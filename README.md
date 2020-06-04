@@ -3,7 +3,7 @@
 Het dashboard coronavirus geeft informatie over de ontwikkeling van het coronavirus in Nederland. Het dashboard laat met actuele cijfers zien hoe het coronavirus zich in Nederland verspreidt. Die informatie komt van onder andere het RIVM, de GGD’en en de ziekenhuizen. Op het dashboard is bijvoorbeeld te zien hoeveel mensen positief getest zijn op het virus en of het aantal besmettingen oploopt.
 
 ## Development & Contribution process
-The core team works on the repository in a private fork and will share its work as often as possible. If you plan to make non-trivial changes, we recommend to open an issue beforehand where we can discuss your planned changes. This increases the chance that we might be able to use your contribution (or it avoids doing work if there are reasons why we wouldn't be able to use it).
+The core team works on the repository in a private fork and will share its work in this repository. If you plan to propose changes, we recommend to open an issue beforehand where we can discuss your planned changes. This increases the chance that we might be able to use your contribution (or it avoids doing work if there are reasons why we wouldn't be able to use it).
 
 ## Setup
 This application uses Next.js as framework, which builds the pages of the application as static exports. We use Preact to keep the bundle as small as possible.
