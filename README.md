@@ -2,6 +2,8 @@
 
 The dashboard provides information on the outbreak and prevalence of COVID-19 in The Netherlands. It combines measured and modelled data from various sources to give a broad perspective on the subject. This is still in development, which means no conclusions may be drawn from it. Further improvements in accessibility, functionality and data will be made in the future.
 
+## Disclaimer
+This dashboard is developed and maintained by a different team than the NL COVID19 Notification App. They are separate projects.
 
 ## Development & Contribution process
 The core team works on the repository in a private fork and will share its work in this repository. If you plan to propose changes, we recommend to open an issue beforehand where we can discuss your planned changes. This increases the chance that we might be able to use your contribution (or it avoids doing work if there are reasons why we wouldn't be able to use it).
