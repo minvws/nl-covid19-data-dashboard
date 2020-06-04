@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "titel": "Cijfer verantwoording Coronavirus COVID-19 Dashboard | Rijksoverheid.nl"
+  },
+  "verantwoording": {
+    "title": "Cijfer verantwoording",
+    "cijfers": [
+      {
+        "cijfer": "Intensive care-bezetting",
+        "verantwoording": "Deze gegevens worden dagelijks aangeleverd als open data door Stichting NICE. De brondata wordt dagelijks geüpdatet om 00:00 en hebben betrekking op de afgelopen 24 uur. De berekening van de ic-bezetting bestaat uit COVD-19-patiënten met een bewezen besmetting of een verdenking hiervan. Het dashboard laat het gemiddelde over de afgelopen 3 dagen zien. Bron: https://stichting-nice.nl/covid-19/public/new-intake/"
+      },
+      {
+        "cijfer": "Ziekenhuisopnames",
+        "verantwoording": "Deze gegevens worden dagelijks aangeleverd als open data door het RIVM. Hierbij wordt gebruik gemaakt van het bestand met gemeentegegevens, dat gepubliceerd wordt in JSON. Alle gemeentegegevens samen vormen de landelijke gegevens. Deze bestanden worden elke dag rond 15:00 uur geüpdatet. Het dashboard laat het gemiddelde over de afgelopen 3 dagen zien. Bron: https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_cumulatief.json. Om deze gegevens te vertalen naar het niveau van de veiligheidsregio’s wordt de CBS-indeling gebruikt: https://opendata.cbs.nl/#/CBS/nl/dataset/84721NED/table?dl=3A154. De datum die gebruikt wordt is de datum van melding. Dat is niet hetzelfde als de datum waarop mensen zijn getest. Voor meer informatie kunt u de RIVM website raadplegen: https://www.rivm.nl/coronavirus-covid-19/grafieken"
+      },
+      {
+        "cijfer": "Aantal positief geteste mensen",
+        "verantwoording": "Deze gegevens worden dagelijks aangeleverd als open data door het RIVM. Hierbij wordt gebruik gemaakt van het bestand met gemeentegegevens, dat gepubliceerd wordt in JSON. Alle gemeentegegevens samen vormen de landelijke gegevens. Deze bestanden worden elke dag rond 15:00 uur geüpdatet.Bron: https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_cumulatief.json. Om deze gegevens te vertalen naar het niveau van de veiligheidsregio’s wordt de CBS-indeling gebruikt:: https://opendata.cbs.nl/#/CBS/nl/dataset/84721NED/table?dl=3A154. De datum die gebruikt wordt is de datum van melding. Dat is niet hetzelfde als de datum waarop mensen zijn getest. Voor meer informatie kunt u de RIVM website raadplegen: https://www.rivm.nl/coronavirus-covid-19/grafieken. De leeftijdsverdeling wordt bepaald op basis van de landelijke cijfers, omdat in het gemeentelijke bestand geen leeftijden worden geregistreerd. Er kan daarom inconsistentie ontstaan tussen de twee tabellen."
+      },
+      {
+        "cijfer": "Reproductiegetal",
+        "verantwoording": "Deze informatie wordt wekelijks beschikbaar gesteld door het RIVM. Het RIVM publiceert de informatie op de website gelijktijdig met het beschikbaar stellen aan het Ministerie van VWS. Het RIVM zal de informatie binnenkort beschikbaar stellen als open data."
+      },
+      {
+        "cijfer": "Andere data en signaalindicatoren",
+        "verantwoording": "Deze informatie is niet beschikbaar in dit dashboard en nog niet gedeeld met het Ministerie van VWS. Deze zijn daarom niet in dit dashboard opgenomen"
+      },
+      {
+        "cijfer": "Verpleeghuiszorg",
+        "verantwoording": "Deze informatie wordt dagelijks beschikbaar gesteld door het RIVM en als JSON-file aangeleverd bij het ministerie van VWS. Het RIVM publiceert de informatie gelijktijdig met het beschikbaar stellen aan het Ministerie van VWS ook in een pdf bestand openbaar op de website."
+      },
+      {
+        "cijfer": "Open source data verwerking",
+        "verantwoording": "Dit prototype is in zeer korte tijd tot stand gekomen. Het is daarom nog niet gelukt om de code voor het inlezen van de data, de databerekeningen en het construeren van de JSON- bestanden open source beschikbaar te stellen. Dit zal binnen afzienbare tijd beschikbaar worden gesteld. De code van de webapplicatie komt op 4 juni 2020 open source beschikbaar."
+      }
+    ]
+  }
+}

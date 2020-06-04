@@ -1,0 +1,83 @@
+@import './variables.scss';
+
+@font-face {
+  font-family: 'RO Sans';
+  font-weight: normal;
+  font-style: normal;
+  src: url('/webfonts/RO-SansWebText-Regular.woff2') format('woff2'),
+    url('/webfonts/RO-SansWebText-Regular.woff') format('woff');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'RO Sans';
+  font-weight: normal;
+  font-style: italic;
+  src: url('/webfonts/RO-SansWebText-Italic.woff2') format('woff2'),
+    url('/webfonts/RO-SansWebText-Italic.woff') format('woff');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'RO Sans';
+  font-weight: bold;
+  font-style: normal;
+  src: url('/webfonts/RO-SansWebText-Bold.woff2') format('woff2'),
+    url('/webfonts/RO-SansWebText-Bold.woff') format('woff');
+  font-display: swap;
+}
+
+body {
+  font-family: 'RO Sans', Calibri, sans-serif;
+  color: $text-color;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 150%;
+}
+
+h1 {
+  font-size: 2.02729rem;
+  line-height: 1.23318;
+  margin-bottom: $default-margin;
+}
+
+h2 {
+  font-size: 1.80203rem;
+  line-height: 1.38732;
+  margin: 0 0 $default-margin 0;
+}
+
+h3 {
+  font-size: 1.42383rem;
+  line-height: 1.40466;
+  margin: 0 0 ($default-margin / 2) 0;
+}
+
+h4 {
+  font-size: 1em;
+  line-height: 1.2;
+  margin: ($default-margin) 0 ($default-margin / 2) 0;
+}
+
+h5 {
+  font-size: 1.26562rem;
+  line-height: 1.18519;
+  margin: 0 0 ($default-margin / 2) 0;
+  font-style: italic;
+  margin: 0 0 ($default-margin / 2) 0;
+}
+
+p {
+  max-width: 35em;
+  margin: $default-margin 0;
+}
+
+a:focus {
+  outline: 2px dotted #01689b;
+  outline-offset: 0;
+}
+
+button::-moz-focus-inner {
+  border: 0;
+}

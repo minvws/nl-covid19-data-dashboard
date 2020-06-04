@@ -1,0 +1,30 @@
+@import 'scss/variables.scss';
+
+.graphContainer {
+  display: block;
+  box-sizing: border-box;
+  border-radius: $default-radius;
+  background-color: $graph-col-background;
+  margin-bottom: $default-margin;
+  padding-top: $default-padding;
+  overflow: hidden;
+
+  p {
+    margin-top: 0;
+    margin-bottom: $default-margin;
+  }
+}
+
+.regioDataLoading {
+  display: inline-block;
+  color: $text-color-grey;
+  margin-top: $default-margin;
+  margin-bottom: $default-margin;
+  overflow: visible;
+
+  svg {
+    position: relative;
+    margin-right: $default-margin/2;
+    top: 2px;
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "name": "corona-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "downshift": "^5.4.2",
+    "highcharts": "^8.1.0",
+    "highcharts-react-official": "^3.0.0",
+    "imagemin-pngquant": "^9.0.0",
+    "next": "9.3",
+    "next-compose-plugins": "^2.2.0",
+    "next-optimized-images": "^2.6.1",
+    "preact": "^10.4.4",
+    "preact-render-to-string": "^5.1.9",
+    "react": "github:preact-compat/react#1.0.0",
+    "react-collapsed": "^3.0.0",
+    "react-dom": "github:preact-compat/react-dom#1.0.0",
+    "react-masonry-css": "^1.0.14",
+    "react-ssr-prepass": "npm:preact-ssr-prepass@^1.0.1",
+    "swr": "^0.2.2",
+    "unfetch": "^4.1.0"
+  },
+  "devDependencies": {
+    "@next/bundle-analyzer": "^9.4.4",
+    "@svgr/webpack": "^5.4.0",
+    "cross-env": "^7.0.2",
+    "node-sass": "^4.14.1"
+  },
+  "scripts": {
+    "analyze": "cross-env ANALYZE=true yarn build",
+    "export": "next export",
+    "dev": "next",
+    "build": "NEXT_TELEMETRY_DISABLED=1 && next build && next export",
+    "start": "next start"
+  }
+}

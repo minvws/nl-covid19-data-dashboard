@@ -1,0 +1,173 @@
+@import 'scss/variables.scss';
+
+.logoWrapper {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: flex-start;
+  background: white;
+  width: 100%;
+}
+
+.logo {
+  margin-left: -50px;
+  transform: translateX(50%);
+}
+
+.header {
+  background: #cd005a;
+  color: white;
+
+  a:focus {
+    outline: 2px dotted #fff;
+    outline-offset: 0;
+  }
+
+  h1 {
+    margin-top: $default-margin * 2.5;
+    margin-bottom: 0;
+  }
+
+  p {
+    margin-bottom: $default-margin * 2;
+  }
+}
+
+.badge {
+  display: inline-block;
+  background: #ffd951;
+  color: black;
+  border-radius: $default-radius;
+  padding: 0 $default-padding / 2;
+  margin: $default-margin 0 0;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 0.75em;
+  letter-spacing: 0.15em;
+}
+
+.readMoreLink {
+  color: white;
+}
+
+.nav {
+  background: #aa004b;
+
+  @media (min-width: 768px) {
+    display: block;
+  }
+}
+
+.navList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+
+  > li:last-child {
+    display: none;
+    margin-left: auto;
+  }
+
+  @media (min-width: 768px) {
+    > li:last-child {
+      display: block;
+      margin-left: auto;
+    }
+  }
+}
+
+.link {
+  display: block;
+  background: transparent;
+  padding: 1em 0.75em;
+  color: white;
+  text-decoration: none;
+  font-size: 1.125em;
+
+  @media (min-width: 768px) {
+    padding: 1em 1.5em;
+  }
+
+  &:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    text-decoration: underline;
+    text-decoration-thickness: from-font;
+  }
+
+  &:focus {
+    outline: 2px dotted #fff;
+    outline-offset: -2px;
+  }
+
+  &.active {
+    background: rgba(255, 255, 255, 0.8);
+    color: black;
+    outline: 0;
+  }
+}
+
+.footer {
+  background: #154273;
+  color: white;
+  padding: 2em 0;
+}
+
+.footerList {
+  padding: 0;
+  list-style: none;
+  font-size: 1.125em;
+
+  li:before {
+    content: '\203a';
+    margin-right: $default-margin / 2;
+  }
+}
+
+.footerLink {
+  display: inline-block;
+  color: white;
+  text-decoration: none;
+  padding: $default-padding / 2;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus {
+    outline: 2px dotted #fff;
+    outline-offset: 0;
+  }
+}
+
+.skiplinks {
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  left: 50%;
+  width: 100%;
+  transform: translateX(-50%);
+
+  a {
+    position: absolute;
+    font-size: 1.2em;
+    width: auto;
+    min-height: 44px;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    color: white;
+    background-color: $icon-color;
+    text-decoration: none;
+    top: -100vh;
+    left: -100vw;
+
+    &:focus {
+      position: absolute;
+      outline: 2px dotted white;
+      outline-offset: -2px;
+      top: $default-padding;
+      left: $default-margin;
+    }
+  }
+}
