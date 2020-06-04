@@ -1,8 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # Nextjs
-.next
-out
+/.next
+/out
 
 # dependencies
 /node_modules
@@ -24,7 +24,8 @@ out
 .idea/
 
 # CI/CD
-env
+/env
+/public/json
 
 npm-debug.log*
 yarn-debug.log*
