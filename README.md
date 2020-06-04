@@ -5,6 +5,8 @@ The dashboard provides information on the outbreak and prevalence of COVID-19 in
 ## Disclaimer
 This dashboard is developed and maintained by a different team than the NL COVID19 Notification App. They are separate projects. If you want to get in touch with the team, please join the CODE for NL Slack and join the channel.
 
+Tamas Erkelens from the Munciapality of Amsterdam is contactpersoon for the project team.
+
 https://doemee.codefor.nl/
 
 ## Development & Contribution process
