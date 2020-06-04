@@ -1,0 +1,6 @@
+// tsconfig.json or jsconfig.json
+{
+  "compilerOptions": {
+    "baseUrl": "./src"
+  }
+}

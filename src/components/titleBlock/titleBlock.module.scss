@@ -1,0 +1,34 @@
+@import 'scss/variables.scss';
+
+.titleRow {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: $default-margin;
+
+  svg {
+    flex: 0 0 48px;
+    margin-right: $default-margin;
+  }
+
+  h2 {
+    margin: 0;
+  }
+
+  p {
+    max-width: 20rem;
+    margin-top: $default-margin / 2;
+  }
+
+  @media screen and (min-width: 768px) {
+    margin-bottom: $default-margin * 2;
+
+    svg {
+      flex: 0 0 64px;
+      margin-right: $default-margin * 2;
+    }
+
+    p {
+      margin-top: $default-margin;
+    }
+  }
+}

@@ -1,0 +1,30 @@
+@import 'scss/variables.scss';
+
+.graphHeader {
+  display: flex;
+  flex-flow: row nowrap;
+  margin-bottom: $default-margin;
+  align-items: center;
+
+  h3 {
+    margin: 0;
+  }
+}
+
+.graphHeaderIcon {
+  flex: 0 0 auto;
+
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+
+  margin-right: $default-margin;
+  width: 48px;
+  height: 48px;
+
+  @media screen and (min-width: 768px) {
+    width: 64px;
+    height: 64px;
+  }
+}

@@ -1,0 +1,58 @@
+.container {
+  display: flex;
+  flex-direction: column-reverse;
+  padding: 0 $default-padding;
+}
+
+@media (min-width: 768px) {
+  .container {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    display: flex;
+    flex-direction: row;
+    max-width: 1200px;
+    margin: auto;
+  }
+}
+
+.home-content {
+  padding: 0 $default-padding;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.home-section {
+  padding: ($default-margin * 4) 0;
+  border-bottom: 1px solid $icon-color;
+
+  &:first-of-type {
+    padding-top: 0;
+  }
+
+  &:last-of-type {
+    border: 0;
+  }
+}
+
+.masonry-grid {
+  display: flex;
+  width: auto;
+  margin-left: -$default-margin * 2;
+}
+
+.masonry-grid-column {
+  padding-left: $default-margin * 2; /* gutter size */
+  background-clip: padding-box;
+}
+
+/* Style your items */
+.masonry-grid-column > .graphContainer,
+.masonry-grid-column > .linkCard {
+  /* change div to reference your elements you put in <Masonry> */
+  margin-bottom: $default-margin * 2;
+}

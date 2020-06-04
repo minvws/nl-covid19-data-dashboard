@@ -1,0 +1,15 @@
+@import 'scss/variables.scss';
+
+.metadataContainer {
+  margin: $default-margin 0;
+
+  p {
+    color: #595959;
+    font-size: 0.875em;
+    margin: 0;
+  }
+
+  a {
+    color: $icon-color;
+  }
+}
