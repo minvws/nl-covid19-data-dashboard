@@ -19,7 +19,7 @@ This application uses Next.js as framework, which builds the pages of the applic
 
 We are using Next.js 9.3, because 9.4 seems to have issues with Fast Refresh and Preact.
 
-Run yarn to install all required packages.
+Run `yarn` to install all required packages.
 
 Data
 Given the short time frame of the project: The data calculations are not open-source yet. If you have data, you can place it in `/public/json/`
