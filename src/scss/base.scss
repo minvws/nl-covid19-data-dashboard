@@ -1,0 +1,29 @@
+@import './variables.scss';
+
+html {
+  box-sizing: border-box;
+  -webkit-text-size-adjust: 100%;
+  line-height: 1.15;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  font-size: 100%;
+  background-color: $page-background;
+}
+
+#__next {
+  position: relative;
+  overflow: hidden;
+}
+
+img,
+svg {
+  max-width: 100%;
+}

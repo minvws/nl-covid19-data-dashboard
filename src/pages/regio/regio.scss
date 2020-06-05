@@ -1,0 +1,18 @@
+.regio-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 960px) {
+  .regio-grid {
+    flex-direction: row;
+  }
+
+  .panelCol {
+    width: 33%;
+  }
+
+  .mapCol {
+    width: 66%;
+  }
+}

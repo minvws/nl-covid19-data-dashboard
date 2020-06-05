@@ -1,0 +1,9 @@
+.chartContainer {
+  display: block;
+  background-color: red;
+  height: 0px;
+  overflow: hidden;
+  &.open {
+    height: auto;
+  }
+}
