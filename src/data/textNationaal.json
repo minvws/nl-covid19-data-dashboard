@@ -1,0 +1,200 @@
+{
+  "metadata": {
+    "titel": "Nationaal Dashboard Coronavirus COVID-19 | Rijksoverheid.nl"
+  },
+  "ic_opnames_per_dag": {
+    "title": "Intensive care-opnames per dag",
+    "text": "Aantal opnames per dag, gemiddeld over de afgelopen 3 dagen.",
+    "fold_title": "Wat betekent dit?",
+    "fold": "Aantal mensen met COVID-19 dat per dag op een intensive care-afdeling van een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de afgelopen drie dagen.",
+    "graph_title": "Verloop over tijd",
+    "open": "Verberg uitleg",
+    "sluit": "Meer uitleg en data",
+    "min": 0,
+    "max": 30,
+    "signaalwaarde": 10,
+    "gradient": [
+      { "color": "#69c253", "offset": 0 },
+      { "color": "#D3A500", "offset": 0.35 },
+      { "color": "#f35065", "offset": 0.67 }
+    ],
+    "bron": {
+      "href": "https://stichting-nice.nl/",
+      "text": "Stichting NICE"
+    }
+  },
+  "ziekenhuisopnames_per_dag": {
+    "title": "Ziekenhuisopnames per dag",
+    "text": "Aantal opnames per dag, gemiddeld over de afgelopen 3 dagen.",
+    "fold_title": "Wat betekent dit?",
+    "fold": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen.",
+    "graph_title": "Verloop over tijd",
+    "open": "Verberg uitleg",
+    "sluit": "Meer uitleg en data",
+    "min": 0,
+    "max": 100,
+    "signaalwaarde": 40,
+    "gradient": [
+      { "color": "#69c253", "offset": 0 },
+      { "color": "#D3A500", "offset": 0.4 },
+      { "color": "#f35065", "offset": 0.9 }
+    ],
+    "bron": {
+      "href": "https://www.rivm.nl/",
+      "text": "RIVM"
+    }
+  },
+  "positief_geteste_personen": {
+    "title": "Positief geteste mensen",
+    "text": "Aantal positief geteste mensen per 100.000 inwoners per dag.",
+    "fold_title": "Wat betekent dit?",
+    "fold": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
+    "graph_title": "Verdeling naar leeftijd (totaal aantal mensen)",
+    "open": "Verberg uitleg",
+    "sluit": "Meer uitleg en data",
+    "min": 0,
+    "max": 5,
+    "gradient": [{ "color": "#3391CC", "offset": 0 }],
+    "bron": {
+      "href": "https://www.rivm.nl/",
+      "text": "RIVM"
+    }
+  },
+  "besmettelijke_personen": {
+    "title": "Aantal besmettelijke mensen",
+    "text": "Een berekening van hoeveel mensen met COVID-19 per 100.000 inwoners besmettelijk zijn voor anderen. Dit getal wordt door het RIVM berekend.",
+    "fold_title": "Wat betekent dit?",
+    "fold": "Als iemand het coronavirus oploopt, dan is deze persoon een tijd lang besmettelijk voor anderen. Hoe lang dit duurt verschilt van persoon tot persoon. Dit getal is een schatting.",
+    "metric_title": "Geschat aantal besmettelijke mensen in Nederland:",
+    "graph_title": "Verloop over tijd",
+    "open": "Verberg uitleg",
+    "sluit": "Meer uitleg en data",
+    "min": 0,
+    "max": 50,
+    "gradient": [{ "color": "#3391CC", "offset": 0 }],
+    "bron": {
+      "href": "https://www.rivm.nl/",
+      "text": "RIVM"
+    }
+  },
+  "reproductiegetal": {
+    "title": "Reproductiegetal",
+    "text": "Aantal mensen dat besmet wordt door één besmettelijke persoon.",
+    "fold_title": "Wat betekent dit?",
+    "fold": "Het reproductiegetal laat zien hoe snel het virus zich verspreidt. Als dat getal bijvoorbeeld 2 is, dan besmet iemand die het coronavirus heeft gemiddeld twee andere mensen binnen 5 dagen. Die twee mensen besmetten ieder ook weer twee mensen binnen 5 dagen. En zo gaat het door. Bij een reproductiegetal van rond de 1 blijft het aantal besmettingen ongeveer gelijk. Als het reproductiegetal lager is dan 1, dan daalt het aantal besmettingen. Dit reproductiegetal is een gemiddelde voor heel Nederland. Het getal dat gepresenteerd wordt is een schatting op basis van een aantal gegevensbronnen. Het exacte getal is onbekend, maar we kunnen met vrij veel zekerheid zeggen tussen welke waarden zich dat bevindt.",
+    "graph_title": "Verloop over tijd",
+    "open": "Verberg uitleg",
+    "sluit": "Meer uitleg en data",
+    "rangeLegendLabel": "R range",
+    "lineLegendLabel": "Effectieve R",
+    "min": 0,
+    "max": 2,
+    "signaalwaarde": 1,
+    "gradient": [
+      { "color": "#69c253", "offset": 0 },
+      { "color": "#69c253", "offset": 0.5 },
+      { "color": "#D3A500", "offset": 0.5052 },
+      { "color": "#f35065", "offset": 0.5625 }
+    ],
+    "bron": {
+      "href": "https://www.rivm.nl/",
+      "text": "RIVM"
+    }
+  },
+  "overige_gegevens": {
+    "title": "Andere cijfers",
+    "text": "Cijfers die iets kunnen zeggen over de verspreiding van het virus. Bijvoorbeeld de infectieradar en cijfers van huisartsen.",
+    "fold_title": "Wat betekent dit?",
+    "fold": "Het is de bedoeling dat het dashboard in de toekomst wordt uitgebreid met de volgende gegevens:",
+    "graph_title": "Verloop over tijd",
+    "open": "Verberg uitleg",
+    "sluit": "Meer uitleg",
+    "list": [
+      {
+        "icon": "/images/Zelfrapportagegegevens.png",
+        "text": "Zelfrapportagegegevens (infectieradar)"
+      },
+      {
+        "icon": "/images/Huisartsengegevens.png",
+        "text": "Huisartsengegevens"
+      },
+      {
+        "icon": "/images/GGD-contactonderzoeken.png",
+        "text": "GGD-contactonderzoeken"
+      },
+      {
+        "icon": "/images/Sentinel-monitor.png",
+        "text": "Sentinel monitoring (zorgverleners)"
+      },
+      {
+        "icon": "/images/Rioolwatermonitor.png",
+        "text": "Rioolwatermonitoring"
+      }
+    ]
+  },
+  "regio_link_block": {
+    "title": "Informatie per regio",
+    "text": "Bekijk de belangrijkste cijfers voor uw veiligheidsregio."
+  },
+  "gedragsignalering": {
+    "title": "Informatie over gedrag",
+    "text": "Het RIVM geeft adviezen over wat mensen wel en niet moeten doen. Hoe goed lukt het om die adviezen te volgen?",
+    "fold": "Het is de bedoeling dat het dashboard in de toekomst wordt uitgebreid met de volgende gegevens:",
+    "open": "Verberg uitleg",
+    "sluit": "Meer uitleg",
+    "list": [
+      {
+        "icon": "/images/Verplaatsingsgegevens.png",
+        "text": "Verplaatsingsgegevens"
+      },
+      { "icon": "/images/Nalevingsmonitor.png", "text": "Nalevingsmonitor" },
+      { "icon": "/images/Gedragsonderzoeken.png", "text": "Gedragsonderzoeken" }
+    ]
+  },
+  "verpleeghuis_besmette_locaties": {
+    "title": "Aantal besmette locaties",
+    "text": "Aantal locaties met minimaal één positief geteste bewoner."
+  },
+  "verpleeghuis_positief_geteste_personen": {
+    "title": "Aantal positief geteste bewoners",
+    "text": "Aantal positief geteste bewoners in verpleeghuizen per dag.",
+    "fold_title": "Wat betekent dit?",
+    "fold": "Dit getal is een inschatting van het aantal gemelde bewoners in verpleeghuizen dat in Nederland positief getest is en COVID-19 heeft. Dit getal verwijst naar de datum vóór de datum van de laatste update.",
+    "graph_title": "Verloop over tijd",
+    "open": "Verberg uitleg",
+    "sluit": "Meer uitleg en data",
+    "min": 0,
+    "max": 100,
+    "signaalwaarde": 40,
+    "gradient": [{ "color": "#3391CC", "offset": 0 }],
+    "bron": {
+      "href": "https://www.rivm.nl/",
+      "text": "RIVM"
+    }
+  },
+  "verpleeghuis_oversterfte": {
+    "title": "Sterfte",
+    "text": "Aantal overleden bewoners in verpleeghuizen met een vastgestelde COVID-19-besmetting dat overleden is per dag.",
+    "fold_title": "Wat betekent dit?",
+    "fold": "Dit getal is een inschatting van het aantal gemelde verpleeghuisbewoners dat in Nederland overlijdt aan de gevolgen van het nieuwe coronavirus. Dit getal verwijst naar de datum vóór de datum van de laatste update.",
+    "graph_title": "Verloop over tijd",
+    "open": "Verberg uitleg",
+    "sluit": "Meer uitleg en data",
+    "min": 0,
+    "max": 50,
+    "gradient": [{ "color": "#3391CC", "offset": 0 }],
+    "bron": {
+      "href": "https://www.rivm.nl/",
+      "text": "RIVM"
+    }
+  },
+  "min": 0,
+  "max": 50,
+  "blok_verpleeghuis_zorg": {
+    "title": "Verpleeghuiszorg",
+    "text": "Informatie over de verspreiding van het coronavirus in verpleeghuizen."
+  },
+  "geen_selectie": {
+    "text": "Deze cijfers zijn binnenkort beschikbaar"
+  }
+}

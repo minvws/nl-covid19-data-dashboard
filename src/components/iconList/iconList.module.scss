@@ -1,0 +1,29 @@
+@import 'scss/variables.scss';
+
+.iconList {
+  padding-left: 0;
+  list-style-type: none;
+}
+
+.iconListItem {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 1px solid #c4c4c4;
+  padding: $default-margin / 2 0;
+  width: 100%;
+
+  &:last-of-type {
+    border-bottom: 0;
+  }
+
+  img {
+    max-width: 2rem;
+    height: auto;
+    margin-left: $default-margin / 2;
+    margin-right: $default-margin * 1.5;
+    margin-bottom: 0;
+  }
+}
