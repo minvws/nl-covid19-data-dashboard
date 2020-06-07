@@ -87,6 +87,9 @@ export default function Home() {
                 <BarScale
                   min={siteText.ic_opnames_per_dag.min}
                   max={siteText.ic_opnames_per_dag.max}
+                  screenReaderText={
+                    siteText.ic_opnames_per_dag.screen_reader_graph_content
+                  }
                   kritiekeWaarde={siteText.ic_opnames_per_dag.signaalwaarde}
                   value={state.NL?.intake_intensivecare_ma.value}
                   id="ic"
@@ -129,6 +132,10 @@ export default function Home() {
                   min={0}
                   max={100}
                   kritiekeWaarde={40}
+                  screenReaderText={
+                    siteText.ziekenhuisopnames_per_dag
+                      .screen_reader_graph_content
+                  }
                   value={state.NL?.intake_hospital_ma.value}
                   id="opnames"
                   gradient={siteText.ziekenhuisopnames_per_dag.gradient}
@@ -165,6 +172,10 @@ export default function Home() {
                 <BarScale
                   min={siteText.positief_geteste_personen.min}
                   max={siteText.positief_geteste_personen.max}
+                  screenReaderText={
+                    siteText.positief_geteste_personen
+                      .screen_reader_graph_content
+                  }
                   value={state.NL?.infected_people_delta_normalized.value}
                   id="positief"
                   gradient={siteText.positief_geteste_personen.gradient}
@@ -211,6 +222,9 @@ export default function Home() {
                 <BarScale
                   min={siteText.besmettelijke_personen.min}
                   max={siteText.besmettelijke_personen.max}
+                  screenReaderText={
+                    siteText.besmettelijke_personen.screen_reader_graph_content
+                  }
                   value={state.NL?.infectious_people_count_normalized.value}
                   id="besmettelijk"
                   gradient={siteText.besmettelijke_personen.gradient}
@@ -257,6 +271,9 @@ export default function Home() {
                 <BarScale
                   min={siteText.reproductiegetal.min}
                   max={siteText.reproductiegetal.max}
+                  screenReaderText={
+                    siteText.reproductiegetal.screen_reader_graph_content
+                  }
                   kritiekeWaarde={siteText.reproductiegetal.signaalwaarde}
                   value={state.NL?.reproduction_index.value}
                   id="repro"
@@ -368,6 +385,10 @@ export default function Home() {
                 <BarScale
                   min={siteText.verpleeghuis_positief_geteste_personen.min}
                   max={siteText.verpleeghuis_positief_geteste_personen.max}
+                  screenReaderText={
+                    siteText.verpleeghuis_positief_geteste_personen
+                      .screen_reader_graph_content
+                  }
                   value={state.NL?.infected_people_nursery_count_daily.value}
                   id="positief_verpleeghuis"
                   gradient={
@@ -430,6 +451,10 @@ export default function Home() {
                 <BarScale
                   min={siteText.verpleeghuis_oversterfte.min}
                   max={siteText.verpleeghuis_oversterfte.max}
+                  screenReaderText={
+                    siteText.verpleeghuis_oversterfte
+                      .screen_reader_graph_content
+                  }
                   value={state.NL?.deceased_people_nursery_count_daily.value}
                   id="over"
                   gradient={siteText.verpleeghuis_oversterfte.gradient}

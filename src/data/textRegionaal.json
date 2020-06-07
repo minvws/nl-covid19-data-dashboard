@@ -5,6 +5,7 @@
   "regionaal_ziekenhuisopnames_per_dag": {
     "title": "Ziekenhuisopnames per dag",
     "text": "Aantal opnames per dag, gemiddeld over de afgelopen 3 dagen.",
+    "screen_reader_graph_content": "{{value}} opnames.",
     "fold_title": "Wat betekent dit?",
     "fold": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen.",
     "graph_title": "Verloop over tijd",
@@ -25,6 +26,7 @@
   "regionaal_positief_geteste_personen": {
     "title": "Positief geteste mensen",
     "text": "Aantal positief geteste mensen per 100.000 inwoners per dag.",
+    "screen_reader_graph_content": "{{value}} positief geteste personen.",
     "fold_title": "Wat betekent dit?",
     "fold": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben. Dit getal verwijst naar de datum vóór de datum van de laatste update.",
     "graph_title": "Verloop over tijd",
@@ -58,5 +60,8 @@
   },
   "geen_selectie": {
     "text": "Selecteer uw regio bovenaan deze pagina"
+  },
+  "terug_naar_regio_selectie": {
+    "text": "Terug naar regio selectie"
   }
 }

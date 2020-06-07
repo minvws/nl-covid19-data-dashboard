@@ -12,6 +12,8 @@ import LastUpdated from 'components/lastUpdated';
 import SelectRegio from 'components/selectRegio';
 import Warning from 'assets/warn.svg';
 import Metadata from 'components/metadata';
+import LoadingPlaceholder from 'components/loadingPlaceholder';
+import ScreenReaderOnly from 'components/screenReaderOnly';
 import regioData from 'data';
 
 import { store } from 'store';
@@ -42,6 +44,31 @@ function Regio() {
       : null;
   }, [router]);
 
+  const contentRef = React.useRef();
+  const selectRegioWrapperRef = React.useRef();
+
+  /**
+   * Focuses region select element. Triggered by a screen reader
+   * only button at the end of the content.
+   */
+  const focusRegioSelect = () => {
+    if (!selectRegioWrapperRef.current) return;
+    try {
+      selectRegioWrapperRef.current.querySelector('input').focus();
+    } catch {}
+  };
+
+  /**
+   * Focuses the first heading in the content column,
+   * used after region changes to move focus for visually impaired
+   * users so they know what has changed.
+   */
+  const focusFirstHeading = () => {
+    try {
+      if (contentRef.current) contentRef.current.focus();
+    } catch {}
+  };
+
   const setSelectedRegio = (item) => {
     router.replace(
       {
@@ -64,6 +91,8 @@ function Regio() {
           const result = await response.json();
           dispatch({ type: 'LOAD_SUCCESS', payload: result });
         }
+
+        focusFirstHeading();
       }
     }
 
@@ -121,7 +150,7 @@ function Regio() {
     <MaxWidth>
       <LastUpdated />
       <div class="regio-grid">
-        <div class="mapCol">
+        <div class="mapCol" ref={selectRegioWrapperRef}>
           <SelectRegio
             selected={selectedRegio}
             setSelection={setSelectedRegio}
@@ -135,14 +164,23 @@ function Regio() {
               <GraphHeader
                 Icon={Ziekenhuis}
                 title={siteText.regionaal_ziekenhuisopnames_per_dag.title}
+                regio={selectedRegio?.name}
+                headingRef={contentRef}
               />
 
               <p>{siteText.regionaal_ziekenhuisopnames_per_dag.text}</p>
+              {!state[selectedRegio?.code]?.intake_hospital_ma && (
+                <LoadingPlaceholder />
+              )}
               {state[selectedRegio?.code]?.intake_hospital_ma && (
                 <BarScale
                   min={siteText.regionaal_ziekenhuisopnames_per_dag.min}
                   max={siteText.regionaal_ziekenhuisopnames_per_dag.max}
                   value={state[selectedRegio.code].intake_hospital_ma.value}
+                  screenReaderText={
+                    siteText.regionaal_ziekenhuisopnames_per_dag
+                      .screen_reader_graph_content
+                  }
                   id="regio_opnames"
                   gradient={
                     siteText.regionaal_ziekenhuisopnames_per_dag.gradient
@@ -180,8 +218,11 @@ function Regio() {
               <GraphHeader
                 Icon={Getest}
                 title={siteText.regionaal_positief_geteste_personen.title}
+                regio={selectedRegio?.name}
               />
               <p>{siteText.regionaal_positief_geteste_personen.text}</p>
+              {!state[selectedRegio?.code]
+                ?.infected_people_delta_normalized && <LoadingPlaceholder />}
               {state[selectedRegio.code]?.infected_people_delta_normalized && (
                 <BarScale
                   min={siteText.regionaal_positief_geteste_personen.min}
@@ -189,6 +230,10 @@ function Regio() {
                   value={
                     state[selectedRegio.code].infected_people_delta_normalized
                       .value
+                  }
+                  screenReaderText={
+                    siteText.regionaal_positief_geteste_personen
+                      .screen_reader_graph_content
                   }
                   id="regio_infecties"
                   gradient={
@@ -233,6 +278,11 @@ function Regio() {
           </GraphContainer>
         </div>
       </div>
+      <ScreenReaderOnly>
+        <button onClick={focusRegioSelect}>
+          {siteText.terug_naar_regio_selectie.text}
+        </button>
+      </ScreenReaderOnly>
     </MaxWidth>
   );
 }

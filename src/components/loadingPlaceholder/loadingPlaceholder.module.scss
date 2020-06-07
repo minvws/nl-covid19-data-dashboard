@@ -1,0 +1,27 @@
+@import 'scss/variables.scss';
+
+.loadingPlaceholder {
+  opacity: 0.05;
+  background-color: $text-color-grey;
+  animation: loadingPlaceholderPulse 1200ms infinite;
+  display: block;
+  height: 80px;
+  margin: 1rem 0;
+
+  /* Spacing between two placeholders */
+  & + & {
+    margin-top: 0.5rem;
+  }
+}
+
+@keyframes loadingPlaceholderPulse {
+  0% {
+    opacity: 0.05;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 0.05;
+  }
+}
