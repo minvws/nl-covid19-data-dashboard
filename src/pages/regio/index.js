@@ -12,6 +12,7 @@ import LastUpdated from 'components/lastUpdated';
 import SelectRegio from 'components/selectRegio';
 import Warning from 'assets/warn.svg';
 import Metadata from 'components/metadata';
+import LoadingPlaceholder from 'components/loadingPlaceholder';
 import regioData from 'data';
 
 import { store } from 'store';
@@ -138,6 +139,9 @@ function Regio() {
               />
 
               <p>{siteText.regionaal_ziekenhuisopnames_per_dag.text}</p>
+              {!state[selectedRegio?.code]?.intake_hospital_ma && (
+                <LoadingPlaceholder />
+              )}
               {state[selectedRegio?.code]?.intake_hospital_ma && (
                 <BarScale
                   min={siteText.regionaal_ziekenhuisopnames_per_dag.min}
@@ -182,6 +186,8 @@ function Regio() {
                 title={siteText.regionaal_positief_geteste_personen.title}
               />
               <p>{siteText.regionaal_positief_geteste_personen.text}</p>
+              {!state[selectedRegio?.code]
+                ?.infected_people_delta_normalized && <LoadingPlaceholder />}
               {state[selectedRegio.code]?.infected_people_delta_normalized && (
                 <BarScale
                   min={siteText.regionaal_positief_geteste_personen.min}
