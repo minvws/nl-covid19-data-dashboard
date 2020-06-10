@@ -21,7 +21,7 @@ const replaceVariablesInText = (translation, variables) => {
   return translation.replace(curlyBracketRegex, (_string, variableName) => {
     if (!variables) return '';
 
-    return variables[variableName] ?? '';
+    return variables[variableName.trim()] ?? '';
   });
 };
 

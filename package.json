@@ -23,14 +23,21 @@
   "devDependencies": {
     "@next/bundle-analyzer": "^9.4.4",
     "@svgr/webpack": "^5.4.0",
+    "@testing-library/jest-dom": "^5.9.0",
+    "babel-jest": "^26.0.1",
     "cross-env": "^7.0.2",
-    "node-sass": "^4.14.1"
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^26.0.1",
+    "node-sass": "^4.14.1",
+    "prettier": "^2.0.5"
   },
   "scripts": {
     "analyze": "cross-env ANALYZE=true yarn build",
     "export": "next export",
     "dev": "next",
     "build": "NEXT_TELEMETRY_DISABLED=1 && next build && next export",
-    "start": "next start"
+    "start": "next start",
+    "test": "jest --watch",
+    "test:ci": "jest --ci"
   }
 }
