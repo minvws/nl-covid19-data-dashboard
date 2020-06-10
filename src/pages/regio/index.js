@@ -135,6 +135,7 @@ function Regio() {
               <GraphHeader
                 Icon={Ziekenhuis}
                 title={siteText.regionaal_ziekenhuisopnames_per_dag.title}
+                regio={selectedRegio?.name}
               />
 
               <p>{siteText.regionaal_ziekenhuisopnames_per_dag.text}</p>
@@ -143,6 +144,10 @@ function Regio() {
                   min={siteText.regionaal_ziekenhuisopnames_per_dag.min}
                   max={siteText.regionaal_ziekenhuisopnames_per_dag.max}
                   value={state[selectedRegio.code].intake_hospital_ma.value}
+                  screenReaderText={
+                    siteText.regionaal_ziekenhuisopnames_per_dag
+                      .screen_reader_graph_content
+                  }
                   id="regio_opnames"
                   gradient={
                     siteText.regionaal_ziekenhuisopnames_per_dag.gradient
@@ -180,6 +185,7 @@ function Regio() {
               <GraphHeader
                 Icon={Getest}
                 title={siteText.regionaal_positief_geteste_personen.title}
+                regio={selectedRegio?.name}
               />
               <p>{siteText.regionaal_positief_geteste_personen.text}</p>
               {state[selectedRegio.code]?.infected_people_delta_normalized && (
@@ -189,6 +195,10 @@ function Regio() {
                   value={
                     state[selectedRegio.code].infected_people_delta_normalized
                       .value
+                  }
+                  screenReaderText={
+                    siteText.regionaal_positief_geteste_personen
+                      .screen_reader_graph_content
                   }
                   id="regio_infecties"
                   gradient={
