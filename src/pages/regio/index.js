@@ -42,6 +42,31 @@ function Regio() {
       : null;
   }, [router]);
 
+  const contentRef = React.useRef();
+  const selectRegioWrapperRef = React.useRef();
+
+  /**
+   * Focuses region select element. Triggered by a screen reader
+   * only button at the end of the content.
+   */
+  const focusRegioSelect = () => {
+    if (!selectRegioWrapperRef.current) return;
+    try {
+      selectRegioWrapperRef.current.querySelector('input').focus();
+    } catch {}
+  };
+
+  /**
+   * Focuses the first heading in the content column,
+   * used after region changes to move focus for visually impaired
+   * users so they know what has changed.
+   */
+  const focusFirstHeading = () => {
+    try {
+      if (contentRef.current) contentRef.current.focus();
+    } catch {}
+  };
+
   const setSelectedRegio = (item) => {
     router.replace(
       {
@@ -64,6 +89,8 @@ function Regio() {
           const result = await response.json();
           dispatch({ type: 'LOAD_SUCCESS', payload: result });
         }
+
+        focusFirstHeading();
       }
     }
 
@@ -121,7 +148,7 @@ function Regio() {
     <MaxWidth>
       <LastUpdated />
       <div class="regio-grid">
-        <div class="mapCol">
+        <div class="mapCol" ref={selectRegioWrapperRef}>
           <SelectRegio
             selected={selectedRegio}
             setSelection={setSelectedRegio}
@@ -135,6 +162,7 @@ function Regio() {
               <GraphHeader
                 Icon={Ziekenhuis}
                 title={siteText.regionaal_ziekenhuisopnames_per_dag.title}
+                headingRef={contentRef}
               />
 
               <p>{siteText.regionaal_ziekenhuisopnames_per_dag.text}</p>
@@ -233,6 +261,9 @@ function Regio() {
           </GraphContainer>
         </div>
       </div>
+      <button onClick={focusRegioSelect}>
+        {siteText.terug_naar_regio_selectie.text}
+      </button>
     </MaxWidth>
   );
 }
