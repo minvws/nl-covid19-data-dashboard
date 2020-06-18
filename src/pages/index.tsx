@@ -23,8 +23,6 @@ import Virus from 'assets/virus.svg';
 import Locatie from 'assets/locaties.svg';
 import Warning from 'assets/warn.svg';
 
-import Nederland from 'assets/nederland.png';
-
 import { store } from 'store';
 import siteText from 'data/textNationaal.json';
 import GraphHeader from 'components/graphHeader';
@@ -305,7 +303,7 @@ const Home: FunctionComponent = () => {
 
           <LinkCard
             href="/regio"
-            icon={Nederland}
+            icon={'images/nederland.png'}
             iconAlt="Kaart van Nederland"
           >
             <h3>{siteText.regio_link_block.title}</h3>
