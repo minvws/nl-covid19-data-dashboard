@@ -18,6 +18,7 @@ class MyDocument extends Document {
             type="text/javascript"
             dangerouslySetInnerHTML={{
               __html: `
+              
               var _paq = _paq || [];
               _paq.push(["setCookieDomain", "*.rijksoverheid.nl"]);
               _paq.push(["setDomains", ["*.rijksoverheid.nl"]]);
@@ -25,7 +26,8 @@ class MyDocument extends Document {
               _paq.push(['setLinkTrackingTimer', 750]);
               _paq.push(['trackPageView']);
               _paq.push(['enableLinkTracking']);
-              (function() 
+
+              (function() {
                 var u="//statistiek.rijksoverheid.nl/piwik/";
                 _paq.push(['setTrackerUrl', u+'piwik.php']);
                 _paq.push(['setSiteId', '7939']);
