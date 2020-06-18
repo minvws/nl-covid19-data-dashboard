@@ -12,21 +12,6 @@ const nextConfig = {
     REACT_APP_DATA_SRC: '/json/',
   },
   webpack(config, { dev, isServer }) {
-    config.module.rules.push({
-      test: /\.svg$/,
-      issuer: {
-        test: /\.(js|ts)x?$/,
-      },
-      use: [
-        {
-          loader: '@svgr/webpack',
-          options: {
-            typescript: false,
-          },
-        },
-      ],
-    });
-
     // Install webpack aliases:
     const aliases = config.resolve.alias || (config.resolve.alias = {});
     aliases.react = aliases['react-dom'] = 'preact/compat';

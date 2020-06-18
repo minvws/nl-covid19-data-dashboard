@@ -340,7 +340,7 @@ const Home: FunctionComponent = () => {
         </Masonry>
       </section>
 
-      <section classNam="home-section">
+      <section className="home-section">
         <TitleBlock
           Icon={VerpleegHuis}
           title={siteText.blok_verpleeghuis_zorg.title}

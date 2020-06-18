@@ -3,13 +3,23 @@ declare global {
     _paq: any;
   }
 }
-
-window._paq = window._paq || {};
+// client-side-only code
+if (process.browser) {
+  if (window) {
+    window._paq = window._paq || {};
+  }
+}
 
 export const pageview = (url: string, documentTitle: string) => {
-  window._paq.push(['setCustomUrl', '/' + url]);
-  window._paq.push(['setDocumentTitle', documentTitle]);
-  window._paq.push(['trackPageView']);
+  if (process.browser) {
+    if (window) {
+      window._paq.push(['setCustomUrl', '/' + url]);
+      window._paq.push(['setDocumentTitle', documentTitle]);
+      window._paq.push(['trackPageView']);
+    } else {
+      console.log('window object not found');
+    }
+  }
 };
 
 type EventTypes = {
@@ -22,5 +32,18 @@ type EventTypes = {
 
 export function event(eventOptions: EventTypes) {
   const { category, action, name, value, dimensions } = eventOptions;
-  window._paq.push(['trackEvent', category, action, name, value, dimensions]);
+  if (process.browser) {
+    if (window) {
+      window._paq.push([
+        'trackEvent',
+        category,
+        action,
+        name,
+        value,
+        dimensions,
+      ]);
+    } else {
+      console.log('no window object found');
+    }
+  }
 }
