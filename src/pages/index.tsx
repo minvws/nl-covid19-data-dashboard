@@ -13,15 +13,15 @@ import Layout from 'components/layout';
 import LinkCard from 'components/linkCard';
 import Metadata from 'components/metadata';
 
-import Arts from 'assets/arts.svg';
-import Ziekenhuis from 'assets/ziekenhuis.svg';
-import Ziektegolf from 'assets/ziektegolf.svg';
-import Getest from 'assets/test.svg';
-import Repro from 'assets/reproductie.svg';
-import VerpleegHuis from 'assets/verpleeg.svg';
-import Virus from 'assets/virus.svg';
-import Locatie from 'assets/locaties.svg';
-import Warning from 'assets/warn.svg';
+import Arts from '../assets/arts.svg';
+import Ziekenhuis from '../assets/ziekenhuis.svg';
+import Ziektegolf from '../assets/ziektegolf.svg';
+import Getest from '../assets/test.svg';
+import Repro from '../assets/reproductie.svg';
+import VerpleegHuis from '../assets/verpleeg.svg';
+import Virus from '../assets/virus.svg';
+import Locatie from '../assets/locaties.svg';
+import Warning from '../assets/warn.svg';
 
 import { store } from 'store';
 import siteText from 'data/textNationaal.json';
@@ -463,3 +463,5 @@ const Home: FunctionComponent = () => {
 };
 
 Home.getLayout = Layout.getLayout();
+
+export default Home;
