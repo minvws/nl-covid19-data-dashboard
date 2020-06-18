@@ -17,7 +17,14 @@ const nextConfig = {
       issuer: {
         test: /\.(js|ts)x?$/,
       },
-      use: ['@svgr/webpack'],
+      use: [
+        {
+          loader: '@svgr/webpack',
+          options: {
+            typescript: false,
+          },
+        },
+      ],
     });
 
     // Install webpack aliases:

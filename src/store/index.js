@@ -8,10 +8,11 @@ const { Provider } = store;
 const StateProvider = ({ children }) => {
   const [state, dispatch] = React.useReducer((state, action) => {
     switch (action.type) {
-      case 'INIT_LOAD':
+      case 'INIT_LOAD': {
         const newObject = { status: 'loading' };
         return { ...state, [action.payload.id]: newObject };
-      case 'LOAD_SUCCESS':
+      }
+      case 'LOAD_SUCCESS': {
         const data = action.payload;
         let id;
         if (data.name == 'NL_Nederland') {
@@ -20,9 +21,11 @@ const StateProvider = ({ children }) => {
           id = data.code;
         }
         return { ...state, [id]: { ...data, status: 'ready' } };
-      case 'LOAD_FAIL':
+      }
+      case 'LOAD_FAIL': {
         const failObject = { status: 'failed' };
         return { ...state, [action.payload.id]: failObject };
+      }
       default:
         throw new Error();
     }

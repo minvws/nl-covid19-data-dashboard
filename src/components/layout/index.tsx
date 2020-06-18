@@ -1,3 +1,5 @@
+import React from 'react';
+
 import Link from 'next/link';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -7,11 +9,20 @@ import MaxWidth from 'components/maxWidth';
 import text from 'data/textLayout.json';
 import useMediaQuery from 'utils/useMediaQuery';
 
-export default function Layout({
+type LayoutProps = {
+  title?: string;
+  description?: string;
+};
+
+type FunctionComponentWithLayout<P> = React.FC<P> & {
+  getLayout?: (title: string) => (page: React.ReactNode) => React.ReactNode;
+};
+
+const Layout: FunctionComponentWithLayout<LayoutProps> = ({
   children,
-  title = 'Dashboard Coronavirus COVID-19 dashboard | Rijksoverheid.nl',
-  description = 'Informatie over de ontwikkeling van het coronavirus in Nederland.',
-}) {
+  title = 'Title',
+  description = 'Description',
+}) => {
   const router = useRouter();
 
   // remove focus after navigation
@@ -59,7 +70,11 @@ export default function Layout({
         <div className={styles.logoWrapper}>
           <img
             className={styles.logo}
-            src={showSmallLogo ? '/images/logo-ro-small.svg' : '/images/logo-ro.svg'}
+            src={
+              showSmallLogo
+                ? '/images/logo-ro-small.svg'
+                : '/images/logo-ro.svg'
+            }
             alt="Rijksoverheid"
           />
         </div>
@@ -179,6 +194,8 @@ export default function Layout({
       </footer>
     </>
   );
-}
+};
 
 Layout.getLayout = (title) => (page) => <Layout title={title}>{page}</Layout>;
+
+export default Layout;

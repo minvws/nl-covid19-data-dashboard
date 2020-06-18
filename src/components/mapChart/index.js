@@ -12,7 +12,7 @@ if (typeof Highcharts === 'object') {
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
 const MapChart = ({ selected, setSelection }) => {
-  const { data, error } = useSWR('/json/veiligheidsregio.json', fetcher);
+  const { data } = useSWR('/json/veiligheidsregio.json', fetcher);
 
   if (!data) {
     return null;
@@ -79,11 +79,6 @@ const MapChart = ({ selected, setSelection }) => {
     plotOptions: {
       panning: false,
     },
-    tooltip: {
-      pointFormatter: function () {
-        return this.properties['Vgrnr'];
-      },
-    },
     legend: {
       enabled: false,
     },
@@ -91,6 +86,9 @@ const MapChart = ({ selected, setSelection }) => {
       backgroundColor: '#FFF',
       borderColor: '#01689B',
       borderRadius: 0,
+      pointFormatter: function () {
+        return this.properties['Vgrnr'];
+      },
       formatter: function () {
         return this.point.properties.Veiligheid;
       },

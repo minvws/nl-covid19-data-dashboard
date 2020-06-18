@@ -10,6 +10,11 @@
     "prettier",
     "prettier/@typescript-eslint"
   ],
+  "settings": {
+    "react": {
+      "version": "16.3"
+    }
+  },
   "env": {
     "es6": true,
     "browser": true,
