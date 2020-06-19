@@ -11,25 +11,27 @@ Tamas Erkelens from the Municipality of Amsterdam is contact person for the proj
 [CODE For NL Slack](https://doemee.codefor.nl)
 
 ## Development & Contribution process
-The core team works on the repository in a private fork and will share its work in this repository in regular updates. If you plan to propose changes, we recommend to open an issue beforehand where we can discuss your planned changes. This increases the chance that we might be able to use your contribution (or it avoids doing work if there are reasons why we wouldn't be able to use it).
+
+The core team works directly from this open-source repository. If you plan to propose changes, we recommend to open an issue beforehand where we can discuss your planned changes. This increases the chance that we might be able to use your contribution (or it avoids doing work if there are reasons why we wouldn't be able to use it).
 
 ## Setup
 
 This application uses Next.js as framework, which builds the pages of the application as static exports. We use Preact to keep the bundle as small as possible.
 
-We are using Next.js 9.3, because 9.4 seems to have issues with Fast Refresh and Preact.
+We are using Next.js 9.3, because 9.4 introduces Fast Refresh and that has issues with Preact.
 
 Run `yarn` to install all required packages.
 
-Data
+### Data
+
 Given the short time frame of the project: The data calculations are not open-source yet. If you have data, you can place it in `/public/json/`
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-`yarn dev`
+`yarn dev`  
 Runs the app in the development mode. Open http://localhost:3000 to view it in the browser.
 
-`yarn build`
+`yarn build`  
 Builds the app for production to the out folder. It correctly bundles React in production mode and optimizes the build for the best performance. All pages are output as static html files through next export.
