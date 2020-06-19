@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import styles from './svgmap.module.scss';
 
 import regioData from 'data';
@@ -155,7 +157,12 @@ const regions = [
   },
 ];
 
-function SvgMap(props) {
+type SvgMapTypes = {
+  selected: any;
+  setSelection: (item: any) => void;
+};
+
+const SvgMap: FunctionComponent<SvgMapTypes> = (props) => {
   const { selected, setSelection } = props;
 
   return (
@@ -166,8 +173,8 @@ function SvgMap(props) {
           version="1.2"
           baseProfile="tiny"
           viewBox="0 0 800 927"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
           className={styles.svg}
           width="800"
         >
@@ -180,6 +187,7 @@ function SvgMap(props) {
 
               return (
                 <path
+                  key={`region-${region.id}`}
                   className={classNameCombined}
                   d={region.d}
                   onClick={() => {
@@ -194,6 +202,6 @@ function SvgMap(props) {
       </div>
     </div>
   );
-}
+};
 
 export default SvgMap;

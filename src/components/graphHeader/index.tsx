@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
+
 import styles from './graphHeader.module.scss';
 
-const GraphHeader = ({ Icon, title }) => {
+type GraphHeaderTypes = {
+  Icon?: React.ComponentType;
+  title: string;
+};
+
+const GraphHeader: FunctionComponent<GraphHeaderTypes> = ({ Icon, title }) => {
   return (
     <div className={styles.graphHeader}>
       {Icon && (

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useContext, useMemo, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 
@@ -26,17 +26,16 @@ import siteText from 'data/textRegionaal.json';
 const LineChart = dynamic(() => import('components/lineChart'));
 const SvgMap = dynamic(() => import('components/mapChart/svgMap'));
 
-export default Regio;
+import { FunctionComponentWithLayout } from 'components/layout';
+import { HomeLayoutProps } from 'pages/index';
 
-Regio.getLayout = Layout.getLayout(siteText.metadata.titel);
-
-function Regio() {
+const Regio: FunctionComponentWithLayout<HomeLayoutProps> = () => {
   const router = useRouter();
 
-  const globalState = React.useContext(store);
+  const globalState = useContext(store);
   const { state, dispatch } = globalState;
 
-  const selectedRegio = React.useMemo(() => {
+  const selectedRegio = useMemo(() => {
     const selectedRegioCode = router.query?.regio;
     return selectedRegioCode
       ? regioData.find((el) => el.code === selectedRegioCode)
@@ -54,7 +53,7 @@ function Regio() {
     );
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     async function fetchData() {
       if (selectedRegio && selectedRegio.code) {
         if (!state[selectedRegio.code]) {
@@ -75,8 +74,8 @@ function Regio() {
     return (
       <MaxWidth>
         <LastUpdated />
-        <div class="regio-grid">
-          <div class="mapCol">
+        <div className="regio-grid">
+          <div className="mapCol">
             <SelectRegio
               selected={selectedRegio}
               setSelection={setSelectedRegio}
@@ -84,7 +83,7 @@ function Regio() {
             <SvgMap selected={selectedRegio} setSelection={setSelectedRegio} />
           </div>
 
-          <div class="panelCol">
+          <div className="panelCol">
             <GraphContainer>
               <GraphContent>
                 <GraphHeader
@@ -121,8 +120,8 @@ function Regio() {
   return (
     <MaxWidth>
       <LastUpdated />
-      <div class="regio-grid">
-        <div class="mapCol">
+      <div className="regio-grid">
+        <div className="mapCol">
           <SelectRegio
             selected={selectedRegio}
             setSelection={setSelectedRegio}
@@ -130,7 +129,7 @@ function Regio() {
           <SvgMap selected={selectedRegio} setSelection={setSelectedRegio} />
         </div>
 
-        <div class="panelCol">
+        <div className="panelCol">
           <GraphContainer>
             <GraphContent>
               <GraphHeader
@@ -241,4 +240,8 @@ function Regio() {
       </div>
     </MaxWidth>
   );
-}
+};
+
+Regio.getLayout = Layout.getLayout(siteText.metadata.titel);
+
+export default Regio;

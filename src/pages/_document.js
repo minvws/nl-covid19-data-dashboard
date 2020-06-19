@@ -41,7 +41,7 @@ class MyDocument extends Document {
           <noscript>
             <img
               src="https://statistiek.rijksoverheid.nl/piwik/piwik.php?idsite=7939&rec=1"
-              style="border:0"
+              style={{ border: 0 }}
               alt=""
             />
           </noscript>

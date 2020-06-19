@@ -1,55 +1,57 @@
-import React from "react";
-import Masonry from "react-masonry-css";
-import dynamic from "next/dynamic";
+import React from 'react';
+import Masonry from 'react-masonry-css';
+import dynamic from 'next/dynamic';
 
-import GraphContainer from "components/graphContainer";
-import GraphContent from "components/graphContent";
-import BarScale from "components/barScale";
-import Collapse from "components/collapse";
+import GraphContainer from 'components/graphContainer';
+import GraphContent from 'components/graphContent';
+import BarScale from 'components/barScale';
+import Collapse from 'components/collapse';
 
-import LastUpdated from "components/lastUpdated";
-import TitleBlock from "components/titleBlock";
-import Layout from "components/layout";
-import LinkCard from "components/linkCard";
-import Metadata from "components/metadata";
+import LastUpdated from 'components/lastUpdated';
+import TitleBlock from 'components/titleBlock';
+import Layout from 'components/layout';
+import LinkCard from 'components/linkCard';
+import Metadata from 'components/metadata';
 
-import Arts from "assets/arts.svg";
-import Ziekenhuis from "assets/ziekenhuis.svg";
-import Ziektegolf from "assets/ziektegolf.svg";
-import Getest from "assets/test.svg";
-import Repro from "assets/reproductie.svg";
-import VerpleegHuis from "assets/verpleeg.svg";
-import Virus from "assets/virus.svg";
-import Locatie from "assets/locaties.svg";
-import Warning from "assets/warn.svg";
+import Arts from '../assets/arts.svg';
+import Ziekenhuis from '../assets/ziekenhuis.svg';
+import Ziektegolf from '../assets/ziektegolf.svg';
+import Getest from '../assets/test.svg';
+import Repro from '../assets/reproductie.svg';
+import VerpleegHuis from '../assets/verpleeg.svg';
+import Virus from '../assets/virus.svg';
+import Locatie from '../assets/locaties.svg';
+import Warning from '../assets/warn.svg';
 
-import Nederland from "assets/nederland.png";
+import { store } from 'store';
+import siteText from 'data/textNationaal.json';
+import GraphHeader from 'components/graphHeader';
+import formatDec from 'utils/formatDec';
+import IconList from 'components/iconList';
 
-import { store } from "store";
-import siteText from "data/textNationaal.json";
-import GraphHeader from "components/graphHeader";
-import formatDec from "utils/formatDec";
-import IconList from "components/iconList";
+const AreaChart = dynamic(() => import('components/areaChart'));
+const BarChart = dynamic(() => import('components/barChart'));
+const LineChart = dynamic(() => import('components/lineChart'));
 
-const AreaChart = dynamic(() => import("components/areaChart"));
-const BarChart = dynamic(() => import("components/barChart"));
-const LineChart = dynamic(() => import("components/lineChart"));
+export type HomeLayoutProps = {
+  getLayout: (string) => string;
+};
 
-Home.getLayout = Layout.getLayout();
+import { FunctionComponentWithLayout } from 'components/layout';
 
-export default function Home() {
+const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
   const globalState = React.useContext(store);
   const { state, dispatch } = globalState;
 
   React.useEffect(() => {
     async function fetchData() {
-      if (!state["NL"]) {
-        dispatch({ type: "INIT_LOAD", payload: { id: "NL" } });
+      if (!state['NL']) {
+        dispatch({ type: 'INIT_LOAD', payload: { id: 'NL' } });
         const response = await fetch(
           `${process.env.REACT_APP_DATA_SRC}NL.json`
         );
         const result = await response.json();
-        dispatch({ type: "LOAD_SUCCESS", payload: result });
+        dispatch({ type: 'LOAD_SUCCESS', payload: result });
       }
     }
     fetchData();
@@ -69,7 +71,7 @@ export default function Home() {
         <LastUpdated lastUpdated={state.NL?.last_generated * 1000} />
       )}
 
-      <section class="home-section">
+      <section className="home-section">
         <Masonry
           breakpointCols={breakpointColumnsObj}
           className="masonry-grid"
@@ -181,11 +183,11 @@ export default function Home() {
               {state.NL?.intake_share_age_groups && (
                 <BarChart
                   keys={[
-                    "0 tot 20",
-                    "20 tot 40",
-                    "40 tot 60",
-                    "60 tot 80",
-                    "80+",
+                    '0 tot 20',
+                    '20 tot 40',
+                    '40 tot 60',
+                    '60 tot 80',
+                    '80+',
                   ]}
                   data={state.NL?.intake_share_age_groups.list}
                 />
@@ -217,14 +219,14 @@ export default function Home() {
                 />
               )}
 
-              <p className={"regioDataLoading"}>
+              <p className={'regioDataLoading'}>
                 Signaalwaarde volgt in juni 2020
               </p>
 
               {state.NL?.infectious_people_count?.value && (
                 <h3>
-                  {siteText.besmettelijke_personen.metric_title}{" "}
-                  <span style={{ color: "#01689b" }}>
+                  {siteText.besmettelijke_personen.metric_title}{' '}
+                  <span style={{ color: '#01689b' }}>
                     {formatDec(state.NL?.infectious_people_count.value)}
                   </span>
                 </h3>
@@ -307,7 +309,7 @@ export default function Home() {
 
           <LinkCard
             href="/regio"
-            icon={Nederland}
+            icon={'images/nederland.png'}
             iconAlt="Kaart van Nederland"
           >
             <h3>{siteText.regio_link_block.title}</h3>
@@ -344,7 +346,7 @@ export default function Home() {
         </Masonry>
       </section>
 
-      <section class="home-section">
+      <section className="home-section">
         <TitleBlock
           Icon={VerpleegHuis}
           title={siteText.blok_verpleeghuis_zorg.title}
@@ -412,7 +414,7 @@ export default function Home() {
                 title={siteText.verpleeghuis_besmette_locaties.title}
               />
               <p>{siteText.verpleeghuis_besmette_locaties.text}</p>
-              <span className={"regioDataLoading"}>
+              <span className={'regioDataLoading'}>
                 <Warning />
                 {siteText.geen_selectie.text}
               </span>
@@ -464,4 +466,8 @@ export default function Home() {
       </section>
     </div>
   );
-}
+};
+
+Home.getLayout = Layout.getLayout();
+
+export default Home;

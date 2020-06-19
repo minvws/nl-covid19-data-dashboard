@@ -6,18 +6,21 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 const nextConfig = {
   env: {
-    // REACT_APP_DATA_SRC: 'http://localhost:8000/json/',
-    // REACT_APP_DATA_SRC: 'public/json/',
     // Lookup from mounted configmap in K8s:
     REACT_APP_DATA_SRC: '/json/',
   },
   webpack(config, { dev, isServer }) {
     config.module.rules.push({
       test: /\.svg$/,
+      use: [
+        {
+          loader: '@svgr/webpack',
+          options: { typescript: false },
+        },
+      ],
       issuer: {
         test: /\.(js|ts)x?$/,
       },
-      use: ['@svgr/webpack'],
     });
 
     // Install webpack aliases:

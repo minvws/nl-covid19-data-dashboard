@@ -6,8 +6,8 @@ function IconList(props) {
 
   return (
     <ul className={styles.iconList}>
-      {list.map((item) => (
-        <li className={styles.iconListItem}>
+      {list.map((item, index) => (
+        <li key={`iconlist-${index}`} className={styles.iconListItem}>
           <img src={item.icon} className={styles.iconListImage} alt="" />{' '}
           <span>{item.text}</span>
         </li>
