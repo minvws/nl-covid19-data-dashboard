@@ -14,7 +14,7 @@ const GraphHeader = ({ Icon, title, headingRef }) => {
       this is used on the region page to focus the first graph header
       after the region is changed.
       */}
-      <h3 ref={headingRef} tabIndex={headingRef ? 0 : undefined}>{title}</h3>
+      <h3 ref={headingRef} tabIndex={headingRef ? -1 : undefined}>{title}</h3>
     </div>
   );
 };

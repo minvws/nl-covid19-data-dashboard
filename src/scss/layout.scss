@@ -56,3 +56,6 @@
   /* change div to reference your elements you put in <Masonry> */
   margin-bottom: $default-margin * 2;
 }
+
+/* Remove outline from programatically focussed elements. */
+[tabindex="-1"] { outline: none }
