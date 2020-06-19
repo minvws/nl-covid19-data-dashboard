@@ -5,14 +5,12 @@
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
-    // Uncomment the following lines to enable eslint-config-prettier
-    // Is not enabled right now to avoid issues with the Next.js repo
     "prettier",
     "prettier/@typescript-eslint"
   ],
   "settings": {
     "react": {
-      "version": "16.3"
+      "version": "16.13.1"
     }
   },
   "env": {
