@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, FunctionComponent } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import months from 'data/months.js';
@@ -8,8 +8,24 @@ if (typeof Highcharts === 'object') {
   require('highcharts/highcharts-more')(Highcharts);
 }
 
-const AreaChart = (props) => {
-  const { rangeLegendLabel, lineLegendLabel, min, max, data, baseline } = props;
+type AreaChartProps = {
+  rangeLegendLabel: string;
+  lineLegendLabel: string;
+  min: number;
+  max: number;
+  data: Record<string, unknown>;
+  signaalwaarde: number;
+};
+
+const AreaChart: FunctionComponent<AreaChartProps> = (props) => {
+  const {
+    rangeLegendLabel,
+    lineLegendLabel,
+    min,
+    max,
+    data,
+    signaalwaarde,
+  } = props;
 
   const formatDate = (value) => {
     const date = new Date(value);
@@ -21,16 +37,9 @@ const AreaChart = (props) => {
     return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
   };
 
-  const baseArray = [];
-  if (baseline !== undefined) {
-    for (let x = 0; x < Object.keys(min).length; x += 1) {
-      baseArray.push(baseline);
-    }
-  }
-
   const rangeData = useMemo(() => {
     const dates = Object.keys(min);
-    dates.sort((a, b) => a - b);
+    dates.sort((a: any, b: any) => a - b);
 
     return dates.map((date) => [
       new Date(parseInt(date) * 1000), // parse Unix timestamp to JS timestamp
@@ -94,6 +103,7 @@ const AreaChart = (props) => {
         title: {
           text: null,
         },
+        plotLines: [],
         accessibility: {
           rangeDescription: 'Range: 2010 to 2017',
         },
@@ -110,7 +120,9 @@ const AreaChart = (props) => {
         formatter() {
           const rangePoint = rangeData.find((el) => el[0].getTime() === this.x);
           const [, minRangePoint, maxRangePoint] = rangePoint;
-          const linePoint = lineData.find((el) => el[0].getTime() === this.x);
+          const linePoint = lineData.find(
+            (el: any) => el[0].getTime() === this.x
+          );
           return `
             ${formatDateLong(this.x)}<br/>
             <strong>Bandbreedte</strong> ${formatNumber(
@@ -134,18 +146,6 @@ const AreaChart = (props) => {
           },
         },
         {
-          name: 'baseline',
-          data: baseArray,
-          dashStyle: 'dash',
-          type: 'line',
-          lineColor: '#4f5458',
-          lineWidth: 1,
-          enableMouseTracking: false,
-          marker: {
-            enabled: false,
-          },
-        },
-        {
           name: lineLegendLabel,
           data: lineData.map((el) => el[1]),
           type: 'line',
@@ -157,8 +157,17 @@ const AreaChart = (props) => {
         },
       ],
     }),
-    [lineLegendLabel, rangeLegendLabel, rangeData, lineData, baseArray]
+    [lineLegendLabel, rangeLegendLabel, rangeData, lineData]
   );
+
+  if (signaalwaarde) {
+    options.yAxis.plotLines.push({
+      value: signaalwaarde,
+      dashStyle: 'dash',
+      width: 1,
+      color: '#4f5458',
+    });
+  }
 
   return (
     <div>
