@@ -1,4 +1,4 @@
-import { useContext, useMemo, useEffect } from 'react';
+import { useContext, useMemo, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 
@@ -28,6 +28,7 @@ const SvgMap = dynamic(() => import('components/mapChart/svgMap'));
 
 import { FunctionComponentWithLayout } from 'components/layout';
 import { HomeLayoutProps } from 'pages/index';
+import ScreenReaderOnly from 'components/screenReaderOnly';
 
 const Regio: FunctionComponentWithLayout<HomeLayoutProps> = () => {
   const router = useRouter();
@@ -41,6 +42,29 @@ const Regio: FunctionComponentWithLayout<HomeLayoutProps> = () => {
       ? regioData.find((el) => el.code === selectedRegioCode)
       : null;
   }, [router]);
+
+  const contentRef = useRef(null);
+  const selectRegioWrapperRef = useRef(null);
+
+  /**
+   * Focuses region select element. Triggered by a screen reader
+   * only button at the end of the content.
+   */
+  const focusRegioSelect = () => {
+    if (!selectRegioWrapperRef.current) return;
+
+    const input = selectRegioWrapperRef.current.querySelector('input');
+    if (input) input.focus();
+  };
+
+  /**
+   * Focuses the first heading in the content column,
+   * used after region changes to move focus for visually impaired
+   * users so they know what has changed.
+   */
+  const focusFirstHeading = () => {
+    if (contentRef.current) contentRef.current.focus();
+  };
 
   const setSelectedRegio = (item) => {
     router.replace(
@@ -64,6 +88,8 @@ const Regio: FunctionComponentWithLayout<HomeLayoutProps> = () => {
           const result = await response.json();
           dispatch({ type: 'LOAD_SUCCESS', payload: result });
         }
+
+        focusFirstHeading();
       }
     }
 
@@ -121,7 +147,7 @@ const Regio: FunctionComponentWithLayout<HomeLayoutProps> = () => {
     <MaxWidth>
       <LastUpdated />
       <div className="regio-grid">
-        <div className="mapCol">
+        <div className="mapCol" ref={selectRegioWrapperRef}>
           <SelectRegio
             selected={selectedRegio}
             setSelection={setSelectedRegio}
@@ -135,6 +161,7 @@ const Regio: FunctionComponentWithLayout<HomeLayoutProps> = () => {
               <GraphHeader
                 Icon={Ziekenhuis}
                 title={siteText.regionaal_ziekenhuisopnames_per_dag.title}
+                headingRef={contentRef}
                 regio={selectedRegio?.name}
               />
 
@@ -248,6 +275,11 @@ const Regio: FunctionComponentWithLayout<HomeLayoutProps> = () => {
           </GraphContainer>
         </div>
       </div>
+      <ScreenReaderOnly>
+        <button onClick={focusRegioSelect}>
+          {siteText.terug_naar_regio_selectie.text}
+        </button>
+      </ScreenReaderOnly>
     </MaxWidth>
   );
 };
