@@ -56,7 +56,7 @@ const SelectRegio = ({ selected, setSelection }) => {
         )
       );
     },
-    onIsOpenChange: ({ isOpen }) => {
+    onIsOpenChange: () => {
       setInputItems(getInitialState());
     },
   });
@@ -82,6 +82,7 @@ const SelectRegio = ({ selected, setSelection }) => {
       <ul {...getMenuProps()} style={ieFix}>
         {isOpen &&
           inputItems.map((item, index) => (
+            // eslint-disable-next-line react/jsx-key
             <li
               style={
                 highlightedIndex === index ? { backgroundColor: '#bde4ff' } : {}

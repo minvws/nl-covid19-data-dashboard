@@ -1,49 +1,50 @@
-import * as React from "react";
-import { useRouter } from "next/router";
-import dynamic from "next/dynamic";
+import { useContext, useMemo, useEffect, useRef } from 'react';
+import { useRouter } from 'next/router';
+import dynamic from 'next/dynamic';
 
-import Layout from "components/layout";
-import MaxWidth from "components/maxWidth";
-import GraphContainer from "components/graphContainer";
-import GraphHeader from "components/graphHeader";
-import BarScale from "components/barScale";
-import Collapse from "components/collapse";
-import LastUpdated from "components/lastUpdated";
-import SelectRegio from "components/selectRegio";
-import Warning from "assets/warn.svg";
-import Metadata from "components/metadata";
-import regioData from "data";
+import Layout from 'components/layout';
+import MaxWidth from 'components/maxWidth';
+import GraphContainer from 'components/graphContainer';
+import GraphHeader from 'components/graphHeader';
+import BarScale from 'components/barScale';
+import Collapse from 'components/collapse';
+import LastUpdated from 'components/lastUpdated';
+import SelectRegio from 'components/selectRegio';
+import Warning from 'assets/warn.svg';
+import Metadata from 'components/metadata';
+import LoadingPlaceholder from 'components/loadingPlaceholder';
+import regioData from 'data';
 
-import { store } from "store";
-import GraphContent from "components/graphContent";
+import { store } from 'store';
+import GraphContent from 'components/graphContent';
 
-import Ziekenhuis from "assets/ziekenhuis.svg";
-import Getest from "assets/test.svg";
+import Ziekenhuis from 'assets/ziekenhuis.svg';
+import Getest from 'assets/test.svg';
 
-import siteText from "data/textRegionaal.json";
+import siteText from 'data/textRegionaal.json';
 
-const LineChart = dynamic(() => import("components/lineChart"));
-const SvgMap = dynamic(() => import("components/mapChart/svgMap"));
+const LineChart = dynamic(() => import('components/lineChart'));
+const SvgMap = dynamic(() => import('components/mapChart/svgMap'));
 
-export default Regio;
+import { FunctionComponentWithLayout } from 'components/layout';
+import { HomeLayoutProps } from 'pages/index';
+import ScreenReaderOnly from 'components/screenReaderOnly';
 
-Regio.getLayout = Layout.getLayout(siteText.metadata.titel);
-
-function Regio() {
+const Regio: FunctionComponentWithLayout<HomeLayoutProps> = () => {
   const router = useRouter();
 
-  const globalState = React.useContext(store);
+  const globalState = useContext(store);
   const { state, dispatch } = globalState;
 
-  const selectedRegio = React.useMemo(() => {
+  const selectedRegio = useMemo(() => {
     const selectedRegioCode = router.query?.regio;
     return selectedRegioCode
       ? regioData.find((el) => el.code === selectedRegioCode)
       : null;
   }, [router]);
 
-  const contentRef = React.useRef();
-  const selectRegioWrapperRef = React.useRef();
+  const contentRef = useRef(null);
+  const selectRegioWrapperRef = useRef(null);
 
   /**
    * Focuses region select element. Triggered by a screen reader
@@ -52,7 +53,7 @@ function Regio() {
   const focusRegioSelect = () => {
     if (!selectRegioWrapperRef.current) return;
 
-    const input = selectRegioWrapperRef.current.querySelector("input")
+    const input = selectRegioWrapperRef.current.querySelector('input');
     if (input) input.focus();
   };
 
@@ -76,16 +77,16 @@ function Regio() {
     );
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     async function fetchData() {
       if (selectedRegio && selectedRegio.code) {
         if (!state[selectedRegio.code]) {
-          dispatch({ type: "INIT_LOAD", payload: { id: selectedRegio.code } });
+          dispatch({ type: 'INIT_LOAD', payload: { id: selectedRegio.code } });
           const response = await fetch(
             `${process.env.REACT_APP_DATA_SRC}${selectedRegio.code}.json`
           );
           const result = await response.json();
-          dispatch({ type: "LOAD_SUCCESS", payload: result });
+          dispatch({ type: 'LOAD_SUCCESS', payload: result });
         }
 
         focusFirstHeading();
@@ -99,8 +100,8 @@ function Regio() {
     return (
       <MaxWidth>
         <LastUpdated />
-        <div class="regio-grid">
-          <div class="mapCol">
+        <div className="regio-grid">
+          <div className="mapCol">
             <SelectRegio
               selected={selectedRegio}
               setSelection={setSelectedRegio}
@@ -108,7 +109,7 @@ function Regio() {
             <SvgMap selected={selectedRegio} setSelection={setSelectedRegio} />
           </div>
 
-          <div class="panelCol">
+          <div className="panelCol">
             <GraphContainer>
               <GraphContent>
                 <GraphHeader
@@ -117,7 +118,7 @@ function Regio() {
                 />
 
                 <p>{siteText.regionaal_ziekenhuisopnames_per_dag.text}</p>
-                <span className={"regioDataLoading"}>
+                <span className={'regioDataLoading'}>
                   <Warning />
                   {siteText.geen_selectie.text}
                 </span>
@@ -131,7 +132,7 @@ function Regio() {
                   title={siteText.regionaal_positief_geteste_personen.title}
                 />
                 <p>{siteText.regionaal_positief_geteste_personen.text}</p>
-                <span className={"regioDataLoading"}>
+                <span className={'regioDataLoading'}>
                   <Warning />
                   {siteText.geen_selectie.text}
                 </span>
@@ -145,8 +146,8 @@ function Regio() {
   return (
     <MaxWidth>
       <LastUpdated />
-      <div class="regio-grid">
-        <div class="mapCol" ref={selectRegioWrapperRef}>
+      <div className="regio-grid">
+        <div className="mapCol" ref={selectRegioWrapperRef}>
           <SelectRegio
             selected={selectedRegio}
             setSelection={setSelectedRegio}
@@ -154,21 +155,29 @@ function Regio() {
           <SvgMap selected={selectedRegio} setSelection={setSelectedRegio} />
         </div>
 
-        <div class="panelCol">
+        <div className="panelCol">
           <GraphContainer>
             <GraphContent>
               <GraphHeader
                 Icon={Ziekenhuis}
                 title={siteText.regionaal_ziekenhuisopnames_per_dag.title}
                 headingRef={contentRef}
+                regio={selectedRegio?.name}
               />
 
               <p>{siteText.regionaal_ziekenhuisopnames_per_dag.text}</p>
+              {!state[selectedRegio?.code]?.intake_hospital_ma && (
+                <LoadingPlaceholder />
+              )}
               {state[selectedRegio?.code]?.intake_hospital_ma && (
                 <BarScale
                   min={siteText.regionaal_ziekenhuisopnames_per_dag.min}
                   max={siteText.regionaal_ziekenhuisopnames_per_dag.max}
                   value={state[selectedRegio.code].intake_hospital_ma.value}
+                  screenReaderText={
+                    siteText.regionaal_ziekenhuisopnames_per_dag
+                      .screen_reader_graph_content
+                  }
                   id="regio_opnames"
                   gradient={
                     siteText.regionaal_ziekenhuisopnames_per_dag.gradient
@@ -206,8 +215,11 @@ function Regio() {
               <GraphHeader
                 Icon={Getest}
                 title={siteText.regionaal_positief_geteste_personen.title}
+                regio={selectedRegio?.name}
               />
               <p>{siteText.regionaal_positief_geteste_personen.text}</p>
+              {!state[selectedRegio?.code]
+                ?.infected_people_delta_normalized && <LoadingPlaceholder />}
               {state[selectedRegio.code]?.infected_people_delta_normalized && (
                 <BarScale
                   min={siteText.regionaal_positief_geteste_personen.min}
@@ -215,6 +227,10 @@ function Regio() {
                   value={
                     state[selectedRegio.code].infected_people_delta_normalized
                       .value
+                  }
+                  screenReaderText={
+                    siteText.regionaal_positief_geteste_personen
+                      .screen_reader_graph_content
                   }
                   id="regio_infecties"
                   gradient={
@@ -259,9 +275,14 @@ function Regio() {
           </GraphContainer>
         </div>
       </div>
-      <button onClick={focusRegioSelect}>
-        {siteText.terug_naar_regio_selectie.text}
-      </button>
+      <ScreenReaderOnly>
+        <button onClick={focusRegioSelect}>
+          {siteText.terug_naar_regio_selectie.text}
+        </button>
+      </ScreenReaderOnly>
     </MaxWidth>
   );
-}
+};
+Regio.getLayout = Layout.getLayout(siteText.metadata.titel);
+
+export default Regio;
