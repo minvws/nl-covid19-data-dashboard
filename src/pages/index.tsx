@@ -104,7 +104,10 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
               <p>{siteText.ic_opnames_per_dag.fold}</p>
               <h4>{siteText.ic_opnames_per_dag.graph_title}</h4>
               {state.NL?.intake_intensivecare_ma?.list && (
-                <LineChart data={state.NL?.intake_intensivecare_ma.list} />
+                <LineChart
+                  data={state.NL?.intake_intensivecare_ma.list}
+                  signaalwaarde={siteText.ic_opnames_per_dag.signaalwaarde}
+                />
               )}
 
               <Metadata
@@ -146,7 +149,10 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
 
               <h4>{siteText.ziekenhuisopnames_per_dag.graph_title}</h4>
               {state.NL?.intake_hospital_ma?.list && (
-                <LineChart data={state.NL?.intake_hospital_ma.list} />
+                <LineChart
+                  data={state.NL?.intake_hospital_ma.list}
+                  signaalwaarde={40}
+                />
               )}
 
               <Metadata
@@ -287,7 +293,7 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                   data={state.NL?.reproduction_index.list}
                   min={state.NL?.reproduction_index.min}
                   max={state.NL?.reproduction_index.max}
-                  baseline={1}
+                  signaalwaarde={1}
                   rangeLegendLabel={siteText.reproductiegetal.rangeLegendLabel}
                   lineLegendLabel={siteText.reproductiegetal.lineLegendLabel}
                 />

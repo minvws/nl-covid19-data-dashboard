@@ -1,13 +1,20 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import months from 'data/months.js';
 import formatNumber from 'utils/formatNumber';
 
-const LineChart = ({ data }) => {
-  const formatDate = (value) => {
-    let dateObj = new Date(parseInt(value * 1000));
-    dateObj.toLocaleString();
+type LineChartProps = {
+  data: Record<string, unknown>;
+  signaalwaarde?: number;
+};
+
+const LineChart: FunctionComponent<LineChartProps> = ({
+  data,
+  signaalwaarde,
+}) => {
+  const formatDate = (value: number) => {
+    const dateObj = new Date(value * 1000);
     return `${dateObj.getDate()} ${months[dateObj.getMonth()]}`;
   };
 
@@ -42,8 +49,7 @@ const LineChart = ({ data }) => {
         rotation: '0',
         formatter: function () {
           if (this.isFirst || this.isLast) {
-            let valueDate = new Date(parseInt(this.value * 1000));
-            valueDate.toLocaleString();
+            const valueDate = new Date(this.value * 1000);
             return `${valueDate.getDate()} ${months[valueDate.getMonth()]}`;
           }
         },
@@ -67,6 +73,7 @@ const LineChart = ({ data }) => {
       accessibility: {
         rangeDescription: 'Range: 2010 to 2017',
       },
+      plotLines: [],
     },
     title: {
       text: null,
@@ -83,6 +90,15 @@ const LineChart = ({ data }) => {
       },
     ],
   };
+
+  if (signaalwaarde) {
+    options.yAxis.plotLines.push({
+      value: signaalwaarde,
+      dashStyle: 'dash',
+      width: 1,
+      color: '#4f5458',
+    });
+  }
 
   return <HighchartsReact highcharts={Highcharts} options={options} />;
 };
