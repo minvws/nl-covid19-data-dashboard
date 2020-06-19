@@ -1,29 +1,29 @@
-import * as React from 'react';
-import { useRouter } from 'next/router';
-import dynamic from 'next/dynamic';
+import * as React from "react";
+import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
 
-import Layout from 'components/layout';
-import MaxWidth from 'components/maxWidth';
-import GraphContainer from 'components/graphContainer';
-import GraphHeader from 'components/graphHeader';
-import BarScale from 'components/barScale';
-import Collapse from 'components/collapse';
-import LastUpdated from 'components/lastUpdated';
-import SelectRegio from 'components/selectRegio';
-import Warning from 'assets/warn.svg';
-import Metadata from 'components/metadata';
-import regioData from 'data';
+import Layout from "components/layout";
+import MaxWidth from "components/maxWidth";
+import GraphContainer from "components/graphContainer";
+import GraphHeader from "components/graphHeader";
+import BarScale from "components/barScale";
+import Collapse from "components/collapse";
+import LastUpdated from "components/lastUpdated";
+import SelectRegio from "components/selectRegio";
+import Warning from "assets/warn.svg";
+import Metadata from "components/metadata";
+import regioData from "data";
 
-import { store } from 'store';
-import GraphContent from 'components/graphContent';
+import { store } from "store";
+import GraphContent from "components/graphContent";
 
-import Ziekenhuis from 'assets/ziekenhuis.svg';
-import Getest from 'assets/test.svg';
+import Ziekenhuis from "assets/ziekenhuis.svg";
+import Getest from "assets/test.svg";
 
-import siteText from 'data/textRegionaal.json';
+import siteText from "data/textRegionaal.json";
 
-const LineChart = dynamic(() => import('components/lineChart'));
-const SvgMap = dynamic(() => import('components/mapChart/svgMap'));
+const LineChart = dynamic(() => import("components/lineChart"));
+const SvgMap = dynamic(() => import("components/mapChart/svgMap"));
 
 export default Regio;
 
@@ -51,9 +51,9 @@ function Regio() {
    */
   const focusRegioSelect = () => {
     if (!selectRegioWrapperRef.current) return;
-    try {
-      selectRegioWrapperRef.current.querySelector('input').focus();
-    } catch {}
+
+    const input = selectRegioWrapperRef.current.querySelector("input")
+    if (input) input.focus();
   };
 
   /**
@@ -62,9 +62,7 @@ function Regio() {
    * users so they know what has changed.
    */
   const focusFirstHeading = () => {
-    try {
-      if (contentRef.current) contentRef.current.focus();
-    } catch {}
+    if (contentRef.current) contentRef.current.focus();
   };
 
   const setSelectedRegio = (item) => {
@@ -82,12 +80,12 @@ function Regio() {
     async function fetchData() {
       if (selectedRegio && selectedRegio.code) {
         if (!state[selectedRegio.code]) {
-          dispatch({ type: 'INIT_LOAD', payload: { id: selectedRegio.code } });
+          dispatch({ type: "INIT_LOAD", payload: { id: selectedRegio.code } });
           const response = await fetch(
             `${process.env.REACT_APP_DATA_SRC}${selectedRegio.code}.json`
           );
           const result = await response.json();
-          dispatch({ type: 'LOAD_SUCCESS', payload: result });
+          dispatch({ type: "LOAD_SUCCESS", payload: result });
         }
 
         focusFirstHeading();
@@ -119,7 +117,7 @@ function Regio() {
                 />
 
                 <p>{siteText.regionaal_ziekenhuisopnames_per_dag.text}</p>
-                <span className={'regioDataLoading'}>
+                <span className={"regioDataLoading"}>
                   <Warning />
                   {siteText.geen_selectie.text}
                 </span>
@@ -133,7 +131,7 @@ function Regio() {
                   title={siteText.regionaal_positief_geteste_personen.title}
                 />
                 <p>{siteText.regionaal_positief_geteste_personen.text}</p>
-                <span className={'regioDataLoading'}>
+                <span className={"regioDataLoading"}>
                   <Warning />
                   {siteText.geen_selectie.text}
                 </span>
