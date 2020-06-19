@@ -27,3 +27,4 @@ jobs:
           # Enable linters
           eslint: true
           prettier: true
+          prettier_extensions: ts,tsx,js
