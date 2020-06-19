@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
+
 import styles from './graphHeader.module.scss';
 import ScreenReaderOnly from 'components/screenReaderOnly';
 
-const GraphHeader = ({ Icon, title, regio }) => {
+type GraphHeaderTypes = {
+  Icon?: React.ComponentType;
+  title: string;
+  regio?: string;
+};
+
+const GraphHeader: FunctionComponent<GraphHeaderTypes> = ({
+  Icon,
+  title,
+  regio,
+}) => {
   return (
     <div className={styles.graphHeader}>
       {Icon && (

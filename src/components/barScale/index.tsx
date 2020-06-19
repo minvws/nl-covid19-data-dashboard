@@ -1,9 +1,19 @@
-import React from 'react';
+import { useRef, FunctionComponent } from 'react';
 import formatNumber from 'utils/formatNumber';
 import ScreenReaderOnly from 'components/screenReaderOnly';
 import replaceVariablesInText from 'utils/replaceVariablesInText';
 
-const BarScale = ({
+type BarscaleProps = {
+  min: number;
+  max: number;
+  value: number;
+  kritiekeWaarde?: number;
+  gradient: any;
+  id: string;
+  screenReaderText: string;
+};
+
+const BarScale: FunctionComponent<BarscaleProps> = ({
   min,
   max,
   value,
@@ -12,20 +22,20 @@ const BarScale = ({
   id,
   screenReaderText,
 }) => {
-  let valueOffset = ((value - min) / (max - min)) * 100;
-  const rand = React.useRef(Math.random().toString(36).substring(2, 15));
+  const valueOffset = ((value - min) / (max - min)) * 100;
+  const rand = useRef(Math.random().toString(36).substring(2, 15));
 
   if (typeof value === 'undefined') {
     return null;
   }
 
-  let fontSize = '120%';
-  if (value.toString().length > 2) {
-    fontSize = '110%';
-  }
-  if (value.toString().length > 3) {
-    fontSize = '100%';
-  }
+  // let fontSize = '120%';
+  // if (value.toString().length > 2) {
+  //   fontSize = '110%';
+  // }
+  // if (value.toString().length > 3) {
+  //   fontSize = '100%';
+  // }
 
   const drawValue = (value) => {
     const offset = ((value - min) / (max - min)) * 100;
