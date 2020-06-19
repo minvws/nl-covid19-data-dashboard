@@ -49,6 +49,7 @@
     "text": "Aantal positief geteste mensen per 100.000 inwoners per dag.",
     "fold_title": "Wat betekent dit?",
     "fold": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
+    "linechart_title": "Verloop over tijd",
     "graph_title": "Verdeling naar leeftijd (totaal aantal mensen)",
     "open": "Verberg uitleg",
     "sluit": "Meer uitleg en data",
