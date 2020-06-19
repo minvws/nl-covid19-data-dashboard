@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import Masonry from 'react-masonry-css';
 import dynamic from 'next/dynamic';
 
@@ -33,7 +33,13 @@ const AreaChart = dynamic(() => import('components/areaChart'));
 const BarChart = dynamic(() => import('components/barChart'));
 const LineChart = dynamic(() => import('components/lineChart'));
 
-const Home: FunctionComponent = () => {
+export type HomeLayoutProps = {
+  getLayout: (string) => string;
+};
+
+import { FunctionComponentWithLayout } from 'components/layout';
+
+const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
   const globalState = React.useContext(store);
   const { state, dispatch } = globalState;
 

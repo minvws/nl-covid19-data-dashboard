@@ -23,7 +23,7 @@ const formatTimestamp = (timestamp) => {
 };
 
 type LastUpdatedProps = {
-  lastUpdated: number;
+  lastUpdated?: number;
 };
 
 const LastUpdated: FunctionComponent<LastUpdatedProps> = (props) => {

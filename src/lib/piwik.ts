@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 declare global {
   interface Window {
     _paq: any;

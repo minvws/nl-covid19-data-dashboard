@@ -1,4 +1,4 @@
-import { useContext, useMemo, useEffect, FunctionComponent } from 'react';
+import { useContext, useMemo, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 
@@ -26,7 +26,10 @@ import siteText from 'data/textRegionaal.json';
 const LineChart = dynamic(() => import('components/lineChart'));
 const SvgMap = dynamic(() => import('components/mapChart/svgMap'));
 
-const Regio: FunctionComponent = () => {
+import { FunctionComponentWithLayout } from 'components/layout';
+import { HomeLayoutProps } from 'pages/index';
+
+const Regio: FunctionComponentWithLayout<HomeLayoutProps> = () => {
   const router = useRouter();
 
   const globalState = useContext(store);

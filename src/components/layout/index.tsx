@@ -9,13 +9,13 @@ import MaxWidth from 'components/maxWidth';
 import text from 'data/textLayout.json';
 import useMediaQuery from 'utils/useMediaQuery';
 
-type LayoutProps = {
+export type LayoutProps = {
   title?: string;
   description?: string;
 };
 
-type FunctionComponentWithLayout<P> = React.FC<P> & {
-  getLayout?: (title: string) => (page: React.ReactNode) => React.ReactNode;
+export type FunctionComponentWithLayout<P> = React.FC<P> & {
+  getLayout?: (title?: string) => (page: any) => any;
 };
 
 const Layout: FunctionComponentWithLayout<LayoutProps> = ({
