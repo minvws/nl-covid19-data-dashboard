@@ -14,8 +14,7 @@ const LineChart: FunctionComponent<LineChartProps> = ({
   signaalwaarde,
 }) => {
   const formatDate = (value: number) => {
-    const dateObj = new Date(parseInt(value * 1000));
-    dateObj.toLocaleString();
+    const dateObj = new Date(value * 1000);
     return `${dateObj.getDate()} ${months[dateObj.getMonth()]}`;
   };
 
@@ -50,7 +49,7 @@ const LineChart: FunctionComponent<LineChartProps> = ({
         rotation: '0',
         formatter: function () {
           if (this.isFirst || this.isLast) {
-            const valueDate = new Date(parseInt(this.value * 1000));
+            const valueDate = new Date(this.value * 1000);
             return `${valueDate.getDate()} ${months[valueDate.getMonth()]}`;
           }
         },
