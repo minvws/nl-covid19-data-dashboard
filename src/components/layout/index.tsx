@@ -20,8 +20,8 @@ export type FunctionComponentWithLayout<P> = React.FC<P> & {
 
 const Layout: FunctionComponentWithLayout<LayoutProps> = ({
   children,
-  title = 'Title',
-  description = 'Description',
+  title = 'Dashboard Coronavirus COVID-19 | Rijksoverheid.nl',
+  description = 'Informatie over de ontwikkeling van het coronavirus in Nederland.',
 }) => {
   const router = useRouter();
 
