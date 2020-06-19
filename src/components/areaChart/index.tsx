@@ -1,6 +1,7 @@
 import { useMemo, FunctionComponent } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+
 import months from 'data/months';
 import formatNumber from 'utils/formatNumber';
 
