@@ -96,7 +96,7 @@ const LineChart: FunctionComponent<LineChartProps> = ({
       value: signaalwaarde,
       dashStyle: 'dash',
       width: 1,
-      color: '#d33',
+      color: '#4f5458',
     });
   }
 
