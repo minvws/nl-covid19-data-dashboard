@@ -5,6 +5,7 @@
   "ic_opnames_per_dag": {
     "title": "Intensive care-opnames per dag",
     "text": "Aantal opnames per dag, gemiddeld over de afgelopen 3 dagen.",
+    "screen_reader_graph_content": "{{value}} intensive care-opnames per dag. Signaalwaarde: {{kritiekeWaarde}} opnames per dag.",
     "fold_title": "Wat betekent dit?",
     "fold": "Aantal mensen met COVID-19 dat per dag op een intensive care-afdeling van een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de afgelopen drie dagen.",
     "graph_title": "Verloop over tijd",
@@ -26,6 +27,7 @@
   "ziekenhuisopnames_per_dag": {
     "title": "Ziekenhuisopnames per dag",
     "text": "Aantal opnames per dag, gemiddeld over de afgelopen 3 dagen.",
+    "screen_reader_graph_content": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{kritiekeWaarde}} opnames per dag.",
     "fold_title": "Wat betekent dit?",
     "fold": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen.",
     "graph_title": "Verloop over tijd",
@@ -47,6 +49,7 @@
   "positief_geteste_personen": {
     "title": "Positief geteste mensen",
     "text": "Aantal positief geteste mensen per 100.000 inwoners per dag.",
+    "screen_reader_graph_content": "{{value}} positief geteste mensen per dag.",
     "fold_title": "Wat betekent dit?",
     "fold": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
     "graph_title": "Verdeling naar leeftijd (totaal aantal mensen)",
@@ -63,6 +66,7 @@
   "besmettelijke_personen": {
     "title": "Aantal besmettelijke mensen",
     "text": "Een berekening van hoeveel mensen met COVID-19 per 100.000 inwoners besmettelijk zijn voor anderen. Dit getal wordt door het RIVM berekend.",
+    "screen_reader_graph_content": "{{value}} besmettelijke personen per 100.000 inwoners.",
     "fold_title": "Wat betekent dit?",
     "fold": "Als iemand het coronavirus oploopt, dan is deze persoon een tijd lang besmettelijk voor anderen. Hoe lang dit duurt verschilt van persoon tot persoon. Dit getal is een schatting.",
     "metric_title": "Geschat aantal besmettelijke mensen in Nederland:",
@@ -80,6 +84,7 @@
   "reproductiegetal": {
     "title": "Reproductiegetal",
     "text": "Aantal mensen dat besmet wordt door één besmettelijke persoon.",
+    "screen_reader_graph_content": "{{value}} mensen. Signaalwaarde: {{kritiekeWaarde}}.",
     "fold_title": "Wat betekent dit?",
     "fold": "Het reproductiegetal laat zien hoe snel het virus zich verspreidt. Als dat getal bijvoorbeeld 2 is, dan besmet iemand die het coronavirus heeft gemiddeld twee andere mensen binnen 5 dagen. Die twee mensen besmetten ieder ook weer twee mensen binnen 5 dagen. En zo gaat het door. Bij een reproductiegetal van rond de 1 blijft het aantal besmettingen ongeveer gelijk. Als het reproductiegetal lager is dan 1, dan daalt het aantal besmettingen. Dit reproductiegetal is een gemiddelde voor heel Nederland. Het getal dat gepresenteerd wordt is een schatting op basis van een aantal gegevensbronnen. Het exacte getal is onbekend, maar we kunnen met vrij veel zekerheid zeggen tussen welke waarden zich dat bevindt.",
     "graph_title": "Verloop over tijd",
@@ -158,6 +163,7 @@
   "verpleeghuis_positief_geteste_personen": {
     "title": "Aantal positief geteste bewoners",
     "text": "Aantal positief geteste bewoners in verpleeghuizen per dag.",
+    "screen_reader_graph_content": "{{value}} positief geteste bewoners.",
     "fold_title": "Wat betekent dit?",
     "fold": "Dit getal is een inschatting van het aantal gemelde bewoners in verpleeghuizen dat in Nederland positief getest is en COVID-19 heeft. Dit getal verwijst naar de datum vóór de datum van de laatste update.",
     "graph_title": "Verloop over tijd",
@@ -175,6 +181,7 @@
   "verpleeghuis_oversterfte": {
     "title": "Sterfte",
     "text": "Aantal overleden bewoners in verpleeghuizen met een vastgestelde COVID-19-besmetting dat overleden is per dag.",
+    "screen_reader_graph_content": "{{value}} overleden bewoners.",
     "fold_title": "Wat betekent dit?",
     "fold": "Dit getal is een inschatting van het aantal gemelde verpleeghuisbewoners dat in Nederland overlijdt aan de gevolgen van het nieuwe coronavirus. Dit getal verwijst naar de datum vóór de datum van de laatste update.",
     "graph_title": "Verloop over tijd",

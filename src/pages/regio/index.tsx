@@ -135,6 +135,7 @@ const Regio: FunctionComponentWithLayout<HomeLayoutProps> = () => {
               <GraphHeader
                 Icon={Ziekenhuis}
                 title={siteText.regionaal_ziekenhuisopnames_per_dag.title}
+                regio={selectedRegio?.name}
               />
 
               <p>{siteText.regionaal_ziekenhuisopnames_per_dag.text}</p>
@@ -146,6 +147,10 @@ const Regio: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                   min={siteText.regionaal_ziekenhuisopnames_per_dag.min}
                   max={siteText.regionaal_ziekenhuisopnames_per_dag.max}
                   value={state[selectedRegio.code].intake_hospital_ma.value}
+                  screenReaderText={
+                    siteText.regionaal_ziekenhuisopnames_per_dag
+                      .screen_reader_graph_content
+                  }
                   id="regio_opnames"
                   gradient={
                     siteText.regionaal_ziekenhuisopnames_per_dag.gradient
@@ -183,6 +188,7 @@ const Regio: FunctionComponentWithLayout<HomeLayoutProps> = () => {
               <GraphHeader
                 Icon={Getest}
                 title={siteText.regionaal_positief_geteste_personen.title}
+                regio={selectedRegio?.name}
               />
               <p>{siteText.regionaal_positief_geteste_personen.text}</p>
               {!state[selectedRegio?.code]
@@ -194,6 +200,10 @@ const Regio: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                   value={
                     state[selectedRegio.code].infected_people_delta_normalized
                       .value
+                  }
+                  screenReaderText={
+                    siteText.regionaal_positief_geteste_personen
+                      .screen_reader_graph_content
                   }
                   id="regio_infecties"
                   gradient={
@@ -241,7 +251,6 @@ const Regio: FunctionComponentWithLayout<HomeLayoutProps> = () => {
     </MaxWidth>
   );
 };
-
 Regio.getLayout = Layout.getLayout(siteText.metadata.titel);
 
 export default Regio;
