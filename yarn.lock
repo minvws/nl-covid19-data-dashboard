@@ -1100,7 +1100,7 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.8.4", "@babel/runtime@^7.9.1":
+"@babel/runtime@^7.8.4", "@babel/runtime@^7.9.6":
   version "7.10.2"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.10.2.tgz#d103f21f2602497d38348a32e008637d506db839"
   integrity sha512-6sF3uQw2ivImfVIl62RZ7MXhO2tap69WeWK57vAaimT6AZbE4FbqjdEJIN1UqoD6wI6B+1n9UiagafH1sxjOtg==
@@ -3432,11 +3432,11 @@ download@^7.1.0:
     pify "^3.0.0"
 
 downshift@^5.4.2:
-  version "5.4.2"
-  resolved "https://registry.yarnpkg.com/downshift/-/downshift-5.4.2.tgz#3f6b7bf4ad7e0ff5503414efe3a398421763ebae"
-  integrity sha512-IVwIc4iw5OF5Bi/MbITarW2E8/5akm++5b6UL7aXyPoZmuVe4ilFGaQaktdFW/IwuzHieIwaWj4AQgI0lQNslQ==
+  version "5.4.3"
+  resolved "https://registry.yarnpkg.com/downshift/-/downshift-5.4.3.tgz#7dda5e5d07aa06d440af4e691e318ec9b4e3e78f"
+  integrity sha512-5RdEBfIfhK4dqoXvLKGrFqY+kE9iBjZJrJoxoWXQzXMCybyr7pbqq4rvXqvzbZtmCuCB8ZN9iGz5V96rv+Q7fw==
   dependencies:
-    "@babel/runtime" "^7.9.1"
+    "@babel/runtime" "^7.9.6"
     compute-scroll-into-view "^1.0.13"
     prop-types "^15.7.2"
     react-is "^16.13.1"
@@ -4682,9 +4682,9 @@ highcharts-react-official@^3.0.0:
   integrity sha512-VefJgDY2hkT9gfppsQGrRF2g5u8d9dtfHGcx2/xqiP+PkZXCqalw9xOeKVCRvJKTOh0coiDFwvVjOvB7KaGl4A==
 
 highcharts@^8.1.0:
-  version "8.1.0"
-  resolved "https://registry.yarnpkg.com/highcharts/-/highcharts-8.1.0.tgz#f93adaf8d53b0f83c74c9854f0ad10baec010d97"
-  integrity sha512-4KXq9t2/PU0cqKUtET7om9Kh5AyOinIn4vYi62oYVsb4ql5wyUYW06f9Si/ERG2Thoy/rcwNmR77upKjg8xhqQ==
+  version "8.1.2"
+  resolved "https://registry.yarnpkg.com/highcharts/-/highcharts-8.1.2.tgz#a4e7d74a6140028e676a3a54f5fd0ea6ccbcc90e"
+  integrity sha512-Q124Lj+2+bVY2MKMd7d8uSVAmhZVzWgknUUzUBEC27S94dCyK6PBgahuwiMP/ET4w7qSFBBi4OC77ZUb0Vnuyg==
 
 hmac-drbg@^1.0.0:
   version "1.0.1"
@@ -8673,9 +8673,9 @@ svgo@^1.0.0, svgo@^1.2.2:
     util.promisify "~1.0.0"
 
 swr@^0.2.2:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/swr/-/swr-0.2.2.tgz#6e1b3e5c0e545c4fdb36ae3aa38cd94d0f9a88b7"
-  integrity sha512-D/z+PTUchZhoUA0tNC8TNJivf7Hc61WPxbUdXPi+VxRloddWYNP1ZicaEgyAph42ZnKl1L7twcZr4q6d0UMXcg==
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/swr/-/swr-0.2.3.tgz#e0fb260d27f12fafa2388312083368f45127480d"
+  integrity sha512-JhuuD5ojqgjAQpZAhoPBd8Di0Mr1+ykByVKuRJdtKaxkUX/y8kMACWKkLgLQc8pcDOKEAnbIreNjU7HfqI9nHQ==
   dependencies:
     fast-deep-equal "2.0.1"
 
