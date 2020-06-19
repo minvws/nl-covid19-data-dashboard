@@ -6,8 +6,6 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 const nextConfig = {
   env: {
-    // REACT_APP_DATA_SRC: 'http://localhost:8000/json/',
-    // REACT_APP_DATA_SRC: 'public/json/',
     // Lookup from mounted configmap in K8s:
     REACT_APP_DATA_SRC: '/json/',
   },
@@ -26,20 +24,20 @@ const nextConfig = {
     });
 
     // Install webpack aliases:
-    // const aliases = config.resolve.alias || (config.resolve.alias = {});
-    // aliases.react = aliases['react-dom'] = 'preact/compat';
+    const aliases = config.resolve.alias || (config.resolve.alias = {});
+    aliases.react = aliases['react-dom'] = 'preact/compat';
 
     // inject Preact DevTools
-    // if (dev && !isServer) {
-    //   const entry = config.entry;
-    //   config.entry = () =>
-    //     entry().then((entries) => {
-    //       entries['main.js'] = ['preact/debug'].concat(
-    //         entries['main.js'] || []
-    //       );
-    //       return entries;
-    //     });
-    // }
+    if (dev && !isServer) {
+      const entry = config.entry;
+      config.entry = () =>
+        entry().then((entries) => {
+          entries['main.js'] = ['preact/debug'].concat(
+            entries['main.js'] || []
+          );
+          return entries;
+        });
+    }
 
     return config;
   },
