@@ -103,14 +103,13 @@ const BarScale: FunctionComponent<BarscaleProps> = ({
 
   return (
     <>
-      {screenReaderText && (
-        <ScreenReaderOnly>
-          {replaceVariablesInText(screenReaderText, {
-            value,
-            kritiekeWaarde,
-          })}
-        </ScreenReaderOnly>
-      )}
+      <ScreenReaderOnly>
+        {replaceVariablesInText(screenReaderText, {
+          value,
+          kritiekeWaarde,
+        })}
+      </ScreenReaderOnly>
+
       <div className="barScale" aria-hidden>
         <svg xmlns="http://www.w3.org/2000/svg">
           <defs>
