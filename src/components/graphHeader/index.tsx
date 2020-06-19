@@ -1,8 +1,9 @@
-import { FunctionComponent } from 'react';
+import React, { FunctionComponent } from 'react';
+
 import styles from './graphHeader.module.scss';
 
 type GraphHeaderTypes = {
-  Icon?: any;
+  Icon?: React.ComponentType;
   title: string;
 };
 
