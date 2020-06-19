@@ -51,9 +51,13 @@ const SelectRegio = ({ selected, setSelection }) => {
     },
     onInputValueChange: ({ inputValue }) => {
       setInputItems(
-        getInitialState().filter((item) =>
-          itemToString(item).toLowerCase().startsWith(inputValue.toLowerCase())
-        )
+        getInitialState().filter((item) => {
+          const source = itemToString(item).toLowerCase().trim();
+          const searchValue = inputValue.toLowerCase().trim();
+
+          const isMatch = source.includes(searchValue);
+          return isMatch;
+        })
       );
     },
     onIsOpenChange: () => {
