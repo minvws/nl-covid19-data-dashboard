@@ -7,7 +7,7 @@
     "text": "Aantal opnames per dag, gemiddeld over de afgelopen 3 dagen.",
     "screen_reader_graph_content": "{{value}} intensive care-opnames per dag. Signaalwaarde: {{kritiekeWaarde}} opnames per dag.",
     "fold_title": "Wat betekent dit?",
-    "fold": "Aantal mensen met COVID-19 dat per dag op een intensive care-afdeling van een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de afgelopen drie dagen.",
+    "fold": "Aantal mensen met bevestigd COVID-19 dat per dag op een intensive care-afdeling van een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de afgelopen drie dagen.",
     "graph_title": "Verloop over tijd",
     "open": "Verberg uitleg",
     "sluit": "Meer uitleg en data",
