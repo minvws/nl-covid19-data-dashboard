@@ -196,6 +196,14 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
             >
               <h4>{siteText.positief_geteste_personen.fold_title}</h4>
               <p>{siteText.positief_geteste_personen.fold}</p>
+
+              <h4>{siteText.positief_geteste_personen.linechart_title}</h4>
+              {state.NL?.infected_people_delta_normalized?.list && (
+                <LineChart
+                  data={state.NL?.infected_people_delta_normalized?.list}
+                />
+              )}
+
               <h4>{siteText.positief_geteste_personen.graph_title}</h4>
               {state.NL?.intake_share_age_groups && (
                 <BarChart
