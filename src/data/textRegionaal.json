@@ -19,7 +19,7 @@
       { "color": "#f35065", "offset": 0.9 }
     ],
     "bron": {
-      "href": "https://www.rivm.nl/",
+      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     }
   },
@@ -36,7 +36,7 @@
     "max": 5,
     "gradient": [{ "color": "#3391CC", "offset": 0 }],
     "bron": {
-      "href": "https://www.rivm.nl/",
+      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     }
   },
@@ -54,7 +54,7 @@
       { "color": "#f35065", "offset": 0.5625 }
     ],
     "bron": {
-      "href": "https://www.rivm.nl/",
+      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     }
   },
