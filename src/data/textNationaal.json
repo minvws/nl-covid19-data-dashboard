@@ -15,9 +15,18 @@
     "max": 30,
     "signaalwaarde": 10,
     "gradient": [
-      { "color": "#69c253", "offset": 0 },
-      { "color": "#D3A500", "offset": 0.35 },
-      { "color": "#f35065", "offset": 0.67 }
+      {
+        "color": "#69c253",
+        "offset": 0
+      },
+      {
+        "color": "#D3A500",
+        "offset": 0.35
+      },
+      {
+        "color": "#f35065",
+        "offset": 0.67
+      }
     ],
     "bron": {
       "href": "https://stichting-nice.nl/",
@@ -37,9 +46,18 @@
     "max": 100,
     "signaalwaarde": 40,
     "gradient": [
-      { "color": "#69c253", "offset": 0 },
-      { "color": "#D3A500", "offset": 0.4 },
-      { "color": "#f35065", "offset": 0.9 }
+      {
+        "color": "#69c253",
+        "offset": 0
+      },
+      {
+        "color": "#D3A500",
+        "offset": 0.4
+      },
+      {
+        "color": "#f35065",
+        "offset": 0.9
+      }
     ],
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
@@ -52,13 +70,19 @@
     "screen_reader_graph_content": "{{value}} positief geteste mensen per dag.",
     "fold_title": "Wat betekent dit?",
     "fold": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
+    "metric_title": "Totaal aantal positief geteste mensen:",
     "linechart_title": "Verloop over tijd",
     "graph_title": "Verdeling naar leeftijd (totaal aantal mensen)",
     "open": "Verberg uitleg",
     "sluit": "Meer uitleg en data",
     "min": 0,
     "max": 5,
-    "gradient": [{ "color": "#3391CC", "offset": 0 }],
+    "gradient": [
+      {
+        "color": "#3391CC",
+        "offset": 0
+      }
+    ],
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -76,7 +100,12 @@
     "sluit": "Meer uitleg en data",
     "min": 0,
     "max": 50,
-    "gradient": [{ "color": "#3391CC", "offset": 0 }],
+    "gradient": [
+      {
+        "color": "#3391CC",
+        "offset": 0
+      }
+    ],
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -97,10 +126,22 @@
     "max": 2,
     "signaalwaarde": 1,
     "gradient": [
-      { "color": "#69c253", "offset": 0 },
-      { "color": "#69c253", "offset": 0.5 },
-      { "color": "#D3A500", "offset": 0.5052 },
-      { "color": "#f35065", "offset": 0.5625 }
+      {
+        "color": "#69c253",
+        "offset": 0
+      },
+      {
+        "color": "#69c253",
+        "offset": 0.5
+      },
+      {
+        "color": "#D3A500",
+        "offset": 0.5052
+      },
+      {
+        "color": "#f35065",
+        "offset": 0.5625
+      }
     ],
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
@@ -153,8 +194,14 @@
         "icon": "/images/Verplaatsingsgegevens.png",
         "text": "Verplaatsingsgegevens"
       },
-      { "icon": "/images/Nalevingsmonitor.png", "text": "Nalevingsmonitor" },
-      { "icon": "/images/Gedragsonderzoeken.png", "text": "Gedragsonderzoeken" }
+      {
+        "icon": "/images/Nalevingsmonitor.png",
+        "text": "Nalevingsmonitor"
+      },
+      {
+        "icon": "/images/Gedragsonderzoeken.png",
+        "text": "Gedragsonderzoeken"
+      }
     ]
   },
   "verpleeghuis_besmette_locaties": {
@@ -173,7 +220,12 @@
     "min": 0,
     "max": 100,
     "signaalwaarde": 40,
-    "gradient": [{ "color": "#3391CC", "offset": 0 }],
+    "gradient": [
+      {
+        "color": "#3391CC",
+        "offset": 0
+      }
+    ],
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -190,7 +242,12 @@
     "sluit": "Meer uitleg en data",
     "min": 0,
     "max": 50,
-    "gradient": [{ "color": "#3391CC", "offset": 0 }],
+    "gradient": [
+      {
+        "color": "#3391CC",
+        "offset": 0
+      }
+    ],
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"

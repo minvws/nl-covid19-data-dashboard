@@ -189,6 +189,15 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                   gradient={siteText.positief_geteste_personen.gradient}
                 />
               )}
+
+              {state.NL?.infected_people_total?.value && (
+                <h3>
+                  {siteText.positief_geteste_personen.metric_title}{' '}
+                  <span style={{ color: '#01689b' }}>
+                    {formatDec(state.NL?.infected_people_total.value)}
+                  </span>
+                </h3>
+              )}
             </GraphContent>
             <Collapse
               openText={siteText.positief_geteste_personen.open}
