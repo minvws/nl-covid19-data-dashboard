@@ -12,8 +12,10 @@ if (typeof Highcharts === 'object') {
 type AreaChartProps = {
   rangeLegendLabel: string;
   lineLegendLabel: string;
-  min: number;
-  max: number;
+  min: Array<Record<string, number>>;
+  max: Array<Record<string, number>>;
+  minY: number;
+  maxY: number;
   data: Record<string, unknown>;
   signaalwaarde: number;
 };
@@ -24,6 +26,8 @@ const AreaChart: FunctionComponent<AreaChartProps> = (props) => {
     lineLegendLabel,
     min,
     max,
+    minY,
+    maxY,
     data,
     signaalwaarde,
   } = props;
@@ -98,7 +102,8 @@ const AreaChart: FunctionComponent<AreaChartProps> = (props) => {
         },
       },
       yAxis: {
-        min: 0,
+        min: minY,
+        max: maxY,
         lineColor: '#C4C4C4',
         gridLineColor: '#C4C4C4',
         title: {
@@ -158,7 +163,7 @@ const AreaChart: FunctionComponent<AreaChartProps> = (props) => {
         },
       ],
     }),
-    [lineLegendLabel, rangeLegendLabel, rangeData, lineData]
+    [lineLegendLabel, minY, maxY, rangeLegendLabel, rangeData, lineData]
   );
 
   if (signaalwaarde) {

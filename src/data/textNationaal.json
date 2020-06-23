@@ -15,9 +15,18 @@
     "max": 30,
     "signaalwaarde": 10,
     "gradient": [
-      { "color": "#69c253", "offset": 0 },
-      { "color": "#D3A500", "offset": 0.35 },
-      { "color": "#f35065", "offset": 0.67 }
+      {
+        "color": "#69c253",
+        "offset": 0
+      },
+      {
+        "color": "#D3A500",
+        "offset": 0.35
+      },
+      {
+        "color": "#f35065",
+        "offset": 0.67
+      }
     ],
     "bron": {
       "href": "https://stichting-nice.nl/",
@@ -37,9 +46,18 @@
     "max": 100,
     "signaalwaarde": 40,
     "gradient": [
-      { "color": "#69c253", "offset": 0 },
-      { "color": "#D3A500", "offset": 0.4 },
-      { "color": "#f35065", "offset": 0.9 }
+      {
+        "color": "#69c253",
+        "offset": 0
+      },
+      {
+        "color": "#D3A500",
+        "offset": 0.4
+      },
+      {
+        "color": "#f35065",
+        "offset": 0.9
+      }
     ],
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
@@ -58,7 +76,12 @@
     "sluit": "Meer uitleg en data",
     "min": 0,
     "max": 5,
-    "gradient": [{ "color": "#3391CC", "offset": 0 }],
+    "gradient": [
+      {
+        "color": "#3391CC",
+        "offset": 0
+      }
+    ],
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -76,7 +99,12 @@
     "sluit": "Meer uitleg en data",
     "min": 0,
     "max": 50,
-    "gradient": [{ "color": "#3391CC", "offset": 0 }],
+    "gradient": [
+      {
+        "color": "#3391CC",
+        "offset": 0
+      }
+    ],
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -94,13 +122,25 @@
     "rangeLegendLabel": "R range",
     "lineLegendLabel": "Effectieve R",
     "min": 0,
-    "max": 2,
+    "max": 4,
     "signaalwaarde": 1,
     "gradient": [
-      { "color": "#69c253", "offset": 0 },
-      { "color": "#69c253", "offset": 0.5 },
-      { "color": "#D3A500", "offset": 0.5052 },
-      { "color": "#f35065", "offset": 0.5625 }
+      {
+        "color": "#69c253",
+        "offset": 0
+      },
+      {
+        "color": "#69c253",
+        "offset": 0.5
+      },
+      {
+        "color": "#D3A500",
+        "offset": 0.5052
+      },
+      {
+        "color": "#f35065",
+        "offset": 0.5625
+      }
     ],
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
@@ -153,13 +193,39 @@
         "icon": "/images/Verplaatsingsgegevens.png",
         "text": "Verplaatsingsgegevens"
       },
-      { "icon": "/images/Nalevingsmonitor.png", "text": "Nalevingsmonitor" },
-      { "icon": "/images/Gedragsonderzoeken.png", "text": "Gedragsonderzoeken" }
+      {
+        "icon": "/images/Nalevingsmonitor.png",
+        "text": "Nalevingsmonitor"
+      },
+      {
+        "icon": "/images/Gedragsonderzoeken.png",
+        "text": "Gedragsonderzoeken"
+      }
     ]
   },
   "verpleeghuis_besmette_locaties": {
     "title": "Aantal besmette locaties",
-    "text": "Aantal locaties met minimaal één positief geteste bewoner."
+    "text": "Aantal nieuwe locaties waarbij tenminste één bewoner positief getest is, per dag.",
+    "metric_title": "Het totaal aantal besmette locaties is:",
+    "metric_text": "Dit getal is een inschatting van het totaal aantal verpleeghuislocaties waar in de afgelopen 28 dagen minstens één (nieuwe) COVID-19 besmetting op basis van een positieve test, is gemeld.",
+    "fold_title": "Wat betekent dit?",
+    "fold": "Dit getal is een inschatting van het aantal nieuwe verpleeghuislocaties waar sprake is van tenminste een COVID-19 besmetting op basis van een positieve test. Het getal geeft het aantal locaties weer dat gisteren is gemeld. Een verpleeghuis wordt meegeteld als ‘nieuwe locatie’ wanneer er tenminste 28 dagen, dit is twee keer de incubatietijd, geen nieuwe patiënten zijn geweest.",
+    "graph_title": "Verloop over tijd",
+    "open": "Verberg uitleg",
+    "sluit": "Meer uitleg en data",
+    "min": 0,
+    "max": 30,
+    "gradient": [
+      {
+        "color": "#3391CC",
+        "offset": 0
+      }
+    ],
+    "screen_reader_graph_content": "{{value}} nieuwe locaties waarbij tenminste één bewoner positief getest is, per dag.",
+    "bron": {
+      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "text": "RIVM"
+    }
   },
   "verpleeghuis_positief_geteste_personen": {
     "title": "Aantal positief geteste bewoners",
@@ -173,7 +239,12 @@
     "min": 0,
     "max": 100,
     "signaalwaarde": 40,
-    "gradient": [{ "color": "#3391CC", "offset": 0 }],
+    "gradient": [
+      {
+        "color": "#3391CC",
+        "offset": 0
+      }
+    ],
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -190,7 +261,12 @@
     "sluit": "Meer uitleg en data",
     "min": 0,
     "max": 50,
-    "gradient": [{ "color": "#3391CC", "offset": 0 }],
+    "gradient": [
+      {
+        "color": "#3391CC",
+        "offset": 0
+      }
+    ],
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
