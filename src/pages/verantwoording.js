@@ -3,6 +3,7 @@ import MaxWidth from 'components/maxWidth';
 
 import text from 'data/textVerantwoording.json';
 import styles from './over.module.scss';
+import ReplaceLinks from 'components/replaceLinks';
 
 Verantwoording.getLayout = Layout.getLayout(text.metadata.titel);
 
@@ -13,14 +14,14 @@ export default function Verantwoording() {
         <div className={styles.maxwidth}>
           <h2>{text.verantwoording.title}</h2>
           <dl className={styles.faqList}>
-            {text.verantwoording.cijfers.map((item) => {
-              return (
-                <>
-                  <dt>{item.cijfer}</dt>
-                  <dd>{item.verantwoording}</dd>
-                </>
-              );
-            })}
+            {text.verantwoording.cijfers.map((item) => (
+              <>
+                <dt>{item.cijfer}</dt>
+                <dd>
+                  <ReplaceLinks>{item.verantwoording}</ReplaceLinks>
+                </dd>
+              </>
+            ))}
           </dl>
         </div>
       </MaxWidth>
