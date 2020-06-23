@@ -11,7 +11,7 @@ if (process.browser) {
   }
 }
 
-export const pageview = (url: string, documentTitle: string) => {
+export const pageview = (url: string, documentTitle: string): void => {
   if (process.browser) {
     if (window) {
       window._paq.push(['setCustomUrl', '/' + url]);
@@ -31,7 +31,7 @@ type EventTypes = {
   dimensions: any;
 };
 
-export function event(eventOptions: EventTypes) {
+export function event(eventOptions: EventTypes): void {
   const { category, action, name, value, dimensions } = eventOptions;
   if (process.browser) {
     if (window) {

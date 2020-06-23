@@ -64,7 +64,7 @@
     "test": "jest --watch",
     "test:ci": "jest --ci",
     "format": "prettier --write **/*.{js,ts,tsx}",
-    "lint": "eslint . --ext ts --ext tsx --ext js",
+    "lint": "eslint .",
     "type-check": "tsc --pretty --noEmit"
   }
 }
