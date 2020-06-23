@@ -21,12 +21,11 @@ import Repro from '../assets/reproductie.svg';
 import VerpleegHuis from '../assets/verpleeg.svg';
 import Virus from '../assets/virus.svg';
 import Locatie from '../assets/locaties.svg';
-import Warning from '../assets/warn.svg';
 
 import { store } from 'store';
 import siteText from 'data/textNationaal.json';
 import GraphHeader from 'components/graphHeader';
-import formatDec from 'utils/formatDec';
+import formatDecimal from 'utils/formatDec';
 import IconList from 'components/iconList';
 
 const AreaChart = dynamic(() => import('components/areaChart'));
@@ -255,7 +254,7 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                 <h3>
                   {siteText.besmettelijke_personen.metric_title}{' '}
                   <span style={{ color: '#01689b' }}>
-                    {formatDec(state.NL?.infectious_people_count.value)}
+                    {formatDecimal(state.NL?.infectious_people_count.value)}
                   </span>
                 </h3>
               )}
@@ -449,11 +448,34 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                 title={siteText.verpleeghuis_besmette_locaties.title}
               />
               <p>{siteText.verpleeghuis_besmette_locaties.text}</p>
-              <span className={'regioDataLoading'}>
-                <Warning />
-                {siteText.geen_selectie.text}
-              </span>
+              {state.NL?.total_reported_locations?.value && (
+                <h3>
+                  {siteText.verpleeghuis_besmette_locaties.metric_title}{' '}
+                  <span style={{ color: '#01689b' }}>
+                    {formatDecimal(state.NL?.total_reported_locations.value)}
+                  </span>
+                </h3>
+              )}
             </GraphContent>
+            <Collapse
+              openText={siteText.verpleeghuis_besmette_locaties.open}
+              sluitText={siteText.verpleeghuis_besmette_locaties.sluit}
+            >
+              <p>{siteText.verpleeghuis_besmette_locaties.metric_text}</p>
+              <h4>{siteText.verpleeghuis_besmette_locaties.fold_title}</h4>
+              <p>{siteText.verpleeghuis_besmette_locaties.fold}</p>
+              <h4>{siteText.verpleeghuis_besmette_locaties.graph_title}</h4>
+              {state.NL?.total_reported_locations?.list && (
+                <LineChart data={state.NL.total_reported_locations.list} />
+              )}
+              <Metadata
+                period={state.NL?.total_reported_locations?.list}
+                dataSource={siteText.verpleeghuis_besmette_locaties.bron}
+                lastUpdated={
+                  state.NL?.total_reported_locations?.lastupdate * 1000
+                }
+              />
+            </Collapse>
           </GraphContainer>
 
           <GraphContainer>
@@ -485,11 +507,9 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
               <p>{siteText.verpleeghuis_oversterfte.fold}</p>
               <h4>{siteText.verpleeghuis_oversterfte.graph_title}</h4>
               {state.NL?.deceased_people_nursery_count_daily?.list && (
-                <>
-                  <LineChart
-                    data={state.NL.deceased_people_nursery_count_daily.list}
-                  />
-                </>
+                <LineChart
+                  data={state.NL.deceased_people_nursery_count_daily.list}
+                />
               )}
               <Metadata
                 period={state.NL?.deceased_people_nursery_count_daily?.list}

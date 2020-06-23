@@ -159,7 +159,18 @@
   },
   "verpleeghuis_besmette_locaties": {
     "title": "Aantal besmette locaties",
-    "text": "Aantal locaties met minimaal één positief geteste bewoner."
+    "text": "Aantal nieuwe locaties waarbij tenminste één bewoner positief getest is, per dag.",
+    "metric_title": "Het totaal aantal besmette locaties is:",
+    "metric_text": "Dit getal is een inschatting van het totaal aantal verpleeghuislocaties waar in de afgelopen 28 dagen minstens één (nieuwe) COVID-19 besmetting op basis van een positieve test, is gemeld.",
+    "fold_title": "Wat betekent dit?",
+    "fold": "Dit getal is een inschatting van het aantal nieuwe verpleeghuislocaties waar sprake is van tenminste een COVID-19 besmetting op basis van een positieve test. Het getal geeft het aantal locaties weer dat gisteren is gemeld. Een verpleeghuis wordt meegeteld als ‘nieuwe locatie’ wanneer er tenminste 28 dagen, dit is twee keer de incubatietijd, geen nieuwe patiënten zijn geweest.",
+    "graph_title": "",
+    "open": "Verberg uitleg",
+    "sluit": "Meer uitleg en data",
+    "bron": {
+      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "text": "RIVM"
+    }
   },
   "verpleeghuis_positief_geteste_personen": {
     "title": "Aantal positief geteste bewoners",
