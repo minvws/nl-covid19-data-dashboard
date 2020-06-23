@@ -99,6 +99,7 @@ const AreaChart: FunctionComponent<AreaChartProps> = (props) => {
       },
       yAxis: {
         min: 0,
+        max: 4,
         lineColor: '#C4C4C4',
         gridLineColor: '#C4C4C4',
         title: {
@@ -158,7 +159,7 @@ const AreaChart: FunctionComponent<AreaChartProps> = (props) => {
         },
       ],
     }),
-    [lineLegendLabel, rangeLegendLabel, rangeData, lineData]
+    [lineLegendLabel, max, rangeLegendLabel, rangeData, lineData]
   );
 
   if (signaalwaarde) {
