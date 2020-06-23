@@ -317,6 +317,8 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                   data={state.NL?.reproduction_index.list}
                   min={state.NL?.reproduction_index.min}
                   max={state.NL?.reproduction_index.max}
+                  minY={siteText.reproductiegetal.min}
+                  maxY={siteText.reproductiegetal.max}
                   signaalwaarde={1}
                   rangeLegendLabel={siteText.reproductiegetal.rangeLegendLabel}
                   lineLegendLabel={siteText.reproductiegetal.lineLegendLabel}
