@@ -3,6 +3,7 @@ import MaxWidth from 'components/maxWidth';
 
 import text from 'data/textOver.json';
 import styles from './over.module.scss';
+import ReplaceLinks from 'components/replaceLinks';
 
 Over.getLayout = Layout.getLayout(text.metadata.titel);
 
@@ -17,14 +18,14 @@ export default function Over() {
           <p>{text.over_disclaimer.text}</p>
           <h2>{text.over_veelgestelde_vragen.text}</h2>
           <dl className={styles.faqList}>
-            {text.over_veelgestelde_vragen.vragen.map((item) => {
-              return (
-                <>
-                  <dt>{item.vraag}</dt>
-                  <dd>{item.antwoord}</dd>
-                </>
-              );
-            })}
+            {text.over_veelgestelde_vragen.vragen.map((item) => (
+              <>
+                <dt>{item.vraag}</dt>
+                <dd>
+                  <ReplaceLinks>{item.antwoord}</ReplaceLinks>
+                </dd>
+              </>
+            ))}
           </dl>
         </div>
       </MaxWidth>
