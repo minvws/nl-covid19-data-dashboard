@@ -448,6 +448,28 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                 title={siteText.verpleeghuis_besmette_locaties.title}
               />
               <p>{siteText.verpleeghuis_besmette_locaties.text}</p>
+
+              {state.NL?.total_newly_reported_locations && (
+                <BarScale
+                  min={siteText.verpleeghuis_besmette_locaties.min}
+                  max={siteText.verpleeghuis_besmette_locaties.max}
+                  screenReaderText={
+                    siteText.verpleeghuis_besmette_locaties
+                      .screen_reader_graph_content
+                  }
+                  value={state.NL?.total_newly_reported_locations.value}
+                  id="besmette_locaties_verpleeghuis"
+                  gradient={siteText.verpleeghuis_besmette_locaties.gradient}
+                />
+              )}
+            </GraphContent>
+            <Collapse
+              openText={siteText.verpleeghuis_besmette_locaties.open}
+              sluitText={siteText.verpleeghuis_besmette_locaties.sluit}
+            >
+              <h4>{siteText.verpleeghuis_besmette_locaties.fold_title}</h4>
+              <p>{siteText.verpleeghuis_besmette_locaties.fold}</p>
+
               {state.NL?.total_reported_locations?.value && (
                 <h3>
                   {siteText.verpleeghuis_besmette_locaties.metric_title}{' '}
@@ -456,14 +478,8 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                   </span>
                 </h3>
               )}
-            </GraphContent>
-            <Collapse
-              openText={siteText.verpleeghuis_besmette_locaties.open}
-              sluitText={siteText.verpleeghuis_besmette_locaties.sluit}
-            >
               <p>{siteText.verpleeghuis_besmette_locaties.metric_text}</p>
-              <h4>{siteText.verpleeghuis_besmette_locaties.fold_title}</h4>
-              <p>{siteText.verpleeghuis_besmette_locaties.fold}</p>
+
               <h4>{siteText.verpleeghuis_besmette_locaties.graph_title}</h4>
               {state.NL?.total_reported_locations?.list && (
                 <LineChart data={state.NL.total_reported_locations.list} />
