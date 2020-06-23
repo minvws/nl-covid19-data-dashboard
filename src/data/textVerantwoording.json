@@ -30,6 +30,10 @@
         "verantwoording": "Deze informatie wordt dagelijks beschikbaar gesteld door het RIVM en als JSON-file aangeleverd bij het ministerie van VWS. Het RIVM publiceert de informatie gelijktijdig met het beschikbaar stellen aan het Ministerie van VWS ook in een pdf bestand openbaar op de website."
       },
       {
+        "cijfer": "Aantal besmette locaties",
+        "verantwoording": "Deze gegevens zijn een inschatting omdat ze worden vastgesteld op postcode-6 niveau. Dit komt overeen met ongeveer 15 adressen. Hierdoor kan iemand onterecht geteld worden als verpleeghuisbewoner. Ook zijn er verpleeghuislocaties met verschillende postcodes, waardoor je mogelijk verpleeghuisbewoners mist. Het RIVM werkt samen met de GGD-en en het CBS aan een meer nauwkeurige meting. Zodra deze beschikbaar is zal het dashboard daarmee worden bijgewerkt."
+      },
+      {
         "cijfer": "Open source data verwerking",
         "verantwoording": "Dit prototype is in zeer korte tijd tot stand gekomen. Het is daarom nog niet gelukt om de code voor het inlezen van de data, de databerekeningen en het construeren van de JSON- bestanden open source beschikbaar te stellen. Dit zal binnen afzienbare tijd beschikbaar worden gesteld. De code van de webapplicatie komt op 5 juni 2020 open source beschikbaar."
       }
