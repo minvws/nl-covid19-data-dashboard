@@ -193,7 +193,7 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                 <h3>
                   {siteText.positief_geteste_personen.metric_title}{' '}
                   <span style={{ color: '#01689b' }}>
-                    {formatDec(state.NL?.infected_people_total.value)}
+                    {formatDecimal(state.NL?.infected_people_total.value)}
                   </span>
                 </h3>
               )}
