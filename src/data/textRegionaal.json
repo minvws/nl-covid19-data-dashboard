@@ -38,7 +38,7 @@
     "screen_reader_graph_content": "{{value}} positief geteste personen.",
     "metric_title": "Totaal aantal positief geteste mensen:",
     "fold_title": "Wat betekent dit?",
-    "fold": "De horizontale balk laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben. Het totaal aantal positief geteste mensen omvat alle testuitslagen tot nu toe waarbij COVID-19 is vastgesteld.",
+    "fold": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
     "graph_title": "Verloop over tijd",
     "open": "Verberg uitleg",
     "sluit": "Meer uitleg en data",
