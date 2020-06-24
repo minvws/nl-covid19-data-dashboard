@@ -29,6 +29,7 @@ const SvgMap = dynamic(() => import('components/mapChart/svgMap'));
 import { FunctionComponentWithLayout } from 'components/layout';
 import { HomeLayoutProps } from 'pages/index';
 import ScreenReaderOnly from 'components/screenReaderOnly';
+import formatDecimal from 'utils/formatDec';
 
 const Regio: FunctionComponentWithLayout<HomeLayoutProps> = () => {
   const router = useRouter();
@@ -143,6 +144,7 @@ const Regio: FunctionComponentWithLayout<HomeLayoutProps> = () => {
       </MaxWidth>
     );
   }
+
   return (
     <MaxWidth>
       <LastUpdated />
@@ -237,6 +239,17 @@ const Regio: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                     siteText.regionaal_positief_geteste_personen.gradient
                   }
                 />
+              )}
+
+              {state[selectedRegio?.code]?.infected_people_total?.value && (
+                <h3>
+                  {siteText.regionaal_positief_geteste_personen.metric_title}{' '}
+                  <span style={{ color: '#01689b' }}>
+                    {formatDecimal(
+                      state[selectedRegio?.code]?.infected_people_total?.value
+                    )}
+                  </span>
+                </h3>
               )}
             </GraphContent>
 
