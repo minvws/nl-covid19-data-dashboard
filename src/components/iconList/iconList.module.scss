@@ -19,7 +19,7 @@
     max-width: 2rem;
     height: auto;
     margin-left: $default-margin / 2;
-    margin-right: $default-margin * 1.5;
+    margin-right: $default-margin / 2;
     margin-bottom: 0;
   }
 
@@ -78,7 +78,7 @@
 .hiddenContent {
   flex-basis: 100%;
   transition: hidden 120ms ease-in;
-  padding-left: $default-padding * 4 + $default-padding / 2;
+  padding-left: $default-padding * 3 + $default-padding / 2;
 
   p {
     margin: 0.5rem 0;
