@@ -7,7 +7,7 @@
     "cijfers": [
       {
         "cijfer": "Intensive care-bezetting",
-        "verantwoording": "Deze gegevens worden dagelijks aangeleverd als open data door Stichting NICE. De brondata wordt dagelijks geüpdatet om 00:00 en hebben betrekking op de afgelopen 24 uur. De berekening van de ic-bezetting bestaat uit COVD-19-patiënten met een bewezen besmetting of een verdenking hiervan. Het dashboard laat het gemiddelde over de afgelopen 3 dagen zien. Bron: https://stichting-nice.nl/covid-19/public/new-intake/"
+        "verantwoording": "Deze gegevens worden dagelijks aangeleverd als open data door Stichting NICE. De brondata wordt dagelijks geüpdatet om 00:00 en hebben betrekking op de afgelopen 24 uur. De berekening van de ic-bezetting bestaat uit COVID-19-patiënten met een bewezen besmetting of een verdenking hiervan. Het dashboard laat het gemiddelde over de afgelopen 3 dagen zien. Bron: https://stichting-nice.nl/covid-19/public/new-intake/"
       },
       {
         "cijfer": "Ziekenhuisopnames",
