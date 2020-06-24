@@ -3,4 +3,8 @@
 .graphContent {
   padding: 0 $default-padding;
   margin-bottom: $default-margin;
+
+  p {
+    max-width: 100%;
+  }
 }
