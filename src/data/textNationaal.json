@@ -122,8 +122,14 @@
     "sluit": "Meer uitleg en data",
     "rangeLegendLabel": "R range",
     "lineLegendLabel": "Effectieve R",
-    "min": 0,
-    "max": 4,
+    "bar": {
+      "min": 0,
+      "max": 2
+    },
+    "graph": {
+      "min": 0,
+      "max": 4
+    },
     "signaalwaarde": 1,
     "gradient": [
       {

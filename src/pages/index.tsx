@@ -294,8 +294,8 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
               <p>{siteText.reproductiegetal.text}</p>
               {state.NL?.reproduction_index && (
                 <BarScale
-                  min={siteText.reproductiegetal.min}
-                  max={siteText.reproductiegetal.max}
+                  min={siteText.reproductiegetal.bar.min}
+                  max={siteText.reproductiegetal.bar.max}
                   screenReaderText={
                     siteText.reproductiegetal.screen_reader_graph_content
                   }
@@ -327,8 +327,8 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                   data={state.NL?.reproduction_index.list}
                   min={state.NL?.reproduction_index.min}
                   max={state.NL?.reproduction_index.max}
-                  minY={siteText.reproductiegetal.min}
-                  maxY={siteText.reproductiegetal.max}
+                  minY={siteText.reproductiegetal.graph.min}
+                  maxY={siteText.reproductiegetal.graph.max}
                   signaalwaarde={1}
                   rangeLegendLabel={siteText.reproductiegetal.rangeLegendLabel}
                   lineLegendLabel={siteText.reproductiegetal.lineLegendLabel}
