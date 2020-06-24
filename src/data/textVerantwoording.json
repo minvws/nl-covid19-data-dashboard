@@ -31,7 +31,7 @@
       },
       {
         "cijfer": "Aantal besmette locaties",
-        "verantwoording": "Deze gegevens zijn een inschatting omdat ze worden vastgesteld op postcode-6 niveau. Dit komt overeen met ongeveer 15 adressen. Hierdoor kan iemand onterecht geteld worden als verpleeghuisbewoner. Ook zijn er verpleeghuislocaties met verschillende postcodes, waardoor je mogelijk verpleeghuisbewoners mist. Het RIVM werkt samen met de GGD-en en het CBS aan een meer nauwkeurige meting. Zodra deze beschikbaar is zal het dashboard daarmee worden bijgewerkt."
+        "verantwoording": "Deze gegevens zijn een inschatting omdat deze worden vastgesteld op het laagste postcode-6 niveau. Dit komt overeen met ongeveer 15 adressen. Omdat er nog niet met exacte adresgegevens kan worden gewerkt is de meting niet overal nauwkeurig. Het RIVM werkt samen met de GGD-en en het CBS aan een meer nauwkeurige meting. Zodra deze beschikbaar is zal het dashboard daarmee worden bijgewerkt. "
       },
       {
         "cijfer": "Open source data verwerking",
