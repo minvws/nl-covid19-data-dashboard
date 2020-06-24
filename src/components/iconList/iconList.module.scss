@@ -43,7 +43,7 @@
   border: 0;
   background: 0;
   text-align: left;
-  padding: $default-padding / 2 $default-padding;
+  padding: $default-padding / 2;
   font: inherit;
   cursor: pointer;
   width: 100%;
@@ -60,6 +60,11 @@
     outline: 2px dotted $icon-color;
     outline-offset: -2px;
   }
+
+  &:active {
+    color: $icon-color;
+    text-decoration: underline;
+  }
 }
 
 .arrow {
@@ -73,7 +78,7 @@
 .hiddenContent {
   flex-basis: 100%;
   transition: hidden 120ms ease-in;
-  padding-left: 4rem;
+  padding-left: $default-padding * 4 + $default-padding / 2;
 
   p {
     margin: 0.5rem 0;
