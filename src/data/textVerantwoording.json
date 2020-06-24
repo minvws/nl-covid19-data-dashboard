@@ -31,11 +31,11 @@
       },
       {
         "cijfer": "Aantal besmette locaties",
-        "verantwoording": "Deze gegevens zijn een inschatting omdat deze worden vastgesteld op het laagste postcode-6 niveau. Dit komt overeen met ongeveer 15 adressen. Omdat er nog niet met exacte adresgegevens kan worden gewerkt is de meting niet overal nauwkeurig. Het RIVM werkt samen met de GGD-en en het CBS aan een meer nauwkeurige meting. Zodra deze beschikbaar is zal het dashboard daarmee worden bijgewerkt. "
+        "verantwoording": "Deze gegevens zijn een inschatting omdat deze worden vastgesteld op het laagste postcodeniveau. Dit komt overeen met ongeveer 15 adressen. Omdat er nog niet met exacte adresgegevens kan worden gewerkt is de meting niet overal nauwkeurig. Het RIVM werkt samen met de GGD-en en het CBS aan een meer nauwkeurige meting. Zodra deze beschikbaar is zal het dashboard daarmee worden bijgewerkt."
       },
       {
         "cijfer": "Open source data verwerking",
-        "verantwoording": "Dit prototype is in zeer korte tijd tot stand gekomen. Het is daarom nog niet gelukt om de code voor het inlezen van de data, de databerekeningen en het construeren van de JSON- bestanden open source beschikbaar te stellen. Dit zal binnen afzienbare tijd beschikbaar worden gesteld. De code van de webapplicatie komt op 5 juni 2020 open source beschikbaar."
+        "verantwoording": "Dit prototype is in zeer korte tijd tot stand gekomen. Het is daarom nog niet gelukt om de code voor het inlezen van de data, de databerekeningen en het construeren van de JSON- bestanden open source beschikbaar te stellen. Dit zal binnen afzienbare tijd beschikbaar worden gesteld. De code van de webapplicatie is op 5 juni 2020 gepubliceerd op Github: https://github.com/minvws/nl-covid19-data-dashboard"
       }
     ]
   }

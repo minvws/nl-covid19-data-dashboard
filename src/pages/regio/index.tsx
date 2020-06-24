@@ -241,7 +241,7 @@ const Regio: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                 />
               )}
 
-              {state[selectedRegio?.code]?.infected_people_total?.value && (
+              {state[selectedRegio?.code]?.infected_people_total && (
                 <h3>
                   {siteText.regionaal_positief_geteste_personen.metric_title}{' '}
                   <span style={{ color: '#01689b' }}>

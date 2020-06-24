@@ -70,7 +70,7 @@
     "screen_reader_graph_content": "{{value}} positief geteste mensen per dag.",
     "fold_title": "Wat betekent dit?",
     "fold": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
-    "metric_title": "Totaal aantal positief geteste mensen:",
+    "metric_title": "Aantal positief geteste mensen:",
     "linechart_title": "Verloop over tijd",
     "graph_title": "Verdeling naar leeftijd (totaal aantal mensen)",
     "open": "Verberg uitleg",
@@ -198,17 +198,17 @@
       {
         "icon": "/images/Verplaatsingsgegevens.png",
         "text": "Verplaatsingsgegevens",
-        "content": "Per gemeente meten we hoeveel mobiele telefoons er elk uur actief zijn. Dit geeft inzicht in waar en wanneer mensen samenkomen, en tussen welke gemeenten mensen zich verplaatsen. Dat kan een aanwijzing geven hoe COVID-19 zich verspreid. Het doel is om per gemeente te berekenen wat het risico is dat er in de komende dagen een infectie met het coronavirus plaats zal vinden."
+        "content": "Verplaatsingsgegevens kunnen een aanwijzing geven hoe COVID-19 zich verspreid. Het doel is om per gemeente te berekenen wat het risico is dat er in de komende dagen een infectie met het coronavirus plaats zal vinden."
       },
       {
         "icon": "/images/Nalevingsmonitor.png",
         "text": "Nalevingsmonitor",
-        "content": "In de nalevingsmonitor rapporteren lokale autoriteiten hoe goed burgers zich aan coronaregels houden. De mogelijke indicatoren worden momenteel nog verkend."
+        "content": "De nalevingsmonitor geeft inzicht in hoeverre het mensen lukt zich aan de coronamaatregelen te houden. De mogelijke indicatoren worden momenteel nog verkend."
       },
       {
         "icon": "/images/Gedragsonderzoeken.png",
         "text": "Gedragsonderzoeken",
-        "content": "Gegevens uit gedragsonderzoeken worden regelmatig verzameld door het RIVM. De gegevens laten geen actueel beeld zien van de mate waarin de basisadviezen van het RIVM worden opgevolgd, maar geven wel goed inzicht in trends in naleving en draagvlak van de op dat moment geldende gedragsregels zoals handen wassen, thuisblijven bij klachten en drukte vermijden."
+        "content": "Gegevens uit gedragsonderzoeken worden regelmatig verzameld door het RIVM. Dit geeft inzicht in trends in naleving en draagvlak van de op dat moment geldende gedragsregels zoals handen wassen, thuisblijven en het laten testen bij klachten."
       }
     ]
   },
