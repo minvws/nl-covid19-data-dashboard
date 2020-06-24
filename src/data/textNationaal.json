@@ -158,23 +158,28 @@
     "list": [
       {
         "icon": "/images/Zelfrapportagegegevens.png",
-        "text": "Zelfrapportagegegevens (infectieradar)"
+        "text": "Zelfrapportagegegevens (infectieradar)",
+        "content": "Het RIVM houdt op verschillende manieren de verspreiding van infectieziekten in de gaten. Dat geldt ook voor COVID-19. Een van die manieren is door te kijken naar mensen met klachten die kunnen wijzen op een infectie. Dat doet het RIVM met de Infectieradar.\n\nIedereen in Nederland kan deelnemen aan  de Infectieradar. Deelnemers geven één keer per week door of zij koorts of andere klachten hebben (gehad). Ook als mensen geen klachten hebben, geven ze dit door. Zo worden signalen van toename of afname van het virus eerder opgepikt."
       },
       {
         "icon": "/images/Huisartsengegevens.png",
-        "text": "Huisartsengegevens"
+        "text": "Huisartsengegevens",
+        "content": "Niet iedereen met COVID-19 wordt in het ziekenhuis opgenomen of door de GGD getest. Het merendeel van mensen met COVID-19-symptomen komt wel bij de huisarts. Het Nivel berekent wekelijks het aantal mensen waarbij de huisarts een verdenking op COVID-19 heeft. Dit aantal wordt weergegeven per 100.000 inwoners per week."
       },
       {
         "icon": "/images/GGD-contactonderzoeken.png",
-        "text": "GGD-contactonderzoeken"
+        "text": "GGD-contactonderzoeken",
+        "content": "Wanneer iemand besmet is met COVID-19 onderzoekt de GGD hoe de besmetting waarschijnlijk is ontstaan en met wie de persoon in contact is geweest. Op deze manier wordt onderzocht of er meer mensen besmet zijn met COVID-19."
       },
       {
         "icon": "/images/Sentinel-monitor.png",
-        "text": "Sentinel monitoring (zorgverleners)"
+        "text": "Sentinel monitoring (zorgverleners)",
+        "content": "Wanneer zorgverleners ziek zijn, kunnen zij patiënten besmetten met COVID-19. Door hun gezondheid in kaart te brengen, verkleint uiteindelijk de kans op ziekteverspreiding. Dit gebeurt door het aantal besmette zorgverleners en het aantal ziektemeldingen bij te houden. Ook draagt dit bij aan het voorkomen van overbelasting in de zorg."
       },
       {
         "icon": "/images/Rioolwatermonitor.png",
-        "text": "Rioolwatermonitoring"
+        "text": "Rioolwatermonitoring",
+        "content": "Het RIVM doet momenteel op 29 locaties onderzoek naar het virus in rioolwater. Daaruit blijkt dat het virus al zichtbaar is in uitwerpselen voordat mensen symptomen van het virus ervaren. Dat betekent dat het virus vroeg kan worden opgespoord in het rioolwater. Het RIVM breidt deze onderzoeken binnenkort uit naar alle 352 rioolwaterzuiveringsinstallaties in Nederland."
       }
     ]
   },
