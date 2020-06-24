@@ -36,7 +36,7 @@
     "title": "Positief geteste mensen",
     "text": "Aantal positief geteste mensen per 100.000 inwoners per dag.",
     "screen_reader_graph_content": "{{value}} positief geteste personen.",
-    "metric_title": "Totaal aantal positief geteste mensen:",
+    "metric_title": "Aantal positief geteste mensen:",
     "fold_title": "Wat betekent dit?",
     "fold": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
     "graph_title": "Verloop over tijd",
