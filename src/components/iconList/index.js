@@ -9,14 +9,34 @@ function IconList(props) {
 
   return (
     <ul className={styles.iconList}>
-      {list.map((item) => (
-        <IconListItem key={`icon-list-item-${item.text}`} item={item} />
-      ))}
+      {list.map((item) =>
+        item?.content ? (
+          <CollapseIconListItem
+            key={`icon-list-item-${item.text}`}
+            item={item}
+          />
+        ) : (
+          <IconListItem item={item} />
+        )
+      )}
     </ul>
   );
 }
 
 function IconListItem(props) {
+  const { item } = props;
+
+  return (
+    <li className={styles.iconListItem}>
+      <div className={styles.content}>
+        <img src={item.icon} className={styles.iconListImage} alt="" />{' '}
+        <h4>{item.text}</h4>
+      </div>
+    </li>
+  );
+}
+
+function CollapseIconListItem(props) {
   const { item } = props;
   const [expanded, setExpanded] = useState(false);
 
