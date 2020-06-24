@@ -362,28 +362,18 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
             <GraphContent>
               <GraphHeader title={siteText.overige_gegevens.title} />
               <p>{siteText.overige_gegevens.text}</p>
-            </GraphContent>
-            <Collapse
-              openText={siteText.overige_gegevens.open}
-              sluitText={siteText.overige_gegevens.sluit}
-            >
               <p>{siteText.overige_gegevens.fold}</p>
               <IconList list={siteText.overige_gegevens.list} />
-            </Collapse>
+            </GraphContent>
           </GraphContainer>
 
           <GraphContainer>
             <GraphContent>
               <GraphHeader title={siteText.gedragsignalering.title} />
               <p>{siteText.gedragsignalering.text}</p>
-            </GraphContent>
-            <Collapse
-              openText={siteText.gedragsignalering.open}
-              sluitText={siteText.gedragsignalering.sluit}
-            >
               <p>{siteText.gedragsignalering.fold}</p>
               <IconList list={siteText.gedragsignalering.list} />
-            </Collapse>
+            </GraphContent>
           </GraphContainer>
         </Masonry>
       </section>
