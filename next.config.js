@@ -1,5 +1,6 @@
 const withPlugins = require('next-compose-plugins');
 const withPrefresh = require('@prefresh/next');
+const withTranspileModules = require('next-transpile-modules')(['lodash-es']);
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
@@ -55,4 +56,7 @@ const nextConfig = {
   },
 };
 
-module.exports = withPlugins([withBundleAnalyzer, withPrefresh], nextConfig);
+module.exports = withPlugins(
+  [withBundleAnalyzer, withTranspileModules, withPrefresh],
+  nextConfig
+);

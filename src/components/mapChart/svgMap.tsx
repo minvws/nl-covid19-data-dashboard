@@ -159,7 +159,7 @@ const regions = [
 
 type SvgMapTypes = {
   selected: any;
-  setSelection: (item: any) => void;
+  setSelection: (safetyRegionCode: string) => void;
 };
 
 const SvgMap: FunctionComponent<SvgMapTypes> = (props) => {
@@ -192,7 +192,7 @@ const SvgMap: FunctionComponent<SvgMapTypes> = (props) => {
                   d={region.d}
                   onClick={() => {
                     const item = regioData.find((x) => x.id === region.id);
-                    setSelection(item);
+                    setSelection(item.code);
                   }}
                 />
               );

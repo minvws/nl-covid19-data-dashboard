@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useEffect, useState } from 'react';
 import { useCombobox } from 'downshift';
 import Arrow from 'assets/white-arrow.svg';
 import regioData from 'data';
@@ -23,9 +23,9 @@ const getInitialState = () => {
 const itemToString = (item) => item?.name ?? '';
 
 const SelectRegio = ({ selected, setSelection }) => {
-  const [inputItems, setInputItems] = React.useState(() => getInitialState());
+  const [inputItems, setInputItems] = useState(() => getInitialState());
 
-  React.useEffect(() => {
+  useEffect(() => {
     selectItem(selected);
   }, [selected]);
 
@@ -70,6 +70,7 @@ const SelectRegio = ({ selected, setSelection }) => {
   if (!isOpen) {
     ieFix = { overflowY: 'hidden' };
   }
+
   return (
     <div className={classNames.selectRegio}>
       <label {...getLabelProps()}>Veiligheidsregio</label>

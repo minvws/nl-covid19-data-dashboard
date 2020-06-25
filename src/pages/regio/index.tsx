@@ -1,6 +1,7 @@
 import { useContext, useMemo, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
+import { sortBy } from 'lodash-es';
 
 import Layout from 'components/layout';
 import MaxWidth from 'components/maxWidth';
@@ -9,11 +10,9 @@ import GraphHeader from 'components/graphHeader';
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
 import LastUpdated from 'components/lastUpdated';
-import SelectRegio from 'components/selectRegio';
 import Warning from 'assets/warn.svg';
 import Metadata from 'components/metadata';
 import LoadingPlaceholder from 'components/loadingPlaceholder';
-import regioData from 'data';
 
 import { store } from 'store';
 import GraphContent from 'components/graphContent';
@@ -30,8 +29,55 @@ import { FunctionComponentWithLayout } from 'components/layout';
 import { HomeLayoutProps } from 'pages/index';
 import ScreenReaderOnly from 'components/screenReaderOnly';
 import formatDecimal from 'utils/formatDec';
+import SelectMunicipality from 'components/selectMunicipality';
 
-const Regio: FunctionComponentWithLayout<HomeLayoutProps> = () => {
+export type SafetyRegion = {
+  id: number;
+  code: string;
+  name: string;
+};
+
+export type MunicipalityMapping = {
+  name: string;
+  safetyRegion: string;
+};
+
+type RegioProps = HomeLayoutProps & {
+  municipalities: MunicipalityMapping[];
+  safetyRegions: SafetyRegion[];
+};
+
+type RegioStaticProps = {
+  props: {
+    municipalities: MunicipalityMapping[];
+    safetyRegions: SafetyRegion[];
+  };
+};
+
+export async function getStaticProps(): Promise<RegioStaticProps> {
+  const municipalityMapping = require('../../data/gemeente_veiligheidsregio.json');
+  const safetyRegions = require('../../data/index').default;
+
+  // group municipalities by safety region
+  const map: MunicipalityMapping[] = Object.entries(municipalityMapping).map(
+    (entry: [string, string]): MunicipalityMapping => {
+      // value is safety region ID, key is municipality name
+      const [municipality, safetyRegion] = entry;
+      return { name: municipality, safetyRegion };
+    }
+  );
+
+  return {
+    props: {
+      municipalities: sortBy(map, ['safetyRegion', 'name']),
+      safetyRegions: safetyRegions.filter((el) => el.id !== 0),
+    },
+  };
+}
+
+const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
+  const { municipalities, safetyRegions } = props;
+
   const router = useRouter();
 
   const globalState = useContext(store);
@@ -40,7 +86,7 @@ const Regio: FunctionComponentWithLayout<HomeLayoutProps> = () => {
   const selectedRegio = useMemo(() => {
     const selectedRegioCode = router.query?.regio;
     return selectedRegioCode
-      ? regioData.find((el) => el.code === selectedRegioCode)
+      ? safetyRegions.find((el) => el.code === selectedRegioCode)
       : null;
   }, [router]);
 
@@ -67,11 +113,11 @@ const Regio: FunctionComponentWithLayout<HomeLayoutProps> = () => {
     if (contentRef.current) contentRef.current.focus();
   };
 
-  const setSelectedRegio = (item) => {
+  const setSelectedRegio = (safetyRegionCode: string): void => {
     router.replace(
       {
         pathname: router.pathname,
-        query: { regio: item.code },
+        query: { regio: safetyRegionCode },
       },
       undefined,
       { shallow: true }
@@ -103,10 +149,12 @@ const Regio: FunctionComponentWithLayout<HomeLayoutProps> = () => {
         <LastUpdated />
         <div className="regio-grid">
           <div className="mapCol">
-            <SelectRegio
-              selected={selectedRegio}
-              setSelection={setSelectedRegio}
+            <SelectMunicipality
+              municipalities={municipalities}
+              safetyRegions={safetyRegions}
+              setSelectedSafetyRegion={setSelectedRegio}
             />
+
             <SvgMap selected={selectedRegio} setSelection={setSelectedRegio} />
           </div>
 
@@ -150,9 +198,10 @@ const Regio: FunctionComponentWithLayout<HomeLayoutProps> = () => {
       <LastUpdated />
       <div className="regio-grid">
         <div className="mapCol" ref={selectRegioWrapperRef}>
-          <SelectRegio
-            selected={selectedRegio}
-            setSelection={setSelectedRegio}
+          <SelectMunicipality
+            municipalities={municipalities}
+            safetyRegions={safetyRegions}
+            setSelectedSafetyRegion={setSelectedRegio}
           />
           <SvgMap selected={selectedRegio} setSelection={setSelectedRegio} />
         </div>
@@ -296,6 +345,7 @@ const Regio: FunctionComponentWithLayout<HomeLayoutProps> = () => {
     </MaxWidth>
   );
 };
+
 Regio.getLayout = Layout.getLayout(siteText.metadata.titel);
 
 export default Regio;
