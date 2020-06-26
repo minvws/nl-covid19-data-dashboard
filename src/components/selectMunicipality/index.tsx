@@ -2,20 +2,60 @@ import styles from './styles.module.scss';
 import { SafetyRegion, MunicipalityMapping } from 'pages/regio';
 import { useCombobox } from 'downshift';
 import Arrow from 'assets/white-arrow.svg';
+import ScreenReaderOnly from 'components/screenReaderOnly';
+import { useState } from 'react';
 
 type SelectMunicipalityProps = {
   municipalities: MunicipalityMapping[];
   safetyRegions: SafetyRegion[];
-  setSelectedSafetyRegion: any;
+  setSelectedSafetyRegion: (code: SafetyRegion['code']) => void;
 };
 
 const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
   const { municipalities, safetyRegions, setSelectedSafetyRegion } = props;
 
+  // Set the full list of municipalities as the initial state.
+  const [items, setItems] = useState(() => municipalities);
+
+  // Returns the string to display as an item's label.
   const itemToString = (item: MunicipalityMapping) => item.name;
 
+  // Returns municipalities by safety region and current inputValue, sorted alphabetically.
+  const getRegionItems = (safetyRegion: string, inputValue) => {
+    return municipalities
+      .filter((el) => el.safetyRegion === safetyRegion)
+      .filter((el) => !getDisabled(el, inputValue))
+      .sort((a, b) => a.name.localeCompare(b.name));
+  };
+
+  // Returns true if a municipality should be disabled based on the current input value.
+  const getDisabled = (item: MunicipalityMapping, inputValue) => {
+    if (!inputValue) return false;
+    return !item.name.toLowerCase().startsWith(inputValue.toLowerCase());
+  };
+
+  // Returns true if a safety region should be hidden.
+  const getRegionDisabled = (items: MunicipalityMapping[], inputValue) => {
+    return items.every((item) => getDisabled(item, inputValue));
+  };
+
+  // Set the safety region code to the URL on item selection
   const onSelectedItemChange = ({ selectedItem }) => {
     setSelectedSafetyRegion(selectedItem?.safetyRegion);
+  };
+
+  // Filters municipalities when the input changes
+  const onInputValueChange = ({ inputValue }) => {
+    setItems(municipalities.filter((item) => !getDisabled(item, inputValue)));
+  };
+
+  // Returns a string for an aria-live status message.
+  const getA11ySelectionMessage = ({ itemToString, selectedItem }) => {
+    if (selectedItem) {
+      return `Gemeente ${itemToString(selectedItem)} is geselecteerd.`;
+    }
+
+    return 'Er is geen gemeente geselecteerd';
   };
 
   const {
@@ -29,26 +69,15 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
     inputValue,
     isOpen,
     openMenu,
+    reset,
+    selectedItem,
   } = useCombobox({
-    items: municipalities,
+    items,
     itemToString,
     onSelectedItemChange,
+    onInputValueChange,
+    getA11ySelectionMessage,
   });
-
-  const getItems = (safetyRegion: string) => {
-    return municipalities
-      .filter((el) => el.safetyRegion === safetyRegion)
-      .sort((a, b) => a.name.toLowerCase() - b.name.toLowerCase());
-  };
-
-  const getDisabled = (item: MunicipalityMapping) => {
-    if (!inputValue) return false;
-    return !item.name.toLowerCase().startsWith(inputValue.toLowerCase());
-  };
-
-  const getRegionDisabled = (safetyRegion: string) => {
-    return getItems(safetyRegion).every((item) => getDisabled(item));
-  };
 
   return (
     <div className={styles.root}>
@@ -61,8 +90,16 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
           onFocus={openMenu}
           placeholder="bv. Aa en Hunze"
         />
+        {selectedItem && (
+          <button onClick={reset} className={styles.reset}>
+            <ScreenReaderOnly>Reset</ScreenReaderOnly>
+            <span aria-hidden="true">&times;</span>
+          </button>
+        )}
         <button
           {...getToggleButtonProps()}
+          tabIndex={0}
+          className={styles.open}
           aria-label="open gemeentes keuzemenu"
         >
           <Arrow aria-hidden="true" />
@@ -71,8 +108,8 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
       <div className={styles.menu} {...getMenuProps()}>
         {isOpen &&
           safetyRegions.map((safetyRegion) => {
-            const items = getItems(safetyRegion.code);
-            const isRegionDisabled = getRegionDisabled(safetyRegion.code);
+            const regionItems = getRegionItems(safetyRegion.code, inputValue);
+            const isRegionDisabled = getRegionDisabled(regionItems, inputValue);
 
             return (
               <div
@@ -82,21 +119,19 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
                 }`}
               >
                 <h4 className={styles.heading}>{safetyRegion.name}</h4>
-                {items.map((municipality) => {
-                  const isDisabled = getDisabled(municipality);
+                {regionItems.map((municipality) => {
                   const isHighlighted =
-                    highlightedIndex === municipalities.indexOf(municipality);
+                    highlightedIndex === items.indexOf(municipality);
 
                   return (
                     <p
                       className={`${styles.item} ${
                         isHighlighted ? styles.active : ''
-                      } ${isDisabled ? styles.disabled : ''}`}
+                      }`}
                       key={municipality.name}
                       {...getItemProps({
-                        disabled: isDisabled,
                         item: municipality,
-                        index: municipalities.indexOf(municipality),
+                        index: items.indexOf(municipality),
                       })}
                     >
                       {itemToString(municipality)}

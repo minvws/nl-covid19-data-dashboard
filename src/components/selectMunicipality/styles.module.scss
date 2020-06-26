@@ -18,11 +18,11 @@
   width: 100%;
 
   button {
+    flex: 0 0 auto;
     display: block;
     width: 2.75rem;
     height: 2.75rem;
     border: 0;
-    background-color: $button-color;
   }
 
   input {
@@ -38,6 +38,27 @@
     &::placeholder {
       font-weight: 400;
     }
+  }
+}
+
+.open {
+  background-color: $button-color;
+  &:focus {
+    outline: 2px dotted white;
+    outline-offset: -2px;
+  }
+}
+
+.reset {
+  display: flex;
+  align-items: center;
+  font-size: 1.5em;
+  line-height: 1;
+  color: $text-color-grey;
+  background-color: white;
+  &:focus {
+    outline: 2px dotted $text-color-grey;
+    outline-offset: -2px;
   }
 }
 
