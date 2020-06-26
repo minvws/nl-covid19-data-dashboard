@@ -1,3 +1,4 @@
+import styles from './regio.module.scss';
 import { useContext, useMemo, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
@@ -161,17 +162,29 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
   return (
     <MaxWidth>
       <LastUpdated />
-      <div className="regio-grid">
-        <div className="mapCol" ref={selectRegioWrapperRef}>
+      <div className={styles['regio-grid']}>
+        <div className={styles['map-column']} ref={selectRegioWrapperRef}>
           <SelectMunicipality
             municipalities={municipalities}
             safetyRegions={safetyRegions}
             setSelectedSafetyRegion={setSelectedRegio}
           />
-          <SvgMap selected={selectedRegio} setSelection={setSelectedRegio} />
+
+          <div className={styles['map-container']}>
+            <div className={styles['safety-region-header']}>
+              <p>Uw veiligheidsregio</p>
+              {selectedRegio && <h2>{selectedRegio.name}</h2>}
+              {!selectedRegio && (
+                <span className={styles['select-safety-region']}>
+                  Selecteer een veiligheidsregio of gemeente
+                </span>
+              )}
+            </div>
+            <SvgMap safetyRegions={safetyRegions} selected={selectedRegio} />
+          </div>
         </div>
 
-        <div className="panelCol">
+        <div className={styles['panel-column']}>
           <GraphContainer>
             <GraphContent>
               <GraphHeader
