@@ -1,9 +1,11 @@
 import styles from './styles.module.scss';
-import { SafetyRegion, MunicipalityMapping } from 'pages/regio';
+
 import { useCombobox } from 'downshift';
+import { useState } from 'react';
+
+import { SafetyRegion, MunicipalityMapping } from 'pages/regio';
 import Arrow from 'assets/white-arrow.svg';
 import ScreenReaderOnly from 'components/screenReaderOnly';
-import { useState } from 'react';
 
 type SelectMunicipalityProps = {
   municipalities: MunicipalityMapping[];
