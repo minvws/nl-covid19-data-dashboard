@@ -18,11 +18,11 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
   const [items, setItems] = useState(() => municipalities);
 
   // Returns the string to display as an item's label.
-  const itemToString = (item: MunicipalityMapping) => item.name;
+  const itemToString = (item?: MunicipalityMapping) => (item ? item.name : '');
 
   // Returns municipalities by safety region and current inputValue, sorted alphabetically.
   const getRegionItems = (safetyRegion: string, inputValue) => {
-    return municipalities
+    return items
       .filter((el) => el.safetyRegion === safetyRegion)
       .filter((el) => !getDisabled(el, inputValue))
       .sort((a, b) => a.name.localeCompare(b.name));
@@ -49,13 +49,29 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
     setItems(municipalities.filter((item) => !getDisabled(item, inputValue)));
   };
 
-  // Returns a string for an aria-live status message.
+  // Clear the input when the dropdown is opened.
+  const onIsOpenChange = ({ isOpen }) => {
+    if (isOpen) selectItem(null);
+  };
+
+  // Returns a string for an aria-live selection status message.
   const getA11ySelectionMessage = ({ itemToString, selectedItem }) => {
     if (selectedItem) {
-      return `Gemeente ${itemToString(selectedItem)} is geselecteerd.`;
+      const safetyRegion = safetyRegions.find(
+        (el) => el.code === selectedItem.safetyRegion
+      );
+
+      return `Gemeente ${itemToString(selectedItem)} in veiligheidsregio ${
+        safetyRegion.name
+      } is geselecteerd.`;
     }
 
     return 'Er is geen gemeente geselecteerd';
+  };
+
+  // Returns a string for an aria-live status message shown while typing.
+  const getA11yStatusMessage = ({ resultCount }) => {
+    return `Er zijn ${resultCount} resultaten, gebruik de omhoog en omlaag pijltjes toetsen om te navigeren. Druk op Enter om te selecteren.`;
   };
 
   const {
@@ -71,11 +87,14 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
     openMenu,
     reset,
     selectedItem,
+    selectItem,
   } = useCombobox({
     items,
     itemToString,
     onSelectedItemChange,
     onInputValueChange,
+    onIsOpenChange,
+    getA11yStatusMessage,
     getA11ySelectionMessage,
   });
 
