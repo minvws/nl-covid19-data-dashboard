@@ -1,9 +1,9 @@
-import { FunctionComponent } from 'react';
-
 import styles from './svgmap.module.scss';
 
-import { SafetyRegion } from 'pages/regio';
+import { FunctionComponent } from 'react';
 import Link from 'next/link';
+
+import { SafetyRegion } from 'pages/regio';
 
 const regions = [
   {
