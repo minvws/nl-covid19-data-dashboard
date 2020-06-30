@@ -361,50 +361,6 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
 
           <GraphContainer>
             <GraphContent>
-              <GraphHeader
-                Icon={Arts}
-                title={siteText.verdenkingen_huisartsen.title}
-              />
-
-              <p>{siteText.verdenkingen_huisartsen.text}</p>
-
-              {state.NL?.verdenkingen_huisartsen && (
-                <BarScale
-                  min={siteText.verdenkingen_huisartsen.min}
-                  max={siteText.verdenkingen_huisartsen.max}
-                  screenReaderText={
-                    siteText.verdenkingen_huisartsen.screen_reader_graph_content
-                  }
-                  value={state.NL?.verdenkingen_huisartsen.value}
-                  id="verdenkingen_huisartsen"
-                  gradient={siteText.verdenkingen_huisartsen.gradient}
-                />
-              )}
-            </GraphContent>
-            <Collapse
-              openText={siteText.verdenkingen_huisartsen.open}
-              sluitText={siteText.verdenkingen_huisartsen.sluit}
-            >
-              <h4>{siteText.verdenkingen_huisartsen.fold_title}</h4>
-              <p>{siteText.verdenkingen_huisartsen.fold}</p>
-
-              <h4>{siteText.verdenkingen_huisartsen.graph_title}</h4>
-              {state.NL?.verdenkingen_huisartsen?.list && (
-                <LineChart data={state.NL?.verdenkingen_huisartsen.list} />
-              )}
-
-              <Metadata
-                period={state.NL?.verdenkingen_huisartsen?.list}
-                dataSource={siteText.verdenkingen_huisartsen.bron}
-                lastUpdated={
-                  state.NL?.verdenkingen_huisartsen?.lastupdate * 1000
-                }
-              />
-            </Collapse>
-          </GraphContainer>
-
-          <GraphContainer>
-            <GraphContent>
               <GraphHeader title={siteText.overige_gegevens.title} />
               <p>{siteText.overige_gegevens.text}</p>
               <p>{siteText.overige_gegevens.fold}</p>
@@ -414,6 +370,15 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
 
           <GraphContainer>
             <GraphContent>
+              <GraphHeader title={siteText.gedragsignalering.title} />
+              <p>{siteText.gedragsignalering.text}</p>
+              <p>{siteText.gedragsignalering.fold}</p>
+              <IconList list={siteText.gedragsignalering.list} />
+            </GraphContent>
+          </GraphContainer>
+
+          <GraphContainer>
+            <GraphContent>
               <GraphHeader
                 Icon={Arts}
                 title={siteText.verdenkingen_huisartsen.title}
@@ -454,15 +419,6 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                 }
               />
             </Collapse>
-          </GraphContainer>
-
-          <GraphContainer>
-            <GraphContent>
-              <GraphHeader title={siteText.gedragsignalering.title} />
-              <p>{siteText.gedragsignalering.text}</p>
-              <p>{siteText.gedragsignalering.fold}</p>
-              <IconList list={siteText.gedragsignalering.list} />
-            </GraphContent>
           </GraphContainer>
         </Masonry>
       </section>
