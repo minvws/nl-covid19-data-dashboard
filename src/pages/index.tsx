@@ -452,10 +452,7 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
 
               <h4>{siteText.rioolwater_metingen.graph_title}</h4>
               {state.NL?.rioolwater_metingen?.list && (
-                <LineChart
-                  data={state.NL?.rioolwater_metingen.list}
-                  max={400}
-                />
+                <LineChart data={state.NL?.rioolwater_metingen.list} />
               )}
 
               <Metadata
