@@ -326,7 +326,7 @@
     "open": "Verberg uitleg",
     "sluit": "Meer uitleg en data",
     "min": 0,
-    "max": 40,
+    "max": 100,
     "gradient": [
       {
         "color": "#3391CC",
