@@ -420,6 +420,48 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
               />
             </Collapse>
           </GraphContainer>
+
+          <GraphContainer>
+            <GraphContent>
+              <GraphHeader
+                Icon={null}
+                title={siteText.rioolwater_metingen.title}
+              />
+
+              <p>{siteText.rioolwater_metingen.text}</p>
+
+              {state.NL?.rioolwater_metingen && (
+                <BarScale
+                  min={siteText.rioolwater_metingen.min}
+                  max={siteText.rioolwater_metingen.max}
+                  screenReaderText={
+                    siteText.rioolwater_metingen.screen_reader_graph_content
+                  }
+                  value={state.NL?.rioolwater_metingen.value}
+                  id="rioolwater_metingen"
+                  gradient={siteText.rioolwater_metingen.gradient}
+                />
+              )}
+            </GraphContent>
+            <Collapse
+              openText={siteText.rioolwater_metingen.open}
+              sluitText={siteText.rioolwater_metingen.sluit}
+            >
+              <h4>{siteText.rioolwater_metingen.fold_title}</h4>
+              <p>{siteText.rioolwater_metingen.fold}</p>
+
+              <h4>{siteText.rioolwater_metingen.graph_title}</h4>
+              {state.NL?.rioolwater_metingen?.list && (
+                <LineChart data={state.NL?.rioolwater_metingen.list} />
+              )}
+
+              <Metadata
+                period={state.NL?.rioolwater_metingen?.list}
+                dataSource={siteText.rioolwater_metingen.bron}
+                lastUpdated={state.NL?.rioolwater_metingen?.lastupdate * 1000}
+              />
+            </Collapse>
+          </GraphContainer>
         </Masonry>
       </section>
 
