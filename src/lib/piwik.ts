@@ -11,11 +11,17 @@ if (process.browser) {
   }
 }
 
-export const pageview = (url: string, documentTitle: string): void => {
+type PageviewProps = {
+  url?: string;
+  documentTitle?: string;
+};
+
+export const pageview = (props: PageviewProps): void => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { url, documentTitle } = props;
+
   if (process.browser) {
     if (window) {
-      window._paq.push(['setCustomUrl', '/' + url]);
-      window._paq.push(['setDocumentTitle', documentTitle]);
       window._paq.push(['trackPageView']);
     } else {
       console.log('window object not found');
