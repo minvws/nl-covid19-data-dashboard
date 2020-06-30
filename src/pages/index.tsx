@@ -125,6 +125,53 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
           <GraphContainer>
             <GraphContent>
               <GraphHeader
+                Icon={Ziekenhuis}
+                title={siteText.ziekenhuisopnames_per_dag.title}
+              />
+
+              <p>{siteText.ziekenhuisopnames_per_dag.text}</p>
+
+              {state.NL?.intake_hospital_ma && (
+                <BarScale
+                  min={0}
+                  max={100}
+                  kritiekeWaarde={40}
+                  screenReaderText={
+                    siteText.ziekenhuisopnames_per_dag
+                      .screen_reader_graph_content
+                  }
+                  value={state.NL?.intake_hospital_ma.value}
+                  id="opnames"
+                  gradient={siteText.ziekenhuisopnames_per_dag.gradient}
+                />
+              )}
+            </GraphContent>
+            <Collapse
+              openText={siteText.ziekenhuisopnames_per_dag.open}
+              sluitText={siteText.ziekenhuisopnames_per_dag.sluit}
+            >
+              <h4>{siteText.ziekenhuisopnames_per_dag.fold_title}</h4>
+              <p>{siteText.ziekenhuisopnames_per_dag.fold}</p>
+
+              <h4>{siteText.ziekenhuisopnames_per_dag.graph_title}</h4>
+              {state.NL?.intake_hospital_ma?.list && (
+                <LineChart
+                  data={state.NL?.intake_hospital_ma.list}
+                  signaalwaarde={40}
+                />
+              )}
+
+              <Metadata
+                period={state.NL?.intake_hospital_ma?.list}
+                dataSource={siteText.ziekenhuisopnames_per_dag.bron}
+                lastUpdated={state.NL?.intake_hospital_ma?.lastupdate * 1000}
+              />
+            </Collapse>
+          </GraphContainer>
+
+          <GraphContainer>
+            <GraphContent>
+              <GraphHeader
                 Icon={Getest}
                 title={siteText.positief_geteste_personen.title}
               />
@@ -299,53 +346,6 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
               <Metadata
                 period={state.NL?.reproduction_index?.list}
                 dataSource={siteText.reproductiegetal.bron}
-              />
-            </Collapse>
-          </GraphContainer>
-
-          <GraphContainer>
-            <GraphContent>
-              <GraphHeader
-                Icon={Ziekenhuis}
-                title={siteText.ziekenhuisopnames_per_dag.title}
-              />
-
-              <p>{siteText.ziekenhuisopnames_per_dag.text}</p>
-
-              {state.NL?.intake_hospital_ma && (
-                <BarScale
-                  min={0}
-                  max={100}
-                  kritiekeWaarde={40}
-                  screenReaderText={
-                    siteText.ziekenhuisopnames_per_dag
-                      .screen_reader_graph_content
-                  }
-                  value={state.NL?.intake_hospital_ma.value}
-                  id="opnames"
-                  gradient={siteText.ziekenhuisopnames_per_dag.gradient}
-                />
-              )}
-            </GraphContent>
-            <Collapse
-              openText={siteText.ziekenhuisopnames_per_dag.open}
-              sluitText={siteText.ziekenhuisopnames_per_dag.sluit}
-            >
-              <h4>{siteText.ziekenhuisopnames_per_dag.fold_title}</h4>
-              <p>{siteText.ziekenhuisopnames_per_dag.fold}</p>
-
-              <h4>{siteText.ziekenhuisopnames_per_dag.graph_title}</h4>
-              {state.NL?.intake_hospital_ma?.list && (
-                <LineChart
-                  data={state.NL?.intake_hospital_ma.list}
-                  signaalwaarde={40}
-                />
-              )}
-
-              <Metadata
-                period={state.NL?.intake_hospital_ma?.list}
-                dataSource={siteText.ziekenhuisopnames_per_dag.bron}
-                lastUpdated={state.NL?.intake_hospital_ma?.lastupdate * 1000}
               />
             </Collapse>
           </GraphContainer>
