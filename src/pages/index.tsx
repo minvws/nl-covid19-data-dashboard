@@ -22,6 +22,7 @@ import VerpleegHuis from '../assets/verpleeg.svg';
 import Virus from '../assets/virus.svg';
 import Locatie from '../assets/locaties.svg';
 import MedischeScreening from '../assets/medische_screening.svg';
+import RioolwaterMonitoring from '../assets/rioolwater-monitoring.svg';
 
 import { store } from 'store';
 import siteText from 'data/textNationaal.json';
@@ -421,7 +422,7 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
           <GraphContainer>
             <GraphContent>
               <GraphHeader
-                Icon={null}
+                Icon={RioolwaterMonitoring}
                 title={siteText.rioolwater_metingen.title}
               />
 
