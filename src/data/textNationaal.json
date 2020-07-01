@@ -40,7 +40,7 @@
     "graph_title": "Verloop over tijd",
     "screen_reader_graph_content": "{{value}} verdenkingen van COVID-19 gesteld door huisartsen, per 100.000 inwoners, per week.",
     "fold_title": "Wat betekent dit?",
-    "fold": "Naast de klinisch bevestigde COVID-19 diagnoses registreerden de huisartsen ook verdenkingen op COVID-19. Ook hier lag de piek weer in week 13, toen het aantal 123 per 100.000. Momenteel ligt het aantal 13 per 100.000 per week. De afname van het aantal verdenkingen is sneller dan van klinisch bevestigden. Dit kan duiden op dat deze indicator voor loopt in de tijd en daardoor mogelijk een geschikte kandidaat voor vroegsignalering.",
+    "fold": "Huisartsen registreren bij het spreken van een patiënt, de vernomen klachten. Elke week berekent het Nivel aan de hand van de geregistreerde klachten, het aantal patiënten met een verdenking op COVID-19 in de afgelopen week.",
     "open": "Verberg uitleg",
     "sluit": "Meer uitleg en data",
     "min": 0,
