@@ -117,7 +117,7 @@
     "text": "Een berekening van hoeveel mensen met COVID-19 per 100.000 inwoners besmettelijk zijn voor anderen. Dit getal wordt door het RIVM berekend.",
     "screen_reader_graph_content": "{{value}} besmettelijke personen per 100.000 inwoners.",
     "fold_title": "Wat betekent dit?",
-    "fold": "Als iemand het coronavirus oploopt, dan is deze persoon een tijd lang besmettelijk voor anderen. Hoe lang dit duurt verschilt van persoon tot persoon. Dit getal is een schatting.",
+    "fold": "Als iemand het coronavirus oploopt, dan is deze persoon een tijd lang besmettelijk voor anderen. Hoe lang dit duurt verschilt van persoon tot persoon. Het aantal besmettelijke mensen is een schatting op basis van een aantal gegevensbronnen. Het exacte aantal is onbekend, maar we kunnen wel aangeven of het gaat om tientallen, honderden, duizenden of meer.",
     "metric_title": "Geschat aantal besmettelijke mensen in Nederland:",
     "graph_title": "Verloop over tijd",
     "open": "Verberg uitleg",
