@@ -321,8 +321,8 @@
       }
     ],
     "bron": {
-      "href": "RIVM Onderzoek rioolwater",
-      "text": "https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater"
+      "text": "RIVM Onderzoek rioolwater",
+      "href": "https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater"
     }
   }
 }
