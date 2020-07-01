@@ -5,6 +5,7 @@ import { useState } from 'react';
 
 import { SafetyRegion, MunicipalityMapping } from 'pages/regio';
 import Arrow from 'assets/white-arrow.svg';
+import ResetIcon from 'assets/reset.svg';
 import ScreenReaderOnly from 'components/screenReaderOnly';
 
 type SelectMunicipalityProps = {
@@ -114,7 +115,9 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
         {selectedItem && (
           <button onClick={reset} className={styles.reset}>
             <ScreenReaderOnly>Reset</ScreenReaderOnly>
-            <span aria-hidden="true">&times;</span>
+            <div aria-hidden="true">
+              <ResetIcon />
+            </div>
           </button>
         )}
         <button
