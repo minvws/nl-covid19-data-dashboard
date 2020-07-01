@@ -304,12 +304,12 @@
   },
 
   "rioolwater_metingen": {
-    "title": "Rioolwatermonitoring",
-    "text": "Het aantal virusdeeltjes in een mL rioolwater, afkomstig van 28 locaties in Nederland. Het aantal locaties wordt komende weken verder uitgebreid.",
+    "title": "Rioolwatermeting",
+    "text": "Het aantal virusdeeltjes in een milliliter rioolwater, afkomstig van 28 locaties in Nederland. Het aantal meetpunten wordt in de komende weken verder uitgebreid naar meer dan 300 locaties.",
     "graph_title": "Verloop over tijd",
     "screen_reader_graph_content": "{{value}} COVID-19 RNA-deeltjes gemeten per mililiter in rioolwater.",
     "fold_title": "Wat betekent dit?",
-    "fold": "In rioolwater kun je ziekteverwekkers zoals het nieuwe coronavirus meten. Onderzoekers testen 24 uur lang steeds 0,5 mL aan genetisch materiaal (uitwerpselen) uit het rioolwater. De test die wordt gedaan zegt iets over de hoeveelheid virusdeeltjes die in een mL rioolwater zit. Het is de bedoeling dat het aantal meetpunten wordt uitgebreid naar 327 voor 1 september 2020.",
+    "fold": "In rioolwater kun je ziekteverwekkers zoals het nieuwe coronavirus meten omdat die met uitwerpselen (ontlasting) in het rioolwater komen. Onderzoekers testen eens per week rioolwater dat over 24 uur verzameld is. Dit onderzoek laat vrij snel zien hoeveel virusdeeltjes in het rioolwater zitten afkomstig uit uitwerpselen van besmette personen. Uit het huidige onderzoek kunnen nog geen conclusies worden getrokken. Het is de bedoeling dat het aantal meetpunten wordt uitgebreid van 28 naar meer dan 300 voor 1 september 2020. Pas als het onderzoek volledig loopt, kunnen hier conclusies aan worden verbonden.",
     "open": "Verberg uitleg",
     "sluit": "Meer uitleg en data",
     "min": 0,
