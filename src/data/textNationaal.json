@@ -318,11 +318,11 @@
 
   "rioolwater_metingen": {
     "title": "Rioolwatermonitoring",
-    "text": "Aantal COVID-19 RNA deeltjes gemeten per mL in rioolwater.",
+    "text": "Aantal COVID-19 RNA-deeltjes gemeten per mL in rioolwater.",
     "graph_title": "Verloop over tijd",
-    "screen_reader_graph_content": "{{value}} COVID-19 RNA deeltjes gemeten per mililiter in rioolwater.",
+    "screen_reader_graph_content": "{{value}} COVID-19 RNA-deeltjes gemeten per mililiter in rioolwater.",
     "fold_title": "Wat betekent dit?",
-    "fold": "Aantal COVID-19 RNA deeltjes gemeten per mL in rioolwater..",
+    "fold": "Aantal COVID-19 RNA-deeltjes gemeten per mL in rioolwater..",
     "open": "Verberg uitleg",
     "sluit": "Meer uitleg en data",
     "min": 0,
