@@ -21,6 +21,7 @@ import Repro from '../assets/reproductie.svg';
 import VerpleegHuis from '../assets/verpleeg.svg';
 import Virus from '../assets/virus.svg';
 import Locatie from '../assets/locaties.svg';
+import MedischeScreening from '../assets/medische_screening.svg';
 
 import { store } from 'store';
 import siteText from 'data/textNationaal.json';
@@ -362,7 +363,7 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
       </section>
 
       <section className="home-section">
-        <TitleBlock Icon={'medische_screening.png'} title="Andere gegevens">
+        <TitleBlock Icon={MedischeScreening} title="Andere gegevens">
           <p>
             Cijfers die iets kunnen zeggen over de verspreiding van het virus.
           </p>
