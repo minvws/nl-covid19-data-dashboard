@@ -1,8 +1,9 @@
-import { FunctionComponent } from 'react';
-
 import styles from './svgmap.module.scss';
 
-import regioData from 'data';
+import { FunctionComponent } from 'react';
+import Link from 'next/link';
+
+import { SafetyRegion } from 'pages/regio';
 
 const regions = [
   {
@@ -158,12 +159,12 @@ const regions = [
 ];
 
 type SvgMapTypes = {
-  selected: any;
-  setSelection: (item: any) => void;
+  safetyRegions: SafetyRegion[];
+  selected: SafetyRegion;
 };
 
 const SvgMap: FunctionComponent<SvgMapTypes> = (props) => {
-  const { selected, setSelection } = props;
+  const { safetyRegions, selected } = props;
 
   return (
     <div className={styles.container}>
@@ -180,21 +181,26 @@ const SvgMap: FunctionComponent<SvgMapTypes> = (props) => {
         >
           <g>
             {regions.map((region) => {
-              let classNameCombined = styles.regio;
-              if (selected && region.id === selected.id) {
-                classNameCombined += ` ${styles.selected}`;
-              }
+              const safetyRegion = safetyRegions.find(
+                (el) => el.id === region.id
+              );
+
+              const isSelected = selected?.id === region.id;
+              const className = `${styles['regio-link']} ${
+                isSelected ? styles['regio-link-selected'] : ''
+              }`;
 
               return (
-                <path
-                  key={`region-${region.id}`}
-                  className={classNameCombined}
-                  d={region.d}
-                  onClick={() => {
-                    const item = regioData.find((x) => x.id === region.id);
-                    setSelection(item);
-                  }}
-                />
+                <Link
+                  key={region.id}
+                  href={`/regio?regio=${safetyRegion.code}`}
+                  scroll={false}
+                  shallow
+                >
+                  <a className={className} aria-label={safetyRegion.name}>
+                    <path key={`region-${region.id}`} d={region.d} />
+                  </a>
+                </Link>
               );
             })}
           </g>
