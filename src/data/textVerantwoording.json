@@ -36,6 +36,10 @@
       {
         "cijfer": "Open source data verwerking",
         "verantwoording": "Dit prototype is in zeer korte tijd tot stand gekomen. Het is daarom nog niet gelukt om de code voor het inlezen van de data, de databerekeningen en het construeren van de JSON- bestanden open source beschikbaar te stellen. Dit zal binnen afzienbare tijd beschikbaar worden gesteld. De code van de webapplicatie is op 5 juni 2020 gepubliceerd op Github: https://github.com/minvws/nl-covid19-data-dashboard"
+      },
+      {
+        "cijfer": "Rioolwatermeting",
+        "verantwoording": "In rioolwater kun je ziekteverwekkers zoals het nieuwe coronavirus meten. Onderzoekers testen 24 uur lang steeds 0,5 mL aan genetisch materiaal (uitwerpselen) uit het rioolwater. De test die wordt gedaan zegt iets over de hoeveelheid virusdeeltjes die in een mL rioolwater zit (zie grafiek). In de grafiek zie je op de Y-as het aantal virusdeeltjes in een mL rioolwater afkomstig van 28 locaties in Nederland. We geven dit weer op een schaal van 0 tot 300 deeltjes. Op de X-as zie je de data waarop het materiaal is verzameld uit het rioolwater. De lijn geeft de hoeveelheid virusdeeltjes per mL rioolwater weer. De gevulde cirkels in de lijn geven aan op welk moment het genetisch materiaal voor de test is verzameld uit het rioolwater. Aan de hand van de metingen kunnen we dus zien dat er een of meer besmette personen naar het toilet zijn geweest. Daarna is het coronavirus met de uitwerpselen, het toiletwater en ander water door de riolering vervoerd naar de rioolwaterzuiveringsinstallatie. Die besmette persoon was dus op dat moment op een locatie waarvan het rioolwater naar de bemonsterde rioolwaterzuiveringsinstallatie ging."
       }
     ]
   }
