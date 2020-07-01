@@ -358,25 +358,21 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
             <h3>{siteText.regio_link_block.title}</h3>
             <p>{siteText.regio_link_block.text}</p>
           </LinkCard>
+        </Masonry>
+      </section>
 
-          <GraphContainer>
-            <GraphContent>
-              <GraphHeader title={siteText.overige_gegevens.title} />
-              <p>{siteText.overige_gegevens.text}</p>
-              <p>{siteText.overige_gegevens.fold}</p>
-              <IconList list={siteText.overige_gegevens.list} />
-            </GraphContent>
-          </GraphContainer>
+      <section className="home-section">
+        <TitleBlock Icon={'medische_screening.png'} title="Andere gegevens">
+          <p>
+            Cijfers die iets kunnen zeggen over de verspreiding van het virus.
+          </p>
+        </TitleBlock>
 
-          <GraphContainer>
-            <GraphContent>
-              <GraphHeader title={siteText.gedragsignalering.title} />
-              <p>{siteText.gedragsignalering.text}</p>
-              <p>{siteText.gedragsignalering.fold}</p>
-              <IconList list={siteText.gedragsignalering.list} />
-            </GraphContent>
-          </GraphContainer>
-
+        <Masonry
+          breakpointCols={breakpointColumnsObj}
+          className="masonry-grid"
+          columnClassName="masonry-grid-column"
+        >
           <GraphContainer>
             <GraphContent>
               <GraphHeader
@@ -461,6 +457,15 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                 lastUpdated={state.NL?.rioolwater_metingen?.lastupdate * 1000}
               />
             </Collapse>
+          </GraphContainer>
+
+          <GraphContainer>
+            <GraphContent>
+              <GraphHeader title={siteText.overige_gegevens.title} />
+              <p>{siteText.overige_gegevens.text}</p>
+
+              <IconList list={siteText.overige_gegevens.list} />
+            </GraphContent>
           </GraphContainer>
         </Masonry>
       </section>

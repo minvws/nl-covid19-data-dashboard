@@ -179,10 +179,10 @@
     }
   },
   "overige_gegevens": {
-    "title": "Andere cijfers",
-    "text": "Cijfers die iets kunnen zeggen over de verspreiding van het virus. Bijvoorbeeld de infectieradar en cijfers van huisartsen.",
+    "title": "Nog te ontwikkelen",
+    "text": "Het is de bedoeling dat het dashboard in de toekomst wordt uitgebreid met de volgende gegevens:",
     "fold_title": "Wat betekent dit?",
-    "fold": "Het is de bedoeling dat het dashboard in de toekomst wordt uitgebreid met de volgende gegevens:",
+    "fold": null,
     "graph_title": "Verloop over tijd",
     "open": "Verberg uitleg",
     "sluit": "Meer uitleg",
@@ -203,24 +203,6 @@
         "content": "Wanneer zorgverleners ziek zijn, kunnen zij patiënten besmetten met COVID-19. Door hun gezondheid in kaart te brengen, verkleint uiteindelijk de kans op ziekteverspreiding. Dit gebeurt door het aantal besmette zorgverleners en het aantal ziektemeldingen bij te houden. Ook draagt dit bij aan het voorkomen van overbelasting in de zorg."
       },
       {
-        "icon": "/images/Rioolwatermonitor.png",
-        "text": "Rioolwatermonitoring",
-        "content": "Het RIVM doet momenteel op 29 locaties onderzoek naar het virus in rioolwater. Daaruit blijkt dat het virus al zichtbaar is in uitwerpselen voordat mensen symptomen van het virus ervaren. Dat betekent dat het virus vroeg kan worden opgespoord in het rioolwater. Het RIVM breidt deze onderzoeken binnenkort uit naar alle 352 rioolwaterzuiveringsinstallaties in Nederland."
-      }
-    ]
-  },
-  "regio_link_block": {
-    "title": "Informatie per regio",
-    "text": "Bekijk de belangrijkste cijfers voor uw veiligheidsregio."
-  },
-  "gedragsignalering": {
-    "title": "Informatie over gedrag",
-    "text": "Het RIVM geeft adviezen over wat mensen wel en niet moeten doen. Hoe goed lukt het om die adviezen te volgen?",
-    "fold": "Het is de bedoeling dat het dashboard in de toekomst wordt uitgebreid met de volgende gegevens:",
-    "open": "Verberg uitleg",
-    "sluit": "Meer uitleg",
-    "list": [
-      {
         "icon": "/images/Verplaatsingsgegevens.png",
         "text": "Verplaatsingsgegevens",
         "content": "Verplaatsingsgegevens kunnen een beeld geven hoe het coronavirus zich verspreid. Het doel is om dit per gemeente in kaart te brengen."
@@ -237,6 +219,11 @@
       }
     ]
   },
+  "regio_link_block": {
+    "title": "Informatie per regio",
+    "text": "Bekijk de belangrijkste cijfers voor uw veiligheidsregio."
+  },
+
   "verpleeghuis_besmette_locaties": {
     "title": "Aantal besmette locaties",
     "text": "Aantal nieuwe locaties waarbij tenminste één bewoner positief getest is, per dag.",
