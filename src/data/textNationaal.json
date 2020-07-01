@@ -35,10 +35,10 @@
   },
 
   "verdenkingen_huisartsen": {
-    "title": "Aantal patiënten met verdenking op COVID-19",
+    "title": "Aantal patiënten waarvan huisartsen COVID-19 vermoeden",
     "text": "Aantal door de huisarts geregistreerde verdenkingen van COVID-19, per 100.000 inwoners, per week.",
     "graph_title": "Verloop over tijd",
-    "screen_reader_graph_content": "{{value}} verdenkingen van COVID-19 gesteld door huisartsen, per 100.000 inwoners, per week.",
+    "screen_reader_graph_content": "{{value}} patiënten waarvan huisartsen COVID-19 vermoeden, per 100.000 inwoners, per week.",
     "fold_title": "Wat betekent dit?",
     "fold": "Huisartsen registreren bij het spreken van een patiënt, de vernomen klachten. Elke week berekent het Nivel aan de hand van de geregistreerde klachten, het aantal patiënten met een verdenking op COVID-19 in de afgelopen week.",
     "open": "Verberg uitleg",
