@@ -6,6 +6,7 @@ import 'components/collapse/collapse.scss';
 import 'components/graphContainer/graphContainer.scss';
 import 'components/graphContent/graphContent.scss';
 import 'components/lineChart/lineChart.scss';
+import 'pages/regio/regio.scss';
 
 import { useEffect } from 'react';
 import Router from 'next/router';
