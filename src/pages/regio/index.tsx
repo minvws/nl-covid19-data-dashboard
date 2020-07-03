@@ -30,6 +30,7 @@ import { HomeLayoutProps } from 'pages/index';
 import ScreenReaderOnly from 'components/screenReaderOnly';
 import formatDecimal from 'utils/formatDec';
 import SelectMunicipality from 'components/selectMunicipality';
+import Select from 'components/select';
 
 export type SafetyRegion = {
   id: number;
@@ -164,6 +165,12 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
       <LastUpdated />
       <div className={styles['regio-grid']}>
         <div className={styles['map-column']} ref={selectRegioWrapperRef}>
+          <Select
+            municipalities={municipalities}
+            safetyRegions={safetyRegions}
+            setSelectedSafetyRegion={setSelectedRegio}
+          />
+
           <SelectMunicipality
             municipalities={municipalities}
             safetyRegions={safetyRegions}

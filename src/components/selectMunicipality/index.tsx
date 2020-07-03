@@ -53,7 +53,9 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
   };
 
   // Clear the input when the dropdown is opened.
-  const onIsOpenChange = ({ isOpen }) => {
+  const onIsOpenChange = (changes) => {
+    console.log(changes);
+    const { isOpen } = changes;
     if (isOpen) selectItem(null);
   };
 
@@ -101,6 +103,11 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
     getA11ySelectionMessage,
   });
 
+  let ieFix = {};
+  if (!isOpen) {
+    ieFix = { overflowY: 'hidden' };
+  }
+
   return (
     <div className={styles.root}>
       <label className={styles.label} {...getLabelProps()}>
@@ -129,7 +136,7 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
           <Arrow aria-hidden="true" />
         </button>
       </div>
-      <div className={styles.menu} {...getMenuProps()}>
+      <div className={styles.menu} {...getMenuProps()} style={ieFix}>
         {isOpen &&
           safetyRegions.map((safetyRegion) => {
             const regionItems = getRegionItems(safetyRegion.code, inputValue);
