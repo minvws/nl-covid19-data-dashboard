@@ -1,13 +1,12 @@
 import styles from './styles.module.scss';
 
 import { useCombobox } from 'downshift';
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 
 import { SafetyRegion, MunicipalityMapping } from 'pages/regio';
 import Arrow from 'assets/white-arrow.svg';
 import ResetIcon from 'assets/reset.svg';
 import ScreenReaderOnly from 'components/screenReaderOnly';
-import { Ref } from 'preact';
 
 type SelectMunicipalityProps = {
   municipalities: MunicipalityMapping[];
@@ -20,8 +19,6 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
 
   // Set the full list of municipalities as the initial state.
   const [items, setItems] = useState(() => municipalities);
-
-  const input: Ref<HTMLInputElement> = useRef();
 
   // Returns the string to display as an item's label.
   const itemToString = (item?: MunicipalityMapping) => (item ? item.name : '');
@@ -47,9 +44,12 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
 
   // Select the current content of the input
   const selectInputContent = () => {
+    // The DOM is used here instead of a ref because Downshift overwrites any ref
+    // used on the input element.
     const input: HTMLInputElement = document.querySelector(
       '#select-municipality-input'
     );
+
     input && input.select();
   };
 
