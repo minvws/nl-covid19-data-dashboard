@@ -81,7 +81,6 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = ({
 
         <MaxWidth>
           <h1>{text.header.title}</h1>
-          <strong className={styles.badge}>{text.header.disclaimer}</strong>
           <p>
             {text.header.text}{' '}
             <Link href="/over">

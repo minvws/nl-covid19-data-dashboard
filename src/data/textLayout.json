@@ -5,8 +5,7 @@
   },
   "header": {
     "title": "Dashboard coronavirus",
-    "disclaimer": "Let op: in ontwikkeling",
-    "text": "Dit is het dashboard coronavirus. U vindt hier cijfers over het aantal positief geteste mensen en het aantal mensen dat is opgenomen in een ziekenhuis. Ook zijn er cijfers over hoe het nu gaat in de verpleeghuizen. Samen laten de cijfers zien hoe het staat met de verspreiding van het coronavirus in Nederland.",
+    "text": "Het dashboard coronavirus geeft informatie over de ontwikkeling van het coronavirus in Nederland. Met deze informatie kunnen eerder signalen van een toename van de verspreiding van het virus worden opgepikt. We moeten voorkomen dat het virus weer om zich heen grijpt. Het aantal IC-en ziekenhuisopnames geven in de kern de ultieme waarschuwing. Maar eerder al komen de signalen door via de testuitslagen die vertaald worden naar het aantal positief geteste personen per 100.000 inwoners. Daarnaast zijn er ondersteunende indicatoren die de epidemie beschrijven en andersoortige signalen oppikken.",
     "link": "Lees meer"
   },
   "nav": {

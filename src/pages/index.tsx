@@ -21,6 +21,8 @@ import Repro from '../assets/reproductie.svg';
 import VerpleegHuis from '../assets/verpleeg.svg';
 import Virus from '../assets/virus.svg';
 import Locatie from '../assets/locaties.svg';
+import MedischeScreening from '../assets/medische_screening.svg';
+import RioolwaterMonitoring from '../assets/rioolwater-monitoring.svg';
 
 import { store } from 'store';
 import siteText from 'data/textNationaal.json';
@@ -168,6 +170,7 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
               />
             </Collapse>
           </GraphContainer>
+
           <GraphContainer>
             <GraphContent>
               <GraphHeader
@@ -357,22 +360,113 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
             <h3>{siteText.regio_link_block.title}</h3>
             <p>{siteText.regio_link_block.text}</p>
           </LinkCard>
+        </Masonry>
+      </section>
+
+      <section className="home-section">
+        <TitleBlock Icon={MedischeScreening} title="Andere gegevens">
+          <p>
+            Cijfers die iets kunnen zeggen over de verspreiding van het virus.
+          </p>
+        </TitleBlock>
+
+        <Masonry
+          breakpointCols={breakpointColumnsObj}
+          className="masonry-grid"
+          columnClassName="masonry-grid-column"
+        >
+          <GraphContainer>
+            <GraphContent>
+              <GraphHeader
+                Icon={Arts}
+                title={siteText.verdenkingen_huisartsen.title}
+              />
+
+              <p>{siteText.verdenkingen_huisartsen.text}</p>
+
+              {state.NL?.verdenkingen_huisartsen && (
+                <BarScale
+                  min={siteText.verdenkingen_huisartsen.min}
+                  max={siteText.verdenkingen_huisartsen.max}
+                  screenReaderText={
+                    siteText.verdenkingen_huisartsen.screen_reader_graph_content
+                  }
+                  value={state.NL?.verdenkingen_huisartsen.value}
+                  id="verdenkingen_huisartsen"
+                  gradient={siteText.verdenkingen_huisartsen.gradient}
+                />
+              )}
+            </GraphContent>
+            <Collapse
+              openText={siteText.verdenkingen_huisartsen.open}
+              sluitText={siteText.verdenkingen_huisartsen.sluit}
+            >
+              <h4>{siteText.verdenkingen_huisartsen.fold_title}</h4>
+              <p>{siteText.verdenkingen_huisartsen.fold}</p>
+
+              <h4>{siteText.verdenkingen_huisartsen.graph_title}</h4>
+              {state.NL?.verdenkingen_huisartsen?.list && (
+                <LineChart data={state.NL?.verdenkingen_huisartsen.list} />
+              )}
+
+              <Metadata
+                period={state.NL?.verdenkingen_huisartsen?.list}
+                dataSource={siteText.verdenkingen_huisartsen.bron}
+                lastUpdated={
+                  state.NL?.verdenkingen_huisartsen?.lastupdate * 1000
+                }
+              />
+            </Collapse>
+          </GraphContainer>
+
+          <GraphContainer>
+            <GraphContent>
+              <GraphHeader
+                Icon={RioolwaterMonitoring}
+                title={siteText.rioolwater_metingen.title}
+              />
+
+              <p>{siteText.rioolwater_metingen.text}</p>
+
+              {state.NL?.rioolwater_metingen && (
+                <BarScale
+                  min={siteText.rioolwater_metingen.min}
+                  max={siteText.rioolwater_metingen.max}
+                  screenReaderText={
+                    siteText.rioolwater_metingen.screen_reader_graph_content
+                  }
+                  value={state.NL?.rioolwater_metingen.value}
+                  id="rioolwater_metingen"
+                  gradient={siteText.rioolwater_metingen.gradient}
+                />
+              )}
+            </GraphContent>
+            <Collapse
+              openText={siteText.rioolwater_metingen.open}
+              sluitText={siteText.rioolwater_metingen.sluit}
+            >
+              <h4>{siteText.rioolwater_metingen.fold_title}</h4>
+              <p>{siteText.rioolwater_metingen.fold}</p>
+
+              <h4>{siteText.rioolwater_metingen.graph_title}</h4>
+              {state.NL?.rioolwater_metingen?.list && (
+                <LineChart data={state.NL?.rioolwater_metingen.list} />
+              )}
+
+              <Metadata
+                period={state.NL?.rioolwater_metingen?.list}
+                dataSource={siteText.rioolwater_metingen.bron}
+                lastUpdated={state.NL?.rioolwater_metingen?.lastupdate * 1000}
+              />
+            </Collapse>
+          </GraphContainer>
 
           <GraphContainer>
             <GraphContent>
               <GraphHeader title={siteText.overige_gegevens.title} />
               <p>{siteText.overige_gegevens.text}</p>
-              <p>{siteText.overige_gegevens.fold}</p>
-              <IconList list={siteText.overige_gegevens.list} />
-            </GraphContent>
-          </GraphContainer>
 
-          <GraphContainer>
-            <GraphContent>
-              <GraphHeader title={siteText.gedragsignalering.title} />
-              <p>{siteText.gedragsignalering.text}</p>
-              <p>{siteText.gedragsignalering.fold}</p>
-              <IconList list={siteText.gedragsignalering.list} />
+              <IconList list={siteText.overige_gegevens.list} />
             </GraphContent>
           </GraphContainer>
         </Masonry>
