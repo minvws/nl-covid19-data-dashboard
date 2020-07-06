@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import { useCombobox } from 'downshift';
 import Arrow from 'assets/white-arrow.svg';
 import regioData from 'data';
@@ -23,15 +23,26 @@ const getInitialState = () => {
 const itemToString = (item) => item?.name ?? '';
 
 const SelectRegio = ({ selected, setSelection }) => {
-  const [inputItems, setInputItems] = React.useState(() => getInitialState());
+  const [inputItems, setInputItems] = useState(() => getInitialState());
 
-  React.useEffect(() => {
-    selectItem(selected);
-  }, [selected]);
+  const stateReducer = (state, actionAndChanges) => {
+    const { type, changes } = actionAndChanges;
+
+    switch (type) {
+      case useCombobox.stateChangeTypes.InputBlur: {
+        // Don't reset the value on blur, only close the dropdown menu
+        // This fixes a bug in Edge < 18, where the blur event would cause
+        // Downshift to reset its state.
+        return { ...state, isOpen: false };
+      }
+      default: {
+        return changes;
+      }
+    }
+  };
 
   const {
     isOpen,
-    selectItem,
     openMenu,
     getToggleButtonProps,
     getLabelProps,
@@ -41,6 +52,7 @@ const SelectRegio = ({ selected, setSelection }) => {
     highlightedIndex,
     getItemProps,
   } = useCombobox({
+    stateReducer,
     items: inputItems,
     itemToString,
     initialSelectedItem: selected,
@@ -66,24 +78,22 @@ const SelectRegio = ({ selected, setSelection }) => {
   });
 
   const openOnFocus = () => openMenu();
-  let ieFix = {};
-  if (!isOpen) {
-    ieFix = { overflowY: 'hidden' };
-  }
+
   return (
     <div className={classNames.selectRegio}>
       <label {...getLabelProps()}>Veiligheidsregio</label>
       <div {...getComboboxProps()} className={classNames.container}>
         <input
-          onFocus={openOnFocus}
-          {...getInputProps()}
-          placeholder="Selecteer uw veiligheidsregio"
+          {...getInputProps({
+            onFocus: openOnFocus,
+            placeholder: 'Selecteer uw veiligheidsregio',
+          })}
         />
         <button {...getToggleButtonProps()} aria-label="open menu">
           <Arrow />
         </button>
       </div>
-      <ul {...getMenuProps()} style={ieFix}>
+      <ul {...getMenuProps()}>
         {isOpen &&
           inputItems.map((item, index) => (
             // eslint-disable-next-line react/jsx-key
