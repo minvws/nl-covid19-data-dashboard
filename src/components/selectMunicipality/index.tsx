@@ -1,12 +1,13 @@
 import styles from './styles.module.scss';
 
 import { useCombobox } from 'downshift';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 import { SafetyRegion, MunicipalityMapping } from 'pages/regio';
 import Arrow from 'assets/white-arrow.svg';
 import ResetIcon from 'assets/reset.svg';
 import ScreenReaderOnly from 'components/screenReaderOnly';
+import { Ref } from 'preact';
 
 type SelectMunicipalityProps = {
   municipalities: MunicipalityMapping[];
@@ -19,6 +20,8 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
 
   // Set the full list of municipalities as the initial state.
   const [items, setItems] = useState(() => municipalities);
+
+  const input: Ref<HTMLInputElement> = useRef();
 
   // Returns the string to display as an item's label.
   const itemToString = (item?: MunicipalityMapping) => (item ? item.name : '');
@@ -42,8 +45,17 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
     return items.every((item) => getDisabled(item, inputValue));
   };
 
+  // Select the current content of the input
+  const selectInputContent = () => {
+    const input: HTMLInputElement = document.querySelector(
+      '#select-municipality-input'
+    );
+    input && input.select();
+  };
+
   // Set the safety region code to the URL on item selection
   const onSelectedItemChange = ({ selectedItem }) => {
+    // console.log(selectedItem, rest);
     setSelectedSafetyRegion(selectedItem?.safetyRegion);
   };
 
@@ -52,9 +64,17 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
     setItems(municipalities.filter((item) => !getDisabled(item, inputValue)));
   };
 
-  // Clear the input when the dropdown is opened.
+  // Select the current input when the dropdown is opened.
   const onIsOpenChange = ({ isOpen }) => {
-    if (isOpen) selectItem(null);
+    if (isOpen) {
+      selectInputContent();
+    }
+  };
+
+  // Select the input content and open the menu on focusing the input
+  const onFocus = () => {
+    selectInputContent();
+    openMenu();
   };
 
   // Returns a string for an aria-live selection status message.
@@ -77,6 +97,24 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
     return `Er zijn ${resultCount} resultaten, gebruik de omhoog en omlaag pijltjes toetsen om te navigeren. Druk op Enter om te selecteren.`;
   };
 
+  // State reducer with an override for the ItemClick action.
+  const stateReducer = (state, actionAndChanges) => {
+    const { type, changes } = actionAndChanges;
+    switch (type) {
+      // overriding the result of this action fixes a race condition bug in IE11
+      // where several actions would be triggered after selecting an item in the
+      // dropdown menu.
+      case useCombobox.stateChangeTypes.ItemClick: {
+        return changes;
+      }
+      default: {
+        // Returning changes here, and not state, allows Downshift to handle
+        // actions that are not overridden itself.
+        return changes;
+      }
+    }
+  };
+
   const {
     getComboboxProps,
     getInputProps,
@@ -90,10 +128,10 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
     openMenu,
     reset,
     selectedItem,
-    selectItem,
   } = useCombobox({
     items,
     itemToString,
+    stateReducer,
     onSelectedItemChange,
     onInputValueChange,
     onIsOpenChange,
@@ -103,14 +141,16 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
 
   return (
     <div className={styles.root}>
-      <label className={styles.label} {...getLabelProps()}>
+      <label {...getLabelProps({ className: styles.label })}>
         Selecteer uw gemeente
       </label>
-      <div className={styles.combobox} {...getComboboxProps()}>
+      <div {...getComboboxProps({ className: styles.combobox })}>
         <input
-          {...getInputProps()}
-          onFocus={openMenu}
-          placeholder="bv. Aa en Hunze"
+          {...getInputProps({
+            onClick: onFocus,
+            id: 'select-municipality-input',
+            placeholder: 'bv. Aa en Hunze',
+          })}
         />
         {selectedItem && (
           <button onClick={reset} className={styles.reset}>
@@ -121,15 +161,20 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
           </button>
         )}
         <button
-          {...getToggleButtonProps()}
-          tabIndex={0}
-          className={styles.open}
-          aria-label="open gemeentes keuzemenu"
+          {...getToggleButtonProps({
+            tabIndex: 0,
+            className: styles.open,
+            'aria-label': 'open gemeentes',
+          })}
         >
           <Arrow aria-hidden="true" />
         </button>
       </div>
-      <div className={styles.menu} {...getMenuProps()}>
+      <div
+        {...getMenuProps({
+          className: styles.menu,
+        })}
+      >
         {isOpen &&
           safetyRegions.map((safetyRegion) => {
             const regionItems = getRegionItems(safetyRegion.code, inputValue);
@@ -148,14 +193,16 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
                     highlightedIndex === items.indexOf(municipality);
 
                   return (
+                    // disabled because key is passed through the Downshift prop getter
+                    // eslint-disable-next-line react/jsx-key
                     <p
-                      className={`${styles.item} ${
-                        isHighlighted ? styles.active : ''
-                      }`}
-                      key={municipality.name}
                       {...getItemProps({
+                        key: municipality.name,
                         item: municipality,
                         index: items.indexOf(municipality),
+                        className: `${styles.item} ${
+                          isHighlighted ? styles.active : ''
+                        }`,
                       })}
                     >
                       {itemToString(municipality)}
