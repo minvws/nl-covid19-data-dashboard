@@ -5,7 +5,7 @@ import regioData from 'data';
 
 import classNames from './selectRegio.module.scss';
 
-const getInitialState = () => {
+export function getInitialState() {
   const items = [...regioData];
   items.shift();
 
@@ -17,8 +17,9 @@ const getInitialState = () => {
     if (nameA > nameB) return 1;
     return 0;
   });
+
   return items;
-};
+}
 
 const itemToString = (item) => item?.name ?? '';
 
