@@ -6,7 +6,13 @@ import 'components/collapse/collapse.scss';
 import 'components/graphContainer/graphContainer.scss';
 import 'components/graphContent/graphContent.scss';
 import 'components/lineChart/lineChart.scss';
-import 'pages/regio/regio.scss';
+
+// Import Preact DevTools in development
+if (process.env.NODE_ENV === 'development') {
+  // Must use require here as import statements are only allowed
+  // to exist at the top of a file.
+  require('preact/debug');
+}
 
 import { useEffect } from 'react';
 import Router from 'next/router';
