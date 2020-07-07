@@ -57,4 +57,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withPlugins([withBundleAnalyzer, withPrefresh], nextConfig);
+module.exports = withPlugins([withBundleAnalyzer], nextConfig);

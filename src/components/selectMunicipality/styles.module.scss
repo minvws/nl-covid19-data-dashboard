@@ -35,6 +35,10 @@
     font-weight: 800;
     line-height: 2.75rem;
 
+    &::-ms-clear {
+      display: none;
+    }
+
     &::placeholder {
       font-weight: 400;
     }
