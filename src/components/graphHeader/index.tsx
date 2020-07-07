@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react';
 
 import styles from './graphHeader.module.scss';
-import ScreenReaderOnly from 'components/screenReaderOnly';
 
 type GraphHeaderTypes = {
   Icon?: React.ComponentType;
@@ -30,7 +29,7 @@ const GraphHeader: FunctionComponent<GraphHeaderTypes> = ({
       */}
       <h3 ref={headingRef} tabIndex={headingRef ? -1 : undefined}>
         {title}
-        {regio && <ScreenReaderOnly>in {regio}</ScreenReaderOnly>}
+        {regio && ` in ${regio}`}
       </h3>
     </div>
   );

@@ -31,7 +31,9 @@ const nextConfig = {
       if (cacheGroups.framework) {
         cacheGroups.preact = Object.assign({}, cacheGroups.framework, { test });
         // if you want to merge the 2 small commons+framework chunks:
-        // cacheGroups.commons.name = 'framework';
+        cacheGroups.commons.name = 'framework';
+      } else {
+        cacheGroups.preact = { name: 'commons', chunks: 'all', test };
       }
     }
 
