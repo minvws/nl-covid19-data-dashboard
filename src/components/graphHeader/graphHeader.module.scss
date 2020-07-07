@@ -22,9 +22,12 @@
   margin-right: $default-margin;
   width: 48px;
   height: 48px;
+  padding: $default-margin / 4;
 
-  @media screen and (min-width: 768px) {
-    width: 64px;
-    height: 64px;
+  svg {
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+    object-fit: contain;
   }
 }

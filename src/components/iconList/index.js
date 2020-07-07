@@ -58,7 +58,7 @@ function CollapseIconListItem(props) {
           >
             <span>
               {item.text}
-              <Arrow className={styles.arrow} />
+              <Arrow className={styles.arrow} width={13} height={8} />
             </span>
           </button>
         </h4>

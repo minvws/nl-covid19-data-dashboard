@@ -24,6 +24,8 @@
   cursor: pointer;
 
   svg {
+    width: 1em;
+    height: auto;
     margin-left: $default-margin / 2;
     transition: all 0.3s ease-out;
   }
