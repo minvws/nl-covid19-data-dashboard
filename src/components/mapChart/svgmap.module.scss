@@ -14,45 +14,32 @@
   height: 100%;
 }
 
-.regio-link {
-  path {
-    fill: white;
-    stroke: $icon-color;
-    stroke-width: 0.5;
-  }
-
-  &:hover,
-  &:active {
-    path {
-      fill: rgba(1, 104, 155, 0.5);
-    }
-  }
-
-  &:focus {
-    outline: none;
-    path {
-      stroke: $icon-color;
-      stroke-width: 3;
-    }
+.regio {
+  fill: white;
+  stroke: $icon-color;
+  stroke-width: 0.5;
+  cursor: pointer;
+  &:hover {
+    fill: rgba(1, 104, 155, 0.5);
   }
 }
 
-.regio-link-selected {
-  path {
-    fill: $icon-color !important;
-    stroke: none;
-  }
+.selected {
+  fill: $icon-color !important;
+  stroke: none;
 }
 
 .container {
+  margin: $default-margin 0;
   padding: 0 $default-padding;
   display: flex;
   justify-content: center;
-  max-width: 35rem;
+  max-width: 35em;
 }
 
 @media screen and (min-width: 960px) {
   .container {
+    margin: $default-margin * 4 0;
     padding-right: $default-padding * 4;
     padding-left: 0;
     max-width: 100%;

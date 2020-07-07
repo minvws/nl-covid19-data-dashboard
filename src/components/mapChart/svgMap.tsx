@@ -1,9 +1,8 @@
+import { FunctionComponent } from 'react';
+
 import styles from './svgmap.module.scss';
 
-import { FunctionComponent } from 'react';
-import Link from 'next/link';
-
-import { SafetyRegion } from 'pages/regio';
+import regioData from 'data';
 
 const regions = [
   {
@@ -159,12 +158,12 @@ const regions = [
 ];
 
 type SvgMapTypes = {
-  safetyRegions: SafetyRegion[];
-  selected: SafetyRegion;
+  selected: any;
+  setSelection: (item: any) => void;
 };
 
 const SvgMap: FunctionComponent<SvgMapTypes> = (props) => {
-  const { safetyRegions, selected } = props;
+  const { selected, setSelection } = props;
 
   return (
     <div className={styles.container}>
@@ -181,26 +180,21 @@ const SvgMap: FunctionComponent<SvgMapTypes> = (props) => {
         >
           <g>
             {regions.map((region) => {
-              const safetyRegion = safetyRegions.find(
-                (el) => el.id === region.id
-              );
-
-              const isSelected = selected?.id === region.id;
-              const className = `${styles['regio-link']} ${
-                isSelected ? styles['regio-link-selected'] : ''
-              }`;
+              let classNameCombined = styles.regio;
+              if (selected && region.id === selected.id) {
+                classNameCombined += ` ${styles.selected}`;
+              }
 
               return (
-                <Link
-                  key={region.id}
-                  href={`/regio?regio=${safetyRegion.code}`}
-                  scroll={false}
-                  shallow
-                >
-                  <a className={className} aria-label={safetyRegion.name}>
-                    <path key={`region-${region.id}`} d={region.d} />
-                  </a>
-                </Link>
+                <path
+                  key={`region-${region.id}`}
+                  className={classNameCombined}
+                  d={region.d}
+                  onClick={() => {
+                    const item = regioData.find((x) => x.id === region.id);
+                    setSelection(item);
+                  }}
+                />
               );
             })}
           </g>
