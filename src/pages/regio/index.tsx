@@ -116,7 +116,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
     return selectedRegioCode
       ? safetyRegions.find((el) => el.code === selectedRegioCode)
       : null;
-  }, [router]);
+  }, [router.query?.regio, safetyRegions]);
 
   const contentRef = useRef(null);
   const selectRegioWrapperRef = useRef(null);
@@ -169,7 +169,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
     }
 
     fetchData();
-  }, [selectedRegio]);
+  }, [dispatch, selectedRegio, state]);
 
   return (
     <MaxWidth>
@@ -179,7 +179,6 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
           <SelectMunicipality
             municipalities={municipalities}
             safetyRegions={safetyRegions}
-            selectedSafetyRegion={selectedRegio}
             setSelectedSafetyRegion={setSelectedRegio}
           />
 
