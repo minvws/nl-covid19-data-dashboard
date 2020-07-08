@@ -179,6 +179,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
           <SelectMunicipality
             municipalities={municipalities}
             safetyRegions={safetyRegions}
+            selectedSafetyRegion={selectedRegio}
             setSelectedSafetyRegion={setSelectedRegio}
           />
 

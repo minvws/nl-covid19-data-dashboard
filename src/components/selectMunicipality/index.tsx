@@ -1,7 +1,7 @@
 import styles from './styles.module.scss';
 
 import { useCombobox } from 'downshift';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { SafetyRegion, MunicipalityMapping } from 'pages/regio';
 import Arrow from 'assets/white-arrow.svg';
@@ -11,11 +11,17 @@ import ScreenReaderOnly from 'components/screenReaderOnly';
 type SelectMunicipalityProps = {
   municipalities: MunicipalityMapping[];
   safetyRegions: SafetyRegion[];
+  selectedSafetyRegion: SafetyRegion;
   setSelectedSafetyRegion: (code: SafetyRegion['code']) => void;
 };
 
 const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
-  const { municipalities, safetyRegions, setSelectedSafetyRegion } = props;
+  const {
+    municipalities,
+    safetyRegions,
+    selectedSafetyRegion,
+    setSelectedSafetyRegion,
+  } = props;
 
   // Set the full list of municipalities as the initial state.
   const [items, setItems] = useState(() => municipalities);
@@ -138,6 +144,14 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
     getA11yStatusMessage,
     getA11ySelectionMessage,
   });
+
+  useEffect(() => {
+    if (selectedSafetyRegion && selectedItem) {
+      if (selectedSafetyRegion.code !== selectedItem.safetyRegion) {
+        reset();
+      }
+    }
+  }, [selectedSafetyRegion, selectedItem, reset]);
 
   return (
     <div className={styles.root}>
