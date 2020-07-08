@@ -1,6 +1,8 @@
 {
   "metadata": {
-    "titel": "Nationaal Dashboard Coronavirus COVID-19 | Rijksoverheid.nl"
+    "title": "Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
+    "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
+    "url": "https://coronadashboard.rijksoverheid.nl"
   },
   "ic_opnames_per_dag": {
     "title": "Intensive care-opnames per dag",
@@ -33,7 +35,6 @@
       "text": "Stichting NICE"
     }
   },
-
   "verdenkingen_huisartsen": {
     "title": "Aantal patiënten waarvan huisartsen COVID-19 vermoeden",
     "text": "Aantal door de huisarts geregistreerde verdenkingen van COVID-19, per 100.000 inwoners, per week.",
@@ -56,7 +57,6 @@
       "text": "Nivel Zorgregistraties Eerste Lijn"
     }
   },
-
   "ziekenhuisopnames_per_dag": {
     "title": "Ziekenhuisopnames per dag",
     "text": "Aantal opnames per dag, gemiddeld over de afgelopen 3 dagen.",
@@ -223,7 +223,6 @@
     "title": "Informatie per regio",
     "text": "Bekijk de belangrijkste cijfers voor uw veiligheidsregio."
   },
-
   "verpleeghuis_besmette_locaties": {
     "title": "Aantal besmette locaties",
     "text": "Aantal nieuwe locaties waarbij tenminste één bewoner positief getest is, per dag.",
@@ -302,7 +301,6 @@
   "geen_selectie": {
     "text": "Deze cijfers zijn binnenkort beschikbaar"
   },
-
   "rioolwater_metingen": {
     "title": "Rioolwatermeting",
     "text": "Het aantal virusdeeltjes in een milliliter rioolwater, afkomstig van 28 locaties in Nederland. Het aantal meetpunten wordt in de komende weken verder uitgebreid naar meer dan 300 locaties.",

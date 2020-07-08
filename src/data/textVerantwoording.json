@@ -1,6 +1,8 @@
 {
   "metadata": {
-    "titel": "Cijferverantwoording Coronavirus COVID-19 Dashboard | Rijksoverheid.nl"
+    "title": "Cijferverantwoording Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
+    "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
+    "url": "https://coronadashboard.rijksoverheid.nl/verantwoording"
   },
   "verantwoording": {
     "title": "Cijferverantwoording",

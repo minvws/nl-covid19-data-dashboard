@@ -30,6 +30,9 @@ import GraphHeader from 'components/graphHeader';
 import formatDecimal from 'utils/formatDec';
 import IconList from 'components/iconList';
 
+import openGraphImage from 'assets/sharing/og-landelijke-cijfers.png?url';
+import twitterImage from 'assets/sharing/twitter-landelijke-cijfers.png?url';
+
 const AreaChart = dynamic(() => import('components/areaChart'));
 const BarChart = dynamic(() => import('components/barChart'));
 const LineChart = dynamic(() => import('components/lineChart'));
@@ -642,6 +645,10 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
   );
 };
 
-Home.getLayout = Layout.getLayout();
+Home.getLayout = Layout.getLayout({
+  ...siteText.metadata,
+  openGraphImage,
+  twitterImage,
+});
 
 export default Home;

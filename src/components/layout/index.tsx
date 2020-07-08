@@ -1,27 +1,27 @@
 import React from 'react';
 
 import Link from 'next/link';
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import styles from './layout.module.scss';
 import MaxWidth from 'components/maxWidth';
 import text from 'data/textLayout.json';
 import useMediaQuery from 'utils/useMediaQuery';
+import SEOHead, { SEOHeadProps } from 'components/seoHead';
 
-export type LayoutProps = {
-  title?: string;
-  description?: string;
-};
+export type LayoutProps = SEOHeadProps;
 
 export type FunctionComponentWithLayout<P> = React.FC<P> & {
-  getLayout?: (title?: string) => (page: any) => any;
+  getLayout?: (seoProps?: SEOHeadProps) => (page: any) => any;
 };
 
 const Layout: FunctionComponentWithLayout<LayoutProps> = ({
   children,
-  title = 'Dashboard Coronavirus COVID-19 | Rijksoverheid.nl',
-  description = 'Informatie over de ontwikkeling van het coronavirus in Nederland.',
+  title,
+  description,
+  openGraphImage,
+  twitterImage,
+  url,
 }) => {
   const router = useRouter();
 
@@ -32,34 +32,13 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = ({
 
   return (
     <>
-      <Head>
-        <title key="title">{title}</title>
-        <meta name="og:locale" content="nl_NL" />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <meta key="ogTitle" property="og:title" content={title} />
-        <meta key="description" name="description" content={description} />
-        <meta
-          key="ogDescripton"
-          property="og:description"
-          content={description}
-        />
-        <meta key="ogType" property="og:type" content="website" />
-        <meta
-          key="image"
-          name="image"
-          content="https://coronadashboard.rijksoverheid.nl/banner.jpg"
-        />
-        <meta
-          key="ogImage"
-          name="og:image"
-          content="https://coronadashboard.rijksoverheid.nl/banner.jpg"
-        />
-        <meta
-          key="ogUrl"
-          name="og:url"
-          content="https://coronadashboard.rijksoverheid.nl"
-        />
-      </Head>
+      <SEOHead
+        title={title}
+        description={description}
+        openGraphImage={openGraphImage}
+        twitterImage={twitterImage}
+        url={url}
+      />
 
       <div className={styles.skiplinks}>
         <a href="#content">{text.skiplinks.inhoud}</a>
@@ -195,6 +174,8 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = ({
   );
 };
 
-Layout.getLayout = (title) => (page) => <Layout title={title}>{page}</Layout>;
+Layout.getLayout = (seoProps) => (page) => (
+  <Layout {...seoProps}>{page}</Layout>
+);
 
 export default Layout;

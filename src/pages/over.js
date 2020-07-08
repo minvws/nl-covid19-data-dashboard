@@ -5,7 +5,14 @@ import text from 'data/textOver.json';
 import styles from './over.module.scss';
 import ReplaceLinks from 'components/replaceLinks';
 
-Over.getLayout = Layout.getLayout(text.metadata.titel);
+import openGraphImage from 'assets/sharing/og-over.png?url';
+import twitterImage from 'assets/sharing/twitter-over.png?url';
+
+Over.getLayout = Layout.getLayout({
+  ...text.metadata,
+  openGraphImage,
+  twitterImage,
+});
 
 export default function Over() {
   return (

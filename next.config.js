@@ -1,5 +1,6 @@
 const withPlugins = require('next-compose-plugins');
 const withPrefresh = require('@prefresh/next');
+const withOptimizedImages = require('next-optimized-images');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
@@ -57,4 +58,11 @@ const nextConfig = {
   },
 };
 
-module.exports = withPlugins([withBundleAnalyzer, withPrefresh], nextConfig);
+module.exports = withPlugins(
+  [
+    withBundleAnalyzer,
+    withPrefresh,
+    [withOptimizedImages, { handleImages: ['jpeg', 'png', 'webp'] }],
+  ],
+  nextConfig
+);
