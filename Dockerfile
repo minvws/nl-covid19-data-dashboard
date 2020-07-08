@@ -9,7 +9,7 @@ RUN yarn build
 FROM bitnami/nginx:latest
 
 COPY --from=react-build /app/out /app
-COPY nginx.conf /opt/bitnami/nginx/conf
+COPY nginx.conf nginx_headers.conf /opt/bitnami/nginx/conf/
 
 EXPOSE 8080
 CMD ["nginx", "-g", "daemon off;"]
