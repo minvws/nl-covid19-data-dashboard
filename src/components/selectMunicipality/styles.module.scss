@@ -47,6 +47,14 @@
 
 .open {
   background-color: $button-color;
+
+  svg {
+    width: 1rem;
+    height: auto;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
   &:focus {
     outline: 2px dotted white;
     outline-offset: -2px;
@@ -56,10 +64,17 @@
 .reset {
   display: flex;
   align-items: center;
-  // font-size: 1.5em;
   line-height: 1;
   color: $text-color-grey;
   background-color: white;
+
+  svg {
+    width: 1rem;
+    height: auto;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
   &:focus {
     outline: 2px dotted $text-color-grey;
     outline-offset: -2px;
