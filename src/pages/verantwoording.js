@@ -9,10 +9,9 @@ import openGraphImage from 'assets/sharing/og-cijferverantwoording.png?url';
 import twitterImage from 'assets/sharing/twitter-cijferverantwoording.png?url';
 
 Verantwoording.getLayout = Layout.getLayout({
-  title: text.metadata.titel,
+  ...text.metadata,
   openGraphImage,
   twitterImage,
-  url: 'https://coronadashboard.rijksoverheid.nl/verantwoording',
 });
 
 export default function Verantwoording() {

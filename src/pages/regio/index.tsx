@@ -369,10 +369,9 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
 };
 
 Regio.getLayout = Layout.getLayout({
-  title: siteText.metadata.titel,
+  ...siteText.metadata,
   openGraphImage,
   twitterImage,
-  url: 'https://coronadashboard.rijksoverheid.nl/regio',
 });
 
 export default Regio;

@@ -9,10 +9,9 @@ import openGraphImage from 'assets/sharing/og-over.png?url';
 import twitterImage from 'assets/sharing/twitter-over.png?url';
 
 Over.getLayout = Layout.getLayout({
-  title: text.metadata.titel,
+  ...text.metadata,
   openGraphImage,
   twitterImage,
-  url: 'https://coronadashboard.rijksoverheid.nl/over',
 });
 
 export default function Over() {

@@ -62,10 +62,7 @@ module.exports = withPlugins(
   [
     withBundleAnalyzer,
     withPrefresh,
-    [
-      withOptimizedImages,
-      { handleImages: ['jpeg', 'png', 'webp'], optimizeImageInDev: false },
-    ],
+    [withOptimizedImages, { handleImages: ['jpeg', 'png', 'webp'] }],
   ],
   nextConfig
 );

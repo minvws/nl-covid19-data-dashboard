@@ -1,6 +1,8 @@
 {
   "metadata": {
-    "titel": "Regionaal Dashboard Coronavirus COVID-19 | Rijksoverheid.nl"
+    "title": "Regionaal Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
+    "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
+    "url": "https://coronadashboard.rijksoverheid.nl/regio"
   },
   "regionaal_ziekenhuisopnames_per_dag": {
     "title": "Ziekenhuisopnames per dag",

@@ -646,12 +646,9 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
 };
 
 Home.getLayout = Layout.getLayout({
-  title: 'Dashboard Coronavirus COVID-19 | Rijksoverheid.nl',
-  description:
-    'Informatie over de ontwikkeling van het coronavirus in Nederland.',
+  ...siteText.metadata,
   openGraphImage,
   twitterImage,
-  url: 'https://coronadashboard.rijksoverheid.nl',
 });
 
 export default Home;
