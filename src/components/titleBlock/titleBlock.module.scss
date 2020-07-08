@@ -10,6 +10,7 @@
     color: $icon-color;
     width: 3rem;
     height: auto;
+    max-height: 3rem;
     margin-right: $default-margin;
   }
 
@@ -28,6 +29,7 @@
     svg {
       width: 4rem;
       height: auto;
+      max-height: 4rem;
       margin-right: $default-margin * 2;
     }
 
