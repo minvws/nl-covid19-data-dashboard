@@ -18,12 +18,15 @@
   border: 0;
   border-top: 1px solid #c4c4c4;
   font-family: 'RO Sans', Calibri, sans-serif;
-  font-size: 18px;
+  font-size: 1.125em;
   color: $text-color-active;
   text-align: center;
   cursor: pointer;
 
   svg {
+    width: 1rem;
+    height: auto;
+    max-height: 0.5rem;
     margin-left: $default-margin / 2;
     transition: all 0.3s ease-out;
   }

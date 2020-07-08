@@ -68,6 +68,7 @@
 }
 
 .arrow {
+  flex: 0 0 auto;
   transition: transform 120ms ease-in;
   transform: rotate(-90deg);
   [aria-expanded='true'] & {

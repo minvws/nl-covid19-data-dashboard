@@ -45,7 +45,9 @@
 }
 
 .linkCardArrow {
-  flex: 0 0 16px;
+  width: 1rem;
+  height: auto;
+  max-height: 1rem;
   display: block;
   margin-left: auto;
 }

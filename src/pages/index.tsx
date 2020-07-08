@@ -17,11 +17,11 @@ import Arts from '../assets/arts.svg';
 import Ziekenhuis from '../assets/ziekenhuis.svg';
 import Ziektegolf from '../assets/ziektegolf.svg';
 import Getest from '../assets/test.svg';
-import Repro from '../assets/reproductie.svg';
-import VerpleegHuis from '../assets/verpleeg.svg';
-import Virus from '../assets/virus.svg';
+import Repro from '../assets/reproductiegetal.svg';
+import VerpleegHuisZorg from '../assets/verpleeghuiszorg.svg';
+import CoronaVirus from '../assets/coronavirus.svg';
 import Locatie from '../assets/locaties.svg';
-import MedischeScreening from '../assets/medische_screening.svg';
+import MedischeScreening from '../assets/medische-screening.svg';
 import RioolwaterMonitoring from '../assets/rioolwater-monitoring.svg';
 
 import { store } from 'store';
@@ -474,7 +474,7 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
 
       <section className="home-section">
         <TitleBlock
-          Icon={VerpleegHuis}
+          Icon={VerpleegHuisZorg}
           title={siteText.blok_verpleeghuis_zorg.title}
         >
           <p>{siteText.blok_verpleeghuis_zorg.text}</p>
@@ -596,7 +596,7 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
           <GraphContainer>
             <GraphContent>
               <GraphHeader
-                Icon={Virus}
+                Icon={CoronaVirus}
                 title={siteText.verpleeghuis_oversterfte.title}
               />
               <p>{siteText.verpleeghuis_oversterfte.text}</p>

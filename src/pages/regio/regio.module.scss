@@ -54,3 +54,19 @@
     width: 66%;
   }
 }
+
+.safety-region-data-loading {
+  display: inline-block;
+  color: $text-color-grey;
+  margin-top: $default-margin;
+  margin-bottom: $default-margin;
+
+  svg {
+    width: 1rem;
+    height: auto;
+    max-height: 1rem;
+    position: relative;
+    margin-right: $default-margin/2;
+    top: 2px;
+  }
+}

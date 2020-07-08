@@ -106,6 +106,12 @@
   list-style: none;
   font-size: 1.125em;
 
+  li {
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+  }
+
   li:before {
     content: '\203a';
     margin-right: $default-margin / 2;
