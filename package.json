@@ -38,6 +38,8 @@
     "eslint-plugin-react-hooks": "^4.0.4",
     "husky": "^4.2.5",
     "identity-obj-proxy": "^3.0.0",
+    "imagemin-mozjpeg": "^9.0.0",
+    "imagemin-optipng": "^8.0.0",
     "jest": "^26.0.1",
     "lint-staged": "^10.2.11",
     "next-compose-plugins": "^2.2.0",

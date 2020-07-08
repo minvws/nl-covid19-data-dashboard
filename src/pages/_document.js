@@ -10,7 +10,6 @@ class MyDocument extends Document {
     return (
       <Html lang="nl-NL">
         <Head />
-
         <body>
           <Main />
 

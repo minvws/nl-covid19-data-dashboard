@@ -31,6 +31,9 @@ import ScreenReaderOnly from 'components/screenReaderOnly';
 import formatDecimal from 'utils/formatDec';
 import SelectMunicipality from 'components/selectMunicipality';
 
+import openGraphImage from 'assets/sharing/og-regionale-cijfers.png?url';
+import twitterImage from 'assets/sharing/twitter-regionale-cijfers.png?url';
+
 export type SafetyRegion = {
   id: number;
   code: string;
@@ -365,6 +368,11 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
   );
 };
 
-Regio.getLayout = Layout.getLayout(siteText.metadata.titel);
+Regio.getLayout = Layout.getLayout({
+  title: siteText.metadata.titel,
+  openGraphImage,
+  twitterImage,
+  url: 'https://coronadashboard.rijksoverheid.nl/regio',
+});
 
 export default Regio;

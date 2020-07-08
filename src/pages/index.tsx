@@ -30,6 +30,9 @@ import GraphHeader from 'components/graphHeader';
 import formatDecimal from 'utils/formatDec';
 import IconList from 'components/iconList';
 
+import openGraphImage from 'assets/sharing/og-landelijke-cijfers.png?url';
+import twitterImage from 'assets/sharing/twitter-landelijke-cijfers.png?url';
+
 const AreaChart = dynamic(() => import('components/areaChart'));
 const BarChart = dynamic(() => import('components/barChart'));
 const LineChart = dynamic(() => import('components/lineChart'));
@@ -642,6 +645,13 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
   );
 };
 
-Home.getLayout = Layout.getLayout();
+Home.getLayout = Layout.getLayout({
+  title: 'Dashboard Coronavirus COVID-19 | Rijksoverheid.nl',
+  description:
+    'Informatie over de ontwikkeling van het coronavirus in Nederland.',
+  openGraphImage,
+  twitterImage,
+  url: 'https://coronadashboard.rijksoverheid.nl',
+});
 
 export default Home;
