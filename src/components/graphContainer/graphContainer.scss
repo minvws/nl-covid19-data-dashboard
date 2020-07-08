@@ -14,17 +14,3 @@
     margin-bottom: $default-margin;
   }
 }
-
-.regioDataLoading {
-  display: inline-block;
-  color: $text-color-grey;
-  margin-top: $default-margin;
-  margin-bottom: $default-margin;
-  overflow: visible;
-
-  svg {
-    position: relative;
-    margin-right: $default-margin/2;
-    top: 2px;
-  }
-}

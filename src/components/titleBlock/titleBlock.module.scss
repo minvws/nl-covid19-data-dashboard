@@ -6,7 +6,10 @@
   margin-bottom: $default-margin;
 
   svg {
-    flex: 0 0 48px;
+    fill: currentColor;
+    color: $icon-color;
+    width: 3rem;
+    height: auto;
     margin-right: $default-margin;
   }
 
@@ -23,7 +26,8 @@
     margin-bottom: $default-margin * 2;
 
     svg {
-      flex: 0 0 64px;
+      width: 4rem;
+      height: auto;
       margin-right: $default-margin * 2;
     }
 

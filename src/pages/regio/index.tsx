@@ -91,6 +91,15 @@ export async function getStaticProps(): Promise<RegioStaticProps> {
   };
 }
 
+const RegioDataLoading = () => {
+  return (
+    <span className={styles['safety-region-data-loading']}>
+      <Warning />
+      {siteText.geen_selectie.text}
+    </span>
+  );
+};
+
 const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
   const { municipalities, safetyRegions } = props;
 
@@ -196,12 +205,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
 
               <p>{siteText.regionaal_ziekenhuisopnames_per_dag.text}</p>
 
-              {!selectedRegio && (
-                <span className={'regioDataLoading'}>
-                  <Warning />
-                  {siteText.geen_selectie.text}
-                </span>
-              )}
+              {!selectedRegio && <RegioDataLoading />}
 
               {selectedRegio && (
                 <>
@@ -267,12 +271,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
 
               <p>{siteText.regionaal_positief_geteste_personen.text}</p>
 
-              {!selectedRegio && (
-                <span className={'regioDataLoading'}>
-                  <Warning />
-                  {siteText.geen_selectie.text}
-                </span>
-              )}
+              {!selectedRegio && <RegioDataLoading />}
 
               {selectedRegio && (
                 <>
