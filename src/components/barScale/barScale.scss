@@ -19,24 +19,6 @@
     margin-top: $default-margin;
     overflow: visible;
   }
-
-  .scale {
-    display: flex;
-    flex-direction: row;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    font-size: 16px;
-    color: $text-color-grey;
-    .minValue,
-    .maxValue {
-      position: absolute;
-      top: 45px;
-    }
-    .maxValue {
-      right: 0px;
-    }
-  }
 }
 
 .value {

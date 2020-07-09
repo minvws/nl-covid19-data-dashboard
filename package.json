@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "d3-scale": "^3.2.1",
     "downshift": "^5.4.2",
     "highcharts": "^8.1.0",
     "highcharts-react-official": "^3.0.0",
