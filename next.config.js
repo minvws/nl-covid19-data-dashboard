@@ -11,19 +11,6 @@ const nextConfig = {
     REACT_APP_DATA_SRC: '/json/',
   },
   webpack(config, { dev, isServer }) {
-    config.module.rules.push({
-      test: /\.svg$/,
-      use: [
-        {
-          loader: '@svgr/webpack',
-          options: { typescript: false },
-        },
-      ],
-      issuer: {
-        test: /\.(js|ts)x?$/,
-      },
-    });
-
     // Move Preact into the framework chunk instead of duplicating in routes:
     const splitChunks = config.optimization && config.optimization.splitChunks;
     if (splitChunks) {
@@ -62,7 +49,7 @@ module.exports = withPlugins(
   [
     withBundleAnalyzer,
     withPrefresh,
-    [withOptimizedImages, { handleImages: ['jpeg', 'png', 'webp'] }],
+    [withOptimizedImages, { handleImages: ['jpeg', 'png', 'webp', 'svg'] }],
   ],
   nextConfig
 );
