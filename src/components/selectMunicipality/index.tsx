@@ -4,6 +4,7 @@ import { useCombobox } from 'downshift';
 import { useState } from 'react';
 
 import { SafetyRegion, MunicipalityMapping } from 'pages/regio';
+
 import Arrow from 'assets/white-arrow.svg?sprite';
 import ResetIcon from 'assets/reset.svg?sprite';
 import ScreenReaderOnly from 'components/screenReaderOnly';

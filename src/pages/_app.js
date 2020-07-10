@@ -14,28 +14,38 @@ if (process.env.NODE_ENV === 'development') {
   require('preact/debug');
 }
 
-import { useEffect } from 'react';
+import App from 'next/app';
 import Router from 'next/router';
 import * as piwik from '../lib/piwik';
 
 import { StateProvider } from 'store';
 
-function MyApp({ Component, pageProps }) {
-  const getLayout = Component.getLayout || ((page) => page);
+class CoronaDashboard extends App {
+  componentDidMount() {
+    Router.events.on('routeChangeComplete', this.handleRouteChange);
+  }
 
-  useEffect(() => {
-    const handleRouteChange = (url) => {
-      piwik.pageview(url);
-    };
-    Router.events.on('routeChangeComplete', handleRouteChange);
-    return () => {
-      Router.events.off('routeChangeComplete', handleRouteChange);
-    };
-  }, []);
+  componentWillUnmount() {
+    Router.events.off('routeChangeComplete', this.handleRouteChange);
+  }
 
-  return (
-    <StateProvider>{getLayout(<Component {...pageProps} />)}</StateProvider>
-  );
+  componentDidCatch(error, errorInfo) {
+    // eslint-disable-next-line no-console
+    console.trace(error, errorInfo);
+  }
+
+  handleRouteChange(url) {
+    piwik.pageview(url);
+  }
+
+  render() {
+    const { Component, pageProps } = this.props;
+    const getLayout = Component.getLayout || ((page) => page);
+
+    return (
+      <StateProvider>{getLayout(<Component {...pageProps} />)}</StateProvider>
+    );
+  }
 }
 
-export default MyApp;
+export default CoronaDashboard;
