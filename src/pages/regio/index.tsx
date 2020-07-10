@@ -33,6 +33,7 @@ import SelectMunicipality from 'components/selectMunicipality';
 
 import openGraphImage from 'assets/sharing/og-regionale-cijfers.png?url';
 import twitterImage from 'assets/sharing/twitter-regionale-cijfers.png?url';
+import Head from 'next/head';
 
 export type SafetyRegion = {
   id: number;
@@ -172,201 +173,235 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
   }, [dispatch, selectedRegio, state]);
 
   return (
-    <MaxWidth>
-      <LastUpdated />
-      <div className={styles['regio-grid']}>
-        <div className={styles['map-column']} ref={selectRegioWrapperRef}>
-          <SelectMunicipality
-            municipalities={municipalities}
-            safetyRegions={safetyRegions}
-            setSelectedSafetyRegion={setSelectedRegio}
-          />
+    <>
+      <Head>
+        <link
+          key="dc-type"
+          rel="dcterms:type"
+          href="https://standaarden.overheid.nl/owms/terms/statistieken"
+        />
+        <link
+          key="dc-type-title"
+          rel="dcterms:type"
+          href="https://standaarden.overheid.nl/owms/terms/statistieken"
+          title="statistieken"
+        />
+      </Head>
 
-          <div className={styles['map-container']}>
-            <div className={styles['safety-region-header']}>
-              <p>Uw veiligheidsregio</p>
-              {selectedRegio && <h2>{selectedRegio.name}</h2>}
-              {!selectedRegio && (
-                <span className={styles['select-safety-region']}>
-                  Selecteer een veiligheidsregio of gemeente
-                </span>
-              )}
-            </div>
-            <SvgMap safetyRegions={safetyRegions} selected={selectedRegio} />
-          </div>
-        </div>
+      <MaxWidth>
+        <LastUpdated />
+        <div className={styles['regio-grid']}>
+          <div className={styles['map-column']} ref={selectRegioWrapperRef}>
+            <SelectMunicipality
+              municipalities={municipalities}
+              safetyRegions={safetyRegions}
+              setSelectedSafetyRegion={setSelectedRegio}
+            />
 
-        <div className={styles['panel-column']}>
-          <GraphContainer>
-            <GraphContent>
-              <GraphHeader
-                Icon={Ziekenhuis}
-                title={siteText.regionaal_ziekenhuisopnames_per_dag.title}
-                headingRef={contentRef}
-                regio={selectedRegio?.name}
-              />
-
-              <p>{siteText.regionaal_ziekenhuisopnames_per_dag.text}</p>
-
-              {!selectedRegio && <RegioDataLoading />}
-
-              {selectedRegio && (
-                <>
-                  {!state[selectedRegio?.code]?.intake_hospital_ma && (
-                    <LoadingPlaceholder />
-                  )}
-
-                  {state[selectedRegio?.code]?.intake_hospital_ma && (
-                    <BarScale
-                      min={siteText.regionaal_ziekenhuisopnames_per_dag.bar.min}
-                      max={siteText.regionaal_ziekenhuisopnames_per_dag.bar.max}
-                      value={state[selectedRegio.code].intake_hospital_ma.value}
-                      screenReaderText={
-                        siteText.regionaal_ziekenhuisopnames_per_dag.bar
-                          .screen_reader_graph_content
-                      }
-                      id="regio_opnames"
-                      gradient={
-                        siteText.regionaal_ziekenhuisopnames_per_dag.bar
-                          .gradient
-                      }
-                    />
-                  )}
-                </>
-              )}
-            </GraphContent>
-
-            {selectedRegio && (
-              <Collapse
-                openText={siteText.regionaal_ziekenhuisopnames_per_dag.open}
-                sluitText={siteText.regionaal_ziekenhuisopnames_per_dag.sluit}
-              >
-                <h4>
-                  {siteText.regionaal_ziekenhuisopnames_per_dag.fold_title}
-                </h4>
-                <p>{siteText.regionaal_ziekenhuisopnames_per_dag.fold}</p>
-                <h4>
-                  {siteText.regionaal_ziekenhuisopnames_per_dag.graph_title}
-                </h4>
-                {state[selectedRegio?.code]?.intake_hospital_ma?.list && (
-                  <LineChart
-                    data={state[selectedRegio?.code]?.intake_hospital_ma?.list}
-                  />
+            <div className={styles['map-container']}>
+              <div className={styles['safety-region-header']}>
+                <p>Uw veiligheidsregio</p>
+                {selectedRegio && <h2>{selectedRegio.name}</h2>}
+                {!selectedRegio && (
+                  <span className={styles['select-safety-region']}>
+                    Selecteer een veiligheidsregio of gemeente
+                  </span>
                 )}
-                <Metadata
-                  period={state[selectedRegio?.code]?.intake_hospital_ma?.list}
-                  dataSource={siteText.regionaal_ziekenhuisopnames_per_dag.bron}
-                  lastUpdated={
-                    state[selectedRegio?.code]?.intake_hospital_ma?.lastupdate *
-                    1000
-                  }
+              </div>
+              <SvgMap safetyRegions={safetyRegions} selected={selectedRegio} />
+            </div>
+          </div>
+
+          <div className={styles['panel-column']}>
+            <GraphContainer>
+              <GraphContent>
+                <GraphHeader
+                  Icon={Ziekenhuis}
+                  title={siteText.regionaal_ziekenhuisopnames_per_dag.title}
+                  headingRef={contentRef}
+                  regio={selectedRegio?.name}
                 />
-              </Collapse>
-            )}
-          </GraphContainer>
 
-          <GraphContainer>
-            <GraphContent>
-              <GraphHeader
-                Icon={Getest}
-                title={siteText.regionaal_positief_geteste_personen.title}
-                regio={selectedRegio?.name}
-              />
+                <p>{siteText.regionaal_ziekenhuisopnames_per_dag.text}</p>
 
-              <p>{siteText.regionaal_positief_geteste_personen.text}</p>
+                {!selectedRegio && <RegioDataLoading />}
 
-              {!selectedRegio && <RegioDataLoading />}
+                {selectedRegio && (
+                  <>
+                    {!state[selectedRegio?.code]?.intake_hospital_ma && (
+                      <LoadingPlaceholder />
+                    )}
+
+                    {state[selectedRegio?.code]?.intake_hospital_ma && (
+                      <BarScale
+                        min={
+                          siteText.regionaal_ziekenhuisopnames_per_dag.bar.min
+                        }
+                        max={
+                          siteText.regionaal_ziekenhuisopnames_per_dag.bar.max
+                        }
+                        value={
+                          state[selectedRegio.code].intake_hospital_ma.value
+                        }
+                        screenReaderText={
+                          siteText.regionaal_ziekenhuisopnames_per_dag.bar
+                            .screen_reader_graph_content
+                        }
+                        id="regio_opnames"
+                        gradient={
+                          siteText.regionaal_ziekenhuisopnames_per_dag.bar
+                            .gradient
+                        }
+                      />
+                    )}
+                  </>
+                )}
+              </GraphContent>
 
               {selectedRegio && (
-                <>
-                  {!state[selectedRegio?.code]
-                    ?.infected_people_delta_normalized && (
-                    <LoadingPlaceholder />
-                  )}
-                  {state[selectedRegio.code]
-                    ?.infected_people_delta_normalized && (
-                    <BarScale
-                      min={siteText.regionaal_positief_geteste_personen.bar.min}
-                      max={siteText.regionaal_positief_geteste_personen.bar.max}
-                      value={
-                        state[selectedRegio.code]
-                          .infected_people_delta_normalized.value
-                      }
-                      screenReaderText={
-                        siteText.regionaal_positief_geteste_personen.bar
-                          .screen_reader_graph_content
-                      }
-                      id="regio_infecties"
-                      gradient={
-                        siteText.regionaal_positief_geteste_personen.bar
-                          .gradient
+                <Collapse
+                  openText={siteText.regionaal_ziekenhuisopnames_per_dag.open}
+                  sluitText={siteText.regionaal_ziekenhuisopnames_per_dag.sluit}
+                >
+                  <h4>
+                    {siteText.regionaal_ziekenhuisopnames_per_dag.fold_title}
+                  </h4>
+                  <p>{siteText.regionaal_ziekenhuisopnames_per_dag.fold}</p>
+                  <h4>
+                    {siteText.regionaal_ziekenhuisopnames_per_dag.graph_title}
+                  </h4>
+                  {state[selectedRegio?.code]?.intake_hospital_ma?.list && (
+                    <LineChart
+                      data={
+                        state[selectedRegio?.code]?.intake_hospital_ma?.list
                       }
                     />
                   )}
-
-                  {state[selectedRegio?.code]?.infected_people_total && (
-                    <h3>
-                      {
-                        siteText.regionaal_positief_geteste_personen
-                          .metric_title
-                      }{' '}
-                      <span style={{ color: '#01689b' }}>
-                        {formatDecimal(
-                          state[selectedRegio?.code]?.infected_people_total
-                            ?.value
-                        )}
-                      </span>
-                    </h3>
-                  )}
-                </>
-              )}
-            </GraphContent>
-
-            {selectedRegio && (
-              <Collapse
-                openText={siteText.regionaal_positief_geteste_personen.open}
-                sluitText={siteText.regionaal_positief_geteste_personen.sluit}
-              >
-                <h4>
-                  {siteText.regionaal_positief_geteste_personen.fold_title}
-                </h4>
-                <p>{siteText.regionaal_positief_geteste_personen.fold}</p>
-                <h4>
-                  {siteText.regionaal_positief_geteste_personen.graph_title}
-                </h4>
-
-                {state[selectedRegio?.code]?.infected_people_delta_normalized
-                  ?.list && (
-                  <LineChart
-                    data={
-                      state[selectedRegio.code].infected_people_delta_normalized
-                        .list
+                  <Metadata
+                    period={
+                      state[selectedRegio?.code]?.intake_hospital_ma?.list
+                    }
+                    dataSource={
+                      siteText.regionaal_ziekenhuisopnames_per_dag.bron
+                    }
+                    lastUpdated={
+                      state[selectedRegio?.code]?.intake_hospital_ma
+                        ?.lastupdate * 1000
                     }
                   />
-                )}
+                </Collapse>
+              )}
+            </GraphContainer>
 
-                <Metadata
-                  period={
-                    state[selectedRegio?.code]?.infected_people_delta_normalized
-                      ?.list
-                  }
-                  dataSource={siteText.regionaal_positief_geteste_personen.bron}
-                  lastUpdated={
-                    state[selectedRegio?.code]?.infected_people_delta_normalized
-                      ?.lastupdate * 1000
-                  }
+            <GraphContainer>
+              <GraphContent>
+                <GraphHeader
+                  Icon={Getest}
+                  title={siteText.regionaal_positief_geteste_personen.title}
+                  regio={selectedRegio?.name}
                 />
-              </Collapse>
-            )}
-          </GraphContainer>
+
+                <p>{siteText.regionaal_positief_geteste_personen.text}</p>
+
+                {!selectedRegio && <RegioDataLoading />}
+
+                {selectedRegio && (
+                  <>
+                    {!state[selectedRegio?.code]
+                      ?.infected_people_delta_normalized && (
+                      <LoadingPlaceholder />
+                    )}
+                    {state[selectedRegio.code]
+                      ?.infected_people_delta_normalized && (
+                      <BarScale
+                        min={
+                          siteText.regionaal_positief_geteste_personen.bar.min
+                        }
+                        max={
+                          siteText.regionaal_positief_geteste_personen.bar.max
+                        }
+                        value={
+                          state[selectedRegio.code]
+                            .infected_people_delta_normalized.value
+                        }
+                        screenReaderText={
+                          siteText.regionaal_positief_geteste_personen.bar
+                            .screen_reader_graph_content
+                        }
+                        id="regio_infecties"
+                        gradient={
+                          siteText.regionaal_positief_geteste_personen.bar
+                            .gradient
+                        }
+                      />
+                    )}
+
+                    {state[selectedRegio?.code]?.infected_people_total && (
+                      <h3>
+                        {
+                          siteText.regionaal_positief_geteste_personen
+                            .metric_title
+                        }{' '}
+                        <span style={{ color: '#01689b' }}>
+                          {formatDecimal(
+                            state[selectedRegio?.code]?.infected_people_total
+                              ?.value
+                          )}
+                        </span>
+                      </h3>
+                    )}
+                  </>
+                )}
+              </GraphContent>
+
+              {selectedRegio && (
+                <Collapse
+                  openText={siteText.regionaal_positief_geteste_personen.open}
+                  sluitText={siteText.regionaal_positief_geteste_personen.sluit}
+                >
+                  <h4>
+                    {siteText.regionaal_positief_geteste_personen.fold_title}
+                  </h4>
+                  <p>{siteText.regionaal_positief_geteste_personen.fold}</p>
+                  <h4>
+                    {siteText.regionaal_positief_geteste_personen.graph_title}
+                  </h4>
+
+                  {state[selectedRegio?.code]?.infected_people_delta_normalized
+                    ?.list && (
+                    <LineChart
+                      data={
+                        state[selectedRegio.code]
+                          .infected_people_delta_normalized.list
+                      }
+                    />
+                  )}
+
+                  <Metadata
+                    period={
+                      state[selectedRegio?.code]
+                        ?.infected_people_delta_normalized?.list
+                    }
+                    dataSource={
+                      siteText.regionaal_positief_geteste_personen.bron
+                    }
+                    lastUpdated={
+                      state[selectedRegio?.code]
+                        ?.infected_people_delta_normalized?.lastupdate * 1000
+                    }
+                  />
+                </Collapse>
+              )}
+            </GraphContainer>
+          </div>
         </div>
-      </div>
-      <ScreenReaderOnly>
-        <button onClick={focusRegioSelect}>
-          {siteText.terug_naar_regio_selectie.text}
-        </button>
-      </ScreenReaderOnly>
-    </MaxWidth>
+        <ScreenReaderOnly>
+          <button onClick={focusRegioSelect}>
+            {siteText.terug_naar_regio_selectie.text}
+          </button>
+        </ScreenReaderOnly>
+      </MaxWidth>
+    </>
   );
 };
 

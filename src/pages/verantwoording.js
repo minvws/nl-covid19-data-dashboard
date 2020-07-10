@@ -1,3 +1,5 @@
+import Head from 'next/head';
+
 import Layout from 'components/layout';
 import MaxWidth from 'components/maxWidth';
 
@@ -16,22 +18,38 @@ Verantwoording.getLayout = Layout.getLayout({
 
 export default function Verantwoording() {
   return (
-    <div className={styles.container}>
-      <MaxWidth>
-        <div className={styles.maxwidth}>
-          <h2>{text.verantwoording.title}</h2>
-          <dl className={styles.faqList}>
-            {text.verantwoording.cijfers.map((item) => (
-              <>
-                <dt>{item.cijfer}</dt>
-                <dd>
-                  <ReplaceLinks>{item.verantwoording}</ReplaceLinks>
-                </dd>
-              </>
-            ))}
-          </dl>
-        </div>
-      </MaxWidth>
-    </div>
+    <>
+      <Head>
+        <link
+          key="dc-type"
+          rel="dcterms:type"
+          href="https://standaarden.overheid.nl/owms/terms/webpagina"
+        />
+        <link
+          key="dc-type-title"
+          rel="dcterms:type"
+          href="https://standaarden.overheid.nl/owms/terms/webpagina"
+          title="webpagina"
+        />
+      </Head>
+
+      <div className={styles.container}>
+        <MaxWidth>
+          <div className={styles.maxwidth}>
+            <h2>{text.verantwoording.title}</h2>
+            <dl className={styles.faqList}>
+              {text.verantwoording.cijfers.map((item) => (
+                <>
+                  <dt>{item.cijfer}</dt>
+                  <dd>
+                    <ReplaceLinks>{item.verantwoording}</ReplaceLinks>
+                  </dd>
+                </>
+              ))}
+            </dl>
+          </div>
+        </MaxWidth>
+      </div>
+    </>
   );
 }
