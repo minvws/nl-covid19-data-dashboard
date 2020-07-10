@@ -218,16 +218,17 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
 
                   {state[selectedRegio?.code]?.intake_hospital_ma && (
                     <BarScale
-                      min={siteText.regionaal_ziekenhuisopnames_per_dag.min}
-                      max={siteText.regionaal_ziekenhuisopnames_per_dag.max}
+                      min={siteText.regionaal_ziekenhuisopnames_per_dag.bar.min}
+                      max={siteText.regionaal_ziekenhuisopnames_per_dag.bar.max}
                       value={state[selectedRegio.code].intake_hospital_ma.value}
                       screenReaderText={
-                        siteText.regionaal_ziekenhuisopnames_per_dag
+                        siteText.regionaal_ziekenhuisopnames_per_dag.bar
                           .screen_reader_graph_content
                       }
                       id="regio_opnames"
                       gradient={
-                        siteText.regionaal_ziekenhuisopnames_per_dag.gradient
+                        siteText.regionaal_ziekenhuisopnames_per_dag.bar
+                          .gradient
                       }
                     />
                   )}
@@ -285,19 +286,20 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                   {state[selectedRegio.code]
                     ?.infected_people_delta_normalized && (
                     <BarScale
-                      min={siteText.regionaal_positief_geteste_personen.min}
-                      max={siteText.regionaal_positief_geteste_personen.max}
+                      min={siteText.regionaal_positief_geteste_personen.bar.min}
+                      max={siteText.regionaal_positief_geteste_personen.bar.max}
                       value={
                         state[selectedRegio.code]
                           .infected_people_delta_normalized.value
                       }
                       screenReaderText={
-                        siteText.regionaal_positief_geteste_personen
+                        siteText.regionaal_positief_geteste_personen.bar
                           .screen_reader_graph_content
                       }
                       id="regio_infecties"
                       gradient={
-                        siteText.regionaal_positief_geteste_personen.gradient
+                        siteText.regionaal_positief_geteste_personen.bar
+                          .gradient
                       }
                     />
                   )}

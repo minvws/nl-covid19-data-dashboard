@@ -55,7 +55,7 @@ const BarScale: FunctionComponent<BarscaleProps> = ({
         })}
       </ScreenReaderOnly>
 
-      <div className={styles.root} aria-hidden>
+      <div className={styles.root} aria-hidden="true">
         <svg xmlns="http://www.w3.org/2000/svg">
           <defs>
             <clipPath id={`cut-off${id}-${rand.current}`}>
