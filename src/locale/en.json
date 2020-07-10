@@ -1004,7 +1004,7 @@
         },
         "terug_naar_regio_selectie": {
             "text": {
-                "translation": "",
+                "translation": "Back to region selection",
                 "notes": ""
             }
         }
@@ -1090,7 +1090,7 @@
                 },
                 {
                     "cijfer": {
-                        "translation": "",
+                        "translation": "Open source data processing",
                         "notes": ""
                     },
                     "verantwoording": {
