@@ -26,6 +26,49 @@ function SEOHead(props: SEOHeadProps): any {
     <Head>
       <title key="title">{title}</title>
 
+      <meta
+        key="dc-title"
+        property="dcterms:title"
+        content={title}
+        xml-lang="nl"
+      />
+      <meta
+        key="dc-identifier"
+        property="dcterms:identifier"
+        content={url}
+        datatype="xsd:anyURI"
+      />
+      <meta
+        key="dc-lang"
+        property="dcterms:language"
+        content="nl-NL"
+        datatype="xsd:language"
+      />
+      <meta
+        key="dc-authority"
+        property="overheid:authority"
+        datatype="overheid:Ministerie"
+        content="Ministerie van Volksgezondheid, Welzijn en Sport"
+      />
+      <link
+        key="dc-authority-title"
+        rel="overheid:authority"
+        href="http://standaarden.overheid.nl/owms/terms/Ministerie_van_Volksgezondheid,_Welzijn_en_Sport"
+        title="Ministerie van Volksgezondheid, Welzijn en Sport"
+      />
+      <meta
+        key="dc-creator"
+        property="dcterms:creator"
+        datatype="overheid:Ministerie"
+        content="Ministerie van Volksgezondheid, Welzijn en Sport"
+      />
+      <link
+        key="dc-creator-title"
+        rel="dcterms:creator"
+        href="http://standaarden.overheid.nl/owms/terms/Ministerie_van_Volksgezondheid,_Welzijn_en_Sport"
+        title="Ministerie van Volksgezondheid, Welzijn en Sport"
+      />
+
       <meta key="description" name="description" content={description} />
       <meta key="image" name="image" content={openGraphImage} />
 
