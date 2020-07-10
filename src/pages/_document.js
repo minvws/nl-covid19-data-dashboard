@@ -13,9 +13,9 @@ class MyDocument extends Document {
       <Html lang="nl-NL">
         <Head />
         <body>
-          <Main />
-
           <div dangerouslySetInnerHTML={{ __html: this.props.sprites }} />
+
+          <Main />
 
           <script src="/piwik.js"></script>
 

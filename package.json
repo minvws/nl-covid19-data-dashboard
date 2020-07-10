@@ -7,8 +7,6 @@
     "downshift": "^5.4.2",
     "highcharts": "^8.1.0",
     "highcharts-react-official": "^3.0.0",
-    "imagemin-pngquant": "^9.0.0",
-    "imagemin-svgo": "^8.0.0",
     "linkifyjs": "^2.1.9",
     "next": "^9.4.4",
     "preact": "^10.4.4",
@@ -18,7 +16,6 @@
     "react-dom": "github:preact-compat/react-dom#1.0.0",
     "react-masonry-css": "^1.0.14",
     "react-ssr-prepass": "npm:preact-ssr-prepass@^1.0.1",
-    "svg-sprite-loader": "^5.0.0",
     "swr": "^0.2.2",
     "unfetch": "^4.1.0"
   },
@@ -46,6 +43,7 @@
     "identity-obj-proxy": "^3.0.0",
     "imagemin-mozjpeg": "^9.0.0",
     "imagemin-optipng": "^8.0.0",
+    "imagemin-svgo": "^8.0.0",
     "jest": "^26.0.1",
     "lint-staged": "^10.2.11",
     "next-compose-plugins": "^2.2.0",
@@ -53,6 +51,7 @@
     "node-sass": "^4.14.1",
     "prettier": "^2.0.5",
     "react-refresh": "^0.8.3",
+    "svg-sprite-loader": "^5.0.0",
     "typescript": "^3.9.5"
   },
   "husky": {
