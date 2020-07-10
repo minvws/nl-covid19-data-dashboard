@@ -7,29 +7,31 @@
   "ic_opnames_per_dag": {
     "title": "Intensive care-opnames per dag",
     "text": "Aantal opnames per dag, gemiddeld over de afgelopen 3 dagen.",
-    "screen_reader_graph_content": "{{value}} intensive care-opnames per dag. Signaalwaarde: {{kritiekeWaarde}} opnames per dag.",
     "fold_title": "Wat betekent dit?",
     "fold": "Aantal mensen met bevestigd COVID-19 dat per dag op een intensive care-afdeling van een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de afgelopen drie dagen.",
     "graph_title": "Verloop over tijd",
     "open": "Verberg uitleg",
     "sluit": "Meer uitleg en data",
-    "min": 0,
-    "max": 30,
     "signaalwaarde": 10,
-    "gradient": [
-      {
-        "color": "#69c253",
-        "offset": 0
-      },
-      {
-        "color": "#D3A500",
-        "offset": 0.35
-      },
-      {
-        "color": "#f35065",
-        "offset": 0.67
-      }
-    ],
+    "bar": {
+      "screen_reader_graph_content": "{{value}} intensive care-opnames per dag. Signaalwaarde: {{kritiekeWaarde}} opnames per dag.",
+      "min": 0,
+      "max": 30,
+      "gradient": [
+        {
+          "color": "#69c253",
+          "value": 0
+        },
+        {
+          "color": "#D3A500",
+          "value": 10
+        },
+        {
+          "color": "#f35065",
+          "value": 20
+        }
+      ]
+    },
     "bron": {
       "href": "https://stichting-nice.nl/",
       "text": "Stichting NICE"
@@ -39,19 +41,21 @@
     "title": "Aantal patiënten waarvan huisartsen COVID-19 vermoeden",
     "text": "Aantal door de huisarts geregistreerde verdenkingen van COVID-19, per 100.000 inwoners, per week.",
     "graph_title": "Verloop over tijd",
-    "screen_reader_graph_content": "{{value}} patiënten waarvan huisartsen COVID-19 vermoeden, per 100.000 inwoners, per week.",
     "fold_title": "Wat betekent dit?",
     "fold": "Huisartsen registreren bij het spreken van een patiënt, de vernomen klachten. Elke week berekent het Nivel aan de hand van de geregistreerde klachten, het aantal patiënten met een verdenking op COVID-19 in de afgelopen week.",
     "open": "Verberg uitleg",
     "sluit": "Meer uitleg en data",
-    "min": 0,
-    "max": 140,
-    "gradient": [
-      {
-        "color": "#3391CC",
-        "offset": 0
-      }
-    ],
+    "bar": {
+      "min": 0,
+      "max": 140,
+      "screen_reader_graph_content": "{{value}} patiënten waarvan huisartsen COVID-19 vermoeden, per 100.000 inwoners, per week.",
+      "gradient": [
+        {
+          "color": "#3391CC",
+          "value": 0
+        }
+      ]
+    },
     "bron": {
       "href": "https://www.nivel.nl/nl/nivel-zorgregistraties-eerste-lijn/nivel-zorgregistraties-eerste-lijn",
       "text": "Nivel Zorgregistraties Eerste Lijn"
@@ -60,29 +64,31 @@
   "ziekenhuisopnames_per_dag": {
     "title": "Ziekenhuisopnames per dag",
     "text": "Aantal opnames per dag, gemiddeld over de afgelopen 3 dagen.",
-    "screen_reader_graph_content": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{kritiekeWaarde}} opnames per dag.",
     "fold_title": "Wat betekent dit?",
     "fold": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen.",
     "graph_title": "Verloop over tijd",
     "open": "Verberg uitleg",
     "sluit": "Meer uitleg en data",
-    "min": 0,
-    "max": 100,
     "signaalwaarde": 40,
-    "gradient": [
-      {
-        "color": "#69c253",
-        "offset": 0
-      },
-      {
-        "color": "#D3A500",
-        "offset": 0.4
-      },
-      {
-        "color": "#f35065",
-        "offset": 0.9
-      }
-    ],
+    "bar": {
+      "screen_reader_graph_content": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{kritiekeWaarde}} opnames per dag.",
+      "min": 0,
+      "max": 100,
+      "gradient": [
+        {
+          "color": "#69c253",
+          "value": 0
+        },
+        {
+          "color": "#D3A500",
+          "value": 40
+        },
+        {
+          "color": "#f35065",
+          "value": 90
+        }
+      ]
+    },
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -91,7 +97,6 @@
   "positief_geteste_personen": {
     "title": "Positief geteste mensen",
     "text": "Aantal positief geteste mensen per 100.000 inwoners per dag.",
-    "screen_reader_graph_content": "{{value}} positief geteste mensen per dag.",
     "fold_title": "Wat betekent dit?",
     "fold": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
     "metric_title": "Aantal positief geteste mensen:",
@@ -99,14 +104,17 @@
     "graph_title": "Verdeling naar leeftijd (totaal aantal mensen)",
     "open": "Verberg uitleg",
     "sluit": "Meer uitleg en data",
-    "min": 0,
-    "max": 5,
-    "gradient": [
-      {
-        "color": "#3391CC",
-        "offset": 0
-      }
-    ],
+    "bar": {
+      "screen_reader_graph_content": "{{value}} positief geteste mensen per dag.",
+      "min": 0,
+      "max": 5,
+      "gradient": [
+        {
+          "color": "#3391CC",
+          "value": 0
+        }
+      ]
+    },
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -115,21 +123,23 @@
   "besmettelijke_personen": {
     "title": "Aantal besmettelijke mensen",
     "text": "Een berekening van hoeveel mensen met COVID-19 per 100.000 inwoners besmettelijk zijn voor anderen. Dit getal wordt door het RIVM berekend.",
-    "screen_reader_graph_content": "{{value}} besmettelijke personen per 100.000 inwoners.",
     "fold_title": "Wat betekent dit?",
     "fold": "Als iemand het coronavirus oploopt, dan is deze persoon een tijd lang besmettelijk voor anderen. Hoe lang dit duurt verschilt van persoon tot persoon. Het aantal besmettelijke mensen is een schatting op basis van een aantal gegevensbronnen. Het exacte aantal is onbekend, maar we kunnen wel aangeven of het gaat om tientallen, honderden, duizenden of meer. ",
     "metric_title": "Geschat aantal besmettelijke mensen in Nederland:",
     "graph_title": "Verloop over tijd",
     "open": "Verberg uitleg",
     "sluit": "Meer uitleg en data",
-    "min": 0,
-    "max": 50,
-    "gradient": [
-      {
-        "color": "#3391CC",
-        "offset": 0
-      }
-    ],
+    "bar": {
+      "screen_reader_graph_content": "{{value}} besmettelijke personen per 100.000 inwoners.",
+      "min": 0,
+      "max": 50,
+      "gradient": [
+        {
+          "color": "#3391CC",
+          "value": 0
+        }
+      ]
+    },
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -158,19 +168,19 @@
     "gradient": [
       {
         "color": "#69c253",
-        "offset": 0
+        "value": 0
       },
       {
         "color": "#69c253",
-        "offset": 0.5
+        "value": 1
       },
       {
         "color": "#D3A500",
-        "offset": 0.5052
+        "value": 1.0104
       },
       {
         "color": "#f35065",
-        "offset": 0.5625
+        "value": 1.125
       }
     ],
     "bron": {
@@ -233,15 +243,17 @@
     "graph_title": "Verloop over tijd",
     "open": "Verberg uitleg",
     "sluit": "Meer uitleg en data",
-    "min": 0,
-    "max": 30,
-    "gradient": [
-      {
-        "color": "#3391CC",
-        "offset": 0
-      }
-    ],
-    "screen_reader_graph_content": "{{value}} nieuwe locaties waarbij tenminste één bewoner positief getest is, per dag.",
+    "bar": {
+      "screen_reader_graph_content": "{{value}} nieuwe locaties waarbij tenminste één bewoner positief getest is, per dag.",
+      "min": 0,
+      "max": 30,
+      "gradient": [
+        {
+          "color": "#3391CC",
+          "value": 0
+        }
+      ]
+    },
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -250,21 +262,23 @@
   "verpleeghuis_positief_geteste_personen": {
     "title": "Aantal positief geteste bewoners",
     "text": "Aantal positief geteste bewoners in verpleeghuizen per dag.",
-    "screen_reader_graph_content": "{{value}} positief geteste bewoners.",
     "fold_title": "Wat betekent dit?",
     "fold": "Dit getal is een inschatting van het aantal gemelde bewoners in verpleeghuizen dat in Nederland positief getest is en COVID-19 heeft. Dit getal verwijst naar de datum vóór de datum van de laatste update.",
     "graph_title": "Verloop over tijd",
     "open": "Verberg uitleg",
     "sluit": "Meer uitleg en data",
-    "min": 0,
-    "max": 100,
     "signaalwaarde": 40,
-    "gradient": [
-      {
-        "color": "#3391CC",
-        "offset": 0
-      }
-    ],
+    "bar": {
+      "screen_reader_graph_content": "{{value}} positief geteste bewoners.",
+      "min": 0,
+      "max": 100,
+      "gradient": [
+        {
+          "color": "#3391CC",
+          "value": 0
+        }
+      ]
+    },
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -279,21 +293,21 @@
     "graph_title": "Verloop over tijd",
     "open": "Verberg uitleg",
     "sluit": "Meer uitleg en data",
-    "min": 0,
-    "max": 50,
-    "gradient": [
-      {
-        "color": "#3391CC",
-        "offset": 0
-      }
-    ],
+    "bar": {
+      "min": 0,
+      "max": 50,
+      "gradient": [
+        {
+          "color": "#3391CC",
+          "value": 0
+        }
+      ]
+    },
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     }
   },
-  "min": 0,
-  "max": 50,
   "blok_verpleeghuis_zorg": {
     "title": "Verpleeghuiszorg",
     "text": "Informatie over de verspreiding van het coronavirus in verpleeghuizen."
@@ -305,19 +319,21 @@
     "title": "Rioolwatermeting",
     "text": "Het aantal virusdeeltjes in een milliliter rioolwater, afkomstig van 28 locaties in Nederland. Het aantal meetpunten wordt in de komende weken verder uitgebreid naar meer dan 300 locaties.",
     "graph_title": "Verloop over tijd",
-    "screen_reader_graph_content": "{{value}} COVID-19 RNA-deeltjes gemeten per mililiter in rioolwater.",
     "fold_title": "Wat betekent dit?",
     "fold": "In rioolwater kun je ziekteverwekkers zoals het nieuwe coronavirus meten omdat die met uitwerpselen (ontlasting) in het rioolwater komen. Onderzoekers testen eens per week rioolwater dat over 24 uur verzameld is. Dit onderzoek laat vrij snel zien hoeveel virusdeeltjes in het rioolwater zitten afkomstig uit uitwerpselen van besmette personen. Uit het huidige onderzoek kunnen nog geen conclusies worden getrokken. Het is de bedoeling dat het aantal meetpunten wordt uitgebreid van 28 naar meer dan 300 voor 1 september 2020. Pas als het onderzoek volledig loopt, kunnen hier conclusies aan worden verbonden.",
     "open": "Verberg uitleg",
     "sluit": "Meer uitleg en data",
-    "min": 0,
-    "max": 100,
-    "gradient": [
-      {
-        "color": "#3391CC",
-        "offset": 0
-      }
-    ],
+    "bar": {
+      "screen_reader_graph_content": "{{value}} COVID-19 RNA-deeltjes gemeten per mililiter in rioolwater.",
+      "min": 0,
+      "max": 100,
+      "gradient": [
+        {
+          "color": "#3391CC",
+          "value": 0
+        }
+      ]
+    },
     "bron": {
       "text": "RIVM Onderzoek rioolwater",
       "href": "https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater"

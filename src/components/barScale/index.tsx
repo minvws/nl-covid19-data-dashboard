@@ -5,12 +5,17 @@ import ScreenReaderOnly from 'components/screenReaderOnly';
 import replaceVariablesInText from 'utils/replaceVariablesInText';
 import { scaleLinear, scaleQuantile, scaleThreshold } from 'd3-scale';
 
+type GradientStop = {
+  color: string;
+  value: number;
+};
+
 type BarscaleProps = {
   min: number;
   max: number;
   value: number;
   kritiekeWaarde?: number;
-  gradient: any;
+  gradient: GradientStop[];
   id: string;
   screenReaderText: string;
 };
@@ -34,11 +39,11 @@ const BarScale: FunctionComponent<BarscaleProps> = ({
   const x = scaleLinear().domain([min, max]).range([0, 100]);
 
   const textAlign = scaleThreshold()
-    .domain([33, 66])
+    .domain([20, 80])
     .range(['start', 'middle', 'end']);
 
   const color = scaleQuantile()
-    .domain(gradient.map((el) => el.offset))
+    .domain(gradient.map((el) => el.value))
     .range(gradient.map((el) => el.color));
 
   return (
@@ -68,11 +73,11 @@ const BarScale: FunctionComponent<BarscaleProps> = ({
               id={`barColor${id}-${rand.current}`}
               gradientUnits="userSpaceOnUse"
             >
-              {color.domain().map((stop) => (
+              {color.domain().map((value) => (
                 <stop
-                  key={`stop-${stop}`}
-                  stopColor={color(stop)}
-                  offset={stop}
+                  key={`stop-${value}`}
+                  stopColor={color(value)}
+                  offset={`${x(value)}%`}
                 />
               ))}
             </linearGradient>
@@ -111,7 +116,7 @@ const BarScale: FunctionComponent<BarscaleProps> = ({
             />
 
             <text
-              className="value"
+              className={styles.value}
               x={`${x(value)}%`}
               y={16}
               textAnchor={textAlign(x(value))}
@@ -129,7 +134,7 @@ const BarScale: FunctionComponent<BarscaleProps> = ({
                 stroke="#595959"
               />
               <text
-                className="kritLabel"
+                className={styles.criticalValue}
                 x={`${x(kritiekeWaarde)}%`}
                 y={72}
                 textAnchor={textAlign(x(kritiekeWaarde))}

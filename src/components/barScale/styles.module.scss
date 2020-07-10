@@ -1,18 +1,26 @@
 @import 'scss/variables.scss';
 
 .root {
-  width: calc(100% - 1rem);
+  width: 100%;
   height: 5rem;
   margin-top: $default-margin;
   margin-bottom: $default-margin;
 
   svg {
-    shape-rendering: auto;
+    shape-rendering: crispEdges;
     width: 100%;
     height: 100%;
-    // margin-top: $default-margin;
-    // overflow: visible;
   }
+}
+
+.value {
+  font-size: 1.25em;
+  font-weight: bold;
+  color: $text-color;
+}
+
+.criticalValue {
+  fill: $text-color-grey;
 }
 
 .tick {
