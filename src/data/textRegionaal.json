@@ -7,28 +7,30 @@
   "regionaal_ziekenhuisopnames_per_dag": {
     "title": "Ziekenhuisopnames per dag",
     "text": "Aantal opnames per dag, gemiddeld over de afgelopen 3 dagen.",
-    "screen_reader_graph_content": "{{value}} opnames.",
     "fold_title": "Wat betekent dit?",
     "fold": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen.",
     "graph_title": "Verloop over tijd",
     "open": "Verberg uitleg",
     "sluit": "Meer uitleg en data",
-    "min": 0,
-    "max": 100,
-    "gradient": [
-      {
-        "color": "#69c253",
-        "offset": 0
-      },
-      {
-        "color": "#D3A500",
-        "offset": 0.4
-      },
-      {
-        "color": "#f35065",
-        "offset": 0.9
-      }
-    ],
+    "bar": {
+      "screen_reader_graph_content": "{{value}} opnames.",
+      "min": 0,
+      "max": 100,
+      "gradient": [
+        {
+          "color": "#69c253",
+          "value": 0
+        },
+        {
+          "color": "#D3A500",
+          "value": 40
+        },
+        {
+          "color": "#f35065",
+          "value": 90
+        }
+      ]
+    },
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -37,48 +39,23 @@
   "regionaal_positief_geteste_personen": {
     "title": "Positief geteste mensen",
     "text": "Aantal positief geteste mensen per 100.000 inwoners per dag.",
-    "screen_reader_graph_content": "{{value}} positief geteste personen.",
     "metric_title": "Aantal positief geteste mensen:",
     "fold_title": "Wat betekent dit?",
     "fold": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
     "graph_title": "Verloop over tijd",
     "open": "Verberg uitleg",
     "sluit": "Meer uitleg en data",
-    "min": 0,
-    "max": 5,
-    "gradient": [
-      {
-        "color": "#3391CC",
-        "offset": 0
-      }
-    ],
-    "bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
-      "text": "RIVM"
-    }
-  },
-  "regionaal_besmettelijke_personen": {
-    "title": "Aantal besmettelijke mensen",
-    "text": "Een schatting van hoeveel mensen per 100.000 inwoners met COVID-19 besmettelijk zijn voor anderen.",
-    "fold_title": "Wat betekent dit?",
-    "fold": "Deze tekst volgt nog.",
-    "graph_title": "Verloop over tijd",
-    "open": "Verberg uitleg",
-    "sluit": "Meer uitleg en data",
-    "gradient": [
-      {
-        "color": "#69c253",
-        "offset": 0
-      },
-      {
-        "color": "#D3A500",
-        "offset": 0.0833
-      },
-      {
-        "color": "#f35065",
-        "offset": 0.5625
-      }
-    ],
+    "bar": {
+      "screen_reader_graph_content": "{{value}} positief geteste personen.",
+      "min": 0,
+      "max": 5,
+      "gradient": [
+        {
+          "color": "#3391CC",
+          "value": 0
+        }
+      ]
+    },
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
