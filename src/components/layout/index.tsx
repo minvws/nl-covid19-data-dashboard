@@ -9,6 +9,9 @@ import text from 'data/textLayout.json';
 import useMediaQuery from 'utils/useMediaQuery';
 import SEOHead, { SEOHeadProps } from 'components/seoHead';
 
+import logo from 'assets/logo-ro.svg';
+import logoSmall from 'assets/logo-ro-small.svg';
+
 export type LayoutProps = SEOHeadProps;
 
 export type FunctionComponentWithLayout<P> = React.FC<P> & {
@@ -49,11 +52,7 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = ({
         <div className={styles.logoWrapper}>
           <img
             className={styles.logo}
-            src={
-              showSmallLogo
-                ? '/images/logo-ro-small.svg'
-                : '/images/logo-ro.svg'
-            }
+            src={showSmallLogo ? logoSmall : logo}
             alt="Rijksoverheid"
           />
         </div>

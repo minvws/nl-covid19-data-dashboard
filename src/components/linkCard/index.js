@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import styles from './linkCard.module.scss';
-import Arrow from 'assets/white-arrow-lg.svg';
+import Arrow from 'assets/white-arrow-lg.svg?sprite';
 
 export default LinkCard;
 

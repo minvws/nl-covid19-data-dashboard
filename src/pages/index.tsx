@@ -13,16 +13,16 @@ import Layout from 'components/layout';
 import LinkCard from 'components/linkCard';
 import Metadata from 'components/metadata';
 
-import Arts from '../assets/arts.svg';
-import Ziekenhuis from '../assets/ziekenhuis.svg';
-import Ziektegolf from '../assets/ziektegolf.svg';
-import Getest from '../assets/test.svg';
-import Repro from '../assets/reproductiegetal.svg';
-import VerpleegHuisZorg from '../assets/verpleeghuiszorg.svg';
-import CoronaVirus from '../assets/coronavirus.svg';
-import Locatie from '../assets/locaties.svg';
-import MedischeScreening from '../assets/medische-screening.svg';
-import RioolwaterMonitoring from '../assets/rioolwater-monitoring.svg';
+import Arts from '../assets/arts.svg?sprite';
+import Ziekenhuis from '../assets/ziekenhuis.svg?sprite';
+import Ziektegolf from '../assets/ziektegolf.svg?sprite';
+import Getest from '../assets/test.svg?sprite';
+import Repro from '../assets/reproductiegetal.svg?sprite';
+import VerpleegHuisZorg from '../assets/verpleeghuiszorg.svg?sprite';
+import CoronaVirus from '../assets/coronavirus.svg?sprite';
+import Locatie from '../assets/locaties.svg?sprite';
+import MedischeScreening from '../assets/medische-screening.svg?sprite';
+import RioolwaterMonitoring from '../assets/rioolwater-monitoring.svg?sprite';
 
 import { store } from 'store';
 import siteText from 'data/textNationaal.json';

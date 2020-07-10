@@ -1,7 +1,7 @@
 import styles from './iconList.module.scss';
 import { useState } from 'react';
 import useCollapse from 'react-collapsed';
-import Arrow from 'assets/arrow.svg';
+import Arrow from 'assets/arrow.svg?sprite';
 
 export default IconList;
 function IconList(props) {

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import useCollapse from 'react-collapsed';
 
-import Arrow from 'assets/arrow.svg';
+import Arrow from 'assets/arrow.svg?sprite';
 
 const Collapse = ({ children, openText, sluitText }) => {
   const [open, setOpen] = React.useState(false);

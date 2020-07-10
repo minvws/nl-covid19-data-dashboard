@@ -10,15 +10,15 @@ import GraphHeader from 'components/graphHeader';
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
 import LastUpdated from 'components/lastUpdated';
-import Warning from 'assets/warn.svg';
 import Metadata from 'components/metadata';
 import LoadingPlaceholder from 'components/loadingPlaceholder';
 
 import { store } from 'store';
 import GraphContent from 'components/graphContent';
 
-import Ziekenhuis from 'assets/ziekenhuis.svg';
-import Getest from 'assets/test.svg';
+import Warning from 'assets/warn.svg?sprite';
+import Ziekenhuis from 'assets/ziekenhuis.svg?sprite';
+import Getest from 'assets/test.svg?sprite';
 
 import siteText from 'data/textRegionaal.json';
 
