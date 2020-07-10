@@ -1,7 +1,4 @@
 var _paq = _paq || [];
-_paq.push(['setCookieDomain', '*.rijksoverheid.nl']);
-_paq.push(['setDomains', ['*.rijksoverheid.nl']]);
-_paq.push(['enableHeartBeatTimer', 10]);
 _paq.push(['setLinkTrackingTimer', 750]);
 _paq.push(['trackPageView']);
 _paq.push(['enableLinkTracking']);
