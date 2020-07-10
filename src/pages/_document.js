@@ -1,9 +1,11 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
+import sprite from 'svg-sprite-loader/runtime/sprite.build';
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
     const initialProps = await Document.getInitialProps(ctx);
-    return { ...initialProps };
+    const sprites = sprite.stringify();
+    return { sprites, ...initialProps };
   }
 
   render() {
@@ -12,6 +14,8 @@ class MyDocument extends Document {
         <Head />
         <body>
           <Main />
+
+          <div dangerouslySetInnerHTML={{ __html: this.props.sprites }} />
 
           <script src="/piwik.js"></script>
 
