@@ -91,15 +91,15 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
 
               {state.NL?.intake_intensivecare_ma && (
                 <BarScale
-                  min={siteText.ic_opnames_per_dag.min}
-                  max={siteText.ic_opnames_per_dag.max}
+                  min={siteText.ic_opnames_per_dag.bar.min}
+                  max={siteText.ic_opnames_per_dag.bar.max}
+                  gradient={siteText.ic_opnames_per_dag.bar.gradient}
                   screenReaderText={
-                    siteText.ic_opnames_per_dag.screen_reader_graph_content
+                    siteText.ic_opnames_per_dag.bar.screen_reader_graph_content
                   }
                   kritiekeWaarde={siteText.ic_opnames_per_dag.signaalwaarde}
                   value={state.NL?.intake_intensivecare_ma.value}
                   id="ic"
-                  gradient={siteText.ic_opnames_per_dag.gradient}
                 />
               )}
             </GraphContent>
@@ -138,16 +138,18 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
 
               {state.NL?.intake_hospital_ma && (
                 <BarScale
-                  min={0}
-                  max={100}
-                  kritiekeWaarde={40}
+                  min={siteText.ziekenhuisopnames_per_dag.bar.min}
+                  max={siteText.ziekenhuisopnames_per_dag.bar.max}
+                  kritiekeWaarde={
+                    siteText.ziekenhuisopnames_per_dag.signaalwaarde
+                  }
                   screenReaderText={
-                    siteText.ziekenhuisopnames_per_dag
+                    siteText.ziekenhuisopnames_per_dag.bar
                       .screen_reader_graph_content
                   }
                   value={state.NL?.intake_hospital_ma.value}
                   id="opnames"
-                  gradient={siteText.ziekenhuisopnames_per_dag.gradient}
+                  gradient={siteText.ziekenhuisopnames_per_dag.bar.gradient}
                 />
               )}
             </GraphContent>
@@ -162,7 +164,9 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
               {state.NL?.intake_hospital_ma?.list && (
                 <LineChart
                   data={state.NL?.intake_hospital_ma.list}
-                  signaalwaarde={40}
+                  signaalwaarde={
+                    siteText.ziekenhuisopnames_per_dag.signaalwaarde
+                  }
                 />
               )}
 
@@ -183,15 +187,15 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
               <p>{siteText.positief_geteste_personen.text}</p>
               {state.NL?.infected_people_delta_normalized && (
                 <BarScale
-                  min={siteText.positief_geteste_personen.min}
-                  max={siteText.positief_geteste_personen.max}
+                  min={siteText.positief_geteste_personen.bar.min}
+                  max={siteText.positief_geteste_personen.bar.max}
                   screenReaderText={
-                    siteText.positief_geteste_personen
+                    siteText.positief_geteste_personen.bar
                       .screen_reader_graph_content
                   }
                   value={state.NL?.infected_people_delta_normalized.value}
                   id="positief"
-                  gradient={siteText.positief_geteste_personen.gradient}
+                  gradient={siteText.positief_geteste_personen.bar.gradient}
                 />
               )}
 
@@ -250,14 +254,15 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
               <p>{siteText.besmettelijke_personen.text}</p>
               {state.NL?.infectious_people_count_normalized && (
                 <BarScale
-                  min={siteText.besmettelijke_personen.min}
-                  max={siteText.besmettelijke_personen.max}
+                  min={siteText.besmettelijke_personen.bar.min}
+                  max={siteText.besmettelijke_personen.bar.max}
                   screenReaderText={
-                    siteText.besmettelijke_personen.screen_reader_graph_content
+                    siteText.besmettelijke_personen.bar
+                      .screen_reader_graph_content
                   }
                   value={state.NL?.infectious_people_count_normalized.value}
                   id="besmettelijk"
-                  gradient={siteText.besmettelijke_personen.gradient}
+                  gradient={siteText.besmettelijke_personen.bar.gradient}
                 />
               )}
 
@@ -389,14 +394,15 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
 
               {state.NL?.verdenkingen_huisartsen && (
                 <BarScale
-                  min={siteText.verdenkingen_huisartsen.min}
-                  max={siteText.verdenkingen_huisartsen.max}
+                  min={siteText.verdenkingen_huisartsen.bar.min}
+                  max={siteText.verdenkingen_huisartsen.bar.max}
                   screenReaderText={
-                    siteText.verdenkingen_huisartsen.screen_reader_graph_content
+                    siteText.verdenkingen_huisartsen.bar
+                      .screen_reader_graph_content
                   }
                   value={state.NL?.verdenkingen_huisartsen.value}
                   id="verdenkingen_huisartsen"
-                  gradient={siteText.verdenkingen_huisartsen.gradient}
+                  gradient={siteText.verdenkingen_huisartsen.bar.gradient}
                 />
               )}
             </GraphContent>
@@ -433,14 +439,14 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
 
               {state.NL?.rioolwater_metingen && (
                 <BarScale
-                  min={siteText.rioolwater_metingen.min}
-                  max={siteText.rioolwater_metingen.max}
+                  min={siteText.rioolwater_metingen.bar.min}
+                  max={siteText.rioolwater_metingen.bar.max}
                   screenReaderText={
-                    siteText.rioolwater_metingen.screen_reader_graph_content
+                    siteText.rioolwater_metingen.bar.screen_reader_graph_content
                   }
                   value={state.NL?.rioolwater_metingen.value}
                   id="rioolwater_metingen"
-                  gradient={siteText.rioolwater_metingen.gradient}
+                  gradient={siteText.rioolwater_metingen.bar.gradient}
                 />
               )}
             </GraphContent>
@@ -497,16 +503,16 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
               <p>{siteText.verpleeghuis_positief_geteste_personen.text}</p>
               {state.NL?.infected_people_nursery_count_daily && (
                 <BarScale
-                  min={siteText.verpleeghuis_positief_geteste_personen.min}
-                  max={siteText.verpleeghuis_positief_geteste_personen.max}
+                  min={siteText.verpleeghuis_positief_geteste_personen.bar.min}
+                  max={siteText.verpleeghuis_positief_geteste_personen.bar.max}
                   screenReaderText={
-                    siteText.verpleeghuis_positief_geteste_personen
+                    siteText.verpleeghuis_positief_geteste_personen.bar
                       .screen_reader_graph_content
                   }
                   value={state.NL?.infected_people_nursery_count_daily.value}
                   id="positief_verpleeghuis"
                   gradient={
-                    siteText.verpleeghuis_positief_geteste_personen.gradient
+                    siteText.verpleeghuis_positief_geteste_personen.bar.gradient
                   }
                 />
               )}
@@ -550,15 +556,17 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
 
               {state.NL?.total_newly_reported_locations && (
                 <BarScale
-                  min={siteText.verpleeghuis_besmette_locaties.min}
-                  max={siteText.verpleeghuis_besmette_locaties.max}
+                  min={siteText.verpleeghuis_besmette_locaties.bar.min}
+                  max={siteText.verpleeghuis_besmette_locaties.bar.max}
                   screenReaderText={
-                    siteText.verpleeghuis_besmette_locaties
+                    siteText.verpleeghuis_besmette_locaties.bar
                       .screen_reader_graph_content
                   }
                   value={state.NL?.total_newly_reported_locations.value}
                   id="besmette_locaties_verpleeghuis"
-                  gradient={siteText.verpleeghuis_besmette_locaties.gradient}
+                  gradient={
+                    siteText.verpleeghuis_besmette_locaties.bar.gradient
+                  }
                 />
               )}
             </GraphContent>
@@ -605,15 +613,15 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
               <p>{siteText.verpleeghuis_oversterfte.text}</p>
               {state.NL?.deceased_people_nursery_count_daily && (
                 <BarScale
-                  min={siteText.verpleeghuis_oversterfte.min}
-                  max={siteText.verpleeghuis_oversterfte.max}
+                  min={siteText.verpleeghuis_oversterfte.bar.min}
+                  max={siteText.verpleeghuis_oversterfte.bar.max}
                   screenReaderText={
                     siteText.verpleeghuis_oversterfte
                       .screen_reader_graph_content
                   }
                   value={state.NL?.deceased_people_nursery_count_daily.value}
                   id="over"
-                  gradient={siteText.verpleeghuis_oversterfte.gradient}
+                  gradient={siteText.verpleeghuis_oversterfte.bar.gradient}
                 />
               )}
             </GraphContent>

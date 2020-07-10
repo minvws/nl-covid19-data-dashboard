@@ -1,7 +1,6 @@
 import './index.css';
 import 'scss/style.scss';
 
-import 'components/barScale/barScale.scss';
 import 'components/collapse/collapse.scss';
 import 'components/graphContainer/graphContainer.scss';
 import 'components/graphContent/graphContent.scss';
