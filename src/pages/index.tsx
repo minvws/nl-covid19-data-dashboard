@@ -12,6 +12,7 @@ import TitleBlock from 'components/titleBlock';
 import Layout from 'components/layout';
 import LinkCard from 'components/linkCard';
 import Metadata from 'components/metadata';
+import Legenda from 'components/legenda';
 
 import Arts from '../assets/arts.svg';
 import Ziekenhuis from '../assets/ziekenhuis.svg';
@@ -376,13 +377,16 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                   />
                 )}
 
-                <p>
-                  Bij lage aantallen ziekenhuisopnames wordt de onzekerheid van
-                  het reproductiegetal groter en kan deze meer schommelen. Als
-                  de schatting boven de waarde 1 komt, moet eerst naar de
-                  bandbreedte worden gekeken voordat er conclusies kunnen worden
-                  getrokken.
-                </p>
+                <Legenda>
+                  <li className="blue">
+                    De effectieve R is een schatting. Om het reproductiegetal te
+                    berekenen is twee weken aan data nodig.
+                  </li>
+                  <li className="gray">
+                    De bandbreedte toont met zekerheid tussen welke waarden de R
+                    zich bevindt. Dit workdt wekelijks bijgewerkt.
+                  </li>
+                </Legenda>
 
                 <Metadata
                   period={state.NL?.reproduction_index?.list}

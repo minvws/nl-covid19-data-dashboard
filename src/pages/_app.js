@@ -2,6 +2,7 @@ import './index.css';
 import 'scss/style.scss';
 
 import 'components/collapse/collapse.scss';
+import 'components/legenda/legenda.scss';
 import 'components/graphContainer/graphContainer.scss';
 import 'components/graphContent/graphContent.scss';
 import 'components/lineChart/lineChart.scss';
