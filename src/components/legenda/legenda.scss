@@ -1,0 +1,18 @@
+@import 'scss/variables.scss';
+
+.legenda {
+  list-style-type: '—  ';
+
+  li.blue::marker {
+    color: #3391CC;
+  }
+
+  li.gray::marker {
+    color: #C4C4C4;
+  }
+  
+  ::marker {
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+}
