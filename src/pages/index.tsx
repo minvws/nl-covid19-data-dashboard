@@ -761,7 +761,7 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
 };
 
 Home.getLayout = Layout.getLayout({
-  ...siteText.metadata,
+  ...siteText.nationaal_metadata,
   openGraphImage,
   twitterImage,
 });

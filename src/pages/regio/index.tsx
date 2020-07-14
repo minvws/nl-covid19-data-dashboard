@@ -410,7 +410,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
 };
 
 Regio.getLayout = Layout.getLayout({
-  ...siteText.metadata,
+  ...siteText.regionaal_metadata,
   openGraphImage,
   twitterImage,
 });
