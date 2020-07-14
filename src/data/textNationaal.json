@@ -286,7 +286,7 @@
   },
   "verpleeghuis_oversterfte": {
     "title": "Sterfte",
-    "text": "Aantal overleden bewoners in verpleeghuizen met een vastgestelde COVID-19-besmetting dat overleden is per dag.",
+    "text": "Aantal overleden bewoners in verpleeghuizen met een vastgestelde COVID-19-besmetting per dag.",
     "screen_reader_graph_content": "{{value}} overleden bewoners.",
     "fold_title": "Wat betekent dit?",
     "fold": "Dit getal is een inschatting van het aantal gemelde verpleeghuisbewoners dat in Nederland overlijdt aan de gevolgen van het nieuwe coronavirus. Dit getal verwijst naar de datum vóór de datum van de laatste update.",
