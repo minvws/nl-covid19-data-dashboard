@@ -44,7 +44,7 @@ function BarChart(props) {
       },
       series: [
         {
-          data
+          data,
         },
       ],
     }),
