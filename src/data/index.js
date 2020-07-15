@@ -23,7 +23,7 @@ const regioData = [
   { name: 'Brabant-Noord', code: 'VR21', id: 21 },
   { name: 'Brabant-Zuidoost', code: 'VR22', id: 22 },
   { name: 'Limburg-Noord', code: 'VR23', id: 23 },
-  { name: 'Limburg-Zuid', code: 'VR24', id: 24 },
+  { name: 'Zuid-Limburg', code: 'VR24', id: 24 },
   { name: 'Flevoland', code: 'VR25', id: 25 },
 ];
 
