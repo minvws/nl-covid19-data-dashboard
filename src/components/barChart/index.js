@@ -44,11 +44,11 @@ function BarChart(props) {
       },
       series: [
         {
-          data: keys.map((key) => data[key]),
+          data,
         },
       ],
     }),
-    [data]
+    [data, keys]
   );
 
   return <HighChartsReact highcharts={HighCharts} options={options} />;
