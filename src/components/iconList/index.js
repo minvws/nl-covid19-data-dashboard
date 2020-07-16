@@ -65,7 +65,6 @@ function CollapseIconListItem(props) {
       </div>
       <div
         className={styles.hiddenContent}
-        hidden={!expanded}
         {...getCollapseProps()}
       >
         <p>{item.content}</p>
