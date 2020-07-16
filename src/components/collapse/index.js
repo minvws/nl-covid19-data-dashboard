@@ -22,7 +22,7 @@ const Collapse = ({
   });
 
   const toggle = () => {
-    setOpen(prevOpen => !prevOpen);
+    setOpen((prevOpen) => !prevOpen);
   };
 
   const buttonText = open ? openText : sluitText;
