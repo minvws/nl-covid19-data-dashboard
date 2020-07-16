@@ -4,7 +4,7 @@ import MaxWidth from 'components/maxWidth';
 import text from 'data/textNotFound.json';
 import styles from './over.module.scss';
 
-NotFound.getLayout = Layout.getLayout(text.metadata.titel);
+NotFound.getLayout = Layout.getLayout(text.notfound_metadata.titel);
 
 export default function NotFound() {
   return (

@@ -11,7 +11,7 @@ import openGraphImage from 'assets/sharing/og-cijferverantwoording.png?url';
 import twitterImage from 'assets/sharing/twitter-cijferverantwoording.png?url';
 
 Verantwoording.getLayout = Layout.getLayout({
-  ...text.metadata,
+  ...text.verantwoording_metadata,
   openGraphImage,
   twitterImage,
 });

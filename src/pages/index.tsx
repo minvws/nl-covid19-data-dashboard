@@ -118,12 +118,24 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
 
                 {state.nl?.intake_intensivecare_ma && (
                   <BarScale
-                    min={siteText.ic_opnames_per_dag.bar.min}
-                    max={siteText.ic_opnames_per_dag.bar.max}
-                    gradient={siteText.ic_opnames_per_dag.bar.gradient}
+                    min={0}
+                    max={30}
+                    gradient={[
+                      {
+                        color: '#69c253',
+                        value: 0,
+                      },
+                      {
+                        color: '#D3A500',
+                        value: 10,
+                      },
+                      {
+                        color: '#f35065',
+                        value: 20,
+                      },
+                    ]}
                     screenReaderText={
-                      siteText.ic_opnames_per_dag.bar
-                        .screen_reader_graph_content
+                      siteText.ic_opnames_per_dag.screen_reader_graph_content
                     }
                     kritiekeWaarde={siteText.ic_opnames_per_dag.signaalwaarde}
                     value={
@@ -177,13 +189,13 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
 
                 {state.nl?.intake_hospital_ma && (
                   <BarScale
-                    min={siteText.ziekenhuisopnames_per_dag.bar.min}
-                    max={siteText.ziekenhuisopnames_per_dag.bar.max}
+                    min={0}
+                    max={100}
                     kritiekeWaarde={
                       siteText.ziekenhuisopnames_per_dag.signaalwaarde
                     }
                     screenReaderText={
-                      siteText.ziekenhuisopnames_per_dag.bar
+                      siteText.ziekenhuisopnames_per_dag
                         .screen_reader_graph_content
                     }
                     value={
@@ -191,7 +203,20 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                         .moving_average_hospital
                     }
                     id="opnames"
-                    gradient={siteText.ziekenhuisopnames_per_dag.bar.gradient}
+                    gradient={[
+                      {
+                        color: '#69c253',
+                        value: 0,
+                      },
+                      {
+                        color: '#D3A500',
+                        value: 40,
+                      },
+                      {
+                        color: '#f35065',
+                        value: 90,
+                      },
+                    ]}
                   />
                 )}
               </GraphContent>
@@ -239,10 +264,10 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                 <p>{siteText.positief_geteste_personen.text}</p>
                 {state.nl?.infected_people_delta_normalized && (
                   <BarScale
-                    min={siteText.positief_geteste_personen.bar.min}
-                    max={siteText.positief_geteste_personen.bar.max}
+                    min={0}
+                    max={5}
                     screenReaderText={
-                      siteText.positief_geteste_personen.bar
+                      siteText.positief_geteste_personen
                         .screen_reader_graph_content
                     }
                     value={
@@ -250,7 +275,12 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                         .infected_daily_increase
                     }
                     id="positief"
-                    gradient={siteText.positief_geteste_personen.bar.gradient}
+                    gradient={[
+                      {
+                        color: '#3391CC',
+                        value: 0,
+                      },
+                    ]}
                   />
                 )}
 
@@ -320,10 +350,10 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                 <p>{siteText.besmettelijke_personen.text}</p>
                 {state.nl?.infectious_people_count_normalized && (
                   <BarScale
-                    min={siteText.besmettelijke_personen.bar.min}
-                    max={siteText.besmettelijke_personen.bar.max}
+                    min={0}
+                    max={50}
                     screenReaderText={
-                      siteText.besmettelijke_personen.bar
+                      siteText.besmettelijke_personen
                         .screen_reader_graph_content
                     }
                     value={
@@ -331,7 +361,12 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                         .infectious_avg_normalized
                     }
                     id="besmettelijk"
-                    gradient={siteText.besmettelijke_personen.bar.gradient}
+                    gradient={[
+                      {
+                        color: '#3391CC',
+                        value: 0,
+                      },
+                    ]}
                   />
                 )}
 
@@ -378,8 +413,8 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                 <p>{siteText.reproductiegetal.text}</p>
                 {state.nl?.reproduction_index && (
                   <BarScale
-                    min={siteText.reproductiegetal.bar.min}
-                    max={siteText.reproductiegetal.bar.max}
+                    min={0}
+                    max={2}
                     screenReaderText={
                       siteText.reproductiegetal.screen_reader_graph_content
                     }
@@ -389,7 +424,24 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                         .reproduction_index_avg
                     }
                     id="repro"
-                    gradient={siteText.reproductiegetal.gradient}
+                    gradient={[
+                      {
+                        color: '#69c253',
+                        value: 0,
+                      },
+                      {
+                        color: '#69c253',
+                        value: 1,
+                      },
+                      {
+                        color: '#D3A500',
+                        value: 1.0104,
+                      },
+                      {
+                        color: '#f35065',
+                        value: 1.125,
+                      },
+                    ]}
                   />
                 )}
               </GraphContent>
@@ -417,8 +469,8 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                       max: value.reproduction_index_high,
                       date: value.date_of_report_unix,
                     }))}
-                    minY={siteText.reproductiegetal.graph.min}
-                    maxY={siteText.reproductiegetal.graph.max}
+                    minY={0}
+                    maxY={4}
                     signaalwaarde={1}
                     rangeLegendLabel={
                       siteText.reproductiegetal.rangeLegendLabel
@@ -478,17 +530,22 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
 
                 {state.nl?.verdenkingen_huisartsen && (
                   <BarScale
-                    min={siteText.verdenkingen_huisartsen.bar.min}
-                    max={siteText.verdenkingen_huisartsen.bar.max}
+                    min={0}
+                    max={140}
                     screenReaderText={
-                      siteText.verdenkingen_huisartsen.bar
+                      siteText.verdenkingen_huisartsen
                         .screen_reader_graph_content
                     }
                     value={
                       state.nl?.verdenkingen_huisartsen.last_value.incidentie
                     }
                     id="verdenkingen_huisartsen"
-                    gradient={siteText.verdenkingen_huisartsen.bar.gradient}
+                    gradient={[
+                      {
+                        color: '#3391CC',
+                        value: 0,
+                      },
+                    ]}
                   />
                 )}
               </GraphContent>
@@ -535,15 +592,19 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
 
                 {state.nl?.rioolwater_metingen && (
                   <BarScale
-                    min={siteText.rioolwater_metingen.bar.min}
-                    max={siteText.rioolwater_metingen.bar.max}
+                    min={0}
+                    max={100}
                     screenReaderText={
-                      siteText.rioolwater_metingen.bar
-                        .screen_reader_graph_content
+                      siteText.rioolwater_metingen.screen_reader_graph_content
                     }
                     value={state.nl?.rioolwater_metingen.last_value.average}
                     id="rioolwater_metingen"
-                    gradient={siteText.rioolwater_metingen.bar.gradient}
+                    gradient={[
+                      {
+                        color: '#3391CC',
+                        value: 0,
+                      },
+                    ]}
                   />
                 )}
               </GraphContent>
@@ -611,14 +672,10 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                 <p>{siteText.verpleeghuis_positief_geteste_personen.text}</p>
                 {state.nl?.infected_people_nursery_count_daily && (
                   <BarScale
-                    min={
-                      siteText.verpleeghuis_positief_geteste_personen.bar.min
-                    }
-                    max={
-                      siteText.verpleeghuis_positief_geteste_personen.bar.max
-                    }
+                    min={0}
+                    max={100}
                     screenReaderText={
-                      siteText.verpleeghuis_positief_geteste_personen.bar
+                      siteText.verpleeghuis_positief_geteste_personen
                         .screen_reader_graph_content
                     }
                     value={
@@ -626,10 +683,12 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                         .infected_nursery_daily
                     }
                     id="positief_verpleeghuis"
-                    gradient={
-                      siteText.verpleeghuis_positief_geteste_personen.bar
-                        .gradient
-                    }
+                    gradient={[
+                      {
+                        color: '#3391CC',
+                        value: 0,
+                      },
+                    ]}
                   />
                 )}
               </GraphContent>
@@ -681,10 +740,10 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
 
                 {state.nl?.total_newly_reported_locations && (
                   <BarScale
-                    min={siteText.verpleeghuis_besmette_locaties.bar.min}
-                    max={siteText.verpleeghuis_besmette_locaties.bar.max}
+                    min={0}
+                    max={30}
                     screenReaderText={
-                      siteText.verpleeghuis_besmette_locaties.bar
+                      siteText.verpleeghuis_besmette_locaties
                         .screen_reader_graph_content
                     }
                     value={
@@ -692,9 +751,12 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                         .infected_nursery_daily
                     }
                     id="besmette_locaties_verpleeghuis"
-                    gradient={
-                      siteText.verpleeghuis_besmette_locaties.bar.gradient
-                    }
+                    gradient={[
+                      {
+                        color: '#3391CC',
+                        value: 0,
+                      },
+                    ]}
                   />
                 )}
               </GraphContent>
@@ -752,8 +814,8 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                 <p>{siteText.verpleeghuis_oversterfte.text}</p>
                 {state.nl?.deceased_people_nursery_count_daily && (
                   <BarScale
-                    min={siteText.verpleeghuis_oversterfte.bar.min}
-                    max={siteText.verpleeghuis_oversterfte.bar.max}
+                    min={0}
+                    max={50}
                     screenReaderText={
                       siteText.verpleeghuis_oversterfte
                         .screen_reader_graph_content
@@ -763,7 +825,12 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                         .deceased_nursery_daily
                     }
                     id="over"
-                    gradient={siteText.verpleeghuis_oversterfte.bar.gradient}
+                    gradient={[
+                      {
+                        color: '#3391CC',
+                        value: 0,
+                      },
+                    ]}
                   />
                 )}
               </GraphContent>
@@ -804,7 +871,7 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
 };
 
 Home.getLayout = Layout.getLayout({
-  ...siteText.metadata,
+  ...siteText.nationaal_metadata,
   openGraphImage,
   twitterImage,
 });

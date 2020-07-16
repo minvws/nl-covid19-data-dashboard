@@ -234,25 +234,31 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
 
                     {state[selectedRegio?.code]?.intake_hospital_ma && (
                       <BarScale
-                        min={
-                          siteText.regionaal_ziekenhuisopnames_per_dag.bar.min
-                        }
-                        max={
-                          siteText.regionaal_ziekenhuisopnames_per_dag.bar.max
-                        }
+                        min={0}
+                        max={100}
                         value={
                           state[selectedRegio.code].intake_hospital_ma
                             .last_value.moving_average_hospital
                         }
                         screenReaderText={
-                          siteText.regionaal_ziekenhuisopnames_per_dag.bar
+                          siteText.regionaal_ziekenhuisopnames_per_dag
                             .screen_reader_graph_content
                         }
                         id="regio_opnames"
-                        gradient={
-                          siteText.regionaal_ziekenhuisopnames_per_dag.bar
-                            .gradient
-                        }
+                        gradient={[
+                          {
+                            color: '#69c253',
+                            value: 0,
+                          },
+                          {
+                            color: '#D3A500',
+                            value: 40,
+                          },
+                          {
+                            color: '#f35065',
+                            value: 90,
+                          },
+                        ]}
                       />
                     )}
                   </>
@@ -320,26 +326,24 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                     {state[selectedRegio.code]
                       ?.infected_people_delta_normalized && (
                       <BarScale
-                        min={
-                          siteText.regionaal_positief_geteste_personen.bar.min
-                        }
-                        max={
-                          siteText.regionaal_positief_geteste_personen.bar.max
-                        }
+                        min={0}
+                        max={5}
                         value={
                           state[selectedRegio.code]
                             .infected_people_delta_normalized.last_value
                             .infected_daily_increase
                         }
                         screenReaderText={
-                          siteText.regionaal_positief_geteste_personen.bar
+                          siteText.regionaal_positief_geteste_personen
                             .screen_reader_graph_content
                         }
                         id="regio_infecties"
-                        gradient={
-                          siteText.regionaal_positief_geteste_personen.bar
-                            .gradient
-                        }
+                        gradient={[
+                          {
+                            color: '#3391CC',
+                            value: 0,
+                          },
+                        ]}
                       />
                     )}
 
@@ -419,7 +423,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
 };
 
 Regio.getLayout = Layout.getLayout({
-  ...siteText.metadata,
+  ...siteText.regionaal_metadata,
   openGraphImage,
   twitterImage,
 });
