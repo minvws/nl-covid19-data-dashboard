@@ -1,9 +1,17 @@
 import * as React from 'react';
 import useCollapse from 'react-collapsed';
 
+import * as piwik from '../../lib/piwik';
+
 import Arrow from 'assets/arrow.svg';
 
-const Collapse = ({ children, openText, sluitText }) => {
+const Collapse = ({
+  children,
+  openText,
+  sluitText,
+  piwikAction,
+  piwikName,
+}) => {
   const [open, setOpen] = React.useState(false);
   const [renderContent, setRenderContent] = React.useState(false);
 
@@ -14,7 +22,7 @@ const Collapse = ({ children, openText, sluitText }) => {
   });
 
   const toggle = () => {
-    setOpen((prevOpen) => !prevOpen);
+    setOpen(prevOpen => !prevOpen);
   };
 
   const buttonText = open ? openText : sluitText;
@@ -27,6 +35,13 @@ const Collapse = ({ children, openText, sluitText }) => {
       <button
         aria-expanded={open}
         className="collapseButton"
+        onClick={() =>
+          piwik.event({
+            category: 'accordion-open',
+            action: piwikAction,
+            name: piwikName,
+          })
+        }
         {...getToggleProps({ onClick: toggle })}
       >
         {buttonText}

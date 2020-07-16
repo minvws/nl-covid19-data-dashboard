@@ -149,6 +149,8 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
               <Collapse
                 openText={siteText.ic_opnames_per_dag.open}
                 sluitText={siteText.ic_opnames_per_dag.sluit}
+                piwikAction="landelijk"
+                piwikName="Intensive care-opnames per dag"
               >
                 <h4>{siteText.ic_opnames_per_dag.fold_title}</h4>
                 <p>{siteText.ic_opnames_per_dag.fold}</p>
@@ -223,6 +225,8 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
               <Collapse
                 openText={siteText.ziekenhuisopnames_per_dag.open}
                 sluitText={siteText.ziekenhuisopnames_per_dag.sluit}
+                piwikName="Ziekenhuisopnames per dag"
+                piwikAction="landelijk"
               >
                 <h4>{siteText.ziekenhuisopnames_per_dag.fold_title}</h4>
                 <p>{siteText.ziekenhuisopnames_per_dag.fold}</p>
@@ -299,6 +303,8 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
               <Collapse
                 openText={siteText.positief_geteste_personen.open}
                 sluitText={siteText.positief_geteste_personen.sluit}
+                piwikAction="landelijk"
+                piwikName="Positief geteste mensen"
               >
                 <h4>{siteText.positief_geteste_personen.fold_title}</h4>
                 <p>{siteText.positief_geteste_personen.fold}</p>
@@ -390,6 +396,8 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
               <Collapse
                 openText={siteText.besmettelijke_personen.open}
                 sluitText={siteText.besmettelijke_personen.sluit}
+                piwikName="Aantal besmettelijke mensen"
+                piwikAction="landelijk"
               >
                 <h4>{siteText.besmettelijke_personen.fold_title}</h4>
                 <p>{siteText.besmettelijke_personen.fold}</p>
@@ -448,6 +456,8 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
               <Collapse
                 openText={siteText.reproductiegetal.open}
                 sluitText={siteText.reproductiegetal.sluit}
+                piwikName="Reproductiegetal"
+                piwikAction="landelijk"
               >
                 <h4>{siteText.reproductiegetal.fold_title}</h4>
                 <p>{siteText.reproductiegetal.fold}</p>
@@ -552,6 +562,8 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
               <Collapse
                 openText={siteText.verdenkingen_huisartsen.open}
                 sluitText={siteText.verdenkingen_huisartsen.sluit}
+                piwikName="Aantal patiënten waarvan huisartsen COVID-19 vermoeden"
+                piwikAction="landelijk"
               >
                 <h4>{siteText.verdenkingen_huisartsen.fold_title}</h4>
                 <p>{siteText.verdenkingen_huisartsen.fold}</p>
@@ -611,6 +623,8 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
               <Collapse
                 openText={siteText.rioolwater_metingen.open}
                 sluitText={siteText.rioolwater_metingen.sluit}
+                piwikName="Rioolwatermeting"
+                piwikAction="landelijk"
               >
                 <h4>{siteText.rioolwater_metingen.fold_title}</h4>
                 <p>{siteText.rioolwater_metingen.fold}</p>
@@ -697,6 +711,8 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                 sluitText={
                   siteText.verpleeghuis_positief_geteste_personen.sluit
                 }
+                piwikAction="landelijk"
+                piwikName="Aantal positief geteste bewoners"
               >
                 <h4>
                   {siteText.verpleeghuis_positief_geteste_personen.fold_title}
@@ -763,6 +779,8 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
               <Collapse
                 openText={siteText.verpleeghuis_besmette_locaties.open}
                 sluitText={siteText.verpleeghuis_besmette_locaties.sluit}
+                piwikName="Aantal besmette locaties"
+                piwikAction="landelijk"
               >
                 <h4>{siteText.verpleeghuis_besmette_locaties.fold_title}</h4>
                 <p>{siteText.verpleeghuis_besmette_locaties.fold}</p>
@@ -837,6 +855,8 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
               <Collapse
                 openText={siteText.verpleeghuis_oversterfte.open}
                 sluitText={siteText.verpleeghuis_oversterfte.sluit}
+                piwikName="Sterfte"
+                piwikAction="landelijk"
               >
                 <h4>{siteText.verpleeghuis_oversterfte.fold_title}</h4>
                 <p>{siteText.verpleeghuis_oversterfte.fold}</p>
