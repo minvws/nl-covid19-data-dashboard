@@ -492,12 +492,12 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
 
                 <Legenda>
                   <li className="blue">
-                    De effectieve R is een schatting. Om het reproductiegetal te
-                    berekenen is twee weken aan data nodig.
+                    Reproductiegetal R is een schatting. Om het reproductiegetal
+                    te berekenen is twee weken aan data nodig.
                   </li>
                   <li className="gray square">
-                    De bandbreedte toont met zekerheid tussen welke waarden de R
-                    zich bevindt. Dit wordt wekelijks bijgewerkt.
+                    De onzekerheidsmarge toont met zekerheid tussen welke
+                    waarden de R zich bevindt. Dit wordt wekelijks bijgewerkt.
                   </li>
                 </Legenda>
 
