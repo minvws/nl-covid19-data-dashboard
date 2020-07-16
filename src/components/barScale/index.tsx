@@ -32,7 +32,7 @@ const BarScale: FunctionComponent<BarscaleProps> = ({
   // Generate a random ID used for clipPath and linearGradient ID's.
   const rand = useRef(Math.random().toString(36).substring(2, 15));
 
-  if (typeof value === 'undefined') {
+  if (typeof value === 'undefined' || value === null) {
     return null;
   }
 

@@ -1,7 +1,7 @@
 const regioData = [
   { name: 'Nederland', code: 'NL', id: 0 },
   { name: 'Groningen', code: 'VR01', id: 1 },
-  { name: 'Fryslân', code: 'VR02', id: 2 },
+  { name: 'Friesland', code: 'VR02', id: 2 },
   { name: 'Drenthe', code: 'VR03', id: 3 },
   { name: 'IJsselland', code: 'VR04', id: 4 },
   { name: 'Twente', code: 'VR05', id: 5 },
@@ -9,7 +9,7 @@ const regioData = [
   { name: 'Gelderland-Midden', code: 'VR07', id: 7 },
   { name: 'Gelderland-Zuid', code: 'VR08', id: 8 },
   { name: 'Utrecht', code: 'VR09', id: 9 },
-  { name: 'Noord-Holland-Noord', code: 'VR10', id: 10 },
+  { name: 'Noord-Holland Noord', code: 'VR10', id: 10 },
   { name: 'Zaanstreek-Waterland', code: 'VR11', id: 11 },
   { name: 'Kennemerland', code: 'VR12', id: 12 },
   { name: 'Amsterdam-Amstelland', code: 'VR13', id: 13 },
@@ -22,8 +22,8 @@ const regioData = [
   { name: 'Midden- en West-Brabant', code: 'VR20', id: 20 },
   { name: 'Brabant-Noord', code: 'VR21', id: 21 },
   { name: 'Brabant-Zuidoost', code: 'VR22', id: 22 },
-  { name: 'Limburg-Noord', code: 'VR23', id: 23 },
-  { name: 'Limburg-Zuid', code: 'VR24', id: 24 },
+  { name: 'Noord-Limburg', code: 'VR23', id: 23 },
+  { name: 'Zuid-Limburg', code: 'VR24', id: 24 },
   { name: 'Flevoland', code: 'VR25', id: 25 },
 ];
 

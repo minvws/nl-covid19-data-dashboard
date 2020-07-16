@@ -50,8 +50,8 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
 
   React.useEffect(() => {
     async function fetchData() {
-      if (!state['NL']) {
-        dispatch({ type: 'INIT_LOAD', payload: { id: 'NL' } });
+      if (!state['nl']) {
+        dispatch({ type: 'INIT_LOAD', payload: { id: 'nl' } });
         const response = await fetch(
           `${process.env.REACT_APP_DATA_SRC}NL.json`
         );
@@ -60,9 +60,9 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
       }
     }
     fetchData();
-  }, []);
+  }, [dispatch, state]);
 
-  const shouldShowDataComponents = Boolean(state.NL);
+  const shouldShowDataComponents = Boolean(state.nl);
 
   const breakpointColumnsObj = {
     default: 3,
@@ -99,7 +99,7 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
 
       <div className="home-content">
         {shouldShowDataComponents && (
-          <LastUpdated lastUpdated={state.NL?.last_generated * 1000} />
+          <LastUpdated lastUpdated={state.nl?.last_generated * 1000} />
         )}
 
         <section className="home-section">
@@ -116,7 +116,7 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                 />
                 <p>{siteText.ic_opnames_per_dag.text}</p>
 
-                {state.NL?.intake_intensivecare_ma && (
+                {state.nl?.intake_intensivecare_ma && (
                   <BarScale
                     min={0}
                     max={30}
@@ -138,7 +138,10 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                       siteText.ic_opnames_per_dag.screen_reader_graph_content
                     }
                     kritiekeWaarde={siteText.ic_opnames_per_dag.signaalwaarde}
-                    value={state.NL?.intake_intensivecare_ma.value}
+                    value={
+                      state.nl?.intake_intensivecare_ma.last_value
+                        .moving_average_ic
+                    }
                     id="ic"
                   />
                 )}
@@ -150,18 +153,26 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                 <h4>{siteText.ic_opnames_per_dag.fold_title}</h4>
                 <p>{siteText.ic_opnames_per_dag.fold}</p>
                 <h4>{siteText.ic_opnames_per_dag.graph_title}</h4>
-                {state.NL?.intake_intensivecare_ma?.list && (
+                {state.nl?.intake_intensivecare_ma?.values && (
                   <LineChart
-                    data={state.NL?.intake_intensivecare_ma.list}
+                    values={state.nl?.intake_intensivecare_ma.values.map(
+                      (value) => ({
+                        value: value.moving_average_ic,
+                        date: value.date_of_report_unix,
+                      })
+                    )}
                     signaalwaarde={siteText.ic_opnames_per_dag.signaalwaarde}
                   />
                 )}
 
                 <Metadata
-                  period={state.NL?.intake_intensivecare_ma?.list}
+                  period={state.nl?.intake_intensivecare_ma?.values.map(
+                    (value) => value.date_of_report_unix
+                  )}
                   dataSource={siteText.ic_opnames_per_dag.bron}
                   lastUpdated={
-                    state.NL?.intake_intensivecare_ma?.lastupdate * 1000
+                    state.nl?.intake_intensivecare_ma?.last_value
+                      .date_of_report_unix * 1000
                   }
                 />
               </Collapse>
@@ -176,7 +187,7 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
 
                 <p>{siteText.ziekenhuisopnames_per_dag.text}</p>
 
-                {state.NL?.intake_hospital_ma && (
+                {state.nl?.intake_hospital_ma && (
                   <BarScale
                     min={0}
                     max={100}
@@ -187,7 +198,10 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                       siteText.ziekenhuisopnames_per_dag
                         .screen_reader_graph_content
                     }
-                    value={state.NL?.intake_hospital_ma.value}
+                    value={
+                      state.nl?.intake_hospital_ma.last_value
+                        .moving_average_hospital
+                    }
                     id="opnames"
                     gradient={[
                       {
@@ -214,9 +228,14 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                 <p>{siteText.ziekenhuisopnames_per_dag.fold}</p>
 
                 <h4>{siteText.ziekenhuisopnames_per_dag.graph_title}</h4>
-                {state.NL?.intake_hospital_ma?.list && (
+                {state.nl?.intake_hospital_ma?.values && (
                   <LineChart
-                    data={state.NL?.intake_hospital_ma.list}
+                    values={state.nl?.intake_hospital_ma.values.map(
+                      (value) => ({
+                        value: value.moving_average_hospital,
+                        date: value.date_of_report_unix,
+                      })
+                    )}
                     signaalwaarde={
                       siteText.ziekenhuisopnames_per_dag.signaalwaarde
                     }
@@ -224,9 +243,14 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                 )}
 
                 <Metadata
-                  period={state.NL?.intake_hospital_ma?.list}
+                  period={state.nl?.intake_hospital_ma?.values.map(
+                    (value) => value.date_of_report_unix
+                  )}
                   dataSource={siteText.ziekenhuisopnames_per_dag.bron}
-                  lastUpdated={state.NL?.intake_hospital_ma?.lastupdate * 1000}
+                  lastUpdated={
+                    state.nl?.intake_hospital_ma?.last_value
+                      .date_of_report_unix * 1000
+                  }
                 />
               </Collapse>
             </GraphContainer>
@@ -238,7 +262,7 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                   title={siteText.positief_geteste_personen.title}
                 />
                 <p>{siteText.positief_geteste_personen.text}</p>
-                {state.NL?.infected_people_delta_normalized && (
+                {state.nl?.infected_people_delta_normalized && (
                   <BarScale
                     min={0}
                     max={5}
@@ -246,7 +270,10 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                       siteText.positief_geteste_personen
                         .screen_reader_graph_content
                     }
-                    value={state.NL?.infected_people_delta_normalized.value}
+                    value={
+                      state.nl?.infected_people_delta_normalized.last_value
+                        .infected_daily_increase
+                    }
                     id="positief"
                     gradient={[
                       {
@@ -257,11 +284,14 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                   />
                 )}
 
-                {state.NL?.infected_people_total?.value && (
+                {state.nl?.infected_people_total?.last_value && (
                   <h3>
                     {siteText.positief_geteste_personen.metric_title}{' '}
                     <span style={{ color: '#01689b' }}>
-                      {formatDecimal(state.NL?.infected_people_total.value)}
+                      {formatDecimal(
+                        state.nl?.infected_people_total.last_value
+                          .infected_daily_total
+                      )}
                     </span>
                   </h3>
                 )}
@@ -274,14 +304,19 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                 <p>{siteText.positief_geteste_personen.fold}</p>
 
                 <h4>{siteText.positief_geteste_personen.linechart_title}</h4>
-                {state.NL?.infected_people_delta_normalized?.list && (
+                {state.nl?.infected_people_delta_normalized?.values && (
                   <LineChart
-                    data={state.NL?.infected_people_delta_normalized?.list}
+                    values={state.nl?.infected_people_delta_normalized?.values.map(
+                      (value) => ({
+                        value: value.infected_daily_increase,
+                        date: value.date_of_report_unix,
+                      })
+                    )}
                   />
                 )}
 
                 <h4>{siteText.positief_geteste_personen.graph_title}</h4>
-                {state.NL?.intake_share_age_groups && (
+                {state.nl?.intake_share_age_groups && (
                   <BarChart
                     keys={[
                       '0 tot 20',
@@ -290,14 +325,17 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                       '60 tot 80',
                       '80+',
                     ]}
-                    data={state.NL?.intake_share_age_groups.list}
+                    data={state.nl?.intake_share_age_groups.values.map(
+                      (value) => value.infected_per_agegroup_increase
+                    )}
                   />
                 )}
 
                 <Metadata
                   dataSource={siteText.positief_geteste_personen.bron}
                   lastUpdated={
-                    state.NL?.intake_share_age_groups?.lastupdate * 1000
+                    state.nl?.intake_share_age_groups?.last_value
+                      .date_of_report_unix * 1000
                   }
                 />
               </Collapse>
@@ -310,7 +348,7 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                   title={siteText.besmettelijke_personen.title}
                 />
                 <p>{siteText.besmettelijke_personen.text}</p>
-                {state.NL?.infectious_people_count_normalized && (
+                {state.nl?.infectious_people_count_normalized && (
                   <BarScale
                     min={0}
                     max={50}
@@ -318,7 +356,10 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                       siteText.besmettelijke_personen
                         .screen_reader_graph_content
                     }
-                    value={state.NL?.infectious_people_count_normalized.value}
+                    value={
+                      state.nl?.infectious_people_count_normalized.last_value
+                        .infectious_avg_normalized
+                    }
                     id="besmettelijk"
                     gradient={[
                       {
@@ -334,11 +375,14 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                   <time dateTime={'2020-07'}>juli 2020</time>.
                 </p>
 
-                {state.NL?.infectious_people_count?.value && (
+                {state.nl?.infectious_people_count?.last_value && (
                   <h3>
                     {siteText.besmettelijke_personen.metric_title}{' '}
                     <span style={{ color: '#01689b' }}>
-                      {formatDecimal(state.NL?.infectious_people_count.value)}
+                      {formatDecimal(
+                        state.nl?.infectious_people_count.last_value
+                          .infectious_avg
+                      )}
                     </span>
                   </h3>
                 )}
@@ -353,7 +397,8 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                 <Metadata
                   dataSource={siteText.besmettelijke_personen.bron}
                   lastUpdated={
-                    state.NL?.infectious_people_count?.lastupdate * 1000
+                    state.nl?.infectious_people_count?.last_value
+                      .date_of_report_unix * 1000
                   }
                 />
               </Collapse>
@@ -366,7 +411,7 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                   title={siteText.reproductiegetal.title}
                 />
                 <p>{siteText.reproductiegetal.text}</p>
-                {state.NL?.reproduction_index && (
+                {state.nl?.reproduction_index && (
                   <BarScale
                     min={0}
                     max={2}
@@ -374,7 +419,10 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                       siteText.reproductiegetal.screen_reader_graph_content
                     }
                     kritiekeWaarde={siteText.reproductiegetal.signaalwaarde}
-                    value={state.NL?.reproduction_index.value}
+                    value={
+                      state.nl?.reproduction_index.last_value
+                        .reproduction_index_avg
+                    }
                     id="repro"
                     gradient={[
                       {
@@ -413,11 +461,14 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                 />
 
                 <h4>{siteText.reproductiegetal.graph_title}</h4>
-                {state.NL?.reproduction_index?.list && (
+                {state.nl?.reproduction_index?.values && (
                   <AreaChart
-                    data={state.NL?.reproduction_index.list}
-                    min={state.NL?.reproduction_index.min}
-                    max={state.NL?.reproduction_index.max}
+                    data={state.nl?.reproduction_index.values.map((value) => ({
+                      avg: value.reproduction_index_avg,
+                      min: value.reproduction_index_low,
+                      max: value.reproduction_index_high,
+                      date: value.date_of_report_unix,
+                    }))}
                     minY={0}
                     maxY={4}
                     signaalwaarde={1}
@@ -437,7 +488,9 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                 </p>
 
                 <Metadata
-                  period={state.NL?.reproduction_index?.list}
+                  period={state.nl?.reproduction_index?.values.map(
+                    (value) => value.date_of_report_unix
+                  )}
                   dataSource={siteText.reproductiegetal.bron}
                 />
               </Collapse>
@@ -475,7 +528,7 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
 
                 <p>{siteText.verdenkingen_huisartsen.text}</p>
 
-                {state.NL?.verdenkingen_huisartsen && (
+                {state.nl?.verdenkingen_huisartsen && (
                   <BarScale
                     min={0}
                     max={140}
@@ -483,7 +536,9 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                       siteText.verdenkingen_huisartsen
                         .screen_reader_graph_content
                     }
-                    value={state.NL?.verdenkingen_huisartsen.value}
+                    value={
+                      state.nl?.verdenkingen_huisartsen.last_value.incidentie
+                    }
                     id="verdenkingen_huisartsen"
                     gradient={[
                       {
@@ -502,15 +557,25 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                 <p>{siteText.verdenkingen_huisartsen.fold}</p>
 
                 <h4>{siteText.verdenkingen_huisartsen.graph_title}</h4>
-                {state.NL?.verdenkingen_huisartsen?.list && (
-                  <LineChart data={state.NL?.verdenkingen_huisartsen.list} />
+                {state.nl?.verdenkingen_huisartsen?.values && (
+                  <LineChart
+                    values={state.nl?.verdenkingen_huisartsen.values.map(
+                      (value) => ({
+                        value: value.incidentie,
+                        date: value.week,
+                      })
+                    )}
+                  />
                 )}
 
                 <Metadata
-                  period={state.NL?.verdenkingen_huisartsen?.list}
+                  period={state.nl?.verdenkingen_huisartsen?.values.map(
+                    (value) => value.week
+                  )}
                   dataSource={siteText.verdenkingen_huisartsen.bron}
                   lastUpdated={
-                    state.NL?.verdenkingen_huisartsen?.lastupdate * 1000
+                    state.nl?.verdenkingen_huisartsen?.last_value.incidentie *
+                    1000
                   }
                 />
               </Collapse>
@@ -525,14 +590,14 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
 
                 <p>{siteText.rioolwater_metingen.text}</p>
 
-                {state.NL?.rioolwater_metingen && (
+                {state.nl?.rioolwater_metingen && (
                   <BarScale
                     min={0}
                     max={100}
                     screenReaderText={
                       siteText.rioolwater_metingen.screen_reader_graph_content
                     }
-                    value={state.NL?.rioolwater_metingen.value}
+                    value={state.nl?.rioolwater_metingen.last_value.average}
                     id="rioolwater_metingen"
                     gradient={[
                       {
@@ -551,14 +616,25 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                 <p>{siteText.rioolwater_metingen.fold}</p>
 
                 <h4>{siteText.rioolwater_metingen.graph_title}</h4>
-                {state.NL?.rioolwater_metingen?.list && (
-                  <LineChart data={state.NL?.rioolwater_metingen.list} />
+                {state.nl?.rioolwater_metingen?.values && (
+                  <LineChart
+                    values={state.nl?.rioolwater_metingen.values.map(
+                      (value) => ({
+                        value: Number(value.average),
+                        date: value.week,
+                      })
+                    )}
+                  />
                 )}
 
                 <Metadata
-                  period={state.NL?.rioolwater_metingen?.list}
+                  period={state.nl?.rioolwater_metingen?.values.map(
+                    (value) => value.week
+                  )}
                   dataSource={siteText.rioolwater_metingen.bron}
-                  lastUpdated={state.NL?.rioolwater_metingen?.lastupdate * 1000}
+                  lastUpdated={
+                    state.nl?.rioolwater_metingen?.last_value.week * 1000
+                  }
                 />
               </Collapse>
             </GraphContainer>
@@ -594,7 +670,7 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                   title={siteText.verpleeghuis_positief_geteste_personen.title}
                 />
                 <p>{siteText.verpleeghuis_positief_geteste_personen.text}</p>
-                {state.NL?.infected_people_nursery_count_daily && (
+                {state.nl?.infected_people_nursery_count_daily && (
                   <BarScale
                     min={0}
                     max={100}
@@ -602,7 +678,10 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                       siteText.verpleeghuis_positief_geteste_personen
                         .screen_reader_graph_content
                     }
-                    value={state.NL?.infected_people_nursery_count_daily.value}
+                    value={
+                      state.nl?.infected_people_nursery_count_daily.last_value
+                        .infected_nursery_daily
+                    }
                     id="positief_verpleeghuis"
                     gradient={[
                       {
@@ -626,19 +705,26 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                 <h4>
                   {siteText.verpleeghuis_positief_geteste_personen.graph_title}
                 </h4>
-                {state.NL?.infected_people_nursery_count_daily?.list && (
+                {state.nl?.infected_people_nursery_count_daily?.values && (
                   <LineChart
-                    data={state.NL?.infected_people_nursery_count_daily?.list}
+                    values={state.nl?.infected_people_nursery_count_daily?.values.map(
+                      (value) => ({
+                        value: value.infected_nursery_daily,
+                        date: value.date_of_report_unix,
+                      })
+                    )}
                   />
                 )}
                 <Metadata
-                  period={state.NL?.infected_people_nursery_count_daily?.list}
+                  period={state.nl?.infected_people_nursery_count_daily?.values.map(
+                    (value) => value.date_of_report_unix
+                  )}
                   dataSource={
                     siteText.verpleeghuis_positief_geteste_personen.bron
                   }
                   lastUpdated={
-                    state.NL?.infected_people_nursery_count_daily?.lastupdate *
-                    1000
+                    state.nl?.infected_people_nursery_count_daily?.last_value
+                      .date_of_report_unix * 1000
                   }
                 />
               </Collapse>
@@ -652,7 +738,7 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                 />
                 <p>{siteText.verpleeghuis_besmette_locaties.text}</p>
 
-                {state.NL?.total_newly_reported_locations && (
+                {state.nl?.total_newly_reported_locations && (
                   <BarScale
                     min={0}
                     max={30}
@@ -660,7 +746,10 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                       siteText.verpleeghuis_besmette_locaties
                         .screen_reader_graph_content
                     }
-                    value={state.NL?.total_newly_reported_locations.value}
+                    value={
+                      state.nl?.total_newly_reported_locations.last_value
+                        .infected_nursery_daily
+                    }
                     id="besmette_locaties_verpleeghuis"
                     gradient={[
                       {
@@ -679,27 +768,38 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                 <p>{siteText.verpleeghuis_besmette_locaties.fold}</p>
 
                 <h4>{siteText.verpleeghuis_besmette_locaties.graph_title}</h4>
-                {state.NL?.total_newly_reported_locations?.list && (
+                {state.nl?.total_newly_reported_locations?.values && (
                   <LineChart
-                    data={state.NL.total_newly_reported_locations.list}
+                    values={state.nl.total_newly_reported_locations.values.map(
+                      (value) => ({
+                        value: value.infected_nursery_daily,
+                        date: value.date_of_report_unix,
+                      })
+                    )}
                   />
                 )}
 
-                {state.NL?.total_reported_locations?.value && (
+                {state.nl?.total_reported_locations?.last_value && (
                   <h3>
                     {siteText.verpleeghuis_besmette_locaties.metric_title}{' '}
                     <span style={{ color: '#01689b' }}>
-                      {formatDecimal(state.NL?.total_reported_locations.value)}
+                      {formatDecimal(
+                        state.nl?.infected_people_nursery_count_daily.last_value
+                          .total_reported_locations
+                      )}
                     </span>
                   </h3>
                 )}
                 <p>{siteText.verpleeghuis_besmette_locaties.metric_text}</p>
 
                 <Metadata
-                  period={state.NL?.total_newly_reported_locations?.list}
+                  period={state.nl?.total_newly_reported_locations?.values.map(
+                    (value) => value.date_of_report_unix
+                  )}
                   dataSource={siteText.verpleeghuis_besmette_locaties.bron}
                   lastUpdated={
-                    state.NL?.total_newly_reported_locations?.lastupdate * 1000
+                    state.nl?.total_newly_reported_locations?.last_value
+                      .date_of_report_unix * 1000
                   }
                 />
               </Collapse>
@@ -712,7 +812,7 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                   title={siteText.verpleeghuis_oversterfte.title}
                 />
                 <p>{siteText.verpleeghuis_oversterfte.text}</p>
-                {state.NL?.deceased_people_nursery_count_daily && (
+                {state.nl?.deceased_people_nursery_count_daily && (
                   <BarScale
                     min={0}
                     max={50}
@@ -720,7 +820,10 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                       siteText.verpleeghuis_oversterfte
                         .screen_reader_graph_content
                     }
-                    value={state.NL?.deceased_people_nursery_count_daily.value}
+                    value={
+                      state.nl?.deceased_people_nursery_count_daily.last_value
+                        .deceased_nursery_daily
+                    }
                     id="over"
                     gradient={[
                       {
@@ -738,17 +841,24 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                 <h4>{siteText.verpleeghuis_oversterfte.fold_title}</h4>
                 <p>{siteText.verpleeghuis_oversterfte.fold}</p>
                 <h4>{siteText.verpleeghuis_oversterfte.graph_title}</h4>
-                {state.NL?.deceased_people_nursery_count_daily?.list && (
+                {state.nl?.deceased_people_nursery_count_daily?.values && (
                   <LineChart
-                    data={state.NL.deceased_people_nursery_count_daily.list}
+                    values={state.nl.deceased_people_nursery_count_daily.values.map(
+                      (value) => ({
+                        value: value.deceased_nursery_daily,
+                        date: value.date_of_report_unix,
+                      })
+                    )}
                   />
                 )}
                 <Metadata
-                  period={state.NL?.deceased_people_nursery_count_daily?.list}
+                  period={state.nl?.deceased_people_nursery_count_daily?.values.map(
+                    (value) => value.date_of_report_unix
+                  )}
                   dataSource={siteText.verpleeghuis_oversterfte.bron}
                   lastUpdated={
-                    state.NL?.deceased_people_nursery_count_daily?.lastupdate *
-                    1000
+                    state.nl?.deceased_people_nursery_count_daily?.last_value
+                      .date_of_report_unix * 1000
                   }
                 />
               </Collapse>
