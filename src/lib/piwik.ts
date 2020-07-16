@@ -32,9 +32,9 @@ export const pageview = (props: PageviewProps): void => {
 type EventTypes = {
   category: string;
   action: string;
-  name: string;
-  value: number;
-  dimensions: any;
+  name?: string;
+  value?: number;
+  dimensions?: any;
 };
 
 export function event(eventOptions: EventTypes): void {

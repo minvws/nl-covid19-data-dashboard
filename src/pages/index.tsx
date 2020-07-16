@@ -51,8 +51,8 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
 
   React.useEffect(() => {
     async function fetchData() {
-      if (!state['NL']) {
-        dispatch({ type: 'INIT_LOAD', payload: { id: 'NL' } });
+      if (!state['nl']) {
+        dispatch({ type: 'INIT_LOAD', payload: { id: 'nl' } });
         const response = await fetch(
           `${process.env.REACT_APP_DATA_SRC}NL.json`
         );
@@ -61,9 +61,9 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
       }
     }
     fetchData();
-  }, []);
+  }, [dispatch, state]);
 
-  const shouldShowDataComponents = Boolean(state.NL);
+  const shouldShowDataComponents = Boolean(state.nl);
 
   const breakpointColumnsObj = {
     default: 3,
@@ -100,7 +100,7 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
 
       <div className="home-content">
         {shouldShowDataComponents && (
-          <LastUpdated lastUpdated={state.NL?.last_generated * 1000} />
+          <LastUpdated lastUpdated={state.nl?.last_generated * 1000} />
         )}
 
         <section className="home-section">
@@ -117,17 +117,32 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                 />
                 <p>{siteText.ic_opnames_per_dag.text}</p>
 
-                {state.NL?.intake_intensivecare_ma && (
+                {state.nl?.intake_intensivecare_ma && (
                   <BarScale
-                    min={siteText.ic_opnames_per_dag.bar.min}
-                    max={siteText.ic_opnames_per_dag.bar.max}
-                    gradient={siteText.ic_opnames_per_dag.bar.gradient}
+                    min={0}
+                    max={30}
+                    gradient={[
+                      {
+                        color: '#69c253',
+                        value: 0,
+                      },
+                      {
+                        color: '#D3A500',
+                        value: 10,
+                      },
+                      {
+                        color: '#f35065',
+                        value: 20,
+                      },
+                    ]}
                     screenReaderText={
-                      siteText.ic_opnames_per_dag.bar
-                        .screen_reader_graph_content
+                      siteText.ic_opnames_per_dag.screen_reader_graph_content
                     }
                     kritiekeWaarde={siteText.ic_opnames_per_dag.signaalwaarde}
-                    value={state.NL?.intake_intensivecare_ma.value}
+                    value={
+                      state.nl?.intake_intensivecare_ma.last_value
+                        .moving_average_ic
+                    }
                     id="ic"
                   />
                 )}
@@ -135,22 +150,32 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
               <Collapse
                 openText={siteText.ic_opnames_per_dag.open}
                 sluitText={siteText.ic_opnames_per_dag.sluit}
+                piwikAction="landelijk"
+                piwikName="Intensive care-opnames per dag"
               >
                 <h4>{siteText.ic_opnames_per_dag.fold_title}</h4>
                 <p>{siteText.ic_opnames_per_dag.fold}</p>
                 <h4>{siteText.ic_opnames_per_dag.graph_title}</h4>
-                {state.NL?.intake_intensivecare_ma?.list && (
+                {state.nl?.intake_intensivecare_ma?.values && (
                   <LineChart
-                    data={state.NL?.intake_intensivecare_ma.list}
+                    values={state.nl?.intake_intensivecare_ma.values.map(
+                      (value) => ({
+                        value: value.moving_average_ic,
+                        date: value.date_of_report_unix,
+                      })
+                    )}
                     signaalwaarde={siteText.ic_opnames_per_dag.signaalwaarde}
                   />
                 )}
 
                 <Metadata
-                  period={state.NL?.intake_intensivecare_ma?.list}
+                  period={state.nl?.intake_intensivecare_ma?.values.map(
+                    (value) => value.date_of_report_unix
+                  )}
                   dataSource={siteText.ic_opnames_per_dag.bron}
                   lastUpdated={
-                    state.NL?.intake_intensivecare_ma?.lastupdate * 1000
+                    state.nl?.intake_intensivecare_ma?.last_value
+                      .date_of_report_unix * 1000
                   }
                 />
               </Collapse>
@@ -165,34 +190,57 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
 
                 <p>{siteText.ziekenhuisopnames_per_dag.text}</p>
 
-                {state.NL?.intake_hospital_ma && (
+                {state.nl?.intake_hospital_ma && (
                   <BarScale
-                    min={siteText.ziekenhuisopnames_per_dag.bar.min}
-                    max={siteText.ziekenhuisopnames_per_dag.bar.max}
+                    min={0}
+                    max={100}
                     kritiekeWaarde={
                       siteText.ziekenhuisopnames_per_dag.signaalwaarde
                     }
                     screenReaderText={
-                      siteText.ziekenhuisopnames_per_dag.bar
+                      siteText.ziekenhuisopnames_per_dag
                         .screen_reader_graph_content
                     }
-                    value={state.NL?.intake_hospital_ma.value}
+                    value={
+                      state.nl?.intake_hospital_ma.last_value
+                        .moving_average_hospital
+                    }
                     id="opnames"
-                    gradient={siteText.ziekenhuisopnames_per_dag.bar.gradient}
+                    gradient={[
+                      {
+                        color: '#69c253',
+                        value: 0,
+                      },
+                      {
+                        color: '#D3A500',
+                        value: 40,
+                      },
+                      {
+                        color: '#f35065',
+                        value: 90,
+                      },
+                    ]}
                   />
                 )}
               </GraphContent>
               <Collapse
                 openText={siteText.ziekenhuisopnames_per_dag.open}
                 sluitText={siteText.ziekenhuisopnames_per_dag.sluit}
+                piwikName="Ziekenhuisopnames per dag"
+                piwikAction="landelijk"
               >
                 <h4>{siteText.ziekenhuisopnames_per_dag.fold_title}</h4>
                 <p>{siteText.ziekenhuisopnames_per_dag.fold}</p>
 
                 <h4>{siteText.ziekenhuisopnames_per_dag.graph_title}</h4>
-                {state.NL?.intake_hospital_ma?.list && (
+                {state.nl?.intake_hospital_ma?.values && (
                   <LineChart
-                    data={state.NL?.intake_hospital_ma.list}
+                    values={state.nl?.intake_hospital_ma.values.map(
+                      (value) => ({
+                        value: value.moving_average_hospital,
+                        date: value.date_of_report_unix,
+                      })
+                    )}
                     signaalwaarde={
                       siteText.ziekenhuisopnames_per_dag.signaalwaarde
                     }
@@ -200,9 +248,14 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                 )}
 
                 <Metadata
-                  period={state.NL?.intake_hospital_ma?.list}
+                  period={state.nl?.intake_hospital_ma?.values.map(
+                    (value) => value.date_of_report_unix
+                  )}
                   dataSource={siteText.ziekenhuisopnames_per_dag.bron}
-                  lastUpdated={state.NL?.intake_hospital_ma?.lastupdate * 1000}
+                  lastUpdated={
+                    state.nl?.intake_hospital_ma?.last_value
+                      .date_of_report_unix * 1000
+                  }
                 />
               </Collapse>
             </GraphContainer>
@@ -214,25 +267,36 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                   title={siteText.positief_geteste_personen.title}
                 />
                 <p>{siteText.positief_geteste_personen.text}</p>
-                {state.NL?.infected_people_delta_normalized && (
+                {state.nl?.infected_people_delta_normalized && (
                   <BarScale
-                    min={siteText.positief_geteste_personen.bar.min}
-                    max={siteText.positief_geteste_personen.bar.max}
+                    min={0}
+                    max={5}
                     screenReaderText={
-                      siteText.positief_geteste_personen.bar
+                      siteText.positief_geteste_personen
                         .screen_reader_graph_content
                     }
-                    value={state.NL?.infected_people_delta_normalized.value}
+                    value={
+                      state.nl?.infected_people_delta_normalized.last_value
+                        .infected_daily_increase
+                    }
                     id="positief"
-                    gradient={siteText.positief_geteste_personen.bar.gradient}
+                    gradient={[
+                      {
+                        color: '#3391CC',
+                        value: 0,
+                      },
+                    ]}
                   />
                 )}
 
-                {state.NL?.infected_people_total?.value && (
+                {state.nl?.infected_people_total?.last_value && (
                   <h3>
                     {siteText.positief_geteste_personen.metric_title}{' '}
                     <span style={{ color: '#01689b' }}>
-                      {formatDecimal(state.NL?.infected_people_total.value)}
+                      {formatDecimal(
+                        state.nl?.infected_people_total.last_value
+                          .infected_daily_total
+                      )}
                     </span>
                   </h3>
                 )}
@@ -240,19 +304,26 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
               <Collapse
                 openText={siteText.positief_geteste_personen.open}
                 sluitText={siteText.positief_geteste_personen.sluit}
+                piwikAction="landelijk"
+                piwikName="Positief geteste mensen"
               >
                 <h4>{siteText.positief_geteste_personen.fold_title}</h4>
                 <p>{siteText.positief_geteste_personen.fold}</p>
 
                 <h4>{siteText.positief_geteste_personen.linechart_title}</h4>
-                {state.NL?.infected_people_delta_normalized?.list && (
+                {state.nl?.infected_people_delta_normalized?.values && (
                   <LineChart
-                    data={state.NL?.infected_people_delta_normalized?.list}
+                    values={state.nl?.infected_people_delta_normalized?.values.map(
+                      (value) => ({
+                        value: value.infected_daily_increase,
+                        date: value.date_of_report_unix,
+                      })
+                    )}
                   />
                 )}
 
                 <h4>{siteText.positief_geteste_personen.graph_title}</h4>
-                {state.NL?.intake_share_age_groups && (
+                {state.nl?.intake_share_age_groups && (
                   <BarChart
                     keys={[
                       '0 tot 20',
@@ -261,14 +332,17 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                       '60 tot 80',
                       '80+',
                     ]}
-                    data={state.NL?.intake_share_age_groups.list}
+                    data={state.nl?.intake_share_age_groups.values.map(
+                      (value) => value.infected_per_agegroup_increase
+                    )}
                   />
                 )}
 
                 <Metadata
                   dataSource={siteText.positief_geteste_personen.bron}
                   lastUpdated={
-                    state.NL?.intake_share_age_groups?.lastupdate * 1000
+                    state.nl?.intake_share_age_groups?.last_value
+                      .date_of_report_unix * 1000
                   }
                 />
               </Collapse>
@@ -281,17 +355,25 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                   title={siteText.besmettelijke_personen.title}
                 />
                 <p>{siteText.besmettelijke_personen.text}</p>
-                {state.NL?.infectious_people_count_normalized && (
+                {state.nl?.infectious_people_count_normalized && (
                   <BarScale
-                    min={siteText.besmettelijke_personen.bar.min}
-                    max={siteText.besmettelijke_personen.bar.max}
+                    min={0}
+                    max={50}
                     screenReaderText={
-                      siteText.besmettelijke_personen.bar
+                      siteText.besmettelijke_personen
                         .screen_reader_graph_content
                     }
-                    value={state.NL?.infectious_people_count_normalized.value}
+                    value={
+                      state.nl?.infectious_people_count_normalized.last_value
+                        .infectious_avg_normalized
+                    }
                     id="besmettelijk"
-                    gradient={siteText.besmettelijke_personen.bar.gradient}
+                    gradient={[
+                      {
+                        color: '#3391CC',
+                        value: 0,
+                      },
+                    ]}
                   />
                 )}
 
@@ -300,11 +382,14 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                   <time dateTime={'2020-07'}>juli 2020</time>.
                 </p>
 
-                {state.NL?.infectious_people_count?.value && (
+                {state.nl?.infectious_people_count?.last_value && (
                   <h3>
                     {siteText.besmettelijke_personen.metric_title}{' '}
                     <span style={{ color: '#01689b' }}>
-                      {formatDecimal(state.NL?.infectious_people_count.value)}
+                      {formatDecimal(
+                        state.nl?.infectious_people_count.last_value
+                          .infectious_avg
+                      )}
                     </span>
                   </h3>
                 )}
@@ -312,6 +397,8 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
               <Collapse
                 openText={siteText.besmettelijke_personen.open}
                 sluitText={siteText.besmettelijke_personen.sluit}
+                piwikName="Aantal besmettelijke mensen"
+                piwikAction="landelijk"
               >
                 <h4>{siteText.besmettelijke_personen.fold_title}</h4>
                 <p>{siteText.besmettelijke_personen.fold}</p>
@@ -319,7 +406,8 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                 <Metadata
                   dataSource={siteText.besmettelijke_personen.bron}
                   lastUpdated={
-                    state.NL?.infectious_people_count?.lastupdate * 1000
+                    state.nl?.infectious_people_count?.last_value
+                      .date_of_report_unix * 1000
                   }
                 />
               </Collapse>
@@ -332,23 +420,45 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                   title={siteText.reproductiegetal.title}
                 />
                 <p>{siteText.reproductiegetal.text}</p>
-                {state.NL?.reproduction_index && (
+                {state.nl?.reproduction_index && (
                   <BarScale
-                    min={siteText.reproductiegetal.bar.min}
-                    max={siteText.reproductiegetal.bar.max}
+                    min={0}
+                    max={2}
                     screenReaderText={
                       siteText.reproductiegetal.screen_reader_graph_content
                     }
                     kritiekeWaarde={siteText.reproductiegetal.signaalwaarde}
-                    value={state.NL?.reproduction_index.value}
+                    value={
+                      state.nl?.reproduction_index.last_value
+                        .reproduction_index_avg
+                    }
                     id="repro"
-                    gradient={siteText.reproductiegetal.gradient}
+                    gradient={[
+                      {
+                        color: '#69c253',
+                        value: 0,
+                      },
+                      {
+                        color: '#69c253',
+                        value: 1,
+                      },
+                      {
+                        color: '#D3A500',
+                        value: 1.0104,
+                      },
+                      {
+                        color: '#f35065',
+                        value: 1.125,
+                      },
+                    ]}
                   />
                 )}
               </GraphContent>
               <Collapse
                 openText={siteText.reproductiegetal.open}
                 sluitText={siteText.reproductiegetal.sluit}
+                piwikName="Reproductiegetal"
+                piwikAction="landelijk"
               >
                 <h4>{siteText.reproductiegetal.fold_title}</h4>
                 <p>{siteText.reproductiegetal.fold}</p>
@@ -362,13 +472,16 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                 />
 
                 <h4>{siteText.reproductiegetal.graph_title}</h4>
-                {state.NL?.reproduction_index?.list && (
+                {state.nl?.reproduction_index?.values && (
                   <AreaChart
-                    data={state.NL?.reproduction_index.list}
-                    min={state.NL?.reproduction_index.min}
-                    max={state.NL?.reproduction_index.max}
-                    minY={siteText.reproductiegetal.graph.min}
-                    maxY={siteText.reproductiegetal.graph.max}
+                    data={state.nl?.reproduction_index.values.map((value) => ({
+                      avg: value.reproduction_index_avg,
+                      min: value.reproduction_index_low,
+                      max: value.reproduction_index_high,
+                      date: value.date_of_report_unix,
+                    }))}
+                    minY={0}
+                    maxY={4}
                     signaalwaarde={1}
                     rangeLegendLabel={
                       siteText.reproductiegetal.rangeLegendLabel
@@ -389,7 +502,9 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                 </Legenda>
 
                 <Metadata
-                  period={state.NL?.reproduction_index?.list}
+                  period={state.nl?.reproduction_index?.values.map(
+                    (value) => value.date_of_report_unix
+                  )}
                   dataSource={siteText.reproductiegetal.bron}
                 />
               </Collapse>
@@ -427,37 +542,56 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
 
                 <p>{siteText.verdenkingen_huisartsen.text}</p>
 
-                {state.NL?.verdenkingen_huisartsen && (
+                {state.nl?.verdenkingen_huisartsen && (
                   <BarScale
-                    min={siteText.verdenkingen_huisartsen.bar.min}
-                    max={siteText.verdenkingen_huisartsen.bar.max}
+                    min={0}
+                    max={140}
                     screenReaderText={
-                      siteText.verdenkingen_huisartsen.bar
+                      siteText.verdenkingen_huisartsen
                         .screen_reader_graph_content
                     }
-                    value={state.NL?.verdenkingen_huisartsen.value}
+                    value={
+                      state.nl?.verdenkingen_huisartsen.last_value.incidentie
+                    }
                     id="verdenkingen_huisartsen"
-                    gradient={siteText.verdenkingen_huisartsen.bar.gradient}
+                    gradient={[
+                      {
+                        color: '#3391CC',
+                        value: 0,
+                      },
+                    ]}
                   />
                 )}
               </GraphContent>
               <Collapse
                 openText={siteText.verdenkingen_huisartsen.open}
                 sluitText={siteText.verdenkingen_huisartsen.sluit}
+                piwikName="Aantal patiënten waarvan huisartsen COVID-19 vermoeden"
+                piwikAction="landelijk"
               >
                 <h4>{siteText.verdenkingen_huisartsen.fold_title}</h4>
                 <p>{siteText.verdenkingen_huisartsen.fold}</p>
 
                 <h4>{siteText.verdenkingen_huisartsen.graph_title}</h4>
-                {state.NL?.verdenkingen_huisartsen?.list && (
-                  <LineChart data={state.NL?.verdenkingen_huisartsen.list} />
+                {state.nl?.verdenkingen_huisartsen?.values && (
+                  <LineChart
+                    values={state.nl?.verdenkingen_huisartsen.values.map(
+                      (value) => ({
+                        value: value.incidentie,
+                        date: value.week,
+                      })
+                    )}
+                  />
                 )}
 
                 <Metadata
-                  period={state.NL?.verdenkingen_huisartsen?.list}
+                  period={state.nl?.verdenkingen_huisartsen?.values.map(
+                    (value) => value.week
+                  )}
                   dataSource={siteText.verdenkingen_huisartsen.bron}
                   lastUpdated={
-                    state.NL?.verdenkingen_huisartsen?.lastupdate * 1000
+                    state.nl?.verdenkingen_huisartsen?.last_value.incidentie *
+                    1000
                   }
                 />
               </Collapse>
@@ -472,36 +606,53 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
 
                 <p>{siteText.rioolwater_metingen.text}</p>
 
-                {state.NL?.rioolwater_metingen && (
+                {state.nl?.rioolwater_metingen && (
                   <BarScale
-                    min={siteText.rioolwater_metingen.bar.min}
-                    max={siteText.rioolwater_metingen.bar.max}
+                    min={0}
+                    max={100}
                     screenReaderText={
-                      siteText.rioolwater_metingen.bar
-                        .screen_reader_graph_content
+                      siteText.rioolwater_metingen.screen_reader_graph_content
                     }
-                    value={state.NL?.rioolwater_metingen.value}
+                    value={state.nl?.rioolwater_metingen.last_value.average}
                     id="rioolwater_metingen"
-                    gradient={siteText.rioolwater_metingen.bar.gradient}
+                    gradient={[
+                      {
+                        color: '#3391CC',
+                        value: 0,
+                      },
+                    ]}
                   />
                 )}
               </GraphContent>
               <Collapse
                 openText={siteText.rioolwater_metingen.open}
                 sluitText={siteText.rioolwater_metingen.sluit}
+                piwikName="Rioolwatermeting"
+                piwikAction="landelijk"
               >
                 <h4>{siteText.rioolwater_metingen.fold_title}</h4>
                 <p>{siteText.rioolwater_metingen.fold}</p>
 
                 <h4>{siteText.rioolwater_metingen.graph_title}</h4>
-                {state.NL?.rioolwater_metingen?.list && (
-                  <LineChart data={state.NL?.rioolwater_metingen.list} />
+                {state.nl?.rioolwater_metingen?.values && (
+                  <LineChart
+                    values={state.nl?.rioolwater_metingen.values.map(
+                      (value) => ({
+                        value: Number(value.average),
+                        date: value.week,
+                      })
+                    )}
+                  />
                 )}
 
                 <Metadata
-                  period={state.NL?.rioolwater_metingen?.list}
+                  period={state.nl?.rioolwater_metingen?.values.map(
+                    (value) => value.week
+                  )}
                   dataSource={siteText.rioolwater_metingen.bron}
-                  lastUpdated={state.NL?.rioolwater_metingen?.lastupdate * 1000}
+                  lastUpdated={
+                    state.nl?.rioolwater_metingen?.last_value.week * 1000
+                  }
                 />
               </Collapse>
             </GraphContainer>
@@ -537,24 +688,25 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                   title={siteText.verpleeghuis_positief_geteste_personen.title}
                 />
                 <p>{siteText.verpleeghuis_positief_geteste_personen.text}</p>
-                {state.NL?.infected_people_nursery_count_daily && (
+                {state.nl?.infected_people_nursery_count_daily && (
                   <BarScale
-                    min={
-                      siteText.verpleeghuis_positief_geteste_personen.bar.min
-                    }
-                    max={
-                      siteText.verpleeghuis_positief_geteste_personen.bar.max
-                    }
+                    min={0}
+                    max={100}
                     screenReaderText={
-                      siteText.verpleeghuis_positief_geteste_personen.bar
+                      siteText.verpleeghuis_positief_geteste_personen
                         .screen_reader_graph_content
                     }
-                    value={state.NL?.infected_people_nursery_count_daily.value}
-                    id="positief_verpleeghuis"
-                    gradient={
-                      siteText.verpleeghuis_positief_geteste_personen.bar
-                        .gradient
+                    value={
+                      state.nl?.infected_people_nursery_count_daily.last_value
+                        .infected_nursery_daily
                     }
+                    id="positief_verpleeghuis"
+                    gradient={[
+                      {
+                        color: '#3391CC',
+                        value: 0,
+                      },
+                    ]}
                   />
                 )}
               </GraphContent>
@@ -563,6 +715,8 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                 sluitText={
                   siteText.verpleeghuis_positief_geteste_personen.sluit
                 }
+                piwikAction="landelijk"
+                piwikName="Aantal positief geteste bewoners"
               >
                 <h4>
                   {siteText.verpleeghuis_positief_geteste_personen.fold_title}
@@ -571,19 +725,26 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                 <h4>
                   {siteText.verpleeghuis_positief_geteste_personen.graph_title}
                 </h4>
-                {state.NL?.infected_people_nursery_count_daily?.list && (
+                {state.nl?.infected_people_nursery_count_daily?.values && (
                   <LineChart
-                    data={state.NL?.infected_people_nursery_count_daily?.list}
+                    values={state.nl?.infected_people_nursery_count_daily?.values.map(
+                      (value) => ({
+                        value: value.infected_nursery_daily,
+                        date: value.date_of_report_unix,
+                      })
+                    )}
                   />
                 )}
                 <Metadata
-                  period={state.NL?.infected_people_nursery_count_daily?.list}
+                  period={state.nl?.infected_people_nursery_count_daily?.values.map(
+                    (value) => value.date_of_report_unix
+                  )}
                   dataSource={
                     siteText.verpleeghuis_positief_geteste_personen.bron
                   }
                   lastUpdated={
-                    state.NL?.infected_people_nursery_count_daily?.lastupdate *
-                    1000
+                    state.nl?.infected_people_nursery_count_daily?.last_value
+                      .date_of_report_unix * 1000
                   }
                 />
               </Collapse>
@@ -597,51 +758,70 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                 />
                 <p>{siteText.verpleeghuis_besmette_locaties.text}</p>
 
-                {state.NL?.total_newly_reported_locations && (
+                {state.nl?.total_newly_reported_locations && (
                   <BarScale
-                    min={siteText.verpleeghuis_besmette_locaties.bar.min}
-                    max={siteText.verpleeghuis_besmette_locaties.bar.max}
+                    min={0}
+                    max={30}
                     screenReaderText={
-                      siteText.verpleeghuis_besmette_locaties.bar
+                      siteText.verpleeghuis_besmette_locaties
                         .screen_reader_graph_content
                     }
-                    value={state.NL?.total_newly_reported_locations.value}
-                    id="besmette_locaties_verpleeghuis"
-                    gradient={
-                      siteText.verpleeghuis_besmette_locaties.bar.gradient
+                    value={
+                      state.nl?.total_newly_reported_locations.last_value
+                        .infected_nursery_daily
                     }
+                    id="besmette_locaties_verpleeghuis"
+                    gradient={[
+                      {
+                        color: '#3391CC',
+                        value: 0,
+                      },
+                    ]}
                   />
                 )}
               </GraphContent>
               <Collapse
                 openText={siteText.verpleeghuis_besmette_locaties.open}
                 sluitText={siteText.verpleeghuis_besmette_locaties.sluit}
+                piwikName="Aantal besmette locaties"
+                piwikAction="landelijk"
               >
                 <h4>{siteText.verpleeghuis_besmette_locaties.fold_title}</h4>
                 <p>{siteText.verpleeghuis_besmette_locaties.fold}</p>
 
                 <h4>{siteText.verpleeghuis_besmette_locaties.graph_title}</h4>
-                {state.NL?.total_newly_reported_locations?.list && (
+                {state.nl?.total_newly_reported_locations?.values && (
                   <LineChart
-                    data={state.NL.total_newly_reported_locations.list}
+                    values={state.nl.total_newly_reported_locations.values.map(
+                      (value) => ({
+                        value: value.infected_nursery_daily,
+                        date: value.date_of_report_unix,
+                      })
+                    )}
                   />
                 )}
 
-                {state.NL?.total_reported_locations?.value && (
+                {state.nl?.total_reported_locations?.last_value && (
                   <h3>
                     {siteText.verpleeghuis_besmette_locaties.metric_title}{' '}
                     <span style={{ color: '#01689b' }}>
-                      {formatDecimal(state.NL?.total_reported_locations.value)}
+                      {formatDecimal(
+                        state.nl?.infected_people_nursery_count_daily.last_value
+                          .total_reported_locations
+                      )}
                     </span>
                   </h3>
                 )}
                 <p>{siteText.verpleeghuis_besmette_locaties.metric_text}</p>
 
                 <Metadata
-                  period={state.NL?.total_newly_reported_locations?.list}
+                  period={state.nl?.total_newly_reported_locations?.values.map(
+                    (value) => value.date_of_report_unix
+                  )}
                   dataSource={siteText.verpleeghuis_besmette_locaties.bron}
                   lastUpdated={
-                    state.NL?.total_newly_reported_locations?.lastupdate * 1000
+                    state.nl?.total_newly_reported_locations?.last_value
+                      .date_of_report_unix * 1000
                   }
                 />
               </Collapse>
@@ -654,38 +834,55 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
                   title={siteText.verpleeghuis_oversterfte.title}
                 />
                 <p>{siteText.verpleeghuis_oversterfte.text}</p>
-                {state.NL?.deceased_people_nursery_count_daily && (
+                {state.nl?.deceased_people_nursery_count_daily && (
                   <BarScale
-                    min={siteText.verpleeghuis_oversterfte.bar.min}
-                    max={siteText.verpleeghuis_oversterfte.bar.max}
+                    min={0}
+                    max={50}
                     screenReaderText={
                       siteText.verpleeghuis_oversterfte
                         .screen_reader_graph_content
                     }
-                    value={state.NL?.deceased_people_nursery_count_daily.value}
+                    value={
+                      state.nl?.deceased_people_nursery_count_daily.last_value
+                        .deceased_nursery_daily
+                    }
                     id="over"
-                    gradient={siteText.verpleeghuis_oversterfte.bar.gradient}
+                    gradient={[
+                      {
+                        color: '#3391CC',
+                        value: 0,
+                      },
+                    ]}
                   />
                 )}
               </GraphContent>
               <Collapse
                 openText={siteText.verpleeghuis_oversterfte.open}
                 sluitText={siteText.verpleeghuis_oversterfte.sluit}
+                piwikName="Sterfte"
+                piwikAction="landelijk"
               >
                 <h4>{siteText.verpleeghuis_oversterfte.fold_title}</h4>
                 <p>{siteText.verpleeghuis_oversterfte.fold}</p>
                 <h4>{siteText.verpleeghuis_oversterfte.graph_title}</h4>
-                {state.NL?.deceased_people_nursery_count_daily?.list && (
+                {state.nl?.deceased_people_nursery_count_daily?.values && (
                   <LineChart
-                    data={state.NL.deceased_people_nursery_count_daily.list}
+                    values={state.nl.deceased_people_nursery_count_daily.values.map(
+                      (value) => ({
+                        value: value.deceased_nursery_daily,
+                        date: value.date_of_report_unix,
+                      })
+                    )}
                   />
                 )}
                 <Metadata
-                  period={state.NL?.deceased_people_nursery_count_daily?.list}
+                  period={state.nl?.deceased_people_nursery_count_daily?.values.map(
+                    (value) => value.date_of_report_unix
+                  )}
                   dataSource={siteText.verpleeghuis_oversterfte.bron}
                   lastUpdated={
-                    state.NL?.deceased_people_nursery_count_daily?.lastupdate *
-                    1000
+                    state.nl?.deceased_people_nursery_count_daily?.last_value
+                      .date_of_report_unix * 1000
                   }
                 />
               </Collapse>
@@ -698,7 +895,7 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
 };
 
 Home.getLayout = Layout.getLayout({
-  ...siteText.metadata,
+  ...siteText.nationaal_metadata,
   openGraphImage,
   twitterImage,
 });

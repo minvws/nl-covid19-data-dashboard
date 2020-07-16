@@ -1,5 +1,5 @@
 {
-  "metadata": {
+  "regionaal_metadata": {
     "title": "Regionaal Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
     "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
     "url": "https://coronadashboard.rijksoverheid.nl/regio"
@@ -12,25 +12,7 @@
     "graph_title": "Verloop over tijd",
     "open": "Verberg uitleg",
     "sluit": "Meer uitleg en data",
-    "bar": {
-      "screen_reader_graph_content": "{{value}} opnames.",
-      "min": 0,
-      "max": 100,
-      "gradient": [
-        {
-          "color": "#69c253",
-          "value": 0
-        },
-        {
-          "color": "#D3A500",
-          "value": 40
-        },
-        {
-          "color": "#f35065",
-          "value": 90
-        }
-      ]
-    },
+    "screen_reader_graph_content": "{{value}} opnames.",
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -45,17 +27,7 @@
     "graph_title": "Verloop over tijd",
     "open": "Verberg uitleg",
     "sluit": "Meer uitleg en data",
-    "bar": {
-      "screen_reader_graph_content": "{{value}} positief geteste personen.",
-      "min": 0,
-      "max": 5,
-      "gradient": [
-        {
-          "color": "#3391CC",
-          "value": 0
-        }
-      ]
-    },
+    "screen_reader_graph_content": "{{value}} positief geteste personen.",
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"

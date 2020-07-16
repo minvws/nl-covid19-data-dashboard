@@ -4,7 +4,7 @@ import MaxWidth from 'components/maxWidth';
 import text from 'data/textError.json';
 import styles from './error.module.scss';
 
-ErrorPage.getLayout = Layout.getLayout(text.metadata.titel);
+ErrorPage.getLayout = Layout.getLayout(text.error_metadata.title);
 
 export default function ErrorPage() {
   return (

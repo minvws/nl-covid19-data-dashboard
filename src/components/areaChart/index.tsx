@@ -12,11 +12,14 @@ if (typeof Highcharts === 'object') {
 type AreaChartProps = {
   rangeLegendLabel: string;
   lineLegendLabel: string;
-  min: Array<Record<string, number>>;
-  max: Array<Record<string, number>>;
   minY: number;
   maxY: number;
-  data: Record<string, unknown>;
+  data: Array<{
+    avg: number | null;
+    date: number;
+    min: number | null;
+    max: number | null;
+  }>;
   signaalwaarde: number;
 };
 
@@ -24,11 +27,9 @@ const AreaChart: FunctionComponent<AreaChartProps> = (props) => {
   const {
     rangeLegendLabel,
     lineLegendLabel,
-    min,
-    max,
+    data,
     minY,
     maxY,
-    data,
     signaalwaarde,
   } = props;
 
@@ -42,20 +43,15 @@ const AreaChart: FunctionComponent<AreaChartProps> = (props) => {
     return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
   };
 
-  const rangeData = useMemo(() => {
-    const dates = Object.keys(min);
-    dates.sort((a: any, b: any) => a - b);
-
-    return dates.map((date) => [
-      new Date(parseInt(date) * 1000), // parse Unix timestamp to JS timestamp
-      min[date],
-      max[date],
-    ]);
-  }, [min, max]);
+  const rangeData: [Date, number, number][] = useMemo(() => {
+    return data
+      .sort((a, b) => a.date - b.date)
+      .map((d) => [new Date(d.date * 1000), d.min, d.max]);
+  }, [data]);
 
   const lineData = useMemo(() => {
-    return Object.keys(data).map((date) => {
-      return [new Date(parseInt(date) * 1000), data[date]];
+    return data.map((value) => {
+      return [new Date(value.date * 1000), value.avg];
     });
   }, [data]);
 

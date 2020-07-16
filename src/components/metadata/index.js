@@ -20,7 +20,7 @@ export default function Metadata(props) {
     let start, end;
 
     if (period) {
-      const timestamps = Object.keys(period)
+      const timestamps = period
         .map((el) => parseInt(el) * 1000)
         .sort((a, b) => a - b);
 
