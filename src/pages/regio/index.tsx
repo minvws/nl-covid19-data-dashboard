@@ -13,6 +13,7 @@ import LastUpdated from 'components/lastUpdated';
 import Warning from 'assets/warn.svg';
 import Metadata from 'components/metadata';
 import LoadingPlaceholder from 'components/loadingPlaceholder';
+import DateReported from 'components/dateReported';
 
 import { store } from 'store';
 import GraphContent from 'components/graphContent';
@@ -263,6 +264,14 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                     )}
                   </>
                 )}
+
+                <DateReported
+                  dateUnix={
+                    state[selectedRegio?.code]?.intake_hospital_ma?.last_value
+                      ?.date_of_report_unix
+                  }
+                  hasDailyInterval
+                />
               </GraphContent>
 
               {selectedRegio && (
@@ -297,10 +306,6 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                     )}
                     dataSource={
                       siteText.regionaal_ziekenhuisopnames_per_dag.bron
-                    }
-                    lastUpdated={
-                      state[selectedRegio?.code]?.intake_hospital_ma?.last_value
-                        .date_of_report_unix * 1000
                     }
                   />
                 </Collapse>
@@ -363,6 +368,14 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                         </span>
                       </h3>
                     )}
+                    <DateReported
+                      dateUnix={
+                        state[selectedRegio?.code]
+                          ?.infected_people_delta_normalized?.last_value
+                          ?.date_of_report_unix
+                      }
+                      hasDailyInterval
+                    />
                   </>
                 )}
               </GraphContent>
@@ -404,11 +417,6 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                     )}
                     dataSource={
                       siteText.regionaal_positief_geteste_personen.bron
-                    }
-                    lastUpdated={
-                      state[selectedRegio?.code]
-                        ?.infected_people_delta_normalized?.last_value
-                        .date_of_report_unix * 1000
                     }
                   />
                 </Collapse>

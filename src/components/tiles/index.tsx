@@ -157,7 +157,6 @@ export const IntakeIntensiveCare: React.FC<IIntakeIntensiveCare> = (props) => {
             <Metadata
               period={data.values.map((value) => value.date_of_report_unix)}
               dataSource={text.bron}
-              lastUpdated={data.last_value.date_of_report_unix * 1000}
             />
           </>
         )}
@@ -230,7 +229,6 @@ export const IntakeHospital: React.FC<IIntakeHospital> = (props) => {
             <Metadata
               period={data.values.map((value) => value.date_of_report_unix)}
               dataSource={text.bron}
-              lastUpdated={data.last_value.date_of_report_unix * 1000}
             />
           </>
         )}
@@ -307,10 +305,7 @@ export const PostivelyTestedPeople: React.FC<IPostivelyTestedPeople> = (
                 (value) => value.infected_per_agegroup_increase
               )}
             />
-            <Metadata
-              dataSource={text.bron}
-              lastUpdated={age.last_value.date_of_report_unix * 1000}
-            />
+            <Metadata dataSource={text.bron} />
           </>
         )}
       </Collapse>
@@ -368,12 +363,7 @@ export const InfectiousPeople: React.FC<IInfectiousPeople> = (props) => {
         <h4>{text.fold_title}</h4>
         <p>{text.fold}</p>
 
-        {count && (
-          <Metadata
-            dataSource={text.bron}
-            lastUpdated={count.last_value.date_of_report_unix * 1000}
-          />
-        )}
+        {count && <Metadata dataSource={text.bron} />}
       </Collapse>
     </GraphContainer>
   );
@@ -523,7 +513,6 @@ export const SuspectedPatients: React.FC<ISuspectedPatients> = (props) => {
             <Metadata
               period={data.values.map((value) => value.week)}
               dataSource={text.bron}
-              lastUpdated={data.last_value.incidentie * 1000}
             />
           </>
         )}
@@ -583,7 +572,6 @@ export const SewerWater: React.FC<ISewerWater> = (props) => {
             <Metadata
               period={data.values.map((value) => value.week)}
               dataSource={text.bron}
-              lastUpdated={data.last_value.week * 1000}
             />
           </>
         )}
@@ -645,7 +633,6 @@ export const NursingHomeInfectedPeople: React.FC<INursingHomeInfectedPeople> = (
             <Metadata
               period={data.values.map((value) => value.date_of_report_unix)}
               dataSource={text.bron}
-              lastUpdated={data.last_value.date_of_report_unix * 1000}
             />
           </>
         )}
@@ -723,7 +710,6 @@ export const NursingHomeInfectedLocations: React.FC<INursingHomeInfectedLocation
               (value) => value.date_of_report_unix
             )}
             dataSource={text.bron}
-            lastUpdated={newLocations.last_value.date_of_report_unix * 1000}
           />
         )}
       </Collapse>
@@ -783,7 +769,6 @@ export const NursingHomeInfectedDeaths: React.FC<INursingHomeInfectedDeaths> = (
             <Metadata
               period={data?.values.map((value) => value.date_of_report_unix)}
               dataSource={text.bron}
-              lastUpdated={data?.last_value.date_of_report_unix * 1000}
             />
           </>
         )}
