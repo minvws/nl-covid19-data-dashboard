@@ -5,7 +5,14 @@ import * as piwik from '../../lib/piwik';
 
 import Arrow from 'assets/arrow.svg';
 
-const Collapse = ({
+interface IProps {
+  openText: string;
+  sluitText: string;
+  piwikAction?: string;
+  piwikName?: string;
+}
+
+const Collapse: React.FC<IProps> = ({
   children,
   openText,
   sluitText,
@@ -22,13 +29,15 @@ const Collapse = ({
   });
 
   const toggle = () => {
-    setOpen(prevOpen => !prevOpen);
+    setOpen((prevOpen) => !prevOpen);
 
-    piwik.event({
-      category: 'accordion-open',
-      action: piwikAction,
-      name: piwikName,
-    });
+    if (piwikAction && piwikName) {
+      piwik.event({
+        category: 'accordion-open',
+        action: piwikAction,
+        name: piwikName,
+      });
+    }
   };
 
   const buttonText = open ? openText : sluitText;

@@ -279,8 +279,6 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                 <Collapse
                   openText={siteText.regionaal_ziekenhuisopnames_per_dag.open}
                   sluitText={siteText.regionaal_ziekenhuisopnames_per_dag.sluit}
-                  piwikAction={selectedRegio.name}
-                  piwikName="Ziekenhuisopnames per dag in Amsterdam-Amstelland"
                 >
                   <h4>
                     {siteText.regionaal_ziekenhuisopnames_per_dag.fold_title}
@@ -382,8 +380,6 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                 <Collapse
                   openText={siteText.regionaal_positief_geteste_personen.open}
                   sluitText={siteText.regionaal_positief_geteste_personen.sluit}
-                  piwikAction={selectedRegio.name}
-                  piwikName="Positief geteste mensen in Amsterdam-Amstelland"
                 >
                   <h4>
                     {siteText.regionaal_positief_geteste_personen.fold_title}

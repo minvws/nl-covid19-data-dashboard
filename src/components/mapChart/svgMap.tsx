@@ -3,8 +3,6 @@ import styles from './svgmap.module.scss';
 import { FunctionComponent } from 'react';
 import Link from 'next/link';
 
-import * as piwik from '../../lib/piwik';
-
 import { SafetyRegion } from 'pages/regio';
 
 const regions = [
@@ -199,16 +197,7 @@ const SvgMap: FunctionComponent<SvgMapTypes> = (props) => {
                   scroll={false}
                   shallow
                 >
-                  <a
-                    className={className}
-                    aria-label={safetyRegion.name}
-                    onClick={() => {
-                      piwik.event({
-                        category: 'select_regio',
-                        action: safetyRegion.name,
-                      });
-                    }}
-                  >
+                  <a className={className} aria-label={safetyRegion.name}>
                     <path key={`region-${region.id}`} d={region.d} />
                   </a>
                 </Link>
