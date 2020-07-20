@@ -234,44 +234,45 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                     )}
 
                     {state[selectedRegio?.code]?.intake_hospital_ma && (
-                      <BarScale
-                        min={0}
-                        max={100}
-                        value={
-                          state[selectedRegio.code].intake_hospital_ma
-                            .last_value.intake_hospital_ma
-                        }
-                        screenReaderText={
-                          siteText.regionaal_ziekenhuisopnames_per_dag
-                            .screen_reader_graph_content
-                        }
-                        id="regio_opnames"
-                        gradient={[
-                          {
-                            color: '#69c253',
-                            value: 0,
-                          },
-                          {
-                            color: '#D3A500',
-                            value: 40,
-                          },
-                          {
-                            color: '#f35065',
-                            value: 90,
-                          },
-                        ]}
-                      />
+                      <>
+                        <BarScale
+                          min={0}
+                          max={100}
+                          value={
+                            state[selectedRegio.code].intake_hospital_ma
+                              .last_value.intake_hospital_ma
+                          }
+                          screenReaderText={
+                            siteText.regionaal_ziekenhuisopnames_per_dag
+                              .screen_reader_graph_content
+                          }
+                          id="regio_opnames"
+                          gradient={[
+                            {
+                              color: '#69c253',
+                              value: 0,
+                            },
+                            {
+                              color: '#D3A500',
+                              value: 40,
+                            },
+                            {
+                              color: '#f35065',
+                              value: 90,
+                            },
+                          ]}
+                        />
+                        <DateReported
+                          dateUnix={
+                            state[selectedRegio?.code]?.intake_hospital_ma
+                              ?.last_value?.date_of_report_unix
+                          }
+                          hasDailyInterval
+                        />
+                      </>
                     )}
                   </>
                 )}
-
-                <DateReported
-                  dateUnix={
-                    state[selectedRegio?.code]?.intake_hospital_ma?.last_value
-                      ?.date_of_report_unix
-                  }
-                  hasDailyInterval
-                />
               </GraphContent>
 
               {selectedRegio && (
@@ -355,27 +356,29 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                     )}
 
                     {state[selectedRegio?.code]?.infected_people_total && (
-                      <h3>
-                        {
-                          siteText.regionaal_positief_geteste_personen
-                            .metric_title
-                        }{' '}
-                        <span style={{ color: '#01689b' }}>
-                          {formatDecimal(
-                            state[selectedRegio?.code]?.infected_people_total
-                              ?.last_value.infected_people_total
-                          )}
-                        </span>
-                      </h3>
+                      <>
+                        <h3>
+                          {
+                            siteText.regionaal_positief_geteste_personen
+                              .metric_title
+                          }{' '}
+                          <span style={{ color: '#01689b' }}>
+                            {formatDecimal(
+                              state[selectedRegio?.code]?.infected_people_total
+                                ?.last_value.infected_people_total
+                            )}
+                          </span>
+                        </h3>
+                        <DateReported
+                          dateUnix={
+                            state[selectedRegio?.code]
+                              ?.infected_people_delta_normalized?.last_value
+                              ?.date_of_report_unix
+                          }
+                          hasDailyInterval
+                        />
+                      </>
                     )}
-                    <DateReported
-                      dateUnix={
-                        state[selectedRegio?.code]
-                          ?.infected_people_delta_normalized?.last_value
-                          ?.date_of_report_unix
-                      }
-                      hasDailyInterval
-                    />
                   </>
                 )}
               </GraphContent>

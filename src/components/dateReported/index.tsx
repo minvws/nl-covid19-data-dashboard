@@ -9,6 +9,8 @@ interface IProps {
 const dateReported: React.FC<IProps> = (props) => {
   const { dateUnix, hasDailyInterval } = props;
 
+  if (!dateUnix) return null;
+
   const date = new Date(dateUnix * 1000);
   const lastDay = `${date.getDate()} ${long[date.getMonth()]}`;
   const interval = hasDailyInterval ? 'dagelijks' : 'wekelijks';
