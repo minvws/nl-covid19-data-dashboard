@@ -437,8 +437,9 @@ export const ReproductionIndex: React.FC<IReproductionIndex> = (props) => {
 
         <Legenda>
           <li className="blue">
-            Reproductiegetal R is een schatting. Om het reproductiegetal te
-            berekenen is twee weken aan data nodig.
+            De effectieve R is een schatting. Voor recente R schattingen is de
+            betrouwbaarheid niet groot, daarom loopt de R-lijn loopt niet door
+            in de laatste twee weken.
           </li>
           <li className="gray square">
             De onzekerheidsmarge toont met zekerheid tussen welke waarden de R
