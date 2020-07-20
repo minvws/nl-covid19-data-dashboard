@@ -3,7 +3,6 @@ import Masonry from 'react-masonry-css';
 
 import GraphContainer from 'components/graphContainer';
 import GraphContent from 'components/graphContent';
-import LastUpdated from 'components/lastUpdated';
 import TitleBlock from 'components/titleBlock';
 import Layout from 'components/layout';
 import LinkCard from 'components/linkCard';
@@ -56,8 +55,6 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
     fetchData();
   }, [dispatch, state]);
 
-  const shouldShowDataComponents = Boolean(state.NL);
-
   const breakpointColumnsObj = {
     default: 3,
     1100: 2,
@@ -92,10 +89,6 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
       </Head>
 
       <div className="home-content">
-        {shouldShowDataComponents && (
-          <LastUpdated lastUpdated={state.NL?.last_generated * 1000} />
-        )}
-
         <section className="home-section">
           <Masonry
             breakpointCols={breakpointColumnsObj}

@@ -126,6 +126,11 @@ export const IntakeIntensiveCare: React.FC<IIntakeIntensiveCare> = (props) => {
             id="ic"
           />
         )}
+
+        <DateReported
+          dateUnix={data?.last_value?.date_of_report_unix}
+          hasDailyInterval
+        />
       </GraphContent>
 
       <Collapse
@@ -195,6 +200,11 @@ export const IntakeHospital: React.FC<IIntakeHospital> = (props) => {
             ]}
           />
         )}
+
+        <DateReported
+          dateUnix={data?.last_value?.date_of_report_unix}
+          hasDailyInterval
+        />
       </GraphContent>
 
       <Collapse
@@ -263,6 +273,11 @@ export const PostivelyTestedPeople: React.FC<IPostivelyTestedPeople> = (
             </span>
           </h3>
         )}
+
+        <DateReported
+          dateUnix={delta?.last_value?.date_of_report_unix}
+          hasDailyInterval
+        />
       </GraphContent>
       <Collapse
         openText={text.open}
@@ -340,6 +355,8 @@ export const InfectiousPeople: React.FC<IInfectiousPeople> = (props) => {
             </span>
           </h3>
         )}
+
+        <DateReported dateUnix={count?.last_value?.date_of_report_unix} />
       </GraphContent>
 
       <Collapse
@@ -480,6 +497,8 @@ export const SuspectedPatients: React.FC<ISuspectedPatients> = (props) => {
             ]}
           />
         )}
+
+        <DateReported dateUnix={data?.last_value?.week} />
       </GraphContent>
       <Collapse
         openText={text.open}
@@ -538,6 +557,8 @@ export const SewerWater: React.FC<ISewerWater> = (props) => {
             ]}
           />
         )}
+
+        <DateReported dateUnix={data?.last_value?.week} />
       </GraphContent>
       <Collapse
         openText={text.open}
@@ -597,6 +618,11 @@ export const NursingHomeInfectedPeople: React.FC<INursingHomeInfectedPeople> = (
             ]}
           />
         )}
+
+        <DateReported
+          dateUnix={data?.last_value?.date_of_report_unix}
+          hasDailyInterval
+        />
       </GraphContent>
       <Collapse
         openText={text.open}
@@ -654,6 +680,10 @@ export const NursingHomeInfectedLocations: React.FC<INursingHomeInfectedLocation
             ]}
           />
         )}
+        <DateReported
+          dateUnix={newLocations?.last_value?.date_of_report_unix}
+          hasDailyInterval
+        />
       </GraphContent>
       <Collapse
         openText={text.open}
@@ -726,6 +756,11 @@ export const NursingHomeInfectedDeaths: React.FC<INursingHomeInfectedDeaths> = (
             ]}
           />
         )}
+
+        <DateReported
+          dateUnix={data?.last_value?.date_of_report_unix}
+          hasDailyInterval
+        />
       </GraphContent>
       <Collapse
         openText={text.open}
