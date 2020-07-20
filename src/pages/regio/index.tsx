@@ -238,7 +238,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                         max={100}
                         value={
                           state[selectedRegio.code].intake_hospital_ma
-                            .last_value.moving_average_hospital
+                            .last_value.intake_hospital_ma
                         }
                         screenReaderText={
                           siteText.regionaal_ziekenhuisopnames_per_dag
@@ -284,7 +284,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                       values={state[
                         selectedRegio?.code
                       ]?.intake_hospital_ma?.values.map((value) => ({
-                        value: value.moving_average_hospital,
+                        value: value.intake_hospital_ma,
                         date: value.date_of_report_unix,
                       }))}
                     />
@@ -333,7 +333,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                         value={
                           state[selectedRegio.code]
                             .infected_people_delta_normalized.last_value
-                            .infected_daily_increase
+                            .infected_people_delta_normalized
                         }
                         screenReaderText={
                           siteText.regionaal_positief_geteste_personen
@@ -358,7 +358,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                         <span style={{ color: '#01689b' }}>
                           {formatDecimal(
                             state[selectedRegio?.code]?.infected_people_total
-                              ?.last_value.infected_daily_total
+                              ?.last_value.infected_people_total
                           )}
                         </span>
                       </h3>
@@ -389,7 +389,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                         selectedRegio.code
                       ].infected_people_delta_normalized.values.map(
                         (value) => ({
-                          value: value.infected_daily_increase,
+                          value: value.infected_people_delta_normalized,
                           date: value.date_of_report_unix,
                         })
                       )}
