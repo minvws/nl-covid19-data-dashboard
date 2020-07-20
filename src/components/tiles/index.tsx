@@ -7,6 +7,7 @@ import Legenda from 'components/legenda';
 import GraphContainer from 'components/graphContainer';
 import GraphContent from 'components/graphContent';
 import GraphHeader from 'components/graphHeader';
+import DateReported from 'components/dateReported';
 
 import Arts from 'assets/arts.svg';
 import Ziekenhuis from 'assets/ziekenhuis.svg';
@@ -397,6 +398,8 @@ export const ReproductionIndex: React.FC<IReproductionIndex> = (props) => {
             ]}
           />
         )}
+
+        <DateReported dateUnix={data?.last_value?.date_of_report_unix} />
       </GraphContent>
       <Collapse
         openText={text.open}

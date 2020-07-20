@@ -1,0 +1,11 @@
+@import 'scss/variables.scss';
+
+.dateReported {
+  display: flex;
+  align-items: center;
+  color: $text-color-grey;
+
+  span {
+    margin-right: 0.5em;
+  }
+}
