@@ -300,11 +300,6 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                     />
                   )}
                   <Metadata
-                    period={state[
-                      selectedRegio?.code
-                    ]?.intake_hospital_ma?.values.map(
-                      (value) => value.date_of_report_unix
-                    )}
                     dataSource={
                       siteText.regionaal_ziekenhuisopnames_per_dag.bron
                     }
@@ -413,11 +408,6 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                   )}
 
                   <Metadata
-                    period={state[
-                      selectedRegio?.code
-                    ]?.infected_people_delta_normalized?.values.map(
-                      (value) => value.date_of_report_unix
-                    )}
                     dataSource={
                       siteText.regionaal_positief_geteste_personen.bron
                     }
