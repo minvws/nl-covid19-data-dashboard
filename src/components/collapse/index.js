@@ -22,7 +22,13 @@ const Collapse = ({
   });
 
   const toggle = () => {
-    setOpen((prevOpen) => !prevOpen);
+    setOpen(prevOpen => !prevOpen);
+
+    piwik.event({
+      category: 'accordion-open',
+      action: piwikAction,
+      name: piwikName,
+    });
   };
 
   const buttonText = open ? openText : sluitText;
@@ -35,13 +41,6 @@ const Collapse = ({
       <button
         aria-expanded={open}
         className="collapseButton"
-        onClick={() =>
-          piwik.event({
-            category: 'accordion-open',
-            action: piwikAction,
-            name: piwikName,
-          })
-        }
         {...getToggleProps({ onClick: toggle })}
       >
         {buttonText}
