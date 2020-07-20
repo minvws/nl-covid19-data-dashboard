@@ -1,0 +1,34 @@
+@import 'scss/variables.scss';
+
+.legenda {
+  list-style: none;
+  padding-left: 2em;
+
+  li {
+    margin: 1em 0;
+    position: relative;
+  }
+
+  li::after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 15px;
+    height: 3px;
+    left: -25px;
+    top: 10px;
+  }
+
+  li.blue::after {
+    background: #3391CC;
+  }
+
+  li.gray::after {
+    background: #C4C4C4;
+  }
+
+  li.square::after {
+    height: 15px;
+    top: 5px;
+  }
+}

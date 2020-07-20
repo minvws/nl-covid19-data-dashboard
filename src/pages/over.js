@@ -11,7 +11,7 @@ import openGraphImage from 'assets/sharing/og-over.png?url';
 import twitterImage from 'assets/sharing/twitter-over.png?url';
 
 Over.getLayout = Layout.getLayout({
-  ...text.metadata,
+  ...text.over_metadata,
   openGraphImage,
   twitterImage,
 });
