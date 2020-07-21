@@ -42,7 +42,9 @@ export default function Verantwoording() {
                 <>
                   <dt>{item.cijfer.translation}</dt>
                   <dd>
-                    <ReplaceLinks>{item.verantwoording.translation}</ReplaceLinks>
+                    <ReplaceLinks>
+                      {item.verantwoording.translation}
+                    </ReplaceLinks>
                   </dd>
                 </>
               ))}

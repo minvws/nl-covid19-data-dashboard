@@ -30,7 +30,11 @@ function IconListItem(props) {
   return (
     <li className={styles.iconListItem}>
       <div className={styles.content}>
-        <img src={item.icon.translation} className={styles.iconListImage} alt="" />{' '}
+        <img
+          src={item.icon.translation}
+          className={styles.iconListImage}
+          alt=""
+        />{' '}
         <h4>{item.text.translation}</h4>
       </div>
     </li>
@@ -50,7 +54,11 @@ function CollapseIconListItem(props) {
   return (
     <li className={styles.iconListItem}>
       <div className={styles.content}>
-        <img src={item.icon.translation} className={styles.iconListImage} alt="" />{' '}
+        <img
+          src={item.icon.translation}
+          className={styles.iconListImage}
+          alt=""
+        />{' '}
         <h4>
           <button
             className={styles.button}
