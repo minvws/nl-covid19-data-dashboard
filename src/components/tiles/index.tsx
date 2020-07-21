@@ -20,7 +20,7 @@ import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
 
 import formatDecimal from 'utils/formatDec';
 
-import siteText from 'data/textNationaal.json';
+import siteText from 'locale/nl.json';
 
 import {
   IntakeIntensivecareMa,
@@ -99,8 +99,8 @@ export const IntakeIntensiveCare: React.FC<IIntakeIntensiveCare> = (props) => {
   return (
     <GraphContainer>
       <GraphContent>
-        <GraphHeader Icon={Arts} title={text.title} />
-        <p>{text.text}</p>
+        <GraphHeader Icon={Arts} title={text.title.translation} />
+        <p>{text.text.translation}</p>
 
         {data && (
           <BarScale
@@ -120,8 +120,8 @@ export const IntakeIntensiveCare: React.FC<IIntakeIntensiveCare> = (props) => {
                 value: 20,
               },
             ]}
-            screenReaderText={text.screen_reader_graph_content}
-            kritiekeWaarde={text.signaalwaarde}
+            screenReaderText={text.screen_reader_graph_content.translation}
+            kritiekeWaarde={Number(text.signaalwaarde.translation)}
             value={data.last_value.moving_average_ic}
             id="ic"
           />
@@ -134,15 +134,15 @@ export const IntakeIntensiveCare: React.FC<IIntakeIntensiveCare> = (props) => {
       </GraphContent>
 
       <Collapse
-        openText={text.open}
-        sluitText={text.sluit}
+        openText={text.open.translation}
+        sluitText={text.sluit.translation}
         piwikAction="landelijk"
         piwikName="Intensive care-opnames per dag"
       >
-        <h4>{text.fold_title}</h4>
-        <p>{text.fold}</p>
+        <h4>{text.fold_title.translation}</h4>
+        <p>{text.fold.translation}</p>
 
-        <h4>{text.graph_title}</h4>
+        <h4>{text.graph_title.translation}</h4>
 
         {data && (
           <>
@@ -151,7 +151,7 @@ export const IntakeIntensiveCare: React.FC<IIntakeIntensiveCare> = (props) => {
                 value: value.moving_average_ic,
                 date: value.date_of_report_unix,
               }))}
-              signaalwaarde={text.signaalwaarde}
+              signaalwaarde={Number(text.signaalwaarde.translation)}
             />
 
             <Metadata dataSource={text.bron} />
@@ -168,16 +168,16 @@ export const IntakeHospital: React.FC<IIntakeHospital> = (props) => {
   return (
     <GraphContainer>
       <GraphContent>
-        <GraphHeader Icon={Ziekenhuis} title={text.title} />
+        <GraphHeader Icon={Ziekenhuis} title={text.title.translation} />
 
-        <p>{text.text}</p>
+        <p>{text.text.translation}</p>
 
         {data && (
           <BarScale
             min={0}
             max={100}
-            kritiekeWaarde={text.signaalwaarde}
-            screenReaderText={text.screen_reader_graph_content}
+            kritiekeWaarde={Number(text.signaalwaarde.translation)}
+            screenReaderText={text.screen_reader_graph_content.translation}
             value={data.last_value.moving_average_hospital}
             id="opnames"
             gradient={[
@@ -204,15 +204,15 @@ export const IntakeHospital: React.FC<IIntakeHospital> = (props) => {
       </GraphContent>
 
       <Collapse
-        openText={text.open}
-        sluitText={text.sluit}
+        openText={text.open.translation}
+        sluitText={text.sluit.translation}
         piwikName="Ziekenhuisopnames per dag"
         piwikAction="landelijk"
       >
-        <h4>{text.fold_title}</h4>
-        <p>{text.fold}</p>
+        <h4>{text.fold_title.translation}</h4>
+        <p>{text.fold.translation}</p>
 
-        <h4>{text.graph_title}</h4>
+        <h4>{text.graph_title.translation}</h4>
         {data && (
           <>
             <LineChart
@@ -220,7 +220,7 @@ export const IntakeHospital: React.FC<IIntakeHospital> = (props) => {
                 value: value.moving_average_hospital,
                 date: value.date_of_report_unix,
               }))}
-              signaalwaarde={text.signaalwaarde}
+              signaalwaarde={Number(text.signaalwaarde.translation)}
             />
 
             <Metadata dataSource={text.bron} />
@@ -239,13 +239,13 @@ export const PostivelyTestedPeople: React.FC<IPostivelyTestedPeople> = (
   return (
     <GraphContainer>
       <GraphContent>
-        <GraphHeader Icon={Getest} title={text.title} />
-        <p>{text.text}</p>
+        <GraphHeader Icon={Getest} title={text.title.translation} />
+        <p>{text.text.translation}</p>
         {delta && (
           <BarScale
             min={0}
             max={5}
-            screenReaderText={text.screen_reader_graph_content}
+            screenReaderText={text.screen_reader_graph_content.translation}
             value={delta.last_value.infected_daily_increase}
             id="positief"
             gradient={[
@@ -259,7 +259,7 @@ export const PostivelyTestedPeople: React.FC<IPostivelyTestedPeople> = (
 
         {total && (
           <h3>
-            {text.metric_title}{' '}
+            {text.metric_title.translation}{' '}
             <span style={{ color: '#01689b' }}>
               {formatDecimal(total.last_value.infected_daily_total)}
             </span>
@@ -272,15 +272,15 @@ export const PostivelyTestedPeople: React.FC<IPostivelyTestedPeople> = (
         />
       </GraphContent>
       <Collapse
-        openText={text.open}
-        sluitText={text.sluit}
+        openText={text.open.translation}
+        sluitText={text.sluit.translation}
         piwikAction="landelijk"
         piwikName="Positief geteste mensen"
       >
-        <h4>{text.fold_title}</h4>
-        <p>{text.fold}</p>
+        <h4>{text.fold_title.translation}</h4>
+        <p>{text.fold.translation}</p>
 
-        <h4>{text.linechart_title}</h4>
+        <h4>{text.linechart_title.translation}</h4>
         {delta && (
           <LineChart
             values={delta.values.map((value) => ({
@@ -290,7 +290,7 @@ export const PostivelyTestedPeople: React.FC<IPostivelyTestedPeople> = (
           />
         )}
 
-        <h4>{text.graph_title}</h4>
+        <h4>{text.graph_title.translation}</h4>
         {age && (
           <>
             <BarChart
@@ -313,14 +313,14 @@ export const InfectiousPeople: React.FC<IInfectiousPeople> = (props) => {
   return (
     <GraphContainer>
       <GraphContent>
-        <GraphHeader Icon={Ziektegolf} title={text.title} />
-        <p>{text.text}</p>
+        <GraphHeader Icon={Ziektegolf} title={text.title.translation} />
+        <p>{text.text.translation}</p>
 
         {countNormalized && (
           <BarScale
             min={0}
             max={50}
-            screenReaderText={text.screen_reader_graph_content}
+            screenReaderText={text.screen_reader_graph_content.translation}
             value={countNormalized.last_value.infectious_avg_normalized}
             id="besmettelijk"
             gradient={[
@@ -338,7 +338,7 @@ export const InfectiousPeople: React.FC<IInfectiousPeople> = (props) => {
 
         {count && (
           <h3>
-            {text.metric_title}{' '}
+            {text.metric_title.translation}{' '}
             <span style={{ color: '#01689b' }}>
               {formatDecimal(count.last_value.infectious_avg)}
             </span>
@@ -349,13 +349,13 @@ export const InfectiousPeople: React.FC<IInfectiousPeople> = (props) => {
       </GraphContent>
 
       <Collapse
-        openText={text.open}
-        sluitText={text.sluit}
+        openText={text.open.translation}
+        sluitText={text.sluit.translation}
         piwikName="Aantal besmettelijke mensen"
         piwikAction="landelijk"
       >
-        <h4>{text.fold_title}</h4>
-        <p>{text.fold}</p>
+        <h4>{text.fold_title.translation}</h4>
+        <p>{text.fold.translation}</p>
 
         {count && <Metadata dataSource={text.bron} />}
       </Collapse>
@@ -369,14 +369,14 @@ export const ReproductionIndex: React.FC<IReproductionIndex> = (props) => {
   return (
     <GraphContainer>
       <GraphContent>
-        <GraphHeader Icon={Repro} title={text.title} />
-        <p>{text.text}</p>
+        <GraphHeader Icon={Repro} title={text.title.translation} />
+        <p>{text.text.translation}</p>
         {data && (
           <BarScale
             min={0}
             max={2}
-            screenReaderText={text.screen_reader_graph_content}
-            kritiekeWaarde={text.signaalwaarde}
+            screenReaderText={text.screen_reader_graph_content.translation}
+            kritiekeWaarde={Number(text.signaalwaarde.translation)}
             value={data.last_value.reproduction_index_avg}
             id="repro"
             gradient={[
@@ -403,13 +403,13 @@ export const ReproductionIndex: React.FC<IReproductionIndex> = (props) => {
         <DateReported dateUnix={data?.last_value?.date_of_report_unix} />
       </GraphContent>
       <Collapse
-        openText={text.open}
-        sluitText={text.sluit}
+        openText={text.open.translation}
+        sluitText={text.sluit.translation}
         piwikName="Reproductiegetal"
         piwikAction="landelijk"
       >
-        <h4>{text.fold_title}</h4>
-        <p>{text.fold}</p>
+        <h4>{text.fold_title.translation}</h4>
+        <p>{text.fold.translation}</p>
 
         <img
           width={315}
@@ -419,7 +419,7 @@ export const ReproductionIndex: React.FC<IReproductionIndex> = (props) => {
           alt="Ondersteunende afbeelding bij bovenstaande uitleg"
         />
 
-        <h4>{text.graph_title}</h4>
+        <h4>{text.graph_title.translation}</h4>
         {data?.values && (
           <AreaChart
             data={data.values.map((value) => ({
@@ -431,8 +431,8 @@ export const ReproductionIndex: React.FC<IReproductionIndex> = (props) => {
             minY={0}
             maxY={4}
             signaalwaarde={1}
-            rangeLegendLabel={text.rangeLegendLabel}
-            lineLegendLabel={text.lineLegendLabel}
+            rangeLegendLabel={text.rangeLegendLabel.translation}
+            lineLegendLabel={text.lineLegendLabel.translation}
           />
         )}
 
@@ -459,15 +459,15 @@ export const SuspectedPatients: React.FC<ISuspectedPatients> = (props) => {
   return (
     <GraphContainer>
       <GraphContent>
-        <GraphHeader Icon={Arts} title={text.title} />
+        <GraphHeader Icon={Arts} title={text.title.translation} />
 
-        <p>{text.text}</p>
+        <p>{text.text.translation}</p>
 
         {data && (
           <BarScale
             min={0}
             max={140}
-            screenReaderText={text.screen_reader_graph_content}
+            screenReaderText={text.screen_reader_graph_content.translation}
             value={data.last_value.incidentie}
             id="verdenkingen_huisartsen"
             gradient={[
@@ -482,15 +482,15 @@ export const SuspectedPatients: React.FC<ISuspectedPatients> = (props) => {
         <DateReported dateUnix={data?.last_value?.week} />
       </GraphContent>
       <Collapse
-        openText={text.open}
-        sluitText={text.sluit}
+        openText={text.open.translation}
+        sluitText={text.sluit.translation}
         piwikName="Aantal patiënten waarvan huisartsen COVID-19 vermoeden"
         piwikAction="landelijk"
       >
-        <h4>{text.fold_title}</h4>
-        <p>{text.fold}</p>
+        <h4>{text.fold_title.translation}</h4>
+        <p>{text.fold.translation}</p>
 
-        <h4>{text.graph_title}</h4>
+        <h4>{text.graph_title.translation}</h4>
 
         {data && (
           <>
@@ -515,15 +515,18 @@ export const SewerWater: React.FC<ISewerWater> = (props) => {
   return (
     <GraphContainer>
       <GraphContent>
-        <GraphHeader Icon={RioolwaterMonitoring} title={text.title} />
+        <GraphHeader
+          Icon={RioolwaterMonitoring}
+          title={text.title.translation}
+        />
 
-        <p>{text.text}</p>
+        <p>{text.text.translation}</p>
 
         {data && (
           <BarScale
             min={0}
             max={100}
-            screenReaderText={text.screen_reader_graph_content}
+            screenReaderText={text.screen_reader_graph_content.translation}
             value={Number(data.last_value.average)}
             id="rioolwater_metingen"
             gradient={[
@@ -538,15 +541,15 @@ export const SewerWater: React.FC<ISewerWater> = (props) => {
         <DateReported dateUnix={data?.last_value?.week} />
       </GraphContent>
       <Collapse
-        openText={text.open}
-        sluitText={text.sluit}
+        openText={text.open.translation}
+        sluitText={text.sluit.translation}
         piwikName="Rioolwatermeting"
         piwikAction="landelijk"
       >
-        <h4>{text.fold_title}</h4>
-        <p>{text.fold}</p>
+        <h4>{text.fold_title.translation}</h4>
+        <p>{text.fold.translation}</p>
 
-        <h4>{text.graph_title}</h4>
+        <h4>{text.graph_title.translation}</h4>
 
         {data && (
           <>
@@ -573,14 +576,14 @@ export const NursingHomeInfectedPeople: React.FC<INursingHomeInfectedPeople> = (
   return (
     <GraphContainer>
       <GraphContent>
-        <GraphHeader Icon={Getest} title={text.title} />
-        <p>{text.text}</p>
+        <GraphHeader Icon={Getest} title={text.title.translation} />
+        <p>{text.text.translation}</p>
 
         {data && (
           <BarScale
             min={0}
             max={100}
-            screenReaderText={text.screen_reader_graph_content}
+            screenReaderText={text.screen_reader_graph_content.translation}
             value={data.last_value.infected_nursery_daily}
             id="positief_verpleeghuis"
             gradient={[
@@ -598,14 +601,14 @@ export const NursingHomeInfectedPeople: React.FC<INursingHomeInfectedPeople> = (
         />
       </GraphContent>
       <Collapse
-        openText={text.open}
-        sluitText={text.sluit}
+        openText={text.open.translation}
+        sluitText={text.sluit.translation}
         piwikAction="landelijk"
         piwikName="Aantal positief geteste bewoners"
       >
-        <h4>{text.fold_title}</h4>
-        <p>{text.fold}</p>
-        <h4>{text.graph_title}</h4>
+        <h4>{text.fold_title.translation}</h4>
+        <p>{text.fold.translation}</p>
+        <h4>{text.graph_title.translation}</h4>
 
         {data && (
           <>
@@ -631,14 +634,14 @@ export const NursingHomeInfectedLocations: React.FC<INursingHomeInfectedLocation
   return (
     <GraphContainer>
       <GraphContent>
-        <GraphHeader Icon={Locatie} title={text.title} />
-        <p>{text.text}</p>
+        <GraphHeader Icon={Locatie} title={text.title.translation} />
+        <p>{text.text.translation}</p>
 
         {newLocations && (
           <BarScale
             min={0}
             max={30}
-            screenReaderText={text.screen_reader_graph_content}
+            screenReaderText={text.screen_reader_graph_content.translation}
             value={newLocations.last_value.infected_nursery_daily}
             id="besmette_locaties_verpleeghuis"
             gradient={[
@@ -655,15 +658,15 @@ export const NursingHomeInfectedLocations: React.FC<INursingHomeInfectedLocation
         />
       </GraphContent>
       <Collapse
-        openText={text.open}
-        sluitText={text.sluit}
+        openText={text.open.translation}
+        sluitText={text.sluit.translation}
         piwikName="Aantal besmette locaties"
         piwikAction="landelijk"
       >
-        <h4>{text.fold_title}</h4>
-        <p>{text.fold}</p>
+        <h4>{text.fold_title.translation}</h4>
+        <p>{text.fold.translation}</p>
 
-        <h4>{text.graph_title}</h4>
+        <h4>{text.graph_title.translation}</h4>
 
         {newLocations && (
           <LineChart
@@ -676,7 +679,7 @@ export const NursingHomeInfectedLocations: React.FC<INursingHomeInfectedLocation
 
         {totalLocations && (
           <h3>
-            {text.metric_title}{' '}
+            {text.metric_title.translation}{' '}
             <span style={{ color: '#01689b' }}>
               {formatDecimal(
                 totalLocations.last_value.total_reported_locations
@@ -684,7 +687,7 @@ export const NursingHomeInfectedLocations: React.FC<INursingHomeInfectedLocation
             </span>
           </h3>
         )}
-        <p>{text.metric_text}</p>
+        <p>{text.metric_text.translation}</p>
 
         {newLocations && <Metadata dataSource={text.bron} />}
       </Collapse>
@@ -700,13 +703,13 @@ export const NursingHomeInfectedDeaths: React.FC<INursingHomeInfectedDeaths> = (
   return (
     <GraphContainer>
       <GraphContent>
-        <GraphHeader Icon={CoronaVirus} title={text.title} />
-        <p>{text.text}</p>
+        <GraphHeader Icon={CoronaVirus} title={text.title.translation} />
+        <p>{text.text.translation}</p>
         {data && (
           <BarScale
             min={0}
             max={50}
-            screenReaderText={text.screen_reader_graph_content}
+            screenReaderText={text.screen_reader_graph_content.translation}
             value={data.last_value.deceased_nursery_daily}
             id="over"
             gradient={[
@@ -724,14 +727,14 @@ export const NursingHomeInfectedDeaths: React.FC<INursingHomeInfectedDeaths> = (
         />
       </GraphContent>
       <Collapse
-        openText={text.open}
-        sluitText={text.sluit}
+        openText={text.open.translation}
+        sluitText={text.sluit.translation}
         piwikName="Sterfte"
         piwikAction="landelijk"
       >
-        <h4>{text.fold_title}</h4>
-        <p>{text.fold}</p>
-        <h4>{text.graph_title}</h4>
+        <h4>{text.fold_title.translation}</h4>
+        <p>{text.fold.translation}</p>
+        <h4>{text.graph_title.translation}</h4>
 
         {data && (
           <>
