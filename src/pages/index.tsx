@@ -3,7 +3,6 @@ import Masonry from 'react-masonry-css';
 
 import GraphContainer from 'components/graphContainer';
 import GraphContent from 'components/graphContent';
-import LastUpdated from 'components/lastUpdated';
 import TitleBlock from 'components/titleBlock';
 import Layout from 'components/layout';
 import LinkCard from 'components/linkCard';
@@ -44,8 +43,8 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
 
   React.useEffect(() => {
     async function fetchData() {
-      if (!state['nl']) {
-        dispatch({ type: 'INIT_LOAD', payload: { id: 'nl' } });
+      if (!state['NL']) {
+        dispatch({ type: 'INIT_LOAD', payload: { id: 'NL' } });
         const response = await fetch(
           `${process.env.REACT_APP_DATA_SRC}NL.json`
         );
@@ -55,8 +54,6 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
     }
     fetchData();
   }, [dispatch, state]);
-
-  const shouldShowDataComponents = Boolean(state.nl);
 
   const breakpointColumnsObj = {
     default: 3,
@@ -92,10 +89,6 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
       </Head>
 
       <div className="home-content">
-        {shouldShowDataComponents && (
-          <LastUpdated lastUpdated={state.nl?.last_generated * 1000} />
-        )}
-
         <section className="home-section">
           <Masonry
             breakpointCols={breakpointColumnsObj}
@@ -104,30 +97,30 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
           >
             <IntakeIntensiveCare
               text={siteText.ic_opnames_per_dag}
-              data={state?.nl?.intake_intensivecare_ma}
+              data={state?.NL?.intake_intensivecare_ma}
             />
 
             <IntakeHospital
               text={siteText.ziekenhuisopnames_per_dag}
-              data={state?.nl?.intake_hospital_ma}
+              data={state?.NL?.intake_hospital_ma}
             />
 
             <PostivelyTestedPeople
               text={siteText.positief_geteste_personen}
-              delta={state?.nl?.infected_people_delta_normalized}
-              age={state?.nl?.intake_share_age_groups}
-              total={state?.nl?.infected_people_total}
+              delta={state?.NL?.infected_people_delta_normalized}
+              age={state?.NL?.intake_share_age_groups}
+              total={state?.NL?.infected_people_total}
             />
 
             <InfectiousPeople
               text={siteText.besmettelijke_personen}
-              count={state?.nl?.infectious_people_count}
-              countNormalized={state?.nl?.infectious_people_count_normalized}
+              count={state?.NL?.infectious_people_count}
+              countNormalized={state?.NL?.infectious_people_count_normalized}
             />
 
             <ReproductionIndex
               text={siteText.reproductiegetal}
-              data={state?.nl?.reproduction_index}
+              data={state?.NL?.reproduction_index}
             />
 
             <LinkCard
@@ -155,12 +148,12 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
           >
             <SuspectedPatients
               text={siteText.verdenkingen_huisartsen}
-              data={state?.nl?.verdenkingen_huisartsen}
+              data={state?.NL?.verdenkingen_huisartsen}
             />
 
             <SewerWater
               text={siteText.rioolwater_metingen}
-              data={state?.nl?.rioolwater_metingen}
+              data={state?.NL?.rioolwater_metingen}
             />
 
             <GraphContainer>
@@ -189,18 +182,18 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
           >
             <NursingHomeInfectedPeople
               text={siteText.verpleeghuis_positief_geteste_personen}
-              data={state?.nl?.infected_people_nursery_count_daily}
+              data={state?.NL?.infected_people_nursery_count_daily}
             />
 
             <NursingHomeInfectedLocations
               text={siteText.verpleeghuis_besmette_locaties}
-              newLocations={state?.nl?.total_newly_reported_locations}
-              totalLocations={state?.nl?.total_reported_locations}
+              newLocations={state?.NL?.total_newly_reported_locations}
+              totalLocations={state?.NL?.total_reported_locations}
             />
 
             <NursingHomeInfectedDeaths
               text={siteText.verpleeghuis_oversterfte}
-              data={state?.nl?.deceased_people_nursery_count_daily}
+              data={state?.NL?.deceased_people_nursery_count_daily}
             />
           </Masonry>
         </section>

@@ -21,7 +21,7 @@
       },
       {
         "cijfer": "Reproductiegetal",
-        "verantwoording": "Deze informatie wordt wekelijks beschikbaar gesteld door het RIVM. Het RIVM publiceert de informatie op de website gelijktijdig met het beschikbaar stellen aan het Ministerie van VWS. Het RIVM zal de informatie binnenkort beschikbaar stellen als open data."
+        "verantwoording": "Het RIVM publiceert de informatie over het reproductiegetal R één keer per week via hun website. Het reproductiegetal is geen exacte waarde maar een betrouwbare schatting. Om deze waarde te berekenen, zijn gegevens van 2 weken nodig. Om deze op een bepaalde datum te kunnen maken, heb je ook cijfers nodig van 2 weken daarna nodig. De R-lijn loopt daarom niet door tot het einde van de bandbreedte. Op 11 juni is er een trendbreuk zichtbaar. Vanaf deze datum wordt de R berekend op basis van het aantal positief geteste mensen met COVID-19 en het aantal ziekenhuisopnames. Voorheen werd dit berekend op basis van alleen het aantal nieuwe ziekenhuisopnames. Bij een laag aantal nieuwe ziekenhuisopnames, is het aantal positief geteste mensen een betere basis voor deze berekening."
       },
       {
         "cijfer": "Andere data en signaalindicatoren",

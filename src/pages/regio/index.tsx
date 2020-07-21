@@ -13,6 +13,7 @@ import LastUpdated from 'components/lastUpdated';
 import Warning from 'assets/warn.svg';
 import Metadata from 'components/metadata';
 import LoadingPlaceholder from 'components/loadingPlaceholder';
+import DateReported from 'components/dateReported';
 
 import { store } from 'store';
 import GraphContent from 'components/graphContent';
@@ -233,33 +234,42 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                     )}
 
                     {state[selectedRegio?.code]?.intake_hospital_ma && (
-                      <BarScale
-                        min={0}
-                        max={100}
-                        value={
-                          state[selectedRegio.code].intake_hospital_ma
-                            .last_value.moving_average_hospital
-                        }
-                        screenReaderText={
-                          siteText.regionaal_ziekenhuisopnames_per_dag
-                            .screen_reader_graph_content
-                        }
-                        id="regio_opnames"
-                        gradient={[
-                          {
-                            color: '#69c253',
-                            value: 0,
-                          },
-                          {
-                            color: '#D3A500',
-                            value: 40,
-                          },
-                          {
-                            color: '#f35065',
-                            value: 90,
-                          },
-                        ]}
-                      />
+                      <>
+                        <BarScale
+                          min={0}
+                          max={100}
+                          value={
+                            state[selectedRegio.code].intake_hospital_ma
+                              .last_value.intake_hospital_ma
+                          }
+                          screenReaderText={
+                            siteText.regionaal_ziekenhuisopnames_per_dag
+                              .screen_reader_graph_content
+                          }
+                          id="regio_opnames"
+                          gradient={[
+                            {
+                              color: '#69c253',
+                              value: 0,
+                            },
+                            {
+                              color: '#D3A500',
+                              value: 40,
+                            },
+                            {
+                              color: '#f35065',
+                              value: 90,
+                            },
+                          ]}
+                        />
+                        <DateReported
+                          dateUnix={
+                            state[selectedRegio?.code]?.intake_hospital_ma
+                              ?.last_value?.date_of_report_unix
+                          }
+                          hasDailyInterval
+                        />
+                      </>
                     )}
                   </>
                 )}
@@ -284,23 +294,14 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                       values={state[
                         selectedRegio?.code
                       ]?.intake_hospital_ma?.values.map((value) => ({
-                        value: value.moving_average_hospital,
+                        value: value.intake_hospital_ma,
                         date: value.date_of_report_unix,
                       }))}
                     />
                   )}
                   <Metadata
-                    period={state[
-                      selectedRegio?.code
-                    ]?.intake_hospital_ma?.values.map(
-                      (value) => value.date_of_report_unix
-                    )}
                     dataSource={
                       siteText.regionaal_ziekenhuisopnames_per_dag.bron
-                    }
-                    lastUpdated={
-                      state[selectedRegio?.code]?.intake_hospital_ma?.last_value
-                        .date_of_report_unix * 1000
                     }
                   />
                 </Collapse>
@@ -333,7 +334,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                         value={
                           state[selectedRegio.code]
                             .infected_people_delta_normalized.last_value
-                            .infected_daily_increase
+                            .infected_people_delta_normalized
                         }
                         screenReaderText={
                           siteText.regionaal_positief_geteste_personen
@@ -350,18 +351,28 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                     )}
 
                     {state[selectedRegio?.code]?.infected_people_total && (
-                      <h3>
-                        {
-                          siteText.regionaal_positief_geteste_personen
-                            .metric_title
-                        }{' '}
-                        <span style={{ color: '#01689b' }}>
-                          {formatDecimal(
-                            state[selectedRegio?.code]?.infected_people_total
-                              ?.last_value.infected_daily_total
-                          )}
-                        </span>
-                      </h3>
+                      <>
+                        <h3>
+                          {
+                            siteText.regionaal_positief_geteste_personen
+                              .metric_title
+                          }{' '}
+                          <span style={{ color: '#01689b' }}>
+                            {formatDecimal(
+                              state[selectedRegio?.code]?.infected_people_total
+                                ?.last_value.infected_people_total
+                            )}
+                          </span>
+                        </h3>
+                        <DateReported
+                          dateUnix={
+                            state[selectedRegio?.code]
+                              ?.infected_people_delta_normalized?.last_value
+                              ?.date_of_report_unix
+                          }
+                          hasDailyInterval
+                        />
+                      </>
                     )}
                   </>
                 )}
@@ -389,7 +400,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                         selectedRegio.code
                       ].infected_people_delta_normalized.values.map(
                         (value) => ({
-                          value: value.infected_daily_increase,
+                          value: value.infected_people_delta_normalized,
                           date: value.date_of_report_unix,
                         })
                       )}
@@ -397,18 +408,8 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                   )}
 
                   <Metadata
-                    period={state[
-                      selectedRegio?.code
-                    ]?.infected_people_delta_normalized?.values.map(
-                      (value) => value.date_of_report_unix
-                    )}
                     dataSource={
                       siteText.regionaal_positief_geteste_personen.bron
-                    }
-                    lastUpdated={
-                      state[selectedRegio?.code]
-                        ?.infected_people_delta_normalized?.last_value
-                        .date_of_report_unix * 1000
                     }
                   />
                 </Collapse>

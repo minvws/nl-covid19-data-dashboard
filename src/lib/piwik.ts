@@ -21,7 +21,7 @@ export const pageview = (props: PageviewProps): void => {
   const { url, documentTitle } = props;
 
   if (process.browser) {
-    if (window) {
+    if (window && window._paq) {
       window._paq.push(['trackPageView']);
     } else {
       console.log('window object not found');
@@ -40,7 +40,7 @@ type EventTypes = {
 export function event(eventOptions: EventTypes): void {
   const { category, action, name, value, dimensions } = eventOptions;
   if (process.browser) {
-    if (window) {
+    if (window && window._paq) {
       window._paq.push([
         'trackEvent',
         category,

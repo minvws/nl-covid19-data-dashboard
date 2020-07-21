@@ -9,8 +9,6 @@ import ResetIcon from 'assets/reset.svg';
 
 import ScreenReaderOnly from 'components/screenReaderOnly';
 
-import * as piwik from '../../lib/piwik';
-
 type SelectMunicipalityProps = {
   municipalities: MunicipalityMapping[];
   safetyRegions: SafetyRegion[];
@@ -59,11 +57,6 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
   // Set the safety region code to the URL on item selection
   const onSelectedItemChange = ({ selectedItem }) => {
     setSelectedSafetyRegion(selectedItem?.safetyRegion);
-
-    piwik.event({
-      category: 'select_regio',
-      action: selectedItem.name,
-    });
   };
 
   // Filters municipalities when the input changes
