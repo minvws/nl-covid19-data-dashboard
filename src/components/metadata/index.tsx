@@ -1,6 +1,14 @@
 import styles from './metadata.module.scss';
+import { Translation } from 'types/data';
 
-export default function Metadata(props) {
+interface IProps {
+  dataSource: {
+    href: Translation;
+    text: Translation;
+  };
+}
+
+const Metadata: React.FC<IProps> = (props) => {
   const { dataSource } = props;
 
   return (
@@ -15,4 +23,6 @@ export default function Metadata(props) {
       ) : null}
     </div>
   );
-}
+};
+
+export default Metadata;

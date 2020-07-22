@@ -1,5 +1,7 @@
 import styles from './maxWidth.module.scss';
 
-export default function MaxWidth(props) {
+const MaxWidth: React.FC = (props) => {
   return <div className={styles.maxWidth}>{props.children}</div>;
-}
+};
+
+export default MaxWidth;

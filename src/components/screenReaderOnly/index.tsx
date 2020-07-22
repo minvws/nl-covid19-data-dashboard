@@ -5,7 +5,7 @@ import styles from './screenReaderOnly.module.scss';
  * present for visually impaired users, alias it will be read out
  * loud by screenreaders without being visible on the screen.
  */
-const ScreenReaderOnly = ({ children }) => {
+const ScreenReaderOnly: React.FC = ({ children }) => {
   return <span className={styles.screenReaderOnly}>{children}</span>;
 };
 

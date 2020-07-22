@@ -25,7 +25,7 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
   const itemToString = (item?: MunicipalityMapping) => (item ? item.name : '');
 
   // Returns municipalities by safety region and current inputValue, sorted alphabetically.
-  const getRegionItems = (safetyRegion: string, inputValue) => {
+  const getRegionItems = (safetyRegion: string, inputValue: string) => {
     return items
       .filter((el) => el.safetyRegion === safetyRegion)
       .filter((el) => !getDisabled(el, inputValue))
@@ -33,13 +33,16 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
   };
 
   // Returns true if a municipality should be disabled based on the current input value.
-  const getDisabled = (item: MunicipalityMapping, inputValue) => {
+  const getDisabled = (item: MunicipalityMapping, inputValue: string) => {
     if (!inputValue) return false;
     return !item.name.toLowerCase().startsWith(inputValue.toLowerCase());
   };
 
   // Returns true if a safety region should be hidden.
-  const getRegionDisabled = (items: MunicipalityMapping[], inputValue) => {
+  const getRegionDisabled = (
+    items: MunicipalityMapping[],
+    inputValue: string
+  ) => {
     return items.every((item) => getDisabled(item, inputValue));
   };
 
@@ -98,7 +101,7 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
   };
 
   // State reducer with an override for the ItemClick action.
-  const stateReducer = (state, actionAndChanges) => {
+  const stateReducer = (state: any, actionAndChanges: any) => {
     const { type, changes } = actionAndChanges;
     switch (type) {
       // overriding the result of this action fixes a race condition bug in IE11

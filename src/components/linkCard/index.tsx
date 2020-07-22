@@ -2,9 +2,13 @@ import Link from 'next/link';
 import styles from './linkCard.module.scss';
 import Arrow from 'assets/white-arrow-lg.svg';
 
-export default LinkCard;
+interface IProps {
+  href: string;
+  icon: string;
+  iconAlt: string;
+}
 
-function LinkCard(props) {
+const LinkCard: React.FC<IProps> = (props) => {
   const { children, href, icon, iconAlt = '' } = props;
 
   return (
@@ -18,4 +22,6 @@ function LinkCard(props) {
       </a>
     </Link>
   );
-}
+};
+
+export default LinkCard;

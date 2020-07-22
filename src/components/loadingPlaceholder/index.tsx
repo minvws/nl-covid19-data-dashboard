@@ -1,8 +1,6 @@
-import { FunctionComponent } from 'react';
-
 import styles from './loadingPlaceholder.module.scss';
 
-const LoadingPlaceholder: FunctionComponent = ({ children }) => {
+const LoadingPlaceholder: React.FC = ({ children }) => {
   return (
     <span className={styles.loadingPlaceholder} aria-hidden="true">
       {children ? children : null}

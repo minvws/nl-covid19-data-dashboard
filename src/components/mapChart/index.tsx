@@ -9,9 +9,14 @@ if (typeof Highcharts === 'object') {
   require('highcharts/modules/map')(Highcharts);
 }
 
-const fetcher = (url) => fetch(url).then((r) => r.json());
+const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
-const MapChart = ({ selected, setSelection }) => {
+interface IProps {
+  selected: { id: string };
+  setSelection: (item: any) => void;
+}
+
+const MapChart: React.FC<IProps> = ({ selected, setSelection }) => {
   const { data } = useSWR('/json/veiligheidsregio.json', fetcher);
 
   if (!data) {

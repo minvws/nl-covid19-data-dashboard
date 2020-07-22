@@ -8,11 +8,7 @@ import MaxWidth from 'components/maxWidth';
 import text from 'locale/nl.json';
 import useMediaQuery from 'utils/useMediaQuery';
 import SEOHead from 'components/seoHead';
-
-interface Translation {
-  translation: string;
-  notes: string;
-}
+import { Translation } from 'types/data';
 
 export interface LayoutProps {
   url?: Translation;
