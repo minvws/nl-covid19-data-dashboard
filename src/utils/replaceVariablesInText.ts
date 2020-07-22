@@ -12,10 +12,14 @@ const curlyBracketRegex = /\{\{(.+?)\}\}/g;
  * - If a specific variable is NOT given, it will replace it with an empty string.
  * - If no translation is given, an empty string will be returned.
  *
- * @param {string} translation - Translation string with curly brackets for variables.
- * @param {object} variables - An object with keys representing any variable available for replacement.
+ * @param translation - Translation string with curly brackets for variables.
+ * @param variables - An object with keys representing any variable available for replacement.
  */
-const replaceVariablesInText = (translation, variables) => {
+
+const replaceVariablesInText = (
+  translation?: string | undefined | null,
+  variables?: { [key: string]: string | undefined }
+): string => {
   if (!translation) return '';
 
   return translation.replace(curlyBracketRegex, (_string, variableName) => {

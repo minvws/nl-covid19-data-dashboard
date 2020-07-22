@@ -1,19 +1,26 @@
 import React from 'react';
 
-export const useResize = (ref) => {
-  const [sizes, refreshSize] = React.useState({ width: 0, height: 0 });
+type TSizes = {
+  width: number | undefined;
+  height: number | undefined;
+};
+
+export const useResize = (
+  ref: React.MutableRefObject<HTMLElement> | null
+): TSizes => {
+  const [sizes, refreshSize] = React.useState<TSizes>({ width: 0, height: 0 });
 
   React.useEffect(() => {
     const getDimensions = () => ({
-      width: ref.current.offsetWidth,
-      height: ref.current.offsetHeight,
+      width: ref?.current.offsetWidth,
+      height: ref?.current.offsetHeight,
     });
 
     const handleResize = () => {
       refreshSize(getDimensions());
     };
 
-    if (ref.current) {
+    if (ref?.current) {
       refreshSize(getDimensions());
     }
 

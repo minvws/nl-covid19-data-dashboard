@@ -21,13 +21,18 @@ import * as piwik from '../lib/piwik';
 
 import { StateProvider } from 'store';
 
-function MyApp({ Component, pageProps }) {
-  const getLayout = Component.getLayout || ((page) => page);
+interface IProps {
+  Component: any;
+  pageProps: any;
+}
+
+function MyApp(props: IProps): React.ReactElement {
+  const { Component, pageProps } = props;
+  const getLayout = Component.getLayout || ((page: any) => page);
 
   useEffect(() => {
-    const handleRouteChange = (url) => {
-      piwik.pageview(url);
-    };
+    const handleRouteChange = () => piwik.pageview();
+
     Router.events.on('routeChangeComplete', handleRouteChange);
     return () => {
       Router.events.off('routeChangeComplete', handleRouteChange);

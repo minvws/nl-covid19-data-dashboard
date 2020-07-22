@@ -1,6 +1,11 @@
 import styles from './titleBlock.module.scss';
 
-export default function TitleBlock(props) {
+interface IProps {
+  Icon: any;
+  title: string;
+}
+
+const TitleBlock: React.FC<IProps> = (props) => {
   const { Icon, title, children } = props;
 
   return (
@@ -12,4 +17,6 @@ export default function TitleBlock(props) {
       </div>
     </div>
   );
-}
+};
+
+export default TitleBlock;

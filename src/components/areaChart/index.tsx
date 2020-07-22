@@ -1,4 +1,4 @@
-import { useMemo, FunctionComponent } from 'react';
+import { useMemo } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
@@ -23,7 +23,7 @@ type AreaChartProps = {
   signaalwaarde: number;
 };
 
-const AreaChart: FunctionComponent<AreaChartProps> = (props) => {
+const AreaChart: React.FC<AreaChartProps> = (props) => {
   const {
     rangeLegendLabel,
     lineLegendLabel,
@@ -33,17 +33,17 @@ const AreaChart: FunctionComponent<AreaChartProps> = (props) => {
     signaalwaarde,
   } = props;
 
-  const formatDate = (value) => {
+  const formatDate = (value: string) => {
     const date = new Date(value);
     return `${date.getDate()} ${months[date.getMonth()]}`;
   };
 
-  const formatDateLong = (value) => {
+  const formatDateLong = (value: string) => {
     const date = new Date(value);
     return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
   };
 
-  const rangeData: [Date, number, number][] = useMemo(() => {
+  const rangeData: [Date, number | null, number | null][] = useMemo(() => {
     return data
       .sort((a, b) => a.date - b.date)
       .map((d) => [new Date(d.date * 1000), d.min, d.max]);
@@ -90,8 +90,10 @@ const AreaChart: FunctionComponent<AreaChartProps> = (props) => {
         labels: {
           align: 'right',
           rotation: '0',
-          formatter: function () {
+          formatter: function (): string | void {
+            // @ts-ignore
             if (this.isFirst || this.isLast) {
+              // @ts-ignore
               return formatDate(this.value);
             }
           },
@@ -119,19 +121,25 @@ const AreaChart: FunctionComponent<AreaChartProps> = (props) => {
         borderColor: '#01689B',
         borderRadius: 0,
         xDateFormat: '%d %b %y',
-        formatter() {
+        formatter(): string {
+          // @ts-ignore
           const rangePoint = rangeData.find((el) => el[0].getTime() === this.x);
+          // @ts-ignore
           const [, minRangePoint, maxRangePoint] = rangePoint;
+          // @ts-ignore
           const linePoint = lineData.find(
+            // @ts-ignore
             (el: any) => el[0].getTime() === this.x
           );
+          // @ts-ignore
+          const x = this.x;
           return `
-            ${formatDateLong(this.x)}<br/>
+            ${formatDateLong(x)}<br/>
             <strong>Bandbreedte</strong> ${formatNumber(
               minRangePoint
             )} - ${formatNumber(maxRangePoint)}<br/>
             <strong>Effectieve R</strong> ${
-              linePoint ? formatNumber(linePoint[1]) : '–'
+              linePoint ? formatNumber(linePoint[1] as number) : '–'
             }
           `;
         },
@@ -164,9 +172,13 @@ const AreaChart: FunctionComponent<AreaChartProps> = (props) => {
 
   if (signaalwaarde) {
     options.yAxis.plotLines.push({
+      // @ts-ignore
       value: signaalwaarde,
+      // @ts-ignore
       dashStyle: 'dash',
+      // @ts-ignore
       width: 1,
+      // @ts-ignore
       color: '#4f5458',
     });
   }

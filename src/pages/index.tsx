@@ -30,14 +30,10 @@ import IconList from 'components/iconList';
 import openGraphImage from 'assets/sharing/og-landelijke-cijfers.png?url';
 import twitterImage from 'assets/sharing/twitter-landelijke-cijfers.png?url';
 
-export type HomeLayoutProps = {
-  getLayout: (string) => string;
-};
-
 import { FunctionComponentWithLayout } from 'components/layout';
 import Head from 'next/head';
 
-const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
+const Home: FunctionComponentWithLayout = () => {
   const globalState = React.useContext(store);
   const { state, dispatch } = globalState;
 

@@ -2,10 +2,15 @@ import styles from './iconList.module.scss';
 import { useState } from 'react';
 import useCollapse from 'react-collapsed';
 import Arrow from 'assets/arrow.svg';
+import { Translation } from 'types/data';
 
-export default IconList;
+interface Item {
+  content: Translation;
+  text: Translation;
+  icon: Translation;
+}
 
-function IconList(props) {
+const IconList: React.FC<{ list: Item[] }> = (props) => {
   const { list } = props;
 
   return (
@@ -22,9 +27,9 @@ function IconList(props) {
       )}
     </ul>
   );
-}
+};
 
-function IconListItem(props) {
+const IconListItem: React.FC<{ item: Item }> = (props) => {
   const { item } = props;
 
   return (
@@ -39,9 +44,9 @@ function IconListItem(props) {
       </div>
     </li>
   );
-}
+};
 
-function CollapseIconListItem(props) {
+const CollapseIconListItem: React.FC<{ item: Item }> = (props) => {
   const { item } = props;
   const [expanded, setExpanded] = useState(false);
 
@@ -62,7 +67,6 @@ function CollapseIconListItem(props) {
         <h4>
           <button
             className={styles.button}
-            aria-expanded={expanded}
             {...getToggleProps({ onClick: toggle })}
           >
             <span>
@@ -77,4 +81,6 @@ function CollapseIconListItem(props) {
       </div>
     </li>
   );
-}
+};
+
+export default IconList;

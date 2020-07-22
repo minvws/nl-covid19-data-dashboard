@@ -1146,7 +1146,7 @@
         ]
     },
     "error_metadata": {
-        "titel": {
+        "title": {
             "translation": "COVID-19 Dashboard foutmelding | Rijksoverheid.nl",
             "notes": ""
         }
@@ -1166,7 +1166,7 @@
         }
     },
     "notfound_metadata": {
-        "titel": {
+        "title": {
             "translation": "Pagina kan niet gevonden worden | Rijksoverheid.nl",
             "notes": ""
         }

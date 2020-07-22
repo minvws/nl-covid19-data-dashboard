@@ -48,7 +48,6 @@ const Collapse: React.FC<IProps> = ({
         {renderContent && children}
       </div>
       <button
-        aria-expanded={open}
         className="collapseButton"
         {...getToggleProps({ onClick: toggle })}
       >

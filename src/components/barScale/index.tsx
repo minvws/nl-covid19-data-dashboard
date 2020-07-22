@@ -13,7 +13,7 @@ type GradientStop = {
 type BarscaleProps = {
   min: number;
   max: number;
-  value: number;
+  value: number | null;
   kritiekeWaarde?: number;
   gradient: GradientStop[];
   id: string;
@@ -40,18 +40,18 @@ const BarScale: FunctionComponent<BarscaleProps> = ({
 
   const textAlign = scaleThreshold()
     .domain([20, 80])
-    .range(['start', 'middle', 'end']);
+    .range(['start', 'middle', 'end'] as any);
 
   const color = scaleQuantile()
     .domain(gradient.map((el) => el.value))
-    .range(gradient.map((el) => el.color));
+    .range(gradient.map((el) => el.color) as any);
 
   return (
     <>
       <ScreenReaderOnly>
         {replaceVariablesInText(screenReaderText, {
-          value,
-          kritiekeWaarde,
+          value: String(value),
+          kritiekeWaarde: String(kritiekeWaarde),
         })}
       </ScreenReaderOnly>
 
@@ -73,10 +73,10 @@ const BarScale: FunctionComponent<BarscaleProps> = ({
               id={`barColor${id}-${rand.current}`}
               gradientUnits="userSpaceOnUse"
             >
-              {color.domain().map((value) => (
+              {color.domain().map((value: any) => (
                 <stop
                   key={`stop-${value}`}
-                  stopColor={color(value)}
+                  stopColor={color(value) as any}
                   offset={`${x(value)}%`}
                 />
               ))}
@@ -119,7 +119,7 @@ const BarScale: FunctionComponent<BarscaleProps> = ({
               className={styles.value}
               x={`${x(value)}%`}
               y={16}
-              textAnchor={textAlign(x(value))}
+              textAnchor={textAlign(x(value)) as any}
             >{`${formatNumber(value)}`}</text>
           </g>
 
@@ -137,7 +137,7 @@ const BarScale: FunctionComponent<BarscaleProps> = ({
                 className={styles.criticalValue}
                 x={`${x(kritiekeWaarde)}%`}
                 y={72}
-                textAnchor={textAlign(x(kritiekeWaarde))}
+                textAnchor={textAlign(x(kritiekeWaarde)) as any}
               >{`Signaalwaarde: ${kritiekeWaarde}`}</text>
             </g>
           )}

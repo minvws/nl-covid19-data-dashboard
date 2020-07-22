@@ -467,7 +467,7 @@ export const SuspectedPatients: React.FC<ISuspectedPatients> = (props) => {
             min={0}
             max={140}
             screenReaderText={text.screen_reader_graph_content.translation}
-            value={data.last_value.incidentie}
+            value={data.last_value.incidentie as number | null}
             id="verdenkingen_huisartsen"
             gradient={[
               {

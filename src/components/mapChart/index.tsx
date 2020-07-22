@@ -9,9 +9,14 @@ if (typeof Highcharts === 'object') {
   require('highcharts/modules/map')(Highcharts);
 }
 
-const fetcher = (url) => fetch(url).then((r) => r.json());
+const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
-const MapChart = ({ selected, setSelection }) => {
+interface IProps {
+  selected: { id: string };
+  setSelection: (item: any) => void;
+}
+
+const MapChart: React.FC<IProps> = ({ selected, setSelection }) => {
   const { data } = useSWR('/json/veiligheidsregio.json', fetcher);
 
   if (!data) {
@@ -47,6 +52,7 @@ const MapChart = ({ selected, setSelection }) => {
   ];
   // Er is ongetwijfeld een veel beter manier om dit te doen :)
   if (selected) {
+    // @ts-ignore
     regioList[selected.id] = { 'hc-key': selected.id, value: 1 };
   }
 
@@ -86,10 +92,12 @@ const MapChart = ({ selected, setSelection }) => {
       backgroundColor: '#FFF',
       borderColor: '#01689B',
       borderRadius: 0,
-      pointFormatter: function () {
+      pointFormatter: function (): any {
+        // @ts-ignore
         return this.properties['Vgrnr'];
       },
-      formatter: function () {
+      formatter: function (): any {
+        // @ts-ignore
         return this.point.properties.Veiligheid;
       },
     },
@@ -101,6 +109,7 @@ const MapChart = ({ selected, setSelection }) => {
           events: {
             click: function () {
               const item = regioData.find(
+                // @ts-ignore
                 (x) => x.id === this.properties.Vgrnr
               );
 

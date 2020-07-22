@@ -11,15 +11,7 @@ if (process.browser) {
   }
 }
 
-type PageviewProps = {
-  url?: string;
-  documentTitle?: string;
-};
-
-export const pageview = (props: PageviewProps): void => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { url, documentTitle } = props;
-
+export const pageview = (): void => {
   if (process.browser) {
     if (window && window._paq) {
       window._paq.push(['trackPageView']);

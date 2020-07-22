@@ -1,17 +1,10 @@
 import Linkify, { LinkifyProps } from 'linkifyjs/react';
 
-export default ReplaceLinks;
-
-export type ReplaceLinksProps = {
-  children: React.ReactNode;
-  options: LinkifyProps['options'];
-  tagName: LinkifyProps['tagName'];
-};
-
 /**
  * Replaces links in a string with linked anchor tags.
  */
-function ReplaceLinks(props: ReplaceLinksProps): JSX.Element {
+
+const ReplaceLinks: React.FC<IProps> = (props) => {
   const { children, tagName, options } = props;
 
   return (
@@ -19,4 +12,12 @@ function ReplaceLinks(props: ReplaceLinksProps): JSX.Element {
       {children}
     </Linkify>
   );
-}
+};
+
+export type IProps = {
+  children: string;
+  options?: LinkifyProps['options'];
+  tagName?: LinkifyProps['tagName'];
+};
+
+export default ReplaceLinks;

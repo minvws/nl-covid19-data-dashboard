@@ -25,7 +25,7 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
   const itemToString = (item?: MunicipalityMapping) => (item ? item.name : '');
 
   // Returns municipalities by safety region and current inputValue, sorted alphabetically.
-  const getRegionItems = (safetyRegion: string, inputValue) => {
+  const getRegionItems = (safetyRegion: string, inputValue: string) => {
     return items
       .filter((el) => el.safetyRegion === safetyRegion)
       .filter((el) => !getDisabled(el, inputValue))
@@ -33,13 +33,16 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
   };
 
   // Returns true if a municipality should be disabled based on the current input value.
-  const getDisabled = (item: MunicipalityMapping, inputValue) => {
+  const getDisabled = (item: MunicipalityMapping, inputValue: string) => {
     if (!inputValue) return false;
     return !item.name.toLowerCase().startsWith(inputValue.toLowerCase());
   };
 
   // Returns true if a safety region should be hidden.
-  const getRegionDisabled = (items: MunicipalityMapping[], inputValue) => {
+  const getRegionDisabled = (
+    items: MunicipalityMapping[],
+    inputValue: string
+  ) => {
     return items.every((item) => getDisabled(item, inputValue));
   };
 
@@ -47,7 +50,7 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
   const selectInputContent = () => {
     // The DOM is used here instead of a ref because Downshift overwrites any ref
     // used on the input element.
-    const input: HTMLInputElement = document.querySelector(
+    const input: HTMLInputElement | null = document.querySelector(
       '#select-municipality-input'
     );
 
@@ -55,17 +58,17 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
   };
 
   // Set the safety region code to the URL on item selection
-  const onSelectedItemChange = ({ selectedItem }) => {
+  const onSelectedItemChange = ({ selectedItem }: any) => {
     setSelectedSafetyRegion(selectedItem?.safetyRegion);
   };
 
   // Filters municipalities when the input changes
-  const onInputValueChange = ({ inputValue }) => {
+  const onInputValueChange: any = ({ inputValue }: { inputValue: string }) => {
     setItems(municipalities.filter((item) => !getDisabled(item, inputValue)));
   };
 
   // Select the current input when the dropdown is opened.
-  const onIsOpenChange = ({ isOpen }) => {
+  const onIsOpenChange: any = ({ isOpen }: { isOpen: boolean }) => {
     if (isOpen) {
       selectInputContent();
     }
@@ -78,14 +81,20 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
   };
 
   // Returns a string for an aria-live selection status message.
-  const getA11ySelectionMessage = ({ itemToString, selectedItem }) => {
+  const getA11ySelectionMessage = ({
+    itemToString,
+    selectedItem,
+  }: {
+    itemToString: (item: MunicipalityMapping) => string;
+    selectedItem: MunicipalityMapping;
+  }) => {
     if (selectedItem) {
       const safetyRegion = safetyRegions.find(
         (el) => el.code === selectedItem.safetyRegion
       );
 
       return `Gemeente ${itemToString(selectedItem)} in veiligheidsregio ${
-        safetyRegion.name
+        safetyRegion?.name
       } is geselecteerd.`;
     }
 
@@ -93,12 +102,16 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
   };
 
   // Returns a string for an aria-live status message shown while typing.
-  const getA11yStatusMessage = ({ resultCount }) => {
+  const getA11yStatusMessage: any = ({
+    resultCount,
+  }: {
+    resultCount: string;
+  }) => {
     return `Er zijn ${resultCount} resultaten, gebruik de omhoog en omlaag pijltjes toetsen om te navigeren. Druk op Enter om te selecteren.`;
   };
 
   // State reducer with an override for the ItemClick action.
-  const stateReducer = (state, actionAndChanges) => {
+  const stateReducer = (_: any, actionAndChanges: any) => {
     const { type, changes } = actionAndChanges;
     switch (type) {
       // overriding the result of this action fixes a race condition bug in IE11

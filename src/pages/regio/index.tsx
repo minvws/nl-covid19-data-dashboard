@@ -27,7 +27,6 @@ const LineChart = dynamic(() => import('components/lineChart'));
 const SvgMap = dynamic(() => import('components/mapChart/svgMap'));
 
 import { FunctionComponentWithLayout } from 'components/layout';
-import { HomeLayoutProps } from 'pages/index';
 import ScreenReaderOnly from 'components/screenReaderOnly';
 import formatDecimal from 'utils/formatDec';
 import SelectMunicipality from 'components/selectMunicipality';
@@ -47,7 +46,7 @@ export type MunicipalityMapping = {
   safetyRegion: string;
 };
 
-type RegioProps = HomeLayoutProps & {
+type RegioProps = {
   municipalities: MunicipalityMapping[];
   safetyRegions: SafetyRegion[];
 };
@@ -65,7 +64,7 @@ export async function getStaticProps(): Promise<RegioStaticProps> {
 
   // group municipalities by safety region
   const map: MunicipalityMapping[] = Object.entries(municipalityMapping).map(
-    (entry: [string, string]): MunicipalityMapping => {
+    (entry: [string, any]): MunicipalityMapping => {
       // value is safety region ID, key is municipality name
       const [municipality, safetyRegion] = entry;
       return { name: municipality, safetyRegion };
@@ -85,7 +84,7 @@ export async function getStaticProps(): Promise<RegioStaticProps> {
 
         return (
           // sort by safety region name OR (if they are the same) sort by name.
-          safetyRegionA.name.localeCompare(safetyRegionB.name) ||
+          safetyRegionA?.name.localeCompare(safetyRegionB?.name as string) ||
           a.name.localeCompare(b.name)
         );
       }),
@@ -117,7 +116,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
     const selectedRegioCode = router.query?.regio;
     return selectedRegioCode
       ? safetyRegions.find((el) => el.code === selectedRegioCode)
-      : null;
+      : undefined;
   }, [router.query?.regio, safetyRegions]);
 
   const contentRef = useRef(null);
@@ -130,7 +129,8 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
   const focusRegioSelect = () => {
     if (!selectRegioWrapperRef.current) return;
 
-    const input = selectRegioWrapperRef.current.querySelector('input');
+    const el = selectRegioWrapperRef.current as any;
+    const input = el.querySelector('input');
     if (input) input.focus();
   };
 
@@ -140,7 +140,8 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
    * users so they know what has changed.
    */
   const focusFirstHeading = () => {
-    if (contentRef.current) contentRef.current.focus();
+    const el = contentRef.current as any;
+    if (el) el.focus();
   };
 
   const setSelectedRegio = (safetyRegionCode: SafetyRegion['code']): void => {
@@ -321,7 +322,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                     <LineChart
                       values={state[
                         selectedRegio?.code
-                      ]?.intake_hospital_ma?.values.map((value) => ({
+                      ]?.intake_hospital_ma?.values.map((value: any) => ({
                         value: value.intake_hospital_ma,
                         date: value.date_of_report_unix,
                       }))}
@@ -455,7 +456,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                       values={state[
                         selectedRegio.code
                       ].infected_people_delta_normalized.values.map(
-                        (value) => ({
+                        (value: any) => ({
                           value: value.infected_people_delta_normalized,
                           date: value.date_of_report_unix,
                         })

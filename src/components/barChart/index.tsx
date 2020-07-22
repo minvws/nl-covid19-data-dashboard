@@ -2,9 +2,12 @@ import { useMemo } from 'react';
 import HighCharts from 'highcharts';
 import HighChartsReact from 'highcharts-react-official';
 
-export default BarChart;
+interface IProps {
+  data: number[];
+  keys: string[];
+}
 
-function BarChart(props) {
+const BarChart: React.FC<IProps> = (props) => {
   const { data, keys } = props;
 
   const options = useMemo(
@@ -52,4 +55,6 @@ function BarChart(props) {
   );
 
   return <HighChartsReact highcharts={HighCharts} options={options} />;
-}
+};
+
+export default BarChart;

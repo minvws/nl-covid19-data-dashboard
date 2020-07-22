@@ -1,12 +1,12 @@
 import React from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import months from 'data/months.js';
+import months from 'data/months';
 import formatNumber from 'utils/formatNumber';
 
 interface Value {
   date: number;
-  value: number;
+  value: number | undefined;
 }
 
 type LineChartProps = {
@@ -49,8 +49,10 @@ const LineChart: React.FC<LineChartProps> = ({ values, signaalwaarde }) => {
       labels: {
         align: 'right',
         rotation: '0',
-        formatter: function () {
+        formatter: function (): void | string {
+          // @ts-ignore
           if (this.isFirst || this.isLast) {
+            // @ts-ignore
             const valueDate = new Date(this.value * 1000);
             return `${valueDate.getDate()} ${months[valueDate.getMonth()]}`;
           }
@@ -61,7 +63,8 @@ const LineChart: React.FC<LineChartProps> = ({ values, signaalwaarde }) => {
       backgroundColor: '#FFF',
       borderColor: '#01689B',
       borderRadius: 0,
-      formatter: function () {
+      formatter: function (): string {
+        // @ts-ignore
         return `${formatDate(this.x)}: ${formatNumber(this.y)}`;
       },
     },
@@ -95,9 +98,13 @@ const LineChart: React.FC<LineChartProps> = ({ values, signaalwaarde }) => {
 
   if (signaalwaarde) {
     options.yAxis.plotLines.push({
+      // @ts-ignore
       value: signaalwaarde,
+      // @ts-ignore
       dashStyle: 'dash',
+      // @ts-ignore
       width: 1,
+      // @ts-ignore
       color: '#4f5458',
     });
   }
