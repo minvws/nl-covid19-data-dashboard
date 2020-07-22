@@ -30,7 +30,6 @@ import {
   IntakeShareAgeGroups,
   InfectiousPeopleCount,
   ReproductionIndex as ReproductionIndexData,
-  VerdenkingenHuisartsen,
   RioolwaterMetingen,
   DeceasedPeopleNurseryCountDaily,
 } from 'types/data';
@@ -68,7 +67,7 @@ interface IReproductionIndex {
 }
 
 interface ISuspectedPatients {
-  data: VerdenkingenHuisartsen | undefined;
+  data: RioolwaterMetingen | undefined;
   text: typeof siteText.verdenkingen_huisartsen;
 }
 
@@ -128,8 +127,8 @@ export const IntakeIntensiveCare: React.FC<IIntakeIntensiveCare> = (props) => {
         )}
 
         <DateReported
+          datumsText={text.datums.translation}
           dateUnix={data?.last_value?.date_of_report_unix}
-          hasDailyInterval
         />
       </GraphContent>
 
@@ -198,8 +197,8 @@ export const IntakeHospital: React.FC<IIntakeHospital> = (props) => {
         )}
 
         <DateReported
+          datumsText={text.datums.translation}
           dateUnix={data?.last_value?.date_of_report_unix}
-          hasDailyInterval
         />
       </GraphContent>
 
@@ -267,8 +266,8 @@ export const PostivelyTestedPeople: React.FC<IPostivelyTestedPeople> = (
         )}
 
         <DateReported
+          datumsText={text.datums.translation}
           dateUnix={delta?.last_value?.date_of_report_unix}
-          hasDailyInterval
         />
       </GraphContent>
       <Collapse
@@ -321,7 +320,7 @@ export const InfectiousPeople: React.FC<IInfectiousPeople> = (props) => {
             min={0}
             max={50}
             screenReaderText={text.screen_reader_graph_content.translation}
-            value={countNormalized.last_value.infectious_avg_normalized}
+            value={countNormalized.last_value.infectious_avg}
             id="besmettelijk"
             gradient={[
               {
@@ -345,7 +344,10 @@ export const InfectiousPeople: React.FC<IInfectiousPeople> = (props) => {
           </h3>
         )}
 
-        <DateReported dateUnix={count?.last_value?.date_of_report_unix} />
+        <DateReported
+          datumsText={text.datums.translation}
+          dateUnix={count?.last_value?.date_of_report_unix}
+        />
       </GraphContent>
 
       <Collapse
@@ -400,7 +402,11 @@ export const ReproductionIndex: React.FC<IReproductionIndex> = (props) => {
           />
         )}
 
-        <DateReported dateUnix={data?.last_value?.date_of_report_unix} />
+        <DateReported
+          datumsText={text.datums.translation}
+          dateUnix={data?.last_value?.date_of_report_unix}
+          dateInsertedUnix={data?.last_value?.date_of_insertion_unix}
+        />
       </GraphContent>
       <Collapse
         openText={text.open.translation}
@@ -472,7 +478,11 @@ export const SuspectedPatients: React.FC<ISuspectedPatients> = (props) => {
           />
         )}
 
-        <DateReported dateUnix={data?.last_value?.week} />
+        <DateReported
+          datumsText={text.datums.translation}
+          dateInsertedUnix={data?.last_value?.date_of_insertion_unix}
+          dateUnix={data?.last_value?.week}
+        />
       </GraphContent>
       <Collapse
         openText={text.open.translation}
@@ -531,7 +541,11 @@ export const SewerWater: React.FC<ISewerWater> = (props) => {
           />
         )}
 
-        <DateReported dateUnix={data?.last_value?.week} />
+        <DateReported
+          datumsText={text.datums.translation}
+          dateInsertedUnix={data?.last_value?.date_of_insertion_unix}
+          dateUnix={data?.last_value?.week}
+        />
       </GraphContent>
       <Collapse
         openText={text.open.translation}
@@ -589,8 +603,8 @@ export const NursingHomeInfectedPeople: React.FC<INursingHomeInfectedPeople> = (
         )}
 
         <DateReported
+          datumsText={text.datums.translation}
           dateUnix={data?.last_value?.date_of_report_unix}
-          hasDailyInterval
         />
       </GraphContent>
       <Collapse
@@ -646,8 +660,9 @@ export const NursingHomeInfectedLocations: React.FC<INursingHomeInfectedLocation
           />
         )}
         <DateReported
+          datumsText={text.datums.translation}
+          dateInsertedUnix={newLocations?.last_value?.date_of_insertion_unix}
           dateUnix={newLocations?.last_value?.date_of_report_unix}
-          hasDailyInterval
         />
       </GraphContent>
       <Collapse
@@ -715,8 +730,8 @@ export const NursingHomeInfectedDeaths: React.FC<INursingHomeInfectedDeaths> = (
         )}
 
         <DateReported
+          datumsText={text.datums.translation}
           dateUnix={data?.last_value?.date_of_report_unix}
-          hasDailyInterval
         />
       </GraphContent>
       <Collapse

@@ -271,11 +271,14 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                           ]}
                         />
                         <DateReported
+                          datumsText={
+                            siteText.regionaal_ziekenhuisopnames_per_dag.datums
+                              .translation
+                          }
                           dateUnix={
                             state[selectedRegio?.code]?.intake_hospital_ma
                               ?.last_value?.date_of_report_unix
                           }
-                          hasDailyInterval
                         />
                       </>
                     )}
@@ -398,12 +401,15 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                           </span>
                         </h3>
                         <DateReported
+                          datumsText={
+                            siteText.regionaal_positief_geteste_personen.datums
+                              .translation
+                          }
                           dateUnix={
                             state[selectedRegio?.code]
                               ?.infected_people_delta_normalized?.last_value
                               ?.date_of_report_unix
                           }
-                          hasDailyInterval
                         />
                       </>
                     )}

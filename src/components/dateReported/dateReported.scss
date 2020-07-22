@@ -5,7 +5,14 @@
   align-items: center;
   color: $text-color-grey;
 
-  span {
-    margin-right: 0.5em;
+  p:first-of-type {
+    margin: 0;
+  }
+
+  svg {
+    width: 30px;
+    height: auto;
+    margin-right: 0.2rem;
+    display: block;
   }
 }
