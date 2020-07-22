@@ -2,6 +2,7 @@
   "name": "corona-dashboard",
   "version": "1.0.1",
   "private": true,
+  "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
   "dependencies": {
     "d3-scale": "^3.2.1",
     "downshift": "^5.4.2",
