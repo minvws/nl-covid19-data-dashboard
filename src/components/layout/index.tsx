@@ -22,7 +22,7 @@ export interface LayoutProps {
   twitterImage?: string;
 }
 
-export type FunctionComponentWithLayout<P> = React.FC<P> & {
+export type FunctionComponentWithLayout<P = void> = React.FC<P> & {
   getLayout?: (seoProps?: LayoutProps) => (page: any) => any;
 };
 

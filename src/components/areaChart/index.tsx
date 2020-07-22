@@ -33,12 +33,12 @@ const AreaChart: FunctionComponent<AreaChartProps> = (props) => {
     signaalwaarde,
   } = props;
 
-  const formatDate = (value) => {
+  const formatDate = (value: string) => {
     const date = new Date(value);
     return `${date.getDate()} ${months[date.getMonth()]}`;
   };
 
-  const formatDateLong = (value) => {
+  const formatDateLong = (value: string) => {
     const date = new Date(value);
     return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
   };
@@ -131,7 +131,7 @@ const AreaChart: FunctionComponent<AreaChartProps> = (props) => {
               minRangePoint
             )} - ${formatNumber(maxRangePoint)}<br/>
             <strong>Effectieve R</strong> ${
-              linePoint ? formatNumber(linePoint[1]) : '–'
+              linePoint ? formatNumber(linePoint[1] as number) : '–'
             }
           `;
         },

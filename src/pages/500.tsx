@@ -1,12 +1,10 @@
-import Layout from 'components/layout';
+import Layout, { FunctionComponentWithLayout } from 'components/layout';
 import MaxWidth from 'components/maxWidth';
 
 import text from 'locale/nl.json';
 import styles from './error.module.scss';
 
-ErrorPage.getLayout = Layout.getLayout(text.error_metadata);
-
-export default function ErrorPage() {
+const ErrorPage: FunctionComponentWithLayout = () => {
   return (
     <div className={styles.container}>
       <MaxWidth>
@@ -17,4 +15,8 @@ export default function ErrorPage() {
       </MaxWidth>
     </div>
   );
-}
+};
+
+ErrorPage.getLayout = Layout.getLayout(text.error_metadata);
+
+export default ErrorPage;

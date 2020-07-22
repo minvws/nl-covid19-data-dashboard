@@ -50,8 +50,8 @@ const BarScale: FunctionComponent<BarscaleProps> = ({
     <>
       <ScreenReaderOnly>
         {replaceVariablesInText(screenReaderText, {
-          value,
-          kritiekeWaarde,
+          value: String(value),
+          kritiekeWaarde: String(kritiekeWaarde),
         })}
       </ScreenReaderOnly>
 
@@ -73,7 +73,7 @@ const BarScale: FunctionComponent<BarscaleProps> = ({
               id={`barColor${id}-${rand.current}`}
               gradientUnits="userSpaceOnUse"
             >
-              {color.domain().map((value) => (
+              {color.domain().map((value: any) => (
                 <stop
                   key={`stop-${value}`}
                   stopColor={color(value)}
