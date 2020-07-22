@@ -5,7 +5,7 @@ import ClockIcon from 'assets/clock.svg';
 import replaceVariablesInText from 'utils/replaceVariablesInText';
 
 interface IProps {
-  dateUnix: number;
+  dateUnix: number | undefined;
   dateInsertedUnix?: number;
   datumsText: string;
 }

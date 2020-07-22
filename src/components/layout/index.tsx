@@ -19,7 +19,7 @@ export interface LayoutProps {
 }
 
 export type FunctionComponentWithLayout<P = void> = React.FC<P> & {
-  getLayout?: (seoProps?: LayoutProps) => (page: any) => any;
+  getLayout: (seoProps?: LayoutProps) => (page: any) => any;
 };
 
 const Layout: FunctionComponentWithLayout<LayoutProps> = (props) => {
@@ -34,7 +34,7 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = (props) => {
   const router = useRouter();
 
   // remove focus after navigation
-  const blur = (evt) => evt.target.blur();
+  const blur = (evt: any) => evt.target.blur();
 
   const showSmallLogo = useMediaQuery('(max-width: 480px)');
 
@@ -185,6 +185,8 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = (props) => {
 };
 
 Layout.getLayout = (seoProps) => (page) => (
+  // ???
+  // @ts-ignore
   <Layout {...seoProps}>{page}</Layout>
 );
 

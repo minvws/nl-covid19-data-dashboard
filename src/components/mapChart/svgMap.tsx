@@ -160,7 +160,7 @@ const regions = [
 
 type SvgMapTypes = {
   safetyRegions: SafetyRegion[];
-  selected: SafetyRegion;
+  selected: SafetyRegion | undefined;
 };
 
 const SvgMap: FunctionComponent<SvgMapTypes> = (props) => {
@@ -193,11 +193,11 @@ const SvgMap: FunctionComponent<SvgMapTypes> = (props) => {
               return (
                 <Link
                   key={region.id}
-                  href={`/regio?regio=${safetyRegion.code}`}
+                  href={`/regio?regio=${safetyRegion?.code}`}
                   scroll={false}
                   shallow
                 >
-                  <a className={className} aria-label={safetyRegion.name}>
+                  <a className={className} aria-label={safetyRegion?.name}>
                     <path key={`region-${region.id}`} d={region.d} />
                   </a>
                 </Link>

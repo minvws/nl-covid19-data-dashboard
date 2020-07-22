@@ -52,6 +52,7 @@ const MapChart: React.FC<IProps> = ({ selected, setSelection }) => {
   ];
   // Er is ongetwijfeld een veel beter manier om dit te doen :)
   if (selected) {
+    // @ts-ignore
     regioList[selected.id] = { 'hc-key': selected.id, value: 1 };
   }
 
@@ -91,10 +92,12 @@ const MapChart: React.FC<IProps> = ({ selected, setSelection }) => {
       backgroundColor: '#FFF',
       borderColor: '#01689B',
       borderRadius: 0,
-      pointFormatter: function () {
+      pointFormatter: function (): any {
+        // @ts-ignore
         return this.properties['Vgrnr'];
       },
-      formatter: function () {
+      formatter: function (): any {
+        // @ts-ignore
         return this.point.properties.Veiligheid;
       },
     },
@@ -106,6 +109,7 @@ const MapChart: React.FC<IProps> = ({ selected, setSelection }) => {
           events: {
             click: function () {
               const item = regioData.find(
+                // @ts-ignore
                 (x) => x.id === this.properties.Vgrnr
               );
 

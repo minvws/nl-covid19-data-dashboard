@@ -1,8 +1,8 @@
 import React from 'react';
 
 type TSizes = {
-  width: number;
-  height: number;
+  width: number | undefined;
+  height: number | undefined;
 };
 
 export const useResize = (
@@ -12,15 +12,15 @@ export const useResize = (
 
   React.useEffect(() => {
     const getDimensions = () => ({
-      width: ref.current.offsetWidth,
-      height: ref.current.offsetHeight,
+      width: ref?.current.offsetWidth,
+      height: ref?.current.offsetHeight,
     });
 
     const handleResize = () => {
       refreshSize(getDimensions());
     };
 
-    if (ref.current) {
+    if (ref?.current) {
       refreshSize(getDimensions());
     }
 

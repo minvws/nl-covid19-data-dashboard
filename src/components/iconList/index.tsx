@@ -67,7 +67,6 @@ const CollapseIconListItem: React.FC<{ item: Item }> = (props) => {
         <h4>
           <button
             className={styles.button}
-            aria-expanded={expanded}
             {...getToggleProps({ onClick: toggle })}
           >
             <span>

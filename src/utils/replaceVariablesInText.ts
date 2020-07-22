@@ -18,7 +18,7 @@ const curlyBracketRegex = /\{\{(.+?)\}\}/g;
 
 const replaceVariablesInText = (
   translation?: string | undefined | null,
-  variables?: { [key: string]: string }
+  variables?: { [key: string]: string | undefined }
 ): string => {
   if (!translation) return '';
 
