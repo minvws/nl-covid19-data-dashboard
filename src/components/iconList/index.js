@@ -4,6 +4,7 @@ import useCollapse from 'react-collapsed';
 import Arrow from 'assets/arrow.svg';
 
 export default IconList;
+
 function IconList(props) {
   const { list } = props;
 
@@ -12,7 +13,7 @@ function IconList(props) {
       {list.map((item) =>
         item?.content ? (
           <CollapseIconListItem
-            key={`icon-list-item-${item.text}`}
+            key={`icon-list-item-${item.text.translation}`}
             item={item}
           />
         ) : (
@@ -29,8 +30,12 @@ function IconListItem(props) {
   return (
     <li className={styles.iconListItem}>
       <div className={styles.content}>
-        <img src={item.icon} className={styles.iconListImage} alt="" />{' '}
-        <h4>{item.text}</h4>
+        <img
+          src={item.icon.translation}
+          className={styles.iconListImage}
+          alt=""
+        />{' '}
+        <h4>{item.text.translation}</h4>
       </div>
     </li>
   );
@@ -49,7 +54,11 @@ function CollapseIconListItem(props) {
   return (
     <li className={styles.iconListItem}>
       <div className={styles.content}>
-        <img src={item.icon} className={styles.iconListImage} alt="" />{' '}
+        <img
+          src={item.icon.translation}
+          className={styles.iconListImage}
+          alt=""
+        />{' '}
         <h4>
           <button
             className={styles.button}
@@ -57,14 +66,14 @@ function CollapseIconListItem(props) {
             {...getToggleProps({ onClick: toggle })}
           >
             <span>
-              {item.text}
+              {item.text.translation}
               <Arrow className={styles.arrow} width={13} height={8} />
             </span>
           </button>
         </h4>
       </div>
       <div className={styles.hiddenContent} {...getCollapseProps()}>
-        <p>{item.content}</p>
+        <p>{item.content.translation}</p>
       </div>
     </li>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const useResize = ref => {
+export const useResize = (ref) => {
   const [sizes, refreshSize] = React.useState({ width: 0, height: 0 });
 
   React.useEffect(() => {
