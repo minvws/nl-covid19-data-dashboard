@@ -930,6 +930,10 @@
             "translation": "Aantal opnames per dag, gemiddeld over de afgelopen 3 dagen.",
             "notes": ""
         },
+        "datums": {
+            "translation": "Waarde van {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
+            "notes": ""
+        },
         "fold_title": {
             "translation": "Wat betekent dit?",
             "notes": ""
@@ -972,6 +976,10 @@
         },
         "text": {
             "translation": "Aantal positief geteste mensen per 100.000 inwoners per dag.",
+            "notes": ""
+        },
+        "datums": {
+            "translation": "Waarde van {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
             "notes": ""
         },
         "metric_title": {
