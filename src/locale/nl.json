@@ -74,6 +74,10 @@
             "translation": "Aantal opnames per dag, gemiddeld over de afgelopen 3 dagen.",
             "notes": ""
         },
+        "datums": {
+            "translation": "Waarde van {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
+            "notes": ""
+        },
         "fold_title": {
             "translation": "Wat betekent dit?",
             "notes": ""
@@ -122,6 +126,10 @@
             "translation": "Aantal door de huisarts geregistreerde verdenkingen van COVID-19, per 100.000 inwoners, per week.",
             "notes": ""
         },
+        "datums": {
+            "translation": "Waarde van {{dateOfReport}}. Verkegen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
+            "notes": ""
+        },
         "graph_title": {
             "translation": "Verloop over tijd",
             "notes": ""
@@ -164,6 +172,10 @@
         },
         "text": {
             "translation": "Aantal opnames per dag, gemiddeld over de afgelopen 3 dagen.",
+            "notes": ""
+        },
+        "datums": {
+            "translation": "Waarde van {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
             "notes": ""
         },
         "fold_title": {
@@ -212,6 +224,10 @@
         },
         "text": {
             "translation": "Aantal positief geteste mensen per 100.000 inwoners per dag.",
+            "notes": ""
+        },
+        "datums": {
+            "translation": "Waarde van {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
             "notes": ""
         },
         "fold_title": {
@@ -266,6 +282,10 @@
             "translation": "Een berekening van hoeveel mensen met COVID-19 per 100.000 inwoners besmettelijk zijn voor anderen. Dit getal wordt door het RIVM berekend.",
             "notes": ""
         },
+        "datums": {
+            "translation": "Waarde van {{dateOfReport}}. Wordt wekelijks bijgewerkt.",
+            "notes": ""
+        },
         "fold_title": {
             "translation": "Wat betekent dit?",
             "notes": ""
@@ -312,6 +332,10 @@
         },
         "text": {
             "translation": "Aantal mensen dat besmet wordt door één besmettelijke persoon.",
+            "notes": ""
+        },
+        "datums": {
+            "translation": "Waarde van {{dateOfReport}}. Verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
             "notes": ""
         },
         "screen_reader_graph_content": {
@@ -504,6 +528,10 @@
             "translation": "Aantal nieuwe locaties waarbij tenminste één bewoner positief getest is, per dag.",
             "notes": ""
         },
+        "datums": {
+            "translation": "Waarde van {{dateOfReport}}. Verkegen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+            "notes": ""
+        },
         "metric_title": {
             "translation": "Het totaal aantal besmette locaties is:",
             "notes": ""
@@ -556,6 +584,10 @@
             "translation": "Aantal positief geteste bewoners in verpleeghuizen per dag.",
             "notes": ""
         },
+        "datums": {
+            "translation": "Waarde van {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
+            "notes": ""
+        },
         "fold_title": {
             "translation": "Wat betekent dit?",
             "notes": ""
@@ -602,6 +634,10 @@
         },
         "text": {
             "translation": "Aantal overleden bewoners in verpleeghuizen met een vastgestelde COVID-19-besmetting per dag.",
+            "notes": ""
+        },
+        "datums": {
+            "translation": "Waarde van {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
             "notes": ""
         },
         "screen_reader_graph_content": {
@@ -662,6 +698,10 @@
         },
         "text": {
             "translation": "Het aantal virusdeeltjes in een milliliter rioolwater, afkomstig van 28 locaties in Nederland. Het aantal meetpunten wordt in de komende weken verder uitgebreid naar meer dan 300 locaties.",
+            "notes": ""
+        },
+        "datums": {
+            "translation": "Waarde van {{dateOfReport}}. Verkegen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
             "notes": ""
         },
         "graph_title": {
