@@ -350,6 +350,14 @@
       "translation": "1",
       "notes": ""
     },
+    "legenda_r": {
+      "translation": "De effectieve R is een schatting. Voor recente R schattingen is de betrouwbaarheid niet groot, daarom loopt de R-lijn niet door in de laatste twee weken.",
+      "notes": ""
+    },
+    "legenda_marge": {
+      "translation": "De onzekerheidsmarge toont met zekerheid tussen welke waarden de R zich bevindt. Dit wordt wekelijks bijgewerkt.",
+      "notes": ""
+    },
     "bron": {
       "href": {
         "translation": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
