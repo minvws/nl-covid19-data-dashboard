@@ -23,21 +23,17 @@ import VerpleegHuisZorg from '../assets/verpleeghuiszorg.svg';
 import MedischeScreening from '../assets/medische-screening.svg';
 
 import { store } from 'store';
-import siteText from 'data/textNationaal.json';
+import siteText from 'locale/nl.json';
 import GraphHeader from 'components/graphHeader';
 import IconList from 'components/iconList';
 
 import openGraphImage from 'assets/sharing/og-landelijke-cijfers.png?url';
 import twitterImage from 'assets/sharing/twitter-landelijke-cijfers.png?url';
 
-export type HomeLayoutProps = {
-  getLayout: (string) => string;
-};
-
 import { FunctionComponentWithLayout } from 'components/layout';
 import Head from 'next/head';
 
-const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
+const Home: FunctionComponentWithLayout = () => {
   const globalState = React.useContext(store);
   const { state, dispatch } = globalState;
 
@@ -120,6 +116,9 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
 
             <ReproductionIndex
               text={siteText.reproductiegetal}
+              lastKnownValidData={
+                state?.NL?.reproduction_index_last_known_average
+              }
               data={state?.NL?.reproduction_index}
             />
 
@@ -128,8 +127,8 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
               icon={'images/nederland.png'}
               iconAlt="Kaart van Nederland"
             >
-              <h3>{siteText.regio_link_block.title}</h3>
-              <p>{siteText.regio_link_block.text}</p>
+              <h3>{siteText.regio_link_block.title.translation}</h3>
+              <p>{siteText.regio_link_block.text.translation}</p>
             </LinkCard>
           </Masonry>
         </section>
@@ -158,8 +157,10 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
 
             <GraphContainer>
               <GraphContent>
-                <GraphHeader title={siteText.overige_gegevens.title} />
-                <p>{siteText.overige_gegevens.text}</p>
+                <GraphHeader
+                  title={siteText.overige_gegevens.title.translation}
+                />
+                <p>{siteText.overige_gegevens.text.translation}</p>
 
                 <IconList list={siteText.overige_gegevens.list} />
               </GraphContent>
@@ -170,9 +171,9 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
         <section className="home-section">
           <TitleBlock
             Icon={VerpleegHuisZorg}
-            title={siteText.blok_verpleeghuis_zorg.title}
+            title={siteText.blok_verpleeghuis_zorg.title.translation}
           >
-            <p>{siteText.blok_verpleeghuis_zorg.text}</p>
+            <p>{siteText.blok_verpleeghuis_zorg.text.translation}</p>
           </TitleBlock>
 
           <Masonry

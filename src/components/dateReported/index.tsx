@@ -1,27 +1,42 @@
 import { long } from 'data/months';
+
 import ClockIcon from 'assets/clock.svg';
 
+import replaceVariablesInText from 'utils/replaceVariablesInText';
+
 interface IProps {
-  dateUnix: number;
-  hasDailyInterval?: boolean;
+  dateUnix: number | undefined;
+  dateInsertedUnix?: number;
+  datumsText: string;
+}
+
+function formatDate(number: number) {
+  const date = new Date(number * 1000);
+  return `${date.getDate()} ${long[date.getMonth()]}`;
 }
 
 const dateReported: React.FC<IProps> = (props) => {
-  const { dateUnix, hasDailyInterval } = props;
+  const { datumsText, dateUnix, dateInsertedUnix } = props;
 
   if (!dateUnix) return null;
 
-  const date = new Date(dateUnix * 1000);
-  const lastDay = `${date.getDate()} ${long[date.getMonth()]}`;
-  const interval = hasDailyInterval ? 'dagelijks' : 'wekelijks';
+  const dateOfReport = formatDate(dateUnix);
+  const dateOfInsertion = dateInsertedUnix
+    ? formatDate(dateInsertedUnix)
+    : undefined;
 
   return (
-    <p className="dateReported">
-      <span aria-hidden>
-        <ClockIcon />
+    <div className="dateReported">
+      <span>
+        <ClockIcon aria-hidden />
       </span>
-      Waarde van {lastDay}.<br /> Wordt {interval} bijgewerkt.
-    </p>
+      <p>
+        {replaceVariablesInText(datumsText, {
+          dateOfReport,
+          dateOfInsertion,
+        })}
+      </p>
+    </div>
   );
 };
 

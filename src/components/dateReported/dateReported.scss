@@ -4,8 +4,15 @@
   display: flex;
   align-items: center;
   color: $text-color-grey;
+  margin: 1rem 0;
+
+  p:first-of-type {
+    margin: 0;
+  }
 
   span {
-    margin-right: 0.5em;
+    display: flex;
+    align-items: center;
+    min-width: 1.8rem;
   }
 }

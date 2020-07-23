@@ -1,58 +1,6 @@
 {
-    "besmettelijke_personen": {
-        "bron": {
-            "href": {
-                "translation": "",
-                "notes": ""
-            },
-            "text": {
-                "translation": "",
-                "notes": ""
-            }
-        },
-        "fold": {
-            "translation": "",
-            "notes": ""
-        },
-        "fold_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "graph_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "metric_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "open": {
-            "translation": "",
-            "notes": ""
-        },
-        "screen_reader_graph_content": {
-            "translation": "",
-            "notes": ""
-        },
-        "sluit": {
-            "translation": "",
-            "notes": ""
-        },
+    "error_titel": {
         "text": {
-            "translation": "",
-            "notes": ""
-        },
-        "title": {
-            "translation": "",
-            "notes": ""
-        }
-    },
-    "blok_verpleeghuis_zorg": {
-        "text": {
-            "translation": "",
-            "notes": ""
-        },
-        "title": {
             "translation": "",
             "notes": ""
         }
@@ -69,20 +17,18 @@
             "notes": ""
         }
     },
-    "error_titel": {
-        "text": {
+    "skiplinks": {
+        "inhoud": {
             "translation": "",
             "notes": ""
-        }
-    },
-    "geen_selectie": {
-        "text": {
+        },
+        "nav": {
             "translation": "",
             "notes": ""
         }
     },
     "header": {
-        "link": {
+        "title": {
             "translation": "",
             "notes": ""
         },
@@ -90,27 +36,49 @@
             "translation": "",
             "notes": ""
         },
-        "title": {
+        "link": {
             "translation": "",
             "notes": ""
         }
     },
-    "ic_opnames_per_dag": {
-        "bron": {
-            "href": {
+    "nav": {
+        "links": {
+            "index": {
                 "translation": "",
                 "notes": ""
             },
-            "text": {
+            "regio": {
+                "translation": "",
+                "notes": ""
+            },
+            "over": {
+                "translation": "",
+                "notes": ""
+            },
+            "meer": {
+                "translation": "",
+                "notes": ""
+            },
+            "verantwoording": {
                 "translation": "",
                 "notes": ""
             }
+        }
+    },
+    "ic_opnames_per_dag": {
+        "title": {
+            "translation": "",
+            "notes": ""
         },
-        "fold": {
+        "text": {
             "translation": "",
             "notes": ""
         },
         "fold_title": {
+            "translation": "",
+            "notes": ""
+        },
+        "fold": {
             "translation": "",
             "notes": ""
         },
@@ -122,7 +90,7 @@
             "translation": "",
             "notes": ""
         },
-        "screen_reader_graph_content": {
+        "sluit": {
             "translation": "",
             "notes": ""
         },
@@ -130,65 +98,605 @@
             "translation": "",
             "notes": ""
         },
-        "sluit": {
+        "screen_reader_graph_content": {
             "translation": "",
             "notes": ""
         },
-        "text": {
-            "translation": "",
-            "notes": ""
-        },
-        "title": {
-            "translation": "",
-            "notes": ""
-        }
-    },
-    "metadata": {
-        "description": {
-            "translation": "",
-            "notes": ""
-        },
-        "titel": {
-            "translation": "",
-            "notes": ""
-        },
-        "title": {
-            "translation": "",
-            "notes": ""
-        },
-        "url": {
-            "translation": "",
-            "notes": ""
-        }
-    },
-    "nav": {
-        "links": {
-            "index": {
+        "bron": {
+            "href": {
                 "translation": "",
                 "notes": ""
             },
-            "meer": {
-                "translation": "",
-                "notes": ""
-            },
-            "over": {
-                "translation": "",
-                "notes": ""
-            },
-            "regio": {
-                "translation": "",
-                "notes": ""
-            },
-            "verantwoording": {
+            "text": {
                 "translation": "",
                 "notes": ""
             }
         }
     },
-    "notfound_beschrijving": {
+    "verdenkingen_huisartsen": {
+        "title": {
+            "translation": "",
+            "notes": ""
+        },
         "text": {
             "translation": "",
             "notes": ""
+        },
+        "graph_title": {
+            "translation": "",
+            "notes": ""
+        },
+        "fold_title": {
+            "translation": "",
+            "notes": ""
+        },
+        "fold": {
+            "translation": "",
+            "notes": ""
+        },
+        "open": {
+            "translation": "",
+            "notes": ""
+        },
+        "sluit": {
+            "translation": "",
+            "notes": ""
+        },
+        "screen_reader_graph_content": {
+            "translation": "",
+            "notes": ""
+        },
+        "bron": {
+            "href": {
+                "translation": "",
+                "notes": ""
+            },
+            "text": {
+                "translation": "",
+                "notes": ""
+            }
+        }
+    },
+    "ziekenhuisopnames_per_dag": {
+        "title": {
+            "translation": "",
+            "notes": ""
+        },
+        "text": {
+            "translation": "",
+            "notes": ""
+        },
+        "fold_title": {
+            "translation": "",
+            "notes": ""
+        },
+        "fold": {
+            "translation": "",
+            "notes": ""
+        },
+        "graph_title": {
+            "translation": "",
+            "notes": ""
+        },
+        "open": {
+            "translation": "",
+            "notes": ""
+        },
+        "sluit": {
+            "translation": "",
+            "notes": ""
+        },
+        "signaalwaarde": {
+            "translation": "",
+            "notes": ""
+        },
+        "screen_reader_graph_content": {
+            "translation": "",
+            "notes": ""
+        },
+        "bron": {
+            "href": {
+                "translation": "",
+                "notes": ""
+            },
+            "text": {
+                "translation": "",
+                "notes": ""
+            }
+        }
+    },
+    "positief_geteste_personen": {
+        "title": {
+            "translation": "",
+            "notes": ""
+        },
+        "text": {
+            "translation": "",
+            "notes": ""
+        },
+        "fold_title": {
+            "translation": "",
+            "notes": ""
+        },
+        "fold": {
+            "translation": "",
+            "notes": ""
+        },
+        "metric_title": {
+            "translation": "",
+            "notes": ""
+        },
+        "linechart_title": {
+            "translation": "",
+            "notes": ""
+        },
+        "graph_title": {
+            "translation": "",
+            "notes": ""
+        },
+        "open": {
+            "translation": "",
+            "notes": ""
+        },
+        "sluit": {
+            "translation": "",
+            "notes": ""
+        },
+        "screen_reader_graph_content": {
+            "translation": "",
+            "notes": ""
+        },
+        "bron": {
+            "href": {
+                "translation": "",
+                "notes": ""
+            },
+            "text": {
+                "translation": "",
+                "notes": ""
+            }
+        }
+    },
+    "besmettelijke_personen": {
+        "title": {
+            "translation": "",
+            "notes": ""
+        },
+        "text": {
+            "translation": "",
+            "notes": ""
+        },
+        "fold_title": {
+            "translation": "",
+            "notes": ""
+        },
+        "fold": {
+            "translation": "",
+            "notes": ""
+        },
+        "metric_title": {
+            "translation": "",
+            "notes": ""
+        },
+        "graph_title": {
+            "translation": "",
+            "notes": ""
+        },
+        "open": {
+            "translation": "",
+            "notes": ""
+        },
+        "sluit": {
+            "translation": "",
+            "notes": ""
+        },
+        "screen_reader_graph_content": {
+            "translation": "",
+            "notes": ""
+        },
+        "bron": {
+            "href": {
+                "translation": "",
+                "notes": ""
+            },
+            "text": {
+                "translation": "",
+                "notes": ""
+            }
+        }
+    },
+    "reproductiegetal": {
+        "title": {
+            "translation": "",
+            "notes": ""
+        },
+        "text": {
+            "translation": "",
+            "notes": ""
+        },
+        "screen_reader_graph_content": {
+            "translation": "",
+            "notes": ""
+        },
+        "fold_title": {
+            "translation": "",
+            "notes": ""
+        },
+        "fold": {
+            "translation": "",
+            "notes": ""
+        },
+        "graph_title": {
+            "translation": "",
+            "notes": ""
+        },
+        "open": {
+            "translation": "",
+            "notes": ""
+        },
+        "sluit": {
+            "translation": "",
+            "notes": ""
+        },
+        "rangeLegendLabel": {
+            "translation": "",
+            "notes": ""
+        },
+        "lineLegendLabel": {
+            "translation": "",
+            "notes": ""
+        },
+        "signaalwaarde": {
+            "translation": "",
+            "notes": ""
+        },
+        "bron": {
+            "href": {
+                "translation": "",
+                "notes": ""
+            },
+            "text": {
+                "translation": "",
+                "notes": ""
+            }
+        },
+        "legenda_r": {
+            "translation": "",
+            "notes": ""
+        },
+        "legenda_marge": {
+            "translation": "",
+            "notes": ""
+        }
+    },
+    "overige_gegevens": {
+        "title": {
+            "translation": "",
+            "notes": ""
+        },
+        "text": {
+            "translation": "",
+            "notes": ""
+        },
+        "fold_title": {
+            "translation": "",
+            "notes": ""
+        },
+        "fold": {
+            "translation": "",
+            "notes": ""
+        },
+        "graph_title": {
+            "translation": "",
+            "notes": ""
+        },
+        "open": {
+            "translation": "",
+            "notes": ""
+        },
+        "sluit": {
+            "translation": "",
+            "notes": ""
+        },
+        "list": [
+            {
+                "icon": {
+                    "translation": "",
+                    "notes": ""
+                },
+                "text": {
+                    "translation": "",
+                    "notes": ""
+                },
+                "content": {
+                    "translation": "",
+                    "notes": ""
+                }
+            },
+            {
+                "icon": {
+                    "translation": "",
+                    "notes": ""
+                },
+                "text": {
+                    "translation": "",
+                    "notes": ""
+                },
+                "content": {
+                    "translation": "",
+                    "notes": ""
+                }
+            },
+            {
+                "icon": {
+                    "translation": "",
+                    "notes": ""
+                },
+                "text": {
+                    "translation": "",
+                    "notes": ""
+                },
+                "content": {
+                    "translation": "",
+                    "notes": ""
+                }
+            },
+            {
+                "icon": {
+                    "translation": "",
+                    "notes": ""
+                },
+                "text": {
+                    "translation": "",
+                    "notes": ""
+                },
+                "content": {
+                    "translation": "",
+                    "notes": ""
+                }
+            },
+            {
+                "icon": {
+                    "translation": "",
+                    "notes": ""
+                },
+                "text": {
+                    "translation": "",
+                    "notes": ""
+                },
+                "content": {
+                    "translation": "",
+                    "notes": ""
+                }
+            },
+            {
+                "icon": {
+                    "translation": "",
+                    "notes": ""
+                },
+                "text": {
+                    "translation": "",
+                    "notes": ""
+                },
+                "content": {
+                    "translation": "",
+                    "notes": ""
+                }
+            }
+        ]
+    },
+    "regio_link_block": {
+        "title": {
+            "translation": "",
+            "notes": ""
+        },
+        "text": {
+            "translation": "",
+            "notes": ""
+        }
+    },
+    "verpleeghuis_besmette_locaties": {
+        "title": {
+            "translation": "",
+            "notes": ""
+        },
+        "text": {
+            "translation": "",
+            "notes": ""
+        },
+        "metric_title": {
+            "translation": "",
+            "notes": ""
+        },
+        "metric_text": {
+            "translation": "",
+            "notes": ""
+        },
+        "fold_title": {
+            "translation": "",
+            "notes": ""
+        },
+        "fold": {
+            "translation": "",
+            "notes": ""
+        },
+        "graph_title": {
+            "translation": "",
+            "notes": ""
+        },
+        "open": {
+            "translation": "",
+            "notes": ""
+        },
+        "sluit": {
+            "translation": "",
+            "notes": ""
+        },
+        "screen_reader_graph_content": {
+            "translation": "",
+            "notes": ""
+        },
+        "bron": {
+            "href": {
+                "translation": "",
+                "notes": ""
+            },
+            "text": {
+                "translation": "",
+                "notes": ""
+            }
+        }
+    },
+    "verpleeghuis_positief_geteste_personen": {
+        "title": {
+            "translation": "",
+            "notes": ""
+        },
+        "text": {
+            "translation": "",
+            "notes": ""
+        },
+        "fold_title": {
+            "translation": "",
+            "notes": ""
+        },
+        "fold": {
+            "translation": "",
+            "notes": ""
+        },
+        "graph_title": {
+            "translation": "",
+            "notes": ""
+        },
+        "open": {
+            "translation": "",
+            "notes": ""
+        },
+        "sluit": {
+            "translation": "",
+            "notes": ""
+        },
+        "signaalwaarde": {
+            "translation": "",
+            "notes": ""
+        },
+        "screen_reader_graph_content": {
+            "translation": "",
+            "notes": ""
+        },
+        "bron": {
+            "href": {
+                "translation": "",
+                "notes": ""
+            },
+            "text": {
+                "translation": "",
+                "notes": ""
+            }
+        }
+    },
+    "verpleeghuis_oversterfte": {
+        "title": {
+            "translation": "",
+            "notes": ""
+        },
+        "text": {
+            "translation": "",
+            "notes": ""
+        },
+        "screen_reader_graph_content": {
+            "translation": "",
+            "notes": ""
+        },
+        "fold_title": {
+            "translation": "",
+            "notes": ""
+        },
+        "fold": {
+            "translation": "",
+            "notes": ""
+        },
+        "graph_title": {
+            "translation": "",
+            "notes": ""
+        },
+        "open": {
+            "translation": "",
+            "notes": ""
+        },
+        "sluit": {
+            "translation": "",
+            "notes": ""
+        },
+        "bron": {
+            "href": {
+                "translation": "",
+                "notes": ""
+            },
+            "text": {
+                "translation": "",
+                "notes": ""
+            }
+        }
+    },
+    "blok_verpleeghuis_zorg": {
+        "title": {
+            "translation": "",
+            "notes": ""
+        },
+        "text": {
+            "translation": "",
+            "notes": ""
+        }
+    },
+    "geen_selectie": {
+        "text": {
+            "translation": "",
+            "notes": ""
+        }
+    },
+    "rioolwater_metingen": {
+        "title": {
+            "translation": "",
+            "notes": ""
+        },
+        "text": {
+            "translation": "",
+            "notes": ""
+        },
+        "graph_title": {
+            "translation": "",
+            "notes": ""
+        },
+        "fold_title": {
+            "translation": "",
+            "notes": ""
+        },
+        "fold": {
+            "translation": "",
+            "notes": ""
+        },
+        "open": {
+            "translation": "",
+            "notes": ""
+        },
+        "sluit": {
+            "translation": "",
+            "notes": ""
+        },
+        "screen_reader_graph_content": {
+            "translation": "",
+            "notes": ""
+        },
+        "bron": {
+            "text": {
+                "translation": "",
+                "notes": ""
+            },
+            "href": {
+                "translation": "",
+                "notes": ""
+            }
         }
     },
     "notfound_titel": {
@@ -197,23 +705,29 @@
             "notes": ""
         }
     },
-    "over_beschrijving": {
+    "notfound_beschrijving": {
+        "text": {
+            "translation": "",
+            "notes": ""
+        }
+    },
+    "over_titel": {
         "text": {
             "translation": "",
             "notes": ""
         }
     },
     "over_disclaimer": {
-        "text": {
+        "title": {
             "translation": "",
             "notes": ""
         },
-        "title": {
+        "text": {
             "translation": "",
             "notes": ""
         }
     },
-    "over_titel": {
+    "over_beschrijving": {
         "text": {
             "translation": "",
             "notes": ""
@@ -226,139 +740,143 @@
         },
         "vragen": [
             {
-                "antwoord": {
+                "vraag": {
                     "translation": "",
                     "notes": ""
                 },
-                "vraag": {
+                "antwoord": {
                     "translation": "",
                     "notes": ""
                 }
             },
             {
-                "antwoord": {
+                "vraag": {
                     "translation": "",
                     "notes": ""
                 },
-                "vraag": {
+                "antwoord": {
                     "translation": "",
                     "notes": ""
                 }
             },
             {
-                "antwoord": {
+                "vraag": {
                     "translation": "",
                     "notes": ""
                 },
-                "vraag": {
+                "antwoord": {
                     "translation": "",
                     "notes": ""
                 }
             },
             {
-                "antwoord": {
+                "vraag": {
                     "translation": "",
                     "notes": ""
                 },
-                "vraag": {
+                "antwoord": {
                     "translation": "",
                     "notes": ""
                 }
             },
             {
-                "antwoord": {
+                "vraag": {
                     "translation": "",
                     "notes": ""
                 },
-                "vraag": {
+                "antwoord": {
                     "translation": "",
                     "notes": ""
                 }
             },
             {
-                "antwoord": {
+                "vraag": {
                     "translation": "",
                     "notes": ""
                 },
-                "vraag": {
+                "antwoord": {
                     "translation": "",
                     "notes": ""
                 }
             },
             {
-                "antwoord": {
+                "vraag": {
                     "translation": "",
                     "notes": ""
                 },
-                "vraag": {
+                "antwoord": {
                     "translation": "",
                     "notes": ""
                 }
             },
             {
-                "antwoord": {
+                "vraag": {
                     "translation": "",
                     "notes": ""
                 },
-                "vraag": {
+                "antwoord": {
                     "translation": "",
                     "notes": ""
                 }
             },
             {
-                "antwoord": {
+                "vraag": {
                     "translation": "",
                     "notes": ""
                 },
-                "vraag": {
+                "antwoord": {
                     "translation": "",
                     "notes": ""
                 }
             },
             {
-                "antwoord": {
+                "vraag": {
                     "translation": "",
                     "notes": ""
                 },
-                "vraag": {
+                "antwoord": {
                     "translation": "",
                     "notes": ""
                 }
             },
             {
-                "antwoord": {
+                "vraag": {
                     "translation": "",
                     "notes": ""
                 },
-                "vraag": {
+                "antwoord": {
                     "translation": "",
                     "notes": ""
                 }
             },
             {
-                "antwoord": {
+                "vraag": {
                     "translation": "",
                     "notes": ""
                 },
-                "vraag": {
+                "antwoord": {
                     "translation": "",
                     "notes": ""
                 }
             },
             {
-                "antwoord": {
+                "vraag": {
                     "translation": "",
                     "notes": ""
                 },
-                "vraag": {
+                "antwoord": {
                     "translation": "",
                     "notes": ""
                 }
             }
         ]
     },
-    "overige_gegevens": {
-        "fold": {
+    "regionaal_ziekenhuisopnames_per_dag": {
+        "title": {
+            "translation": "",
+            "notes": ""
+        },
+        "text": {
             "translation": "",
             "notes": ""
         },
@@ -366,96 +884,14 @@
             "translation": "",
             "notes": ""
         },
+        "fold": {
+            "translation": "",
+            "notes": ""
+        },
         "graph_title": {
             "translation": "",
             "notes": ""
         },
-        "list": [
-            {
-                "content": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "icon": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "text": {
-                    "translation": "",
-                    "notes": ""
-                }
-            },
-            {
-                "content": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "icon": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "text": {
-                    "translation": "",
-                    "notes": ""
-                }
-            },
-            {
-                "content": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "icon": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "text": {
-                    "translation": "",
-                    "notes": ""
-                }
-            },
-            {
-                "content": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "icon": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "text": {
-                    "translation": "",
-                    "notes": ""
-                }
-            },
-            {
-                "content": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "icon": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "text": {
-                    "translation": "",
-                    "notes": ""
-                }
-            },
-            {
-                "content": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "icon": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "text": {
-                    "translation": "",
-                    "notes": ""
-                }
-            }
-        ],
         "open": {
             "translation": "",
             "notes": ""
@@ -464,16 +900,10 @@
             "translation": "",
             "notes": ""
         },
-        "text": {
+        "screen_reader_graph_content": {
             "translation": "",
             "notes": ""
         },
-        "title": {
-            "translation": "",
-            "notes": ""
-        }
-    },
-    "positief_geteste_personen": {
         "bron": {
             "href": {
                 "translation": "",
@@ -483,78 +913,14 @@
                 "translation": "",
                 "notes": ""
             }
-        },
-        "fold": {
-            "translation": "",
-            "notes": ""
-        },
-        "fold_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "graph_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "linechart_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "metric_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "open": {
-            "translation": "",
-            "notes": ""
-        },
-        "screen_reader_graph_content": {
-            "translation": "",
-            "notes": ""
-        },
-        "sluit": {
-            "translation": "",
-            "notes": ""
-        },
-        "text": {
-            "translation": "",
-            "notes": ""
-        },
-        "title": {
-            "translation": "",
-            "notes": ""
-        }
-    },
-    "regio_link_block": {
-        "text": {
-            "translation": "",
-            "notes": ""
-        },
-        "title": {
-            "translation": "",
-            "notes": ""
         }
     },
     "regionaal_positief_geteste_personen": {
-        "bron": {
-            "href": {
-                "translation": "",
-                "notes": ""
-            },
-            "text": {
-                "translation": "",
-                "notes": ""
-            }
-        },
-        "fold": {
+        "title": {
             "translation": "",
             "notes": ""
         },
-        "fold_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "graph_title": {
+        "text": {
             "translation": "",
             "notes": ""
         },
@@ -562,43 +928,11 @@
             "translation": "",
             "notes": ""
         },
-        "open": {
+        "fold_title": {
             "translation": "",
             "notes": ""
-        },
-        "screen_reader_graph_content": {
-            "translation": "",
-            "notes": ""
-        },
-        "sluit": {
-            "translation": "",
-            "notes": ""
-        },
-        "text": {
-            "translation": "",
-            "notes": ""
-        },
-        "title": {
-            "translation": "",
-            "notes": ""
-        }
-    },
-    "regionaal_ziekenhuisopnames_per_dag": {
-        "bron": {
-            "href": {
-                "translation": "",
-                "notes": ""
-            },
-            "text": {
-                "translation": "",
-                "notes": ""
-            }
         },
         "fold": {
-            "translation": "",
-            "notes": ""
-        },
-        "fold_title": {
             "translation": "",
             "notes": ""
         },
@@ -610,24 +944,14 @@
             "translation": "",
             "notes": ""
         },
-        "screen_reader_graph_content": {
-            "translation": "",
-            "notes": ""
-        },
         "sluit": {
             "translation": "",
             "notes": ""
         },
-        "text": {
+        "screen_reader_graph_content": {
             "translation": "",
             "notes": ""
         },
-        "title": {
-            "translation": "",
-            "notes": ""
-        }
-    },
-    "reproductiegetal": {
         "bron": {
             "href": {
                 "translation": "",
@@ -637,104 +961,6 @@
                 "translation": "",
                 "notes": ""
             }
-        },
-        "fold": {
-            "translation": "",
-            "notes": ""
-        },
-        "fold_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "graph_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "lineLegendLabel": {
-            "translation": "",
-            "notes": ""
-        },
-        "open": {
-            "translation": "",
-            "notes": ""
-        },
-        "rangeLegendLabel": {
-            "translation": "",
-            "notes": ""
-        },
-        "screen_reader_graph_content": {
-            "translation": "",
-            "notes": ""
-        },
-        "signaalwaarde": {
-            "translation": "",
-            "notes": ""
-        },
-        "sluit": {
-            "translation": "",
-            "notes": ""
-        },
-        "text": {
-            "translation": "",
-            "notes": ""
-        },
-        "title": {
-            "translation": "",
-            "notes": ""
-        }
-    },
-    "rioolwater_metingen": {
-        "bron": {
-            "href": {
-                "translation": "",
-                "notes": ""
-            },
-            "text": {
-                "translation": "",
-                "notes": ""
-            }
-        },
-        "fold": {
-            "translation": "",
-            "notes": ""
-        },
-        "fold_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "graph_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "open": {
-            "translation": "",
-            "notes": ""
-        },
-        "screen_reader_graph_content": {
-            "translation": "",
-            "notes": ""
-        },
-        "sluit": {
-            "translation": "",
-            "notes": ""
-        },
-        "text": {
-            "translation": "",
-            "notes": ""
-        },
-        "title": {
-            "translation": "",
-            "notes": ""
-        }
-    },
-    "skiplinks": {
-        "inhoud": {
-            "translation": "",
-            "notes": ""
-        },
-        "nav": {
-            "translation": "",
-            "notes": ""
         }
     },
     "terug_naar_regio_selectie": {
@@ -744,6 +970,10 @@
         }
     },
     "verantwoording": {
+        "title": {
+            "translation": "",
+            "notes": ""
+        },
         "cijfers": [
             {
                 "cijfer": {
@@ -855,244 +1085,90 @@
                     "notes": ""
                 }
             }
-        ],
-        "title": {
+        ]
+    },
+    "error_metadata": {
+        "titel": {
             "translation": "",
             "notes": ""
         }
     },
-    "verdenkingen_huisartsen": {
-        "bron": {
-            "href": {
-                "translation": "",
-                "notes": ""
-            },
-            "text": {
-                "translation": "",
-                "notes": ""
-            }
-        },
-        "fold": {
-            "translation": "",
-            "notes": ""
-        },
-        "fold_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "graph_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "open": {
-            "translation": "",
-            "notes": ""
-        },
-        "screen_reader_graph_content": {
-            "translation": "",
-            "notes": ""
-        },
-        "sluit": {
-            "translation": "",
-            "notes": ""
-        },
-        "text": {
-            "translation": "",
-            "notes": ""
-        },
+    "nationaal_metadata": {
         "title": {
+            "translation": "",
+            "notes": ""
+        },
+        "description": {
+            "translation": "",
+            "notes": ""
+        },
+        "url": {
             "translation": "",
             "notes": ""
         }
     },
-    "verpleeghuis_besmette_locaties": {
-        "bron": {
-            "href": {
-                "translation": "",
-                "notes": ""
-            },
-            "text": {
-                "translation": "",
-                "notes": ""
-            }
-        },
-        "fold": {
-            "translation": "",
-            "notes": ""
-        },
-        "fold_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "graph_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "metric_text": {
-            "translation": "",
-            "notes": ""
-        },
-        "metric_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "open": {
-            "translation": "",
-            "notes": ""
-        },
-        "screen_reader_graph_content": {
-            "translation": "",
-            "notes": ""
-        },
-        "sluit": {
-            "translation": "",
-            "notes": ""
-        },
-        "text": {
-            "translation": "",
-            "notes": ""
-        },
-        "title": {
+    "notfound_metadata": {
+        "titel": {
             "translation": "",
             "notes": ""
         }
     },
-    "verpleeghuis_oversterfte": {
-        "bron": {
-            "href": {
-                "translation": "",
-                "notes": ""
-            },
-            "text": {
-                "translation": "",
-                "notes": ""
-            }
-        },
-        "fold": {
-            "translation": "",
-            "notes": ""
-        },
-        "fold_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "graph_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "open": {
-            "translation": "",
-            "notes": ""
-        },
-        "screen_reader_graph_content": {
-            "translation": "",
-            "notes": ""
-        },
-        "sluit": {
-            "translation": "",
-            "notes": ""
-        },
-        "text": {
-            "translation": "",
-            "notes": ""
-        },
+    "over_metadata": {
         "title": {
+            "translation": "",
+            "notes": ""
+        },
+        "description": {
+            "translation": "",
+            "notes": ""
+        },
+        "url": {
             "translation": "",
             "notes": ""
         }
     },
-    "verpleeghuis_positief_geteste_personen": {
-        "bron": {
-            "href": {
-                "translation": "",
-                "notes": ""
-            },
-            "text": {
-                "translation": "",
-                "notes": ""
-            }
-        },
-        "fold": {
-            "translation": "",
-            "notes": ""
-        },
-        "fold_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "graph_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "open": {
-            "translation": "",
-            "notes": ""
-        },
-        "screen_reader_graph_content": {
-            "translation": "",
-            "notes": ""
-        },
-        "signaalwaarde": {
-            "translation": "",
-            "notes": ""
-        },
-        "sluit": {
-            "translation": "",
-            "notes": ""
-        },
-        "text": {
-            "translation": "",
-            "notes": ""
-        },
+    "regionaal_metadata": {
         "title": {
+            "translation": "",
+            "notes": ""
+        },
+        "description": {
+            "translation": "",
+            "notes": ""
+        },
+        "url": {
             "translation": "",
             "notes": ""
         }
     },
-    "ziekenhuisopnames_per_dag": {
-        "bron": {
-            "href": {
-                "translation": "",
-                "notes": ""
-            },
-            "text": {
-                "translation": "",
-                "notes": ""
-            }
-        },
-        "fold": {
+    "verantwoording_metadata": {
+        "title": {
             "translation": "",
             "notes": ""
         },
-        "fold_title": {
+        "description": {
             "translation": "",
             "notes": ""
         },
-        "graph_title": {
+        "url": {
+            "translation": "",
+            "notes": ""
+        }
+    },
+    "metadata": {
+        "description": {
             "translation": "",
             "notes": ""
         },
-        "open": {
-            "translation": "",
-            "notes": ""
-        },
-        "screen_reader_graph_content": {
-            "translation": "",
-            "notes": ""
-        },
-        "signaalwaarde": {
-            "translation": "",
-            "notes": ""
-        },
-        "sluit": {
-            "translation": "",
-            "notes": ""
-        },
-        "text": {
+        "titel": {
             "translation": "",
             "notes": ""
         },
         "title": {
+            "translation": "",
+            "notes": ""
+        },
+        "url": {
             "translation": "",
             "notes": ""
         }

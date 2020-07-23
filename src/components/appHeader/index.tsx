@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.scss';
 
-const AppHeader = () => {
+const AppHeader: React.FC = () => {
   return (
     <div className="appHeader">
       <nav>

@@ -5,44 +5,52 @@ import { useRouter } from 'next/router';
 
 import styles from './layout.module.scss';
 import MaxWidth from 'components/maxWidth';
-import text from 'data/textLayout.json';
+import text from 'locale/nl.json';
 import useMediaQuery from 'utils/useMediaQuery';
-import SEOHead, { SEOHeadProps } from 'components/seoHead';
+import SEOHead from 'components/seoHead';
+import { Translation } from 'types/data';
 
-export type LayoutProps = SEOHeadProps;
+export interface LayoutProps {
+  url?: Translation;
+  title: Translation;
+  description?: Translation;
+  openGraphImage?: string;
+  twitterImage?: string;
+}
 
-export type FunctionComponentWithLayout<P> = React.FC<P> & {
-  getLayout?: (seoProps?: SEOHeadProps) => (page: any) => any;
+export type FunctionComponentWithLayout<P = void> = React.FC<P> & {
+  getLayout: (seoProps?: LayoutProps) => (page: any) => any;
 };
 
-const Layout: FunctionComponentWithLayout<LayoutProps> = ({
-  children,
-  title,
-  description,
-  openGraphImage,
-  twitterImage,
-  url,
-}) => {
+const Layout: FunctionComponentWithLayout<LayoutProps> = (props) => {
+  const {
+    children,
+    title,
+    description,
+    openGraphImage,
+    twitterImage,
+    url,
+  } = props;
   const router = useRouter();
 
   // remove focus after navigation
-  const blur = (evt) => evt.target.blur();
+  const blur = (evt: any) => evt.target.blur();
 
   const showSmallLogo = useMediaQuery('(max-width: 480px)');
 
   return (
     <>
       <SEOHead
-        title={title}
-        description={description}
+        title={title?.translation}
+        description={description?.translation}
         openGraphImage={openGraphImage}
         twitterImage={twitterImage}
-        url={url}
+        url={url?.translation}
       />
 
       <div className={styles.skiplinks}>
-        <a href="#content">{text.skiplinks.inhoud}</a>
-        <a href="#main-navigation">{text.skiplinks.nav}</a>
+        <a href="#content">{text.skiplinks.inhoud.translation}</a>
+        <a href="#main-navigation">{text.skiplinks.nav.translation}</a>
       </div>
 
       <header className={styles.header}>
@@ -59,11 +67,13 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = ({
         </div>
 
         <MaxWidth>
-          <h1>{text.header.title}</h1>
+          <h1>{text.header.title.translation}</h1>
           <p>
-            {text.header.text}{' '}
+            {text.header.text.translation}{' '}
             <Link href="/over">
-              <a className={styles.readMoreLink}>{text.header.link}</a>
+              <a className={styles.readMoreLink}>
+                {text.header.link.translation}
+              </a>
             </Link>
           </p>
         </MaxWidth>
@@ -81,7 +91,7 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = ({
                         : styles.link
                     }
                   >
-                    {text.nav.links.index}
+                    {text.nav.links.index.translation}
                   </a>
                 </Link>
               </li>
@@ -95,7 +105,7 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = ({
                         : styles.link
                     }
                   >
-                    {text.nav.links.regio}
+                    {text.nav.links.regio.translation}
                   </a>
                 </Link>
               </li>
@@ -109,7 +119,7 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = ({
                         : styles.link
                     }
                   >
-                    {text.nav.links.over}
+                    {text.nav.links.over.translation}
                   </a>
                 </Link>
               </li>
@@ -129,28 +139,28 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = ({
                 <li>
                   <Link href="/">
                     <a onClick={blur} className={styles.footerLink}>
-                      {text.nav.links.index}
+                      {text.nav.links.index.translation}
                     </a>
                   </Link>
                 </li>
                 <li>
                   <Link href="/regio">
                     <a onClick={blur} className={styles.footerLink}>
-                      {text.nav.links.regio}
+                      {text.nav.links.regio.translation}
                     </a>
                   </Link>
                 </li>
                 <li>
                   <Link href="/over">
                     <a onClick={blur} className={styles.footerLink}>
-                      {text.nav.links.over}
+                      {text.nav.links.over.translation}
                     </a>
                   </Link>
                 </li>
                 <li>
                   <Link href="/verantwoording">
                     <a onClick={blur} className={styles.footerLink}>
-                      {text.nav.links.verantwoording}
+                      {text.nav.links.verantwoording.translation}
                     </a>
                   </Link>
                 </li>
@@ -162,7 +172,7 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = ({
                     rel="noopener noreferrer"
                     className={styles.footerLink}
                   >
-                    {text.nav.links.meer}
+                    {text.nav.links.meer.translation}
                   </a>
                 </li>
               </ul>
@@ -175,6 +185,8 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = ({
 };
 
 Layout.getLayout = (seoProps) => (page) => (
+  // ???
+  // @ts-ignore
   <Layout {...seoProps}>{page}</Layout>
 );
 
