@@ -687,7 +687,7 @@
     },
     "geen_selectie": {
         "text": {
-            "translation": "Deze cijfers zijn binnenkort beschikbaar",
+            "translation": "Selecteer uw regio bovenaan deze pagina",
             "notes": ""
         }
     },
@@ -931,7 +931,7 @@
             "notes": ""
         },
         "datums": {
-            "translation": "Waarde van {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
+            "translation": "Waarde van gisteren. Verkregen op {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
             "notes": ""
         },
         "fold_title": {
@@ -979,7 +979,7 @@
             "notes": ""
         },
         "datums": {
-            "translation": "Waarde van {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
+            "translation": "Waarde van gisteren. Verkregen op {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
             "notes": ""
         },
         "metric_title": {
