@@ -63,6 +63,7 @@ interface IInfectiousPeople {
 
 interface IReproductionIndex {
   data: ReproductionIndexData | undefined;
+  lastKnownValidData: ReproductionIndexData | undefined;
   text: typeof siteText.reproductiegetal;
 }
 
@@ -374,7 +375,7 @@ export const InfectiousPeople: React.FC<IInfectiousPeople> = (props) => {
 };
 
 export const ReproductionIndex: React.FC<IReproductionIndex> = (props) => {
-  const { data, text } = props;
+  const { data, text, lastKnownValidData } = props;
 
   return (
     <GraphContainer>
@@ -387,7 +388,7 @@ export const ReproductionIndex: React.FC<IReproductionIndex> = (props) => {
             max={2}
             screenReaderText={text.screen_reader_graph_content.translation}
             kritiekeWaarde={Number(text.signaalwaarde.translation)}
-            value={data.last_value.reproduction_index_avg}
+            value={lastKnownValidData.last_value.reproduction_index_avg}
             id="repro"
             gradient={[
               {
@@ -410,13 +411,13 @@ export const ReproductionIndex: React.FC<IReproductionIndex> = (props) => {
           />
         )}
 
-        {data?.last_value?.reproduction_index_avg !== null && (
-          <DateReported
-            datumsText={text.datums.translation}
-            dateUnix={data?.last_value?.date_of_report_unix}
-            dateInsertedUnix={data?.last_value?.date_of_insertion_unix}
-          />
-        )}
+        <DateReported
+          datumsText={text.datums.translation}
+          dateUnix={lastKnownValidData?.last_value?.date_of_report_unix}
+          dateInsertedUnix={
+            lastKnownValidData?.last_value?.date_of_insertion_unix
+          }
+        />
       </GraphContent>
       <Collapse
         openText={text.open.translation}

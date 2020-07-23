@@ -116,6 +116,9 @@ const Home: FunctionComponentWithLayout = () => {
 
             <ReproductionIndex
               text={siteText.reproductiegetal}
+              lastKnownValidData={
+                state?.NL?.reproduction_index_last_known_average
+              }
               data={state?.NL?.reproduction_index}
             />
 
