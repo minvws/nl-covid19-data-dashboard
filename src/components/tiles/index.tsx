@@ -388,7 +388,7 @@ export const ReproductionIndex: React.FC<IReproductionIndex> = (props) => {
             max={2}
             screenReaderText={text.screen_reader_graph_content.translation}
             kritiekeWaarde={Number(text.signaalwaarde.translation)}
-            value={lastKnownValidData.last_value.reproduction_index_avg}
+            value={lastKnownValidData?.last_value?.reproduction_index_avg}
             id="repro"
             gradient={[
               {

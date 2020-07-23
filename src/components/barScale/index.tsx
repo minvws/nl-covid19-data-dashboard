@@ -13,7 +13,7 @@ type GradientStop = {
 type BarscaleProps = {
   min: number;
   max: number;
-  value: number | null;
+  value: number | null | undefined;
   kritiekeWaarde?: number;
   gradient: GradientStop[];
   id: string;
