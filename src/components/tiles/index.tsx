@@ -368,6 +368,21 @@ export const InfectiousPeople: React.FC<IInfectiousPeople> = (props) => {
         <h4>{text.fold_title.translation}</h4>
         <p>{text.fold.translation}</p>
 
+        {count?.values && (
+          <AreaChart
+            data={count.values.map((value) => ({
+              avg: value.infectious_avg,
+              min: value.infectious_low,
+              max: value.infectious_high,
+              date: value.date_of_report_unix,
+            }))}
+            minY={0}
+            maxY={300000}
+            rangeLegendLabel="Bandbreedte"
+            lineLegendLabel="Besmettelijke mensen"
+          />
+        )}
+
         {count && <Metadata dataSource={text.bron} />}
       </Collapse>
     </GraphContainer>
