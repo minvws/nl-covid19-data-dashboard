@@ -620,6 +620,7 @@ export const NursingHomeInfectedPeople: React.FC<INursingHomeInfectedPeople> = (
         {data?.last_value?.infected_nursery_daily !== null && (
           <DateReported
             datumsText={text.datums.translation}
+            dateInsertedUnix={data?.last_value?.date_of_insertion_unix}
             dateUnix={data?.last_value?.date_of_report_unix}
           />
         )}
@@ -752,6 +753,7 @@ export const NursingHomeInfectedDeaths: React.FC<INursingHomeInfectedDeaths> = (
           <DateReported
             datumsText={text.datums.translation}
             dateUnix={data?.last_value?.date_of_report_unix}
+            dateInsertedUnix={data?.last_value?.date_of_insertion_unix}
           />
         )}
       </GraphContent>
