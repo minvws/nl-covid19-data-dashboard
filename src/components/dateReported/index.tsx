@@ -27,7 +27,9 @@ const dateReported: React.FC<IProps> = (props) => {
 
   return (
     <div className="dateReported">
-      <ClockIcon aria-hidden />
+      <span>
+        <ClockIcon aria-hidden />
+      </span>
       <p>
         {replaceVariablesInText(datumsText, {
           dateOfReport,

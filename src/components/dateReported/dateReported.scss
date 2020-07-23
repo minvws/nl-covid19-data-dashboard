@@ -3,16 +3,17 @@
 .dateReported {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   color: $text-color-grey;
+  margin: 1rem 0;
 
   p:first-of-type {
     margin: 0;
   }
 
-  svg {
-    width: 30px;
-    height: auto;
-    margin-right: 0.2rem;
-    display: block;
+  span {
+    display: flex;
+    align-items: center;
+    min-width: 1.8rem;
   }
 }
