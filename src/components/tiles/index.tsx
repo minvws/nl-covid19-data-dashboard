@@ -666,7 +666,7 @@ export const NursingHomeInfectedLocations: React.FC<INursingHomeInfectedLocation
             min={0}
             max={30}
             screenReaderText={text.screen_reader_graph_content.translation}
-            value={newLocations.last_value.infected_nursery_daily}
+            value={newLocations.last_value.total_new_reported_locations}
             id="besmette_locaties_verpleeghuis"
             gradient={[
               {
@@ -676,7 +676,7 @@ export const NursingHomeInfectedLocations: React.FC<INursingHomeInfectedLocation
             ]}
           />
         )}
-        {newLocations?.last_value?.infected_nursery_daily !== null && (
+        {newLocations?.last_value?.total_new_reported_locations !== null && (
           <DateReported
             datumsText={text.datums.translation}
             dateInsertedUnix={newLocations?.last_value?.date_of_insertion_unix}
@@ -698,7 +698,7 @@ export const NursingHomeInfectedLocations: React.FC<INursingHomeInfectedLocation
         {newLocations && (
           <LineChart
             values={newLocations.values.map((value) => ({
-              value: value.infected_nursery_daily,
+              value: value.total_new_reported_locations,
               date: value.date_of_report_unix,
             }))}
           />
