@@ -25,10 +25,10 @@ export interface DeceasedPeopleNurseryCountDaily {
 
 export interface DeceasedPeopleNurseryCountDailyLastValue {
   date_of_report_unix: number;
-  infected_nursery_daily: number;
-  deceased_nursery_daily: number;
-  total_new_reported_locations: number;
-  total_reported_locations: number;
+  infected_nursery_daily: number | null;
+  deceased_nursery_daily: number | null;
+  total_new_reported_locations: number | null;
+  total_reported_locations: number | null;
   date_of_insertion_unix: number;
 }
 
@@ -39,7 +39,7 @@ export interface InfectedPeopleDeltaNormalized {
 
 export interface InfectedPeopleDeltaNormalizedLastValue {
   date_of_report_unix: number;
-  infected_daily_increase: number;
+  infected_daily_increase: number | null;
 }
 
 export interface InfectedPeopleTotal {
@@ -49,7 +49,7 @@ export interface InfectedPeopleTotal {
 
 export interface InfectedPeopleTotalLastValue {
   date_of_report_unix: number;
-  infected_daily_total: number;
+  infected_daily_total: number | null;
 }
 
 export interface InfectiousPeopleCount {
@@ -59,9 +59,9 @@ export interface InfectiousPeopleCount {
 
 export interface InfectiousPeopleCountLastValue {
   date_of_report_unix: number;
-  infectious_low: number;
+  infectious_low: number | null;
   infectious_avg: number | null;
-  infectious_high: number;
+  infectious_high: number | null;
   date_of_insertion_unix: number;
 }
 
@@ -72,7 +72,7 @@ export interface IntakeHospitalMa {
 
 export interface IntakeHospitalMaLastValue {
   date_of_report_unix: number;
-  moving_average_hospital: number;
+  moving_average_hospital: number | null;
 }
 
 export interface IntakeIntensivecareMa {
@@ -82,7 +82,7 @@ export interface IntakeIntensivecareMa {
 
 export interface IntakeIntensivecareMaLastValue {
   date_of_report_unix: number;
-  moving_average_ic: number;
+  moving_average_ic: number | null;
 }
 
 export interface IntakeShareAgeGroups {
@@ -92,8 +92,8 @@ export interface IntakeShareAgeGroups {
 
 export interface IntakeShareAgeGroupsLastValue {
   date_of_report_unix: number;
-  agegroup: string;
-  infected_per_agegroup_increase: number;
+  agegroup: string | null;
+  infected_per_agegroup_increase: number | null;
 }
 
 export interface ReproductionIndex {
@@ -117,9 +117,9 @@ export interface RioolwaterMetingen {
 export interface RioolwaterMetingenLastValue {
   last_week_unix: number;
   week: number;
-  average?: string;
+  average?: string | null;
   date_of_insertion_unix: number;
-  incidentie?: number;
+  incidentie?: number | null;
 }
 
 export interface Translation {

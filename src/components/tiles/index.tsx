@@ -126,10 +126,12 @@ export const IntakeIntensiveCare: React.FC<IIntakeIntensiveCare> = (props) => {
           />
         )}
 
-        <DateReported
-          datumsText={text.datums.translation}
-          dateUnix={data?.last_value?.date_of_report_unix}
-        />
+        {data?.last_value?.moving_average_ic !== null && (
+          <DateReported
+            datumsText={text.datums.translation}
+            dateUnix={data?.last_value?.date_of_report_unix}
+          />
+        )}
       </GraphContent>
 
       <Collapse
@@ -196,10 +198,12 @@ export const IntakeHospital: React.FC<IIntakeHospital> = (props) => {
           />
         )}
 
-        <DateReported
-          datumsText={text.datums.translation}
-          dateUnix={data?.last_value?.date_of_report_unix}
-        />
+        {data?.last_value?.moving_average_hospital !== null && (
+          <DateReported
+            datumsText={text.datums.translation}
+            dateUnix={data?.last_value?.date_of_report_unix}
+          />
+        )}
       </GraphContent>
 
       <Collapse
@@ -265,10 +269,12 @@ export const PostivelyTestedPeople: React.FC<IPostivelyTestedPeople> = (
           </h3>
         )}
 
-        <DateReported
-          datumsText={text.datums.translation}
-          dateUnix={delta?.last_value?.date_of_report_unix}
-        />
+        {delta?.last_value?.infected_daily_increase !== null && (
+          <DateReported
+            datumsText={text.datums.translation}
+            dateUnix={delta?.last_value?.date_of_report_unix}
+          />
+        )}
       </GraphContent>
       <Collapse
         openText={text.open.translation}
@@ -344,10 +350,12 @@ export const InfectiousPeople: React.FC<IInfectiousPeople> = (props) => {
           </h3>
         )}
 
-        <DateReported
-          datumsText={text.datums.translation}
-          dateUnix={count?.last_value?.date_of_report_unix}
-        />
+        {countNormalized?.last_value?.infectious_avg !== null && (
+          <DateReported
+            datumsText={text.datums.translation}
+            dateUnix={count?.last_value?.date_of_report_unix}
+          />
+        )}
       </GraphContent>
 
       <Collapse
@@ -402,11 +410,13 @@ export const ReproductionIndex: React.FC<IReproductionIndex> = (props) => {
           />
         )}
 
-        <DateReported
-          datumsText={text.datums.translation}
-          dateUnix={data?.last_value?.date_of_report_unix}
-          dateInsertedUnix={data?.last_value?.date_of_insertion_unix}
-        />
+        {data?.last_value?.reproduction_index_avg !== null && (
+          <DateReported
+            datumsText={text.datums.translation}
+            dateUnix={data?.last_value?.date_of_report_unix}
+            dateInsertedUnix={data?.last_value?.date_of_insertion_unix}
+          />
+        )}
       </GraphContent>
       <Collapse
         openText={text.open.translation}
@@ -478,11 +488,13 @@ export const SuspectedPatients: React.FC<ISuspectedPatients> = (props) => {
           />
         )}
 
-        <DateReported
-          datumsText={text.datums.translation}
-          dateInsertedUnix={data?.last_value?.date_of_insertion_unix}
-          dateUnix={data?.last_value?.week}
-        />
+        {data?.last_value?.incidentie !== null && (
+          <DateReported
+            datumsText={text.datums.translation}
+            dateInsertedUnix={data?.last_value?.date_of_insertion_unix}
+            dateUnix={data?.last_value?.week}
+          />
+        )}
       </GraphContent>
       <Collapse
         openText={text.open.translation}
@@ -541,11 +553,13 @@ export const SewerWater: React.FC<ISewerWater> = (props) => {
           />
         )}
 
-        <DateReported
-          datumsText={text.datums.translation}
-          dateInsertedUnix={data?.last_value?.date_of_insertion_unix}
-          dateUnix={data?.last_value?.week}
-        />
+        {data?.last_value?.average !== null && (
+          <DateReported
+            datumsText={text.datums.translation}
+            dateInsertedUnix={data?.last_value?.date_of_insertion_unix}
+            dateUnix={data?.last_value?.week}
+          />
+        )}
       </GraphContent>
       <Collapse
         openText={text.open.translation}
@@ -602,10 +616,12 @@ export const NursingHomeInfectedPeople: React.FC<INursingHomeInfectedPeople> = (
           />
         )}
 
-        <DateReported
-          datumsText={text.datums.translation}
-          dateUnix={data?.last_value?.date_of_report_unix}
-        />
+        {data?.last_value?.infected_nursery_daily !== null && (
+          <DateReported
+            datumsText={text.datums.translation}
+            dateUnix={data?.last_value?.date_of_report_unix}
+          />
+        )}
       </GraphContent>
       <Collapse
         openText={text.open.translation}
@@ -659,11 +675,13 @@ export const NursingHomeInfectedLocations: React.FC<INursingHomeInfectedLocation
             ]}
           />
         )}
-        <DateReported
-          datumsText={text.datums.translation}
-          dateInsertedUnix={newLocations?.last_value?.date_of_insertion_unix}
-          dateUnix={newLocations?.last_value?.date_of_report_unix}
-        />
+        {newLocations?.last_value?.infected_nursery_daily !== null && (
+          <DateReported
+            datumsText={text.datums.translation}
+            dateInsertedUnix={newLocations?.last_value?.date_of_insertion_unix}
+            dateUnix={newLocations?.last_value?.date_of_report_unix}
+          />
+        )}
       </GraphContent>
       <Collapse
         openText={text.open.translation}
@@ -729,10 +747,12 @@ export const NursingHomeInfectedDeaths: React.FC<INursingHomeInfectedDeaths> = (
           />
         )}
 
-        <DateReported
-          datumsText={text.datums.translation}
-          dateUnix={data?.last_value?.date_of_report_unix}
-        />
+        {data?.last_value?.deceased_nursery_daily !== null && (
+          <DateReported
+            datumsText={text.datums.translation}
+            dateUnix={data?.last_value?.date_of_report_unix}
+          />
+        )}
       </GraphContent>
       <Collapse
         openText={text.open.translation}

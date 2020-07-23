@@ -6,7 +6,7 @@ import formatNumber from 'utils/formatNumber';
 
 interface Value {
   date: number;
-  value: number | undefined;
+  value: number | undefined | null;
 }
 
 type LineChartProps = {

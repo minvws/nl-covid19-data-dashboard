@@ -3,7 +3,7 @@ import HighCharts from 'highcharts';
 import HighChartsReact from 'highcharts-react-official';
 
 interface IProps {
-  data: number[];
+  data: Array<number | null>;
   keys: string[];
 }
 
