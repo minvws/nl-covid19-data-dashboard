@@ -4,7 +4,7 @@
   "private": true,
   "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
   "dependencies": {
-    "d3-scale": "^3.2.1",
+    "d3-scale": "2",
     "downshift": "^5.4.2",
     "highcharts": "^8.1.0",
     "highcharts-react-official": "^3.0.0",
