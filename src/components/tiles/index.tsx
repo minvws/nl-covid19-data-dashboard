@@ -325,7 +325,7 @@ export const InfectiousPeople: React.FC<IInfectiousPeople> = (props) => {
         {countNormalized && (
           <BarScale
             min={0}
-            max={50}
+            max={80}
             screenReaderText={text.screen_reader_graph_content.translation}
             value={countNormalized.last_value.infectious_avg}
             id="besmettelijk"
