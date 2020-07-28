@@ -135,7 +135,7 @@ const AreaChart: React.FC<AreaChartProps> = (props) => {
           const x = this.x;
           return `
             ${formatDateLong(x)}<br/>
-            <strong>Bandbreedte</strong> ${formatNumber(
+            <strong>Onzekerheidsmarge</strong> ${formatNumber(
               minRangePoint
             )} - ${formatNumber(maxRangePoint)}<br/>
             <strong>Effectieve R</strong> ${
