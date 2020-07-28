@@ -15,4 +15,4 @@ services:
       args:
         NEXT_PUBLIC_LOCALE: 'en'
     ports:
-      - '8080:8081'
+      - '8081:8080'

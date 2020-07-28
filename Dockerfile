@@ -2,7 +2,7 @@
 
 FROM node:12 as react-build
 
-ARG language
+ARG NEXT_PUBLIC_LOCALE
 
 WORKDIR /app
 COPY . ./
