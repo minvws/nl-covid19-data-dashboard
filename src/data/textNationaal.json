@@ -132,7 +132,7 @@
     "bar": {
       "screen_reader_graph_content": "{{value}} besmettelijke personen per 100.000 inwoners.",
       "min": 0,
-      "max": 50,
+      "max": 80,
       "gradient": [
         {
           "color": "#3391CC",
