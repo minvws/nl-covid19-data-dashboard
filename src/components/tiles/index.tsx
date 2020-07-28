@@ -136,6 +136,7 @@ export const IntakeIntensiveCare: React.FC<IIntakeIntensiveCare> = (props) => {
             <DateReported>
               <FormattedMessage
                 id="ic_opnames_per_dag.datums.translation"
+                defaultMessage="hello"
                 values={{
                   relativeTime: formatDistanceToNow(
                     new Date(data?.last_value?.date_of_report_unix * 1000),
