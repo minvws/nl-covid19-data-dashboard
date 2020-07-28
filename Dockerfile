@@ -1,5 +1,9 @@
 # Stage 1
+
 FROM node:12 as react-build
+
+ARG language
+
 WORKDIR /app
 COPY . ./
 RUN yarn

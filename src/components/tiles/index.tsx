@@ -20,7 +20,7 @@ import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
 
 import formatDecimal from 'utils/formatDec';
 
-import siteText from 'locale/nl.json';
+import siteText from 'locale';
 
 import {
   IntakeIntensivecareMa,

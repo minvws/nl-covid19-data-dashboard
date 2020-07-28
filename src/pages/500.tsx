@@ -1,7 +1,7 @@
 import Layout, { FunctionComponentWithLayout } from 'components/layout';
 import MaxWidth from 'components/maxWidth';
 
-import text from 'locale/nl.json';
+import text from 'locale';
 import styles from './error.module.scss';
 
 const ErrorPage: FunctionComponentWithLayout = () => {
