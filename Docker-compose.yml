@@ -1,8 +1,18 @@
 version: '3'
 
 services:
-  web:
-    build: .
+  web-nl:
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_LOCALE: 'nl'
     ports:
       - '8080:8080'
-      - '443:443'
+
+  web-en:
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_LOCALE: 'en'
+    ports:
+      - '8081:8080'

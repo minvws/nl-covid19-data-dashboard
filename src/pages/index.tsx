@@ -23,7 +23,7 @@ import VerpleegHuisZorg from '../assets/verpleeghuiszorg.svg';
 import MedischeScreening from '../assets/medische-screening.svg';
 
 import { store } from 'store';
-import siteText from 'locale/nl.json';
+import siteText from 'locale';
 import GraphHeader from 'components/graphHeader';
 import IconList from 'components/iconList';
 

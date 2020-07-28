@@ -21,7 +21,7 @@ import GraphContent from 'components/graphContent';
 import Ziekenhuis from 'assets/ziekenhuis.svg';
 import Getest from 'assets/test.svg';
 
-import siteText from 'locale/nl.json';
+import siteText from 'locale';
 
 const LineChart = dynamic(() => import('components/lineChart'));
 const SvgMap = dynamic(() => import('components/mapChart/svgMap'));
