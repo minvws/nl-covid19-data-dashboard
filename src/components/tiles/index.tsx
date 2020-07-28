@@ -1,5 +1,9 @@
 import dynamic from 'next/dynamic';
 
+import { FormattedMessage } from 'react-intl';
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+import { nl } from 'date-fns/locale';
+
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
 import Metadata from 'components/metadata';
@@ -127,12 +131,23 @@ export const IntakeIntensiveCare: React.FC<IIntakeIntensiveCare> = (props) => {
           />
         )}
 
-        {data?.last_value?.moving_average_ic !== null && (
-          <DateReported
-            datumsText={text.datums.translation}
-            dateUnix={data?.last_value?.date_of_report_unix}
-          />
-        )}
+        {data?.last_value?.moving_average_ic !== null &&
+          data?.last_value?.date_of_report_unix && (
+            <DateReported>
+              <FormattedMessage
+                id="ic_opnames_per_dag.datums.translation"
+                values={{
+                  relativeTime: formatDistanceToNow(
+                    new Date(data?.last_value?.date_of_report_unix * 1000),
+                    {
+                      locale: nl,
+                      addSuffix: true,
+                    }
+                  ),
+                }}
+              />
+            </DateReported>
+          )}
       </GraphContent>
 
       <Collapse
@@ -325,7 +340,7 @@ export const InfectiousPeople: React.FC<IInfectiousPeople> = (props) => {
         {countNormalized && (
           <BarScale
             min={0}
-            max={50}
+            max={80}
             screenReaderText={text.screen_reader_graph_content.translation}
             value={countNormalized.last_value.infectious_avg}
             id="besmettelijk"

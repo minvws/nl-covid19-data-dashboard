@@ -5,6 +5,7 @@
   "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
   "dependencies": {
     "d3-scale": "2",
+    "date-fns": "^2.15.0",
     "downshift": "^5.4.2",
     "highcharts": "^8.1.0",
     "highcharts-react-official": "^3.0.0",
@@ -16,6 +17,7 @@
     "react": "github:preact-compat/react#1.0.0",
     "react-collapsed": "^3.0.0",
     "react-dom": "github:preact-compat/react-dom#1.0.0",
+    "react-intl": "^5.4.2",
     "react-masonry-css": "^1.0.14",
     "react-ssr-prepass": "npm:preact-ssr-prepass@^1.0.1",
     "swr": "^0.2.2",

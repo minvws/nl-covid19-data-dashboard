@@ -1,6 +1,10 @@
 import './index.css';
 import 'scss/style.scss';
 
+import { IntlProvider } from 'react-intl';
+
+import locale from 'locale';
+
 import 'components/collapse/collapse.scss';
 import 'components/legenda/legenda.scss';
 import 'components/dateReported/dateReported.scss';
@@ -26,6 +30,21 @@ interface IProps {
   pageProps: any;
 }
 
+function flattenMessages(nestedMessages, prefix = '') {
+  return Object.keys(nestedMessages).reduce((messages, key) => {
+    const value = nestedMessages[key];
+    const prefixedKey = prefix ? `${prefix}.${key}` : key;
+
+    if (typeof value === 'string') {
+      messages[prefixedKey] = value;
+    } else {
+      Object.assign(messages, flattenMessages(value, prefixedKey));
+    }
+
+    return messages;
+  }, {});
+}
+
 function MyApp(props: IProps): React.ReactElement {
   const { Component, pageProps } = props;
   const getLayout = Component.getLayout || ((page: any) => page);
@@ -39,8 +58,16 @@ function MyApp(props: IProps): React.ReactElement {
     };
   }, []);
 
+  const messages = flattenMessages(locale);
+
   return (
-    <StateProvider>{getLayout(<Component {...pageProps} />)}</StateProvider>
+    <IntlProvider
+      messages={messages}
+      locale={process.env.NEXT_PUBLIC_LOCALE}
+      defaultLocale="nl"
+    >
+      <StateProvider>{getLayout(<Component {...pageProps} />)}</StateProvider>
+    </IntlProvider>
   );
 }
 
