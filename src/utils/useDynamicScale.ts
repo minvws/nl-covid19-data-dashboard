@@ -10,7 +10,6 @@ import useSWR from 'swr';
  * desires min/max extent.
  */
 function useDynamicScale(
-  dataKey: string,
   min: number,
   max: number,
   value?: number | null

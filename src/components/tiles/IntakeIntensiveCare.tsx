@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
 import Metadata from 'components/metadata';
@@ -9,6 +11,7 @@ import Arts from 'assets/arts.svg';
 import { LineChart } from './index';
 
 import siteText from 'locale';
+import { store } from 'store';
 
 import { IntakeIntensivecareMa } from 'types/data';
 
@@ -19,6 +22,9 @@ interface IIntakeIntensiveCare {
 }
 
 export const IntakeIntensiveCare: React.FC = () => {
+  const globalState = useContext(store);
+  const { state } = globalState;
+
   const text = siteText.ic_opnames_per_dag;
   const dataKey = 'intake_intensivecare_ma';
   const data = state?.NL?.[dataKey];

@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
 import Metadata from 'components/metadata';
@@ -10,6 +12,7 @@ import Repro from 'assets/reproductiegetal.svg';
 import { AreaChart } from './index';
 
 import siteText from 'locale';
+import { store } from 'store';
 
 import { ReproductionIndex as ReproductionIndexData } from 'types/data';
 
@@ -20,6 +23,9 @@ export interface IReproductionIndex {
 }
 
 export const ReproductionIndex: React.FC = () => {
+  const globalState = useContext(store);
+  const { state } = globalState;
+
   const text = siteText.reproductiegetal;
   const lastKnownValidData = state?.NL?.reproduction_index_last_known_average;
 

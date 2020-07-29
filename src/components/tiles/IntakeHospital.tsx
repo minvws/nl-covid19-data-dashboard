@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
 import Metadata from 'components/metadata';
@@ -9,6 +11,7 @@ import Ziekenhuis from 'assets/ziekenhuis.svg';
 import { LineChart } from './index';
 
 import siteText from 'locale';
+import { store } from 'store';
 
 import { IntakeHospitalMa } from 'types/data';
 
@@ -18,6 +21,9 @@ export interface IIntakeHospital {
 }
 
 export const IntakeHospital: React.FC = () => {
+  const globalState = useContext(store);
+  const { state } = globalState;
+
   const text = siteText.ziekenhuisopnames_per_dag;
   const data = state?.NL?.intake_hospital_ma;
 
@@ -74,7 +80,7 @@ export const IntakeHospital: React.FC = () => {
         {data && (
           <>
             <LineChart
-              values={data.values.map((value) => ({
+              values={data.values.map((value: any) => ({
                 value: value.moving_average_hospital,
                 date: value.date_of_report_unix,
               }))}

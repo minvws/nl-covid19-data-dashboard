@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
 import Metadata from 'components/metadata';
@@ -9,6 +11,7 @@ import Ziektegolf from 'assets/ziektegolf.svg';
 import formatDecimal from 'utils/formatDec';
 
 import siteText from 'locale';
+import { store } from 'store';
 
 import { InfectiousPeopleCount } from 'types/data';
 interface IInfectiousPeople {
@@ -17,6 +20,9 @@ interface IInfectiousPeople {
   text: typeof siteText.besmettelijke_personen;
 }
 export const InfectiousPeople: React.FC = () => {
+  const globalState = useContext(store);
+  const { state } = globalState;
+
   const text = siteText.besmettelijke_personen;
   const count = state?.NL?.infectious_people_count;
   const countNormalized = state?.NL?.infectious_people_count_normalized;

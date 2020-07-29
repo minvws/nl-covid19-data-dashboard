@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
 import Metadata from 'components/metadata';
@@ -10,6 +12,7 @@ import formatDecimal from 'utils/formatDec';
 import { LineChart } from './index';
 
 import siteText from 'locale';
+import { store } from 'store';
 
 import { DeceasedPeopleNurseryCountDaily } from 'types/data';
 
@@ -20,6 +23,9 @@ export interface INursingHomeInfectedLocations {
 }
 
 export const NursingHomeInfectedLocations: React.FC = () => {
+  const globalState = useContext(store);
+  const { state } = globalState;
+
   const text = siteText.verpleeghuis_besmette_locaties;
   const newLocations = state?.NL?.total_newly_reported_locations;
   const totalLocations = state?.NL?.total_reported_locations;

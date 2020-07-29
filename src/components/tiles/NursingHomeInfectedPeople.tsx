@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
 import Metadata from 'components/metadata';
@@ -9,6 +11,7 @@ import Getest from 'assets/test.svg';
 import { LineChart } from './index';
 
 import siteText from 'locale';
+import { store } from 'store';
 
 import { DeceasedPeopleNurseryCountDaily } from 'types/data';
 
@@ -18,6 +21,8 @@ export interface INursingHomeInfectedPeople {
 }
 
 export const NursingHomeInfectedPeople: React.FC = () => {
+  const globalState = useContext(store);
+  const { state } = globalState;
   const text = siteText.verpleeghuis_positief_geteste_personen;
   const data = state?.NL?.infected_people_nursery_count_daily;
   return (

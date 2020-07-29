@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
 import Metadata from 'components/metadata';
@@ -9,6 +11,7 @@ import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
 import { LineChart } from './index';
 
 import siteText from 'locale';
+import { store } from 'store';
 
 import { RioolwaterMetingen } from 'types/data';
 
@@ -18,6 +21,9 @@ export interface ISewerWater {
 }
 
 export const SewerWater: React.FC = () => {
+  const globalState = useContext(store);
+  const { state } = globalState;
+
   const text = siteText.rioolwater_metingen;
   const data = state?.NL?.rioolwater_metingen;
 

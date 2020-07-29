@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
 import Metadata from 'components/metadata';
@@ -10,6 +12,7 @@ import formatDecimal from 'utils/formatDec';
 import { LineChart, BarChart } from './index';
 
 import siteText from 'locale';
+import { store } from 'store';
 
 import {
   InfectedPeopleDeltaNormalized,
@@ -25,6 +28,9 @@ export interface IPostivelyTestedPeople {
 }
 
 export const PostivelyTestedPeople: React.FC = () => {
+  const globalState = useContext(store);
+  const { state } = globalState;
+
   const text = siteText.positief_geteste_personen;
   const delta = state?.NL?.infected_people_delta_normalized;
   const age = state?.NL?.intake_share_age_groups;
