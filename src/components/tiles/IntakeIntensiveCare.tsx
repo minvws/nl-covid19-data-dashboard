@@ -15,19 +15,13 @@ import { store } from 'store';
 
 import { IntakeIntensivecareMa } from 'types/data';
 
-interface IIntakeIntensiveCare {
-  data: IntakeIntensivecareMa | undefined;
-  text: typeof siteText.ic_opnames_per_dag;
-  dataKey: string;
-}
-
 export const IntakeIntensiveCare: React.FC = () => {
   const globalState = useContext(store);
   const { state } = globalState;
 
-  const text = siteText.ic_opnames_per_dag;
-  const dataKey = 'intake_intensivecare_ma';
-  const data = state?.NL?.[dataKey];
+  const text: typeof siteText.ic_opnames_per_dag = siteText.ic_opnames_per_dag;
+  const data: IntakeIntensivecareMa | undefined =
+    state?.NL?.intake_intensivecare_ma;
 
   return (
     <GraphContainer>
@@ -57,7 +51,6 @@ export const IntakeIntensiveCare: React.FC = () => {
             kritiekeWaarde={Number(text.signaalwaarde.translation)}
             value={data.last_value.moving_average_ic}
             id="ic"
-            dataKey={dataKey}
           />
         )}
 

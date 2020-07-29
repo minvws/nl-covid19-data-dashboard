@@ -15,17 +15,13 @@ import { store } from 'store';
 
 import { RioolwaterMetingen } from 'types/data';
 
-export interface ISewerWater {
-  data: RioolwaterMetingen | undefined;
-  text: typeof siteText.rioolwater_metingen;
-}
-
 export const SewerWater: React.FC = () => {
   const globalState = useContext(store);
   const { state } = globalState;
 
-  const text = siteText.rioolwater_metingen;
-  const data = state?.NL?.rioolwater_metingen;
+  const text: typeof siteText.rioolwater_metingen =
+    siteText.rioolwater_metingen;
+  const data: RioolwaterMetingen | undefined = state?.NL?.rioolwater_metingen;
 
   return (
     <GraphContainer>

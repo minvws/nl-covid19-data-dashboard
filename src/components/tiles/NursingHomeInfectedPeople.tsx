@@ -15,16 +15,13 @@ import { store } from 'store';
 
 import { DeceasedPeopleNurseryCountDaily } from 'types/data';
 
-export interface INursingHomeInfectedPeople {
-  data: DeceasedPeopleNurseryCountDaily | undefined;
-  text: typeof siteText.verpleeghuis_positief_geteste_personen;
-}
-
 export const NursingHomeInfectedPeople: React.FC = () => {
   const globalState = useContext(store);
   const { state } = globalState;
-  const text = siteText.verpleeghuis_positief_geteste_personen;
-  const data = state?.NL?.infected_people_nursery_count_daily;
+  const text: typeof siteText.verpleeghuis_positief_geteste_personen =
+    siteText.verpleeghuis_positief_geteste_personen;
+  const data: DeceasedPeopleNurseryCountDaily | undefined =
+    state?.NL?.infected_people_nursery_count_daily;
   return (
     <GraphContainer>
       <GraphContent>

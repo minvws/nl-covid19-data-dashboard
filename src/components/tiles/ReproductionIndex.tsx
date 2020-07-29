@@ -16,20 +16,15 @@ import { store } from 'store';
 
 import { ReproductionIndex as ReproductionIndexData } from 'types/data';
 
-export interface IReproductionIndex {
-  data: ReproductionIndexData | undefined;
-  lastKnownValidData: ReproductionIndexData | undefined;
-  text: typeof siteText.reproductiegetal;
-}
-
 export const ReproductionIndex: React.FC = () => {
   const globalState = useContext(store);
   const { state } = globalState;
 
-  const text = siteText.reproductiegetal;
-  const lastKnownValidData = state?.NL?.reproduction_index_last_known_average;
+  const text: typeof siteText.reproductiegetal = siteText.reproductiegetal;
+  const lastKnownValidData: ReproductionIndexData | undefined =
+    state?.NL?.reproduction_index_last_known_average;
 
-  const data = state?.NL?.reproduction_index;
+  const data: ReproductionIndexData | undefined = state?.NL?.reproduction_index;
 
   return (
     <GraphContainer>

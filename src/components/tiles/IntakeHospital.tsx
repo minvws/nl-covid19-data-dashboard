@@ -15,17 +15,13 @@ import { store } from 'store';
 
 import { IntakeHospitalMa } from 'types/data';
 
-export interface IIntakeHospital {
-  data: IntakeHospitalMa | undefined;
-  text: typeof siteText.ziekenhuisopnames_per_dag;
-}
-
 export const IntakeHospital: React.FC = () => {
   const globalState = useContext(store);
   const { state } = globalState;
 
-  const text = siteText.ziekenhuisopnames_per_dag;
-  const data = state?.NL?.intake_hospital_ma;
+  const text: typeof siteText.ziekenhuisopnames_per_dag =
+    siteText.ziekenhuisopnames_per_dag;
+  const data: IntakeHospitalMa | undefined = state?.NL?.intake_hospital_ma;
 
   return (
     <GraphContainer>

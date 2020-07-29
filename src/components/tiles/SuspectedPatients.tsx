@@ -15,17 +15,14 @@ import { store } from 'store';
 
 import { RioolwaterMetingen } from 'types/data';
 
-export interface ISuspectedPatients {
-  data: RioolwaterMetingen | undefined;
-  text: typeof siteText.verdenkingen_huisartsen;
-}
-
 export const SuspectedPatients: React.FC = () => {
   const globalState = useContext(store);
   const { state } = globalState;
 
-  const text = siteText.verdenkingen_huisartsen;
-  const data = state?.NL?.verdenkingen_huisartsen;
+  const text: typeof siteText.verdenkingen_huisartsen =
+    siteText.verdenkingen_huisartsen;
+  const data: RioolwaterMetingen | undefined =
+    state?.NL?.verdenkingen_huisartsen;
 
   return (
     <GraphContainer>

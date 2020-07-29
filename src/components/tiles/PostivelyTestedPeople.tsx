@@ -20,21 +20,18 @@ import {
   IntakeShareAgeGroups,
 } from 'types/data';
 
-export interface IPostivelyTestedPeople {
-  delta: InfectedPeopleDeltaNormalized | undefined;
-  total: InfectedPeopleTotal | undefined;
-  age: IntakeShareAgeGroups | undefined;
-  text: typeof siteText.positief_geteste_personen;
-}
-
 export const PostivelyTestedPeople: React.FC = () => {
   const globalState = useContext(store);
   const { state } = globalState;
 
-  const text = siteText.positief_geteste_personen;
-  const delta = state?.NL?.infected_people_delta_normalized;
-  const age = state?.NL?.intake_share_age_groups;
-  const total = state?.NL?.infected_people_total;
+  const text: typeof siteText.positief_geteste_personen =
+    siteText.positief_geteste_personen;
+  const delta: InfectedPeopleDeltaNormalized | undefined =
+    state?.NL?.infected_people_delta_normalized;
+  const age: IntakeShareAgeGroups | undefined =
+    state?.NL?.intake_share_age_groups;
+  const total: InfectedPeopleTotal | undefined =
+    state?.NL?.infected_people_total;
 
   return (
     <GraphContainer>

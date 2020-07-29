@@ -14,18 +14,17 @@ import siteText from 'locale';
 import { store } from 'store';
 
 import { InfectiousPeopleCount } from 'types/data';
-interface IInfectiousPeople {
-  count: InfectiousPeopleCount | undefined;
-  countNormalized: InfectiousPeopleCount | undefined;
-  text: typeof siteText.besmettelijke_personen;
-}
+
 export const InfectiousPeople: React.FC = () => {
   const globalState = useContext(store);
   const { state } = globalState;
 
-  const text = siteText.besmettelijke_personen;
-  const count = state?.NL?.infectious_people_count;
-  const countNormalized = state?.NL?.infectious_people_count_normalized;
+  const text: typeof siteText.besmettelijke_personen =
+    siteText.besmettelijke_personen;
+  const count: InfectiousPeopleCount | undefined =
+    state?.NL?.infectious_people_count;
+  const countNormalized: InfectiousPeopleCount | undefined =
+    state?.NL?.infectious_people_count_normalized;
 
   return (
     <GraphContainer>
