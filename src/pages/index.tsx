@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import Masonry from 'react-masonry-css';
 
 import GraphContainer from 'components/graphContainer';
@@ -6,18 +6,16 @@ import GraphContent from 'components/graphContent';
 import TitleBlock from 'components/titleBlock';
 import Layout from 'components/layout';
 import LinkCard from 'components/linkCard';
-import {
-  IntakeIntensiveCare,
-  IntakeHospital,
-  PostivelyTestedPeople,
-  InfectiousPeople,
-  ReproductionIndex,
-  SuspectedPatients,
-  SewerWater,
-  NursingHomeInfectedDeaths,
-  NursingHomeInfectedLocations,
-  NursingHomeInfectedPeople,
-} from 'components/tiles';
+import { IntakeIntensiveCare } from 'components/tiles/IntakeIntensiveCare';
+import { NursingHomeInfectedDeaths } from 'components/tiles/NursingHomeInfectedDeaths';
+import { NursingHomeInfectedLocations } from 'components/tiles/NursingHomeInfectedLocations';
+import { NursingHomeInfectedPeople } from 'components/tiles/NursingHomeInfectedPeople';
+import { SewerWater } from 'components/tiles/SewerWater';
+import { SuspectedPatients } from 'components/tiles/SuspectedPatients';
+import { ReproductionIndex } from 'components/tiles/ReproductionIndex';
+import { InfectiousPeople } from 'components/tiles/InfectiousPeople';
+import { PostivelyTestedPeople } from 'components/tiles/PostivelyTestedPeople';
+import { IntakeHospital } from 'components/tiles/IntakeHospital';
 
 import VerpleegHuisZorg from '../assets/verpleeghuiszorg.svg';
 import MedischeScreening from '../assets/medische-screening.svg';
@@ -91,36 +89,15 @@ const Home: FunctionComponentWithLayout = () => {
             className="masonry-grid"
             columnClassName="masonry-grid-column"
           >
-            <IntakeIntensiveCare
-              text={siteText.ic_opnames_per_dag}
-              data={state?.NL?.intake_intensivecare_ma}
-            />
+            <IntakeIntensiveCare />
 
-            <IntakeHospital
-              text={siteText.ziekenhuisopnames_per_dag}
-              data={state?.NL?.intake_hospital_ma}
-            />
+            <IntakeHospital />
 
-            <PostivelyTestedPeople
-              text={siteText.positief_geteste_personen}
-              delta={state?.NL?.infected_people_delta_normalized}
-              age={state?.NL?.intake_share_age_groups}
-              total={state?.NL?.infected_people_total}
-            />
+            <PostivelyTestedPeople />
 
-            <InfectiousPeople
-              text={siteText.besmettelijke_personen}
-              count={state?.NL?.infectious_people_count}
-              countNormalized={state?.NL?.infectious_people_count_normalized}
-            />
+            <InfectiousPeople />
 
-            <ReproductionIndex
-              text={siteText.reproductiegetal}
-              lastKnownValidData={
-                state?.NL?.reproduction_index_last_known_average
-              }
-              data={state?.NL?.reproduction_index}
-            />
+            <ReproductionIndex />
 
             <LinkCard
               href="/regio"
@@ -145,15 +122,9 @@ const Home: FunctionComponentWithLayout = () => {
             className="masonry-grid"
             columnClassName="masonry-grid-column"
           >
-            <SuspectedPatients
-              text={siteText.verdenkingen_huisartsen}
-              data={state?.NL?.verdenkingen_huisartsen}
-            />
+            <SuspectedPatients />
 
-            <SewerWater
-              text={siteText.rioolwater_metingen}
-              data={state?.NL?.rioolwater_metingen}
-            />
+            <SewerWater />
 
             <GraphContainer>
               <GraphContent>
@@ -181,21 +152,11 @@ const Home: FunctionComponentWithLayout = () => {
             className="masonry-grid"
             columnClassName="masonry-grid-column"
           >
-            <NursingHomeInfectedPeople
-              text={siteText.verpleeghuis_positief_geteste_personen}
-              data={state?.NL?.infected_people_nursery_count_daily}
-            />
+            <NursingHomeInfectedPeople />
 
-            <NursingHomeInfectedLocations
-              text={siteText.verpleeghuis_besmette_locaties}
-              newLocations={state?.NL?.total_newly_reported_locations}
-              totalLocations={state?.NL?.total_reported_locations}
-            />
+            <NursingHomeInfectedLocations />
 
-            <NursingHomeInfectedDeaths
-              text={siteText.verpleeghuis_oversterfte}
-              data={state?.NL?.deceased_people_nursery_count_daily}
-            />
+            <NursingHomeInfectedDeaths />
           </Masonry>
         </section>
       </div>

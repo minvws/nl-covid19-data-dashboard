@@ -3,7 +3,9 @@ import { useRef, FunctionComponent } from 'react';
 import formatNumber from 'utils/formatNumber';
 import ScreenReaderOnly from 'components/screenReaderOnly';
 import replaceVariablesInText from 'utils/replaceVariablesInText';
-import { scaleLinear, scaleQuantile, scaleThreshold } from 'd3-scale';
+import { scaleQuantile, scaleThreshold } from 'd3-scale';
+
+import useDynamicScale from 'utils/useDynamicScale';
 
 type GradientStop = {
   color: string;
@@ -20,33 +22,6 @@ type BarscaleProps = {
   screenReaderText: string;
 };
 
-/**
- * Use this hook to get an x-scale for your barcharts
- * You use this by providing a desired min and max for your domains
- * We compare the extent of your domain with your data value, and use the data value as the max value
- * for your scale when it's higher than the imperative max value. This ensures you can set your min/max values
- * imperatively with the guarantee the scale won't break if suddenly the value is higher than your
- * desires min/max extent.
- */
-function useDynamicScale(min: number, max: number, value?: number | null) {
-  let scaleMax = max;
-
-  const isValueHigherThanMax = value && value !== null && value > max;
-  if (value) {
-    if (isValueHigherThanMax) {
-      scaleMax = value;
-    }
-  }
-
-  const scale = scaleLinear().domain([min, scaleMax]).range([0, 100]);
-
-  if (isValueHigherThanMax) {
-    scale.nice(2);
-  }
-
-  return scale;
-}
-
 const BarScale: FunctionComponent<BarscaleProps> = ({
   min,
   max,
@@ -59,12 +34,17 @@ const BarScale: FunctionComponent<BarscaleProps> = ({
   // Generate a random ID used for clipPath and linearGradient ID's.
   const rand = useRef(Math.random().toString(36).substring(2, 15));
 
-  const x = useDynamicScale(min, max, value);
-  const [xMin, xMax] = x.domain();
+  const { scale: x, loading } = useDynamicScale(min, max, value);
+
+  if (loading || !x) {
+    return null;
+  }
 
   if (typeof value === 'undefined' || value === null) {
     return null;
   }
+
+  const [xMin, xMax] = x.domain();
 
   const textAlign = scaleThreshold()
     .domain([20, 80])
