@@ -21,7 +21,7 @@ class MyDocument extends Document {
         <body>
           <Main />
 
-          <script src="/piwik.js"></script>
+          <script src="/piwik.js" async></script>
 
           <noscript>
             <img
