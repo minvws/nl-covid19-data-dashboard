@@ -22,7 +22,6 @@ const Notification: FC = () => {
           reproductiegetal (Rt Real Time) ligt boven de 1.
         </p>
       </div>
-      <hr />
       <a
         className={styles.link}
         href="https://www.rivm.nl/nieuws/aantal-besmettingen-covid-19-neemt-verder-toe"
