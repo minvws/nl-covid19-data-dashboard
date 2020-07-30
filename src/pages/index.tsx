@@ -262,8 +262,9 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
               )}
 
               <p className={'regioDataLoading'}>
-                Signaalwaarde volgt in{' '}
-                <time dateTime={'2020-07'}>juli 2020</time>.
+                Voor het aantal besmettelijke mensen is geen signaalwaarde
+                beschikbaar omdat dit aantal een inschatting is gebaseerd op een
+                berekening.
               </p>
 
               {state.NL?.infectious_people_count?.value && (
