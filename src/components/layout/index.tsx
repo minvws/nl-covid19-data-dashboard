@@ -64,6 +64,8 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = (props) => {
             }
             alt="Rijksoverheid"
             loading="lazy"
+            width={showSmallLogo ? 40 : 314}
+            height={showSmallLogo ? 76 : 125}
           />
         </div>
 
