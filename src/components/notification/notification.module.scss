@@ -45,4 +45,12 @@
 
 .link {
   color: $text-color-active;
+  display: flex;
+  align-items: center;
+
+  svg {
+    display: block;
+    margin-right: 0.5em;
+    flex: 0 0 auto;
+  }
 }

@@ -3,6 +3,7 @@ import { FC } from 'react';
 import styles from './notification.module.scss';
 
 import Inform from './inform.svg';
+import ExternalLink from './external-link.svg';
 
 const Notification: FC = () => {
   return (
@@ -26,7 +27,8 @@ const Notification: FC = () => {
         className={styles.link}
         href="https://www.rivm.nl/nieuws/aantal-besmettingen-covid-19-neemt-verder-toe"
       >
-        Lees het gehele bericht van de RIVM
+        <ExternalLink />
+        <span>Lees het gehele bericht van de RIVM</span>
       </a>
     </aside>
   );
