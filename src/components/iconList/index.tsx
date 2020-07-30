@@ -39,6 +39,7 @@ const IconListItem: React.FC<{ item: Item }> = (props) => {
           src={item.icon.translation}
           className={styles.iconListImage}
           alt=""
+          loading="lazy"
         />{' '}
         <h4>{item.text.translation}</h4>
       </div>
@@ -62,6 +63,7 @@ const CollapseIconListItem: React.FC<{ item: Item }> = (props) => {
         <img
           src={item.icon.translation}
           className={styles.iconListImage}
+          loading="lazy"
           alt=""
         />{' '}
         <h4>
