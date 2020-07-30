@@ -33,7 +33,7 @@
       "notes": ""
     },
     "text": {
-      "translation": "Het dashboard coronavirus geeft informatie over de ontwikkeling van het coronavirus in Nederland. Met deze informatie kunnen eerder signalen van een toename van de verspreiding van het virus worden opgepikt. We moeten voorkomen dat het virus weer om zich heen grijpt. Het aantal IC-en ziekenhuisopnames geven in de kern de ultieme waarschuwing. Maar eerder al komen de signalen door via de testuitslagen die vertaald worden naar het aantal positief geteste personen per 100.000 inwoners. Daarnaast zijn er ondersteunende indicatoren die de epidemie beschrijven en andersoortige signalen oppikken.",
+      "translation": "Het dashboard coronavirus geeft informatie over de ontwikkeling van het coronavirus in Nederland.",
       "notes": ""
     },
     "link": {
@@ -75,7 +75,7 @@
       "notes": ""
     },
     "datums": {
-      "translation": "Waarde van {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
+      "translation": "Waarde van gisteren. Verkregen op {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
       "notes": ""
     },
     "fold_title": {
@@ -175,7 +175,7 @@
       "notes": ""
     },
     "datums": {
-      "translation": "Waarde van {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
+      "translation": "Waarde van gisteren. Verkregen op {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
       "notes": ""
     },
     "fold_title": {
@@ -227,7 +227,7 @@
       "notes": ""
     },
     "datums": {
-      "translation": "Waarde van {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
+      "translation": "Waarde van gisteren. Verkregen op {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
       "notes": ""
     },
     "fold_title": {
@@ -585,7 +585,7 @@
       "notes": ""
     },
     "datums": {
-      "translation": "Waarde van {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
+      "translation": "Waarde van {{dateOfReport}}. Verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "notes": ""
     },
     "fold_title": {
@@ -637,7 +637,7 @@
       "notes": ""
     },
     "datums": {
-      "translation": "Waarde van {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
+      "translation": "Waarde van {{dateOfReport}}. Verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "notes": ""
     },
     "screen_reader_graph_content": {
@@ -687,7 +687,7 @@
   },
   "geen_selectie": {
     "text": {
-      "translation": "Deze cijfers zijn binnenkort beschikbaar",
+      "translation": "Selecteer uw regio bovenaan deze pagina",
       "notes": ""
     }
   },
@@ -769,7 +769,7 @@
   },
   "over_beschrijving": {
     "text": {
-      "translation": "Het dashboard coronavirus geeft informatie over de ontwikkeling van het coronavirus in Nederland. Het dashboard laat met actuele cijfers zien hoe het coronavirus zich in Nederland verspreidt. Die informatie komt van onder andere het RIVM, de GGD’en en de ziekenhuizen. Op het dashboard is bijvoorbeeld te zien hoeveel mensen positief getest zijn op het virus en of het aantal besmettingen oploopt. ",
+      "translation": "Het dashboard coronavirus geeft informatie over de ontwikkeling van het coronavirus in Nederland. Met deze informatie kunnen eerder signalen van een toename van de verspreiding van het virus worden opgepikt. We moeten voorkomen dat het virus weer om zich heen grijpt. Het aantal IC-en ziekenhuisopnames geven in de kern de ultieme waarschuwing. Maar eerder al komen de signalen door via de testuitslagen die vertaald worden naar het aantal positief geteste personen per 100.000 inwoners. Daarnaast zijn er ondersteunende indicatoren die de epidemie beschrijven en andersoortige signalen oppikken.",
       "notes": ""
     }
   },
@@ -931,7 +931,7 @@
       "notes": ""
     },
     "datums": {
-      "translation": "Waarde van {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
+      "translation": "Waarde van gisteren. Verkregen op {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
       "notes": ""
     },
     "fold_title": {
@@ -979,7 +979,7 @@
       "notes": ""
     },
     "datums": {
-      "translation": "Waarde van {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
+      "translation": "Waarde van gisteren. Verkregen op {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
       "notes": ""
     },
     "metric_title": {

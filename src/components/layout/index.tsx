@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 
 import styles from './layout.module.scss';
 import MaxWidth from 'components/maxWidth';
-import text from 'locale/nl.json';
+import text from 'locale';
 import useMediaQuery from 'utils/useMediaQuery';
 import SEOHead from 'components/seoHead';
 import { Translation } from 'types/data';
