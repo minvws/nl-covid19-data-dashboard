@@ -1,0 +1,48 @@
+@import 'scss/variables.scss';
+
+.aside {
+  background: white;
+  border-radius: $default-radius;
+  padding: 1em;
+  overflow: auto;
+  margin-top: 2em;
+
+  hr {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    display: flex;
+    align-items: center;
+
+    > div:first-child {
+      border-right: 1px solid #eee;
+      padding-right: 2em;
+      margin-right: 2em;
+    }
+
+    a {
+      visibility: initial;
+      flex: 1 0 9em;
+    }
+  }
+}
+
+.headergroup {
+  display: flex;
+  align-items: center;
+  svg {
+    display: block;
+    margin-right: 1em;
+    flex: 0 0 auto;
+  }
+}
+
+.header {
+  font-size: 1.125em;
+  font-weight: bold;
+}
+
+.link {
+  color: $text-color-active;
+}

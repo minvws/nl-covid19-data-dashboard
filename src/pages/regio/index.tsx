@@ -15,6 +15,8 @@ import Metadata from 'components/metadata';
 import LoadingPlaceholder from 'components/loadingPlaceholder';
 import DateReported from 'components/dateReported';
 
+import Notification from 'components/notification';
+
 import { store } from 'store';
 import GraphContent from 'components/graphContent';
 
@@ -189,6 +191,10 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
           title="statistieken"
         />
       </Head>
+
+      <MaxWidth>
+        <Notification />
+      </MaxWidth>
 
       <MaxWidth>
         <LastUpdated />
