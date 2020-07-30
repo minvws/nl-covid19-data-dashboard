@@ -114,7 +114,11 @@ function SEOHead(props: SEOHeadProps): any {
       <meta key="ogLocale" name="og:locale" content="nl_NL" />
       <meta key="ogTitle" property="og:title" content={title} />
       <meta key="ogDesc" property="og:description" content={description} />
-      <meta key="ogImage" name="og:image" content={openGraphImage} />
+      <meta
+        key="ogImage"
+        name="og:image"
+        content={`https://coronadashboard.rijksoverheid.nl${openGraphImage}`}
+      />
       <meta key="ogUrl" name="og:url" content={url} />
       <meta key="ogType" property="og:type" content="website" />
 
