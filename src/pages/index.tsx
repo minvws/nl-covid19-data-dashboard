@@ -17,6 +17,9 @@ import { InfectiousPeople } from 'components/tiles/InfectiousPeople';
 import { PostivelyTestedPeople } from 'components/tiles/PostivelyTestedPeople';
 import { IntakeHospital } from 'components/tiles/IntakeHospital';
 
+import Notification from 'components/notification';
+import MaxWidth from 'components/maxWidth';
+
 import VerpleegHuisZorg from '../assets/verpleeghuiszorg.svg';
 import MedischeScreening from '../assets/medische-screening.svg';
 
@@ -81,6 +84,10 @@ const Home: FunctionComponentWithLayout = () => {
           title="Nederland"
         />
       </Head>
+
+      <MaxWidth>
+        <Notification />
+      </MaxWidth>
 
       <div className="home-content">
         <section className="home-section">
