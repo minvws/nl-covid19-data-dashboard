@@ -36,7 +36,7 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = (props) => {
   // remove focus after navigation
   const blur = (evt: any) => evt.target.blur();
 
-  const showSmallLogo = useMediaQuery('(max-width: 480px)');
+  const showSmallLogo = useMediaQuery('(max-width: 480px)', true);
 
   return (
     <>
