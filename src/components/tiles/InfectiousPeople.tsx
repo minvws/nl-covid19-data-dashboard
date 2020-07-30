@@ -3,12 +3,15 @@ import { useContext } from 'react';
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
 import Metadata from 'components/metadata';
+import Legenda from 'components/legenda';
 import GraphContainer from 'components/graphContainer';
 import GraphContent from 'components/graphContent';
 import GraphHeader from 'components/graphHeader';
 import DateReported from 'components/dateReported';
 import Ziektegolf from 'assets/ziektegolf.svg';
 import formatDecimal from 'utils/formatDec';
+
+import { AreaChart } from './index';
 
 import siteText from 'locale';
 import { store } from 'store';
@@ -77,6 +80,33 @@ export const InfectiousPeople: React.FC = () => {
       >
         <h4>{text.fold_title.translation}</h4>
         <p>{text.fold.translation}</p>
+
+        <h4>{text.graph_title.translation}</h4>
+
+        {count?.values && (
+          <AreaChart
+            data={count.values.map((value) => ({
+              avg: value.infectious_avg,
+              min: value.infectious_low,
+              max: value.infectious_high,
+              date: value.date_of_report_unix,
+            }))}
+            minY={0}
+            maxY={300000}
+            rangeLegendLabel="Onzekerheidsmarge"
+            lineLegendLabel="Besmettelijke mensen"
+          />
+        )}
+
+        <Legenda>
+          <li className="blue">
+            Het geschatte aantal besmettelijke mensen op die dag
+          </li>
+          <li className="gray square">
+            De onzekerheidsmarge toont met zekerheid tussen welke waarden het
+            aantal besmettelijke mensen op die dag zich bevindt
+          </li>
+        </Legenda>
 
         {count && <Metadata dataSource={text.bron} />}
       </Collapse>

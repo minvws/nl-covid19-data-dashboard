@@ -20,7 +20,7 @@ type AreaChartProps = {
     min: number | null;
     max: number | null;
   }>;
-  signaalwaarde: number;
+  signaalwaarde?: number;
 };
 
 const AreaChart: React.FC<AreaChartProps> = (props) => {
@@ -135,12 +135,12 @@ const AreaChart: React.FC<AreaChartProps> = (props) => {
           const x = this.x;
           return `
             ${formatDateLong(x)}<br/>
-            <strong>Onzekerheidsmarge</strong> ${formatNumber(
-              minRangePoint
-            )} - ${formatNumber(maxRangePoint)}<br/>
-            <strong>Effectieve R</strong> ${
-              linePoint ? formatNumber(linePoint[1] as number) : '–'
-            }
+            <strong>${rangeLegendLabel}</strong> ${formatNumber(
+            minRangePoint
+          )} - ${formatNumber(maxRangePoint)}<br/>
+            <strong>${lineLegendLabel}</strong> ${
+            linePoint ? formatNumber(linePoint[1] as number) : '–'
+          }
           `;
         },
       },
