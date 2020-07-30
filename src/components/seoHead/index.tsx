@@ -69,6 +69,45 @@ function SEOHead(props: SEOHeadProps): any {
         title="Ministerie van Volksgezondheid, Welzijn en Sport"
       />
 
+      <link
+        rel="preload"
+        href="webfonts/RO-SansWebText-Regular.woff2"
+        as="font"
+        type="font/woff2"
+      />
+      <link
+        rel="preload"
+        href="webfonts/RO-SansWebText-Regular.woff"
+        as="font"
+        type="font/woff"
+      />
+
+      <link
+        rel="preload"
+        href="webfonts/RO-SansWebText-Italic.woff2"
+        as="font"
+        type="font/woff2"
+      />
+      <link
+        rel="preload"
+        href="webfonts/RO-SansWebText-Italic.woff"
+        as="font"
+        type="font/woff"
+      />
+
+      <link
+        rel="preload"
+        href="webfonts/RO-SansWebText-Bold.woff2"
+        as="font"
+        type="font/woff2"
+      />
+      <link
+        rel="preload"
+        href="webfonts/RO-SansWebText-Bold.woff"
+        as="font"
+        type="font/woff"
+      />
+
       <meta key="description" name="description" content={description} />
       <meta key="image" name="image" content={openGraphImage} />
 
