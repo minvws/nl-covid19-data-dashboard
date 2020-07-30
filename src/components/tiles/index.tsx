@@ -378,7 +378,7 @@ export const InfectiousPeople: React.FC<IInfectiousPeople> = (props) => {
             }))}
             minY={0}
             maxY={300000}
-            rangeLegendLabel="Bandbreedte"
+            rangeLegendLabel="Onzekerheidsmarge"
             lineLegendLabel="Besmettelijke mensen"
           />
         )}
