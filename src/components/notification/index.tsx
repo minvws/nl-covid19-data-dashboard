@@ -8,7 +8,10 @@ import ExternalLink from './external-link.svg';
 const Notification: FC = () => {
   return (
     <aside className={styles.aside}>
-      <div>
+      <div className={styles.desktopInform}>
+        <Inform />
+      </div>
+      <div className={styles.textgroup}>
         <div className={styles.headergroup}>
           <Inform />
           <p className={styles.header}>
