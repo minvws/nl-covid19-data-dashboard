@@ -34,9 +34,9 @@ const BarScale: FunctionComponent<BarscaleProps> = ({
   // Generate a random ID used for clipPath and linearGradient ID's.
   const rand = useRef(Math.random().toString(36).substring(2, 15));
 
-  const { scale: x, loading } = useDynamicScale(min, max, value);
+  const { scale: x } = useDynamicScale(min, max, value);
 
-  if (loading || !x) {
+  if (!x) {
     return null;
   }
 
