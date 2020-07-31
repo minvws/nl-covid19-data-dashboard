@@ -10,6 +10,8 @@ import DateReported from 'components/dateReported';
 import Arts from 'assets/arts.svg';
 import { LineChart } from './index';
 
+import formatDecimal from 'utils/formatDec';
+
 import siteText from 'locale';
 import { store } from 'store';
 
@@ -23,6 +25,8 @@ export const SuspectedPatients: React.FC = () => {
     siteText.verdenkingen_huisartsen;
   const data: RioolwaterMetingen | undefined =
     state?.NL?.verdenkingen_huisartsen;
+
+  const total = state?.NL?.verdenkingen_huisartsen?.last_value?.geschat_aantal;
 
   return (
     <GraphContainer>
@@ -45,6 +49,13 @@ export const SuspectedPatients: React.FC = () => {
               },
             ]}
           />
+        )}
+
+        {total && (
+          <h3>
+            Geschat aantal patiënten met verdenking van COVID-19:{' '}
+            <span style={{ color: '#01689b' }}>{formatDecimal(total)}</span>
+          </h3>
         )}
 
         {data?.last_value?.incidentie !== null && (
