@@ -7,6 +7,10 @@
   overflow: auto;
   margin-top: 2em;
 
+  p {
+    margin-bottom: 0;
+  }
+
   @media (max-width: 767px) {
     > div:first-child {
       border-bottom: 1px solid #eee;
@@ -44,6 +48,7 @@
 .header {
   font-size: 1.125em;
   font-weight: bold;
+  margin: 0;
 }
 
 .link {
