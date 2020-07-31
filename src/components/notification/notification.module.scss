@@ -7,10 +7,6 @@
   overflow: auto;
   margin-top: 2em;
 
-  p {
-    margin-bottom: 0;
-  }
-
   @media (max-width: 767px) {
     > div:first-child {
       border-bottom: 1px solid #eee;
