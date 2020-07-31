@@ -35,7 +35,7 @@
         "open": "Verberg uitleg",
         "sluit": "Meer uitleg en data",
         "signaalwaarde": "10",
-        "screen_reader_graph_content": "{{value}} intensive care-opnames per dag. Signaalwaarde: {{kritiekeWaarde}} opnames per dag.",
+        "screen_reader_graph_content": "{value} intensive care-opnames per dag. Signaalwaarde: {kritiekeWaarde} opnames per dag.",
         "bron": {
             "href": "https:\/\/stichting-nice.nl\/",
             "text": "Stichting NICE"
@@ -50,7 +50,7 @@
         "fold": "Huisartsen registreren bij het spreken van een patiënt, de vernomen klachten. Elke week berekent het Nivel aan de hand van de geregistreerde klachten, het aantal patiënten met een verdenking op COVID-19 in de afgelopen week.",
         "open": "Verberg uitleg",
         "sluit": "Meer uitleg en data",
-        "screen_reader_graph_content": "{{value}} patiënten waarvan huisartsen COVID-19 vermoeden, per 100.000 inwoners, per week.",
+        "screen_reader_graph_content": "{value} patiënten waarvan huisartsen COVID-19 vermoeden, per 100.000 inwoners, per week.",
         "bron": {
             "href": "https:\/\/www.nivel.nl\/nl\/nivel-zorgregistraties-eerste-lijn\/nivel-zorgregistraties-eerste-lijn",
             "text": "Nivel Zorgregistraties Eerste Lijn"
@@ -66,7 +66,7 @@
         "open": "Verberg uitleg",
         "sluit": "Meer uitleg en data",
         "signaalwaarde": "40",
-        "screen_reader_graph_content": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{kritiekeWaarde}} opnames per dag.",
+        "screen_reader_graph_content": "{value} ziekenhuisopnames per dag. Signaalwaarde: {kritiekeWaarde} opnames per dag.",
         "bron": {
             "href": "https:\/\/www.rivm.nl\/documenten\/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
             "text": "RIVM"
@@ -83,7 +83,7 @@
         "graph_title": "Verdeling naar leeftijd (totaal aantal mensen)",
         "open": "Verberg uitleg",
         "sluit": "Meer uitleg en data",
-        "screen_reader_graph_content": "{{value}} positief geteste mensen per dag.",
+        "screen_reader_graph_content": "{value} positief geteste mensen per dag.",
         "bron": {
             "href": "https:\/\/www.rivm.nl\/documenten\/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
             "text": "RIVM"
@@ -99,7 +99,7 @@
         "graph_title": "Verloop over tijd",
         "open": "Verberg uitleg",
         "sluit": "Meer uitleg en data",
-        "screen_reader_graph_content": "{{value}} besmettelijke personen per 100.000 inwoners.",
+        "screen_reader_graph_content": "{value} besmettelijke personen per 100.000 inwoners.",
         "bron": {
             "href": "https:\/\/www.rivm.nl\/documenten\/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
             "text": "RIVM"
@@ -109,7 +109,7 @@
     "reproductiegetal": {
         "title": "Reproductiegetal",
         "text": "Aantal mensen dat besmet wordt door één besmettelijke persoon.",
-        "screen_reader_graph_content": "{{value}} mensen. Signaalwaarde: {{kritiekeWaarde}}.",
+        "screen_reader_graph_content": "{value} mensen. Signaalwaarde: {kritiekeWaarde}.",
         "fold_title": "Wat betekent dit?",
         "fold": "Het reproductiegetal laat zien hoe snel het virus zich verspreidt. Dit getal geeft aan hoeveel mensen gemiddeld besmet worden door één patiënt met COVID-19. Bij een reproductiegetal van rond de 1 blijft het aantal besmettingen ongeveer gelijk. Als het reproductiegetal lager is dan 1, dan daalt het aantal besmettingen. Bij een getal hoger dan 1 stijgt het aantal besmettingen.",
         "graph_title": "Verloop over tijd",
@@ -181,7 +181,7 @@
         "graph_title": "Verloop over tijd",
         "open": "Verberg uitleg",
         "sluit": "Meer uitleg en data",
-        "screen_reader_graph_content": "{{value}} nieuwe locaties waarbij tenminste één bewoner positief getest is, per dag.",
+        "screen_reader_graph_content": "{value} nieuwe locaties waarbij tenminste één bewoner positief getest is, per dag.",
         "bron": {
             "href": "https:\/\/www.rivm.nl\/documenten\/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
             "text": "RIVM"
@@ -197,7 +197,7 @@
         "open": "Verberg uitleg",
         "sluit": "Meer uitleg en data",
         "signaalwaarde": "40",
-        "screen_reader_graph_content": "{{value}} positief geteste bewoners.",
+        "screen_reader_graph_content": "{value} positief geteste bewoners.",
         "bron": {
             "href": "https:\/\/www.rivm.nl\/documenten\/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
             "text": "RIVM"
@@ -207,7 +207,7 @@
     "verpleeghuis_oversterfte": {
         "title": "Sterfte",
         "text": "Aantal overleden bewoners in verpleeghuizen met een vastgestelde COVID-19-besmetting per dag.",
-        "screen_reader_graph_content": "{{value}} overleden bewoners.",
+        "screen_reader_graph_content": "{value} overleden bewoners.",
         "fold_title": "Wat betekent dit?",
         "fold": "Dit getal is een inschatting van het aantal gemelde verpleeghuisbewoners dat in Nederland overlijdt aan de gevolgen van het nieuwe coronavirus. Dit getal verwijst naar de datum vóór de datum van de laatste update.",
         "graph_title": "Verloop over tijd",
@@ -234,7 +234,7 @@
         "fold": "In rioolwater kun je ziekteverwekkers zoals het nieuwe coronavirus meten omdat die met uitwerpselen (ontlasting) in het rioolwater komen. Onderzoekers testen eens per week rioolwater dat over 24 uur verzameld is. Dit onderzoek laat vrij snel zien hoeveel virusdeeltjes in het rioolwater zitten afkomstig uit uitwerpselen van besmette personen. Uit het huidige onderzoek kunnen nog geen conclusies worden getrokken. Het is de bedoeling dat het aantal meetpunten wordt uitgebreid van 28 naar meer dan 300 voor 1 september 2020. Pas als het onderzoek volledig loopt, kunnen hier conclusies aan worden verbonden.",
         "open": "Verberg uitleg",
         "sluit": "Meer uitleg en data",
-        "screen_reader_graph_content": "{{value}} COVID-19 RNA-deeltjes gemeten per mililiter in rioolwater.",
+        "screen_reader_graph_content": "{value} COVID-19 RNA-deeltjes gemeten per mililiter in rioolwater.",
         "bron": {
             "text": "RIVM Onderzoek rioolwater",
             "href": "https:\/\/www.rivm.nl\/coronavirus-covid-19\/onderzoek\/rioolwater"
@@ -326,7 +326,7 @@
         "graph_title": "Verloop over tijd",
         "open": "Verberg uitleg",
         "sluit": "Meer uitleg en data",
-        "screen_reader_graph_content": "{{value}} opnames.",
+        "screen_reader_graph_content": "{value} opnames.",
         "bron": {
             "href": "https:\/\/www.rivm.nl\/documenten\/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
             "text": "RIVM"
@@ -342,7 +342,7 @@
         "graph_title": "Verloop over tijd",
         "open": "Verberg uitleg",
         "sluit": "Meer uitleg en data",
-        "screen_reader_graph_content": "{{value}} positief geteste personen.",
+        "screen_reader_graph_content": "{value} positief geteste personen.",
         "bron": {
             "href": "https:\/\/www.rivm.nl\/documenten\/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
             "text": "RIVM"
