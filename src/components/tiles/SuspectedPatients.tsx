@@ -1,5 +1,7 @@
 import { useContext } from 'react';
 
+import { FormattedMessage, useIntl } from 'react-intl';
+
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
 import Metadata from 'components/metadata';
@@ -28,18 +30,29 @@ export const SuspectedPatients: React.FC = () => {
 
   const total = state?.NL?.verdenkingen_huisartsen?.last_value?.geschat_aantal;
 
+  const intl = useIntl();
+
   return (
     <GraphContainer>
       <GraphContent>
-        <GraphHeader Icon={Arts} title={text.title} />
+        <GraphHeader
+          Icon={Arts}
+          title={intl.formatMessage({
+            id: 'verdenkingen_huisartsen.title',
+          })}
+        />
 
-        <p>{text.text}</p>
+        <p>
+          <FormattedMessage id="verdenkingen_huisartsen.text" />
+        </p>
 
         {data && (
           <BarScale
             min={0}
             max={140}
-            screenReaderText={text.screen_reader_graph_content}
+            screenReaderText={intl.formatMessage({
+              id: 'verdenkingen_huisartsen.screen_reader_graph_content',
+            })}
             value={data.last_value.incidentie as number | null}
             id="verdenkingen_huisartsen"
             gradient={[
@@ -53,29 +66,41 @@ export const SuspectedPatients: React.FC = () => {
 
         {total && (
           <h3>
-            Geschat aantal patiënten met verdenking van COVID-19:{' '}
+            <FormattedMessage defaultMessage="Geschat aantal patiënten met verdenking van COVID-19:" />{' '}
             <span style={{ color: '#01689b' }}>{formatDecimal(total)}</span>
           </h3>
         )}
 
         {data?.last_value?.incidentie !== null && (
           <DateReported
-            datumsText={text.datums}
+            datumsText={intl.formatMessage({
+              id: 'verdenkingen_huisartsen.datums',
+            })}
             dateInsertedUnix={data?.last_value?.date_of_insertion_unix}
             dateUnix={data?.last_value?.week}
           />
         )}
       </GraphContent>
       <Collapse
-        openText={text.open}
-        sluitText={text.sluit}
+        openText={intl.formatMessage({
+          id: 'verdenkingen_huisartsen.open',
+        })}
+        sluitText={intl.formatMessage({
+          id: 'verdenkingen_huisartsen.sluit',
+        })}
         piwikName="Aantal patiënten waarvan huisartsen COVID-19 vermoeden"
         piwikAction="landelijk"
       >
-        <h4>{text.fold_title}</h4>
-        <p>{text.fold}</p>
+        <h4>
+          <FormattedMessage id="verdenkingen_huisartsen.fold_title" />
+        </h4>
+        <p>
+          <FormattedMessage id="verdenkingen_huisartsen.fold" />
+        </p>
 
-        <h4>{text.graph_title}</h4>
+        <h4>
+          <FormattedMessage id="verdenkingen_huisartsen.graph_title" />
+        </h4>
 
         {data && (
           <>

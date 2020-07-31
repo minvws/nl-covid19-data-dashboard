@@ -16,7 +16,7 @@ import { SewerWater } from 'components/tiles/SewerWater';
 import { SuspectedPatients } from 'components/tiles/SuspectedPatients';
 import { ReproductionIndex } from 'components/tiles/ReproductionIndex';
 import { InfectiousPeople } from 'components/tiles/InfectiousPeople';
-import { PostivelyTestedPeople } from 'components/tiles/PostivelyTestedPeople';
+import { PositivelyTestedPeople } from 'components/tiles/PositivelyTestedPeople';
 import { IntakeHospital } from 'components/tiles/IntakeHospital';
 
 import Notification from 'components/notification';
@@ -102,7 +102,7 @@ const Home: FunctionComponentWithLayout = () => {
 
             <IntakeHospital />
 
-            <PostivelyTestedPeople />
+            <PositivelyTestedPeople />
 
             <InfectiousPeople />
 
