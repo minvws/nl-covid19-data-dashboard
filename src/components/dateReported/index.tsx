@@ -1,9 +1,9 @@
 import ClockIcon from 'assets/clock.svg';
 import { ReactElement } from 'react';
 
-import { FormattedMessage } from 'react-intl';
-import formatDistanceToNow from 'date-fns/formatDistanceToNow';
-import { nl } from 'date-fns/locale';
+// import { FormattedMessage } from 'react-intl';
+// import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+// import { nl } from 'date-fns/locale';
 
 import { long } from 'data/months';
 import replaceVariablesInText from 'utils/replaceVariablesInText';
@@ -14,7 +14,7 @@ interface IPropsIntl {
 
 const DateReportedIntl: React.FC<IPropsIntl> = (props) => {
   const { children } = props;
-  const { dateUnix } = props;
+  // const { dateUnix } = props;
 
   return (
     <div className="dateReported">
@@ -22,7 +22,7 @@ const DateReportedIntl: React.FC<IPropsIntl> = (props) => {
         <ClockIcon aria-hidden />
       </span>
       <p>{children}</p>
-      <FormattedMessage
+      {/* <FormattedMessage
         defaultMessage="hello {relativeTime}"
         values={{
           relativeTime: formatDistanceToNow(new Date(dateUnix), {
@@ -30,8 +30,7 @@ const DateReportedIntl: React.FC<IPropsIntl> = (props) => {
             addSuffix: true,
           }),
         }}
-      />
-      ;
+      /> */}
     </div>
   );
 };
