@@ -1,5 +1,7 @@
 import { useContext } from 'react';
 
+import { FormattedMessage, useIntl } from 'react-intl';
+
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
 import Metadata from 'components/metadata';
@@ -27,17 +29,29 @@ export const NursingHomeInfectedLocations: React.FC = () => {
   const totalLocations: DeceasedPeopleNurseryCountDaily | undefined =
     state?.NL?.total_reported_locations;
 
+  const intl = useIntl();
+
   return (
     <GraphContainer>
       <GraphContent>
-        <GraphHeader Icon={Locatie} title={text.title} />
-        <p>{text.text}</p>
+        <GraphHeader
+          Icon={Locatie}
+          title={intl.formatMessage({
+            id: 'verpleeghuis_besmette_locaties.title',
+          })}
+        />
+
+        <p>
+          <FormattedMessage id="verpleeghuis_besmette_locaties.text" />
+        </p>
 
         {newLocations && (
           <BarScale
             min={0}
             max={30}
-            screenReaderText={text.screen_reader_graph_content}
+            screenReaderText={intl.formatMessage({
+              id: 'verpleeghuis_besmette_locaties.screen_reader_graph_content',
+            })}
             value={newLocations.last_value.total_new_reported_locations}
             id="besmette_locaties_verpleeghuis"
             gradient={[
@@ -50,22 +64,34 @@ export const NursingHomeInfectedLocations: React.FC = () => {
         )}
         {newLocations?.last_value?.total_new_reported_locations !== null && (
           <DateReported
-            datumsText={text.datums}
+            datumsText={intl.formatMessage({
+              id: 'verpleeghuis_besmette_locaties.datums',
+            })}
             dateInsertedUnix={newLocations?.last_value?.date_of_insertion_unix}
             dateUnix={newLocations?.last_value?.date_of_report_unix}
           />
         )}
       </GraphContent>
       <Collapse
-        openText={text.open}
-        sluitText={text.sluit}
+        openText={intl.formatMessage({
+          id: 'verpleeghuis_besmette_locaties.open',
+        })}
+        sluitText={intl.formatMessage({
+          id: 'verpleeghuis_besmette_locaties.sluit',
+        })}
         piwikName="Aantal besmette locaties"
         piwikAction="landelijk"
       >
-        <h4>{text.fold_title}</h4>
-        <p>{text.fold}</p>
+        <h4>
+          <FormattedMessage id="verpleeghuis_besmette_locaties.fold_title" />
+        </h4>
+        <p>
+          <FormattedMessage id="verpleeghuis_besmette_locaties.fold" />
+        </p>
 
-        <h4>{text.graph_title}</h4>
+        <h4>
+          <FormattedMessage id="verpleeghuis_besmette_locaties.graph_title" />
+        </h4>
 
         {newLocations && (
           <LineChart
@@ -78,7 +104,7 @@ export const NursingHomeInfectedLocations: React.FC = () => {
 
         {totalLocations && (
           <h3>
-            {text.metric_title}{' '}
+            <FormattedMessage id="verpleeghuis_besmette_locaties.metric_title" />{' '}
             <span style={{ color: '#01689b' }}>
               {formatDecimal(
                 totalLocations.last_value.total_reported_locations
@@ -86,7 +112,9 @@ export const NursingHomeInfectedLocations: React.FC = () => {
             </span>
           </h3>
         )}
-        <p>{text.metric_text}</p>
+        <p>
+          <FormattedMessage id="verpleeghuis_besmette_locaties.metric_text" />
+        </p>
 
         {newLocations && <Metadata dataSource={text.bron} />}
       </Collapse>

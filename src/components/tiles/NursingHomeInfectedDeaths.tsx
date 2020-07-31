@@ -1,5 +1,7 @@
 import { useContext } from 'react';
 
+import { FormattedMessage, useIntl } from 'react-intl';
+
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
 import Metadata from 'components/metadata';
@@ -24,16 +26,27 @@ export const NursingHomeInfectedDeaths: React.FC = () => {
   const data: DeceasedPeopleNurseryCountDaily | undefined =
     state?.NL?.deceased_people_nursery_count_daily;
 
+  const intl = useIntl();
+
   return (
     <GraphContainer>
       <GraphContent>
-        <GraphHeader Icon={CoronaVirus} title={text.title} />
-        <p>{text.text}</p>
+        <GraphHeader
+          Icon={CoronaVirus}
+          title={intl.formatMessage({
+            id: 'verpleeghuis_oversterfte.title',
+          })}
+        />
+        <p>
+          <FormattedMessage id="verpleeghuis_oversterfte.text" />
+        </p>
         {data && (
           <BarScale
             min={0}
             max={50}
-            screenReaderText={text.screen_reader_graph_content}
+            screenReaderText={intl.formatMessage({
+              id: 'verpleeghuis_oversterfte.screen_reader_graph_content',
+            })}
             value={data.last_value.deceased_nursery_daily}
             id="over"
             gradient={[
@@ -47,21 +60,33 @@ export const NursingHomeInfectedDeaths: React.FC = () => {
 
         {data?.last_value?.deceased_nursery_daily !== null && (
           <DateReported
-            datumsText={text.datums}
+            datumsText={intl.formatMessage({
+              id: 'verpleeghuis_oversterfte.datums',
+            })}
             dateUnix={data?.last_value?.date_of_report_unix}
             dateInsertedUnix={data?.last_value?.date_of_insertion_unix}
           />
         )}
       </GraphContent>
       <Collapse
-        openText={text.open}
-        sluitText={text.sluit}
+        openText={intl.formatMessage({
+          id: 'verpleeghuis_oversterfte.open',
+        })}
+        sluitText={intl.formatMessage({
+          id: 'verpleeghuis_oversterfte.sluit',
+        })}
         piwikName="Sterfte"
         piwikAction="landelijk"
       >
-        <h4>{text.fold_title}</h4>
-        <p>{text.fold}</p>
-        <h4>{text.graph_title}</h4>
+        <h4>
+          <FormattedMessage id="verpleeghuis_oversterfte.fold_title" />
+        </h4>
+        <p>
+          <FormattedMessage id="verpleeghuis_oversterfte.fold" />
+        </p>
+        <h4>
+          <FormattedMessage id="verpleeghuis_oversterfte.graph_title" />
+        </h4>
 
         {data && (
           <>

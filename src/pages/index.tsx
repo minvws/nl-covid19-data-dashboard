@@ -1,7 +1,7 @@
 import React from 'react';
 import Masonry from 'react-masonry-css';
 
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import GraphContainer from 'components/graphContainer';
 import GraphContent from 'components/graphContent';
@@ -27,6 +27,9 @@ import MedischeScreening from '../assets/medische-screening.svg';
 
 import { store } from 'store';
 import siteText from 'locale';
+
+import list from 'data/overige-gegevens.json';
+
 import GraphHeader from 'components/graphHeader';
 import IconList from 'components/iconList';
 
@@ -59,6 +62,8 @@ const Home: FunctionComponentWithLayout = () => {
     1100: 2,
     600: 1,
   };
+
+  const intl = useIntl();
 
   return (
     <>
@@ -125,7 +130,12 @@ const Home: FunctionComponentWithLayout = () => {
         </section>
 
         <section className="home-section">
-          <TitleBlock Icon={MedischeScreening} title="Andere gegevens">
+          <TitleBlock
+            Icon={MedischeScreening}
+            title={intl.formatMessage({
+              defaultMessage: 'Andere gegevens',
+            })}
+          >
             <p>
               <FormattedMessage defaultMessage="Cijfers die iets kunnen zeggen over de verspreiding van het virus." />
             </p>
@@ -142,13 +152,17 @@ const Home: FunctionComponentWithLayout = () => {
 
             <GraphContainer>
               <GraphContent>
-                <GraphHeader title={siteText['overige_gegevens.title']} />
+                <GraphHeader
+                  title={intl.formatMessage({
+                    id: 'overige_gegevens.title',
+                  })}
+                />
 
                 <p>
                   <FormattedMessage id="overige_gegevens.text" />
                 </p>
 
-                <IconList list={siteText['overige_gegevens.list']} />
+                <IconList list={list} />
               </GraphContent>
             </GraphContainer>
           </Masonry>
@@ -157,7 +171,9 @@ const Home: FunctionComponentWithLayout = () => {
         <section className="home-section">
           <TitleBlock
             Icon={VerpleegHuisZorg}
-            title={siteText['blok_verpleeghuis_zorg.title']}
+            title={intl.formatMessage({
+              id: 'blok_verpleeghuis_zorg.title',
+            })}
           >
             <p>
               <FormattedMessage id="blok_verpleeghuis_zorg.text" />

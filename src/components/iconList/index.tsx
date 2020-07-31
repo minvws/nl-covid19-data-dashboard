@@ -2,7 +2,6 @@ import styles from './iconList.module.scss';
 import { useState } from 'react';
 import useCollapse from 'react-collapsed';
 import Arrow from 'assets/arrow.svg';
-import { Translation } from 'types/data';
 
 interface Item {
   content: Translation;

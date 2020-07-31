@@ -1,5 +1,7 @@
 import { useContext } from 'react';
 
+import { FormattedMessage, useIntl } from 'react-intl';
+
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
 import Metadata from 'components/metadata';
@@ -23,18 +25,29 @@ export const SewerWater: React.FC = () => {
     siteText.rioolwater_metingen;
   const data: RioolwaterMetingen | undefined = state?.NL?.rioolwater_metingen;
 
+  const intl = useIntl();
+
   return (
     <GraphContainer>
       <GraphContent>
-        <GraphHeader Icon={RioolwaterMonitoring} title={text.title} />
+        <GraphHeader
+          Icon={RioolwaterMonitoring}
+          title={intl.formatMessage({
+            id: 'rioolwater_metingen.title',
+          })}
+        />
 
-        <p>{text.text}</p>
+        <p>
+          <FormattedMessage id="rioolwater_metingen.text" />
+        </p>
 
         {data && (
           <BarScale
             min={0}
             max={100}
-            screenReaderText={text.screen_reader_graph_content}
+            screenReaderText={intl.formatMessage({
+              id: 'rioolwater_metingen.screen_reader_graph_content',
+            })}
             value={Number(data.last_value.average)}
             id="rioolwater_metingen"
             gradient={[
@@ -48,22 +61,34 @@ export const SewerWater: React.FC = () => {
 
         {data?.last_value?.average !== null && (
           <DateReported
-            datumsText={text.datums}
+            datumsText={intl.formatMessage({
+              id: 'rioolwater_metingen.datums',
+            })}
             dateInsertedUnix={data?.last_value?.date_of_insertion_unix}
             dateUnix={data?.last_value?.week}
           />
         )}
       </GraphContent>
       <Collapse
-        openText={text.open}
-        sluitText={text.sluit}
+        openText={intl.formatMessage({
+          id: 'rioolwater_metingen.open',
+        })}
+        sluitText={intl.formatMessage({
+          id: 'rioolwater_metingen.sluit',
+        })}
         piwikName="Rioolwatermeting"
         piwikAction="landelijk"
       >
-        <h4>{text.fold_title}</h4>
-        <p>{text.fold}</p>
+        <h4>
+          <FormattedMessage id="rioolwater_metingen.fold_title" />
+        </h4>
+        <p>
+          <FormattedMessage id="rioolwater_metingen.fold" />
+        </p>
 
-        <h4>{text.graph_title}</h4>
+        <h4>
+          <FormattedMessage id="rioolwater_metingen.graph_title" />
+        </h4>
 
         {data && (
           <>

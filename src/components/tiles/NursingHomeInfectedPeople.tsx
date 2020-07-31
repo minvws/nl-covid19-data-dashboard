@@ -1,5 +1,7 @@
 import { useContext } from 'react';
 
+import { FormattedMessage, useIntl } from 'react-intl';
+
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
 import Metadata from 'components/metadata';
@@ -22,17 +24,30 @@ export const NursingHomeInfectedPeople: React.FC = () => {
     siteText.verpleeghuis_positief_geteste_personen;
   const data: DeceasedPeopleNurseryCountDaily | undefined =
     state?.NL?.infected_people_nursery_count_daily;
+
+  const intl = useIntl();
+
   return (
     <GraphContainer>
       <GraphContent>
-        <GraphHeader Icon={Getest} title={text.title} />
-        <p>{text.text}</p>
+        <GraphHeader
+          Icon={Getest}
+          title={intl.formatMessage({
+            id: 'verpleeghuis_positief_geteste_personen.title',
+          })}
+        />
+        <p>
+          <FormattedMessage id="verpleeghuis_positief_geteste_personen.text" />
+        </p>
 
         {data && (
           <BarScale
             min={0}
             max={100}
-            screenReaderText={text.screen_reader_graph_content}
+            screenReaderText={intl.formatMessage({
+              id:
+                'verpleeghuis_positief_geteste_personen.screen_reader_graph_content',
+            })}
             value={data.last_value.infected_nursery_daily}
             id="positief_verpleeghuis"
             gradient={[
@@ -46,21 +61,33 @@ export const NursingHomeInfectedPeople: React.FC = () => {
 
         {data?.last_value?.infected_nursery_daily !== null && (
           <DateReported
-            datumsText={text.datums}
+            datumsText={intl.formatMessage({
+              id: 'verpleeghuis_positief_geteste_personen.datums',
+            })}
             dateInsertedUnix={data?.last_value?.date_of_insertion_unix}
             dateUnix={data?.last_value?.date_of_report_unix}
           />
         )}
       </GraphContent>
       <Collapse
-        openText={text.open}
-        sluitText={text.sluit}
+        openText={intl.formatMessage({
+          id: 'verpleeghuis_positief_geteste_personen.open',
+        })}
+        sluitText={intl.formatMessage({
+          id: 'verpleeghuis_positief_geteste_personen.sluit',
+        })}
         piwikAction="landelijk"
         piwikName="Aantal positief geteste bewoners"
       >
-        <h4>{text.fold_title}</h4>
-        <p>{text.fold}</p>
-        <h4>{text.graph_title}</h4>
+        <h4>
+          <FormattedMessage id="verpleeghuis_positief_geteste_personen.fold_title" />
+        </h4>
+        <p>
+          <FormattedMessage id="verpleeghuis_positief_geteste_personen.fold" />
+        </p>
+        <h4>
+          <FormattedMessage id="verpleeghuis_positief_geteste_personen.graph_title" />
+        </h4>
 
         {data && (
           <>
