@@ -22,8 +22,6 @@ export const NursingHomeInfectedLocations: React.FC = () => {
   const globalState = useContext(store);
   const { state } = globalState;
 
-  const text: typeof siteText.verpleeghuis_besmette_locaties =
-    siteText.verpleeghuis_besmette_locaties;
   const newLocations: DeceasedPeopleNurseryCountDaily | undefined =
     state?.NL?.total_newly_reported_locations;
   const totalLocations: DeceasedPeopleNurseryCountDaily | undefined =
@@ -116,7 +114,11 @@ export const NursingHomeInfectedLocations: React.FC = () => {
           <FormattedMessage id="verpleeghuis_besmette_locaties.metric_text" />
         </p>
 
-        {newLocations && <Metadata dataSource={text.bron} />}
+        {newLocations && (
+          <Metadata
+            dataSource={siteText['verpleeghuis_besmette_locaties.bron']}
+          />
+        )}
       </Collapse>
     </GraphContainer>
   );

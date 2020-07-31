@@ -23,8 +23,6 @@ export const SuspectedPatients: React.FC = () => {
   const globalState = useContext(store);
   const { state } = globalState;
 
-  const text: typeof siteText.verdenkingen_huisartsen =
-    siteText.verdenkingen_huisartsen;
   const data: RioolwaterMetingen | undefined =
     state?.NL?.verdenkingen_huisartsen;
 
@@ -111,7 +109,7 @@ export const SuspectedPatients: React.FC = () => {
               }))}
             />
 
-            <Metadata dataSource={text.bron} />
+            <Metadata dataSource={siteText['verdenkingen_huisartsen.bron']} />
           </>
         )}
       </Collapse>

@@ -21,8 +21,6 @@ export const NursingHomeInfectedDeaths: React.FC = () => {
   const globalState = useContext(store);
   const { state } = globalState;
 
-  const text: typeof siteText.verpleeghuis_oversterfte =
-    siteText.verpleeghuis_oversterfte;
   const data: DeceasedPeopleNurseryCountDaily | undefined =
     state?.NL?.deceased_people_nursery_count_daily;
 
@@ -96,7 +94,7 @@ export const NursingHomeInfectedDeaths: React.FC = () => {
                 date: value.date_of_report_unix,
               }))}
             />
-            <Metadata dataSource={text.bron} />
+            <Metadata dataSource={siteText['verpleeghuis_oversterfte.bron']} />
           </>
         )}
       </Collapse>

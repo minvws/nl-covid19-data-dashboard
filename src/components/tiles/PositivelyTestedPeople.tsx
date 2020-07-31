@@ -26,8 +26,6 @@ export const PositivelyTestedPeople: React.FC = () => {
   const globalState = useContext(store);
   const { state } = globalState;
 
-  const text: typeof siteText.positief_geteste_personen =
-    siteText.positief_geteste_personen;
   const delta: InfectedPeopleDeltaNormalized | undefined =
     state?.NL?.infected_people_delta_normalized;
   const age: IntakeShareAgeGroups | undefined =
@@ -125,7 +123,7 @@ export const PositivelyTestedPeople: React.FC = () => {
                 (value) => value.infected_per_agegroup_increase
               )}
             />
-            <Metadata dataSource={text.bron} />
+            <Metadata dataSource={siteText['positief_geteste_personen.bron']} />
           </>
         )}
       </Collapse>

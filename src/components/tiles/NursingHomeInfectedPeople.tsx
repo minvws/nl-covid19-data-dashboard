@@ -20,8 +20,6 @@ import { DeceasedPeopleNurseryCountDaily } from 'types/data';
 export const NursingHomeInfectedPeople: React.FC = () => {
   const globalState = useContext(store);
   const { state } = globalState;
-  const text: typeof siteText.verpleeghuis_positief_geteste_personen =
-    siteText.verpleeghuis_positief_geteste_personen;
   const data: DeceasedPeopleNurseryCountDaily | undefined =
     state?.NL?.infected_people_nursery_count_daily;
 
@@ -97,7 +95,11 @@ export const NursingHomeInfectedPeople: React.FC = () => {
                 date: value.date_of_report_unix,
               }))}
             />
-            <Metadata dataSource={text.bron} />
+            <Metadata
+              dataSource={
+                siteText['verpleeghuis_positief_geteste_personen.bron']
+              }
+            />
           </>
         )}
       </Collapse>

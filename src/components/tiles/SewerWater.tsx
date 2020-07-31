@@ -21,8 +21,6 @@ export const SewerWater: React.FC = () => {
   const globalState = useContext(store);
   const { state } = globalState;
 
-  const text: typeof siteText.rioolwater_metingen =
-    siteText.rioolwater_metingen;
   const data: RioolwaterMetingen | undefined = state?.NL?.rioolwater_metingen;
 
   const intl = useIntl();
@@ -99,7 +97,7 @@ export const SewerWater: React.FC = () => {
               }))}
             />
 
-            <Metadata dataSource={text.bron} />
+            <Metadata dataSource={siteText['rioolwater_metingen.bron']} />
           </>
         )}
       </Collapse>
