@@ -25,6 +25,8 @@ const Notification: FC = () => {
       <a
         className={styles.link}
         href="https://www.rivm.nl/nieuws/aantal-besmettingen-covid-19-neemt-verder-toe"
+        target="_blank"
+        rel="noreferrer"
       >
         <ExternalLink />
         <span>Lees het gehele bericht van de RIVM</span>

@@ -10,7 +10,7 @@
   @media (max-width: 767px) {
     > div:first-child {
       border-bottom: 1px solid #eee;
-      padding-top: 2em;
+      padding-top: 0;
       margin-bottom: 1em;
     }
   }
@@ -26,7 +26,7 @@
     }
 
     a {
-      flex: 1 0 9em;
+      flex: 1 0 12em;
     }
   }
 }
@@ -50,11 +50,15 @@
   color: $text-color-active;
   display: flex;
   align-items: center;
-  margin-right: 0.5em;
+  margin-right: 1em;
+
+  @media (max-width: 767px) {
+    justify-content: center;
+  }
 
   svg {
     display: block;
-    margin-right: 0.5em;
+    margin-right: 1em;
     flex: 0 0 auto;
   }
 }
