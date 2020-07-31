@@ -1,6 +1,8 @@
 import React from 'react';
 import Masonry from 'react-masonry-css';
 
+import { FormattedMessage } from 'react-intl';
+
 import GraphContainer from 'components/graphContainer';
 import GraphContent from 'components/graphContent';
 import TitleBlock from 'components/titleBlock';
@@ -111,8 +113,13 @@ const Home: FunctionComponentWithLayout = () => {
               icon={'images/nederland.png'}
               iconAlt="Kaart van Nederland"
             >
-              <h3>{siteText.regio_link_block.title.translation}</h3>
-              <p>{siteText.regio_link_block.text.translation}</p>
+              <h3>
+                <FormattedMessage id="regio_link_block.title" />
+              </h3>
+
+              <p>
+                <FormattedMessage id="regio_link_block.text" />
+              </p>
             </LinkCard>
           </Masonry>
         </section>
@@ -120,7 +127,7 @@ const Home: FunctionComponentWithLayout = () => {
         <section className="home-section">
           <TitleBlock Icon={MedischeScreening} title="Andere gegevens">
             <p>
-              Cijfers die iets kunnen zeggen over de verspreiding van het virus.
+              <FormattedMessage defaultMessage="Cijfers die iets kunnen zeggen over de verspreiding van het virus." />
             </p>
           </TitleBlock>
 
@@ -135,12 +142,13 @@ const Home: FunctionComponentWithLayout = () => {
 
             <GraphContainer>
               <GraphContent>
-                <GraphHeader
-                  title={siteText.overige_gegevens.title.translation}
-                />
-                <p>{siteText.overige_gegevens.text.translation}</p>
+                <GraphHeader title={siteText['overige_gegevens.title']} />
 
-                <IconList list={siteText.overige_gegevens.list} />
+                <p>
+                  <FormattedMessage id="overige_gegevens.text" />
+                </p>
+
+                <IconList list={siteText['overige_gegevens.list']} />
               </GraphContent>
             </GraphContainer>
           </Masonry>
@@ -149,9 +157,11 @@ const Home: FunctionComponentWithLayout = () => {
         <section className="home-section">
           <TitleBlock
             Icon={VerpleegHuisZorg}
-            title={siteText.blok_verpleeghuis_zorg.title.translation}
+            title={siteText['blok_verpleeghuis_zorg.title']}
           >
-            <p>{siteText.blok_verpleeghuis_zorg.text.translation}</p>
+            <p>
+              <FormattedMessage id="blok_verpleeghuis_zorg.text" />
+            </p>
           </TitleBlock>
 
           <Masonry

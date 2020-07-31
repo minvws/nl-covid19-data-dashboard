@@ -3,6 +3,8 @@ import { useContext, useMemo, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 
+import { FormattedMessage, useIntl } from 'react-intl';
+
 import Layout from 'components/layout';
 import MaxWidth from 'components/maxWidth';
 import GraphContainer from 'components/graphContainer';
@@ -99,7 +101,7 @@ const RegioDataLoading = () => {
   return (
     <span className={styles['safety-region-data-loading']}>
       <Warning />
-      {siteText.geen_selectie.text.translation}
+      <FormattedMessage id="geen_selectie.text" />
     </span>
   );
 };
@@ -174,6 +176,8 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
     fetchData();
   }, [dispatch, selectedRegio, state]);
 
+  const intl = useIntl();
+
   return (
     <>
       <Head>
@@ -202,11 +206,13 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
 
             <div className={styles['map-container']}>
               <div className={styles['safety-region-header']}>
-                <p>Uw veiligheidsregio</p>
+                <p>
+                  <FormattedMessage defaultMessage="Uw veiligheidsregio" />
+                </p>
                 {selectedRegio && <h2>{selectedRegio.name}</h2>}
                 {!selectedRegio && (
                   <span className={styles['select-safety-region']}>
-                    Selecteer een veiligheidsregio of gemeente
+                    <FormattedMessage defaultMessage="Selecteer een veiligheidsregio of gemeente" />
                   </span>
                 )}
               </div>
@@ -219,19 +225,15 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
               <GraphContent>
                 <GraphHeader
                   Icon={Ziekenhuis}
-                  title={
-                    siteText.regionaal_ziekenhuisopnames_per_dag.title
-                      .translation
-                  }
+                  title={intl.formatMessage({
+                    id: 'regionaal_ziekenhuisopnames_per_dag.title',
+                  })}
                   headingRef={contentRef}
                   regio={selectedRegio?.name}
                 />
 
                 <p>
-                  {
-                    siteText.regionaal_ziekenhuisopnames_per_dag.text
-                      .translation
-                  }
+                  <FormattedMessage id="regionaal_ziekenhuisopnames_per_dag.text" />
                 </p>
 
                 {!selectedRegio && <RegioDataLoading />}
@@ -253,7 +255,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                           }
                           screenReaderText={
                             siteText.regionaal_ziekenhuisopnames_per_dag
-                              .screen_reader_graph_content.translation
+                              .screen_reader_graph_content
                           }
                           id="regio_opnames"
                           gradient={[
@@ -272,10 +274,9 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                           ]}
                         />
                         <DateReported
-                          datumsText={
-                            siteText.regionaal_ziekenhuisopnames_per_dag.datums
-                              .translation
-                          }
+                          datumsText={intl.formatMessage({
+                            id: 'regionaal_ziekenhuisopnames_per_dag.datums',
+                          })}
                           dateUnix={
                             state[selectedRegio?.code]?.intake_hospital_ma
                               ?.last_value?.date_of_report_unix
@@ -289,34 +290,21 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
 
               {selectedRegio && (
                 <Collapse
-                  openText={
-                    siteText.regionaal_ziekenhuisopnames_per_dag.open
-                      .translation
-                  }
-                  sluitText={
-                    siteText.regionaal_ziekenhuisopnames_per_dag.sluit
-                      .translation
-                  }
+                  openText={intl.formatMessage({
+                    id: 'regionaal_ziekenhuisopnames_per_dag.open',
+                  })}
+                  sluitText={intl.formatMessage({
+                    id: 'regionaal_ziekenhuisopnames_per_dag.sluit',
+                  })}
                   piwikAction={selectedRegio.name}
                   piwikName="Ziekenhuisopnames per dag in Amsterdam-Amstelland"
                 >
                   <h4>
-                    {
-                      siteText.regionaal_ziekenhuisopnames_per_dag.fold_title
-                        .translation
-                    }
+                    {siteText.regionaal_ziekenhuisopnames_per_dag.fold_title}
                   </h4>
-                  <p>
-                    {
-                      siteText.regionaal_ziekenhuisopnames_per_dag.fold
-                        .translation
-                    }
-                  </p>
+                  <p>{siteText.regionaal_ziekenhuisopnames_per_dag.fold}</p>
                   <h4>
-                    {
-                      siteText.regionaal_ziekenhuisopnames_per_dag.graph_title
-                        .translation
-                    }
+                    {siteText.regionaal_ziekenhuisopnames_per_dag.graph_title}
                   </h4>
                   {state[selectedRegio?.code]?.intake_hospital_ma?.values && (
                     <LineChart
@@ -341,18 +329,14 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
               <GraphContent>
                 <GraphHeader
                   Icon={Getest}
-                  title={
-                    siteText.regionaal_positief_geteste_personen.title
-                      .translation
-                  }
+                  title={intl.formatMessage({
+                    id: 'regionaal_positief_geteste_personen.title',
+                  })}
                   regio={selectedRegio?.name}
                 />
 
                 <p>
-                  {
-                    siteText.regionaal_positief_geteste_personen.text
-                      .translation
-                  }
+                  <FormattedMessage id="regionaal_positief_geteste_personen.text" />
                 </p>
 
                 {!selectedRegio && <RegioDataLoading />}
@@ -373,10 +357,10 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                             .infected_people_delta_normalized.last_value
                             .infected_people_delta_normalized
                         }
-                        screenReaderText={
-                          siteText.regionaal_positief_geteste_personen
-                            .screen_reader_graph_content.translation
-                        }
+                        screenReaderText={intl.formatMessage({
+                          id:
+                            'regionaal_positief_geteste_personen.screen_reader_graph_content',
+                        })}
                         id="regio_infecties"
                         gradient={[
                           {
@@ -392,7 +376,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                         <h3>
                           {
                             siteText.regionaal_positief_geteste_personen
-                              .metric_title.translation
+                              .metric_title
                           }{' '}
                           <span style={{ color: '#01689b' }}>
                             {formatDecimal(
@@ -404,7 +388,6 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                         <DateReported
                           datumsText={
                             siteText.regionaal_positief_geteste_personen.datums
-                              .translation
                           }
                           dateUnix={
                             state[selectedRegio?.code]
@@ -420,34 +403,23 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
 
               {selectedRegio && (
                 <Collapse
-                  openText={
-                    siteText.regionaal_positief_geteste_personen.open
-                      .translation
-                  }
-                  sluitText={
-                    siteText.regionaal_positief_geteste_personen.sluit
-                      .translation
-                  }
+                  openText={intl.formatMessage({
+                    id: 'regionaal_positief_geteste_personen.open',
+                  })}
+                  sluitText={intl.formatMessage({
+                    id: 'regionaal_positief_geteste_personen.sluit',
+                  })}
                   piwikAction={selectedRegio.name}
                   piwikName="Positief geteste mensen in Amsterdam-Amstelland"
                 >
                   <h4>
-                    {
-                      siteText.regionaal_positief_geteste_personen.fold_title
-                        .translation
-                    }
+                    <FormattedMessage id="regionaal_positief_geteste_personen.fold_title" />
                   </h4>
                   <p>
-                    {
-                      siteText.regionaal_positief_geteste_personen.fold
-                        .translation
-                    }
+                    <FormattedMessage id="regionaal_positief_geteste_personen.fold" />
                   </p>
                   <h4>
-                    {
-                      siteText.regionaal_positief_geteste_personen.graph_title
-                        .translation
-                    }
+                    <FormattedMessage id="regionaal_positief_geteste_personen.graph_title" />
                   </h4>
 
                   {state[selectedRegio?.code]?.infected_people_delta_normalized
@@ -466,7 +438,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
 
                   <Metadata
                     dataSource={
-                      siteText.regionaal_positief_geteste_personen.bron
+                      siteText['regionaal_positief_geteste_personen.bron']
                     }
                   />
                 </Collapse>
@@ -476,7 +448,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
         </div>
         <ScreenReaderOnly>
           <button onClick={focusRegioSelect}>
-            {siteText.terug_naar_regio_selectie.text.translation}
+            <FormattedMessage id="terug_naar_regio_selectie.text" />
           </button>
         </ScreenReaderOnly>
       </MaxWidth>

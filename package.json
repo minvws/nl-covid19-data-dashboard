@@ -27,6 +27,7 @@
     "@babel/core": "^7.10.4",
     "@babel/preset-env": "^7.10.4",
     "@formatjs/cli": "^2.0.0",
+    "@formatjs/ts-transformer": "^2.5.1",
     "@next/bundle-analyzer": "^9.4.4",
     "@prefresh/next": "^0.3.1",
     "@svgr/webpack": "^5.4.0",
@@ -85,6 +86,7 @@
     "format": "prettier --write **/*.{js,ts,tsx}",
     "lint": "eslint .",
     "type-check": "tsc --pretty --noEmit",
-    "extract": "formatjs extract 'src/**/*.ts*' --out-file './src/extracted/en.json'"
+    "extract": "formatjs extract 'src/**/**.ts*' --out-file 'src/extracted/nl.json'",
+    "compile": "formatjs compile src/extracted/nl.json --ast --out-file src/compiled-lang/nl.json"
   }
 }

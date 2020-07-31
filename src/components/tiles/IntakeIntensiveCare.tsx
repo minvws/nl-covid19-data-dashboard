@@ -26,8 +26,8 @@ export const IntakeIntensiveCare: React.FC = () => {
   return (
     <GraphContainer>
       <GraphContent>
-        <GraphHeader Icon={Arts} title={text.title.translation} />
-        <p>{text.text.translation}</p>
+        <GraphHeader Icon={Arts} title={siteText['ic_opnames_per_dag.title']} />
+        <p>{siteText['ic_opnames_per_dag.text']}</p>
 
         {data && (
           <BarScale
@@ -47,8 +47,12 @@ export const IntakeIntensiveCare: React.FC = () => {
                 value: 20,
               },
             ]}
-            screenReaderText={text.screen_reader_graph_content.translation}
-            kritiekeWaarde={Number(text.signaalwaarde.translation)}
+            screenReaderText={
+              siteText['ic_opnames_per_dag.screen_reader_graph_content']
+            }
+            kritiekeWaarde={Number(
+              siteText['ic_opnames_per_dag.signaalwaarde']
+            )}
             value={data.last_value.moving_average_ic}
             id="ic"
           />
@@ -56,22 +60,22 @@ export const IntakeIntensiveCare: React.FC = () => {
 
         {data?.last_value?.moving_average_ic !== null && (
           <DateReported
-            datumsText={text.datums.translation}
+            datumsText={siteText['ic_opnames_per_dag.datums']}
             dateUnix={data?.last_value?.date_of_report_unix}
           />
         )}
       </GraphContent>
 
       <Collapse
-        openText={text.open.translation}
-        sluitText={text.sluit.translation}
+        openText={siteText['ic_opnames_per_dag.open']}
+        sluitText={siteText['ic_opnames_per_dag.sluit']}
         piwikAction="landelijk"
         piwikName="Intensive care-opnames per dag"
       >
-        <h4>{text.fold_title.translation}</h4>
-        <p>{text.fold.translation}</p>
+        <h4>{siteText['ic_opnames_per_dag.fold_title']}</h4>
+        <p>{siteText['ic_opnames_per_dag.fold']}</p>
 
-        <h4>{text.graph_title.translation}</h4>
+        <h4>{siteText['ic_opnames_per_dag.graph_title']}</h4>
 
         {data && (
           <>
@@ -80,10 +84,10 @@ export const IntakeIntensiveCare: React.FC = () => {
                 value: value.moving_average_ic,
                 date: value.date_of_report_unix,
               }))}
-              signaalwaarde={Number(text.signaalwaarde.translation)}
+              signaalwaarde={Number(text.signaalwaarde)}
             />
 
-            <Metadata dataSource={text.bron} />
+            <Metadata dataSource={siteText['ic_opnames_per_dag.bron']} />
           </>
         )}
       </Collapse>

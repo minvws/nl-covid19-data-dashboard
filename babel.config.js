@@ -3,23 +3,34 @@ module.exports = (api) => {
 
   const defaults = {
     presets: ['next/babel'],
+    plugins: [
+      [
+        'react-intl',
+        {
+          extractFromFormatMessageCall: true,
+          idInterpolationPattern: '[sha512:contenthash:base64:6]',
+        },
+      ],
+    ],
   };
 
   if (isTest) {
-    return {
+    const copy = {
       ...defaults,
-      plugins: [
-        // resolve imports correctly
-        [
-          'module-resolver',
-          {
-            root: ['./src/'],
-          },
-        ],
-        // allow importing of SVG's in test environment
-        'inline-react-svg',
-      ],
     };
+
+    // resolve imports correctly
+    copy.plugins.push([
+      'module-resolver',
+      {
+        root: ['./src/'],
+      },
+    ]);
+
+    // allow importing of SVG's in test environment
+    copy.plugins.push('inline-react-svg');
+
+    return copy;
   }
 
   return defaults;

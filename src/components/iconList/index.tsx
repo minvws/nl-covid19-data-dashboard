@@ -18,7 +18,7 @@ const IconList: React.FC<{ list: Item[] }> = (props) => {
       {list.map((item) =>
         item?.content ? (
           <CollapseIconListItem
-            key={`icon-list-item-${item.text.translation}`}
+            key={`icon-list-item-${item.text}`}
             item={item}
           />
         ) : (
@@ -36,12 +36,12 @@ const IconListItem: React.FC<{ item: Item }> = (props) => {
     <li className={styles.iconListItem}>
       <div className={styles.content}>
         <img
-          src={item.icon.translation}
+          src={item.icon}
           className={styles.iconListImage}
           alt=""
           loading="lazy"
         />{' '}
-        <h4>{item.text.translation}</h4>
+        <h4>{item.text}</h4>
       </div>
     </li>
   );
@@ -61,7 +61,7 @@ const CollapseIconListItem: React.FC<{ item: Item }> = (props) => {
     <li className={styles.iconListItem}>
       <div className={styles.content}>
         <img
-          src={item.icon.translation}
+          src={item.icon}
           className={styles.iconListImage}
           loading="lazy"
           alt=""
@@ -72,14 +72,14 @@ const CollapseIconListItem: React.FC<{ item: Item }> = (props) => {
             {...getToggleProps({ onClick: toggle })}
           >
             <span>
-              {item.text.translation}
+              {item.text}
               <Arrow className={styles.arrow} width={13} height={8} />
             </span>
           </button>
         </h4>
       </div>
       <div className={styles.hiddenContent} {...getCollapseProps()}>
-        <p>{item.content.translation}</p>
+        <p>{item.content}</p>
       </div>
     </li>
   );

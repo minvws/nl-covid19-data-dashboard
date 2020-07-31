@@ -15,10 +15,7 @@ const Metadata: React.FC<IProps> = (props) => {
     <div className={styles.metadataContainer}>
       {dataSource ? (
         <p>
-          Bron data:{' '}
-          <a href={dataSource.href.translation}>
-            {dataSource.text.translation}
-          </a>
+          Bron data: <a href={dataSource.href}>{dataSource.text}</a>
         </p>
       ) : null}
     </div>

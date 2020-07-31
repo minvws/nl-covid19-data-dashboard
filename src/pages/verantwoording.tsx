@@ -41,7 +41,7 @@ const Verantwoording: FunctionComponentWithLayout = () => {
       <div className={styles.container}>
         <MaxWidth>
           <div className={styles.maxwidth}>
-            <h2>{text.verantwoording.title.translation}</h2>
+            <h2>{text.verantwoording.title}</h2>
             <p>
               In dit dashboard staan verschillende cijfers die ons vertellen hoe
               het ervoor staat met beheersen van COVID-19. Op deze plek geven we
@@ -51,11 +51,9 @@ const Verantwoording: FunctionComponentWithLayout = () => {
             <dl className={styles.faqList}>
               {text.verantwoording.cijfers.map((item: ICijfer) => (
                 <>
-                  <dt>{item.cijfer.translation}</dt>
+                  <dt>{item.cijfer}</dt>
                   <dd>
-                    <ReplaceLinks>
-                      {item.verantwoording.translation}
-                    </ReplaceLinks>
+                    <ReplaceLinks>{item.verantwoording}</ReplaceLinks>
                   </dd>
                 </>
               ))}

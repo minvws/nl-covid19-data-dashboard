@@ -1,5 +1,7 @@
 import { useContext } from 'react';
 
+import { FormattedMessage, useIntl } from 'react-intl';
+
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
 import Metadata from 'components/metadata';
@@ -20,23 +22,38 @@ export const ReproductionIndex: React.FC = () => {
   const globalState = useContext(store);
   const { state } = globalState;
 
-  const text: typeof siteText.reproductiegetal = siteText.reproductiegetal;
   const lastKnownValidData: ReproductionIndexData | undefined =
     state?.NL?.reproduction_index_last_known_average;
 
   const data: ReproductionIndexData | undefined = state?.NL?.reproduction_index;
 
+  const intl = useIntl();
+
   return (
     <GraphContainer>
       <GraphContent>
-        <GraphHeader Icon={Repro} title={text.title.translation} />
-        <p>{text.text.translation}</p>
+        <GraphHeader
+          Icon={Repro}
+          title={intl.formatMessage({
+            id: 'reproductiegetal.title',
+          })}
+        />
+
+        <p>
+          <FormattedMessage id="reproductiegetal.text" />
+        </p>
         {data && (
           <BarScale
             min={0}
             max={2}
-            screenReaderText={text.screen_reader_graph_content.translation}
-            kritiekeWaarde={Number(text.signaalwaarde.translation)}
+            screenReaderText={intl.formatMessage({
+              id: 'reproductiegetal.screen_reader_graph_content',
+            })}
+            kritiekeWaarde={Number(
+              intl.formatMessage({
+                id: 'reproductiegetal.signaalwaarde',
+              })
+            )}
             value={lastKnownValidData?.last_value?.reproduction_index_avg}
             id="repro"
             gradient={[
@@ -61,7 +78,9 @@ export const ReproductionIndex: React.FC = () => {
         )}
 
         <DateReported
-          datumsText={text.datums.translation}
+          datumsText={intl.formatMessage({
+            id: 'reproductiegetal.datums',
+          })}
           dateUnix={lastKnownValidData?.last_value?.date_of_report_unix}
           dateInsertedUnix={
             lastKnownValidData?.last_value?.date_of_insertion_unix
@@ -69,13 +88,21 @@ export const ReproductionIndex: React.FC = () => {
         />
       </GraphContent>
       <Collapse
-        openText={text.open.translation}
-        sluitText={text.sluit.translation}
+        openText={intl.formatMessage({
+          id: 'reproductiegetal.open',
+        })}
+        sluitText={intl.formatMessage({
+          id: 'reproductiegetal.sluit',
+        })}
         piwikName="Reproductiegetal"
         piwikAction="landelijk"
       >
-        <h4>{text.fold_title.translation}</h4>
-        <p>{text.fold.translation}</p>
+        <h4>
+          <FormattedMessage id="reproductiegetal.fold_title" />
+        </h4>
+        <p>
+          <FormattedMessage id="reproductiegetal.fold" />
+        </p>
 
         <img
           width={315}
@@ -85,7 +112,9 @@ export const ReproductionIndex: React.FC = () => {
           alt="Ondersteunende afbeelding bij bovenstaande uitleg"
         />
 
-        <h4>{text.graph_title.translation}</h4>
+        <h4>
+          <FormattedMessage id="reproductiegetal.graph_title" />
+        </h4>
         {data?.values && (
           <AreaChart
             data={data.values.map((value) => ({
@@ -97,17 +126,25 @@ export const ReproductionIndex: React.FC = () => {
             minY={0}
             maxY={4}
             signaalwaarde={1}
-            rangeLegendLabel={text.rangeLegendLabel.translation}
-            lineLegendLabel={text.lineLegendLabel.translation}
+            rangeLegendLabel={intl.formatMessage({
+              id: 'reproductiegetal.rangeLegendLabel',
+            })}
+            lineLegendLabel={intl.formatMessage({
+              id: 'reproductiegetal.lineLegendLabel',
+            })}
           />
         )}
 
         <Legenda>
-          <li className="blue">{text.legenda_r.translation}</li>
-          <li className="gray square">{text.legenda_marge.translation}</li>
+          <li className="blue">
+            <FormattedMessage id="reproductiegetal.legenda_r" />
+          </li>
+          <li className="gray square">
+            <FormattedMessage id="reproductiegetal.legenda_marge" />
+          </li>
         </Legenda>
 
-        <Metadata dataSource={text.bron} />
+        <Metadata dataSource={siteText['reproductiegetal.bron']} />
       </Collapse>
     </GraphContainer>
   );
