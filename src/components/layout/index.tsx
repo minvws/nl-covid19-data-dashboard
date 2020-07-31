@@ -36,7 +36,7 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = (props) => {
   // remove focus after navigation
   const blur = (evt: any) => evt.target.blur();
 
-  const showSmallLogo = useMediaQuery('(max-width: 480px)');
+  const showSmallLogo = useMediaQuery('(max-width: 480px)', true);
 
   return (
     <>
@@ -63,6 +63,9 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = (props) => {
                 : '/images/logo-ro.svg'
             }
             alt="Rijksoverheid"
+            loading="lazy"
+            width={showSmallLogo ? 40 : 314}
+            height={showSmallLogo ? 76 : 125}
           />
         </div>
 
@@ -169,6 +172,7 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = (props) => {
                     href={
                       'https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19'
                     }
+                    target="_blank"
                     rel="noopener noreferrer"
                     className={styles.footerLink}
                   >

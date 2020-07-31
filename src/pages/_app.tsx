@@ -23,6 +23,8 @@ import { useEffect } from 'react';
 import Router from 'next/router';
 import * as piwik from '../lib/piwik';
 
+import { SWRConfig } from 'swr';
+
 import { StateProvider } from 'store';
 
 interface IProps {
@@ -30,7 +32,7 @@ interface IProps {
   pageProps: any;
 }
 
-function flattenMessages(nestedMessages, prefix = '') {
+function flattenMessages(nestedMessages: any, prefix = '') {
   return Object.keys(nestedMessages).reduce((messages, key) => {
     const value = nestedMessages[key];
     const prefixedKey = prefix ? `${prefix}.${key}` : key;
@@ -44,6 +46,7 @@ function flattenMessages(nestedMessages, prefix = '') {
     return messages;
   }, {});
 }
+const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
 function MyApp(props: IProps): React.ReactElement {
   const { Component, pageProps } = props;
@@ -66,7 +69,13 @@ function MyApp(props: IProps): React.ReactElement {
       locale={process.env.NEXT_PUBLIC_LOCALE}
       defaultLocale="nl"
     >
-      <StateProvider>{getLayout(<Component {...pageProps} />)}</StateProvider>
+      <SWRConfig
+        value={{
+          fetcher,
+        }}
+      >
+        <StateProvider>{getLayout(<Component {...pageProps} />)}</StateProvider>
+      </SWRConfig>
     </IntlProvider>
   );
 }
