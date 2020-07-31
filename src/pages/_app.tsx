@@ -33,7 +33,7 @@ interface IProps {
 }
 
 function flattenMessages(nestedMessages: any, prefix = '') {
-  return Object.keys(nestedMessages).reduce((messages, key) => {
+  return Object.keys(nestedMessages).reduce((messages: any, key) => {
     const value = nestedMessages[key];
     const prefixedKey = prefix ? `${prefix}.${key}` : key;
 
@@ -64,11 +64,7 @@ function MyApp(props: IProps): React.ReactElement {
   const messages = flattenMessages(locale);
 
   return (
-    <IntlProvider
-      messages={messages}
-      locale={process.env.NEXT_PUBLIC_LOCALE}
-      defaultLocale="nl"
-    >
+    <IntlProvider messages={messages} locale={locale} defaultLocale="nl">
       <SWRConfig
         value={{
           fetcher,
