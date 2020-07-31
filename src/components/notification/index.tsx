@@ -14,25 +14,21 @@ const Notification: FC = () => {
       <div className={styles.textgroup}>
         <div className={styles.headergroup}>
           <Inform />
-          <p className={styles.header}>
-            We zien een toename in het aantal COVID-19 besmettingen
-          </p>
+          <p className={styles.header}>Toename in besmettingen COVID-19</p>
         </div>
         <p>
-          Het nieuwe coronavirus verspreidt zich weer meer in Nederland. Het
-          aantal mensen dat besmet is met het nieuwe coronavirus neemt toe. In
-          de teststraten stijgt het percentage positieve testen en het
-          reproductiegetal (Rt Real Time) ligt boven de 1.
+          Het aantal nieuwe personen dat positief getest is in Nederland neemt
+          verder toe. Het reproductiegetal ligt net als vorige week boven de 1.
         </p>
       </div>
       <a
         className={styles.link}
-        href="https://www.rivm.nl/nieuws/aantal-besmettingen-covid-19-neemt-verder-toe"
+        href="https://www.rivm.nl/coronavirus-covid-19/actueel"
         target="_blank"
         rel="noopener noreferrer"
       >
         <ExternalLink />
-        <span>Lees het gehele bericht van de RIVM</span>
+        <span>Bekijk de actuele informatie van het RIVM</span>
       </a>
     </aside>
   );
