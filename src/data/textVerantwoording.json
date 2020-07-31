@@ -8,6 +8,10 @@
     "title": "Cijferverantwoording",
     "cijfers": [
       {
+        "cijfer": "Update 31 juli over signaalwaarde aantal besmettelijke personen",
+        "verantwoording": "Oorspronkelijk is op het dashboard gecommuniceerd dat er een signaalwaarde zou komen voor het aantal besmettelijke personen. Op advies van de modelleurs van het RIVM wordt deze niet aan het dashboard toegevoegd. Dit omdat dit een inschatting is die niet puur op berekeningen berust maar ook op aannames, zoals over infectieuze periode."
+      },
+      {
         "cijfer": "Intensive care-bezetting",
         "verantwoording": "Deze gegevens worden dagelijks aangeleverd als open data door Stichting NICE. De brondata wordt dagelijks geüpdatet om 00:00 en hebben betrekking op de afgelopen 24 uur. De berekening van de ic-bezetting bestaat uit COVID-19-patiënten met een bewezen besmetting. Het dashboard laat het gemiddelde over de afgelopen 3 dagen zien. Bron: https://stichting-nice.nl/covid-19/public/new-intake/"
       },
