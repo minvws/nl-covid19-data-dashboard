@@ -529,7 +529,7 @@
       "notes": ""
     },
     "datums": {
-      "translation": "Waarde van {{dateOfReport}}. Verkegen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+      "translation": "Waarde van gisteren. Verkegen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "notes": ""
     },
     "metric_title": {
@@ -585,7 +585,7 @@
       "notes": ""
     },
     "datums": {
-      "translation": "Waarde van {{dateOfReport}}. Verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+      "translation": "Waarde van gisteren. Verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "notes": ""
     },
     "fold_title": {
@@ -637,7 +637,7 @@
       "notes": ""
     },
     "datums": {
-      "translation": "Waarde van {{dateOfReport}}. Verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+      "translation": "Waarde van gisteren. Verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "notes": ""
     },
     "screen_reader_graph_content": {
