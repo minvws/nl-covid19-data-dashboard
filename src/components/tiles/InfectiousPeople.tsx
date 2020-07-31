@@ -101,11 +101,11 @@ export const InfectiousPeople: React.FC = () => {
 
         <Legenda>
           <li className="blue">
-            Het geschatte aantal besmettelijke mensen op die dag
+            Het aantal besmettelijke mensen in Nederland.
           </li>
           <li className="gray square">
-            De onzekerheidsmarge toont met zekerheid tussen welke waarden het
-            aantal besmettelijke mensen op die dag zich bevindt
+            De onzekerheidsmarge toont tussen welke waarden het aantal
+            besmettelijke mensen zich bevindt.
           </li>
         </Legenda>
 
