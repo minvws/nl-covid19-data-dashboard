@@ -1,10 +1,9 @@
 import styles from './metadata.module.scss';
-import { Translation } from 'types/data';
 
 interface IProps {
   dataSource: {
-    href: Translation;
-    text: Translation;
+    href: string;
+    text: string;
   };
 }
 

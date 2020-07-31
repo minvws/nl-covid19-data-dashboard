@@ -4,9 +4,9 @@ import useCollapse from 'react-collapsed';
 import Arrow from 'assets/arrow.svg';
 
 interface Item {
-  content: Translation;
-  text: Translation;
-  icon: Translation;
+  content: string;
+  text: string;
+  icon: string;
 }
 
 const IconList: React.FC<{ list: Item[] }> = (props) => {

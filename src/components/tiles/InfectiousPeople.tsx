@@ -15,6 +15,7 @@ import formatDecimal from 'utils/formatDec';
 
 import { AreaChart } from './index';
 
+import siteText from 'locale';
 import { store } from 'store';
 
 import { InfectiousPeopleCount } from 'types/data';
@@ -133,7 +134,9 @@ export const InfectiousPeople: React.FC = () => {
           </li>
         </Legenda>
 
-        {count && <Metadata dataSource={text.bron} />}
+        {count && (
+          <Metadata dataSource={siteText['besmettelijke_personen.bron']} />
+        )}
       </Collapse>
     </GraphContainer>
   );
