@@ -3,7 +3,7 @@ import 'scss/style.scss';
 
 import { IntlProvider } from 'react-intl';
 
-import locale from 'locale';
+import locale, { targetLanguage } from 'locale';
 
 import 'components/collapse/collapse.scss';
 import 'components/legenda/legenda.scss';
@@ -64,7 +64,11 @@ function MyApp(props: IProps): React.ReactElement {
   const messages = flattenMessages(locale);
 
   return (
-    <IntlProvider messages={messages} locale={locale} defaultLocale="nl">
+    <IntlProvider
+      messages={messages}
+      locale={targetLanguage}
+      defaultLocale="nl"
+    >
       <SWRConfig
         value={{
           fetcher,
