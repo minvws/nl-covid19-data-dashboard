@@ -7,7 +7,7 @@ import Legenda from 'components/legenda';
 import GraphContainer from 'components/graphContainer';
 import GraphContent from 'components/graphContent';
 import GraphHeader from 'components/graphHeader';
-import DateReported from 'components/dateReported';
+import { DateReported } from 'components/dateReported';
 import Repro from 'assets/reproductiegetal.svg';
 import { AreaChart } from './index';
 

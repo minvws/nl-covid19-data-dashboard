@@ -13,7 +13,7 @@ import LastUpdated from 'components/lastUpdated';
 import Warning from 'assets/warn.svg';
 import Metadata from 'components/metadata';
 import LoadingPlaceholder from 'components/loadingPlaceholder';
-import DateReported from 'components/dateReported';
+import { DateReported } from 'components/dateReported';
 
 import { store } from 'store';
 import GraphContent from 'components/graphContent';

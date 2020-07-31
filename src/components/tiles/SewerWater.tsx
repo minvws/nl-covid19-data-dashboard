@@ -6,7 +6,7 @@ import Metadata from 'components/metadata';
 import GraphContainer from 'components/graphContainer';
 import GraphContent from 'components/graphContent';
 import GraphHeader from 'components/graphHeader';
-import DateReported from 'components/dateReported';
+import { DateReported } from 'components/dateReported';
 import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
 import { LineChart } from './index';
 
