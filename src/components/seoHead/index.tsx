@@ -71,12 +71,14 @@ function SEOHead(props: SEOHeadProps): any {
 
       <link
         rel="preload"
+        crossOrigin="anonymous"
         href="webfonts/RO-SansWebText-Regular.woff2"
         as="font"
         type="font/woff2"
       />
       <link
         rel="preload"
+        crossOrigin="anonymous"
         href="webfonts/RO-SansWebText-Regular.woff"
         as="font"
         type="font/woff"
@@ -84,12 +86,14 @@ function SEOHead(props: SEOHeadProps): any {
 
       <link
         rel="preload"
+        crossOrigin="anonymous"
         href="webfonts/RO-SansWebText-Italic.woff2"
         as="font"
         type="font/woff2"
       />
       <link
         rel="preload"
+        crossOrigin="anonymous"
         href="webfonts/RO-SansWebText-Italic.woff"
         as="font"
         type="font/woff"
@@ -97,12 +101,14 @@ function SEOHead(props: SEOHeadProps): any {
 
       <link
         rel="preload"
+        crossOrigin="anonymous"
         href="webfonts/RO-SansWebText-Bold.woff2"
         as="font"
         type="font/woff2"
       />
       <link
         rel="preload"
+        crossOrigin="anonymous"
         href="webfonts/RO-SansWebText-Bold.woff"
         as="font"
         type="font/woff"
