@@ -172,6 +172,7 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = (props) => {
                     href={
                       'https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19'
                     }
+                    target="_blank"
                     rel="noopener noreferrer"
                     className={styles.footerLink}
                   >
