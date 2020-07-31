@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Masonry from 'react-masonry-css';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 
 import GraphContainer from 'components/graphContainer';
 import GraphContent from 'components/graphContent';
@@ -262,8 +263,11 @@ const Home: FunctionComponentWithLayout<HomeLayoutProps> = () => {
               )}
 
               <p className={'regioDataLoading'}>
-                Signaalwaarde volgt in{' '}
-                <time dateTime={'2020-07'}>juli 2020</time>.
+                Voor het aantal besmettelijke mensen is geen signaalwaarde
+                beschikbaar.{' '}
+                <Link href="/verantwoording">
+                  <a>Lees hier waarom.</a>
+                </Link>
               </p>
 
               {state.NL?.infectious_people_count?.value && (

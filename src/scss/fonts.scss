@@ -73,8 +73,12 @@ p {
   margin: $default-margin 0;
 }
 
+a {
+  color: $text-color-active;
+}
+
 a:focus {
-  outline: 2px dotted #01689b;
+  outline: 2px dotted $text-color-active;
   outline-offset: 0;
 }
 
