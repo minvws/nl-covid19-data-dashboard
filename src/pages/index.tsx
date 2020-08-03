@@ -6,6 +6,9 @@ import GraphContent from 'components/graphContent';
 import TitleBlock from 'components/titleBlock';
 import Layout from 'components/layout';
 import LinkCard from 'components/linkCard';
+
+import LastUpdated from 'components/lastUpdated';
+
 import { IntakeIntensiveCare } from 'components/tiles/IntakeIntensiveCare';
 import { NursingHomeInfectedDeaths } from 'components/tiles/NursingHomeInfectedDeaths';
 import { NursingHomeInfectedLocations } from 'components/tiles/NursingHomeInfectedLocations';
@@ -86,6 +89,10 @@ const Home: FunctionComponentWithLayout = () => {
       </Head>
 
       <MaxWidth>
+        {state?.NL && (
+          <LastUpdated lastUpdated={state.NL?.last_generated * 1000} />
+        )}
+
         <Notification />
       </MaxWidth>
 
