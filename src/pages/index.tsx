@@ -8,6 +8,7 @@ import Layout from 'components/layout';
 import LinkCard from 'components/linkCard';
 
 import LastUpdated from 'components/lastUpdated';
+import lastUpdatedStyles from 'components/lastUpdated/lastUpdated.module.scss';
 
 import { IntakeIntensiveCare } from 'components/tiles/IntakeIntensiveCare';
 import { NursingHomeInfectedDeaths } from 'components/tiles/NursingHomeInfectedDeaths';
@@ -89,8 +90,12 @@ const Home: FunctionComponentWithLayout = () => {
       </Head>
 
       <MaxWidth>
-        {state?.NL && (
+        {state?.NL?.last_generated ? (
           <LastUpdated lastUpdated={state.NL?.last_generated * 1000} />
+        ) : (
+          <p className={lastUpdatedStyles.text}>
+            Laatste informatie aan het ophalen
+          </p>
         )}
 
         <Notification />
