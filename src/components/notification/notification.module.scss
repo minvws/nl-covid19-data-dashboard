@@ -32,13 +32,13 @@
 
 .textgroup {
   @media (max-width: 767px) {
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #c4c4c4;
     padding-top: 0;
     margin-bottom: 1em;
   }
 
   @media (min-width: 768px) {
-    border-right: 1px solid #eee;
+    border-right: 1px solid #c4c4c4;
     padding-right: 2em;
     margin-right: 2em;
     flex: 1 1 auto;
