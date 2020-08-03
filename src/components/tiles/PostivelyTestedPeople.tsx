@@ -67,6 +67,7 @@ export const PostivelyTestedPeople: React.FC = () => {
           <DateReported
             datumsText={text.datums.translation}
             dateUnix={delta?.last_value?.date_of_report_unix}
+            dateInsertedUnix={delta?.last_value?.date_of_insertion_unix}
           />
         )}
       </GraphContent>

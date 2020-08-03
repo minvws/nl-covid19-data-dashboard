@@ -40,6 +40,7 @@ export interface InfectedPeopleDeltaNormalized {
 export interface InfectedPeopleDeltaNormalizedLastValue {
   date_of_report_unix: number;
   infected_daily_increase: number | null;
+  date_of_insertion_unix: number;
 }
 
 export interface InfectedPeopleTotal {
