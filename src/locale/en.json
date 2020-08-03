@@ -29,6 +29,7 @@
     "ic_opnames_per_dag": {
         "title": "",
         "text": "",
+        "datums": "",
         "fold_title": "",
         "fold": "",
         "graph_title": "",
@@ -39,12 +40,12 @@
         "bron": {
             "href": "",
             "text": ""
-        },
-        "datums": ""
+        }
     },
     "verdenkingen_huisartsen": {
         "title": "",
         "text": "",
+        "datums": "",
         "graph_title": "",
         "fold_title": "",
         "fold": "",
@@ -54,12 +55,12 @@
         "bron": {
             "href": "",
             "text": ""
-        },
-        "datums": ""
+        }
     },
     "ziekenhuisopnames_per_dag": {
         "title": "",
         "text": "",
+        "datums": "",
         "fold_title": "",
         "fold": "",
         "graph_title": "",
@@ -70,12 +71,12 @@
         "bron": {
             "href": "",
             "text": ""
-        },
-        "datums": ""
+        }
     },
     "positief_geteste_personen": {
         "title": "",
         "text": "",
+        "datums": "",
         "fold_title": "",
         "fold": "",
         "metric_title": "",
@@ -87,12 +88,12 @@
         "bron": {
             "href": "",
             "text": ""
-        },
-        "datums": ""
+        }
     },
     "besmettelijke_personen": {
         "title": "",
         "text": "",
+        "datums": "",
         "fold_title": "",
         "fold": "",
         "metric_title": "",
@@ -103,12 +104,12 @@
         "bron": {
             "href": "",
             "text": ""
-        },
-        "datums": ""
+        }
     },
     "reproductiegetal": {
         "title": "",
         "text": "",
+        "datums": "",
         "screen_reader_graph_content": "",
         "fold_title": "",
         "fold": "",
@@ -123,8 +124,7 @@
             "text": ""
         },
         "legenda_r": "",
-        "legenda_marge": "",
-        "datums": ""
+        "legenda_marge": ""
     },
     "overige_gegevens": {
         "title": "",
@@ -174,6 +174,7 @@
     "verpleeghuis_besmette_locaties": {
         "title": "",
         "text": "",
+        "datums": "",
         "metric_title": "",
         "metric_text": "",
         "fold_title": "",
@@ -185,12 +186,12 @@
         "bron": {
             "href": "",
             "text": ""
-        },
-        "datums": ""
+        }
     },
     "verpleeghuis_positief_geteste_personen": {
         "title": "",
         "text": "",
+        "datums": "",
         "fold_title": "",
         "fold": "",
         "graph_title": "",
@@ -201,12 +202,12 @@
         "bron": {
             "href": "",
             "text": ""
-        },
-        "datums": ""
+        }
     },
     "verpleeghuis_oversterfte": {
         "title": "",
         "text": "",
+        "datums": "",
         "screen_reader_graph_content": "",
         "fold_title": "",
         "fold": "",
@@ -216,8 +217,7 @@
         "bron": {
             "href": "",
             "text": ""
-        },
-        "datums": ""
+        }
     },
     "blok_verpleeghuis_zorg": {
         "title": "",
@@ -229,6 +229,7 @@
     "rioolwater_metingen": {
         "title": "",
         "text": "",
+        "datums": "",
         "graph_title": "",
         "fold_title": "",
         "fold": "",
@@ -238,8 +239,7 @@
         "bron": {
             "text": "",
             "href": ""
-        },
-        "datums": ""
+        }
     },
     "notfound_titel": {
         "text": ""
@@ -321,6 +321,7 @@
     "regionaal_ziekenhuisopnames_per_dag": {
         "title": "",
         "text": "",
+        "datums": "",
         "fold_title": "",
         "fold": "",
         "graph_title": "",
@@ -330,12 +331,12 @@
         "bron": {
             "href": "",
             "text": ""
-        },
-        "datums": ""
+        }
     },
     "regionaal_positief_geteste_personen": {
         "title": "",
         "text": "",
+        "datums": "",
         "metric_title": "",
         "fold_title": "",
         "fold": "",
@@ -346,11 +347,10 @@
         "bron": {
             "href": "",
             "text": ""
-        },
-        "datums": ""
+        }
     },
     "terug_naar_regio_selectie": {
-        "text": ""
+        "text": "Back to region selection"
     },
     "verantwoording": {
         "title": "",
@@ -404,13 +404,12 @@
                 "verantwoording": ""
             },
             {
-                "cijfer": "",
+                "cijfer": "Open source data processing",
                 "verantwoording": ""
             }
         ]
     },
     "error_metadata": {
-        "titel": "",
         "title": ""
     },
     "nationaal_metadata": {
@@ -419,7 +418,6 @@
         "url": ""
     },
     "notfound_metadata": {
-        "titel": "",
         "title": ""
     },
     "over_metadata": {
@@ -442,205 +440,5 @@
         "titel": "",
         "title": "",
         "url": ""
-    },
-    "error_titel.text": "",
-    "error_beschrijving.text": "",
-    "error_probeer_opnieuw.text": "",
-    "skiplinks.inhoud": "",
-    "skiplinks.nav": "",
-    "header.title": "",
-    "header.text": "",
-    "header.link": "",
-    "nav.links.index": "",
-    "nav.links.regio": "",
-    "nav.links.over": "",
-    "nav.links.meer": "",
-    "nav.links.verantwoording": "",
-    "ic_opnames_per_dag.title": "",
-    "ic_opnames_per_dag.text": "",
-    "ic_opnames_per_dag.fold_title": "",
-    "ic_opnames_per_dag.fold": "",
-    "ic_opnames_per_dag.graph_title": "",
-    "ic_opnames_per_dag.open": "",
-    "ic_opnames_per_dag.sluit": "",
-    "ic_opnames_per_dag.signaalwaarde": "",
-    "ic_opnames_per_dag.screen_reader_graph_content": "",
-    "ic_opnames_per_dag.bron.href": "",
-    "ic_opnames_per_dag.bron.text": "",
-    "ic_opnames_per_dag.datums": "",
-    "verdenkingen_huisartsen.title": "",
-    "verdenkingen_huisartsen.text": "",
-    "verdenkingen_huisartsen.graph_title": "",
-    "verdenkingen_huisartsen.fold_title": "",
-    "verdenkingen_huisartsen.fold": "",
-    "verdenkingen_huisartsen.open": "",
-    "verdenkingen_huisartsen.sluit": "",
-    "verdenkingen_huisartsen.screen_reader_graph_content": "",
-    "verdenkingen_huisartsen.bron.href": "",
-    "verdenkingen_huisartsen.bron.text": "",
-    "verdenkingen_huisartsen.datums": "",
-    "ziekenhuisopnames_per_dag.title": "",
-    "ziekenhuisopnames_per_dag.text": "",
-    "ziekenhuisopnames_per_dag.fold_title": "",
-    "ziekenhuisopnames_per_dag.fold": "",
-    "ziekenhuisopnames_per_dag.graph_title": "",
-    "ziekenhuisopnames_per_dag.open": "",
-    "ziekenhuisopnames_per_dag.sluit": "",
-    "ziekenhuisopnames_per_dag.signaalwaarde": "",
-    "ziekenhuisopnames_per_dag.screen_reader_graph_content": "",
-    "ziekenhuisopnames_per_dag.bron.href": "",
-    "ziekenhuisopnames_per_dag.bron.text": "",
-    "ziekenhuisopnames_per_dag.datums": "",
-    "positief_geteste_personen.title": "",
-    "positief_geteste_personen.text": "",
-    "positief_geteste_personen.fold_title": "",
-    "positief_geteste_personen.fold": "",
-    "positief_geteste_personen.metric_title": "",
-    "positief_geteste_personen.linechart_title": "",
-    "positief_geteste_personen.graph_title": "",
-    "positief_geteste_personen.open": "",
-    "positief_geteste_personen.sluit": "",
-    "positief_geteste_personen.screen_reader_graph_content": "",
-    "positief_geteste_personen.bron.href": "",
-    "positief_geteste_personen.bron.text": "",
-    "positief_geteste_personen.datums": "",
-    "besmettelijke_personen.title": "",
-    "besmettelijke_personen.text": "",
-    "besmettelijke_personen.fold_title": "",
-    "besmettelijke_personen.fold": "",
-    "besmettelijke_personen.metric_title": "",
-    "besmettelijke_personen.graph_title": "",
-    "besmettelijke_personen.open": "",
-    "besmettelijke_personen.sluit": "",
-    "besmettelijke_personen.screen_reader_graph_content": "",
-    "besmettelijke_personen.bron.href": "",
-    "besmettelijke_personen.bron.text": "",
-    "besmettelijke_personen.datums": "",
-    "reproductiegetal.title": "",
-    "reproductiegetal.text": "",
-    "reproductiegetal.screen_reader_graph_content": "",
-    "reproductiegetal.fold_title": "",
-    "reproductiegetal.fold": "",
-    "reproductiegetal.graph_title": "",
-    "reproductiegetal.open": "",
-    "reproductiegetal.sluit": "",
-    "reproductiegetal.rangeLegendLabel": "",
-    "reproductiegetal.lineLegendLabel": "",
-    "reproductiegetal.signaalwaarde": "",
-    "reproductiegetal.bron.href": "",
-    "reproductiegetal.bron.text": "",
-    "reproductiegetal.legenda_r": "",
-    "reproductiegetal.legenda_marge": "",
-    "reproductiegetal.datums": "",
-    "overige_gegevens.title": "",
-    "overige_gegevens.text": "",
-    "overige_gegevens.fold_title": "",
-    "overige_gegevens.fold": "",
-    "overige_gegevens.graph_title": "",
-    "overige_gegevens.open": "",
-    "overige_gegevens.sluit": "",
-    "regio_link_block.title": "",
-    "regio_link_block.text": "",
-    "verpleeghuis_besmette_locaties.title": "",
-    "verpleeghuis_besmette_locaties.text": "",
-    "verpleeghuis_besmette_locaties.metric_title": "",
-    "verpleeghuis_besmette_locaties.metric_text": "",
-    "verpleeghuis_besmette_locaties.fold_title": "",
-    "verpleeghuis_besmette_locaties.fold": "",
-    "verpleeghuis_besmette_locaties.graph_title": "",
-    "verpleeghuis_besmette_locaties.open": "",
-    "verpleeghuis_besmette_locaties.sluit": "",
-    "verpleeghuis_besmette_locaties.screen_reader_graph_content": "",
-    "verpleeghuis_besmette_locaties.bron.href": "",
-    "verpleeghuis_besmette_locaties.bron.text": "",
-    "verpleeghuis_besmette_locaties.datums": "",
-    "verpleeghuis_positief_geteste_personen.title": "",
-    "verpleeghuis_positief_geteste_personen.text": "",
-    "verpleeghuis_positief_geteste_personen.fold_title": "",
-    "verpleeghuis_positief_geteste_personen.fold": "",
-    "verpleeghuis_positief_geteste_personen.graph_title": "",
-    "verpleeghuis_positief_geteste_personen.open": "",
-    "verpleeghuis_positief_geteste_personen.sluit": "",
-    "verpleeghuis_positief_geteste_personen.signaalwaarde": "",
-    "verpleeghuis_positief_geteste_personen.screen_reader_graph_content": "",
-    "verpleeghuis_positief_geteste_personen.bron.href": "",
-    "verpleeghuis_positief_geteste_personen.bron.text": "",
-    "verpleeghuis_positief_geteste_personen.datums": "",
-    "verpleeghuis_oversterfte.title": "",
-    "verpleeghuis_oversterfte.text": "",
-    "verpleeghuis_oversterfte.screen_reader_graph_content": "",
-    "verpleeghuis_oversterfte.fold_title": "",
-    "verpleeghuis_oversterfte.fold": "",
-    "verpleeghuis_oversterfte.graph_title": "",
-    "verpleeghuis_oversterfte.open": "",
-    "verpleeghuis_oversterfte.sluit": "",
-    "verpleeghuis_oversterfte.bron.href": "",
-    "verpleeghuis_oversterfte.bron.text": "",
-    "verpleeghuis_oversterfte.datums": "",
-    "blok_verpleeghuis_zorg.title": "",
-    "blok_verpleeghuis_zorg.text": "",
-    "geen_selectie.text": "",
-    "rioolwater_metingen.title": "",
-    "rioolwater_metingen.text": "",
-    "rioolwater_metingen.graph_title": "",
-    "rioolwater_metingen.fold_title": "",
-    "rioolwater_metingen.fold": "",
-    "rioolwater_metingen.open": "",
-    "rioolwater_metingen.sluit": "",
-    "rioolwater_metingen.screen_reader_graph_content": "",
-    "rioolwater_metingen.bron.text": "",
-    "rioolwater_metingen.bron.href": "",
-    "rioolwater_metingen.datums": "",
-    "notfound_titel.text": "",
-    "notfound_beschrijving.text": "",
-    "over_titel.text": "",
-    "over_disclaimer.title": "",
-    "over_disclaimer.text": "",
-    "over_beschrijving.text": "",
-    "over_veelgestelde_vragen.text": "",
-    "regionaal_ziekenhuisopnames_per_dag.title": "",
-    "regionaal_ziekenhuisopnames_per_dag.text": "",
-    "regionaal_ziekenhuisopnames_per_dag.fold_title": "",
-    "regionaal_ziekenhuisopnames_per_dag.fold": "",
-    "regionaal_ziekenhuisopnames_per_dag.graph_title": "",
-    "regionaal_ziekenhuisopnames_per_dag.open": "",
-    "regionaal_ziekenhuisopnames_per_dag.sluit": "",
-    "regionaal_ziekenhuisopnames_per_dag.screen_reader_graph_content": "",
-    "regionaal_ziekenhuisopnames_per_dag.bron.href": "",
-    "regionaal_ziekenhuisopnames_per_dag.bron.text": "",
-    "regionaal_ziekenhuisopnames_per_dag.datums": "",
-    "regionaal_positief_geteste_personen.title": "",
-    "regionaal_positief_geteste_personen.text": "",
-    "regionaal_positief_geteste_personen.metric_title": "",
-    "regionaal_positief_geteste_personen.fold_title": "",
-    "regionaal_positief_geteste_personen.fold": "",
-    "regionaal_positief_geteste_personen.graph_title": "",
-    "regionaal_positief_geteste_personen.open": "",
-    "regionaal_positief_geteste_personen.sluit": "",
-    "regionaal_positief_geteste_personen.screen_reader_graph_content": "",
-    "regionaal_positief_geteste_personen.bron.href": "",
-    "regionaal_positief_geteste_personen.bron.text": "",
-    "regionaal_positief_geteste_personen.datums": "",
-    "terug_naar_regio_selectie.text": "",
-    "verantwoording.title": "",
-    "error_metadata.titel": "",
-    "error_metadata.title": "",
-    "nationaal_metadata.title": "",
-    "nationaal_metadata.description": "",
-    "nationaal_metadata.url": "",
-    "notfound_metadata.titel": "",
-    "notfound_metadata.title": "",
-    "over_metadata.title": "",
-    "over_metadata.description": "",
-    "over_metadata.url": "",
-    "regionaal_metadata.title": "",
-    "regionaal_metadata.description": "",
-    "regionaal_metadata.url": "",
-    "verantwoording_metadata.title": "",
-    "verantwoording_metadata.description": "",
-    "verantwoording_metadata.url": "",
-    "metadata.description": "",
-    "metadata.titel": "",
-    "metadata.title": "",
-    "metadata.url": ""
+    }
 }
