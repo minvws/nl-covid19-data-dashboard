@@ -75,6 +75,9 @@ const LineChart: React.FC<LineChartProps> = ({ values, signaalwaarde }) => {
       title: {
         text: null,
       },
+      labels: {
+        format: '{value}',
+      },
       accessibility: {
         rangeDescription: 'Range: 2010 to 2017',
       },
