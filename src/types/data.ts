@@ -58,12 +58,25 @@ export interface InfectiousPeopleCount {
   last_value: InfectiousPeopleCountLastValue;
 }
 
+export interface InfectiousPeopleCountNormalized {
+  values: InfectiousPeopleCountLastValueNormalized[];
+  last_value: InfectiousPeopleCountLastValueNormalized;
+}
+
 export interface InfectiousPeopleCountLastValue {
+  date_of_insertion_unix: number;
   date_of_report_unix: number;
-  infectious_low: number | null;
   infectious_avg: number | null;
   infectious_high: number | null;
+  infectious_low: number | null;
+}
+
+export interface InfectiousPeopleCountLastValueNormalized {
   date_of_insertion_unix: number;
+  date_of_report_unix: number;
+  infectious_avg_normalized: number | null;
+  infectious_high_normalized: number | null;
+  infectious_low_normalized: number | null;
 }
 
 export interface IntakeHospitalMa {

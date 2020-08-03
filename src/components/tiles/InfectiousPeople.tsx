@@ -18,7 +18,10 @@ import { AreaChart } from './index';
 import siteText from 'locale';
 import { store } from 'store';
 
-import { InfectiousPeopleCount } from 'types/data';
+import {
+  InfectiousPeopleCount,
+  InfectiousPeopleCountNormalized,
+} from 'types/data';
 
 export const InfectiousPeople: React.FC = () => {
   const globalState = useContext(store);
@@ -28,7 +31,7 @@ export const InfectiousPeople: React.FC = () => {
     siteText.besmettelijke_personen;
   const count: InfectiousPeopleCount | undefined =
     state?.NL?.infectious_people_count;
-  const countNormalized: InfectiousPeopleCount | undefined =
+  const countNormalized: InfectiousPeopleCountNormalized | undefined =
     state?.NL?.infectious_people_count_normalized;
 
   return (
@@ -42,7 +45,7 @@ export const InfectiousPeople: React.FC = () => {
             min={0}
             max={80}
             screenReaderText={text.screen_reader_graph_content.translation}
-            value={countNormalized.last_value.infectious_avg}
+            value={countNormalized.last_value.infectious_avg_normalized}
             id="besmettelijk"
             gradient={[
               {
@@ -70,7 +73,7 @@ export const InfectiousPeople: React.FC = () => {
           </h3>
         )}
 
-        {countNormalized?.last_value?.infectious_avg !== null && (
+        {countNormalized?.last_value?.infectious_avg_normalized !== null && (
           <DateReported
             datumsText={text.datums.translation}
             dateUnix={count?.last_value?.date_of_report_unix}
