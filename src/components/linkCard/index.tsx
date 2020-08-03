@@ -15,7 +15,12 @@ const LinkCard: React.FC<IProps> = (props) => {
     <Link href={href} passHref>
       <a className={`linkCard ${styles.linkCardLink}`}>
         <div className={styles.linkCard}>
-          <img src={icon} className={styles.linkCardIcon} alt={iconAlt} />
+          <img
+            src={icon}
+            className={styles.linkCardIcon}
+            alt={iconAlt}
+            loading="lazy"
+          />
           <div className={styles.linkCardContent}>{children}</div>
           <Arrow className={styles.linkCardArrow} />
         </div>

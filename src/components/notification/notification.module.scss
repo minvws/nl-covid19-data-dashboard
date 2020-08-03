@@ -1,0 +1,86 @@
+@import 'scss/variables.scss';
+
+.aside {
+  background: white;
+  border-radius: $default-radius;
+  padding: 1em;
+  overflow: auto;
+  margin-top: 2em;
+
+  @media (min-width: 768px) {
+    display: flex;
+    align-items: flex-start;
+    padding: 2em 2em 1em 2em;
+    a {
+      flex: 1 0 12em;
+    }
+  }
+}
+
+.desktopInform {
+  flex: 0 0 auto;
+
+  svg {
+    display: block;
+    margin-right: 1em;
+  }
+
+  @media (max-width: 767px) {
+    display: none;
+  }
+}
+
+.textgroup {
+  @media (max-width: 767px) {
+    border-bottom: 1px solid #c4c4c4;
+    padding-top: 0;
+    margin-bottom: 1em;
+  }
+
+  @media (min-width: 768px) {
+    border-right: 1px solid #c4c4c4;
+    padding-right: 2em;
+    margin-right: 2em;
+    flex: 1 1 auto;
+  }
+}
+
+.headergroup {
+  display: flex;
+  align-items: center;
+  svg {
+    display: block;
+    margin-right: 1em;
+    flex: 0 0 auto;
+
+    @media (min-width: 768px) {
+      display: none;
+    }
+  }
+}
+
+.header {
+  font-size: 1.125em;
+  font-weight: bold;
+  margin: 0;
+}
+
+.link {
+  color: $text-color-active;
+  display: flex;
+  align-items: center;
+  margin-right: 1em;
+
+  @media (max-width: 767px) {
+    justify-content: center;
+  }
+
+  margin-top: auto;
+  margin-bottom: auto;
+
+  svg {
+    display: block;
+    margin-right: 1em;
+    flex: 0 0 auto;
+  }
+}

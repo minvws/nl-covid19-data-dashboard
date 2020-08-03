@@ -13,8 +13,10 @@ class MyDocument extends Document {
   }
 
   render(): React.ReactElement {
+    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+
     return (
-      <Html lang="nl-NL">
+      <Html lang={locale}>
         <Head />
         <body>
           <Main />

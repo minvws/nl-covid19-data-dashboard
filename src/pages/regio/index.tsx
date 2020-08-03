@@ -21,7 +21,7 @@ import GraphContent from 'components/graphContent';
 import Ziekenhuis from 'assets/ziekenhuis.svg';
 import Getest from 'assets/test.svg';
 
-import siteText from 'locale/nl.json';
+import siteText from 'locale';
 
 const LineChart = dynamic(() => import('components/lineChart'));
 const SvgMap = dynamic(() => import('components/mapChart/svgMap'));
@@ -367,7 +367,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                       ?.infected_people_delta_normalized && (
                       <BarScale
                         min={0}
-                        max={5}
+                        max={10}
                         value={
                           state[selectedRegio.code]
                             .infected_people_delta_normalized.last_value
@@ -410,6 +410,11 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                             state[selectedRegio?.code]
                               ?.infected_people_delta_normalized?.last_value
                               ?.date_of_report_unix
+                          }
+                          dateInsertedUnix={
+                            state[selectedRegio?.code]
+                              ?.infected_people_delta_normalized?.last_value
+                              ?.date_of_insertion_unix
                           }
                         />
                       </>

@@ -3,13 +3,10 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
 import useSWR from 'swr';
-import fetch from 'unfetch';
 
 if (typeof Highcharts === 'object') {
   require('highcharts/modules/map')(Highcharts);
 }
-
-const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
 interface IProps {
   selected: { id: string };
@@ -17,7 +14,7 @@ interface IProps {
 }
 
 const MapChart: React.FC<IProps> = ({ selected, setSelection }) => {
-  const { data } = useSWR('/json/veiligheidsregio.json', fetcher);
+  const { data } = useSWR('/json/veiligheidsregio.json');
 
   if (!data) {
     return null;

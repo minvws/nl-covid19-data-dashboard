@@ -69,8 +69,11 @@ h5 {
 }
 
 p {
-  max-width: 35em;
   margin: $default-margin 0;
+}
+
+a {
+  color: #01689b;
 }
 
 a:focus {

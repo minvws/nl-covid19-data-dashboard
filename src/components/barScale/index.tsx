@@ -3,7 +3,9 @@ import { useRef, FunctionComponent } from 'react';
 import formatNumber from 'utils/formatNumber';
 import ScreenReaderOnly from 'components/screenReaderOnly';
 import replaceVariablesInText from 'utils/replaceVariablesInText';
-import { scaleLinear, scaleQuantile, scaleThreshold } from 'd3-scale';
+import { scaleQuantile, scaleThreshold } from 'd3-scale';
+
+import useDynamicScale from 'utils/useDynamicScale';
 
 type GradientStop = {
   color: string;
@@ -32,11 +34,17 @@ const BarScale: FunctionComponent<BarscaleProps> = ({
   // Generate a random ID used for clipPath and linearGradient ID's.
   const rand = useRef(Math.random().toString(36).substring(2, 15));
 
+  const { scale: x } = useDynamicScale(min, max, value);
+
+  if (!x) {
+    return null;
+  }
+
   if (typeof value === 'undefined' || value === null) {
     return null;
   }
 
-  const x = scaleLinear().domain([min, max]).range([0, 100]);
+  const [xMin, xMax] = x.domain();
 
   const textAlign = scaleThreshold()
     .domain([20, 80])
@@ -143,16 +151,16 @@ const BarScale: FunctionComponent<BarscaleProps> = ({
           )}
 
           <g>
-            <text x={`${x(min)}%`} y={64} className={styles.tick}>
-              {min}
+            <text x={`${x(xMin)}%`} y={64} className={styles.tick}>
+              {xMin}
             </text>
             <text
-              x={`${x(max)}%`}
+              x={`${x(xMax)}%`}
               y={64}
               className={styles.tick}
               textAnchor="end"
             >
-              {max}
+              {xMax}
             </text>
           </g>
         </svg>

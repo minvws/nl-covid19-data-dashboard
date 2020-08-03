@@ -20,7 +20,7 @@ type AreaChartProps = {
     min: number | null;
     max: number | null;
   }>;
-  signaalwaarde: number;
+  signaalwaarde?: number;
 };
 
 const AreaChart: React.FC<AreaChartProps> = (props) => {
@@ -107,6 +107,9 @@ const AreaChart: React.FC<AreaChartProps> = (props) => {
         title: {
           text: null,
         },
+        labels: {
+          format: '{value}',
+        },
         plotLines: [],
         accessibility: {
           rangeDescription: 'Range: 2010 to 2017',
@@ -135,12 +138,12 @@ const AreaChart: React.FC<AreaChartProps> = (props) => {
           const x = this.x;
           return `
             ${formatDateLong(x)}<br/>
-            <strong>Bandbreedte</strong> ${formatNumber(
-              minRangePoint
-            )} - ${formatNumber(maxRangePoint)}<br/>
-            <strong>Effectieve R</strong> ${
-              linePoint ? formatNumber(linePoint[1] as number) : '–'
-            }
+            <strong>${rangeLegendLabel}</strong> ${formatNumber(
+            minRangePoint
+          )} - ${formatNumber(maxRangePoint)}<br/>
+            <strong>${lineLegendLabel}</strong> ${
+            linePoint ? formatNumber(linePoint[1] as number) : '–'
+          }
           `;
         },
       },

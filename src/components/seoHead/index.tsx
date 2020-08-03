@@ -69,13 +69,62 @@ function SEOHead(props: SEOHeadProps): any {
         title="Ministerie van Volksgezondheid, Welzijn en Sport"
       />
 
+      <link
+        rel="preload"
+        crossOrigin="anonymous"
+        href="webfonts/RO-SansWebText-Regular.woff2"
+        as="font"
+        type="font/woff2"
+      />
+      <link
+        rel="preload"
+        crossOrigin="anonymous"
+        href="webfonts/RO-SansWebText-Regular.woff"
+        as="font"
+        type="font/woff"
+      />
+
+      <link
+        rel="preload"
+        crossOrigin="anonymous"
+        href="webfonts/RO-SansWebText-Italic.woff2"
+        as="font"
+        type="font/woff2"
+      />
+      <link
+        rel="preload"
+        crossOrigin="anonymous"
+        href="webfonts/RO-SansWebText-Italic.woff"
+        as="font"
+        type="font/woff"
+      />
+
+      <link
+        rel="preload"
+        crossOrigin="anonymous"
+        href="webfonts/RO-SansWebText-Bold.woff2"
+        as="font"
+        type="font/woff2"
+      />
+      <link
+        rel="preload"
+        crossOrigin="anonymous"
+        href="webfonts/RO-SansWebText-Bold.woff"
+        as="font"
+        type="font/woff"
+      />
+
       <meta key="description" name="description" content={description} />
       <meta key="image" name="image" content={openGraphImage} />
 
       <meta key="ogLocale" name="og:locale" content="nl_NL" />
       <meta key="ogTitle" property="og:title" content={title} />
       <meta key="ogDesc" property="og:description" content={description} />
-      <meta key="ogImage" name="og:image" content={openGraphImage} />
+      <meta
+        key="ogImage"
+        name="og:image"
+        content={`https://coronadashboard.rijksoverheid.nl${openGraphImage}`}
+      />
       <meta key="ogUrl" name="og:url" content={url} />
       <meta key="ogType" property="og:type" content="website" />
 
