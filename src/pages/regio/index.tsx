@@ -367,7 +367,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                       ?.infected_people_delta_normalized && (
                       <BarScale
                         min={0}
-                        max={5}
+                        max={10}
                         value={
                           state[selectedRegio.code]
                             .infected_people_delta_normalized.last_value

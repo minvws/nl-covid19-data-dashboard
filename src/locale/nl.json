@@ -227,7 +227,7 @@
       "notes": ""
     },
     "datums": {
-      "translation": "Waarde van {{dateOfInsertion}}. Verkregen op {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
+      "translation": "Waarde van {{dateOfReport}}. Verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "notes": ""
     },
     "fold_title": {

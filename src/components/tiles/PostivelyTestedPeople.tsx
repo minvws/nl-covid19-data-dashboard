@@ -41,7 +41,7 @@ export const PostivelyTestedPeople: React.FC = () => {
         {delta && (
           <BarScale
             min={0}
-            max={5}
+            max={10}
             screenReaderText={text.screen_reader_graph_content.translation}
             value={delta.last_value.infected_daily_increase}
             id="positief"
