@@ -3,7 +3,12 @@ import { useContext, useMemo, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 
-import { FormattedMessage, FormattedDate, useIntl } from 'react-intl';
+import {
+  FormattedMessage,
+  FormattedDate,
+  FormattedNumber,
+  useIntl,
+} from 'react-intl';
 
 import Layout from 'components/layout';
 import MaxWidth from 'components/maxWidth';
@@ -404,10 +409,13 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                         <h3>
                           <FormattedMessage id="regionaal_positief_geteste_personen.metric_title" />{' '}
                           <span style={{ color: '#01689b' }}>
-                            {formatDecimal(
-                              state[selectedRegio?.code]?.infected_people_total
-                                ?.last_value.infected_people_total
-                            )}
+                            <FormattedNumber
+                              value={
+                                state[selectedRegio?.code]
+                                  ?.infected_people_total?.last_value
+                                  .infected_people_total
+                              }
+                            />
                           </span>
                         </h3>
 
