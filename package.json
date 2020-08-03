@@ -86,7 +86,7 @@
     "format": "prettier --write **/*.{js,ts,tsx}",
     "lint": "eslint .",
     "type-check": "tsc --pretty --noEmit",
-    "extract": "formatjs extract 'src/**/**.ts*' --out-file 'src/extracted/nl.json'",
+    "extract": "formatjs extract src/**/*.ts* --out-file src/extracted/nl.json",
     "compile": "formatjs compile src/extracted/nl.json --ast --out-file src/compiled-lang/nl.json"
   }
 }

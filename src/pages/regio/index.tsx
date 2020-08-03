@@ -376,10 +376,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                     {state[selectedRegio?.code]?.infected_people_total && (
                       <>
                         <h3>
-                          <FormattedMessage
-                            id="regionaal_positief_geteste_personen
-                              .metric_title"
-                          />{' '}
+                          <FormattedMessage id="regionaal_positief_geteste_personen.metric_title" />{' '}
                           <span style={{ color: '#01689b' }}>
                             {formatDecimal(
                               state[selectedRegio?.code]?.infected_people_total
