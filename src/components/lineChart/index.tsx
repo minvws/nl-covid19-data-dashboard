@@ -49,7 +49,10 @@ const LineChart: React.FC<LineChartProps> = ({ values, signaalwaarde }) => {
           // @ts-ignore
           if (this.isFirst || this.isLast) {
             // @ts-ignore
-            return intl.formatDate(this.value * 1000);
+            return intl.formatDate(this.value * 1000, {
+              day: 'numeric',
+              month: 'short',
+            });
           }
         },
       },
@@ -60,7 +63,10 @@ const LineChart: React.FC<LineChartProps> = ({ values, signaalwaarde }) => {
       borderRadius: 0,
       formatter: function (): string {
         // @ts-ignore
-        return `${intl.formatDate(this.x * 1000)}: ${intl.formatNumber(
+        return `${intl.formatDate(this.x * 1000, {
+          day: 'numeric',
+          month: 'long',
+        })}: ${intl.formatNumber(
           // @ts-ignore
           this.y
         )}`;

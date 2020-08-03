@@ -79,13 +79,16 @@ const AreaChart: React.FC<AreaChartProps> = (props) => {
           text: null,
         },
         labels: {
-          align: ['left', 'right'],
+          align: 'right',
           rotation: '0',
           formatter: function (): string | void {
             // @ts-ignore
             if (this.isFirst || this.isLast) {
               // @ts-ignore
-              return intl.formatDate(this.value);
+              return intl.formatDate(this.value, {
+                day: 'numeric',
+                month: 'short',
+              });
             }
           },
         },
@@ -132,7 +135,11 @@ const AreaChart: React.FC<AreaChartProps> = (props) => {
           const x = this.x;
           return `
 
-            ${intl.formatDate(x)}<br/>
+            ${intl.formatDate(x, {
+              day: 'numeric',
+              month: 'long',
+              year: 'numeric',
+            })}<br/>
             <strong>${rangeLegendLabel}</strong> ${intl.formatNumber(
             minRangePoint
           )} - ${intl.formatNumber(maxRangePoint)}<br/>

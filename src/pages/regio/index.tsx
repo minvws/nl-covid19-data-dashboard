@@ -298,6 +298,8 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                                         ?.intake_hospital_ma?.last_value
                                         ?.date_of_report_unix * 1000
                                     }
+                                    day="numeric"
+                                    month="long"
                                   />
                                 ),
                               }}
@@ -342,7 +344,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                   )}
                   <Metadata
                     dataSource={
-                      siteText.regionaal_ziekenhuisopnames_per_dag.bron
+                      siteText['regionaal_ziekenhuisopnames_per_dag.bron']
                     }
                   />
                 </Collapse>
@@ -431,6 +433,8 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                                         ?.infected_people_delta_normalized
                                         ?.last_value?.date_of_report_unix * 1000
                                     }
+                                    day="numeric"
+                                    month="long"
                                   />
                                 ),
                                 dateOfInsertion: (
@@ -441,6 +445,8 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                                         ?.last_value?.date_of_insertion_unix *
                                       1000
                                     }
+                                    day="numeric"
+                                    month="long"
                                   />
                                 ),
                               }}
