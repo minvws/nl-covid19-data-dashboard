@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage, FormattedDate, useIntl } from 'react-intl';
 
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
@@ -74,14 +74,26 @@ export const PositivelyTestedPeople: React.FC = () => {
           </h3>
         )}
 
-        {delta?.last_value?.infected_daily_increase !== null && (
-          <DateReported
-            datumsText={intl.formatMessage({
-              id: 'positief_geteste_personen.datums',
-            })}
-            dateUnix={delta?.last_value?.date_of_report_unix}
-            dateInsertedUnix={delta?.last_value?.date_of_insertion_unix}
-          />
+        {delta && delta?.last_value?.infected_daily_increase !== null && (
+          <DateReported>
+            <p>
+              <FormattedMessage
+                id="positief_geteste_personen.datums"
+                values={{
+                  dateOfReport: (
+                    <FormattedDate
+                      value={delta?.last_value?.date_of_report_unix * 1000}
+                    />
+                  ),
+                  dateOfInsertion: (
+                    <FormattedDate
+                      value={delta?.last_value?.date_of_insertion_unix * 1000}
+                    />
+                  ),
+                }}
+              />
+            </p>
+          </DateReported>
         )}
       </GraphContent>
       <Collapse

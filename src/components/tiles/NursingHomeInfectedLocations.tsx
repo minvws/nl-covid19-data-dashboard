@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage, FormattedDate, useIntl } from 'react-intl';
 
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
@@ -60,15 +60,30 @@ export const NursingHomeInfectedLocations: React.FC = () => {
             ]}
           />
         )}
-        {newLocations?.last_value?.total_new_reported_locations !== null && (
-          <DateReported
-            datumsText={intl.formatMessage({
-              id: 'verpleeghuis_besmette_locaties.datums',
-            })}
-            dateInsertedUnix={newLocations?.last_value?.date_of_insertion_unix}
-            dateUnix={newLocations?.last_value?.date_of_report_unix}
-          />
-        )}
+        {newLocations &&
+          newLocations?.last_value?.total_new_reported_locations !== null && (
+            <DateReported>
+              <p>
+                <FormattedMessage
+                  id="verpleeghuis_besmette_locaties.datums"
+                  values={{
+                    dateOfReport: (
+                      <FormattedDate
+                        value={
+                          newLocations?.last_value?.date_of_report_unix * 1000
+                        }
+                      />
+                    ),
+                    dateOfInsertion: (
+                      <FormattedDate
+                        value={newLocations?.last_value?.date_of_insertion_unix}
+                      />
+                    ),
+                  }}
+                />
+              </p>
+            </DateReported>
+          )}
       </GraphContent>
       <Collapse
         openText={intl.formatMessage({

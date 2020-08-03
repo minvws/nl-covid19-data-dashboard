@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage, FormattedDate, useIntl } from 'react-intl';
 
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
@@ -77,16 +77,35 @@ export const ReproductionIndex: React.FC = () => {
           />
         )}
 
-        <DateReported
-          datumsText={intl.formatMessage({
-            id: 'reproductiegetal.datums',
-          })}
-          dateUnix={lastKnownValidData?.last_value?.date_of_report_unix}
-          dateInsertedUnix={
-            lastKnownValidData?.last_value?.date_of_insertion_unix
-          }
-        />
+        {lastKnownValidData ? (
+          <DateReported>
+            <p>
+              <FormattedMessage
+                id="reproductiegetal.datums"
+                values={{
+                  dateOfReport: (
+                    <FormattedDate
+                      value={
+                        lastKnownValidData?.last_value?.date_of_report_unix *
+                        1000
+                      }
+                    />
+                  ),
+                  dateOfInsertion: (
+                    <FormattedDate
+                      value={
+                        lastKnownValidData?.last_value?.date_of_insertion_unix *
+                        1000
+                      }
+                    />
+                  ),
+                }}
+              />
+            </p>
+          </DateReported>
+        ) : null}
       </GraphContent>
+
       <Collapse
         openText={intl.formatMessage({
           id: 'reproductiegetal.open',

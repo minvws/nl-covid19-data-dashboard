@@ -3,7 +3,7 @@ import { useContext, useMemo, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage, FormattedDate, useIntl } from 'react-intl';
 
 import Layout from 'components/layout';
 import MaxWidth from 'components/maxWidth';
@@ -273,15 +273,25 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                             },
                           ]}
                         />
-                        <DateReported
-                          datumsText={intl.formatMessage({
-                            id: 'regionaal_ziekenhuisopnames_per_dag.datums',
-                          })}
-                          dateUnix={
-                            state[selectedRegio?.code]?.intake_hospital_ma
-                              ?.last_value?.date_of_report_unix
-                          }
-                        />
+
+                        <DateReported>
+                          <p>
+                            <FormattedMessage
+                              id="regionaal_ziekenhuisopnames_per_dag.datums"
+                              values={{
+                                dateOfReport: (
+                                  <FormattedDate
+                                    value={
+                                      state[selectedRegio?.code]
+                                        ?.intake_hospital_ma?.last_value
+                                        ?.date_of_report_unix * 1000
+                                    }
+                                  />
+                                ),
+                              }}
+                            />
+                          </p>
+                        </DateReported>
                       </>
                     )}
                   </>
@@ -384,21 +394,35 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                             )}
                           </span>
                         </h3>
-                        <DateReported
-                          datumsText={intl.formatMessage({
-                            id: 'regionaal_positief_geteste_personen.datums',
-                          })}
-                          dateUnix={
-                            state[selectedRegio?.code]
-                              ?.infected_people_delta_normalized?.last_value
-                              ?.date_of_report_unix
-                          }
-                          dateInsertedUnix={
-                            state[selectedRegio?.code]
-                              ?.infected_people_delta_normalized?.last_value
-                              ?.date_of_insertion_unix
-                          }
-                        />
+
+                        <DateReported>
+                          <p>
+                            <FormattedMessage
+                              id="regionaal_positief_geteste_personen.datums"
+                              values={{
+                                dateOfReport: (
+                                  <FormattedDate
+                                    value={
+                                      state[selectedRegio?.code]
+                                        ?.infected_people_delta_normalized
+                                        ?.last_value?.date_of_report_unix * 1000
+                                    }
+                                  />
+                                ),
+                                dateOfInsertion: (
+                                  <FormattedDate
+                                    value={
+                                      state[selectedRegio?.code]
+                                        ?.infected_people_delta_normalized
+                                        ?.last_value?.date_of_insertion_unix *
+                                      1000
+                                    }
+                                  />
+                                ),
+                              }}
+                            />
+                          </p>
+                        </DateReported>
                       </>
                     )}
                   </>
