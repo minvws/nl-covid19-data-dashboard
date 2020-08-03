@@ -1,1176 +1,444 @@
 {
     "error_titel": {
-        "text": {
-            "translation": "",
-            "notes": ""
-        }
+        "text": ""
     },
     "error_beschrijving": {
-        "text": {
-            "translation": "",
-            "notes": ""
-        }
+        "text": ""
     },
     "error_probeer_opnieuw": {
-        "text": {
-            "translation": "",
-            "notes": ""
-        }
+        "text": ""
     },
     "skiplinks": {
-        "inhoud": {
-            "translation": "",
-            "notes": ""
-        },
-        "nav": {
-            "translation": "",
-            "notes": ""
-        }
+        "inhoud": "",
+        "nav": ""
     },
     "header": {
-        "title": {
-            "translation": "",
-            "notes": ""
-        },
-        "text": {
-            "translation": "",
-            "notes": ""
-        },
-        "link": {
-            "translation": "",
-            "notes": ""
-        }
+        "title": "",
+        "text": "",
+        "link": ""
     },
     "nav": {
         "links": {
-            "index": {
-                "translation": "",
-                "notes": ""
-            },
-            "regio": {
-                "translation": "",
-                "notes": ""
-            },
-            "over": {
-                "translation": "",
-                "notes": ""
-            },
-            "meer": {
-                "translation": "",
-                "notes": ""
-            },
-            "verantwoording": {
-                "translation": "",
-                "notes": ""
-            }
+            "index": "",
+            "regio": "",
+            "over": "",
+            "meer": "",
+            "verantwoording": ""
         }
     },
     "ic_opnames_per_dag": {
-        "title": {
-            "translation": "",
-            "notes": ""
-        },
-        "text": {
-            "translation": "",
-            "notes": ""
-        },
-        "fold_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "fold": {
-            "translation": "",
-            "notes": ""
-        },
-        "graph_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "open": {
-            "translation": "",
-            "notes": ""
-        },
-        "sluit": {
-            "translation": "",
-            "notes": ""
-        },
-        "signaalwaarde": {
-            "translation": "",
-            "notes": ""
-        },
-        "screen_reader_graph_content": {
-            "translation": "",
-            "notes": ""
-        },
+        "title": "",
+        "text": "",
+        "datums": "",
+        "fold_title": "",
+        "fold": "",
+        "graph_title": "",
+        "open": "",
+        "sluit": "",
+        "signaalwaarde": "",
+        "screen_reader_graph_content": "",
         "bron": {
-            "href": {
-                "translation": "",
-                "notes": ""
-            },
-            "text": {
-                "translation": "",
-                "notes": ""
-            }
+            "href": "",
+            "text": ""
         }
     },
     "verdenkingen_huisartsen": {
-        "title": {
-            "translation": "",
-            "notes": ""
-        },
-        "text": {
-            "translation": "",
-            "notes": ""
-        },
-        "graph_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "fold_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "fold": {
-            "translation": "",
-            "notes": ""
-        },
-        "open": {
-            "translation": "",
-            "notes": ""
-        },
-        "sluit": {
-            "translation": "",
-            "notes": ""
-        },
-        "screen_reader_graph_content": {
-            "translation": "",
-            "notes": ""
-        },
+        "title": "",
+        "text": "",
+        "datums": "",
+        "graph_title": "",
+        "fold_title": "",
+        "fold": "",
+        "open": "",
+        "sluit": "",
+        "screen_reader_graph_content": "",
         "bron": {
-            "href": {
-                "translation": "",
-                "notes": ""
-            },
-            "text": {
-                "translation": "",
-                "notes": ""
-            }
+            "href": "",
+            "text": ""
         }
     },
     "ziekenhuisopnames_per_dag": {
-        "title": {
-            "translation": "",
-            "notes": ""
-        },
-        "text": {
-            "translation": "",
-            "notes": ""
-        },
-        "fold_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "fold": {
-            "translation": "",
-            "notes": ""
-        },
-        "graph_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "open": {
-            "translation": "",
-            "notes": ""
-        },
-        "sluit": {
-            "translation": "",
-            "notes": ""
-        },
-        "signaalwaarde": {
-            "translation": "",
-            "notes": ""
-        },
-        "screen_reader_graph_content": {
-            "translation": "",
-            "notes": ""
-        },
+        "title": "",
+        "text": "",
+        "datums": "",
+        "fold_title": "",
+        "fold": "",
+        "graph_title": "",
+        "open": "",
+        "sluit": "",
+        "signaalwaarde": "",
+        "screen_reader_graph_content": "",
         "bron": {
-            "href": {
-                "translation": "",
-                "notes": ""
-            },
-            "text": {
-                "translation": "",
-                "notes": ""
-            }
+            "href": "",
+            "text": ""
         }
     },
     "positief_geteste_personen": {
-        "title": {
-            "translation": "",
-            "notes": ""
-        },
-        "text": {
-            "translation": "",
-            "notes": ""
-        },
-        "fold_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "fold": {
-            "translation": "",
-            "notes": ""
-        },
-        "metric_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "linechart_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "graph_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "open": {
-            "translation": "",
-            "notes": ""
-        },
-        "sluit": {
-            "translation": "",
-            "notes": ""
-        },
-        "screen_reader_graph_content": {
-            "translation": "",
-            "notes": ""
-        },
+        "title": "",
+        "text": "",
+        "datums": "",
+        "fold_title": "",
+        "fold": "",
+        "metric_title": "",
+        "linechart_title": "",
+        "graph_title": "",
+        "open": "",
+        "sluit": "",
+        "screen_reader_graph_content": "",
         "bron": {
-            "href": {
-                "translation": "",
-                "notes": ""
-            },
-            "text": {
-                "translation": "",
-                "notes": ""
-            }
+            "href": "",
+            "text": ""
         }
     },
     "besmettelijke_personen": {
-        "title": {
-            "translation": "",
-            "notes": ""
-        },
-        "text": {
-            "translation": "",
-            "notes": ""
-        },
-        "fold_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "fold": {
-            "translation": "",
-            "notes": ""
-        },
-        "metric_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "graph_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "open": {
-            "translation": "",
-            "notes": ""
-        },
-        "sluit": {
-            "translation": "",
-            "notes": ""
-        },
-        "screen_reader_graph_content": {
-            "translation": "",
-            "notes": ""
-        },
+        "title": "",
+        "text": "",
+        "datums": "",
+        "fold_title": "",
+        "fold": "",
+        "metric_title": "",
+        "graph_title": "",
+        "open": "",
+        "sluit": "",
+        "screen_reader_graph_content": "",
         "bron": {
-            "href": {
-                "translation": "",
-                "notes": ""
-            },
-            "text": {
-                "translation": "",
-                "notes": ""
-            }
+            "href": "",
+            "text": ""
         }
     },
     "reproductiegetal": {
-        "title": {
-            "translation": "",
-            "notes": ""
-        },
-        "text": {
-            "translation": "",
-            "notes": ""
-        },
-        "screen_reader_graph_content": {
-            "translation": "",
-            "notes": ""
-        },
-        "fold_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "fold": {
-            "translation": "",
-            "notes": ""
-        },
-        "graph_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "open": {
-            "translation": "",
-            "notes": ""
-        },
-        "sluit": {
-            "translation": "",
-            "notes": ""
-        },
-        "rangeLegendLabel": {
-            "translation": "",
-            "notes": ""
-        },
-        "lineLegendLabel": {
-            "translation": "",
-            "notes": ""
-        },
-        "signaalwaarde": {
-            "translation": "",
-            "notes": ""
-        },
+        "title": "",
+        "text": "",
+        "datums": "",
+        "screen_reader_graph_content": "",
+        "fold_title": "",
+        "fold": "",
+        "graph_title": "",
+        "open": "",
+        "sluit": "",
+        "rangeLegendLabel": "",
+        "lineLegendLabel": "",
+        "signaalwaarde": "",
         "bron": {
-            "href": {
-                "translation": "",
-                "notes": ""
-            },
-            "text": {
-                "translation": "",
-                "notes": ""
-            }
+            "href": "",
+            "text": ""
         },
-        "legenda_r": {
-            "translation": "",
-            "notes": ""
-        },
-        "legenda_marge": {
-            "translation": "",
-            "notes": ""
-        }
+        "legenda_r": "",
+        "legenda_marge": ""
     },
     "overige_gegevens": {
-        "title": {
-            "translation": "",
-            "notes": ""
-        },
-        "text": {
-            "translation": "",
-            "notes": ""
-        },
-        "fold_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "fold": {
-            "translation": "",
-            "notes": ""
-        },
-        "graph_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "open": {
-            "translation": "",
-            "notes": ""
-        },
-        "sluit": {
-            "translation": "",
-            "notes": ""
-        },
+        "title": "",
+        "text": "",
+        "fold_title": "",
+        "fold": "",
+        "graph_title": "",
+        "open": "",
+        "sluit": "",
         "list": [
             {
-                "icon": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "text": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "content": {
-                    "translation": "",
-                    "notes": ""
-                }
+                "icon": "",
+                "text": "",
+                "content": ""
             },
             {
-                "icon": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "text": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "content": {
-                    "translation": "",
-                    "notes": ""
-                }
+                "icon": "",
+                "text": "",
+                "content": ""
             },
             {
-                "icon": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "text": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "content": {
-                    "translation": "",
-                    "notes": ""
-                }
+                "icon": "",
+                "text": "",
+                "content": ""
             },
             {
-                "icon": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "text": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "content": {
-                    "translation": "",
-                    "notes": ""
-                }
+                "icon": "",
+                "text": "",
+                "content": ""
             },
             {
-                "icon": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "text": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "content": {
-                    "translation": "",
-                    "notes": ""
-                }
+                "icon": "",
+                "text": "",
+                "content": ""
             },
             {
-                "icon": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "text": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "content": {
-                    "translation": "",
-                    "notes": ""
-                }
+                "icon": "",
+                "text": "",
+                "content": ""
             }
         ]
     },
     "regio_link_block": {
-        "title": {
-            "translation": "",
-            "notes": ""
-        },
-        "text": {
-            "translation": "",
-            "notes": ""
-        }
+        "title": "",
+        "text": ""
     },
     "verpleeghuis_besmette_locaties": {
-        "title": {
-            "translation": "",
-            "notes": ""
-        },
-        "text": {
-            "translation": "",
-            "notes": ""
-        },
-        "metric_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "metric_text": {
-            "translation": "",
-            "notes": ""
-        },
-        "fold_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "fold": {
-            "translation": "",
-            "notes": ""
-        },
-        "graph_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "open": {
-            "translation": "",
-            "notes": ""
-        },
-        "sluit": {
-            "translation": "",
-            "notes": ""
-        },
-        "screen_reader_graph_content": {
-            "translation": "",
-            "notes": ""
-        },
+        "title": "",
+        "text": "",
+        "datums": "",
+        "metric_title": "",
+        "metric_text": "",
+        "fold_title": "",
+        "fold": "",
+        "graph_title": "",
+        "open": "",
+        "sluit": "",
+        "screen_reader_graph_content": "",
         "bron": {
-            "href": {
-                "translation": "",
-                "notes": ""
-            },
-            "text": {
-                "translation": "",
-                "notes": ""
-            }
+            "href": "",
+            "text": ""
         }
     },
     "verpleeghuis_positief_geteste_personen": {
-        "title": {
-            "translation": "",
-            "notes": ""
-        },
-        "text": {
-            "translation": "",
-            "notes": ""
-        },
-        "fold_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "fold": {
-            "translation": "",
-            "notes": ""
-        },
-        "graph_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "open": {
-            "translation": "",
-            "notes": ""
-        },
-        "sluit": {
-            "translation": "",
-            "notes": ""
-        },
-        "signaalwaarde": {
-            "translation": "",
-            "notes": ""
-        },
-        "screen_reader_graph_content": {
-            "translation": "",
-            "notes": ""
-        },
+        "title": "",
+        "text": "",
+        "datums": "",
+        "fold_title": "",
+        "fold": "",
+        "graph_title": "",
+        "open": "",
+        "sluit": "",
+        "signaalwaarde": "",
+        "screen_reader_graph_content": "",
         "bron": {
-            "href": {
-                "translation": "",
-                "notes": ""
-            },
-            "text": {
-                "translation": "",
-                "notes": ""
-            }
+            "href": "",
+            "text": ""
         }
     },
     "verpleeghuis_oversterfte": {
-        "title": {
-            "translation": "",
-            "notes": ""
-        },
-        "text": {
-            "translation": "",
-            "notes": ""
-        },
-        "screen_reader_graph_content": {
-            "translation": "",
-            "notes": ""
-        },
-        "fold_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "fold": {
-            "translation": "",
-            "notes": ""
-        },
-        "graph_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "open": {
-            "translation": "",
-            "notes": ""
-        },
-        "sluit": {
-            "translation": "",
-            "notes": ""
-        },
+        "title": "",
+        "text": "",
+        "datums": "",
+        "screen_reader_graph_content": "",
+        "fold_title": "",
+        "fold": "",
+        "graph_title": "",
+        "open": "",
+        "sluit": "",
         "bron": {
-            "href": {
-                "translation": "",
-                "notes": ""
-            },
-            "text": {
-                "translation": "",
-                "notes": ""
-            }
+            "href": "",
+            "text": ""
         }
     },
     "blok_verpleeghuis_zorg": {
-        "title": {
-            "translation": "",
-            "notes": ""
-        },
-        "text": {
-            "translation": "",
-            "notes": ""
-        }
+        "title": "",
+        "text": ""
     },
     "geen_selectie": {
-        "text": {
-            "translation": "",
-            "notes": ""
-        }
+        "text": ""
     },
     "rioolwater_metingen": {
-        "title": {
-            "translation": "",
-            "notes": ""
-        },
-        "text": {
-            "translation": "",
-            "notes": ""
-        },
-        "graph_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "fold_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "fold": {
-            "translation": "",
-            "notes": ""
-        },
-        "open": {
-            "translation": "",
-            "notes": ""
-        },
-        "sluit": {
-            "translation": "",
-            "notes": ""
-        },
-        "screen_reader_graph_content": {
-            "translation": "",
-            "notes": ""
-        },
+        "title": "",
+        "text": "",
+        "datums": "",
+        "graph_title": "",
+        "fold_title": "",
+        "fold": "",
+        "open": "",
+        "sluit": "",
+        "screen_reader_graph_content": "",
         "bron": {
-            "text": {
-                "translation": "",
-                "notes": ""
-            },
-            "href": {
-                "translation": "",
-                "notes": ""
-            }
+            "text": "",
+            "href": ""
         }
     },
     "notfound_titel": {
-        "text": {
-            "translation": "",
-            "notes": ""
-        }
+        "text": ""
     },
     "notfound_beschrijving": {
-        "text": {
-            "translation": "",
-            "notes": ""
-        }
+        "text": ""
     },
     "over_titel": {
-        "text": {
-            "translation": "",
-            "notes": ""
-        }
+        "text": ""
     },
     "over_disclaimer": {
-        "title": {
-            "translation": "",
-            "notes": ""
-        },
-        "text": {
-            "translation": "",
-            "notes": ""
-        }
+        "title": "",
+        "text": ""
     },
     "over_beschrijving": {
-        "text": {
-            "translation": "",
-            "notes": ""
-        }
+        "text": ""
     },
     "over_veelgestelde_vragen": {
-        "text": {
-            "translation": "",
-            "notes": ""
-        },
+        "text": "",
         "vragen": [
             {
-                "vraag": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "antwoord": {
-                    "translation": "",
-                    "notes": ""
-                }
+                "vraag": "",
+                "antwoord": ""
             },
             {
-                "vraag": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "antwoord": {
-                    "translation": "",
-                    "notes": ""
-                }
+                "vraag": "",
+                "antwoord": ""
             },
             {
-                "vraag": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "antwoord": {
-                    "translation": "",
-                    "notes": ""
-                }
+                "vraag": "",
+                "antwoord": ""
             },
             {
-                "vraag": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "antwoord": {
-                    "translation": "",
-                    "notes": ""
-                }
+                "vraag": "",
+                "antwoord": ""
             },
             {
-                "vraag": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "antwoord": {
-                    "translation": "",
-                    "notes": ""
-                }
+                "vraag": "",
+                "antwoord": ""
             },
             {
-                "vraag": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "antwoord": {
-                    "translation": "",
-                    "notes": ""
-                }
+                "vraag": "",
+                "antwoord": ""
             },
             {
-                "vraag": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "antwoord": {
-                    "translation": "",
-                    "notes": ""
-                }
+                "vraag": "",
+                "antwoord": ""
             },
             {
-                "vraag": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "antwoord": {
-                    "translation": "",
-                    "notes": ""
-                }
+                "vraag": "",
+                "antwoord": ""
             },
             {
-                "vraag": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "antwoord": {
-                    "translation": "",
-                    "notes": ""
-                }
+                "vraag": "",
+                "antwoord": ""
             },
             {
-                "vraag": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "antwoord": {
-                    "translation": "",
-                    "notes": ""
-                }
+                "vraag": "",
+                "antwoord": ""
             },
             {
-                "vraag": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "antwoord": {
-                    "translation": "",
-                    "notes": ""
-                }
+                "vraag": "",
+                "antwoord": ""
             },
             {
-                "vraag": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "antwoord": {
-                    "translation": "",
-                    "notes": ""
-                }
+                "vraag": "",
+                "antwoord": ""
             },
             {
-                "vraag": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "antwoord": {
-                    "translation": "",
-                    "notes": ""
-                }
+                "vraag": "",
+                "antwoord": ""
+            },
+            {
+                "vraag": "",
+                "antwoord": ""
             }
         ]
     },
     "regionaal_ziekenhuisopnames_per_dag": {
-        "title": {
-            "translation": "",
-            "notes": ""
-        },
-        "text": {
-            "translation": "",
-            "notes": ""
-        },
-        "fold_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "fold": {
-            "translation": "",
-            "notes": ""
-        },
-        "graph_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "open": {
-            "translation": "",
-            "notes": ""
-        },
-        "sluit": {
-            "translation": "",
-            "notes": ""
-        },
-        "screen_reader_graph_content": {
-            "translation": "",
-            "notes": ""
-        },
+        "title": "",
+        "text": "",
+        "datums": "",
+        "fold_title": "",
+        "fold": "",
+        "graph_title": "",
+        "open": "",
+        "sluit": "",
+        "screen_reader_graph_content": "",
         "bron": {
-            "href": {
-                "translation": "",
-                "notes": ""
-            },
-            "text": {
-                "translation": "",
-                "notes": ""
-            }
+            "href": "",
+            "text": ""
         }
     },
     "regionaal_positief_geteste_personen": {
-        "title": {
-            "translation": "",
-            "notes": ""
-        },
-        "text": {
-            "translation": "",
-            "notes": ""
-        },
-        "metric_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "fold_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "fold": {
-            "translation": "",
-            "notes": ""
-        },
-        "graph_title": {
-            "translation": "",
-            "notes": ""
-        },
-        "open": {
-            "translation": "",
-            "notes": ""
-        },
-        "sluit": {
-            "translation": "",
-            "notes": ""
-        },
-        "screen_reader_graph_content": {
-            "translation": "",
-            "notes": ""
-        },
+        "title": "",
+        "text": "",
+        "datums": "",
+        "metric_title": "",
+        "fold_title": "",
+        "fold": "",
+        "graph_title": "",
+        "open": "",
+        "sluit": "",
+        "screen_reader_graph_content": "",
         "bron": {
-            "href": {
-                "translation": "",
-                "notes": ""
-            },
-            "text": {
-                "translation": "",
-                "notes": ""
-            }
+            "href": "",
+            "text": ""
         }
     },
     "terug_naar_regio_selectie": {
-        "text": {
-            "translation": "",
-            "notes": ""
-        }
+        "text": "Back to region selection"
     },
     "verantwoording": {
-        "title": {
-            "translation": "",
-            "notes": ""
-        },
+        "title": "",
         "cijfers": [
             {
-                "cijfer": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "verantwoording": {
-                    "translation": "",
-                    "notes": ""
-                }
+                "cijfer": "",
+                "verantwoording": ""
             },
             {
-                "cijfer": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "verantwoording": {
-                    "translation": "",
-                    "notes": ""
-                }
+                "cijfer": "",
+                "verantwoording": ""
             },
             {
-                "cijfer": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "verantwoording": {
-                    "translation": "",
-                    "notes": ""
-                }
+                "cijfer": "",
+                "verantwoording": ""
             },
             {
-                "cijfer": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "verantwoording": {
-                    "translation": "",
-                    "notes": ""
-                }
+                "cijfer": "",
+                "verantwoording": ""
             },
             {
-                "cijfer": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "verantwoording": {
-                    "translation": "",
-                    "notes": ""
-                }
+                "cijfer": "",
+                "verantwoording": ""
             },
             {
-                "cijfer": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "verantwoording": {
-                    "translation": "",
-                    "notes": ""
-                }
+                "cijfer": "",
+                "verantwoording": ""
             },
             {
-                "cijfer": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "verantwoording": {
-                    "translation": "",
-                    "notes": ""
-                }
+                "cijfer": "",
+                "verantwoording": ""
             },
             {
-                "cijfer": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "verantwoording": {
-                    "translation": "",
-                    "notes": ""
-                }
+                "cijfer": "",
+                "verantwoording": ""
             },
             {
-                "cijfer": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "verantwoording": {
-                    "translation": "",
-                    "notes": ""
-                }
+                "cijfer": "",
+                "verantwoording": ""
             },
             {
-                "cijfer": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "verantwoording": {
-                    "translation": "",
-                    "notes": ""
-                }
+                "cijfer": "",
+                "verantwoording": ""
             },
             {
-                "cijfer": {
-                    "translation": "",
-                    "notes": ""
-                },
-                "verantwoording": {
-                    "translation": "",
-                    "notes": ""
-                }
+                "cijfer": "",
+                "verantwoording": ""
+            },
+            {
+                "cijfer": "",
+                "verantwoording": ""
+            },
+            {
+                "cijfer": "Open source data processing",
+                "verantwoording": ""
             }
         ]
     },
     "error_metadata": {
-        "titel": {
-            "translation": "",
-            "notes": ""
-        }
+        "title": ""
     },
     "nationaal_metadata": {
-        "title": {
-            "translation": "",
-            "notes": ""
-        },
-        "description": {
-            "translation": "",
-            "notes": ""
-        },
-        "url": {
-            "translation": "",
-            "notes": ""
-        }
+        "title": "",
+        "description": "",
+        "url": ""
     },
     "notfound_metadata": {
-        "titel": {
-            "translation": "",
-            "notes": ""
-        }
+        "title": ""
     },
     "over_metadata": {
-        "title": {
-            "translation": "",
-            "notes": ""
-        },
-        "description": {
-            "translation": "",
-            "notes": ""
-        },
-        "url": {
-            "translation": "",
-            "notes": ""
-        }
+        "title": "",
+        "description": "",
+        "url": ""
     },
     "regionaal_metadata": {
-        "title": {
-            "translation": "",
-            "notes": ""
-        },
-        "description": {
-            "translation": "",
-            "notes": ""
-        },
-        "url": {
-            "translation": "",
-            "notes": ""
-        }
+        "title": "",
+        "description": "",
+        "url": ""
     },
     "verantwoording_metadata": {
-        "title": {
-            "translation": "",
-            "notes": ""
-        },
-        "description": {
-            "translation": "",
-            "notes": ""
-        },
-        "url": {
-            "translation": "",
-            "notes": ""
-        }
+        "title": "",
+        "description": "",
+        "url": ""
     },
     "metadata": {
-        "description": {
-            "translation": "",
-            "notes": ""
-        },
-        "titel": {
-            "translation": "",
-            "notes": ""
-        },
-        "title": {
-            "translation": "",
-            "notes": ""
-        },
-        "url": {
-            "translation": "",
-            "notes": ""
-        }
+        "description": "",
+        "titel": "",
+        "title": "",
+        "url": ""
     }
 }

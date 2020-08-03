@@ -15,7 +15,7 @@ const ReplaceLinks: React.FC<IProps> = (props) => {
 };
 
 export type IProps = {
-  children: string;
+  children: any;
   options?: LinkifyProps['options'];
   tagName?: LinkifyProps['tagName'];
 };

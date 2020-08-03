@@ -1,9 +1,12 @@
 import './index.css';
 import 'scss/style.scss';
 
+import { IntlProvider } from 'react-intl';
+
+import locale, { targetLanguage } from 'locale';
+
 import 'components/collapse/collapse.scss';
 import 'components/legenda/legenda.scss';
-import 'components/dateReported/dateReported.scss';
 import 'components/graphContainer/graphContainer.scss';
 import 'components/graphContent/graphContent.scss';
 import 'components/lineChart/lineChart.scss';
@@ -28,6 +31,20 @@ interface IProps {
   pageProps: any;
 }
 
+function flattenMessages(nestedMessages: any, prefix = '') {
+  return Object.keys(nestedMessages).reduce((messages: any, key) => {
+    const value = nestedMessages[key];
+    const prefixedKey = prefix ? `${prefix}.${key}` : key;
+
+    if (typeof value === 'string') {
+      messages[prefixedKey] = value;
+    } else {
+      Object.assign(messages, flattenMessages(value, prefixedKey));
+    }
+
+    return messages;
+  }, {});
+}
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
 function MyApp(props: IProps): React.ReactElement {
@@ -43,14 +60,22 @@ function MyApp(props: IProps): React.ReactElement {
     };
   }, []);
 
+  const messages = flattenMessages(locale);
+
   return (
-    <SWRConfig
-      value={{
-        fetcher,
-      }}
+    <IntlProvider
+      messages={messages}
+      locale={targetLanguage}
+      defaultLocale="nl"
     >
-      <StateProvider>{getLayout(<Component {...pageProps} />)}</StateProvider>{' '}
-    </SWRConfig>
+      <SWRConfig
+        value={{
+          fetcher,
+        }}
+      >
+        <StateProvider>{getLayout(<Component {...pageProps} />)}</StateProvider>
+      </SWRConfig>
+    </IntlProvider>
   );
 }
 

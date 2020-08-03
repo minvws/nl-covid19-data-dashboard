@@ -1,43 +1,17 @@
-import { long } from 'data/months';
-
 import ClockIcon from 'assets/clock.svg';
+import styles from './dateReported.module.scss';
 
-import replaceVariablesInText from 'utils/replaceVariablesInText';
-
-interface IProps {
-  dateUnix: number | undefined;
-  dateInsertedUnix?: number;
-  datumsText: string;
-}
-
-function formatDate(number: number) {
-  const date = new Date(number * 1000);
-  return `${date.getDate()} ${long[date.getMonth()]}`;
-}
-
-const dateReported: React.FC<IProps> = (props) => {
-  const { datumsText, dateUnix, dateInsertedUnix } = props;
-
-  if (!dateUnix) return null;
-
-  const dateOfReport = formatDate(dateUnix);
-  const dateOfInsertion = dateInsertedUnix
-    ? formatDate(dateInsertedUnix)
-    : undefined;
+const DateReported: React.FC = (props) => {
+  const { children } = props;
 
   return (
-    <div className="dateReported">
+    <div className={styles.dateReported}>
       <span>
         <ClockIcon aria-hidden />
       </span>
-      <p>
-        {replaceVariablesInText(datumsText, {
-          dateOfReport,
-          dateOfInsertion,
-        })}
-      </p>
+      <p>{children}</p>
     </div>
   );
 };
 
-export default dateReported;
+export { DateReported };

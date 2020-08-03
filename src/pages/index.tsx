@@ -1,6 +1,8 @@
 import React from 'react';
 import Masonry from 'react-masonry-css';
 
+import { FormattedMessage, useIntl } from 'react-intl';
+
 import GraphContainer from 'components/graphContainer';
 import GraphContent from 'components/graphContent';
 import TitleBlock from 'components/titleBlock';
@@ -18,7 +20,7 @@ import { SewerWater } from 'components/tiles/SewerWater';
 import { SuspectedPatients } from 'components/tiles/SuspectedPatients';
 import { ReproductionIndex } from 'components/tiles/ReproductionIndex';
 import { InfectiousPeople } from 'components/tiles/InfectiousPeople';
-import { PostivelyTestedPeople } from 'components/tiles/PostivelyTestedPeople';
+import { PositivelyTestedPeople } from 'components/tiles/PositivelyTestedPeople';
 import { IntakeHospital } from 'components/tiles/IntakeHospital';
 
 import Notification from 'components/notification';
@@ -29,6 +31,9 @@ import MedischeScreening from '../assets/medische-screening.svg';
 
 import { store } from 'store';
 import siteText from 'locale';
+
+import list from 'data/overige-gegevens.json';
+
 import GraphHeader from 'components/graphHeader';
 import IconList from 'components/iconList';
 
@@ -61,6 +66,8 @@ const Home: FunctionComponentWithLayout = () => {
     1100: 2,
     600: 1,
   };
+
+  const intl = useIntl();
 
   return (
     <>
@@ -112,7 +119,7 @@ const Home: FunctionComponentWithLayout = () => {
 
             <IntakeHospital />
 
-            <PostivelyTestedPeople />
+            <PositivelyTestedPeople />
 
             <InfectiousPeople />
 
@@ -123,16 +130,26 @@ const Home: FunctionComponentWithLayout = () => {
               icon={'images/nederland.png'}
               iconAlt="Kaart van Nederland"
             >
-              <h3>{siteText.regio_link_block.title.translation}</h3>
-              <p>{siteText.regio_link_block.text.translation}</p>
+              <h3>
+                <FormattedMessage id="regio_link_block.title" />
+              </h3>
+
+              <p>
+                <FormattedMessage id="regio_link_block.text" />
+              </p>
             </LinkCard>
           </Masonry>
         </section>
 
         <section className="home-section">
-          <TitleBlock Icon={MedischeScreening} title="Andere gegevens">
+          <TitleBlock
+            Icon={MedischeScreening}
+            title={intl.formatMessage({
+              defaultMessage: 'Andere gegevens',
+            })}
+          >
             <p>
-              Cijfers die iets kunnen zeggen over de verspreiding van het virus.
+              <FormattedMessage defaultMessage="Cijfers die iets kunnen zeggen over de verspreiding van het virus." />
             </p>
           </TitleBlock>
 
@@ -148,11 +165,16 @@ const Home: FunctionComponentWithLayout = () => {
             <GraphContainer>
               <GraphContent>
                 <GraphHeader
-                  title={siteText.overige_gegevens.title.translation}
+                  title={intl.formatMessage({
+                    id: 'overige_gegevens.title',
+                  })}
                 />
-                <p>{siteText.overige_gegevens.text.translation}</p>
 
-                <IconList list={siteText.overige_gegevens.list} />
+                <p>
+                  <FormattedMessage id="overige_gegevens.text" />
+                </p>
+
+                <IconList list={list} />
               </GraphContent>
             </GraphContainer>
           </Masonry>
@@ -161,9 +183,13 @@ const Home: FunctionComponentWithLayout = () => {
         <section className="home-section">
           <TitleBlock
             Icon={VerpleegHuisZorg}
-            title={siteText.blok_verpleeghuis_zorg.title.translation}
+            title={intl.formatMessage({
+              id: 'blok_verpleeghuis_zorg.title',
+            })}
           >
-            <p>{siteText.blok_verpleeghuis_zorg.text.translation}</p>
+            <p>
+              <FormattedMessage id="blok_verpleeghuis_zorg.text" />
+            </p>
           </TitleBlock>
 
           <Masonry

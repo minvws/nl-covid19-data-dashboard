@@ -1,8 +1,7 @@
 import React from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import months from 'data/months';
-import formatNumber from 'utils/formatNumber';
+import { useIntl } from 'react-intl';
 
 interface Value {
   date: number;
@@ -15,10 +14,7 @@ type LineChartProps = {
 };
 
 const LineChart: React.FC<LineChartProps> = ({ values, signaalwaarde }) => {
-  const formatDate = (value: number) => {
-    const dateObj = new Date(value * 1000);
-    return `${dateObj.getDate()} ${months[dateObj.getMonth()]}`;
-  };
+  const intl = useIntl();
 
   const options = {
     chart: {
@@ -53,8 +49,10 @@ const LineChart: React.FC<LineChartProps> = ({ values, signaalwaarde }) => {
           // @ts-ignore
           if (this.isFirst || this.isLast) {
             // @ts-ignore
-            const valueDate = new Date(this.value * 1000);
-            return `${valueDate.getDate()} ${months[valueDate.getMonth()]}`;
+            return intl.formatDate(this.value * 1000, {
+              day: 'numeric',
+              month: 'short',
+            });
           }
         },
       },
@@ -65,7 +63,13 @@ const LineChart: React.FC<LineChartProps> = ({ values, signaalwaarde }) => {
       borderRadius: 0,
       formatter: function (): string {
         // @ts-ignore
-        return `${formatDate(this.x)}: ${formatNumber(this.y)}`;
+        return `${intl.formatDate(this.x * 1000, {
+          day: 'numeric',
+          month: 'long',
+        })}: ${intl.formatNumber(
+          // @ts-ignore
+          this.y
+        )}`;
       },
     },
     credits: false,

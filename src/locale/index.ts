@@ -7,7 +7,7 @@ interface ILocale {
 
 const languages: any = { en, nl };
 
-const targetLanguage: string = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+export const targetLanguage: string = process.env.NEXT_PUBLIC_LOCALE || 'nl';
 const dictionary = languages[targetLanguage];
 
 export default dictionary;

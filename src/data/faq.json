@@ -1,0 +1,66 @@
+[
+  {
+    "vraag": "Wat doet dit dashboard?",
+    "antwoord": "Het dashboard laat met actuele cijfers zien hoe het coronavirus zich in Nederland verspreidt. Die informatie komt van onder andere het RIVM, de GGD’en en de ziekenhuizen. Op het dashboard is bijvoorbeeld te zien hoeveel mensen positief getest zijn op het virus en of het aantal besmettingen oploopt. Het dashboard biedt informatie aan iedereen die de meest actuele cijfers in één overzicht wil zien."
+  },
+  {
+    "vraag": "Waarom een dashboard?",
+    "antwoord": "Door het coronavirus zijn in de afgelopen maanden veel mensen ziek geworden en overleden. Totdat we een goed vaccin hebben, kan het virus makkelijk weer grote groepen mensen ziek maken. Met het dashboard is te zien of en waar het virus weer opleeft. Zo kunnen we nieuwe uitbraken van het virus sneller en preciezer bestrijden. Bijvoorbeeld met maatregelen voor regio’s waar het virus de kop opsteekt. Maatregelen vragen altijd om integrale politieke weging. Bij het nemen van maatregelen wordt dus ook gekeken naar maatschappelijke en economische belangen. "
+  },
+  {
+    "vraag": "Van wie is dit dashboard?",
+    "antwoord": "Dit dashboard is ontwikkeld in opdracht van het ministerie van Volksgezondheid, Welzijn en Sport. De komende weken komen er meer gegevens bij. Het dashboard zal in de toekomst beheerd worden door het RIVM."
+  },
+  {
+    "vraag": "Waarom deze indicatoren?",
+    "antwoord": "De cijfers die nu zichtbaar zijn, laten het beste zien hoe het ervoor staat met de epidemie. Het gaat bijvoorbeeld om het aantal mensen dat besmet is en het aantal mensen dat in het ziekenhuis is opgenomen. Binnenkort komen ook andere cijfers beschikbaar in het dashboard. Al deze cijfers samen geven een nauwkeurig beeld van het virus in het hele land."
+  },
+  {
+    "vraag": "Wat betekent het dat dit dashboard nog in ontwikkeling is?",
+    "antwoord": "In de komende periode zullen naast de hoofdindicatoren ook andere gegevens worden toegevoegd. Ook zal het dashboard een overzicht bieden van alle geldende maatregelen en adviezen, op landelijk en regionaal niveau."
+  },
+  {
+    "vraag": "Wat is een signaalwaarde?",
+    "antwoord": "Een signaalwaarde is een getal dat door het RIVM is berekend. Het zijn een soort `alarmbellen’. Die alarmbellen kunnen afgaan als er veel mensen tegelijkertijd ziek worden of in het ziekenhuis worden opgenomen. Het RIVM heeft berekend dat als er langdurig meer dan 40 mensen per dag in het ziekenhuis worden opgenomen, de zorg al snel overbelast kan raken."
+  },
+
+  {
+    "vraag": "Wat zegt een regionaal beeld (t.o.v. een landelijk beeld)?",
+    "antwoord": "Het coronavirus verspreidt zich makkelijk tussen mensen. In de afgelopen maanden heeft het RIVM veel regionale uitbraken van besmettingen waargenomen. Dat betekent dat er op bepaalde plekken in ons land meer besmettingen waren dan op andere plekken. Als we die informatie goed in beeld hebben, kunnen we het virus gericht en snel bestrijden als het opleeft."
+  },
+
+  {
+    "vraag": "Is dit een van de aangekondigde apps?",
+    "antwoord": "Nee, dit is geen app. De app voor anonieme contactopsporing wordt ontwikkeld om te weten of je misschien contact hebt gehad met iemand die besmet is met het coronavirus en om je een advies te geven als dat zo is. De app voor thuisrapportage ondersteunt de GGD door op afstand contact te houden met mensen met een (verdenking van) besmetting. "
+  },
+
+  {
+    "vraag": "Houden jullie rekening met mijn privacy in dit dashboard?",
+    "antwoord": "Ja, het dashboard voldoet aan de privacyrichtlijnen. Je kunt dus niet zien bij wie welke gegevens horen. De gegevens zijn niet herleidbaar tot personen. "
+  },
+
+  {
+    "vraag": "Welke conclusies kan ik uit dit dashboard trekken?",
+    "antwoord": "Het dashboard geeft inzicht, maar er kunnen geen conclusies uit getrokken worden. Wel worden deze gegevens gebruikt door de deskundigen van onder andere het RIVM."
+  },
+
+  {
+    "vraag": "Ik zie dat het goed gaat in mijn regio. Waarom gelden in mijn regio dezelfde maatregelen als in andere regio’s?",
+    "antwoord": "Er bestaan grote verschillen tussen regio’s. In de ene regio heeft het virus tot nu toe veel harder toegeslagen dan in de andere. Toch kan het virus overal in het land makkelijk om zich heen grijpen. Veel maatregelen gelden daarom in het hele land. Soms gelden extra maatregelen in een bepaalde regio. Dat gebeurt als daar veel extra besmettingen worden vastgesteld. Met het dashboard kunnen we mogelijk in de toekomst gerichter maatregelen nemen per regio of per sector."
+  },
+
+  {
+    "vraag": "Ik zie een technisch zwakke plek op de website. Waar kan ik dit melden?",
+    "antwoord": "Wij werken samen met het Nationaal Cyber Security Centrum (NCSC). Stel het NCSC zo snel mogelijk op de hoogte via het formulier (https://www.ncsc.nl/contact/kwetsbaarheid-melden/cvd-meldingen-formulier) voordat u dit aan de buitenwereld kenbaar maakt. In samenwerking met het NCSC nemen we de bevinding in behandeling en lossen dit zo snel mogelijk op."
+  },
+
+  {
+    "vraag": "Waar kan ik terecht met vragen over het coronavirus?",
+    "antwoord": "U kunt terecht bij het publieksinformatienummer 0800 - 1351 (tussen 08:00 en 20:00 uur). Vanuit het buitenland is het nummer te bereiken door te bellen naar +31 20 205 1351."
+  },
+
+  {
+    "vraag": "Hoe komt het dat als ik het aantal positief geteste mensen per regio bij elkaar optel, er een ander getal uitkomt dan het landelijke cijfer?",
+    "antwoord": "We berekenen de toename van het aantal positief geteste mensen door het gerapporteerde cumulatief aantal meldingen van positief geteste mensen van vandaag, af te trekken van het cumulatief aantal van gisteren. Correcties over oude data, zoals dubbeltellingen, worden door het RIVM verwerkt op de datum dat dit bekend is. \n\nHet gerapporteerde nieuwe aantal meldingen voor die dag ligt dan lager dan het feitelijk aantal die dag. Daar staat tegenover dat voorgaande dagen er dus te veel gevallen zijn gerapporteerd. Door correctie kan het cumulatieve aantal van vandaag lager zijn dan het cumulatieve aantal van gisteren. In die gevallen wordt er op het dashboard de waarde 0 gepresenteerd in plaats van een negatief waarde; een negatieve waarde is namelijk verwarrend. Daarom krijg je uiteindelijk verschillen als je regio's optelt naar landelijk. Als je de negatieve waarden zou meerekenen kom je wel op de juiste getallen uit."
+  }
+]
