@@ -87,29 +87,26 @@ export const ReproductionIndex: React.FC = () => {
 
         {lastKnownValidData ? (
           <DateReported>
-            <p>
-              <FormattedMessage
-                id="reproductiegetal.datums"
-                values={{
-                  dateOfReport: (
-                    <FormattedDate
-                      value={
-                        lastKnownValidData?.last_value?.date_of_report_unix *
-                        1000
-                      }
-                    />
-                  ),
-                  dateOfInsertion: (
-                    <FormattedDate
-                      value={
-                        lastKnownValidData?.last_value?.date_of_insertion_unix *
-                        1000
-                      }
-                    />
-                  ),
-                }}
-              />
-            </p>
+            <FormattedMessage
+              id="reproductiegetal.datums"
+              values={{
+                dateOfReport: (
+                  <FormattedDate
+                    value={
+                      lastKnownValidData?.last_value?.date_of_report_unix * 1000
+                    }
+                  />
+                ),
+                dateOfInsertion: (
+                  <FormattedDate
+                    value={
+                      lastKnownValidData?.last_value?.date_of_insertion_unix *
+                      1000
+                    }
+                  />
+                ),
+              }}
+            />
           </DateReported>
         ) : null}
       </GraphContent>

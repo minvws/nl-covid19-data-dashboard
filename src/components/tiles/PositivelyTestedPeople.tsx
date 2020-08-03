@@ -1,6 +1,11 @@
 import { useContext } from 'react';
 
-import { FormattedMessage, FormattedDate, useIntl } from 'react-intl';
+import {
+  FormattedMessage,
+  FormattedNumber,
+  FormattedDate,
+  useIntl,
+} from 'react-intl';
 
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
@@ -74,30 +79,34 @@ export const PositivelyTestedPeople: React.FC = () => {
           <h3>
             <FormattedMessage id="positief_geteste_personen.metric_title" />{' '}
             <span style={{ color: '#01689b' }}>
-              {formatDecimal(total.last_value.infected_daily_total)}
+              {total.last_value.infected_daily_total ? (
+                <FormattedNumber
+                  value={total.last_value.infected_daily_total}
+                />
+              ) : (
+                '-'
+              )}
             </span>
           </h3>
         )}
 
         {delta && delta?.last_value?.infected_daily_increase !== null && (
           <DateReported>
-            <p>
-              <FormattedMessage
-                id="positief_geteste_personen.datums"
-                values={{
-                  dateOfReport: (
-                    <FormattedDate
-                      value={delta?.last_value?.date_of_report_unix * 1000}
-                    />
-                  ),
-                  dateOfInsertion: (
-                    <FormattedDate
-                      value={delta?.last_value?.date_of_insertion_unix * 1000}
-                    />
-                  ),
-                }}
-              />
-            </p>
+            <FormattedMessage
+              id="positief_geteste_personen.datums"
+              values={{
+                dateOfReport: (
+                  <FormattedDate
+                    value={delta?.last_value?.date_of_report_unix * 1000}
+                  />
+                ),
+                dateOfInsertion: (
+                  <FormattedDate
+                    value={delta?.last_value?.date_of_insertion_unix * 1000}
+                  />
+                ),
+              }}
+            />
           </DateReported>
         )}
       </GraphContent>

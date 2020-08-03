@@ -81,18 +81,16 @@ export const IntakeIntensiveCare: React.FC = () => {
 
         {data && data?.last_value?.moving_average_ic !== null && (
           <DateReported>
-            <p>
-              <FormattedMessage
-                id="ic_opnames_per_dag.datums"
-                values={{
-                  dateOfReport: (
-                    <FormattedDate
-                      value={data?.last_value?.date_of_report_unix * 1000}
-                    />
-                  ),
-                }}
-              />
-            </p>
+            <FormattedMessage
+              id="ic_opnames_per_dag.datums"
+              values={{
+                dateOfReport: (
+                  <FormattedDate
+                    value={data?.last_value?.date_of_report_unix * 1000}
+                  />
+                ),
+              }}
+            />
           </DateReported>
         )}
       </GraphContent>

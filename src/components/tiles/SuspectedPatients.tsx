@@ -1,6 +1,11 @@
 import { useContext } from 'react';
 
-import { FormattedMessage, FormattedDate, useIntl } from 'react-intl';
+import {
+  FormattedMessage,
+  FormattedDate,
+  FormattedNumber,
+  useIntl,
+} from 'react-intl';
 
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
@@ -69,27 +74,27 @@ export const SuspectedPatients: React.FC = () => {
         {total && (
           <h3>
             <FormattedMessage defaultMessage="Geschat aantal patiënten met verdenking van COVID-19:" />{' '}
-            <span style={{ color: '#01689b' }}>{formatDecimal(total)}</span>
+            <span style={{ color: '#01689b' }}>
+              {total ? <FormattedNumber value={total} /> : '-'}
+            </span>
           </h3>
         )}
 
         {data && data?.last_value?.incidentie !== null && (
           <DateReported>
-            <p>
-              <FormattedMessage
-                id="verdenkingen_huisartsen.datums"
-                values={{
-                  dateOfReport: (
-                    <FormattedDate value={data?.last_value?.week_unix * 1000} />
-                  ),
-                  dateOfInsertion: (
-                    <FormattedDate
-                      value={data?.last_value?.date_of_insertion_unix * 1000}
-                    />
-                  ),
-                }}
-              />
-            </p>
+            <FormattedMessage
+              id="verdenkingen_huisartsen.datums"
+              values={{
+                dateOfReport: (
+                  <FormattedDate value={data?.last_value?.week_unix * 1000} />
+                ),
+                dateOfInsertion: (
+                  <FormattedDate
+                    value={data?.last_value?.date_of_insertion_unix * 1000}
+                  />
+                ),
+              }}
+            />
           </DateReported>
         )}
       </GraphContent>

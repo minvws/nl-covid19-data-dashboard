@@ -3,6 +3,8 @@ import { useRef, FunctionComponent } from 'react';
 import ScreenReaderOnly from 'components/screenReaderOnly';
 import { scaleQuantile, scaleThreshold } from 'd3-scale';
 
+import { FormattedNumber } from 'react-intl';
+
 import useDynamicScale from 'utils/useDynamicScale';
 
 type GradientStop = {
@@ -121,7 +123,9 @@ const BarScale: FunctionComponent<BarscaleProps> = ({
               x={`${x(value)}%`}
               y={16}
               textAnchor={textAlign(x(value)) as any}
-            >{`${formatNumber(value)}`}</text>
+            >
+              <FormattedNumber value={value} />
+            </text>
           </g>
 
           {kritiekeWaarde && (

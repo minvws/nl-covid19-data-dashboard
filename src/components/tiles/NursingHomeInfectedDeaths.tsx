@@ -64,23 +64,21 @@ export const NursingHomeInfectedDeaths: React.FC = () => {
 
         {data && data?.last_value?.deceased_nursery_daily !== null && (
           <DateReported>
-            <p>
-              <FormattedMessage
-                id="verpleeghuis_oversterfte.datums"
-                values={{
-                  dateOfReport: (
-                    <FormattedDate
-                      value={data?.last_value?.date_of_report_unix * 1000}
-                    />
-                  ),
-                  dateOfInsertion: (
-                    <FormattedDate
-                      value={data?.last_value?.date_of_insertion_unix}
-                    />
-                  ),
-                }}
-              />
-            </p>
+            <FormattedMessage
+              id="verpleeghuis_oversterfte.datums"
+              values={{
+                dateOfReport: (
+                  <FormattedDate
+                    value={data?.last_value?.date_of_report_unix * 1000}
+                  />
+                ),
+                dateOfInsertion: (
+                  <FormattedDate
+                    value={data?.last_value?.date_of_insertion_unix}
+                  />
+                ),
+              }}
+            />
           </DateReported>
         )}
       </GraphContent>

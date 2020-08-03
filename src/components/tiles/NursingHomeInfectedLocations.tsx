@@ -1,6 +1,11 @@
 import { useContext } from 'react';
 
-import { FormattedMessage, FormattedDate, useIntl } from 'react-intl';
+import {
+  FormattedMessage,
+  FormattedDate,
+  FormattedNumber,
+  useIntl,
+} from 'react-intl';
 
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
@@ -69,25 +74,23 @@ export const NursingHomeInfectedLocations: React.FC = () => {
         {newLocations &&
           newLocations?.last_value?.total_new_reported_locations !== null && (
             <DateReported>
-              <p>
-                <FormattedMessage
-                  id="verpleeghuis_besmette_locaties.datums"
-                  values={{
-                    dateOfReport: (
-                      <FormattedDate
-                        value={
-                          newLocations?.last_value?.date_of_report_unix * 1000
-                        }
-                      />
-                    ),
-                    dateOfInsertion: (
-                      <FormattedDate
-                        value={newLocations?.last_value?.date_of_insertion_unix}
-                      />
-                    ),
-                  }}
-                />
-              </p>
+              <FormattedMessage
+                id="verpleeghuis_besmette_locaties.datums"
+                values={{
+                  dateOfReport: (
+                    <FormattedDate
+                      value={
+                        newLocations?.last_value?.date_of_report_unix * 1000
+                      }
+                    />
+                  ),
+                  dateOfInsertion: (
+                    <FormattedDate
+                      value={newLocations?.last_value?.date_of_insertion_unix}
+                    />
+                  ),
+                }}
+              />
             </DateReported>
           )}
       </GraphContent>
@@ -125,8 +128,12 @@ export const NursingHomeInfectedLocations: React.FC = () => {
           <h3>
             <FormattedMessage id="verpleeghuis_besmette_locaties.metric_title" />{' '}
             <span style={{ color: '#01689b' }}>
-              {formatDecimal(
-                totalLocations.last_value.total_reported_locations
+              {totalLocations.last_value.total_reported_locations ? (
+                <FormattedNumber
+                  value={totalLocations.last_value.total_reported_locations}
+                />
+              ) : (
+                '-'
               )}
             </span>
           </h3>

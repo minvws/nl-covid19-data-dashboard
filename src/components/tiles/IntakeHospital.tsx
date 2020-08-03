@@ -82,18 +82,16 @@ export const IntakeHospital: React.FC = () => {
 
         {data && data?.last_value?.moving_average_hospital !== null && (
           <DateReported>
-            <p>
-              <FormattedMessage
-                id="ziekenhuisopnames_per_dag.datums"
-                values={{
-                  dateOfReport: (
-                    <FormattedDate
-                      value={data?.last_value?.date_of_report_unix * 1000}
-                    />
-                  ),
-                }}
-              />
-            </p>
+            <FormattedMessage
+              id="ziekenhuisopnames_per_dag.datums"
+              values={{
+                dateOfReport: (
+                  <FormattedDate
+                    value={data?.last_value?.date_of_report_unix * 1000}
+                  />
+                ),
+              }}
+            />
           </DateReported>
         )}
       </GraphContent>

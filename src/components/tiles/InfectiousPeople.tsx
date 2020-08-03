@@ -1,6 +1,11 @@
 import { useContext } from 'react';
 
-import { FormattedMessage, FormattedDate, useIntl } from 'react-intl';
+import {
+  FormattedMessage,
+  FormattedDate,
+  useIntl,
+  FormattedNumber,
+} from 'react-intl';
 import Link from 'next/link';
 
 import BarScale from 'components/barScale';
@@ -83,7 +88,11 @@ export const InfectiousPeople: React.FC = () => {
           <h3>
             <FormattedMessage id="besmettelijke_personen.metric_title" />{' '}
             <span style={{ color: '#01689b' }}>
-              {formatDecimal(count.last_value.infectious_avg)}
+              {count.last_value.infectious_avg ? (
+                <FormattedNumber value={count.last_value.infectious_avg} />
+              ) : (
+                '-'
+              )}
             </span>
           </h3>
         )}
@@ -91,18 +100,16 @@ export const InfectiousPeople: React.FC = () => {
         {count &&
           countNormalized?.last_value?.infectious_avg_normalized !== null && (
             <DateReported>
-              <p>
-                <FormattedMessage
-                  id="besmettelijke_personen.datums"
-                  values={{
-                    dateOfReport: (
-                      <FormattedDate
-                        value={count?.last_value?.date_of_report_unix * 1000}
-                      />
-                    ),
-                  }}
-                />
-              </p>
+              <FormattedMessage
+                id="besmettelijke_personen.datums"
+                values={{
+                  dateOfReport: (
+                    <FormattedDate
+                      value={count?.last_value?.date_of_report_unix * 1000}
+                    />
+                  ),
+                }}
+              />
             </DateReported>
           )}
       </GraphContent>

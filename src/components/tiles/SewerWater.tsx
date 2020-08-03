@@ -65,21 +65,19 @@ export const SewerWater: React.FC = () => {
 
         {data && data?.last_value?.average !== null && (
           <DateReported>
-            <p>
-              <FormattedMessage
-                id="rioolwater_metingen.datums"
-                values={{
-                  dateOfReport: (
-                    <FormattedDate value={data?.last_value?.week_unix * 1000} />
-                  ),
-                  dateOfInsertion: (
-                    <FormattedDate
-                      value={data?.last_value?.date_of_insertion_unix * 1000}
-                    />
-                  ),
-                }}
-              />
-            </p>
+            <FormattedMessage
+              id="rioolwater_metingen.datums"
+              values={{
+                dateOfReport: (
+                  <FormattedDate value={data?.last_value?.week_unix * 1000} />
+                ),
+                dateOfInsertion: (
+                  <FormattedDate
+                    value={data?.last_value?.date_of_insertion_unix * 1000}
+                  />
+                ),
+              }}
+            />
           </DateReported>
         )}
       </GraphContent>

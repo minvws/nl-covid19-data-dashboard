@@ -5,7 +5,6 @@
   "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
   "dependencies": {
     "d3-scale": "2",
-    "date-fns": "^2.15.0",
     "downshift": "^5.4.2",
     "highcharts": "^8.1.0",
     "highcharts-react-official": "^3.0.0",
@@ -14,10 +13,9 @@
     "next": "^9.4.4",
     "preact": "^10.4.4",
     "preact-render-to-string": "^5.1.9",
-    "react": "^16.13.1",
+    "react": "github:preact-compat/react#1.0.0",
     "react-collapsed": "^3.0.0",
-    "react-dom": "^16.13.1",
-    "react-intl": "^5.4.2",
+    "react-dom": "github:preact-compat/react-dom#1.0.0",
     "react-masonry-css": "^1.0.14",
     "react-ssr-prepass": "npm:preact-ssr-prepass@^1.0.1",
     "swr": "^0.2.2",
@@ -26,8 +24,6 @@
   "devDependencies": {
     "@babel/core": "^7.10.4",
     "@babel/preset-env": "^7.10.4",
-    "@formatjs/cli": "^2.0.0",
-    "@formatjs/ts-transformer": "^2.5.1",
     "@next/bundle-analyzer": "^9.4.4",
     "@prefresh/next": "^0.3.1",
     "@svgr/webpack": "^5.4.0",
@@ -85,8 +81,6 @@
     "test:ci": "jest --ci",
     "format": "prettier --write **/*.{js,ts,tsx}",
     "lint": "eslint .",
-    "type-check": "tsc --pretty --noEmit",
-    "extract": "formatjs extract src/**/*.ts* --out-file src/extracted/nl.json",
-    "compile": "formatjs compile src/extracted/nl.json --ast --out-file src/compiled-lang/nl.json"
+    "type-check": "tsc --pretty --noEmit"
   }
 }
