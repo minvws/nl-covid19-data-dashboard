@@ -12,7 +12,6 @@ import GraphContent from 'components/graphContent';
 import GraphHeader from 'components/graphHeader';
 import { DateReported } from 'components/dateReported';
 import Ziektegolf from 'assets/ziektegolf.svg';
-import formatDecimal from 'utils/formatDec';
 
 import { AreaChart } from './index';
 

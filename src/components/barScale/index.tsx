@@ -1,6 +1,5 @@
 import styles from './styles.module.scss';
 import { useRef, FunctionComponent } from 'react';
-import formatNumber from 'utils/formatNumber';
 import ScreenReaderOnly from 'components/screenReaderOnly';
 import { scaleQuantile, scaleThreshold } from 'd3-scale';
 

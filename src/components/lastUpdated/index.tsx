@@ -1,7 +1,6 @@
 import { FunctionComponent } from 'react';
 
 import styles from './lastUpdated.module.scss';
-import { long } from 'data/months';
 
 const formatDate = (timestamp: number) => {
   const date = new Date(timestamp);
@@ -12,9 +11,7 @@ const formatDate = (timestamp: number) => {
   let mm = date.getMinutes().toString();
   if (mm.length === 1) mm = '0' + mm;
 
-  return `${hh}:${mm}, ${date.getDate()} ${
-    long[date.getMonth()]
-  } ${date.getFullYear()}`;
+  return `${hh}:${mm}, ${date.getDate()} ${date.getMonth()} ${date.getFullYear()}`;
 };
 
 const formatTimestamp = (timestamp: number) => {

@@ -2,9 +2,6 @@ import { useMemo } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-import months from 'data/months';
-import formatNumber from 'utils/formatNumber';
-
 if (typeof Highcharts === 'object') {
   require('highcharts/highcharts-more')(Highcharts);
 }
@@ -35,12 +32,12 @@ const AreaChart: React.FC<AreaChartProps> = (props) => {
 
   const formatDate = (value: string) => {
     const date = new Date(value);
-    return `${date.getDate()} ${months[date.getMonth()]}`;
+    return `${date.getDate()} ${date.getMonth()}`;
   };
 
   const formatDateLong = (value: string) => {
     const date = new Date(value);
-    return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
+    return `${date.getDate()} ${date.getMonth()} ${date.getFullYear()}`;
   };
 
   const rangeData: [Date, number | null, number | null][] = useMemo(() => {
