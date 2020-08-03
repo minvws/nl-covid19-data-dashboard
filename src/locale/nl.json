@@ -127,7 +127,7 @@
       "notes": ""
     },
     "datums": {
-      "translation": "Waarde van {{dateOfReport}}. Verkegen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
+      "translation": "Waarde van {{dateOfReport}}. Verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
       "notes": ""
     },
     "graph_title": {
@@ -529,7 +529,7 @@
       "notes": ""
     },
     "datums": {
-      "translation": "Waarde van {{dateOfReport}}. Verkegen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+      "translation": "Waarde van {{dateOfReport}}. Verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "notes": ""
     },
     "metric_title": {
@@ -701,7 +701,7 @@
       "notes": ""
     },
     "datums": {
-      "translation": "Waarde van {{dateOfReport}}. Verkegen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
+      "translation": "Waarde van {{dateOfReport}}. Verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
       "notes": ""
     },
     "graph_title": {
