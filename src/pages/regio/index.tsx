@@ -411,6 +411,11 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                               ?.infected_people_delta_normalized?.last_value
                               ?.date_of_report_unix
                           }
+                          dateInsertedUnix={
+                            state[selectedRegio?.code]
+                              ?.infected_people_delta_normalized?.last_value
+                              ?.date_of_insertion_unix
+                          }
                         />
                       </>
                     )}

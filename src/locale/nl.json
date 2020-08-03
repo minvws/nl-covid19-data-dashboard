@@ -979,7 +979,7 @@
       "notes": ""
     },
     "datums": {
-      "translation": "Waarde van gisteren. Verkregen op {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
+      "translation": "Waarde van {{dateOfReport}}. Verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "notes": ""
     },
     "metric_title": {
