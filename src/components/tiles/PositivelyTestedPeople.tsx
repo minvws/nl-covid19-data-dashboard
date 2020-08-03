@@ -98,11 +98,15 @@ export const PositivelyTestedPeople: React.FC = () => {
                 dateOfReport: (
                   <FormattedDate
                     value={delta?.last_value?.date_of_report_unix * 1000}
+                    month="long"
+                    day="numeric"
                   />
                 ),
                 dateOfInsertion: (
                   <FormattedDate
                     value={delta?.last_value?.date_of_insertion_unix * 1000}
+                    month="long"
+                    day="numeric"
                   />
                 ),
               }}

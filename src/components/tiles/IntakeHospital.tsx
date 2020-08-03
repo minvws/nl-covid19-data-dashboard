@@ -88,6 +88,8 @@ export const IntakeHospital: React.FC = () => {
                 dateOfReport: (
                   <FormattedDate
                     value={data?.last_value?.date_of_report_unix * 1000}
+                    month="long"
+                    day="numeric"
                   />
                 ),
               }}

@@ -69,11 +69,17 @@ export const SewerWater: React.FC = () => {
               id="rioolwater_metingen.datums"
               values={{
                 dateOfReport: (
-                  <FormattedDate value={data?.last_value?.week_unix * 1000} />
+                  <FormattedDate
+                    value={data?.last_value?.week_unix * 1000}
+                    month="long"
+                    day="numeric"
+                  />
                 ),
                 dateOfInsertion: (
                   <FormattedDate
                     value={data?.last_value?.date_of_insertion_unix * 1000}
+                    month="long"
+                    day="numeric"
                   />
                 ),
               }}

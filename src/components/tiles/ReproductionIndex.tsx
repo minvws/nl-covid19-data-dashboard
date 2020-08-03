@@ -95,6 +95,8 @@ export const ReproductionIndex: React.FC = () => {
                     value={
                       lastKnownValidData?.last_value?.date_of_report_unix * 1000
                     }
+                    month="long"
+                    day="numeric"
                   />
                 ),
                 dateOfInsertion: (
@@ -103,6 +105,8 @@ export const ReproductionIndex: React.FC = () => {
                       lastKnownValidData?.last_value?.date_of_insertion_unix *
                       1000
                     }
+                    month="long"
+                    day="numeric"
                   />
                 ),
               }}
