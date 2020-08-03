@@ -63,7 +63,7 @@ export const SewerWater: React.FC = () => {
               id: 'rioolwater_metingen.datums',
             })}
             dateInsertedUnix={data?.last_value?.date_of_insertion_unix}
-            dateUnix={data?.last_value?.week}
+            dateUnix={data?.last_value?.week_unix}
           />
         )}
       </GraphContent>
@@ -93,7 +93,7 @@ export const SewerWater: React.FC = () => {
             <LineChart
               values={data.values.map((value) => ({
                 value: Number(value.average),
-                date: value.week,
+                date: value.week_unix,
               }))}
             />
 

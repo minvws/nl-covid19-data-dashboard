@@ -67,7 +67,7 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = (props) => {
                 : '/images/logo-ro.svg'
             }
             alt="Rijksoverheid"
-            loading="lazy"
+            // loading="lazy"
             width={showSmallLogo ? 40 : 314}
             height={showSmallLogo ? 76 : 125}
           />

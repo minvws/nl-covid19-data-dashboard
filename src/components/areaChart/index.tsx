@@ -107,6 +107,9 @@ const AreaChart: React.FC<AreaChartProps> = (props) => {
         title: {
           text: null,
         },
+        labels: {
+          format: '{value}',
+        },
         plotLines: [],
         accessibility: {
           rangeDescription: 'Range: 2010 to 2017',

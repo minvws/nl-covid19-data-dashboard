@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 
 import { FormattedMessage, useIntl } from 'react-intl';
+import Link from 'next/link';
 
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
@@ -18,7 +19,10 @@ import { AreaChart } from './index';
 import siteText from 'locale';
 import { store } from 'store';
 
-import { InfectiousPeopleCount } from 'types/data';
+import {
+  InfectiousPeopleCount,
+  InfectiousPeopleCountNormalized,
+} from 'types/data';
 
 export const InfectiousPeople: React.FC = () => {
   const globalState = useContext(store);
@@ -26,7 +30,7 @@ export const InfectiousPeople: React.FC = () => {
 
   const count: InfectiousPeopleCount | undefined =
     state?.NL?.infectious_people_count;
-  const countNormalized: InfectiousPeopleCount | undefined =
+  const countNormalized: InfectiousPeopleCountNormalized | undefined =
     state?.NL?.infectious_people_count_normalized;
 
   const intl = useIntl();
@@ -49,7 +53,7 @@ export const InfectiousPeople: React.FC = () => {
             screenReaderText={intl.formatMessage({
               id: 'besmettelijke_personen.screen_reader_graph_content',
             })}
-            value={countNormalized.last_value.infectious_avg}
+            value={countNormalized.last_value.infectious_avg_normalized}
             id="besmettelijk"
             gradient={[
               {
@@ -64,7 +68,10 @@ export const InfectiousPeople: React.FC = () => {
           <FormattedMessage
             defaultMessage="Voor het aantal besmettelijke mensen is geen signaalwaarde beschikbaar
           omdat dit aantal een inschatting is gebaseerd op een berekening."
-          />
+          />{' '}
+          <Link href="/verantwoording">
+            <a>Lees hier waarom</a>
+          </Link>
         </p>
 
         {count && (
@@ -76,7 +83,7 @@ export const InfectiousPeople: React.FC = () => {
           </h3>
         )}
 
-        {countNormalized?.last_value?.infectious_avg !== null && (
+        {countNormalized?.last_value?.infectious_avg_normalized !== null && (
           <DateReported
             datumsText={intl.formatMessage({
               id: 'besmettelijke_personen.datums',

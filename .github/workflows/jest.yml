@@ -11,7 +11,7 @@ on:
   pull_request:
     branches:
       - master
-      - developer
+      - develop
 
 jobs:
   build:

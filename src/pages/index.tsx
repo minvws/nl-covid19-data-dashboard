@@ -8,6 +8,10 @@ import GraphContent from 'components/graphContent';
 import TitleBlock from 'components/titleBlock';
 import Layout from 'components/layout';
 import LinkCard from 'components/linkCard';
+
+import LastUpdated from 'components/lastUpdated';
+import lastUpdatedStyles from 'components/lastUpdated/lastUpdated.module.scss';
+
 import { IntakeIntensiveCare } from 'components/tiles/IntakeIntensiveCare';
 import { NursingHomeInfectedDeaths } from 'components/tiles/NursingHomeInfectedDeaths';
 import { NursingHomeInfectedLocations } from 'components/tiles/NursingHomeInfectedLocations';
@@ -93,6 +97,14 @@ const Home: FunctionComponentWithLayout = () => {
       </Head>
 
       <MaxWidth>
+        {state?.NL?.last_generated ? (
+          <LastUpdated lastUpdated={state.NL?.last_generated * 1000} />
+        ) : (
+          <p className={lastUpdatedStyles.text}>
+            Laatste informatie aan het ophalen
+          </p>
+        )}
+
         <Notification />
       </MaxWidth>
 

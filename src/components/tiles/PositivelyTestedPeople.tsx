@@ -50,7 +50,7 @@ export const PositivelyTestedPeople: React.FC = () => {
         {delta && (
           <BarScale
             min={0}
-            max={5}
+            max={10}
             screenReaderText={intl.formatMessage({
               id: 'positief_geteste_personen.screen_reader_graph_content',
             })}
@@ -80,6 +80,7 @@ export const PositivelyTestedPeople: React.FC = () => {
               id: 'positief_geteste_personen.datums',
             })}
             dateUnix={delta?.last_value?.date_of_report_unix}
+            dateInsertedUnix={delta?.last_value?.date_of_insertion_unix}
           />
         )}
       </GraphContent>
