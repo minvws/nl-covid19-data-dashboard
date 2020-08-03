@@ -82,11 +82,17 @@ export const NursingHomeInfectedLocations: React.FC = () => {
                       value={
                         newLocations?.last_value?.date_of_report_unix * 1000
                       }
+                      month="long"
+                      day="numeric"
                     />
                   ),
                   dateOfInsertion: (
                     <FormattedDate
-                      value={newLocations?.last_value?.date_of_insertion_unix}
+                      value={
+                        newLocations?.last_value?.date_of_insertion_unix * 1000
+                      }
+                      month="long"
+                      day="numeric"
                     />
                   ),
                 }}

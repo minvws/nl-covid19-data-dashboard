@@ -106,6 +106,8 @@ export const InfectiousPeople: React.FC = () => {
                   dateOfReport: (
                     <FormattedDate
                       value={count?.last_value?.date_of_report_unix * 1000}
+                      month="long"
+                      day="numeric"
                     />
                   ),
                 }}
