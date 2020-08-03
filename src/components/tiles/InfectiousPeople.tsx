@@ -1,5 +1,7 @@
 import { useContext } from 'react';
 
+import Link from 'next/link';
+
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
 import Metadata from 'components/metadata';
@@ -52,8 +54,11 @@ export const InfectiousPeople: React.FC = () => {
         )}
 
         <p className={'regioDataLoading'}>
-          Voor het aantal besmettelijke mensen is geen signaalwaarde beschikbaar
-          omdat dit aantal een inschatting is gebaseerd op een berekening.
+          Voor het aantal besmettelijke mensen is geen signaalwaarde
+          beschikbaar.{' '}
+          <Link href="/verantwoording">
+            <a>Lees hier waarom</a>
+          </Link>
         </p>
 
         {count && (
