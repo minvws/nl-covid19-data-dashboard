@@ -1,444 +1,199 @@
 {
-    "error_titel": {
-        "text": ""
-    },
-    "error_beschrijving": {
-        "text": ""
-    },
-    "error_probeer_opnieuw": {
-        "text": ""
-    },
-    "skiplinks": {
-        "inhoud": "",
-        "nav": ""
-    },
-    "header": {
-        "title": "",
-        "text": "",
-        "link": ""
-    },
-    "nav": {
-        "links": {
-            "index": "",
-            "regio": "",
-            "over": "",
-            "meer": "",
-            "verantwoording": ""
-        }
-    },
-    "ic_opnames_per_dag": {
-        "title": "",
-        "text": "",
-        "datums": "",
-        "fold_title": "",
-        "fold": "",
-        "graph_title": "",
-        "open": "",
-        "sluit": "",
-        "signaalwaarde": "",
-        "screen_reader_graph_content": "",
-        "bron": {
-            "href": "",
-            "text": ""
-        }
-    },
-    "verdenkingen_huisartsen": {
-        "title": "",
-        "text": "",
-        "datums": "",
-        "graph_title": "",
-        "fold_title": "",
-        "fold": "",
-        "open": "",
-        "sluit": "",
-        "screen_reader_graph_content": "",
-        "bron": {
-            "href": "",
-            "text": ""
-        }
-    },
-    "ziekenhuisopnames_per_dag": {
-        "title": "",
-        "text": "",
-        "datums": "",
-        "fold_title": "",
-        "fold": "",
-        "graph_title": "",
-        "open": "",
-        "sluit": "",
-        "signaalwaarde": "",
-        "screen_reader_graph_content": "",
-        "bron": {
-            "href": "",
-            "text": ""
-        }
-    },
-    "positief_geteste_personen": {
-        "title": "",
-        "text": "",
-        "datums": "",
-        "fold_title": "",
-        "fold": "",
-        "metric_title": "",
-        "linechart_title": "",
-        "graph_title": "",
-        "open": "",
-        "sluit": "",
-        "screen_reader_graph_content": "",
-        "bron": {
-            "href": "",
-            "text": ""
-        }
-    },
-    "besmettelijke_personen": {
-        "title": "",
-        "text": "",
-        "datums": "",
-        "fold_title": "",
-        "fold": "",
-        "metric_title": "",
-        "graph_title": "",
-        "open": "",
-        "sluit": "",
-        "screen_reader_graph_content": "",
-        "bron": {
-            "href": "",
-            "text": ""
-        }
-    },
-    "reproductiegetal": {
-        "title": "",
-        "text": "",
-        "datums": "",
-        "screen_reader_graph_content": "",
-        "fold_title": "",
-        "fold": "",
-        "graph_title": "",
-        "open": "",
-        "sluit": "",
-        "rangeLegendLabel": "",
-        "lineLegendLabel": "",
-        "signaalwaarde": "",
-        "bron": {
-            "href": "",
-            "text": ""
-        },
-        "legenda_r": "",
-        "legenda_marge": ""
-    },
-    "overige_gegevens": {
-        "title": "",
-        "text": "",
-        "fold_title": "",
-        "fold": "",
-        "graph_title": "",
-        "open": "",
-        "sluit": "",
-        "list": [
-            {
-                "icon": "",
-                "text": "",
-                "content": ""
-            },
-            {
-                "icon": "",
-                "text": "",
-                "content": ""
-            },
-            {
-                "icon": "",
-                "text": "",
-                "content": ""
-            },
-            {
-                "icon": "",
-                "text": "",
-                "content": ""
-            },
-            {
-                "icon": "",
-                "text": "",
-                "content": ""
-            },
-            {
-                "icon": "",
-                "text": "",
-                "content": ""
-            }
-        ]
-    },
-    "regio_link_block": {
-        "title": "",
-        "text": ""
-    },
-    "verpleeghuis_besmette_locaties": {
-        "title": "",
-        "text": "",
-        "datums": "",
-        "metric_title": "",
-        "metric_text": "",
-        "fold_title": "",
-        "fold": "",
-        "graph_title": "",
-        "open": "",
-        "sluit": "",
-        "screen_reader_graph_content": "",
-        "bron": {
-            "href": "",
-            "text": ""
-        }
-    },
-    "verpleeghuis_positief_geteste_personen": {
-        "title": "",
-        "text": "",
-        "datums": "",
-        "fold_title": "",
-        "fold": "",
-        "graph_title": "",
-        "open": "",
-        "sluit": "",
-        "signaalwaarde": "",
-        "screen_reader_graph_content": "",
-        "bron": {
-            "href": "",
-            "text": ""
-        }
-    },
-    "verpleeghuis_oversterfte": {
-        "title": "",
-        "text": "",
-        "datums": "",
-        "screen_reader_graph_content": "",
-        "fold_title": "",
-        "fold": "",
-        "graph_title": "",
-        "open": "",
-        "sluit": "",
-        "bron": {
-            "href": "",
-            "text": ""
-        }
-    },
-    "blok_verpleeghuis_zorg": {
-        "title": "",
-        "text": ""
-    },
-    "geen_selectie": {
-        "text": ""
-    },
-    "rioolwater_metingen": {
-        "title": "",
-        "text": "",
-        "datums": "",
-        "graph_title": "",
-        "fold_title": "",
-        "fold": "",
-        "open": "",
-        "sluit": "",
-        "screen_reader_graph_content": "",
-        "bron": {
-            "text": "",
-            "href": ""
-        }
-    },
-    "notfound_titel": {
-        "text": ""
-    },
-    "notfound_beschrijving": {
-        "text": ""
-    },
-    "over_titel": {
-        "text": ""
-    },
-    "over_disclaimer": {
-        "title": "",
-        "text": ""
-    },
-    "over_beschrijving": {
-        "text": ""
-    },
-    "over_veelgestelde_vragen": {
-        "text": "",
-        "vragen": [
-            {
-                "vraag": "",
-                "antwoord": ""
-            },
-            {
-                "vraag": "",
-                "antwoord": ""
-            },
-            {
-                "vraag": "",
-                "antwoord": ""
-            },
-            {
-                "vraag": "",
-                "antwoord": ""
-            },
-            {
-                "vraag": "",
-                "antwoord": ""
-            },
-            {
-                "vraag": "",
-                "antwoord": ""
-            },
-            {
-                "vraag": "",
-                "antwoord": ""
-            },
-            {
-                "vraag": "",
-                "antwoord": ""
-            },
-            {
-                "vraag": "",
-                "antwoord": ""
-            },
-            {
-                "vraag": "",
-                "antwoord": ""
-            },
-            {
-                "vraag": "",
-                "antwoord": ""
-            },
-            {
-                "vraag": "",
-                "antwoord": ""
-            },
-            {
-                "vraag": "",
-                "antwoord": ""
-            },
-            {
-                "vraag": "",
-                "antwoord": ""
-            }
-        ]
-    },
-    "regionaal_ziekenhuisopnames_per_dag": {
-        "title": "",
-        "text": "",
-        "datums": "",
-        "fold_title": "",
-        "fold": "",
-        "graph_title": "",
-        "open": "",
-        "sluit": "",
-        "screen_reader_graph_content": "",
-        "bron": {
-            "href": "",
-            "text": ""
-        }
-    },
-    "regionaal_positief_geteste_personen": {
-        "title": "",
-        "text": "",
-        "datums": "",
-        "metric_title": "",
-        "fold_title": "",
-        "fold": "",
-        "graph_title": "",
-        "open": "",
-        "sluit": "",
-        "screen_reader_graph_content": "",
-        "bron": {
-            "href": "",
-            "text": ""
-        }
-    },
-    "terug_naar_regio_selectie": {
-        "text": "Back to region selection"
-    },
-    "verantwoording": {
-        "title": "",
-        "cijfers": [
-            {
-                "cijfer": "",
-                "verantwoording": ""
-            },
-            {
-                "cijfer": "",
-                "verantwoording": ""
-            },
-            {
-                "cijfer": "",
-                "verantwoording": ""
-            },
-            {
-                "cijfer": "",
-                "verantwoording": ""
-            },
-            {
-                "cijfer": "",
-                "verantwoording": ""
-            },
-            {
-                "cijfer": "",
-                "verantwoording": ""
-            },
-            {
-                "cijfer": "",
-                "verantwoording": ""
-            },
-            {
-                "cijfer": "",
-                "verantwoording": ""
-            },
-            {
-                "cijfer": "",
-                "verantwoording": ""
-            },
-            {
-                "cijfer": "",
-                "verantwoording": ""
-            },
-            {
-                "cijfer": "",
-                "verantwoording": ""
-            },
-            {
-                "cijfer": "",
-                "verantwoording": ""
-            },
-            {
-                "cijfer": "Open source data processing",
-                "verantwoording": ""
-            }
-        ]
-    },
-    "error_metadata": {
-        "title": ""
-    },
-    "nationaal_metadata": {
-        "title": "",
-        "description": "",
-        "url": ""
-    },
-    "notfound_metadata": {
-        "title": ""
-    },
-    "over_metadata": {
-        "title": "",
-        "description": "",
-        "url": ""
-    },
-    "regionaal_metadata": {
-        "title": "",
-        "description": "",
-        "url": ""
-    },
-    "verantwoording_metadata": {
-        "title": "",
-        "description": "",
-        "url": ""
-    },
-    "metadata": {
-        "description": "",
-        "titel": "",
-        "title": "",
-        "url": ""
-    }
+  "error_titel.text": "Er is iets misgegaan",
+  "error_beschrijving.text": "Er is helaas iets misgegaan. Ververs de pagina of probeer het later opnieuw.",
+  "error_probeer_opnieuw.text": "Probeer opnieuw",
+  "skiplinks.inhoud": "Ga direct naar de inhoud",
+  "skiplinks.nav": "Ga direct naar de navigatie",
+  "header.title": "Dashboard coronavirus",
+  "header.text": "Het dashboard coronavirus geeft informatie over de ontwikkeling van het coronavirus in Nederland.",
+  "header.link": "Lees meer",
+  "nav.links.index": "Landelijke cijfers",
+  "nav.links.regio": "Regionale cijfers",
+  "nav.links.over": "Over dit dashboard",
+  "nav.links.meer": "Meer informatie over het coronavirus",
+  "nav.links.verantwoording": "Cijferverantwoording",
+  "ic_opnames_per_dag.title": "Intensive care-opnames per dag",
+  "ic_opnames_per_dag.text": "Aantal opnames per dag, gemiddeld over de afgelopen 3 dagen.",
+  "ic_opnames_per_dag.datums": "Berekend op {dateOfReport}. Wordt dagelijks bijgewerkt.",
+  "ic_opnames_per_dag.fold_title": "What does this mean?",
+  "ic_opnames_per_dag.fold": "Aantal mensen met bevestigd COVID-19 dat per dag op een intensive care-afdeling van een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de afgelopen drie dagen.",
+  "ic_opnames_per_dag.graph_title": "Verloop over tijd",
+  "ic_opnames_per_dag.open": "Hide explanation",
+  "ic_opnames_per_dag.sluit": "More information and data",
+  "ic_opnames_per_dag.signaalwaarde": "10",
+  "ic_opnames_per_dag.screen_reader_graph_content": "{value} intensive care-opnames per dag. Signaalwaarde: {kritiekeWaarde} opnames per dag.",
+  "ic_opnames_per_dag.bron.href": "https://stichting-nice.nl/",
+  "ic_opnames_per_dag.bron.text": "Stichting NICE",
+  "verdenkingen_huisartsen.title": "Aantal patiënten waarvan huisartsen COVID-19 vermoeden",
+  "verdenkingen_huisartsen.text": "Aantal door de huisarts geregistreerde verdenkingen van COVID-19, per 100.000 inwoners, per week.",
+  "verdenkingen_huisartsen.datums": "Waarde van {dateOfReport}. Verkregen op {dateOfInsertion}. Wordt wekelijks bijgewerkt.",
+  "verdenkingen_huisartsen.graph_title": "Verloop over tijd",
+  "verdenkingen_huisartsen.fold_title": "What does this mean?",
+  "verdenkingen_huisartsen.fold": "Huisartsen registreren bij het spreken van een patiënt, de vernomen klachten. Elke week berekent het Nivel aan de hand van de geregistreerde klachten, het aantal patiënten met een verdenking op COVID-19 in de afgelopen week.",
+  "verdenkingen_huisartsen.open": "Hide explanation",
+  "verdenkingen_huisartsen.sluit": "More information and data",
+  "verdenkingen_huisartsen.screen_reader_graph_content": "{value} patiënten waarvan huisartsen COVID-19 vermoeden, per 100.000 inwoners, per week.",
+  "verdenkingen_huisartsen.bron.href": "https://www.nivel.nl/nl/nivel-zorgregistraties-eerste-lijn/nivel-zorgregistraties-eerste-lijn",
+  "verdenkingen_huisartsen.bron.text": "Nivel Zorgregistraties Eerste Lijn",
+  "ziekenhuisopnames_per_dag.title": "Ziekenhuisopnames per dag",
+  "ziekenhuisopnames_per_dag.text": "Aantal opnames per dag, gemiddeld over de afgelopen 3 dagen.",
+  "ziekenhuisopnames_per_dag.datums": "Berekend op {dateOfReport}. Wordt dagelijks bijgewerkt.",
+  "ziekenhuisopnames_per_dag.fold_title": "What does this mean?",
+  "ziekenhuisopnames_per_dag.fold": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen.",
+  "ziekenhuisopnames_per_dag.graph_title": "Verloop over tijd",
+  "ziekenhuisopnames_per_dag.open": "Hide explanation",
+  "ziekenhuisopnames_per_dag.sluit": "More information and data",
+  "ziekenhuisopnames_per_dag.signaalwaarde": "40",
+  "ziekenhuisopnames_per_dag.screen_reader_graph_content": "{value} ziekenhuisopnames per dag. Signaalwaarde: {kritiekeWaarde} opnames per dag.",
+  "ziekenhuisopnames_per_dag.bron.href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+  "ziekenhuisopnames_per_dag.bron.text": "RIVM",
+  "positief_geteste_personen.title": "Positief geteste mensen",
+  "positief_geteste_personen.text": "Aantal positief geteste mensen per 100.000 inwoners per dag.",
+  "positief_geteste_personen.datums": "Waarde van {dateOfReport}. Verkregen op {dateOfInsertion}. Wordt dagelijks bijgewerkt.",
+  "positief_geteste_personen.fold_title": "What does this mean?",
+  "positief_geteste_personen.fold": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
+  "positief_geteste_personen.metric_title": "Aantal positief geteste mensen:",
+  "positief_geteste_personen.linechart_title": "Verloop over tijd",
+  "positief_geteste_personen.graph_title": "Verdeling naar leeftijd (totaal aantal mensen)",
+  "positief_geteste_personen.open": "Hide explanation",
+  "positief_geteste_personen.sluit": "More information and data",
+  "positief_geteste_personen.screen_reader_graph_content": "{value} positief geteste mensen per dag.",
+  "positief_geteste_personen.bron.href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+  "positief_geteste_personen.bron.text": "RIVM",
+  "besmettelijke_personen.title": "Aantal besmettelijke mensen",
+  "besmettelijke_personen.text": "Een berekening van hoeveel mensen met COVID-19 per 100.000 inwoners besmettelijk zijn voor anderen. Dit getal wordt door het RIVM berekend.",
+  "besmettelijke_personen.datums": "Waarde van {dateOfReport}. Wordt wekelijks bijgewerkt.",
+  "besmettelijke_personen.fold_title": "What does this mean?",
+  "besmettelijke_personen.fold": "Als iemand het coronavirus oploopt, dan is deze persoon een tijd lang besmettelijk voor anderen. Hoe lang dit duurt verschilt van persoon tot persoon. Het aantal besmettelijke mensen is een schatting op basis van een aantal gegevensbronnen. Het exacte aantal is onbekend, maar we kunnen wel aangeven of het gaat om tientallen, honderden, duizenden of meer. ",
+  "besmettelijke_personen.metric_title": "Geschat aantal besmettelijke mensen in Nederland:",
+  "besmettelijke_personen.graph_title": "Verloop over tijd",
+  "besmettelijke_personen.open": "Hide explanation",
+  "besmettelijke_personen.sluit": "More information and data",
+  "besmettelijke_personen.screen_reader_graph_content": "{value} besmettelijke personen per 100.000 inwoners.",
+  "besmettelijke_personen.bron.href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+  "besmettelijke_personen.bron.text": "RIVM",
+  "reproductiegetal.title": "Reproductiegetal",
+  "reproductiegetal.text": "Aantal mensen dat besmet wordt door één besmettelijke persoon.",
+  "reproductiegetal.datums": "Waarde van {dateOfReport}. Verkregen op {dateOfInsertion}. Wordt wekelijks bijgewerkt.",
+  "reproductiegetal.screen_reader_graph_content": "{value} mensen. Signaalwaarde: {kritiekeWaarde}.",
+  "reproductiegetal.fold_title": "What does this mean?",
+  "reproductiegetal.fold": "Het reproductiegetal laat zien hoe snel het virus zich verspreidt. Dit getal geeft aan hoeveel mensen gemiddeld besmet worden door één patiënt met COVID-19. Bij een reproductiegetal van rond de 1 blijft het aantal besmettingen ongeveer gelijk. Als het reproductiegetal lager is dan 1, dan daalt het aantal besmettingen. Bij een getal hoger dan 1 stijgt het aantal besmettingen.",
+  "reproductiegetal.graph_title": "Verloop over tijd",
+  "reproductiegetal.open": "Hide explanation",
+  "reproductiegetal.sluit": "More information and data",
+  "reproductiegetal.rangeLegendLabel": "Onzekerheidsmarge",
+  "reproductiegetal.lineLegendLabel": "Effectieve R",
+  "reproductiegetal.signaalwaarde": "1",
+  "reproductiegetal.bron.href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+  "reproductiegetal.bron.text": "RIVM",
+  "reproductiegetal.legenda_r": "De effectieve R is een schatting. Voor recente R schattingen is de betrouwbaarheid niet groot, daarom loopt de R-lijn niet door in de laatste twee weken.",
+  "reproductiegetal.legenda_marge": "De onzekerheidsmarge toont tussen welke waarden de R zich bevindt. Dit wordt wekelijks bijgewerkt.",
+  "overige_gegevens.title": "Nog te ontwikkelen",
+  "overige_gegevens.text": "Het is de bedoeling dat het dashboard in de toekomst wordt uitgebreid met de volgende gegevens:",
+  "overige_gegevens.fold_title": "What does this mean?",
+  "overige_gegevens.graph_title": "Verloop over tijd",
+  "overige_gegevens.open": "Hide explanation",
+  "overige_gegevens.sluit": "Meer uitleg",
+  "regio_link_block.title": "Informatie per regio",
+  "regio_link_block.text": "Bekijk de belangrijkste cijfers voor uw veiligheidsregio.",
+  "verpleeghuis_besmette_locaties.title": "Aantal besmette locaties",
+  "verpleeghuis_besmette_locaties.text": "Aantal nieuwe locaties waarbij tenminste één bewoner positief getest is, per dag.",
+  "verpleeghuis_besmette_locaties.datums": "Waarde van {dateOfReport}. Verkregen op {dateOfInsertion}. Wordt dagelijks bijgewerkt.",
+  "verpleeghuis_besmette_locaties.metric_title": "Het totaal aantal besmette locaties is:",
+  "verpleeghuis_besmette_locaties.metric_text": "Dit getal is een inschatting van het totaal aantal verpleeghuislocaties waar in de afgelopen 28 dagen minstens één (nieuwe) COVID-19 besmetting op basis van een positieve test, is gemeld.",
+  "verpleeghuis_besmette_locaties.fold_title": "What does this mean?",
+  "verpleeghuis_besmette_locaties.fold": "Dit getal is een inschatting van het aantal nieuwe verpleeghuislocaties waar sprake is van tenminste een COVID-19 besmetting op basis van een positieve test. Het getal geeft het aantal locaties weer dat gisteren is gemeld. Een verpleeghuis wordt meegeteld als ‘nieuwe locatie’ wanneer er tenminste 28 dagen, dit is twee keer de incubatietijd, geen nieuwe patiënten zijn geweest.",
+  "verpleeghuis_besmette_locaties.graph_title": "Verloop over tijd",
+  "verpleeghuis_besmette_locaties.open": "Hide explanation",
+  "verpleeghuis_besmette_locaties.sluit": "More information and data",
+  "verpleeghuis_besmette_locaties.screen_reader_graph_content": "{value} nieuwe locaties waarbij tenminste één bewoner positief getest is, per dag.",
+  "verpleeghuis_besmette_locaties.bron.href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+  "verpleeghuis_besmette_locaties.bron.text": "RIVM",
+  "verpleeghuis_positief_geteste_personen.title": "Aantal positief geteste bewoners",
+  "verpleeghuis_positief_geteste_personen.text": "Aantal positief geteste bewoners in verpleeghuizen per dag.",
+  "verpleeghuis_positief_geteste_personen.datums": "Waarde van {dateOfReport}. Verkregen op {dateOfInsertion}. Wordt dagelijks bijgewerkt.",
+  "verpleeghuis_positief_geteste_personen.fold_title": "What does this mean?",
+  "verpleeghuis_positief_geteste_personen.fold": "Dit getal is een inschatting van het aantal gemelde bewoners in verpleeghuizen dat in Nederland positief getest is en COVID-19 heeft. Dit getal verwijst naar de datum vóór de datum van de laatste update.",
+  "verpleeghuis_positief_geteste_personen.graph_title": "Verloop over tijd",
+  "verpleeghuis_positief_geteste_personen.open": "Hide explanation",
+  "verpleeghuis_positief_geteste_personen.sluit": "More information and data",
+  "verpleeghuis_positief_geteste_personen.signaalwaarde": "40",
+  "verpleeghuis_positief_geteste_personen.screen_reader_graph_content": "{value} positief geteste bewoners.",
+  "verpleeghuis_positief_geteste_personen.bron.href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+  "verpleeghuis_positief_geteste_personen.bron.text": "RIVM",
+  "verpleeghuis_oversterfte.title": "Sterfte",
+  "verpleeghuis_oversterfte.text": "Aantal overleden bewoners in verpleeghuizen met een vastgestelde COVID-19-besmetting per dag.",
+  "verpleeghuis_oversterfte.datums": "Waarde van {dateOfReport}. Verkregen op {dateOfInsertion}. Wordt dagelijks bijgewerkt.",
+  "verpleeghuis_oversterfte.screen_reader_graph_content": "{value} overleden bewoners.",
+  "verpleeghuis_oversterfte.fold_title": "What does this mean?",
+  "verpleeghuis_oversterfte.fold": "Dit getal is een inschatting van het aantal gemelde verpleeghuisbewoners dat in Nederland overlijdt aan de gevolgen van het nieuwe coronavirus. Dit getal verwijst naar de datum vóór de datum van de laatste update.",
+  "verpleeghuis_oversterfte.graph_title": "Verloop over tijd",
+  "verpleeghuis_oversterfte.open": "Hide explanation",
+  "verpleeghuis_oversterfte.sluit": "More information and data",
+  "verpleeghuis_oversterfte.bron.href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+  "verpleeghuis_oversterfte.bron.text": "RIVM",
+  "blok_verpleeghuis_zorg.title": "Verpleeghuiszorg",
+  "blok_verpleeghuis_zorg.text": "Informatie over de verspreiding van het coronavirus in verpleeghuizen.",
+  "geen_selectie.text": "Selecteer uw regio bovenaan deze pagina",
+  "rioolwater_metingen.title": "Rioolwatermeting",
+  "rioolwater_metingen.text": "Het aantal virusdeeltjes in een milliliter rioolwater, afkomstig van 28 locaties in Nederland. Het aantal meetpunten wordt in de komende weken verder uitgebreid naar meer dan 300 locaties.",
+  "rioolwater_metingen.datums": "Waarde van {dateOfReport}. Verkregen op {dateOfInsertion}. Wordt wekelijks bijgewerkt.",
+  "rioolwater_metingen.graph_title": "Verloop over tijd",
+  "rioolwater_metingen.fold_title": "What does this mean?",
+  "rioolwater_metingen.fold": "In rioolwater kun je ziekteverwekkers zoals het nieuwe coronavirus meten omdat die met uitwerpselen (ontlasting) in het rioolwater komen. Onderzoekers testen eens per week rioolwater dat over 24 uur verzameld is. Dit onderzoek laat vrij snel zien hoeveel virusdeeltjes in het rioolwater zitten afkomstig uit uitwerpselen van besmette personen. Uit het huidige onderzoek kunnen nog geen conclusies worden getrokken. Het is de bedoeling dat het aantal meetpunten wordt uitgebreid van 28 naar meer dan 300 voor 1 september 2020. Pas als het onderzoek volledig loopt, kunnen hier conclusies aan worden verbonden.",
+  "rioolwater_metingen.open": "Hide explanation",
+  "rioolwater_metingen.sluit": "More information and data",
+  "rioolwater_metingen.screen_reader_graph_content": "{value} COVID-19 RNA-deeltjes gemeten per mililiter in rioolwater.",
+  "rioolwater_metingen.bron.text": "RIVM Onderzoek rioolwater",
+  "rioolwater_metingen.bron.href": "https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater",
+  "notfound_titel.text": "Er is iets misgegaan",
+  "notfound_beschrijving.text": "Er is helaas iets misgegaan. Ververs de pagina of probeer het later opnieuw.",
+  "over_titel.text": "Over dit dashboard",
+  "over_disclaimer.title": "Disclaimer",
+  "over_disclaimer.text": "Let op: dit dashboard coronavirus is in ontwikkeling. De komende periode worden stap voor stap meer functies en gegevens toegevoegd. Daarnaast werken we aan het verbeteren van de digitoegankelijkheid van deze site. De informatie op deze site willen we voor iedereen in Nederland beschikbaar maken. Het dashboard wordt nog niet gebruikt voor besluitvorming. Er kunnen nog geen conclusies uit getrokken worden.",
+  "over_beschrijving.text": "Het dashboard coronavirus geeft informatie over de ontwikkeling van het coronavirus in Nederland. Met deze informatie kunnen eerder signalen van een toename van de verspreiding van het virus worden opgepikt. We moeten voorkomen dat het virus weer om zich heen grijpt. Het aantal IC-en ziekenhuisopnames geven in de kern de ultieme waarschuwing. Maar eerder al komen de signalen door via de testuitslagen die vertaald worden naar het aantal positief geteste personen per 100.000 inwoners. Daarnaast zijn er ondersteunende indicatoren die de epidemie beschrijven en andersoortige signalen oppikken.",
+  "over_veelgestelde_vragen.text": "Veelgestelde vragen",
+  "regionaal_ziekenhuisopnames_per_dag.title": "Ziekenhuisopnames per dag",
+  "regionaal_ziekenhuisopnames_per_dag.text": "Aantal opnames per dag, gemiddeld over de afgelopen 3 dagen.",
+  "regionaal_ziekenhuisopnames_per_dag.datums": "Berekend op {dateOfReport}. Wordt dagelijks bijgewerkt.",
+  "regionaal_ziekenhuisopnames_per_dag.fold_title": "What does this mean?",
+  "regionaal_ziekenhuisopnames_per_dag.fold": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen.",
+  "regionaal_ziekenhuisopnames_per_dag.graph_title": "Verloop over tijd",
+  "regionaal_ziekenhuisopnames_per_dag.open": "Hide explanation",
+  "regionaal_ziekenhuisopnames_per_dag.sluit": "More information and data",
+  "regionaal_ziekenhuisopnames_per_dag.screen_reader_graph_content": "{value} opnames.",
+  "regionaal_ziekenhuisopnames_per_dag.bron.href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+  "regionaal_ziekenhuisopnames_per_dag.bron.text": "RIVM",
+  "regionaal_positief_geteste_personen.title": "Positief geteste mensen",
+  "regionaal_positief_geteste_personen.text": "Aantal positief geteste mensen per 100.000 inwoners per dag.",
+  "regionaal_positief_geteste_personen.datums": "Waarde van {dateOfReport}. Verkregen op {dateOfInsertion}. Wordt dagelijks bijgewerkt.",
+  "regionaal_positief_geteste_personen.metric_title": "Aantal positief geteste mensen:",
+  "regionaal_positief_geteste_personen.fold_title": "What does this mean?",
+  "regionaal_positief_geteste_personen.fold": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
+  "regionaal_positief_geteste_personen.graph_title": "Development over time",
+  "regionaal_positief_geteste_personen.open": "Hide explanation",
+  "regionaal_positief_geteste_personen.sluit": "More information and data",
+  "regionaal_positief_geteste_personen.screen_reader_graph_content": "{value} positively tested persons.",
+  "regionaal_positief_geteste_personen.bron.href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+  "regionaal_positief_geteste_personen.bron.text": "RIVM",
+  "terug_naar_regio_selectie.text": "Back to region selection",
+  "verantwoording.title": "Cijferverantwoording",
+  "error_metadata.title": "COVID-19 Dashboard error message | Rijksoverheid.nl",
+  "nationaal_metadata.title": "Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
+  "nationaal_metadata.description": "Information about the development of the coronavirus in The Netherlands.",
+  "nationaal_metadata.url": "https://coronadashboard.rijksoverheid.nl",
+  "notfound_metadata.title": "Page can not be found | Rijksoverheid.nl",
+  "over_metadata.title": "About the Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
+  "over_metadata.description": "Information about the development of the coronavirus in The Netherlands.",
+  "over_metadata.url": "https://coronadashboard.rijksoverheid.nl/over",
+  "regionaal_metadata.title": "Regional Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
+  "regionaal_metadata.description": "Information about the development of the coronavirus in The Netherlands.",
+  "regionaal_metadata.url": "https://coronadashboard.rijksoverheid.nl/regio",
+  "verantwoording_metadata.title": "Cijferverantwoording Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
+  "verantwoording_metadata.description": "Information about the development of the coronavirus in The Netherlands.",
+  "verantwoording_metadata.url": "https://coronadashboard.rijksoverheid.nl/verantwoording",
+  "metadata.description": "Information about the development of the coronavirus in The Netherlands.",
+  "metadata.titel": "COVID-19 Dashboard error message | Rijksoverheid.nl",
+  "metadata.title": "Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
+  "metadata.url": "https://coronadashboard.rijksoverheid.nl"
 }

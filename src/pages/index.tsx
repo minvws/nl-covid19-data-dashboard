@@ -145,7 +145,7 @@ const Home: FunctionComponentWithLayout = () => {
           <TitleBlock
             Icon={MedischeScreening}
             title={intl.formatMessage({
-              defaultMessage: 'Andere gegevens',
+              id: 'andere_gegevens',
             })}
           >
             <p>
