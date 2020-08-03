@@ -78,7 +78,7 @@
     "build": "NEXT_TELEMETRY_DISABLED=1 && next build && next export",
     "start": "next start",
     "test": "jest --watch",
-    "test:ci": "jest --ci",
+    "test:ci": "jest --ci --passWithNoTests",
     "format": "prettier --write **/*.{js,ts,tsx}",
     "lint": "eslint .",
     "type-check": "tsc --pretty --noEmit"
