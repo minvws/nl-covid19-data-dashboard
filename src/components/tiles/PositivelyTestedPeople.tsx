@@ -51,9 +51,15 @@ export const PositivelyTestedPeople: React.FC = () => {
           <BarScale
             min={0}
             max={10}
-            screenReaderText={intl.formatMessage({
-              id: 'positief_geteste_personen.screen_reader_graph_content',
-            })}
+            screenReaderText={intl.formatMessage(
+              {
+                id: 'positief_geteste_personen.screen_reader_graph_content',
+              },
+              {
+                value: delta.last_value.infected_daily_increase,
+                kritiekeWaarde: null,
+              }
+            )}
             value={delta.last_value.infected_daily_increase}
             id="positief"
             gradient={[

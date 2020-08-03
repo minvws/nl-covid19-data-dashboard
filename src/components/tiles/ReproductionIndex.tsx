@@ -46,9 +46,17 @@ export const ReproductionIndex: React.FC = () => {
           <BarScale
             min={0}
             max={2}
-            screenReaderText={intl.formatMessage({
-              id: 'reproductiegetal.screen_reader_graph_content',
-            })}
+            screenReaderText={intl.formatMessage(
+              {
+                id: 'reproductiegetal.screen_reader_graph_content',
+              },
+              {
+                value: lastKnownValidData?.last_value?.reproduction_index_avg,
+                kritiekeWaarde: intl.formatMessage({
+                  id: 'reproductiegetal.signaalwaarde',
+                }),
+              }
+            )}
             kritiekeWaarde={Number(
               intl.formatMessage({
                 id: 'reproductiegetal.signaalwaarde',

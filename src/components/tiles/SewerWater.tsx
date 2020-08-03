@@ -43,9 +43,15 @@ export const SewerWater: React.FC = () => {
           <BarScale
             min={0}
             max={100}
-            screenReaderText={intl.formatMessage({
-              id: 'rioolwater_metingen.screen_reader_graph_content',
-            })}
+            screenReaderText={intl.formatMessage(
+              {
+                id: 'rioolwater_metingen.screen_reader_graph_content',
+              },
+              {
+                value: data.last_value.average,
+                kritiekeWaarde: null,
+              }
+            )}
             value={Number(data.last_value.average)}
             id="rioolwater_metingen"
             gradient={[

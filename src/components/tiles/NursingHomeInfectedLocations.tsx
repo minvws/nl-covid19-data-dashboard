@@ -47,9 +47,16 @@ export const NursingHomeInfectedLocations: React.FC = () => {
           <BarScale
             min={0}
             max={30}
-            screenReaderText={intl.formatMessage({
-              id: 'verpleeghuis_besmette_locaties.screen_reader_graph_content',
-            })}
+            screenReaderText={intl.formatMessage(
+              {
+                id:
+                  'verpleeghuis_besmette_locaties.screen_reader_graph_content',
+              },
+              {
+                value: newLocations.last_value.total_new_reported_locations,
+                kritiekeWaarde: null,
+              }
+            )}
             value={newLocations.last_value.total_new_reported_locations}
             id="besmette_locaties_verpleeghuis"
             gradient={[

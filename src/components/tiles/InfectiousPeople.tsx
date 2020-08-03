@@ -50,9 +50,15 @@ export const InfectiousPeople: React.FC = () => {
           <BarScale
             min={0}
             max={80}
-            screenReaderText={intl.formatMessage({
-              id: 'besmettelijke_personen.screen_reader_graph_content',
-            })}
+            screenReaderText={intl.formatMessage(
+              {
+                id: 'besmettelijke_personen.screen_reader_graph_content',
+              },
+              {
+                value: countNormalized.last_value.infectious_avg_normalized,
+                kritiekeWaarde: null,
+              }
+            )}
             value={countNormalized.last_value.infectious_avg_normalized}
             id="besmettelijk"
             gradient={[

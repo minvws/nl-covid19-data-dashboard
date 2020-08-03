@@ -48,9 +48,19 @@ export const IntakeHospital: React.FC = () => {
                 id: 'ziekenhuisopnames_per_dag.signaalwaarde',
               })
             )}
-            screenReaderText={intl.formatMessage({
-              id: 'ziekenhuisopnames_per_dag.screen_reader_graph_content',
-            })}
+            screenReaderText={intl.formatMessage(
+              {
+                id: 'ziekenhuisopnames_per_dag.screen_reader_graph_content',
+              },
+              {
+                value: intl.formatMessage({
+                  id: 'ziekenhuisopnames_per_dag.signaalwaarde',
+                }),
+                kritiekeWaarde: intl.formatMessage({
+                  id: 'ziekenhuisopnames_per_dag.signaalwaarde',
+                }),
+              }
+            )}
             value={data.last_value.moving_average_hospital}
             id="opnames"
             gradient={[

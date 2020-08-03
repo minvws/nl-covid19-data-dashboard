@@ -2,7 +2,6 @@ import styles from './styles.module.scss';
 import { useRef, FunctionComponent } from 'react';
 import formatNumber from 'utils/formatNumber';
 import ScreenReaderOnly from 'components/screenReaderOnly';
-import replaceVariablesInText from 'utils/replaceVariablesInText';
 import { scaleQuantile, scaleThreshold } from 'd3-scale';
 
 import useDynamicScale from 'utils/useDynamicScale';
@@ -56,12 +55,7 @@ const BarScale: FunctionComponent<BarscaleProps> = ({
 
   return (
     <>
-      <ScreenReaderOnly>
-        {replaceVariablesInText(screenReaderText, {
-          value: String(value),
-          kritiekeWaarde: String(kritiekeWaarde),
-        })}
-      </ScreenReaderOnly>
+      <ScreenReaderOnly>{screenReaderText}</ScreenReaderOnly>
 
       <div className={styles.root} aria-hidden="true">
         <svg xmlns="http://www.w3.org/2000/svg">

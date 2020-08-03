@@ -58,9 +58,17 @@ export const IntakeIntensiveCare: React.FC = () => {
                 value: 20,
               },
             ]}
-            screenReaderText={intl.formatMessage({
-              id: 'ic_opnames_per_dag.screen_reader_graph_content',
-            })}
+            screenReaderText={intl.formatMessage(
+              {
+                id: 'ic_opnames_per_dag.screen_reader_graph_content',
+              },
+              {
+                value: data.last_value.moving_average_ic,
+                kritiekeWaarde: intl.formatMessage({
+                  id: 'ic_opnames_per_dag.signaalwaarde',
+                }),
+              }
+            )}
             kritiekeWaarde={Number(
               intl.formatMessage({
                 id: 'ic_opnames_per_dag.signaalwaarde',

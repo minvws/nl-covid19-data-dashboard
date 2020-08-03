@@ -48,9 +48,15 @@ export const SuspectedPatients: React.FC = () => {
           <BarScale
             min={0}
             max={140}
-            screenReaderText={intl.formatMessage({
-              id: 'verdenkingen_huisartsen.screen_reader_graph_content',
-            })}
+            screenReaderText={intl.formatMessage(
+              {
+                id: 'verdenkingen_huisartsen.screen_reader_graph_content',
+              },
+              {
+                value: data.last_value.incidentie,
+                kritiekeWaarde: null,
+              }
+            )}
             value={data.last_value.incidentie as number | null}
             id="verdenkingen_huisartsen"
             gradient={[

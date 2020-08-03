@@ -253,10 +253,18 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                             state[selectedRegio.code].intake_hospital_ma
                               .last_value.intake_hospital_ma
                           }
-                          screenReaderText={intl.formatMessage({
-                            id:
-                              'regionaal_ziekenhuisopnames_per_dag.screen_reader_graph_content',
-                          })}
+                          screenReaderText={intl.formatMessage(
+                            {
+                              id:
+                                'regionaal_ziekenhuisopnames_per_dag.screen_reader_graph_content',
+                            },
+                            {
+                              value:
+                                state[selectedRegio.code].intake_hospital_ma
+                                  .last_value.intake_hospital_ma,
+                              kritiekeWaarde: null,
+                            }
+                          )}
                           id="regio_opnames"
                           gradient={[
                             {
@@ -369,10 +377,19 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                             .infected_people_delta_normalized.last_value
                             .infected_people_delta_normalized
                         }
-                        screenReaderText={intl.formatMessage({
-                          id:
-                            'regionaal_positief_geteste_personen.screen_reader_graph_content',
-                        })}
+                        screenReaderText={intl.formatMessage(
+                          {
+                            id:
+                              'regionaal_positief_geteste_personen.screen_reader_graph_content',
+                          },
+                          {
+                            value:
+                              state[selectedRegio.code]
+                                .infected_people_delta_normalized.last_value
+                                .infected_people_delta_normalized,
+                            kritiekeWaarde: null,
+                          }
+                        )}
                         id="regio_infecties"
                         gradient={[
                           {
