@@ -140,7 +140,7 @@
   "rioolwater_metingen.datums": "Waarde van {dateOfReport}. Verkregen op {dateOfInsertion}. Wordt wekelijks bijgewerkt.",
   "rioolwater_metingen.graph_title": "Verloop over tijd",
   "rioolwater_metingen.fold_title": "Wat betekent dit?",
-  "rioolwater_metingen.fold": "In rioolwater kun je ziekteverwekkers zoals het nieuwe coronavirus meten omdat die met uitwerpselen (ontlasting) in het rioolwater komen. Onderzoekers testen eens per week rioolwater dat over 24 uur verzameld is. Dit onderzoek laat vrij snel zien hoeveel virusdeeltjes in het rioolwater zitten afkomstig uit uitwerpselen van besmette personen. Uit het huidige onderzoek kunnen nog geen conclusies worden getrokken. Het is de bedoeling dat het aantal meetpunten wordt uitgebreid van 28 naar meer dan 300 voor 1 september 2020. Pas als het onderzoek volledig loopt, kunnen hier conclusies aan worden verbonden.",
+  "rioolwater_metingen.fold": "In rioolwater kun je ziekteverwekkers zoals het nieuwe coronavirus meten omdat die met uitwerpselen (ontlasting) in het rioolwater komen. Op elke locatie wordt er eens per week, gedurende 24 uur steeds een beetje rioolwater genomen, dat noemen we een verzamelmonster. Het verzamelmonster wordt onderzocht. Dit onderzoek laat vrij snel zien hoeveel virusdeeltjes in het rioolwater zitten afkomstig uit uitwerpselen van besmette personen. Uit het huidige onderzoek kunnen nog geen conclusies worden getrokken. Het is de bedoeling dat het aantal meetpunten wordt uitgebreid van 28 naar meer dan 300 voor 1 september 2020. Pas als het onderzoek volledig loopt, kunnen hier conclusies aan worden verbonden.",
   "rioolwater_metingen.open": "Verberg uitleg",
   "rioolwater_metingen.sluit": "Meer uitleg en data",
   "rioolwater_metingen.screen_reader_graph_content": "{value} COVID-19 RNA-deeltjes gemeten per mililiter in rioolwater.",
@@ -195,5 +195,6 @@
   "metadata.description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
   "metadata.titel": "COVID-19 Dashboard foutmelding | Rijksoverheid.nl",
   "metadata.title": "Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
-  "metadata.url": "https://coronadashboard.rijksoverheid.nl"
+  "metadata.url": "https://coronadashboard.rijksoverheid.nl",
+  "andere_gegevens": "Andere gegevens"
 }
