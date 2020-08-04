@@ -1,20 +1,14 @@
 import { useContext } from 'react';
 
-import {
-  FormattedMessage,
-  FormattedDate,
-  FormattedNumber,
-  useIntl,
-} from 'react-intl';
-
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
 import Metadata from 'components/metadata';
 import GraphContainer from 'components/graphContainer';
 import GraphContent from 'components/graphContent';
 import GraphHeader from 'components/graphHeader';
-import { DateReported } from 'components/dateReported';
+import DateReported from 'components/dateReported';
 import Locatie from 'assets/locaties.svg';
+import formatDecimal from 'utils/formatDec';
 import { LineChart } from './index';
 
 import siteText from 'locale';
@@ -26,41 +20,24 @@ export const NursingHomeInfectedLocations: React.FC = () => {
   const globalState = useContext(store);
   const { state } = globalState;
 
+  const text: typeof siteText.verpleeghuis_besmette_locaties =
+    siteText.verpleeghuis_besmette_locaties;
   const newLocations: DeceasedPeopleNurseryCountDaily | undefined =
     state?.NL?.total_newly_reported_locations;
   const totalLocations: DeceasedPeopleNurseryCountDaily | undefined =
     state?.NL?.total_reported_locations;
 
-  const intl = useIntl();
-
   return (
     <GraphContainer>
       <GraphContent>
-        <GraphHeader
-          Icon={Locatie}
-          title={intl.formatMessage({
-            id: 'verpleeghuis_besmette_locaties.title',
-          })}
-        />
-
-        <p>
-          <FormattedMessage id="verpleeghuis_besmette_locaties.text" />
-        </p>
+        <GraphHeader Icon={Locatie} title={text.title.translation} />
+        <p>{text.text.translation}</p>
 
         {newLocations && (
           <BarScale
             min={0}
             max={30}
-            screenReaderText={intl.formatMessage(
-              {
-                id:
-                  'verpleeghuis_besmette_locaties.screen_reader_graph_content',
-              },
-              {
-                value: newLocations.last_value.total_new_reported_locations,
-                kritiekeWaarde: null,
-              }
-            )}
+            screenReaderText={text.screen_reader_graph_content.translation}
             value={newLocations.last_value.total_new_reported_locations}
             id="besmette_locaties_verpleeghuis"
             gradient={[
@@ -71,55 +48,24 @@ export const NursingHomeInfectedLocations: React.FC = () => {
             ]}
           />
         )}
-        {newLocations &&
-          newLocations?.last_value?.total_new_reported_locations !== null && (
-            <DateReported>
-              <FormattedMessage
-                id="verpleeghuis_besmette_locaties.datums"
-                values={{
-                  dateOfReport: (
-                    <FormattedDate
-                      value={
-                        newLocations?.last_value?.date_of_report_unix * 1000
-                      }
-                      month="long"
-                      day="numeric"
-                    />
-                  ),
-                  dateOfInsertion: (
-                    <FormattedDate
-                      value={
-                        newLocations?.last_value?.date_of_insertion_unix * 1000
-                      }
-                      month="long"
-                      day="numeric"
-                    />
-                  ),
-                }}
-              />
-            </DateReported>
-          )}
+        {newLocations?.last_value?.total_new_reported_locations !== null && (
+          <DateReported
+            datumsText={text.datums.translation}
+            dateInsertedUnix={newLocations?.last_value?.date_of_insertion_unix}
+            dateUnix={newLocations?.last_value?.date_of_report_unix}
+          />
+        )}
       </GraphContent>
       <Collapse
-        openText={intl.formatMessage({
-          id: 'verpleeghuis_besmette_locaties.open',
-        })}
-        sluitText={intl.formatMessage({
-          id: 'verpleeghuis_besmette_locaties.sluit',
-        })}
+        openText={text.open.translation}
+        sluitText={text.sluit.translation}
         piwikName="Aantal besmette locaties"
         piwikAction="landelijk"
       >
-        <h4>
-          <FormattedMessage id="verpleeghuis_besmette_locaties.fold_title" />
-        </h4>
-        <p>
-          <FormattedMessage id="verpleeghuis_besmette_locaties.fold" />
-        </p>
+        <h4>{text.fold_title.translation}</h4>
+        <p>{text.fold.translation}</p>
 
-        <h4>
-          <FormattedMessage id="verpleeghuis_besmette_locaties.graph_title" />
-        </h4>
+        <h4>{text.graph_title.translation}</h4>
 
         {newLocations && (
           <LineChart
@@ -132,27 +78,17 @@ export const NursingHomeInfectedLocations: React.FC = () => {
 
         {totalLocations && (
           <h3>
-            <FormattedMessage id="verpleeghuis_besmette_locaties.metric_title" />{' '}
+            {text.metric_title.translation}{' '}
             <span style={{ color: '#01689b' }}>
-              {totalLocations.last_value.total_reported_locations ? (
-                <FormattedNumber
-                  value={totalLocations.last_value.total_reported_locations}
-                />
-              ) : (
-                '-'
+              {formatDecimal(
+                totalLocations.last_value.total_reported_locations
               )}
             </span>
           </h3>
         )}
-        <p>
-          <FormattedMessage id="verpleeghuis_besmette_locaties.metric_text" />
-        </p>
+        <p>{text.metric_text.translation}</p>
 
-        {newLocations && (
-          <Metadata
-            dataSource={siteText['verpleeghuis_besmette_locaties.bron']}
-          />
-        )}
+        {newLocations && <Metadata dataSource={text.bron} />}
       </Collapse>
     </GraphContainer>
   );

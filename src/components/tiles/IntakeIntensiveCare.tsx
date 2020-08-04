@@ -1,14 +1,12 @@
 import { useContext } from 'react';
 
-import { FormattedMessage, FormattedDate, useIntl } from 'react-intl';
-
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
 import Metadata from 'components/metadata';
 import GraphContainer from 'components/graphContainer';
 import GraphContent from 'components/graphContent';
 import GraphHeader from 'components/graphHeader';
-import { DateReported } from 'components/dateReported';
+import DateReported from 'components/dateReported';
 import Arts from 'assets/arts.svg';
 import { LineChart } from './index';
 
@@ -21,24 +19,15 @@ export const IntakeIntensiveCare: React.FC = () => {
   const globalState = useContext(store);
   const { state } = globalState;
 
+  const text: typeof siteText.ic_opnames_per_dag = siteText.ic_opnames_per_dag;
   const data: IntakeIntensivecareMa | undefined =
     state?.NL?.intake_intensivecare_ma;
-
-  const intl = useIntl();
 
   return (
     <GraphContainer>
       <GraphContent>
-        <GraphHeader
-          Icon={Arts}
-          title={intl.formatMessage({
-            id: 'ic_opnames_per_dag.title',
-          })}
-        />
-
-        <p>
-          <FormattedMessage id="ic_opnames_per_dag.text" />
-        </p>
+        <GraphHeader Icon={Arts} title={text.title.translation} />
+        <p>{text.text.translation}</p>
 
         {data && (
           <BarScale
@@ -58,65 +47,31 @@ export const IntakeIntensiveCare: React.FC = () => {
                 value: 20,
               },
             ]}
-            screenReaderText={intl.formatMessage(
-              {
-                id: 'ic_opnames_per_dag.screen_reader_graph_content',
-              },
-              {
-                value: data.last_value.moving_average_ic,
-                kritiekeWaarde: intl.formatMessage({
-                  id: 'ic_opnames_per_dag.signaalwaarde',
-                }),
-              }
-            )}
-            kritiekeWaarde={Number(
-              intl.formatMessage({
-                id: 'ic_opnames_per_dag.signaalwaarde',
-              })
-            )}
+            screenReaderText={text.screen_reader_graph_content.translation}
+            kritiekeWaarde={Number(text.signaalwaarde.translation)}
             value={data.last_value.moving_average_ic}
             id="ic"
           />
         )}
 
-        {data && data?.last_value?.moving_average_ic !== null && (
-          <DateReported>
-            <FormattedMessage
-              id="ic_opnames_per_dag.datums"
-              values={{
-                dateOfReport: (
-                  <FormattedDate
-                    value={data?.last_value?.date_of_report_unix * 1000}
-                    month="long"
-                    day="numeric"
-                  />
-                ),
-              }}
-            />
-          </DateReported>
+        {data?.last_value?.moving_average_ic !== null && (
+          <DateReported
+            datumsText={text.datums.translation}
+            dateUnix={data?.last_value?.date_of_report_unix}
+          />
         )}
       </GraphContent>
 
       <Collapse
-        openText={intl.formatMessage({
-          id: 'ic_opnames_per_dag.open',
-        })}
-        sluitText={intl.formatMessage({
-          id: 'ic_opnames_per_dag.sluit',
-        })}
+        openText={text.open.translation}
+        sluitText={text.sluit.translation}
         piwikAction="landelijk"
         piwikName="Intensive care-opnames per dag"
       >
-        <h4>
-          <FormattedMessage id="ic_opnames_per_dag.fold_title" />
-        </h4>
-        <p>
-          <FormattedMessage id="ic_opnames_per_dag.fold" />
-        </p>
+        <h4>{text.fold_title.translation}</h4>
+        <p>{text.fold.translation}</p>
 
-        <h4>
-          <FormattedMessage id="ic_opnames_per_dag.graph_title" />
-        </h4>
+        <h4>{text.graph_title.translation}</h4>
 
         {data && (
           <>
@@ -125,14 +80,10 @@ export const IntakeIntensiveCare: React.FC = () => {
                 value: value.moving_average_ic,
                 date: value.date_of_report_unix,
               }))}
-              signaalwaarde={Number(
-                intl.formatMessage({
-                  id: 'ic_opnames_per_dag.signaalwaarde',
-                })
-              )}
+              signaalwaarde={Number(text.signaalwaarde.translation)}
             />
 
-            <Metadata dataSource={siteText['ic_opnames_per_dag.bron']} />
+            <Metadata dataSource={text.bron} />
           </>
         )}
       </Collapse>

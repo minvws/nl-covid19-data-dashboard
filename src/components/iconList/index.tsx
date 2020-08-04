@@ -2,11 +2,12 @@ import styles from './iconList.module.scss';
 import { useState } from 'react';
 import useCollapse from 'react-collapsed';
 import Arrow from 'assets/arrow.svg';
+import { Translation } from 'types/data';
 
 interface Item {
-  content: string;
-  text: string;
-  icon: string;
+  content: Translation;
+  text: Translation;
+  icon: Translation;
 }
 
 const IconList: React.FC<{ list: Item[] }> = (props) => {
@@ -17,7 +18,7 @@ const IconList: React.FC<{ list: Item[] }> = (props) => {
       {list.map((item) =>
         item?.content ? (
           <CollapseIconListItem
-            key={`icon-list-item-${item.text}`}
+            key={`icon-list-item-${item.text.translation}`}
             item={item}
           />
         ) : (
@@ -35,12 +36,12 @@ const IconListItem: React.FC<{ item: Item }> = (props) => {
     <li className={styles.iconListItem}>
       <div className={styles.content}>
         <img
-          src={item.icon}
+          src={item.icon.translation}
           className={styles.iconListImage}
           alt=""
           loading="lazy"
         />{' '}
-        <h4>{item.text}</h4>
+        <h4>{item.text.translation}</h4>
       </div>
     </li>
   );
@@ -60,7 +61,7 @@ const CollapseIconListItem: React.FC<{ item: Item }> = (props) => {
     <li className={styles.iconListItem}>
       <div className={styles.content}>
         <img
-          src={item.icon}
+          src={item.icon.translation}
           className={styles.iconListImage}
           loading="lazy"
           alt=""
@@ -71,14 +72,14 @@ const CollapseIconListItem: React.FC<{ item: Item }> = (props) => {
             {...getToggleProps({ onClick: toggle })}
           >
             <span>
-              {item.text}
+              {item.text.translation}
               <Arrow className={styles.arrow} width={13} height={8} />
             </span>
           </button>
         </h4>
       </div>
       <div className={styles.hiddenContent} {...getCollapseProps()}>
-        <p>{item.content}</p>
+        <p>{item.content.translation}</p>
       </div>
     </li>
   );

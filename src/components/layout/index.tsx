@@ -1,19 +1,19 @@
 import React from 'react';
 
-import { FormattedMessage } from 'react-intl';
-
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import styles from './layout.module.scss';
 import MaxWidth from 'components/maxWidth';
+import text from 'locale';
 import useMediaQuery from 'utils/useMediaQuery';
 import SEOHead from 'components/seoHead';
+import { Translation } from 'types/data';
 
 export interface LayoutProps {
-  url?: string;
-  title: string;
-  description?: string;
+  url?: Translation;
+  title: Translation;
+  description?: Translation;
   openGraphImage?: string;
   twitterImage?: string;
 }
@@ -41,20 +41,16 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = (props) => {
   return (
     <>
       <SEOHead
-        title={title}
-        description={description}
+        title={title?.translation}
+        description={description?.translation}
         openGraphImage={openGraphImage}
         twitterImage={twitterImage}
-        url={url}
+        url={url?.translation}
       />
 
       <div className={styles.skiplinks}>
-        <a href="#content">
-          <FormattedMessage id="error_beschrijving.text" />
-        </a>
-        <a href="#main-navigation">
-          <FormattedMessage id="skiplinks.nav" />
-        </a>
+        <a href="#content">{text.skiplinks.inhoud.translation}</a>
+        <a href="#main-navigation">{text.skiplinks.nav.translation}</a>
       </div>
 
       <header className={styles.header}>
@@ -74,15 +70,12 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = (props) => {
         </div>
 
         <MaxWidth>
-          <h1>
-            <FormattedMessage id="header.title" />
-          </h1>
+          <h1>{text.header.title.translation}</h1>
           <p>
-            <FormattedMessage id="header.text" />
-
+            {text.header.text.translation}{' '}
             <Link href="/over">
               <a className={styles.readMoreLink}>
-                <FormattedMessage id="header.link" />
+                {text.header.link.translation}
               </a>
             </Link>
           </p>
@@ -101,7 +94,7 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = (props) => {
                         : styles.link
                     }
                   >
-                    <FormattedMessage id="nav.links.index" />
+                    {text.nav.links.index.translation}
                   </a>
                 </Link>
               </li>
@@ -115,7 +108,7 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = (props) => {
                         : styles.link
                     }
                   >
-                    <FormattedMessage id="nav.links.regio" />
+                    {text.nav.links.regio.translation}
                   </a>
                 </Link>
               </li>
@@ -129,7 +122,7 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = (props) => {
                         : styles.link
                     }
                   >
-                    <FormattedMessage id="nav.links.over" />
+                    {text.nav.links.over.translation}
                   </a>
                 </Link>
               </li>
@@ -149,28 +142,28 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = (props) => {
                 <li>
                   <Link href="/">
                     <a onClick={blur} className={styles.footerLink}>
-                      <FormattedMessage id="nav.links.index" />
+                      {text.nav.links.index.translation}
                     </a>
                   </Link>
                 </li>
                 <li>
                   <Link href="/regio">
                     <a onClick={blur} className={styles.footerLink}>
-                      <FormattedMessage id="nav.links.regio" />
+                      {text.nav.links.regio.translation}
                     </a>
                   </Link>
                 </li>
                 <li>
                   <Link href="/over">
                     <a onClick={blur} className={styles.footerLink}>
-                      <FormattedMessage id="nav.links.over" />
+                      {text.nav.links.over.translation}
                     </a>
                   </Link>
                 </li>
                 <li>
                   <Link href="/verantwoording">
                     <a onClick={blur} className={styles.footerLink}>
-                      <FormattedMessage id="nav.links.verantwoording" />
+                      {text.nav.links.verantwoording.translation}
                     </a>
                   </Link>
                 </li>
@@ -183,7 +176,7 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = (props) => {
                     rel="noopener noreferrer"
                     className={styles.footerLink}
                   >
-                    <FormattedMessage id="nav.links.meer" />
+                    {text.nav.links.meer.translation}
                   </a>
                 </li>
               </ul>

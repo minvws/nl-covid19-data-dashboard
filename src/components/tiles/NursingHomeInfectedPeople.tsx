@@ -1,14 +1,12 @@
 import { useContext } from 'react';
 
-import { FormattedMessage, FormattedDate, useIntl } from 'react-intl';
-
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
 import Metadata from 'components/metadata';
 import GraphContainer from 'components/graphContainer';
 import GraphContent from 'components/graphContent';
 import GraphHeader from 'components/graphHeader';
-import { DateReported } from 'components/dateReported';
+import DateReported from 'components/dateReported';
 import Getest from 'assets/test.svg';
 import { LineChart } from './index';
 
@@ -20,38 +18,21 @@ import { DeceasedPeopleNurseryCountDaily } from 'types/data';
 export const NursingHomeInfectedPeople: React.FC = () => {
   const globalState = useContext(store);
   const { state } = globalState;
+  const text: typeof siteText.verpleeghuis_positief_geteste_personen =
+    siteText.verpleeghuis_positief_geteste_personen;
   const data: DeceasedPeopleNurseryCountDaily | undefined =
     state?.NL?.infected_people_nursery_count_daily;
-
-  const intl = useIntl();
-
   return (
     <GraphContainer>
       <GraphContent>
-        <GraphHeader
-          Icon={Getest}
-          title={intl.formatMessage({
-            id: 'verpleeghuis_positief_geteste_personen.title',
-          })}
-        />
-        <p>
-          <FormattedMessage id="verpleeghuis_positief_geteste_personen.text" />
-        </p>
+        <GraphHeader Icon={Getest} title={text.title.translation} />
+        <p>{text.text.translation}</p>
 
         {data && (
           <BarScale
             min={0}
             max={100}
-            screenReaderText={intl.formatMessage(
-              {
-                id:
-                  'verpleeghuis_positief_geteste_personen.screen_reader_graph_content',
-              },
-              {
-                value: data.last_value.infected_nursery_daily,
-                kritiekeWaarde: null,
-              }
-            )}
+            screenReaderText={text.screen_reader_graph_content.translation}
             value={data.last_value.infected_nursery_daily}
             id="positief_verpleeghuis"
             gradient={[
@@ -63,49 +44,23 @@ export const NursingHomeInfectedPeople: React.FC = () => {
           />
         )}
 
-        {data && data?.last_value?.infected_nursery_daily !== null && (
-          <DateReported>
-            <FormattedMessage
-              id="verpleeghuis_positief_geteste_personen.datums"
-              values={{
-                dateOfReport: (
-                  <FormattedDate
-                    value={data?.last_value?.date_of_report_unix * 1000}
-                    month="long"
-                    day="numeric"
-                  />
-                ),
-                dateOfInsertion: (
-                  <FormattedDate
-                    value={data?.last_value?.date_of_insertion_unix * 1000}
-                    month="long"
-                    day="numeric"
-                  />
-                ),
-              }}
-            />
-          </DateReported>
+        {data?.last_value?.infected_nursery_daily !== null && (
+          <DateReported
+            datumsText={text.datums.translation}
+            dateInsertedUnix={data?.last_value?.date_of_insertion_unix}
+            dateUnix={data?.last_value?.date_of_report_unix}
+          />
         )}
       </GraphContent>
       <Collapse
-        openText={intl.formatMessage({
-          id: 'verpleeghuis_positief_geteste_personen.open',
-        })}
-        sluitText={intl.formatMessage({
-          id: 'verpleeghuis_positief_geteste_personen.sluit',
-        })}
+        openText={text.open.translation}
+        sluitText={text.sluit.translation}
         piwikAction="landelijk"
         piwikName="Aantal positief geteste bewoners"
       >
-        <h4>
-          <FormattedMessage id="verpleeghuis_positief_geteste_personen.fold_title" />
-        </h4>
-        <p>
-          <FormattedMessage id="verpleeghuis_positief_geteste_personen.fold" />
-        </p>
-        <h4>
-          <FormattedMessage id="verpleeghuis_positief_geteste_personen.graph_title" />
-        </h4>
+        <h4>{text.fold_title.translation}</h4>
+        <p>{text.fold.translation}</p>
+        <h4>{text.graph_title.translation}</h4>
 
         {data && (
           <>
@@ -115,11 +70,7 @@ export const NursingHomeInfectedPeople: React.FC = () => {
                 date: value.date_of_report_unix,
               }))}
             />
-            <Metadata
-              dataSource={
-                siteText['verpleeghuis_positief_geteste_personen.bron']
-              }
-            />
+            <Metadata dataSource={text.bron} />
           </>
         )}
       </Collapse>

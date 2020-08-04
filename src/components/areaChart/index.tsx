@@ -2,7 +2,8 @@ import { useMemo } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-import { useIntl } from 'react-intl';
+import months from 'data/months';
+import formatNumber from 'utils/formatNumber';
 
 if (typeof Highcharts === 'object') {
   require('highcharts/highcharts-more')(Highcharts);
@@ -32,7 +33,15 @@ const AreaChart: React.FC<AreaChartProps> = (props) => {
     signaalwaarde,
   } = props;
 
-  const intl = useIntl();
+  const formatDate = (value: string) => {
+    const date = new Date(value);
+    return `${date.getDate()} ${months[date.getMonth()]}`;
+  };
+
+  const formatDateLong = (value: string) => {
+    const date = new Date(value);
+    return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
+  };
 
   const rangeData: [Date, number | null, number | null][] = useMemo(() => {
     return data
@@ -85,10 +94,7 @@ const AreaChart: React.FC<AreaChartProps> = (props) => {
             // @ts-ignore
             if (this.isFirst || this.isLast) {
               // @ts-ignore
-              return intl.formatDate(this.value, {
-                day: 'numeric',
-                month: 'short',
-              });
+              return formatDate(this.value);
             }
           },
         },
@@ -102,10 +108,7 @@ const AreaChart: React.FC<AreaChartProps> = (props) => {
           text: null,
         },
         labels: {
-          formatter: function (): string | void {
-            // @ts-ignore
-            return `${intl.formatNumber(this.value)}`;
-          },
+          format: '{value}',
         },
         plotLines: [],
         accessibility: {
@@ -134,17 +137,12 @@ const AreaChart: React.FC<AreaChartProps> = (props) => {
           // @ts-ignore
           const x = this.x;
           return `
-
-            ${intl.formatDate(x, {
-              day: 'numeric',
-              month: 'long',
-              year: 'numeric',
-            })}<br/>
-            <strong>${rangeLegendLabel}</strong> ${intl.formatNumber(
+            ${formatDateLong(x)}<br/>
+            <strong>${rangeLegendLabel}</strong> ${formatNumber(
             minRangePoint
-          )} - ${intl.formatNumber(maxRangePoint)}<br/>
+          )} - ${formatNumber(maxRangePoint)}<br/>
             <strong>${lineLegendLabel}</strong> ${
-            linePoint ? intl.formatNumber(linePoint[1] as number) : '–'
+            linePoint ? formatNumber(linePoint[1] as number) : '–'
           }
           `;
         },
@@ -172,7 +170,7 @@ const AreaChart: React.FC<AreaChartProps> = (props) => {
         },
       ],
     }),
-    [lineLegendLabel, minY, maxY, rangeLegendLabel, rangeData, lineData, intl]
+    [lineLegendLabel, minY, maxY, rangeLegendLabel, rangeData, lineData]
   );
 
   if (signaalwaarde) {
