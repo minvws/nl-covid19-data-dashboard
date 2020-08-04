@@ -33,6 +33,7 @@ export const NursingHomeInfectedPeople: React.FC = () => {
             min={0}
             max={100}
             screenReaderText={text.screen_reader_graph_content.translation}
+            kritiekeWaarde={Number(text.signaalwaarde.translation)}
             value={data.last_value.infected_nursery_daily}
             id="positief_verpleeghuis"
             gradient={[
@@ -69,6 +70,7 @@ export const NursingHomeInfectedPeople: React.FC = () => {
                 value: value.infected_nursery_daily,
                 date: value.date_of_report_unix,
               }))}
+              signaalwaarde={Number(text.signaalwaarde.translation)}
             />
             <Metadata dataSource={text.bron} />
           </>
