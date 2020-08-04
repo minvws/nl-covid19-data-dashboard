@@ -1,0 +1,794 @@
+{
+    "error_titel.text": {
+        "translation": "",
+        "notes": ""
+    },
+    "error_beschrijving.text": {
+        "translation": "",
+        "notes": ""
+    },
+    "error_probeer_opnieuw.text": {
+        "translation": "",
+        "notes": ""
+    },
+    "skiplinks.inhoud": {
+        "translation": "",
+        "notes": ""
+    },
+    "skiplinks.nav": {
+        "translation": "",
+        "notes": ""
+    },
+    "header.title": {
+        "translation": "",
+        "notes": ""
+    },
+    "header.text": {
+        "translation": "The coronavirus dashboard provides information about the development of the coronavirus in The Netherlands.",
+        "notes": ""
+    },
+    "header.link": {
+        "translation": "",
+        "notes": ""
+    },
+    "nav.links.index": {
+        "translation": "National numbers",
+        "notes": ""
+    },
+    "nav.links.regio": {
+        "translation": "Regional numbers",
+        "notes": ""
+    },
+    "nav.links.over": {
+        "translation": "About this dashboard",
+        "notes": ""
+    },
+    "nav.links.meer": {
+        "translation": "",
+        "notes": ""
+    },
+    "nav.links.verantwoording": {
+        "translation": "",
+        "notes": ""
+    },
+    "ic_opnames_per_dag.title": {
+        "translation": "Intensive care intake per day",
+        "notes": ""
+    },
+    "ic_opnames_per_dag.text": {
+        "translation": "",
+        "notes": ""
+    },
+    "ic_opnames_per_dag.datums": {
+        "translation": "",
+        "notes": ""
+    },
+    "ic_opnames_per_dag.fold_title": {
+        "translation": "What does this mean?",
+        "notes": ""
+    },
+    "ic_opnames_per_dag.fold": {
+        "translation": "",
+        "notes": ""
+    },
+    "ic_opnames_per_dag.graph_title": {
+        "translation": "",
+        "notes": ""
+    },
+    "ic_opnames_per_dag.open": {
+        "translation": "Hide explanation",
+        "notes": ""
+    },
+    "ic_opnames_per_dag.sluit": {
+        "translation": "More information and data",
+        "notes": ""
+    },
+    "ic_opnames_per_dag.signaalwaarde": {
+        "translation": "",
+        "notes": ""
+    },
+    "ic_opnames_per_dag.screen_reader_graph_content": {
+        "translation": "",
+        "notes": ""
+    },
+    "ic_opnames_per_dag.bron.href": {
+        "translation": "",
+        "notes": ""
+    },
+    "ic_opnames_per_dag.bron.text": {
+        "translation": "",
+        "notes": ""
+    },
+    "verdenkingen_huisartsen.title": {
+        "translation": "",
+        "notes": ""
+    },
+    "verdenkingen_huisartsen.text": {
+        "translation": "",
+        "notes": ""
+    },
+    "verdenkingen_huisartsen.datums": {
+        "translation": "",
+        "notes": ""
+    },
+    "verdenkingen_huisartsen.graph_title": {
+        "translation": "",
+        "notes": ""
+    },
+    "verdenkingen_huisartsen.fold_title": {
+        "translation": "What does this mean?",
+        "notes": ""
+    },
+    "verdenkingen_huisartsen.fold": {
+        "translation": "",
+        "notes": ""
+    },
+    "verdenkingen_huisartsen.open": {
+        "translation": "Hide explanation",
+        "notes": ""
+    },
+    "verdenkingen_huisartsen.sluit": {
+        "translation": "More information and data",
+        "notes": ""
+    },
+    "verdenkingen_huisartsen.screen_reader_graph_content": {
+        "translation": "",
+        "notes": ""
+    },
+    "verdenkingen_huisartsen.bron.href": {
+        "translation": "",
+        "notes": ""
+    },
+    "verdenkingen_huisartsen.bron.text": {
+        "translation": "",
+        "notes": ""
+    },
+    "ziekenhuisopnames_per_dag.title": {
+        "translation": "Hospitalizations each day",
+        "notes": ""
+    },
+    "ziekenhuisopnames_per_dag.text": {
+        "translation": "",
+        "notes": ""
+    },
+    "ziekenhuisopnames_per_dag.datums": {
+        "translation": "",
+        "notes": ""
+    },
+    "ziekenhuisopnames_per_dag.fold_title": {
+        "translation": "What does this mean?",
+        "notes": ""
+    },
+    "ziekenhuisopnames_per_dag.fold": {
+        "translation": "",
+        "notes": ""
+    },
+    "ziekenhuisopnames_per_dag.graph_title": {
+        "translation": "",
+        "notes": ""
+    },
+    "ziekenhuisopnames_per_dag.open": {
+        "translation": "Hide explanation",
+        "notes": ""
+    },
+    "ziekenhuisopnames_per_dag.sluit": {
+        "translation": "More information and data",
+        "notes": ""
+    },
+    "ziekenhuisopnames_per_dag.signaalwaarde": {
+        "translation": "",
+        "notes": ""
+    },
+    "ziekenhuisopnames_per_dag.screen_reader_graph_content": {
+        "translation": "%1$s hospitalizations per day. Critical value: %1$s hospitalizations per day.",
+        "notes": ""
+    },
+    "ziekenhuisopnames_per_dag.bron.href": {
+        "translation": "",
+        "notes": ""
+    },
+    "ziekenhuisopnames_per_dag.bron.text": {
+        "translation": "",
+        "notes": ""
+    },
+    "positief_geteste_personen.title": {
+        "translation": "",
+        "notes": ""
+    },
+    "positief_geteste_personen.text": {
+        "translation": "",
+        "notes": ""
+    },
+    "positief_geteste_personen.datums": {
+        "translation": "",
+        "notes": ""
+    },
+    "positief_geteste_personen.fold_title": {
+        "translation": "What does this mean?",
+        "notes": ""
+    },
+    "positief_geteste_personen.fold": {
+        "translation": "",
+        "notes": ""
+    },
+    "positief_geteste_personen.metric_title": {
+        "translation": "",
+        "notes": ""
+    },
+    "positief_geteste_personen.linechart_title": {
+        "translation": "",
+        "notes": ""
+    },
+    "positief_geteste_personen.graph_title": {
+        "translation": "",
+        "notes": ""
+    },
+    "positief_geteste_personen.open": {
+        "translation": "Hide explanation",
+        "notes": ""
+    },
+    "positief_geteste_personen.sluit": {
+        "translation": "More information and data",
+        "notes": ""
+    },
+    "positief_geteste_personen.screen_reader_graph_content": {
+        "translation": "",
+        "notes": ""
+    },
+    "positief_geteste_personen.bron.href": {
+        "translation": "",
+        "notes": ""
+    },
+    "positief_geteste_personen.bron.text": {
+        "translation": "",
+        "notes": ""
+    },
+    "besmettelijke_personen.title": {
+        "translation": "",
+        "notes": ""
+    },
+    "besmettelijke_personen.text": {
+        "translation": "",
+        "notes": ""
+    },
+    "besmettelijke_personen.datums": {
+        "translation": "",
+        "notes": ""
+    },
+    "besmettelijke_personen.fold_title": {
+        "translation": "What does this mean?",
+        "notes": ""
+    },
+    "besmettelijke_personen.fold": {
+        "translation": "",
+        "notes": ""
+    },
+    "besmettelijke_personen.metric_title": {
+        "translation": "",
+        "notes": ""
+    },
+    "besmettelijke_personen.graph_title": {
+        "translation": "",
+        "notes": ""
+    },
+    "besmettelijke_personen.open": {
+        "translation": "Hide explanation",
+        "notes": ""
+    },
+    "besmettelijke_personen.sluit": {
+        "translation": "More information and data",
+        "notes": ""
+    },
+    "besmettelijke_personen.screen_reader_graph_content": {
+        "translation": "",
+        "notes": ""
+    },
+    "besmettelijke_personen.bron.href": {
+        "translation": "",
+        "notes": ""
+    },
+    "besmettelijke_personen.bron.text": {
+        "translation": "",
+        "notes": ""
+    },
+    "reproductiegetal.title": {
+        "translation": "",
+        "notes": ""
+    },
+    "reproductiegetal.text": {
+        "translation": "",
+        "notes": ""
+    },
+    "reproductiegetal.datums": {
+        "translation": "",
+        "notes": ""
+    },
+    "reproductiegetal.screen_reader_graph_content": {
+        "translation": "",
+        "notes": ""
+    },
+    "reproductiegetal.fold_title": {
+        "translation": "What does this mean?",
+        "notes": ""
+    },
+    "reproductiegetal.fold": {
+        "translation": "",
+        "notes": ""
+    },
+    "reproductiegetal.graph_title": {
+        "translation": "",
+        "notes": ""
+    },
+    "reproductiegetal.open": {
+        "translation": "Hide explanation",
+        "notes": ""
+    },
+    "reproductiegetal.sluit": {
+        "translation": "More information and data",
+        "notes": ""
+    },
+    "reproductiegetal.rangeLegendLabel": {
+        "translation": "",
+        "notes": ""
+    },
+    "reproductiegetal.lineLegendLabel": {
+        "translation": "",
+        "notes": ""
+    },
+    "reproductiegetal.signaalwaarde": {
+        "translation": "",
+        "notes": ""
+    },
+    "reproductiegetal.bron.href": {
+        "translation": "",
+        "notes": ""
+    },
+    "reproductiegetal.bron.text": {
+        "translation": "",
+        "notes": ""
+    },
+    "reproductiegetal.legenda_r": {
+        "translation": "",
+        "notes": ""
+    },
+    "reproductiegetal.legenda_marge": {
+        "translation": "",
+        "notes": ""
+    },
+    "overige_gegevens.title": {
+        "translation": "",
+        "notes": ""
+    },
+    "overige_gegevens.text": {
+        "translation": "",
+        "notes": ""
+    },
+    "overige_gegevens.fold_title": {
+        "translation": "What does this mean?",
+        "notes": ""
+    },
+    "overige_gegevens.graph_title": {
+        "translation": "",
+        "notes": ""
+    },
+    "overige_gegevens.open": {
+        "translation": "Hide explanation",
+        "notes": ""
+    },
+    "overige_gegevens.sluit": {
+        "translation": "",
+        "notes": ""
+    },
+    "regio_link_block.title": {
+        "translation": "",
+        "notes": ""
+    },
+    "regio_link_block.text": {
+        "translation": "",
+        "notes": ""
+    },
+    "verpleeghuis_besmette_locaties.title": {
+        "translation": "",
+        "notes": ""
+    },
+    "verpleeghuis_besmette_locaties.text": {
+        "translation": "",
+        "notes": ""
+    },
+    "verpleeghuis_besmette_locaties.datums": {
+        "translation": "",
+        "notes": ""
+    },
+    "verpleeghuis_besmette_locaties.metric_title": {
+        "translation": "",
+        "notes": ""
+    },
+    "verpleeghuis_besmette_locaties.metric_text": {
+        "translation": "",
+        "notes": ""
+    },
+    "verpleeghuis_besmette_locaties.fold_title": {
+        "translation": "What does this mean?",
+        "notes": ""
+    },
+    "verpleeghuis_besmette_locaties.fold": {
+        "translation": "",
+        "notes": ""
+    },
+    "verpleeghuis_besmette_locaties.graph_title": {
+        "translation": "",
+        "notes": ""
+    },
+    "verpleeghuis_besmette_locaties.open": {
+        "translation": "Hide explanation",
+        "notes": ""
+    },
+    "verpleeghuis_besmette_locaties.sluit": {
+        "translation": "More information and data",
+        "notes": ""
+    },
+    "verpleeghuis_besmette_locaties.screen_reader_graph_content": {
+        "translation": "",
+        "notes": ""
+    },
+    "verpleeghuis_besmette_locaties.bron.href": {
+        "translation": "",
+        "notes": ""
+    },
+    "verpleeghuis_besmette_locaties.bron.text": {
+        "translation": "",
+        "notes": ""
+    },
+    "verpleeghuis_positief_geteste_personen.title": {
+        "translation": "",
+        "notes": ""
+    },
+    "verpleeghuis_positief_geteste_personen.text": {
+        "translation": "",
+        "notes": ""
+    },
+    "verpleeghuis_positief_geteste_personen.datums": {
+        "translation": "",
+        "notes": ""
+    },
+    "verpleeghuis_positief_geteste_personen.fold_title": {
+        "translation": "What does this mean?",
+        "notes": ""
+    },
+    "verpleeghuis_positief_geteste_personen.fold": {
+        "translation": "",
+        "notes": ""
+    },
+    "verpleeghuis_positief_geteste_personen.graph_title": {
+        "translation": "",
+        "notes": ""
+    },
+    "verpleeghuis_positief_geteste_personen.open": {
+        "translation": "Hide explanation",
+        "notes": ""
+    },
+    "verpleeghuis_positief_geteste_personen.sluit": {
+        "translation": "More information and data",
+        "notes": ""
+    },
+    "verpleeghuis_positief_geteste_personen.signaalwaarde": {
+        "translation": "",
+        "notes": ""
+    },
+    "verpleeghuis_positief_geteste_personen.screen_reader_graph_content": {
+        "translation": "",
+        "notes": ""
+    },
+    "verpleeghuis_positief_geteste_personen.bron.href": {
+        "translation": "",
+        "notes": ""
+    },
+    "verpleeghuis_positief_geteste_personen.bron.text": {
+        "translation": "",
+        "notes": ""
+    },
+    "verpleeghuis_oversterfte.title": {
+        "translation": "",
+        "notes": ""
+    },
+    "verpleeghuis_oversterfte.text": {
+        "translation": "",
+        "notes": ""
+    },
+    "verpleeghuis_oversterfte.datums": {
+        "translation": "",
+        "notes": ""
+    },
+    "verpleeghuis_oversterfte.screen_reader_graph_content": {
+        "translation": "",
+        "notes": ""
+    },
+    "verpleeghuis_oversterfte.fold_title": {
+        "translation": "What does this mean?",
+        "notes": ""
+    },
+    "verpleeghuis_oversterfte.fold": {
+        "translation": "",
+        "notes": ""
+    },
+    "verpleeghuis_oversterfte.graph_title": {
+        "translation": "",
+        "notes": ""
+    },
+    "verpleeghuis_oversterfte.open": {
+        "translation": "Hide explanation",
+        "notes": ""
+    },
+    "verpleeghuis_oversterfte.sluit": {
+        "translation": "More information and data",
+        "notes": ""
+    },
+    "verpleeghuis_oversterfte.bron.href": {
+        "translation": "",
+        "notes": ""
+    },
+    "verpleeghuis_oversterfte.bron.text": {
+        "translation": "",
+        "notes": ""
+    },
+    "blok_verpleeghuis_zorg.title": {
+        "translation": "",
+        "notes": ""
+    },
+    "blok_verpleeghuis_zorg.text": {
+        "translation": "",
+        "notes": ""
+    },
+    "geen_selectie.text": {
+        "translation": "",
+        "notes": ""
+    },
+    "rioolwater_metingen.title": {
+        "translation": "",
+        "notes": ""
+    },
+    "rioolwater_metingen.text": {
+        "translation": "",
+        "notes": ""
+    },
+    "rioolwater_metingen.datums": {
+        "translation": "",
+        "notes": ""
+    },
+    "rioolwater_metingen.graph_title": {
+        "translation": "",
+        "notes": ""
+    },
+    "rioolwater_metingen.fold_title": {
+        "translation": "What does this mean?",
+        "notes": ""
+    },
+    "rioolwater_metingen.fold": {
+        "translation": "In rioolwater kun je ziekteverwekkers zoals het nieuwe coronavirus meten omdat die met uitwerpselen (ontlasting) in het rioolwater komen. Op elke locatie wordt er eens per week, gedurende 24 uur steeds een beetje rioolwater genomen, dat noemen we een verzamelmonster. Het verzamelmonster wordt onderzocht. Dit onderzoek laat vrij snel zien hoeveel virusdeeltjes in het rioolwater zitten afkomstig uit uitwerpselen van besmette personen. Uit het huidige onderzoek kunnen nog geen conclusies worden getrokken. Het is de bedoeling dat het aantal meetpunten wordt uitgebreid van 28 naar meer dan 300 voor 1 september 2020. Pas als het onderzoek volledig loopt, kunnen hier conclusies aan worden verbonden.",
+        "notes": ""
+    },
+    "rioolwater_metingen.open": {
+        "translation": "Hide explanation",
+        "notes": ""
+    },
+    "rioolwater_metingen.sluit": {
+        "translation": "More information and data",
+        "notes": ""
+    },
+    "rioolwater_metingen.screen_reader_graph_content": {
+        "translation": "",
+        "notes": ""
+    },
+    "rioolwater_metingen.bron.text": {
+        "translation": "",
+        "notes": ""
+    },
+    "rioolwater_metingen.bron.href": {
+        "translation": "",
+        "notes": ""
+    },
+    "notfound_titel.text": {
+        "translation": "",
+        "notes": ""
+    },
+    "notfound_beschrijving.text": {
+        "translation": "",
+        "notes": ""
+    },
+    "over_titel.text": {
+        "translation": "About this dashboard",
+        "notes": ""
+    },
+    "over_disclaimer.title": {
+        "translation": "",
+        "notes": ""
+    },
+    "over_disclaimer.text": {
+        "translation": "",
+        "notes": ""
+    },
+    "over_beschrijving.text": {
+        "translation": "",
+        "notes": ""
+    },
+    "over_veelgestelde_vragen.text": {
+        "translation": "",
+        "notes": ""
+    },
+    "regionaal_ziekenhuisopnames_per_dag.title": {
+        "translation": "Hospitalizations each day",
+        "notes": ""
+    },
+    "regionaal_ziekenhuisopnames_per_dag.text": {
+        "translation": "",
+        "notes": ""
+    },
+    "regionaal_ziekenhuisopnames_per_dag.datums": {
+        "translation": "",
+        "notes": ""
+    },
+    "regionaal_ziekenhuisopnames_per_dag.fold_title": {
+        "translation": "What does this mean?",
+        "notes": ""
+    },
+    "regionaal_ziekenhuisopnames_per_dag.fold": {
+        "translation": "",
+        "notes": ""
+    },
+    "regionaal_ziekenhuisopnames_per_dag.graph_title": {
+        "translation": "",
+        "notes": ""
+    },
+    "regionaal_ziekenhuisopnames_per_dag.open": {
+        "translation": "Hide explanation",
+        "notes": ""
+    },
+    "regionaal_ziekenhuisopnames_per_dag.sluit": {
+        "translation": "More information and data",
+        "notes": ""
+    },
+    "regionaal_ziekenhuisopnames_per_dag.screen_reader_graph_content": {
+        "translation": "",
+        "notes": ""
+    },
+    "regionaal_ziekenhuisopnames_per_dag.bron.href": {
+        "translation": "",
+        "notes": ""
+    },
+    "regionaal_ziekenhuisopnames_per_dag.bron.text": {
+        "translation": "",
+        "notes": ""
+    },
+    "regionaal_positief_geteste_personen.title": {
+        "translation": "",
+        "notes": ""
+    },
+    "regionaal_positief_geteste_personen.text": {
+        "translation": "",
+        "notes": ""
+    },
+    "regionaal_positief_geteste_personen.datums": {
+        "translation": "",
+        "notes": ""
+    },
+    "regionaal_positief_geteste_personen.metric_title": {
+        "translation": "",
+        "notes": ""
+    },
+    "regionaal_positief_geteste_personen.fold_title": {
+        "translation": "What does this mean?",
+        "notes": ""
+    },
+    "regionaal_positief_geteste_personen.fold": {
+        "translation": "",
+        "notes": ""
+    },
+    "regionaal_positief_geteste_personen.graph_title": {
+        "translation": "Development over time",
+        "notes": ""
+    },
+    "regionaal_positief_geteste_personen.open": {
+        "translation": "Hide explanation",
+        "notes": ""
+    },
+    "regionaal_positief_geteste_personen.sluit": {
+        "translation": "More information and data",
+        "notes": ""
+    },
+    "regionaal_positief_geteste_personen.screen_reader_graph_content": {
+        "translation": "%1$s positively tested persons.",
+        "notes": ""
+    },
+    "regionaal_positief_geteste_personen.bron.href": {
+        "translation": "",
+        "notes": ""
+    },
+    "regionaal_positief_geteste_personen.bron.text": {
+        "translation": "",
+        "notes": ""
+    },
+    "terug_naar_regio_selectie.text": {
+        "translation": "Back to region selection",
+        "notes": ""
+    },
+    "verantwoording.title": {
+        "translation": "",
+        "notes": ""
+    },
+    "error_metadata.title": {
+        "translation": "COVID-19 Dashboard error message | Rijksoverheid.nl",
+        "notes": ""
+    },
+    "nationaal_metadata.title": {
+        "translation": "",
+        "notes": ""
+    },
+    "nationaal_metadata.description": {
+        "translation": "Information about the development of the coronavirus in The Netherlands.",
+        "notes": ""
+    },
+    "nationaal_metadata.url": {
+        "translation": "",
+        "notes": ""
+    },
+    "notfound_metadata.title": {
+        "translation": "Page can not be found | Rijksoverheid.nl",
+        "notes": ""
+    },
+    "over_metadata.title": {
+        "translation": "About the Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
+        "notes": ""
+    },
+    "over_metadata.description": {
+        "translation": "Information about the development of the coronavirus in The Netherlands.",
+        "notes": ""
+    },
+    "over_metadata.url": {
+        "translation": "",
+        "notes": ""
+    },
+    "regionaal_metadata.title": {
+        "translation": "Regional Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
+        "notes": ""
+    },
+    "regionaal_metadata.description": {
+        "translation": "Information about the development of the coronavirus in The Netherlands.",
+        "notes": ""
+    },
+    "regionaal_metadata.url": {
+        "translation": "",
+        "notes": ""
+    },
+    "verantwoording_metadata.title": {
+        "translation": "",
+        "notes": ""
+    },
+    "verantwoording_metadata.description": {
+        "translation": "Information about the development of the coronavirus in The Netherlands.",
+        "notes": ""
+    },
+    "verantwoording_metadata.url": {
+        "translation": "",
+        "notes": ""
+    },
+    "metadata.description": {
+        "translation": "Information about the development of the coronavirus in The Netherlands.",
+        "notes": ""
+    },
+    "metadata.titel": {
+        "translation": "COVID-19 Dashboard error message | Rijksoverheid.nl",
+        "notes": ""
+    },
+    "metadata.title": {
+        "translation": "",
+        "notes": ""
+    },
+    "metadata.url": {
+        "translation": "",
+        "notes": ""
+    },
+    "andere_gegevens": {
+        "translation": "Andere gegevens",
+        "notes": ""
+    }
+}

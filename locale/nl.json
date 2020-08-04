@@ -1,0 +1,794 @@
+{
+    "error_titel.text": {
+        "translation": "Er is iets misgegaan",
+        "notes": ""
+    },
+    "error_beschrijving.text": {
+        "translation": "Er is helaas iets misgegaan. Ververs de pagina of probeer het later opnieuw.",
+        "notes": ""
+    },
+    "error_probeer_opnieuw.text": {
+        "translation": "Probeer opnieuw",
+        "notes": ""
+    },
+    "skiplinks.inhoud": {
+        "translation": "Ga direct naar de inhoud",
+        "notes": ""
+    },
+    "skiplinks.nav": {
+        "translation": "Ga direct naar de navigatie",
+        "notes": ""
+    },
+    "header.title": {
+        "translation": "Dashboard coronavirus",
+        "notes": ""
+    },
+    "header.text": {
+        "translation": "Het dashboard coronavirus geeft informatie over de ontwikkeling van het coronavirus in Nederland.",
+        "notes": ""
+    },
+    "header.link": {
+        "translation": "Lees meer",
+        "notes": ""
+    },
+    "nav.links.index": {
+        "translation": "Landelijke cijfers",
+        "notes": ""
+    },
+    "nav.links.regio": {
+        "translation": "Regionale cijfers",
+        "notes": ""
+    },
+    "nav.links.over": {
+        "translation": "Over dit dashboard",
+        "notes": ""
+    },
+    "nav.links.meer": {
+        "translation": "Meer informatie over het coronavirus",
+        "notes": ""
+    },
+    "nav.links.verantwoording": {
+        "translation": "Cijferverantwoording",
+        "notes": ""
+    },
+    "ic_opnames_per_dag.title": {
+        "translation": "Intensive care-opnames per dag",
+        "notes": ""
+    },
+    "ic_opnames_per_dag.text": {
+        "translation": "Aantal opnames per dag, gemiddeld over de afgelopen 3 dagen.",
+        "notes": ""
+    },
+    "ic_opnames_per_dag.datums": {
+        "translation": "Berekend op %1$s. Wordt dagelijks bijgewerkt.",
+        "notes": ""
+    },
+    "ic_opnames_per_dag.fold_title": {
+        "translation": "Wat betekent dit?",
+        "notes": ""
+    },
+    "ic_opnames_per_dag.fold": {
+        "translation": "Aantal mensen met bevestigd COVID-19 dat per dag op een intensive care-afdeling van een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de afgelopen drie dagen.",
+        "notes": ""
+    },
+    "ic_opnames_per_dag.graph_title": {
+        "translation": "Verloop over tijd",
+        "notes": ""
+    },
+    "ic_opnames_per_dag.open": {
+        "translation": "Verberg uitleg",
+        "notes": ""
+    },
+    "ic_opnames_per_dag.sluit": {
+        "translation": "Meer uitleg en data",
+        "notes": ""
+    },
+    "ic_opnames_per_dag.signaalwaarde": {
+        "translation": "10",
+        "notes": ""
+    },
+    "ic_opnames_per_dag.screen_reader_graph_content": {
+        "translation": "%1$s intensive care-opnames per dag. Signaalwaarde: %1$s opnames per dag.",
+        "notes": ""
+    },
+    "ic_opnames_per_dag.bron.href": {
+        "translation": "https:\/\/stichting-nice.nl\/",
+        "notes": ""
+    },
+    "ic_opnames_per_dag.bron.text": {
+        "translation": "Stichting NICE",
+        "notes": ""
+    },
+    "verdenkingen_huisartsen.title": {
+        "translation": "Aantal patiënten waarvan huisartsen COVID-19 vermoeden",
+        "notes": ""
+    },
+    "verdenkingen_huisartsen.text": {
+        "translation": "Aantal door de huisarts geregistreerde verdenkingen van COVID-19, per 100.000 inwoners, per week.",
+        "notes": ""
+    },
+    "verdenkingen_huisartsen.datums": {
+        "translation": "Waarde van %1$s. Verkregen op %1$s. Wordt wekelijks bijgewerkt.",
+        "notes": ""
+    },
+    "verdenkingen_huisartsen.graph_title": {
+        "translation": "Verloop over tijd",
+        "notes": ""
+    },
+    "verdenkingen_huisartsen.fold_title": {
+        "translation": "Wat betekent dit?",
+        "notes": ""
+    },
+    "verdenkingen_huisartsen.fold": {
+        "translation": "Huisartsen registreren bij het spreken van een patiënt, de vernomen klachten. Elke week berekent het Nivel aan de hand van de geregistreerde klachten, het aantal patiënten met een verdenking op COVID-19 in de afgelopen week.",
+        "notes": ""
+    },
+    "verdenkingen_huisartsen.open": {
+        "translation": "Verberg uitleg",
+        "notes": ""
+    },
+    "verdenkingen_huisartsen.sluit": {
+        "translation": "Meer uitleg en data",
+        "notes": ""
+    },
+    "verdenkingen_huisartsen.screen_reader_graph_content": {
+        "translation": "%1$s patiënten waarvan huisartsen COVID-19 vermoeden, per 100.000 inwoners, per week.",
+        "notes": ""
+    },
+    "verdenkingen_huisartsen.bron.href": {
+        "translation": "https:\/\/www.nivel.nl\/nl\/nivel-zorgregistraties-eerste-lijn\/nivel-zorgregistraties-eerste-lijn",
+        "notes": ""
+    },
+    "verdenkingen_huisartsen.bron.text": {
+        "translation": "Nivel Zorgregistraties Eerste Lijn",
+        "notes": ""
+    },
+    "ziekenhuisopnames_per_dag.title": {
+        "translation": "Ziekenhuisopnames per dag",
+        "notes": ""
+    },
+    "ziekenhuisopnames_per_dag.text": {
+        "translation": "Aantal opnames per dag, gemiddeld over de afgelopen 3 dagen.",
+        "notes": ""
+    },
+    "ziekenhuisopnames_per_dag.datums": {
+        "translation": "Berekend op %1$s. Wordt dagelijks bijgewerkt.",
+        "notes": ""
+    },
+    "ziekenhuisopnames_per_dag.fold_title": {
+        "translation": "Wat betekent dit?",
+        "notes": ""
+    },
+    "ziekenhuisopnames_per_dag.fold": {
+        "translation": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen.",
+        "notes": ""
+    },
+    "ziekenhuisopnames_per_dag.graph_title": {
+        "translation": "Verloop over tijd",
+        "notes": ""
+    },
+    "ziekenhuisopnames_per_dag.open": {
+        "translation": "Verberg uitleg",
+        "notes": ""
+    },
+    "ziekenhuisopnames_per_dag.sluit": {
+        "translation": "Meer uitleg en data",
+        "notes": ""
+    },
+    "ziekenhuisopnames_per_dag.signaalwaarde": {
+        "translation": "40",
+        "notes": ""
+    },
+    "ziekenhuisopnames_per_dag.screen_reader_graph_content": {
+        "translation": "%1$s ziekenhuisopnames per dag. Signaalwaarde: %1$s opnames per dag.",
+        "notes": ""
+    },
+    "ziekenhuisopnames_per_dag.bron.href": {
+        "translation": "https:\/\/www.rivm.nl\/documenten\/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+        "notes": ""
+    },
+    "ziekenhuisopnames_per_dag.bron.text": {
+        "translation": "RIVM",
+        "notes": ""
+    },
+    "positief_geteste_personen.title": {
+        "translation": "Positief geteste mensen",
+        "notes": ""
+    },
+    "positief_geteste_personen.text": {
+        "translation": "Aantal positief geteste mensen per 100.000 inwoners per dag.",
+        "notes": ""
+    },
+    "positief_geteste_personen.datums": {
+        "translation": "Waarde van %1$s. Verkregen op %1$s. Wordt dagelijks bijgewerkt.",
+        "notes": ""
+    },
+    "positief_geteste_personen.fold_title": {
+        "translation": "Wat betekent dit?",
+        "notes": ""
+    },
+    "positief_geteste_personen.fold": {
+        "translation": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
+        "notes": ""
+    },
+    "positief_geteste_personen.metric_title": {
+        "translation": "Aantal positief geteste mensen:",
+        "notes": ""
+    },
+    "positief_geteste_personen.linechart_title": {
+        "translation": "Verloop over tijd",
+        "notes": ""
+    },
+    "positief_geteste_personen.graph_title": {
+        "translation": "Verdeling naar leeftijd (totaal aantal mensen)",
+        "notes": ""
+    },
+    "positief_geteste_personen.open": {
+        "translation": "Verberg uitleg",
+        "notes": ""
+    },
+    "positief_geteste_personen.sluit": {
+        "translation": "Meer uitleg en data",
+        "notes": ""
+    },
+    "positief_geteste_personen.screen_reader_graph_content": {
+        "translation": "%1$s positief geteste mensen per dag.",
+        "notes": ""
+    },
+    "positief_geteste_personen.bron.href": {
+        "translation": "https:\/\/www.rivm.nl\/documenten\/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+        "notes": ""
+    },
+    "positief_geteste_personen.bron.text": {
+        "translation": "RIVM",
+        "notes": ""
+    },
+    "besmettelijke_personen.title": {
+        "translation": "Aantal besmettelijke mensen",
+        "notes": ""
+    },
+    "besmettelijke_personen.text": {
+        "translation": "Een berekening van hoeveel mensen met COVID-19 per 100.000 inwoners besmettelijk zijn voor anderen. Dit getal wordt door het RIVM berekend.",
+        "notes": ""
+    },
+    "besmettelijke_personen.datums": {
+        "translation": "Waarde van %1$s. Wordt wekelijks bijgewerkt.",
+        "notes": ""
+    },
+    "besmettelijke_personen.fold_title": {
+        "translation": "Wat betekent dit?",
+        "notes": ""
+    },
+    "besmettelijke_personen.fold": {
+        "translation": "Als iemand het coronavirus oploopt, dan is deze persoon een tijd lang besmettelijk voor anderen. Hoe lang dit duurt verschilt van persoon tot persoon. Het aantal besmettelijke mensen is een schatting op basis van een aantal gegevensbronnen. Het exacte aantal is onbekend, maar we kunnen wel aangeven of het gaat om tientallen, honderden, duizenden of meer. ",
+        "notes": ""
+    },
+    "besmettelijke_personen.metric_title": {
+        "translation": "Geschat aantal besmettelijke mensen in Nederland:",
+        "notes": ""
+    },
+    "besmettelijke_personen.graph_title": {
+        "translation": "Verloop over tijd",
+        "notes": ""
+    },
+    "besmettelijke_personen.open": {
+        "translation": "Verberg uitleg",
+        "notes": ""
+    },
+    "besmettelijke_personen.sluit": {
+        "translation": "Meer uitleg en data",
+        "notes": ""
+    },
+    "besmettelijke_personen.screen_reader_graph_content": {
+        "translation": "%1$s besmettelijke personen per 100.000 inwoners.",
+        "notes": ""
+    },
+    "besmettelijke_personen.bron.href": {
+        "translation": "https:\/\/www.rivm.nl\/documenten\/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+        "notes": ""
+    },
+    "besmettelijke_personen.bron.text": {
+        "translation": "RIVM",
+        "notes": ""
+    },
+    "reproductiegetal.title": {
+        "translation": "Reproductiegetal",
+        "notes": ""
+    },
+    "reproductiegetal.text": {
+        "translation": "Aantal mensen dat besmet wordt door één besmettelijke persoon.",
+        "notes": ""
+    },
+    "reproductiegetal.datums": {
+        "translation": "Waarde van %1$s. Verkregen op %1$s. Wordt wekelijks bijgewerkt.",
+        "notes": ""
+    },
+    "reproductiegetal.screen_reader_graph_content": {
+        "translation": "%1$s mensen. Signaalwaarde: %1$s.",
+        "notes": ""
+    },
+    "reproductiegetal.fold_title": {
+        "translation": "Wat betekent dit?",
+        "notes": ""
+    },
+    "reproductiegetal.fold": {
+        "translation": "Het reproductiegetal laat zien hoe snel het virus zich verspreidt. Dit getal geeft aan hoeveel mensen gemiddeld besmet worden door één patiënt met COVID-19. Bij een reproductiegetal van rond de 1 blijft het aantal besmettingen ongeveer gelijk. Als het reproductiegetal lager is dan 1, dan daalt het aantal besmettingen. Bij een getal hoger dan 1 stijgt het aantal besmettingen.",
+        "notes": ""
+    },
+    "reproductiegetal.graph_title": {
+        "translation": "Verloop over tijd",
+        "notes": ""
+    },
+    "reproductiegetal.open": {
+        "translation": "Verberg uitleg",
+        "notes": ""
+    },
+    "reproductiegetal.sluit": {
+        "translation": "Meer uitleg en data",
+        "notes": ""
+    },
+    "reproductiegetal.rangeLegendLabel": {
+        "translation": "Onzekerheidsmarge",
+        "notes": ""
+    },
+    "reproductiegetal.lineLegendLabel": {
+        "translation": "Effectieve R",
+        "notes": ""
+    },
+    "reproductiegetal.signaalwaarde": {
+        "translation": "1",
+        "notes": ""
+    },
+    "reproductiegetal.bron.href": {
+        "translation": "https:\/\/www.rivm.nl\/documenten\/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+        "notes": ""
+    },
+    "reproductiegetal.bron.text": {
+        "translation": "RIVM",
+        "notes": ""
+    },
+    "reproductiegetal.legenda_r": {
+        "translation": "De effectieve R is een schatting. Voor recente R schattingen is de betrouwbaarheid niet groot, daarom loopt de R-lijn niet door in de laatste twee weken.",
+        "notes": ""
+    },
+    "reproductiegetal.legenda_marge": {
+        "translation": "De onzekerheidsmarge toont tussen welke waarden de R zich bevindt. Dit wordt wekelijks bijgewerkt.",
+        "notes": ""
+    },
+    "overige_gegevens.title": {
+        "translation": "Nog te ontwikkelen",
+        "notes": ""
+    },
+    "overige_gegevens.text": {
+        "translation": "Het is de bedoeling dat het dashboard in de toekomst wordt uitgebreid met de volgende gegevens:",
+        "notes": ""
+    },
+    "overige_gegevens.fold_title": {
+        "translation": "Wat betekent dit?",
+        "notes": ""
+    },
+    "overige_gegevens.graph_title": {
+        "translation": "Verloop over tijd",
+        "notes": ""
+    },
+    "overige_gegevens.open": {
+        "translation": "Verberg uitleg",
+        "notes": ""
+    },
+    "overige_gegevens.sluit": {
+        "translation": "Meer uitleg",
+        "notes": ""
+    },
+    "regio_link_block.title": {
+        "translation": "Informatie per regio",
+        "notes": ""
+    },
+    "regio_link_block.text": {
+        "translation": "Bekijk de belangrijkste cijfers voor uw veiligheidsregio.",
+        "notes": ""
+    },
+    "verpleeghuis_besmette_locaties.title": {
+        "translation": "Aantal besmette locaties",
+        "notes": ""
+    },
+    "verpleeghuis_besmette_locaties.text": {
+        "translation": "Aantal nieuwe locaties waarbij tenminste één bewoner positief getest is, per dag.",
+        "notes": ""
+    },
+    "verpleeghuis_besmette_locaties.datums": {
+        "translation": "Waarde van %1$s. Verkregen op %1$s. Wordt dagelijks bijgewerkt.",
+        "notes": ""
+    },
+    "verpleeghuis_besmette_locaties.metric_title": {
+        "translation": "Het totaal aantal besmette locaties is:",
+        "notes": ""
+    },
+    "verpleeghuis_besmette_locaties.metric_text": {
+        "translation": "Dit getal is een inschatting van het totaal aantal verpleeghuislocaties waar in de afgelopen 28 dagen minstens één (nieuwe) COVID-19 besmetting op basis van een positieve test, is gemeld.",
+        "notes": ""
+    },
+    "verpleeghuis_besmette_locaties.fold_title": {
+        "translation": "Wat betekent dit?",
+        "notes": ""
+    },
+    "verpleeghuis_besmette_locaties.fold": {
+        "translation": "Dit getal is een inschatting van het aantal nieuwe verpleeghuislocaties waar sprake is van tenminste een COVID-19 besmetting op basis van een positieve test. Het getal geeft het aantal locaties weer dat gisteren is gemeld. Een verpleeghuis wordt meegeteld als ‘nieuwe locatie’ wanneer er tenminste 28 dagen, dit is twee keer de incubatietijd, geen nieuwe patiënten zijn geweest.",
+        "notes": ""
+    },
+    "verpleeghuis_besmette_locaties.graph_title": {
+        "translation": "Verloop over tijd",
+        "notes": ""
+    },
+    "verpleeghuis_besmette_locaties.open": {
+        "translation": "Verberg uitleg",
+        "notes": ""
+    },
+    "verpleeghuis_besmette_locaties.sluit": {
+        "translation": "Meer uitleg en data",
+        "notes": ""
+    },
+    "verpleeghuis_besmette_locaties.screen_reader_graph_content": {
+        "translation": "%1$s nieuwe locaties waarbij tenminste één bewoner positief getest is, per dag.",
+        "notes": ""
+    },
+    "verpleeghuis_besmette_locaties.bron.href": {
+        "translation": "https:\/\/www.rivm.nl\/documenten\/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+        "notes": ""
+    },
+    "verpleeghuis_besmette_locaties.bron.text": {
+        "translation": "RIVM",
+        "notes": ""
+    },
+    "verpleeghuis_positief_geteste_personen.title": {
+        "translation": "Aantal positief geteste bewoners",
+        "notes": ""
+    },
+    "verpleeghuis_positief_geteste_personen.text": {
+        "translation": "Aantal positief geteste bewoners in verpleeghuizen per dag.",
+        "notes": ""
+    },
+    "verpleeghuis_positief_geteste_personen.datums": {
+        "translation": "Waarde van %1$s. Verkregen op %1$s. Wordt dagelijks bijgewerkt.",
+        "notes": ""
+    },
+    "verpleeghuis_positief_geteste_personen.fold_title": {
+        "translation": "Wat betekent dit?",
+        "notes": ""
+    },
+    "verpleeghuis_positief_geteste_personen.fold": {
+        "translation": "Dit getal is een inschatting van het aantal gemelde bewoners in verpleeghuizen dat in Nederland positief getest is en COVID-19 heeft. Dit getal verwijst naar de datum vóór de datum van de laatste update.",
+        "notes": ""
+    },
+    "verpleeghuis_positief_geteste_personen.graph_title": {
+        "translation": "Verloop over tijd",
+        "notes": ""
+    },
+    "verpleeghuis_positief_geteste_personen.open": {
+        "translation": "Verberg uitleg",
+        "notes": ""
+    },
+    "verpleeghuis_positief_geteste_personen.sluit": {
+        "translation": "Meer uitleg en data",
+        "notes": ""
+    },
+    "verpleeghuis_positief_geteste_personen.signaalwaarde": {
+        "translation": "40",
+        "notes": ""
+    },
+    "verpleeghuis_positief_geteste_personen.screen_reader_graph_content": {
+        "translation": "%1$s positief geteste bewoners.",
+        "notes": ""
+    },
+    "verpleeghuis_positief_geteste_personen.bron.href": {
+        "translation": "https:\/\/www.rivm.nl\/documenten\/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+        "notes": ""
+    },
+    "verpleeghuis_positief_geteste_personen.bron.text": {
+        "translation": "RIVM",
+        "notes": ""
+    },
+    "verpleeghuis_oversterfte.title": {
+        "translation": "Sterfte",
+        "notes": ""
+    },
+    "verpleeghuis_oversterfte.text": {
+        "translation": "Aantal overleden bewoners in verpleeghuizen met een vastgestelde COVID-19-besmetting per dag.",
+        "notes": ""
+    },
+    "verpleeghuis_oversterfte.datums": {
+        "translation": "Waarde van %1$s. Verkregen op %1$s. Wordt dagelijks bijgewerkt.",
+        "notes": ""
+    },
+    "verpleeghuis_oversterfte.screen_reader_graph_content": {
+        "translation": "%1$s overleden bewoners.",
+        "notes": ""
+    },
+    "verpleeghuis_oversterfte.fold_title": {
+        "translation": "Wat betekent dit?",
+        "notes": ""
+    },
+    "verpleeghuis_oversterfte.fold": {
+        "translation": "Dit getal is een inschatting van het aantal gemelde verpleeghuisbewoners dat in Nederland overlijdt aan de gevolgen van het nieuwe coronavirus. Dit getal verwijst naar de datum vóór de datum van de laatste update.",
+        "notes": ""
+    },
+    "verpleeghuis_oversterfte.graph_title": {
+        "translation": "Verloop over tijd",
+        "notes": ""
+    },
+    "verpleeghuis_oversterfte.open": {
+        "translation": "Verberg uitleg",
+        "notes": ""
+    },
+    "verpleeghuis_oversterfte.sluit": {
+        "translation": "Meer uitleg en data",
+        "notes": ""
+    },
+    "verpleeghuis_oversterfte.bron.href": {
+        "translation": "https:\/\/www.rivm.nl\/documenten\/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+        "notes": ""
+    },
+    "verpleeghuis_oversterfte.bron.text": {
+        "translation": "RIVM",
+        "notes": ""
+    },
+    "blok_verpleeghuis_zorg.title": {
+        "translation": "Verpleeghuiszorg",
+        "notes": ""
+    },
+    "blok_verpleeghuis_zorg.text": {
+        "translation": "Informatie over de verspreiding van het coronavirus in verpleeghuizen.",
+        "notes": ""
+    },
+    "geen_selectie.text": {
+        "translation": "Selecteer uw regio bovenaan deze pagina",
+        "notes": ""
+    },
+    "rioolwater_metingen.title": {
+        "translation": "Rioolwatermeting",
+        "notes": ""
+    },
+    "rioolwater_metingen.text": {
+        "translation": "Het aantal virusdeeltjes in een milliliter rioolwater, afkomstig van 28 locaties in Nederland. Het aantal meetpunten wordt in de komende weken verder uitgebreid naar meer dan 300 locaties.",
+        "notes": ""
+    },
+    "rioolwater_metingen.datums": {
+        "translation": "Waarde van %1$s. Verkregen op %1$s. Wordt wekelijks bijgewerkt.",
+        "notes": ""
+    },
+    "rioolwater_metingen.graph_title": {
+        "translation": "Verloop over tijd",
+        "notes": ""
+    },
+    "rioolwater_metingen.fold_title": {
+        "translation": "Wat betekent dit?",
+        "notes": ""
+    },
+    "rioolwater_metingen.fold": {
+        "translation": "In rioolwater kun je ziekteverwekkers zoals het nieuwe coronavirus meten omdat die met uitwerpselen (ontlasting) in het rioolwater komen. Op elke locatie wordt er eens per week, gedurende 24 uur steeds een beetje rioolwater genomen, dat noemen we een verzamelmonster. Het verzamelmonster wordt onderzocht. Dit onderzoek laat vrij snel zien hoeveel virusdeeltjes in het rioolwater zitten afkomstig uit uitwerpselen van besmette personen. Uit het huidige onderzoek kunnen nog geen conclusies worden getrokken. Het is de bedoeling dat het aantal meetpunten wordt uitgebreid van 28 naar meer dan 300 voor 1 september 2020. Pas als het onderzoek volledig loopt, kunnen hier conclusies aan worden verbonden.",
+        "notes": ""
+    },
+    "rioolwater_metingen.open": {
+        "translation": "Verberg uitleg",
+        "notes": ""
+    },
+    "rioolwater_metingen.sluit": {
+        "translation": "Meer uitleg en data",
+        "notes": ""
+    },
+    "rioolwater_metingen.screen_reader_graph_content": {
+        "translation": "%1$s COVID-19 RNA-deeltjes gemeten per mililiter in rioolwater.",
+        "notes": ""
+    },
+    "rioolwater_metingen.bron.text": {
+        "translation": "RIVM Onderzoek rioolwater",
+        "notes": ""
+    },
+    "rioolwater_metingen.bron.href": {
+        "translation": "https:\/\/www.rivm.nl\/coronavirus-covid-19\/onderzoek\/rioolwater",
+        "notes": ""
+    },
+    "notfound_titel.text": {
+        "translation": "Er is iets misgegaan",
+        "notes": ""
+    },
+    "notfound_beschrijving.text": {
+        "translation": "Er is helaas iets misgegaan. Ververs de pagina of probeer het later opnieuw.",
+        "notes": ""
+    },
+    "over_titel.text": {
+        "translation": "Over dit dashboard",
+        "notes": ""
+    },
+    "over_disclaimer.title": {
+        "translation": "Disclaimer",
+        "notes": ""
+    },
+    "over_disclaimer.text": {
+        "translation": "Let op: dit dashboard coronavirus is in ontwikkeling. De komende periode worden stap voor stap meer functies en gegevens toegevoegd. Daarnaast werken we aan het verbeteren van de digitoegankelijkheid van deze site. De informatie op deze site willen we voor iedereen in Nederland beschikbaar maken. Het dashboard wordt nog niet gebruikt voor besluitvorming. Er kunnen nog geen conclusies uit getrokken worden.",
+        "notes": ""
+    },
+    "over_beschrijving.text": {
+        "translation": "Het dashboard coronavirus geeft informatie over de ontwikkeling van het coronavirus in Nederland. Met deze informatie kunnen eerder signalen van een toename van de verspreiding van het virus worden opgepikt. We moeten voorkomen dat het virus weer om zich heen grijpt. Het aantal IC-en ziekenhuisopnames geven in de kern de ultieme waarschuwing. Maar eerder al komen de signalen door via de testuitslagen die vertaald worden naar het aantal positief geteste personen per 100.000 inwoners. Daarnaast zijn er ondersteunende indicatoren die de epidemie beschrijven en andersoortige signalen oppikken.",
+        "notes": ""
+    },
+    "over_veelgestelde_vragen.text": {
+        "translation": "Veelgestelde vragen",
+        "notes": ""
+    },
+    "regionaal_ziekenhuisopnames_per_dag.title": {
+        "translation": "Ziekenhuisopnames per dag",
+        "notes": ""
+    },
+    "regionaal_ziekenhuisopnames_per_dag.text": {
+        "translation": "Aantal opnames per dag, gemiddeld over de afgelopen 3 dagen.",
+        "notes": ""
+    },
+    "regionaal_ziekenhuisopnames_per_dag.datums": {
+        "translation": "Berekend op %1$s. Wordt dagelijks bijgewerkt.",
+        "notes": ""
+    },
+    "regionaal_ziekenhuisopnames_per_dag.fold_title": {
+        "translation": "Wat betekent dit?",
+        "notes": ""
+    },
+    "regionaal_ziekenhuisopnames_per_dag.fold": {
+        "translation": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen.",
+        "notes": ""
+    },
+    "regionaal_ziekenhuisopnames_per_dag.graph_title": {
+        "translation": "Verloop over tijd",
+        "notes": ""
+    },
+    "regionaal_ziekenhuisopnames_per_dag.open": {
+        "translation": "Verberg uitleg",
+        "notes": ""
+    },
+    "regionaal_ziekenhuisopnames_per_dag.sluit": {
+        "translation": "Meer uitleg en data",
+        "notes": ""
+    },
+    "regionaal_ziekenhuisopnames_per_dag.screen_reader_graph_content": {
+        "translation": "%1$s opnames.",
+        "notes": ""
+    },
+    "regionaal_ziekenhuisopnames_per_dag.bron.href": {
+        "translation": "https:\/\/www.rivm.nl\/documenten\/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+        "notes": ""
+    },
+    "regionaal_ziekenhuisopnames_per_dag.bron.text": {
+        "translation": "RIVM",
+        "notes": ""
+    },
+    "regionaal_positief_geteste_personen.title": {
+        "translation": "Positief geteste mensen",
+        "notes": ""
+    },
+    "regionaal_positief_geteste_personen.text": {
+        "translation": "Aantal positief geteste mensen per 100.000 inwoners per dag.",
+        "notes": ""
+    },
+    "regionaal_positief_geteste_personen.datums": {
+        "translation": "Waarde van %1$s. Verkregen op %1$s. Wordt dagelijks bijgewerkt.",
+        "notes": ""
+    },
+    "regionaal_positief_geteste_personen.metric_title": {
+        "translation": "Aantal positief geteste mensen:",
+        "notes": ""
+    },
+    "regionaal_positief_geteste_personen.fold_title": {
+        "translation": "Wat betekent dit?",
+        "notes": ""
+    },
+    "regionaal_positief_geteste_personen.fold": {
+        "translation": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
+        "notes": ""
+    },
+    "regionaal_positief_geteste_personen.graph_title": {
+        "translation": "Verloop over tijd",
+        "notes": ""
+    },
+    "regionaal_positief_geteste_personen.open": {
+        "translation": "Verberg uitleg",
+        "notes": ""
+    },
+    "regionaal_positief_geteste_personen.sluit": {
+        "translation": "Meer uitleg en data",
+        "notes": ""
+    },
+    "regionaal_positief_geteste_personen.screen_reader_graph_content": {
+        "translation": "%1$s positief geteste personen.",
+        "notes": ""
+    },
+    "regionaal_positief_geteste_personen.bron.href": {
+        "translation": "https:\/\/www.rivm.nl\/documenten\/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+        "notes": ""
+    },
+    "regionaal_positief_geteste_personen.bron.text": {
+        "translation": "RIVM",
+        "notes": ""
+    },
+    "terug_naar_regio_selectie.text": {
+        "translation": "Terug naar regio selectie",
+        "notes": ""
+    },
+    "verantwoording.title": {
+        "translation": "Cijferverantwoording",
+        "notes": ""
+    },
+    "error_metadata.title": {
+        "translation": "COVID-19 Dashboard foutmelding | Rijksoverheid.nl",
+        "notes": ""
+    },
+    "nationaal_metadata.title": {
+        "translation": "Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
+        "notes": ""
+    },
+    "nationaal_metadata.description": {
+        "translation": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
+        "notes": ""
+    },
+    "nationaal_metadata.url": {
+        "translation": "https:\/\/coronadashboard.rijksoverheid.nl",
+        "notes": ""
+    },
+    "notfound_metadata.title": {
+        "translation": "Pagina kan niet gevonden worden | Rijksoverheid.nl",
+        "notes": ""
+    },
+    "over_metadata.title": {
+        "translation": "Over het Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
+        "notes": ""
+    },
+    "over_metadata.description": {
+        "translation": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
+        "notes": ""
+    },
+    "over_metadata.url": {
+        "translation": "https:\/\/coronadashboard.rijksoverheid.nl\/over",
+        "notes": ""
+    },
+    "regionaal_metadata.title": {
+        "translation": "Regionaal Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
+        "notes": ""
+    },
+    "regionaal_metadata.description": {
+        "translation": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
+        "notes": ""
+    },
+    "regionaal_metadata.url": {
+        "translation": "https:\/\/coronadashboard.rijksoverheid.nl\/regio",
+        "notes": ""
+    },
+    "verantwoording_metadata.title": {
+        "translation": "Cijferverantwoording Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
+        "notes": ""
+    },
+    "verantwoording_metadata.description": {
+        "translation": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
+        "notes": ""
+    },
+    "verantwoording_metadata.url": {
+        "translation": "https:\/\/coronadashboard.rijksoverheid.nl\/verantwoording",
+        "notes": ""
+    },
+    "metadata.description": {
+        "translation": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
+        "notes": ""
+    },
+    "metadata.titel": {
+        "translation": "COVID-19 Dashboard foutmelding | Rijksoverheid.nl",
+        "notes": ""
+    },
+    "metadata.title": {
+        "translation": "Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
+        "notes": ""
+    },
+    "metadata.url": {
+        "translation": "https:\/\/coronadashboard.rijksoverheid.nl",
+        "notes": ""
+    },
+    "andere_gegevens": {
+        "translation": "Andere gegevens",
+        "notes": ""
+    }
+}
