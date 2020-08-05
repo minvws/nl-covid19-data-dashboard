@@ -5,7 +5,8 @@ import MaxWidth from 'components/maxWidth';
 
 import text from 'locale';
 import styles from './over.module.scss';
-import ReplaceLinks from 'components/replaceLinks';
+
+import MDToHTMLString from 'utils/MDToHTMLString';
 
 import openGraphImage from 'assets/sharing/og-cijferverantwoording.png?url';
 import twitterImage from 'assets/sharing/twitter-cijferverantwoording.png?url';
@@ -47,11 +48,11 @@ const Verantwoording: FunctionComponentWithLayout = () => {
               {text.verantwoording.cijfers.map((item: ICijfer) => (
                 <>
                   <dt>{item.cijfer.translation}</dt>
-                  <dd>
-                    <ReplaceLinks>
-                      {item.verantwoording.translation}
-                    </ReplaceLinks>
-                  </dd>
+                  <dd
+                    dangerouslySetInnerHTML={{
+                      __html: MDToHTMLString(item.verantwoording.translation),
+                    }}
+                  ></dd>
                 </>
               ))}
             </dl>
