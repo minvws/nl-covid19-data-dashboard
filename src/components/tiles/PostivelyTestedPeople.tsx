@@ -8,7 +8,7 @@ import GraphContent from 'components/graphContent';
 import GraphHeader from 'components/graphHeader';
 import DateReported from 'components/dateReported';
 import Getest from 'assets/test.svg';
-import formatDecimal from 'utils/formatDec';
+import formatDecimal from 'utils/formatNumber';
 import { LineChart, BarChart } from './index';
 
 import siteText from 'locale';

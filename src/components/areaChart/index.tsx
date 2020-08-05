@@ -2,8 +2,8 @@ import { useMemo } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-import months from 'data/months';
 import formatNumber from 'utils/formatNumber';
+import formatDate from 'utils/formatDate';
 
 if (typeof Highcharts === 'object') {
   require('highcharts/highcharts-more')(Highcharts);
@@ -32,16 +32,6 @@ const AreaChart: React.FC<AreaChartProps> = (props) => {
     maxY,
     signaalwaarde,
   } = props;
-
-  const formatDate = (value: string) => {
-    const date = new Date(value);
-    return `${date.getDate()} ${months[date.getMonth()]}`;
-  };
-
-  const formatDateLong = (value: string) => {
-    const date = new Date(value);
-    return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
-  };
 
   const rangeData: [Date, number | null, number | null][] = useMemo(() => {
     return data
@@ -108,7 +98,10 @@ const AreaChart: React.FC<AreaChartProps> = (props) => {
           text: null,
         },
         labels: {
-          format: '{value}',
+          formatter: function (): string {
+            // @ts-ignore
+            return formatNumber(this.value);
+          },
         },
         plotLines: [],
         accessibility: {
@@ -137,7 +130,7 @@ const AreaChart: React.FC<AreaChartProps> = (props) => {
           // @ts-ignore
           const x = this.x;
           return `
-            ${formatDateLong(x)}<br/>
+            ${formatDate(x, 'medium')}<br/>
             <strong>${rangeLegendLabel}</strong> ${formatNumber(
             minRangePoint
           )} - ${formatNumber(maxRangePoint)}<br/>

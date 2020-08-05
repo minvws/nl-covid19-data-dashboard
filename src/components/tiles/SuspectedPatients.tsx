@@ -10,7 +10,7 @@ import DateReported from 'components/dateReported';
 import Arts from 'assets/arts.svg';
 import { LineChart } from './index';
 
-import formatDecimal from 'utils/formatDec';
+import formatDecimal from 'utils/formatNumber';
 
 import siteText from 'locale';
 import { store } from 'store';

@@ -28,7 +28,7 @@ const SvgMap = dynamic(() => import('components/mapChart/svgMap'));
 
 import { FunctionComponentWithLayout } from 'components/layout';
 import ScreenReaderOnly from 'components/screenReaderOnly';
-import formatDecimal from 'utils/formatDec';
+import formatDecimal from 'utils/formatNumber';
 import SelectMunicipality from 'components/selectMunicipality';
 
 import openGraphImage from 'assets/sharing/og-regionale-cijfers.png?url';
