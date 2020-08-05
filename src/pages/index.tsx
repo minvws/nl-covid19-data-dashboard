@@ -8,7 +8,6 @@ import Layout from 'components/layout';
 import LinkCard from 'components/linkCard';
 
 import LastUpdated from 'components/lastUpdated';
-import lastUpdatedStyles from 'components/lastUpdated/lastUpdated.module.scss';
 
 import { IntakeIntensiveCare } from 'components/tiles/IntakeIntensiveCare';
 import { NursingHomeInfectedDeaths } from 'components/tiles/NursingHomeInfectedDeaths';
@@ -90,13 +89,7 @@ const Home: FunctionComponentWithLayout = () => {
       </Head>
 
       <MaxWidth>
-        {state?.NL?.last_generated ? (
-          <LastUpdated lastUpdated={state.NL?.last_generated * 1000} />
-        ) : (
-          <p className={lastUpdatedStyles.text}>
-            Laatste informatie aan het ophalen
-          </p>
-        )}
+        <LastUpdated lastUpdated={state.NL?.last_generated * 1000} />
 
         <Notification />
       </MaxWidth>
@@ -130,10 +123,11 @@ const Home: FunctionComponentWithLayout = () => {
         </section>
 
         <section className="home-section">
-          <TitleBlock Icon={MedischeScreening} title="Andere gegevens">
-            <p>
-              Cijfers die iets kunnen zeggen over de verspreiding van het virus.
-            </p>
+          <TitleBlock
+            Icon={MedischeScreening}
+            title={siteText.blok_andere_gegevens.title.translation}
+          >
+            <p>{siteText.blok_andere_gegevens.message.translation}</p>
           </TitleBlock>
 
           <Masonry

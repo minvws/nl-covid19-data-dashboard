@@ -1,7 +1,5 @@
 import { useContext } from 'react';
 
-import Link from 'next/link';
-
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
 import Metadata from 'components/metadata';
@@ -56,14 +54,6 @@ export const InfectiousPeople: React.FC = () => {
           />
         )}
 
-        <p className={'regioDataLoading'}>
-          Voor het aantal besmettelijke mensen is geen signaalwaarde
-          beschikbaar.{' '}
-          <Link href="/verantwoording">
-            <a>Lees hier waarom</a>
-          </Link>
-        </p>
-
         {count && (
           <h3>
             {text.metric_title.translation}{' '}
@@ -102,19 +92,14 @@ export const InfectiousPeople: React.FC = () => {
             }))}
             minY={0}
             maxY={300000}
-            rangeLegendLabel="Onzekerheidsmarge"
-            lineLegendLabel="Besmettelijke mensen"
+            rangeLegendLabel={text.rangeLegendLabel.translation}
+            lineLegendLabel={text.lineLegendLabel.translation}
           />
         )}
 
         <Legenda>
-          <li className="blue">
-            Het aantal besmettelijke mensen in Nederland.
-          </li>
-          <li className="gray square">
-            De onzekerheidsmarge toont tussen welke waarden het aantal
-            besmettelijke mensen zich bevindt.
-          </li>
+          <li className="blue">{text.legenda_line.translation}</li>
+          <li className="gray square">{text.legenda_marge.translation}</li>
         </Legenda>
 
         {count && <Metadata dataSource={text.bron} />}

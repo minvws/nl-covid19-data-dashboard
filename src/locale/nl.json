@@ -1,4 +1,44 @@
 {
+  "blok_andere_gegevens": {
+    "title": {
+      "translation": "Andere gegevens",
+      "notes": ""
+    },
+    "message": {
+      "translation": "Cijfers die iets kunnen zeggen over de verspreiding van het virus.",
+      "notes": ""
+    }
+  },
+  "laatst_bijgewerkt": {
+    "loading": {
+      "translation": "Laatste gegevens aan het ophalen",
+      "notes": ""
+    },
+    "message": {
+      "translation": "Laatst bijgewerkt",
+      "notes": ""
+    }
+  },
+  "notificatie": {
+    "titel": {
+      "translation": "Toename in besmettingen COVID-19",
+      "notes": ""
+    },
+    "bericht": {
+      "translation": "Het aantal nieuwe personen dat positief getest is in Nederland neemt verder toe. Het reproductiegetal ligt net als vorige week boven de 1.",
+      "notes": ""
+    },
+    "link": {
+      "text": {
+        "translation": "Bekijk de actuele informatie van het RIVM",
+        "notes": ""
+      },
+      "href": {
+        "translation": "https://www.rivm.nl/coronavirus-covid-19/actueel",
+        "notes": ""
+      }
+    }
+  },
   "error_titel": {
     "text": {
       "translation": "Er is iets misgegaan",
@@ -323,6 +363,22 @@
         "translation": "RIVM",
         "notes": ""
       }
+    },
+    "legenda_line": {
+      "translation": "Het aantal besmettelijke mensen in Nederland.",
+      "notes": ""
+    },
+    "legenda_marge": {
+      "translation": "De onzekerheidsmarge toont tussen welke waarden het aantal besmettelijke mensen zich bevindt.",
+      "notes": ""
+    },
+    "rangeLegendLabel": {
+      "translation": "Onzekerheidsmarge",
+      "notes": ""
+    },
+    "lineLegendLabel": {
+      "translation": "Besmettelijke mensen",
+      "notes": ""
     }
   },
   "reproductiegetal": {
@@ -1030,6 +1086,10 @@
   "verantwoording": {
     "title": {
       "translation": "Cijferverantwoording",
+      "notes": ""
+    },
+    "paragraaf": {
+      "translation": "In dit dashboard staan verschillende cijfers die ons vertellen hoe het ervoor staat met beheersen van COVID-19. Op deze plek geven we meer toelichting over de wijze waarop de cijfers zijn samengesteld.",
       "notes": ""
     },
     "cijfers": [

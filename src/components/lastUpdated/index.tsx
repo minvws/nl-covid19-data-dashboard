@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 
 import styles from './lastUpdated.module.scss';
 import { long } from 'data/months';
+import siteText from 'locale';
 
 const formatDate = (timestamp: number) => {
   const date = new Date(timestamp);
@@ -33,12 +34,14 @@ const LastUpdated: FunctionComponent<LastUpdatedProps> = (props) => {
     <p className={styles.text}>
       {lastUpdated ? (
         <>
-          Laatst bijgewerkt:{' '}
+          {siteText.laatst_bijgewerkt.message.translation}:{' '}
           <time dateTime={formatTimestamp(lastUpdated)}>
             {formatDate(lastUpdated)}
           </time>
         </>
-      ) : null}
+      ) : (
+        siteText.laatst_bijgewerkt.loading.translation
+      )}
     </p>
   );
 };
