@@ -252,7 +252,7 @@
     "datums": "Waarde van {{dateOfReport}}. Verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
     "graph_title": "Verloop over tijd",
     "fold_title": "Wat betekent dit?",
-    "fold": "In rioolwater kun je ziekteverwekkers zoals het nieuwe coronavirus meten omdat die met uitwerpselen (ontlasting) in het rioolwater komen. Onderzoekers testen eens per week rioolwater dat over 24 uur verzameld is. Dit onderzoek laat vrij snel zien hoeveel virusdeeltjes in het rioolwater zitten afkomstig uit uitwerpselen van besmette personen. Uit het huidige onderzoek kunnen nog geen conclusies worden getrokken. Het is de bedoeling dat het aantal meetpunten wordt uitgebreid van 28 naar meer dan 300 voor 1 september 2020. Pas als het onderzoek volledig loopt, kunnen hier conclusies aan worden verbonden.",
+    "fold": "In rioolwater kun je ziekteverwekkers zoals het nieuwe coronavirus meten omdat die met uitwerpselen (ontlasting) in het rioolwater komen. Op elke locatie wordt er eens per week, gedurende 24 uur steeds een beetje rioolwater genomen, dat noemen we een verzamelmonster. Het verzamelmonster wordt onderzocht. Dit onderzoek laat vrij snel zien hoeveel virusdeeltjes in het rioolwater zitten afkomstig uit uitwerpselen van besmette personen. Uit het huidige onderzoek kunnen nog geen conclusies worden getrokken. Het is de bedoeling dat het aantal meetpunten wordt uitgebreid van 28 naar meer dan 300 voor 1 september 2020. Pas als het onderzoek volledig loopt, kunnen hier conclusies aan worden verbonden.",
     "open": "Verberg uitleg",
     "sluit": "Meer uitleg en data",
     "screen_reader_graph_content": "{{value}} COVID-19 RNA-deeltjes gemeten per mililiter in rioolwater.",
@@ -382,7 +382,7 @@
       },
       {
         "cijfer": "Intensive care-bezetting",
-        "verantwoording": "Deze gegevens worden dagelijks aangeleverd als open data door [Stichting NICE](https://stichting-nice.nl/covid-19/public/new-intake/confirmed/). De brondata heeft betrekking op de afgelopen 24 uur. De berekening van de ic-bezetting bestaat uit COVID-19-patiënten met een bewezen besmetting. \\n Uit de data van het bronbestand wordt het gemiddelde berekend van de afgelopen drie dagen, dus exclusief vandaag. Door de waarden van elke dag (gisteren, eergisteren en de dag daarvoor) bijeen te tellen, te delen door drie en de uitkomst hiervan af te ronden naar één cijfer achter de komma komen we tot het gemiddelde."
+        "verantwoording": "Deze gegevens worden dagelijks aangeleverd als open data door [Stichting NICE](https://stichting-nice.nl/covid-19/public/new-intake/confirmed/). De brondata heeft betrekking op de afgelopen 24 uur. De berekening van de ic-bezetting bestaat uit COVID-19-patiënten met een bewezen besmetting. {{whitespace}} Uit de data van het bronbestand wordt het gemiddelde berekend van de afgelopen drie dagen, dus exclusief vandaag. Door de waarden van elke dag (gisteren, eergisteren en de dag daarvoor) bijeen te tellen, te delen door drie en de uitkomst hiervan af te ronden naar één cijfer achter de komma komen we tot het gemiddelde."
       },
       {
         "cijfer": "Ziekenhuisopnames",
