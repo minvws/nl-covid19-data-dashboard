@@ -18,7 +18,7 @@ The core team works directly from this open-source repository. If you plan to pr
 
 This application uses Next.js as framework, which builds the pages of the application as static exports. We use Preact to keep the bundle as small as possible.
 
-We are using Next.js 9.3, because 9.4 introduces Fast Refresh and that has issues with Preact.
+We are using Next.js 9.5.
 
 Run `yarn` to install all required packages.
 
