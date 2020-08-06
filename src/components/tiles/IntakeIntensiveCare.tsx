@@ -48,7 +48,7 @@ export const IntakeIntensiveCare: React.FC = () => {
               },
             ]}
             screenReaderText={text.screen_reader_graph_content}
-            kritiekeWaarde={Number(text.signaalwaarde)}
+            kritiekeWaarde={10}
             value={data.last_value.moving_average_ic}
             id="ic"
           />

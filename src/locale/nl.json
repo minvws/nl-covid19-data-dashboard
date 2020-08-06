@@ -52,7 +52,6 @@
     "graph_title": "Verloop over tijd",
     "open": "Verberg uitleg",
     "sluit": "Meer uitleg en data",
-    "signaalwaarde": "10",
     "screen_reader_graph_content": "{{value}} intensive care-opnames per dag. Signaalwaarde: {{kritiekeWaarde}} opnames per dag.",
     "bron": {
       "href": "https://stichting-nice.nl/",
@@ -83,7 +82,6 @@
     "graph_title": "Verloop over tijd",
     "open": "Verberg uitleg",
     "sluit": "Meer uitleg en data",
-    "signaalwaarde": "40",
     "screen_reader_graph_content": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{kritiekeWaarde}} opnames per dag.",
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
@@ -139,7 +137,6 @@
     "sluit": "Meer uitleg en data",
     "rangeLegendLabel": "Onzekerheidsmarge",
     "lineLegendLabel": "Effectieve R",
-    "signaalwaarde": "1",
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"

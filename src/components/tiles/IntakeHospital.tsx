@@ -34,7 +34,7 @@ export const IntakeHospital: React.FC = () => {
           <BarScale
             min={0}
             max={100}
-            kritiekeWaarde={Number(text.signaalwaarde)}
+            kritiekeWaarde={40}
             screenReaderText={text.screen_reader_graph_content}
             value={data.last_value.moving_average_hospital}
             id="opnames"

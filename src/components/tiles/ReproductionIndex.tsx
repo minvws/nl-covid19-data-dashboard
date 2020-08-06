@@ -36,7 +36,7 @@ export const ReproductionIndex: React.FC = () => {
             min={0}
             max={2}
             screenReaderText={text.screen_reader_graph_content}
-            kritiekeWaarde={Number(text.signaalwaarde)}
+            kritiekeWaarde={1}
             value={lastKnownValidData?.last_value?.reproduction_index_avg}
             id="repro"
             gradient={[
