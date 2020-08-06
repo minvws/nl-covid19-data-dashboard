@@ -12,14 +12,8 @@ import openGraphImage from 'assets/sharing/og-cijferverantwoording.png?url';
 import twitterImage from 'assets/sharing/twitter-cijferverantwoording.png?url';
 
 interface ICijfer {
-  cijfer: {
-    translation: string;
-    notes: string;
-  };
-  verantwoording: {
-    translation: string;
-    notes: string;
-  };
+  cijfer: string;
+  verantwoording: string;
 }
 
 const Verantwoording: FunctionComponentWithLayout = () => {
@@ -42,15 +36,15 @@ const Verantwoording: FunctionComponentWithLayout = () => {
       <div className={styles.container}>
         <MaxWidth>
           <div className={styles.maxwidth}>
-            <h2>{text.verantwoording.title.translation}</h2>
-            <p>{text.verantwoording.paragraaf.translation}</p>
+            <h2>{text.verantwoording.title}</h2>
+            <p>{text.verantwoording.paragraaf}</p>
             <dl className={styles.faqList}>
               {text.verantwoording.cijfers.map((item: ICijfer) => (
                 <>
-                  <dt>{item.cijfer.translation}</dt>
+                  <dt>{item.cijfer}</dt>
                   <dd
                     dangerouslySetInnerHTML={{
-                      __html: MDToHTMLString(item.verantwoording.translation),
+                      __html: MDToHTMLString(item.verantwoording),
                     }}
                   ></dd>
                 </>

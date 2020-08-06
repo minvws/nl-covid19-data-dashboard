@@ -9,8 +9,8 @@ const NotFound: FunctionComponentWithLayout = () => {
     <div className={styles.container}>
       <MaxWidth>
         <div className={styles.maxwidth}>
-          <h2>{text.notfound_titel.text.translation}</h2>
-          <p>{text.notfound_beschrijving.text.translation}</p>
+          <h2>{text.notfound_titel.text}</h2>
+          <p>{text.notfound_beschrijving.text}</p>
         </div>
       </MaxWidth>
     </div>

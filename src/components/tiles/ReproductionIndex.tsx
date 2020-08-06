@@ -29,14 +29,14 @@ export const ReproductionIndex: React.FC = () => {
   return (
     <GraphContainer>
       <GraphContent>
-        <GraphHeader Icon={Repro} title={text.title.translation} />
-        <p>{text.text.translation}</p>
+        <GraphHeader Icon={Repro} title={text.title} />
+        <p>{text.text}</p>
         {data && (
           <BarScale
             min={0}
             max={2}
-            screenReaderText={text.screen_reader_graph_content.translation}
-            kritiekeWaarde={Number(text.signaalwaarde.translation)}
+            screenReaderText={text.screen_reader_graph_content}
+            kritiekeWaarde={Number(text.signaalwaarde)}
             value={lastKnownValidData?.last_value?.reproduction_index_avg}
             id="repro"
             gradient={[
@@ -61,7 +61,7 @@ export const ReproductionIndex: React.FC = () => {
         )}
 
         <DateReported
-          datumsText={text.datums.translation}
+          datumsText={text.datums}
           dateUnix={lastKnownValidData?.last_value?.date_of_report_unix}
           dateInsertedUnix={
             lastKnownValidData?.last_value?.date_of_insertion_unix
@@ -69,13 +69,13 @@ export const ReproductionIndex: React.FC = () => {
         />
       </GraphContent>
       <Collapse
-        openText={text.open.translation}
-        sluitText={text.sluit.translation}
+        openText={text.open}
+        sluitText={text.sluit}
         piwikName="Reproductiegetal"
         piwikAction="landelijk"
       >
-        <h4>{text.fold_title.translation}</h4>
-        <p>{text.fold.translation}</p>
+        <h4>{text.fold_title}</h4>
+        <p>{text.fold}</p>
 
         <img
           width={315}
@@ -85,7 +85,7 @@ export const ReproductionIndex: React.FC = () => {
           alt="Ondersteunende afbeelding bij bovenstaande uitleg"
         />
 
-        <h4>{text.graph_title.translation}</h4>
+        <h4>{text.graph_title}</h4>
         {data?.values && (
           <AreaChart
             data={data.values.map((value) => ({
@@ -97,14 +97,14 @@ export const ReproductionIndex: React.FC = () => {
             minY={0}
             maxY={4}
             signaalwaarde={1}
-            rangeLegendLabel={text.rangeLegendLabel.translation}
-            lineLegendLabel={text.lineLegendLabel.translation}
+            rangeLegendLabel={text.rangeLegendLabel}
+            lineLegendLabel={text.lineLegendLabel}
           />
         )}
 
         <Legenda>
-          <li className="blue">{text.legenda_r.translation}</li>
-          <li className="gray square">{text.legenda_marge.translation}</li>
+          <li className="blue">{text.legenda_r}</li>
+          <li className="gray square">{text.legenda_marge}</li>
         </Legenda>
 
         <Metadata dataSource={text.bron} />

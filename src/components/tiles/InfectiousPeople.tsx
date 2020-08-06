@@ -35,14 +35,14 @@ export const InfectiousPeople: React.FC = () => {
   return (
     <GraphContainer>
       <GraphContent>
-        <GraphHeader Icon={Ziektegolf} title={text.title.translation} />
-        <p>{text.text.translation}</p>
+        <GraphHeader Icon={Ziektegolf} title={text.title} />
+        <p>{text.text}</p>
 
         {countNormalized && (
           <BarScale
             min={0}
             max={80}
-            screenReaderText={text.screen_reader_graph_content.translation}
+            screenReaderText={text.screen_reader_graph_content}
             value={countNormalized.last_value.infectious_avg_normalized}
             id="besmettelijk"
             gradient={[
@@ -56,7 +56,7 @@ export const InfectiousPeople: React.FC = () => {
 
         {count && (
           <h3>
-            {text.metric_title.translation}{' '}
+            {text.metric_title}{' '}
             <span style={{ color: '#01689b' }}>
               {formatDecimal(count.last_value.infectious_avg)}
             </span>
@@ -65,22 +65,22 @@ export const InfectiousPeople: React.FC = () => {
 
         {countNormalized?.last_value?.infectious_avg_normalized !== null && (
           <DateReported
-            datumsText={text.datums.translation}
+            datumsText={text.datums}
             dateUnix={count?.last_value?.date_of_report_unix}
           />
         )}
       </GraphContent>
 
       <Collapse
-        openText={text.open.translation}
-        sluitText={text.sluit.translation}
+        openText={text.open}
+        sluitText={text.sluit}
         piwikName="Aantal besmettelijke mensen"
         piwikAction="landelijk"
       >
-        <h4>{text.fold_title.translation}</h4>
-        <p>{text.fold.translation}</p>
+        <h4>{text.fold_title}</h4>
+        <p>{text.fold}</p>
 
-        <h4>{text.graph_title.translation}</h4>
+        <h4>{text.graph_title}</h4>
 
         {count?.values && (
           <AreaChart
@@ -92,14 +92,14 @@ export const InfectiousPeople: React.FC = () => {
             }))}
             minY={0}
             maxY={300000}
-            rangeLegendLabel={text.rangeLegendLabel.translation}
-            lineLegendLabel={text.lineLegendLabel.translation}
+            rangeLegendLabel={text.rangeLegendLabel}
+            lineLegendLabel={text.lineLegendLabel}
           />
         )}
 
         <Legenda>
-          <li className="blue">{text.legenda_line.translation}</li>
-          <li className="gray square">{text.legenda_marge.translation}</li>
+          <li className="blue">{text.legenda_line}</li>
+          <li className="gray square">{text.legenda_marge}</li>
         </Legenda>
 
         {count && <Metadata dataSource={text.bron} />}

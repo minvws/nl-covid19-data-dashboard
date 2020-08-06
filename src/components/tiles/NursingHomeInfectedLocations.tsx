@@ -30,14 +30,14 @@ export const NursingHomeInfectedLocations: React.FC = () => {
   return (
     <GraphContainer>
       <GraphContent>
-        <GraphHeader Icon={Locatie} title={text.title.translation} />
-        <p>{text.text.translation}</p>
+        <GraphHeader Icon={Locatie} title={text.title} />
+        <p>{text.text}</p>
 
         {newLocations && (
           <BarScale
             min={0}
             max={30}
-            screenReaderText={text.screen_reader_graph_content.translation}
+            screenReaderText={text.screen_reader_graph_content}
             value={newLocations.last_value.total_new_reported_locations}
             id="besmette_locaties_verpleeghuis"
             gradient={[
@@ -50,22 +50,22 @@ export const NursingHomeInfectedLocations: React.FC = () => {
         )}
         {newLocations?.last_value?.total_new_reported_locations !== null && (
           <DateReported
-            datumsText={text.datums.translation}
+            datumsText={text.datums}
             dateInsertedUnix={newLocations?.last_value?.date_of_insertion_unix}
             dateUnix={newLocations?.last_value?.date_of_report_unix}
           />
         )}
       </GraphContent>
       <Collapse
-        openText={text.open.translation}
-        sluitText={text.sluit.translation}
+        openText={text.open}
+        sluitText={text.sluit}
         piwikName="Aantal besmette locaties"
         piwikAction="landelijk"
       >
-        <h4>{text.fold_title.translation}</h4>
-        <p>{text.fold.translation}</p>
+        <h4>{text.fold_title}</h4>
+        <p>{text.fold}</p>
 
-        <h4>{text.graph_title.translation}</h4>
+        <h4>{text.graph_title}</h4>
 
         {newLocations && (
           <LineChart
@@ -78,7 +78,7 @@ export const NursingHomeInfectedLocations: React.FC = () => {
 
         {totalLocations && (
           <h3>
-            {text.metric_title.translation}{' '}
+            {text.metric_title}{' '}
             <span style={{ color: '#01689b' }}>
               {formatDecimal(
                 totalLocations.last_value.total_reported_locations
@@ -86,7 +86,7 @@ export const NursingHomeInfectedLocations: React.FC = () => {
             </span>
           </h3>
         )}
-        <p>{text.metric_text.translation}</p>
+        <p>{text.metric_text}</p>
 
         {newLocations && <Metadata dataSource={text.bron} />}
       </Collapse>

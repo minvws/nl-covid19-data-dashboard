@@ -16,18 +16,18 @@ const Notification: FC = () => {
       <div className={styles.textgroup}>
         <div className={styles.headergroup}>
           <Inform />
-          <p className={styles.header}>{text.notificatie.titel.translation}</p>
+          <p className={styles.header}>{text.notificatie.titel}</p>
         </div>
-        <p>{text.notificatie.bericht.translation}</p>
+        <p>{text.notificatie.bericht}</p>
       </div>
       <a
         className={styles.link}
-        href={text.notificatie.link.href.translation}
+        href={text.notificatie.link.href}
         target="_blank"
         rel="noopener noreferrer"
       >
         <ExternalLink />
-        <span>{text.notificatie.link.text.translation}</span>
+        <span>{text.notificatie.link.text}</span>
       </a>
     </aside>
   );

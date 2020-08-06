@@ -135,8 +135,3 @@ export interface RioolwaterMetingenLastValue {
   date_of_insertion_unix: number;
   incidentie?: number | null;
 }
-
-export interface Translation {
-  translation: string;
-  notes: string;
-}
