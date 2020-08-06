@@ -5,10 +5,12 @@
   "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
   "dependencies": {
     "d3-scale": "2",
+    "dompurify": "^2.0.12",
     "downshift": "^5.4.2",
     "highcharts": "^8.1.0",
     "highcharts-react-official": "^3.0.0",
     "imagemin-pngquant": "^9.0.0",
+    "jsdom": "^16.3.0",
     "linkifyjs": "^2.1.9",
     "next": "^9.4.4",
     "preact": "^10.4.4",

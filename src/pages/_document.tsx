@@ -5,6 +5,7 @@ import Document, {
   NextScript,
   DocumentContext,
 } from 'next/document';
+import getLocale from 'utils/getLocale';
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext): Promise<any> {
@@ -13,7 +14,7 @@ class MyDocument extends Document {
   }
 
   render(): React.ReactElement {
-    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+    const locale = getLocale();
 
     return (
       <Html lang={locale}>
