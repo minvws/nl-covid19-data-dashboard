@@ -20,7 +20,7 @@ type BarscaleProps = {
   gradient: GradientStop[];
   id: string;
   screenReaderText: string;
-  dataKey: string;
+  dataKey?: string;
 };
 
 const BarScale: FunctionComponent<BarscaleProps> = ({
