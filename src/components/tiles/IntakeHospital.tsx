@@ -26,16 +26,16 @@ export const IntakeHospital: React.FC = () => {
   return (
     <GraphContainer>
       <GraphContent>
-        <GraphHeader Icon={Ziekenhuis} title={text.title.translation} />
+        <GraphHeader Icon={Ziekenhuis} title={text.title} />
 
-        <p>{text.text.translation}</p>
+        <p>{text.text}</p>
 
         {data && (
           <BarScale
             min={0}
             max={100}
-            kritiekeWaarde={Number(text.signaalwaarde.translation)}
-            screenReaderText={text.screen_reader_graph_content.translation}
+            kritiekeWaarde={Number(text.signaalwaarde)}
+            screenReaderText={text.screen_reader_graph_content}
             value={data.last_value.moving_average_hospital}
             id="opnames"
             gradient={[
@@ -57,22 +57,22 @@ export const IntakeHospital: React.FC = () => {
 
         {data?.last_value?.moving_average_hospital !== null && (
           <DateReported
-            datumsText={text.datums.translation}
+            datumsText={text.datums}
             dateUnix={data?.last_value?.date_of_report_unix}
           />
         )}
       </GraphContent>
 
       <Collapse
-        openText={text.open.translation}
-        sluitText={text.sluit.translation}
+        openText={text.open}
+        sluitText={text.sluit}
         piwikName="Ziekenhuisopnames per dag"
         piwikAction="landelijk"
       >
-        <h4>{text.fold_title.translation}</h4>
-        <p>{text.fold.translation}</p>
+        <h4>{text.fold_title}</h4>
+        <p>{text.fold}</p>
 
-        <h4>{text.graph_title.translation}</h4>
+        <h4>{text.graph_title}</h4>
         {data && (
           <>
             <LineChart
@@ -80,7 +80,7 @@ export const IntakeHospital: React.FC = () => {
                 value: value.moving_average_hospital,
                 date: value.date_of_report_unix,
               }))}
-              signaalwaarde={Number(text.signaalwaarde.translation)}
+              signaalwaarde={Number(text.signaalwaarde)}
             />
 
             <Metadata dataSource={text.bron} />

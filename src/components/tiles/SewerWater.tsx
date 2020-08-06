@@ -26,18 +26,15 @@ export const SewerWater: React.FC = () => {
   return (
     <GraphContainer>
       <GraphContent>
-        <GraphHeader
-          Icon={RioolwaterMonitoring}
-          title={text.title.translation}
-        />
+        <GraphHeader Icon={RioolwaterMonitoring} title={text.title} />
 
-        <p>{text.text.translation}</p>
+        <p>{text.text}</p>
 
         {data && (
           <BarScale
             min={0}
             max={100}
-            screenReaderText={text.screen_reader_graph_content.translation}
+            screenReaderText={text.screen_reader_graph_content}
             value={Number(data.last_value.average)}
             id="rioolwater_metingen"
             gradient={[
@@ -51,22 +48,22 @@ export const SewerWater: React.FC = () => {
 
         {data?.last_value?.average !== null && (
           <DateReported
-            datumsText={text.datums.translation}
+            datumsText={text.datums}
             dateInsertedUnix={data?.last_value?.date_of_insertion_unix}
             dateUnix={data?.last_value?.week_unix}
           />
         )}
       </GraphContent>
       <Collapse
-        openText={text.open.translation}
-        sluitText={text.sluit.translation}
+        openText={text.open}
+        sluitText={text.sluit}
         piwikName="Rioolwatermeting"
         piwikAction="landelijk"
       >
-        <h4>{text.fold_title.translation}</h4>
-        <p>{text.fold.translation}</p>
+        <h4>{text.fold_title}</h4>
+        <p>{text.fold}</p>
 
-        <h4>{text.graph_title.translation}</h4>
+        <h4>{text.graph_title}</h4>
 
         {data && (
           <>

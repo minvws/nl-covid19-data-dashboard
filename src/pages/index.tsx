@@ -116,8 +116,8 @@ const Home: FunctionComponentWithLayout = () => {
               icon={'images/nederland.png'}
               iconAlt="Kaart van Nederland"
             >
-              <h3>{siteText.regio_link_block.title.translation}</h3>
-              <p>{siteText.regio_link_block.text.translation}</p>
+              <h3>{siteText.regio_link_block.title}</h3>
+              <p>{siteText.regio_link_block.text}</p>
             </LinkCard>
           </Masonry>
         </section>
@@ -125,9 +125,9 @@ const Home: FunctionComponentWithLayout = () => {
         <section className="home-section">
           <TitleBlock
             Icon={MedischeScreening}
-            title={siteText.blok_andere_gegevens.title.translation}
+            title={siteText.blok_andere_gegevens.title}
           >
-            <p>{siteText.blok_andere_gegevens.message.translation}</p>
+            <p>{siteText.blok_andere_gegevens.message}</p>
           </TitleBlock>
 
           <Masonry
@@ -141,10 +141,8 @@ const Home: FunctionComponentWithLayout = () => {
 
             <GraphContainer>
               <GraphContent>
-                <GraphHeader
-                  title={siteText.overige_gegevens.title.translation}
-                />
-                <p>{siteText.overige_gegevens.text.translation}</p>
+                <GraphHeader title={siteText.overige_gegevens.title} />
+                <p>{siteText.overige_gegevens.text}</p>
 
                 <IconList list={siteText.overige_gegevens.list} />
               </GraphContent>
@@ -155,9 +153,9 @@ const Home: FunctionComponentWithLayout = () => {
         <section className="home-section">
           <TitleBlock
             Icon={VerpleegHuisZorg}
-            title={siteText.blok_verpleeghuis_zorg.title.translation}
+            title={siteText.blok_verpleeghuis_zorg.title}
           >
-            <p>{siteText.blok_verpleeghuis_zorg.text.translation}</p>
+            <p>{siteText.blok_verpleeghuis_zorg.text}</p>
           </TitleBlock>
 
           <Masonry

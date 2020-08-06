@@ -36,13 +36,13 @@ export const PostivelyTestedPeople: React.FC = () => {
   return (
     <GraphContainer>
       <GraphContent>
-        <GraphHeader Icon={Getest} title={text.title.translation} />
-        <p>{text.text.translation}</p>
+        <GraphHeader Icon={Getest} title={text.title} />
+        <p>{text.text}</p>
         {delta && (
           <BarScale
             min={0}
             max={10}
-            screenReaderText={text.screen_reader_graph_content.translation}
+            screenReaderText={text.screen_reader_graph_content}
             value={delta.last_value.infected_daily_increase}
             id="positief"
             gradient={[
@@ -56,7 +56,7 @@ export const PostivelyTestedPeople: React.FC = () => {
 
         {total && (
           <h3>
-            {text.metric_title.translation}{' '}
+            {text.metric_title}{' '}
             <span style={{ color: '#01689b' }}>
               {formatDecimal(total.last_value.infected_daily_total)}
             </span>
@@ -65,22 +65,22 @@ export const PostivelyTestedPeople: React.FC = () => {
 
         {delta?.last_value?.infected_daily_increase !== null && (
           <DateReported
-            datumsText={text.datums.translation}
+            datumsText={text.datums}
             dateUnix={delta?.last_value?.date_of_report_unix}
             dateInsertedUnix={delta?.last_value?.date_of_insertion_unix}
           />
         )}
       </GraphContent>
       <Collapse
-        openText={text.open.translation}
-        sluitText={text.sluit.translation}
+        openText={text.open}
+        sluitText={text.sluit}
         piwikAction="landelijk"
         piwikName="Positief geteste mensen"
       >
-        <h4>{text.fold_title.translation}</h4>
-        <p>{text.fold.translation}</p>
+        <h4>{text.fold_title}</h4>
+        <p>{text.fold}</p>
 
-        <h4>{text.linechart_title.translation}</h4>
+        <h4>{text.linechart_title}</h4>
         {delta && (
           <LineChart
             values={delta.values.map((value) => ({
@@ -90,7 +90,7 @@ export const PostivelyTestedPeople: React.FC = () => {
           />
         )}
 
-        <h4>{text.graph_title.translation}</h4>
+        <h4>{text.graph_title}</h4>
         {age && (
           <>
             <BarChart

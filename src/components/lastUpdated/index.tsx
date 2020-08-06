@@ -15,13 +15,13 @@ const LastUpdated: FunctionComponent<LastUpdatedProps> = (props) => {
     <p className={styles.text}>
       {lastUpdated ? (
         <>
-          {siteText.laatst_bijgewerkt.message.translation}:{' '}
+          {siteText.laatst_bijgewerkt.message}:{' '}
           <time dateTime={formatDate(lastUpdated, 'iso')}>
             {formatDate(lastUpdated, 'long')}
           </time>
         </>
       ) : (
-        siteText.laatst_bijgewerkt.loading.translation
+        siteText.laatst_bijgewerkt.loading
       )}
     </p>
   );
