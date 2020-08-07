@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import useSWR from 'swr';
 
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
@@ -11,17 +11,15 @@ import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
 import { LineChart } from './index';
 
 import siteText from 'locale';
-import { store } from 'store';
 
 import { RioolwaterMetingen } from 'types/data';
 
 export const SewerWater: React.FC = () => {
-  const globalState = useContext(store);
-  const { state } = globalState;
+  const { data: state } = useSWR(`/json/NL.json`);
 
   const text: typeof siteText.rioolwater_metingen =
     siteText.rioolwater_metingen;
-  const data: RioolwaterMetingen | undefined = state?.NL?.rioolwater_metingen;
+  const data: RioolwaterMetingen | undefined = state?.rioolwater_metingen;
 
   return (
     <GraphContainer>

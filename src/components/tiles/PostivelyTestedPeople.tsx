@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import useSWR from 'swr';
 
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
@@ -12,7 +12,6 @@ import formatDecimal from 'utils/formatNumber';
 import { LineChart, BarChart } from './index';
 
 import siteText from 'locale';
-import { store } from 'store';
 
 import {
   InfectedPeopleDeltaNormalized,
@@ -21,17 +20,14 @@ import {
 } from 'types/data';
 
 export const PostivelyTestedPeople: React.FC = () => {
-  const globalState = useContext(store);
-  const { state } = globalState;
+  const { data: state } = useSWR(`/json/NL.json`);
 
   const text: typeof siteText.positief_geteste_personen =
     siteText.positief_geteste_personen;
   const delta: InfectedPeopleDeltaNormalized | undefined =
-    state?.NL?.infected_people_delta_normalized;
-  const age: IntakeShareAgeGroups | undefined =
-    state?.NL?.intake_share_age_groups;
-  const total: InfectedPeopleTotal | undefined =
-    state?.NL?.infected_people_total;
+    state?.infected_people_delta_normalized;
+  const age: IntakeShareAgeGroups | undefined = state?.intake_share_age_groups;
+  const total: InfectedPeopleTotal | undefined = state?.infected_people_total;
 
   return (
     <GraphContainer>

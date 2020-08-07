@@ -21,8 +21,6 @@ import * as piwik from '../lib/piwik';
 
 import { SWRConfig } from 'swr';
 
-import { StateProvider } from 'store';
-
 interface IProps {
   Component: any;
   pageProps: any;
@@ -49,7 +47,7 @@ function MyApp(props: IProps): React.ReactElement {
         fetcher,
       }}
     >
-      <StateProvider>{getLayout(<Component {...pageProps} />)}</StateProvider>{' '}
+      {getLayout(<Component {...pageProps} />)}
     </SWRConfig>
   );
 }

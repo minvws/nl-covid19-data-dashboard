@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import useSWR from 'swr';
 
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
@@ -11,17 +11,16 @@ import Getest from 'assets/test.svg';
 import { LineChart } from './index';
 
 import siteText from 'locale';
-import { store } from 'store';
 
 import { DeceasedPeopleNurseryCountDaily } from 'types/data';
 
 export const NursingHomeInfectedPeople: React.FC = () => {
-  const globalState = useContext(store);
-  const { state } = globalState;
+  const { data: state } = useSWR(`/json/NL.json`);
+
   const text: typeof siteText.verpleeghuis_positief_geteste_personen =
     siteText.verpleeghuis_positief_geteste_personen;
   const data: DeceasedPeopleNurseryCountDaily | undefined =
-    state?.NL?.infected_people_nursery_count_daily;
+    state?.infected_people_nursery_count_daily;
   return (
     <GraphContainer>
       <GraphContent>

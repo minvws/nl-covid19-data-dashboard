@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import useSWR from 'swr';
 
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
@@ -13,20 +13,17 @@ import { LineChart } from './index';
 import formatDecimal from 'utils/formatNumber';
 
 import siteText from 'locale';
-import { store } from 'store';
 
 import { RioolwaterMetingen } from 'types/data';
 
 export const SuspectedPatients: React.FC = () => {
-  const globalState = useContext(store);
-  const { state } = globalState;
+  const { data: state } = useSWR(`/json/NL.json`);
 
   const text: typeof siteText.verdenkingen_huisartsen =
     siteText.verdenkingen_huisartsen;
-  const data: RioolwaterMetingen | undefined =
-    state?.NL?.verdenkingen_huisartsen;
+  const data: RioolwaterMetingen | undefined = state?.verdenkingen_huisartsen;
 
-  const total = state?.NL?.verdenkingen_huisartsen?.last_value?.geschat_aantal;
+  const total = state?.verdenkingen_huisartsen?.last_value?.geschat_aantal;
 
   return (
     <GraphContainer>

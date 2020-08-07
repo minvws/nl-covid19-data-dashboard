@@ -6,10 +6,6 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 const nextConfig = {
-  env: {
-    // Lookup from mounted configmap in K8s:
-    REACT_APP_DATA_SRC: '/json/',
-  },
   webpack(config, { dev, isServer }) {
     config.module.rules.push({
       test: /\.svg$/,

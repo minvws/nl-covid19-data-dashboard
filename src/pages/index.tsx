@@ -26,7 +26,6 @@ import MaxWidth from 'components/maxWidth';
 import VerpleegHuisZorg from '../assets/verpleeghuiszorg.svg';
 import MedischeScreening from '../assets/medische-screening.svg';
 
-import { store } from 'store';
 import siteText from 'locale';
 import GraphHeader from 'components/graphHeader';
 import IconList from 'components/iconList';
@@ -37,23 +36,10 @@ import twitterImage from 'assets/sharing/twitter-landelijke-cijfers.png?url';
 import { FunctionComponentWithLayout } from 'components/layout';
 import Head from 'next/head';
 
-const Home: FunctionComponentWithLayout = () => {
-  const globalState = React.useContext(store);
-  const { state, dispatch } = globalState;
+import useSWR from 'swr';
 
-  React.useEffect(() => {
-    async function fetchData() {
-      if (!state['NL']) {
-        dispatch({ type: 'INIT_LOAD', payload: { id: 'NL' } });
-        const response = await fetch(
-          `${process.env.REACT_APP_DATA_SRC}NL.json`
-        );
-        const result = await response.json();
-        dispatch({ type: 'LOAD_SUCCESS', payload: result });
-      }
-    }
-    fetchData();
-  }, [dispatch, state]);
+const Home: FunctionComponentWithLayout = () => {
+  const { data } = useSWR(`/json/NL.json`);
 
   const breakpointColumnsObj = {
     default: 3,
@@ -89,8 +75,7 @@ const Home: FunctionComponentWithLayout = () => {
       </Head>
 
       <MaxWidth>
-        <LastUpdated lastUpdated={state.NL?.last_generated * 1000} />
-
+        <LastUpdated lastUpdated={data?.last_generated * 1000} />
         <Notification />
       </MaxWidth>
 

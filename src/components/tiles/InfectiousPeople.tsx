@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import useSWR from 'swr';
 
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
@@ -14,7 +14,6 @@ import formatDecimal from 'utils/formatNumber';
 import { AreaChart } from './index';
 
 import siteText from 'locale';
-import { store } from 'store';
 
 import {
   InfectiousPeopleCount,
@@ -22,15 +21,14 @@ import {
 } from 'types/data';
 
 export const InfectiousPeople: React.FC = () => {
-  const globalState = useContext(store);
-  const { state } = globalState;
+  const { data } = useSWR(`/json/NL.json`);
 
   const text: typeof siteText.besmettelijke_personen =
     siteText.besmettelijke_personen;
   const count: InfectiousPeopleCount | undefined =
-    state?.NL?.infectious_people_count;
+    data?.infectious_people_count;
   const countNormalized: InfectiousPeopleCountNormalized | undefined =
-    state?.NL?.infectious_people_count_normalized;
+    data?.infectious_people_count_normalized;
 
   return (
     <GraphContainer>
