@@ -16,7 +16,7 @@ type BarscaleProps = {
   min: number;
   max: number;
   value: number | null | undefined;
-  kritiekeWaarde?: number;
+  signaalwaarde?: number;
   gradient: GradientStop[];
   id: string;
   screenReaderText: string;
@@ -27,7 +27,7 @@ const BarScale: FunctionComponent<BarscaleProps> = ({
   min,
   max,
   value,
-  kritiekeWaarde,
+  signaalwaarde,
   gradient,
   id,
   screenReaderText,
@@ -61,7 +61,7 @@ const BarScale: FunctionComponent<BarscaleProps> = ({
       <ScreenReaderOnly>
         {replaceVariablesInText(screenReaderText, {
           value: String(value),
-          kritiekeWaarde: String(kritiekeWaarde),
+          signaalwaarde: String(signaalwaarde),
         })}
       </ScreenReaderOnly>
 
@@ -133,11 +133,11 @@ const BarScale: FunctionComponent<BarscaleProps> = ({
             >{`${formatNumber(value)}`}</text>
           </g>
 
-          {kritiekeWaarde && (
+          {signaalwaarde && (
             <g>
               <line
-                x1={`${x(kritiekeWaarde)}%`}
-                x2={`${x(kritiekeWaarde)}%`}
+                x1={`${x(signaalwaarde)}%`}
+                x2={`${x(signaalwaarde)}%`}
                 y1={56}
                 y2={46}
                 strokeWidth="3"
@@ -145,10 +145,10 @@ const BarScale: FunctionComponent<BarscaleProps> = ({
               />
               <text
                 className={styles.criticalValue}
-                x={`${x(kritiekeWaarde)}%`}
+                x={`${x(signaalwaarde)}%`}
                 y={72}
-                textAnchor={textAlign(x(kritiekeWaarde)) as any}
-              >{`Signaalwaarde: ${kritiekeWaarde}`}</text>
+                textAnchor={textAlign(x(signaalwaarde)) as any}
+              >{`Signaalwaarde: ${signaalwaarde}`}</text>
             </g>
           )}
 

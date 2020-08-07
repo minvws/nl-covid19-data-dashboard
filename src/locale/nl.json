@@ -52,7 +52,7 @@
     "graph_title": "Verloop over tijd",
     "open": "Verberg uitleg",
     "sluit": "Meer uitleg en data",
-    "screen_reader_graph_content": "{{value}} intensive care-opnames per dag. Signaalwaarde: {{kritiekeWaarde}} opnames per dag.",
+    "screen_reader_graph_content": "{{value}} intensive care-opnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "bron": {
       "href": "https://stichting-nice.nl/",
       "text": "Stichting NICE"
@@ -82,7 +82,7 @@
     "graph_title": "Verloop over tijd",
     "open": "Verberg uitleg",
     "sluit": "Meer uitleg en data",
-    "screen_reader_graph_content": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{kritiekeWaarde}} opnames per dag.",
+    "screen_reader_graph_content": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -129,7 +129,7 @@
     "title": "Reproductiegetal",
     "text": "Aantal mensen dat besmet wordt door één besmettelijke persoon.",
     "datums": "Waarde van {{dateOfReport}}. Verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
-    "screen_reader_graph_content": "{{value}} mensen. Signaalwaarde: {{kritiekeWaarde}}.",
+    "screen_reader_graph_content": "{{value}} mensen. Signaalwaarde: {{signaalwaarde}}.",
     "fold_title": "Wat betekent dit?",
     "fold": "Het reproductiegetal laat zien hoe snel het virus zich verspreidt. Dit getal geeft aan hoeveel mensen gemiddeld besmet worden door één patiënt met COVID-19. Bij een reproductiegetal van rond de 1 blijft het aantal besmettingen ongeveer gelijk. Als het reproductiegetal lager is dan 1, dan daalt het aantal besmettingen. Bij een getal hoger dan 1 stijgt het aantal besmettingen.",
     "graph_title": "Verloop over tijd",

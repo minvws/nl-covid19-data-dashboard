@@ -14,6 +14,8 @@ import siteText from 'locale';
 
 import { IntakeIntensivecareMa } from 'types/data';
 
+const SIGNAAL_WAARDE = 10;
+
 export const IntakeIntensiveCare: React.FC = () => {
   const { data: state } = useSWR(`/json/NL.json`);
 
@@ -38,7 +40,7 @@ export const IntakeIntensiveCare: React.FC = () => {
               },
               {
                 color: '#D3A500',
-                value: 10,
+                value: SIGNAAL_WAARDE,
               },
               {
                 color: '#f35065',
@@ -47,7 +49,7 @@ export const IntakeIntensiveCare: React.FC = () => {
             ]}
             dataKey="moving_average_ic"
             screenReaderText={text.screen_reader_graph_content}
-            kritiekeWaarde={10}
+            signaalwaarde={SIGNAAL_WAARDE}
             value={data.last_value.moving_average_ic}
             id="ic"
           />
@@ -79,7 +81,7 @@ export const IntakeIntensiveCare: React.FC = () => {
                 value: value.moving_average_ic,
                 date: value.date_of_report_unix,
               }))}
-              signaalwaarde={Number(text.signaalwaarde)}
+              signaalwaarde={SIGNAAL_WAARDE}
             />
 
             <Metadata dataSource={text.bron} />

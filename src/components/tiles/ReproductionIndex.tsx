@@ -15,6 +15,8 @@ import siteText from 'locale';
 
 import { ReproductionIndex as ReproductionIndexData } from 'types/data';
 
+const SIGNAAL_WAARDE = 1;
+
 export const ReproductionIndex: React.FC = () => {
   const { data: state } = useSWR(`/json/NL.json`);
 
@@ -34,7 +36,7 @@ export const ReproductionIndex: React.FC = () => {
             min={0}
             max={2}
             screenReaderText={text.screen_reader_graph_content}
-            kritiekeWaarde={1}
+            signaalwaarde={SIGNAAL_WAARDE}
             value={lastKnownValidData?.last_value?.reproduction_index_avg}
             id="repro"
             dataKey="reproduction_index_avg"
@@ -45,7 +47,7 @@ export const ReproductionIndex: React.FC = () => {
               },
               {
                 color: '#69c253',
-                value: 1,
+                value: SIGNAAL_WAARDE,
               },
               {
                 color: '#D3A500',
@@ -95,7 +97,7 @@ export const ReproductionIndex: React.FC = () => {
             }))}
             minY={0}
             maxY={4}
-            signaalwaarde={1}
+            signaalwaarde={SIGNAAL_WAARDE}
             rangeLegendLabel={text.rangeLegendLabel}
             lineLegendLabel={text.lineLegendLabel}
           />

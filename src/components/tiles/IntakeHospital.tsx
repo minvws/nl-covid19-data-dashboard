@@ -14,6 +14,8 @@ import siteText from 'locale';
 
 import { IntakeHospitalMa } from 'types/data';
 
+const SIGNAAL_WAARDE = 40;
+
 export const IntakeHospital: React.FC = () => {
   const { data: state } = useSWR(`/json/NL.json`);
 
@@ -32,7 +34,7 @@ export const IntakeHospital: React.FC = () => {
           <BarScale
             min={0}
             max={100}
-            kritiekeWaarde={40}
+            signaalwaarde={SIGNAAL_WAARDE}
             screenReaderText={text.screen_reader_graph_content}
             value={data.last_value.moving_average_hospital}
             id="opnames"
@@ -44,7 +46,7 @@ export const IntakeHospital: React.FC = () => {
               },
               {
                 color: '#D3A500',
-                value: 40,
+                value: SIGNAAL_WAARDE,
               },
               {
                 color: '#f35065',
@@ -79,7 +81,7 @@ export const IntakeHospital: React.FC = () => {
                 value: value.moving_average_hospital,
                 date: value.date_of_report_unix,
               }))}
-              signaalwaarde={Number(text.signaalwaarde)}
+              signaalwaarde={SIGNAAL_WAARDE}
             />
 
             <Metadata dataSource={text.bron} />
