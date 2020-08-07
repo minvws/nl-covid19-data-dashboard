@@ -42,6 +42,7 @@ export const SuspectedPatients: React.FC = () => {
             screenReaderText={text.screen_reader_graph_content}
             value={data.last_value.incidentie as number | null}
             id="verdenkingen_huisartsen"
+            dataKey="incidentie"
             gradient={[
               {
                 color: '#3391CC',

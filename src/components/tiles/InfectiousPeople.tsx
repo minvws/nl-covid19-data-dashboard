@@ -45,6 +45,7 @@ export const InfectiousPeople: React.FC = () => {
             screenReaderText={text.screen_reader_graph_content}
             value={countNormalized.last_value.infectious_avg_normalized}
             id="besmettelijk"
+            dataKey="infectious_avg"
             gradient={[
               {
                 color: '#3391CC',

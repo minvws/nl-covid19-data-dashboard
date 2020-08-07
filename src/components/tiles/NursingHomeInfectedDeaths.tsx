@@ -36,6 +36,7 @@ export const NursingHomeInfectedDeaths: React.FC = () => {
             screenReaderText={text.screen_reader_graph_content}
             value={data.last_value.deceased_nursery_daily}
             id="over"
+            dataKey="deceased_nursery_daily"
             gradient={[
               {
                 color: '#3391CC',

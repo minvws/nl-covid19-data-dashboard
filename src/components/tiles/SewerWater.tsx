@@ -37,6 +37,7 @@ export const SewerWater: React.FC = () => {
             screenReaderText={text.screen_reader_graph_content}
             value={Number(data.last_value.average)}
             id="rioolwater_metingen"
+            dataKey="average"
             gradient={[
               {
                 color: '#3391CC',
