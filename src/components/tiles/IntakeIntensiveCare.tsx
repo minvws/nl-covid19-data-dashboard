@@ -47,6 +47,7 @@ export const IntakeIntensiveCare: React.FC = () => {
                 value: 20,
               },
             ]}
+            dataKey="moving_average_ic"
             screenReaderText={text.screen_reader_graph_content}
             kritiekeWaarde={10}
             value={data.last_value.moving_average_ic}

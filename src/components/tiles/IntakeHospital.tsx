@@ -38,6 +38,7 @@ export const IntakeHospital: React.FC = () => {
             screenReaderText={text.screen_reader_graph_content}
             value={data.last_value.moving_average_hospital}
             id="opnames"
+            dataKey="moving_average_hospital"
             gradient={[
               {
                 color: '#69c253',

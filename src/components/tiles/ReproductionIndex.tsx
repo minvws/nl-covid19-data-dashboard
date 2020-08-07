@@ -39,6 +39,7 @@ export const ReproductionIndex: React.FC = () => {
             kritiekeWaarde={1}
             value={lastKnownValidData?.last_value?.reproduction_index_avg}
             id="repro"
+            dataKey="reproduction_index_avg"
             gradient={[
               {
                 color: '#69c253',
