@@ -34,7 +34,6 @@ import SelectMunicipality from 'components/selectMunicipality';
 
 import openGraphImage from 'assets/sharing/og-regionale-cijfers.png?url';
 import twitterImage from 'assets/sharing/twitter-regionale-cijfers.png?url';
-import Head from 'next/head';
 
 export type SafetyRegion = {
   id: number;
@@ -161,20 +160,6 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
 
   return (
     <>
-      <Head>
-        <link
-          key="dc-type"
-          rel="dcterms:type"
-          href="https://standaarden.overheid.nl/owms/terms/statistieken"
-        />
-        <link
-          key="dc-type-title"
-          rel="dcterms:type"
-          href="https://standaarden.overheid.nl/owms/terms/statistieken"
-          title="statistieken"
-        />
-      </Head>
-
       <MaxWidth>
         <LastUpdated />
         <div className={styles['regio-grid']}>

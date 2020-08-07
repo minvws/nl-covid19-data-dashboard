@@ -51,17 +51,6 @@ const Home: FunctionComponentWithLayout = () => {
     <>
       <Head>
         <link
-          key="dc-type"
-          rel="dcterms:type"
-          href="https://standaarden.overheid.nl/owms/terms/statistieken"
-        />
-        <link
-          key="dc-type-title"
-          rel="dcterms:type"
-          href="https://standaarden.overheid.nl/owms/terms/statistieken"
-          title="statistieken"
-        />
-        <link
           key="dc-spatial"
           rel="dcterms:spatial"
           href="https://standaarden.overheid.nl/owms/terms/Nederland"

@@ -68,6 +68,17 @@ function SEOHead(props: SEOHeadProps): any {
         href="http://standaarden.overheid.nl/owms/terms/Ministerie_van_Volksgezondheid,_Welzijn_en_Sport"
         title="Ministerie van Volksgezondheid, Welzijn en Sport"
       />
+      <link
+        key="dc-type"
+        rel="dcterms:type"
+        href="https://standaarden.overheid.nl/owms/terms/statistieken"
+      />
+      <link
+        key="dc-type-title"
+        rel="dcterms:type"
+        href="https://standaarden.overheid.nl/owms/terms/statistieken"
+        title="statistieken"
+      />
 
       <link
         rel="preload"
