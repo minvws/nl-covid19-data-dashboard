@@ -272,7 +272,7 @@
     "text": "Let op: dit dashboard coronavirus is in ontwikkeling. De komende periode worden stap voor stap meer functies en gegevens toegevoegd. Daarnaast werken we aan het verbeteren van de digitoegankelijkheid van deze site. De informatie op deze site willen we voor iedereen in Nederland beschikbaar maken. Het dashboard wordt nog niet gebruikt voor besluitvorming. Er kunnen nog geen conclusies uit getrokken worden."
   },
   "over_beschrijving": {
-    "text": "Het dashboard coronavirus geeft informatie over de ontwikkeling van het coronavirus in Nederland. Met deze informatie kunnen eerder signalen van een toename van de verspreiding van het virus worden opgepikt. We moeten voorkomen dat het virus weer om zich heen grijpt. Het aantal IC-en ziekenhuisopnames geven in de kern de ultieme waarschuwing. Maar eerder al komen de signalen door via de testuitslagen die vertaald worden naar het aantal positief geteste personen per 100.000 inwoners. Daarnaast zijn er ondersteunende indicatoren die de epidemie beschrijven en andersoortige signalen oppikken."
+    "text": "Het dashboard coronavirus geeft informatie over de ontwikkeling van het coronavirus in Nederland. Met deze informatie kunnen eerder signalen van een toename van de verspreiding van het virus worden opgepikt. We moeten voorkomen dat het virus weer om zich heen grijpt. Het aantal intensive care en ziekenhuisopnames geven in de kern de ultieme waarschuwing. Maar eerder al komen de signalen door via de testuitslagen die vertaald worden naar het aantal positief geteste personen per 100.000 inwoners. Daarnaast zijn er ondersteunende indicatoren die de epidemie beschrijven en andersoortige signalen oppikken."
   },
   "over_veelgestelde_vragen": {
     "text": "Veelgestelde vragen",
@@ -379,7 +379,7 @@
       },
       {
         "cijfer": "Intensive care-bezetting",
-        "verantwoording": "Deze gegevens worden dagelijks aangeleverd als open data door [Stichting NICE](https://stichting-nice.nl/covid-19/public/new-intake/confirmed/). De brondata heeft betrekking op de afgelopen 24 uur. De berekening van de ic-bezetting bestaat uit COVID-19-patiënten met een bewezen besmetting. {{whitespace}} Uit de data van het bronbestand wordt het gemiddelde berekend van de afgelopen drie dagen, dus exclusief vandaag. Door de waarden van elke dag (gisteren, eergisteren en de dag daarvoor) bijeen te tellen, te delen door drie en de uitkomst hiervan af te ronden naar één cijfer achter de komma komen we tot het gemiddelde."
+        "verantwoording": "Deze gegevens worden dagelijks aangeleverd als open data door [Stichting NICE](https://stichting-nice.nl/covid-19/public/new-intake/confirmed/). De brondata heeft betrekking op de afgelopen 24 uur. De berekening van de intensive care-bezetting bestaat uit COVID-19-patiënten met een bewezen besmetting. {{whitespace}} Uit de data van het bronbestand wordt het gemiddelde berekend van de afgelopen drie dagen, dus exclusief vandaag. Door de waarden van elke dag (gisteren, eergisteren en de dag daarvoor) bijeen te tellen, te delen door drie en de uitkomst hiervan af te ronden naar één cijfer achter de komma komen we tot het gemiddelde."
       },
       {
         "cijfer": "Ziekenhuisopnames",
