@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import useSWR from 'swr';
 
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
@@ -11,17 +11,15 @@ import Ziekenhuis from 'assets/ziekenhuis.svg';
 import { LineChart } from './index';
 
 import siteText from 'locale';
-import { store } from 'store';
 
 import { IntakeHospitalMa } from 'types/data';
 
 export const IntakeHospital: React.FC = () => {
-  const globalState = useContext(store);
-  const { state } = globalState;
+  const { data: state } = useSWR(`/json/NL.json`);
 
   const text: typeof siteText.ziekenhuisopnames_per_dag =
     siteText.ziekenhuisopnames_per_dag;
-  const data: IntakeHospitalMa | undefined = state?.NL?.intake_hospital_ma;
+  const data: IntakeHospitalMa | undefined = state?.intake_hospital_ma;
 
   return (
     <GraphContainer>

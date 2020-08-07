@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import useSWR from 'swr';
 
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
@@ -12,19 +12,17 @@ import Repro from 'assets/reproductiegetal.svg';
 import { AreaChart } from './index';
 
 import siteText from 'locale';
-import { store } from 'store';
 
 import { ReproductionIndex as ReproductionIndexData } from 'types/data';
 
 export const ReproductionIndex: React.FC = () => {
-  const globalState = useContext(store);
-  const { state } = globalState;
+  const { data: state } = useSWR(`/json/NL.json`);
 
   const text: typeof siteText.reproductiegetal = siteText.reproductiegetal;
   const lastKnownValidData: ReproductionIndexData | undefined =
-    state?.NL?.reproduction_index_last_known_average;
+    state?.reproduction_index_last_known_average;
 
-  const data: ReproductionIndexData | undefined = state?.NL?.reproduction_index;
+  const data: ReproductionIndexData | undefined = state?.reproduction_index;
 
   return (
     <GraphContainer>

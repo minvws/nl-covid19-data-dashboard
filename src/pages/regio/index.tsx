@@ -1,7 +1,9 @@
 import styles from './regio.module.scss';
-import { useContext, useMemo, useEffect, useRef } from 'react';
+import { useMemo, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
+
+import useSWR from 'swr';
 
 import Layout from 'components/layout';
 import MaxWidth from 'components/maxWidth';
@@ -15,7 +17,6 @@ import Metadata from 'components/metadata';
 import LoadingPlaceholder from 'components/loadingPlaceholder';
 import DateReported from 'components/dateReported';
 
-import { store } from 'store';
 import GraphContent from 'components/graphContent';
 
 import Ziekenhuis from 'assets/ziekenhuis.svg';
@@ -109,9 +110,6 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
 
   const router = useRouter();
 
-  const globalState = useContext(store);
-  const { state, dispatch } = globalState;
-
   const selectedRegio = useMemo(() => {
     const selectedRegioCode = router.query?.regio;
     return selectedRegioCode
@@ -155,24 +153,11 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
     );
   };
 
-  useEffect(() => {
-    async function fetchData() {
-      if (selectedRegio && selectedRegio.code) {
-        if (!state[selectedRegio.code]) {
-          dispatch({ type: 'INIT_LOAD', payload: { id: selectedRegio.code } });
-          const response = await fetch(
-            `${process.env.REACT_APP_DATA_SRC}${selectedRegio.code}.json`
-          );
-          const result = await response.json();
-          dispatch({ type: 'LOAD_SUCCESS', payload: result });
-        }
+  const { data } = useSWR(() =>
+    selectedRegio?.code ? `/json/${selectedRegio.code}.json` : null
+  );
 
-        focusFirstHeading();
-      }
-    }
-
-    fetchData();
-  }, [dispatch, selectedRegio, state]);
+  useEffect(focusFirstHeading, [data]);
 
   return (
     <>
@@ -230,18 +215,16 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
 
                 {selectedRegio && (
                   <>
-                    {!state[selectedRegio?.code]?.intake_hospital_ma && (
-                      <LoadingPlaceholder />
-                    )}
+                    {!data?.intake_hospital_ma && <LoadingPlaceholder />}
 
-                    {state[selectedRegio?.code]?.intake_hospital_ma && (
+                    {data?.intake_hospital_ma && (
                       <>
                         <BarScale
                           min={0}
                           max={100}
                           value={
-                            state[selectedRegio.code].intake_hospital_ma
-                              .last_value.intake_hospital_ma
+                            data.intake_hospital_ma.last_value
+                              .intake_hospital_ma
                           }
                           screenReaderText={
                             siteText.regionaal_ziekenhuisopnames_per_dag
@@ -268,8 +251,8 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                             siteText.regionaal_ziekenhuisopnames_per_dag.datums
                           }
                           dateUnix={
-                            state[selectedRegio?.code]?.intake_hospital_ma
-                              ?.last_value?.date_of_report_unix
+                            data.intake_hospital_ma?.last_value
+                              ?.date_of_report_unix
                           }
                         />
                       </>
@@ -292,14 +275,14 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                   <h4>
                     {siteText.regionaal_ziekenhuisopnames_per_dag.graph_title}
                   </h4>
-                  {state[selectedRegio?.code]?.intake_hospital_ma?.values && (
+                  {data?.intake_hospital_ma?.values && (
                     <LineChart
-                      values={state[
-                        selectedRegio?.code
-                      ]?.intake_hospital_ma?.values.map((value: any) => ({
-                        value: value.intake_hospital_ma,
-                        date: value.date_of_report_unix,
-                      }))}
+                      values={data.intake_hospital_ma?.values.map(
+                        (value: any) => ({
+                          value: value.intake_hospital_ma,
+                          date: value.date_of_report_unix,
+                        })
+                      )}
                     />
                   )}
                   <Metadata
@@ -325,18 +308,15 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
 
                 {selectedRegio && (
                   <>
-                    {!state[selectedRegio?.code]
-                      ?.infected_people_delta_normalized && (
+                    {!data?.infected_people_delta_normalized && (
                       <LoadingPlaceholder />
                     )}
-                    {state[selectedRegio.code]
-                      ?.infected_people_delta_normalized && (
+                    {data?.infected_people_delta_normalized && (
                       <BarScale
                         min={0}
                         max={10}
                         value={
-                          state[selectedRegio.code]
-                            .infected_people_delta_normalized.last_value
+                          data.infected_people_delta_normalized.last_value
                             .infected_people_delta_normalized
                         }
                         screenReaderText={
@@ -353,7 +333,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                       />
                     )}
 
-                    {state[selectedRegio?.code]?.infected_people_total && (
+                    {data?.infected_people_total && (
                       <>
                         <h3>
                           {
@@ -362,8 +342,8 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                           }{' '}
                           <span style={{ color: '#01689b' }}>
                             {formatDecimal(
-                              state[selectedRegio?.code]?.infected_people_total
-                                ?.last_value.infected_people_total
+                              data?.infected_people_total?.last_value
+                                .infected_people_total
                             )}
                           </span>
                         </h3>
@@ -372,13 +352,11 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                             siteText.regionaal_positief_geteste_personen.datums
                           }
                           dateUnix={
-                            state[selectedRegio?.code]
-                              ?.infected_people_delta_normalized?.last_value
+                            data?.infected_people_delta_normalized?.last_value
                               ?.date_of_report_unix
                           }
                           dateInsertedUnix={
-                            state[selectedRegio?.code]
-                              ?.infected_people_delta_normalized?.last_value
+                            data?.infected_people_delta_normalized?.last_value
                               ?.date_of_insertion_unix
                           }
                         />
@@ -403,12 +381,9 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                     {siteText.regionaal_positief_geteste_personen.graph_title}
                   </h4>
 
-                  {state[selectedRegio?.code]?.infected_people_delta_normalized
-                    ?.values && (
+                  {data?.infected_people_delta_normalized?.values && (
                     <LineChart
-                      values={state[
-                        selectedRegio.code
-                      ].infected_people_delta_normalized.values.map(
+                      values={data.infected_people_delta_normalized.values.map(
                         (value: any) => ({
                           value: value.infected_people_delta_normalized,
                           date: value.date_of_report_unix,

@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import useSWR from 'swr';
 
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
@@ -11,17 +11,15 @@ import Arts from 'assets/arts.svg';
 import { LineChart } from './index';
 
 import siteText from 'locale';
-import { store } from 'store';
 
 import { IntakeIntensivecareMa } from 'types/data';
 
 export const IntakeIntensiveCare: React.FC = () => {
-  const globalState = useContext(store);
-  const { state } = globalState;
+  const { data: state } = useSWR(`/json/NL.json`);
 
   const text: typeof siteText.ic_opnames_per_dag = siteText.ic_opnames_per_dag;
   const data: IntakeIntensivecareMa | undefined =
-    state?.NL?.intake_intensivecare_ma;
+    state?.intake_intensivecare_ma;
 
   return (
     <GraphContainer>
