@@ -20,7 +20,7 @@ type BarscaleProps = {
   gradient: GradientStop[];
   id: string;
   screenReaderText: string;
-  dataKey?: string;
+  dataKey: string;
 };
 
 const BarScale: FunctionComponent<BarscaleProps> = ({
@@ -36,7 +36,7 @@ const BarScale: FunctionComponent<BarscaleProps> = ({
   // Generate a random ID used for clipPath and linearGradient ID's.
   const rand = useRef(Math.random().toString(36).substring(2, 15));
 
-  const { scale: x } = useDynamicScale(min, max, value, dataKey);
+  const { scale: x } = useDynamicScale(min, max, dataKey, value);
 
   if (!x) {
     return null;

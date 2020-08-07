@@ -216,6 +216,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                               .screen_reader_graph_content
                           }
                           id="regio_opnames"
+                          dataKey="hospital_moving_avg_per_region"
                           gradient={[
                             {
                               color: '#69c253',
@@ -309,6 +310,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                             .screen_reader_graph_content
                         }
                         id="regio_infecties"
+                        dataKey="infected_increase_per_region"
                         gradient={[
                           {
                             color: '#3391CC',

@@ -20,8 +20,8 @@ interface IDynamicScale {
 function useDynamicScale(
   min: number,
   max: number,
-  value?: number | null,
-  dataKey?: string
+  dataKey: string,
+  value?: number | null
 ): IDynamicScale {
   const { data, isValidating } = useSWR('/json/RANGES.json');
 
