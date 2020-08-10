@@ -29,7 +29,7 @@ const SvgMap = dynamic(() => import('components/mapChart/svgMap'));
 
 import { FunctionComponentWithLayout } from 'components/layout';
 import ScreenReaderOnly from 'components/screenReaderOnly';
-import formatDecimal from 'utils/formatNumber';
+import formatNumber from 'utils/formatNumber';
 import SelectMunicipality from 'components/selectMunicipality';
 
 import openGraphImage from 'assets/sharing/og-regionale-cijfers.png?url';
@@ -57,6 +57,29 @@ type RegioStaticProps = {
     safetyRegions: SafetyRegion[];
   };
 };
+
+interface IValue {
+  date_of_report_unix: number;
+  date_of_insertion_unix: number;
+  vrcode: string;
+  total_reported_increase_per_region: number;
+  infected_total_counts_per_region: number;
+  hospital_total_counts_per_region: number;
+  infected_increase_per_region: number;
+  hospital_increase_per_region: number;
+  hospital_moving_avg_per_region: number;
+}
+
+interface IData {
+  code: string;
+  last_generated: number;
+  name: string;
+  proto_name: string;
+  results_per_region: {
+    last_value: IValue;
+    values: IValue[];
+  };
+}
 
 export async function getStaticProps(): Promise<RegioStaticProps> {
   const municipalityMapping = require('../../data/gemeente_veiligheidsregio.json');
@@ -152,9 +175,10 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
     );
   };
 
-  const { data } = useSWR(() =>
+  const response = useSWR(() =>
     selectedRegio?.code ? `/json/${selectedRegio.code}.json` : null
   );
+  const data: IData = response.data;
 
   useEffect(focusFirstHeading, [data]);
 
@@ -200,16 +224,18 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
 
                 {selectedRegio && (
                   <>
-                    {!data?.intake_hospital_ma && <LoadingPlaceholder />}
+                    {!data?.results_per_region.last_value && (
+                      <LoadingPlaceholder />
+                    )}
 
-                    {data?.intake_hospital_ma && (
+                    {data?.results_per_region?.last_value && (
                       <>
                         <BarScale
                           min={0}
                           max={30}
                           value={
-                            data.intake_hospital_ma.last_value
-                              .intake_hospital_ma
+                            data.results_per_region.last_value
+                              .hospital_moving_avg_per_region
                           }
                           screenReaderText={
                             siteText.regionaal_ziekenhuisopnames_per_dag
@@ -229,7 +255,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                             siteText.regionaal_ziekenhuisopnames_per_dag.datums
                           }
                           dateUnix={
-                            data.intake_hospital_ma?.last_value
+                            data.results_per_region.last_value
                               ?.date_of_report_unix
                           }
                         />
@@ -243,8 +269,8 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                 <Collapse
                   openText={siteText.regionaal_ziekenhuisopnames_per_dag.open}
                   sluitText={siteText.regionaal_ziekenhuisopnames_per_dag.sluit}
-                  piwikAction={selectedRegio.name}
                   piwikName="Ziekenhuisopnames per dag in Amsterdam-Amstelland"
+                  piwikAction={selectedRegio.name}
                 >
                   <h4>
                     {siteText.regionaal_ziekenhuisopnames_per_dag.fold_title}
@@ -253,11 +279,11 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                   <h4>
                     {siteText.regionaal_ziekenhuisopnames_per_dag.graph_title}
                   </h4>
-                  {data?.intake_hospital_ma?.values && (
+                  {data?.results_per_region?.values && (
                     <LineChart
-                      values={data.intake_hospital_ma?.values.map(
-                        (value: any) => ({
-                          value: value.intake_hospital_ma,
+                      values={data.results_per_region.values.map(
+                        (value: IValue) => ({
+                          value: value.hospital_moving_avg_per_region,
                           date: value.date_of_report_unix,
                         })
                       )}
@@ -286,23 +312,21 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
 
                 {selectedRegio && (
                   <>
-                    {!data?.infected_people_delta_normalized && (
-                      <LoadingPlaceholder />
-                    )}
-                    {data?.infected_people_delta_normalized && (
+                    {!data?.results_per_region && <LoadingPlaceholder />}
+                    {data?.results_per_region && (
                       <BarScale
                         min={0}
                         max={10}
                         value={
-                          data.infected_people_delta_normalized.last_value
-                            .infected_people_delta_normalized
+                          data.results_per_region.last_value
+                            .infected_increase_per_region
                         }
                         screenReaderText={
                           siteText.regionaal_positief_geteste_personen
                             .screen_reader_graph_content
                         }
                         id="regio_infecties"
-                        dataKey="infected_increase_per_region"
+                        dataKey="infected_total_counts_per_region"
                         gradient={[
                           {
                             color: '#3391CC',
@@ -312,7 +336,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                       />
                     )}
 
-                    {data?.infected_people_total && (
+                    {data?.results_per_region && (
                       <>
                         <h3>
                           {
@@ -320,9 +344,9 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                               .metric_title
                           }{' '}
                           <span style={{ color: '#01689b' }}>
-                            {formatDecimal(
-                              data?.infected_people_total?.last_value
-                                .infected_people_total
+                            {formatNumber(
+                              data.results_per_region.last_value
+                                .total_reported_increase_per_region
                             )}
                           </span>
                         </h3>
@@ -331,12 +355,12 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                             siteText.regionaal_positief_geteste_personen.datums
                           }
                           dateUnix={
-                            data?.infected_people_delta_normalized?.last_value
-                              ?.date_of_report_unix
+                            data.results_per_region.last_value
+                              .date_of_report_unix
                           }
                           dateInsertedUnix={
-                            data?.infected_people_delta_normalized?.last_value
-                              ?.date_of_insertion_unix
+                            data.results_per_region.last_value
+                              .date_of_insertion_unix
                           }
                         />
                       </>
@@ -360,11 +384,11 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                     {siteText.regionaal_positief_geteste_personen.graph_title}
                   </h4>
 
-                  {data?.infected_people_delta_normalized?.values && (
+                  {data?.results_per_region?.values && (
                     <LineChart
-                      values={data.infected_people_delta_normalized.values.map(
-                        (value: any) => ({
-                          value: value.infected_people_delta_normalized,
+                      values={data.results_per_region.values.map(
+                        (value: IValue) => ({
+                          value: value.infected_increase_per_region,
                           date: value.date_of_report_unix,
                         })
                       )}
