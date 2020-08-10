@@ -206,7 +206,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                       <>
                         <BarScale
                           min={0}
-                          max={100}
+                          max={30}
                           value={
                             data.intake_hospital_ma.last_value
                               .intake_hospital_ma
@@ -219,16 +219,8 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                           dataKey="hospital_moving_avg_per_region"
                           gradient={[
                             {
-                              color: '#69c253',
+                              color: '#3391CC',
                               value: 0,
-                            },
-                            {
-                              color: '#D3A500',
-                              value: 40,
-                            },
-                            {
-                              color: '#f35065',
-                              value: 90,
                             },
                           ]}
                         />
