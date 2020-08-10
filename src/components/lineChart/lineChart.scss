@@ -1,3 +1,5 @@
+@import 'scss/variables.scss';
+
 .chartContainer {
   display: block;
   background-color: red;
@@ -5,5 +7,31 @@
   overflow: hidden;
   &.open {
     height: auto;
+  }
+}
+
+.chart-button-group {
+  display: flex;
+  margin: 1em 0;
+
+  input {
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+
+    &:checked + label {
+      background: $button-color;
+      color: white;
+    }
+  }
+
+  label {
+    flex: 1 1 auto;
+    text-align: center;
+    padding: 0.2em 0;
+    border: 1px solid $button-color;
+
+    &:nth-of-type(even) {
+      border-width: 1px 0;
+    }
   }
 }
