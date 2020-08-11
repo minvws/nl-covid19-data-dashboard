@@ -1,4 +1,11 @@
 {
+  "charts": {
+    "time_controls": {
+      "all": "Toon alles",
+      "month": "Laatste maand",
+      "week": "Laatste week"
+    }
+  },
   "andere_gegevens": "Andere gegevens",
   "blok_andere_gegevens": {
     "title": "Andere gegevens",

@@ -1,6 +1,9 @@
 import React, { useMemo, useState } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+
+import ChartTimeControls from 'components/chartTimeControls';
+
 import formatNumber from 'utils/formatNumber';
 import formatDate from 'utils/formatDate';
 
@@ -114,15 +117,11 @@ function getOptions(
 }
 
 const LineChart: React.FC<LineChartProps> = ({ values, signaalwaarde }) => {
-  const [timeframe, setTimeframe] = useState<'all' | 'month' | 'week'>('month');
-
-  const id = useMemo(() => {
-    return Math.random().toString(36).substr(2);
-  }, []);
+  const [timeframe, setTimeframe] = useState('month');
 
   const chartOptions = useMemo(() => {
-    const week = 8;
-    const month = 31;
+    const week = 7;
+    const month = 30;
     const days = values.length;
 
     if (timeframe === 'all') {
@@ -139,37 +138,10 @@ const LineChart: React.FC<LineChartProps> = ({ values, signaalwaarde }) => {
   return (
     <>
       <HighchartsReact highcharts={Highcharts} options={chartOptions} />
-      <div
-        className="chart-button-group"
-        onChange={(evt: any) => setTimeframe(evt.target.value)}
-      >
-        <input
-          id={`all-${id}`}
-          type="radio"
-          name={`timeframe-${id}`}
-          value="all"
-          checked={timeframe === 'all'}
-        />
-        <label htmlFor={`all-${id}`}>Toon alles</label>
-
-        <input
-          id={`month-${id}`}
-          type="radio"
-          name={`timeframe-${id}`}
-          value="month"
-          checked={timeframe === 'month'}
-        />
-        <label htmlFor={`month-${id}`}>Laatste maand</label>
-
-        <input
-          id={`week-${id}`}
-          type="radio"
-          name={`timeframe-${id}`}
-          value="week"
-          checked={timeframe === 'week'}
-        />
-        <label htmlFor={`week-${id}`}>Laatste week</label>
-      </div>
+      <ChartTimeControls
+        timeframe={timeframe}
+        onChange={(evt) => setTimeframe(evt.target.value)}
+      />
     </>
   );
 };
