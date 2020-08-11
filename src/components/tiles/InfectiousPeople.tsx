@@ -56,7 +56,7 @@ export const InfectiousPeople: React.FC = () => {
           />
         )}
 
-        <p className={'regioDataLoading'}>
+        <p>
           Voor het aantal besmettelijke mensen is geen signaalwaarde
           beschikbaar.{' '}
           <Link href="/verantwoording">

@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import Link from 'next/link';
 
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
@@ -53,6 +54,14 @@ export const PostivelyTestedPeople: React.FC = () => {
             ]}
           />
         )}
+
+        <p>
+          In de open data van het RIVM zijn op 9 en 10 augustus nagekomen
+          meldingen uit de periode van daarvoor geregistreerd.{' '}
+          <Link href="/verantwoording">
+            <a>Lees hier waarom</a>
+          </Link>
+        </p>
 
         {total && (
           <h3>

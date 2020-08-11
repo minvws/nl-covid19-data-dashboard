@@ -1035,6 +1035,16 @@
     "cijfers": [
       {
         "cijfer": {
+          "translation": "Update 11 augustus over piek aantal positief geteste mensen",
+          "notes": ""
+        },
+        "verantwoording": {
+          "translation": "Om technische redenen konden in de periode van 14 juli tot 9 augustus niet alle meldingen over besmettingen doorgestuurd worden van GGD naar het RIVM. Deze nagekomen meldingen zijn op 9 en 10 augustus alsnog opgenomen in de data waardoor het totaal aantal op deze datums t.o.v. de werkelijkheid is overschat. Het betreft in totaal 160 nagekomen meldingen van COVID-19 patiënten. Hiervan worden 9 meldingen gerapporteerd op 9 augustus en 151 op 10 augustus. De verdeling van deze 160 nagekomen meldingen over de veiligheidsregio’s is als volgt: Amsterdam-Amstelland: 8, Flevoland: 30, Friesland: 8, Groningen: 1, Hollands Midden: 26, Rotterdam-Rijnmond: 7, Midden- en West-Brabant: 27, Zaanstreek-Waterland: 8, Zeeland: 23, Zuid-Limburg: 14, Gelderland-Midden: 7, Onbekend: 1",
+          "notes": ""
+        }
+      },
+      {
+        "cijfer": {
           "translation": "Update 31 juli over signaalwaarde aantal besmettelijke personen",
           "notes": ""
         },
@@ -1160,16 +1170,6 @@
         },
         "verantwoording": {
           "translation": "Dit dashboard is in korte tijd tot stand gekomen. Het is daarom nog niet gelukt om de code voor het inlezen van de data, de databerekeningen en het construeren van de JSON- bestanden open source beschikbaar te stellen. Dit zal binnen afzienbare tijd beschikbaar worden gesteld. De code van de webapplicatie is op 5 juni 2020 gepubliceerd op Github: https://github.com/minvws/nl-covid19-data-dashboard",
-          "notes": ""
-        }
-      },
-      {
-        "cijfer": {
-          "translation": "Update 11 augustus over piek aantal positief geteste mensen",
-          "notes": ""
-        },
-        "verantwoording": {
-          "translation": "Om technische redenen konden in de periode van 14 juli tot 9 augustus niet alle meldingen over besmettingen doorgestuurd worden van GGD naar het RIVM. Deze nagekomen meldingen zijn op 9 en 10 augustus alsnog opgenomen in de data. Het betreft in totaal 160 nagekomen meldingen van COVID-19 patiënten. Hiervan worden 9 meldingen gerapporteerd op 9 augustus en 151 op 10 augustus. De verdeling van deze 160 nagekomen meldingen over de veiligheidsregio’s is als volgt: Amsterdam-Amstelland: 8, Flevoland: 30, Friesland: 8, Groningen: 1, Hollands Midden: 26, Rotterdam-Rijnmond: 7, Midden- en West-Brabant: 27, Zaanstreek-Waterland: 8, Zeeland: 23, Zuid-Limburg: 14, Gelderland-Midden: 7, Onbekend: 1",
           "notes": ""
         }
       }
