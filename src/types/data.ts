@@ -130,7 +130,7 @@ export interface RioolwaterMetingen {
 
 export interface RioolwaterMetingenLastValue {
   last_week_unix: number;
-  week_unix: number;
+  week: number;
   average?: string | null;
   date_of_insertion_unix: number;
   incidentie?: number | null;
