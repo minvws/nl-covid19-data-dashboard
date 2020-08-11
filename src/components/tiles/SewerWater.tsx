@@ -49,7 +49,7 @@ export const SewerWater: React.FC = () => {
           <DateReported
             datumsText={text.datums}
             dateInsertedUnix={data?.last_value?.date_of_insertion_unix}
-            dateUnix={data?.last_value?.week_unix}
+            dateUnix={data?.last_value?.week}
           />
         )}
       </GraphContent>
@@ -64,12 +64,12 @@ export const SewerWater: React.FC = () => {
 
         <h4>{text.graph_title}</h4>
 
-        {data && (
+        {data?.values && (
           <>
             <LineChart
               values={data.values.map((value) => ({
                 value: Number(value.average),
-                date: value.week_unix,
+                date: value.week,
               }))}
             />
 
