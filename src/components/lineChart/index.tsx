@@ -19,15 +19,13 @@ function getOptions(
   signaalwaarde?: number | undefined
 ): Highcharts.Options {
   const options: Highcharts.Options = {
-    title: { text: undefined },
     chart: {
       alignTicks: true,
-      animation: true,
+      animation: false,
       backgroundColor: 'transparent',
       borderColor: '#000',
       borderRadius: 0,
       borderWidth: 0,
-      className: 'undefined',
       colorCount: 10,
       displayErrors: true,
       height: 175,
@@ -45,7 +43,9 @@ function getOptions(
       categories: values.map((value) => value.date.toString()),
       labels: {
         align: 'right',
-        rotation: 0,
+        // types say `rotation` needs to be a number,
+        // but that doesn’t work.
+        rotation: '0' as any,
         formatter: function (): string {
           if (this.isFirst || this.isLast) {
             return formatDate(this.value * 1000);
@@ -70,20 +70,25 @@ function getOptions(
       },
       labels: {
         formatter: function (): string {
+          // @ts-ignore
           return formatNumber(this.value);
         },
       },
       accessibility: {
         rangeDescription: 'Range: 2010 to 2017',
       },
+      plotLines: [],
+    },
+    title: {
+      text: undefined,
     },
     series: [
       {
-        data: values.map((value) => value.value as number),
         type: 'line',
-        color: '#3391CC',
+        data: values.map((value) => value.value as number),
         name: '',
         showInLegend: false,
+        color: '#3391CC',
         marker: {
           enabled: false,
         },
@@ -106,15 +111,15 @@ function getOptions(
 }
 
 const LineChart: React.FC<LineChartProps> = ({ values, signaalwaarde }) => {
-  const [timeframe, setTimeframe] = useState<'all' | 'month' | 'week'>('week');
+  const [timeframe, setTimeframe] = useState<'all' | 'month' | 'week'>('all');
 
   const id = useMemo(() => {
     return Math.random().toString(36).substr(2);
   }, []);
 
   const chartOptions = useMemo(() => {
-    const week = 7;
-    const month = 30;
+    const week = 8;
+    const month = 31;
     const days = values.length;
 
     if (timeframe === 'all') {
@@ -130,11 +135,7 @@ const LineChart: React.FC<LineChartProps> = ({ values, signaalwaarde }) => {
 
   return (
     <>
-      <HighchartsReact
-        key={timeframe}
-        highcharts={Highcharts}
-        options={chartOptions}
-      />
+      <HighchartsReact highcharts={Highcharts} options={chartOptions} />
       <div
         className="chart-button-group"
         onChange={(evt: any) => setTimeframe(evt.target.value)}
