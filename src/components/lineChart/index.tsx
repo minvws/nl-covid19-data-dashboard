@@ -30,6 +30,9 @@ function getOptions(
       displayErrors: true,
       height: 175,
     },
+    credits: {
+      enabled: false,
+    },
     xAxis: {
       lineColor: '#C4C4C4',
       gridLineColor: '#ca005d',
@@ -63,6 +66,7 @@ function getOptions(
       },
     },
     yAxis: {
+      allowDecimals: false,
       lineColor: '#C4C4C4',
       gridLineColor: '#C4C4C4',
       title: {
@@ -77,7 +81,6 @@ function getOptions(
       accessibility: {
         rangeDescription: 'Range: 2010 to 2017',
       },
-      plotLines: [],
     },
     title: {
       text: undefined,
@@ -111,7 +114,7 @@ function getOptions(
 }
 
 const LineChart: React.FC<LineChartProps> = ({ values, signaalwaarde }) => {
-  const [timeframe, setTimeframe] = useState<'all' | 'month' | 'week'>('all');
+  const [timeframe, setTimeframe] = useState<'all' | 'month' | 'week'>('month');
 
   const id = useMemo(() => {
     return Math.random().toString(36).substr(2);
