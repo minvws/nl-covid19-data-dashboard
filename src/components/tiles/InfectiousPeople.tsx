@@ -60,7 +60,7 @@ export const InfectiousPeople: React.FC = () => {
           Voor het aantal besmettelijke mensen is geen signaalwaarde
           beschikbaar.{' '}
           <Link href="/verantwoording">
-            <a>Lees hier waarom</a>
+            <a>Lees hier waarom.</a>
           </Link>
         </p>
 

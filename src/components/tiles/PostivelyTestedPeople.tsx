@@ -59,7 +59,7 @@ export const PostivelyTestedPeople: React.FC = () => {
           In de open data van het RIVM zijn op 9 en 10 augustus nagekomen
           meldingen uit de periode van daarvoor geregistreerd.{' '}
           <Link href="/verantwoording">
-            <a>Lees hier waarom</a>
+            <a>Lees hier wat het effect is.</a>
           </Link>
         </p>
 
