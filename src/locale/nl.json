@@ -424,6 +424,10 @@
       {
         "cijfer": "Open source data verwerking",
         "verantwoording": "Dit dashboard is in korte tijd tot stand gekomen. Het is daarom nog niet gelukt om de code voor het inlezen van de data, de databerekeningen en het construeren van de JSON- bestanden open source beschikbaar te stellen. Dit zal binnen afzienbare tijd beschikbaar worden gesteld. De code van de webapplicatie is op 5 juni 2020 gepubliceerd op [GitHub](https://github.com/minvws/nl-covid19-data-dashboard)"
+      },
+      {
+        "cijfer": "Update 11 augustus over piek aantal positief geteste mensen",
+        "verantwoording": "Om technische redenen konden in de periode van 14 juli tot 9 augustus niet alle meldingen over besmettingen doorgestuurd worden van GGD naar het RIVM. Deze nagekomen meldingen zijn op 9 en 10 augustus alsnog opgenomen in de data. Het betreft in totaal 160 nagekomen meldingen van COVID-19 patiënten. Hiervan worden 9 meldingen gerapporteerd op 9 augustus en 151 op 10 augustus. {{whitespace}} \n\nDe verdeling van deze 160 nagekomen meldingen over de veiligheidsregio’s is als volgt: {{whitespace}} \n\nAmsterdam-Amstelland: 8 {{whitespace}} \nFlevoland: 30 {{whitespace}} \nFriesland: 8 {{whitespace}} \nGroningen: 1 {{whitespace}} \nHollands Midden: 26 {{whitespace}} \nRotterdam-Rijnmond: 7 {{whitespace}} \nMidden- en West-Brabant: 27 {{whitespace}} \nZaanstreek-Waterland: 8 {{whitespace}} \nZeeland: 23 {{whitespace}} \nZuid-Limburg: 14 {{whitespace}} \nGelderland-Midden: 7 {{whitespace}} \nOnbekend: 1 {{whitespace}} "
       }
     ]
   },
