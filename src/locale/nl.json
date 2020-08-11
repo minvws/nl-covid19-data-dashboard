@@ -1,11 +1,4 @@
 {
-  "charts": {
-    "time_controls": {
-      "all": "Toon alles",
-      "month": "Laatste maand",
-      "week": "Laatste week"
-    }
-  },
   "andere_gegevens": "Andere gegevens",
   "blok_andere_gegevens": {
     "title": "Andere gegevens",
@@ -434,7 +427,7 @@
       },
       {
         "cijfer": "Update 11 augustus over piek aantal positief geteste mensen",
-        "verantwoording": "Om technische redenen konden in de periode van 14 juli tot 9 augustus niet alle meldingen over besmettingen doorgestuurd worden van GGD naar het RIVM. Deze nagekomen meldingen zijn op 9 en 10 augustus alsnog opgenomen in de data. Het betreft in totaal 160 nagekomen meldingen van COVID-19 patiënten. Hiervan worden 9 meldingen gerapporteerd op 9 augustus en 151 op 10 augustus. {{whitespace}} De verdeling van deze 160 nagekomen meldingen over de veiligheidsregio’s is als volgt: {{whitespace}} Amsterdam-Amstelland: 8 \n\nFlevoland: 30 \n\nFriesland: 8 \n\nGroningen: 1 \n\nHollands Midden: 26 \n\nRotterdam-Rijnmond: 7 \n\nMidden- en West-Brabant: 27 \n\nZaanstreek-Waterland: 8 \n\nZeeland: 23 \n\nZuid-Limburg: 14 \n\nGelderland-Midden: 7 \n\n Onbekend: 1"
+        "verantwoording": "Om technische redenen konden in de periode van 14 juli tot 9 augustus niet alle meldingen over besmettingen doorgestuurd worden van GGD naar het RIVM. Deze nagekomen meldingen zijn op 9 en 10 augustus alsnog opgenomen in de data. Het betreft in totaal 160 nagekomen meldingen van COVID-19 patiënten. Hiervan worden 9 meldingen gerapporteerd op 9 augustus en 151 op 10 augustus. {{whitespace}} De verdeling van deze 160 nagekomen meldingen over de veiligheidsregio’s is als volgt: {{whitespace}} Amsterdam-Amstelland: 8 \\n\\nFlevoland: 30 \\n\\nFriesland: 8 \\n\\nGroningen: 1 \\n\\nHollands Midden: 26 \\n\\nRotterdam-Rijnmond: 7 \\n\\nMidden- en West-Brabant: 27 \\n\\nZaanstreek-Waterland: 8 \\n\\nZeeland: 23 \\n\\nZuid-Limburg: 14 \\n\\nGelderland-Midden: 7 \\n\\n Onbekend: 1"
       }
     ]
   },
