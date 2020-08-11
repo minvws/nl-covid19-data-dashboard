@@ -1,11 +1,4 @@
 {
-  "charts": {
-    "time_controls": {
-      "all": "Toon alles",
-      "month": "Laatste maand",
-      "week": "Laatste week"
-    }
-  },
   "andere_gegevens": "Andere gegevens",
   "blok_andere_gegevens": {
     "title": "Andere gegevens",
@@ -469,5 +462,12 @@
     "titel": "COVID-19 Dashboard foutmelding | Rijksoverheid.nl",
     "title": "Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
     "url": "https://coronadashboard.rijksoverheid.nl"
+  },
+  "charts": {
+    "time_controls": {
+      "all": "Toon alles",
+      "month": "Laatste maand",
+      "week": "Laatste week"
+    }
   }
 }
