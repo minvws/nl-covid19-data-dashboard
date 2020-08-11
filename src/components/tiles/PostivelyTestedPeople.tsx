@@ -56,10 +56,10 @@ export const PostivelyTestedPeople: React.FC = () => {
         )}
 
         <p>
-          In de open data van het RIVM zijn op 9 en 10 augustus nagekomen
-          meldingen uit de periode van daarvoor geregistreerd.{' '}
+          Let op: de cijfers van 10 en 11 augustus vallen hoger uit door
+          nagekomen meldingen van de GGD aan het RIVM.{' '}
           <Link href="/verantwoording">
-            <a>Lees hier wat het effect is.</a>
+            <a>Lees meer</a>
           </Link>
         </p>
 
