@@ -54,7 +54,7 @@ function getOptions(
         rotation: '0' as any,
         formatter: function (): string {
           if (this.isFirst || this.isLast) {
-            return formatDate(this.value * 1000);
+            return formatDate(this.value * 1000, 'axis');
           }
           return '';
         },
@@ -69,6 +69,7 @@ function getOptions(
       },
     },
     yAxis: {
+      min: 0,
       allowDecimals: false,
       lineColor: '#C4C4C4',
       gridLineColor: '#C4C4C4',
