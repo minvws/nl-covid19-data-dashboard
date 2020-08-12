@@ -1,3 +1,5 @@
+import { isToday, isYesterday } from 'date-fns';
+
 import getLocale from 'utils/getLocale';
 
 const locale = getLocale();
@@ -22,26 +24,37 @@ const Medium = new Intl.DateTimeFormat(locale, {
 
 const Month = new Intl.DateTimeFormat(locale, {
   month: 'long',
-} as DateTimeFormatOptions);
+});
 
 const MonthShort = new Intl.DateTimeFormat(locale, {
   month: 'short',
-} as DateTimeFormatOptions);
+});
 
 const Day = new Intl.DateTimeFormat(locale, {
   day: 'numeric',
-} as DateTimeFormatOptions);
+});
+
+// TypeScript will release types for `RelativeTimeFormat` in 4.0.0
+// @ts-ignore
+const Relative = new Intl.RelativeTimeFormat(locale, {
+  style: 'long',
+  numeric: 'auto',
+});
 
 function formatDate(
-  number: number | Date,
-  style?: 'long' | 'medium' | 'short' | 'iso' | 'axis'
+  value: number | Date,
+  style?: 'long' | 'medium' | 'relative' | 'iso' | 'axis'
 ): string {
-  if (style === 'iso') return new Date(number).toISOString(); // '2020-07-23T10:01:16.000Z'
-  if (style === 'long') return Long.format(number); // '23 juli 2020 om 12:01'
-  if (style === 'medium') return Medium.format(number); // '23 juli 2020'
-  if (style === 'short') return `${Day.format(number)} ${Month.format(number)}`; // '23 juli'
+  if (style === 'iso') return new Date(value).toISOString(); // '2020-07-23T10:01:16.000Z'
+  if (style === 'long') return Long.format(value); // '23 juli 2020 om 12:01'
+  if (style === 'medium') return Medium.format(value); // '23 juli 2020'
   if (style === 'axis')
-    return `${Day.format(number)} ${MonthShort.format(number)}`; // '23 jul.'
+    return `${Day.format(value)} ${MonthShort.format(value)}`; // '23 jul.'
 
-  return `${Day.format(number)} ${Month.format(number)}`; // '23 juli'
+  if (style === 'relative') {
+    if (isToday(value)) return Relative.format(-0, 'day'); // 'vandaag'
+    if (isYesterday(value)) return Relative.format(-1, 'day'); // 'gisteren'
+  }
+
+  return `${Day.format(value)} ${Month.format(value)}`; // '23 juli'
 }

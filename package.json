@@ -5,6 +5,7 @@
   "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
   "dependencies": {
     "d3-scale": "2",
+    "date-fns": "^2.15.0",
     "dompurify": "^2.0.12",
     "downshift": "^5.4.2",
     "highcharts": "^8.1.0",

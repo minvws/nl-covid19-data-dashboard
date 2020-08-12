@@ -23,6 +23,7 @@ class MyDocument extends Document {
           <Main />
 
           <script src="/piwik.js"></script>
+          <script src="https://polyfill.io/v3/polyfill.min.js?features=Intl.RelativeTimeFormat.%7Elocale.en%2CIntl.RelativeTimeFormat.%7Elocale.nl"></script>
 
           <noscript>
             <img

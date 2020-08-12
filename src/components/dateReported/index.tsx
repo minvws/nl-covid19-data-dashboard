@@ -14,9 +14,9 @@ const dateReported: React.FC<IProps> = (props) => {
 
   if (!dateUnix) return null;
 
-  const dateOfReport = formatDate(dateUnix * 1000);
+  const dateOfReport = formatDate(dateUnix * 1000, 'relative');
   const dateOfInsertion = dateInsertedUnix
-    ? formatDate(dateInsertedUnix * 1000)
+    ? formatDate(dateInsertedUnix * 1000, 'relative')
     : undefined;
 
   return (
