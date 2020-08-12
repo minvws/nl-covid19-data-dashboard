@@ -1,4 +1,5 @@
 import useSWR from 'swr';
+import Link from 'next/link';
 
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
@@ -52,6 +53,14 @@ export const InfectiousPeople: React.FC = () => {
             ]}
           />
         )}
+
+        <p>
+          Voor het aantal besmettelijke mensen is geen signaalwaarde
+          beschikbaar.{' '}
+          <Link href="/verantwoording">
+            <a>Lees hier waarom</a>
+          </Link>
+        </p>
 
         {count && (
           <h3>
