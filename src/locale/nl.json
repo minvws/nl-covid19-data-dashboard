@@ -374,6 +374,10 @@
     "paragraaf": "In dit dashboard staan verschillende cijfers die ons vertellen hoe het ervoor staat met beheersen van COVID-19. Op deze plek geven we meer toelichting over de wijze waarop de cijfers zijn samengesteld.",
     "cijfers": [
       {
+        "cijfer": "Update 11 augustus over piek aantal positief geteste mensen",
+        "verantwoording": "Om technische redenen konden in de periode van 14 juli tot 9 augustus niet alle meldingen over besmettingen doorgestuurd worden van GGD naar het RIVM. Deze nagekomen meldingen zijn op 9 en 10 augustus alsnog opgenomen in de open data. In het dashboard gebruiken wij de open data. Hierdoor zijn de waarden op het dashboard van 10 en 11 augustus vertekend. Het betreft in totaal 160 nagekomen meldingen van COVID-19 patiënten, 151 hebben effect op de waarden van 11 augustus en 9 op de waarden van 10augustus. De verdeling van deze 160 nagekomen meldingen over de veiligheidsregio’s is als volgt: Amsterdam-Amstelland: 8, Flevoland: 30, Friesland: 8, Groningen: 1, Hollands Midden: 26, Rotterdam-Rijnmond: 7, Midden- en West-Brabant: 27, Zaanstreek-Waterland: 8, Zeeland: 23, Zuid-Limburg: 14, Gelderland-Midden: 7, Onbekend: 1"
+      },
+      {
         "cijfer": "Update 31 juli over signaalwaarde aantal besmettelijke personen",
         "verantwoording": "Oorspronkelijk is op het dashboard gecommuniceerd dat er een signaalwaarde zou komen voor het aantal besmettelijke personen. Op advies van de modelleurs van het RIVM wordt deze niet aan het dashboard toegevoegd. Dit omdat dit een inschatting is die niet puur op berekeningen berust maar ook op aannames, zoals over infectieuze periode."
       },
