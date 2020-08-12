@@ -13,9 +13,9 @@ export type SEOHeadProps = {
 SEOHead.defaultProps = {
   description:
     'Informatie over de ontwikkeling van het coronavirus in Nederland.',
-  openGraphImage: 'https://coronadashboard.rijksoverheid.nl/banner.jpg',
+  openGraphImage: '/banner.jpg',
   title: 'Dashboard Coronavirus COVID-19 | Rijksoverheid.nl',
-  twitterImage: 'https://coronadashboard.rijksoverheid.nl/banner.jpg',
+  twitterImage: '/banner.jpg',
   url: 'https://coronadashboard.rijksoverheid.nl',
 };
 
@@ -139,14 +139,23 @@ function SEOHead(props: SEOHeadProps): any {
       />
 
       <meta key="description" name="description" content={description} />
-      <meta key="image" name="image" content={openGraphImage} />
+      <meta
+        key="image"
+        name="image"
+        content={`https://coronadashboard.rijksoverheid.nl${openGraphImage}`}
+      />
 
       <meta key="ogLocale" name="og:locale" content="nl_NL" />
       <meta key="ogTitle" property="og:title" content={title} />
       <meta key="ogDesc" property="og:description" content={description} />
       <meta
         key="ogImage"
-        name="og:image"
+        name="og:image:url"
+        content={`https://coronadashboard.rijksoverheid.nl${openGraphImage}`}
+      />
+      <meta
+        key="ogImageSecureUrl"
+        name="og:image:secure_url"
         content={`https://coronadashboard.rijksoverheid.nl${openGraphImage}`}
       />
       <meta key="ogUrl" name="og:url" content={url} />
@@ -154,7 +163,11 @@ function SEOHead(props: SEOHeadProps): any {
 
       <meta key="twTitle" name="twitter:title" content={title} />
       <meta key="twDesc" name="twitter:description" content={description} />
-      <meta key="twImg" name="twitter:image" content={twitterImage} />
+      <meta
+        key="twImg"
+        name="twitter:image"
+        content={`https://coronadashboard.rijksoverheid.nl${twitterImage}`}
+      />
       <meta key="twCard" name="twitter:card" content="summary_large_image" />
     </Head>
   );
