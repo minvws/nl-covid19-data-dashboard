@@ -70,6 +70,7 @@ function getOptions(props: IGetOptions): Highcharts.Options {
       },
       labels: {
         align: 'right',
+        x: 10,
         rotation: '0' as any,
         formatter: function (): string {
           if (this.isFirst || this.isLast) {
