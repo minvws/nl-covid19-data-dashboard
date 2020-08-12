@@ -95,8 +95,6 @@ export const ReproductionIndex: React.FC = () => {
               max: value.reproduction_index_high,
               date: value.date_of_report_unix,
             }))}
-            minY={0}
-            maxY={4}
             signaalwaarde={SIGNAAL_WAARDE}
             rangeLegendLabel={text.rangeLegendLabel}
             lineLegendLabel={text.lineLegendLabel}

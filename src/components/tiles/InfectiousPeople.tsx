@@ -98,8 +98,6 @@ export const InfectiousPeople: React.FC = () => {
               max: value.infectious_high,
               date: value.date_of_report_unix,
             }))}
-            minY={0}
-            maxY={300000}
             rangeLegendLabel={text.rangeLegendLabel}
             lineLegendLabel={text.lineLegendLabel}
           />
