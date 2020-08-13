@@ -5,7 +5,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 const nextConfig = {
-  webpack(config, { dev, isServer }) {
+  webpack(config, { dev }) {
     config.module.rules.push({
       test: /\.svg$/,
       use: [
