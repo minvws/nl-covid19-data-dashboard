@@ -1,39 +1,27 @@
-import styles from './regio.module.scss';
 import { useMemo, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
-
 import useSWR from 'swr';
 
 import Layout from 'components/layout';
 import MaxWidth from 'components/maxWidth';
-import GraphContainer from 'components/graphContainer';
-import GraphHeader from 'components/graphHeader';
-import BarScale from 'components/barScale';
-import Collapse from 'components/collapse';
 import LastUpdated from 'components/lastUpdated';
 import Warning from 'assets/warn.svg';
-import Metadata from 'components/metadata';
-import LoadingPlaceholder from 'components/loadingPlaceholder';
-import DateReported from 'components/dateReported';
+import { FunctionComponentWithLayout } from 'components/layout';
+import ScreenReaderOnly from 'components/screenReaderOnly';
+import SelectMunicipality from 'components/selectMunicipality';
+import IntakeHospital from 'components/tiles/regio/IntakeHospital';
+import PostivelyTestedPeople from 'components/tiles/regio/PositivelyTestedPeople';
 
-import GraphContent from 'components/graphContent';
+const SvgMap = dynamic(() => import('components/mapChart/svgMap'));
 
-import Ziekenhuis from 'assets/ziekenhuis.svg';
-import Getest from 'assets/test.svg';
+import styles from './regio.module.scss';
+import openGraphImage from 'assets/sharing/og-regionale-cijfers.png?url';
+import twitterImage from 'assets/sharing/twitter-regionale-cijfers.png?url';
 
 import siteText from 'locale';
 
-const LineChart = dynamic(() => import('components/lineChart'));
-const SvgMap = dynamic(() => import('components/mapChart/svgMap'));
-
-import { FunctionComponentWithLayout } from 'components/layout';
-import ScreenReaderOnly from 'components/screenReaderOnly';
-import formatNumber from 'utils/formatNumber';
-import SelectMunicipality from 'components/selectMunicipality';
-
-import openGraphImage from 'assets/sharing/og-regionale-cijfers.png?url';
-import twitterImage from 'assets/sharing/twitter-regionale-cijfers.png?url';
+import { Regionaal } from 'types/data';
 
 export type SafetyRegion = {
   id: number;
@@ -57,29 +45,6 @@ type RegioStaticProps = {
     safetyRegions: SafetyRegion[];
   };
 };
-
-interface IValue {
-  date_of_report_unix: number;
-  date_of_insertion_unix: number;
-  vrcode: string;
-  total_reported_increase_per_region: number;
-  infected_total_counts_per_region: number;
-  hospital_total_counts_per_region: number;
-  infected_increase_per_region: number;
-  hospital_increase_per_region: number;
-  hospital_moving_avg_per_region: number;
-}
-
-interface IData {
-  code: string;
-  last_generated: number;
-  name: string;
-  proto_name: string;
-  results_per_region: {
-    last_value: IValue;
-    values: IValue[];
-  };
-}
 
 export async function getStaticProps(): Promise<RegioStaticProps> {
   const municipalityMapping = require('../../data/gemeente_veiligheidsregio.json');
@@ -118,7 +83,7 @@ export async function getStaticProps(): Promise<RegioStaticProps> {
   };
 }
 
-const RegioDataLoading = () => {
+export const RegioDataLoading: React.FC = () => {
   return (
     <span className={styles['safety-region-data-loading']}>
       <Warning />
@@ -178,7 +143,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
   const response = useSWR(() =>
     selectedRegio?.code ? `/json/${selectedRegio.code}.json` : null
   );
-  const data: IData = response.data;
+  const data: Regionaal = response.data;
 
   useEffect(focusFirstHeading, [data]);
 
@@ -209,200 +174,13 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
           </div>
 
           <div className={styles['panel-column']}>
-            <GraphContainer>
-              <GraphContent>
-                <GraphHeader
-                  Icon={Ziekenhuis}
-                  title={siteText.regionaal_ziekenhuisopnames_per_dag.title}
-                  headingRef={contentRef}
-                  regio={selectedRegio?.name}
-                />
+            <IntakeHospital
+              selectedRegio={selectedRegio}
+              data={data}
+              contentRef={contentRef}
+            />
 
-                <p>{siteText.regionaal_ziekenhuisopnames_per_dag.text}</p>
-
-                {!selectedRegio && <RegioDataLoading />}
-
-                {selectedRegio && (
-                  <>
-                    {!data?.results_per_region.last_value && (
-                      <LoadingPlaceholder />
-                    )}
-
-                    {data?.results_per_region?.last_value && (
-                      <>
-                        <BarScale
-                          min={0}
-                          max={30}
-                          value={
-                            data.results_per_region.last_value
-                              .hospital_moving_avg_per_region
-                          }
-                          screenReaderText={
-                            siteText.regionaal_ziekenhuisopnames_per_dag
-                              .screen_reader_graph_content
-                          }
-                          id="regio_opnames"
-                          dataKey="hospital_moving_avg_per_region"
-                          gradient={[
-                            {
-                              color: '#3391CC',
-                              value: 0,
-                            },
-                          ]}
-                        />
-                        <DateReported
-                          datumsText={
-                            siteText.regionaal_ziekenhuisopnames_per_dag.datums
-                          }
-                          dateUnix={
-                            data.results_per_region.last_value
-                              ?.date_of_report_unix
-                          }
-                        />
-                      </>
-                    )}
-                  </>
-                )}
-              </GraphContent>
-
-              {selectedRegio && (
-                <Collapse
-                  openText={siteText.regionaal_ziekenhuisopnames_per_dag.open}
-                  sluitText={siteText.regionaal_ziekenhuisopnames_per_dag.sluit}
-                  piwikName="Ziekenhuisopnames per dag"
-                  piwikAction={selectedRegio.name}
-                >
-                  <h4>
-                    {siteText.regionaal_ziekenhuisopnames_per_dag.fold_title}
-                  </h4>
-                  <p>{siteText.regionaal_ziekenhuisopnames_per_dag.fold}</p>
-                  <h4>
-                    {siteText.regionaal_ziekenhuisopnames_per_dag.graph_title}
-                  </h4>
-                  {data?.results_per_region?.values && (
-                    <LineChart
-                      values={data.results_per_region.values.map(
-                        (value: IValue) => ({
-                          value: value.hospital_moving_avg_per_region,
-                          date: value.date_of_report_unix,
-                        })
-                      )}
-                    />
-                  )}
-                  <Metadata
-                    dataSource={
-                      siteText.regionaal_ziekenhuisopnames_per_dag.bron
-                    }
-                  />
-                </Collapse>
-              )}
-            </GraphContainer>
-
-            <GraphContainer>
-              <GraphContent>
-                <GraphHeader
-                  Icon={Getest}
-                  title={siteText.regionaal_positief_geteste_personen.title}
-                  regio={selectedRegio?.name}
-                />
-
-                <p>{siteText.regionaal_positief_geteste_personen.text}</p>
-
-                {!selectedRegio && <RegioDataLoading />}
-
-                {selectedRegio && (
-                  <>
-                    {!data?.results_per_region && <LoadingPlaceholder />}
-                    {data?.results_per_region && (
-                      <BarScale
-                        min={0}
-                        max={10}
-                        value={
-                          data.results_per_region.last_value
-                            .infected_increase_per_region
-                        }
-                        screenReaderText={
-                          siteText.regionaal_positief_geteste_personen
-                            .screen_reader_graph_content
-                        }
-                        id="regio_infecties"
-                        dataKey="infected_total_counts_per_region"
-                        gradient={[
-                          {
-                            color: '#3391CC',
-                            value: 0,
-                          },
-                        ]}
-                      />
-                    )}
-
-                    {data?.results_per_region && (
-                      <>
-                        <h3>
-                          {
-                            siteText.regionaal_positief_geteste_personen
-                              .metric_title
-                          }{' '}
-                          <span style={{ color: '#01689b' }}>
-                            {formatNumber(
-                              data.results_per_region.last_value
-                                .total_reported_increase_per_region
-                            )}
-                          </span>
-                        </h3>
-                        <DateReported
-                          datumsText={
-                            siteText.regionaal_positief_geteste_personen.datums
-                          }
-                          dateUnix={
-                            data.results_per_region.last_value
-                              .date_of_report_unix
-                          }
-                          dateInsertedUnix={
-                            data.results_per_region.last_value
-                              .date_of_insertion_unix
-                          }
-                        />
-                      </>
-                    )}
-                  </>
-                )}
-              </GraphContent>
-
-              {selectedRegio && (
-                <Collapse
-                  openText={siteText.regionaal_positief_geteste_personen.open}
-                  sluitText={siteText.regionaal_positief_geteste_personen.sluit}
-                  piwikAction={selectedRegio.name}
-                  piwikName="Positief geteste mensen"
-                >
-                  <h4>
-                    {siteText.regionaal_positief_geteste_personen.fold_title}
-                  </h4>
-                  <p>{siteText.regionaal_positief_geteste_personen.fold}</p>
-                  <h4>
-                    {siteText.regionaal_positief_geteste_personen.graph_title}
-                  </h4>
-
-                  {data?.results_per_region?.values && (
-                    <LineChart
-                      values={data.results_per_region.values.map(
-                        (value: IValue) => ({
-                          value: value.infected_increase_per_region,
-                          date: value.date_of_report_unix,
-                        })
-                      )}
-                    />
-                  )}
-
-                  <Metadata
-                    dataSource={
-                      siteText.regionaal_positief_geteste_personen.bron
-                    }
-                  />
-                </Collapse>
-              )}
-            </GraphContainer>
+            <PostivelyTestedPeople selectedRegio={selectedRegio} data={data} />
           </div>
         </div>
         <ScreenReaderOnly>

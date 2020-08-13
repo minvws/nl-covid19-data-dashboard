@@ -18,6 +18,29 @@ export interface National {
   rioolwater_metingen: RioolwaterMetingen;
 }
 
+export interface Regionaal {
+  code: string;
+  last_generated: number;
+  name: string;
+  proto_name: string;
+  results_per_region: {
+    last_value: RegionaalValue;
+    values: RegionaalValue[];
+  };
+}
+
+export interface RegionaalValue {
+  date_of_report_unix: number;
+  date_of_insertion_unix: number;
+  vrcode: string;
+  total_reported_increase_per_region: number;
+  infected_total_counts_per_region: number;
+  hospital_total_counts_per_region: number;
+  infected_increase_per_region: number;
+  hospital_increase_per_region: number;
+  hospital_moving_avg_per_region: number;
+}
+
 export interface DeceasedPeopleNurseryCountDaily {
   values: DeceasedPeopleNurseryCountDailyLastValue[];
   last_value: DeceasedPeopleNurseryCountDailyLastValue;
