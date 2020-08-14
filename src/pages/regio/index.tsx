@@ -12,6 +12,7 @@ import ScreenReaderOnly from 'components/screenReaderOnly';
 import SelectMunicipality from 'components/selectMunicipality';
 import IntakeHospital from 'components/tiles/regio/IntakeHospital';
 import PostivelyTestedPeople from 'components/tiles/regio/PositivelyTestedPeople';
+import { SewerWater } from 'components/tiles/regio/SewerWater';
 
 const SvgMap = dynamic(() => import('components/mapChart/svgMap'));
 
@@ -181,6 +182,8 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
             />
 
             <PostivelyTestedPeople selectedRegio={selectedRegio} data={data} />
+
+            <SewerWater selectedRegio={selectedRegio} data={data} />
           </div>
         </div>
         <ScreenReaderOnly>

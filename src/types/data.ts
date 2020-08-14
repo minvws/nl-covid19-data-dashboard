@@ -26,6 +26,7 @@ export interface Regionaal {
   results_per_region: {
     last_value: RegionaalValue;
     values: RegionaalValue[];
+    results_per_sewer_installation_per_region: SewerResultsPerInstallation;
   };
 }
 
@@ -157,4 +158,20 @@ export interface RioolwaterMetingenLastValue {
   average?: string | null;
   date_of_insertion_unix: number;
   incidentie?: number | null;
+}
+
+export interface InstallationSewerResults {
+  rwzi_code: string;
+  values: Value[];
+  lastValue: Value;
+}
+
+export interface SewerResultsPerInstallation {
+  values: InstallationSewerResults[];
+}
+
+export interface Value {
+  date: number | undefined;
+  value: number | undefined | null;
+  date_unix?: number;
 }
