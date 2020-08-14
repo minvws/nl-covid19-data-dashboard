@@ -8,11 +8,6 @@ import formatNumber from 'utils/formatNumber';
 import formatDate from 'utils/formatDate';
 import { Value } from 'types/data';
 
-type LineChartProps = {
-  values: Value[];
-  signaalwaarde?: number;
-};
-
 type MultiDateLineChartProps = {
   values: Value[];
   secondaryValues: Value[][];
@@ -28,32 +23,42 @@ function getOptions(
     {
       type: 'line',
       data: values.map((value) => [value.date, value.value]),
-      name: '',
+      name: 'average',
       showInLegend: false,
       color: '#3391CC',
       marker: {
         enabled: false,
       },
+      states: {
+        inactive: {
+          opacity: 1,
+        },
+      },
     },
   ];
 
   if (secondaryValues) {
-    console.log(111, secondaryValues);
     secondaryValues.forEach((values) => {
-      series.push({
+      series.unshift({
         type: 'line',
         data: values.map((value) => [value.date, value.value]),
-        name: '',
+        name: 'secondary',
         showInLegend: false,
-        color: '#3391CC',
+        color: '#666',
         marker: {
           enabled: false,
+        },
+        states: {
+          hover: {
+            enabled: false,
+          },
+          inactive: {
+            opacity: 1,
+          },
         },
       });
     });
   }
-
-  console.log(series);
 
   const options: Highcharts.Options = {
     chart: {
@@ -98,7 +103,10 @@ function getOptions(
       backgroundColor: '#FFF',
       borderColor: '#01689B',
       borderRadius: 0,
-      formatter: function (): string {
+      formatter: function (): false | string {
+        if (this.series.name !== 'average') {
+          return false;
+        }
         return `${formatDate(this.x * 1000)}: ${formatNumber(this.y)}`;
       },
     },
@@ -167,8 +175,6 @@ const MultiDateLineChart: React.FC<MultiDateLineChartProps> = ({
     const week = 7;
     const month = 30;
     const days = values.length;
-
-    // console.log(33333, secondaryValues);
 
     if (timeframe === 'all') {
       return getOptions(values, signaalwaarde);
