@@ -40,11 +40,16 @@ function useDynamicScale(
     // The first and most important check, did we find an absolute max value across
     // the complete dataset for this metric? Then we want to use that as the
     // new max.
-    if (isDataMaxHigherThanMax) {
-      scaleMax = dataMax;
-      // This second check, which theoretically shouldn't happen anymore but we leave it in for good
-      // measure, would ensure even if the back-end reports a wrong max value, the scale
-      // never breaks.
+    // Disabled for now because the max reported in the dataset reports the max over
+    // full history of a metric, and we need the latest value.
+    // eslint-disable-next-line no-constant-condition
+    if (false) {
+      if (isDataMaxHigherThanMax) {
+        scaleMax = dataMax;
+        // This second check, which theoretically shouldn't happen anymore but we leave it in for good
+        // measure, would ensure even if the back-end reports a wrong max value, the scale
+        // never breaks.
+      }
     } else if (isValueHigherThanMax) {
       scaleMax = value;
     }

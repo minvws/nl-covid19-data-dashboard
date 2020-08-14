@@ -61,7 +61,7 @@ const BarChart: React.FC<IProps> = (props) => {
         },
       ],
     }),
-    [data, keys]
+    [data, keys, total]
   );
 
   return <HighChartsReact highcharts={HighCharts} options={options} />;
