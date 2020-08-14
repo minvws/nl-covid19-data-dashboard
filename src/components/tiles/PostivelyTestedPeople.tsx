@@ -1,5 +1,4 @@
 import useSWR from 'swr';
-import Link from 'next/link';
 
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
@@ -51,14 +50,6 @@ export const PostivelyTestedPeople: React.FC = () => {
             ]}
           />
         )}
-
-        <p>
-          Let op: de cijfers van 10 en 11 augustus vallen hoger uit door
-          nagekomen meldingen van de GGD aan het RIVM.{' '}
-          <Link href="/verantwoording">
-            <a>Lees meer</a>
-          </Link>
-        </p>
 
         {total && (
           <h3>
