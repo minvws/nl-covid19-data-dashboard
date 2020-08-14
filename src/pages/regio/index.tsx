@@ -150,7 +150,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
   return (
     <>
       <MaxWidth>
-        <LastUpdated />
+        <LastUpdated lastUpdated={data?.last_generated * 1000} />
         <div className={styles['regio-grid']}>
           <div className={styles['map-column']} ref={selectRegioWrapperRef}>
             <SelectMunicipality
