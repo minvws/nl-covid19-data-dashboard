@@ -473,5 +473,9 @@
       "month": "Laatste maand",
       "week": "Laatste week"
     }
+  },
+  "utils": {
+    "date_today": "vandaag",
+    "date_yesterday": "gisteren"
   }
 }
