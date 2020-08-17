@@ -57,7 +57,7 @@ const IntakeHospitalRegio: React.FC<IProps> = (props) => {
                       .screen_reader_graph_content
                   }
                   id="regio_opnames"
-                  dataKey="hospital_moving_avg_per_region"
+                  rangeKey="hospital_moving_avg_per_region"
                   gradient={[
                     {
                       color: '#3391CC',
