@@ -3,7 +3,7 @@ import HighCharts from 'highcharts';
 import HighChartsReact from 'highcharts-react-official';
 
 interface IProps {
-  data: Array<number | null>;
+  data: Array<number | null | { y: number; color: string }>;
   keys: string[];
   axisTitle: string;
 }

@@ -167,7 +167,8 @@ export interface SewerResults {
 }
 
 export interface InstallationSewerResults extends SewerResults {
-  rwzi_code: string;
+  rwzi_awzi_code: string;
+  rwzi_awzi_name: string;
 }
 
 export interface SewerResultsPerInstallation {
@@ -180,5 +181,10 @@ export interface Value {
 }
 
 export interface SewerValue extends Value {
-  date_unix: number;
+  average: number;
+  date_measurement_unix: number;
+  week_unix: number;
+  rna_per_ml: number;
+  rwzi_awzi_code: string;
+  rwzi_awzi_name: string;
 }

@@ -44,7 +44,7 @@ function getOptions(
         data: values.map((value) => [value.date, value.value]),
         name: 'secondary',
         showInLegend: false,
-        color: '#bbb',
+        color: '##D2D2D2',
         marker: {
           enabled: false,
         },

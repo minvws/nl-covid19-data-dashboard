@@ -37,7 +37,7 @@ export const SewerWater: React.FC<IProps> = ({ data }) => {
             max={100}
             screenReaderText={text.screen_reader_graph_content}
             value={Number(
-              data?.average_sewer_installation_per_region?.last_value.value
+              data?.average_sewer_installation_per_region?.last_value.average
             )}
             id="rioolwater_metingen"
             dataKey="average"
@@ -54,10 +54,12 @@ export const SewerWater: React.FC<IProps> = ({ data }) => {
           <DateReported
             datumsText={text.datums}
             dateInsertedUnix={
-              data?.average_sewer_installation_per_region?.last_value?.date_unix
+              data?.average_sewer_installation_per_region?.last_value
+                ?.date_measurement_unix
             }
             dateUnix={
-              data?.average_sewer_installation_per_region?.last_value?.date_unix
+              data?.average_sewer_installation_per_region?.last_value
+                ?.date_measurement_unix
             }
           />
         )}
@@ -75,13 +77,21 @@ export const SewerWater: React.FC<IProps> = ({ data }) => {
               <MultiDateLineChart
                 values={data?.average_sewer_installation_per_region?.values.map(
                   (value) => {
-                    return { ...value, date: value.date_unix };
+                    return {
+                      ...value,
+                      value: value.average,
+                      date: value.week_unix,
+                    };
                   }
                 )}
                 secondaryValues={data.results_per_sewer_installation_per_region?.values.map(
                   (installation) => {
                     return installation.values.map((value) => {
-                      return { ...value, date: value.date_unix };
+                      return {
+                        ...value,
+                        value: value.rna_per_ml || null,
+                        date: value.date_measurement_unix,
+                      };
                     });
                   }
                 )}
@@ -91,14 +101,21 @@ export const SewerWater: React.FC<IProps> = ({ data }) => {
                 keys={[
                   text.average,
                   ...data.results_per_sewer_installation_per_region.values.map(
-                    (installation) => installation.rwzi_code
+                    (installation) => installation.last_value.rwzi_awzi_name
                   ),
                 ]}
                 data={[
-                  data.average_sewer_installation_per_region.last_value.value ||
-                    null,
+                  {
+                    y:
+                      data.average_sewer_installation_per_region.last_value
+                        .average,
+                    color: '#3391CC',
+                  },
                   ...data.results_per_sewer_installation_per_region.values.map(
-                    (installation) => installation.last_value.value || null
+                    (installation) => ({
+                      y: installation.last_value.rna_per_ml,
+                      color: '#C1C1C1',
+                    })
                   ),
                 ]}
                 axisTitle={text.bar_chart_axis_title}
