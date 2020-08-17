@@ -44,7 +44,7 @@ function getOptions(
         data: values.map((value) => [value.date, value.value]),
         name: 'secondary',
         showInLegend: false,
-        color: '##D2D2D2',
+        color: '#D2D2D2',
         marker: {
           enabled: false,
         },
@@ -145,21 +145,21 @@ function getOptions(
   return options;
 }
 
-// const filterSecondaryValues = (
-//   secondaryValues: Value[][],
-//   days: number
-// ): Value[][] => {
-//   const minimumDate = Math.floor(
-//     new Date().getTime() / 1000 - days * 24 * 60 * 60
-//   );
-//   return secondaryValues.map((values: Value[]) => {
-//     return values
-//       .filter((value: Value) => {
-//         return value.date >= minimumDate;
-//       })
-//       .map((value: Value): Value => ({ ...value }));
-//   });
-// };
+const filterSecondaryValues = (
+  secondaryValues: Value[][],
+  days: number
+): Value[][] => {
+  return secondaryValues.map((values: Value[]) => filterValues(values, days));
+};
+
+const filterValues = (values: Value[], days: number): Value[] => {
+  const minimumDate = Math.floor(
+    new Date().getTime() / 1000 - days * 24 * 60 * 60
+  );
+  return values
+    .filter((value: Value) => value.date >= minimumDate)
+    .map((value: Value): Value => ({ ...value }));
+};
 
 const MultiDateLineChart: React.FC<MultiDateLineChartProps> = ({
   values,
@@ -171,31 +171,22 @@ const MultiDateLineChart: React.FC<MultiDateLineChartProps> = ({
   const chartOptions = useMemo(() => {
     const week = 7;
     const month = 30;
-    const days = values.length;
 
     if (timeframe === 'all') {
-      return getOptions(values, signaalwaarde);
+      return getOptions(values, signaalwaarde, secondaryValues);
     }
     if (timeframe === 'month') {
-      // const filteredSecondaryValues = filterSecondaryValues(
-      //   secondaryValues,
-      //   month
-      // );
       return getOptions(
-        values.slice(days - month, days),
+        filterValues(values, month),
         signaalwaarde,
-        secondaryValues
+        filterSecondaryValues(secondaryValues, month)
       );
     }
     if (timeframe === 'week') {
-      // const filteredSecondaryValues = filterSecondaryValues(
-      //   secondaryValues,
-      //   week
-      // );
       return getOptions(
-        values.slice(days - week, days),
+        filterValues(values, week),
         signaalwaarde,
-        secondaryValues
+        filterSecondaryValues(secondaryValues, week)
       );
     }
   }, [values, secondaryValues, timeframe, signaalwaarde]);

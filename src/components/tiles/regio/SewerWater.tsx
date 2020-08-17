@@ -89,7 +89,7 @@ export const SewerWater: React.FC<IProps> = ({ data }) => {
                     return installation.values.map((value) => {
                       return {
                         ...value,
-                        value: value.rna_per_ml || null,
+                        value: value.rna_per_ml || 0,
                         date: value.date_measurement_unix,
                       };
                     });
