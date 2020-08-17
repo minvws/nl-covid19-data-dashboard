@@ -383,7 +383,9 @@
     "bron": {
       "text": "RIVM Onderzoek rioolwater",
       "href": "https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater"
-    }
+    },
+    "graph_average_label_text": "Gemiddelde waarde van RWZI-locaties",
+    "graph_secondary_label_text": "Waarde van individuele RWZI-locatie"
   },
   "terug_naar_regio_selectie": {
     "text": "Terug naar regio selectie"

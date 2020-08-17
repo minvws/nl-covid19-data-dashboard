@@ -11,8 +11,11 @@ interface IProps {
 const BarChart: React.FC<IProps> = (props) => {
   const { data, keys, axisTitle } = props;
 
-  const total = data.reduce((mem, part) => {
-    return (mem || 0) + (part || 0);
+  const total = data.reduce((mem: number, part): number => {
+    if (typeof part !== 'number') {
+      return mem;
+    }
+    return mem + ((part as number) || 0);
   }, 0);
 
   const options = useMemo(
@@ -32,7 +35,10 @@ const BarChart: React.FC<IProps> = (props) => {
       title: { text: null },
       tooltip: {
         enabled: true,
-        formatter: function (): string {
+        formatter: function (): string | false {
+          if (!total) {
+            return false;
+          }
           // @ts-ignore
           return `${((this.y * 100) / total).toFixed(0)}%`;
         },

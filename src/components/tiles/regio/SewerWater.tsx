@@ -95,6 +95,10 @@ export const SewerWater: React.FC<IProps> = ({ data }) => {
                     });
                   }
                 )}
+                text={{
+                  average_label_text: text.graph_average_label_text,
+                  secondary_label_text: text.graph_secondary_label_text,
+                }}
               />
               <h4>{text.bar_chart_title}</h4>
               <BarChart

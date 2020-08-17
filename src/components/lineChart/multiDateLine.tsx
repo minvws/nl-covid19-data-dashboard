@@ -8,23 +8,28 @@ import formatNumber from 'utils/formatNumber';
 import formatDate from 'utils/formatDate';
 import { Value } from 'types/data';
 
+interface TranslationStrings {
+  [key: string]: string;
+}
+
 type MultiDateLineChartProps = {
   values: Value[];
   secondaryValues: Value[][];
   signaalwaarde?: number;
+  text: TranslationStrings;
 };
 
 function getOptions(
   values: Value[],
-  signaalwaarde?: number | undefined,
-  secondaryValues?: Value[][] | undefined
+  secondaryValues: Value[][] | undefined,
+  text: TranslationStrings
 ): Highcharts.Options {
   const series: SeriesLineOptions[] = [
     {
       type: 'line',
       data: values.map((value) => [value.date, value.value]),
-      name: 'average',
-      showInLegend: false,
+      name: text.average_label_text,
+      showInLegend: true,
       color: '#3391CC',
       marker: {
         enabled: false,
@@ -38,12 +43,12 @@ function getOptions(
   ];
 
   if (secondaryValues) {
-    secondaryValues.forEach((values) => {
+    secondaryValues.forEach((values, index) => {
       series.unshift({
         type: 'line',
         data: values.map((value) => [value.date, value.value]),
-        name: 'secondary',
-        showInLegend: false,
+        name: text.secondary_label_text,
+        showInLegend: index === 0,
         color: '#D2D2D2',
         marker: {
           enabled: false,
@@ -70,7 +75,18 @@ function getOptions(
       borderWidth: 0,
       colorCount: 10,
       displayErrors: true,
-      height: 175,
+      height: 225,
+    },
+    legend: {
+      itemWidth: 300,
+      reversed: true,
+      itemStyle: {
+        color: '#666',
+        cursor: 'pointer',
+        fontSize: '12px',
+        fontWeight: 'normal',
+        textOverflow: 'ellipsis',
+      },
     },
     credits: {
       enabled: false,
@@ -131,17 +147,6 @@ function getOptions(
     series,
   };
 
-  if (signaalwaarde) {
-    // @ts-ignore
-    options.yAxis.plotLines = [
-      {
-        value: signaalwaarde,
-        dashStyle: 'dash',
-        width: 1,
-        color: '#4f5458',
-      },
-    ];
-  }
   return options;
 }
 
@@ -164,7 +169,7 @@ const filterValues = (values: Value[], days: number): Value[] => {
 const MultiDateLineChart: React.FC<MultiDateLineChartProps> = ({
   values,
   secondaryValues,
-  signaalwaarde,
+  text,
 }) => {
   const [timeframe, setTimeframe] = useState('month');
 
@@ -173,23 +178,23 @@ const MultiDateLineChart: React.FC<MultiDateLineChartProps> = ({
     const month = 30;
 
     if (timeframe === 'all') {
-      return getOptions(values, signaalwaarde, secondaryValues);
+      return getOptions(values, secondaryValues, text);
     }
     if (timeframe === 'month') {
       return getOptions(
         filterValues(values, month),
-        signaalwaarde,
-        filterSecondaryValues(secondaryValues, month)
+        filterSecondaryValues(secondaryValues, month),
+        text
       );
     }
     if (timeframe === 'week') {
       return getOptions(
         filterValues(values, week),
-        signaalwaarde,
-        filterSecondaryValues(secondaryValues, week)
+        filterSecondaryValues(secondaryValues, week),
+        text
       );
     }
-  }, [values, secondaryValues, timeframe, signaalwaarde]);
+  }, [values, secondaryValues, text, timeframe]);
 
   return (
     <>
