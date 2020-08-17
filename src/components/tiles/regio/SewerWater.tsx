@@ -40,7 +40,7 @@ export const SewerWater: React.FC<IProps> = ({ data }) => {
               data?.average_sewer_installation_per_region?.last_value.average
             )}
             id="rioolwater_metingen"
-            dataKey="average"
+            rangeKey="average"
             gradient={[
               {
                 color: '#3391CC',

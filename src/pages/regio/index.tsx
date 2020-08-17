@@ -183,7 +183,11 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
 
             <PostivelyTestedPeople selectedRegio={selectedRegio} data={data} />
 
-            <SewerWater selectedRegio={selectedRegio} data={data} />
+            <SewerWater
+              contentRef={contentRef}
+              selectedRegio={selectedRegio}
+              data={data}
+            />
           </div>
         </div>
         <ScreenReaderOnly>
