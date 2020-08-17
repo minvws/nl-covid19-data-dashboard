@@ -469,5 +469,9 @@
       "month": "Laatste maand",
       "week": "Laatste week"
     }
+  },
+  "utils": {
+    "date_today": "today",
+    "date_yesterday": "yesterday"
   }
 }

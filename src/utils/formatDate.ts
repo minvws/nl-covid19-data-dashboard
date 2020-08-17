@@ -1,5 +1,6 @@
 import { isToday, isYesterday } from 'date-fns';
 
+import siteText from 'locale';
 import getLocale from 'utils/getLocale';
 
 const locale = getLocale();
@@ -34,13 +35,6 @@ const Day = new Intl.DateTimeFormat(locale, {
   day: 'numeric',
 });
 
-// TypeScript will release types for `RelativeTimeFormat` in 4.0.0
-// @ts-ignore
-const Relative = new Intl.RelativeTimeFormat(locale, {
-  style: 'long',
-  numeric: 'auto',
-});
-
 function formatDate(
   value: number | Date,
   style?: 'long' | 'medium' | 'relative' | 'iso' | 'axis'
@@ -52,8 +46,8 @@ function formatDate(
     return `${Day.format(value)} ${MonthShort.format(value)}`; // '23 jul.'
 
   if (style === 'relative') {
-    if (isToday(value)) return Relative.format(-0, 'day'); // 'vandaag'
-    if (isYesterday(value)) return Relative.format(-1, 'day'); // 'gisteren'
+    if (isToday(value)) return siteText.utils.date_today;
+    if (isYesterday(value)) return siteText.utils.date_yesterday;
   }
 
   return `${Day.format(value)} ${Month.format(value)}`; // '23 juli'
