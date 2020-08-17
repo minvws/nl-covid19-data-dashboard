@@ -39,7 +39,7 @@ export const ReproductionIndex: React.FC = () => {
             signaalwaarde={SIGNAAL_WAARDE}
             value={lastKnownValidData?.last_value?.reproduction_index_avg}
             id="repro"
-            dataKey="reproduction_index_avg"
+            rangeKey="reproduction_index_avg"
             gradient={[
               {
                 color: '#69c253',

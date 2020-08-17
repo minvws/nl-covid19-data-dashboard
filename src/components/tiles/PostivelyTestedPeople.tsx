@@ -41,7 +41,7 @@ export const PostivelyTestedPeople: React.FC = () => {
             screenReaderText={text.screen_reader_graph_content}
             value={delta.last_value.infected_daily_increase}
             id="positief"
-            dataKey="infected_daily_increase"
+            rangeKey="infected_daily_increase"
             gradient={[
               {
                 color: '#3391CC',

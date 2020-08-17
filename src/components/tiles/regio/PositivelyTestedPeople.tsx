@@ -55,7 +55,7 @@ const PostivelyTestedPeople: React.FC<IProps> = (props) => {
                     .screen_reader_graph_content
                 }
                 id="regio_infecties"
-                dataKey="infected_total_counts_per_region"
+                rangeKey="infected_increase_per_region"
                 gradient={[
                   {
                     color: '#3391CC',

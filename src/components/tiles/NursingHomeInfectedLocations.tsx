@@ -38,7 +38,7 @@ export const NursingHomeInfectedLocations: React.FC = () => {
             screenReaderText={text.screen_reader_graph_content}
             value={newLocations.last_value.total_new_reported_locations}
             id="besmette_locaties_verpleeghuis"
-            dataKey="total_new_reported_locations"
+            rangeKey="total_new_reported_locations"
             gradient={[
               {
                 color: '#3391CC',
