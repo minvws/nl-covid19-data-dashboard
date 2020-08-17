@@ -1,8 +1,7 @@
-import { long } from 'data/months';
-
 import ClockIcon from 'assets/clock.svg';
 
 import replaceVariablesInText from 'utils/replaceVariablesInText';
+import formatDate from 'utils/formatDate';
 
 interface IProps {
   dateUnix: number | undefined;
@@ -10,19 +9,14 @@ interface IProps {
   datumsText: string;
 }
 
-function formatDate(number: number) {
-  const date = new Date(number * 1000);
-  return `${date.getDate()} ${long[date.getMonth()]}`;
-}
-
 const dateReported: React.FC<IProps> = (props) => {
   const { datumsText, dateUnix, dateInsertedUnix } = props;
 
   if (!dateUnix) return null;
 
-  const dateOfReport = formatDate(dateUnix);
+  const dateOfReport = formatDate(dateUnix * 1000, 'relative');
   const dateOfInsertion = dateInsertedUnix
-    ? formatDate(dateInsertedUnix)
+    ? formatDate(dateInsertedUnix * 1000, 'relative')
     : undefined;
 
   return (

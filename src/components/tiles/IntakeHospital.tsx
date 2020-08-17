@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import useSWR from 'swr';
 
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
@@ -11,33 +11,34 @@ import Ziekenhuis from 'assets/ziekenhuis.svg';
 import { LineChart } from './index';
 
 import siteText from 'locale';
-import { store } from 'store';
 
 import { IntakeHospitalMa } from 'types/data';
 
+const SIGNAAL_WAARDE = 40;
+
 export const IntakeHospital: React.FC = () => {
-  const globalState = useContext(store);
-  const { state } = globalState;
+  const { data: state } = useSWR(`/json/NL.json`);
 
   const text: typeof siteText.ziekenhuisopnames_per_dag =
     siteText.ziekenhuisopnames_per_dag;
-  const data: IntakeHospitalMa | undefined = state?.NL?.intake_hospital_ma;
+  const data: IntakeHospitalMa | undefined = state?.intake_hospital_ma;
 
   return (
     <GraphContainer>
       <GraphContent>
-        <GraphHeader Icon={Ziekenhuis} title={text.title.translation} />
+        <GraphHeader Icon={Ziekenhuis} title={text.title} />
 
-        <p>{text.text.translation}</p>
+        <p>{text.text}</p>
 
         {data && (
           <BarScale
             min={0}
             max={100}
-            kritiekeWaarde={Number(text.signaalwaarde.translation)}
-            screenReaderText={text.screen_reader_graph_content.translation}
+            signaalwaarde={SIGNAAL_WAARDE}
+            screenReaderText={text.screen_reader_graph_content}
             value={data.last_value.moving_average_hospital}
             id="opnames"
+            rangeKey="moving_average_hospital"
             gradient={[
               {
                 color: '#69c253',
@@ -45,7 +46,7 @@ export const IntakeHospital: React.FC = () => {
               },
               {
                 color: '#D3A500',
-                value: 40,
+                value: SIGNAAL_WAARDE,
               },
               {
                 color: '#f35065',
@@ -57,22 +58,22 @@ export const IntakeHospital: React.FC = () => {
 
         {data?.last_value?.moving_average_hospital !== null && (
           <DateReported
-            datumsText={text.datums.translation}
+            datumsText={text.datums}
             dateUnix={data?.last_value?.date_of_report_unix}
           />
         )}
       </GraphContent>
 
       <Collapse
-        openText={text.open.translation}
-        sluitText={text.sluit.translation}
+        openText={text.open}
+        sluitText={text.sluit}
         piwikName="Ziekenhuisopnames per dag"
         piwikAction="landelijk"
       >
-        <h4>{text.fold_title.translation}</h4>
-        <p>{text.fold.translation}</p>
+        <h4>{text.fold_title}</h4>
+        <p>{text.fold}</p>
 
-        <h4>{text.graph_title.translation}</h4>
+        <h4>{text.graph_title}</h4>
         {data && (
           <>
             <LineChart
@@ -80,7 +81,7 @@ export const IntakeHospital: React.FC = () => {
                 value: value.moving_average_hospital,
                 date: value.date_of_report_unix,
               }))}
-              signaalwaarde={Number(text.signaalwaarde.translation)}
+              signaalwaarde={SIGNAAL_WAARDE}
             />
 
             <Metadata dataSource={text.bron} />

@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import months from 'data/months';
+
+import ChartTimeControls from 'components/chartTimeControls';
+
 import formatNumber from 'utils/formatNumber';
+import formatDate from 'utils/formatDate';
 
 interface Value {
   date: number;
@@ -14,26 +17,24 @@ type LineChartProps = {
   signaalwaarde?: number;
 };
 
-const LineChart: React.FC<LineChartProps> = ({ values, signaalwaarde }) => {
-  const formatDate = (value: number) => {
-    const dateObj = new Date(value * 1000);
-    return `${dateObj.getDate()} ${months[dateObj.getMonth()]}`;
-  };
-
-  const options = {
+function getOptions(
+  values: Value[],
+  signaalwaarde?: number | undefined
+): Highcharts.Options {
+  const options: Highcharts.Options = {
     chart: {
       alignTicks: true,
-      animation: true,
+      animation: false,
       backgroundColor: 'transparent',
       borderColor: '#000',
       borderRadius: 0,
       borderWidth: 0,
-      className: 'undefined',
       colorCount: 10,
-      defaultSeriesType: 'line',
       displayErrors: true,
-      margin: [null],
       height: 175,
+    },
+    credits: {
+      enabled: false,
     },
     xAxis: {
       lineColor: '#C4C4C4',
@@ -45,17 +46,17 @@ const LineChart: React.FC<LineChartProps> = ({ values, signaalwaarde }) => {
       title: {
         text: null,
       },
-      categories: values.map((value) => value.date),
+      categories: values.map((value) => value.date.toString()),
       labels: {
         align: 'right',
-        rotation: '0',
-        formatter: function (): void | string {
-          // @ts-ignore
+        // types say `rotation` needs to be a number,
+        // but that doesn’t work.
+        rotation: '0' as any,
+        formatter: function (): string {
           if (this.isFirst || this.isLast) {
-            // @ts-ignore
-            const valueDate = new Date(this.value * 1000);
-            return `${valueDate.getDate()} ${months[valueDate.getMonth()]}`;
+            return formatDate(this.value * 1000, 'axis');
           }
+          return '';
         },
       },
     },
@@ -64,34 +65,37 @@ const LineChart: React.FC<LineChartProps> = ({ values, signaalwaarde }) => {
       borderColor: '#01689B',
       borderRadius: 0,
       formatter: function (): string {
-        // @ts-ignore
-        return `${formatDate(this.x)}: ${formatNumber(this.y)}`;
+        return `${formatDate(this.x * 1000)}: ${formatNumber(this.y)}`;
       },
     },
-    credits: false,
     yAxis: {
+      min: 0,
+      allowDecimals: false,
       lineColor: '#C4C4C4',
       gridLineColor: '#C4C4C4',
       title: {
         text: null,
       },
       labels: {
-        format: '{value}',
+        formatter: function (): string {
+          // @ts-ignore
+          return formatNumber(this.value);
+        },
       },
       accessibility: {
         rangeDescription: 'Range: 2010 to 2017',
       },
-      plotLines: [],
     },
     title: {
-      text: null,
+      text: undefined,
     },
     series: [
       {
-        data: values.map((value) => value.value),
+        type: 'line',
+        data: values.map((value) => value.value as number),
         name: '',
         showInLegend: false,
-        lineColor: '#3391CC',
+        color: '#3391CC',
         marker: {
           enabled: false,
         },
@@ -100,19 +104,47 @@ const LineChart: React.FC<LineChartProps> = ({ values, signaalwaarde }) => {
   };
 
   if (signaalwaarde) {
-    options.yAxis.plotLines.push({
-      // @ts-ignore
-      value: signaalwaarde,
-      // @ts-ignore
-      dashStyle: 'dash',
-      // @ts-ignore
-      width: 1,
-      // @ts-ignore
-      color: '#4f5458',
-    });
+    // @ts-ignore
+    options.yAxis.plotLines = [
+      {
+        value: signaalwaarde,
+        dashStyle: 'dash',
+        width: 1,
+        color: '#4f5458',
+      },
+    ];
   }
+  return options;
+}
 
-  return <HighchartsReact highcharts={Highcharts} options={options} />;
+const LineChart: React.FC<LineChartProps> = ({ values, signaalwaarde }) => {
+  const [timeframe, setTimeframe] = useState('month');
+
+  const chartOptions = useMemo(() => {
+    const week = 7;
+    const month = 30;
+    const days = values.length;
+
+    if (timeframe === 'all') {
+      return getOptions(values, signaalwaarde);
+    }
+    if (timeframe === 'month') {
+      return getOptions(values.slice(days - month, days), signaalwaarde);
+    }
+    if (timeframe === 'week') {
+      return getOptions(values.slice(days - week, days), signaalwaarde);
+    }
+  }, [values, timeframe, signaalwaarde]);
+
+  return (
+    <>
+      <HighchartsReact highcharts={Highcharts} options={chartOptions} />
+      <ChartTimeControls
+        timeframe={timeframe}
+        onChange={(evt) => setTimeframe(evt.target.value)}
+      />
+    </>
+  );
 };
 
 export default LineChart;

@@ -8,7 +8,6 @@ import Layout from 'components/layout';
 import LinkCard from 'components/linkCard';
 
 import LastUpdated from 'components/lastUpdated';
-import lastUpdatedStyles from 'components/lastUpdated/lastUpdated.module.scss';
 
 import { IntakeIntensiveCare } from 'components/tiles/IntakeIntensiveCare';
 import { NursingHomeInfectedDeaths } from 'components/tiles/NursingHomeInfectedDeaths';
@@ -27,7 +26,6 @@ import MaxWidth from 'components/maxWidth';
 import VerpleegHuisZorg from '../assets/verpleeghuiszorg.svg';
 import MedischeScreening from '../assets/medische-screening.svg';
 
-import { store } from 'store';
 import siteText from 'locale';
 import GraphHeader from 'components/graphHeader';
 import IconList from 'components/iconList';
@@ -38,23 +36,10 @@ import twitterImage from 'assets/sharing/twitter-landelijke-cijfers.png?url';
 import { FunctionComponentWithLayout } from 'components/layout';
 import Head from 'next/head';
 
-const Home: FunctionComponentWithLayout = () => {
-  const globalState = React.useContext(store);
-  const { state, dispatch } = globalState;
+import useSWR from 'swr';
 
-  React.useEffect(() => {
-    async function fetchData() {
-      if (!state['NL']) {
-        dispatch({ type: 'INIT_LOAD', payload: { id: 'NL' } });
-        const response = await fetch(
-          `${process.env.REACT_APP_DATA_SRC}NL.json`
-        );
-        const result = await response.json();
-        dispatch({ type: 'LOAD_SUCCESS', payload: result });
-      }
-    }
-    fetchData();
-  }, [dispatch, state]);
+const Home: FunctionComponentWithLayout = () => {
+  const { data } = useSWR(`/json/NL.json`);
 
   const breakpointColumnsObj = {
     default: 3,
@@ -65,17 +50,6 @@ const Home: FunctionComponentWithLayout = () => {
   return (
     <>
       <Head>
-        <link
-          key="dc-type"
-          rel="dcterms:type"
-          href="https://standaarden.overheid.nl/owms/terms/statistieken"
-        />
-        <link
-          key="dc-type-title"
-          rel="dcterms:type"
-          href="https://standaarden.overheid.nl/owms/terms/statistieken"
-          title="statistieken"
-        />
         <link
           key="dc-spatial"
           rel="dcterms:spatial"
@@ -90,14 +64,7 @@ const Home: FunctionComponentWithLayout = () => {
       </Head>
 
       <MaxWidth>
-        {state?.NL?.last_generated ? (
-          <LastUpdated lastUpdated={state.NL?.last_generated * 1000} />
-        ) : (
-          <p className={lastUpdatedStyles.text}>
-            Laatste informatie aan het ophalen
-          </p>
-        )}
-
+        <LastUpdated lastUpdated={data?.last_generated * 1000} />
         <Notification />
       </MaxWidth>
 
@@ -123,17 +90,18 @@ const Home: FunctionComponentWithLayout = () => {
               icon={'images/nederland.png'}
               iconAlt="Kaart van Nederland"
             >
-              <h3>{siteText.regio_link_block.title.translation}</h3>
-              <p>{siteText.regio_link_block.text.translation}</p>
+              <h3>{siteText.regio_link_block.title}</h3>
+              <p>{siteText.regio_link_block.text}</p>
             </LinkCard>
           </Masonry>
         </section>
 
         <section className="home-section">
-          <TitleBlock Icon={MedischeScreening} title="Andere gegevens">
-            <p>
-              Cijfers die iets kunnen zeggen over de verspreiding van het virus.
-            </p>
+          <TitleBlock
+            Icon={MedischeScreening}
+            title={siteText.blok_andere_gegevens.title}
+          >
+            <p>{siteText.blok_andere_gegevens.message}</p>
           </TitleBlock>
 
           <Masonry
@@ -147,10 +115,8 @@ const Home: FunctionComponentWithLayout = () => {
 
             <GraphContainer>
               <GraphContent>
-                <GraphHeader
-                  title={siteText.overige_gegevens.title.translation}
-                />
-                <p>{siteText.overige_gegevens.text.translation}</p>
+                <GraphHeader title={siteText.overige_gegevens.title} />
+                <p>{siteText.overige_gegevens.text}</p>
 
                 <IconList list={siteText.overige_gegevens.list} />
               </GraphContent>
@@ -161,9 +127,9 @@ const Home: FunctionComponentWithLayout = () => {
         <section className="home-section">
           <TitleBlock
             Icon={VerpleegHuisZorg}
-            title={siteText.blok_verpleeghuis_zorg.title.translation}
+            title={siteText.blok_verpleeghuis_zorg.title}
           >
-            <p>{siteText.blok_verpleeghuis_zorg.text.translation}</p>
+            <p>{siteText.blok_verpleeghuis_zorg.text}</p>
           </TitleBlock>
 
           <Masonry

@@ -1,5 +1,4 @@
-import { useContext } from 'react';
-import Link from 'next/link';
+import useSWR from 'swr';
 
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
@@ -9,11 +8,10 @@ import GraphContent from 'components/graphContent';
 import GraphHeader from 'components/graphHeader';
 import DateReported from 'components/dateReported';
 import Getest from 'assets/test.svg';
-import formatDecimal from 'utils/formatDec';
+import formatDecimal from 'utils/formatNumber';
 import { LineChart, BarChart } from './index';
 
 import siteText from 'locale';
-import { store } from 'store';
 
 import {
   InfectedPeopleDeltaNormalized,
@@ -22,30 +20,28 @@ import {
 } from 'types/data';
 
 export const PostivelyTestedPeople: React.FC = () => {
-  const globalState = useContext(store);
-  const { state } = globalState;
+  const { data: state } = useSWR(`/json/NL.json`);
 
   const text: typeof siteText.positief_geteste_personen =
     siteText.positief_geteste_personen;
   const delta: InfectedPeopleDeltaNormalized | undefined =
-    state?.NL?.infected_people_delta_normalized;
-  const age: IntakeShareAgeGroups | undefined =
-    state?.NL?.intake_share_age_groups;
-  const total: InfectedPeopleTotal | undefined =
-    state?.NL?.infected_people_total;
+    state?.infected_people_delta_normalized;
+  const age: IntakeShareAgeGroups | undefined = state?.intake_share_age_groups;
+  const total: InfectedPeopleTotal | undefined = state?.infected_people_total;
 
   return (
     <GraphContainer>
       <GraphContent>
-        <GraphHeader Icon={Getest} title={text.title.translation} />
-        <p>{text.text.translation}</p>
+        <GraphHeader Icon={Getest} title={text.title} />
+        <p>{text.text}</p>
         {delta && (
           <BarScale
             min={0}
             max={10}
-            screenReaderText={text.screen_reader_graph_content.translation}
+            screenReaderText={text.screen_reader_graph_content}
             value={delta.last_value.infected_daily_increase}
             id="positief"
+            rangeKey="infected_daily_increase"
             gradient={[
               {
                 color: '#3391CC',
@@ -55,17 +51,9 @@ export const PostivelyTestedPeople: React.FC = () => {
           />
         )}
 
-        <p>
-          Let op: de cijfers van 10 en 11 augustus vallen hoger uit door
-          nagekomen meldingen van de GGD aan het RIVM.{' '}
-          <Link href="/verantwoording">
-            <a>Lees meer</a>
-          </Link>
-        </p>
-
         {total && (
           <h3>
-            {text.metric_title.translation}{' '}
+            {text.metric_title}{' '}
             <span style={{ color: '#01689b' }}>
               {formatDecimal(total.last_value.infected_daily_total)}
             </span>
@@ -74,22 +62,22 @@ export const PostivelyTestedPeople: React.FC = () => {
 
         {delta?.last_value?.infected_daily_increase !== null && (
           <DateReported
-            datumsText={text.datums.translation}
+            datumsText={text.datums}
             dateUnix={delta?.last_value?.date_of_report_unix}
             dateInsertedUnix={delta?.last_value?.date_of_insertion_unix}
           />
         )}
       </GraphContent>
       <Collapse
-        openText={text.open.translation}
-        sluitText={text.sluit.translation}
+        openText={text.open}
+        sluitText={text.sluit}
         piwikAction="landelijk"
         piwikName="Positief geteste mensen"
       >
-        <h4>{text.fold_title.translation}</h4>
-        <p>{text.fold.translation}</p>
+        <h4>{text.fold_title}</h4>
+        <p>{text.fold}</p>
 
-        <h4>{text.linechart_title.translation}</h4>
+        <h4>{text.linechart_title}</h4>
         {delta && (
           <LineChart
             values={delta.values.map((value) => ({
@@ -99,7 +87,7 @@ export const PostivelyTestedPeople: React.FC = () => {
           />
         )}
 
-        <h4>{text.graph_title.translation}</h4>
+        <h4>{text.graph_title}</h4>
         {age && (
           <>
             <BarChart

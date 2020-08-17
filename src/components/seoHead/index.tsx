@@ -13,9 +13,9 @@ export type SEOHeadProps = {
 SEOHead.defaultProps = {
   description:
     'Informatie over de ontwikkeling van het coronavirus in Nederland.',
-  openGraphImage: 'https://coronadashboard.rijksoverheid.nl/banner.jpg',
+  openGraphImage: '/banner.jpg',
   title: 'Dashboard Coronavirus COVID-19 | Rijksoverheid.nl',
-  twitterImage: 'https://coronadashboard.rijksoverheid.nl/banner.jpg',
+  twitterImage: '/banner.jpg',
   url: 'https://coronadashboard.rijksoverheid.nl',
 };
 
@@ -68,6 +68,17 @@ function SEOHead(props: SEOHeadProps): any {
         href="http://standaarden.overheid.nl/owms/terms/Ministerie_van_Volksgezondheid,_Welzijn_en_Sport"
         title="Ministerie van Volksgezondheid, Welzijn en Sport"
       />
+      <link
+        key="dc-type"
+        rel="dcterms:type"
+        href="https://standaarden.overheid.nl/owms/terms/statistieken"
+      />
+      <link
+        key="dc-type-title"
+        rel="dcterms:type"
+        href="https://standaarden.overheid.nl/owms/terms/statistieken"
+        title="statistieken"
+      />
 
       <link
         rel="preload"
@@ -114,15 +125,37 @@ function SEOHead(props: SEOHeadProps): any {
         type="font/woff"
       />
 
+      <link
+        rel="preload"
+        href="/json/NL.json"
+        as="fetch"
+        crossOrigin="anonymous"
+      />
+      <link
+        rel="preload"
+        href="/json/RANGES.json"
+        as="fetch"
+        crossOrigin="anonymous"
+      />
+
       <meta key="description" name="description" content={description} />
-      <meta key="image" name="image" content={openGraphImage} />
+      <meta
+        key="image"
+        name="image"
+        content={`https://coronadashboard.rijksoverheid.nl${openGraphImage}`}
+      />
 
       <meta key="ogLocale" name="og:locale" content="nl_NL" />
       <meta key="ogTitle" property="og:title" content={title} />
       <meta key="ogDesc" property="og:description" content={description} />
       <meta
         key="ogImage"
-        name="og:image"
+        name="og:image:url"
+        content={`https://coronadashboard.rijksoverheid.nl${openGraphImage}`}
+      />
+      <meta
+        key="ogImageSecureUrl"
+        name="og:image:secure_url"
         content={`https://coronadashboard.rijksoverheid.nl${openGraphImage}`}
       />
       <meta key="ogUrl" name="og:url" content={url} />
@@ -130,7 +163,11 @@ function SEOHead(props: SEOHeadProps): any {
 
       <meta key="twTitle" name="twitter:title" content={title} />
       <meta key="twDesc" name="twitter:description" content={description} />
-      <meta key="twImg" name="twitter:image" content={twitterImage} />
+      <meta
+        key="twImg"
+        name="twitter:image"
+        content={`https://coronadashboard.rijksoverheid.nl${twitterImage}`}
+      />
       <meta key="twCard" name="twitter:card" content="summary_large_image" />
     </Head>
   );

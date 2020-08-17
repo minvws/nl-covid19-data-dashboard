@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import useSWR from 'swr';
 
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
@@ -10,38 +10,36 @@ import DateReported from 'components/dateReported';
 import Arts from 'assets/arts.svg';
 import { LineChart } from './index';
 
-import formatDecimal from 'utils/formatDec';
+import formatDecimal from 'utils/formatNumber';
 
 import siteText from 'locale';
-import { store } from 'store';
 
 import { RioolwaterMetingen } from 'types/data';
 
 export const SuspectedPatients: React.FC = () => {
-  const globalState = useContext(store);
-  const { state } = globalState;
+  const { data: state } = useSWR(`/json/NL.json`);
 
   const text: typeof siteText.verdenkingen_huisartsen =
     siteText.verdenkingen_huisartsen;
-  const data: RioolwaterMetingen | undefined =
-    state?.NL?.verdenkingen_huisartsen;
+  const data: RioolwaterMetingen | undefined = state?.verdenkingen_huisartsen;
 
-  const total = state?.NL?.verdenkingen_huisartsen?.last_value?.geschat_aantal;
+  const total = state?.verdenkingen_huisartsen?.last_value?.geschat_aantal;
 
   return (
     <GraphContainer>
       <GraphContent>
-        <GraphHeader Icon={Arts} title={text.title.translation} />
+        <GraphHeader Icon={Arts} title={text.title} />
 
-        <p>{text.text.translation}</p>
+        <p>{text.text}</p>
 
         {data && (
           <BarScale
             min={0}
             max={140}
-            screenReaderText={text.screen_reader_graph_content.translation}
+            screenReaderText={text.screen_reader_graph_content}
             value={data.last_value.incidentie as number | null}
             id="verdenkingen_huisartsen"
+            rangeKey="incidentie"
             gradient={[
               {
                 color: '#3391CC',
@@ -60,22 +58,22 @@ export const SuspectedPatients: React.FC = () => {
 
         {data?.last_value?.incidentie !== null && (
           <DateReported
-            datumsText={text.datums.translation}
+            datumsText={text.datums}
             dateInsertedUnix={data?.last_value?.date_of_insertion_unix}
             dateUnix={data?.last_value?.week_unix}
           />
         )}
       </GraphContent>
       <Collapse
-        openText={text.open.translation}
-        sluitText={text.sluit.translation}
+        openText={text.open}
+        sluitText={text.sluit}
         piwikName="Aantal patiënten waarvan huisartsen COVID-19 vermoeden"
         piwikAction="landelijk"
       >
-        <h4>{text.fold_title.translation}</h4>
-        <p>{text.fold.translation}</p>
+        <h4>{text.fold_title}</h4>
+        <p>{text.fold}</p>
 
-        <h4>{text.graph_title.translation}</h4>
+        <h4>{text.graph_title}</h4>
 
         {data && (
           <>

@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import useSWR from 'swr';
 
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
@@ -11,35 +11,31 @@ import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
 import { LineChart } from './index';
 
 import siteText from 'locale';
-import { store } from 'store';
 
 import { RioolwaterMetingen } from 'types/data';
 
 export const SewerWater: React.FC = () => {
-  const globalState = useContext(store);
-  const { state } = globalState;
+  const { data: state } = useSWR(`/json/NL.json`);
 
   const text: typeof siteText.rioolwater_metingen =
     siteText.rioolwater_metingen;
-  const data: RioolwaterMetingen | undefined = state?.NL?.rioolwater_metingen;
+  const data: RioolwaterMetingen | undefined = state?.rioolwater_metingen;
 
   return (
     <GraphContainer>
       <GraphContent>
-        <GraphHeader
-          Icon={RioolwaterMonitoring}
-          title={text.title.translation}
-        />
+        <GraphHeader Icon={RioolwaterMonitoring} title={text.title} />
 
-        <p>{text.text.translation}</p>
+        <p>{text.text}</p>
 
         {data && (
           <BarScale
             min={0}
             max={100}
-            screenReaderText={text.screen_reader_graph_content.translation}
+            screenReaderText={text.screen_reader_graph_content}
             value={Number(data.last_value.average)}
             id="rioolwater_metingen"
+            rangeKey="average"
             gradient={[
               {
                 color: '#3391CC',
@@ -51,24 +47,24 @@ export const SewerWater: React.FC = () => {
 
         {data?.last_value?.average !== null && (
           <DateReported
-            datumsText={text.datums.translation}
+            datumsText={text.datums}
             dateInsertedUnix={data?.last_value?.date_of_insertion_unix}
             dateUnix={data?.last_value?.week_unix}
           />
         )}
       </GraphContent>
       <Collapse
-        openText={text.open.translation}
-        sluitText={text.sluit.translation}
+        openText={text.open}
+        sluitText={text.sluit}
         piwikName="Rioolwatermeting"
         piwikAction="landelijk"
       >
-        <h4>{text.fold_title.translation}</h4>
-        <p>{text.fold.translation}</p>
+        <h4>{text.fold_title}</h4>
+        <p>{text.fold}</p>
 
-        <h4>{text.graph_title.translation}</h4>
+        <h4>{text.graph_title}</h4>
 
-        {data && (
+        {data?.values && (
           <>
             <LineChart
               values={data.values.map((value) => ({

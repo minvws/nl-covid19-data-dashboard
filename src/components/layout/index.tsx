@@ -8,12 +8,11 @@ import MaxWidth from 'components/maxWidth';
 import text from 'locale';
 import useMediaQuery from 'utils/useMediaQuery';
 import SEOHead from 'components/seoHead';
-import { Translation } from 'types/data';
 
 export interface LayoutProps {
-  url?: Translation;
-  title: Translation;
-  description?: Translation;
+  url?: string;
+  title: string;
+  description?: string;
   openGraphImage?: string;
   twitterImage?: string;
 }
@@ -41,16 +40,16 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = (props) => {
   return (
     <>
       <SEOHead
-        title={title?.translation}
-        description={description?.translation}
+        title={title}
+        description={description}
         openGraphImage={openGraphImage}
         twitterImage={twitterImage}
-        url={url?.translation}
+        url={url}
       />
 
       <div className={styles.skiplinks}>
-        <a href="#content">{text.skiplinks.inhoud.translation}</a>
-        <a href="#main-navigation">{text.skiplinks.nav.translation}</a>
+        <a href="#content">{text.skiplinks.inhoud}</a>
+        <a href="#main-navigation">{text.skiplinks.nav}</a>
       </div>
 
       <header className={styles.header}>
@@ -70,13 +69,11 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = (props) => {
         </div>
 
         <MaxWidth>
-          <h1>{text.header.title.translation}</h1>
+          <h1>{text.header.title}</h1>
           <p>
-            {text.header.text.translation}{' '}
+            {text.header.text}{' '}
             <Link href="/over">
-              <a className={styles.readMoreLink}>
-                {text.header.link.translation}
-              </a>
+              <a className={styles.readMoreLink}>{text.header.link}</a>
             </Link>
           </p>
         </MaxWidth>
@@ -94,7 +91,7 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = (props) => {
                         : styles.link
                     }
                   >
-                    {text.nav.links.index.translation}
+                    {text.nav.links.index}
                   </a>
                 </Link>
               </li>
@@ -108,7 +105,7 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = (props) => {
                         : styles.link
                     }
                   >
-                    {text.nav.links.regio.translation}
+                    {text.nav.links.regio}
                   </a>
                 </Link>
               </li>
@@ -122,7 +119,7 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = (props) => {
                         : styles.link
                     }
                   >
-                    {text.nav.links.over.translation}
+                    {text.nav.links.over}
                   </a>
                 </Link>
               </li>
@@ -142,28 +139,28 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = (props) => {
                 <li>
                   <Link href="/">
                     <a onClick={blur} className={styles.footerLink}>
-                      {text.nav.links.index.translation}
+                      {text.nav.links.index}
                     </a>
                   </Link>
                 </li>
                 <li>
                   <Link href="/regio">
                     <a onClick={blur} className={styles.footerLink}>
-                      {text.nav.links.regio.translation}
+                      {text.nav.links.regio}
                     </a>
                   </Link>
                 </li>
                 <li>
                   <Link href="/over">
                     <a onClick={blur} className={styles.footerLink}>
-                      {text.nav.links.over.translation}
+                      {text.nav.links.over}
                     </a>
                   </Link>
                 </li>
                 <li>
                   <Link href="/verantwoording">
                     <a onClick={blur} className={styles.footerLink}>
-                      {text.nav.links.verantwoording.translation}
+                      {text.nav.links.verantwoording}
                     </a>
                   </Link>
                 </li>
@@ -176,7 +173,7 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = (props) => {
                     rel="noopener noreferrer"
                     className={styles.footerLink}
                   >
-                    {text.nav.links.meer.translation}
+                    {text.nav.links.meer}
                   </a>
                 </li>
               </ul>

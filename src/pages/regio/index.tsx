@@ -1,39 +1,27 @@
-import styles from './regio.module.scss';
-import { useContext, useMemo, useEffect, useRef } from 'react';
+import { useMemo, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
+import useSWR from 'swr';
 
 import Layout from 'components/layout';
 import MaxWidth from 'components/maxWidth';
-import GraphContainer from 'components/graphContainer';
-import GraphHeader from 'components/graphHeader';
-import BarScale from 'components/barScale';
-import Collapse from 'components/collapse';
 import LastUpdated from 'components/lastUpdated';
 import Warning from 'assets/warn.svg';
-import Metadata from 'components/metadata';
-import LoadingPlaceholder from 'components/loadingPlaceholder';
-import DateReported from 'components/dateReported';
+import { FunctionComponentWithLayout } from 'components/layout';
+import ScreenReaderOnly from 'components/screenReaderOnly';
+import SelectMunicipality from 'components/selectMunicipality';
+import IntakeHospital from 'components/tiles/regio/IntakeHospital';
+import PostivelyTestedPeople from 'components/tiles/regio/PositivelyTestedPeople';
 
-import { store } from 'store';
-import GraphContent from 'components/graphContent';
+const SvgMap = dynamic(() => import('components/mapChart/svgMap'));
 
-import Ziekenhuis from 'assets/ziekenhuis.svg';
-import Getest from 'assets/test.svg';
+import styles from './regio.module.scss';
+import openGraphImage from 'assets/sharing/og-regionale-cijfers.png?url';
+import twitterImage from 'assets/sharing/twitter-regionale-cijfers.png?url';
 
 import siteText from 'locale';
 
-const LineChart = dynamic(() => import('components/lineChart'));
-const SvgMap = dynamic(() => import('components/mapChart/svgMap'));
-
-import { FunctionComponentWithLayout } from 'components/layout';
-import ScreenReaderOnly from 'components/screenReaderOnly';
-import formatDecimal from 'utils/formatDec';
-import SelectMunicipality from 'components/selectMunicipality';
-
-import openGraphImage from 'assets/sharing/og-regionale-cijfers.png?url';
-import twitterImage from 'assets/sharing/twitter-regionale-cijfers.png?url';
-import Head from 'next/head';
+import { Regionaal } from 'types/data';
 
 export type SafetyRegion = {
   id: number;
@@ -95,11 +83,11 @@ export async function getStaticProps(): Promise<RegioStaticProps> {
   };
 }
 
-const RegioDataLoading = () => {
+export const RegioDataLoading: React.FC = () => {
   return (
     <span className={styles['safety-region-data-loading']}>
       <Warning />
-      {siteText.geen_selectie.text.translation}
+      {siteText.geen_selectie.text}
     </span>
   );
 };
@@ -108,9 +96,6 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
   const { municipalities, safetyRegions } = props;
 
   const router = useRouter();
-
-  const globalState = useContext(store);
-  const { state, dispatch } = globalState;
 
   const selectedRegio = useMemo(() => {
     const selectedRegioCode = router.query?.regio;
@@ -155,43 +140,17 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
     );
   };
 
-  useEffect(() => {
-    async function fetchData() {
-      if (selectedRegio && selectedRegio.code) {
-        if (!state[selectedRegio.code]) {
-          dispatch({ type: 'INIT_LOAD', payload: { id: selectedRegio.code } });
-          const response = await fetch(
-            `${process.env.REACT_APP_DATA_SRC}${selectedRegio.code}.json`
-          );
-          const result = await response.json();
-          dispatch({ type: 'LOAD_SUCCESS', payload: result });
-        }
+  const response = useSWR(() =>
+    selectedRegio?.code ? `/json/${selectedRegio.code}.json` : null
+  );
+  const data: Regionaal = response.data;
 
-        focusFirstHeading();
-      }
-    }
-
-    fetchData();
-  }, [dispatch, selectedRegio, state]);
+  useEffect(focusFirstHeading, [data]);
 
   return (
     <>
-      <Head>
-        <link
-          key="dc-type"
-          rel="dcterms:type"
-          href="https://standaarden.overheid.nl/owms/terms/statistieken"
-        />
-        <link
-          key="dc-type-title"
-          rel="dcterms:type"
-          href="https://standaarden.overheid.nl/owms/terms/statistieken"
-          title="statistieken"
-        />
-      </Head>
-
       <MaxWidth>
-        <LastUpdated />
+        <LastUpdated lastUpdated={data?.last_generated * 1000} />
         <div className={styles['regio-grid']}>
           <div className={styles['map-column']} ref={selectRegioWrapperRef}>
             <SelectMunicipality
@@ -215,273 +174,18 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
           </div>
 
           <div className={styles['panel-column']}>
-            <GraphContainer>
-              <GraphContent>
-                <GraphHeader
-                  Icon={Ziekenhuis}
-                  title={
-                    siteText.regionaal_ziekenhuisopnames_per_dag.title
-                      .translation
-                  }
-                  headingRef={contentRef}
-                  regio={selectedRegio?.name}
-                />
+            <IntakeHospital
+              selectedRegio={selectedRegio}
+              data={data}
+              contentRef={contentRef}
+            />
 
-                <p>
-                  {
-                    siteText.regionaal_ziekenhuisopnames_per_dag.text
-                      .translation
-                  }
-                </p>
-
-                {!selectedRegio && <RegioDataLoading />}
-
-                {selectedRegio && (
-                  <>
-                    {!state[selectedRegio?.code]?.intake_hospital_ma && (
-                      <LoadingPlaceholder />
-                    )}
-
-                    {state[selectedRegio?.code]?.intake_hospital_ma && (
-                      <>
-                        <BarScale
-                          min={0}
-                          max={100}
-                          value={
-                            state[selectedRegio.code].intake_hospital_ma
-                              .last_value.intake_hospital_ma
-                          }
-                          screenReaderText={
-                            siteText.regionaal_ziekenhuisopnames_per_dag
-                              .screen_reader_graph_content.translation
-                          }
-                          id="regio_opnames"
-                          gradient={[
-                            {
-                              color: '#69c253',
-                              value: 0,
-                            },
-                            {
-                              color: '#D3A500',
-                              value: 40,
-                            },
-                            {
-                              color: '#f35065',
-                              value: 90,
-                            },
-                          ]}
-                        />
-                        <DateReported
-                          datumsText={
-                            siteText.regionaal_ziekenhuisopnames_per_dag.datums
-                              .translation
-                          }
-                          dateUnix={
-                            state[selectedRegio?.code]?.intake_hospital_ma
-                              ?.last_value?.date_of_report_unix
-                          }
-                        />
-                      </>
-                    )}
-                  </>
-                )}
-              </GraphContent>
-
-              {selectedRegio && (
-                <Collapse
-                  openText={
-                    siteText.regionaal_ziekenhuisopnames_per_dag.open
-                      .translation
-                  }
-                  sluitText={
-                    siteText.regionaal_ziekenhuisopnames_per_dag.sluit
-                      .translation
-                  }
-                  piwikAction={selectedRegio.name}
-                  piwikName="Ziekenhuisopnames per dag in Amsterdam-Amstelland"
-                >
-                  <h4>
-                    {
-                      siteText.regionaal_ziekenhuisopnames_per_dag.fold_title
-                        .translation
-                    }
-                  </h4>
-                  <p>
-                    {
-                      siteText.regionaal_ziekenhuisopnames_per_dag.fold
-                        .translation
-                    }
-                  </p>
-                  <h4>
-                    {
-                      siteText.regionaal_ziekenhuisopnames_per_dag.graph_title
-                        .translation
-                    }
-                  </h4>
-                  {state[selectedRegio?.code]?.intake_hospital_ma?.values && (
-                    <LineChart
-                      values={state[
-                        selectedRegio?.code
-                      ]?.intake_hospital_ma?.values.map((value: any) => ({
-                        value: value.intake_hospital_ma,
-                        date: value.date_of_report_unix,
-                      }))}
-                    />
-                  )}
-                  <Metadata
-                    dataSource={
-                      siteText.regionaal_ziekenhuisopnames_per_dag.bron
-                    }
-                  />
-                </Collapse>
-              )}
-            </GraphContainer>
-
-            <GraphContainer>
-              <GraphContent>
-                <GraphHeader
-                  Icon={Getest}
-                  title={
-                    siteText.regionaal_positief_geteste_personen.title
-                      .translation
-                  }
-                  regio={selectedRegio?.name}
-                />
-
-                <p>
-                  {
-                    siteText.regionaal_positief_geteste_personen.text
-                      .translation
-                  }
-                </p>
-
-                {!selectedRegio && <RegioDataLoading />}
-
-                {selectedRegio && (
-                  <>
-                    {!state[selectedRegio?.code]
-                      ?.infected_people_delta_normalized && (
-                      <LoadingPlaceholder />
-                    )}
-                    {state[selectedRegio.code]
-                      ?.infected_people_delta_normalized && (
-                      <BarScale
-                        min={0}
-                        max={10}
-                        value={
-                          state[selectedRegio.code]
-                            .infected_people_delta_normalized.last_value
-                            .infected_people_delta_normalized
-                        }
-                        screenReaderText={
-                          siteText.regionaal_positief_geteste_personen
-                            .screen_reader_graph_content.translation
-                        }
-                        id="regio_infecties"
-                        gradient={[
-                          {
-                            color: '#3391CC',
-                            value: 0,
-                          },
-                        ]}
-                      />
-                    )}
-
-                    {state[selectedRegio?.code]?.infected_people_total && (
-                      <>
-                        <h3>
-                          {
-                            siteText.regionaal_positief_geteste_personen
-                              .metric_title.translation
-                          }{' '}
-                          <span style={{ color: '#01689b' }}>
-                            {formatDecimal(
-                              state[selectedRegio?.code]?.infected_people_total
-                                ?.last_value.infected_people_total
-                            )}
-                          </span>
-                        </h3>
-                        <DateReported
-                          datumsText={
-                            siteText.regionaal_positief_geteste_personen.datums
-                              .translation
-                          }
-                          dateUnix={
-                            state[selectedRegio?.code]
-                              ?.infected_people_delta_normalized?.last_value
-                              ?.date_of_report_unix
-                          }
-                          dateInsertedUnix={
-                            state[selectedRegio?.code]
-                              ?.infected_people_delta_normalized?.last_value
-                              ?.date_of_insertion_unix
-                          }
-                        />
-                      </>
-                    )}
-                  </>
-                )}
-              </GraphContent>
-
-              {selectedRegio && (
-                <Collapse
-                  openText={
-                    siteText.regionaal_positief_geteste_personen.open
-                      .translation
-                  }
-                  sluitText={
-                    siteText.regionaal_positief_geteste_personen.sluit
-                      .translation
-                  }
-                  piwikAction={selectedRegio.name}
-                  piwikName="Positief geteste mensen in Amsterdam-Amstelland"
-                >
-                  <h4>
-                    {
-                      siteText.regionaal_positief_geteste_personen.fold_title
-                        .translation
-                    }
-                  </h4>
-                  <p>
-                    {
-                      siteText.regionaal_positief_geteste_personen.fold
-                        .translation
-                    }
-                  </p>
-                  <h4>
-                    {
-                      siteText.regionaal_positief_geteste_personen.graph_title
-                        .translation
-                    }
-                  </h4>
-
-                  {state[selectedRegio?.code]?.infected_people_delta_normalized
-                    ?.values && (
-                    <LineChart
-                      values={state[
-                        selectedRegio.code
-                      ].infected_people_delta_normalized.values.map(
-                        (value: any) => ({
-                          value: value.infected_people_delta_normalized,
-                          date: value.date_of_report_unix,
-                        })
-                      )}
-                    />
-                  )}
-
-                  <Metadata
-                    dataSource={
-                      siteText.regionaal_positief_geteste_personen.bron
-                    }
-                  />
-                </Collapse>
-              )}
-            </GraphContainer>
+            <PostivelyTestedPeople selectedRegio={selectedRegio} data={data} />
           </div>
         </div>
         <ScreenReaderOnly>
           <button onClick={focusRegioSelect}>
-            {siteText.terug_naar_regio_selectie.text.translation}
+            {siteText.terug_naar_regio_selectie.text}
           </button>
         </ScreenReaderOnly>
       </MaxWidth>
