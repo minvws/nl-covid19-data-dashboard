@@ -44,7 +44,7 @@ function getOptions(
         data: values.map((value) => [value.date, value.value]),
         name: 'secondary',
         showInLegend: false,
-        color: '#666',
+        color: '#bbb',
         marker: {
           enabled: false,
         },
@@ -123,9 +123,6 @@ function getOptions(
           // @ts-ignore
           return formatNumber(this.value);
         },
-      },
-      accessibility: {
-        rangeDescription: 'Range: 2010 to 2017',
       },
     },
     title: {

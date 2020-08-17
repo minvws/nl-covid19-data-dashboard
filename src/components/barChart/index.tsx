@@ -5,10 +5,11 @@ import HighChartsReact from 'highcharts-react-official';
 interface IProps {
   data: Array<number | null>;
   keys: string[];
+  axisTitle: string;
 }
 
 const BarChart: React.FC<IProps> = (props) => {
-  const { data, keys } = props;
+  const { data, keys, axisTitle } = props;
 
   const total = data.reduce((mem, part) => {
     return (mem || 0) + (part || 0);
@@ -43,7 +44,7 @@ const BarChart: React.FC<IProps> = (props) => {
       yAxis: {
         gridLineColor: '#c4c4c4',
         title: {
-          text: 'Totaal aantal positief geteste mensen',
+          text: axisTitle,
         },
       },
       legend: {

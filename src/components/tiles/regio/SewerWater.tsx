@@ -12,6 +12,7 @@ import siteText from 'locale';
 
 import { Regionaal } from 'types/data';
 import { SafetyRegion } from 'pages/regio';
+import BarChart from 'components/barChart';
 
 interface IProps {
   data: Regionaal;
@@ -20,8 +21,8 @@ interface IProps {
 }
 
 export const SewerWater: React.FC<IProps> = ({ data }) => {
-  const text: typeof siteText.rioolwater_metingen =
-    siteText.rioolwater_metingen;
+  const text: typeof siteText.regionaal_rioolwater_metingen =
+    siteText.regionaal_rioolwater_metingen;
 
   return (
     <GraphContainer>
@@ -67,32 +68,45 @@ export const SewerWater: React.FC<IProps> = ({ data }) => {
         piwikName="Rioolwatermeting"
         piwikAction="regionaal"
       >
-        <h4>{text.fold_title}</h4>
-        <p>{text.fold}</p>
-
-        <h4>{text.graph_title}</h4>
-
-        {data?.average_sewer_installation_per_region?.values && (
-          <>
-            {data.average_sewer_installation_per_region.values.toString()}
-            <MultiDateLineChart
-              values={data?.average_sewer_installation_per_region?.values.map(
-                (value) => {
-                  return { ...value, date: value.date_unix };
-                }
-              )}
-              secondaryValues={data.results_per_sewer_installation_per_region?.values.map(
-                (installation) => {
-                  return installation.values.map((value) => {
+        {data?.average_sewer_installation_per_region?.values &&
+          data?.results_per_sewer_installation_per_region?.values && (
+            <>
+              <h4>{text.graph_title}</h4>
+              <MultiDateLineChart
+                values={data?.average_sewer_installation_per_region?.values.map(
+                  (value) => {
                     return { ...value, date: value.date_unix };
-                  });
-                }
-              )}
-            />
+                  }
+                )}
+                secondaryValues={data.results_per_sewer_installation_per_region?.values.map(
+                  (installation) => {
+                    return installation.values.map((value) => {
+                      return { ...value, date: value.date_unix };
+                    });
+                  }
+                )}
+              />
+              <h4>{text.bar_chart_title}</h4>
+              <BarChart
+                keys={[
+                  text.average,
+                  ...data.results_per_sewer_installation_per_region.values.map(
+                    (installation) => installation.rwzi_code
+                  ),
+                ]}
+                data={[
+                  data.average_sewer_installation_per_region.last_value.value ||
+                    null,
+                  ...data.results_per_sewer_installation_per_region.values.map(
+                    (installation) => installation.last_value.value || null
+                  ),
+                ]}
+                axisTitle={text.bar_chart_axis_title}
+              />
 
-            <Metadata dataSource={text.bron} />
-          </>
-        )}
+              <Metadata dataSource={text.bron} />
+            </>
+          )}
       </Collapse>
     </GraphContainer>
   );
