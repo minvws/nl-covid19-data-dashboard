@@ -95,6 +95,7 @@ export const PostivelyTestedPeople: React.FC = () => {
               data={age.values.map(
                 (value) => value.infected_per_agegroup_increase
               )}
+              axisTitle={text.graph_axis_title}
             />
             <Metadata dataSource={text.bron} />
           </>

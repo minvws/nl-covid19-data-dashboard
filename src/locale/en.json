@@ -100,6 +100,7 @@
     "open": "Verberg uitleg",
     "sluit": "Meer uitleg en data",
     "screen_reader_graph_content": "{{value}} positief geteste mensen per dag.",
+    "graph_axis_title": "Totaal aantal positief geteste mensen",
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -365,6 +366,26 @@
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     }
+  },
+  "regionaal_rioolwater_metingen": {
+    "title": "Rioolwatermeting",
+    "text": "Het aantal virusdeeltjes in een milliliter rioolwater, afkomstig van 28 locaties in Nederland. Het aantal meetpunten wordt in de komende weken verder uitgebreid naar meer dan 300 locaties.",
+    "datums": "Waarde van {{dateOfReport}}. Verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
+    "graph_title": "Verloop over tijd",
+    "fold_title": "Wat betekent dit?",
+    "fold": "In rioolwater kun je ziekteverwekkers zoals het nieuwe coronavirus meten omdat die met uitwerpselen (ontlasting) in het rioolwater komen. Op elke locatie wordt er eens per week, gedurende 24 uur steeds een beetje rioolwater genomen, dat noemen we een verzamelmonster. Het verzamelmonster wordt onderzocht. Dit onderzoek laat vrij snel zien hoeveel virusdeeltjes in het rioolwater zitten afkomstig uit uitwerpselen van besmette personen. Uit het huidige onderzoek kunnen nog geen conclusies worden getrokken. Het is de bedoeling dat het aantal meetpunten wordt uitgebreid van 28 naar meer dan 300 voor 1 september 2020. Pas als het onderzoek volledig loopt, kunnen hier conclusies aan worden verbonden.",
+    "open": "Verberg uitleg",
+    "sluit": "Meer uitleg en data",
+    "screen_reader_graph_content": "{{value}} virusdeeltjes in een milliliter rioolwater, afkomstig van 28 locaties in Nederland.",
+    "average": "Gemiddelde",
+    "bar_chart_title": "Laatste bekende waarde per RWZI locatie",
+    "bar_chart_axis_title": "Aantal virusdeeltjes in millimeter rioolwater",
+    "bron": {
+      "text": "RIVM Onderzoek rioolwater",
+      "href": "https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater"
+    },
+    "graph_average_label_text": "Gemiddelde waarde van RWZI-locaties",
+    "graph_secondary_label_text": "Waarde van individuele RWZI-locatie"
   },
   "terug_naar_regio_selectie": {
     "text": "Terug naar regio selectie"
