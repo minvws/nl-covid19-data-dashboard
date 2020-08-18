@@ -37,7 +37,7 @@ const Day = new Intl.DateTimeFormat(locale, {
 
 function formatDate(
   value: number | Date,
-  style?: 'long' | 'medium' | 'relative' | 'iso' | 'axis'
+  style?: 'long' | 'medium' | 'short' | 'relative' | 'iso' | 'axis'
 ): string {
   if (style === 'iso') return new Date(value).toISOString(); // '2020-07-23T10:01:16.000Z'
   if (style === 'long') return Long.format(value); // '23 juli 2020 om 12:01'
@@ -50,5 +50,6 @@ function formatDate(
     if (isYesterday(value)) return siteText.utils.date_yesterday;
   }
 
+  // short or relative
   return `${Day.format(value)} ${Month.format(value)}`; // '23 juli'
 }

@@ -13,7 +13,7 @@ if (process.browser) {
 
 export const pageview = (): void => {
   if (process.browser) {
-    if (window && window._paq) {
+    if (window?._paq?.push) {
       window._paq.push(['trackPageView']);
     } else {
       console.log('window object not found');
@@ -32,7 +32,7 @@ type EventTypes = {
 export function event(eventOptions: EventTypes): void {
   const { category, action, name, value, dimensions } = eventOptions;
   if (process.browser) {
-    if (window && window._paq) {
+    if (window?._paq?.push) {
       window._paq.push([
         'trackEvent',
         category,
