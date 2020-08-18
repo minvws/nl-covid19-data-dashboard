@@ -52,6 +52,7 @@ const BarChart: React.FC<IProps> = (props) => {
       },
       plotOptions: {
         series: {
+          minPointLength: 5,
           groupPadding: 0,
           color: '#3391CC',
         },
