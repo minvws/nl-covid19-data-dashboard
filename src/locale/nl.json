@@ -368,7 +368,7 @@
     }
   },
   "regionaal_rioolwater_metingen": {
-    "title": "Rioolwatermeting",
+    "title": "Rioolwatermetingen",
     "text": "Het aantal virusdeeltjes in een milliliter rioolwater, afkomstig van 28 locaties in Nederland. Het aantal meetpunten wordt in de komende weken verder uitgebreid naar meer dan 300 locaties.",
     "datums": "Waarde van {{dateOfReport}}. Verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
     "graph_title": "Verloop over tijd",

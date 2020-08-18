@@ -28,7 +28,11 @@ export const SewerWater: React.FC<IProps> = ({ data, selectedRegio }) => {
   return (
     <GraphContainer>
       <GraphContent>
-        <GraphHeader Icon={RioolwaterMonitoring} title={text.title} />
+        <GraphHeader
+          Icon={RioolwaterMonitoring}
+          title={text.title}
+          regio={selectedRegio?.name}
+        />
 
         <p>{text.text}</p>
 
