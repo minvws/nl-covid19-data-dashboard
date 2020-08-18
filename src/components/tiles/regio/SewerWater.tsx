@@ -6,7 +6,7 @@ import GraphContent from 'components/graphContent';
 import GraphHeader from 'components/graphHeader';
 import DateReported from 'components/dateReported';
 import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
-import MultiDateLineChart from 'components/lineChart/multiDateLine';
+import RegionalSewerWaterLineChart from 'components/lineChart/regionalSewerWaterLineChart';
 
 import siteText from 'locale';
 
@@ -28,7 +28,11 @@ export const SewerWater: React.FC<IProps> = ({ data, selectedRegio }) => {
   return (
     <GraphContainer>
       <GraphContent>
-        <GraphHeader Icon={RioolwaterMonitoring} title={text.title} />
+        <GraphHeader
+          Icon={RioolwaterMonitoring}
+          title={text.title}
+          regio={selectedRegio?.name}
+        />
 
         <p>{text.text}</p>
 
@@ -55,12 +59,10 @@ export const SewerWater: React.FC<IProps> = ({ data, selectedRegio }) => {
           <DateReported
             datumsText={text.datums}
             dateInsertedUnix={
-              data.average_sewer_installation_per_region.last_value
-                .date_measurement_unix
+              data.average_sewer_installation_per_region.last_value.week_unix
             }
             dateUnix={
-              data.average_sewer_installation_per_region.last_value
-                .date_measurement_unix
+              data.average_sewer_installation_per_region.last_value.week_unix
             }
           />
         )}
@@ -79,8 +81,8 @@ export const SewerWater: React.FC<IProps> = ({ data, selectedRegio }) => {
             data?.results_per_sewer_installation_per_region?.values && (
               <>
                 <h4>{text.graph_title}</h4>
-                <MultiDateLineChart
-                  values={data?.average_sewer_installation_per_region?.values.map(
+                <RegionalSewerWaterLineChart
+                  averageValues={data?.average_sewer_installation_per_region?.values.map(
                     (value) => {
                       return {
                         ...value,
@@ -89,15 +91,17 @@ export const SewerWater: React.FC<IProps> = ({ data, selectedRegio }) => {
                       };
                     }
                   )}
-                  secondaryValues={data.results_per_sewer_installation_per_region.values.map(
+                  allValues={data.results_per_sewer_installation_per_region.values.map(
                     (installation) => {
-                      return installation.values.map((value) => {
-                        return {
-                          ...value,
-                          value: value.rna_per_ml || 0,
-                          date: value.date_measurement_unix,
-                        };
-                      });
+                      return installation.values
+                        .map((value) => {
+                          return {
+                            ...value,
+                            value: value.rna_per_ml || 0,
+                            date: value.date_measurement_unix,
+                          };
+                        })
+                        .sort((a, b) => b.date - a.date);
                     }
                   )}
                   text={{

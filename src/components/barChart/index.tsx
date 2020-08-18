@@ -1,11 +1,9 @@
 import { useMemo } from 'react';
-import HighCharts from 'highcharts';
+import HighCharts, { XrangePointOptionsObject } from 'highcharts';
 import HighChartsReact from 'highcharts-react-official';
 
 interface IProps {
-  data: Array<
-    number | null | { y: number; color?: string; label?: string | boolean }
-  >;
+  data: XrangePointOptionsObject[];
   keys: string[];
   axisTitle: string;
 }
@@ -13,7 +11,7 @@ interface IProps {
 const BarChart: React.FC<IProps> = (props) => {
   const { data, keys, axisTitle } = props;
 
-  const options = useMemo(
+  const options = useMemo<HighCharts.Options>(
     () => ({
       chart: {
         type: 'bar',
@@ -24,10 +22,10 @@ const BarChart: React.FC<IProps> = (props) => {
         className: 'undefined',
         colorCount: 10,
         displayErrors: true,
-        margin: [null],
-        height: '80%',
+        margin: [],
+        height: data.length * 35 + 50,
       },
-      title: { text: null },
+      title: { text: '' },
       tooltip: {
         enabled: true,
         formatter: function (): string | false {
@@ -61,6 +59,7 @@ const BarChart: React.FC<IProps> = (props) => {
       series: [
         {
           data,
+          type: 'bar',
         },
       ],
     }),
