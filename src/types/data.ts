@@ -168,6 +168,7 @@ export interface AverageSewerInstallationPerRegion {
 
 export interface AverageSewerInstallationPerRegionLastValue {
   week_unix: number;
+  date_of_insertion_unix: number;
   vrcode: string;
   average: number;
 }

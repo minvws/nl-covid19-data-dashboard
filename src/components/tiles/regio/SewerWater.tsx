@@ -74,15 +74,14 @@ export const SewerWater: React.FC<IProps> = ({ data, selectedRegio }) => {
           <DateReported
             datumsText={text.datums}
             dateInsertedUnix={
-              data.average_sewer_installation_per_region.last_value.week_unix
+              data.average_sewer_installation_per_region.last_value
+                .date_of_insertion_unix
             }
             dateUnix={
               data.average_sewer_installation_per_region.last_value.week_unix
             }
           />
         )}
-
-        {!selectedRegio && <RegioDataLoading />}
       </GraphContent>
 
       {selectedRegio && (
