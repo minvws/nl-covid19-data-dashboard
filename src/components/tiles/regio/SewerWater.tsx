@@ -12,7 +12,7 @@ import siteText from 'locale';
 
 import { Regionaal } from 'types/data';
 import BarChart from 'components/barChart';
-import { RegioDataLoading } from 'pages/regio';
+import { SafetyRegion, RegioDataLoading } from 'pages/regio/index';
 
 interface IProps {
   data: Regionaal;
