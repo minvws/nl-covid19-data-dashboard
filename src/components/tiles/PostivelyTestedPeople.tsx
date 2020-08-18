@@ -29,6 +29,13 @@ export const PostivelyTestedPeople: React.FC = () => {
   const age: IntakeShareAgeGroups | undefined = state?.intake_share_age_groups;
   const total: InfectedPeopleTotal | undefined = state?.infected_people_total;
 
+  const barChartTotal: number = age?.values
+    ? age.values.reduce((mem: number, part): number => {
+        const amount = part.infected_per_agegroup_increase || 0;
+        return mem + ((amount as number) || 0);
+      }, 0)
+    : 0;
+
   return (
     <GraphContainer>
       <GraphContent>
@@ -92,9 +99,16 @@ export const PostivelyTestedPeople: React.FC = () => {
           <>
             <BarChart
               keys={['0 tot 20', '20 tot 40', '40 tot 60', '60 tot 80', '80+']}
-              data={age.values.map(
-                (value) => value.infected_per_agegroup_increase
-              )}
+              data={age.values.map((value) => ({
+                y: value.infected_per_agegroup_increase || 0,
+                label: value?.infected_per_agegroup_increase
+                  ? `${(
+                      ((value.infected_per_agegroup_increase as number) * 100) /
+                      barChartTotal
+                    ).toFixed(0)}%`
+                  : false,
+              }))}
+              axisTitle={text.graph_axis_title}
             />
             <Metadata dataSource={text.bron} />
           </>

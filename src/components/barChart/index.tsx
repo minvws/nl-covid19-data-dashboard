@@ -1,20 +1,17 @@
 import { useMemo } from 'react';
-import HighCharts from 'highcharts';
+import HighCharts, { XrangePointOptionsObject } from 'highcharts';
 import HighChartsReact from 'highcharts-react-official';
 
 interface IProps {
-  data: Array<number | null>;
+  data: XrangePointOptionsObject[];
   keys: string[];
+  axisTitle: string;
 }
 
 const BarChart: React.FC<IProps> = (props) => {
-  const { data, keys } = props;
+  const { data, keys, axisTitle } = props;
 
-  const total = data.reduce((mem, part) => {
-    return (mem || 0) + (part || 0);
-  }, 0);
-
-  const options = useMemo(
+  const options = useMemo<HighCharts.Options>(
     () => ({
       chart: {
         type: 'bar',
@@ -25,15 +22,19 @@ const BarChart: React.FC<IProps> = (props) => {
         className: 'undefined',
         colorCount: 10,
         displayErrors: true,
-        margin: [null],
-        height: '80%',
+        margin: [],
+        height: data.length * 35 + 50,
       },
-      title: { text: null },
+      title: { text: '' },
       tooltip: {
         enabled: true,
-        formatter: function (): string {
+        formatter: function (): string | false {
           // @ts-ignore
-          return `${((this.y * 100) / total).toFixed(0)}%`;
+          if (this.point.label) {
+            // @ts-ignore
+            return this.point.label;
+          }
+          return false;
         },
       },
       credits: { enabled: false },
@@ -43,7 +44,7 @@ const BarChart: React.FC<IProps> = (props) => {
       yAxis: {
         gridLineColor: '#c4c4c4',
         title: {
-          text: 'Totaal aantal positief geteste mensen',
+          text: axisTitle,
         },
       },
       legend: {
@@ -51,6 +52,7 @@ const BarChart: React.FC<IProps> = (props) => {
       },
       plotOptions: {
         series: {
+          minPointLength: 5,
           groupPadding: 0,
           color: '#3391CC',
         },
@@ -58,10 +60,11 @@ const BarChart: React.FC<IProps> = (props) => {
       series: [
         {
           data,
+          type: 'bar',
         },
       ],
     }),
-    [data, keys, total]
+    [data, keys, axisTitle]
   );
 
   return <HighChartsReact highcharts={HighCharts} options={options} />;
