@@ -8,9 +8,7 @@ import formatNumber from 'utils/formatNumber';
 import formatDate from 'utils/formatDate';
 import { Value } from 'types/data';
 
-interface TranslationStrings {
-  [key: string]: string;
-}
+type TranslationStrings = Record<string, string>;
 
 type MultiDateLineChartProps = {
   values: Value[];
