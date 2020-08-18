@@ -3,20 +3,15 @@ import HighCharts from 'highcharts';
 import HighChartsReact from 'highcharts-react-official';
 
 interface IProps {
-  data: Array<number | null | { y: number; color: string }>;
+  data: Array<
+    number | null | { y: number; color?: string; label?: string | boolean }
+  >;
   keys: string[];
   axisTitle: string;
 }
 
 const BarChart: React.FC<IProps> = (props) => {
   const { data, keys, axisTitle } = props;
-
-  const total = data.reduce((mem: number, part): number => {
-    if (typeof part !== 'number') {
-      return mem;
-    }
-    return mem + ((part as number) || 0);
-  }, 0);
 
   const options = useMemo(
     () => ({
@@ -36,11 +31,12 @@ const BarChart: React.FC<IProps> = (props) => {
       tooltip: {
         enabled: true,
         formatter: function (): string | false {
-          if (!total) {
-            return false;
-          }
           // @ts-ignore
-          return `${((this.y * 100) / total).toFixed(0)}%`;
+          if (this.point.label) {
+            // @ts-ignore
+            return this.point.label;
+          }
+          return false;
         },
       },
       credits: { enabled: false },
@@ -68,7 +64,7 @@ const BarChart: React.FC<IProps> = (props) => {
         },
       ],
     }),
-    [data, keys, total]
+    [data, keys, axisTitle]
   );
 
   return <HighChartsReact highcharts={HighCharts} options={options} />;

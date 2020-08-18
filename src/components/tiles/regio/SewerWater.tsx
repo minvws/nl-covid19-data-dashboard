@@ -13,6 +13,8 @@ import siteText from 'locale';
 import { Regionaal } from 'types/data';
 import BarChart from 'components/barChart';
 import { SafetyRegion, RegioDataLoading } from 'pages/regio/index';
+import formatDate from 'utils/formatDate';
+import formatNumber from 'utils/formatNumber';
 
 interface IProps {
   data: Regionaal;
@@ -117,11 +119,28 @@ export const SewerWater: React.FC<IProps> = ({ data, selectedRegio }) => {
                         data.average_sewer_installation_per_region.last_value
                           .average,
                       color: '#3391CC',
+                      label: `${formatDate(
+                        data.average_sewer_installation_per_region.last_value
+                          .week_unix * 1000,
+                        'short'
+                      )}: ${formatNumber(
+                        data.average_sewer_installation_per_region.last_value
+                          .average
+                      )}`,
                     },
                     ...data.results_per_sewer_installation_per_region.values.map(
                       (installation) => ({
-                        y: installation.last_value.rna_per_ml,
+                        y: installation?.last_value?.rna_per_ml,
                         color: '#C1C1C1',
+                        label: installation?.last_value
+                          ? `${formatDate(
+                              installation.last_value.date_measurement_unix *
+                                1000,
+                              'short'
+                            )}: ${formatNumber(
+                              installation.last_value.rna_per_ml
+                            )}`
+                          : false,
                       })
                     ),
                   ]}
