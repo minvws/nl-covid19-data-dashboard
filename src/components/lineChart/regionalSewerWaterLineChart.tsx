@@ -131,7 +131,7 @@ function getOptions(
       borderColor: '#01689B',
       borderRadius: 0,
       formatter: function (): false | string {
-        if (this.series.name !== 'average') {
+        if (this.series.name !== text.average_label_text) {
           return false;
         }
         return `${formatDate(this.x * 1000)}: ${formatNumber(this.y)}`;
