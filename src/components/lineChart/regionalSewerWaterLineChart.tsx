@@ -6,26 +6,29 @@ import ChartTimeControls from 'components/chartTimeControls';
 
 import formatNumber from 'utils/formatNumber';
 import formatDate from 'utils/formatDate';
-import { Value } from 'types/data';
+
+interface Value {
+  date: number;
+  value: number | undefined | null;
+}
 
 type TranslationStrings = Record<string, string>;
 
-type MultiDateLineChartProps = {
-  values: Value[];
-  secondaryValues: Value[][];
-  signaalwaarde?: number;
+type RegionalSewerWaterLineChartProps = {
+  averageValues: Value[];
+  allValues: Value[][];
   text: TranslationStrings;
 };
 
 function getOptions(
-  values: Value[],
-  secondaryValues: Value[][] | undefined,
+  averageValues: Value[],
+  allValues: Value[][],
   text: TranslationStrings
 ): Highcharts.Options {
   const series: SeriesLineOptions[] = [
     {
       type: 'line',
-      data: values.map((value) => [value.date, value.value]),
+      data: averageValues.map((value) => [value.date, value.value]),
       name: text.average_label_text,
       showInLegend: true,
       color: '#3391CC',
@@ -40,28 +43,26 @@ function getOptions(
     },
   ];
 
-  if (secondaryValues) {
-    secondaryValues.forEach((values, index) => {
-      series.unshift({
-        type: 'line',
-        data: values.map((value) => [value.date, value.value]),
-        name: text.secondary_label_text,
-        showInLegend: index === 0,
-        color: '#D2D2D2',
-        marker: {
+  allValues.forEach((values, index) => {
+    series.unshift({
+      type: 'line',
+      data: values.map((value) => [value.date, value.value]),
+      name: text.secondary_label_text,
+      showInLegend: index === 0,
+      color: '#D2D2D2',
+      marker: {
+        enabled: false,
+      },
+      states: {
+        hover: {
           enabled: false,
         },
-        states: {
-          hover: {
-            enabled: false,
-          },
-          inactive: {
-            opacity: 1,
-          },
+        inactive: {
+          opacity: 1,
         },
-      });
+      },
     });
-  }
+  });
 
   const options: Highcharts.Options = {
     chart: {
@@ -99,7 +100,7 @@ function getOptions(
       title: {
         text: null,
       },
-      categories: values.map((value) => value?.date.toString()),
+      categories: averageValues.map((value) => value?.date.toString()),
       labels: {
         align: 'right',
         // types say `rotation` needs to be a number,
@@ -164,9 +165,9 @@ const filterValues = (values: Value[], days: number): Value[] => {
     .map((value: Value): Value => ({ ...value }));
 };
 
-const MultiDateLineChart: React.FC<MultiDateLineChartProps> = ({
-  values,
-  secondaryValues,
+const RegionalSewerWaterLineChart: React.FC<RegionalSewerWaterLineChartProps> = ({
+  averageValues,
+  allValues,
   text,
 }) => {
   const [timeframe, setTimeframe] = useState('month');
@@ -176,23 +177,23 @@ const MultiDateLineChart: React.FC<MultiDateLineChartProps> = ({
     const month = 30;
 
     if (timeframe === 'all') {
-      return getOptions(values, secondaryValues, text);
+      return getOptions(averageValues, allValues, text);
     }
     if (timeframe === 'month') {
       return getOptions(
-        filterValues(values, month),
-        filterSecondaryValues(secondaryValues, month),
+        filterValues(averageValues, month),
+        filterSecondaryValues(allValues, month),
         text
       );
     }
     if (timeframe === 'week') {
       return getOptions(
-        filterValues(values, week),
-        filterSecondaryValues(secondaryValues, week),
+        filterValues(averageValues, week),
+        filterSecondaryValues(allValues, week),
         text
       );
     }
-  }, [values, secondaryValues, text, timeframe]);
+  }, [averageValues, allValues, text, timeframe]);
 
   return (
     <>
@@ -205,4 +206,4 @@ const MultiDateLineChart: React.FC<MultiDateLineChartProps> = ({
   );
 };
 
-export default MultiDateLineChart;
+export default RegionalSewerWaterLineChart;
