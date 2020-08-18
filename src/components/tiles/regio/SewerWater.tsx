@@ -93,13 +93,15 @@ export const SewerWater: React.FC<IProps> = ({ data, selectedRegio }) => {
                   )}
                   allValues={data.results_per_sewer_installation_per_region.values.map(
                     (installation) => {
-                      return installation.values.map((value) => {
-                        return {
-                          ...value,
-                          value: value.rna_per_ml || 0,
-                          date: value.date_measurement_unix,
-                        };
-                      });
+                      return installation.values
+                        .map((value) => {
+                          return {
+                            ...value,
+                            value: value.rna_per_ml || 0,
+                            date: value.date_measurement_unix,
+                          };
+                        })
+                        .sort((a, b) => b.date - a.date);
                     }
                   )}
                   text={{
