@@ -1,8 +1,6 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import Highcharts, { SeriesLineOptions } from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-
-import ChartTimeControls from 'components/chartTimeControls';
 
 import formatNumber from 'utils/formatNumber';
 import formatDate from 'utils/formatDate';
@@ -32,8 +30,15 @@ function getOptions(
       name: text.average_label_text,
       showInLegend: true,
       color: '#3391CC',
+      allowPointSelect: false,
       marker: {
+        symbol: 'circle',
         enabled: false,
+      },
+      events: {
+        legendItemClick: function () {
+          return false;
+        },
       },
       states: {
         inactive: {
@@ -50,8 +55,12 @@ function getOptions(
       name: text.secondary_label_text,
       showInLegend: index === 0,
       color: '#D2D2D2',
+      allowPointSelect: false,
       marker: {
         enabled: false,
+      },
+      events: {
+        legendItemClick: () => false,
       },
       states: {
         hover: {
@@ -79,6 +88,9 @@ function getOptions(
     legend: {
       itemWidth: 300,
       reversed: true,
+      itemHoverStyle: {
+        color: '#666',
+      },
       itemStyle: {
         color: '#666',
         cursor: 'pointer',
@@ -149,61 +161,16 @@ function getOptions(
   return options;
 }
 
-const filterSecondaryValues = (
-  secondaryValues: Value[][],
-  days: number
-): Value[][] => {
-  return secondaryValues.map((values: Value[]) => filterValues(values, days));
-};
-
-const filterValues = (values: Value[], days: number): Value[] => {
-  const minimumDate = Math.floor(
-    new Date().getTime() / 1000 - days * 24 * 60 * 60
-  );
-  return values
-    .filter((value: Value) => value.date >= minimumDate)
-    .map((value: Value): Value => ({ ...value }));
-};
-
 const RegionalSewerWaterLineChart: React.FC<RegionalSewerWaterLineChartProps> = ({
   averageValues,
   allValues,
   text,
 }) => {
-  const [timeframe, setTimeframe] = useState('month');
-
   const chartOptions = useMemo(() => {
-    const week = 7;
-    const month = 30;
+    return getOptions(averageValues, allValues, text);
+  }, [averageValues, allValues, text]);
 
-    if (timeframe === 'all') {
-      return getOptions(averageValues, allValues, text);
-    }
-    if (timeframe === 'month') {
-      return getOptions(
-        filterValues(averageValues, month),
-        filterSecondaryValues(allValues, month),
-        text
-      );
-    }
-    if (timeframe === 'week') {
-      return getOptions(
-        filterValues(averageValues, week),
-        filterSecondaryValues(allValues, week),
-        text
-      );
-    }
-  }, [averageValues, allValues, text, timeframe]);
-
-  return (
-    <>
-      <HighchartsReact highcharts={Highcharts} options={chartOptions} />
-      <ChartTimeControls
-        timeframe={timeframe}
-        onChange={(evt) => setTimeframe(evt.target.value)}
-      />
-    </>
-  );
+  return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;
 };
 
 export default RegionalSewerWaterLineChart;
