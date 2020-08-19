@@ -43,7 +43,7 @@ function NationalLayout(props: WithChildren) {
   const router = useRouter();
   const isLargeScreen = useMediaQuery('(min-width: 1000px)', true);
   const showAside = isLargeScreen || router.route === '/landelijk';
-  const showContent = isLargeScreen || router.route === '/landelijk/[metric]';
+  const showContent = isLargeScreen || router.route !== '/landelijk';
 
   return (
     <div className="national-layout">
