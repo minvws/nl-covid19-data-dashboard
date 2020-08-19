@@ -91,6 +91,8 @@ export const SewerWater: React.FC<IProps> = ({ data, selectedRegio }) => {
           piwikName="Rioolwatermeting"
           piwikAction="regionaal"
         >
+          <h4>{text.fold_title}</h4>
+          <p>{text.fold}</p>
           {data?.average_sewer_installation_per_region?.values &&
             data?.results_per_sewer_installation_per_region?.values && (
               <>

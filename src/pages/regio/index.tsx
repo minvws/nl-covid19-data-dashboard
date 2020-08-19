@@ -151,7 +151,10 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
   return (
     <>
       <MaxWidth>
-        <LastUpdated lastUpdated={data?.last_generated * 1000} />
+        <LastUpdated
+          lastUpdated={data?.last_generated * 1000}
+          loadingText={selectedRegio ? null : '\u00A0'}
+        />
         <div className={styles['regio-grid']}>
           <div className={styles['map-column']} ref={selectRegioWrapperRef}>
             <SelectMunicipality
