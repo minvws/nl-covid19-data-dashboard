@@ -3,11 +3,10 @@ import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import useSWR from 'swr';
 
-import Layout from 'components/layout';
 import MaxWidth from 'components/maxWidth';
 import LastUpdated from 'components/lastUpdated';
 import Warning from 'assets/warn.svg';
-import { FunctionComponentWithLayout } from 'components/layout';
+import { getLayout, FCWithLayout } from 'components/layout';
 import ScreenReaderOnly from 'components/screenReaderOnly';
 import SelectMunicipality from 'components/selectMunicipality';
 import IntakeHospital from 'components/tiles/regio/IntakeHospital';
@@ -93,7 +92,7 @@ export const RegioDataLoading: React.FC = () => {
   );
 };
 
-const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
+const Regio: FCWithLayout<RegioProps> = (props) => {
   const { municipalities, safetyRegions } = props;
 
   const router = useRouter();
@@ -196,7 +195,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
   );
 };
 
-Regio.getLayout = Layout.getLayout({
+Regio.getLayout = getLayout({
   ...siteText.regionaal_metadata,
   openGraphImage,
   twitterImage,

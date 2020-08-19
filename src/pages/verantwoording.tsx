@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-import Layout, { FunctionComponentWithLayout } from 'components/layout';
+import { getLayout, FCWithLayout } from 'components/layout';
 import MaxWidth from 'components/maxWidth';
 
 import styles from './over.module.scss';
@@ -42,7 +42,7 @@ export async function getStaticProps(): Promise<StaticProps> {
   return { props: { text } };
 }
 
-const Verantwoording: FunctionComponentWithLayout<{ text: any }> = (props) => {
+const Verantwoording: FCWithLayout<{ text: any }> = (props) => {
   const { text } = props;
 
   return (
@@ -85,7 +85,7 @@ const Verantwoording: FunctionComponentWithLayout<{ text: any }> = (props) => {
   );
 };
 
-Verantwoording.getLayout = Layout.getLayout({
+Verantwoording.getLayout = getLayout({
   ...siteText.verantwoording_metadata,
   openGraphImage,
   twitterImage,

@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-import Layout, { FunctionComponentWithLayout } from 'components/layout';
+import { getLayout, FCWithLayout } from 'components/layout';
 import MaxWidth from 'components/maxWidth';
 
 import text from 'locale';
@@ -15,7 +15,7 @@ interface IVraagEnAntwoord {
   antwoord: string;
 }
 
-const Over: FunctionComponentWithLayout = () => {
+const Over: FCWithLayout = () => {
   return (
     <>
       <Head>
@@ -59,7 +59,7 @@ const Over: FunctionComponentWithLayout = () => {
   );
 };
 
-Over.getLayout = Layout.getLayout({
+Over.getLayout = getLayout({
   ...text.over_metadata,
   openGraphImage,
   twitterImage,

@@ -1,3 +1,5 @@
+@import './variables.scss';
+
 .container {
   display: flex;
   flex-direction: column-reverse;
@@ -60,3 +62,46 @@
 
 /* Remove outline from programatically focussed elements. */
 [tabindex="-1"] { outline: none }
+
+
+.national-layout {
+  display: flex;
+
+  > aside {
+    padding: 2em 1em;
+    flex-basis: 100%; 
+  }
+  > div {
+    background: $page-background;
+    padding: 2em 1em;
+    flex-basis: 100%; 
+  }
+}
+
+@media (min-width: 1000px) {
+  .national-layout > aside {
+    flex: 1 0 auto;
+    max-width: 30em;
+  }
+  .national-layout > div {
+    flex: 3 0 auto;
+  }
+}
+
+.national-aside {
+  background: white;
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      padding: 1em 0;
+    }
+
+    li:not(:last-of-type) {
+      border-bottom: 2px solid lightgrey;
+    }
+  }
+}

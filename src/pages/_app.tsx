@@ -30,7 +30,8 @@ const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
 function MyApp(props: IProps): React.ReactElement {
   const { Component, pageProps } = props;
-  const getLayout = Component.getLayout || ((page: any) => page);
+  const page = (page: any) => page;
+  const getLayout = Component.getLayout || page;
 
   useEffect(() => {
     const handleRouteChange = () => piwik.pageview();
