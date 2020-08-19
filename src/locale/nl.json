@@ -481,7 +481,7 @@
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
     "graph_title": "Verloop over tijd",
     "fold_title": "Wat betekent dit?",
-    "fold": "In rioolwater kun je ziekteverwekkers zoals het nieuwe coronavirus meten, omdat die met ontlasting via de wc in het rioolwater komen. Op elke locatie testen onderzoekers van het RIVM eens per week rioolwater dat over 24 uur verzameld is. Dit onderzoek laat zien hoeveel virusdeeltjes in het rioolwater zitten. Niet alle besmette personen scheiden het virus ook uit, de virusdeeltjes zijn dus afkomstig uit ontlasting van een deel van de besmette personen. In het huidige onderzoek kunnen trends in aantallen virusdeeltjes, zoals een stijging of daling, worden gezien. Het is de bedoeling dat het aantal meetpunten vanaf september wordt uitgebreid naar meer dan 300. Pas als het onderzoek volledig loopt, kunnen hier conclusies aan worden verbonden.",
+    "fold": "Dit getal laat zien hoeveel virusdeeltjes er zijn gevonden in het rioolwater in een bepaalde regio. Er is meer onderzoek nodig om de waarden per regio betrouwbaar met elkaar te vergelijken. Het weekgemiddelde is altijd op maandag berekend. Voor meer informatie zie cijferverantwoording.",
     "open": "Verberg uitleg",
     "sluit": "Meer uitleg en data",
     "screen_reader_graph_content": "{{value}} virusdeeltjes in een milliliter rioolwater, afkomstig van 28 locaties in Nederland.",
