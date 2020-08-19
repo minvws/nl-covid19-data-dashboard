@@ -126,7 +126,7 @@ const LineChart: React.FC<LineChartProps> = ({
   signaalwaarde,
   timeframeOptions,
 }) => {
-  const [timeframe, setTimeframe] = useState<TimeframeOption>('month');
+  const [timeframe, setTimeframe] = useState<TimeframeOption>('5weeks');
 
   const chartOptions = useMemo(() => {
     const filteredValues = getFilteredValues<Value>(
@@ -138,7 +138,7 @@ const LineChart: React.FC<LineChartProps> = ({
   }, [values, timeframe, signaalwaarde]);
 
   if (!timeframeOptions) {
-    timeframeOptions = ['all', 'month', 'week'];
+    timeframeOptions = ['all', '5weeks', 'week'];
   }
 
   return (

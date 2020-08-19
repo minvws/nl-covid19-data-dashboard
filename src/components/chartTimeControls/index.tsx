@@ -3,7 +3,7 @@ import styles from './chartTimeControls.module.scss';
 
 import text from 'locale';
 
-export type TimeframeOption = 'all' | 'month' | 'week';
+export type TimeframeOption = 'all' | '5weeks' | 'week';
 
 interface IProps {
   timeframe: string;
@@ -17,7 +17,7 @@ const ChartTimeControls: React.FC<IProps> = ({
   onChange,
 }) => {
   if (!timeframeOptions) {
-    timeframeOptions = ['all', 'month', 'week'];
+    timeframeOptions = ['all', '5weeks', 'week'];
   }
 
   const id = useMemo(() => Math.random().toString(36).substr(2), []);

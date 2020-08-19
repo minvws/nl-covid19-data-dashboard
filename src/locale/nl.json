@@ -468,7 +468,8 @@
     "time_controls": {
       "all": "Toon alles",
       "month": "Laatste maand",
-      "week": "Laatste week"
+      "week": "Laatste week",
+      "5weeks": "Laatste 5 weken"
     }
   },
   "utils": {

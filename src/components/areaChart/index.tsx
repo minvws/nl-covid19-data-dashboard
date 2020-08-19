@@ -182,7 +182,7 @@ const AreaChart: React.FC<AreaChartProps> = (props) => {
     });
   }, [data]);
 
-  const [timeframe, setTimeframe] = useState<TimeframeOption>('month');
+  const [timeframe, setTimeframe] = useState<TimeframeOption>('5weeks');
 
   const chartOptions = useMemo(() => {
     const getOptionsThunk = (rangeData: TRange[], lineData: TLine[]) =>

@@ -78,7 +78,7 @@ export const SuspectedPatients: React.FC = () => {
         {data && (
           <>
             <LineChart
-              timeframeOptions={['all', 'month']}
+              timeframeOptions={['all', '5weeks']}
               values={data.values.map((value) => ({
                 value: value.incidentie,
                 date: value.week_unix,
