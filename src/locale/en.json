@@ -136,13 +136,13 @@
     "graph_title": "Progression over time",
     "open": "Hide explanation",
     "sluit": "More explanation and data",
-    "rangeLegendLabel": "Onzekerheidsmarge",
+    "rangeLegendLabel": "Confidence interval",
     "lineLegendLabel": "Effective R",
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     },
-    "legenda_r": "De effectieve R is een schatting. Voor recente R schattingen is de betrouwbaarheid niet groot, daarom loopt de R-lijn niet door in de laatste twee weken.",
+    "legenda_r": "The reproduction number is not an exact value but a reliable estimate. Reproduction numbers (R) using data from less than two weeks ago are not reliable, therefore, the line depicting R stops at a date two weeks in the past. ",
     "legenda_marge": "The confidence interval shows the range between which the number R falls. This is updated on a weekly basis."
   },
   "overige_gegevens": {
@@ -246,7 +246,7 @@
   },
   "rioolwater_metingen": {
     "title": "Waste water testing",
-    "text": "Het aantal virusdeeltjes in een milliliter rioolwater, afkomstig van 28 locaties in Nederland. Het aantal meetpunten wordt in de komende weken verder uitgebreid naar meer dan 300 locaties.",
+    "text": "Number of viral particles in one milliliter of wastewater, collected from about 80 locations in the Netherlands. The national value is based on the total number of viral particles that is found in a week, divided by the number of locations where the data is collected. From september onwards, the number of sampling locations will be increased to more than 300.",
     "datums": "Value of  {{dateOfReport}}. Obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
     "graph_title": "Progression over time",
     "fold_title": "What does this mean?",
@@ -420,7 +420,7 @@
       },
       {
         "cijfer": "Wastewater testing",
-        "verantwoording": "In rioolwater kun je ziekteverwekkers zoals het nieuwe coronavirus meten omdat die met uitwerpselen (ontlasting) in het rioolwater komen. Onderzoekers testen eens per week rioolwater dat over 24 uur verzameld is. Dit onderzoek laat vrij snel zien hoeveel virusdeeltjes in het rioolwater zitten afkomstig uit uitwerpselen van besmette personen. Uit het huidige onderzoek kunnen nog geen conclusies worden getrokken. Het is de bedoeling dat het aantal meetpunten wordt uitgebreid van 28 naar meer dan 300 voor 1 september 2020. Pas als het onderzoek volledig loopt, kunnen hier conclusies aan worden verbonden. {{whitespace}} In de grafiek zie je op de Y-as het aantal virusdeeltjes in een milliliter rioolwater afkomstig van 28 locaties in Nederland. Op de X-as zie je de data waarop het materiaal is verzameld uit het rioolwater. De lijn geeft de hoeveelheid virusdeeltjes per milliliter rioolwater weer. De gevulde cirkels in de lijn geven aan op welk moment het genetisch materiaal voor de test is verzameld uit het rioolwater. Deze informatie wordt wekelijks (meestal op dinsdag) beschikbaar gesteld door het RIVM en als Excel-bestand aangeleverd bij het ministerie van VWS. Deze excel wordt omgezet naar een CSV om in te lezen. Het bronbestand rapporteert over weeknummers. De weeknummers uit het bestand worden omgezet naar de datum van de maandag van de betreffende week voor weergave op het dashboard. Het RIVM werkt toe naar het als open data beschikbaar van deze informatie."
+        "verantwoording": "Wastewater contains human excrement that contains pathogens (viruses and bacteria that can make people sick). Once a week at each location, researchers test samples of wastewater collected over a period of 24 hours. These tests detect the presence of coronavirus particles in wastewater originating from the excrement of people with COVID-19. The research so far do not allow us to draw conclusions. The number of sampling points will be increased from the current 28 to more than 300. Only when testing is taking place on this larger scale, will it be possible to draw conclusions based on the findings."
       },
       {
         "cijfer": "“Value of ” and “Obtained on”",
@@ -433,36 +433,36 @@
     ]
   },
   "error_metadata": {
-    "title": "COVID-19 Dashboard foutmelding | Rijksoverheid.nl"
+    "title": "COVID-19 Dashboard error message | Government.nl"
   },
   "nationaal_metadata": {
-    "title": "Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
+    "title": "Dashboard Coronavirus COVID-19 | Government.nl",
     "description": "Information on the development of the coronavirus in the Netherlands.",
-    "url": "https://coronadashboard.rijksoverheid.nl"
+    "url": "https://coronadashboard.government.nl"
   },
   "notfound_metadata": {
-    "title": "Pagina kan niet gevonden worden | Rijksoverheid.nl"
+    "title": "Page cannot be found | Government.nl"
   },
   "over_metadata": {
-    "title": "Over het Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
+    "title": "About the Coronavirus COVID-19 Dashboard | Government.nl",
     "description": "Information on the development of the coronavirus in the Netherlands.",
-    "url": "https://coronadashboard.rijksoverheid.nl/over"
+    "url": "https://coronadashboard.government.nl/over"
   },
   "regionaal_metadata": {
-    "title": "Regionaal Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
+    "title": "Regional Dashboard Coronavirus COVID-19 | Government.nl",
     "description": "Information on the development of the coronavirus in the Netherlands.",
-    "url": "https://coronadashboard.rijksoverheid.nl/regio"
+    "url": "https://coronadashboard.government.nl/regio"
   },
   "verantwoording_metadata": {
-    "title": "Cijferverantwoording Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
+    "title": "Explanation of data Coronavirus COVID-19 Dashboard | Government.nl",
     "description": "Information on the development of the coronavirus in the Netherlands.",
-    "url": "https://coronadashboard.rijksoverheid.nl/verantwoording"
+    "url": "https://coronadashboard.government.nl/verantwoording"
   },
   "metadata": {
     "description": "Information on the development of the coronavirus in the Netherlands.",
-    "titel": "COVID-19 Dashboard foutmelding | Rijksoverheid.nl",
-    "title": "Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
-    "url": "https://coronadashboard.rijksoverheid.nl"
+    "titel": "COVID-19 Dashboard error message | Government.nl",
+    "title": "Dashboard Coronavirus COVID-19 | Government.nl",
+    "url": "https://coronadashboard.government.nl"
   },
   "charts": {
     "time_controls": {
@@ -477,17 +477,17 @@
   },
   "regionaal_rioolwater_metingen": {
     "title": "Waste water testing",
-    "text": "Number of viral particles in one milliliter of wastewater, collected from 28 locations in the Netherlands. Over the next few weeks, the number of sampling locations will be increased to more than 300.",
+    "text": "Number of viral particles in one milliliter of wastewater, collected from locations in the safety region. This regional number is based on the total number of viral particles that is found in a week, divided by the number of locations where the data is collected.",
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis. ",
     "graph_title": "Progression over time",
     "fold_title": "What does this mean?",
-    "fold": "Wastewater contains human excrement that contains pathogens (viruses and bacteria that can make people sick). Once a week at each location, researchers test samples of wastewater collected over a period of 24 hours. These tests detect the presence of coronavirus particles in wastewater originating from the excrement of people with COVID-19. The research so far do not allow us to draw conclusions. The number of sampling points will be increased from the current 28 to more than 300. Only when testing is taking place on this larger scale, will it be possible to draw conclusions based on the findings.",
+    "fold": "This number shows how many viral particles were found in the waste water of a certain region. More research is required to be able to compare the values of the regions. The weekly average is always calculated on monday. For more information please see the explanation of data page. ",
     "open": "Hide explanation",
     "sluit": "More explanation and data",
     "screen_reader_graph_content": "{{value}} viral particles in one milliliter of wastewater, collected from 28 locations in the Netherlands.",
     "average": "average",
     "bar_chart_title": "Last known value per RWZI location",
-    "bar_chart_axis_title": "Number of viral particles in milliliter waste water",
+    "bar_chart_axis_title": "Number of viral particles in one milliliter of waste water",
     "bron": {
       "text": "RIVM Research waste water",
       "href": "https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater"
