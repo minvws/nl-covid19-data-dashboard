@@ -22,6 +22,22 @@ export function getNationalLayout() {
   };
 }
 
+/*
+ * NationalLayout is a composition of persistent layouts.
+ *
+ * ## States
+ *
+ * ### Mobile
+ * - /landelijk -> only show aside
+ * - /landelijk/[metric] -> only show content (children)
+ *
+ * ### Desktop
+ * - /landelijk -> shows aside and content (children)
+ * - /landelijk/[metric] -> shows aside and content (children)
+ *
+ * More info on persistent layouts:
+ * https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
+ */
 function NationalLayout(props: WithChildren) {
   const { children } = props;
   const router = useRouter();
@@ -37,10 +53,7 @@ function NationalLayout(props: WithChildren) {
             <h2>Medische indicatoren</h2>
             <ul>
               <li>
-                <Link
-                  href="/landelijk/[metric]"
-                  as="/landelijk/positief-geteste-mensen"
-                >
+                <Link href="/landelijk/positief-geteste-mensen">
                   <a>
                     <GraphHeader
                       Icon={GetestIcon}
@@ -50,10 +63,7 @@ function NationalLayout(props: WithChildren) {
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/landelijk/[metric]"
-                  as="/landelijk/reproductiegetal"
-                >
+                <Link href="/landelijk/reproductiegetal">
                   <a>
                     <GraphHeader
                       Icon={ReproIcon}
