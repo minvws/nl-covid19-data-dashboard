@@ -6,10 +6,11 @@ import formatDate from 'utils/formatDate';
 
 type LastUpdatedProps = {
   lastUpdated?: number;
+  loadingText?: string | null;
 };
 
 const LastUpdated: FunctionComponent<LastUpdatedProps> = (props) => {
-  const { lastUpdated } = props;
+  const { lastUpdated, loadingText } = props;
 
   return (
     <p className={styles.text}>
@@ -21,7 +22,7 @@ const LastUpdated: FunctionComponent<LastUpdatedProps> = (props) => {
           </time>
         </>
       ) : (
-        siteText.laatst_bijgewerkt.loading
+        loadingText || siteText.laatst_bijgewerkt.loading
       )}
     </p>
   );
