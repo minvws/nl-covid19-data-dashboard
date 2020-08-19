@@ -1,57 +1,57 @@
 {
-  "andere_gegevens": "Andere gegevens",
+  "andere_gegevens": "Other data",
   "blok_andere_gegevens": {
-    "title": "Andere gegevens",
-    "message": "Cijfers die iets kunnen zeggen over de verspreiding van het virus."
+    "title": "Other data",
+    "message": "Data that could give insight in the spread of the virus."
   },
   "laatst_bijgewerkt": {
-    "loading": "Laatste gegevens aan het ophalen",
-    "message": "Laatst bijgewerkt"
+    "loading": "Retrieving most recent data",
+    "message": "Last updated"
   },
   "notificatie": {
-    "titel": "Toename in besmettingen COVID-19",
-    "bericht": "Het aantal nieuwe personen dat positief getest is in Nederland neemt verder toe. Het reproductiegetal ligt net als vorige week boven de 1.",
+    "titel": "Increase in infections Covid-19",
+    "bericht": "The number of new persons that tested positive in the Netherland is increasing. The reproduction number is more than 1, just as it was last week. ",
     "link": {
-      "text": "Bekijk de actuele informatie van het RIVM",
+      "text": "View the recent information from the RIVM",
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel"
     }
   },
   "error_titel": {
-    "text": "Er is iets misgegaan"
+    "text": "Something went wrong"
   },
   "error_beschrijving": {
-    "text": "Er is helaas iets misgegaan. Ververs de pagina of probeer het later opnieuw."
+    "text": "Unfortunately something went wrong. Refresh the page or try again later."
   },
   "error_probeer_opnieuw": {
-    "text": "Probeer opnieuw"
+    "text": "Try again"
   },
   "skiplinks": {
-    "inhoud": "Ga direct naar de inhoud",
-    "nav": "Ga direct naar de navigatie"
+    "inhoud": "Go directly to the content",
+    "nav": "Go directly to the navigation"
   },
   "header": {
     "title": "Dashboard coronavirus",
     "text": "The coronavirus dashboard provides information on the development of the coronavirus in The Netherlands.",
-    "link": "Lees meer"
+    "link": "Read more"
   },
   "nav": {
     "links": {
-      "index": "Landelijke cijfers",
-      "regio": "Regionale cijfers",
-      "over": "Over dit dashboard",
-      "meer": "Meer informatie over het coronavirus",
-      "verantwoording": "Cijferverantwoording"
+      "index": "National numbers",
+      "regio": "Regional numbers",
+      "over": "About this dashboard",
+      "meer": "More information on the corona virus",
+      "verantwoording": "Explanation of the data presented"
     }
   },
   "ic_opnames_per_dag": {
-    "title": "Intensive care-opnames per dag",
-    "text": "Aantal opnames per dag, gemiddeld over de afgelopen 3 dagen.",
+    "title": "ICU admissions per day",
+    "text": "Average number of daily admissions over the past 3 days",
     "datums": "Calculated on {{dateOfReport}}. Is updated on a daily basis.",
-    "fold_title": "Wat betekent dit?",
-    "fold": "Aantal mensen met bevestigd COVID-19 dat per dag op een intensive care-afdeling van een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de afgelopen drie dagen.",
-    "graph_title": "Verloop over tijd",
-    "open": "Verberg uitleg",
-    "sluit": "Meer uitleg en data",
+    "fold_title": "What does this mean?",
+    "fold": "Number of confirmed COVID-19 patients admitted to a hospital intensive care unit (ICU) per day. This figure is an average for the daily admissions over the past three days.",
+    "graph_title": "Progression over time",
+    "open": "Hide explanation",
+    "sluit": "More explanation and data",
     "screen_reader_graph_content": "{{value}} intensive care-admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "bron": {
       "href": "https://stichting-nice.nl/",
@@ -62,11 +62,11 @@
     "title": "Number of patients who contact their GP for the first time because of symptoms associated with COVID-19",
     "text": "Number of patients who contact their GP for the first time because of symptoms associated with COVID-19 per 100.000 inhabitants per week. ",
     "datums": "Value of  {{dateOfReport}}. Obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
-    "graph_title": "Verloop over tijd",
-    "fold_title": "Wat betekent dit?",
+    "graph_title": "Progression over time",
+    "fold_title": "What does this mean?",
     "fold": "General practitioners (GPs) record the reported and observed symptoms of the patients they see. Using this data, the Netherlands Institute for Health Services Research (NIVEL) calculates how many patients contacted their GP because of symptoms associated with COVID-19. Based on a sample of 350 GP's, the total amount is estimated for the entire Netherlands. \n",
-    "open": "Verberg uitleg",
-    "sluit": "Meer uitleg en data",
+    "open": "Hide explanation",
+    "sluit": "More explanation and data",
     "screen_reader_graph_content": "{{value}} Number of patients who contact their GP for the first time because of symptoms associated with COVID-19, per 100.000 inhabitants per week. \n",
     "bron": {
       "href": "https://www.nivel.nl/nl/nivel-zorgregistraties-eerste-lijn/nivel-zorgregistraties-eerste-lijn",
@@ -74,14 +74,14 @@
     }
   },
   "ziekenhuisopnames_per_dag": {
-    "title": "Ziekenhuisopnames per dag",
-    "text": "Aantal opnames per dag, gemiddeld over de afgelopen 3 dagen.",
+    "title": "Hospital admissions per day",
+    "text": "Number of admissions per day, averaged over the past three days.",
     "datums": "Calculated on {{dateOfReport}}. Is updated on a daily basis.",
-    "fold_title": "Wat betekent dit?",
-    "fold": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen.",
-    "graph_title": "Verloop over tijd",
-    "open": "Verberg uitleg",
-    "sluit": "Meer uitleg en data",
+    "fold_title": "What does this mean?",
+    "fold": "Number of confirmed COVID-19 patients admitted to hospital per day. This number is an average for daily admissions over the past three days.",
+    "graph_title": "Progression over time",
+    "open": "Hide explanation",
+    "sluit": "More explanation and data",
     "screen_reader_graph_content": "{{value}} Hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
@@ -89,17 +89,17 @@
     }
   },
   "positief_geteste_personen": {
-    "title": "Positief geteste mensen",
-    "text": "Aantal positief geteste mensen per 100.000 inwoners per dag.",
+    "title": "Positively tested persons",
+    "text": "Number of positively tested persons per 100,000 inhabitants per day. ",
     "datums": "Value of {{dateOfReport}}. Obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "fold_title": "Wat betekent dit?",
-    "fold": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
-    "metric_title": "Aantal positief geteste mensen:",
-    "linechart_title": "Verloop over tijd",
-    "graph_title": "Verdeling naar leeftijd (totaal aantal mensen)",
-    "open": "Verberg uitleg",
-    "sluit": "Meer uitleg en data",
-    "screen_reader_graph_content": "{{value}} positief geteste mensen per dag.",
+    "fold_title": "What does this mean?",
+    "fold": "This figure shows how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19.",
+    "metric_title": "Number of positively tested persons",
+    "linechart_title": "Progression over time",
+    "graph_title": "New cases by age group (total number of new cases)",
+    "open": "Hide explanation",
+    "sluit": "More explanation and data",
+    "screen_reader_graph_content": "{{value}} positively tested persons per day.",
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -107,284 +107,284 @@
     "graph_axis_title": "Total number of positively tested persons"
   },
   "besmettelijke_personen": {
-    "title": "Aantal besmettelijke mensen",
-    "text": "Een berekening van hoeveel mensen met COVID-19 per 100.000 inwoners besmettelijk zijn voor anderen. Dit getal wordt door het RIVM berekend.",
-    "datums": "Waarde van {{dateOfReport}}. Wordt wekelijks bijgewerkt.",
-    "fold_title": "Wat betekent dit?",
-    "fold": "Als iemand het coronavirus oploopt, dan is deze persoon een tijd lang besmettelijk voor anderen. Hoe lang dit duurt verschilt van persoon tot persoon. Het aantal besmettelijke mensen is een schatting op basis van een aantal gegevensbronnen. Het exacte aantal is onbekend, maar we kunnen wel aangeven of het gaat om tientallen, honderden, duizenden of meer. ",
-    "metric_title": "Geschat aantal besmettelijke mensen in Nederland:",
-    "graph_title": "Verloop over tijd",
-    "open": "Verberg uitleg",
-    "sluit": "Meer uitleg en data",
-    "screen_reader_graph_content": "{{value}} besmettelijke personen per 100.000 inwoners.",
+    "title": "Number of infectious people",
+    "text": "A calculation of how many people with COVID-19 per 100.000 inhabitants can transmit the virus.",
+    "datums": "Value of {{dateOfReport}}. Is updated on a weekly basis.",
+    "fold_title": "Wat does this mean?",
+    "fold": "A person who carries coronavirus can infect other people within a certain time frame. How long someone is infectious for differs from one person to another. The number of infectious people is estimated using data from various sources. It is not possible to know exactly how many people are infectious, but we can indicate whether there are dozens, hundreds, thousands or even more.",
+    "metric_title": "Estimated number of infectious people in the Netherlands:",
+    "graph_title": "Progression over time",
+    "open": "Hide explanation",
+    "sluit": "More explanation and data",
+    "screen_reader_graph_content": "{{value}} infectious people per 100.000 inhabitants.",
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     },
-    "legenda_line": "Het aantal besmettelijke mensen in Nederland.",
-    "legenda_marge": "De onzekerheidsmarge toont tussen welke waarden het aantal besmettelijke mensen zich bevindt.",
-    "rangeLegendLabel": "Onzekerheidsmarge",
-    "lineLegendLabel": "Besmettelijke mensen"
+    "legenda_line": "The number of infectious people in the Netherlands",
+    "legenda_marge": "The confidence interval shows the range between which the number of infectious people falls.",
+    "rangeLegendLabel": "Confidence interval",
+    "lineLegendLabel": "Infectious people"
   },
   "reproductiegetal": {
-    "title": "Reproductiegetal",
-    "text": "Aantal mensen dat besmet wordt door één besmettelijke persoon.",
+    "title": "Reproduction number",
+    "text": "Number of people infected by one infectious person.",
     "datums": "Value of {{dateOfReport}}. Obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
     "screen_reader_graph_content": "{{value}} people. Alert value: {{signaalwaarde}}.",
-    "fold_title": "Wat betekent dit?",
-    "fold": "Het reproductiegetal laat zien hoe snel het virus zich verspreidt. Dit getal geeft aan hoeveel mensen gemiddeld besmet worden door één patiënt met COVID-19. Bij een reproductiegetal van rond de 1 blijft het aantal besmettingen ongeveer gelijk. Als het reproductiegetal lager is dan 1, dan daalt het aantal besmettingen. Bij een getal hoger dan 1 stijgt het aantal besmettingen.",
-    "graph_title": "Verloop over tijd",
-    "open": "Verberg uitleg",
-    "sluit": "Meer uitleg en data",
-    "rangeLegendLabel": "Onzekerheidsmarge",
-    "lineLegendLabel": "Effectieve R",
+    "fold_title": "What does this mean?",
+    "fold": "The reproduction number shows how fast the virus is spreading. The number shows how many people are on average infected by one patient with Covid019. The number of transmissions remains more or less constant when the reproduction number is 1, declines when it is less than 1 and increases when the number is above 1.",
+    "graph_title": "Progression over time",
+    "open": "Hide explanation",
+    "sluit": "More explanation and data",
+    "rangeLegendLabel": "Confidence interval",
+    "lineLegendLabel": "Effective R",
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     },
-    "legenda_r": "De effectieve R is een schatting. Voor recente R schattingen is de betrouwbaarheid niet groot, daarom loopt de R-lijn niet door in de laatste twee weken.",
-    "legenda_marge": "De onzekerheidsmarge toont tussen welke waarden de R zich bevindt. Dit wordt wekelijks bijgewerkt."
+    "legenda_r": "The reproduction number is not an exact value but a reliable estimate. Reproduction numbers (R) using data from less than two weeks ago are not reliable, therefore, the line depicting R stops at a date two weeks in the past. ",
+    "legenda_marge": "The confidence interval shows the range between which the number R falls. This is updated on a weekly basis."
   },
   "overige_gegevens": {
-    "title": "Nog te ontwikkelen",
-    "text": "Het is de bedoeling dat het dashboard in de toekomst wordt uitgebreid met de volgende gegevens:",
-    "fold_title": "Wat betekent dit?",
+    "title": "To be developed",
+    "text": "We aim to expand the dashboard in the future with the following data:",
+    "fold_title": "What does this mean?",
     "fold": "",
-    "graph_title": "Verloop over tijd",
-    "open": "Verberg uitleg",
-    "sluit": "Meer uitleg",
+    "graph_title": "Progression over time",
+    "open": "Hide explanation",
+    "sluit": "More explanation",
     "list": [
       {
         "icon": "/images/Zelfrapportagegegevens.png",
-        "text": "Zelfrapportagegegevens (infectieradar)",
-        "content": "Het RIVM houdt op verschillende manieren de verspreiding van infectieziekten in de gaten. Dat geldt ook voor COVID-19. Een van die manieren is door te kijken naar mensen met klachten die kunnen wijzen op een infectie. Dat doet het RIVM met de Infectieradar.\n\nIedereen in Nederland kan deelnemen aan  de Infectieradar. Deelnemers geven één keer per week door of zij koorts of andere klachten hebben (gehad). Ook als mensen geen klachten hebben, geven ze dit door. Zo worden signalen van toename of afname van het virus eerder opgepikt."
+        "text": "Self-report data (Infectieradar.nl)",
+        "content": "The National Institute for Public Health and the Environment (RIVM) monitors the spread of infectious diseases, including COVID-19, in several different ways. One useful tool is the Infectionradar website, which allows RIVM to track the number of people with symptoms associated with a Covid-19 infection. Anyone in the Netherlands can participate in the infectionradar. Once a week participants report whether they have or have had a fever or any other symptoms, or no symptoms at all. This gives experts faster insight into whether the spread of the virus is increasing or decreasing."
       },
       {
         "icon": "/images/GGD-contactonderzoeken.png",
-        "text": "GGD-contactonderzoeken",
-        "content": "Wanneer iemand besmet is met COVID-19 onderzoekt de GGD hoe de besmetting waarschijnlijk is ontstaan en met wie de persoon in contact is geweest. Op deze manier wordt onderzocht of er meer mensen besmet zijn met COVID-19."
+        "text": "Contact tracing by the municipal health service",
+        "content": "When someone is infected with coronavirus, the municipal health service (GGD) tries to find out where they got it from and who they recently had contact with. The purpose is to discover whether the virus has also been transmitted to any other people."
       },
       {
         "icon": "/images/Sentinel-monitor.png",
-        "text": "Sentinel monitoring (zorgverleners)",
-        "content": "Wanneer zorgverleners ziek zijn, kunnen zij patiënten besmetten met COVID-19. Door hun gezondheid in kaart te brengen, verkleint uiteindelijk de kans op ziekteverspreiding. Dit gebeurt door het aantal besmette zorgverleners en het aantal ziektemeldingen bij te houden. Ook draagt dit bij aan het voorkomen van overbelasting in de zorg."
+        "text": "Sentinel surveillance (care professionals)",
+        "content": "Care professionals with COVID-19 can infect their patients, so monitoring care professionals’ health can help contain the spread of the disease. This means keeping track of the number of care professionals who are infected with coronavirus and the number who report ill. This data also helps the healthcare system cope with increases in workload."
       },
       {
         "icon": "/images/Verplaatsingsgegevens.png",
-        "text": "Verplaatsingsgegevens",
+        "text": "Data on movements",
         "content": "Data on the movement of people can indicate how the coronavirus is spreading. The aim is to show this per muncipality."
       },
       {
         "icon": "/images/Nalevingsmonitor.png",
-        "text": "Nalevingsmonitor",
-        "content": "De nalevingsmonitor geeft inzicht in hoeverre het mensen lukt om zich aan de coronamaatregelen te houden."
+        "text": "Compliance monitor",
+        "content": "The compliance monitor provides insight into the degree to which people are able to follow the coronavirus measures."
       },
       {
         "icon": "/images/Gedragsonderzoeken.png",
-        "text": "Gedragsonderzoeken",
-        "content": "Gegevens uit gedragsonderzoeken worden regelmatig verzameld door het RIVM. Dit geeft inzicht in trends in naleving en draagvlak van de op dat moment geldende gedragsregels zoals handen wassen, thuisblijven en het laten testen bij klachten."
+        "text": "Behavioural studies",
+        "content": "RIVM routinely collects data from behavioural studies that shed light on trends in compliance with and support for the basic rules that apply, like washing hands, staying home and getting tested if you have symptoms."
       }
     ]
   },
   "regio_link_block": {
-    "title": "Informatie per regio",
-    "text": "Bekijk de belangrijkste cijfers voor uw veiligheidsregio."
+    "title": "Information per region",
+    "text": "View the most important information for your safety region."
   },
   "verpleeghuis_besmette_locaties": {
-    "title": "Aantal besmette locaties",
-    "text": "Aantal nieuwe locaties waarbij tenminste één bewoner positief getest is, per dag.",
+    "title": "Number of infected locations",
+    "text": "The number of new locations where at least on resident is tested postive per day.",
     "datums": "Value of {{dateOfReport}}. Obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "metric_title": "Het totaal aantal besmette locaties is:",
-    "metric_text": "Dit getal is een inschatting van het totaal aantal verpleeghuislocaties waar in de afgelopen 28 dagen minstens één (nieuwe) COVID-19 besmetting op basis van een positieve test, is gemeld.",
-    "fold_title": "Wat betekent dit?",
+    "metric_title": "The total number of infected locations is:",
+    "metric_text": "This figure is an estimate of the number of nursing homes where in the past 28 days at least one (new) Covid-19 infection (confirmed by a positive test) is reported.",
+    "fold_title": "What does this mean?",
     "fold": "This figure is an estimate of the number of nursing homes with a new COVID-19 outbreak following at least one positive test. The figure is for the number of nursing homes where a new outbreak was reported yesterday. A nursing home is considered to have a new outbreak if there had been no new cases of COVID-19 in the home in the previous 28 days (i.e. twice the length of the incubation period). Please note: the increase in the total number of infected nursing homes does not always match the daily number of newly infected locations. More information can be found in the explanation of the presented data. ",
-    "graph_title": "Verloop over tijd",
-    "open": "Verberg uitleg",
-    "sluit": "Meer uitleg en data",
-    "screen_reader_graph_content": "{{value}} nieuwe locaties waarbij tenminste één bewoner positief getest is, per dag.",
+    "graph_title": "Progression over time",
+    "open": "Hide explanation",
+    "sluit": "More explanation and data",
+    "screen_reader_graph_content": "{{value}} new locations where at least one resident tested positive per day.",
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     }
   },
   "verpleeghuis_positief_geteste_personen": {
-    "title": "Aantal positief geteste bewoners",
-    "text": "Aantal positief geteste bewoners in verpleeghuizen per dag.",
+    "title": "Number of positively tested residents",
+    "text": "Number of positively tested residents in nursing homes per day",
     "datums": "Value of {{dateOfReport}}. Obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "fold_title": "Wat betekent dit?",
+    "fold_title": "What does this mean?",
     "fold": "This value is an estimate of the daily number of nursing home residents in the Netherlands who tested positive for coronavirus and have COVID-19. The value refers to the day before the date on which it was most recently updated.",
-    "graph_title": "Verloop over tijd",
-    "open": "Verberg uitleg",
-    "sluit": "Meer uitleg en data",
-    "screen_reader_graph_content": "{{value}} positief geteste bewoners.",
+    "graph_title": "Progression over time",
+    "open": "Hide explanation",
+    "sluit": "Meer explanation and data",
+    "screen_reader_graph_content": "{{value}} positively tested persons",
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     }
   },
   "verpleeghuis_oversterfte": {
-    "title": "Sterfte",
-    "text": "Aantal overleden bewoners in verpleeghuizen met een vastgestelde COVID-19-besmetting per dag.",
+    "title": "Death",
+    "text": "Number of deceased residents in nursing homes with a confirmed Covid-19 infection per day.",
     "datums": "Value of  {{dateOfReport}}. Obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "screen_reader_graph_content": "{{value}} overleden bewoners.",
-    "fold_title": "Wat betekent dit?",
-    "fold": "Dit getal is een inschatting van het aantal gemelde verpleeghuisbewoners dat in Nederland overlijdt aan de gevolgen van het nieuwe coronavirus. Dit getal verwijst naar de datum vóór de datum van de laatste update.",
-    "graph_title": "Verloop over tijd",
-    "open": "Verberg uitleg",
-    "sluit": "Meer uitleg en data",
+    "screen_reader_graph_content": "{{value}} deceased residents.",
+    "fold_title": "What does this mean?",
+    "fold": "This number is an estimate of the number of nursing home residents in the Netherlands who died due to the coronavirus. The value refers to the date before the date of the last update.",
+    "graph_title": "Progression over time",
+    "open": "Hide explanation",
+    "sluit": "More explanation and data",
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     }
   },
   "blok_verpleeghuis_zorg": {
-    "title": "Verpleeghuiszorg",
-    "text": "Informatie over de verspreiding van het coronavirus in verpleeghuizen."
+    "title": "Nursing homes",
+    "text": "Information on the spread of the coronavirus in nursing homes."
   },
   "geen_selectie": {
-    "text": "Selecteer uw regio bovenaan deze pagina"
+    "text": "Select your region at the top of this page"
   },
   "rioolwater_metingen": {
-    "title": "Rioolwatermeting",
-    "text": "Het aantal virusdeeltjes in een milliliter rioolwater, afkomstig van 28 locaties in Nederland. Het aantal meetpunten wordt in de komende weken verder uitgebreid naar meer dan 300 locaties.",
+    "title": "Waste water testing",
+    "text": "Number of viral particles in one milliliter of wastewater, collected from about 80 locations in the Netherlands. The national value is based on the total number of viral particles that is found in a week, divided by the number of locations where the data is collected. From september onwards, the number of sampling locations will be increased to more than 300.",
     "datums": "Value of  {{dateOfReport}}. Obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
-    "graph_title": "Verloop over tijd",
-    "fold_title": "Wat betekent dit?",
+    "graph_title": "Progression over time",
+    "fold_title": "What does this mean?",
     "fold": "In rioolwater kun je ziekteverwekkers zoals het nieuwe coronavirus meten omdat die met uitwerpselen (ontlasting) in het rioolwater komen. Onderzoekers testen eens per week rioolwater dat over 24 uur verzameld is. Dit onderzoek laat vrij snel zien hoeveel virusdeeltjes in het rioolwater zitten afkomstig uit uitwerpselen van besmette personen. Uit het huidige onderzoek kunnen nog geen conclusies worden getrokken. Het is de bedoeling dat het aantal meetpunten wordt uitgebreid van 28 naar meer dan 300 voor 1 september 2020. Pas als het onderzoek volledig loopt, kunnen hier conclusies aan worden verbonden.",
-    "open": "Verberg uitleg",
-    "sluit": "Meer uitleg en data",
+    "open": "Hide explanation",
+    "sluit": "More explanation and data",
     "screen_reader_graph_content": "{{value}} viral particles in one milliliter of waste water, collected from 28 locations in the Netherlands.",
     "bron": {
-      "text": "RIVM Onderzoek rioolwater",
+      "text": "RIVM Research waste water",
       "href": "https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater"
     }
   },
   "notfound_titel": {
-    "text": "Er is iets misgegaan"
+    "text": "Something went wrong"
   },
   "notfound_beschrijving": {
-    "text": "Er is helaas iets misgegaan. Ververs de pagina of probeer het later opnieuw."
+    "text": "Unfortunately something went wrong. Refresh the page or try again later. "
   },
   "over_titel": {
-    "text": "Over dit dashboard"
+    "text": "About this dashboard"
   },
   "over_disclaimer": {
     "title": "Disclaimer",
-    "text": "Let op: dit dashboard coronavirus is in ontwikkeling. De komende periode worden stap voor stap meer functies en gegevens toegevoegd. Daarnaast werken we aan het verbeteren van de digitoegankelijkheid van deze site. De informatie op deze site willen we voor iedereen in Nederland beschikbaar maken. Het dashboard wordt nog niet gebruikt voor besluitvorming. Er kunnen nog geen conclusies uit getrokken worden."
+    "text": "Please Note: this dashboard is still in the development phase. New features and data will be added to it in stages in the period ahead. Steps are also being taken to improve the website’s accessibility and user-friendliness. We want everyone in the Netherlands to be able to access the information on this website. The dashboard is not yet being used for decision-making. No conclusions can yet be made on the basis of the data presented here."
   },
   "over_beschrijving": {
-    "text": "Het dashboard coronavirus geeft informatie over de ontwikkeling van het coronavirus in Nederland. Met deze informatie kunnen eerder signalen van een toename van de verspreiding van het virus worden opgepikt. We moeten voorkomen dat het virus weer om zich heen grijpt. Het aantal intensive care en ziekenhuisopnames geven in de kern de ultieme waarschuwing. Maar eerder al komen de signalen door via de testuitslagen die vertaald worden naar het aantal positief geteste personen per 100.000 inwoners. Daarnaast zijn er ondersteunende indicatoren die de epidemie beschrijven en andersoortige signalen oppikken."
+    "text": "The coronavirus dashboard gives up-to-date information about the development of the coronavirus in the Netherlands. With this information  early signs that the rate of infection is increasing can be picked up. We must prevent losing control over the spread of the virus. The numbers of new intensive care (ICU) patients and hospital admissions are the ultimate warning, but early indications are provided by the results of testing people for the virus. These are used to calculate the number of people who are infected with coronavirus (SARS-CoV-2) per 100,000 inhabitants. There are also other, secondary indicators to describe the course of the epidemic and give other information."
   },
   "over_veelgestelde_vragen": {
-    "text": "Veelgestelde vragen",
+    "text": "Frequently asked questions",
     "vragen": [
       {
-        "vraag": "Wat doet dit dashboard?",
-        "antwoord": "Het dashboard laat met actuele cijfers zien hoe het coronavirus zich in Nederland verspreidt. Die informatie komt van onder andere het RIVM, de GGD’en en de ziekenhuizen. Op het dashboard is bijvoorbeeld te zien hoeveel mensen positief getest zijn op het virus en of het aantal besmettingen oploopt. Het dashboard biedt informatie aan iedereen die de meest actuele cijfers in één overzicht wil zien. "
+        "vraag": "What is the dashboard for?",
+        "antwoord": "The dashboard presents up-to-date information about the spread of coronavirus in the Netherlands. It uses data provided by the National Institute for Public Health and the Environment (RIVM), municipal health services (GGDs), hospitals and other sources. The dashboard shows, for example, how many people tested positive for the virus and if the number of infected people is increasing. The dashboard is intended for everyone who wants a useful overview of the most up-to-date data."
       },
       {
-        "vraag": "Waarom een dashboard?",
-        "antwoord": "Door het coronavirus zijn in de afgelopen maanden veel mensen ziek geworden en overleden. Totdat we een goed vaccin hebben, kan het virus makkelijk weer grote groepen mensen ziek maken. Met het dashboard is te zien of en waar het virus weer opleeft. Zo kunnen we nieuwe uitbraken van het virus sneller en preciezer bestrijden. Bijvoorbeeld met maatregelen voor regio’s waar het virus de kop opsteekt. Maatregelen vragen altijd om integrale politieke weging. Bij het nemen van maatregelen wordt dus ook gekeken naar maatschappelijke en economische belangen. "
+        "vraag": "Why a dashboard?",
+        "antwoord": "Over the past several months, many people have become ill because of coronavirus and many people have died. Until there is an effective vaccine, the virus can easily flare up and again make large numbers of people ill. The dashboard shows if and where the virus is gaining ground. Using this information we can take control measures faster and in a more targeted way, such as introducing additional measures only in the regions with sharply increasing infection rates. Measures must always be based on a comprehensive political assessment of all relevant aspects, including broader social and economic interests."
       },
       {
-        "vraag": "Van wie is dit dashboard?",
-        "antwoord": "Dit dashboard is ontwikkeld in opdracht van het ministerie van Volksgezondheid, Welzijn en Sport. De komende weken komen er meer gegevens bij. Het dashboard zal in de toekomst beheerd worden door het RIVM."
+        "vraag": "Whose dashboard is it?",
+        "antwoord": "The dashboard has been commissioned by the Ministry of Health, Welfare and Sport. New types of data will be added to it in the weeks ahead. In the future, the National Institute for Public Health and the Environment (RIVM) will manage the dashboard."
       },
       {
-        "vraag": "Waarom deze indicatoren?",
-        "antwoord": "De cijfers die nu zichtbaar zijn, laten het beste zien hoe het ervoor staat met de epidemie. Het gaat bijvoorbeeld om het aantal mensen dat besmet is en het aantal mensen dat in het ziekenhuis is opgenomen. Binnenkort komen ook andere cijfers beschikbaar in het dashboard. Al deze cijfers samen geven een nauwkeurig beeld van het virus in het hele land."
+        "vraag": "Why use these indicators?",
+        "antwoord": "The data currently presented on the dashboard gives the best overall view of the epidemiological situation. This data includes the number of people who have tested positive and the number of people admitted to hospital with COVID-19. Other data will be added to the dashboard shortly. Together they will give an accurate picture of the epidemic in the Netherlands."
       },
       {
-        "vraag": "Wat betekent het dat dit dashboard nog in ontwikkeling is?",
-        "antwoord": "In de komende periode zullen naast de hoofdindicatoren ook andere gegevens worden toegevoegd. Ook zal het dashboard een overzicht bieden van alle geldende maatregelen en adviezen, op landelijk en regionaal niveau."
+        "vraag": "The dashboard is still in development. What does this mean?",
+        "antwoord": "In the near future, secondary data will be added to the main indicators already shown on the dashboard. It will also give an overview of all measures and public advice in place at both national and regional level."
       },
       {
-        "vraag": "Wat is een signaalwaarde?",
-        "antwoord": "Een signaalwaarde is een getal dat door het RIVM is berekend. Het zijn een soort `alarmbellen’. Die alarmbellen kunnen afgaan als er veel mensen tegelijkertijd ziek worden of in het ziekenhuis worden opgenomen. Het RIVM heeft berekend dat als er langdurig meer dan 40 mensen per dag in het ziekenhuis worden opgenomen, de zorg al snel overbelast kan raken."
+        "vraag": "What is an alert value?",
+        "antwoord": "An alert value is calculated by the National Institute for Public Health and the Environment (RIVM) and is intended to act as a warning. A warning can be triggered if a large number of people become ill or are admitted to hospital at the same time. According to RIVM’s models, the healthcare sector will be unable to cope if daily hospital admissions for COVID-19 exceed 40 per day for an extended period of time."
       },
       {
-        "vraag": "Wat zegt een regionaal beeld (t.o.v. een landelijk beeld)?",
-        "antwoord": "Het coronavirus verspreidt zich makkelijk tussen mensen. In de afgelopen maanden heeft het RIVM veel regionale uitbraken van besmettingen waargenomen. Dat betekent dat er op bepaalde plekken in ons land meer besmettingen waren dan op andere plekken. Als we die informatie goed in beeld hebben, kunnen we het virus gericht en snel bestrijden als het opleeft."
+        "vraag": "What can the regional overview tell that the national overview cannot?",
+        "antwoord": "Coronavirus spreads easily among people. In recent months RIVM has identified several regional outbreaks. This means the infection rate was higher in some parts of the country than in others. If we have an accurate picture of this, we can combat the virus quickly and in a targeted manner."
       },
       {
-        "vraag": "Is dit een van de aangekondigde apps?",
-        "antwoord": "Nee, dit is geen app. De app voor anonieme contactopsporing wordt ontwikkeld om te weten of je misschien contact hebt gehad met iemand die besmet is met het coronavirus en om je een advies te geven als dat zo is. De app voor thuisrapportage ondersteunt de GGD door op afstand contact te houden met mensen met een (verdenking van) besmetting. "
+        "vraag": "Is this one of the apps that was announced?",
+        "antwoord": "No, this is not an app. An anonymous contact tracing app is being developed so that people can find out if they may have been in close proximity to someone carrying coronavirus, and to advise them on what to do in that case. A home monitoring app will help the municipal health service (GGD) stay in touch with people with suspected or confirmed coronavirus infection."
       },
       {
-        "vraag": "Houden jullie rekening met mijn privacy in dit dashboard?",
-        "antwoord": "Ja, het dashboard voldoet aan de privacyrichtlijnen. Je kunt dus niet zien bij wie welke gegevens horen. De gegevens zijn niet herleidbaar tot personen. "
+        "vraag": "Does the dashboard respect my privacy?",
+        "antwoord": "Yes, the dashboard complies with privacy rules. The presented data cannot be traced back to individual people."
       },
       {
-        "vraag": "Welke conclusies kan ik uit dit dashboard trekken?",
-        "antwoord": "Het dashboard geeft inzicht, maar er kunnen geen conclusies uit getrokken worden. Wel worden deze gegevens gebruikt door de deskundigen van onder andere het RIVM."
+        "vraag": "What conclusions can I draw based on the information on this dashboard?",
+        "antwoord": "The dashboard gives insight in the development of the virus, but it is not possible draw any conclusions. However, the data on the dashboard is used by experts, such as RIVM researchers."
       },
       {
-        "vraag": "Ik zie dat het goed gaat in mijn regio. Waarom gelden in mijn regio dezelfde maatregelen als in andere regio’s?",
-        "antwoord": "Er bestaan grote verschillen tussen regio’s. In de ene regio heeft het virus tot nu toe veel harder toegeslagen dan in de andere. Toch kan het virus overal in het land makkelijk om zich heen grijpen. Veel maatregelen gelden daarom in het hele land. Soms gelden extra maatregelen in een bepaalde regio. Dat gebeurt als daar veel extra besmettingen worden vastgesteld. Met het dashboard kunnen we mogelijk in de toekomst gerichter maatregelen nemen per regio of per sector."
+        "vraag": "I can see that coronavirus is under control in my region. So why do the same measures apply here as in other regions?",
+        "antwoord": "The situation in different regions can vary a lot, and the epidemic is much bigger in some regions than in others. But the virus can easily spread across the country and that’s why many measures apply nationwide. Sometimes, extra measures are taken in a specific region if there are many extra cases there. In the future we aim that the dashboard will make it possible to introduce measures that target specific regions or sectors."
       },
       {
-        "vraag": "Ik zie een technisch zwakke plek op de website. Waar kan ik dit melden?",
-        "antwoord": "Wij werken samen met het Nationaal Cyber Security Centrum (NCSC). Stel het NCSC zo snel mogelijk op de hoogte via het formulier (https://www.ncsc.nl/contact/kwetsbaarheid-melden/cvd-meldingen-formulier) voordat u dit aan de buitenwereld kenbaar maakt. In samenwerking met het NCSC nemen we de bevinding in behandeling en lossen dit zo snel mogelijk op."
+        "vraag": "I’ve found a technical vulnerability in the website. Where can I report this?",
+        "antwoord": "We work together with the National Cyber Security Centre (NCSC). Please notify them of the vulnerability as soon as possible using their form (https://www.ncsc.nl/contact/kwetsbaarheid-melden/cvd-meldingen-formulier) before making the issue publicly known. We will deal with your notification and resolve it as quickly as possible together with the NCSC."
       },
       {
-        "vraag": "Waar kan ik terecht met vragen over het coronavirus?",
-        "antwoord": "U kunt terecht bij het publieksinformatienummer 0800 - 1351 (tussen 08:00 en 20:00 uur). Vanuit het buitenland is het nummer te bereiken door te bellen naar +31 20 205 1351."
+        "vraag": "Who can I contact with questions about coronavirus and COVID-19?",
+        "antwoord": "Please call the public information number 0800-1351 from within the Netherlands (open between 8.00 and 20.00). From outside the Netherlands, call +31 20 205 1351."
       },
       {
-        "vraag": "Hoe komt het dat als ik het aantal positief geteste mensen per regio bij elkaar optel, er een ander getal uitkomt dan het landelijke cijfer?",
-        "antwoord": "We berekenen de toename van het aantal positief geteste mensen door het gerapporteerde cumulatief aantal meldingen van positief geteste mensen van vandaag, af te trekken van het cumulatief aantal van gisteren. Correcties over oude data, zoals dubbeltellingen, worden door het RIVM verwerkt op de datum dat dit bekend is. Het gerapporteerde nieuwe aantal meldingen voor die dag ligt dan lager dan het feitelijk aantal die dag. Daar staat tegenover dat voorgaande dagen er dus teveel gevallen zijn gerapporteerd. Door correctie kan het cumulatieve aantal van vandaag lager zijn dan het cumulatieve aantal van gisteren. In die gevallen wordt er op het dashboard de waarde 0 gepresenteerd in plaats van een negatief waarde; een negatieve waarde is namelijk verwarrend. Daarom krijg je uiteindelijk verschillen als je regio's optelt naar landelijk. Als je de negatieve waarden zou meerekenen kom je wel op de juiste getallen uit."
+        "vraag": "Why do I find a different value for the total number of positively tested persons as shown on the site, if I add all the reported positively tested persons per safety region? ",
+        "antwoord": "We calculate the increase in the number of positively tested persons by deducting  the current day’s cumulative number of positively tested persons reported from the cumulative number reported the day before. \nAny corrections to historical data, such as double counting, are processed by the RIVM on the day the error was discovered. This means the number of new cases reported for that day is lower than the actual number, but this is offset by the numbers being too high on previous days. Because of such corrections, it is possible for the current day’s cumulative number to be lower than the number for the day before. This is then depicted as 0 (zero) on the dashboard, as a negative number is confusing. This is why discrepancies arise when regional data is aggregated into national data. If you would use the negative values of the safety regions to calculate the daily number of positively tested persons, you would find the correct values. "
       }
     ]
   },
   "regionaal_ziekenhuisopnames_per_dag": {
-    "title": "Ziekenhuisopnames per dag",
-    "text": "Aantal opnames per dag, gemiddeld over de afgelopen 3 dagen.",
+    "title": "Hospital admissions per day\n",
+    "text": "Number of admissions per day, averaged over the past three days.",
     "datums": "Calculated on {{dateOfReport}}. Is updated on a daily basis.",
-    "fold_title": "Wat betekent dit?",
-    "fold": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen.",
-    "graph_title": "Verloop over tijd",
-    "open": "Verberg uitleg",
-    "sluit": "Meer uitleg en data",
-    "screen_reader_graph_content": "{{value}} opnames.",
+    "fold_title": "What does this mean?",
+    "fold": "Number of confirmed COVID-19 patients admitted to hospital per day. This value is an average of the reported admissions over the past three days.",
+    "graph_title": "Progression over time",
+    "open": "Hide explanation",
+    "sluit": "More explanation and data",
+    "screen_reader_graph_content": "{{value}} admissions.",
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     }
   },
   "regionaal_positief_geteste_personen": {
-    "title": "Positief geteste mensen",
-    "text": "Aantal positief geteste mensen per 100.000 inwoners per dag.",
+    "title": "Positively tested persons",
+    "text": "Number of positively tested persons per 100.000 inhabitants per day. ",
     "datums": "Value of {{dateOfReport}}. Obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
-    "metric_title": "Aantal positief geteste mensen:",
-    "fold_title": "Wat betekent dit?",
-    "fold": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
-    "graph_title": "Verloop over tijd",
-    "open": "Verberg uitleg",
-    "sluit": "Meer uitleg en data",
-    "screen_reader_graph_content": "{{value}} positief geteste personen.",
+    "metric_title": "Number of positively tested persons:",
+    "fold_title": "What does this mean?",
+    "fold": "This figure shows how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19.",
+    "graph_title": "Progression over time",
+    "open": "Hide explanation",
+    "sluit": "More explanation and data",
+    "screen_reader_graph_content": "{{value}} positively tested persons.",
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     }
   },
   "terug_naar_regio_selectie": {
-    "text": "Terug naar regio selectie"
+    "text": "Back to selection of region"
   },
   "verantwoording": {
-    "title": "Cijferverantwoording",
-    "paragraaf": "In dit dashboard staan verschillende cijfers die ons vertellen hoe het ervoor staat met beheersen van COVID-19. Op deze plek geven we meer toelichting over de wijze waarop de cijfers zijn samengesteld.",
+    "title": "Explanation of the data presented",
+    "paragraaf": "The dashboard presents a variety of data that give us an idea of how we are managing the COVID-19 epidemic. Here we explain how we arrive at this data.",
     "cijfers": [
       {
-        "cijfer": "Update 11 augustus over piek aantal positief geteste mensen",
+        "cijfer": "Update of 11 August on the peak of the number of positively tested persons",
         "verantwoording": "Due to technical reasons, not all reports on infections could be sent from the municipal health services (GGDs) to the National Institute for Public Health and environment (RIVM). These later received reports were on the 9th en 10th of August added to the data. In total there were 160 later received reports, of which 9 on the 9th and 151 on the 10th of August.{{whitespace}}\n\nThese 160 later received reports were spread through the safety regions as follows:{{whitespace}}\nAmsterdam-Amstelland: 8 \nFlevoland: 30 \nFriesland: 8\nGroningen: 1\nHollands Midden: 26\nRotterdam-Rijnmond: 7\nMidden- en West-Brabant: 27 \nZaanstreek-Waterland: 8\nZeeland: 23\nZuid-Limburg: 14\nGelderland-Midden: 7\nUnknown: 1"
       },
       {
-        "cijfer": "Update 31 juli over signaalwaarde aantal besmettelijke personen",
-        "verantwoording": "Oorspronkelijk is op het dashboard gecommuniceerd dat er een signaalwaarde zou komen voor het aantal besmettelijke personen. Op advies van de modelleurs van het RIVM wordt deze niet aan het dashboard toegevoegd. Dit omdat dit een inschatting is die niet puur op berekeningen berust maar ook op aannames, zoals over infectieuze periode."
+        "cijfer": "Update of 31 July on the alert value for number of infectious people",
+        "verantwoording": "Originally, it was announced that an alert value would be developed for the number of infectious people. However, the modelling experts at the National Institute for Public Health and the Environment (RIVM) have advised us not to do this, as the number of infectious people is not based exclusively on measurable data but also on assumptions, about how long people remain infectious, for instance."
       },
       {
-        "cijfer": "Intensive care-bezetting",
-        "verantwoording": "Deze gegevens worden dagelijks aangeleverd als open data door [Stichting NICE](https://stichting-nice.nl/covid-19/public/new-intake/confirmed/). De brondata heeft betrekking op de afgelopen 24 uur. De berekening van de intensive care-bezetting bestaat uit COVID-19-patiënten met een bewezen besmetting. {{whitespace}} Uit de data van het bronbestand wordt het gemiddelde berekend van de afgelopen drie dagen, dus exclusief vandaag. Door de waarden van elke dag (gisteren, eergisteren en de dag daarvoor) bijeen te tellen, te delen door drie en de uitkomst hiervan af te ronden naar één cijfer achter de komma komen we tot het gemiddelde."
+        "cijfer": "Intensive care (ICU) admissions",
+        "verantwoording": "These figures are supplied daily as open data by the National Intensive Care Evaluation Registry [Stichting NICE]  (https://stichting-nice.nl/covid-19/public/new-intake/confirmed/). The source data refers to the previous 24 hours. The calculation of the ICU admissions is based on patients with a confirmed infection of the COVID-19 virus.{{whitespace}} From the source file, we calculate the average admissions over the past three days. Thus this does not include the number for the current day. The average is obtained by adding up each day’s values (the figures for one day, two days and three days ago), dividing the total by three and rounding off the answer to one decimal place."
       },
       {
         "cijfer": "Hospital admissions",
@@ -395,16 +395,16 @@
         "verantwoording": "This data is supplied daily as open data by the National Institute for Public Health and the Environment (RIVM): https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_cumulatief.json. The file is published online every day at 10.00 and registers the number of postively tested persons in the past 24 hours. {{whitespace}}\n\nThe source file contains figures per municipality. Figures are also calculated for each of the safety regions, using the Statistics Netherlands allocation of municipalities to safety regions: https://opendata.cbs.nl/#/CBS/nl/dataset/84721NED/table?dl=3A154. At the time of writing, the most recent version of this data set was from 10 April 2020. This version has been exported and saved as a .JSON file.{{whitespace}}\n\nThe increase in the number of daily positive tests is calculated by deducting  the current day’s cumulative number of positive tests reported from the cumulative number reported the day before. This produces the number absolute of daily positive ly tested persons reported, as shown on the dashboard.{{whitespace}}\n\nWe also use this number to calculate a relative rate per 100,000 inhabitants. First, we divide the Netherlands’ total population by 100,000. We then divide the number of daily positively tested by the outcome of that division. This gives us the number of daily positive tests per 100,000 inhabitants.{{whitespace}}\n\nThe date used is the date of notification. This is not the same as the day on which people were tested. For more information, please go to the RIVM website: https://www.rivm.nl/coronavirus-covid-19/grafieken.\nAny corrections to historical data, such as double counting, are processed on the day the error was discovered. This means the number of new cases reported for that day is lower than the actual number, but this is offset by the numbers being too high on previous days. {{whitespace}}\n\nBecause of such corrections, it is possible for the current day’s cumulative number to be lower than the number for the day before. This is then depicted as 0 (zero) on the dashboard, as it is impossible to have a negative number of infections. For instance, you cannot have -0.4 infections over the past three days. This is also why discrepancies arise when regional data is aggregated into national data. The national value is the total of all municipalities’ cumulative data for the current day minus the total of all their cumulative data for the day before. It is not the outcome of this same formula using the safety regions’ cumulative data. If the negative values would used for the safety regions, you would get the correct values.{{whitespace}}\n\nThe division of new cases by age group is based on the national figures because ages are not recorded in the file containing municipal data. The table on the RIVM website may therefore not always match the table on the dashboard."
       },
       {
-        "cijfer": "Reproductiegetal",
-        "verantwoording": "Deze gegevens worden wekelijks (op dinsdag) aangeleverd als open data door het [RIVM](https://data.rivm.nl/covid-19/COVID-19_reproductiegetal.json). De waarden zoals weergeven in het bestand worden direct overgenomen op het dashboard. Het reproductiegetal is geen exacte waarde maar een betrouwbare schatting. Voor Rt schattingen minder dan twee weken geleden is de betrouwbaarheid niet groot, omdat de Rt afhangt van de tijd tussen infectie en ziek worden (incubatieperiode) en de tijd tussen ziek worden en melding (rapportagevertraging). Daarom loopt de R-lijn niet door in de laatste twee weken. {{whitespace}} Op 11 juni is er een trendbreuk zichtbaar. Vanaf deze datum wordt de R berekend op basis van het aantal positief geteste mensen met COVID-19 en het aantal ziekenhuisopnames. Voorheen werd dit berekend op basis van alleen het aantal nieuwe ziekenhuisopnames. Bij een laag aantal nieuwe ziekenhuisopnames, is het aantal positief geteste mensen een betere basis voor deze berekening."
+        "cijfer": "Reproduction number",
+        "verantwoording": "These figures are supplied weekly (on Tuesdays) as open data by RIVM: https://data.rivm.nl/covid-19/COVID-19_reproductiegetal.json. The values in the file are copied directly onto the dashboard. \nThe reproduction number is not an exact value but a reliable estimate. Reproduction numbers (R) using data from less than two weeks ago are not reliable because R depends on the incubation period (the time between someone becoming infected and becoming ill) and the reporting delay (the time between someone becoming ill and being reported as a COVID-19 case). That is why the line depicting R stops at a date two weeks in the past.{{whitespace}} \nThere is a clear break in the R trend on 11 June. On that date, RIVM began calculating R using the number of daily positive tests and the number of hospital admissions. Before 11 June, R was based only on the number of new hospital admissions. With a low number of new admissions, the number of daily positive tests is a better indicator of R.\n"
       },
       {
-        "cijfer": "Andere data en signaalindicatoren",
-        "verantwoording": "Deze informatie is niet beschikbaar in dit dashboard en nog niet gedeeld met het Ministerie van VWS. Deze zijn daarom niet in dit dashboard opgenomen."
+        "cijfer": "Other data and alert indicators",
+        "verantwoording": "This information has not yet been shared with the Ministry of Health, Welfare and Sport and is therefore not available on the dashboard."
       },
       {
-        "cijfer": "Verpleeghuiszorg: positief geteste bewoners, besmette locaties en sterfte.",
-        "verantwoording": "Deze informatie over Verpleeghuiszorg wordt dagelijks beschikbaar gesteld door het RIVM en als JSON-file aangeleverd bij het ministerie van VWS. Het RIVM publiceert de informatie gelijktijdig met het beschikbaar stellen aan het Ministerie van VWS ook in een pdf bestand openbaar op de website. De waarden zoals weergeven in het bestand worden direct overgenomen op het dashboard."
+        "cijfer": "Nursing Homes: number of residents testing positive, number of homes with outbreaks, number of deaths.",
+        "verantwoording": "The National Institute for Public Health and the Environment (RIVM) provides the Ministry of Health, Welfare and Sport with information about the COVID-19 situation in nursing homes every day. The data is delivered in JSON format. RIVM publishes this information on its website as a .PDF file at the same time that it is delivered to the ministry. The values in that file are copied directly onto the dashboard."
       },
       {
         "cijfer": "Nursing homes: number of infected locations",
@@ -420,7 +420,7 @@
       },
       {
         "cijfer": "Wastewater testing",
-        "verantwoording": "In rioolwater kun je ziekteverwekkers zoals het nieuwe coronavirus meten omdat die met uitwerpselen (ontlasting) in het rioolwater komen. Onderzoekers testen eens per week rioolwater dat over 24 uur verzameld is. Dit onderzoek laat vrij snel zien hoeveel virusdeeltjes in het rioolwater zitten afkomstig uit uitwerpselen van besmette personen. Uit het huidige onderzoek kunnen nog geen conclusies worden getrokken. Het is de bedoeling dat het aantal meetpunten wordt uitgebreid van 28 naar meer dan 300 voor 1 september 2020. Pas als het onderzoek volledig loopt, kunnen hier conclusies aan worden verbonden. {{whitespace}} In de grafiek zie je op de Y-as het aantal virusdeeltjes in een milliliter rioolwater afkomstig van 28 locaties in Nederland. Op de X-as zie je de data waarop het materiaal is verzameld uit het rioolwater. De lijn geeft de hoeveelheid virusdeeltjes per milliliter rioolwater weer. De gevulde cirkels in de lijn geven aan op welk moment het genetisch materiaal voor de test is verzameld uit het rioolwater. Deze informatie wordt wekelijks (meestal op dinsdag) beschikbaar gesteld door het RIVM en als Excel-bestand aangeleverd bij het ministerie van VWS. Deze excel wordt omgezet naar een CSV om in te lezen. Het bronbestand rapporteert over weeknummers. De weeknummers uit het bestand worden omgezet naar de datum van de maandag van de betreffende week voor weergave op het dashboard. Het RIVM werkt toe naar het als open data beschikbaar van deze informatie."
+        "verantwoording": "Wastewater contains human excrement that contains pathogens (viruses and bacteria that can make people sick). Once a week at each location, researchers test samples of wastewater collected over a period of 24 hours. These tests detect the presence of coronavirus particles in wastewater originating from the excrement of people with COVID-19. The research so far do not allow us to draw conclusions. The number of sampling points will be increased from the current 28 to more than 300. Only when testing is taking place on this larger scale, will it be possible to draw conclusions based on the findings."
       },
       {
         "cijfer": "“Value of ” and “Obtained on”",
@@ -433,36 +433,36 @@
     ]
   },
   "error_metadata": {
-    "title": "COVID-19 Dashboard foutmelding | Rijksoverheid.nl"
+    "title": "COVID-19 Dashboard error message | Government.nl"
   },
   "nationaal_metadata": {
-    "title": "Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
-    "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
-    "url": "https://coronadashboard.rijksoverheid.nl"
+    "title": "Dashboard Coronavirus COVID-19 | Government.nl",
+    "description": "Information on the development of the coronavirus in the Netherlands.",
+    "url": "https://coronadashboard.government.nl"
   },
   "notfound_metadata": {
-    "title": "Pagina kan niet gevonden worden | Rijksoverheid.nl"
+    "title": "Page cannot be found | Government.nl"
   },
   "over_metadata": {
-    "title": "Over het Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
-    "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
-    "url": "https://coronadashboard.rijksoverheid.nl/over"
+    "title": "About the Coronavirus COVID-19 Dashboard | Government.nl",
+    "description": "Information on the development of the coronavirus in the Netherlands.",
+    "url": "https://coronadashboard.government.nl/over"
   },
   "regionaal_metadata": {
-    "title": "Regionaal Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
-    "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
-    "url": "https://coronadashboard.rijksoverheid.nl/regio"
+    "title": "Regional Dashboard Coronavirus COVID-19 | Government.nl",
+    "description": "Information on the development of the coronavirus in the Netherlands.",
+    "url": "https://coronadashboard.government.nl/regio"
   },
   "verantwoording_metadata": {
-    "title": "Cijferverantwoording Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
-    "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
-    "url": "https://coronadashboard.rijksoverheid.nl/verantwoording"
+    "title": "Explanation of data Coronavirus COVID-19 Dashboard | Government.nl",
+    "description": "Information on the development of the coronavirus in the Netherlands.",
+    "url": "https://coronadashboard.government.nl/verantwoording"
   },
   "metadata": {
-    "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
-    "titel": "COVID-19 Dashboard foutmelding | Rijksoverheid.nl",
-    "title": "Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
-    "url": "https://coronadashboard.rijksoverheid.nl"
+    "description": "Information on the development of the coronavirus in the Netherlands.",
+    "titel": "COVID-19 Dashboard error message | Government.nl",
+    "title": "Dashboard Coronavirus COVID-19 | Government.nl",
+    "url": "https://coronadashboard.government.nl"
   },
   "charts": {
     "time_controls": {
@@ -477,17 +477,17 @@
   },
   "regionaal_rioolwater_metingen": {
     "title": "Waste water testing",
-    "text": "Number of viral particles in one milliliter of wastewater, collected from 28 locations in the Netherlands. Over the next few weeks, the number of sampling locations will be increased to more than 300.",
+    "text": "Number of viral particles in one milliliter of wastewater, collected from locations in the safety region. This regional number is based on the total number of viral particles that is found in a week, divided by the number of locations where the data is collected.",
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis. ",
     "graph_title": "Progression over time",
     "fold_title": "What does this mean?",
-    "fold": "Wastewater contains human excrement that contains pathogens (viruses and bacteria that can make people sick). Once a week at each location, researchers test samples of wastewater collected over a period of 24 hours. These tests detect the presence of coronavirus particles in wastewater originating from the excrement of people with COVID-19. The research so far do not allow us to draw conclusions. The number of sampling points will be increased from the current 28 to more than 300. Only when testing is taking place on this larger scale, will it be possible to draw conclusions based on the findings.",
+    "fold": "This number shows how many viral particles were found in the waste water of a certain region. More research is required to be able to compare the values of the regions. The weekly average is always calculated on monday. For more information please see the explanation of data page. ",
     "open": "Hide explanation",
     "sluit": "More explanation and data",
     "screen_reader_graph_content": "{{value}} viral particles in one milliliter of wastewater, collected from 28 locations in the Netherlands.",
     "average": "average",
     "bar_chart_title": "Last known value per RWZI location",
-    "bar_chart_axis_title": "Number of viral particles in milliliter waste water",
+    "bar_chart_axis_title": "Number of viral particles in one milliliter of waste water",
     "bron": {
       "text": "RIVM Research waste water",
       "href": "https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater"
