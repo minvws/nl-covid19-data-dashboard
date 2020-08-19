@@ -10,7 +10,7 @@
   },
   "notificatie": {
     "titel": "Toename in besmettingen COVID-19",
-    "bericht": "Het aantal nieuwe personen dat positief getest is in Nederland neemt verder toe. Het reproductiegetal ligt net als vorige week boven de 1.",
+    "bericht": "Het reproductiegetal ligt net als vorige week boven de 1. Sinds eind juli neemt het aantal nieuwe personen dat positief getest is toe. Ook is sinds eind juli een toename zichtbaar van het aantal ziekenhuisopnames door COVID-19. De meeste nieuwe vastgestelde besmettingen vinden plaats in de provincie Zuid-Holland, Noord-Holland en het westelijk deel van Noord-Brabant.",
     "link": {
       "text": "Bekijk de actuele informatie van het RIVM",
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel"

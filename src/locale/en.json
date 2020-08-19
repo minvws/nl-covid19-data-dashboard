@@ -46,7 +46,7 @@
   "ic_opnames_per_dag": {
     "title": "ICU admissions per day",
     "text": "Average number of daily admissions over the past 3 days",
-    "datums": "Calculated on {{dateOfReport}}. Is updated on a daily basis.",
+    "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
     "fold_title": "What does this mean?",
     "fold": "Number of confirmed COVID-19 patients admitted to a hospital intensive care unit (ICU) per day. This figure is an average for the daily admissions over the past three days.",
     "graph_title": "Progression over time",
@@ -61,7 +61,7 @@
   "verdenkingen_huisartsen": {
     "title": "Number of patients who contact their GP for the first time because of symptoms associated with COVID-19",
     "text": "Number of patients who contact their GP for the first time because of symptoms associated with COVID-19 per 100.000 inhabitants per week. ",
-    "datums": "Value of  {{dateOfReport}}. Obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
+    "datums": "Value of  {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
     "graph_title": "Progression over time",
     "fold_title": "What does this mean?",
     "fold": "General practitioners (GPs) record the reported and observed symptoms of the patients they see. Using this data, the Netherlands Institute for Health Services Research (NIVEL) calculates how many patients contacted their GP because of symptoms associated with COVID-19. Based on a sample of 350 GP's, the total amount is estimated for the entire Netherlands. \n",
@@ -76,7 +76,7 @@
   "ziekenhuisopnames_per_dag": {
     "title": "Hospital admissions per day",
     "text": "Number of admissions per day, averaged over the past three days.",
-    "datums": "Calculated on {{dateOfReport}}. Is updated on a daily basis.",
+    "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
     "fold_title": "What does this mean?",
     "fold": "Number of confirmed COVID-19 patients admitted to hospital per day. This number is an average for daily admissions over the past three days.",
     "graph_title": "Progression over time",
@@ -91,7 +91,7 @@
   "positief_geteste_personen": {
     "title": "Positively tested persons",
     "text": "Number of positively tested persons per 100,000 inhabitants per day. ",
-    "datums": "Value of {{dateOfReport}}. Obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
+    "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
     "fold_title": "What does this mean?",
     "fold": "This figure shows how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19.",
     "metric_title": "Number of positively tested persons",
@@ -129,7 +129,7 @@
   "reproductiegetal": {
     "title": "Reproduction number",
     "text": "Number of people infected by one infectious person.",
-    "datums": "Value of {{dateOfReport}}. Obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
+    "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
     "screen_reader_graph_content": "{{value}} people. Alert value: {{signaalwaarde}}.",
     "fold_title": "What does this mean?",
     "fold": "The reproduction number shows how fast the virus is spreading. The number shows how many people are on average infected by one patient with Covid019. The number of transmissions remains more or less constant when the reproduction number is 1, declines when it is less than 1 and increases when the number is above 1.",
@@ -193,7 +193,7 @@
   "verpleeghuis_besmette_locaties": {
     "title": "Number of infected locations",
     "text": "The number of new locations where at least on resident is tested postive per day.",
-    "datums": "Value of {{dateOfReport}}. Obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
+    "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
     "metric_title": "The total number of infected locations is:",
     "metric_text": "This figure is an estimate of the number of nursing homes where in the past 28 days at least one (new) Covid-19 infection (confirmed by a positive test) is reported.",
     "fold_title": "What does this mean?",
@@ -210,7 +210,7 @@
   "verpleeghuis_positief_geteste_personen": {
     "title": "Number of positively tested residents",
     "text": "Number of positively tested residents in nursing homes per day",
-    "datums": "Value of {{dateOfReport}}. Obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
+    "datums": "Value of {{dateOfReport}}. Obtained:{{dateOfInsertion}}. Is updated on a daily basis.",
     "fold_title": "What does this mean?",
     "fold": "This value is an estimate of the daily number of nursing home residents in the Netherlands who tested positive for coronavirus and have COVID-19. The value refers to the day before the date on which it was most recently updated.",
     "graph_title": "Progression over time",
@@ -225,7 +225,7 @@
   "verpleeghuis_oversterfte": {
     "title": "Death",
     "text": "Number of deceased residents in nursing homes with a confirmed Covid-19 infection per day.",
-    "datums": "Value of  {{dateOfReport}}. Obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
+    "datums": "Value of  {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
     "screen_reader_graph_content": "{{value}} deceased residents.",
     "fold_title": "What does this mean?",
     "fold": "This number is an estimate of the number of nursing home residents in the Netherlands who died due to the coronavirus. The value refers to the date before the date of the last update.",
@@ -247,10 +247,10 @@
   "rioolwater_metingen": {
     "title": "Waste water testing",
     "text": "Number of viral particles in one milliliter of wastewater, collected from about 80 locations in the Netherlands. The national value is based on the total number of viral particles that is found in a week, divided by the number of locations where the data is collected. From september onwards, the number of sampling locations will be increased to more than 300.",
-    "datums": "Value of  {{dateOfReport}}. Obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
+    "datums": "Value of  {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
     "graph_title": "Progression over time",
     "fold_title": "What does this mean?",
-    "fold": "In rioolwater kun je ziekteverwekkers zoals het nieuwe coronavirus meten omdat die met uitwerpselen (ontlasting) in het rioolwater komen. Onderzoekers testen eens per week rioolwater dat over 24 uur verzameld is. Dit onderzoek laat vrij snel zien hoeveel virusdeeltjes in het rioolwater zitten afkomstig uit uitwerpselen van besmette personen. Uit het huidige onderzoek kunnen nog geen conclusies worden getrokken. Het is de bedoeling dat het aantal meetpunten wordt uitgebreid van 28 naar meer dan 300 voor 1 september 2020. Pas als het onderzoek volledig loopt, kunnen hier conclusies aan worden verbonden.",
+    "fold": "It is possible to test waste water for pathogens like the new coronavirus, because they end up with the excrements via the toilets in the waste water. Once a week at each location, researchers from the National Institute for Health and Environment (RIVM) test samples of wastewater collected over a period of 24 hours. Not all persons will secrete the virus, thus the viral particles come from the excrements of a part of the population that is infected by the virus. In the current research we can see trends in the amount of viral particles like an increase or decrease. We aim to increase the number of sampling points will be increased from the about 80 locations to more than 300 from september onwards. Only when testing is taking place completely on this larger scale, will it be possible to draw conclusions based on the findings. Please note that with the availability of more quantitative data, the number of viral particles can be determined more accurately. Therefore, the RIVM has adapted their method to calculate the viral particles per milliliter since 18 August. The historical data are retroactively recalculated using this new method. The values from before 20 July are based on about 28 locations. After this date the data of about 80 locations are being used. See for more information the explanation of data section. ",
     "open": "Hide explanation",
     "sluit": "More explanation and data",
     "screen_reader_graph_content": "{{value}} viral particles in one milliliter of waste water, collected from 28 locations in the Netherlands.",
@@ -339,7 +339,7 @@
   "regionaal_ziekenhuisopnames_per_dag": {
     "title": "Hospital admissions per day\n",
     "text": "Number of admissions per day, averaged over the past three days.",
-    "datums": "Calculated on {{dateOfReport}}. Is updated on a daily basis.",
+    "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
     "fold_title": "What does this mean?",
     "fold": "Number of confirmed COVID-19 patients admitted to hospital per day. This value is an average of the reported admissions over the past three days.",
     "graph_title": "Progression over time",
@@ -354,7 +354,7 @@
   "regionaal_positief_geteste_personen": {
     "title": "Positively tested persons",
     "text": "Number of positively tested persons per 100.000 inhabitants per day. ",
-    "datums": "Value of {{dateOfReport}}. Obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
+    "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
     "metric_title": "Number of positively tested persons:",
     "fold_title": "What does this mean?",
     "fold": "This figure shows how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19.",
@@ -420,11 +420,11 @@
       },
       {
         "cijfer": "Wastewater testing",
-        "verantwoording": "Wastewater contains human excrement that contains pathogens (viruses and bacteria that can make people sick). Once a week at each location, researchers test samples of wastewater collected over a period of 24 hours. These tests detect the presence of coronavirus particles in wastewater originating from the excrement of people with COVID-19. The research so far do not allow us to draw conclusions. The number of sampling points will be increased from the current 28 to more than 300. Only when testing is taking place on this larger scale, will it be possible to draw conclusions based on the findings."
+        "verantwoording": "It is possible to test waste water for pathogens like the new coronavirus, because they end up with the excrements via the toilets in the waste water. Once a week at each location, researchers from the National Institute for Health and Environment (RIVM) test samples of wastewater collected over a period of 24 hours. These tests shows how many viral particles are in the wastewater. These particles come from the excrement of people with COVID-19. We aim to increase the number of sampling points will be increased from the about 80 locations to more than 300 from september onwards. Each week the number of locations may vary, because not every test can be completed succesfully. Please note that the values from before 20 July are based on about 28 locations. In the current research we can see trends in the amount of viral particles like an increase or decrease. Only when testing is taking place completely on this larger scale, will it be possible to draw conclusions based on the findings.{{whitespace}}\n\nThe National Institute for Public Health and the Environment (RIVM) provides this information to the Ministry of Health, Welfare and Sport once a week (on Tuesdays). Please note that this file is available for the first time on 19 august around 15.00 h. With the availability of more quantitative data, the number of viral particles can be determined more accurately. Therefore, the RIVM has adapted their method to calculate the viral particles per milliliter since 18 August. {{whitespace}}\n\nThe graph’s y-axis shows the concentration of viral particles in one millilitre of wastewater. The x-axis shows the date on which the samples were collected. The national and regional average are the weekly averages. The sum of the reported values in the week is divided by the number of locations that completed the tests that week. The reported weeks are from Sunday up and until Saturday. These weekly averages are shown in the graph on the monday of the week. The measured value per location is shown on the date on which the measurement took place. {{whitespace}}\n\nTo determine which location belongs to which safety regions, we look at the catchment area. This is the area for which the sewage treatment plant purfies the water. The RIVM delivers per location the percentage that the catchment area is part of the safety region. This is not entirely accurate and will be improved on in the future. Some locations have a catchment area that contains multiple safety regions. If this is the case, the location is attributed completed to the safety region covering the largest part of the catchment area. {{whitespace}}\n\nThe viral particles per milliliter shown on the dashboard can be influenced by a number of other factors. For instance, due to rainfall, the number of measures particles per milliliter can be decreased, because the waste water is diluted. Furthermore, industrial areas in the catchment areas can bring about this effect, because in the waste water of industrial areas little to no amount of human excrements can be found. If the concentration of viral particles is too low, it will no longer be found by the test. This will then result in a measurement of zero particles per milliliter. {{whitespace}}\n\nIn the open data file you can see if a measurement in representative of not. \nFor the dashboard we only use representative data."
       },
       {
-        "cijfer": "“Value of ” and “Obtained on”",
-        "verantwoording": "The tiles on the dashboard show the term \"value of\" to indicate the date to which the number refers, while ‘obtained on’ is used to refer to the date when the information was received. The purpose of providing this information is to give users a better idea of how up-to-date the data is, which is especially relevant for retrospective indicators. For instance, RIVM publishes the reproduction number (R) once a week, but the most recent R is always for a date two weeks in the past. ‘Value of’ is followed by that date two weeks ago, and ‘obtained on’ by the date on which the most recent R was published (the current week)."
+        "cijfer": "“Value of ” and “Obtained”",
+        "verantwoording": "The tiles on the dashboard show the term \"value of\" to indicate the date to which the number refers, while ‘obtained’ is used to refer to the date when the information was received. The purpose of providing this information is to give users a better idea of how up-to-date the data is, which is especially relevant for retrospective indicators. For instance, RIVM publishes the reproduction number (R) once a week, but the most recent R is always for a date two weeks in the past. ‘Value of’ is followed by that date two weeks ago, and ‘obtained’ by the date on which the most recent R was published (the current week)."
       },
       {
         "cijfer": "Open source data processing",
@@ -481,7 +481,7 @@
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis. ",
     "graph_title": "Progression over time",
     "fold_title": "What does this mean?",
-    "fold": "This number shows how many viral particles were found in the waste water of a certain region. More research is required to be able to compare the values of the regions. The weekly average is always calculated on monday. For more information please see the explanation of data page. ",
+    "fold": "This number shows how many viral particles were found in the waste water of a certain region. For more information, please see the data explanation section.",
     "open": "Hide explanation",
     "sluit": "More explanation and data",
     "screen_reader_graph_content": "{{value}} viral particles in one milliliter of wastewater, collected from 28 locations in the Netherlands.",
