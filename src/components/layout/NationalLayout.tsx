@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import useSWR from 'swr';
 import { useRouter } from 'next/router';
 
 import GraphHeader from 'components/graphHeader';
@@ -11,6 +12,7 @@ import siteText from 'locale';
 
 import { WithChildren } from 'types';
 import useMediaQuery from 'utils/useMediaQuery';
+import BarScale from 'components/barScale';
 
 export default NationalLayout;
 
@@ -41,9 +43,12 @@ export function getNationalLayout() {
 function NationalLayout(props: WithChildren) {
   const { children } = props;
   const router = useRouter();
+  const { data } = useSWR(`/json/NL.json`);
   const isLargeScreen = useMediaQuery('(min-width: 1000px)', true);
   const showAside = isLargeScreen || router.route === '/landelijk';
   const showContent = isLargeScreen || router.route !== '/landelijk';
+  // remove focus after navigation
+  const blur = (evt: any) => evt.target.blur();
 
   return (
     <div className="national-layout">
@@ -54,21 +59,91 @@ function NationalLayout(props: WithChildren) {
             <ul>
               <li>
                 <Link href="/landelijk/positief-geteste-mensen">
-                  <a>
+                  <a
+                    onClick={blur}
+                    className={
+                      router.pathname === '/landelijk/positief-geteste-mensen'
+                        ? 'metric-link active-metric-link'
+                        : 'metric-link'
+                    }
+                  >
                     <GraphHeader
                       Icon={GetestIcon}
                       title={siteText.positief_geteste_personen.title}
                     />
+                    <span>
+                      <BarScale
+                        min={0}
+                        max={10}
+                        screenReaderText={
+                          siteText.positief_geteste_personen
+                            .screen_reader_graph_content
+                        }
+                        value={
+                          data?.infected_people_delta_normalized?.last_value
+                            ?.infected_daily_increase ?? 0
+                        }
+                        id="positief"
+                        rangeKey="infected_daily_increase"
+                        gradient={[
+                          {
+                            color: '#3391CC',
+                            value: 0,
+                          },
+                        ]}
+                      />
+                    </span>
                   </a>
                 </Link>
               </li>
               <li>
                 <Link href="/landelijk/reproductiegetal">
-                  <a>
+                  <a
+                    onClick={blur}
+                    className={
+                      router.pathname === '/landelijk/reproductiegetal'
+                        ? 'metric-link active-metric-link'
+                        : 'metric-link'
+                    }
+                  >
                     <GraphHeader
                       Icon={ReproIcon}
                       title={siteText.reproductiegetal.title}
                     />
+                    <span>
+                      <BarScale
+                        min={0}
+                        max={2}
+                        screenReaderText={
+                          siteText.reproductiegetal.screen_reader_graph_content
+                        }
+                        signaalwaarde={1}
+                        value={
+                          data?.reproduction_index_last_known_average
+                            ?.last_value?.reproduction_index_avg ?? 0
+                        }
+                        id="repro"
+                        rangeKey="reproduction_index_avg"
+                        gradient={[
+                          {
+                            color: '#69c253',
+                            value: 0,
+                          },
+                          {
+                            color: '#69c253',
+                            value: 1,
+                          },
+                          {
+                            color: '#D3A500',
+                            value: 1.0104,
+                          },
+                          {
+                            color: '#f35065',
+                            value: 1.125,
+                          },
+                        ]}
+                      />
+                    </span>
                   </a>
                 </Link>
               </li>
@@ -77,7 +152,11 @@ function NationalLayout(props: WithChildren) {
         </aside>
       )}
 
-      {showContent && <div>{children}</div>}
+      {showContent && (
+        <section>
+          <div>{children}</div>
+        </section>
+      )}
     </div>
   );
 }

@@ -26,7 +26,7 @@
   padding: 0 $default-padding;
   max-width: 1200px;
   margin: 0 auto;
-  margin-top: 2em;
+  margin-top: 1em;
 }
 
 .home-section {
@@ -61,20 +61,26 @@
 }
 
 /* Remove outline from programatically focussed elements. */
-[tabindex="-1"] { outline: none }
-
+[tabindex='-1'] {
+  outline: none;
+}
 
 .national-layout {
   display: flex;
 
   > aside {
-    padding: 2em 1em;
-    flex-basis: 100%; 
+    flex-basis: 100%;
   }
-  > div {
+  > section {
     background: $page-background;
-    padding: 2em 1em;
-    flex-basis: 100%; 
+    padding: 2em;
+    flex-basis: 100%;
+
+    > div {
+      background: white;
+      box-shadow: $box-shadow;
+      padding: 1em;
+    }
   }
 }
 
@@ -90,18 +96,55 @@
 
 .national-aside {
   background: white;
+  margin-top: 1rem;
+
+  h2 {
+    margin: 1rem;
+  }
 
   ul {
     list-style: none;
     margin: 0;
     padding: 0;
 
-    li {
-      padding: 1em 0;
-    }
-
-    li:not(:last-of-type) {
-      border-bottom: 2px solid lightgrey;
+    li:not(:last-of-type) a {
+      border-bottom: 2px solid $page-background;
     }
   }
+}
+
+a.metric-link {
+  display: block;
+  padding: 1rem;
+  border-right: 5px solid transparent;
+  color: black;
+  text-decoration: none;
+  position: relative;
+
+  &:hover,
+  &:focus {
+    background: $page-background;
+  }
+
+  &::after {
+    content: '';
+    background-image: url('/images/chevron.svg');
+    background-size: 2em 2em;
+    height: 2em;
+    width: 2em;
+    display: block;
+    position: absolute;
+    right: 1em;
+    top: 4em;
+  }
+
+  span {
+    display: block;
+    margin: 0 4rem;
+  }
+}
+
+a.active-metric-link {
+  background: $page-background;
+  border-right: 5px solid $red;
 }
