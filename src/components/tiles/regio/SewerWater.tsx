@@ -6,7 +6,7 @@ import GraphContent from 'components/graphContent';
 import GraphHeader from 'components/graphHeader';
 import DateReported from 'components/dateReported';
 import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
-import MultiDateLineChart from 'components/lineChart/multiDateLine';
+import RegionalSewerWaterLineChart from 'components/lineChart/regionalSewerWaterLineChart';
 
 import siteText from 'locale';
 
@@ -15,6 +15,7 @@ import BarChart from 'components/barChart';
 import { SafetyRegion, RegioDataLoading } from 'pages/regio/index';
 import formatDate from 'utils/formatDate';
 import formatNumber from 'utils/formatNumber';
+import LoadingPlaceholder from 'components/loadingPlaceholder';
 
 interface IProps {
   data: Regionaal;
@@ -25,30 +26,48 @@ export const SewerWater: React.FC<IProps> = ({ data, selectedRegio }) => {
   const text: typeof siteText.regionaal_rioolwater_metingen =
     siteText.regionaal_rioolwater_metingen;
 
+  const orderedSewerInstallations =
+    data?.results_per_sewer_installation_per_region?.values?.sort((a, b) => {
+      return b?.last_value?.rna_per_ml - a?.last_value?.rna_per_ml;
+    }) || [];
+
   return (
     <GraphContainer>
       <GraphContent>
-        <GraphHeader Icon={RioolwaterMonitoring} title={text.title} />
+        <GraphHeader
+          Icon={RioolwaterMonitoring}
+          title={text.title}
+          regio={selectedRegio?.name}
+        />
 
         <p>{text.text}</p>
 
-        {data?.average_sewer_installation_per_region?.last_value.average && (
-          <BarScale
-            min={0}
-            max={100}
-            screenReaderText={text.screen_reader_graph_content}
-            value={Number(
-              data.average_sewer_installation_per_region.last_value.average
+        {!selectedRegio && <RegioDataLoading />}
+
+        {selectedRegio && (
+          <>
+            {!data?.average_sewer_installation_per_region?.last_value && (
+              <LoadingPlaceholder />
             )}
-            id="rioolwater_metingen"
-            rangeKey="average"
-            gradient={[
-              {
-                color: '#3391CC',
-                value: 0,
-              },
-            ]}
-          />
+            {data?.average_sewer_installation_per_region?.last_value && (
+              <BarScale
+                min={0}
+                max={100}
+                screenReaderText={text.screen_reader_graph_content}
+                value={Number(
+                  data.average_sewer_installation_per_region.last_value.average
+                )}
+                id="rioolwater_metingen"
+                rangeKey="average"
+                gradient={[
+                  {
+                    color: '#3391CC',
+                    value: 0,
+                  },
+                ]}
+              />
+            )}
+          </>
         )}
 
         {data?.average_sewer_installation_per_region?.last_value && (
@@ -56,16 +75,13 @@ export const SewerWater: React.FC<IProps> = ({ data, selectedRegio }) => {
             datumsText={text.datums}
             dateInsertedUnix={
               data.average_sewer_installation_per_region.last_value
-                .date_measurement_unix
+                .date_of_insertion_unix
             }
             dateUnix={
-              data.average_sewer_installation_per_region.last_value
-                .date_measurement_unix
+              data.average_sewer_installation_per_region.last_value.week_unix
             }
           />
         )}
-
-        {!selectedRegio && <RegioDataLoading />}
       </GraphContent>
 
       {selectedRegio && (
@@ -75,12 +91,14 @@ export const SewerWater: React.FC<IProps> = ({ data, selectedRegio }) => {
           piwikName="Rioolwatermeting"
           piwikAction="regionaal"
         >
+          <h4>{text.fold_title}</h4>
+          <p>{text.fold}</p>
           {data?.average_sewer_installation_per_region?.values &&
             data?.results_per_sewer_installation_per_region?.values && (
               <>
                 <h4>{text.graph_title}</h4>
-                <MultiDateLineChart
-                  values={data?.average_sewer_installation_per_region?.values.map(
+                <RegionalSewerWaterLineChart
+                  averageValues={data?.average_sewer_installation_per_region?.values.map(
                     (value) => {
                       return {
                         ...value,
@@ -89,15 +107,17 @@ export const SewerWater: React.FC<IProps> = ({ data, selectedRegio }) => {
                       };
                     }
                   )}
-                  secondaryValues={data.results_per_sewer_installation_per_region.values.map(
+                  allValues={data.results_per_sewer_installation_per_region.values.map(
                     (installation) => {
-                      return installation.values.map((value) => {
-                        return {
-                          ...value,
-                          value: value.rna_per_ml || 0,
-                          date: value.date_measurement_unix,
-                        };
-                      });
+                      return installation?.values
+                        .map((value) => {
+                          return {
+                            ...value,
+                            value: value.rna_per_ml || 0,
+                            date: value.date_measurement_unix,
+                          };
+                        })
+                        .sort((a, b) => b.date - a.date);
                     }
                   )}
                   text={{
@@ -109,8 +129,8 @@ export const SewerWater: React.FC<IProps> = ({ data, selectedRegio }) => {
                 <BarChart
                   keys={[
                     text.average,
-                    ...data.results_per_sewer_installation_per_region.values.map(
-                      (installation) => installation.last_value.rwzi_awzi_name
+                    ...orderedSewerInstallations.map(
+                      (installation) => installation?.last_value?.rwzi_awzi_name
                     ),
                   ]}
                   data={[
@@ -128,21 +148,19 @@ export const SewerWater: React.FC<IProps> = ({ data, selectedRegio }) => {
                           .average
                       )}`,
                     },
-                    ...data.results_per_sewer_installation_per_region.values.map(
-                      (installation) => ({
-                        y: installation?.last_value?.rna_per_ml,
-                        color: '#C1C1C1',
-                        label: installation?.last_value
-                          ? `${formatDate(
-                              installation.last_value.date_measurement_unix *
-                                1000,
-                              'short'
-                            )}: ${formatNumber(
-                              installation.last_value.rna_per_ml
-                            )}`
-                          : false,
-                      })
-                    ),
+                    ...orderedSewerInstallations.map((installation) => ({
+                      y: installation?.last_value?.rna_per_ml,
+                      color: '#C1C1C1',
+                      label: installation?.last_value
+                        ? `${formatDate(
+                            installation.last_value.date_measurement_unix *
+                              1000,
+                            'short'
+                          )}: ${formatNumber(
+                            installation.last_value.rna_per_ml
+                          )}`
+                        : false,
+                    })),
                   ]}
                   axisTitle={text.bar_chart_axis_title}
                 />

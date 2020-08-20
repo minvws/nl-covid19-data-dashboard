@@ -1,36 +1,44 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import Highcharts, { SeriesLineOptions } from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-import ChartTimeControls from 'components/chartTimeControls';
-
 import formatNumber from 'utils/formatNumber';
 import formatDate from 'utils/formatDate';
-import { Value } from 'types/data';
+
+interface Value {
+  date: number;
+  value: number | undefined | null;
+}
 
 type TranslationStrings = Record<string, string>;
 
-type MultiDateLineChartProps = {
-  values: Value[];
-  secondaryValues: Value[][];
-  signaalwaarde?: number;
+type RegionalSewerWaterLineChartProps = {
+  averageValues: Value[];
+  allValues: Value[][];
   text: TranslationStrings;
 };
 
 function getOptions(
-  values: Value[],
-  secondaryValues: Value[][] | undefined,
+  averageValues: Value[],
+  allValues: Value[][],
   text: TranslationStrings
 ): Highcharts.Options {
   const series: SeriesLineOptions[] = [
     {
       type: 'line',
-      data: values.map((value) => [value.date, value.value]),
+      data: averageValues.map((value) => [value.date, value.value]),
       name: text.average_label_text,
       showInLegend: true,
       color: '#3391CC',
+      allowPointSelect: false,
       marker: {
+        symbol: 'circle',
         enabled: false,
+      },
+      events: {
+        legendItemClick: function () {
+          return false;
+        },
       },
       states: {
         inactive: {
@@ -40,28 +48,30 @@ function getOptions(
     },
   ];
 
-  if (secondaryValues) {
-    secondaryValues.forEach((values, index) => {
-      series.unshift({
-        type: 'line',
-        data: values.map((value) => [value.date, value.value]),
-        name: text.secondary_label_text,
-        showInLegend: index === 0,
-        color: '#D2D2D2',
-        marker: {
+  allValues.forEach((values, index) => {
+    series.unshift({
+      type: 'line',
+      data: values.map((value) => [value.date, value.value]),
+      name: text.secondary_label_text,
+      showInLegend: index === 0,
+      color: '#D2D2D2',
+      allowPointSelect: false,
+      marker: {
+        enabled: false,
+      },
+      events: {
+        legendItemClick: () => false,
+      },
+      states: {
+        hover: {
           enabled: false,
         },
-        states: {
-          hover: {
-            enabled: false,
-          },
-          inactive: {
-            opacity: 1,
-          },
+        inactive: {
+          opacity: 1,
         },
-      });
+      },
     });
-  }
+  });
 
   const options: Highcharts.Options = {
     chart: {
@@ -78,6 +88,9 @@ function getOptions(
     legend: {
       itemWidth: 300,
       reversed: true,
+      itemHoverStyle: {
+        color: '#666',
+      },
       itemStyle: {
         color: '#666',
         cursor: 'pointer',
@@ -99,7 +112,7 @@ function getOptions(
       title: {
         text: null,
       },
-      categories: values.map((value) => value?.date.toString()),
+      categories: averageValues.map((value) => value?.date.toString()),
       labels: {
         align: 'right',
         // types say `rotation` needs to be a number,
@@ -118,7 +131,7 @@ function getOptions(
       borderColor: '#01689B',
       borderRadius: 0,
       formatter: function (): false | string {
-        if (this.series.name !== 'average') {
+        if (this.series.name !== text.average_label_text) {
           return false;
         }
         return `${formatDate(this.x * 1000)}: ${formatNumber(this.y)}`;
@@ -148,61 +161,16 @@ function getOptions(
   return options;
 }
 
-const filterSecondaryValues = (
-  secondaryValues: Value[][],
-  days: number
-): Value[][] => {
-  return secondaryValues.map((values: Value[]) => filterValues(values, days));
-};
-
-const filterValues = (values: Value[], days: number): Value[] => {
-  const minimumDate = Math.floor(
-    new Date().getTime() / 1000 - days * 24 * 60 * 60
-  );
-  return values
-    .filter((value: Value) => value.date >= minimumDate)
-    .map((value: Value): Value => ({ ...value }));
-};
-
-const MultiDateLineChart: React.FC<MultiDateLineChartProps> = ({
-  values,
-  secondaryValues,
+const RegionalSewerWaterLineChart: React.FC<RegionalSewerWaterLineChartProps> = ({
+  averageValues,
+  allValues,
   text,
 }) => {
-  const [timeframe, setTimeframe] = useState('month');
-
   const chartOptions = useMemo(() => {
-    const week = 7;
-    const month = 30;
+    return getOptions(averageValues, allValues, text);
+  }, [averageValues, allValues, text]);
 
-    if (timeframe === 'all') {
-      return getOptions(values, secondaryValues, text);
-    }
-    if (timeframe === 'month') {
-      return getOptions(
-        filterValues(values, month),
-        filterSecondaryValues(secondaryValues, month),
-        text
-      );
-    }
-    if (timeframe === 'week') {
-      return getOptions(
-        filterValues(values, week),
-        filterSecondaryValues(secondaryValues, week),
-        text
-      );
-    }
-  }, [values, secondaryValues, text, timeframe]);
-
-  return (
-    <>
-      <HighchartsReact highcharts={Highcharts} options={chartOptions} />
-      <ChartTimeControls
-        timeframe={timeframe}
-        onChange={(evt) => setTimeframe(evt.target.value)}
-      />
-    </>
-  );
+  return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;
 };
 
-export default MultiDateLineChart;
+export default RegionalSewerWaterLineChart;
