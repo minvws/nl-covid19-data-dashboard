@@ -32,7 +32,8 @@
   "header": {
     "title": "Dashboard coronavirus",
     "text": "The coronavirus dashboard provides information on the development of the coronavirus in The Netherlands.",
-    "link": "Read more"
+    "link": "Read more",
+    "logo_alt": "Rijksoverheid"
   },
   "nav": {
     "links": {
@@ -40,8 +41,10 @@
       "regio": "Regional numbers",
       "over": "About this dashboard",
       "meer": "More information on the corona virus",
+      "meer_href": "https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19",
       "verantwoording": "Explanation of the data presented"
-    }
+    },
+    "title": "Corona Dashboard"
   },
   "ic_opnames_per_dag": {
     "title": "ICU admissions per day",
@@ -71,7 +74,8 @@
     "bron": {
       "href": "https://www.nivel.nl/nl/nivel-zorgregistraties-eerste-lijn/nivel-zorgregistraties-eerste-lijn",
       "text": "Nivel Zorgregistraties Eerste Lijn"
-    }
+    },
+    "estimated_amount_of_patients": "Geschat aantal patiënten met verdenking van COVID-19:"
   },
   "ziekenhuisopnames_per_dag": {
     "title": "Hospital admissions per day",
@@ -124,7 +128,9 @@
     "legenda_line": "The number of infectious people in the Netherlands",
     "legenda_marge": "The confidence interval shows the range between which the number of infectious people falls.",
     "rangeLegendLabel": "Confidence interval",
-    "lineLegendLabel": "Infectious people"
+    "lineLegendLabel": "Infectious people",
+    "geen_signaalwaarde_beschikbaar": "Voor het aantal besmettelijke mensen is geen signaalwaarde beschikbaar.",
+    "geen_signaalwaarde_beschikbaar_lees_waarom": "Lees hier waarom"
   },
   "reproductiegetal": {
     "title": "Reproduction number",
@@ -143,7 +149,8 @@
       "text": "RIVM"
     },
     "legenda_r": "The reproduction number is not an exact value but a reliable estimate. Reproduction numbers (R) using data from less than two weeks ago are not reliable, therefore, the line depicting R stops at a date two weeks in the past. ",
-    "legenda_marge": "The confidence interval shows the range between which the number R falls. This is updated on a weekly basis."
+    "legenda_marge": "The confidence interval shows the range between which the number R falls. This is updated on a weekly basis.",
+    "reproductie_explainer_alt": "Ondersteunende afbeelding bij bovenstaande uitleg"
   },
   "overige_gegevens": {
     "title": "To be developed",
@@ -494,5 +501,29 @@
     },
     "graph_average_label_text": "Average value of all tested locations",
     "graph_secondary_label_text": "Measured value per location"
+  },
+  "common": {
+    "metadata": {
+      "source": "Bron data"
+    },
+    "barScale": {
+      "signaalwaarde": "Signaalwaarde"
+    }
+  },
+  "select_municipality": {
+    "input_municipality_placeholder": "bv. Aa en Hunze",
+    "municipality_in_safety_region_selected": "Gemeente {{municipality}} in veiligheidsregio {{safetyRegion}} is geselecteerd.",
+    "no_municipality_selected": "Er is geen gemeente geselecteerd",
+    "result_count_help_text": "Er zijn {{resultCount}} resultaten, gebruik de omhoog en omlaag pijltjes toetsen om te navigeren. Druk op Enter om te selecteren.",
+    "select_mmunicipality": "Selecteer uw gemeente"
+  },
+  "regionaal_index": {
+    "your_safety_region": "Uw veiligheidsregio",
+    "select_safety_region_municipality": "Selecteer een veiligheidsregio of gemeente"
+  },
+  "seoHead": {
+    "default_description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
+    "default_title": "Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
+    "default_url": "https://coronadashboard.rijksoverheid.nl"
   }
 }
