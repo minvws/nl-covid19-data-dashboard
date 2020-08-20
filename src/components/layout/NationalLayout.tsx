@@ -4,15 +4,22 @@ import { useRouter } from 'next/router';
 
 import GraphHeader from 'components/graphHeader';
 import { getLayout as getSiteLayout } from 'components/layout';
+import { ReproductionIndexBarScale } from 'pages/landelijk/reproductiegetal';
+import { PostivelyTestedPeopleBarScale } from 'pages/landelijk/positief-geteste-mensen';
 
 import GetestIcon from 'assets/test.svg';
 import ReproIcon from 'assets/reproductiegetal.svg';
+import Ziektegolf from 'assets/ziektegolf.svg';
+import Ziekenhuis from 'assets/ziekenhuis.svg';
+import Arts from 'assets/arts.svg';
 
 import siteText from 'locale';
 
 import { WithChildren } from 'types';
 import useMediaQuery from 'utils/useMediaQuery';
-import BarScale from 'components/barScale';
+import { InfectiousPeopleBarScale } from 'pages/landelijk/besmettelijke-mensen';
+import { IntakeHospitalBarScale } from 'pages/landelijk/ziekenhuis-opnames';
+import { IntakeIntensiveCareBarscale } from 'pages/landelijk/intensive-care-opnames';
 
 export default NationalLayout;
 
@@ -50,6 +57,12 @@ function NationalLayout(props: WithChildren) {
   // remove focus after navigation
   const blur = (evt: any) => evt.target.blur();
 
+  function getClassName(path: string) {
+    return router.pathname === path
+      ? 'metric-link active-metric-link'
+      : 'metric-link';
+  }
+
   return (
     <div className="national-layout">
       {showAside && (
@@ -61,87 +74,94 @@ function NationalLayout(props: WithChildren) {
                 <Link href="/landelijk/positief-geteste-mensen">
                   <a
                     onClick={blur}
-                    className={
-                      router.pathname === '/landelijk/positief-geteste-mensen'
-                        ? 'metric-link active-metric-link'
-                        : 'metric-link'
-                    }
+                    className={getClassName(
+                      '/landelijk/positief-geteste-mensen'
+                    )}
                   >
                     <GraphHeader
                       Icon={GetestIcon}
                       title={siteText.positief_geteste_personen.title}
                     />
                     <span>
-                      <BarScale
-                        min={0}
-                        max={10}
-                        screenReaderText={
-                          siteText.positief_geteste_personen
-                            .screen_reader_graph_content
-                        }
-                        value={
-                          data?.infected_people_delta_normalized?.last_value
-                            ?.infected_daily_increase ?? 0
-                        }
-                        id="positief"
-                        rangeKey="infected_daily_increase"
-                        gradient={[
-                          {
-                            color: '#3391CC',
-                            value: 0,
-                          },
-                        ]}
+                      <PostivelyTestedPeopleBarScale
+                        data={data?.infected_people_delta_normalized}
                       />
                     </span>
                   </a>
                 </Link>
               </li>
+
               <li>
                 <Link href="/landelijk/reproductiegetal">
                   <a
                     onClick={blur}
-                    className={
-                      router.pathname === '/landelijk/reproductiegetal'
-                        ? 'metric-link active-metric-link'
-                        : 'metric-link'
-                    }
+                    className={getClassName('/landelijk/reproductiegetal')}
                   >
                     <GraphHeader
                       Icon={ReproIcon}
                       title={siteText.reproductiegetal.title}
                     />
                     <span>
-                      <BarScale
-                        min={0}
-                        max={2}
-                        screenReaderText={
-                          siteText.reproductiegetal.screen_reader_graph_content
-                        }
-                        signaalwaarde={1}
-                        value={
-                          data?.reproduction_index_last_known_average
-                            ?.last_value?.reproduction_index_avg ?? 0
-                        }
-                        id="repro"
-                        rangeKey="reproduction_index_avg"
-                        gradient={[
-                          {
-                            color: '#69c253',
-                            value: 0,
-                          },
-                          {
-                            color: '#69c253',
-                            value: 1,
-                          },
-                          {
-                            color: '#D3A500',
-                            value: 1.0104,
-                          },
-                          {
-                            color: '#f35065',
-                            value: 1.125,
-                          },
-                        ]}
+                      <ReproductionIndexBarScale
+                        data={data?.reproduction_index}
+                        lastKnown={data?.reproduction_index_last_known_average}
+                      />
+                    </span>
+                  </a>
+                </Link>
+              </li>
+
+              <li>
+                <Link href="/landelijk/besmettelijke-mensen">
+                  <a
+                    onClick={blur}
+                    className={getClassName('/landelijk/besmettelijke-mensen')}
+                  >
+                    <GraphHeader
+                      Icon={Ziektegolf}
+                      title={siteText.besmettelijke_personen.title}
+                    />
+                    <span>
+                      <InfectiousPeopleBarScale
+                        data={data?.infectious_people_count_normalized}
+                      />
+                    </span>
+                  </a>
+                </Link>
+              </li>
+
+              <li>
+                <Link href="/landelijk/ziekenhuis-opnames">
+                  <a
+                    onClick={blur}
+                    className={getClassName('/landelijk/ziekenhuis-opnames')}
+                  >
+                    <GraphHeader
+                      Icon={Ziekenhuis}
+                      title={siteText.ziekenhuisopnames_per_dag.title}
+                    />
+                    <span>
+                      <IntakeHospitalBarScale data={data?.intake_hospital_ma} />
+                    </span>
+                  </a>
+                </Link>
+              </li>
+
+              <li>
+                <Link href="/landelijk/intensive-care-opnames">
+                  <a
+                    onClick={blur}
+                    className={getClassName(
+                      '/landelijk/intensive-care-opnames'
+                    )}
+                  >
+                    <GraphHeader
+                      Icon={Arts}
+                      title={siteText.ic_opnames_per_dag.title}
+                    />
+                    <span>
+                      <IntakeIntensiveCareBarscale
+                        data={data?.intake_intensivecare_ma}
                       />
                     </span>
                   </a>

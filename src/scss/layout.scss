@@ -87,7 +87,7 @@
 @media (min-width: 1000px) {
   .national-layout > aside {
     flex: 1 0 auto;
-    max-width: 30em;
+    width: 30em;
   }
   .national-layout > div {
     flex: 3 0 auto;
@@ -129,9 +129,9 @@ a.metric-link {
   &::after {
     content: '';
     background-image: url('/images/chevron.svg');
-    background-size: 2em 2em;
-    height: 2em;
-    width: 2em;
+    background-size: 1.5em 1.5em;
+    height: 1.5em;
+    width: 1.5em;
     display: block;
     position: absolute;
     right: 1em;

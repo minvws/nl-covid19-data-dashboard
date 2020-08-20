@@ -19,11 +19,37 @@ import {
   IntakeShareAgeGroups,
 } from 'types/data';
 
+const text: typeof siteText.positief_geteste_personen =
+  siteText.positief_geteste_personen;
+
+export function PostivelyTestedPeopleBarScale(props: {
+  data: InfectedPeopleDeltaNormalized | undefined;
+}) {
+  const { data } = props;
+
+  if (!data) return null;
+
+  return (
+    <BarScale
+      min={0}
+      max={10}
+      screenReaderText={text.screen_reader_graph_content}
+      value={data.last_value.infected_daily_increase}
+      id="positief"
+      rangeKey="infected_daily_increase"
+      gradient={[
+        {
+          color: '#3391CC',
+          value: 0,
+        },
+      ]}
+    />
+  );
+}
+
 const PostivelyTestedPeople: FCWithLayout = () => {
   const { data } = useSWR(`/json/NL.json`);
 
-  const text: typeof siteText.positief_geteste_personen =
-    siteText.positief_geteste_personen;
   const delta: InfectedPeopleDeltaNormalized | undefined =
     data?.infected_people_delta_normalized;
   const age: IntakeShareAgeGroups | undefined = data?.intake_share_age_groups;
@@ -41,22 +67,7 @@ const PostivelyTestedPeople: FCWithLayout = () => {
       <GraphHeader Icon={Getest} title={text.title} />
       <p>{text.text}</p>
 
-      {delta && (
-        <BarScale
-          min={0}
-          max={10}
-          screenReaderText={text.screen_reader_graph_content}
-          value={delta.last_value.infected_daily_increase}
-          id="positief"
-          rangeKey="infected_daily_increase"
-          gradient={[
-            {
-              color: '#3391CC',
-              value: 0,
-            },
-          ]}
-        />
-      )}
+      {delta && <PostivelyTestedPeopleBarScale data={delta} />}
 
       {total && (
         <h3>
