@@ -478,7 +478,7 @@
   "charts": {
     "time_controls": {
       "all": "Toon alles",
-      "month": "Laatste maand",
+      "5weeks": "Laatste 5 weken",
       "week": "Laatste week"
     }
   },

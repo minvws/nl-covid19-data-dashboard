@@ -474,7 +474,7 @@
   "charts": {
     "time_controls": {
       "all": "Show everything",
-      "month": "Last month",
+      "5weeks": "Last 5 weeks",
       "week": "Last week"
     }
   },
