@@ -61,7 +61,7 @@ const SuspectedPatients: FCWithLayout = () => {
 
       {total && (
         <h3>
-          Geschat aantal patiënten met verdenking van COVID-19:{' '}
+          {text.estimated_amount_of_patients}{' '}
           <span style={{ color: '#01689b' }}>{formatNumber(total)}</span>
         </h3>
       )}
@@ -82,6 +82,7 @@ const SuspectedPatients: FCWithLayout = () => {
       {data && (
         <>
           <LineChart
+            timeframeOptions={['all', '5weeks']}
             values={data.values.map((value) => ({
               value: value.incidentie,
               date: value.week_unix,

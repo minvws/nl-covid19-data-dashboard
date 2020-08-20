@@ -72,7 +72,7 @@ function Layout(props: WithChildren<LayoutProps>) {
                 ? '/images/logo-ro-small.svg'
                 : '/images/logo-ro.svg'
             }
-            alt="Rijksoverheid"
+            alt={text.header.logo_alt}
             // loading="lazy"
             width={showSmallLogo ? 40 : 314}
             height={showSmallLogo ? 76 : 125}
@@ -144,7 +144,7 @@ function Layout(props: WithChildren<LayoutProps>) {
       <footer>
         <div className={styles.footer}>
           <MaxWidth>
-            <h3>Corona Dashboard</h3>
+            <h3>{text.nav.title}</h3>
             <nav>
               <ul className={styles.footerList}>
                 <li>
@@ -177,9 +177,7 @@ function Layout(props: WithChildren<LayoutProps>) {
                 </li>
                 <li>
                   <a
-                    href={
-                      'https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19'
-                    }
+                    href={text.nav.links.meer_href}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={styles.footerLink}

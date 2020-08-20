@@ -91,7 +91,7 @@ const ReproductionIndex: FCWithLayout = () => {
         height={100}
         loading="lazy"
         src="/images/reproductie-explainer.svg"
-        alt="Ondersteunende afbeelding bij bovenstaande uitleg"
+        alt={text.reproductie_explainer_alt}
       />
 
       <h4>{text.graph_title}</h4>

@@ -70,6 +70,7 @@ const SewerWater: FCWithLayout = () => {
       {data?.values && (
         <>
           <LineChart
+            timeframeOptions={['all', '5weeks']}
             values={data.values.map((value) => ({
               value: Number(value.average),
               date: value.week_unix,

@@ -144,6 +144,7 @@ const Regio: FCWithLayout<RegioProps> = (props) => {
     selectedRegio?.code ? `/json/${selectedRegio.code}.json` : null
   );
   const data: Regionaal = response.data;
+  const text: typeof siteText.regionaal_index = siteText.regionaal_index;
 
   useEffect(focusFirstHeading, [data]);
 
@@ -164,11 +165,11 @@ const Regio: FCWithLayout<RegioProps> = (props) => {
 
             <div className={styles['map-container']}>
               <div className={styles['safety-region-header']}>
-                <p>Uw veiligheidsregio</p>
+                <p>{text.your_safety_region}</p>
                 {selectedRegio && <h2>{selectedRegio.name}</h2>}
                 {!selectedRegio && (
                   <span className={styles['select-safety-region']}>
-                    Selecteer een veiligheidsregio of gemeente
+                    {text.select_safety_region_municipality}
                   </span>
                 )}
               </div>

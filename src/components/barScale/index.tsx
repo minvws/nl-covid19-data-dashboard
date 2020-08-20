@@ -6,6 +6,7 @@ import replaceVariablesInText from 'utils/replaceVariablesInText';
 import { scaleQuantile, scaleThreshold } from 'd3-scale';
 
 import useDynamicScale from 'utils/useDynamicScale';
+import siteText from 'locale';
 
 type GradientStop = {
   color: string;
@@ -37,6 +38,8 @@ const BarScale: FunctionComponent<BarscaleProps> = ({
   const rand = useRef(Math.random().toString(36).substring(2, 15));
 
   const { scale: x } = useDynamicScale(min, max, rangeKey, value);
+
+  const text: typeof siteText.common.barScale = siteText.common.barScale;
 
   if (!x) {
     return null;
@@ -148,7 +151,9 @@ const BarScale: FunctionComponent<BarscaleProps> = ({
                 x={`${x(signaalwaarde)}%`}
                 y={72}
                 textAnchor={textAlign(x(signaalwaarde)) as any}
-              >{`Signaalwaarde: ${signaalwaarde}`}</text>
+              >
+                {text.signaalwaarde}: {signaalwaarde}
+              </text>
             </g>
           )}
 

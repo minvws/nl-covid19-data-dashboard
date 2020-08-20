@@ -39,7 +39,8 @@
   "header": {
     "title": "Dashboard coronavirus",
     "text": "Het dashboard coronavirus geeft informatie over de ontwikkeling van het coronavirus in Nederland.",
-    "link": "Lees meer"
+    "link": "Lees meer",
+    "logo_alt": "Rijksoverheid"
   },
   "nav": {
     "links": {
@@ -47,8 +48,10 @@
       "regio": "Regionale cijfers",
       "over": "Over dit dashboard",
       "meer": "Meer informatie over het coronavirus",
+      "meer_href": "https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19",
       "verantwoording": "Cijferverantwoording"
-    }
+    },
+    "title": "Corona Dashboard"
   },
   "ic_opnames_per_dag": {
     "title": "Intensive care-opnames per dag",
@@ -75,6 +78,7 @@
     "open": "Verberg uitleg",
     "sluit": "Meer uitleg en data",
     "screen_reader_graph_content": "{{value}} patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten, per 100.000 inwoners, per week.",
+    "estimated_amount_of_patients": "Geschat aantal patiënten met verdenking van COVID-19:",
     "bron": {
       "href": "https://www.nivel.nl/nl/nivel-zorgregistraties-eerste-lijn/nivel-zorgregistraties-eerste-lijn",
       "text": "Nivel Zorgregistraties Eerste Lijn"
@@ -131,7 +135,9 @@
     "legenda_line": "Het aantal besmettelijke mensen in Nederland.",
     "legenda_marge": "De onzekerheidsmarge toont tussen welke waarden het aantal besmettelijke mensen zich bevindt.",
     "rangeLegendLabel": "Onzekerheidsmarge",
-    "lineLegendLabel": "Besmettelijke mensen"
+    "lineLegendLabel": "Besmettelijke mensen",
+    "geen_signaalwaarde_beschikbaar": "Voor het aantal besmettelijke mensen is geen signaalwaarde beschikbaar.",
+    "geen_signaalwaarde_beschikbaar_lees_waarom": "Lees hier waarom"
   },
   "reproductiegetal": {
     "title": "Reproductiegetal",
@@ -150,7 +156,8 @@
       "text": "RIVM"
     },
     "legenda_r": "De effectieve R is een schatting. Voor recente R schattingen is de betrouwbaarheid niet groot, daarom loopt de R-lijn niet door in de laatste twee weken.",
-    "legenda_marge": "De onzekerheidsmarge toont tussen welke waarden de R zich bevindt. Dit wordt wekelijks bijgewerkt."
+    "legenda_marge": "De onzekerheidsmarge toont tussen welke waarden de R zich bevindt. Dit wordt wekelijks bijgewerkt.",
+    "reproductie_explainer_alt": "Ondersteunende afbeelding bij bovenstaande uitleg"
   },
   "overige_gegevens": {
     "title": "Nog te ontwikkelen",
@@ -277,7 +284,7 @@
   },
   "over_disclaimer": {
     "title": "Disclaimer",
-    "text": "Let op: dit dashboard coronavirus is in ontwikkeling. De komende periode worden stap voor stap meer functies en gegevens toegevoegd. Daarnaast werken we aan het verbeteren van de digitoegankelijkheid van deze site. De informatie op deze site willen we voor iedereen in Nederland beschikbaar maken. Het dashboard wordt nog niet gebruikt voor besluitvorming. Er kunnen nog geen conclusies uit getrokken worden."
+    "text": "Let op: dit dashboard coronavirus is in ontwikkeling. De komende periode worden stap voor stap meer functies en gegevens toegevoegd. Daarnaast werken we aan het verbeteren van de digitoegankelijkheid van deze site. De informatie op deze site willen we voor iedereen in Nederland beschikbaar maken."
   },
   "over_beschrijving": {
     "text": "Het dashboard coronavirus geeft informatie over de ontwikkeling van het coronavirus in Nederland. Met deze informatie kunnen eerder signalen van een toename van de verspreiding van het virus worden opgepikt. We moeten voorkomen dat het virus weer om zich heen grijpt. Het aantal intensive care en ziekenhuisopnames geven in de kern de ultieme waarschuwing. Maar eerder al komen de signalen door via de testuitslagen die vertaald worden naar het aantal positief geteste personen per 100.000 inwoners. Daarnaast zijn er ondersteunende indicatoren die de epidemie beschrijven en andersoortige signalen oppikken."
@@ -295,7 +302,7 @@
       },
       {
         "vraag": "Van wie is dit dashboard?",
-        "antwoord": "Dit dashboard is ontwikkeld in opdracht van het ministerie van Volksgezondheid, Welzijn en Sport. De komende weken komen er meer gegevens bij. Het dashboard zal in de toekomst beheerd worden door het RIVM."
+        "antwoord": "Dit dashboard is ontwikkeld in opdracht van het ministerie van Volksgezondheid, Welzijn en Sport. De komende weken komen er meer gegevens bij."
       },
       {
         "vraag": "Waarom deze indicatoren?",
@@ -303,7 +310,7 @@
       },
       {
         "vraag": "Wat betekent het dat dit dashboard nog in ontwikkeling is?",
-        "antwoord": "In de komende periode zullen naast de hoofdindicatoren ook andere gegevens worden toegevoegd. Ook zal het dashboard een overzicht bieden van alle geldende maatregelen en adviezen, op landelijk en regionaal niveau."
+        "antwoord": "In de komende periode zullen naast de hoofdindicatoren ook andere gegevens worden toegevoegd."
       },
       {
         "vraag": "Wat is een signaalwaarde?",
@@ -342,6 +349,10 @@
         "antwoord": "We berekenen de toename van het aantal positief geteste mensen door het gerapporteerde cumulatief aantal meldingen van positief geteste mensen van vandaag, af te trekken van het cumulatief aantal van gisteren. Correcties over oude data, zoals dubbeltellingen, worden door het RIVM verwerkt op de datum dat dit bekend is. Het gerapporteerde nieuwe aantal meldingen voor die dag ligt dan lager dan het feitelijk aantal die dag. Daar staat tegenover dat voorgaande dagen er dus teveel gevallen zijn gerapporteerd. Door correctie kan het cumulatieve aantal van vandaag lager zijn dan het cumulatieve aantal van gisteren. In die gevallen wordt er op het dashboard de waarde 0 gepresenteerd in plaats van een negatief waarde; een negatieve waarde is namelijk verwarrend. Daarom krijg je uiteindelijk verschillen als je regio's optelt naar landelijk. Als je de negatieve waarden zou meerekenen kom je wel op de juiste getallen uit."
       }
     ]
+  },
+  "regionaal_index": {
+    "your_safety_region": "Uw veiligheidsregio",
+    "select_safety_region_municipality": "Selecteer een veiligheidsregio of gemeente"
   },
   "regionaal_ziekenhuisopnames_per_dag": {
     "title": "Ziekenhuisopnames per dag",
@@ -474,7 +485,7 @@
   "charts": {
     "time_controls": {
       "all": "Toon alles",
-      "month": "Laatste maand",
+      "5weeks": "Laatste 5 weken",
       "week": "Laatste week"
     }
   },
@@ -501,5 +512,25 @@
     },
     "graph_average_label_text": "Gemiddelde waarde van gemeten locaties.",
     "graph_secondary_label_text": "Gemeten waarde per locatie."
+  },
+  "common": {
+    "metadata": {
+      "source": "Bron data"
+    },
+    "barScale": {
+      "signaalwaarde": "Signaalwaarde"
+    }
+  },
+  "select_municipality": {
+    "input_municipality_placeholder": "bv. Aa en Hunze",
+    "municipality_in_safety_region_selected": "Gemeente {{municipality}} in veiligheidsregio {{safetyRegion}} is geselecteerd.",
+    "no_municipality_selected": "Er is geen gemeente geselecteerd",
+    "result_count_help_text": "Er zijn {{resultCount}} resultaten, gebruik de omhoog en omlaag pijltjes toetsen om te navigeren. Druk op Enter om te selecteren.",
+    "select_mmunicipality": "Selecteer uw gemeente"
+  },
+  "seoHead": {
+    "default_description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
+    "default_title": "Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
+    "default_url": "https://coronadashboard.rijksoverheid.nl"
   }
 }
