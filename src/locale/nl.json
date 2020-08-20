@@ -1,4 +1,11 @@
 {
+  "nationaal_layout": {
+    "headings": {
+      "medisch": "Medische indicatoren",
+      "overig": "Overige indicatoren",
+      "verpleeghuis": "Verpleeghuiszorg"
+    }
+  },
   "andere_gegevens": "Andere gegevens",
   "blok_andere_gegevens": {
     "title": "Andere gegevens",

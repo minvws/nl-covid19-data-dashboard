@@ -126,6 +126,10 @@ a.metric-link {
     background: $page-background;
   }
 
+  h3 {
+    margin-right: 1em;
+  }
+
   &::after {
     content: '';
     background-image: url('/images/chevron.svg');
