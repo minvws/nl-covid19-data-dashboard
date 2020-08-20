@@ -13,6 +13,7 @@ import { SuspectedPatientsBarScale } from 'pages/landelijk/verdenkingen-huisarts
 import { SewerWaterBarScale } from 'pages/landelijk/rioolwater';
 import { NursingHomeInfectedPeopleBarScale } from 'pages/landelijk/verpleeghuis-positief-geteste-personen';
 import { NursingHomeInfectedLocationsBarScale } from 'pages/landelijk/verpleeghuis-besmette-locaties';
+import { NursingHomeDeathsBarScale } from 'pages/landelijk/verpleeghuis-sterfte';
 
 import GetestIcon from 'assets/test.svg';
 import ReproIcon from 'assets/reproductiegetal.svg';
@@ -28,7 +29,6 @@ import siteText from 'locale';
 import { WithChildren } from 'types';
 
 import useMediaQuery from 'utils/useMediaQuery';
-import { NursingHomeDeathsBarScale } from 'pages/landelijk/verpleeghuis-sterfte';
 
 export default NationalLayout;
 
@@ -288,11 +288,7 @@ function NationalLayout(props: WithChildren) {
         </aside>
       )}
 
-      {showContent && (
-        <section>
-          <div>{children}</div>
-        </section>
-      )}
+      {showContent && <section>{children}</section>}
     </div>
   );
 }

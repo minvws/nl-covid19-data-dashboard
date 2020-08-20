@@ -7,6 +7,7 @@ type GraphHeaderTypes = {
   title: string;
   regio?: string;
   headingRef?: React.RefObject<HTMLHeadingElement>;
+  as?: 'h2' | 'h3';
 };
 
 const GraphHeader: FunctionComponent<GraphHeaderTypes> = ({
@@ -14,11 +15,16 @@ const GraphHeader: FunctionComponent<GraphHeaderTypes> = ({
   title,
   regio,
   headingRef,
+  as = 'h3',
 }) => {
   return (
     <div className={styles.graphHeader}>
       {Icon && (
-        <div className={styles.graphHeaderIcon}>
+        <div
+          className={`${styles.graphHeaderIcon} ${
+            as === 'h2' ? styles['icon-large'] : styles['icon-small']
+          }`}
+        >
           <Icon />
         </div>
       )}
@@ -27,10 +33,19 @@ const GraphHeader: FunctionComponent<GraphHeaderTypes> = ({
       this is used on the region page to focus the first graph header
       after the region is changed.
       */}
-      <h3 ref={headingRef} tabIndex={headingRef ? -1 : undefined}>
-        {title}
-        {regio && ` in ${regio}`}
-      </h3>
+      {as === 'h3' && (
+        <h3 ref={headingRef} tabIndex={headingRef ? -1 : undefined}>
+          {title}
+          {regio && ` in ${regio}`}
+        </h3>
+      )}
+
+      {as === 'h2' && (
+        <h2 ref={headingRef} tabIndex={headingRef ? -1 : undefined}>
+          {title}
+          {regio && ` in ${regio}`}
+        </h2>
+      )}
     </div>
   );
 };
