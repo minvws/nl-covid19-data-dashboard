@@ -97,7 +97,7 @@ function Layout(props: WithChildren<LayoutProps>) {
                   <a
                     onClick={blur}
                     className={
-                      router.pathname === '/landelijk'
+                      router.pathname.includes('/landelijk')
                         ? styles.link + ' ' + styles.active
                         : styles.link
                     }
