@@ -100,6 +100,7 @@ export const InfectiousPeople: React.FC = () => {
             }))}
             rangeLegendLabel={text.rangeLegendLabel}
             lineLegendLabel={text.lineLegendLabel}
+            timeframeOptions={['all', '5weeks']}
           />
         )}
 

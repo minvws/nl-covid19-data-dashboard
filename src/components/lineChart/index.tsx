@@ -2,10 +2,13 @@ import React, { useMemo, useState } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-import ChartTimeControls from 'components/chartTimeControls';
+import ChartTimeControls, {
+  TimeframeOption,
+} from 'components/chartTimeControls';
 
 import formatNumber from 'utils/formatNumber';
 import formatDate from 'utils/formatDate';
+import { getFilteredValues } from 'components/chartTimeControls/chartTimeControlUtils';
 
 interface Value {
   date: number;
@@ -15,6 +18,7 @@ interface Value {
 type LineChartProps = {
   values: Value[];
   signaalwaarde?: number;
+  timeframeOptions?: TimeframeOption[];
 };
 
 function getOptions(
@@ -117,31 +121,33 @@ function getOptions(
   return options;
 }
 
-const LineChart: React.FC<LineChartProps> = ({ values, signaalwaarde }) => {
-  const [timeframe, setTimeframe] = useState('month');
+const LineChart: React.FC<LineChartProps> = ({
+  values,
+  signaalwaarde,
+  timeframeOptions,
+}) => {
+  const [timeframe, setTimeframe] = useState<TimeframeOption>('5weeks');
 
   const chartOptions = useMemo(() => {
-    const week = 7;
-    const month = 30;
-    const days = values.length;
-
-    if (timeframe === 'all') {
-      return getOptions(values, signaalwaarde);
-    }
-    if (timeframe === 'month') {
-      return getOptions(values.slice(days - month, days), signaalwaarde);
-    }
-    if (timeframe === 'week') {
-      return getOptions(values.slice(days - week, days), signaalwaarde);
-    }
+    const filteredValues = getFilteredValues<Value>(
+      values,
+      timeframe,
+      (value: Value) => value.date * 1000
+    );
+    return getOptions(filteredValues, signaalwaarde);
   }, [values, timeframe, signaalwaarde]);
+
+  if (!timeframeOptions) {
+    timeframeOptions = ['all', '5weeks', 'week'];
+  }
 
   return (
     <>
       <HighchartsReact highcharts={Highcharts} options={chartOptions} />
       <ChartTimeControls
         timeframe={timeframe}
-        onChange={(evt) => setTimeframe(evt.target.value)}
+        timeframeOptions={timeframeOptions}
+        onChange={(evt) => setTimeframe(evt.target.value as TimeframeOption)}
       />
     </>
   );

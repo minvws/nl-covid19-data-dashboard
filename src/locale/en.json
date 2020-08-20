@@ -468,7 +468,8 @@
     "time_controls": {
       "all": "Show everything",
       "month": "Last month",
-      "week": "Last week"
+      "week": "Last week",
+      "5weeks": "Last 5 weeks"
     }
   },
   "utils": {
