@@ -106,7 +106,7 @@ export const ReproductionIndex: React.FC = () => {
           <li className="gray square">{text.legenda_marge}</li>
         </Legenda>
 
-        <Metadata dataSource={text.bron} text={siteText.common.metadata} />
+        <Metadata dataSource={text.bron} />
       </Collapse>
     </GraphContainer>
   );

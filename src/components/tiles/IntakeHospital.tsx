@@ -84,7 +84,7 @@ export const IntakeHospital: React.FC = () => {
               signaalwaarde={SIGNAAL_WAARDE}
             />
 
-            <Metadata dataSource={text.bron} text={siteText.common.metadata} />
+            <Metadata dataSource={text.bron} />
           </>
         )}
       </Collapse>

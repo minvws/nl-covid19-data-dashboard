@@ -117,7 +117,6 @@ const PostivelyTestedPeople: React.FC<IProps> = (props) => {
 
           <Metadata
             dataSource={siteText.regionaal_positief_geteste_personen.bron}
-            text={siteText.common.metadata}
           />
         </Collapse>
       )}

@@ -107,9 +107,7 @@ export const InfectiousPeople: React.FC = () => {
           <li className="gray square">{text.legenda_marge}</li>
         </Legenda>
 
-        {count && (
-          <Metadata dataSource={text.bron} text={siteText.common.metadata} />
-        )}
+        {count && <Metadata dataSource={text.bron} />}
       </Collapse>
     </GraphContainer>
   );

@@ -101,7 +101,6 @@ const IntakeHospitalRegio: React.FC<IProps> = (props) => {
           )}
           <Metadata
             dataSource={siteText.regionaal_ziekenhuisopnames_per_dag.bron}
-            text={siteText.common.metadata}
           />
         </Collapse>
       )}

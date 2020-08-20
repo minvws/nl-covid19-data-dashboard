@@ -70,7 +70,7 @@ export const NursingHomeInfectedPeople: React.FC = () => {
                 date: value.date_of_report_unix,
               }))}
             />
-            <Metadata dataSource={text.bron} text={siteText.common.metadata} />
+            <Metadata dataSource={text.bron} />
           </>
         )}
       </Collapse>

@@ -87,9 +87,7 @@ export const NursingHomeInfectedLocations: React.FC = () => {
         )}
         <p>{text.metric_text}</p>
 
-        {newLocations && (
-          <Metadata dataSource={text.bron} text={siteText.common.metadata} />
-        )}
+        {newLocations && <Metadata dataSource={text.bron} />}
       </Collapse>
     </GraphContainer>
   );

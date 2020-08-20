@@ -110,7 +110,7 @@ export const PostivelyTestedPeople: React.FC = () => {
               }))}
               axisTitle={text.graph_axis_title}
             />
-            <Metadata dataSource={text.bron} text={siteText.common.metadata} />
+            <Metadata dataSource={text.bron} />
           </>
         )}
       </Collapse>

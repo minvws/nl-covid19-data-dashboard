@@ -73,7 +73,7 @@ export const SewerWater: React.FC = () => {
               }))}
             />
 
-            <Metadata dataSource={text.bron} text={siteText.common.metadata} />
+            <Metadata dataSource={text.bron} />
           </>
         )}
       </Collapse>
