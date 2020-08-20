@@ -52,7 +52,6 @@ export const IntakeIntensiveCare: React.FC = () => {
             signaalwaarde={SIGNAAL_WAARDE}
             value={data.last_value.moving_average_ic}
             id="ic"
-            text={siteText.common.barScale}
           />
         )}
 

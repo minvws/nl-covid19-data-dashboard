@@ -1,16 +1,17 @@
 import styles from './metadata.module.scss';
-import { TranslationStrings } from 'types/common';
+import siteText from 'locale';
 
 interface IProps {
   dataSource: {
     href: string;
     text: string;
   };
-  text: TranslationStrings;
 }
 
 const Metadata: React.FC<IProps> = (props) => {
-  const { dataSource, text } = props;
+  const { dataSource } = props;
+
+  const text: typeof siteText.common.metadata = siteText.common.metadata;
 
   return (
     <div className={styles.metadataContainer}>

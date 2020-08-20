@@ -41,7 +41,6 @@ export const NursingHomeInfectedDeaths: React.FC = () => {
                 value: 0,
               },
             ]}
-            text={siteText.common.barScale}
           />
         )}
 

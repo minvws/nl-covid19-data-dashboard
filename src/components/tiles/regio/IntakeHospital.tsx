@@ -64,7 +64,6 @@ const IntakeHospitalRegio: React.FC<IProps> = (props) => {
                       value: 0,
                     },
                   ]}
-                  text={siteText.common.barScale}
                 />
                 <DateReported
                   datumsText={

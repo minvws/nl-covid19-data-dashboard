@@ -53,7 +53,6 @@ export const IntakeHospital: React.FC = () => {
                 value: 90,
               },
             ]}
-            text={siteText.common.barScale}
           />
         )}
 

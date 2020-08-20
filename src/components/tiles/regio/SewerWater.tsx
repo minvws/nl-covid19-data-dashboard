@@ -65,7 +65,6 @@ export const SewerWater: React.FC<IProps> = ({ data, selectedRegio }) => {
                     value: 0,
                   },
                 ]}
-                text={siteText.common.barScale}
               />
             )}
           </>

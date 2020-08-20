@@ -62,7 +62,6 @@ const PostivelyTestedPeople: React.FC<IProps> = (props) => {
                     value: 0,
                   },
                 ]}
-                text={siteText.common.barScale}
               />
             )}
 

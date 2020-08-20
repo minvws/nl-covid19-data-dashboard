@@ -46,7 +46,6 @@ export const SuspectedPatients: React.FC = () => {
                 value: 0,
               },
             ]}
-            text={siteText.common.barScale}
           />
         )}
 

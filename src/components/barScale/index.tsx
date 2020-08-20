@@ -6,7 +6,7 @@ import replaceVariablesInText from 'utils/replaceVariablesInText';
 import { scaleQuantile, scaleThreshold } from 'd3-scale';
 
 import useDynamicScale from 'utils/useDynamicScale';
-import { TranslationStrings } from 'types/common';
+import siteText from 'locale';
 
 type GradientStop = {
   color: string;
@@ -22,7 +22,6 @@ type BarscaleProps = {
   id: string;
   screenReaderText: string;
   rangeKey: string;
-  text: TranslationStrings;
 };
 
 const BarScale: FunctionComponent<BarscaleProps> = ({
@@ -34,12 +33,13 @@ const BarScale: FunctionComponent<BarscaleProps> = ({
   id,
   screenReaderText,
   rangeKey,
-  text,
 }) => {
   // Generate a random ID used for clipPath and linearGradient ID's.
   const rand = useRef(Math.random().toString(36).substring(2, 15));
 
   const { scale: x } = useDynamicScale(min, max, rangeKey, value);
+
+  const text: typeof siteText.common.barScale = siteText.common.barScale;
 
   if (!x) {
     return null;

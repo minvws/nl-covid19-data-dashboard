@@ -58,7 +58,6 @@ export const ReproductionIndex: React.FC = () => {
                 value: 1.125,
               },
             ]}
-            text={siteText.common.barScale}
           />
         )}
 

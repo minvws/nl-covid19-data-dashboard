@@ -4,7 +4,8 @@ import HighchartsReact from 'highcharts-react-official';
 
 import formatNumber from 'utils/formatNumber';
 import formatDate from 'utils/formatDate';
-import { TranslationStrings } from 'types/common';
+
+type TranslationStrings = Record<string, string>;
 
 interface Value {
   date: number;

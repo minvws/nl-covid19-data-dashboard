@@ -51,7 +51,6 @@ export const InfectiousPeople: React.FC = () => {
                 value: 0,
               },
             ]}
-            text={siteText.common.barScale}
           />
         )}
 
