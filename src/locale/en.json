@@ -10,11 +10,7 @@
   },
   "notificatie": {
     "titel": "Increase in infections Covid-19",
-<<<<<<< HEAD
     "bericht": "The reproduction number is more than 1, just as it was last week. There is an increase in the number of people who tested positive since the end of July. There is also an increase in the number of hospital admissions due to COVID-19, since the end of July. The most confirmed infections take place in the province of Zuid-Holland, Noord-Holland en the western part of North-Brabant. ",
-=======
-    "bericht": "The reproduction number is more than 1, just as it was last week. There is an increase in the the number of people who tested positively since the end of July. There is also an increase in the number of hospital admissions due to COVID-19, since the end of July. The most confirmed infections take place in the province of Zuid-Holland, Noord-Holland en the western part of North-Brabant. ",
->>>>>>> origin/lokalise-2020-08-20_10-43-02
     "link": {
       "text": "View the recent information from the RIVM",
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel"
