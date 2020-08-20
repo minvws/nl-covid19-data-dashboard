@@ -64,6 +64,7 @@ const IntakeHospitalRegio: React.FC<IProps> = (props) => {
                       value: 0,
                     },
                   ]}
+                  text={siteText.common.barScale}
                 />
                 <DateReported
                   datumsText={
@@ -101,6 +102,7 @@ const IntakeHospitalRegio: React.FC<IProps> = (props) => {
           )}
           <Metadata
             dataSource={siteText.regionaal_ziekenhuisopnames_per_dag.bron}
+            text={siteText.common.metadata}
           />
         </Collapse>
       )}

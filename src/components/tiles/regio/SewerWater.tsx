@@ -65,6 +65,7 @@ export const SewerWater: React.FC<IProps> = ({ data, selectedRegio }) => {
                     value: 0,
                   },
                 ]}
+                text={siteText.common.barScale}
               />
             )}
           </>
@@ -165,7 +166,10 @@ export const SewerWater: React.FC<IProps> = ({ data, selectedRegio }) => {
                   axisTitle={text.bar_chart_axis_title}
                 />
 
-                <Metadata dataSource={text.bron} />
+                <Metadata
+                  dataSource={text.bron}
+                  text={siteText.common.metadata}
+                />
               </>
             )}
         </Collapse>

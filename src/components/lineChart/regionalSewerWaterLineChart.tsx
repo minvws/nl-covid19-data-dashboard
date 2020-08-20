@@ -4,13 +4,12 @@ import HighchartsReact from 'highcharts-react-official';
 
 import formatNumber from 'utils/formatNumber';
 import formatDate from 'utils/formatDate';
+import { TranslationStrings } from 'types/common';
 
 interface Value {
   date: number;
   value: number | undefined | null;
 }
-
-type TranslationStrings = Record<string, string>;
 
 type RegionalSewerWaterLineChartProps = {
   averageValues: Value[];

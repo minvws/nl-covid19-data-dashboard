@@ -52,6 +52,7 @@ export const IntakeIntensiveCare: React.FC = () => {
             signaalwaarde={SIGNAAL_WAARDE}
             value={data.last_value.moving_average_ic}
             id="ic"
+            text={siteText.common.barScale}
           />
         )}
 
@@ -84,7 +85,7 @@ export const IntakeIntensiveCare: React.FC = () => {
               signaalwaarde={SIGNAAL_WAARDE}
             />
 
-            <Metadata dataSource={text.bron} />
+            <Metadata dataSource={text.bron} text={siteText.common.metadata} />
           </>
         )}
       </Collapse>

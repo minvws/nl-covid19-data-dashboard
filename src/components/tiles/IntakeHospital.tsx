@@ -53,6 +53,7 @@ export const IntakeHospital: React.FC = () => {
                 value: 90,
               },
             ]}
+            text={siteText.common.barScale}
           />
         )}
 
@@ -84,7 +85,7 @@ export const IntakeHospital: React.FC = () => {
               signaalwaarde={SIGNAAL_WAARDE}
             />
 
-            <Metadata dataSource={text.bron} />
+            <Metadata dataSource={text.bron} text={siteText.common.metadata} />
           </>
         )}
       </Collapse>

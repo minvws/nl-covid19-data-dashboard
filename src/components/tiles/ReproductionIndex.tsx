@@ -58,6 +58,7 @@ export const ReproductionIndex: React.FC = () => {
                 value: 1.125,
               },
             ]}
+            text={siteText.common.barScale}
           />
         )}
 
@@ -83,7 +84,7 @@ export const ReproductionIndex: React.FC = () => {
           height={100}
           loading="lazy"
           src="/images/reproductie-explainer.svg"
-          alt="Ondersteunende afbeelding bij bovenstaande uitleg"
+          alt={text.reproductie_explainer_alt}
         />
 
         <h4>{text.graph_title}</h4>
@@ -106,7 +107,7 @@ export const ReproductionIndex: React.FC = () => {
           <li className="gray square">{text.legenda_marge}</li>
         </Legenda>
 
-        <Metadata dataSource={text.bron} />
+        <Metadata dataSource={text.bron} text={siteText.common.metadata} />
       </Collapse>
     </GraphContainer>
   );

@@ -45,6 +45,7 @@ export const NursingHomeInfectedLocations: React.FC = () => {
                 value: 0,
               },
             ]}
+            text={siteText.common.barScale}
           />
         )}
         {newLocations?.last_value?.total_new_reported_locations !== null && (
@@ -87,7 +88,9 @@ export const NursingHomeInfectedLocations: React.FC = () => {
         )}
         <p>{text.metric_text}</p>
 
-        {newLocations && <Metadata dataSource={text.bron} />}
+        {newLocations && (
+          <Metadata dataSource={text.bron} text={siteText.common.metadata} />
+        )}
       </Collapse>
     </GraphContainer>
   );

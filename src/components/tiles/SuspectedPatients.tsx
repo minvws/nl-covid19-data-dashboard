@@ -46,12 +46,13 @@ export const SuspectedPatients: React.FC = () => {
                 value: 0,
               },
             ]}
+            text={siteText.common.barScale}
           />
         )}
 
         {total && (
           <h3>
-            Geschat aantal patiënten met verdenking van COVID-19:{' '}
+            {text.estimated_amount_of_patients}{' '}
             <span style={{ color: '#01689b' }}>{formatDecimal(total)}</span>
           </h3>
         )}
@@ -84,7 +85,7 @@ export const SuspectedPatients: React.FC = () => {
               }))}
             />
 
-            <Metadata dataSource={text.bron} />
+            <Metadata dataSource={text.bron} text={siteText.common.metadata} />
           </>
         )}
       </Collapse>
