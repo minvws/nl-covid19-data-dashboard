@@ -13,8 +13,6 @@ import IntakeHospital from 'components/tiles/regio/IntakeHospital';
 import PostivelyTestedPeople from 'components/tiles/regio/PositivelyTestedPeople';
 import { SewerWater } from 'components/tiles/regio/SewerWater';
 
-const SvgMap = dynamic(() => import('components/mapChart/svgMap'));
-
 import styles from './regio.module.scss';
 import openGraphImage from 'assets/sharing/og-regionale-cijfers.png?url';
 import twitterImage from 'assets/sharing/twitter-regionale-cijfers.png?url';
@@ -22,6 +20,7 @@ import twitterImage from 'assets/sharing/twitter-regionale-cijfers.png?url';
 import siteText from 'locale';
 
 import { Regionaal } from 'types/data';
+const MapChart = dynamic(() => import('components/mapChart'));
 
 export type SafetyRegion = {
   id: number;
@@ -144,7 +143,6 @@ const Regio: FCWithLayout<RegioProps> = (props) => {
     selectedRegio?.code ? `/json/${selectedRegio.code}.json` : null
   );
   const data: Regionaal = response.data;
-  const text: typeof siteText.regionaal_index = siteText.regionaal_index;
 
   useEffect(focusFirstHeading, [data]);
 
@@ -165,15 +163,20 @@ const Regio: FCWithLayout<RegioProps> = (props) => {
 
             <div className={styles['map-container']}>
               <div className={styles['safety-region-header']}>
-                <p>{text.your_safety_region}</p>
+                <p>Uw veiligheidsregio</p>
                 {selectedRegio && <h2>{selectedRegio.name}</h2>}
                 {!selectedRegio && (
                   <span className={styles['select-safety-region']}>
-                    {text.select_safety_region_municipality}
+                    Selecteer een veiligheidsregio of gemeente
                   </span>
                 )}
               </div>
-              <SvgMap safetyRegions={safetyRegions} selected={selectedRegio} />
+              <MapChart
+                metric="Total_reported"
+                setSelection={(s) => {
+                  console.dir(s); // eslint-disable-line
+                }}
+              />
             </div>
           </div>
 
