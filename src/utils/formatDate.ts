@@ -2,6 +2,7 @@ import { isToday, isYesterday } from 'date-fns';
 
 import siteText from 'locale';
 import getLocale from 'utils/getLocale';
+import replaceVariablesInText from './replaceVariablesInText';
 
 const locale = getLocale();
 
@@ -35,6 +36,8 @@ const Day = new Intl.DateTimeFormat(locale, {
   day: 'numeric',
 });
 
+const shortFormat = locale === 'nl' ? '{{day}} {{month}}' : '{{month}} {{day}}';
+
 function formatDate(
   value: number | Date,
   style?: 'long' | 'medium' | 'short' | 'relative' | 'iso' | 'axis'
@@ -51,5 +54,8 @@ function formatDate(
   }
 
   // short or relative
-  return `${Day.format(value)} ${Month.format(value)}`; // '23 juli'
+  return replaceVariablesInText(shortFormat, {
+    day: Day.format(value),
+    month: Month.format(value),
+  });
 }
