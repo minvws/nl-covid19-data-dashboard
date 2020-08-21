@@ -2,9 +2,9 @@ import { isToday, isYesterday } from 'date-fns';
 
 import siteText from 'locale';
 import getLocale from 'utils/getLocale';
-import replaceVariablesInText from './replaceVariablesInText';
 
 const locale = getLocale();
+const formatLocale = locale === 'nl' ? 'nl' : 'en-GB';
 
 export default formatDate;
 
@@ -15,28 +15,27 @@ interface DateTimeFormatOptions extends Intl.DateTimeFormatOptions {
   timeStyle?: 'full' | 'long' | 'medium' | 'short';
 }
 
-const Long = new Intl.DateTimeFormat(locale, {
+interface DateTimeFormatPart {
+  type: string;
+  value: string;
+}
+
+const Long = new Intl.DateTimeFormat(formatLocale, {
   dateStyle: 'long',
   timeStyle: 'short',
 } as DateTimeFormatOptions);
 
-const Medium = new Intl.DateTimeFormat(locale, {
+const Medium = new Intl.DateTimeFormat(formatLocale, {
   dateStyle: 'long',
 } as DateTimeFormatOptions);
 
-const Month = new Intl.DateTimeFormat(locale, {
-  month: 'long',
-});
-
-const MonthShort = new Intl.DateTimeFormat(locale, {
+const MonthShort = new Intl.DateTimeFormat(formatLocale, {
   month: 'short',
 });
 
-const Day = new Intl.DateTimeFormat(locale, {
+const Day = new Intl.DateTimeFormat(formatLocale, {
   day: 'numeric',
 });
-
-const shortFormat = locale === 'nl' ? '{{day}} {{month}}' : '{{month}} {{day}}';
 
 function formatDate(
   value: number | Date,
@@ -53,9 +52,12 @@ function formatDate(
     if (isYesterday(value)) return siteText.utils.date_yesterday;
   }
 
-  // short or relative
-  return replaceVariablesInText(shortFormat, {
-    day: Day.format(value),
-    month: Month.format(value),
-  });
+  return formatShortDate(value);
+}
+
+function formatShortDate(value: number | Date): string {
+  return Medium.formatToParts(value)
+    .filter((part: DateTimeFormatPart) => ['month', 'day'].includes(part.type))
+    .map((part: DateTimeFormatPart) => part.value)
+    .join(' ');
 }
