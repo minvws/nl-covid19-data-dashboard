@@ -270,7 +270,7 @@
   },
   "over_disclaimer": {
     "title": "Disclaimer",
-    "text": "Please Note: this dashboard is still in the development phase. New features and data will be added to it in stages in the period ahead. Steps are also being taken to improve the website’s accessibility and user-friendliness. We want everyone in the Netherlands to be able to access the information on this website. The dashboard is not yet being used for decision-making. No conclusions can yet be made on the basis of the data presented here."
+    "text": "Please note: this dashboard is still in the development phase. New features and data will be added to it in stages in the period ahead. Steps are also being taken to improve the website’s accessibility and user-friendliness. We want everyone in the Netherlands to be able to access the information on this website."
   },
   "over_beschrijving": {
     "text": "The coronavirus dashboard gives up-to-date information about the development of the coronavirus in the Netherlands. With this information  early signs that the rate of infection is increasing can be picked up. We must prevent losing control over the spread of the virus. The numbers of new intensive care (ICU) patients and hospital admissions are the ultimate warning, but early indications are provided by the results of testing people for the virus. These are used to calculate the number of people who are infected with coronavirus (SARS-CoV-2) per 100,000 inhabitants. There are also other, secondary indicators to describe the course of the epidemic and give other information."
@@ -288,19 +288,19 @@
       },
       {
         "vraag": "Whose dashboard is it?",
-        "antwoord": "The dashboard has been commissioned by the Ministry of Health, Welfare and Sport. New types of data will be added to it in the weeks ahead. In the future, the National Institute for Public Health and the Environment (RIVM) will manage the dashboard."
+        "antwoord": "This dashboard has been commissioned by the Ministry of Health, Welfare and Sport. New types of data will be added to it in the weeks ahead."
       },
       {
         "vraag": "Why use these indicators?",
-        "antwoord": "The data currently presented on the dashboard gives the best overall view of the epidemiological situation. This data includes the number of people who have tested positive and the number of people admitted to hospital with COVID-19. Other data will be added to the dashboard shortly. Together they will give an accurate picture of the epidemic in the Netherlands."
+        "antwoord": "The data currently presented on the dashboard gives the best overall view of the epidemiological situation. This data includes the number of people who have tested positive and the number of people admitted to a hospital with COVID-19. Other data will be added to the dashboard shortly. Together they will give an accurate picture of the epidemic in the Netherlands."
       },
       {
         "vraag": "The dashboard is still in development. What does this mean?",
-        "antwoord": "In the near future, secondary data will be added to the main indicators already shown on the dashboard. It will also give an overview of all measures and public advice in place at both national and regional level."
+        "antwoord": "In the near future, secondary data will be added to the main indicators already shown on the dashboard."
       },
       {
         "vraag": "What is an alert value?",
-        "antwoord": "An alert value is calculated by the National Institute for Public Health and the Environment (RIVM) and is intended to act as a warning. A warning can be triggered if a large number of people become ill or are admitted to hospital at the same time. According to RIVM’s models, the healthcare sector will be unable to cope if daily hospital admissions for COVID-19 exceed 40 per day for an extended period of time."
+        "antwoord": "An alert value is calculated by the National Institute for Public Health and the Environment (RIVM) and is intended to act as a warning. A warning can be triggered if a large number of people become ill or are admitted to a hospital at the same time. According to RIVM’s models, the healthcare sector will be unable to cope if daily hospital admissions for COVID-19 exceed 40 per day for an extended period of time."
       },
       {
         "vraag": "What can the regional overview tell that the national overview cannot?",
