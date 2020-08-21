@@ -8,6 +8,7 @@ import MaxWidth from 'components/maxWidth';
 import text from 'locale';
 import useMediaQuery from 'utils/useMediaQuery';
 import SEOHead from 'components/seoHead';
+import getLocale from 'utils/getLocale';
 
 export interface LayoutProps {
   url?: string;
@@ -35,6 +36,7 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = (props) => {
   // remove focus after navigation
   const blur = (evt: any) => evt.target.blur();
 
+  const locale = getLocale();
   const showSmallLogo = useMediaQuery('(max-width: 480px)', true);
 
   return (
@@ -69,6 +71,27 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = (props) => {
         </div>
 
         <MaxWidth>
+          <div className={styles.languageSwitcher}>
+            <a
+              href={`${text.language_switcher.nl_base_url}${router.asPath}`}
+              lang="nl"
+              hrefLang="nl"
+              className={locale === 'nl' ? styles.languageActive : undefined}
+              title={text.language_switcher.nl_title}
+            >
+              {text.language_switcher.nl}
+            </a>
+            |
+            <a
+              href={`${text.language_switcher.en_base_url}${router.asPath}`}
+              lang="en-GB"
+              hrefLang="en-GB"
+              className={locale === 'en-GB' ? styles.languageActive : undefined}
+              title={text.language_switcher.en_title}
+            >
+              {text.language_switcher.en}
+            </a>
+          </div>
           <h1>{text.header.title}</h1>
           <p>
             {text.header.text}{' '}

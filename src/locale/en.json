@@ -525,5 +525,13 @@
     "default_description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
     "default_title": "Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
     "default_url": "https://coronadashboard.rijksoverheid.nl"
+  },
+  "language_switcher": {
+    "en": "EN",
+    "en_title": "Website in English",
+    "en_base_url": "https://coronadashboard.government.nl",
+    "nl": "NL",
+    "nl_title": "Website in het Nederlands",
+    "nl_base_url": "https://coronadashboard.rijksoverheid.nl"
   }
 }
