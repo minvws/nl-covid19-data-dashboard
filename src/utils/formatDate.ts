@@ -4,7 +4,6 @@ import siteText from 'locale';
 import getLocale from 'utils/getLocale';
 
 const locale = getLocale();
-const formatLocale = locale === 'nl' ? 'nl' : 'en-GB';
 
 export default formatDate;
 
@@ -20,20 +19,20 @@ interface DateTimeFormatPart {
   value: string;
 }
 
-const Long = new Intl.DateTimeFormat(formatLocale, {
+const Long = new Intl.DateTimeFormat(locale, {
   dateStyle: 'long',
   timeStyle: 'short',
 } as DateTimeFormatOptions);
 
-const Medium = new Intl.DateTimeFormat(formatLocale, {
+const Medium = new Intl.DateTimeFormat(locale, {
   dateStyle: 'long',
 } as DateTimeFormatOptions);
 
-const MonthShort = new Intl.DateTimeFormat(formatLocale, {
+const MonthShort = new Intl.DateTimeFormat(locale, {
   month: 'short',
 });
 
-const Day = new Intl.DateTimeFormat(formatLocale, {
+const Day = new Intl.DateTimeFormat(locale, {
   day: 'numeric',
 });
 
