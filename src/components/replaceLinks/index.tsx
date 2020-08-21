@@ -5,7 +5,12 @@ import Linkify, { LinkifyProps } from 'linkifyjs/react';
  */
 
 const ReplaceLinks: React.FC<IProps> = (props) => {
-  const { children, tagName, options } = props;
+  const { children, tagName } = props;
+
+  const options = {
+    ...props?.options,
+    attributes: { rel: 'noopener noreferrer', ...props?.options?.attributes },
+  };
 
   return (
     <Linkify tagName={tagName} options={options}>
