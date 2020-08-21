@@ -47,6 +47,8 @@ type RegioStaticProps = {
   };
 };
 
+type RegionType = 'municipality' | 'safetyRegion';
+
 export async function getStaticProps(): Promise<RegioStaticProps> {
   const municipalityMapping = require('../../data/gemeente_veiligheidsregio.json');
   const safetyRegions: SafetyRegion[] = require('../../data/index').default;
@@ -95,6 +97,8 @@ export const RegioDataLoading: React.FC = () => {
 
 const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
   const { municipalities, safetyRegions } = props;
+
+  // let regionType: RegionType = 'municipality';
 
   const router = useRouter();
 
@@ -152,6 +156,25 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
   return (
     <>
       <MaxWidth>
+        <div>
+          <input
+            id="regionType-municipality"
+            type="radio"
+            name="regionType"
+            value="municipality"
+            defaultChecked={true}
+          />
+          <label htmlFor="regionType-municipality">Gemeentes</label>{' '}
+          <input
+            id="regionType-safetyRegion"
+            type="radio"
+            name="regionType"
+            value="safetyRegion"
+          />
+          <label htmlFor="regionType-safetyRegion">
+            Veiligheidsregio&apos;s
+          </label>
+        </div>
         <LastUpdated
           lastUpdated={data?.last_generated * 1000}
           loadingText={selectedRegio ? null : '\u00A0'}
