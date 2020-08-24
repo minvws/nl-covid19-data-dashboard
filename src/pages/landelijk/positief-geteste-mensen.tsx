@@ -65,8 +65,8 @@ const PostivelyTestedPeople: FCWithLayout = () => {
   return (
     <>
       <GraphHeader Icon={Getest} title={text.title} as="h2" />
-      <article className="masonry-item">
-        <h3>{text.text}</h3>
+      <article className="metric-article">
+        <p>{text.text}</p>
 
         {delta && <PostivelyTestedPeopleBarScale data={delta} />}
 
@@ -90,7 +90,7 @@ const PostivelyTestedPeople: FCWithLayout = () => {
         <p>{text.fold}</p>
       </article>
 
-      <article className="masonry-item">
+      <article className="metric-article">
         <h3>{text.linechart_title}</h3>
         {delta && (
           <LineChart
@@ -102,7 +102,7 @@ const PostivelyTestedPeople: FCWithLayout = () => {
         )}
       </article>
 
-      <article className="masonry-item">
+      <article className="metric-article">
         <h3>{text.graph_title}</h3>
         {age && (
           <>
