@@ -98,7 +98,11 @@ export const RegioDataLoading: React.FC = () => {
 const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
   const { municipalities, safetyRegions } = props;
 
-  // let regionType: RegionType = 'municipality';
+  let regionType: RegionType = 'municipality';
+
+  const setRegionType = (event: Event): void => {
+    regionType = event.currentTarget.value;
+  };
 
   const router = useRouter();
 
@@ -145,9 +149,12 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
     );
   };
 
-  const response = useSWR(() =>
-    selectedRegio?.code ? `/json/${selectedRegio.code}.json` : null
-  );
+  const response = useSWR(() => {
+    if (regionType === 'municipality') {
+      return '/json/GM0010.json';
+    }
+    selectedRegio?.code ? `/json/${selectedRegio.code}.json` : null;
+  });
   const data: Regionaal = response.data;
   const text: typeof siteText.regionaal_index = siteText.regionaal_index;
 
@@ -158,6 +165,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
       <MaxWidth>
         <div>
           <input
+            onChange={setRegionType}
             id="regionType-municipality"
             type="radio"
             name="regionType"
@@ -166,6 +174,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
           />
           <label htmlFor="regionType-municipality">Gemeentes</label>{' '}
           <input
+            onChange={setRegionType}
             id="regionType-safetyRegion"
             type="radio"
             name="regionType"
