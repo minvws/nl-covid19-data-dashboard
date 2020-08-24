@@ -14,6 +14,11 @@ interface DateTimeFormatOptions extends Intl.DateTimeFormatOptions {
   timeStyle?: 'full' | 'long' | 'medium' | 'short';
 }
 
+interface DateTimeFormatPart {
+  type: string;
+  value: string;
+}
+
 const Long = new Intl.DateTimeFormat(locale, {
   dateStyle: 'long',
   timeStyle: 'short',
@@ -22,10 +27,6 @@ const Long = new Intl.DateTimeFormat(locale, {
 const Medium = new Intl.DateTimeFormat(locale, {
   dateStyle: 'long',
 } as DateTimeFormatOptions);
-
-const Month = new Intl.DateTimeFormat(locale, {
-  month: 'long',
-});
 
 const MonthShort = new Intl.DateTimeFormat(locale, {
   month: 'short',
@@ -50,6 +51,12 @@ function formatDate(
     if (isYesterday(value)) return siteText.utils.date_yesterday;
   }
 
-  // short or relative
-  return `${Day.format(value)} ${Month.format(value)}`; // '23 juli'
+  return formatShortDate(value);
+}
+
+function formatShortDate(value: number | Date): string {
+  return Medium.formatToParts(value)
+    .filter((part: DateTimeFormatPart) => ['month', 'day'].includes(part.type))
+    .map((part: DateTimeFormatPart) => part.value)
+    .join(' ');
 }

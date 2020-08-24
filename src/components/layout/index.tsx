@@ -11,6 +11,7 @@ import useMediaQuery from 'utils/useMediaQuery';
 import styles from './layout.module.scss';
 
 import { WithChildren } from 'types';
+import getLocale from 'utils/getLocale';
 
 export interface LayoutProps {
   url?: string;
@@ -46,6 +47,7 @@ function Layout(props: WithChildren<LayoutProps>) {
   // remove focus after navigation
   const blur = (evt: any) => evt.target.blur();
 
+  const locale = getLocale();
   const showSmallLogo = useMediaQuery('(max-width: 480px)', true);
 
   return (
@@ -80,6 +82,27 @@ function Layout(props: WithChildren<LayoutProps>) {
         </div>
 
         <MaxWidth>
+          <div className={styles.languageSwitcher}>
+            <a
+              href={`https://coronadashboard.rijksoverheid.nl${router.asPath}`}
+              lang="nl"
+              hrefLang="nl"
+              className={locale === 'nl' ? styles.languageActive : undefined}
+              title="Website in het Nederlands"
+            >
+              NL
+            </a>
+            |
+            <a
+              href={`https://coronadashboard.government.nl${router.asPath}`}
+              lang="en-GB"
+              hrefLang="en-GB"
+              className={locale === 'en-GB' ? styles.languageActive : undefined}
+              title="Website in English"
+            >
+              EN
+            </a>
+          </div>
           <h1>{text.header.title}</h1>
           <p>
             {text.header.text}{' '}

@@ -48,8 +48,8 @@
       "regio": "Regionale cijfers",
       "over": "Over dit dashboard",
       "meer": "Meer informatie over het coronavirus",
-      "meer_href": "https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19",
-      "verantwoording": "Cijferverantwoording"
+      "verantwoording": "Cijferverantwoording",
+      "meer_href": "https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19"
     },
     "title": "Corona Dashboard"
   },
@@ -78,11 +78,11 @@
     "open": "Verberg uitleg",
     "sluit": "Meer uitleg en data",
     "screen_reader_graph_content": "{{value}} patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten, per 100.000 inwoners, per week.",
-    "estimated_amount_of_patients": "Geschat aantal patiënten met verdenking van COVID-19:",
     "bron": {
       "href": "https://www.nivel.nl/nl/nivel-zorgregistraties-eerste-lijn/nivel-zorgregistraties-eerste-lijn",
       "text": "Nivel Zorgregistraties Eerste Lijn"
-    }
+    },
+    "estimated_amount_of_patients": "Geschat aantal patiënten met verdenking van COVID-19:"
   },
   "ziekenhuisopnames_per_dag": {
     "title": "Ziekenhuisopnames per dag",
@@ -350,10 +350,6 @@
       }
     ]
   },
-  "regionaal_index": {
-    "your_safety_region": "Uw veiligheidsregio",
-    "select_safety_region_municipality": "Selecteer een veiligheidsregio of gemeente"
-  },
   "regionaal_ziekenhuisopnames_per_dag": {
     "title": "Ziekenhuisopnames per dag",
     "text": "Aantal opnames per dag, gemiddeld over de afgelopen 3 dagen.",
@@ -485,8 +481,8 @@
   "charts": {
     "time_controls": {
       "all": "Toon alles",
-      "5weeks": "Laatste 5 weken",
-      "week": "Laatste week"
+      "week": "Laatste week",
+      "5weeks": "Laatste 5 weken"
     }
   },
   "utils": {
@@ -512,6 +508,10 @@
     },
     "graph_average_label_text": "Gemiddelde waarde van gemeten locaties.",
     "graph_secondary_label_text": "Gemeten waarde per locatie."
+  },
+  "regionaal_index": {
+    "your_safety_region": "Uw veiligheidsregio",
+    "select_safety_region_municipality": "Selecteer een veiligheidsregio of gemeente"
   },
   "common": {
     "metadata": {
