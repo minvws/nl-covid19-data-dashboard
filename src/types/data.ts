@@ -222,4 +222,5 @@ export interface MunicipalityData extends MunicipalityMetrics {
   Municipality_code: string;
   Municipality_name: string;
   Province: string;
+  value?: number;
 }

@@ -1,8 +1,8 @@
-import Highcharts from 'highcharts';
+import Highcharts, { TooltipFormatterContextObject } from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
 import useSWR from 'swr';
-import { FeatureCollection, MultiPolygon, MultiLineString } from 'geojson';
+import { FeatureCollection, MultiPolygon } from 'geojson';
 import { useMemo, useRef, useEffect } from 'react';
 import useMunicipalityData, {
   TMunicipalityMetricName,
@@ -32,7 +32,7 @@ const MunicipalityMap: React.FC<IProps> = ({
   setSelection,
   metric,
 }) => {
-  const { data: countryLines } = useSWR<FeatureCollection<MultiLineString>>(
+  const { data: countryLines } = useSWR<any[]>(
     '/static-json/netherlands-outline.geojson'
   );
 
@@ -46,7 +46,7 @@ const MunicipalityMap: React.FC<IProps> = ({
     (item: MunicipalityData) => item[metric]
   );
 
-  const mapOptions = useMemo(
+  const mapOptions = useMemo<Highcharts.Options>(
     () => ({
       chart: {
         alignTicks: true,
@@ -59,8 +59,8 @@ const MunicipalityMap: React.FC<IProps> = ({
         colorCount: 10,
         defaultSeriesType: 'line',
         displayErrors: true,
-        margin: [null],
-        panning: false,
+        margin: [],
+        panning: { enabled: false },
         height: '100%',
       },
       title: {
@@ -79,14 +79,22 @@ const MunicipalityMap: React.FC<IProps> = ({
         backgroundColor: '#FFF',
         borderColor: '#01689B',
         borderRadius: 0,
-        formatter: function (this: { point: TMunicipalityPoint }) {
-          const { Province, Municipality_name } = this.point;
+        formatter: function (
+          this: TooltipFormatterContextObject
+        ):
+          | false
+          | string
+          | Array<string | null | undefined>
+          | null
+          | undefined {
+          const { point }: { point: MunicipalityData } = this as any;
+          const { Province, Municipality_name } = point;
 
           if (!Municipality_name) {
             return false;
           }
 
-          const metricValue = this.point[metric];
+          const metricValue = point[metric];
 
           return `${Municipality_name} (${Province})<br/>
                   ${metricValue}`;
@@ -119,6 +127,7 @@ const MunicipalityMap: React.FC<IProps> = ({
             },
           },
           data: municipalityData,
+          // @ts-ignore
           joinBy: ['gemcode', 'Municipality_code'],
         },
         {
@@ -141,14 +150,12 @@ const MunicipalityMap: React.FC<IProps> = ({
   const ref = useRef<any>();
 
   useEffect(() => {
-    const chart = ref?.current?.chart;
+    const chart: Highcharts.Chart | undefined = ref?.current?.chart;
     if (selected && chart) {
-      if (!chart) {
-        return;
-      }
-      const point = chart?.series[0].points.find(
+      const point = chart.series[0].points.find(
         (p: any) => p.gemcode === selected.id
       );
+
       point?.select(true, false);
     }
   }, [ref, selected]);

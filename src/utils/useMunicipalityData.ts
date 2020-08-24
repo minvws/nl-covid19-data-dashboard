@@ -22,17 +22,24 @@ function useMunicipalityData(
       return [];
     }
 
-    const max = Math.min(
-      ...data.map((item) => new Date(item.Date_of_report).getTime())
+    const max: number = Math.min(
+      ...data.map((item: MunicipalityData): number =>
+        new Date(item.Date_of_report).getTime()
+      )
     );
 
     const filteredData = data
       .filter(
-        (item) =>
-          item.Municipality_code &&
-          new Date(item.Date_of_report).getTime() == max
+        (item: MunicipalityData): boolean =>
+          Boolean(item.Municipality_code) &&
+          new Date(item.Date_of_report).getTime() === max
       )
-      .map((item) => ({ ...item, value: item[metricName] }));
+      .map(
+        (item: MunicipalityData): MunicipalityData => ({
+          ...item,
+          value: item[metricName],
+        })
+      );
 
     return filteredData;
   }, [data, metricName]);
