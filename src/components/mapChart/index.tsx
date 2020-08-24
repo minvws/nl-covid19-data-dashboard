@@ -81,12 +81,7 @@ const MunicipalityMap: React.FC<IProps> = ({
         borderRadius: 0,
         formatter: function (
           this: TooltipFormatterContextObject
-        ):
-          | false
-          | string
-          | Array<string | null | undefined>
-          | null
-          | undefined {
+        ): false | string {
           const { point }: { point: MunicipalityData } = this as any;
           const { Province, Municipality_name } = point;
 
