@@ -3,11 +3,14 @@ import styles from './styles.module.scss';
 import { useCombobox } from 'downshift';
 import { useState } from 'react';
 
+import siteText from 'locale';
+
 import { SafetyRegion, MunicipalityMapping } from 'pages/regio';
 import Arrow from 'assets/white-arrow.svg';
 import ResetIcon from 'assets/reset.svg';
 
 import ScreenReaderOnly from 'components/screenReaderOnly';
+import replaceVariablesInText from 'utils/replaceVariablesInText';
 
 type SelectMunicipalityProps = {
   municipalities: MunicipalityMapping[];
@@ -17,6 +20,8 @@ type SelectMunicipalityProps = {
 
 const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
   const { municipalities, safetyRegions, setSelectedSafetyRegion } = props;
+  const text: typeof siteText.select_municipality =
+    siteText.select_municipality;
 
   // Set the full list of municipalities as the initial state.
   const [items, setItems] = useState(() => municipalities);
@@ -93,12 +98,16 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
         (el) => el.code === selectedItem.safetyRegion
       );
 
-      return `Gemeente ${itemToString(selectedItem)} in veiligheidsregio ${
-        safetyRegion?.name
-      } is geselecteerd.`;
+      return replaceVariablesInText(
+        text.municipality_in_safety_region_selected,
+        {
+          municipality: itemToString(selectedItem),
+          safetyRegion: safetyRegion?.name,
+        }
+      );
     }
 
-    return 'Er is geen gemeente geselecteerd';
+    return text.no_municipality_selected;
   };
 
   // Returns a string for an aria-live status message shown while typing.
@@ -107,7 +116,9 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
   }: {
     resultCount: string;
   }) => {
-    return `Er zijn ${resultCount} resultaten, gebruik de omhoog en omlaag pijltjes toetsen om te navigeren. Druk op Enter om te selecteren.`;
+    return replaceVariablesInText(text.result_count_help_text, {
+      resultCount: String(resultCount),
+    });
   };
 
   // State reducer with an override for the ItemClick action.
@@ -155,14 +166,14 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
   return (
     <div className={styles.root}>
       <label {...getLabelProps({ className: styles.label })}>
-        Selecteer uw gemeente
+        {text.select_municipality}
       </label>
       <div {...getComboboxProps({ className: styles.combobox })}>
         <input
           {...getInputProps({
             onClick: onFocus,
             id: 'select-municipality-input',
-            placeholder: 'bv. Aa en Hunze',
+            placeholder: text.input_municipality_placeholder,
           })}
         />
         {selectedItem && (

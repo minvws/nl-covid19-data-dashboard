@@ -2,17 +2,20 @@ import { useMemo, useState } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-import ChartTimeControls from 'components/chartTimeControls';
+import ChartTimeControls, {
+  TimeframeOption,
+} from 'components/chartTimeControls';
 
 import formatNumber from 'utils/formatNumber';
 import formatDate from 'utils/formatDate';
+import { getFilteredValues } from 'components/chartTimeControls/chartTimeControlUtils';
 
 if (typeof Highcharts === 'object') {
   require('highcharts/highcharts-more')(Highcharts);
 }
 
-type TRangeData = [Date, number | null, number | null][];
-type TLineData = [Date, number | null][];
+type TRange = [Date, number | null, number | null];
+type TLine = [Date, number | null];
 
 interface AreaChartProps {
   rangeLegendLabel: string;
@@ -24,11 +27,12 @@ interface AreaChartProps {
     max: number | null;
   }>;
   signaalwaarde?: number;
+  timeframeOptions?: TimeframeOption[];
 }
 
 type IGetOptions = Omit<AreaChartProps, 'data'> & {
-  rangeData: TRangeData;
-  lineData: TLineData;
+  rangeData: TRange[];
+  lineData: TLine[];
 };
 
 function getOptions(props: IGetOptions): Highcharts.Options {
@@ -158,27 +162,30 @@ function getOptions(props: IGetOptions): Highcharts.Options {
 }
 
 const AreaChart: React.FC<AreaChartProps> = (props) => {
-  const { rangeLegendLabel, lineLegendLabel, data, signaalwaarde } = props;
+  const {
+    rangeLegendLabel,
+    lineLegendLabel,
+    data,
+    signaalwaarde,
+    timeframeOptions,
+  } = props;
 
-  const rangeData: TRangeData = useMemo(() => {
+  const rangeData: TRange[] = useMemo(() => {
     return data
       .sort((a, b) => a.date - b.date)
       .map((d) => [new Date(d.date * 1000), d.min, d.max]);
   }, [data]);
 
-  const lineData: TLineData = useMemo(() => {
+  const lineData: TLine[] = useMemo(() => {
     return data.map((value) => {
       return [new Date(value.date * 1000), value.avg];
     });
   }, [data]);
 
-  const [timeframe, setTimeframe] = useState('month');
+  const [timeframe, setTimeframe] = useState<TimeframeOption>('5weeks');
 
   const chartOptions = useMemo(() => {
-    const week = 7;
-    const month = 30;
-    const days = rangeData.length;
-    const getOptionsThunk = (rangeData: TRangeData, lineData: TLineData) =>
+    const getOptionsThunk = (rangeData: TRange[], lineData: TLine[]) =>
       getOptions({
         rangeData,
         lineData,
@@ -187,21 +194,19 @@ const AreaChart: React.FC<AreaChartProps> = (props) => {
         lineLegendLabel,
       });
 
-    if (timeframe === 'all') {
-      return getOptionsThunk(rangeData, lineData);
-    }
-    if (timeframe === 'month') {
-      const range = rangeData.slice(days - month, days);
-      const line = lineData.slice(days - month, days);
+    const filteredRange = getFilteredValues<TRange>(
+      rangeData,
+      timeframe,
+      (value: TRange) => value[0].getTime()
+    );
 
-      return getOptionsThunk(range, line);
-    }
-    if (timeframe === 'week') {
-      const range = rangeData.slice(days - week, days);
-      const line = lineData.slice(days - week, days);
+    const filteredLine = getFilteredValues<TLine>(
+      lineData,
+      timeframe,
+      (value: TLine) => value[0].getTime()
+    );
 
-      return getOptionsThunk(range, line);
-    }
+    return getOptionsThunk(filteredRange, filteredLine);
   }, [
     lineData,
     rangeData,
@@ -216,7 +221,8 @@ const AreaChart: React.FC<AreaChartProps> = (props) => {
       <HighchartsReact highcharts={Highcharts} options={chartOptions} />
       <ChartTimeControls
         timeframe={timeframe}
-        onChange={(evt) => setTimeframe(evt.target.value)}
+        timeframeOptions={timeframeOptions}
+        onChange={(evt) => setTimeframe(evt.target.value as TimeframeOption)}
       />
     </>
   );

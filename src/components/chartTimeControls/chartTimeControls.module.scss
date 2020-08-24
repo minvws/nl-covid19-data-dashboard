@@ -19,10 +19,11 @@
     text-align: center;
     padding: 0.2em 0;
     border: 1px solid $button-color;
+    border-width: 1px 0 1px 1px;
     color: $button-color;
 
-    &:nth-of-type(even) {
-      border-width: 1px 0;
+    &:last-child {
+      border-right-width: 1px;
     }
   }
 }

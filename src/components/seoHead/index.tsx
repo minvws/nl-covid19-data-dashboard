@@ -1,5 +1,7 @@
 import Head from 'next/head';
 
+import siteText from 'locale';
+
 export default SEOHead;
 
 export type SEOHeadProps = {
@@ -11,12 +13,11 @@ export type SEOHeadProps = {
 };
 
 SEOHead.defaultProps = {
-  description:
-    'Informatie over de ontwikkeling van het coronavirus in Nederland.',
+  description: siteText.seoHead.default_description,
   openGraphImage: '/banner.jpg',
-  title: 'Dashboard Coronavirus COVID-19 | Rijksoverheid.nl',
+  title: siteText.seoHead.default_title,
   twitterImage: '/banner.jpg',
-  url: 'https://coronadashboard.rijksoverheid.nl',
+  url: siteText.seoHead.default_url,
 };
 
 function SEOHead(props: SEOHeadProps): any {

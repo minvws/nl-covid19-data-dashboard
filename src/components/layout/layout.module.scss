@@ -1,5 +1,7 @@
 @import 'scss/variables.scss';
 
+$language-switcher-offset: 55px;
+
 .logoWrapper {
   display: flex;
   flex-flow: row wrap;
@@ -30,6 +32,34 @@
 
   p {
     margin-bottom: $default-margin * 2;
+  }
+}
+
+.languageActive {
+  font-weight: 700;
+}
+
+.languageSwitcher {
+  height: $language-switcher-offset;
+  margin-top: -1 * $language-switcher-offset;
+  text-align: right;
+  color: $text-color;
+
+  a {
+    border-bottom-color: transparent;
+    border-bottom: 2px solid transparent;
+    color: inherit;
+    display: inline-block;
+    margin: 0 4px;
+    text-align: center;
+    text-decoration: none;
+    min-width: 24px;
+
+    &.languageActive,
+    &:hover,
+    &:focus {
+      border-color: $button-color;
+    }
   }
 }
 

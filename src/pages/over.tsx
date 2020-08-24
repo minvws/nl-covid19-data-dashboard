@@ -7,8 +7,16 @@ import text from 'locale';
 import styles from './over.module.scss';
 import ReplaceLinks from 'components/replaceLinks';
 
-import openGraphImage from 'assets/sharing/og-over.png?url';
-import twitterImage from 'assets/sharing/twitter-over.png?url';
+import openGraphImageNL from 'assets/sharing/og-over.png?url';
+import twitterImageNL from 'assets/sharing/twitter-over.png?url';
+import openGraphImageEN from 'assets/sharing/og-about.png?url';
+import twitterImageEN from 'assets/sharing/twitter-about.png?url';
+import getLocale from 'utils/getLocale';
+
+const locale = getLocale();
+
+const openGraphImage = locale === 'nl' ? openGraphImageNL : openGraphImageEN;
+const twitterImage = locale === 'nl' ? twitterImageNL : twitterImageEN;
 
 interface IVraagEnAntwoord {
   vraag: string;

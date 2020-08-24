@@ -8,6 +8,7 @@ import MaxWidth from 'components/maxWidth';
 import text from 'locale';
 import useMediaQuery from 'utils/useMediaQuery';
 import SEOHead from 'components/seoHead';
+import getLocale from 'utils/getLocale';
 
 export interface LayoutProps {
   url?: string;
@@ -35,6 +36,7 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = (props) => {
   // remove focus after navigation
   const blur = (evt: any) => evt.target.blur();
 
+  const locale = getLocale();
   const showSmallLogo = useMediaQuery('(max-width: 480px)', true);
 
   return (
@@ -61,7 +63,7 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = (props) => {
                 ? '/images/logo-ro-small.svg'
                 : '/images/logo-ro.svg'
             }
-            alt="Rijksoverheid"
+            alt={text.header.logo_alt}
             // loading="lazy"
             width={showSmallLogo ? 40 : 314}
             height={showSmallLogo ? 76 : 125}
@@ -69,6 +71,27 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = (props) => {
         </div>
 
         <MaxWidth>
+          <div className={styles.languageSwitcher}>
+            <a
+              href={`https://coronadashboard.rijksoverheid.nl${router.asPath}`}
+              lang="nl"
+              hrefLang="nl"
+              className={locale === 'nl' ? styles.languageActive : undefined}
+              title="Website in het Nederlands"
+            >
+              NL
+            </a>
+            |
+            <a
+              href={`https://coronadashboard.government.nl${router.asPath}`}
+              lang="en-GB"
+              hrefLang="en-GB"
+              className={locale === 'en-GB' ? styles.languageActive : undefined}
+              title="Website in English"
+            >
+              EN
+            </a>
+          </div>
           <h1>{text.header.title}</h1>
           <p>
             {text.header.text}{' '}
@@ -133,7 +156,7 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = (props) => {
       <footer>
         <div className={styles.footer}>
           <MaxWidth>
-            <h3>Corona Dashboard</h3>
+            <h3>{text.nav.title}</h3>
             <nav>
               <ul className={styles.footerList}>
                 <li>
@@ -166,9 +189,7 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = (props) => {
                 </li>
                 <li>
                   <a
-                    href={
-                      'https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19'
-                    }
+                    href={text.nav.links.meer_href}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={styles.footerLink}

@@ -17,8 +17,16 @@ import { SewerWater } from 'components/tiles/regio/SewerWater';
 const SvgMap = dynamic(() => import('components/mapChart/svgMap'));
 
 import styles from './regio.module.scss';
-import openGraphImage from 'assets/sharing/og-regionale-cijfers.png?url';
-import twitterImage from 'assets/sharing/twitter-regionale-cijfers.png?url';
+import openGraphImageNL from 'assets/sharing/og-regionale-cijfers.png?url';
+import twitterImageNL from 'assets/sharing/twitter-regionale-cijfers.png?url';
+import openGraphImageEN from 'assets/sharing/og-regional.png?url';
+import twitterImageEN from 'assets/sharing/twitter-regional.png?url';
+import getLocale from 'utils/getLocale';
+
+const locale = getLocale();
+
+const openGraphImage = locale === 'nl' ? openGraphImageNL : openGraphImageEN;
+const twitterImage = locale === 'nl' ? twitterImageNL : twitterImageEN;
 
 import siteText from 'locale';
 
@@ -145,6 +153,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
     selectedRegio?.code ? `/json/${selectedRegio.code}.json` : null
   );
   const data: Regionaal = response.data;
+  const text: typeof siteText.regionaal_index = siteText.regionaal_index;
 
   useEffect(focusFirstHeading, [data]);
 
@@ -165,11 +174,11 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
 
             <div className={styles['map-container']}>
               <div className={styles['safety-region-header']}>
-                <p>Uw veiligheidsregio</p>
+                <p>{text.your_safety_region}</p>
                 {selectedRegio && <h2>{selectedRegio.name}</h2>}
                 {!selectedRegio && (
                   <span className={styles['select-safety-region']}>
-                    Selecteer een veiligheidsregio of gemeente
+                    {text.select_safety_region_municipality}
                   </span>
                 )}
               </div>
