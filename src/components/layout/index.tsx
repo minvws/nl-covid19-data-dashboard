@@ -73,23 +73,23 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = (props) => {
         <MaxWidth>
           <div className={styles.languageSwitcher}>
             <a
-              href={`${text.language_switcher.nl_base_url}${router.asPath}`}
+              href={`https://coronadashboard.rijksoverheid.nl${router.asPath}`}
               lang="nl"
               hrefLang="nl"
               className={locale === 'nl' ? styles.languageActive : undefined}
-              title={text.language_switcher.nl_title}
+              title="Website in het Nederlands"
             >
-              {text.language_switcher.nl}
+              NL
             </a>
             |
             <a
-              href={`${text.language_switcher.en_base_url}${router.asPath}`}
+              href={`https://coronadashboard.government.nl${router.asPath}`}
               lang="en-GB"
               hrefLang="en-GB"
               className={locale === 'en-GB' ? styles.languageActive : undefined}
-              title={text.language_switcher.en_title}
+              title="Website in English"
             >
-              {text.language_switcher.en}
+              EN
             </a>
           </div>
           <h1>{text.header.title}</h1>
