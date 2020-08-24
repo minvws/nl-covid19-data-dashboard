@@ -30,13 +30,22 @@ import siteText from 'locale';
 import GraphHeader from 'components/graphHeader';
 import IconList from 'components/iconList';
 
-import openGraphImage from 'assets/sharing/og-landelijke-cijfers.png?url';
-import twitterImage from 'assets/sharing/twitter-landelijke-cijfers.png?url';
+import openGraphImageNL from 'assets/sharing/og-landelijke-cijfers.png?url';
+import twitterImageNL from 'assets/sharing/twitter-landelijke-cijfers.png?url';
+
+import openGraphImageEN from 'assets/sharing/og-national.png?url';
+import twitterImageEN from 'assets/sharing/twitter-national.png?url';
 
 import { FunctionComponentWithLayout } from 'components/layout';
 import Head from 'next/head';
 
 import useSWR from 'swr';
+import getLocale from 'utils/getLocale';
+
+const locale = getLocale();
+
+const openGraphImage = locale === 'nl' ? openGraphImageNL : openGraphImageEN;
+const twitterImage = locale === 'nl' ? twitterImageNL : twitterImageEN;
 
 const Home: FunctionComponentWithLayout = () => {
   const { data } = useSWR(`/json/NL.json`);

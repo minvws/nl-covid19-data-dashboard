@@ -8,8 +8,16 @@ import siteText from 'locale';
 
 import MDToHTMLString from 'utils/MDToHTMLString';
 
-import openGraphImage from 'assets/sharing/og-cijferverantwoording.png?url';
-import twitterImage from 'assets/sharing/twitter-cijferverantwoording.png?url';
+import openGraphImageNL from 'assets/sharing/og-cijferverantwoording.png?url';
+import twitterImageNL from 'assets/sharing/twitter-cijferverantwoording.png?url';
+import openGraphImageEN from 'assets/sharing/og-data-explanation.png?url';
+import twitterImageEN from 'assets/sharing/twitter-data-explanation.png?url';
+import getLocale from 'utils/getLocale';
+
+const locale = getLocale();
+
+const openGraphImage = locale === 'nl' ? openGraphImageNL : openGraphImageEN;
+const twitterImage = locale === 'nl' ? twitterImageNL : twitterImageEN;
 
 interface ICijfer {
   cijfer: string;
