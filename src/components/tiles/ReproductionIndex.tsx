@@ -98,6 +98,7 @@ export const ReproductionIndex: React.FC = () => {
             signaalwaarde={SIGNAAL_WAARDE}
             rangeLegendLabel={text.rangeLegendLabel}
             lineLegendLabel={text.lineLegendLabel}
+            timeframeOptions={['all', '5weeks']}
           />
         )}
 
