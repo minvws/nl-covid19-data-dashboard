@@ -1,8 +1,9 @@
 import Link from 'next/link';
+import Head from 'next/head';
 import useSWR from 'swr';
 import { useRouter } from 'next/router';
 
-import GraphHeader from 'components/graphHeader';
+import TitleWithIcon from 'components/titleWithIcon';
 import { getLayout as getSiteLayout } from 'components/layout';
 import { ReproductionIndexBarScale } from 'pages/landelijk/reproductiegetal';
 import { PostivelyTestedPeopleBarScale } from 'pages/landelijk/positief-geteste-mensen';
@@ -13,6 +14,7 @@ import { SuspectedPatientsBarScale } from 'pages/landelijk/verdenkingen-huisarts
 import { SewerWaterBarScale } from 'pages/landelijk/rioolwater';
 import { NursingHomeInfectedPeopleBarScale } from 'pages/landelijk/verpleeghuis-positief-geteste-personen';
 import { NursingHomeInfectedLocationsBarScale } from 'pages/landelijk/verpleeghuis-besmette-locaties';
+import { NursingHomeDeathsBarScale } from 'pages/landelijk/verpleeghuis-sterfte';
 
 import GetestIcon from 'assets/test.svg';
 import ReproIcon from 'assets/reproductiegetal.svg';
@@ -28,7 +30,6 @@ import siteText from 'locale';
 import { WithChildren } from 'types';
 
 import useMediaQuery from 'utils/useMediaQuery';
-import { NursingHomeDeathsBarScale } from 'pages/landelijk/verpleeghuis-sterfte';
 
 export default NationalLayout;
 
@@ -73,226 +74,246 @@ function NationalLayout(props: WithChildren) {
   }
 
   return (
-    <div className="national-layout">
-      {showAside && (
-        <aside className="national-aside">
-          <nav aria-label="metric navigation">
-            <h2>{siteText.nationaal_layout.headings.medisch}</h2>
-            <ul>
-              <li>
-                <Link href="/landelijk/positief-geteste-mensen">
-                  <a
-                    onClick={blur}
-                    className={getClassName(
-                      '/landelijk/positief-geteste-mensen'
-                    )}
-                  >
-                    <GraphHeader
-                      Icon={GetestIcon}
-                      title={siteText.positief_geteste_personen.title}
-                    />
-                    <span>
-                      <PostivelyTestedPeopleBarScale
-                        data={data?.infected_people_delta_normalized}
+    <>
+      <Head>
+        <link
+          key="dc-spatial"
+          rel="dcterms:spatial"
+          href="https://standaarden.overheid.nl/owms/terms/Nederland"
+        />
+        <link
+          key="dc-spatial-title"
+          rel="dcterms:spatial"
+          href="https://standaarden.overheid.nl/owms/terms/Nederland"
+          title="Nederland"
+        />
+      </Head>
+
+      <div className="national-layout">
+        {showAside && (
+          <aside className="national-aside">
+            <nav aria-label="metric navigation">
+              <h2>{siteText.nationaal_layout.headings.medisch}</h2>
+              <ul>
+                <li>
+                  <Link href="/landelijk/positief-geteste-mensen">
+                    <a
+                      onClick={blur}
+                      className={getClassName(
+                        '/landelijk/positief-geteste-mensen'
+                      )}
+                    >
+                      <TitleWithIcon
+                        Icon={GetestIcon}
+                        title={siteText.positief_geteste_personen.title}
                       />
-                    </span>
-                  </a>
-                </Link>
-              </li>
+                      <span>
+                        <PostivelyTestedPeopleBarScale
+                          data={data?.infected_people_delta_normalized}
+                        />
+                      </span>
+                    </a>
+                  </Link>
+                </li>
 
-              <li>
-                <Link href="/landelijk/reproductiegetal">
-                  <a
-                    onClick={blur}
-                    className={getClassName('/landelijk/reproductiegetal')}
-                  >
-                    <GraphHeader
-                      Icon={ReproIcon}
-                      title={siteText.reproductiegetal.title}
-                    />
-                    <span>
-                      <ReproductionIndexBarScale
-                        data={data?.reproduction_index}
-                        lastKnown={data?.reproduction_index_last_known_average}
+                <li>
+                  <Link href="/landelijk/reproductiegetal">
+                    <a
+                      onClick={blur}
+                      className={getClassName('/landelijk/reproductiegetal')}
+                    >
+                      <TitleWithIcon
+                        Icon={ReproIcon}
+                        title={siteText.reproductiegetal.title}
                       />
-                    </span>
-                  </a>
-                </Link>
-              </li>
+                      <span>
+                        <ReproductionIndexBarScale
+                          data={data?.reproduction_index}
+                          lastKnown={
+                            data?.reproduction_index_last_known_average
+                          }
+                        />
+                      </span>
+                    </a>
+                  </Link>
+                </li>
 
-              <li>
-                <Link href="/landelijk/besmettelijke-mensen">
-                  <a
-                    onClick={blur}
-                    className={getClassName('/landelijk/besmettelijke-mensen')}
-                  >
-                    <GraphHeader
-                      Icon={Ziektegolf}
-                      title={siteText.besmettelijke_personen.title}
-                    />
-                    <span>
-                      <InfectiousPeopleBarScale
-                        data={data?.infectious_people_count_normalized}
+                <li>
+                  <Link href="/landelijk/besmettelijke-mensen">
+                    <a
+                      onClick={blur}
+                      className={getClassName(
+                        '/landelijk/besmettelijke-mensen'
+                      )}
+                    >
+                      <TitleWithIcon
+                        Icon={Ziektegolf}
+                        title={siteText.besmettelijke_personen.title}
                       />
-                    </span>
-                  </a>
-                </Link>
-              </li>
+                      <span>
+                        <InfectiousPeopleBarScale
+                          data={data?.infectious_people_count_normalized}
+                        />
+                      </span>
+                    </a>
+                  </Link>
+                </li>
 
-              <li>
-                <Link href="/landelijk/ziekenhuis-opnames">
-                  <a
-                    onClick={blur}
-                    className={getClassName('/landelijk/ziekenhuis-opnames')}
-                  >
-                    <GraphHeader
-                      Icon={Ziekenhuis}
-                      title={siteText.ziekenhuisopnames_per_dag.title}
-                    />
-                    <span>
-                      <IntakeHospitalBarScale data={data?.intake_hospital_ma} />
-                    </span>
-                  </a>
-                </Link>
-              </li>
-
-              <li>
-                <Link href="/landelijk/intensive-care-opnames">
-                  <a
-                    onClick={blur}
-                    className={getClassName(
-                      '/landelijk/intensive-care-opnames'
-                    )}
-                  >
-                    <GraphHeader
-                      Icon={Arts}
-                      title={siteText.ic_opnames_per_dag.title}
-                    />
-                    <span>
-                      <IntakeIntensiveCareBarscale
-                        data={data?.intake_intensivecare_ma}
+                <li>
+                  <Link href="/landelijk/ziekenhuis-opnames">
+                    <a
+                      onClick={blur}
+                      className={getClassName('/landelijk/ziekenhuis-opnames')}
+                    >
+                      <TitleWithIcon
+                        Icon={Ziekenhuis}
+                        title={siteText.ziekenhuisopnames_per_dag.title}
                       />
-                    </span>
-                  </a>
-                </Link>
-              </li>
-            </ul>
+                      <span>
+                        <IntakeHospitalBarScale
+                          data={data?.intake_hospital_ma}
+                        />
+                      </span>
+                    </a>
+                  </Link>
+                </li>
 
-            <h2>{siteText.nationaal_layout.headings.overig}</h2>
-            <ul>
-              <li>
-                <Link href="/landelijk/verdenkingen-huisartsen">
-                  <a
-                    onClick={blur}
-                    className={getClassName(
-                      '/landelijk/verdenkingen-huisartsen'
-                    )}
-                  >
-                    <GraphHeader
-                      Icon={Arts}
-                      title={siteText.verdenkingen_huisartsen.title}
-                    />
-                    <span>
-                      <SuspectedPatientsBarScale
-                        data={data?.verdenkingen_huisartsen}
+                <li>
+                  <Link href="/landelijk/intensive-care-opnames">
+                    <a
+                      onClick={blur}
+                      className={getClassName(
+                        '/landelijk/intensive-care-opnames'
+                      )}
+                    >
+                      <TitleWithIcon
+                        Icon={Arts}
+                        title={siteText.ic_opnames_per_dag.title}
                       />
-                    </span>
-                  </a>
-                </Link>
-              </li>
+                      <span>
+                        <IntakeIntensiveCareBarscale
+                          data={data?.intake_intensivecare_ma}
+                        />
+                      </span>
+                    </a>
+                  </Link>
+                </li>
+              </ul>
 
-              <li>
-                <Link href="/landelijk/rioolwater">
-                  <a
-                    onClick={blur}
-                    className={getClassName('/landelijk/rioolwater')}
-                  >
-                    <GraphHeader
-                      Icon={RioolwaterMonitoring}
-                      title={siteText.rioolwater_metingen.title}
-                    />
-                    <span>
-                      <SewerWaterBarScale data={data?.rioolwater_metingen} />
-                    </span>
-                  </a>
-                </Link>
-              </li>
-            </ul>
-
-            <h2>{siteText.nationaal_layout.headings.verpleeghuis}</h2>
-            <ul>
-              <li>
-                <Link href="/landelijk/verpleeghuis-positief-geteste-personen">
-                  <a
-                    onClick={blur}
-                    className={getClassName(
-                      '/landelijk/verpleeghuis-positief-geteste-personen'
-                    )}
-                  >
-                    <GraphHeader
-                      Icon={GetestIcon}
-                      title={
-                        siteText.verpleeghuis_positief_geteste_personen.title
-                      }
-                    />
-                    <span>
-                      <NursingHomeInfectedPeopleBarScale
-                        data={data?.infected_people_nursery_count_daily}
+              <h2>{siteText.nationaal_layout.headings.overig}</h2>
+              <ul>
+                <li>
+                  <Link href="/landelijk/verdenkingen-huisartsen">
+                    <a
+                      onClick={blur}
+                      className={getClassName(
+                        '/landelijk/verdenkingen-huisartsen'
+                      )}
+                    >
+                      <TitleWithIcon
+                        Icon={Arts}
+                        title={siteText.verdenkingen_huisartsen.title}
                       />
-                    </span>
-                  </a>
-                </Link>
-              </li>
+                      <span>
+                        <SuspectedPatientsBarScale
+                          data={data?.verdenkingen_huisartsen}
+                        />
+                      </span>
+                    </a>
+                  </Link>
+                </li>
 
-              <li>
-                <Link href="/landelijk/verpleeghuis-besmette-locaties">
-                  <a
-                    onClick={blur}
-                    className={getClassName(
-                      '/landelijk/verpleeghuis-besmette-locaties'
-                    )}
-                  >
-                    <GraphHeader
-                      Icon={Locatie}
-                      title={siteText.verpleeghuis_besmette_locaties.title}
-                    />
-                    <span>
-                      <NursingHomeInfectedLocationsBarScale
-                        data={data?.total_newly_reported_locations}
+                <li>
+                  <Link href="/landelijk/rioolwater">
+                    <a
+                      onClick={blur}
+                      className={getClassName('/landelijk/rioolwater')}
+                    >
+                      <TitleWithIcon
+                        Icon={RioolwaterMonitoring}
+                        title={siteText.rioolwater_metingen.title}
                       />
-                    </span>
-                  </a>
-                </Link>
-              </li>
+                      <span>
+                        <SewerWaterBarScale data={data?.rioolwater_metingen} />
+                      </span>
+                    </a>
+                  </Link>
+                </li>
+              </ul>
 
-              <li>
-                <Link href="/landelijk/verpleeghuis-sterfte">
-                  <a
-                    onClick={blur}
-                    className={getClassName('/landelijk/verpleeghuis-sterfte')}
-                  >
-                    <GraphHeader
-                      Icon={CoronaVirus}
-                      title={siteText.verpleeghuis_oversterfte.title}
-                    />
-                    <span>
-                      <NursingHomeDeathsBarScale
-                        data={data?.deceased_people_nursery_count_daily}
+              <h2>{siteText.nationaal_layout.headings.verpleeghuis}</h2>
+              <ul>
+                <li>
+                  <Link href="/landelijk/verpleeghuis-positief-geteste-personen">
+                    <a
+                      onClick={blur}
+                      className={getClassName(
+                        '/landelijk/verpleeghuis-positief-geteste-personen'
+                      )}
+                    >
+                      <TitleWithIcon
+                        Icon={GetestIcon}
+                        title={
+                          siteText.verpleeghuis_positief_geteste_personen.title
+                        }
                       />
-                    </span>
-                  </a>
-                </Link>
-              </li>
-            </ul>
-          </nav>
-        </aside>
-      )}
+                      <span>
+                        <NursingHomeInfectedPeopleBarScale
+                          data={data?.infected_people_nursery_count_daily}
+                        />
+                      </span>
+                    </a>
+                  </Link>
+                </li>
 
-      {showContent && (
-        <section>
-          <div>{children}</div>
-        </section>
-      )}
-    </div>
+                <li>
+                  <Link href="/landelijk/verpleeghuis-besmette-locaties">
+                    <a
+                      onClick={blur}
+                      className={getClassName(
+                        '/landelijk/verpleeghuis-besmette-locaties'
+                      )}
+                    >
+                      <TitleWithIcon
+                        Icon={Locatie}
+                        title={siteText.verpleeghuis_besmette_locaties.title}
+                      />
+                      <span>
+                        <NursingHomeInfectedLocationsBarScale
+                          data={data?.total_newly_reported_locations}
+                        />
+                      </span>
+                    </a>
+                  </Link>
+                </li>
+
+                <li>
+                  <Link href="/landelijk/verpleeghuis-sterfte">
+                    <a
+                      onClick={blur}
+                      className={getClassName(
+                        '/landelijk/verpleeghuis-sterfte'
+                      )}
+                    >
+                      <TitleWithIcon
+                        Icon={CoronaVirus}
+                        title={siteText.verpleeghuis_oversterfte.title}
+                      />
+                      <span>
+                        <NursingHomeDeathsBarScale
+                          data={data?.deceased_people_nursery_count_daily}
+                        />
+                      </span>
+                    </a>
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+          </aside>
+        )}
+
+        {showContent && <section>{children}</section>}
+      </div>
+    </>
   );
 }

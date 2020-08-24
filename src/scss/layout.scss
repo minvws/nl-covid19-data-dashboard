@@ -60,6 +60,13 @@
   margin-bottom: $default-margin * 2;
 }
 
+.metric-article {
+  background: white;
+  padding: 2em;
+  border-radius: 5px;
+  margin: $default-margin * 2 0;
+}
+
 /* Remove outline from programatically focussed elements. */
 [tabindex='-1'] {
   outline: none;
@@ -75,19 +82,14 @@
     background: $page-background;
     padding: 2em;
     flex-basis: 100%;
-
-    > div {
-      background: white;
-      box-shadow: $box-shadow;
-      padding: 1em;
-    }
+    padding-top: 3rem;
   }
 }
 
 @media (min-width: 1000px) {
   .national-layout > aside {
     flex: 1 0 auto;
-    width: 30em;
+    width: 25em;
   }
   .national-layout > div {
     flex: 3 0 auto;
@@ -96,10 +98,10 @@
 
 .national-aside {
   background: white;
-  margin-top: 1rem;
 
   h2 {
     margin: 1rem;
+    margin-top: 3rem;
   }
 
   ul {
@@ -107,7 +109,11 @@
     margin: 0;
     padding: 0;
 
-    li:not(:last-of-type) a {
+    li:first-of-type a {
+      border-top: 2px solid $page-background;
+    }
+
+    li a {
       border-bottom: 2px solid $page-background;
     }
   }
@@ -144,7 +150,7 @@ a.metric-link {
 
   span {
     display: block;
-    margin: 0 4rem;
+    margin: 0 2.5rem;
   }
 }
 
@@ -152,3 +158,4 @@ a.active-metric-link {
   background: $page-background;
   border-right: 5px solid $red;
 }
+

@@ -2,7 +2,7 @@ import useSWR from 'swr';
 
 import BarScale from 'components/barScale';
 import Metadata from 'components/metadata';
-import GraphHeader from 'components/graphHeader';
+import TitleWithIcon from 'components/titleWithIcon';
 import DateReported from 'components/dateReported';
 import { FCWithLayout } from 'components/layout';
 import { getNationalLayout } from 'components/layout/NationalLayout';
@@ -48,38 +48,42 @@ const SewerWater: FCWithLayout = () => {
 
   return (
     <>
-      <GraphHeader Icon={RioolwaterMonitoring} title={text.title} />
+      <TitleWithIcon Icon={RioolwaterMonitoring} title={text.title} as="h2" />
 
-      <p>{text.text}</p>
+      <article className="metric-article">
+        <p>{text.text}</p>
 
-      <SewerWaterBarScale data={data} />
+        <SewerWaterBarScale data={data} />
 
-      {data?.last_value?.average !== null && (
-        <DateReported
-          datumsText={text.datums}
-          dateInsertedUnix={data?.last_value?.date_of_insertion_unix}
-          dateUnix={data?.last_value?.week_unix}
-        />
-      )}
-
-      <h4>{text.fold_title}</h4>
-      <p>{text.fold}</p>
-
-      <h4>{text.graph_title}</h4>
-
-      {data?.values && (
-        <>
-          <LineChart
-            timeframeOptions={['all', '5weeks']}
-            values={data.values.map((value) => ({
-              value: Number(value.average),
-              date: value.week_unix,
-            }))}
+        {data?.last_value?.average !== null && (
+          <DateReported
+            datumsText={text.datums}
+            dateInsertedUnix={data?.last_value?.date_of_insertion_unix}
+            dateUnix={data?.last_value?.week_unix}
           />
+        )}
 
-          <Metadata dataSource={text.bron} />
-        </>
-      )}
+        <h3>{text.fold_title}</h3>
+        <p>{text.fold}</p>
+      </article>
+
+      <article className="metric-article">
+        <h3>{text.graph_title}</h3>
+
+        {data?.values && (
+          <>
+            <LineChart
+              timeframeOptions={['all', '5weeks']}
+              values={data.values.map((value) => ({
+                value: Number(value.average),
+                date: value.week_unix,
+              }))}
+            />
+
+            <Metadata dataSource={text.bron} />
+          </>
+        )}
+      </article>
     </>
   );
 };

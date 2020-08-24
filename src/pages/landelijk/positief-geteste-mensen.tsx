@@ -2,7 +2,7 @@ import useSWR from 'swr';
 
 import BarScale from 'components/barScale';
 import Metadata from 'components/metadata';
-import GraphHeader from 'components/graphHeader';
+import TitleWithIcon from 'components/titleWithIcon';
 import DateReported from 'components/dateReported';
 import { FCWithLayout } from 'components/layout';
 import { getNationalLayout } from 'components/layout/NationalLayout';
@@ -64,60 +64,65 @@ const PostivelyTestedPeople: FCWithLayout = () => {
 
   return (
     <>
-      <GraphHeader Icon={Getest} title={text.title} />
-      <p>{text.text}</p>
+      <TitleWithIcon Icon={Getest} title={text.title} as="h2" />
+      <article className="metric-article">
+        <p>{text.text}</p>
 
-      {delta && <PostivelyTestedPeopleBarScale data={delta} />}
+        {delta && <PostivelyTestedPeopleBarScale data={delta} />}
 
-      {total && (
-        <h3>
-          {text.metric_title}{' '}
-          <span style={{ color: '#01689b' }}>
-            {formatDecimal(total.last_value.infected_daily_total)}
-          </span>
-        </h3>
-      )}
+        {total && (
+          <h3>
+            {text.metric_title}{' '}
+            <span style={{ color: '#01689b' }}>
+              {formatDecimal(total.last_value.infected_daily_total)}
+            </span>
+          </h3>
+        )}
 
-      {delta?.last_value?.infected_daily_increase !== null && (
-        <DateReported
-          datumsText={text.datums}
-          dateUnix={delta?.last_value?.date_of_report_unix}
-          dateInsertedUnix={delta?.last_value?.date_of_insertion_unix}
-        />
-      )}
-
-      <h4>{text.fold_title}</h4>
-      <p>{text.fold}</p>
-
-      <h4>{text.linechart_title}</h4>
-      {delta && (
-        <LineChart
-          values={delta.values.map((value) => ({
-            value: value.infected_daily_increase,
-            date: value.date_of_report_unix,
-          }))}
-        />
-      )}
-
-      <h4>{text.graph_title}</h4>
-      {age && (
-        <>
-          <BarChart
-            keys={['0 tot 20', '20 tot 40', '40 tot 60', '60 tot 80', '80+']}
-            data={age.values.map((value) => ({
-              y: value.infected_per_agegroup_increase || 0,
-              label: value?.infected_per_agegroup_increase
-                ? `${(
-                    ((value.infected_per_agegroup_increase as number) * 100) /
-                    barChartTotal
-                  ).toFixed(0)}%`
-                : false,
-            }))}
-            axisTitle={text.graph_axis_title}
+        {delta?.last_value?.infected_daily_increase !== null && (
+          <DateReported
+            datumsText={text.datums}
+            dateUnix={delta?.last_value?.date_of_report_unix}
+            dateInsertedUnix={delta?.last_value?.date_of_insertion_unix}
           />
-          <Metadata dataSource={text.bron} />
-        </>
-      )}
+        )}
+        <h3>{text.fold_title}</h3>
+        <p>{text.fold}</p>
+      </article>
+
+      <article className="metric-article">
+        <h3>{text.linechart_title}</h3>
+        {delta && (
+          <LineChart
+            values={delta.values.map((value) => ({
+              value: value.infected_daily_increase,
+              date: value.date_of_report_unix,
+            }))}
+          />
+        )}
+      </article>
+
+      <article className="metric-article">
+        <h3>{text.graph_title}</h3>
+        {age && (
+          <>
+            <BarChart
+              keys={['0 tot 20', '20 tot 40', '40 tot 60', '60 tot 80', '80+']}
+              data={age.values.map((value) => ({
+                y: value.infected_per_agegroup_increase || 0,
+                label: value?.infected_per_agegroup_increase
+                  ? `${(
+                      ((value.infected_per_agegroup_increase as number) * 100) /
+                      barChartTotal
+                    ).toFixed(0)}%`
+                  : false,
+              }))}
+              axisTitle={text.graph_axis_title}
+            />
+            <Metadata dataSource={text.bron} />
+          </>
+        )}
+      </article>
     </>
   );
 };

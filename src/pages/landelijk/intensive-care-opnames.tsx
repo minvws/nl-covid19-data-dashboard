@@ -2,7 +2,7 @@ import useSWR from 'swr';
 
 import BarScale from 'components/barScale';
 import Metadata from 'components/metadata';
-import GraphHeader from 'components/graphHeader';
+import TitleWithIcon from 'components/titleWithIcon';
 import DateReported from 'components/dateReported';
 import { FCWithLayout } from 'components/layout';
 import { getNationalLayout } from 'components/layout/NationalLayout';
@@ -58,36 +58,41 @@ const IntakeIntensiveCare: FCWithLayout = () => {
 
   return (
     <>
-      <GraphHeader Icon={Arts} title={text.title} />
-      <p>{text.text}</p>
+      <TitleWithIcon Icon={Arts} title={text.title} as="h2" />
 
-      <IntakeIntensiveCareBarscale data={data} />
+      <article className="metric-article">
+        <p>{text.text}</p>
 
-      {data?.last_value?.moving_average_ic !== null && (
-        <DateReported
-          datumsText={text.datums}
-          dateUnix={data?.last_value?.date_of_report_unix}
-        />
-      )}
+        <IntakeIntensiveCareBarscale data={data} />
 
-      <h4>{text.fold_title}</h4>
-      <p>{text.fold}</p>
-
-      <h4>{text.graph_title}</h4>
-
-      {data && (
-        <>
-          <LineChart
-            values={data.values.map((value) => ({
-              value: value.moving_average_ic,
-              date: value.date_of_report_unix,
-            }))}
-            signaalwaarde={10}
+        {data?.last_value?.moving_average_ic !== null && (
+          <DateReported
+            datumsText={text.datums}
+            dateUnix={data?.last_value?.date_of_report_unix}
           />
+        )}
 
-          <Metadata dataSource={text.bron} />
-        </>
-      )}
+        <h3>{text.fold_title}</h3>
+        <p>{text.fold}</p>
+      </article>
+
+      <article className="metric-article">
+        <h3>{text.graph_title}</h3>
+
+        {data && (
+          <>
+            <LineChart
+              values={data.values.map((value) => ({
+                value: value.moving_average_ic,
+                date: value.date_of_report_unix,
+              }))}
+              signaalwaarde={10}
+            />
+
+            <Metadata dataSource={text.bron} />
+          </>
+        )}
+      </article>
     </>
   );
 };
