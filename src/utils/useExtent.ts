@@ -9,7 +9,7 @@ import { useMemo } from 'react';
  */
 export default function useExtent(
   collection: any[],
-  predicate?: (item: any) => number
+  predicate?: (item: Record<string, unknown>) => number
 ): [number, number] {
   return useMemo(() => {
     const numberCollection = predicate
