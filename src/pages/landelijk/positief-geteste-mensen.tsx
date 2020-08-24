@@ -6,7 +6,6 @@ import GraphHeader from 'components/graphHeader';
 import DateReported from 'components/dateReported';
 import { FCWithLayout } from 'components/layout';
 import { getNationalLayout } from 'components/layout/NationalLayout';
-import Masonry from 'components/layout/Masonry';
 import { LineChart, BarChart } from 'components/tiles/index';
 
 import Getest from 'assets/test.svg';
@@ -66,76 +65,64 @@ const PostivelyTestedPeople: FCWithLayout = () => {
   return (
     <>
       <GraphHeader Icon={Getest} title={text.title} as="h2" />
-      <Masonry>
-        <article className="masonry-item">
-          <h3>{text.text}</h3>
+      <article className="masonry-item">
+        <h3>{text.text}</h3>
 
-          {delta && <PostivelyTestedPeopleBarScale data={delta} />}
+        {delta && <PostivelyTestedPeopleBarScale data={delta} />}
 
-          {total && (
-            <h3>
-              {text.metric_title}{' '}
-              <span style={{ color: '#01689b' }}>
-                {formatDecimal(total.last_value.infected_daily_total)}
-              </span>
-            </h3>
-          )}
+        {total && (
+          <h3>
+            {text.metric_title}{' '}
+            <span style={{ color: '#01689b' }}>
+              {formatDecimal(total.last_value.infected_daily_total)}
+            </span>
+          </h3>
+        )}
 
-          {delta?.last_value?.infected_daily_increase !== null && (
-            <DateReported
-              datumsText={text.datums}
-              dateUnix={delta?.last_value?.date_of_report_unix}
-              dateInsertedUnix={delta?.last_value?.date_of_insertion_unix}
-            />
-          )}
-        </article>
+        {delta?.last_value?.infected_daily_increase !== null && (
+          <DateReported
+            datumsText={text.datums}
+            dateUnix={delta?.last_value?.date_of_report_unix}
+            dateInsertedUnix={delta?.last_value?.date_of_insertion_unix}
+          />
+        )}
+        <h3>{text.fold_title}</h3>
+        <p>{text.fold}</p>
+      </article>
 
-        <article className="masonry-item">
-          <h3>{text.fold_title}</h3>
-          <p>{text.fold}</p>
-        </article>
+      <article className="masonry-item">
+        <h3>{text.linechart_title}</h3>
+        {delta && (
+          <LineChart
+            values={delta.values.map((value) => ({
+              value: value.infected_daily_increase,
+              date: value.date_of_report_unix,
+            }))}
+          />
+        )}
+      </article>
 
-        <article className="masonry-item">
-          <h3>{text.linechart_title}</h3>
-          {delta && (
-            <LineChart
-              values={delta.values.map((value) => ({
-                value: value.infected_daily_increase,
-                date: value.date_of_report_unix,
+      <article className="masonry-item">
+        <h3>{text.graph_title}</h3>
+        {age && (
+          <>
+            <BarChart
+              keys={['0 tot 20', '20 tot 40', '40 tot 60', '60 tot 80', '80+']}
+              data={age.values.map((value) => ({
+                y: value.infected_per_agegroup_increase || 0,
+                label: value?.infected_per_agegroup_increase
+                  ? `${(
+                      ((value.infected_per_agegroup_increase as number) * 100) /
+                      barChartTotal
+                    ).toFixed(0)}%`
+                  : false,
               }))}
+              axisTitle={text.graph_axis_title}
             />
-          )}
-        </article>
-
-        <article className="masonry-item">
-          <h3>{text.graph_title}</h3>
-          {age && (
-            <>
-              <BarChart
-                keys={[
-                  '0 tot 20',
-                  '20 tot 40',
-                  '40 tot 60',
-                  '60 tot 80',
-                  '80+',
-                ]}
-                data={age.values.map((value) => ({
-                  y: value.infected_per_agegroup_increase || 0,
-                  label: value?.infected_per_agegroup_increase
-                    ? `${(
-                        ((value.infected_per_agegroup_increase as number) *
-                          100) /
-                        barChartTotal
-                      ).toFixed(0)}%`
-                    : false,
-                }))}
-                axisTitle={text.graph_axis_title}
-              />
-              <Metadata dataSource={text.bron} />
-            </>
-          )}
-        </article>
-      </Masonry>
+            <Metadata dataSource={text.bron} />
+          </>
+        )}
+      </article>
     </>
   );
 };
