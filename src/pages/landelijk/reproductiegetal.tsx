@@ -106,6 +106,7 @@ const ReproductionIndex: FCWithLayout = () => {
           signaalwaarde={1}
           rangeLegendLabel={text.rangeLegendLabel}
           lineLegendLabel={text.lineLegendLabel}
+          timeframeOptions={['all', '5weeks']}
         />
       )}
 
