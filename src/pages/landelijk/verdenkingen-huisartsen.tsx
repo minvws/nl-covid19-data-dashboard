@@ -63,7 +63,7 @@ const SuspectedPatients: FCWithLayout = () => {
         {total && (
           <h3>
             {text.estimated_amount_of_patients}{' '}
-            <span style={{ color: '#01689b' }}>{formatNumber(total)}</span>
+            <span className="text-blue">{formatNumber(total)}</span>
           </h3>
         )}
 

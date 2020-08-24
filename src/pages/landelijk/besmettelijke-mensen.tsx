@@ -76,7 +76,7 @@ const InfectiousPeople: FCWithLayout = () => {
         {count && (
           <h3>
             {text.metric_title}{' '}
-            <span style={{ color: '#01689b' }}>
+            <span className="text-blue">
               {formatNumber(count.last_value.infectious_avg)}
             </span>
           </h3>

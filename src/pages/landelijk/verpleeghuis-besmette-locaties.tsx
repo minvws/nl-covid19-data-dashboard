@@ -87,7 +87,7 @@ const NursingHomeInfectedLocations: FCWithLayout = () => {
         {totalLocations && (
           <h4>
             {text.metric_title}{' '}
-            <span style={{ color: '#01689b' }}>
+            <span className="text-blue">
               {formatNumber(totalLocations.last_value.total_reported_locations)}
             </span>
           </h4>
