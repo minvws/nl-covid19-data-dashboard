@@ -19,19 +19,28 @@ interface MunicipalityProperties {
   gemcode: string;
 }
 
-type TMunicipalityPoint = MunicipalityProperties & MunicipalityData;
+type TMunicipalityTooltipFormatterContextObject = TooltipFormatterContextObject & {
+  point: TMunicipalityPoint;
+};
+
+type TMunicipalityPoint = Highcharts.Point &
+  MunicipalityProperties &
+  MunicipalityData;
 
 interface IProps {
   selected?: { id: string };
-  setSelection: (item: { id: string }) => void;
+  setSelection?: (item: { id: string }) => void;
   metric: TMunicipalityMetricName;
+  gradient?: [minColor: string, maxColor: string];
 }
 
-const MunicipalityMap: React.FC<IProps> = ({
-  selected,
-  setSelection,
-  metric,
-}) => {
+function MunicipalityMap(props: IProps) {
+  const {
+    selected,
+    setSelection,
+    metric,
+    gradient = ['#0000ff', '#ff0000'],
+  } = props;
   const { data: countryLines } = useSWR<any[]>(
     '/static-json/netherlands-outline.geojson'
   );
@@ -69,8 +78,8 @@ const MunicipalityMap: React.FC<IProps> = ({
       colorAxis: {
         min,
         max,
-        minColor: '#0000ff',
-        maxColor: '#ff0000',
+        minColor: gradient[0],
+        maxColor: gradient[1],
       },
       legend: {
         enabled: false,
@@ -79,10 +88,11 @@ const MunicipalityMap: React.FC<IProps> = ({
         backgroundColor: '#FFF',
         borderColor: '#01689B',
         borderRadius: 0,
+        // @ts-ignore
         formatter: function (
-          this: TooltipFormatterContextObject
+          this: TMunicipalityTooltipFormatterContextObject
         ): false | string {
-          const { point }: { point: MunicipalityData } = this as any;
+          const { point } = this;
           const { Province, Municipality_name } = point;
 
           if (!Municipality_name) {
@@ -106,18 +116,27 @@ const MunicipalityMap: React.FC<IProps> = ({
               color: '#ffffff',
             },
           },
+          borderWidth: 1,
+          borderColor: '#012090',
+        },
+        mapline: {
+          borderColor: 'black',
+          borderWidth: 2,
         },
       },
       series: [
         {
           type: 'map',
           mapData: municipalityLines,
-          allowPointSelect: true,
+          allowPointSelect: setSelection !== undefined,
           point: {
             events: {
-              click: function (this: any) {
-                this.select(this.selected, false);
-                setSelection({ id: this.Municipality_code });
+              // @ts-ignore
+              click: function (this: TMunicipalityPoint) {
+                if (setSelection) {
+                  this.select(this.selected, false);
+                  setSelection({ id: this.Municipality_code });
+                }
               },
             },
           },
@@ -164,6 +183,6 @@ const MunicipalityMap: React.FC<IProps> = ({
       options={mapOptions}
     />
   );
-};
+}
 
 export default MunicipalityMap;
