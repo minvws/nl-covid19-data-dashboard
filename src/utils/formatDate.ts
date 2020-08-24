@@ -23,8 +23,10 @@ const Medium = new Intl.DateTimeFormat(locale, {
   dateStyle: 'long',
 } as DateTimeFormatOptions);
 
-const MonthLong = new Intl.DateTimeFormat(locale, {
+// Day Month or Month Day depending on the locale
+const DayMonth = new Intl.DateTimeFormat(locale, {
   month: 'long',
+  day: 'numeric',
 });
 
 const MonthShort = new Intl.DateTimeFormat(locale, {
@@ -50,9 +52,5 @@ function formatDate(
     if (isYesterday(value)) return siteText.utils.date_yesterday;
   }
 
-  return formatShortDate(value);
-}
-
-function formatShortDate(value: number | Date): string {
-  return `${Day.format(value)} ${MonthLong.format(value)}`;
+  return DayMonth.format(value);
 }
