@@ -43,7 +43,7 @@ const MunicipalityMap: React.FC<IProps> = ({
   const municipalityData = useMunicipalityData(metric);
   const [min, max] = useExtent(
     municipalityData,
-    (item: MunicipalityData) => item[metric]
+    (item: MunicipalityData): number => item[metric]
   );
 
   const mapOptions = useMemo<Highcharts.Options>(
