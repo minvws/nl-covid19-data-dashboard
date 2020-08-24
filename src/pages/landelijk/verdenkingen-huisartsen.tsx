@@ -2,7 +2,7 @@ import useSWR from 'swr';
 
 import BarScale from 'components/barScale';
 import Metadata from 'components/metadata';
-import GraphHeader from 'components/graphHeader';
+import TitleWithIcon from 'components/titleWithIcon';
 import DateReported from 'components/dateReported';
 import { FCWithLayout } from 'components/layout';
 import { getNationalLayout } from 'components/layout/NationalLayout';
@@ -53,7 +53,7 @@ const SuspectedPatients: FCWithLayout = () => {
 
   return (
     <>
-      <GraphHeader Icon={Arts} title={text.title} as="h2" />
+      <TitleWithIcon Icon={Arts} title={text.title} as="h2" />
 
       <article className="metric-article">
         <p>{text.text}</p>

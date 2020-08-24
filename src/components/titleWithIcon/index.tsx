@@ -1,27 +1,25 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 
-import styles from './graphHeader.module.scss';
+import styles from './titleWithIcon.module.scss';
 
-type GraphHeaderTypes = {
+interface IProps {
   Icon?: React.ComponentType;
   title: string;
   regio?: string;
   headingRef?: React.RefObject<HTMLHeadingElement>;
   as?: 'h2' | 'h3';
-};
+}
 
-const GraphHeader: FunctionComponent<GraphHeaderTypes> = ({
-  Icon,
-  title,
-  regio,
-  headingRef,
-  as = 'h3',
-}) => {
+export default TitleWithIcon;
+
+function TitleWithIcon(props: IProps) {
+  const { Icon, title, regio, headingRef, as = 'h3' } = props;
+
   return (
-    <div className={styles.graphHeader}>
+    <div className={styles.titleWithIcon}>
       {Icon && (
         <div
-          className={`${styles.graphHeaderIcon} ${
+          className={`${styles.titleWithIconIcon} ${
             as === 'h2' ? styles['icon-large'] : styles['icon-small']
           }`}
         >
@@ -48,6 +46,4 @@ const GraphHeader: FunctionComponent<GraphHeaderTypes> = ({
       )}
     </div>
   );
-};
-
-export default GraphHeader;
+}

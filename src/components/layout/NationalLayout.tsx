@@ -3,7 +3,7 @@ import Head from 'next/head';
 import useSWR from 'swr';
 import { useRouter } from 'next/router';
 
-import GraphHeader from 'components/graphHeader';
+import TitleWithIcon from 'components/titleWithIcon';
 import { getLayout as getSiteLayout } from 'components/layout';
 import { ReproductionIndexBarScale } from 'pages/landelijk/reproductiegetal';
 import { PostivelyTestedPeopleBarScale } from 'pages/landelijk/positief-geteste-mensen';
@@ -103,7 +103,7 @@ function NationalLayout(props: WithChildren) {
                         '/landelijk/positief-geteste-mensen'
                       )}
                     >
-                      <GraphHeader
+                      <TitleWithIcon
                         Icon={GetestIcon}
                         title={siteText.positief_geteste_personen.title}
                       />
@@ -122,7 +122,7 @@ function NationalLayout(props: WithChildren) {
                       onClick={blur}
                       className={getClassName('/landelijk/reproductiegetal')}
                     >
-                      <GraphHeader
+                      <TitleWithIcon
                         Icon={ReproIcon}
                         title={siteText.reproductiegetal.title}
                       />
@@ -146,7 +146,7 @@ function NationalLayout(props: WithChildren) {
                         '/landelijk/besmettelijke-mensen'
                       )}
                     >
-                      <GraphHeader
+                      <TitleWithIcon
                         Icon={Ziektegolf}
                         title={siteText.besmettelijke_personen.title}
                       />
@@ -165,7 +165,7 @@ function NationalLayout(props: WithChildren) {
                       onClick={blur}
                       className={getClassName('/landelijk/ziekenhuis-opnames')}
                     >
-                      <GraphHeader
+                      <TitleWithIcon
                         Icon={Ziekenhuis}
                         title={siteText.ziekenhuisopnames_per_dag.title}
                       />
@@ -186,7 +186,7 @@ function NationalLayout(props: WithChildren) {
                         '/landelijk/intensive-care-opnames'
                       )}
                     >
-                      <GraphHeader
+                      <TitleWithIcon
                         Icon={Arts}
                         title={siteText.ic_opnames_per_dag.title}
                       />
@@ -210,7 +210,7 @@ function NationalLayout(props: WithChildren) {
                         '/landelijk/verdenkingen-huisartsen'
                       )}
                     >
-                      <GraphHeader
+                      <TitleWithIcon
                         Icon={Arts}
                         title={siteText.verdenkingen_huisartsen.title}
                       />
@@ -229,7 +229,7 @@ function NationalLayout(props: WithChildren) {
                       onClick={blur}
                       className={getClassName('/landelijk/rioolwater')}
                     >
-                      <GraphHeader
+                      <TitleWithIcon
                         Icon={RioolwaterMonitoring}
                         title={siteText.rioolwater_metingen.title}
                       />
@@ -251,7 +251,7 @@ function NationalLayout(props: WithChildren) {
                         '/landelijk/verpleeghuis-positief-geteste-personen'
                       )}
                     >
-                      <GraphHeader
+                      <TitleWithIcon
                         Icon={GetestIcon}
                         title={
                           siteText.verpleeghuis_positief_geteste_personen.title
@@ -274,7 +274,7 @@ function NationalLayout(props: WithChildren) {
                         '/landelijk/verpleeghuis-besmette-locaties'
                       )}
                     >
-                      <GraphHeader
+                      <TitleWithIcon
                         Icon={Locatie}
                         title={siteText.verpleeghuis_besmette_locaties.title}
                       />
@@ -295,7 +295,7 @@ function NationalLayout(props: WithChildren) {
                         '/landelijk/verpleeghuis-sterfte'
                       )}
                     >
-                      <GraphHeader
+                      <TitleWithIcon
                         Icon={CoronaVirus}
                         title={siteText.verpleeghuis_oversterfte.title}
                       />

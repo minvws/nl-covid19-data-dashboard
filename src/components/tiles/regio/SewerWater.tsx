@@ -3,7 +3,7 @@ import Collapse from 'components/collapse';
 import Metadata from 'components/metadata';
 import GraphContainer from 'components/graphContainer';
 import GraphContent from 'components/graphContent';
-import GraphHeader from 'components/graphHeader';
+import TitleWithIcon from 'components/titleWithIcon';
 import DateReported from 'components/dateReported';
 import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
 import RegionalSewerWaterLineChart from 'components/lineChart/regionalSewerWaterLineChart';
@@ -34,7 +34,7 @@ export const SewerWater: React.FC<IProps> = ({ data, selectedRegio }) => {
   return (
     <GraphContainer>
       <GraphContent>
-        <GraphHeader
+        <TitleWithIcon
           Icon={RioolwaterMonitoring}
           title={text.title}
           regio={selectedRegio?.name}
