@@ -32,18 +32,12 @@ type TMunicipalityPoint = Highcharts.Point &
 
 interface IProps {
   selected?: { id: string };
-  setSelection?: (item: { id: string }) => void;
   metric: TMunicipalityMetricName;
   gradient?: [minColor: string, maxColor: string];
 }
 
 function MunicipalityMap(props: IProps) {
-  const {
-    selected,
-    setSelection,
-    metric,
-    gradient = ['#0000ff', '#ff0000'],
-  } = props;
+  const { selected, metric, gradient = ['#0000ff', '#ff0000'] } = props;
 
   const municipalCode = selected?.id;
 
@@ -67,18 +61,7 @@ function MunicipalityMap(props: IProps) {
         type: 'map',
         allAreas: false,
         mapData: municipalityLines,
-        allowPointSelect: setSelection !== undefined,
-        point: {
-          events: {
-            // @ts-ignore
-            click: function (this: TMunicipalityPoint) {
-              if (setSelection) {
-                this.select(this.selected, false);
-                setSelection({ id: this.Municipality_code });
-              }
-            },
-          },
-        },
+        allowPointSelect: false,
         data: municipalityData,
         // @ts-ignore
         joinBy: ['gemcode', 'Municipality_code'],
@@ -94,13 +77,7 @@ function MunicipalityMap(props: IProps) {
     }
 
     return result;
-  }, [
-    countryLines,
-    municipalCode,
-    municipalityData,
-    municipalityLines,
-    setSelection,
-  ]);
+  }, [countryLines, municipalCode, municipalityData, municipalityLines]);
 
   const mapOptions = useMemo<Highcharts.Options>(
     () => ({
