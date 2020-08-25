@@ -31,6 +31,9 @@ const twitterImage = locale === 'nl' ? twitterImageNL : twitterImageEN;
 import siteText from 'locale';
 
 import { Regionaal } from 'types/data';
+import { IntakeHospitalMunicipality } from 'components/tiles/municipality/IntakeHospital';
+import { PostivelyTestedPeopleMunicipality } from 'components/tiles/municipality/PositivelyTestedPeople';
+import { SewerWaterMunicipality } from 'components/tiles/municipality/SewerWater';
 
 export type SafetyRegion = {
   id: number;
@@ -108,8 +111,9 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
 
   let regionType: RegionType = 'municipality';
 
-  const setRegionType = (event: Event): void => {
-    regionType = event.currentTarget.value;
+  const setRegionType = (event: any): void => {
+    regionType = event?.currentTarget?.value;
+    console.log('setRegionType', regionType);
   };
 
   const router = useRouter();
@@ -158,8 +162,9 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
   };
 
   const response = useSWR(() => {
+    console.log(regionType);
     if (regionType === 'municipality') {
-      return '/json/GM0010.json';
+      return '/json/GM0014.json';
     }
     selectedRegio?.code ? `/json/${selectedRegio.code}.json` : null;
   });
@@ -219,15 +224,33 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
           </div>
 
           <div className={styles['panel-column']}>
-            <IntakeHospital
-              selectedRegio={selectedRegio}
-              data={data}
-              contentRef={contentRef}
-            />
+            {regionType === 'safetyRegion' && (
+              <>
+                <IntakeHospital
+                  selectedRegio={selectedRegio}
+                  data={data}
+                  contentRef={contentRef}
+                />
 
-            <PostivelyTestedPeople selectedRegio={selectedRegio} data={data} />
+                <PostivelyTestedPeople selectedRegio={selectedRegio} data={data} />
 
-            <SewerWater selectedRegio={selectedRegio} data={data} />
+                <SewerWater selectedRegio={selectedRegio} data={data} />
+              </>
+            )}
+
+            {regionType === 'municipality' && (
+              <>
+              <IntakeHospitalMunicipality
+                selectedRegio={selectedRegio}
+                data={data}
+                contentRef={contentRef}
+              />
+
+              <PostivelyTestedPeopleMunicipality selectedRegio={selectedRegio} data={data} />
+
+              <SewerWaterMunicipality selectedRegio={selectedRegio} data={data} />
+            </>
+            )}
           </div>
         </div>
         <ScreenReaderOnly>
