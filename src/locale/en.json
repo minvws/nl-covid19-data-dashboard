@@ -383,7 +383,7 @@
     "cijfers": [
       {
         "cijfer": "Update of 11 August on the peak of the number of confirmed cases",
-        "verantwoording": "Due to technical reasons, not all reports on infections could be sent from the municipal health services (GGDs) to the National Institute for Public Health and environment (RIVM). These later received reports were on the 9th en 10th of August added to the data. In total there were 160 later received reports, of which 9 on the 9th and 151 on the 10th of August.{{whitespace}}\n\nThese 160 later received reports were spread through the safety regions as follows:{{whitespace}}\nAmsterdam-Amstelland: 8 \nFlevoland: 30 \nFriesland: 8\nGroningen: 1\nHollands Midden: 26\nRotterdam-Rijnmond: 7\nMidden- en West-Brabant: 27 \nZaanstreek-Waterland: 8\nZeeland: 23\nZuid-Limburg: 14\nGelderland-Midden: 7\nUnknown: 1"
+        "verantwoording": "Due to technical reasons, not all reports on infections could be sent from the municipal health services (GGDs) to the National Institute for Public Health and environment (RIVM). These later received reports were on the 9th en 10th of August added to the data. In total there were 160 later received reports, of which 9 on the 9th and 151 on the 10th of August.\n\nThese 160 later received reports were spread through the safety regions as follows:\n\n- Amsterdam-Amstelland: 8\n- Flevoland: 30\n- Friesland: 8\n- Groningen: 1\n- Hollands Midden: 26\n- Rotterdam-Rijnmond: 7\n- Midden- en West-Brabant: 27\n- Zaanstreek-Waterland: 8\n- Zeeland: 23\n- Zuid-Limburg: 14\n- Gelderland-Midden: 7\n- Unknown: 1"
       },
       {
         "cijfer": "Update of 31 July on the alert value for number of infectious people",
