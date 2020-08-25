@@ -75,12 +75,12 @@ const IntakeHospital: FCWithLayout = () => {
       <h4>{text.fold_title}</h4>
       <p>{text.fold}</p>
 
-      <h4>{text.graph_title}</h4>
-
       <MunicipalityMap
         metric="Hospital_admission"
         gradient={['#69c253', '#f35065']}
       />
+
+      <h4>{text.graph_title}</h4>
 
       {data && (
         <>

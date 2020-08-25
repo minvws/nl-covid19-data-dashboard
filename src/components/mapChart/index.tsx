@@ -1,4 +1,7 @@
-import Highcharts, { TooltipFormatterContextObject } from 'highcharts';
+import Highcharts, {
+  TooltipFormatterContextObject,
+  SeriesOptionsType,
+} from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
 import useSWR from 'swr';
@@ -14,7 +17,7 @@ if (typeof Highcharts === 'object') {
   require('highcharts/modules/map')(Highcharts);
 }
 
-interface MunicipalityProperties {
+export interface MunicipalityProperties {
   gemnaam: string;
   gemcode: string;
 }
@@ -41,6 +44,9 @@ function MunicipalityMap(props: IProps) {
     metric,
     gradient = ['#0000ff', '#ff0000'],
   } = props;
+
+  const municipalCode = selected?.id;
+
   const { data: countryLines } = useSWR<any[]>(
     '/static-json/netherlands-outline.geojson'
   );
@@ -49,11 +55,52 @@ function MunicipalityMap(props: IProps) {
     FeatureCollection<MultiPolygon, MunicipalityProperties>
   >('/static-json/municipalities-outline.geojson');
 
-  const municipalityData = useMunicipalityData(metric);
+  const municipalityData = useMunicipalityData(metric, municipalCode);
   const [min, max] = useExtent(
     municipalityData,
     (item: MunicipalityData): number => item[metric]
   );
+
+  const series = useMemo<SeriesOptionsType[]>(() => {
+    const result: SeriesOptionsType[] = [
+      {
+        type: 'map',
+        allAreas: false,
+        mapData: municipalityLines,
+        allowPointSelect: setSelection !== undefined,
+        point: {
+          events: {
+            // @ts-ignore
+            click: function (this: TMunicipalityPoint) {
+              if (setSelection) {
+                this.select(this.selected, false);
+                setSelection({ id: this.Municipality_code });
+              }
+            },
+          },
+        },
+        data: municipalityData,
+        // @ts-ignore
+        joinBy: ['gemcode', 'Municipality_code'],
+      },
+    ];
+
+    // When there's no selected municipal code we render the outlines of the country:
+    if (!municipalCode) {
+      result.push({
+        type: 'mapline',
+        data: countryLines,
+      });
+    }
+
+    return result;
+  }, [
+    countryLines,
+    municipalCode,
+    municipalityData,
+    municipalityLines,
+    setSelection,
+  ]);
 
   const mapOptions = useMemo<Highcharts.Options>(
     () => ({
@@ -124,41 +171,9 @@ function MunicipalityMap(props: IProps) {
           borderWidth: 2,
         },
       },
-      series: [
-        {
-          type: 'map',
-          mapData: municipalityLines,
-          allowPointSelect: setSelection !== undefined,
-          point: {
-            events: {
-              // @ts-ignore
-              click: function (this: TMunicipalityPoint) {
-                if (setSelection) {
-                  this.select(this.selected, false);
-                  setSelection({ id: this.Municipality_code });
-                }
-              },
-            },
-          },
-          data: municipalityData,
-          // @ts-ignore
-          joinBy: ['gemcode', 'Municipality_code'],
-        },
-        {
-          type: 'mapline',
-          data: countryLines,
-        },
-      ],
+      series: series,
     }),
-    [
-      countryLines,
-      municipalityLines,
-      municipalityData,
-      setSelection,
-      min,
-      max,
-      metric,
-    ]
+    [min, max, metric, gradient, series]
   );
 
   const ref = useRef<any>();
