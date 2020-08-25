@@ -14,7 +14,6 @@ import siteText from 'locale';
 
 import { IntakeHospitalMa } from 'types/data';
 import MunicipalityMap from 'components/mapChart';
-import DualColumn from 'components/dualColumn';
 
 const text: typeof siteText.ziekenhuisopnames_per_dag =
   siteText.ziekenhuisopnames_per_dag;
@@ -62,30 +61,23 @@ const IntakeHospital: FCWithLayout = () => {
     <>
       <TitleWithIcon Icon={Ziekenhuis} title={text.title} as="h2" />
       <article className="metric-article">
-        <DualColumn
-          leftCol={
-            <>
-              <p>{text.text}</p>
+        <p>{text.text}</p>
 
-              <IntakeHospitalBarScale data={data} />
+        <IntakeHospitalBarScale data={data} />
 
-              {data?.last_value?.moving_average_hospital !== null && (
-                <DateReported
-                  datumsText={text.datums}
-                  dateUnix={data?.last_value?.date_of_report_unix}
-                />
-              )}
+        {data?.last_value?.moving_average_hospital !== null && (
+          <DateReported
+            datumsText={text.datums}
+            dateUnix={data?.last_value?.date_of_report_unix}
+          />
+        )}
 
-              <h3>{text.fold_title}</h3>
-              <p>{text.fold}</p>
-            </>
-          }
-          rightCol={
-            <MunicipalityMap
-              metric="Hospital_admission"
-              gradient={['#69c253', '#f35065']}
-            />
-          }
+        <h3>{text.fold_title}</h3>
+        <p>{text.fold}</p>
+
+        <MunicipalityMap
+          metric="Hospital_admission"
+          gradient={['#69c253', '#f35065']}
         />
       </article>
 

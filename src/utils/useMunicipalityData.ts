@@ -24,9 +24,9 @@ function getAllMunicipalitiesForSameRegion(
 
   const regionCode = municipalCodeToRegionCode[code];
 
-  return Object.entries<[string, string]>(municipalCodeToRegionCode)
-    .filter(([_mun, region]) => region === regionCode)
-    .map<string>(([mun, _region]) => mun);
+  return Object.keys(municipalCodeToRegionCode).filter(
+    (code) => municipalCodeToRegionCode[code] === regionCode
+  );
 }
 
 /**

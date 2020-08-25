@@ -19,7 +19,6 @@ import {
   IntakeShareAgeGroups,
 } from 'types/data';
 import MunicipalityMap from 'components/mapChart';
-import DualColumn from 'components/dualColumn';
 
 const text: typeof siteText.positief_geteste_personen =
   siteText.positief_geteste_personen;
@@ -68,39 +67,32 @@ const PostivelyTestedPeople: FCWithLayout = () => {
     <>
       <TitleWithIcon Icon={Getest} title={text.title} as="h2" />
       <article className="metric-article">
-        <DualColumn
-          leftCol={
-            <>
-              <p>{text.text}</p>
+        <p>{text.text}</p>
 
-              {delta && <PostivelyTestedPeopleBarScale data={delta} />}
+        {delta && <PostivelyTestedPeopleBarScale data={delta} />}
 
-              {total && (
-                <h3>
-                  {text.metric_title}{' '}
-                  <span style={{ color: '#01689b' }}>
-                    {formatDecimal(total.last_value.infected_daily_total)}
-                  </span>
-                </h3>
-              )}
+        {total && (
+          <h3>
+            {text.metric_title}{' '}
+            <span style={{ color: '#01689b' }}>
+              {formatDecimal(total.last_value.infected_daily_total)}
+            </span>
+          </h3>
+        )}
 
-              {delta?.last_value?.infected_daily_increase !== null && (
-                <DateReported
-                  datumsText={text.datums}
-                  dateUnix={delta?.last_value?.date_of_report_unix}
-                  dateInsertedUnix={delta?.last_value?.date_of_insertion_unix}
-                />
-              )}
-              <h3>{text.fold_title}</h3>
-              <p>{text.fold}</p>
-            </>
-          }
-          rightCol={
-            <MunicipalityMap
-              metric="Total_reported"
-              gradient={['#9DDEFE', '#0290D6']}
-            />
-          }
+        {delta?.last_value?.infected_daily_increase !== null && (
+          <DateReported
+            datumsText={text.datums}
+            dateUnix={delta?.last_value?.date_of_report_unix}
+            dateInsertedUnix={delta?.last_value?.date_of_insertion_unix}
+          />
+        )}
+        <h3>{text.fold_title}</h3>
+        <p>{text.fold}</p>
+
+        <MunicipalityMap
+          metric="Total_reported"
+          gradient={['#9DDEFE', '#0290D6']}
         />
       </article>
 
