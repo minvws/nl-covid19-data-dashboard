@@ -171,12 +171,7 @@ const Regio: FCWithLayout<RegioProps> = (props) => {
                   </span>
                 )}
               </div>
-              <MapChart
-                metric="Total_reported"
-                setSelection={(s) => {
-                  console.dir(s); // eslint-disable-line
-                }}
-              />
+              <MapChart selected={{ id: 'GM0074' }} metric="Total_reported" />
             </div>
           </div>
 

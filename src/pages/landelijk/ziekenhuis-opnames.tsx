@@ -13,6 +13,7 @@ import Ziekenhuis from 'assets/ziekenhuis.svg';
 import siteText from 'locale';
 
 import { IntakeHospitalMa } from 'types/data';
+import MunicipalityMap from 'components/mapChart';
 
 const text: typeof siteText.ziekenhuisopnames_per_dag =
   siteText.ziekenhuisopnames_per_dag;
@@ -73,6 +74,11 @@ const IntakeHospital: FCWithLayout = () => {
 
         <h3>{text.fold_title}</h3>
         <p>{text.fold}</p>
+
+        <MunicipalityMap
+          metric="Hospital_admission"
+          gradient={['#69c253', '#f35065']}
+        />
       </article>
 
       <article className="metric-article">

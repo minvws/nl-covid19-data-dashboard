@@ -18,6 +18,7 @@ import {
   InfectedPeopleTotal,
   IntakeShareAgeGroups,
 } from 'types/data';
+import MunicipalityMap from 'components/mapChart';
 
 const text: typeof siteText.positief_geteste_personen =
   siteText.positief_geteste_personen;
@@ -88,6 +89,11 @@ const PostivelyTestedPeople: FCWithLayout = () => {
         )}
         <h3>{text.fold_title}</h3>
         <p>{text.fold}</p>
+
+        <MunicipalityMap
+          metric="Total_reported"
+          gradient={['#9DDEFE', '#0290D6']}
+        />
       </article>
 
       <article className="metric-article">

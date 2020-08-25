@@ -1,4 +1,7 @@
-import Highcharts, { TooltipFormatterContextObject } from 'highcharts';
+import Highcharts, {
+  TooltipFormatterContextObject,
+  SeriesOptionsType,
+} from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
 import useSWR from 'swr';
@@ -14,24 +17,30 @@ if (typeof Highcharts === 'object') {
   require('highcharts/modules/map')(Highcharts);
 }
 
-interface MunicipalityProperties {
+export interface MunicipalityProperties {
   gemnaam: string;
   gemcode: string;
 }
 
-type TMunicipalityPoint = MunicipalityProperties & MunicipalityData;
+type TMunicipalityTooltipFormatterContextObject = TooltipFormatterContextObject & {
+  point: TMunicipalityPoint;
+};
+
+type TMunicipalityPoint = Highcharts.Point &
+  MunicipalityProperties &
+  MunicipalityData;
 
 interface IProps {
   selected?: { id: string };
-  setSelection: (item: { id: string }) => void;
   metric: TMunicipalityMetricName;
+  gradient?: [minColor: string, maxColor: string];
 }
 
-const MunicipalityMap: React.FC<IProps> = ({
-  selected,
-  setSelection,
-  metric,
-}) => {
+function MunicipalityMap(props: IProps) {
+  const { selected, metric, gradient = ['#0000ff', '#ff0000'] } = props;
+
+  const municipalCode = selected?.id;
+
   const { data: countryLines } = useSWR<any[]>(
     '/static-json/netherlands-outline.geojson'
   );
@@ -40,11 +49,35 @@ const MunicipalityMap: React.FC<IProps> = ({
     FeatureCollection<MultiPolygon, MunicipalityProperties>
   >('/static-json/municipalities-outline.geojson');
 
-  const municipalityData = useMunicipalityData(metric);
+  const municipalityData = useMunicipalityData(metric, municipalCode);
   const [min, max] = useExtent(
     municipalityData,
     (item: MunicipalityData): number => item[metric]
   );
+
+  const series = useMemo<SeriesOptionsType[]>(() => {
+    const result: SeriesOptionsType[] = [
+      {
+        type: 'map',
+        allAreas: false,
+        mapData: municipalityLines,
+        allowPointSelect: false,
+        data: municipalityData,
+        // @ts-ignore
+        joinBy: ['gemcode', 'Municipality_code'],
+      },
+    ];
+
+    // When there's no selected municipal code we render the outlines of the country:
+    if (!municipalCode) {
+      result.push({
+        type: 'mapline',
+        data: countryLines,
+      });
+    }
+
+    return result;
+  }, [countryLines, municipalCode, municipalityData, municipalityLines]);
 
   const mapOptions = useMemo<Highcharts.Options>(
     () => ({
@@ -69,8 +102,8 @@ const MunicipalityMap: React.FC<IProps> = ({
       colorAxis: {
         min,
         max,
-        minColor: '#0000ff',
-        maxColor: '#ff0000',
+        minColor: gradient[0],
+        maxColor: gradient[1],
       },
       legend: {
         enabled: false,
@@ -79,10 +112,11 @@ const MunicipalityMap: React.FC<IProps> = ({
         backgroundColor: '#FFF',
         borderColor: '#01689B',
         borderRadius: 0,
+        // @ts-ignore
         formatter: function (
-          this: TooltipFormatterContextObject
+          this: TMunicipalityTooltipFormatterContextObject
         ): false | string {
-          const { point }: { point: MunicipalityData } = this as any;
+          const { point } = this;
           const { Province, Municipality_name } = point;
 
           if (!Municipality_name) {
@@ -106,40 +140,17 @@ const MunicipalityMap: React.FC<IProps> = ({
               color: '#ffffff',
             },
           },
+          borderWidth: 1,
+          borderColor: '#012090',
+        },
+        mapline: {
+          borderColor: 'black',
+          borderWidth: 2,
         },
       },
-      series: [
-        {
-          type: 'map',
-          mapData: municipalityLines,
-          allowPointSelect: true,
-          point: {
-            events: {
-              click: function (this: any) {
-                this.select(this.selected, false);
-                setSelection({ id: this.Municipality_code });
-              },
-            },
-          },
-          data: municipalityData,
-          // @ts-ignore
-          joinBy: ['gemcode', 'Municipality_code'],
-        },
-        {
-          type: 'mapline',
-          data: countryLines,
-        },
-      ],
+      series: series,
     }),
-    [
-      countryLines,
-      municipalityLines,
-      municipalityData,
-      setSelection,
-      min,
-      max,
-      metric,
-    ]
+    [min, max, metric, gradient, series]
   );
 
   const ref = useRef<any>();
@@ -164,6 +175,6 @@ const MunicipalityMap: React.FC<IProps> = ({
       options={mapOptions}
     />
   );
-};
+}
 
 export default MunicipalityMap;
