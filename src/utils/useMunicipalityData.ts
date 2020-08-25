@@ -17,9 +17,9 @@ export default useMunicipalityData;
 function getAllMunicipalitiesForSameRegion(
   code: string | undefined,
   municipalCodeToRegionCode: any
-): string[] | undefined {
+): string[] {
   if (!code) {
-    return;
+    return [];
   }
 
   const regionCode = municipalCodeToRegionCode[code];
@@ -68,14 +68,14 @@ function useMunicipalityData(
     );
 
     const filterByRegionAndNewestDate = (item: MunicipalityData): boolean =>
-      applicableMunicipalCodes?.indexOf(item.Municipality_code) > -1 &&
+      applicableMunicipalCodes.indexOf(item.Municipality_code) > -1 &&
       new Date(item.Date_of_report).getTime() === maxDate;
 
     const filterByValidDataAndNewestDate = (item: MunicipalityData): boolean =>
       Boolean(item.Municipality_code) &&
       new Date(item.Date_of_report).getTime() === maxDate;
 
-    const activeFilter = applicableMunicipalCodes
+    const activeFilter = applicableMunicipalCodes.length
       ? filterByRegionAndNewestDate
       : filterByValidDataAndNewestDate;
 
