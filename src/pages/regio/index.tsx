@@ -17,8 +17,16 @@ import { SewerWater } from 'components/tiles/regio/SewerWater';
 const SvgMap = dynamic(() => import('components/mapChart/svgMap'));
 
 import styles from './regio.module.scss';
-import openGraphImage from 'assets/sharing/og-regionale-cijfers.png?url';
-import twitterImage from 'assets/sharing/twitter-regionale-cijfers.png?url';
+import openGraphImageNL from 'assets/sharing/og-regionale-cijfers.png?url';
+import twitterImageNL from 'assets/sharing/twitter-regionale-cijfers.png?url';
+import openGraphImageEN from 'assets/sharing/og-regional.png?url';
+import twitterImageEN from 'assets/sharing/twitter-regional.png?url';
+import getLocale from 'utils/getLocale';
+
+const locale = getLocale();
+
+const openGraphImage = locale === 'nl' ? openGraphImageNL : openGraphImageEN;
+const twitterImage = locale === 'nl' ? twitterImageNL : twitterImageEN;
 
 import siteText from 'locale';
 
