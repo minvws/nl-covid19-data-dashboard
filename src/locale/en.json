@@ -9,8 +9,8 @@
     "message": "Last updated"
   },
   "notificatie": {
-    "titel": "Increase in COVID-19 infections",
-    "bericht": "The reproduction number is more than 1, just as it was last week. There is an increase in the number of newly confirmed cases since the end of July. There is also an increase in the number of hospital admissions due to COVID-19, since the end of July. The most newly identified infections are found in the province of South-Holland, North-Holland en the western part of North-Brabant.",
+    "titel": "Slight decrease in COVID-19 infections",
+    "bericht": "The number of new people who tested positive has decreased slightly since last week. Starting the end of July, there has been an increase in the number of hospital admissions due to COVID-19. Most newly established infections take place in the provinces of South-Holland and North-Holland. Most newly diagnosed infections are still found in the 20 to 40 age group. The reproduction number has decreased slightly since last week, and is around 1.",
     "link": {
       "text": "View the recent information from the RIVM",
       "href": "https://www.rivm.nl/en/novel-coronavirus-covid-19/current-information"
