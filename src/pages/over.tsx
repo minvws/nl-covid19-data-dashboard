@@ -1,4 +1,4 @@
-import React from 'react';
+import { Fragment } from 'react';
 import Head from 'next/head';
 
 import Layout, { FunctionComponentWithLayout } from 'components/layout';
@@ -81,14 +81,14 @@ const Over: FunctionComponentWithLayout<{ text: any }> = (props) => {
             <dl className={styles.faqList}>
               {text.over_veelgestelde_vragen.vragen.map(
                 (item: IVraagEnAntwoord) => (
-                  <React.Fragment key={`item-${item.vraag}`}>
+                  <Fragment key={`item-${item.vraag}`}>
                     <dt>{item.vraag}</dt>
                     <dd
                       dangerouslySetInnerHTML={{
                         __html: item.antwoord,
                       }}
                     />
-                  </React.Fragment>
+                  </Fragment>
                 )
               )}
             </dl>
