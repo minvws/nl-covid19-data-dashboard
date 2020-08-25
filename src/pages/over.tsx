@@ -1,11 +1,13 @@
 import Head from 'next/head';
+import React from 'react';
 
 import Layout, { FunctionComponentWithLayout } from 'components/layout';
 import MaxWidth from 'components/maxWidth';
 
 import text from 'locale';
 import styles from './over.module.scss';
-import ReplaceLinks from 'components/replaceLinks';
+import siteText from 'locale';
+import MDToHTMLString from 'utils/MDToHTMLString';
 
 import openGraphImageNL from 'assets/sharing/og-over.png?url';
 import twitterImageNL from 'assets/sharing/twitter-over.png?url';
@@ -21,6 +23,32 @@ const twitterImage = locale === 'nl' ? twitterImageNL : twitterImageEN;
 interface IVraagEnAntwoord {
   vraag: string;
   antwoord: string;
+}
+
+interface StaticProps {
+  props: {
+    text: typeof siteText;
+  };
+}
+
+// We use lokalise.com as our dictionary/text source and to support internationalisation.
+// Lokakise will output JSON files which can be found in `src/locale`.
+// However, all content lives inside plain strings. To support structured content and newlines,
+// we (optionally) write markdown in Lokakise and parse it to HTML.
+//
+// Ideally this entire page would have been build from markdown, but that’s not possible
+// with our internationalisation setup.
+export async function getStaticProps(): Promise<StaticProps> {
+  const text = require('../locale/index').default;
+  const serializedContent = text.verantwoording.cijfers.map(function (
+    item: IVraagEnAntwoord
+  ) {
+    return { ...item, verantwoording: MDToHTMLString(item.antwoord) };
+  });
+
+  text.verantwoording.cijfers = serializedContent;
+
+  return { props: { text } };
 }
 
 const Over: FunctionComponentWithLayout = () => {
@@ -51,12 +79,14 @@ const Over: FunctionComponentWithLayout = () => {
             <dl className={styles.faqList}>
               {text.over_veelgestelde_vragen.vragen.map(
                 (item: IVraagEnAntwoord) => (
-                  <>
+                  <React.Fragment key={`item-${item}`}>
                     <dt>{item.vraag}</dt>
-                    <dd>
-                      <ReplaceLinks>{item.antwoord}</ReplaceLinks>
-                    </dd>
-                  </>
+                    <dd
+                      dangerouslySetInnerHTML={{
+                        __html: item.antwoord,
+                      }}
+                    ></dd>
+                  </React.Fragment>
                 )
               )}
             </dl>
