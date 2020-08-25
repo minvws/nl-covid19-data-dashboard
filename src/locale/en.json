@@ -508,7 +508,7 @@
   },
   "common": {
     "metadata": {
-      "source": "Source:"
+      "source": "Source"
     },
     "barScale": {
       "signaalwaarde": "Alert value"
