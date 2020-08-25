@@ -61,21 +61,25 @@ function useMunicipalityData(
       return [];
     }
 
-    const maxDate: number = Math.min(
+    const maxDate: number = Math.max(
       ...data.map((item: MunicipalityData): number =>
         new Date(item.Date_of_report).getTime()
       )
     );
 
-    const filter = applicableMunicipalCodes
-      ? (item: MunicipalityData): boolean =>
-          applicableMunicipalCodes?.includes(item.Municipality_code) &&
-          new Date(item.Date_of_report).getTime() === maxDate
-      : (item: MunicipalityData): boolean =>
-          Boolean(item.Municipality_code) &&
-          new Date(item.Date_of_report).getTime() === maxDate;
+    const filterByRegionAndNewestDate = (item: MunicipalityData): boolean =>
+      applicableMunicipalCodes?.indexOf(item.Municipality_code) > -1 &&
+      new Date(item.Date_of_report).getTime() === maxDate;
 
-    const filteredData = data.filter(filter).map(
+    const filterByValidDataAndNewestDate = (item: MunicipalityData): boolean =>
+      Boolean(item.Municipality_code) &&
+      new Date(item.Date_of_report).getTime() === maxDate;
+
+    const activeFilter = applicableMunicipalCodes
+      ? filterByRegionAndNewestDate
+      : filterByValidDataAndNewestDate;
+
+    const filteredData = data.filter(activeFilter).map(
       (item: MunicipalityData): MunicipalityData => ({
         ...item,
         value: item[metricName],
