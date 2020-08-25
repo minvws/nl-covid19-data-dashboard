@@ -1,3 +1,4 @@
+import React from 'react';
 import Head from 'next/head';
 
 import Layout, { FunctionComponentWithLayout } from 'components/layout';
@@ -76,14 +77,14 @@ const Verantwoording: FunctionComponentWithLayout<{ text: any }> = (props) => {
             <p>{text.verantwoording.paragraaf}</p>
             <dl className={styles.faqList}>
               {text.verantwoording.cijfers.map((item: ICijfer) => (
-                <>
+                <React.Fragment key={`item-${item.cijfer}`}>
                   <dt>{item.cijfer}</dt>
                   <dd
                     dangerouslySetInnerHTML={{
                       __html: item.verantwoording,
                     }}
                   ></dd>
-                </>
+                </React.Fragment>
               ))}
             </dl>
           </div>

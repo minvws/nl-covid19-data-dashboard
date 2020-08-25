@@ -1,12 +1,12 @@
-import Head from 'next/head';
 import React from 'react';
+import Head from 'next/head';
 
 import Layout, { FunctionComponentWithLayout } from 'components/layout';
 import MaxWidth from 'components/maxWidth';
 
-import text from 'locale';
 import styles from './over.module.scss';
 import siteText from 'locale';
+
 import MDToHTMLString from 'utils/MDToHTMLString';
 
 import openGraphImageNL from 'assets/sharing/og-over.png?url';
@@ -40,18 +40,20 @@ interface StaticProps {
 // with our internationalisation setup.
 export async function getStaticProps(): Promise<StaticProps> {
   const text = require('../locale/index').default;
-  const serializedContent = text.verantwoording.cijfers.map(function (
+  const serializedContent = text.over_veelgestelde_vragen.vragen.map(function (
     item: IVraagEnAntwoord
   ) {
-    return { ...item, verantwoording: MDToHTMLString(item.antwoord) };
+    return { ...item, antwoord: MDToHTMLString(item.antwoord) };
   });
 
-  text.verantwoording.cijfers = serializedContent;
+  text.over_veelgestelde_vragen.vragen = serializedContent;
 
   return { props: { text } };
 }
 
-const Over: FunctionComponentWithLayout = () => {
+const Over: FunctionComponentWithLayout<{ text: any }> = (props) => {
+  const { text } = props;
+
   return (
     <>
       <Head>
@@ -79,13 +81,13 @@ const Over: FunctionComponentWithLayout = () => {
             <dl className={styles.faqList}>
               {text.over_veelgestelde_vragen.vragen.map(
                 (item: IVraagEnAntwoord) => (
-                  <React.Fragment key={`item-${item}`}>
+                  <React.Fragment key={`item-${item.vraag}`}>
                     <dt>{item.vraag}</dt>
                     <dd
                       dangerouslySetInnerHTML={{
                         __html: item.antwoord,
                       }}
-                    ></dd>
+                    />
                   </React.Fragment>
                 )
               )}
@@ -98,7 +100,7 @@ const Over: FunctionComponentWithLayout = () => {
 };
 
 Over.getLayout = Layout.getLayout({
-  ...text.over_metadata,
+  ...siteText.over_metadata,
   openGraphImage,
   twitterImage,
 });
