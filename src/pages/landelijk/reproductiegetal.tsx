@@ -3,7 +3,7 @@ import useSWR from 'swr';
 import BarScale from 'components/barScale';
 import Metadata from 'components/metadata';
 import Legenda from 'components/legenda';
-import GraphHeader from 'components/graphHeader';
+import TitleWithIcon from 'components/titleWithIcon';
 import DateReported from 'components/dateReported';
 import { FCWithLayout } from 'components/layout';
 import { getNationalLayout } from 'components/layout/NationalLayout';
@@ -66,56 +66,60 @@ const ReproductionIndex: FCWithLayout = () => {
 
   return (
     <>
-      <GraphHeader Icon={Repro} title={text.title} />
-      <p>{text.text}</p>
-      {data && (
+      <TitleWithIcon Icon={Repro} title={text.title} as="h2" />
+
+      <article className="metric-article">
+        <p>{text.text}</p>
+
         <ReproductionIndexBarScale
           data={state}
           lastKnown={lastKnownValidData}
         />
-      )}
 
-      <DateReported
-        datumsText={text.datums}
-        dateUnix={lastKnownValidData?.last_value?.date_of_report_unix}
-        dateInsertedUnix={
-          lastKnownValidData?.last_value?.date_of_insertion_unix
-        }
-      />
-
-      <h4>{text.fold_title}</h4>
-      <p>{text.fold}</p>
-
-      <img
-        width={315}
-        height={100}
-        loading="lazy"
-        src="/images/reproductie-explainer.svg"
-        alt={text.reproductie_explainer_alt}
-      />
-
-      <h4>{text.graph_title}</h4>
-      {data?.values && (
-        <AreaChart
-          data={data.values.map((value) => ({
-            avg: value.reproduction_index_avg,
-            min: value.reproduction_index_low,
-            max: value.reproduction_index_high,
-            date: value.date_of_report_unix,
-          }))}
-          signaalwaarde={1}
-          rangeLegendLabel={text.rangeLegendLabel}
-          lineLegendLabel={text.lineLegendLabel}
-          timeframeOptions={['all', '5weeks']}
+        <DateReported
+          datumsText={text.datums}
+          dateUnix={lastKnownValidData?.last_value?.date_of_report_unix}
+          dateInsertedUnix={
+            lastKnownValidData?.last_value?.date_of_insertion_unix
+          }
         />
-      )}
 
-      <Legenda>
-        <li className="blue">{text.legenda_r}</li>
-        <li className="gray square">{text.legenda_marge}</li>
-      </Legenda>
+        <h3>{text.fold_title}</h3>
+        <p>{text.fold}</p>
 
-      <Metadata dataSource={text.bron} />
+        <img
+          width={315}
+          height={100}
+          loading="lazy"
+          src="/images/reproductie-explainer.svg"
+          alt={text.reproductie_explainer_alt}
+        />
+      </article>
+
+      <article className="metric-article">
+        <h3>{text.graph_title}</h3>
+        {data?.values && (
+          <AreaChart
+            data={data.values.map((value) => ({
+              avg: value.reproduction_index_avg,
+              min: value.reproduction_index_low,
+              max: value.reproduction_index_high,
+              date: value.date_of_report_unix,
+            }))}
+            signaalwaarde={1}
+            rangeLegendLabel={text.rangeLegendLabel}
+            lineLegendLabel={text.lineLegendLabel}
+            timeframeOptions={['all', '5weeks']}
+          />
+        )}
+
+        <Legenda>
+          <li className="blue">{text.legenda_r}</li>
+          <li className="gray square">{text.legenda_marge}</li>
+        </Legenda>
+
+        <Metadata dataSource={text.bron} />
+      </article>
     </>
   );
 };

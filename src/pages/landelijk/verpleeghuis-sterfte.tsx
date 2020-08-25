@@ -2,7 +2,7 @@ import useSWR from 'swr';
 
 import BarScale from 'components/barScale';
 import Metadata from 'components/metadata';
-import GraphHeader from 'components/graphHeader';
+import TitleWithIcon from 'components/titleWithIcon';
 import DateReported from 'components/dateReported';
 import { FCWithLayout } from 'components/layout';
 import { getNationalLayout } from 'components/layout/NationalLayout';
@@ -14,6 +14,7 @@ import siteText from 'locale';
 
 import { DeceasedPeopleNurseryCountDaily } from 'types/data';
 import MunicipalityMap from 'components/mapChart';
+import DualColumn from 'components/dualColumn';
 
 const text: typeof siteText.verpleeghuis_oversterfte =
   siteText.verpleeghuis_oversterfte;
@@ -51,37 +52,51 @@ const NursingHomeDeaths: FCWithLayout = () => {
 
   return (
     <>
-      <GraphHeader Icon={CoronaVirus} title={text.title} />
-      <p>{text.text}</p>
+      <TitleWithIcon Icon={CoronaVirus} title={text.title} as="h2" />
+      <article className="metric-article">
+        <DualColumn
+          leftCol={
+            <>
+              <p>{text.text}</p>
 
-      <NursingHomeDeathsBarScale data={data} />
+              <NursingHomeDeathsBarScale data={data} />
 
-      {data?.last_value?.deceased_nursery_daily !== null && (
-        <DateReported
-          datumsText={text.datums}
-          dateUnix={data?.last_value?.date_of_report_unix}
-          dateInsertedUnix={data?.last_value?.date_of_insertion_unix}
+              {data?.last_value?.deceased_nursery_daily !== null && (
+                <DateReported
+                  datumsText={text.datums}
+                  dateUnix={data?.last_value?.date_of_report_unix}
+                  dateInsertedUnix={data?.last_value?.date_of_insertion_unix}
+                />
+              )}
+
+              <h3>{text.fold_title}</h3>
+              <p>{text.fold}</p>
+            </>
+          }
+          rightCol={
+            <MunicipalityMap
+              metric="Deceased"
+              gradient={['#9DDEFE', '#0290D6']}
+            />
+          }
         />
-      )}
+      </article>
 
-      <h4>{text.fold_title}</h4>
-      <p>{text.fold}</p>
+      <article className="metric-article">
+        <h3>{text.graph_title}</h3>
 
-      <MunicipalityMap metric="Deceased" gradient={['#9DDEFE', '#0290D6']} />
-
-      <h4>{text.graph_title}</h4>
-
-      {data && (
-        <>
-          <LineChart
-            values={data.values.map((value) => ({
-              value: value.deceased_nursery_daily,
-              date: value.date_of_report_unix,
-            }))}
-          />
-          <Metadata dataSource={text.bron} />
-        </>
-      )}
+        {data && (
+          <>
+            <LineChart
+              values={data.values.map((value) => ({
+                value: value.deceased_nursery_daily,
+                date: value.date_of_report_unix,
+              }))}
+            />
+            <Metadata dataSource={text.bron} />
+          </>
+        )}
+      </article>
     </>
   );
 };

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import BarScale from 'components/barScale';
 import Metadata from 'components/metadata';
 import Legenda from 'components/legenda';
-import GraphHeader from 'components/graphHeader';
+import TitleWithIcon from 'components/titleWithIcon';
 import DateReported from 'components/dateReported';
 import { FCWithLayout } from 'components/layout';
 import { getNationalLayout } from 'components/layout/NationalLayout';
@@ -59,59 +59,64 @@ const InfectiousPeople: FCWithLayout = () => {
 
   return (
     <>
-      <GraphHeader Icon={Ziektegolf} title={text.title} />
-      <p>{text.text}</p>
+      <TitleWithIcon Icon={Ziektegolf} title={text.title} as="h2" />
 
-      <InfectiousPeopleBarScale data={countNormalized} />
+      <article className="metric-article">
+        <p>{text.text}</p>
 
-      <p>
-        {text.geen_signaalwaarde_beschikbaar}{' '}
-        <Link href="/verantwoording">
-          <a>{text.geen_signaalwaarde_beschikbaar_lees_waarom}</a>
-        </Link>
-      </p>
+        <InfectiousPeopleBarScale data={countNormalized} />
 
-      {count && (
-        <h3>
-          {text.metric_title}{' '}
-          <span style={{ color: '#01689b' }}>
-            {formatNumber(count.last_value.infectious_avg)}
-          </span>
-        </h3>
-      )}
+        <p>
+          {text.geen_signaalwaarde_beschikbaar}{' '}
+          <Link href="/verantwoording">
+            <a>{text.geen_signaalwaarde_beschikbaar_lees_waarom}</a>
+          </Link>
+        </p>
 
-      {countNormalized?.last_value?.infectious_avg_normalized !== null && (
-        <DateReported
-          datumsText={text.datums}
-          dateUnix={count?.last_value?.date_of_report_unix}
-        />
-      )}
+        {count && (
+          <h3>
+            {text.metric_title}{' '}
+            <span className="text-blue">
+              {formatNumber(count.last_value.infectious_avg)}
+            </span>
+          </h3>
+        )}
 
-      <h4>{text.fold_title}</h4>
-      <p>{text.fold}</p>
+        {countNormalized?.last_value?.infectious_avg_normalized !== null && (
+          <DateReported
+            datumsText={text.datums}
+            dateUnix={count?.last_value?.date_of_report_unix}
+          />
+        )}
 
-      <h4>{text.graph_title}</h4>
+        <h3>{text.fold_title}</h3>
+        <p>{text.fold}</p>
+      </article>
 
-      {count?.values && (
-        <AreaChart
-          data={count.values.map((value) => ({
-            avg: value.infectious_avg,
-            min: value.infectious_low,
-            max: value.infectious_high,
-            date: value.date_of_report_unix,
-          }))}
-          rangeLegendLabel={text.rangeLegendLabel}
-          lineLegendLabel={text.lineLegendLabel}
-          timeframeOptions={['all', '5weeks']}
-        />
-      )}
+      <article className="metric-article">
+        <h3>{text.graph_title}</h3>
 
-      <Legenda>
-        <li className="blue">{text.legenda_line}</li>
-        <li className="gray square">{text.legenda_marge}</li>
-      </Legenda>
+        {count?.values && (
+          <AreaChart
+            data={count.values.map((value) => ({
+              avg: value.infectious_avg,
+              min: value.infectious_low,
+              max: value.infectious_high,
+              date: value.date_of_report_unix,
+            }))}
+            rangeLegendLabel={text.rangeLegendLabel}
+            lineLegendLabel={text.lineLegendLabel}
+            timeframeOptions={['all', '5weeks']}
+          />
+        )}
 
-      {count && <Metadata dataSource={text.bron} />}
+        <Legenda>
+          <li className="blue">{text.legenda_line}</li>
+          <li className="gray square">{text.legenda_marge}</li>
+        </Legenda>
+
+        {count && <Metadata dataSource={text.bron} />}
+      </article>
     </>
   );
 };

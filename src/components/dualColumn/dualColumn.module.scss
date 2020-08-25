@@ -1,0 +1,13 @@
+@import 'scss/variables.scss';
+
+.dualColumn {
+  display: block;
+}
+
+@media (min-width: 992px) {
+  .dualColumn {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 0;
+  }
+}

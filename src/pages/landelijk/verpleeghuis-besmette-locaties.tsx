@@ -2,7 +2,7 @@ import useSWR from 'swr';
 
 import BarScale from 'components/barScale';
 import Metadata from 'components/metadata';
-import GraphHeader from 'components/graphHeader';
+import TitleWithIcon from 'components/titleWithIcon';
 import DateReported from 'components/dateReported';
 import { FCWithLayout } from 'components/layout';
 import { getNationalLayout } from 'components/layout/NationalLayout';
@@ -54,44 +54,48 @@ const NursingHomeInfectedLocations: FCWithLayout = () => {
 
   return (
     <>
-      <GraphHeader Icon={Locatie} title={text.title} />
-      <p>{text.text}</p>
+      <TitleWithIcon Icon={Locatie} title={text.title} as="h2" />
+      <article className="metric-article">
+        <p>{text.text}</p>
 
-      <NursingHomeInfectedLocationsBarScale data={newLocations} />
+        <NursingHomeInfectedLocationsBarScale data={newLocations} />
 
-      {newLocations?.last_value?.total_new_reported_locations !== null && (
-        <DateReported
-          datumsText={text.datums}
-          dateInsertedUnix={newLocations?.last_value?.date_of_insertion_unix}
-          dateUnix={newLocations?.last_value?.date_of_report_unix}
-        />
-      )}
+        {newLocations?.last_value?.total_new_reported_locations !== null && (
+          <DateReported
+            datumsText={text.datums}
+            dateInsertedUnix={newLocations?.last_value?.date_of_insertion_unix}
+            dateUnix={newLocations?.last_value?.date_of_report_unix}
+          />
+        )}
 
-      <h4>{text.fold_title}</h4>
-      <p>{text.fold}</p>
+        <h3>{text.fold_title}</h3>
+        <p>{text.fold}</p>
+      </article>
 
-      <h4>{text.graph_title}</h4>
+      <article className="metric-article">
+        <h3>{text.graph_title}</h3>
 
-      {newLocations && (
-        <LineChart
-          values={newLocations.values.map((value) => ({
-            value: value.total_new_reported_locations,
-            date: value.date_of_report_unix,
-          }))}
-        />
-      )}
+        {newLocations && (
+          <LineChart
+            values={newLocations.values.map((value) => ({
+              value: value.total_new_reported_locations,
+              date: value.date_of_report_unix,
+            }))}
+          />
+        )}
 
-      {totalLocations && (
-        <h3>
-          {text.metric_title}{' '}
-          <span style={{ color: '#01689b' }}>
-            {formatNumber(totalLocations.last_value.total_reported_locations)}
-          </span>
-        </h3>
-      )}
-      <p>{text.metric_text}</p>
+        {totalLocations && (
+          <h4>
+            {text.metric_title}{' '}
+            <span className="text-blue">
+              {formatNumber(totalLocations.last_value.total_reported_locations)}
+            </span>
+          </h4>
+        )}
+        <p>{text.metric_text}</p>
 
-      {newLocations && <Metadata dataSource={text.bron} />}
+        {newLocations && <Metadata dataSource={text.bron} />}
+      </article>
     </>
   );
 };

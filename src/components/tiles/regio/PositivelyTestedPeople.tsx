@@ -3,7 +3,7 @@ import Collapse from 'components/collapse';
 import Metadata from 'components/metadata';
 import GraphContainer from 'components/graphContainer';
 import GraphContent from 'components/graphContent';
-import GraphHeader from 'components/graphHeader';
+import TitleWithIcon from 'components/titleWithIcon';
 import DateReported from 'components/dateReported';
 import LoadingPlaceholder from 'components/loadingPlaceholder';
 import { LineChart } from '../index';
@@ -29,7 +29,7 @@ const PostivelyTestedPeople: React.FC<IProps> = (props) => {
   return (
     <GraphContainer>
       <GraphContent>
-        <GraphHeader
+        <TitleWithIcon
           Icon={Getest}
           title={siteText.regionaal_positief_geteste_personen.title}
           regio={selectedRegio?.name}

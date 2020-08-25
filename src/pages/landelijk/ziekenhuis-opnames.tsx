@@ -2,7 +2,7 @@ import useSWR from 'swr';
 
 import BarScale from 'components/barScale';
 import Metadata from 'components/metadata';
-import GraphHeader from 'components/graphHeader';
+import TitleWithIcon from 'components/titleWithIcon';
 import DateReported from 'components/dateReported';
 import { FCWithLayout } from 'components/layout';
 import { getNationalLayout } from 'components/layout/NationalLayout';
@@ -14,6 +14,7 @@ import siteText from 'locale';
 
 import { IntakeHospitalMa } from 'types/data';
 import MunicipalityMap from 'components/mapChart';
+import DualColumn from 'components/dualColumn';
 
 const text: typeof siteText.ziekenhuisopnames_per_dag =
   siteText.ziekenhuisopnames_per_dag;
@@ -59,42 +60,52 @@ const IntakeHospital: FCWithLayout = () => {
 
   return (
     <>
-      <GraphHeader Icon={Ziekenhuis} title={text.title} />
+      <TitleWithIcon Icon={Ziekenhuis} title={text.title} as="h2" />
+      <article className="metric-article">
+        <DualColumn
+          leftCol={
+            <>
+              <p>{text.text}</p>
 
-      <p>{text.text}</p>
+              <IntakeHospitalBarScale data={data} />
 
-      <IntakeHospitalBarScale data={data} />
+              {data?.last_value?.moving_average_hospital !== null && (
+                <DateReported
+                  datumsText={text.datums}
+                  dateUnix={data?.last_value?.date_of_report_unix}
+                />
+              )}
 
-      {data?.last_value?.moving_average_hospital !== null && (
-        <DateReported
-          datumsText={text.datums}
-          dateUnix={data?.last_value?.date_of_report_unix}
+              <h3>{text.fold_title}</h3>
+              <p>{text.fold}</p>
+            </>
+          }
+          rightCol={
+            <MunicipalityMap
+              metric="Hospital_admission"
+              gradient={['#69c253', '#f35065']}
+            />
+          }
         />
-      )}
+      </article>
 
-      <h4>{text.fold_title}</h4>
-      <p>{text.fold}</p>
+      <article className="metric-article">
+        <h3>{text.graph_title}</h3>
 
-      <MunicipalityMap
-        metric="Hospital_admission"
-        gradient={['#69c253', '#f35065']}
-      />
+        {data && (
+          <>
+            <LineChart
+              values={data.values.map((value: any) => ({
+                value: value.moving_average_hospital,
+                date: value.date_of_report_unix,
+              }))}
+              signaalwaarde={40}
+            />
 
-      <h4>{text.graph_title}</h4>
-
-      {data && (
-        <>
-          <LineChart
-            values={data.values.map((value: any) => ({
-              value: value.moving_average_hospital,
-              date: value.date_of_report_unix,
-            }))}
-            signaalwaarde={40}
-          />
-
-          <Metadata dataSource={text.bron} />
-        </>
-      )}
+            <Metadata dataSource={text.bron} />
+          </>
+        )}
+      </article>
     </>
   );
 };

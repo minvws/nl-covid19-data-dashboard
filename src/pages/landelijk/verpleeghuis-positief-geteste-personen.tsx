@@ -2,7 +2,7 @@ import useSWR from 'swr';
 
 import BarScale from 'components/barScale';
 import Metadata from 'components/metadata';
-import GraphHeader from 'components/graphHeader';
+import TitleWithIcon from 'components/titleWithIcon';
 import DateReported from 'components/dateReported';
 import { FCWithLayout } from 'components/layout';
 import { getNationalLayout } from 'components/layout/NationalLayout';
@@ -50,34 +50,40 @@ const NursingHomeInfectedPeople: FCWithLayout = () => {
 
   return (
     <>
-      <GraphHeader Icon={Getest} title={text.title} />
-      <p>{text.text}</p>
+      <TitleWithIcon Icon={Getest} title={text.title} as="h2" />
 
-      <NursingHomeInfectedPeopleBarScale data={data} />
+      <article className="metric-article">
+        <p>{text.text}</p>
 
-      {data?.last_value?.infected_nursery_daily !== null && (
-        <DateReported
-          datumsText={text.datums}
-          dateInsertedUnix={data?.last_value?.date_of_insertion_unix}
-          dateUnix={data?.last_value?.date_of_report_unix}
-        />
-      )}
+        <NursingHomeInfectedPeopleBarScale data={data} />
 
-      <h4>{text.fold_title}</h4>
-      <p>{text.fold}</p>
-      <h4>{text.graph_title}</h4>
-
-      {data && (
-        <>
-          <LineChart
-            values={data.values.map((value) => ({
-              value: value.infected_nursery_daily,
-              date: value.date_of_report_unix,
-            }))}
+        {data?.last_value?.infected_nursery_daily !== null && (
+          <DateReported
+            datumsText={text.datums}
+            dateInsertedUnix={data?.last_value?.date_of_insertion_unix}
+            dateUnix={data?.last_value?.date_of_report_unix}
           />
-          <Metadata dataSource={text.bron} />
-        </>
-      )}
+        )}
+
+        <h3>{text.fold_title}</h3>
+        <p>{text.fold}</p>
+      </article>
+
+      <article className="metric-article">
+        <h3>{text.graph_title}</h3>
+
+        {data && (
+          <>
+            <LineChart
+              values={data.values.map((value) => ({
+                value: value.infected_nursery_daily,
+                date: value.date_of_report_unix,
+              }))}
+            />
+            <Metadata dataSource={text.bron} />
+          </>
+        )}
+      </article>
     </>
   );
 };
