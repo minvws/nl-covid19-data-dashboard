@@ -31,13 +31,6 @@ interface StaticProps {
   };
 }
 
-// We use lokalise.com as our dictionary/text source and to support internationalisation.
-// Lokakise will output JSON files which can be found in `src/locale`.
-// However, all content lives inside plain strings. To support structured content and newlines,
-// we (optionally) write markdown in Lokakise and parse it to HTML.
-//
-// Ideally this entire page would have been build from markdown, but that’s not possible
-// with our internationalisation setup.
 export async function getStaticProps(): Promise<StaticProps> {
   const text = require('../locale/index').default;
   const serializedContent = text.verantwoording.cijfers.map(function (
