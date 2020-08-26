@@ -3,14 +3,18 @@ import { useState } from 'react';
 import useCollapse from 'react-collapsed';
 import Arrow from 'assets/arrow.svg';
 
+interface IProps {
+  list: Item[];
+}
+
 interface Item {
   content: string;
   text: string;
   icon: string;
 }
 
-interface IProps {
-  list: Item[];
+interface IIconListItemProps {
+  item: Item;
 }
 
 function IconList({ list }: IProps) {
@@ -18,16 +22,19 @@ function IconList({ list }: IProps) {
     <ul className={styles.iconList}>
       {list.map((item) =>
         item?.content ? (
-          <CollapseIconListItem key={`icon-list-item-${item.text}`} {...item} />
+          <CollapseIconListItem
+            key={`icon-list-item-${item.text}`}
+            item={item}
+          />
         ) : (
-          <IconListItem {...item} />
+          <IconListItem item={item} />
         )
       )}
     </ul>
   );
 }
 
-function IconListItem(item: Item) {
+function IconListItem({ item }: IIconListItemProps) {
   const { text, icon } = item;
 
   return (
@@ -45,7 +52,7 @@ function IconListItem(item: Item) {
   );
 }
 
-function CollapseIconListItem(item: Item) {
+function CollapseIconListItem({ item }: IIconListItemProps) {
   const [expanded, setExpanded] = useState(false);
 
   const { getCollapseProps, getToggleProps } = useCollapse({

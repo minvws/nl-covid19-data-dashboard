@@ -18,7 +18,7 @@ type SelectMunicipalityProps = {
   setSelectedSafetyRegion: (code: SafetyRegion['code']) => void;
 };
 
-const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
+function SelectMunicipality(props: SelectMunicipalityProps) {
   const { municipalities, safetyRegions, setSelectedSafetyRegion } = props;
   const text: typeof siteText.select_municipality =
     siteText.select_municipality;
@@ -239,6 +239,6 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
       </div>
     </div>
   );
-};
+}
 
 export default SelectMunicipality;

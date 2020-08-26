@@ -8,7 +8,7 @@ interface IProps {
   };
 }
 
-const Metadata: React.FC<IProps> = (props) => {
+function Metadata(props: IProps) {
   const { dataSource } = props;
 
   const text: typeof siteText.common.metadata = siteText.common.metadata;
@@ -22,6 +22,6 @@ const Metadata: React.FC<IProps> = (props) => {
       ) : null}
     </div>
   );
-};
+}
 
 export default Metadata;
