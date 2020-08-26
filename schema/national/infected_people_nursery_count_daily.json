@@ -1,0 +1,36 @@
+{
+  "definitions": {
+    "item": {
+      "allOf": [
+        {
+          "$ref": "base_item.json"
+        },
+        {
+          "type": "object",
+          "required": ["infected_nursery_daily"],
+          "properties": {
+            "infected_nursery_daily": {
+              "type": "number"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "infected_people_nursery_count_daily.json",
+  "type": "object",
+  "required": ["values", "last_value"],
+  "additionalProperties": false,
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/item"
+      }
+    },
+    "last_value": {
+      "$ref": "#/definitions/item"
+    }
+  }
+}

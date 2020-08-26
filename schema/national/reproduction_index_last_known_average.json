@@ -1,0 +1,46 @@
+{
+  "definitions": {
+    "item": {
+      "allOf": [
+        {
+          "$ref": "base_item.json"
+        },
+        {
+          "type": "object",
+          "required": [
+            "reproduction_index_low",
+            "reproduction_index_avg",
+            "reproduction_index_high"
+          ],
+          "properties": {
+            "reproduction_index_low": {
+              "type": "number"
+            },
+            "reproduction_index_avg": {
+              "type": "number"
+            },
+            "reproduction_index_high": {
+              "type": "number"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "reproduction_index_last_known_average.json",
+  "type": "object",
+  "required": ["values", "last_value"],
+  "additionalProperties": false,
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/item"
+      }
+    },
+    "last_value": {
+      "$ref": "#/definitions/item"
+    }
+  }
+}

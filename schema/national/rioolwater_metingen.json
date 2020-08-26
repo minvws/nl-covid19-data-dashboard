@@ -1,0 +1,36 @@
+{
+  "definitions": {
+    "item": {
+      "type": "object",
+      "required": ["week_unix", "average", "date_of_insertion_unix"],
+      "additionalProperties": false,
+      "properties": {
+        "week_unix": {
+          "type": "number"
+        },
+        "average": {
+          "type": "number"
+        },
+        "date_of_insertion_unix": {
+          "type": "number"
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "rioolwater_metingen.json",
+  "type": "object",
+  "required": ["values", "last_value"],
+  "additionalProperties": false,
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/item"
+      }
+    },
+    "last_value": {
+      "$ref": "#/definitions/item"
+    }
+  }
+}

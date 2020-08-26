@@ -1,0 +1,45 @@
+{
+  "definitions": {
+    "item": {
+      "allOf": [
+        {
+          "$ref": "base_item.json"
+        },
+        {
+          "type": "object",
+          "required": ["infectious_low", "infectious_avg", "infectious_high"],
+          "properties": {
+            "infectious_low": {
+              "type": "number"
+            },
+            "infectious_avg": {
+              "type": ["number", "null"],
+              "nullable": true
+            },
+            "infectious_high": {
+              "type": "number"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "infectious_people_count.json",
+  "type": "object",
+  "required": ["values", "last_value"],
+  "additionalProperties": false,
+  "properties": {
+    "values": {
+      "type": "array",
+      "title": "The values Schema",
+      "items": {
+        "$ref": "#/definitions/item"
+      }
+    },
+    "last_value": {
+      "title": "The last_value Schema",
+      "$ref": "#/definitions/item"
+    }
+  }
+}
