@@ -331,7 +331,7 @@
       },
       {
         "vraag": "I’ve found a technical vulnerability in the website. Where can I report this?",
-        "antwoord": "Wij werken samen met het Nationaal Cyber Security Centrum (NCSC). Stel het NCSC zo snel mogelijk op de hoogte via [het formulier](https://www.ncsc.nl/contact/kwetsbaarheid-melden/cvd-meldingen-formulier) voordat u dit aan de buitenwereld kenbaar maakt. In samenwerking met het NCSC nemen we de bevinding in behandeling en lossen dit zo snel mogelijk op."
+        "antwoord": "We work together with the National Cyber Security Centre (NCSC). Please notify them of the vulnerability as soon as possible using their form (https://english.ncsc.nl/contact/reporting-a-vulnerability-cvd) before making the issue publicly known. We will deal with your notification and resolve it as quickly as possible together with the NCSC."
       },
       {
         "vraag": "Who can I contact with questions about coronavirus and COVID-19?",
@@ -383,7 +383,7 @@
     "cijfers": [
       {
         "cijfer": "Update of 11 August on the peak of the number of confirmed cases",
-        "verantwoording": "Om technische redenen konden in de periode van 14 juli tot 9 augustus niet alle meldingen over besmettingen doorgestuurd worden van GGD naar het RIVM. Deze nagekomen meldingen zijn op 9 en 10 augustus alsnog opgenomen in de data. Het betreft in totaal 160 nagekomen meldingen van COVID-19 patiënten. Hiervan worden 9 meldingen gerapporteerd op 9 augustus en 151 op 10 augustus. \n\nDe verdeling van deze 160 nagekomen meldingen over de veiligheidsregio’s is als volgt:\n\n- Amsterdam-Amstelland: 8\n- Flevoland: 30\n- Friesland: 8\n- Groningen: 1\n- Hollands Midden: 26\n- Rotterdam-Rijnmond: 7\n- Midden- en West-Brabant: 27\n- Zaanstreek-Waterland: 8\n- Zeeland: 23\n- Zuid-Limburg: 14\n- Gelderland-Midden: 7\n- Onbekend: 1"
+        "verantwoording": "Due to technical reasons, not all reports on infections could be sent from the municipal health services (GGDs) to the National Institute for Public Health and environment (RIVM). These later received reports were on the 9th en 10th of August added to the data. In total there were 160 later received reports, of which 9 on the 9th and 151 on the 10th of August.\n\nThese 160 later received reports were spread through the safety regions as follows:\n\n- Amsterdam-Amstelland: 8\n- Flevoland: 30\n- Friesland: 8\n- Groningen: 1\n- Hollands Midden: 26\n- Rotterdam-Rijnmond: 7\n- Midden- en West-Brabant: 27\n- Zaanstreek-Waterland: 8\n- Zeeland: 23\n- Zuid-Limburg: 14\n- Gelderland-Midden: 7\n- Unknown: 1"
       },
       {
         "cijfer": "Update of 31 July on the alert value for number of infectious people",
