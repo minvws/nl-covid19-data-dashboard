@@ -1,5 +1,6 @@
 import * as React from 'react';
 import useCollapse from 'react-collapsed';
+import { WithChildren } from 'types';
 
 import * as piwik from '../../lib/piwik';
 
@@ -10,15 +11,11 @@ interface IProps {
   sluitText: string;
   piwikAction?: string;
   piwikName?: string;
+  children: WithChildren;
 }
 
-const Collapse: React.FC<IProps> = ({
-  children,
-  openText,
-  sluitText,
-  piwikAction,
-  piwikName,
-}) => {
+function Collapse(props: WithChildren<IProps>) {
+  const { children, openText, sluitText, piwikAction, piwikName } = props;
   const [open, setOpen] = React.useState(false);
   const [renderContent, setRenderContent] = React.useState(false);
 
@@ -56,6 +53,6 @@ const Collapse: React.FC<IProps> = ({
       </button>
     </>
   );
-};
+}
 
 export default Collapse;

@@ -9,45 +9,43 @@ interface Item {
   icon: string;
 }
 
-const IconList: React.FC<{ list: Item[] }> = (props) => {
-  const { list } = props;
+interface IProps {
+  list: Item[];
+}
 
+function IconList({ list }: IProps) {
   return (
     <ul className={styles.iconList}>
       {list.map((item) =>
         item?.content ? (
-          <CollapseIconListItem
-            key={`icon-list-item-${item.text}`}
-            item={item}
-          />
+          <CollapseIconListItem key={`icon-list-item-${item.text}`} {...item} />
         ) : (
-          <IconListItem item={item} />
+          <IconListItem {...item} />
         )
       )}
     </ul>
   );
-};
+}
 
-const IconListItem: React.FC<{ item: Item }> = (props) => {
-  const { item } = props;
+function IconListItem(item: Item) {
+  const { text, icon } = item;
 
   return (
     <li className={styles.iconListItem}>
       <div className={styles.content}>
         <img
-          src={item.icon}
+          src={icon}
           className={styles.iconListImage}
           alt=""
           loading="lazy"
         />{' '}
-        <h4>{item.text}</h4>
+        <h4>{text}</h4>
       </div>
     </li>
   );
-};
+}
 
-const CollapseIconListItem: React.FC<{ item: Item }> = (props) => {
-  const { item } = props;
+function CollapseIconListItem(item: Item) {
   const [expanded, setExpanded] = useState(false);
 
   const { getCollapseProps, getToggleProps } = useCollapse({
@@ -82,6 +80,6 @@ const CollapseIconListItem: React.FC<{ item: Item }> = (props) => {
       </div>
     </li>
   );
-};
+}
 
 export default IconList;
