@@ -7,12 +7,10 @@ interface IProps {
   href: string;
   icon: string;
   iconAlt: string;
+  children: WithChildren;
 }
 
-function LinkCard(
-  { href, icon, iconAlt = '' }: IProps,
-  children: WithChildren
-) {
+function LinkCard({ href, icon, iconAlt = '', children }: IProps) {
   return (
     <Link href={href} passHref>
       <a className={`linkCard ${styles.linkCardLink}`}>

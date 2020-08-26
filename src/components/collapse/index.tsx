@@ -12,12 +12,11 @@ interface IProps {
   sluitText: string;
   piwikAction?: string;
   piwikName?: string;
+  children: WithChildren;
 }
 
-function Collapse(
-  { openText, sluitText, piwikAction, piwikName }: IProps,
-  children: WithChildren
-) {
+function Collapse(props: WithChildren<IProps>) {
+  const { openText, sluitText, piwikAction, piwikName, children } = props;
   const [open, setOpen] = React.useState(false);
   const [renderContent, setRenderContent] = React.useState(false);
 
