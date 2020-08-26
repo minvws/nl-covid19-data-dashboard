@@ -15,11 +15,15 @@
   padding-bottom: 3em;
 
   p {
-    font-size: 1.125em;
+    font-size: 1em;
   }
 
   h2:not(:first-child) {
     margin-top: 2em;
+  }
+
+  h3 {
+    font-size: 1.125em;
   }
 }
 
