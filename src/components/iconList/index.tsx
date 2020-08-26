@@ -13,7 +13,9 @@ interface Item {
   icon: string;
 }
 
-function IconList({ list }: IProps) {
+function IconList(props: IProps) {
+  const { list } = props;
+
   return (
     <ul className={styles.iconList}>
       {list.map((item) =>
@@ -30,7 +32,9 @@ function IconList({ list }: IProps) {
   );
 }
 
-function IconListItem({ text, icon }: Item) {
+function IconListItem(item: Item) {
+  const { text, icon } = item;
+
   return (
     <li className={styles.iconListItem}>
       <div className={styles.content}>
@@ -46,7 +50,8 @@ function IconListItem({ text, icon }: Item) {
   );
 }
 
-function CollapseIconListItem({ icon, text, content }: Item) {
+function CollapseIconListItem(item: Item) {
+  const { icon, text, content } = item;
   const [expanded, setExpanded] = useState(false);
 
   const { getCollapseProps, getToggleProps } = useCollapse({
