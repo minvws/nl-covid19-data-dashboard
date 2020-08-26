@@ -7,6 +7,8 @@ interface IProps {
   children: WithChildren;
 }
 
+export default TitleBlock;
+
 function TitleBlock(props: WithChildren<IProps>) {
   const { Icon, title, children } = props;
 
@@ -20,5 +22,3 @@ function TitleBlock(props: WithChildren<IProps>) {
     </div>
   );
 }
-
-export default TitleBlock;

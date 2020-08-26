@@ -8,6 +8,8 @@ interface IProps {
   children: WithChildren;
 }
 
+export default ScalingSVG;
+
 function ScalingSVG(props: WithChildren<IProps>) {
   const { children, width, height } = props;
 
@@ -19,5 +21,3 @@ function ScalingSVG(props: WithChildren<IProps>) {
     </div>
   );
 }
-
-export default ScalingSVG;

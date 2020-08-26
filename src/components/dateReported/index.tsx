@@ -9,6 +9,8 @@ interface IProps {
   datumsText: string;
 }
 
+export default dateReported;
+
 function dateReported(props: IProps) {
   const { datumsText, dateUnix, dateInsertedUnix } = props;
 
@@ -33,5 +35,3 @@ function dateReported(props: IProps) {
     </div>
   );
 }
-
-export default dateReported;

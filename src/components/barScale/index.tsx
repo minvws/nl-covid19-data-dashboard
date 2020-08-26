@@ -1,5 +1,5 @@
 import styles from './styles.module.scss';
-import { useRef, FunctionComponent } from 'react';
+import { useRef } from 'react';
 import formatNumber from 'utils/formatNumber';
 import ScreenReaderOnly from 'components/screenReaderOnly';
 import replaceVariablesInText from 'utils/replaceVariablesInText';
@@ -24,7 +24,9 @@ type BarscaleProps = {
   rangeKey: string;
 };
 
-const BarScale: FunctionComponent<BarscaleProps> = ({
+export default BarScale;
+
+function BarScale({
   min,
   max,
   value,
@@ -33,7 +35,7 @@ const BarScale: FunctionComponent<BarscaleProps> = ({
   id,
   screenReaderText,
   rangeKey,
-}) => {
+}: BarscaleProps) {
   // Generate a random ID used for clipPath and linearGradient ID's.
   const rand = useRef(Math.random().toString(36).substring(2, 15));
 
@@ -174,6 +176,4 @@ const BarScale: FunctionComponent<BarscaleProps> = ({
       </div>
     </>
   );
-};
-
-export default BarScale;
+}

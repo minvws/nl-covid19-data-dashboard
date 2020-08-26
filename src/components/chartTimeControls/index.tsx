@@ -11,6 +11,8 @@ interface IProps {
   timeframeOptions?: TimeframeOption[];
 }
 
+export default ChartTimeControls;
+
 function ChartTimeControls({ timeframe, timeframeOptions, onChange }: IProps) {
   if (!timeframeOptions) {
     timeframeOptions = ['all', '5weeks', 'week'];
@@ -37,5 +39,3 @@ function ChartTimeControls({ timeframe, timeframeOptions, onChange }: IProps) {
     </div>
   );
 }
-
-export default ChartTimeControls;

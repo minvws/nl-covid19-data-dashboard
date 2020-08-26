@@ -17,6 +17,8 @@ interface IIconListItemProps {
   item: Item;
 }
 
+export default IconList;
+
 function IconList({ list }: IProps) {
   return (
     <ul className={styles.iconList}>
@@ -88,5 +90,3 @@ function CollapseIconListItem({ item }: IIconListItemProps) {
     </li>
   );
 }
-
-export default IconList;

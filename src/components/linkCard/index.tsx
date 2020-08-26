@@ -10,6 +10,8 @@ interface IProps {
   children: WithChildren;
 }
 
+export default LinkCard;
+
 function LinkCard(props: WithChildren<IProps>) {
   const { children, href, icon, iconAlt = '' } = props;
 
@@ -30,5 +32,3 @@ function LinkCard(props: WithChildren<IProps>) {
     </Link>
   );
 }
-
-export default LinkCard;

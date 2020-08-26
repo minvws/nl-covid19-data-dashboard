@@ -18,6 +18,8 @@ type RegionalSewerWaterLineChartProps = {
   text: TranslationStrings;
 };
 
+export default RegionalSewerWaterLineChart;
+
 function getOptions(
   averageValues: Value[],
   allValues: Value[][],
@@ -172,5 +174,3 @@ function RegionalSewerWaterLineChart({
 
   return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;
 }
-
-export default RegionalSewerWaterLineChart;

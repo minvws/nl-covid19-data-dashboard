@@ -36,6 +36,8 @@ interface IProps {
   gradient?: [minColor: string, maxColor: string];
 }
 
+export default MunicipalityMap;
+
 function MunicipalityMap(props: IProps) {
   const { selected, metric, gradient = ['#0000ff', '#ff0000'] } = props;
 
@@ -176,5 +178,3 @@ function MunicipalityMap(props: IProps) {
     />
   );
 }
-
-export default MunicipalityMap;

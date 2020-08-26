@@ -14,6 +14,8 @@ interface IProps {
   children: WithChildren;
 }
 
+export default Collapse;
+
 function Collapse(props: WithChildren<IProps>) {
   const { children, openText, sluitText, piwikAction, piwikName } = props;
   const [open, setOpen] = React.useState(false);
@@ -54,5 +56,3 @@ function Collapse(props: WithChildren<IProps>) {
     </>
   );
 }
-
-export default Collapse;

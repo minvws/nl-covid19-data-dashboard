@@ -22,6 +22,8 @@ interface IProps {
   selectedRegio: SafetyRegion | undefined;
 }
 
+export default SewerWater;
+
 function SewerWater(props: IProps) {
   const { data, selectedRegio } = props;
 
@@ -175,5 +177,3 @@ function SewerWater(props: IProps) {
     </GraphContainer>
   );
 }
-
-export default SewerWater;

@@ -8,6 +8,8 @@ interface IProps {
   axisTitle: string;
 }
 
+export default BarChart;
+
 function BarChart(props: IProps) {
   const { data, keys, axisTitle } = props;
 
@@ -69,5 +71,3 @@ function BarChart(props: IProps) {
 
   return <HighChartsReact highcharts={HighCharts} options={options} />;
 }
-
-export default BarChart;

@@ -21,6 +21,8 @@ type LineChartProps = {
   timeframeOptions?: TimeframeOption[];
 };
 
+export default LineChart;
+
 function getOptions(
   values: Value[],
   signaalwaarde?: number | undefined
@@ -152,5 +154,3 @@ function LineChart({
     </>
   );
 }
-
-export default LineChart;

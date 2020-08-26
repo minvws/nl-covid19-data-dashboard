@@ -8,6 +8,8 @@ interface IProps {
   };
 }
 
+export default Metadata;
+
 function Metadata(props: IProps) {
   const { dataSource } = props;
 
@@ -23,5 +25,3 @@ function Metadata(props: IProps) {
     </div>
   );
 }
-
-export default Metadata;

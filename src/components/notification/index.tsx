@@ -1,5 +1,3 @@
-import { FC } from 'react';
-
 import styles from './notification.module.scss';
 
 import Inform from './inform.svg';
@@ -7,7 +5,9 @@ import ExternalLink from './external-link.svg';
 
 import text from 'locale';
 
-const Notification: FC = () => {
+export default Notification;
+
+function Notification() {
   return (
     <aside className={styles.aside}>
       <div className={styles.desktopInform}>
@@ -31,6 +31,4 @@ const Notification: FC = () => {
       </a>
     </aside>
   );
-};
-
-export default Notification;
+}

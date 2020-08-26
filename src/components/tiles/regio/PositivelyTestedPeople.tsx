@@ -23,6 +23,8 @@ interface IProps {
   selectedRegio: SafetyRegion | undefined;
 }
 
+export default PostivelyTestedPeople;
+
 function PostivelyTestedPeople(props: IProps) {
   const { selectedRegio, data } = props;
 
@@ -123,5 +125,3 @@ function PostivelyTestedPeople(props: IProps) {
     </GraphContainer>
   );
 }
-
-export default PostivelyTestedPeople;

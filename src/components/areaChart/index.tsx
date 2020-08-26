@@ -35,6 +35,8 @@ type IGetOptions = Omit<AreaChartProps, 'data'> & {
   lineData: TLine[];
 };
 
+export default AreaChart;
+
 function getOptions(props: IGetOptions): Highcharts.Options {
   const {
     rangeData,
@@ -227,5 +229,3 @@ function AreaChart(props: AreaChartProps) {
     </>
   );
 }
-
-export default AreaChart;

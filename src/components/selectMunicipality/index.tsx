@@ -18,6 +18,8 @@ type SelectMunicipalityProps = {
   setSelectedSafetyRegion: (code: SafetyRegion['code']) => void;
 };
 
+export default SelectMunicipality;
+
 function SelectMunicipality(props: SelectMunicipalityProps) {
   const { municipalities, safetyRegions, setSelectedSafetyRegion } = props;
   const text: typeof siteText.select_municipality =
@@ -240,5 +242,3 @@ function SelectMunicipality(props: SelectMunicipalityProps) {
     </div>
   );
 }
-
-export default SelectMunicipality;

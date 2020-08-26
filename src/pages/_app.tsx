@@ -28,6 +28,8 @@ interface IProps {
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
+export default MyApp;
+
 function MyApp(props: IProps): React.ReactElement {
   const { Component, pageProps } = props;
   const page = (page: any) => page;
@@ -52,5 +54,3 @@ function MyApp(props: IProps): React.ReactElement {
     </SWRConfig>
   );
 }
-
-export default MyApp;
