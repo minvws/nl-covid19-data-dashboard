@@ -161,7 +161,7 @@ function getOptions(props: IGetOptions): Highcharts.Options {
   return options;
 }
 
-const AreaChart: React.FC<AreaChartProps> = (props) => {
+function AreaChart(props: AreaChartProps) {
   const {
     rangeLegendLabel,
     lineLegendLabel,
@@ -226,6 +226,6 @@ const AreaChart: React.FC<AreaChartProps> = (props) => {
       />
     </>
   );
-};
+}
 
 export default AreaChart;

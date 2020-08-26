@@ -1,7 +1,8 @@
 import React from 'react';
+import { WithChildren } from 'types';
 
-const GraphContainer: React.FC = (props) => {
-  return <div className="graphContainer">{props.children}</div>;
-};
+function GraphContainer({ children }: WithChildren) {
+  return <div className="graphContainer">{children}</div>;
+}
 
 export default GraphContainer;

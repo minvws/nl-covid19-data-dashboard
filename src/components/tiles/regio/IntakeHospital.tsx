@@ -22,7 +22,7 @@ interface IProps {
   contentRef: React.RefObject<HTMLHeadingElement>;
 }
 
-const IntakeHospitalRegio: React.FC<IProps> = (props) => {
+function IntakeHospitalRegio(props: IProps) {
   const { selectedRegio, data, contentRef } = props;
 
   return (
@@ -106,6 +106,6 @@ const IntakeHospitalRegio: React.FC<IProps> = (props) => {
       )}
     </GraphContainer>
   );
-};
+}
 
 export default IntakeHospitalRegio;
