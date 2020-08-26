@@ -18,14 +18,11 @@ function IconList(props: IProps) {
 
   return (
     <ul className={styles.iconList}>
-      {list.map((item) =>
+      {list.map((item: Item) =>
         item?.content ? (
-          <CollapseIconListItem
-            key={`icon-list-item-${item.text}`}
-            item={item}
-          />
+          <CollapseIconListItem key={`icon-list-item-${item.text}`} {...item} />
         ) : (
-          <IconListItem item={item} />
+          <IconListItem {...item} />
         )
       )}
     </ul>
