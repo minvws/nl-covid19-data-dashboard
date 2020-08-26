@@ -68,7 +68,7 @@ const Verantwoording: FunctionComponentWithLayout<{ text: any }> = (props) => {
           <div className={styles.maxwidth}>
             <h2>{text.verantwoording.title}</h2>
             <p>{text.verantwoording.paragraaf}</p>
-            <div className={styles.faqList}>
+            <article className={styles.faqList}>
               {text.verantwoording.cijfers.map((item: ICijfer) => (
                 <Fragment key={`item-${item.cijfer}`}>
                   <h3>{item.cijfer}</h3>
@@ -79,7 +79,7 @@ const Verantwoording: FunctionComponentWithLayout<{ text: any }> = (props) => {
                   />
                 </Fragment>
               ))}
-            </div>
+            </article>
           </div>
         </MaxWidth>
       </div>

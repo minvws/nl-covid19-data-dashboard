@@ -71,7 +71,7 @@ const Over: FunctionComponentWithLayout<{ text: any }> = (props) => {
             <h2>{text.over_disclaimer.title}</h2>
             <p>{text.over_disclaimer.text}</p>
             <h2>{text.over_veelgestelde_vragen.text}</h2>
-            <div className={styles.faqList}>
+            <article className={styles.faqList}>
               {text.over_veelgestelde_vragen.vragen.map(
                 (item: IVraagEnAntwoord) => (
                   <Fragment key={`item-${item.vraag}`}>
@@ -84,7 +84,7 @@ const Over: FunctionComponentWithLayout<{ text: any }> = (props) => {
                   </Fragment>
                 )
               )}
-            </div>
+            </article>
           </div>
         </MaxWidth>
       </div>
