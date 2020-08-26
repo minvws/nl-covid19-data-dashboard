@@ -1,21 +1,51 @@
+import { Fragment } from 'react';
 import Head from 'next/head';
 
 import { getLayout, FCWithLayout } from 'components/layout';
 import MaxWidth from 'components/maxWidth';
 
-import text from 'locale';
 import styles from './over.module.scss';
-import ReplaceLinks from 'components/replaceLinks';
+import siteText from 'locale';
 
-import openGraphImage from 'assets/sharing/og-over.png?url';
-import twitterImage from 'assets/sharing/twitter-over.png?url';
+import MDToHTMLString from 'utils/MDToHTMLString';
+
+import openGraphImageNL from 'assets/sharing/og-over.png?url';
+import twitterImageNL from 'assets/sharing/twitter-over.png?url';
+import openGraphImageEN from 'assets/sharing/og-about.png?url';
+import twitterImageEN from 'assets/sharing/twitter-about.png?url';
+import getLocale from 'utils/getLocale';
+
+const locale = getLocale();
+const openGraphImage = locale === 'nl' ? openGraphImageNL : openGraphImageEN;
+const twitterImage = locale === 'nl' ? twitterImageNL : twitterImageEN;
 
 interface IVraagEnAntwoord {
   vraag: string;
   antwoord: string;
 }
 
-const Over: FCWithLayout = () => {
+interface StaticProps {
+  props: {
+    text: typeof siteText;
+  };
+}
+
+export async function getStaticProps(): Promise<StaticProps> {
+  const text = require('../locale/index').default;
+  const serializedContent = text.over_veelgestelde_vragen.vragen.map(function (
+    item: IVraagEnAntwoord
+  ) {
+    return { ...item, antwoord: MDToHTMLString(item.antwoord) };
+  });
+
+  text.over_veelgestelde_vragen.vragen = serializedContent;
+
+  return { props: { text } };
+}
+
+const Over: FCWithLayout<{ text: typeof siteText }> = (props) => {
+  const { text } = props;
+
   return (
     <>
       <Head>
@@ -43,12 +73,14 @@ const Over: FCWithLayout = () => {
             <dl className={styles.faqList}>
               {text.over_veelgestelde_vragen.vragen.map(
                 (item: IVraagEnAntwoord) => (
-                  <>
+                  <Fragment key={`item-${item.vraag}`}>
                     <dt>{item.vraag}</dt>
-                    <dd>
-                      <ReplaceLinks>{item.antwoord}</ReplaceLinks>
-                    </dd>
-                  </>
+                    <dd
+                      dangerouslySetInnerHTML={{
+                        __html: item.antwoord,
+                      }}
+                    />
+                  </Fragment>
                 )
               )}
             </dl>
@@ -60,7 +92,7 @@ const Over: FCWithLayout = () => {
 };
 
 Over.getLayout = getLayout({
-  ...text.over_metadata,
+  ...siteText.over_metadata,
   openGraphImage,
   twitterImage,
 });
