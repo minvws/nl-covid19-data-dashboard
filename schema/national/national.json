@@ -1,8 +1,7 @@
 {
-  "definitions": {},
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-  "title": "The national Schema",
+  "title": "national",
   "required": [
     "last_generated",
     "proto_name",
@@ -31,14 +30,16 @@
       "type": "string"
     },
     "proto_name": {
-      "type": "string"
+      "type": "string",
+      "enum": ["NL"]
     },
     "name": {
-      "type": "string"
+      "type": "string",
+      "enum": ["NL"]
     },
     "code": {
       "type": "string",
-      "enum": ["NL", "EN"]
+      "enum": ["NL"]
     },
     "verdenkingen_huisartsen": {
       "$ref": "verdenkingen_huisartsen.json"

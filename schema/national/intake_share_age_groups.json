@@ -1,27 +1,34 @@
 {
   "definitions": {
     "item": {
-      "allOf": [
-        {
-          "$ref": "base_item.json"
+      "title": "intake_share_age_groups_item",
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "agegroup",
+        "infected_per_agegroup_increase",
+        "date_of_report_unix",
+        "date_of_insertion_unix"
+      ],
+      "properties": {
+        "agegroup": {
+          "type": "string"
         },
-        {
-          "type": "object",
-          "required": ["agegroup", "infected_per_agegroup_increase"],
-          "properties": {
-            "agegroup": {
-              "type": "string"
-            },
-            "infected_per_agegroup_increase": {
-              "type": "number"
-            }
-          }
+        "infected_per_agegroup_increase": {
+          "type": "number"
+        },
+        "date_of_report_unix": {
+          "type": "integer"
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
         }
-      ]
+      }
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "intake_share_age_groups.json",
+  "title": "intake_share_age_groups",
   "type": "object",
   "required": ["values", "last_value"],
   "additionalProperties": false,

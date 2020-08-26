@@ -1,17 +1,25 @@
 {
   "definitions": {
     "item": {
-      "title": "rioolwater_metingen_per_rwzi_item",
-      "type": "object",
-      "required": [
-        "date_measurement_unix",
-        "rwzi_awzi_code",
-        "rwzi_awzi_name",
-        "vrcode",
-        "vrnaam",
-        "rna_per_ml",
-        "date_of_insertion_unix"
-      ],
+      "title": "results_per_sewer_installation_per_region_item",
+      "additionalProperties": false,
+      "properties": {
+        "rwzi_awzi_code": {
+          "type": "string"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/valueDef"
+          }
+        },
+        "last_value": {
+          "$ref": "#/definitions/valueDef"
+        }
+      }
+    },
+    "valueDef": {
+      "title": "results_per_sewer_installation_per_region_item_value",
       "additionalProperties": false,
       "properties": {
         "date_measurement_unix": {
@@ -39,10 +47,9 @@
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "rioolwater_metingen_per_rwzi.json",
-  "title": "rioolwater_metingen_per_rwzi",
   "type": "object",
-  "required": ["values", "last_value"],
+  "title": "results_per_sewer_installation_per_region",
+  "required": ["values"],
   "additionalProperties": false,
   "properties": {
     "values": {
@@ -50,9 +57,6 @@
       "items": {
         "$ref": "#/definitions/item"
       }
-    },
-    "last_value": {
-      "$ref": "#/definitions/item"
     }
   }
 }
