@@ -272,7 +272,9 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
       <MaxWidth>
         <div className={styles['regio-grid']}>
           <div className={styles['map-column']} ref={selectRegioWrapperRef}>
-            <p className={styles['select-region-legend']}>Toon cijfers van:</p>
+            <p className={styles['select-region-legend']}>
+              {text.select_region_type_legend}
+            </p>
             <div className={styles['select-region-type']}>
               <input
                 onChange={setRegionType}
@@ -282,7 +284,9 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                 value="municipality"
                 defaultChecked={true}
               />
-              <label htmlFor="regionType-municipality">Gemeentes</label>{' '}
+              <label htmlFor="regionType-municipality">
+                {text.label_municipalities}
+              </label>{' '}
               <input
                 onChange={setRegionType}
                 id="regionType-safetyRegion"
@@ -291,11 +295,11 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
                 value="safetyRegion"
               />
               <label htmlFor="regionType-safetyRegion">
-                Veiligheidsregio&apos;s
+                {text.label_safety_regions}
               </label>
             </div>
             <p className={styles['select-region-legend']}>
-              Selecteer een gemeente:
+              {text.select_region_municipality_legend}
             </p>
             <SelectMunicipality
               regionType={regionType}
@@ -323,11 +327,17 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
 
           <div className={styles['panel-column']}>
             <div className={styles['safety-region-header']}>
-              <p>{text.your_safety_region}</p>
+              <p>
+                {regionType === 'safetyRegion'
+                  ? text.your_safety_region
+                  : text.your_municipality}
+              </p>
               {selectedRegio && <h2>{selectedRegio.name}</h2>}
               {!selectedRegio && (
                 <span className={styles['select-safety-region']}>
-                  {text.select_safety_region_municipality}
+                  {regionType === 'safetyRegion'
+                    ? text.select_safety_region_municipality
+                    : text.select_municipality}
                 </span>
               )}
             </div>

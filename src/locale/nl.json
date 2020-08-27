@@ -503,8 +503,14 @@
     "graph_secondary_label_text": "Gemeten waarde per locatie."
   },
   "regionaal_index": {
-    "your_safety_region": "Uw veiligheidsregio",
-    "select_safety_region_municipality": "Selecteer een veiligheidsregio of gemeente"
+    "label_municipalities": "Gemeentes",
+    "label_safety_regions": "Veiligheidsregio's",
+    "select_municipality": "Selecteer een gemeente",
+    "select_region_municipality_legend": "Selecteer een gemeente:",
+    "select_region_type_legend": "Toon cijfers van:",
+    "select_safety_region_municipality": "Selecteer een veiligheidsregio of gemeente",
+    "your_municipality": "Gemeente",
+    "your_safety_region": "Veiligheidsregio"
   },
   "common": {
     "metadata": {

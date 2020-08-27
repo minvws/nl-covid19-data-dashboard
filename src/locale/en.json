@@ -503,8 +503,14 @@
     "graph_secondary_label_text": "Measured value per location"
   },
   "regionaal_index": {
-    "your_safety_region": "Your safety region",
-    "select_safety_region_municipality": "Select a safety region or municipality"
+    "label_municipalities": "Municipalities",
+    "label_safety_regions": "Safety regions",
+    "select_region_municipality_legend": "Select a municipality:",
+    "select_region_type_legend": "Show data of:",
+    "select_municipality": "Select a municipality",
+    "select_safety_region_municipality": "Select a safety region or municipality",
+    "your_municipality": "Municipality",
+    "your_safety_region": "Safety region"
   },
   "common": {
     "metadata": {
