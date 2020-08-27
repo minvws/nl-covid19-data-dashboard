@@ -590,7 +590,7 @@
     "gemcode": "GM0010"
   },
   {
-    "name": "Groningen (gemeente)",
+    "name": "Groningen",
     "safetyRegion": "VR01",
     "gemcode": "GM0014"
   },
@@ -665,7 +665,7 @@
     "gemcode": "GM0603"
   },
   {
-    "name": "s-Gravenhage (gemeente)",
+    "name": "s-Gravenhage",
     "safetyRegion": "VR15",
     "gemcode": "GM0518"
   },
@@ -1500,7 +1500,7 @@
     "gemcode": "GM1904"
   },
   {
-    "name": "Utrecht (gemeente)",
+    "name": "Utrecht",
     "safetyRegion": "VR09",
     "gemcode": "GM0344"
   },

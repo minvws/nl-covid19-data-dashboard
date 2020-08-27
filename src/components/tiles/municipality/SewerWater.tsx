@@ -30,9 +30,11 @@ export const SewerWaterMunicipality: React.FC<IProps> = ({
     siteText.regionaal_rioolwater_metingen;
 
   const orderedSewerInstallations =
-    data?.results_per_sewer_installation_per_region?.values?.sort((a, b) => {
-      return b?.last_value?.rna_per_ml - a?.last_value?.rna_per_ml;
-    }) || [];
+    data?.results_per_sewer_installation_per_municipality?.values?.sort(
+      (a, b) => {
+        return b?.last_value?.rna_per_ml - a?.last_value?.rna_per_ml;
+      }
+    ) || [];
 
   return (
     <GraphContainer>
@@ -80,7 +82,7 @@ export const SewerWaterMunicipality: React.FC<IProps> = ({
         )}
       </GraphContent>
 
-      {/* {selectedRegio && (
+      {selectedRegio && (
         <Collapse
           openText={text.open}
           sluitText={text.sluit}
@@ -89,12 +91,12 @@ export const SewerWaterMunicipality: React.FC<IProps> = ({
         >
           <h4>{text.fold_title}</h4>
           <p>{text.fold}</p>
-          {data?.average_sewer_installation_per_region?.values &&
-            data?.results_per_sewer_installation_per_region?.values && (
+          {data?.sewer_measurements?.values &&
+            data?.results_per_sewer_installation_per_municipality?.values && (
               <>
                 <h4>{text.graph_title}</h4>
                 <RegionalSewerWaterLineChart
-                  averageValues={data?.average_sewer_installation_per_region?.values.map(
+                  averageValues={data?.sewer_measurements?.values.map(
                     (value) => {
                       return {
                         ...value,
@@ -103,7 +105,7 @@ export const SewerWaterMunicipality: React.FC<IProps> = ({
                       };
                     }
                   )}
-                  allValues={data.results_per_sewer_installation_per_region.values.map(
+                  allValues={data.results_per_sewer_installation_per_municipality.values.map(
                     (installation) => {
                       return installation?.values
                         .map((value) => {
@@ -131,17 +133,13 @@ export const SewerWaterMunicipality: React.FC<IProps> = ({
                   ]}
                   data={[
                     {
-                      y:
-                        data.average_sewer_installation_per_region.last_value
-                          .average,
+                      y: data.sewer_measurements.last_value.average,
                       color: '#3391CC',
                       label: `${formatDate(
-                        data.average_sewer_installation_per_region.last_value
-                          .week_unix * 1000,
+                        data.sewer_measurements.last_value.week_unix * 1000,
                         'short'
                       )}: ${formatNumber(
-                        data.average_sewer_installation_per_region.last_value
-                          .average
+                        data.sewer_measurements.last_value.average
                       )}`,
                     },
                     ...orderedSewerInstallations.map((installation) => ({
@@ -165,7 +163,7 @@ export const SewerWaterMunicipality: React.FC<IProps> = ({
               </>
             )}
         </Collapse>
-      )} */}
+      )}
     </GraphContainer>
   );
 };

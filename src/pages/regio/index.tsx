@@ -108,17 +108,22 @@ let lastKnownGemcode: string | null = null;
 const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
   const { municipalities, safetyRegions } = props;
 
+  // Toggle region type between municipality and safety region
   const setRegionType = (event: any): void => {
     let query = null;
     regionType = event?.currentTarget?.value;
 
+    // Recover last known municipality in case we switch back from
+    // safety region to municipality
     if (lastKnownGemcode) {
       if (regionType === 'municipality') {
         query = { regio: lastKnownGemcode };
       } else {
         const municipalityMatch = municipalities.find(
-          (g: MunicipalityMapping) => g.gemcode === lastKnownGemcode
+          (municipality: MunicipalityMapping) =>
+            municipality.gemcode === lastKnownGemcode
         );
+        // Scale up from municipality level to safety region
         if (municipalityMatch?.safetyRegion) {
           query = { regio: municipalityMatch?.safetyRegion };
         }
@@ -167,13 +172,12 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
 
   const router = useRouter();
 
-  const selectedRegio:
-    | SafetyRegion
-    | MunicipalityMapping
-    | undefined = useMemo(() => {
+  // Recover selected regio from URL param
+  // can also set the region type to match
+  const selectedRegio = useMemo(() => {
     const selectedRegioCode = router.query?.regio;
     if (selectedRegioCode?.indexOf('GM') === 0) {
-      // municipality
+      regionType = 'municipality';
       return (
         municipalities.find(
           (municipality) => municipality.gemcode === selectedRegioCode
@@ -182,13 +186,15 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
     }
 
     // safety region
-
     const region = selectedRegioCode
       ? safetyRegions.find((el) => el.code === selectedRegioCode)
       : undefined;
 
     // reset the last known gemcode when we select a safety region that is outside the municipality
     // keep it if the municipality is inside the safety region
+    if (region) {
+      regionType = 'safetyRegion';
+    }
     if (region && lastKnownGemcode) {
       const lastKnownMunicipality = municipalities.find(
         (municipality) => municipality.gemcode === lastKnownGemcode
@@ -200,6 +206,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
         lastKnownGemcode = null;
       }
     }
+    // return { regionType: 'safetyRegion', selectedRegio: region };
     return region;
   }, [router.query?.regio, safetyRegions, municipalities]);
 
@@ -244,6 +251,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
     );
   };
 
+  // Fetch data for municipality or safety region
   const response = useSWR(() => {
     if (!selectedRegio) {
       return null;

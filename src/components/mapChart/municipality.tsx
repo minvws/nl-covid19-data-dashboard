@@ -154,7 +154,7 @@ function MunicipalityMap(props: IProps): any {
         point.select(false, false);
       });
     }
-  }, [ref, selected]);
+  }, [ref, selected, mapOptions]);
 
   return mapOptions ? (
     <div className={styles.container}>
