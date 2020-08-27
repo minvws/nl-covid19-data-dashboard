@@ -226,7 +226,7 @@ export interface MunicipalityData extends MunicipalityMetrics {
 }
 
 export interface RegionaalMunicipality {
-  last_generated: string;
+  last_generated: string | string;
   proto_name: string;
   name: string;
   code: string;
