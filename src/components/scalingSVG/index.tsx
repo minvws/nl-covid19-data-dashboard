@@ -1,7 +1,16 @@
 import styles from './scalingSVG.module.scss';
 import CSS from 'csstype';
+import { WithChildren } from 'types';
 
-const ScalingSVG: React.FC<{ width: number; height: number }> = (props) => {
+interface IProps {
+  width: number;
+  height: number;
+  children: WithChildren;
+}
+
+export default ScalingSVG;
+
+function ScalingSVG(props: WithChildren<IProps>) {
   const { children, width, height } = props;
 
   const style: CSS.Properties = { paddingBottom: `${100 * (height / width)}%` };
@@ -11,6 +20,4 @@ const ScalingSVG: React.FC<{ width: number; height: number }> = (props) => {
       {children}
     </div>
   );
-};
-
-export default ScalingSVG;
+}

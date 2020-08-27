@@ -1,5 +1,7 @@
-const GraphContent: React.FC = (props) => {
-  return <div className="graphContent">{props.children}</div>;
-};
+import { WithChildren } from 'types';
 
 export default GraphContent;
+
+function GraphContent({ children }: WithChildren) {
+  return <div className="graphContent">{children}</div>;
+}

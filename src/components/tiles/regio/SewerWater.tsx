@@ -22,7 +22,11 @@ interface IProps {
   selectedRegio: SafetyRegion | undefined;
 }
 
-export const SewerWater: React.FC<IProps> = ({ data, selectedRegio }) => {
+export default SewerWater;
+
+function SewerWater(props: IProps) {
+  const { data, selectedRegio } = props;
+
   const text: typeof siteText.regionaal_rioolwater_metingen =
     siteText.regionaal_rioolwater_metingen;
 
@@ -172,4 +176,4 @@ export const SewerWater: React.FC<IProps> = ({ data, selectedRegio }) => {
       )}
     </GraphContainer>
   );
-};
+}

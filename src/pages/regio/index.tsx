@@ -11,7 +11,7 @@ import ScreenReaderOnly from 'components/screenReaderOnly';
 import SelectMunicipality from 'components/selectMunicipality';
 import IntakeHospital from 'components/tiles/regio/IntakeHospital';
 import PostivelyTestedPeople from 'components/tiles/regio/PositivelyTestedPeople';
-import { SewerWater } from 'components/tiles/regio/SewerWater';
+import SewerWater from 'components/tiles/regio/SewerWater';
 
 import styles from './regio.module.scss';
 import openGraphImageNL from 'assets/sharing/og-regionale-cijfers.png?url';
@@ -90,14 +90,14 @@ export async function getStaticProps(): Promise<RegioStaticProps> {
   };
 }
 
-export const RegioDataLoading: React.FC = () => {
+export function RegioDataLoading() {
   return (
     <span className={styles['safety-region-data-loading']}>
       <Warning />
       {siteText.geen_selectie.text}
     </span>
   );
-};
+}
 
 const Regio: FCWithLayout<RegioProps> = (props) => {
   const { municipalities, safetyRegions } = props;

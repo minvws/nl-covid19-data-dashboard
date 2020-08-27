@@ -9,7 +9,9 @@ interface IProps {
   datumsText: string;
 }
 
-const dateReported: React.FC<IProps> = (props) => {
+export default dateReported;
+
+function dateReported(props: IProps) {
   const { datumsText, dateUnix, dateInsertedUnix } = props;
 
   if (!dateUnix) return null;
@@ -32,6 +34,4 @@ const dateReported: React.FC<IProps> = (props) => {
       </p>
     </div>
   );
-};
-
-export default dateReported;
+}
