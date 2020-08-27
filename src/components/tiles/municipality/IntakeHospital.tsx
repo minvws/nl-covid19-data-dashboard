@@ -10,7 +10,7 @@ import { LineChart } from '../index';
 
 import Ziekenhuis from 'assets/ziekenhuis.svg';
 
-import { SafetyRegion, RegioDataLoading } from 'pages/regio/index';
+import { RegioDataLoading, MunicipalityMapping } from 'pages/regio/index';
 
 import { Regionaal, RegionaalValue } from 'types/data';
 
@@ -18,7 +18,7 @@ import siteText from 'locale';
 
 interface IProps {
   data: Regionaal;
-  selectedRegio: SafetyRegion | undefined;
+  selectedRegio: MunicipalityMapping | undefined;
   contentRef: React.RefObject<HTMLHeadingElement>;
 }
 
@@ -49,8 +49,7 @@ export const IntakeHospitalMunicipality: React.FC<IProps> = (props) => {
                   min={0}
                   max={30}
                   value={
-                    data.hospital_admissions.last_value
-                      .moving_average_hospital
+                    data.hospital_admissions.last_value.moving_average_hospital
                   }
                   screenReaderText={
                     siteText.regionaal_ziekenhuisopnames_per_dag

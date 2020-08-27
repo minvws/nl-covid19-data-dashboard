@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 import siteText from 'locale';
 
-import { SafetyRegion, MunicipalityMapping } from 'pages/regio';
+import { SafetyRegion, MunicipalityMapping, RegionType } from 'pages/regio';
 import Arrow from 'assets/white-arrow.svg';
 import ResetIcon from 'assets/reset.svg';
 
@@ -13,13 +13,21 @@ import ScreenReaderOnly from 'components/screenReaderOnly';
 import replaceVariablesInText from 'utils/replaceVariablesInText';
 
 type SelectMunicipalityProps = {
+  regionType: RegionType;
   municipalities: MunicipalityMapping[];
   safetyRegions: SafetyRegion[];
-  setSelectedSafetyRegion: (code: SafetyRegion['code']) => void;
+  setSelectedSafetyRegion: (selection: MunicipalityMapping) => void;
+  setSelectedMunicipality: (selection: MunicipalityMapping) => void;
 };
 
 const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
-  const { municipalities, safetyRegions, setSelectedSafetyRegion } = props;
+  const {
+    regionType,
+    municipalities,
+    safetyRegions,
+    setSelectedSafetyRegion,
+    setSelectedMunicipality,
+  } = props;
   const text: typeof siteText.select_municipality =
     siteText.select_municipality;
 
@@ -33,6 +41,12 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
   const getRegionItems = (safetyRegion: string, inputValue: string) => {
     return items
       .filter((el) => el.safetyRegion === safetyRegion)
+      .filter((el) => !getDisabled(el, inputValue))
+      .sort((a, b) => a.name.localeCompare(b.name));
+  };
+
+  const getMunicipalities = (inputValue: string) => {
+    return items
       .filter((el) => !getDisabled(el, inputValue))
       .sort((a, b) => a.name.localeCompare(b.name));
   };
@@ -64,7 +78,11 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
 
   // Set the safety region code to the URL on item selection
   const onSelectedItemChange = ({ selectedItem }: any) => {
-    setSelectedSafetyRegion(selectedItem?.safetyRegion);
+    if (regionType === 'safetyRegion') {
+      setSelectedSafetyRegion(selectedItem);
+    } else {
+      setSelectedMunicipality(selectedItem);
+    }
   };
 
   // Filters municipalities when the input changes
@@ -200,6 +218,7 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
         })}
       >
         {isOpen &&
+          regionType === 'safetyRegion' &&
           safetyRegions.map((safetyRegion) => {
             const regionItems = getRegionItems(safetyRegion.code, inputValue);
             const isRegionDisabled = getRegionDisabled(regionItems, inputValue);
@@ -234,6 +253,28 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
                   );
                 })}
               </div>
+            );
+          })}
+
+        {isOpen &&
+          regionType === 'municipality' &&
+          getMunicipalities(inputValue).map((municipality) => {
+            const isHighlighted =
+              highlightedIndex === items.indexOf(municipality);
+            return (
+              // eslint-disable-next-line react/jsx-key
+              <p
+                {...getItemProps({
+                  key: municipality.name,
+                  item: municipality,
+                  index: items.indexOf(municipality),
+                  className: `${styles.item} ${
+                    isHighlighted ? styles.active : ''
+                  }`,
+                })}
+              >
+                {itemToString(municipality)}
+              </p>
             );
           })}
       </div>

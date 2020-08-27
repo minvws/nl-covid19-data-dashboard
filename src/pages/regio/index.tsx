@@ -34,6 +34,7 @@ import { Regionaal } from 'types/data';
 import { IntakeHospitalMunicipality } from 'components/tiles/municipality/IntakeHospital';
 import { PostivelyTestedPeopleMunicipality } from 'components/tiles/municipality/PositivelyTestedPeople';
 import { SewerWaterMunicipality } from 'components/tiles/municipality/SewerWater';
+import MunicipalityMap from 'components/mapChart/municipality';
 
 export type SafetyRegion = {
   id: number;
@@ -44,6 +45,7 @@ export type SafetyRegion = {
 export type MunicipalityMapping = {
   name: string;
   safetyRegion: string;
+  gemcode: string;
 };
 
 type RegioProps = {
@@ -58,20 +60,14 @@ type RegioStaticProps = {
   };
 };
 
-type RegionType = 'municipality' | 'safetyRegion';
+export type RegionType = 'municipality' | 'safetyRegion';
 
 export async function getStaticProps(): Promise<RegioStaticProps> {
   const municipalityMapping = require('../../data/gemeente_veiligheidsregio.json');
   const safetyRegions: SafetyRegion[] = require('../../data/index').default;
 
   // group municipalities by safety region
-  const map: MunicipalityMapping[] = Object.entries(municipalityMapping).map(
-    (entry: [string, any]): MunicipalityMapping => {
-      // value is safety region ID, key is municipality name
-      const [municipality, safetyRegion] = entry;
-      return { name: municipality, safetyRegion };
-    }
-  );
+  const map: MunicipalityMapping[] = municipalityMapping;
 
   return {
     props: {
@@ -106,24 +102,106 @@ export const RegioDataLoading: React.FC = () => {
   );
 };
 
+let regionType: RegionType = 'municipality';
+let lastKnownGemcode: string | null = null;
+
 const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
   const { municipalities, safetyRegions } = props;
 
-  let regionType: RegionType = 'municipality';
-
   const setRegionType = (event: any): void => {
+    let query = null;
     regionType = event?.currentTarget?.value;
-    console.log('setRegionType', regionType);
+
+    if (lastKnownGemcode) {
+      if (regionType === 'municipality') {
+        query = { regio: lastKnownGemcode };
+      } else {
+        const municipalityMatch = municipalities.find(
+          (g: MunicipalityMapping) => g.gemcode === lastKnownGemcode
+        );
+        if (municipalityMatch?.safetyRegion) {
+          query = { regio: municipalityMatch?.safetyRegion };
+        }
+      }
+    }
+
+    router.replace(
+      {
+        pathname: router.pathname,
+        query,
+      },
+      undefined,
+      { shallow: true }
+    );
+  };
+
+  const selectMunicipalityFromMap = (selectedGemcode: string): void => {
+    lastKnownGemcode = selectedGemcode;
+    router.replace(
+      {
+        pathname: router.pathname,
+        query: { regio: selectedGemcode },
+      },
+      undefined,
+      { shallow: true }
+    );
+  };
+
+  const setSelectedMunicipality = (
+    selectedRegio: MunicipalityMapping
+  ): void => {
+    let query = null;
+    if (selectedRegio?.gemcode) {
+      lastKnownGemcode = selectedRegio.gemcode;
+      query = { regio: selectedRegio.gemcode };
+    }
+    router.replace(
+      {
+        pathname: router.pathname,
+        query,
+      },
+      undefined,
+      { shallow: true }
+    );
   };
 
   const router = useRouter();
 
-  const selectedRegio = useMemo(() => {
+  const selectedRegio:
+    | SafetyRegion
+    | MunicipalityMapping
+    | undefined = useMemo(() => {
     const selectedRegioCode = router.query?.regio;
-    return selectedRegioCode
+    if (selectedRegioCode?.indexOf('GM') === 0) {
+      // municipality
+      return (
+        municipalities.find(
+          (municipality) => municipality.gemcode === selectedRegioCode
+        ) || undefined
+      );
+    }
+
+    // safety region
+
+    const region = selectedRegioCode
       ? safetyRegions.find((el) => el.code === selectedRegioCode)
       : undefined;
-  }, [router.query?.regio, safetyRegions]);
+
+    // reset the last known gemcode when we select a safety region that is outside the municipality
+    // keep it if the municipality is inside the safety region
+    if (region && lastKnownGemcode) {
+      const lastKnownMunicipality = municipalities.find(
+        (municipality) => municipality.gemcode === lastKnownGemcode
+      );
+      if (
+        lastKnownMunicipality &&
+        lastKnownMunicipality.safetyRegion !== region.code
+      ) {
+        lastKnownGemcode = null;
+      }
+    }
+    return region;
+  }, [router.query?.regio, safetyRegions, municipalities]);
 
   const contentRef = useRef(null);
   const selectRegioWrapperRef = useRef(null);
@@ -150,11 +228,16 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
     if (el) el.focus();
   };
 
-  const setSelectedRegio = (safetyRegionCode: SafetyRegion['code']): void => {
+  const setSelectedSafetyRegion = (
+    selectedRegio: MunicipalityMapping
+  ): void => {
+    if (selectedRegio?.gemcode) {
+      lastKnownGemcode = selectedRegio.gemcode;
+    }
     router.replace(
       {
         pathname: router.pathname,
-        query: safetyRegionCode ? { regio: safetyRegionCode } : {},
+        query: selectedRegio ? { regio: selectedRegio.safetyRegion } : {},
       },
       undefined,
       { shallow: true }
@@ -162,11 +245,22 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
   };
 
   const response = useSWR(() => {
-    console.log(regionType);
+    if (!selectedRegio) {
+      return null;
+    }
     if (regionType === 'municipality') {
+      if (
+        ['GM0014', 'GM0037', 'GM0050'].includes(
+          (selectedRegio as MunicipalityMapping).gemcode
+        )
+      ) {
+        return `/json/${(selectedRegio as MunicipalityMapping).gemcode}.json`;
+      }
       return '/json/GM0014.json';
     }
-    selectedRegio?.code ? `/json/${selectedRegio.code}.json` : null;
+    return (selectedRegio as SafetyRegion).code
+      ? `/json/${(selectedRegio as SafetyRegion).code}.json`
+      : null;
   });
   const data: Regionaal = response.data;
   const text: typeof siteText.regionaal_index = siteText.regionaal_index;
@@ -176,80 +270,109 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
   return (
     <>
       <MaxWidth>
-        <div>
-          <input
-            onChange={setRegionType}
-            id="regionType-municipality"
-            type="radio"
-            name="regionType"
-            value="municipality"
-            defaultChecked={true}
-          />
-          <label htmlFor="regionType-municipality">Gemeentes</label>{' '}
-          <input
-            onChange={setRegionType}
-            id="regionType-safetyRegion"
-            type="radio"
-            name="regionType"
-            value="safetyRegion"
-          />
-          <label htmlFor="regionType-safetyRegion">
-            Veiligheidsregio&apos;s
-          </label>
-        </div>
-        <LastUpdated
-          lastUpdated={data?.last_generated * 1000}
-          loadingText={selectedRegio ? null : '\u00A0'}
-        />
         <div className={styles['regio-grid']}>
           <div className={styles['map-column']} ref={selectRegioWrapperRef}>
+            <p className={styles['select-region-legend']}>Toon cijfers van:</p>
+            <div className={styles['select-region-type']}>
+              <input
+                onChange={setRegionType}
+                id="regionType-municipality"
+                type="radio"
+                name="regionType"
+                value="municipality"
+                defaultChecked={true}
+              />
+              <label htmlFor="regionType-municipality">Gemeentes</label>{' '}
+              <input
+                onChange={setRegionType}
+                id="regionType-safetyRegion"
+                type="radio"
+                name="regionType"
+                value="safetyRegion"
+              />
+              <label htmlFor="regionType-safetyRegion">
+                Veiligheidsregio&apos;s
+              </label>
+            </div>
+            <p className={styles['select-region-legend']}>
+              Selecteer een gemeente:
+            </p>
             <SelectMunicipality
+              regionType={regionType}
               municipalities={municipalities}
               safetyRegions={safetyRegions}
-              setSelectedSafetyRegion={setSelectedRegio}
+              setSelectedSafetyRegion={setSelectedSafetyRegion}
+              setSelectedMunicipality={setSelectedMunicipality}
             />
 
             <div className={styles['map-container']}>
-              <div className={styles['safety-region-header']}>
-                <p>{text.your_safety_region}</p>
-                {selectedRegio && <h2>{selectedRegio.name}</h2>}
-                {!selectedRegio && (
-                  <span className={styles['select-safety-region']}>
-                    {text.select_safety_region_municipality}
-                  </span>
-                )}
-              </div>
-              <SvgMap safetyRegions={safetyRegions} selected={selectedRegio} />
+              {regionType === 'municipality' && (
+                <MunicipalityMap
+                  onSelect={selectMunicipalityFromMap}
+                  selected={selectedRegio as MunicipalityMapping}
+                />
+              )}
+              {regionType === 'safetyRegion' && (
+                <SvgMap
+                  safetyRegions={safetyRegions}
+                  selected={selectedRegio as SafetyRegion}
+                />
+              )}
             </div>
           </div>
 
           <div className={styles['panel-column']}>
+            <div className={styles['safety-region-header']}>
+              <p>{text.your_safety_region}</p>
+              {selectedRegio && <h2>{selectedRegio.name}</h2>}
+              {!selectedRegio && (
+                <span className={styles['select-safety-region']}>
+                  {text.select_safety_region_municipality}
+                </span>
+              )}
+            </div>
+            <LastUpdated
+              lastUpdated={selectedRegio ? data?.last_generated * 1000 : 0}
+              loadingText={selectedRegio ? null : '\u00A0'}
+            />
             {regionType === 'safetyRegion' && (
               <>
                 <IntakeHospital
-                  selectedRegio={selectedRegio}
+                  selectedRegio={selectedRegio as SafetyRegion}
                   data={data}
                   contentRef={contentRef}
                 />
 
-                <PostivelyTestedPeople selectedRegio={selectedRegio} data={data} />
+                <PostivelyTestedPeople
+                  selectedRegio={selectedRegio as SafetyRegion}
+                  data={data}
+                />
 
-                <SewerWater selectedRegio={selectedRegio} data={data} />
+                <SewerWater
+                  selectedRegio={selectedRegio as SafetyRegion}
+                  data={data}
+                />
               </>
             )}
 
             {regionType === 'municipality' && (
               <>
-              <IntakeHospitalMunicipality
-                selectedRegio={selectedRegio}
-                data={data}
-                contentRef={contentRef}
-              />
+                <IntakeHospitalMunicipality
+                  selectedRegio={selectedRegio as MunicipalityMapping}
+                  data={data}
+                  contentRef={contentRef}
+                />
 
-              <PostivelyTestedPeopleMunicipality selectedRegio={selectedRegio} data={data} />
+                <PostivelyTestedPeopleMunicipality
+                  selectedRegio={selectedRegio as MunicipalityMapping}
+                  data={data}
+                />
 
-              <SewerWaterMunicipality selectedRegio={selectedRegio} data={data} />
-            </>
+                <SewerWaterMunicipality
+                  selectedRegio={selectedRegio as MunicipalityMapping}
+                  data={data}
+                />
+              </>
             )}
           </div>
         </div>

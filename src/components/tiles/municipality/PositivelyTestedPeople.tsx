@@ -10,7 +10,7 @@ import { LineChart } from '../index';
 
 import Getest from 'assets/test.svg';
 
-import { SafetyRegion, RegioDataLoading } from 'pages/regio/index';
+import { MunicipalityMapping, RegioDataLoading } from 'pages/regio/index';
 
 import { Regionaal, RegionaalValue } from 'types/data';
 
@@ -20,7 +20,7 @@ import formatNumber from 'utils/formatNumber';
 
 interface IProps {
   data: Regionaal;
-  selectedRegio: SafetyRegion | undefined;
+  selectedRegio: MunicipalityMapping | undefined;
 }
 
 export const PostivelyTestedPeopleMunicipality: React.FC<IProps> = (props) => {
@@ -47,8 +47,7 @@ export const PostivelyTestedPeopleMunicipality: React.FC<IProps> = (props) => {
                 min={0}
                 max={10}
                 value={
-                  data.positive_tested_people.last_value
-                    .infected_daily_total
+                  data.positive_tested_people.last_value.infected_daily_increase
                 }
                 screenReaderText={
                   siteText.regionaal_positief_geteste_personen
@@ -84,7 +83,8 @@ export const PostivelyTestedPeopleMunicipality: React.FC<IProps> = (props) => {
                     data.positive_tested_people.last_value.date_of_report_unix
                   }
                   dateInsertedUnix={
-                    data.positive_tested_people.last_value.date_of_insertion_unix
+                    data.positive_tested_people.last_value
+                      .date_of_insertion_unix
                   }
                 />
               </>

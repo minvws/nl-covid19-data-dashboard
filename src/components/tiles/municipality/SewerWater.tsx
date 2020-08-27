@@ -12,17 +12,20 @@ import siteText from 'locale';
 
 import { Regionaal } from 'types/data';
 import BarChart from 'components/barChart';
-import { SafetyRegion, RegioDataLoading } from 'pages/regio/index';
+import { MunicipalityMapping, RegioDataLoading } from 'pages/regio/index';
 import formatDate from 'utils/formatDate';
 import formatNumber from 'utils/formatNumber';
 import LoadingPlaceholder from 'components/loadingPlaceholder';
 
 interface IProps {
   data: Regionaal;
-  selectedRegio: SafetyRegion | undefined;
+  selectedRegio: MunicipalityMapping | undefined;
 }
 
-export const SewerWaterMunicipality: React.FC<IProps> = ({ data, selectedRegio }) => {
+export const SewerWaterMunicipality: React.FC<IProps> = ({
+  data,
+  selectedRegio,
+}) => {
   const text: typeof siteText.regionaal_rioolwater_metingen =
     siteText.regionaal_rioolwater_metingen;
 
@@ -46,17 +49,13 @@ export const SewerWaterMunicipality: React.FC<IProps> = ({ data, selectedRegio }
 
         {selectedRegio && (
           <>
-            {!data?.sewer_measurements?.last_value && (
-              <LoadingPlaceholder />
-            )}
+            {!data?.sewer_measurements?.last_value && <LoadingPlaceholder />}
             {data?.sewer_measurements?.last_value && (
               <BarScale
                 min={0}
                 max={100}
                 screenReaderText={text.screen_reader_graph_content}
-                value={Number(
-                  data.sewer_measurements.last_value.average
-                )}
+                value={Number(data.sewer_measurements.last_value.average)}
                 id="rioolwater_metingen"
                 rangeKey="average"
                 gradient={[
@@ -74,12 +73,9 @@ export const SewerWaterMunicipality: React.FC<IProps> = ({ data, selectedRegio }
           <DateReported
             datumsText={text.datums}
             dateInsertedUnix={
-              data.sewer_measurements.last_value
-                .date_of_insertion_unix
+              data.sewer_measurements.last_value.date_of_insertion_unix
             }
-            dateUnix={
-              data.sewer_measurements.last_value.week_unix
-            }
+            dateUnix={data.sewer_measurements.last_value.week_unix}
           />
         )}
       </GraphContent>
