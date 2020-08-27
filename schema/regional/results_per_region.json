@@ -1,11 +1,23 @@
 {
   "definitions": {
     "item": {
-      "title": "results_per_region_item",
+      "title": "regionaal_value",
       "additionalProperties": false,
+      "required": [
+        "date_of_report_unix",
+        "vrcode",
+        "total_reported_increase_per_region",
+        "infected_total_counts_per_region",
+        "hospital_total_counts_per_region",
+        "infected_increase_per_region",
+        "hospital_increase_per_region",
+        "infected_moving_avg_per_region",
+        "hospital_moving_avg_per_region",
+        "date_of_insertion_unix"
+      ],
       "properties": {
         "date_of_report_unix": { "type": "integer" },
-        "vrcode": { "type": "string" },
+        "vrcode": { "type": "string", "pattern": "^VR[0-9]+$" },
         "total_reported_increase_per_region": { "type": "number" },
         "infected_total_counts_per_region": { "type": "number" },
         "hospital_total_counts_per_region": { "type": "number" },

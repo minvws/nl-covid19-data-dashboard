@@ -1,7 +1,7 @@
 {
   "definitions": {
     "item": {
-      "title": "infected_people_delta_normalized_item",
+      "title": "infected_people_delta_normalized_last_value",
       "type": "object",
       "additionalProperties": false,
       "required": [

@@ -1,18 +1,28 @@
 {
   "definitions": {
     "item": {
-      "title": "average_sewer_installation_per_region_item",
+      "title": "hospital_admissions_last_value",
+      "type": "object",
       "additionalProperties": false,
-      "required": ["week_unix", "vrcode", "average", "date_of_insertion_unix"],
+      "required": [
+        "date_of_report_unix",
+        "gmcode",
+        "municipality_name",
+        "moving_average_hospital",
+        "date_of_insertion_unix"
+      ],
       "properties": {
-        "week_unix": {
+        "date_of_report_unix": {
           "type": "integer"
         },
-        "vrcode": {
+        "gmcode": {
           "type": "string",
-          "pattern": "^VR[0-9]+$"
+          "pattern": "^GM[0-9]+$"
         },
-        "average": {
+        "municipality_name": {
+          "type": "string"
+        },
+        "moving_average_hospital": {
           "type": "number"
         },
         "date_of_insertion_unix": {
@@ -22,8 +32,9 @@
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "hospital_admissions.json",
+  "title": "hospital_admissions",
   "type": "object",
-  "title": "average_sewer_installation_per_region",
   "required": ["values", "last_value"],
   "additionalProperties": false,
   "properties": {

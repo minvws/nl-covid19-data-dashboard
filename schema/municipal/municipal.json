@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "municipal",
+  "additionalProperties": false,
+  "required": ["last_generated", "proto_name", "name", "code"],
+  "properties": {
+    "last_generated": {
+      "type": "string"
+    },
+    "proto_name": {
+      "type": "string",
+      "pattern": "^GM[0-9]+$"
+    },
+    "name": {
+      "type": "string",
+      "pattern": "^GM[0-9]+$"
+    },
+    "code": {
+      "type": "string",
+      "pattern": "^GM[0-9]+$"
+    },
+    "hospital_admissions": {
+      "$ref": "hospital_admissions.json"
+    },
+    "positive_tested_people": {
+      "$ref": "positive_tested_people.json"
+    },
+    "sewer_measurements": {
+      "$ref": "sewer_measurements.json"
+    }
+  }
+}

@@ -10,7 +10,7 @@ import { useMemo, useRef, useEffect } from 'react';
 import useMunicipalityData, {
   TMunicipalityMetricName,
 } from 'utils/useMunicipalityData';
-import { MunicipalityData } from 'types/data';
+import { MunicipalityData } from 'types/municipality';
 import useExtent from 'utils/useExtent';
 
 if (typeof Highcharts === 'object') {

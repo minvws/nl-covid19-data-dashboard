@@ -1,7 +1,7 @@
 {
   "definitions": {
     "item": {
-      "title": "reproduction_index_item",
+      "title": "reproduction_index_last_value",
       "type": "object",
       "additionalProperties": false,
       "required": [

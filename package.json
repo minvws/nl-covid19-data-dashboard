@@ -86,6 +86,8 @@
     "test:ci": "jest --ci",
     "format": "prettier --write **/*.{js,ts,tsx}",
     "lint": "eslint .",
-    "type-check": "tsc --pretty --noEmit"
+    "type-check": "tsc --pretty --noEmit",
+    "validate-json": "node schema/validator/validate-json.js",
+    "generate-typescript": "node schema/validator/generate-typescript.js"
   }
 }

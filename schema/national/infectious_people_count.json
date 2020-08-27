@@ -1,7 +1,7 @@
 {
   "definitions": {
     "item": {
-      "title": "infectious_people_count_item",
+      "title": "infectious_people_count_last_value",
       "type": "object",
       "additionalProperties": false,
       "required": [

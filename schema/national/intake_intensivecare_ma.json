@@ -1,7 +1,7 @@
 {
   "definitions": {
     "item": {
-      "title": "intake_intensivecare_ma_item",
+      "title": "intake_intensivecare_ma_last_value",
       "type": "object",
       "additionalProperties": false,
       "required": [

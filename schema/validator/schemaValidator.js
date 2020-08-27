@@ -25,6 +25,7 @@ class SchemaValidator {
 
     const validator = new Ajv({
       loadSchema: loadSchema.bind(null, this.basePath),
+      $data: true,
     }); // options can be passed, e.g. {allErrors: true}
     return validator.compileAsync(schema).then(function (validate) {
       return validate;

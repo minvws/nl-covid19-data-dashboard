@@ -1,7 +1,7 @@
 {
   "definitions": {
     "item": {
-      "title": "reproduction_index_last_known_average_item",
+      "title": "reproduction_index_last_known_average_last_value",
       "type": "object",
       "additionalProperties": false,
       "required": [

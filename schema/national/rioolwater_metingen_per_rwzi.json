@@ -1,7 +1,7 @@
 {
   "definitions": {
     "item": {
-      "title": "rioolwater_metingen_per_rwzi_item",
+      "title": "rioolwater_metingen_per_rwzi_last_value",
       "type": "object",
       "required": [
         "date_measurement_unix",

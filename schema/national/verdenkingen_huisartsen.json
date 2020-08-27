@@ -1,7 +1,7 @@
 {
   "definitions": {
     "item": {
-      "title": "verdenkingen_huisartsen_item",
+      "title": "verdenkingen_huisartsen_last_value",
       "type": "object",
       "required": [
         "week_unix",

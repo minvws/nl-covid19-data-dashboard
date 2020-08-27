@@ -1,8 +1,9 @@
 {
   "definitions": {
     "item": {
-      "title": "results_per_sewer_installation_per_region_item",
+      "title": "sewer_value_element",
       "additionalProperties": false,
+      "required": ["rwzi_awzi_code", "values", "last_value"],
       "properties": {
         "rwzi_awzi_code": {
           "type": "string"
@@ -19,10 +20,23 @@
       }
     },
     "valueDef": {
-      "title": "results_per_sewer_installation_per_region_item_value",
+      "title": "sewer_value",
       "additionalProperties": false,
+      "required": [
+        "date_measurement_unix",
+        "week",
+        "rwzi_awzi_code",
+        "rwzi_awzi_name",
+        "vrcode",
+        "vrnaam",
+        "rna_per_ml",
+        "date_of_insertion_unix"
+      ],
       "properties": {
         "date_measurement_unix": {
+          "type": "integer"
+        },
+        "week": {
           "type": "integer"
         },
         "rwzi_awzi_code": {

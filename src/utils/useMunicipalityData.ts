@@ -1,4 +1,4 @@
-import { MunicipalityMetrics, MunicipalityData } from 'types/data';
+import { MunicipalityMetrics, MunicipalityData } from 'types/municipality';
 import useSWR from 'swr';
 import { useMemo } from 'react';
 import municipalCodeToRegionCodeLookup from 'data/municipalCodeToRegionCodeLookup';

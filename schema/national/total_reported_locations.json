@@ -1,7 +1,7 @@
 {
   "definitions": {
     "item": {
-      "title": "total_reported_locations_item",
+      "title": "total_reported_locations_last_value",
       "type": "object",
       "additionalProperties": false,
       "required": [

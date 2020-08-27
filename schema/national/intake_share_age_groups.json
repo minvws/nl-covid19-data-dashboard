@@ -1,7 +1,7 @@
 {
   "definitions": {
     "item": {
-      "title": "intake_share_age_groups_item",
+      "title": "intake_share_age_groups_last_value",
       "additionalProperties": false,
       "type": "object",
       "required": [

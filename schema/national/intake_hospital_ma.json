@@ -1,7 +1,7 @@
 {
   "definitions": {
     "item": {
-      "title": "intake_hospital_ma_item",
+      "title": "intake_hospital_ma_last_value",
       "type": "object",
       "required": [
         "moving_average_hospital",
