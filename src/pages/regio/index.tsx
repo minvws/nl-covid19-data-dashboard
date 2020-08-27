@@ -30,7 +30,7 @@ const twitterImage = locale === 'nl' ? twitterImageNL : twitterImageEN;
 
 import siteText from 'locale';
 
-import { Regionaal } from 'types/data';
+import { Regionaal, RegionaalMunicipality } from 'types/data';
 import { IntakeHospitalMunicipality } from 'components/tiles/municipality/IntakeHospital';
 import { PostivelyTestedPeopleMunicipality } from 'components/tiles/municipality/PositivelyTestedPeople';
 import { SewerWaterMunicipality } from 'components/tiles/municipality/SewerWater';
@@ -270,7 +270,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
       ? `/json/${(selectedRegio as SafetyRegion).code}.json`
       : null;
   });
-  const data: Regionaal = response.data;
+  const data: Regionaal | RegionaalMunicipality = response.data;
   const text: typeof siteText.regionaal_index = siteText.regionaal_index;
 
   useEffect(focusFirstHeading, [data]);
@@ -350,25 +350,31 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
               )}
             </div>
             <LastUpdated
-              lastUpdated={selectedRegio ? data?.last_generated * 1000 : 0}
+              lastUpdated={
+                selectedRegio
+                  ? (typeof data?.last_generated === 'number'
+                      ? data?.last_generated
+                      : parseInt(data?.last_generated, 10)) * 1000
+                  : 0
+              }
               loadingText={selectedRegio ? null : '\u00A0'}
             />
             {regionType === 'safetyRegion' && (
               <>
                 <IntakeHospital
                   selectedRegio={selectedRegio as SafetyRegion}
-                  data={data}
+                  data={data as Regionaal}
                   contentRef={contentRef}
                 />
 
                 <PostivelyTestedPeople
                   selectedRegio={selectedRegio as SafetyRegion}
-                  data={data}
+                  data={data as Regionaal}
                 />
 
                 <SewerWater
                   selectedRegio={selectedRegio as SafetyRegion}
-                  data={data}
+                  data={data as Regionaal}
                 />
               </>
             )}
@@ -377,18 +383,18 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
               <>
                 <IntakeHospitalMunicipality
                   selectedRegio={selectedRegio as MunicipalityMapping}
-                  data={data}
+                  data={data as RegionaalMunicipality}
                   contentRef={contentRef}
                 />
 
                 <PostivelyTestedPeopleMunicipality
                   selectedRegio={selectedRegio as MunicipalityMapping}
-                  data={data}
+                  data={data as RegionaalMunicipality}
                 />
 
                 <SewerWaterMunicipality
                   selectedRegio={selectedRegio as MunicipalityMapping}
-                  data={data}
+                  data={data as RegionaalMunicipality}
                 />
               </>
             )}
