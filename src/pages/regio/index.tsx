@@ -350,13 +350,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
               )}
             </div>
             <LastUpdated
-              lastUpdated={
-                selectedRegio
-                  ? (typeof data?.last_generated === 'number'
-                      ? data?.last_generated
-                      : parseInt(data?.last_generated, 10)) * 1000
-                  : 0
-              }
+              lastUpdated={selectedRegio ? data?.last_generated * 1000 : 0}
               loadingText={selectedRegio ? null : '\u00A0'}
             />
             {regionType === 'safetyRegion' && (
