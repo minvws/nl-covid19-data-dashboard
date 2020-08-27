@@ -68,18 +68,18 @@ const Verantwoording: FunctionComponentWithLayout<{ text: any }> = (props) => {
           <div className={styles.maxwidth}>
             <h2>{text.verantwoording.title}</h2>
             <p>{text.verantwoording.paragraaf}</p>
-            <dl className={styles.faqList}>
+            <article className={styles.faqList}>
               {text.verantwoording.cijfers.map((item: ICijfer) => (
                 <Fragment key={`item-${item.cijfer}`}>
-                  <dt>{item.cijfer}</dt>
-                  <dd
+                  <h3>{item.cijfer}</h3>
+                  <div
                     dangerouslySetInnerHTML={{
                       __html: item.verantwoording,
                     }}
-                  ></dd>
+                  />
                 </Fragment>
               ))}
-            </dl>
+            </article>
           </div>
         </MaxWidth>
       </div>

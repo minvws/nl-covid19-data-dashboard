@@ -71,12 +71,12 @@ const Over: FunctionComponentWithLayout<{ text: any }> = (props) => {
             <h2>{text.over_disclaimer.title}</h2>
             <p>{text.over_disclaimer.text}</p>
             <h2>{text.over_veelgestelde_vragen.text}</h2>
-            <dl className={styles.faqList}>
+            <article className={styles.faqList}>
               {text.over_veelgestelde_vragen.vragen.map(
                 (item: IVraagEnAntwoord) => (
                   <Fragment key={`item-${item.vraag}`}>
-                    <dt>{item.vraag}</dt>
-                    <dd
+                    <h3>{item.vraag}</h3>
+                    <div
                       dangerouslySetInnerHTML={{
                         __html: item.antwoord,
                       }}
@@ -84,7 +84,7 @@ const Over: FunctionComponentWithLayout<{ text: any }> = (props) => {
                   </Fragment>
                 )
               )}
-            </dl>
+            </article>
           </div>
         </MaxWidth>
       </div>
