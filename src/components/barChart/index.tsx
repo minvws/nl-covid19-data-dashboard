@@ -8,7 +8,9 @@ interface IProps {
   axisTitle: string;
 }
 
-const BarChart: React.FC<IProps> = (props) => {
+export default BarChart;
+
+function BarChart(props: IProps) {
   const { data, keys, axisTitle } = props;
 
   const options = useMemo<HighCharts.Options>(
@@ -68,6 +70,4 @@ const BarChart: React.FC<IProps> = (props) => {
   );
 
   return <HighChartsReact highcharts={HighCharts} options={options} />;
-};
-
-export default BarChart;
+}

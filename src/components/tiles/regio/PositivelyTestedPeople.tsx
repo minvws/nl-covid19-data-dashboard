@@ -23,7 +23,9 @@ interface IProps {
   selectedRegio: SafetyRegion | undefined;
 }
 
-const PostivelyTestedPeople: React.FC<IProps> = (props) => {
+export default PostivelyTestedPeople;
+
+function PostivelyTestedPeople(props: IProps) {
   const { selectedRegio, data } = props;
 
   return (
@@ -122,6 +124,4 @@ const PostivelyTestedPeople: React.FC<IProps> = (props) => {
       )}
     </GraphContainer>
   );
-};
-
-export default PostivelyTestedPeople;
+}

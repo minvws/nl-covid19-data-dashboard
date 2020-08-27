@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import Head from 'next/head';
 
 import { getLayout, FCWithLayout } from 'components/layout';
@@ -8,8 +9,16 @@ import siteText from 'locale';
 
 import MDToHTMLString from 'utils/MDToHTMLString';
 
-import openGraphImage from 'assets/sharing/og-cijferverantwoording.png?url';
-import twitterImage from 'assets/sharing/twitter-cijferverantwoording.png?url';
+import openGraphImageNL from 'assets/sharing/og-cijferverantwoording.png?url';
+import twitterImageNL from 'assets/sharing/twitter-cijferverantwoording.png?url';
+import openGraphImageEN from 'assets/sharing/og-data-explanation.png?url';
+import twitterImageEN from 'assets/sharing/twitter-data-explanation.png?url';
+import getLocale from 'utils/getLocale';
+
+const locale = getLocale();
+
+const openGraphImage = locale === 'nl' ? openGraphImageNL : openGraphImageEN;
+const twitterImage = locale === 'nl' ? twitterImageNL : twitterImageEN;
 
 interface ICijfer {
   cijfer: string;
@@ -22,13 +31,6 @@ interface StaticProps {
   };
 }
 
-// We use lokalise.com as our dictionary/text source and to support internationalisation.
-// Lokakise will output JSON files which can be found in `src/locale`.
-// However, all content lives inside plain strings. To support structured content and newlines,
-// we (optionally) write markdown in Lokakise and parse it to HTML.
-//
-// Ideally this entire page would have been build from markdown, but that’s not possible
-// with our internationalisation setup.
 export async function getStaticProps(): Promise<StaticProps> {
   const text = require('../locale/index').default;
   const serializedContent = text.verantwoording.cijfers.map(function (
@@ -68,14 +70,14 @@ const Verantwoording: FCWithLayout<{ text: any }> = (props) => {
             <p>{text.verantwoording.paragraaf}</p>
             <dl className={styles.faqList}>
               {text.verantwoording.cijfers.map((item: ICijfer) => (
-                <>
+                <Fragment key={`item-${item.cijfer}`}>
                   <dt>{item.cijfer}</dt>
                   <dd
                     dangerouslySetInnerHTML={{
                       __html: item.verantwoording,
                     }}
                   ></dd>
-                </>
+                </Fragment>
               ))}
             </dl>
           </div>

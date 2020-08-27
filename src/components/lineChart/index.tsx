@@ -21,6 +21,8 @@ type LineChartProps = {
   timeframeOptions?: TimeframeOption[];
 };
 
+export default LineChart;
+
 function getOptions(
   values: Value[],
   signaalwaarde?: number | undefined
@@ -121,11 +123,11 @@ function getOptions(
   return options;
 }
 
-const LineChart: React.FC<LineChartProps> = ({
+function LineChart({
   values,
   signaalwaarde,
   timeframeOptions,
-}) => {
+}: LineChartProps) {
   const [timeframe, setTimeframe] = useState<TimeframeOption>('5weeks');
 
   const chartOptions = useMemo(() => {
@@ -151,6 +153,4 @@ const LineChart: React.FC<LineChartProps> = ({
       />
     </>
   );
-};
-
-export default LineChart;
+}

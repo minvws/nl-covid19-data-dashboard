@@ -5,8 +5,17 @@ import { getLayout, FCWithLayout } from 'components/layout';
 
 import siteText from 'locale';
 
-import openGraphImage from 'assets/sharing/og-landelijke-cijfers.png?url';
-import twitterImage from 'assets/sharing/twitter-landelijke-cijfers.png?url';
+import openGraphImageNL from 'assets/sharing/og-landelijke-cijfers.png?url';
+import twitterImageNL from 'assets/sharing/twitter-landelijke-cijfers.png?url';
+
+import openGraphImageEN from 'assets/sharing/og-national.png?url';
+import twitterImageEN from 'assets/sharing/twitter-national.png?url';
+
+import getLocale from 'utils/getLocale';
+
+const locale = getLocale();
+const openGraphImage = locale === 'nl' ? openGraphImageNL : openGraphImageEN;
+const twitterImage = locale === 'nl' ? twitterImageNL : twitterImageEN;
 
 const Home: FCWithLayout = () => {
   return (
