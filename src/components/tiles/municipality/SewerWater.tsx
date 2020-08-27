@@ -10,7 +10,7 @@ import RegionalSewerWaterLineChart from 'components/lineChart/regionalSewerWater
 
 import siteText from 'locale';
 
-import { Regionaal } from 'types/data';
+import { RegionaalMunicipality } from 'types/data';
 import BarChart from 'components/barChart';
 import { MunicipalityMapping, RegioDataLoading } from 'pages/regio/index';
 import formatDate from 'utils/formatDate';
@@ -18,7 +18,7 @@ import formatNumber from 'utils/formatNumber';
 import LoadingPlaceholder from 'components/loadingPlaceholder';
 
 interface IProps {
-  data: Regionaal;
+  data: RegionaalMunicipality;
   selectedRegio: MunicipalityMapping | undefined;
 }
 
@@ -97,7 +97,7 @@ export const SewerWaterMunicipality: React.FC<IProps> = ({
                 <h4>{text.graph_title}</h4>
                 <RegionalSewerWaterLineChart
                   averageValues={data?.sewer_measurements?.values.map(
-                    (value) => {
+                    (value: any) => {
                       return {
                         ...value,
                         value: value.average,

@@ -12,14 +12,14 @@ import Getest from 'assets/test.svg';
 
 import { MunicipalityMapping, RegioDataLoading } from 'pages/regio/index';
 
-import { Regionaal, RegionaalValue } from 'types/data';
+import { RegionaalMunicipality, PositiveTestedPeople } from 'types/data';
 
 import siteText from 'locale';
 
 import formatNumber from 'utils/formatNumber';
 
 interface IProps {
-  data: Regionaal;
+  data: RegionaalMunicipality;
   selectedRegio: MunicipalityMapping | undefined;
 }
 
@@ -107,7 +107,7 @@ export const PostivelyTestedPeopleMunicipality: React.FC<IProps> = (props) => {
           {data?.positive_tested_people?.values && (
             <LineChart
               values={data.positive_tested_people.values.map(
-                (value: RegionaalValue) => ({
+                (value: PositiveTestedPeople) => ({
                   value: value.infected_daily_total,
                   date: value.date_of_report_unix,
                 })
