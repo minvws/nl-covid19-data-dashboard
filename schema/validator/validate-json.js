@@ -4,17 +4,13 @@ const path = require('path');
 const SchemaValidator = require('./schemaValidator');
 
 const jsonBasePath = path.join(__dirname, '../../public/json/');
-
-const safetyRegions = [];
-for (let i = 1, ii = 26; i < ii; i++) {
-  safetyRegions.push(`VR${i.toString().padStart(2, '0')}.json`);
-}
+const allJsonFiles = fs.readdirSync(jsonBasePath);
 
 const schemas = {
   national: ['NL.json'],
   ranges: ['RANGES.json'],
-  regional: safetyRegions,
-  municipal: ['GM0014.json'],
+  regional: filterFilenames(allJsonFiles, new RegExp('^VR[0-9]+\\.json$')),
+  municipal: filterFilenames(allJsonFiles, new RegExp('^GM[0-9]+\\.json$')),
 };
 
 const results = Object.keys(schemas).reduce((aggr, schemaName) => {
@@ -64,4 +60,8 @@ function validate(schemaName, fileNames) {
         return false;
       });
   });
+}
+
+function filterFilenames(fileList, pattern) {
+  return fileList.filter((filename) => filename.match(pattern));
 }
