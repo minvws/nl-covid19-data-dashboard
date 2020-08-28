@@ -2,11 +2,11 @@
 const fs = require('fs');
 const path = require('path');
 const { compile } = require('json-schema-to-typescript');
-
-const outputPath = path.join(__dirname, '../../src/types');
-
 const SchemaValidator = require('./schemaValidator');
 const getSchemaNames = require('./getSchemaNames');
+
+// The directory where the resulting data.d.ts file will be saved
+const outputPath = path.join(__dirname, '../../src/types');
 
 const schemaNames = getSchemaNames();
 
@@ -27,6 +27,8 @@ function generateTypeScriptFromSchema(schemaName) {
     path.join(__dirname, `../${schemaName}/${schemaName}.json`)
   );
 
+  // Sets the current working directory (cwd) to the schema directory, in order
+  // for the typescript generator to properly resolve external references
   const generateOptions = {
     cwd: path.join(__dirname, `../${schemaName}/`),
   };
