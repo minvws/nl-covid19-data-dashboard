@@ -10,9 +10,18 @@ const getSchemaNames = require('./getSchemaNames');
 
 const schemaNames = getSchemaNames();
 
-const generatedTypescript = [];
-schemaNames.forEach(generateTypeScriptFromSchema);
+const promises = schemaNames.map(generateTypeScriptFromSchema);
 
+Promise.all(promises).then((result) => {
+  saveFile(result.join('\n'));
+});
+
+/**
+ * Loads the given schema by name and generates typescript interfaces from it.
+ *
+ * @param {string} schemaName the given schema name
+ * @returns {Promise} A Promise that will resolve to the generated typescript
+ */
 function generateTypeScriptFromSchema(schemaName) {
   const validator = new SchemaValidator(
     path.join(__dirname, `../${schemaName}/${schemaName}.json`)
@@ -22,13 +31,10 @@ function generateTypeScriptFromSchema(schemaName) {
     cwd: path.join(__dirname, `../${schemaName}/`),
   };
 
-  validator.init().then((validate) => {
-    compile(validate.schema, schemaName, generateOptions).then((ts) => {
-      generatedTypescript.push(ts);
+  return validator.init().then((validate) => {
+    return compile(validate.schema, schemaName, generateOptions).then((ts) => {
       console.info(`Generated typescript for schema '${schemaName}'`);
-      if (generatedTypescript.length === schemaNames.length) {
-        saveFile(generatedTypescript.join('\n'));
-      }
+      return ts;
     });
   });
 }
