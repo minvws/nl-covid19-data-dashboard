@@ -29,11 +29,9 @@ const text: typeof siteText.besmettelijke_personen =
   siteText.besmettelijke_personen;
 
 export function InfectiousPeopleBarScale(props: {
-  data: InfectiousPeopleCountNormalized | undefined;
+  data: InfectiousPeopleCountNormalized;
 }) {
   const { data } = props;
-
-  if (!data) return null;
 
   return (
     <BarScale
@@ -58,8 +56,8 @@ interface IProps {
 }
 
 const InfectiousPeople: FCWithLayout<IProps> = ({ data }) => {
-  const count: InfectiousPeopleCount | undefined = data.infectious_people_count;
-  const countNormalized: InfectiousPeopleCountNormalized | undefined =
+  const count: InfectiousPeopleCount = data.infectious_people_count;
+  const countNormalized: InfectiousPeopleCountNormalized =
     data.infectious_people_count_normalized;
 
   return (
