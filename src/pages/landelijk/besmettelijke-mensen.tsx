@@ -22,6 +22,7 @@ import siteText from 'locale';
 import {
   InfectiousPeopleCount,
   InfectiousPeopleCountNormalized,
+  National,
 } from 'types/data';
 
 const text: typeof siteText.besmettelijke_personen =
@@ -52,11 +53,14 @@ export function InfectiousPeopleBarScale(props: {
   );
 }
 
-const InfectiousPeople: FCWithLayout = ({ data }) => {
-  const count: InfectiousPeopleCount | undefined =
-    data?.infectious_people_count;
+interface IProps {
+  data: National;
+}
+
+const InfectiousPeople: FCWithLayout<IProps> = ({ data }) => {
+  const count: InfectiousPeopleCount | undefined = data.infectious_people_count;
   const countNormalized: InfectiousPeopleCountNormalized | undefined =
-    data?.infectious_people_count_normalized;
+    data.infectious_people_count_normalized;
 
   return (
     <>
@@ -126,9 +130,8 @@ InfectiousPeople.getLayout = getNationalLayout();
 
 // This function gets called at build time on server-side.
 // It won't be called on client-side.
-export const getStaticProps: GetStaticProps = async () => {
-  const jsonDirectory = path.join(process.cwd(), 'public/json');
-  const filePath = path.join(jsonDirectory, 'NL.json');
+export const getStaticProps: GetStaticProps<IProps> = async () => {
+  const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
   const fileContents = fs.readFileSync(filePath, 'utf8');
 
   return {
