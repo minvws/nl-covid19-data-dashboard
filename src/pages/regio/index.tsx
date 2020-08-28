@@ -60,7 +60,7 @@ type RegioStaticProps = {
   };
 };
 
-export type RegionType = 'municipality' | 'safetyRegion';
+export type RegionType = 'municipality' | 'safetyRegion' | null;
 
 export async function getStaticProps(): Promise<RegioStaticProps> {
   const municipalityMapping = require('../../data/gemeente_veiligheidsregio.json');
@@ -113,23 +113,28 @@ export const RegioNoData: React.FC = () => {
   );
 };
 
-let regionType: RegionType = 'municipality';
 let lastKnownGemcode: string | null = null;
 
 const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
   const { municipalities, safetyRegions } = props;
+  let regionType: RegionType = null;
 
   // Toggle region type between municipality and safety region
   const setRegionType = (event: any): void => {
     let query = null;
-    regionType = event?.currentTarget?.value;
+    const targetRegionType = event?.currentTarget?.value;
 
-    // Recover last known municipality in case we switch back from
-    // safety region to municipality
-    if (lastKnownGemcode) {
-      if (regionType === 'municipality') {
+    // Detect if can be scaled up / down to a known last municipality
+    if (targetRegionType === 'municipality') {
+      query = { regio: 'GM' };
+      if (lastKnownGemcode) {
+        // Coming from safety region to municipality: select the known region
         query = { regio: lastKnownGemcode };
-      } else {
+      }
+    } else {
+      query = { regio: 'VR' };
+      if (lastKnownGemcode) {
+        // Look up the municipality. If found, go to the safety region linked to it
         const municipalityMatch = municipalities.find(
           (municipality: MunicipalityMapping) =>
             municipality.gemcode === lastKnownGemcode
@@ -163,6 +168,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
     );
   };
 
+  // Select municipality from the dropdown menu
   const setSelectedMunicipality = (
     selectedRegio: MunicipalityMapping
   ): void => {
@@ -183,43 +189,56 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
 
   const router = useRouter();
 
-  // Recover selected regio from URL param
-  // can also set the region type to match
-  const selectedRegio = useMemo(() => {
+  // Retrieve the proper region properties:
+  // * regionType
+  // * selectedRegio
+  const regionProperties = useMemo((): {
+    regionType: RegionType;
+    selectedRegio: MunicipalityMapping | SafetyRegion | null | undefined;
+  } => {
     const selectedRegioCode = router.query?.regio;
+
+    if (!selectedRegioCode) {
+      return { regionType: 'municipality', selectedRegio: null };
+    }
+
     if (selectedRegioCode?.indexOf('GM') === 0) {
-      regionType = 'municipality';
-      return (
-        municipalities.find(
-          (municipality) => municipality.gemcode === selectedRegioCode
-        ) || undefined
-      );
+      return {
+        regionType: 'municipality',
+        selectedRegio:
+          municipalities.find(
+            (municipality) => municipality.gemcode === selectedRegioCode
+          ) || null,
+      };
+    }
+
+    if (selectedRegioCode === 'VR') {
+      return { regionType: 'safetyRegion', selectedRegio: null };
     }
 
     // safety region
-    const region = selectedRegioCode
+    const selectedSafetyRegion = selectedRegioCode
       ? safetyRegions.find((el) => el.code === selectedRegioCode)
-      : undefined;
+      : null;
 
     // reset the last known gemcode when we select a safety region that is outside the municipality
     // keep it if the municipality is inside the safety region
-    if (region) {
-      regionType = 'safetyRegion';
-    }
-    if (region && lastKnownGemcode) {
+    if (selectedSafetyRegion && lastKnownGemcode) {
       const lastKnownMunicipality = municipalities.find(
         (municipality) => municipality.gemcode === lastKnownGemcode
       );
       if (
         lastKnownMunicipality &&
-        lastKnownMunicipality.safetyRegion !== region.code
+        lastKnownMunicipality.safetyRegion !== selectedSafetyRegion.code
       ) {
         lastKnownGemcode = null;
       }
     }
-    // return { regionType: 'safetyRegion', selectedRegio: region };
-    return region;
+    return { regionType: 'safetyRegion', selectedRegio: selectedSafetyRegion };
   }, [router.query?.regio, safetyRegions, municipalities]);
+
+  const { selectedRegio } = regionProperties;
+  regionType = regionProperties.regionType;
 
   const contentRef = useRef(null);
   const selectRegioWrapperRef = useRef(null);
@@ -277,6 +296,8 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
   const data: Regionaal | RegionaalMunicipality = response.data;
   const text: typeof siteText.regionaal_index = siteText.regionaal_index;
 
+  const id = useMemo(() => Math.random().toString(36).substr(2), []);
+
   useEffect(focusFirstHeading, [data]);
 
   return (
@@ -290,23 +311,24 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
             <div className={styles['select-region-type']}>
               <input
                 onChange={setRegionType}
-                id="regionType-municipality"
+                id={`regionType-municipality-${id}`}
                 type="radio"
-                name="regionType"
+                name={`regionType-${id}`}
                 value="municipality"
-                defaultChecked={true}
+                checked={regionType === 'municipality'}
               />
-              <label htmlFor="regionType-municipality">
+              <label htmlFor={`regionType-municipality-${id}`}>
                 {text.label_municipalities}
               </label>{' '}
               <input
                 onChange={setRegionType}
-                id="regionType-safetyRegion"
+                id={`regionType-safetyRegion-${id}`}
                 type="radio"
-                name="regionType"
+                name={`regionType-${id}`}
                 value="safetyRegion"
+                checked={regionType === 'safetyRegion'}
               />
-              <label htmlFor="regionType-safetyRegion">
+              <label htmlFor={`regionType-safetyRegion-${id}`}>
                 {text.label_safety_regions}
               </label>
             </div>
