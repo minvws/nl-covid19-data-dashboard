@@ -1,4 +1,7 @@
-import useSWR from 'swr';
+import fs from 'fs';
+import path from 'path';
+
+import { GetStaticProps } from 'next';
 import Link from 'next/link';
 
 import BarScale from 'components/barScale';
@@ -49,9 +52,7 @@ export function InfectiousPeopleBarScale(props: {
   );
 }
 
-const InfectiousPeople: FCWithLayout = () => {
-  const { data } = useSWR(`/json/NL.json`);
-
+const InfectiousPeople: FCWithLayout = ({ data }) => {
   const count: InfectiousPeopleCount | undefined =
     data?.infectious_people_count;
   const countNormalized: InfectiousPeopleCountNormalized | undefined =
@@ -122,5 +123,19 @@ const InfectiousPeople: FCWithLayout = () => {
 };
 
 InfectiousPeople.getLayout = getNationalLayout();
+
+// This function gets called at build time on server-side.
+// It won't be called on client-side.
+export const getStaticProps: GetStaticProps = async () => {
+  const jsonDirectory = path.join(process.cwd(), 'public/json');
+  const filePath = path.join(jsonDirectory, 'NL.json');
+  const fileContents = fs.readFileSync(filePath, 'utf8');
+
+  return {
+    props: {
+      data: JSON.parse(fileContents),
+    },
+  };
+};
 
 export default InfectiousPeople;
