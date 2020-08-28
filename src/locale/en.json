@@ -251,6 +251,9 @@
   "geen_selectie": {
     "text": "Select your region at the top of this page"
   },
+  "no_data_for_this_municipality": {
+    "text": "Deze informatie is niet beschikbaar voor deze gemeente."
+  },
   "rioolwater_metingen": {
     "title": "Sewage water examination",
     "text": "Number of virus particles in one milliliter of sewage water, collected from about 80 sites in the Netherlands. The national value is based on the total number of virus particles that is found in a week, divided by the number of sites where the data is collected. From September onwards, the number of sampling sites will be increased to more than 300.",

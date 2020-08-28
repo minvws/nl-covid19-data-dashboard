@@ -102,6 +102,17 @@ export const RegioDataLoading: React.FC = () => {
   );
 };
 
+export const RegioNoData: React.FC = () => {
+  return (
+    <div className={styles['data-not-available']}>
+      <span>
+        <Warning aria-hidden />
+      </span>
+      <p>{siteText.no_data_for_this_municipality.text}</p>
+    </div>
+  );
+};
+
 let regionType: RegionType = 'municipality';
 let lastKnownGemcode: string | null = null;
 

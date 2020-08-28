@@ -10,12 +10,22 @@ import RegionalSewerWaterLineChart from 'components/lineChart/regionalSewerWater
 
 import siteText from 'locale';
 
-import { RegionaalMunicipality } from 'types/data';
+import {
+  RegionaalMunicipality,
+  ValueLastValue,
+  SewerMeasurementsLastValue,
+  MunicipalitySewerInstallationValue,
+} from 'types/data';
 import BarChart from 'components/barChart';
-import { MunicipalityMapping, RegioDataLoading } from 'pages/regio/index';
+import {
+  MunicipalityMapping,
+  RegioDataLoading,
+  RegioNoData,
+} from 'pages/regio/index';
 import formatDate from 'utils/formatDate';
 import formatNumber from 'utils/formatNumber';
 import LoadingPlaceholder from 'components/loadingPlaceholder';
+import replaceVariablesInText from 'utils/replaceVariablesInText';
 
 interface IProps {
   data: RegionaalMunicipality;
@@ -29,12 +39,69 @@ export const SewerWaterMunicipality: React.FC<IProps> = ({
   const text: typeof siteText.regionaal_municipality_rioolwater_metingen =
     siteText.regionaal_municipality_rioolwater_metingen;
 
-  const orderedSewerInstallations =
-    data?.results_per_sewer_installation_per_municipality?.values?.sort(
-      (a, b) => {
-        return b?.last_value?.rna_per_ml - a?.last_value?.rna_per_ml;
-      }
-    ) || [];
+  const averagesAvailable = !!data?.sewer_measurements?.last_value;
+  const dataAvailable =
+    data?.results_per_sewer_installation_per_municipality?.values?.length !==
+      0 || averagesAvailable;
+
+  let barScaleData: ValueLastValue | SewerMeasurementsLastValue | undefined;
+  let barScaleValue: number | undefined;
+  let barScaleUnix: number | undefined;
+  let orderedSewerInstallations: MunicipalitySewerInstallationValue[] = [];
+  let averageValues: ValueLastValue[] | SewerMeasurementsLastValue[] = [];
+  let allValues: MunicipalitySewerInstallationValue[] = [];
+  let onlyOneRwzi = false;
+  let averageValueKey: 'rna_per_ml' | 'average';
+  let averageDateKey: 'week_unix' | 'date_measurement_unix';
+  let averageLabelText = '';
+
+  if (dataAvailable) {
+    onlyOneRwzi =
+      data?.results_per_sewer_installation_per_municipality?.values?.length ===
+      1;
+
+    if (onlyOneRwzi) {
+      barScaleData =
+        data?.results_per_sewer_installation_per_municipality?.values[0]
+          .last_value;
+      barScaleValue = barScaleData?.rna_per_ml;
+      barScaleUnix = barScaleData?.date_measurement_unix;
+
+      averageValues =
+        data?.results_per_sewer_installation_per_municipality?.values[0]
+          .values || [];
+      allValues = [];
+      averageValueKey = 'rna_per_ml';
+      averageDateKey = 'date_measurement_unix';
+      averageLabelText = replaceVariablesInText(
+        text.graph_average_label_text_rwzi,
+        {
+          name:
+            data?.results_per_sewer_installation_per_municipality?.values[0]
+              .last_value.rwzi_awzi_name,
+        }
+      );
+    } else {
+      barScaleData = data?.sewer_measurements?.last_value;
+
+      barScaleValue = barScaleData?.average;
+      barScaleUnix = barScaleData?.week_unix;
+
+      orderedSewerInstallations =
+        data?.results_per_sewer_installation_per_municipality?.values?.sort(
+          (a, b) => {
+            return b?.last_value?.rna_per_ml - a?.last_value?.rna_per_ml;
+          }
+        ) || [];
+
+      averageValues = data?.sewer_measurements?.values || [];
+      allValues =
+        data?.results_per_sewer_installation_per_municipality?.values || [];
+      averageValueKey = 'average';
+      averageDateKey = 'week_unix';
+      averageLabelText = text.graph_average_label_text;
+    }
+  }
 
   return (
     <GraphContainer>
@@ -49,15 +116,17 @@ export const SewerWaterMunicipality: React.FC<IProps> = ({
 
         {!selectedRegio && <RegioDataLoading />}
 
-        {selectedRegio && (
+        {!dataAvailable && <RegioNoData />}
+
+        {selectedRegio && dataAvailable && (
           <>
-            {!data?.sewer_measurements?.last_value && <LoadingPlaceholder />}
-            {data?.sewer_measurements?.last_value && (
+            {!barScaleData && <LoadingPlaceholder />}
+            {barScaleData && (
               <BarScale
                 min={0}
                 max={100}
                 screenReaderText={text.screen_reader_graph_content}
-                value={Number(data.sewer_measurements.last_value.average)}
+                value={Number(barScaleValue)}
                 id="rioolwater_metingen"
                 rangeKey="average"
                 gradient={[
@@ -71,18 +140,16 @@ export const SewerWaterMunicipality: React.FC<IProps> = ({
           </>
         )}
 
-        {data?.sewer_measurements?.last_value && (
+        {barScaleData && dataAvailable && (
           <DateReported
             datumsText={text.datums}
-            dateInsertedUnix={
-              data.sewer_measurements.last_value.date_of_insertion_unix
-            }
-            dateUnix={data.sewer_measurements.last_value.week_unix}
+            dateInsertedUnix={barScaleData.date_of_insertion_unix}
+            dateUnix={barScaleUnix}
           />
         )}
       </GraphContent>
 
-      {selectedRegio && (
+      {selectedRegio && dataAvailable && (
         <Collapse
           openText={text.open}
           sluitText={text.sluit}
@@ -91,77 +158,84 @@ export const SewerWaterMunicipality: React.FC<IProps> = ({
         >
           <h4>{text.fold_title}</h4>
           <p>{text.fold}</p>
-          {data?.sewer_measurements?.values &&
-            data?.results_per_sewer_installation_per_municipality?.values && (
-              <>
-                <h4>{text.graph_title}</h4>
-                <RegionalSewerWaterLineChart
-                  averageValues={data?.sewer_measurements?.values.map(
-                    (value: any) => {
-                      return {
-                        ...value,
-                        value: value.average,
-                        date: value.week_unix,
-                      };
-                    }
-                  )}
-                  allValues={data.results_per_sewer_installation_per_municipality.values.map(
-                    (installation) => {
-                      return installation?.values
-                        .map((value) => {
-                          return {
-                            ...value,
-                            value: value.rna_per_ml || 0,
-                            date: value.date_measurement_unix,
-                          };
-                        })
-                        .sort((a, b) => b.date - a.date);
-                    }
-                  )}
-                  text={{
-                    average_label_text: text.graph_average_label_text,
-                    secondary_label_text: text.graph_secondary_label_text,
-                  }}
-                />
-                <h4>{text.bar_chart_title}</h4>
-                <BarChart
-                  keys={[
-                    text.average,
-                    ...orderedSewerInstallations.map(
-                      (installation) => installation?.last_value?.rwzi_awzi_name
-                    ),
-                  ]}
-                  data={[
-                    {
-                      y: data.sewer_measurements.last_value.average,
-                      color: '#3391CC',
-                      label: `${formatDate(
-                        data.sewer_measurements.last_value.week_unix * 1000,
-                        'short'
-                      )}: ${formatNumber(
-                        data.sewer_measurements.last_value.average
-                      )}`,
-                    },
-                    ...orderedSewerInstallations.map((installation) => ({
-                      y: installation?.last_value?.rna_per_ml,
-                      color: '#C1C1C1',
-                      label: installation?.last_value
-                        ? `${formatDate(
-                            installation.last_value.date_measurement_unix *
-                              1000,
-                            'short'
-                          )}: ${formatNumber(
-                            installation.last_value.rna_per_ml
-                          )}`
-                        : false,
-                    })),
-                  ]}
-                  axisTitle={text.bar_chart_axis_title}
-                />
+          {averageValues && allValues && (
+            <>
+              <h4>
+                {text.graph_title}
+                {String(onlyOneRwzi)}
+              </h4>
+              <RegionalSewerWaterLineChart
+                averageValues={averageValues
+                  .map((value: any) => {
+                    return {
+                      ...value,
+                      value: value[averageValueKey],
+                      date: value[averageDateKey],
+                    };
+                  })
+                  .sort((a: any, b: any) => b.date - a.date)}
+                allValues={allValues.map(
+                  (installation: MunicipalitySewerInstallationValue) => {
+                    return installation?.values
+                      .map((value) => {
+                        return {
+                          ...value,
+                          value: value.rna_per_ml || 0,
+                          date: value.date_measurement_unix,
+                        };
+                      })
+                      .sort((a, b) => b.date - a.date);
+                  }
+                )}
+                text={{
+                  average_label_text: averageLabelText,
+                  secondary_label_text: text.graph_secondary_label_text,
+                }}
+              />
+              {orderedSewerInstallations && averagesAvailable && (
+                <>
+                  <h4>{text.bar_chart_title}</h4>
+                  <BarChart
+                    keys={[
+                      text.average,
+                      ...orderedSewerInstallations.map(
+                        (installation) =>
+                          installation?.last_value?.rwzi_awzi_name
+                      ),
+                    ]}
+                    data={[
+                      {
+                        y: data?.sewer_measurements?.last_value.average,
+                        color: '#3391CC',
+                        label: `${formatDate(
+                          data.sewer_measurements.last_value.week_unix * 1000,
+                          'short'
+                        )}: ${formatNumber(
+                          data.sewer_measurements.last_value.average
+                        )}`,
+                      },
+                      ...orderedSewerInstallations.map((installation) => ({
+                        y: installation?.last_value?.rna_per_ml,
+                        color: '#C1C1C1',
+                        label: installation?.last_value
+                          ? `${formatDate(
+                              installation.last_value.date_measurement_unix *
+                                1000,
+                              'short'
+                            )}: ${formatNumber(
+                              installation.last_value.rna_per_ml
+                            )}`
+                          : false,
+                      })),
+                    ]}
+                    axisTitle={text.bar_chart_axis_title}
+                  />
 
-                <Metadata dataSource={text.bron} />
-              </>
-            )}
+                  <Metadata dataSource={text.bron} />
+                </>
+              )}
+            </>
+          )}
         </Collapse>
       )}
     </GraphContainer>

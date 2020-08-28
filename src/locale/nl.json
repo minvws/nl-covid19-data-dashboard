@@ -251,6 +251,9 @@
   "geen_selectie": {
     "text": "Selecteer uw regio bovenaan deze pagina"
   },
+  "no_data_for_this_municipality": {
+    "text": "Deze informatie is niet beschikbaar voor deze gemeente."
+  },
   "rioolwater_metingen": {
     "title": "Rioolwatermeting",
     "text": "Het aantal virusdeeltjes in een milliliter rioolwater, afkomstig van circa 80 locaties in Nederland. Voor het landelijke cijfer wordt uitgegaan van het totaal aantal virusdeeltjes dat wordt aangetroffen in een week, gedeeld door het totaal aantal locaties waar de data van afkomstig is. Het aantal meetpunten wordt vanaf september verder uitgebreid naar meer dan 300.",
@@ -551,7 +554,8 @@
       "href": "https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater"
     },
     "graph_average_label_text": "Gemiddelde waarde van gemeten locaties.",
-    "graph_secondary_label_text": "Gemeten waarde per locatie."
+    "graph_secondary_label_text": "Gemeten waarde per locatie.",
+    "graph_average_label_text_rwzi": "Waarde van RWZI-locatie {{name}}"
   },
   "regionaal_index": {
     "label_municipalities": "Gemeentes",
