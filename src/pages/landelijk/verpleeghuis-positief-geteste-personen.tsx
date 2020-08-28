@@ -12,13 +12,13 @@ import Getest from 'assets/test.svg';
 
 import siteText from 'locale';
 
-import { DeceasedPeopleNurseryCountDaily } from 'types/data';
+import { National, InfectedPeopleNurseryCountDaily } from 'types/data';
 
 const text: typeof siteText.verpleeghuis_positief_geteste_personen =
   siteText.verpleeghuis_positief_geteste_personen;
 
 export function NursingHomeInfectedPeopleBarScale(props: {
-  data: DeceasedPeopleNurseryCountDaily | undefined;
+  data: InfectedPeopleNurseryCountDaily | undefined;
 }) {
   const { data } = props;
 
@@ -43,9 +43,9 @@ export function NursingHomeInfectedPeopleBarScale(props: {
 }
 
 const NursingHomeInfectedPeople: FCWithLayout = () => {
-  const { data: state } = useSWR(`/json/NL.json`);
+  const { data: state } = useSWR<National>(`/json/NL.json`);
 
-  const data: DeceasedPeopleNurseryCountDaily | undefined =
+  const data: InfectedPeopleNurseryCountDaily | undefined =
     state?.infected_people_nursery_count_daily;
 
   return (
