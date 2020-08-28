@@ -1,5 +1,5 @@
 export interface National {
-  last_generated: number;
+  last_generated: string;
   name: string;
   code: string;
   intake_share_age_groups: IntakeShareAgeGroups;
@@ -20,7 +20,7 @@ export interface National {
 
 export interface Regionaal {
   code: string;
-  last_generated: number;
+  last_generated: string;
   name: string;
   proto_name: string;
   results_per_region: {
@@ -226,7 +226,7 @@ export interface MunicipalityData extends MunicipalityMetrics {
 }
 
 export interface RegionaalMunicipality {
-  last_generated: string | string;
+  last_generated: string;
   proto_name: string;
   name: string;
   code: string;
