@@ -42,7 +42,9 @@ function generateTypeScriptFromSchema(schemaName) {
 }
 
 function saveFile(ts) {
-  fs.writeFileSync(path.join(outputPath, 'data.d.ts'), ts, {
+  const outputFile = path.join(outputPath, 'data.d.ts');
+  fs.writeFileSync(outputFile, ts, {
     encoding: 'utf8',
   });
+  console.info(`Written typescript output to file '${outputFile}'`);
 }
