@@ -26,6 +26,7 @@ import formatDate from 'utils/formatDate';
 import formatNumber from 'utils/formatNumber';
 import LoadingPlaceholder from 'components/loadingPlaceholder';
 import replaceVariablesInText from 'utils/replaceVariablesInText';
+import { XrangePointOptionsObject } from 'highcharts';
 
 interface IProps {
   data: RegionaalMunicipality;
@@ -207,13 +208,16 @@ export const SewerWaterMunicipality: React.FC<IProps> = ({
                       {
                         y: data?.sewer_measurements?.last_value.average,
                         color: '#3391CC',
-                        label: `${formatDate(
-                          data.sewer_measurements.last_value.week_unix * 1000,
-                          'short'
-                        )}: ${formatNumber(
-                          data.sewer_measurements.last_value.average
-                        )}`,
-                      },
+                        label: data?.sewer_measurements?.last_value
+                          ? `${formatDate(
+                              data.sewer_measurements.last_value.week_unix *
+                                1000,
+                              'short'
+                            )}: ${formatNumber(
+                              data.sewer_measurements.last_value.average
+                            )}`
+                          : false,
+                      } as XrangePointOptionsObject,
                       ...orderedSewerInstallations.map((installation) => ({
                         y: installation?.last_value?.rna_per_ml,
                         color: '#C1C1C1',
