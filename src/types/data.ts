@@ -8,7 +8,7 @@ export interface National {
   infected_people_total: InfectedPeopleTotal;
   infected_people_delta_normalized: InfectedPeopleDeltaNormalized;
   infectious_people_count: InfectiousPeopleCount;
-  infectious_people_count_normalized: InfectiousPeopleCount;
+  infectious_people_count_normalized: InfectiousPeopleCountNormalized;
   reproduction_index: ReproductionIndex;
   infected_people_nursery_count_daily: DeceasedPeopleNurseryCountDaily;
   deceased_people_nursery_count_daily: DeceasedPeopleNurseryCountDaily;

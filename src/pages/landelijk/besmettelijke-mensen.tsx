@@ -33,6 +33,8 @@ export function InfectiousPeopleBarScale(props: {
 }) {
   const { data } = props;
 
+  if (!data) return null;
+
   return (
     <BarScale
       min={0}
@@ -56,8 +58,8 @@ interface IProps {
 }
 
 const InfectiousPeople: FCWithLayout<IProps> = ({ data }) => {
-  const count: InfectiousPeopleCount = data.infectious_people_count;
-  const countNormalized: InfectiousPeopleCountNormalized =
+  const count: InfectiousPeopleCount | undefined = data.infectious_people_count;
+  const countNormalized: InfectiousPeopleCountNormalized | undefined =
     data.infectious_people_count_normalized;
 
   return (
