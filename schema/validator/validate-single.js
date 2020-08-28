@@ -1,6 +1,8 @@
+/* eslint no-console: 0 */
 const fs = require('fs');
 const path = require('path');
 const SchemaValidator = require('./schemaValidator');
+const getSchemaNames = require('./getSchemaNames');
 
 const jsonBasePath = path.join(__dirname, '../../public/json/');
 const validSchemaNames = getSchemaNames();
@@ -16,7 +18,7 @@ Where schema name must be one of these values: ${validSchemaNames.join(', ')}
 
 and json filename must a file present in the '${jsonBasePath}' directory.`
   );
-  return;
+  process.exit();
 }
 
 const schemaName = myArgs[0];
@@ -28,14 +30,14 @@ if (!validSchemaNames.includes(schemaName)) {
       ', '
     )}`
   );
-  return;
+  process.exit();
 }
 
 if (!fs.existsSync(path.join(jsonBasePath, jsonFileName))) {
   console.error(
     `Invalid json filename argument '${jsonFileName}', file does not exist in directory ${jsonBasePath}`
   );
-  return;
+  process.exit();
 }
 
 const validatorInstance = new SchemaValidator(
@@ -51,26 +53,15 @@ validatorInstance
   .then((validate) => {
     const valid = validate(data);
     if (!valid) {
-      // eslint-disable-next-line
       console.log('');
-      // eslint-disable-next-line
       console.error(validate.errors);
       throw new Error(`${jsonFileName} is invalid`);
     }
-    // eslint-disable-next-line
     console.log(`${jsonFileName} is valid`);
     return true;
   })
   .catch((e) => {
-    // eslint-disable-next-line
     console.error(e.message);
-    // eslint-disable-next-line
     console.log('');
     return false;
   });
-
-function getSchemaNames() {
-  const directoryPath = path.join(__dirname, '../');
-  const contents = fs.readdirSync(directoryPath);
-  return contents.filter((item) => item !== 'validator');
-}

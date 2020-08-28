@@ -1,3 +1,4 @@
+/* eslint no-console: 0 */
 const fs = require('fs');
 const path = require('path');
 const { compile } = require('json-schema-to-typescript');
@@ -5,8 +6,9 @@ const { compile } = require('json-schema-to-typescript');
 const outputPath = path.join(__dirname, '../../src/types');
 
 const SchemaValidator = require('./schemaValidator');
+const getSchemaNames = require('./getSchemaNames');
 
-const schemaNames = ['national', 'ranges', 'regional', 'municipal'];
+const schemaNames = getSchemaNames();
 
 const generatedTypescript = [];
 schemaNames.forEach(generateTypeScriptFromSchema);
@@ -23,7 +25,6 @@ function generateTypeScriptFromSchema(schemaName) {
   validator.init().then((validate) => {
     compile(validate.schema, schemaName, generateOptions).then((ts) => {
       generatedTypescript.push(ts);
-      // eslint-disable-next-line
       console.info(`Generated typescript for schema '${schemaName}'`);
       if (generatedTypescript.length === schemaNames.length) {
         saveFile(generatedTypescript.join('\n'));

@@ -1,3 +1,4 @@
+/* eslint no-console: 0 */
 const fs = require('fs');
 const path = require('path');
 const SchemaValidator = require('./schemaValidator');
@@ -27,7 +28,6 @@ Promise.all(results)
     if (validationResults.indexOf(false) > -1) {
       throw new Error('Validation errors occured...');
     }
-    // eslint-disable-next-line
     console.info('Validation finished...');
   })
   .catch((error) => {
@@ -51,20 +51,15 @@ function validate(schemaName, fileNames) {
       .then((validate) => {
         const valid = validate(data);
         if (!valid) {
-          // eslint-disable-next-line
           console.log('');
-          // eslint-disable-next-line
           console.error(validate.errors);
           throw new Error(`${fileName} is invalid`);
         }
-        // eslint-disable-next-line
         console.log(`${fileName} is valid`);
         return true;
       })
       .catch((e) => {
-        // eslint-disable-next-line
         console.error(e.message);
-        // eslint-disable-next-line
         console.log('');
         return false;
       });
