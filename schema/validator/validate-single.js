@@ -3,8 +3,8 @@ const fs = require('fs');
 const path = require('path');
 const SchemaValidator = require('./schemaValidator');
 const getSchemaNames = require('./getSchemaNames');
+const jsonBasePath = require('./jsonBasePath');
 
-const jsonBasePath = path.join(__dirname, '../../public/json/');
 const validSchemaNames = getSchemaNames();
 
 var myArgs = process.argv.slice(2);

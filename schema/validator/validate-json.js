@@ -2,8 +2,8 @@
 const fs = require('fs');
 const path = require('path');
 const SchemaValidator = require('./schemaValidator');
+const jsonBasePath = require('./jsonBasePath');
 
-const jsonBasePath = path.join(__dirname, '../../public/json/');
 const allJsonFiles = fs.readdirSync(jsonBasePath);
 
 // This struct defines which JSON files should be validated with which schema
@@ -44,7 +44,7 @@ Promise.all(results)
  */
 function validate(schemaName, fileNames) {
   const validatorInstance = new SchemaValidator(
-    path.join(__dirname, `../${schemaName}/${schemaName}.json`)
+    path.join(__dirname, '..', schemaName, `${schemaName}.json`)
   );
 
   return fileNames.map((fileName) => {

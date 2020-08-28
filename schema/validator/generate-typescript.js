@@ -6,7 +6,7 @@ const SchemaValidator = require('./schemaValidator');
 const getSchemaNames = require('./getSchemaNames');
 
 // The directory where the resulting data.d.ts file will be saved
-const outputPath = path.join(__dirname, '../../src/types');
+const outputPath = path.join(__dirname, '..', '..', 'src', 'types');
 
 const schemaNames = getSchemaNames();
 
@@ -24,13 +24,13 @@ Promise.all(promises).then((result) => {
  */
 function generateTypeScriptFromSchema(schemaName) {
   const validator = new SchemaValidator(
-    path.join(__dirname, `../${schemaName}/${schemaName}.json`)
+    path.join(__dirname, '..', schemaName, `${schemaName}.json`)
   );
 
   // Sets the current working directory (cwd) to the schema directory, in order
   // for the typescript generator to properly resolve external references
   const generateOptions = {
-    cwd: path.join(__dirname, `../${schemaName}/`),
+    cwd: path.join(__dirname, '..', schemaName),
   };
 
   return validator.init().then((validate) => {
