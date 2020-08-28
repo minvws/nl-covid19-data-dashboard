@@ -257,14 +257,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
       return null;
     }
     if (regionType === 'municipality') {
-      if (
-        ['GM0014', 'GM0037', 'GM0050'].includes(
-          (selectedRegio as MunicipalityMapping).gemcode
-        )
-      ) {
-        return `/json/${(selectedRegio as MunicipalityMapping).gemcode}.json`;
-      }
-      return '/json/GM0014.json';
+      return `/json/${(selectedRegio as MunicipalityMapping).gemcode}.json`;
     }
     return (selectedRegio as SafetyRegion).code
       ? `/json/${(selectedRegio as SafetyRegion).code}.json`

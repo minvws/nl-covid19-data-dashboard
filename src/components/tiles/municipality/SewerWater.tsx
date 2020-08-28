@@ -26,8 +26,8 @@ export const SewerWaterMunicipality: React.FC<IProps> = ({
   data,
   selectedRegio,
 }) => {
-  const text: typeof siteText.regionaal_rioolwater_metingen =
-    siteText.regionaal_rioolwater_metingen;
+  const text: typeof siteText.regionaal_municipality_rioolwater_metingen =
+    siteText.regionaal_municipality_rioolwater_metingen;
 
   const orderedSewerInstallations =
     data?.results_per_sewer_installation_per_municipality?.values?.sort(

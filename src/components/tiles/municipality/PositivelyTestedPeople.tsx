@@ -31,11 +31,13 @@ export const PostivelyTestedPeopleMunicipality: React.FC<IProps> = (props) => {
       <GraphContent>
         <GraphHeader
           Icon={Getest}
-          title={siteText.regionaal_positief_geteste_personen.title}
+          title={
+            siteText.regionaal_municipality_positief_geteste_personen.title
+          }
           regio={selectedRegio?.name}
         />
 
-        <p>{siteText.regionaal_positief_geteste_personen.text}</p>
+        <p>{siteText.regionaal_municipality_positief_geteste_personen.text}</p>
 
         {!selectedRegio && <RegioDataLoading />}
 
@@ -50,7 +52,7 @@ export const PostivelyTestedPeopleMunicipality: React.FC<IProps> = (props) => {
                   data.positive_tested_people.last_value.infected_daily_increase
                 }
                 screenReaderText={
-                  siteText.regionaal_positief_geteste_personen
+                  siteText.regionaal_municipality_positief_geteste_personen
                     .screen_reader_graph_content
                 }
                 id="regio_infecties"
@@ -67,7 +69,10 @@ export const PostivelyTestedPeopleMunicipality: React.FC<IProps> = (props) => {
             {data?.positive_tested_people && (
               <>
                 <h3>
-                  {siteText.regionaal_positief_geteste_personen.metric_title}{' '}
+                  {
+                    siteText.regionaal_municipality_positief_geteste_personen
+                      .metric_title
+                  }{' '}
                   <span style={{ color: '#01689b' }}>
                     {formatNumber(
                       data.positive_tested_people.last_value
@@ -77,7 +82,8 @@ export const PostivelyTestedPeopleMunicipality: React.FC<IProps> = (props) => {
                 </h3>
                 <DateReported
                   datumsText={
-                    siteText.regionaal_positief_geteste_personen.datums
+                    siteText.regionaal_municipality_positief_geteste_personen
+                      .datums
                   }
                   dateUnix={
                     data.positive_tested_people.last_value.date_of_report_unix
@@ -95,14 +101,30 @@ export const PostivelyTestedPeopleMunicipality: React.FC<IProps> = (props) => {
 
       {selectedRegio && (
         <Collapse
-          openText={siteText.regionaal_positief_geteste_personen.open}
-          sluitText={siteText.regionaal_positief_geteste_personen.sluit}
+          openText={
+            siteText.regionaal_municipality_positief_geteste_personen.open
+          }
+          sluitText={
+            siteText.regionaal_municipality_positief_geteste_personen.sluit
+          }
           piwikAction={selectedRegio.name}
           piwikName="Positief geteste mensen"
         >
-          <h4>{siteText.regionaal_positief_geteste_personen.fold_title}</h4>
-          <p>{siteText.regionaal_positief_geteste_personen.fold}</p>
-          <h4>{siteText.regionaal_positief_geteste_personen.graph_title}</h4>
+          <h4>
+            {
+              siteText.regionaal_municipality_positief_geteste_personen
+                .fold_title
+            }
+          </h4>
+          <p>
+            {siteText.regionaal_municipality_positief_geteste_personen.fold}
+          </p>
+          <h4>
+            {
+              siteText.regionaal_municipality_positief_geteste_personen
+                .graph_title
+            }
+          </h4>
 
           {data?.positive_tested_people?.values && (
             <LineChart
@@ -116,7 +138,9 @@ export const PostivelyTestedPeopleMunicipality: React.FC<IProps> = (props) => {
           )}
 
           <Metadata
-            dataSource={siteText.regionaal_positief_geteste_personen.bron}
+            dataSource={
+              siteText.regionaal_municipality_positief_geteste_personen.bron
+            }
           />
         </Collapse>
       )}

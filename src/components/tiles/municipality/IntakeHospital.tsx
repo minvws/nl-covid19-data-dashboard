@@ -30,12 +30,14 @@ export const IntakeHospitalMunicipality: React.FC<IProps> = (props) => {
       <GraphContent>
         <GraphHeader
           Icon={Ziekenhuis}
-          title={siteText.regionaal_ziekenhuisopnames_per_dag.title}
+          title={
+            siteText.regionaal_municipality_ziekenhuisopnames_per_dag.title
+          }
           headingRef={contentRef}
           regio={selectedRegio?.name}
         />
 
-        <p>{siteText.regionaal_ziekenhuisopnames_per_dag.text}</p>
+        <p>{siteText.regionaal_municipality_ziekenhuisopnames_per_dag.text}</p>
 
         {!selectedRegio && <RegioDataLoading />}
 
@@ -52,7 +54,7 @@ export const IntakeHospitalMunicipality: React.FC<IProps> = (props) => {
                     data.hospital_admissions.last_value.moving_average_hospital
                   }
                   screenReaderText={
-                    siteText.regionaal_ziekenhuisopnames_per_dag
+                    siteText.regionaal_municipality_ziekenhuisopnames_per_dag
                       .screen_reader_graph_content
                   }
                   id="regio_opnames"
@@ -66,7 +68,8 @@ export const IntakeHospitalMunicipality: React.FC<IProps> = (props) => {
                 />
                 <DateReported
                   datumsText={
-                    siteText.regionaal_ziekenhuisopnames_per_dag.datums
+                    siteText.regionaal_municipality_ziekenhuisopnames_per_dag
+                      .datums
                   }
                   dateUnix={
                     data.hospital_admissions.last_value?.date_of_report_unix
@@ -80,14 +83,30 @@ export const IntakeHospitalMunicipality: React.FC<IProps> = (props) => {
 
       {selectedRegio && (
         <Collapse
-          openText={siteText.regionaal_ziekenhuisopnames_per_dag.open}
-          sluitText={siteText.regionaal_ziekenhuisopnames_per_dag.sluit}
+          openText={
+            siteText.regionaal_municipality_ziekenhuisopnames_per_dag.open
+          }
+          sluitText={
+            siteText.regionaal_municipality_ziekenhuisopnames_per_dag.sluit
+          }
           piwikName="Ziekenhuisopnames per dag"
           piwikAction={selectedRegio.name}
         >
-          <h4>{siteText.regionaal_ziekenhuisopnames_per_dag.fold_title}</h4>
-          <p>{siteText.regionaal_ziekenhuisopnames_per_dag.fold}</p>
-          <h4>{siteText.regionaal_ziekenhuisopnames_per_dag.graph_title}</h4>
+          <h4>
+            {
+              siteText.regionaal_municipality_ziekenhuisopnames_per_dag
+                .fold_title
+            }
+          </h4>
+          <p>
+            {siteText.regionaal_municipality_ziekenhuisopnames_per_dag.fold}
+          </p>
+          <h4>
+            {
+              siteText.regionaal_municipality_ziekenhuisopnames_per_dag
+                .graph_title
+            }
+          </h4>
           {data?.hospital_admissions?.values && (
             <LineChart
               values={data.hospital_admissions.values.map(
@@ -99,7 +118,9 @@ export const IntakeHospitalMunicipality: React.FC<IProps> = (props) => {
             />
           )}
           <Metadata
-            dataSource={siteText.regionaal_ziekenhuisopnames_per_dag.bron}
+            dataSource={
+              siteText.regionaal_municipality_ziekenhuisopnames_per_dag.bron
+            }
           />
         </Collapse>
       )}
