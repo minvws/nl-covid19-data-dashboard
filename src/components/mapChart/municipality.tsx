@@ -3,7 +3,7 @@ import HighchartsReact from 'highcharts-react-official';
 
 import useSWR from 'swr';
 import { FeatureCollection, MultiPolygon } from 'geojson';
-import { useMemo, useRef, useEffect, Fragment } from 'react';
+import { useMemo, useRef, useEffect } from 'react';
 import { MunicipalityMapping } from 'pages/regio';
 
 import styles from './municipality.module.scss';
@@ -168,9 +168,7 @@ function MunicipalityMap(props: IProps): any {
         />
       </div>
     </div>
-  ) : (
-    <Fragment></Fragment>
-  );
+  ) : null;
 }
 
 export default MunicipalityMap;
