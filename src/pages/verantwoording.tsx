@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import Head from 'next/head';
 
 import Layout, { FunctionComponentWithLayout } from 'components/layout';
@@ -30,13 +31,6 @@ interface StaticProps {
   };
 }
 
-// We use lokalise.com as our dictionary/text source and to support internationalisation.
-// Lokakise will output JSON files which can be found in `src/locale`.
-// However, all content lives inside plain strings. To support structured content and newlines,
-// we (optionally) write markdown in Lokakise and parse it to HTML.
-//
-// Ideally this entire page would have been build from markdown, but that’s not possible
-// with our internationalisation setup.
 export async function getStaticProps(): Promise<StaticProps> {
   const text = require('../locale/index').default;
   const serializedContent = text.verantwoording.cijfers.map(function (
@@ -74,18 +68,18 @@ const Verantwoording: FunctionComponentWithLayout<{ text: any }> = (props) => {
           <div className={styles.maxwidth}>
             <h2>{text.verantwoording.title}</h2>
             <p>{text.verantwoording.paragraaf}</p>
-            <dl className={styles.faqList}>
+            <article className={styles.faqList}>
               {text.verantwoording.cijfers.map((item: ICijfer) => (
-                <>
-                  <dt>{item.cijfer}</dt>
-                  <dd
+                <Fragment key={`item-${item.cijfer}`}>
+                  <h3>{item.cijfer}</h3>
+                  <div
                     dangerouslySetInnerHTML={{
                       __html: item.verantwoording,
                     }}
-                  ></dd>
-                </>
+                  />
+                </Fragment>
               ))}
-            </dl>
+            </article>
           </div>
         </MaxWidth>
       </div>

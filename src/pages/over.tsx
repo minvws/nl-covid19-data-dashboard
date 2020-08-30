@@ -1,11 +1,13 @@
+import { Fragment } from 'react';
 import Head from 'next/head';
 
 import Layout, { FunctionComponentWithLayout } from 'components/layout';
 import MaxWidth from 'components/maxWidth';
 
-import text from 'locale';
 import styles from './over.module.scss';
-import ReplaceLinks from 'components/replaceLinks';
+import siteText from 'locale';
+
+import MDToHTMLString from 'utils/MDToHTMLString';
 
 import openGraphImageNL from 'assets/sharing/og-over.png?url';
 import twitterImageNL from 'assets/sharing/twitter-over.png?url';
@@ -23,7 +25,28 @@ interface IVraagEnAntwoord {
   antwoord: string;
 }
 
-const Over: FunctionComponentWithLayout = () => {
+interface StaticProps {
+  props: {
+    text: typeof siteText;
+  };
+}
+
+export async function getStaticProps(): Promise<StaticProps> {
+  const text = require('../locale/index').default;
+  const serializedContent = text.over_veelgestelde_vragen.vragen.map(function (
+    item: IVraagEnAntwoord
+  ) {
+    return { ...item, antwoord: MDToHTMLString(item.antwoord) };
+  });
+
+  text.over_veelgestelde_vragen.vragen = serializedContent;
+
+  return { props: { text } };
+}
+
+const Over: FunctionComponentWithLayout<{ text: any }> = (props) => {
+  const { text } = props;
+
   return (
     <>
       <Head>
@@ -48,18 +71,20 @@ const Over: FunctionComponentWithLayout = () => {
             <h2>{text.over_disclaimer.title}</h2>
             <p>{text.over_disclaimer.text}</p>
             <h2>{text.over_veelgestelde_vragen.text}</h2>
-            <dl className={styles.faqList}>
+            <article className={styles.faqList}>
               {text.over_veelgestelde_vragen.vragen.map(
                 (item: IVraagEnAntwoord) => (
-                  <>
-                    <dt>{item.vraag}</dt>
-                    <dd>
-                      <ReplaceLinks>{item.antwoord}</ReplaceLinks>
-                    </dd>
-                  </>
+                  <Fragment key={`item-${item.vraag}`}>
+                    <h3>{item.vraag}</h3>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: item.antwoord,
+                      }}
+                    />
+                  </Fragment>
                 )
               )}
-            </dl>
+            </article>
           </div>
         </MaxWidth>
       </div>
@@ -68,7 +93,7 @@ const Over: FunctionComponentWithLayout = () => {
 };
 
 Over.getLayout = Layout.getLayout({
-  ...text.over_metadata,
+  ...siteText.over_metadata,
   openGraphImage,
   twitterImage,
 });
