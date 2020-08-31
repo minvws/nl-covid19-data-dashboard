@@ -251,6 +251,9 @@
   "geen_selectie": {
     "text": "Selecteer uw regio bovenaan deze pagina"
   },
+  "no_data_for_this_municipality": {
+    "text": "Deze informatie is niet beschikbaar voor deze gemeente."
+  },
   "rioolwater_metingen": {
     "title": "Rioolwatermeting",
     "text": "Het aantal virusdeeltjes in een milliliter rioolwater, afkomstig van circa 80 locaties in Nederland. Voor het landelijke cijfer wordt uitgegaan van het totaal aantal virusdeeltjes dat wordt aangetroffen in een week, gedeeld door het totaal aantal locaties waar de data van afkomstig is. Het aantal meetpunten wordt vanaf september verder uitgebreid naar meer dan 300.",
@@ -359,6 +362,37 @@
     }
   },
   "regionaal_positief_geteste_personen": {
+    "title": "Positief geteste mensen",
+    "text": "Aantal positief geteste mensen per 100.000 inwoners per dag.",
+    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "metric_title": "Aantal positief geteste mensen:",
+    "fold_title": "Wat betekent dit?",
+    "fold": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
+    "graph_title": "Verloop over tijd",
+    "open": "Verberg uitleg",
+    "sluit": "Meer uitleg en data",
+    "screen_reader_graph_content": "{{value}} positief geteste personen.",
+    "bron": {
+      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "text": "RIVM"
+    }
+  },
+  "regionaal_municipality_ziekenhuisopnames_per_dag": {
+    "title": "Ziekenhuisopnames per dag",
+    "text": "Aantal opnames per dag, gemiddeld over de afgelopen 3 dagen.",
+    "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
+    "fold_title": "Wat betekent dit?",
+    "fold": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen.",
+    "graph_title": "Verloop over tijd",
+    "open": "Verberg uitleg",
+    "sluit": "Meer uitleg en data",
+    "screen_reader_graph_content": "{{value}} opnames.",
+    "bron": {
+      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "text": "RIVM"
+    }
+  },
+  "regionaal_municipality_positief_geteste_personen": {
     "title": "Positief geteste mensen",
     "text": "Aantal positief geteste mensen per 100.000 inwoners per dag.",
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -502,9 +536,36 @@
     "graph_average_label_text": "Gemiddelde waarde van gemeten locaties.",
     "graph_secondary_label_text": "Gemeten waarde per locatie."
   },
+  "regionaal_municipality_rioolwater_metingen": {
+    "title": "Rioolwatermeting",
+    "text": "Het aantal virusdeeltjes in een milliliter rioolwater afkomstig van locaties in de veiligheidsregio. Voor dit regionale cijfer wordt uitgegaan van het totaal aantal virusdeeltjes dat wordt aangetroffen in een week gedeeld door het totaal aantal locaties waar de data van afkomstig is.",
+    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
+    "graph_title": "Verloop over tijd",
+    "fold_title": "Wat betekent dit?",
+    "fold": "Dit getal laat zien hoeveel virusdeeltjes er zijn gevonden in het rioolwater in een bepaalde regio. Voor meer informatie zie cijferverantwoording.",
+    "open": "Verberg uitleg",
+    "sluit": "Meer uitleg en data",
+    "screen_reader_graph_content": "{{value}} virusdeeltjes in een milliliter rioolwater, afkomstig van 28 locaties in Nederland.",
+    "average": "Gemiddelde",
+    "bar_chart_title": "Laatste bekende waarde per RWZI locatie",
+    "bar_chart_axis_title": "Aantal virusdeeltjes in milliliter rioolwater",
+    "bron": {
+      "text": "RIVM Onderzoek rioolwater",
+      "href": "https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater"
+    },
+    "graph_average_label_text": "Gemiddelde waarde van gemeten locaties.",
+    "graph_secondary_label_text": "Gemeten waarde per locatie.",
+    "graph_average_label_text_rwzi": "Waarde van RWZI-locatie {{name}}"
+  },
   "regionaal_index": {
-    "your_safety_region": "Uw veiligheidsregio",
-    "select_safety_region_municipality": "Selecteer een veiligheidsregio of gemeente"
+    "label_municipalities": "Gemeentes",
+    "label_safety_regions": "Veiligheidsregio's",
+    "select_municipality": "Selecteer een gemeente",
+    "select_region_municipality_legend": "Selecteer een gemeente:",
+    "select_region_type_legend": "Toon cijfers van:",
+    "select_safety_region_municipality": "Selecteer een veiligheidsregio of gemeente",
+    "your_municipality": "Gemeente",
+    "your_safety_region": "Veiligheidsregio"
   },
   "common": {
     "metadata": {

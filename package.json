@@ -4,9 +4,11 @@
   "private": true,
   "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
   "dependencies": {
+    "@types/geojson": "^7946.0.7",
     "d3-scale": "2",
     "date-fns": "^2.15.0",
     "downshift": "^5.4.2",
+    "geojson": "^0.5.0",
     "highcharts": "^8.2.0",
     "highcharts-react-official": "^3.0.0",
     "imagemin-pngquant": "^9.0.0",
