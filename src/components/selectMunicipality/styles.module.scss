@@ -2,7 +2,13 @@
 
 .root {
   position: relative;
-  max-width: 25rem;
+  max-width: 100%;
+}
+
+@media screen and (min-width: 960px) {
+  .root {
+    max-width: 25rem;
+  }
 }
 
 .label {
