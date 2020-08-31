@@ -1,4 +1,4 @@
-import { useMemo, useEffect, useRef } from 'react';
+import { useMemo, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import useSWR from 'swr';
@@ -118,6 +118,11 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
   const { municipalities, safetyRegions } = props;
   let regionType: RegionType = null;
 
+  const [
+    mySelectedItem,
+    setMySelectedItem,
+  ] = useState<MunicipalityMapping | null>(null);
+
   // Toggle region type between municipality and safety region
   const setRegionType = (event: any): void => {
     let query = { regio: regionType === 'municipality' ? 'GM' : 'VR' };
@@ -157,6 +162,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
 
   const selectMunicipalityFromMap = (selectedGemcode: string): void => {
     lastKnownGemcode = selectedGemcode;
+    setMySelectedItem(null);
     router.replace(
       {
         pathname: router.pathname,
@@ -171,6 +177,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
   const setSelectedMunicipality = (
     selectedRegio: MunicipalityMapping
   ): void => {
+    setMySelectedItem(selectedRegio);
     let query = null;
     if (selectedRegio?.gemcode) {
       lastKnownGemcode = selectedRegio.gemcode;
@@ -269,6 +276,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
   const setSelectedSafetyRegion = (
     selectedRegio: MunicipalityMapping
   ): void => {
+    setMySelectedItem(selectedRegio);
     if (selectedRegio?.gemcode) {
       lastKnownGemcode = selectedRegio.gemcode;
     } else {
@@ -346,6 +354,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
               safetyRegions={safetyRegions}
               setSelectedSafetyRegion={setSelectedSafetyRegion}
               setSelectedMunicipality={setSelectedMunicipality}
+              mySelectedItem={mySelectedItem}
             />{' '}
             <div className={styles['safety-region-header']}>
               <p>

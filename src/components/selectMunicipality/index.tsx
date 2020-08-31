@@ -20,6 +20,7 @@ type SelectMunicipalityProps = {
   safetyRegions: SafetyRegion[];
   setSelectedSafetyRegion: (selection: MunicipalityMapping) => void;
   setSelectedMunicipality: (selection: MunicipalityMapping) => void;
+  // mySelectedItem: MunicipalityMapping | null;
 };
 
 // Returns the string to display as an item's label.
@@ -33,12 +34,16 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
     safetyRegions,
     setSelectedSafetyRegion,
     setSelectedMunicipality,
+    // mySelectedItem,
   } = props;
+
   const text: typeof siteText.select_municipality =
     siteText.select_municipality;
 
   // Set the full list of municipalities as the initial state.
   const [items, setItems] = useState(() => municipalities);
+
+  const [myInputValue, setMyInputValue] = useState<string>('');
 
   // Returns municipalities by safety region and current inputValue, sorted alphabetically.
   const getRegionItems = (safetyRegion: string, inputValue: string) => {
@@ -80,7 +85,10 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
   };
 
   // Set the safety region code to the URL on item selection
-  const onSelectedItemChange = ({ selectedItem }: any) => {
+  const onSelectedItemChange = (foo: any) => {
+    console.log('foo', foo);
+    const selectedItem = foo.selectedItem;
+    // setMySelectedItem(selectedItem);
     if (regionType === 'safetyRegion') {
       setSelectedSafetyRegion(selectedItem);
     } else {
@@ -90,6 +98,8 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
 
   // Filters municipalities when the input changes
   const onInputValueChange: any = ({ inputValue }: { inputValue: string }) => {
+    setMyInputValue(inputValue);
+    console.log('set my input value');
     setItems(municipalities.filter((item) => !getDisabled(item, inputValue)));
   };
 
@@ -174,6 +184,7 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
     reset,
     selectedItem,
   } = useCombobox({
+    inputValue: myInputValue,
     items,
     itemToString,
     stateReducer,
