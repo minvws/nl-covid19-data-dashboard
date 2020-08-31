@@ -85,9 +85,7 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
   };
 
   // Set the safety region code to the URL on item selection
-  const onSelectedItemChange = (foo: any) => {
-    const selectedItem = foo.selectedItem;
-    // setMySelectedItem(selectedItem);
+  const onSelectedItemChange = ({ selectedItem }: any) => {
     if (regionType === 'safetyRegion') {
       setSelectedSafetyRegion(selectedItem);
     } else {
