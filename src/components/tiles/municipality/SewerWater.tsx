@@ -191,13 +191,19 @@ export const SewerWaterMunicipality: React.FC<IProps> = ({
                 {text.graph_title}
                 {String(onlyOneRwzi)}
               </h4>
+
               <RegionalSewerWaterLineChart
                 averageValues={averageValues
                   .map((value: any) => {
                     return {
                       ...value,
-                      value: value[averageValueKey],
-                      date: value[averageDateKey],
+                      value: value[averageValueKey as 'rna_per_ml' | 'average'],
+                      date:
+                        value[
+                          averageDateKey as
+                            | 'week_unix'
+                            | 'date_measurement_unix'
+                        ],
                     };
                   })
                   .sort((a: any, b: any) => b.date - a.date)}
