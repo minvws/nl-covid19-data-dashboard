@@ -14,13 +14,13 @@ import formatNumber from 'utils/formatNumber';
 
 import siteText from 'locale';
 
-import { RioolwaterMetingen } from 'types/data';
+import { National, VerdenkingenHuisartsen } from 'types/data';
 
 const text: typeof siteText.verdenkingen_huisartsen =
   siteText.verdenkingen_huisartsen;
 
 export function SuspectedPatientsBarScale(props: {
-  data: RioolwaterMetingen | undefined;
+  data: VerdenkingenHuisartsen | undefined;
 }) {
   const { data } = props;
 
@@ -45,9 +45,10 @@ export function SuspectedPatientsBarScale(props: {
 }
 
 const SuspectedPatients: FCWithLayout = () => {
-  const { data: state } = useSWR(`/json/NL.json`);
+  const { data: state } = useSWR<National>(`/json/NL.json`);
 
-  const data: RioolwaterMetingen | undefined = state?.verdenkingen_huisartsen;
+  const data: VerdenkingenHuisartsen | undefined =
+    state?.verdenkingen_huisartsen;
 
   const total = state?.verdenkingen_huisartsen?.last_value?.geschat_aantal;
 

@@ -14,13 +14,17 @@ import formatNumber from 'utils/formatNumber';
 
 import siteText from 'locale';
 
-import { DeceasedPeopleNurseryCountDaily } from 'types/data';
+import {
+  National,
+  TotalNewlyReportedLocations,
+  TotalReportedLocations,
+} from 'types/data';
 
 const text: typeof siteText.verpleeghuis_besmette_locaties =
   siteText.verpleeghuis_besmette_locaties;
 
 export function NursingHomeInfectedLocationsBarScale(props: {
-  data: DeceasedPeopleNurseryCountDaily | undefined;
+  data: TotalNewlyReportedLocations | undefined;
 }) {
   const { data } = props;
 
@@ -45,11 +49,11 @@ export function NursingHomeInfectedLocationsBarScale(props: {
 }
 
 const NursingHomeInfectedLocations: FCWithLayout = () => {
-  const { data: state } = useSWR(`/json/NL.json`);
+  const { data: state } = useSWR<National>(`/json/NL.json`);
 
-  const newLocations: DeceasedPeopleNurseryCountDaily | undefined =
+  const newLocations: TotalNewlyReportedLocations | undefined =
     state?.total_newly_reported_locations;
-  const totalLocations: DeceasedPeopleNurseryCountDaily | undefined =
+  const totalLocations: TotalReportedLocations | undefined =
     state?.total_reported_locations;
 
   return (
