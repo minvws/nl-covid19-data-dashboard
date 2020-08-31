@@ -11,7 +11,6 @@
         "hospital_total_counts_per_region",
         "infected_increase_per_region",
         "hospital_increase_per_region",
-        "infected_moving_avg_per_region",
         "hospital_moving_avg_per_region",
         "date_of_insertion_unix"
       ],
@@ -23,10 +22,6 @@
         "hospital_total_counts_per_region": { "type": "number" },
         "infected_increase_per_region": { "type": "number" },
         "hospital_increase_per_region": { "type": "number" },
-        "infected_moving_avg_per_region": {
-          "type": ["number", "null"],
-          "nullable": true
-        },
         "hospital_moving_avg_per_region": { "type": "number" },
         "date_of_insertion_unix": { "type": "integer" }
       }
