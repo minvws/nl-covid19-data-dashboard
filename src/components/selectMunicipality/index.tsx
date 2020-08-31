@@ -5,34 +5,51 @@ import { useState } from 'react';
 
 import siteText from 'locale';
 
-import { SafetyRegion, MunicipalityMapping } from 'pages/regio';
+import { SafetyRegion, MunicipalityMapping, RegionType } from 'pages/regio';
 import Arrow from 'assets/white-arrow.svg';
 import ResetIcon from 'assets/reset.svg';
 
 import ScreenReaderOnly from 'components/screenReaderOnly';
 import replaceVariablesInText from 'utils/replaceVariablesInText';
+import SelectSafetyRegionValue from './select-safety-region-value';
+import SelectMunicipalityValue from './select-municipality-value';
 
 type SelectMunicipalityProps = {
+  regionType: RegionType;
   municipalities: MunicipalityMapping[];
   safetyRegions: SafetyRegion[];
-  setSelectedSafetyRegion: (code: SafetyRegion['code']) => void;
+  setSelectedSafetyRegion: (selection: MunicipalityMapping) => void;
+  setSelectedMunicipality: (selection: MunicipalityMapping) => void;
 };
 
+// Returns the string to display as an item's label.
+export const itemToString = (item?: MunicipalityMapping): string =>
+  item ? item.name : '';
+
 const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
-  const { municipalities, safetyRegions, setSelectedSafetyRegion } = props;
+  const {
+    regionType,
+    municipalities,
+    safetyRegions,
+    setSelectedSafetyRegion,
+    setSelectedMunicipality,
+  } = props;
   const text: typeof siteText.select_municipality =
     siteText.select_municipality;
 
   // Set the full list of municipalities as the initial state.
   const [items, setItems] = useState(() => municipalities);
 
-  // Returns the string to display as an item's label.
-  const itemToString = (item?: MunicipalityMapping) => (item ? item.name : '');
-
   // Returns municipalities by safety region and current inputValue, sorted alphabetically.
   const getRegionItems = (safetyRegion: string, inputValue: string) => {
     return items
       .filter((el) => el.safetyRegion === safetyRegion)
+      .filter((el) => !getDisabled(el, inputValue))
+      .sort((a, b) => a.name.localeCompare(b.name));
+  };
+
+  const getMunicipalities = (inputValue: string) => {
+    return items
       .filter((el) => !getDisabled(el, inputValue))
       .sort((a, b) => a.name.localeCompare(b.name));
   };
@@ -64,7 +81,11 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
 
   // Set the safety region code to the URL on item selection
   const onSelectedItemChange = ({ selectedItem }: any) => {
-    setSelectedSafetyRegion(selectedItem?.safetyRegion);
+    if (regionType === 'safetyRegion') {
+      setSelectedSafetyRegion(selectedItem);
+    } else {
+      setSelectedMunicipality(selectedItem);
+    }
   };
 
   // Filters municipalities when the input changes
@@ -199,43 +220,27 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
           className: styles.menu,
         })}
       >
-        {isOpen &&
-          safetyRegions.map((safetyRegion) => {
-            const regionItems = getRegionItems(safetyRegion.code, inputValue);
-            const isRegionDisabled = getRegionDisabled(regionItems, inputValue);
+        {isOpen && regionType === 'safetyRegion' && (
+          <SelectSafetyRegionValue
+            safetyRegions={safetyRegions}
+            inputValue={inputValue}
+            highlightedIndex={highlightedIndex}
+            getRegionItems={getRegionItems}
+            getRegionDisabled={getRegionDisabled}
+            getItemProps={getItemProps}
+            items={items}
+          />
+        )}
 
-            return (
-              <div
-                key={safetyRegion.code}
-                className={`${
-                  isRegionDisabled ? styles['region-disabled'] : ''
-                }`}
-              >
-                <h4 className={styles.heading}>{safetyRegion.name}</h4>
-                {regionItems.map((municipality) => {
-                  const isHighlighted =
-                    highlightedIndex === items.indexOf(municipality);
-
-                  return (
-                    // disabled because key is passed through the Downshift prop getter
-                    // eslint-disable-next-line react/jsx-key
-                    <p
-                      {...getItemProps({
-                        key: municipality.name,
-                        item: municipality,
-                        index: items.indexOf(municipality),
-                        className: `${styles.item} ${
-                          isHighlighted ? styles.active : ''
-                        }`,
-                      })}
-                    >
-                      {itemToString(municipality)}
-                    </p>
-                  );
-                })}
-              </div>
-            );
-          })}
+        {isOpen && regionType === 'municipality' && (
+          <SelectMunicipalityValue
+            getMunicipalities={getMunicipalities}
+            inputValue={inputValue}
+            highlightedIndex={highlightedIndex}
+            getItemProps={getItemProps}
+            items={items}
+          />
+        )}
       </div>
     </div>
   );

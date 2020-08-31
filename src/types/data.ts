@@ -1,5 +1,5 @@
 export interface National {
-  last_generated: number;
+  last_generated: string;
   name: string;
   code: string;
   intake_share_age_groups: IntakeShareAgeGroups;
@@ -20,7 +20,7 @@ export interface National {
 
 export interface Regionaal {
   code: string;
-  last_generated: number;
+  last_generated: string;
   name: string;
   proto_name: string;
   results_per_region: {
@@ -208,5 +208,93 @@ export interface SewerValue {
   vrcode: string;
   vrnaam: string;
   rna_per_ml: number;
+  date_of_insertion_unix: number;
+}
+
+export interface MunicipalityMetrics {
+  Total_reported: number;
+  Hospital_admission: number;
+  Deceased: number;
+}
+
+export interface MunicipalityData extends MunicipalityMetrics {
+  Date_of_report: string;
+  Municipality_code: string;
+  Municipality_name: string;
+  Province: string;
+  value?: number;
+}
+
+export interface RegionaalMunicipality {
+  last_generated: string;
+  proto_name: string;
+  name: string;
+  code: string;
+  hospital_admissions?: HospitalAdmissions;
+  positive_tested_people?: PositiveTestedPeople;
+  sewer_measurements?: SewerMeasurements;
+  results_per_sewer_installation_per_municipality?: ResultsPerSewerInstallationPerMunicipality;
+}
+
+export interface HospitalAdmissions {
+  values: HospitalAdmissions[];
+  last_value: HospitalAdmissions;
+}
+
+export interface HospitalAdmissions {
+  date_of_report_unix: number;
+  gmcode: string;
+  municipality_name: string;
+  moving_average_hospital: number;
+  date_of_insertion_unix: number;
+}
+
+export interface PositiveTestedPeople {
+  values: PositiveTestedPeople[];
+  last_value: PositiveTestedPeople;
+}
+
+export interface PositiveTestedPeople {
+  date_of_report_unix: number;
+  gmcode: string;
+  municipality_name: string;
+  infected_daily_total: number;
+  infected_daily_increase: number;
+  date_of_insertion_unix: number;
+}
+
+export interface ResultsPerSewerInstallationPerMunicipality {
+  values: MunicipalitySewerInstallationValue[];
+}
+
+export interface MunicipalitySewerInstallationValue {
+  rwzi_awzi_code: string;
+  values: ValueLastValue[];
+  last_value: ValueLastValue;
+}
+
+export interface ValueLastValue {
+  date_measurement_unix: number;
+  week_start_unix: number;
+  week_end_unix: number;
+  week: number;
+  rwzi_awzi_code: string;
+  rwzi_awzi_name: string;
+  gm_code: string;
+  rna_per_ml: number;
+  date_of_insertion_unix: number;
+}
+
+export interface SewerMeasurements {
+  values: SewerMeasurementsLastValue[];
+  last_value: SewerMeasurementsLastValue;
+}
+
+export interface SewerMeasurementsLastValue {
+  week_unix: number;
+  week_start_unix: number;
+  week_end_unix: number;
+  gmcode: string;
+  average: number;
   date_of_insertion_unix: number;
 }

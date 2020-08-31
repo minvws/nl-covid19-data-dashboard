@@ -14,6 +14,11 @@ interface DateTimeFormatOptions extends Intl.DateTimeFormatOptions {
   timeStyle?: 'full' | 'long' | 'medium' | 'short';
 }
 
+interface DateTimeFormatPart {
+  type: string;
+  value: string;
+}
+
 const Long = new Intl.DateTimeFormat(locale, {
   dateStyle: 'long',
   timeStyle: 'short',

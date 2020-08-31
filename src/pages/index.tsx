@@ -73,7 +73,11 @@ const Home: FunctionComponentWithLayout = () => {
       </Head>
 
       <MaxWidth>
-        <LastUpdated lastUpdated={data?.last_generated * 1000} />
+        <LastUpdated
+          lastUpdated={
+            data?.last_generated ? parseInt(data.last_generated, 10) * 1000 : 0
+          }
+        />
         <Notification />
       </MaxWidth>
 
