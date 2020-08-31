@@ -1,7 +1,7 @@
 import styles from './styles.module.scss';
 
 import { useCombobox } from 'downshift';
-import { useState } from 'react';
+import { useState, Dispatch, SetStateAction } from 'react';
 
 import siteText from 'locale';
 
@@ -20,7 +20,8 @@ type SelectMunicipalityProps = {
   safetyRegions: SafetyRegion[];
   setSelectedSafetyRegion: (selection: MunicipalityMapping) => void;
   setSelectedMunicipality: (selection: MunicipalityMapping) => void;
-  // mySelectedItem: MunicipalityMapping | null;
+  textInput: string;
+  setTextInput: Dispatch<SetStateAction<string>>;
 };
 
 // Returns the string to display as an item's label.
@@ -34,7 +35,8 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
     safetyRegions,
     setSelectedSafetyRegion,
     setSelectedMunicipality,
-    // mySelectedItem,
+    textInput,
+    setTextInput,
   } = props;
 
   const text: typeof siteText.select_municipality =
@@ -42,8 +44,6 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
 
   // Set the full list of municipalities as the initial state.
   const [items, setItems] = useState(() => municipalities);
-
-  const [myInputValue, setMyInputValue] = useState<string>('');
 
   // Returns municipalities by safety region and current inputValue, sorted alphabetically.
   const getRegionItems = (safetyRegion: string, inputValue: string) => {
@@ -86,7 +86,6 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
 
   // Set the safety region code to the URL on item selection
   const onSelectedItemChange = (foo: any) => {
-    console.log('foo', foo);
     const selectedItem = foo.selectedItem;
     // setMySelectedItem(selectedItem);
     if (regionType === 'safetyRegion') {
@@ -98,14 +97,18 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
 
   // Filters municipalities when the input changes
   const onInputValueChange: any = ({ inputValue }: { inputValue: string }) => {
-    setMyInputValue(inputValue);
-    console.log('set my input value');
-    setItems(municipalities.filter((item) => !getDisabled(item, inputValue)));
+    setTextInput(inputValue);
+    setItemsForTextInput();
+  };
+
+  const setItemsForTextInput = (): void => {
+    setItems(municipalities.filter((item) => !getDisabled(item, textInput)));
   };
 
   // Select the current input when the dropdown is opened.
   const onIsOpenChange: any = ({ isOpen }: { isOpen: boolean }) => {
     if (isOpen) {
+      setItemsForTextInput();
       selectInputContent();
     }
   };
@@ -184,7 +187,7 @@ const SelectMunicipality: React.FC<SelectMunicipalityProps> = (props): any => {
     reset,
     selectedItem,
   } = useCombobox({
-    inputValue: myInputValue,
+    inputValue: textInput,
     items,
     itemToString,
     stateReducer,

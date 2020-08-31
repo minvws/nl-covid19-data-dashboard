@@ -118,10 +118,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
   const { municipalities, safetyRegions } = props;
   let regionType: RegionType = null;
 
-  const [
-    mySelectedItem,
-    setMySelectedItem,
-  ] = useState<MunicipalityMapping | null>(null);
+  const [textInput, setTextInput] = useState<string>('');
 
   // Toggle region type between municipality and safety region
   const setRegionType = (event: any): void => {
@@ -162,7 +159,14 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
 
   const selectMunicipalityFromMap = (selectedGemcode: string): void => {
     lastKnownGemcode = selectedGemcode;
-    setMySelectedItem(null);
+
+    const municipalityMatch = municipalities.find(
+      (municipality: MunicipalityMapping) =>
+        municipality.gemcode === lastKnownGemcode
+    );
+
+    setTextInput(municipalityMatch ? municipalityMatch.name : '');
+
     router.replace(
       {
         pathname: router.pathname,
@@ -177,7 +181,6 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
   const setSelectedMunicipality = (
     selectedRegio: MunicipalityMapping
   ): void => {
-    setMySelectedItem(selectedRegio);
     let query = null;
     if (selectedRegio?.gemcode) {
       lastKnownGemcode = selectedRegio.gemcode;
@@ -239,6 +242,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
         lastKnownMunicipality &&
         lastKnownMunicipality.safetyRegion !== selectedSafetyRegion.code
       ) {
+        setTextInput('');
         lastKnownGemcode = null;
       }
     }
@@ -276,7 +280,6 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
   const setSelectedSafetyRegion = (
     selectedRegio: MunicipalityMapping
   ): void => {
-    setMySelectedItem(selectedRegio);
     if (selectedRegio?.gemcode) {
       lastKnownGemcode = selectedRegio.gemcode;
     } else {
@@ -354,7 +357,8 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
               safetyRegions={safetyRegions}
               setSelectedSafetyRegion={setSelectedSafetyRegion}
               setSelectedMunicipality={setSelectedMunicipality}
-              mySelectedItem={mySelectedItem}
+              textInput={textInput}
+              setTextInput={setTextInput}
             />{' '}
             <div className={styles['safety-region-header']}>
               <p>
