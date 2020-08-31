@@ -53,7 +53,6 @@ export const SewerWaterMunicipality: React.FC<IProps> = ({
     orderedSewerInstallations,
     averageValues,
     allValues,
-    onlyOneRwzi,
     averageValueKey,
     averageDateKey,
     averageLabelText,
@@ -64,10 +63,10 @@ export const SewerWaterMunicipality: React.FC<IProps> = ({
     let orderedSewerInstallations: MunicipalitySewerInstallationValue[] = [];
     let averageValues: Array<ValueLastValue | SewerMeasurementsLastValue> = [];
     let allValues: MunicipalitySewerInstallationValue[] = [];
-    let onlyOneRwzi = false;
     let averageValueKey: 'rna_per_ml' | 'average' | undefined;
     let averageDateKey: 'week_unix' | 'date_measurement_unix' | undefined;
     let averageLabelText = '';
+    let onlyOneRwzi = false;
 
     if (dataAvailable) {
       onlyOneRwzi =
@@ -123,7 +122,6 @@ export const SewerWaterMunicipality: React.FC<IProps> = ({
       orderedSewerInstallations,
       averageValues,
       allValues,
-      onlyOneRwzi,
       averageValueKey,
       averageDateKey,
       averageLabelText,
@@ -187,10 +185,7 @@ export const SewerWaterMunicipality: React.FC<IProps> = ({
           <p>{text.fold}</p>
           {averageValues && allValues && (
             <>
-              <h4>
-                {text.graph_title}
-                {String(onlyOneRwzi)}
-              </h4>
+              <h4>{text.graph_title}</h4>
 
               <RegionalSewerWaterLineChart
                 averageValues={averageValues

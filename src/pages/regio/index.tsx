@@ -120,7 +120,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
 
   // Toggle region type between municipality and safety region
   const setRegionType = (event: any): void => {
-    let query = null;
+    let query = { regio: regionType === 'municipality' ? 'GM' : 'VR' };
     const targetRegionType = event?.currentTarget?.value;
 
     // Detect if can be scaled up / down to a known last municipality
@@ -175,6 +175,8 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
     if (selectedRegio?.gemcode) {
       lastKnownGemcode = selectedRegio.gemcode;
       query = { regio: selectedRegio.gemcode };
+    } else {
+      lastKnownGemcode = null;
     }
     router.replace(
       {
@@ -269,11 +271,15 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
   ): void => {
     if (selectedRegio?.gemcode) {
       lastKnownGemcode = selectedRegio.gemcode;
+    } else {
+      lastKnownGemcode = null;
     }
     router.replace(
       {
         pathname: router.pathname,
-        query: selectedRegio ? { regio: selectedRegio.safetyRegion } : {},
+        query: selectedRegio
+          ? { regio: selectedRegio.safetyRegion }
+          : { regio: 'VR' },
       },
       undefined,
       { shallow: true }
