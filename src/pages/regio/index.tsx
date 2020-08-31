@@ -5,7 +5,6 @@ import useSWR from 'swr';
 
 import Layout from 'components/layout';
 import MaxWidth from 'components/maxWidth';
-import LastUpdated from 'components/lastUpdated';
 import Warning from 'assets/warn.svg';
 import { FunctionComponentWithLayout } from 'components/layout';
 import ScreenReaderOnly from 'components/screenReaderOnly';
@@ -341,8 +340,22 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
               safetyRegions={safetyRegions}
               setSelectedSafetyRegion={setSelectedSafetyRegion}
               setSelectedMunicipality={setSelectedMunicipality}
-            />
-
+            />{' '}
+            <div className={styles['safety-region-header']}>
+              <p>
+                {regionType === 'safetyRegion'
+                  ? text.your_safety_region
+                  : text.your_municipality}
+              </p>
+              {selectedRegio && <h2>{selectedRegio.name}</h2>}
+              {!selectedRegio && (
+                <span className={styles['select-safety-region']}>
+                  {regionType === 'safetyRegion'
+                    ? text.select_safety_region_municipality
+                    : text.select_municipality}
+                </span>
+              )}
+            </div>
             <div className={styles['map-container']}>
               {regionType === 'municipality' && (
                 <MunicipalityMap
@@ -360,29 +373,6 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
           </div>
 
           <div className={styles['panel-column']}>
-            <div className={styles['safety-region-header']}>
-              <p>
-                {regionType === 'safetyRegion'
-                  ? text.your_safety_region
-                  : text.your_municipality}
-              </p>
-              {selectedRegio && <h2>{selectedRegio.name}</h2>}
-              {!selectedRegio && (
-                <span className={styles['select-safety-region']}>
-                  {regionType === 'safetyRegion'
-                    ? text.select_safety_region_municipality
-                    : text.select_municipality}
-                </span>
-              )}
-            </div>
-            <LastUpdated
-              lastUpdated={
-                selectedRegio && data?.last_generated
-                  ? parseInt(data.last_generated, 10) * 1000
-                  : 0
-              }
-              loadingText={selectedRegio ? null : '\u00A0'}
-            />
             {regionType === 'safetyRegion' && (
               <>
                 <IntakeHospital

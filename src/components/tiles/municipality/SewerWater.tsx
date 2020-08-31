@@ -27,6 +27,7 @@ import formatNumber from 'utils/formatNumber';
 import LoadingPlaceholder from 'components/loadingPlaceholder';
 import replaceVariablesInText from 'utils/replaceVariablesInText';
 import { XrangePointOptionsObject } from 'highcharts';
+import { useMemo } from 'react';
 
 interface IProps {
   data: RegionaalMunicipality;
@@ -45,64 +46,89 @@ export const SewerWaterMunicipality: React.FC<IProps> = ({
     data?.results_per_sewer_installation_per_municipality?.values?.length !==
       0 || averagesAvailable;
 
-  let barScaleData: ValueLastValue | SewerMeasurementsLastValue | undefined;
-  let barScaleValue: number | undefined;
-  let barScaleUnix: number | undefined;
-  let orderedSewerInstallations: MunicipalitySewerInstallationValue[] = [];
-  let averageValues: Array<ValueLastValue | SewerMeasurementsLastValue> = [];
-  let allValues: MunicipalitySewerInstallationValue[] = [];
-  let onlyOneRwzi = false;
-  let averageValueKey: 'rna_per_ml' | 'average';
-  let averageDateKey: 'week_unix' | 'date_measurement_unix';
-  let averageLabelText = '';
+  const {
+    barScaleData,
+    barScaleValue,
+    barScaleUnix,
+    orderedSewerInstallations,
+    averageValues,
+    allValues,
+    onlyOneRwzi,
+    averageValueKey,
+    averageDateKey,
+    averageLabelText,
+  } = useMemo(() => {
+    let barScaleData: ValueLastValue | SewerMeasurementsLastValue | undefined;
+    let barScaleValue: number | undefined;
+    let barScaleUnix: number | undefined;
+    let orderedSewerInstallations: MunicipalitySewerInstallationValue[] = [];
+    let averageValues: Array<ValueLastValue | SewerMeasurementsLastValue> = [];
+    let allValues: MunicipalitySewerInstallationValue[] = [];
+    let onlyOneRwzi = false;
+    let averageValueKey: 'rna_per_ml' | 'average' | undefined;
+    let averageDateKey: 'week_unix' | 'date_measurement_unix' | undefined;
+    let averageLabelText = '';
 
-  if (dataAvailable) {
-    onlyOneRwzi =
-      data?.results_per_sewer_installation_per_municipality?.values?.length ===
-      1;
+    if (dataAvailable) {
+      onlyOneRwzi =
+        data?.results_per_sewer_installation_per_municipality?.values
+          ?.length === 1;
 
-    if (onlyOneRwzi) {
-      barScaleData =
-        data?.results_per_sewer_installation_per_municipality?.values[0]
-          .last_value;
-      barScaleValue = barScaleData?.rna_per_ml;
-      barScaleUnix = barScaleData?.date_measurement_unix;
+      if (onlyOneRwzi) {
+        barScaleData =
+          data?.results_per_sewer_installation_per_municipality?.values[0]
+            .last_value;
+        barScaleValue = barScaleData?.rna_per_ml;
+        barScaleUnix = barScaleData?.date_measurement_unix;
 
-      averageValues =
-        data?.results_per_sewer_installation_per_municipality?.values[0]
-          .values || [];
-      allValues = [];
-      averageValueKey = 'rna_per_ml';
-      averageDateKey = 'date_measurement_unix';
-      averageLabelText = replaceVariablesInText(
-        text.graph_average_label_text_rwzi,
-        {
-          name:
-            data?.results_per_sewer_installation_per_municipality?.values[0]
-              .last_value.rwzi_awzi_name,
-        }
-      );
-    } else {
-      barScaleData = data?.sewer_measurements?.last_value;
-
-      barScaleValue = barScaleData?.average;
-      barScaleUnix = barScaleData?.week_unix;
-
-      orderedSewerInstallations =
-        data?.results_per_sewer_installation_per_municipality?.values?.sort(
-          (a, b) => {
-            return b?.last_value?.rna_per_ml - a?.last_value?.rna_per_ml;
+        averageValues =
+          data?.results_per_sewer_installation_per_municipality?.values[0]
+            .values || [];
+        allValues = [];
+        averageValueKey = 'rna_per_ml';
+        averageDateKey = 'date_measurement_unix';
+        averageLabelText = replaceVariablesInText(
+          text.graph_average_label_text_rwzi,
+          {
+            name:
+              data?.results_per_sewer_installation_per_municipality?.values[0]
+                .last_value.rwzi_awzi_name,
           }
-        ) || [];
+        );
+      } else {
+        barScaleData = data?.sewer_measurements?.last_value;
 
-      averageValues = data?.sewer_measurements?.values || [];
-      allValues =
-        data?.results_per_sewer_installation_per_municipality?.values || [];
-      averageValueKey = 'average';
-      averageDateKey = 'week_unix';
-      averageLabelText = text.graph_average_label_text;
+        barScaleValue = barScaleData?.average;
+        barScaleUnix = barScaleData?.week_unix;
+
+        orderedSewerInstallations =
+          data?.results_per_sewer_installation_per_municipality?.values?.sort(
+            (a, b) => {
+              return b?.last_value?.rna_per_ml - a?.last_value?.rna_per_ml;
+            }
+          ) || [];
+
+        averageValues = data?.sewer_measurements?.values || [];
+        allValues =
+          data?.results_per_sewer_installation_per_municipality?.values || [];
+        averageValueKey = 'average';
+        averageDateKey = 'week_unix';
+        averageLabelText = text.graph_average_label_text;
+      }
     }
-  }
+    return {
+      barScaleData,
+      barScaleValue,
+      barScaleUnix,
+      orderedSewerInstallations,
+      averageValues,
+      allValues,
+      onlyOneRwzi,
+      averageValueKey,
+      averageDateKey,
+      averageLabelText,
+    };
+  }, [data, dataAvailable, text]);
 
   return (
     <GraphContainer>
