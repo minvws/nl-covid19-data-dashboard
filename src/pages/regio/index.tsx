@@ -161,7 +161,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
     <>
       <MaxWidth>
         <LastUpdated
-          lastUpdated={data?.last_generated * 1000}
+          lastUpdated={+data?.last_generated * 1000}
           loadingText={selectedRegio ? null : '\u00A0'}
         />
         <div className={styles['regio-grid']}>

@@ -13,16 +13,20 @@ import { LineChart } from './index';
 
 import siteText from 'locale';
 
-import { DeceasedPeopleNurseryCountDaily } from 'types/data';
+import {
+  National,
+  TotalNewlyReportedLocations,
+  TotalReportedLocations,
+} from 'types/data';
 
 export const NursingHomeInfectedLocations: React.FC = () => {
-  const { data: state } = useSWR(`/json/NL.json`);
+  const { data: state } = useSWR<National>(`/json/NL.json`);
 
   const text: typeof siteText.verpleeghuis_besmette_locaties =
     siteText.verpleeghuis_besmette_locaties;
-  const newLocations: DeceasedPeopleNurseryCountDaily | undefined =
+  const newLocations: TotalNewlyReportedLocations | undefined =
     state?.total_newly_reported_locations;
-  const totalLocations: DeceasedPeopleNurseryCountDaily | undefined =
+  const totalLocations: TotalReportedLocations | undefined =
     state?.total_reported_locations;
 
   return (

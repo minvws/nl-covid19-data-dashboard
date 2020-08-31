@@ -14,14 +14,15 @@ import formatDecimal from 'utils/formatNumber';
 
 import siteText from 'locale';
 
-import { RioolwaterMetingen } from 'types/data';
+import { National, VerdenkingenHuisartsen } from 'types/data';
 
 export const SuspectedPatients: React.FC = () => {
-  const { data: state } = useSWR(`/json/NL.json`);
+  const { data: state } = useSWR<National>(`/json/NL.json`);
 
   const text: typeof siteText.verdenkingen_huisartsen =
     siteText.verdenkingen_huisartsen;
-  const data: RioolwaterMetingen | undefined = state?.verdenkingen_huisartsen;
+  const data: VerdenkingenHuisartsen | undefined =
+    state?.verdenkingen_huisartsen;
 
   const total = state?.verdenkingen_huisartsen?.last_value?.geschat_aantal;
 
