@@ -1,0 +1,40 @@
+{
+  "definitions": {
+    "item": {
+      "title": "average_sewer_installation_per_region_item",
+      "additionalProperties": false,
+      "required": ["week_unix", "vrcode", "average", "date_of_insertion_unix"],
+      "properties": {
+        "week_unix": {
+          "type": "integer"
+        },
+        "vrcode": {
+          "type": "string",
+          "pattern": "^VR[0-9]+$"
+        },
+        "average": {
+          "type": "number"
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "average_sewer_installation_per_region",
+  "required": ["values", "last_value"],
+  "additionalProperties": false,
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/item"
+      }
+    },
+    "last_value": {
+      "$ref": "#/definitions/item"
+    }
+  }
+}
