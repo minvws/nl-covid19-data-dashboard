@@ -1,4 +1,7 @@
-import useSWR from 'swr';
+import fs from 'fs';
+import path from 'path';
+
+import { GetStaticProps } from 'next';
 
 import BarScale from 'components/barScale';
 import Metadata from 'components/metadata';
@@ -16,8 +19,12 @@ import { IntakeIntensivecareMa } from 'types/data';
 
 const text: typeof siteText.ic_opnames_per_dag = siteText.ic_opnames_per_dag;
 
+interface IProps {
+  data: IntakeIntensivecareMa;
+}
+
 export function IntakeIntensiveCareBarscale(props: {
-  data: IntakeIntensivecareMa | undefined;
+  data: IntakeIntensivecareMa;
 }) {
   const { data } = props;
 
@@ -50,12 +57,7 @@ export function IntakeIntensiveCareBarscale(props: {
   );
 }
 
-const IntakeIntensiveCare: FCWithLayout = () => {
-  const { data: state } = useSWR(`/json/NL.json`);
-
-  const data: IntakeIntensivecareMa | undefined =
-    state?.intake_intensivecare_ma;
-
+const IntakeIntensiveCare: FCWithLayout<IProps> = ({ data }) => {
   return (
     <>
       <TitleWithIcon Icon={Arts} title={text.title} as="h2" />
@@ -65,10 +67,10 @@ const IntakeIntensiveCare: FCWithLayout = () => {
 
         <IntakeIntensiveCareBarscale data={data} />
 
-        {data?.last_value?.moving_average_ic !== null && (
+        {data.last_value?.moving_average_ic !== null && (
           <DateReported
             datumsText={text.datums}
-            dateUnix={data?.last_value?.date_of_report_unix}
+            dateUnix={data.last_value?.date_of_report_unix}
           />
         )}
 
@@ -98,5 +100,18 @@ const IntakeIntensiveCare: FCWithLayout = () => {
 };
 
 IntakeIntensiveCare.getLayout = getNationalLayout();
+
+// This function gets called at build time on server-side.
+// It won't be called on client-side.
+export const getStaticProps: GetStaticProps<IProps> = async () => {
+  const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
+  const fileContents = fs.readFileSync(filePath, 'utf8');
+
+  return {
+    props: {
+      data: JSON.parse(fileContents).intake_intensivecare_ma,
+    },
+  };
+};
 
 export default IntakeIntensiveCare;
