@@ -1,6 +1,5 @@
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
-import Metadata from 'components/metadata';
 import GraphContainer from 'components/graphContainer';
 import GraphContent from 'components/graphContent';
 import TitleWithIcon from 'components/titleWithIcon';
@@ -116,10 +115,6 @@ function PostivelyTestedPeople(props: IProps) {
               )}
             />
           )}
-
-          <Metadata
-            dataSource={siteText.regionaal_positief_geteste_personen.bron}
-          />
         </Collapse>
       )}
     </GraphContainer>

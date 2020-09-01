@@ -112,7 +112,7 @@ function NationalLayout(props: WithChildren) {
                     >
                       <TitleWithIcon
                         Icon={GetestIcon}
-                        title={siteText.positief_geteste_personen.title}
+                        title={siteText.positief_geteste_personen.titel}
                       />
                       <span>
                         <PostivelyTestedPeopleBarScale
@@ -131,7 +131,7 @@ function NationalLayout(props: WithChildren) {
                     >
                       <TitleWithIcon
                         Icon={ReproIcon}
-                        title={siteText.reproductiegetal.title}
+                        title={siteText.reproductiegetal.titel}
                       />
                       <span>
                         <ReproductionIndexBarScale
@@ -174,7 +174,7 @@ function NationalLayout(props: WithChildren) {
                     >
                       <TitleWithIcon
                         Icon={Ziekenhuis}
-                        title={siteText.ziekenhuisopnames_per_dag.title}
+                        title={siteText.ziekenhuisopnames_per_dag.titel}
                       />
                       <span>
                         <IntakeHospitalBarScale
@@ -195,7 +195,7 @@ function NationalLayout(props: WithChildren) {
                     >
                       <TitleWithIcon
                         Icon={Arts}
-                        title={siteText.ic_opnames_per_dag.title}
+                        title={siteText.ic_opnames_per_dag.titel}
                       />
                       <span>
                         <IntakeIntensiveCareBarscale
@@ -219,7 +219,7 @@ function NationalLayout(props: WithChildren) {
                     >
                       <TitleWithIcon
                         Icon={Arts}
-                        title={siteText.verdenkingen_huisartsen.title}
+                        title={siteText.verdenkingen_huisartsen.titel}
                       />
                       <span>
                         <SuspectedPatientsBarScale
@@ -238,7 +238,7 @@ function NationalLayout(props: WithChildren) {
                     >
                       <TitleWithIcon
                         Icon={RioolwaterMonitoring}
-                        title={siteText.rioolwater_metingen.title}
+                        title={siteText.rioolwater_metingen.titel}
                       />
                       <span>
                         <SewerWaterBarScale data={data?.rioolwater_metingen} />
@@ -261,7 +261,7 @@ function NationalLayout(props: WithChildren) {
                       <TitleWithIcon
                         Icon={GetestIcon}
                         title={
-                          siteText.verpleeghuis_positief_geteste_personen.title
+                          siteText.verpleeghuis_positief_geteste_personen.titel
                         }
                       />
                       <span>
@@ -283,7 +283,7 @@ function NationalLayout(props: WithChildren) {
                     >
                       <TitleWithIcon
                         Icon={Locatie}
-                        title={siteText.verpleeghuis_besmette_locaties.title}
+                        title={siteText.verpleeghuis_besmette_locaties.titel}
                       />
                       <span>
                         <NursingHomeInfectedLocationsBarScale
@@ -304,7 +304,7 @@ function NationalLayout(props: WithChildren) {
                     >
                       <TitleWithIcon
                         Icon={CoronaVirus}
-                        title={siteText.verpleeghuis_oversterfte.title}
+                        title={siteText.verpleeghuis_oversterfte.titel}
                       />
                       <span>
                         <NursingHomeDeathsBarScale

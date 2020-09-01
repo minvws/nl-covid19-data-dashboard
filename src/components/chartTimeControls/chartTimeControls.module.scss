@@ -3,6 +3,7 @@
 .chart-radio-group {
   display: flex;
   margin: 1em 0;
+  justify-content: flex-end;
 
   input {
     position: absolute;
@@ -17,10 +18,14 @@
   label {
     flex: 1 1 auto;
     text-align: center;
-    padding: 0.2em 0;
+    padding: 0.2em 1.5em;
     border: 1px solid $button-color;
     border-width: 1px 0 1px 1px;
     color: $button-color;
+
+    @media screen and (min-width: 700px) {
+      flex: 0 1 auto;
+    }
 
     &:last-child {
       border-right-width: 1px;
