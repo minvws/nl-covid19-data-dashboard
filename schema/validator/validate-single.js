@@ -18,7 +18,7 @@ Where schema name must be one of these values: ${validSchemaNames.join(', ')}
 
 and json filename must a file present in the '${jsonBasePath}' directory.`
   );
-  process.exit();
+  process.exit(1);
 }
 
 const schemaName = myArgs[0];
@@ -30,14 +30,14 @@ if (!validSchemaNames.includes(schemaName)) {
       ', '
     )}`
   );
-  process.exit();
+  process.exit(1);
 }
 
 if (!fs.existsSync(path.join(jsonBasePath, jsonFileName))) {
   console.error(
     `Invalid json filename argument '${jsonFileName}', file does not exist in directory ${jsonBasePath}`
   );
-  process.exit();
+  process.exit(1);
 }
 
 const validatorInstance = new SchemaValidator(
