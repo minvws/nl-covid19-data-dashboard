@@ -1,9 +1,7 @@
 import useSWR from 'swr';
 
 import BarScale from 'components/barScale';
-import Metadata from 'components/metadata';
-import TitleWithIcon from 'components/titleWithIcon';
-import DateReported from 'components/dateReported';
+import { ContentHeader } from 'components/layout/Content';
 import { FCWithLayout } from 'components/layout';
 import { getNationalLayout } from 'components/layout/NationalLayout';
 import { LineChart } from 'components/tiles/index';
@@ -14,13 +12,13 @@ import formatNumber from 'utils/formatNumber';
 
 import siteText from 'locale';
 
-import { RioolwaterMetingen } from 'types/data';
+import { National, VerdenkingenHuisartsen } from 'types/data';
 
 const text: typeof siteText.verdenkingen_huisartsen =
   siteText.verdenkingen_huisartsen;
 
 export function SuspectedPatientsBarScale(props: {
-  data: RioolwaterMetingen | undefined;
+  data: VerdenkingenHuisartsen | undefined;
 }) {
   const { data } = props;
 
@@ -30,7 +28,7 @@ export function SuspectedPatientsBarScale(props: {
     <BarScale
       min={0}
       max={140}
-      screenReaderText={text.screen_reader_graph_content}
+      screenReaderText={text.barscale_screenreader_text}
       value={data.last_value.incidentie as number | null}
       id="verdenkingen_huisartsen"
       rangeKey="incidentie"
@@ -45,55 +43,58 @@ export function SuspectedPatientsBarScale(props: {
 }
 
 const SuspectedPatients: FCWithLayout = () => {
-  const { data: state } = useSWR(`/json/NL.json`);
+  const { data: state } = useSWR<National>(`/json/NL.json`);
 
-  const data: RioolwaterMetingen | undefined = state?.verdenkingen_huisartsen;
+  const data: VerdenkingenHuisartsen | undefined =
+    state?.verdenkingen_huisartsen;
 
   const total = state?.verdenkingen_huisartsen?.last_value?.geschat_aantal;
 
   return (
     <>
-      <TitleWithIcon Icon={Arts} title={text.title} as="h2" />
+      <ContentHeader
+        category="Overige indicatoren"
+        title={text.titel}
+        Icon={Arts}
+        subtitle={text.pagina_toelichting}
+        metadata={{
+          datumsText: text.datums,
+          dateUnix: data?.last_value?.week_unix,
+          dateInsertedUnix: data?.last_value?.date_of_insertion_unix,
+          dataSource: text.bron,
+        }}
+      />
+
+      <div className="layout-two-column">
+        <article className="metric-article column-item">
+          <h3>{text.barscale_titel}</h3>
+
+          <SuspectedPatientsBarScale data={data} />
+          <p>{text.barscale_toelichting}</p>
+        </article>
+
+        <article className="metric-article column-item">
+          {total && (
+            <h3>
+              {text.kpi_titel}{' '}
+              <span className="text-blue kpi">{formatNumber(total)}</span>
+            </h3>
+          )}
+          <p>{text.kpi_toelichting}</p>
+        </article>
+      </div>
 
       <article className="metric-article">
-        <p>{text.text}</p>
-
-        <SuspectedPatientsBarScale data={data} />
-
-        {total && (
-          <h3>
-            {text.estimated_amount_of_patients}{' '}
-            <span className="text-blue">{formatNumber(total)}</span>
-          </h3>
-        )}
-
-        {data?.last_value?.incidentie !== null && (
-          <DateReported
-            datumsText={text.datums}
-            dateInsertedUnix={data?.last_value?.date_of_insertion_unix}
-            dateUnix={data?.last_value?.week_unix}
-          />
-        )}
-
-        <h3>{text.fold_title}</h3>
-        <p>{text.fold}</p>
-      </article>
-
-      <article className="metric-article">
-        <h4>{text.graph_title}</h4>
+        <h3>{text.linechart_titel}</h3>
 
         {data && (
-          <>
-            <LineChart
-              timeframeOptions={['all', '5weeks']}
-              values={data.values.map((value) => ({
-                value: value.incidentie,
-                date: value.week_unix,
-              }))}
-            />
-
-            <Metadata dataSource={text.bron} />
-          </>
+          <LineChart
+            timeframeOptions={['all', '5weeks']}
+            values={data.values.map((value) => ({
+              value: value.incidentie,
+              date: value.week_unix,
+            }))}
+          />
         )}
       </article>
     </>

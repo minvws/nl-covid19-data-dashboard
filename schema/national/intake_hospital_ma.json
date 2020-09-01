@@ -1,0 +1,42 @@
+{
+  "definitions": {
+    "item": {
+      "title": "intake_hospital_ma_last_value",
+      "type": "object",
+      "required": [
+        "moving_average_hospital",
+        "date_of_report_unix",
+        "date_of_insertion_unix"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "moving_average_hospital": {
+          "type": "number"
+        },
+        "date_of_report_unix": {
+          "type": "integer"
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "intake_hospital_ma.json",
+  "title": "intake_hospital_ma",
+  "type": "object",
+  "required": ["values", "last_value"],
+  "additionalProperties": false,
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/item"
+      }
+    },
+    "last_value": {
+      "$ref": "#/definitions/item"
+    }
+  }
+}

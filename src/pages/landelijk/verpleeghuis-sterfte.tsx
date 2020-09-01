@@ -1,9 +1,7 @@
 import useSWR from 'swr';
 
 import BarScale from 'components/barScale';
-import Metadata from 'components/metadata';
-import TitleWithIcon from 'components/titleWithIcon';
-import DateReported from 'components/dateReported';
+import { ContentHeader } from 'components/layout/Content';
 import { FCWithLayout } from 'components/layout';
 import { getNationalLayout } from 'components/layout/NationalLayout';
 import { LineChart } from 'components/tiles/index';
@@ -13,7 +11,6 @@ import CoronaVirus from 'assets/coronavirus.svg';
 import siteText from 'locale';
 
 import { DeceasedPeopleNurseryCountDaily } from 'types/data';
-import MunicipalityMap from 'components/mapChart';
 
 const text: typeof siteText.verpleeghuis_oversterfte =
   siteText.verpleeghuis_oversterfte;
@@ -29,7 +26,7 @@ export function NursingHomeDeathsBarScale(props: {
     <BarScale
       min={0}
       max={50}
-      screenReaderText={text.screen_reader_graph_content}
+      screenReaderText={text.barscale_screenreader_text}
       value={data.last_value.deceased_nursery_daily}
       id="over"
       rangeKey="deceased_nursery_daily"
@@ -51,39 +48,41 @@ const NursingHomeDeaths: FCWithLayout = () => {
 
   return (
     <>
-      <TitleWithIcon Icon={CoronaVirus} title={text.title} as="h2" />
-      <article className="metric-article">
-        <p>{text.text}</p>
+      <ContentHeader
+        category="Verpleeghuiszorg"
+        title={text.titel}
+        Icon={CoronaVirus}
+        subtitle={text.pagina_toelichting}
+        metadata={{
+          datumsText: text.datums,
+          dateUnix: data?.last_value?.date_of_report_unix,
+          dateInsertedUnix: data?.last_value?.date_of_insertion_unix,
+          dataSource: text.bron,
+        }}
+      />
 
-        <NursingHomeDeathsBarScale data={data} />
+      <article className="metric-article layout-two-column">
+        <div className="column-item column-item-extra-margin">
+          <h3>{text.barscale_titel}</h3>
 
-        {data?.last_value?.deceased_nursery_daily !== null && (
-          <DateReported
-            datumsText={text.datums}
-            dateUnix={data?.last_value?.date_of_report_unix}
-            dateInsertedUnix={data?.last_value?.date_of_insertion_unix}
-          />
-        )}
+          <NursingHomeDeathsBarScale data={data} />
+        </div>
 
-        <h3>{text.fold_title}</h3>
-        <p>{text.fold}</p>
-
-        <MunicipalityMap metric="Deceased" gradient={['#9DDEFE', '#0290D6']} />
+        <div className="column-item column-item-extra-margin">
+          <p>{text.extra_uitleg}</p>
+        </div>
       </article>
 
       <article className="metric-article">
-        <h3>{text.graph_title}</h3>
+        <h3>{text.linechart_titel}</h3>
 
         {data && (
-          <>
-            <LineChart
-              values={data.values.map((value) => ({
-                value: value.deceased_nursery_daily,
-                date: value.date_of_report_unix,
-              }))}
-            />
-            <Metadata dataSource={text.bron} />
-          </>
+          <LineChart
+            values={data.values.map((value) => ({
+              value: value.deceased_nursery_daily,
+              date: value.date_of_report_unix,
+            }))}
+          />
         )}
       </article>
     </>

@@ -1,12 +1,10 @@
 import useSWR from 'swr';
 
 import BarScale from 'components/barScale';
-import Metadata from 'components/metadata';
-import TitleWithIcon from 'components/titleWithIcon';
-import DateReported from 'components/dateReported';
 import { FCWithLayout } from 'components/layout';
 import { getNationalLayout } from 'components/layout/NationalLayout';
 import { LineChart } from 'components/tiles/index';
+import { ContentHeader } from 'components/layout/Content';
 
 import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
 
@@ -27,7 +25,7 @@ export function SewerWaterBarScale(props: {
     <BarScale
       min={0}
       max={100}
-      screenReaderText={text.screen_reader_graph_content}
+      screenReaderText={text.barscale_screenreader_text}
       value={Number(data.last_value.average)}
       id="rioolwater_metingen"
       rangeKey="average"
@@ -48,40 +46,42 @@ const SewerWater: FCWithLayout = () => {
 
   return (
     <>
-      <TitleWithIcon Icon={RioolwaterMonitoring} title={text.title} as="h2" />
+      <ContentHeader
+        category="Overige indicatoren"
+        title={text.titel}
+        Icon={RioolwaterMonitoring}
+        subtitle={text.pagina_toelichting}
+        metadata={{
+          datumsText: text.datums,
+          dateUnix: data?.last_value?.week_unix,
+          dateInsertedUnix: data?.last_value?.date_of_insertion_unix,
+          dataSource: text.bron,
+        }}
+      />
 
-      <article className="metric-article">
-        <p>{text.text}</p>
+      <article className="metric-article layout-two-column">
+        <div className="column-item column-item-extra-margin">
+          <h3>{text.barscale_titel}</h3>
 
-        <SewerWaterBarScale data={data} />
+          <SewerWaterBarScale data={data} />
+        </div>
 
-        {data?.last_value?.average !== null && (
-          <DateReported
-            datumsText={text.datums}
-            dateInsertedUnix={data?.last_value?.date_of_insertion_unix}
-            dateUnix={data?.last_value?.week_unix}
-          />
-        )}
-
-        <h3>{text.fold_title}</h3>
-        <p>{text.fold}</p>
+        <div className="column-item column-item-extra-margin">
+          <p>{text.extra_uitleg}</p>
+        </div>
       </article>
 
       <article className="metric-article">
-        <h3>{text.graph_title}</h3>
+        <h3>{text.linechart_titel}</h3>
 
         {data?.values && (
-          <>
-            <LineChart
-              timeframeOptions={['all', '5weeks']}
-              values={data.values.map((value) => ({
-                value: Number(value.average),
-                date: value.week_unix,
-              }))}
-            />
-
-            <Metadata dataSource={text.bron} />
-          </>
+          <LineChart
+            timeframeOptions={['all', '5weeks']}
+            values={data.values.map((value) => ({
+              value: Number(value.average),
+              date: value.week_unix,
+            }))}
+          />
         )}
       </article>
     </>

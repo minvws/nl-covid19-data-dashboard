@@ -1,0 +1,55 @@
+{
+  "definitions": {
+    "item": {
+      "title": "sewer_measurements_last_value",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "week_unix",
+        "week_start_unix",
+        "week_end_unix",
+        "gmcode",
+        "average",
+        "date_of_insertion_unix"
+      ],
+      "properties": {
+        "week_unix": {
+          "type": "integer"
+        },
+        "week_start_unix": {
+          "type": "integer"
+        },
+        "week_end_unix": {
+          "type": "integer"
+        },
+        "gmcode": {
+          "type": "string",
+          "pattern": "^GM[0-9]+$"
+        },
+        "average": {
+          "type": "number"
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "sewer_measurements.json",
+  "title": "sewer_measurements",
+  "type": "object",
+  "required": ["values", "last_value"],
+  "additionalProperties": false,
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/item"
+      }
+    },
+    "last_value": {
+      "$ref": "#/definitions/item"
+    }
+  }
+}
