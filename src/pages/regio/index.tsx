@@ -29,7 +29,7 @@ const twitterImage = locale === 'nl' ? twitterImageNL : twitterImageEN;
 
 import siteText from 'locale';
 
-import { Regionaal, RegionaalMunicipality } from 'types/data';
+import { Regionaal, Municipal } from 'types/data';
 import { IntakeHospitalMunicipality } from 'components/tiles/municipality/IntakeHospital';
 import { PostivelyTestedPeopleMunicipality } from 'components/tiles/municipality/PositivelyTestedPeople';
 import { SewerWaterMunicipality } from 'components/tiles/municipality/SewerWater';
@@ -298,7 +298,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
       ? `/json/${(selectedRegio as SafetyRegion).code}.json`
       : null;
   });
-  const data: Regionaal | RegionaalMunicipality = response.data;
+  const data: Regionaal | Municipal = response.data;
   const text: typeof siteText.regionaal_index = siteText.regionaal_index;
 
   const id = useMemo(() => Math.random().toString(36).substr(2), []);
@@ -403,18 +403,18 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
               <>
                 <IntakeHospitalMunicipality
                   selectedRegio={selectedRegio as MunicipalityMapping}
-                  data={data as RegionaalMunicipality}
+                  data={data as Municipal}
                   contentRef={contentRef}
                 />
 
                 <PostivelyTestedPeopleMunicipality
                   selectedRegio={selectedRegio as MunicipalityMapping}
-                  data={data as RegionaalMunicipality}
+                  data={data as Municipal}
                 />
 
                 <SewerWaterMunicipality
                   selectedRegio={selectedRegio as MunicipalityMapping}
-                  data={data as RegionaalMunicipality}
+                  data={data as Municipal}
                 />
               </>
             )}

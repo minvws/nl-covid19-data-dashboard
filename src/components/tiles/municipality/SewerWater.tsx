@@ -11,10 +11,10 @@ import RegionalSewerWaterLineChart from 'components/lineChart/regionalSewerWater
 import siteText from 'locale';
 
 import {
-  RegionaalMunicipality,
-  ValueLastValue,
+  Municipal,
   SewerMeasurementsLastValue,
-  MunicipalitySewerInstallationValue,
+  ResultsPerSewerInstallationPerMunicipalityLastValue,
+  ResultsPerSewerInstallationPerMunicipalityItem,
 } from 'types/data';
 import BarChart from 'components/barChart';
 import {
@@ -30,7 +30,7 @@ import { XrangePointOptionsObject } from 'highcharts';
 import { useMemo } from 'react';
 
 interface IProps {
-  data: RegionaalMunicipality;
+  data: Municipal;
   selectedRegio: MunicipalityMapping | undefined;
 }
 
@@ -57,12 +57,18 @@ export const SewerWaterMunicipality: React.FC<IProps> = ({
     averageDateKey,
     averageLabelText,
   } = useMemo(() => {
-    let barScaleData: ValueLastValue | SewerMeasurementsLastValue | undefined;
+    let barScaleData:
+      | ResultsPerSewerInstallationPerMunicipalityLastValue
+      | SewerMeasurementsLastValue
+      | undefined;
     let barScaleValue: number | undefined;
     let barScaleUnix: number | undefined;
-    let orderedSewerInstallations: MunicipalitySewerInstallationValue[] = [];
-    let averageValues: Array<ValueLastValue | SewerMeasurementsLastValue> = [];
-    let allValues: MunicipalitySewerInstallationValue[] = [];
+    let orderedSewerInstallations: ResultsPerSewerInstallationPerMunicipalityItem[] = [];
+    let averageValues: Array<
+      | ResultsPerSewerInstallationPerMunicipalityLastValue
+      | SewerMeasurementsLastValue
+    > = [];
+    let allValues: ResultsPerSewerInstallationPerMunicipalityItem[] = [];
     let averageValueKey: 'rna_per_ml' | 'average' | undefined;
     let averageDateKey: 'week_unix' | 'date_measurement_unix' | undefined;
     let averageLabelText = '';
@@ -203,7 +209,9 @@ export const SewerWaterMunicipality: React.FC<IProps> = ({
                   })
                   .sort((a: any, b: any) => b.date - a.date)}
                 allValues={allValues.map(
-                  (installation: MunicipalitySewerInstallationValue) => {
+                  (
+                    installation: ResultsPerSewerInstallationPerMunicipalityItem
+                  ) => {
                     return installation?.values
                       .map((value) => {
                         return {

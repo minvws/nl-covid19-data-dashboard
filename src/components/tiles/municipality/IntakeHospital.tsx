@@ -12,12 +12,12 @@ import Ziekenhuis from 'assets/ziekenhuis.svg';
 
 import { RegioDataLoading, MunicipalityMapping } from 'pages/regio/index';
 
-import { RegionaalMunicipality, HospitalAdmissions } from 'types/data';
+import { Municipal, HospitalAdmissionsLastValue } from 'types/data';
 
 import siteText from 'locale';
 
 interface IProps {
-  data: RegionaalMunicipality;
+  data: Municipal;
   selectedRegio: MunicipalityMapping | undefined;
   contentRef: React.RefObject<HTMLHeadingElement>;
 }
@@ -110,7 +110,7 @@ export const IntakeHospitalMunicipality: React.FC<IProps> = (props) => {
           {data?.hospital_admissions?.values && (
             <LineChart
               values={data.hospital_admissions.values.map(
-                (value: HospitalAdmissions) => ({
+                (value: HospitalAdmissionsLastValue) => ({
                   value: value.moving_average_hospital,
                   date: value.date_of_report_unix,
                 })
