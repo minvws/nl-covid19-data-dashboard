@@ -13,12 +13,12 @@ import Arts from 'assets/arts.svg';
 
 import siteText from 'locale';
 
-import { IntakeIntensivecareMa } from 'types/data';
+import { National, IntakeIntensivecareMa } from 'types/data';
 
 const text: typeof siteText.ic_opnames_per_dag = siteText.ic_opnames_per_dag;
 
 interface IProps {
-  data: IntakeIntensivecareMa;
+  data: National;
 }
 
 export function IntakeIntensiveCareBarscale(props: {
@@ -56,6 +56,8 @@ export function IntakeIntensiveCareBarscale(props: {
 }
 
 const IntakeIntensiveCare: FCWithLayout<IProps> = ({ data }) => {
+  const infectiousPeopleData = data.intake_intensivecare_ma;
+
   return (
     <>
       <ContentHeader
@@ -65,7 +67,7 @@ const IntakeIntensiveCare: FCWithLayout<IProps> = ({ data }) => {
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: data?.last_value?.date_of_report_unix,
+          dateUnix: infectiousPeopleData?.last_value?.date_of_report_unix,
           dataSource: text.bron,
         }}
       />
@@ -74,7 +76,7 @@ const IntakeIntensiveCare: FCWithLayout<IProps> = ({ data }) => {
         <div className="column-item column-item-extra-margin">
           <h3>{text.barscale_titel}</h3>
 
-          <IntakeIntensiveCareBarscale data={data} />
+          <IntakeIntensiveCareBarscale data={infectiousPeopleData} />
         </div>
 
         <div className="column-item column-item-extra-margin">
@@ -87,7 +89,7 @@ const IntakeIntensiveCare: FCWithLayout<IProps> = ({ data }) => {
 
         {data && (
           <LineChart
-            values={data.values.map((value) => ({
+            values={infectiousPeopleData.values.map((value) => ({
               value: value.moving_average_ic,
               date: value.date_of_report_unix,
             }))}
@@ -109,7 +111,7 @@ export const getStaticProps: GetStaticProps<IProps> = async () => {
 
   return {
     props: {
-      data: JSON.parse(fileContents).intake_intensivecare_ma,
+      data: JSON.parse(fileContents),
     },
   };
 };
