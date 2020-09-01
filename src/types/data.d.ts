@@ -13,6 +13,7 @@ export interface Municipal {
   hospital_admissions?: HospitalAdmissions;
   positive_tested_people?: PositiveTestedPeople;
   sewer_measurements?: SewerMeasurements;
+  results_per_sewer_installation_per_municipality?: ResultsPerSewerInstallationPerMunicipality;
 }
 export interface HospitalAdmissions {
   values: HospitalAdmissionsLastValue[];
@@ -47,6 +48,25 @@ export interface SewerMeasurementsLastValue {
   week_end_unix: number;
   gmcode: string;
   average: number;
+  date_of_insertion_unix: number;
+}
+export interface ResultsPerSewerInstallationPerMunicipality {
+  values: ResultsPerSewerInstallationPerMunicipalityItem[];
+}
+export interface ResultsPerSewerInstallationPerMunicipalityItem {
+  rwzi_awzi_code: string;
+  values: ResultsPerSewerInstallationPerMunicipalityLastValue[];
+  last_value: ResultsPerSewerInstallationPerMunicipalityLastValue;
+}
+export interface ResultsPerSewerInstallationPerMunicipalityLastValue {
+  date_measurement_unix: number;
+  week_start_unix: number;
+  week_end_unix: number;
+  week: number;
+  rwzi_awzi_code: string;
+  rwzi_awzi_name: string;
+  gm_code: string;
+  rna_per_ml: number;
   date_of_insertion_unix: number;
 }
 

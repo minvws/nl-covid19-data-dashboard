@@ -11,7 +11,7 @@ const schemaToJsonLookup = {
   national: ['NL.json'],
   ranges: ['RANGES.json'],
   regional: filterFilenames(allJsonFiles, new RegExp('^VR[0-9]+\\.json$')),
-  // municipal: filterFilenames(allJsonFiles, new RegExp('^GM[0-9]+\\.json$')),
+  municipal: filterFilenames(allJsonFiles, new RegExp('^GM[0-9]+\\.json$')),
 };
 
 // The validations are asynchronous so this reducer gathers all the Promises in one array.
