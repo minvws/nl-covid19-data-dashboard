@@ -1,4 +1,7 @@
-import useSWR from 'swr';
+import fs from 'fs';
+import path from 'path';
+
+import { GetStaticProps } from 'next';
 
 import BarScale from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
@@ -10,15 +13,13 @@ import Ziekenhuis from 'assets/ziekenhuis.svg';
 
 import siteText from 'locale';
 
-import { IntakeHospitalMa } from 'types/data';
+import { National, IntakeHospitalMa } from 'types/data';
 import MunicipalityMap from 'components/mapChart';
 
 const text: typeof siteText.ziekenhuisopnames_per_dag =
   siteText.ziekenhuisopnames_per_dag;
 
-export function IntakeHospitalBarScale(props: {
-  data: IntakeHospitalMa | undefined;
-}) {
+export function IntakeHospitalBarScale(props: { data: IntakeHospitalMa }) {
   const { data } = props;
 
   if (!data) return null;
@@ -50,10 +51,12 @@ export function IntakeHospitalBarScale(props: {
   );
 }
 
-const IntakeHospital: FCWithLayout = () => {
-  const { data: state } = useSWR(`/json/NL.json`);
+interface IProps {
+  data: National;
+}
 
-  const data: IntakeHospitalMa | undefined = state?.intake_hospital_ma;
+const IntakeHospital: FCWithLayout<IProps> = ({ data }) => {
+  const intakeData: IntakeHospitalMa = data.intake_hospital_ma;
 
   return (
     <>
@@ -64,7 +67,7 @@ const IntakeHospital: FCWithLayout = () => {
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: data?.last_value?.date_of_report_unix,
+          dateUnix: intakeData?.last_value?.date_of_report_unix,
           dataSource: text.bron,
         }}
       />
@@ -73,7 +76,7 @@ const IntakeHospital: FCWithLayout = () => {
         <div className="column-item column-item-extra-margin">
           <h3>{text.barscale_titel}</h3>
 
-          <IntakeHospitalBarScale data={data} />
+          <IntakeHospitalBarScale data={intakeData} />
         </div>
 
         <div className="column-item column-item-extra-margin">
@@ -98,10 +101,10 @@ const IntakeHospital: FCWithLayout = () => {
       <article className="metric-article">
         <h3>{text.linechart_titel}</h3>
 
-        {data && (
+        {intakeData && (
           <>
             <LineChart
-              values={data.values.map((value: any) => ({
+              values={intakeData.values.map((value: any) => ({
                 value: value.moving_average_hospital,
                 date: value.date_of_report_unix,
               }))}
@@ -115,5 +118,18 @@ const IntakeHospital: FCWithLayout = () => {
 };
 
 IntakeHospital.getLayout = getNationalLayout();
+
+// This function gets called at build time on server-side.
+// It won't be called on client-side.
+export const getStaticProps: GetStaticProps<IProps> = async () => {
+  const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
+  const fileContents = fs.readFileSync(filePath, 'utf8');
+
+  return {
+    props: {
+      data: JSON.parse(fileContents),
+    },
+  };
+};
 
 export default IntakeHospital;

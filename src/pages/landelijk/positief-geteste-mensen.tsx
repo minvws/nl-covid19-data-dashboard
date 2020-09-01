@@ -55,10 +55,10 @@ interface IProps {
 }
 
 const PostivelyTestedPeople: FCWithLayout<IProps> = ({ data }) => {
-  const delta: InfectedPeopleDeltaNormalized | undefined =
-    data?.infected_people_delta_normalized;
-  const age: IntakeShareAgeGroups | undefined = data?.intake_share_age_groups;
-  const total: InfectedPeopleTotal | undefined = data?.infected_people_total;
+  const delta: InfectedPeopleDeltaNormalized =
+    data.infected_people_delta_normalized;
+  const age: IntakeShareAgeGroups = data.intake_share_age_groups;
+  const total: InfectedPeopleTotal = data.infected_people_total;
 
   const barChartTotal: number = age?.values
     ? age.values.reduce((mem: number, part): number => {
