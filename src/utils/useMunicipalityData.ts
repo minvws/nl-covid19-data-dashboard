@@ -61,16 +61,13 @@ function useMunicipalityData<
       return [];
     }
 
-    const filterByRegion: any = (
-      item: K[number],
-      _index: number,
-      _arr: K[number][]
-    ): any => applicableMunicipalCodes.indexOf(item.gmcode) > -1;
+    const filterByRegion: any = (item: K[number]): any =>
+      applicableMunicipalCodes.indexOf(item.gmcode) > -1;
 
-    const filteredData = (metricItems as any[]).map<any>(
-      (item: K[number]): any => ({
+    const filteredData = (metricItems as any[]).map<K[number]>(
+      (item: K[number]): K[number] & { value: number } => ({
         ...item,
-        value: (item as any)[metricName] as number,
+        value: (item as any)[metricName],
       })
     );
 
