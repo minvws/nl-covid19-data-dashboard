@@ -5,7 +5,10 @@ import { GetStaticProps } from 'next';
 
 import BarScale from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
-import { getNationalLayout } from 'components/layout/NationalLayout';
+import {
+  getNationalLayout,
+  NationalLayoutProps,
+} from 'components/layout/NationalLayout';
 import { LineChart } from 'components/tiles/index';
 import { ContentHeader } from 'components/layout/Content';
 
@@ -13,7 +16,7 @@ import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
 
 import siteText from 'locale';
 
-import { National, RioolwaterMetingen } from 'types/data';
+import { RioolwaterMetingen } from 'types/data';
 
 const text: typeof siteText.rioolwater_metingen = siteText.rioolwater_metingen;
 
@@ -40,11 +43,7 @@ export function SewerWaterBarScale(props: { data: RioolwaterMetingen }) {
   );
 }
 
-interface IProps {
-  data: National;
-}
-
-const SewerWater: FCWithLayout<IProps> = ({ data: state }) => {
+const SewerWater: FCWithLayout<NationalLayoutProps> = ({ data: state }) => {
   const data: RioolwaterMetingen = state.rioolwater_metingen;
 
   return (
@@ -95,7 +94,7 @@ SewerWater.getLayout = getNationalLayout();
 
 // This function gets called at build time on server-side.
 // It won't be called on client-side.
-export const getStaticProps: GetStaticProps<IProps> = async () => {
+export const getStaticProps: GetStaticProps<NationalLayoutProps> = async () => {
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
   const fileContents = fs.readFileSync(filePath, 'utf8');
 

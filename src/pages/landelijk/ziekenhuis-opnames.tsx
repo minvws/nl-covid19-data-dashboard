@@ -5,7 +5,10 @@ import { GetStaticProps } from 'next';
 
 import BarScale from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
-import { getNationalLayout } from 'components/layout/NationalLayout';
+import {
+  getNationalLayout,
+  NationalLayoutProps,
+} from 'components/layout/NationalLayout';
 import { LineChart } from 'components/tiles/index';
 import { ContentHeader } from 'components/layout/Content';
 
@@ -13,7 +16,7 @@ import Ziekenhuis from 'assets/ziekenhuis.svg';
 
 import siteText from 'locale';
 
-import { National, IntakeHospitalMa } from 'types/data';
+import { IntakeHospitalMa } from 'types/data';
 import MunicipalityMap from 'components/mapChart';
 
 const text: typeof siteText.ziekenhuisopnames_per_dag =
@@ -51,11 +54,7 @@ export function IntakeHospitalBarScale(props: { data: IntakeHospitalMa }) {
   );
 }
 
-interface IProps {
-  data: National;
-}
-
-const IntakeHospital: FCWithLayout<IProps> = ({ data }) => {
+const IntakeHospital: FCWithLayout<NationalLayoutProps> = ({ data }) => {
   const intakeData: IntakeHospitalMa = data.intake_hospital_ma;
 
   return (
@@ -121,7 +120,7 @@ IntakeHospital.getLayout = getNationalLayout();
 
 // This function gets called at build time on server-side.
 // It won't be called on client-side.
-export const getStaticProps: GetStaticProps<IProps> = async () => {
+export const getStaticProps: GetStaticProps<NationalLayoutProps> = async () => {
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
   const fileContents = fs.readFileSync(filePath, 'utf8');
 

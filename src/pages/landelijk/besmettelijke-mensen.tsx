@@ -7,7 +7,10 @@ import Link from 'next/link';
 import BarScale from 'components/barScale';
 import Legenda from 'components/legenda';
 import { FCWithLayout } from 'components/layout';
-import { getNationalLayout } from 'components/layout/NationalLayout';
+import {
+  getNationalLayout,
+  NationalLayoutProps,
+} from 'components/layout/NationalLayout';
 import { AreaChart } from 'components/tiles/index';
 
 import Ziektegolf from 'assets/ziektegolf.svg';
@@ -19,7 +22,6 @@ import siteText from 'locale';
 import {
   InfectiousPeopleCount,
   InfectiousPeopleCountNormalized,
-  National,
 } from 'types/data';
 import { ContentHeader } from 'components/layout/Content';
 
@@ -49,11 +51,7 @@ export function InfectiousPeopleBarScale(props: {
   );
 }
 
-interface IProps {
-  data: National;
-}
-
-const InfectiousPeople: FCWithLayout<IProps> = ({ data }) => {
+const InfectiousPeople: FCWithLayout<NationalLayoutProps> = ({ data }) => {
   const count: InfectiousPeopleCount = data.infectious_people_count;
   const countNormalized: InfectiousPeopleCountNormalized =
     data.infectious_people_count_normalized;
@@ -130,7 +128,7 @@ InfectiousPeople.getLayout = getNationalLayout();
 
 // This function gets called at build time on server-side.
 // It won't be called on client-side.
-export const getStaticProps: GetStaticProps<IProps> = async () => {
+export const getStaticProps: GetStaticProps<NationalLayoutProps> = async () => {
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
   const fileContents = fs.readFileSync(filePath, 'utf8');
 

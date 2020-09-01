@@ -6,7 +6,10 @@ import { GetStaticProps } from 'next';
 import BarScale from 'components/barScale';
 import Legenda from 'components/legenda';
 import { FCWithLayout } from 'components/layout';
-import { getNationalLayout } from 'components/layout/NationalLayout';
+import {
+  getNationalLayout,
+  NationalLayoutProps,
+} from 'components/layout/NationalLayout';
 import { AreaChart } from 'components/tiles/index';
 import { ContentHeader } from 'components/layout/Content';
 
@@ -14,10 +17,7 @@ import Repro from 'assets/reproductiegetal.svg';
 
 import siteText from 'locale';
 
-import {
-  ReproductionIndex as ReproductionIndexData,
-  National,
-} from 'types/data';
+import { ReproductionIndex as ReproductionIndexData } from 'types/data';
 
 const text: typeof siteText.reproductiegetal = siteText.reproductiegetal;
 
@@ -60,11 +60,7 @@ export function ReproductionIndexBarScale(props: {
   );
 }
 
-interface IProps {
-  data: National;
-}
-
-const ReproductionIndex: FCWithLayout<IProps> = ({ data }) => {
+const ReproductionIndex: FCWithLayout<NationalLayoutProps> = ({ data }) => {
   const lastKnownValidData: ReproductionIndexData =
     data.reproduction_index_last_known_average;
 
@@ -137,7 +133,7 @@ ReproductionIndex.getLayout = getNationalLayout();
 
 // This function gets called at build time on server-side.
 // It won't be called on client-side.
-export const getStaticProps: GetStaticProps<IProps> = async () => {
+export const getStaticProps: GetStaticProps<NationalLayoutProps> = async () => {
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
   const fileContents = fs.readFileSync(filePath, 'utf8');
 

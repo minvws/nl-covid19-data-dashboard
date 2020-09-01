@@ -33,8 +33,15 @@ import useMediaQuery from 'utils/useMediaQuery';
 
 export default NationalLayout;
 
+export interface NationalLayoutProps {
+  data: National;
+}
+
 export function getNationalLayout() {
-  return function (page: React.ReactNode, pageProps: any): React.ReactNode {
+  return function (
+    page: React.ReactNode,
+    pageProps: NationalLayoutProps
+  ): React.ReactNode {
     return getSiteLayout(siteText.nationaal_metadata)(
       <NationalLayout pageProps={pageProps}>{page}</NationalLayout>
     );

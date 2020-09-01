@@ -1,7 +1,10 @@
 import { FCWithLayout } from 'components/layout';
-import { getNationalLayout } from 'components/layout/NationalLayout';
+import {
+  getNationalLayout,
+  NationalLayoutProps,
+} from 'components/layout/NationalLayout';
 
-const National: FCWithLayout = () => {
+const National: FCWithLayout<NationalLayoutProps> = () => {
   return null;
 };
 
