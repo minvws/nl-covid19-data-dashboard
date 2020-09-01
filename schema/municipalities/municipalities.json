@@ -30,18 +30,21 @@
     },
     "hospital_admissions": {
       "type": "array",
+      "maxItems": 355,
       "items": {
         "$ref": "hospital_admissions.json"
       }
     },
     "positive_tested_people": {
       "type": "array",
+      "maxItems": 355,
       "items": {
         "$ref": "positive_tested_people.json"
       }
     },
     "deceased": {
       "type": "array",
+      "maxItems": 355,
       "items": {
         "$ref": "deceased.json"
       }
