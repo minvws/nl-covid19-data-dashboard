@@ -91,7 +91,7 @@ const PostivelyTestedPeople: FCWithLayout = () => {
         <p>{text.fold}</p>
 
         <MunicipalityMap
-          metric="Total_reported"
+          metric="positive_tested_people"
           gradient={['#9DDEFE', '#0290D6']}
         />
       </article>

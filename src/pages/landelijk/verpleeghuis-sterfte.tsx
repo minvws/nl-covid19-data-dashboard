@@ -68,7 +68,7 @@ const NursingHomeDeaths: FCWithLayout = () => {
         <h3>{text.fold_title}</h3>
         <p>{text.fold}</p>
 
-        <MunicipalityMap metric="Deceased" gradient={['#9DDEFE', '#0290D6']} />
+        <MunicipalityMap metric="deceased" gradient={['#9DDEFE', '#0290D6']} />
       </article>
 
       <article className="metric-article">
