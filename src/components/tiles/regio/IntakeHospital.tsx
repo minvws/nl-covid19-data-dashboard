@@ -16,8 +16,8 @@ import { Regionaal, RegionaalValue } from 'types/data';
 import siteText from 'locale';
 
 interface IProps {
-  data: Regionaal;
-  selectedRegio: SafetyRegion | undefined;
+  data?: Regionaal;
+  selectedRegio?: SafetyRegion | undefined;
   contentRef: React.RefObject<HTMLHeadingElement>;
 }
 

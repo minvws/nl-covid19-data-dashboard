@@ -5,7 +5,7 @@ import { useMemo, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetStaticPaths } from 'next';
 
 import MaxWidth from 'components/maxWidth';
 import LastUpdated from 'components/lastUpdated';
@@ -52,7 +52,13 @@ type RegioProps = {
   data: Regionaal;
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+type IParams = {
+  params: {
+    region: string;
+  };
+};
+
+export const getStaticProps = async ({ params }: IParams) => {
   const { region } = params;
 
   const filePath = path.join(process.cwd(), 'public', 'json', `${region}.json`);

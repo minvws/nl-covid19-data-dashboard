@@ -18,8 +18,8 @@ import siteText from 'locale';
 import formatNumber from 'utils/formatNumber';
 
 interface IProps {
-  data: Regionaal;
-  selectedRegio: SafetyRegion | undefined;
+  data?: Regionaal;
+  selectedRegio?: SafetyRegion | undefined;
 }
 
 export default PostivelyTestedPeople;

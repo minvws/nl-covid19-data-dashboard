@@ -17,8 +17,8 @@ import formatNumber from 'utils/formatNumber';
 import LoadingPlaceholder from 'components/loadingPlaceholder';
 
 interface IProps {
-  data: Regionaal;
-  selectedRegio: SafetyRegion | undefined;
+  data?: Regionaal;
+  selectedRegio?: SafetyRegion | undefined;
 }
 
 export default SewerWater;
