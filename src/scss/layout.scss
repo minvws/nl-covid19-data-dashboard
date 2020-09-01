@@ -99,9 +99,17 @@
   }
 }
 
+@media (min-width: 1400px) {
+  .national-layout {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1em;
+  }
+}
+
 .national-aside {
   background: white;
-  box-shadow: 3px -1px 5px lightgrey;
+  box-shadow: 1px -1px 5px #e5e5e5, -1px -1px 5px #e5e5e5;
   z-index: 2;
 
   h2 {
@@ -164,7 +172,6 @@ a.active-metric-link {
   border-right: 5px solid $red;
 }
 
-
 .layout-two-column {
   display: flex;
   flex-direction: column;
@@ -200,5 +207,4 @@ a.active-metric-link {
       margin-left: $default-margin * 3;
     }
   }
-
 }
