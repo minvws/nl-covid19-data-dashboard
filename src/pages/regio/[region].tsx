@@ -1,6 +1,11 @@
-import { useRef } from 'react';
+import fs from 'fs';
+import path from 'path';
+
+import { useMemo, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
+
+import { GetStaticPaths, GetStaticProps } from 'next';
 
 import MaxWidth from 'components/maxWidth';
 import LastUpdated from 'components/lastUpdated';
@@ -26,6 +31,7 @@ const twitterImage = locale === 'nl' ? twitterImageNL : twitterImageEN;
 
 import siteText from 'locale';
 
+import { Regionaal } from 'types/data';
 const MapChart = dynamic(() => import('components/mapChart'));
 
 export type SafetyRegion = {
@@ -42,16 +48,17 @@ export type MunicipalityMapping = {
 type RegioProps = {
   municipalities: MunicipalityMapping[];
   safetyRegions: SafetyRegion[];
+  region: string;
+  data: Regionaal;
 };
 
-type RegioStaticProps = {
-  props: {
-    municipalities: MunicipalityMapping[];
-    safetyRegions: SafetyRegion[];
-  };
-};
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const { region } = params;
 
-export async function getStaticProps(): Promise<RegioStaticProps> {
+  const filePath = path.join(process.cwd(), 'public', 'json', `${region}.json`);
+  const fileContents = fs.readFileSync(filePath, 'utf8');
+  const regionData = JSON.parse(fileContents);
+
   const municipalityMapping = require('../../data/gemeente_veiligheidsregio.json');
   const safetyRegions: SafetyRegion[] = require('../../data/index').default;
 
@@ -66,6 +73,7 @@ export async function getStaticProps(): Promise<RegioStaticProps> {
 
   return {
     props: {
+      data: regionData,
       municipalities: map.sort((a, b) => {
         const safetyRegionA = safetyRegions.find(
           (el) => el.code === a.safetyRegion
@@ -86,7 +94,7 @@ export async function getStaticProps(): Promise<RegioStaticProps> {
         .sort((a, b) => a.name.localeCompare(b.name)),
     },
   };
-}
+};
 
 export function RegioDataLoading() {
   return (
@@ -98,21 +106,57 @@ export function RegioDataLoading() {
 }
 
 const Regio: FCWithLayout<RegioProps> = (props) => {
-  const { municipalities, safetyRegions } = props;
+  const { municipalities, safetyRegions, data } = props;
 
   const router = useRouter();
 
+  const { region } = router.query;
+
+  const selectedRegio = useMemo(() => {
+    const selectedRegioCode = region;
+    return selectedRegioCode
+      ? safetyRegions.find((el) => el.code === selectedRegioCode)
+      : undefined;
+  }, [region, safetyRegions]);
+
   const contentRef = useRef(null);
   const selectRegioWrapperRef = useRef(null);
+
+  /**
+   * Focuses region select element. Triggered by a screen reader
+   * only button at the end of the content.
+   */
+  const focusRegioSelect = () => {
+    if (!selectRegioWrapperRef.current) return;
+
+    const el = selectRegioWrapperRef.current as any;
+    const input = el.querySelector('input');
+    if (input) input.focus();
+  };
+
+  /**
+   * Focuses the first heading in the content column,
+   * used after region changes to move focus for visually impaired
+   * users so they know what has changed.
+   */
+  const focusFirstHeading = () => {
+    const el = contentRef.current as any;
+    if (el) el.focus();
+  };
 
   const setSelectedRegio = (safetyRegionCode: SafetyRegion['code']): void => {
     router.replace('/regio/[region]', `/regio/${safetyRegionCode}`);
   };
 
+  useEffect(focusFirstHeading, [data]);
+
   return (
     <>
       <MaxWidth>
-        <LastUpdated loadingText={'\u00A0'} />
+        <LastUpdated
+          lastUpdated={+data?.last_generated * 1000}
+          loadingText={selectedRegio ? null : '\u00A0'}
+        />
         <div className={styles['regio-grid']}>
           <div className={styles['map-column']} ref={selectRegioWrapperRef}>
             <SelectMunicipality
@@ -124,24 +168,33 @@ const Regio: FCWithLayout<RegioProps> = (props) => {
             <div className={styles['map-container']}>
               <div className={styles['safety-region-header']}>
                 <p>Uw veiligheidsregio</p>
-                <span className={styles['select-safety-region']}>
-                  Selecteer een veiligheidsregio of gemeente
-                </span>
+                {selectedRegio && <h2>{selectedRegio.name}</h2>}
+                {!selectedRegio && (
+                  <span className={styles['select-safety-region']}>
+                    Selecteer een veiligheidsregio of gemeente
+                  </span>
+                )}
               </div>
               <MapChart selected={{ id: 'GM0074' }} metric="Total_reported" />
             </div>
           </div>
 
           <div className={styles['panel-column']}>
-            <IntakeHospital contentRef={contentRef} />
+            <IntakeHospital
+              selectedRegio={selectedRegio}
+              data={data}
+              contentRef={contentRef}
+            />
 
-            <PostivelyTestedPeople />
+            <PostivelyTestedPeople selectedRegio={selectedRegio} data={data} />
 
-            <SewerWater />
+            <SewerWater selectedRegio={selectedRegio} data={data} />
           </div>
         </div>
         <ScreenReaderOnly>
-          <button>{siteText.terug_naar_regio_selectie.text}</button>
+          <button onClick={focusRegioSelect}>
+            {siteText.terug_naar_regio_selectie.text}
+          </button>
         </ScreenReaderOnly>
       </MaxWidth>
     </>
@@ -153,5 +206,22 @@ Regio.getLayout = getLayout({
   openGraphImage,
   twitterImage,
 });
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const paths = [];
+  for (let i = 1; i < 25; i++) {
+    const safetyRegionNumber = `${i}`.padStart(2, '0');
+    const safetyRegion = `VR${safetyRegionNumber}`;
+    paths.push({
+      params: {
+        region: safetyRegion,
+      },
+    });
+  }
+
+  // We'll pre-render only these paths at build time.
+  // { fallback: false } means other routes should 404.
+  return { paths, fallback: false };
+};
 
 export default Regio;
