@@ -1,9 +1,12 @@
 # Stage 0 - Install dependancies
 FROM node:12 as react-build-base
 WORKDIR /app
-COPY package/json yarn.lock ./
+COPY package.json yarn.lock ./
 RUN yarn
 COPY . .
+
+# Validation stage
+RUN yarn validate-json
 
 # Stage 1 - Build NL application
 FROM node:12 as react-build-nl
