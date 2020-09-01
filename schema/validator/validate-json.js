@@ -34,6 +34,7 @@ Promise.all(results)
   })
   .catch((error) => {
     console.error(error);
+    process.exit(1);
   });
 
 /** This function creates a SchemaValidator instance for the given schema
