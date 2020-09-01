@@ -1,9 +1,7 @@
 import useSWR from 'swr';
 
 import BarScale from 'components/barScale';
-import Metadata from 'components/metadata';
-import TitleWithIcon from 'components/titleWithIcon';
-import DateReported from 'components/dateReported';
+import { ContentHeader } from 'components/layout/Content';
 import { FCWithLayout } from 'components/layout';
 import { getNationalLayout } from 'components/layout/NationalLayout';
 import { LineChart } from 'components/tiles/index';
@@ -34,7 +32,7 @@ export function NursingHomeInfectedLocationsBarScale(props: {
     <BarScale
       min={0}
       max={30}
-      screenReaderText={text.screen_reader_graph_content}
+      screenReaderText={text.barscale_screenreader_text}
       value={data.last_value.total_new_reported_locations}
       id="besmette_locaties_verpleeghuis"
       rangeKey="total_new_reported_locations"
@@ -58,26 +56,44 @@ const NursingHomeInfectedLocations: FCWithLayout = () => {
 
   return (
     <>
-      <TitleWithIcon Icon={Locatie} title={text.title} as="h2" />
+      <ContentHeader
+        category="Verpleeghuiszorg"
+        title={text.titel}
+        Icon={Locatie}
+        subtitle={text.pagina_toelichting}
+        metadata={{
+          datumsText: text.datums,
+          dateUnix: newLocations?.last_value?.date_of_report_unix,
+          dateInsertedUnix: newLocations?.last_value?.date_of_insertion_unix,
+          dataSource: text.bron,
+        }}
+      />
+
+      <div className="layout-two-column">
+        <article className="metric-article column-item">
+          <h3>{text.barscale_titel}</h3>
+
+          <NursingHomeInfectedLocationsBarScale data={newLocations} />
+          <p>{text.barscale_toelichting}</p>
+        </article>
+
+        <article className="metric-article column-item">
+          {totalLocations && (
+            <h3>
+              {text.kpi_titel}{' '}
+              <span className="text-blue kpi">
+                {formatNumber(
+                  totalLocations.last_value.total_reported_locations
+                )}
+              </span>
+            </h3>
+          )}
+          <p>{text.kpi_toelichting}</p>
+        </article>
+      </div>
+
       <article className="metric-article">
-        <p>{text.text}</p>
-
-        <NursingHomeInfectedLocationsBarScale data={newLocations} />
-
-        {newLocations?.last_value?.total_new_reported_locations !== null && (
-          <DateReported
-            datumsText={text.datums}
-            dateInsertedUnix={newLocations?.last_value?.date_of_insertion_unix}
-            dateUnix={newLocations?.last_value?.date_of_report_unix}
-          />
-        )}
-
-        <h3>{text.fold_title}</h3>
-        <p>{text.fold}</p>
-      </article>
-
-      <article className="metric-article">
-        <h3>{text.graph_title}</h3>
+        <h3>{text.linechart_titel}</h3>
 
         {newLocations && (
           <LineChart
@@ -87,18 +103,6 @@ const NursingHomeInfectedLocations: FCWithLayout = () => {
             }))}
           />
         )}
-
-        {totalLocations && (
-          <h4>
-            {text.metric_title}{' '}
-            <span className="text-blue">
-              {formatNumber(totalLocations.last_value.total_reported_locations)}
-            </span>
-          </h4>
-        )}
-        <p>{text.metric_text}</p>
-
-        {newLocations && <Metadata dataSource={text.bron} />}
       </article>
     </>
   );

@@ -1,12 +1,10 @@
 import useSWR from 'swr';
 
 import BarScale from 'components/barScale';
-import Metadata from 'components/metadata';
-import TitleWithIcon from 'components/titleWithIcon';
-import DateReported from 'components/dateReported';
 import { FCWithLayout } from 'components/layout';
 import { getNationalLayout } from 'components/layout/NationalLayout';
 import { LineChart } from 'components/tiles/index';
+import { ContentHeader } from 'components/layout/Content';
 
 import Ziekenhuis from 'assets/ziekenhuis.svg';
 
@@ -30,7 +28,7 @@ export function IntakeHospitalBarScale(props: {
       min={0}
       max={100}
       signaalwaarde={40}
-      screenReaderText={text.screen_reader_graph_content}
+      screenReaderText={text.barscale_screenreader_text}
       value={data.last_value.moving_average_hospital}
       id="opnames"
       rangeKey="moving_average_hospital"
@@ -59,30 +57,46 @@ const IntakeHospital: FCWithLayout = () => {
 
   return (
     <>
-      <TitleWithIcon Icon={Ziekenhuis} title={text.title} as="h2" />
-      <article className="metric-article">
-        <p>{text.text}</p>
+      <ContentHeader
+        category="Medische indicatoren"
+        title={text.titel}
+        Icon={Ziekenhuis}
+        subtitle={text.pagina_toelichting}
+        metadata={{
+          datumsText: text.datums,
+          dateUnix: data?.last_value?.date_of_report_unix,
+          dataSource: text.bron,
+        }}
+      />
 
-        <IntakeHospitalBarScale data={data} />
+      <article className="metric-article layout-two-column">
+        <div className="column-item column-item-extra-margin">
+          <h3>{text.barscale_titel}</h3>
 
-        {data?.last_value?.moving_average_hospital !== null && (
-          <DateReported
-            datumsText={text.datums}
-            dateUnix={data?.last_value?.date_of_report_unix}
+          <IntakeHospitalBarScale data={data} />
+        </div>
+
+        <div className="column-item column-item-extra-margin">
+          <p>{text.extra_uitleg}</p>
+        </div>
+      </article>
+
+      <article className="metric-article layout-two-column">
+        <div className="column-item column-item-extra-margin">
+          <h3>{text.map_titel}</h3>
+          <p>{text.map_toelichting}</p>
+        </div>
+
+        <div className="column-item column-item-extra-margin">
+          <MunicipalityMap
+            metric="Hospital_admission"
+            gradient={['#69c253', '#f35065']}
           />
-        )}
-
-        <h3>{text.fold_title}</h3>
-        <p>{text.fold}</p>
-
-        <MunicipalityMap
-          metric="Hospital_admission"
-          gradient={['#69c253', '#f35065']}
-        />
+        </div>
       </article>
 
       <article className="metric-article">
-        <h3>{text.graph_title}</h3>
+        <h3>{text.linechart_titel}</h3>
 
         {data && (
           <>
@@ -93,8 +107,6 @@ const IntakeHospital: FCWithLayout = () => {
               }))}
               signaalwaarde={40}
             />
-
-            <Metadata dataSource={text.bron} />
           </>
         )}
       </article>

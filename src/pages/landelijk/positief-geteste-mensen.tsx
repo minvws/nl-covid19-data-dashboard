@@ -1,12 +1,11 @@
 import useSWR from 'swr';
 
 import BarScale from 'components/barScale';
-import Metadata from 'components/metadata';
-import TitleWithIcon from 'components/titleWithIcon';
-import DateReported from 'components/dateReported';
 import { FCWithLayout } from 'components/layout';
 import { getNationalLayout } from 'components/layout/NationalLayout';
 import { LineChart, BarChart } from 'components/tiles/index';
+import MunicipalityMap from 'components/mapChart';
+import { ContentHeader } from 'components/layout/Content';
 
 import Getest from 'assets/test.svg';
 import formatDecimal from 'utils/formatNumber';
@@ -18,7 +17,6 @@ import {
   InfectedPeopleTotal,
   IntakeShareAgeGroups,
 } from 'types/data';
-import MunicipalityMap from 'components/mapChart';
 
 const text: typeof siteText.positief_geteste_personen =
   siteText.positief_geteste_personen;
@@ -34,7 +32,7 @@ export function PostivelyTestedPeopleBarScale(props: {
     <BarScale
       min={0}
       max={10}
-      screenReaderText={text.screen_reader_graph_content}
+      screenReaderText={text.barscale_screenreader_text}
       value={data.last_value.infected_daily_increase}
       id="positief"
       rangeKey="infected_daily_increase"
@@ -65,39 +63,57 @@ const PostivelyTestedPeople: FCWithLayout = () => {
 
   return (
     <>
-      <TitleWithIcon Icon={Getest} title={text.title} as="h2" />
-      <article className="metric-article">
-        <p>{text.text}</p>
+      <ContentHeader
+        category="Medische indicatoren"
+        title={text.titel}
+        Icon={Getest}
+        subtitle={text.pagina_toelichting}
+        metadata={{
+          datumsText: text.datums,
+          dateUnix: delta?.last_value?.date_of_report_unix,
+          dateInsertedUnix: delta?.last_value?.date_of_insertion_unix,
+          dataSource: text.bron,
+        }}
+      />
 
-        {delta && <PostivelyTestedPeopleBarScale data={delta} />}
+      <div className="layout-two-column">
+        <article className="metric-article column-item">
+          <h3>{text.barscale_titel}</h3>
 
-        {total && (
-          <h3>
-            {text.metric_title}{' '}
-            <span style={{ color: '#01689b' }}>
-              {formatDecimal(total.last_value.infected_daily_total)}
-            </span>
-          </h3>
-        )}
+          {delta && <PostivelyTestedPeopleBarScale data={delta} />}
+          <p>{text.barscale_toelichting}</p>
+        </article>
 
-        {delta?.last_value?.infected_daily_increase !== null && (
-          <DateReported
-            datumsText={text.datums}
-            dateUnix={delta?.last_value?.date_of_report_unix}
-            dateInsertedUnix={delta?.last_value?.date_of_insertion_unix}
+        <article className="metric-article column-item">
+          {total && (
+            <h3>
+              {text.kpi_titel}{' '}
+              <span className="text-blue kpi">
+                {formatDecimal(total.last_value.infected_daily_total)}
+              </span>
+            </h3>
+          )}
+          <p>{text.kpi_toelichting}</p>
+        </article>
+      </div>
+
+      <article className="metric-article layout-two-column">
+        <div className="column-item column-item-extra-margin">
+          <h3>{text.map_titel}</h3>
+          <p>{text.map_toelichting}</p>
+        </div>
+
+        <div className="column-item column-item-extra-margin">
+          <MunicipalityMap
+            metric="Total_reported"
+            gradient={['#9DDEFE', '#0290D6']}
           />
-        )}
-        <h3>{text.fold_title}</h3>
-        <p>{text.fold}</p>
-
-        <MunicipalityMap
-          metric="Total_reported"
-          gradient={['#9DDEFE', '#0290D6']}
-        />
+        </div>
       </article>
 
       <article className="metric-article">
-        <h3>{text.linechart_title}</h3>
+        <h3>{text.linechart_titel}</h3>
+        <p>{text.linechart_toelichting}</p>
         {delta && (
           <LineChart
             values={delta.values.map((value) => ({
@@ -109,7 +125,8 @@ const PostivelyTestedPeople: FCWithLayout = () => {
       </article>
 
       <article className="metric-article">
-        <h3>{text.graph_title}</h3>
+        <h3>{text.barscale_titel}</h3>
+        <p>{text.barchart_toelichting}</p>
         {age && (
           <>
             <BarChart
@@ -123,9 +140,8 @@ const PostivelyTestedPeople: FCWithLayout = () => {
                     ).toFixed(0)}%`
                   : false,
               }))}
-              axisTitle={text.graph_axis_title}
+              axisTitle={text.barchart_axis_titel}
             />
-            <Metadata dataSource={text.bron} />
           </>
         )}
       </article>

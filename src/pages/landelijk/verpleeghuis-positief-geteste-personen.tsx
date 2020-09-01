@@ -1,11 +1,9 @@
 import useSWR from 'swr';
 
 import BarScale from 'components/barScale';
-import Metadata from 'components/metadata';
-import TitleWithIcon from 'components/titleWithIcon';
-import DateReported from 'components/dateReported';
 import { FCWithLayout } from 'components/layout';
 import { getNationalLayout } from 'components/layout/NationalLayout';
+import { ContentHeader } from 'components/layout/Content';
 import { LineChart } from 'components/tiles/index';
 
 import Getest from 'assets/test.svg';
@@ -28,7 +26,7 @@ export function NursingHomeInfectedPeopleBarScale(props: {
     <BarScale
       min={0}
       max={100}
-      screenReaderText={text.screen_reader_graph_content}
+      screenReaderText={text.barscale_screenreader_text}
       value={data.last_value.infected_nursery_daily}
       id="positief_verpleeghuis"
       rangeKey="infected_nursery_daily"
@@ -50,38 +48,41 @@ const NursingHomeInfectedPeople: FCWithLayout = () => {
 
   return (
     <>
-      <TitleWithIcon Icon={Getest} title={text.title} as="h2" />
+      <ContentHeader
+        category="Verpleeghuiszorg"
+        title={text.titel}
+        Icon={Getest}
+        subtitle={text.pagina_toelichting}
+        metadata={{
+          datumsText: text.datums,
+          dateUnix: data?.last_value?.date_of_report_unix,
+          dateInsertedUnix: data?.last_value?.date_of_insertion_unix,
+          dataSource: text.bron,
+        }}
+      />
 
-      <article className="metric-article">
-        <p>{text.text}</p>
+      <article className="metric-article layout-two-column">
+        <div className="column-item column-item-extra-margin">
+          <h3>{text.barscale_titel}</h3>
 
-        <NursingHomeInfectedPeopleBarScale data={data} />
+          <NursingHomeInfectedPeopleBarScale data={data} />
+        </div>
 
-        {data?.last_value?.infected_nursery_daily !== null && (
-          <DateReported
-            datumsText={text.datums}
-            dateInsertedUnix={data?.last_value?.date_of_insertion_unix}
-            dateUnix={data?.last_value?.date_of_report_unix}
-          />
-        )}
-
-        <h3>{text.fold_title}</h3>
-        <p>{text.fold}</p>
+        <div className="column-item column-item-extra-margin">
+          <p>{text.extra_uitleg}</p>
+        </div>
       </article>
 
       <article className="metric-article">
-        <h3>{text.graph_title}</h3>
+        <h3>{text.linechart_titel}</h3>
 
         {data && (
-          <>
-            <LineChart
-              values={data.values.map((value) => ({
-                value: value.infected_nursery_daily,
-                date: value.date_of_report_unix,
-              }))}
-            />
-            <Metadata dataSource={text.bron} />
-          </>
+          <LineChart
+            values={data.values.map((value) => ({
+              value: value.infected_nursery_daily,
+              date: value.date_of_report_unix,
+            }))}
+          />
         )}
       </article>
     </>
