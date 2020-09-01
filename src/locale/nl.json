@@ -9,8 +9,8 @@
     "message": "Laatst bijgewerkt"
   },
   "notificatie": {
-    "titel": "Lichte daling in besmettingen COVID-19",
-    "bericht": "Het aantal nieuwe personen dat positief is getest, is licht gedaald sinds vorige week. Sinds eind juli is een toename zichtbaar van het aantal ziekenhuisopnames door COVID-19. De meeste nieuwe vastgestelde besmettingen vinden plaats in de provincies Zuid-Holland en Noord-Holland. De meeste nieuwe vastgestelde besmettingen zijn nog steeds in de leeftijdsgroep 20 tot 40 jaar. Het reproductiegetal is licht gedaald sinds vorige week en ligt rond de 1.",
+    "titel": "Besmettingen COVID-19 stabiel",
+    "bericht": "Het aantal nieuwe personen dat positief is getest, is de afgelopen week gelijk gebleven. Net als vorige week komen de meeste meldingen van nieuwe besmettingen uit de provincies Zuid-Holland en Noord-Holland. De aantallen gerapporteerde ziekenhuisopnames en intensive-care opnames vanwege COVID-19 zijn gedaald.  Het reproductiegetal ligt net als vorige week rond de 1.",
     "link": {
       "text": "Bekijk de actuele informatie van het RIVM",
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel"
@@ -251,16 +251,13 @@
   "geen_selectie": {
     "text": "Selecteer uw regio bovenaan deze pagina"
   },
-  "no_data_for_this_municipality": {
-    "text": "Deze informatie is niet beschikbaar voor deze gemeente."
-  },
   "rioolwater_metingen": {
     "title": "Rioolwatermeting",
     "text": "Het aantal virusdeeltjes in een milliliter rioolwater, afkomstig van circa 80 locaties in Nederland. Voor het landelijke cijfer wordt uitgegaan van het totaal aantal virusdeeltjes dat wordt aangetroffen in een week, gedeeld door het totaal aantal locaties waar de data van afkomstig is. Het aantal meetpunten wordt vanaf september verder uitgebreid naar meer dan 300.",
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
     "graph_title": "Verloop over tijd",
     "fold_title": "Wat betekent dit?",
-    "fold": "In rioolwater kun je ziekteverwekkers zoals het nieuwe coronavirus meten omdat die met ontlasting via de wc in het rioolwater komen. Op elke locatie testen onderzoekers van het RIVM eens per week rioolwater dat over 24 uur verzameld is. Niet alle besmette personen scheiden het virus ook uit, de virusdeeltjes zijn dus afkomstig uit ontlasting van een deel van de besmette personen. In het huidige onderzoek kunnen trends in aantallen virusdeeltjes zoals een stijging of daling worden gezien. Het is de bedoeling dat het aantal meetpunten vanaf september wordt uitgebreid naar meer dan 300. Pas als het onderzoek volledig loopt, kunnen hier conclusies aan worden verbonden.  Let op: Met het beschikbaar komen van meer kwantitatieve gegevens kan het aantal virusdeeltjes nauwkeuriger bepaald worden. Daarom hanteert het RIVM sinds 18 augustus een aangepaste rekenmethode om het aantal virusdeeltjes per milliliter te bepalen. Met terugwerkende kracht zijn ook alle historische gegevens volgens dezelfde methode herrekend. De cijfers in de verloop over tijd grafiek van vóór 20 juli zijn gebaseerd op circa 28 locaties. Daarna worden de gegevens gebruikt van circa 80 locaties. Meer info onder cijferverantwoording.",
+    "fold": "In rioolwater kun je ziekteverwekkers zoals het nieuwe coronavirus meten omdat die met ontlasting via de wc in het rioolwater komen. Niet alle besmette personen scheiden het virus uit in hun ontlasting, de virusdeeltjes zijn dus afkomstig uit ontlasting van een deel van de besmette personen. In het huidige onderzoek kunnen trends in aantallen virusdeeltjes zoals een stijging of daling worden gezien. De aantallen kunnen niet vergeleken worden tussen locaties. Deze duiding volgt nog. Zie meer info in de cijferverantwoording.",
     "open": "Verberg uitleg",
     "sluit": "Meer uitleg en data",
     "screen_reader_graph_content": "{{value}} virusdeeltjes in een milliliter rioolwater, afkomstig van 28 locaties in Nederland.",
@@ -377,37 +374,6 @@
       "text": "RIVM"
     }
   },
-  "regionaal_municipality_ziekenhuisopnames_per_dag": {
-    "title": "Ziekenhuisopnames per dag",
-    "text": "Aantal opnames per dag, gemiddeld over de afgelopen 3 dagen.",
-    "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
-    "fold_title": "Wat betekent dit?",
-    "fold": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen.",
-    "graph_title": "Verloop over tijd",
-    "open": "Verberg uitleg",
-    "sluit": "Meer uitleg en data",
-    "screen_reader_graph_content": "{{value}} opnames.",
-    "bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
-      "text": "RIVM"
-    }
-  },
-  "regionaal_municipality_positief_geteste_personen": {
-    "title": "Positief geteste mensen",
-    "text": "Aantal positief geteste mensen per 100.000 inwoners per dag.",
-    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "metric_title": "Aantal positief geteste mensen:",
-    "fold_title": "Wat betekent dit?",
-    "fold": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
-    "graph_title": "Verloop over tijd",
-    "open": "Verberg uitleg",
-    "sluit": "Meer uitleg en data",
-    "screen_reader_graph_content": "{{value}} positief geteste personen.",
-    "bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
-      "text": "RIVM"
-    }
-  },
   "terug_naar_regio_selectie": {
     "text": "Terug naar regio selectie"
   },
@@ -429,11 +395,11 @@
       },
       {
         "cijfer": "Ziekenhuisopnames",
-        "verantwoording": "Deze gegevens worden dagelijks aangeleverd als open data door het [RIVM](https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_cumulatief.json). Het bestand wordt dagelijks om 10:00 online gezet en registreert het aantal ziekenhuisopnames in de afgelopen 24 uur.\n\nSinds 1 mei 2020 worden alleen opnames meegenomen waarbij niet is aangegeven dat de opname om een andere reden dan COVID-19 was. Dit geeft weer hoeveel mensen ernstig ziek zijn door COVID-19. Dit getal is een zo goed mogelijke indicator van de epidemie.\n\nHet bronbestand registreert op gemeenteniveau. Om tot landelijke gegevens te komen tellen we alle meldingen per gemeente bij elkaar op. Om deze gegevens te vertalen naar het niveau van de veiligheidsregio’s wordt [deze CBS-indeling](https://opendata.cbs.nl/#/CBS/nl/dataset/84721NED/table?dl=3A154) gebruikt. \n\nDeze dataset is geëxporteerd en opgeslagen als een JSON-bestand. Het gaat dan om de versie van de dataset zoals beschikbaar op 10 april 2020 (laatste publicatie bij tijde van schrijven van deze verantwoording). \n\nUit de data van het bronbestand wordt het gemiddelde berekend van de laatste drie dagen, dus inclusief de opnames t/m 10:00 vandaag. Door de waarden van elke dag (vandaag, gisteren en eergisteren) bijeen te tellen, te delen door drie en de uitkomst hiervan af te ronden naar één cijfer achter de komma komen we tot het gemiddelde.\n\nDe datum die gebruikt wordt is de datum van melding, omdat deze meer actuele informatie geeft dan de datum van test wanneer iemand bewezen Covid-19 heeft. \n\nOmdat ons doel vroegsignalering is baseren we ons op de meest recente gegevens en de datum van melding. Dat is niet hetzelfde als de datum waarop mensen zijn getest. Dit leidt wel tot een overschatting van het aantal ziekenhuisopnames. Voor de cijfers in het verleden waarin deze cijfers zijn gecorrigeerd kunt u de RIVM website [raadplegen](https://www.rivm.nl/coronavirus-covid-19/grafieken)."
+        "verantwoording": "Deze gegevens worden dagelijks aangeleverd als open data door het [RIVM](https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_cumulatief.json). Het bestand wordt dagelijks om 10:00 online gezet en registreert het aantal ziekenhuisopnames in de afgelopen 24 uur.\n\nSinds 1 mei 2020 worden alleen opnames meegenomen waarbij niet is aangegeven dat de opname om een andere reden dan COVID-19 was. Dit geeft weer hoeveel mensen ernstig ziek zijn door COVID-19. Dit getal is één van de indicatoren van het verloop van de epidemie.\n\nHet bronbestand registreert op gemeenteniveau. Om tot landelijke gegevens te komen tellen we alle meldingen per gemeente bij elkaar op. Om deze gegevens te vertalen naar het niveau van de veiligheidsregio’s wordt deze [deze CBS-indeling](https://opendata.cbs.nl/#/CBS/nl/dataset/84721NED/table?dl=3A154) gebruikt. \nLet op: in het aanleverbestand wordt voor sommige meldingen de gemeente niet vermeld. Deze kunnen daarom niet worden gekoppeld op veiligheidsregio en gemeente niveau. Wel worden deze meldingen meegenomen bij het tonen van het landelijk cijfer.\nDeze dataset is geëxporteerd en opgeslagen als een JSON-bestand. Uit de data van het bronbestand wordt het gemiddelde berekend van de laatste drie dagen, dus inclusief de opnames tot 10:00 vandaag. Door de nieuwe opnames van elke dag (vandaag, gisteren en eergisteren) bijelkaar op te tellen, te delen door drie en de uitkomst hiervan af te ronden naar één cijfer achter de komma komen we tot het gemiddelde.\nOmdat ons doel vroegsignalering is, baseren we ons op de meest recente gegevens en de datum van melding."
       },
       {
         "cijfer": "Aantal positief geteste mensen",
-        "verantwoording": "Deze gegevens worden dagelijks aangeleverd als open data door het [RIVM](https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_cumulatief.json). Het bestand wordt dagelijks om 10:00 online gezet en registreert het aantal positief geteste mensen in de afgelopen 24 uur.\n\nHet bronbestand registreert op gemeenteniveau. Om deze gegevens te vertalen naar het niveau van de veiligheidsregio’s wordt [deze CBS-indeling](https://opendata.cbs.nl/#/CBS/nl/dataset/84721NED/table?dl=3A154) gebruikt. Deze dataset is geexporteerd en opgeslagen als een JSON-bestand. Het gaat dan om de versie van de dataset zoals beschikbaar op 10 april 2020 (laatste publicatie bij tijde van schrijven van deze verantwoording).\n\nWe berekenen de toename van het aantal positief geteste mensen door het gerapporteerde cumulatief aantal meldingen van positief geteste mensen van vandaag, af te trekken van het cumulatief aantal van gisteren. Dit vormt het absolute aantal meldingen van positief geteste mensen op het dashboard.\n\nDaarnaast berekenen we op basis van die absolute aantallen het genormaliseerde aantal besmettelijke mensen. Dit doen we door het aantal inwoners van Nederland te delen door 100.000. Vervolgens gebruiken we het getal dat daaruit komt en delen we het absolute aantal zoals aangeven in het bronbestand hierdoor. De uitkomst hiervan vormt het getal per 100.000.\n\nDe datum die gebruikt wordt is de datum van melding. Dat is niet hetzelfde als de datum waarop mensen zijn getest. Voor meer informatie kunt u de RIVM website [raadplegen](https://www.rivm.nl/coronavirus-covid-19/grafieken). Correcties over oude data, zoals dubbeltellingen, worden door het RIVM verwerkt op de datum dat dit bekend is. Het gerapporteerde nieuwe aantal meldingen voor die dag ligt dan lager dan het feitelijk aantal die dag. Daar staat tegenover dat voorgaande dagen er dus teveel gevallen zijn gerapporteerd.\n\nDoor correctie kan het cumulatieve aantal van vandaag lager zijn dan het cumulatieve aantal van gisteren. In die gevallen wordt er op het dashboard de waarde 0 gepresenteerd in plaats van een negatief waarde; een negatieve waarde kan namelijk feitelijk niet: je kunt geen -0,4 besmettingen hebben in de afgelopen 3 dagen. Daarom krijg je uiteindelijk verschillen als je regio's optelt naar landelijk. Landelijke gegevens zijn namelijk het cumulatieve getal van alle gemeenten afgetrokken van het cumulatieve getal van gisteren, niet de som van de uitkomsten van dezelfde berekening voor veiligheidsregio's. Als je met negatieve waarden voor veiligheidsregio’s zou rekenen kom je wel op de juiste getallen uit.\n\nDe leeftijdsverdeling wordt bepaald op basis van de landelijke cijfers, omdat in het gemeentelijke bestand geen leeftijden worden geregistreerd. Er kan daarom inconsistentie ontstaan tussen de tabel zoals weergegeven op de website van het RIVM en zoals weergeven op het dashboard."
+        "verantwoording": "Deze gegevens worden dagelijks aangeleverd als open data door het [RIVM](https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_cumulatief.json). Het bestand wordt dagelijks om 10:00 online gezet en registreert het aantal positief geteste mensen in de afgelopen 24 uur.\n\nHet bronbestand registreert op gemeenteniveau. Om deze gegevens te vertalen naar het niveau van de veiligheidsregio’s wordt deze [deze CBS-indeling](https://opendata.cbs.nl/#/CBS/nl/dataset/84721NED/table?dl=3A154) gebruikt. Let op: in het aanleverbestand wordt voor sommige meldingen de gemeente niet vermeld. Deze kunnen daarom niet worden gekoppeld op veiligheidsregio en gemeente niveau. Wel worden deze meldingen meegenomen bij het tonen van het landelijk cijfer. \n\nWe berekenen de toename van het aantal positief geteste mensen door het gerapporteerde cumulatief aantal meldingen van positief geteste mensen van vandaag, af te trekken van het cumulatief aantal van gisteren. Dit vormt het absolute aantal meldingen van positief geteste mensen op het dashboard.\n\nDaarnaast berekenen we op basis van die absolute aantallen het relatieve aantal positief geteste mensen naar rato van het aantal inwoners. Dit doen we door het aantal positief geteste mensen te delen door het aantal inwoners van Nederland. We geven dit dan weer als het aantal positief geteste personen per 100.000 inwoners.\n\nDe datum die gebruikt wordt is de datum van melding. Dat is niet hetzelfde als de datum waarop mensen zijn getest. Voor meer informatie kunt u de RIVM website [raadplegen](https://www.rivm.nl/coronavirus-covid). Correcties over oude data, zoals dubbeltellingen, worden door het RIVM verwerkt op de datum dat dit bekend is. Het gerapporteerde nieuwe aantal meldingen voor die dag ligt dan lager dan het feitelijk aantal die dag. Daar staat tegenover dat voorgaande dagen er dus teveel gevallen zijn gerapporteerd.\n\nDoor correctie kan het cumulatieve aantal van vandaag lager zijn dan het cumulatieve aantal van gisteren. In die gevallen wordt er op het dashboard de waarde 0 gepresenteerd in plaats van een negatief waarde; een negatieve waarde kan namelijk feitelijk niet: je kunt geen -0,4 besmettingen hebben in de afgelopen 3 dagen. Daarom krijg je uiteindelijk verschillen als je regio's optelt naar landelijk. Landelijke gegevens zijn namelijk het cumulatieve getal van alle gemeenten afgetrokken van het cumulatieve getal van gisteren, niet de som van de uitkomsten van dezelfde berekening voor veiligheidsregio's. Als je met negatieve waarden voor veiligheidsregio’s zou rekenen kom je wel op de juiste getallen uit.\n\nDe leeftijdsverdeling wordt bepaald op basis van de landelijke cijfers, omdat in het gemeentelijke bestand geen leeftijden worden geregistreerd. Er kan daarom inconsistentie ontstaan tussen de tabel zoals weergegeven op de website van het RIVM en zoals weergeven op het dashboard."
       },
       {
         "cijfer": "Reproductiegetal",
@@ -453,7 +419,7 @@
       },
       {
         "cijfer": "Aantal besmettelijke mensen",
-        "verantwoording": "Deze gegevens worden wekelijks (op dinsdag) aangeleverd als open data door het [RIVM](https://data.rivm.nl/covid-19/COVID-19_prevalentie.json). De waarden zoals weergeven in het bestand worden direct overgenomen op het dashboard. Daarnaast berekenen we op basis van de absolute aantallen het genormaliseerde aantal besmettelijke mensen. Dit doen we door het aantal inwoners van Nederland te delen door 100.000. Vervolgens gebruiken we het getal dat daaruit komt en delen we het absolute aantal zoals aangeven in het bronbestand. De uitkomst hiervan vormt het getal per 100.000.\n\nHet RIVM baseert de berekening achter het aantal besmettelijke mensen op het aantal meldingen van COVID-19 per dag. Tot 30 juni was deze gebaseerd op het aantal mensen met COVID-19 dat per dag werd opgenomen op de intensive care. Omdat het aantal intensive care opnamen laag is, is het aantal COVID-19 meldingen een meer geschikte indicator om het tijdsverloop in aantal besmettelijke mensen te volgen. Het geschat aantal besmettelijke mensen wordt door het RIVM berekend op basis van het aantal besmettingen en de duur van de besmettelijke periode. De duur van de besmettelijke periode is per persoon verschillend. Deze kan variëren tussen 6 en 10 dagen. Het aantal besmettingen baseert het RIVM op het aantal COVID-19 meldingen. Ook gebruikt het RIVM een omrekenfactor om rekening te houden met het aantal besmettingen dat niet gemeld wordt. De omrekenfactor leidt het RIVM af uit de waargenomen ziekenhuisopnames met COVID 19 en uit het percentage van de mensen met antistoffen in het bloed tegen het virus dat COVID19 veroorzaakt. Het RIVM houdt er rekening mee dat een heel klein percentage van de testen een onterechte positieve uitslag kan geven.\n\nVoor het aantal besmettelijke mensen is geen signaalwaarde beschikbaar omdat dit aantal een inschatting is gebaseerd op een berekening."
+        "verantwoording": "Deze gegevens worden wekelijks (op dinsdag) aangeleverd als open data door het [RIVM](https://data.rivm.nl/covid-19/COVID-19_prevalentie.json). De waarden zoals weergeven in het bestand worden direct overgenomen op het dashboard. Daarnaast berekenen we op basis van de absolute aantallen het genormaliseerde aantal besmettelijke mensen. Dit doen we door het aantal inwoners van Nederland te delen door 100.000. Vervolgens gebruiken we het getal dat daaruit komt en delen we het absolute aantal zoals aangeven in het bronbestand. De uitkomst hiervan vormt het getal per 100.000.\n\nHet RIVM baseert de berekening achter het aantal besmettelijke mensen op het aantal meldingen van COVID-19 per dag. Tot 30 juni was deze gebaseerd op het aantal mensen met COVID-19 dat per dag werd opgenomen op de intensive care. Omdat het aantal intensive care opnamen laag is, is het aantal COVID-19 meldingen een meer geschikte indicator om het tijdsverloop in aantal besmettelijke mensen te volgen. Het geschat aantal besmettelijke mensen wordt door het RIVM berekend op basis van het aantal besmettingen en de duur van de besmettelijke periode. De duur van de besmettelijke periode is per persoon verschillend. Deze kan variëren tussen 6 en 10 dagen. Het aantal besmettingen baseert het RIVM op het aantal COVID-19 meldingen. Ook gebruikt het RIVM een omrekenfactor om rekening te houden met het aantal besmettingen dat niet gemeld wordt. De omrekenfactor leidt het RIVM af uit de waargenomen ziekenhuisopnames met COVID-19 en uit het percentage van de mensen met antistoffen in het bloed tegen het virus dat COVID-19 veroorzaakt. Het RIVM houdt er rekening mee dat een heel klein percentage van de testen een onterechte positieve uitslag kan geven.\n\nVoor het aantal besmettelijke mensen is geen signaalwaarde beschikbaar omdat dit aantal een inschatting is gebaseerd op een berekening."
       },
       {
         "cijfer": "Aantal patiënten met eerste melding van COVID-19 klachten bij de huisarts",
@@ -461,7 +427,7 @@
       },
       {
         "cijfer": "Rioolwatermeting",
-        "verantwoording": "In rioolwater kun je ziekteverwekkers zoals het nieuwe coronavirus meten omdat die met ontlasting via de wc in het rioolwater komen. Op elke locatie testen onderzoekers van het RIVM eens per week rioolwater dat over 24 uur verzameld is. Dit onderzoek laat zien hoeveel virusdeeltjes in het rioolwater zitten afkomstig uit ontlasting van een deel van de besmette personen. Het is de bedoeling dat het aantal meetpunten vanaf september wordt uitgebreid van circa 80 naar meer dan 300. Per week kan het aantal gemeten locaties variëren, omdat niet elke meting succesvol wordt afgerond. In het open data bestand staat per datum welke locaties gemeten zijn. Let op dat de cijfers van vóór 20 juli zijn gebaseerd op circa 28 locaties. In het huidige onderzoek kunnen trends in aantallen virusdeeltjes zoals een stijging of daling worden gezien. Pas als het onderzoek volledig loopt, kunnen hier conclusies aan worden verbonden.\n\nDe gegevens worden wekelijks (op dinsdag) geleverd [als open data door het RIVM](https://data.rivm.nl/covid-19/COVID-19_rioolwaterdata.csv). Let op dat dit bestand op 19 augustus rond 15:00 voor het eerst beschikbaar komt. Met het beschikbaar komen van meer kwantitatieve gegevens kan het aantal virusdeeltjes nauwkeuriger bepaald worden. Daarom hanteert het RIVM sinds 18 augustus een aangepaste rekenmethode om het aantal virusdeeltjes per milliliter te bepalen.\n\nIn de grafiek zie je op de Y-as het aantal virusdeeltjes in een milliliter rioolwater. Op de X-as zie je de datum waarop het materiaal is verzameld uit het rioolwater. Het landelijk en regionale gemiddelde betreft een weekgemiddelde. De som van de geleverde waarden in de week, wordt gedeeld door het aantal locaties waar meetwaarden voor die week geleverd zijn. De gerapporteerde weken lopen van zondag t/m zaterdag. Deze weekgemiddelden worden in de grafiek weergegeven op de maandag van de week. De gemeten waarde per locatie staat in de grafiek wel op de datum waarop de meting daadwerkelijk plaatsvond.\n\nOm te bepalen welke locatie tot welke veiligheidsregio behoort, wordt gekeken naar het verzorgingsgebied van de locatie. Dit is het gebied waarvoor de zuiveringsinstallatie water zuivert. Het RIVM levert per locatie aan voor hoeveel procent deze in een veiligheidsregio valt. Deze verdeling is nog niet volledig accuraat en wordt de komende tijd verder uitgewerkt. Sommige locaties hebben een verzorgingsgebied dat meerdere veiligheidsregio’s bevat. Indien dat zo is, wordt de locatie op het dashboard volledig toegewezen aan de veiligheidsregio dat het grootste deel van het verzorgingsgebied bevat.\n\nDe getoonde virusdeeltjes per milliliter kunnen worden beïnvloed door een aantal extra factoren. Onder andere regenval kan het aantal gemeten deeltjes per milliliter verlagen, doordat het rioolwater hierdoor wordt verdund. Ook kunnen aangesloten industriegebieden ditzelfde effect hebben, omdat daar in het rioolwater meestal geen of nauwelijks menselijke ontlasting te vinden is. Tevens kan de concentratie virusdeeltjes per milliliter zo laag zijn, dat het niet gemeten wordt. Dit leidt dan tot een meting met een waarde van nul deeltjes per milliliter.\n\nIn het open data bestand staat aangegeven of een meting representatief is of niet. In het dashboard maken we alleen gebruik van representatieve data."
+        "verantwoording": "In rioolwater kun je ziekteverwekkers zoals het nieuwe coronavirus meten omdat die met ontlasting via de wc in het rioolwater komen. Dit onderzoek laat zien hoeveel virusdeeltjes in het rioolwater zitten afkomstig uit ontlasting van een deel van de besmette personen. Op elke locatie testen onderzoekers van het RIVM eens per week rioolwater dat over 24 uur verzameld is.  Per week kan het aantal gemeten locaties variëren, omdat niet elke meting succesvol wordt afgerond. In het open data bestand staat per datum bij welke locaties gemeten is. Let op dat de cijfers van vóór 20 juli zijn gebaseerd op circa 28 locaties. In het huidige onderzoek kunnen trends in aantallen virusdeeltjes zoals een stijging of daling worden gezien. Pas als het onderzoek volledig loopt, kunnen hier conclusies aan worden verbonden. De aantallen kunnen niet vergeleken worden tussen locaties. Deze duiding volgt nog. Het is de bedoeling dat het aantal meetpunten vanaf september wordt uitgebreid van circa 80 naar meer dan 300.\n\nDe gegevens worden wekelijks (op dinsdag) geleverd [als open data door het RIVM](https://data.rivm.nl/covid-19/COVID-19_rioolwaterdata.csv). Met het beschikbaar komen van meer gegevens kan het aantal virusdeeltjes nauwkeuriger bepaald worden. Het RIVM hanteert sinds 18 augustus een aangepaste rekenmethode om het aantal virusdeeltjes per milliliter te bepalen. In het open data bestand staat aangegeven of een meting representatief is of niet, in het dashboard maken we alleen gebruik van representatieve data.\n\nIn de grafiek staat op de Y-as het aantal virusdeeltjes in een milliliter rioolwater. Op de X-as staat de datum waarop het het rioolwater is verzameld. Het landelijk en regionale gemiddelde betreft een weekgemiddelde. De som van de geleverde waarden in de week, wordt gedeeld door het aantal locaties waarover meetwaarden voor die week geleverd zijn. De gerapporteerde weken lopen van maandag t/m zondag. De gemeten waarden per afzonderlijke locatie staan in de grafiek op de datum waarop de monstername van het rioolwater us gestart. \n\nDe getoonde virusdeeltjes per milliliter kunnen worden beïnvloed door een aantal extra factoren. Regenval bijvoorbeeld kan het aantal gemeten deeltjes per milliliter verlagen, doordat het rioolwater door hemelwater wordt verdund. Ook kunnen aangesloten industriegebieden ditzelfde effect hebben, omdat daar in het rioolwater meestal geen of nauwelijks menselijke ontlasting te vinden is. Tevens kunnen de aantal virusdeeltjes per milliliter zo laag zijn, dat het niet gemeten wordt. Dit leidt dan tot een meting met een waarde van nul deeltjes per milliliter.\n\nOm te bepalen welke locatie tot welke veiligheidsregio behoort, wordt gekeken naar het verzorgingsgebied van de locatie. Dit is het gebied waarvoor de zuiveringsinstallatie afvalwater zuivert. Het RIVM levert per locatie aan voor hoeveel procent deze in een veiligheidsregio valt. Deze verdeling is nog niet volledig accuraat en wordt de komende tijd verder uitgewerkt. Sommige locaties hebben een verzorgingsgebied dat meerdere veiligheidsregio’s bevat. Indien dat zo is, wordt de locatie op het dashboard volledig toegewezen aan de veiligheidsregio dat het grootste deel van het verzorgingsgebied omvat.\nVoor het koppelen van locaties met gemeenten wordt momenteel gekeken naar de postcode van de locatie. Met gebruik van de CBS indeling gemeente voor postcode wordt vervolgens deze postcode vertaald naar een gemeente. In een paar gevallen kwam hier geen match uit. Voor die uitzonderingen is handmatig op basis van coördinaten gekeken op de kaart tot welke gemeente de locaties behoren. Let op: deze koppelingen zijn mogelijk niet volledig accuraat, want het verzorgingsgebied van een zuiveringsinstallatie hoeft niet gelijk te lopen met gemeentegrenzen. Er wordt gewerkt aan een meer nauwkeurige koppeling tussen locatie en gemeente."
       },
       {
         "cijfer": "“Waarde van” en “Verkregen”",
@@ -536,36 +502,15 @@
     "graph_average_label_text": "Gemiddelde waarde van gemeten locaties.",
     "graph_secondary_label_text": "Gemeten waarde per locatie."
   },
-  "regionaal_municipality_rioolwater_metingen": {
-    "title": "Rioolwatermeting",
-    "text": "Het aantal virusdeeltjes in een milliliter rioolwater afkomstig van locaties in de veiligheidsregio. Voor dit regionale cijfer wordt uitgegaan van het totaal aantal virusdeeltjes dat wordt aangetroffen in een week gedeeld door het totaal aantal locaties waar de data van afkomstig is.",
-    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
-    "graph_title": "Verloop over tijd",
-    "fold_title": "Wat betekent dit?",
-    "fold": "Dit getal laat zien hoeveel virusdeeltjes er zijn gevonden in het rioolwater in een bepaalde regio. Voor meer informatie zie cijferverantwoording.",
-    "open": "Verberg uitleg",
-    "sluit": "Meer uitleg en data",
-    "screen_reader_graph_content": "{{value}} virusdeeltjes in een milliliter rioolwater, afkomstig van 28 locaties in Nederland.",
-    "average": "Gemiddelde",
-    "bar_chart_title": "Laatste bekende waarde per RWZI locatie",
-    "bar_chart_axis_title": "Aantal virusdeeltjes in milliliter rioolwater",
-    "bron": {
-      "text": "RIVM Onderzoek rioolwater",
-      "href": "https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater"
-    },
-    "graph_average_label_text": "Gemiddelde waarde van gemeten locaties.",
-    "graph_secondary_label_text": "Gemeten waarde per locatie.",
-    "graph_average_label_text_rwzi": "Waarde van RWZI-locatie {{name}}"
-  },
   "regionaal_index": {
+    "your_safety_region": "Veiligheidsregio",
+    "select_safety_region_municipality": "Selecteer een veiligheidsregio of gemeente",
     "label_municipalities": "Gemeentes",
     "label_safety_regions": "Veiligheidsregio's",
     "select_municipality": "Selecteer een gemeente",
     "select_region_municipality_legend": "Selecteer een gemeente:",
     "select_region_type_legend": "Toon cijfers van:",
-    "select_safety_region_municipality": "Selecteer een veiligheidsregio of gemeente",
-    "your_municipality": "Gemeente",
-    "your_safety_region": "Veiligheidsregio"
+    "your_municipality": "Gemeente"
   },
   "common": {
     "metadata": {
@@ -586,5 +531,60 @@
     "default_description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
     "default_title": "Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
     "default_url": "https://coronadashboard.rijksoverheid.nl"
+  },
+  "no_data_for_this_municipality": {
+    "text": "Deze informatie is niet beschikbaar voor deze gemeente."
+  },
+  "regionaal_municipality_ziekenhuisopnames_per_dag": {
+    "title": "Ziekenhuisopnames per dag",
+    "text": "Aantal opnames per dag, gemiddeld over de afgelopen 3 dagen.",
+    "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
+    "fold_title": "Wat betekent dit?",
+    "fold": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen.",
+    "graph_title": "Verloop over tijd",
+    "open": "Verberg uitleg",
+    "sluit": "Meer uitleg en data",
+    "screen_reader_graph_content": "{{value}} opnames.",
+    "bron": {
+      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "text": "RIVM"
+    }
+  },
+  "regionaal_municipality_positief_geteste_personen": {
+    "title": "Positief geteste mensen",
+    "text": "Aantal positief geteste mensen per 100.000 inwoners per dag.",
+    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "metric_title": "Aantal positief geteste mensen:",
+    "fold_title": "Wat betekent dit?",
+    "fold": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
+    "graph_title": "Verloop over tijd",
+    "open": "Verberg uitleg",
+    "sluit": "Meer uitleg en data",
+    "screen_reader_graph_content": "{{value}} positief geteste personen.",
+    "bron": {
+      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "text": "RIVM"
+    }
+  },
+  "regionaal_municipality_rioolwater_metingen": {
+    "title": "Rioolwatermeting",
+    "text": "Het aantal virusdeeltjes in een milliliter rioolwater afkomstig van locaties in de veiligheidsregio. Voor dit regionale cijfer wordt uitgegaan van het totaal aantal virusdeeltjes dat wordt aangetroffen in een week gedeeld door het totaal aantal locaties waar de data van afkomstig is.",
+    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
+    "graph_title": "Verloop over tijd",
+    "fold_title": "Wat betekent dit?",
+    "fold": "Dit getal laat zien hoeveel virusdeeltjes er zijn gevonden in het rioolwater in een bepaalde regio. Voor meer informatie zie cijferverantwoording.",
+    "open": "Verberg uitleg",
+    "sluit": "Meer uitleg en data",
+    "screen_reader_graph_content": "{{value}} virusdeeltjes in een milliliter rioolwater, afkomstig van 28 locaties in Nederland.",
+    "average": "Gemiddelde",
+    "bar_chart_title": "Laatste bekende waarde per RWZI locatie",
+    "bar_chart_axis_title": "Aantal virusdeeltjes in milliliter rioolwater",
+    "bron": {
+      "text": "RIVM Onderzoek rioolwater",
+      "href": "https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater"
+    },
+    "graph_average_label_text": "Gemiddelde waarde van gemeten locaties.",
+    "graph_secondary_label_text": "Gemeten waarde per locatie.",
+    "graph_average_label_text_rwzi": "Waarde van RWZI-locatie {{name}}"
   }
 }
