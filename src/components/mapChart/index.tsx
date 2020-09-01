@@ -51,7 +51,7 @@ function MunicipalityMap(props: IProps) {
   const municipalityData = useMunicipalityData(metric, municipalCode);
   const [min, max] = useExtent(
     municipalityData,
-    (item: any): number => item[metric]
+    (item: any): number => item.value
   );
 
   const series = useMemo<SeriesOptionsType[]>(() => {
