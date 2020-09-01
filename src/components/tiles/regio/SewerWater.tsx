@@ -1,6 +1,5 @@
 import BarScale from 'components/barScale';
 import Collapse from 'components/collapse';
-import Metadata from 'components/metadata';
 import GraphContainer from 'components/graphContainer';
 import GraphContent from 'components/graphContent';
 import TitleWithIcon from 'components/titleWithIcon';
@@ -168,8 +167,6 @@ function SewerWater(props: IProps) {
                   ]}
                   axisTitle={text.bar_chart_axis_title}
                 />
-
-                <Metadata dataSource={text.bron} />
               </>
             )}
         </Collapse>

@@ -1,12 +1,10 @@
 import useSWR from 'swr';
 
 import BarScale from 'components/barScale';
-import Metadata from 'components/metadata';
-import TitleWithIcon from 'components/titleWithIcon';
-import DateReported from 'components/dateReported';
 import { FCWithLayout } from 'components/layout';
 import { getNationalLayout } from 'components/layout/NationalLayout';
 import { LineChart } from 'components/tiles/index';
+import { ContentHeader } from 'components/layout/Content';
 
 import Arts from 'assets/arts.svg';
 
@@ -42,7 +40,7 @@ export function IntakeIntensiveCareBarscale(props: {
         },
       ]}
       rangeKey="moving_average_ic"
-      screenReaderText={text.screen_reader_graph_content}
+      screenReaderText={text.barscale_screenreader_text}
       signaalwaarde={10}
       value={data.last_value.moving_average_ic}
       id="ic"
@@ -58,39 +56,41 @@ const IntakeIntensiveCare: FCWithLayout = () => {
 
   return (
     <>
-      <TitleWithIcon Icon={Arts} title={text.title} as="h2" />
+      <ContentHeader
+        category="Medische indicatoren"
+        title={text.titel}
+        Icon={Arts}
+        subtitle={text.pagina_toelichting}
+        metadata={{
+          datumsText: text.datums,
+          dateUnix: data?.last_value?.date_of_report_unix,
+          dataSource: text.bron,
+        }}
+      />
 
-      <article className="metric-article">
-        <p>{text.text}</p>
+      <article className="metric-article layout-two-column">
+        <div className="column-item column-item-extra-margin">
+          <h3>{text.barscale_titel}</h3>
 
-        <IntakeIntensiveCareBarscale data={data} />
+          <IntakeIntensiveCareBarscale data={data} />
+        </div>
 
-        {data?.last_value?.moving_average_ic !== null && (
-          <DateReported
-            datumsText={text.datums}
-            dateUnix={data?.last_value?.date_of_report_unix}
-          />
-        )}
-
-        <h3>{text.fold_title}</h3>
-        <p>{text.fold}</p>
+        <div className="column-item column-item-extra-margin">
+          <p>{text.extra_uitleg}</p>
+        </div>
       </article>
 
       <article className="metric-article">
-        <h3>{text.graph_title}</h3>
+        <h3>{text.linechart_titel}</h3>
 
         {data && (
-          <>
-            <LineChart
-              values={data.values.map((value) => ({
-                value: value.moving_average_ic,
-                date: value.date_of_report_unix,
-              }))}
-              signaalwaarde={10}
-            />
-
-            <Metadata dataSource={text.bron} />
-          </>
+          <LineChart
+            values={data.values.map((value) => ({
+              value: value.moving_average_ic,
+              date: value.date_of_report_unix,
+            }))}
+            signaalwaarde={10}
+          />
         )}
       </article>
     </>
