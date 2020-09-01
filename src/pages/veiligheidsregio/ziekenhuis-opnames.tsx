@@ -1,9 +1,6 @@
 import BarScale from 'components/barScale';
-import TitleWithIcon from 'components/titleWithIcon';
 import { FCWithLayout } from 'components/layout';
 import { getSafetyRegionLayout } from 'components/layout/SafetyRegionLayout';
-
-import Ziekenhuis from 'assets/ziekenhuis.svg';
 
 import siteText from 'locale';
 
@@ -47,7 +44,7 @@ export function IntakeHospitalBarScale(props: {
 }
 
 const IntakeHospital: FCWithLayout = () => {
-  return <TitleWithIcon Icon={Ziekenhuis} title={text.title} as="h2" />;
+  return null;
 };
 
 IntakeHospital.getLayout = getSafetyRegionLayout();

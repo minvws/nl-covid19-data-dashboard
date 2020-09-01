@@ -1,9 +1,6 @@
 import BarScale from 'components/barScale';
-import TitleWithIcon from 'components/titleWithIcon';
 import { FCWithLayout } from 'components/layout';
 import { getSafetyRegionLayout } from 'components/layout/SafetyRegionLayout';
-
-import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
 
 import siteText from 'locale';
 
@@ -37,9 +34,7 @@ export function SewerWaterBarScale(props: {
 }
 
 const SewerWater: FCWithLayout = () => {
-  return (
-    <TitleWithIcon Icon={RioolwaterMonitoring} title={text.title} as="h2" />
-  );
+  return null;
 };
 
 SewerWater.getLayout = getSafetyRegionLayout();
