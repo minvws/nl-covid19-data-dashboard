@@ -1,15 +1,18 @@
 @import 'scss/variables.scss';
 
-.metadataContainer {
-  margin: $default-margin 0;
+.item {
+  display: flex;
+  align-items: center;
+  color: $text-color-grey;
+  margin: 1rem 0;
 
-  p {
-    color: #595959;
-    font-size: 0.875em;
+  p:first-of-type {
     margin: 0;
   }
 
-  a {
-    color: $icon-color;
+  span {
+    display: flex;
+    align-items: center;
+    min-width: 1.8rem;
   }
 }

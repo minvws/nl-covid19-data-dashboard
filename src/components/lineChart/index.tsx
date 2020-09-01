@@ -145,12 +145,12 @@ function LineChart({
 
   return (
     <>
-      <HighchartsReact highcharts={Highcharts} options={chartOptions} />
       <ChartTimeControls
         timeframe={timeframe}
         timeframeOptions={timeframeOptions}
         onChange={(evt) => setTimeframe(evt.target.value as TimeframeOption)}
       />
+      <HighchartsReact highcharts={Highcharts} options={chartOptions} />
     </>
   );
 }

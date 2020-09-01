@@ -2,10 +2,7 @@ import useSWR from 'swr';
 import Link from 'next/link';
 
 import BarScale from 'components/barScale';
-import Metadata from 'components/metadata';
 import Legenda from 'components/legenda';
-import TitleWithIcon from 'components/titleWithIcon';
-import DateReported from 'components/dateReported';
 import { FCWithLayout } from 'components/layout';
 import { getNationalLayout } from 'components/layout/NationalLayout';
 import { AreaChart } from 'components/tiles/index';
@@ -20,6 +17,7 @@ import {
   InfectiousPeopleCount,
   InfectiousPeopleCountNormalized,
 } from 'types/data';
+import { ContentHeader } from 'components/layout/Content';
 
 const text: typeof siteText.besmettelijke_personen =
   siteText.besmettelijke_personen;
@@ -35,7 +33,7 @@ export function InfectiousPeopleBarScale(props: {
     <BarScale
       min={0}
       max={80}
-      screenReaderText={text.screen_reader_graph_content}
+      screenReaderText={text.barscale_screenreader_text}
       value={data.last_value.infectious_avg_normalized}
       id="besmettelijk"
       rangeKey="infectious_normalized_high"
@@ -59,42 +57,48 @@ const InfectiousPeople: FCWithLayout = () => {
 
   return (
     <>
-      <TitleWithIcon Icon={Ziektegolf} title={text.title} as="h2" />
+      <ContentHeader
+        category="Medische indicatoren"
+        title={text.title}
+        Icon={Ziektegolf}
+        subtitle={text.toelichting_pagina}
+        metadata={{
+          datumsText: text.datums,
+          dateUnix: count?.last_value?.date_of_report_unix,
+          dataSource: text.bron,
+        }}
+      />
 
-      <article className="metric-article">
-        <p>{text.text}</p>
+      <div className="layout-two-column">
+        <article className="metric-article column-item">
+          <h3>{text.barscale_titel}</h3>
+          <InfectiousPeopleBarScale data={countNormalized} />
 
-        <InfectiousPeopleBarScale data={countNormalized} />
+          <p>
+            {text.geen_signaalwaarde_beschikbaar}{' '}
+            <Link href="/verantwoording">
+              <a>{text.geen_signaalwaarde_beschikbaar_lees_waarom}</a>
+            </Link>
+          </p>
+        </article>
 
-        <p>
-          {text.geen_signaalwaarde_beschikbaar}{' '}
-          <Link href="/verantwoording">
-            <a>{text.geen_signaalwaarde_beschikbaar_lees_waarom}</a>
-          </Link>
-        </p>
-
-        {count && (
+        <article className="metric-article column-item">
           <h3>
-            {text.metric_title}{' '}
-            <span className="text-blue">
-              {formatNumber(count.last_value.infectious_avg)}
-            </span>
+            {text.cijfer_titel}
+
+            {count && (
+              <span className="text-blue kpi">
+                {formatNumber(count.last_value.infectious_avg)}
+              </span>
+            )}
           </h3>
-        )}
 
-        {countNormalized?.last_value?.infectious_avg_normalized !== null && (
-          <DateReported
-            datumsText={text.datums}
-            dateUnix={count?.last_value?.date_of_report_unix}
-          />
-        )}
-
-        <h3>{text.fold_title}</h3>
-        <p>{text.fold}</p>
-      </article>
+          <p>{text.cijfer_toelichting}</p>
+        </article>
+      </div>
 
       <article className="metric-article">
-        <h3>{text.graph_title}</h3>
+        <h3>{text.linechart_titel}</h3>
 
         {count?.values && (
           <AreaChart
@@ -114,8 +118,6 @@ const InfectiousPeople: FCWithLayout = () => {
           <li className="blue">{text.legenda_line}</li>
           <li className="gray square">{text.legenda_marge}</li>
         </Legenda>
-
-        {count && <Metadata dataSource={text.bron} />}
       </article>
     </>
   );

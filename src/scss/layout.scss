@@ -64,7 +64,9 @@
   background: white;
   padding: 2em;
   border-radius: 5px;
-  margin: $default-margin * 2 0;
+  margin: 0;
+  margin-top: 2rem;
+  box-shadow: $box-shadow;
 }
 
 /* Remove outline from programatically focussed elements. */
@@ -94,8 +96,8 @@
       flex: 1 0 auto;
       width: 25em;
     }
-    & > div {
-      flex: 3 0 auto;
+    & > section {
+      max-width: 80em;
     }
   }
 }
@@ -103,6 +105,8 @@
 .national-aside,
 .safety-region-aside {
   background: white;
+  box-shadow: 3px -1px 5px lightgrey;
+  z-index: 2;
 
   h2 {
     margin: 1rem;
@@ -162,4 +166,41 @@ a.metric-link {
 a.active-metric-link {
   background: $page-background;
   border-right: 5px solid $red;
+}
+
+.layout-two-column {
+  display: flex;
+  flex-direction: column;
+
+  .column-item {
+    flex: 1 1 50%;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 1200px) {
+  .layout-two-column {
+    flex-direction: row;
+  }
+
+  .column-item {
+    &:first-of-type {
+      margin-right: $default-margin;
+    }
+
+    &:nth-of-type(2) {
+      margin-left: $default-margin;
+    }
+  }
+
+  .column-item-extra-margin {
+    &:first-of-type {
+      margin-right: $default-margin * 3;
+    }
+
+    &:nth-of-type(2) {
+      margin-left: $default-margin * 3;
+    }
+  }
 }
