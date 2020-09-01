@@ -32,6 +32,7 @@ export default MyApp;
 
 function MyApp(props: IProps): React.ReactElement {
   const { Component, pageProps } = props;
+
   const page = (page: any) => page;
   const getLayout = Component.getLayout || page;
 
@@ -50,7 +51,7 @@ function MyApp(props: IProps): React.ReactElement {
         fetcher,
       }}
     >
-      {getLayout(<Component {...pageProps} />)}
+      {getLayout(<Component {...pageProps} />, pageProps)}
     </SWRConfig>
   );
 }

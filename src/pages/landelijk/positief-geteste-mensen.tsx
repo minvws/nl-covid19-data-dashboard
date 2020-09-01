@@ -1,4 +1,7 @@
-import useSWR from 'swr';
+import fs from 'fs';
+import path from 'path';
+
+import { GetStaticProps } from 'next';
 
 import BarScale from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
@@ -16,6 +19,7 @@ import {
   InfectedPeopleDeltaNormalized,
   InfectedPeopleTotal,
   IntakeShareAgeGroups,
+  National,
 } from 'types/data';
 
 const text: typeof siteText.positief_geteste_personen =
@@ -46,9 +50,11 @@ export function PostivelyTestedPeopleBarScale(props: {
   );
 }
 
-const PostivelyTestedPeople: FCWithLayout = () => {
-  const { data } = useSWR(`/json/NL.json`);
+interface IProps {
+  data: National;
+}
 
+const PostivelyTestedPeople: FCWithLayout<IProps> = ({ data }) => {
   const delta: InfectedPeopleDeltaNormalized | undefined =
     data?.infected_people_delta_normalized;
   const age: IntakeShareAgeGroups | undefined = data?.intake_share_age_groups;
@@ -150,5 +156,18 @@ const PostivelyTestedPeople: FCWithLayout = () => {
 };
 
 PostivelyTestedPeople.getLayout = getNationalLayout();
+
+// This function gets called at build time on server-side.
+// It won't be called on client-side.
+export const getStaticProps: GetStaticProps<IProps> = async () => {
+  const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
+  const fileContents = fs.readFileSync(filePath, 'utf8');
+
+  return {
+    props: {
+      data: JSON.parse(fileContents),
+    },
+  };
+};
 
 export default PostivelyTestedPeople;

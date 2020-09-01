@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import Head from 'next/head';
-import useSWR from 'swr';
 import { useRouter } from 'next/router';
 
 import TitleWithIcon from 'components/titleWithIcon';
@@ -28,16 +27,23 @@ import CoronaVirus from 'assets/coronavirus.svg';
 import siteText from 'locale';
 
 import { WithChildren } from 'types';
+import { National } from 'types/data';
 
 import useMediaQuery from 'utils/useMediaQuery';
 
 export default NationalLayout;
 
 export function getNationalLayout() {
-  return function (page: React.ReactNode): React.ReactNode {
+  return function (page: React.ReactNode, pageProps: any): React.ReactNode {
     return getSiteLayout(siteText.nationaal_metadata)(
-      <NationalLayout>{page}</NationalLayout>
+      <NationalLayout pageProps={pageProps}>{page}</NationalLayout>
     );
+  };
+}
+
+interface PageProps {
+  pageProps: {
+    data: National;
   };
 }
 
@@ -57,10 +63,10 @@ export function getNationalLayout() {
  * More info on persistent layouts:
  * https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
-function NationalLayout(props: WithChildren) {
-  const { children } = props;
+function NationalLayout(props: WithChildren<PageProps>) {
+  const { children, pageProps } = props;
+  const { data } = pageProps;
   const router = useRouter();
-  const { data } = useSWR(`/json/NL.json`);
   const isLargeScreen = useMediaQuery('(min-width: 1000px)', true);
   const showAside = isLargeScreen || router.route === '/landelijk';
   const showContent = isLargeScreen || router.route !== '/landelijk';
