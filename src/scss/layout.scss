@@ -72,7 +72,8 @@
   outline: none;
 }
 
-.national-layout {
+.national-layout,
+.safety-region-layout {
   display: flex;
 
   > aside {
@@ -87,16 +88,20 @@
 }
 
 @media (min-width: 1000px) {
-  .national-layout > aside {
-    flex: 1 0 auto;
-    width: 25em;
-  }
-  .national-layout > div {
-    flex: 3 0 auto;
+  .national-layout,
+  .safety-region-layout {
+    & > aside {
+      flex: 1 0 auto;
+      width: 25em;
+    }
+    & > div {
+      flex: 3 0 auto;
+    }
   }
 }
 
-.national-aside {
+.national-aside,
+.safety-region-aside {
   background: white;
 
   h2 {
@@ -158,4 +163,3 @@ a.active-metric-link {
   background: $page-background;
   border-right: 5px solid $red;
 }
-
