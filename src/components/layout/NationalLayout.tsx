@@ -69,7 +69,7 @@ function NationalLayout(props: WithChildren) {
   const blur = (evt: any) => evt.target.blur();
 
   useEffect(() => {
-    if (isLargeScreen) {
+    if (isLargeScreen && router.route === '/landelijk') {
       router.push('/landelijk/positief-geteste-mensen');
     }
   }, [isLargeScreen, router]);
