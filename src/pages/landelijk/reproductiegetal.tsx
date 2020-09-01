@@ -22,8 +22,8 @@ import {
 const text: typeof siteText.reproductiegetal = siteText.reproductiegetal;
 
 export function ReproductionIndexBarScale(props: {
-  data: ReproductionIndexData | undefined;
-  lastKnown: ReproductionIndexData | undefined;
+  data: ReproductionIndexData;
+  lastKnown: ReproductionIndexData;
 }) {
   const { data, lastKnown } = props;
 
@@ -35,7 +35,7 @@ export function ReproductionIndexBarScale(props: {
       max={2}
       screenReaderText={text.barscale_screenreader_text}
       signaalwaarde={1}
-      value={lastKnown?.last_value?.reproduction_index_avg}
+      value={lastKnown.last_value.reproduction_index_avg}
       id="repro"
       rangeKey="reproduction_index_avg"
       gradient={[

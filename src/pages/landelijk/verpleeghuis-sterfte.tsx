@@ -1,4 +1,7 @@
-import useSWR from 'swr';
+import fs from 'fs';
+import path from 'path';
+
+import { GetStaticProps } from 'next';
 
 import BarScale from 'components/barScale';
 import { ContentHeader } from 'components/layout/Content';
@@ -10,13 +13,13 @@ import CoronaVirus from 'assets/coronavirus.svg';
 
 import siteText from 'locale';
 
-import { DeceasedPeopleNurseryCountDaily } from 'types/data';
+import { National, DeceasedPeopleNurseryCountDaily } from 'types/data';
 
 const text: typeof siteText.verpleeghuis_oversterfte =
   siteText.verpleeghuis_oversterfte;
 
 export function NursingHomeDeathsBarScale(props: {
-  data: DeceasedPeopleNurseryCountDaily | undefined;
+  data: DeceasedPeopleNurseryCountDaily;
 }) {
   const { data } = props;
 
@@ -40,11 +43,13 @@ export function NursingHomeDeathsBarScale(props: {
   );
 }
 
-const NursingHomeDeaths: FCWithLayout = () => {
-  const { data: state } = useSWR(`/json/NL.json`);
+interface IProps {
+  data: National;
+}
 
-  const data: DeceasedPeopleNurseryCountDaily | undefined =
-    state?.deceased_people_nursery_count_daily;
+const NursingHomeDeaths: FCWithLayout<IProps> = ({ data: state }) => {
+  const data: DeceasedPeopleNurseryCountDaily =
+    state.deceased_people_nursery_count_daily;
 
   return (
     <>
@@ -90,5 +95,18 @@ const NursingHomeDeaths: FCWithLayout = () => {
 };
 
 NursingHomeDeaths.getLayout = getNationalLayout();
+
+// This function gets called at build time on server-side.
+// It won't be called on client-side.
+export const getStaticProps: GetStaticProps<IProps> = async () => {
+  const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
+  const fileContents = fs.readFileSync(filePath, 'utf8');
+
+  return {
+    props: {
+      data: JSON.parse(fileContents),
+    },
+  };
+};
 
 export default NursingHomeDeaths;

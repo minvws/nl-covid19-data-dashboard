@@ -26,7 +26,7 @@ const text: typeof siteText.positief_geteste_personen =
   siteText.positief_geteste_personen;
 
 export function PostivelyTestedPeopleBarScale(props: {
-  data: InfectedPeopleDeltaNormalized | undefined;
+  data: InfectedPeopleDeltaNormalized;
 }) {
   const { data } = props;
 

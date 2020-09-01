@@ -1,4 +1,7 @@
-import useSWR from 'swr';
+import fs from 'fs';
+import path from 'path';
+
+import { GetStaticProps } from 'next';
 
 import BarScale from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
@@ -16,7 +19,7 @@ const text: typeof siteText.verpleeghuis_positief_geteste_personen =
   siteText.verpleeghuis_positief_geteste_personen;
 
 export function NursingHomeInfectedPeopleBarScale(props: {
-  data: InfectedPeopleNurseryCountDaily | undefined;
+  data: InfectedPeopleNurseryCountDaily;
 }) {
   const { data } = props;
 
@@ -40,11 +43,13 @@ export function NursingHomeInfectedPeopleBarScale(props: {
   );
 }
 
-const NursingHomeInfectedPeople: FCWithLayout = () => {
-  const { data: state } = useSWR<National>(`/json/NL.json`);
+interface IProps {
+  data: National;
+}
 
-  const data: InfectedPeopleNurseryCountDaily | undefined =
-    state?.infected_people_nursery_count_daily;
+const NursingHomeInfectedPeople: FCWithLayout<IProps> = ({ data: state }) => {
+  const data: InfectedPeopleNurseryCountDaily =
+    state.infected_people_nursery_count_daily;
 
   return (
     <>
@@ -90,5 +95,18 @@ const NursingHomeInfectedPeople: FCWithLayout = () => {
 };
 
 NursingHomeInfectedPeople.getLayout = getNationalLayout();
+
+// This function gets called at build time on server-side.
+// It won't be called on client-side.
+export const getStaticProps: GetStaticProps<IProps> = async () => {
+  const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
+  const fileContents = fs.readFileSync(filePath, 'utf8');
+
+  return {
+    props: {
+      data: JSON.parse(fileContents),
+    },
+  };
+};
 
 export default NursingHomeInfectedPeople;
