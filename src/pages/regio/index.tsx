@@ -1,4 +1,4 @@
-import { useMemo, useEffect, useRef } from 'react';
+import { useMemo, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import useSWR from 'swr';
@@ -118,6 +118,8 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
   const { municipalities, safetyRegions } = props;
   let regionType: RegionType = null;
 
+  const [textInput, setTextInput] = useState<string>('');
+
   // Toggle region type between municipality and safety region
   const setRegionType = (event: any): void => {
     let query = { regio: regionType === 'municipality' ? 'GM' : 'VR' };
@@ -157,6 +159,14 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
 
   const selectMunicipalityFromMap = (selectedGemcode: string): void => {
     lastKnownGemcode = selectedGemcode;
+
+    const municipalityMatch = municipalities.find(
+      (municipality: MunicipalityMapping) =>
+        municipality.gemcode === lastKnownGemcode
+    );
+
+    setTextInput(municipalityMatch ? municipalityMatch.name : '');
+
     router.replace(
       {
         pathname: router.pathname,
@@ -232,6 +242,7 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
         lastKnownMunicipality &&
         lastKnownMunicipality.safetyRegion !== selectedSafetyRegion.code
       ) {
+        setTextInput('');
         lastKnownGemcode = null;
       }
     }
@@ -346,6 +357,8 @@ const Regio: FunctionComponentWithLayout<RegioProps> = (props) => {
               safetyRegions={safetyRegions}
               setSelectedSafetyRegion={setSelectedSafetyRegion}
               setSelectedMunicipality={setSelectedMunicipality}
+              textInput={textInput}
+              setTextInput={setTextInput}
             />{' '}
             <div className={styles['safety-region-header']}>
               <p>
