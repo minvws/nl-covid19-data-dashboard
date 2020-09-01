@@ -130,7 +130,7 @@ const PostivelyTestedPeople: FCWithLayout = () => {
         {age && (
           <>
             <BarChart
-              keys={['0 tot 20', '20 tot 40', '40 tot 60', '60 tot 80', '80+']}
+              keys={text.barscale_keys}
               data={age.values.map((value) => ({
                 y: value.infected_per_agegroup_increase || 0,
                 label: value?.infected_per_agegroup_increase
