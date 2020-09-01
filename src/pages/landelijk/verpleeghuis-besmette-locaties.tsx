@@ -1,6 +1,3 @@
-import fs from 'fs';
-import path from 'path';
-
 import { GetStaticProps } from 'next';
 
 import BarScale from 'components/barScale';
@@ -15,6 +12,8 @@ import { LineChart } from 'components/tiles/index';
 import Locatie from 'assets/locaties.svg';
 
 import formatNumber from 'utils/formatNumber';
+
+import getNlData from 'static-props/nl-data';
 
 import siteText from 'locale';
 
@@ -117,14 +116,7 @@ NursingHomeInfectedLocations.getLayout = getNationalLayout();
 // This function gets called at build time on server-side.
 // It won't be called on client-side.
 export const getStaticProps: GetStaticProps<NationalLayoutProps> = async () => {
-  const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
-  const fileContents = fs.readFileSync(filePath, 'utf8');
-
-  return {
-    props: {
-      data: JSON.parse(fileContents),
-    },
-  };
+  return getNlData();
 };
 
 export default NursingHomeInfectedLocations;
