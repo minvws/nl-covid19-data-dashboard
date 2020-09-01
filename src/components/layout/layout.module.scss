@@ -19,6 +19,8 @@ $language-switcher-offset: 55px;
 .header {
   background: #cd005a;
   color: white;
+  z-index: 4;
+  position: relative;
 
   a:focus {
     outline: 2px dotted #fff;
@@ -129,6 +131,8 @@ $language-switcher-offset: 55px;
   background: #01689b;
   color: white;
   padding: 2em 0;
+  z-index: 4;
+  position: relative;
 }
 
 .footerList {
@@ -192,5 +196,40 @@ $language-switcher-offset: 55px;
       top: $default-padding;
       left: $default-margin;
     }
+  }
+}
+
+.text {
+  p {
+    max-width: 40em;
+    margin-right: $default-margin;
+  }
+}
+
+.category {
+  font-size: 1.42383rem;
+  font-weight: 600;
+  color: $text-color-grey;
+  margin: 0;
+  margin-bottom: 0.3rem;
+  margin-left: 4rem;
+}
+
+@media (min-width: 1200px) {
+  .text {
+    display: flex;
+    margin-left: 4rem;
+  }
+}
+
+.two-column {
+  display: flex;
+  flex-direction: column;
+
+  > * {
+    flex: 1 1 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 }
