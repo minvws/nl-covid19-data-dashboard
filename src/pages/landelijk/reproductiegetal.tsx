@@ -1,4 +1,7 @@
-import useSWR from 'swr';
+import fs from 'fs';
+import path from 'path';
+
+import { GetStaticProps } from 'next';
 
 import BarScale from 'components/barScale';
 import Legenda from 'components/legenda';
@@ -11,7 +14,10 @@ import Repro from 'assets/reproductiegetal.svg';
 
 import siteText from 'locale';
 
-import { ReproductionIndex as ReproductionIndexData } from 'types/data';
+import {
+  ReproductionIndex as ReproductionIndexData,
+  National,
+} from 'types/data';
 
 const text: typeof siteText.reproductiegetal = siteText.reproductiegetal;
 
@@ -54,13 +60,15 @@ export function ReproductionIndexBarScale(props: {
   );
 }
 
-const ReproductionIndex: FCWithLayout = () => {
-  const { data: state } = useSWR(`/json/NL.json`);
+interface IProps {
+  data: National;
+}
 
-  const lastKnownValidData: ReproductionIndexData | undefined =
-    state?.reproduction_index_last_known_average;
+const ReproductionIndex: FCWithLayout<IProps> = ({ data }) => {
+  const lastKnownValidData: ReproductionIndexData =
+    data.reproduction_index_last_known_average;
 
-  const data: ReproductionIndexData | undefined = state?.reproduction_index;
+  const reproductionData: ReproductionIndexData = data.reproduction_index;
 
   return (
     <>
@@ -71,8 +79,8 @@ const ReproductionIndex: FCWithLayout = () => {
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: data?.last_value?.date_of_report_unix,
-          dateInsertedUnix: data?.last_value?.date_of_insertion_unix,
+          dateUnix: reproductionData.last_value.date_of_report_unix,
+          dateInsertedUnix: reproductionData.last_value.date_of_insertion_unix,
           dataSource: text.bron,
         }}
       />
@@ -81,7 +89,7 @@ const ReproductionIndex: FCWithLayout = () => {
         <div className="column-item column-item-extra-margin">
           <h3>{text.barscale_titel}</h3>
           <ReproductionIndexBarScale
-            data={state}
+            data={reproductionData}
             lastKnown={lastKnownValidData}
           />
           <p>{text.barscale_toelichting}</p>
@@ -101,9 +109,9 @@ const ReproductionIndex: FCWithLayout = () => {
 
       <article className="metric-article">
         <h3>{text.linechart_titel}</h3>
-        {data?.values && (
+        {reproductionData.values && (
           <AreaChart
-            data={data.values.map((value) => ({
+            data={reproductionData.values.map((value) => ({
               avg: value.reproduction_index_avg,
               min: value.reproduction_index_low,
               max: value.reproduction_index_high,
@@ -126,5 +134,18 @@ const ReproductionIndex: FCWithLayout = () => {
 };
 
 ReproductionIndex.getLayout = getNationalLayout();
+
+// This function gets called at build time on server-side.
+// It won't be called on client-side.
+export const getStaticProps: GetStaticProps<IProps> = async () => {
+  const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
+  const fileContents = fs.readFileSync(filePath, 'utf8');
+
+  return {
+    props: {
+      data: JSON.parse(fileContents),
+    },
+  };
+};
 
 export default ReproductionIndex;
