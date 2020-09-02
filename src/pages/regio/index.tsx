@@ -179,7 +179,10 @@ const Regio: FCWithLayout<RegioProps> = (props) => {
                   </span>
                 )}
               </div>
-              <MapChart selected={{ id: 'GM0074' }} metric="Total_reported" />
+              <MapChart
+                selected={{ id: 'GM0074' }}
+                metric="positive_tested_people"
+              />
             </div>
           </div>
 

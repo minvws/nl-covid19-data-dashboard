@@ -11,6 +11,7 @@ import CoronaVirus from 'assets/coronavirus.svg';
 import siteText from 'locale';
 
 import { DeceasedPeopleNurseryCountDaily } from 'types/data';
+import MunicipalityMap from 'components/mapChart';
 
 const text: typeof siteText.verpleeghuis_oversterfte =
   siteText.verpleeghuis_oversterfte;
@@ -70,6 +71,20 @@ const NursingHomeDeaths: FCWithLayout = () => {
 
         <div className="column-item column-item-extra-margin">
           <p>{text.extra_uitleg}</p>
+        </div>
+      </article>
+
+      <article className="metric-article layout-two-column">
+        <div className="column-item column-item-extra-margin">
+          <h3>{text.map_titel}</h3>
+          <p>{text.map_toelichting}</p>
+        </div>
+
+        <div className="column-item column-item-extra-margin">
+          <MunicipalityMap
+            metric="deceased"
+            gradient={['#9DDEFE', '#0290D6']}
+          />
         </div>
       </article>
 
