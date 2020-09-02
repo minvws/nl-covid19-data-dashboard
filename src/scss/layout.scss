@@ -79,12 +79,12 @@
   display: flex;
   flex-direction: column;
 
-  > a {
+  .back-button {
     background: white;
     display: block;
     width: 100%;
     padding: 1em;
-    box-shadow: $box-shadow-bottom;
+    box-shadow: $box-shadow;
     text-decoration: none;
 
     &:hover {
