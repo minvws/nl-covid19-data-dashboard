@@ -118,7 +118,7 @@ const PostivelyTestedPeople: FCWithLayout = () => {
                 value: 'region',
               },
             ]}
-            onSelect={(val: string) => setSelectedMap(val)}
+            onSelect={(val: 'region' | 'municipal') => setSelectedMap(val)}
           />
         </div>
 

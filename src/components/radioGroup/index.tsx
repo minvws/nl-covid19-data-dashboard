@@ -7,7 +7,7 @@ export interface IRadioGroupItem {
 }
 
 export interface IProps {
-  onSelect: (value: string) => void;
+  onSelect: (value: any) => void;
   values: IRadioGroupItem[];
 }
 
