@@ -120,7 +120,7 @@ function Layout(props: WithChildren<LayoutProps>) {
                   <a
                     onClick={blur}
                     className={
-                      router.pathname.includes('/landelijk')
+                      router.pathname.indexOf('/landelijk') === 0
                         ? styles.link + ' ' + styles.active
                         : styles.link
                     }
@@ -134,12 +134,12 @@ function Layout(props: WithChildren<LayoutProps>) {
                   <a
                     onClick={blur}
                     className={
-                      router.pathname.includes('/veiligheidsregio')
+                      router.pathname.indexOf('/veiligheidsregio') === 0
                         ? styles.link + ' ' + styles.active
                         : styles.link
                     }
                   >
-                    {text.nav.links.regio}
+                    {text.nav.links.veiligheidsregio}
                   </a>
                 </Link>
               </li>
