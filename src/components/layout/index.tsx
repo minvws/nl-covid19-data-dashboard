@@ -144,6 +144,20 @@ function Layout(props: WithChildren<LayoutProps>) {
                 </Link>
               </li>
               <li>
+                <Link href="/gemeente">
+                  <a
+                    onClick={blur}
+                    className={
+                      router.pathname.indexOf('/gemeente') === 0
+                        ? styles.link + ' ' + styles.active
+                        : styles.link
+                    }
+                  >
+                    {text.nav.links.gemeente}
+                  </a>
+                </Link>
+              </li>
+              <li>
                 <Link href="/over">
                   <a
                     onClick={blur}
