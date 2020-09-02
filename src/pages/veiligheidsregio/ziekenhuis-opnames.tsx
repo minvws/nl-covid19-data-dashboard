@@ -1,16 +1,22 @@
+import useSWR from 'swr';
+
 import BarScale from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
 import { getSafetyRegionLayout } from 'components/layout/SafetyRegionLayout';
+import { ContentHeader } from 'components/layout/Content';
+
+import Ziekenhuis from 'assets/ziekenhuis.svg';
 
 import siteText from 'locale';
 
-import { IntakeHospitalMa } from 'types/data';
+import { ResultsPerRegion } from 'types/data';
+import { LineChart } from 'components/charts/index';
 
 const text: typeof siteText.ziekenhuisopnames_per_dag =
   siteText.ziekenhuisopnames_per_dag;
 
 export function IntakeHospitalBarScale(props: {
-  data: IntakeHospitalMa | undefined;
+  data: ResultsPerRegion | undefined;
 }) {
   const { data } = props;
 
@@ -22,9 +28,9 @@ export function IntakeHospitalBarScale(props: {
       max={100}
       signaalwaarde={40}
       screenReaderText={text.screen_reader_graph_content}
-      value={data.last_value.moving_average_hospital}
+      value={data.last_value.hospital_moving_avg_per_region}
       id="opnames"
-      rangeKey="moving_average_hospital"
+      rangeKey="hospital_moving_avg_per_region"
       gradient={[
         {
           color: '#69c253',
@@ -44,7 +50,56 @@ export function IntakeHospitalBarScale(props: {
 }
 
 const IntakeHospital: FCWithLayout = () => {
-  return null;
+  const { data } = useSWR(`/json/VR01.json`);
+
+  const resultsPerRegion: ResultsPerRegion | undefined =
+    data?.results_per_region;
+
+  return (
+    <>
+      <ContentHeader
+        category="Medische indicatoren"
+        title={text.titel}
+        Icon={Ziekenhuis}
+        subtitle={text.pagina_toelichting}
+        metadata={{
+          datumsText: text.datums,
+          dateUnix: resultsPerRegion?.last_value?.date_of_report_unix,
+          dateInsertedUnix:
+            resultsPerRegion?.last_value?.date_of_insertion_unix,
+          dataSource: text.bron,
+        }}
+      />
+
+      <article className="metric-article layout-two-column">
+        <div className="column-item column-item-extra-margin">
+          <h3>{text.barscale_titel}</h3>
+
+          <IntakeHospitalBarScale data={resultsPerRegion} />
+        </div>
+
+        <div className="column-item column-item-extra-margin">
+          <p>{text.extra_uitleg}</p>
+        </div>
+      </article>
+
+      <article className="metric-article">
+        <h3>{text.linechart_titel}</h3>
+
+        {resultsPerRegion && (
+          <>
+            <LineChart
+              values={resultsPerRegion.values.map((value: any) => ({
+                value: value.hospital_moving_avg_per_region,
+                date: value.date_of_report_unix,
+              }))}
+              signaalwaarde={40}
+            />
+          </>
+        )}
+      </article>
+    </>
+  );
 };
 
 IntakeHospital.getLayout = getSafetyRegionLayout();

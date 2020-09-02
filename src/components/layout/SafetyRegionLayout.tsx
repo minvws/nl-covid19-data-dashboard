@@ -48,7 +48,7 @@ export function getSafetyRegionLayout() {
 function SafetyRegionLayout(props: WithChildren) {
   const { children } = props;
   const router = useRouter();
-  const { data } = useSWR(`/json/NL.json`);
+  const { data } = useSWR(`/json/VR01.json`);
   const isLargeScreen = useMediaQuery('(min-width: 1000px)', true);
   const showAside = isLargeScreen || router.route === '/veiligheidsregio';
   const showContent = isLargeScreen || router.route !== '/veiligheidsregio';
@@ -97,7 +97,7 @@ function SafetyRegionLayout(props: WithChildren) {
                       />
                       <span>
                         <PostivelyTestedPeopleBarScale
-                          data={data?.infected_people_delta_normalized}
+                          data={data?.results_per_region}
                         />
                       </span>
                     </a>
@@ -118,7 +118,7 @@ function SafetyRegionLayout(props: WithChildren) {
                       />
                       <span>
                         <IntakeHospitalBarScale
-                          data={data?.intake_hospital_ma}
+                          data={data?.results_per_region}
                         />
                       </span>
                     </a>
