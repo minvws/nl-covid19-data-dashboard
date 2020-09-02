@@ -75,6 +75,7 @@
 }
 
 .national-layout,
+.safety-region-layout,
 .municipality-layout {
   display: flex;
 
@@ -91,6 +92,7 @@
 
 @media (min-width: 1000px) {
   .national-layout,
+  .safety-region-layout,
   .municipality-layout {
     & > aside {
       flex: 0 0 auto;
@@ -105,6 +107,7 @@
 
 @media (min-width: 1400px) {
   .national-layout,
+  .safety-region-layout,
   .municipality-layout {
     max-width: 1400px;
     margin: 0 auto;
@@ -113,6 +116,7 @@
 }
 
 .national-aside,
+.safety-region-aside,
 .municipality-aside {
   background: white;
   box-shadow: 1px -1px 5px #e5e5e5, -1px -1px 5px #e5e5e5;
