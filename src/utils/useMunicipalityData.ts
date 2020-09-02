@@ -1,9 +1,12 @@
-import { MunicipalityMetrics, MunicipalityData } from 'types/municipality';
 import useSWR from 'swr';
 import { useMemo } from 'react';
 import municipalCodeToRegionCodeLookup from 'data/municipalCodeToRegionCodeLookup';
+import { Municipalities } from 'types/data';
 
-export type TMunicipalityMetricName = keyof MunicipalityMetrics;
+export type TMunicipalityMetricName = keyof Pick<
+  Municipalities,
+  'hospital_admissions' | 'positive_tested_people' | 'deceased'
+>;
 
 export default useMunicipalityData;
 
@@ -38,11 +41,13 @@ function getAllMunicipalitiesForSameRegion(
  * @param metricName
  * @param municipalCode
  */
-function useMunicipalityData(
-  metricName: TMunicipalityMetricName,
-  municipalCode?: string
-): MunicipalityData[] {
-  const { data } = useSWR<MunicipalityData[]>('/json/municipality-data.json');
+function useMunicipalityData<
+  T extends TMunicipalityMetricName,
+  K extends Municipalities[T]
+>(metricName: T, municipalCode?: string): (K[number] & { value: number })[] {
+  const { data } = useSWR<Municipalities>('/json/municipalities.json');
+
+  const metricItems = data?.[metricName];
 
   const applicableMunicipalCodes = useMemo(() => {
     return getAllMunicipalitiesForSameRegion(
@@ -52,35 +57,22 @@ function useMunicipalityData(
   }, [municipalCode]);
 
   return useMemo(() => {
-    if (!data) {
+    if (!metricItems) {
       return [];
     }
 
-    const maxDate: number = Math.max(
-      ...data.map((item: MunicipalityData): number =>
-        new Date(item.Date_of_report).getTime()
-      )
-    );
+    const filterByRegion: any = (item: K[number]): any =>
+      applicableMunicipalCodes.indexOf(item.gmcode) > -1;
 
-    const filterByRegionAndNewestDate = (item: MunicipalityData): boolean =>
-      applicableMunicipalCodes.indexOf(item.Municipality_code) > -1 &&
-      new Date(item.Date_of_report).getTime() === maxDate;
-
-    const filterByValidDataAndNewestDate = (item: MunicipalityData): boolean =>
-      Boolean(item.Municipality_code) &&
-      new Date(item.Date_of_report).getTime() === maxDate;
-
-    const activeFilter = applicableMunicipalCodes.length
-      ? filterByRegionAndNewestDate
-      : filterByValidDataAndNewestDate;
-
-    const filteredData = data.filter(activeFilter).map(
-      (item: MunicipalityData): MunicipalityData => ({
+    const filteredData = (metricItems as any[]).map<K[number]>(
+      (item: K[number]): K[number] & { value: number } => ({
         ...item,
-        value: item[metricName],
+        value: (item as any)[metricName],
       })
     );
 
-    return filteredData;
-  }, [data, metricName, applicableMunicipalCodes]);
+    return applicableMunicipalCodes.length
+      ? filteredData.filter<any>(filterByRegion)
+      : filteredData;
+  }, [metricItems, metricName, applicableMunicipalCodes]);
 }

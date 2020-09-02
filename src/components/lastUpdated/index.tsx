@@ -3,7 +3,7 @@ import siteText from 'locale';
 import formatDate from 'utils/formatDate';
 
 type LastUpdatedProps = {
-  lastUpdated?: number;
+  lastUpdated?: number | string;
   loadingText?: string | null;
 };
 
@@ -12,13 +12,18 @@ export default LastUpdated;
 function LastUpdated(props: LastUpdatedProps) {
   const { lastUpdated, loadingText } = props;
 
+  let parsedLastUpdated = lastUpdated;
+  if (typeof parsedLastUpdated === 'string') {
+    parsedLastUpdated = parseInt(parsedLastUpdated, 10);
+  }
+
   return (
     <p className={styles.text}>
-      {lastUpdated ? (
+      {parsedLastUpdated ? (
         <>
           {siteText.laatst_bijgewerkt.message}:{' '}
-          <time dateTime={formatDate(lastUpdated, 'iso')}>
-            {formatDate(lastUpdated, 'long')}
+          <time dateTime={formatDate(parsedLastUpdated, 'iso')}>
+            {formatDate(parsedLastUpdated, 'long')}
           </time>
         </>
       ) : (
