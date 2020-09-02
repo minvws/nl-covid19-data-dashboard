@@ -4,7 +4,7 @@ import BarScale from 'components/barScale';
 import Legenda from 'components/legenda';
 import { FCWithLayout } from 'components/layout';
 import { getNationalLayout } from 'components/layout/NationalLayout';
-import { AreaChart } from 'components/tiles/index';
+import { AreaChart } from 'components/index';
 import { ContentHeader } from 'components/layout/Content';
 
 import Repro from 'assets/reproductiegetal.svg';
