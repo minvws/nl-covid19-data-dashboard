@@ -75,7 +75,8 @@
 }
 
 .national-layout,
-.safety-region-layout {
+.safety-region-layout,
+.municipality-layout {
   display: flex;
 
   > aside {
@@ -91,11 +92,13 @@
 
 @media (min-width: 1000px) {
   .national-layout,
-  .safety-region-layout {
+  .safety-region-layout,
+  .municipality-layout {
     & > aside {
       flex: 0 0 auto;
       width: 25em;
     }
+
     & > section {
       max-width: 80em;
     }
@@ -104,7 +107,8 @@
 
 @media (min-width: 1400px) {
   .national-layout,
-  .safety-region-layout {
+  .safety-region-layout,
+  .municipality-layout {
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 1em;
@@ -112,7 +116,8 @@
 }
 
 .national-aside,
-.safety-region-aside {
+.safety-region-aside,
+.municipality-aside {
   background: white;
   box-shadow: 1px -1px 5px #e5e5e5, -1px -1px 5px #e5e5e5;
   z-index: 2;
