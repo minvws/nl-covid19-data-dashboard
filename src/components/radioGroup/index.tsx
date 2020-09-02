@@ -11,6 +11,12 @@ export interface IProps {
   values: IRadioGroupItem[];
 }
 
+/**
+ * Very simple styled radiogroup component that takes an array of radiogroup items and
+ * reports its changes using the given onSelect callback.
+ *
+ * @param props
+ */
 export default function RadioGroup(props: IProps) {
   const { onSelect, values } = props;
   const [selected, setSelected] = useState<string>(values?.[0].value);
