@@ -77,6 +77,30 @@
 .national-layout,
 .safety-region-layout {
   display: flex;
+  flex-direction: column;
+
+  > a {
+    background: white;
+    display: block;
+    width: 100%;
+    padding: 1em;
+    box-shadow: $box-shadow-bottom;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &:focus {
+      text-decoration: underline;
+    }
+
+    > svg {
+      width: 16px;
+      transform: rotate(90deg);
+      margin-right: 0.7em;
+    }
+  }
 
   > aside {
     flex-basis: 100%;

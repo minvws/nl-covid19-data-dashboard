@@ -25,6 +25,7 @@ import Arts from 'assets/arts.svg';
 import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
 import Locatie from 'assets/locaties.svg';
 import CoronaVirus from 'assets/coronavirus.svg';
+import Arrow from 'assets/arrow.svg';
 
 import siteText from 'locale';
 
@@ -65,6 +66,9 @@ function NationalLayout(props: WithChildren) {
   const isLargeScreen = useMediaQuery('(min-width: 1000px)', false);
   const showAside = isLargeScreen || router.route === '/landelijk';
   const showContent = isLargeScreen || router.route !== '/landelijk';
+  const showBackButton =
+    useMediaQuery('(max-width: 1000px)', false) &&
+    router.route !== '/landelijk';
   // remove focus after navigation
   const blur = (evt: any) => evt.target.blur();
 
@@ -97,6 +101,14 @@ function NationalLayout(props: WithChildren) {
       </Head>
 
       <div className="national-layout">
+        {showBackButton && (
+          <Link href="/landelijk">
+            <a className="back-button" href="/landelijk">
+              <Arrow />
+              {siteText.nav.terug_naar_alle_cijfers}
+            </a>
+          </Link>
+        )}
         {showAside && (
           <aside className="national-aside">
             <nav aria-label="metric navigation">
