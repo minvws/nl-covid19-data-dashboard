@@ -28,7 +28,7 @@ const twitterImage = locale === 'nl' ? twitterImageNL : twitterImageEN;
 import siteText from 'locale';
 
 import { Regionaal } from 'types/data';
-const MapChart = dynamic(() => import('components/mapChart'));
+const MapChart = dynamic(() => import('components/mapChart/MunicipalityMap'));
 
 export type SafetyRegion = {
   id: number;

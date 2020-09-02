@@ -11,7 +11,7 @@ import Ziekenhuis from 'assets/ziekenhuis.svg';
 import siteText from 'locale';
 
 import { IntakeHospitalMa } from 'types/data';
-import MunicipalityMap from 'components/mapChart';
+import MunicipalityMap from 'components/mapChart/MunicipalityMap';
 
 const text: typeof siteText.ziekenhuisopnames_per_dag =
   siteText.ziekenhuisopnames_per_dag;

@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-  "title": "municipalities",
+  "title": "regions",
   "additionalProperties": false,
   "required": [
     "last_generated",
@@ -18,33 +18,33 @@
     },
     "proto_name": {
       "type": "string",
-      "enum": ["MUNICIPALITIES"]
+      "enum": ["REGIONS"]
     },
     "name": {
       "type": "string",
-      "enum": ["MUNICIPALITIES"]
+      "enum": ["REGIONS"]
     },
     "code": {
       "type": "string",
-      "enum": ["MUNICIPALITIES"]
+      "enum": ["REGIONS"]
     },
     "hospital_admissions": {
       "type": "array",
-      "maxItems": 355,
+      "maxItems": 25,
       "items": {
         "$ref": "hospital_admissions.json"
       }
     },
     "positive_tested_people": {
       "type": "array",
-      "maxItems": 355,
+      "maxItems": 25,
       "items": {
         "$ref": "positive_tested_people.json"
       }
     },
     "deceased": {
       "type": "array",
-      "maxItems": 355,
+      "maxItems": 25,
       "items": {
         "$ref": "deceased.json"
       }

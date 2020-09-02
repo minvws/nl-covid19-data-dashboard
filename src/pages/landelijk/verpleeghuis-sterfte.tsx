@@ -11,7 +11,7 @@ import CoronaVirus from 'assets/coronavirus.svg';
 import siteText from 'locale';
 
 import { DeceasedPeopleNurseryCountDaily } from 'types/data';
-import MunicipalityMap from 'components/mapChart';
+import MunicipalityMap from 'components/mapChart/MunicipalityMap';
 
 const text: typeof siteText.verpleeghuis_oversterfte =
   siteText.verpleeghuis_oversterfte;
