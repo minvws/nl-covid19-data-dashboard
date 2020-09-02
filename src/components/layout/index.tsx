@@ -120,7 +120,7 @@ function Layout(props: WithChildren<LayoutProps>) {
                   <a
                     onClick={blur}
                     className={
-                      router.pathname.includes('/landelijk')
+                      router.pathname.indexOf('/landelijk') === 0
                         ? styles.link + ' ' + styles.active
                         : styles.link
                     }
@@ -130,16 +130,16 @@ function Layout(props: WithChildren<LayoutProps>) {
                 </Link>
               </li>
               <li>
-                <Link href="/regio">
+                <Link href="/veiligheidsregio">
                   <a
                     onClick={blur}
                     className={
-                      router.pathname == '/regio'
+                      router.pathname.indexOf('/veiligheidsregio') === 0
                         ? styles.link + ' ' + styles.active
                         : styles.link
                     }
                   >
-                    {text.nav.links.regio}
+                    {text.nav.links.veiligheidsregio}
                   </a>
                 </Link>
               </li>
@@ -178,7 +178,7 @@ function Layout(props: WithChildren<LayoutProps>) {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/regio">
+                  <Link href="/veiligheidsregio">
                     <a onClick={blur} className={styles.footerLink}>
                       {text.nav.links.regio}
                     </a>

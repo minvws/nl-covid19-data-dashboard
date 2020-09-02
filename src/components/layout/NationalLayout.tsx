@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Head from 'next/head';
 import useSWR from 'swr';
 import { useRouter } from 'next/router';
+import { useLayoutEffect } from 'react';
 
 import TitleWithIcon from 'components/titleWithIcon';
 import { getLayout as getSiteLayout } from 'components/layout';
@@ -61,11 +62,17 @@ function NationalLayout(props: WithChildren) {
   const { children } = props;
   const router = useRouter();
   const { data } = useSWR(`/json/NL.json`);
-  const isLargeScreen = useMediaQuery('(min-width: 1000px)', true);
+  const isLargeScreen = useMediaQuery('(min-width: 1000px)', false);
   const showAside = isLargeScreen || router.route === '/landelijk';
   const showContent = isLargeScreen || router.route !== '/landelijk';
   // remove focus after navigation
   const blur = (evt: any) => evt.target.blur();
+
+  useLayoutEffect(() => {
+    if (isLargeScreen && router.route === '/landelijk') {
+      router.push('/landelijk/positief-geteste-mensen');
+    }
+  }, [isLargeScreen, router]);
 
   function getClassName(path: string) {
     return router.pathname === path
