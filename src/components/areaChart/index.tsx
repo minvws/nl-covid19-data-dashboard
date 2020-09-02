@@ -35,6 +35,8 @@ type IGetOptions = Omit<AreaChartProps, 'data'> & {
   lineData: TLine[];
 };
 
+export default AreaChart;
+
 function getOptions(props: IGetOptions): Highcharts.Options {
   const {
     rangeData,
@@ -161,7 +163,7 @@ function getOptions(props: IGetOptions): Highcharts.Options {
   return options;
 }
 
-const AreaChart: React.FC<AreaChartProps> = (props) => {
+function AreaChart(props: AreaChartProps) {
   const {
     rangeLegendLabel,
     lineLegendLabel,
@@ -218,14 +220,12 @@ const AreaChart: React.FC<AreaChartProps> = (props) => {
 
   return (
     <>
-      <HighchartsReact highcharts={Highcharts} options={chartOptions} />
       <ChartTimeControls
         timeframe={timeframe}
         timeframeOptions={timeframeOptions}
         onChange={(evt) => setTimeframe(evt.target.value as TimeframeOption)}
       />
+      <HighchartsReact highcharts={Highcharts} options={chartOptions} />
     </>
   );
-};
-
-export default AreaChart;
+}

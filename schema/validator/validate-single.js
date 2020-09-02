@@ -58,10 +58,9 @@ validatorInstance
       throw new Error(`${jsonFileName} is invalid`);
     }
     console.log(`${jsonFileName} is valid`);
-    return true;
   })
   .catch((e) => {
     console.error(e.message);
     console.log('');
-    return false;
+    process.exit(1);
   });

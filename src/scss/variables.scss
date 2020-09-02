@@ -1,8 +1,10 @@
 $base-font-stack: 'RO Sans', sans-serif;
 
-$page-background: #cce0f1;
+$page-background: #f3f3f3;
 $icon-color: #01689b;
 $button-color: $icon-color;
+
+$red: #cd005a;
 
 $text-color: #000;
 $text-color-grey: #595959;
@@ -29,3 +31,6 @@ $map-border-color: $map-col-base;
 $default-radius: 5px;
 $default-padding: 1rem;
 $default-margin: 1rem;
+
+$box-shadow: 0 -1px 1px 0 #e5e5e5, 0 1px 1px 0 #e5e5e5,
+  0 2px 2px 0 #e5e5e5, 0 4px 4px 0 #e5e5e5, 0 6px 6px 0 #e5e5e5;

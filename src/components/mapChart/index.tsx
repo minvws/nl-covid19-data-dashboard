@@ -1,141 +1,169 @@
-import regioData from 'data';
-import Highcharts from 'highcharts';
+import Highcharts, {
+  TooltipFormatterContextObject,
+  SeriesOptionsType,
+} from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
 import useSWR from 'swr';
+import { FeatureCollection, MultiPolygon } from 'geojson';
+import { useMemo, useRef, useEffect } from 'react';
+import useMunicipalityData, {
+  TMunicipalityMetricName,
+} from 'utils/useMunicipalityData';
+import useExtent from 'utils/useExtent';
 
 if (typeof Highcharts === 'object') {
   require('highcharts/modules/map')(Highcharts);
 }
 
-interface IProps {
-  selected: { id: string };
-  setSelection: (item: any) => void;
+export interface MunicipalityProperties {
+  gemnaam: string;
+  gemcode: string;
 }
 
-const MapChart: React.FC<IProps> = ({ selected, setSelection }) => {
-  const { data } = useSWR('/json/veiligheidsregio.json');
+type TMunicipalityTooltipFormatterContextObject = TooltipFormatterContextObject & {
+  point: TMunicipalityPoint;
+};
 
-  if (!data) {
-    return null;
-  }
+type TMunicipalityPoint = Highcharts.Point & MunicipalityProperties;
 
-  const regioList = [
-    ['1', 0],
-    ['2', 0],
-    ['3', 0],
-    ['4', 0],
-    ['5', 0],
-    ['6', 0],
-    ['7', 0],
-    ['8', 0],
-    ['9', 0],
-    ['10', 0],
-    ['11', 0],
-    ['12', 0],
-    ['13', 0],
-    ['14', 0],
-    ['15', 0],
-    ['16', 0],
-    ['17', 0],
-    ['18', 0],
-    ['19', 0],
-    ['20', 0],
-    ['21', 0],
-    ['22', 0],
-    ['23', 0],
-    ['24', 0],
-    ['25', 0],
-  ];
-  // Er is ongetwijfeld een veel beter manier om dit te doen :)
-  if (selected) {
-    // @ts-ignore
-    regioList[selected.id] = { 'hc-key': selected.id, value: 1 };
-  }
+interface IProps {
+  selected?: { id: string };
+  metric: TMunicipalityMetricName;
+  gradient?: [minColor: string, maxColor: string];
+}
 
-  const mapOptions = {
-    chart: {
-      alignTicks: true,
-      animation: true,
-      backgroundColor: 'transparent',
-      borderColor: '#000',
-      borderRadius: 0,
-      borderWidth: 0,
-      className: 'undefined',
-      colorCount: 10,
-      defaultSeriesType: 'line',
-      displayErrors: true,
-      margin: [null],
-      panning: false,
-      height: '100%',
-    },
-    title: {
-      text: '',
-    },
-    colorAxis: {
-      min: 0,
-      stops: [
-        [0, '#FFF'],
-        [1, '#01689B'],
-      ],
-    },
-    plotOptions: {
-      panning: false,
-    },
-    legend: {
-      enabled: false,
-    },
-    tooltip: {
-      backgroundColor: '#FFF',
-      borderColor: '#01689B',
-      borderRadius: 0,
-      pointFormatter: function (): any {
-        // @ts-ignore
-        return this.properties['Vgrnr'];
-      },
-      formatter: function (): any {
-        // @ts-ignore
-        return this.point.properties.Veiligheid;
-      },
-    },
-    series: [
+export default MunicipalityMap;
+
+function MunicipalityMap(props: IProps) {
+  const { selected, metric, gradient = ['#0000ff', '#ff0000'] } = props;
+
+  const municipalCode = selected?.id;
+
+  const { data: countryLines } = useSWR<any[]>(
+    '/static-json/netherlands-outline.geojson'
+  );
+
+  const { data: municipalityLines } = useSWR<
+    FeatureCollection<MultiPolygon, MunicipalityProperties>
+  >('/static-json/municipalities-outline.geojson');
+
+  const municipalityData = useMunicipalityData(metric, municipalCode);
+  const [min, max] = useExtent(
+    municipalityData,
+    (item: any): number => item.value
+  );
+
+  const series = useMemo<SeriesOptionsType[]>(() => {
+    const result: SeriesOptionsType[] = [
       {
-        // Make sure your data has hc-key properties defined! You need to do this manually (for now)
-        mapData: data,
-        point: {
-          events: {
-            click: function () {
-              const item = regioData.find(
-                // @ts-ignore
-                (x) => x.id === this.properties.Vgrnr
-              );
+        type: 'map',
+        allAreas: false,
+        mapData: municipalityLines,
+        allowPointSelect: false,
+        data: municipalityData,
+        // @ts-ignore
+        joinBy: ['gemcode', 'gmcode'],
+      },
+    ];
 
-              setSelection(item);
+    // When there's no selected municipal code we render the outlines of the country:
+    if (!municipalCode) {
+      result.push({
+        type: 'mapline',
+        data: countryLines,
+      });
+    }
+
+    return result;
+  }, [countryLines, municipalCode, municipalityData, municipalityLines]);
+
+  const mapOptions = useMemo<Highcharts.Options>(
+    () => ({
+      chart: {
+        alignTicks: true,
+        animation: true,
+        backgroundColor: 'transparent',
+        borderColor: '#000',
+        borderRadius: 0,
+        borderWidth: 0,
+        className: 'undefined',
+        colorCount: 10,
+        defaultSeriesType: 'line',
+        displayErrors: true,
+        margin: [],
+        panning: { enabled: false },
+        height: '100%',
+      },
+      title: {
+        text: '',
+      },
+      colorAxis: {
+        min,
+        max,
+        minColor: gradient[0],
+        maxColor: gradient[1],
+      },
+      legend: {
+        enabled: false,
+      },
+      tooltip: {
+        backgroundColor: '#FFF',
+        borderColor: '#01689B',
+        borderRadius: 0,
+        // @ts-ignore
+        formatter: function (this: any): false | string {
+          const { point } = this;
+
+          const metricValue = point[metric];
+
+          return metricValue;
+        },
+      },
+      plotOptions: {
+        panning: false,
+        map: {
+          states: {
+            hover: {
+              color: '#99C3D7',
+            },
+            select: {
+              color: '#ffffff',
             },
           },
+          borderWidth: 1,
+          borderColor: '#012090',
         },
-        states: {
-          hover: {
-            color: '#99C3D7',
-          },
-          select: {
-            color: '#01689B',
-          },
+        mapline: {
+          borderColor: 'black',
+          borderWidth: 2,
         },
-        // This is your regional data. Map the ID of the region to the value you want to show
-        data: regioList,
       },
-    ],
-  };
+      series: series,
+    }),
+    [min, max, metric, gradient, series]
+  );
+
+  const ref = useRef<any>();
+
+  useEffect(() => {
+    const chart: Highcharts.Chart | undefined = ref?.current?.chart;
+    if (selected && chart) {
+      const point = chart.series[0].points.find(
+        (p: any) => p.gemcode === selected.id
+      );
+
+      point?.select(true, false);
+    }
+  }, [ref, selected]);
 
   return (
     <HighchartsReact
+      {...({ ref } as any)}
       highcharts={Highcharts}
       containerProps={{ style: { height: '100%' } }}
       constructorType={'mapChart'}
       options={mapOptions}
     />
   );
-};
-
-export default MapChart;
+}

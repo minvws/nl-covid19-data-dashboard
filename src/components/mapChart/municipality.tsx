@@ -4,13 +4,17 @@ import HighchartsReact from 'highcharts-react-official';
 import useSWR from 'swr';
 import { FeatureCollection, MultiPolygon } from 'geojson';
 import { useMemo, useRef, useEffect } from 'react';
-import { MunicipalityMapping } from 'pages/regio';
 
 import styles from './municipality.module.scss';
 
 if (typeof Highcharts === 'object') {
   require('highcharts/modules/map')(Highcharts);
 }
+export type MunicipalityMapping = {
+  name: string;
+  safetyRegion: string;
+  gemcode: string;
+};
 
 export interface MunicipalityProperties {
   gemnaam: string;

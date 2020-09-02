@@ -3,7 +3,15 @@
   "type": "object",
   "title": "municipal",
   "additionalProperties": false,
-  "required": ["last_generated", "proto_name", "name", "code"],
+  "required": [
+    "last_generated",
+    "proto_name",
+    "name",
+    "code",
+    "hospital_admissions",
+    "positive_tested_people",
+    "sewer_measurements"
+  ],
   "properties": {
     "last_generated": {
       "type": "string"

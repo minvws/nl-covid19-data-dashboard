@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import Head from 'next/head';
 
-import Layout, { FunctionComponentWithLayout } from 'components/layout';
+import { getLayout, FCWithLayout } from 'components/layout';
 import MaxWidth from 'components/maxWidth';
 
 import styles from './over.module.scss';
@@ -16,7 +16,6 @@ import twitterImageEN from 'assets/sharing/twitter-about.png?url';
 import getLocale from 'utils/getLocale';
 
 const locale = getLocale();
-
 const openGraphImage = locale === 'nl' ? openGraphImageNL : openGraphImageEN;
 const twitterImage = locale === 'nl' ? twitterImageNL : twitterImageEN;
 
@@ -44,7 +43,7 @@ export async function getStaticProps(): Promise<StaticProps> {
   return { props: { text } };
 }
 
-const Over: FunctionComponentWithLayout<{ text: any }> = (props) => {
+const Over: FCWithLayout<{ text: typeof siteText }> = (props) => {
   const { text } = props;
 
   return (
@@ -92,7 +91,7 @@ const Over: FunctionComponentWithLayout<{ text: any }> = (props) => {
   );
 };
 
-Over.getLayout = Layout.getLayout({
+Over.getLayout = getLayout({
   ...siteText.over_metadata,
   openGraphImage,
   twitterImage,

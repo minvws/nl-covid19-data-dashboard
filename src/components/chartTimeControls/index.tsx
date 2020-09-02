@@ -11,11 +11,9 @@ interface IProps {
   timeframeOptions?: TimeframeOption[];
 }
 
-const ChartTimeControls: React.FC<IProps> = ({
-  timeframe,
-  timeframeOptions,
-  onChange,
-}) => {
+export default ChartTimeControls;
+
+function ChartTimeControls({ timeframe, timeframeOptions, onChange }: IProps) {
   if (!timeframeOptions) {
     timeframeOptions = ['all', '5weeks', 'week'];
   }
@@ -40,6 +38,4 @@ const ChartTimeControls: React.FC<IProps> = ({
       ))}
     </div>
   );
-};
-
-export default ChartTimeControls;
+}
