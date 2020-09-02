@@ -3,7 +3,7 @@ import useSWR from 'swr';
 import BarScale from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
 import { getNationalLayout } from 'components/layout/NationalLayout';
-import { LineChart, BarChart } from 'components/tiles/index';
+import { LineChart, BarChart } from 'components/charts/index';
 import MunicipalityMap from 'components/mapChart';
 import { ContentHeader } from 'components/layout/Content';
 

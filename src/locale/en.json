@@ -251,6 +251,9 @@
   "geen_selectie": {
     "text": "Select your region at the top of this page"
   },
+  "no_data_for_this_municipality": {
+    "text": "Deze informatie is niet beschikbaar voor deze gemeente."
+  },
   "rioolwater_metingen": {
     "title": "Sewage water examination",
     "text": "Number of virus particles in one milliliter of sewage water, collected from about 80 sites in the Netherlands. The national value is based on the total number of virus particles that is found in a week, divided by the number of sites where the data is collected. From September onwards, the number of sampling sites will be increased to more than 300.",
@@ -359,6 +362,37 @@
     }
   },
   "regionaal_positief_geteste_personen": {
+    "title": "Confirmed cases",
+    "text": "Number of confirmed cases per 100.000 inhabitants per day.",
+    "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
+    "metric_title": "Number of confirmed cases:",
+    "fold_title": "What does this mean?",
+    "fold": "This figure shows how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19.",
+    "graph_title": "Progression over time",
+    "open": "Hide explanation",
+    "sluit": "More explanation and data",
+    "screen_reader_graph_content": "{{value}} confirmed cases.",
+    "bron": {
+      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "text": "RIVM"
+    }
+  },
+  "regionaal_municipality_ziekenhuisopnames_per_dag": {
+    "title": "Hospital admissions per day",
+    "text": "Number of admissions per day, averaged over the past three days.",
+    "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
+    "fold_title": "What does this mean?",
+    "fold": "Number of confirmed COVID-19 cases who are admitted to a hospital per day. This value is an average of the reported admissions over the past three days.",
+    "graph_title": "Progression over time",
+    "open": "Hide explanation",
+    "sluit": "More explanation and data",
+    "screen_reader_graph_content": "{{value}} admissions.",
+    "bron": {
+      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "text": "RIVM"
+    }
+  },
+  "regionaal_municipality_positief_geteste_personen": {
     "title": "Confirmed cases",
     "text": "Number of confirmed cases per 100.000 inhabitants per day.",
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
@@ -502,9 +536,35 @@
     "graph_average_label_text": "Average value of all tested sites.",
     "graph_secondary_label_text": "Measured value per location"
   },
+  "regionaal_municipality_rioolwater_metingen": {
+    "title": "Sewage water examination",
+    "text": "Number of virus particles in one milliliter of sewage water, collected from sites in the safety region. This regional number is based on the total number of virus particles that is found in a week, divided by the number of sites where the data is collected.",
+    "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis. ",
+    "graph_title": "Progression over time",
+    "fold_title": "What does this mean?",
+    "fold": "This number shows how many virus particles were found in the sewage water of a certain region. For more information, please see the data explanation section.",
+    "open": "Hide explanation",
+    "sluit": "More explanation and data",
+    "screen_reader_graph_content": "{{value}} virus particles in one milliliter of sewage water, collected from 28 sites in the Netherlands.",
+    "average": "Average",
+    "bar_chart_title": "Last known value per RWZI location",
+    "bar_chart_axis_title": "Number of virus particles in one milliliter of sewage water",
+    "bron": {
+      "text": "RIVM Research sewage water",
+      "href": "https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater"
+    },
+    "graph_average_label_text": "Average value of all tested sites.",
+    "graph_secondary_label_text": "Measured value per location"
+  },
   "regionaal_index": {
-    "your_safety_region": "Your safety region",
-    "select_safety_region_municipality": "Select a safety region or municipality"
+    "label_municipalities": "Municipalities",
+    "label_safety_regions": "Safety regions",
+    "select_region_municipality_legend": "Select a municipality:",
+    "select_region_type_legend": "Show data of:",
+    "select_municipality": "Select a municipality",
+    "select_safety_region_municipality": "Select a safety region or municipality",
+    "your_municipality": "Municipality",
+    "your_safety_region": "Safety region"
   },
   "common": {
     "metadata": {
