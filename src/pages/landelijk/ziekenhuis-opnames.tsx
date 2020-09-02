@@ -12,6 +12,9 @@ import siteText from 'locale';
 
 import { IntakeHospitalMa } from 'types/data';
 import MunicipalityMap from 'components/mapChart/MunicipalityMap';
+import RadioGroup from 'components/radioGroup';
+import { useState } from 'react';
+import SafetyRegionMap from 'components/mapChart/SafetyRegionMap';
 
 const text: typeof siteText.ziekenhuisopnames_per_dag =
   siteText.ziekenhuisopnames_per_dag;
@@ -52,6 +55,9 @@ export function IntakeHospitalBarScale(props: {
 
 const IntakeHospital: FCWithLayout = () => {
   const { data: state } = useSWR(`/json/NL.json`);
+  const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
+    'municipal'
+  );
 
   const data: IntakeHospitalMa | undefined = state?.intake_hospital_ma;
 
@@ -85,13 +91,34 @@ const IntakeHospital: FCWithLayout = () => {
         <div className="column-item column-item-extra-margin">
           <h3>{text.map_titel}</h3>
           <p>{text.map_toelichting}</p>
+          <RadioGroup
+            values={[
+              {
+                label: 'Per gemeente',
+                value: 'municipal',
+              },
+              {
+                label: 'Per Veiligheidsregio',
+                value: 'region',
+              },
+            ]}
+            onSelect={(val: 'region' | 'municipal') => setSelectedMap(val)}
+          />
         </div>
 
         <div className="column-item column-item-extra-margin">
-          <MunicipalityMap
-            metric="hospital_admissions"
-            gradient={['#69c253', '#f35065']}
-          />
+          {selectedMap === 'municipal' && (
+            <MunicipalityMap
+              metric="hospital_admissions"
+              gradient={['#69c253', '#f35065']}
+            />
+          )}
+          {selectedMap === 'region' && (
+            <SafetyRegionMap
+              metric="hospital_admissions"
+              gradient={['#69c253', '#f35065']}
+            />
+          )}
         </div>
       </article>
 
