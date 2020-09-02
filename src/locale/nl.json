@@ -6,6 +6,13 @@
       "verpleeghuis": "Verpleeghuiszorg"
     }
   },
+  "veiligheidsregio_layout": {
+    "headings": {
+      "medisch": "Medische indicatoren",
+      "overig": "Overige indicatoren",
+      "verpleeghuis": "Verpleeghuiszorg"
+    }
+  },
   "andere_gegevens": "Andere gegevens",
   "blok_andere_gegevens": {
     "title": "Andere gegevens",
@@ -45,7 +52,7 @@
   "nav": {
     "links": {
       "index": "Landelijke cijfers",
-      "regio": "Regionale cijfers",
+      "veiligheidsregio": "Veiligheidsregio cijfers",
       "over": "Over dit dashboard",
       "meer": "Meer informatie over het coronavirus",
       "verantwoording": "Cijferverantwoording",
@@ -487,6 +494,11 @@
     "url": "https://coronadashboard.rijksoverheid.nl/over"
   },
   "regionaal_metadata": {
+    "title": "Regionaal Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
+    "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
+    "url": "https://coronadashboard.rijksoverheid.nl/regio"
+  },
+  "veiligheidsregio_metadata": {
     "title": "Regionaal Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
     "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
     "url": "https://coronadashboard.rijksoverheid.nl/regio"
