@@ -7,11 +7,14 @@ import MaxWidth from 'components/maxWidth';
 
 import text from 'locale';
 import useMediaQuery from 'utils/useMediaQuery';
+import { PAGES } from 'utils/useRoutes';
 
 import styles from './layout.module.scss';
 
 import { WithChildren } from 'types';
 import getLocale from 'utils/getLocale';
+
+import Arrow from 'assets/arrow.svg';
 
 export interface LayoutProps {
   url?: string;
@@ -49,6 +52,9 @@ function Layout(props: WithChildren<LayoutProps>) {
 
   const locale = getLocale();
   const showSmallLogo = useMediaQuery('(max-width: 480px)', true);
+  const showBackButton =
+    useMediaQuery('(max-width: 1000px)', false) &&
+    Object.values(PAGES.landelijk).includes(router.pathname);
 
   return (
     <>
@@ -159,6 +165,14 @@ function Layout(props: WithChildren<LayoutProps>) {
               </li>
             </ul>
           </MaxWidth>
+          {showBackButton && (
+            <Link href="/landelijk" passHref>
+              <a className="back-button" href="/landelijk">
+                <Arrow />
+                {text.nav.terug_naar_alle_cijfers}
+              </a>
+            </Link>
+          )}
         </nav>
       </header>
 
