@@ -8,6 +8,11 @@ export type TRegionMetricName = keyof Pick<
   'hospital_admissions' | 'positive_tested_people' | 'deceased'
 >;
 
+/**
+ * This hook filters the regional chloropleth data based on the given metric name
+ *
+ * @param metricName The given metric name
+ */
 export default function useRegionData<
   T extends TRegionMetricName,
   K extends Regions[T]
