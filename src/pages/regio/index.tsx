@@ -9,9 +9,6 @@ import Warning from 'assets/warn.svg';
 import { getLayout, FCWithLayout } from 'components/layout';
 import ScreenReaderOnly from 'components/screenReaderOnly';
 import SelectMunicipality from 'components/selectMunicipality';
-import IntakeHospital from 'components/tiles/regio/IntakeHospital';
-import PostivelyTestedPeople from 'components/tiles/regio/PositivelyTestedPeople';
-import SewerWater from 'components/tiles/regio/SewerWater';
 
 import styles from './regio.module.scss';
 import openGraphImageNL from 'assets/sharing/og-regionale-cijfers.png?url';
@@ -186,17 +183,7 @@ const Regio: FCWithLayout<RegioProps> = (props) => {
             </div>
           </div>
 
-          <div className={styles['panel-column']}>
-            <IntakeHospital
-              selectedRegio={selectedRegio}
-              data={data}
-              contentRef={contentRef}
-            />
-
-            <PostivelyTestedPeople selectedRegio={selectedRegio} data={data} />
-
-            <SewerWater selectedRegio={selectedRegio} data={data} />
-          </div>
+          <div className={styles['panel-column']}></div>
         </div>
         <ScreenReaderOnly>
           <button onClick={focusRegioSelect}>
