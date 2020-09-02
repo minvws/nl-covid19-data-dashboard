@@ -4,7 +4,7 @@ import BarScale from 'components/barScale';
 import { ContentHeader } from 'components/layout/Content';
 import { FCWithLayout } from 'components/layout';
 import { getNationalLayout } from 'components/layout/NationalLayout';
-import { LineChart } from 'components/index';
+import { LineChart } from 'components/charts/index';
 
 import CoronaVirus from 'assets/coronavirus.svg';
 
