@@ -130,11 +130,11 @@ function Layout(props: WithChildren<LayoutProps>) {
                 </Link>
               </li>
               <li>
-                <Link href="/regio">
+                <Link href="/veiligheidsregio">
                   <a
                     onClick={blur}
                     className={
-                      router.pathname == '/regio'
+                      router.pathname.includes('/veiligheidsregio')
                         ? styles.link + ' ' + styles.active
                         : styles.link
                     }
@@ -178,7 +178,7 @@ function Layout(props: WithChildren<LayoutProps>) {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/regio">
+                  <Link href="/veiligheidsregio">
                     <a onClick={blur} className={styles.footerLink}>
                       {text.nav.links.regio}
                     </a>
