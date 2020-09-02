@@ -39,6 +39,7 @@
     "links": {
       "index": "National numbers",
       "regio": "Regional numbers",
+      "gemeente": "Municipality numbers",
       "over": "About this dashboard",
       "meer": "More information on the coronavirus",
       "verantwoording": "Explanation of the data presented",
