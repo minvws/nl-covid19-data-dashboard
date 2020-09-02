@@ -84,6 +84,10 @@ $language-switcher-offset: 55px;
       text-decoration: underline;
     }
 
+    &:focus {
+      text-decoration: underline;
+    }
+
     > svg {
       width: 16px;
       transform: rotate(90deg);
