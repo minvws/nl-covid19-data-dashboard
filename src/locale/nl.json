@@ -52,6 +52,7 @@
   "nav": {
     "links": {
       "index": "Landelijke cijfers",
+      "gemeente": "Gemeentelijke cijfers",
       "veiligheidsregio": "Veiligheidsregio cijfers",
       "over": "Over dit dashboard",
       "meer": "Meer informatie over het coronavirus",

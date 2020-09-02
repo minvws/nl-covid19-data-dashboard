@@ -38,6 +38,7 @@
   "nav": {
     "links": {
       "index": "National numbers",
+      "gemeente": "Municipality numbers",
       "veiligheidsregio": "Safety region numbers",
       "over": "About this dashboard",
       "meer": "More information on the coronavirus",
