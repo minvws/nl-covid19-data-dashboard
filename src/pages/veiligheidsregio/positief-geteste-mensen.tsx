@@ -9,7 +9,7 @@ import { ContentHeader } from 'components/layout/Content';
 
 import Getest from 'assets/test.svg';
 import formatDecimal from 'utils/formatNumber';
-import { InfectedPeopleTotal, ResultsPerRegion } from 'types/data';
+import { ResultsPerRegion } from 'types/data';
 import useSWR from 'swr';
 
 const text: typeof siteText.positief_geteste_personen =
@@ -45,7 +45,6 @@ const PostivelyTestedPeople: FCWithLayout = () => {
 
   const resultsPerRegion: ResultsPerRegion | undefined =
     data?.results_per_region;
-  const total: InfectedPeopleTotal | undefined = data?.infected_people_total;
 
   return (
     <>
@@ -74,11 +73,13 @@ const PostivelyTestedPeople: FCWithLayout = () => {
         </article>
 
         <article className="metric-article column-item">
-          {total && (
+          {resultsPerRegion && (
             <h3>
               {text.kpi_titel}{' '}
               <span className="text-blue kpi">
-                {formatDecimal(total.last_value.infected_daily_total)}
+                {formatDecimal(
+                  resultsPerRegion.last_value.hospital_total_counts_per_region
+                )}
               </span>
             </h3>
           )}

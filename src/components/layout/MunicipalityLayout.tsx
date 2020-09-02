@@ -48,7 +48,7 @@ export function getMunicipalityLayout() {
 function MunicipalityLayout(props: WithChildren) {
   const { children } = props;
   const router = useRouter();
-  const { data } = useSWR(`/json/NL.json`);
+  const { data } = useSWR(`/json/GM0014.json`);
   const isLargeScreen = useMediaQuery('(min-width: 1000px)', true);
   const showAside = isLargeScreen || router.route === '/gemeente';
   const showContent = isLargeScreen || router.route !== '/gemeente';
@@ -97,7 +97,7 @@ function MunicipalityLayout(props: WithChildren) {
                       />
                       <span>
                         <PostivelyTestedPeopleBarScale
-                          data={data?.infected_people_delta_normalized}
+                          data={data?.positive_tested_people}
                         />
                       </span>
                     </a>
@@ -116,7 +116,7 @@ function MunicipalityLayout(props: WithChildren) {
                       />
                       <span>
                         <IntakeHospitalBarScale
-                          data={data?.intake_hospital_ma}
+                          data={data?.hospital_admissions}
                         />
                       </span>
                     </a>

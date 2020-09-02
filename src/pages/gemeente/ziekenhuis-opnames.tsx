@@ -1,16 +1,22 @@
+import useSWR from 'swr';
+
 import BarScale from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
 import { getMunicipalityLayout } from 'components/layout/MunicipalityLayout';
+import { ContentHeader } from 'components/layout/Content';
+
+import Ziekenhuis from 'assets/ziekenhuis.svg';
 
 import siteText from 'locale';
 
-import { IntakeHospitalMa } from 'types/data';
+import { HospitalAdmissions } from 'types/data';
+import { LineChart } from 'components/charts/index';
 
 const text: typeof siteText.ziekenhuisopnames_per_dag =
   siteText.ziekenhuisopnames_per_dag;
 
 export function IntakeHospitalBarScale(props: {
-  data: IntakeHospitalMa | undefined;
+  data: HospitalAdmissions | undefined;
 }) {
   const { data } = props;
 
@@ -21,7 +27,7 @@ export function IntakeHospitalBarScale(props: {
       min={0}
       max={100}
       signaalwaarde={40}
-      screenReaderText={text.barscale_screenreader_text}
+      screenReaderText={text.screen_reader_graph_content}
       value={data.last_value.moving_average_hospital}
       id="opnames"
       rangeKey="moving_average_hospital"
@@ -44,7 +50,56 @@ export function IntakeHospitalBarScale(props: {
 }
 
 const IntakeHospital: FCWithLayout = () => {
-  return null;
+  const { data } = useSWR(`/json/GM0014.json`);
+
+  const hospitalAdmissions: HospitalAdmissions | undefined =
+    data?.hospital_admissions;
+
+  return (
+    <>
+      <ContentHeader
+        category="Medische indicatoren"
+        title={text.titel}
+        Icon={Ziekenhuis}
+        subtitle={text.pagina_toelichting}
+        metadata={{
+          datumsText: text.datums,
+          dateUnix: hospitalAdmissions?.last_value?.date_of_report_unix,
+          dateInsertedUnix:
+            hospitalAdmissions?.last_value?.date_of_insertion_unix,
+          dataSource: text.bron,
+        }}
+      />
+
+      <article className="metric-article layout-two-column">
+        <div className="column-item column-item-extra-margin">
+          <h3>{text.barscale_titel}</h3>
+
+          <IntakeHospitalBarScale data={hospitalAdmissions} />
+        </div>
+
+        <div className="column-item column-item-extra-margin">
+          <p>{text.extra_uitleg}</p>
+        </div>
+      </article>
+
+      <article className="metric-article">
+        <h3>{text.linechart_titel}</h3>
+
+        {hospitalAdmissions && (
+          <>
+            <LineChart
+              values={hospitalAdmissions.values.map((value: any) => ({
+                value: value.moving_average_hospital,
+                date: value.date_of_report_unix,
+              }))}
+              signaalwaarde={40}
+            />
+          </>
+        )}
+      </article>
+    </>
+  );
 };
 
 IntakeHospital.getLayout = getMunicipalityLayout();
