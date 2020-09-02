@@ -166,7 +166,7 @@ function Layout(props: WithChildren<LayoutProps>) {
             </ul>
           </MaxWidth>
           {showBackButton && (
-            <Link href="/landelijk" passHref>
+            <Link href="/landelijk">
               <a className="back-button" href="/landelijk">
                 <Arrow />
                 {text.nav.terug_naar_alle_cijfers}
