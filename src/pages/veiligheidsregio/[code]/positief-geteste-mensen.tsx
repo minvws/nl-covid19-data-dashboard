@@ -1,3 +1,6 @@
+import { useRouter } from 'next/router';
+import useSRW from 'swr';
+
 import BarScale from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
 import { getSafetyRegionLayout } from 'components/layout/SafetyRegionLayout';
@@ -35,7 +38,11 @@ export function PostivelyTestedPeopleBarScale(props: {
 }
 
 const PostivelyTestedPeople: FCWithLayout = () => {
-  return null;
+  const router = useRouter();
+  const { code } = router.query;
+  const { data } = useSRW(`/json/${code}.json`);
+
+  return data?.name ?? 'loading';
 };
 
 PostivelyTestedPeople.getLayout = getSafetyRegionLayout();
