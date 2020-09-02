@@ -10,7 +10,6 @@ import { useMemo, useRef, useEffect } from 'react';
 import useMunicipalityData, {
   TMunicipalityMetricName,
 } from 'utils/useMunicipalityData';
-import { MunicipalityData } from 'types/municipality';
 import useExtent from 'utils/useExtent';
 
 if (typeof Highcharts === 'object') {
@@ -26,9 +25,7 @@ type TMunicipalityTooltipFormatterContextObject = TooltipFormatterContextObject 
   point: TMunicipalityPoint;
 };
 
-type TMunicipalityPoint = Highcharts.Point &
-  MunicipalityProperties &
-  MunicipalityData;
+type TMunicipalityPoint = Highcharts.Point & MunicipalityProperties;
 
 interface IProps {
   selected?: { id: string };
@@ -54,7 +51,7 @@ function MunicipalityMap(props: IProps) {
   const municipalityData = useMunicipalityData(metric, municipalCode);
   const [min, max] = useExtent(
     municipalityData,
-    (item: MunicipalityData): number => item[metric]
+    (item: any): number => item.value
   );
 
   const series = useMemo<SeriesOptionsType[]>(() => {
@@ -66,7 +63,7 @@ function MunicipalityMap(props: IProps) {
         allowPointSelect: false,
         data: municipalityData,
         // @ts-ignore
-        joinBy: ['gemcode', 'Municipality_code'],
+        joinBy: ['gemcode', 'gmcode'],
       },
     ];
 
@@ -115,20 +112,12 @@ function MunicipalityMap(props: IProps) {
         borderColor: '#01689B',
         borderRadius: 0,
         // @ts-ignore
-        formatter: function (
-          this: TMunicipalityTooltipFormatterContextObject
-        ): false | string {
+        formatter: function (this: any): false | string {
           const { point } = this;
-          const { Province, Municipality_name } = point;
-
-          if (!Municipality_name) {
-            return false;
-          }
 
           const metricValue = point[metric];
 
-          return `${Municipality_name} (${Province})<br/>
-                  ${metricValue}`;
+          return metricValue;
         },
       },
       plotOptions: {

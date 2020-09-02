@@ -3,7 +3,7 @@ import useSWR from 'swr';
 import BarScale from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
 import { getNationalLayout } from 'components/layout/NationalLayout';
-import { LineChart } from 'components/tiles/index';
+import { LineChart } from 'components/charts/index';
 import { ContentHeader } from 'components/layout/Content';
 
 import Ziekenhuis from 'assets/ziekenhuis.svg';
@@ -89,7 +89,7 @@ const IntakeHospital: FCWithLayout = () => {
 
         <div className="column-item column-item-extra-margin">
           <MunicipalityMap
-            metric="Hospital_admission"
+            metric="hospital_admissions"
             gradient={['#69c253', '#f35065']}
           />
         </div>

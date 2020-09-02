@@ -4,7 +4,7 @@ import BarScale from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
 import { getNationalLayout } from 'components/layout/NationalLayout';
 import { ContentHeader } from 'components/layout/Content';
-import { LineChart } from 'components/tiles/index';
+import { LineChart } from 'components/charts/index';
 
 import Getest from 'assets/test.svg';
 
