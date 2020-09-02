@@ -78,6 +78,30 @@
 .safety-region-layout,
 .municipality-layout {
   display: flex;
+  flex-direction: column;
+
+  .back-button {
+    background: white;
+    display: block;
+    width: 100%;
+    padding: 1em;
+    box-shadow: $box-shadow;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &:focus {
+      text-decoration: underline;
+    }
+
+    > svg {
+      width: 16px;
+      transform: rotate(90deg);
+      margin-right: 0.7em;
+    }
+  }
 
   > aside {
     flex-basis: 100%;

@@ -59,7 +59,8 @@
       "verantwoording": "Cijferverantwoording",
       "meer_href": "https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19"
     },
-    "title": "Corona Dashboard"
+    "title": "Corona Dashboard",
+    "terug_naar_alle_cijfers": "Terug naar alle cijfers"
   },
   "ic_opnames_per_dag": {
     "titel": "Intensive care-opnames per dag",
