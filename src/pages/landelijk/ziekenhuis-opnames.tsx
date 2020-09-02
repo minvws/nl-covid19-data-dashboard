@@ -89,7 +89,7 @@ const IntakeHospital: FCWithLayout = () => {
 
         <div className="column-item column-item-extra-margin">
           <MunicipalityMap
-            metric="Hospital_admission"
+            metric="hospital_admissions"
             gradient={['#69c253', '#f35065']}
           />
         </div>

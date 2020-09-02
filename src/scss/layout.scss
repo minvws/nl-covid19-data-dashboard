@@ -102,10 +102,19 @@
   }
 }
 
+@media (min-width: 1400px) {
+  .national-layout,
+  .safety-region-layout {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1em;
+  }
+}
+
 .national-aside,
 .safety-region-aside {
   background: white;
-  box-shadow: 3px -1px 5px lightgrey;
+  box-shadow: 1px -1px 5px #e5e5e5, -1px -1px 5px #e5e5e5;
   z-index: 2;
 
   h2 {
