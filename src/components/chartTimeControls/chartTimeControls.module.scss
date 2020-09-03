@@ -3,4 +3,12 @@
 .chart-radio-group {
   margin: 1em 0;
   justify-content: flex-end;
+
+  label {
+    padding: 0.2em 1.5em;
+
+    @media screen and (min-width: 700px) {
+      flex: 0 1 auto;
+    }
+  }
 }
