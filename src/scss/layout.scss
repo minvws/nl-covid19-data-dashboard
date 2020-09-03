@@ -118,8 +118,6 @@
   .national-layout,
   .safety-region-layout,
   .municipality-layout {
-    flex-direction: row;
-
     & > aside {
       flex: 0 0 auto;
       width: 25em;
