@@ -35,6 +35,17 @@ interface IProps {
 
 export default MunicipalityMap;
 
+/**
+ * This map shows a map of the Netherlands with features that represent all the municipalities.
+ * The geojson data is joined with the municipal data on the gemcode => gmcode keys. The municipal data is used
+ * to fill the chloropleth colors and generate the tooltips.
+ * When a selected prop is set, the id is expected to contain a gmcode. In which case only the municipalities
+ * that belong to the same safety region as the given gmcode will be rendered.
+ *
+ * @param props
+ *
+ * @component
+ */
 function MunicipalityMap(props: IProps) {
   const { selected, metric, gradient = ['#0000ff', '#ff0000'] } = props;
 
