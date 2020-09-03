@@ -45,11 +45,11 @@ function ComboBox<Option extends TOption>(props: TProps<Option>) {
   const [term, setTerm] = useState<string>('');
   const results = useSearchedOptions<Option>(term, options);
 
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>): void {
     setTerm(event.target.value);
   }
 
-  function onSelect(name: string) {
+  function onSelect(name: string): void {
     const option = options.find((option) => option.name === name);
 
     handleSelect(option as Option);
