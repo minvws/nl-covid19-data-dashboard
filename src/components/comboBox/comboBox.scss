@@ -1,0 +1,31 @@
+@import 'scss/variables.scss';
+
+[data-reach-combobox-popover] {
+  z-index: 100;
+
+  > span {
+    display: block;
+    padding: 0.5em 1em;
+    font-size: 1rem;
+  }
+}
+
+[data-reach-combobox-input] {
+  width: 100%;
+  padding: 0.5em 1em;
+  font-size: 1rem;
+}
+
+[data-reach-combobox-option] {
+  padding: 0.5em 1em;
+
+  &:hover,
+  &:focus {
+    background: $page-background;
+  }
+
+  span {
+    font-size: 1rem;
+    font-weight: normal;
+  }
+}

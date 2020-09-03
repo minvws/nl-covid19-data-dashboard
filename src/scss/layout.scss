@@ -74,10 +74,42 @@
   outline: none;
 }
 
+.safety-region-aside {
+  min-height: 30em;
+
+  [data-reach-combobox] {
+    margin: 1em;
+  }
+}
+
 .national-layout,
 .safety-region-layout,
 .municipality-layout {
   display: flex;
+  flex-direction: column;
+
+  .back-button {
+    background: white;
+    display: block;
+    width: 100%;
+    padding: 1em;
+    box-shadow: $box-shadow;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &:focus {
+      text-decoration: underline;
+    }
+
+    > svg {
+      width: 16px;
+      transform: rotate(90deg);
+      margin-right: 0.7em;
+    }
+  }
 
   > aside {
     flex-basis: 100%;
@@ -94,6 +126,8 @@
   .national-layout,
   .safety-region-layout,
   .municipality-layout {
+    flex-direction: row;
+
     & > aside {
       flex: 0 0 auto;
       width: 25em;

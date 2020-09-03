@@ -59,7 +59,8 @@
       "verantwoording": "Cijferverantwoording",
       "meer_href": "https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19"
     },
-    "title": "Corona Dashboard"
+    "title": "Corona Dashboard",
+    "terug_naar_alle_cijfers": "Terug naar alle cijfers"
   },
   "ic_opnames_per_dag": {
     "titel": "Intensive care-opnames per dag",
@@ -121,6 +122,7 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de trend van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
+    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -520,6 +522,10 @@
       "all": "Toon alles",
       "week": "Laatste week",
       "5weeks": "Laatste 5 weken"
+    },
+    "region_controls": {
+      "municipal": "Per gemeente",
+      "region": "Per veiligheidsregio"
     }
   },
   "utils": {
@@ -583,14 +589,9 @@
     },
     "barScale": {
       "signaalwaarde": "Signaalwaarde"
-    }
-  },
-  "select_municipality": {
-    "input_municipality_placeholder": "bv. Aa en Hunze",
-    "municipality_in_safety_region_selected": "Gemeente {{municipality}} in veiligheidsregio {{safetyRegion}} is geselecteerd.",
-    "no_municipality_selected": "Er is geen gemeente geselecteerd",
-    "result_count_help_text": "Er zijn {{resultCount}} resultaten, gebruik de omhoog en omlaag pijltjes toetsen om te navigeren. Druk op Enter om te selecteren.",
-    "select_mmunicipality": "Selecteer uw gemeente"
+    },
+    "zoekveld_placeholder": "Zoek op gemeente of veiligheidsregio ",
+    "zoekveld_geen_resultaten": "Geen resultaten"
   },
   "seoHead": {
     "default_description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",

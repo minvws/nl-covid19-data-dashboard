@@ -1,41 +1,37 @@
-import { useMemo, Fragment } from 'react';
 import styles from './chartTimeControls.module.scss';
+
+import RadioGroup, { IRadioGroupItem } from 'components/radioGroup';
 
 import text from 'locale';
 
 export type TimeframeOption = 'all' | '5weeks' | 'week';
 
 interface IProps {
-  timeframe: string;
-  onChange: (evt: React.ChangeEvent<HTMLInputElement>) => void;
-  timeframeOptions?: TimeframeOption[];
+  timeframe: TimeframeOption;
+  onChange: (value: TimeframeOption) => void;
+  timeframeOptions: TimeframeOption[];
 }
 
 export default ChartTimeControls;
 
-function ChartTimeControls({ timeframe, timeframeOptions, onChange }: IProps) {
-  if (!timeframeOptions) {
-    timeframeOptions = ['all', '5weeks', 'week'];
-  }
+function ChartTimeControls(props: IProps) {
+  const { timeframe, onChange, timeframeOptions } = props;
 
-  const id = useMemo(() => Math.random().toString(36).substr(2), []);
+  const values = timeframeOptions.map<IRadioGroupItem>((key) => ({
+    label: text.charts.time_controls[key],
+    value: key,
+  }));
 
   return (
-    <div className={styles['chart-radio-group']} onChange={onChange}>
-      {timeframeOptions.map((option) => (
-        <Fragment key={`${option}-${id}`}>
-          <input
-            id={`${option}-${id}`}
-            type="radio"
-            name={`timeframe-${id}`}
-            value={option}
-            defaultChecked={timeframe === option}
-          />
-          <label htmlFor={`${option}-${id}`}>
-            {text.charts.time_controls[option]}
-          </label>
-        </Fragment>
-      ))}
-    </div>
+    <RadioGroup
+      value={timeframe}
+      className={styles['chart-radio-group']}
+      onChange={onChange}
+      values={values}
+    />
   );
 }
+
+ChartTimeControls.defaultProps = {
+  timeframeOptions: ['all', '5weeks', 'week'],
+};

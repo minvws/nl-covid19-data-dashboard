@@ -223,7 +223,7 @@ function AreaChart(props: AreaChartProps) {
       <ChartTimeControls
         timeframe={timeframe}
         timeframeOptions={timeframeOptions}
-        onChange={(evt) => setTimeframe(evt.target.value as TimeframeOption)}
+        onChange={(value) => setTimeframe(value)}
       />
       <HighchartsReact highcharts={Highcharts} options={chartOptions} />
     </>

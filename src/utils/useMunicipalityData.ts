@@ -11,7 +11,7 @@ export type TMunicipalityMetricName = keyof Pick<
 export default useMunicipalityData;
 
 /**
- * This function take a municiaplity code and returns an array of municipality codes that
+ * This function take a municipality code and returns an array of municipality codes that
  * all belong to the same region as the given code belongs to.
  *
  * @param code
@@ -64,12 +64,12 @@ function useMunicipalityData<
     const filterByRegion: any = (item: K[number]): any =>
       applicableMunicipalCodes.indexOf(item.gmcode) > -1;
 
-    const filteredData = (metricItems as any[]).map<K[number]>(
-      (item: K[number]): K[number] & { value: number } => ({
-        ...item,
-        value: (item as any)[metricName],
-      })
-    );
+    const filteredData = (metricItems as any[]).map<
+      K[number] & { value: number }
+    >((item: K[number]): K[number] & { value: number } => ({
+      ...item,
+      value: (item as any)[metricName],
+    }));
 
     return applicableMunicipalCodes.length
       ? filteredData.filter<any>(filterByRegion)
