@@ -13,8 +13,8 @@ import siteText from 'locale';
 import { DeceasedPeopleNurseryCountDaily } from 'types/data';
 import MunicipalityMap from 'components/mapChart/MunicipalityMap';
 import { useState } from 'react';
-import RadioGroup from 'components/radioGroup';
 import SafetyRegionMap from 'components/mapChart/SafetyRegionMap';
+import ChartRegionControls from 'components/chartRegionControls';
 
 const text: typeof siteText.verpleeghuis_oversterfte =
   siteText.verpleeghuis_oversterfte;
@@ -84,18 +84,8 @@ const NursingHomeDeaths: FCWithLayout = () => {
         <div className="column-item column-item-extra-margin">
           <h3>{text.map_titel}</h3>
           <p>{text.map_toelichting}</p>
-          <RadioGroup
-            values={[
-              {
-                label: 'Per gemeente',
-                value: 'municipal',
-              },
-              {
-                label: 'Per Veiligheidsregio',
-                value: 'region',
-              },
-            ]}
-            onSelect={(val: 'region' | 'municipal') => setSelectedMap(val)}
+          <ChartRegionControls
+            onChange={(val: 'region' | 'municipal') => setSelectedMap(val)}
           />
         </div>
 

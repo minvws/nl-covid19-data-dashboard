@@ -1,10 +1,8 @@
 @import 'scss/variables.scss';
 
-.select-region-type {
+.select-radio-group {
   background: white;
   display: flex;
-  margin: 0 0 1rem;
-  max-width: 100%;
 
   input {
     position: absolute;

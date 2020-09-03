@@ -12,9 +12,9 @@ import siteText from 'locale';
 
 import { IntakeHospitalMa } from 'types/data';
 import MunicipalityMap from 'components/mapChart/MunicipalityMap';
-import RadioGroup from 'components/radioGroup';
 import { useState } from 'react';
 import SafetyRegionMap from 'components/mapChart/SafetyRegionMap';
+import ChartRegionControls from 'components/chartRegionControls';
 
 const text: typeof siteText.ziekenhuisopnames_per_dag =
   siteText.ziekenhuisopnames_per_dag;
@@ -91,18 +91,8 @@ const IntakeHospital: FCWithLayout = () => {
         <div className="column-item column-item-extra-margin">
           <h3>{text.map_titel}</h3>
           <p>{text.map_toelichting}</p>
-          <RadioGroup
-            values={[
-              {
-                label: 'Per gemeente',
-                value: 'municipal',
-              },
-              {
-                label: 'Per Veiligheidsregio',
-                value: 'region',
-              },
-            ]}
-            onSelect={(val: 'region' | 'municipal') => setSelectedMap(val)}
+          <ChartRegionControls
+            onChange={(val: 'region' | 'municipal') => setSelectedMap(val)}
           />
         </div>
 

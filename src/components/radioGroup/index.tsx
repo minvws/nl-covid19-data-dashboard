@@ -7,8 +7,10 @@ export interface IRadioGroupItem {
 }
 
 export interface IProps {
-  onSelect: (value: any) => void;
+  onChange: (value: any) => void;
+  value?: string;
   values: IRadioGroupItem[];
+  className?: string;
 }
 
 /**
@@ -18,24 +20,28 @@ export interface IProps {
  * @param props
  */
 export default function RadioGroup(props: IProps) {
-  const { onSelect, values } = props;
-  const [selected, setSelected] = useState<string>(values?.[0].value);
+  const { onChange, values, className, value } = props;
+  const [selected, setSelected] = useState<string>(value ?? values?.[0].value);
 
   const id = useMemo(() => Math.random().toString(36).substr(2), []);
 
-  const onChange = (value: string) => {
+  const onLocalChange = (value: string) => {
     if (value !== selected) {
       setSelected(value);
-      onSelect(value);
+      onChange(value);
     }
   };
 
+  const combinedClassName = className
+    ? `${styles['select-radio-group']} ${className}`
+    : styles['select-radio-group'];
+
   return (
-    <div className={styles['select-region-type']}>
+    <div className={combinedClassName}>
       {values.map((pair: IRadioGroupItem, index: number) => (
         <Fragment key={`radiogroup-${index}-${id}`}>
           <input
-            onChange={() => onChange(pair.value)}
+            onChange={() => onLocalChange(pair.value)}
             id={`radiogroup-${index}-${id}`}
             type="radio"
             name={`regionType-${id}`}

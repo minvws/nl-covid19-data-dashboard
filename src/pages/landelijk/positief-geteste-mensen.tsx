@@ -17,9 +17,9 @@ import {
   InfectedPeopleTotal,
   IntakeShareAgeGroups,
 } from 'types/data';
-import RadioGroup from 'components/radioGroup';
 import { useState } from 'react';
 import SafetyRegionMap from 'components/mapChart/SafetyRegionMap';
+import ChartRegionControls from 'components/chartRegionControls';
 
 const text: typeof siteText.positief_geteste_personen =
   siteText.positief_geteste_personen;
@@ -107,18 +107,8 @@ const PostivelyTestedPeople: FCWithLayout = () => {
         <div className="column-item column-item-extra-margin">
           <h3>{text.map_titel}</h3>
           <p>{text.map_toelichting}</p>
-          <RadioGroup
-            values={[
-              {
-                label: 'Per gemeente',
-                value: 'municipal',
-              },
-              {
-                label: 'Per Veiligheidsregio',
-                value: 'region',
-              },
-            ]}
-            onSelect={(val: 'region' | 'municipal') => setSelectedMap(val)}
+          <ChartRegionControls
+            onChange={(val: 'region' | 'municipal') => setSelectedMap(val)}
           />
         </div>
 

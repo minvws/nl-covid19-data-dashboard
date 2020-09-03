@@ -519,6 +519,10 @@
       "all": "Toon alles",
       "week": "Laatste week",
       "5weeks": "Laatste 5 weken"
+    },
+    "region_controls": {
+      "municipal": "Per gemeente",
+      "region": "Per veiligheidsregio"
     }
   },
   "utils": {
