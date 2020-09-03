@@ -123,6 +123,7 @@ const PostivelyTestedPeople: React.FC<IProps> = (props) => {
                   date: value.date_of_report_unix,
                 })
               )}
+              signaalwaarde={SIGNAAL_WAARDE}
             />
           )}
 
