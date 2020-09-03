@@ -109,7 +109,8 @@
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     },
-    "graph_axis_title": "Total number of confirmed cases"
+    "graph_axis_title": "Total number of confirmed cases",
+    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"]
   },
   "besmettelijke_personen": {
     "title": "Number of infectious people",
