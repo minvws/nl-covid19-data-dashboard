@@ -139,7 +139,7 @@ function SafetyRegionLayout(props: WithChildren) {
                         title={siteText.rioolwater_metingen.titel}
                       />
                       <span>
-                        <SewerWaterBarScale data={data?.rioolwater_metingen} />
+                        <SewerWaterBarScale data={data} />
                       </span>
                     </a>
                   </Link>

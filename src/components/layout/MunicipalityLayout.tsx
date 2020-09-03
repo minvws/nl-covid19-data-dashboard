@@ -7,7 +7,10 @@ import TitleWithIcon from 'components/titleWithIcon';
 import { getLayout as getSiteLayout } from 'components/layout';
 import { PostivelyTestedPeopleBarScale } from 'pages/gemeente/positief-geteste-mensen';
 import { IntakeHospitalBarScale } from 'pages/gemeente/ziekenhuis-opnames';
-import { SewerWaterBarScale } from 'pages/gemeente/rioolwater';
+import {
+  SewerWaterBarScale,
+  getSewerWaterBarScaleData,
+} from 'pages/gemeente/rioolwater';
 
 import GetestIcon from 'assets/test.svg';
 import Ziekenhuis from 'assets/ziekenhuis.svg';
@@ -137,7 +140,9 @@ function MunicipalityLayout(props: WithChildren) {
                         title={siteText.rioolwater_metingen.titel}
                       />
                       <span>
-                        <SewerWaterBarScale data={data?.rioolwater_metingen} />
+                        <SewerWaterBarScale
+                          data={getSewerWaterBarScaleData(data)}
+                        />
                       </span>
                     </a>
                   </Link>
