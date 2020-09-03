@@ -67,8 +67,7 @@ function SafetyRegionLayout(props: WithChildren) {
 
   const showAside = isLargeScreen || router.route === '/veiligheidsregio';
   const showContent = isLargeScreen || router.route !== '/veiligheidsregio';
-  /* const showMetricLinks = router.route !== '/veiligheidsregio'; */
-  const showMetricLinks = true;
+  const showMetricLinks = router.route !== '/veiligheidsregio';
   // remove focus after navigation
   const blur = (evt: any) => evt.target.blur();
 
