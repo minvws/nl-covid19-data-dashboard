@@ -5,13 +5,20 @@
       "type": "object",
       "required": [
         "week_unix",
+        "week_start_unix",
+        "week_end_unix",
         "incidentie",
-        "geschat_aantal",
         "date_of_insertion_unix"
       ],
       "additionalProperties": false,
       "properties": {
         "week_unix": {
+          "type": "integer"
+        },
+        "week_start_unix": {
+          "type": "integer"
+        },
+        "week_end_unix": {
           "type": "integer"
         },
         "incidentie": {
