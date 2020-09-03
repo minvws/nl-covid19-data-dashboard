@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
 import useSWR from 'swr';
@@ -5,15 +6,17 @@ import { useRouter } from 'next/router';
 
 import TitleWithIcon from 'components/titleWithIcon';
 import { getLayout as getSiteLayout } from 'components/layout';
-import { PostivelyTestedPeopleBarScale } from 'pages/veiligheidsregio/positief-geteste-mensen';
-import { IntakeHospitalBarScale } from 'pages/veiligheidsregio/ziekenhuis-opnames';
-import { SewerWaterBarScale } from 'pages/veiligheidsregio/rioolwater';
+import { PostivelyTestedPeopleBarScale } from 'pages/veiligheidsregio/[code]/positief-geteste-mensen';
+import { IntakeHospitalBarScale } from 'pages/veiligheidsregio/[code]/ziekenhuis-opnames';
+import { SewerWaterBarScale } from 'pages/veiligheidsregio/[code]/rioolwater';
+import Combobox from 'components/comboBox';
 
 import GetestIcon from 'assets/test.svg';
 import Ziekenhuis from 'assets/ziekenhuis.svg';
 import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
 
 import siteText from 'locale';
+import safetyRegions from 'data/index';
 
 import { WithChildren } from 'types';
 
@@ -28,6 +31,12 @@ export function getSafetyRegionLayout() {
     );
   };
 }
+
+type TSafetyRegion = {
+  name: string;
+  code: string;
+  id: number;
+};
 
 /*
  * SafetyRegionLayout is a composition of persistent layouts.
@@ -47,11 +56,18 @@ export function getSafetyRegionLayout() {
  */
 function SafetyRegionLayout(props: WithChildren) {
   const { children } = props;
+
   const router = useRouter();
+  // TODO: replace with regio data
   const { data } = useSWR(`/json/NL.json`);
   const isLargeScreen = useMediaQuery('(min-width: 1000px)', true);
+  const [selectedSafetyRegion, setSelectedSafetyRegion] = useState<
+    TSafetyRegion
+  >();
+
   const showAside = isLargeScreen || router.route === '/veiligheidsregio';
   const showContent = isLargeScreen || router.route !== '/veiligheidsregio';
+  const showMetricLinks = router.route !== '/veiligheidsregio';
   // remove focus after navigation
   const blur = (evt: any) => evt.target.blur();
 
@@ -59,6 +75,22 @@ function SafetyRegionLayout(props: WithChildren) {
     return router.pathname === path
       ? 'metric-link active-metric-link'
       : 'metric-link';
+  }
+
+  function handleSafeRegionSelect(region: TSafetyRegion) {
+    setSelectedSafetyRegion(region);
+
+    if (isLargeScreen) {
+      router.push(
+        '/veiligheidsregio/[code]/positief-geteste-mensen',
+        `/veiligheidsregio/${region.code}/positief-geteste-mensen`
+      );
+    } else {
+      router.push(
+        '/veiligheidsregio/[code]',
+        `/veiligheidsregio/${region.code}`
+      );
+    }
   }
 
   return (
@@ -80,72 +112,93 @@ function SafetyRegionLayout(props: WithChildren) {
       <div className="safety-region-layout">
         {showAside && (
           <aside className="safety-region-aside">
-            <nav aria-label="metric navigation">
-              <h2>{siteText.veiligheidsregio_layout.headings.medisch}</h2>
-              <ul>
-                <li>
-                  <Link href="/veiligheidsregio/positief-geteste-mensen">
-                    <a
-                      onClick={blur}
-                      className={getClassName(
-                        '/veiligheidsregio/positief-geteste-mensen'
-                      )}
-                    >
-                      <TitleWithIcon
-                        Icon={GetestIcon}
-                        title={siteText.positief_geteste_personen.titel}
-                      />
-                      <span>
-                        <PostivelyTestedPeopleBarScale
-                          data={data?.infected_people_delta_normalized}
-                        />
-                      </span>
-                    </a>
-                  </Link>
-                </li>
+            <Combobox<TSafetyRegion>
+              handleSelect={handleSafeRegionSelect}
+              options={safetyRegions}
+            />
 
-                <li>
-                  <Link href="/veiligheidsregio/ziekenhuis-opnames">
-                    <a
-                      onClick={blur}
-                      className={getClassName(
-                        '/veiligheidsregio/ziekenhuis-opnames'
-                      )}
-                    >
-                      <TitleWithIcon
-                        Icon={Ziekenhuis}
-                        title={siteText.ziekenhuisopnames_per_dag.titel}
-                      />
-                      <span>
-                        <IntakeHospitalBarScale
-                          data={data?.intake_hospital_ma}
-                        />
-                      </span>
-                    </a>
-                  </Link>
-                </li>
-              </ul>
+            {showMetricLinks && selectedSafetyRegion && (
+              <nav aria-label="metric navigation">
+                <h2>{siteText.veiligheidsregio_layout.headings.medisch}</h2>
 
-              <h2>{siteText.veiligheidsregio_layout.headings.overig}</h2>
-              <ul>
-                <li>
-                  <Link href="/veiligheidsregio/rioolwater">
-                    <a
-                      onClick={blur}
-                      className={getClassName('/veiligheidsregio/rioolwater')}
+                <ul>
+                  <li>
+                    <Link
+                      href="/veiligheidsregio/[code]/positief-geteste-mensen"
+                      as={`/veiligheidsregio/${selectedSafetyRegion.code}/positief-geteste-mensen`}
                     >
-                      <TitleWithIcon
-                        Icon={RioolwaterMonitoring}
-                        title={siteText.rioolwater_metingen.titel}
-                      />
-                      <span>
-                        <SewerWaterBarScale data={data?.rioolwater_metingen} />
-                      </span>
-                    </a>
-                  </Link>
-                </li>
-              </ul>
-            </nav>
+                      <a
+                        onClick={blur}
+                        className={getClassName(
+                          `/veiligheidsregio/[code]/positief-geteste-mensen`
+                        )}
+                      >
+                        <TitleWithIcon
+                          Icon={GetestIcon}
+                          title={siteText.positief_geteste_personen.titel}
+                        />
+                        <span>
+                          <PostivelyTestedPeopleBarScale
+                            data={data?.infected_people_delta_normalized}
+                          />
+                        </span>
+                      </a>
+                    </Link>
+                  </li>
+
+                  <li>
+                    <Link
+                      href="/veiligheidsregio/[code]/ziekenhuis-opnames"
+                      as={`/veiligheidsregio/${selectedSafetyRegion.code}/ziekenhuis-opnames`}
+                    >
+                      <a
+                        onClick={blur}
+                        className={getClassName(
+                          `/veiligheidsregio/[code]/ziekenhuis-opnames`
+                        )}
+                      >
+                        <TitleWithIcon
+                          Icon={Ziekenhuis}
+                          title={siteText.ziekenhuisopnames_per_dag.titel}
+                        />
+                        <span>
+                          <IntakeHospitalBarScale
+                            data={data?.intake_hospital_ma}
+                          />
+                        </span>
+                      </a>
+                    </Link>
+                  </li>
+                </ul>
+
+                <h2>{siteText.veiligheidsregio_layout.headings.overig}</h2>
+                <ul>
+                  <li>
+                    <Link
+                      href="/veiligheidsregio/[code]/rioolwater"
+                      as={`/veiligheidsregio/${selectedSafetyRegion.code}/rioolwater`}
+                    >
+                      <a
+                        onClick={blur}
+                        className={getClassName(
+                          `/veiligheidsregio/[code]/rioolwater`
+                        )}
+                      >
+                        <TitleWithIcon
+                          Icon={RioolwaterMonitoring}
+                          title={siteText.rioolwater_metingen.titel}
+                        />
+                        <span>
+                          <SewerWaterBarScale
+                            data={data?.rioolwater_metingen}
+                          />
+                        </span>
+                      </a>
+                    </Link>
+                  </li>
+                </ul>
+              </nav>
+            )}
           </aside>
         )}
 

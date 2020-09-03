@@ -74,6 +74,14 @@
   outline: none;
 }
 
+.safety-region-aside {
+  min-height: 30em;
+
+  [data-reach-combobox] {
+    margin: 1em;
+  }
+}
+
 .national-layout,
 .safety-region-layout,
 .municipality-layout {
