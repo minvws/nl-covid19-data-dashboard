@@ -12,7 +12,7 @@ export interface Municipal {
   code: string;
   hospital_admissions: HospitalAdmissions;
   positive_tested_people: PositiveTestedPeople;
-  sewer_measurements: SewerMeasurements;
+  sewer_measurements?: SewerMeasurements;
   results_per_sewer_installation_per_municipality?: ResultsPerSewerInstallationPerMunicipality;
 }
 export interface HospitalAdmissions {
@@ -65,7 +65,7 @@ export interface ResultsPerSewerInstallationPerMunicipalityLastValue {
   week: number;
   rwzi_awzi_code: string;
   rwzi_awzi_name: string;
-  gm_code: string;
+  gmcode: string;
   rna_per_ml: number;
   date_of_insertion_unix: number;
 }
@@ -126,8 +126,10 @@ export interface VerdenkingenHuisartsen {
 }
 export interface VerdenkingenHuisartsenLastValue {
   week_unix: number;
+  week_start_unix: number;
+  week_end_unix: number;
   incidentie: number;
-  geschat_aantal: number;
+  geschat_aantal?: number;
   date_of_insertion_unix: number;
 }
 export interface IntakeHospitalMa {
@@ -270,9 +272,12 @@ export interface RioolwaterMetingenPerRwzi {
   last_value: RioolwaterMetingenPerRwziLastValue;
 }
 export interface RioolwaterMetingenPerRwziLastValue {
+  week_start_unix: number;
+  week_end_unix: number;
   date_measurement_unix: number;
   rwzi_awzi_code: string;
   rwzi_awzi_name: string;
+  gm_code: string;
   vrcode: string;
   vrnaam: string;
   rna_per_ml: number;
@@ -370,10 +375,13 @@ export interface SewerValueElement {
 export interface SewerValue {
   date_measurement_unix: number;
   week: number;
+  week_start_unix: number;
+  week_end_unix: number;
   rwzi_awzi_code: string;
   rwzi_awzi_name: string;
   vrcode: string;
   vrnaam: string;
+  gmcode: string;
   rna_per_ml: number;
   date_of_insertion_unix: number;
 }
@@ -383,6 +391,8 @@ export interface AverageSewerInstallationPerRegion {
 }
 export interface AverageSewerInstallationPerRegionItem {
   week_unix: number;
+  week_start_unix: number;
+  week_end_unix: number;
   vrcode: string;
   average: number;
   date_of_insertion_unix: number;
