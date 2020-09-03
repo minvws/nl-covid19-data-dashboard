@@ -50,7 +50,7 @@ const PostivelyTestedPeople: FCWithLayout = () => {
 
       <div className="column-item column-item-extra-margin">
         <SafetyRegionMap
-          selected={{ id: vrcode }}
+          selected={vrcode ? { id: vrcode } : undefined}
           metric="positive_tested_people"
           gradient={['#9DDEFE', '#0290D6']}
         />
