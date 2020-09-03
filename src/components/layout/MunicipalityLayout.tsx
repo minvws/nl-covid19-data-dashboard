@@ -96,7 +96,10 @@ function MunicipalityLayout(props: WithChildren) {
                     >
                       <TitleWithIcon
                         Icon={GetestIcon}
-                        title={siteText.positief_geteste_personen.titel}
+                        title={
+                          siteText.gemeente_positief_geteste_personen
+                            .titel_sidebar
+                        }
                       />
                       <span>
                         <PostivelyTestedPeopleBarScale
@@ -115,7 +118,10 @@ function MunicipalityLayout(props: WithChildren) {
                     >
                       <TitleWithIcon
                         Icon={Ziekenhuis}
-                        title={siteText.ziekenhuisopnames_per_dag.titel}
+                        title={
+                          siteText.gemeente_ziekenhuisopnames_per_dag
+                            .titel_sidebar
+                        }
                       />
                       <span>
                         <IntakeHospitalBarScale
@@ -137,7 +143,9 @@ function MunicipalityLayout(props: WithChildren) {
                     >
                       <TitleWithIcon
                         Icon={RioolwaterMonitoring}
-                        title={siteText.rioolwater_metingen.titel}
+                        title={
+                          siteText.gemeente_rioolwater_metingen.titel_sidebar
+                        }
                       />
                       <span>
                         <SewerWaterBarScale

@@ -11,9 +11,10 @@ import siteText from 'locale';
 
 import { ResultsPerRegion } from 'types/data';
 import { LineChart } from 'components/charts/index';
+import replaceVariablesInText from 'utils/replaceVariablesInText';
 
-const text: typeof siteText.ziekenhuisopnames_per_dag =
-  siteText.ziekenhuisopnames_per_dag;
+const text: typeof siteText.veiligheidsregio_ziekenhuisopnames_per_dag =
+  siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
 
 export function IntakeHospitalBarScale(props: {
   data: ResultsPerRegion | undefined;
@@ -59,7 +60,9 @@ const IntakeHospital: FCWithLayout = () => {
     <>
       <ContentHeader
         category="Medische indicatoren"
-        title={text.titel}
+        title={replaceVariablesInText(text.titel, {
+          safetyRegion: 'Veiligheidsregionaam',
+        })}
         Icon={Ziekenhuis}
         subtitle={text.pagina_toelichting}
         metadata={{

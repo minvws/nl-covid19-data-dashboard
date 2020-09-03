@@ -11,9 +11,10 @@ import Getest from 'assets/test.svg';
 import formatDecimal from 'utils/formatNumber';
 import { PositiveTestedPeople } from 'types/data';
 import useSWR from 'swr';
+import replaceVariablesInText from 'utils/replaceVariablesInText';
 
-const text: typeof siteText.positief_geteste_personen =
-  siteText.positief_geteste_personen;
+const text: typeof siteText.gemeente_positief_geteste_personen =
+  siteText.gemeente_positief_geteste_personen;
 
 export function PostivelyTestedPeopleBarScale(props: {
   data: PositiveTestedPeople | undefined;
@@ -50,7 +51,9 @@ const PostivelyTestedPeople: FCWithLayout = () => {
     <>
       <ContentHeader
         category="Medische indicatoren"
-        title={text.titel}
+        title={replaceVariablesInText(text.titel, {
+          municipality: 'Gemeentenaam',
+        })}
         Icon={Getest}
         subtitle={text.pagina_toelichting}
         metadata={{

@@ -11,9 +11,10 @@ import siteText from 'locale';
 
 import { HospitalAdmissions } from 'types/data';
 import { LineChart } from 'components/charts/index';
+import replaceVariablesInText from 'utils/replaceVariablesInText';
 
-const text: typeof siteText.ziekenhuisopnames_per_dag =
-  siteText.ziekenhuisopnames_per_dag;
+const text: typeof siteText.gemeente_ziekenhuisopnames_per_dag =
+  siteText.gemeente_ziekenhuisopnames_per_dag;
 
 export function IntakeHospitalBarScale(props: {
   data: HospitalAdmissions | undefined;
@@ -59,7 +60,9 @@ const IntakeHospital: FCWithLayout = () => {
     <>
       <ContentHeader
         category="Medische indicatoren"
-        title={text.titel}
+        title={replaceVariablesInText(text.titel, {
+          municipality: 'Gemeentenaam',
+        })}
         Icon={Ziekenhuis}
         subtitle={text.pagina_toelichting}
         metadata={{

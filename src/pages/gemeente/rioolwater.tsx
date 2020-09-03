@@ -23,7 +23,8 @@ import formatNumber from 'utils/formatNumber';
 import BarChart from 'components/barChart';
 import { XrangePointOptionsObject } from 'highcharts';
 
-const text: typeof siteText.rioolwater_metingen = siteText.rioolwater_metingen;
+const text: typeof siteText.gemeente_rioolwater_metingen =
+  siteText.gemeente_rioolwater_metingen;
 
 // Specific interfaces to pass data between the formatting functions and the highcharts configs
 interface SewerWaterMetadata {
@@ -44,7 +45,7 @@ interface SewerWaterLineChartData {
 }
 
 interface SewerWaterBarChartData {
-  keys: any[];
+  keys: string[];
   data: XrangePointOptionsObject[];
 }
 
@@ -271,7 +272,9 @@ const SewerWater: FCWithLayout = () => {
     <>
       <ContentHeader
         category="Overige indicatoren"
-        title={text.titel}
+        title={replaceVariablesInText(text.titel, {
+          municipality: 'Gemeentenaam',
+        })}
         Icon={RioolwaterMonitoring}
         subtitle={text.pagina_toelichting}
         metadata={{
@@ -311,7 +314,11 @@ const SewerWater: FCWithLayout = () => {
 
       {barChartData && (
         <article className="metric-article">
-          <h3>{text.bar_chart_title}</h3>
+          <h3>
+            {replaceVariablesInText(text.bar_chart_title, {
+              municipality: 'Gemeentenaam',
+            })}
+          </h3>
           <BarChart
             keys={barChartData.keys}
             data={barChartData.data}

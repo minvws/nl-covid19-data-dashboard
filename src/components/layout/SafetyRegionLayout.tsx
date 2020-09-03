@@ -135,7 +135,10 @@ function SafetyRegionLayout(props: WithChildren) {
                       >
                         <TitleWithIcon
                           Icon={GetestIcon}
-                          title={siteText.positief_geteste_personen.titel}
+                          title={
+                            siteText.veiligheidsregio_positief_geteste_personen
+                              .titel_sidebar
+                          }
                         />
                         <span>
                           <PostivelyTestedPeopleBarScale
@@ -159,7 +162,10 @@ function SafetyRegionLayout(props: WithChildren) {
                       >
                         <TitleWithIcon
                           Icon={Ziekenhuis}
-                          title={siteText.ziekenhuisopnames_per_dag.titel}
+                          title={
+                            siteText.veiligheidsregio_ziekenhuisopnames_per_dag
+                              .titel_sidebar
+                          }
                         />
                         <span>
                           <IntakeHospitalBarScale
@@ -186,7 +192,10 @@ function SafetyRegionLayout(props: WithChildren) {
                       >
                         <TitleWithIcon
                           Icon={RioolwaterMonitoring}
-                          title={siteText.rioolwater_metingen.titel}
+                          title={
+                            siteText.veiligheidsregio_rioolwater_metingen
+                              .titel_sidebar
+                          }
                         />
                         <span>
                           <SewerWaterBarScale
