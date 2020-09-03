@@ -59,7 +59,7 @@ function ComboBox<Option extends TOption>(props: TProps<Option>) {
             ))}
           </ComboboxList>
         ) : (
-          <span style={{ display: 'block', margin: 8 }}>No results found</span>
+          <span>{text.common.zoekveld_geen_resultaten}</span>
         )}
       </ComboboxPopover>
     </Combobox>
