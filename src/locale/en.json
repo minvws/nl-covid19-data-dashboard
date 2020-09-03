@@ -307,7 +307,7 @@
       },
       {
         "vraag": "What is an alert value?",
-        "antwoord": "An alert value is intended to act as a warning. A warning can be triggered if many people become ill or are admitted to a hospital at the same time. For example, the model of the RIVM shows that the healthcare sector will be unable to cope if daily hospital admissions for COVID-19 exceed 40 admissions per day for an extended period of time."
+        "antwoord": "An alert value is determined by the ministry of VWS and is intended to act as a warning. A warning can be triggered if many people become ill, are admitted to a hospital or test positive at the same time. For example, it is modelled that the healthcare sector will be unable to cope if daily hospital admissions for COVID-19 exceed 40 admissions per day for an extended period of time."
       },
       {
         "vraag": "What can the regional overview tell that the national overview cannot?",
