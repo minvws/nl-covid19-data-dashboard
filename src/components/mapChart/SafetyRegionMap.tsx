@@ -4,7 +4,7 @@ import HighchartsReact from 'highcharts-react-official';
 import useSWR from 'swr';
 import { FeatureCollection, MultiPolygon } from 'geojson';
 import { useMemo, useRef, useEffect } from 'react';
-// import { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 
 import useExtent from 'utils/useExtent';
 import useRegionData, { TRegionMetricName } from 'utils/useRegionData';
@@ -31,7 +31,7 @@ function SafetyRegionMap(props: IProps) {
   const { selected, metric, gradient = ['#0000ff', '#ff0000'] } = props;
 
   const municipalCode = selected?.id;
-  // const router = useRouter();
+  const router = useRouter();
 
   const { data: countryLines } = useSWR<any[]>(
     '/static-json/netherlands-outline.geojson'
@@ -43,12 +43,6 @@ function SafetyRegionMap(props: IProps) {
 
   const regionData = useRegionData(metric);
   const [min, max] = useExtent(regionData, (item: any): number => item.value);
-
-  // function onSelect(name: string): void {
-  //   const option = options.find((option) => option.name === name);
-
-  //   handleSelect(option as Option);
-  // }
 
   const series = useMemo<SeriesOptionsType[]>(() => {
     const result: SeriesOptionsType[] = [
@@ -62,12 +56,10 @@ function SafetyRegionMap(props: IProps) {
         joinBy: ['vrcode', 'vrcode'],
         point: {
           events: {
-            // click: (this: any) => {
-            //   const { point } = this;
-            //   // @ts-ignore
-            //   // router.push("/landelijk");
-            //   console.log(point);
-            // },
+            click: function (this: any) {
+              const code = this?.point?.properties.vrcode;
+              router.push(`/veiligheidsregio/${code}/positief-geteste-mensen`);
+            },
           },
         },
       },
@@ -82,7 +74,7 @@ function SafetyRegionMap(props: IProps) {
     }
 
     return result;
-  }, [countryLines, municipalCode, regionData, municipalityLines]);
+  }, [countryLines, municipalCode, regionData, municipalityLines, router]);
 
   const mapOptions = useMemo<Highcharts.Options>(
     () => ({
