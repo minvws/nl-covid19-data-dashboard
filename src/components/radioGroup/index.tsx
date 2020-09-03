@@ -25,7 +25,7 @@ export default function RadioGroup(props: IProps) {
 
   const id = useMemo(() => Math.random().toString(36).substr(2), []);
 
-  const onLocalChange = (value: string) => {
+  const onLocalChange = (value: string): void => {
     if (value !== selected) {
       setSelected(value);
       onChange(value);
