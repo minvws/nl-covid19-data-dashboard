@@ -76,6 +76,7 @@ function getOptions(
     },
     yAxis: {
       min: 0,
+      max: values.length > 0 ? null : 1,
       allowDecimals: false,
       lineColor: '#C4C4C4',
       gridLineColor: '#C4C4C4',
