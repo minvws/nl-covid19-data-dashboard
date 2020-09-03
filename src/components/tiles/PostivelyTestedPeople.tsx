@@ -102,6 +102,7 @@ export const PostivelyTestedPeople: React.FC = () => {
               value: value.infected_daily_increase,
               date: value.date_of_report_unix,
             }))}
+            signaalwaarde={SIGNAAL_WAARDE}
           />
         )}
 

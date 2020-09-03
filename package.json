@@ -1,6 +1,6 @@
 {
   "name": "corona-dashboard",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "private": true,
   "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
   "dependencies": {
