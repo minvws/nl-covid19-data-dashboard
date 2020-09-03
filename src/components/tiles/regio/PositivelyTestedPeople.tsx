@@ -23,6 +23,8 @@ interface IProps {
   selectedRegio: SafetyRegion | undefined;
 }
 
+const SIGNAAL_WAARDE = 7;
+
 const PostivelyTestedPeople: React.FC<IProps> = (props) => {
   const { selectedRegio, data } = props;
 
@@ -56,10 +58,19 @@ const PostivelyTestedPeople: React.FC<IProps> = (props) => {
                 }
                 id="regio_infecties"
                 rangeKey="infected_increase_per_region"
+                signaalwaarde={SIGNAAL_WAARDE}
                 gradient={[
                   {
-                    color: '#3391CC',
+                    color: '#69c253',
                     value: 0,
+                  },
+                  {
+                    color: '#D3A500',
+                    value: SIGNAAL_WAARDE,
+                  },
+                  {
+                    color: '#f35065',
+                    value: 90,
                   },
                 ]}
               />
