@@ -23,6 +23,21 @@ type TProps<Option extends TOption> = {
 
 export default ComboBox;
 
+/*
+ * Combox is an accessible dropdown with search.
+ *
+ * @param options - Options to render. Needs to atleast contain a key `name` with a string as value.
+ * @param handleSelect - Callback when an option has been selected
+ *
+ * ComboBox accept a generic type which extends `TOption` ({name: string}).
+ *
+ * ```ts
+ * <Combobox<TSafetyRegion> // generic passed here
+ *   handleSelect={handleSafeRegionSelect}
+ *   options={safetyRegions}
+ * />
+ * ```
+ */
 function ComboBox<Option extends TOption>(props: TProps<Option>) {
   const { options, handleSelect } = props;
 
