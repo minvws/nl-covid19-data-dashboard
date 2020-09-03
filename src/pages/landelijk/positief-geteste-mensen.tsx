@@ -4,7 +4,7 @@ import BarScale from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
 import { getNationalLayout } from 'components/layout/NationalLayout';
 import { LineChart, BarChart } from 'components/charts/index';
-import MunicipalityMap from 'components/mapChart';
+import MunicipalityMap from 'components/mapChart/MunicipalityMap';
 import { ContentHeader } from 'components/layout/Content';
 
 import Getest from 'assets/test.svg';
@@ -17,6 +17,9 @@ import {
   InfectedPeopleTotal,
   IntakeShareAgeGroups,
 } from 'types/data';
+import { useState } from 'react';
+import SafetyRegionMap from 'components/mapChart/SafetyRegionMap';
+import ChartRegionControls from 'components/chartRegionControls';
 
 const text: typeof siteText.positief_geteste_personen =
   siteText.positief_geteste_personen;
@@ -48,6 +51,9 @@ export function PostivelyTestedPeopleBarScale(props: {
 
 const PostivelyTestedPeople: FCWithLayout = () => {
   const { data } = useSWR(`/json/NL.json`);
+  const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
+    'municipal'
+  );
 
   const delta: InfectedPeopleDeltaNormalized | undefined =
     data?.infected_people_delta_normalized;
@@ -101,13 +107,24 @@ const PostivelyTestedPeople: FCWithLayout = () => {
         <div className="column-item column-item-extra-margin">
           <h3>{text.map_titel}</h3>
           <p>{text.map_toelichting}</p>
+          <ChartRegionControls
+            onChange={(val: 'region' | 'municipal') => setSelectedMap(val)}
+          />
         </div>
 
         <div className="column-item column-item-extra-margin">
-          <MunicipalityMap
-            metric="positive_tested_people"
-            gradient={['#9DDEFE', '#0290D6']}
-          />
+          {selectedMap === 'municipal' && (
+            <MunicipalityMap
+              metric="positive_tested_people"
+              gradient={['#9DDEFE', '#0290D6']}
+            />
+          )}
+          {selectedMap === 'region' && (
+            <SafetyRegionMap
+              metric="positive_tested_people"
+              gradient={['#9DDEFE', '#0290D6']}
+            />
+          )}
         </div>
       </article>
 

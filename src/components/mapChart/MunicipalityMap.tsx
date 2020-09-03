@@ -115,9 +115,11 @@ function MunicipalityMap(props: IProps) {
         formatter: function (this: any): false | string {
           const { point } = this;
 
-          const metricValue = point[metric];
-
-          return metricValue;
+          if (point.properties?.gemnaam) {
+            const metricValue = point[metric];
+            return `<strong>${point.properties.gemnaam}</strong><br/>${metricValue}`;
+          }
+          return false;
         },
       },
       plotOptions: {

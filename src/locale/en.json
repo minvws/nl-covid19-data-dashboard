@@ -512,6 +512,10 @@
       "all": "Show everything",
       "week": "Last week",
       "5weeks": "Past 5 weeks"
+    },
+    "region_controls": {
+      "municipal": "Per municipality",
+      "region": "Per safety region"
     }
   },
   "utils": {

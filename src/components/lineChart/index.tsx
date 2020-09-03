@@ -140,16 +140,12 @@ function LineChart({
     return getOptions(filteredValues, signaalwaarde);
   }, [values, timeframe, signaalwaarde]);
 
-  if (!timeframeOptions) {
-    timeframeOptions = ['all', '5weeks', 'week'];
-  }
-
   return (
     <>
       <ChartTimeControls
         timeframe={timeframe}
         timeframeOptions={timeframeOptions}
-        onChange={(evt) => setTimeframe(evt.target.value as TimeframeOption)}
+        onChange={(value) => setTimeframe(value as TimeframeOption)}
       />
       <HighchartsReact highcharts={Highcharts} options={chartOptions} />
     </>
