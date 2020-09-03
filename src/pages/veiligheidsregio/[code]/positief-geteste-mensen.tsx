@@ -39,7 +39,7 @@ export function PostivelyTestedPeopleBarScale(props: {
 const PostivelyTestedPeople: FCWithLayout = () => {
   const router = useRouter();
 
-  const vrcode = router.query.code;
+  const vrcode = router.query.code as string;
 
   return (
     <article className="metric-article layout-two-column">
