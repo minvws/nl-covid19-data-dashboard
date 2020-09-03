@@ -10,6 +10,8 @@ import {
 
 import useThrottle from 'utils/useThrottle';
 
+import text from 'locale';
+
 type TOption = {
   name: string;
 };
@@ -47,7 +49,7 @@ function ComboBox<Option extends TOption>(props: TProps<Option>) {
       <ComboboxInput
         ref={inputRef}
         onChange={handleChange}
-        placeholder="Zoek op gemeente of veiligheidsregio "
+        placeholder={text.common.zoekveld_placeholder}
       />
       <ComboboxPopover>
         {results.length > 0 ? (

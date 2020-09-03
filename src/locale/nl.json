@@ -583,14 +583,8 @@
     },
     "barScale": {
       "signaalwaarde": "Signaalwaarde"
-    }
-  },
-  "select_municipality": {
-    "input_municipality_placeholder": "bv. Aa en Hunze",
-    "municipality_in_safety_region_selected": "Gemeente {{municipality}} in veiligheidsregio {{safetyRegion}} is geselecteerd.",
-    "no_municipality_selected": "Er is geen gemeente geselecteerd",
-    "result_count_help_text": "Er zijn {{resultCount}} resultaten, gebruik de omhoog en omlaag pijltjes toetsen om te navigeren. Druk op Enter om te selecteren.",
-    "select_mmunicipality": "Selecteer uw gemeente"
+    },
+    "zoekveld_placeholder": "Zoek op gemeente of veiligheidsregio "
   },
   "seoHead": {
     "default_description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",

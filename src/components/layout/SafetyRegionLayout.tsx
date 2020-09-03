@@ -58,6 +58,7 @@ function SafetyRegionLayout(props: WithChildren) {
   const { children } = props;
 
   const router = useRouter();
+  // TODO: replace with regio data
   const { data } = useSWR(`/json/NL.json`);
   const isLargeScreen = useMediaQuery('(min-width: 1000px)', true);
   const [selectedSafetyRegion, setSelectedSafetyRegion] = useState<
@@ -77,9 +78,20 @@ function SafetyRegionLayout(props: WithChildren) {
       : 'metric-link';
   }
 
-  function handleSafeRegionSelect(value: TSafetyRegion) {
-    setSelectedSafetyRegion(value);
-    router.push('/veiligheidsregio/[code]', `/veiligheidsregio/${value.code}`);
+  function handleSafeRegionSelect(region: TSafetyRegion) {
+    setSelectedSafetyRegion(region);
+
+    if (isLargeScreen) {
+      router.push(
+        '/veiligheidsregio/[code]/positief-geteste-mensen',
+        `/veiligheidsregio/${region.code}/positief-geteste-mensen`
+      );
+    } else {
+      router.push(
+        '/veiligheidsregio/[code]',
+        `/veiligheidsregio/${region.code}`
+      );
+    }
   }
 
   return (
