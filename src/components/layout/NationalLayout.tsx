@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Head from 'next/head';
 import useSWR from 'swr';
 import { useRouter } from 'next/router';
-import { useLayoutEffect } from 'react';
+import { useEffect } from 'react';
 
 import TitleWithIcon from 'components/titleWithIcon';
 import { getLayout as getSiteLayout } from 'components/layout';
@@ -72,7 +72,7 @@ function NationalLayout(props: WithChildren) {
   // remove focus after navigation
   const blur = (evt: any) => evt.target.blur();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (isLargeScreen && router.route === '/landelijk') {
       router.push('/landelijk/positief-geteste-mensen');
     }
