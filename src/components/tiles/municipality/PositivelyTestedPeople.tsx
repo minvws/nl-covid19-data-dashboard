@@ -130,7 +130,7 @@ export const PostivelyTestedPeopleMunicipality: React.FC<IProps> = (props) => {
             <LineChart
               values={data.positive_tested_people.values.map(
                 (value: PositiveTestedPeople) => ({
-                  value: value.infected_daily_total,
+                  value: value.infected_daily_increase,
                   date: value.date_of_report_unix,
                 })
               )}
