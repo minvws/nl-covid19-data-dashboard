@@ -19,6 +19,8 @@ import {
   IntakeShareAgeGroups,
 } from 'types/data';
 
+const SIGNAAL_WAARDE = 7;
+
 export const PostivelyTestedPeople: React.FC = () => {
   const { data: state } = useSWR(`/json/NL.json`);
 
@@ -49,10 +51,19 @@ export const PostivelyTestedPeople: React.FC = () => {
             value={delta.last_value.infected_daily_increase}
             id="positief"
             rangeKey="infected_daily_increase"
+            signaalwaarde={SIGNAAL_WAARDE}
             gradient={[
               {
-                color: '#3391CC',
+                color: '#69c253',
                 value: 0,
+              },
+              {
+                color: '#D3A500',
+                value: SIGNAAL_WAARDE,
+              },
+              {
+                color: '#f35065',
+                value: 90,
               },
             ]}
           />
