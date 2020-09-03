@@ -70,7 +70,7 @@ function getSewerWaterMetadata(
   };
 }
 
-function getSewerWaterBarScaleData(
+export function getSewerWaterBarScaleData(
   data: Regionaal | undefined
 ): SewerWaterBarScaleData | null {
   const { dataAvailable, oneInstallation } = getSewerWaterMetadata(data);
@@ -226,7 +226,9 @@ function getSewerWaterBarChartData(
   };
 }
 
-export function SewerWaterBarScale(props: { data: Regionaal | undefined }) {
+export function SewerWaterBarScale(props: {
+  data: SewerWaterBarScaleData | null;
+}) {
   const { data } = props;
 
   if (!data) return null;
@@ -250,7 +252,7 @@ export function SewerWaterBarScale(props: { data: Regionaal | undefined }) {
 }
 
 const SewerWater: FCWithLayout = () => {
-  const { data } = useSWR<Regionaal>(`/json/GM0014.json`);
+  const { data } = useSWR<Regionaal>(`/json/VR01.json`);
 
   const { barScaleData, lineChartData, barChartData } = useMemo(() => {
     return {

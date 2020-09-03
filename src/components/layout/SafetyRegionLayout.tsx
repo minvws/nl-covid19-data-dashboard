@@ -21,6 +21,7 @@ import safetyRegions from 'data/index';
 import { WithChildren } from 'types';
 
 import useMediaQuery from 'utils/useMediaQuery';
+import { getSewerWaterBarScaleData } from 'pages/veiligheidsregio/[code]/rioolwater';
 
 export default SafetyRegionLayout;
 
@@ -188,7 +189,9 @@ function SafetyRegionLayout(props: WithChildren) {
                           title={siteText.rioolwater_metingen.titel}
                         />
                         <span>
-                          <SewerWaterBarScale data={data} />
+                          <SewerWaterBarScale
+                            data={getSewerWaterBarScaleData(data)}
+                          />
                         </span>
                       </a>
                     </Link>
