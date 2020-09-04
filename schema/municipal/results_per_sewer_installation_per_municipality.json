@@ -11,7 +11,7 @@
         "week",
         "rwzi_awzi_code",
         "rwzi_awzi_name",
-        "gm_code",
+        "gmcode",
         "rna_per_ml",
         "date_of_insertion_unix"
       ],
@@ -34,7 +34,7 @@
         "rwzi_awzi_name": {
           "type": "string"
         },
-        "gm_code": {
+        "gmcode": {
           "type": "string",
           "pattern": "^GM[0-9]+$"
         },

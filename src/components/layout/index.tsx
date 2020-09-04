@@ -194,7 +194,7 @@ function Layout(props: WithChildren<LayoutProps>) {
                 <li>
                   <Link href="/veiligheidsregio">
                     <a onClick={blur} className={styles.footerLink}>
-                      {text.nav.links.regio}
+                      {text.nav.links.veiligheidsregio}
                     </a>
                   </Link>
                 </li>
