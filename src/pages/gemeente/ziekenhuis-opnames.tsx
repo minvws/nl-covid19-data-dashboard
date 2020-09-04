@@ -9,7 +9,7 @@ import Ziekenhuis from 'assets/ziekenhuis.svg';
 
 import siteText from 'locale';
 
-import { HospitalAdmissions } from 'types/data';
+import { HospitalAdmissions, Municipal } from 'types/data';
 import { LineChart } from 'components/charts/index';
 import replaceVariablesInText from 'utils/replaceVariablesInText';
 
@@ -51,7 +51,7 @@ export function IntakeHospitalBarScale(props: {
 }
 
 const IntakeHospital: FCWithLayout = () => {
-  const { data } = useSWR(`/json/GM0014.json`);
+  const { data } = useSWR<Municipal>(`/json/GM0014.json`);
 
   const hospitalAdmissions: HospitalAdmissions | undefined =
     data?.hospital_admissions;

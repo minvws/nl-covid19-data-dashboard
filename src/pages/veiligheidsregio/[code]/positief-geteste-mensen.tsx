@@ -9,7 +9,7 @@ import { ContentHeader } from 'components/layout/Content';
 
 import Getest from 'assets/test.svg';
 import formatDecimal from 'utils/formatNumber';
-import { ResultsPerRegion } from 'types/data';
+import { ResultsPerRegion, Regionaal } from 'types/data';
 import useSWR from 'swr';
 import replaceVariablesInText from 'utils/replaceVariablesInText';
 
@@ -42,7 +42,7 @@ export function PostivelyTestedPeopleBarScale(props: {
 }
 
 const PostivelyTestedPeople: FCWithLayout = () => {
-  const { data } = useSWR(`/json/VR01.json`);
+  const { data } = useSWR<Regionaal>(`/json/VR01.json`);
 
   const resultsPerRegion: ResultsPerRegion | undefined =
     data?.results_per_region;

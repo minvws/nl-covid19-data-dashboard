@@ -9,7 +9,7 @@ import Ziekenhuis from 'assets/ziekenhuis.svg';
 
 import siteText from 'locale';
 
-import { ResultsPerRegion } from 'types/data';
+import { ResultsPerRegion, Regionaal } from 'types/data';
 import { LineChart } from 'components/charts/index';
 import replaceVariablesInText from 'utils/replaceVariablesInText';
 
@@ -51,7 +51,7 @@ export function IntakeHospitalBarScale(props: {
 }
 
 const IntakeHospital: FCWithLayout = () => {
-  const { data } = useSWR(`/json/VR01.json`);
+  const { data } = useSWR<Regionaal>(`/json/VR01.json`);
 
   const resultsPerRegion: ResultsPerRegion | undefined =
     data?.results_per_region;

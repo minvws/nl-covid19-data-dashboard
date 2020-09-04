@@ -22,6 +22,7 @@ import { WithChildren } from 'types';
 
 import useMediaQuery from 'utils/useMediaQuery';
 import { getSewerWaterBarScaleData } from 'pages/veiligheidsregio/[code]/rioolwater';
+import { Regionaal } from 'types/data';
 
 export default SafetyRegionLayout;
 
@@ -59,7 +60,7 @@ function SafetyRegionLayout(props: WithChildren) {
   const { children } = props;
 
   const router = useRouter();
-  const { data } = useSWR(`/json/VR01.json`);
+  const { data } = useSWR<Regionaal>(`/json/VR01.json`);
   const isLargeScreen = useMediaQuery('(min-width: 1000px)', true);
   const [selectedSafetyRegion, setSelectedSafetyRegion] = useState<
     TSafetyRegion

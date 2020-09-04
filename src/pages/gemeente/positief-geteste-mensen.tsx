@@ -9,7 +9,7 @@ import { ContentHeader } from 'components/layout/Content';
 
 import Getest from 'assets/test.svg';
 import formatDecimal from 'utils/formatNumber';
-import { PositiveTestedPeople } from 'types/data';
+import { PositiveTestedPeople, Municipal } from 'types/data';
 import useSWR from 'swr';
 import replaceVariablesInText from 'utils/replaceVariablesInText';
 
@@ -42,9 +42,9 @@ export function PostivelyTestedPeopleBarScale(props: {
 }
 
 const PostivelyTestedPeople: FCWithLayout = () => {
-  const { data } = useSWR(`/json/GM0014.json`);
+  const { data } = useSWR<Municipal>(`/json/GM0014.json`);
 
-  const positivelyTestedPeople: PositiveTestedPeople =
+  const positivelyTestedPeople: PositiveTestedPeople | undefined =
     data?.positive_tested_people;
 
   return (

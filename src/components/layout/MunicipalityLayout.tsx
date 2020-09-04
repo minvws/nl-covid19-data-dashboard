@@ -21,6 +21,7 @@ import siteText from 'locale';
 import { WithChildren } from 'types';
 
 import useMediaQuery from 'utils/useMediaQuery';
+import { Municipal } from 'types/data';
 
 export default MunicipalityLayout;
 
@@ -51,7 +52,7 @@ export function getMunicipalityLayout() {
 function MunicipalityLayout(props: WithChildren) {
   const { children } = props;
   const router = useRouter();
-  const { data } = useSWR(`/json/GM0014.json`);
+  const { data } = useSWR<Municipal>(`/json/GM0014.json`);
   const isLargeScreen = useMediaQuery('(min-width: 1000px)', true);
   const showAside = isLargeScreen || router.route === '/gemeente';
   const showContent = isLargeScreen || router.route !== '/gemeente';
