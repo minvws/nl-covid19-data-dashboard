@@ -35,7 +35,7 @@ export function SewerWaterBarScale(props: {
     <BarScale
       min={0}
       max={100}
-      screenReaderText={text.barscale_screenreader_text}
+      screenReaderText={text.screen_reader_graph_content}
       value={Number(data.value)}
       id="rioolwater_metingen"
       rangeKey="average"
