@@ -29,6 +29,7 @@ type TMuncipality = {
   displayName?: string;
   safetyRegion: string;
   gemcode: string;
+  searchTerms: string[];
 };
 
 export function getMunicipalityLayout() {

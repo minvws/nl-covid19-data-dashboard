@@ -669,7 +669,8 @@
     "name": "s-Gravenhage",
     "displayName": "'s Gravenhage",
     "safetyRegion": "VR15",
-    "gemcode": "GM0518"
+    "gemcode": "GM0518",
+    "searchTerms": ["Den Haag"]
   },
   {
     "name": "Wassenaar",
