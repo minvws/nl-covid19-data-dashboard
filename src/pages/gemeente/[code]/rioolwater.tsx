@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import useSWR from 'swr';
 
 import BarScale from 'components/barScale';
@@ -19,7 +20,7 @@ import {
   getSewerWaterBarScaleData,
   getSewerWaterLineChartData,
   getSewerWaterBarChartData,
-} from '../../utils/sewer-water/municipality-sewer-water.util';
+} from 'utils/sewer-water/municipality-sewer-water.util';
 
 const text: typeof siteText.gemeente_rioolwater_metingen =
   siteText.gemeente_rioolwater_metingen;
@@ -29,7 +30,8 @@ export function SewerWaterBarScale(props: {
 }) {
   const { data } = props;
 
-  if (data === null) return null;
+  if (data === null)
+    return <p>{siteText.no_data_for_this_municipality.text}</p>;
 
   return (
     <BarScale
@@ -50,7 +52,9 @@ export function SewerWaterBarScale(props: {
 }
 
 const SewerWater: FCWithLayout = () => {
-  const { data } = useSWR<Municipal>(`/json/GM0014.json`);
+  const router = useRouter();
+  const { code } = router.query;
+  const { data } = useSWR<Municipal>(`/json/${code}.json`);
 
   const { barScaleData, lineChartData, barChartData } = useMemo(() => {
     return {

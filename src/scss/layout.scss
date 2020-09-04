@@ -74,7 +74,8 @@
   outline: none;
 }
 
-.safety-region-aside {
+.safety-region-aside,
+.municipality-aside {
   min-height: 30em;
 
   [data-reach-combobox] {
