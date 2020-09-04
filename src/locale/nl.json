@@ -1,4 +1,7 @@
 {
+  "gemeente_metadata": {
+    "title": "Gemeente"
+  },
   "nationaal_layout": {
     "headings": {
       "medisch": "Medische indicatoren",
@@ -251,7 +254,9 @@
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
-    }
+    },
+    "map_titel": "Verpleeghuis oversterfte in Nederland",
+    "map_toelichting": "Deze grafieken laten zien hoe de oversterfte in verpleeghuizen is in Nederland per dag."
   },
   "blok_verpleeghuis_zorg": {
     "title": "Verpleeghuiszorg",

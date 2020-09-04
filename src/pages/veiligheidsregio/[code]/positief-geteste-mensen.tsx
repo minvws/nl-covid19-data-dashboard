@@ -20,7 +20,7 @@ export function PostivelyTestedPeopleBarScale(props: {
     <BarScale
       min={0}
       max={10}
-      screenReaderText={text.screen_reader_graph_content}
+      screenReaderText={text.barscale_screenreader_text}
       value={data.last_value.infected_daily_increase}
       id="positief"
       rangeKey="infected_daily_increase"

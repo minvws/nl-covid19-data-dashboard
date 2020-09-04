@@ -21,7 +21,7 @@ export function IntakeHospitalBarScale(props: {
       min={0}
       max={100}
       signaalwaarde={40}
-      screenReaderText={text.screen_reader_graph_content}
+      screenReaderText={text.barscale_screenreader_text}
       value={data.last_value.moving_average_hospital}
       id="opnames"
       rangeKey="moving_average_hospital"
