@@ -1,6 +1,5 @@
 import useSWR from 'swr';
 import { useMemo } from 'react';
-import municipalCodeToRegionCodeLookup from 'data/municipalCodeToRegionCodeLookup';
 import { Municipalities } from 'types/data';
 
 export type TMunicipalityMetricName = keyof Pick<
@@ -10,26 +9,13 @@ export type TMunicipalityMetricName = keyof Pick<
 
 export default useMunicipalityData;
 
-/**
- * This function take a municipality code and returns an array of municipality codes that
- * all belong to the same region as the given code belongs to.
- *
- * @param code
- * @param municipalCodeToRegionCode
- */
-function getAllMunicipalitiesForSameRegion(
-  code: string | undefined,
-  municipalCodeToRegionCode: any
-): string[] {
-  if (!code) {
-    return [];
+function createMunicipalCodeFilter<T extends { gmcode: string }>(
+  municipalCodes?: string[]
+) {
+  if (municipalCodes) {
+    return (item: T): boolean => municipalCodes.indexOf(item.gmcode) > -1;
   }
-
-  const regionCode = municipalCodeToRegionCode[code];
-
-  return Object.keys(municipalCodeToRegionCode).filter(
-    (code) => municipalCodeToRegionCode[code] === regionCode
-  );
+  return (_item: T): boolean => true;
 }
 
 /**
@@ -44,25 +30,15 @@ function getAllMunicipalitiesForSameRegion(
 function useMunicipalityData<
   T extends TMunicipalityMetricName,
   K extends Municipalities[T]
->(metricName: T, municipalCode?: string): (K[number] & { value: number })[] {
+>(metricName: T, municipalCodes?: string[]): (K[number] & { value: number })[] {
   const { data } = useSWR<Municipalities>('/json/municipalities.json');
 
   const metricItems = data?.[metricName];
-
-  const applicableMunicipalCodes = useMemo(() => {
-    return getAllMunicipalitiesForSameRegion(
-      municipalCode,
-      municipalCodeToRegionCodeLookup
-    );
-  }, [municipalCode]);
 
   return useMemo(() => {
     if (!metricItems) {
       return [];
     }
-
-    const filterByRegion: any = (item: K[number]): any =>
-      applicableMunicipalCodes.indexOf(item.gmcode) > -1;
 
     const filteredData = (metricItems as any[]).map<
       K[number] & { value: number }
@@ -71,8 +47,8 @@ function useMunicipalityData<
       value: (item as any)[metricName],
     }));
 
-    return applicableMunicipalCodes.length
-      ? filteredData.filter<any>(filterByRegion)
-      : filteredData;
-  }, [metricItems, metricName, applicableMunicipalCodes]);
+    return filteredData.filter(
+      createMunicipalCodeFilter<K[number] & { value: number }>(municipalCodes)
+    );
+  }, [metricItems, metricName, municipalCodes]);
 }

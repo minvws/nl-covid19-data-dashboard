@@ -5,6 +5,9 @@ import { getSafetyRegionLayout } from 'components/layout/SafetyRegionLayout';
 import siteText from 'locale';
 
 import { IntakeHospitalMa } from 'types/data';
+import { useRouter } from 'next/router';
+import regionCodeToMunicipalCodeLookup from 'data/regionCodeToMunicipalCodeLookup';
+import MunicipalityMap from 'components/mapChart/MunicipalityMap';
 
 const text: typeof siteText.ziekenhuisopnames_per_dag =
   siteText.ziekenhuisopnames_per_dag;
@@ -44,7 +47,30 @@ export function IntakeHospitalBarScale(props: {
 }
 
 const IntakeHospital: FCWithLayout = () => {
-  return null;
+  const router = useRouter();
+
+  const vrcode = router.query.code as string | undefined;
+
+  const municipalCodes = vrcode
+    ? regionCodeToMunicipalCodeLookup[vrcode]
+    : undefined;
+
+  return (
+    <article className="metric-article layout-two-column">
+      <div className="column-item column-item-extra-margin">
+        <h3>{text.map_titel}</h3>
+        <p>{text.map_toelichting}</p>
+      </div>
+
+      <div className="column-item column-item-extra-margin">
+        <MunicipalityMap
+          municipalCodes={municipalCodes}
+          metric="hospital_admissions"
+          gradient={['#69c253', '#f35065']}
+        />
+      </div>
+    </article>
+  );
 };
 
 IntakeHospital.getLayout = getSafetyRegionLayout();

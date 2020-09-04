@@ -28,10 +28,16 @@ type TMunicipalityTooltipFormatterContextObject = TooltipFormatterContextObject 
 type TMunicipalityPoint = Highcharts.Point & MunicipalityProperties;
 
 interface IProps {
-  selected?: { id: string };
+  selected?: string;
+  municipalCodes?: string[];
   metric: TMunicipalityMetricName;
   gradient?: [minColor: string, maxColor: string];
 }
+
+export type MunicipalGeoJOSN = FeatureCollection<
+  MultiPolygon,
+  MunicipalityProperties
+>;
 
 export default MunicipalityMap;
 
@@ -39,27 +45,29 @@ export default MunicipalityMap;
  * This map shows a map of the Netherlands with features that represent all the municipalities.
  * The geojson data is joined with the municipal data on the gemcode => gmcode keys. The municipal data is used
  * to fill the chloropleth colors and generate the tooltips.
- * When a selected prop is set, the id is expected to contain a gmcode. In which case only the municipalities
- * that belong to the same safety region as the given gmcode will be rendered.
+ * When the selected prop is set only the municipalities with the corresponding codes are shown.
  *
  * @param props
  *
  * @component
  */
 function MunicipalityMap(props: IProps) {
-  const { selected, metric, gradient = ['#0000ff', '#ff0000'] } = props;
-
-  const municipalCode = selected?.id;
+  const {
+    selected,
+    municipalCodes,
+    metric,
+    gradient = ['#0000ff', '#ff0000'],
+  } = props;
 
   const { data: countryLines } = useSWR<any[]>(
     '/static-json/netherlands-outline.geojson'
   );
 
-  const { data: municipalityLines } = useSWR<
-    FeatureCollection<MultiPolygon, MunicipalityProperties>
-  >('/static-json/municipalities-outline.geojson');
+  const { data: municipalityLines } = useSWR<MunicipalGeoJOSN>(
+    '/static-json/municipalities-outline.geojson'
+  );
 
-  const municipalityData = useMunicipalityData(metric, municipalCode);
+  const municipalityData = useMunicipalityData(metric, municipalCodes);
   const [min, max] = useExtent(
     municipalityData,
     (item: any): number => item.value
@@ -79,7 +87,7 @@ function MunicipalityMap(props: IProps) {
     ];
 
     // When there's no selected municipal code we render the outlines of the country:
-    if (!municipalCode) {
+    if (!municipalCodes?.length) {
       result.push({
         type: 'mapline',
         data: countryLines,
@@ -87,7 +95,7 @@ function MunicipalityMap(props: IProps) {
     }
 
     return result;
-  }, [countryLines, municipalCode, municipalityData, municipalityLines]);
+  }, [countryLines, selected, municipalityData, municipalityLines]);
 
   const mapOptions = useMemo<Highcharts.Options>(
     () => ({
@@ -163,7 +171,7 @@ function MunicipalityMap(props: IProps) {
     const chart: Highcharts.Chart | undefined = ref?.current?.chart;
     if (selected && chart) {
       const point = chart.series[0].points.find(
-        (p: any) => p.gemcode === selected.id
+        (p: any) => p.gemcode === selected
       );
 
       point?.select(true, false);
@@ -172,6 +180,8 @@ function MunicipalityMap(props: IProps) {
 
   return (
     <HighchartsReact
+      immutable={true}
+      allowChartUpdate={true}
       {...({ ref } as any)}
       highcharts={Highcharts}
       containerProps={{ style: { height: '100%' } }}

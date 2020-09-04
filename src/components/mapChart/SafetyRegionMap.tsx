@@ -7,6 +7,7 @@ import { useMemo, useRef, useEffect } from 'react';
 import useExtent from 'utils/useExtent';
 import useRegionData, { TRegionMetricName } from 'utils/useRegionData';
 import regioData from 'data';
+import filterFeatures from './filterFeatures';
 
 if (typeof Highcharts === 'object') {
   require('highcharts/modules/map')(Highcharts);
@@ -28,16 +29,6 @@ interface IProps {
 }
 
 export default SafetyRegionMap;
-
-const filterByRegion = (
-  collection: SafetyRegionGeoJSON,
-  regionCode: string
-): SafetyRegionGeoJSON => {
-  collection.features = collection.features.filter(
-    (feat) => feat.properties.vrcode === regionCode
-  );
-  return collection;
-};
 
 /**
  * This map shows a map of the Netherlands with features that represent all the safety regions.
@@ -62,7 +53,11 @@ function SafetyRegionMap(props: IProps) {
   );
 
   if (regionCode && municipalityLines) {
-    municipalityLines = filterByRegion(municipalityLines, regionCode);
+    municipalityLines = filterFeatures<SafetyRegionProperties>(
+      municipalityLines,
+      'vrcode',
+      regionCode
+    );
   }
 
   const regionData = useRegionData(metric, regionCode);

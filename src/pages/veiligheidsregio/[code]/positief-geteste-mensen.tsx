@@ -5,8 +5,9 @@ import { getSafetyRegionLayout } from 'components/layout/SafetyRegionLayout';
 import siteText from 'locale';
 
 import { InfectedPeopleDeltaNormalized } from 'types/data';
-import SafetyRegionMap from 'components/mapChart/SafetyRegionMap';
 import { useRouter } from 'next/router';
+import MunicipalityMap from 'components/mapChart/MunicipalityMap';
+import regionCodeToMunicipalCodeLookup from 'data/regionCodeToMunicipalCodeLookup';
 
 const text: typeof siteText.positief_geteste_personen =
   siteText.positief_geteste_personen;
@@ -39,7 +40,11 @@ export function PostivelyTestedPeopleBarScale(props: {
 const PostivelyTestedPeople: FCWithLayout = () => {
   const router = useRouter();
 
-  const vrcode = router.query.code as string;
+  const vrcode = router.query.code as string | undefined;
+
+  const municipalCodes = vrcode
+    ? regionCodeToMunicipalCodeLookup[vrcode]
+    : undefined;
 
   return (
     <article className="metric-article layout-two-column">
@@ -49,8 +54,8 @@ const PostivelyTestedPeople: FCWithLayout = () => {
       </div>
 
       <div className="column-item column-item-extra-margin">
-        <SafetyRegionMap
-          selected={vrcode ? { id: vrcode } : undefined}
+        <MunicipalityMap
+          municipalCodes={municipalCodes}
           metric="positive_tested_people"
           gradient={['#9DDEFE', '#0290D6']}
         />
