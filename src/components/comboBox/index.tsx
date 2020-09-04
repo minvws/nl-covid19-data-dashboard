@@ -13,6 +13,7 @@ import useThrottle from 'utils/useThrottle';
 import text from 'locale';
 
 type TOption = {
+  displayName?: string;
   name: string;
 };
 
@@ -70,7 +71,10 @@ function ComboBox<Option extends TOption>(props: TProps<Option>) {
         {results.length > 0 ? (
           <ComboboxList>
             {results.slice(0, 10).map((option) => (
-              <ComboboxOption key={option.name} value={option.name} />
+              <ComboboxOption
+                key={option.name}
+                value={option.displayName || option.name}
+              />
             ))}
           </ComboboxList>
         ) : (
@@ -92,7 +96,7 @@ function useSearchedOptions<Option extends TOption>(
     if (throttledTerm.trim() === '') return options.sort(sortByName);
 
     return matchSorter(options, throttledTerm, {
-      keys: [(item: Option) => item.name],
+      keys: [(item: Option) => item.name, 'searchTerms', 'displayName'],
     });
   }, [throttledTerm, options]);
 }

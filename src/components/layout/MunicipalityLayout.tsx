@@ -8,6 +8,8 @@ import { getLayout as getSiteLayout } from 'components/layout';
 import { PostivelyTestedPeopleBarScale } from 'pages/gemeente/positief-geteste-mensen';
 import { IntakeHospitalBarScale } from 'pages/gemeente/ziekenhuis-opnames';
 import { SewerWaterBarScale } from 'pages/gemeente/rioolwater';
+import Combobox from 'components/comboBox';
+import { getSewerWaterBarScaleData } from 'utils/sewer-water/municipality-sewer-water.util';
 
 import GetestIcon from 'assets/test.svg';
 import Ziekenhuis from 'assets/ziekenhuis.svg';
@@ -18,9 +20,13 @@ import siteText from 'locale';
 import { WithChildren } from 'types';
 
 import useMediaQuery from 'utils/useMediaQuery';
+import { Municipal } from 'types/data';
+
+import municipalities from 'data/gemeente_veiligheidsregio.json';
 
 export default MunicipalityLayout;
 
+export type TMunicipality = typeof municipalities;
 export function getMunicipalityLayout() {
   return function (page: React.ReactNode): React.ReactNode {
     return getSiteLayout(siteText.gemeente_metadata)(
@@ -48,7 +54,7 @@ export function getMunicipalityLayout() {
 function MunicipalityLayout(props: WithChildren) {
   const { children } = props;
   const router = useRouter();
-  const { data } = useSWR(`/json/NL.json`);
+  const { data } = useSWR<Municipal>(`/json/GM0014.json`);
   const isLargeScreen = useMediaQuery('(min-width: 1000px)', true);
   const showAside = isLargeScreen || router.route === '/gemeente';
   const showContent = isLargeScreen || router.route !== '/gemeente';
@@ -80,6 +86,11 @@ function MunicipalityLayout(props: WithChildren) {
       <div className="municipality-layout">
         {showAside && (
           <aside className="municipality-aside">
+            <Combobox<TMuncipality>
+              handleSelect={() => false}
+              options={municipalities}
+            />
+
             <nav aria-label="metric navigation">
               <h2>{siteText.nationaal_layout.headings.medisch}</h2>
               <ul>
@@ -93,11 +104,14 @@ function MunicipalityLayout(props: WithChildren) {
                     >
                       <TitleWithIcon
                         Icon={GetestIcon}
-                        title={siteText.positief_geteste_personen.titel}
+                        title={
+                          siteText.gemeente_positief_geteste_personen
+                            .titel_sidebar
+                        }
                       />
                       <span>
                         <PostivelyTestedPeopleBarScale
-                          data={data?.infected_people_delta_normalized}
+                          data={data?.positive_tested_people}
                         />
                       </span>
                     </a>
@@ -112,11 +126,14 @@ function MunicipalityLayout(props: WithChildren) {
                     >
                       <TitleWithIcon
                         Icon={Ziekenhuis}
-                        title={siteText.ziekenhuisopnames_per_dag.titel}
+                        title={
+                          siteText.gemeente_ziekenhuisopnames_per_dag
+                            .titel_sidebar
+                        }
                       />
                       <span>
                         <IntakeHospitalBarScale
-                          data={data?.intake_hospital_ma}
+                          data={data?.hospital_admissions}
                         />
                       </span>
                     </a>
@@ -134,10 +151,14 @@ function MunicipalityLayout(props: WithChildren) {
                     >
                       <TitleWithIcon
                         Icon={RioolwaterMonitoring}
-                        title={siteText.rioolwater_metingen.titel}
+                        title={
+                          siteText.gemeente_rioolwater_metingen.titel_sidebar
+                        }
                       />
                       <span>
-                        <SewerWaterBarScale data={data?.rioolwater_metingen} />
+                        <SewerWaterBarScale
+                          data={getSewerWaterBarScaleData(data)}
+                        />
                       </span>
                     </a>
                   </Link>
