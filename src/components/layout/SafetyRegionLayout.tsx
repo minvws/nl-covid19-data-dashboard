@@ -9,7 +9,7 @@ import { getLayout as getSiteLayout } from 'components/layout';
 import { PostivelyTestedPeopleBarScale } from 'pages/veiligheidsregio/[code]/positief-geteste-mensen';
 import { IntakeHospitalBarScale } from 'pages/veiligheidsregio/[code]/ziekenhuis-opnames';
 import { SewerWaterBarScale } from 'pages/veiligheidsregio/[code]/rioolwater';
-import { getSewerWaterBarScaleData } from 'pages/veiligheidsregio/[code]/_rioolwater.util';
+import { getSewerWaterBarScaleData } from 'utils/sewer-water/safety-region-sewer-water.util';
 import Combobox from 'components/comboBox';
 
 import GetestIcon from 'assets/test.svg';

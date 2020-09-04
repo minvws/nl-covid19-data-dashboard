@@ -19,7 +19,7 @@ import {
   getSewerWaterBarScaleData,
   getSewerWaterLineChartData,
   getSewerWaterBarChartData,
-} from './_rioolwater.util';
+} from '../../utils/sewer-water/municipality-sewer-water.util';
 
 const text: typeof siteText.gemeente_rioolwater_metingen =
   siteText.gemeente_rioolwater_metingen;
