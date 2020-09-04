@@ -37,6 +37,7 @@ type TSafetyRegion = {
   displayName?: string;
   code: string;
   id: number;
+  searchTerms?: string[];
 };
 
 /*
