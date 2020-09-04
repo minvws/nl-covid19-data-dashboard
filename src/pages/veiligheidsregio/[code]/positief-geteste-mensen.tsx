@@ -12,6 +12,8 @@ import Getest from 'assets/test.svg';
 import formatDecimal from 'utils/formatNumber';
 import { ResultsPerRegion, Regionaal } from 'types/data';
 import replaceVariablesInText from 'utils/replaceVariablesInText';
+import MunicipalityMap from 'components/mapChart/MunicipalityMap';
+import regionCodeToMunicipalCodeLookup from 'data/regionCodeToMunicipalCodeLookup';
 
 const text: typeof siteText.veiligheidsregio_positief_geteste_personen =
   siteText.veiligheidsregio_positief_geteste_personen;
@@ -58,6 +60,11 @@ const PostivelyTestedPeople: FCWithLayout = () => {
   const resultsPerRegion: ResultsPerRegion | undefined =
     data?.results_per_region;
 
+  const municipalCodes =
+    code && typeof code === 'string'
+      ? regionCodeToMunicipalCodeLookup[code]
+      : undefined;
+
   return (
     <>
       <ContentHeader
@@ -75,7 +82,6 @@ const PostivelyTestedPeople: FCWithLayout = () => {
           dataSource: text.bron,
         }}
       />
-
       <div className="layout-two-column">
         <article className="metric-article column-item">
           <h3>{text.barscale_titel}</h3>
@@ -100,7 +106,6 @@ const PostivelyTestedPeople: FCWithLayout = () => {
           <p>{text.kpi_toelichting}</p>
         </article>
       </div>
-
       <article className="metric-article">
         <h3>{text.linechart_titel}</h3>
         <p>{text.linechart_toelichting}</p>
@@ -114,6 +119,21 @@ const PostivelyTestedPeople: FCWithLayout = () => {
           />
         )}
       </article>
+      <article className="metric-article layout-two-column">
+        <div className="column-item column-item-extra-margin">
+          <h3>{text.map_titel}</h3>
+          <p>{text.map_toelichting}</p>
+        </div>
+
+        <div className="column-item column-item-extra-margin">
+          <MunicipalityMap
+            municipalCodes={municipalCodes}
+            metric="positive_tested_people"
+            gradient={['#9DDEFE', '#0290D6']}
+          />
+        </div>
+      </article>
+      );
     </>
   );
 };

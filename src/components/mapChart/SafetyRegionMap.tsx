@@ -7,15 +7,20 @@ import { useMemo, useRef, useEffect } from 'react';
 import useExtent from 'utils/useExtent';
 import useRegionData, { TRegionMetricName } from 'utils/useRegionData';
 import regioData from 'data';
+import filterFeatures from './filterFeatures';
 
 if (typeof Highcharts === 'object') {
   require('highcharts/modules/map')(Highcharts);
 }
 
-export interface MunicipalityProperties {
-  gemnaam: string;
-  gemcode: string;
+export interface SafetyRegionProperties {
+  vrcode: string;
 }
+
+export type SafetyRegionGeoJSON = FeatureCollection<
+  MultiPolygon,
+  SafetyRegionProperties
+>;
 
 interface IProps {
   selected?: { id: string };
@@ -25,20 +30,37 @@ interface IProps {
 
 export default SafetyRegionMap;
 
+/**
+ * This map shows a map of the Netherlands with features that represent all the safety regions.
+ * The geojson data is joined with the region data on the vrcode key. The region data is used
+ * to fill the chloropleth colors and generate the tooltips.
+ *
+ * @param props
+ *
+ * @component
+ */
 function SafetyRegionMap(props: IProps) {
   const { selected, metric, gradient = ['#0000ff', '#ff0000'] } = props;
 
-  const municipalCode = selected?.id;
+  const regionCode = selected?.id;
 
   const { data: countryLines } = useSWR<any[]>(
     '/static-json/netherlands-outline.geojson'
   );
 
-  const { data: municipalityLines } = useSWR<
-    FeatureCollection<MultiPolygon, MunicipalityProperties>
-  >('/static-json/safetyregions-outline.geojson');
+  let { data: municipalityLines } = useSWR<SafetyRegionGeoJSON>(
+    '/static-json/safetyregions-outline.geojson'
+  );
 
-  const regionData = useRegionData(metric);
+  if (regionCode && municipalityLines) {
+    municipalityLines = filterFeatures<SafetyRegionProperties>(
+      municipalityLines,
+      'vrcode',
+      regionCode
+    );
+  }
+
+  const regionData = useRegionData(metric, regionCode);
   const [min, max] = useExtent(regionData, (item: any): number => item.value);
 
   const series = useMemo<SeriesOptionsType[]>(() => {
@@ -54,8 +76,8 @@ function SafetyRegionMap(props: IProps) {
       },
     ];
 
-    // When there's no selected municipal code we render the outlines of the country:
-    if (!municipalCode) {
+    // When there's no selected region code we render the outlines of the country:
+    if (!regionCode) {
       result.push({
         type: 'mapline',
         data: countryLines,
@@ -63,7 +85,7 @@ function SafetyRegionMap(props: IProps) {
     }
 
     return result;
-  }, [countryLines, municipalCode, regionData, municipalityLines]);
+  }, [countryLines, regionCode, regionData, municipalityLines]);
 
   const mapOptions = useMemo<Highcharts.Options>(
     () => ({
@@ -152,6 +174,8 @@ function SafetyRegionMap(props: IProps) {
 
   return (
     <HighchartsReact
+      immutable={true}
+      allowChartUpdate={true}
       {...({ ref } as any)}
       highcharts={Highcharts}
       containerProps={{ style: { height: '100%' } }}

@@ -16,7 +16,7 @@ export type TRegionMetricName = keyof Pick<
 export default function useRegionData<
   T extends TRegionMetricName,
   K extends Regions[T]
->(metricName: T): (K[number] & { value: number })[] {
+>(metricName: T, regionCode?: string): (K[number] & { value: number })[] {
   const { data } = useSWR<Regions>('/json/regions.json');
 
   const metricItems = data?.[metricName];
@@ -33,6 +33,9 @@ export default function useRegionData<
       value: (item as any)[metricName],
     }));
 
-    return filteredData;
-  }, [metricItems, metricName]);
+    const filterByRegion: any = (item: K[number]): any =>
+      item.vrcode === regionCode;
+
+    return regionCode ? filteredData.filter<any>(filterByRegion) : filteredData;
+  }, [metricItems, metricName, regionCode]);
 }
