@@ -91,6 +91,7 @@
   },
   {
     "name": "s-Hertogenbosch",
+    "displayName": "'s Hertogenbosch",
     "safetyRegion": "VR21",
     "gemcode": "GM0796"
   },
@@ -666,6 +667,7 @@
   },
   {
     "name": "s-Gravenhage",
+    "displayName": "'s Gravenhage",
     "safetyRegion": "VR15",
     "gemcode": "GM0518"
   },

@@ -12,7 +12,7 @@ const regioData = [
   { name: 'Noord-Holland Noord', code: 'VR10', id: 10 },
   { name: 'Zaanstreek-Waterland', code: 'VR11', id: 11 },
   { name: 'Kennemerland', code: 'VR12', id: 12 },
-  { name: 'Amsterdam-Amstelland', code: 'VR13', id: 13 },
+  { name: 'Amsterdam-Amstelland', code: 'VR13', id: 13, searchTerms: ['020'] },
   { name: 'Gooi en Vechtstreek', code: 'VR14', id: 14 },
   { name: 'Haaglanden', code: 'VR15', id: 15 },
   { name: 'Hollands Midden', code: 'VR16', id: 16 },
