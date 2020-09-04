@@ -24,14 +24,7 @@ import municipalities from 'data/gemeente_veiligheidsregio.json';
 
 export default MunicipalityLayout;
 
-type TMuncipality = {
-  name: string;
-  displayName?: string;
-  safetyRegion: string;
-  gemcode: string;
-  searchTerms?: string[];
-};
-
+export type TMunicipality = typeof municipalities;
 export function getMunicipalityLayout() {
   return function (page: React.ReactNode): React.ReactNode {
     return getSiteLayout(siteText.gemeente_metadata)(
