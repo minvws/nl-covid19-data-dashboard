@@ -33,10 +33,19 @@ export function PostivelyTestedPeopleBarScale(props: {
       rangeKey="infected_daily_increase"
       gradient={[
         {
-          color: '#3391CC',
+          color: '#69c253',
           value: 0,
         },
+        {
+          color: '#D3A500',
+          value: 7,
+        },
+        {
+          color: '#f35065',
+          value: 10,
+        },
       ]}
+      signaalwaarde={7}
     />
   );
 }
@@ -101,6 +110,7 @@ const PostivelyTestedPeople: FCWithLayout = () => {
               value: value.infected_increase_per_region,
               date: value.date_of_report_unix,
             }))}
+            signaalwaarde={7}
           />
         )}
       </article>
