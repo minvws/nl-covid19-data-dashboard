@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import useSWR from 'swr';
 
 import BarScale from 'components/barScale';
@@ -51,7 +52,9 @@ export function IntakeHospitalBarScale(props: {
 }
 
 const IntakeHospital: FCWithLayout = () => {
-  const { data } = useSWR<Regionaal>(`/json/VR01.json`);
+  const router = useRouter();
+  const { code } = router.query;
+  const { data } = useSWR<Regionaal>(`/json/${code}.json`);
 
   const resultsPerRegion: ResultsPerRegion | undefined =
     data?.results_per_region;

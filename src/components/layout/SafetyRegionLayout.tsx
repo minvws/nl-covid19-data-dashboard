@@ -60,7 +60,8 @@ function SafetyRegionLayout(props: WithChildren) {
   const { children } = props;
 
   const router = useRouter();
-  const { data } = useSWR<Regionaal>(`/json/VR01.json`);
+  const { code } = router.query;
+  const { data } = useSWR<Regionaal>(`/json/${code}.json`);
   const isLargeScreen = useMediaQuery('(min-width: 1000px)', true);
   const [selectedSafetyRegion, setSelectedSafetyRegion] = useState<
     TSafetyRegion

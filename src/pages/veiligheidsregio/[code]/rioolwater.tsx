@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import useSWR from 'swr';
 
 import BarScale from 'components/barScale';
@@ -50,7 +51,9 @@ export function SewerWaterBarScale(props: {
 }
 
 const SewerWater: FCWithLayout = () => {
-  const { data } = useSWR<Regionaal>(`/json/VR01.json`);
+  const router = useRouter();
+  const { code } = router.query;
+  const { data } = useSWR<Regionaal>(`/json/${code}.json`);
 
   const { barScaleData, lineChartData, barChartData } = useMemo(() => {
     return {

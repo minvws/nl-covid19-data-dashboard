@@ -1,16 +1,16 @@
+import { useRouter } from 'next/router';
+import useSWR from 'swr';
 import BarScale from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
 import { getSafetyRegionLayout } from 'components/layout/SafetyRegionLayout';
-
-import siteText from 'locale';
-
 import { LineChart } from 'components/charts/index';
 import { ContentHeader } from 'components/layout/Content';
+
+import siteText from 'locale';
 
 import Getest from 'assets/test.svg';
 import formatDecimal from 'utils/formatNumber';
 import { ResultsPerRegion, Regionaal } from 'types/data';
-import useSWR from 'swr';
 import replaceVariablesInText from 'utils/replaceVariablesInText';
 
 const text: typeof siteText.veiligheidsregio_positief_geteste_personen =
@@ -42,7 +42,9 @@ export function PostivelyTestedPeopleBarScale(props: {
 }
 
 const PostivelyTestedPeople: FCWithLayout = () => {
-  const { data } = useSWR<Regionaal>(`/json/VR01.json`);
+  const router = useRouter();
+  const { code } = router.query;
+  const { data } = useSWR<Regionaal>(`/json/${code}.json`);
 
   const resultsPerRegion: ResultsPerRegion | undefined =
     data?.results_per_region;
