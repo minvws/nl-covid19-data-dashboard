@@ -86,7 +86,7 @@ function MunicipalityLayout(props: WithChildren) {
       <div className="municipality-layout">
         {showAside && (
           <aside className="municipality-aside">
-            <Combobox<TMuncipality>
+            <Combobox<TMunicipality[number]>
               handleSelect={() => false}
               options={municipalities}
             />
