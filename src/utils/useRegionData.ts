@@ -37,5 +37,5 @@ export default function useRegionData<
       item.vrcode === regionCode;
 
     return regionCode ? filteredData.filter<any>(filterByRegion) : filteredData;
-  }, [metricItems, metricName]);
+  }, [metricItems, metricName, regionCode]);
 }

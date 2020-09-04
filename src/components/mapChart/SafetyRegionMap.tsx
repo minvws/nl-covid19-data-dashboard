@@ -174,6 +174,8 @@ function SafetyRegionMap(props: IProps) {
 
   return (
     <HighchartsReact
+      immutable={true}
+      allowChartUpdate={true}
       {...({ ref } as any)}
       highcharts={Highcharts}
       containerProps={{ style: { height: '100%' } }}
