@@ -9,6 +9,7 @@ import { getLayout as getSiteLayout } from 'components/layout';
 import { PostivelyTestedPeopleBarScale } from 'pages/veiligheidsregio/[code]/positief-geteste-mensen';
 import { IntakeHospitalBarScale } from 'pages/veiligheidsregio/[code]/ziekenhuis-opnames';
 import { SewerWaterBarScale } from 'pages/veiligheidsregio/[code]/rioolwater';
+import { getSewerWaterBarScaleData } from 'utils/sewer-water/safety-region-sewer-water.util';
 import Combobox from 'components/comboBox';
 
 import GetestIcon from 'assets/test.svg';
@@ -21,6 +22,7 @@ import safetyRegions from 'data/index';
 import { WithChildren } from 'types';
 
 import useMediaQuery from 'utils/useMediaQuery';
+import { Regionaal } from 'types/data';
 
 export default SafetyRegionLayout;
 
@@ -58,8 +60,8 @@ function SafetyRegionLayout(props: WithChildren) {
   const { children } = props;
 
   const router = useRouter();
-  // TODO: replace with regio data
-  const { data } = useSWR(`/json/NL.json`);
+  const { code } = router.query;
+  const { data } = useSWR<Regionaal>(`/json/${code}.json`);
   const isLargeScreen = useMediaQuery('(min-width: 1000px)', true);
   const [selectedSafetyRegion, setSelectedSafetyRegion] = useState<
     TSafetyRegion
@@ -135,11 +137,14 @@ function SafetyRegionLayout(props: WithChildren) {
                       >
                         <TitleWithIcon
                           Icon={GetestIcon}
-                          title={siteText.positief_geteste_personen.titel}
+                          title={
+                            siteText.veiligheidsregio_positief_geteste_personen
+                              .titel_sidebar
+                          }
                         />
                         <span>
                           <PostivelyTestedPeopleBarScale
-                            data={data?.infected_people_delta_normalized}
+                            data={data?.results_per_region}
                           />
                         </span>
                       </a>
@@ -159,11 +164,14 @@ function SafetyRegionLayout(props: WithChildren) {
                       >
                         <TitleWithIcon
                           Icon={Ziekenhuis}
-                          title={siteText.ziekenhuisopnames_per_dag.titel}
+                          title={
+                            siteText.veiligheidsregio_ziekenhuisopnames_per_dag
+                              .titel_sidebar
+                          }
                         />
                         <span>
                           <IntakeHospitalBarScale
-                            data={data?.intake_hospital_ma}
+                            data={data?.results_per_region}
                           />
                         </span>
                       </a>
@@ -186,11 +194,14 @@ function SafetyRegionLayout(props: WithChildren) {
                       >
                         <TitleWithIcon
                           Icon={RioolwaterMonitoring}
-                          title={siteText.rioolwater_metingen.titel}
+                          title={
+                            siteText.veiligheidsregio_rioolwater_metingen
+                              .titel_sidebar
+                          }
                         />
                         <span>
                           <SewerWaterBarScale
-                            data={data?.rioolwater_metingen}
+                            data={getSewerWaterBarScaleData(data)}
                           />
                         </span>
                       </a>
