@@ -93,7 +93,8 @@
     "name": "s-Hertogenbosch",
     "displayName": "'s Hertogenbosch",
     "safetyRegion": "VR21",
-    "gemcode": "GM0796"
+    "gemcode": "GM0796",
+    "searchTerms": ["Den Bosch"]
   },
   {
     "name": "Sint Anthonis",
