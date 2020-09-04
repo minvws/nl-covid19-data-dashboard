@@ -3,9 +3,22 @@
     "item": {
       "title": "average_sewer_installation_per_region_item",
       "additionalProperties": false,
-      "required": ["week_unix", "vrcode", "average", "date_of_insertion_unix"],
+      "required": [
+        "week_unix",
+        "week_start_unix",
+        "week_end_unix",
+        "vrcode",
+        "average",
+        "date_of_insertion_unix"
+      ],
       "properties": {
         "week_unix": {
+          "type": "integer"
+        },
+        "week_start_unix": {
+          "type": "integer"
+        },
+        "week_end_unix": {
           "type": "integer"
         },
         "vrcode": {

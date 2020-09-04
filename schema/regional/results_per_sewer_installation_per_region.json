@@ -25,10 +25,13 @@
       "required": [
         "date_measurement_unix",
         "week",
+        "week_start_unix",
+        "week_end_unix",
         "rwzi_awzi_code",
         "rwzi_awzi_name",
         "vrcode",
         "vrnaam",
+        "gmcode",
         "rna_per_ml",
         "date_of_insertion_unix"
       ],
@@ -39,6 +42,12 @@
         "week": {
           "type": "integer"
         },
+        "week_start_unix": {
+          "type": "integer"
+        },
+        "week_end_unix": {
+          "type": "integer"
+        },
         "rwzi_awzi_code": {
           "type": "string"
         },
@@ -46,10 +55,15 @@
           "type": "string"
         },
         "vrcode": {
-          "type": "string"
+          "type": "string",
+          "pattern": "^VR[0-9]+$"
         },
         "vrnaam": {
           "type": "string"
+        },
+        "gmcode": {
+          "type": "string",
+          "pattern": "^GM[0-9]+$"
         },
         "rna_per_ml": {
           "type": "number"

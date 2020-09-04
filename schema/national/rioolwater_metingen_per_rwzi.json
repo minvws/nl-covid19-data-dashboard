@@ -4,9 +4,12 @@
       "title": "rioolwater_metingen_per_rwzi_last_value",
       "type": "object",
       "required": [
+        "week_start_unix",
+        "week_end_unix",
         "date_measurement_unix",
         "rwzi_awzi_code",
         "rwzi_awzi_name",
+        "gm_code",
         "vrcode",
         "vrnaam",
         "rna_per_ml",
@@ -14,6 +17,12 @@
       ],
       "additionalProperties": false,
       "properties": {
+        "week_start_unix": {
+          "type": "integer"
+        },
+        "week_end_unix": {
+          "type": "integer"
+        },
         "date_measurement_unix": {
           "type": "integer"
         },
@@ -23,8 +32,13 @@
         "rwzi_awzi_name": {
           "type": "string"
         },
+        "gm_code": {
+          "type": "string",
+          "pattern": "^GM[0-9]+$"
+        },
         "vrcode": {
-          "type": "string"
+          "type": "string",
+          "pattern": "^VR[0-9]+$"
         },
         "vrnaam": {
           "type": "string"
