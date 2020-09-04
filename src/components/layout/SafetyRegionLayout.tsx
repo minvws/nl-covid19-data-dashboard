@@ -9,6 +9,7 @@ import { getLayout as getSiteLayout } from 'components/layout';
 import { PostivelyTestedPeopleBarScale } from 'pages/veiligheidsregio/[code]/positief-geteste-mensen';
 import { IntakeHospitalBarScale } from 'pages/veiligheidsregio/[code]/ziekenhuis-opnames';
 import { SewerWaterBarScale } from 'pages/veiligheidsregio/[code]/rioolwater';
+import { getSewerWaterBarScaleData } from 'pages/veiligheidsregio/[code]/_rioolwater.util';
 import Combobox from 'components/comboBox';
 
 import GetestIcon from 'assets/test.svg';
@@ -21,7 +22,6 @@ import safetyRegions from 'data/index';
 import { WithChildren } from 'types';
 
 import useMediaQuery from 'utils/useMediaQuery';
-import { getSewerWaterBarScaleData } from 'pages/veiligheidsregio/[code]/rioolwater';
 import { Regionaal } from 'types/data';
 
 export default SafetyRegionLayout;

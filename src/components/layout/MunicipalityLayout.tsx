@@ -7,10 +7,8 @@ import TitleWithIcon from 'components/titleWithIcon';
 import { getLayout as getSiteLayout } from 'components/layout';
 import { PostivelyTestedPeopleBarScale } from 'pages/gemeente/positief-geteste-mensen';
 import { IntakeHospitalBarScale } from 'pages/gemeente/ziekenhuis-opnames';
-import {
-  SewerWaterBarScale,
-  getSewerWaterBarScaleData,
-} from 'pages/gemeente/rioolwater';
+import { SewerWaterBarScale } from 'pages/gemeente/rioolwater';
+import { getSewerWaterBarScaleData } from 'pages/gemeente/_rioolwater.util';
 
 import GetestIcon from 'assets/test.svg';
 import Ziekenhuis from 'assets/ziekenhuis.svg';
