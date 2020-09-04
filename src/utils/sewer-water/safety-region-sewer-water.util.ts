@@ -25,9 +25,14 @@ export interface SewerWaterBarScaleData {
   dateInsertedUnix: number | undefined;
 }
 
+interface SewerWaterLineChartValue {
+  date: number;
+  value: number;
+}
+
 export interface SewerWaterLineChartData {
-  averageValues: any[];
-  allValues: any[][];
+  averageValues: SewerWaterLineChartValue[];
+  allValues: SewerWaterLineChartValue[][];
   averageLabelText: string;
 }
 
