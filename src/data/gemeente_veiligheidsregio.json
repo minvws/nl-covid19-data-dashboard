@@ -91,8 +91,10 @@
   },
   {
     "name": "s-Hertogenbosch",
+    "displayName": "'s Hertogenbosch",
     "safetyRegion": "VR21",
-    "gemcode": "GM0796"
+    "gemcode": "GM0796",
+    "searchTerms": ["Den Bosch"]
   },
   {
     "name": "Sint Anthonis",
@@ -327,7 +329,8 @@
   {
     "name": "De Fryske Marren",
     "safetyRegion": "VR02",
-    "gemcode": "GM1940"
+    "gemcode": "GM1940",
+    "searchTerms": ["De Friese Meeren"]
   },
   {
     "name": "Harlingen",
@@ -347,7 +350,8 @@
   {
     "name": "Noardeast-Fryslân",
     "safetyRegion": "VR02",
-    "gemcode": "GM1970"
+    "gemcode": "GM1970",
+    "searchTerms": ["Noordoost-Friesland"]
   },
   {
     "name": "Ooststellingwerf",
@@ -372,7 +376,8 @@
   {
     "name": "Súdwest-Fryslân",
     "safetyRegion": "VR02",
-    "gemcode": "GM1900"
+    "gemcode": "GM1900",
+    "searchTerms": ["Zuidwest-Friesland"]
   },
   {
     "name": "Terschelling",
@@ -382,7 +387,8 @@
   {
     "name": "Tytsjerksteradiel",
     "safetyRegion": "VR02",
-    "gemcode": "GM0737"
+    "gemcode": "GM0737",
+    "searchTerms": ["Tietjerksteradeel"]
   },
   {
     "name": "Vlieland",
@@ -666,8 +672,10 @@
   },
   {
     "name": "s-Gravenhage",
+    "displayName": "'s Gravenhage",
     "safetyRegion": "VR15",
-    "gemcode": "GM0518"
+    "gemcode": "GM0518",
+    "searchTerms": ["Den Haag"]
   },
   {
     "name": "Wassenaar",

@@ -8,6 +8,7 @@ import { getLayout as getSiteLayout } from 'components/layout';
 import { PostivelyTestedPeopleBarScale } from 'pages/gemeente/positief-geteste-mensen';
 import { IntakeHospitalBarScale } from 'pages/gemeente/ziekenhuis-opnames';
 import { SewerWaterBarScale } from 'pages/gemeente/rioolwater';
+import Combobox from 'components/comboBox';
 import { getSewerWaterBarScaleData } from 'utils/sewer-water/municipality-sewer-water.util';
 
 import GetestIcon from 'assets/test.svg';
@@ -21,8 +22,11 @@ import { WithChildren } from 'types';
 import useMediaQuery from 'utils/useMediaQuery';
 import { Municipal } from 'types/data';
 
+import municipalities from 'data/gemeente_veiligheidsregio.json';
+
 export default MunicipalityLayout;
 
+export type TMunicipality = typeof municipalities;
 export function getMunicipalityLayout() {
   return function (page: React.ReactNode): React.ReactNode {
     return getSiteLayout(siteText.gemeente_metadata)(
@@ -82,6 +86,11 @@ function MunicipalityLayout(props: WithChildren) {
       <div className="municipality-layout">
         {showAside && (
           <aside className="municipality-aside">
+            <Combobox<TMuncipality>
+              handleSelect={() => false}
+              options={municipalities}
+            />
+
             <nav aria-label="metric navigation">
               <h2>{siteText.nationaal_layout.headings.medisch}</h2>
               <ul>

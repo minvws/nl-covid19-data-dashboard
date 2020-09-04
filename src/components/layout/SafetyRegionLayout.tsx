@@ -36,8 +36,10 @@ export function getSafetyRegionLayout() {
 
 type TSafetyRegion = {
   name: string;
+  displayName?: string;
   code: string;
   id: number;
+  searchTerms?: string[];
 };
 
 /*
