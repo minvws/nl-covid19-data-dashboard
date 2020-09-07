@@ -36,7 +36,7 @@ function useMunicipalityData<
 ): (K[number] & { value: number })[] {
   const { data } = useSWR<Municipalities>('/json/municipalities.json');
 
-  const metricItems = metricName ? data?.[metricName] : [];
+  const metricItems = metricName ? data?.[metricName] : undefined;
 
   return useMemo(() => {
     if (!metricItems) {
