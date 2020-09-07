@@ -68,7 +68,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
       <ContentHeader
         category="Overige indicatoren"
         title={replaceVariablesInText(text.titel, {
-          municipality: 'Gemeentenaam',
+          municipality: municipality?.name,
         })}
         Icon={RioolwaterMonitoring}
         subtitle={text.pagina_toelichting}
@@ -111,7 +111,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
         <article className="metric-article">
           <h3>
             {replaceVariablesInText(text.bar_chart_title, {
-              municipality: 'Gemeentenaam',
+              municipality: municipality?.name,
             })}
           </h3>
           <BarChart

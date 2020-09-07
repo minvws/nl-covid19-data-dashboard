@@ -51,7 +51,7 @@ function ComboBox<Option extends TOption>(props: TProps<Option>) {
   }
 
   function onSelect(name: string): void {
-    const option = options.find(option => option.name === name);
+    const option = options.find((option) => option.name === name);
 
     handleSelect(option as Option);
   }
@@ -70,7 +70,7 @@ function ComboBox<Option extends TOption>(props: TProps<Option>) {
       <ComboboxPopover>
         {results.length > 0 ? (
           <ComboboxList>
-            {results.map(option => (
+            {results.map((option) => (
               <ComboboxOption key={option.name} value={option.name} />
             ))}
           </ComboboxList>
