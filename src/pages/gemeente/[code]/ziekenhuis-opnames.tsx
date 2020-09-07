@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import useSWR from 'swr';
 
 import BarScale from 'components/barScale';
@@ -51,7 +52,9 @@ export function IntakeHospitalBarScale(props: {
 }
 
 const IntakeHospital: FCWithLayout = () => {
-  const { data } = useSWR<Municipal>(`/json/GM0014.json`);
+  const router = useRouter();
+  const { code } = router.query;
+  const { data } = useSWR<Municipal>(`/json/${code}.json`);
 
   const hospitalAdmissions: HospitalAdmissions | undefined =
     data?.hospital_admissions;

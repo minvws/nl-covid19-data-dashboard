@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import BarScale from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
 import { getMunicipalityLayout } from 'components/layout/MunicipalityLayout';
@@ -42,7 +43,9 @@ export function PostivelyTestedPeopleBarScale(props: {
 }
 
 const PostivelyTestedPeople: FCWithLayout = () => {
-  const { data } = useSWR<Municipal>(`/json/GM0014.json`);
+  const router = useRouter();
+  const { code } = router.query;
+  const { data } = useSWR<Municipal>(`/json/${code}.json`);
 
   const positivelyTestedPeople: PositiveTestedPeople | undefined =
     data?.positive_tested_people;

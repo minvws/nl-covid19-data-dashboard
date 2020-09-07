@@ -20,7 +20,7 @@ import {
   getSewerWaterBarScaleData,
   getSewerWaterLineChartData,
   getSewerWaterBarChartData,
-} from '../../../utils/sewer-water/safety-region-sewer-water.util';
+} from 'utils/sewer-water/safety-region-sewer-water.util';
 
 const text: typeof siteText.veiligheidsregio_rioolwater_metingen =
   siteText.veiligheidsregio_rioolwater_metingen;
