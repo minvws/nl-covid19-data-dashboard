@@ -9,7 +9,7 @@ const Municipality: FCWithLayout = () => {
   const router = useRouter();
 
   const onSelectMunicpal = (context: TMunicipalityPoint) => {
-    router.push(`/gemeente/${context.gmcode}/positief-geteste-mensen`);
+    router.push(`/gemeente/${context.gemcode}/positief-geteste-mensen`);
   };
 
   return (
