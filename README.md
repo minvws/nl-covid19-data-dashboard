@@ -16,7 +16,7 @@ The core team works directly from this open-source repository. If you plan to pr
 
 ## Setup
 
-This application uses Next.js as framework, which builds the pages of the application as static exports. We use Preact to keep the bundle as small as possible.
+This application uses Next.js as framework, which builds the pages of the application as static exports. We use Preact in production to keep the bundle as small as possible.
 
 We are using Next.js 9.5.
 
@@ -24,7 +24,8 @@ Run `yarn` to install all required packages.
 
 ### Data
 
-Given the short time frame of the project: The data calculations are not open-source yet. If you have data, you can place it in `/public/json/`
+If you have data, you can place it in `/public/json/`. 
+The calculations for the data can be found in [nl-covid19-data-backend-processing](https://github.com/minvws/nl-covid19-data-backend-processing).
 
 ## Available Scripts
 
@@ -34,4 +35,4 @@ In the project directory, you can run:
 Runs the app in the development mode. Open http://localhost:3000 to view it in the browser.
 
 `yarn build`  
-Builds the app for production to the out folder. It correctly bundles React in production mode and optimizes the build for the best performance. All pages are output as static html files through next export.
+Builds the app for production to the out folder. It correctly bundles React in production mode and optimizes the build for the best performance. All pages are output as static HTML files through next export, ready to be served on any static file server.

@@ -1,8 +1,7 @@
 import Link from 'next/link';
 import Head from 'next/head';
-import useSWR from 'swr';
 import { useRouter } from 'next/router';
-import { useLayoutEffect } from 'react';
+import { useEffect } from 'react';
 
 import TitleWithIcon from 'components/titleWithIcon';
 import { getLayout as getSiteLayout } from 'components/layout';
@@ -32,13 +31,17 @@ import siteText from 'locale';
 import { WithChildren } from 'types';
 
 import useMediaQuery from 'utils/useMediaQuery';
+import { INationalData } from 'static-props/nl-data';
 
 export default NationalLayout;
 
 export function getNationalLayout() {
-  return function (page: React.ReactNode): React.ReactNode {
+  return function (
+    page: React.ReactNode,
+    pageProps: INationalData
+  ): React.ReactNode {
     return getSiteLayout(siteText.nationaal_metadata)(
-      <NationalLayout>{page}</NationalLayout>
+      <NationalLayout {...pageProps}>{page}</NationalLayout>
     );
   };
 }
@@ -59,10 +62,9 @@ export function getNationalLayout() {
  * More info on persistent layouts:
  * https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
-function NationalLayout(props: WithChildren) {
-  const { children } = props;
+function NationalLayout(props: WithChildren<INationalData>) {
+  const { children, data } = props;
   const router = useRouter();
-  const { data } = useSWR(`/json/NL.json`);
   const isLargeScreen = useMediaQuery('(min-width: 1000px)', false);
   const showAside = isLargeScreen || router.route === '/landelijk';
   const showContent = isLargeScreen || router.route !== '/landelijk';
@@ -72,7 +74,7 @@ function NationalLayout(props: WithChildren) {
   // remove focus after navigation
   const blur = (evt: any) => evt.target.blur();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (isLargeScreen && router.route === '/landelijk') {
       router.push('/landelijk/positief-geteste-mensen');
     }

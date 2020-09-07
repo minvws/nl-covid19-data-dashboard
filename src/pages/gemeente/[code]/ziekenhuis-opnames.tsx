@@ -1,6 +1,3 @@
-import { useRouter } from 'next/router';
-import useSWR from 'swr';
-
 import BarScale from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
 import { getMunicipalityLayout } from 'components/layout/MunicipalityLayout';
@@ -10,10 +7,14 @@ import Ziekenhuis from 'assets/ziekenhuis.svg';
 
 import siteText from 'locale';
 
-import { HospitalAdmissions, Municipal } from 'types/data';
+import { HospitalAdmissions } from 'types/data';
 import { LineChart } from 'components/charts/index';
 import replaceVariablesInText from 'utils/replaceVariablesInText';
-import municipalities from 'data/gemeente_veiligheidsregio.json';
+import {
+  getMunicipalityData,
+  getMunicipalityPaths,
+  IMunicipalityData,
+} from 'static-props/municipality-data';
 
 const text: typeof siteText.gemeente_ziekenhuisopnames_per_dag =
   siteText.gemeente_ziekenhuisopnames_per_dag;
@@ -52,11 +53,8 @@ export function IntakeHospitalBarScale(props: {
   );
 }
 
-const IntakeHospital: FCWithLayout = () => {
-  const router = useRouter();
-  const { code } = router.query;
-  const { data } = useSWR<Municipal>(`/json/${code}.json`);
-  const municipality = municipalities.find((m) => m.gemcode === code);
+const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
+  const { data } = props;
 
   const hospitalAdmissions: HospitalAdmissions | undefined =
     data?.hospital_admissions;
@@ -66,7 +64,7 @@ const IntakeHospital: FCWithLayout = () => {
       <ContentHeader
         category="Medische indicatoren"
         title={replaceVariablesInText(text.titel, {
-          municipality: municipality?.name,
+          municipality: data.name,
         })}
         Icon={Ziekenhuis}
         subtitle={text.pagina_toelichting}
@@ -111,5 +109,8 @@ const IntakeHospital: FCWithLayout = () => {
 };
 
 IntakeHospital.getLayout = getMunicipalityLayout();
+
+export const getStaticProps = getMunicipalityData();
+export const getStaticPaths = getMunicipalityPaths();
 
 export default IntakeHospital;

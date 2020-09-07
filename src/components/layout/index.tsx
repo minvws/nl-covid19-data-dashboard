@@ -22,7 +22,7 @@ export interface LayoutProps {
 }
 
 export type FCWithLayout<Props = void> = React.FC<Props> & {
-  getLayout: (page: React.ReactNode) => React.ReactNode;
+  getLayout: (page: React.ReactNode, pageProps: Props) => React.ReactNode;
 };
 
 export function getLayout(layoutProps: LayoutProps) {

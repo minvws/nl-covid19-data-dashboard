@@ -1,7 +1,4 @@
-import Highcharts, {
-  TooltipFormatterContextObject,
-  SeriesOptionsType,
-} from 'highcharts';
+import Highcharts, { SeriesOptionsType } from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
 import useSWR from 'swr';
@@ -111,7 +108,7 @@ function MunicipalityMap(props: IProps) {
     }
 
     return result;
-  }, [countryLines, selected, municipalityData, municipalityLines]);
+  }, [countryLines, municipalityData, municipalityLines, municipalCodes]);
 
   const mapOptions = useMemo<Highcharts.Options>(
     () => ({
