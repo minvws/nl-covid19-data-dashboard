@@ -79,7 +79,7 @@ function MunicipalityMap(props: IProps) {
         type: 'map',
         allAreas: false,
         mapData: municipalityLines,
-        allowPointSelect: false,
+        allowPointSelect: true,
         data: municipalityData,
         // @ts-ignore
         joinBy: ['gemcode', 'gmcode'],
@@ -108,7 +108,6 @@ function MunicipalityMap(props: IProps) {
         borderWidth: 0,
         className: 'undefined',
         colorCount: 10,
-        defaultSeriesType: 'line',
         displayErrors: true,
         margin: [],
         panning: { enabled: false },
@@ -149,7 +148,9 @@ function MunicipalityMap(props: IProps) {
               color: '#99C3D7',
             },
             select: {
-              color: '#ffffff',
+              brightness: 0,
+              borderColor: '#ffffff',
+              borderWidth: 4,
             },
           },
           borderWidth: 1,

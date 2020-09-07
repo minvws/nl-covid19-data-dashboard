@@ -12,7 +12,7 @@ export type TLanguages = {
 export type TALLLanguages = TNLLocale | TENLocale;
 export type TLanguageKey = keyof TLanguages;
 
-const languages: TLanguages = { en, nl };
+const languages: TLanguages = { en, nl } as const;
 
 const targetLanguage: TLanguageKey =
   (process.env.NEXT_PUBLIC_LOCALE as TLanguageKey) || 'nl';

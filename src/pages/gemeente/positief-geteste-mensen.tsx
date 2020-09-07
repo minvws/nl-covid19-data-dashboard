@@ -12,6 +12,9 @@ import formatDecimal from 'utils/formatNumber';
 import { PositiveTestedPeople, Municipal } from 'types/data';
 import useSWR from 'swr';
 import replaceVariablesInText from 'utils/replaceVariablesInText';
+import MunicipalityMap from 'components/mapChart/MunicipalityMap';
+import municipalCodeToRegionCodeLookup from 'data/municipalCodeToRegionCodeLookup';
+import regionCodeToMunicipalCodeLookup from 'data/regionCodeToMunicipalCodeLookup';
 
 const text: typeof siteText.gemeente_positief_geteste_personen =
   siteText.gemeente_positief_geteste_personen;
@@ -42,6 +45,10 @@ export function PostivelyTestedPeopleBarScale(props: {
 }
 
 const PostivelyTestedPeople: FCWithLayout = () => {
+  const code = 'GM0014';
+  const vrcode = municipalCodeToRegionCodeLookup[code];
+  const municipalCodes = regionCodeToMunicipalCodeLookup[vrcode];
+
   const { data } = useSWR<Municipal>(`/json/GM0014.json`);
 
   const positivelyTestedPeople: PositiveTestedPeople | undefined =
@@ -101,6 +108,22 @@ const PostivelyTestedPeople: FCWithLayout = () => {
             }))}
           />
         )}
+      </article>
+
+      <article className="metric-article layout-two-column">
+        <div className="column-item column-item-extra-margin">
+          <h3>{text.map_titel}</h3>
+          <p>{text.map_toelichting}</p>
+        </div>
+
+        <div className="column-item column-item-extra-margin">
+          <MunicipalityMap
+            selected={code}
+            municipalCodes={municipalCodes}
+            metric="positive_tested_people"
+            gradient={['#9DDEFE', '#0290D6']}
+          />
+        </div>
       </article>
     </>
   );
