@@ -1,4 +1,4 @@
-const municipalCodeToRegionCodeLookup = {
+const municipalCodeToRegionCodeLookup: Record<string, string> = {
   GM1680: 'VR03',
   GM0358: 'VR13',
   GM0197: 'VR06',
