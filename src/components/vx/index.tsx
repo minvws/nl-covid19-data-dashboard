@@ -13,8 +13,10 @@ export default function ResponsiveMap(props: IProps) {
   return (
     <ParentSize>
       {({ width, height }) => (
-        <MunicipalityMap width={width} height={height} {...props} />
+        <MunicipalityMap width={width - 10} height={height - 10} {...props} />
       )}
     </ParentSize>
   );
 }
+/*
+ */

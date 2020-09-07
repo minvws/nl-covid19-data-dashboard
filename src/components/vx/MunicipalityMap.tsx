@@ -10,6 +10,19 @@ import useNewMunicipalityData, {
 } from 'utils/useNewMunicipalityData';
 import useMapColorScale from 'utils/useMapColorScale';
 import useMapTooltip from './useMapTooltip';
+import municipalities from 'data/gemeente_veiligheidsregio.json';
+
+type TMunicipalityInfo = typeof municipalities;
+
+const municipalityInfo = municipalities.reduce<
+  Record<string, TMunicipalityInfo[number]>
+>((aggr, item: TMunicipalityInfo[number]): Record<
+  string,
+  TMunicipalityInfo[number]
+> => {
+  aggr[item.gemcode] = item;
+  return aggr;
+}, {});
 
 export type MunicipalGeoJOSN = FeatureCollection<
   MultiPolygon,
@@ -21,7 +34,7 @@ export interface MunicipalityProperties {
   gemcode: string;
 }
 
-export type GeoMercatorProps = {
+export type TProps = {
   width: number;
   height: number;
   selected?: string;
@@ -36,7 +49,7 @@ const world = topojson.feature(
   topology.objects.municipalities
 ) as MunicipalGeoJOSN;
 
-export default function MunicipalityMap(props: GeoMercatorProps) {
+export default function MunicipalityMap(props: TProps) {
   const { width, height, metric, gradient, onSelect, selected } = props;
 
   const [selection, setSelection] = useState<string | undefined>(selected);
@@ -97,7 +110,7 @@ export default function MunicipalityMap(props: GeoMercatorProps) {
                   onClick={() => {
                     if (onSelect) {
                       setSelection(feature.properties.gemcode);
-                      onSelect(feature);
+                      onSelect(getData(feature.properties.gemcode));
                     }
                   }}
                 />
@@ -114,6 +127,7 @@ export default function MunicipalityMap(props: GeoMercatorProps) {
           left={info.tooltipLeft}
           top={info.tooltipTop}
         >
+          {municipalityInfo[info.tooltipData.gmcode].name}:<br />
           <strong>{info.tooltipData.value}</strong>
         </TooltipInPortal>
       )}

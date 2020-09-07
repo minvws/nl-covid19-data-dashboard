@@ -42,8 +42,8 @@ export default function ParentSize(props: IProps) {
     ...restProps
   } = props;
 
-  let animationFrameID = 0;
-  let resizeObserver: ResizeObserver | undefined;
+  const animationFrameID = useRef<number>(0);
+  const resizeObserver = useRef<ResizeObserver | undefined>(undefined);
 
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
@@ -63,20 +63,22 @@ export default function ParentSize(props: IProps) {
   );
 
   useEffect(() => {
-    resizeObserver = new ResizeObserver((entries = [] /** , observer */) => {
+    resizeObserver.current = new ResizeObserver((
+      entries = [] /** , observer */
+    ) => {
       entries.forEach((entry) => {
         const { left, top, width, height } = entry.contentRect;
-        animationFrameID = window.requestAnimationFrame(() => {
+        animationFrameID.current = window.requestAnimationFrame(() => {
           resize({ width, height, top, left });
         });
       });
     });
     if (ref.current) {
-      resizeObserver.observe(ref.current);
+      resizeObserver.current.observe(ref.current);
       return () => {
-        window.cancelAnimationFrame(animationFrameID);
-        if (resizeObserver) {
-          resizeObserver.disconnect();
+        window.cancelAnimationFrame(animationFrameID.current);
+        if (resizeObserver.current) {
+          resizeObserver.current.disconnect();
         }
         resize.cancel();
       };
