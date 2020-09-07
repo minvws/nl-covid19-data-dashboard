@@ -67,7 +67,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
       <ContentHeader
         category="Overige indicatoren"
         title={replaceVariablesInText(text.titel, {
-          safetyRegion: safetyRegion?.name,
+          safetyRegion: data.name,
         })}
         Icon={RioolwaterMonitoring}
         subtitle={text.pagina_toelichting}
@@ -110,7 +110,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
         <article className="metric-article">
           <h3>
             {replaceVariablesInText(text.bar_chart_title, {
-              safetyRegion: safetyRegion?.name,
+              safetyRegion: data.name,
             })}
           </h3>
           <BarChart

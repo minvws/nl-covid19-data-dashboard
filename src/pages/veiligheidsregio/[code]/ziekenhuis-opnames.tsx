@@ -75,7 +75,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
       <ContentHeader
         category="Medische indicatoren"
         title={replaceVariablesInText(text.titel, {
-          safetyRegion: safetyRegion?.name,
+          safetyRegion: data.name,
         })}
         Icon={Ziekenhuis}
         subtitle={text.pagina_toelichting}
