@@ -60,7 +60,8 @@ const PostivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
       <ContentHeader
         category="Medische indicatoren"
         title={replaceVariablesInText(text.titel, {
-          municipality: data.name,
+          municipality:
+            data.positive_tested_people.last_value.municipality_name,
         })}
         Icon={Getest}
         subtitle={text.pagina_toelichting}

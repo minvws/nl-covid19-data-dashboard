@@ -67,7 +67,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
       <ContentHeader
         category="Medische indicatoren"
         title={replaceVariablesInText(text.titel, {
-          municipality: data.name,
+          municipality: data.hospital_admissions.last_value.municipality_name,
         })}
         Icon={Ziekenhuis}
         subtitle={text.pagina_toelichting}
