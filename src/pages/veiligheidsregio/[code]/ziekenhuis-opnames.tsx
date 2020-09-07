@@ -15,6 +15,7 @@ import { LineChart } from 'components/charts/index';
 import replaceVariablesInText from 'utils/replaceVariablesInText';
 import MunicipalityMap from 'components/mapChart/MunicipalityMap';
 import regionCodeToMunicipalCodeLookup from 'data/regionCodeToMunicipalCodeLookup';
+import safetyRegions from 'data/index';
 
 const text: typeof siteText.veiligheidsregio_ziekenhuisopnames_per_dag =
   siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
@@ -57,6 +58,7 @@ const IntakeHospital: FCWithLayout = () => {
   const router = useRouter();
   const { code } = router.query;
   const { data } = useSWR<Regionaal>(`/json/${code}.json`);
+  const safetyRegion = safetyRegions.find((region) => region.code === code);
 
   const resultsPerRegion: ResultsPerRegion | undefined =
     data?.results_per_region;
@@ -71,7 +73,7 @@ const IntakeHospital: FCWithLayout = () => {
       <ContentHeader
         category="Medische indicatoren"
         title={replaceVariablesInText(text.titel, {
-          safetyRegion: 'Veiligheidsregionaam',
+          safetyRegion: safetyRegion?.name,
         })}
         Icon={Ziekenhuis}
         subtitle={text.pagina_toelichting}

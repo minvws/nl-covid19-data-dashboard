@@ -13,9 +13,9 @@ import siteText from 'locale';
 import { HospitalAdmissions, Municipal } from 'types/data';
 import { LineChart } from 'components/charts/index';
 import replaceVariablesInText from 'utils/replaceVariablesInText';
+import municipalities from 'data/gemeente_veiligheidsregio.json';
 import getSafetyRegionForMunicipal from 'utils/getSafetyRegionForMunicipal';
 import MunicipalityMap from 'components/mapChart/MunicipalityMap';
-
 const text: typeof siteText.gemeente_ziekenhuisopnames_per_dag =
   siteText.gemeente_ziekenhuisopnames_per_dag;
 
@@ -57,6 +57,7 @@ const IntakeHospital: FCWithLayout = () => {
   const router = useRouter();
   const { code } = router.query;
   const { data } = useSWR<Municipal>(`/json/${code}.json`);
+  const municipality = municipalities.find((m) => m.gemcode === code);
 
   const [municipalCode, municipalCodes] = getSafetyRegionForMunicipal(code);
 
@@ -68,7 +69,7 @@ const IntakeHospital: FCWithLayout = () => {
       <ContentHeader
         category="Medische indicatoren"
         title={replaceVariablesInText(text.titel, {
-          municipality: 'Gemeentenaam',
+          municipality: municipality?.name,
         })}
         Icon={Ziekenhuis}
         subtitle={text.pagina_toelichting}
