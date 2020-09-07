@@ -37,8 +37,8 @@ export default function useMapTooltip<T>(): [
   const handleMouseOver = (event: any, datum: T) => {
     const coords = localPoint(event.target.ownerSVGElement, event);
     showTooltip({
-      tooltipLeft: coords.x,
-      tooltipTop: coords.y,
+      tooltipLeft: coords?.x ?? 0,
+      tooltipTop: coords?.y ?? 0,
       tooltipData: datum,
     });
   };
