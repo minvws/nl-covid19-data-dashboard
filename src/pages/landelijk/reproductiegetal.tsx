@@ -1,5 +1,3 @@
-import useSWR from 'swr';
-
 import BarScale from 'components/barScale';
 import Legenda from 'components/legenda';
 import { FCWithLayout } from 'components/layout';
@@ -12,6 +10,8 @@ import Repro from 'assets/reproductiegetal.svg';
 import siteText from 'locale';
 
 import { ReproductionIndex as ReproductionIndexData } from 'types/data';
+
+import getNlData, { INationalData } from 'static-props/nl-data';
 
 const text: typeof siteText.reproductiegetal = siteText.reproductiegetal;
 
@@ -54,8 +54,8 @@ export function ReproductionIndexBarScale(props: {
   );
 }
 
-const ReproductionIndex: FCWithLayout = () => {
-  const { data: state } = useSWR(`/json/NL.json`);
+const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
+  const { data: state } = props;
 
   const lastKnownValidData: ReproductionIndexData | undefined =
     state?.reproduction_index_last_known_average;
@@ -81,7 +81,7 @@ const ReproductionIndex: FCWithLayout = () => {
         <div className="column-item column-item-extra-margin">
           <h3>{text.barscale_titel}</h3>
           <ReproductionIndexBarScale
-            data={state}
+            data={data}
             lastKnown={lastKnownValidData}
           />
           <p>{text.barscale_toelichting}</p>
@@ -126,5 +126,7 @@ const ReproductionIndex: FCWithLayout = () => {
 };
 
 ReproductionIndex.getLayout = getNationalLayout();
+
+export const getStaticProps = getNlData();
 
 export default ReproductionIndex;

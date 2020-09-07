@@ -1,7 +1,5 @@
-import { useState } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
-import useSWR from 'swr';
 import { useRouter } from 'next/router';
 
 import TitleWithIcon from 'components/titleWithIcon';
@@ -22,14 +20,17 @@ import safetyRegions from 'data/index';
 import { WithChildren } from 'types';
 
 import useMediaQuery from 'utils/useMediaQuery';
-import { Regionaal } from 'types/data';
+import { ISafetyRegionData } from 'static-props/safetyregion-data';
 
 export default SafetyRegionLayout;
 
 export function getSafetyRegionLayout() {
-  return function (page: React.ReactNode): React.ReactNode {
+  return function (
+    page: React.ReactNode,
+    pageProps: ISafetyRegionData
+  ): React.ReactNode {
     return getSiteLayout(siteText.veiligheidsregio_metadata)(
-      <SafetyRegionLayout>{page}</SafetyRegionLayout>
+      <SafetyRegionLayout {...pageProps}>{page}</SafetyRegionLayout>
     );
   };
 }
@@ -58,16 +59,13 @@ type TSafetyRegion = {
  * More info on persistent layouts:
  * https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
-function SafetyRegionLayout(props: WithChildren) {
-  const { children } = props;
+function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
+  const { children, data } = props;
 
   const router = useRouter();
-  const { code } = router.query;
-  const { data } = useSWR<Regionaal>(`/json/${code}.json`);
   const isLargeScreen = useMediaQuery('(min-width: 1000px)', true);
-  const [selectedSafetyRegion, setSelectedSafetyRegion] = useState<
-    TSafetyRegion
-  >();
+
+  const { code } = router.query;
 
   const showAside = isLargeScreen || router.route === '/veiligheidsregio';
   const showContent = isLargeScreen || router.route !== '/veiligheidsregio';
@@ -82,8 +80,6 @@ function SafetyRegionLayout(props: WithChildren) {
   }
 
   function handleSafeRegionSelect(region: TSafetyRegion) {
-    setSelectedSafetyRegion(region);
-
     if (isLargeScreen) {
       router.push(
         '/veiligheidsregio/[code]/positief-geteste-mensen',
@@ -121,7 +117,7 @@ function SafetyRegionLayout(props: WithChildren) {
               options={safetyRegions}
             />
 
-            {showMetricLinks && selectedSafetyRegion && (
+            {showMetricLinks && (
               <nav aria-label="metric navigation">
                 <h2>{siteText.veiligheidsregio_layout.headings.medisch}</h2>
 
@@ -129,7 +125,7 @@ function SafetyRegionLayout(props: WithChildren) {
                   <li>
                     <Link
                       href="/veiligheidsregio/[code]/positief-geteste-mensen"
-                      as={`/veiligheidsregio/${selectedSafetyRegion.code}/positief-geteste-mensen`}
+                      as={`/veiligheidsregio/${code}/positief-geteste-mensen`}
                     >
                       <a
                         onClick={blur}
@@ -156,7 +152,7 @@ function SafetyRegionLayout(props: WithChildren) {
                   <li>
                     <Link
                       href="/veiligheidsregio/[code]/ziekenhuis-opnames"
-                      as={`/veiligheidsregio/${selectedSafetyRegion.code}/ziekenhuis-opnames`}
+                      as={`/veiligheidsregio/${code}/ziekenhuis-opnames`}
                     >
                       <a
                         onClick={blur}
@@ -186,7 +182,7 @@ function SafetyRegionLayout(props: WithChildren) {
                   <li>
                     <Link
                       href="/veiligheidsregio/[code]/rioolwater"
-                      as={`/veiligheidsregio/${selectedSafetyRegion.code}/rioolwater`}
+                      as={`/veiligheidsregio/${code}/rioolwater`}
                     >
                       <a
                         onClick={blur}

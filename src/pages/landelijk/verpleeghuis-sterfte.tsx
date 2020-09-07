@@ -1,5 +1,3 @@
-import useSWR from 'swr';
-
 import BarScale from 'components/barScale';
 import { ContentHeader } from 'components/layout/Content';
 import { FCWithLayout } from 'components/layout';
@@ -15,6 +13,7 @@ import MunicipalityMap from 'components/mapChart/MunicipalityMap';
 import { useState } from 'react';
 import SafetyRegionMap from 'components/mapChart/SafetyRegionMap';
 import ChartRegionControls from 'components/chartRegionControls';
+import getNlData, { INationalData } from 'static-props/nl-data';
 
 const text: typeof siteText.verpleeghuis_oversterfte =
   siteText.verpleeghuis_oversterfte;
@@ -44,8 +43,8 @@ export function NursingHomeDeathsBarScale(props: {
   );
 }
 
-const NursingHomeDeaths: FCWithLayout = () => {
-  const { data: state } = useSWR(`/json/NL.json`);
+const NursingHomeDeaths: FCWithLayout<INationalData> = (props) => {
+  const { data: state } = props;
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
     'municipal'
   );
@@ -122,5 +121,7 @@ const NursingHomeDeaths: FCWithLayout = () => {
 };
 
 NursingHomeDeaths.getLayout = getNationalLayout();
+
+export const getStaticProps = getNlData();
 
 export default NursingHomeDeaths;

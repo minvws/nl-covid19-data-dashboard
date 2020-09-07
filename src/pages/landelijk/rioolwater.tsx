@@ -1,5 +1,3 @@
-import useSWR from 'swr';
-
 import BarScale from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
 import { getNationalLayout } from 'components/layout/NationalLayout';
@@ -11,6 +9,8 @@ import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
 import siteText from 'locale';
 
 import { RioolwaterMetingen } from 'types/data';
+
+import getNlData, { INationalData } from 'static-props/nl-data';
 
 const text: typeof siteText.rioolwater_metingen = siteText.rioolwater_metingen;
 
@@ -39,8 +39,8 @@ export function SewerWaterBarScale(props: {
   );
 }
 
-const SewerWater: FCWithLayout = () => {
-  const { data: state } = useSWR(`/json/NL.json`);
+const SewerWater: FCWithLayout<INationalData> = (props) => {
+  const { data: state } = props;
 
   const data: RioolwaterMetingen | undefined = state?.rioolwater_metingen;
 
@@ -89,5 +89,7 @@ const SewerWater: FCWithLayout = () => {
 };
 
 SewerWater.getLayout = getNationalLayout();
+
+export const getStaticProps = getNlData();
 
 export default SewerWater;
