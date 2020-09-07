@@ -14,8 +14,7 @@ import { PositiveTestedPeople, Municipal } from 'types/data';
 import useSWR from 'swr';
 import replaceVariablesInText from 'utils/replaceVariablesInText';
 import MunicipalityMap from 'components/mapChart/MunicipalityMap';
-import municipalCodeToRegionCodeLookup from 'data/municipalCodeToRegionCodeLookup';
-import regionCodeToMunicipalCodeLookup from 'data/regionCodeToMunicipalCodeLookup';
+import getSafetyRegionForMunicipal from 'utils/getSafetyRegionForMunicipal';
 
 const text: typeof siteText.gemeente_positief_geteste_personen =
   siteText.gemeente_positief_geteste_personen;
@@ -50,12 +49,7 @@ const PostivelyTestedPeople: FCWithLayout = () => {
   const { code } = router.query;
   const { data } = useSWR<Municipal>(`/json/${code}.json`);
 
-  const municipalCode = typeof code === 'string' ? code : 'unknown';
-
-  const vrcode = municipalCodeToRegionCodeLookup[municipalCode];
-  const municipalCodes = vrcode
-    ? regionCodeToMunicipalCodeLookup[vrcode]
-    : undefined;
+  const [municipalCode, municipalCodes] = getSafetyRegionForMunicipal(code);
 
   const positivelyTestedPeople: PositiveTestedPeople | undefined =
     data?.positive_tested_people;

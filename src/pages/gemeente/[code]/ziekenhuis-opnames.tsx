@@ -13,6 +13,8 @@ import siteText from 'locale';
 import { HospitalAdmissions, Municipal } from 'types/data';
 import { LineChart } from 'components/charts/index';
 import replaceVariablesInText from 'utils/replaceVariablesInText';
+import getSafetyRegionForMunicipal from 'utils/getSafetyRegionForMunicipal';
+import MunicipalityMap from 'components/mapChart/MunicipalityMap';
 
 const text: typeof siteText.gemeente_ziekenhuisopnames_per_dag =
   siteText.gemeente_ziekenhuisopnames_per_dag;
@@ -55,6 +57,8 @@ const IntakeHospital: FCWithLayout = () => {
   const router = useRouter();
   const { code } = router.query;
   const { data } = useSWR<Municipal>(`/json/${code}.json`);
+
+  const [municipalCode, municipalCodes] = getSafetyRegionForMunicipal(code);
 
   const hospitalAdmissions: HospitalAdmissions | undefined =
     data?.hospital_admissions;
@@ -103,6 +107,24 @@ const IntakeHospital: FCWithLayout = () => {
             />
           </>
         )}
+      </article>
+
+      <article className="metric-article layout-two-column">
+        <div className="column-item column-item-extra-margin">
+          <h3>{text.map_titel}</h3>
+          <p>{text.map_toelichting}</p>
+        </div>
+
+        <div className="column-item column-item-extra-margin">
+          {municipalCodes && (
+            <MunicipalityMap
+              selected={municipalCode}
+              municipalCodes={municipalCodes}
+              metric="hospital_admissions"
+              gradient={['#69c253', '#f35065']}
+            />
+          )}
+        </div>
       </article>
     </>
   );
