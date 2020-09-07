@@ -1,4 +1,4 @@
-import { ParentSize } from '@vx/responsive';
+import ParentSize from './ParentSize';
 import Municipalities from './choropleth';
 
 export default function Choropleth() {
