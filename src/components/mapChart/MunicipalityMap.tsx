@@ -95,7 +95,12 @@ function MunicipalityMap(props: IProps) {
     }
 
     return result;
-  }, [countryLines, selected, municipalityData, municipalityLines]);
+  }, [
+    municipalityLines,
+    municipalityData,
+    municipalCodes?.length,
+    countryLines,
+  ]);
 
   const mapOptions = useMemo<Highcharts.Options>(
     () => ({
