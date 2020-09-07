@@ -1,14 +1,20 @@
 import ParentSize from './ParentSize';
-import Municipalities from './choropleth';
+import MunicipalityMap from './MunicipalityMap';
+import { TMunicipalityMetricName } from 'utils/useMunicipalityData';
 
-export default function Choropleth() {
+export interface IProps {
+  selected?: string;
+  metric: TMunicipalityMetricName;
+  gradient: [minColor: string, maxColor: string];
+  onSelect?: (context: any) => void;
+}
+
+export default function ResponsiveMap(props: IProps) {
   return (
-    <>
-      <ParentSize>
-        {({ width, height }) => (
-          <Municipalities events width={width} height={height} />
-        )}
-      </ParentSize>
-    </>
+    <ParentSize>
+      {({ width, height }) => (
+        <MunicipalityMap width={width} height={height} {...props} />
+      )}
+    </ParentSize>
   );
 }

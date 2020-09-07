@@ -1,6 +1,3 @@
-import { useRouter } from 'next/router';
-import useSWR from 'swr';
-
 import BarScale from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
 import { getSafetyRegionLayout } from 'components/layout/SafetyRegionLayout';
@@ -10,7 +7,6 @@ import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
 
 import siteText from 'locale';
 
-import { Regionaal } from 'types/data';
 import RegionalSewerWaterLineChart from 'components/lineChart/regionalSewerWaterLineChart';
 import replaceVariablesInText from 'utils/replaceVariablesInText';
 import { useMemo } from 'react';
@@ -21,6 +17,11 @@ import {
   getSewerWaterLineChartData,
   getSewerWaterBarChartData,
 } from 'utils/sewer-water/safety-region-sewer-water.util';
+import {
+  getSafetyRegionData,
+  getSafetyRegionPaths,
+  ISafetyRegionData,
+} from 'static-props/safetyregion-data';
 
 const text: typeof siteText.veiligheidsregio_rioolwater_metingen =
   siteText.veiligheidsregio_rioolwater_metingen;
@@ -50,10 +51,8 @@ export function SewerWaterBarScale(props: {
   );
 }
 
-const SewerWater: FCWithLayout = () => {
-  const router = useRouter();
-  const { code } = router.query;
-  const { data } = useSWR<Regionaal>(`/json/${code}.json`);
+const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
+  const { data } = props;
 
   const { barScaleData, lineChartData, barChartData } = useMemo(() => {
     return {
@@ -68,7 +67,7 @@ const SewerWater: FCWithLayout = () => {
       <ContentHeader
         category="Overige indicatoren"
         title={replaceVariablesInText(text.titel, {
-          safetyRegion: 'Veiligheidsregionaam',
+          safetyRegion: data.name,
         })}
         Icon={RioolwaterMonitoring}
         subtitle={text.pagina_toelichting}
@@ -111,7 +110,7 @@ const SewerWater: FCWithLayout = () => {
         <article className="metric-article">
           <h3>
             {replaceVariablesInText(text.bar_chart_title, {
-              safetyRegion: 'Veiligheidsregionaam',
+              safetyRegion: data.name,
             })}
           </h3>
           <BarChart
@@ -126,5 +125,8 @@ const SewerWater: FCWithLayout = () => {
 };
 
 SewerWater.getLayout = getSafetyRegionLayout();
+
+export const getStaticProps = getSafetyRegionData();
+export const getStaticPaths = getSafetyRegionPaths();
 
 export default SewerWater;

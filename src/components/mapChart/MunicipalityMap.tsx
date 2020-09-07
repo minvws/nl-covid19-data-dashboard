@@ -1,6 +1,6 @@
 import Highcharts, {
-  TooltipFormatterContextObject,
   SeriesOptionsType,
+  TooltipFormatterContextObject,
 } from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
@@ -22,16 +22,17 @@ export interface MunicipalityProperties {
 }
 
 type TMunicipalityTooltipFormatterContextObject = TooltipFormatterContextObject & {
-  point: TMunicipalityPoint;
+  point: TMunicipalityPoint & { properties: MunicipalityProperties };
 };
 
-type TMunicipalityPoint = Highcharts.Point & MunicipalityProperties;
+export type TMunicipalityPoint = Highcharts.Point & MunicipalityProperties;
 
 interface IProps {
   selected?: string;
   municipalCodes?: string[];
-  metric: TMunicipalityMetricName;
+  metric?: TMunicipalityMetricName;
   gradient?: [minColor: string, maxColor: string];
+  onSelect?: (context: TMunicipalityPoint) => void;
 }
 
 export type MunicipalGeoJOSN = FeatureCollection<
@@ -53,6 +54,7 @@ export default MunicipalityMap;
  */
 function MunicipalityMap(props: IProps) {
   const {
+    onSelect,
     selected,
     municipalCodes,
     metric,
@@ -67,11 +69,16 @@ function MunicipalityMap(props: IProps) {
     '/static-json/municipalities-outline.geojson'
   );
 
-  const municipalityData = useMunicipalityData(metric, municipalCodes);
+  let municipalityData = useMunicipalityData(metric, municipalCodes);
   const [min, max] = useExtent(
     municipalityData,
     (item: any): number => item.value
   );
+  if (!municipalityData.length) {
+    municipalityData = municipalityLines?.features.map((feat) => ({
+      gmcode: feat.properties.gemcode,
+    })) as any;
+  }
 
   const series = useMemo<SeriesOptionsType[]>(() => {
     const result: SeriesOptionsType[] = [
@@ -79,14 +86,33 @@ function MunicipalityMap(props: IProps) {
         type: 'map',
         allAreas: false,
         mapData: municipalityLines,
-        allowPointSelect: false,
+        allowPointSelect: true,
         data: municipalityData,
         // @ts-ignore
         joinBy: ['gemcode', 'gmcode'],
+        states: {
+          select: {
+            color: '#0000ff',
+            // @ts-ignore
+            dashStyle: 'dash',
+            borderColor: 'black',
+          },
+        },
+        borderWidth: 1,
+        borderColor: '#012090',
+        point: {
+          events: {
+            click: function (this: any) {
+              if (onSelect) {
+                onSelect(this as TMunicipalityPoint);
+              }
+            },
+          },
+        },
       },
     ];
 
-    // When there's no selected municipal code we render the outlines of the country:
+    // Only when there are no selected municipals do we render the outlines of the country:
     if (!municipalCodes?.length) {
       result.push({
         type: 'mapline',
@@ -95,15 +121,13 @@ function MunicipalityMap(props: IProps) {
     }
 
     return result;
-  }, [
-    municipalityLines,
-    municipalityData,
-    municipalCodes?.length,
-    countryLines,
-  ]);
+  }, [countryLines, municipalityData, municipalityLines, municipalCodes]);
 
   const mapOptions = useMemo<Highcharts.Options>(
     () => ({
+      credits: {
+        enabled: false,
+      },
       chart: {
         alignTicks: true,
         animation: true,
@@ -113,7 +137,6 @@ function MunicipalityMap(props: IProps) {
         borderWidth: 0,
         className: 'undefined',
         colorCount: 10,
-        defaultSeriesType: 'line',
         displayErrors: true,
         margin: [],
         panning: { enabled: false },
@@ -136,30 +159,22 @@ function MunicipalityMap(props: IProps) {
         borderColor: '#01689B',
         borderRadius: 0,
         // @ts-ignore
-        formatter: function (this: any): false | string {
+        formatter: function (
+          this: TMunicipalityTooltipFormatterContextObject
+        ): false | string {
           const { point } = this;
-
-          if (point.properties?.gemnaam) {
-            const metricValue = point[metric];
+          if (point.properties?.gemnaam && metric) {
+            const metricValue = (point as any)[metric];
             return `<strong>${point.properties.gemnaam}</strong><br/>${metricValue}`;
+          } else if (point.properties?.gemnaam) {
+            return `<strong>${point.properties.gemnaam}</strong>`;
           }
+
           return false;
         },
       },
       plotOptions: {
         panning: false,
-        map: {
-          states: {
-            hover: {
-              color: '#99C3D7',
-            },
-            select: {
-              color: '#ffffff',
-            },
-          },
-          borderWidth: 1,
-          borderColor: '#012090',
-        },
         mapline: {
           borderColor: 'black',
           borderWidth: 2,
@@ -181,7 +196,7 @@ function MunicipalityMap(props: IProps) {
 
       point?.select(true, false);
     }
-  }, [ref, selected]);
+  }, [ref.current, selected]);
 
   return (
     <HighchartsReact

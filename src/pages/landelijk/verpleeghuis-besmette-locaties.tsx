@@ -1,5 +1,3 @@
-import useSWR from 'swr';
-
 import BarScale from 'components/barScale';
 import { ContentHeader } from 'components/layout/Content';
 import { FCWithLayout } from 'components/layout';
@@ -13,10 +11,11 @@ import formatNumber from 'utils/formatNumber';
 import siteText from 'locale';
 
 import {
-  National,
   TotalNewlyReportedLocations,
   TotalReportedLocations,
 } from 'types/data';
+
+import getNlData, { INationalData } from 'static-props/nl-data';
 
 const text: typeof siteText.verpleeghuis_besmette_locaties =
   siteText.verpleeghuis_besmette_locaties;
@@ -46,8 +45,8 @@ export function NursingHomeInfectedLocationsBarScale(props: {
   );
 }
 
-const NursingHomeInfectedLocations: FCWithLayout = () => {
-  const { data: state } = useSWR<National>(`/json/NL.json`);
+const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
+  const { data: state } = props;
 
   const newLocations: TotalNewlyReportedLocations | undefined =
     state?.total_newly_reported_locations;
@@ -109,5 +108,7 @@ const NursingHomeInfectedLocations: FCWithLayout = () => {
 };
 
 NursingHomeInfectedLocations.getLayout = getNationalLayout();
+
+export const getStaticProps = getNlData();
 
 export default NursingHomeInfectedLocations;
