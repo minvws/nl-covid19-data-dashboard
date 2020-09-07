@@ -89,6 +89,9 @@ function SafetyRegionMap(props: IProps) {
 
   const mapOptions = useMemo<Highcharts.Options>(
     () => ({
+      credits: {
+        enabled: false,
+      },
       chart: {
         alignTicks: true,
         animation: true,
