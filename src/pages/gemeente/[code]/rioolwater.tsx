@@ -21,6 +21,7 @@ import {
   getSewerWaterLineChartData,
   getSewerWaterBarChartData,
 } from 'utils/sewer-water/municipality-sewer-water.util';
+import municipalities from 'data/gemeente_veiligheidsregio.json';
 
 const text: typeof siteText.gemeente_rioolwater_metingen =
   siteText.gemeente_rioolwater_metingen;
@@ -55,6 +56,7 @@ const SewerWater: FCWithLayout = () => {
   const router = useRouter();
   const { code } = router.query;
   const { data } = useSWR<Municipal>(`/json/${code}.json`);
+  const municipality = municipalities.find((m) => m.gemcode === code);
 
   const { barScaleData, lineChartData, barChartData } = useMemo(() => {
     return {
@@ -69,7 +71,7 @@ const SewerWater: FCWithLayout = () => {
       <ContentHeader
         category="Overige indicatoren"
         title={replaceVariablesInText(text.titel, {
-          municipality: 'Gemeentenaam',
+          municipality: municipality?.name,
         })}
         Icon={RioolwaterMonitoring}
         subtitle={text.pagina_toelichting}
@@ -112,7 +114,7 @@ const SewerWater: FCWithLayout = () => {
         <article className="metric-article">
           <h3>
             {replaceVariablesInText(text.bar_chart_title, {
-              municipality: 'Gemeentenaam',
+              municipality: municipality?.name,
             })}
           </h3>
           <BarChart

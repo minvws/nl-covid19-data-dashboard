@@ -13,6 +13,7 @@ import formatDecimal from 'utils/formatNumber';
 import { PositiveTestedPeople, Municipal } from 'types/data';
 import useSWR from 'swr';
 import replaceVariablesInText from 'utils/replaceVariablesInText';
+import municipalities from 'data/gemeente_veiligheidsregio.json';
 
 const text: typeof siteText.gemeente_positief_geteste_personen =
   siteText.gemeente_positief_geteste_personen;
@@ -46,6 +47,7 @@ const PostivelyTestedPeople: FCWithLayout = () => {
   const router = useRouter();
   const { code } = router.query;
   const { data } = useSWR<Municipal>(`/json/${code}.json`);
+  const municipality = municipalities.find((m) => m.gemcode === code);
 
   const positivelyTestedPeople: PositiveTestedPeople | undefined =
     data?.positive_tested_people;
@@ -55,7 +57,7 @@ const PostivelyTestedPeople: FCWithLayout = () => {
       <ContentHeader
         category="Medische indicatoren"
         title={replaceVariablesInText(text.titel, {
-          municipality: 'Gemeentenaam',
+          municipality: municipality?.name,
         })}
         Icon={Getest}
         subtitle={text.pagina_toelichting}

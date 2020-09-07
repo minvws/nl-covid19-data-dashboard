@@ -21,6 +21,7 @@ import {
   getSewerWaterLineChartData,
   getSewerWaterBarChartData,
 } from 'utils/sewer-water/safety-region-sewer-water.util';
+import safetyRegions from 'data/index';
 
 const text: typeof siteText.veiligheidsregio_rioolwater_metingen =
   siteText.veiligheidsregio_rioolwater_metingen;
@@ -54,6 +55,7 @@ const SewerWater: FCWithLayout = () => {
   const router = useRouter();
   const { code } = router.query;
   const { data } = useSWR<Regionaal>(`/json/${code}.json`);
+  const safetyRegion = safetyRegions.find((region) => region.code === code);
 
   const { barScaleData, lineChartData, barChartData } = useMemo(() => {
     return {
@@ -68,7 +70,7 @@ const SewerWater: FCWithLayout = () => {
       <ContentHeader
         category="Overige indicatoren"
         title={replaceVariablesInText(text.titel, {
-          safetyRegion: 'Veiligheidsregionaam',
+          safetyRegion: safetyRegion?.name,
         })}
         Icon={RioolwaterMonitoring}
         subtitle={text.pagina_toelichting}
@@ -111,7 +113,7 @@ const SewerWater: FCWithLayout = () => {
         <article className="metric-article">
           <h3>
             {replaceVariablesInText(text.bar_chart_title, {
-              safetyRegion: 'Veiligheidsregionaam',
+              safetyRegion: safetyRegion?.name,
             })}
           </h3>
           <BarChart
