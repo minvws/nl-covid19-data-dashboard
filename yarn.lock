@@ -1704,7 +1704,12 @@
   dependencies:
     "@types/react" "*"
 
-"@types/lodash@^4.14.146", "@types/lodash@^4.14.161":
+"@types/lodash@4.14.146":
+  version "4.14.146"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.146.tgz#de0d2c8610012f12a6a796455054cbc654f8fecf"
+  integrity sha512-JzJcmQ/ikHSv7pbvrVNKJU5j9jL9VLf3/gqs048CEnBVVVEv4kve3vLxoPHGvclutS+Il4SBIuQQ087m1eHffw==
+
+"@types/lodash@^4.14.146":
   version "4.14.161"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.161.tgz#a21ca0777dabc6e4f44f3d07f37b765f54188b18"
   integrity sha512-EP6O3Jkr7bXvZZSZYlsgt5DIjiGr0dXP1/jVEwVLTFgg0d+3lWVQkRavYVQszV7dYUwvg0B8R0MBDpcmXg7XIA==
