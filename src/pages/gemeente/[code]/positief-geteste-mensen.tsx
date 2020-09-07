@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import BarScale from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
 import { getMunicipalityLayout } from 'components/layout/MunicipalityLayout';
@@ -45,11 +46,16 @@ export function PostivelyTestedPeopleBarScale(props: {
 }
 
 const PostivelyTestedPeople: FCWithLayout = () => {
-  const code = 'GM0014';
-  const vrcode = municipalCodeToRegionCodeLookup[code];
-  const municipalCodes = regionCodeToMunicipalCodeLookup[vrcode];
+  const router = useRouter();
+  const { code } = router.query;
+  const { data } = useSWR<Municipal>(`/json/${code}.json`);
 
-  const { data } = useSWR<Municipal>(`/json/GM0014.json`);
+  const municipalCode = typeof code === 'string' ? code : 'unknown';
+
+  const vrcode = municipalCodeToRegionCodeLookup[municipalCode];
+  const municipalCodes = vrcode
+    ? regionCodeToMunicipalCodeLookup[vrcode]
+    : undefined;
 
   const positivelyTestedPeople: PositiveTestedPeople | undefined =
     data?.positive_tested_people;
@@ -117,12 +123,14 @@ const PostivelyTestedPeople: FCWithLayout = () => {
         </div>
 
         <div className="column-item column-item-extra-margin">
-          <MunicipalityMap
-            selected={code}
-            municipalCodes={municipalCodes}
-            metric="positive_tested_people"
-            gradient={['#9DDEFE', '#0290D6']}
-          />
+          {municipalCodes && (
+            <MunicipalityMap
+              selected={municipalCode}
+              municipalCodes={municipalCodes}
+              metric="positive_tested_people"
+              gradient={['#9DDEFE', '#0290D6']}
+            />
+          )}
         </div>
       </article>
     </>

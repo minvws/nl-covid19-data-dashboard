@@ -70,11 +70,8 @@ function ComboBox<Option extends TOption>(props: TProps<Option>) {
       <ComboboxPopover>
         {results.length > 0 ? (
           <ComboboxList>
-            {results.slice(0, 10).map((option) => (
-              <ComboboxOption
-                key={option.name}
-                value={option.displayName || option.name}
-              />
+            {results.map((option) => (
+              <ComboboxOption key={option.name} value={option.name} />
             ))}
           </ComboboxList>
         ) : (
