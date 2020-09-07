@@ -1,4 +1,7 @@
-import Highcharts, { SeriesOptionsType } from 'highcharts';
+import Highcharts, {
+  SeriesOptionsType,
+  TooltipFormatterContextObject,
+} from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
 import useSWR from 'swr';
