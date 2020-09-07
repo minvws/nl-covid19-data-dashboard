@@ -1,5 +1,3 @@
-import useSWR from 'swr';
-
 import BarScale from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
 import { getNationalLayout } from 'components/layout/NationalLayout';
@@ -15,6 +13,7 @@ import MunicipalityMap from 'components/mapChart/MunicipalityMap';
 import { useState } from 'react';
 import SafetyRegionMap from 'components/mapChart/SafetyRegionMap';
 import ChartRegionControls from 'components/chartRegionControls';
+import getNlData, { INationalData } from 'static-props/nl-data';
 
 const text: typeof siteText.ziekenhuisopnames_per_dag =
   siteText.ziekenhuisopnames_per_dag;
@@ -53,8 +52,8 @@ export function IntakeHospitalBarScale(props: {
   );
 }
 
-const IntakeHospital: FCWithLayout = () => {
-  const { data: state } = useSWR(`/json/NL.json`);
+const IntakeHospital: FCWithLayout<INationalData> = (props) => {
+  const { data: state } = props;
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
     'municipal'
   );
@@ -132,5 +131,7 @@ const IntakeHospital: FCWithLayout = () => {
 };
 
 IntakeHospital.getLayout = getNationalLayout();
+
+export const getStaticProps = getNlData();
 
 export default IntakeHospital;

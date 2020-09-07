@@ -1,7 +1,4 @@
-import Highcharts, {
-  TooltipFormatterContextObject,
-  SeriesOptionsType,
-} from 'highcharts';
+import Highcharts, { SeriesOptionsType } from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
 import useSWR from 'swr';
@@ -20,12 +17,6 @@ export interface MunicipalityProperties {
   gemnaam: string;
   gemcode: string;
 }
-
-type TMunicipalityTooltipFormatterContextObject = TooltipFormatterContextObject & {
-  point: TMunicipalityPoint;
-};
-
-type TMunicipalityPoint = Highcharts.Point & MunicipalityProperties;
 
 interface IProps {
   selected?: string;
@@ -95,7 +86,7 @@ function MunicipalityMap(props: IProps) {
     }
 
     return result;
-  }, [countryLines, selected, municipalityData, municipalityLines]);
+  }, [countryLines, municipalityData, municipalityLines, municipalCodes]);
 
   const mapOptions = useMemo<Highcharts.Options>(
     () => ({

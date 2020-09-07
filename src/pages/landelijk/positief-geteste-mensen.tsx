@@ -1,4 +1,4 @@
-import useSWR from 'swr';
+import { useState } from 'react';
 
 import BarScale from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
@@ -6,6 +6,8 @@ import { getNationalLayout } from 'components/layout/NationalLayout';
 import { LineChart, BarChart } from 'components/charts/index';
 import MunicipalityMap from 'components/mapChart/MunicipalityMap';
 import { ContentHeader } from 'components/layout/Content';
+import SafetyRegionMap from 'components/mapChart/SafetyRegionMap';
+import ChartRegionControls from 'components/chartRegionControls';
 
 import Getest from 'assets/test.svg';
 import formatDecimal from 'utils/formatNumber';
@@ -17,9 +19,8 @@ import {
   InfectedPeopleTotal,
   IntakeShareAgeGroups,
 } from 'types/data';
-import { useState } from 'react';
-import SafetyRegionMap from 'components/mapChart/SafetyRegionMap';
-import ChartRegionControls from 'components/chartRegionControls';
+
+import getNlData, { INationalData } from 'static-props/nl-data';
 
 const text: typeof siteText.positief_geteste_personen =
   siteText.positief_geteste_personen;
@@ -58,8 +59,8 @@ export function PostivelyTestedPeopleBarScale(props: {
   );
 }
 
-const PostivelyTestedPeople: FCWithLayout = () => {
-  const { data } = useSWR(`/json/NL.json`);
+const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
+  const { data } = props;
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
     'municipal'
   );
@@ -177,5 +178,7 @@ const PostivelyTestedPeople: FCWithLayout = () => {
 };
 
 PostivelyTestedPeople.getLayout = getNationalLayout();
+
+export const getStaticProps = getNlData();
 
 export default PostivelyTestedPeople;

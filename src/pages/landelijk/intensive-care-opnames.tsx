@@ -1,5 +1,3 @@
-import useSWR from 'swr';
-
 import BarScale from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
 import { getNationalLayout } from 'components/layout/NationalLayout';
@@ -11,6 +9,8 @@ import Arts from 'assets/arts.svg';
 import siteText from 'locale';
 
 import { IntakeIntensivecareMa } from 'types/data';
+
+import getNlData, { INationalData } from 'static-props/nl-data';
 
 const text: typeof siteText.ic_opnames_per_dag = siteText.ic_opnames_per_dag;
 
@@ -48,8 +48,8 @@ export function IntakeIntensiveCareBarscale(props: {
   );
 }
 
-const IntakeIntensiveCare: FCWithLayout = () => {
-  const { data: state } = useSWR(`/json/NL.json`);
+const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
+  const { data: state } = props;
 
   const data: IntakeIntensivecareMa | undefined =
     state?.intake_intensivecare_ma;
@@ -98,5 +98,7 @@ const IntakeIntensiveCare: FCWithLayout = () => {
 };
 
 IntakeIntensiveCare.getLayout = getNationalLayout();
+
+export const getStaticProps = getNlData();
 
 export default IntakeIntensiveCare;

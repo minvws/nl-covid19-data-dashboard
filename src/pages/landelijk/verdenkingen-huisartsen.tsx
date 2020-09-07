@@ -1,5 +1,3 @@
-import useSWR from 'swr';
-
 import BarScale from 'components/barScale';
 import { ContentHeader } from 'components/layout/Content';
 import { FCWithLayout } from 'components/layout';
@@ -12,7 +10,8 @@ import formatNumber from 'utils/formatNumber';
 
 import siteText from 'locale';
 
-import { National, VerdenkingenHuisartsen } from 'types/data';
+import { VerdenkingenHuisartsen } from 'types/data';
+import getNlData, { INationalData } from 'static-props/nl-data';
 
 const text: typeof siteText.verdenkingen_huisartsen =
   siteText.verdenkingen_huisartsen;
@@ -42,8 +41,8 @@ export function SuspectedPatientsBarScale(props: {
   );
 }
 
-const SuspectedPatients: FCWithLayout = () => {
-  const { data: state } = useSWR<National>(`/json/NL.json`);
+const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
+  const { data: state } = props;
 
   const data: VerdenkingenHuisartsen | undefined =
     state?.verdenkingen_huisartsen;
@@ -102,5 +101,7 @@ const SuspectedPatients: FCWithLayout = () => {
 };
 
 SuspectedPatients.getLayout = getNationalLayout();
+
+export const getStaticProps = getNlData();
 
 export default SuspectedPatients;

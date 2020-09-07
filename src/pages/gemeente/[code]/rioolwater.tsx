@@ -1,6 +1,3 @@
-import { useRouter } from 'next/router';
-import useSWR from 'swr';
-
 import BarScale from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
 import { getMunicipalityLayout } from 'components/layout/MunicipalityLayout';
@@ -10,7 +7,6 @@ import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
 
 import siteText from 'locale';
 
-import { Municipal } from 'types/data';
 import RegionalSewerWaterLineChart from 'components/lineChart/regionalSewerWaterLineChart';
 import replaceVariablesInText from 'utils/replaceVariablesInText';
 import { useMemo } from 'react';
@@ -21,6 +17,11 @@ import {
   getSewerWaterLineChartData,
   getSewerWaterBarChartData,
 } from 'utils/sewer-water/municipality-sewer-water.util';
+import {
+  getMunicipalityData,
+  getMunicipalityPaths,
+  IMunicipalityData,
+} from 'static-props/municipality-data';
 
 const text: typeof siteText.gemeente_rioolwater_metingen =
   siteText.gemeente_rioolwater_metingen;
@@ -51,10 +52,8 @@ export function SewerWaterBarScale(props: {
   );
 }
 
-const SewerWater: FCWithLayout = () => {
-  const router = useRouter();
-  const { code } = router.query;
-  const { data } = useSWR<Municipal>(`/json/${code}.json`);
+const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
+  const { data } = props;
 
   const { barScaleData, lineChartData, barChartData } = useMemo(() => {
     return {
@@ -127,5 +126,8 @@ const SewerWater: FCWithLayout = () => {
 };
 
 SewerWater.getLayout = getMunicipalityLayout();
+
+export const getStaticProps = getMunicipalityData();
+export const getStaticPaths = getMunicipalityPaths();
 
 export default SewerWater;
