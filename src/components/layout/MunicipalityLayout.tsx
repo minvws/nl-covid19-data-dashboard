@@ -25,7 +25,11 @@ import { IMunicipalityData } from 'static-props/municipality-data';
 
 export default MunicipalityLayout;
 
-export type TMunicipality = typeof municipalities;
+interface IMunicipality {
+  name: string;
+  safetyRegion: string;
+  gemcode: string;
+}
 
 export function getMunicipalityLayout() {
   return function (
@@ -74,7 +78,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
       : 'metric-link';
   }
 
-  function handleMunicipalitySelect(region: TMunicipality[number]) {
+  function handleMunicipalitySelect(region: IMunicipality) {
     if (isLargeScreen) {
       router.push(
         '/gemeente/[code]/positief-geteste-mensen',
@@ -104,7 +108,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
       <div className="municipality-layout">
         {showAside && (
           <aside className="municipality-aside">
-            <Combobox<TMunicipality[number]>
+            <Combobox<IMunicipality>
               handleSelect={handleMunicipalitySelect}
               options={municipalities}
             />
