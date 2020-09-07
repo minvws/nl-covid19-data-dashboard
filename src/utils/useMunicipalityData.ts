@@ -30,10 +30,13 @@ function createMunicipalCodeFilter<T extends { gmcode: string }>(
 function useMunicipalityData<
   T extends TMunicipalityMetricName,
   K extends Municipalities[T]
->(metricName: T, municipalCodes?: string[]): (K[number] & { value: number })[] {
+>(
+  metricName?: T,
+  municipalCodes?: string[]
+): (K[number] & { value: number })[] {
   const { data } = useSWR<Municipalities>('/json/municipalities.json');
 
-  const metricItems = data?.[metricName];
+  const metricItems = metricName ? data?.[metricName] : undefined;
 
   return useMemo(() => {
     if (!metricItems) {
