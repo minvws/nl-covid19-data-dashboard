@@ -2,14 +2,12 @@ import municipalCodeToRegionCodeLookup from 'data/municipalCodeToRegionCodeLooku
 import regionCodeToMunicipalCodeLookup from 'data/regionCodeToMunicipalCodeLookup';
 
 export default function getSafetyRegionForMunicipal(
-  code: string | string[] | undefined
-): [string, string[] | undefined] {
-  const municipalCode = typeof code === 'string' ? code : 'unknown';
-
-  const vrcode = municipalCodeToRegionCodeLookup[municipalCode];
+  code: string
+): string[] | undefined {
+  const vrcode = municipalCodeToRegionCodeLookup[code];
   const municipalCodes = vrcode
     ? regionCodeToMunicipalCodeLookup[vrcode]
     : undefined;
 
-  return [municipalCode, municipalCodes];
+  return municipalCodes;
 }

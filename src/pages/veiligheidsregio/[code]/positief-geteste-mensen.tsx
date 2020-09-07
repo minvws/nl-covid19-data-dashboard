@@ -1,5 +1,3 @@
-import { useRouter } from 'next/router';
-import useSWR from 'swr';
 import BarScale from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
 import { getSafetyRegionLayout } from 'components/layout/SafetyRegionLayout';
@@ -10,11 +8,16 @@ import siteText from 'locale';
 
 import Getest from 'assets/test.svg';
 import formatDecimal from 'utils/formatNumber';
-import { ResultsPerRegion, Regionaal } from 'types/data';
+import { ResultsPerRegion } from 'types/data';
 import replaceVariablesInText from 'utils/replaceVariablesInText';
 import MunicipalityMap from 'components/mapChart/MunicipalityMap';
 import regionCodeToMunicipalCodeLookup from 'data/regionCodeToMunicipalCodeLookup';
-import safetyRegions from 'data/index';
+import {
+  getSafetyRegionData,
+  getSafetyRegionPaths,
+  ISafetyRegionData,
+} from 'static-props/safetyregion-data';
+import { useRouter } from 'next/router';
 
 const text: typeof siteText.veiligheidsregio_positief_geteste_personen =
   siteText.veiligheidsregio_positief_geteste_personen;
@@ -53,11 +56,10 @@ export function PostivelyTestedPeopleBarScale(props: {
   );
 }
 
-const PostivelyTestedPeople: FCWithLayout = () => {
+const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
   const router = useRouter();
   const { code } = router.query;
-  const { data } = useSWR<Regionaal>(`/json/${code}.json`);
-  const safetyRegion = safetyRegions.find((region) => region.code === code);
+  const { data } = props;
 
   const resultsPerRegion: ResultsPerRegion | undefined =
     data?.results_per_region;
@@ -72,7 +74,7 @@ const PostivelyTestedPeople: FCWithLayout = () => {
       <ContentHeader
         category="Medische indicatoren"
         title={replaceVariablesInText(text.titel, {
-          safetyRegion: safetyRegion?.name,
+          safetyRegion: data.name,
         })}
         Icon={Getest}
         subtitle={text.pagina_toelichting}
@@ -141,5 +143,8 @@ const PostivelyTestedPeople: FCWithLayout = () => {
 };
 
 PostivelyTestedPeople.getLayout = getSafetyRegionLayout();
+
+export const getStaticProps = getSafetyRegionData();
+export const getStaticPaths = getSafetyRegionPaths();
 
 export default PostivelyTestedPeople;

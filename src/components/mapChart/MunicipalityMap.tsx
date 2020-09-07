@@ -1,6 +1,6 @@
 import Highcharts, {
-  TooltipFormatterContextObject,
   SeriesOptionsType,
+  TooltipFormatterContextObject,
 } from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
@@ -25,13 +25,14 @@ type TMunicipalityTooltipFormatterContextObject = TooltipFormatterContextObject 
   point: TMunicipalityPoint & { properties: MunicipalityProperties };
 };
 
-type TMunicipalityPoint = Highcharts.Point & MunicipalityProperties;
+export type TMunicipalityPoint = Highcharts.Point & MunicipalityProperties;
 
 interface IProps {
   selected?: string;
   municipalCodes?: string[];
-  metric: TMunicipalityMetricName;
+  metric?: TMunicipalityMetricName;
   gradient?: [minColor: string, maxColor: string];
+  onSelect?: (context: TMunicipalityPoint) => void;
 }
 
 export type MunicipalGeoJOSN = FeatureCollection<
@@ -53,6 +54,7 @@ export default MunicipalityMap;
  */
 function MunicipalityMap(props: IProps) {
   const {
+    onSelect,
     selected,
     municipalCodes,
     metric,
@@ -67,11 +69,16 @@ function MunicipalityMap(props: IProps) {
     '/static-json/municipalities-outline.geojson'
   );
 
-  const municipalityData = useMunicipalityData(metric, municipalCodes);
+  let municipalityData = useMunicipalityData(metric, municipalCodes);
   const [min, max] = useExtent(
     municipalityData,
     (item: any): number => item.value
   );
+  if (!municipalityData.length) {
+    municipalityData = municipalityLines?.features.map((feat) => ({
+      gmcode: feat.properties.gemcode,
+    })) as any;
+  }
 
   const series = useMemo<SeriesOptionsType[]>(() => {
     const result: SeriesOptionsType[] = [
@@ -93,6 +100,15 @@ function MunicipalityMap(props: IProps) {
         },
         borderWidth: 1,
         borderColor: '#012090',
+        point: {
+          events: {
+            click: function (this: any) {
+              if (onSelect) {
+                onSelect(this as TMunicipalityPoint);
+              }
+            },
+          },
+        },
       },
     ];
 
@@ -105,7 +121,7 @@ function MunicipalityMap(props: IProps) {
     }
 
     return result;
-  }, [countryLines, selected, municipalityData, municipalityLines]);
+  }, [countryLines, municipalityData, municipalityLines, municipalCodes]);
 
   const mapOptions = useMemo<Highcharts.Options>(
     () => ({
@@ -147,10 +163,13 @@ function MunicipalityMap(props: IProps) {
           this: TMunicipalityTooltipFormatterContextObject
         ): false | string {
           const { point } = this;
-          if (point.properties?.gemnaam) {
+          if (point.properties?.gemnaam && metric) {
             const metricValue = (point as any)[metric];
             return `<strong>${point.properties.gemnaam}</strong><br/>${metricValue}`;
+          } else if (point.properties?.gemnaam) {
+            return `<strong>${point.properties.gemnaam}</strong>`;
           }
+
           return false;
         },
       },

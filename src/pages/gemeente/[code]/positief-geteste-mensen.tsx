@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import BarScale from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
 import { getMunicipalityLayout } from 'components/layout/MunicipalityLayout';
@@ -10,10 +9,13 @@ import { ContentHeader } from 'components/layout/Content';
 
 import Getest from 'assets/test.svg';
 import formatDecimal from 'utils/formatNumber';
-import { PositiveTestedPeople, Municipal } from 'types/data';
-import useSWR from 'swr';
+import { PositiveTestedPeople } from 'types/data';
 import replaceVariablesInText from 'utils/replaceVariablesInText';
-import municipalities from 'data/gemeente_veiligheidsregio.json';
+import {
+  getMunicipalityData,
+  getMunicipalityPaths,
+  IMunicipalityData,
+} from 'static-props/municipality-data';
 import MunicipalityMap from 'components/mapChart/MunicipalityMap';
 import getSafetyRegionForMunicipal from 'utils/getSafetyRegionForMunicipal';
 
@@ -45,13 +47,10 @@ export function PostivelyTestedPeopleBarScale(props: {
   );
 }
 
-const PostivelyTestedPeople: FCWithLayout = () => {
-  const router = useRouter();
-  const { code } = router.query;
-  const { data } = useSWR<Municipal>(`/json/${code}.json`);
-  const municipality = municipalities.find((m) => m.gemcode === code);
+const PostivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
+  const { data } = props;
 
-  const [municipalCode, municipalCodes] = getSafetyRegionForMunicipal(code);
+  const municipalCodes = getSafetyRegionForMunicipal(data.code);
 
   const positivelyTestedPeople: PositiveTestedPeople | undefined =
     data?.positive_tested_people;
@@ -61,7 +60,7 @@ const PostivelyTestedPeople: FCWithLayout = () => {
       <ContentHeader
         category="Medische indicatoren"
         title={replaceVariablesInText(text.titel, {
-          municipality: municipality?.name,
+          municipality: data.name,
         })}
         Icon={Getest}
         subtitle={text.pagina_toelichting}
@@ -121,7 +120,7 @@ const PostivelyTestedPeople: FCWithLayout = () => {
         <div className="column-item column-item-extra-margin">
           {municipalCodes && (
             <MunicipalityMap
-              selected={municipalCode}
+              selected={data.code}
               municipalCodes={municipalCodes}
               metric="positive_tested_people"
               gradient={['#9DDEFE', '#0290D6']}
@@ -134,5 +133,8 @@ const PostivelyTestedPeople: FCWithLayout = () => {
 };
 
 PostivelyTestedPeople.getLayout = getMunicipalityLayout();
+
+export const getStaticProps = getMunicipalityData();
+export const getStaticPaths = getMunicipalityPaths();
 
 export default PostivelyTestedPeople;
