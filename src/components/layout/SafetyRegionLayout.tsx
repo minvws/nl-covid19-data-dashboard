@@ -118,13 +118,10 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
       >
         {!isMainRoute && (
           <Link
-            href={code ? '/veiligheidsregio/[code]' : '/veiligheidsregio'}
-            as={code ? `/veiligheidsregio/${code}` : '/veiligheidsregio'}
+            href="/veiligheidsregio/[code]"
+            as={`/veiligheidsregio/${code}`}
           >
-            <a
-              className="back-button"
-              href={code ? `/veiligheidsregio/${code}` : '/veiligheidsregio'}
-            >
+            <a className="back-button" href={`/veiligheidsregio/${code}`}>
               <Arrow />
               {siteText.nav.terug_naar_alle_cijfers}
             </a>

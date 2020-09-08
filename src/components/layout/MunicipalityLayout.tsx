@@ -111,14 +111,8 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
         className={`municipality-layout  small-screen-${displayTendency}-tendency`}
       >
         {!isMainRoute && (
-          <Link
-            href={code ? '/gemeente/[code]' : '/gemeente'}
-            as={code ? `/gemeente/${code}` : '/gemeente'}
-          >
-            <a
-              className="back-button"
-              href={code ? `/gemeente/${code}` : '/gemeente'}
-            >
+          <Link href="/gemeente/[code]" as={`/gemeente/${code}`}>
+            <a className="back-button" href={`/gemeente/${code}`}>
               <Arrow />
               {siteText.nav.terug_naar_alle_cijfers}
             </a>
