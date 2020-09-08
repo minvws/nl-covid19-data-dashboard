@@ -9,8 +9,8 @@
     "message": "Last updated"
   },
   "notificatie": {
-    "titel": "New COVID-19 infections stabilized",
-    "bericht": "The number people who newly tested positive has stabilized. Like last week, most newly established infections take place in the provinces of South-Holland and North-Holland. The numbers of reported hospital admissions and admission to the ICU due to COVID-19 have decreased. The reproduction number still lies around 1, similar to the previous week.",
+    "titel": "More new COVID-19 infections",
+    "bericht": "The number of people who newly tested positive has increased. The sharpest rise in new infections was seen in the provinces of South-Holland and North-Holland. Most new infections were reported in the 20-40 year old group. The reproduction number has also increased to above 1. The numbers of reported hospital admissions and admission to the ICU due to COVID-19 remain low.",
     "link": {
       "text": "View the recent information from the RIVM",
       "href": "https://www.rivm.nl/en/novel-coronavirus-covid-19/current-information"
@@ -307,7 +307,7 @@
       },
       {
         "vraag": "What is an alert value?",
-        "antwoord": "An alert value is intended to act as a warning. A warning can be triggered if many people become ill or are admitted to a hospital at the same time. For example, the model of the RIVM shows that the healthcare sector will be unable to cope if daily hospital admissions for COVID-19 exceed 40 admissions per day for an extended period of time."
+        "antwoord": "An alert value is determined by the ministry of VWS and is intended to act as a warning. A warning can be triggered if many people become ill, are admitted to a hospital or test positive at the same time. For example, it is modelled that the healthcare sector will be unable to cope if daily hospital admissions for COVID-19 exceed 40 admissions per day for an extended period of time."
       },
       {
         "vraag": "What can the regional overview tell that the national overview cannot?",
@@ -583,7 +583,7 @@
       "text": "RIVM research into sewage water",
       "href": "https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater"
     },
-    "graph_average_label_text": "Average value of measured locations.",
+    "graph_average_label_text": "Average value of all tested sites.",
     "graph_secondary_label_text": "Measured value per location.",
     "graph_average_label_text_rwzi": "Value of waste water collection service at {{name}}"
   }

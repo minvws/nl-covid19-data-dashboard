@@ -9,8 +9,8 @@
     "message": "Laatst bijgewerkt"
   },
   "notificatie": {
-    "titel": "Besmettingen COVID-19 stabiel",
-    "bericht": "Het aantal nieuwe personen dat positief is getest, is de afgelopen week gelijk gebleven. Net als vorige week komen de meeste meldingen van nieuwe besmettingen uit de provincies Zuid-Holland en Noord-Holland. De aantallen gerapporteerde ziekenhuisopnames en intensive-care opnames vanwege COVID-19 zijn gedaald.  Het reproductiegetal ligt net als vorige week rond de 1.",
+    "titel": "Besmettingen COVID-19 toegenomen",
+    "bericht": "De afgelopen week is het aantal nieuwe positief geteste personen toegenomen. De sterkste stijgingen waren te zien in de provincies Zuid-Holland en Noord-Holland. De meeste nieuwe besmettingen zijn gemeld in de leeftijdsgroep van 20-40 jaar. Ook het reproductiegetal is gestegen en ligt nu boven de 1. De aantallen gerapporteerde ziekenhuisopnames en intensive-care opnames vanwege COVID-19 blijven laag.",
     "link": {
       "text": "Bekijk de actuele informatie van het RIVM",
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel"
@@ -307,7 +307,7 @@
       },
       {
         "vraag": "Wat is een signaalwaarde?",
-        "antwoord": "Een signaalwaarde is een soort `alarmbel’. Die alarmbellen kunnen afgaan als er veel mensen tegelijkertijd ziek worden, in het ziekenhuis worden opgenomen, of positief getest worden. Het RIVM heeft bijvoorbeeld berekend dat als er langdurig meer dan 40 mensen per dag in het ziekenhuis worden opgenomen, de zorg al snel overbelast kan raken."
+        "antwoord": "Een signaalwaarde is een soort 'alarmbel’ die door het ministerie van VWS wordt vastgesteld. Die alarmbellen kunnen afgaan als er veel mensen tegelijkertijd ziek worden, in het ziekenhuis worden opgenomen, of positief getest worden. Zo is er bijvoorbeeld berekend dat als langdurig meer dan 40 mensen per dag in het ziekenhuis worden opgenomen, de zorg al snel overbelast kan raken."
       },
       {
         "vraag": "Wat zegt een regionaal beeld (t.o.v. een landelijk beeld)?",
