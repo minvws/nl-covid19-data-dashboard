@@ -58,7 +58,7 @@ type TSafetyRegion = {
  * - /veiligheidsregio/[metric] -> shows aside and content (children)
  *
  * More info on persistent layouts:
- * https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
+ * https:adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
 function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
   const { children, data } = props;
@@ -103,12 +103,12 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
         <link
           key="dc-spatial"
           rel="dcterms:spatial"
-          href="https://standaarden.overheid.nl/owms/terms/Nederland"
+          href="https:standaarden.overheid.nl/owms/terms/Nederland"
         />
         <link
           key="dc-spatial-title"
           rel="dcterms:spatial"
-          href="https://standaarden.overheid.nl/owms/terms/Nederland"
+          href="https:standaarden.overheid.nl/owms/terms/Nederland"
           title="Nederland"
         />
       </Head>
@@ -121,15 +121,15 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
             href="/veiligheidsregio/[code]"
             as={`/veiligheidsregio/${code}`}
           >
-            <a className="back-button" href={`/veiligheidsregio/${code}`}>
+            <a className="back-button">
               <Arrow />
               {siteText.nav.terug_naar_alle_cijfers}
             </a>
           </Link>
         )}
-
         <aside className="safety-region-aside">
           <Combobox<TSafetyRegion>
+            placeholder={siteText.common.zoekveld_placeholder_regio}
             handleSelect={handleSafeRegionSelect}
             options={safetyRegions}
           />
@@ -147,7 +147,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                     <a
                       onClick={blur}
                       className={getClassName(
-                        `/veiligheidsregio/[code]/positief-geteste-mensen`
+                        `/veiligheidsregio/[code]positief-geteste-mensen`
                       )}
                     >
                       <TitleWithIcon

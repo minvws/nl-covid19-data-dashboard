@@ -62,7 +62,7 @@ export function getMunicipalityLayout() {
 function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
   const { children, data } = props;
   const router = useRouter();
-  const isLargeScreen = useMediaQuery('(min-width: 1000px)', true);
+  const isLargeScreen = useMediaQuery('(min-width: 1000px)');
 
   const { code } = router.query;
 
@@ -120,6 +120,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
         )}
         <aside className="municipality-aside">
           <Combobox<IMunicipality>
+            placeholder={siteText.common.zoekveld_placeholder_gemeente}
             handleSelect={handleMunicipalitySelect}
             options={municipalities}
           />

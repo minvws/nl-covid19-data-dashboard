@@ -19,6 +19,7 @@ type TOption = {
 
 type TProps<Option extends TOption> = {
   options: Option[];
+  placeholder: string;
   handleSelect: (option: Option) => void;
 };
 
@@ -40,7 +41,7 @@ export default ComboBox;
  * ```
  */
 function ComboBox<Option extends TOption>(props: TProps<Option>) {
-  const { options, handleSelect } = props;
+  const { options, placeholder, handleSelect } = props;
 
   const inputRef = useRef<HTMLInputElement>();
   const [term, setTerm] = useState<string>('');
@@ -65,7 +66,7 @@ function ComboBox<Option extends TOption>(props: TProps<Option>) {
       <ComboboxInput
         ref={inputRef}
         onChange={handleChange}
-        placeholder={text.common.zoekveld_placeholder}
+        placeholder={placeholder}
       />
       <ComboboxPopover>
         {results.length > 0 ? (
