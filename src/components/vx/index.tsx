@@ -1,6 +1,7 @@
-import ParentSize from './ParentSize';
 import MunicipalityMap from './MunicipalityMap';
 import { TMunicipalityMetricName } from 'utils/useMunicipalityData';
+
+import useChartDimensions from './use-chart-dimensions';
 
 export interface IProps {
   selected?: string;
@@ -9,13 +10,20 @@ export interface IProps {
   onSelect?: (context: any) => void;
 }
 
+const chartSettings = {
+  marginBottom: 0,
+};
+
 export default function ResponsiveMap(props: IProps) {
+  const [ref, dms] = useChartDimensions(chartSettings);
+
+  const { width, height } = dms;
+
+  console.log(width, height);
   return (
-    <ParentSize>
-      {({ width, height }) => (
-        <MunicipalityMap width={width - 10} height={height - 10} {...props} />
-      )}
-    </ParentSize>
+    <div ref={ref} style={{ height: '800px' }}>
+      <MunicipalityMap width={500} height={500} {...props} />
+    </div>
   );
 }
 /*

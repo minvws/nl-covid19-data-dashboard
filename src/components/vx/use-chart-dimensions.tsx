@@ -1,0 +1,68 @@
+import { ResizeObserver } from '@juggle/resize-observer';
+import { useRef, useState, useEffect } from 'react';
+
+const combineChartDimensions = (dimensions: any) => {
+  const { marginTop, marginRight, marginBottom, marginLeft } = dimensions;
+
+  const parsedDimensions = {
+    ...dimensions,
+    marginTop,
+    marginRight,
+    marginBottom,
+    marginLeft,
+  };
+  return {
+    ...parsedDimensions,
+    boundedHeight: Math.max(
+      parsedDimensions.height -
+        parsedDimensions.marginTop -
+        parsedDimensions.marginBottom,
+      0
+    ),
+    boundedWidth: Math.max(
+      parsedDimensions.width -
+        parsedDimensions.marginLeft -
+        parsedDimensions.marginRight,
+      0
+    ),
+  };
+};
+
+const useChartDimensions = (passedSettings: any) => {
+  const ref = useRef();
+  const dimensions = combineChartDimensions(passedSettings);
+
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
+  // @ts-ignore
+  useEffect(() => {
+    if (dimensions.width && dimensions.height) return [ref, dimensions];
+
+    const element = ref.current;
+    const resizeObserver = new ResizeObserver((entries) => {
+      if (!Array.isArray(entries)) return;
+      if (!entries.length) return;
+
+      const entry = entries[0];
+
+      if (width != entry.contentRect.width) setWidth(entry.contentRect.width);
+      if (height != entry.contentRect.height)
+        setHeight(entry.contentRect.height);
+    });
+    // @ts-ignore
+    resizeObserver.observe(element);
+    // @ts-ignore
+    return () => resizeObserver.unobserve(element);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const newSettings = combineChartDimensions({
+    ...dimensions,
+    width: dimensions.width || width,
+    height: dimensions.height || height,
+  });
+
+  return [ref, newSettings];
+};
+
+export default useChartDimensions;

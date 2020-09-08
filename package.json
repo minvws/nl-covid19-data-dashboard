@@ -4,6 +4,7 @@
   "private": true,
   "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
   "dependencies": {
+    "@juggle/resize-observer": "^3.2.0",
     "@reach/combobox": "^0.11.2",
     "@vx/event": "^0.0.198",
     "@vx/geo": "latest",
