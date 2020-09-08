@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 
 import TitleWithIcon from 'components/titleWithIcon';
 import { getLayout as getSiteLayout } from 'components/layout';
@@ -73,12 +72,6 @@ function NationalLayout(props: WithChildren<INationalData>) {
   // remove focus after navigation
   const blur = (evt: any) => evt.target.blur();
 
-  useEffect(() => {
-    if (isLargeScreen && router.route === '/landelijk') {
-      router.push('/landelijk/positief-geteste-mensen');
-    }
-  }, [isLargeScreen, router]);
-
   function getClassName(path: string) {
     return router.pathname === path
       ? 'metric-link active-metric-link'
@@ -137,6 +130,27 @@ function NationalLayout(props: WithChildren<INationalData>) {
                 </li>
 
                 <li>
+                  <Link href="/landelijk/besmettelijke-mensen">
+                    <a
+                      onClick={blur}
+                      className={getClassName(
+                        '/landelijk/besmettelijke-mensen'
+                      )}
+                    >
+                      <TitleWithIcon
+                        Icon={Ziektegolf}
+                        title={siteText.besmettelijke_personen.title}
+                      />
+                      <span>
+                        <InfectiousPeopleBarScale
+                          data={data?.infectious_people_count_normalized}
+                        />
+                      </span>
+                    </a>
+                  </Link>
+                </li>
+
+                <li>
                   <Link href="/landelijk/reproductiegetal">
                     <a
                       onClick={blur}
@@ -152,27 +166,6 @@ function NationalLayout(props: WithChildren<INationalData>) {
                           lastKnown={
                             data?.reproduction_index_last_known_average
                           }
-                        />
-                      </span>
-                    </a>
-                  </Link>
-                </li>
-
-                <li>
-                  <Link href="/landelijk/besmettelijke-mensen">
-                    <a
-                      onClick={blur}
-                      className={getClassName(
-                        '/landelijk/besmettelijke-mensen'
-                      )}
-                    >
-                      <TitleWithIcon
-                        Icon={Ziektegolf}
-                        title={siteText.besmettelijke_personen.title}
-                      />
-                      <span>
-                        <InfectiousPeopleBarScale
-                          data={data?.infectious_people_count_normalized}
                         />
                       </span>
                     </a>
