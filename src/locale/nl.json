@@ -1,21 +1,4 @@
 {
-  "gemeente_metadata": {
-    "title": "Gemeente"
-  },
-  "nationaal_layout": {
-    "headings": {
-      "medisch": "Medische indicatoren",
-      "overig": "Overige indicatoren",
-      "verpleeghuis": "Verpleeghuiszorg"
-    }
-  },
-  "veiligheidsregio_layout": {
-    "headings": {
-      "medisch": "Medische indicatoren",
-      "overig": "Overige indicatoren",
-      "verpleeghuis": "Verpleeghuiszorg"
-    }
-  },
   "andere_gegevens": "Andere gegevens",
   "blok_andere_gegevens": {
     "title": "Andere gegevens",
@@ -55,64 +38,68 @@
   "nav": {
     "links": {
       "index": "Landelijke cijfers",
-      "gemeente": "Gemeentelijke cijfers",
-      "veiligheidsregio": "Veiligheidsregio cijfers",
       "over": "Over dit dashboard",
       "meer": "Meer informatie over het coronavirus",
       "verantwoording": "Cijferverantwoording",
-      "meer_href": "https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19"
+      "meer_href": "https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19",
+      "veiligheidsregio": "Veiligheidsregio cijfers",
+      "gemeente": "Gemeentelijke cijfers"
     },
     "title": "Corona Dashboard",
     "terug_naar_alle_cijfers": "Terug naar alle cijfers"
   },
   "ic_opnames_per_dag": {
+    "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
+    "bron": {
+      "href": "https://stichting-nice.nl/",
+      "text": "Stichting NICE"
+    },
     "titel": "Intensive care-opnames per dag",
     "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag op de intensive care is opgenomen.",
     "barscale_titel": "Intensive care-opnames per dag",
     "barscale_screenreader_text": "{{value}} intensive care-opnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "extra_uitleg": " Aantal mensen met bevestigd COVID-19 dat per dag op een intensive care-afdeling van een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de afgelopen drie dagen.",
-    "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
-    "linechart_titel": "Verloop over tijd",
-    "bron": {
-      "href": "https://stichting-nice.nl/",
-      "text": "Stichting NICE"
-    }
+    "linechart_titel": "Verloop over tijd"
   },
   "verdenkingen_huisartsen": {
+    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
+    "bron": {
+      "href": "https://www.nivel.nl/nl/nivel-zorgregistraties-eerste-lijn/nivel-zorgregistraties-eerste-lijn",
+      "text": "Nivel Zorgregistraties Eerste Lijn"
+    },
+    "estimated_amount_of_patients": "Geschat aantal patiënten met verdenking van COVID-19:",
     "titel": "Aantal patiënten met eerste melding van COVID-19 klachten bij de huisarts",
     "pagina_toelichting": "Elke week berekent het Nivel aan de hand van de geregistreerde klachten door huisartsen, het aantal patiënten dat voor de eerste keer contact opneemt met de huisartsenpraktijk vanwege COVID-19-achtige klachten.",
-    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
     "barscale_titel": "Aantal patiënten met eerste melding van COVID-19 klachten bij de huisarts",
     "barscale_toelichting": "Aantal patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten, per 100.000 inwoners, per week.",
     "kpi_titel": "Geschat aantal patiënten met verdenking van COVID-19",
     "kpi_toelichting": "Geschat aantal patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten per week.",
     "linechart_titel": "Verloop over tijd",
-    "barscale_screenreader_text": "{{value}} patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten, per 100.000 inwoners, per week.",
-    "bron": {
-      "href": "https://www.nivel.nl/nl/nivel-zorgregistraties-eerste-lijn/nivel-zorgregistraties-eerste-lijn",
-      "text": "Nivel Zorgregistraties Eerste Lijn"
-    },
-    "estimated_amount_of_patients": "Geschat aantal patiënten met verdenking van COVID-19:"
+    "barscale_screenreader_text": "{{value}} patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten, per 100.000 inwoners, per week."
   },
   "ziekenhuisopnames_per_dag": {
+    "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
+    "bron": {
+      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "text": "RIVM"
+    },
     "titel": "Ziekenhuisopnames per dag",
     "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen.",
-    "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
     "barscale_titel": "Ziekenhuisopnames per dag",
     "extra_uitleg": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen.",
     "map_titel": "Verdeling ziekenhuisopnames in Nederland",
     "map_toelichting": "Deze grafieken laten zien hoe de verdeling van ziekenhuisopnames is in Nederland per dag.",
     "linechart_titel": "Ziekenhuisopnames over tijd",
-    "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
+    "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag."
+  },
+  "positief_geteste_personen": {
+    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
-    }
-  },
-  "positief_geteste_personen": {
+    },
     "titel": "Positief geteste mensen",
-    "pagina_toelichting": "Door het aantal positief gesteste mensen bij te houden krijgen we een duidelijk beeld van hoe snel het virus zich verspreid voordat het de intensive care bereikt. Hierdoor blijven we voorbereid.",
-    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "pagina_toelichting": "Door het aantal positief geteste mensen bij te houden krijgen we een duidelijk beeld van hoe snel het virus zich verspreid voordat het de intensive care bereikt. Hierdoor blijven we voorbereid.",
     "barscale_titel": "Gemiddeld aantal positief geteste mensen per 100.00 inwoners",
     "barscale_toelichting": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
     "barscale_screenreader_text": "{{value}} positief geteste mensen per dag.",
@@ -125,21 +112,17 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de trend van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
-    "bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
-      "text": "RIVM"
-    }
+    "barscale_keys": [
+      "0 tot 20",
+      "20 tot 40",
+      "40 tot 60",
+      "60 tot 80",
+      "80+"
+    ]
   },
   "besmettelijke_personen": {
     "title": "Aantal besmettelijke mensen",
     "datums": "Waarde van {{dateOfReport}}. Wordt wekelijks bijgewerkt.",
-    "toelichting_pagina": "Als iemand het coronavirus oploopt, dan is deze persoon een tijd lang besmettelijk voor anderen. Hoe lang dit duurt verschilt van persoon tot persoon. Het aantal besmettelijke mensen is een schatting op basis van een aantal gegevensbronnen. Het exacte aantal is onbekend, maar we kunnen wel aangeven of het gaat om tientallen, honderden, duizenden of meer. ",
-    "barscale_titel": "Gemiddeld aantal besmettelijke mensen per 100.00 inwoners",
-    "barscale_screenreader_text": "{{value}} besmettelijke personen per 100.000 inwoners.",
-    "cijfer_titel": "Geschat aantal besmettelijke mensen in Nederland:",
-    "cijfer_toelichting": "Een berekening van hoeveel mensen met COVID-19 per 100.000 inwoners besmettelijk zijn voor anderen. Dit getal wordt door het RIVM berekend.",
-    "linechart_titel": "Verloop over tijd",
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -149,17 +132,16 @@
     "rangeLegendLabel": "Onzekerheidsmarge",
     "lineLegendLabel": "Besmettelijke mensen",
     "geen_signaalwaarde_beschikbaar": "Voor het aantal besmettelijke mensen is geen signaalwaarde beschikbaar.",
-    "geen_signaalwaarde_beschikbaar_lees_waarom": "Lees hier waarom"
+    "geen_signaalwaarde_beschikbaar_lees_waarom": "Lees hier waarom",
+    "toelichting_pagina": "Als iemand het coronavirus oploopt, dan is deze persoon een tijd lang besmettelijk voor anderen. Hoe lang dit duurt verschilt van persoon tot persoon. Het aantal besmettelijke mensen is een schatting op basis van een aantal gegevensbronnen. Het exacte aantal is onbekend, maar we kunnen wel aangeven of het gaat om tientallen, honderden, duizenden of meer. ",
+    "barscale_titel": "Gemiddeld aantal besmettelijke mensen per 100.00 inwoners",
+    "barscale_screenreader_text": "{{value}} besmettelijke personen per 100.000 inwoners.",
+    "cijfer_titel": "Geschat aantal besmettelijke mensen in Nederland:",
+    "cijfer_toelichting": "Een berekening van hoeveel mensen met COVID-19 per 100.000 inwoners besmettelijk zijn voor anderen. Dit getal wordt door het RIVM berekend.",
+    "linechart_titel": "Verloop over tijd"
   },
   "reproductiegetal": {
-    "titel": "Reproductiegetal",
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
-    "pagina_toelichting": "Het reproductiegetal laat zien hoe snel het virus zich verspreidt. Dit getal geeft aan hoeveel mensen gemiddeld besmet worden door één patiënt met COVID-19.",
-    "barscale_titel": "Meest recente reproductiegetal",
-    "barscale_toelichting": "Aantal mensen dat besmet wordt door één besmettelijke persoon.",
-    "barscale_screenreader_text": "{{value}} positief geteste mensen per dag.",
-    "extra_uitleg": "Het reproductiegetal laat zien hoe snel het virus zich verspreidt. Dit getal geeft aan hoeveel mensen gemiddeld besmet worden door één patiënt met COVID-19. Bij een reproductiegetal van rond de 1 blijft het aantal besmettingen ongeveer gelijk. Als het reproductiegetal lager is dan 1, dan daalt het aantal besmettingen. Bij een getal hoger dan 1 stijgt het aantal besmettingen.",
-    "linechart_titel": "Verloop over tijd",
     "rangeLegendLabel": "Onzekerheidsmarge",
     "lineLegendLabel": "Effectieve R",
     "bron": {
@@ -168,7 +150,14 @@
     },
     "legenda_r": "De effectieve R is een schatting. Voor recente R schattingen is de betrouwbaarheid niet groot, daarom loopt de R-lijn niet door in de laatste twee weken.",
     "legenda_marge": "De onzekerheidsmarge toont tussen welke waarden de R zich bevindt. Dit wordt wekelijks bijgewerkt.",
-    "reproductie_explainer_alt": "Ondersteunende afbeelding bij bovenstaande uitleg"
+    "reproductie_explainer_alt": "Ondersteunende afbeelding bij bovenstaande uitleg",
+    "titel": "Reproductiegetal",
+    "pagina_toelichting": "Het reproductiegetal laat zien hoe snel het virus zich verspreidt. Dit getal geeft aan hoeveel mensen gemiddeld besmet worden door één patiënt met COVID-19.",
+    "barscale_titel": "Meest recente reproductiegetal",
+    "barscale_toelichting": "Aantal mensen dat besmet wordt door één besmettelijke persoon.",
+    "barscale_screenreader_text": "{{value}} positief geteste mensen per dag.",
+    "extra_uitleg": "Het reproductiegetal laat zien hoe snel het virus zich verspreidt. Dit getal geeft aan hoeveel mensen gemiddeld besmet worden door één patiënt met COVID-19. Bij een reproductiegetal van rond de 1 blijft het aantal besmettingen ongeveer gelijk. Als het reproductiegetal lager is dan 1, dan daalt het aantal besmettingen. Bij een getal hoger dan 1 stijgt het aantal besmettingen.",
+    "linechart_titel": "Verloop over tijd"
   },
   "overige_gegevens": {
     "title": "Nog te ontwikkelen",
@@ -216,45 +205,45 @@
     "text": "Bekijk de belangrijkste cijfers voor uw veiligheidsregio."
   },
   "verpleeghuis_besmette_locaties": {
+    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "bron": {
+      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "text": "RIVM"
+    },
     "titel": "Aantal besmette locaties",
     "pagina_toelichting": "Dit getal is een inschatting van het aantal nieuwe verpleeghuislocaties waar sprake is van tenminste een COVID-19 besmetting op basis van een positieve test.",
-    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "barscale_titel": "Aantal nieuwe locaties per dag",
     "barscale_toelichting": "Aantal nieuwe locaties waarbij tenminste één bewoner positief getest is. Een verpleeghuis wordt meegeteld als ‘nieuwe locatie’ wanneer er tenminste 28 dagen, dit is twee keer de incubatietijd, geen nieuwe patiënten zijn geweest.",
     "kpi_titel": "Totaal aantal besmette locaties",
     "kpi_toelichting": "???",
     "linechart_titel": "Verloop over tijd",
-    "barscale_screenreader_text": "{{value}} nieuwe locaties waarbij tenminste één bewoner positief getest is, per dag.",
-    "bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
-      "text": "RIVM"
-    }
+    "barscale_screenreader_text": "{{value}} nieuwe locaties waarbij tenminste één bewoner positief getest is, per dag."
   },
   "verpleeghuis_positief_geteste_personen": {
-    "titel": "Aantal positief geteste bewoners",
-    "barscale_titel": "Aantal positief geteste bewoners in verpleeghuizen per dag",
-    "extra_uitleg": " Aantal positief geteste bewoners in verpleeghuizen per dag.",
-    "pagina_toelichting": "Aantal positief geteste bewoners in verpleeghuizen per dag. Dit getal is een inschatting van het aantal gemelde bewoners in verpleeghuizen dat in Nederland positief getest is en COVID-19 heeft.",
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "linechart_titel": "Verloop over tijd",
-    "barscale_screenreader_text": "{{value}} positief geteste bewoners.",
-    "bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
-      "text": "RIVM"
-    }
-  },
-  "verpleeghuis_oversterfte": {
-    "titel": "Sterfte",
-    "pagina_toelichting": "Aantal overleden bewoners in verpleeghuizen met een vastgestelde COVID-19-besmetting per dag.",
-    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "barscale_titel": "Aantal overleden bewoners",
-    "barscale_screenreader_text": "{{value}} overleden bewoners.",
-    "extra_uitleg": "Dit getal is een inschatting van het aantal gemelde verpleeghuisbewoners dat in Nederland overlijdt aan de gevolgen van het nieuwe coronavirus. Dit getal verwijst naar de datum vóór de datum van de laatste update.",
-    "linechart_titel": "Verloop over tijd",
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     },
+    "titel": "Aantal positief geteste bewoners",
+    "barscale_titel": "Aantal positief geteste bewoners in verpleeghuizen per dag",
+    "extra_uitleg": " Aantal positief geteste bewoners in verpleeghuizen per dag.",
+    "pagina_toelichting": "Aantal positief geteste bewoners in verpleeghuizen per dag. Dit getal is een inschatting van het aantal gemelde bewoners in verpleeghuizen dat in Nederland positief getest is en COVID-19 heeft.",
+    "linechart_titel": "Verloop over tijd",
+    "barscale_screenreader_text": "{{value}} positief geteste bewoners."
+  },
+  "verpleeghuis_oversterfte": {
+    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "bron": {
+      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "text": "RIVM"
+    },
+    "titel": "Sterfte",
+    "pagina_toelichting": "Aantal overleden bewoners in verpleeghuizen met een vastgestelde COVID-19-besmetting per dag.",
+    "barscale_titel": "Aantal overleden bewoners",
+    "barscale_screenreader_text": "{{value}} overleden bewoners.",
+    "extra_uitleg": "Dit getal is een inschatting van het aantal gemelde verpleeghuisbewoners dat in Nederland overlijdt aan de gevolgen van het nieuwe coronavirus. Dit getal verwijst naar de datum vóór de datum van de laatste update.",
+    "linechart_titel": "Verloop over tijd",
     "map_titel": "Verpleeghuis oversterfte in Nederland",
     "map_toelichting": "Deze grafieken laten zien hoe de oversterfte in verpleeghuizen is in Nederland per dag."
   },
@@ -265,21 +254,18 @@
   "geen_selectie": {
     "text": "Selecteer uw regio bovenaan deze pagina"
   },
-  "no_data_for_this_municipality": {
-    "text": "Deze informatie is niet beschikbaar voor deze gemeente."
-  },
   "rioolwater_metingen": {
-    "titel": "Rioolwatermeting",
-    "pagina_toelichting": "Het aantal virusdeeltjes in een milliliter rioolwater, afkomstig van circa 80 locaties in Nederland. Voor het landelijke cijfer wordt uitgegaan van het totaal aantal virusdeeltjes dat wordt aangetroffen in een week, gedeeld door het totaal aantal locaties waar de data van afkomstig is. Het aantal meetpunten wordt vanaf september verder uitgebreid naar meer dan 300.",
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
-    "barscale_titel": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater",
-    "extra_uitleg": "Voor het landelijke cijfer wordt uitgegaan van het totaal aantal virusdeeltjes dat wordt aangetroffen in een week, gedeeld door het totaal aantal locaties waar de data van afkomstig is.",
-    "barscale_screenreader_text": "{{value}} virusdeeltjes in een milliliter rioolwater, afkomstig van 28 locaties in Nederland.",
-    "linechart_titel": "Verloop over tijd",
     "bron": {
       "text": "RIVM Onderzoek rioolwater",
       "href": "https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater"
-    }
+    },
+    "titel": "Rioolwatermeting",
+    "pagina_toelichting": "Het aantal virusdeeltjes in een milliliter rioolwater, afkomstig van circa 80 locaties in Nederland. Voor het landelijke cijfer wordt uitgegaan van het totaal aantal virusdeeltjes dat wordt aangetroffen in een week, gedeeld door het totaal aantal locaties waar de data van afkomstig is. Het aantal meetpunten wordt vanaf september verder uitgebreid naar meer dan 300.",
+    "barscale_titel": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater",
+    "extra_uitleg": "Voor het landelijke cijfer wordt uitgegaan van het totaal aantal virusdeeltjes dat wordt aangetroffen in een week, gedeeld door het totaal aantal locaties waar de data van afkomstig is.",
+    "barscale_screenreader_text": "{{value}} virusdeeltjes in een milliliter rioolwater, afkomstig van 28 locaties in Nederland.",
+    "linechart_titel": "Verloop over tijd"
   },
   "notfound_titel": {
     "text": "Er is iets misgegaan"
@@ -357,130 +343,6 @@
         "antwoord": "We berekenen de toename van het aantal positief geteste mensen door het gerapporteerde cumulatief aantal meldingen van positief geteste mensen van vandaag, af te trekken van het cumulatief aantal van gisteren. Correcties over oude data, zoals dubbeltellingen, worden door het RIVM verwerkt op de datum dat dit bekend is. Het gerapporteerde nieuwe aantal meldingen voor die dag ligt dan lager dan het feitelijk aantal die dag. Daar staat tegenover dat voorgaande dagen er dus teveel gevallen zijn gerapporteerd. Door correctie kan het cumulatieve aantal van vandaag lager zijn dan het cumulatieve aantal van gisteren. In die gevallen wordt er op het dashboard de waarde 0 gepresenteerd in plaats van een negatief waarde; een negatieve waarde is namelijk verwarrend. Daarom krijg je uiteindelijk verschillen als je regio's optelt naar landelijk. Als je de negatieve waarden zou meerekenen kom je wel op de juiste getallen uit."
       }
     ]
-  },
-  "veiligheidsregio_ziekenhuisopnames_per_dag": {
-    "titel_sidebar": "Ziekenhuisopnames per dag",
-    "titel": "Ziekenhuisopnames per dag in {{safetyRegion}}",
-    "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen.",
-    "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
-    "screen_reader_graph_content": "{{value}} opnames.",
-    "barscale_titel": "Ziekenhuisopnames per dag",
-    "extra_uitleg": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen.",
-    "map_titel": "Verdeling ziekenhuisopnames in Nederland",
-    "map_toelichting": "Deze grafieken laten zien hoe de verdeling van ziekenhuisopnames is in Nederland per dag.",
-    "linechart_titel": "Ziekenhuisopnames over tijd",
-    "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
-    "bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
-      "text": "RIVM"
-    }
-  },
-  "veiligheidsregio_positief_geteste_personen": {
-    "titel_sidebar": "Positief geteste mensen",
-    "titel": "Positief geteste mensen in {{safetyRegion}}",
-    "pagina_toelichting": "Door het aantal positief gesteste mensen bij te houden krijgen we een duidelijk beeld van hoe snel het virus zich verspreid voordat het de intensive care bereikt. Hierdoor blijven we voorbereid.",
-    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "screen_reader_graph_content": "{{value}} positief geteste personen.",
-    "barscale_titel": "Gemiddeld aantal positief geteste mensen per 100.00 inwoners",
-    "barscale_toelichting": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
-    "barscale_screenreader_text": "{{value}} positief geteste mensen per dag.",
-    "kpi_titel": "Aantal positief geteste mensen:",
-    "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn en COVID-19 hebben.",
-    "map_titel": "Verdeling positief geteste mensen in Nederland",
-    "map_toelichting": "Deze grafieken laten zien hoe de verdeling van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
-    "linechart_titel": "Verloop over tijd",
-    "linechart_toelichting": "Deze grafieken laten zien hoe de verdeling van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
-    "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
-    "barchart_toelichting": "Deze grafiek toont de trend van het aantal positieve tests over leeftijdsgroepen.",
-    "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
-    "bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
-      "text": "RIVM"
-    }
-  },
-  "veiligheidsregio_rioolwater_metingen": {
-    "titel_sidebar": "Rioolwatermeting",
-    "titel": "Rioolwatermeting in {{safetyRegion}}",
-    "pagina_toelichting": "Het aantal virusdeeltjes in een milliliter rioolwater, afkomstig van circa 80 locaties in Nederland. Voor het landelijke cijfer wordt uitgegaan van het totaal aantal virusdeeltjes dat wordt aangetroffen in een week, gedeeld door het totaal aantal locaties waar de data van afkomstig is. Het aantal meetpunten wordt vanaf september verder uitgebreid naar meer dan 300.",
-    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
-    "screen_reader_graph_content": "{{value}} virusdeeltjes in een milliliter rioolwater.",
-    "barscale_titel": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater",
-    "extra_uitleg": "Voor het landelijke cijfer wordt uitgegaan van het totaal aantal virusdeeltjes dat wordt aangetroffen in een week, gedeeld door het totaal aantal locaties waar de data van afkomstig is.",
-    "barscale_screenreader_text": "{{value}} virusdeeltjes in een milliliter rioolwater, afkomstig van 28 locaties in Nederland.",
-    "linechart_titel": "Verloop over tijd",
-    "bar_chart_title": "Laatste bekende waarde per RWZI-locatie in {{safetyRegion}}",
-    "bar_chart_axis_title": "Aantal virusdeeltjes in milliliter rioolwater",
-    "bron": {
-      "text": "RIVM Onderzoek rioolwater",
-      "href": "https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater"
-    },
-    "graph_average_label_text": "Gemiddelde waarde van gemeten locaties.",
-    "graph_secondary_label_text": "Gemeten waarde per locatie.",
-    "graph_average_label_text_rwzi": "Waarde van RWZI-locatie {{name}}",
-    "average": "Gemiddelde"
-  },
-  "gemeente_ziekenhuisopnames_per_dag": {
-    "titel_sidebar": "Ziekenhuisopnames per dag",
-    "titel": "Ziekenhuisopnames per dag in {{municipality}}",
-    "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen.",
-    "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
-    "screen_reader_graph_content": "{{value}} opnames.",
-    "barscale_titel": "Ziekenhuisopnames per dag",
-    "extra_uitleg": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen.",
-    "map_titel": "Verdeling ziekenhuisopnames in Nederland",
-    "map_toelichting": "Deze grafieken laten zien hoe de verdeling van ziekenhuisopnames is in Nederland per dag.",
-    "linechart_titel": "Ziekenhuisopnames over tijd",
-    "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
-    "bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
-      "text": "RIVM"
-    }
-  },
-  "gemeente_positief_geteste_personen": {
-    "titel_sidebar": "Positief geteste mensen",
-    "titel": "Positief geteste mensen in {{municipality}}",
-    "pagina_toelichting": "Door het aantal positief gesteste mensen bij te houden krijgen we een duidelijk beeld van hoe snel het virus zich verspreid voordat het de intensive care bereikt. Hierdoor blijven we voorbereid.",
-    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "screen_reader_graph_content": "{{value}} positief geteste personen.",
-    "barscale_titel": "Gemiddeld aantal positief geteste mensen per 100.00 inwoners",
-    "barscale_toelichting": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
-    "barscale_screenreader_text": "{{value}} positief geteste mensen per dag.",
-    "kpi_titel": "Aantal positief geteste mensen:",
-    "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn en COVID-19 hebben.",
-    "map_titel": "Verdeling positief geteste mensen in Nederland",
-    "map_toelichting": "Deze grafieken laten zien hoe de verdeling van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
-    "linechart_titel": "Verloop over tijd",
-    "linechart_toelichting": "Deze grafieken laten zien hoe de verdeling van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
-    "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
-    "barchart_toelichting": "Deze grafiek toont de trend van het aantal positieve tests over leeftijdsgroepen.",
-    "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
-    "bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
-      "text": "RIVM"
-    }
-  },
-  "gemeente_rioolwater_metingen": {
-    "titel_sidebar": "Rioolwatermeting",
-    "titel": "Rioolwatermeting in {{municipality}}",
-    "pagina_toelichting": "Het aantal virusdeeltjes in een milliliter rioolwater, afkomstig van circa 80 locaties in Nederland. Voor het landelijke cijfer wordt uitgegaan van het totaal aantal virusdeeltjes dat wordt aangetroffen in een week, gedeeld door het totaal aantal locaties waar de data van afkomstig is. Het aantal meetpunten wordt vanaf september verder uitgebreid naar meer dan 300.",
-    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
-    "screen_reader_graph_content": "{{value}} virusdeeltjes in een milliliter rioolwater.",
-    "barscale_titel": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater",
-    "extra_uitleg": "Voor het landelijke cijfer wordt uitgegaan van het totaal aantal virusdeeltjes dat wordt aangetroffen in een week, gedeeld door het totaal aantal locaties waar de data van afkomstig is.",
-    "barscale_screenreader_text": "{{value}} virusdeeltjes in een milliliter rioolwater, afkomstig van 28 locaties in Nederland.",
-    "linechart_titel": "Verloop over tijd",
-    "bar_chart_title": "Laatste bekende waarde per RWZI-locatie in {{municipality}}",
-    "bar_chart_axis_title": "Aantal virusdeeltjes in milliliter rioolwater",
-    "bron": {
-      "text": "RIVM Onderzoek rioolwater",
-      "href": "https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater"
-    },
-    "graph_average_label_text": "Gemiddelde waarde van gemeten locaties.",
-    "graph_secondary_label_text": "Gemeten waarde per locatie.",
-    "graph_average_label_text_rwzi": "Waarde van RWZI-locatie {{name}}",
-    "average": "Gemiddelde"
   },
   "terug_naar_regio_selectie": {
     "text": "Terug naar regio selectie"
@@ -568,11 +430,6 @@
     "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
     "url": "https://coronadashboard.rijksoverheid.nl/regio"
   },
-  "veiligheidsregio_metadata": {
-    "title": "Regionaal Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
-    "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
-    "url": "https://coronadashboard.rijksoverheid.nl/regio"
-  },
   "verantwoording_metadata": {
     "title": "Cijferverantwoording Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
     "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
@@ -600,14 +457,14 @@
     "date_yesterday": "gisteren"
   },
   "regionaal_index": {
+    "your_safety_region": "Veiligheidsregio",
+    "select_safety_region_municipality": "Selecteer een veiligheidsregio of gemeente",
     "label_municipalities": "Gemeentes",
     "label_safety_regions": "Veiligheidsregio's",
     "select_municipality": "Selecteer een gemeente",
     "select_region_municipality_legend": "Selecteer een gemeente:",
     "select_region_type_legend": "Toon cijfers van:",
-    "select_safety_region_municipality": "Selecteer een veiligheidsregio of gemeente",
-    "your_municipality": "Gemeente",
-    "your_safety_region": "Veiligheidsregio"
+    "your_municipality": "Gemeente"
   },
   "common": {
     "metadata": {
@@ -624,5 +481,166 @@
     "default_description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
     "default_title": "Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
     "default_url": "https://coronadashboard.rijksoverheid.nl"
+  },
+  "no_data_for_this_municipality": {
+    "text": "Deze informatie is niet beschikbaar voor deze gemeente."
+  },
+  "nationaal_layout": {
+    "headings": {
+      "medisch": "Medische indicatoren",
+      "overig": "Overige indicatoren",
+      "verpleeghuis": "Verpleeghuiszorg"
+    }
+  },
+  "veiligheidsregio_layout": {
+    "headings": {
+      "medisch": "Medische indicatoren",
+      "overig": "Overige indicatoren",
+      "verpleeghuis": "Verpleeghuiszorg"
+    }
+  },
+  "veiligheidsregio_metadata": {
+    "title": "Regionaal Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
+    "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
+    "url": "https://coronadashboard.rijksoverheid.nl/regio"
+  },
+  "gemeente_metadata": {
+    "title": "Gemeente"
+  },
+  "veiligheidsregio_ziekenhuisopnames_per_dag": {
+    "titel_sidebar": "Ziekenhuisopnames per dag",
+    "titel": "Ziekenhuisopnames per dag in {{safetyRegion}}",
+    "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen.",
+    "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
+    "screen_reader_graph_content": "{{value}} opnames.",
+    "barscale_titel": "Ziekenhuisopnames per dag",
+    "extra_uitleg": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen.",
+    "map_titel": "Verdeling ziekenhuisopnames in Nederland",
+    "map_toelichting": "Deze grafieken laten zien hoe de verdeling van ziekenhuisopnames is in Nederland per dag.",
+    "linechart_titel": "Ziekenhuisopnames over tijd",
+    "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
+    "bron": {
+      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "text": "RIVM"
+    }
+  },
+  "veiligheidsregio_positief_geteste_personen": {
+    "titel_sidebar": "Positief geteste mensen",
+    "titel": "Positief geteste mensen in {{safetyRegion}}",
+    "pagina_toelichting": "Door het aantal positief geteste mensen bij te houden krijgen we een duidelijk beeld van hoe snel het virus zich verspreid voordat het de intensive care bereikt. Hierdoor blijven we voorbereid.",
+    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "screen_reader_graph_content": "{{value}} positief geteste personen.",
+    "barscale_titel": "Gemiddeld aantal positief geteste mensen per 100.00 inwoners",
+    "barscale_toelichting": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
+    "barscale_screenreader_text": "{{value}} positief geteste mensen per dag.",
+    "kpi_titel": "Aantal positief geteste mensen:",
+    "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn en COVID-19 hebben.",
+    "map_titel": "Verdeling positief geteste mensen in Nederland",
+    "map_toelichting": "Deze grafieken laten zien hoe de verdeling van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
+    "linechart_titel": "Verloop over tijd",
+    "linechart_toelichting": "Deze grafieken laten zien hoe de verdeling van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
+    "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
+    "barchart_toelichting": "Deze grafiek toont de trend van het aantal positieve tests over leeftijdsgroepen.",
+    "barchart_axis_titel": "Totaal aantal positief geteste mensen",
+    "barscale_keys": [
+      "0 tot 20",
+      "20 tot 40",
+      "40 tot 60",
+      "60 tot 80",
+      "80+"
+    ],
+    "bron": {
+      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "text": "RIVM"
+    }
+  },
+  "veiligheidsregio_rioolwater_metingen": {
+    "titel_sidebar": "Rioolwatermeting",
+    "titel": "Rioolwatermeting in {{safetyRegion}}",
+    "pagina_toelichting": "Het aantal virusdeeltjes in een milliliter rioolwater, afkomstig van circa 80 locaties in Nederland. Voor het landelijke cijfer wordt uitgegaan van het totaal aantal virusdeeltjes dat wordt aangetroffen in een week, gedeeld door het totaal aantal locaties waar de data van afkomstig is. Het aantal meetpunten wordt vanaf september verder uitgebreid naar meer dan 300.",
+    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
+    "screen_reader_graph_content": "{{value}} virusdeeltjes in een milliliter rioolwater.",
+    "barscale_titel": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater",
+    "extra_uitleg": "Voor het landelijke cijfer wordt uitgegaan van het totaal aantal virusdeeltjes dat wordt aangetroffen in een week, gedeeld door het totaal aantal locaties waar de data van afkomstig is.",
+    "barscale_screenreader_text": "{{value}} virusdeeltjes in een milliliter rioolwater, afkomstig van 28 locaties in Nederland.",
+    "linechart_titel": "Verloop over tijd",
+    "bar_chart_title": "Laatste bekende waarde per RWZI-locatie in {{safetyRegion}}",
+    "bar_chart_axis_title": "Aantal virusdeeltjes in milliliter rioolwater",
+    "bron": {
+      "text": "RIVM Onderzoek rioolwater",
+      "href": "https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater"
+    },
+    "graph_average_label_text": "Gemiddelde waarde van gemeten locaties.",
+    "graph_secondary_label_text": "Gemeten waarde per locatie.",
+    "graph_average_label_text_rwzi": "Waarde van RWZI-locatie {{name}}",
+    "average": "Gemiddelde"
+  },
+  "gemeente_ziekenhuisopnames_per_dag": {
+    "titel_sidebar": "Ziekenhuisopnames per dag",
+    "titel": "Ziekenhuisopnames per dag in {{municipality}}",
+    "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen.",
+    "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
+    "screen_reader_graph_content": "{{value}} opnames.",
+    "barscale_titel": "Ziekenhuisopnames per dag",
+    "extra_uitleg": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen.",
+    "map_titel": "Verdeling ziekenhuisopnames in Nederland",
+    "map_toelichting": "Deze grafieken laten zien hoe de verdeling van ziekenhuisopnames is in Nederland per dag.",
+    "linechart_titel": "Ziekenhuisopnames over tijd",
+    "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
+    "bron": {
+      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "text": "RIVM"
+    }
+  },
+  "gemeente_positief_geteste_personen": {
+    "titel_sidebar": "Positief geteste mensen",
+    "titel": "Positief geteste mensen in {{municipality}}",
+    "pagina_toelichting": "Door het aantal positief geteste mensen bij te houden krijgen we een duidelijk beeld van hoe snel het virus zich verspreid voordat het de intensive care bereikt. Hierdoor blijven we voorbereid.",
+    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "screen_reader_graph_content": "{{value}} positief geteste personen.",
+    "barscale_titel": "Gemiddeld aantal positief geteste mensen per 100.00 inwoners",
+    "barscale_toelichting": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
+    "barscale_screenreader_text": "{{value}} positief geteste mensen per dag.",
+    "kpi_titel": "Aantal positief geteste mensen:",
+    "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn en COVID-19 hebben.",
+    "map_titel": "Verdeling positief geteste mensen in Nederland",
+    "map_toelichting": "Deze grafieken laten zien hoe de verdeling van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
+    "linechart_titel": "Verloop over tijd",
+    "linechart_toelichting": "Deze grafieken laten zien hoe de verdeling van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
+    "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
+    "barchart_toelichting": "Deze grafiek toont de trend van het aantal positieve tests over leeftijdsgroepen.",
+    "barchart_axis_titel": "Totaal aantal positief geteste mensen",
+    "barscale_keys": [
+      "0 to 20",
+      "20 tot 40",
+      "40 tot 60",
+      "60 tot 80",
+      "80+"
+    ],
+    "bron": {
+      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "text": "RIVM"
+    }
+  },
+  "gemeente_rioolwater_metingen": {
+    "titel_sidebar": "Rioolwatermeting",
+    "titel": "Rioolwatermeting in {{municipality}}",
+    "pagina_toelichting": "Het aantal virusdeeltjes in een milliliter rioolwater, afkomstig van circa 80 locaties in Nederland. Voor het landelijke cijfer wordt uitgegaan van het totaal aantal virusdeeltjes dat wordt aangetroffen in een week, gedeeld door het totaal aantal locaties waar de data van afkomstig is. Het aantal meetpunten wordt vanaf september verder uitgebreid naar meer dan 300.",
+    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
+    "screen_reader_graph_content": "{{value}} virusdeeltjes in een milliliter rioolwater.",
+    "barscale_titel": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater",
+    "extra_uitleg": "Voor het landelijke cijfer wordt uitgegaan van het totaal aantal virusdeeltjes dat wordt aangetroffen in een week, gedeeld door het totaal aantal locaties waar de data van afkomstig is.",
+    "barscale_screenreader_text": "{{value}} virusdeeltjes in een milliliter rioolwater, afkomstig van 80 locaties in Nederland.",
+    "linechart_titel": "Verloop over tijd",
+    "bar_chart_title": "Laatste bekende waarde per RWZI-locatie in {{municipality}}",
+    "bar_chart_axis_title": "Aantal virusdeeltjes in milliliter rioolwater",
+    "bron": {
+      "text": "RIVM Onderzoek rioolwater",
+      "href": "https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater"
+    },
+    "graph_average_label_text": "Gemiddelde waarde van gemeten locaties.",
+    "graph_secondary_label_text": "Gemeten waarde per locatie.",
+    "graph_average_label_text_rwzi": "Waarde van RWZI-locatie {{name}}",
+    "average": "Gemiddelde"
   }
 }
