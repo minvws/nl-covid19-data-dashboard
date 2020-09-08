@@ -12,15 +12,18 @@ function filterFeatures<
 >(
   collection: FeatureCollection<K, T>,
   key: keyof T,
-  value: T[keyof T]
+  value: T[keyof T][]
 ): FeatureCollection<K, T> {
-  collection.features = collection.features.filter(
-    (feat: Feature<K, T>): boolean =>
-      feat.properties &&
-      typeof key === 'string' &&
-      feat.properties[key] === value
-  );
-  return collection;
+  const result = {
+    ...collection,
+    features: collection.features.filter(
+      (feat: Feature<K, T>): boolean =>
+        feat.properties &&
+        typeof key === 'string' &&
+        value.indexOf(feat.properties[key]) > -1
+    ),
+  };
+  return result;
 }
 
 export default filterFeatures;

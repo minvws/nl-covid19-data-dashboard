@@ -9,11 +9,11 @@ import Ziekenhuis from 'assets/ziekenhuis.svg';
 import siteText from 'locale';
 
 import { IntakeHospitalMa } from 'types/data';
-import MunicipalityMap from 'components/mapChart/MunicipalityMap';
 import { useState } from 'react';
-import SafetyRegionMap from 'components/mapChart/SafetyRegionMap';
-import ChartRegionControls from 'components/chartRegionControls';
 import getNlData, { INationalData } from 'static-props/nl-data';
+import ChartRegionControls from 'components/chartRegionControls';
+import MunicipalityMap from 'components/vx/MunicipalityMap';
+import SafetyRegionMap from 'components/vx/SafetyRegionMap';
 
 const text: typeof siteText.ziekenhuisopnames_per_dag =
   siteText.ziekenhuisopnames_per_dag;

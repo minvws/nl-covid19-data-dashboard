@@ -72,6 +72,7 @@
     "lint-staged": "^10.2.11",
     "next-compose-plugins": "^2.2.0",
     "next-optimized-images": "^2.6.1",
+    "next-transpile-modules": "^4.1.0",
     "node-sass": "^4.14.1",
     "prettier": "^2.0.5",
     "react-refresh": "^0.8.3",

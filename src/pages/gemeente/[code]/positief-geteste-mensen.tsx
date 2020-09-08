@@ -16,8 +16,7 @@ import {
   getMunicipalityPaths,
   IMunicipalityData,
 } from 'static-props/municipality-data';
-import MunicipalityMap from 'components/mapChart/MunicipalityMap';
-import getSafetyRegionForMunicipal from 'utils/getSafetyRegionForMunicipal';
+import MunicipalityMap from 'components/vx/MunicipalityMap';
 
 const text: typeof siteText.gemeente_positief_geteste_personen =
   siteText.gemeente_positief_geteste_personen;
@@ -49,8 +48,6 @@ export function PostivelyTestedPeopleBarScale(props: {
 
 const PostivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
   const { data } = props;
-
-  const municipalCodes = getSafetyRegionForMunicipal(data.code);
 
   const positivelyTestedPeople: PositiveTestedPeople | undefined =
     data?.positive_tested_people;
@@ -119,14 +116,11 @@ const PostivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
         </div>
 
         <div className="column-item column-item-extra-margin">
-          {municipalCodes && (
-            <MunicipalityMap
-              selected={data.code}
-              municipalCodes={municipalCodes}
-              metric="positive_tested_people"
-              gradient={['#9DDEFE', '#0290D6']}
-            />
-          )}
+          <MunicipalityMap
+            selected={data.code}
+            metric="positive_tested_people"
+            gradient={['#9DDEFE', '#0290D6']}
+          />
         </div>
       </article>
     </>

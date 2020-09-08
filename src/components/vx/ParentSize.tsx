@@ -15,19 +15,12 @@ export type ParentSizeProps = {
   children: (
     args: {
       ref: HTMLDivElement | null;
-      resize: (state: ParentSizeState) => void;
-    } & ParentSizeState
+      resize: (state: any) => void;
+    } & any
   ) => React.ReactNode;
 };
 
-type ParentSizeState = {
-  width: number;
-  height: number;
-  top: number;
-  left: number;
-};
-
-export type ParentSizeProvidedProps = ParentSizeState;
+export type ParentSizeProvidedProps = any;
 
 export type IProps = ParentSizeProps &
   Omit<JSX.IntrinsicElements['div'], keyof ParentSizeProps>;
@@ -52,7 +45,7 @@ export default function ParentSize(props: IProps) {
   const ref = useRef<HTMLDivElement | null>(null);
 
   const resize = debounce(
-    ({ width, height, top, left }: ParentSizeState) => {
+    ({ width, height, top, left }) => {
       setWidth(width);
       setHeight(height);
       setTop(top);
@@ -63,9 +56,7 @@ export default function ParentSize(props: IProps) {
   );
 
   useEffect(() => {
-    resizeObserver.current = new ResizeObserver((
-      entries = [] /** , observer */
-    ) => {
+    resizeObserver.current = new ResizeObserver((entries = []) => {
       entries.forEach((entry) => {
         const { left, top, width, height } = entry.contentRect;
         animationFrameID.current = window.requestAnimationFrame(() => {
@@ -83,7 +74,7 @@ export default function ParentSize(props: IProps) {
         resize.cancel();
       };
     }
-  }, []);
+  }, [resize]);
 
   return (
     <div
@@ -107,5 +98,10 @@ export default function ParentSize(props: IProps) {
 ParentSize.defaultProps = {
   debounceTime: 300,
   enableDebounceLeadingCall: true,
-  parentSizeStyles: { width: '100%', height: '100%', position: 'relative' },
+  parentSizeStyles: {
+    width: '100%',
+    height: '100%',
+    position: 'relative',
+    overflow: 'hidden',
+  },
 };

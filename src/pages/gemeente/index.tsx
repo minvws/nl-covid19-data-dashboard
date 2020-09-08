@@ -1,9 +1,7 @@
 import { FCWithLayout } from 'components/layout';
 import { getMunicipalityLayout } from 'components/layout/MunicipalityLayout';
-import MunicipalityMap, {
-  TMunicipalityPoint,
-} from 'components/mapChart/MunicipalityMap';
 import { useRouter } from 'next/router';
+import MunicipalityMap from 'components/vx/MunicipalityMap';
 
 // Passing `any` to `FCWithLayout` because we
 // can't do `getStaticProps` on this page because we require
@@ -14,7 +12,7 @@ import { useRouter } from 'next/router';
 const Municipality: FCWithLayout<any> = () => {
   const router = useRouter();
 
-  const onSelectMunicpal = (context: TMunicipalityPoint) => {
+  const onSelectMunicpal = (context: any) => {
     router.push(
       '/gemeente/[code]/positief-geteste-mensen',
       `/gemeente/${context.gemcode}/positief-geteste-mensen`
