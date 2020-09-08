@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-import useSWR from 'swr';
 
 import BarScale from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
@@ -10,11 +9,16 @@ import Ziekenhuis from 'assets/ziekenhuis.svg';
 
 import siteText from 'locale';
 
-import { ResultsPerRegion, Regionaal } from 'types/data';
+import { ResultsPerRegion } from 'types/data';
 import { LineChart } from 'components/charts/index';
 import replaceVariablesInText from 'utils/replaceVariablesInText';
 import MunicipalityMap from 'components/mapChart/MunicipalityMap';
 import regionCodeToMunicipalCodeLookup from 'data/regionCodeToMunicipalCodeLookup';
+import {
+  getSafetyRegionData,
+  getSafetyRegionPaths,
+  ISafetyRegionData,
+} from 'static-props/safetyregion-data';
 
 const text: typeof siteText.veiligheidsregio_ziekenhuisopnames_per_dag =
   siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
@@ -53,10 +57,10 @@ export function IntakeHospitalBarScale(props: {
   );
 }
 
-const IntakeHospital: FCWithLayout = () => {
+const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
   const router = useRouter();
   const { code } = router.query;
-  const { data } = useSWR<Regionaal>(`/json/${code}.json`);
+  const { data } = props;
 
   const resultsPerRegion: ResultsPerRegion | undefined =
     data?.results_per_region;
@@ -71,7 +75,7 @@ const IntakeHospital: FCWithLayout = () => {
       <ContentHeader
         category="Medische indicatoren"
         title={replaceVariablesInText(text.titel, {
-          safetyRegion: 'Veiligheidsregionaam',
+          safetyRegion: data.name,
         })}
         Icon={Ziekenhuis}
         subtitle={text.pagina_toelichting}
@@ -128,5 +132,8 @@ const IntakeHospital: FCWithLayout = () => {
 };
 
 IntakeHospital.getLayout = getSafetyRegionLayout();
+
+export const getStaticProps = getSafetyRegionData();
+export const getStaticPaths = getSafetyRegionPaths();
 
 export default IntakeHospital;

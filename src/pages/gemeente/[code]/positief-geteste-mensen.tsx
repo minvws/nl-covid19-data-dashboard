@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import BarScale from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
 import { getMunicipalityLayout } from 'components/layout/MunicipalityLayout';
@@ -10,9 +9,15 @@ import { ContentHeader } from 'components/layout/Content';
 
 import Getest from 'assets/test.svg';
 import formatDecimal from 'utils/formatNumber';
-import { PositiveTestedPeople, Municipal } from 'types/data';
-import useSWR from 'swr';
+import { PositiveTestedPeople } from 'types/data';
 import replaceVariablesInText from 'utils/replaceVariablesInText';
+import {
+  getMunicipalityData,
+  getMunicipalityPaths,
+  IMunicipalityData,
+} from 'static-props/municipality-data';
+import MunicipalityMap from 'components/mapChart/MunicipalityMap';
+import getSafetyRegionForMunicipal from 'utils/getSafetyRegionForMunicipal';
 
 const text: typeof siteText.gemeente_positief_geteste_personen =
   siteText.gemeente_positief_geteste_personen;
@@ -42,10 +47,10 @@ export function PostivelyTestedPeopleBarScale(props: {
   );
 }
 
-const PostivelyTestedPeople: FCWithLayout = () => {
-  const router = useRouter();
-  const { code } = router.query;
-  const { data } = useSWR<Municipal>(`/json/${code}.json`);
+const PostivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
+  const { data } = props;
+
+  const municipalCodes = getSafetyRegionForMunicipal(data.code);
 
   const positivelyTestedPeople: PositiveTestedPeople | undefined =
     data?.positive_tested_people;
@@ -55,7 +60,8 @@ const PostivelyTestedPeople: FCWithLayout = () => {
       <ContentHeader
         category="Medische indicatoren"
         title={replaceVariablesInText(text.titel, {
-          municipality: 'Gemeentenaam',
+          municipality:
+            data.positive_tested_people.last_value.municipality_name,
         })}
         Icon={Getest}
         subtitle={text.pagina_toelichting}
@@ -105,10 +111,31 @@ const PostivelyTestedPeople: FCWithLayout = () => {
           />
         )}
       </article>
+
+      <article className="metric-article layout-two-column">
+        <div className="column-item column-item-extra-margin">
+          <h3>{text.map_titel}</h3>
+          <p>{text.map_toelichting}</p>
+        </div>
+
+        <div className="column-item column-item-extra-margin">
+          {municipalCodes && (
+            <MunicipalityMap
+              selected={data.code}
+              municipalCodes={municipalCodes}
+              metric="positive_tested_people"
+              gradient={['#9DDEFE', '#0290D6']}
+            />
+          )}
+        </div>
+      </article>
     </>
   );
 };
 
 PostivelyTestedPeople.getLayout = getMunicipalityLayout();
+
+export const getStaticProps = getMunicipalityData();
+export const getStaticPaths = getMunicipalityPaths();
 
 export default PostivelyTestedPeople;

@@ -1,7 +1,5 @@
 import Link from 'next/link';
 import Head from 'next/head';
-import { useState } from 'react';
-import useSWR from 'swr';
 import { useRouter } from 'next/router';
 
 import TitleWithIcon from 'components/titleWithIcon';
@@ -21,17 +19,25 @@ import siteText from 'locale';
 import { WithChildren } from 'types';
 
 import useMediaQuery from 'utils/useMediaQuery';
-import { Municipal } from 'types/data';
 
 import municipalities from 'data/gemeente_veiligheidsregio.json';
+import { IMunicipalityData } from 'static-props/municipality-data';
 
 export default MunicipalityLayout;
 
-export type TMunicipality = typeof municipalities;
+interface IMunicipality {
+  name: string;
+  safetyRegion: string;
+  gemcode: string;
+}
+
 export function getMunicipalityLayout() {
-  return function (page: React.ReactNode): React.ReactNode {
+  return function (
+    page: React.ReactNode,
+    pageProps: IMunicipalityData
+  ): React.ReactNode {
     return getSiteLayout(siteText.gemeente_metadata)(
-      <MunicipalityLayout>{page}</MunicipalityLayout>
+      <MunicipalityLayout {...pageProps}>{page}</MunicipalityLayout>
     );
   };
 }
@@ -52,19 +58,16 @@ export function getMunicipalityLayout() {
  * More info on persistent layouts:
  * https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
-function MunicipalityLayout(props: WithChildren) {
-  const { children } = props;
+function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
+  const { children, data } = props;
   const router = useRouter();
-  const { code } = router.query;
-  const { data } = useSWR<Municipal>(`/json/${code}.json`);
   const isLargeScreen = useMediaQuery('(min-width: 1000px)', true);
+
+  const { code } = router.query;
+
   const showAside = isLargeScreen || router.route === '/gemeente';
   const showContent = isLargeScreen || router.route !== '/gemeente';
   const showMetricLinks = router.route !== '/gemeente';
-
-  const [selectedMunicipality, setSelectedMunicipality] = useState<
-    TMunicipality[number]
-  >();
 
   // remove focus after navigation
   const blur = (evt: any) => evt.target.blur();
@@ -75,9 +78,7 @@ function MunicipalityLayout(props: WithChildren) {
       : 'metric-link';
   }
 
-  function handleMunicipalitySelect(region: TMunicipality[number]) {
-    setSelectedMunicipality(region);
-
+  function handleMunicipalitySelect(region: IMunicipality) {
     if (isLargeScreen) {
       router.push(
         '/gemeente/[code]/positief-geteste-mensen',
@@ -107,19 +108,19 @@ function MunicipalityLayout(props: WithChildren) {
       <div className="municipality-layout">
         {showAside && (
           <aside className="municipality-aside">
-            <Combobox<TMunicipality[number]>
+            <Combobox<IMunicipality>
               handleSelect={handleMunicipalitySelect}
               options={municipalities}
             />
 
-            {showMetricLinks && selectedMunicipality && (
+            {showMetricLinks && (
               <nav aria-label="metric navigation">
                 <h2>{siteText.nationaal_layout.headings.medisch}</h2>
                 <ul>
                   <li>
                     <Link
                       href="/gemeente/[code]/positief-geteste-mensen"
-                      as={`/gemeente/${selectedMunicipality.gemcode}/positief-geteste-mensen`}
+                      as={`/gemeente/${code}/positief-geteste-mensen`}
                     >
                       <a
                         onClick={blur}
@@ -146,7 +147,7 @@ function MunicipalityLayout(props: WithChildren) {
                   <li>
                     <Link
                       href="/gemeente/[code]/ziekenhuis-opnames"
-                      as={`/gemeente/${selectedMunicipality.gemcode}/ziekenhuis-opnames`}
+                      as={`/gemeente/${code}/ziekenhuis-opnames`}
                     >
                       <a
                         onClick={blur}
@@ -176,7 +177,7 @@ function MunicipalityLayout(props: WithChildren) {
                   <li>
                     <Link
                       href="/gemeente/[code]/rioolwater"
-                      as={`/gemeente/${selectedMunicipality.gemcode}/rioolwater`}
+                      as={`/gemeente/${code}/rioolwater`}
                     >
                       <a
                         onClick={blur}
