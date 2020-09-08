@@ -127,7 +127,7 @@ export default function MunicipalityMap(props: TProps) {
           left={info.tooltipLeft}
           top={info.tooltipTop}
         >
-          {municipalityInfo[info.tooltipData.gmcode].name}:<br />
+          {municipalityInfo[info.tooltipData.gmcode]?.name}:<br />
           <strong>{info.tooltipData.value}</strong>
         </TooltipInPortal>
       )}
