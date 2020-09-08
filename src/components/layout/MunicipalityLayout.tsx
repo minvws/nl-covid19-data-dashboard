@@ -66,13 +66,11 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
 
   const { code } = router.query;
 
-  const showAside = isLargeScreen || router.route === '/gemeente';
-  const showContent = isLargeScreen || router.route !== '/gemeente';
   const showMetricLinks = router.route !== '/gemeente';
-  const showBackButton =
-    useMediaQuery('(max-width: 1000px)', false) &&
-    router.route !== '/gemeente' &&
-    router.route !== '/gemeente/[code]';
+
+  const isMainRoute =
+    router.route === '/gemeente' || router.route === `/gemeente/[code]`;
+  const displayTendency = isMainRoute ? 'aside' : 'content';
 
   // remove focus after navigation
   const blur = (evt: any) => evt.target.blur();
@@ -109,9 +107,10 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
           title="Nederland"
         />
       </Head>
-
-      <div className="municipality-layout">
-        {showBackButton && (
+      <div
+        className={`municipality-layout  small-screen-${displayTendency}-tendency`}
+      >
+        {!isMainRoute && (
           <Link href="/gemeente/[code]" as={`/gemeente/${code}`}>
             <a className="back-button">
               <Arrow />
@@ -119,107 +118,105 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
             </a>
           </Link>
         )}
-        {showAside && (
-          <aside className="municipality-aside">
-            <Combobox<IMunicipality>
-              placeholder={siteText.common.zoekveld_placeholder_gemeente}
-              handleSelect={handleMunicipalitySelect}
-              options={municipalities}
-            />
+        <aside className="municipality-aside">
+          <Combobox<IMunicipality>
+            placeholder={siteText.common.zoekveld_placeholder_gemeente}
+            handleSelect={handleMunicipalitySelect}
+            options={municipalities}
+          />
 
-            {showMetricLinks && (
-              <nav aria-label="metric navigation">
-                <h2>{siteText.nationaal_layout.headings.medisch}</h2>
-                <ul>
-                  <li>
-                    <Link
-                      href="/gemeente/[code]/positief-geteste-mensen"
-                      as={`/gemeente/${code}/positief-geteste-mensen`}
+          {showMetricLinks && (
+            <nav aria-label="metric navigation">
+              <h2>{siteText.nationaal_layout.headings.medisch}</h2>
+              <ul>
+                <li>
+                  <Link
+                    href="/gemeente/[code]/positief-geteste-mensen"
+                    as={`/gemeente/${code}/positief-geteste-mensen`}
+                  >
+                    <a
+                      onClick={blur}
+                      className={getClassName(
+                        `/veiligheidsregio/[code]/positief-geteste-mensen`
+                      )}
                     >
-                      <a
-                        onClick={blur}
-                        className={getClassName(
-                          `/veiligheidsregio/[code]/positief-geteste-mensen`
-                        )}
-                      >
-                        <TitleWithIcon
-                          Icon={GetestIcon}
-                          title={
-                            siteText.gemeente_positief_geteste_personen
-                              .titel_sidebar
-                          }
+                      <TitleWithIcon
+                        Icon={GetestIcon}
+                        title={
+                          siteText.gemeente_positief_geteste_personen
+                            .titel_sidebar
+                        }
+                      />
+                      <span>
+                        <PostivelyTestedPeopleBarScale
+                          data={data?.positive_tested_people}
                         />
-                        <span>
-                          <PostivelyTestedPeopleBarScale
-                            data={data?.positive_tested_people}
-                          />
-                        </span>
-                      </a>
-                    </Link>
-                  </li>
+                      </span>
+                    </a>
+                  </Link>
+                </li>
 
-                  <li>
-                    <Link
-                      href="/gemeente/[code]/ziekenhuis-opnames"
-                      as={`/gemeente/${code}/ziekenhuis-opnames`}
+                <li>
+                  <Link
+                    href="/gemeente/[code]/ziekenhuis-opnames"
+                    as={`/gemeente/${code}/ziekenhuis-opnames`}
+                  >
+                    <a
+                      onClick={blur}
+                      className={getClassName(
+                        `/veiligheidsregio/[code]/ziekenhuis-opnames`
+                      )}
                     >
-                      <a
-                        onClick={blur}
-                        className={getClassName(
-                          `/veiligheidsregio/[code]/ziekenhuis-opnames`
-                        )}
-                      >
-                        <TitleWithIcon
-                          Icon={Ziekenhuis}
-                          title={
-                            siteText.gemeente_ziekenhuisopnames_per_dag
-                              .titel_sidebar
-                          }
+                      <TitleWithIcon
+                        Icon={Ziekenhuis}
+                        title={
+                          siteText.gemeente_ziekenhuisopnames_per_dag
+                            .titel_sidebar
+                        }
+                      />
+                      <span>
+                        <IntakeHospitalBarScale
+                          data={data?.hospital_admissions}
                         />
-                        <span>
-                          <IntakeHospitalBarScale
-                            data={data?.hospital_admissions}
-                          />
-                        </span>
-                      </a>
-                    </Link>
-                  </li>
-                </ul>
+                      </span>
+                    </a>
+                  </Link>
+                </li>
+              </ul>
 
-                <h2>{siteText.nationaal_layout.headings.overig}</h2>
-                <ul>
-                  <li>
-                    <Link
-                      href="/gemeente/[code]/rioolwater"
-                      as={`/gemeente/${code}/rioolwater`}
+              <h2>{siteText.nationaal_layout.headings.overig}</h2>
+              <ul>
+                <li>
+                  <Link
+                    href="/gemeente/[code]/rioolwater"
+                    as={`/gemeente/${code}/rioolwater`}
+                  >
+                    <a
+                      onClick={blur}
+                      className={getClassName(
+                        `/veiligheidsregio/[code]/rioolwater`
+                      )}
                     >
-                      <a
-                        onClick={blur}
-                        className={getClassName(
-                          `/veiligheidsregio/[code]/rioolwater`
-                        )}
-                      >
-                        <TitleWithIcon
-                          Icon={RioolwaterMonitoring}
-                          title={
-                            siteText.gemeente_rioolwater_metingen.titel_sidebar
-                          }
+                      <TitleWithIcon
+                        Icon={RioolwaterMonitoring}
+                        title={
+                          siteText.gemeente_rioolwater_metingen.titel_sidebar
+                        }
+                      />
+                      <span>
+                        <SewerWaterBarScale
+                          data={getSewerWaterBarScaleData(data)}
                         />
-                        <span>
-                          <SewerWaterBarScale
-                            data={getSewerWaterBarScaleData(data)}
-                          />
-                        </span>
-                      </a>
-                    </Link>
-                  </li>
-                </ul>
-              </nav>
-            )}
-          </aside>
-        )}
+                      </span>
+                    </a>
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+          )}
+        </aside>
 
-        {showContent && <section>{children}</section>}
+        <section className="municipality-content">{children}</section>
       </div>
     </>
   );

@@ -99,10 +99,7 @@
     text-decoration: none;
     z-index: 3;
 
-    &:hover {
-      text-decoration: underline;
-    }
-
+    &:hover,
     &:focus {
       text-decoration: underline;
     }
@@ -126,6 +123,24 @@
   }
 }
 
+@media (max-width: 1000px) {
+  .small-screen-aside-tendency {
+    .national-content,
+    .safety-region-content,
+    .municipality-content {
+      display: none;
+    }
+  }
+
+  .small-screen-content-tendency {
+    .national-aside,
+    .safety-region-aside,
+    .municipality-aside {
+      display: none;
+    }
+  }
+}
+
 @media (min-width: 1000px) {
   .national-layout,
   .safety-region-layout,
@@ -140,6 +155,10 @@
 
     & > section {
       max-width: calc(100vw - 25em);
+    }
+
+    .back-button {
+      display: none;
     }
   }
 }
