@@ -65,12 +65,11 @@ export function getNationalLayout() {
 function NationalLayout(props: WithChildren<INationalData>) {
   const { children, data } = props;
   const router = useRouter();
-  const isLargeScreen = useMediaQuery('(min-width: 1000px)', false);
+  const isLargeScreen = useMediaQuery('(min-width: 1000px)');
   const showAside = isLargeScreen || router.route === '/landelijk';
   const showContent = isLargeScreen || router.route !== '/landelijk';
   const showBackButton =
-    useMediaQuery('(max-width: 1000px)', false) &&
-    router.route !== '/landelijk';
+    useMediaQuery('(max-width: 1000px)') && router.route !== '/landelijk';
   // remove focus after navigation
   const blur = (evt: any) => evt.target.blur();
 
@@ -105,7 +104,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
       <div className="national-layout">
         {showBackButton && (
           <Link href="/landelijk">
-            <a className="back-button" href="/landelijk">
+            <a className="back-button">
               <Arrow />
               {siteText.nav.terug_naar_alle_cijfers}
             </a>

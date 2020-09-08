@@ -617,7 +617,8 @@
     "barScale": {
       "signaalwaarde": "Signaalwaarde"
     },
-    "zoekveld_placeholder": "Zoek op gemeente of veiligheidsregio ",
+    "zoekveld_placeholder_regio": "Zoek op veiligheidsregio ",
+    "zoekveld_placeholder_gemeente": "Zoek op gemeente ",
     "zoekveld_geen_resultaten": "Geen resultaten"
   },
   "seoHead": {

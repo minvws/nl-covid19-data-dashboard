@@ -96,6 +96,7 @@
     padding: 1em;
     box-shadow: $box-shadow;
     text-decoration: none;
+    z-index: 3;
 
     &:hover {
       text-decoration: underline;
