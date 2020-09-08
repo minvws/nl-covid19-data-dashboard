@@ -82,6 +82,11 @@ $language-switcher-offset: 55px;
   padding: 0;
   margin: 0;
   display: flex;
+  overflow-x: auto;
+
+  li {
+    white-space: nowrap;
+  }
 
   > li:last-child {
     display: none;

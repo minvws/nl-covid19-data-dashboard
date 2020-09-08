@@ -1,5 +1,4 @@
 const regioData = [
-  { name: 'Nederland', code: 'NL', id: 0 },
   { name: 'Groningen', code: 'VR01', id: 1 },
   { name: 'Friesland', code: 'VR02', id: 2 },
   { name: 'Drenthe', code: 'VR03', id: 3 },

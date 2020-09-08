@@ -13,6 +13,7 @@ import Combobox from 'components/comboBox';
 import GetestIcon from 'assets/test.svg';
 import Ziekenhuis from 'assets/ziekenhuis.svg';
 import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
+import Arrow from 'assets/arrow.svg';
 
 import siteText from 'locale';
 import safetyRegions from 'data/index';
@@ -70,6 +71,10 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
   const showAside = isLargeScreen || router.route === '/veiligheidsregio';
   const showContent = isLargeScreen || router.route !== '/veiligheidsregio';
   const showMetricLinks = router.route !== '/veiligheidsregio';
+  const showBackButton =
+    useMediaQuery('(max-width: 1000px)', false) &&
+    router.route !== '/veiligheidsregio' &&
+    router.route !== '/veiligheidsregio/[code]';
   // remove focus after navigation
   const blur = (evt: any) => evt.target.blur();
 
@@ -110,9 +115,21 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
       </Head>
 
       <div className="safety-region-layout">
+        {showBackButton && (
+          <Link
+            href="/veiligheidsregio/[code]"
+            as={`/veiligheidsregio/${code}`}
+          >
+            <a className="back-button">
+              <Arrow />
+              {siteText.nav.terug_naar_alle_cijfers}
+            </a>
+          </Link>
+        )}
         {showAside && (
           <aside className="safety-region-aside">
             <Combobox<TSafetyRegion>
+              placeholder={siteText.common.zoekveld_placeholder_regio}
               handleSelect={handleSafeRegionSelect}
               options={safetyRegions}
             />

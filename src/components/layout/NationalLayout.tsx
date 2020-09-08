@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 
 import TitleWithIcon from 'components/titleWithIcon';
 import { getLayout as getSiteLayout } from 'components/layout';
@@ -65,20 +64,13 @@ export function getNationalLayout() {
 function NationalLayout(props: WithChildren<INationalData>) {
   const { children, data } = props;
   const router = useRouter();
-  const isLargeScreen = useMediaQuery('(min-width: 1000px)', false);
+  const isLargeScreen = useMediaQuery('(min-width: 1000px)');
   const showAside = isLargeScreen || router.route === '/landelijk';
   const showContent = isLargeScreen || router.route !== '/landelijk';
   const showBackButton =
-    useMediaQuery('(max-width: 1000px)', false) &&
-    router.route !== '/landelijk';
+    useMediaQuery('(max-width: 1000px)') && router.route !== '/landelijk';
   // remove focus after navigation
   const blur = (evt: any) => evt.target.blur();
-
-  useEffect(() => {
-    if (isLargeScreen && router.route === '/landelijk') {
-      router.push('/landelijk/positief-geteste-mensen');
-    }
-  }, [isLargeScreen, router]);
 
   function getClassName(path: string) {
     return router.pathname === path
@@ -105,7 +97,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
       <div className="national-layout">
         {showBackButton && (
           <Link href="/landelijk">
-            <a className="back-button" href="/landelijk">
+            <a className="back-button">
               <Arrow />
               {siteText.nav.terug_naar_alle_cijfers}
             </a>
@@ -138,6 +130,27 @@ function NationalLayout(props: WithChildren<INationalData>) {
                 </li>
 
                 <li>
+                  <Link href="/landelijk/besmettelijke-mensen">
+                    <a
+                      onClick={blur}
+                      className={getClassName(
+                        '/landelijk/besmettelijke-mensen'
+                      )}
+                    >
+                      <TitleWithIcon
+                        Icon={Ziektegolf}
+                        title={siteText.besmettelijke_personen.title}
+                      />
+                      <span>
+                        <InfectiousPeopleBarScale
+                          data={data?.infectious_people_count_normalized}
+                        />
+                      </span>
+                    </a>
+                  </Link>
+                </li>
+
+                <li>
                   <Link href="/landelijk/reproductiegetal">
                     <a
                       onClick={blur}
@@ -153,27 +166,6 @@ function NationalLayout(props: WithChildren<INationalData>) {
                           lastKnown={
                             data?.reproduction_index_last_known_average
                           }
-                        />
-                      </span>
-                    </a>
-                  </Link>
-                </li>
-
-                <li>
-                  <Link href="/landelijk/besmettelijke-mensen">
-                    <a
-                      onClick={blur}
-                      className={getClassName(
-                        '/landelijk/besmettelijke-mensen'
-                      )}
-                    >
-                      <TitleWithIcon
-                        Icon={Ziektegolf}
-                        title={siteText.besmettelijke_personen.title}
-                      />
-                      <span>
-                        <InfectiousPeopleBarScale
-                          data={data?.infectious_people_count_normalized}
                         />
                       </span>
                     </a>
