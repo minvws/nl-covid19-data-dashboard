@@ -48,6 +48,13 @@
       "items": {
         "$ref": "deceased.json"
       }
+    },
+    "escalation_levels": {
+      "type": "array",
+      "maxItems": 25,
+      "items": {
+        "$ref": "escalation_levels.json"
+      }
     }
   }
 }
