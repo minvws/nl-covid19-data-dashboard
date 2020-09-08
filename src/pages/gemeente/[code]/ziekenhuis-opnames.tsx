@@ -120,7 +120,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
               selected={data.code}
               municipalCodes={municipalCodes}
               metric="hospital_admissions"
-              gradient={['#69c253', '#f35065']}
+              gradient={['#9DDEFE', '#0290D6']}
             />
           )}
         </div>

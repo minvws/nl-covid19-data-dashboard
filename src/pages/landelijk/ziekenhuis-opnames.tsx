@@ -99,13 +99,13 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
           {selectedMap === 'municipal' && (
             <MunicipalityMap
               metric="hospital_admissions"
-              gradient={['#69c253', '#f35065']}
+              gradient={['#9DDEFE', '#0290D6']}
             />
           )}
           {selectedMap === 'region' && (
             <SafetyRegionMap
               metric="hospital_admissions"
-              gradient={['#69c253', '#f35065']}
+              gradient={['#9DDEFE', '#0290D6']}
             />
           )}
         </div>
