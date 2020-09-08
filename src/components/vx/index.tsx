@@ -22,7 +22,7 @@ export default function ResponsiveMap(props: IProps) {
   console.log(width, height);
   return (
     <div ref={ref} style={{ height: '800px' }}>
-      <MunicipalityMap width={500} height={500} {...props} />
+      <MunicipalityMap width={width} height={height} {...props} />
     </div>
   );
 }

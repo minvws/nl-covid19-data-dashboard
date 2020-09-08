@@ -1,6 +1,8 @@
 import { useTooltip, useTooltipInPortal } from '@vx/tooltip';
 import { localPoint } from '@vx/event';
 
+import { ResizeObserver } from '@juggle/resize-observer';
+
 export type TShowTooltipFunc = (event: any, datum: any) => void;
 export type TTooltipInfo<T> = {
   tooltipData: T;
@@ -32,6 +34,7 @@ export default function useMapTooltip<T>(): [
     detectBounds: true,
     // when tooltip containers are scrolled, this will correctly update the Tooltip position
     scroll: true,
+    polyfill: ResizeObserver,
   });
 
   const handleMouseOver = (event: any, datum: T) => {
