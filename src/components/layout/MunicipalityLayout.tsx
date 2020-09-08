@@ -13,6 +13,7 @@ import { getSewerWaterBarScaleData } from 'utils/sewer-water/municipality-sewer-
 import GetestIcon from 'assets/test.svg';
 import Ziekenhuis from 'assets/ziekenhuis.svg';
 import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
+import Arrow from 'assets/arrow.svg';
 
 import siteText from 'locale';
 
@@ -61,13 +62,17 @@ export function getMunicipalityLayout() {
 function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
   const { children, data } = props;
   const router = useRouter();
-  const isLargeScreen = useMediaQuery('(min-width: 1000px)', true);
+  const isLargeScreen = useMediaQuery('(min-width: 1000px)');
 
   const { code } = router.query;
 
   const showAside = isLargeScreen || router.route === '/gemeente';
   const showContent = isLargeScreen || router.route !== '/gemeente';
   const showMetricLinks = router.route !== '/gemeente';
+  const showBackButton =
+    useMediaQuery('(max-width: 1000px)', false) &&
+    router.route !== '/gemeente' &&
+    router.route !== '/gemeente/[code]';
 
   // remove focus after navigation
   const blur = (evt: any) => evt.target.blur();
@@ -106,9 +111,18 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
       </Head>
 
       <div className="municipality-layout">
+        {showBackButton && (
+          <Link href="/gemeente/[code]" as={`/gemeente/${code}`}>
+            <a className="back-button">
+              <Arrow />
+              {siteText.nav.terug_naar_alle_cijfers}
+            </a>
+          </Link>
+        )}
         {showAside && (
           <aside className="municipality-aside">
             <Combobox<IMunicipality>
+              placeholder={siteText.common.zoekveld_placeholder_gemeente}
               handleSelect={handleMunicipalitySelect}
               options={municipalities}
             />
