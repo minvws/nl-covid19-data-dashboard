@@ -62,6 +62,9 @@
     "deceased_people_nursery_count_daily": {
       "$ref": "deceased_people_nursery_count_daily.json"
     },
+    "infected_people_clusters": {
+      "$ref": "infected_people_clusters.json"
+    },
     "total_reported_locations": {
       "$ref": "total_reported_locations.json"
     },
