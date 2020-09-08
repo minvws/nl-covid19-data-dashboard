@@ -7,9 +7,10 @@ import topology from './safetyregions.topo.json';
 import { FeatureCollection, MultiPolygon } from 'geojson';
 import useMapColorScale from 'utils/useMapColorScale';
 import useMapTooltip from './useMapTooltip';
-import useNewRegionData from 'utils/useNewRegionData';
+import useRegionData from 'utils/useRegionData';
 import { ISafetyRegionMapProps } from './SafetyRegionMap';
 import { TooltipWithBounds } from '@vx/tooltip';
+import sortFeatures from './sortFeatures';
 
 export type SafetyRegionGeoJSON = FeatureCollection<
   MultiPolygon,
@@ -35,7 +36,9 @@ export default function SafetyRegionChloropleth(props: TProps) {
 
   const [selection, setSelection] = useState<string | undefined>(selected);
 
-  const regionData = useNewRegionData(metric);
+  world.features = sortFeatures(world, 'vrcode', selected);
+
+  const regionData = useRegionData(metric);
   const color = useMapColorScale(
     regionData,
     (item: typeof regionData[number]) => item.value,
@@ -90,7 +93,7 @@ export default function SafetyRegionChloropleth(props: TProps) {
                   <path
                     onMouseOver={(event) => showTooltip(event, data)}
                     onMouseOut={hideTooltip}
-                    key={`municipality-map-feature-${i}`}
+                    key={`safetyregion-map-feature-${i}`}
                     d={path || ''}
                     fill={getFillColor(vrcode)}
                     stroke={'black'}

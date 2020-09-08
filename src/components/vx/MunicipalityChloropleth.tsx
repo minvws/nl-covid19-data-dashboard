@@ -5,7 +5,7 @@ import * as topojson from 'topojson-client';
 
 import topology from './municipalities.topo.json';
 import { FeatureCollection, MultiPolygon } from 'geojson';
-import useNewMunicipalityData from 'utils/useNewMunicipalityData';
+import useNewMunicipalityData from 'utils/useMunicipalityData';
 import useMapColorScale from 'utils/useMapColorScale';
 import useMapTooltip from './useMapTooltip';
 import { IResponsiveMunicipalityMapProps } from './MunicipalityMap';
@@ -46,7 +46,7 @@ export default function MunicipalityChloropleth(props: TProps) {
   );
 
   const boundingbox = useMunicipalityFeatures(world, selected);
-  world.features = sortFeatures(world, selected);
+  world.features = sortFeatures(world, 'gemcode', selected);
 
   const getFillColor = (gmCode: string) => {
     const data = municipalityData[gmCode];

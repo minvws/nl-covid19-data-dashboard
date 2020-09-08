@@ -1,19 +1,19 @@
 import { FeatureCollection, MultiPolygon, Feature } from 'geojson';
-import { MunicipalityProperties } from './MunicipalityChloropleth';
 
-export default function sortFeatures(
-  featureCollection: FeatureCollection<MultiPolygon, MunicipalityProperties>,
-  selected?: string
-): Feature<MultiPolygon, MunicipalityProperties>[] {
+export default function sortFeatures<T>(
+  featureCollection: FeatureCollection<MultiPolygon, T>,
+  propertyName: keyof T,
+  selected?: T[keyof T]
+): Feature<MultiPolygon, T>[] {
   if (!selected) {
     return featureCollection.features;
   }
 
   return featureCollection.features.sort((featA, featB): number => {
-    if (featA.properties.gemcode === selected) {
+    if (featA.properties[propertyName] === selected) {
       return 1;
     }
-    if (featB.properties.gemcode === selected) {
+    if (featB.properties[propertyName] === selected) {
       return -1;
     }
     return 0;
