@@ -11,6 +11,7 @@ import useMapTooltip from './useMapTooltip';
 import { IResponsiveMunicipalityMapProps } from './MunicipalityMap';
 import useMunicipalityFeatures from './useMunicipalityFeatures';
 import sortFeatures from './sortFeatures';
+import { TooltipWithBounds } from '@vx/tooltip';
 
 export type MunicipalGeoJOSN = FeatureCollection<
   MultiPolygon,
@@ -66,18 +67,13 @@ export default function MunicipalityChloropleth(props: TProps) {
     return {};
   };
 
-  const [
-    showTooltip,
-    hideTooltip,
-    containerRef,
-    TooltipInPortal,
-    info,
-  ] = useMapTooltip<typeof municipalityData[number] & MunicipalityProperties>();
+  const [showTooltip, hideTooltip, tooltipInfo] = useMapTooltip<
+    typeof municipalityData[number] & MunicipalityProperties
+  >();
 
   return width < 10 ? null : (
     <>
       <svg
-        ref={containerRef}
         width={width}
         height={height}
         style={{ display: 'block', width: '100%' }}
@@ -122,16 +118,26 @@ export default function MunicipalityChloropleth(props: TProps) {
         </Mercator>
       </svg>
 
-      {info?.tooltipOpen && (
-        <TooltipInPortal
+      {tooltipInfo?.tooltipOpen && tooltipInfo.tooltipData && (
+        <TooltipWithBounds
           // set this to random so it correctly updates with parent bounds
           key={Math.random()}
-          left={info.tooltipLeft}
-          top={info.tooltipTop}
+          left={tooltipInfo.tooltipLeft}
+          top={tooltipInfo.tooltipTop}
+          style={{
+            left: `${tooltipInfo?.tooltipLeft}px`,
+            top: `${tooltipInfo?.tooltipTop}px`,
+            position: 'absolute',
+            border: '1px black solid',
+            backgroundColor: 'white',
+            transform: undefined,
+            padding: '.5em',
+            zIndex: 1000,
+          }}
         >
-          <strong>{info.tooltipData.gemnaam}</strong>:<br />
-          {info.tooltipData.value}
-        </TooltipInPortal>
+          <strong>{tooltipInfo.tooltipData?.gemnaam}</strong>:<br />
+          {tooltipInfo.tooltipData?.value}
+        </TooltipWithBounds>
       )}
     </>
   );
