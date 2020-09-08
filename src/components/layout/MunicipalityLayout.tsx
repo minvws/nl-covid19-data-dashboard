@@ -112,7 +112,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
       >
         {!isMainRoute && (
           <Link href="/gemeente/[code]" as={`/gemeente/${code}`}>
-            <a className="back-button" href={`/gemeente/${code}`}>
+            <a className="back-button">
               <Arrow />
               {siteText.nav.terug_naar_alle_cijfers}
             </a>
