@@ -79,14 +79,15 @@
   min-height: 30em;
 
   [data-reach-combobox] {
-    margin: 1em;
+    padding: 1em;
   }
 }
 
 .national-layout,
 .safety-region-layout,
 .municipality-layout {
-  display: flex;
+  /* will become display: flex at wider screens */
+  display: block;
   flex-direction: column;
 
   .back-button {
@@ -107,6 +108,7 @@
     }
 
     > svg {
+      height: 10px;
       width: 16px;
       transform: rotate(90deg);
       margin-right: 0.7em;
@@ -128,6 +130,7 @@
   .national-layout,
   .safety-region-layout,
   .municipality-layout {
+    display: flex;
     flex-direction: row;
 
     & > aside {
@@ -136,7 +139,7 @@
     }
 
     & > section {
-      max-width: 80em;
+      max-width: calc(100vw - 25em);
     }
   }
 }
@@ -151,6 +154,16 @@
   }
 }
 
+@media (min-width: 1600px) {
+  .national-layout,
+  .safety-region-layout,
+  .municipality-layout {
+    & > section {
+      max-width: 80em;
+    }
+  }
+}
+
 .national-aside,
 .safety-region-aside,
 .municipality-aside {
@@ -159,8 +172,8 @@
   z-index: 2;
 
   h2 {
-    margin: 1rem;
-    margin-top: 3rem;
+    padding: 1rem;
+    padding-top: 3rem;
   }
 
   ul {
@@ -198,9 +211,10 @@ a.metric-link {
   &::after {
     content: '';
     background-image: url('/images/chevron.svg');
-    background-size: 1.5em 1.5em;
-    height: 1.5em;
-    width: 1.5em;
+    // match aspect ratio of chevron.svg
+    background-size: 1.1em 1.8em;
+    height: 1.8em;
+    width: 1.1em;
     display: block;
     position: absolute;
     right: 1em;
@@ -218,20 +232,16 @@ a.active-metric-link {
   border-right: 5px solid $red;
 }
 
-.layout-two-column {
-  display: flex;
-  flex-direction: column;
-
-  .column-item {
-    flex: 1 1 50%;
-    display: flex;
-    flex-direction: column;
-  }
-}
-
 @media (min-width: 1200px) {
   .layout-two-column {
+    display: flex;
     flex-direction: row;
+
+    .column-item {
+      flex: 1 1 50%;
+      display: flex;
+      flex-direction: column;
+    }
   }
 
   .column-item {

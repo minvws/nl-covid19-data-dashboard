@@ -224,6 +224,14 @@ $language-switcher-offset: 55px;
   .text {
     display: flex;
     margin-left: 4rem;
+
+    p {
+      flex: 1 1 60%;
+    }
+
+    div {
+      flex: 0 1 40%;
+    }
   }
 }
 
