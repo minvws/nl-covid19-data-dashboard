@@ -13,6 +13,8 @@ import useMunicipalityFeatures from './useMunicipalityFeatures';
 import sortFeatures from './sortFeatures';
 import { TooltipWithBounds } from '@vx/tooltip';
 
+import styles from './chloropleth.module.scss';
+
 export type MunicipalGeoJOSN = FeatureCollection<
   MultiPolygon,
   MunicipalityProperties
@@ -73,11 +75,7 @@ export default function MunicipalityChloropleth(props: TProps) {
 
   return width < 10 ? null : (
     <>
-      <svg
-        width={width}
-        height={height}
-        style={{ display: 'block', width: '100%' }}
-      >
+      <svg width={width} height={height} style={{ display: 'block' }}>
         <rect
           x={0}
           y={0}
@@ -97,13 +95,14 @@ export default function MunicipalityChloropleth(props: TProps) {
                 const data = getData(gemcode, feature.properties);
                 return (
                   <path
+                    shapeRendering="optimizeQuality"
                     onMouseOver={(event) => showTooltip(event, data)}
                     onMouseOut={hideTooltip}
                     key={`municipality-map-feature-${i}`}
                     d={path || ''}
                     fill={getFillColor(gemcode)}
-                    stroke={gemcode === selection ? 'white' : 'black'}
-                    strokeWidth={gemcode === selection ? 2 : 0.5}
+                    stroke={gemcode === selection ? 'black' : 'blue'}
+                    strokeWidth={gemcode === selection ? 3 : 0.5}
                     onClick={() => {
                       if (onSelect) {
                         setSelection(gemcode);
@@ -127,13 +126,9 @@ export default function MunicipalityChloropleth(props: TProps) {
           style={{
             left: `${tooltipInfo?.tooltipLeft}px`,
             top: `${tooltipInfo?.tooltipTop}px`,
-            position: 'absolute',
-            border: '1px black solid',
-            backgroundColor: 'white',
-            transform: undefined,
-            padding: '.5em',
-            zIndex: 1000,
+            transform: 'none',
           }}
+          className={styles.toolTip}
         >
           <strong>{tooltipInfo.tooltipData?.gemnaam}</strong>:<br />
           {tooltipInfo.tooltipData?.value}

@@ -2,6 +2,8 @@ import SafetyRegionChloropleth from './SafetyRegionChloropleth';
 import { TRegionMetricName } from 'utils/useRegionData';
 import useChartDimensions from './use-chart-dimensions';
 
+import styles from './chloropleth.module.scss';
+
 export interface ISafetyRegionMapProps {
   selected?: string;
   metric: TRegionMetricName;
@@ -19,7 +21,7 @@ export default function SafetyRegionMap(props: ISafetyRegionMapProps) {
   const { width, height } = dms;
 
   return (
-    <div ref={ref} style={{ height: '800px' }}>
+    <div ref={ref} className={styles.chloroplethContainer}>
       <SafetyRegionChloropleth width={width} height={height} {...props} />
     </div>
   );

@@ -13,6 +13,7 @@ import Combobox from 'components/comboBox';
 import GetestIcon from 'assets/test.svg';
 import Ziekenhuis from 'assets/ziekenhuis.svg';
 import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
+import Arrow from 'assets/arrow.svg';
 
 import siteText from 'locale';
 import safetyRegions from 'data/index';
@@ -57,7 +58,7 @@ type TSafetyRegion = {
  * - /veiligheidsregio/[metric] -> shows aside and content (children)
  *
  * More info on persistent layouts:
- * https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
+ * https:adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
 function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
   const { children, data } = props;
@@ -67,8 +68,11 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
 
   const { code } = router.query;
 
-  const showAside = isLargeScreen || router.route === '/veiligheidsregio';
-  const showContent = isLargeScreen || router.route !== '/veiligheidsregio';
+  const isMainRoute =
+    router.route === '/veiligheidsregio' ||
+    router.route === `/veiligheidsregio/[code]`;
+  const displayTendency = isMainRoute ? 'aside' : 'content';
+
   const showMetricLinks = router.route !== '/veiligheidsregio';
   // remove focus after navigation
   const blur = (evt: any) => evt.target.blur();
@@ -99,119 +103,131 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
         <link
           key="dc-spatial"
           rel="dcterms:spatial"
-          href="https://standaarden.overheid.nl/owms/terms/Nederland"
+          href="https:standaarden.overheid.nl/owms/terms/Nederland"
         />
         <link
           key="dc-spatial-title"
           rel="dcterms:spatial"
-          href="https://standaarden.overheid.nl/owms/terms/Nederland"
+          href="https:standaarden.overheid.nl/owms/terms/Nederland"
           title="Nederland"
         />
       </Head>
 
-      <div className="safety-region-layout">
-        {showAside && (
-          <aside className="safety-region-aside">
-            <Combobox<TSafetyRegion>
-              handleSelect={handleSafeRegionSelect}
-              options={safetyRegions}
-            />
-
-            {showMetricLinks && (
-              <nav aria-label="metric navigation">
-                <h2>{siteText.veiligheidsregio_layout.headings.medisch}</h2>
-
-                <ul>
-                  <li>
-                    <Link
-                      href="/veiligheidsregio/[code]/positief-geteste-mensen"
-                      as={`/veiligheidsregio/${code}/positief-geteste-mensen`}
-                    >
-                      <a
-                        onClick={blur}
-                        className={getClassName(
-                          `/veiligheidsregio/[code]/positief-geteste-mensen`
-                        )}
-                      >
-                        <TitleWithIcon
-                          Icon={GetestIcon}
-                          title={
-                            siteText.veiligheidsregio_positief_geteste_personen
-                              .titel_sidebar
-                          }
-                        />
-                        <span>
-                          <PostivelyTestedPeopleBarScale
-                            data={data?.results_per_region}
-                          />
-                        </span>
-                      </a>
-                    </Link>
-                  </li>
-
-                  <li>
-                    <Link
-                      href="/veiligheidsregio/[code]/ziekenhuis-opnames"
-                      as={`/veiligheidsregio/${code}/ziekenhuis-opnames`}
-                    >
-                      <a
-                        onClick={blur}
-                        className={getClassName(
-                          `/veiligheidsregio/[code]/ziekenhuis-opnames`
-                        )}
-                      >
-                        <TitleWithIcon
-                          Icon={Ziekenhuis}
-                          title={
-                            siteText.veiligheidsregio_ziekenhuisopnames_per_dag
-                              .titel_sidebar
-                          }
-                        />
-                        <span>
-                          <IntakeHospitalBarScale
-                            data={data?.results_per_region}
-                          />
-                        </span>
-                      </a>
-                    </Link>
-                  </li>
-                </ul>
-
-                <h2>{siteText.veiligheidsregio_layout.headings.overig}</h2>
-                <ul>
-                  <li>
-                    <Link
-                      href="/veiligheidsregio/[code]/rioolwater"
-                      as={`/veiligheidsregio/${code}/rioolwater`}
-                    >
-                      <a
-                        onClick={blur}
-                        className={getClassName(
-                          `/veiligheidsregio/[code]/rioolwater`
-                        )}
-                      >
-                        <TitleWithIcon
-                          Icon={RioolwaterMonitoring}
-                          title={
-                            siteText.veiligheidsregio_rioolwater_metingen
-                              .titel_sidebar
-                          }
-                        />
-                        <span>
-                          <SewerWaterBarScale
-                            data={getSewerWaterBarScaleData(data)}
-                          />
-                        </span>
-                      </a>
-                    </Link>
-                  </li>
-                </ul>
-              </nav>
-            )}
-          </aside>
+      <div
+        className={`safety-region-layout  small-screen-${displayTendency}-tendency`}
+      >
+        {!isMainRoute && (
+          <Link
+            href="/veiligheidsregio/[code]"
+            as={`/veiligheidsregio/${code}`}
+          >
+            <a className="back-button">
+              <Arrow />
+              {siteText.nav.terug_naar_alle_cijfers}
+            </a>
+          </Link>
         )}
+        <aside className="safety-region-aside">
+          <Combobox<TSafetyRegion>
+            placeholder={siteText.common.zoekveld_placeholder_regio}
+            handleSelect={handleSafeRegionSelect}
+            options={safetyRegions}
+          />
 
-        {showContent && <section>{children}</section>}
+          {showMetricLinks && (
+            <nav aria-label="metric navigation">
+              <h2>{siteText.veiligheidsregio_layout.headings.medisch}</h2>
+
+              <ul>
+                <li>
+                  <Link
+                    href="/veiligheidsregio/[code]/positief-geteste-mensen"
+                    as={`/veiligheidsregio/${code}/positief-geteste-mensen`}
+                  >
+                    <a
+                      onClick={blur}
+                      className={getClassName(
+                        `/veiligheidsregio/[code]positief-geteste-mensen`
+                      )}
+                    >
+                      <TitleWithIcon
+                        Icon={GetestIcon}
+                        title={
+                          siteText.veiligheidsregio_positief_geteste_personen
+                            .titel_sidebar
+                        }
+                      />
+                      <span>
+                        <PostivelyTestedPeopleBarScale
+                          data={data?.results_per_region}
+                        />
+                      </span>
+                    </a>
+                  </Link>
+                </li>
+
+                <li>
+                  <Link
+                    href="/veiligheidsregio/[code]/ziekenhuis-opnames"
+                    as={`/veiligheidsregio/${code}/ziekenhuis-opnames`}
+                  >
+                    <a
+                      onClick={blur}
+                      className={getClassName(
+                        `/veiligheidsregio/[code]/ziekenhuis-opnames`
+                      )}
+                    >
+                      <TitleWithIcon
+                        Icon={Ziekenhuis}
+                        title={
+                          siteText.veiligheidsregio_ziekenhuisopnames_per_dag
+                            .titel_sidebar
+                        }
+                      />
+                      <span>
+                        <IntakeHospitalBarScale
+                          data={data?.results_per_region}
+                        />
+                      </span>
+                    </a>
+                  </Link>
+                </li>
+              </ul>
+
+              <h2>{siteText.veiligheidsregio_layout.headings.overig}</h2>
+              <ul>
+                <li>
+                  <Link
+                    href="/veiligheidsregio/[code]/rioolwater"
+                    as={`/veiligheidsregio/${code}/rioolwater`}
+                  >
+                    <a
+                      onClick={blur}
+                      className={getClassName(
+                        `/veiligheidsregio/[code]/rioolwater`
+                      )}
+                    >
+                      <TitleWithIcon
+                        Icon={RioolwaterMonitoring}
+                        title={
+                          siteText.veiligheidsregio_rioolwater_metingen
+                            .titel_sidebar
+                        }
+                      />
+                      <span>
+                        <SewerWaterBarScale
+                          data={getSewerWaterBarScaleData(data)}
+                        />
+                      </span>
+                    </a>
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+          )}
+        </aside>
+
+        <section className="safety-region-content">{children}</section>
       </div>
     </>
   );

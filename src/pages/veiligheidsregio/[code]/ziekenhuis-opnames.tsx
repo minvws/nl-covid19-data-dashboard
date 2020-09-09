@@ -113,7 +113,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
           <MunicipalityMap
             selected={data.code}
             metric="hospital_admissions"
-            gradient={['#69c253', '#f35065']}
+            gradient={['#9DDEFE', '#0290D6']}
           />
         </div>
       </article>

@@ -13,6 +13,7 @@ import { getSewerWaterBarScaleData } from 'utils/sewer-water/municipality-sewer-
 import GetestIcon from 'assets/test.svg';
 import Ziekenhuis from 'assets/ziekenhuis.svg';
 import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
+import Arrow from 'assets/arrow.svg';
 
 import siteText from 'locale';
 
@@ -61,13 +62,15 @@ export function getMunicipalityLayout() {
 function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
   const { children, data } = props;
   const router = useRouter();
-  const isLargeScreen = useMediaQuery('(min-width: 1000px)', true);
+  const isLargeScreen = useMediaQuery('(min-width: 1000px)');
 
   const { code } = router.query;
 
-  const showAside = isLargeScreen || router.route === '/gemeente';
-  const showContent = isLargeScreen || router.route !== '/gemeente';
   const showMetricLinks = router.route !== '/gemeente';
+
+  const isMainRoute =
+    router.route === '/gemeente' || router.route === `/gemeente/[code]`;
+  const displayTendency = isMainRoute ? 'aside' : 'content';
 
   // remove focus after navigation
   const blur = (evt: any) => evt.target.blur();
@@ -104,108 +107,116 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
           title="Nederland"
         />
       </Head>
-
-      <div className="municipality-layout">
-        {showAside && (
-          <aside className="municipality-aside">
-            <Combobox<IMunicipality>
-              handleSelect={handleMunicipalitySelect}
-              options={municipalities}
-            />
-
-            {showMetricLinks && (
-              <nav aria-label="metric navigation">
-                <h2>{siteText.nationaal_layout.headings.medisch}</h2>
-                <ul>
-                  <li>
-                    <Link
-                      href="/gemeente/[code]/positief-geteste-mensen"
-                      as={`/gemeente/${code}/positief-geteste-mensen`}
-                    >
-                      <a
-                        onClick={blur}
-                        className={getClassName(
-                          `/veiligheidsregio/[code]/positief-geteste-mensen`
-                        )}
-                      >
-                        <TitleWithIcon
-                          Icon={GetestIcon}
-                          title={
-                            siteText.gemeente_positief_geteste_personen
-                              .titel_sidebar
-                          }
-                        />
-                        <span>
-                          <PostivelyTestedPeopleBarScale
-                            data={data?.positive_tested_people}
-                          />
-                        </span>
-                      </a>
-                    </Link>
-                  </li>
-
-                  <li>
-                    <Link
-                      href="/gemeente/[code]/ziekenhuis-opnames"
-                      as={`/gemeente/${code}/ziekenhuis-opnames`}
-                    >
-                      <a
-                        onClick={blur}
-                        className={getClassName(
-                          `/veiligheidsregio/[code]/ziekenhuis-opnames`
-                        )}
-                      >
-                        <TitleWithIcon
-                          Icon={Ziekenhuis}
-                          title={
-                            siteText.gemeente_ziekenhuisopnames_per_dag
-                              .titel_sidebar
-                          }
-                        />
-                        <span>
-                          <IntakeHospitalBarScale
-                            data={data?.hospital_admissions}
-                          />
-                        </span>
-                      </a>
-                    </Link>
-                  </li>
-                </ul>
-
-                <h2>{siteText.nationaal_layout.headings.overig}</h2>
-                <ul>
-                  <li>
-                    <Link
-                      href="/gemeente/[code]/rioolwater"
-                      as={`/gemeente/${code}/rioolwater`}
-                    >
-                      <a
-                        onClick={blur}
-                        className={getClassName(
-                          `/veiligheidsregio/[code]/rioolwater`
-                        )}
-                      >
-                        <TitleWithIcon
-                          Icon={RioolwaterMonitoring}
-                          title={
-                            siteText.gemeente_rioolwater_metingen.titel_sidebar
-                          }
-                        />
-                        <span>
-                          <SewerWaterBarScale
-                            data={getSewerWaterBarScaleData(data)}
-                          />
-                        </span>
-                      </a>
-                    </Link>
-                  </li>
-                </ul>
-              </nav>
-            )}
-          </aside>
+      <div
+        className={`municipality-layout  small-screen-${displayTendency}-tendency`}
+      >
+        {!isMainRoute && (
+          <Link href="/gemeente/[code]" as={`/gemeente/${code}`}>
+            <a className="back-button">
+              <Arrow />
+              {siteText.nav.terug_naar_alle_cijfers}
+            </a>
+          </Link>
         )}
+        <aside className="municipality-aside">
+          <Combobox<IMunicipality>
+            placeholder={siteText.common.zoekveld_placeholder_gemeente}
+            handleSelect={handleMunicipalitySelect}
+            options={municipalities}
+          />
 
-        {showContent && <section>{children}</section>}
+          {showMetricLinks && (
+            <nav aria-label="metric navigation">
+              <h2>{siteText.nationaal_layout.headings.medisch}</h2>
+              <ul>
+                <li>
+                  <Link
+                    href="/gemeente/[code]/positief-geteste-mensen"
+                    as={`/gemeente/${code}/positief-geteste-mensen`}
+                  >
+                    <a
+                      onClick={blur}
+                      className={getClassName(
+                        `/veiligheidsregio/[code]/positief-geteste-mensen`
+                      )}
+                    >
+                      <TitleWithIcon
+                        Icon={GetestIcon}
+                        title={
+                          siteText.gemeente_positief_geteste_personen
+                            .titel_sidebar
+                        }
+                      />
+                      <span>
+                        <PostivelyTestedPeopleBarScale
+                          data={data?.positive_tested_people}
+                        />
+                      </span>
+                    </a>
+                  </Link>
+                </li>
+
+                <li>
+                  <Link
+                    href="/gemeente/[code]/ziekenhuis-opnames"
+                    as={`/gemeente/${code}/ziekenhuis-opnames`}
+                  >
+                    <a
+                      onClick={blur}
+                      className={getClassName(
+                        `/veiligheidsregio/[code]/ziekenhuis-opnames`
+                      )}
+                    >
+                      <TitleWithIcon
+                        Icon={Ziekenhuis}
+                        title={
+                          siteText.gemeente_ziekenhuisopnames_per_dag
+                            .titel_sidebar
+                        }
+                      />
+                      <span>
+                        <IntakeHospitalBarScale
+                          data={data?.hospital_admissions}
+                        />
+                      </span>
+                    </a>
+                  </Link>
+                </li>
+              </ul>
+
+              <h2>{siteText.nationaal_layout.headings.overig}</h2>
+              <ul>
+                <li>
+                  <Link
+                    href="/gemeente/[code]/rioolwater"
+                    as={`/gemeente/${code}/rioolwater`}
+                  >
+                    <a
+                      onClick={blur}
+                      className={getClassName(
+                        `/veiligheidsregio/[code]/rioolwater`
+                      )}
+                    >
+                      <TitleWithIcon
+                        Icon={RioolwaterMonitoring}
+                        title={
+                          siteText.gemeente_rioolwater_metingen.titel_sidebar
+                        }
+                      />
+                      <span>
+                        <SewerWaterBarScale
+                          data={getSewerWaterBarScaleData(data)}
+                        />
+                      </span>
+                    </a>
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+          )}
+        </aside>
+
+        <section className="municipality-content">{children}</section>
       </div>
     </>
   );

@@ -91,6 +91,7 @@ export default function SafetyRegionChloropleth(props: TProps) {
                 const data = getData(vrcode, feature.properties);
                 return (
                   <path
+                    shapeRendering="optimizeQuality"
                     onMouseOver={(event) => showTooltip(event, data)}
                     onMouseOut={hideTooltip}
                     key={`safetyregion-map-feature-${i}`}

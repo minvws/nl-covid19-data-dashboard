@@ -135,7 +135,6 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           )}
         </div>
       </article>
-      );
     </>
   );
 };
