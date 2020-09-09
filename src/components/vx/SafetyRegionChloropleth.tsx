@@ -87,8 +87,11 @@ export default function SafetyRegionChloropleth(props: TProps) {
           {(mercator) => (
             <g>
               {mercator.features.map(({ feature, path }, i) => {
+                if (!path) return null;
+
                 const { vrcode } = feature.properties;
                 const data = getData(vrcode, feature.properties);
+
                 return (
                   <path
                     shapeRendering="optimizeQuality"

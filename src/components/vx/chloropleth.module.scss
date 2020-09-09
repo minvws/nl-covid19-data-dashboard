@@ -13,3 +13,13 @@
   padding: 0.5em;
   z-index: 1000;
 }
+
+.svgMap {
+  display: block;
+
+  path:hover {
+    stroke-width: 2;
+    fill: #fff;
+    cursor: pointer;
+  }
+}

@@ -41,6 +41,7 @@ export default function MunicipalityChloropleth(props: TProps) {
   const [selection] = useState<string | undefined>(selected);
 
   const municipalityData = useNewMunicipalityData(metric);
+
   const color = useMapColorScale(
     municipalityData,
     (item: typeof municipalityData[number]) => item.value,
@@ -52,7 +53,8 @@ export default function MunicipalityChloropleth(props: TProps) {
 
   const getFillColor = (gmCode: string) => {
     const data = municipalityData[gmCode];
-    return color(data?.value ?? 0);
+    const value = data?.value ?? 0;
+    return color(value);
   };
 
   const getData = (
@@ -66,16 +68,20 @@ export default function MunicipalityChloropleth(props: TProps) {
         ...featureProperties,
       };
     }
-    return {};
+    return featureProperties;
   };
 
   const [showTooltip, hideTooltip, tooltipInfo] = useMapTooltip<
     typeof municipalityData[number] & MunicipalityProperties
   >();
 
+  const handleMouseOver = (event, data) => {
+    showTooltip(event, data);
+  };
+
   return width < 10 ? null : (
     <>
-      <svg width={width} height={height} style={{ display: 'block' }}>
+      <svg width={width} height={height} className={styles.svgMap}>
         <rect
           x={0}
           y={0}
@@ -91,15 +97,18 @@ export default function MunicipalityChloropleth(props: TProps) {
           {(mercator) => (
             <g>
               {mercator.features.map(({ feature, path }, i) => {
+                if (!path) return null;
+
                 const { gemcode } = feature.properties;
                 const data = getData(gemcode, feature.properties);
+
                 return (
                   <path
                     shapeRendering="optimizeQuality"
-                    onMouseOver={(event) => showTooltip(event, data)}
+                    onMouseOver={(event) => handleMouseOver(event, data)}
                     onMouseOut={hideTooltip}
                     key={`municipality-map-feature-${i}`}
-                    d={path || ''}
+                    d={path}
                     fill={getFillColor(gemcode)}
                     stroke={gemcode === selection ? 'black' : 'blue'}
                     strokeWidth={gemcode === selection ? 3 : 0.5}
@@ -129,8 +138,13 @@ export default function MunicipalityChloropleth(props: TProps) {
           }}
           className={styles.toolTip}
         >
-          <strong>{tooltipInfo.tooltipData?.gemnaam}</strong>:<br />
-          {tooltipInfo.tooltipData?.value}
+          <strong>{tooltipInfo.tooltipData?.gemnaam}</strong>
+          {tooltipInfo.tooltipData?.value && (
+            <>
+              :<br />
+              {tooltipInfo.tooltipData?.value}
+            </>
+          )}
         </TooltipWithBounds>
       )}
     </>

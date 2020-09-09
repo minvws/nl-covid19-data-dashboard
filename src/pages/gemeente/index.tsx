@@ -20,10 +20,12 @@ const Municipality: FCWithLayout<any> = () => {
   };
 
   return (
-    <MunicipalityMap
-      onSelect={onSelectMunicpal}
-      gradient={['#9DDEFE', '#0290D6']}
-    />
+    <article className="metric-article">
+      <MunicipalityMap
+        onSelect={onSelectMunicpal}
+        gradient={['#9DDEFE', '#0290D6']}
+      />
+    </article>
   );
 };
 
