@@ -112,13 +112,21 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de trend van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": [
-      "0 tot 20",
-      "20 tot 40",
-      "40 tot 60",
-      "60 tot 80",
-      "80+"
-    ]
+    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
+    "cluster_datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "cluster_bron": {
+      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "text": "RIVM"
+    },
+    "cluster_titel": "Clusters van positief geteste personen",
+    "cluster_toelichting": "---",
+    "cluster_barscale_titel": "Aantal actieve clusters",
+    "cluster_barscale_toelichting": "---",
+    "cluster_barscale_screenreader_text": "{{value}} actieve clusters.",
+    "cluster_gemiddelde_titel": "Gemiddelde grootte actieve clusters",
+    "cluster_gemiddelde_toelichting": "---.",
+    "cluster_linechart_titel": "Verloop actieve clusters over tijd",
+    "cluster_linechart_toelichting": "---"
   },
   "besmettelijke_personen": {
     "title": "Aantal besmettelijke mensen",
@@ -542,17 +550,25 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de trend van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": [
-      "0 tot 20",
-      "20 tot 40",
-      "40 tot 60",
-      "60 tot 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
-    }
+    },
+    "cluster_datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "cluster_bron": {
+      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "text": "RIVM"
+    },
+    "cluster_titel": "Clusters van positief geteste personen",
+    "cluster_toelichting": "---",
+    "cluster_barscale_titel": "Aantal actieve clusters",
+    "cluster_barscale_toelichting": "---",
+    "cluster_barscale_screenreader_text": "{{value}} actieve clusters.",
+    "cluster_gemiddelde_titel": "Gemiddelde grootte actieve clusters",
+    "cluster_gemiddelde_toelichting": "---.",
+    "cluster_linechart_titel": "Verloop actieve clusters over tijd",
+    "cluster_linechart_toelichting": "---"
   },
   "veiligheidsregio_rioolwater_metingen": {
     "titel_sidebar": "Rioolwatermeting",
@@ -610,13 +626,7 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de trend van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": [
-      "0 to 20",
-      "20 tot 40",
-      "40 tot 60",
-      "60 tot 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 to 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
