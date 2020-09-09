@@ -37,13 +37,13 @@
   },
   "nav": {
     "links": {
-      "index": "Landelijke cijfers",
+      "index": "Landelijk",
       "over": "Over dit dashboard",
       "meer": "Meer informatie over het coronavirus",
       "verantwoording": "Cijferverantwoording",
       "meer_href": "https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19",
-      "veiligheidsregio": "Veiligheidsregio cijfers",
-      "gemeente": "Gemeentelijke cijfers"
+      "veiligheidsregio": "Veiligheidsregio",
+      "gemeente": "Gemeentelijk"
     },
     "title": "Corona Dashboard",
     "terug_naar_alle_cijfers": "Terug naar alle cijfers"
@@ -215,7 +215,7 @@
     "barscale_titel": "Aantal nieuwe locaties per dag",
     "barscale_toelichting": "Aantal nieuwe locaties waarbij tenminste één bewoner positief getest is. Een verpleeghuis wordt meegeteld als ‘nieuwe locatie’ wanneer er tenminste 28 dagen, dit is twee keer de incubatietijd, geen nieuwe patiënten zijn geweest.",
     "kpi_titel": "Totaal aantal besmette locaties",
-    "kpi_toelichting": "???",
+    "kpi_toelichting": "Dit getal is een inschatting van het totaal aantal verpleeghuislocaties waar in de afgelopen 28 dagen minstens één (nieuwe) COVID-19 besmetting op basis van een positieve test, is gemeld.",
     "linechart_titel": "Verloop over tijd",
     "barscale_screenreader_text": "{{value}} nieuwe locaties waarbij tenminste één bewoner positief getest is, per dag."
   },
@@ -473,9 +473,9 @@
     "barScale": {
       "signaalwaarde": "Signaalwaarde"
     },
+    "zoekveld_geen_resultaten": "Geen resultaten",
     "zoekveld_placeholder_regio": "Zoek op veiligheidsregio ",
-    "zoekveld_placeholder_gemeente": "Zoek op gemeente ",
-    "zoekveld_geen_resultaten": "Geen resultaten"
+    "zoekveld_placeholder_gemeente": "Zoek op gemeente "
   },
   "seoHead": {
     "default_description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
