@@ -75,7 +75,7 @@ export default function MunicipalityChloropleth(props: TProps) {
     typeof municipalityData[number] & MunicipalityProperties
   >();
 
-  const handleMouseOver = (event, data) => {
+  const handleMouseOver = (event: any, data: any) => {
     showTooltip(event, data);
   };
 
