@@ -38,7 +38,7 @@ const world = topojson.feature(
 export default function MunicipalityChloropleth(props: TProps) {
   const { width, height, metric, gradient, onSelect, selected } = props;
 
-  const [selection, setSelection] = useState<string | undefined>(selected);
+  const [selection] = useState<string | undefined>(selected);
 
   const municipalityData = useNewMunicipalityData(metric);
   const color = useMapColorScale(
@@ -105,7 +105,6 @@ export default function MunicipalityChloropleth(props: TProps) {
                     strokeWidth={gemcode === selection ? 3 : 0.5}
                     onClick={() => {
                       if (onSelect) {
-                        setSelection(gemcode);
                         onSelect(data);
                       }
                     }}

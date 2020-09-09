@@ -34,7 +34,7 @@ const world = topojson.feature(
 export default function SafetyRegionChloropleth(props: TProps) {
   const { width, height, metric, gradient, onSelect, selected } = props;
 
-  const [selection, setSelection] = useState<string | undefined>(selected);
+  const [selection] = useState<string | undefined>(selected);
 
   world.features = sortFeatures(world, 'vrcode', selected);
 
@@ -97,11 +97,10 @@ export default function SafetyRegionChloropleth(props: TProps) {
                     key={`safetyregion-map-feature-${i}`}
                     d={path || ''}
                     fill={getFillColor(vrcode)}
-                    stroke={'black'}
+                    stroke={vrcode === selection ? 'black' : 'blue'}
                     strokeWidth={vrcode === selection ? 2 : 0.5}
                     onClick={() => {
                       if (onSelect) {
-                        setSelection(vrcode);
                         onSelect(data);
                       }
                     }}
