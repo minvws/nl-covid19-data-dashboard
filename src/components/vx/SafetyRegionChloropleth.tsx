@@ -32,7 +32,16 @@ const world = topojson.feature(
 ) as SafetyRegionGeoJSON;
 
 export default function SafetyRegionChloropleth(props: TProps) {
-  const { width, height, metric, gradient, onSelect, selected } = props;
+  const { dimensions, metric, gradient, onSelect, selected } = props;
+
+  const {
+    width,
+    height,
+    marginLeft,
+    marginTop,
+    boundedWidth,
+    boundedHeight,
+  } = dimensions;
 
   const [selection] = useState<string | undefined>(selected);
 
@@ -83,33 +92,38 @@ export default function SafetyRegionChloropleth(props: TProps) {
           fill={'white'}
           rx={14}
         />
-        <Mercator data={world.features} fitSize={[[width, height], world]}>
-          {(mercator) => (
-            <g>
-              {mercator.features.map(({ feature, path }, i) => {
-                const { vrcode } = feature.properties;
-                const data = getData(vrcode, feature.properties);
-                return (
-                  <path
-                    shapeRendering="optimizeQuality"
-                    onMouseOver={(event) => showTooltip(event, data)}
-                    onMouseOut={hideTooltip}
-                    key={`safetyregion-map-feature-${i}`}
-                    d={path || ''}
-                    fill={getFillColor(vrcode)}
-                    stroke={vrcode === selection ? 'black' : 'blue'}
-                    strokeWidth={vrcode === selection ? 2 : 0.5}
-                    onClick={() => {
-                      if (onSelect) {
-                        onSelect(data);
-                      }
-                    }}
-                  />
-                );
-              })}
-            </g>
-          )}
-        </Mercator>
+        <g transform={`translate(${[marginLeft, marginTop].join(',')})`}>
+          <Mercator
+            data={world.features}
+            fitSize={[[boundedWidth, boundedHeight], world]}
+          >
+            {(mercator) => (
+              <g>
+                {mercator.features.map(({ feature, path }, i) => {
+                  const { vrcode } = feature.properties;
+                  const data = getData(vrcode, feature.properties);
+                  return (
+                    <path
+                      shapeRendering="optimizeQuality"
+                      onMouseOver={(event) => showTooltip(event, data)}
+                      onMouseOut={hideTooltip}
+                      key={`safetyregion-map-feature-${i}`}
+                      d={path || ''}
+                      fill={getFillColor(vrcode)}
+                      stroke={vrcode === selection ? 'black' : 'blue'}
+                      strokeWidth={vrcode === selection ? 2 : 0.5}
+                      onClick={() => {
+                        if (onSelect) {
+                          onSelect(data);
+                        }
+                      }}
+                    />
+                  );
+                })}
+              </g>
+            )}
+          </Mercator>
+        </g>
       </svg>
 
       {tooltipInfo?.tooltipOpen && tooltipInfo.tooltipData && (
