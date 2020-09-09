@@ -6,7 +6,7 @@ import styles from './chloropleth.module.scss';
 
 export interface ISafetyRegionMapProps {
   selected?: string;
-  metric: TRegionMetricName;
+  metric?: TRegionMetricName;
   gradient: [minColor: string, maxColor: string];
   onSelect?: (context: any) => void;
 }
