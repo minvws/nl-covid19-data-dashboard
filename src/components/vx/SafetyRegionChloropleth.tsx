@@ -79,9 +79,23 @@ export default function SafetyRegionChloropleth(props: TProps) {
     typeof regionData[number] & SafetyRegionProperties
   >();
 
+  const clipPathId = `_${Math.random().toString(36).substring(2, 15)}`;
+
   return width < 10 ? null : (
     <>
       <svg width={width} height={height} className={styles.svgMap}>
+        <clipPath id={clipPathId}>
+          <rect
+            x={dimensions.marginLeft}
+            y={0}
+            height={dimensions.boundedHeight}
+            width={
+              (dimensions.boundedWidth ?? 0) -
+              (dimensions.marginLeft ?? 0) -
+              (dimensions.marginRight ?? 0)
+            }
+          />
+        </clipPath>
         <rect
           x={0}
           y={0}
@@ -90,7 +104,10 @@ export default function SafetyRegionChloropleth(props: TProps) {
           fill={'white'}
           rx={14}
         />
-        <g transform={`translate(${[marginLeft, marginTop].join(',')})`}>
+        <g
+          transform={`translate(${[marginLeft, marginTop].join(',')})`}
+          clipPath={`url(#${clipPathId})`}
+        >
           <Mercator
             data={world.features}
             fitSize={[[boundedWidth, boundedHeight], world]}
