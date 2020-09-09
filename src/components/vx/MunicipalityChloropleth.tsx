@@ -8,7 +8,7 @@ import { FeatureCollection, MultiPolygon } from 'geojson';
 import useNewMunicipalityData from 'utils/useMunicipalityData';
 import useMapColorScale from 'utils/useMapColorScale';
 import useMapTooltip from './useMapTooltip';
-import { IResponsiveMunicipalityMapProps } from './MunicipalityMap';
+import { IMunicipalityMapProps } from './MunicipalityMap';
 import useMunicipalityFeatures from './useMunicipalityFeatures';
 import sortFeatures from './sortFeatures';
 import { TooltipWithBounds } from '@vx/tooltip';
@@ -28,7 +28,7 @@ export interface MunicipalityProperties {
 export type TProps = {
   width: number;
   height: number;
-} & IResponsiveMunicipalityMapProps;
+} & IMunicipalityMapProps;
 
 const world = topojson.feature(
   topology,
