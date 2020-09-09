@@ -9,7 +9,14 @@ import { useRef, useState, useEffect } from 'react';
  * our charts. Plus, who doesn't love D3 margin conventions?
  */
 
-const combineChartDimensions = (dimensions: any) => {
+const combineChartDimensions = (
+  dimensions = {
+    marginTop: 0,
+    marginRight: 0,
+    marginBottom: 0,
+    marginLeft: 0,
+  }
+) => {
   const { marginTop, marginRight, marginBottom, marginLeft } = dimensions;
 
   const parsedDimensions = {
@@ -36,7 +43,16 @@ const combineChartDimensions = (dimensions: any) => {
   };
 };
 
-const useChartDimensions = (passedSettings: any) => {
+type IChartDimensions = {
+  width?: number;
+  height?: number;
+  marginTop?: number;
+  marginRight?: number;
+  marginBottom?: number;
+  marginLeft?: number;
+};
+
+const useChartDimensions = (passedSettings?: IChartDimensions) => {
   const ref = useRef();
   const dimensions = combineChartDimensions(passedSettings);
 
@@ -44,6 +60,9 @@ const useChartDimensions = (passedSettings: any) => {
   const [height, setHeight] = useState(0);
   // @ts-ignore
   useEffect(() => {
+    // If we provide an explicit width and height, we simply return the dimensions
+    // as they are, but run through combineChartDimensions. In other words,
+    // when both width and height are set we don't need to set up a ResizeObserver
     if (dimensions.width && dimensions.height) return [ref, dimensions];
 
     const element = ref.current;

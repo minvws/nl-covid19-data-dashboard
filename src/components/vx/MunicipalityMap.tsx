@@ -11,18 +11,12 @@ export interface IMunicipalityMapProps {
   onSelect?: (context: any) => void;
 }
 
-const chartSettings = {
-  marginBottom: 0,
-};
-
 export default function MunicipalityMap(props: IMunicipalityMapProps) {
-  const [ref, dms] = useChartDimensions(chartSettings);
-
-  const { width, height } = dms;
+  const [ref, dimensions] = useChartDimensions();
 
   return (
     <div ref={ref} className={styles.chloroplethContainer}>
-      <MunicipalityChloropleth width={width} height={height} {...props} />
+      <MunicipalityChloropleth dimensions={dimensions} {...props} />
     </div>
   );
 }
