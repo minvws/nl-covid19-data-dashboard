@@ -13,7 +13,6 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 const nextConfig = {
   webpack(config, { dev }) {
-    config.optimization.minimizer = [];
     config.module.rules.push({
       test: /\.svg$/,
       use: [

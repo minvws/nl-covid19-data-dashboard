@@ -20,29 +20,28 @@ export default useMunicipalityData;
  */
 function useMunicipalityData<
   T extends TMunicipalityMetricName,
-  K extends Municipalities[T]
->(metricName?: T): Record<string, K[number] & { value: number }> {
+  ItemType extends Municipalities[T][number],
+  ReturnType extends ItemType & { value: number }
+>(metricName?: T): Record<string, ReturnType> {
   const { data } = useSWR<Municipalities>('/json/municipalities.json');
 
-  const metricItems = metricName ? data?.[metricName] : undefined;
+  const metricItems: ItemType[] | undefined =
+    metricName && data ? (data[metricName] as ItemType[]) : undefined;
 
   return useMemo(() => {
     if (!metricItems) {
       return {};
     }
 
-    const filteredData = (metricItems as any[]).reduce(
-      (
-        aggr,
-        item: K[number]
-      ): Record<string, K[number] & { value: number }> => {
+    const filteredData = metricItems.reduce<Record<string, ReturnType>>(
+      (aggr, item: ItemType): Record<string, ReturnType> => {
         aggr[item.gmcode] = {
           ...item,
-          value: (item as any)[metricName],
-        };
+          value: (item as any)[metricName] as number,
+        } as any;
         return aggr;
       },
-      {}
+      {} as Record<string, ReturnType>
     );
 
     return filteredData;

@@ -18,11 +18,14 @@ const chartSettings = {
 export default function SafetyRegionMap(props: ISafetyRegionMapProps) {
   const [ref, dms] = useChartDimensions(chartSettings);
 
-  const { width, height } = dms;
-
   return (
-    <div ref={ref} className={styles.chloroplethContainer}>
-      <SafetyRegionChloropleth width={width} height={height} {...props} />
+    <div
+      ref={(elm) => {
+        ref.current = elm;
+      }}
+      className={styles.chloroplethContainer}
+    >
+      <SafetyRegionChloropleth dimensions={dms} {...props} />
     </div>
   );
 }

@@ -14,6 +14,7 @@ import sortFeatures from './sortFeatures';
 import { TooltipWithBounds } from '@vx/tooltip';
 
 import styles from './chloropleth.module.scss';
+import { TCombinedChartDimensions } from './use-chart-dimensions';
 
 export type MunicipalGeoJOSN = FeatureCollection<
   MultiPolygon,
@@ -26,8 +27,7 @@ export interface MunicipalityProperties {
 }
 
 export type TProps = {
-  width: number;
-  height: number;
+  dimensions: TCombinedChartDimensions;
 } & IMunicipalityMapProps;
 
 const world = topojson.feature(
@@ -36,7 +36,16 @@ const world = topojson.feature(
 ) as MunicipalGeoJOSN;
 
 export default function MunicipalityChloropleth(props: TProps) {
-  const { width, height, metric, gradient, onSelect, selected } = props;
+  const { dimensions, metric, gradient, onSelect, selected } = props;
+
+  const {
+    width = 0,
+    height = 0,
+    marginLeft,
+    marginTop,
+    boundedWidth,
+    boundedHeight,
+  } = dimensions;
 
   const [selection] = useState<string | undefined>(selected);
 
@@ -90,39 +99,41 @@ export default function MunicipalityChloropleth(props: TProps) {
           fill={'white'}
           rx={14}
         />
-        <Mercator
-          data={world.features}
-          fitSize={[[width, height], boundingbox]}
-        >
-          {(mercator) => (
-            <g>
-              {mercator.features.map(({ feature, path }, i) => {
-                if (!path) return null;
+        <g transform={`translate(${[marginLeft, marginTop].join(',')})`}>
+          <Mercator
+            data={world.features}
+            fitSize={[[boundedWidth, boundedHeight], boundingbox]}
+          >
+            {(mercator) => (
+              <g>
+                {mercator.features.map(({ feature, path }, i) => {
+                  if (!path) return null;
 
-                const { gemcode } = feature.properties;
-                const data = getData(gemcode, feature.properties);
+                  const { gemcode } = feature.properties;
+                  const data = getData(gemcode, feature.properties);
 
-                return (
-                  <path
-                    shapeRendering="optimizeQuality"
-                    onMouseOver={(event) => handleMouseOver(event, data)}
-                    onMouseOut={hideTooltip}
-                    key={`municipality-map-feature-${i}`}
-                    d={path}
-                    fill={getFillColor(gemcode)}
-                    stroke={gemcode === selection ? 'black' : 'blue'}
-                    strokeWidth={gemcode === selection ? 3 : 0.5}
-                    onClick={() => {
-                      if (onSelect) {
-                        onSelect(data);
-                      }
-                    }}
-                  />
-                );
-              })}
-            </g>
-          )}
-        </Mercator>
+                  return (
+                    <path
+                      shapeRendering="optimizeQuality"
+                      onMouseOver={(event) => handleMouseOver(event, data)}
+                      onMouseOut={hideTooltip}
+                      key={`municipality-map-feature-${i}`}
+                      d={path}
+                      fill={getFillColor(gemcode)}
+                      stroke={gemcode === selection ? 'black' : 'blue'}
+                      strokeWidth={gemcode === selection ? 3 : 0.5}
+                      onClick={() => {
+                        if (onSelect) {
+                          onSelect(data);
+                        }
+                      }}
+                    />
+                  );
+                })}
+              </g>
+            )}
+          </Mercator>
+        </g>
       </svg>
 
       {tooltipInfo?.tooltipOpen && tooltipInfo.tooltipData && (
