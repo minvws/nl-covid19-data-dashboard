@@ -7,8 +7,6 @@
   /* Extra specificity to overrule radio-group rules */
   &.chart-radio-group {
     label {
-      padding: 0.2em 1.5em;
-
       @media screen and (min-width: 700px) {
         flex: 0 1 auto;
       }

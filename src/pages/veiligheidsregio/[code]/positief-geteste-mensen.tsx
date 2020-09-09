@@ -9,7 +9,6 @@ import siteText from 'locale';
 import Getest from 'assets/test.svg';
 import formatDecimal from 'utils/formatNumber';
 import { ResultsPerRegion } from 'types/data';
-import replaceVariablesInText from 'utils/replaceVariablesInText';
 import MunicipalityMap from 'components/mapChart/MunicipalityMap';
 import regionCodeToMunicipalCodeLookup from 'data/regionCodeToMunicipalCodeLookup';
 import {
@@ -18,6 +17,7 @@ import {
   ISafetyRegionData,
 } from 'static-props/safetyregion-data';
 import { useRouter } from 'next/router';
+import { getLocalTitleForRegion } from 'utils/getLocalTitleForCode';
 
 const text: typeof siteText.veiligheidsregio_positief_geteste_personen =
   siteText.veiligheidsregio_positief_geteste_personen;
@@ -73,9 +73,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
     <>
       <ContentHeader
         category="Medische indicatoren"
-        title={replaceVariablesInText(text.titel, {
-          safetyRegion: data.name,
-        })}
+        title={getLocalTitleForRegion(text.titel, data.code)}
         Icon={Getest}
         subtitle={text.pagina_toelichting}
         metadata={{
@@ -125,7 +123,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
       </article>
       <article className="metric-article layout-two-column">
         <div className="column-item column-item-extra-margin">
-          <h3>{text.map_titel}</h3>
+          <h3>{getLocalTitleForRegion(text.map_titel, data.code)}</h3>
           <p>{text.map_toelichting}</p>
         </div>
 
