@@ -4,7 +4,7 @@ import useChartDimensions from './use-chart-dimensions';
 
 import styles from './chloropleth.module.scss';
 
-export interface IResponsiveMunicipalityMapProps {
+export interface IMunicipalityMapProps {
   selected?: string;
   metric?: TMunicipalityMetricName;
   gradient: [minColor: string, maxColor: string];
@@ -15,7 +15,7 @@ const chartSettings = {
   marginBottom: 0,
 };
 
-export default function ResponsiveMap(props: IResponsiveMunicipalityMapProps) {
+export default function MunicipalityMap(props: IMunicipalityMapProps) {
   const [ref, dms] = useChartDimensions(chartSettings);
 
   const { width, height } = dms;
