@@ -53,7 +53,7 @@ export function SewerWaterBarScale(props: {
 }
 
 const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
-  const { data } = props;
+  const { data, name } = props;
 
   const { barScaleData, lineChartData, barChartData } = useMemo(() => {
     return {
@@ -68,7 +68,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
       <ContentHeader
         category="Overige indicatoren"
         title={replaceVariablesInText(text.titel, {
-          municipality: data.name,
+          municipality: name,
         })}
         Icon={RioolwaterMonitoring}
         subtitle={text.pagina_toelichting}

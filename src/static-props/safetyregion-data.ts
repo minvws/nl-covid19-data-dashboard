@@ -4,9 +4,11 @@ import path from 'path';
 import { Regionaal } from 'types/data';
 
 import safetyRegions from 'data';
+import municipalities from 'data/gemeente_veiligheidsregio.json';
 
 export interface ISafetyRegionData {
   data: Regionaal;
+  name: string;
 }
 
 interface IProps {
@@ -54,9 +56,15 @@ export function getSafetyRegionData() {
     const fileContents = fs.readFileSync(filePath, 'utf8');
     const data = JSON.parse(fileContents);
 
+    const municipalityName = municipalities.find((r) => r.gemcode === code)
+      ?.name;
+    const safetyRegionName = safetyRegions.find((r) => r.code === code)?.name;
+    const name = safetyRegionName || municipalityName || '';
+
     return {
       props: {
-        data: data,
+        data,
+        name,
       },
     };
   };

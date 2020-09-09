@@ -48,7 +48,7 @@ export function PostivelyTestedPeopleBarScale(props: {
 }
 
 const PostivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
-  const { data } = props;
+  const { data, name } = props;
 
   const municipalCodes = getSafetyRegionForMunicipal(data.code);
 
@@ -60,8 +60,7 @@ const PostivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
       <ContentHeader
         category="Medische indicatoren"
         title={replaceVariablesInText(text.titel, {
-          municipality:
-            data.positive_tested_people.last_value.municipality_name,
+          municipality: name,
         })}
         Icon={Getest}
         subtitle={text.pagina_toelichting}

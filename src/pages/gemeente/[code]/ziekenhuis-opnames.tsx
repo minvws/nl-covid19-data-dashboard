@@ -55,7 +55,7 @@ export function IntakeHospitalBarScale(props: {
 }
 
 const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
-  const { data } = props;
+  const { data, name } = props;
 
   const municipalCodes = getSafetyRegionForMunicipal(data.code);
 
@@ -67,7 +67,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
       <ContentHeader
         category="Medische indicatoren"
         title={replaceVariablesInText(text.titel, {
-          municipality: data.hospital_admissions.last_value.municipality_name,
+          municipality: name,
         })}
         Icon={Ziekenhuis}
         subtitle={text.pagina_toelichting}

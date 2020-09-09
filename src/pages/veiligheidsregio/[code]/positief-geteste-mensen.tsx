@@ -59,7 +59,7 @@ export function PostivelyTestedPeopleBarScale(props: {
 const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
   const router = useRouter();
   const { code } = router.query;
-  const { data } = props;
+  const { data, name } = props;
 
   const resultsPerRegion: ResultsPerRegion | undefined =
     data?.results_per_region;
@@ -74,7 +74,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
       <ContentHeader
         category="Medische indicatoren"
         title={replaceVariablesInText(text.titel, {
-          safetyRegion: data.name,
+          safetyRegion: name,
         })}
         Icon={Getest}
         subtitle={text.pagina_toelichting}
