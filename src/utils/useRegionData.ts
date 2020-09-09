@@ -1,24 +1,11 @@
 import { Regions } from 'types/data';
 import useSWR from 'swr';
 import { useMemo } from 'react';
-import regionData from 'data';
 
 export type TRegionMetricName = keyof Pick<
   Regions,
   'hospital_admissions' | 'positive_tested_people' | 'deceased'
 >;
-
-type TRegionDataList = typeof regionData;
-type TRegionData = TRegionDataList[number];
-type TRegionDataRecord = Record<string, TRegionData>;
-
-const regionDataRecord: TRegionDataRecord = regionData.reduce(
-  (aggr: TRegionDataRecord, item: TRegionData) => {
-    aggr[item.code] = item;
-    return aggr;
-  },
-  {}
-);
 
 export default function useRegionData<
   T extends TRegionMetricName,
@@ -42,7 +29,6 @@ export default function useRegionData<
       ): Record<string, K[number] & { value: number }> => {
         aggr[item.vrcode] = {
           ...item,
-          regionName: regionDataRecord[item.vrcode]?.name,
           value: (item as any)[metricName],
         };
         return aggr;

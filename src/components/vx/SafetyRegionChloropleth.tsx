@@ -21,6 +21,7 @@ export type SafetyRegionGeoJSON = FeatureCollection<
 
 export interface SafetyRegionProperties {
   vrcode: string;
+  vrname: string;
 }
 
 export type TProps = {
@@ -139,7 +140,7 @@ export default function SafetyRegionChloropleth(props: TProps) {
           }}
           className={styles.toolTip}
         >
-          <strong>{tooltipInfo.tooltipData.regionName}</strong>
+          <strong>{tooltipInfo.tooltipData.vrname}</strong>
           {tooltipInfo.tooltipData?.value && (
             <>
               :<br />
