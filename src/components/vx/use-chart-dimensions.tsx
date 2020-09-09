@@ -1,6 +1,14 @@
 import { ResizeObserver } from '@juggle/resize-observer';
 import { useRef, useState, useEffect } from 'react';
 
+/**
+ * This custom hook has been taken from the wonderful blog of
+ * Amelia Wattenberger. https://wattenberger.com/blog/react-and-d3
+ * We tried using @vx/responsive but felt it lacking in documentation and
+ * it didn't work on IE11. This way we have more control over how we resize
+ * our charts. Plus, who doesn't love D3 margin conventions?
+ */
+
 const combineChartDimensions = (dimensions: any) => {
   const { marginTop, marginRight, marginBottom, marginLeft } = dimensions;
 
