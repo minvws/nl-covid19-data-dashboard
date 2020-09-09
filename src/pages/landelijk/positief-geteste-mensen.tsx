@@ -139,8 +139,11 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
       </article>
 
       <article className="metric-article">
-        <h3>{text.linechart_titel}</h3>
-        <p>{text.linechart_toelichting}</p>
+        <div className="article-text">
+          <h3>{text.linechart_titel}</h3>
+          <p>{text.linechart_toelichting}</p>
+        </div>
+
         {delta && (
           <LineChart
             values={delta.values.map((value) => ({

@@ -68,9 +68,9 @@
   margin-top: 2rem;
   box-shadow: $box-shadow;
 
-  h3,
-  p {
+  .article-text {
     max-width: 30rem;
+    // color: blue;
   }
 }
 
