@@ -24,11 +24,11 @@ export default function useRegionData<
   T extends TRegionMetricName,
   K extends Regions[T]
 >(
-  metricName: T
+  metricName?: T
 ): Record<string, K[number] & { value: number; regionName: string }> {
   const { data } = useSWR<Regions>('/json/regions.json');
 
-  const metricItems = data?.[metricName];
+  const metricItems = metricName && data ? data[metricName] : undefined;
 
   return useMemo(() => {
     if (!metricItems) {
