@@ -99,7 +99,7 @@
       "text": "RIVM"
     },
     "titel": "Number of confirmed cases",
-    "pagina_toelichting": "By registering the number of confirmed cases we gain insight into how fast the virus spreads before it reaches the intensive care division. This helps to keep us prepared.",
+    "pagina_toelichting": "Door het aantal positief geteste mensen bij te houden krijgen we een duidelijk beeld van hoe snel het virus zich verspreid voordat het de intensive care bereikt. Hierdoor blijven we voorbereid.",
     "barscale_titel": "Average number of confirmed cases per 100,000 inhabitants per day.",
     "barscale_toelichting": "This figure shows how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
@@ -112,7 +112,13 @@
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the progression over time in the amount of new cases by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"]
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ]
   },
   "besmettelijke_personen": {
     "title": "Number of infectious people",
@@ -145,12 +151,12 @@
     "legenda_r": "The reproduction number is not an exact value but a reliable estimate. Reproduction numbers (R) using data from less than two weeks ago are not reliable, therefore, the line depicting R stops at a date two weeks in the past. ",
     "legenda_marge": "The confidence interval shows the range between which the number R falls. This is updated on a weekly basis.",
     "reproductie_explainer_alt": "Image to support the explanation above",
-    "titel": "Reproductiegetal",
-    "pagina_toelichting": "Het reproductiegetal laat zien hoe snel het virus zich verspreidt. Dit getal geeft aan hoeveel mensen gemiddeld besmet worden door één patiënt met COVID-19.",
+    "titel": "Reproduction number",
+    "pagina_toelichting": "The reproduction number shows how fast the virus is spreading. The number shows how many people are on average infected by one patient with COVID-19.",
     "barscale_titel": "Most recent reproduction number",
     "barscale_toelichting": "Aantal mensen dat besmet wordt door één besmettelijke persoon.",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
-    "extra_uitleg": "Het reproductiegetal laat zien hoe snel het virus zich verspreidt. Dit getal geeft aan hoeveel mensen gemiddeld besmet worden door één patiënt met COVID-19. Bij een reproductiegetal van rond de 1 blijft het aantal besmettingen ongeveer gelijk. Als het reproductiegetal lager is dan 1, dan daalt het aantal besmettingen. Bij een getal hoger dan 1 stijgt het aantal besmettingen.",
+    "extra_uitleg": "The reproduction number shows how fast the virus is spreading. The number shows how many people are on average infected by one patient with COVID-19. The number of transmissions remains more or less constant when the reproduction number is 1, declines when it is less than 1 and increases when the number is above 1.",
     "linechart_titel": "Progression over time"
   },
   "overige_gegevens": {
@@ -209,7 +215,7 @@
     "barscale_titel": "Aantal nieuwe locaties per dag",
     "barscale_toelichting": "Aantal nieuwe locaties waarbij tenminste één bewoner positief getest is. Een verpleeghuis wordt meegeteld als ‘nieuwe locatie’ wanneer er tenminste 28 dagen, dit is twee keer de incubatietijd, geen nieuwe patiënten zijn geweest.",
     "kpi_titel": "Totaal aantal besmette locaties",
-    "kpi_toelichting": "???",
+    "kpi_toelichting": "This figure is an estimate of the number of nursing homes where in the past 28 days at least one (new) COVID-19 infection (confirmed by a positive test) is reported.",
     "linechart_titel": "Progression over time",
     "barscale_screenreader_text": "{{value}} nieuwe locaties waarbij tenminste één bewoner positief getest is, per dag."
   },
@@ -467,9 +473,9 @@
     "barScale": {
       "signaalwaarde": "Alert value"
     },
+    "zoekveld_geen_resultaten": "No results",
     "zoekveld_placeholder_regio": "Zoek op veiligheidsregio ",
-    "zoekveld_placeholder_gemeente": "Zoek op gemeente ",
-    "zoekveld_geen_resultaten": "No results"
+    "zoekveld_placeholder_gemeente": "Zoek op gemeente "
   },
   "seoHead": {
     "default_description": "Information on the development of the coronavirus in The Netherlands.",
@@ -521,7 +527,7 @@
   "veiligheidsregio_positief_geteste_personen": {
     "titel_sidebar": "Positief geteste mensen",
     "titel": "Positief geteste mensen in {{safetyRegion}}",
-    "pagina_toelichting": "By registering the number of confirmed cases we gain insight into how fast the virus spreads before it reaches the intensive care division. This helps to keep us prepared.",
+    "pagina_toelichting": "Door het aantal positief geteste mensen bij te houden krijgen we een duidelijk beeld van hoe snel het virus zich verspreid voordat het de intensive care bereikt. Hierdoor blijven we voorbereid.",
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis. ",
     "screen_reader_graph_content": "{{value}} positief geteste personen.",
     "barscale_titel": "Gemiddeld aantal positief geteste mensen per 100.00 inwoners",
@@ -536,7 +542,13 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de trend van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -583,7 +595,7 @@
   "gemeente_positief_geteste_personen": {
     "titel_sidebar": "Confirmed cases",
     "titel": "Confirmed cases in {{municipality}}",
-    "pagina_toelichting": "By registering the number of confirmed cases we gain insight into how fast the virus spreads before it reaches the intensive care division. This helps to keep us prepared.",
+    "pagina_toelichting": "Door het aantal positief geteste mensen bij te houden krijgen we een duidelijk beeld van hoe snel het virus zich verspreid voordat het de intensive care bereikt. Hierdoor blijven we voorbereid.",
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
     "screen_reader_graph_content": "{{value}} confirmed cases.",
     "barscale_titel": "Average number of confirmed cases per 100,000 inhabitants per day",
@@ -598,7 +610,13 @@
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the change in the number of confirmed cases by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -612,7 +630,7 @@
     "screen_reader_graph_content": "{{value}} virus particles in one milliliter of sewage water.",
     "barscale_titel": "Average amount of virus particles in one milliliter of sewage water",
     "extra_uitleg": "The national value is based on the total number of virus particles that is found in a week, divided by the number of sites where the data is collected.",
-    "barscale_screenreader_text": "{{value}} virus particles in one milliliter of sewage water, collected from 80 sites in the Netherlands.",
+    "barscale_screenreader_text": "{{value}} virusdeeltjes in een milliliter rioolwater, afkomstig van 80 locaties in Nederland.",
     "linechart_titel": "Progression over time",
     "bar_chart_title": "Last known value per RWZI location in {{municipality}}",
     "bar_chart_axis_title": "Amount of virus particles in one milliliter of sewage water",
