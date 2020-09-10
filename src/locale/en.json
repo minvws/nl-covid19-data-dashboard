@@ -507,6 +507,14 @@
   "gemeente_metadata": {
     "title": "Municipality"
   },
+  "veiligheidsregio_index": {
+    "selecteer_titel": "Selecteer een veiligheidsregio",
+    "selecteer_toelichting": "Er gelden verschillende maatregelen per veiligheidsregio en gemeente"
+  },
+  "gemeente_index": {
+    "selecteer_titel": "Selecteer een gemeente",
+    "selecteer_toelichting": "Er gelden verschillende maatregelen per veiligheidsregio en gemeente"
+  },
   "veiligheidsregio_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Ziekenhuisopnames per dag",
     "titel": "Ziekenhuisopnames per dag in {{safetyRegion}}",

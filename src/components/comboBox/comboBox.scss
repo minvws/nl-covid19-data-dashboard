@@ -28,8 +28,7 @@
 }
 
 [data-reach-combobox-list] {
-  min-height: 30em;
-  height: 50vh;
+  height: 30em;
   overflow-y: scroll;
   border: none;
   box-shadow: $box-shadow;
@@ -42,6 +41,10 @@
   font-size: 1rem;
   border: 1px solid #c4c4c4;
 
+  &:focus {
+    border-color: $icon-color;
+    outline: none;
+  }
 }
 
 [data-reach-combobox-option] {

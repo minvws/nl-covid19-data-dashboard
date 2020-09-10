@@ -101,7 +101,7 @@ export default function SafetyRegionChloropleth(props: TProps) {
           y={0}
           width={width}
           height={height}
-          fill={'white'}
+          fill={'transparent'}
           rx={14}
         />
         <g
@@ -128,8 +128,8 @@ export default function SafetyRegionChloropleth(props: TProps) {
                       key={`safetyregion-map-feature-${i}`}
                       d={path || ''}
                       fill={getFillColor(vrcode)}
-                      stroke={vrcode === selection ? 'black' : 'blue'}
-                      strokeWidth={vrcode === selection ? 2 : 0.5}
+                      stroke={vrcode === selection ? 'black' : '#01689B'}
+                      strokeWidth={0.75}
                       onClick={() => {
                         if (onSelect) {
                           onSelect(data);

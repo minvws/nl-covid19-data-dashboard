@@ -3,9 +3,11 @@ import { getSafetyRegionLayout } from 'components/layout/SafetyRegionLayout';
 import SafetyRegionMap from 'components/vx/SafetyRegionMap';
 import { useRouter } from 'next/router';
 
+import text from 'locale';
+
 // Passing `any` to `FCWithLayout` because we
 // can't do `getStaticProps` on this page because we require
-// a code, but is is the screen we select a code (municipality).
+// a code, but is is the screen we select a code (safety region).
 // All other pages which use `getSafetyRegionLayout` can assume
 // the data is always there. Making the data optional would mean
 // lots of unnecessary null checks on those pages.
@@ -20,13 +22,19 @@ const SafetyRegion: FCWithLayout<any> = () => {
   };
 
   return (
-    <article className="metric-article">
+    <>
+      <h2 className="text-max-width">
+        {text.veiligheidsregio_index.selecteer_titel}
+      </h2>
+      <p className="text-max-width">
+        {text.veiligheidsregio_index.selecteer_toelichting}
+      </p>
       <SafetyRegionMap
-        style={{ height: '800px' }}
+        style={{ height: '500px' }}
         onSelect={onSelectRegion}
-        gradient={['#9DDEFE', '#0290D6']}
+        gradient={['#ffff', '#ffff']}
       />
-    </article>
+    </>
   );
 };
 

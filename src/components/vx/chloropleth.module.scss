@@ -3,6 +3,7 @@
 .chloroplethContainer {
   position: relative;
   height: 400px;
+  background: transparent;
 }
 
 .toolTip {
@@ -16,6 +17,7 @@
 
 .svgMap {
   display: block;
+  background: transparent;
 
   path:hover {
     stroke-width: 2;
