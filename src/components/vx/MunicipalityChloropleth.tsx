@@ -67,7 +67,7 @@ export default function MunicipalityChloropleth(props: TProps) {
       const value = data?.value ?? 0;
       return color(value);
     },
-    [municipalityData]
+    [municipalityData, color]
   );
 
   const getData = useCallback(
@@ -77,7 +77,7 @@ export default function MunicipalityChloropleth(props: TProps) {
         : world.features.find((feat) => feat.properties.gemcode === gmCode)
             ?.properties;
     },
-    [municipalityData]
+    [municipalityData, hasData]
   );
 
   const [showTooltip, hideTooltip, tooltipInfo] = useMapTooltip<

@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 
 import { Mercator } from '@vx/geo';
 import * as topojson from 'topojson-client';
@@ -49,7 +49,9 @@ export default function SafetyRegionChloropleth(props: TProps) {
 
   world.features = sortFeatures(world, 'vrcode', selected);
 
-  const regionData = useRegionData(metric);
+  const regionData = useRegionData(metric, world);
+  const hasData = Boolean(Object.keys(regionData).length);
+
   const color = useMapColorScale(
     regionData,
     (item: typeof regionData[number]) => item.value,
@@ -61,52 +63,68 @@ export default function SafetyRegionChloropleth(props: TProps) {
       const data = regionData[gmCode];
       return color(data?.value ?? 0);
     },
-    [regionData]
+    [regionData, color]
   );
 
   const getData = useCallback(
-    (gmCode: string, featureProperties: SafetyRegionProperties) => {
-      const data = regionData[gmCode];
-      if (data) {
-        return {
-          ...data,
-          ...featureProperties,
-        };
-      }
-      return featureProperties;
+    (vrCode: string) => {
+      return hasData
+        ? regionData[vrCode]
+        : world.features.find((feat) => feat.properties.vrcode === vrCode)
+            ?.properties;
     },
-    [regionData]
+    [regionData, hasData]
   );
 
   const [showTooltip, hideTooltip, tooltipInfo] = useMapTooltip<
     typeof regionData[number] & SafetyRegionProperties
   >();
 
-  const clipPathId = `_${Math.random().toString(36).substring(2, 15)}`;
+  const clipPathId = useRef(`_${Math.random().toString(36).substring(2, 15)}`);
+
+  const svgClick = (event: any) => {
+    if (!onSelect) {
+      return;
+    }
+
+    const elm = event.target;
+
+    if (elm.id) {
+      onSelect(getData(elm.id));
+    }
+  };
+
+  const svgMouseOver = (event: any) => {
+    const elm = event.target;
+    if (elm.id) {
+      if (timout.current > -1) {
+        clearTimeout(timout.current);
+        timout.current = -1;
+      }
+      showTooltip(event, getData(elm.id));
+    }
+  };
+
+  const timout = useRef<any>(-1);
+  const mouseout = () => {
+    if (timout.current < 0) {
+      timout.current = setTimeout(() => {
+        hideTooltip();
+      }, 500);
+    }
+  };
 
   return width < 10 ? null : (
     <>
-      <TooltipWithBounds
-        // set this to random so it correctly updates with parent bounds
-        key={Math.random()}
-        left={tooltipInfo?.tooltipLeft}
-        top={tooltipInfo?.tooltipTop}
-        style={{
-          display: tooltipInfo?.tooltipOpen ? 'block' : 'none',
-        }}
-        className={styles.toolTip}
+      <svg
+        width={width}
+        height={height}
+        className={styles.svgMap}
+        onMouseOver={svgMouseOver}
+        onMouseOut={mouseout}
+        onClick={svgClick}
       >
-        <strong>{tooltipInfo?.tooltipData?.vrname}</strong>
-        {tooltipInfo?.tooltipData?.value && (
-          <>
-            <br />
-            {tooltipInfo.tooltipData.value}
-          </>
-        )}
-      </TooltipWithBounds>
-
-      <svg width={width} height={height} className={styles.svgMap}>
-        <clipPath id={clipPathId}>
+        <clipPath id={clipPathId.current}>
           <rect
             x={dimensions.marginLeft}
             y={0}
@@ -128,7 +146,7 @@ export default function SafetyRegionChloropleth(props: TProps) {
         />
         <g
           transform={`translate(${[marginLeft, marginTop].join(',')})`}
-          clipPath={`url(#${clipPathId})`}
+          clipPath={`url(#${clipPathId.current})`}
         >
           <Mercator
             data={world.features}
@@ -140,23 +158,16 @@ export default function SafetyRegionChloropleth(props: TProps) {
                   if (!path) return null;
 
                   const { vrcode } = feature.properties;
-                  const data = getData(vrcode, feature.properties);
 
                   return (
                     <path
                       shapeRendering="optimizeQuality"
-                      onMouseOver={(event) => showTooltip(event, data)}
-                      onMouseOut={hideTooltip}
+                      id={vrcode}
                       key={`safetyregion-map-feature-${i}`}
                       d={path || ''}
                       fill={getFillColor(vrcode)}
                       stroke={vrcode === selection ? 'black' : 'blue'}
                       strokeWidth={vrcode === selection ? 2 : 0.5}
-                      onClick={() => {
-                        if (onSelect) {
-                          onSelect(data);
-                        }
-                      }}
                     />
                   );
                 })}
@@ -165,6 +176,25 @@ export default function SafetyRegionChloropleth(props: TProps) {
           </Mercator>
         </g>
       </svg>
+
+      <TooltipWithBounds
+        // set this to random so it correctly updates with parent bounds
+        key={Math.random()}
+        left={tooltipInfo?.tooltipLeft}
+        top={tooltipInfo?.tooltipTop}
+        style={{
+          display: tooltipInfo?.tooltipOpen ? 'block' : 'none',
+        }}
+        className={styles.toolTip}
+      >
+        <strong>{tooltipInfo?.tooltipData?.vrname}</strong>
+        {tooltipInfo?.tooltipData?.value && (
+          <>
+            <br />
+            {tooltipInfo.tooltipData.value}
+          </>
+        )}
+      </TooltipWithBounds>
     </>
   );
 }
