@@ -68,6 +68,10 @@
   margin-top: 2rem;
   box-shadow: $box-shadow;
 
+  .article-text {
+    max-width: 30rem;
+  }
+
   @media (min-width: 700px) {
     margin: 0;
     margin-top: 2rem;
