@@ -120,7 +120,8 @@ function Layout(props: WithChildren<LayoutProps>) {
                   <a
                     onClick={blur}
                     className={
-                      router.pathname.indexOf('/landelijk') === 0
+                      router.pathname.indexOf('/landelijk') === 0 ||
+                      router.pathname === '/'
                         ? styles.link + ' ' + styles.active
                         : styles.link
                     }

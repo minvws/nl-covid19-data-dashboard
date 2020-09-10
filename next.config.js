@@ -51,15 +51,15 @@ const nextConfig = {
 
     return config;
   },
-  redirects() {
-    return [
-      {
-        source: '/',
-        destination: '/landelijk',
-        permanent: true,
-      },
-    ];
-  },
+  // redirects() {
+  //   return [
+  //     {
+  //       source: '/',
+  //       destination: '/landelijk',
+  //       permanent: true,
+  //     },
+  //   ];
+  // },
 };
 
 const plugins = [

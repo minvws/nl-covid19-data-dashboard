@@ -103,6 +103,15 @@ function NationalLayout(props: WithChildren<INationalData>) {
           </Link>
         )}
         <aside className="national-aside">
+          <Link href="/">
+            <a onClick={blur} className={getClassName('/')}>
+              <TitleWithIcon
+                Icon={GetestIcon}
+                title={'Laatste ontwikkelingen'}
+              />
+              <span>Belangrijke verandering</span>
+            </a>
+          </Link>
           <nav aria-label="metric navigation">
             <h2>{siteText.nationaal_layout.headings.medisch}</h2>
             <ul>
