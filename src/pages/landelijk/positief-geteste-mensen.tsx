@@ -4,10 +4,11 @@ import BarScale from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
 import { getNationalLayout } from 'components/layout/NationalLayout';
 import { LineChart, BarChart } from 'components/charts/index';
-import MunicipalityMap from 'components/mapChart/MunicipalityMap';
 import { ContentHeader } from 'components/layout/Content';
-import SafetyRegionMap from 'components/mapChart/SafetyRegionMap';
 import ChartRegionControls from 'components/chartRegionControls';
+
+import MunicipalityMap from 'components/vx/MunicipalityMap';
+import SafetyRegionMap from 'components/vx/SafetyRegionMap';
 
 import Getest from 'assets/test.svg';
 import formatDecimal from 'utils/formatNumber';

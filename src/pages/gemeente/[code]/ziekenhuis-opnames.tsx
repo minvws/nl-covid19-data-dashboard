@@ -15,8 +15,7 @@ import {
   getMunicipalityPaths,
   IMunicipalityData,
 } from 'static-props/municipality-data';
-import getSafetyRegionForMunicipal from 'utils/getSafetyRegionForMunicipal';
-import MunicipalityMap from 'components/mapChart/MunicipalityMap';
+import MunicipalityMap from 'components/vx/MunicipalityMap';
 const text: typeof siteText.gemeente_ziekenhuisopnames_per_dag =
   siteText.gemeente_ziekenhuisopnames_per_dag;
 
@@ -56,8 +55,6 @@ export function IntakeHospitalBarScale(props: {
 
 const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
   const { data } = props;
-
-  const municipalCodes = getSafetyRegionForMunicipal(data.code);
 
   const hospitalAdmissions: HospitalAdmissions | undefined =
     data?.hospital_admissions;
@@ -115,14 +112,11 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
         </div>
 
         <div className="column-item column-item-extra-margin">
-          {municipalCodes && (
-            <MunicipalityMap
-              selected={data.code}
-              municipalCodes={municipalCodes}
-              metric="hospital_admissions"
-              gradient={['#9DDEFE', '#0290D6']}
-            />
-          )}
+          <MunicipalityMap
+            selected={data.code}
+            metric="hospital_admissions"
+            gradient={['#69c253', '#f35065']}
+          />
         </div>
       </article>
     </>
