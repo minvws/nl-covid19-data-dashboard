@@ -18,7 +18,9 @@
       "pattern": "^VR[0-9]+$"
     },
     "escalation_level": {
-      "type": "number"
+      "type": "number",
+      "minimum": 1,
+      "maximum": 3
     },
     "date_of_insertion_unix": {
       "type": "integer"

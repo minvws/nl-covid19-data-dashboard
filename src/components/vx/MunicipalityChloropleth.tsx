@@ -1,11 +1,14 @@
-import { useState } from 'react';
+import { useState, useCallback, useRef } from 'react';
 
 import { Mercator } from '@vx/geo';
 import * as topojson from 'topojson-client';
 
-import topology from './municipalities.topo.json';
+import municipalTopology from './municipalities.topo.json';
+import countryTopology from './netherlands.topo.json';
+import regionTopology from './safetyregions.topo.json';
+
 import { FeatureCollection, MultiPolygon } from 'geojson';
-import useNewMunicipalityData from 'utils/useMunicipalityData';
+import useMunicipalityData from 'utils/useMunicipalityData';
 import useMapColorScale from 'utils/useMapColorScale';
 import useMapTooltip from './useMapTooltip';
 import { IMunicipalityMapProps } from './MunicipalityMap';
@@ -15,6 +18,7 @@ import { TooltipWithBounds } from '@vx/tooltip';
 
 import styles from './chloropleth.module.scss';
 import { TCombinedChartDimensions } from './use-chart-dimensions';
+import municipalCodeToRegionCodeLookup from 'data/municipalCodeToRegionCodeLookup';
 
 export type MunicipalGeoJOSN = FeatureCollection<
   MultiPolygon,
@@ -30,13 +34,23 @@ export type TProps = {
   dimensions: TCombinedChartDimensions;
 } & IMunicipalityMapProps;
 
-const world = topojson.feature(
-  topology,
-  topology.objects.municipalities
-) as MunicipalGeoJOSN;
+const countryGeo = topojson.feature(
+  countryTopology,
+  countryTopology.objects.netherlands
+) as FeatureCollection<MultiPolygon>;
 
 export default function MunicipalityChloropleth(props: TProps) {
   const { dimensions, metric, gradient, onSelect, selected } = props;
+
+  const municipalGeo = topojson.feature(
+    municipalTopology,
+    municipalTopology.objects.municipalities
+  ) as MunicipalGeoJOSN;
+
+  const regionGeo = topojson.feature(
+    regionTopology,
+    regionTopology.objects.safetyregions
+  ) as FeatureCollection<MultiPolygon>;
 
   const {
     width = 0,
@@ -47,9 +61,26 @@ export default function MunicipalityChloropleth(props: TProps) {
     boundedHeight,
   } = dimensions;
 
+  let boundingbox = useMunicipalityFeatures(municipalGeo, selected) as any;
+  municipalGeo.features = sortFeatures(municipalGeo, 'gemcode', selected);
+
+  const vrcode = selected
+    ? municipalCodeToRegionCodeLookup[selected]
+    : undefined;
+  if (vrcode) {
+    const feature = regionGeo.features.find(
+      (feat) => feat.properties?.vrcode === vrcode
+    );
+    if (feature) {
+      regionGeo.features = [feature];
+      boundingbox = regionGeo;
+    }
+  }
+
   const [selection] = useState<string | undefined>(selected);
 
-  const municipalityData = useNewMunicipalityData(metric);
+  const municipalityData = useMunicipalityData(metric, municipalGeo);
+  const hasData = Boolean(Object.keys(municipalityData).length);
 
   const color = useMapColorScale(
     municipalityData,
@@ -57,43 +88,79 @@ export default function MunicipalityChloropleth(props: TProps) {
     gradient
   );
 
-  const boundingbox = useMunicipalityFeatures(world, selected);
-  world.features = sortFeatures(world, 'gemcode', selected);
+  const getFillColor = useCallback(
+    (gmCode: string) => {
+      const data = municipalityData[gmCode];
+      const value = data?.value ?? 0;
+      return color(value);
+    },
+    [municipalityData, color]
+  );
 
-  const getFillColor = (gmCode: string) => {
-    const data = municipalityData[gmCode];
-    const value = data?.value ?? 0;
-    return color(value);
-  };
-
-  const getData = (
-    gmCode: string,
-    featureProperties?: MunicipalityProperties
-  ) => {
-    const data = municipalityData[gmCode];
-    if (data) {
-      return {
-        ...data,
-        ...featureProperties,
-      };
-    }
-    return featureProperties;
-  };
+  const getData = useCallback(
+    (gmCode: string) => {
+      return hasData
+        ? municipalityData[gmCode]
+        : municipalGeo.features.find(
+            (feat) => feat.properties.gemcode === gmCode
+          )?.properties;
+    },
+    [municipalityData, hasData]
+  );
 
   const [showTooltip, hideTooltip, tooltipInfo] = useMapTooltip<
     typeof municipalityData[number] & MunicipalityProperties
   >();
 
-  const handleMouseOver = (event: any, data: any) => {
-    showTooltip(event, data);
+  const clipPathId = useRef(`_${Math.random().toString(36).substring(2, 15)}`);
+
+  const svgClick = (event: any) => {
+    if (!onSelect) {
+      return;
+    }
+
+    const elm = event.target;
+
+    if (elm.id) {
+      onSelect(getData(elm.id));
+    }
   };
 
-  const clipPathId = `_${Math.random().toString(36).substring(2, 15)}`;
+  const svgMouseOver = (event: any) => {
+    const elm = event.target;
+    if (elm.id) {
+      if (timout.current > -1) {
+        clearTimeout(timout.current);
+        timout.current = -1;
+      }
+      showTooltip(event, getData(elm.id));
+    }
+  };
+
+  const timout = useRef<any>(-1);
+  const mouseout = () => {
+    if (timout.current < 0) {
+      timout.current = setTimeout(() => {
+        hideTooltip();
+      }, 500);
+    }
+  };
+
+  const features = municipalGeo.features
+    .concat(regionGeo.features as any)
+    .concat(countryGeo.features as any);
 
   return width < 10 ? null : (
     <>
-      <svg width={width} height={height} className={styles.svgMap}>
-        <clipPath id={clipPathId}>
+      <svg
+        width={width}
+        height={height}
+        className={styles.svgMap}
+        onMouseOver={svgMouseOver}
+        onMouseOut={mouseout}
+        onClick={svgClick}
+      >
+        <clipPath id={clipPathId.current}>
           <rect
             x={dimensions.marginLeft}
             y={0}
@@ -110,42 +177,44 @@ export default function MunicipalityChloropleth(props: TProps) {
           y={0}
           width={width}
           height={height}
-          fill={'transparent'}
+          fill={'white'}
           rx={14}
         />
         <g
           transform={`translate(${[marginLeft, marginTop].join(',')})`}
-          clipPath={`url(#${clipPathId})`}
+          clipPath={`url(#${clipPathId.current})`}
         >
           <Mercator
-            data={world.features}
+            data={features}
             fitSize={[[boundedWidth, boundedHeight], boundingbox]}
           >
             {(mercator) => (
               <g>
                 {mercator.features.map(({ feature, path }, i) => {
                   if (!path) return null;
-
                   const { gemcode } = feature.properties;
-                  const data = getData(gemcode, feature.properties);
-
-                  return (
-                    <path
-                      shapeRendering="optimizeQuality"
-                      onMouseOver={(event) => handleMouseOver(event, data)}
-                      onMouseOut={hideTooltip}
-                      key={`municipality-map-feature-${i}`}
-                      d={path}
-                      fill={getFillColor(gemcode)}
-                      stroke={gemcode === selection ? 'black' : '#01689B'}
-                      strokeWidth={0.75}
-                      onClick={() => {
-                        if (onSelect) {
-                          onSelect(data);
-                        }
-                      }}
-                    />
-                  );
+                  if (gemcode) {
+                    return (
+                      <path
+                        shapeRendering="optimizeQuality"
+                        id={gemcode}
+                        key={`municipality-map-feature-${i}`}
+                        d={path}
+                        fill={getFillColor(gemcode)}
+                        stroke={gemcode === selection ? 'black' : 'grey'}
+                        strokeWidth={gemcode === selection ? 3 : 0.5}
+                      />
+                    );
+                  } else {
+                    return (
+                      <path
+                        className={styles.overlay}
+                        shapeRendering="optimizeQuality"
+                        key={`municipality-map-feature-${i}`}
+                        d={path}
+                      />
+                    );
+                  }
                 })}
               </g>
             )}
@@ -153,28 +222,24 @@ export default function MunicipalityChloropleth(props: TProps) {
         </g>
       </svg>
 
-      {tooltipInfo?.tooltipOpen && tooltipInfo.tooltipData && (
-        <TooltipWithBounds
-          // set this to random so it correctly updates with parent bounds
-          key={Math.random()}
-          left={tooltipInfo.tooltipLeft}
-          top={tooltipInfo.tooltipTop}
-          style={{
-            left: `${tooltipInfo?.tooltipLeft}px`,
-            top: `${tooltipInfo?.tooltipTop}px`,
-            transform: 'none',
-          }}
-          className={styles.toolTip}
-        >
-          <strong>{tooltipInfo.tooltipData?.gemnaam}</strong>
-          {tooltipInfo.tooltipData?.value && (
-            <>
-              :<br />
-              {tooltipInfo.tooltipData?.value}
-            </>
-          )}
-        </TooltipWithBounds>
-      )}
+      <TooltipWithBounds
+        // set this to random so it correctly updates with parent bounds
+        key={Math.random()}
+        left={tooltipInfo?.tooltipLeft}
+        top={tooltipInfo?.tooltipTop}
+        style={{
+          display: tooltipInfo?.tooltipOpen ? 'block' : 'none',
+        }}
+        className={styles.toolTip}
+      >
+        <strong>{tooltipInfo?.tooltipData?.gemnaam}</strong>
+        {tooltipInfo?.tooltipData?.value && (
+          <>
+            <br />
+            {tooltipInfo?.tooltipData?.value}
+          </>
+        )}
+      </TooltipWithBounds>
     </>
   );
 }
