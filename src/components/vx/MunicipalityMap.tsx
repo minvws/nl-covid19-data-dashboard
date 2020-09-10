@@ -3,12 +3,14 @@ import { TMunicipalityMetricName } from 'utils/useMunicipalityData';
 import useChartDimensions from './use-chart-dimensions';
 
 import styles from './chloropleth.module.scss';
+import { CSSProperties } from 'react';
 
 export interface IMunicipalityMapProps {
   selected?: string;
   metric?: TMunicipalityMetricName;
   gradient: [minColor: string, maxColor: string];
   onSelect?: (context: any) => void;
+  style?: CSSProperties;
 }
 
 export default function MunicipalityMap(props: IMunicipalityMapProps) {
@@ -20,6 +22,7 @@ export default function MunicipalityMap(props: IMunicipalityMapProps) {
         ref.current = elm;
       }}
       className={styles.chloroplethContainer}
+      style={props.style}
     >
       <MunicipalityChloropleth dimensions={dimensions} {...props} />
     </div>

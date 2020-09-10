@@ -22,6 +22,7 @@ const SafetyRegion: FCWithLayout<any> = () => {
   return (
     <article className="metric-article">
       <SafetyRegionMap
+        style={{ height: '800px' }}
         onSelect={onSelectRegion}
         gradient={['#9DDEFE', '#0290D6']}
       />

@@ -3,12 +3,14 @@ import { TRegionMetricName } from 'utils/useRegionData';
 import useChartDimensions from './use-chart-dimensions';
 
 import styles from './chloropleth.module.scss';
+import { CSSProperties } from 'react';
 
 export interface ISafetyRegionMapProps {
   selected?: string;
   metric?: TRegionMetricName;
   gradient: [minColor: string, maxColor: string];
   onSelect?: (context: any) => void;
+  style?: CSSProperties;
 }
 
 const chartSettings = {
@@ -24,6 +26,7 @@ export default function SafetyRegionMap(props: ISafetyRegionMapProps) {
         ref.current = elm;
       }}
       className={styles.chloroplethContainer}
+      style={props.style}
     >
       <SafetyRegionChloropleth dimensions={dms} {...props} />
     </div>

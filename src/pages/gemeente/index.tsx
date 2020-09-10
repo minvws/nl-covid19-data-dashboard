@@ -22,6 +22,7 @@ const Municipality: FCWithLayout<any> = () => {
   return (
     <article className="metric-article">
       <MunicipalityMap
+        style={{ height: '800px' }}
         onSelect={onSelectMunicpal}
         gradient={['#9DDEFE', '#0290D6']}
       />
