@@ -76,7 +76,7 @@ function getOptions(
     },
     yAxis: {
       min: 0,
-      max: values.length > 0 ? null : 1,
+      max: signaalwaarde ? signaalwaarde + 1 : values.length > 0 ? null : 1,
       allowDecimals: false,
       lineColor: '#C4C4C4',
       gridLineColor: '#C4C4C4',
@@ -98,16 +98,32 @@ function getOptions(
     },
     series: [
       {
-        type: 'line',
+        type: 'area',
         data: values.map((value) => value.value as number),
         name: '',
         showInLegend: false,
         color: '#3391CC',
+        // hex to rgb converted, added opacity
+        fillColor: 'rgba(51, 145, 204, 0.2)',
         marker: {
           enabled: false,
         },
       },
     ],
+    plotOptions: {
+      area: {
+        marker: {
+          enabled: false,
+          symbol: 'circle',
+          radius: 2,
+          states: {
+            hover: {
+              enabled: true,
+            },
+          },
+        },
+      },
+    },
   };
 
   if (signaalwaarde) {
@@ -142,12 +158,12 @@ function LineChart({
 
   return (
     <>
+      <HighchartsReact highcharts={Highcharts} options={chartOptions} />
       <ChartTimeControls
         timeframe={timeframe}
         timeframeOptions={timeframeOptions}
         onChange={(value) => setTimeframe(value as TimeframeOption)}
       />
-      <HighchartsReact highcharts={Highcharts} options={chartOptions} />
     </>
   );
 }
