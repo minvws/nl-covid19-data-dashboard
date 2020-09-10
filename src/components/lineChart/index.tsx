@@ -76,7 +76,7 @@ function getOptions(
     },
     yAxis: {
       min: 0,
-      max: values.length > 0 ? null : Math.max(signaalwaarde as number, 1),
+      max: values.length > 0 ? null : signaalwaarde + 1 || 1,
       allowDecimals: false,
       lineColor: '#C4C4C4',
       gridLineColor: '#C4C4C4',
