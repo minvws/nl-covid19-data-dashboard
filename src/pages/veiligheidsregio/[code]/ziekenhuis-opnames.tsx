@@ -1,5 +1,3 @@
-import { useRouter } from 'next/router';
-
 import BarScale from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
 import { getSafetyRegionLayout } from 'components/layout/SafetyRegionLayout';
@@ -12,13 +10,12 @@ import siteText from 'locale';
 import { ResultsPerRegion } from 'types/data';
 import { LineChart } from 'components/charts/index';
 import replaceVariablesInText from 'utils/replaceVariablesInText';
-import MunicipalityMap from 'components/mapChart/MunicipalityMap';
-import regionCodeToMunicipalCodeLookup from 'data/regionCodeToMunicipalCodeLookup';
 import {
   getSafetyRegionData,
   getSafetyRegionPaths,
   ISafetyRegionData,
 } from 'static-props/safetyregion-data';
+import MunicipalityMap from 'components/vx/MunicipalityMap';
 
 const text: typeof siteText.veiligheidsregio_ziekenhuisopnames_per_dag =
   siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
@@ -58,17 +55,10 @@ export function IntakeHospitalBarScale(props: {
 }
 
 const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
-  const router = useRouter();
-  const { code } = router.query;
   const { data } = props;
 
   const resultsPerRegion: ResultsPerRegion | undefined =
     data?.results_per_region;
-
-  const municipalCodes =
-    code && typeof code === 'string'
-      ? regionCodeToMunicipalCodeLookup[code]
-      : undefined;
 
   return (
     <>
@@ -121,7 +111,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
 
         <div className="column-item column-item-extra-margin">
           <MunicipalityMap
-            municipalCodes={municipalCodes}
+            selected={data.code}
             metric="hospital_admissions"
             gradient={['#9DDEFE', '#0290D6']}
           />

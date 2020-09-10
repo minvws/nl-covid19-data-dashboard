@@ -10,14 +10,13 @@ import Getest from 'assets/test.svg';
 import formatDecimal from 'utils/formatNumber';
 import { ResultsPerRegion } from 'types/data';
 import replaceVariablesInText from 'utils/replaceVariablesInText';
-import MunicipalityMap from 'components/mapChart/MunicipalityMap';
 import regionCodeToMunicipalCodeLookup from 'data/regionCodeToMunicipalCodeLookup';
 import {
   getSafetyRegionData,
   getSafetyRegionPaths,
   ISafetyRegionData,
 } from 'static-props/safetyregion-data';
-import { useRouter } from 'next/router';
+import MunicipalityMap from 'components/vx/MunicipalityMap';
 
 const text: typeof siteText.veiligheidsregio_positief_geteste_personen =
   siteText.veiligheidsregio_positief_geteste_personen;
@@ -57,17 +56,14 @@ export function PostivelyTestedPeopleBarScale(props: {
 }
 
 const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
-  const router = useRouter();
-  const { code } = router.query;
   const { data } = props;
 
   const resultsPerRegion: ResultsPerRegion | undefined =
     data?.results_per_region;
 
-  const municipalCodes =
-    code && typeof code === 'string'
-      ? regionCodeToMunicipalCodeLookup[code]
-      : undefined;
+  const municipalCodes = data.code
+    ? regionCodeToMunicipalCodeLookup[data.code]
+    : undefined;
 
   return (
     <>
@@ -130,11 +126,13 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
         </div>
 
         <div className="column-item column-item-extra-margin">
-          <MunicipalityMap
-            municipalCodes={municipalCodes}
-            metric="positive_tested_people"
-            gradient={['#9DDEFE', '#0290D6']}
-          />
+          {municipalCodes?.length && (
+            <MunicipalityMap
+              selected={municipalCodes[0]}
+              metric="positive_tested_people"
+              gradient={['#9DDEFE', '#0290D6']}
+            />
+          )}
         </div>
       </article>
     </>
