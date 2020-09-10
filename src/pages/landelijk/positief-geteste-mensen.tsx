@@ -4,10 +4,11 @@ import BarScale from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
 import { getNationalLayout } from 'components/layout/NationalLayout';
 import { LineChart, BarChart } from 'components/charts/index';
-import MunicipalityMap from 'components/mapChart/MunicipalityMap';
 import { ContentHeader } from 'components/layout/Content';
-import SafetyRegionMap from 'components/mapChart/SafetyRegionMap';
 import ChartRegionControls from 'components/chartRegionControls';
+
+import MunicipalityMap from 'components/vx/MunicipalityMap';
+import SafetyRegionMap from 'components/vx/SafetyRegionMap';
 
 import Getest from 'assets/test.svg';
 import formatDecimal from 'utils/formatNumber';
@@ -139,8 +140,11 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
       </article>
 
       <article className="metric-article">
-        <h3>{text.linechart_titel}</h3>
-        <p>{text.linechart_toelichting}</p>
+        <div className="article-text">
+          <h3>{text.linechart_titel}</h3>
+          <p>{text.linechart_toelichting}</p>
+        </div>
+
         {delta && (
           <LineChart
             values={delta.values.map((value) => ({
@@ -152,9 +156,11 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         )}
       </article>
 
-      <article className="metric-article">
-        <h3>{text.barscale_titel}</h3>
-        <p>{text.barchart_toelichting}</p>
+      <article className="metric-article layout-two-column">
+        <div className="column-item column-item-extra-margin">
+          <h3>{text.barscale_titel}</h3>
+          <p>{text.barchart_toelichting}</p>
+        </div>
         {age && (
           <>
             <BarChart

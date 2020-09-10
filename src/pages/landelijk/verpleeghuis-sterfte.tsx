@@ -9,10 +9,6 @@ import CoronaVirus from 'assets/coronavirus.svg';
 import siteText from 'locale';
 
 import { DeceasedPeopleNurseryCountDaily } from 'types/data';
-import MunicipalityMap from 'components/mapChart/MunicipalityMap';
-import { useState } from 'react';
-import SafetyRegionMap from 'components/mapChart/SafetyRegionMap';
-import ChartRegionControls from 'components/chartRegionControls';
 import getNlData, { INationalData } from 'static-props/nl-data';
 
 const text: typeof siteText.verpleeghuis_oversterfte =
@@ -45,9 +41,6 @@ export function NursingHomeDeathsBarScale(props: {
 
 const NursingHomeDeaths: FCWithLayout<INationalData> = (props) => {
   const { data: state } = props;
-  const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
-    'municipal'
-  );
 
   const data: DeceasedPeopleNurseryCountDaily | undefined =
     state?.deceased_people_nursery_count_daily;
@@ -76,31 +69,6 @@ const NursingHomeDeaths: FCWithLayout<INationalData> = (props) => {
 
         <div className="column-item column-item-extra-margin">
           <p>{text.extra_uitleg}</p>
-        </div>
-      </article>
-
-      <article className="metric-article layout-two-column">
-        <div className="column-item column-item-extra-margin">
-          <h3>{text.map_titel}</h3>
-          <p>{text.map_toelichting}</p>
-          <ChartRegionControls
-            onChange={(val: 'region' | 'municipal') => setSelectedMap(val)}
-          />
-        </div>
-
-        <div className="column-item column-item-extra-margin">
-          {selectedMap === 'municipal' && (
-            <MunicipalityMap
-              metric="deceased"
-              gradient={['#9DDEFE', '#0290D6']}
-            />
-          )}
-          {selectedMap === 'region' && (
-            <SafetyRegionMap
-              metric="deceased"
-              gradient={['#9DDEFE', '#0290D6']}
-            />
-          )}
         </div>
       </article>
 

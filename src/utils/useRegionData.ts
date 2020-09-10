@@ -1,41 +1,41 @@
-import { useMemo } from 'react';
-import useSWR from 'swr';
-
 import { Regions } from 'types/data';
+import useSWR from 'swr';
+import { useMemo } from 'react';
 
 export type TRegionMetricName = keyof Pick<
   Regions,
   'hospital_admissions' | 'positive_tested_people' | 'deceased'
 >;
 
-/**
- * This hook filters the regional chloropleth data based on the given metric name
- *
- * @param metricName The given metric name
- */
 export default function useRegionData<
   T extends TRegionMetricName,
   K extends Regions[T]
->(metricName: T, regionCode?: string): (K[number] & { value: number })[] {
+>(
+  metricName?: T
+): Record<string, K[number] & { value: number; regionName: string }> {
   const { data } = useSWR<Regions>('/json/regions.json');
 
-  const metricItems = data?.[metricName];
+  const metricItems = metricName && data ? data[metricName] : undefined;
 
   return useMemo(() => {
     if (!metricItems) {
       return [];
     }
 
-    const filteredData = (metricItems as any[]).map<
-      K[number] & { value: number }
-    >((item: K[number]): K[number] & { value: number } => ({
-      ...item,
-      value: (item as any)[metricName],
-    }));
+    const filteredData = (metricItems as any[]).reduce(
+      (
+        aggr,
+        item: K[number]
+      ): Record<string, K[number] & { value: number }> => {
+        aggr[item.vrcode] = {
+          ...item,
+          value: (item as any)[metricName],
+        };
+        return aggr;
+      },
+      {}
+    );
 
-    const filterByRegion: any = (item: K[number]): any =>
-      item.vrcode === regionCode;
-
-    return regionCode ? filteredData.filter<any>(filterByRegion) : filteredData;
-  }, [metricItems, metricName, regionCode]);
+    return filteredData;
+  }, [metricItems, metricName]);
 }

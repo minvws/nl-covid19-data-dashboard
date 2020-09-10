@@ -129,7 +129,7 @@
   }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 999px) {
   .small-screen-aside-tendency {
     .national-content,
     .safety-region-content,
@@ -259,7 +259,7 @@ a.metric-link {
     fill: currentColor;
     color: $text-color-grey !important;
   }
-  
+
   p {
     margin-top: 0.5rem;
     margin-left: 2.5rem;
