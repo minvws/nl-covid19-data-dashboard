@@ -1,11 +1,11 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 
 import { Mercator } from '@vx/geo';
 import * as topojson from 'topojson-client';
 
 import topology from './municipalities.topo.json';
 import { FeatureCollection, MultiPolygon } from 'geojson';
-import useNewMunicipalityData from 'utils/useMunicipalityData';
+import useMunicipalityData from 'utils/useMunicipalityData';
 import useMapColorScale from 'utils/useMapColorScale';
 import useMapTooltip from './useMapTooltip';
 import { IMunicipalityMapProps } from './MunicipalityMap';
@@ -47,18 +47,19 @@ export default function MunicipalityChloropleth(props: TProps) {
     boundedHeight,
   } = dimensions;
 
+  const boundingbox = useMunicipalityFeatures(world, selected);
+  world.features = sortFeatures(world, 'gemcode', selected);
+
   const [selection] = useState<string | undefined>(selected);
 
-  const municipalityData = useNewMunicipalityData(metric);
+  const municipalityData = useMunicipalityData(metric, world);
+  const hasData = Boolean(Object.keys(municipalityData).length);
 
   const color = useMapColorScale(
     municipalityData,
     (item: typeof municipalityData[number]) => item.value,
     gradient
   );
-
-  const boundingbox = useMunicipalityFeatures(world, selected);
-  world.features = sortFeatures(world, 'gemcode', selected);
 
   const getFillColor = useCallback(
     (gmCode: string) => {
@@ -70,15 +71,11 @@ export default function MunicipalityChloropleth(props: TProps) {
   );
 
   const getData = useCallback(
-    (gmCode: string, featureProperties?: MunicipalityProperties) => {
-      const data = municipalityData[gmCode];
-      if (data) {
-        return {
-          ...data,
-          ...featureProperties,
-        };
-      }
-      return featureProperties;
+    (gmCode: string) => {
+      return hasData
+        ? municipalityData[gmCode]
+        : world.features.find((feat) => feat.properties.gemcode === gmCode)
+            ?.properties;
     },
     [municipalityData]
   );
@@ -87,35 +84,51 @@ export default function MunicipalityChloropleth(props: TProps) {
     typeof municipalityData[number] & MunicipalityProperties
   >();
 
-  const handleMouseOver = (event: any, data: any) => {
-    showTooltip(event, data);
+  const clipPathId = useRef(`_${Math.random().toString(36).substring(2, 15)}`);
+
+  const svgClick = (event: any) => {
+    if (!onSelect) {
+      return;
+    }
+
+    const elm = event.target;
+
+    if (elm.id) {
+      onSelect(getData(elm.id));
+    }
   };
 
-  const clipPathId = `_${Math.random().toString(36).substring(2, 15)}`;
+  const svgMouseOver = (event: any) => {
+    const elm = event.target;
+    if (elm.id) {
+      if (timout.current > -1) {
+        clearTimeout(timout.current);
+        timout.current = -1;
+      }
+      showTooltip(event, getData(elm.id));
+    }
+  };
+
+  const timout = useRef<any>(-1);
+  const mouseout = () => {
+    if (timout.current < 0) {
+      timout.current = setTimeout(() => {
+        hideTooltip();
+      }, 500);
+    }
+  };
 
   return width < 10 ? null : (
     <>
-      <TooltipWithBounds
-        // set this to random so it correctly updates with parent bounds
-        key={Math.random()}
-        left={tooltipInfo?.tooltipLeft}
-        top={tooltipInfo?.tooltipTop}
-        style={{
-          display: tooltipInfo?.tooltipOpen ? 'block' : 'none',
-        }}
-        className={styles.toolTip}
+      <svg
+        width={width}
+        height={height}
+        className={styles.svgMap}
+        onMouseOver={svgMouseOver}
+        onMouseOut={mouseout}
+        onClick={svgClick}
       >
-        <strong>{tooltipInfo?.tooltipData?.gemnaam}</strong>
-        {tooltipInfo?.tooltipData?.value && (
-          <>
-            <br />
-            {tooltipInfo?.tooltipData?.value}
-          </>
-        )}
-      </TooltipWithBounds>
-
-      <svg width={width} height={height} className={styles.svgMap}>
-        <clipPath id={clipPathId}>
+        <clipPath id={clipPathId.current}>
           <rect
             x={dimensions.marginLeft}
             y={0}
@@ -137,7 +150,7 @@ export default function MunicipalityChloropleth(props: TProps) {
         />
         <g
           transform={`translate(${[marginLeft, marginTop].join(',')})`}
-          clipPath={`url(#${clipPathId})`}
+          clipPath={`url(#${clipPathId.current})`}
         >
           <Mercator
             data={world.features}
@@ -147,25 +160,16 @@ export default function MunicipalityChloropleth(props: TProps) {
               <g>
                 {mercator.features.map(({ feature, path }, i) => {
                   if (!path) return null;
-
                   const { gemcode } = feature.properties;
-                  const data = getData(gemcode, feature.properties);
-
                   return (
                     <path
                       shapeRendering="optimizeQuality"
-                      onMouseOver={(event) => handleMouseOver(event, data)}
-                      onMouseOut={hideTooltip}
+                      id={gemcode}
                       key={`municipality-map-feature-${i}`}
                       d={path}
                       fill={getFillColor(gemcode)}
                       stroke={gemcode === selection ? 'black' : 'blue'}
                       strokeWidth={gemcode === selection ? 3 : 0.5}
-                      onClick={() => {
-                        if (onSelect) {
-                          onSelect(data);
-                        }
-                      }}
                     />
                   );
                 })}
@@ -174,6 +178,25 @@ export default function MunicipalityChloropleth(props: TProps) {
           </Mercator>
         </g>
       </svg>
+
+      <TooltipWithBounds
+        // set this to random so it correctly updates with parent bounds
+        key={Math.random()}
+        left={tooltipInfo?.tooltipLeft}
+        top={tooltipInfo?.tooltipTop}
+        style={{
+          display: tooltipInfo?.tooltipOpen ? 'block' : 'none',
+        }}
+        className={styles.toolTip}
+      >
+        <strong>{tooltipInfo?.tooltipData?.gemnaam}</strong>
+        {tooltipInfo?.tooltipData?.value && (
+          <>
+            <br />
+            {tooltipInfo?.tooltipData?.value}
+          </>
+        )}
+      </TooltipWithBounds>
     </>
   );
 }
