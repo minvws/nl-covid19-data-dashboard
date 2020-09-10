@@ -88,8 +88,8 @@
   min-height: 35em;
 
   [data-reach-combobox] {
-    margin: 2em 1em;
-    margin-bottom: 0;
+    padding: 2em 1em;
+    padding-bottom: 0;
   }
 }
 
@@ -201,8 +201,9 @@
   z-index: 2;
 
   h2 {
-    margin: 1rem;
-    margin-top: 2rem;
+    padding: 1rem;
+    padding-bottom: 0.5rem;
+    padding-top: 2rem;
   }
 
   ul {
