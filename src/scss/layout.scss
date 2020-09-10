@@ -67,6 +67,11 @@
   margin: 0;
   margin-top: 2rem;
   box-shadow: $box-shadow;
+
+  .article-text {
+    max-width: 30rem;
+    // color: blue;
+  }
 }
 
 /* Remove outline from programatically focussed elements. */
@@ -123,7 +128,7 @@
   }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 999px) {
   .small-screen-aside-tendency {
     .national-content,
     .safety-region-content,
