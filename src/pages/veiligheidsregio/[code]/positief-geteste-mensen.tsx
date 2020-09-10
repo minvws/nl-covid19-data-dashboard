@@ -1,3 +1,5 @@
+import { Fragment } from 'react';
+
 import BarScale from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
 import { getSafetyRegionLayout } from 'components/layout/SafetyRegionLayout';
@@ -9,15 +11,14 @@ import siteText from 'locale';
 import Getest from 'assets/test.svg';
 import formatDecimal from 'utils/formatNumber';
 import { ResultsPerRegion } from 'types/data';
-import replaceVariablesInText from 'utils/replaceVariablesInText';
-import MunicipalityMap from 'components/mapChart/MunicipalityMap';
 import regionCodeToMunicipalCodeLookup from 'data/regionCodeToMunicipalCodeLookup';
 import {
   getSafetyRegionData,
   getSafetyRegionPaths,
   ISafetyRegionData,
 } from 'static-props/safetyregion-data';
-import { useRouter } from 'next/router';
+import { getLocalTitleForRegion } from 'utils/getLocalTitleForCode';
+import MunicipalityMap from 'components/vx/MunicipalityMap';
 
 const text: typeof siteText.veiligheidsregio_positief_geteste_personen =
   siteText.veiligheidsregio_positief_geteste_personen;
@@ -57,25 +58,20 @@ export function PostivelyTestedPeopleBarScale(props: {
 }
 
 const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
-  const router = useRouter();
-  const { code } = router.query;
   const { data } = props;
 
   const resultsPerRegion: ResultsPerRegion | undefined =
     data?.results_per_region;
 
-  const municipalCodes =
-    code && typeof code === 'string'
-      ? regionCodeToMunicipalCodeLookup[code]
-      : undefined;
+  const municipalCodes = data.code
+    ? regionCodeToMunicipalCodeLookup[data.code]
+    : undefined;
 
   return (
     <>
       <ContentHeader
         category="Medische indicatoren"
-        title={replaceVariablesInText(text.titel, {
-          safetyRegion: data.name,
-        })}
+        title={getLocalTitleForRegion(text.titel, data.code)}
         Icon={Getest}
         subtitle={text.pagina_toelichting}
         metadata={{
@@ -125,18 +121,79 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
       </article>
       <article className="metric-article layout-two-column">
         <div className="column-item column-item-extra-margin">
-          <h3>{text.map_titel}</h3>
+          <h3>{getLocalTitleForRegion(text.map_titel, data.code)}</h3>
           <p>{text.map_toelichting}</p>
         </div>
 
         <div className="column-item column-item-extra-margin">
-          <MunicipalityMap
-            municipalCodes={municipalCodes}
-            metric="positive_tested_people"
-            gradient={['#9DDEFE', '#0290D6']}
-          />
+          {municipalCodes?.length && (
+            <MunicipalityMap
+              selected={municipalCodes[0]}
+              metric="positive_tested_people"
+              gradient={['#9DDEFE', '#0290D6']}
+            />
+          )}
         </div>
       </article>
+
+      {resultsPerRegion?.last_value?.active_clusters && (
+        <>
+          <ContentHeader
+            category={'\u00A0'}
+            title={text.cluster_titel}
+            Icon={Fragment}
+            subtitle={text.cluster_toelichting}
+            metadata={{
+              datumsText: text.cluster_datums,
+              dateUnix: resultsPerRegion.last_value.date_of_report_unix,
+              dateInsertedUnix:
+                resultsPerRegion.last_value.date_of_insertion_unix,
+              dataSource: text.cluster_bron,
+            }}
+          />
+          <div className="layout-two-column">
+            <article className="metric-article column-item">
+              <h3>{text.cluster_barscale_titel}</h3>
+
+              <BarScale
+                min={0}
+                max={10}
+                screenReaderText={text.barscale_screenreader_text}
+                value={resultsPerRegion.last_value.active_clusters}
+                id="positief"
+                rangeKey="infected_daily_increase"
+                gradient={[
+                  {
+                    color: '#3391CC',
+                    value: 0,
+                  },
+                ]}
+              />
+              <p>{text.cluster_barscale_toelichting}</p>
+            </article>
+
+            <article className="metric-article column-item">
+              <h3>
+                {text.cluster_gemiddelde_titel}{' '}
+                <span className="text-blue kpi">
+                  {formatDecimal(resultsPerRegion.last_value.cluster_average)}
+                </span>
+              </h3>
+              <p>{text.cluster_gemiddelde_toelichting}</p>
+            </article>
+          </div>
+          <article className="metric-article">
+            <h3>{text.cluster_linechart_titel}</h3>
+            <p>{text.cluster_linechart_toelichting}</p>
+            <LineChart
+              values={resultsPerRegion?.values?.map((value) => ({
+                value: value?.active_clusters,
+                date: value.date_of_report_unix,
+              }))}
+            />
+          </article>
+        </>
+      )}
     </>
   );
 };

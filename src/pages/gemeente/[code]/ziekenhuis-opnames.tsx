@@ -9,14 +9,14 @@ import siteText from 'locale';
 
 import { HospitalAdmissions } from 'types/data';
 import { LineChart } from 'components/charts/index';
-import replaceVariablesInText from 'utils/replaceVariablesInText';
 import {
   getMunicipalityData,
   getMunicipalityPaths,
   IMunicipalityData,
 } from 'static-props/municipality-data';
-import getSafetyRegionForMunicipal from 'utils/getSafetyRegionForMunicipal';
-import MunicipalityMap from 'components/mapChart/MunicipalityMap';
+
+import { getLocalTitleForMuncipality } from 'utils/getLocalTitleForCode';
+import MunicipalityMap from 'components/vx/MunicipalityMap';
 const text: typeof siteText.gemeente_ziekenhuisopnames_per_dag =
   siteText.gemeente_ziekenhuisopnames_per_dag;
 
@@ -57,8 +57,6 @@ export function IntakeHospitalBarScale(props: {
 const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
   const { data } = props;
 
-  const municipalCodes = getSafetyRegionForMunicipal(data.code);
-
   const hospitalAdmissions: HospitalAdmissions | undefined =
     data?.hospital_admissions;
 
@@ -66,9 +64,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
     <>
       <ContentHeader
         category="Medische indicatoren"
-        title={replaceVariablesInText(text.titel, {
-          municipality: data.hospital_admissions.last_value.municipality_name,
-        })}
+        title={getLocalTitleForMuncipality(text.titel, data.code)}
         Icon={Ziekenhuis}
         subtitle={text.pagina_toelichting}
         metadata={{
@@ -110,19 +106,16 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
 
       <article className="metric-article layout-two-column">
         <div className="column-item column-item-extra-margin">
-          <h3>{text.map_titel}</h3>
+          <h3>{getLocalTitleForMuncipality(text.map_titel, data.code)}</h3>
           <p>{text.map_toelichting}</p>
         </div>
 
         <div className="column-item column-item-extra-margin">
-          {municipalCodes && (
-            <MunicipalityMap
-              selected={data.code}
-              municipalCodes={municipalCodes}
-              metric="hospital_admissions"
-              gradient={['#9DDEFE', '#0290D6']}
-            />
-          )}
+          <MunicipalityMap
+            selected={data.code}
+            metric="hospital_admissions"
+            gradient={['#69c253', '#f35065']}
+          />
         </div>
       </article>
     </>

@@ -110,6 +110,7 @@ export interface National {
   intake_intensivecare_ma: IntakeIntensivecareMa;
   infected_people_nursery_count_daily: InfectedPeopleNurseryCountDaily;
   deceased_people_nursery_count_daily: DeceasedPeopleNurseryCountDaily;
+  infected_people_clusters?: InfectedPeopleClusters;
   total_reported_locations: TotalReportedLocations;
   total_newly_reported_locations: TotalNewlyReportedLocations;
   infected_people_total: InfectedPeopleTotal;
@@ -187,6 +188,16 @@ export interface DeceasedPeopleNurseryCountDaily {
 }
 export interface DeceasedPeopleNurseryCountDailyLastValue {
   deceased_nursery_daily: number;
+  date_of_report_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface InfectedPeopleClusters {
+  values: InfectedPeopleClustersLastValue[];
+  last_value: InfectedPeopleClustersLastValue;
+}
+export interface InfectedPeopleClustersLastValue {
+  active_clusters: number;
+  cluster_average: number;
   date_of_report_unix: number;
   date_of_insertion_unix: number;
 }
@@ -407,6 +418,8 @@ export interface RegionaalValue {
   total_reported_increase_per_region: number;
   infected_total_counts_per_region: number;
   hospital_total_counts_per_region: number;
+  active_clusters?: number;
+  cluster_average?: number;
   infected_increase_per_region: number;
   hospital_increase_per_region: number;
   hospital_moving_avg_per_region: number;
@@ -421,6 +434,7 @@ export interface Regions {
   hospital_admissions: RegionHospitalAdmissions[];
   positive_tested_people: RegionPositiveTestedPeople[];
   deceased: RegionDeceased[];
+  escalation_levels?: EscalationLevels[];
 }
 export interface RegionHospitalAdmissions {
   date_of_report_unix: number;
@@ -438,5 +452,11 @@ export interface RegionDeceased {
   date_of_report_unix: number;
   vrcode: string;
   deceased: number;
+  date_of_insertion_unix: number;
+}
+export interface EscalationLevels {
+  date_of_report_unix: number;
+  vrcode: string;
+  escalation_level: number;
   date_of_insertion_unix: number;
 }

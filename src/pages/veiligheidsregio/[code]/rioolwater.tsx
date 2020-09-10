@@ -8,7 +8,6 @@ import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
 import siteText from 'locale';
 
 import RegionalSewerWaterLineChart from 'components/lineChart/regionalSewerWaterLineChart';
-import replaceVariablesInText from 'utils/replaceVariablesInText';
 import { useMemo } from 'react';
 import BarChart from 'components/barChart';
 import {
@@ -22,6 +21,7 @@ import {
   getSafetyRegionPaths,
   ISafetyRegionData,
 } from 'static-props/safetyregion-data';
+import { getLocalTitleForRegion } from 'utils/getLocalTitleForCode';
 
 const text: typeof siteText.veiligheidsregio_rioolwater_metingen =
   siteText.veiligheidsregio_rioolwater_metingen;
@@ -66,9 +66,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
     <>
       <ContentHeader
         category="Overige indicatoren"
-        title={replaceVariablesInText(text.titel, {
-          safetyRegion: data.name,
-        })}
+        title={getLocalTitleForRegion(text.titel, data.code)}
         Icon={RioolwaterMonitoring}
         subtitle={text.pagina_toelichting}
         metadata={{
@@ -108,11 +106,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
 
       {barChartData && (
         <article className="metric-article">
-          <h3>
-            {replaceVariablesInText(text.bar_chart_title, {
-              safetyRegion: data.name,
-            })}
-          </h3>
+          <h3>{getLocalTitleForRegion(text.bar_chart_title, data.code)}</h3>
           <BarChart
             keys={barChartData.keys}
             data={barChartData.data}

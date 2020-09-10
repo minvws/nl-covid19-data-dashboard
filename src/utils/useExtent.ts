@@ -18,6 +18,6 @@ export default function useExtent(
 
     const min = Math.min(...numberCollection);
     const max = Math.max(...numberCollection);
-    return [min, max];
+    return [min !== Infinity ? min : 0, max !== -Infinity ? max : 0];
   }, [collection, predicate]);
 }

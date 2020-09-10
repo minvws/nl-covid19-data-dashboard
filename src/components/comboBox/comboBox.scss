@@ -1,28 +1,54 @@
 @import 'scss/variables.scss';
 
+[data-reach-combobox] {
+  position: relative;
+
+  &::after {
+    content: '';
+    background-image: url('/images/search.svg');
+    background-size: 1.5em 1.5em;
+    height: 1.5em;
+    width: 1.5em;
+    display: block;
+    position: absolute;
+    left: 0.75em;
+    top: 0.65em;
+    z-index: 100;
+  }
+}
+
 [data-reach-combobox-popover] {
   z-index: 100;
 
   > span {
     display: block;
-    padding: 0.5em 1em;
+    padding: 0.75em 1em;
     font-size: 1rem;
   }
 }
 
 [data-reach-combobox-list] {
-  max-height: 30em;
+  height: 30em;
   overflow-y: scroll;
+  border: none;
+  box-shadow: $box-shadow;
 }
 
 [data-reach-combobox-input] {
   width: 100%;
-  padding: 0.5em 1em;
+  padding: 0.75em 1em;
+  padding-left: 2.5em;
   font-size: 1rem;
+  border: 1px solid #c4c4c4;
+
+  &:focus {
+    border-color: $icon-color;
+    outline: none;
+  }
 }
 
 [data-reach-combobox-option] {
-  padding: 0.5em 1em;
+  padding: 0.75em 1em;
 
   &:hover,
   &:focus {
