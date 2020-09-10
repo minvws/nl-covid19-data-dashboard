@@ -54,6 +54,8 @@ function ComboBox<Option extends TOption>(props: TProps<Option>) {
   function onSelect(name: string): void {
     const option = options.find((option) => option.name === name);
 
+    inputRef?.current?.blur();
+
     handleSelect(option as Option);
   }
 

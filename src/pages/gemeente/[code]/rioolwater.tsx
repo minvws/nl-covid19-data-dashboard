@@ -8,7 +8,6 @@ import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
 import siteText from 'locale';
 
 import RegionalSewerWaterLineChart from 'components/lineChart/regionalSewerWaterLineChart';
-import replaceVariablesInText from 'utils/replaceVariablesInText';
 import { useMemo } from 'react';
 import BarChart from 'components/barChart';
 import {
@@ -22,6 +21,7 @@ import {
   getMunicipalityPaths,
   IMunicipalityData,
 } from 'static-props/municipality-data';
+import { getLocalTitleForMuncipality } from 'utils/getLocalTitleForCode';
 
 const text: typeof siteText.gemeente_rioolwater_metingen =
   siteText.gemeente_rioolwater_metingen;
@@ -67,9 +67,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
     <>
       <ContentHeader
         category="Overige indicatoren"
-        title={replaceVariablesInText(text.titel, {
-          municipality: data.name,
-        })}
+        title={getLocalTitleForMuncipality(text.titel, data.code)}
         Icon={RioolwaterMonitoring}
         subtitle={text.pagina_toelichting}
         metadata={{
@@ -110,9 +108,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
       {barChartData && (
         <article className="metric-article">
           <h3>
-            {replaceVariablesInText(text.bar_chart_title, {
-              municipality: data.name,
-            })}
+            {getLocalTitleForMuncipality(text.bar_chart_title, data.code)}
           </h3>
           <BarChart
             keys={barChartData.keys}
