@@ -540,7 +540,7 @@
     "linechart_titel": "Progression over time",
     "linechart_toelichting": "Deze grafieken laten zien hoe de verdeling van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
-    "barchart_toelichting": "Deze grafiek toont de trend van het aantal positieve tests over leeftijdsgroepen.",
+    "barchart_toelichting": "This figure shows the progression over time in the number of positive tests by agegroup.",
     "barchart_axis_titel": "Total number of confirmed cases",
     "barscale_keys": [
       "0 to 20",
