@@ -515,6 +515,14 @@
   "gemeente_metadata": {
     "title": "Gemeente"
   },
+  "veiligheidsregio_index": {
+    "selecteer_titel": "Selecteer een veiligheidsregio",
+    "selecteer_toelichting": "Er gelden verschillende maatregelen per veiligheidsregio en gemeente"
+  },
+  "gemeente_index": {
+    "selecteer_titel": "Selecteer een gemeente",
+    "selecteer_toelichting": "Er gelden verschillende maatregelen per veiligheidsregio en gemeente"
+  },
   "veiligheidsregio_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Ziekenhuisopnames per dag",
     "titel": "Ziekenhuisopnames per dag in {{safetyRegion}}",
@@ -523,7 +531,7 @@
     "screen_reader_graph_content": "{{value}} opnames.",
     "barscale_titel": "Ziekenhuisopnames per dag",
     "extra_uitleg": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen.",
-    "map_titel": "Verdeling ziekenhuisopnames in Nederland",
+    "map_titel": "Verdeling ziekenhuisopnames in {{safetyRegion}}",
     "map_toelichting": "Deze grafieken laten zien hoe de verdeling van ziekenhuisopnames is in Nederland per dag.",
     "linechart_titel": "Ziekenhuisopnames over tijd",
     "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
@@ -543,7 +551,7 @@
     "barscale_screenreader_text": "{{value}} positief geteste mensen per dag.",
     "kpi_titel": "Aantal positief geteste mensen:",
     "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn en COVID-19 hebben.",
-    "map_titel": "Verdeling positief geteste mensen in Nederland",
+    "map_titel": "Verdeling positief geteste mensen in {{safetyRegion}}",
     "map_toelichting": "Deze grafieken laten zien hoe de verdeling van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
     "linechart_titel": "Verloop over tijd",
     "linechart_toelichting": "Deze grafieken laten zien hoe de verdeling van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
@@ -599,7 +607,7 @@
     "screen_reader_graph_content": "{{value}} opnames.",
     "barscale_titel": "Ziekenhuisopnames per dag",
     "extra_uitleg": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen.",
-    "map_titel": "Verdeling ziekenhuisopnames in Nederland",
+    "map_titel": "Verdeling ziekenhuisopnames in {{municipality}}",
     "map_toelichting": "Deze grafieken laten zien hoe de verdeling van ziekenhuisopnames is in Nederland per dag.",
     "linechart_titel": "Ziekenhuisopnames over tijd",
     "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
@@ -619,7 +627,7 @@
     "barscale_screenreader_text": "{{value}} positief geteste mensen per dag.",
     "kpi_titel": "Aantal positief geteste mensen:",
     "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn en COVID-19 hebben.",
-    "map_titel": "Verdeling positief geteste mensen in Nederland",
+    "map_titel": "Verdeling positief geteste mensen in {{municipality}}",
     "map_toelichting": "Deze grafieken laten zien hoe de verdeling van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
     "linechart_titel": "Verloop over tijd",
     "linechart_toelichting": "Deze grafieken laten zien hoe de verdeling van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",

@@ -9,12 +9,13 @@ import siteText from 'locale';
 
 import { ResultsPerRegion } from 'types/data';
 import { LineChart } from 'components/charts/index';
-import replaceVariablesInText from 'utils/replaceVariablesInText';
+
 import {
   getSafetyRegionData,
   getSafetyRegionPaths,
   ISafetyRegionData,
 } from 'static-props/safetyregion-data';
+import { getLocalTitleForRegion } from 'utils/getLocalTitleForCode';
 import MunicipalityMap from 'components/vx/MunicipalityMap';
 
 const text: typeof siteText.veiligheidsregio_ziekenhuisopnames_per_dag =
@@ -64,9 +65,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
     <>
       <ContentHeader
         category="Medische indicatoren"
-        title={replaceVariablesInText(text.titel, {
-          safetyRegion: data.name,
-        })}
+        title={getLocalTitleForRegion(text.titel, data.code)}
         Icon={Ziekenhuis}
         subtitle={text.pagina_toelichting}
         metadata={{
@@ -105,7 +104,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
       </article>
       <article className="metric-article layout-two-column">
         <div className="column-item column-item-extra-margin">
-          <h3>{text.map_titel}</h3>
+          <h3>{getLocalTitleForRegion(text.map_titel, data.code)}</h3>
           <p>{text.map_toelichting}</p>
         </div>
 

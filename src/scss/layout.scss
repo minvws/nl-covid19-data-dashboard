@@ -64,13 +64,13 @@
   background: white;
   padding: 2em;
   border-radius: 5px;
-  margin: 0;
+  margin: 0 -2rem;
   margin-top: 2rem;
   box-shadow: $box-shadow;
 
-  .article-text {
-    max-width: 30rem;
-    // color: blue;
+  @media (min-width: 700px) {
+    margin: 0;
+    margin-top: 2rem;
   }
 }
 
@@ -81,10 +81,11 @@
 
 .safety-region-aside,
 .municipality-aside {
-  min-height: 30em;
+  min-height: 35em;
 
   [data-reach-combobox] {
-    padding: 1em;
+    margin: 2em 1em;
+    margin-bottom: 0;
   }
 }
 
@@ -196,8 +197,8 @@
   z-index: 2;
 
   h2 {
-    padding: 1rem;
-    padding-top: 3rem;
+    margin: 1rem;
+    margin-top: 2rem;
   }
 
   ul {
@@ -235,10 +236,9 @@ a.metric-link {
   &::after {
     content: '';
     background-image: url('/images/chevron.svg');
-    // match aspect ratio of chevron.svg
-    background-size: 1.1em 1.8em;
-    height: 1.8em;
-    width: 1.1em;
+    background-size: 1.2em 1.2em;
+    height: 1.2em;
+    width: 1.2em;
     display: block;
     position: absolute;
     right: 1em;
@@ -248,6 +248,21 @@ a.metric-link {
   span {
     display: block;
     margin: 0 2.5rem;
+  }
+}
+
+.metric-not-available {
+  padding: 1rem;
+  color: $text-color-grey;
+
+  svg {
+    fill: currentColor;
+    color: $text-color-grey !important;
+  }
+
+  p {
+    margin-top: 0.5rem;
+    margin-left: 2.5rem;
   }
 }
 

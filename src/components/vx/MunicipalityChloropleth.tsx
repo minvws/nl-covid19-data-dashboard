@@ -110,7 +110,7 @@ export default function MunicipalityChloropleth(props: TProps) {
           y={0}
           width={width}
           height={height}
-          fill={'white'}
+          fill={'transparent'}
           rx={14}
         />
         <g
@@ -137,8 +137,8 @@ export default function MunicipalityChloropleth(props: TProps) {
                       key={`municipality-map-feature-${i}`}
                       d={path}
                       fill={getFillColor(gemcode)}
-                      stroke={gemcode === selection ? 'black' : 'blue'}
-                      strokeWidth={gemcode === selection ? 3 : 0.5}
+                      stroke={gemcode === selection ? 'black' : '#01689B'}
+                      strokeWidth={0.75}
                       onClick={() => {
                         if (onSelect) {
                           onSelect(data);

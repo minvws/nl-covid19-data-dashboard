@@ -9,12 +9,13 @@ import siteText from 'locale';
 
 import { HospitalAdmissions } from 'types/data';
 import { LineChart } from 'components/charts/index';
-import replaceVariablesInText from 'utils/replaceVariablesInText';
 import {
   getMunicipalityData,
   getMunicipalityPaths,
   IMunicipalityData,
 } from 'static-props/municipality-data';
+
+import { getLocalTitleForMuncipality } from 'utils/getLocalTitleForCode';
 import MunicipalityMap from 'components/vx/MunicipalityMap';
 const text: typeof siteText.gemeente_ziekenhuisopnames_per_dag =
   siteText.gemeente_ziekenhuisopnames_per_dag;
@@ -63,9 +64,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
     <>
       <ContentHeader
         category="Medische indicatoren"
-        title={replaceVariablesInText(text.titel, {
-          municipality: data.hospital_admissions.last_value.municipality_name,
-        })}
+        title={getLocalTitleForMuncipality(text.titel, data.code)}
         Icon={Ziekenhuis}
         subtitle={text.pagina_toelichting}
         metadata={{
@@ -107,7 +106,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
 
       <article className="metric-article layout-two-column">
         <div className="column-item column-item-extra-margin">
-          <h3>{text.map_titel}</h3>
+          <h3>{getLocalTitleForMuncipality(text.map_titel, data.code)}</h3>
           <p>{text.map_toelichting}</p>
         </div>
 

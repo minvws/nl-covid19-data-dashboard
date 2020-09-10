@@ -3,6 +3,8 @@ import { getMunicipalityLayout } from 'components/layout/MunicipalityLayout';
 import { useRouter } from 'next/router';
 import MunicipalityMap from 'components/vx/MunicipalityMap';
 
+import text from 'locale';
+
 // Passing `any` to `FCWithLayout` because we
 // can't do `getStaticProps` on this page because we require
 // a code, but is is the screen we select a code (municipality).
@@ -20,13 +22,17 @@ const Municipality: FCWithLayout<any> = () => {
   };
 
   return (
-    <article className="metric-article">
+    <>
+      <h2 className="text-max-width">{text.gemeente_index.selecteer_titel}</h2>
+      <p className="text-max-width">
+        {text.gemeente_index.selecteer_toelichting}
+      </p>
       <MunicipalityMap
-        style={{ height: '800px' }}
+        style={{ height: '500px' }}
         onSelect={onSelectMunicpal}
-        gradient={['#9DDEFE', '#0290D6']}
+        gradient={['#ffff', '#ffff']}
       />
-    </article>
+    </>
   );
 };
 
