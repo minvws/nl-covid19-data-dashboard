@@ -3,7 +3,10 @@ import { useState, useCallback, useRef } from 'react';
 import { Mercator } from '@vx/geo';
 import * as topojson from 'topojson-client';
 
-import topology from './municipalities.topo.json';
+import municipalTopology from './municipalities.topo.json';
+import countryTopology from './netherlands.topo.json';
+import regionTopology from './safetyregions.topo.json';
+
 import { FeatureCollection, MultiPolygon } from 'geojson';
 import useMunicipalityData from 'utils/useMunicipalityData';
 import useMapColorScale from 'utils/useMapColorScale';
@@ -15,6 +18,7 @@ import { TooltipWithBounds } from '@vx/tooltip';
 
 import styles from './chloropleth.module.scss';
 import { TCombinedChartDimensions } from './use-chart-dimensions';
+import municipalCodeToRegionCodeLookup from 'data/municipalCodeToRegionCodeLookup';
 
 export type MunicipalGeoJOSN = FeatureCollection<
   MultiPolygon,
@@ -30,13 +34,23 @@ export type TProps = {
   dimensions: TCombinedChartDimensions;
 } & IMunicipalityMapProps;
 
-const world = topojson.feature(
-  topology,
-  topology.objects.municipalities
-) as MunicipalGeoJOSN;
+const countryGeo = topojson.feature(
+  countryTopology,
+  countryTopology.objects.netherlands
+) as FeatureCollection<MultiPolygon>;
 
 export default function MunicipalityChloropleth(props: TProps) {
   const { dimensions, metric, gradient, onSelect, selected } = props;
+
+  const municipalGeo = topojson.feature(
+    municipalTopology,
+    municipalTopology.objects.municipalities
+  ) as MunicipalGeoJOSN;
+
+  const regionGeo = topojson.feature(
+    regionTopology,
+    regionTopology.objects.safetyregions
+  ) as FeatureCollection<MultiPolygon>;
 
   const {
     width = 0,
@@ -47,12 +61,25 @@ export default function MunicipalityChloropleth(props: TProps) {
     boundedHeight,
   } = dimensions;
 
-  const boundingbox = useMunicipalityFeatures(world, selected);
-  world.features = sortFeatures(world, 'gemcode', selected);
+  let boundingbox = useMunicipalityFeatures(municipalGeo, selected) as any;
+  municipalGeo.features = sortFeatures(municipalGeo, 'gemcode', selected);
+
+  const vrcode = selected
+    ? municipalCodeToRegionCodeLookup[selected]
+    : undefined;
+  if (vrcode) {
+    const feature = regionGeo.features.find(
+      (feat) => feat.properties?.vrcode === vrcode
+    );
+    if (feature) {
+      regionGeo.features = [feature];
+      boundingbox = regionGeo;
+    }
+  }
 
   const [selection] = useState<string | undefined>(selected);
 
-  const municipalityData = useMunicipalityData(metric, world);
+  const municipalityData = useMunicipalityData(metric, municipalGeo);
   const hasData = Boolean(Object.keys(municipalityData).length);
 
   const color = useMapColorScale(
@@ -74,8 +101,9 @@ export default function MunicipalityChloropleth(props: TProps) {
     (gmCode: string) => {
       return hasData
         ? municipalityData[gmCode]
-        : world.features.find((feat) => feat.properties.gemcode === gmCode)
-            ?.properties;
+        : municipalGeo.features.find(
+            (feat) => feat.properties.gemcode === gmCode
+          )?.properties;
     },
     [municipalityData, hasData]
   );
@@ -118,6 +146,10 @@ export default function MunicipalityChloropleth(props: TProps) {
     }
   };
 
+  const features = municipalGeo.features
+    .concat(regionGeo.features as any)
+    .concat(countryGeo.features as any);
+
   return width < 10 ? null : (
     <>
       <svg
@@ -153,25 +185,36 @@ export default function MunicipalityChloropleth(props: TProps) {
           clipPath={`url(#${clipPathId.current})`}
         >
           <Mercator
-            data={world.features}
+            data={features}
             fitSize={[[boundedWidth, boundedHeight], boundingbox]}
           >
             {(mercator) => (
               <g>
                 {mercator.features.map(({ feature, path }, i) => {
                   if (!path) return null;
-                  const { gemcode } = feature.properties;
-                  return (
-                    <path
-                      shapeRendering="optimizeQuality"
-                      id={gemcode}
-                      key={`municipality-map-feature-${i}`}
-                      d={path}
-                      fill={getFillColor(gemcode)}
-                      stroke={gemcode === selection ? 'black' : 'blue'}
-                      strokeWidth={gemcode === selection ? 3 : 0.5}
-                    />
-                  );
+                  if (feature.properties.gemcode) {
+                    const { gemcode } = feature.properties;
+                    return (
+                      <path
+                        shapeRendering="optimizeQuality"
+                        id={gemcode}
+                        key={`municipality-map-feature-${i}`}
+                        d={path}
+                        fill={getFillColor(gemcode)}
+                        stroke={gemcode === selection ? 'black' : 'grey'}
+                        strokeWidth={gemcode === selection ? 3 : 0.5}
+                      />
+                    );
+                  } else {
+                    return (
+                      <path
+                        className={styles.overlay}
+                        shapeRendering="optimizeQuality"
+                        key={`municipality-map-feature-${i}`}
+                        d={path}
+                      />
+                    );
+                  }
                 })}
               </g>
             )}
