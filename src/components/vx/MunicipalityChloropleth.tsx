@@ -192,8 +192,8 @@ export default function MunicipalityChloropleth(props: TProps) {
               <g>
                 {mercator.features.map(({ feature, path }, i) => {
                   if (!path) return null;
-                  if (feature.properties.gemcode) {
-                    const { gemcode } = feature.properties;
+                  const { gemcode } = feature.properties;
+                  if (gemcode) {
                     return (
                       <path
                         shapeRendering="optimizeQuality"

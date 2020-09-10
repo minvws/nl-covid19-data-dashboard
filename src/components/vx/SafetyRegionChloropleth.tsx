@@ -4,6 +4,8 @@ import { Mercator } from '@vx/geo';
 import * as topojson from 'topojson-client';
 
 import topology from './safetyregions.topo.json';
+import countryTopology from './netherlands.topo.json';
+
 import { FeatureCollection, MultiPolygon } from 'geojson';
 import useMapColorScale from 'utils/useMapColorScale';
 import useMapTooltip from './useMapTooltip';
@@ -32,6 +34,11 @@ const world = topojson.feature(
   topology,
   topology.objects.safetyregions
 ) as SafetyRegionGeoJSON;
+
+const countryGeo = topojson.feature(
+  countryTopology,
+  countryTopology.objects.netherlands
+) as FeatureCollection<MultiPolygon>;
 
 export default function SafetyRegionChloropleth(props: TProps) {
   const { dimensions, metric, gradient, onSelect, selected } = props;
@@ -114,6 +121,8 @@ export default function SafetyRegionChloropleth(props: TProps) {
     }
   };
 
+  const features = world.features.concat(countryGeo.features as any);
+
   return width < 10 ? null : (
     <>
       <svg
@@ -149,7 +158,7 @@ export default function SafetyRegionChloropleth(props: TProps) {
           clipPath={`url(#${clipPathId.current})`}
         >
           <Mercator
-            data={world.features}
+            data={features}
             fitSize={[[boundedWidth, boundedHeight], world]}
           >
             {(mercator) => (
@@ -159,17 +168,28 @@ export default function SafetyRegionChloropleth(props: TProps) {
 
                   const { vrcode } = feature.properties;
 
-                  return (
-                    <path
-                      shapeRendering="optimizeQuality"
-                      id={vrcode}
-                      key={`safetyregion-map-feature-${i}`}
-                      d={path || ''}
-                      fill={getFillColor(vrcode)}
-                      stroke={vrcode === selection ? 'black' : 'blue'}
-                      strokeWidth={vrcode === selection ? 2 : 0.5}
-                    />
-                  );
+                  if (vrcode) {
+                    return (
+                      <path
+                        shapeRendering="optimizeQuality"
+                        id={vrcode}
+                        key={`safetyregion-map-feature-${i}`}
+                        d={path || ''}
+                        fill={getFillColor(vrcode)}
+                        stroke={vrcode === selection ? 'black' : 'grey'}
+                        strokeWidth={vrcode === selection ? 2 : 0.5}
+                      />
+                    );
+                  } else {
+                    return (
+                      <path
+                        className={styles.overlay}
+                        shapeRendering="optimizeQuality"
+                        key={`municipality-map-feature-${i}`}
+                        d={path}
+                      />
+                    );
+                  }
                 })}
               </g>
             )}
