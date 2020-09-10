@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 import { Mercator } from '@vx/geo';
 import * as topojson from 'topojson-client';
@@ -56,24 +56,27 @@ export default function SafetyRegionChloropleth(props: TProps) {
     gradient
   );
 
-  const getFillColor = (gmCode: string) => {
-    const data = regionData[gmCode];
-    return color(data?.value ?? 0);
-  };
+  const getFillColor = useCallback(
+    (gmCode: string) => {
+      const data = regionData[gmCode];
+      return color(data?.value ?? 0);
+    },
+    [regionData]
+  );
 
-  const getData = (
-    gmCode: string,
-    featureProperties: SafetyRegionProperties
-  ) => {
-    const data = regionData[gmCode];
-    if (data) {
-      return {
-        ...data,
-        ...featureProperties,
-      };
-    }
-    return featureProperties;
-  };
+  const getData = useCallback(
+    (gmCode: string, featureProperties: SafetyRegionProperties) => {
+      const data = regionData[gmCode];
+      if (data) {
+        return {
+          ...data,
+          ...featureProperties,
+        };
+      }
+      return featureProperties;
+    },
+    [regionData]
+  );
 
   const [showTooltip, hideTooltip, tooltipInfo] = useMapTooltip<
     typeof regionData[number] & SafetyRegionProperties
@@ -83,6 +86,25 @@ export default function SafetyRegionChloropleth(props: TProps) {
 
   return width < 10 ? null : (
     <>
+      <TooltipWithBounds
+        // set this to random so it correctly updates with parent bounds
+        key={Math.random()}
+        left={tooltipInfo?.tooltipLeft}
+        top={tooltipInfo?.tooltipTop}
+        style={{
+          display: tooltipInfo?.tooltipOpen ? 'block' : 'none',
+        }}
+        className={styles.toolTip}
+      >
+        <strong>{tooltipInfo?.tooltipData?.vrname}</strong>
+        {tooltipInfo?.tooltipData?.value && (
+          <>
+            <br />
+            {tooltipInfo.tooltipData.value}
+          </>
+        )}
+      </TooltipWithBounds>
+
       <svg width={width} height={height} className={styles.svgMap}>
         <clipPath id={clipPathId}>
           <rect
@@ -143,29 +165,6 @@ export default function SafetyRegionChloropleth(props: TProps) {
           </Mercator>
         </g>
       </svg>
-
-      {tooltipInfo?.tooltipOpen && tooltipInfo.tooltipData && (
-        <TooltipWithBounds
-          // set this to random so it correctly updates with parent bounds
-          key={Math.random()}
-          left={tooltipInfo.tooltipLeft}
-          top={tooltipInfo.tooltipTop}
-          style={{
-            left: `${tooltipInfo?.tooltipLeft}px`,
-            top: `${tooltipInfo?.tooltipTop}px`,
-            transform: 'none',
-          }}
-          className={styles.toolTip}
-        >
-          <strong>{tooltipInfo.tooltipData.vrname}</strong>
-          {tooltipInfo.tooltipData?.value && (
-            <>
-              :<br />
-              {tooltipInfo.tooltipData.value}
-            </>
-          )}
-        </TooltipWithBounds>
-      )}
     </>
   );
 }

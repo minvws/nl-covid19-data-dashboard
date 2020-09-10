@@ -17,6 +17,10 @@
 .svgMap {
   display: block;
 
+  path {
+    pointer-events: all;
+  }
+
   path:hover {
     stroke-width: 2;
     fill: #fff;
