@@ -251,6 +251,21 @@ a.metric-link {
   }
 }
 
+.metric-not-available {
+  padding: 1rem;
+  color: $text-color-grey;
+
+  svg {
+    fill: currentColor;
+    color: $text-color-grey !important;
+  }
+  
+  p {
+    margin-top: 0.5rem;
+    margin-left: 2.5rem;
+  }
+}
+
 a.active-metric-link {
   background: $page-background;
   border-right: 5px solid $red;

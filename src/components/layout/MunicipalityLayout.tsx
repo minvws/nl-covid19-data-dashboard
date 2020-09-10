@@ -187,16 +187,32 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
               <h2>{siteText.nationaal_layout.headings.overig}</h2>
               <ul>
                 <li>
-                  <Link
-                    href="/gemeente/[code]/rioolwater"
-                    as={`/gemeente/${code}/rioolwater`}
-                  >
-                    <a
-                      onClick={blur}
-                      className={getClassName(
-                        `/veiligheidsregio/[code]/rioolwater`
-                      )}
+                  {getSewerWaterBarScaleData(data) ? (
+                    <Link
+                      href="/gemeente/[code]/rioolwater"
+                      as={`/gemeente/${code}/rioolwater`}
                     >
+                      <a
+                        onClick={blur}
+                        className={getClassName(
+                          `/veiligheidsregio/[code]/rioolwater`
+                        )}
+                      >
+                        <TitleWithIcon
+                          Icon={RioolwaterMonitoring}
+                          title={
+                            siteText.gemeente_rioolwater_metingen.titel_sidebar
+                          }
+                        />
+                        <span>
+                          <SewerWaterBarScale
+                            data={getSewerWaterBarScaleData(data)}
+                          />
+                        </span>
+                      </a>
+                    </Link>
+                  ) : (
+                    <div className="metric-not-available">
                       <TitleWithIcon
                         Icon={RioolwaterMonitoring}
                         title={
@@ -208,8 +224,8 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                           data={getSewerWaterBarScaleData(data)}
                         />
                       </span>
-                    </a>
-                  </Link>
+                    </div>
+                  )}
                 </li>
               </ul>
             </nav>
