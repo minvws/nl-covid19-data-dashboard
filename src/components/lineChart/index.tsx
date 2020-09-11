@@ -76,6 +76,7 @@ function getOptions(
     },
     yAxis: {
       min: 0,
+      minRange: 0.1,
       max: values.length > 0 ? null : signaalwaarde ? signaalwaarde + 1 : 1,
       allowDecimals: false,
       lineColor: '#C4C4C4',
