@@ -22,6 +22,7 @@ import { WithChildren } from 'types';
 
 import useMediaQuery from 'utils/useMediaQuery';
 import { ISafetyRegionData } from 'static-props/safetyregion-data';
+import { getLocalTitleForRegion } from 'utils/getLocalTitleForCode';
 
 export default SafetyRegionLayout;
 
@@ -136,6 +137,11 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
 
           {showMetricLinks && (
             <nav aria-label="metric navigation">
+              <div className="region-names">
+                <h2>
+                  {getLocalTitleForRegion('{{safetyRegion}}', code as string)}
+                </h2>
+              </div>
               <h2>{siteText.veiligheidsregio_layout.headings.medisch}</h2>
 
               <ul>
@@ -147,7 +153,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                     <a
                       onClick={blur}
                       className={getClassName(
-                        `/veiligheidsregio/[code]positief-geteste-mensen`
+                        `/veiligheidsregio/[code]/positief-geteste-mensen`
                       )}
                     >
                       <TitleWithIcon

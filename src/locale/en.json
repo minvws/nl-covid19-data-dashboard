@@ -489,7 +489,8 @@
     },
     "zoekveld_geen_resultaten": "No results",
     "zoekveld_placeholder_regio": "Zoek op veiligheidsregio ",
-    "zoekveld_placeholder_gemeente": "Search by municipality"
+    "zoekveld_placeholder_gemeente": "Search by municipality",
+    "veiligheidsregio_label": "Veiligheidsregio:"
   },
   "seoHead": {
     "default_description": "Information on the development of the coronavirus in The Netherlands.",

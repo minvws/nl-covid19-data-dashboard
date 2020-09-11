@@ -489,7 +489,8 @@
     },
     "zoekveld_geen_resultaten": "Geen resultaten",
     "zoekveld_placeholder_regio": "Zoek op veiligheidsregio ",
-    "zoekveld_placeholder_gemeente": "Zoek op gemeente "
+    "zoekveld_placeholder_gemeente": "Zoek op gemeente ",
+    "veiligheidsregio_label": "Veiligheidsregio:"
   },
   "seoHead": {
     "default_description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
