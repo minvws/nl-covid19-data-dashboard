@@ -32,21 +32,17 @@ function TitleWithIcon(props: IProps) {
       after the region is changed.
       */}
       {as === 'h3' && (
-        <>
-          <h3 ref={headingRef} tabIndex={headingRef ? -1 : undefined}>
-            {title}
-            {regio && ` in ${regio}`}
-          </h3>
-        </>
+        <h3 ref={headingRef} tabIndex={headingRef ? -1 : undefined}>
+          {title}
+          {regio && ` in ${regio}`}
+        </h3>
       )}
 
       {as === 'h2' && (
-        <>
-          <h2 ref={headingRef} tabIndex={headingRef ? -1 : undefined}>
-            {title}
-            {regio && ` in ${regio}`}
-          </h2>
-        </>
+        <h2 ref={headingRef} tabIndex={headingRef ? -1 : undefined}>
+          {title}
+          {regio && ` in ${regio}`}
+        </h2>
       )}
     </div>
   );
