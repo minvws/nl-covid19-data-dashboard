@@ -42,8 +42,8 @@
       "meer": "Meer informatie over het coronavirus",
       "verantwoording": "Cijferverantwoording",
       "meer_href": "https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19",
-      "veiligheidsregio": "Veiligheidsregio",
-      "gemeente": "Gemeentelijk"
+      "veiligheidsregio": "Veiligheidsregio's",
+      "gemeente": "Gemeentes"
     },
     "title": "Corona Dashboard",
     "terug_naar_alle_cijfers": "Terug naar alle cijfers"
@@ -112,7 +112,13 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de trend van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
+    "barscale_keys": [
+      "0 tot 20",
+      "20 tot 40",
+      "40 tot 60",
+      "60 tot 80",
+      "80+"
+    ],
     "cluster_datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "cluster_bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
@@ -550,7 +556,13 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de trend van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
+    "barscale_keys": [
+      "0 tot 20",
+      "20 tot 40",
+      "40 tot 60",
+      "60 tot 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -626,7 +638,13 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de trend van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": ["0 to 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 tot 40",
+      "40 tot 60",
+      "60 tot 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -653,10 +671,6 @@
     "graph_average_label_text_rwzi": "Waarde van RWZI-locatie {{name}}",
     "average": "Gemiddelde"
   },
-  "laatste_ontwikkelingen": {
-    "title": "Laatste ontwikkelingen",
-    "menu_subtitle": "Belangrijke verandering"
-  },
   "veiligheidsregio_index": {
     "selecteer_titel": "Selecteer een veiligheidsregio",
     "selecteer_toelichting": "Er gelden verschillende maatregelen per veiligheidsregio en gemeente"
@@ -664,5 +678,9 @@
   "gemeente_index": {
     "selecteer_titel": "Selecteer een gemeente",
     "selecteer_toelichting": "Er gelden verschillende maatregelen per veiligheidsregio en gemeente"
+  },
+  "laatste_ontwikkelingen": {
+    "title": "Laatste ontwikkelingen",
+    "menu_subtitle": "Belangrijke verandering"
   }
 }
