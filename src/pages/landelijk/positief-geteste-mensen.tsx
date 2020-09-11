@@ -1,4 +1,4 @@
-import { useState, Fragment } from 'react';
+import { useState, Fragment, ReactNode } from 'react';
 
 import BarScale from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
@@ -14,6 +14,7 @@ import Getest from 'assets/test.svg';
 import formatDecimal from 'utils/formatNumber';
 
 import siteText from 'locale';
+import styles from './landelijk.module.scss';
 
 import {
   InfectedPeopleDeltaNormalized,
@@ -26,6 +27,18 @@ import getNlData, { INationalData } from 'static-props/nl-data';
 
 const text: typeof siteText.positief_geteste_personen =
   siteText.positief_geteste_personen;
+
+const tooltipContent = (context: any): ReactNode => {
+  return (
+    context && (
+      <div className={styles.defaultTooltip}>
+        <strong>{context.vrname}</strong>
+        <br />
+        {context.value} / 100.000
+      </div>
+    )
+  );
+};
 
 export function PostivelyTestedPeopleBarScale(props: {
   data: InfectedPeopleDeltaNormalized | undefined;
@@ -138,6 +151,7 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
             <SafetyRegionMap
               metric="positive_tested_people"
               gradient={['#9DDEFE', '#0290D6']}
+              tooltipContent={tooltipContent}
             />
           )}
         </div>

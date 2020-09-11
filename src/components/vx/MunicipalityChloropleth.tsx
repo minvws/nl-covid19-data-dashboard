@@ -231,13 +231,21 @@ export default function MunicipalityChloropleth(props: TProps) {
         }}
         className={styles.toolTip}
       >
-        <strong>{tooltipInfo?.tooltipData?.gemnaam}</strong>
-        {tooltipInfo?.tooltipData?.value && (
-          <>
-            <br />
-            {tooltipInfo?.tooltipData?.value}
-          </>
-        )}
+        <div
+          style={{
+            backgroundColor: 'white',
+            border: '1px solid lightgrey',
+            padding: '.5em',
+          }}
+        >
+          <strong>{tooltipInfo?.tooltipData?.gemnaam}</strong>
+          {tooltipInfo?.tooltipData?.value && (
+            <>
+              <br />
+              {tooltipInfo?.tooltipData?.value}
+            </>
+          )}
+        </div>
       </TooltipWithBounds>
     </>
   );

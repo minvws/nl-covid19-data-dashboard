@@ -84,10 +84,11 @@ export default function SafetyRegionChloropleth(props: TProps) {
 
   const getData = useCallback(
     (vrCode: string) => {
-      return hasData
+      const result = hasData
         ? regionData[vrCode]
         : world.features.find((feat) => feat.properties.vrcode === vrCode)
             ?.properties;
+      return result;
     },
     [regionData, hasData]
   );
@@ -117,7 +118,8 @@ export default function SafetyRegionChloropleth(props: TProps) {
         clearTimeout(timout.current);
         timout.current = -1;
       }
-      showTooltip(event, getData(elm.id));
+      const data = getData(elm.id);
+      showTooltip(event, data);
     }
   };
 
