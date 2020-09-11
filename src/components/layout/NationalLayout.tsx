@@ -195,10 +195,12 @@ function NationalLayout(props: WithChildren<INationalData>) {
                     <TitleWithIcon
                       Icon={Ziekenhuis}
                       title={siteText.ziekenhuisopnames_per_dag.titel}
-                      showAxis={false}
                     />
                     <span>
-                      <IntakeHospitalBarScale data={data?.intake_hospital_ma} />
+                      <IntakeHospitalBarScale
+                        data={data?.intake_hospital_ma}
+                        showAxis={false}
+                      />
                     </span>
                   </a>
                 </Link>
