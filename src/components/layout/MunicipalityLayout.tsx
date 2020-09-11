@@ -108,7 +108,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
         />
       </Head>
       <div
-        className={`municipality-layout  small-screen-${displayTendency}-tendency`}
+        className={`municipality-layout small-screen-${displayTendency}-tendency`}
       >
         {!isMainRoute && (
           <Link href="/gemeente/[code]" as={`/gemeente/${code}`}>

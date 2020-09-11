@@ -1,37 +1,35 @@
 import { FCWithLayout } from 'components/layout';
 import { getNationalLayout } from 'components/layout/NationalLayout';
-// import Inform from './inform.svg';
-// import ExternalLink from './external-link.svg';
+import Notification from 'assets/notification.svg';
+import ExternalLink from 'assets/external-link.svg';
 
 import getNlData, { INationalData } from 'static-props/nl-data';
 
-const styles = {
-  notification: '',
-  desktopInform: '',
-  textgroup: '',
-  header: '',
-  headergroup: '',
-  link: '',
-};
+import styles from './index.module.scss';
 
 import text from 'locale';
+import TitleWithIcon from 'components/titleWithIcon';
 
 const Home: FCWithLayout<INationalData> = () => {
   return (
     <>
-      <h2>Laatste ontwikkelingen</h2>
-      <article className="metric-article">
-        <div className={styles?.textgroup}>
-          <h3 className={styles?.header}>{text.notificatie.titel}</h3>
+      <TitleWithIcon
+        Icon={Notification}
+        title={'Laatste ontwikkelingen'}
+        as="h2"
+      />
+      <article className={`${styles.notification} metric-article`}>
+        <div className={styles.textgroup}>
+          <h3 className={styles.header}>{text.notificatie.titel}</h3>
           <p>{text.notificatie.bericht}</p>
         </div>
         <a
-          className={styles?.link}
+          className={styles.link}
           href={text.notificatie.link.href}
           target="_blank"
           rel="noopener noreferrer"
         >
-          {/* <ExternalLink /> */}
+          <ExternalLink />
           <span>{text.notificatie.link.text}</span>
         </a>
       </article>

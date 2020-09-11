@@ -24,6 +24,7 @@ import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
 import Locatie from 'assets/locaties.svg';
 import CoronaVirus from 'assets/coronavirus.svg';
 import Arrow from 'assets/arrow.svg';
+import Notification from 'assets/notification.svg';
 
 import siteText from 'locale';
 
@@ -103,16 +104,23 @@ function NationalLayout(props: WithChildren<INationalData>) {
           </Link>
         )}
         <aside className="national-aside">
-          <Link href="/">
-            <a onClick={blur} className={getClassName('/')}>
-              <TitleWithIcon
-                Icon={GetestIcon}
-                title={'Laatste ontwikkelingen'}
-              />
-              <span>Belangrijke verandering</span>
-            </a>
-          </Link>
           <nav aria-label="metric navigation">
+            <ul>
+              <li>
+                <Link href="/">
+                  <a
+                    onClick={blur}
+                    className={`last-developments-link ${getClassName('/')}`}
+                  >
+                    <TitleWithIcon
+                      Icon={Notification}
+                      title={'Laatste ontwikkelingen'}
+                    />
+                    <span>Belangrijke verandering</span>
+                  </a>
+                </Link>
+              </li>
+            </ul>
             <h2>{siteText.nationaal_layout.headings.medisch}</h2>
             <ul>
               <li>

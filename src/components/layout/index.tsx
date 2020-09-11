@@ -116,7 +116,7 @@ function Layout(props: WithChildren<LayoutProps>) {
           <MaxWidth>
             <ul className={styles.navList}>
               <li>
-                <Link href="/landelijk">
+                <Link href="/">
                   <a
                     onClick={blur}
                     className={
