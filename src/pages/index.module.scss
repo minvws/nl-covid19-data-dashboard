@@ -57,3 +57,59 @@
     flex: 0 0 auto;
   }
 }
+
+.legenda {
+  padding-left: 0;
+  vertical-align: bottom;
+  position: absolute;
+  bottom: 0;
+
+  .escalationInfo {
+    margin-bottom: 1em;
+  }
+
+  h4 {
+    margin-bottom: 1em;
+  }
+}
+
+.escalationTooltip {
+  width: 265px;
+  background-color: white;
+  border-radius: 2px;
+  padding: 0 0.5em 0.5em 0.5em;
+  border: 1px solid lightgray;
+}
+
+.escalationInfo {
+  display: flex;
+  flex-direction: row;
+
+  .bubble {
+    flex-grow: 0;
+    flex-shrink: 0;
+    height: 54px;
+    width: 54px;
+    line-height: 54px;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 50%;
+    font-weight: bolder;
+    color: white;
+    font-size: 2em;
+    margin-right: 0.5em;
+  }
+}
+
+.escalationColor1 {
+  background-color: #fcd603;
+}
+
+.escalationColor2 {
+  background-color: #f79903;
+}
+
+.escalationColor3 {
+  background-color: #f45167;
+}

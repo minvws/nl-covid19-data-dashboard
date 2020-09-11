@@ -85,6 +85,28 @@
   }
 }
 
+.escalation-article {
+  background: white;
+  padding: 2em;
+  border-radius: 5px;
+  margin: 0 -2rem;
+  margin-top: 2rem;
+  box-shadow: $box-shadow;
+
+  .article-text {
+    max-width: 30rem;
+  }
+
+  @media (min-width: 700px) {
+    margin: 0;
+    margin-top: 2rem;
+  }
+
+  .column-item-no-margin {
+    position: relative;
+  }
+}
+
 /* Remove outline from programatically focussed elements. */
 [tabindex='-1'] {
   outline: none;

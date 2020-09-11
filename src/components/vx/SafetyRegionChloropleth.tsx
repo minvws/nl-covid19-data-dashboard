@@ -28,7 +28,7 @@ export interface SafetyRegionProperties {
 
 export type TProps = {
   dimensions: TCombinedChartDimensions;
-} & ISafetyRegionMapProps;
+} & ISafetyRegionMapProps<any>;
 
 const world = topojson.feature(
   topology,
@@ -41,7 +41,15 @@ const countryGeo = topojson.feature(
 ) as FeatureCollection<MultiPolygon>;
 
 export default function SafetyRegionChloropleth(props: TProps) {
-  const { dimensions, metric, gradient, onSelect, selected } = props;
+  const {
+    dimensions,
+    metric,
+    metricProperty,
+    gradient,
+    onSelect,
+    selected,
+    tooltipContent,
+  } = props;
 
   const {
     width = 0,
@@ -56,8 +64,9 @@ export default function SafetyRegionChloropleth(props: TProps) {
 
   world.features = sortFeatures(world, 'vrcode', selected);
 
-  const regionData = useRegionData(metric, world);
-  const hasData = Boolean(Object.keys(regionData).length);
+  const regionData = useRegionData(metric, world, metricProperty as any);
+
+  const hasData = Boolean(Object.keys(regionData ?? {}).length);
 
   const color = useMapColorScale(
     regionData,
@@ -75,10 +84,11 @@ export default function SafetyRegionChloropleth(props: TProps) {
 
   const getData = useCallback(
     (vrCode: string) => {
-      return hasData
+      const result = hasData
         ? regionData[vrCode]
         : world.features.find((feat) => feat.properties.vrcode === vrCode)
             ?.properties;
+      return result;
     },
     [regionData, hasData]
   );
@@ -108,7 +118,8 @@ export default function SafetyRegionChloropleth(props: TProps) {
         clearTimeout(timout.current);
         timout.current = -1;
       }
-      showTooltip(event, getData(elm.id));
+      const data = getData(elm.id);
+      showTooltip(event, data);
     }
   };
 
@@ -204,13 +215,7 @@ export default function SafetyRegionChloropleth(props: TProps) {
         }}
         className={styles.toolTip}
       >
-        <strong>{tooltipInfo?.tooltipData?.vrname}</strong>
-        {tooltipInfo?.tooltipData?.value && (
-          <>
-            <br />
-            {tooltipInfo.tooltipData.value}
-          </>
-        )}
+        {tooltipContent(tooltipInfo?.tooltipData)}
       </TooltipWithBounds>
     </>
   );

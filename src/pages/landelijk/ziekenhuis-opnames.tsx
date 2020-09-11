@@ -9,7 +9,7 @@ import Ziekenhuis from 'assets/ziekenhuis.svg';
 import siteText from 'locale';
 
 import { IntakeHospitalMa } from 'types/data';
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 import getNlData, { INationalData } from 'static-props/nl-data';
 import ChartRegionControls from 'components/chartRegionControls';
 import MunicipalityMap from 'components/vx/MunicipalityMap';
@@ -17,6 +17,18 @@ import SafetyRegionMap from 'components/vx/SafetyRegionMap';
 
 const text: typeof siteText.ziekenhuisopnames_per_dag =
   siteText.ziekenhuisopnames_per_dag;
+
+const tooltipContent = (context: any): ReactNode => {
+  return (
+    context && (
+      <>
+        <strong>{context.vrnaam}</strong>
+        <br />
+        {context.value}
+      </>
+    )
+  );
+};
 
 export function IntakeHospitalBarScale(props: {
   data: IntakeHospitalMa | undefined;
@@ -106,6 +118,7 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
             <SafetyRegionMap
               metric="hospital_admissions"
               gradient={['#69c253', '#f35065']}
+              tooltipContent={tooltipContent}
             />
           )}
         </div>

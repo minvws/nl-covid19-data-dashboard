@@ -61,7 +61,7 @@ export default function MunicipalityChloropleth(props: TProps) {
     boundedHeight,
   } = dimensions;
 
-  let boundingbox = useMunicipalityFeatures(municipalGeo, selected) as any;
+  const boundingbox = useMunicipalityFeatures(municipalGeo, selected) as any;
   municipalGeo.features = sortFeatures(municipalGeo, 'gemcode', selected);
 
   const vrcode = selected
@@ -73,7 +73,6 @@ export default function MunicipalityChloropleth(props: TProps) {
     );
     if (feature) {
       regionGeo.features = [feature];
-      boundingbox = regionGeo;
     }
   }
 
@@ -182,7 +181,10 @@ export default function MunicipalityChloropleth(props: TProps) {
         >
           <Mercator
             data={features}
-            fitSize={[[boundedWidth, boundedHeight], boundingbox]}
+            fitSize={[
+              [boundedWidth, boundedHeight],
+              vrcode ? regionGeo : boundingbox,
+            ]}
           >
             {(mercator) => (
               <g>
@@ -232,13 +234,21 @@ export default function MunicipalityChloropleth(props: TProps) {
         }}
         className={styles.toolTip}
       >
-        <strong>{tooltipInfo?.tooltipData?.gemnaam}</strong>
-        {tooltipInfo?.tooltipData?.value && (
-          <>
-            <br />
-            {tooltipInfo?.tooltipData?.value}
-          </>
-        )}
+        <div
+          style={{
+            backgroundColor: 'white',
+            border: '1px solid lightgrey',
+            padding: '.5em',
+          }}
+        >
+          <strong>{tooltipInfo?.tooltipData?.gemnaam}</strong>
+          {tooltipInfo?.tooltipData?.value && (
+            <>
+              <br />
+              {tooltipInfo?.tooltipData?.value}
+            </>
+          )}
+        </div>
       </TooltipWithBounds>
     </>
   );

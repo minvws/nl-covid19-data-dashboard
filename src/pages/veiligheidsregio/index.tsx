@@ -4,6 +4,17 @@ import SafetyRegionMap from 'components/vx/SafetyRegionMap';
 import { useRouter } from 'next/router';
 
 import text from 'locale';
+import { ReactNode } from 'react';
+
+const tooltipContent = (context: any): ReactNode => {
+  return (
+    context && (
+      <>
+        <strong>{context.vrnaam}</strong>
+      </>
+    )
+  );
+};
 
 // Passing `any` to `FCWithLayout` because we
 // can't do `getStaticProps` on this page because we require
@@ -37,6 +48,7 @@ const SafetyRegion: FCWithLayout<any> = () => {
             style={{ height: '800px', backgroundColor: 'none' }}
             onSelect={onSelectRegion}
             gradient={['#ffff', '#ffff']}
+            tooltipContent={tooltipContent}
           />
         </div>
       </article>

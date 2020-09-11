@@ -434,7 +434,7 @@ export interface Regions {
   hospital_admissions: RegionHospitalAdmissions[];
   positive_tested_people: RegionPositiveTestedPeople[];
   deceased: RegionDeceased[];
-  escalation_levels?: EscalationLevels[];
+  escalation_levels: EscalationLevels[];
 }
 export interface RegionHospitalAdmissions {
   date_of_report_unix: number;

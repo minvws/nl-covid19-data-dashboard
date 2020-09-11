@@ -10,7 +10,8 @@
     "code",
     "hospital_admissions",
     "positive_tested_people",
-    "deceased"
+    "deceased",
+    "escalation_levels"
   ],
   "properties": {
     "last_generated": {
