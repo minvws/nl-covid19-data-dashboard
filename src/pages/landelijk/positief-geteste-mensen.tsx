@@ -54,8 +54,9 @@ const tooltipRegionContent = (context: any): ReactNode => {
 
 export function PostivelyTestedPeopleBarScale(props: {
   data: InfectedPeopleDeltaNormalized | undefined;
+  showAxis: boolean;
 }) {
-  const { data } = props;
+  const { data, showAxis } = props;
 
   if (!data) return null;
 
@@ -82,6 +83,7 @@ export function PostivelyTestedPeopleBarScale(props: {
         },
       ]}
       signaalwaarde={7}
+      showAxis={showAxis}
     />
   );
 }
@@ -126,7 +128,9 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         <article className="metric-article column-item">
           <h3>{text.barscale_titel}</h3>
 
-          {delta && <PostivelyTestedPeopleBarScale data={delta} />}
+          {delta && (
+            <PostivelyTestedPeopleBarScale data={delta} showAxis={true} />
+          )}
           <p>{text.barscale_toelichting}</p>
         </article>
 
@@ -243,6 +247,7 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
                     value: 0,
                   },
                 ]}
+                showAxis={true}
               />
               <p>{text.cluster_barscale_toelichting}</p>
             </article>

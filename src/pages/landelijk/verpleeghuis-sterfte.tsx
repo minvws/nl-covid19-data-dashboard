@@ -16,8 +16,9 @@ const text: typeof siteText.verpleeghuis_oversterfte =
 
 export function NursingHomeDeathsBarScale(props: {
   data: DeceasedPeopleNurseryCountDaily | undefined;
+  showAxis: boolean;
 }) {
-  const { data } = props;
+  const { data, showAxis } = props;
 
   if (!data) return null;
 
@@ -35,6 +36,7 @@ export function NursingHomeDeathsBarScale(props: {
           value: 0,
         },
       ]}
+      showAxis={showAxis}
     />
   );
 }
@@ -64,7 +66,7 @@ const NursingHomeDeaths: FCWithLayout<INationalData> = (props) => {
         <div className="column-item column-item-extra-margin">
           <h3>{text.barscale_titel}</h3>
 
-          <NursingHomeDeathsBarScale data={data} />
+          <NursingHomeDeathsBarScale data={data} showAxis={true} />
         </div>
 
         <div className="column-item column-item-extra-margin">

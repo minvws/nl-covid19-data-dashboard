@@ -166,6 +166,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                       <span>
                         <PostivelyTestedPeopleBarScale
                           data={data?.results_per_region}
+                          showAxis={false}
                         />
                       </span>
                     </a>
@@ -193,6 +194,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                       <span>
                         <IntakeHospitalBarScale
                           data={data?.results_per_region}
+                          showAxis={false}
                         />
                       </span>
                     </a>
@@ -223,6 +225,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                       <span>
                         <SewerWaterBarScale
                           data={getSewerWaterBarScaleData(data)}
+                          showAxis={false}
                         />
                       </span>
                     </a>

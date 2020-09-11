@@ -18,8 +18,9 @@ const text: typeof siteText.verdenkingen_huisartsen =
 
 export function SuspectedPatientsBarScale(props: {
   data: VerdenkingenHuisartsen | undefined;
+  showAxis: boolean;
 }) {
-  const { data } = props;
+  const { data, showAxis } = props;
 
   if (!data) return null;
 
@@ -37,6 +38,7 @@ export function SuspectedPatientsBarScale(props: {
           value: 0,
         },
       ]}
+      showAxis={showAxis}
     />
   );
 }
@@ -68,7 +70,7 @@ const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
         <article className="metric-article column-item">
           <h3>{text.barscale_titel}</h3>
 
-          <SuspectedPatientsBarScale data={data} />
+          <SuspectedPatientsBarScale data={data} showAxis={true} />
           <p>{text.barscale_toelichting}</p>
         </article>
 

@@ -16,8 +16,9 @@ const text: typeof siteText.ic_opnames_per_dag = siteText.ic_opnames_per_dag;
 
 export function IntakeIntensiveCareBarscale(props: {
   data: IntakeIntensivecareMa | undefined;
+  showAxis: boolean;
 }) {
-  const { data } = props;
+  const { data, showAxis } = props;
 
   if (!data) return null;
 
@@ -44,6 +45,7 @@ export function IntakeIntensiveCareBarscale(props: {
       signaalwaarde={10}
       value={data.last_value.moving_average_ic}
       id="ic"
+      showAxis={showAxis}
     />
   );
 }
@@ -72,7 +74,7 @@ const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
         <div className="column-item column-item-extra-margin">
           <h3>{text.barscale_titel}</h3>
 
-          <IntakeIntensiveCareBarscale data={data} />
+          <IntakeIntensiveCareBarscale data={data} showAxis={true} />
         </div>
 
         <div className="column-item column-item-extra-margin">
