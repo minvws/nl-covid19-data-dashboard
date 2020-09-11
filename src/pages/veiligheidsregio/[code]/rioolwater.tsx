@@ -28,8 +28,9 @@ const text: typeof siteText.veiligheidsregio_rioolwater_metingen =
 
 export function SewerWaterBarScale(props: {
   data: SewerWaterBarScaleData | null;
+  showAxis: boolean;
 }) {
-  const { data } = props;
+  const { data, showAxis } = props;
 
   if (!data) return null;
 
@@ -47,6 +48,7 @@ export function SewerWaterBarScale(props: {
           value: 0,
         },
       ]}
+      showAxis={showAxis}
     />
   );
 }
@@ -81,7 +83,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
         <div className="column-item column-item-extra-margin">
           <h3>{text.barscale_titel}</h3>
 
-          <SewerWaterBarScale data={barScaleData} />
+          <SewerWaterBarScale data={barScaleData} showAxis={true} />
         </div>
 
         <div className="column-item column-item-extra-margin">

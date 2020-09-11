@@ -22,8 +22,9 @@ const text: typeof siteText.verpleeghuis_besmette_locaties =
 
 export function NursingHomeInfectedLocationsBarScale(props: {
   data: TotalNewlyReportedLocations | undefined;
+  showAxis: boolean;
 }) {
-  const { data } = props;
+  const { data, showAxis } = props;
 
   if (!data) return null;
 
@@ -41,6 +42,7 @@ export function NursingHomeInfectedLocationsBarScale(props: {
           value: 0,
         },
       ]}
+      showAxis={showAxis}
     />
   );
 }
@@ -72,7 +74,10 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
         <article className="metric-article column-item">
           <h3>{text.barscale_titel}</h3>
 
-          <NursingHomeInfectedLocationsBarScale data={newLocations} />
+          <NursingHomeInfectedLocationsBarScale
+            data={newLocations}
+            showAxis={true}
+          />
           <p>{text.barscale_toelichting}</p>
         </article>
 

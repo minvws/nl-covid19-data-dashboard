@@ -24,8 +24,9 @@ const text: typeof siteText.besmettelijke_personen =
 
 export function InfectiousPeopleBarScale(props: {
   data: InfectiousPeopleCountNormalized | undefined;
+  showAxis: boolean;
 }) {
-  const { data } = props;
+  const { data, showAxis } = props;
 
   if (!data) return null;
 
@@ -43,6 +44,7 @@ export function InfectiousPeopleBarScale(props: {
           value: 0,
         },
       ]}
+      showAxis={showAxis}
     />
   );
 }
@@ -72,7 +74,7 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
       <div className="layout-two-column">
         <article className="metric-article column-item">
           <h3>{text.barscale_titel}</h3>
-          <InfectiousPeopleBarScale data={countNormalized} />
+          <InfectiousPeopleBarScale data={countNormalized} showAxis={true} />
 
           <p>
             {text.geen_signaalwaarde_beschikbaar}{' '}

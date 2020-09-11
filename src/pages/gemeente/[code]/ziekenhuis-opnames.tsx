@@ -22,8 +22,9 @@ const text: typeof siteText.gemeente_ziekenhuisopnames_per_dag =
 
 export function IntakeHospitalBarScale(props: {
   data: HospitalAdmissions | undefined;
+  showAxis: boolean;
 }) {
-  const { data } = props;
+  const { data, showAxis } = props;
 
   if (!data) return null;
 
@@ -50,6 +51,7 @@ export function IntakeHospitalBarScale(props: {
           value: 90,
         },
       ]}
+      showAxis={showAxis}
     />
   );
 }
@@ -80,7 +82,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
         <div className="column-item column-item-extra-margin">
           <h3>{text.barscale_titel}</h3>
 
-          <IntakeHospitalBarScale data={hospitalAdmissions} />
+          <IntakeHospitalBarScale data={hospitalAdmissions} showAxis={true} />
         </div>
 
         <div className="column-item column-item-extra-margin">

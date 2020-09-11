@@ -25,8 +25,9 @@ const text: typeof siteText.veiligheidsregio_positief_geteste_personen =
 
 export function PostivelyTestedPeopleBarScale(props: {
   data: ResultsPerRegion | undefined;
+  showAxis: boolean;
 }) {
-  const { data } = props;
+  const { data, showAxis } = props;
 
   if (!data) return null;
 
@@ -53,6 +54,7 @@ export function PostivelyTestedPeopleBarScale(props: {
         },
       ]}
       signaalwaarde={7}
+      showAxis={showAxis}
     />
   );
 }
@@ -87,7 +89,10 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           <h3>{text.barscale_titel}</h3>
 
           {resultsPerRegion && (
-            <PostivelyTestedPeopleBarScale data={resultsPerRegion} />
+            <PostivelyTestedPeopleBarScale
+              data={resultsPerRegion}
+              showAxis={true}
+            />
           )}
           <p>{text.barscale_toelichting}</p>
         </article>
@@ -168,6 +173,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
                     value: 0,
                   },
                 ]}
+                showAxis={true}
               />
               <p>{text.cluster_barscale_toelichting}</p>
             </article>

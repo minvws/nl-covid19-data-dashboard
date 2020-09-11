@@ -18,8 +18,9 @@ const text: typeof siteText.reproductiegetal = siteText.reproductiegetal;
 export function ReproductionIndexBarScale(props: {
   data: ReproductionIndexData | undefined;
   lastKnown: ReproductionIndexData | undefined;
+  showAxis: boolean;
 }) {
-  const { data, lastKnown } = props;
+  const { data, lastKnown, showAxis } = props;
 
   if (!data) return null;
 
@@ -50,6 +51,7 @@ export function ReproductionIndexBarScale(props: {
           value: 1.125,
         },
       ]}
+      showAxis={showAxis}
     />
   );
 }
@@ -83,6 +85,7 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
           <ReproductionIndexBarScale
             data={data}
             lastKnown={lastKnownValidData}
+            showAxis={true}
           />
           <p>{text.barscale_toelichting}</p>
         </div>

@@ -23,8 +23,9 @@ const text: typeof siteText.gemeente_positief_geteste_personen =
 
 export function PostivelyTestedPeopleBarScale(props: {
   data: PositiveTestedPeople | undefined;
+  showAxis: boolean;
 }) {
-  const { data } = props;
+  const { data, showAxis } = props;
 
   if (!data) return null;
 
@@ -42,6 +43,7 @@ export function PostivelyTestedPeopleBarScale(props: {
           value: 0,
         },
       ]}
+      showAxis={showAxis}
     />
   );
 }
@@ -73,7 +75,10 @@ const PostivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
           <h3>{text.barscale_titel}</h3>
 
           {positivelyTestedPeople && (
-            <PostivelyTestedPeopleBarScale data={positivelyTestedPeople} />
+            <PostivelyTestedPeopleBarScale
+              data={positivelyTestedPeople}
+              showAxis={true}
+            />
           )}
           <p>{text.barscale_toelichting}</p>
         </article>

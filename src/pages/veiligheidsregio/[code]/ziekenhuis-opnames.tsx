@@ -23,8 +23,9 @@ const text: typeof siteText.veiligheidsregio_ziekenhuisopnames_per_dag =
 
 export function IntakeHospitalBarScale(props: {
   data: ResultsPerRegion | undefined;
+  showAxis: boolean;
 }) {
-  const { data } = props;
+  const { data, showAxis } = props;
 
   if (!data) return null;
 
@@ -51,6 +52,7 @@ export function IntakeHospitalBarScale(props: {
           value: 90,
         },
       ]}
+      showAxis={showAxis}
     />
   );
 }
@@ -80,7 +82,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
         <div className="column-item column-item-extra-margin">
           <h3>{text.barscale_titel}</h3>
 
-          <IntakeHospitalBarScale data={resultsPerRegion} />
+          <IntakeHospitalBarScale data={resultsPerRegion} showAxis={true} />
         </div>
 
         <div className="column-item column-item-extra-margin">

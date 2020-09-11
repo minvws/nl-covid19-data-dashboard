@@ -16,8 +16,9 @@ const text: typeof siteText.verpleeghuis_positief_geteste_personen =
 
 export function NursingHomeInfectedPeopleBarScale(props: {
   data: InfectedPeopleNurseryCountDaily | undefined;
+  showAxis: boolean;
 }) {
-  const { data } = props;
+  const { data, showAxis } = props;
 
   if (!data) return null;
 
@@ -35,6 +36,7 @@ export function NursingHomeInfectedPeopleBarScale(props: {
           value: 0,
         },
       ]}
+      showAxis={showAxis}
     />
   );
 }
@@ -64,7 +66,7 @@ const NursingHomeInfectedPeople: FCWithLayout<INationalData> = (props) => {
         <div className="column-item column-item-extra-margin">
           <h3>{text.barscale_titel}</h3>
 
-          <NursingHomeInfectedPeopleBarScale data={data} />
+          <NursingHomeInfectedPeopleBarScale data={data} showAxis={true} />
         </div>
 
         <div className="column-item column-item-extra-margin">
