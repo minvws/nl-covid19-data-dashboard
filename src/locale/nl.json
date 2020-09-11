@@ -652,5 +652,9 @@
     "graph_secondary_label_text": "Gemeten waarde per locatie.",
     "graph_average_label_text_rwzi": "Waarde van RWZI-locatie {{name}}",
     "average": "Gemiddelde"
+  },
+  "laatste_ontwikkelingen": {
+    "title": "Laatste ontwikkelingen",
+    "menu_subtitle": "Belangrijke verandering"
   }
 }

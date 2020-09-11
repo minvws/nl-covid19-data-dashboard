@@ -114,9 +114,9 @@ function NationalLayout(props: WithChildren<INationalData>) {
                   >
                     <TitleWithIcon
                       Icon={Notification}
-                      title={'Laatste ontwikkelingen'}
+                      title={siteText.laatste_ontwikkelingen.title}
                     />
-                    <span>Belangrijke verandering</span>
+                    <span>{siteText.laatste_ontwikkelingen.menu_subtitle}</span>
                   </a>
                 </Link>
               </li>

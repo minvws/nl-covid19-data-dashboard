@@ -15,7 +15,7 @@ const Home: FCWithLayout<INationalData> = () => {
     <>
       <TitleWithIcon
         Icon={Notification}
-        title={'Laatste ontwikkelingen'}
+        title={text.laatste_ontwikkelingen.title}
         as="h2"
       />
       <article className={`${styles.notification} metric-article`}>
