@@ -181,7 +181,10 @@ export default function MunicipalityChloropleth(props: TProps) {
         >
           <Mercator
             data={features}
-            fitSize={[[boundedWidth, boundedHeight], boundingbox]}
+            fitSize={[
+              [boundedWidth, boundedHeight],
+              vrcode ? regionGeo : boundingbox,
+            ]}
           >
             {(mercator) => (
               <g>
