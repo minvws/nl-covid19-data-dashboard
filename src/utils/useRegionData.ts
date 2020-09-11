@@ -45,5 +45,5 @@ export default function useRegionData<
     );
 
     return filteredData;
-  }, [metricItems, metricName]);
+  }, [metricItems, metricName, featureCollection.features]);
 }
