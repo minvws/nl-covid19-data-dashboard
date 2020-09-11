@@ -1,46 +1,44 @@
-import React from 'react';
-import Head from 'next/head';
+import { FCWithLayout } from 'components/layout';
+import { getNationalLayout } from 'components/layout/NationalLayout';
+import Notification from 'assets/notification.svg';
+import ExternalLink from 'assets/external-link.svg';
 
-import { getLayout, FCWithLayout } from 'components/layout';
+import getNlData, { INationalData } from 'static-props/nl-data';
 
-import siteText from 'locale';
+import styles from './index.module.scss';
 
-import openGraphImageNL from 'assets/sharing/og-landelijke-cijfers.png?url';
-import twitterImageNL from 'assets/sharing/twitter-landelijke-cijfers.png?url';
+import text from 'locale';
+import TitleWithIcon from 'components/titleWithIcon';
 
-import openGraphImageEN from 'assets/sharing/og-national.png?url';
-import twitterImageEN from 'assets/sharing/twitter-national.png?url';
-
-import getLocale from 'utils/getLocale';
-
-const locale = getLocale();
-const openGraphImage = locale === 'nl' ? openGraphImageNL : openGraphImageEN;
-const twitterImage = locale === 'nl' ? twitterImageNL : twitterImageEN;
-
-const Home: FCWithLayout = () => {
+const Home: FCWithLayout<INationalData> = () => {
   return (
     <>
-      <Head>
-        <link
-          key="dc-spatial"
-          rel="dcterms:spatial"
-          href="https://standaarden.overheid.nl/owms/terms/Nederland"
-        />
-        <link
-          key="dc-spatial-title"
-          rel="dcterms:spatial"
-          href="https://standaarden.overheid.nl/owms/terms/Nederland"
-          title="Nederland"
-        />
-      </Head>
+      <TitleWithIcon
+        Icon={Notification}
+        title={text.laatste_ontwikkelingen.title}
+        as="h2"
+      />
+      <article className={`${styles.notification} metric-article`}>
+        <div className={styles.textgroup}>
+          <h3 className={styles.header}>{text.notificatie.titel}</h3>
+          <p>{text.notificatie.bericht}</p>
+        </div>
+        <a
+          className={styles.link}
+          href={text.notificatie.link.href}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <ExternalLink />
+          <span>{text.notificatie.link.text}</span>
+        </a>
+      </article>
     </>
   );
 };
 
-Home.getLayout = getLayout({
-  ...siteText.nationaal_metadata,
-  openGraphImage,
-  twitterImage,
-});
+Home.getLayout = getNationalLayout();
+
+export const getStaticProps = getNlData();
 
 export default Home;

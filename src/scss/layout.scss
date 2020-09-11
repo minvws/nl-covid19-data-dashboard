@@ -254,6 +254,15 @@ a.metric-link {
     display: block;
     margin: 0 2.5rem;
   }
+
+  &.last-developments-link {
+    margin-top: 2em;
+    min-height: 6em;
+
+    &::after {
+      top: 2em;
+    }
+  }
 }
 
 .metric-not-available {
