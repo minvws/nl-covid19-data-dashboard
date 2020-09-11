@@ -145,14 +145,7 @@ export default function SafetyRegionChloropleth(props: TProps) {
             }
           />
         </clipPath>
-        <rect
-          x={0}
-          y={0}
-          width={width}
-          height={height}
-          fill={'white'}
-          rx={14}
-        />
+        <rect x={0} y={0} width={width} height={height} fill={'none'} rx={14} />
         <g
           transform={`translate(${[marginLeft, marginTop].join(',')})`}
           clipPath={`url(#${clipPathId.current})`}
@@ -169,15 +162,19 @@ export default function SafetyRegionChloropleth(props: TProps) {
                   const { vrcode } = feature.properties;
 
                   if (vrcode) {
+                    const isSelected = vrcode === selection;
+                    let className = isSelected ? styles.selectedPath : '';
+                    if (!hasData) {
+                      className += ` ${styles.noData}`;
+                    }
                     return (
                       <path
+                        className={className}
                         shapeRendering="optimizeQuality"
                         id={vrcode}
                         key={`safetyregion-map-feature-${i}`}
                         d={path || ''}
                         fill={getFillColor(vrcode)}
-                        stroke={vrcode === selection ? 'black' : 'grey'}
-                        strokeWidth={vrcode === selection ? 2 : 0.5}
                       />
                     );
                   } else {
