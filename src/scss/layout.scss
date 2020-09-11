@@ -218,14 +218,18 @@
     margin: 0;
     padding: 0;
 
-    li:first-of-type a {
-      border-top: 2px solid $page-background;
-    }
+    li {
+      border-bottom: 1px solid #c4c4c4;
 
-    li a {
-      border-bottom: 2px solid $page-background;
+      &:first-child {
+        border-top: 1px solid #c4c4c4;
+      }
     }
   }
+}
+
+.national-aside .last-developments {
+  margin-top: 2em;
 }
 
 a.metric-link {
@@ -264,9 +268,6 @@ a.metric-link {
   }
 
   &.last-developments-link {
-    margin-top: 2em;
-    min-height: 6em;
-
     &::after {
       top: 2em;
     }

@@ -105,7 +105,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
         )}
         <aside className="national-aside">
           <nav aria-label="metric navigation">
-            <ul>
+            <ul className="last-developments">
               <li>
                 <Link href="/">
                   <a
