@@ -1,10 +1,11 @@
-import { useState, useCallback, useRef } from 'react';
+import { useCallback, useRef } from 'react';
 
 import { Mercator } from '@vx/geo';
 import * as topojson from 'topojson-client';
 
-import topology from './safetyregions.topo.json';
+import regionTopology from './safetyregions.topo.json';
 import countryTopology from './netherlands.topo.json';
+import municipalTopology from './municipalities.topo.json';
 
 import { FeatureCollection, MultiPolygon } from 'geojson';
 import useMapColorScale from 'utils/useMapColorScale';
@@ -15,11 +16,7 @@ import { TooltipWithBounds } from '@vx/tooltip';
 import sortFeatures from './sortFeatures';
 import { TCombinedChartDimensions } from './use-chart-dimensions';
 import styles from './chloropleth.module.scss';
-
-export type SafetyRegionGeoJSON = FeatureCollection<
-  MultiPolygon,
-  SafetyRegionProperties
->;
+import { MunicipalGeoJOSN, SafetyRegionGeoJSON } from './chloropleth';
 
 export interface SafetyRegionProperties {
   vrcode: string;
@@ -29,11 +26,6 @@ export interface SafetyRegionProperties {
 export type TProps = {
   dimensions: TCombinedChartDimensions;
 } & ISafetyRegionMapProps<any>;
-
-const world = topojson.feature(
-  topology,
-  topology.objects.safetyregions
-) as SafetyRegionGeoJSON;
 
 const countryGeo = topojson.feature(
   countryTopology,
@@ -51,6 +43,16 @@ export default function SafetyRegionChloropleth(props: TProps) {
     tooltipContent,
   } = props;
 
+  const regionGeo = topojson.feature(
+    regionTopology,
+    regionTopology.objects.safetyregions
+  ) as SafetyRegionGeoJSON;
+
+  const municipalGeo = topojson.feature(
+    municipalTopology,
+    municipalTopology.objects.municipalities
+  ) as MunicipalGeoJOSN;
+
   const {
     width = 0,
     height = 0,
@@ -60,11 +62,14 @@ export default function SafetyRegionChloropleth(props: TProps) {
     boundedHeight,
   } = dimensions;
 
-  const [selection] = useState<string | undefined>(selected);
+  regionGeo.features = sortFeatures(regionGeo, 'vrcode', selected);
 
-  world.features = sortFeatures(world, 'vrcode', selected);
+  const boundingbox = { ...regionGeo };
+  boundingbox.features = selected
+    ? boundingbox.features.filter((feat) => feat.properties.vrcode === selected)
+    : boundingbox.features;
 
-  const regionData = useRegionData(metric, world, metricProperty as any);
+  const regionData = useRegionData(metric, regionGeo, metricProperty as any);
 
   const hasData = Boolean(Object.keys(regionData ?? {}).length);
 
@@ -86,7 +91,7 @@ export default function SafetyRegionChloropleth(props: TProps) {
     (vrCode: string) => {
       const result = hasData
         ? regionData[vrCode]
-        : world.features.find((feat) => feat.properties.vrcode === vrCode)
+        : regionGeo.features.find((feat) => feat.properties.vrcode === vrCode)
             ?.properties;
       return result;
     },
@@ -132,7 +137,9 @@ export default function SafetyRegionChloropleth(props: TProps) {
     }
   };
 
-  const features = world.features.concat(countryGeo.features as any);
+  const features = regionGeo.features
+    .concat(selected ? (municipalGeo.features as any) : [])
+    .concat(countryGeo.features as any);
 
   return width < 10 ? null : (
     <>
@@ -163,17 +170,17 @@ export default function SafetyRegionChloropleth(props: TProps) {
         >
           <Mercator
             data={features}
-            fitSize={[[boundedWidth, boundedHeight], world]}
+            fitSize={[[boundedWidth, boundedHeight], boundingbox]}
           >
             {(mercator) => (
               <g>
                 {mercator.features.map(({ feature, path }, i) => {
                   if (!path) return null;
 
-                  const { vrcode } = feature.properties;
+                  const { vrcode } = feature.properties as any;
 
                   if (vrcode) {
-                    const isSelected = vrcode === selection;
+                    const isSelected = vrcode === selected;
                     let className = isSelected ? styles.selectedPath : '';
                     if (!hasData) {
                       className += ` ${styles.noData}`;

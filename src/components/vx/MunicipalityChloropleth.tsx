@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from 'react';
+import { useCallback, useRef } from 'react';
 
 import { Mercator } from '@vx/geo';
 import * as topojson from 'topojson-client';
@@ -19,11 +19,7 @@ import { TooltipWithBounds } from '@vx/tooltip';
 import styles from './chloropleth.module.scss';
 import { TCombinedChartDimensions } from './use-chart-dimensions';
 import municipalCodeToRegionCodeLookup from 'data/municipalCodeToRegionCodeLookup';
-
-export type MunicipalGeoJOSN = FeatureCollection<
-  MultiPolygon,
-  MunicipalityProperties
->;
+import { MunicipalGeoJOSN } from './chloropleth';
 
 export interface MunicipalityProperties {
   gemnaam: string;
@@ -40,7 +36,14 @@ const countryGeo = topojson.feature(
 ) as FeatureCollection<MultiPolygon>;
 
 export default function MunicipalityChloropleth(props: TProps) {
-  const { dimensions, metric, gradient, onSelect, selected } = props;
+  const {
+    dimensions,
+    metric,
+    gradient,
+    onSelect,
+    selected,
+    tooltipContent,
+  } = props;
 
   const municipalGeo = topojson.feature(
     municipalTopology,
@@ -75,8 +78,6 @@ export default function MunicipalityChloropleth(props: TProps) {
       regionGeo.features = [feature];
     }
   }
-
-  const [selection] = useState<string | undefined>(selected);
 
   const municipalityData = useMunicipalityData(metric, municipalGeo);
   const hasData = Boolean(Object.keys(municipalityData).length);
@@ -192,7 +193,7 @@ export default function MunicipalityChloropleth(props: TProps) {
                   if (!path) return null;
                   const { gemcode } = feature.properties;
                   if (gemcode) {
-                    const isSelected = gemcode === selection;
+                    const isSelected = gemcode === selected;
                     let className = isSelected ? styles.selectedPath : '';
                     if (!hasData) {
                       className += ` ${styles.noData}`;
@@ -234,21 +235,7 @@ export default function MunicipalityChloropleth(props: TProps) {
         }}
         className={styles.toolTip}
       >
-        <div
-          style={{
-            backgroundColor: 'white',
-            border: '1px solid lightgrey',
-            padding: '.5em',
-          }}
-        >
-          <strong>{tooltipInfo?.tooltipData?.gemnaam}</strong>
-          {tooltipInfo?.tooltipData?.value && (
-            <>
-              <br />
-              {tooltipInfo?.tooltipData?.value}
-            </>
-          )}
-        </div>
+        {tooltipContent(tooltipInfo?.tooltipData)}
       </TooltipWithBounds>
     </>
   );

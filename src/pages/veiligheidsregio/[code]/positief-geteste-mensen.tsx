@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, ReactNode } from 'react';
 
 import BarScale from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
@@ -11,17 +11,31 @@ import siteText from 'locale';
 import Getest from 'assets/test.svg';
 import formatDecimal from 'utils/formatNumber';
 import { ResultsPerRegion } from 'types/data';
-import regionCodeToMunicipalCodeLookup from 'data/regionCodeToMunicipalCodeLookup';
+
+import styles from 'components/vx/chloropleth.module.scss';
+
 import {
   getSafetyRegionData,
   getSafetyRegionPaths,
   ISafetyRegionData,
 } from 'static-props/safetyregion-data';
 import { getLocalTitleForRegion } from 'utils/getLocalTitleForCode';
-import MunicipalityMap from 'components/vx/MunicipalityMap';
+import SafetyRegionMap from 'components/vx/SafetyRegionMap';
 
 const text: typeof siteText.veiligheidsregio_positief_geteste_personen =
   siteText.veiligheidsregio_positief_geteste_personen;
+
+const tooltipContent = (context: any): ReactNode => {
+  return (
+    context && (
+      <div className={styles.defaultTooltip}>
+        <strong>{context.vrname}</strong>
+        <br />
+        {context.value} / 100.000
+      </div>
+    )
+  );
+};
 
 export function PostivelyTestedPeopleBarScale(props: {
   data: ResultsPerRegion | undefined;
@@ -62,10 +76,6 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
 
   const resultsPerRegion: ResultsPerRegion | undefined =
     data?.results_per_region;
-
-  const municipalCodes = data.code
-    ? regionCodeToMunicipalCodeLookup[data.code]
-    : undefined;
 
   return (
     <>
@@ -126,13 +136,12 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
         </div>
 
         <div className="column-item column-item-extra-margin">
-          {municipalCodes?.length && (
-            <MunicipalityMap
-              selected={municipalCodes[0]}
-              metric="positive_tested_people"
-              gradient={['#9DDEFE', '#0290D6']}
-            />
-          )}
+          <SafetyRegionMap
+            selected={data.code}
+            metric="positive_tested_people"
+            gradient={['#D2F3FF', '#005684']}
+            tooltipContent={tooltipContent}
+          />
         </div>
       </article>
 

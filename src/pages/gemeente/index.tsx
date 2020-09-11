@@ -36,7 +36,7 @@ const Municipality: FCWithLayout<any> = () => {
           <MunicipalityMap
             style={{ height: '800px', backgroundColor: 'none' }}
             onSelect={onSelectMunicpal}
-            gradient={['#ffff', '#ffff']}
+            gradient={['#ffffff', '#ffffff']}
           />
         </div>
       </article>
