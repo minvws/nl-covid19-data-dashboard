@@ -23,6 +23,8 @@ import useMediaQuery from 'utils/useMediaQuery';
 
 import municipalities from 'data/gemeente_veiligheidsregio.json';
 import { IMunicipalityData } from 'static-props/municipality-data';
+import { getLocalTitleForMuncipality } from 'utils/getLocalTitleForCode';
+import getSafetyRegionForMunicipalityCode from 'utils/getSafetyRegionForMunicipalityCode';
 
 export default MunicipalityLayout;
 
@@ -92,6 +94,10 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
     }
   }
 
+  const safetyRegion:
+    | { name: string; code: string; id: number }
+    | undefined = getSafetyRegionForMunicipalityCode(code as string);
+
   return (
     <>
       <Head>
@@ -127,6 +133,25 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
 
           {showMetricLinks && (
             <nav aria-label="metric navigation">
+              <div className="region-names">
+                <h2>
+                  {getLocalTitleForMuncipality(
+                    '{{municipality}}',
+                    code as string
+                  )}
+                </h2>
+                {safetyRegion && (
+                  <p>
+                    {siteText.common.veiligheidsregio_label}{' '}
+                    <Link
+                      href="/veiligheidsregio/[code]/positief-geteste-mensen"
+                      as={`/veiligheidsregio/${safetyRegion.code}/positief-geteste-mensen`}
+                    >
+                      <a>{safetyRegion.name}</a>
+                    </Link>
+                  </p>
+                )}
+              </div>
               <h2>{siteText.nationaal_layout.headings.medisch}</h2>
               <ul>
                 <li>
@@ -137,7 +162,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                     <a
                       onClick={blur}
                       className={getClassName(
-                        `/veiligheidsregio/[code]/positief-geteste-mensen`
+                        `/gemeente/[code]/positief-geteste-mensen`
                       )}
                     >
                       <TitleWithIcon
@@ -164,7 +189,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                     <a
                       onClick={blur}
                       className={getClassName(
-                        `/veiligheidsregio/[code]/ziekenhuis-opnames`
+                        `/gemeente/[code]/ziekenhuis-opnames`
                       )}
                     >
                       <TitleWithIcon
@@ -194,9 +219,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                     >
                       <a
                         onClick={blur}
-                        className={getClassName(
-                          `/veiligheidsregio/[code]/rioolwater`
-                        )}
+                        className={getClassName(`/gemeente/[code]/rioolwater`)}
                       >
                         <TitleWithIcon
                           Icon={RioolwaterMonitoring}

@@ -240,14 +240,30 @@
     margin: 0;
     padding: 0;
 
-    li:first-of-type a {
-      border-top: 2px solid $page-background;
-    }
+    li {
+      border-bottom: 1px solid #c4c4c4;
 
-    li a {
-      border-bottom: 2px solid $page-background;
+      &:first-child {
+        border-top: 1px solid #c4c4c4;
+      }
     }
   }
+}
+
+.region-names {
+  h2 {
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+
+  p {
+    margin-top: 0;
+    padding: 0 1rem 1rem;
+  }
+}
+
+.national-aside .last-developments {
+  margin-top: 2em;
 }
 
 a.metric-link {
@@ -270,9 +286,10 @@ a.metric-link {
   &::after {
     content: '';
     background-image: url('/images/chevron.svg');
-    background-size: 1.2em 1.2em;
-    height: 1.2em;
-    width: 1.2em;
+    // match aspect ratio of chevron.svg
+    background-size: 1.1em 1.8em;
+    height: 1.8em;
+    width: 1.1em;
     display: block;
     position: absolute;
     right: 1em;
@@ -285,9 +302,6 @@ a.metric-link {
   }
 
   &.last-developments-link {
-    margin-top: 2em;
-    min-height: 6em;
-
     &::after {
       top: 2em;
     }
