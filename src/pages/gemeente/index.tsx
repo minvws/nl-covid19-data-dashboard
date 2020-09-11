@@ -23,15 +23,23 @@ const Municipality: FCWithLayout<any> = () => {
 
   return (
     <>
-      <h2 className="text-max-width">{text.gemeente_index.selecteer_titel}</h2>
-      <p className="text-max-width">
-        {text.gemeente_index.selecteer_toelichting}
-      </p>
-      <MunicipalityMap
-        style={{ height: '500px' }}
-        onSelect={onSelectMunicpal}
-        gradient={['#ffff', '#ffff']}
-      />
+      <article className="map-article layout-two-column">
+        <div className="column-item-no-margin column-item-small">
+          <h2 className="text-max-width">
+            {text.gemeente_index.selecteer_titel}
+          </h2>
+          <p className="text-max-width">
+            {text.gemeente_index.selecteer_toelichting}
+          </p>
+        </div>
+        <div className="column-item-no-margin column-item">
+          <MunicipalityMap
+            style={{ height: '800px', backgroundColor: 'none' }}
+            onSelect={onSelectMunicpal}
+            gradient={['#ffff', '#ffff']}
+          />
+        </div>
+      </article>
     </>
   );
 };
