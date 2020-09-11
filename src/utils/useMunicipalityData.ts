@@ -14,11 +14,11 @@ export default useMunicipalityData;
 /**
  * This hook return a list of municipality data where each item has a value property
  * that is set based on the given metric name.
- * When municipalCode param is defined, the result will be filtered on the safety region
- * that the given municipalCode belongs to.
+ * The municipal data is merged with the given FeatureCollection's properties
+ * based on the associated gemcode > gmcode keys.
  *
  * @param metricName
- * @param municipalCode
+ * @param featureCollection
  */
 function useMunicipalityData<
   T extends TMunicipalityMetricName,

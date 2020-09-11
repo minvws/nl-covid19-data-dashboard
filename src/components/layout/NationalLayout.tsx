@@ -16,6 +16,7 @@ import { NursingHomeInfectedLocationsBarScale } from 'pages/landelijk/verpleeghu
 import { NursingHomeDeathsBarScale } from 'pages/landelijk/verpleeghuis-sterfte';
 
 import GetestIcon from 'assets/test.svg';
+import LaatsteOntwIcon from 'assets/test.svg';
 import ReproIcon from 'assets/reproductiegetal.svg';
 import Ziektegolf from 'assets/ziektegolf.svg';
 import Ziekenhuis from 'assets/ziekenhuis.svg';
@@ -104,6 +105,24 @@ function NationalLayout(props: WithChildren<INationalData>) {
         )}
         <aside className="national-aside">
           <nav aria-label="metric navigation">
+            <ul>
+              <li>
+                <Link href="/landelijk/laatste-ontwikkelingen">
+                  <a
+                    onClick={blur}
+                    className={getClassName(
+                      '/landelijk/laatste-ontwikkelingen'
+                    )}
+                  >
+                    <TitleWithIcon
+                      Icon={LaatsteOntwIcon}
+                      title={siteText.laatste_ontwikkelingen.titel}
+                    />
+                    <span>{siteText.laatste_ontwikkelingen.subtitel}</span>
+                  </a>
+                </Link>
+              </li>
+            </ul>
             <h2>{siteText.nationaal_layout.headings.medisch}</h2>
             <ul>
               <li>

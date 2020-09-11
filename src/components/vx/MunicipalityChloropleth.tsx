@@ -61,7 +61,7 @@ export default function MunicipalityChloropleth(props: TProps) {
     boundedHeight,
   } = dimensions;
 
-  let boundingbox = useMunicipalityFeatures(municipalGeo, selected) as any;
+  const boundingbox = useMunicipalityFeatures(municipalGeo, selected) as any;
   municipalGeo.features = sortFeatures(municipalGeo, 'gemcode', selected);
 
   const vrcode = selected
@@ -73,7 +73,6 @@ export default function MunicipalityChloropleth(props: TProps) {
     );
     if (feature) {
       regionGeo.features = [feature];
-      boundingbox = regionGeo;
     }
   }
 
@@ -105,7 +104,7 @@ export default function MunicipalityChloropleth(props: TProps) {
             (feat) => feat.properties.gemcode === gmCode
           )?.properties;
     },
-    [municipalityData, hasData]
+    [municipalityData, hasData, municipalGeo]
   );
 
   const [showTooltip, hideTooltip, tooltipInfo] = useMapTooltip<
