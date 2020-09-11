@@ -7,6 +7,7 @@ import { ContentHeader } from 'components/layout/Content';
 import Ziekenhuis from 'assets/ziekenhuis.svg';
 
 import siteText from 'locale';
+import styles from 'components/vx/chloropleth.module.scss';
 
 import { IntakeHospitalMa } from 'types/data';
 import { ReactNode, useState } from 'react';
@@ -18,14 +19,26 @@ import SafetyRegionMap from 'components/vx/SafetyRegionMap';
 const text: typeof siteText.ziekenhuisopnames_per_dag =
   siteText.ziekenhuisopnames_per_dag;
 
-const tooltipContent = (context: any): ReactNode => {
+const tooltipMunicipalContent = (context: any): ReactNode => {
   return (
     context && (
-      <>
-        <strong>{context.vrnaam}</strong>
+      <div className={styles.defaultTooltip}>
+        <strong>{context.gemnaam}</strong>
         <br />
         {context.value}
-      </>
+      </div>
+    )
+  );
+};
+
+const tooltipRegionContent = (context: any): ReactNode => {
+  return (
+    context && (
+      <div className={styles.defaultTooltip}>
+        <strong>{context.vrname}</strong>
+        <br />
+        {context.value}
+      </div>
     )
   );
 };
@@ -111,14 +124,15 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
           {selectedMap === 'municipal' && (
             <MunicipalityMap
               metric="hospital_admissions"
-              gradient={['#69c253', '#f35065']}
+              gradient={['#D2F3FF', '#005684']}
+              tooltipContent={tooltipMunicipalContent}
             />
           )}
           {selectedMap === 'region' && (
             <SafetyRegionMap
               metric="hospital_admissions"
-              gradient={['#69c253', '#f35065']}
-              tooltipContent={tooltipContent}
+              gradient={['#D2F3FF', '#005684']}
+              tooltipContent={tooltipRegionContent}
             />
           )}
         </div>

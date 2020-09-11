@@ -6,6 +6,7 @@ import { ContentHeader } from 'components/layout/Content';
 import Ziekenhuis from 'assets/ziekenhuis.svg';
 
 import siteText from 'locale';
+import styles from 'components/vx/chloropleth.module.scss';
 
 import { ResultsPerRegion } from 'types/data';
 import { LineChart } from 'components/charts/index';
@@ -17,9 +18,22 @@ import {
 } from 'static-props/safetyregion-data';
 import { getLocalTitleForRegion } from 'utils/getLocalTitleForCode';
 import MunicipalityMap from 'components/vx/MunicipalityMap';
+import { ReactNode } from 'react';
 
 const text: typeof siteText.veiligheidsregio_ziekenhuisopnames_per_dag =
   siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
+
+const tooltipContent = (context: any): ReactNode => {
+  return (
+    context && (
+      <div className={styles.defaultTooltip}>
+        <strong>{context.gemnaam}</strong>
+        <br />
+        {context.value}
+      </div>
+    )
+  );
+};
 
 export function IntakeHospitalBarScale(props: {
   data: ResultsPerRegion | undefined;
@@ -112,7 +126,8 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
           <MunicipalityMap
             selected={data.code}
             metric="hospital_admissions"
-            gradient={['#9DDEFE', '#0290D6']}
+            gradient={['#D2F3FF', '#005684']}
+            tooltipContent={tooltipContent}
           />
         </div>
       </article>

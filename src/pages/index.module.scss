@@ -86,30 +86,25 @@
   flex-direction: row;
 
   .bubble {
+    width: 54px;
+    height: 54px;
+    margin-right: 0.5em;
     flex-grow: 0;
     flex-shrink: 0;
-    height: 54px;
-    width: 54px;
-    line-height: 54px;
-    display: table-cell;
-    text-align: center;
-    vertical-align: middle;
-    border-radius: 50%;
-    font-weight: bolder;
-    color: white;
-    font-size: 2em;
-    margin-right: 0.5em;
   }
 }
 
 .escalationColor1 {
-  background-color: #fcd603;
+  fill: #fcd603;
+  stroke: #fcd603;
 }
 
 .escalationColor2 {
-  background-color: #f79903;
+  fill: #f79903;
+  stroke: #f79903;
 }
 
 .escalationColor3 {
-  background-color: #f45167;
+  fill: #f45167;
+  stroke: #f45167;
 }

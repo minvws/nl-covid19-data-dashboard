@@ -14,7 +14,7 @@ import Getest from 'assets/test.svg';
 import formatDecimal from 'utils/formatNumber';
 
 import siteText from 'locale';
-import styles from './landelijk.module.scss';
+import styles from 'components/vx/chloropleth.module.scss';
 
 import {
   InfectedPeopleDeltaNormalized,
@@ -28,7 +28,19 @@ import getNlData, { INationalData } from 'static-props/nl-data';
 const text: typeof siteText.positief_geteste_personen =
   siteText.positief_geteste_personen;
 
-const tooltipContent = (context: any): ReactNode => {
+const tooltipMunicipalContent = (context: any): ReactNode => {
+  return (
+    context && (
+      <div className={styles.defaultTooltip}>
+        <strong>{context.gemnaam}</strong>
+        <br />
+        {context.value} / 100.000
+      </div>
+    )
+  );
+};
+
+const tooltipRegionContent = (context: any): ReactNode => {
   return (
     context && (
       <div className={styles.defaultTooltip}>
@@ -144,14 +156,15 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           {selectedMap === 'municipal' && (
             <MunicipalityMap
               metric="positive_tested_people"
-              gradient={['#9DDEFE', '#0290D6']}
+              gradient={['#D2F3FF', '#005684']}
+              tooltipContent={tooltipMunicipalContent}
             />
           )}
           {selectedMap === 'region' && (
             <SafetyRegionMap
               metric="positive_tested_people"
-              gradient={['#9DDEFE', '#0290D6']}
-              tooltipContent={tooltipContent}
+              gradient={['#D2F3FF', '#005684']}
+              tooltipContent={tooltipRegionContent}
             />
           )}
         </div>
