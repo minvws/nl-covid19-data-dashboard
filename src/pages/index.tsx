@@ -1,6 +1,7 @@
 import { FCWithLayout } from 'components/layout';
 import { getNationalLayout } from 'components/layout/NationalLayout';
 import Notification from 'assets/notification.svg';
+import ExclamationMark from 'assets/exclamation-mark-bubble.svg';
 import ExternalLink from 'assets/external-link.svg';
 
 import getNlData, { INationalData } from 'static-props/nl-data';
@@ -22,10 +23,10 @@ const tooltipContent = (context: any): ReactNode => {
         <h4>Situatie in {context?.vrname}</h4>
         {
           <div className={styles.escalationInfo}>
-            <div
-              className={`${styles.bubble} ${styles['escalationColor' + type]}`}
-            >
-              !
+            <div className={styles.bubble}>
+              <ExclamationMark
+                className={`${styles[`escalationColor${type}`]}`}
+              />
             </div>
             <div>
               <strong>
@@ -75,8 +76,8 @@ const Home: FCWithLayout<INationalData> = () => {
             </h4>
 
             <div className={styles.escalationInfo}>
-              <div className={`${styles.bubble} ${styles.escalationColor1}`}>
-                !
+              <div className={`${styles.bubble} `}>
+                <ExclamationMark className={styles.escalationColor1} />
               </div>
               <div>
                 <strong>{text.escalatie_niveau.types['1'].titel}</strong>
@@ -86,8 +87,8 @@ const Home: FCWithLayout<INationalData> = () => {
             </div>
 
             <div className={styles.escalationInfo}>
-              <div className={`${styles.bubble} ${styles.escalationColor2}`}>
-                !
+              <div className={styles.bubble}>
+                <ExclamationMark className={styles.escalationColor2} />
               </div>
               <div>
                 <strong>{text.escalatie_niveau.types['2'].titel}</strong>
@@ -97,8 +98,8 @@ const Home: FCWithLayout<INationalData> = () => {
             </div>
 
             <div className={styles.escalationInfo}>
-              <div className={`${styles.bubble} ${styles.escalationColor3}`}>
-                !
+              <div className={styles.bubble}>
+                <ExclamationMark className={styles.escalationColor3} />
               </div>
               <div>
                 <strong>{text.escalatie_niveau.types['3'].titel}</strong>

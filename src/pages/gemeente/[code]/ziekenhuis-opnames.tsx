@@ -20,6 +20,20 @@ import MunicipalityMap from 'components/vx/MunicipalityMap';
 const text: typeof siteText.gemeente_ziekenhuisopnames_per_dag =
   siteText.gemeente_ziekenhuisopnames_per_dag;
 
+import styles from 'components/vx/chloropleth.module.scss';
+
+const tooltipContent = (context: any) => {
+  return (
+    context && (
+      <div className={styles.defaultTooltip}>
+        <strong>{context.gemnaam}</strong>
+        <br />
+        {context.value}
+      </div>
+    )
+  );
+};
+
 export function IntakeHospitalBarScale(props: {
   data: HospitalAdmissions | undefined;
 }) {
@@ -114,7 +128,8 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
           <MunicipalityMap
             selected={data.code}
             metric="hospital_admissions"
-            gradient={['#69c253', '#f35065']}
+            gradient={['#D2F3FF', '#005684']}
+            tooltipContent={tooltipContent}
           />
         </div>
       </article>
