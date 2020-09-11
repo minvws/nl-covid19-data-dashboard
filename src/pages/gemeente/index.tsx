@@ -4,6 +4,19 @@ import { useRouter } from 'next/router';
 import MunicipalityMap from 'components/vx/MunicipalityMap';
 
 import text from 'locale';
+import styles from 'components/vx/chloropleth.module.scss';
+
+import { ReactNode } from 'react';
+
+const tooltipContent = (context: any): ReactNode => {
+  return (
+    context && (
+      <div className={styles.defaultTooltip}>
+        <strong>{context.gemnaam}</strong>
+      </div>
+    )
+  );
+};
 
 // Passing `any` to `FCWithLayout` because we
 // can't do `getStaticProps` on this page because we require
@@ -37,6 +50,7 @@ const Municipality: FCWithLayout<any> = () => {
             style={{ height: '800px', backgroundColor: 'none' }}
             onSelect={onSelectMunicpal}
             gradient={['#ffffff', '#ffffff']}
+            tooltipContent={tooltipContent}
           />
         </div>
       </article>

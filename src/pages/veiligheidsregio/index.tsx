@@ -4,14 +4,16 @@ import SafetyRegionMap from 'components/vx/SafetyRegionMap';
 import { useRouter } from 'next/router';
 
 import text from 'locale';
+import styles from 'components/vx/chloropleth.module.scss';
+
 import { ReactNode } from 'react';
 
 const tooltipContent = (context: any): ReactNode => {
   return (
     context && (
-      <>
-        <strong>{context.vrnaam}</strong>
-      </>
+      <div className={styles.defaultTooltip}>
+        <strong>{context.vrname}</strong>
+      </div>
     )
   );
 };
