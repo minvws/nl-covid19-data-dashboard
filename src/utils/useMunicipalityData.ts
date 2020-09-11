@@ -1,6 +1,8 @@
 import useSWR from 'swr';
 import { useMemo } from 'react';
 import { Municipalities } from 'types/data';
+import { FeatureCollection, MultiPolygon } from 'geojson';
+import { MunicipalityProperties } from 'components/vx/MunicipalityChloropleth';
 
 export type TMunicipalityMetricName = keyof Pick<
   Municipalities,
@@ -22,7 +24,10 @@ function useMunicipalityData<
   T extends TMunicipalityMetricName,
   ItemType extends Municipalities[T][number],
   ReturnType extends ItemType & { value: number }
->(metricName?: T): Record<string, ReturnType> {
+>(
+  metricName: T | undefined,
+  featureCollection: FeatureCollection<MultiPolygon, MunicipalityProperties>
+): Record<string, ReturnType> {
   const { data } = useSWR<Municipalities>('/json/municipalities.json');
 
   const metricItems: ItemType[] | undefined =
@@ -35,8 +40,12 @@ function useMunicipalityData<
 
     const filteredData = metricItems.reduce<Record<string, ReturnType>>(
       (aggr, item: ItemType): Record<string, ReturnType> => {
+        const feature = featureCollection.features.find(
+          (feat) => feat.properties.gemcode === item.gmcode
+        );
         aggr[item.gmcode] = {
           ...item,
+          ...feature?.properties,
           value: (item as any)[metricName] as number,
         } as any;
         return aggr;
@@ -45,5 +54,5 @@ function useMunicipalityData<
     );
 
     return filteredData;
-  }, [metricItems, metricName]);
+  }, [metricItems, metricName, featureCollection.features]);
 }

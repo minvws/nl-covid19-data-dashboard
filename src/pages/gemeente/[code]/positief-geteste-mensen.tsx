@@ -10,12 +10,12 @@ import { ContentHeader } from 'components/layout/Content';
 import Getest from 'assets/test.svg';
 import formatDecimal from 'utils/formatNumber';
 import { PositiveTestedPeople } from 'types/data';
-import replaceVariablesInText from 'utils/replaceVariablesInText';
 import {
   getMunicipalityData,
   getMunicipalityPaths,
   IMunicipalityData,
 } from 'static-props/municipality-data';
+import { getLocalTitleForMuncipality } from 'utils/getLocalTitleForCode';
 import MunicipalityMap from 'components/vx/MunicipalityMap';
 
 const text: typeof siteText.gemeente_positief_geteste_personen =
@@ -56,10 +56,7 @@ const PostivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
     <>
       <ContentHeader
         category="Medische indicatoren"
-        title={replaceVariablesInText(text.titel, {
-          municipality:
-            data.positive_tested_people.last_value.municipality_name,
-        })}
+        title={getLocalTitleForMuncipality(text.titel, data.code)}
         Icon={Getest}
         subtitle={text.pagina_toelichting}
         metadata={{
@@ -111,7 +108,7 @@ const PostivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
 
       <article className="metric-article layout-two-column">
         <div className="column-item column-item-extra-margin">
-          <h3>{text.map_titel}</h3>
+          <h3>{getLocalTitleForMuncipality(text.map_titel, data.code)}</h3>
           <p>{text.map_toelichting}</p>
         </div>
 

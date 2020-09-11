@@ -1,3 +1,5 @@
+import { Fragment } from 'react';
+
 import BarScale from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
 import { getSafetyRegionLayout } from 'components/layout/SafetyRegionLayout';
@@ -9,14 +11,13 @@ import siteText from 'locale';
 import Getest from 'assets/test.svg';
 import formatDecimal from 'utils/formatNumber';
 import { ResultsPerRegion } from 'types/data';
-import replaceVariablesInText from 'utils/replaceVariablesInText';
 import regionCodeToMunicipalCodeLookup from 'data/regionCodeToMunicipalCodeLookup';
 import {
   getSafetyRegionData,
   getSafetyRegionPaths,
   ISafetyRegionData,
 } from 'static-props/safetyregion-data';
-import { Fragment } from 'react';
+import { getLocalTitleForRegion } from 'utils/getLocalTitleForCode';
 import MunicipalityMap from 'components/vx/MunicipalityMap';
 
 const text: typeof siteText.veiligheidsregio_positief_geteste_personen =
@@ -70,9 +71,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
     <>
       <ContentHeader
         category="Medische indicatoren"
-        title={replaceVariablesInText(text.titel, {
-          safetyRegion: data.name,
-        })}
+        title={getLocalTitleForRegion(text.titel, data.code)}
         Icon={Getest}
         subtitle={text.pagina_toelichting}
         metadata={{
@@ -122,7 +121,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
       </article>
       <article className="metric-article layout-two-column">
         <div className="column-item column-item-extra-margin">
-          <h3>{text.map_titel}</h3>
+          <h3>{getLocalTitleForRegion(text.map_titel, data.code)}</h3>
           <p>{text.map_toelichting}</p>
         </div>
 
