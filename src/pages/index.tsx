@@ -15,7 +15,7 @@ import { ReactNode } from 'react';
 const escalationColors = ['#FCD603', '#F79903', '#F45167'];
 
 const tooltipContent = (context: any): ReactNode => {
-  const type = context?.value;
+  const type: string = context?.value;
   return (
     type && (
       <div className={styles.escalationTooltip}>
@@ -28,8 +28,11 @@ const tooltipContent = (context: any): ReactNode => {
               !
             </div>
             <div>
-              <strong>{text.escalatie_niveau.types[type].titel}</strong>:&nbsp;
-              {text.escalatie_niveau.types[type].toelichting}
+              <strong>
+                {(text.escalatie_niveau.types as any)[type].titel}
+              </strong>
+              :&nbsp;
+              {(text.escalatie_niveau.types as any)[type].toelichting}
             </div>
           </div>
         }
