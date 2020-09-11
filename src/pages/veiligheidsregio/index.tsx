@@ -23,17 +23,23 @@ const SafetyRegion: FCWithLayout<any> = () => {
 
   return (
     <>
-      <h2 className="text-max-width">
-        {text.veiligheidsregio_index.selecteer_titel}
-      </h2>
-      <p className="text-max-width">
-        {text.veiligheidsregio_index.selecteer_toelichting}
-      </p>
-      <SafetyRegionMap
-        style={{ height: '500px' }}
-        onSelect={onSelectRegion}
-        gradient={['#ffff', '#ffff']}
-      />
+      <article className="map-article layout-two-column">
+        <div className="column-item-no-margin column-item-small">
+          <h2 className="text-max-width">
+            {text.veiligheidsregio_index.selecteer_titel}
+          </h2>
+          <p className="text-max-width">
+            {text.veiligheidsregio_index.selecteer_toelichting}
+          </p>
+        </div>
+        <div className="column-item-no-margin column-item">
+          <SafetyRegionMap
+            style={{ height: '800px', backgroundColor: 'none' }}
+            onSelect={onSelectRegion}
+            gradient={['#ffff', '#ffff']}
+          />
+        </div>
+      </article>
     </>
   );
 };

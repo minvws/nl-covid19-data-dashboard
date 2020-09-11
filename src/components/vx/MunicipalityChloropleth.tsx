@@ -89,11 +89,14 @@ export default function MunicipalityChloropleth(props: TProps) {
 
   const getFillColor = useCallback(
     (gmCode: string) => {
-      const data = municipalityData[gmCode];
-      const value = data?.value ?? 0;
-      return color(value);
+      if (hasData) {
+        const data = municipalityData[gmCode];
+        const value = data?.value ?? 0;
+        return color(value);
+      }
+      return 'white';
     },
-    [municipalityData, color]
+    [municipalityData, color, hasData]
   );
 
   const getData = useCallback(
@@ -171,14 +174,7 @@ export default function MunicipalityChloropleth(props: TProps) {
             }
           />
         </clipPath>
-        <rect
-          x={0}
-          y={0}
-          width={width}
-          height={height}
-          fill={'white'}
-          rx={14}
-        />
+        <rect x={0} y={0} width={width} height={height} fill={'none'} rx={14} />
         <g
           transform={`translate(${[marginLeft, marginTop].join(',')})`}
           clipPath={`url(#${clipPathId.current})`}
@@ -193,15 +189,19 @@ export default function MunicipalityChloropleth(props: TProps) {
                   if (!path) return null;
                   const { gemcode } = feature.properties;
                   if (gemcode) {
+                    const isSelected = gemcode === selection;
+                    let className = isSelected ? styles.selectedPath : '';
+                    if (!hasData) {
+                      className += ` ${styles.noData}`;
+                    }
                     return (
                       <path
+                        className={className}
                         shapeRendering="optimizeQuality"
                         id={gemcode}
                         key={`municipality-map-feature-${i}`}
                         d={path}
                         fill={getFillColor(gemcode)}
-                        stroke={gemcode === selection ? 'black' : 'grey'}
-                        strokeWidth={gemcode === selection ? 3 : 0.5}
                       />
                     );
                   } else {

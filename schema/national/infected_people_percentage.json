@@ -1,0 +1,50 @@
+{
+  "definitions": {
+    "item": {
+      "title": "infected_people_percentage_last_value",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "infected_ggd",
+        "percentage_infected_ggd",
+        "total_tested_ggd",
+        "date_of_report_unix",
+        "date_of_insertion_unix"
+      ],
+      "properties": {
+        "infected_ggd": {
+          "type": "number"
+        },
+        "percentage_infected_ggd": {
+          "type": "number"
+        },
+        "total_tested_ggd": {
+          "type": "number"
+        },
+        "date_of_report_unix": {
+          "type": "integer"
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "infected_people_perentage.json",
+  "title": "infected_people_percentage",
+  "type": "object",
+  "required": ["values", "last_value"],
+  "additionalProperties": false,
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/item"
+      }
+    },
+    "last_value": {
+      "$ref": "#/definitions/item"
+    }
+  }
+}

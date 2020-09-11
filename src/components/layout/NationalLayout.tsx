@@ -16,7 +16,6 @@ import { NursingHomeInfectedLocationsBarScale } from 'pages/landelijk/verpleeghu
 import { NursingHomeDeathsBarScale } from 'pages/landelijk/verpleeghuis-sterfte';
 
 import GetestIcon from 'assets/test.svg';
-import LaatsteOntwIcon from 'assets/test.svg';
 import ReproIcon from 'assets/reproductiegetal.svg';
 import Ziektegolf from 'assets/ziektegolf.svg';
 import Ziekenhuis from 'assets/ziekenhuis.svg';
@@ -25,6 +24,7 @@ import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
 import Locatie from 'assets/locaties.svg';
 import CoronaVirus from 'assets/coronavirus.svg';
 import Arrow from 'assets/arrow.svg';
+import Notification from 'assets/notification.svg';
 
 import siteText from 'locale';
 
@@ -107,18 +107,16 @@ function NationalLayout(props: WithChildren<INationalData>) {
           <nav aria-label="metric navigation">
             <ul>
               <li>
-                <Link href="/landelijk/laatste-ontwikkelingen">
+                <Link href="/">
                   <a
                     onClick={blur}
-                    className={getClassName(
-                      '/landelijk/laatste-ontwikkelingen'
-                    )}
+                    className={`last-developments-link ${getClassName('/')}`}
                   >
                     <TitleWithIcon
-                      Icon={LaatsteOntwIcon}
-                      title={siteText.laatste_ontwikkelingen.titel}
+                      Icon={Notification}
+                      title={siteText.laatste_ontwikkelingen.title}
                     />
-                    <span>{siteText.laatste_ontwikkelingen.subtitel}</span>
+                    <span>{siteText.laatste_ontwikkelingen.menu_subtitle}</span>
                   </a>
                 </Link>
               </li>

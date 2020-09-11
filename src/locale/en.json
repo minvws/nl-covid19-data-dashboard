@@ -42,15 +42,11 @@
       "meer": "More information on the coronavirus",
       "verantwoording": "Explanation of the data presented",
       "meer_href": "https://www.government.nl/topics/coronavirus-covid-19",
-      "veiligheidsregio": "Safety region",
-      "gemeente": "Municipality"
+      "veiligheidsregio": "Safety regions",
+      "gemeente": "Municipalities"
     },
     "title": "Corona Dashboard",
     "terug_naar_alle_cijfers": "Back to overview"
-  },
-  "laatste_ontwikkelingen": {
-    "titel": "Laatste ontwikkelingen",
-    "subtitel": "Belangrijkste veranderingen"
   },
   "ic_opnames_per_dag": {
     "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
@@ -664,5 +660,30 @@
   "gemeente_index": {
     "selecteer_titel": "Selecteer een gemeente",
     "selecteer_toelichting": "Er gelden verschillende maatregelen per veiligheidsregio en gemeente"
+  },
+  "laatste_ontwikkelingen": {
+    "title": "Laatste ontwikkelingen",
+    "menu_subtitle": "Belangrijke verandering"
+  },
+  "escalatie_niveau": {
+    "titel": "Maatregelenniveaus in Nederland",
+    "toelichting": "Naast de landelijke maatregelen, kunnen per regio aanvullende maatregelen gelden. Op basis van de lokale ontwikkeling van de cijfers wordt deze stats regelmatig herzien door de afzonderlijke veiligheidsregio's.",
+    "types": {
+      "1": {
+        "titel": "Waakzaam",
+        "toelichting": "houd je aan de (landelijke) maatregelen"
+      },
+      "2": {
+        "titel": "Zorgelijk",
+        "toelichting": "er gelden aanvullende maatregelen"
+      },
+      "3": {
+        "titel": "Ernstig",
+        "toelichting": "strenge aanvullende maatregelen"
+      }
+    },
+    "legenda": {
+      "titel": "Legenda situatiekaart"
+    }
   }
 }

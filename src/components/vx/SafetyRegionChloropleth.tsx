@@ -28,7 +28,7 @@ export interface SafetyRegionProperties {
 
 export type TProps = {
   dimensions: TCombinedChartDimensions;
-} & ISafetyRegionMapProps;
+} & ISafetyRegionMapProps<any>;
 
 const world = topojson.feature(
   topology,
@@ -41,7 +41,15 @@ const countryGeo = topojson.feature(
 ) as FeatureCollection<MultiPolygon>;
 
 export default function SafetyRegionChloropleth(props: TProps) {
-  const { dimensions, metric, gradient, onSelect, selected } = props;
+  const {
+    dimensions,
+    metric,
+    metricProperty,
+    gradient,
+    onSelect,
+    selected,
+    tooltipContent,
+  } = props;
 
   const {
     width = 0,
@@ -56,8 +64,9 @@ export default function SafetyRegionChloropleth(props: TProps) {
 
   world.features = sortFeatures(world, 'vrcode', selected);
 
-  const regionData = useRegionData(metric, world);
-  const hasData = Boolean(Object.keys(regionData).length);
+  const regionData = useRegionData(metric, world, metricProperty as any);
+
+  const hasData = Boolean(Object.keys(regionData ?? {}).length);
 
   const color = useMapColorScale(
     regionData,
@@ -145,14 +154,7 @@ export default function SafetyRegionChloropleth(props: TProps) {
             }
           />
         </clipPath>
-        <rect
-          x={0}
-          y={0}
-          width={width}
-          height={height}
-          fill={'white'}
-          rx={14}
-        />
+        <rect x={0} y={0} width={width} height={height} fill={'none'} rx={14} />
         <g
           transform={`translate(${[marginLeft, marginTop].join(',')})`}
           clipPath={`url(#${clipPathId.current})`}
@@ -169,15 +171,19 @@ export default function SafetyRegionChloropleth(props: TProps) {
                   const { vrcode } = feature.properties;
 
                   if (vrcode) {
+                    const isSelected = vrcode === selection;
+                    let className = isSelected ? styles.selectedPath : '';
+                    if (!hasData) {
+                      className += ` ${styles.noData}`;
+                    }
                     return (
                       <path
+                        className={className}
                         shapeRendering="optimizeQuality"
                         id={vrcode}
                         key={`safetyregion-map-feature-${i}`}
                         d={path || ''}
                         fill={getFillColor(vrcode)}
-                        stroke={vrcode === selection ? 'black' : 'grey'}
-                        strokeWidth={vrcode === selection ? 2 : 0.5}
                       />
                     );
                   } else {
@@ -207,13 +213,7 @@ export default function SafetyRegionChloropleth(props: TProps) {
         }}
         className={styles.toolTip}
       >
-        <strong>{tooltipInfo?.tooltipData?.vrname}</strong>
-        {tooltipInfo?.tooltipData?.value && (
-          <>
-            <br />
-            {tooltipInfo.tooltipData.value}
-          </>
-        )}
+        {tooltipContent(tooltipInfo?.tooltipData)}
       </TooltipWithBounds>
     </>
   );
