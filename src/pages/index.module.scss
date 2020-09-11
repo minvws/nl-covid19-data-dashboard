@@ -7,7 +7,7 @@
   overflow: auto;
   margin-top: 2em;
 
-  @media (min-width: 768px) {
+  @media (min-width: 1201px) {
     display: flex;
     align-items: flex-start;
     padding: 2em 2em 1em 2em;
@@ -18,13 +18,13 @@
 }
 
 .textgroup {
-  @media (max-width: 767px) {
+  @media (max-width: 1200px) {
     border-bottom: 1px solid #c4c4c4;
     padding-top: 0;
     margin-bottom: 1em;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1201px) {
     border-right: 1px solid #c4c4c4;
     padding-right: 2em;
     margin-right: 2em;
