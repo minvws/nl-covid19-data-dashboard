@@ -106,8 +106,8 @@
     width: 100%;
     padding: 1em;
     box-shadow: $box-shadow;
-    text-decoration: none;
-    z-index: 3;
+    position: relative;
+    z-index: 2;
 
     &:hover,
     &:focus {
