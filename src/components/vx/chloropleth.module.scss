@@ -21,6 +21,8 @@
 
   path {
     pointer-events: all;
+    stroke: grey;
+    stroke-width: 0.5;
   }
 
   path:hover {
@@ -29,14 +31,23 @@
     z-index: 1000;
   }
 
-  .overlay {
+  path.selectedPath {
+    stroke: black;
+    stroke-width: 3;
+  }
+
+  path.noData:hover {
+    stroke: black;
+  }
+
+  path.overlay {
     pointer-events: none;
     stroke: black;
     stroke-width: 1;
     fill: transparent;
   }
 
-  .overlay:hover {
+  path.overlay:hover {
     stroke: black;
     stroke-width: 1;
     fill: transparent;
