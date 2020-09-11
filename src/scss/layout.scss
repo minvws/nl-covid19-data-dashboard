@@ -221,6 +221,18 @@
   }
 }
 
+.region-names {
+  h2 {
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+
+  p {
+    margin-top: 0;
+    padding: 0 1rem 1rem;
+  }
+}
+
 a.metric-link {
   display: block;
   padding: 1rem;
