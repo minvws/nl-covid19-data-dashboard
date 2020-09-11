@@ -6,7 +6,10 @@ import { FeatureCollection, MultiPolygon } from 'geojson';
 
 export type TRegionMetricName = keyof Pick<
   Regions,
-  'hospital_admissions' | 'positive_tested_people' | 'deceased'
+  | 'hospital_admissions'
+  | 'positive_tested_people'
+  | 'deceased'
+  | 'escalation_levels'
 >;
 
 export default function useRegionData<
@@ -14,15 +17,19 @@ export default function useRegionData<
   K extends Regions[T]
 >(
   metricName: T | undefined,
-  featureCollection: FeatureCollection<MultiPolygon, SafetyRegionProperties>
+  featureCollection: FeatureCollection<MultiPolygon, SafetyRegionProperties>,
+  metricProperty?: string
 ): Record<string, K[number] & { value: number } & SafetyRegionProperties> {
   const { data } = useSWR<Regions>('/json/regions.json');
 
   const metricItems = metricName && data ? data[metricName] : undefined;
+  metricProperty = metricProperty ?? metricName;
 
-  return useMemo(() => {
-    if (!metricItems) {
-      return [];
+  return useMemo<
+    Record<string, K[number] & { value: number } & SafetyRegionProperties>
+  >(() => {
+    if (!metricName || !metricItems) {
+      return {};
     }
 
     const filteredData = (metricItems as any[]).reduce(
@@ -37,7 +44,7 @@ export default function useRegionData<
         aggr[item.vrcode] = {
           ...item,
           ...feature?.properties,
-          value: (item as any)[metricName],
+          value: (item as any)[metricProperty as string],
         };
         return aggr;
       },
@@ -45,5 +52,5 @@ export default function useRegionData<
     );
 
     return filteredData;
-  }, [metricItems, metricName]);
+  }, [metricItems, metricName, metricProperty, featureCollection.features]);
 }
