@@ -248,9 +248,10 @@ a.metric-link {
   &::after {
     content: '';
     background-image: url('/images/chevron.svg');
-    background-size: 1.2em 1.2em;
-    height: 1.2em;
-    width: 1.2em;
+    // match aspect ratio of chevron.svg
+    background-size: 1.1em 1.8em;
+    height: 1.8em;
+    width: 1.1em;
     display: block;
     position: absolute;
     right: 1em;
