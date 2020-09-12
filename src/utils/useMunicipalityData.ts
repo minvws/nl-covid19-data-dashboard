@@ -4,9 +4,9 @@ import { Municipalities } from 'types/data';
 import { FeatureCollection, MultiPolygon } from 'geojson';
 import { MunicipalityProperties } from 'components/vx/MunicipalityChloropleth';
 
-export type TMunicipalityMetricName = keyof Pick<
+export type TMunicipalityMetricName = keyof Omit<
   Municipalities,
-  'hospital_admissions' | 'positive_tested_people' | 'deceased'
+  'last_generated' | 'proto_name' | 'name' | 'code'
 >;
 
 export default useMunicipalityData;

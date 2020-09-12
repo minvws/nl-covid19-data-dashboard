@@ -95,7 +95,7 @@ export default function SafetyRegionChloropleth(props: TProps) {
             ?.properties;
       return result;
     },
-    [regionData, hasData]
+    [regionData, hasData, regionGeo]
   );
 
   const [showTooltip, hideTooltip, tooltipInfo] = useMapTooltip<
