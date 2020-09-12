@@ -16,19 +16,22 @@ import {
   IMunicipalityData,
 } from 'static-props/municipality-data';
 import { getLocalTitleForMuncipality } from 'utils/getLocalTitleForCode';
-import MunicipalityMap from 'components/vx/MunicipalityMap';
 import { ReactNode } from 'react';
 
 import styles from 'components/vx/chloropleth.module.scss';
+import MunicipalityChloropleth from 'components/chloropleth/MunicipalityChloropleth';
+import { MunicipalityProperties } from 'components/chloropleth/shared';
 
 const text: typeof siteText.gemeente_positief_geteste_personen =
   siteText.gemeente_positief_geteste_personen;
 
-const tooltipContent = (context: any): ReactNode => {
+const tooltipContent = (
+  context: MunicipalityProperties & { value: number }
+): ReactNode => {
   return (
     context && (
       <div className={styles.defaultTooltip}>
-        <strong>{context.gemname}</strong>
+        <strong>{context.gemnaam}</strong>
         <br />
         {context.value} / 100.000
       </div>
@@ -133,9 +136,9 @@ const PostivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
         </div>
 
         <div className="column-item column-item-extra-margin">
-          <MunicipalityMap
+          <MunicipalityChloropleth
             selected={data.code}
-            metric="positive_tested_people"
+            metricName="positive_tested_people"
             gradient={['#D2F3FF', '#005684']}
             tooltipContent={tooltipContent}
           />

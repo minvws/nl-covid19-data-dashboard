@@ -1,18 +1,20 @@
 import { FCWithLayout } from 'components/layout';
 import { getMunicipalityLayout } from 'components/layout/MunicipalityLayout';
-// import { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 
 import text from 'locale';
 import styles from 'components/vx/chloropleth.module.scss';
 
 import { ReactNode } from 'react';
-import MunicipalityChloropleth from 'components/chloropleth/MunicipalityChloropleth';
+import MunicipalityChloropleth, {
+  MunicipalityProperties,
+} from 'components/chloropleth/MunicipalityChloropleth';
 
-const tooltipContent = (context: any): ReactNode => {
+const tooltipContent = (context: MunicipalityProperties): ReactNode => {
   return (
     context && (
       <div className={styles.defaultTooltip}>
-        <strong>{context.gemnaam}!!!!!!!!!!</strong>
+        <strong>{context.gemnaam}</strong>
       </div>
     )
   );
@@ -25,14 +27,14 @@ const tooltipContent = (context: any): ReactNode => {
 // the data is always there. Making the data optional would mean
 // lots of unnecessary null checks on those pages.
 const Municipality: FCWithLayout<any> = () => {
-  // const router = useRouter();
+  const router = useRouter();
 
-  /*const onSelectMunicpal = (context: any) => {
+  const onSelectMunicpal = (context: MunicipalityProperties) => {
     router.push(
       '/gemeente/[code]/positief-geteste-mensen',
       `/gemeente/${context.gemcode}/positief-geteste-mensen`
     );
-  };*/
+  };
 
   return (
     <>
@@ -49,6 +51,7 @@ const Municipality: FCWithLayout<any> = () => {
           <MunicipalityChloropleth
             tooltipContent={tooltipContent}
             style={{ height: '800px' }}
+            onSelect={onSelectMunicpal}
           />
         </div>
       </article>

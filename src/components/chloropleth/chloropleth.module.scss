@@ -37,6 +37,11 @@
     stroke: black;
   }
 
+  path.faded {
+    fill-opacity: 0.2;
+    stroke-opacity: 0.2;
+  }
+
   path.overlay {
     pointer-events: none;
     stroke: black;

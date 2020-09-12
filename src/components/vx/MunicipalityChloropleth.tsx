@@ -20,6 +20,7 @@ import styles from './chloropleth.module.scss';
 import { TCombinedChartDimensions } from './use-chart-dimensions';
 import municipalCodeToRegionCodeLookup from 'data/municipalCodeToRegionCodeLookup';
 import { MunicipalGeoJOSN } from './chloropleth';
+import { SafetyRegionProperties } from './SafetyRegionChloropleth';
 
 export interface MunicipalityProperties {
   gemnaam: string;
@@ -53,7 +54,7 @@ export default function MunicipalityChloropleth(props: TProps) {
   const regionGeo = topojson.feature(
     regionTopology,
     regionTopology.objects.safetyregions
-  ) as FeatureCollection<MultiPolygon>;
+  ) as FeatureCollection<MultiPolygon, SafetyRegionProperties>;
 
   const {
     width = 0,

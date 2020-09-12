@@ -3,62 +3,66 @@ import municipalTopology from './municipalities.topo.json';
 import countryTopology from './netherlands.topo.json';
 import regionTopology from './safetyregions.topo.json';
 
-import { MunicipalGeoJOSN, TMunicipalityMetricName } from './shared';
+import {
+  MunicipalGeoJOSN,
+  RegionGeoJOSN,
+  TMunicipalityMetricName,
+} from './shared';
 
 import Chloropleth from './Chloropleth';
 import { Feature, FeatureCollection, MultiPolygon } from 'geojson';
-import useChartDimensions from 'components/vx/use-chart-dimensions';
+import useChartDimensions from './hooks/useChartDimensions';
 
 import styles from './chloropleth.module.scss';
 import { CSSProperties, ReactNode, useCallback } from 'react';
 import { Municipalities } from 'types/data';
+import useMunicipalityData from './hooks/useMunicipalityData';
+import useChloroplethColor from './hooks/useChloroplethColor';
+import useBoundingbox from './hooks/useBoundingbox';
+import { MunicipalityProperties } from './shared';
+import useRegionMunicipalities from './hooks/useRegionMunicipalities';
 
-export type TProps = {
+export type TProps<
+  T extends TMunicipalityMetricName,
+  ItemType extends Municipalities[T][number],
+  ReturnType extends ItemType & { value: number },
+  TContext extends ReturnType | MunicipalityProperties
+> = {
+  metricName?: T;
   selected?: string;
   style?: CSSProperties;
-  metricName?: TMunicipalityMetricName;
   onSelect?: (context: TContext) => void;
   tooltipContent?: (context: TContext) => ReactNode;
+  gradient?: string[];
 };
 
-export interface MunicipalityProperties {
-  gemnaam: string;
-  gemcode: string;
-}
+export default function MunicipalityChloropleth<
+  T extends TMunicipalityMetricName,
+  ItemType extends Municipalities[T][number],
+  ReturnType extends ItemType & { value: number },
+  TContext extends ReturnType | MunicipalityProperties
+>(props: TProps<T, ItemType, ReturnType, TContext>) {
+  const {
+    selected,
+    style,
+    metricName,
+    onSelect,
+    tooltipContent,
+    gradient,
+  } = props;
 
-export type TContext =
-  | MunicipalityProperties
-  | (Municipalities & MunicipalityProperties);
-
-const countryGeo = topojson.feature(
-  countryTopology,
-  countryTopology.objects.netherlands
-) as FeatureCollection<MultiPolygon>;
-
-const regionGeo = topojson.feature(
-  regionTopology,
-  regionTopology.objects.safetyregions
-) as FeatureCollection<MultiPolygon>;
-
-const municipalGeo = topojson.feature(
-  municipalTopology,
-  municipalTopology.objects.municipalities
-) as MunicipalGeoJOSN;
-
-const overlays = {
-  ...countryGeo,
-  features: countryGeo.features.concat(regionGeo.features),
-};
-
-export default function MunicipalityChloropleth(props: TProps) {
-  const { selected, style, onSelect, tooltipContent } = props;
   const [ref, dimensions] = useChartDimensions();
 
-  const boundingbox = countryGeo;
+  const boundingbox = useBoundingbox(regionGeo, selected);
 
-  const getFillColor = useCallback((_id: string): string => {
-    return 'white';
-  }, []);
+  const [getData, hasData, domain] = useMunicipalityData(
+    metricName,
+    municipalGeo
+  );
+
+  const regionMunicipalities = useRegionMunicipalities(selected);
+
+  const getFillColor = useChloroplethColor(getData, domain, gradient);
 
   const featureCallback = useCallback(
     (
@@ -68,7 +72,19 @@ export default function MunicipalityChloropleth(props: TProps) {
     ) => {
       const { gemcode } = feature.properties;
       const isSelected = gemcode === selected;
-      const className = isSelected ? styles.selectedPath : undefined;
+      let className = isSelected ? styles.selectedPath : '';
+
+      if (!hasData) {
+        className += ` ${styles.noData}`;
+      }
+
+      if (regionMunicipalities) {
+        if (regionMunicipalities.indexOf(gemcode) < 0) {
+          className += ` ${styles.faded}`;
+        }
+      }
+
+      const fillColor = getFillColor(gemcode);
 
       return (
         <path
@@ -77,11 +93,11 @@ export default function MunicipalityChloropleth(props: TProps) {
           id={gemcode}
           key={`municipality-map-feature-${index}`}
           d={path}
-          fill={getFillColor(gemcode)}
+          fill={fillColor}
         />
       );
     },
-    [getFillColor, selected]
+    [getFillColor, selected, hasData, regionMunicipalities]
   );
 
   const overlayCallback = (
@@ -100,19 +116,17 @@ export default function MunicipalityChloropleth(props: TProps) {
     );
   };
 
-  const getData = (_id: string): TContext => {
-    return {} as any;
-  };
-
-  const onClick = (_id: string) => {
+  const onClick = (id: string) => {
     if (onSelect) {
-      onSelect(getData(_id));
+      const data = getData(id);
+      onSelect(data as any);
     }
   };
 
   const getTooltipContent = (id: string) => {
     if (tooltipContent) {
-      return tooltipContent(getData(id));
+      const data = getData(id);
+      return tooltipContent(data as any);
     }
     return null;
   };
@@ -128,7 +142,7 @@ export default function MunicipalityChloropleth(props: TProps) {
       <Chloropleth
         featureCollection={municipalGeo}
         overlays={overlays}
-        boundingbox={boundingbox}
+        boundingbox={boundingbox || countryGeo}
         dimensions={dimensions}
         featureCallback={featureCallback}
         overlayCallback={overlayCallback}
@@ -138,3 +152,23 @@ export default function MunicipalityChloropleth(props: TProps) {
     </div>
   );
 }
+
+const countryGeo = topojson.feature(
+  countryTopology,
+  countryTopology.objects.netherlands
+) as FeatureCollection<MultiPolygon>;
+
+const regionGeo = topojson.feature(
+  regionTopology,
+  regionTopology.objects.safetyregions
+) as RegionGeoJOSN;
+
+const municipalGeo = topojson.feature(
+  municipalTopology,
+  municipalTopology.objects.municipalities
+) as MunicipalGeoJOSN;
+
+const overlays = {
+  ...countryGeo,
+  features: countryGeo.features.concat(regionGeo.features),
+};

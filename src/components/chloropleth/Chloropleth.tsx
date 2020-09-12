@@ -8,62 +8,6 @@ import styles from './chloropleth.module.scss';
 import { localPoint } from '@vx/event';
 import { TooltipWithBounds, useTooltip } from '@vx/tooltip';
 
-const renderFeature = (callback: any) => {
-  return (mercator: any) => (
-    <g>
-      {mercator.features.map(
-        ({ feature, path }: { feature: any; path: any }, index: number) => {
-          if (path) {
-            return callback(feature, path, index);
-          }
-        }
-      )}
-    </g>
-  );
-};
-
-const svgClick = (onPathClick: any) => {
-  return (event: any) => {
-    const elm = event.target;
-    if (elm.id) {
-      onPathClick(elm.id);
-    }
-  };
-};
-
-const svgMouseOver = (timout: MutableRefObject<any>, showTooltip: any) => {
-  return (event: any) => {
-    const elm = event.target;
-
-    if (elm.id) {
-      if (timout.current > -1) {
-        clearTimeout(timout.current);
-        timout.current = -1;
-      }
-
-      const coords = localPoint(event.target.ownerSVGElement, event);
-
-      if (coords) {
-        showTooltip({
-          tooltipLeft: coords.x + 5,
-          tooltipTop: coords.y + 5,
-          tooltipData: elm.id,
-        });
-      }
-    }
-  };
-};
-
-const svgMouseOut = (timout: MutableRefObject<any>, hideTooltip: any) => {
-  return () => {
-    if (timout.current < 0) {
-      timout.current = setTimeout(() => {
-        hideTooltip();
-      }, 500);
-    }
-  };
-};
-
 export type TProps<TFeatureProperties> = {
   featureCollection: FeatureCollection<MultiPolygon, TFeatureProperties>;
   overlays: FeatureCollection<MultiPolygon>;
@@ -144,7 +88,7 @@ export default function Chloropleth<T>(props: TProps<T>) {
         </clipPath>
         <rect x={0} y={0} width={width} height={height} fill={'none'} rx={14} />
         <g
-          transform={`translate(${[marginLeft, marginTop].join(',')})`}
+          transform={`translate(${marginLeft},${marginTop})`}
           clipPath={`url(#${clipPathId.current})`}
         >
           <Mercator data={featureCollection.features} fitSize={sizeToFit}>
@@ -168,3 +112,59 @@ export default function Chloropleth<T>(props: TProps<T>) {
     </>
   );
 }
+
+const renderFeature = (callback: any) => {
+  return (mercator: any) => (
+    <g>
+      {mercator.features.map(
+        ({ feature, path }: { feature: any; path: any }, index: number) => {
+          if (path) {
+            return callback(feature, path, index);
+          }
+        }
+      )}
+    </g>
+  );
+};
+
+const svgClick = (onPathClick: any) => {
+  return (event: any) => {
+    const elm = event.target;
+    if (elm.id) {
+      onPathClick(elm.id);
+    }
+  };
+};
+
+const svgMouseOver = (timout: MutableRefObject<any>, showTooltip: any) => {
+  return (event: any) => {
+    const elm = event.target;
+
+    if (elm.id) {
+      if (timout.current > -1) {
+        clearTimeout(timout.current);
+        timout.current = -1;
+      }
+
+      const coords = localPoint(event.target.ownerSVGElement, event);
+
+      if (coords) {
+        showTooltip({
+          tooltipLeft: coords.x + 5,
+          tooltipTop: coords.y + 5,
+          tooltipData: elm.id,
+        });
+      }
+    }
+  };
+};
+
+const svgMouseOut = (timout: MutableRefObject<any>, hideTooltip: any) => {
+  return () => {
+    if (timout.current < 0) {
+      timout.current = setTimeout(() => {
+        hideTooltip();
+      }, 500);
+    }
+  };
+};
