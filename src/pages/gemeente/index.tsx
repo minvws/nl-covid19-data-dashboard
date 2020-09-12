@@ -6,9 +6,8 @@ import text from 'locale';
 import styles from 'components/vx/chloropleth.module.scss';
 
 import { ReactNode } from 'react';
-import MunicipalityChloropleth, {
-  MunicipalityProperties,
-} from 'components/chloropleth/MunicipalityChloropleth';
+import MunicipalityChloropleth from 'components/chloropleth/MunicipalityChloropleth';
+import { MunicipalityProperties } from 'components/chloropleth/shared';
 
 const tooltipContent = (context: MunicipalityProperties): ReactNode => {
   return (
