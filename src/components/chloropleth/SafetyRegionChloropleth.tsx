@@ -50,6 +50,7 @@ export default function SafetyRegionChloropleth<
     selected,
     style,
     metricName,
+    metricProperty,
     onSelect,
     tooltipContent,
     gradient,
@@ -59,7 +60,11 @@ export default function SafetyRegionChloropleth<
 
   const boundingbox = useSafetyRegionBoundingbox(regionGeo, selected);
 
-  const [getData, hasData, domain] = useSafetyRegionData(metricName, regionGeo);
+  const [getData, hasData, domain] = useSafetyRegionData(
+    metricName,
+    regionGeo,
+    metricProperty
+  );
 
   const getFillColor = useChloroplethColorScale(getData, domain, gradient);
 
@@ -144,5 +149,5 @@ export default function SafetyRegionChloropleth<
 }
 
 SafetyRegionChloropleth.defaultProps = {
-  gradient: ['#D2F3FF', '#005684'],
+  gradient: ['#C0E8FC', '#0579B3'],
 };

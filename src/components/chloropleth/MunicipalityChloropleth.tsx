@@ -160,7 +160,7 @@ export default function MunicipalityChloropleth<
 }
 
 MunicipalityChloropleth.defaultProps = {
-  gradient: ['#D2F3FF', '#005684'],
+  gradient: ['#C0E8FC', '#0579B3'],
 };
 
 const overlays = {
