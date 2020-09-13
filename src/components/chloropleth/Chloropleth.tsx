@@ -2,7 +2,7 @@ import { Mercator } from '@vx/geo';
 import { Feature, FeatureCollection, MultiPolygon } from 'geojson';
 import { MutableRefObject, ReactNode, useMemo, useRef } from 'react';
 
-import { TCombinedChartDimensions } from 'components/vx/use-chart-dimensions';
+import { TCombinedChartDimensions } from './hooks/useChartDimensions';
 
 import styles from './chloropleth.module.scss';
 import { localPoint } from '@vx/event';

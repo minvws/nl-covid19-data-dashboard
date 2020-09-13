@@ -7,14 +7,11 @@ import { LineChart, BarChart } from 'components/charts/index';
 import { ContentHeader } from 'components/layout/Content';
 import ChartRegionControls from 'components/chartRegionControls';
 
-import MunicipalityMap from 'components/vx/MunicipalityMap';
-import SafetyRegionMap from 'components/vx/SafetyRegionMap';
-
 import Getest from 'assets/test.svg';
 import formatDecimal from 'utils/formatNumber';
 
 import siteText from 'locale';
-import styles from 'components/vx/chloropleth.module.scss';
+import styles from 'components/chloropleth/chloropleth.module.scss';
 
 import {
   InfectedPeopleDeltaNormalized,
@@ -24,6 +21,8 @@ import {
 } from 'types/data';
 
 import getNlData, { INationalData } from 'static-props/nl-data';
+import MunicipalityChloropleth from 'components/chloropleth/MunicipalityChloropleth';
+import SafetyRegionChloropleth from 'components/chloropleth/SafetyRegionChloropleth';
 
 const text: typeof siteText.positief_geteste_personen =
   siteText.positief_geteste_personen;
@@ -158,15 +157,15 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
 
         <div className="column-item column-item-extra-margin">
           {selectedMap === 'municipal' && (
-            <MunicipalityMap
-              metric="positive_tested_people"
+            <MunicipalityChloropleth
+              metricName="positive_tested_people"
               gradient={['#D2F3FF', '#005684']}
               tooltipContent={tooltipMunicipalContent}
             />
           )}
           {selectedMap === 'region' && (
-            <SafetyRegionMap
-              metric="positive_tested_people"
+            <SafetyRegionChloropleth
+              metricName="positive_tested_people"
               gradient={['#D2F3FF', '#005684']}
               tooltipContent={tooltipRegionContent}
             />

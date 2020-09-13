@@ -12,7 +12,7 @@ import Getest from 'assets/test.svg';
 import formatDecimal from 'utils/formatNumber';
 import { ResultsPerRegion } from 'types/data';
 
-import styles from 'components/vx/chloropleth.module.scss';
+import styles from 'components/chloropleth/chloropleth.module.scss';
 
 import {
   getSafetyRegionData,
@@ -20,7 +20,7 @@ import {
   ISafetyRegionData,
 } from 'static-props/safetyregion-data';
 import { getLocalTitleForRegion } from 'utils/getLocalTitleForCode';
-import SafetyRegionMap from 'components/vx/SafetyRegionMap';
+import SafetyRegionChloropleth from 'components/chloropleth/SafetyRegionChloropleth';
 
 const text: typeof siteText.veiligheidsregio_positief_geteste_personen =
   siteText.veiligheidsregio_positief_geteste_personen;
@@ -141,9 +141,9 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
         </div>
 
         <div className="column-item column-item-extra-margin">
-          <SafetyRegionMap
+          <SafetyRegionChloropleth
             selected={data.code}
-            metric="positive_tested_people"
+            metricName="positive_tested_people"
             gradient={['#D2F3FF', '#005684']}
             tooltipContent={tooltipContent}
           />

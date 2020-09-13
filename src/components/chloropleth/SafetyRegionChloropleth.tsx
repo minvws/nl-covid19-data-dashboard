@@ -1,26 +1,23 @@
-import { TMunicipalityMetricName } from './shared';
-
-import Chloropleth from './Chloropleth';
-import { Feature, MultiPolygon } from 'geojson';
-import useChartDimensions from './hooks/useChartDimensions';
-
-import styles from './chloropleth.module.scss';
+import { SafetyRegionProperties, TRegionMetricName } from './shared';
+import { Regions } from 'types/data';
 import { CSSProperties, ReactNode, useCallback } from 'react';
-import { Municipalities } from 'types/data';
-import useMunicipalityData from './hooks/useMunicipalityData';
+import useChartDimensions from './hooks/useChartDimensions';
+import Chloropleth from './Chloropleth';
+import { countryGeo, regionGeo } from './topology';
+import { Feature, MultiPolygon } from 'geojson';
+import styles from './chloropleth.module.scss';
+import useSafetyRegionBoundingbox from './hooks/useSafetyRegionBoundingbox';
 import useChloroplethColorScale from './hooks/useChloroplethColorScale';
-import useMunicipalityBoundingbox from './hooks/useMunicipalityBoundingbox';
-import { MunicipalityProperties } from './shared';
-import useRegionMunicipalities from './hooks/useRegionMunicipalities';
-import { countryGeo, municipalGeo, regionGeo } from './topology';
+import useSafetyRegionData from './hooks/useSafetyRegionData';
 
 export type TProps<
-  T extends TMunicipalityMetricName,
-  ItemType extends Municipalities[T][number],
+  T extends TRegionMetricName,
+  ItemType extends Regions[T][number],
   ReturnType extends ItemType & { value: number },
-  TContext extends ReturnType | MunicipalityProperties
+  TContext extends ReturnType | SafetyRegionProperties
 > = {
   metricName?: T;
+  metricProperty?: string;
   selected?: string;
   style?: CSSProperties;
   onSelect?: (context: TContext) => void;
@@ -28,11 +25,11 @@ export type TProps<
   gradient?: string[];
 };
 
-export default function MunicipalityChloropleth<
-  T extends TMunicipalityMetricName,
-  ItemType extends Municipalities[T][number],
+export default function SafetyRegionChloropleth<
+  T extends TRegionMetricName,
+  ItemType extends Regions[T][number],
   ReturnType extends ItemType & { value: number },
-  TContext extends ReturnType | MunicipalityProperties
+  TContext extends ReturnType | SafetyRegionProperties
 >(props: TProps<T, ItemType, ReturnType, TContext>) {
   const {
     selected,
@@ -45,51 +42,37 @@ export default function MunicipalityChloropleth<
 
   const [ref, dimensions] = useChartDimensions();
 
-  const boundingbox = useMunicipalityBoundingbox(regionGeo, selected);
+  const boundingbox = useSafetyRegionBoundingbox(regionGeo, selected);
 
-  const [getData, hasData, domain] = useMunicipalityData(
-    metricName,
-    municipalGeo
-  );
-
-  const safetyRegionMunicipalCodes = useRegionMunicipalities(selected);
+  const [getData, hasData, domain] = useSafetyRegionData(metricName, regionGeo);
 
   const getFillColor = useChloroplethColorScale(getData, domain, gradient);
 
   const featureCallback = useCallback(
     (
-      feature: Feature<MultiPolygon, MunicipalityProperties>,
+      feature: Feature<MultiPolygon, SafetyRegionProperties>,
       path: string,
       index: number
     ) => {
-      const { gemcode } = feature.properties;
-      const isSelected = gemcode === selected;
-      let className = isSelected ? styles.selectedPath : '';
+      const { vrcode } = feature.properties;
 
+      const isSelected = vrcode === selected;
+      let className = isSelected ? styles.selectedPath : '';
       if (!hasData) {
         className += ` ${styles.noData}`;
       }
-
-      if (safetyRegionMunicipalCodes) {
-        if (safetyRegionMunicipalCodes.indexOf(gemcode) < 0) {
-          className += ` ${styles.faded}`;
-        }
-      }
-
-      const fillColor = getFillColor(gemcode);
-
       return (
         <path
           className={className}
           shapeRendering="optimizeQuality"
-          id={gemcode}
-          key={`municipality-map-feature-${index}`}
-          d={path}
-          fill={fillColor}
+          id={vrcode}
+          key={`safetyregion-map-feature-${index}`}
+          d={path || ''}
+          fill={getFillColor(vrcode)}
         />
       );
     },
-    [getFillColor, selected, hasData, safetyRegionMunicipalCodes]
+    [getFillColor, hasData, selected]
   );
 
   const overlayCallback = (
@@ -101,7 +84,7 @@ export default function MunicipalityChloropleth<
       <path
         className={styles.overlay}
         shapeRendering="optimizeQuality"
-        key={`municipality-map-overlay-${index}`}
+        key={`safetyregion-map-overlay-${index}`}
         d={path}
         fill={'none'}
       />
@@ -132,8 +115,8 @@ export default function MunicipalityChloropleth<
       style={style}
     >
       <Chloropleth
-        featureCollection={municipalGeo}
-        overlays={overlays}
+        featureCollection={regionGeo}
+        overlays={countryGeo}
         boundingbox={boundingbox || countryGeo}
         dimensions={dimensions}
         featureCallback={featureCallback}
@@ -144,8 +127,3 @@ export default function MunicipalityChloropleth<
     </div>
   );
 }
-
-const overlays = {
-  ...countryGeo,
-  features: countryGeo.features.concat(regionGeo.features),
-};

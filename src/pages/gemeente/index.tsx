@@ -3,7 +3,7 @@ import { getMunicipalityLayout } from 'components/layout/MunicipalityLayout';
 import { useRouter } from 'next/router';
 
 import text from 'locale';
-import styles from 'components/vx/chloropleth.module.scss';
+import styles from 'components/chloropleth/chloropleth.module.scss';
 
 import { ReactNode } from 'react';
 import MunicipalityChloropleth from 'components/chloropleth/MunicipalityChloropleth';

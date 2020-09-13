@@ -18,7 +18,7 @@ import {
 import { getLocalTitleForMuncipality } from 'utils/getLocalTitleForCode';
 import { ReactNode } from 'react';
 
-import styles from 'components/vx/chloropleth.module.scss';
+import styles from 'components/chloropleth/chloropleth.module.scss';
 import MunicipalityChloropleth from 'components/chloropleth/MunicipalityChloropleth';
 import { MunicipalityProperties } from 'components/chloropleth/shared';
 
