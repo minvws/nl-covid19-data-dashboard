@@ -25,6 +25,21 @@ export type TProps<
   gradient?: string[];
 };
 
+/**
+ * This component renders a map of the Netherlands with the outlines of all the safety regions which
+ * receive a fill color based on the specified Region metric data.
+ *
+ * The metricName specifies which exact metric is visualised. The color scale is calculated using
+ * the specified metric and the given gradient.
+ * An optional metricProperty name can be provided as well, when the metric key isn't the same name
+ * as the actual value property.
+ *
+ * When a selected region code is specified, the map will zoom in on the safety region.
+ *
+ * As an overlay the country outlines are shown.
+ *
+ * @param props
+ */
 export default function SafetyRegionChloropleth<
   T extends TRegionMetricName,
   ItemType extends Regions[T][number],

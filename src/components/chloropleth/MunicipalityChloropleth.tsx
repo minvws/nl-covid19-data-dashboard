@@ -31,6 +31,7 @@ export type TProps<
 /**
  * This component renders a map of the Netherlands with the outlines of all the municipalities which
  * receive a fill color based on the specified Municipality metric data.
+ *
  * The metricName specifies which exact metric is visualised. The color scale is calculated using
  * the specified metric and the given gradient.
  *
