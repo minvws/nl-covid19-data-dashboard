@@ -9,24 +9,48 @@ import { localPoint } from '@vx/event';
 import { TooltipWithBounds, useTooltip } from '@vx/tooltip';
 
 export type TProps<TFeatureProperties> = {
+  // This is the main feature collection that displays the features that will
+  // be colored in as part of the chloropleth
   featureCollection: FeatureCollection<MultiPolygon, TFeatureProperties>;
+  // These are features that are used as an overlay, overlays have no interactions
+  // they are simply there to beautify the map or emphasise certain parts.
   overlays: FeatureCollection<MultiPolygon>;
+  // The boundingbox is calculated based on these features, this can be used to
+  // zoom in on a specific part of the map upon initialisation.
   boundingbox: FeatureCollection<MultiPolygon>;
+  // Height, width, etc
   dimensions: TCombinedChartDimensions;
+  // This callback is invoked for each of the features in the featureCollection property.
+  // This will usually return a <path/> element.
   featureCallback: (
     feature: Feature<MultiPolygon, TFeatureProperties>,
     path: string,
     index: number
   ) => ReactNode;
+  // This callback is invoked for each of the features in the overlays property.
+  // This will usually return a <path/> element.
   overlayCallback: (
     feature: Feature<MultiPolygon>,
     path: string,
     index: number
   ) => ReactNode;
+  // This callback is invoked after a click was received on one of the features in the featureCollection property.
+  // The id is the value that is assigned to the data-id attribute in the featureCallback.
   onPathClick: (id: string) => void;
+  // This callback is invoked right before a tooltip is shown for one of the features in the featureCollection property.
+  // The id is the value that is assigned to the data-id attribute in the featureCallback.
   getTooltipContent: (id: string) => ReactNode;
 };
 
+/**
+ * Generic chloropleth component that takes featurecollection that is considered the data layer
+ * and another that is considered the overlay layer.
+ * It implements a click and mouseover/mouseout system where the value that is assigned to the
+ * data-id attribute of a path is propagated to the injected onPatchClick and getTooltipContent
+ * callbacks.
+ *
+ * @param props
+ */
 export default function Chloropleth<T>(props: TProps<T>) {
   const {
     featureCollection,

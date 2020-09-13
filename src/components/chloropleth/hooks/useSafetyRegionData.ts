@@ -13,6 +13,21 @@ export type TSafetyRegionDataInfo<T> = [
   [min: number, max: number] | undefined
 ];
 
+/**
+ * This hook takes a metric name, extracts the associated data from the json/regions.json
+ * data file and merges these metrics with feature properties of the given featureCollection.
+ *
+ * A min and max domain is calculated based on the specified metric.
+ *
+ * When no metricName is provided only the feature properties are used.
+ *
+ * It returns a function that returns the merged data given a valid region code, as wel
+ * as a noData indicator along with the generated domain.
+ *
+ * @param metricName
+ * @param featureCollection
+ * @param metricProperty
+ */
 export default function useRegionData<
   T extends TRegionMetricName,
   K extends Regions[T],

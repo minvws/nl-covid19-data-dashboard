@@ -28,6 +28,19 @@ export type TProps<
   gradient?: string[];
 };
 
+/**
+ * This component renders a map of the Netherlands with the outlines of all the municipalities which
+ * receive a fill color based on the specified Municipality metric data.
+ * The metricName specifies which exact metric is visualised. The color scale is calculated using
+ * the specified metric and the given gradient.
+ *
+ * When a selected municipal code is specified, the map will zoom in on the safety region to which
+ * the associated municipality belongs and all surrounding features will be rendered in a faded manner.
+ *
+ * As an overlay the safety region and country outlines are shown.
+ *
+ * @param props
+ */
 export default function MunicipalityChloropleth<
   T extends TMunicipalityMetricName,
   ItemType extends Municipalities[T][number],
