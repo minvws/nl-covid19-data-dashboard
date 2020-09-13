@@ -65,7 +65,7 @@ export default function SafetyRegionChloropleth<
         <path
           className={className}
           shapeRendering="optimizeQuality"
-          id={vrcode}
+          data-id={vrcode}
           key={`safetyregion-map-feature-${index}`}
           d={path || ''}
           fill={getFillColor(vrcode)}

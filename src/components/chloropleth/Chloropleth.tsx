@@ -130,8 +130,8 @@ const renderFeature = (callback: any) => {
 const svgClick = (onPathClick: any) => {
   return (event: any) => {
     const elm = event.target;
-    if (elm.id) {
-      onPathClick(elm.id);
+    if (elm.attributes['data-id']) {
+      onPathClick(elm.attributes['data-id'].value);
     }
   };
 };
@@ -140,7 +140,7 @@ const svgMouseOver = (timout: MutableRefObject<any>, showTooltip: any) => {
   return (event: any) => {
     const elm = event.target;
 
-    if (elm.id) {
+    if (elm.attributes['data-id']) {
       if (timout.current > -1) {
         clearTimeout(timout.current);
         timout.current = -1;
@@ -152,7 +152,7 @@ const svgMouseOver = (timout: MutableRefObject<any>, showTooltip: any) => {
         showTooltip({
           tooltipLeft: coords.x + 5,
           tooltipTop: coords.y + 5,
-          tooltipData: elm.id,
+          tooltipData: elm.attributes['data-id'].value,
         });
       }
     }

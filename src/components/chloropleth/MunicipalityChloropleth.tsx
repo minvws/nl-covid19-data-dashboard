@@ -82,7 +82,7 @@ export default function MunicipalityChloropleth<
         <path
           className={className}
           shapeRendering="optimizeQuality"
-          id={gemcode}
+          data-id={gemcode}
           key={`municipality-map-feature-${index}`}
           d={path}
           fill={fillColor}
