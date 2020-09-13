@@ -158,6 +158,10 @@ export default function MunicipalityChloropleth<
   );
 }
 
+MunicipalityChloropleth.defaultProps = {
+  gradient: ['#D2F3FF', '#005684'],
+};
+
 const overlays = {
   ...countryGeo,
   features: countryGeo.features.concat(regionGeo.features),

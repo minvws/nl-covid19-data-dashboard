@@ -127,3 +127,7 @@ export default function SafetyRegionChloropleth<
     </div>
   );
 }
+
+SafetyRegionChloropleth.defaultProps = {
+  gradient: ['#D2F3FF', '#005684'],
+};

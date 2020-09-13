@@ -20,20 +20,8 @@ import { getLocalTitleForMuncipality } from 'utils/getLocalTitleForCode';
 const text: typeof siteText.gemeente_ziekenhuisopnames_per_dag =
   siteText.gemeente_ziekenhuisopnames_per_dag;
 
-import styles from 'components/chloropleth/chloropleth.module.scss';
 import MunicipalityChloropleth from 'components/chloropleth/MunicipalityChloropleth';
-
-const tooltipContent = (context: any) => {
-  return (
-    context && (
-      <div className={styles.defaultTooltip}>
-        <strong>{context.gemnaam}</strong>
-        <br />
-        {context.value}
-      </div>
-    )
-  );
-};
+import hospitalAdmissionsTooltip from 'components/chloropleth/tooltips/municipal/hospitalAdmissionsTooltip';
 
 export function IntakeHospitalBarScale(props: {
   data: HospitalAdmissions | undefined;
@@ -131,8 +119,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
           <MunicipalityChloropleth
             selected={data.code}
             metricName="hospital_admissions"
-            gradient={['#D2F3FF', '#005684']}
-            tooltipContent={tooltipContent}
+            tooltipContent={hospitalAdmissionsTooltip}
           />
         </div>
       </article>
