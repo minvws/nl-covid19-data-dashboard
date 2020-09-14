@@ -8,6 +8,12 @@ import styles from './chloropleth.module.scss';
 import { localPoint } from '@vx/event';
 import { TooltipWithBounds, useTooltip } from '@vx/tooltip';
 
+export type TRenderCallback = (
+  feature: Feature<any, any>,
+  path: string,
+  index: number
+) => ReactNode;
+
 export type TProps<TFeatureProperties> = {
   // This is the main feature collection that displays the features that will
   // be colored in as part of the chloropleth
@@ -75,7 +81,7 @@ export default function Chloropleth<T>(props: TProps<T>) {
     boundedHeight,
   } = dimensions;
 
-  const sizeToFit: any = useMemo(() => {
+  const sizeToFit: [[number, number], FeatureCollection] = useMemo(() => {
     return [[boundedWidth, boundedHeight], boundingbox];
   }, [boundedWidth, boundedHeight, boundingbox]);
 
@@ -125,7 +131,6 @@ export default function Chloropleth<T>(props: TProps<T>) {
       </svg>
       {tooltipOpen && tooltipData && getTooltipContent && (
         <TooltipWithBounds
-          key={Math.random()}
           left={tooltipLeft}
           top={tooltipTop}
           className={styles.toolTip}
@@ -137,11 +142,14 @@ export default function Chloropleth<T>(props: TProps<T>) {
   );
 }
 
-const renderFeature = (callback: any) => {
+const renderFeature = (callback: TRenderCallback) => {
   return (mercator: any) => (
     <g>
       {mercator.features.map(
-        ({ feature, path }: { feature: any; path: any }, index: number) => {
+        (
+          { feature, path }: { feature: Feature; path: string },
+          index: number
+        ) => {
           if (path) {
             return callback(feature, path, index);
           }
