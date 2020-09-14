@@ -10,7 +10,10 @@ interface IProps {
 }
 
 /*
- * getNlData loads the data for /landelijk pages.
+ * getLastGeneratedData loads the data for pages where no other data is loaded.
+ * In most cases you can fetch either NL.json, regional data or gemeente data to get
+ * last generated values that way. In other words, use this for skeleton pages where no
+ * other data has been fetched yet.
  * It needs to be used as the Next.js `getStaticProps` function.
  *
  * Example:
@@ -33,12 +36,10 @@ interface IProps {
  */
 export default function getLastGeneratedData(): () => IProps {
   return function () {
-    console.log('generating getLastGeneratedData');
     const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
     const fileContents = fs.readFileSync(filePath, 'utf8');
     const lastGenerated = JSON.parse(fileContents).last_generated;
 
-    console.log({ lastGenerated });
     return {
       props: {
         lastGenerated,

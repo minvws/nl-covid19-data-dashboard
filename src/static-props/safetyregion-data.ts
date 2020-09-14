@@ -7,6 +7,7 @@ import safetyRegions from 'data';
 
 export interface ISafetyRegionData {
   data: Regionaal;
+  lastGenerated: string;
 }
 
 interface IProps {
@@ -55,16 +56,12 @@ export function getSafetyRegionData() {
     const fileContents = fs.readFileSync(filePath, 'utf8');
     const data = JSON.parse(fileContents);
 
-    console.log('getSafetyRegionData');
-
-    // get the last generated prop
-    // const filePathNL = path.join(process.cwd(), 'public', 'json', 'NL.json');
-    // const fileContentsNL = fs.readFileSync(filePath, 'utf8');
-    // const lastGenerated = JSON.parse(fileContents).last_generated;
+    const lastGenerated = data.last_generated;
 
     return {
       props: {
         data: data,
+        lastGenerated,
       },
     };
   };

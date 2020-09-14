@@ -39,10 +39,9 @@ interface IMunicipality {
 export function getMunicipalityLayout() {
   return function (
     page: React.ReactNode,
-    pageProps: IMunicipalityData | ILastGeneratedData
+    pageProps: IMunicipalityData & ILastGeneratedData
   ): React.ReactNode {
-    const lastGenerated =
-      pageProps.lastGenerated || pageProps.data.last_generated;
+    const lastGenerated = pageProps.lastGenerated;
     return getSiteLayout(
       siteText.gemeente_metadata,
       lastGenerated

@@ -37,10 +37,14 @@ export default function getNlData(): () => IProps {
   return function () {
     const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
     const fileContents = fs.readFileSync(filePath, 'utf8');
+    const data = JSON.parse(fileContents);
+
+    const lastGenerated = data.lastGenerated;
 
     return {
       props: {
-        data: JSON.parse(fileContents),
+        data,
+        lastGenerated,
       },
     };
   };
