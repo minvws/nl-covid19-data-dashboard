@@ -68,7 +68,6 @@
       "text": "Nivel Primary Care Database"
     },
     "estimated_amount_of_patients": "Estimated number of patients with symptoms that could indicate COVID-19:",
-    "titel_sidebar": "Patiënten met eerste melding van COVID-19 klachten bij de huisarts per 100.000 inwoners",
     "titel": "Estimated number of patients who contact the general practitioner for the first time with COVID-19 symptoms",
     "pagina_toelichting": "Based on the registered diagnoses by general practitioners every week, NIVEL calculates the number patients who contact the general practitioner for the first time due to COVID-19 like symptoms.",
     "barscale_titel": "Estimated number of patients who contact the general practitioner for the first time with COVID-19 symptoms",
@@ -76,7 +75,8 @@
     "kpi_titel": "Estimated number of patients where COVID-19 is suspected",
     "kpi_toelichting": "Estimated number of patients who contact the general practitioner for the first time due to COVID-19 like symptoms, per 100.000 inhabitants, per week.",
     "linechart_titel": "Progression over time",
-    "barscale_screenreader_text": "{{value}} patients who contact the general practitioner for the first time due to COVID-19 like symptoms, per 100.000 inhabitants, per week."
+    "barscale_screenreader_text": "{{value}} patients who contact the general practitioner for the first time due to COVID-19 like symptoms, per 100.000 inhabitants, per week.",
+    "titel_sidebar": "Patiënten met eerste melding van COVID-19 klachten bij de huisarts per 100.000 inwoners"
   },
   "ziekenhuisopnames_per_dag": {
     "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
@@ -103,7 +103,6 @@
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     },
-    "titel_sidebar": "Positief geteste mensen per 100.000 inwoners",
     "titel": "Number of confirmed cases",
     "pagina_toelichting": "By keeping track of the number of confirmed cases, we are able to determine the rate at which the virus is spreading before it reaches the intensive care. This keeps us prepared.",
     "barscale_titel": "Average number of confirmed cases per 100,000 inhabitants per day.",
@@ -142,11 +141,11 @@
     "chloropleth_legenda": {
       "titel": "Number per 100.000 inhabitants",
       "geen_meldingen": "No confirmed cases"
-    }
+    },
+    "titel_sidebar": "Positief geteste mensen per 100.000 inwoners"
   },
   "besmettelijke_personen": {
     "title": "Number of infectious people",
-    "titel_sidebar": "Aantal besmettelijke mensen per 100.000 inwoners",
     "datums": "Value of {{dateOfReport}}. Is updated on a weekly basis.",
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
@@ -163,7 +162,8 @@
     "barscale_screenreader_text": "{{value}} infectious people per 100.000 inhabitants.",
     "cijfer_titel": "Estimated number of infectious people in the Netherlands:",
     "cijfer_toelichting": "A calculation of how many people with COVID-19 per 100.000 inhabitants that can transmit the virus. This number is calculated by the RIVM.",
-    "linechart_titel": "Progression over time"
+    "linechart_titel": "Progression over time",
+    "titel_sidebar": "Aantal besmettelijke mensen per 100.000 inwoners"
   },
   "reproductiegetal": {
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
@@ -394,7 +394,7 @@
       },
       {
         "cijfer": "Number of confirmed cases",
-        "verantwoording": "This data is supplied daily as open data by the RIVM (National Institute for Public Health and the Environment). The file is published online every day at 10.00 a.m. and registers the number of confirmed cases (people who tested positive) in the past 24 hours.\n\nThe source file contains figures per municipality. Figures are also calculated for each of the safety regions, using the Statistics Netherlands [allocation of municipalities](https://opendata.cbs.nl/#/CBS/nl/dataset/84721NED/table?dl=3A154) to safety regions. At the time of writing, the most recent version of this data set was from 10 April 2020. This version has been exported and saved as a .JSON file.\n\nThe increase in the number of daily confirmed cases is calculated by deducting the current day’s cumulative number of people who tested positive reported from the cumulative number reported the day before. This produces the number absolute of daily confirmed cases reported, as shown on the dashboard.\n\nWe also use this absolute number to calculate a relative rate per 100,000 inhabitants. First, we divide the Netherlands’ total population by 100,000. We then divide the number of daily confirmed cases by the outcome of that division. This gives us the daily number of confirmed cases per 100,000 inhabitants.\n\nThe date used is the date of notification. This is not the same as the day on which people were tested. For more information, please go to the [RIVM website](https://www.rivm.nl/coronavirus-covid-19/grafieken). Any corrections to historical data, such as double counting, are processed on the day the error was discovered. This means the number of new cases reported for that day is lower than the actual number, but this is offset by the numbers being too high on previous days.\n\nBecause of such corrections, it is possible for the current day’s cumulative number to be lower than the number for the day before. This is then depicted as 0 (zero) on the dashboard, as it is impossible to have a negative number of infections. For instance, you cannot have -0.4 infections over the past three days. This is also why discrepancies arise when regional data is aggregated into national data. The national value is the total of all municipalities’ cumulative data for the current day minus the total of all their cumulative data for the day before. It is not the outcome of this same formula using the safety regions’ cumulative data. If the negative values would be used for the safety regions, you would get the correct values.\n\nThe division of new cases by age group is based on the national figures because ages are not recorded in the file containing municipal data. The table on the RIVM website may therefore not always match the table on the dashboard.\n\nThe alert value for the number of confirmed cases is now added to the dashboard. The value is 7 confirmed cases per 100.000 inhabitants. This means that if this value reached, the number of infections is possibly increasing too fast to keep the novel coronavirus under control. The same value is also used by Germany for example. An alert value functions as a “warning” to examine the situation with urgency. It is possible that this alert value is further refined at another point in time."
+        "verantwoording": "This data is supplied daily as open data by the [RIVM](https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_cumulatief.json). The file is published online every day at 10.00 a.m. and registers the number of confirmed cases (people who tested positive) in the past 24 hours. The date used is the date of notification. This is not the same as the day on which people were tested. \n\nThe RIVM can retroactively correct data that was previously published. These corrections are then applied to the open data file on their site and will automatically be shown on the dashboard. \n\nThe source file contains figures per safety region and municipality. To obtain the national figures, all reports are added. In the sourcefile, not all reports mention a municipality or a safety region. These cannot be shown on that lower level, but will be shown in the national figures. \n\nThe increase in the number of daily confirmed cases is calculated by deducting the current day’s cumulative number of from the cumulative number reported the day before. This produces the absolute number of daily confirmed cases reported, as shown on the dashboard.\n\nWe use the absolute number of confirmed cases to calculate a relative rate per 100,000 inhabitants. We do this by first dividing the number of confirmed cases by the number of inhabitants in the Netherlands. This produces the number of confirmed cases per 100,000 inhabitants, as shown on the dashboard. The number of inhabitants is determined by this [CBS file](https://opendata.cbs.nl/#/CBS/nl/dataset/84721NED/table?dl=3A154).\n \nThe division of new cases by age group is based on the national figures, because ages are not recorded in the file containing municipal data. The table on the RIVM website may therefore not always match the table on the dashboard.\n\nThe alert value for the number of confirmed cases is now added to the dashboard. The value is 7 confirmed cases per 100.000 inhabitants. This means that if this value reached, the number of infections is possibly increasing too fast to keep the novel coronavirus under control. The same value is also used by Germany for example. An alert value functions as a “warning” to examine the situation with urgency. It is possible that this alert value is further refined at another point in time."
       },
       {
         "cijfer": "Reproduction number",
@@ -551,7 +551,7 @@
     }
   },
   "veiligheidsregio_positief_geteste_personen": {
-    "titel_sidebar": "Confirmed cases",
+    "titel_sidebar": "Positief geteste mensen per 100.000 inwoners",
     "titel": "Confirmed cases in {{safetyRegion}}",
     "pagina_toelichting": "By keeping track of the number of confirmed cases, we are able to determine the rate at which the virus is spreading before it reaches the intensive care. This keeps us prepared.",
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis. ",
@@ -633,7 +633,7 @@
     }
   },
   "gemeente_positief_geteste_personen": {
-    "titel_sidebar": "Confirmed cases",
+    "titel_sidebar": "Positief geteste mensen per 100.000 inwoners",
     "titel": "Confirmed cases in {{municipality}}",
     "pagina_toelichting": "By keeping track of the number of confirmed cases, we are able to determine the rate at which the virus is spreading before it reaches the intensive care. This keeps us prepared.",
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
