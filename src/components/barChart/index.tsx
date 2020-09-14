@@ -13,8 +13,9 @@ export default BarChart;
 function BarChart(props: IProps) {
   const { data, keys, axisTitle } = props;
 
-  const options = useMemo<HighCharts.Options>(
-    () => ({
+  const options = useMemo<HighCharts.Options>(() => {
+    const max = data.reduce((acc, value) => Math.max(acc, value.y || 0), 1);
+    return {
       chart: {
         type: 'bar',
         backgroundColor: 'transparent',
@@ -44,6 +45,9 @@ function BarChart(props: IProps) {
         categories: keys,
       },
       yAxis: {
+        min: 0,
+        max,
+        allowDecimals: false,
         gridLineColor: '#c4c4c4',
         title: {
           text: axisTitle,
@@ -65,9 +69,8 @@ function BarChart(props: IProps) {
           type: 'bar',
         },
       ],
-    }),
-    [data, keys, axisTitle]
-  );
+    };
+  }, [data, keys, axisTitle]);
 
   return <HighChartsReact highcharts={HighCharts} options={options} />;
 }
