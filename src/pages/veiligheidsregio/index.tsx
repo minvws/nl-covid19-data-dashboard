@@ -1,14 +1,14 @@
 import { FCWithLayout } from 'components/layout';
 import { getSafetyRegionLayout } from 'components/layout/SafetyRegionLayout';
-import SafetyRegionMap from 'components/vx/SafetyRegionMap';
 import { useRouter } from 'next/router';
 
 import text from 'locale';
-import styles from 'components/vx/chloropleth.module.scss';
+import styles from 'components/chloropleth/chloropleth.module.scss';
 
 import getLastGeneratedData from 'static-props/last-generated-data';
 
 import { ReactNode } from 'react';
+import SafetyRegionChloropleth from 'components/chloropleth/SafetyRegionChloropleth';
 
 const tooltipContent = (context: any): ReactNode => {
   return (
@@ -48,7 +48,7 @@ const SafetyRegion: FCWithLayout<any> = () => {
           </p>
         </div>
         <div className="column-item-no-margin column-item">
-          <SafetyRegionMap
+          <SafetyRegionChloropleth
             style={{ height: '800px', backgroundColor: 'none' }}
             onSelect={onSelectRegion}
             gradient={['#ffff', '#ffff']}

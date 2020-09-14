@@ -52,7 +52,13 @@ function ComboBox<Option extends TOption>(props: TProps<Option>) {
   }
 
   function onSelect(name: string): void {
-    const option = options.find((option) => option.name === name);
+    if (!name) {
+      return;
+    }
+
+    const option = options.find(
+      (option) => option.name === name || option.displayName === name
+    );
 
     inputRef?.current?.blur();
 
@@ -60,7 +66,9 @@ function ComboBox<Option extends TOption>(props: TProps<Option>) {
   }
 
   useEffect(() => {
-    inputRef?.current?.focus();
+    if (!inputRef?.current?.value) {
+      inputRef?.current?.focus();
+    }
   }, []);
 
   return (
@@ -74,7 +82,10 @@ function ComboBox<Option extends TOption>(props: TProps<Option>) {
         {results.length > 0 ? (
           <ComboboxList>
             {results.map((option) => (
-              <ComboboxOption key={option.name} value={option.name} />
+              <ComboboxOption
+                key={option.name}
+                value={option.displayName || option.name}
+              />
             ))}
           </ComboboxList>
         ) : (

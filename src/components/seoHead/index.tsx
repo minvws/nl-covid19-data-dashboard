@@ -14,9 +14,9 @@ export type SEOHeadProps = {
 
 SEOHead.defaultProps = {
   description: siteText.seoHead.default_description,
-  openGraphImage: '/banner.jpg',
+  openGraphImage: '/banner.png',
   title: siteText.seoHead.default_title,
-  twitterImage: '/banner.jpg',
+  twitterImage: '/banner-twitter.png',
   url: siteText.seoHead.default_url,
 };
 

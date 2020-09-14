@@ -21,6 +21,6 @@ function getLocalTitleForMuncipality(title: string, code: string): string {
   if (!municipality) return '';
 
   return replaceVariablesInText(title, {
-    municipality: municipality.name,
+    municipality: municipality.displayName || municipality.name,
   });
 }

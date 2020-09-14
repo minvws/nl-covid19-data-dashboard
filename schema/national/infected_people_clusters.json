@@ -12,10 +12,12 @@
       ],
       "properties": {
         "active_clusters": {
-          "type": "number"
+          "type": ["number", "null"],
+          "nullable": true
         },
         "cluster_average": {
-          "type": "number"
+          "type": ["number", "null"],
+          "nullable": true
         },
         "date_of_report_unix": {
           "type": "integer"

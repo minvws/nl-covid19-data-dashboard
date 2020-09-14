@@ -134,12 +134,12 @@ function NationalLayout(props: WithChildren<INationalData>) {
                   >
                     <TitleWithIcon
                       Icon={GetestIcon}
-                      title={siteText.positief_geteste_personen.titel}
+                      title={siteText.positief_geteste_personen.titel_sidebar}
                     />
                     <span>
                       <PostivelyTestedPeopleBarScale
                         data={data?.infected_people_delta_normalized}
-                        showAxis={false}
+                        showAxis={true}
                       />
                     </span>
                   </a>
@@ -154,12 +154,12 @@ function NationalLayout(props: WithChildren<INationalData>) {
                   >
                     <TitleWithIcon
                       Icon={Ziektegolf}
-                      title={siteText.besmettelijke_personen.title}
+                      title={siteText.besmettelijke_personen.titel_sidebar}
                     />
                     <span>
                       <InfectiousPeopleBarScale
                         data={data?.infectious_people_count_normalized}
-                        showAxis={false}
+                        showAxis={true}
                       />
                     </span>
                   </a>
@@ -180,7 +180,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
                       <ReproductionIndexBarScale
                         data={data?.reproduction_index}
                         lastKnown={data?.reproduction_index_last_known_average}
-                        showAxis={false}
+                        showAxis={true}
                       />
                     </span>
                   </a>
@@ -200,7 +200,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
                     <span>
                       <IntakeHospitalBarScale
                         data={data?.intake_hospital_ma}
-                        showAxis={false}
+                        showAxis={true}
                       />
                     </span>
                   </a>
@@ -222,7 +222,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
                     <span>
                       <IntakeIntensiveCareBarscale
                         data={data?.intake_intensivecare_ma}
-                        showAxis={false}
+                        showAxis={true}
                       />
                     </span>
                   </a>
@@ -242,12 +242,12 @@ function NationalLayout(props: WithChildren<INationalData>) {
                   >
                     <TitleWithIcon
                       Icon={Arts}
-                      title={siteText.verdenkingen_huisartsen.titel}
+                      title={siteText.verdenkingen_huisartsen.titel_sidebar}
                     />
                     <span>
                       <SuspectedPatientsBarScale
                         data={data?.verdenkingen_huisartsen}
-                        showAxis={false}
+                        showAxis={true}
                       />
                     </span>
                   </a>
@@ -267,7 +267,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
                     <span>
                       <SewerWaterBarScale
                         data={data?.rioolwater_metingen}
-                        showAxis={false}
+                        showAxis={true}
                       />
                     </span>
                   </a>
@@ -294,7 +294,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
                     <span>
                       <NursingHomeInfectedPeopleBarScale
                         data={data?.infected_people_nursery_count_daily}
-                        showAxis={false}
+                        showAxis={true}
                       />
                     </span>
                   </a>
@@ -316,7 +316,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
                     <span>
                       <NursingHomeInfectedLocationsBarScale
                         data={data?.total_newly_reported_locations}
-                        showAxis={false}
+                        showAxis={true}
                       />
                     </span>
                   </a>
@@ -336,7 +336,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
                     <span>
                       <NursingHomeDeathsBarScale
                         data={data?.deceased_people_nursery_count_daily}
-                        showAxis={false}
+                        showAxis={true}
                       />
                     </span>
                   </a>

@@ -2,30 +2,28 @@ import Link from 'next/link';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-import TitleWithIcon from 'components/titleWithIcon';
-import { getLayout as getSiteLayout } from 'components/layout';
-import { PostivelyTestedPeopleBarScale } from 'pages/gemeente/[code]/positief-geteste-mensen';
-import { IntakeHospitalBarScale } from 'pages/gemeente/[code]/ziekenhuis-opnames';
-import { SewerWaterBarScale } from 'pages/gemeente/[code]/rioolwater';
-import Combobox from 'components/comboBox';
-import { getSewerWaterBarScaleData } from 'utils/sewer-water/municipality-sewer-water.util';
-
-import GetestIcon from 'assets/test.svg';
-import Ziekenhuis from 'assets/ziekenhuis.svg';
-import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
-import Arrow from 'assets/arrow.svg';
-
 import siteText from 'locale';
-
 import { WithChildren } from 'types';
-
-import useMediaQuery from 'utils/useMediaQuery';
-
 import municipalities from 'data/gemeente_veiligheidsregio.json';
 import { IMunicipalityData } from 'static-props/municipality-data';
 
 import { getLocalTitleForMuncipality } from 'utils/getLocalTitleForCode';
 import getSafetyRegionForMunicipalityCode from 'utils/getSafetyRegionForMunicipalityCode';
+import { getSewerWaterBarScaleData } from 'utils/sewer-water/municipality-sewer-water.util';
+import useMediaQuery from 'utils/useMediaQuery';
+
+import { PostivelyTestedPeopleBarScale } from 'pages/gemeente/[code]/positief-geteste-mensen';
+import { IntakeHospitalBarScale } from 'pages/gemeente/[code]/ziekenhuis-opnames';
+import { SewerWaterBarScale } from 'pages/gemeente/[code]/rioolwater';
+
+import TitleWithIcon from 'components/titleWithIcon';
+import { getLayout as getSiteLayout } from 'components/layout';
+import Combobox from 'components/comboBox';
+
+import GetestIcon from 'assets/test.svg';
+import Ziekenhuis from 'assets/ziekenhuis.svg';
+import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
+import Arrow from 'assets/arrow.svg';
 
 export default MunicipalityLayout;
 
@@ -180,7 +178,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                       <span>
                         <PostivelyTestedPeopleBarScale
                           data={data?.positive_tested_people}
-                          showAxis={false}
+                          showAxis={true}
                         />
                       </span>
                     </a>
@@ -208,7 +206,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                       <span>
                         <IntakeHospitalBarScale
                           data={data?.hospital_admissions}
-                          showAxis={false}
+                          showAxis={true}
                         />
                       </span>
                     </a>
@@ -237,7 +235,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                         <span>
                           <SewerWaterBarScale
                             data={getSewerWaterBarScaleData(data)}
-                            showAxis={false}
+                            showAxis={true}
                           />
                         </span>
                       </a>
@@ -253,7 +251,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                       <span>
                         <SewerWaterBarScale
                           data={getSewerWaterBarScaleData(data)}
-                          showAxis={false}
+                          showAxis={true}
                         />
                       </span>
                     </div>

@@ -1,4 +1,4 @@
-import { useState, Fragment, ReactNode } from 'react';
+import { useState } from 'react';
 
 import BarScale from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
@@ -7,50 +7,25 @@ import { LineChart, BarChart } from 'components/charts/index';
 import { ContentHeader } from 'components/layout/Content';
 import ChartRegionControls from 'components/chartRegionControls';
 
-import MunicipalityMap from 'components/vx/MunicipalityMap';
-import SafetyRegionMap from 'components/vx/SafetyRegionMap';
-
 import Getest from 'assets/test.svg';
 import formatDecimal from 'utils/formatNumber';
 
 import siteText from 'locale';
-import styles from 'components/vx/chloropleth.module.scss';
 
 import {
   InfectedPeopleDeltaNormalized,
   InfectedPeopleTotal,
   IntakeShareAgeGroups,
-  InfectedPeopleClusters,
 } from 'types/data';
 
 import getNlData, { INationalData } from 'static-props/nl-data';
+import MunicipalityChloropleth from 'components/chloropleth/MunicipalityChloropleth';
+import SafetyRegionChloropleth from 'components/chloropleth/SafetyRegionChloropleth';
+import positiveTestedPeopleTooltip from 'components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
+import positiveTestedPeopleTooltipRegion from 'components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
 
 const text: typeof siteText.positief_geteste_personen =
   siteText.positief_geteste_personen;
-
-const tooltipMunicipalContent = (context: any): ReactNode => {
-  return (
-    context && (
-      <div className={styles.defaultTooltip}>
-        <strong>{context.gemnaam}</strong>
-        <br />
-        {context.value} / 100.000
-      </div>
-    )
-  );
-};
-
-const tooltipRegionContent = (context: any): ReactNode => {
-  return (
-    context && (
-      <div className={styles.defaultTooltip}>
-        <strong>{context.vrname}</strong>
-        <br />
-        {context.value} / 100.000
-      </div>
-    )
-  );
-};
 
 export function PostivelyTestedPeopleBarScale(props: {
   data: InfectedPeopleDeltaNormalized | undefined;
@@ -106,9 +81,6 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
       }, 0)
     : 0;
 
-  const cluster: InfectedPeopleClusters | undefined =
-    data?.infected_people_clusters;
-
   return (
     <>
       <ContentHeader
@@ -158,17 +130,15 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
 
         <div className="column-item column-item-extra-margin">
           {selectedMap === 'municipal' && (
-            <MunicipalityMap
-              metric="positive_tested_people"
-              gradient={['#D2F3FF', '#005684']}
-              tooltipContent={tooltipMunicipalContent}
+            <MunicipalityChloropleth
+              metricName="positive_tested_people"
+              tooltipContent={positiveTestedPeopleTooltip}
             />
           )}
           {selectedMap === 'region' && (
-            <SafetyRegionMap
-              metric="positive_tested_people"
-              gradient={['#D2F3FF', '#005684']}
-              tooltipContent={tooltipRegionContent}
+            <SafetyRegionChloropleth
+              metricName="positive_tested_people"
+              tooltipContent={positiveTestedPeopleTooltipRegion}
             />
           )}
         </div>
@@ -193,7 +163,7 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
 
       <article className="metric-article layout-two-column">
         <div className="column-item column-item-extra-margin">
-          <h3>{text.barscale_titel}</h3>
+          <h3>{text.barchart_titel}</h3>
           <p>{text.barchart_toelichting}</p>
         </div>
         {age && (
@@ -214,67 +184,6 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           </>
         )}
       </article>
-
-      {cluster && (
-        <>
-          <ContentHeader
-            category={'\u00A0'}
-            title={text.cluster_titel}
-            Icon={Fragment}
-            subtitle={text.cluster_toelichting}
-            metadata={{
-              datumsText: text.cluster_datums,
-              dateUnix: cluster?.last_value?.date_of_report_unix,
-              dateInsertedUnix: cluster?.last_value?.date_of_insertion_unix,
-              dataSource: text.cluster_bron,
-            }}
-          />
-
-          <div className="layout-two-column">
-            <article className="metric-article column-item">
-              <h3>{text.cluster_barscale_titel}</h3>
-
-              <BarScale
-                min={0}
-                max={10}
-                screenReaderText={text.barscale_screenreader_text}
-                value={cluster.last_value.active_clusters}
-                id="positief"
-                rangeKey="infected_daily_increase"
-                gradient={[
-                  {
-                    color: '#3391CC',
-                    value: 0,
-                  },
-                ]}
-                showAxis={true}
-              />
-              <p>{text.cluster_barscale_toelichting}</p>
-            </article>
-
-            <article className="metric-article column-item">
-              <h3>
-                {text.cluster_gemiddelde_titel}{' '}
-                <span className="text-blue kpi">
-                  {formatDecimal(cluster.last_value.cluster_average)}
-                </span>
-              </h3>
-              <p>{text.cluster_gemiddelde_toelichting}</p>
-            </article>
-          </div>
-
-          <article className="metric-article">
-            <h3>{text.cluster_linechart_titel}</h3>
-            <p>{text.cluster_linechart_toelichting}</p>
-            <LineChart
-              values={cluster.values.map((value) => ({
-                value: value.active_clusters,
-                date: value.date_of_report_unix,
-              }))}
-            />
-          </article>
-        </>
-      )}
     </>
   );
 };
