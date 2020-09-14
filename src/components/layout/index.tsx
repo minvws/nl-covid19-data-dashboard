@@ -66,6 +66,8 @@ function Layout(props: WithChildren<LayoutProps & ILastGeneratedData>) {
   const locale = getLocale();
   const showSmallLogo = useMediaQuery('(max-width: 480px)', true);
 
+  const dateTime = new Date(lastGenerated * 1000).toISOString();
+
   const dateOfInsertion = lastGenerated
     ? formatDate(Number(lastGenerated) * 1000, 'relative')
     : undefined;
@@ -249,7 +251,7 @@ function Layout(props: WithChildren<LayoutProps & ILastGeneratedData>) {
             </div>
             <div className="footerColumn">
               <h3>{text.laatst_bijgewerkt.message}</h3>
-              <p>{dateOfInsertion}</p>
+              <time dateTime={dateTime}>{dateOfInsertion}</time>
             </div>
           </MaxWidth>
         </div>
