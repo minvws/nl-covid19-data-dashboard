@@ -48,10 +48,6 @@
     "title": "Corona Dashboard",
     "terug_naar_alle_cijfers": "Back to overview"
   },
-  "laatst_bijgewerkt_datum": {
-    "titel": "Last edited",
-    "datum": "{{dateOfInsertion}}"
-  },
   "ic_opnames_per_dag": {
     "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
     "bron": {
