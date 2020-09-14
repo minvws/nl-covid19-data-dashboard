@@ -137,6 +137,7 @@
     box-shadow: $box-shadow;
     position: relative;
     z-index: 2;
+    text-decoration: none;
 
     &:hover,
     &:focus {
@@ -199,6 +200,10 @@
     .back-button {
       display: none;
     }
+
+    .last-developments {
+      margin-top: 2em;
+    }
   }
 }
 
@@ -260,10 +265,6 @@
     margin-top: 0;
     padding: 0 1rem 1rem;
   }
-}
-
-.national-aside .last-developments {
-  margin-top: 2em;
 }
 
 a.metric-link {
