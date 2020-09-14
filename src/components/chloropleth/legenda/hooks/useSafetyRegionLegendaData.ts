@@ -1,15 +1,15 @@
-import { TMunicipalityMetricName } from 'components/chloropleth/shared';
+import { TRegionMetricName } from '../../shared';
 import useSWR from 'swr';
-import { Municipalities } from 'types/data';
+import { Regions } from 'types/data';
 import useExtent from 'utils/useExtent';
 
 import useLegendaItems from './useLegendaItems';
 
-export default function useMunicipalLegendaData(
-  metric: TMunicipalityMetricName,
+export default function useSafetyRegionLegendaData(
+  metric: TRegionMetricName,
   gradient: [min: string, max: string]
 ) {
-  const { data } = useSWR<Municipalities>('/json/MUNICIPALITIES.json');
+  const { data } = useSWR<Regions>('/json/REGIONS.json');
 
   const metrics = data?.[metric];
   const domain = useExtent(metrics, (item: any) => item[metric]);

@@ -20,6 +20,7 @@ import {
 import { getLocalTitleForRegion } from 'utils/getLocalTitleForCode';
 import SafetyRegionChloropleth from 'components/chloropleth/SafetyRegionChloropleth';
 import positiveTestedPeopleTooltip from 'components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
+import SafetyRegionLegenda from 'components/chloropleth/legenda/SafetyRegionLegenda';
 
 const text: typeof siteText.veiligheidsregio_positief_geteste_personen =
   siteText.veiligheidsregio_positief_geteste_personen;
@@ -125,6 +126,11 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
         <div className="column-item column-item-extra-margin">
           <h3>{getLocalTitleForRegion(text.map_titel, data.code)}</h3>
           <p>{text.map_toelichting}</p>
+
+          <SafetyRegionLegenda
+            metricName="positive_tested_people"
+            title={siteText.positief_geteste_personen.chloropleth_legenda.titel}
+          />
         </div>
 
         <div className="column-item column-item-extra-margin">
