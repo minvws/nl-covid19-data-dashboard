@@ -19,6 +19,8 @@ $language-switcher-offset: 55px;
 .header {
   background: #cd005a;
   color: white;
+  z-index: 4;
+  position: relative;
 
   a:focus {
     outline: 2px dotted #fff;
@@ -80,6 +82,11 @@ $language-switcher-offset: 55px;
   padding: 0;
   margin: 0;
   display: flex;
+  overflow-x: auto;
+
+  li {
+    white-space: nowrap;
+  }
 
   > li:last-child {
     display: none;
@@ -100,7 +107,11 @@ $language-switcher-offset: 55px;
   padding: 1em 0.75em;
   color: white;
   text-decoration: none;
-  font-size: 1.125em;
+  font-size: 1em;
+
+  @media (min-width: 420px) {
+    font-size: 1.125em;
+  }
 
   @media (min-width: 768px) {
     padding: 1em 1.5em;
@@ -129,6 +140,30 @@ $language-switcher-offset: 55px;
   background: #01689b;
   color: white;
   padding: 2em 0;
+  z-index: 4;
+  position: relative;
+
+  margin-top: 2em;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+
+  time {
+    font-size: 1.125em;
+  }
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+
+    & > div:not(:first-child) {
+      margin-left: 2em;
+      h3 {
+        margin-bottom: 1.125em;
+      }
+    }
+  }
 }
 
 .footerList {
@@ -192,5 +227,48 @@ $language-switcher-offset: 55px;
       top: $default-padding;
       left: $default-margin;
     }
+  }
+}
+
+.text {
+  p {
+    max-width: 30em;
+    margin-right: $default-margin;
+  }
+}
+
+.category {
+  font-size: 1.42383rem;
+  font-weight: 600;
+  color: #9d9d9d;
+  margin: 0;
+  margin-bottom: 0.3rem;
+  margin-left: 4rem;
+}
+
+@media (min-width: 1200px) {
+  .text {
+    display: flex;
+    margin-left: 4rem;
+
+    p {
+      flex: 1 1 60%;
+    }
+
+    div {
+      flex: 0 1 40%;
+    }
+  }
+}
+
+.two-column {
+  display: flex;
+  flex-direction: column;
+
+  > * {
+    flex: 1 1 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 }

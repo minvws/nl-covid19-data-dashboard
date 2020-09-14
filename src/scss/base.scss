@@ -15,7 +15,7 @@ html {
 body {
   margin: 0;
   font-size: 100%;
-  background-color: $page-background;
+  background: $page-background;
   overflow-anchor: none;
 }
 
@@ -27,4 +27,20 @@ body {
 img,
 svg {
   max-width: 100%;
+}
+
+.text-blue {
+  color: $icon-color;
+}
+
+.kpi {
+  display: block;
+  font-size: 1.80203rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  margin-top: 1rem;
+}
+
+.text-max-width {
+  max-width: 20em;
 }

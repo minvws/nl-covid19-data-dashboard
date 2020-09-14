@@ -1,10 +1,12 @@
-import Layout, { FunctionComponentWithLayout } from 'components/layout';
+import { getLayoutWithMetadata, FCWithLayout } from 'components/layout';
 import MaxWidth from 'components/maxWidth';
 
 import text from 'locale';
 import styles from './over.module.scss';
 
-const NotFound: FunctionComponentWithLayout = () => {
+import getLastGeneratedData from 'static-props/last-generated-data';
+
+const NotFound: FCWithLayout = () => {
   return (
     <div className={styles.container}>
       <MaxWidth>
@@ -17,6 +19,7 @@ const NotFound: FunctionComponentWithLayout = () => {
   );
 };
 
-NotFound.getLayout = Layout.getLayout(text.notfound_metadata);
+NotFound.getLayout = getLayoutWithMetadata(text.notfound_metadata);
+export const getStaticProps = getLastGeneratedData();
 
 export default NotFound;

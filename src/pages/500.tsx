@@ -1,10 +1,12 @@
-import Layout, { FunctionComponentWithLayout } from 'components/layout';
+import { FCWithLayout, getLayoutWithMetadata } from 'components/layout';
 import MaxWidth from 'components/maxWidth';
+
+import getLastGeneratedData from 'static-props/last-generated-data';
 
 import text from 'locale';
 import styles from './error.module.scss';
 
-const ErrorPage: FunctionComponentWithLayout = () => {
+const ErrorPage: FCWithLayout = () => {
   return (
     <div className={styles.container}>
       <MaxWidth>
@@ -17,6 +19,7 @@ const ErrorPage: FunctionComponentWithLayout = () => {
   );
 };
 
-ErrorPage.getLayout = Layout.getLayout(text.error_metadata);
+ErrorPage.getLayout = getLayoutWithMetadata(text.error_metadata);
+export const getStaticProps = getLastGeneratedData();
 
 export default ErrorPage;

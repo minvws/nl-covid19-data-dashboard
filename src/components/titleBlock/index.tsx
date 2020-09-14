@@ -1,11 +1,15 @@
 import styles from './titleBlock.module.scss';
+import { WithChildren } from 'types';
 
 interface IProps {
   Icon: any;
   title: string;
+  children: WithChildren;
 }
 
-const TitleBlock: React.FC<IProps> = (props) => {
+export default TitleBlock;
+
+function TitleBlock(props: WithChildren<IProps>) {
   const { Icon, title, children } = props;
 
   return (
@@ -17,6 +21,4 @@ const TitleBlock: React.FC<IProps> = (props) => {
       </div>
     </div>
   );
-};
-
-export default TitleBlock;
+}

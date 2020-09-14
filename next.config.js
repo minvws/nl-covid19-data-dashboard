@@ -1,5 +1,12 @@
 const withPlugins = require('next-compose-plugins');
 const withOptimizedImages = require('next-optimized-images');
+const withTM = require('next-transpile-modules')([
+  '@juggle/resize-observer',
+  '@vx/tooltip',
+  '@vx/event',
+  'react-use-measure',
+]);
+
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
@@ -47,6 +54,7 @@ const nextConfig = {
 };
 
 const plugins = [
+  withTM,
   withBundleAnalyzer,
   [withOptimizedImages, { handleImages: ['jpeg', 'png', 'webp'] }],
 ];

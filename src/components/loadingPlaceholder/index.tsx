@@ -1,11 +1,12 @@
 import styles from './loadingPlaceholder.module.scss';
+import { WithChildren } from 'types';
 
-const LoadingPlaceholder: React.FC = ({ children }) => {
+export default LoadingPlaceholder;
+
+function LoadingPlaceholder({ children }: WithChildren) {
   return (
     <span className={styles.loadingPlaceholder} aria-hidden="true">
       {children ? children : null}
     </span>
   );
-};
-
-export default LoadingPlaceholder;
+}

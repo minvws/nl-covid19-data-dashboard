@@ -1,0 +1,110 @@
+@import 'scss/variables.scss';
+
+.notification {
+  background: white;
+  border-radius: $default-radius;
+  padding: 1em;
+  overflow: auto;
+  margin-top: 2em;
+
+  @media (min-width: 1201px) {
+    display: flex;
+    align-items: flex-start;
+    padding: 2em 2em 1em 2em;
+    a {
+      flex: 1 0 12em;
+    }
+  }
+}
+
+.textgroup {
+  @media (max-width: 1200px) {
+    border-bottom: 1px solid #c4c4c4;
+    padding-top: 0;
+    margin-bottom: 1em;
+  }
+
+  @media (min-width: 1201px) {
+    border-right: 1px solid #c4c4c4;
+    padding-right: 2em;
+    margin-right: 2em;
+    flex: 1 1 auto;
+  }
+}
+
+.header {
+  font-size: 1.125em;
+  font-weight: bold;
+  margin: 0;
+}
+
+.link {
+  color: $text-color-active;
+  display: flex;
+  align-items: center;
+  margin-right: 1em;
+
+  @media (max-width: 1200px) {
+    justify-content: center;
+  }
+
+  margin-top: auto;
+  margin-bottom: auto;
+
+  svg {
+    display: block;
+    margin-right: 1em;
+    flex: 0 0 auto;
+  }
+}
+
+.legenda {
+  padding-left: 0;
+  vertical-align: bottom;
+  position: absolute;
+  bottom: 0;
+
+  .escalationInfo {
+    margin-bottom: 1em;
+  }
+
+  h4 {
+    margin-bottom: 1em;
+  }
+}
+
+.escalationTooltip {
+  width: 265px;
+  background-color: white;
+  border-radius: 2px;
+  padding: 0 0.5em 0.5em 0.5em;
+  border: 1px solid lightgray;
+}
+
+.escalationInfo {
+  display: flex;
+  flex-direction: row;
+
+  .bubble {
+    width: 54px;
+    height: 54px;
+    margin-right: 0.5em;
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
+}
+
+.escalationColor1 {
+  fill: #fcd603;
+  stroke: #fcd603;
+}
+
+.escalationColor2 {
+  fill: #f79903;
+  stroke: #f79903;
+}
+
+.escalationColor3 {
+  fill: #f45167;
+  stroke: #f45167;
+}

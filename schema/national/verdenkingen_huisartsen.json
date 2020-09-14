@@ -1,0 +1,53 @@
+{
+  "definitions": {
+    "item": {
+      "title": "verdenkingen_huisartsen_last_value",
+      "type": "object",
+      "required": [
+        "week_unix",
+        "week_start_unix",
+        "week_end_unix",
+        "incidentie",
+        "date_of_insertion_unix"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "week_unix": {
+          "type": "integer"
+        },
+        "week_start_unix": {
+          "type": "integer"
+        },
+        "week_end_unix": {
+          "type": "integer"
+        },
+        "incidentie": {
+          "type": "number"
+        },
+        "geschat_aantal": {
+          "type": "number"
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "verdenkingen_huisartsen.json",
+  "title": "verdenkingen_huisartsen",
+  "type": "object",
+  "required": ["values", "last_value"],
+  "additionalProperties": false,
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/item"
+      }
+    },
+    "last_value": {
+      "$ref": "#/definitions/item"
+    }
+  }
+}

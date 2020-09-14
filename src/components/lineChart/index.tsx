@@ -21,6 +21,8 @@ type LineChartProps = {
   timeframeOptions?: TimeframeOption[];
 };
 
+export default LineChart;
+
 function getOptions(
   values: Value[],
   signaalwaarde?: number | undefined
@@ -74,6 +76,8 @@ function getOptions(
     },
     yAxis: {
       min: 0,
+      minRange: 0.1,
+      max: values.length > 0 ? null : signaalwaarde ? signaalwaarde + 1 : 1,
       allowDecimals: false,
       lineColor: '#C4C4C4',
       gridLineColor: '#C4C4C4',
@@ -95,16 +99,32 @@ function getOptions(
     },
     series: [
       {
-        type: 'line',
+        type: 'area',
         data: values.map((value) => value.value as number),
         name: '',
         showInLegend: false,
         color: '#3391CC',
+        // hex to rgb converted, added opacity
+        fillColor: 'rgba(51, 145, 204, 0.2)',
         marker: {
           enabled: false,
         },
       },
     ],
+    plotOptions: {
+      area: {
+        marker: {
+          enabled: false,
+          symbol: 'circle',
+          radius: 2,
+          states: {
+            hover: {
+              enabled: true,
+            },
+          },
+        },
+      },
+    },
   };
 
   if (signaalwaarde) {
@@ -121,11 +141,11 @@ function getOptions(
   return options;
 }
 
-const LineChart: React.FC<LineChartProps> = ({
+function LineChart({
   values,
   signaalwaarde,
   timeframeOptions,
-}) => {
+}: LineChartProps) {
   const [timeframe, setTimeframe] = useState<TimeframeOption>('5weeks');
 
   const chartOptions = useMemo(() => {
@@ -137,20 +157,14 @@ const LineChart: React.FC<LineChartProps> = ({
     return getOptions(filteredValues, signaalwaarde);
   }, [values, timeframe, signaalwaarde]);
 
-  if (!timeframeOptions) {
-    timeframeOptions = ['all', '5weeks', 'week'];
-  }
-
   return (
     <>
       <HighchartsReact highcharts={Highcharts} options={chartOptions} />
       <ChartTimeControls
         timeframe={timeframe}
         timeframeOptions={timeframeOptions}
-        onChange={(evt) => setTimeframe(evt.target.value as TimeframeOption)}
+        onChange={(value) => setTimeframe(value as TimeframeOption)}
       />
     </>
   );
-};
-
-export default LineChart;
+}
