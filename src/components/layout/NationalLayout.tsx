@@ -133,7 +133,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
                   >
                     <TitleWithIcon
                       Icon={GetestIcon}
-                      title={siteText.positief_geteste_personen.sidebar_titel}
+                      title={siteText.positief_geteste_personen.titel_sidebar}
                     />
                     <span>
                       <PostivelyTestedPeopleBarScale
@@ -153,7 +153,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
                   >
                     <TitleWithIcon
                       Icon={Ziektegolf}
-                      title={siteText.besmettelijke_personen.sidebar_title}
+                      title={siteText.besmettelijke_personen.titel_sidebar}
                     />
                     <span>
                       <InfectiousPeopleBarScale
@@ -241,7 +241,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
                   >
                     <TitleWithIcon
                       Icon={Arts}
-                      title={siteText.verdenkingen_huisartsen.sidebar_titel}
+                      title={siteText.verdenkingen_huisartsen.titel_sidebar}
                     />
                     <span>
                       <SuspectedPatientsBarScale
