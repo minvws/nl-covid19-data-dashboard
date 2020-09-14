@@ -112,7 +112,7 @@ const Home: FCWithLayout<INationalData> = () => {
         <div className="column-item">
           <SafetyRegionChloropleth
             metricName="escalation_levels"
-            metricProperty="type"
+            metricProperty="escalation_level"
             style={{ height: '500px' }}
             gradient={escalationColors}
             tooltipContent={tooltipContent}

@@ -19,6 +19,7 @@ import { getLocalTitleForMuncipality } from 'utils/getLocalTitleForCode';
 
 import MunicipalityChloropleth from 'components/chloropleth/MunicipalityChloropleth';
 import positiveTestedPeopleTooltip from 'components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
+import MunicipalityLegenda from 'components/chloropleth/legenda/MunicipalityLegenda';
 
 const text: typeof siteText.gemeente_positief_geteste_personen =
   siteText.gemeente_positief_geteste_personen;
@@ -117,6 +118,11 @@ const PostivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
         <div className="column-item column-item-extra-margin">
           <h3>{getLocalTitleForMuncipality(text.map_titel, data.code)}</h3>
           <p>{text.map_toelichting}</p>
+
+          <MunicipalityLegenda
+            metricName="positive_tested_people"
+            title={siteText.positief_geteste_personen.chloropleth_legenda.titel}
+          />
         </div>
 
         <div className="column-item column-item-extra-margin">

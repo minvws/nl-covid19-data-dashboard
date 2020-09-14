@@ -22,6 +22,7 @@ const text: typeof siteText.gemeente_ziekenhuisopnames_per_dag =
 
 import MunicipalityChloropleth from 'components/chloropleth/MunicipalityChloropleth';
 import hospitalAdmissionsTooltip from 'components/chloropleth/tooltips/municipal/hospitalAdmissionsTooltip';
+import MunicipalityLegenda from 'components/chloropleth/legenda/MunicipalityLegenda';
 
 export function IntakeHospitalBarScale(props: {
   data: HospitalAdmissions | undefined;
@@ -113,6 +114,11 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
         <div className="column-item column-item-extra-margin">
           <h3>{getLocalTitleForMuncipality(text.map_titel, data.code)}</h3>
           <p>{text.map_toelichting}</p>
+
+          <MunicipalityLegenda
+            metricName="hospital_admissions"
+            title={siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel}
+          />
         </div>
 
         <div className="column-item column-item-extra-margin">
