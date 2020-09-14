@@ -84,9 +84,6 @@ const Over: FCWithLayout<{ text: typeof siteText }> = (props) => {
                   //@TODO, Why does this sometimes return empty strings for the
                   // antwoord key? Does this PR mess up something with promises/async behavior
                   // in getStaticProps?
-
-                  // eslint-disable-next-line no-console
-                  console.log(item);
                   return (
                     <Fragment key={`item-${item.vraag}`}>
                       <h3>{item.vraag}</h3>
