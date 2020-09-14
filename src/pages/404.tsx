@@ -1,4 +1,4 @@
-import { getLayout, FCWithLayout } from 'components/layout';
+import { getLayoutWithMetadata, FCWithLayout } from 'components/layout';
 import MaxWidth from 'components/maxWidth';
 
 import text from 'locale';
@@ -19,7 +19,7 @@ const NotFound: FCWithLayout = () => {
   );
 };
 
-NotFound.getLayout = getLayout(text.notfound_metadata);
+NotFound.getLayout = getLayoutWithMetadata(text.notfound_metadata);
 export const getStaticProps = getLastGeneratedData();
 
 export default NotFound;

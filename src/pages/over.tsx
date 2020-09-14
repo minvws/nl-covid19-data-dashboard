@@ -4,7 +4,7 @@ import fs from 'fs';
 import { Fragment } from 'react';
 import Head from 'next/head';
 
-import { getLayout as getSiteLayout, FCWithLayout } from 'components/layout';
+import { getLayoutWithMetadata, FCWithLayout } from 'components/layout';
 import MaxWidth from 'components/maxWidth';
 
 import styles from './over.module.scss';
@@ -107,21 +107,12 @@ const Over: FCWithLayout<{ text: typeof siteText }> = (props) => {
   );
 };
 
-function getOverLayout() {
-  return function (page: React.ReactNode, pageProps: any) {
-    const lastGenerated = pageProps.lastGenerated;
+const metadata = {
+  ...siteText.over_metadata,
+  openGraphImage,
+  twitterImage,
+};
 
-    return getSiteLayout(
-      {
-        ...siteText.over_metadata,
-        openGraphImage,
-        twitterImage,
-      },
-      lastGenerated
-    )(<>{page}</>, pageProps);
-  };
-}
-
-Over.getLayout = getOverLayout();
+Over.getLayout = getLayoutWithMetadata(metadata);
 
 export default Over;

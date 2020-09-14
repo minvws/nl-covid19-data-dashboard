@@ -56,7 +56,7 @@ export function getSafetyRegionData() {
     const fileContents = fs.readFileSync(filePath, 'utf8');
     const data = JSON.parse(fileContents);
 
-    const lastGenerated = data.last_generated;
+    const lastGenerated = data.lastGenerated;
 
     return {
       props: {

@@ -20,15 +20,21 @@ export interface LayoutProps {
   description?: string;
   openGraphImage?: string;
   twitterImage?: string;
-  lastGenerated: string;
 }
 
 export type FCWithLayout<Props = void> = React.FC<Props> & {
   getLayout: (page: React.ReactNode, pageProps: Props) => React.ReactNode;
 };
 
+export function getLayoutWithMetadata(metadata: LayoutProps) {
+  return function (page: React.ReactNode, pageProps: any) {
+    const lastGenerated = pageProps.lastGenerated;
+    return getLayout(metadata, lastGenerated)(<>{page}</>);
+  };
+}
+
 export function getLayout(layoutProps: LayoutProps, lastGenerated: string) {
-  return function (page: React.ReactNode, pageProps: any): React.ReactNode {
+  return function (page: React.ReactNode): React.ReactNode {
     return (
       <Layout {...layoutProps} lastGenerated={lastGenerated}>
         {page}

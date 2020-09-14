@@ -1,4 +1,4 @@
-import { FCWithLayout, getLayout } from 'components/layout';
+import { FCWithLayout, getLayoutWithMetadata } from 'components/layout';
 import MaxWidth from 'components/maxWidth';
 
 import getLastGeneratedData from 'static-props/last-generated-data';
@@ -19,7 +19,7 @@ const ErrorPage: FCWithLayout = () => {
   );
 };
 
-ErrorPage.getLayout = getLayout(text.error_metadata);
+ErrorPage.getLayout = getLayoutWithMetadata(text.error_metadata);
 export const getStaticProps = getLastGeneratedData();
 
 export default ErrorPage;

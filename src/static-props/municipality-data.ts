@@ -5,6 +5,7 @@ import { getSafetyRegionData } from './safetyregion-data';
 
 export interface IMunicipalityData {
   data: Municipal;
+  lastGenerated: string;
 }
 
 interface IPaths {

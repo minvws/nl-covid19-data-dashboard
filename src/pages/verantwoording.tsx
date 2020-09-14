@@ -4,10 +4,8 @@ import fs from 'fs';
 import { Fragment } from 'react';
 import Head from 'next/head';
 
-import { getLayout as getSiteLayout, FCWithLayout } from 'components/layout';
+import { getLayoutWithMetadata, FCWithLayout } from 'components/layout';
 import MaxWidth from 'components/maxWidth';
-
-import { ILastGeneratedData } from 'static-props/last-generated-data';
 
 import styles from './over.module.scss';
 import siteText from 'locale';
@@ -54,7 +52,9 @@ export async function getStaticProps(): Promise<StaticProps> {
   return { props: { text, lastGenerated } };
 }
 
-const Verantwoording: FCWithLayout<{ text: any }> = (props) => {
+const Verantwoording: FCWithLayout<{ text: any; lastGenerated: string }> = (
+  props
+) => {
   const { text } = props;
 
   return (
@@ -97,21 +97,12 @@ const Verantwoording: FCWithLayout<{ text: any }> = (props) => {
   );
 };
 
-function getVerantwoordingLayout() {
-  return function (page: React.ReactNode, pageProps: ILastGeneratedData) {
-    const lastGenerated = pageProps.lastGenerated;
+const metadata = {
+  ...siteText.verantwoording_metadata,
+  openGraphImage,
+  twitterImage,
+};
 
-    return getSiteLayout(
-      {
-        ...siteText.verantwoording_metadata,
-        openGraphImage,
-        twitterImage,
-      },
-      lastGenerated
-    )(<>{page}</>, pageProps);
-  };
-}
-
-Verantwoording.getLayout = getVerantwoordingLayout();
+Verantwoording.getLayout = getLayoutWithMetadata(metadata);
 
 export default Verantwoording;
