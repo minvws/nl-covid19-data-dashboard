@@ -107,7 +107,11 @@ $language-switcher-offset: 55px;
   padding: 1em 0.75em;
   color: white;
   text-decoration: none;
-  font-size: 1.125em;
+  font-size: 1em;
+
+  @media (min-width: 420px) {
+    font-size: 1.125em;
+  }
 
   @media (min-width: 768px) {
     padding: 1em 1.5em;
