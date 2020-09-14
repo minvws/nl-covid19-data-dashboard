@@ -2,26 +2,26 @@ import Link from 'next/link';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-import TitleWithIcon from 'components/titleWithIcon';
-import { getLayout as getSiteLayout } from 'components/layout';
+import siteText from 'locale';
+import safetyRegions from 'data/index';
+import { WithChildren } from 'types';
+import { ISafetyRegionData } from 'static-props/safetyregion-data';
+
+import useMediaQuery from 'utils/useMediaQuery';
+import { getSewerWaterBarScaleData } from 'utils/sewer-water/safety-region-sewer-water.util';
+
 import { PostivelyTestedPeopleBarScale } from 'pages/veiligheidsregio/[code]/positief-geteste-mensen';
 import { IntakeHospitalBarScale } from 'pages/veiligheidsregio/[code]/ziekenhuis-opnames';
 import { SewerWaterBarScale } from 'pages/veiligheidsregio/[code]/rioolwater';
-import { getSewerWaterBarScaleData } from 'utils/sewer-water/safety-region-sewer-water.util';
+
+import TitleWithIcon from 'components/titleWithIcon';
+import { getLayout as getSiteLayout } from 'components/layout';
 import Combobox from 'components/comboBox';
 
 import GetestIcon from 'assets/test.svg';
 import Ziekenhuis from 'assets/ziekenhuis.svg';
 import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
 import Arrow from 'assets/arrow.svg';
-
-import siteText from 'locale';
-import safetyRegions from 'data/index';
-
-import { WithChildren } from 'types';
-
-import useMediaQuery from 'utils/useMediaQuery';
-import { ISafetyRegionData } from 'static-props/safetyregion-data';
 
 export default SafetyRegionLayout;
 
