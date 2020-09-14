@@ -23,6 +23,8 @@ import useMediaQuery from 'utils/useMediaQuery';
 
 import municipalities from 'data/gemeente_veiligheidsregio.json';
 import { IMunicipalityData } from 'static-props/municipality-data';
+import { ILastGeneratedData } from 'static-props/last-generated-data';
+
 import { getLocalTitleForMuncipality } from 'utils/getLocalTitleForCode';
 import getSafetyRegionForMunicipalityCode from 'utils/getSafetyRegionForMunicipalityCode';
 
@@ -37,11 +39,14 @@ interface IMunicipality {
 export function getMunicipalityLayout() {
   return function (
     page: React.ReactNode,
-    pageProps: IMunicipalityData
+    pageProps: IMunicipalityData | ILastGeneratedData
   ): React.ReactNode {
-    return getSiteLayout(siteText.gemeente_metadata)(
-      <MunicipalityLayout {...pageProps}>{page}</MunicipalityLayout>
-    );
+    const lastGenerated =
+      pageProps.lastGenerated || pageProps.data.last_generated;
+    return getSiteLayout(
+      siteText.gemeente_metadata,
+      lastGenerated
+    )(<MunicipalityLayout {...pageProps}>{page}</MunicipalityLayout>);
   };
 }
 

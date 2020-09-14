@@ -50,9 +50,17 @@ export function getSafetyRegionData() {
   return function ({ params }: IParams): IProps {
     const { code } = params;
 
+    // get data for the page
     const filePath = path.join(process.cwd(), 'public', 'json', `${code}.json`);
     const fileContents = fs.readFileSync(filePath, 'utf8');
     const data = JSON.parse(fileContents);
+
+    console.log('getSafetyRegionData');
+
+    // get the last generated prop
+    // const filePathNL = path.join(process.cwd(), 'public', 'json', 'NL.json');
+    // const fileContentsNL = fs.readFileSync(filePath, 'utf8');
+    // const lastGenerated = JSON.parse(fileContents).last_generated;
 
     return {
       props: {

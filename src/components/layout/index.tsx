@@ -20,15 +20,20 @@ export interface LayoutProps {
   description?: string;
   openGraphImage?: string;
   twitterImage?: string;
+  lastGenerated: string;
 }
 
 export type FCWithLayout<Props = void> = React.FC<Props> & {
   getLayout: (page: React.ReactNode, pageProps: Props) => React.ReactNode;
 };
 
-export function getLayout(layoutProps: LayoutProps) {
+export function getLayout(layoutProps: LayoutProps, lastGenerated: string) {
   return function (page: React.ReactNode): React.ReactNode {
-    return <Layout {...layoutProps}>{page}</Layout>;
+    return (
+      <Layout {...layoutProps} lastGenerated={lastGenerated}>
+        {page}
+      </Layout>
+    );
   };
 }
 
@@ -42,7 +47,9 @@ function Layout(props: WithChildren<LayoutProps>) {
     openGraphImage,
     twitterImage,
     url,
+    lastGenerated,
   } = props;
+
   const router = useRouter();
 
   // remove focus after navigation
@@ -51,9 +58,8 @@ function Layout(props: WithChildren<LayoutProps>) {
   const locale = getLocale();
   const showSmallLogo = useMediaQuery('(max-width: 480px)', true);
 
-  const dateInsertedUnix = Date.now();
-  const dateOfInsertion = dateInsertedUnix
-    ? formatDate(dateInsertedUnix * 1000, 'relative')
+  const dateOfInsertion = lastGenerated
+    ? formatDate(Number(lastGenerated) * 1000, 'relative')
     : undefined;
 
   return (
