@@ -1,4 +1,4 @@
-import { useState, Fragment } from 'react';
+import { useState } from 'react';
 
 import BarScale from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
@@ -16,7 +16,6 @@ import {
   InfectedPeopleDeltaNormalized,
   InfectedPeopleTotal,
   IntakeShareAgeGroups,
-  InfectedPeopleClusters,
 } from 'types/data';
 
 import getNlData, { INationalData } from 'static-props/nl-data';
@@ -81,9 +80,6 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         return mem + ((amount as number) || 0);
       }, 0)
     : 0;
-
-  const cluster: InfectedPeopleClusters | undefined =
-    data?.infected_people_clusters;
 
   return (
     <>
@@ -188,67 +184,6 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           </>
         )}
       </article>
-
-      {cluster && (
-        <>
-          <ContentHeader
-            category={'\u00A0'}
-            title={text.cluster_titel}
-            Icon={Fragment}
-            subtitle={text.cluster_toelichting}
-            metadata={{
-              datumsText: text.cluster_datums,
-              dateUnix: cluster?.last_value?.date_of_report_unix,
-              dateInsertedUnix: cluster?.last_value?.date_of_insertion_unix,
-              dataSource: text.cluster_bron,
-            }}
-          />
-
-          <div className="layout-two-column">
-            <article className="metric-article column-item">
-              <h3>{text.cluster_barscale_titel}</h3>
-
-              <BarScale
-                min={0}
-                max={10}
-                screenReaderText={text.barscale_screenreader_text}
-                value={cluster.last_value.active_clusters}
-                id="positief"
-                rangeKey="infected_daily_increase"
-                gradient={[
-                  {
-                    color: '#3391CC',
-                    value: 0,
-                  },
-                ]}
-                showAxis={true}
-              />
-              <p>{text.cluster_barscale_toelichting}</p>
-            </article>
-
-            <article className="metric-article column-item">
-              <h3>
-                {text.cluster_gemiddelde_titel}{' '}
-                <span className="text-blue kpi">
-                  {formatDecimal(cluster.last_value.cluster_average)}
-                </span>
-              </h3>
-              <p>{text.cluster_gemiddelde_toelichting}</p>
-            </article>
-          </div>
-
-          <article className="metric-article">
-            <h3>{text.cluster_linechart_titel}</h3>
-            <p>{text.cluster_linechart_toelichting}</p>
-            <LineChart
-              values={cluster.values.map((value) => ({
-                value: value.active_clusters,
-                date: value.date_of_report_unix,
-              }))}
-            />
-          </article>
-        </>
-      )}
     </>
   );
 };
