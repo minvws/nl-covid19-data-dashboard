@@ -60,7 +60,9 @@ function ComboBox<Option extends TOption>(props: TProps<Option>) {
   }
 
   useEffect(() => {
-    inputRef?.current?.focus();
+    if (!inputRef?.current?.value) {
+      inputRef?.current?.focus();
+    }
   }, []);
 
   return (
