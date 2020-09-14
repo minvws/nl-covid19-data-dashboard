@@ -1,7 +1,13 @@
 import municipalCodeToRegionCodeLookup from 'data/municipalCodeToRegionCodeLookup';
 import regionCodeToMunicipalCodeLookup from 'data/regionCodeToMunicipalCodeLookup';
 
-export default function getSafetyRegionForMunicipal(
+/**
+ * This method looks up all the municipal codes that belong to the same safety region
+ * as the given municipal code.
+ *
+ * @param code
+ */
+export default function getSafetyRegionMunicipalsForMunicipalCode(
   code: string
 ): string[] | undefined {
   const vrcode = municipalCodeToRegionCodeLookup[code];

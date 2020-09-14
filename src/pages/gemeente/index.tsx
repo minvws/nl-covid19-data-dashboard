@@ -1,14 +1,15 @@
 import { FCWithLayout } from 'components/layout';
 import { getMunicipalityLayout } from 'components/layout/MunicipalityLayout';
 import { useRouter } from 'next/router';
-import MunicipalityMap from 'components/vx/MunicipalityMap';
 
 import text from 'locale';
-import styles from 'components/vx/chloropleth.module.scss';
+import styles from 'components/chloropleth/chloropleth.module.scss';
 
 import { ReactNode } from 'react';
+import MunicipalityChloropleth from 'components/chloropleth/MunicipalityChloropleth';
+import { MunicipalityProperties } from 'components/chloropleth/shared';
 
-const tooltipContent = (context: any): ReactNode => {
+const tooltipContent = (context: MunicipalityProperties): ReactNode => {
   return (
     context && (
       <div className={styles.defaultTooltip}>
@@ -27,7 +28,7 @@ const tooltipContent = (context: any): ReactNode => {
 const Municipality: FCWithLayout<any> = () => {
   const router = useRouter();
 
-  const onSelectMunicpal = (context: any) => {
+  const onSelectMunicpal = (context: MunicipalityProperties) => {
     router.push(
       '/gemeente/[code]/positief-geteste-mensen',
       `/gemeente/${context.gemcode}/positief-geteste-mensen`
@@ -46,11 +47,10 @@ const Municipality: FCWithLayout<any> = () => {
           </p>
         </div>
         <div className="column-item-no-margin column-item">
-          <MunicipalityMap
-            style={{ height: '800px', backgroundColor: 'none' }}
-            onSelect={onSelectMunicpal}
-            gradient={['#ffffff', '#ffffff']}
+          <MunicipalityChloropleth
             tooltipContent={tooltipContent}
+            style={{ height: '800px' }}
+            onSelect={onSelectMunicpal}
           />
         </div>
       </article>

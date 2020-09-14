@@ -10,8 +10,8 @@ import styles from './index.module.scss';
 
 import text from 'locale';
 import TitleWithIcon from 'components/titleWithIcon';
-import SafetyRegionMap from 'components/vx/SafetyRegionMap';
 import { ReactNode } from 'react';
+import SafetyRegionChloropleth from 'components/chloropleth/SafetyRegionChloropleth';
 
 const escalationColors = ['#FCD603', '#F79903', '#F45167'];
 
@@ -110,8 +110,8 @@ const Home: FCWithLayout<INationalData> = () => {
           </div>
         </div>
         <div className="column-item">
-          <SafetyRegionMap
-            metric="escalation_levels"
+          <SafetyRegionChloropleth
+            metricName="escalation_levels"
             metricProperty="type"
             style={{ height: '500px' }}
             gradient={escalationColors}

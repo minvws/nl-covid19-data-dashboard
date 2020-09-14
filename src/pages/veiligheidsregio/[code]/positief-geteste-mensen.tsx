@@ -1,4 +1,4 @@
-import { Fragment, ReactNode } from 'react';
+import { Fragment } from 'react';
 
 import BarScale from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
@@ -12,30 +12,17 @@ import Getest from 'assets/test.svg';
 import formatDecimal from 'utils/formatNumber';
 import { ResultsPerRegion } from 'types/data';
 
-import styles from 'components/vx/chloropleth.module.scss';
-
 import {
   getSafetyRegionData,
   getSafetyRegionPaths,
   ISafetyRegionData,
 } from 'static-props/safetyregion-data';
 import { getLocalTitleForRegion } from 'utils/getLocalTitleForCode';
-import SafetyRegionMap from 'components/vx/SafetyRegionMap';
+import SafetyRegionChloropleth from 'components/chloropleth/SafetyRegionChloropleth';
+import positiveTestedPeopleTooltip from 'components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
 
 const text: typeof siteText.veiligheidsregio_positief_geteste_personen =
   siteText.veiligheidsregio_positief_geteste_personen;
-
-const tooltipContent = (context: any): ReactNode => {
-  return (
-    context && (
-      <div className={styles.defaultTooltip}>
-        <strong>{context.vrname}</strong>
-        <br />
-        {context.value} / 100.000
-      </div>
-    )
-  );
-};
 
 export function PostivelyTestedPeopleBarScale(props: {
   data: ResultsPerRegion | undefined;
@@ -141,11 +128,10 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
         </div>
 
         <div className="column-item column-item-extra-margin">
-          <SafetyRegionMap
+          <SafetyRegionChloropleth
             selected={data.code}
-            metric="positive_tested_people"
-            gradient={['#D2F3FF', '#005684']}
-            tooltipContent={tooltipContent}
+            metricName="positive_tested_people"
+            tooltipContent={positiveTestedPeopleTooltip}
           />
         </div>
       </article>

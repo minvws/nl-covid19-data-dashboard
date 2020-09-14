@@ -16,25 +16,12 @@ import {
   IMunicipalityData,
 } from 'static-props/municipality-data';
 import { getLocalTitleForMuncipality } from 'utils/getLocalTitleForCode';
-import MunicipalityMap from 'components/vx/MunicipalityMap';
-import { ReactNode } from 'react';
 
-import styles from 'components/vx/chloropleth.module.scss';
+import MunicipalityChloropleth from 'components/chloropleth/MunicipalityChloropleth';
+import positiveTestedPeopleTooltip from 'components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
 
 const text: typeof siteText.gemeente_positief_geteste_personen =
   siteText.gemeente_positief_geteste_personen;
-
-const tooltipContent = (context: any): ReactNode => {
-  return (
-    context && (
-      <div className={styles.defaultTooltip}>
-        <strong>{context.gemname}</strong>
-        <br />
-        {context.value} / 100.000
-      </div>
-    )
-  );
-};
 
 export function PostivelyTestedPeopleBarScale(props: {
   data: PositiveTestedPeople | undefined;
@@ -133,11 +120,10 @@ const PostivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
         </div>
 
         <div className="column-item column-item-extra-margin">
-          <MunicipalityMap
+          <MunicipalityChloropleth
             selected={data.code}
-            metric="positive_tested_people"
-            gradient={['#D2F3FF', '#005684']}
-            tooltipContent={tooltipContent}
+            metricName="positive_tested_people"
+            tooltipContent={positiveTestedPeopleTooltip}
           />
         </div>
       </article>
