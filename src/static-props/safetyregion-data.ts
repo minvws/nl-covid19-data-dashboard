@@ -54,9 +54,9 @@ export function getSafetyRegionData() {
     // get data for the page
     const filePath = path.join(process.cwd(), 'public', 'json', `${code}.json`);
     const fileContents = fs.readFileSync(filePath, 'utf8');
-    const data = JSON.parse(fileContents);
+    const data = JSON.parse(fileContents) as Regionaal;
 
-    const lastGenerated = data.lastGenerated;
+    const lastGenerated = data.last_generated;
 
     return {
       props: {
