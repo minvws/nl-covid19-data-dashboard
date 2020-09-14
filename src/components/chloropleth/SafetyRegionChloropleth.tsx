@@ -72,7 +72,7 @@ export default function SafetyRegionChloropleth<
     (
       feature: Feature<MultiPolygon, SafetyRegionProperties>,
       path: string,
-      index: number
+      _index: number
     ) => {
       const { vrcode } = feature.properties;
 
@@ -86,7 +86,7 @@ export default function SafetyRegionChloropleth<
           className={className}
           shapeRendering="optimizeQuality"
           data-id={vrcode}
-          key={`safetyregion-map-feature-${index}`}
+          key={`safetyregion-map-feature-${vrcode}`}
           d={path || ''}
           fill={getFillColor(vrcode)}
         />

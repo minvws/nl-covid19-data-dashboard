@@ -74,7 +74,7 @@ export default function MunicipalityChloropleth<
     (
       feature: Feature<MultiPolygon, MunicipalityProperties>,
       path: string,
-      index: number
+      _index: number
     ) => {
       const { gemcode } = feature.properties;
       const isSelected = gemcode === selected;
@@ -97,7 +97,7 @@ export default function MunicipalityChloropleth<
           className={className}
           shapeRendering="optimizeQuality"
           data-id={gemcode}
-          key={`municipality-map-feature-${index}`}
+          key={`municipality-map-feature-${gemcode}`}
           d={path}
           fill={fillColor}
         />
