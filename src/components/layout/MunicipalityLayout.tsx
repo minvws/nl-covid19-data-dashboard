@@ -175,7 +175,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                       <span>
                         <PostivelyTestedPeopleBarScale
                           data={data?.positive_tested_people}
-                          showAxis={false}
+                          showAxis={true}
                         />
                       </span>
                     </a>
@@ -203,7 +203,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                       <span>
                         <IntakeHospitalBarScale
                           data={data?.hospital_admissions}
-                          showAxis={false}
+                          showAxis={true}
                         />
                       </span>
                     </a>
@@ -232,7 +232,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                         <span>
                           <SewerWaterBarScale
                             data={getSewerWaterBarScaleData(data)}
-                            showAxis={false}
+                            showAxis={true}
                           />
                         </span>
                       </a>
@@ -248,7 +248,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                       <span>
                         <SewerWaterBarScale
                           data={getSewerWaterBarScaleData(data)}
-                          showAxis={false}
+                          showAxis={true}
                         />
                       </span>
                     </div>
