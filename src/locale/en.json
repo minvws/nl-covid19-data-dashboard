@@ -68,11 +68,11 @@
       "text": "Nivel Primary Care Database"
     },
     "estimated_amount_of_patients": "Estimated number of patients with symptoms that could indicate COVID-19:",
-    "titel": "Aantal patiënten met eerste melding van COVID-19 klachten bij de huisarts",
+    "titel": "Estimated number of patients who contact the general practitioner for the first time with COVID-19 symptoms",
     "pagina_toelichting": "Based on the registered diagnoses by general practitioners every week, NIVEL calculates the number patients who contact the general practitioner for the first time due to COVID-19 like symptoms.",
-    "barscale_titel": "Aantal patiënten met eerste melding van COVID-19 klachten bij de huisarts",
+    "barscale_titel": "Estimated number of patients who contact the general practitioner for the first time with COVID-19 symptoms",
     "barscale_toelichting": "Number of patients who contact the general practitioner for the first time due to COVID-19 like symptoms, per 100.000 inhabitants, per week.",
-    "kpi_titel": "Geschat aantal patiënten met verdenking van COVID-19",
+    "kpi_titel": "Estimated number of patients where COVID-19 is suspected",
     "kpi_toelichting": "Estimated number of patients who contact the general practitioner for the first time due to COVID-19 like symptoms, per 100.000 inhabitants, per week.",
     "linechart_titel": "Progression over time",
     "barscale_screenreader_text": "{{value}} patients who contact the general practitioner for the first time due to COVID-19 like symptoms, per 100.000 inhabitants, per week."
@@ -112,7 +112,13 @@
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the progression over time in the number of new cases by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "cluster_datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
     "cluster_bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
@@ -218,14 +224,14 @@
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     },
-    "titel": "Aantal besmette locaties",
-    "pagina_toelichting": "Dit getal is een inschatting van het aantal nieuwe verpleeghuislocaties waar sprake is van tenminste een COVID-19 besmetting op basis van een positieve test.",
-    "barscale_titel": "Aantal nieuwe locaties per dag",
-    "barscale_toelichting": "Aantal nieuwe locaties waarbij tenminste één bewoner positief getest is. Een verpleeghuis wordt meegeteld als ‘nieuwe locatie’ wanneer er tenminste 28 dagen, dit is twee keer de incubatietijd, geen nieuwe patiënten zijn geweest.",
-    "kpi_titel": "Totaal aantal besmette locaties",
+    "titel": "Number of infected locations",
+    "pagina_toelichting": "This number is an estimation of the number of new nursing home locations where there is at least one confirmed case.",
+    "barscale_titel": "Number of new locations per day",
+    "barscale_toelichting": "Number of new locations where there is at least one confirmed case. A nursing home is counted as a 'new location; when there have not been any confirmed cases for at least 28 days, which is twice the incubation period.",
+    "kpi_titel": "Total number of infected locations",
     "kpi_toelichting": "This figure is an estimate of the number of nursing homes where in the past 28 days at least one (new) COVID-19 infection (confirmed by a positive test) is reported.",
     "linechart_titel": "Progression over time",
-    "barscale_screenreader_text": "{{value}} nieuwe locaties waarbij tenminste één bewoner positief getest is, per dag."
+    "barscale_screenreader_text": "{{value}} new locations where there is at least one confirmed case, per day."
   },
   "verpleeghuis_positief_geteste_personen": {
     "datums": "Value of {{dateOfReport}}. Obtained:{{dateOfInsertion}}. Is updated on a daily basis.",
@@ -233,10 +239,10 @@
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     },
-    "titel": "Aantal positief geteste bewoners",
-    "barscale_titel": "Aantal positief geteste bewoners in verpleeghuizen per dag",
-    "extra_uitleg": " Aantal positief geteste bewoners in verpleeghuizen per dag.",
-    "pagina_toelichting": "Aantal positief geteste bewoners in verpleeghuizen per dag. Dit getal is een inschatting van het aantal gemelde bewoners in verpleeghuizen dat in Nederland positief getest is en COVID-19 heeft.",
+    "titel": "Number of confirmed cases",
+    "barscale_titel": "Number of confirmed cases in nursing homes per day",
+    "extra_uitleg": "Number of confirmed cases in nursing homes per day.",
+    "pagina_toelichting": "Number of confirmed cases in nursing homes per day. This number is an estimation of the number confirmed cases in nursing home inhabitants.",
     "linechart_titel": "Progression over time",
     "barscale_screenreader_text": "{{value}} positief geteste bewoners."
   },
@@ -250,10 +256,10 @@
     "pagina_toelichting": "Daily number of deceased residents with confirmed cases of COVID-19 in nursing homes.",
     "barscale_titel": "Number of deceased residents",
     "barscale_screenreader_text": "{{value}} deceased residents",
-    "extra_uitleg": "Dit getal is een inschatting van het aantal gemelde verpleeghuisbewoners dat in Nederland overlijdt aan de gevolgen van het nieuwe coronavirus. Dit getal verwijst naar de datum vóór de datum van de laatste update.",
+    "extra_uitleg": "This number is an estimation of the number of nursing home inhabitants that have died due to the novel coronavirus. This number refers to the date before the last update.",
     "linechart_titel": "Progression over time",
     "map_titel": "Nursing home excess mortality in the Netherlands",
-    "map_toelichting": "Deze grafieken laten zien hoe de oversterfte in verpleeghuizen is in Nederland per dag."
+    "map_toelichting": "These figures show the excess mortality in nursing homes in the Netherlands per day."
   },
   "blok_verpleeghuis_zorg": {
     "title": "Nursing homes",
@@ -265,7 +271,7 @@
   "rioolwater_metingen": {
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
     "bron": {
-      "text": "RIVM Research sewage water",
+      "text": "RIVM research into sewage water",
       "href": "https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater"
     },
     "titel": "Sewage water examination",
@@ -361,7 +367,7 @@
     "cijfers": [
       {
         "cijfer": "Update of 11 August on the peak of the number of confirmed cases",
-        "verantwoording": "Om technische redenen konden in de periode van 14 juli tot 9 augustus niet alle meldingen over besmettingen doorgestuurd worden van GGD naar het RIVM. Deze nagekomen meldingen zijn op 9 en 10 augustus alsnog opgenomen in de data. Het betreft in totaal 160 nagekomen meldingen van COVID-19 patiënten. Hiervan worden 9 meldingen gerapporteerd op 9 augustus en 151 op 10 augustus. \n\nDe verdeling van deze 160 nagekomen meldingen over de veiligheidsregio’s is als volgt:\n\n- Amsterdam-Amstelland: 8\n- Flevoland: 30\n- Friesland: 8\n- Groningen: 1\n- Hollands Midden: 26\n- Rotterdam-Rijnmond: 7\n- Midden- en West-Brabant: 27\n- Zaanstreek-Waterland: 8\n- Zeeland: 23\n- Zuid-Limburg: 14\n- Gelderland-Midden: 7\n- Onbekend: 1"
+        "verantwoording": "Due to technical reasons, during the period of July 14 to August 9, the municipal health service (GGD) was not able to send of the all confirmed cases to RIVM. This backlog was added to the data on the 9th and 10th of August. There were 160 confirmed cases in total. 9 were reported on August 9th, and 151 on August 10th. \n\nThe distribution of these 160 confirmed cases over the safety regions is as follows:\n\n- Amsterdam-Amstelland: 8\n- Flevoland: 30\n- Friesland: 8\n- Groningen: 1\n- Hollands Middle: 26\n- Rotterdam-Rijnmond: 7\n- Middle- en West-Brabant: 27\n- Zaanstreek-Waterland: 8\n- Zeeland: 23\n- South-Limburg: 14\n- Middle Gelderland: 7\n- Unknown: 1"
       },
       {
         "cijfer": "Update of 31 July on the alert value for number of infectious people",
@@ -482,9 +488,9 @@
       "signaalwaarde": "Alert value"
     },
     "zoekveld_geen_resultaten": "No results",
-    "zoekveld_placeholder_regio": "Zoek op veiligheidsregio ",
+    "zoekveld_placeholder_regio": "Search by safety region",
     "zoekveld_placeholder_gemeente": "Search by municipality",
-    "veiligheidsregio_label": "Veiligheidsregio:"
+    "veiligheidsregio_label": "Safety region:"
   },
   "seoHead": {
     "default_description": "Information on the development of the coronavirus in The Netherlands.",
@@ -509,7 +515,7 @@
     }
   },
   "veiligheidsregio_metadata": {
-    "title": "Regionaal Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
+    "title": "Regional Dashboard Coronavirus COVID-19 | Government.nl",
     "description": "Information on the development of the coronavirus in the Netherlands.",
     "url": "https://coronadashboard.rijksoverheid.nl/regio"
   },
@@ -524,7 +530,7 @@
     "screen_reader_graph_content": "{{value}} admissions.",
     "barscale_titel": "Hospital admissions per day",
     "extra_uitleg": "Number of confirmed COVID-19 cases who are admitted to a hospital per day. This number is an average for daily admissions over the past 3 days.",
-    "map_titel": "Verdeling ziekenhuisopnames in {{safetyRegion}}",
+    "map_titel": "Distribution of hospital admissions in {{safetyRegion}}",
     "map_toelichting": "These figures show the daily hospital admissions in the Netherlands.",
     "linechart_titel": "Progression in hospital admissions over time",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
@@ -544,14 +550,20 @@
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
     "kpi_titel": "Number of confirmed cases:",
     "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday.",
-    "map_titel": "Verdeling positief geteste mensen in {{safetyRegion}}",
+    "map_titel": "Distribution of confirmed cases in {{safetyRegion}}",
     "map_toelichting": "These figures show how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
     "linechart_titel": "Progression over time",
     "linechart_toelichting": "These figures show how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the progression over time in the number of positive tests by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -561,7 +573,7 @@
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     },
-    "cluster_titel": "Clusters van positief geteste personen",
+    "cluster_titel": "Clusters of confirmed cases",
     "cluster_toelichting": "---",
     "cluster_barscale_titel": "Number of active clusters",
     "cluster_barscale_toelichting": "---",
@@ -576,15 +588,15 @@
     "titel": "Sewage water examination in {{safetyRegion}}",
     "pagina_toelichting": "Number of virus particles in one milliliter of sewage water, collected from about 80 sites in the Netherlands. The national value is based on the total number of virus particles that is found in a week, divided by the number of sites where the data is collected. From September onwards, the number of sampling sites will be increased to more than 300.",
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis. ",
-    "screen_reader_graph_content": "{{value}} virus particles in one milliliter of seage water.",
+    "screen_reader_graph_content": "{{value}} virus particles in one milliliter of sewage water.",
     "barscale_titel": "Average number of virus particles in one milliliter of sewage water",
     "extra_uitleg": "The national value is based on the total number of virus particles that is found in a week, divided by the number of sites where the data is collected.",
     "barscale_screenreader_text": "{{value}} virus particles in one milliliter of sewage water, collected from 28 locations in the Netherlands.",
     "linechart_titel": "Progression over time",
     "bar_chart_title": "Last known value by RWZI-location in {{safetyRegion}}",
-    "bar_chart_axis_title": "Aantal virusdeeltjes in milliliter rioolwater",
+    "bar_chart_axis_title": "Number of virus particles per milliliter of sewage water",
     "bron": {
-      "text": "RIVM Onderzoek rioolwater",
+      "text": "RIVM research into sewage water",
       "href": "https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater"
     },
     "graph_average_label_text": "Average value of all tested sites.",
@@ -600,7 +612,7 @@
     "screen_reader_graph_content": "{{value}} admissions.",
     "barscale_titel": "Hospital admissions per day",
     "extra_uitleg": "Number of confirmed COVID-19 cases who are admitted to a hospital per day. This number is an average for daily admissions over the past 3 days.",
-    "map_titel": "Verdeling ziekenhuisopnames in {{municipality}}",
+    "map_titel": "Distribution of hospital admissions in {{municipality}}",
     "map_toelichting": "These figures show the daily hospital admissions in the Netherlands.",
     "linechart_titel": "Progression in hospital admissions over time",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
@@ -620,14 +632,20 @@
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
     "kpi_titel": "Number of confirmed cases:",
     "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday.",
-    "map_titel": "Verdeling positief geteste mensen in {{municipality}}",
+    "map_titel": "Distribution of confirmed cases in {{municipality}}",
     "map_toelichting": "These figures show how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
     "linechart_titel": "Progression over time",
     "linechart_toelichting": "These figures show how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the change in the number of confirmed cases by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -644,7 +662,7 @@
     "barscale_screenreader_text": "{{value}} virus particles in one milliliter of sewage water, collected from 80 sited in the Netherlands.",
     "linechart_titel": "Progression over time",
     "bar_chart_title": "Last known value per RWZI location in {{municipality}}",
-    "bar_chart_axis_title": "Aantal virusdeeltjes in milliliter rioolwater",
+    "bar_chart_axis_title": "Number of virus particles per milliliter of sewage water",
     "bron": {
       "text": "RIVM research into sewage water",
       "href": "https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater"
@@ -655,36 +673,36 @@
     "average": "Average"
   },
   "veiligheidsregio_index": {
-    "selecteer_titel": "Selecteer een veiligheidsregio",
-    "selecteer_toelichting": "Er gelden verschillende maatregelen per veiligheidsregio en gemeente"
+    "selecteer_titel": "Select a safety region",
+    "selecteer_toelichting": "There are different measures per safety region and municipality"
   },
   "gemeente_index": {
-    "selecteer_titel": "Selecteer een gemeente",
-    "selecteer_toelichting": "Er gelden verschillende maatregelen per veiligheidsregio en gemeente"
+    "selecteer_titel": "Select your municipality",
+    "selecteer_toelichting": "There are different measures per safety region and municipality"
   },
   "laatste_ontwikkelingen": {
-    "title": "Laatste ontwikkelingen",
+    "title": "Latest developments",
     "menu_subtitle": "More new COVID-19 infections"
   },
   "escalatie_niveau": {
-    "titel": "Maatregelenniveaus in Nederland",
-    "toelichting": "Naast de landelijke maatregelen, kunnen per regio aanvullende maatregelen gelden. Op basis van de lokale ontwikkeling van de cijfers wordt deze stats regelmatig herzien door de afzonderlijke veiligheidsregio's.",
+    "titel": "Level of measures in the Netherlands",
+    "toelichting": "In addition to the nationwide measures, there can be regional measures in place. Based on the development of the local numbers these measures are reguraly revised for the individual safety regions.",
     "types": {
       "1": {
-        "titel": "Waakzaam",
-        "toelichting": "houd je aan de (landelijke) maatregelen"
+        "titel": "Watchful",
+        "toelichting": "please adhere to the (national) measures"
       },
       "2": {
-        "titel": "Zorgelijk",
-        "toelichting": "er gelden aanvullende maatregelen"
+        "titel": "Worrisome",
+        "toelichting": "there are extra measures in place"
       },
       "3": {
-        "titel": "Ernstig",
-        "toelichting": "strenge aanvullende maatregelen"
+        "titel": "Serious",
+        "toelichting": "strict additional measures"
       }
     },
     "legenda": {
-      "titel": "Legenda situatiekaart"
+      "titel": "Legend of situation map"
     }
   }
 }

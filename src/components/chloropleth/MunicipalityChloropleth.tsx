@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { TMunicipalityMetricName } from './shared';
 
 import Chloropleth from './Chloropleth';
@@ -74,21 +75,17 @@ export default function MunicipalityChloropleth<
     (
       feature: Feature<MultiPolygon, MunicipalityProperties>,
       path: string,
-      index: number
+      _index: number
     ) => {
       const { gemcode } = feature.properties;
       const isSelected = gemcode === selected;
-      let className = isSelected ? styles.selectedPath : '';
-
-      if (!hasData) {
-        className += ` ${styles.noData}`;
-      }
-
-      if (safetyRegionMunicipalCodes) {
-        if (safetyRegionMunicipalCodes.indexOf(gemcode) < 0) {
-          className += ` ${styles.faded}`;
-        }
-      }
+      const isInSameRegion =
+        (safetyRegionMunicipalCodes?.indexOf(gemcode) ?? 0) > -1;
+      const className = classNames(
+        isSelected ? styles.selectedPath : undefined,
+        !hasData ? styles.noData : undefined,
+        isInSameRegion ? undefined : styles.faded
+      );
 
       const fillColor = getFillColor(gemcode);
 
@@ -97,7 +94,7 @@ export default function MunicipalityChloropleth<
           className={className}
           shapeRendering="optimizeQuality"
           data-id={gemcode}
-          key={`municipality-map-feature-${index}`}
+          key={`municipality-map-feature-${gemcode}`}
           d={path}
           fill={fillColor}
         />

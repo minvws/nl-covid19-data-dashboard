@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { SafetyRegionProperties, TRegionMetricName } from './shared';
 import { Regions } from 'types/data';
 import { CSSProperties, ReactNode, useCallback } from 'react';
@@ -72,21 +73,22 @@ export default function SafetyRegionChloropleth<
     (
       feature: Feature<MultiPolygon, SafetyRegionProperties>,
       path: string,
-      index: number
+      _index: number
     ) => {
       const { vrcode } = feature.properties;
 
       const isSelected = vrcode === selected;
-      let className = isSelected ? styles.selectedPath : '';
-      if (!hasData) {
-        className += ` ${styles.noData}`;
-      }
+      const className = classNames(
+        isSelected ? styles.selectedPath : '',
+        !hasData ? styles.noData : undefined
+      );
+
       return (
         <path
           className={className}
           shapeRendering="optimizeQuality"
           data-id={vrcode}
-          key={`safetyregion-map-feature-${index}`}
+          key={`safetyregion-map-feature-${vrcode}`}
           d={path || ''}
           fill={getFillColor(vrcode)}
         />

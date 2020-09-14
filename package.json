@@ -10,6 +10,7 @@
     "@vx/geo": "latest",
     "@vx/scale": "latest",
     "@vx/tooltip": "^0.0.198",
+    "classnames": "^2.2.6",
     "d3-scale": "2",
     "date-fns": "^2.15.0",
     "geojson": "^0.5.0",

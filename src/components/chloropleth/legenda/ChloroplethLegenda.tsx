@@ -1,11 +1,4 @@
-import Legenda from 'components/legenda';
-
 import styles from './chloroplethlegenda.module.scss';
-
-/*export type TProps<T = Municipalities | Regions> = {
-  source: T;
-  metricName: TMetricHolder<T>;
-};*/
 
 export interface ILegendaItem {
   color: string;
@@ -22,14 +15,17 @@ export default function ChloroplethLegenda(props: TProps) {
   return (
     <>
       <h4>{title}</h4>
-      <Legenda>
+      <ul className={styles.legenda}>
         {items.map((item) => (
           <li key={item.color} className={styles.legendaItem}>
-            <div style={{ backgroundColor: item.color }}></div>
+            <div
+              className={styles.box}
+              style={{ backgroundColor: item.color }}
+            ></div>
             <div>{item.label}</div>
           </li>
         ))}
-      </Legenda>
+      </ul>
     </>
   );
 }

@@ -10,8 +10,8 @@ export default function positiveTestedPeopleTooltip(
       <div className={styles.defaultTooltip}>
         <strong>{context.vrname}</strong>
         <br />
-        {context.value && `${context.value} / 100.000`}
-        {!context.value && '-'}
+        {context.value !== undefined && `${context.value} / 100.000`}
+        {!context.value === undefined && '-'}
       </div>
     )
   );
