@@ -10,8 +10,8 @@ export default function hospitalAdmissionsTooltip(
       <div className={styles.defaultTooltip}>
         <strong>{context.gemnaam}</strong>
         <br />
-        {context.value && `${context.value}`}
-        {!context.value && '-'}
+        {context.value !== undefined && `${context.value}`}
+        {!context.value === undefined && '-'}
       </div>
     )
   );

@@ -18,6 +18,7 @@ import {
 import { getLocalTitleForRegion } from 'utils/getLocalTitleForCode';
 import SafetyRegionChloropleth from 'components/chloropleth/SafetyRegionChloropleth';
 import hospitalAdmissionsTooltip from 'components/chloropleth/tooltips/region/hospitalAdmissionsTooltip';
+import SafetyRegionLegenda from 'components/chloropleth/legenda/SafetyRegionLegenda';
 
 const text: typeof siteText.veiligheidsregio_ziekenhuisopnames_per_dag =
   siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
@@ -109,6 +110,11 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
         <div className="column-item column-item-extra-margin">
           <h3>{getLocalTitleForRegion(text.map_titel, data.code)}</h3>
           <p>{text.map_toelichting}</p>
+
+          <SafetyRegionLegenda
+            metricName="hospital_admissions"
+            title={siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel}
+          />
         </div>
 
         <div className="column-item column-item-extra-margin">

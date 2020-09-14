@@ -12,7 +12,7 @@ export default function useExtent(
   predicate?: (item: any) => number
 ): [number, number] | undefined {
   return useMemo(() => {
-    if (!collection) {
+    if (!collection?.length) {
       return undefined;
     }
     const numberCollection = predicate
