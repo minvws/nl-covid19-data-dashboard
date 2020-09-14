@@ -92,8 +92,8 @@
     "linechart_titel": "Progression in hospital admissions over time",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "chloropleth_legenda": {
-      "titel": "Ziekenhuis opnames",
-      "geen_meldingen": "Geen meldingen"
+      "titel": "Hospital admissions",
+      "geen_meldingen": "No reported admissions"
     }
   },
   "positief_geteste_personen": {
@@ -138,8 +138,8 @@
     "cluster_linechart_titel": "Progression of active clusters over time",
     "cluster_linechart_toelichting": "---",
     "chloropleth_legenda": {
-      "titel": "Aantal per 100.000 inwoners",
-      "geen_meldingen": "Geen meldingen"
+      "titel": "Number per 100.000 inhabitants",
+      "geen_meldingen": "No confirmed cases"
     }
   },
   "besmettelijke_personen": {
@@ -178,7 +178,7 @@
     "barscale_titel": "Most recent reproduction number",
     "barscale_toelichting": "Number of people infected by one infectious person.",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
-    "extra_uitleg": "The reproduction number shows how fast the virus is spreading. The number shows how many people are on average infected by one patient with COVID-19. The number of transmissions remains more or less constant when the reproduction number is 1, declines when it is less than 1 and increases when the number is above 1.",
+    "extra_uitleg": "The reproduction number shows how fast the virus is spreading. This number shows how many people are on average infected by one patient with COVID-19. The number of transmissions remains more or less constant when the reproduction number is 1, declines when it is less than 1 and increases when the number is above 1.",
     "linechart_titel": "Progression over time"
   },
   "overige_gegevens": {
@@ -193,7 +193,7 @@
       {
         "icon": "/images/Zelfrapportagegegevens.png",
         "text": "Self-report data (Infectieradar)",
-        "content": "The RIVM monitors the spread of infectious diseases in many different ways. This is also the case for COVID-19. One of these ways is to look at persons exhibiting symptoms that could indicate an infection. The RIVM does this with the Infectionradar.\n\nEveryone in the Netherlands can participate in the Infectionradar. Participants submit once a week if they have (had) a fevr or other symptoms. Even if participants don't have any symptoms they pass this on to us. This way, signals of an increase or decrease in the virus are picked up earlier."
+        "content": "The RIVM monitors the spread of infectious diseases in many ways. This is also the case for COVID-19. One of these ways is to look at persons exhibiting symptoms that could indicate an infection. The RIVM does this with the Infectieradar.\n\nEveryone in the Netherlands can take part in the Infectieradar. Participants self-report once a week if they have (had) a fever or other symptoms. Even if participants don't have any symptoms they pass this on to us. This way, signals of an increase or decrease in the virus are picked up earlier."
       },
       {
         "icon": "/images/GGD-contactonderzoeken.png",
@@ -252,7 +252,7 @@
     "extra_uitleg": "Number of confirmed cases in nursing homes per day.",
     "pagina_toelichting": "Number of confirmed cases in nursing homes per day. This number is an estimation of the number confirmed cases in nursing home inhabitants.",
     "linechart_titel": "Progression over time",
-    "barscale_screenreader_text": "{{value}} positief geteste bewoners."
+    "barscale_screenreader_text": "{{value}} Number of residents who tested positive (confirmed cases)."
   },
   "verpleeghuis_oversterfte": {
     "datums": "Value of  {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -283,7 +283,7 @@
       "href": "https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater"
     },
     "titel": "Sewage water examination",
-    "pagina_toelichting": "Number of virus particles in one milliliter of sewage water, collected from about 80 sites in the Netherlands. The national value is based on the total number of virus particles that is found in a week, divided by the number of sites where the data is collected. From September onwards, the number of sampling sites will be increased to more than 300.",
+    "pagina_toelichting": "Number of virus particles in one milliliter of sewage water, collected from about 80 sites in the Netherlands. The national value is based on the total number of virus particles that is found in a week, divided by the number of sites where the data is collected. From September onwards the number of sampling sites will be increased to more than 300.",
     "barscale_titel": "Average number of virus particles in one milliliter of sewage water",
     "extra_uitleg": "The national value is based on the total number of virus particles that is found in a week, divided by the number of sites where the data is collected.",
     "barscale_screenreader_text": "{{value}} virus particles in one milliliter of sewage water, collected from 28 locations in the Netherlands.",
@@ -362,7 +362,7 @@
       },
       {
         "vraag": "Why do I find a different value for the total number of confirmed cases (people who tested positive) as shown on the site, if I add all the reported confirmed cases per safety region? ",
-        "antwoord": "We calculate the increase in the number of confirmed cases (people who tested positive) by deducting  the current day’s cumulative number of confirmed cases reported from the cumulative number reported the day before. Any corrections to historical data, such as double counting, are processed by the RIVM on the day the error was discovered. This means the number of new cases reported for that day is lower than the actual number, but this is offset by the numbers being too high on previous days. Because of such corrections, it is possible for the current day’s cumulative number to be lower than the number for the day before. This is then depicted as 0 (zero) on the dashboard, as a negative number is confusing. This is why discrepancies arise when regional data is aggregated into national data. If you would use the negative values of the safety regions to calculate the daily number of confirmed cases, you would find the correct values. "
+        "antwoord": "We calculate the increase in the number of confirmed cases (people who tested positive) by deducting the current day’s cumulative number of confirmed cases reported from the cumulative number reported the day before. Any corrections to historical data, such as double counting, are processed by the RIVM on the day the error was discovered. This means the number of new cases reported for that day is lower than the actual number, but this is offset by the numbers being too high on previous days. Because of such corrections, it is possible for the current day’s cumulative number to be lower than the number for the day before. This is then depicted as 0 (zero) on the dashboard, as a negative number is confusing. This is why discrepancies arise when regional data is aggregated into national data. If you would use the negative values of the safety regions to calculate the daily number of confirmed cases, you would find the correct values. "
       }
     ]
   },
