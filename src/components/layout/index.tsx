@@ -7,6 +7,7 @@ import MaxWidth from 'components/maxWidth';
 
 import text from 'locale';
 import useMediaQuery from 'utils/useMediaQuery';
+import formatDate from 'utils/formatDate';
 
 import styles from './layout.module.scss';
 
@@ -49,6 +50,11 @@ function Layout(props: WithChildren<LayoutProps>) {
 
   const locale = getLocale();
   const showSmallLogo = useMediaQuery('(max-width: 480px)', true);
+
+  const dateInsertedUnix = Date.now();
+  const dateOfInsertion = dateInsertedUnix
+    ? formatDate(dateInsertedUnix * 1000, 'relative')
+    : undefined;
 
   return (
     <>
@@ -182,49 +188,55 @@ function Layout(props: WithChildren<LayoutProps>) {
       <footer>
         <div className={styles.footer}>
           <MaxWidth>
-            <h3>{text.nav.title}</h3>
-            <nav>
-              <ul className={styles.footerList}>
-                <li>
-                  <Link href="/">
-                    <a onClick={blur} className={styles.footerLink}>
-                      {text.nav.links.index}
+            <div className="footerColumn">
+              <h3>{text.nav.title}</h3>
+              <nav>
+                <ul className={styles.footerList}>
+                  <li>
+                    <Link href="/">
+                      <a onClick={blur} className={styles.footerLink}>
+                        {text.nav.links.index}
+                      </a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/veiligheidsregio">
+                      <a onClick={blur} className={styles.footerLink}>
+                        {text.nav.links.veiligheidsregio}
+                      </a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/over">
+                      <a onClick={blur} className={styles.footerLink}>
+                        {text.nav.links.over}
+                      </a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/verantwoording">
+                      <a onClick={blur} className={styles.footerLink}>
+                        {text.nav.links.verantwoording}
+                      </a>
+                    </Link>
+                  </li>
+                  <li>
+                    <a
+                      href={text.nav.links.meer_href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.footerLink}
+                    >
+                      {text.nav.links.meer}
                     </a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/veiligheidsregio">
-                    <a onClick={blur} className={styles.footerLink}>
-                      {text.nav.links.veiligheidsregio}
-                    </a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/over">
-                    <a onClick={blur} className={styles.footerLink}>
-                      {text.nav.links.over}
-                    </a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/verantwoording">
-                    <a onClick={blur} className={styles.footerLink}>
-                      {text.nav.links.verantwoording}
-                    </a>
-                  </Link>
-                </li>
-                <li>
-                  <a
-                    href={text.nav.links.meer_href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.footerLink}
-                  >
-                    {text.nav.links.meer}
-                  </a>
-                </li>
-              </ul>
-            </nav>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            <div className="footerColumn">
+              <h3>{text.laatst_bijgewerkt.message}</h3>
+              <p>{dateOfInsertion}</p>
+            </div>
           </MaxWidth>
         </div>
       </footer>
