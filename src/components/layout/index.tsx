@@ -7,11 +7,14 @@ import MaxWidth from 'components/maxWidth';
 
 import text from 'locale';
 import useMediaQuery from 'utils/useMediaQuery';
+import formatDate from 'utils/formatDate';
 
 import styles from './layout.module.scss';
 
 import { WithChildren } from 'types';
 import getLocale from 'utils/getLocale';
+
+import { ILastGeneratedData } from 'static-props/last-generated-data';
 
 export interface LayoutProps {
   url?: string;
@@ -25,15 +28,26 @@ export type FCWithLayout<Props = void> = React.FC<Props> & {
   getLayout: (page: React.ReactNode, pageProps: Props) => React.ReactNode;
 };
 
-export function getLayout(layoutProps: LayoutProps) {
+export function getLayoutWithMetadata(metadata: LayoutProps) {
+  return function (page: React.ReactNode, pageProps: any) {
+    const lastGenerated = pageProps.lastGenerated;
+    return getLayout(metadata, lastGenerated)(<>{page}</>);
+  };
+}
+
+export function getLayout(layoutProps: LayoutProps, lastGenerated: string) {
   return function (page: React.ReactNode): React.ReactNode {
-    return <Layout {...layoutProps}>{page}</Layout>;
+    return (
+      <Layout {...layoutProps} lastGenerated={lastGenerated}>
+        {page}
+      </Layout>
+    );
   };
 }
 
 export default Layout;
 
-function Layout(props: WithChildren<LayoutProps>) {
+function Layout(props: WithChildren<LayoutProps & ILastGeneratedData>) {
   const {
     children,
     title,
@@ -41,7 +55,9 @@ function Layout(props: WithChildren<LayoutProps>) {
     openGraphImage,
     twitterImage,
     url,
+    lastGenerated,
   } = props;
+
   const router = useRouter();
 
   // remove focus after navigation
@@ -49,6 +65,12 @@ function Layout(props: WithChildren<LayoutProps>) {
 
   const locale = getLocale();
   const showSmallLogo = useMediaQuery('(max-width: 480px)', true);
+
+  const dateTime = new Date(Number(lastGenerated) * 1000).toISOString();
+
+  const dateOfInsertion = lastGenerated
+    ? formatDate(Number(lastGenerated) * 1000, 'relative')
+    : undefined;
 
   return (
     <>
@@ -182,49 +204,57 @@ function Layout(props: WithChildren<LayoutProps>) {
       <footer>
         <div className={styles.footer}>
           <MaxWidth>
-            <h3>{text.nav.title}</h3>
-            <nav>
-              <ul className={styles.footerList}>
-                <li>
-                  <Link href="/">
-                    <a onClick={blur} className={styles.footerLink}>
-                      {text.nav.links.index}
-                    </a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/veiligheidsregio">
-                    <a onClick={blur} className={styles.footerLink}>
-                      {text.nav.links.veiligheidsregio}
-                    </a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/over">
-                    <a onClick={blur} className={styles.footerLink}>
-                      {text.nav.links.over}
-                    </a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/verantwoording">
-                    <a onClick={blur} className={styles.footerLink}>
-                      {text.nav.links.verantwoording}
-                    </a>
-                  </Link>
-                </li>
-                <li>
-                  <a
-                    href={text.nav.links.meer_href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.footerLink}
-                  >
-                    {text.nav.links.meer}
-                  </a>
-                </li>
-              </ul>
-            </nav>
+            <div className={styles.grid}>
+              <div className={styles.footerColumn}>
+                <h3>{text.nav.title}</h3>
+                <nav>
+                  <ul className={styles.footerList}>
+                    <li>
+                      <Link href="/">
+                        <a onClick={blur} className={styles.footerLink}>
+                          {text.nav.links.index}
+                        </a>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/veiligheidsregio">
+                        <a onClick={blur} className={styles.footerLink}>
+                          {text.nav.links.veiligheidsregio}
+                        </a>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/over">
+                        <a onClick={blur} className={styles.footerLink}>
+                          {text.nav.links.over}
+                        </a>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/verantwoording">
+                        <a onClick={blur} className={styles.footerLink}>
+                          {text.nav.links.verantwoording}
+                        </a>
+                      </Link>
+                    </li>
+                    <li>
+                      <a
+                        href={text.nav.links.meer_href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.footerLink}
+                      >
+                        {text.nav.links.meer}
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+              <div className={styles.footerColumn}>
+                <h3>{text.laatst_bijgewerkt.message}</h3>
+                <time dateTime={dateTime}>{dateOfInsertion}</time>
+              </div>
+            </div>
           </MaxWidth>
         </div>
       </footer>

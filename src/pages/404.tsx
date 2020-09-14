@@ -1,8 +1,10 @@
-import { getLayout, FCWithLayout } from 'components/layout';
+import { getLayoutWithMetadata, FCWithLayout } from 'components/layout';
 import MaxWidth from 'components/maxWidth';
 
 import text from 'locale';
 import styles from './over.module.scss';
+
+import getLastGeneratedData from 'static-props/last-generated-data';
 
 const NotFound: FCWithLayout = () => {
   return (
@@ -17,6 +19,7 @@ const NotFound: FCWithLayout = () => {
   );
 };
 
-NotFound.getLayout = getLayout(text.notfound_metadata);
+NotFound.getLayout = getLayoutWithMetadata(text.notfound_metadata);
+export const getStaticProps = getLastGeneratedData();
 
 export default NotFound;

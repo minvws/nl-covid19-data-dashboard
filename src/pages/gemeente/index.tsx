@@ -2,6 +2,8 @@ import { FCWithLayout } from 'components/layout';
 import { getMunicipalityLayout } from 'components/layout/MunicipalityLayout';
 import { useRouter } from 'next/router';
 
+import getLastGeneratedData from 'static-props/last-generated-data';
+
 import text from 'locale';
 import styles from 'components/chloropleth/chloropleth.module.scss';
 
@@ -59,5 +61,6 @@ const Municipality: FCWithLayout<any> = () => {
 };
 
 Municipality.getLayout = getMunicipalityLayout();
+export const getStaticProps = getLastGeneratedData();
 
 export default Municipality;
