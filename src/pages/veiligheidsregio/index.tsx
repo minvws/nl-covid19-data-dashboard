@@ -6,6 +6,8 @@ import { useRouter } from 'next/router';
 import text from 'locale';
 import styles from 'components/vx/chloropleth.module.scss';
 
+import getLastGeneratedData from 'static-props/last-generated-data';
+
 import { ReactNode } from 'react';
 
 const tooltipContent = (context: any): ReactNode => {
@@ -59,5 +61,6 @@ const SafetyRegion: FCWithLayout<any> = () => {
 };
 
 SafetyRegion.getLayout = getSafetyRegionLayout();
+export const getStaticProps = getLastGeneratedData();
 
 export default SafetyRegion;

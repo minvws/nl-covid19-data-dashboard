@@ -3,9 +3,7 @@ import { getMunicipalityLayout } from 'components/layout/MunicipalityLayout';
 import { useRouter } from 'next/router';
 import MunicipalityMap from 'components/vx/MunicipalityMap';
 
-import getLastGeneratedData, {
-  ILastGeneratedData,
-} from 'static-props/last-generated-data';
+import getLastGeneratedData from 'static-props/last-generated-data';
 
 import text from 'locale';
 import styles from 'components/vx/chloropleth.module.scss';
