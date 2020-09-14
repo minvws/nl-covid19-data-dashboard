@@ -6,6 +6,10 @@ import { Municipalities } from 'types/data';
 import useExtent from 'utils/useExtent';
 import { ILegendaItem } from '../ChloroplethLegenda';
 
+import siteText from 'locale';
+
+const NUMBER_OF_ITEMS = 5;
+
 export default function useMunicipalLegendaData(
   metric: TMunicipalityMetricName,
   gradient: [min: string, max: string]
@@ -25,7 +29,7 @@ export default function useMunicipalLegendaData(
       domain: domain,
       range: gradient,
     });
-    const steps = (max - min) / 5;
+    const steps = (max - min) / NUMBER_OF_ITEMS;
 
     const calcValue = (i: number) => {
       return Math.floor(i > 0 ? i * steps : 0);
@@ -34,12 +38,14 @@ export default function useMunicipalLegendaData(
     const legendaItems: ILegendaItem[] = [
       {
         color: '#C4C4C4',
-        label: 'Geen meldingen',
+        label:
+          siteText.positief_geteste_personen.chloropleth_legenda.geen_meldingen,
       },
     ];
-    for (let i = 0; i < 5; i++) {
+
+    for (let i = 0; i < NUMBER_OF_ITEMS; i++) {
       const value = calcValue(i);
-      const nextValue = calcValue(i + 1) - (i === 4 ? 0 : 1);
+      const nextValue = calcValue(i + 1) - (i === NUMBER_OF_ITEMS - 1 ? 0 : 1);
       const label = `${value} - ${nextValue}`;
       legendaItems.push({
         color: color(value),

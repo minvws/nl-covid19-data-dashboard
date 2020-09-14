@@ -111,6 +111,7 @@ export interface National {
   infected_people_nursery_count_daily: InfectedPeopleNurseryCountDaily;
   deceased_people_nursery_count_daily: DeceasedPeopleNurseryCountDaily;
   infected_people_clusters?: InfectedPeopleClusters;
+  infected_people_percentage?: InfectedPeoplePercentage;
   total_reported_locations: TotalReportedLocations;
   total_newly_reported_locations: TotalNewlyReportedLocations;
   infected_people_total: InfectedPeopleTotal;
@@ -198,6 +199,17 @@ export interface InfectedPeopleClusters {
 export interface InfectedPeopleClustersLastValue {
   active_clusters: number;
   cluster_average: number;
+  date_of_report_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface InfectedPeoplePercentage {
+  values: InfectedPeoplePercentageLastValue[];
+  last_value: InfectedPeoplePercentageLastValue;
+}
+export interface InfectedPeoplePercentageLastValue {
+  infected_ggd: number;
+  percentage_infected_ggd: number;
+  total_tested_ggd: number;
   date_of_report_unix: number;
   date_of_insertion_unix: number;
 }

@@ -121,7 +121,7 @@ const PostivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
 
           <MunicipalityLegenda
             metricName="positive_tested_people"
-            title="Aantal per 100.000 inwoners"
+            title={siteText.positief_geteste_personen.chloropleth_legenda.titel}
           />
         </div>
 
