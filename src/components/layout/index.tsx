@@ -14,6 +14,8 @@ import styles from './layout.module.scss';
 import { WithChildren } from 'types';
 import getLocale from 'utils/getLocale';
 
+import { ILastGeneratedData } from 'static-props/last-generated-data';
+
 export interface LayoutProps {
   url?: string;
   title: string;
@@ -45,7 +47,7 @@ export function getLayout(layoutProps: LayoutProps, lastGenerated: string) {
 
 export default Layout;
 
-function Layout(props: WithChildren<LayoutProps>) {
+function Layout(props: WithChildren<LayoutProps & ILastGeneratedData>) {
   const {
     children,
     title,

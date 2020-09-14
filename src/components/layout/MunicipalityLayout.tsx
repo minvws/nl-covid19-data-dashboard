@@ -33,13 +33,14 @@ interface IMunicipality {
   name: string;
   safetyRegion: string;
   gemcode: string;
-  lastGenerated: string;
 }
 
 export function getMunicipalityLayout() {
   return function (
     page: React.ReactNode,
-    pageProps: IMunicipalityData
+    pageProps: IMunicipalityData & {
+      lastGenerated: string;
+    }
   ): React.ReactNode {
     const lastGenerated = pageProps.lastGenerated;
     return getSiteLayout(
