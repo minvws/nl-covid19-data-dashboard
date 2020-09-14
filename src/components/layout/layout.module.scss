@@ -143,24 +143,27 @@ $language-switcher-offset: 55px;
   z-index: 4;
   position: relative;
 
-  > div {
-    display: flex;
-    flex-direction: column;
+  margin-top: 2em;
+}
 
-    p {
-      font-size: 1.125em;
-    }
+.grid {
+  display: flex;
+  flex-direction: column;
 
-    @media (min-width: 768px) {
-      flex-direction: row;
+  time {
+    font-size: 1.125em;
+  }
 
-      > div:not(:first-child) {
-        margin-left: 2em;
+  @media (min-width: 768px) {
+    flex-direction: row;
+
+    & > div:not(:first-child) {
+      margin-left: 2em;
+      h3 {
+        margin-bottom: 1.125em;
       }
     }
   }
-
-  margin-top: 2em;
 }
 
 .footerList {
