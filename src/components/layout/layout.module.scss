@@ -142,7 +142,28 @@ $language-switcher-offset: 55px;
   padding: 2em 0;
   z-index: 4;
   position: relative;
+
   margin-top: 2em;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+
+  time {
+    font-size: 1.125em;
+  }
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+
+    & > div:not(:first-child) {
+      margin-left: 2em;
+      h3 {
+        margin-bottom: 1.125em;
+      }
+    }
+  }
 }
 
 .footerList {

@@ -36,11 +36,15 @@ interface IMunicipality {
 export function getMunicipalityLayout() {
   return function (
     page: React.ReactNode,
-    pageProps: IMunicipalityData
+    pageProps: IMunicipalityData & {
+      lastGenerated: string;
+    }
   ): React.ReactNode {
-    return getSiteLayout(siteText.gemeente_metadata)(
-      <MunicipalityLayout {...pageProps}>{page}</MunicipalityLayout>
-    );
+    const lastGenerated = pageProps.lastGenerated;
+    return getSiteLayout(
+      siteText.gemeente_metadata,
+      lastGenerated
+    )(<MunicipalityLayout {...pageProps}>{page}</MunicipalityLayout>);
   };
 }
 

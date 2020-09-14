@@ -1,7 +1,10 @@
+import path from 'path';
+import fs from 'fs';
+
 import { Fragment } from 'react';
 import Head from 'next/head';
 
-import { getLayout, FCWithLayout } from 'components/layout';
+import { getLayoutWithMetadata, FCWithLayout } from 'components/layout';
 import MaxWidth from 'components/maxWidth';
 
 import styles from './over.module.scss';
@@ -17,6 +20,7 @@ interface ICijfer {
 interface StaticProps {
   props: {
     text: typeof siteText;
+    lastGenerated: string;
   };
 }
 
@@ -30,10 +34,16 @@ export async function getStaticProps(): Promise<StaticProps> {
 
   text.verantwoording.cijfers = serializedContent;
 
-  return { props: { text } };
+  const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
+  const fileContents = fs.readFileSync(filePath, 'utf8');
+  const lastGenerated = JSON.parse(fileContents).last_generated;
+
+  return { props: { text, lastGenerated } };
 }
 
-const Verantwoording: FCWithLayout<{ text: any }> = (props) => {
+const Verantwoording: FCWithLayout<{ text: any; lastGenerated: string }> = (
+  props
+) => {
   const { text } = props;
 
   return (
@@ -76,8 +86,10 @@ const Verantwoording: FCWithLayout<{ text: any }> = (props) => {
   );
 };
 
-Verantwoording.getLayout = getLayout({
+const metadata = {
   ...siteText.verantwoording_metadata,
-});
+};
+
+Verantwoording.getLayout = getLayoutWithMetadata(metadata);
 
 export default Verantwoording;
