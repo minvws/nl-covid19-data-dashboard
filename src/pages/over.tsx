@@ -9,16 +9,6 @@ import siteText from 'locale';
 
 import MDToHTMLString from 'utils/MDToHTMLString';
 
-import openGraphImageNL from 'assets/sharing/og-over.png?url';
-import twitterImageNL from 'assets/sharing/twitter-over.png?url';
-import openGraphImageEN from 'assets/sharing/og-about.png?url';
-import twitterImageEN from 'assets/sharing/twitter-about.png?url';
-import getLocale from 'utils/getLocale';
-
-const locale = getLocale();
-const openGraphImage = locale === 'nl' ? openGraphImageNL : openGraphImageEN;
-const twitterImage = locale === 'nl' ? twitterImageNL : twitterImageEN;
-
 interface IVraagEnAntwoord {
   vraag: string;
   antwoord: string;
@@ -93,8 +83,6 @@ const Over: FCWithLayout<{ text: typeof siteText }> = (props) => {
 
 Over.getLayout = getLayout({
   ...siteText.over_metadata,
-  openGraphImage,
-  twitterImage,
 });
 
 export default Over;

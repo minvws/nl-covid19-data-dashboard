@@ -9,17 +9,6 @@ import siteText from 'locale';
 
 import MDToHTMLString from 'utils/MDToHTMLString';
 
-import openGraphImageNL from 'assets/sharing/og-cijferverantwoording.png?url';
-import twitterImageNL from 'assets/sharing/twitter-cijferverantwoording.png?url';
-import openGraphImageEN from 'assets/sharing/og-data-explanation.png?url';
-import twitterImageEN from 'assets/sharing/twitter-data-explanation.png?url';
-import getLocale from 'utils/getLocale';
-
-const locale = getLocale();
-
-const openGraphImage = locale === 'nl' ? openGraphImageNL : openGraphImageEN;
-const twitterImage = locale === 'nl' ? twitterImageNL : twitterImageEN;
-
 interface ICijfer {
   cijfer: string;
   verantwoording: string;
@@ -89,8 +78,6 @@ const Verantwoording: FCWithLayout<{ text: any }> = (props) => {
 
 Verantwoording.getLayout = getLayout({
   ...siteText.verantwoording_metadata,
-  openGraphImage,
-  twitterImage,
 });
 
 export default Verantwoording;
