@@ -94,7 +94,7 @@ export default function Chloropleth<T>(props: TProps<T>) {
     hideTooltip,
   } = useTooltip<string>();
 
-  return width < 10 ? null : (
+  return (
     <>
       <svg
         width={width}

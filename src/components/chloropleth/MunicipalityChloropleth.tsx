@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { TMunicipalityMetricName } from './shared';
 
 import Chloropleth from './Chloropleth';
@@ -78,17 +79,13 @@ export default function MunicipalityChloropleth<
     ) => {
       const { gemcode } = feature.properties;
       const isSelected = gemcode === selected;
-      let className = isSelected ? styles.selectedPath : '';
-
-      if (!hasData) {
-        className += ` ${styles.noData}`;
-      }
-
-      if (safetyRegionMunicipalCodes) {
-        if (safetyRegionMunicipalCodes.indexOf(gemcode) < 0) {
-          className += ` ${styles.faded}`;
-        }
-      }
+      const isInSameRegion =
+        (safetyRegionMunicipalCodes?.indexOf(gemcode) ?? 0) > -1;
+      const className = classNames(
+        isSelected ? styles.selectedPath : undefined,
+        !hasData ? styles.noData : undefined,
+        isInSameRegion ? undefined : styles.faded
+      );
 
       const fillColor = getFillColor(gemcode);
 
