@@ -4,7 +4,7 @@ import fs from 'fs';
 import { Fragment } from 'react';
 import Head from 'next/head';
 
-import { getLayout, FCWithLayout } from 'components/layout';
+import { getLayout as getSiteLayout, FCWithLayout } from 'components/layout';
 import MaxWidth from 'components/maxWidth';
 
 import styles from './over.module.scss';
@@ -80,16 +80,19 @@ const Over: FCWithLayout<{ text: typeof siteText }> = (props) => {
             <h2>{text.over_veelgestelde_vragen.text}</h2>
             <article className={styles.faqList}>
               {text.over_veelgestelde_vragen.vragen.map(
-                (item: IVraagEnAntwoord) => (
-                  <Fragment key={`item-${item.vraag}`}>
-                    <h3>{item.vraag}</h3>
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: item.antwoord,
-                      }}
-                    />
-                  </Fragment>
-                )
+                (item: IVraagEnAntwoord) => {
+                  console.log(item);
+                  return (
+                    <Fragment key={`item-${item.vraag}`}>
+                      <h3>{item.vraag}</h3>
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: item.antwoord,
+                        }}
+                      />
+                    </Fragment>
+                  );
+                }
               )}
             </article>
           </div>
@@ -99,10 +102,21 @@ const Over: FCWithLayout<{ text: typeof siteText }> = (props) => {
   );
 };
 
-Over.getLayout = getLayout({
-  ...siteText.over_metadata,
-  openGraphImage,
-  twitterImage,
-});
+function getOverLayout() {
+  return function (page: React.ReactNode, pageProps: any) {
+    const lastGenerated = pageProps.lastGenerated;
+
+    return getSiteLayout(
+      {
+        ...siteText.over_metadata,
+        openGraphImage,
+        twitterImage,
+      },
+      lastGenerated
+    )(<>{page}</>, pageProps);
+  };
+}
+
+Over.getLayout = getOverLayout();
 
 export default Over;

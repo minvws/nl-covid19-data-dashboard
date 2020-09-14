@@ -4,8 +4,10 @@ import fs from 'fs';
 import { Fragment } from 'react';
 import Head from 'next/head';
 
-import { getLayout, FCWithLayout } from 'components/layout';
+import { getLayout as getSiteLayout, FCWithLayout } from 'components/layout';
 import MaxWidth from 'components/maxWidth';
+
+import { ILastGeneratedData } from 'static-props/last-generated-data';
 
 import styles from './over.module.scss';
 import siteText from 'locale';
@@ -95,10 +97,21 @@ const Verantwoording: FCWithLayout<{ text: any }> = (props) => {
   );
 };
 
-Verantwoording.getLayout = getLayout({
-  ...siteText.verantwoording_metadata,
-  openGraphImage,
-  twitterImage,
-});
+function getVerantwoordingLayout() {
+  return function (page: React.ReactNode, pageProps: ILastGeneratedData) {
+    const lastGenerated = pageProps.lastGenerated;
+
+    return getSiteLayout(
+      {
+        ...siteText.verantwoording_metadata,
+        openGraphImage,
+        twitterImage,
+      },
+      lastGenerated
+    )(<>{page}</>, pageProps);
+  };
+}
+
+Verantwoording.getLayout = getVerantwoordingLayout();
 
 export default Verantwoording;
