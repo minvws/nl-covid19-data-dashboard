@@ -9,7 +9,7 @@ import { ContentHeader } from 'components/layout/Content';
 
 import Getest from 'assets/test.svg';
 import formatDecimal from 'utils/formatNumber';
-import { PositiveTestedPeople } from 'types/data';
+import { PositiveTestedPeople } from 'types/data.d';
 import {
   getMunicipalityData,
   getMunicipalityPaths,

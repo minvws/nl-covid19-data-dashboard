@@ -7,7 +7,7 @@ import Ziekenhuis from 'assets/ziekenhuis.svg';
 
 import siteText from 'locale';
 
-import { ResultsPerRegion } from 'types/data';
+import { ResultsPerRegion } from 'types/data.d';
 import { LineChart } from 'components/charts/index';
 
 import {

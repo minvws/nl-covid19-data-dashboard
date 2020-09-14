@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import { SafetyRegionProperties, TRegionMetricName } from './shared';
-import { Regions } from 'types/data';
 import { CSSProperties, ReactNode, useCallback } from 'react';
 import useChartDimensions from './hooks/useChartDimensions';
 import Chloropleth from './Chloropleth';
@@ -10,6 +9,7 @@ import styles from './chloropleth.module.scss';
 import useSafetyRegionBoundingbox from './hooks/useSafetyRegionBoundingbox';
 import useChloroplethColorScale from './hooks/useChloroplethColorScale';
 import useSafetyRegionData from './hooks/useSafetyRegionData';
+import { Regions } from 'types/data.d';
 
 export type TProps<
   T extends TRegionMetricName,

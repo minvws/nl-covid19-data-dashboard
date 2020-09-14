@@ -4,7 +4,7 @@ import {
   SewerValue,
   AverageSewerInstallationPerRegionItem,
   SewerValueElement,
-} from 'types/data';
+} from 'types/data.d';
 import replaceVariablesInText from 'utils/replaceVariablesInText';
 import formatDate from 'utils/formatDate';
 import formatNumber from 'utils/formatNumber';

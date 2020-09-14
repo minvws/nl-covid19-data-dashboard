@@ -1,7 +1,7 @@
 import { FeatureCollection, MultiPolygon } from 'geojson';
 import { useMemo } from 'react';
 import useSWR from 'swr';
-import { Regions } from 'types/data';
+import { Regions } from 'types/data.d';
 import useExtent from 'utils/useExtent';
 import { SafetyRegionProperties, TRegionMetricName } from '../shared';
 

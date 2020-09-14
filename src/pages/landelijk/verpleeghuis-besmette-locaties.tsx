@@ -13,7 +13,7 @@ import siteText from 'locale';
 import {
   TotalNewlyReportedLocations,
   TotalReportedLocations,
-} from 'types/data';
+} from 'types/data.d';
 
 import getNlData, { INationalData } from 'static-props/nl-data';
 

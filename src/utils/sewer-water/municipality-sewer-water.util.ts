@@ -3,7 +3,7 @@ import {
   ResultsPerSewerInstallationPerMunicipalityItem,
   SewerMeasurementsLastValue,
   ResultsPerSewerInstallationPerMunicipalityLastValue,
-} from 'types/data';
+} from 'types/data.d';
 import formatDate from 'utils/formatDate';
 import formatNumber from 'utils/formatNumber';
 import { XrangePointOptionsObject } from 'highcharts';

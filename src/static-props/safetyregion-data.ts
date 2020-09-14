@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-import { Regionaal } from 'types/data';
+import { Regionaal } from 'types/data.d';
 
 import safetyRegions from 'data';
 

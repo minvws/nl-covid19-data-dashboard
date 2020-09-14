@@ -7,7 +7,7 @@ import Ziekenhuis from 'assets/ziekenhuis.svg';
 
 import siteText from 'locale';
 
-import { HospitalAdmissions } from 'types/data';
+import { HospitalAdmissions } from 'types/data.d';
 import { LineChart } from 'components/charts/index';
 import {
   getMunicipalityData,

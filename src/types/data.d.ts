@@ -213,17 +213,6 @@ export interface InfectedPeoplePercentageLastValue {
   date_of_report_unix: number;
   date_of_insertion_unix: number;
 }
-export interface InfectedPeoplePercentage {
-  values: InfectedPeoplePercentageLastValue[];
-  last_value: InfectedPeoplePercentageLastValue;
-}
-export interface InfectedPeoplePercentageLastValue {
-  infected_ggd: number;
-  percentage_infected_ggd: number;
-  total_tested_ggd: number;
-  date_of_report_unix: number;
-  date_of_insertion_unix: number;
-}
 export interface TotalReportedLocations {
   values: TotalReportedLocationsLastValue[];
   last_value: TotalReportedLocationsLastValue;
@@ -456,7 +445,7 @@ export interface Regions {
   code: 'REGIONS';
   hospital_admissions: RegionHospitalAdmissions[];
   positive_tested_people: RegionPositiveTestedPeople[];
-  deceased: RegionDeceased[];
+  deceased?: RegionDeceased[];
   escalation_levels: EscalationLevels[];
 }
 export interface RegionHospitalAdmissions {

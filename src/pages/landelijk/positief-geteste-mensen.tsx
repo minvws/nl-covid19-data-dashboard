@@ -16,7 +16,7 @@ import {
   InfectedPeopleDeltaNormalized,
   InfectedPeopleTotal,
   IntakeShareAgeGroups,
-} from 'types/data';
+} from 'types/data.d';
 
 import getNlData, { INationalData } from 'static-props/nl-data';
 import MunicipalityChloropleth from 'components/chloropleth/MunicipalityChloropleth';

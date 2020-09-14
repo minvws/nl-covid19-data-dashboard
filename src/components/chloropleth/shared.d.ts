@@ -1,5 +1,5 @@
 import { FeatureCollection, MultiPolygon } from 'geojson';
-import { Municipalities, Regions } from 'types/data';
+import { Municipalities, Regions } from 'types/data.d';
 
 type TMetricHolder<T> = keyof Omit<
   T,

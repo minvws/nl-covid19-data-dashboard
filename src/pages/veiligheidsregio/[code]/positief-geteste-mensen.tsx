@@ -8,7 +8,7 @@ import siteText from 'locale';
 
 import Getest from 'assets/test.svg';
 import formatDecimal from 'utils/formatNumber';
-import { ResultsPerRegion } from 'types/data';
+import { ResultsPerRegion } from 'types/data.d';
 
 import {
   getSafetyRegionData,
