@@ -68,6 +68,7 @@
       "text": "Nivel Zorgregistraties Eerste Lijn"
     },
     "estimated_amount_of_patients": "Geschat aantal patiënten met verdenking van COVID-19:",
+    "titel_sidebar": "Patiënten met eerste melding van COVID-19 klachten bij de huisarts per 100.000 inwoners",
     "titel": "Aantal patiënten met eerste melding van COVID-19 klachten bij de huisarts",
     "pagina_toelichting": "Elke week berekent het Nivel aan de hand van de geregistreerde klachten door huisartsen, het aantal patiënten dat voor de eerste keer contact opneemt met de huisartsenpraktijk vanwege COVID-19-achtige klachten.",
     "barscale_titel": "Aantal patiënten met eerste melding van COVID-19 klachten bij de huisarts",
@@ -102,6 +103,7 @@
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     },
+    "titel_sidebar": "Positief geteste mensen per 100.000 inwoners",
     "titel": "Positief geteste mensen",
     "pagina_toelichting": "Door het aantal positief geteste mensen bij te houden krijgen we een duidelijk beeld van hoe snel het virus zich verspreid voordat het de intensive care bereikt. Hierdoor blijven we voorbereid.",
     "barscale_titel": "Gemiddeld aantal positief geteste mensen per 100.00 inwoners",
@@ -143,6 +145,7 @@
     }
   },
   "besmettelijke_personen": {
+    "titel_sidebar": "Aantal besmettelijke mensen per 100.000 inwoners",
     "title": "Aantal besmettelijke mensen",
     "datums": "Waarde van {{dateOfReport}}. Wordt wekelijks bijgewerkt.",
     "bron": {
@@ -548,7 +551,7 @@
     }
   },
   "veiligheidsregio_positief_geteste_personen": {
-    "titel_sidebar": "Positief geteste mensen",
+    "titel_sidebar": "Positief geteste mensen per 100.000 inwoners",
     "titel": "Positief geteste mensen in {{safetyRegion}}",
     "pagina_toelichting": "Door het aantal positief geteste mensen bij te houden krijgen we een duidelijk beeld van hoe snel het virus zich verspreid voordat het de intensive care bereikt. Hierdoor blijven we voorbereid.",
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -630,7 +633,7 @@
     }
   },
   "gemeente_positief_geteste_personen": {
-    "titel_sidebar": "Positief geteste mensen",
+    "titel_sidebar": "Positief geteste mensen per 100.000 inwoners",
     "titel": "Positief geteste mensen in {{municipality}}",
     "pagina_toelichting": "Door het aantal positief geteste mensen bij te houden krijgen we een duidelijk beeld van hoe snel het virus zich verspreid voordat het de intensive care bereikt. Hierdoor blijven we voorbereid.",
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",

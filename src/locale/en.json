@@ -68,6 +68,7 @@
       "text": "Nivel Primary Care Database"
     },
     "estimated_amount_of_patients": "Estimated number of patients with symptoms that could indicate COVID-19:",
+    "titel_sidebar": "Patiënten met eerste melding van COVID-19 klachten bij de huisarts per 100.000 inwoners",
     "titel": "Estimated number of patients who contact the general practitioner for the first time with COVID-19 symptoms",
     "pagina_toelichting": "Based on the registered diagnoses by general practitioners every week, NIVEL calculates the number patients who contact the general practitioner for the first time due to COVID-19 like symptoms.",
     "barscale_titel": "Estimated number of patients who contact the general practitioner for the first time with COVID-19 symptoms",
@@ -102,6 +103,7 @@
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     },
+    "titel_sidebar": "Positief geteste mensen per 100.000 inwoners",
     "titel": "Number of confirmed cases",
     "pagina_toelichting": "By keeping track of the number of confirmed cases, we are able to determine the rate at which the virus is spreading before it reaches the intensive care. This keeps us prepared.",
     "barscale_titel": "Average number of confirmed cases per 100,000 inhabitants per day.",
@@ -144,6 +146,7 @@
   },
   "besmettelijke_personen": {
     "title": "Number of infectious people",
+    "titel_sidebar": "Aantal besmettelijke mensen per 100.000 inwoners",
     "datums": "Value of {{dateOfReport}}. Is updated on a weekly basis.",
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
