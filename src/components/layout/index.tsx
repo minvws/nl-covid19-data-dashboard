@@ -13,6 +13,7 @@ import styles from './layout.module.scss';
 
 import { WithChildren } from 'types';
 import getLocale from 'utils/getLocale';
+import { ILastGeneratedData } from 'static-props/last-generated-data';
 
 export interface LayoutProps {
   url?: string;
@@ -28,9 +29,10 @@ export type FCWithLayout<Props = void> = React.FC<Props> & {
 };
 
 export function getLayout(layoutProps: LayoutProps, lastGenerated: string) {
-  return function (page: React.ReactNode): React.ReactNode {
+  return function (page: React.ReactNode, pageProps: any): React.ReactNode {
+    const lastGeneratedProp = pageProps?.lastGenerated || lastGenerated;
     return (
-      <Layout {...layoutProps} lastGenerated={lastGenerated}>
+      <Layout {...layoutProps} {...pageProps} lastGenerated={lastGeneratedProp}>
         {page}
       </Layout>
     );
