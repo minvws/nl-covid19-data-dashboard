@@ -28,7 +28,7 @@ function useMunicipalityData<
   metricName: T | undefined,
   featureCollection: FeatureCollection<MultiPolygon, MunicipalityProperties>
 ): Record<string, ReturnType> {
-  const { data } = useSWR<Municipalities>('/json/municipalities.json');
+  const { data } = useSWR<Municipalities>('/json/MUNICIPALITIES.json');
 
   const metricItems: ItemType[] | undefined =
     metricName && data ? (data[metricName] as ItemType[]) : undefined;

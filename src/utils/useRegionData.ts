@@ -20,7 +20,7 @@ export default function useRegionData<
   featureCollection: FeatureCollection<MultiPolygon, SafetyRegionProperties>,
   metricProperty?: string
 ): Record<string, K[number] & { value: number } & SafetyRegionProperties> {
-  const { data } = useSWR<Regions>('/json/regions.json');
+  const { data } = useSWR<Regions>('/json/REGIONS.json');
 
   const metricItems = metricName && data ? data[metricName] : undefined;
   metricProperty = metricProperty ?? metricName;
