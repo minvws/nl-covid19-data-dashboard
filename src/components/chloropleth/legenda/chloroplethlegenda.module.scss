@@ -1,4 +1,12 @@
 .legendaItem {
   display: flex;
   flex-direction: row;
+
+  &:first-child {
+    width: 40x;
+    height: 34px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    margin-right: 0.5em;
+  }
 }

@@ -25,7 +25,8 @@ export default function ChloroplethLegenda(props: TProps) {
       <Legenda>
         {items.map((item) => (
           <li key={item.color} className={styles.legendaItem}>
-            {item.label}
+            <div style={{ backgroundColor: item.color }}></div>
+            <div>{item.label}</div>
           </li>
         ))}
       </Legenda>
