@@ -37,9 +37,7 @@ export default NationalLayout;
 export function getNationalLayout() {
   return function (
     page: React.ReactNode,
-    pageProps: INationalData & {
-      lastGenerated: string;
-    }
+    pageProps: INationalData
   ): React.ReactNode {
     return getSiteLayout(
       siteText.nationaal_metadata,

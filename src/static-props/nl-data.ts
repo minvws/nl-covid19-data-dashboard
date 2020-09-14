@@ -5,6 +5,7 @@ import { National } from 'types/data';
 
 export interface INationalData {
   data: National;
+  lastGenerated: string;
 }
 
 interface IProps {
@@ -37,7 +38,7 @@ export default function getNlData(): () => IProps {
   return function () {
     const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
     const fileContents = fs.readFileSync(filePath, 'utf8');
-    const data = JSON.parse(fileContents);
+    const data = JSON.parse(fileContents) as National;
 
     const lastGenerated = data.last_generated;
 
