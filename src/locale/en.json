@@ -92,8 +92,8 @@
     "linechart_titel": "Progression in hospital admissions over time",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "chloropleth_legenda": {
-      "titel": "Ziekenhuis opnames",
-      "geen_meldingen": "Geen meldingen"
+      "titel": "Hospital admissions",
+      "geen_meldingen": "No reported admissions"
     }
   },
   "positief_geteste_personen": {
@@ -138,8 +138,8 @@
     "cluster_linechart_titel": "Progression of active clusters over time",
     "cluster_linechart_toelichting": "---",
     "chloropleth_legenda": {
-      "titel": "Aantal per 100.000 inwoners",
-      "geen_meldingen": "Geen meldingen"
+      "titel": "Number per 100.000 inhabitants",
+      "geen_meldingen": "No confirmed cases"
     }
   },
   "besmettelijke_personen": {
@@ -178,7 +178,7 @@
     "barscale_titel": "Most recent reproduction number",
     "barscale_toelichting": "Number of people infected by one infectious person.",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
-    "extra_uitleg": "The reproduction number shows how fast the virus is spreading. The number shows how many people are on average infected by one patient with COVID-19. The number of transmissions remains more or less constant when the reproduction number is 1, declines when it is less than 1 and increases when the number is above 1.",
+    "extra_uitleg": "The reproduction number shows how fast the virus is spreading. This number shows how many people are on average infected by one patient with COVID-19. The number of transmissions remains more or less constant when the reproduction number is 1, declines when it is less than 1 and increases when the number is above 1.",
     "linechart_titel": "Progression over time"
   },
   "overige_gegevens": {
@@ -193,7 +193,7 @@
       {
         "icon": "/images/Zelfrapportagegegevens.png",
         "text": "Self-report data (Infectieradar)",
-        "content": "The RIVM monitors the spread of infectious diseases in many different ways. This is also the case for COVID-19. One of these ways is to look at persons exhibiting symptoms that could indicate an infection. The RIVM does this with the Infectionradar.\n\nEveryone in the Netherlands can participate in the Infectionradar. Participants submit once a week if they have (had) a fevr or other symptoms. Even if participants don't have any symptoms they pass this on to us. This way, signals of an increase or decrease in the virus are picked up earlier."
+        "content": "The RIVM monitors the spread of infectious diseases in many ways. This is also the case for COVID-19. One of these ways is to look at persons exhibiting symptoms that could indicate an infection. The RIVM does this with the Infectieradar.\n\nEveryone in the Netherlands can take part in the Infectieradar. Participants self-report once a week if they have (had) a fever or other symptoms. Even if participants don't have any symptoms they pass this on to us. This way, signals of an increase or decrease in the spread of the virus are picked up earlier."
       },
       {
         "icon": "/images/GGD-contactonderzoeken.png",
@@ -252,7 +252,7 @@
     "extra_uitleg": "Number of confirmed cases in nursing homes per day.",
     "pagina_toelichting": "Number of confirmed cases in nursing homes per day. This number is an estimation of the number confirmed cases in nursing home inhabitants.",
     "linechart_titel": "Progression over time",
-    "barscale_screenreader_text": "{{value}} positief geteste bewoners."
+    "barscale_screenreader_text": "{{value}} Number of residents who tested positive (confirmed cases)."
   },
   "verpleeghuis_oversterfte": {
     "datums": "Value of  {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -283,7 +283,7 @@
       "href": "https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater"
     },
     "titel": "Sewage water examination",
-    "pagina_toelichting": "Number of virus particles in one milliliter of sewage water, collected from about 80 sites in the Netherlands. The national value is based on the total number of virus particles that is found in a week, divided by the number of sites where the data is collected. From September onwards, the number of sampling sites will be increased to more than 300.",
+    "pagina_toelichting": "Number of virus particles in one milliliter of sewage water, collected from about 80 sites in the Netherlands. The national value is based on the total number of virus particles that is found in a week, divided by the number of sites where the data is collected. From September onwards the number of sampling sites will be increased to more than 300.",
     "barscale_titel": "Average number of virus particles in one milliliter of sewage water",
     "extra_uitleg": "The national value is based on the total number of virus particles that is found in a week, divided by the number of sites where the data is collected.",
     "barscale_screenreader_text": "{{value}} virus particles in one milliliter of sewage water, collected from 28 locations in the Netherlands.",
@@ -362,7 +362,7 @@
       },
       {
         "vraag": "Why do I find a different value for the total number of confirmed cases (people who tested positive) as shown on the site, if I add all the reported confirmed cases per safety region? ",
-        "antwoord": "We calculate the increase in the number of confirmed cases (people who tested positive) by deducting  the current day’s cumulative number of confirmed cases reported from the cumulative number reported the day before. Any corrections to historical data, such as double counting, are processed by the RIVM on the day the error was discovered. This means the number of new cases reported for that day is lower than the actual number, but this is offset by the numbers being too high on previous days. Because of such corrections, it is possible for the current day’s cumulative number to be lower than the number for the day before. This is then depicted as 0 (zero) on the dashboard, as a negative number is confusing. This is why discrepancies arise when regional data is aggregated into national data. If you would use the negative values of the safety regions to calculate the daily number of confirmed cases, you would find the correct values. "
+        "antwoord": "We calculate the increase in the number of confirmed cases (people who tested positive) by deducting the current day’s cumulative number of confirmed cases reported from the cumulative number reported the day before. Any corrections to historical data, such as double counting, are processed by the RIVM on the day the error was discovered. This means the number of new cases reported for that day is lower than the actual number, but this is offset by the numbers being too high on previous days. Because of such corrections, it is possible for the current day’s cumulative number to be lower than the number for the day before. This is then depicted as 0 (zero) on the dashboard, as a negative number is confusing. This is why discrepancies arise when regional data is aggregated into national data. If you would use the negative values of the safety regions to calculate the daily number of confirmed cases, you would find the correct values. "
       }
     ]
   },
@@ -375,7 +375,7 @@
     "cijfers": [
       {
         "cijfer": "Update of 11 August on the peak of the number of confirmed cases",
-        "verantwoording": "Due to technical reasons, during the period of July 14 to August 9, the municipal health service (GGD) was not able to send of the all confirmed cases to RIVM. This backlog was added to the data on the 9th and 10th of August. There were 160 confirmed cases in total. 9 were reported on August 9th, and 151 on August 10th. \n\nThe distribution of these 160 confirmed cases over the safety regions is as follows:\n\n- Amsterdam-Amstelland: 8\n- Flevoland: 30\n- Friesland: 8\n- Groningen: 1\n- Hollands Middle: 26\n- Rotterdam-Rijnmond: 7\n- Middle- en West-Brabant: 27\n- Zaanstreek-Waterland: 8\n- Zeeland: 23\n- South-Limburg: 14\n- Middle Gelderland: 7\n- Unknown: 1"
+        "verantwoording": "Due to technical reasons, during the period of July 14 to August 9, the municipal health service (GGD) was not able to send all the reports of confirmed cases to RIVM. This backlog was added to the data on the 9th and 10th of August. There were 160 confirmed cases in total. 9 were reported on August 9th, and 151 on August 10th. \n\nThe distribution of these 160 confirmed cases over the safety regions is as follows:\n\n- Amsterdam-Amstelland: 8\n- Flevoland: 30\n- Friesland: 8\n- Groningen: 1\n- Hollands Middle: 26\n- Rotterdam-Rijnmond: 7\n- Middle- en West-Brabant: 27\n- Zaanstreek-Waterland: 8\n- Zeeland: 23\n- South-Limburg: 14\n- Middle Gelderland: 7\n- Unknown: 1"
       },
       {
         "cijfer": "Update of 31 July on the alert value for number of infectious people",
@@ -387,7 +387,7 @@
       },
       {
         "cijfer": "Hospital admissions",
-        "verantwoording": "Deze gegevens worden dagelijks aangeleverd als open data door het [RIVM](https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_cumulatief.json). Het bestand wordt dagelijks om 10:00 online gezet en registreert het aantal ziekenhuisopnames in de afgelopen 24 uur.\n\nSinds 1 mei 2020 worden alleen opnames meegenomen waarbij niet is aangegeven dat de opname om een andere reden dan COVID-19 was. Dit geeft weer hoeveel mensen ernstig ziek zijn door COVID-19. Dit getal is een zo goed mogelijke indicator van de epidemie.\n\nHet bronbestand registreert op gemeenteniveau. Om tot landelijke gegevens te komen tellen we alle meldingen per gemeente bij elkaar op. Om deze gegevens te vertalen naar het niveau van de veiligheidsregio’s wordt [deze CBS-indeling](https://opendata.cbs.nl/#/CBS/nl/dataset/84721NED/table?dl=3A154) gebruikt. \n\nDeze dataset is geëxporteerd en opgeslagen als een JSON-bestand. Het gaat dan om de versie van de dataset zoals beschikbaar op 10 april 2020 (laatste publicatie bij tijde van schrijven van deze verantwoording). \n\nUit de data van het bronbestand wordt het gemiddelde berekend van de laatste drie dagen, dus inclusief de opnames t/m 10:00 vandaag. Door de waarden van elke dag (vandaag, gisteren en eergisteren) bijeen te tellen, te delen door drie en de uitkomst hiervan af te ronden naar één cijfer achter de komma komen we tot het gemiddelde.\n\nDe datum die gebruikt wordt is de datum van melding, omdat deze meer actuele informatie geeft dan de datum van test wanneer iemand bewezen Covid-19 heeft. \n\nOmdat ons doel vroegsignalering is baseren we ons op de meest recente gegevens en de datum van melding. Dat is niet hetzelfde als de datum waarop mensen zijn getest. Dit leidt wel tot een overschatting van het aantal ziekenhuisopnames. Voor de cijfers in het verleden waarin deze cijfers zijn gecorrigeerd kunt u de RIVM website [raadplegen](https://www.rivm.nl/coronavirus-covid-19/grafieken)."
+        "verantwoording": "These figures are supplied daily as open data by the [RIVM](https://data.rivm.nl/covid-19/COVID-19_prevalentie.json). The file is uploaded daily at 10:00 and it represents the number of hospital admissions in the past 24 hours.\n\nSince May 1st 2020 only hospital admissions are included where it was not indicated that the admission was due to a reason other than COVID-19. This represents the number of seriously ill persons due to COVID-19. Dit number is one of the best possible indicators of the epidemic. \n\nThe source file registers on a municipal level. To get to national figures the confirmed cases per municipality are added to each other. To translate these figures to safety regions, the [CBS classification](https://opendata.cbs.nl/#/CBS/nl/dataset/84721NED/table?dl=3A154) is used.\n\nThis dataset is exported and saved as a JSON file. The last available dataset was available on April 10th 2020.\n\nFrom the data of the source file an average of the past three days is calculated, so including the admissions until 10:00 today. By totalling the values of each day (today, yesterday and the day before yesterday), dividing by three and rounding to the nearest whole number we calculate our average.\n\nThe date that is used is the date that someone reports for the test, because this is more actual than the date of the test when someone is a confirmed case.\n\nBeacause are goal is early detection we focus on the most recent figures and the date of reporting. This is not the same date as the date of testing. This leads to an overestimation of the amount of hospital admissions. To see corrected results you can visit the [RIVM website](https://www.rivm.nl/coronavirus-covid-19/grafieken)."
       },
       {
         "cijfer": "Number of confirmed cases",
@@ -594,7 +594,7 @@
   "veiligheidsregio_rioolwater_metingen": {
     "titel_sidebar": "Sewage water examination",
     "titel": "Sewage water examination in {{safetyRegion}}",
-    "pagina_toelichting": "Number of virus particles in one milliliter of sewage water, collected from about 80 sites in the Netherlands. The national value is based on the total number of virus particles that is found in a week, divided by the number of sites where the data is collected. From September onwards, the number of sampling sites will be increased to more than 300.",
+    "pagina_toelichting": "Number of virus particles in one milliliter of sewage water, collected from about 80 sites in the Netherlands. The national value is based on the total number of virus particles that is found in a week, divided by the number of sites where the data is collected. From September onward the number of sampling sites will be increased to more than 300.",
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis. ",
     "screen_reader_graph_content": "{{value}} virus particles in one milliliter of sewage water.",
     "barscale_titel": "Average number of virus particles in one milliliter of sewage water",
