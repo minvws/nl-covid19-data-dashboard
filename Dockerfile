@@ -6,7 +6,7 @@ RUN yarn
 COPY . .
 
 # Validation stage
-RUN yarn validate-json && generate-typescript
+RUN yarn validate-json && yarn generate-typescript
 
 # Stage 1 - Build NL application
 FROM node:12 as react-build-nl
