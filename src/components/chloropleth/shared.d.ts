@@ -8,7 +8,7 @@ type TMetricHolder<T> = keyof Omit<
 
 export type TMunicipalityMetricName = TMetricHolder<Municipalities>;
 
-export type TRegionMetricName = TMetricHolder<Regions>;
+export type TRegionMetricName = TMetricHolder<Omit<Regions, 'deceased'>>;
 
 export interface SafetyRegionProperties {
   vrcode: string;
