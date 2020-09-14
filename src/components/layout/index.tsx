@@ -1,13 +1,16 @@
 import React from 'react';
-
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import styles from './layout.module.scss';
+import SEOHead from 'components/seoHead';
 import MaxWidth from 'components/maxWidth';
+
 import text from 'locale';
 import useMediaQuery from 'utils/useMediaQuery';
-import SEOHead from 'components/seoHead';
+
+import styles from './layout.module.scss';
+
+import { WithChildren } from 'types';
 import getLocale from 'utils/getLocale';
 
 export interface LayoutProps {
@@ -18,11 +21,19 @@ export interface LayoutProps {
   twitterImage?: string;
 }
 
-export type FunctionComponentWithLayout<P = void> = React.FC<P> & {
-  getLayout: (seoProps?: LayoutProps) => (page: any) => any;
+export type FCWithLayout<Props = void> = React.FC<Props> & {
+  getLayout: (page: React.ReactNode, pageProps: Props) => React.ReactNode;
 };
 
-const Layout: FunctionComponentWithLayout<LayoutProps> = (props) => {
+export function getLayout(layoutProps: LayoutProps) {
+  return function (page: React.ReactNode): React.ReactNode {
+    return <Layout {...layoutProps}>{page}</Layout>;
+  };
+}
+
+export default Layout;
+
+function Layout(props: WithChildren<LayoutProps>) {
   const {
     children,
     title,
@@ -109,6 +120,7 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = (props) => {
                   <a
                     onClick={blur}
                     className={
+                      router.pathname.indexOf('/landelijk') === 0 ||
                       router.pathname === '/'
                         ? styles.link + ' ' + styles.active
                         : styles.link
@@ -119,16 +131,30 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = (props) => {
                 </Link>
               </li>
               <li>
-                <Link href="/regio">
+                <Link href="/veiligheidsregio">
                   <a
                     onClick={blur}
                     className={
-                      router.pathname == '/regio'
+                      router.pathname.indexOf('/veiligheidsregio') === 0
                         ? styles.link + ' ' + styles.active
                         : styles.link
                     }
                   >
-                    {text.nav.links.regio}
+                    {text.nav.links.veiligheidsregio}
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/gemeente">
+                  <a
+                    onClick={blur}
+                    className={
+                      router.pathname.indexOf('/gemeente') === 0
+                        ? styles.link + ' ' + styles.active
+                        : styles.link
+                    }
+                  >
+                    {text.nav.links.gemeente}
                   </a>
                 </Link>
               </li>
@@ -167,9 +193,9 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = (props) => {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/regio">
+                  <Link href="/veiligheidsregio">
                     <a onClick={blur} className={styles.footerLink}>
-                      {text.nav.links.regio}
+                      {text.nav.links.veiligheidsregio}
                     </a>
                   </Link>
                 </li>
@@ -204,12 +230,4 @@ const Layout: FunctionComponentWithLayout<LayoutProps> = (props) => {
       </footer>
     </>
   );
-};
-
-Layout.getLayout = (seoProps) => (page) => (
-  // ???
-  // @ts-ignore
-  <Layout {...seoProps}>{page}</Layout>
-);
-
-export default Layout;
+}

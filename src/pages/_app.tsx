@@ -1,12 +1,10 @@
+import '@reach/combobox/styles.css';
 import './index.css';
 import 'scss/style.scss';
 
-import 'components/collapse/collapse.scss';
 import 'components/legenda/legenda.scss';
-import 'components/dateReported/dateReported.scss';
-import 'components/graphContainer/graphContainer.scss';
-import 'components/graphContent/graphContent.scss';
 import 'components/lineChart/lineChart.scss';
+import 'components/comboBox/comboBox.scss';
 
 // Import Preact DevTools in development
 if (process.env.NODE_ENV === 'development') {
@@ -28,9 +26,12 @@ interface IProps {
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
+export default MyApp;
+
 function MyApp(props: IProps): React.ReactElement {
   const { Component, pageProps } = props;
-  const getLayout = Component.getLayout || ((page: any) => page);
+  const page = (page: React.ReactNode) => page;
+  const getLayout = Component.getLayout || page;
 
   useEffect(() => {
     const handleRouteChange = () => piwik.pageview();
@@ -47,9 +48,7 @@ function MyApp(props: IProps): React.ReactElement {
         fetcher,
       }}
     >
-      {getLayout(<Component {...pageProps} />)}
+      {getLayout(<Component {...pageProps} />, pageProps)}
     </SWRConfig>
   );
 }
-
-export default MyApp;

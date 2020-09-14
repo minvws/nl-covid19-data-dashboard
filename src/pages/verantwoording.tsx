@@ -1,24 +1,13 @@
 import { Fragment } from 'react';
 import Head from 'next/head';
 
-import Layout, { FunctionComponentWithLayout } from 'components/layout';
+import { getLayout, FCWithLayout } from 'components/layout';
 import MaxWidth from 'components/maxWidth';
 
 import styles from './over.module.scss';
 import siteText from 'locale';
 
 import MDToHTMLString from 'utils/MDToHTMLString';
-
-import openGraphImageNL from 'assets/sharing/og-cijferverantwoording.png?url';
-import twitterImageNL from 'assets/sharing/twitter-cijferverantwoording.png?url';
-import openGraphImageEN from 'assets/sharing/og-data-explanation.png?url';
-import twitterImageEN from 'assets/sharing/twitter-data-explanation.png?url';
-import getLocale from 'utils/getLocale';
-
-const locale = getLocale();
-
-const openGraphImage = locale === 'nl' ? openGraphImageNL : openGraphImageEN;
-const twitterImage = locale === 'nl' ? twitterImageNL : twitterImageEN;
 
 interface ICijfer {
   cijfer: string;
@@ -44,7 +33,7 @@ export async function getStaticProps(): Promise<StaticProps> {
   return { props: { text } };
 }
 
-const Verantwoording: FunctionComponentWithLayout<{ text: any }> = (props) => {
+const Verantwoording: FCWithLayout<{ text: any }> = (props) => {
   const { text } = props;
 
   return (
@@ -87,10 +76,8 @@ const Verantwoording: FunctionComponentWithLayout<{ text: any }> = (props) => {
   );
 };
 
-Verantwoording.getLayout = Layout.getLayout({
+Verantwoording.getLayout = getLayout({
   ...siteText.verantwoording_metadata,
-  openGraphImage,
-  twitterImage,
 });
 
 export default Verantwoording;

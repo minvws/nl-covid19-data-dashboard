@@ -1,0 +1,57 @@
+@import 'scss/variables.scss';
+
+.defaultTooltip {
+  background-color: white;
+  border: 1px solid lightgrey;
+  padding: 0.5em;
+}
+
+.chloroplethContainer {
+  position: relative;
+  height: 400px;
+  background: transparent;
+}
+
+.svgMap {
+  display: block;
+  background: transparent;
+
+  path {
+    pointer-events: all;
+    stroke: grey;
+    stroke-width: 0.5;
+  }
+
+  path:hover {
+    stroke-width: 2;
+    stroke: #fff;
+    z-index: 1000;
+  }
+
+  path.selectedPath {
+    stroke: black;
+    stroke-width: 3;
+  }
+
+  path.noData:hover {
+    stroke: black;
+  }
+
+  path.faded {
+    fill-opacity: 0.2;
+    stroke-opacity: 0.2;
+  }
+
+  path.overlay {
+    pointer-events: none;
+    stroke: black;
+    stroke-width: 1;
+    fill: transparent;
+  }
+
+  path.overlay:hover {
+    stroke: black;
+    stroke-width: 1;
+    fill: transparent;
+  }
+}

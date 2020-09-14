@@ -1,5 +1,3 @@
-import { FunctionComponent } from 'react';
-
 import styles from './lastUpdated.module.scss';
 import siteText from 'locale';
 import formatDate from 'utils/formatDate';
@@ -9,7 +7,9 @@ type LastUpdatedProps = {
   loadingText?: string | null;
 };
 
-const LastUpdated: FunctionComponent<LastUpdatedProps> = (props) => {
+export default LastUpdated;
+
+function LastUpdated(props: LastUpdatedProps) {
   const { lastUpdated, loadingText } = props;
 
   let parsedLastUpdated = lastUpdated;
@@ -31,6 +31,4 @@ const LastUpdated: FunctionComponent<LastUpdatedProps> = (props) => {
       )}
     </p>
   );
-};
-
-export default LastUpdated;
+}

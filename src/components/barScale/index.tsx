@@ -1,5 +1,5 @@
 import styles from './styles.module.scss';
-import { useRef, FunctionComponent } from 'react';
+import { useRef } from 'react';
 import formatNumber from 'utils/formatNumber';
 import ScreenReaderOnly from 'components/screenReaderOnly';
 import replaceVariablesInText from 'utils/replaceVariablesInText';
@@ -22,9 +22,12 @@ type BarscaleProps = {
   id: string;
   screenReaderText: string;
   rangeKey: string;
+  showAxis?: boolean;
 };
 
-const BarScale: FunctionComponent<BarscaleProps> = ({
+export default BarScale;
+
+function BarScale({
   min,
   max,
   value,
@@ -33,13 +36,16 @@ const BarScale: FunctionComponent<BarscaleProps> = ({
   id,
   screenReaderText,
   rangeKey,
-}) => {
+  showAxis,
+}: BarscaleProps) {
   // Generate a random ID used for clipPath and linearGradient ID's.
   const rand = useRef(Math.random().toString(36).substring(2, 15));
 
   const { scale: x } = useDynamicScale(min, max, rangeKey, value);
 
   const text: typeof siteText.common.barScale = siteText.common.barScale;
+
+  const clipPathId = useRef(`cut-off${id}-${rand.current}`);
 
   if (!x) {
     return null;
@@ -71,7 +77,7 @@ const BarScale: FunctionComponent<BarscaleProps> = ({
       <div className={styles.root} aria-hidden="true">
         <svg xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <clipPath id={`cut-off${id}-${rand.current}`}>
+            <clipPath id={clipPathId.current}>
               <rect
                 x="0"
                 y={36}
@@ -104,7 +110,7 @@ const BarScale: FunctionComponent<BarscaleProps> = ({
               ry="2"
               width="100%"
               height="10"
-              clipPath={`url(#cut-off${id}-${rand.current})`}
+              clipPath={`url(#${clipPathId.current})`}
               fill={`url(#barColor${id}-${rand.current})`}
             />
             <rect
@@ -136,7 +142,7 @@ const BarScale: FunctionComponent<BarscaleProps> = ({
             >{`${formatNumber(value)}`}</text>
           </g>
 
-          {signaalwaarde && (
+          {signaalwaarde && showAxis && (
             <g>
               <line
                 x1={`${x(signaalwaarde)}%`}
@@ -157,23 +163,23 @@ const BarScale: FunctionComponent<BarscaleProps> = ({
             </g>
           )}
 
-          <g>
-            <text x={`${x(xMin)}%`} y={64} className={styles.tick}>
-              {xMin}
-            </text>
-            <text
-              x={`${x(xMax)}%`}
-              y={64}
-              className={styles.tick}
-              textAnchor="end"
-            >
-              {xMax}
-            </text>
-          </g>
+          {showAxis && (
+            <g>
+              <text x={`${x(xMin)}%`} y={64} className={styles.tick}>
+                {xMin}
+              </text>
+              <text
+                x={`${x(xMax)}%`}
+                y={64}
+                className={styles.tick}
+                textAnchor="end"
+              >
+                {xMax}
+              </text>
+            </g>
+          )}
         </svg>
       </div>
     </>
   );
-};
-
-export default BarScale;
+}

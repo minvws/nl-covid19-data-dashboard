@@ -1,3 +1,5 @@
+@import './variables.scss';
+
 .container {
   display: flex;
   flex-direction: column-reverse;
@@ -24,7 +26,7 @@
   padding: 0 $default-padding;
   max-width: 1200px;
   margin: 0 auto;
-  margin-top: 2em;
+  margin-top: 1em;
 }
 
 .home-section {
@@ -58,5 +60,324 @@
   margin-bottom: $default-margin * 2;
 }
 
+.map-article {
+  background: transparent;
+  padding: 0 2em 2em 2em;
+  border-radius: 5px;
+  margin: 0 -2rem;
+}
+
+.metric-article {
+  background: white;
+  padding: 2em;
+  border-radius: 5px;
+  margin: 0 -2rem;
+  margin-top: 2rem;
+  box-shadow: $box-shadow;
+
+  .article-text {
+    max-width: 30rem;
+  }
+
+  @media (min-width: 700px) {
+    margin: 0;
+    margin-top: 2rem;
+  }
+}
+
+.escalation-article {
+  background: white;
+  padding: 2em;
+  border-radius: 5px;
+  margin: 0 -2rem;
+  margin-top: 2rem;
+  box-shadow: $box-shadow;
+
+  .article-text {
+    max-width: 30rem;
+  }
+
+  @media (min-width: 700px) {
+    margin: 0;
+    margin-top: 2rem;
+  }
+
+  .column-item-no-margin {
+    position: relative;
+  }
+}
+
 /* Remove outline from programatically focussed elements. */
-[tabindex="-1"] { outline: none }
+[tabindex='-1'] {
+  outline: none;
+}
+
+.safety-region-aside,
+.municipality-aside {
+  min-height: 35em;
+
+  [data-reach-combobox] {
+    padding: 2em 1em;
+    padding-bottom: 0;
+  }
+}
+
+.national-layout,
+.safety-region-layout,
+.municipality-layout {
+  /* will become display: flex at wider screens */
+  display: block;
+  flex-direction: column;
+
+  .back-button {
+    background: white;
+    display: block;
+    width: 100%;
+    padding: 1em;
+    box-shadow: $box-shadow;
+    position: relative;
+    z-index: 2;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
+
+    > svg {
+      height: 10px;
+      width: 16px;
+      transform: rotate(90deg);
+      margin-right: 0.7em;
+    }
+  }
+
+  > aside {
+    flex-basis: 100%;
+  }
+  > section {
+    background: $page-background;
+    padding: 2em;
+    flex-basis: 100%;
+    padding-top: 3rem;
+  }
+}
+
+@media (max-width: 999px) {
+  .small-screen-aside-tendency {
+    .national-content,
+    .safety-region-content,
+    .municipality-content {
+      display: none;
+    }
+  }
+
+  .small-screen-content-tendency {
+    .national-aside,
+    .safety-region-aside,
+    .municipality-aside {
+      display: none;
+    }
+  }
+}
+
+@media (min-width: 1000px) {
+  .national-layout,
+  .safety-region-layout,
+  .municipality-layout {
+    display: flex;
+    flex-direction: row;
+
+    & > aside {
+      flex: 0 0 auto;
+      width: 25em;
+    }
+
+    & > section {
+      max-width: calc(100vw - 25em);
+    }
+
+    .back-button {
+      display: none;
+    }
+
+    .last-developments {
+      margin-top: 2em;
+    }
+  }
+}
+
+@media (min-width: 1400px) {
+  .national-layout,
+  .safety-region-layout,
+  .municipality-layout {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1em;
+  }
+}
+
+@media (min-width: 1600px) {
+  .national-layout,
+  .safety-region-layout,
+  .municipality-layout {
+    & > section {
+      max-width: 80em;
+    }
+  }
+}
+
+.national-aside,
+.safety-region-aside,
+.municipality-aside {
+  background: white;
+  box-shadow: 1px -1px 5px #e5e5e5, -1px -1px 5px #e5e5e5;
+  z-index: 2;
+
+  h2 {
+    padding: 1rem;
+    padding-bottom: 0.5rem;
+    padding-top: 2rem;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      border-bottom: 1px solid #c4c4c4;
+
+      &:first-child {
+        border-top: 1px solid #c4c4c4;
+      }
+    }
+  }
+}
+
+.region-names {
+  h2 {
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+
+  p {
+    margin-top: 0;
+    padding: 0 1rem 1rem;
+  }
+}
+
+a.metric-link {
+  display: block;
+  padding: 1rem;
+  border-right: 5px solid transparent;
+  color: black;
+  text-decoration: none;
+  position: relative;
+
+  &:hover,
+  &:focus {
+    background: $page-background;
+  }
+
+  h3 {
+    margin-right: 1em;
+  }
+
+  &::after {
+    content: '';
+    background-image: url('/images/chevron.svg');
+    // match aspect ratio of chevron.svg
+    background-size: 0.6em 1.2em;
+    height: 1.2em;
+    width: 0.6em;
+    display: block;
+    position: absolute;
+    right: 1em;
+    top: 4em;
+  }
+
+  span {
+    display: block;
+    margin: 0 2.5rem;
+  }
+
+  &.last-developments-link {
+    &::after {
+      top: 2em;
+    }
+  }
+}
+
+.metric-not-available {
+  padding: 1rem;
+  color: $text-color-grey;
+
+  svg {
+    fill: currentColor;
+    color: $text-color-grey !important;
+  }
+
+  p {
+    margin-top: 0.5rem;
+    margin-left: 2.5rem;
+  }
+}
+
+a.active-metric-link {
+  background: $page-background;
+  border-right: 5px solid $red;
+}
+
+@media (min-width: 1200px) {
+  .layout-two-column {
+    display: flex;
+    flex-direction: row;
+
+    .column-item-no-margin {
+      margin: 0;
+    }
+
+    .column-item {
+      flex: 1 1 50%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .column-item-small {
+      flex: 1 1 10%;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .column-item {
+    &:first-of-type {
+      margin-right: $default-margin;
+    }
+
+    &:nth-of-type(2) {
+      margin-left: $default-margin;
+    }
+  }
+
+  .column-item-extra-margin {
+    &:first-of-type {
+      margin-right: $default-margin * 3;
+    }
+
+    &:nth-of-type(2) {
+      margin-left: $default-margin * 3;
+    }
+  }
+
+  .column-item-no-margin {
+    &:first-of-type {
+      margin-right: 0;
+    }
+
+    &:nth-of-type(2) {
+      margin-left: 0;
+    }
+  }
+}
