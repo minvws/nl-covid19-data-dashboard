@@ -163,7 +163,7 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
 
       <article className="metric-article layout-two-column">
         <div className="column-item column-item-extra-margin">
-          <h3>{text.barscale_titel}</h3>
+          <h3>{text.barchart_titel}</h3>
           <p>{text.barchart_toelichting}</p>
         </div>
         {age && (
