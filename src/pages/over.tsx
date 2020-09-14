@@ -81,6 +81,11 @@ const Over: FCWithLayout<{ text: typeof siteText }> = (props) => {
             <article className={styles.faqList}>
               {text.over_veelgestelde_vragen.vragen.map(
                 (item: IVraagEnAntwoord) => {
+                  //@TODO, Why does this sometimes return empty strings for the
+                  // antwoord key? Does this PR mess up something with promises/async behavior
+                  // in getStaticProps?
+
+                  // eslint-disable-next-line no-console
                   console.log(item);
                   return (
                     <Fragment key={`item-${item.vraag}`}>
