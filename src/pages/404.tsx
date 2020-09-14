@@ -4,6 +4,8 @@ import MaxWidth from 'components/maxWidth';
 import text from 'locale';
 import styles from './over.module.scss';
 
+import getLastGeneratedData from 'static-props/last-generated-data';
+
 const NotFound: FCWithLayout = () => {
   return (
     <div className={styles.container}>
@@ -18,5 +20,6 @@ const NotFound: FCWithLayout = () => {
 };
 
 NotFound.getLayout = getLayout(text.notfound_metadata);
+export const getStaticProps = getLastGeneratedData();
 
 export default NotFound;
