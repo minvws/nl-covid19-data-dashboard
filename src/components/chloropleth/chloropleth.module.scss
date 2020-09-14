@@ -12,12 +12,6 @@
   background: transparent;
 }
 
-.toolTip {
-  position: absolute;
-  transform: none;
-  z-index: 1000;
-}
-
 .svgMap {
   display: block;
   background: transparent;
@@ -41,6 +35,11 @@
 
   path.noData:hover {
     stroke: black;
+  }
+
+  path.faded {
+    fill-opacity: 0.2;
+    stroke-opacity: 0.2;
   }
 
   path.overlay {

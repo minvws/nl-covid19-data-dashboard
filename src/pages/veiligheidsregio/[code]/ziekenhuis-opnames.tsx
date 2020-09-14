@@ -6,7 +6,6 @@ import { ContentHeader } from 'components/layout/Content';
 import Ziekenhuis from 'assets/ziekenhuis.svg';
 
 import siteText from 'locale';
-import styles from 'components/vx/chloropleth.module.scss';
 
 import { ResultsPerRegion } from 'types/data';
 import { LineChart } from 'components/charts/index';
@@ -17,23 +16,11 @@ import {
   ISafetyRegionData,
 } from 'static-props/safetyregion-data';
 import { getLocalTitleForRegion } from 'utils/getLocalTitleForCode';
-import MunicipalityMap from 'components/vx/MunicipalityMap';
-import { ReactNode } from 'react';
+import SafetyRegionChloropleth from 'components/chloropleth/SafetyRegionChloropleth';
+import hospitalAdmissionsTooltip from 'components/chloropleth/tooltips/region/hospitalAdmissionsTooltip';
 
 const text: typeof siteText.veiligheidsregio_ziekenhuisopnames_per_dag =
   siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
-
-const tooltipContent = (context: any): ReactNode => {
-  return (
-    context && (
-      <div className={styles.defaultTooltip}>
-        <strong>{context.gemnaam}</strong>
-        <br />
-        {context.value}
-      </div>
-    )
-  );
-};
 
 export function IntakeHospitalBarScale(props: {
   data: ResultsPerRegion | undefined;
@@ -125,11 +112,10 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
         </div>
 
         <div className="column-item column-item-extra-margin">
-          <MunicipalityMap
+          <SafetyRegionChloropleth
             selected={data.code}
-            metric="hospital_admissions"
-            gradient={['#D2F3FF', '#005684']}
-            tooltipContent={tooltipContent}
+            metricName="hospital_admissions"
+            tooltipContent={hospitalAdmissionsTooltip}
           />
         </div>
       </article>

@@ -1,6 +1,12 @@
 import municipalities from 'data/gemeente_veiligheidsregio.json';
 import regios from 'data';
 
+/**
+ * This function returns the safety region information for the given
+ * municipality.
+ *
+ * @param code
+ */
 export default function getSafetyRegionForMunicipalityCode(
   code: string
 ): { name: string; code: string; id: number } | undefined {

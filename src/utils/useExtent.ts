@@ -8,10 +8,13 @@ import { useMemo } from 'react';
  * @param predicate the optional predicate
  */
 export default function useExtent(
-  collection: any[],
+  collection?: any[],
   predicate?: (item: any) => number
-): [number, number] {
+): [number, number] | undefined {
   return useMemo(() => {
+    if (!collection) {
+      return undefined;
+    }
     const numberCollection = predicate
       ? collection.map<number>(predicate)
       : collection;
