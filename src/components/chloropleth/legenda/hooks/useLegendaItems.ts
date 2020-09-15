@@ -39,7 +39,7 @@ export default function useLegendaItems(
       const nextValue = calcValue(i + 1);
       const label = `${value} - ${nextValue}`;
       legendaItems.push({
-        color: color(value),
+        color: color(i === numberOfItems - 1 ? nextValue : value),
         label: label,
       });
     }
