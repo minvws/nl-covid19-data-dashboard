@@ -330,6 +330,10 @@ a.metric-link {
 a.active-metric-link {
   background: $page-background-active;
   border-right: 5px solid $red;
+
+  &::after {
+    content: none;
+  }
 }
 
 @media (min-width: 1200px) {
