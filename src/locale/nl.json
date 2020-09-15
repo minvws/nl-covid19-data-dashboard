@@ -8,8 +8,8 @@
     "message": "Laatst bijgewerkt"
   },
   "notificatie": {
-    "titel": "Besmettingen COVID-19 toegenomen",
-    "bericht": "De afgelopen week is het aantal nieuwe positief geteste personen toegenomen. De sterkste stijgingen waren te zien in de provincies Zuid-Holland en Noord-Holland. De meeste nieuwe besmettingen zijn gemeld in de leeftijdsgroep van 20-40 jaar. Ook het reproductiegetal is gestegen en ligt nu boven de 1. De aantallen gerapporteerde ziekenhuisopnames en intensive-care opnames vanwege COVID-19 blijven laag.",
+    "titel": "Besmettingen COVID-19 verder toegenomen",
+    "bericht": "De afgelopen week (9 t/m 15 september) is het aantal nieuwe positief geteste personen wederom sterk  toegenomen. De sterkste stijgingen waren weer te zien in de provincies Zuid-Holland en Noord-Holland. De nieuwe besmettingen nemen toe in alle leeftijdsgroepen, maar de meeste nieuwe besmettingen zijn gemeld in de leeftijdsgroep van 20-40 jaar. Ook het reproductiegetal is verder gestegen tot 1,38. De aantallen patiënten die vanwege COVID-19 zijn opgenomen in het ziekenhuis of op de intensive care zijn ook gestegen.",
     "link": {
       "text": "Bekijk de actuele informatie van het RIVM",
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel"
@@ -297,17 +297,17 @@
   },
   "over_disclaimer": {
     "title": "Disclaimer",
-    "text": "Let op: dit dashboard coronavirus is in ontwikkeling. De komende periode worden stap voor stap meer functies en gegevens toegevoegd. Daarnaast werken we aan het verbeteren van de digitoegankelijkheid van deze site. De informatie op deze site willen we voor iedereen in Nederland beschikbaar maken."
+    "text": "Het dashboard wordt de komende tijd stap voor stap verder uitgebreid. Sommige functies zijn nu dus nog niet beschikbaar. Bij elke stap wordt goed gekeken of de informatie eenduidig en begrijpelijk is voor iedereen. Ook willen we dat de informatie op deze site goed te lezen is op iedere computer of telefoon. De informatie op deze site is voor iedereen in zowel Nederlands als Engels beschikbaar. Als u suggesties heeft om deze website verder te verbeteren dan kunt u mailen naar coronadashboard@minvws.nl."
   },
   "over_beschrijving": {
-    "text": "Het dashboard coronavirus geeft informatie over de ontwikkeling van het coronavirus in Nederland. Met deze informatie kunnen eerder signalen van een toename van de verspreiding van het virus worden opgepikt. We moeten voorkomen dat het virus weer om zich heen grijpt. Het aantal intensive care en ziekenhuisopnames geven in de kern de ultieme waarschuwing. Maar eerder al komen de signalen door via de testuitslagen die vertaald worden naar het aantal positief geteste personen per 100.000 inwoners. Daarnaast zijn er ondersteunende indicatoren die de epidemie beschrijven en andersoortige signalen oppikken."
+    "text": "Het dashboard coronavirus geeft informatie over de ontwikkeling van het coronavirus in Nederland. Met deze informatie kunnen zo snel mogelijk signalen van nieuwe oplevingen worden opgepikt. Zo kunnen we op tijd maatregelen nemen om het virus te stoppen. Op deze manier willen we een nieuwe golf aan besmettingen en ziekenhuisopnamen voorkomen."
   },
   "over_veelgestelde_vragen": {
     "text": "Veelgestelde vragen",
     "vragen": [
       {
         "vraag": "Wat doet dit dashboard?",
-        "antwoord": "Het dashboard laat met actuele cijfers zien hoe het coronavirus zich in Nederland verspreidt. Die informatie komt van onder andere het RIVM, de GGD’en en de ziekenhuizen. Op het dashboard is bijvoorbeeld te zien hoeveel mensen positief getest zijn op het virus en of het aantal besmettingen oploopt. Het dashboard biedt informatie aan iedereen die de meest actuele cijfers in één overzicht wil zien. "
+        "antwoord": "Het dashboard laat actuele cijfers zien over het coronavirus in Nederland. Die informatie komt van het RIVM, de GGD’en en de ziekenhuizen. Op het dashboard is bijvoorbeeld te zien hoeveel mensen getest zijn op corona en hoeveel daarvan besmet zijn. "
       },
       {
         "vraag": "Waarom een dashboard?",
@@ -318,40 +318,40 @@
         "antwoord": "Dit dashboard is ontwikkeld in opdracht van het ministerie van Volksgezondheid, Welzijn en Sport. De komende weken komen er meer gegevens bij."
       },
       {
-        "vraag": "Waarom deze indicatoren?",
-        "antwoord": "De cijfers die nu zichtbaar zijn, laten het beste zien hoe het ervoor staat met de epidemie. Het gaat bijvoorbeeld om het aantal mensen dat besmet is en het aantal mensen dat in het ziekenhuis is opgenomen. Binnenkort komen ook andere cijfers beschikbaar in het dashboard. Al deze cijfers samen geven een nauwkeurig beeld van het virus in het hele land."
+        "vraag": "Waarom deze cijfers?",
+        "antwoord": "De cijfers op dit dashboard geven samen een goed overzicht. Sommige cijfers zeggen iets over het virus en nieuwe uitbraken. Andere cijfers helpen bestuurders om de kans op nieuwe oplevingen beter in te schatten."
       },
       {
-        "vraag": "Wat betekent het dat dit dashboard nog in ontwikkeling is?",
-        "antwoord": "In de komende periode zullen naast de hoofdindicatoren ook andere gegevens worden toegevoegd."
+        "vraag": "Waarom is het dashboard nog in ontwikkeling?",
+        "antwoord": "Het dashboard is continu in ontwikkeling (zolang het virus nog “onder ons” is), omdat we voortdurend kijken of we betere data kunnen toevoegen. Daarbij kost tijd om zo’n dashboard goed te bouwen. Daarom wordt het dashboard  stap voor stap uitgebreid. Ook willen we dat de informatie op deze website goed te lezen is op iedere computer of telefoon, in het Nederlands en in het Engels."
       },
       {
         "vraag": "Wat is een signaalwaarde?",
-        "antwoord": "Een signaalwaarde is een getal dat door het RIVM is berekend. Het zijn een soort `alarmbellen’. Die alarmbellen kunnen afgaan als er veel mensen tegelijkertijd ziek worden of in het ziekenhuis worden opgenomen. Het RIVM heeft berekend dat als er langdurig meer dan 40 mensen per dag in het ziekenhuis worden opgenomen, de zorg al snel overbelast kan raken."
+        "antwoord": "Een signaalwaarde is een soort `alarmbel’ die door het ministerie van VWS wordt vastgesteld. Die alarmbellen kunnen afgaan als er veel mensen tegelijkertijd ziek worden, in het ziekenhuis worden opgenomen, of positief getest worden. Zo is berekend dat als er langdurig meer dan 40 mensen per dag in het ziekenhuis worden opgenomen, de zorg al snel overbelast kan raken."
       },
       {
-        "vraag": "Wat zegt een regionaal beeld (t.o.v. een landelijk beeld)?",
-        "antwoord": "Het coronavirus verspreidt zich makkelijk tussen mensen. In de afgelopen maanden heeft het RIVM veel regionale uitbraken van besmettingen waargenomen. Dat betekent dat er op bepaalde plekken in ons land meer besmettingen waren dan op andere plekken. Als we die informatie goed in beeld hebben, kunnen we het virus gericht en snel bestrijden als het opleeft."
+        "vraag": "Wat kan ik met cijfers over mijn gemeente of regio?",
+        "antwoord": "Het coronavirus verspreidt zich niet overal even snel. Soms vlamt het virus in bepaalde regio op, terwijl in een andere regio het aantal besmettingen beperkt blijft. Als we die informatie goed in beeld hebben, kunnen we het virus gericht en snel bestrijden daar waar het opleeft. Daarom worden de cijfers op het dashboard ook per gemeente of regio’s weergegeven. Dit helpt ook burgemeesters om lokale of regionale maatregelen te nemen."
       },
       {
         "vraag": "Is dit een van de aangekondigde apps?",
-        "antwoord": "Nee, dit is geen app. De app voor anonieme contactopsporing wordt ontwikkeld om te weten of je misschien contact hebt gehad met iemand die besmet is met het coronavirus en om je een advies te geven als dat zo is. De app voor thuisrapportage ondersteunt de GGD door op afstand contact te houden met mensen met een (verdenking van) besmetting. "
+        "antwoord": "Nee, dit is geen app. De app voor anonieme contactopsporing wordt ontwikkeld om te weten of je misschien contact hebt gehad met iemand die besmet is met het coronavirus en om je een advies te geven als dat zo is. De app voor thuisrapportage ondersteunt de GGD door op afstand contact te houden met mensen met een (verdenking van) besmetting."
       },
       {
         "vraag": "Houden jullie rekening met mijn privacy in dit dashboard?",
-        "antwoord": "Ja, het dashboard voldoet aan de privacyrichtlijnen. Je kunt dus niet zien bij wie welke gegevens horen. De gegevens zijn niet herleidbaar tot personen. "
+        "antwoord": "Ja, het dashboard voldoet aan de privacyrichtlijnen. Je kunt dus niet zien bij wie welke gegevens horen. De gegevens zijn niet herleidbaar tot personen. Alle data van het dashboard zijn voor iedereen toegankelijk en zijn verkrijgbaar bij het RIVM, de GGD’en en de ziekenhuizen. Het dashboard verwijst naar die databronnen."
       },
       {
         "vraag": "Welke conclusies kan ik uit dit dashboard trekken?",
-        "antwoord": "Het dashboard geeft inzicht, maar er kunnen geen conclusies uit getrokken worden. Wel worden deze gegevens gebruikt door de deskundigen van onder andere het RIVM."
+        "antwoord": "Het dashboard geeft inzicht in de ontwikkeling van het coronavirus in de verschillende regio’s. De informatie in het dashboard wordt door  gemeenten, regio’s en het Rijk  gebruikt om te bepalen welke maatregelen nodig zijn om het virus in te dammen. "
       },
       {
         "vraag": "Ik zie dat het goed gaat in mijn regio. Waarom gelden in mijn regio dezelfde maatregelen als in andere regio’s?",
-        "antwoord": "Er bestaan grote verschillen tussen regio’s. In de ene regio heeft het virus tot nu toe veel harder toegeslagen dan in de andere. Toch kan het virus overal in het land makkelijk om zich heen grijpen. Veel maatregelen gelden daarom in het hele land. Soms gelden extra maatregelen in een bepaalde regio. Dat gebeurt als daar veel extra besmettingen worden vastgesteld. Met het dashboard kunnen we mogelijk in de toekomst gerichter maatregelen nemen per regio of per sector."
+        "antwoord": "Er bestaan grote verschillen tussen regio’s. In de ene regio heeft het virus tot nu toe veel harder toegeslagen dan in de andere. Toch kan het virus overal in het land makkelijk om zich heen grijpen. Veel maatregelen gelden daarom in het hele land. Soms gelden extra maatregelen in een bepaalde regio. Dat gebeurt als daar veel extra besmettingen worden vastgesteld. Dus: duiding van experts en gesprekken met GGD en veiligheidsregio’s bepalen in grote mate de maatregelen die worden genomen."
       },
       {
         "vraag": "Ik zie een technisch zwakke plek op de website. Waar kan ik dit melden?",
-        "antwoord": "Wij werken samen met het Nationaal Cyber Security Centrum (NCSC). Stel het NCSC zo snel mogelijk op de hoogte via [het formulier](https://www.ncsc.nl/contact/kwetsbaarheid-melden/cvd-meldingen-formulier) voordat u dit aan de buitenwereld kenbaar maakt. In samenwerking met het NCSC nemen we de bevinding in behandeling en lossen dit zo snel mogelijk op."
+        "antwoord": "Wij werken samen met het Nationaal Cyber Security Centrum (NCSC). Stel het NCSC zo snel mogelijk op de hoogte via het [formulier](https://www.ncsc.nl/contact/kwetsbaarheid-melden/cvd-meldingen-formulier) voordat u dit aan de buitenwereld kenbaar maakt. In samenwerking met het NCSC nemen we de bevinding in behandeling en lossen dit zo snel mogelijk op."
       },
       {
         "vraag": "Waar kan ik terecht met vragen over het coronavirus?",
@@ -515,7 +515,7 @@
   "veiligheidsregio_layout": {
     "headings": {
       "medisch": "Medische indicatoren",
-      "overig": "Overige indicatoren",
+      "overig": "Vroegsignalering",
       "verpleeghuis": "Verpleeghuiszorg"
     }
   },
@@ -626,7 +626,7 @@
     "pagina_toelichting": "Door het aantal positief geteste mensen bij te houden krijgen we een duidelijk beeld van hoe snel het virus zich verspreid voordat het de intensive care bereikt. Hierdoor blijven we voorbereid.",
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "screen_reader_graph_content": "{{value}} positief geteste personen.",
-    "barscale_titel": "Gemiddeld aantal positief geteste mensen per 100.00 inwoners",
+    "barscale_titel": "Gemiddeld aantal positief geteste mensen per 100.000 inwoners",
     "barscale_toelichting": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
     "barscale_screenreader_text": "{{value}} positief geteste mensen per dag.",
     "kpi_titel": "Aantal positief geteste mensen:",
@@ -675,7 +675,7 @@
   },
   "laatste_ontwikkelingen": {
     "title": "Laatste ontwikkelingen",
-    "menu_subtitle": "Besmettingen COVID-19 toegenomen",
+    "menu_subtitle": "Besmettingen COVID-19 verder toegenomen",
     "regio_cta_gemeente": "Bekijk uw gemeente",
     "regio_cta_veiligheidsregio": "Bekijk uw veiligheidsregio"
   },
