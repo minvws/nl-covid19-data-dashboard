@@ -8,7 +8,7 @@ import Getest from 'assets/test.svg';
 
 import siteText from 'locale';
 
-import { InfectedPeopleNurseryCountDaily } from 'types/data';
+import { InfectedPeopleNurseryCountDaily } from 'types/data.d';
 import getNlData, { INationalData } from 'static-props/nl-data';
 
 const text: typeof siteText.verpleeghuis_positief_geteste_personen =

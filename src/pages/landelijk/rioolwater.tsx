@@ -8,7 +8,7 @@ import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
 
 import siteText from 'locale';
 
-import { RioolwaterMetingen } from 'types/data';
+import { RioolwaterMetingen } from 'types/data.d';
 
 import getNlData, { INationalData } from 'static-props/nl-data';
 

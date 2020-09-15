@@ -13,10 +13,10 @@ import { useMemo } from 'react';
 export default function useMunicipalityBoundingbox(
   regionGeo: FeatureCollection<MultiPolygon, SafetyRegionProperties>,
   selectedMunicipality?: string
-): FeatureCollection<MultiPolygon> | undefined {
+): [FeatureCollection<MultiPolygon>, string] | [undefined, undefined] {
   return useMemo(() => {
     if (!selectedMunicipality) {
-      return undefined;
+      return [undefined, undefined];
     }
 
     const vrcode = municipalCodeToRegionCodeLookup[selectedMunicipality];
@@ -26,14 +26,17 @@ export default function useMunicipalityBoundingbox(
         (feat) => feat.properties.vrcode === vrcode
       );
       if (!feature) {
-        return undefined;
+        return [undefined, undefined];
       }
-      return {
-        ...regionGeo,
-        features: [feature],
-      };
+      return [
+        {
+          ...regionGeo,
+          features: [feature],
+        },
+        vrcode,
+      ];
     }
 
-    return undefined;
+    return [undefined, undefined];
   }, [selectedMunicipality, regionGeo]);
 }

@@ -24,7 +24,6 @@ Run `yarn` to install all required packages.
 
 ### Data
 
-If you have data, you can place it in `/public/json/`.
 The calculations for the data can be found in [nl-covid19-data-backend-processing](https://github.com/minvws/nl-covid19-data-backend-processing).
 
 ## Available Scripts

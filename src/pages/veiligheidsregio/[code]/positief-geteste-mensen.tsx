@@ -8,7 +8,7 @@ import siteText from 'locale';
 
 import Getest from 'assets/test.svg';
 import formatDecimal from 'utils/formatNumber';
-import { ResultsPerRegion } from 'types/data';
+import { ResultsPerRegion } from 'types/data.d';
 
 import {
   getSafetyRegionData,
@@ -16,9 +16,10 @@ import {
   ISafetyRegionData,
 } from 'static-props/safetyregion-data';
 import { getLocalTitleForRegion } from 'utils/getLocalTitleForCode';
-import SafetyRegionChloropleth from 'components/chloropleth/SafetyRegionChloropleth';
-import positiveTestedPeopleTooltip from 'components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
-import SafetyRegionLegenda from 'components/chloropleth/legenda/SafetyRegionLegenda';
+import positiveTestedPeopleTooltip from 'components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
+import MunicipalityLegenda from 'components/chloropleth/legenda/MunicipalityLegenda';
+import MunicipalityChloropleth from 'components/chloropleth/MunicipalityChloropleth';
+import regionCodeToMunicipalCodeLookup from 'data/regionCodeToMunicipalCodeLookup';
 
 const text: typeof siteText.veiligheidsregio_positief_geteste_personen =
   siteText.veiligheidsregio_positief_geteste_personen;
@@ -64,6 +65,9 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
 
   const resultsPerRegion: ResultsPerRegion | undefined =
     data?.results_per_region;
+
+  const municipalCodes = regionCodeToMunicipalCodeLookup[data.code];
+  const selectedMunicipalCode = municipalCodes ? municipalCodes[0] : undefined;
 
   return (
     <>
@@ -125,15 +129,16 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           <h3>{getLocalTitleForRegion(text.map_titel, data.code)}</h3>
           <p>{text.map_toelichting}</p>
 
-          <SafetyRegionLegenda
+          <MunicipalityLegenda
             metricName="positive_tested_people"
             title={siteText.positief_geteste_personen.chloropleth_legenda.titel}
           />
         </div>
 
         <div className="column-item column-item-extra-margin">
-          <SafetyRegionChloropleth
-            selected={data.code}
+          <MunicipalityChloropleth
+            selected={selectedMunicipalCode}
+            highlightSelection={false}
             metricName="positive_tested_people"
             tooltipContent={positiveTestedPeopleTooltip}
           />

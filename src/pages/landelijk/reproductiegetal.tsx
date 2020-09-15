@@ -9,7 +9,7 @@ import Repro from 'assets/reproductiegetal.svg';
 
 import siteText from 'locale';
 
-import { ReproductionIndex as ReproductionIndexData } from 'types/data';
+import { ReproductionIndex as ReproductionIndexData } from 'types/data.d';
 
 import getNlData, { INationalData } from 'static-props/nl-data';
 

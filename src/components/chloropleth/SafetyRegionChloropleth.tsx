@@ -20,6 +20,7 @@ export type TProps<
   metricName?: T;
   metricProperty?: string;
   selected?: string;
+  highlightSelection?: boolean;
   style?: CSSProperties;
   onSelect?: (context: TContext) => void;
   tooltipContent?: (context: TContext) => ReactNode;
@@ -49,6 +50,7 @@ export default function SafetyRegionChloropleth<
 >(props: TProps<T, ItemType, ReturnType, TContext>) {
   const {
     selected,
+    highlightSelection = true,
     style,
     metricName,
     metricProperty,
@@ -77,11 +79,7 @@ export default function SafetyRegionChloropleth<
     ) => {
       const { vrcode } = feature.properties;
 
-      const isSelected = vrcode === selected;
-      const className = classNames(
-        isSelected ? styles.selectedPath : '',
-        !hasData ? styles.noData : undefined
-      );
+      const className = classNames(!hasData ? styles.noData : undefined);
 
       return (
         <path
@@ -94,7 +92,7 @@ export default function SafetyRegionChloropleth<
         />
       );
     },
-    [getFillColor, hasData, selected]
+    [getFillColor, hasData]
   );
 
   const overlayCallback = (
@@ -112,6 +110,27 @@ export default function SafetyRegionChloropleth<
       />
     );
   };
+
+  const hoverCallback = useCallback(
+    (feature: Feature<MultiPolygon, SafetyRegionProperties>, path: string) => {
+      const { vrcode } = feature.properties;
+      const isSelected = vrcode === selected && highlightSelection;
+      const className = classNames(
+        isSelected ? styles.selectedPath : styles.hoverLayer
+      );
+
+      return (
+        <path
+          className={className}
+          data-id={vrcode}
+          shapeRendering="optimizeQuality"
+          key={`safetyregion-map-hover-${vrcode}`}
+          d={path}
+        />
+      );
+    },
+    [selected, highlightSelection]
+  );
 
   const onClick = (id: string) => {
     if (onSelect) {
@@ -139,10 +158,12 @@ export default function SafetyRegionChloropleth<
       <Chloropleth
         featureCollection={regionGeo}
         overlays={countryGeo}
+        hovers={hasData ? regionGeo : undefined}
         boundingbox={boundingbox || countryGeo}
         dimensions={dimensions}
         featureCallback={featureCallback}
         overlayCallback={overlayCallback}
+        hoverCallback={hoverCallback}
         onPathClick={onClick}
         getTooltipContent={getTooltipContent}
       />

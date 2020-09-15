@@ -100,7 +100,9 @@ function NationalLayout(props: WithChildren<INationalData>) {
           <Link href="/landelijk">
             <a className="back-button">
               <Arrow />
-              {siteText.nav.terug_naar_alle_cijfers}
+              {router.pathname === '/'
+                ? siteText.nav.terug_naar_alle_cijfers_homepage
+                : siteText.nav.terug_naar_alle_cijfers}
             </a>
           </Link>
         )}

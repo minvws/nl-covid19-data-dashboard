@@ -8,7 +8,7 @@ import CoronaVirus from 'assets/coronavirus.svg';
 
 import siteText from 'locale';
 
-import { DeceasedPeopleNurseryCountDaily } from 'types/data';
+import { DeceasedPeopleNurseryCountDaily } from 'types/data.d';
 import getNlData, { INationalData } from 'static-props/nl-data';
 
 const text: typeof siteText.verpleeghuis_oversterfte =

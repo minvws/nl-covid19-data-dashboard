@@ -2,8 +2,6 @@ import { scaleLinear } from '@vx/scale';
 import { useMemo } from 'react';
 import { ILegendaItem } from '../ChloroplethLegenda';
 
-const NUMBER_OF_ITEMS = 5;
-
 import siteText from 'locale';
 
 export default function useLegendaItems(
@@ -20,9 +18,11 @@ export default function useLegendaItems(
       domain: domain,
       range: gradient,
     });
-    const steps = (max - min) / NUMBER_OF_ITEMS;
+    const numberOfItems = calculateDivisible(max - min);
+    const steps = (max - min) / numberOfItems;
 
     const calcValue = (i: number) => {
+      if (i === numberOfItems) return max;
       return Math.floor(i > 0 ? i * steps : 0);
     };
 
@@ -34,16 +34,27 @@ export default function useLegendaItems(
       },
     ];
 
-    for (let i = 0; i < NUMBER_OF_ITEMS; i++) {
+    for (let i = 0; i < numberOfItems; i++) {
       const value = calcValue(i);
-      const nextValue = calcValue(i + 1) - (i === NUMBER_OF_ITEMS - 1 ? 0 : 1);
+      const nextValue = calcValue(i + 1);
       const label = `${value} - ${nextValue}`;
       legendaItems.push({
-        color: color(value),
+        color: color(i === numberOfItems - 1 ? nextValue : value),
         label: label,
       });
     }
 
     return legendaItems;
   }, [domain, gradient]);
+}
+
+function calculateDivisible(input: number) {
+  let div = 5;
+  let quotient = Math.floor(input / div);
+
+  while (quotient === 0 && div > 0) {
+    quotient = Math.floor(input / --div);
+  }
+
+  return div;
 }

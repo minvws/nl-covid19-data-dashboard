@@ -161,6 +161,10 @@
     flex-basis: 100%;
     padding-top: 3rem;
   }
+
+  .last-developments {
+    padding-top: 2em;
+  }
 }
 
 @media (max-width: 999px) {
@@ -199,10 +203,6 @@
 
     .back-button {
       display: none;
-    }
-
-    .last-developments {
-      margin-top: 2em;
     }
   }
 }
@@ -275,12 +275,9 @@ a.metric-link {
   text-decoration: none;
   position: relative;
 
-  &:hover {
-    background: $page-background;
-  }
-
+  &:hover,
   &:focus {
-    background: $page-background-active;
+    background: $page-background;
   }
 
   h3 {
@@ -328,12 +325,8 @@ a.metric-link {
 }
 
 a.active-metric-link {
-  background: $page-background-active;
+  background: $page-background;
   border-right: 5px solid $red;
-
-  &::after {
-    content: none;
-  }
 }
 
 @media (min-width: 1200px) {

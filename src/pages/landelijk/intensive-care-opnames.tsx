@@ -8,7 +8,7 @@ import Arts from 'assets/arts.svg';
 
 import siteText from 'locale';
 
-import { IntakeIntensivecareMa } from 'types/data';
+import { IntakeIntensivecareMa } from 'types/data.d';
 
 import getNlData, { INationalData } from 'static-props/nl-data';
 

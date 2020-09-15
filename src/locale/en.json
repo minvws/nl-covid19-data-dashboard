@@ -9,7 +9,7 @@
   },
   "notificatie": {
     "titel": "More new COVID-19 infections",
-    "bericht": "The number of people who newly tested positive has increased. The sharpest rise in new infections was seen in the provinces of South-Holland and North-Holland. Most new infections were reported in the 20-40 year old group. The reproduction number has also increased to above 1. The numbers of reported hospital admissions and admission to the ICU due to COVID-19 remain low.",
+    "bericht": "The number of people who newly tested positive has increased in the past week (9 to 15 September). Again, the sharpest rise in new infections was seen in the provinces of South-Holland and North-Holland. The number of newly tested positive persons increased across all age-groups, but most new infections were reported in the 20-40 year old group. The reproduction number has also increased to 1.38. More COVID-19 patients were reported to have been admitted to the hospital or the ICU in the past week.",
     "link": {
       "text": "View the recent information from the RIVM",
       "href": "https://www.rivm.nl/en/novel-coronavirus-covid-19/current-information"
@@ -45,7 +45,8 @@
       "gemeente": "Municipalities"
     },
     "title": "Corona Dashboard",
-    "terug_naar_alle_cijfers": "Back to overview"
+    "terug_naar_alle_cijfers": "Back to overview",
+    "terug_naar_alle_cijfers_homepage": "Overview"
   },
   "ic_opnames_per_dag": {
     "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
@@ -75,7 +76,7 @@
     "kpi_toelichting": "Estimated number of patients who contact the general practitioner for the first time due to COVID-19 like symptoms, per 100.000 inhabitants, per week.",
     "linechart_titel": "Progression over time",
     "barscale_screenreader_text": "{{value}} patients who contact the general practitioner for the first time due to COVID-19 like symptoms, per 100.000 inhabitants, per week.",
-    "titel_sidebar": "Patiënten met eerste melding van COVID-19 klachten bij de huisarts per 100.000 inwoners"
+    "titel_sidebar": "Patients who contact their GP for the first time because of symptoms that could indicate COVID-19 per 100.000 inhabitants"
   },
   "ziekenhuisopnames_per_dag": {
     "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
@@ -135,7 +136,7 @@
       "titel": "Number per 100.000 inhabitants",
       "geen_meldingen": "No confirmed cases"
     },
-    "titel_sidebar": "Positief geteste mensen per 100.000 inwoners"
+    "titel_sidebar": "Confirmed cases per 100,000 inhabitants"
   },
   "besmettelijke_personen": {
     "title": "Number of infectious people",
@@ -156,7 +157,7 @@
     "cijfer_titel": "Estimated number of infectious people in the Netherlands:",
     "cijfer_toelichting": "A calculation of how many people with COVID-19 per 100.000 inhabitants that can transmit the virus. This number is calculated by the RIVM.",
     "linechart_titel": "Progression over time",
-    "titel_sidebar": "Aantal besmettelijke mensen per 100.000 inwoners"
+    "titel_sidebar": "Number of infectious people per 100,000 inhabitants"
   },
   "reproductiegetal": {
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
@@ -279,10 +280,10 @@
       "href": "https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater"
     },
     "titel": "Sewage water examination",
-    "pagina_toelichting": "Number of virus particles in one milliliter of sewage water, collected from about 80 sites in the Netherlands. The national value is based on the total number of virus particles that is found in a week, divided by the number of sites where the data is collected. From September onwards the number of sampling sites will be increased to more than 300.",
+    "pagina_toelichting": "Number of virus particles in one milliliter of sewage water, collected from about 300 sites in the Netherlands. The national value is based on the total number of virus particles that is found in a week, divided by the number of sites where the data is collected. ",
     "barscale_titel": "Average number of virus particles in one milliliter of sewage water",
     "extra_uitleg": "The national value is based on the total number of virus particles that is found in a week, divided by the number of sites where the data is collected.",
-    "barscale_screenreader_text": "{{value}} virus particles in one milliliter of sewage water, collected from 28 locations in the Netherlands.",
+    "barscale_screenreader_text": "{{value}} virus particles in one milliliter of sewage water, collected from about 300 sites in the Netherlands.",
     "linechart_titel": "Progression over time"
   },
   "notfound_titel": {
@@ -296,17 +297,17 @@
   },
   "over_disclaimer": {
     "title": "Disclaimer",
-    "text": "Please note: this dashboard is still in the development phase. New features and data will be added to it in stages in the period ahead. Steps are also being taken to improve the website’s accessibility and user-friendliness. We want everyone in the Netherlands to be able to access the information on this website."
+    "text": "The dashboard is still under development, so some features aren’t yet available. After each step, we take a good look to see if the information is clear and understandable for everyone. We also want it to be easy to read on all devices, and available in both Dutch and English. If you have suggestions as to how the website could be improved, you can email them to coronadashboard@minvws.nl."
   },
   "over_beschrijving": {
-    "text": "The coronavirus dashboard gives up-to-date information about the development of the coronavirus in the Netherlands. With this information  early signs that the rate of infection is increasing can be picked up. We must prevent losing control over the spread of the virus. The numbers of new intensive care (ICU) patients and hospital admissions are the ultimate warning, but early indications are provided by the results of testing people for the virus. These are used to calculate the number of people who are infected with coronavirus (SARS-CoV-2) per 100,000 inhabitants. There are also other, secondary indicators to describe the course of the epidemic and give other information."
+    "text": "The coronavirus dashboard gives up-to-date information about COVID-19 in the Netherlands. Picking up early signs that the rate of infection is increasing allows us to act in time to stop the virus from spreading. In this way, we want to prevent a new wave of infection and hospital admissions."
   },
   "over_veelgestelde_vragen": {
     "text": "Frequently asked questions",
     "vragen": [
       {
         "vraag": "What is the dashboard for?",
-        "antwoord": "The dashboard presents up-to-date information about the spread of coronavirus in the Netherlands. It uses data provided by the National Institute for Public Health and the Environment (RIVM), municipal health services (GGDs), hospitals and other sources. The dashboard shows, for example, how many people tested positive for the virus and if the number of infected people is increasing. The dashboard is intended for everyone who wants a useful overview of the most up-to-date data."
+        "antwoord": "The dashboard presents up-to-date information about coronavirus in the Netherlands. It uses data provided by the National Institute for Public Health and the Environment (RIVM), municipal health services (GGDs) and hospitals. The dashboard shows, for example, how many people have been tested for the virus, and how many tested positive."
       },
       {
         "vraag": "Why a dashboard?",
@@ -317,40 +318,40 @@
         "antwoord": "This dashboard has been commissioned by the Ministry of Health, Welfare and Sport. New types of data will be added to it in the weeks ahead."
       },
       {
-        "vraag": "Why use these indicators?",
-        "antwoord": "The data currently presented on the dashboard gives the best overall view of the epidemiological situation. This data includes the number of confirmed cases and the number of confirmed cases with COVID-19 who are admitted to a hospital. Other data will be added to the dashboard shortly. Together they will give an accurate picture of the epidemic in the Netherlands."
+        "vraag": "Why use these figures?",
+        "antwoord": "The data on the dashboard gives a good overall view of the situation regarding coronavirus in the Netherlands. Some of the figures are about the virus and new outbreaks. Other figures help administrators to better calculate the risk of new waves of infection."
       },
       {
-        "vraag": "The dashboard is still in development. What does this mean?",
-        "antwoord": "In the near future, secondary data will be added to the main indicators already shown on the dashboard."
+        "vraag": "Why is the dashboard still being developed?",
+        "antwoord": "The dashboard will remain under development as long as coronavirus is still with us, because we are always looking to see if we can add better data. Moreover, it takes time to set up the dashboard properly. So we’re expanding it step by step. We also want the information on this website to be easy to read on any device, and to be available in Dutch and in English. "
       },
       {
         "vraag": "What is an alert value?",
-        "antwoord": "An alert value is calculated by the National Institute for Public Health and the Environment (RIVM) and is intended to act as a warning. A warning can be triggered if many people become ill or are admitted to a hospital at the same time. According to RIVM’s models, the healthcare sector will be unable to cope if daily hospital admissions for COVID-19 exceed 40 per day for an extended period of time."
+        "antwoord": "An alert value is a kind of ‘alarm bell’, determined by the Ministry of VWS. These alarm bells can go off if a large number of people test positive, fall ill or are admitted to hospital at the same time. It’s been calculated that the healthcare sector would soon be unable to cope if daily hospital admissions for COVID-19 exceed 40 per day for an extended period of time. "
       },
       {
-        "vraag": "What can the regional overview tell that the national overview cannot?",
-        "antwoord": "Coronavirus spreads easily among people. In recent months RIVM has identified several regional surges in coronavirus infections. This means the infection rate was higher in some parts of the country than in others. If we have an accurate picture of this, we can combat the virus quickly and in a targeted manner."
+        "vraag": "What can I use the figures about my municipality or region for?",
+        "antwoord": "Coronavirus doesn’t spread uniformly. Sometimes it flares up in one region, while in others the infection rate remains low. If we have an accurate picture of this, we can combat the virus quickly and in a targeted manner. That’s why the data on the dashboard is also broken down by municipality/region. This also helps mayors decide if local measures are necessary."
       },
       {
         "vraag": "Is this one of the apps that was announced?",
-        "antwoord": "No, this is not an app. An anonymous contact tracing app is being developed so that people can find out if they may have been in close proximity to someone carrying coronavirus, and to advise them on what to do in that case. A home monitoring app will help the municipal health service (GGD) stay in touch with people with suspected or confirmed coronavirus infection."
+        "antwoord": "No, this is not an app. An anonymous contact tracing app is being developed so that people can find out if they might have been in close proximity to someone carrying coronavirus, and to advise them what to do. A home monitoring app will help the municipal health service (GGD) stay in touch with people with suspected or confirmed coronavirus infection."
       },
       {
         "vraag": "Does the dashboard respect my privacy?",
-        "antwoord": "Yes, the dashboard complies with privacy rules. The presented data cannot be traced back to individual people."
+        "antwoord": "Yes, the dashboard complies with privacy rules, so the data can’t be traced back to individuals. All the data is provided by the National Institute for Public Health and the Environment (RIVM), municipal health services (GGDs) and hospitals, and is accessible to everyone. The dashboard lists its data sources. "
       },
       {
         "vraag": "What conclusions can I draw based on the information on this dashboard?",
-        "antwoord": "The dashboard gives insight in the development of the virus, but it is not possible draw any conclusions. However, the data on the dashboard is used by experts, such as RIVM researchers."
+        "antwoord": "The dashboard shows how the situation per region is developing with regard to coronavirus. The data is used by municipal, regional and central government authorities to decide on the measures necessary to stop the spread of the virus."
       },
       {
         "vraag": "I can see that coronavirus is under control in my region. So why do the same measures apply here as in other regions?",
-        "antwoord": "The situation in different regions can vary a lot, and the epidemic is much bigger in some regions than in others. But the virus can easily spread across the country and that’s why many measures apply nationwide. Sometimes, extra measures are taken in a specific region if there are many extra cases there. In the future we aim that the dashboard will make it possible to introduce measures that target specific regions or sectors."
+        "antwoord": "The situation varies widely, and some regions have been worse affected than others. But the virus can easily spread across the country and that’s why many measures apply nationwide. Sometimes, extra measures are taken in a specific region if there are many extra cases there. These are largely based on input from experts, and consultations with the GGDs and safety regions. "
       },
       {
         "vraag": "I’ve found a technical vulnerability in the website. Where can I report this?",
-        "antwoord": "We work together with the National Cyber Security Centre (NCSC). Please notify them of the vulnerability as soon as possible using their form (https://english.ncsc.nl/contact/reporting-a-vulnerability-cvd) before making the issue publicly known. We will deal with your notification and resolve it as quickly as possible together with the NCSC."
+        "antwoord": "We work together with the National Cyber Security Centre (NCSC). Please notify them of the vulnerability as soon as possible using their [form](https://www.ncsc.nl/contact/kwetsbaarheid-melden/cvd-meldingen-formulier) before making the issue publicly known. We will deal with your notification and resolve it as quickly as possible together with the NCSC."
       },
       {
         "vraag": "Who can I contact with questions about coronavirus and COVID-19?",
@@ -387,7 +388,7 @@
       },
       {
         "cijfer": "Number of confirmed cases",
-        "verantwoording": "This data is supplied daily as open data by the [RIVM](https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_cumulatief.json). The file is published online every day at 10.00 a.m. and registers the number of confirmed cases (people who tested positive) in the past 24 hours. The date used is the date of notification. This is not the same as the day on which people were tested. \n\nThe RIVM can retroactively correct data that was previously published. These corrections are then applied to the open data file on their site and will automatically be shown on the dashboard. \n\nThe source file contains figures per safety region and municipality. To obtain the national figures, all reports are added. In the sourcefile, not all reports mention a municipality or a safety region. These cannot be shown on that lower level, but will be shown in the national figures. \n\nThe increase in the number of daily confirmed cases is calculated by deducting the current day’s cumulative number of from the cumulative number reported the day before. This produces the absolute number of daily confirmed cases reported, as shown on the dashboard.\n\nWe use the absolute number of confirmed cases to calculate a relative rate per 100,000 inhabitants. We do this by first dividing the number of confirmed cases by the number of inhabitants in the Netherlands. This produces the number of confirmed cases per 100,000 inhabitants, as shown on the dashboard. The number of inhabitants is determined by this [CBS file](https://opendata.cbs.nl/#/CBS/nl/dataset/84721NED/table?dl=3A154).\n \nThe division of new cases by age group is based on the national figures, because ages are not recorded in the file containing municipal data. The table on the RIVM website may therefore not always match the table on the dashboard.\n\nThe alert value for the number of confirmed cases is now added to the dashboard. The value is 7 confirmed cases per 100.000 inhabitants. This means that if this value reached, the number of infections is possibly increasing too fast to keep the novel coronavirus under control. The same value is also used by Germany for example. An alert value functions as a “warning” to examine the situation with urgency. It is possible that this alert value is further refined at another point in time."
+        "verantwoording": "This data is supplied daily as open data by the [RIVM](https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_cumulatief.json). The file is published online every day at 10.00 a.m. and registers the number of confirmed cases (people who tested positive) reportet to the RIVM in the past 24 hours. The date used is the date of notification. This is not the same as the day on which people were tested. \n\nThe RIVM can retroactively correct data that was previously published. These corrections are then applied to the open data file on their site and will automatically be shown on the dashboard. \n\nThe source file contains figures per safety region and municipality. To obtain the national figures, all reports are added. In the sourcefile, not all reports mention a municipality or a safety region because this information is not available. These cannot be shown on that lower level, but will be shown in the national figures. \n\nThe increase in the number of daily confirmed cases is calculated by deducting the current day’s cumulative number of from the cumulative number reported the day before. This produces the absolute number of daily confirmed cases reported, as shown on the dashboard.\n\nWe use the absolute number of confirmed cases to calculate a relative rate per 100,000 inhabitants. We do this by first dividing the number of confirmed cases by the number of inhabitants in the Netherlands. This produces the number of confirmed cases per 100,000 inhabitants, as shown on the dashboard. The number of inhabitants is determined by this [CBS file](https://opendata.cbs.nl/#/CBS/nl/dataset/84721NED/table?dl=3A154).\n \nThe division of new cases by age group is based on the national figures, because ages are not recorded in the file containing municipal data. The table on the RIVM website in the 'COVID-19 weekly epidemiological update of the Netherlands' may therefore not always match the table on the dashboard.\n\nThe alert value for the number of confirmed cases is now added to the dashboard. The value is 7 confirmed cases per 100.000 inhabitants. This means that if this value reached, the number of infections is possibly increasing too fast to keep the novel coronavirus under control. The same value is also used by Germany for example. An alert value functions as a “warning” to examine the situation with urgency. It is possible that this alert value is further refined at another point in time."
       },
       {
         "cijfer": "Reproduction number",
@@ -415,7 +416,7 @@
       },
       {
         "cijfer": "Sewage water examination",
-        "verantwoording": "It is possible to test samples of sewage water for pathogens like the novel coronavirus, because they enter the sewage system via the faeces.  Once a week at each site, researchers from the National Institute for Health and Environment (RIVM) examine samples of sewage water collected over a period of 24 hours. These tests show how many virus particles are in the sewage water. Each week the number of sites may vary, because not every test can be completed successfully. Please note that the values from before 20 July are based on about 28 sites. In the current research we can see trends in the amount of virus particles, like an increase or decrease. We cannot yet compare the number of particles found at different sites. The number of sampling points will be expanded from 80 sites now to over 300 sites from September onwards. Only when testing on this larger scale is complete, it will be possible to draw conclusions based on the findings.\n\nOnce a week (on Tuesdays), this information is delivered [as an open data file by the RIVM](https://data.rivm.nl/covid-19/COVID-19_rioolwaterdata.csv). With the availability of more data, the number of virus particles can be determined more accurately. Therefore, the RIVM has adapted their method to calculate the virus particles per milliliter since 18 August. In the open data file you can see if a measurement in representative of not. For the dashboard we only use representative data.\n\nThe graph’s y-axis shows the concentration of virus particles in one milliliter of sewage water. The x-axis shows the date on which the samples were collected. The national and regional average are weekly averages. The sum of the reported values in the week is divided by the number of sites that completed the tests that week. The reported weeks are from Monday up and until Sunday. These weekly averages are shown in the graph on the Monday of the week. The measured value per location is shown on the date on which the measurement took place.\n\nThe virus particles per milliliter shown on the dashboard can be influenced by a number of other factors. For instance, due to rainfall, the number of virus particles per milliliter can be decreased, because the sewage water is diluted. Furthermore, industrial areas in the catchment areas can bring about this effect, because in the sewage water of industrial areas little to no amount of human faeces can be found. If the concentration of virus particles is too low, it will no longer be found by the test. This will then result in a measurement of zero particles per milliliter.\n\nTo determine which location belongs to which safety regions, we look at the catchment area. This is the area for which the sewage treatment plant purifies the water. The RIVM shares per site the percentage that the catchment area is part of the safety region. This is not entirely accurate and will be improved on in the future. Some sites have a catchment area that contains multiple safety regions. If this is the case, the site is attributed completed to the safety region covering the largest part of the catchment area.\n\nTo match the sites to the municipalities, we currently use the postal code of the site. Using the Statistics Netherlands (CBS) allocation of municipalities, these postal codes are translated to a municipality. In a few cases, no match was found. For these exceptions the municipalities are established by hand, using coordinates of the sites and a map. Please note: the matching of these sites with municipalities can be partly inaccurate, because the catchment area of purification site is not necessarily similar to the borders of the municipalities. This matching between sites and municipalities is currently being improved on."
+        "verantwoording": "It is possible to test samples of sewage water for pathogens like the novel coronavirus, because they enter the sewage system via the faeces.  Once a week at each site, researchers from the National Institute for Health and Environment (RIVM) examine samples of sewage water collected over a period of 24 hours. These tests show how many virus particles are in the sewage water. Each week the number of sites may vary, because not every test can be completed successfully. Please note that the values from before 20 July are based on about 28 sites. The figures between 20 July and 31 August are based on about 80 sites. From 31 August sewage water from about 300 sites is examined. In the current research we can see trends in the amount of virus particles, like an increase or decrease. We cannot yet compare the number of particles found at different sites. More research is necessary in order to be able to draw conclusions based on the findings.\n\nOnce a week (on Tuesdays), this information is delivered [as an open data file by the RIVM](https://data.rivm.nl/covid-19/COVID-19_rioolwaterdata.csv). With the availability of more data, the number of virus particles can be determined more accurately. Therefore, the RIVM has adapted their method to calculate the virus particles per milliliter since 18 August. In the open data file you can see if a measurement in representative of not. For the dashboard we only use representative data.\n\nThe graph’s y-axis shows the concentration of virus particles in one milliliter of sewage water. The x-axis shows the date on which the samples were collected. The national and regional average are weekly averages. The sum of the reported values in the week is divided by the number of sites that completed the tests that week. The reported weeks are from Monday up and until Sunday. These weekly averages are shown in the graph on the Monday of the week. The measured value per location is shown on the date on which the measurement took place.\n\nThe virus particles per milliliter shown on the dashboard can be influenced by a number of other factors. For instance, due to rainfall, the number of virus particles per milliliter can be decreased, because the sewage water is diluted. Furthermore, industrial areas in the catchment areas can bring about this effect, because in the sewage water of industrial areas little to no amount of human faeces can be found. If the concentration of virus particles is too low, it will no longer be found by the test. This will then result in a measurement of zero particles per milliliter.\n\nTo determine which location belongs to which safety regions, we look at the catchment area. This is the area for which the sewage treatment plant purifies the water. The RIVM shares per site the percentage that the catchment area is part of the safety region. This is not entirely accurate and will be improved on in the future. Some sites have a catchment area that contains multiple safety regions. If this is the case, the site is attributed completed to the safety region covering the largest part of the catchment area.\n\nTo match the sites to the municipalities, we currently use the postal code of the site. Using the Statistics Netherlands (CBS) allocation of municipalities, these postal codes are translated to a municipality. In a few cases, no match was found. For these exceptions the municipalities are established by hand, using coordinates of the sites and a map. Please note: the matching of these sites with municipalities can be partly inaccurate, because the catchment area of purification site is not necessarily similar to the borders of the municipalities. This matching between sites and municipalities is currently being improved on."
       },
       {
         "cijfer": "“Value of ” and “Obtained”",
@@ -544,7 +545,7 @@
     }
   },
   "veiligheidsregio_positief_geteste_personen": {
-    "titel_sidebar": "Positief geteste mensen per 100.000 inwoners",
+    "titel_sidebar": "Confirmed cases per 100,000 inhabitants",
     "titel": "Confirmed cases in {{safetyRegion}}",
     "pagina_toelichting": "By keeping track of the number of confirmed cases, we are able to determine the rate at which the virus is spreading before it reaches the intensive care. This keeps us prepared.",
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis. ",
@@ -584,7 +585,7 @@
   "veiligheidsregio_rioolwater_metingen": {
     "titel_sidebar": "Sewage water examination",
     "titel": "Sewage water examination in {{safetyRegion}}",
-    "pagina_toelichting": "Number of virus particles in one milliliter of sewage water, collected from about 80 sites in the Netherlands. The national value is based on the total number of virus particles that is found in a week, divided by the number of sites where the data is collected. From September onward the number of sampling sites will be increased to more than 300.",
+    "pagina_toelichting": "Number of virus particles in one milliliter of sewage water, collected from about 300 sites in the Netherlands. The national value is based on the total number of virus particles that is found in a week, divided by the number of sites where the data is collected. ",
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis. ",
     "screen_reader_graph_content": "{{value}} virus particles in one milliliter of sewage water.",
     "barscale_titel": "Average number of virus particles in one milliliter of sewage water",
@@ -620,7 +621,7 @@
     }
   },
   "gemeente_positief_geteste_personen": {
-    "titel_sidebar": "Positief geteste mensen per 100.000 inwoners",
+    "titel_sidebar": "Confirmed cases per 100,000 inhabitants",
     "titel": "Confirmed cases in {{municipality}}",
     "pagina_toelichting": "By keeping track of the number of confirmed cases, we are able to determine the rate at which the virus is spreading before it reaches the intensive care. This keeps us prepared.",
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -646,12 +647,12 @@
   "gemeente_rioolwater_metingen": {
     "titel_sidebar": "Sewage water examination",
     "titel": "Sewage water examination in {{municipality}}",
-    "pagina_toelichting": "Number of virus particles in one milliliter of sewage water, collected from about 80 sites in the Netherlands. The national value is based on the total number of virus particles that is found in a week, divided by the number of sites where the data is collected. From September onward, the number of sampling sites will be increased to more than 300.",
+    "pagina_toelichting": "Number of virus particles in one milliliter of sewage water, collected from about 300 sites in the Netherlands. The national value is based on the total number of virus particles that is found in a week, divided by the number of sites where the data is collected. ",
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
     "screen_reader_graph_content": "{{value}} virus particles in one milliliter of sewage water.",
     "barscale_titel": "Average number of virus particles in one milliliter of sewage water",
     "extra_uitleg": "The national value is based on the total number of virus particles that is found in a week, divided by the number of sites where the data is collected.",
-    "barscale_screenreader_text": "{{value}} virus particles in one milliliter of sewage water, collected from 80 sited in the Netherlands.",
+    "barscale_screenreader_text": "{{value}} virus particles in one milliliter of sewage water, collected from 300 sites in the Netherlands.",
     "linechart_titel": "Progression over time",
     "bar_chart_title": "Last known value per RWZI location in {{municipality}}",
     "bar_chart_axis_title": "Number of virus particles per milliliter of sewage water",

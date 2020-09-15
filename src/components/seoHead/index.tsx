@@ -26,6 +26,7 @@ function SEOHead(props: SEOHeadProps): any {
   return (
     <Head>
       <title key="title">{title}</title>
+      <meta name="version" key="version" content={process.env.COMMIT_ID} />
 
       <meta
         key="dc-title"
