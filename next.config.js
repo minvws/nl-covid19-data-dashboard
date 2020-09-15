@@ -20,8 +20,7 @@ const nextConfig = {
   env: {
     COMMIT_ID: commitHash,
   },
-
-  webpack(config, { dev }) {
+  webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
       use: [
