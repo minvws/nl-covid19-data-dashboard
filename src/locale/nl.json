@@ -45,7 +45,8 @@
       "gemeente": "Gemeentes"
     },
     "title": "Corona Dashboard",
-    "terug_naar_alle_cijfers": "Terug naar alle cijfers"
+    "terug_naar_alle_cijfers": "Terug naar alle cijfers",
+    "terug_naar_alle_cijfers_homepage": "Alle cijfers"
   },
   "ic_opnames_per_dag": {
     "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
