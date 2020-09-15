@@ -25,6 +25,16 @@ function getOptions(
   allValues: Value[][],
   text: TranslationStrings
 ): Highcharts.Options {
+  const multipleAverageValues = averageValues.length > 1;
+
+  // If any of the RWZI locations has more than 1 value, we trigger different styling
+  const multipleAllValues =
+    allValues &&
+    allValues.length &&
+    allValues
+      .map((values: Value[]) => values.length)
+      .reduce((max, amount) => Math.max(max, amount)) > 1;
+
   const series: SeriesLineOptions[] = [
     {
       type: 'line',
@@ -35,7 +45,7 @@ function getOptions(
       allowPointSelect: false,
       marker: {
         symbol: 'circle',
-        enabled: false,
+        enabled: !multipleAverageValues,
       },
       events: {
         legendItemClick: function () {
@@ -59,7 +69,7 @@ function getOptions(
       color: '#D2D2D2',
       allowPointSelect: false,
       marker: {
-        enabled: false,
+        enabled: !multipleAllValues,
       },
       events: {
         legendItemClick: () => false,
