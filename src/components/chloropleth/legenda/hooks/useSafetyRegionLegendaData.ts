@@ -1,6 +1,6 @@
 import { TRegionMetricName } from '../../shared';
 import useSWR from 'swr';
-import { Regions } from 'types/data.d';
+import { Regions } from 'types/data';
 import useExtent from 'utils/useExtent';
 
 import useLegendaItems from './useLegendaItems';
