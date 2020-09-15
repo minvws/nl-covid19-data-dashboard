@@ -275,9 +275,12 @@ a.metric-link {
   text-decoration: none;
   position: relative;
 
-  &:hover,
-  &:focus {
+  &:hover {
     background: $page-background;
+  }
+
+  &:focus {
+    background: $page-background-active;
   }
 
   h3 {
@@ -325,8 +328,12 @@ a.metric-link {
 }
 
 a.active-metric-link {
-  background: $page-background;
+  background: $page-background-active;
   border-right: 5px solid $red;
+
+  &::after {
+    content: none;
+  }
 }
 
 @media (min-width: 1200px) {
