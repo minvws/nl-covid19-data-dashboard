@@ -9,7 +9,7 @@
   },
   "notificatie": {
     "titel": "More new COVID-19 infections",
-    "bericht": "The number of people who newly tested positive has increased in the past week (9 to 15 September). Again, the sharpest rise in new infections was seen in the provinces of South-Holland and North-Holland. The number of newly tested positive persons increased across all age-groups, but most new infections were reported in the 20-40 year old group. The reproduction number has also increased to 1.38. More COVID-19 patients were reported to have been admitted to the hospital or the ICU in the past week.",
+    "bericht": "The number of people who newly tested positive has increased in the past week (9 to 15 September). Again, the sharpest rise in new infections was seen in the provinces of South-Holland and North-Holland. The number of newly tested positive persons increased across all age-groups, but most new infections were reported in the 20-24 year old group. The reproduction number has also increased, to 1.38. More COVID-19 patients were reported to have been admitted to the hospital or the ICU in the past week.",
     "link": {
       "text": "View the recent information from the RIVM",
       "href": "https://www.rivm.nl/en/novel-coronavirus-covid-19/current-information"
