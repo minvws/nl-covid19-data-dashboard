@@ -7,6 +7,7 @@ import { ContentHeader } from 'components/layout/Content';
 import siteText from 'locale';
 
 import Getest from 'assets/test.svg';
+import formatDecimal from 'utils/formatNumber';
 import { ResultsPerRegion } from 'types/data.d';
 
 import {
@@ -101,8 +102,11 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
             <h3>
               {text.kpi_titel}{' '}
               <span className="text-blue kpi">
-                {Math.round(
-                  resultsPerRegion.last_value.infected_total_counts_per_region
+                {formatDecimal(
+                  Math.round(
+                    resultsPerRegion.last_value
+                      .total_reported_increase_per_region
+                  )
                 )}
               </span>
             </h3>
