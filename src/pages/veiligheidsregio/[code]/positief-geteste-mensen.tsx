@@ -104,7 +104,8 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
               <span className="text-blue kpi">
                 {formatDecimal(
                   Math.round(
-                    resultsPerRegion.last_value.infected_total_counts_per_region
+                    resultsPerRegion.last_value
+                      .total_reported_increase_per_region
                   )
                 )}
               </span>
