@@ -674,7 +674,9 @@
   },
   "laatste_ontwikkelingen": {
     "title": "Latest developments",
-    "menu_subtitle": "More new COVID-19 infections"
+    "menu_subtitle": "More new COVID-19 infections",
+    "regio_cta_gemeente": "Bekijk uw gemeente",
+    "regio_cta_veiligheidsregio": "Bekijk uw veiligheidsregio"
   },
   "escalatie_niveau": {
     "titel": "Level of measures in the Netherlands",
