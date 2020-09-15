@@ -1,4 +1,4 @@
-import { Municipalities } from 'types/data.d';
+import { Municipalities } from 'types/data';
 import { MunicipalityProperties, TMunicipalityMetricName } from '../shared';
 import { FeatureCollection, MultiPolygon } from 'geojson';
 import useSWR from 'swr';

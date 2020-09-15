@@ -16,6 +16,8 @@ import positiveTestedPeopleTooltip from 'components/chloropleth/tooltips/municip
 import positiveTestedPeopleTooltipRegion from 'components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
 import { useState } from 'react';
 import Link from 'next/link';
+import MunicipalityLegenda from 'components/chloropleth/legenda/MunicipalityLegenda';
+import SafetyRegionLegenda from 'components/chloropleth/legenda/SafetyRegionLegenda';
 
 const Home: FCWithLayout<INationalData> = () => {
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
@@ -54,15 +56,27 @@ const Home: FCWithLayout<INationalData> = () => {
           />
 
           {selectedMap === 'municipal' && (
-            <Link href="/gemeente">
-              <a>{text.laatste_ontwikkelingen.regio_cta_gemeente}</a>
-            </Link>
+            <>
+              <MunicipalityLegenda
+                metricName="positive_tested_people"
+                title={text.positief_geteste_personen.chloropleth_legenda.titel}
+              />
+              <Link href="/gemeente">
+                <a>{text.laatste_ontwikkelingen.regio_cta_gemeente}</a>
+              </Link>
+            </>
           )}
 
           {selectedMap === 'region' && (
-            <Link href="/veiligheidsregio">
-              <a>{text.laatste_ontwikkelingen.regio_cta_veiligheidsregio}</a>
-            </Link>
+            <>
+              <SafetyRegionLegenda
+                metricName="positive_tested_people"
+                title={text.positief_geteste_personen.chloropleth_legenda.titel}
+              />
+              <Link href="/veiligheidsregio">
+                <a>{text.laatste_ontwikkelingen.regio_cta_veiligheidsregio}</a>
+              </Link>
+            </>
           )}
         </div>
 
