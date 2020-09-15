@@ -107,7 +107,7 @@ const PostivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
         {positivelyTestedPeople && (
           <LineChart
             values={positivelyTestedPeople.values.map((value) => ({
-              value: value.infected_daily_total,
+              value: value.infected_daily_increase,
               date: value.date_of_report_unix,
             }))}
           />
