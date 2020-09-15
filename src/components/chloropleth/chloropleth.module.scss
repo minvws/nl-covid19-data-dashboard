@@ -2,7 +2,6 @@
 
 .defaultTooltip {
   background-color: white;
-  border: 1px solid lightgrey;
   padding: 0.5em;
 }
 
@@ -18,40 +17,45 @@
 
   path {
     pointer-events: all;
-    stroke: grey;
+    stroke: #01689b;
     stroke-width: 0.5;
   }
 
-  path:hover {
-    stroke-width: 2;
-    stroke: #fff;
-    z-index: 1000;
+  path.selectedPath {
+    stroke: #000000;
+    stroke-width: 1.5;
+    fill: none;
   }
 
-  path.selectedPath {
-    stroke: black;
-    stroke-width: 3;
+  path.noData {
+    pointer-events: all;
+    fill: #fff;
   }
 
   path.noData:hover {
-    stroke: black;
+    pointer-events: all;
+    fill: #62a0be;
   }
 
   path.faded {
-    fill-opacity: 0.2;
-    stroke-opacity: 0.2;
+    stroke: #c4c4c4;
   }
 
   path.overlay {
     pointer-events: none;
-    stroke: black;
-    stroke-width: 1;
+    stroke: #01689b;
+    stroke-width: 0.5;
     fill: transparent;
   }
 
-  path.overlay:hover {
-    stroke: black;
-    stroke-width: 1;
-    fill: transparent;
+  path.hoverLayer {
+    pointer-events: all;
+    fill: none;
+    stroke: transparent;
+  }
+
+  path.hoverLayer:hover {
+    stroke: #000000;
+    stroke-width: 1.5;
   }
 }
