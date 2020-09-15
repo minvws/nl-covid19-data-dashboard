@@ -130,7 +130,7 @@ export default function MunicipalityChloropleth<
         />
       );
     },
-    [selectedVrCode]
+    [selectedVrCode, hasData]
   );
 
   const hoverCallback = useCallback(
