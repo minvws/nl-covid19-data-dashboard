@@ -1,6 +1,6 @@
 import { TMunicipalityMetricName } from 'components/chloropleth/shared';
 import useSWR from 'swr';
-import { Municipalities } from 'types/data.d';
+import { Municipalities } from 'types/data';
 import useExtent from 'utils/useExtent';
 
 import useLegendaItems from './useLegendaItems';
