@@ -15,7 +15,6 @@ import SafetyRegionChloropleth from 'components/chloropleth/SafetyRegionChloropl
 import positiveTestedPeopleTooltip from 'components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
 import positiveTestedPeopleTooltipRegion from 'components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
 import { useState } from 'react';
-import Link from 'next/link';
 import MunicipalityLegenda from 'components/chloropleth/legenda/MunicipalityLegenda';
 import SafetyRegionLegenda from 'components/chloropleth/legenda/SafetyRegionLegenda';
 
@@ -61,9 +60,6 @@ const Home: FCWithLayout<INationalData> = () => {
                 metricName="positive_tested_people"
                 title={text.positief_geteste_personen.chloropleth_legenda.titel}
               />
-              <Link href="/gemeente">
-                <a>{text.laatste_ontwikkelingen.regio_cta_gemeente}</a>
-              </Link>
             </>
           )}
 
@@ -73,9 +69,6 @@ const Home: FCWithLayout<INationalData> = () => {
                 metricName="positive_tested_people"
                 title={text.positief_geteste_personen.chloropleth_legenda.titel}
               />
-              <Link href="/veiligheidsregio">
-                <a>{text.laatste_ontwikkelingen.regio_cta_veiligheidsregio}</a>
-              </Link>
             </>
           )}
         </div>
