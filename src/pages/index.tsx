@@ -53,9 +53,17 @@ const Home: FCWithLayout<INationalData> = () => {
             onChange={(val: 'region' | 'municipal') => setSelectedMap(val)}
           />
 
-          <Link href="/gemeente">
-            <a>{text.laatste_ontwikkelingen.regio_cta}</a>
-          </Link>
+          {selectedMap === 'municipal' && (
+            <Link href="/gemeente">
+              <a>{text.laatste_ontwikkelingen.regio_cta_gemeente}</a>
+            </Link>
+          )}
+
+          {selectedMap === 'region' && (
+            <Link href="/veiligheidsregio">
+              <a>{text.laatste_ontwikkelingen.regio_cta_veiligheidsregio}</a>
+            </Link>
+          )}
         </div>
 
         <div className="column-item column-item-extra-margin">

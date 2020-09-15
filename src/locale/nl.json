@@ -675,7 +675,8 @@
   "laatste_ontwikkelingen": {
     "title": "Laatste ontwikkelingen",
     "menu_subtitle": "Besmettingen COVID-19 toegenomen",
-    "regio_cta": "Bekijk uw gemeente"
+    "regio_cta_gemeente": "Bekijk uw gemeente",
+    "regio_cta_veiligheidsregio": "Bekijk uw veiligheidsregio"
   },
   "escalatie_niveau": {
     "titel": "Maatregelenniveaus in Nederland",
