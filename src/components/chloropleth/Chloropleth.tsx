@@ -21,6 +21,9 @@ export type TProps<TFeatureProperties> = {
   // These are features that are used as an overlay, overlays have no interactions
   // they are simply there to beautify the map or emphasise certain parts.
   overlays: FeatureCollection<MultiPolygon>;
+  // These are features that are used as as the hover features, these are
+  // typically activated when the user mouse overs them.
+  hovers?: FeatureCollection<MultiPolygon, TFeatureProperties>;
   // The boundingbox is calculated based on these features, this can be used to
   // zoom in on a specific part of the map upon initialisation.
   boundingbox: FeatureCollection<MultiPolygon>;
@@ -37,6 +40,13 @@ export type TProps<TFeatureProperties> = {
   // This will usually return a <path/> element.
   overlayCallback: (
     feature: Feature<MultiPolygon>,
+    path: string,
+    index: number
+  ) => ReactNode;
+  // This callback is invoked for each of the features in the hovers property.
+  // This will usually return a <path/> element.
+  hoverCallback: (
+    feature: Feature<MultiPolygon, TFeatureProperties>,
     path: string,
     index: number
   ) => ReactNode;
@@ -61,10 +71,12 @@ export default function Chloropleth<T>(props: TProps<T>) {
   const {
     featureCollection,
     overlays,
+    hovers,
     boundingbox,
     dimensions,
     featureCallback,
     overlayCallback,
+    hoverCallback,
     onPathClick,
     getTooltipContent,
   } = props;
@@ -127,6 +139,11 @@ export default function Chloropleth<T>(props: TProps<T>) {
           <Mercator data={overlays.features} fitSize={sizeToFit}>
             {renderFeature(overlayCallback)}
           </Mercator>
+          {hovers && (
+            <Mercator data={hovers.features} fitSize={sizeToFit}>
+              {renderFeature(hoverCallback)}
+            </Mercator>
+          )}
         </g>
       </svg>
       {tooltipOpen && tooltipData && getTooltipContent && (

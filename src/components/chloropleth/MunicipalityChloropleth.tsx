@@ -1,13 +1,13 @@
 import classNames from 'classnames';
-import { TMunicipalityMetricName } from './shared';
+import { SafetyRegionProperties, TMunicipalityMetricName } from './shared';
 
 import Chloropleth from './Chloropleth';
-import { Feature, MultiPolygon } from 'geojson';
+import { Feature, GeoJsonProperties, MultiPolygon } from 'geojson';
 import useChartDimensions from './hooks/useChartDimensions';
 
 import styles from './chloropleth.module.scss';
 import { CSSProperties, ReactNode, useCallback } from 'react';
-import { Municipalities } from 'types/data.d';
+import { Municipalities } from 'types/data';
 import useMunicipalityData from './hooks/useMunicipalityData';
 import useChloroplethColorScale from './hooks/useChloroplethColorScale';
 import useMunicipalityBoundingbox from './hooks/useMunicipalityBoundingbox';
@@ -23,6 +23,7 @@ export type TProps<
 > = {
   metricName?: T;
   selected?: string;
+  highlightSelection?: boolean;
   style?: CSSProperties;
   onSelect?: (context: TContext) => void;
   tooltipContent?: (context: TContext) => ReactNode;
@@ -56,11 +57,15 @@ export default function MunicipalityChloropleth<
     onSelect,
     tooltipContent,
     gradient,
+    highlightSelection = true,
   } = props;
 
   const [ref, dimensions] = useChartDimensions();
 
-  const boundingbox = useMunicipalityBoundingbox(regionGeo, selected);
+  const [boundingbox, selectedVrCode] = useMunicipalityBoundingbox(
+    regionGeo,
+    selected
+  );
 
   const [getData, hasData, domain] = useMunicipalityData(
     metricName,
@@ -78,16 +83,14 @@ export default function MunicipalityChloropleth<
       _index: number
     ) => {
       const { gemcode } = feature.properties;
-      const isSelected = gemcode === selected;
       const isInSameRegion =
         (safetyRegionMunicipalCodes?.indexOf(gemcode) ?? 0) > -1;
       const className = classNames(
-        isSelected ? styles.selectedPath : undefined,
         !hasData ? styles.noData : undefined,
         isInSameRegion ? undefined : styles.faded
       );
 
-      const fillColor = getFillColor(gemcode);
+      const fillColor = isInSameRegion ? getFillColor(gemcode) : 'white';
 
       return (
         <path
@@ -100,24 +103,62 @@ export default function MunicipalityChloropleth<
         />
       );
     },
-    [getFillColor, selected, hasData, safetyRegionMunicipalCodes]
+    [getFillColor, hasData, safetyRegionMunicipalCodes]
   );
 
-  const overlayCallback = (
-    _feature: Feature<MultiPolygon>,
-    path: string,
-    index: number
-  ) => {
-    return (
-      <path
-        className={styles.overlay}
-        shapeRendering="optimizeQuality"
-        key={`municipality-map-overlay-${index}`}
-        d={path}
-        fill={'none'}
-      />
-    );
-  };
+  const overlayCallback = useCallback(
+    (
+      feature: Feature<
+        MultiPolygon,
+        SafetyRegionProperties | GeoJsonProperties
+      >,
+      path: string,
+      index: number
+    ) => {
+      const { vrcode } = feature.properties as SafetyRegionProperties;
+      const className = classNames(
+        hasData && vrcode !== selectedVrCode ? styles.faded : styles.overlay
+      );
+
+      return (
+        <path
+          className={className}
+          shapeRendering="optimizeQuality"
+          key={`municipality-map-overlay-${index}`}
+          d={path}
+          fill={'none'}
+        />
+      );
+    },
+    [selectedVrCode]
+  );
+
+  const hoverCallback = useCallback(
+    (feature: Feature<MultiPolygon, MunicipalityProperties>, path: string) => {
+      const { gemcode } = feature.properties;
+      const isInSameRegion =
+        (safetyRegionMunicipalCodes?.indexOf(gemcode) ?? 0) > -1;
+      const isSelected = gemcode === selected && highlightSelection;
+      const className = classNames(
+        isSelected ? styles.selectedPath : styles.hoverLayer
+      );
+
+      if (hasData && selected && !isInSameRegion) {
+        return null;
+      }
+
+      return (
+        <path
+          className={className}
+          data-id={gemcode}
+          shapeRendering="optimizeQuality"
+          key={`municipality-map-hover-${gemcode}`}
+          d={path}
+        />
+      );
+    },
+    [hasData, selected, highlightSelection, safetyRegionMunicipalCodes]
+  );
 
   const onClick = (id: string) => {
     if (onSelect) {
@@ -145,10 +186,12 @@ export default function MunicipalityChloropleth<
       <Chloropleth
         featureCollection={municipalGeo}
         overlays={overlays}
+        hovers={hasData ? municipalGeo : undefined}
         boundingbox={boundingbox || countryGeo}
         dimensions={dimensions}
         featureCallback={featureCallback}
         overlayCallback={overlayCallback}
+        hoverCallback={hoverCallback}
         onPathClick={onClick}
         getTooltipContent={getTooltipContent}
       />
