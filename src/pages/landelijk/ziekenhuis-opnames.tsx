@@ -15,6 +15,8 @@ import getNlData, { INationalData } from 'static-props/nl-data';
 import ChartRegionControls from 'components/chartRegionControls';
 import MunicipalityChloropleth from 'components/chloropleth/MunicipalityChloropleth';
 import SafetyRegionChloropleth from 'components/chloropleth/SafetyRegionChloropleth';
+import MunicipalityLegenda from 'components/chloropleth/legenda/MunicipalityLegenda';
+import SafetyRegionLegenda from 'components/chloropleth/legenda/SafetyRegionLegenda';
 
 const text: typeof siteText.ziekenhuisopnames_per_dag =
   siteText.ziekenhuisopnames_per_dag;
@@ -120,6 +122,19 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
           <ChartRegionControls
             onChange={(val: 'region' | 'municipal') => setSelectedMap(val)}
           />
+          {selectedMap === 'municipal' && (
+            <MunicipalityLegenda
+              metricName="hospital_admissions"
+              title={text.chloropleth_legenda.titel}
+            />
+          )}
+
+          {selectedMap === 'region' && (
+            <SafetyRegionLegenda
+              metricName="hospital_admissions"
+              title={text.chloropleth_legenda.titel}
+            />
+          )}
         </div>
 
         <div className="column-item column-item-extra-margin">

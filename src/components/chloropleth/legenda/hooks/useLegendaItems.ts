@@ -22,6 +22,7 @@ export default function useLegendaItems(
     const steps = (max - min) / numberOfItems;
 
     const calcValue = (i: number) => {
+      if (i === numberOfItems) return max;
       return Math.floor(i > 0 ? i * steps : 0);
     };
 
@@ -35,7 +36,7 @@ export default function useLegendaItems(
 
     for (let i = 0; i < numberOfItems; i++) {
       const value = calcValue(i);
-      const nextValue = calcValue(i + 1) - (i === numberOfItems - 1 ? 0 : 1);
+      const nextValue = calcValue(i + 1);
       const label = `${value} - ${nextValue}`;
       legendaItems.push({
         color: color(value),
