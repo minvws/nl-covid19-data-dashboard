@@ -5,7 +5,8 @@
     "message": "Cijfers die iets kunnen zeggen over de verspreiding van het virus."
   },
   "laatst_bijgewerkt": {
-    "message": "Laatst bijgewerkt"
+    "title": "Laatst bijgewerkt",
+    "message": "Het dashboard is op {{dateOfInsertion}} voor het laatst voorzien van nieuwe data."
   },
   "notificatie": {
     "titel": "Besmettingen COVID-19 verder toegenomen",

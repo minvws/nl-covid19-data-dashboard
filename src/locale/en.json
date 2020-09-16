@@ -5,7 +5,8 @@
     "message": "Data that could give insight in the spread of the virus."
   },
   "laatst_bijgewerkt": {
-    "message": "Last updated"
+    "title": "Last updated",
+    "message": "Het dashboard is op {{dateOfInstertion}} voor het laatst voorzien van nieuwe data."
   },
   "notificatie": {
     "titel": "More new COVID-19 infections",

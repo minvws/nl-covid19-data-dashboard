@@ -129,12 +129,6 @@ function SEOHead(props: SEOHeadProps): any {
 
       <link
         rel="preload"
-        href="/json/NL.json"
-        as="fetch"
-        crossOrigin="anonymous"
-      />
-      <link
-        rel="preload"
         href="/json/RANGES.json"
         as="fetch"
         crossOrigin="anonymous"

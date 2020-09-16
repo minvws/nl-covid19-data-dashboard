@@ -2,19 +2,18 @@ import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import SEOHead from 'components/seoHead';
-import MaxWidth from 'components/maxWidth';
-
+import { WithChildren } from 'types';
 import text from 'locale';
-import useMediaQuery from 'utils/useMediaQuery';
-import formatDate from 'utils/formatDate';
-
+import { ILastGeneratedData } from 'static-props/last-generated-data';
 import styles from './layout.module.scss';
 
-import { WithChildren } from 'types';
+import useMediaQuery from 'utils/useMediaQuery';
+import formatDate from 'utils/formatDate';
+import replaceVariablesInText from 'utils/replaceVariablesInText';
 import getLocale from 'utils/getLocale';
 
-import { ILastGeneratedData } from 'static-props/last-generated-data';
+import SEOHead from 'components/seoHead';
+import MaxWidth from 'components/maxWidth';
 
 export interface LayoutProps {
   url?: string;
@@ -251,8 +250,17 @@ function Layout(props: WithChildren<LayoutProps & ILastGeneratedData>) {
                 </nav>
               </div>
               <div className={styles.footerColumn}>
-                <h3>{text.laatst_bijgewerkt.message}</h3>
-                <time dateTime={dateTime}>{dateOfInsertion}</time>
+                <h3>{text.laatst_bijgewerkt.title}</h3>
+                <p
+                  dangerouslySetInnerHTML={{
+                    __html: replaceVariablesInText(
+                      text.laatst_bijgewerkt.message,
+                      {
+                        dateOfInsertion: `<time dateTime=${dateTime}>${dateOfInsertion}</time>`,
+                      }
+                    ),
+                  }}
+                />
               </div>
             </div>
           </MaxWidth>
