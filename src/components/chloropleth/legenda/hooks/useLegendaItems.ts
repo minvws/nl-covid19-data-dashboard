@@ -23,7 +23,7 @@ export default function useLegendaItems(
       thresholds.map<ILegendaItem>((threshold: ChloroplethThresholdsValue) => {
         return {
           color: threshold.color,
-          label: threshold.threshold.toFixed(1),
+          label: threshold.threshold.toString(),
         };
       })
     );
