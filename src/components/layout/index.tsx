@@ -256,7 +256,7 @@ function Layout(props: WithChildren<LayoutProps & ILastGeneratedData>) {
                     __html: replaceVariablesInText(
                       text.laatst_bijgewerkt.message,
                       {
-                        dateOfInstertion: `<time dateTime=${dateTime}>${dateOfInsertion}</time>`,
+                        dateOfInsertion: `<time dateTime=${dateTime}>${dateOfInsertion}</time>`,
                       }
                     ),
                   }}

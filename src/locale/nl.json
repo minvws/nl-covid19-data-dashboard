@@ -6,7 +6,7 @@
   },
   "laatst_bijgewerkt": {
     "title": "Laatst bijgewerkt",
-    "message": "Het dashboard is op {{dateOfInstertion}} voor het laatst voorzien van nieuwe data."
+    "message": "Het dashboard is op {{dateOfInsertion}} voor het laatst voorzien van nieuwe data."
   },
   "notificatie": {
     "titel": "Besmettingen COVID-19 verder toegenomen",
