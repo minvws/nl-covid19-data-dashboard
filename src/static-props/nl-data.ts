@@ -35,16 +35,25 @@ interface IProps {
  * ```
  */
 export default function getNlData(): () => IProps {
-  return function () {
-    const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
-    const fileContents = fs.readFileSync(filePath, 'utf8');
-    const data = JSON.parse(fileContents) as National;
+  return async function () {
+    let nlData;
 
-    const lastGenerated = data.last_generated;
+    const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
+    if (fs.existsSync(filePath)) {
+      const fileContents = fs.readFileSync(filePath, 'utf8');
+      nlData = JSON.parse(fileContents) as National;
+    } else {
+      const res = await fetch(
+        'https://coronadashboard.rijksoverheid.nl/json/NL.json'
+      );
+      nlData = await res.json();
+    }
+
+    const lastGenerated = nlData.last_generated;
 
     return {
       props: {
-        data,
+        data: nlData,
         lastGenerated,
       },
     };
