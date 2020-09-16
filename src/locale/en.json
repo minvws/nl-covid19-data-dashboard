@@ -117,7 +117,13 @@
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the progression over time in the number of new cases by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "cluster_datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
     "cluster_bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
@@ -155,7 +161,7 @@
     "barscale_titel": "Average number of infectious people per 100.000 inhabitants.",
     "barscale_screenreader_text": "{{value}} infectious people per 100.000 inhabitants.",
     "cijfer_titel": "Estimated number of infectious people in the Netherlands:",
-    "cijfer_toelichting": "A calculation of how many people with COVID-19 per 100.000 inhabitants that can transmit the virus. This number is calculated by the RIVM.",
+    "cijfer_toelichting": "A calculation of how many people with COVID-19 inhabitants that can transmit the virus. This number is calculated by the RIVM.",
     "linechart_titel": "Progression over time",
     "titel_sidebar": "Number of infectious people per 100,000 inhabitants"
   },
@@ -416,7 +422,7 @@
       },
       {
         "cijfer": "Sewage water examination",
-        "verantwoording": "It is possible to test samples of sewage water for pathogens like the novel coronavirus, because they enter the sewage system via the faeces.  Once a week at each site, researchers from the National Institute for Health and Environment (RIVM) examine samples of sewage water collected over a period of 24 hours. These tests show how many virus particles are in the sewage water. Each week the number of sites may vary, because not every test can be completed successfully. Please note that the values from before 20 July are based on about 28 sites. The figures between 20 July and 31 August are based on about 80 sites. From 31 August sewage water from about 300 sites is examined. In the current research we can see trends in the amount of virus particles, like an increase or decrease. We cannot yet compare the number of particles found at different sites. More research is necessary in order to be able to draw conclusions based on the findings.\n\nOnce a week (on Tuesdays), this information is delivered [as an open data file by the RIVM](https://data.rivm.nl/covid-19/COVID-19_rioolwaterdata.csv). With the availability of more data, the number of virus particles can be determined more accurately. Therefore, the RIVM has adapted their method to calculate the virus particles per milliliter since 18 August. In the open data file you can see if a measurement in representative of not. For the dashboard we only use representative data.\n\nThe graph’s y-axis shows the concentration of virus particles in one milliliter of sewage water. The x-axis shows the date on which the samples were collected. The national and regional average are weekly averages. The sum of the reported values in the week is divided by the number of sites that completed the tests that week. The reported weeks are from Monday up and until Sunday. These weekly averages are shown in the graph on the Monday of the week. The measured value per location is shown on the date on which the measurement took place.\n\nThe virus particles per milliliter shown on the dashboard can be influenced by a number of other factors. For instance, due to rainfall, the number of virus particles per milliliter can be decreased, because the sewage water is diluted. Furthermore, industrial areas in the catchment areas can bring about this effect, because in the sewage water of industrial areas little to no amount of human faeces can be found. If the concentration of virus particles is too low, it will no longer be found by the test. This will then result in a measurement of zero particles per milliliter.\n\nTo determine which location belongs to which safety regions, we look at the catchment area. This is the area for which the sewage treatment plant purifies the water. The RIVM shares per site the percentage that the catchment area is part of the safety region. This is not entirely accurate and will be improved on in the future. Some sites have a catchment area that contains multiple safety regions. If this is the case, the site is attributed completed to the safety region covering the largest part of the catchment area.\n\nTo match the sites to the municipalities, we currently use the postal code of the site. Using the Statistics Netherlands (CBS) allocation of municipalities, these postal codes are translated to a municipality. In a few cases, no match was found. For these exceptions the municipalities are established by hand, using coordinates of the sites and a map. Please note: the matching of these sites with municipalities can be partly inaccurate, because the catchment area of purification site is not necessarily similar to the borders of the municipalities. This matching between sites and municipalities is currently being improved on."
+        "verantwoording": "It is possible to test samples of sewage water for pathogens like the novel coronavirus, because they enter the sewage system via the faeces.  Once a week at each site, researchers from the National Institute for Health and Environment (RIVM) examine samples of sewage water collected over a period of 24 hours. These tests show how many virus particles are in the sewage water. Each week the number of sites may vary, because not every test can be completed successfully. Please note that the values from before 20 July are based on about 28 sites. The figures between 20 July and 31 August are based on about 80 sites. From 31 August sewage water from about 300 sites is examined. In the current research we can see trends in the amount of virus particles, like an increase or decrease. We cannot yet compare the number of particles found at different sites. More research is necessary in order to be able to draw conclusions based on the findings.\n\nOnce a week (on Tuesdays), this information is delivered [as an open data file by the RIVM](https://data.rivm.nl/covid-19/COVID-19_rioolwaterdata.csv). With the availability of more data, the number of virus particles can be determined more accurately. Therefore, the RIVM has adapted their method to calculate the virus particles per milliliter since 18 August. In the open data file you can see if a measurement in representative of not. For the dashboard we only use representative data.\n\nThe graph’s y-axis shows the concentration of virus particles in one milliliter of sewage water. The x-axis shows the date on which the samples were collected. The national and regional average are weekly averages. The sum of the reported values in the week is divided by the number of sites that completed the tests that week. The reported weeks are from Monday up and until Sunday. These weekly averages are shown in the graph on the Monday of the week.\n\nThe virus particles per milliliter shown on the dashboard can be influenced by a number of other factors. For instance, due to rainfall, the number of virus particles per milliliter can be decreased, because the sewage water is diluted. Furthermore, industrial areas in the catchment areas can bring about this effect, because in the sewage water of industrial areas little to no amount of human faeces can be found. If the concentration of virus particles is too low, it will no longer be found by the test. This will then result in a measurement of zero particles per milliliter.\n\nTo determine which location belongs to which safety regions, we look at the catchment area. This is the area for which the sewage treatment plant purifies the water. The RIVM shares per site the percentage that the catchment area is part of the safety region. This is not entirely accurate and will be improved on in the future. Some sites have a catchment area that contains multiple safety regions. If this is the case, the site is attributed completed to the safety region covering the largest part of the catchment area.\n\nTo match the sites to the municipalities, we currently use the postal code of the site. Using the Statistics Netherlands (CBS) allocation of municipalities, these postal codes are translated to a municipality. In a few cases, no match was found. For these exceptions the municipalities are established by hand, using coordinates of the sites and a map. Please note: the matching of these sites with municipalities can be partly inaccurate, because the catchment area of purification site is not necessarily similar to the borders of the municipalities. This matching between sites and municipalities is currently being improved on."
       },
       {
         "cijfer": "“Value of ” and “Obtained”",
@@ -562,7 +568,13 @@
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the progression over time in the number of positive tests by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -638,7 +650,13 @@
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the change in the number of confirmed cases by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
