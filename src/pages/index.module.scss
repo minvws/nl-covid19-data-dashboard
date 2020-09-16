@@ -60,9 +60,11 @@
 
 .legenda {
   padding-left: 0;
-  vertical-align: bottom;
-  position: absolute;
-  bottom: 0;
+  margin-bottom: 1em;
+
+  @media (min-width: 1200px) {
+    margin-bottom: 0;
+  }
 
   .escalationInfo {
     margin-bottom: 1em;
