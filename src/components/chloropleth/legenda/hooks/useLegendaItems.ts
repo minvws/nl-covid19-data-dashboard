@@ -1,12 +1,12 @@
-import { scaleLinear } from '@vx/scale';
 import { useMemo } from 'react';
 import { ILegendaItem } from '../ChloroplethLegenda';
 
 import siteText from 'locale';
+import { scaleQuantile } from 'd3-scale';
 
 export default function useLegendaItems(
   domain: [min: number, max: number] | undefined,
-  gradient: [min: string, max: string]
+  gradient: string[]
 ) {
   return useMemo(() => {
     if (!domain) {
@@ -14,17 +14,11 @@ export default function useLegendaItems(
     }
     const [min, max] = domain;
 
-    const color = scaleLinear({
-      domain: domain,
-      range: gradient,
-    });
-    const numberOfItems = calculateDivisible(max - min);
-    const steps = (max - min) / numberOfItems;
+    const color = scaleQuantile()
+      .domain(domain)
+      .range(gradient as any);
 
-    const calcValue = (i: number) => {
-      if (i === numberOfItems) return max;
-      return Math.floor(i > 0 ? i * steps : 0);
-    };
+    const quantiles = [min].concat(color.quantiles());
 
     const legendaItems: ILegendaItem[] = [
       {
@@ -32,29 +26,16 @@ export default function useLegendaItems(
         label:
           siteText.positief_geteste_personen.chloropleth_legenda.geen_meldingen,
       },
-    ];
-
-    for (let i = 0; i < numberOfItems; i++) {
-      const value = calcValue(i);
-      const nextValue = calcValue(i + 1);
-      const label = `${value} - ${nextValue}`;
-      legendaItems.push({
-        color: color(i === numberOfItems - 1 ? nextValue : value),
-        label: label,
-      });
-    }
+    ].concat(
+      quantiles.map<ILegendaItem>((q: number, index: number) => {
+        const next = index < quantiles.length - 1 ? quantiles[index + 1] : max;
+        return {
+          color: color(q) as any,
+          label: `${q.toFixed(1)} - ${next.toFixed(1)}`,
+        };
+      })
+    );
 
     return legendaItems;
   }, [domain, gradient]);
-}
-
-function calculateDivisible(input: number) {
-  let div = 5;
-  let quotient = Math.floor(input / div);
-
-  while (quotient === 0 && div > 0) {
-    quotient = Math.floor(input / --div);
-  }
-
-  return div;
 }

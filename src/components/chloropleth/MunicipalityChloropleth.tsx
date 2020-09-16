@@ -56,7 +56,7 @@ export default function MunicipalityChloropleth<
     metricName,
     onSelect,
     tooltipContent,
-    gradient,
+    gradient = ['#c0e8fc', '#87cbf8', '#5dafe4', '#3391cc', '#0579b3'],
     highlightSelection = true,
   } = props;
 
@@ -198,10 +198,6 @@ export default function MunicipalityChloropleth<
     </div>
   );
 }
-
-MunicipalityChloropleth.defaultProps = {
-  gradient: ['#C0E8FC', '#0579B3'],
-};
 
 const overlays = {
   ...countryGeo,

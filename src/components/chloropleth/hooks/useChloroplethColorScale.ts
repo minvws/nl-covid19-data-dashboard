@@ -1,4 +1,4 @@
-import { scaleLinear } from '@vx/scale';
+import { scaleQuantile } from 'd3-scale';
 import { useCallback, useMemo } from 'react';
 
 export type TGetFillColor = (id: string) => string;
@@ -23,26 +23,22 @@ export default function useChloroplethColorScale(
   gradient: string[] | undefined,
   defaultColor = 'white'
 ): TGetFillColor {
-  const colorScale = useMemo(() => {
+  const colorScale = useMemo<any>(() => {
     if (!domain || !gradient) {
       return undefined;
     }
 
-    const color =
-      gradient.length === 2
-        ? scaleLinear({
-            domain: domain,
-            range: gradient,
-          })
-        : (value: number) => gradient[value - 1];
+    const color = scaleQuantile()
+      .domain(domain)
+      .range(gradient as any);
 
     return color;
   }, [domain, gradient]);
 
   return useCallback(
     (id: string) => {
-      if (colorScale) {
-        const data = getData(id);
+      const data = getData(id);
+      if (colorScale && data?.value !== undefined) {
         return colorScale(data.value);
       }
       return defaultColor;

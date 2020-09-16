@@ -1,4 +1,4 @@
-//import styles from './chloroplethlegenda.module.scss';
+import styles from './chloroplethlegenda.module.scss';
 
 export interface ILegendaItem {
   color: string;
@@ -10,15 +10,14 @@ export type TProps = {
   items: ILegendaItem[];
 };
 
-export default function ChloroplethLegenda(_props: TProps) {
-  return null;
-  /*const { items, title } = props;
+export default function ChloroplethLegenda(props: TProps) {
+  const { items, title } = props;
   return (
     <>
       <h4>{title}</h4>
       <ul className={styles.legenda}>
         {items.map((item) => (
-          <li key={item.color} className={styles.legendaItem}>
+          <li key={Math.random()} className={styles.legendaItem}>
             <div
               className={styles.box}
               style={{ backgroundColor: item.color }}
@@ -28,5 +27,5 @@ export default function ChloroplethLegenda(_props: TProps) {
         ))}
       </ul>
     </>
-  );*/
+  );
 }

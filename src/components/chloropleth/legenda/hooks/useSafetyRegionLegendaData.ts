@@ -7,7 +7,7 @@ import useLegendaItems from './useLegendaItems';
 
 export default function useSafetyRegionLegendaData(
   metric: TRegionMetricName,
-  gradient: [min: string, max: string]
+  gradient: string[]
 ) {
   const { data } = useSWR<Regions>('/json/REGIONS.json');
 

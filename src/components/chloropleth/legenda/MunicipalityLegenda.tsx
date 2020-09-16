@@ -9,7 +9,11 @@ export type TProps = {
 };
 
 export default function MunicipalityLegenda(props: TProps) {
-  const { metricName, title, gradients = ['#C0E8FC', '#0579B3'] } = props;
+  const {
+    metricName,
+    title,
+    gradients = ['#c0e8fc', '#87cbf8', '#5dafe4', '#3391cc', '#0579b3'],
+  } = props;
   const items = useMunicipalLegendaData(metricName, gradients);
 
   if (!items) {

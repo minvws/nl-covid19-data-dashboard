@@ -56,7 +56,7 @@ export default function SafetyRegionChloropleth<
     metricProperty,
     onSelect,
     tooltipContent,
-    gradient,
+    gradient = ['#c0e8fc', '#87cbf8', '#5dafe4', '#3391cc', '#0579b3'],
   } = props;
 
   const [ref, dimensions] = useChartDimensions();
@@ -170,7 +170,3 @@ export default function SafetyRegionChloropleth<
     </div>
   );
 }
-
-SafetyRegionChloropleth.defaultProps = {
-  gradient: ['#C0E8FC', '#0579B3'],
-};
