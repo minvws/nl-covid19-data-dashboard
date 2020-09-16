@@ -25,23 +25,27 @@ const positiveTestedThresholds: MunicipalThresholds = {
   dataKey: 'positive_tested_people',
   thresholds: [
     {
-      color: '#c0e8fc',
+      color: '#C0E8FC',
       threshold: 0,
     },
     {
-      color: '#87cbf8',
-      threshold: 5,
+      color: '#8BD1FF',
+      threshold: 4,
     },
     {
-      color: '#5dafe4',
+      color: '#61B6ED',
+      threshold: 7,
+    },
+    {
+      color: '#3597D4',
       threshold: 10,
     },
     {
-      color: '#3391cc',
+      color: '#046899',
       threshold: 20,
     },
     {
-      color: '#0579b3',
+      color: '#034566',
       threshold: 30,
     },
   ],

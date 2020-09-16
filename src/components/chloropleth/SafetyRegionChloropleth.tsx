@@ -21,24 +21,28 @@ const positiveTestedThresholds: RegionalThresholds = {
   dataKey: 'positive_tested_people',
   thresholds: [
     {
-      color: '#c0e8fc',
+      color: '#C0E8FC',
       threshold: 0,
     },
     {
-      color: '#87cbf8',
-      threshold: 15,
+      color: '#8BD1FF',
+      threshold: 4,
     },
     {
-      color: '#5dafe4',
-      threshold: 25,
+      color: '#61B6ED',
+      threshold: 7,
     },
     {
-      color: '#3391cc',
-      threshold: 35,
+      color: '#3597D4',
+      threshold: 10,
     },
     {
-      color: '#0579b3',
-      threshold: 50,
+      color: '#046899',
+      threshold: 20,
+    },
+    {
+      color: '#034566',
+      threshold: 30,
     },
   ],
 };
