@@ -1,5 +1,9 @@
 import classNames from 'classnames';
-import { SafetyRegionProperties, TRegionMetricName } from './shared';
+import {
+  ChloroplethThresholds,
+  SafetyRegionProperties,
+  TRegionMetricName,
+} from './shared';
 import { Regions } from 'types/data';
 import { CSSProperties, ReactNode, useCallback } from 'react';
 import useChartDimensions from './hooks/useChartDimensions';
@@ -10,6 +14,84 @@ import styles from './chloropleth.module.scss';
 import useSafetyRegionBoundingbox from './hooks/useSafetyRegionBoundingbox';
 import useChloroplethColorScale from './hooks/useChloroplethColorScale';
 import useSafetyRegionData from './hooks/useSafetyRegionData';
+
+type RegionalThresholds = ChloroplethThresholds<TRegionMetricName>;
+
+const positiveTestedThresholds: RegionalThresholds = {
+  dataKey: 'positive_tested_people',
+  thresholds: [
+    {
+      color: '#c0e8fc',
+      threshold: 0,
+    },
+    {
+      color: '#87cbf8',
+      threshold: 15,
+    },
+    {
+      color: '#5dafe4',
+      threshold: 25,
+    },
+    {
+      color: '#3391cc',
+      threshold: 35,
+    },
+    {
+      color: '#0579b3',
+      threshold: 50,
+    },
+  ],
+};
+
+const hospitalAdmissionsThresholds: RegionalThresholds = {
+  dataKey: 'hospital_admissions',
+  thresholds: [
+    {
+      color: '#c0e8fc',
+      threshold: 0,
+    },
+    {
+      color: '#87cbf8',
+      threshold: 10,
+    },
+    {
+      color: '#5dafe4',
+      threshold: 16,
+    },
+    {
+      color: '#3391cc',
+      threshold: 24,
+    },
+    {
+      color: '#0579b3',
+      threshold: 31,
+    },
+  ],
+};
+
+const escalationThresholds: RegionalThresholds = {
+  dataKey: 'escalation_levels',
+  thresholds: [
+    {
+      color: '#FFF7A3',
+      threshold: 1,
+    },
+    {
+      color: '#FACB3E',
+      threshold: 2,
+    },
+    {
+      color: '#F5512D',
+      threshold: 3,
+    },
+  ],
+};
+
+export const thresholds: Record<TRegionMetricName, RegionalThresholds> = {
+  positive_tested_people: positiveTestedThresholds,
+  hospital_admissions: hospitalAdmissionsThresholds,
+  escalation_levels: escalationThresholds,
+};
 
 export type TProps<
   T extends TRegionMetricName,
@@ -24,14 +106,13 @@ export type TProps<
   style?: CSSProperties;
   onSelect?: (context: TContext) => void;
   tooltipContent?: (context: TContext) => ReactNode;
-  gradient?: string[];
 };
 
 /**
  * This component renders a map of the Netherlands with the outlines of all the safety regions which
  * receive a fill color based on the specified Region metric data.
  *
- * The metricName specifies which exact metric is visualised. The color scale is calculated using
+ * The metricName specifies which exact metric is visualized. The color scale is calculated using
  * the specified metric and the given gradient.
  * An optional metricProperty name can be provided as well, when the metric key isn't the same name
  * as the actual value property.
@@ -56,20 +137,23 @@ export default function SafetyRegionChloropleth<
     metricProperty,
     onSelect,
     tooltipContent,
-    gradient = ['#c0e8fc', '#87cbf8', '#5dafe4', '#3391cc', '#0579b3'],
   } = props;
 
   const [ref, dimensions] = useChartDimensions();
 
   const boundingbox = useSafetyRegionBoundingbox(regionGeo, selected);
 
-  const [getData, hasData, domain] = useSafetyRegionData(
+  const [getData, hasData] = useSafetyRegionData(
     metricName,
     regionGeo,
     metricProperty
   );
 
-  const getFillColor = useChloroplethColorScale(getData, domain, gradient);
+  const thresholdValues = metricName ? thresholds[metricName] : undefined;
+  const getFillColor = useChloroplethColorScale(
+    getData,
+    thresholdValues?.thresholds
+  );
 
   const featureCallback = useCallback(
     (

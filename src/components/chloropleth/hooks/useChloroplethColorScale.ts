@@ -1,5 +1,6 @@
-import { scaleQuantile } from 'd3-scale';
+import { scaleThreshold } from '@vx/scale';
 import { useCallback, useMemo } from 'react';
+import { ChloroplethThresholdsValue } from '../shared';
 
 export type TGetFillColor = (id: string) => string;
 
@@ -19,21 +20,24 @@ export type TGetFillColor = (id: string) => string;
  */
 export default function useChloroplethColorScale(
   getData: (id: string) => any,
-  domain: [min: number, max: number] | undefined,
-  gradient: string[] | undefined,
+  thresholds?: ChloroplethThresholdsValue[],
   defaultColor = 'white'
 ): TGetFillColor {
   const colorScale = useMemo<any>(() => {
-    if (!domain || !gradient) {
+    if (!thresholds) {
       return undefined;
     }
 
-    const color = scaleQuantile()
-      .domain(domain)
-      .range(gradient as any);
+    const domain = thresholds.map((t) => t.threshold);
+    domain.shift();
+    const scaleArgs = {
+      domain,
+      range: thresholds.map((t) => t.color),
+    };
+    const color = scaleThreshold(scaleArgs);
 
     return color;
-  }, [domain, gradient]);
+  }, [thresholds]);
 
   return useCallback(
     (id: string) => {

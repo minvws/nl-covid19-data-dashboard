@@ -2,23 +2,16 @@ import { useMemo } from 'react';
 import { ILegendaItem } from '../ChloroplethLegenda';
 
 import siteText from 'locale';
-import { scaleQuantile } from 'd3-scale';
+
+import { ChloroplethThresholdsValue } from 'components/chloropleth/shared';
 
 export default function useLegendaItems(
-  domain: [min: number, max: number] | undefined,
-  gradient: string[]
+  thresholds?: ChloroplethThresholdsValue[]
 ) {
   return useMemo(() => {
-    if (!domain) {
+    if (!thresholds) {
       return;
     }
-    const [min, max] = domain;
-
-    const color = scaleQuantile()
-      .domain(domain)
-      .range(gradient as any);
-
-    const quantiles = [min].concat(color.quantiles());
 
     const legendaItems: ILegendaItem[] = [
       {
@@ -27,15 +20,14 @@ export default function useLegendaItems(
           siteText.positief_geteste_personen.chloropleth_legenda.geen_meldingen,
       },
     ].concat(
-      quantiles.map<ILegendaItem>((q: number, index: number) => {
-        const next = index < quantiles.length - 1 ? quantiles[index + 1] : max;
+      thresholds.map<ILegendaItem>((threshold: ChloroplethThresholdsValue) => {
         return {
-          color: color(q) as any,
-          label: `${q.toFixed(1)} - ${next.toFixed(1)}`,
+          color: threshold.color,
+          label: threshold.threshold.toFixed(1),
         };
       })
     );
 
     return legendaItems;
-  }, [domain, gradient]);
+  }, [thresholds]);
 }
