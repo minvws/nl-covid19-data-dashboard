@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, Fragment } from 'react';
 
 import BarScale from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
@@ -25,6 +25,7 @@ import positiveTestedPeopleTooltip from 'components/chloropleth/tooltips/municip
 import positiveTestedPeopleTooltipRegion from 'components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
 import MunicipalityLegenda from 'components/chloropleth/legenda/MunicipalityLegenda';
 import SafetyRegionLegenda from 'components/chloropleth/legenda/SafetyRegionLegenda';
+import replaceVariablesInText from 'utils/replaceVariablesInText';
 
 const text: typeof siteText.positief_geteste_personen =
   siteText.positief_geteste_personen;
@@ -75,6 +76,8 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
     data?.infected_people_delta_normalized;
   const age: IntakeShareAgeGroups | undefined = data?.intake_share_age_groups;
   const total: InfectedPeopleTotal | undefined = data?.infected_people_total;
+
+  const percentageDataGGD = data?.infected_people_percentage?.last_value;
 
   const barChartTotal: number = age?.values
     ? age.values.reduce((mem: number, part): number => {
@@ -199,6 +202,62 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           </>
         )}
       </article>
+
+      {percentageDataGGD && (
+        <>
+          <ContentHeader
+            category={'\u00A0'}
+            title={text.percentage_ggd_titel}
+            Icon={Fragment}
+            subtitle={text.percentage_ggd_toelichting}
+            metadata={{
+              datumsText: text.percentage_ggd_datums,
+              dateUnix: percentageDataGGD.date_of_report_unix,
+              dateInsertedUnix: percentageDataGGD.date_of_insertion_unix,
+              dataSource: text.percentage_ggd_bron,
+            }}
+          />
+
+          <div className="layout-two-column">
+            <article className="metric-article column-item">
+              <h3>
+                {text.percentage_ggd_totaal_getest_week_titel}{' '}
+                <span className="text-dark-blue kpi">
+                  {formatDecimal(percentageDataGGD?.total_tested_ggd)}
+                </span>
+              </h3>
+
+              <p>{text.percentage_ggd_totaal_getest_week_uitleg}</p>
+            </article>
+
+            <article className="metric-article column-item">
+              <h3>
+                {text.percentage_ggd_positief_getest_week_titel}{' '}
+                <span className="text-light-blue kpi">
+                  {formatDecimal(percentageDataGGD?.infected_ggd)}
+                </span>
+                <span
+                  className="additional-kpi"
+                  dangerouslySetInnerHTML={{
+                    __html: replaceVariablesInText(
+                      text.percentage_ggd_positief_getest_getest_week_uitleg,
+                      {
+                        percentage: `<span class="text-light-blue inline-kpi">${formatDecimal(
+                          percentageDataGGD?.percentage_infected_ggd
+                        )}%</span>`,
+                        totaal: `<span class="text-dark-blue inline-kpi">${formatDecimal(
+                          percentageDataGGD?.total_tested_ggd
+                        )}</span>`,
+                      }
+                    ),
+                  }}
+                ></span>
+              </h3>
+              <p>{text.percentage_ggd_positief_getest_week_uitleg}</p>
+            </article>
+          </div>
+        </>
+      )}
     </>
   );
 };

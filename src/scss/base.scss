@@ -33,12 +33,28 @@ svg {
   color: $icon-color;
 }
 
+.text-light-blue {
+  color: #3391cc;
+}
+
+.text-dark-blue {
+  color: #154273;
+}
+
 .kpi {
   display: block;
   font-size: 1.80203rem;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   margin-top: 1rem;
+}
+
+.inline-kpi {
+  font-variant-numeric: tabular-nums;
+}
+
+.additional-kpi {
+  font-size: 0.90909090909em;
 }
 
 .text-max-width {
