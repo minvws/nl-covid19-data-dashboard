@@ -2,11 +2,14 @@ import { Mercator } from '@vx/geo';
 import { Feature, FeatureCollection, MultiPolygon } from 'geojson';
 import { MutableRefObject, ReactNode, useMemo, useRef } from 'react';
 
+import create from 'zustand';
+
 import { TCombinedChartDimensions } from './hooks/useChartDimensions';
 
 import styles from './chloropleth.module.scss';
 import { localPoint } from '@vx/event';
-import { TooltipWithBounds, useTooltip } from '@vx/tooltip';
+
+import Tooltip from './tooltips/tooltip';
 
 export type TRenderCallback = (
   feature: Feature<any, any>,
@@ -97,14 +100,22 @@ export default function Chloropleth<T>(props: TProps<T>) {
     return [[boundedWidth, boundedHeight], boundingbox];
   }, [boundedWidth, boundedHeight, boundingbox]);
 
-  const {
-    tooltipData,
-    tooltipLeft,
-    tooltipTop,
-    tooltipOpen,
-    showTooltip,
-    hideTooltip,
-  } = useTooltip<string>();
+  const tooltipStore = create((set) => ({
+    tooltip: null,
+    showTooltip: (hoveredElement: any) => {
+      return set({
+        tooltip: {
+          left: hoveredElement.tooltipLeft,
+          top: hoveredElement.tooltipTop,
+          data: hoveredElement.tooltipData,
+        },
+      });
+    },
+    hideTooltip: () => set({ tooltip: null }),
+  }));
+
+  const showTooltip = tooltipStore((state) => state.showTooltip);
+  const hideTooltip = tooltipStore((state) => state.hideTooltip);
 
   return (
     <>
@@ -146,15 +157,10 @@ export default function Chloropleth<T>(props: TProps<T>) {
           )}
         </g>
       </svg>
-      {tooltipOpen && tooltipData && getTooltipContent && (
-        <TooltipWithBounds
-          left={tooltipLeft}
-          top={tooltipTop}
-          className={styles.toolTip}
-        >
-          {getTooltipContent(tooltipData)}
-        </TooltipWithBounds>
-      )}
+      <Tooltip
+        tooltipStore={tooltipStore}
+        getTooltipContent={getTooltipContent}
+      />
     </>
   );
 }
@@ -190,10 +196,10 @@ const svgMouseOver = (timout: MutableRefObject<any>, showTooltip: any) => {
     const elm = event.target;
 
     if (elm.attributes['data-id']) {
-      if (timout.current > -1) {
-        clearTimeout(timout.current);
-        timout.current = -1;
-      }
+      // if (timout.current > -1) {
+      //   clearTimeout(timout.current);
+      //   timout.current = -1;
+      // }
 
       const coords = localPoint(event.target.ownerSVGElement, event);
 
@@ -210,10 +216,10 @@ const svgMouseOver = (timout: MutableRefObject<any>, showTooltip: any) => {
 
 const svgMouseOut = (timout: MutableRefObject<any>, hideTooltip: any) => {
   return () => {
-    if (timout.current < 0) {
-      timout.current = setTimeout(() => {
-        hideTooltip();
-      }, 500);
-    }
+    // if (timout.current < 0) {
+    // timout.current = setTimeout(() => {
+    hideTooltip();
+    // }, 500);
+    // }
   };
 };

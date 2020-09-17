@@ -34,7 +34,8 @@
     "swr": "^0.3.1",
     "topojson-client": "^3.1.0",
     "unfetch": "^4.1.0",
-    "unified": "^9.2.0"
+    "unified": "^9.2.0",
+    "zustand": "^3.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.11.4",
