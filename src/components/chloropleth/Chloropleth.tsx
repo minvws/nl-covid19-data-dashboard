@@ -10,9 +10,15 @@ import styles from './chloropleth.module.scss';
 import { localPoint } from '@vx/event';
 
 import Tooltip from './tooltips/tooltip';
+import useMediaQuery from 'utils/useMediaQuery';
 
 const tooltipStore = create((set) => ({
   tooltip: null,
+  updateTooltip: (tooltip: any) => {
+    set({
+      tooltip,
+    });
+  },
   showTooltip: (hoveredElement: any) => {
     return set({
       tooltip: {
@@ -100,6 +106,7 @@ export default function Chloropleth<T>(props: TProps<T>) {
 
   const clipPathId = useRef(`_${Math.random().toString(36).substring(2, 15)}`);
   const timout = useRef<any>(-1);
+  const isLargeScreen = useMediaQuery('(min-width: 1000px)');
 
   const {
     width = 0,
@@ -125,7 +132,7 @@ export default function Chloropleth<T>(props: TProps<T>) {
         className={styles.svgMap}
         onMouseOver={svgMouseOver(timout, showTooltip)}
         onMouseOut={svgMouseOut(timout, hideTooltip)}
-        onClick={svgClick(onPathClick)}
+        onClick={svgClick(onPathClick, showTooltip, isLargeScreen)}
       >
         <clipPath id={clipPathId.current}>
           <rect
@@ -182,13 +189,39 @@ const renderFeature = (callback: TRenderCallback) => {
   );
 };
 
-const svgClick = (onPathClick: any) => {
+const svgClick = (
+  onPathClick: any,
+  showTooltip: any,
+  isLargeScreen: boolean
+) => {
   return (event: any) => {
     const elm = event.target;
     if (elm.attributes['data-id']) {
-      onPathClick(elm.attributes['data-id'].value);
+      const id = elm.attributes['data-id'].value;
+      if (isLargeScreen) {
+        onPathClick(id);
+      } else {
+        positionTooltip(event, elm, showTooltip, id);
+      }
     }
   };
+};
+
+const positionTooltip = (
+  event: any,
+  element: any,
+  showTooltip: any,
+  id: string
+) => {
+  const coords = localPoint(element.ownerSVGElement, event);
+
+  if (coords) {
+    showTooltip({
+      tooltipLeft: coords.x + 5,
+      tooltipTop: coords.y + 5,
+      tooltipData: id,
+    });
+  }
 };
 
 const svgMouseOver = (timout: MutableRefObject<any>, showTooltip: any) => {
@@ -201,15 +234,8 @@ const svgMouseOver = (timout: MutableRefObject<any>, showTooltip: any) => {
         timout.current = -1;
       }
 
-      const coords = localPoint(event.target.ownerSVGElement, event);
-
-      if (coords) {
-        showTooltip({
-          tooltipLeft: coords.x + 5,
-          tooltipTop: coords.y + 5,
-          tooltipData: elm.attributes['data-id'].value,
-        });
-      }
+      const id = elm.attributes['data-id'].value;
+      positionTooltip(event, elm, showTooltip, id);
     }
   };
 };
