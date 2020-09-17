@@ -317,7 +317,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
                     />
                     <span>
                       <NursingHomeInfectedLocationsBarScale
-                        data={data?.total_newly_reported_locations}
+                        data={data?.total_reported_locations}
                         showAxis={true}
                       />
                     </span>
@@ -349,6 +349,14 @@ function NationalLayout(props: WithChildren<INationalData>) {
         </aside>
 
         <section className="national-content">{children}</section>
+
+        {router.route === '/' && (
+          <Link href="/landelijk">
+            <a className="back-button back-button-big">
+              {siteText.nav.terug_naar_alle_cijfers_homepage}
+            </a>
+          </Link>
+        )}
       </div>
     </>
   );

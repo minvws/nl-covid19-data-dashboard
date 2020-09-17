@@ -3,17 +3,12 @@ import { MunicipalityProperties, TMunicipalityMetricName } from '../shared';
 import { FeatureCollection, MultiPolygon } from 'geojson';
 import useSWR from 'swr';
 import { useMemo } from 'react';
-import useExtent from 'utils/useExtent';
 
 export type TGetMunicipalityFunc<T> = (
   id: string
 ) => T | MunicipalityProperties;
 
-export type TMunicipalityDataInfo<T> = [
-  TGetMunicipalityFunc<T>,
-  boolean,
-  [min: number, max: number] | undefined
-];
+export type TMunicipalityDataInfo<T> = [TGetMunicipalityFunc<T>, boolean];
 
 /**
  * This hook takes a metric name, extracts the associated data from the json/municipalities.json
@@ -41,8 +36,6 @@ export default function useMunicipalityData<
 
   const metricItems: ItemType[] | undefined =
     metricName && data ? (data[metricName] as ItemType[]) : undefined;
-
-  const domain = useExtent(metricItems, (item: any) => item[metricName]);
 
   const mergedData = useMemo(() => {
     if (!metricItems) {
@@ -83,6 +76,5 @@ export default function useMunicipalityData<
   return [
     getData,
     mergedData ? Boolean(Object.keys(mergedData).length) : false,
-    domain,
   ];
 }

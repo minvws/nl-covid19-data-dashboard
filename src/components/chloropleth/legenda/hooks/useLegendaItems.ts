@@ -1,30 +1,27 @@
-import { scaleLinear } from '@vx/scale';
 import { useMemo } from 'react';
 import { ILegendaItem } from '../ChloroplethLegenda';
 
 import siteText from 'locale';
 
+import { ChloroplethThresholdsValue } from 'components/chloropleth/shared';
+
+const createLabel = (list: ChloroplethThresholdsValue[], index: number) => {
+  if (index === 0) {
+    return `< ${list[1].threshold}`;
+  }
+  if (index === list.length - 1) {
+    return `> ${list[index].threshold}`;
+  }
+  return `${list[index].threshold} - ${list[index + 1].threshold}`;
+};
+
 export default function useLegendaItems(
-  domain: [min: number, max: number] | undefined,
-  gradient: [min: string, max: string]
+  thresholds?: ChloroplethThresholdsValue[]
 ) {
   return useMemo(() => {
-    if (!domain) {
+    if (!thresholds) {
       return;
     }
-    const [min, max] = domain;
-
-    const color = scaleLinear({
-      domain: domain,
-      range: gradient,
-    });
-    const numberOfItems = calculateDivisible(max - min);
-    const steps = (max - min) / numberOfItems;
-
-    const calcValue = (i: number) => {
-      if (i === numberOfItems) return max;
-      return Math.floor(i > 0 ? i * steps : 0);
-    };
 
     const legendaItems: ILegendaItem[] = [
       {
@@ -32,29 +29,17 @@ export default function useLegendaItems(
         label:
           siteText.positief_geteste_personen.chloropleth_legenda.geen_meldingen,
       },
-    ];
-
-    for (let i = 0; i < numberOfItems; i++) {
-      const value = calcValue(i);
-      const nextValue = calcValue(i + 1);
-      const label = `${value} - ${nextValue}`;
-      legendaItems.push({
-        color: color(i === numberOfItems - 1 ? nextValue : value),
-        label: label,
-      });
-    }
+    ].concat(
+      thresholds.map<ILegendaItem>(
+        (threshold: ChloroplethThresholdsValue, index: number) => {
+          return {
+            color: threshold.color,
+            label: createLabel(thresholds, index),
+          };
+        }
+      )
+    );
 
     return legendaItems;
-  }, [domain, gradient]);
-}
-
-function calculateDivisible(input: number) {
-  let div = 5;
-  let quotient = Math.floor(input / div);
-
-  while (quotient === 0 && div > 0) {
-    quotient = Math.floor(input / --div);
-  }
-
-  return div;
+  }, [thresholds]);
 }
