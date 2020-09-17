@@ -10,7 +10,10 @@ import formatNumber from 'utils/formatNumber';
 
 import siteText from 'locale';
 
-import { TotalReportedLocations } from 'types/data.d';
+import {
+  TotalNewlyReportedLocations,
+  TotalReportedLocations,
+} from 'types/data.d';
 
 import getNlData, { INationalData } from 'static-props/nl-data';
 
@@ -18,7 +21,7 @@ const text: typeof siteText.verpleeghuis_besmette_locaties =
   siteText.verpleeghuis_besmette_locaties;
 
 export function NursingHomeInfectedLocationsBarScale(props: {
-  data: TotalReportedLocations | undefined;
+  data: TotalNewlyReportedLocations | undefined;
   showAxis: boolean;
 }) {
   const { data, showAxis } = props;
@@ -30,9 +33,9 @@ export function NursingHomeInfectedLocationsBarScale(props: {
       min={0}
       max={30}
       screenReaderText={text.barscale_screenreader_text}
-      value={data.last_value.total_reported_locations}
+      value={data.last_value.total_new_reported_locations}
       id="besmette_locaties_verpleeghuis"
-      rangeKey="total_reported_locations"
+      rangeKey="total_new_reported_locations"
       gradient={[
         {
           color: '#3391CC',
@@ -47,6 +50,8 @@ export function NursingHomeInfectedLocationsBarScale(props: {
 const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
   const { data: state } = props;
 
+  const newLocations: TotalNewlyReportedLocations | undefined =
+    state?.total_newly_reported_locations;
   const totalLocations: TotalReportedLocations | undefined =
     state?.total_reported_locations;
 
@@ -59,8 +64,8 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: totalLocations?.last_value?.date_of_report_unix,
-          dateInsertedUnix: totalLocations?.last_value?.date_of_insertion_unix,
+          dateUnix: newLocations?.last_value?.date_of_report_unix,
+          dateInsertedUnix: newLocations?.last_value?.date_of_insertion_unix,
           dataSource: text.bron,
         }}
       />
@@ -70,7 +75,7 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
           <h3>{text.barscale_titel}</h3>
 
           <NursingHomeInfectedLocationsBarScale
-            data={totalLocations}
+            data={newLocations}
             showAxis={true}
           />
           <p>{text.barscale_toelichting}</p>
@@ -94,10 +99,10 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
       <article className="metric-article">
         <h3>{text.linechart_titel}</h3>
 
-        {totalLocations && (
+        {newLocations && (
           <LineChart
-            values={totalLocations.values.map((value) => ({
-              value: value.total_reported_locations,
+            values={newLocations.values.map((value) => ({
+              value: value.total_new_reported_locations,
               date: value.date_of_report_unix,
             }))}
           />
