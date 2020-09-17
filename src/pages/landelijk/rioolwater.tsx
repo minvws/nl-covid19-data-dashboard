@@ -82,7 +82,6 @@ const SewerWater: FCWithLayout<INationalData> = (props) => {
               value: Number(value.average),
               date: value.week_unix,
             }))}
-            signaalwaarde={80} // @TODO set correct value
           />
         </article>
       )}
