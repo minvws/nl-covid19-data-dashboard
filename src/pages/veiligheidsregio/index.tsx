@@ -13,6 +13,7 @@ import SafetyRegionChloropleth, {
   thresholds,
 } from 'components/chloropleth/SafetyRegionChloropleth';
 import formatDate from 'utils/formatDate';
+import replaceVariablesInText from 'utils/replaceVariablesInText';
 
 const escalationThresholds = thresholds.escalation_levels.thresholds;
 
@@ -37,11 +38,11 @@ const escalationTooltipContent = (context: any): ReactNode => {
               <strong>
                 {(text.escalatie_niveau.types as any)[type].titel}
               </strong>
-              :&nbsp;
-              {(text.escalatie_niveau.types as any)[type].toelichting}
+              : {(text.escalatie_niveau.types as any)[type].toelichting}
               <br />
-              {text.escalatie_niveau.valid_from}{' '}
-              {formatDate(context.valid_from)}
+              {replaceVariablesInText(text.escalatie_niveau.valid_from, {
+                validFrom: formatDate(context.valid_from),
+              })}
             </div>
           </div>
         }
