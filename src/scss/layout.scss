@@ -134,6 +134,7 @@
   /* will become display: flex at wider screens */
   display: block;
   flex-direction: column;
+  margin-bottom: 2rem;
 
   .back-button {
     background: white;
@@ -224,7 +225,7 @@
   .safety-region-layout,
   .municipality-layout {
     max-width: 1400px;
-    margin: 0 auto;
+    margin: 0 auto 2rem;
     padding: 0 1em;
   }
 }
