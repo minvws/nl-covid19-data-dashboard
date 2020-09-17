@@ -41,7 +41,7 @@ const escalationTooltipContent = (context: any): ReactNode => {
               : {(text.escalatie_niveau.types as any)[type].toelichting}
               <br />
               {replaceVariablesInText(text.escalatie_niveau.valid_from, {
-                validFrom: formatDate(context.valid_from),
+                validFrom: formatDate(context.valid_from_unix),
               })}
             </div>
           </div>
