@@ -101,7 +101,7 @@ const SafetyRegion: FCWithLayout<any> = () => {
                       ].titel
                     }
                   </strong>
-                  :&nbsp;
+                  :{' '}
                   {
                     (text.escalatie_niveau.types as any)[
                       info.threshold.toString()
