@@ -99,6 +99,7 @@ function getChartOptions(values: Value[], signaalwaarde?: number | undefined) {
               dashStyle: 'Dash',
               width: 1,
               color: '#4f5458',
+              zIndex: 1,
               label: {
                 text: 'Signaalwaarde',
                 align: 'right',
