@@ -1,5 +1,17 @@
 @import 'scss/variables.scss';
 
+.tooltipBase {
+  padding: 0;
+  position: absolute;
+  background-color: white;
+  color: rgb(102, 102, 102);
+  border-radius: 3px;
+  font-size: 14px;
+  box-shadow: rgba(33, 33, 33, 0.2) 0px 1px 2px;
+  line-height: 1em;
+  pointer-events: none;
+}
+
 .defaultTooltip {
   background-color: white;
   padding: 0.5em;

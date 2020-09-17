@@ -6,7 +6,7 @@ import { TCombinedChartDimensions } from './hooks/useChartDimensions';
 
 import styles from './chloropleth.module.scss';
 import { localPoint } from '@vx/event';
-import { TooltipWithBounds, useTooltip } from '@vx/tooltip';
+import { Tooltip, useTooltip } from '@vx/tooltip';
 
 export type TRenderCallback = (
   feature: Feature<any, any>,
@@ -147,13 +147,14 @@ export default function Chloropleth<T>(props: TProps<T>) {
         </g>
       </svg>
       {tooltipOpen && tooltipData && getTooltipContent && (
-        <TooltipWithBounds
+        <Tooltip
           left={tooltipLeft}
           top={tooltipTop}
-          className={styles.toolTip}
+          className={styles.tooltipBase}
+          style={{}}
         >
           {getTooltipContent(tooltipData)}
-        </TooltipWithBounds>
+        </Tooltip>
       )}
     </>
   );
