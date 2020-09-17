@@ -77,9 +77,6 @@ const SewerWater: FCWithLayout<INationalData> = (props) => {
         {data?.values && (
           <LineChart
             title={text.linechart_titel}
-            // description={
-            //   'Even een test beschrijving voor bij deze grafiek zodat ik kan zien hoe dat er uit komt te zien'
-            // }
             timeframeOptions={['all', '5weeks']}
             values={data.values.map((value) => ({
               value: Number(value.average),
