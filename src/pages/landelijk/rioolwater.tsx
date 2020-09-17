@@ -73,8 +73,8 @@ const SewerWater: FCWithLayout<INationalData> = (props) => {
         </div>
       </article>
 
-      <article className="metric-article">
-        {data?.values && (
+      {data?.values && (
+        <article className="metric-article">
           <LineChart
             title={text.linechart_titel}
             timeframeOptions={['all', '5weeks']}
@@ -84,8 +84,8 @@ const SewerWater: FCWithLayout<INationalData> = (props) => {
             }))}
             signaalwaarde={80} // @TODO set correct value
           />
-        )}
-      </article>
+        </article>
+      )}
     </>
   );
 };

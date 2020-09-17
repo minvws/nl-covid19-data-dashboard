@@ -153,21 +153,18 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
         </div>
       </article>
 
-      <article className="metric-article">
-        <h3>{text.linechart_titel}</h3>
-
-        {data && (
-          <>
-            <LineChart
-              values={data.values.map((value: any) => ({
-                value: value.moving_average_hospital,
-                date: value.date_of_report_unix,
-              }))}
-              signaalwaarde={40}
-            />
-          </>
-        )}
-      </article>
+      {data && (
+        <article className="metric-article">
+          <LineChart
+            title={text.linechart_titel}
+            values={data.values.map((value: any) => ({
+              value: value.moving_average_hospital,
+              date: value.date_of_report_unix,
+            }))}
+            signaalwaarde={40}
+          />
+        </article>
+      )}
     </>
   );
 };

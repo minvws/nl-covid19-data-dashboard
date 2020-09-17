@@ -92,23 +92,21 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
         <div className="column-item column-item-extra-margin">
           <p>{text.extra_uitleg}</p>
         </div>
-      </article>
 
-      <article className="metric-article">
-        <h3>{text.linechart_titel}</h3>
 
         {hospitalAdmissions && (
-          <>
+          <article className="metric-article">
             <LineChart
+              title={text.linechart_titel}
               values={hospitalAdmissions.values.map((value: any) => ({
                 value: value.moving_average_hospital,
                 date: value.date_of_report_unix,
               }))}
               signaalwaarde={40}
             />
-          </>
+          </article>
         )}
-      </article>
+
 
       <article className="metric-article layout-two-column">
         <div className="column-item column-item-extra-margin">
