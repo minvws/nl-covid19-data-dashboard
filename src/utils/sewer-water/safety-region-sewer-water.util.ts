@@ -47,7 +47,8 @@ function getSewerWaterMetadata(
   const averagesAvailable = !!data?.average_sewer_installation_per_region
     ?.last_value;
 
-  const installationsAmount = data?.results_per_region?.values?.length;
+  const installationsAmount =
+    data?.results_per_sewer_installation_per_region?.values?.length;
 
   const oneInstallation = installationsAmount === 1;
 

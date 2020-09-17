@@ -7,6 +7,7 @@
     "date_of_report_unix",
     "vrcode",
     "escalation_level",
+    "valid_from_unix",
     "date_of_insertion_unix"
   ],
   "properties": {
@@ -21,6 +22,9 @@
       "type": "number",
       "minimum": 1,
       "maximum": 3
+    },
+    "valid_from_unix": {
+      "type": "integer"
     },
     "date_of_insertion_unix": {
       "type": "integer"

@@ -45,8 +45,6 @@ function BarScale({
 
   const text: typeof siteText.common.barScale = siteText.common.barScale;
 
-  const clipPathId = useRef(`cut-off${id}-${rand.current}`);
-
   if (!x) {
     return null;
   }
@@ -77,7 +75,7 @@ function BarScale({
       <div className={styles.root} aria-hidden="true">
         <svg xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <clipPath id={clipPathId.current}>
+            <clipPath id={`cut-off${id}-${rand.current}`}>
               <rect
                 x="0"
                 y={36}
@@ -110,7 +108,7 @@ function BarScale({
               ry="2"
               width="100%"
               height="10"
-              clipPath={`url(#${clipPathId.current})`}
+              clipPath={`url(#cut-off${id}-${rand.current})`}
               fill={`url(#barColor${id}-${rand.current})`}
             />
             <rect

@@ -681,6 +681,7 @@
   "escalatie_niveau": {
     "titel": "Level of measures in the Netherlands",
     "toelichting": "In addition to the nationwide measures, there can be regional measures in place. Based on the development of the local numbers these measures are regularly revised for the individual safety regions.",
+    "valid_from": "from {{validFrom}}",
     "types": {
       "1": {
         "titel": "Watchful",

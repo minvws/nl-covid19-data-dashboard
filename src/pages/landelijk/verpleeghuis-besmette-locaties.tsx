@@ -21,7 +21,7 @@ const text: typeof siteText.verpleeghuis_besmette_locaties =
   siteText.verpleeghuis_besmette_locaties;
 
 export function NursingHomeInfectedLocationsBarScale(props: {
-  data: TotalNewlyReportedLocations | undefined;
+  data: TotalReportedLocations | undefined;
   showAxis: boolean;
 }) {
   const { data, showAxis } = props;
@@ -33,9 +33,9 @@ export function NursingHomeInfectedLocationsBarScale(props: {
       min={0}
       max={30}
       screenReaderText={text.barscale_screenreader_text}
-      value={data.last_value.total_new_reported_locations}
+      value={data.last_value.total_reported_locations}
       id="besmette_locaties_verpleeghuis"
-      rangeKey="total_new_reported_locations"
+      rangeKey="total_reported_locations"
       gradient={[
         {
           color: '#3391CC',
@@ -74,8 +74,19 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
         <article className="metric-article column-item">
           <h3>{text.barscale_titel}</h3>
 
-          <NursingHomeInfectedLocationsBarScale
-            data={newLocations}
+          <BarScale
+            min={0}
+            max={30}
+            screenReaderText={text.barscale_screenreader_text}
+            value={newLocations?.last_value.total_new_reported_locations}
+            id="besmette_locaties_verpleeghuis"
+            rangeKey="total_new_reported_locations"
+            gradient={[
+              {
+                color: '#3391CC',
+                value: 0,
+              },
+            ]}
             showAxis={true}
           />
           <p>{text.barscale_toelichting}</p>
@@ -99,10 +110,10 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
       <article className="metric-article">
         <h3>{text.linechart_titel}</h3>
 
-        {newLocations && (
+        {totalLocations && (
           <LineChart
-            values={newLocations.values.map((value) => ({
-              value: value.total_new_reported_locations,
+            values={totalLocations.values.map((value) => ({
+              value: value.total_reported_locations,
               date: value.date_of_report_unix,
             }))}
           />

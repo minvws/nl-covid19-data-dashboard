@@ -317,7 +317,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
                     />
                     <span>
                       <NursingHomeInfectedLocationsBarScale
-                        data={data?.total_newly_reported_locations}
+                        data={data?.total_reported_locations}
                         showAxis={true}
                       />
                     </span>

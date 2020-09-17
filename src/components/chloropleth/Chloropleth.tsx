@@ -25,6 +25,7 @@ const tooltipStore = create((set) => ({
   hideTooltip: () => set({ tooltip: null }),
 }));
 
+
 export type TRenderCallback = (
   feature: Feature<any, any>,
   path: string,
@@ -216,10 +217,10 @@ const svgMouseOver = (timout: MutableRefObject<any>, showTooltip: any) => {
 
 const svgMouseOut = (timout: MutableRefObject<any>, hideTooltip: any) => {
   return () => {
-    // if (timout.current < 0) {
-    // timout.current = setTimeout(() => {
-    hideTooltip();
-    // }, 500);
-    // }
+    if (timout.current < 0) {
+      timout.current = setTimeout(() => {
+        hideTooltip();
+      }, 500);
+    }
   };
 };
