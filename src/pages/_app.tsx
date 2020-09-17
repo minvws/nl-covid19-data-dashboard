@@ -24,7 +24,13 @@ interface IProps {
   pageProps: any;
 }
 
-const fetcher = (url: string) => fetch(url).then((r) => r.json());
+const fetcher = (url: string) => {
+  const fetchUrl =
+    process.env.NODE_ENV === 'development'
+      ? `http://coronadashboard.rijksoverheid.nl${url}`
+      : url;
+  return fetch(fetchUrl).then((r) => r.json());
+};
 
 export default MyApp;
 

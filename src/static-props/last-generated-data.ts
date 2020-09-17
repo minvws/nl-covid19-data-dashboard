@@ -44,7 +44,7 @@ export default function getLastGeneratedData(): () => IProps {
       nlData = JSON.parse(fileContents);
     } else {
       const res = await fetch(
-        'https://coronadashboard.rijksoverheid.nl/NL.json'
+        'https://coronadashboard.rijksoverheid.nl/json/NL.json'
       );
       nlData = await res.json();
     }

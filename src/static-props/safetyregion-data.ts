@@ -48,19 +48,30 @@ interface IParams {
  * ```
  */
 export function getSafetyRegionData() {
-  return function ({ params }: IParams): IProps {
+  return async function ({ params }: IParams): IProps {
     const { code } = params;
 
-    // get data for the page
-    const filePath = path.join(process.cwd(), 'public', 'json', `${code}.json`);
-    const fileContents = fs.readFileSync(filePath, 'utf8');
-    const data = JSON.parse(fileContents) as Regionaal;
+    let safetyRegionData: Regionaal;
 
-    const lastGenerated = data.last_generated;
+    const filePath = path.join(process.cwd(), 'public', 'json', `${code}.json`);
+
+    if (fs.existsSync(filePath)) {
+      const fileContents = fs.readFileSync(filePath, 'utf8');
+      safetyRegionData = JSON.parse(fileContents);
+    } else {
+      const res = await fetch(
+        `https://coronadashboard.rijksoverheid.nl/json/${code}.json`
+      );
+      safetyRegionData = await res.json();
+    }
+
+    // get data for the page
+
+    const lastGenerated = safetyRegionData.last_generated;
 
     return {
       props: {
-        data: data,
+        data: safetyRegionData,
         lastGenerated,
       },
     };
