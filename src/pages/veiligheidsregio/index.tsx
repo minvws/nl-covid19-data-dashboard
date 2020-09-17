@@ -88,11 +88,9 @@ const SafetyRegion: FCWithLayout<any> = () => {
               >
                 <div className={styles.bubble}>
                   {info.threshold !== 1 && (
-                    <ExclamationMark fill={info?.color} stroke={info?.color} />
+                    <ExclamationMark fill={info?.color} />
                   )}
-                  {info.threshold === 1 && (
-                    <EmptyBubble fill={info?.color} stroke={info?.color} />
-                  )}
+                  {info.threshold === 1 && <EmptyBubble fill={info?.color} />}
                 </div>
                 <div>
                   <strong>
