@@ -25,7 +25,6 @@ const tooltipStore = create((set) => ({
   hideTooltip: () => set({ tooltip: null }),
 }));
 
-
 export type TRenderCallback = (
   feature: Feature<any, any>,
   path: string,
@@ -197,10 +196,10 @@ const svgMouseOver = (timout: MutableRefObject<any>, showTooltip: any) => {
     const elm = event.target;
 
     if (elm.attributes['data-id']) {
-      // if (timout.current > -1) {
-      //   clearTimeout(timout.current);
-      //   timout.current = -1;
-      // }
+      if (timout.current > -1) {
+        clearTimeout(timout.current);
+        timout.current = -1;
+      }
 
       const coords = localPoint(event.target.ownerSVGElement, event);
 
