@@ -470,5 +470,6 @@ export interface EscalationLevels {
   date_of_report_unix: number;
   vrcode: string;
   escalation_level: number;
+  valid_from_unix: number;
   date_of_insertion_unix: number;
 }

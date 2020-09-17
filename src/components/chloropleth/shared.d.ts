@@ -33,6 +33,7 @@ export type RegionGeoJOSN = FeatureCollection<
 
 export type ChloroplethThresholds<T extends string> = {
   dataKey: T;
+  svgClass?: string;
   thresholds: ChloroplethThresholdsValue[];
 };
 
