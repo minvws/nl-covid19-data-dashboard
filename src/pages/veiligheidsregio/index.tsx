@@ -51,7 +51,6 @@ const SafetyRegion: FCWithLayout<any> = () => {
           <SafetyRegionChloropleth
             style={{ height: '800px', backgroundColor: 'none' }}
             onSelect={onSelectRegion}
-            gradient={['#ffff', '#ffff']}
             tooltipContent={tooltipContent}
           />
         </div>

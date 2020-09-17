@@ -141,14 +141,12 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
           {selectedMap === 'municipal' && (
             <MunicipalityChloropleth
               metricName="hospital_admissions"
-              gradient={['#D2F3FF', '#005684']}
               tooltipContent={tooltipMunicipalContent}
             />
           )}
           {selectedMap === 'region' && (
             <SafetyRegionChloropleth
               metricName="hospital_admissions"
-              gradient={['#D2F3FF', '#005684']}
               tooltipContent={tooltipRegionContent}
             />
           )}

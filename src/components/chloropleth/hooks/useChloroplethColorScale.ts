@@ -1,5 +1,6 @@
-import { scaleLinear } from '@vx/scale';
+import { scaleThreshold } from '@vx/scale';
 import { useCallback, useMemo } from 'react';
+import { ChloroplethThresholdsValue } from '../shared';
 
 export type TGetFillColor = (id: string) => string;
 
@@ -19,30 +20,29 @@ export type TGetFillColor = (id: string) => string;
  */
 export default function useChloroplethColorScale(
   getData: (id: string) => any,
-  domain: [min: number, max: number] | undefined,
-  gradient: string[] | undefined,
+  thresholds?: ChloroplethThresholdsValue[],
   defaultColor = 'white'
 ): TGetFillColor {
-  const colorScale = useMemo(() => {
-    if (!domain || !gradient) {
+  const colorScale = useMemo<any>(() => {
+    if (!thresholds) {
       return undefined;
     }
 
-    const color =
-      gradient.length === 2
-        ? scaleLinear({
-            domain: domain,
-            range: gradient,
-          })
-        : (value: number) => gradient[value - 1];
+    const domain = thresholds.map((t) => t.threshold);
+    domain.shift();
+    const scaleArgs = {
+      domain,
+      range: thresholds.map((t) => t.color),
+    };
+    const color = scaleThreshold(scaleArgs);
 
     return color;
-  }, [domain, gradient]);
+  }, [thresholds]);
 
   return useCallback(
     (id: string) => {
-      if (colorScale) {
-        const data = getData(id);
+      const data = getData(id);
+      if (colorScale && data?.value !== undefined) {
         return colorScale(data.value);
       }
       return defaultColor;
