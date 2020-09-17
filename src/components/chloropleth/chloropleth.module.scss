@@ -11,6 +11,18 @@
   background: transparent;
 }
 
+.chloroplethContainer.escalationMap {
+  .svgMap {
+    path {
+      stroke: #595959;
+    }
+
+    path.overlay {
+      stroke: #595959;
+    }
+  }
+}
+
 .svgMap {
   display: block;
   background: transparent;
