@@ -19,8 +19,27 @@
   width: 265px;
   background-color: white;
   border-radius: 2px;
-  padding: 0 0.5em 0.5em 0.5em;
-  border: 1px solid lightgray;
+  margin: 0;
+
+  .escalationTooltipHeader {
+    border-bottom: 1px solid #c4c4c4;
+    margin: 0;
+    margin-bottom: 1em;
+    font-size: 1.2em;
+
+    &::after {
+      content: '';
+      background-image: url('/images/chevron.svg');
+      // match aspect ratio of chevron.svg
+      background-size: 0.6em 1.2em;
+      height: 1em;
+      width: 0.6em;
+      display: block;
+      position: absolute;
+      right: 1em;
+      top: 1em;
+    }
+  }
 }
 
 .escalationInfo {
@@ -28,25 +47,12 @@
   flex-direction: row;
 
   .bubble {
-    width: 54px;
-    height: 54px;
-    margin-right: 0.5em;
+    display: flex;
+    width: 3em;
+    height: 3em;
     flex-grow: 0;
     flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
   }
-}
-
-.escalationColor1 {
-  fill: #fcd603;
-  stroke: #fcd603;
-}
-
-.escalationColor2 {
-  fill: #f79903;
-  stroke: #f79903;
-}
-
-.escalationColor3 {
-  fill: #f45167;
-  stroke: #f45167;
 }

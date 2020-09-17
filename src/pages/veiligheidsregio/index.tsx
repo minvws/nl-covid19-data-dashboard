@@ -2,28 +2,36 @@ import { FCWithLayout } from 'components/layout';
 import { getSafetyRegionLayout } from 'components/layout/SafetyRegionLayout';
 import { useRouter } from 'next/router';
 import ExclamationMark from 'assets/exclamation-mark-bubble.svg';
+import EmptyBubble from 'assets/empty-bubble.svg';
 import text from 'locale';
 import styles from './index.module.scss';
 
 import getLastGeneratedData from 'static-props/last-generated-data';
 
 import { ReactNode } from 'react';
-import SafetyRegionChloropleth from 'components/chloropleth/SafetyRegionChloropleth';
+import SafetyRegionChloropleth, {
+  thresholds,
+} from 'components/chloropleth/SafetyRegionChloropleth';
+import formatDate from 'utils/formatDate';
 
-const escalationColors = ['#FCD603', '#F79903', '#F45167'];
+const escalationThresholds = thresholds.escalation_levels.thresholds;
 
 const escalationTooltipContent = (context: any): ReactNode => {
-  const type: string = context?.value;
+  const type: number = context?.value;
+  const thresholdInfo = escalationThresholds.find(
+    (value) => value.threshold === type
+  );
   return (
     type && (
       <div className={styles.escalationTooltip}>
-        <h4>Situatie in {context?.vrname}</h4>
+        <div className={styles.escalationTooltipHeader}>
+          <h4>{context?.vrname}</h4>
+        </div>
         {
           <div className={styles.escalationInfo}>
             <div className={styles.bubble}>
-              <ExclamationMark
-                className={`${styles[`escalationColor${type}`]}`}
-              />
+              {type !== 1 && <ExclamationMark fill={thresholdInfo?.color} />}
+              {type === 1 && <EmptyBubble fill={thresholdInfo?.color} />}
             </div>
             <div>
               <strong>
@@ -31,6 +39,9 @@ const escalationTooltipContent = (context: any): ReactNode => {
               </strong>
               :&nbsp;
               {(text.escalatie_niveau.types as any)[type].toelichting}
+              <br />
+              {text.escalatie_niveau.valid_from}{' '}
+              {formatDate(context.valid_from)}
             </div>
           </div>
         }
@@ -65,43 +76,41 @@ const SafetyRegion: FCWithLayout<any> = () => {
           <p className="text-max-width">
             {text.veiligheidsregio_index.selecteer_toelichting}
           </p>
-          <div className={styles.legenda}>
+          <div className={styles.legenda} aria-label="legend">
             <h4 className="text-max-width">
               {text.escalatie_niveau.legenda.titel}
             </h4>
 
-            <div className={styles.escalationInfo}>
-              <div className={styles.bubble}>
-                <ExclamationMark className={styles.escalationColor1} />
+            {escalationThresholds.map((info) => (
+              <div
+                className={styles.escalationInfo}
+                key={`legenda-item-${info?.threshold}`}
+              >
+                <div className={styles.bubble}>
+                  {info.threshold !== 1 && (
+                    <ExclamationMark fill={info?.color} stroke={info?.color} />
+                  )}
+                  {info.threshold === 1 && (
+                    <EmptyBubble fill={info?.color} stroke={info?.color} />
+                  )}
+                </div>
+                <div>
+                  <strong>
+                    {
+                      (text.escalatie_niveau.types as any)[
+                        info.threshold.toString()
+                      ].titel
+                    }
+                  </strong>
+                  :&nbsp;
+                  {
+                    (text.escalatie_niveau.types as any)[
+                      info.threshold.toString()
+                    ].toelichting
+                  }
+                </div>
               </div>
-              <div>
-                <strong>{text.escalatie_niveau.types['1'].titel}</strong>
-                :&nbsp;
-                {text.escalatie_niveau.types['1'].toelichting}
-              </div>
-            </div>
-
-            <div className={styles.escalationInfo}>
-              <div className={styles.bubble}>
-                <ExclamationMark className={styles.escalationColor2} />
-              </div>
-              <div>
-                <strong>{text.escalatie_niveau.types['2'].titel}</strong>
-                :&nbsp;
-                {text.escalatie_niveau.types['2'].toelichting}
-              </div>
-            </div>
-
-            <div className={styles.escalationInfo}>
-              <div className={styles.bubble}>
-                <ExclamationMark className={styles.escalationColor3} />
-              </div>
-              <div>
-                <strong>{text.escalatie_niveau.types['3'].titel}</strong>
-                :&nbsp;
-                {text.escalatie_niveau.types['3'].toelichting}
-              </div>
-            </div>
+            ))}
           </div>
         </div>
         <div className="column-item-no-margin column-item">
@@ -109,7 +118,6 @@ const SafetyRegion: FCWithLayout<any> = () => {
             metricName="escalation_levels"
             metricProperty="escalation_level"
             style={{ height: '500px' }}
-            gradient={escalationColors}
             onSelect={onSelectRegion}
             tooltipContent={escalationTooltipContent}
           />
