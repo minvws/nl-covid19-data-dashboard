@@ -178,7 +178,7 @@ function LineChart({
           <ChartTimeControls
             timeframe={timeframe}
             timeframeOptions={timeframeOptions}
-            onChange={(value) => setTimeframe(value as TimeframeOption)}
+            onChange={setTimeframe}
           />
         </div>
       </header>
