@@ -137,19 +137,21 @@
       "titel": "Aantal per 100.000 inwoners",
       "geen_meldingen": "Geen meldingen"
     },
-    "titel_sidebar": "Positief geteste mensen per 100.000 inwoners",
-    "percentage_ggd_titel": "Aantal geteste personen via GGD",
-    "percentage_ggd_datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "percentage_ggd_bron": {
-      "href": "https://coronadashboard.rijksoverheid.nl/#ggd",
-      "text": "GGD"
+    "titel_sidebar": "Positief geteste mensen per 100.000 inwoners"
+  },
+  "positief_geteste_personen_ggd": {
+    "titel": "Aantal geteste personen via GGD",
+    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "bron": {
+      "href": "https://www.rivm.nl/documenten/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "text": "RIVM"
     },
-    "percentage_ggd_toelichting": "Dit getal zegt iets over het totaal aantal personen dat via de GGD getest is, en hoeveel daarvan een positieve uitslag hadden. Let op dat de meeste testen via de GGD lopen, maar dit niet voor alle testen geldt. Daarom wijkt het absolute aantal positief geteste personen af van het aantal positief geteste personen door de GGD.",
-    "percentage_ggd_totaal_getest_week_titel": "Aantal geteste personen via GGD",
-    "percentage_ggd_totaal_getest_week_uitleg": "Aantal personen die in één week via de GGD getest zijn.",
-    "percentage_ggd_positief_getest_week_titel": "Positief getest personen via GGD",
-    "percentage_ggd_positief_getest_week_uitleg": "Aantal en percentage positief geteste personen die in één week via de GGD getest zijn.",
-    "percentage_ggd_positief_getest_getest_week_uitleg": "dit is {{percentage}} van {{totaal}} geteste personen"
+    "toelichting": "Dit getal zegt iets over het totaal aantal personen dat via de GGD getest is, en hoeveel daarvan een positieve uitslag hadden. Let op dat de meeste testen via de GGD lopen, maar dit niet voor alle testen geldt. Daarom wijkt het absolute aantal positief geteste personen af van het aantal positief geteste personen door de GGD.",
+    "totaal_getest_week_titel": "Aantal geteste personen via GGD",
+    "totaal_getest_week_uitleg": "Aantal personen die in één week via de GGD getest zijn.",
+    "positief_getest_week_titel": "Positief getest personen via GGD",
+    "positief_getest_week_uitleg": "Aantal en percentage positief geteste personen die in één week via de GGD getest zijn.",
+    "positief_getest_getest_week_uitleg": "dit is {{percentage}} van {{totaal}} geteste personen"
   },
   "besmettelijke_personen": {
     "title": "Aantal besmettelijke mensen",

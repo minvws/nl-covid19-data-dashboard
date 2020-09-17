@@ -25,10 +25,13 @@ import positiveTestedPeopleTooltip from 'components/chloropleth/tooltips/municip
 import positiveTestedPeopleTooltipRegion from 'components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
 import MunicipalityLegenda from 'components/chloropleth/legenda/MunicipalityLegenda';
 import SafetyRegionLegenda from 'components/chloropleth/legenda/SafetyRegionLegenda';
-import replaceVariablesInText from 'utils/replaceVariablesInText';
+import replaceKpisInText from 'utils/replaceKpisInText';
 
 const text: typeof siteText.positief_geteste_personen =
   siteText.positief_geteste_personen;
+
+const percentageGgdText: typeof siteText.positief_geteste_personen_ggd =
+  siteText.positief_geteste_personen_ggd;
 
 export function PostivelyTestedPeopleBarScale(props: {
   data: InfectedPeopleDeltaNormalized | undefined;
@@ -207,53 +210,61 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         <>
           <ContentHeader
             category={'\u00A0'}
-            title={text.percentage_ggd_titel}
+            title={percentageGgdText.titel}
             Icon={Fragment}
-            subtitle={text.percentage_ggd_toelichting}
+            subtitle={percentageGgdText.toelichting}
             metadata={{
-              datumsText: text.percentage_ggd_datums,
+              datumsText: percentageGgdText.datums,
               dateUnix: percentageDataGGD.date_of_report_unix,
               dateInsertedUnix: percentageDataGGD.date_of_insertion_unix,
-              dataSource: text.percentage_ggd_bron,
+              dataSource: percentageGgdText.bron,
             }}
           />
 
           <div className="layout-two-column">
             <article className="metric-article column-item">
               <h3>
-                {text.percentage_ggd_totaal_getest_week_titel}{' '}
+                {percentageGgdText.totaal_getest_week_titel}{' '}
                 <span className="text-dark-blue kpi">
                   {formatDecimal(percentageDataGGD?.total_tested_ggd)}
                 </span>
               </h3>
 
-              <p>{text.percentage_ggd_totaal_getest_week_uitleg}</p>
+              <p>{percentageGgdText.totaal_getest_week_uitleg}</p>
             </article>
 
             <article className="metric-article column-item">
               <h3>
-                {text.percentage_ggd_positief_getest_week_titel}{' '}
+                {percentageGgdText.positief_getest_week_titel}{' '}
                 <span className="text-light-blue kpi">
                   {formatDecimal(percentageDataGGD?.infected_ggd)}
                 </span>
                 <span
                   className="additional-kpi"
                   dangerouslySetInnerHTML={{
-                    __html: replaceVariablesInText(
-                      text.percentage_ggd_positief_getest_getest_week_uitleg,
-                      {
-                        percentage: `<span class="text-light-blue inline-kpi">${formatDecimal(
-                          percentageDataGGD?.percentage_infected_ggd
-                        )}%</span>`,
-                        totaal: `<span class="text-dark-blue inline-kpi">${formatDecimal(
-                          percentageDataGGD?.total_tested_ggd
-                        )}</span>`,
-                      }
+                    __html: replaceKpisInText(
+                      percentageGgdText.positief_getest_getest_week_uitleg,
+                      [
+                        {
+                          name: 'percentage',
+                          value: `${formatDecimal(
+                            percentageDataGGD?.percentage_infected_ggd
+                          )}%`,
+                          className: 'text-light-blue',
+                        },
+                        {
+                          name: 'totaal',
+                          value: formatDecimal(
+                            percentageDataGGD?.total_tested_ggd
+                          ),
+                          className: 'text-dark-blue',
+                        },
+                      ]
                     ),
                   }}
                 ></span>
               </h3>
-              <p>{text.percentage_ggd_positief_getest_week_uitleg}</p>
+              <p>{percentageGgdText.positief_getest_week_uitleg}</p>
             </article>
           </div>
         </>
