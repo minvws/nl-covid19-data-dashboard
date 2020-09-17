@@ -11,6 +11,20 @@ import { localPoint } from '@vx/event';
 
 import Tooltip from './tooltips/tooltip';
 
+const tooltipStore = create((set) => ({
+  tooltip: null,
+  showTooltip: (hoveredElement: any) => {
+    return set({
+      tooltip: {
+        left: hoveredElement.tooltipLeft,
+        top: hoveredElement.tooltipTop,
+        data: hoveredElement.tooltipData,
+      },
+    });
+  },
+  hideTooltip: () => set({ tooltip: null }),
+}));
+
 export type TRenderCallback = (
   feature: Feature<any, any>,
   path: string,
@@ -99,20 +113,6 @@ export default function Chloropleth<T>(props: TProps<T>) {
   const sizeToFit: [[number, number], FeatureCollection] = useMemo(() => {
     return [[boundedWidth, boundedHeight], boundingbox];
   }, [boundedWidth, boundedHeight, boundingbox]);
-
-  const tooltipStore = create((set) => ({
-    tooltip: null,
-    showTooltip: (hoveredElement: any) => {
-      return set({
-        tooltip: {
-          left: hoveredElement.tooltipLeft,
-          top: hoveredElement.tooltipTop,
-          data: hoveredElement.tooltipData,
-        },
-      });
-    },
-    hideTooltip: () => set({ tooltip: null }),
-  }));
 
   const showTooltip = tooltipStore((state) => state.showTooltip);
   const hideTooltip = tooltipStore((state) => state.hideTooltip);

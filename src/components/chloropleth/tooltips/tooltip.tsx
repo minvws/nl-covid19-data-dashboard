@@ -1,15 +1,9 @@
-import styles from '../chloropleth.module.scss';
+import styles from './tooltip.module.scss';
 
 export default function Tooltip(props: any) {
   const { tooltipStore, getTooltipContent } = props;
 
   const tooltip = tooltipStore((state: any) => state.tooltip);
-
-  // console.log({ tooltip });
-
-  // if (tooltip) {
-  //   console.log(getTooltipContent(tooltip.data));
-  // }
 
   return tooltip ? (
     <div
@@ -17,7 +11,7 @@ export default function Tooltip(props: any) {
         left: tooltip.left,
         top: tooltip.top,
       }}
-      className={styles.defaultTooltip}
+      className={styles.tooltip}
     >
       {getTooltipContent(tooltip.data)}
     </div>
