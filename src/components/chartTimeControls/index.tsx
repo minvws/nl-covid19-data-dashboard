@@ -1,4 +1,4 @@
-import styles from './chartTimeControls.module.scss';
+import styles from './styles.module.scss';
 
 import RadioGroup, { IRadioGroupItem } from 'components/radioGroup';
 
@@ -25,7 +25,7 @@ function ChartTimeControls(props: IProps) {
   return (
     <RadioGroup
       value={timeframe}
-      className={styles['chart-radio-group']}
+      className={styles.root}
       onChange={onChange}
       values={values}
     />

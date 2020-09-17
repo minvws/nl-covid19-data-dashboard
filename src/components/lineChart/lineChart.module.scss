@@ -1,0 +1,39 @@
+@import 'scss/variables.scss';
+
+.root {
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  // outline: 1px solid blue;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+}
+
+.titleAndDescription {
+  // background-color: hotpink;
+
+  @media (min-width: 768px) {
+    margin-right: 1em;
+    margin-bottom: 1em;
+  }
+}
+
+.timeControls {
+  // @media (min-width: 768px) {
+  flex: none;
+  // }
+
+  /**
+    This is a hack because chartTimeControls contains margin settings.
+  */
+  > div {
+    @media (min-width: 768px) {
+      margin: 0;
+    }
+  }
+}
