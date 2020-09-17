@@ -681,6 +681,7 @@
   "escalatie_niveau": {
     "titel": "Maatregelenniveaus in Nederland",
     "toelichting": "Naast de landelijke maatregelen, kunnen per regio aanvullende maatregelen gelden. Op basis van de lokale ontwikkeling van de cijfers wordt deze steeds regelmatig herzien door de afzonderlijke veiligheidsregio's.",
+    "valid_from": "vanaf {{validFrom}}",
     "types": {
       "1": {
         "titel": "Waakzaam",

@@ -1,5 +1,16 @@
 @import 'scss/variables.scss';
 
+.tooltipBase {
+  padding: 0;
+  position: absolute;
+  color: #666666;
+  border-radius: 3px;
+  font-size: 14px;
+  box-shadow: rgba(33, 33, 33, 0.2) 0px 1px 2px;
+  line-height: 1em;
+  pointer-events: none;
+}
+
 .defaultTooltip {
   background-color: white;
   padding: 0.5em;
@@ -9,6 +20,18 @@
   position: relative;
   height: 400px;
   background: transparent;
+}
+
+.chloroplethContainer.escalationMap {
+  .svgMap {
+    path {
+      stroke: #595959;
+    }
+
+    path.overlay {
+      stroke: #595959;
+    }
+  }
 }
 
 .svgMap {

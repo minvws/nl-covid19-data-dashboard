@@ -1,20 +1,51 @@
 import { FCWithLayout } from 'components/layout';
 import { getSafetyRegionLayout } from 'components/layout/SafetyRegionLayout';
 import { useRouter } from 'next/router';
-
+import ExclamationMark from 'assets/exclamation-mark-bubble.svg';
+import EmptyBubble from 'assets/empty-bubble.svg';
 import text from 'locale';
-import styles from 'components/chloropleth/chloropleth.module.scss';
+import styles from './index.module.scss';
 
 import getLastGeneratedData from 'static-props/last-generated-data';
 
 import { ReactNode } from 'react';
-import SafetyRegionChloropleth from 'components/chloropleth/SafetyRegionChloropleth';
+import SafetyRegionChloropleth, {
+  thresholds,
+} from 'components/chloropleth/SafetyRegionChloropleth';
+import formatDate from 'utils/formatDate';
+import replaceVariablesInText from 'utils/replaceVariablesInText';
 
-const tooltipContent = (context: any): ReactNode => {
+const escalationThresholds = thresholds.escalation_levels.thresholds;
+
+const escalationTooltipContent = (context: any): ReactNode => {
+  const type: number = context?.value;
+  const thresholdInfo = escalationThresholds.find(
+    (value) => value.threshold === type
+  );
   return (
-    context && (
-      <div className={styles.defaultTooltip}>
-        <strong>{context.vrname}</strong>
+    type && (
+      <div className={styles.escalationTooltip}>
+        <div className={styles.escalationTooltipHeader}>
+          <h4>{context?.vrname}</h4>
+        </div>
+        {
+          <div className={styles.escalationInfo}>
+            <div className={styles.bubble}>
+              {type !== 1 && <ExclamationMark fill={thresholdInfo?.color} />}
+              {type === 1 && <EmptyBubble fill={thresholdInfo?.color} />}
+            </div>
+            <div>
+              <strong>
+                {(text.escalatie_niveau.types as any)[type].titel}
+              </strong>
+              : {(text.escalatie_niveau.types as any)[type].toelichting}
+              <br />
+              {replaceVariablesInText(text.escalatie_niveau.valid_from, {
+                validFrom: formatDate(context.valid_from_unix),
+              })}
+            </div>
+          </div>
+        }
       </div>
     )
   );
@@ -46,12 +77,48 @@ const SafetyRegion: FCWithLayout<any> = () => {
           <p className="text-max-width">
             {text.veiligheidsregio_index.selecteer_toelichting}
           </p>
+          <div className={styles.legenda} aria-label="legend">
+            <h4 className="text-max-width">
+              {text.escalatie_niveau.legenda.titel}
+            </h4>
+
+            {escalationThresholds.map((info) => (
+              <div
+                className={styles.escalationInfo}
+                key={`legenda-item-${info?.threshold}`}
+              >
+                <div className={styles.bubble}>
+                  {info.threshold !== 1 && (
+                    <ExclamationMark fill={info?.color} />
+                  )}
+                  {info.threshold === 1 && <EmptyBubble fill={info?.color} />}
+                </div>
+                <div>
+                  <strong>
+                    {
+                      (text.escalatie_niveau.types as any)[
+                        info.threshold.toString()
+                      ].titel
+                    }
+                  </strong>
+                  :{' '}
+                  {
+                    (text.escalatie_niveau.types as any)[
+                      info.threshold.toString()
+                    ].toelichting
+                  }
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
         <div className="column-item-no-margin column-item">
           <SafetyRegionChloropleth
-            style={{ height: '800px', backgroundColor: 'none' }}
+            metricName="escalation_levels"
+            metricProperty="escalation_level"
+            style={{ height: '500px' }}
             onSelect={onSelectRegion}
-            tooltipContent={tooltipContent}
+            tooltipContent={escalationTooltipContent}
           />
         </div>
       </article>
