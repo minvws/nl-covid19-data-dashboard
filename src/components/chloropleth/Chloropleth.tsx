@@ -2,11 +2,28 @@ import { Mercator } from '@vx/geo';
 import { Feature, FeatureCollection, MultiPolygon } from 'geojson';
 import { MutableRefObject, ReactNode, useMemo, useRef } from 'react';
 
+import create from 'zustand';
+
 import { TCombinedChartDimensions } from './hooks/useChartDimensions';
 
 import styles from './chloropleth.module.scss';
 import { localPoint } from '@vx/event';
-import { Tooltip, useTooltip } from '@vx/tooltip';
+
+import Tooltip from './tooltips/tooltip';
+
+const tooltipStore = create((set) => ({
+  tooltip: null,
+  showTooltip: (hoveredElement: any) => {
+    return set({
+      tooltip: {
+        left: hoveredElement.tooltipLeft,
+        top: hoveredElement.tooltipTop,
+        data: hoveredElement.tooltipData,
+      },
+    });
+  },
+  hideTooltip: () => set({ tooltip: null }),
+}));
 
 export type TRenderCallback = (
   feature: Feature<any, any>,
@@ -97,14 +114,8 @@ export default function Chloropleth<T>(props: TProps<T>) {
     return [[boundedWidth, boundedHeight], boundingbox];
   }, [boundedWidth, boundedHeight, boundingbox]);
 
-  const {
-    tooltipData,
-    tooltipLeft,
-    tooltipTop,
-    tooltipOpen,
-    showTooltip,
-    hideTooltip,
-  } = useTooltip<string>();
+  const showTooltip = tooltipStore((state) => state.showTooltip);
+  const hideTooltip = tooltipStore((state) => state.hideTooltip);
 
   return (
     <>
@@ -146,16 +157,10 @@ export default function Chloropleth<T>(props: TProps<T>) {
           )}
         </g>
       </svg>
-      {tooltipOpen && tooltipData && getTooltipContent && (
-        <Tooltip
-          left={tooltipLeft}
-          top={tooltipTop}
-          className={styles.tooltipBase}
-          style={{}}
-        >
-          {getTooltipContent(tooltipData)}
-        </Tooltip>
-      )}
+      <Tooltip
+        tooltipStore={tooltipStore}
+        getTooltipContent={getTooltipContent}
+      />
     </>
   );
 }
