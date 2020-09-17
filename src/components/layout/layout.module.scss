@@ -150,8 +150,9 @@ $language-switcher-offset: 55px;
   display: flex;
   flex-direction: column;
 
-  time {
+  p {
     font-size: 1.125em;
+    max-width: 25em;
   }
 
   @media (min-width: 768px) {
