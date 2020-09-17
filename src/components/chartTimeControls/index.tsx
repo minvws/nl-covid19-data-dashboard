@@ -1,4 +1,4 @@
-import styles from './styles.module.scss';
+import styles from './chartTimeControls.module.scss';
 
 import RadioGroup, { IRadioGroupItem } from 'components/radioGroup';
 
