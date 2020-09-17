@@ -7,11 +7,11 @@ import 'components/lineChart/lineChart.scss';
 import 'components/comboBox/comboBox.scss';
 
 // Import Preact DevTools in development
-if (process.env.NODE_ENV === 'development') {
-  // Must use require here as import statements are only allowed
-  // to exist at the top of a file.
-  require('preact/debug');
-}
+// if (process.env.NODE_ENV === 'development') {
+//   // Must use require here as import statements are only allowed
+//   // to exist at the top of a file.
+//   require('preact/debug');
+// }
 
 import { useEffect } from 'react';
 import Router from 'next/router';
