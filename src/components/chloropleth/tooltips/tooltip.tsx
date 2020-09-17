@@ -7,11 +7,11 @@ export default function Tooltip(props: any) {
 
   return tooltip ? (
     <div
+      className={styles.tooltip}
       style={{
         left: tooltip.left,
         top: tooltip.top,
       }}
-      className={styles.tooltip}
     >
       {getTooltipContent(tooltip.data)}
     </div>
