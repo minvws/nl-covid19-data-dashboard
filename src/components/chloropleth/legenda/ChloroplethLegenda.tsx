@@ -17,7 +17,7 @@ export default function ChloroplethLegenda(props: TProps) {
       <h4>{title}</h4>
       <ul className={styles.legenda}>
         {items.map((item) => (
-          <li key={Math.random()} className={styles.legendaItem}>
+          <li key={item.color} className={styles.legendaItem}>
             <div
               className={styles.box}
               style={{ backgroundColor: item.color }}
