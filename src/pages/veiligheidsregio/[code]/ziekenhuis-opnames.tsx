@@ -36,23 +36,14 @@ export function IntakeHospitalBarScale(props: {
     <BarScale
       min={0}
       max={100}
-      signaalwaarde={40}
       screenReaderText={text.barscale_screenreader_text}
       value={data.last_value.hospital_moving_avg_per_region}
       id="opnames"
       rangeKey="hospital_moving_avg_per_region"
       gradient={[
         {
-          color: '#69c253',
+          color: '#3391CC',
           value: 0,
-        },
-        {
-          color: '#D3A500',
-          value: 40,
-        },
-        {
-          color: '#f35065',
-          value: 90,
         },
       ]}
       showAxis={showAxis}
@@ -105,7 +96,6 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
                 value: value.hospital_moving_avg_per_region,
                 date: value.date_of_report_unix,
               }))}
-              signaalwaarde={40}
             />
           </>
         )}
