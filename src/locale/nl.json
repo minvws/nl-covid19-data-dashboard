@@ -692,7 +692,7 @@
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Risiconiveaus",
-    "selecteer_toelichting": "De kaart geeft het risiconiveau per regio weer. Dat kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2) of ‘ernstig’ (niveau 3) zijn. Per regio worden passende maatregelen genomen.\n\n[Meer over de risiconiveaus](/verantwoording)"
+    "selecteer_toelichting": "De kaart geeft het risiconiveau per regio weer. Dat kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2) of ‘ernstig’ (niveau 3) zijn. Per regio worden passende maatregelen genomen.\n\n[Regionale maatregelen](https://www.rijksoverheid.nl/actueel/nieuws/2020/09/18/nieuwe-regionale-maatregelen-om-het-virus-in-te-dammen)\n[Meer over de risiconiveaus](/verantwoording)"
   },
   "gemeente_index": {
     "selecteer_titel": "Selecteer een gemeente",
@@ -706,7 +706,7 @@
   },
   "escalatie_niveau": {
     "titel": "Risiconiveaus",
-    "toelichting": "De kaart geeft het risiconiveau per regio weer. Dat kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2) of ‘ernstig’ (niveau 3) zijn. Per regio worden passende maatregelen genomen.\n\n[Meer over de risiconiveaus](/verantwoording)",
+    "toelichting": "De kaart geeft het risiconiveau per regio weer. Dat kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2) of ‘ernstig’ (niveau 3) zijn. Per regio worden passende maatregelen genomen.\n\n[Regionale maatregelen](https://www.rijksoverheid.nl/actueel/nieuws/2020/09/18/nieuwe-regionale-maatregelen-om-het-virus-in-te-dammen)\n[Meer over de risiconiveaus](/verantwoording)",
     "types": {
       "1": {
         "titel": "Waakzaam",
