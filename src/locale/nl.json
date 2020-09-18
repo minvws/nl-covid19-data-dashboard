@@ -5,8 +5,8 @@
     "message": "Cijfers die iets kunnen zeggen over de verspreiding van het virus."
   },
   "laatst_bijgewerkt": {
-    "title": "Laatst bijgewerkt",
-    "message": "Het dashboard is op {{dateOfInsertion}} voor het laatst voorzien van nieuwe data."
+    "message": "Het dashboard is op {{dateOfInsertion}} voor het laatst voorzien van nieuwe data.",
+    "title": "Laatst bijgewerkt"
   },
   "notificatie": {
     "titel": "Besmettingen COVID-19 verder toegenomen",
@@ -118,7 +118,13 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de trend van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
+    "barscale_keys": [
+      "0 tot 20",
+      "20 tot 40",
+      "40 tot 60",
+      "60 tot 80",
+      "80+"
+    ],
     "cluster_datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "cluster_bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
@@ -137,7 +143,7 @@
       "titel": "Aantal per 100.000 inwoners",
       "geen_meldingen": "Geen meldingen"
     },
-    "titel_sidebar": "Positief geteste mensen per 100.000 inwoners"
+    "titel_sidebar": "Positief geteste mensen per 100.000 inwoners per dag"
   },
   "besmettelijke_personen": {
     "title": "Aantal besmettelijke mensen",
@@ -262,7 +268,7 @@
     "pagina_toelichting": "Aantal overleden bewoners in verpleeghuizen met een vastgestelde COVID-19-besmetting per dag.",
     "barscale_titel": "Aantal overleden bewoners",
     "barscale_screenreader_text": "{{value}} overleden bewoners.",
-    "extra_uitleg": "Dit getal is een inschatting van het aantal gemelde verpleeghuisbewoners dat in Nederland overlijdt aan de gevolgen van het nieuwe coronavirus. Dit getal verwijst naar de datum vóór de datum van de laatste update.",
+    "extra_uitleg": "Dit getal is een inschatting van het aantal gemelde verpleeghuisbewoners dat in Nederland overlijdt aan de gevolgen van het nieuwe coronavirus.",
     "linechart_titel": "Verloop over tijd",
     "map_titel": "Verpleeghuis oversterfte in Nederland",
     "map_toelichting": "Deze grafieken laten zien hoe de oversterfte in verpleeghuizen is in Nederland per dag."
@@ -546,7 +552,7 @@
     }
   },
   "veiligheidsregio_positief_geteste_personen": {
-    "titel_sidebar": "Positief geteste mensen per 100.000 inwoners",
+    "titel_sidebar": "Positief geteste mensen per 100.000 inwoners per dag",
     "titel": "Positief geteste mensen in {{safetyRegion}}",
     "pagina_toelichting": "Door het aantal positief geteste mensen bij te houden krijgen we een duidelijk beeld van hoe snel het virus zich verspreid voordat het de intensive care bereikt. Hierdoor blijven we voorbereid.",
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -563,7 +569,13 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de trend van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
+    "barscale_keys": [
+      "0 tot 20",
+      "20 tot 40",
+      "40 tot 60",
+      "60 tot 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -622,7 +634,7 @@
     }
   },
   "gemeente_positief_geteste_personen": {
-    "titel_sidebar": "Positief geteste mensen per 100.000 inwoners",
+    "titel_sidebar": "Positief geteste mensen per 100.000 inwoners per dag",
     "titel": "Positief geteste mensen in {{municipality}}",
     "pagina_toelichting": "Door het aantal positief geteste mensen bij te houden krijgen we een duidelijk beeld van hoe snel het virus zich verspreid voordat het de intensive care bereikt. Hierdoor blijven we voorbereid.",
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -639,7 +651,13 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de trend van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": ["0 to 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 tot 40",
+      "40 tot 60",
+      "60 tot 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -681,7 +699,6 @@
   "escalatie_niveau": {
     "titel": "Maatregelenniveaus in Nederland",
     "toelichting": "Naast de landelijke maatregelen, kunnen per regio aanvullende maatregelen gelden. Op basis van de lokale ontwikkeling van de cijfers wordt deze steeds regelmatig herzien door de afzonderlijke veiligheidsregio's.",
-    "valid_from": "vanaf {{validFrom}}",
     "types": {
       "1": {
         "titel": "Waakzaam",
@@ -698,6 +715,7 @@
     },
     "legenda": {
       "titel": "Legenda situatiekaart"
-    }
+    },
+    "valid_from": "vanaf {{validFrom}}"
   }
 }
