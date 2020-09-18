@@ -378,12 +378,12 @@
     "paragraaf": "In dit dashboard staan verschillende cijfers die ons vertellen hoe het ervoor staat met beheersen van COVID-19. Op deze plek geven we meer toelichting over de wijze waarop de cijfers zijn samengesteld.",
     "cijfers": [
       {
-        "cijfer": "Correctie cijfers 2 september in aantal positief geteste mensen",
-        "verantwoording": "Vanwege een eerdere technische storing bij het RIVM ontbreekt een aantal meldingen in de rapportage van 1 september. Deze meldingen zijn opgenomen in de rapportage van 2 september. Hierdoor is het aantal nieuwe positief geteste personen gemeld op 2 september (734) bijna 300 meldingen hoger dan op 1 september (462)."
+        "cijfer": "Risiconiveaus",
+        "verantwoording": "Er zijn veel gegevens over het coronavirus. Iedere week wordt bekeken of de situatie zich positief of negatief ontwikkelt. Dan beoordelen het Rijk, de GGD’en, het RIVM en de veiligheidsregio’s in gezamenlijkheid samen de situatie en het stellen risiconiveaus vast. Moeten we waakzaam zijn (niveau 1), is de situatie zorgelijk (niveau 2) of is de situatie zelfs ernstig te noemen (niveau 3)? Zo is voor iedereen in één oogopslag duidelijk hoe het ervoor staat met het coronavirus per regio. Afhankelijk van het niveau kunnen bestuurders maatregelen treffen. Daarbij wordt altijd gekeken naar de effecten van de maatregelen op de samenleving en de economie. De maatregelen zijn maatwerk en kunnen per regio verschillen.\n\nWat betekenen de drie risiconiveaus? \n\n1. Waakzaam\nEr is sprake van een beheersbare situatie. Het aantal nieuwe besmettingen is laag. Kwetsbare groepen dienen alert te zijn. Het bron-en contactonderzoek is overwegend effectief. Maatregelen worden voldoende nageleefd en zijn te handhaven. Er is voldoende regionale zorgcapaciteit beschikbaar. Aanvullende maatregelen zijn erop gericht om de bestaande aanpak beter te laten functioneren.\n\n2. Zorgelijk\nDe situatie ontwikkelt zich negatief. Het aantal nieuwe besmettingen neemt toe. Maatwerk is nodig om kwetsbaren groepen te beschermen. Als de situatie voortduurt, wordt het bron- en contactonderzoek ineffectief. Maatregelen worden onvoldoende nageleefd. De druk op de regionale zorgcapaciteit neemt toe. De bestaande aanpak moet met aanvullende maatregelen worden versterkt om de verspreiding van het virus weer onder controle te krijgen en terug te keren naar een beheersbare situatie.\n\n3. Ernstig\nHard ingrijpen is noodzakelijk om verdere escalatie te voorkomen en terug te keren naar een beheersbare situatie (waakzaam). Het aantal nieuwe besmettingen neemt snel toe. Het bron- en contactonderzoek is niet meer effectief, waardoor het zicht op de verspreiding afneemt. Maatregelen worden onvoldoende nageleefd. De regionale zorgcapaciteit is onvoldoende. Maatregelen zijn erop gericht om (regionale) overbelasting van de zorg te voorkomen, kwetsbaren te beschermen en weer zicht op de verspreiding van het virus te krijgen."
       },
       {
-        "cijfer": "Update 31 juli over signaalwaarde aantal besmettelijke personen",
-        "verantwoording": "Oorspronkelijk is op het dashboard gecommuniceerd dat er een signaalwaarde zou komen voor het aantal besmettelijke personen. Op advies van de modelleurs van het RIVM wordt deze niet aan het dashboard toegevoegd. Dit omdat dit een inschatting is die niet puur op berekeningen berust maar ook op aannames, zoals over infectieuze periode."
+        "cijfer": "Correctie cijfers 2 september in aantal positief geteste mensen",
+        "verantwoording": "Vanwege een eerdere technische storing bij het RIVM ontbreekt een aantal meldingen in de rapportage van 1 september. Deze meldingen zijn opgenomen in de rapportage van 2 september. Hierdoor is het aantal nieuwe positief geteste personen gemeld op 2 september (734) bijna 300 meldingen hoger dan op 1 september (462)."
       },
       {
         "cijfer": "Intensive care-bezetting",
@@ -432,6 +432,10 @@
       {
         "cijfer": "Open source data verwerking",
         "verantwoording": "Dit dashboard is in korte tijd tot stand gekomen. Het is daarom nog niet gelukt om de code voor het inlezen van de data en het construeren van de JSON- bestanden open source beschikbaar te stellen. Dit zal binnen afzienbare tijd beschikbaar worden gesteld. De code van de webapplicatie is op 5 juni 2020 gepubliceerd op [GitHub](https://github.com/minvws/nl-covid19-data-dashboard). De [databerekeningen](https://github.com/minvws/nl-covid19-data-backend-processing) zijn ook beschikbaar via Github."
+      },
+      {
+        "cijfer": "Update 31 juli over signaalwaarde aantal besmettelijke personen",
+        "verantwoording": "Oorspronkelijk is op het dashboard gecommuniceerd dat er een signaalwaarde zou komen voor het aantal besmettelijke personen. Op advies van de modelleurs van het RIVM wordt deze niet aan het dashboard toegevoegd. Dit omdat dit een inschatting is die niet puur op berekeningen berust maar ook op aannames, zoals over infectieuze periode."
       }
     ]
   },
@@ -686,7 +690,7 @@
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Risiconiveaus",
-    "selecteer_toelichting": ""
+    "selecteer_toelichting": "De kaart geeft het risiconiveau per regio weer. Die kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2) of ‘ernstig’ (niveau 3) zijn. Per regio worden passende maatregelen genomen."
   },
   "gemeente_index": {
     "selecteer_titel": "Selecteer een gemeente",
@@ -699,25 +703,25 @@
     "alle_cijfers_link": "Bekijk alle cijfers"
   },
   "escalatie_niveau": {
-    "titel": "Maatregelenniveaus in Nederland",
-    "toelichting": "Naast de landelijke maatregelen, kunnen per regio aanvullende maatregelen gelden. Op basis van de lokale ontwikkeling van de cijfers wordt deze steeds regelmatig herzien door de afzonderlijke veiligheidsregio's.",
+    "titel": "Risiconiveaus",
+    "toelichting": "De kaart geeft het risiconiveau per regio weer. Die kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2) of ‘ernstig’ (niveau 3) zijn. Per regio worden passende maatregelen genomen.",
     "types": {
       "1": {
         "titel": "Waakzaam",
-        "toelichting": "houd je aan de (landelijke) maatregelen"
+        "toelichting": ""
       },
       "2": {
         "titel": "Zorgelijk",
-        "toelichting": "er gelden aanvullende maatregelen"
+        "toelichting": ""
       },
       "3": {
         "titel": "Ernstig",
-        "toelichting": "strenge aanvullende maatregelen"
+        "toelichting": ""
       }
     },
     "legenda": {
-      "titel": "Legenda situatiekaart"
+      "titel": "Legenda"
     },
-    "valid_from": "vanaf {{validFrom}}"
+    "valid_from": "Geldig vanaf {{validFrom}}"
   }
 }

@@ -118,7 +118,13 @@
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the progression over time in the number of new cases by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "cluster_datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
     "cluster_bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
@@ -372,12 +378,12 @@
     "paragraaf": "The dashboard presents a variety of data that give us an idea of how we are managing the COVID-19 epidemic. In this section we explain how we arrive at this data.",
     "cijfers": [
       {
-        "cijfer": "Correction figures of 2 September in the number of confirmed cases",
-        "verantwoording": "Due to a previous technical issue at the RIVM, a number of reports are missing in the figures of 1 September. These reports are added in the figures of 2 September. Because of this, the number of newly identified infections shown on 2 September (734) is nearly 300 reports higher than it was the day before (462)."
+        "cijfer": "Level of risk",
+        "verantwoording": ""
       },
       {
-        "cijfer": "Update of 31 July on the alert value for number of infectious people",
-        "verantwoording": "Originally, it was announced that an alert value would be developed for the number of infectious people. However, the modelling experts at the National Institute for Public Health and the Environment (RIVM) have advised us not to do this, as the number of infectious people is not based exclusively on measurable data but also on assumptions, about how long people remain infectious, for instance."
+        "cijfer": "Correction figures of 2 September in the number of confirmed cases",
+        "verantwoording": "Due to a previous technical issue at the RIVM, a number of reports are missing in the figures of 1 September. These reports are added in the figures of 2 September. Because of this, the number of newly identified infections shown on 2 September (734) is nearly 300 reports higher than it was the day before (462)."
       },
       {
         "cijfer": "Intensive care (ICU) admissions",
@@ -426,6 +432,10 @@
       {
         "cijfer": "Open source data processing",
         "verantwoording": "This dashboard was developed in a short amount of time. So far, we have therefore not been able to publish the code for inputting the data and constructing the .JSON files. However, this will be done soon. The web application code was published on [Github](https://github.com/minvws/nl-covid19-data-dashboard) on 5 June 2020. The [data calculations](https://github.com/minvws/nl-covid19-data-backend-processing) are available via Github as well."
+      },
+      {
+        "cijfer": "Update of 31 July on the alert value for number of infectious people",
+        "verantwoording": "Originally, it was announced that an alert value would be developed for the number of infectious people. However, the modelling experts at the National Institute for Public Health and the Environment (RIVM) have advised us not to do this, as the number of infectious people is not based exclusively on measurable data but also on assumptions, about how long people remain infectious, for instance."
       }
     ]
   },
@@ -563,7 +573,13 @@
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the progression over time in the number of positive tests by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -639,7 +655,13 @@
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the change in the number of confirmed cases by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -667,8 +689,8 @@
     "average": "Average"
   },
   "veiligheidsregio_index": {
-    "selecteer_titel": "Select a safety region",
-    "selecteer_toelichting": "There are different measures per safety region and municipality"
+    "selecteer_titel": "Level of risk",
+    "selecteer_toelichting": "The map indicates the level of risk per region. This can be ‘vigilant’ (level 1), ‘worrisome’ (level 2) or ‘serious’ (level 3). Appropriate measures are taken per region."
   },
   "gemeente_index": {
     "selecteer_titel": "Select your municipality",
@@ -677,29 +699,29 @@
   "laatste_ontwikkelingen": {
     "title": "Latest developments",
     "menu_subtitle": "More new COVID-19 infections",
-    "alle_cijfers_header": "Benieuwd naar alle cijfers?",
-    "alle_cijfers_link": "Bekijk alle cijfers"
+    "alle_cijfers_header": "",
+    "alle_cijfers_link": ""
   },
   "escalatie_niveau": {
-    "titel": "Level of measures in the Netherlands",
-    "toelichting": "In addition to the nationwide measures, there can be regional measures in place. Based on the development of the local numbers these measures are regularly revised for the individual safety regions.",
+    "titel": "Level of risk",
+    "toelichting": "The map indicates the level of risk per region. This can be ‘vigilant’ (level 1), ‘worrisome’ (level 2) or ‘serious’ (level 3). Appropriate measures are taken per region.",
     "types": {
       "1": {
         "titel": "Watchful",
-        "toelichting": "please adhere to the (national) measures"
+        "toelichting": ""
       },
       "2": {
         "titel": "Worrisome",
-        "toelichting": "there are extra measures in place"
+        "toelichting": ""
       },
       "3": {
         "titel": "Serious",
-        "toelichting": "strict additional measures"
+        "toelichting": ""
       }
     },
     "legenda": {
-      "titel": "Legend of the situation map"
+      "titel": "Legend"
     },
-    "valid_from": ""
+    "valid_from": "Valid from {{validFrom}}"
   }
 }
