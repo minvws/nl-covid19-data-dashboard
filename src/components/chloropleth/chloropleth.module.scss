@@ -11,6 +11,10 @@
   pointer-events: none;
 }
 
+.clickableTooltip {
+  pointer-events: all;
+}
+
 .chloroplethContainer {
   position: relative;
   height: 400px;
@@ -53,6 +57,7 @@
   path.noData:hover {
     pointer-events: all;
     fill: #62a0be;
+    cursor: pointer;
   }
 
   path.faded {
@@ -75,5 +80,6 @@
   path.hoverLayer:hover {
     stroke: #000000;
     stroke-width: 2;
+    cursor: pointer;
   }
 }

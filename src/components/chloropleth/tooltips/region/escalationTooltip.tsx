@@ -41,14 +41,16 @@ export const escalationTooltip = (router: NextRouter) => {
                 {type !== 1 && <ExclamationMark fill={thresholdInfo?.color} />}
                 {type === 1 && <EmptyBubble fill={thresholdInfo?.color} />}
               </div>
-              <div>
+              <div className={styles.escalationText}>
                 <strong>
                   {(text.escalatie_niveau.types as any)[type].titel}
                 </strong>
-                : {(text.escalatie_niveau.types as any)[type].toelichting}
                 <br />
                 {replaceVariablesInText(text.escalatie_niveau.valid_from, {
-                  validFrom: formatDate(context.valid_from_unix),
+                  validFrom: formatDate(
+                    context.valid_from_unix * 1000,
+                    'short'
+                  ),
                 })}
               </div>
             </div>
