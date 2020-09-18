@@ -4,8 +4,6 @@ import fs from 'fs';
 import { FCWithLayout } from 'components/layout';
 import { getSafetyRegionLayout } from 'components/layout/SafetyRegionLayout';
 import { useRouter } from 'next/router';
-import ExclamationMark from 'assets/exclamation-mark-bubble.svg';
-import EmptyBubble from 'assets/empty-bubble.svg';
 import EscalationLevel1 from 'assets/niveau-1.svg';
 import EscalationLevel2 from 'assets/niveau-2.svg';
 import EscalationLevel3 from 'assets/niveau-3.svg';
@@ -39,16 +37,9 @@ export const EscalationMapLegenda = (props: any) => {
             {info.threshold === 3 && <EscalationLevel3 color={info?.color} />}
           </div>
           <div className={styles.escalationText}>
-            <strong>
-              {
-                (text.escalatie_niveau.types as any)[info.threshold.toString()]
-                  .titel
-              }
-            </strong>
-            <br />
             {
               (text.escalatie_niveau.types as any)[info.threshold.toString()]
-                .toelichting
+                .titel
             }
           </div>
         </div>

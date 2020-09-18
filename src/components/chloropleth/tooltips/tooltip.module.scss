@@ -21,10 +21,6 @@
     margin-bottom: 0;
   }
 
-  .escalationInfo {
-    margin-bottom: 1em;
-  }
-
   h4 {
     margin-bottom: 1em;
   }
@@ -77,20 +73,16 @@
 
 .escalationInfo {
   display: flex;
-  flex-direction: row;
+  align-items: stretch;
+  margin-bottom: 0.5em;
 
   .bubble {
     margin-right: 0.5em;
-    display: flex;
-    width: 3em;
-    height: 3em;
-    flex-grow: 0;
-    flex-shrink: 0;
-    justify-content: center;
-    align-items: center;
   }
 
   .escalationText {
     align-items: center;
+    font-size: 1.42383rem;
+    line-height: 1.40466;
   }
 }
