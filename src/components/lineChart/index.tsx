@@ -110,6 +110,23 @@ function getChartOptions(values: Value[], signaalwaarde?: number | undefined) {
                 },
               },
             },
+            /**
+             * In order to show the value of the signaalwaarde, we plot a second
+             * transparent line, and only use its label positioned at the y-axis.
+             */
+            {
+              value: signaalwaarde,
+              color: 'transparent',
+              label: {
+                text: signaalwaarde,
+                align: 'left',
+                y: -8,
+                x: 0,
+                style: {
+                  color: '#4f5458',
+                },
+              },
+            },
           ]
         : undefined,
     },
