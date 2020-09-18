@@ -694,7 +694,9 @@
   },
   "laatste_ontwikkelingen": {
     "title": "Laatste ontwikkelingen",
-    "menu_subtitle": "Besmettingen COVID-19 verder toegenomen"
+    "menu_subtitle": "Besmettingen COVID-19 verder toegenomen",
+    "alle_cijfers_header": "Benieuwd naar alle cijfers?",
+    "alle_cijfers_link": "Bekijk alle cijfers"
   },
   "escalatie_niveau": {
     "titel": "Maatregelenniveaus in Nederland",

@@ -17,6 +17,7 @@ import positiveTestedPeopleTooltipRegion from 'components/chloropleth/tooltips/r
 import { useState } from 'react';
 import MunicipalityLegenda from 'components/chloropleth/legenda/MunicipalityLegenda';
 import SafetyRegionLegenda from 'components/chloropleth/legenda/SafetyRegionLegenda';
+import Link from 'next/link';
 
 const Home: FCWithLayout<INationalData> = () => {
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
@@ -44,6 +45,15 @@ const Home: FCWithLayout<INationalData> = () => {
           <ExternalLink />
           <span>{text.notificatie.link.text}</span>
         </a>
+      </article>
+
+      <article className={styles['all-numbers']}>
+        <h3>{text.laatste_ontwikkelingen.alle_cijfers_header}</h3>
+        <Link href="/landelijk">
+          <a className={styles['all-numbers-link']}>
+            {text.laatste_ontwikkelingen.alle_cijfers_link}
+          </a>
+        </Link>
       </article>
 
       <article className="metric-article layout-two-column">
