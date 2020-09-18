@@ -16,7 +16,7 @@ export default function ChloroplethLegenda(_props: TProps) {
   return (
     <>
       <h4>{title}</h4>
-      <ul className={styles.legenda}>
+      <ul className={styles.legenda} aria-label="legend">
         {items.map((item) => (
           <li key={item.color} className={styles.legendaItem}>
             <div

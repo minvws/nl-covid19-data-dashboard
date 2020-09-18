@@ -17,11 +17,28 @@ import positiveTestedPeopleTooltipRegion from 'components/chloropleth/tooltips/r
 import { useState } from 'react';
 import MunicipalityLegenda from 'components/chloropleth/legenda/MunicipalityLegenda';
 import SafetyRegionLegenda from 'components/chloropleth/legenda/SafetyRegionLegenda';
+import Link from 'next/link';
+import { EscalationMapLegenda } from './veiligheidsregio';
+import useMediaQuery from 'utils/useMediaQuery';
+import { useRouter } from 'next/router';
+import { escalationTooltip } from 'components/chloropleth/tooltips/region/escalationTooltip';
 
 const Home: FCWithLayout<INationalData> = () => {
+  const router = useRouter();
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
     'municipal'
   );
+
+  const isLargeScreen = useMediaQuery('(min-width: 1000px)');
+
+  const onSelectRegion = (context: any) => {
+    router.push(
+      '/veiligheidsregio/[code]/positief-geteste-mensen',
+      `/veiligheidsregio/${context.vrcode}/positief-geteste-mensen`
+    );
+  };
+
+  const mapHeight = isLargeScreen ? '500px' : '400px';
 
   return (
     <>
@@ -44,6 +61,15 @@ const Home: FCWithLayout<INationalData> = () => {
           <ExternalLink />
           <span>{text.notificatie.link.text}</span>
         </a>
+      </article>
+
+      <article className={styles['all-numbers']}>
+        <h3>{text.laatste_ontwikkelingen.alle_cijfers_header}</h3>
+        <Link href="/landelijk">
+          <a className={styles['all-numbers-link']}>
+            {text.laatste_ontwikkelingen.alle_cijfers_link}
+          </a>
+        </Link>
       </article>
 
       <article className="metric-article layout-two-column">
@@ -86,6 +112,27 @@ const Home: FCWithLayout<INationalData> = () => {
               tooltipContent={positiveTestedPeopleTooltipRegion}
             />
           )}
+        </div>
+      </article>
+
+      <article className="index-article layout-two-column">
+        <div className="column-item-no-margin column-item-small">
+          <h2 className="text-max-width">
+            {text.veiligheidsregio_index.selecteer_titel}
+          </h2>
+          <p className="text-max-width">
+            {text.veiligheidsregio_index.selecteer_toelichting}
+          </p>
+          <EscalationMapLegenda />
+        </div>
+        <div className="column-item-no-margin column-item">
+          <SafetyRegionChloropleth
+            metricName="escalation_levels"
+            metricProperty="escalation_level"
+            style={{ height: mapHeight }}
+            onSelect={onSelectRegion}
+            tooltipContent={escalationTooltip(router)}
+          />
         </div>
       </article>
     </>

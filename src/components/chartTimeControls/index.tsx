@@ -25,7 +25,7 @@ function ChartTimeControls(props: IProps) {
   return (
     <RadioGroup
       value={timeframe}
-      className={styles['chart-radio-group']}
+      className={styles.root}
       onChange={onChange}
       values={values}
     />

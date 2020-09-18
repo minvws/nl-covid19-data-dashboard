@@ -104,8 +104,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
               <span className="text-blue kpi">
                 {formatDecimal(
                   Math.round(
-                    resultsPerRegion.last_value
-                      .total_reported_increase_per_region
+                    resultsPerRegion.last_value.infected_total_counts_per_region
                   )
                 )}
               </span>
@@ -114,19 +113,19 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           <p>{text.kpi_toelichting}</p>
         </article>
       </div>
-      <article className="metric-article">
-        <h3>{text.linechart_titel}</h3>
-        <p>{text.linechart_toelichting}</p>
-        {resultsPerRegion && (
+      {resultsPerRegion && (
+        <article className="metric-article">
           <LineChart
+            title={text.linechart_titel}
+            description={text.linechart_toelichting}
             values={resultsPerRegion.values.map((value) => ({
               value: value.infected_increase_per_region,
               date: value.date_of_report_unix,
             }))}
             signaalwaarde={7}
           />
-        )}
-      </article>
+        </article>
+      )}
       <article className="metric-article layout-two-column">
         <div className="column-item column-item-extra-margin">
           <h3>{getLocalTitleForRegion(text.map_titel, data.code)}</h3>

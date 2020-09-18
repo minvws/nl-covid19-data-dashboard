@@ -50,6 +50,7 @@
     },
     "escalation_levels": {
       "type": "array",
+      "minItems": 25,
       "maxItems": 25,
       "items": {
         "$ref": "escalation_levels.json"

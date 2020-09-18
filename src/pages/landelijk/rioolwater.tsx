@@ -73,19 +73,18 @@ const SewerWater: FCWithLayout<INationalData> = (props) => {
         </div>
       </article>
 
-      <article className="metric-article">
-        <h3>{text.linechart_titel}</h3>
-
-        {data?.values && (
+      {data?.values && (
+        <article className="metric-article">
           <LineChart
+            title={text.linechart_titel}
             timeframeOptions={['all', '5weeks']}
             values={data.values.map((value) => ({
               value: Number(value.average),
               date: value.week_unix,
             }))}
           />
-        )}
-      </article>
+        </article>
+      )}
     </>
   );
 };

@@ -1,0 +1,36 @@
+@import 'scss/variables.scss';
+
+$breakpoint: 1200px;
+
+.root {
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  @media (min-width: $breakpoint) {
+    flex-direction: row;
+  }
+}
+
+.titleAndDescription {
+  @media (min-width: $breakpoint) {
+    margin-right: 1em;
+    margin-bottom: 1em;
+  }
+}
+
+.timeControls {
+  flex: none;
+
+  /**
+    This is a hack because chartTimeControls contains margin settings.
+  */
+  > div {
+    @media (min-width: $breakpoint) {
+      margin: 0;
+    }
+  }
+}

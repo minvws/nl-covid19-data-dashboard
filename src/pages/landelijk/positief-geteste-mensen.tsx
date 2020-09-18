@@ -159,22 +159,19 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         </div>
       </article>
 
-      <article className="metric-article">
-        <div className="article-text">
-          <h3>{text.linechart_titel}</h3>
-          <p>{text.linechart_toelichting}</p>
-        </div>
-
-        {delta && (
+      {delta && (
+        <article className="metric-article">
           <LineChart
+            title={text.linechart_titel}
+            description={text.linechart_toelichting}
             values={delta.values.map((value) => ({
               value: value.infected_daily_increase,
               date: value.date_of_report_unix,
             }))}
             signaalwaarde={7}
           />
-        )}
-      </article>
+        </article>
+      )}
 
       <article className="metric-article layout-two-column">
         <div className="column-item column-item-extra-margin">
