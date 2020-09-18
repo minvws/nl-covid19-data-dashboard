@@ -3,11 +3,13 @@ import { getNationalLayout } from 'components/layout/NationalLayout';
 import Notification from 'assets/notification.svg';
 import ExternalLink from 'assets/external-link.svg';
 
-import getNlData, { INationalData } from 'static-props/nl-data';
+import path from 'path';
+import fs from 'fs';
+
+import { INationalData } from 'static-props/nl-data';
 
 import styles from './index.module.scss';
 
-import text from 'locale';
 import TitleWithIcon from 'components/titleWithIcon';
 import ChartRegionControls from 'components/chartRegionControls';
 import MunicipalityChloropleth from 'components/chloropleth/MunicipalityChloropleth';
@@ -22,8 +24,11 @@ import { EscalationMapLegenda } from './veiligheidsregio';
 import useMediaQuery from 'utils/useMediaQuery';
 import { useRouter } from 'next/router';
 import { escalationTooltip } from 'components/chloropleth/tooltips/region/escalationTooltip';
+import MDToHTMLString from 'utils/MDToHTMLString';
+import { National } from 'types/data';
 
-const Home: FCWithLayout<INationalData> = () => {
+const Home: FCWithLayout<INationalData> = (props) => {
+  const { text } = props;
   const router = useRouter();
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
     'municipal'
@@ -120,9 +125,12 @@ const Home: FCWithLayout<INationalData> = () => {
           <h2 className="text-max-width">
             {text.veiligheidsregio_index.selecteer_titel}
           </h2>
-          <p className="text-max-width">
-            {text.veiligheidsregio_index.selecteer_toelichting}
-          </p>
+          <div
+            className="text-max-width"
+            dangerouslySetInnerHTML={{
+              __html: text.veiligheidsregio_index.selecteer_toelichting,
+            }}
+          />
           <EscalationMapLegenda text={text} />
         </div>
         <div className="column-item-no-margin column-item">
@@ -141,6 +149,29 @@ const Home: FCWithLayout<INationalData> = () => {
 
 Home.getLayout = getNationalLayout();
 
-export const getStaticProps = getNlData();
+interface StaticProps {
+  props: {
+    data: National;
+    text: any;
+    lastGenerated: string;
+  };
+}
+
+export async function getStaticProps(): Promise<StaticProps> {
+  const text = require('../locale/index').default;
+
+  const serializedContent = MDToHTMLString(
+    text.veiligheidsregio_index.selecteer_toelichting
+  );
+
+  text.veiligheidsregio_index.selecteer_toelichting = serializedContent;
+
+  const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
+  const fileContents = fs.readFileSync(filePath, 'utf8');
+  const data = JSON.parse(fileContents) as National;
+  const lastGenerated = data.last_generated;
+
+  return { props: { data, text, lastGenerated } };
+}
 
 export default Home;

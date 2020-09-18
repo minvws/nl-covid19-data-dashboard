@@ -73,14 +73,34 @@
 
 .escalationInfo {
   display: flex;
-  align-items: stretch;
-  margin-bottom: 0.5em;
+  flex-direction: row;
 
   .bubble {
     margin-right: 0.5em;
+    display: flex;
+    width: 34px;
+    height: 3em;
+    flex-grow: 0;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
   }
 
   .escalationText {
+    align-items: center;
+  }
+}
+
+.escalationInfoLegenda {
+  display: flex;
+  align-items: stretch;
+  margin-bottom: 0.5em;
+
+  .bubbleLegenda {
+    margin-right: 0.5em;
+  }
+
+  .escalationTextLegenda {
     align-items: center;
     font-size: 1.42383rem;
     line-height: 1.40466;
