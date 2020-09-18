@@ -676,7 +676,9 @@
   },
   "laatste_ontwikkelingen": {
     "title": "Latest developments",
-    "menu_subtitle": "More new COVID-19 infections"
+    "menu_subtitle": "More new COVID-19 infections",
+    "alle_cijfers_header": "Benieuwd naar alle cijfers?",
+    "alle_cijfers_link": "Bekijk alle cijfers"
   },
   "escalatie_niveau": {
     "titel": "Level of measures in the Netherlands",

@@ -57,3 +57,31 @@
     flex: 0 0 auto;
   }
 }
+
+.all-numbers {
+  padding: 3em 2em 2em;
+  margin: 0 -2rem;
+  text-align: center;
+
+  @media (min-width: 1000px) {
+    display: none;
+  }
+}
+
+.all-numbers-link {
+  background: #01689b;
+  color: #fff;
+  font-size: 1.3em;
+  display: block;
+  padding: 1em;
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    background: #055880; // #01689b + 20% #000
+  }
+
+  @media (min-width: 700px) {
+    margin: 0 2rem;
+  }
+}
