@@ -8,9 +8,9 @@
     "proto_name",
     "name",
     "code",
+    "escalation_levels",
     "hospital_admissions",
-    "positive_tested_people",
-    "escalation_levels"
+    "positive_tested_people"
   ],
   "properties": {
     "last_generated": {

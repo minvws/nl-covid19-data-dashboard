@@ -4,8 +4,6 @@ import fs from 'fs';
 import { FCWithLayout } from 'components/layout';
 import { getSafetyRegionLayout } from 'components/layout/SafetyRegionLayout';
 import { useRouter } from 'next/router';
-import ExclamationMark from 'assets/exclamation-mark-bubble.svg';
-import EmptyBubble from 'assets/empty-bubble.svg';
 import EscalationLevel1 from 'assets/niveau-1.svg';
 import EscalationLevel2 from 'assets/niveau-2.svg';
 import EscalationLevel3 from 'assets/niveau-3.svg';
@@ -30,25 +28,18 @@ export const EscalationMapLegenda = (props: any) => {
       <h3 className="text-max-width">{text.escalatie_niveau.legenda.titel}</h3>
       {escalationThresholds.map((info) => (
         <div
-          className={styles.escalationInfo}
+          className={styles.escalationInfoLegenda}
           key={`legenda-item-${info?.threshold}`}
         >
-          <div className={styles.bubble}>
+          <div className={styles.bubbleLegenda}>
             {info.threshold === 1 && <EscalationLevel1 color={info?.color} />}
             {info.threshold === 2 && <EscalationLevel2 color={info?.color} />}
             {info.threshold === 3 && <EscalationLevel3 color={info?.color} />}
           </div>
-          <div className={styles.escalationText}>
-            <strong>
-              {
-                (text.escalatie_niveau.types as any)[info.threshold.toString()]
-                  .titel
-              }
-            </strong>
-            <br />
+          <div className={styles.escalationTextLegenda}>
             {
               (text.escalatie_niveau.types as any)[info.threshold.toString()]
-                .toelichting
+                .titel
             }
           </div>
         </div>

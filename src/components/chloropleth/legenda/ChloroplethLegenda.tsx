@@ -12,6 +12,7 @@ export type TProps = {
 
 export default function ChloroplethLegenda(props: TProps) {
   const { items, title } = props;
+
   return (
     <>
       <h4>{title}</h4>

@@ -98,7 +98,6 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
         {lineChartData && (
           <RegionalSewerWaterLineChart
             averageValues={lineChartData.averageValues}
-            allValues={lineChartData.allValues}
             text={{
               average_label_text: lineChartData.averageLabelText,
               secondary_label_text: text.graph_secondary_label_text,

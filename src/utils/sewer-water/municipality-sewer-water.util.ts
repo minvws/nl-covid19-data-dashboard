@@ -33,7 +33,6 @@ interface SewerWaterLineChartValue {
 
 export interface SewerWaterLineChartData {
   averageValues: SewerWaterLineChartValue[];
-  allValues: SewerWaterLineChartValue[][];
   averageLabelText: string;
 }
 
@@ -135,7 +134,6 @@ export function getSewerWaterLineChartData(
           };
         })
         .sort((a: any, b: any) => b.date - a.date),
-      allValues: [],
       averageLabelText: replaceVariablesInText(
         text.graph_average_label_text_rwzi,
         {
@@ -151,8 +149,6 @@ export function getSewerWaterLineChartData(
   // Average line === the averages from `sewer_measurements`
   // Grey lines are the RWZI locations
   const averageValues = data?.sewer_measurements?.values || [];
-  const allValues =
-    data?.results_per_sewer_installation_per_municipality?.values || [];
 
   return {
     averageValues: averageValues
@@ -164,19 +160,6 @@ export function getSewerWaterLineChartData(
         };
       })
       .sort((a: any, b: any) => b.date - a.date),
-    allValues: allValues.map(
-      (installation: ResultsPerSewerInstallationPerMunicipalityItem) => {
-        return installation?.values
-          .map((value: any) => {
-            return {
-              ...value,
-              value: value.rna_per_ml || 0,
-              date: value.date_measurement_unix,
-            };
-          })
-          .sort((a: any, b: any) => b.date - a.date);
-      }
-    ),
     averageLabelText: text.graph_average_label_text,
   };
 }

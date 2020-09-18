@@ -1,8 +1,6 @@
 import { useMemo } from 'react';
 import { ILegendaItem } from '../ChloroplethLegenda';
 
-import siteText from 'locale';
-
 import { ChloroplethThresholdsValue } from 'components/chloropleth/shared';
 
 const createLabel = (list: ChloroplethThresholdsValue[], index: number) => {
@@ -23,21 +21,13 @@ export default function useLegendaItems(
       return;
     }
 
-    const legendaItems: ILegendaItem[] = [
-      {
-        color: '#C4C4C4',
-        label:
-          siteText.positief_geteste_personen.chloropleth_legenda.geen_meldingen,
-      },
-    ].concat(
-      thresholds.map<ILegendaItem>(
-        (threshold: ChloroplethThresholdsValue, index: number) => {
-          return {
-            color: threshold.color,
-            label: createLabel(thresholds, index),
-          };
-        }
-      )
+    const legendaItems: ILegendaItem[] = thresholds.map<ILegendaItem>(
+      (threshold: ChloroplethThresholdsValue, index: number) => {
+        return {
+          color: threshold.color,
+          label: createLabel(thresholds, index),
+        };
+      }
     );
 
     return legendaItems;

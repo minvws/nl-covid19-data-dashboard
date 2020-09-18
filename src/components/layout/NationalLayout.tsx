@@ -290,7 +290,8 @@ function NationalLayout(props: WithChildren<INationalData>) {
                     <TitleWithIcon
                       Icon={GetestIcon}
                       title={
-                        siteText.verpleeghuis_positief_geteste_personen.titel
+                        siteText.verpleeghuis_positief_geteste_personen
+                          .titel_sidebar
                       }
                     />
                     <span>
@@ -333,7 +334,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
                   >
                     <TitleWithIcon
                       Icon={CoronaVirus}
-                      title={siteText.verpleeghuis_oversterfte.titel}
+                      title={siteText.verpleeghuis_oversterfte.titel_sidebar}
                     />
                     <span>
                       <NursingHomeDeathsBarScale
