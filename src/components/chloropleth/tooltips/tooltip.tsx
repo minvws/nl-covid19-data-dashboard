@@ -1,16 +1,23 @@
-import { useEffect, useRef } from 'react';
+import { ReactNode, useEffect, useRef } from 'react';
+import { UseStore } from 'zustand';
+import { TooltipState } from '../Chloropleth';
 import styles from './tooltip.module.scss';
 
-export default function Tooltip(props: any) {
+export type TTooltipProps = {
+  tooltipStore: UseStore<TooltipState>;
+  getTooltipContent: (id: string) => ReactNode;
+};
+
+export default function Tooltip(props: TTooltipProps) {
   const { tooltipStore, getTooltipContent } = props;
   const ref = useRef<HTMLDivElement | undefined>();
-  const [tooltip, updateTooltip] = tooltipStore((state: any) => [
+  const [tooltip, updateTooltip] = tooltipStore((state: TooltipState) => [
     state.tooltip,
     state.updateTooltip,
   ]);
 
   useEffect(() => {
-    if (ref.current) {
+    if (ref.current && tooltip) {
       const viewPort = { width: window.innerWidth, height: window.innerHeight };
 
       const boundingRect = ref.current.getBoundingClientRect();
