@@ -85,19 +85,18 @@ const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
         </article>
       </div>
 
-      <article className="metric-article">
-        <h3>{text.linechart_titel}</h3>
-
-        {data && (
+      {data && (
+        <article className="metric-article">
           <LineChart
+            title={text.linechart_titel}
             timeframeOptions={['all', '5weeks']}
             values={data.values.map((value) => ({
               value: value.incidentie,
               date: value.week_unix,
             }))}
           />
-        )}
-      </article>
+        </article>
+      )}
     </>
   );
 };

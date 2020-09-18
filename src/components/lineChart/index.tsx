@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import styles from './lineChart.module.scss';
 
 import ChartTimeControls, {
   TimeframeOption,
@@ -10,23 +11,22 @@ import formatNumber from 'utils/formatNumber';
 import formatDate from 'utils/formatDate';
 import { getFilteredValues } from 'components/chartTimeControls/chartTimeControlUtils';
 
-interface Value {
+type Value = {
   date: number;
   value: number | undefined | null;
-}
+};
 
-type LineChartProps = {
+interface LineChartProps {
+  title?: string;
+  description?: string;
   values: Value[];
   signaalwaarde?: number;
   timeframeOptions?: TimeframeOption[];
-};
+}
 
 export default LineChart;
 
-function getOptions(
-  values: Value[],
-  signaalwaarde?: number | undefined
-): Highcharts.Options {
+function getChartOptions(values: Value[], signaalwaarde?: number | undefined) {
   const options: Highcharts.Options = {
     chart: {
       alignTicks: true,
@@ -85,14 +85,33 @@ function getOptions(
         text: null,
       },
       labels: {
-        formatter: function (): string {
-          // @ts-ignore
+        formatter: function () {
           return formatNumber(this.value);
         },
       },
       accessibility: {
         rangeDescription: 'Range: 2010 to 2017',
       },
+      plotLines: signaalwaarde
+        ? [
+            {
+              value: signaalwaarde,
+              dashStyle: 'Dash',
+              width: 1,
+              color: '#4f5458',
+              zIndex: 1,
+              label: {
+                text: 'Signaalwaarde',
+                align: 'right',
+                y: -8,
+                x: 0,
+                style: {
+                  color: '#4f5458',
+                },
+              },
+            },
+          ]
+        : undefined,
     },
     title: {
       text: undefined,
@@ -127,21 +146,12 @@ function getOptions(
     },
   };
 
-  if (signaalwaarde) {
-    // @ts-ignore
-    options.yAxis.plotLines = [
-      {
-        value: signaalwaarde,
-        dashStyle: 'dash',
-        width: 1,
-        color: '#4f5458',
-      },
-    ];
-  }
   return options;
 }
 
 function LineChart({
+  title,
+  description,
   values,
   signaalwaarde,
   timeframeOptions,
@@ -154,17 +164,25 @@ function LineChart({
       timeframe,
       (value: Value) => value.date * 1000
     );
-    return getOptions(filteredValues, signaalwaarde);
+    return getChartOptions(filteredValues, signaalwaarde);
   }, [values, timeframe, signaalwaarde]);
 
   return (
-    <>
+    <section className={styles.root}>
+      <header className={styles.header}>
+        <div className={styles.titleAndDescription}>
+          {title && <h3>{title}</h3>}
+          {description && <p>{description}</p>}
+        </div>
+        <div className={styles.timeControls}>
+          <ChartTimeControls
+            timeframe={timeframe}
+            timeframeOptions={timeframeOptions}
+            onChange={setTimeframe}
+          />
+        </div>
+      </header>
       <HighchartsReact highcharts={Highcharts} options={chartOptions} />
-      <ChartTimeControls
-        timeframe={timeframe}
-        timeframeOptions={timeframeOptions}
-        onChange={(value) => setTimeframe(value as TimeframeOption)}
-      />
-    </>
+    </section>
   );
 }

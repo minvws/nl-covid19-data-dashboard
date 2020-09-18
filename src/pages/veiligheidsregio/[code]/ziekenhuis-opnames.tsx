@@ -86,20 +86,18 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
           <p>{text.extra_uitleg}</p>
         </div>
       </article>
-      <article className="metric-article">
-        <h3>{text.linechart_titel}</h3>
 
-        {resultsPerRegion && (
-          <>
-            <LineChart
-              values={resultsPerRegion.values.map((value: any) => ({
-                value: value.hospital_moving_avg_per_region,
-                date: value.date_of_report_unix,
-              }))}
-            />
-          </>
-        )}
-      </article>
+      {resultsPerRegion && (
+        <article className="metric-article">
+          <LineChart
+            title={text.linechart_titel}
+            values={resultsPerRegion.values.map((value: any) => ({
+              value: value.hospital_moving_avg_per_region,
+              date: value.date_of_report_unix,
+            }))}
+          />
+        </article>
+      )}
       <article className="metric-article layout-two-column">
         <div className="column-item column-item-extra-margin">
           <h3>{getLocalTitleForRegion(text.map_titel, data.code)}</h3>

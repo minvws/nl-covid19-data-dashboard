@@ -107,18 +107,17 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
         </article>
       </div>
 
-      <article className="metric-article">
-        <h3>{text.linechart_titel}</h3>
-
-        {totalLocations && (
+      {totalLocations && (
+        <article className="metric-article">
           <LineChart
+            title={text.linechart_titel}
             values={totalLocations.values.map((value) => ({
               value: value.total_reported_locations,
               date: value.date_of_report_unix,
             }))}
           />
-        )}
-      </article>
+        </article>
+      )}
     </>
   );
 };
