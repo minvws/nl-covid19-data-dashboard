@@ -9,8 +9,8 @@
     "title": "Last updated"
   },
   "notificatie": {
-    "titel": "More new COVID-19 infections",
-    "bericht": "De afgelopen week (9 t/m 15 september) is het aantal nieuwe positief geteste personen wederom sterk  toegenomen. De sterkste stijgingen waren weer te zien in de provincies Zuid-Holland en Noord-Holland. De nieuwe besmettingen nemen toe in alle leeftijdsgroepen, maar de meeste nieuwe besmettingen zijn gemeld in de leeftijdsgroep van 20-24 jaar. Ook het reproductiegetal is verder gestegen tot 1,38. De aantallen patiënten die vanwege COVID-19 zijn opgenomen in het ziekenhuis of op de intensive care zijn ook gestegen.",
+    "titel": "Risk level per region",
+    "bericht": "The number of people who newly tested positive has increased in the past week (9 to 15 September). Again, the sharpest rise in new infections was seen in the provinces of South-Holland and North-Holland. The number of newly tested positive persons increased across all age-groups, but most new infections were reported in the 20-24 year old group. The reproduction number has also increased, to 1.38. More COVID-19 patients were reported to have been admitted to the hospital or the ICU in the past week.\n\nRisk level per region can be ‘vigilant’ (level 1), ‘worrisome’ (level 2) or ‘serious’ (level 3). The situation is worrisome in 6 out of 25 safety regions.",
     "link": {
       "text": "View the recent information from the RIVM",
       "href": "https://www.rivm.nl/en/novel-coronavirus-covid-19/current-information"
@@ -82,7 +82,7 @@
   "ziekenhuisopnames_per_dag": {
     "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
     "bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
     },
     "titel": "Hospital admissions per day",
@@ -101,7 +101,7 @@
   "positief_geteste_personen": {
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
     },
     "titel": "Number of confirmed cases",
@@ -112,13 +112,19 @@
     "kpi_titel": "Number of confirmed cases:",
     "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday.",
     "map_titel": "Distribution of confirmed cases in the Netherlands",
-    "map_toelichting": "These figures show how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
+    "map_toelichting": "These maps show how many confirmed cases of COVID-19 were reported yesterday per 100,000 inhabitants.",
     "linechart_titel": "Progression over time",
-    "linechart_toelichting": "These figures show how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
+    "linechart_toelichting": "This graph shows how many confirmed cases of COVID-19 were reported recently per 100,000 inhabitants.",
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the progression over time in the number of new cases by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "cluster_datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
     "cluster_bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
@@ -156,7 +162,7 @@
     "barscale_titel": "Average number of infectious people per 100.000 inhabitants.",
     "barscale_screenreader_text": "{{value}} infectious people per 100.000 inhabitants.",
     "cijfer_titel": "Estimated number of infectious people in the Netherlands:",
-    "cijfer_toelichting": "A calculation of how many people with COVID-19 inhabitants that can transmit the virus. This number is calculated by the RIVM.",
+    "cijfer_toelichting": "A calculation of how many people with COVID-19 per 100.000 inhabitants that can transmit the virus. This number is calculated by the RIVM.",
     "linechart_titel": "Progression over time",
     "titel_sidebar": "Number of infectious people per 100,000 inhabitants"
   },
@@ -246,7 +252,6 @@
       "text": "RIVM"
     },
     "titel": "Number of confirmed cases",
-    "titel_sidebar": "Number of confirmed cases  per day",
     "barscale_titel": "Number of confirmed cases in nursing homes per day",
     "extra_uitleg": "Number of confirmed cases in nursing homes per day.",
     "pagina_toelichting": "Number of confirmed cases in nursing homes per day. This number is an estimation of the number confirmed cases in nursing home inhabitants.",
@@ -260,7 +265,6 @@
       "text": "RIVM"
     },
     "titel": "Mortality",
-    "titel_sidebar": "Mortality",
     "pagina_toelichting": "Daily number of deceased residents with confirmed cases of COVID-19 in nursing homes.",
     "barscale_titel": "Number of deceased residents",
     "barscale_screenreader_text": "{{value}} deceased residents",
@@ -284,7 +288,7 @@
     },
     "titel": "Sewage water examination",
     "pagina_toelichting": "Number of virus particles in one milliliter of sewage water, collected from about 300 sites in the Netherlands. The national value is based on the total number of virus particles that is found in a week, divided by the number of sites where the data is collected. ",
-    "barscale_titel": "Average number of virus particles in one milliliter of sewage water",
+    "barscale_titel": "Calculation of the average number of virus particles in one milliliter of sewage water",
     "extra_uitleg": "The national value is based on the total number of virus particles that is found in a week, divided by the number of sites where the data is collected.",
     "barscale_screenreader_text": "{{value}} virus particles in one milliliter of sewage water, collected from about 300 sites in the Netherlands.",
     "linechart_titel": "Progression over time"
@@ -375,7 +379,7 @@
     "cijfers": [
       {
         "cijfer": "Level of risk",
-        "verantwoording": "There is a lot of data about the Coronavirus available. Every week, it is evaluated whether the situation is positively or negatively developing. The ministry, the municipal health services (GGD), the RIVM, and the safety regions judge the situation together. Do we have to be vigilant (level 1), is the situation worrisome (level 2) or is the situation even serious (level 3)? This way it is immediately clear to everyone what the situation per region is. Depending on the severity of the situation,  different measures can be taken. Determining the risk level and the different measures, the effect of the measures on society and the economy are always considered. The measures are tailored and may vary per region.\n\n1. *Vigilant*. The situation is manageable. The number of new infections is low. Vulnerable groups need to be careful. The source and contact tracing is predominantly effective. Citizens adhere to the measures to prevent the spread of the virus and the measures can be enforced. The healthcare capacity is sufficient. Additional measures are focused on the improvement of the current approach.\n\n2. *Worrisome*. The situation is negatively developing. The number of new infections is increasing. Specific measures are needed to protect vulnerable groups. If the situation continues, source- and contact tracing becomes ineffective. Measures are not being adhered to. The healthcare capacity is under increased pressure. Additional measures are needed to gain control of the virus again and to return to a manageable situation.\n\n3. *Serious*. Strong intervention is needed to prevent further escalation and to return to a controllable situation (vigilant). The number of new infections is increasing fast. The source- and contact tracing is ineffective, which leads to a decrease in the insight in the spread of the virus. Measures are not being adhered to. The regional healthcare capacity is insufficient. Measures are focused on preventing the (regional) healthcare capacity to be overwhelmed, protecting the vulnerable groups and to regain sight on the spread of the virus again."
+        "verantwoording": "The situation around the Coronavirus is evaluated weekly by the ministry, the municipal health services (GGD), the RIVM and the safety regions. Based on recent regional developments, should we remain vigilant (level 1), is the situation worrisome (level 2) or is the situation serious (level 3)? The levels of risk serve to clearly communicate to everyone what the current situation per safety region is. Any measures taken are tailored to a specific region and depend on the severity of the situation. The impact on our society and the economy is considered when determining risk level and measures.\n\n1. *Vigilant*. The situation is manageable. The number of new infections is low. Vulnerable groups need to be careful. The source and contact tracing is predominantly effective. Citizens adhere to the measures to prevent the spread of the virus and the measures can be enforced. The healthcare capacity is sufficient. Additional measures are focused on the improvement of the current approach.\n\n2. *Worrisome*. The situation is negatively developing. The number of new infections is increasing. Specific measures are needed to protect vulnerable groups. If the situation continues, source- and contact tracing becomes ineffective. Measures are not being adhered to. The healthcare capacity is under increased pressure. Additional measures are needed to gain control of the virus again and to return to a manageable situation.\n\n3. *Serious*. Strong intervention is needed to prevent further escalation and to return to a controllable situation (vigilant). The number of new infections is increasing fast. The source- and contact tracing is ineffective, which leads to a decrease in the insight in the spread of the virus. Measures are not being adhered to. The regional healthcare capacity is insufficient. Measures are focused on preventing the (regional) healthcare capacity to be overwhelmed, protecting the vulnerable groups and to regain sight on the spread of the virus again."
       },
       {
         "cijfer": "Correction figures of 2 September in the number of confirmed cases",
@@ -547,7 +551,7 @@
     "linechart_titel": "Progression in hospital admissions over time",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
     }
   },
@@ -563,15 +567,21 @@
     "kpi_titel": "Number of confirmed cases:",
     "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday.",
     "map_titel": "Distribution of confirmed cases in {{safetyRegion}}",
-    "map_toelichting": "These figures show how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
+    "map_toelichting": "This map shows how many confirmed cases of COVID-19 were reported yesterday in the municipalities of this safety region per 100,000 inhabitants.",
     "linechart_titel": "Progression over time",
-    "linechart_toelichting": "These figures show how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
+    "linechart_toelichting": "This graph shows how many confirmed cases of COVID-19 were reported recently in this safety region per 100,000 inhabitants.",
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the progression over time in the number of positive tests by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
     },
     "cluster_datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -595,7 +605,7 @@
     "pagina_toelichting": "Number of virus particles in one milliliter of sewage water, collected from about 300 sites in the Netherlands. The national value is based on the total number of virus particles that is found in a week, divided by the number of sites where the data is collected. ",
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis. ",
     "screen_reader_graph_content": "{{value}} virus particles in one milliliter of sewage water.",
-    "barscale_titel": "Average number of virus particles in one milliliter of sewage water",
+    "barscale_titel": "Calculation of average number of virus particles in one milliliter of sewage water in this safety region",
     "extra_uitleg": "The national value is based on the total number of virus particles that is found in a week, divided by the number of sites where the data is collected.",
     "barscale_screenreader_text": "{{value}} virus particles in one milliliter of sewage water, collected from 28 locations in the Netherlands.",
     "linechart_titel": "Progression over time",
@@ -623,7 +633,7 @@
     "linechart_titel": "Progression in hospital admissions over time",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
     }
   },
@@ -639,15 +649,21 @@
     "kpi_titel": "Number of confirmed cases:",
     "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday.",
     "map_titel": "Distribution of confirmed cases in {{municipality}}",
-    "map_toelichting": "These figures show how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
+    "map_toelichting": "This map shows how many confirmed cases of COVID-19 were reported yesterday in these municipalities per 100,000 inhabitants.",
     "linechart_titel": "Progression over time",
-    "linechart_toelichting": "These figures show how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
+    "linechart_toelichting": "This graph shows how many confirmed cases of COVID-19 were reported recently in this municipality per 100,000 inhabitants.",
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the change in the number of confirmed cases by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
     }
   },
@@ -657,7 +673,7 @@
     "pagina_toelichting": "Number of virus particles in one milliliter of sewage water, collected from about 300 sites in the Netherlands. The national value is based on the total number of virus particles that is found in a week, divided by the number of sites where the data is collected. ",
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
     "screen_reader_graph_content": "{{value}} virus particles in one milliliter of sewage water.",
-    "barscale_titel": "Average number of virus particles in one milliliter of sewage water",
+    "barscale_titel": "Calculation of the average number of virus particles in one milliliter of sewage water in this municipality",
     "extra_uitleg": "The national value is based on the total number of virus particles that is found in a week, divided by the number of sites where the data is collected.",
     "barscale_screenreader_text": "{{value}} virus particles in one milliliter of sewage water, collected from 300 sites in the Netherlands.",
     "linechart_titel": "Progression over time",
@@ -682,7 +698,7 @@
   },
   "laatste_ontwikkelingen": {
     "title": "Latest developments",
-    "menu_subtitle": "More new COVID-19 infections",
+    "menu_subtitle": "Risk level per region",
     "alle_cijfers_header": "",
     "alle_cijfers_link": ""
   },
