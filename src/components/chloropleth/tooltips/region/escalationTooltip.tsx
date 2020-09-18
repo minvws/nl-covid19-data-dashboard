@@ -33,7 +33,7 @@ export const escalationTooltip = (router: NextRouter) => {
       type && (
         <div className={styles.escalationTooltip} onClick={onSelectRegion}>
           <div className={styles.escalationTooltipHeader}>
-            <h4>{context?.vrname}</h4>
+            <h3>{context?.vrname}</h3>
           </div>
           {
             <div className={styles.escalationInfo}>
