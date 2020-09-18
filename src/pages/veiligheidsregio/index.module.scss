@@ -15,41 +15,6 @@
   }
 }
 
-.escalationTooltip {
-  width: 265px;
-  background-color: white;
-  border-radius: 4px;
-  margin: 0;
-  padding: 0;
-  cursor: pointer;
-
-  .escalationTooltipHeader {
-    border-bottom: 1px solid #c4c4c4;
-    padding-top: 0.1em;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-    margin: 0;
-    font-size: 1.2em;
-
-    &::after {
-      content: '';
-      background-image: url('/images/chevron-black.svg');
-      // match aspect ratio of chevron.svg
-      background-size: 0.6em 1em;
-      height: 1em;
-      width: 0.6em;
-      display: block;
-      position: absolute;
-      right: 1em;
-      top: 1em;
-    }
-  }
-
-  .escalationInfo {
-    padding: 1em;
-  }
-}
-
 .escalationInfo {
   display: flex;
   flex-direction: row;

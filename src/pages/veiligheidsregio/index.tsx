@@ -6,9 +6,12 @@ import { getSafetyRegionLayout } from 'components/layout/SafetyRegionLayout';
 import { useRouter } from 'next/router';
 import ExclamationMark from 'assets/exclamation-mark-bubble.svg';
 import EmptyBubble from 'assets/empty-bubble.svg';
-import siteText from 'locale';
+import EscalationLevel1 from 'assets/niveau-1.svg';
+import EscalationLevel2 from 'assets/niveau-2.svg';
+import EscalationLevel3 from 'assets/niveau-3.svg';
 import styles from 'components/chloropleth/tooltips/tooltip.module.scss';
 
+import siteText from 'locale';
 import MDToHTMLString from 'utils/MDToHTMLString';
 
 import SafetyRegionChloropleth, {
@@ -31,8 +34,9 @@ export const EscalationMapLegenda = (props: any) => {
           key={`legenda-item-${info?.threshold}`}
         >
           <div className={styles.bubble}>
-            {info.threshold !== 1 && <ExclamationMark fill={info?.color} />}
-            {info.threshold === 1 && <EmptyBubble fill={info?.color} />}
+            {info.threshold === 1 && <EscalationLevel1 color={info?.color} />}
+            {info.threshold === 2 && <EscalationLevel2 color={info?.color} />}
+            {info.threshold === 3 && <EscalationLevel3 color={info?.color} />}
           </div>
           <div className={styles.escalationText}>
             <strong>
@@ -76,7 +80,7 @@ const SafetyRegion: FCWithLayout<any> = (props) => {
 
   return (
     <>
-      <article className="map-article layout-two-column">
+      <article className="index-article layout-two-column">
         <div className="column-item-no-margin column-item-small">
           <h2 className="text-max-width">
             {text.veiligheidsregio_index.selecteer_titel}

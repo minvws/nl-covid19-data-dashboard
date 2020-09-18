@@ -6,8 +6,9 @@ import replaceVariablesInText from 'utils/replaceVariablesInText';
 import text from 'locale';
 import styles from '../tooltip.module.scss';
 
-import ExclamationMark from 'assets/exclamation-mark-bubble.svg';
-import EmptyBubble from 'assets/empty-bubble.svg';
+import EscalationLevel1 from 'assets/niveau-1.svg';
+import EscalationLevel2 from 'assets/niveau-2.svg';
+import EscalationLevel3 from 'assets/niveau-3.svg';
 
 import { thresholds } from 'components/chloropleth/SafetyRegionChloropleth';
 
@@ -30,16 +31,24 @@ export const escalationTooltip = (router: NextRouter) => {
     };
 
     return (
-      type && (
+      type &&
+      thresholdInfo && (
         <div className={styles.escalationTooltip} onClick={onSelectRegion}>
           <div className={styles.escalationTooltipHeader}>
-            <h4>{context?.vrname}</h4>
+            <h3>{context?.vrname}</h3>
           </div>
           {
             <div className={styles.escalationInfo}>
               <div className={styles.bubble}>
-                {type !== 1 && <ExclamationMark fill={thresholdInfo?.color} />}
-                {type === 1 && <EmptyBubble fill={thresholdInfo?.color} />}
+                {thresholdInfo.threshold === 1 && (
+                  <EscalationLevel1 color={thresholdInfo.color} />
+                )}
+                {thresholdInfo.threshold === 2 && (
+                  <EscalationLevel2 color={thresholdInfo.color} />
+                )}
+                {thresholdInfo.threshold === 3 && (
+                  <EscalationLevel3 color={thresholdInfo.color} />
+                )}
               </div>
               <div className={styles.escalationText}>
                 <strong>
