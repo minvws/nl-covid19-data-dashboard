@@ -6,6 +6,7 @@ import { National } from 'types/data.d';
 export interface INationalData {
   data: National;
   lastGenerated: string;
+  text?: any;
 }
 
 interface IProps {

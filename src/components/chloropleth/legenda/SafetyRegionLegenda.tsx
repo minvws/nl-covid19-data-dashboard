@@ -5,12 +5,11 @@ import useSafetyRegionLegendaData from './hooks/useSafetyRegionLegendaData';
 export type TProps = {
   metricName: TRegionMetricName;
   title: string;
-  gradients?: [minColor: string, maxColor: string];
 };
 
 export default function SafetyRegionLegenda(props: TProps) {
-  const { metricName, title, gradients = ['#C0E8FC', '#0579B3'] } = props;
-  const items = useSafetyRegionLegendaData(metricName, gradients);
+  const { metricName, title } = props;
+  const items = useSafetyRegionLegendaData(metricName);
 
   if (!items) {
     return null;

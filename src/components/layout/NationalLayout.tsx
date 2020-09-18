@@ -290,7 +290,8 @@ function NationalLayout(props: WithChildren<INationalData>) {
                     <TitleWithIcon
                       Icon={GetestIcon}
                       title={
-                        siteText.verpleeghuis_positief_geteste_personen.titel
+                        siteText.verpleeghuis_positief_geteste_personen
+                          .titel_sidebar
                       }
                     />
                     <span>
@@ -317,7 +318,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
                     />
                     <span>
                       <NursingHomeInfectedLocationsBarScale
-                        data={data?.total_newly_reported_locations}
+                        data={data?.total_reported_locations}
                         showAxis={true}
                       />
                     </span>
@@ -333,7 +334,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
                   >
                     <TitleWithIcon
                       Icon={CoronaVirus}
-                      title={siteText.verpleeghuis_oversterfte.titel}
+                      title={siteText.verpleeghuis_oversterfte.titel_sidebar}
                     />
                     <span>
                       <NursingHomeDeathsBarScale
@@ -349,14 +350,6 @@ function NationalLayout(props: WithChildren<INationalData>) {
         </aside>
 
         <section className="national-content">{children}</section>
-
-        {router.route === '/' && (
-          <Link href="/landelijk">
-            <a className="back-button back-button-big">
-              {siteText.nav.terug_naar_alle_cijfers_homepage}
-            </a>
-          </Link>
-        )}
       </div>
     </>
   );

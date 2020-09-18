@@ -1,0 +1,108 @@
+@import 'scss/variables.scss';
+
+.tooltip {
+  background: white;
+  position: absolute;
+  z-index: 1000;
+  color: rgb(102, 102, 102);
+  padding: 0.3rem 0.5rem;
+  border-radius: 3px;
+  font-size: 14px;
+  box-shadow: rgba(33, 33, 33, 0.2) 0px 1px 2px;
+  pointer-events: none;
+  line-height: 1em;
+}
+
+.legenda {
+  padding-left: 0;
+  margin-bottom: 1em;
+
+  @media (min-width: 1200px) {
+    margin-bottom: 0;
+  }
+
+  h4 {
+    margin-bottom: 1em;
+  }
+}
+
+.escalationTooltip {
+  color: $text-color;
+  width: 265px;
+  background-color: white;
+  border-radius: 4px;
+  pointer-events: all;
+  cursor: pointer;
+
+  .escalationTooltipHeader {
+    border-bottom: 1px solid #c4c4c4;
+    margin: 0 -0.5rem;
+    padding: 0.25rem 3rem 0.25rem 1rem;
+    font-size: 1.2em;
+    cursor: pointer;
+    position: relative;
+    color: #000;
+
+    h3 {
+      margin: 0;
+    }
+
+    &::after {
+      content: '';
+      background-image: url('/images/chevron-black.svg');
+      // match aspect ratio of chevron.svg
+      background-size: 0.6em 1em;
+      background-position: 0 50%;
+      background-repeat: no-repeat;
+      width: 0.6em;
+      display: block;
+      position: absolute;
+      right: 1em;
+      top: 0;
+      bottom: 0;
+    }
+  }
+
+  .escalationInfo {
+    padding: 1em 0.5em;
+    font-size: 1rem;
+    line-height: 1.5;
+    cursor: pointer;
+  }
+}
+
+.escalationInfo {
+  display: flex;
+  flex-direction: row;
+
+  .bubble {
+    margin-right: 0.5em;
+    display: flex;
+    width: 34px;
+    height: 3em;
+    flex-grow: 0;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .escalationText {
+    align-items: center;
+  }
+}
+
+.escalationInfoLegenda {
+  display: flex;
+  align-items: stretch;
+  margin-bottom: 0.5em;
+
+  .bubbleLegenda {
+    margin-right: 0.5em;
+  }
+
+  .escalationTextLegenda {
+    align-items: center;
+    font-size: 1.2rem;
+    line-height: 1.8;
+  }
+}

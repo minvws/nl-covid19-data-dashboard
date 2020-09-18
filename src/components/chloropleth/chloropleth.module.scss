@@ -1,14 +1,36 @@
 @import 'scss/variables.scss';
 
-.defaultTooltip {
-  background-color: white;
-  padding: 0.5em;
+.tooltipBase {
+  padding: 0;
+  position: absolute;
+  color: #666666;
+  border-radius: 3px;
+  font-size: 14px;
+  box-shadow: rgba(33, 33, 33, 0.2) 0px 1px 2px;
+  line-height: 1em;
+  pointer-events: none;
+}
+
+.clickableTooltip {
+  pointer-events: all;
 }
 
 .chloroplethContainer {
   position: relative;
   height: 400px;
   background: transparent;
+}
+
+.chloroplethContainer.escalationMap {
+  .svgMap {
+    path {
+      stroke: white;
+    }
+
+    path.overlay {
+      stroke: #595959;
+    }
+  }
 }
 
 .svgMap {
@@ -35,6 +57,7 @@
   path.noData:hover {
     pointer-events: all;
     fill: #62a0be;
+    cursor: pointer;
   }
 
   path.faded {
@@ -56,6 +79,7 @@
 
   path.hoverLayer:hover {
     stroke: #000000;
-    stroke-width: 1.5;
+    stroke-width: 2;
+    cursor: pointer;
   }
 }
