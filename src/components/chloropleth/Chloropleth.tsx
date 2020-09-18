@@ -10,15 +10,34 @@ import styles from './chloropleth.module.scss';
 import { localPoint } from '@vx/event';
 
 import Tooltip from './tooltips/tooltip';
+import useMediaQuery from 'utils/useMediaQuery';
 
-const tooltipStore = create((set) => ({
+export type TooltipState = {
+  tooltip: TooltipSettings | null;
+  updateTooltip: (tooltip: TooltipSettings) => void;
+  showTooltip: (settings: TooltipSettings) => void;
+  hideTooltip: () => void;
+};
+
+export type TooltipSettings = {
+  left: number;
+  top: number;
+  data: any;
+};
+
+const tooltipStore = create<TooltipState>((set) => ({
   tooltip: null,
-  showTooltip: (hoveredElement: any) => {
+  updateTooltip: (tooltip: TooltipSettings) => {
+    set({
+      tooltip,
+    });
+  },
+  showTooltip: (settings: TooltipSettings) => {
     return set({
       tooltip: {
-        left: hoveredElement.tooltipLeft,
-        top: hoveredElement.tooltipTop,
-        data: hoveredElement.tooltipData,
+        left: settings.left,
+        top: settings.top,
+        data: settings.data,
       },
     });
   },
@@ -100,6 +119,7 @@ export default function Chloropleth<T>(props: TProps<T>) {
 
   const clipPathId = useRef(`_${Math.random().toString(36).substring(2, 15)}`);
   const timout = useRef<any>(-1);
+  const isLargeScreen = useMediaQuery('(min-width: 1000px)');
 
   const {
     width = 0,
@@ -125,7 +145,7 @@ export default function Chloropleth<T>(props: TProps<T>) {
         className={styles.svgMap}
         onMouseOver={svgMouseOver(timout, showTooltip)}
         onMouseOut={svgMouseOut(timout, hideTooltip)}
-        onClick={svgClick(onPathClick)}
+        onClick={svgClick(onPathClick, showTooltip, isLargeScreen)}
       >
         <clipPath id={clipPathId.current}>
           <rect
@@ -182,13 +202,39 @@ const renderFeature = (callback: TRenderCallback) => {
   );
 };
 
-const svgClick = (onPathClick: any) => {
+const svgClick = (
+  onPathClick: (id: string) => void,
+  showTooltip: (settings: TooltipSettings) => void,
+  isLargeScreen: boolean
+) => {
   return (event: any) => {
     const elm = event.target;
     if (elm.attributes['data-id']) {
-      onPathClick(elm.attributes['data-id'].value);
+      const id = elm.attributes['data-id'].value;
+      if (isLargeScreen) {
+        onPathClick(id);
+      } else {
+        positionTooltip(event, elm, showTooltip, id);
+      }
     }
   };
+};
+
+const positionTooltip = (
+  event: any,
+  element: any,
+  showTooltip: (settings: TooltipSettings) => void,
+  id: string
+) => {
+  const coords = localPoint(element.ownerSVGElement, event);
+
+  if (coords) {
+    showTooltip({
+      left: coords.x + 5,
+      top: coords.y + 5,
+      data: id,
+    });
+  }
 };
 
 const svgMouseOver = (timout: MutableRefObject<any>, showTooltip: any) => {
@@ -201,15 +247,8 @@ const svgMouseOver = (timout: MutableRefObject<any>, showTooltip: any) => {
         timout.current = -1;
       }
 
-      const coords = localPoint(event.target.ownerSVGElement, event);
-
-      if (coords) {
-        showTooltip({
-          tooltipLeft: coords.x + 5,
-          tooltipTop: coords.y + 5,
-          tooltipData: elm.attributes['data-id'].value,
-        });
-      }
+      const id = elm.attributes['data-id'].value;
+      positionTooltip(event, elm, showTooltip, id);
     }
   };
 };

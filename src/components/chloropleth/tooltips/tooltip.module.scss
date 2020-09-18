@@ -11,3 +11,74 @@
   pointer-events: none;
   line-height: 1em;
 }
+
+.legenda {
+  padding-left: 0;
+  margin-bottom: 1em;
+
+  @media (min-width: 1200px) {
+    margin-bottom: 0;
+  }
+
+  .escalationInfo {
+    margin-bottom: 1em;
+  }
+
+  h4 {
+    margin-bottom: 1em;
+  }
+}
+
+.escalationTooltip {
+  width: 265px;
+  background-color: white;
+  border-radius: 4px;
+  margin: 0;
+  padding: 0;
+  pointer-events: all;
+  cursor: pointer;
+
+  .escalationTooltipHeader {
+    border-bottom: 1px solid #c4c4c4;
+    padding-top: 0.1em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    margin: 0;
+    font-size: 1.2em;
+    cursor: pointer;
+
+    &::after {
+      content: '';
+      background-image: url('/images/chevron-black.svg');
+      // match aspect ratio of chevron.svg
+      background-size: 0.6em 1em;
+      height: 1em;
+      width: 0.6em;
+      display: block;
+      position: absolute;
+      right: 1em;
+      top: 1em;
+    }
+  }
+
+  .escalationInfo {
+    padding: 1em;
+    cursor: pointer;
+  }
+}
+
+.escalationInfo {
+  display: flex;
+  flex-direction: row;
+
+  .bubble {
+    margin-right: 0.5em;
+    display: flex;
+    width: 3em;
+    height: 3em;
+    flex-grow: 0;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+  }
+}

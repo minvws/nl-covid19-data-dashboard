@@ -177,7 +177,6 @@
 @media (max-width: 999px) {
   .small-screen-aside-tendency {
     .national-content,
-    .safety-region-content,
     .municipality-content {
       display: none;
     }
@@ -188,6 +187,12 @@
     .safety-region-aside,
     .municipality-aside {
       display: none;
+    }
+  }
+
+  .small-screen-aside-tendency {
+    .safety-region-aside {
+      min-height: 6em;
     }
   }
 }

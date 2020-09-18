@@ -20,7 +20,7 @@
 .chloroplethContainer.escalationMap {
   .svgMap {
     path {
-      stroke: #595959;
+      stroke: white;
     }
 
     path.overlay {
@@ -74,6 +74,6 @@
 
   path.hoverLayer:hover {
     stroke: #000000;
-    stroke-width: 1.5;
+    stroke-width: 2;
   }
 }
