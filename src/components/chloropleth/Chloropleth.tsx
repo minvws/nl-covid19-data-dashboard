@@ -2,7 +2,7 @@ import { Mercator } from '@vx/geo';
 import { Feature, FeatureCollection, MultiPolygon } from 'geojson';
 import { MutableRefObject, ReactNode, useMemo, useRef } from 'react';
 
-import create from 'zustand';
+import create, { UseStore } from 'zustand';
 
 import { TCombinedChartDimensions } from './hooks/useChartDimensions';
 
@@ -24,25 +24,6 @@ export type TooltipSettings = {
   top: number;
   data: any;
 };
-
-const tooltipStore = create<TooltipState>((set) => ({
-  tooltip: null,
-  updateTooltip: (tooltip: TooltipSettings) => {
-    set({
-      tooltip,
-    });
-  },
-  showTooltip: (settings: TooltipSettings) => {
-    return set({
-      tooltip: {
-        left: settings.left,
-        top: settings.top,
-        data: settings.data,
-      },
-    });
-  },
-  hideTooltip: () => set({ tooltip: null }),
-}));
 
 export type TRenderCallback = (
   feature: Feature<any, any>,
@@ -117,6 +98,27 @@ export default function Chloropleth<T>(props: TProps<T>) {
     getTooltipContent,
   } = props;
 
+  const tooltipStore = useRef<UseStore<TooltipState>>(
+    create<TooltipState>((set) => ({
+      tooltip: null,
+      updateTooltip: (tooltip: TooltipSettings) => {
+        set({
+          tooltip,
+        });
+      },
+      showTooltip: (settings: TooltipSettings) => {
+        return set({
+          tooltip: {
+            left: settings.left,
+            top: settings.top,
+            data: settings.data,
+          },
+        });
+      },
+      hideTooltip: () => set({ tooltip: null }),
+    }))
+  );
+
   const clipPathId = useRef(`_${Math.random().toString(36).substring(2, 15)}`);
   const timout = useRef<any>(-1);
   const isLargeScreen = useMediaQuery('(min-width: 1000px)');
@@ -134,8 +136,8 @@ export default function Chloropleth<T>(props: TProps<T>) {
     return [[boundedWidth, boundedHeight], boundingbox];
   }, [boundedWidth, boundedHeight, boundingbox]);
 
-  const showTooltip = tooltipStore((state) => state.showTooltip);
-  const hideTooltip = tooltipStore((state) => state.hideTooltip);
+  const showTooltip = tooltipStore.current((state) => state.showTooltip);
+  const hideTooltip = tooltipStore.current((state) => state.hideTooltip);
 
   return (
     <>
@@ -178,7 +180,7 @@ export default function Chloropleth<T>(props: TProps<T>) {
         </g>
       </svg>
       <Tooltip
-        tooltipStore={tooltipStore}
+        tooltipStore={tooltipStore.current}
         getTooltipContent={getTooltipContent}
       />
     </>
