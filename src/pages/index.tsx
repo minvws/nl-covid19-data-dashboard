@@ -115,7 +115,7 @@ const Home: FCWithLayout<INationalData> = () => {
         </div>
       </article>
 
-      <article className="map-article layout-two-column">
+      <article className="index-article layout-two-column">
         <div className="column-item-no-margin column-item-small">
           <h2 className="text-max-width">
             {text.veiligheidsregio_index.selecteer_titel}

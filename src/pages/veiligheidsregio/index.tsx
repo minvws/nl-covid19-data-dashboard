@@ -20,7 +20,7 @@ const escalationThresholds = thresholds.escalation_levels.thresholds;
 export const EscalationMapLegenda = () => {
   return (
     <div className={styles.legenda} aria-label="legend">
-      <h4 className="text-max-width">{text.escalatie_niveau.legenda.titel}</h4>
+      <h3 className="text-max-width">{text.escalatie_niveau.legenda.titel}</h3>
       {escalationThresholds.map((info) => (
         <div
           className={styles.escalationInfo}

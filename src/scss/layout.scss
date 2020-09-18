@@ -60,13 +60,6 @@
   margin-bottom: $default-margin * 2;
 }
 
-.index-article {
-  background: white;
-  border-radius: 5px;
-  padding: 2em;
-  margin: -1rem 0 0;
-}
-
 .map-article {
   background: transparent;
   padding: 0 2em 2em 2em;
@@ -74,12 +67,12 @@
   margin: 0 -2rem;
 }
 
+.index-article,
 .metric-article {
   background: white;
   padding: 2em;
   border-radius: 5px;
-  margin: 0 -2rem;
-  margin-top: 2rem;
+  margin: 2rem -2rem 0;
   box-shadow: $box-shadow;
 
   .article-text {
@@ -90,6 +83,10 @@
     margin: 0;
     margin-top: 2rem;
   }
+}
+
+.index-article:first-of-type() {
+  margin-top: -1rem;
 }
 
 .escalation-article {
