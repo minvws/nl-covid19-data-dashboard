@@ -72,28 +72,6 @@ const Home: FCWithLayout<INationalData> = () => {
         </Link>
       </article>
 
-      <article className="map-article layout-two-column">
-        <div className="column-item-no-margin column-item-small">
-          <h2 className="text-max-width">
-            {text.veiligheidsregio_index.selecteer_titel}
-          </h2>
-          <p className="text-max-width">
-            {text.veiligheidsregio_index.selecteer_toelichting}
-          </p>
-          {isLargeScreen && <EscalationMapLegenda />}
-        </div>
-        <div className="column-item-no-margin column-item">
-          <SafetyRegionChloropleth
-            metricName="escalation_levels"
-            metricProperty="escalation_level"
-            style={{ height: mapHeight }}
-            onSelect={onSelectRegion}
-            tooltipContent={escalationTooltip(router)}
-          />
-        </div>
-        {!isLargeScreen && <EscalationMapLegenda />}
-      </article>
-
       <article className="metric-article layout-two-column">
         <div className="column-item column-item-extra-margin">
           <h3>{text.positief_geteste_personen.map_titel}</h3>
@@ -135,6 +113,28 @@ const Home: FCWithLayout<INationalData> = () => {
             />
           )}
         </div>
+      </article>
+
+      <article className="map-article layout-two-column">
+        <div className="column-item-no-margin column-item-small">
+          <h2 className="text-max-width">
+            {text.veiligheidsregio_index.selecteer_titel}
+          </h2>
+          <p className="text-max-width">
+            {text.veiligheidsregio_index.selecteer_toelichting}
+          </p>
+          {isLargeScreen && <EscalationMapLegenda />}
+        </div>
+        <div className="column-item-no-margin column-item">
+          <SafetyRegionChloropleth
+            metricName="escalation_levels"
+            metricProperty="escalation_level"
+            style={{ height: mapHeight }}
+            onSelect={onSelectRegion}
+            tooltipContent={escalationTooltip(router)}
+          />
+        </div>
+        {!isLargeScreen && <EscalationMapLegenda />}
       </article>
     </>
   );
