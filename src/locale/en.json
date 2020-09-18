@@ -692,7 +692,7 @@
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Level of risk",
-    "selecteer_toelichting": "The map indicates the level of risk per region. This can be ‘vigilant’ (level 1), ‘worrisome’ (level 2) or ‘serious’ (level 3). Appropriate measures are taken per region.\n\n[More about risk levels](/verantwoording)"
+    "selecteer_toelichting": "The map indicates the level of risk per region. This can be ‘vigilant’ (level 1), ‘worrisome’ (level 2) or ‘serious’ (level 3). Appropriate measures are taken per region.\n\n[Regional measures](https://www.rijksoverheid.nl/actueel/nieuws/2020/09/18/nieuwe-regionale-maatregelen-om-het-virus-in-te-dammen)\n[More about risk levels](/verantwoording)"
   },
   "gemeente_index": {
     "selecteer_titel": "Select your municipality",
@@ -706,7 +706,7 @@
   },
   "escalatie_niveau": {
     "titel": "Level of risk",
-    "toelichting": "The map indicates the level of risk per region. This can be ‘vigilant’ (level 1), ‘worrisome’ (level 2) or ‘serious’ (level 3). Appropriate measures are taken per region.\n\n[More about risk levels](/verantwoording)",
+    "toelichting": "The map indicates the level of risk per region. This can be ‘vigilant’ (level 1), ‘worrisome’ (level 2) or ‘serious’ (level 3). Appropriate measures are taken per region.\n\n[Regional measures](https://www.rijksoverheid.nl/actueel/nieuws/2020/09/18/nieuwe-regionale-maatregelen-om-het-virus-in-te-dammen)\n[More about risk levels](/verantwoording)",
     "types": {
       "1": {
         "titel": "Watchful",
