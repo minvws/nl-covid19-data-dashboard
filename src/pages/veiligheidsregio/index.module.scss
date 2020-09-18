@@ -30,7 +30,6 @@
     padding-right: 0.5em;
     margin: 0;
     font-size: 1.2em;
-    cursor: pointer;
 
     &::after {
       content: '';
@@ -48,7 +47,6 @@
 
   .escalationInfo {
     padding: 1em;
-    cursor: pointer;
   }
 }
 
