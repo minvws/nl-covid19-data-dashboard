@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import styles from './lineChart.module.scss';
+import text from 'locale';
 
 import ChartTimeControls, {
   TimeframeOption,
@@ -101,7 +102,7 @@ function getChartOptions(values: Value[], signaalwaarde?: number | undefined) {
               color: '#4f5458',
               zIndex: 1,
               label: {
-                text: 'Signaalwaarde',
+                text: text.common.barScale.signaalwaarde,
                 align: 'right',
                 y: -8,
                 x: 0,
