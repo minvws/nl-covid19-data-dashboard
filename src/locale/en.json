@@ -246,6 +246,7 @@
       "text": "RIVM"
     },
     "titel": "Number of confirmed cases",
+    "titel_sidebar": "Number of confirmed cases  per day",
     "barscale_titel": "Number of confirmed cases in nursing homes per day",
     "extra_uitleg": "Number of confirmed cases in nursing homes per day.",
     "pagina_toelichting": "Number of confirmed cases in nursing homes per day. This number is an estimation of the number confirmed cases in nursing home inhabitants.",
@@ -259,6 +260,7 @@
       "text": "RIVM"
     },
     "titel": "Mortality",
+    "titel_sidebar": "Mortality",
     "pagina_toelichting": "Daily number of deceased residents with confirmed cases of COVID-19 in nursing homes.",
     "barscale_titel": "Number of deceased residents",
     "barscale_screenreader_text": "{{value}} deceased residents",

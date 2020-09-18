@@ -6,6 +6,8 @@ import ExternalLink from 'assets/external-link.svg';
 import path from 'path';
 import fs from 'fs';
 
+import siteText from 'locale';
+
 import { INationalData } from 'static-props/nl-data';
 
 import styles from './index.module.scss';
@@ -152,7 +154,7 @@ Home.getLayout = getNationalLayout();
 interface StaticProps {
   props: {
     data: National;
-    text: any;
+    text: typeof siteText;
     lastGenerated: string;
   };
 }
