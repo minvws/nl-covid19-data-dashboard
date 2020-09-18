@@ -1,12 +1,15 @@
+import path from 'path';
+import fs from 'fs';
+
 import { FCWithLayout } from 'components/layout';
 import { getSafetyRegionLayout } from 'components/layout/SafetyRegionLayout';
 import { useRouter } from 'next/router';
 import ExclamationMark from 'assets/exclamation-mark-bubble.svg';
 import EmptyBubble from 'assets/empty-bubble.svg';
-import text from 'locale';
+import siteText from 'locale';
 import styles from 'components/chloropleth/tooltips/tooltip.module.scss';
 
-import getLastGeneratedData from 'static-props/last-generated-data';
+import MDToHTMLString from 'utils/MDToHTMLString';
 
 import SafetyRegionChloropleth, {
   thresholds,
@@ -16,7 +19,9 @@ import { escalationTooltip } from 'components/chloropleth/tooltips/region/escala
 
 const escalationThresholds = thresholds.escalation_levels.thresholds;
 
-export const EscalationMapLegenda = () => {
+export const EscalationMapLegenda = (props: any) => {
+  const { text } = props;
+
   return (
     <div className={styles.legenda} aria-label="legend">
       <h4 className="text-max-width">{text.escalatie_niveau.legenda.titel}</h4>
@@ -54,9 +59,11 @@ export const EscalationMapLegenda = () => {
 // All other pages which use `getSafetyRegionLayout` can assume
 // the data is always there. Making the data optional would mean
 // lots of unnecessary null checks on those pages.
-const SafetyRegion: FCWithLayout<any> = () => {
+const SafetyRegion: FCWithLayout<any> = (props) => {
   const router = useRouter();
   const isLargeScreen = useMediaQuery('(min-width: 1000px)');
+
+  const { text } = props;
 
   const onSelectRegion = (context: any) => {
     router.push(
@@ -74,10 +81,13 @@ const SafetyRegion: FCWithLayout<any> = () => {
           <h2 className="text-max-width">
             {text.veiligheidsregio_index.selecteer_titel}
           </h2>
-          <p className="text-max-width">
-            {text.veiligheidsregio_index.selecteer_toelichting}
-          </p>
-          {isLargeScreen && <EscalationMapLegenda />}
+          <div
+            className="text-max-width"
+            dangerouslySetInnerHTML={{
+              __html: text.veiligheidsregio_index.selecteer_toelichting,
+            }}
+          />
+          {isLargeScreen && <EscalationMapLegenda text={text} />}
         </div>
         <div className="column-item-no-margin column-item">
           <SafetyRegionChloropleth
@@ -88,13 +98,35 @@ const SafetyRegion: FCWithLayout<any> = () => {
             tooltipContent={escalationTooltip(router)}
           />
         </div>
-        {!isLargeScreen && <EscalationMapLegenda />}
+        {!isLargeScreen && <EscalationMapLegenda text={text} />}
       </article>
     </>
   );
 };
 
 SafetyRegion.getLayout = getSafetyRegionLayout();
-export const getStaticProps = getLastGeneratedData();
+
+interface StaticProps {
+  props: {
+    text: typeof siteText;
+    lastGenerated: string;
+  };
+}
+
+export async function getStaticProps(): Promise<StaticProps> {
+  const text = require('../../locale/index').default;
+
+  const serializedContent = MDToHTMLString(
+    text.veiligheidsregio_index.selecteer_toelichting
+  );
+
+  text.veiligheidsregio_index.selecteer_toelichting = serializedContent;
+
+  const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
+  const fileContents = fs.readFileSync(filePath, 'utf8');
+  const lastGenerated = JSON.parse(fileContents).last_generated;
+
+  return { props: { text, lastGenerated } };
+}
 
 export default SafetyRegion;
