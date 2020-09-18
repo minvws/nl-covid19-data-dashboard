@@ -119,7 +119,7 @@ function getChartOptions(values: Value[], signaalwaarde?: number | undefined) {
               value: signaalwaarde,
               color: 'transparent',
               label: {
-                text: signaalwaarde,
+                text: `${signaalwaarde}`,
                 align: 'left',
                 y: -8,
                 x: 0,
