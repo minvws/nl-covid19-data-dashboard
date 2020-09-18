@@ -79,6 +79,30 @@ const Home: FCWithLayout<INationalData> = (props) => {
         </Link>
       </article>
 
+      <article className="index-article layout-two-column">
+        <div className="column-item-no-margin column-item-small">
+          <h2 className="text-max-width">
+            {text.veiligheidsregio_index.selecteer_titel}
+          </h2>
+          <div
+            className="text-max-width"
+            dangerouslySetInnerHTML={{
+              __html: text.veiligheidsregio_index.selecteer_toelichting,
+            }}
+          />
+          <EscalationMapLegenda text={text} />
+        </div>
+        <div className="column-item-no-margin column-item">
+          <SafetyRegionChloropleth
+            metricName="escalation_levels"
+            metricProperty="escalation_level"
+            style={{ height: mapHeight }}
+            onSelect={onSelectRegion}
+            tooltipContent={escalationTooltip(router)}
+          />
+        </div>
+      </article>
+
       <article className="metric-article layout-two-column">
         <div className="column-item column-item-extra-margin">
           <h3>{text.positief_geteste_personen.map_titel}</h3>
@@ -119,30 +143,6 @@ const Home: FCWithLayout<INationalData> = (props) => {
               tooltipContent={positiveTestedPeopleTooltipRegion}
             />
           )}
-        </div>
-      </article>
-
-      <article className="index-article layout-two-column">
-        <div className="column-item-no-margin column-item-small">
-          <h2 className="text-max-width">
-            {text.veiligheidsregio_index.selecteer_titel}
-          </h2>
-          <div
-            className="text-max-width"
-            dangerouslySetInnerHTML={{
-              __html: text.veiligheidsregio_index.selecteer_toelichting,
-            }}
-          />
-          <EscalationMapLegenda text={text} />
-        </div>
-        <div className="column-item-no-margin column-item">
-          <SafetyRegionChloropleth
-            metricName="escalation_levels"
-            metricProperty="escalation_level"
-            style={{ height: mapHeight }}
-            onSelect={onSelectRegion}
-            tooltipContent={escalationTooltip(router)}
-          />
         </div>
       </article>
     </>
