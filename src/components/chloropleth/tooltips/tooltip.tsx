@@ -11,12 +11,6 @@ export default function Tooltip(props: any) {
 
   useEffect(() => {
     if (ref.current) {
-      const { parentElement } = ref.current;
-
-      if (!parentElement) {
-        return;
-      }
-
       const viewPort = { width: window.innerWidth, height: window.innerHeight };
 
       const boundingRect = ref.current.getBoundingClientRect();
