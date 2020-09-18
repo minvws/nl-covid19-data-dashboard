@@ -78,15 +78,15 @@ const escalationThresholds: RegionalThresholds = {
   svgClass: 'escalationMap',
   thresholds: [
     {
-      color: '#FFF7A3',
+      color: '#F291BC',
       threshold: 1,
     },
     {
-      color: '#FACB3E',
+      color: '#D95790',
       threshold: 2,
     },
     {
-      color: '#F5512D',
+      color: '#A11050',
       threshold: 3,
     },
   ],

@@ -1,71 +1,22 @@
 import { FCWithLayout } from 'components/layout';
 import { getSafetyRegionLayout } from 'components/layout/SafetyRegionLayout';
-import { NextRouter, useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import ExclamationMark from 'assets/exclamation-mark-bubble.svg';
 import EmptyBubble from 'assets/empty-bubble.svg';
 import text from 'locale';
-import styles from './index.module.scss';
+import styles from 'components/chloropleth/tooltips/tooltip.module.scss';
 
 import getLastGeneratedData from 'static-props/last-generated-data';
 
-import { ReactNode } from 'react';
 import SafetyRegionChloropleth, {
   thresholds,
 } from 'components/chloropleth/SafetyRegionChloropleth';
-import formatDate from 'utils/formatDate';
-import replaceVariablesInText from 'utils/replaceVariablesInText';
 import useMediaQuery from 'utils/useMediaQuery';
+import { escalationTooltip } from 'components/chloropleth/tooltips/region/escalationTooltip';
 
 const escalationThresholds = thresholds.escalation_levels.thresholds;
 
-const escalationTooltipContent = (router: NextRouter) => {
-  return (context: any): ReactNode => {
-    const type: number = context?.value;
-
-    const thresholdInfo = escalationThresholds.find(
-      (value) => value.threshold === type
-    );
-
-    const onSelectRegion = (event: any) => {
-      event.stopPropagation();
-      event.stopImmediatePropagation();
-      router.push(
-        '/veiligheidsregio/[code]/positief-geteste-mensen',
-        `/veiligheidsregio/${context.vrcode}/positief-geteste-mensen`
-      );
-    };
-
-    return (
-      type && (
-        <div className={styles.escalationTooltip} onClick={onSelectRegion}>
-          <div className={styles.escalationTooltipHeader}>
-            <h4>{context?.vrname}</h4>
-          </div>
-          {
-            <div className={styles.escalationInfo}>
-              <div className={styles.bubble}>
-                {type !== 1 && <ExclamationMark fill={thresholdInfo?.color} />}
-                {type === 1 && <EmptyBubble fill={thresholdInfo?.color} />}
-              </div>
-              <div>
-                <strong>
-                  {(text.escalatie_niveau.types as any)[type].titel}
-                </strong>
-                : {(text.escalatie_niveau.types as any)[type].toelichting}
-                <br />
-                {replaceVariablesInText(text.escalatie_niveau.valid_from, {
-                  validFrom: formatDate(context.valid_from_unix),
-                })}
-              </div>
-            </div>
-          }
-        </div>
-      )
-    );
-  };
-};
-
-const EscalationMapLegenda = () => {
+export const EscalationMapLegenda = () => {
   return (
     <div className={styles.legenda} aria-label="legend">
       <h4 className="text-max-width">{text.escalatie_niveau.legenda.titel}</h4>
@@ -134,7 +85,7 @@ const SafetyRegion: FCWithLayout<any> = () => {
             metricProperty="escalation_level"
             style={{ height: mapHeight }}
             onSelect={onSelectRegion}
-            tooltipContent={escalationTooltipContent(router)}
+            tooltipContent={escalationTooltip(router)}
           />
         </div>
         {!isLargeScreen && <EscalationMapLegenda />}
