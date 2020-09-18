@@ -23,7 +23,6 @@ export const escalationTooltip = (router: NextRouter) => {
 
     const onSelectRegion = (event: any) => {
       event.stopPropagation();
-      event.stopImmediatePropagation();
       router.push(
         '/veiligheidsregio/[code]/positief-geteste-mensen',
         `/veiligheidsregio/${context.vrcode}/positief-geteste-mensen`
