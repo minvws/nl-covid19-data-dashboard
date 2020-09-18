@@ -8,6 +8,7 @@
     "proto_name",
     "name",
     "code",
+    "escalation_levels",
     "hospital_admissions",
     "positive_tested_people"
   ],
