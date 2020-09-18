@@ -379,7 +379,7 @@
     "cijfers": [
       {
         "cijfer": "Level of risk",
-        "verantwoording": ""
+        "verantwoording": "There is a lot of data about the Coronavirus available. Every week, it is evaluated whether the situation is positively or negatively developing. The ministry, the municipal health services (GGD), the RIVM, and the safety regions judge the situation together. Do we have to be vigilant (level 1), is the situation worrisome (level 2) or is the situation even serious (level 3)? This way it is immediately clear to everyone what the situation per region is. Depending on the severity of the situation,  different measures can be taken. Determining the risk level and the different measures, the effect of the measures on society and the economy are always considered. The measures are tailored and may vary per region.\n\n1. Vigilant\nThe situation is manageable. The number of new infections is low. Vulnerable groups need to be careful. The source and contact tracing is predominantly effective. Citizens adhere to the measures to prevent the spread of the virus and the measures can be enforced. The healthcare capacity is sufficient. Additional measures are focused on the improvement of the current approach.\n\n2. Worrisome\nThe situation is negatively developing. The number of new infections is increasing. Specific measures are needed to protect vulnerable groups. If the situation continues, source- and contact tracing becomes ineffective. Measures are not being adhered to. The healthcare capacity is under increased pressure. Additional measures are needed to gain control of the virus again and to return to a manageable situation.\n\n3. Serious\nStrong intervention is needed to prevent further escalation and to return to a controllable situation (vigilant). The number of new infections is increasing fast. The source- and contact tracing is ineffective, which leads to a decrease in the insight in the spread of the virus. Measures are not being adhered to. The regional healthcare capacity is insufficient. Measures are focused on preventing the (regional) healthcare capacity to be overwhelmed, protecting the vulnerable groups and to regain sight on the spread of the virus again."
       },
       {
         "cijfer": "Correction figures of 2 September in the number of confirmed cases",
@@ -690,7 +690,7 @@
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Level of risk",
-    "selecteer_toelichting": "The map indicates the level of risk per region. This can be ‘vigilant’ (level 1), ‘worrisome’ (level 2) or ‘serious’ (level 3). Appropriate measures are taken per region."
+    "selecteer_toelichting": "The map indicates the level of risk per region. This can be ‘vigilant’ (level 1), ‘worrisome’ (level 2) or ‘serious’ (level 3). Appropriate measures are taken per region.\n\n[More about risk levels](/verantwoording)"
   },
   "gemeente_index": {
     "selecteer_titel": "Select your municipality",
@@ -704,7 +704,7 @@
   },
   "escalatie_niveau": {
     "titel": "Level of risk",
-    "toelichting": "The map indicates the level of risk per region. This can be ‘vigilant’ (level 1), ‘worrisome’ (level 2) or ‘serious’ (level 3). Appropriate measures are taken per region.",
+    "toelichting": "The map indicates the level of risk per region. This can be ‘vigilant’ (level 1), ‘worrisome’ (level 2) or ‘serious’ (level 3). Appropriate measures are taken per region.\n\n[More about risk levels](/verantwoording)",
     "types": {
       "1": {
         "titel": "Watchful",
