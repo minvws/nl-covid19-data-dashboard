@@ -29,14 +29,14 @@ export const EscalationMapLegenda = () => {
             {info.threshold !== 1 && <ExclamationMark fill={info?.color} />}
             {info.threshold === 1 && <EmptyBubble fill={info?.color} />}
           </div>
-          <div>
+          <div className={styles.escalationText}>
             <strong>
               {
                 (text.escalatie_niveau.types as any)[info.threshold.toString()]
                   .titel
               }
             </strong>
-            :{' '}
+            <br />
             {
               (text.escalatie_niveau.types as any)[info.threshold.toString()]
                 .toelichting
