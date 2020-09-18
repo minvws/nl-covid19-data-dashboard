@@ -162,7 +162,7 @@
     "barscale_titel": "Average number of infectious people per 100.000 inhabitants.",
     "barscale_screenreader_text": "{{value}} infectious people per 100.000 inhabitants.",
     "cijfer_titel": "Estimated number of infectious people in the Netherlands:",
-    "cijfer_toelichting": "A calculation of how many people with COVID-19 per 100.000 inhabitants that can transmit the virus. This number is calculated by the RIVM.",
+    "cijfer_toelichting": "A calculation of how many people with COVID-19 can transmit the virus. This number is calculated by the RIVM.",
     "linechart_titel": "Progression over time",
     "titel_sidebar": "Number of infectious people per 100,000 inhabitants"
   },
