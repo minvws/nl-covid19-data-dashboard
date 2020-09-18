@@ -330,7 +330,7 @@
       },
       {
         "vraag": "Waarom is het dashboard nog in ontwikkeling?",
-        "antwoord": "Het dashboard is continu in ontwikkeling (zolang het virus nog “onder ons” is), omdat we voortdurend kijken of we betere data kunnen toevoegen. Daarbij kost tijd om zo’n dashboard goed te bouwen. Daarom wordt het dashboard  stap voor stap uitgebreid. Ook willen we dat de informatie op deze website goed te lezen is op iedere computer of telefoon, in het Nederlands en in het Engels."
+        "antwoord": "Het dashboard is continu in ontwikkeling (zolang het virus nog “onder ons” is), omdat we voortdurend kijken of we betere data kunnen toevoegen. Daarbij kost het tijd om zo’n dashboard goed te bouwen. Daarom wordt het dashboard  stap voor stap uitgebreid. Ook willen we dat de informatie op deze website goed te lezen is op iedere computer of telefoon, in het Nederlands en in het Engels."
       },
       {
         "vraag": "Wat is een signaalwaarde?",
@@ -685,7 +685,7 @@
     "average": "Gemiddelde"
   },
   "veiligheidsregio_index": {
-    "selecteer_titel": "Selecteer een veiligheidsregio",
+    "selecteer_titel": "Risiconiveaus",
     "selecteer_toelichting": ""
   },
   "gemeente_index": {

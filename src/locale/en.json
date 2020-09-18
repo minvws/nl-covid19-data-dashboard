@@ -685,7 +685,7 @@
     "average": "Average"
   },
   "veiligheidsregio_index": {
-    "selecteer_titel": "Select a safety region",
+    "selecteer_titel": "Levels of risk",
     "selecteer_toelichting": "There are different measures per safety region and municipality"
   },
   "gemeente_index": {
@@ -716,6 +716,6 @@
     "legenda": {
       "titel": "Legend of the situation map"
     },
-    "valid_from": ""
+    "valid_from": "vanaf {{validFrom}}"
   }
 }
