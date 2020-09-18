@@ -123,7 +123,7 @@ const Home: FCWithLayout<INationalData> = () => {
           <p className="text-max-width">
             {text.veiligheidsregio_index.selecteer_toelichting}
           </p>
-          {isLargeScreen && <EscalationMapLegenda />}
+          <EscalationMapLegenda />
         </div>
         <div className="column-item-no-margin column-item">
           <SafetyRegionChloropleth
@@ -134,7 +134,6 @@ const Home: FCWithLayout<INationalData> = () => {
             tooltipContent={escalationTooltip(router)}
           />
         </div>
-        {!isLargeScreen && <EscalationMapLegenda />}
       </article>
     </>
   );
