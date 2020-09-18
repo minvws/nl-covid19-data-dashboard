@@ -71,7 +71,6 @@ const Home: FCWithLayout<INationalData> = (props) => {
       </article>
 
       <article className={styles['all-numbers']}>
-        <h3>{text.laatste_ontwikkelingen.alle_cijfers_header}</h3>
         <Link href="/landelijk">
           <a className={styles['all-numbers-link']}>
             {text.laatste_ontwikkelingen.alle_cijfers_link}
