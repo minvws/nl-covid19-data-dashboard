@@ -123,7 +123,7 @@ const Home: FCWithLayout<INationalData> = () => {
           <p className="text-max-width">
             {text.veiligheidsregio_index.selecteer_toelichting}
           </p>
-          <EscalationMapLegenda />
+          <EscalationMapLegenda text={text} />
         </div>
         <div className="column-item-no-margin column-item">
           <SafetyRegionChloropleth
