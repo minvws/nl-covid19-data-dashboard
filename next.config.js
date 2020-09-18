@@ -5,6 +5,7 @@ const withTM = require('next-transpile-modules')([
   '@vx/tooltip',
   '@vx/event',
   'react-use-measure',
+  'zustand',
 ]);
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
