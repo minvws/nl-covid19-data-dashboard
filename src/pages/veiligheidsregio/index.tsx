@@ -28,25 +28,18 @@ export const EscalationMapLegenda = (props: any) => {
       <h3 className="text-max-width">{text.escalatie_niveau.legenda.titel}</h3>
       {escalationThresholds.map((info) => (
         <div
-          className={styles.escalationInfo}
+          className={styles.escalationInfoLegenda}
           key={`legenda-item-${info?.threshold}`}
         >
-          <div className={styles.bubble}>
+          <div className={styles.bubbleLegenda}>
             {info.threshold === 1 && <EscalationLevel1 color={info?.color} />}
             {info.threshold === 2 && <EscalationLevel2 color={info?.color} />}
             {info.threshold === 3 && <EscalationLevel3 color={info?.color} />}
           </div>
-          <div className={styles.escalationText}>
-            <strong>
-              {
-                (text.escalatie_niveau.types as any)[info.threshold.toString()]
-                  .titel
-              }
-            </strong>
-            <br />
+          <div className={styles.escalationTextLegenda}>
             {
               (text.escalatie_niveau.types as any)[info.threshold.toString()]
-                .toelichting
+                .titel
             }
           </div>
         </div>
