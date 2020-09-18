@@ -12,19 +12,32 @@ import { localPoint } from '@vx/event';
 import Tooltip from './tooltips/tooltip';
 import useMediaQuery from 'utils/useMediaQuery';
 
-const tooltipStore = create((set) => ({
+export type TooltipState = {
+  tooltip: TooltipSettings | null;
+  updateTooltip: (tooltip: TooltipSettings) => void;
+  showTooltip: (settings: TooltipSettings) => void;
+  hideTooltip: () => void;
+};
+
+export type TooltipSettings = {
+  left: number;
+  top: number;
+  data: any;
+};
+
+const tooltipStore = create<TooltipState>((set) => ({
   tooltip: null,
-  updateTooltip: (tooltip: any) => {
+  updateTooltip: (tooltip: TooltipSettings) => {
     set({
       tooltip,
     });
   },
-  showTooltip: (hoveredElement: any) => {
+  showTooltip: (settings: TooltipSettings) => {
     return set({
       tooltip: {
-        left: hoveredElement.tooltipLeft,
-        top: hoveredElement.tooltipTop,
-        data: hoveredElement.tooltipData,
+        left: settings.left,
+        top: settings.top,
+        data: settings.data,
       },
     });
   },
@@ -190,8 +203,8 @@ const renderFeature = (callback: TRenderCallback) => {
 };
 
 const svgClick = (
-  onPathClick: any,
-  showTooltip: any,
+  onPathClick: (id: string) => void,
+  showTooltip: (settings: TooltipSettings) => void,
   isLargeScreen: boolean
 ) => {
   return (event: any) => {
@@ -210,16 +223,16 @@ const svgClick = (
 const positionTooltip = (
   event: any,
   element: any,
-  showTooltip: any,
+  showTooltip: (settings: TooltipSettings) => void,
   id: string
 ) => {
   const coords = localPoint(element.ownerSVGElement, event);
 
   if (coords) {
     showTooltip({
-      tooltipLeft: coords.x + 5,
-      tooltipTop: coords.y + 5,
-      tooltipData: id,
+      left: coords.x + 5,
+      top: coords.y + 5,
+      data: id,
     });
   }
 };
