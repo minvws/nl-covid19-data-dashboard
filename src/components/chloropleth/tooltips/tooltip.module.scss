@@ -1,6 +1,7 @@
+@import 'scss/variables.scss';
+
 .tooltip {
   background: white;
-  padding: 0.5em;
   position: absolute;
   z-index: 1000;
   color: rgb(102, 102, 102);
@@ -30,39 +31,46 @@
 }
 
 .escalationTooltip {
+  color: $text-color;
   width: 265px;
   background-color: white;
   border-radius: 4px;
-  margin: 0;
-  padding: 0;
   pointer-events: all;
   cursor: pointer;
 
   .escalationTooltipHeader {
     border-bottom: 1px solid #c4c4c4;
-    padding-top: 0.1em;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-    margin: 0;
+    margin: 0 -0.5rem;
+    padding: 0.25rem 3rem 0.25rem 1rem;
     font-size: 1.2em;
     cursor: pointer;
+    position: relative;
+    color: #000;
+
+    h3 {
+      margin: 0;
+    }
 
     &::after {
       content: '';
       background-image: url('/images/chevron-black.svg');
       // match aspect ratio of chevron.svg
       background-size: 0.6em 1em;
-      height: 1em;
+      background-position: 0 50%;
+      background-repeat: no-repeat;
       width: 0.6em;
       display: block;
       position: absolute;
       right: 1em;
-      top: 1em;
+      top: 0;
+      bottom: 0;
     }
   }
 
   .escalationInfo {
-    padding: 1em;
+    padding: 1em 0.5em;
+    font-size: 1rem;
+    line-height: 1.5;
     cursor: pointer;
   }
 }
