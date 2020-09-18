@@ -4,8 +4,6 @@ import fs from 'fs';
 import { FCWithLayout } from 'components/layout';
 import { getSafetyRegionLayout } from 'components/layout/SafetyRegionLayout';
 import { useRouter } from 'next/router';
-import ExclamationMark from 'assets/exclamation-mark-bubble.svg';
-import EmptyBubble from 'assets/empty-bubble.svg';
 import EscalationLevel1 from 'assets/niveau-1.svg';
 import EscalationLevel2 from 'assets/niveau-2.svg';
 import EscalationLevel3 from 'assets/niveau-3.svg';
