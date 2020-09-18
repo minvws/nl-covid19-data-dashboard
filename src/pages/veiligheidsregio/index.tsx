@@ -87,7 +87,7 @@ const SafetyRegion: FCWithLayout<any> = (props) => {
               __html: text.veiligheidsregio_index.selecteer_toelichting,
             }}
           />
-          {isLargeScreen && <EscalationMapLegenda text={text} />}
+          <EscalationMapLegenda text={text} />
         </div>
         <div className="column-item-no-margin column-item">
           <SafetyRegionChloropleth
@@ -98,7 +98,6 @@ const SafetyRegion: FCWithLayout<any> = (props) => {
             tooltipContent={escalationTooltip(router)}
           />
         </div>
-        {!isLargeScreen && <EscalationMapLegenda text={text} />}
       </article>
     </>
   );
