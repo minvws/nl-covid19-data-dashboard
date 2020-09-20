@@ -105,7 +105,7 @@
       "text": "RIVM"
     },
     "titel": "Positief geteste mensen",
-    "pagina_toelichting": "Door het aantal positief geteste mensen bij te houden krijgen we een duidelijk beeld van hoe snel het virus zich verspreid voordat het de intensive care bereikt. Hierdoor blijven we voorbereid.",
+    "pagina_toelichting": "Door het aantal positief geteste mensen bij te houden krijgen we een duidelijk beeld van hoe snel het virus zich verspreidt voordat het de intensive care bereikt. Hierdoor blijven we voorbereid.",
     "barscale_titel": "Gemiddeld aantal positief geteste mensen per 100.00 inwoners",
     "barscale_toelichting": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
     "barscale_screenreader_text": "{{value}} positief geteste mensen per dag.",
@@ -560,7 +560,7 @@
   "veiligheidsregio_positief_geteste_personen": {
     "titel_sidebar": "Positief geteste mensen per 100.000 inwoners per dag",
     "titel": "Positief geteste mensen in {{safetyRegion}}",
-    "pagina_toelichting": "Door het aantal positief geteste mensen bij te houden krijgen we een duidelijk beeld van hoe snel het virus zich verspreid voordat het de intensive care bereikt. Hierdoor blijven we voorbereid.",
+    "pagina_toelichting": "Door het aantal positief geteste mensen bij te houden krijgen we een duidelijk beeld van hoe snel het virus zich verspreidt voordat het de intensive care bereikt. Hierdoor blijven we voorbereid.",
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "screen_reader_graph_content": "{{value}} positief geteste personen.",
     "barscale_titel": "Gemiddeld aantal positief geteste mensen per 100.000 inwoners",
@@ -642,7 +642,7 @@
   "gemeente_positief_geteste_personen": {
     "titel_sidebar": "Positief geteste mensen per 100.000 inwoners per dag",
     "titel": "Positief geteste mensen in {{municipality}}",
-    "pagina_toelichting": "Door het aantal positief geteste mensen bij te houden krijgen we een duidelijk beeld van hoe snel het virus zich verspreid voordat het de intensive care bereikt. Hierdoor blijven we voorbereid.",
+    "pagina_toelichting": "Door het aantal positief geteste mensen bij te houden krijgen we een duidelijk beeld van hoe snel het virus zich verspreidt voordat het de intensive care bereikt. Hierdoor blijven we voorbereid.",
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "screen_reader_graph_content": "{{value}} positief geteste personen.",
     "barscale_titel": "Gemiddeld aantal positief geteste mensen per 100.000 inwoners",
