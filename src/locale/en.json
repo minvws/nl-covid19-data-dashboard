@@ -257,7 +257,7 @@
     "pagina_toelichting": "Number of confirmed cases in nursing homes per day. This number is an estimation of the number confirmed cases in nursing home inhabitants.",
     "linechart_titel": "Progression over time",
     "barscale_screenreader_text": "{{value}} Number of residents who tested positive (confirmed cases).",
-    "titel_sidebar": "Number of confirmed cases"
+    "titel_sidebar": "Number of confirmed cases per day"
   },
   "verpleeghuis_oversterfte": {
     "datums": "Value of  {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -273,7 +273,7 @@
     "linechart_titel": "Progression over time",
     "map_titel": "Nursing home excess mortality in the Netherlands",
     "map_toelichting": "These figures show the excess mortality in nursing homes in the Netherlands per day.",
-    "titel_sidebar": "Mortality"
+    "titel_sidebar": "Mortality per day"
   },
   "blok_verpleeghuis_zorg": {
     "title": "Nursing homes",
