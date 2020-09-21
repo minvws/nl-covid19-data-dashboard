@@ -14,7 +14,6 @@ interface Value {
 
 type RegionalSewerWaterLineChartProps = {
   averageValues: Value[];
-  allValues: Value[][];
   text: TranslationStrings;
 };
 
@@ -22,18 +21,9 @@ export default RegionalSewerWaterLineChart;
 
 function getOptions(
   averageValues: Value[],
-  allValues: Value[][],
   text: TranslationStrings
 ): Highcharts.Options {
   const multipleAverageValues = averageValues.length > 1;
-
-  // If any of the RWZI locations has more than 1 value, we trigger different styling
-  const multipleAllValues =
-    allValues &&
-    allValues.length &&
-    allValues
-      .map((values: Value[]) => values.length)
-      .reduce((max, amount) => Math.max(max, amount)) > 1;
 
   const series: SeriesLineOptions[] = [
     {
@@ -59,31 +49,6 @@ function getOptions(
       },
     },
   ];
-
-  allValues.forEach((values, index) => {
-    series.unshift({
-      type: 'line',
-      data: values.map((value) => [value.date, value.value]),
-      name: text.secondary_label_text,
-      showInLegend: index === 0,
-      color: '#D2D2D2',
-      allowPointSelect: false,
-      marker: {
-        enabled: !multipleAllValues,
-      },
-      events: {
-        legendItemClick: () => false,
-      },
-      states: {
-        hover: {
-          enabled: false,
-        },
-        inactive: {
-          opacity: 1,
-        },
-      },
-    });
-  });
 
   const options: Highcharts.Options = {
     chart: {
@@ -176,12 +141,11 @@ function getOptions(
 
 function RegionalSewerWaterLineChart({
   averageValues,
-  allValues,
   text,
 }: RegionalSewerWaterLineChartProps) {
   const chartOptions = useMemo(() => {
-    return getOptions(averageValues, allValues, text);
-  }, [averageValues, allValues, text]);
+    return getOptions(averageValues, text);
+  }, [averageValues, text]);
 
   return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;
 }

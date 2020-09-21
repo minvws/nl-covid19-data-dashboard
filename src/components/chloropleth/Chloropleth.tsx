@@ -2,11 +2,28 @@ import { Mercator } from '@vx/geo';
 import { Feature, FeatureCollection, MultiPolygon } from 'geojson';
 import { MutableRefObject, ReactNode, useMemo, useRef } from 'react';
 
+import create, { UseStore } from 'zustand';
+
 import { TCombinedChartDimensions } from './hooks/useChartDimensions';
 
 import styles from './chloropleth.module.scss';
 import { localPoint } from '@vx/event';
-import { TooltipWithBounds, useTooltip } from '@vx/tooltip';
+
+import Tooltip from './tooltips/tooltip';
+import useMediaQuery from 'utils/useMediaQuery';
+
+export type TooltipState = {
+  tooltip: TooltipSettings | null;
+  updateTooltip: (tooltip: TooltipSettings) => void;
+  showTooltip: (settings: TooltipSettings) => void;
+  hideTooltip: () => void;
+};
+
+export type TooltipSettings = {
+  left: number;
+  top: number;
+  data: any;
+};
 
 export type TRenderCallback = (
   feature: Feature<any, any>,
@@ -81,8 +98,30 @@ export default function Chloropleth<T>(props: TProps<T>) {
     getTooltipContent,
   } = props;
 
+  const tooltipStore = useRef<UseStore<TooltipState>>(
+    create<TooltipState>((set) => ({
+      tooltip: null,
+      updateTooltip: (tooltip: TooltipSettings) => {
+        set({
+          tooltip,
+        });
+      },
+      showTooltip: (settings: TooltipSettings) => {
+        return set({
+          tooltip: {
+            left: settings.left,
+            top: settings.top,
+            data: settings.data,
+          },
+        });
+      },
+      hideTooltip: () => set({ tooltip: null }),
+    }))
+  );
+
   const clipPathId = useRef(`_${Math.random().toString(36).substring(2, 15)}`);
   const timout = useRef<any>(-1);
+  const isLargeScreen = useMediaQuery('(min-width: 1000px)');
 
   const {
     width = 0,
@@ -97,14 +136,8 @@ export default function Chloropleth<T>(props: TProps<T>) {
     return [[boundedWidth, boundedHeight], boundingbox];
   }, [boundedWidth, boundedHeight, boundingbox]);
 
-  const {
-    tooltipData,
-    tooltipLeft,
-    tooltipTop,
-    tooltipOpen,
-    showTooltip,
-    hideTooltip,
-  } = useTooltip<string>();
+  const showTooltip = tooltipStore.current((state) => state.showTooltip);
+  const hideTooltip = tooltipStore.current((state) => state.hideTooltip);
 
   return (
     <>
@@ -114,7 +147,7 @@ export default function Chloropleth<T>(props: TProps<T>) {
         className={styles.svgMap}
         onMouseOver={svgMouseOver(timout, showTooltip)}
         onMouseOut={svgMouseOut(timout, hideTooltip)}
-        onClick={svgClick(onPathClick)}
+        onClick={svgClick(onPathClick, showTooltip, isLargeScreen)}
       >
         <clipPath id={clipPathId.current}>
           <rect
@@ -146,15 +179,10 @@ export default function Chloropleth<T>(props: TProps<T>) {
           )}
         </g>
       </svg>
-      {tooltipOpen && tooltipData && getTooltipContent && (
-        <TooltipWithBounds
-          left={tooltipLeft}
-          top={tooltipTop}
-          className={styles.toolTip}
-        >
-          {getTooltipContent(tooltipData)}
-        </TooltipWithBounds>
-      )}
+      <Tooltip
+        tooltipStore={tooltipStore.current}
+        getTooltipContent={getTooltipContent}
+      />
     </>
   );
 }
@@ -176,13 +204,39 @@ const renderFeature = (callback: TRenderCallback) => {
   );
 };
 
-const svgClick = (onPathClick: any) => {
+const svgClick = (
+  onPathClick: (id: string) => void,
+  showTooltip: (settings: TooltipSettings) => void,
+  isLargeScreen: boolean
+) => {
   return (event: any) => {
     const elm = event.target;
     if (elm.attributes['data-id']) {
-      onPathClick(elm.attributes['data-id'].value);
+      const id = elm.attributes['data-id'].value;
+      if (isLargeScreen) {
+        onPathClick(id);
+      } else {
+        positionTooltip(event, elm, showTooltip, id);
+      }
     }
   };
+};
+
+const positionTooltip = (
+  event: any,
+  element: any,
+  showTooltip: (settings: TooltipSettings) => void,
+  id: string
+) => {
+  const coords = localPoint(element.ownerSVGElement, event);
+
+  if (coords) {
+    showTooltip({
+      left: coords.x + 5,
+      top: coords.y + 5,
+      data: id,
+    });
+  }
 };
 
 const svgMouseOver = (timout: MutableRefObject<any>, showTooltip: any) => {
@@ -195,15 +249,8 @@ const svgMouseOver = (timout: MutableRefObject<any>, showTooltip: any) => {
         timout.current = -1;
       }
 
-      const coords = localPoint(event.target.ownerSVGElement, event);
-
-      if (coords) {
-        showTooltip({
-          tooltipLeft: coords.x + 5,
-          tooltipTop: coords.y + 5,
-          tooltipData: elm.attributes['data-id'].value,
-        });
-      }
+      const id = elm.attributes['data-id'].value;
+      positionTooltip(event, elm, showTooltip, id);
     }
   };
 };

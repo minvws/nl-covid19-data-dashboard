@@ -75,17 +75,18 @@ const hospitalAdmissionsThresholds: RegionalThresholds = {
 
 const escalationThresholds: RegionalThresholds = {
   dataKey: 'escalation_levels',
+  svgClass: 'escalationMap',
   thresholds: [
     {
-      color: '#FFF7A3',
+      color: '#F291BC',
       threshold: 1,
     },
     {
-      color: '#FACB3E',
+      color: '#D95790',
       threshold: 2,
     },
     {
-      color: '#F5512D',
+      color: '#A11050',
       threshold: 3,
     },
   ],
@@ -153,10 +154,10 @@ export default function SafetyRegionChloropleth<
     metricProperty
   );
 
-  const thresholdValues = metricName ? thresholds[metricName] : undefined;
+  const selectedThreshold = metricName ? thresholds[metricName] : undefined;
   const getFillColor = useChloroplethColorScale(
     getData,
-    thresholdValues?.thresholds
+    selectedThreshold?.thresholds
   );
 
   const featureCallback = useCallback(
@@ -235,12 +236,17 @@ export default function SafetyRegionChloropleth<
     return null;
   };
 
+  const className = classNames(
+    styles.chloroplethContainer,
+    selectedThreshold?.svgClass ? styles[selectedThreshold.svgClass] : undefined
+  );
+
   return (
     <div
       ref={(elm) => {
         ref.current = elm;
       }}
-      className={styles.chloroplethContainer}
+      className={className}
       style={style}
     >
       <Chloropleth

@@ -3,7 +3,6 @@ import './index.css';
 import 'scss/style.scss';
 
 import 'components/legenda/legenda.scss';
-import 'components/lineChart/lineChart.scss';
 import 'components/comboBox/comboBox.scss';
 
 // Import Preact DevTools in development
@@ -34,7 +33,10 @@ function MyApp(props: IProps): React.ReactElement {
   const getLayout = Component.getLayout || page;
 
   useEffect(() => {
-    const handleRouteChange = () => piwik.pageview();
+    const handleRouteChange = () => {
+      window.scrollTo(0, 0);
+      piwik.pageview();
+    };
 
     Router.events.on('routeChangeComplete', handleRouteChange);
     return () => {
