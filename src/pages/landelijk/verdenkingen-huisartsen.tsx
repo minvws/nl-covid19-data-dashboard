@@ -54,7 +54,7 @@ const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
   return (
     <>
       <ContentHeader
-        category="Overige indicatoren"
+        category={siteText.gemeente_layout.headings.overig}
         title={text.titel}
         Icon={Arts}
         subtitle={text.pagina_toelichting}

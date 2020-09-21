@@ -60,7 +60,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
   return (
     <>
       <ContentHeader
-        category="Medische indicatoren"
+        category={siteText.gemeente_layout.headings.medisch}
         title={getLocalTitleForMuncipality(text.titel, data.code)}
         Icon={Ziekenhuis}
         subtitle={text.pagina_toelichting}

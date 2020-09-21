@@ -60,7 +60,7 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
   return (
     <>
       <ContentHeader
-        category="Medische indicatoren"
+        category={siteText.nationaal_layout.headings.medisch}
         title={text.title}
         Icon={Ziektegolf}
         subtitle={text.toelichting_pagina}

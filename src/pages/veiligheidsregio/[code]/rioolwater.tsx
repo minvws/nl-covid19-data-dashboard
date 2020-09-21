@@ -67,7 +67,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
   return (
     <>
       <ContentHeader
-        category="Overige indicatoren"
+        category={siteText.veiligheidsregio_layout.headings.overig}
         title={getLocalTitleForRegion(text.titel, data.code)}
         Icon={RioolwaterMonitoring}
         subtitle={text.pagina_toelichting}
