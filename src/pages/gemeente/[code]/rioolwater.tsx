@@ -68,7 +68,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
   return (
     <>
       <ContentHeader
-        category="Overige indicatoren"
+        category={siteText.gemeente_layout.headings.overig}
         title={getLocalTitleForMuncipality(text.titel, data.code)}
         Icon={RioolwaterMonitoring}
         subtitle={text.pagina_toelichting}
