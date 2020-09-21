@@ -31,9 +31,6 @@
         },
         "date_of_insertion_unix": {
           "type": "integer"
-        },
-        "date_measurement_unix": {
-          "type": "integer"
         }
       }
     }
