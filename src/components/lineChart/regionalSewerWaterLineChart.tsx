@@ -32,10 +32,10 @@ function getOptions(
 ): Highcharts.Options {
   const multipleAverageValues = averageValues.length > 1;
 
-  const weeks: Week[] = [];
-  averageValues.map((value) =>
-    weeks.push({ start: value.week_start_unix, end: value.week_end_unix })
-  );
+  const weeklyMeasurements: Week[] = averageValues.map((value) => ({
+    start: value.week_start_unix,
+    end: value.week_end_unix,
+  }));
 
   const series: SeriesLineOptions[] = [
     {
@@ -123,7 +123,7 @@ function getOptions(
         if (this.series.name !== text.average_label_text) {
           return false;
         }
-        const { start, end } = weeks[this.point.index];
+        const { start, end } = weeklyMeasurements[this.point.index];
         return `<strong>${formatDate(start * 1000, 'short')} - ${formatDate(
           end * 1000,
           'short'
