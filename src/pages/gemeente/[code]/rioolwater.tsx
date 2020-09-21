@@ -14,7 +14,6 @@ import {
   getSewerWaterBarChartData,
 } from 'utils/sewer-water/municipality-sewer-water.util';
 import { getLocalTitleForMuncipality } from 'utils/getLocalTitleForCode';
-import formatDate from 'utils/formatDate';
 
 import BarScale from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
@@ -66,14 +65,6 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
       barChartData: getSewerWaterBarChartData(data),
     };
   }, [data]);
-
-  // eslint-disable-next-line no-console
-  console.dir(
-    data.sewer_measurements?.values.map((value) => ({
-      start: formatDate(value.week_start_unix * 1000, 'short'),
-      end: formatDate(value.week_end_unix * 1000, 'short'),
-    }))
-  );
 
   return (
     <>
