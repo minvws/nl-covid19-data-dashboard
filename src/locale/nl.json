@@ -52,7 +52,7 @@
   "ic_opnames_per_dag": {
     "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
     "bron": {
-      "href": "https://stichting-nice.nl/",
+      "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
       "text": "Stichting NICE"
     },
     "titel": "Intensive care-opnames per dag",
@@ -149,7 +149,7 @@
     "title": "Aantal besmettelijke mensen",
     "datums": "Waarde van {{dateOfReport}}. Wordt wekelijks bijgewerkt.",
     "bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/097155aa-75eb-4caa-8ed3-4c6edb80467e",
       "text": "RIVM"
     },
     "legenda_line": "Het aantal besmettelijke mensen in Nederland.",
@@ -171,7 +171,7 @@
     "rangeLegendLabel": "Onzekerheidsmarge",
     "lineLegendLabel": "Effectieve R",
     "bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/ed0699d1-c9d5-4436-8517-27eb993eab6e",
       "text": "RIVM"
     },
     "legenda_r": "De effectieve R is een schatting. Voor recente R schattingen is de betrouwbaarheid niet groot, daarom loopt de R-lijn niet door in de laatste twee weken.",
@@ -285,8 +285,8 @@
   "rioolwater_metingen": {
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
     "bron": {
-      "text": "RIVM Onderzoek rioolwater",
-      "href": "https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater"
+      "text": "RIVM",
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
     },
     "titel": "Rioolwatermeting",
     "pagina_toelichting": "Het aantal virusdeeltjes in een milliliter rioolwater, afkomstig van circa 300 locaties in Nederland. Voor het landelijke cijfer wordt uitgegaan van het totaal aantal virusdeeltjes dat wordt aangetroffen in een week, gedeeld door het totaal aantal locaties waar de data van afkomstig is. ",
@@ -393,11 +393,11 @@
       },
       {
         "cijfer": "Ziekenhuisopnames",
-        "verantwoording": "Deze gegevens worden dagelijks aangeleverd als open data door het [RIVM](https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_cumulatief.json). Het bestand wordt dagelijks om 10:00 online gezet en registreert het aantal ziekenhuisopnames in de afgelopen 24 uur.\n\nVanaf 1 september voegt het RIVM de data van Stichting NICE toe als bron voor de landelijke cijfers over ziekenhuisopnamen in de wekelijkse update van de epidemiologische situatie van COVID-19 in Nederland. Het dashboard blijft zoals voorheen nog de OSIRIS-database van het RIVM gebruiken. De reden hiervoor is dat de gegevens van Stichting NICE nog niet uitgesplitst kunnen worden naar regio en gemeente.\n\nSinds 1 mei 2020 worden alleen opnames meegenomen waarbij niet is aangegeven dat de opname om een andere reden dan COVID-19 was. Dit geeft weer hoeveel mensen ernstig ziek zijn door COVID-19. Dit getal is één van de indicatoren van het verloop van de epidemie.\n\nHet bronbestand registreert op gemeenteniveau. Om tot landelijke gegevens te komen tellen we alle meldingen per gemeente bij elkaar op. Om deze gegevens te vertalen naar het niveau van de veiligheidsregio’s wordt deze deze [CBS-indeling gebruikt](https://opendata.cbs.nl/#/CBS/nl/dataset/84721NED/table?dl=3A154). Let op: in het aanleverbestand wordt voor sommige meldingen de gemeente niet vermeld. Deze kunnen daarom niet worden gekoppeld op veiligheidsregio en gemeente niveau. Wel worden deze meldingen meegenomen bij het tonen van het landelijk cijfer. Deze dataset is geëxporteerd en opgeslagen als een JSON-bestand. Uit de data van het bronbestand wordt het gemiddelde berekend van de laatste drie dagen, dus inclusief de opnames tot 10:00 vandaag. Door de nieuwe opnames van elke dag (vandaag, gisteren en eergisteren) bijelkaar op te tellen, te delen door drie en de uitkomst hiervan af te ronden naar één cijfer achter de komma komen we tot het gemiddelde. Omdat ons doel vroegsignalering is, baseren we ons op de meest recente gegevens en de datum van melding."
+        "verantwoording": "Deze gegevens worden dagelijks aangeleverd als open data door het [RIVM](https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv). Het bestand wordt dagelijks om 10:00 online gezet en registreert het aantal ziekenhuisopnames in de afgelopen 24 uur.\n\nVanaf 1 september voegt het RIVM de data van Stichting NICE toe als bron voor de landelijke cijfers over ziekenhuisopnamen in de wekelijkse update van de epidemiologische situatie van COVID-19 in Nederland. Het dashboard blijft zoals voorheen nog de OSIRIS-database van het RIVM gebruiken. De reden hiervoor is dat de gegevens van Stichting NICE nog niet uitgesplitst kunnen worden naar regio en gemeente.\n\nSinds 1 mei 2020 worden alleen opnames meegenomen waarbij niet is aangegeven dat de opname om een andere reden dan COVID-19 was. Dit geeft weer hoeveel mensen ernstig ziek zijn door COVID-19. Dit getal is één van de indicatoren van het verloop van de epidemie.\n\nHet bronbestand registreert op gemeenteniveau. Om tot landelijke gegevens te komen tellen we alle meldingen per gemeente bij elkaar op. Om deze gegevens te vertalen naar het niveau van de veiligheidsregio’s wordt deze deze [CBS-indeling gebruikt](https://opendata.cbs.nl/#/CBS/nl/dataset/84721NED/table?dl=3A154). Let op: in het aanleverbestand wordt voor sommige meldingen de gemeente niet vermeld. Deze kunnen daarom niet worden gekoppeld op veiligheidsregio en gemeente niveau. Wel worden deze meldingen meegenomen bij het tonen van het landelijk cijfer. Deze dataset is geëxporteerd en opgeslagen als een JSON-bestand. Uit de data van het bronbestand wordt het gemiddelde berekend van de laatste drie dagen, dus inclusief de opnames tot 10:00 vandaag. Door de nieuwe opnames van elke dag (vandaag, gisteren en eergisteren) bijelkaar op te tellen, te delen door drie en de uitkomst hiervan af te ronden naar één cijfer achter de komma komen we tot het gemiddelde. Omdat ons doel vroegsignalering is, baseren we ons op de meest recente gegevens en de datum van melding."
       },
       {
         "cijfer": "Aantal positief geteste mensen",
-        "verantwoording": "Deze gegevens worden dagelijks gepubliceerd als open databestand door het [RIVM](https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_cumulatief.json) Het bestand wordt dagelijks om 10:00 online gezet en registreert het aantal positief geteste mensen die aan het RIVM gemeld zijn in de afgelopen 24 uur. De datum die gebruikt wordt, is de datum van melding. Dat is dus niet hetzelfde als de datum waarop mensen zijn getest.\n\nHet RIVM kan met terugwerkende kracht correcties uitvoeren op eerder gepubliceerde cijfers. Deze correcties komen dan in het open databestand te staan en worden overgenomen door het dashboard.\n\nHet databestand registreert op niveau van veiligheidsregio en gemeente. Om tot landelijke gegevens te komen tellen we alle meldingen bij elkaar op. In het aanleverbestand wordt voor sommige meldingen de gemeente en/of veiligheidsregio niet vermeld, omdat die gegevens ontbreken. Die kunnen dan niet op dat niveau worden getoond, maar wel op landelijk niveau. \n\nWe berekenen op basis van de absolute aantallen het relatieve aantal positief geteste mensen naar rato van het aantal inwoners. Dit doen we door het aantal positief geteste mensen te delen door het aantal inwoners van Nederland. We geven dit weer als het aantal positief geteste personen per 100.000 inwoners. Het aantal inwoners wordt gebaseerd op [deze CBS-indeling](https://opendata.cbs.nl/#/CBS/nl/dataset/84721NED/table?dl=3A154).\n\nDe leeftijdsverdeling wordt bepaald op basis van de landelijke cijfers, omdat in het gemeentelijke bestand geen leeftijden worden geregistreerd. Er kunnen daarom kleine verschillen ontstaan tussen de tabel zoals weergegeven in de 'wekelijks update epidemiologische situatie COVID-19 in Nederland' op de website van het RIVM en zoals weergeven op het dashboard.\n\nDe signaalwaarde voor het aantal positief geteste mensen is toegevoegd. Deze bedraagt 7 op de 100.000 inwoners. Dit betekent dat vanaf deze waarde mogelijk het aantal besmettingen te hard oploopt om het virus in de hand te houden. Deze waarde wordt bijvoorbeeld ook in Duitsland gehanteerd. Een signaalwaarde functioneert als een ‘alarmbel’ om met urgentie naar de situatie te kijken. Mogelijk wordt deze waarde in de loop van de tijd verder verfijnd."
+        "verantwoording": "Deze gegevens worden dagelijks gepubliceerd als open databestand door het [RIVM](https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv) Het bestand wordt dagelijks om 10:00 online gezet en registreert het aantal positief geteste mensen die aan het RIVM gemeld zijn in de afgelopen 24 uur. De datum die gebruikt wordt, is de datum van melding. Dat is dus niet hetzelfde als de datum waarop mensen zijn getest.\n\nHet RIVM kan met terugwerkende kracht correcties uitvoeren op eerder gepubliceerde cijfers. Deze correcties komen dan in het open databestand te staan en worden overgenomen door het dashboard.\n\nHet databestand registreert op niveau van veiligheidsregio en gemeente. Om tot landelijke gegevens te komen tellen we alle meldingen bij elkaar op. In het aanleverbestand wordt voor sommige meldingen de gemeente en/of veiligheidsregio niet vermeld, omdat die gegevens ontbreken. Die kunnen dan niet op dat niveau worden getoond, maar wel op landelijk niveau. \n\nWe berekenen op basis van de absolute aantallen het relatieve aantal positief geteste mensen naar rato van het aantal inwoners. Dit doen we door het aantal positief geteste mensen te delen door het aantal inwoners van Nederland. We geven dit weer als het aantal positief geteste personen per 100.000 inwoners. Het aantal inwoners wordt gebaseerd op [deze CBS-indeling](https://opendata.cbs.nl/#/CBS/nl/dataset/84721NED/table?dl=3A154).\n\nDe leeftijdsverdeling wordt bepaald op basis van de landelijke cijfers, omdat in het gemeentelijke bestand geen leeftijden worden geregistreerd. Er kunnen daarom kleine verschillen ontstaan tussen de tabel zoals weergegeven in de 'wekelijks update epidemiologische situatie COVID-19 in Nederland' op de website van het RIVM en zoals weergeven op het dashboard.\n\nDe signaalwaarde voor het aantal positief geteste mensen is toegevoegd. Deze bedraagt 7 op de 100.000 inwoners. Dit betekent dat vanaf deze waarde mogelijk het aantal besmettingen te hard oploopt om het virus in de hand te houden. Deze waarde wordt bijvoorbeeld ook in Duitsland gehanteerd. Een signaalwaarde functioneert als een ‘alarmbel’ om met urgentie naar de situatie te kijken. Mogelijk wordt deze waarde in de loop van de tijd verder verfijnd."
       },
       {
         "cijfer": "Reproductiegetal",
@@ -614,8 +614,8 @@
     "bar_chart_title": "Laatste bekende waarde per RWZI-locatie in {{safetyRegion}}",
     "bar_chart_axis_title": "Aantal virusdeeltjes in milliliter rioolwater",
     "bron": {
-      "text": "RIVM Onderzoek rioolwater",
-      "href": "https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater"
+      "text": "RIVM",
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
     },
     "graph_average_label_text": "Gemiddelde waarde van gemeten locaties.",
     "graph_secondary_label_text": "Gemeten waarde per locatie.",
@@ -682,8 +682,8 @@
     "bar_chart_title": "Laatste bekende waarde per RWZI-locatie in {{municipality}}",
     "bar_chart_axis_title": "Aantal virusdeeltjes in milliliter rioolwater",
     "bron": {
-      "text": "RIVM Onderzoek rioolwater",
-      "href": "https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater"
+      "text": "RIVM",
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
     },
     "graph_average_label_text": "Gemiddelde waarde van gemeten locaties.",
     "graph_secondary_label_text": "Gemeten waarde per locatie.",
