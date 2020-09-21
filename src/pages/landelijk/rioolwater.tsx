@@ -79,6 +79,8 @@ const SewerWater: FCWithLayout<INationalData> = (props) => {
             values={data.values.map((value) => ({
               value: Number(value.average),
               date: value.week_unix,
+              // TO DO: add start_week and end_week
+              // weeks: { start: value.start_week_unix, end: value.end_week_unix }
             }))}
           />
         </article>
