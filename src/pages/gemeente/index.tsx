@@ -42,7 +42,7 @@ const Municipality: FCWithLayout<any> = () => {
   const router = useRouter();
   const isLargeScreen = useMediaQuery('(min-width: 1000px)');
 
-  const onSelectMunicpal = (context: MunicipalityProperties) => {
+  const onSelectMunicipal = (context: MunicipalityProperties) => {
     router.push(
       '/gemeente/[code]/positief-geteste-mensen',
       `/gemeente/${context.gemcode}/positief-geteste-mensen`
@@ -66,7 +66,7 @@ const Municipality: FCWithLayout<any> = () => {
           <MunicipalityChloropleth
             tooltipContent={tooltipContent(router)}
             style={{ height: mapHeight }}
-            onSelect={onSelectMunicpal}
+            onSelect={onSelectMunicipal}
           />
         </div>
       </article>
