@@ -1,27 +1,29 @@
-import BarScale from 'components/barScale';
-import { FCWithLayout } from 'components/layout';
-import { getMunicipalityLayout } from 'components/layout/MunicipalityLayout';
-import { ContentHeader } from 'components/layout/Content';
-
-import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
+import { useMemo } from 'react';
 
 import siteText from 'locale';
+import {
+  getMunicipalityData,
+  getMunicipalityPaths,
+  IMunicipalityData,
+} from 'static-props/municipality-data';
 
-import RegionalSewerWaterLineChart from 'components/lineChart/regionalSewerWaterLineChart';
-import { useMemo } from 'react';
-import BarChart from 'components/barChart';
 import {
   SewerWaterBarScaleData,
   getSewerWaterBarScaleData,
   getSewerWaterLineChartData,
   getSewerWaterBarChartData,
 } from 'utils/sewer-water/municipality-sewer-water.util';
-import {
-  getMunicipalityData,
-  getMunicipalityPaths,
-  IMunicipalityData,
-} from 'static-props/municipality-data';
 import { getLocalTitleForMuncipality } from 'utils/getLocalTitleForCode';
+import formatDate from 'utils/formatDate';
+
+import BarScale from 'components/barScale';
+import { FCWithLayout } from 'components/layout';
+import { getMunicipalityLayout } from 'components/layout/MunicipalityLayout';
+import { ContentHeader } from 'components/layout/Content';
+import RegionalSewerWaterLineChart from 'components/lineChart/regionalSewerWaterLineChart';
+import BarChart from 'components/barChart';
+
+import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
 
 const text: typeof siteText.gemeente_rioolwater_metingen =
   siteText.gemeente_rioolwater_metingen;
@@ -64,6 +66,14 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
       barChartData: getSewerWaterBarChartData(data),
     };
   }, [data]);
+
+  // eslint-disable-next-line no-console
+  console.dir(
+    data.sewer_measurements?.values.map((value) => ({
+      start: formatDate(value.week_start_unix * 1000, 'short'),
+      end: formatDate(value.week_end_unix * 1000, 'short'),
+    }))
+  );
 
   return (
     <>

@@ -1,3 +1,7 @@
+import siteText from 'locale';
+import { RioolwaterMetingen } from 'types/data.d';
+import getNlData, { INationalData } from 'static-props/nl-data';
+
 import BarScale from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
 import { getNationalLayout } from 'components/layout/NationalLayout';
@@ -5,12 +9,6 @@ import { LineChart } from 'components/charts/index';
 import { ContentHeader } from 'components/layout/Content';
 
 import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
-
-import siteText from 'locale';
-
-import { RioolwaterMetingen } from 'types/data.d';
-
-import getNlData, { INationalData } from 'static-props/nl-data';
 
 const text: typeof siteText.rioolwater_metingen = siteText.rioolwater_metingen;
 
