@@ -66,13 +66,10 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
     };
   }, [data]);
 
-  const weeks = data.sewer_measurements?.values.map((value) => ({
+  const weeklyMeasurements = data.sewer_measurements?.values.map((value) => ({
     start: value.week_start_unix,
     end: value.week_end_unix,
   }));
-
-  // eslint-disable-next-line no-console
-  // console.dir(weeks)
 
   return (
     <>
@@ -111,7 +108,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
               average_label_text: lineChartData.averageLabelText,
               secondary_label_text: text.graph_secondary_label_text,
             }}
-            weeks={weeks}
+            weeklyMeasurements={weeklyMeasurements}
           />
         )}
       </article>
