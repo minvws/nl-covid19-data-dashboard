@@ -10,27 +10,32 @@ type TranslationStrings = Record<string, string>;
 interface Value {
   date: number;
   value: number | undefined | null;
+  week_start_unix: number;
+  week_end_unix: number;
 }
 
 type Week = {
-  start: string;
-  end: string;
+  start: number;
+  end: number;
 };
 
 type RegionalSewerWaterLineChartProps = {
   averageValues: Value[];
   text: TranslationStrings;
-  weeklyMeasurements: Week[];
 };
 
 export default RegionalSewerWaterLineChart;
 
 function getOptions(
   averageValues: Value[],
-  text: TranslationStrings,
-  weeklyMeasurements?: Week[]
+  text: TranslationStrings
 ): Highcharts.Options {
   const multipleAverageValues = averageValues.length > 1;
+
+  const weeks: Week[] = [];
+  averageValues.map((value) =>
+    weeks.push({ start: value.week_start_unix, end: value.week_end_unix })
+  );
 
   const series: SeriesLineOptions[] = [
     {
@@ -115,16 +120,10 @@ function getOptions(
       borderColor: '#01689B',
       borderRadius: 0,
       formatter: function (): false | string {
-        if (
-          this.series.name !== text.average_label_text ||
-          weeklyMeasurements === undefined
-        ) {
+        if (this.series.name !== text.average_label_text) {
           return false;
         }
-
-        const { start, end } = weeklyMeasurements[
-          weeklyMeasurements.length - this.point.index
-        ];
+        const { start, end } = weeks[this.point.index];
         return `<strong>${formatDate(start * 1000, 'short')} - ${formatDate(
           end * 1000,
           'short'
@@ -159,11 +158,10 @@ function getOptions(
 function RegionalSewerWaterLineChart({
   averageValues,
   text,
-  weeklyMeasurements,
 }: RegionalSewerWaterLineChartProps) {
   const chartOptions = useMemo(() => {
-    return getOptions(averageValues, text, weeklyMeasurements);
-  }, [averageValues, text, weeklyMeasurements]);
+    return getOptions(averageValues, text);
+  }, [averageValues, text]);
 
   return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;
 }
