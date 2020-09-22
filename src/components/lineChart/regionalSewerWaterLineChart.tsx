@@ -24,19 +24,19 @@ function getOptions(
   averageValues: Value[],
   text: TranslationStrings
 ): Highcharts.Options {
-  const multipleAverageValues = averageValues.length > 1;
+  const hasMultipleValues = averageValues.length > 1;
 
   const series: SeriesLineOptions[] = [
     {
       type: 'line',
-      data: averageValues.map((value) => [value.date, value.value]),
+      data: averageValues.map((x) => [x.date, x.value]),
       name: text.average_label_text,
       showInLegend: true,
       color: '#3391CC',
       allowPointSelect: false,
       marker: {
         symbol: 'circle',
-        enabled: !multipleAverageValues,
+        enabled: !hasMultipleValues,
       },
       events: {
         legendItemClick: function () {

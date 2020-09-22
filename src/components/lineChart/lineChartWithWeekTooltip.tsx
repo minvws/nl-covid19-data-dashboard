@@ -26,12 +26,12 @@ type LineChartProps = {
 };
 
 function getOptions(values: Value[]): Highcharts.Options {
-  const multipleAverageValues = values.length > 1;
+  const hasMultipleValues = values.length > 1;
 
   const series: SeriesAreaOptions[] = [
     {
       type: 'area',
-      data: values.map((value) => [value.date, value.value]),
+      data: values.map((x) => [x.date, x.value]),
       name: '',
       showInLegend: false,
       color: '#3391CC',
@@ -39,7 +39,7 @@ function getOptions(values: Value[]): Highcharts.Options {
       allowPointSelect: false,
       marker: {
         symbol: 'circle',
-        enabled: !multipleAverageValues,
+        enabled: !hasMultipleValues,
       },
       events: {
         legendItemClick: function () {
