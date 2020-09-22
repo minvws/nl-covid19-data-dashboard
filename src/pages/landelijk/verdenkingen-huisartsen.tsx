@@ -2,7 +2,7 @@ import BarScale from 'components/barScale';
 import { ContentHeader } from 'components/layout/Content';
 import { FCWithLayout } from 'components/layout';
 import { getNationalLayout } from 'components/layout/NationalLayout';
-import { LineChart } from 'components/charts/index';
+import NationalPractitionerLineChart from 'components/lineChart/nationalPractitionerLineChart';
 
 import Arts from 'assets/arts.svg';
 
@@ -87,12 +87,13 @@ const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
 
       {data && (
         <article className="metric-article">
-          <LineChart
-            title={text.linechart_titel}
+          <NationalPractitionerLineChart
+            text={text.linechart_titel}
             timeframeOptions={['all', '5weeks']}
             values={data.values.map((value) => ({
               value: value.incidentie,
               date: value.week_unix,
+              week: { start: value.week_start_unix, end: value.week_end_unix },
             }))}
           />
         </article>
