@@ -1,4 +1,4 @@
-import BarScale from '~/components/barScale';
+import { BarScale } from '~/components/barScale';
 import { PositiveTestedPeople } from '~/types/data.d';
 
 import siteText from '~/locale/index';

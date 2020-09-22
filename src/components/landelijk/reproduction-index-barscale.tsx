@@ -1,4 +1,4 @@
-import BarScale from '~/components/barScale';
+import { BarScale } from '~/components/barScale';
 
 import { ReproductionIndex as ReproductionIndexData } from '~/types/data.d';
 

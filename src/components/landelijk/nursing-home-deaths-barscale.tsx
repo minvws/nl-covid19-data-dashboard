@@ -1,4 +1,4 @@
-import BarScale from '~/components/barScale';
+import { BarScale } from '~/components/barScale';
 import siteText from '~/locale/index';
 import { DeceasedPeopleNurseryCountDaily } from '~/types/data.d';
 

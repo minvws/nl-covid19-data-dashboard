@@ -1,4 +1,4 @@
-import BarScale from '~/components/barScale';
+import { BarScale } from '~/components/barScale';
 
 import { IntakeHospitalMa } from '~/types/data.d';
 import siteText from '~/locale/index';

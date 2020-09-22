@@ -1,4 +1,4 @@
-import BarScale from '~/components/barScale';
+import { BarScale } from '~/components/barScale';
 
 import { TotalReportedLocations } from '~/types/data.d';
 

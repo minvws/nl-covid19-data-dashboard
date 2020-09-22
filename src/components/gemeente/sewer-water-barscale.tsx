@@ -1,4 +1,4 @@
-import BarScale from '~/components/barScale';
+import { BarScale } from '~/components/barScale';
 
 import { SewerWaterBarScaleData } from '~/utils/sewer-water/municipality-sewer-water.util';
 import siteText from '~/locale/index';
