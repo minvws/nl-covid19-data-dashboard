@@ -3,6 +3,8 @@ import BarScale from '~/components/barScale';
 import { InfectedPeopleDeltaNormalized } from '~/types/data.d';
 
 import siteText from '~/locale/index';
+const text: typeof siteText.positief_geteste_personen =
+  siteText.positief_geteste_personen;
 
 export function PositiveTestedPeopleBarScale(props: {
   data: InfectedPeopleDeltaNormalized | undefined;
@@ -11,9 +13,6 @@ export function PositiveTestedPeopleBarScale(props: {
   const { data, showAxis } = props;
 
   if (!data) return null;
-
-  const text: typeof siteText.positief_geteste_personen =
-    siteText.positief_geteste_personen;
 
   return (
     <BarScale
