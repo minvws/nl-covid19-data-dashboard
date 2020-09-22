@@ -11,8 +11,6 @@ import styles from './lineChart.module.scss';
 import formatNumber from 'utils/formatNumber';
 import formatDate from 'utils/formatDate';
 
-type TranslationStrings = Record<string, string>;
-
 interface Value {
   date: number;
   value: number | undefined | null;
@@ -26,27 +24,25 @@ type Week = {
 
 type NationalPractitionerLineChartProps = {
   values: Value[];
-  text: TranslationStrings;
+  text: string;
   timeframeOptions?: TimeframeOption[];
 };
 
 export default NationalPractitionerLineChart;
 
-function getOptions(
-  values: Value[],
-  text: TranslationStrings
-): Highcharts.Options {
+function getOptions(values: Value[]): Highcharts.Options {
   const multipleAverageValues = values.length > 1;
 
   const weeklyMeasurements: Week[] = values.map((value) => value.week);
 
   const series: SeriesLineOptions[] = [
     {
-      type: 'line',
+      type: 'area',
       data: values.map((value) => [value.date, value.value]),
-      name: text.average_label_text,
-      showInLegend: true,
+      name: '',
+      showInLegend: false,
       color: '#3391CC',
+      fillColor: 'rgba(51, 145, 204, 0.2)',
       allowPointSelect: false,
       marker: {
         symbol: 'circle',
@@ -171,8 +167,8 @@ function NationalPractitionerLineChart({
       timeframe,
       (value: Value) => value.date * 1000
     );
-    return getOptions(filteredValues, text);
-  }, [values, timeframe, text]);
+    return getOptions(filteredValues);
+  }, [values, timeframe]);
 
   return (
     <section className={styles.root}>
