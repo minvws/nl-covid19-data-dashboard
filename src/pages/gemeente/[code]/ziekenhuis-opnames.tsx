@@ -1,7 +1,7 @@
-import BarScale from '@/components/barScale';
 import { FCWithLayout } from '@/components/layout';
 import { getMunicipalityLayout } from '@/components/layout/MunicipalityLayout';
 import { ContentHeader } from '@/components/layout/Content';
+import { IntakeHospitalBarScale } from '@/components/gemeente/intake-hospital-barscale';
 
 import Ziekenhuis from '@/assets/ziekenhuis.svg';
 
@@ -23,33 +23,6 @@ const text: typeof siteText.gemeente_ziekenhuisopnames_per_dag =
 import MunicipalityChloropleth from '@/components/chloropleth/MunicipalityChloropleth';
 import hospitalAdmissionsTooltip from '@/components/chloropleth/tooltips/municipal/hospitalAdmissionsTooltip';
 import MunicipalityLegenda from '@/components/chloropleth/legenda/MunicipalityLegenda';
-
-export function IntakeHospitalBarScale(props: {
-  data: HospitalAdmissions | undefined;
-  showAxis: boolean;
-}) {
-  const { data, showAxis } = props;
-
-  if (!data) return null;
-
-  return (
-    <BarScale
-      min={0}
-      max={100}
-      screenReaderText={text.screen_reader_graph_content}
-      value={data.last_value.moving_average_hospital}
-      id="opnames"
-      rangeKey="moving_average_hospital"
-      gradient={[
-        {
-          color: '#3391CC',
-          value: 0,
-        },
-      ]}
-      showAxis={showAxis}
-    />
-  );
-}
 
 const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
   const { data } = props;

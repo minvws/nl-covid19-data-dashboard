@@ -12,9 +12,9 @@ import getSafetyRegionForMunicipalityCode from '@/utils/getSafetyRegionForMunici
 import { getSewerWaterBarScaleData } from '@/utils/sewer-water/municipality-sewer-water.util';
 import useMediaQuery from '@/utils/useMediaQuery';
 
-import { PositivelyTestedPeopleBarScale } from '@/components/veiligheidsregio/positive-tested-people-barscale';
-import { IntakeHospitalBarScale } from '@/components/veiligheidsregio/intake-hospital-barscale';
-import { SewerWaterBarScale } from '@/components/veiligheidsregio/sewer-water-barscale';
+import { PositivelyTestedPeopleBarScale } from '@/components/gemeente/positively-tested-people-barscale';
+import { IntakeHospitalBarScale } from '@/components/gemeente/intake-hospital-barscale';
+import { SewerWaterBarScale } from '@/components/gemeente/sewer-water-barscale';
 
 import TitleWithIcon from '@/components/titleWithIcon';
 import { getLayout as getSiteLayout } from '@/components/layout';
