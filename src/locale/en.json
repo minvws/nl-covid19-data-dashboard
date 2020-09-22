@@ -728,9 +728,9 @@
   },
   "gemeente_layout": {
     "headings": {
-      "medisch": "",
-      "overig": "",
-      "verpleeghuis": ""
+      "medisch": "Medical indicators",
+      "overig": "Early warning",
+      "verpleeghuis": "Nursing homes"
     }
   }
 }
