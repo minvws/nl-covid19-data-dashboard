@@ -2,26 +2,26 @@ import Link from 'next/link';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-import siteText from 'locale';
-import safetyRegions from 'data/index';
-import { WithChildren } from 'types';
-import { ISafetyRegionData } from 'static-props/safetyregion-data';
+import siteText from '~/locale/index';
+import safetyRegions from '~/data/index';
+import { WithChildren } from '~/types/index';
+import { ISafetyRegionData } from '~/static-props/safetyregion-data';
 
-import { useMediaQuery } from 'utils/useMediaQuery';
-import { getSewerWaterBarScaleData } from 'utils/sewer-water/safety-region-sewer-water.util';
+import { useMediaQuery } from '~/utils/useMediaQuery';
+import { getSewerWaterBarScaleData } from '~/utils/sewer-water/safety-region-sewer-water.util';
 
-import { PostivelyTestedPeopleBarScale } from 'pages/veiligheidsregio/[code]/positief-geteste-mensen';
-import { IntakeHospitalBarScale } from 'pages/veiligheidsregio/[code]/ziekenhuis-opnames';
-import { SewerWaterBarScale } from 'pages/veiligheidsregio/[code]/rioolwater';
+import { PositivelyTestedPeopleBarScale } from '~/components/veiligheidsregio/positive-tested-people-barscale';
+import { IntakeHospitalBarScale } from '~/components/veiligheidsregio/intake-hospital-barscale';
+import { SewerWaterBarScale } from '~/components/veiligheidsregio/sewer-water-barscale';
 
-import { TitleWithIcon } from 'components/titleWithIcon';
-import { getLayout as getSiteLayout } from 'components/layout';
-import { ComboBox } from 'components/comboBox';
+import { TitleWithIcon } from '~/components/titleWithIcon';
+import { getLayout as getSiteLayout } from '~/components/layout';
+import { ComboBox } from '~/components/comboBox';
 
-import GetestIcon from 'assets/test.svg';
-import Ziekenhuis from 'assets/ziekenhuis.svg';
-import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
-import Arrow from 'assets/arrow.svg';
+import GetestIcon from '~/assets/test.svg';
+import Ziekenhuis from '~/assets/ziekenhuis.svg';
+import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
+import Arrow from '~/assets/arrow.svg';
 
 export function getSafetyRegionLayout() {
   return function (
@@ -157,7 +157,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                         }
                       />
                       <span>
-                        <PostivelyTestedPeopleBarScale
+                        <PositivelyTestedPeopleBarScale
                           data={data?.results_per_region}
                           showAxis={true}
                         />

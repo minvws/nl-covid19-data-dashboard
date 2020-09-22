@@ -4,7 +4,7 @@ import {
   SafetyRegionProperties,
   TRegionMetricName,
 } from './shared';
-import { Regions } from 'types/data';
+import { Regions } from '~/types/data';
 import { CSSProperties, ReactNode, useCallback } from 'react';
 import { useChartDimensions } from './hooks/useChartDimensions';
 import { Chloropleth } from './Chloropleth';

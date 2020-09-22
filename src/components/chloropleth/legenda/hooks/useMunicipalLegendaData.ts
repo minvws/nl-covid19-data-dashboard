@@ -1,5 +1,5 @@
-import { thresholds } from 'components/chloropleth/MunicipalityChloropleth';
-import { TMunicipalityMetricName } from 'components/chloropleth/shared';
+import { thresholds } from '~/components/chloropleth/MunicipalityChloropleth';
+import { TMunicipalityMetricName } from '~/components/chloropleth/shared';
 
 import { useLegendaItems } from './useLegendaItems';
 

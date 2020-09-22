@@ -3,13 +3,13 @@ import {
   ResultsPerSewerInstallationPerMunicipalityItem,
   SewerMeasurementsLastValue,
   ResultsPerSewerInstallationPerMunicipalityLastValue,
-} from 'types/data.d';
-import { formatDate } from 'utils/formatDate';
-import { formatNumber } from 'utils/formatNumber';
+} from '~/types/data.d';
+import { formatDate } from '~/utils/formatDate';
+import { formatNumber } from '~/utils/formatNumber';
 import { XrangePointOptionsObject } from 'highcharts';
-import { replaceVariablesInText } from 'utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
-import siteText from 'locale';
+import siteText from '~/locale/index';
 
 const text: typeof siteText.gemeente_rioolwater_metingen =
   siteText.gemeente_rioolwater_metingen;

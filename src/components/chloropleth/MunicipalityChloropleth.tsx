@@ -11,7 +11,7 @@ import { useChartDimensions } from './hooks/useChartDimensions';
 
 import styles from './chloropleth.module.scss';
 import { CSSProperties, ReactNode, useCallback } from 'react';
-import { Municipalities } from 'types/data';
+import { Municipalities } from '~/types/data';
 import { useMunicipalityData } from './hooks/useMunicipalityData';
 import { useChloroplethColorScale } from './hooks/useChloroplethColorScale';
 import { useMunicipalityBoundingbox } from './hooks/useMunicipalityBoundingbox';

@@ -1,8 +1,8 @@
 import styles from './chartTimeControls.module.scss';
 
-import { RadioGroup, IRadioGroupItem } from 'components/radioGroup';
+import { RadioGroup, IRadioGroupItem } from '~/components/radioGroup';
 
-import text from 'locale';
+import text from '~/locale/index';
 
 export type TimeframeOption = 'all' | '5weeks' | 'week';
 

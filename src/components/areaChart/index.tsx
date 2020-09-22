@@ -5,13 +5,13 @@ import HighchartsReact from 'highcharts-react-official';
 import {
   ChartTimeControls,
   TimeframeOption,
-} from 'components/chartTimeControls';
+} from '~/components/chartTimeControls';
 
-import { formatNumber } from 'utils/formatNumber';
-import { formatDate } from 'utils/formatDate';
-import text from 'locale';
+import { formatNumber } from '~/utils/formatNumber';
+import { formatDate } from '~/utils/formatDate';
+import text from '~/locale/index';
 
-import { getFilteredValues } from 'components/chartTimeControls/chartTimeControlUtils';
+import { getFilteredValues } from '~/components/chartTimeControls/chartTimeControlUtils';
 
 if (typeof Highcharts === 'object') {
   require('highcharts/highcharts-more')(Highcharts);

@@ -1,7 +1,7 @@
 import { replaceVariablesInText } from './replaceVariablesInText';
 
-import regios from 'data';
-import municipalities from 'data/gemeente_veiligheidsregio.json';
+import regios from '~/data/index';
+import municipalities from '~/data/gemeente_veiligheidsregio.json';
 
 export { getLocalTitleForRegion, getLocalTitleForMuncipality };
 

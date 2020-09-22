@@ -1,23 +1,23 @@
 import path from 'path';
 import fs from 'fs';
 
-import { FCWithLayout } from 'components/layout';
-import { getSafetyRegionLayout } from 'components/layout/SafetyRegionLayout';
+import { FCWithLayout } from '~/components/layout';
+import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { useRouter } from 'next/router';
-import EscalationLevel1 from 'assets/niveau-1.svg';
-import EscalationLevel2 from 'assets/niveau-2.svg';
-import EscalationLevel3 from 'assets/niveau-3.svg';
-import styles from 'components/chloropleth/tooltips/tooltip.module.scss';
+import EscalationLevel1 from '~/assets/niveau-1.svg';
+import EscalationLevel2 from '~/assets/niveau-2.svg';
+import EscalationLevel3 from '~/assets/niveau-3.svg';
+import styles from '~/components/chloropleth/tooltips/tooltip.module.scss';
 
-import siteText from 'locale';
-import { MDToHTMLString } from 'utils/MDToHTMLString';
+import siteText from '~/locale/index';
+import { MDToHTMLString } from '~/utils/MDToHTMLString';
 
 import {
   SafetyRegionChloropleth,
   thresholds,
-} from 'components/chloropleth/SafetyRegionChloropleth';
-import { useMediaQuery } from 'utils/useMediaQuery';
-import { escalationTooltip } from 'components/chloropleth/tooltips/region/escalationTooltip';
+} from '~/components/chloropleth/SafetyRegionChloropleth';
+import { useMediaQuery } from '~/utils/useMediaQuery';
+import { escalationTooltip } from '~/components/chloropleth/tooltips/region/escalationTooltip';
 
 const escalationThresholds = thresholds.escalation_levels.thresholds;
 

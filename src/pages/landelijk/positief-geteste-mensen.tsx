@@ -1,69 +1,34 @@
 import { useState } from 'react';
 
-import { BarScale } from 'components/barScale';
-import { FCWithLayout } from 'components/layout';
-import { getNationalLayout } from 'components/layout/NationalLayout';
-import { LineChart, BarChart } from 'components/charts/index';
-import { ContentHeader } from 'components/layout/Content';
-import { ChartRegionControls } from 'components/chartRegionControls';
+import { FCWithLayout } from '~/components/layout';
+import { getNationalLayout } from '~/components/layout/NationalLayout';
+import { LineChart, BarChart } from '~/components/charts/index';
+import { ContentHeader } from '~/components/layout/Content';
+import { ChartRegionControls } from '~/components/chartRegionControls';
 
-import Getest from 'assets/test.svg';
-import { formatNumber } from 'utils/formatNumber';
+import Getest from '~/assets/test.svg';
+import { formatNumber } from '~/utils/formatNumber';
 
-import siteText from 'locale';
+import { PositiveTestedPeopleBarScale } from '~/components/landelijk/positive-tested-people-barscale';
+
+import siteText from '~/locale/index';
 
 import {
   InfectedPeopleDeltaNormalized,
   InfectedPeopleTotal,
   IntakeShareAgeGroups,
-} from 'types/data.d';
+} from '~/types/data.d';
 
-import getNlData, { INationalData } from 'static-props/nl-data';
-import { MunicipalityChloropleth } from 'components/chloropleth/MunicipalityChloropleth';
-import { SafetyRegionChloropleth } from 'components/chloropleth/SafetyRegionChloropleth';
-import { positiveTestedPeopleMunicipalTooltip } from 'components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
-import { positiveTestedPeopleRegionTooltip } from 'components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
-import { MunicipalityLegenda } from 'components/chloropleth/legenda/MunicipalityLegenda';
-import { SafetyRegionLegenda } from 'components/chloropleth/legenda/SafetyRegionLegenda';
+import getNlData, { INationalData } from '~/static-props/nl-data';
+import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
+import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
+import { positiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
+import { positiveTestedPeopleRegionTooltip } from '~/components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
+import { MunicipalityLegenda } from '~/components/chloropleth/legenda/MunicipalityLegenda';
+import { SafetyRegionLegenda } from '~/components/chloropleth/legenda/SafetyRegionLegenda';
 
 const text: typeof siteText.positief_geteste_personen =
   siteText.positief_geteste_personen;
-
-export function PostivelyTestedPeopleBarScale(props: {
-  data: InfectedPeopleDeltaNormalized | undefined;
-  showAxis: boolean;
-}) {
-  const { data, showAxis } = props;
-
-  if (!data) return null;
-
-  return (
-    <BarScale
-      min={0}
-      max={10}
-      screenReaderText={text.barscale_screenreader_text}
-      value={data.last_value.infected_daily_increase}
-      id="positief"
-      rangeKey="infected_daily_increase"
-      gradient={[
-        {
-          color: '#69c253',
-          value: 0,
-        },
-        {
-          color: '#D3A500',
-          value: 7,
-        },
-        {
-          color: '#f35065',
-          value: 10,
-        },
-      ]}
-      signaalwaarde={7}
-      showAxis={showAxis}
-    />
-  );
-}
 
 const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
   const { data } = props;
@@ -103,7 +68,7 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           <h3>{text.barscale_titel}</h3>
 
           {delta && (
-            <PostivelyTestedPeopleBarScale data={delta} showAxis={true} />
+            <PositiveTestedPeopleBarScale data={delta} showAxis={true} />
           )}
           <p>{text.barscale_toelichting}</p>
         </article>

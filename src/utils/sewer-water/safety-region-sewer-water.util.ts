@@ -4,11 +4,11 @@ import {
   SewerValue,
   AverageSewerInstallationPerRegionItem,
   SewerValueElement,
-} from 'types/data.d';
-import { replaceVariablesInText } from 'utils/replaceVariablesInText';
-import { formatDate } from 'utils/formatDate';
-import { formatNumber } from 'utils/formatNumber';
-import siteText from 'locale';
+} from '~/types/data.d';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { formatDate } from '~/utils/formatDate';
+import { formatNumber } from '~/utils/formatNumber';
+import siteText from '~/locale/index';
 
 const text: typeof siteText.veiligheidsregio_rioolwater_metingen =
   siteText.veiligheidsregio_rioolwater_metingen;

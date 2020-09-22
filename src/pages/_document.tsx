@@ -5,7 +5,7 @@ import Document, {
   NextScript,
   DocumentContext,
 } from 'next/document';
-import { getLocale } from 'utils/getLocale';
+import { getLocale } from '~/utils/getLocale';
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext): Promise<any> {

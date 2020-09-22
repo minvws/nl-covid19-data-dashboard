@@ -1,53 +1,26 @@
 import Link from 'next/link';
 
-import { BarScale } from 'components/barScale';
-import { Legenda } from 'components/legenda';
-import { FCWithLayout } from 'components/layout';
-import { getNationalLayout } from 'components/layout/NationalLayout';
-import { AreaChart } from 'components/charts/index';
+import { Legenda } from '~/components/legenda';
+import { FCWithLayout } from '~/components/layout';
+import { getNationalLayout } from '~/components/layout/NationalLayout';
+import { AreaChart } from '~/components/charts/index';
 
-import Ziektegolf from 'assets/ziektegolf.svg';
+import { InfectiousPeopleBarScale } from '~/components/landelijk/infectious-people-barscale';
 
-import { formatNumber } from 'utils/formatNumber';
+import Ziektegolf from '~/assets/ziektegolf.svg';
+import { formatNumber } from '~/utils/formatNumber';
 
-import siteText from 'locale';
+import siteText from '~/locale/index';
 
 import {
   InfectiousPeopleCount,
   InfectiousPeopleCountNormalized,
-} from 'types/data.d';
-import { ContentHeader } from 'components/layout/Content';
-import getNlData, { INationalData } from 'static-props/nl-data';
+} from '~/types/data.d';
+import { ContentHeader } from '~/components/layout/Content';
+import getNlData, { INationalData } from '~/static-props/nl-data';
 
 const text: typeof siteText.besmettelijke_personen =
   siteText.besmettelijke_personen;
-
-export function InfectiousPeopleBarScale(props: {
-  data: InfectiousPeopleCountNormalized | undefined;
-  showAxis: boolean;
-}) {
-  const { data, showAxis } = props;
-
-  if (!data) return null;
-
-  return (
-    <BarScale
-      min={0}
-      max={80}
-      screenReaderText={text.barscale_screenreader_text}
-      value={data.last_value.infectious_avg_normalized}
-      id="besmettelijk"
-      rangeKey="infectious_normalized_high"
-      gradient={[
-        {
-          color: '#3391CC',
-          value: 0,
-        },
-      ]}
-      showAxis={showAxis}
-    />
-  );
-}
 
 const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
   const { data } = props;

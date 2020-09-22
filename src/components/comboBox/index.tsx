@@ -8,10 +8,10 @@ import {
   ComboboxOption,
 } from '@reach/combobox';
 
-import { useThrottle } from 'utils/useThrottle';
+import { useThrottle } from '~/utils/useThrottle';
 
-import text from 'locale';
-import { useMediaQuery } from 'utils/useMediaQuery';
+import text from '~/locale/index';
+import { useMediaQuery } from '~/utils/useMediaQuery';
 
 type TOption = {
   displayName?: string;

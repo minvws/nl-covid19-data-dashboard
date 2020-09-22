@@ -1,12 +1,13 @@
 import styles from './styles.module.scss';
 import { useRef } from 'react';
-import { formatNumber } from 'utils/formatNumber';
-import { ScreenReaderOnly } from 'components/screenReaderOnly';
-import { replaceVariablesInText } from 'utils/replaceVariablesInText';
+
+import { formatNumber } from '~/utils/formatNumber';
+import { ScreenReaderOnly } from '~/components/screenReaderOnly';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { scaleQuantile, scaleThreshold } from 'd3-scale';
 
-import { useDynamicScale } from 'utils/useDynamicScale';
-import siteText from 'locale';
+import { useDynamicScale } from '~/utils/useDynamicScale';
+import siteText from '~/locale/index';
 
 type GradientStop = {
   color: string;

@@ -10,7 +10,7 @@ import styles from './chloropleth.module.scss';
 import { localPoint } from '@vx/event';
 
 import { Tooltip } from './tooltips/tooltip';
-import { useMediaQuery } from 'utils/useMediaQuery';
+import { useMediaQuery } from '~/utils/useMediaQuery';
 
 export type TooltipState = {
   tooltip: TooltipSettings | null;

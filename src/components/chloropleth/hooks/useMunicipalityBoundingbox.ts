@@ -1,5 +1,5 @@
 import { SafetyRegionProperties } from '../shared';
-import municipalCodeToRegionCodeLookup from 'data/municipalCodeToRegionCodeLookup';
+import municipalCodeToRegionCodeLookup from '~/data/municipalCodeToRegionCodeLookup';
 import { FeatureCollection, MultiPolygon } from 'geojson';
 import { useMemo } from 'react';
 

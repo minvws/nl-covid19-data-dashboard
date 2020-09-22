@@ -1,5 +1,5 @@
-import municipalities from 'data/gemeente_veiligheidsregio.json';
-import regios from 'data';
+import municipalities from '~/data/gemeente_veiligheidsregio.json';
+import regios from '~/data/index';
 
 /**
  * This function returns the safety region information for the given

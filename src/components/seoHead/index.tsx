@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-import siteText from 'locale';
+import siteText from '~/locale/index';
 
 export type SEOHeadProps = {
   title?: string;

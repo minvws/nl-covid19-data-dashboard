@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { WithChildren } from 'types';
+import { WithChildren } from '~/types/index';
 
 /*
  * Takes `li` elements as children.

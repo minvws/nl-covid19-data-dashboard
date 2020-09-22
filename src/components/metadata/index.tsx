@@ -1,12 +1,12 @@
-import siteText from 'locale';
+import siteText from '~/locale/index';
 
 import styles from './metadata.module.scss';
 
-import ClockIcon from 'assets/clock.svg';
-import DatabaseIcon from 'assets/database.svg';
+import ClockIcon from '~/assets/clock.svg';
+import DatabaseIcon from '~/assets/database.svg';
 
-import { replaceVariablesInText } from 'utils/replaceVariablesInText';
-import { formatDate } from 'utils/formatDate';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { formatDate } from '~/utils/formatDate';
 
 interface IProps {
   dataSource: {

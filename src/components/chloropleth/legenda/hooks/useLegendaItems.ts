@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { ILegendaItem } from '../ChloroplethLegenda';
 
-import { ChloroplethThresholdsValue } from 'components/chloropleth/shared';
+import { ChloroplethThresholdsValue } from '~/components/chloropleth/shared';
 
 const createLabel = (list: ChloroplethThresholdsValue[], index: number) => {
   if (index === 0) {

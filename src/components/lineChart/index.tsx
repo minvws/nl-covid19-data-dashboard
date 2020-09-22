@@ -2,16 +2,16 @@ import React, { useMemo, useState } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import styles from './lineChart.module.scss';
-import text from 'locale';
+import text from '~/locale/index';
 
 import {
   ChartTimeControls,
   TimeframeOption,
-} from 'components/chartTimeControls';
+} from '~/components/chartTimeControls';
 
-import { formatNumber } from 'utils/formatNumber';
-import { formatDate } from 'utils/formatDate';
-import { getFilteredValues } from 'components/chartTimeControls/chartTimeControlUtils';
+import { formatNumber } from '~/utils/formatNumber';
+import { formatDate } from '~/utils/formatDate';
+import { getFilteredValues } from '~/components/chartTimeControls/chartTimeControlUtils';
 
 type Value = {
   date: number;

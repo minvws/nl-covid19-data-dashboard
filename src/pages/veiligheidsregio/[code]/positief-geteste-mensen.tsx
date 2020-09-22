@@ -1,64 +1,29 @@
-import { BarScale } from 'components/barScale';
-import { FCWithLayout } from 'components/layout';
-import { getSafetyRegionLayout } from 'components/layout/SafetyRegionLayout';
-import { LineChart } from 'components/charts/index';
-import { ContentHeader } from 'components/layout/Content';
+import { FCWithLayout } from '~/components/layout';
+import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
+import { LineChart } from '~/components/charts/index';
+import { ContentHeader } from '~/components/layout/Content';
 
-import siteText from 'locale';
+import { PositivelyTestedPeopleBarScale } from '~/components/veiligheidsregio/positive-tested-people-barscale';
 
-import Getest from 'assets/test.svg';
-import { formatNumber } from 'utils/formatNumber';
-import { ResultsPerRegion } from 'types/data.d';
+import siteText from '~/locale/index';
+
+import Getest from '~/assets/test.svg';
+import { formatNumber } from '~/utils/formatNumber';
+import { ResultsPerRegion } from '~/types/data.d';
 
 import {
   getSafetyRegionData,
   getSafetyRegionPaths,
   ISafetyRegionData,
-} from 'static-props/safetyregion-data';
-import { getLocalTitleForRegion } from 'utils/getLocalTitleForCode';
-import { positiveTestedPeopleMunicipalTooltip } from 'components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
-import { MunicipalityLegenda } from 'components/chloropleth/legenda/MunicipalityLegenda';
-import { MunicipalityChloropleth } from 'components/chloropleth/MunicipalityChloropleth';
-import regionCodeToMunicipalCodeLookup from 'data/regionCodeToMunicipalCodeLookup';
+} from '~/static-props/safetyregion-data';
+import { getLocalTitleForRegion } from '~/utils/getLocalTitleForCode';
+import { positiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
+import { MunicipalityLegenda } from '~/components/chloropleth/legenda/MunicipalityLegenda';
+import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
+import regionCodeToMunicipalCodeLookup from '~/data/regionCodeToMunicipalCodeLookup';
 
 const text: typeof siteText.veiligheidsregio_positief_geteste_personen =
   siteText.veiligheidsregio_positief_geteste_personen;
-
-export function PostivelyTestedPeopleBarScale(props: {
-  data: ResultsPerRegion | undefined;
-  showAxis: boolean;
-}) {
-  const { data, showAxis } = props;
-
-  if (!data) return null;
-
-  return (
-    <BarScale
-      min={0}
-      max={10}
-      screenReaderText={text.barscale_screenreader_text}
-      value={data.last_value.infected_increase_per_region}
-      id="positief"
-      rangeKey="infected_daily_increase"
-      gradient={[
-        {
-          color: '#69c253',
-          value: 0,
-        },
-        {
-          color: '#D3A500',
-          value: 7,
-        },
-        {
-          color: '#f35065',
-          value: 10,
-        },
-      ]}
-      signaalwaarde={7}
-      showAxis={showAxis}
-    />
-  );
-}
 
 const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
   const { data } = props;
@@ -89,7 +54,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           <h3>{text.barscale_titel}</h3>
 
           {resultsPerRegion && (
-            <PostivelyTestedPeopleBarScale
+            <PositivelyTestedPeopleBarScale
               data={resultsPerRegion}
               showAxis={true}
             />

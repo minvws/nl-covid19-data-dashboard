@@ -1,9 +1,9 @@
 import fs from 'fs';
 import path from 'path';
 
-import { Regionaal } from 'types/data.d';
+import { Regionaal } from '~/types/data.d';
 
-import safetyRegions from 'data';
+import safetyRegions from '~/data/index';
 
 export interface ISafetyRegionData {
   data: Regionaal;

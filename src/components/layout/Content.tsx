@@ -1,5 +1,5 @@
-import { Metadata } from 'components/metadata';
-import { TitleWithIcon } from 'components/titleWithIcon';
+import { Metadata } from '~/components/metadata';
+import { TitleWithIcon } from '~/components/titleWithIcon';
 import styles from './layout.module.scss';
 
 export function ContentHeader(props: IContentHeaderProps) {

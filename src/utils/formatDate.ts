@@ -1,7 +1,7 @@
 import { isToday, isYesterday } from 'date-fns';
 
-import siteText from 'locale';
-import { getLocale } from 'utils/getLocale';
+import siteText from '~/locale/index';
+import { getLocale } from '~/utils/getLocale';
 
 const locale = getLocale();
 

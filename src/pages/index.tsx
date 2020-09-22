@@ -1,34 +1,34 @@
-import { FCWithLayout } from 'components/layout';
-import { getNationalLayout } from 'components/layout/NationalLayout';
-import Notification from 'assets/notification.svg';
-import ExternalLink from 'assets/external-link.svg';
+import { FCWithLayout } from '~/components/layout';
+import { getNationalLayout } from '~/components/layout/NationalLayout';
+import Notification from '~/assets/notification.svg';
+import ExternalLink from '~/assets/external-link.svg';
 
 import path from 'path';
 import fs from 'fs';
 
-import siteText from 'locale';
+import siteText from '~/locale/index';
 
-import { INationalData } from 'static-props/nl-data';
+import { INationalData } from '~/static-props/nl-data';
 
 import styles from './index.module.scss';
 
-import { TitleWithIcon } from 'components/titleWithIcon';
-import { ChartRegionControls } from 'components/chartRegionControls';
-import { MunicipalityChloropleth } from 'components/chloropleth/MunicipalityChloropleth';
-import { SafetyRegionChloropleth } from 'components/chloropleth/SafetyRegionChloropleth';
-import { positiveTestedPeopleMunicipalTooltip } from 'components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
-import { positiveTestedPeopleRegionTooltip } from 'components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
+import { TitleWithIcon } from '~/components/titleWithIcon';
+import { ChartRegionControls } from '~/components/chartRegionControls';
+import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
+import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
+import { positiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
+import { positiveTestedPeopleRegionTooltip } from '~/components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
 import { useState } from 'react';
-import { MunicipalityLegenda } from 'components/chloropleth/legenda/MunicipalityLegenda';
-import { SafetyRegionLegenda } from 'components/chloropleth/legenda/SafetyRegionLegenda';
+import { MunicipalityLegenda } from '~/components/chloropleth/legenda/MunicipalityLegenda';
+import { SafetyRegionLegenda } from '~/components/chloropleth/legenda/SafetyRegionLegenda';
 import Link from 'next/link';
 import { EscalationMapLegenda } from './veiligheidsregio';
-import { useMediaQuery } from 'utils/useMediaQuery';
+import { useMediaQuery } from '~/utils/useMediaQuery';
 import { useRouter } from 'next/router';
-import { escalationTooltip } from 'components/chloropleth/tooltips/region/escalationTooltip';
-import { MDToHTMLString } from 'utils/MDToHTMLString';
-import { National } from 'types/data';
-import { MunicipalityProperties } from 'components/chloropleth/shared';
+import { escalationTooltip } from '~/components/chloropleth/tooltips/region/escalationTooltip';
+import { MDToHTMLString } from '~/utils/MDToHTMLString';
+import { National } from '~/types/data';
+import { MunicipalityProperties } from '~/components/chloropleth/shared';
 
 const Home: FCWithLayout<INationalData> = (props) => {
   const { text } = props;
