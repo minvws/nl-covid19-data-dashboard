@@ -164,14 +164,23 @@ export function Chloropleth<T>(props: TProps<T>) {
           transform={`translate(${marginLeft},${marginTop})`}
           clipPath={`url(#${clipPathId.current})`}
         >
-          <Mercator data={featureCollection.features} fitSize={sizeToFit}>
+          <Mercator
+            data={featureCollection.features}
+            fitSize={sizeToFit as [[number, number], any]}
+          >
             {renderFeature(featureCallback)}
           </Mercator>
-          <Mercator data={overlays.features} fitSize={sizeToFit}>
+          <Mercator
+            data={overlays.features}
+            fitSize={sizeToFit as [[number, number], any]}
+          >
             {renderFeature(overlayCallback)}
           </Mercator>
           {hovers && (
-            <Mercator data={hovers.features} fitSize={sizeToFit}>
+            <Mercator
+              data={hovers.features}
+              fitSize={sizeToFit as [[number, number], any]}
+            >
               {renderFeature(hoverCallback)}
             </Mercator>
           )}
