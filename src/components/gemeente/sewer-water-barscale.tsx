@@ -1,7 +1,7 @@
-import BarScale from '@/components/barScale';
+import BarScale from '~/components/barScale';
 
-import { SewerWaterBarScaleData } from '@/utils/sewer-water/municipality-sewer-water.util';
-import siteText from '@/locale/index';
+import { SewerWaterBarScaleData } from '~/utils/sewer-water/municipality-sewer-water.util';
+import siteText from '~/locale/index';
 
 const text: typeof siteText.gemeente_rioolwater_metingen =
   siteText.gemeente_rioolwater_metingen;

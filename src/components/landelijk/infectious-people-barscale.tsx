@@ -1,7 +1,7 @@
-import BarScale from '@/components/barScale';
-import { InfectiousPeopleCountNormalized } from '@/types/data.d';
+import BarScale from '~/components/barScale';
+import { InfectiousPeopleCountNormalized } from '~/types/data.d';
 
-import siteText from '@/locale/index';
+import siteText from '~/locale/index';
 
 const text: typeof siteText.besmettelijke_personen =
   siteText.besmettelijke_personen;

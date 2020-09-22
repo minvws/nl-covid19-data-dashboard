@@ -1,25 +1,25 @@
-import { FCWithLayout } from '@/components/layout';
-import { getSafetyRegionLayout } from '@/components/layout/SafetyRegionLayout';
-import { ContentHeader } from '@/components/layout/Content';
+import { FCWithLayout } from '~/components/layout';
+import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
+import { ContentHeader } from '~/components/layout/Content';
 
-import Ziekenhuis from '@/assets/ziekenhuis.svg';
+import Ziekenhuis from '~/assets/ziekenhuis.svg';
 
-import siteText from '@/locale/index';
+import siteText from '~/locale/index';
 
-import { ResultsPerRegion } from '@/types/data.d';
-import { LineChart } from '@/components/charts/index';
-import { IntakeHospitalBarScale } from '@/components/veiligheidsregio/intake-hospital-barscale';
+import { ResultsPerRegion } from '~/types/data.d';
+import { LineChart } from '~/components/charts/index';
+import { IntakeHospitalBarScale } from '~/components/veiligheidsregio/intake-hospital-barscale';
 
 import {
   getSafetyRegionData,
   getSafetyRegionPaths,
   ISafetyRegionData,
-} from '@/static-props/safetyregion-data';
-import { getLocalTitleForRegion } from '@/utils/getLocalTitleForCode';
-import hospitalAdmissionsTooltip from '@/components/chloropleth/tooltips/municipal/hospitalAdmissionsTooltip';
-import MunicipalityLegenda from '@/components/chloropleth/legenda/MunicipalityLegenda';
-import MunicipalityChloropleth from '@/components/chloropleth/MunicipalityChloropleth';
-import regionCodeToMunicipalCodeLookup from '@/data/regionCodeToMunicipalCodeLookup';
+} from '~/static-props/safetyregion-data';
+import { getLocalTitleForRegion } from '~/utils/getLocalTitleForCode';
+import hospitalAdmissionsTooltip from '~/components/chloropleth/tooltips/municipal/hospitalAdmissionsTooltip';
+import MunicipalityLegenda from '~/components/chloropleth/legenda/MunicipalityLegenda';
+import MunicipalityChloropleth from '~/components/chloropleth/MunicipalityChloropleth';
+import regionCodeToMunicipalCodeLookup from '~/data/regionCodeToMunicipalCodeLookup';
 
 const text: typeof siteText.veiligheidsregio_ziekenhuisopnames_per_dag =
   siteText.veiligheidsregio_ziekenhuisopnames_per_dag;

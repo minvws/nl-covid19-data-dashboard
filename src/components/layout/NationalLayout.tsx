@@ -2,37 +2,37 @@ import Link from 'next/link';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-import TitleWithIcon from '@/components/titleWithIcon';
-import { getLayout as getSiteLayout } from '@/components/layout';
+import TitleWithIcon from '~/components/titleWithIcon';
+import { getLayout as getSiteLayout } from '~/components/layout';
 
-import { ReproductionIndexBarScale } from '@/components/landelijk/reproduction-index-barscale';
-import { PositiveTestedPeopleBarScale } from '@/components/landelijk/positive-tested-people-barscale';
-import { InfectiousPeopleBarScale } from '@/components/landelijk/infectious-people-barscale';
-import { IntakeHospitalBarScale } from '@/components/landelijk/intake-hospital-barscale';
+import { ReproductionIndexBarScale } from '~/components/landelijk/reproduction-index-barscale';
+import { PositiveTestedPeopleBarScale } from '~/components/landelijk/positive-tested-people-barscale';
+import { InfectiousPeopleBarScale } from '~/components/landelijk/infectious-people-barscale';
+import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-barscale';
 
-import { IntakeIntensiveCareBarscale } from '@/components/landelijk/intake-intensive-care-barscale';
-import { SuspectedPatientsBarScale } from '@/components/landelijk/suspected-patients-barscale';
-import { SewerWaterBarScale } from '@/components/landelijk/sewer-water-barscale';
-import { NursingHomeInfectedPeopleBarScale } from '@/components/landelijk/nursing-home-infected-people-barscale';
-import { NursingHomeInfectedLocationsBarScale } from '@/components/landelijk/nursing-home-infected-locations-barscale';
-import { NursingHomeDeathsBarScale } from '@/components/landelijk/nursing-home-deaths-barscale';
+import { IntakeIntensiveCareBarscale } from '~/components/landelijk/intake-intensive-care-barscale';
+import { SuspectedPatientsBarScale } from '~/components/landelijk/suspected-patients-barscale';
+import { SewerWaterBarScale } from '~/components/landelijk/sewer-water-barscale';
+import { NursingHomeInfectedPeopleBarScale } from '~/components/landelijk/nursing-home-infected-people-barscale';
+import { NursingHomeInfectedLocationsBarScale } from '~/components/landelijk/nursing-home-infected-locations-barscale';
+import { NursingHomeDeathsBarScale } from '~/components/landelijk/nursing-home-deaths-barscale';
 
-import GetestIcon from '@/assets/test.svg';
-import ReproIcon from '@/assets/reproductiegetal.svg';
-import Ziektegolf from '@/assets/ziektegolf.svg';
-import Ziekenhuis from '@/assets/ziekenhuis.svg';
-import Arts from '@/assets/arts.svg';
-import RioolwaterMonitoring from '@/assets/rioolwater-monitoring.svg';
-import Locatie from '@/assets/locaties.svg';
-import CoronaVirus from '@/assets/coronavirus.svg';
-import Arrow from '@/assets/arrow.svg';
-import Notification from '@/assets/notification.svg';
+import GetestIcon from '~/assets/test.svg';
+import ReproIcon from '~/assets/reproductiegetal.svg';
+import Ziektegolf from '~/assets/ziektegolf.svg';
+import Ziekenhuis from '~/assets/ziekenhuis.svg';
+import Arts from '~/assets/arts.svg';
+import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
+import Locatie from '~/assets/locaties.svg';
+import CoronaVirus from '~/assets/coronavirus.svg';
+import Arrow from '~/assets/arrow.svg';
+import Notification from '~/assets/notification.svg';
 
-import siteText from '@/locale/index';
+import siteText from '~/locale/index';
 
-import { WithChildren } from '@/types/index';
+import { WithChildren } from '~/types/index';
 
-import { INationalData } from '@/static-props/nl-data';
+import { INationalData } from '~/static-props/nl-data';
 
 export default NationalLayout;
 

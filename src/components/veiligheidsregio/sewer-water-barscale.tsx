@@ -1,6 +1,6 @@
-import BarScale from '@/components/barScale';
-import { SewerWaterBarScaleData } from '@/utils/sewer-water/safety-region-sewer-water.util';
-import siteText from '@/locale/index';
+import BarScale from '~/components/barScale';
+import { SewerWaterBarScaleData } from '~/utils/sewer-water/safety-region-sewer-water.util';
+import siteText from '~/locale/index';
 
 export function SewerWaterBarScale(props: {
   data: SewerWaterBarScaleData | null;

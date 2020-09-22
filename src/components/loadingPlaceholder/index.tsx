@@ -1,5 +1,5 @@
 import styles from './loadingPlaceholder.module.scss';
-import { WithChildren } from '@/types/index';
+import { WithChildren } from '~/types/index';
 
 export default LoadingPlaceholder;
 

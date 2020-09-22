@@ -1,7 +1,7 @@
-import BarScale from '@/components/barScale';
+import BarScale from '~/components/barScale';
 
-import { IntakeIntensivecareMa } from '@/types/data.d';
-import siteText from '@/locale/index';
+import { IntakeIntensivecareMa } from '~/types/data.d';
+import siteText from '~/locale/index';
 
 const text: typeof siteText.ic_opnames_per_dag = siteText.ic_opnames_per_dag;
 

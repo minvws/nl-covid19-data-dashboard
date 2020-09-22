@@ -1,24 +1,24 @@
 import Link from 'next/link';
 
-import Legenda from '@/components/legenda';
-import { FCWithLayout } from '@/components/layout';
-import { getNationalLayout } from '@/components/layout/NationalLayout';
-import { AreaChart } from '@/components/charts/index';
+import Legenda from '~/components/legenda';
+import { FCWithLayout } from '~/components/layout';
+import { getNationalLayout } from '~/components/layout/NationalLayout';
+import { AreaChart } from '~/components/charts/index';
 
-import { InfectiousPeopleBarScale } from '@/components/landelijk/infectious-people-barscale';
+import { InfectiousPeopleBarScale } from '~/components/landelijk/infectious-people-barscale';
 
-import Ziektegolf from '@/assets/ziektegolf.svg';
+import Ziektegolf from '~/assets/ziektegolf.svg';
 
-import formatNumber from '@/utils/formatNumber';
+import formatNumber from '~/utils/formatNumber';
 
-import siteText from '@/locale/index';
+import siteText from '~/locale/index';
 
 import {
   InfectiousPeopleCount,
   InfectiousPeopleCountNormalized,
-} from '@/types/data.d';
-import { ContentHeader } from '@/components/layout/Content';
-import getNlData, { INationalData } from '@/static-props/nl-data';
+} from '~/types/data.d';
+import { ContentHeader } from '~/components/layout/Content';
+import getNlData, { INationalData } from '~/static-props/nl-data';
 
 const text: typeof siteText.besmettelijke_personen =
   siteText.besmettelijke_personen;

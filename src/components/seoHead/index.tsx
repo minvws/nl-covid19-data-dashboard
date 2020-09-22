@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-import siteText from '@/locale/index';
+import siteText from '~/locale/index';
 
 export default SEOHead;
 

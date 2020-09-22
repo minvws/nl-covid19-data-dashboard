@@ -1,6 +1,6 @@
 import styles from './scalingSVG.module.scss';
 import CSS from 'csstype';
-import { WithChildren } from '@/types/index';
+import { WithChildren } from '~/types/index';
 
 interface IProps {
   width: number;

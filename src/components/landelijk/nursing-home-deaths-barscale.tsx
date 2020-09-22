@@ -1,6 +1,6 @@
-import BarScale from '@/components/barScale';
-import siteText from '@/locale/index';
-import { DeceasedPeopleNurseryCountDaily } from '@/types/data.d';
+import BarScale from '~/components/barScale';
+import siteText from '~/locale/index';
+import { DeceasedPeopleNurseryCountDaily } from '~/types/data.d';
 
 const text: typeof siteText.verpleeghuis_oversterfte =
   siteText.verpleeghuis_oversterfte;

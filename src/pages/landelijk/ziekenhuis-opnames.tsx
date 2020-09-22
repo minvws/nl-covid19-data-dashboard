@@ -1,23 +1,23 @@
-import { FCWithLayout } from '@/components/layout';
-import { getNationalLayout } from '@/components/layout/NationalLayout';
-import { LineChart } from '@/components/charts/index';
-import { ContentHeader } from '@/components/layout/Content';
+import { FCWithLayout } from '~/components/layout';
+import { getNationalLayout } from '~/components/layout/NationalLayout';
+import { LineChart } from '~/components/charts/index';
+import { ContentHeader } from '~/components/layout/Content';
 
-import { IntakeHospitalBarScale } from '@/components/landelijk/intake-hospital-barscale';
+import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-barscale';
 
-import Ziekenhuis from '@/assets/ziekenhuis.svg';
+import Ziekenhuis from '~/assets/ziekenhuis.svg';
 
-import siteText from '@/locale/index';
-import styles from '@/components/chloropleth/chloropleth.module.scss';
+import siteText from '~/locale/index';
+import styles from '~/components/chloropleth/chloropleth.module.scss';
 
-import { IntakeHospitalMa } from '@/types/data.d';
+import { IntakeHospitalMa } from '~/types/data.d';
 import { ReactNode, useState } from 'react';
-import getNlData, { INationalData } from '@/static-props/nl-data';
-import ChartRegionControls from '@/components/chartRegionControls';
-import MunicipalityChloropleth from '@/components/chloropleth/MunicipalityChloropleth';
-import SafetyRegionChloropleth from '@/components/chloropleth/SafetyRegionChloropleth';
-import MunicipalityLegenda from '@/components/chloropleth/legenda/MunicipalityLegenda';
-import SafetyRegionLegenda from '@/components/chloropleth/legenda/SafetyRegionLegenda';
+import getNlData, { INationalData } from '~/static-props/nl-data';
+import ChartRegionControls from '~/components/chartRegionControls';
+import MunicipalityChloropleth from '~/components/chloropleth/MunicipalityChloropleth';
+import SafetyRegionChloropleth from '~/components/chloropleth/SafetyRegionChloropleth';
+import MunicipalityLegenda from '~/components/chloropleth/legenda/MunicipalityLegenda';
+import SafetyRegionLegenda from '~/components/chloropleth/legenda/SafetyRegionLegenda';
 
 const text: typeof siteText.ziekenhuisopnames_per_dag =
   siteText.ziekenhuisopnames_per_dag;

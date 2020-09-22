@@ -4,11 +4,11 @@ import HighchartsReact from 'highcharts-react-official';
 
 import ChartTimeControls, {
   TimeframeOption,
-} from '@/components/chartTimeControls';
+} from '~/components/chartTimeControls';
 
-import formatNumber from '@/utils/formatNumber';
-import formatDate from '@/utils/formatDate';
-import { getFilteredValues } from '@/components/chartTimeControls/chartTimeControlUtils';
+import formatNumber from '~/utils/formatNumber';
+import formatDate from '~/utils/formatDate';
+import { getFilteredValues } from '~/components/chartTimeControls/chartTimeControlUtils';
 
 if (typeof Highcharts === 'object') {
   require('highcharts/highcharts-more')(Highcharts);

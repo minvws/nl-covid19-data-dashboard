@@ -1,7 +1,7 @@
-import BarScale from '@/components/barScale';
-import { VerdenkingenHuisartsen } from '@/types/data.d';
+import BarScale from '~/components/barScale';
+import { VerdenkingenHuisartsen } from '~/types/data.d';
 
-import siteText from '@/locale/index';
+import siteText from '~/locale/index';
 const text: typeof siteText.verdenkingen_huisartsen =
   siteText.verdenkingen_huisartsen;
 

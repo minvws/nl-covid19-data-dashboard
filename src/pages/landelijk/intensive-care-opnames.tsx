@@ -1,16 +1,16 @@
-import { FCWithLayout } from '@/components/layout';
-import { getNationalLayout } from '@/components/layout/NationalLayout';
-import { LineChart } from '@/components/charts/index';
-import { ContentHeader } from '@/components/layout/Content';
-import { IntakeIntensiveCareBarscale } from '@/components/landelijk/intake-intensive-care-barscale';
+import { FCWithLayout } from '~/components/layout';
+import { getNationalLayout } from '~/components/layout/NationalLayout';
+import { LineChart } from '~/components/charts/index';
+import { ContentHeader } from '~/components/layout/Content';
+import { IntakeIntensiveCareBarscale } from '~/components/landelijk/intake-intensive-care-barscale';
 
-import Arts from '@/assets/arts.svg';
+import Arts from '~/assets/arts.svg';
 
-import siteText from '@/locale/index';
+import siteText from '~/locale/index';
 
-import { IntakeIntensivecareMa } from '@/types/data.d';
+import { IntakeIntensivecareMa } from '~/types/data.d';
 
-import getNlData, { INationalData } from '@/static-props/nl-data';
+import getNlData, { INationalData } from '~/static-props/nl-data';
 
 const text: typeof siteText.ic_opnames_per_dag = siteText.ic_opnames_per_dag;
 

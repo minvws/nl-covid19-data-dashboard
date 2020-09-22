@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { WithChildren } from '@/types/index';
+import { WithChildren } from '~/types/index';
 
 export default Legenda;
 

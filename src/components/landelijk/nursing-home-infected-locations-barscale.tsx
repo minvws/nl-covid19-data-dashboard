@@ -1,8 +1,8 @@
-import BarScale from '@/components/barScale';
+import BarScale from '~/components/barScale';
 
-import { TotalReportedLocations } from '@/types/data.d';
+import { TotalReportedLocations } from '~/types/data.d';
 
-import siteText from '@/locale/index';
+import siteText from '~/locale/index';
 
 const text: typeof siteText.verpleeghuis_besmette_locaties =
   siteText.verpleeghuis_besmette_locaties;
