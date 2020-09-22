@@ -63,7 +63,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
   return (
     <>
       <ContentHeader
-        category="Medische indicatoren"
+        category={siteText.veiligheidsregio_layout.headings.medisch}
         title={getLocalTitleForRegion(text.titel, data.code)}
         Icon={Ziekenhuis}
         subtitle={text.pagina_toelichting}

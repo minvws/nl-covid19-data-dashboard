@@ -50,7 +50,7 @@ const NursingHomeInfectedPeople: FCWithLayout<INationalData> = (props) => {
   return (
     <>
       <ContentHeader
-        category="Verpleeghuiszorg"
+        category={siteText.nationaal_layout.headings.verpleeghuis}
         title={text.titel}
         Icon={Getest}
         subtitle={text.pagina_toelichting}

@@ -86,7 +86,7 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
   return (
     <>
       <ContentHeader
-        category="Medische indicatoren"
+        category={siteText.nationaal_layout.headings.medisch}
         title={text.titel}
         Icon={Getest}
         subtitle={text.pagina_toelichting}

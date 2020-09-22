@@ -28,6 +28,7 @@ import { useRouter } from 'next/router';
 import { escalationTooltip } from 'components/chloropleth/tooltips/region/escalationTooltip';
 import MDToHTMLString from 'utils/MDToHTMLString';
 import { National } from 'types/data';
+import { MunicipalityProperties } from 'components/chloropleth/shared';
 
 const Home: FCWithLayout<INationalData> = (props) => {
   const { text } = props;
@@ -42,6 +43,13 @@ const Home: FCWithLayout<INationalData> = (props) => {
     router.push(
       '/veiligheidsregio/[code]/positief-geteste-mensen',
       `/veiligheidsregio/${context.vrcode}/positief-geteste-mensen`
+    );
+  };
+
+  const onSelectMunicipal = (context: MunicipalityProperties) => {
+    router.push(
+      '/gemeente/[code]/positief-geteste-mensen',
+      `/gemeente/${context.gemcode}/positief-geteste-mensen`
     );
   };
 
@@ -134,12 +142,14 @@ const Home: FCWithLayout<INationalData> = (props) => {
             <MunicipalityChloropleth
               metricName="positive_tested_people"
               tooltipContent={positiveTestedPeopleTooltip}
+              onSelect={onSelectMunicipal}
             />
           )}
           {selectedMap === 'region' && (
             <SafetyRegionChloropleth
               metricName="positive_tested_people"
               tooltipContent={positiveTestedPeopleTooltipRegion}
+              onSelect={onSelectRegion}
             />
           )}
         </div>

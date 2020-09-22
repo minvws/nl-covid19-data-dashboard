@@ -59,7 +59,7 @@ const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
   return (
     <>
       <ContentHeader
-        category="Medische indicatoren"
+        category={siteText.nationaal_layout.headings.medisch}
         title={text.titel}
         Icon={Arts}
         subtitle={text.pagina_toelichting}
