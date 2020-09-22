@@ -66,7 +66,6 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
     };
   }, [data]);
 
-
   return (
     <>
       <ContentHeader

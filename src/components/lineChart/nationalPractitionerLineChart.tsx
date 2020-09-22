@@ -118,10 +118,7 @@ function getOptions(values: Value[]): Highcharts.Options {
       backgroundColor: '#FFF',
       borderColor: '#01689B',
       borderRadius: 0,
-      formatter: function (): false | string {
-        // if (this.series.name !== text.average_label_text) {
-        //   return false;
-        // }
+      formatter: function (): string {
         const { start, end } = weeklyMeasurements[this.point.index];
         return `<strong>${formatDate(start * 1000, 'short')} - ${formatDate(
           end * 1000,
