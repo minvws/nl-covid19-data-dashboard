@@ -9,6 +9,8 @@ import {
 
 import { formatNumber } from 'utils/formatNumber';
 import { formatDate } from 'utils/formatDate';
+import text from 'locale';
+
 import { getFilteredValues } from 'components/chartTimeControls/chartTimeControlUtils';
 
 if (typeof Highcharts === 'object') {
@@ -156,6 +158,17 @@ function getOptions(props: IGetOptions): Highcharts.Options {
       value: signaalwaarde,
       width: 1,
       color: '#4f5458',
+      dashStyle: 'Dash',
+      zIndex: 1,
+      label: {
+        text: text.common.barScale.signaalwaarde,
+        align: 'right',
+        y: -8,
+        x: 0,
+        style: {
+          color: '#4f5458',
+        },
+      },
     });
   }
 
