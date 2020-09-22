@@ -106,5 +106,8 @@
     "validate-json": "node schema/validator/validate-json.js",
     "validate-single": "node schema/validator/validate-single.js",
     "generate-typescript": "node schema/validator/generate-typescript.js"
-  }
+  },
+  "sideEffects": [
+    "./src/some-side-effectful-file.js"
+  ]
 }
