@@ -6,6 +6,8 @@ import ChartTimeControls, {
   TimeframeOption,
 } from 'components/chartTimeControls';
 
+import text from 'locale';
+
 import formatNumber from 'utils/formatNumber';
 import formatDate from 'utils/formatDate';
 import { getFilteredValues } from 'components/chartTimeControls/chartTimeControlUtils';
@@ -157,6 +159,17 @@ function getOptions(props: IGetOptions): Highcharts.Options {
       value: signaalwaarde,
       width: 1,
       color: '#4f5458',
+      dashStyle: 'Dash',
+      zIndex: 1,
+      label: {
+        text: text.common.barScale.signaalwaarde,
+        align: 'right',
+        y: -8,
+        x: 0,
+        style: {
+          color: '#4f5458',
+        },
+      },
     });
   }
 
