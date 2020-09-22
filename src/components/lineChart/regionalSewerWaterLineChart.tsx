@@ -4,7 +4,7 @@ import HighchartsReact from 'highcharts-react-official';
 
 import { formatNumber } from '~/utils/formatNumber';
 import { formatDate } from '~/utils/formatDate';
-import { getWeekStartEndByIndex } from '~/utils/getWeekStartEndByIndex';
+import { getWeekStartEndByIndex, Week } from '~/utils/getWeekStartEndByIndex';
 
 type TranslationStrings = Record<string, string>;
 
@@ -25,6 +25,10 @@ function getOptions(
   text: TranslationStrings
 ): Highcharts.Options {
   const hasMultipleValues = averageValues.length > 1;
+  const weekSet: Week[] = averageValues.map((value) => ({
+    start: value.week_start_unix,
+    end: value.week_end_unix,
+  }));
 
   const series: SeriesLineOptions[] = [
     {
@@ -39,9 +43,7 @@ function getOptions(
         enabled: !hasMultipleValues,
       },
       events: {
-        legendItemClick: function () {
-          return false;
-        },
+        legendItemClick: () => false,
       },
       states: {
         inactive: {
@@ -113,10 +115,7 @@ function getOptions(
           return false;
         }
         const { start, end } = getWeekStartEndByIndex(
-          averageValues.map((value) => ({
-            start: value.week_start_unix,
-            end: value.week_end_unix,
-          })),
+          weekSet,
           this.point.index
         );
         return `<strong>${formatDate(start * 1000, 'short')} - ${formatDate(

@@ -42,9 +42,7 @@ function getOptions(values: Value[]): Highcharts.Options {
         enabled: !hasMultipleValues,
       },
       events: {
-        legendItemClick: function () {
-          return false;
-        },
+        legendItemClick: () => false,
       },
       states: {
         inactive: {
@@ -113,7 +111,7 @@ function getOptions(values: Value[]): Highcharts.Options {
       borderRadius: 0,
       formatter: function (): string {
         const { start, end } = getWeekStartEndByIndex(
-          values.map((value) => value.week),
+          values.map((x) => x.week),
           this.point.index
         );
         return `<strong>${formatDate(start * 1000, 'short')} - ${formatDate(
