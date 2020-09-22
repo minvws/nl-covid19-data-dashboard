@@ -2,14 +2,15 @@ import React, { useMemo, useState } from 'react';
 import Highcharts, { SeriesAreaOptions } from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-import ChartTimeControls, {
+import {
   TimeframeOption,
-} from 'components/chartTimeControls';
-import { getFilteredValues } from 'components/chartTimeControls/chartTimeControlUtils';
-import styles from './lineChart.module.scss';
+  ChartTimeControls,
+} from '~/components/chartTimeControls';
+import { getFilteredValues } from '~/components/chartTimeControls/chartTimeControlUtils';
 
-import formatNumber from 'utils/formatNumber';
-import formatDate from 'utils/formatDate';
+import styles from './lineChart.module.scss';
+import { formatNumber } from '~/utils/formatNumber';
+import { formatDate } from '~/utils/formatDate';
 
 interface Value {
   date: number;
@@ -27,8 +28,6 @@ type NationalPractitionerLineChartProps = {
   text: string;
   timeframeOptions?: TimeframeOption[];
 };
-
-export default NationalPractitionerLineChart;
 
 function getOptions(values: Value[]): Highcharts.Options {
   const multipleAverageValues = values.length > 1;
@@ -151,7 +150,7 @@ function getOptions(values: Value[]): Highcharts.Options {
   return options;
 }
 
-function NationalPractitionerLineChart({
+export function NationalPractitionerLineChart({
   values,
   text,
   timeframeOptions,
