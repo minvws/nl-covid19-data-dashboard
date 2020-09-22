@@ -4,7 +4,7 @@ import getNlData, { INationalData } from '~/static-props/nl-data';
 
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
-import { LineChart } from '~/components/charts/index';
+import { LineChart } from '~/components/lineChart/lineChartWithWeekTooltip';
 import { ContentHeader } from '~/components/layout/Content';
 import { SewerWaterBarScale } from '~/components/landelijk/sewer-water-barscale';
 
@@ -52,7 +52,7 @@ const SewerWater: FCWithLayout<INationalData> = (props) => {
             values={data.values.map((value) => ({
               value: Number(value.average),
               date: value.week_unix,
-              // week: { start: value.week_start_unix, end: value.week_end_unix }
+              week: { start: value.week_start_unix, end: value.week_end_unix },
             }))}
           />
         </article>

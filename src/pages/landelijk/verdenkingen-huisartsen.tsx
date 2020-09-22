@@ -5,7 +5,7 @@ import getNlData, { INationalData } from '~/static-props/nl-data';
 import { ContentHeader } from '~/components/layout/Content';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
-import { NationalPractitionerLineChart } from '~/components/lineChart/nationalPractitionerLineChart';
+import { LineChart } from '~/components/lineChart/lineChartWithWeekTooltip';
 import { SuspectedPatientsBarScale } from '~/components/landelijk/suspected-patients-barscale';
 
 import Arts from '~/assets/arts.svg';
@@ -58,8 +58,8 @@ const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
 
       {data && (
         <article className="metric-article">
-          <NationalPractitionerLineChart
-            text={text.linechart_titel}
+          <LineChart
+            title={text.linechart_titel}
             timeframeOptions={['all', '5weeks']}
             values={data.values.map((value) => ({
               value: value.incidentie,

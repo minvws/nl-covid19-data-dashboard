@@ -11,28 +11,22 @@ import { getFilteredValues } from '~/components/chartTimeControls/chartTimeContr
 import styles from './lineChart.module.scss';
 import { formatNumber } from '~/utils/formatNumber';
 import { formatDate } from '~/utils/formatDate';
+import { getWeekStartEndByIndex, Week } from '~/utils/getWeekStartEndByIndex';
 
 interface Value {
   date: number;
-  value: number | undefined | null;
+  value: number | undefined;
   week: Week;
 }
 
-type Week = {
-  start: number;
-  end: number;
-};
-
-type NationalPractitionerLineChartProps = {
+type LineChartProps = {
   values: Value[];
-  text: string;
+  title: string;
   timeframeOptions?: TimeframeOption[];
 };
 
 function getOptions(values: Value[]): Highcharts.Options {
   const multipleAverageValues = values.length > 1;
-
-  const weeklyMeasurements: Week[] = values.map((value) => value.week);
 
   const series: SeriesAreaOptions[] = [
     {
@@ -70,7 +64,7 @@ function getOptions(values: Value[]): Highcharts.Options {
       borderWidth: 0,
       colorCount: 10,
       displayErrors: true,
-      height: 225,
+      height: 175,
     },
     legend: {
       itemWidth: 300,
@@ -118,7 +112,10 @@ function getOptions(values: Value[]): Highcharts.Options {
       borderColor: '#01689B',
       borderRadius: 0,
       formatter: function (): string {
-        const { start, end } = weeklyMeasurements[this.point.index];
+        const { start, end } = getWeekStartEndByIndex(
+          values.map((value) => value.week),
+          this.point.index
+        );
         return `<strong>${formatDate(start * 1000, 'short')} - ${formatDate(
           end * 1000,
           'short'
@@ -150,11 +147,7 @@ function getOptions(values: Value[]): Highcharts.Options {
   return options;
 }
 
-export function NationalPractitionerLineChart({
-  values,
-  text,
-  timeframeOptions,
-}: NationalPractitionerLineChartProps) {
+export function LineChart({ values, title, timeframeOptions }: LineChartProps) {
   const [timeframe, setTimeframe] = useState<TimeframeOption>('5weeks');
 
   const chartOptions = useMemo(() => {
@@ -170,7 +163,7 @@ export function NationalPractitionerLineChart({
     <section className={styles.root}>
       <header className={styles.header}>
         <div className={styles.titleAndDescription}>
-          {text && <h3>{text}</h3>}
+          {title && <h3>{title}</h3>}
         </div>
         <div>
           <ChartTimeControls
