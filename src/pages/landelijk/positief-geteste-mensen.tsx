@@ -21,7 +21,8 @@ import {
 import getNlData, { INationalData } from 'static-props/nl-data';
 import { MunicipalityChloropleth } from 'components/chloropleth/MunicipalityChloropleth';
 import { SafetyRegionChloropleth } from 'components/chloropleth/SafetyRegionChloropleth';
-import { positiveTestedPeopleTooltip } from 'components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
+import { positiveTestedPeopleMunicipalTooltip } from 'components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
+import { positiveTestedPeopleRegionTooltip } from 'components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
 import { MunicipalityLegenda } from 'components/chloropleth/legenda/MunicipalityLegenda';
 import { SafetyRegionLegenda } from 'components/chloropleth/legenda/SafetyRegionLegenda';
 
@@ -146,13 +147,13 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           {selectedMap === 'municipal' && (
             <MunicipalityChloropleth
               metricName="positive_tested_people"
-              tooltipContent={positiveTestedPeopleTooltip}
+              tooltipContent={positiveTestedPeopleMunicipalTooltip}
             />
           )}
           {selectedMap === 'region' && (
             <SafetyRegionChloropleth
               metricName="positive_tested_people"
-              tooltipContent={positiveTestedPeopleTooltip}
+              tooltipContent={positiveTestedPeopleRegionTooltip}
             />
           )}
         </div>
