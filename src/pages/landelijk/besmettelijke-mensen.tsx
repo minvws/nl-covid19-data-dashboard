@@ -8,7 +8,7 @@ import { AreaChart } from 'components/charts/index';
 
 import Ziektegolf from 'assets/ziektegolf.svg';
 
-import formatNumber from 'utils/formatNumber';
+import { formatNumber } from 'utils/formatNumber';
 
 import siteText from 'locale';
 

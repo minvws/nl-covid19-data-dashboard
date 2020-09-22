@@ -8,9 +8,9 @@ import municipalities from 'data/gemeente_veiligheidsregio.json';
 import { IMunicipalityData } from 'static-props/municipality-data';
 
 import { getLocalTitleForMuncipality } from 'utils/getLocalTitleForCode';
-import getSafetyRegionForMunicipalityCode from 'utils/getSafetyRegionForMunicipalityCode';
+import { getSafetyRegionForMunicipalityCode } from 'utils/getSafetyRegionForMunicipalityCode';
 import { getSewerWaterBarScaleData } from 'utils/sewer-water/municipality-sewer-water.util';
-import useMediaQuery from 'utils/useMediaQuery';
+import { useMediaQuery } from 'utils/useMediaQuery';
 
 import { PostivelyTestedPeopleBarScale } from 'pages/gemeente/[code]/positief-geteste-mensen';
 import { IntakeHospitalBarScale } from 'pages/gemeente/[code]/ziekenhuis-opnames';

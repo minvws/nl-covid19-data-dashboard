@@ -7,7 +7,7 @@ import regionCodeToMunicipalCodeLookup from 'data/regionCodeToMunicipalCodeLooku
  *
  * @param code
  */
-export default function getSafetyRegionMunicipalsForMunicipalCode(
+export function getSafetyRegionMunicipalsForMunicipalCode(
   code: string
 ): string[] | undefined {
   const vrcode = municipalCodeToRegionCodeLookup[code];

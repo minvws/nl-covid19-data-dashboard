@@ -7,7 +7,7 @@ import safetyRegions from 'data/index';
 import { WithChildren } from 'types';
 import { ISafetyRegionData } from 'static-props/safetyregion-data';
 
-import useMediaQuery from 'utils/useMediaQuery';
+import { useMediaQuery } from 'utils/useMediaQuery';
 import { getSewerWaterBarScaleData } from 'utils/sewer-water/safety-region-sewer-water.util';
 
 import { PostivelyTestedPeopleBarScale } from 'pages/veiligheidsregio/[code]/positief-geteste-mensen';

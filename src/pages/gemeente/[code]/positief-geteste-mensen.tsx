@@ -8,7 +8,7 @@ import { LineChart } from 'components/charts/index';
 import { ContentHeader } from 'components/layout/Content';
 
 import Getest from 'assets/test.svg';
-import formatDecimal from 'utils/formatNumber';
+import { formatNumber } from 'utils/formatNumber';
 import { PositiveTestedPeople } from 'types/data.d';
 import {
   getMunicipalityData,
@@ -91,7 +91,7 @@ const PostivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
             <h3>
               {text.kpi_titel}{' '}
               <span className="text-blue kpi">
-                {formatDecimal(
+                {formatNumber(
                   positivelyTestedPeople.last_value.infected_daily_total
                 )}
               </span>

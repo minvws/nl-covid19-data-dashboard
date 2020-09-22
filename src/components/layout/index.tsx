@@ -7,10 +7,10 @@ import text from 'locale';
 import { ILastGeneratedData } from 'static-props/last-generated-data';
 import styles from './layout.module.scss';
 
-import useMediaQuery from 'utils/useMediaQuery';
-import formatDate from 'utils/formatDate';
-import replaceVariablesInText from 'utils/replaceVariablesInText';
-import getLocale from 'utils/getLocale';
+import { useMediaQuery } from 'utils/useMediaQuery';
+import { formatDate } from 'utils/formatDate';
+import { replaceVariablesInText } from 'utils/replaceVariablesInText';
+import { getLocale } from 'utils/getLocale';
 
 import SEOHead from 'components/seoHead';
 import MaxWidth from 'components/maxWidth';

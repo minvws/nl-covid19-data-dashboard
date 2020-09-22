@@ -10,7 +10,7 @@ import MaxWidth from 'components/maxWidth';
 import styles from './over.module.scss';
 import siteText from 'locale';
 
-import MDToHTMLString from 'utils/MDToHTMLString';
+import { MDToHTMLString } from 'utils/MDToHTMLString';
 
 interface ICijfer {
   cijfer: string;

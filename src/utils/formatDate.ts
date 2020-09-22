@@ -1,11 +1,9 @@
 import { isToday, isYesterday } from 'date-fns';
 
 import siteText from 'locale';
-import getLocale from 'utils/getLocale';
+import { getLocale } from 'utils/getLocale';
 
 const locale = getLocale();
-
-export default formatDate;
 
 // TypeScript is missing some types for `Intl.DateTimeFormat`.
 // https://github.com/microsoft/TypeScript/issues/35865
@@ -42,7 +40,7 @@ const Day = new Intl.DateTimeFormat(locale, {
   day: 'numeric',
 });
 
-function formatDate(
+export function formatDate(
   value: number | Date,
   style?: 'long' | 'medium' | 'short' | 'relative' | 'iso' | 'axis'
 ): string {

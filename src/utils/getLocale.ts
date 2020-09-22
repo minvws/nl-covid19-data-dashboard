@@ -1,4 +1,4 @@
-export default function getLocale(): string {
+export function getLocale(): string {
   const locale = process.env.NEXT_PUBLIC_LOCALE;
   const defaultLocale = 'nl';
   if (!locale) return defaultLocale;

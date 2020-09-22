@@ -23,10 +23,10 @@ import MunicipalityLegenda from 'components/chloropleth/legenda/MunicipalityLege
 import SafetyRegionLegenda from 'components/chloropleth/legenda/SafetyRegionLegenda';
 import Link from 'next/link';
 import { EscalationMapLegenda } from './veiligheidsregio';
-import useMediaQuery from 'utils/useMediaQuery';
+import { useMediaQuery } from 'utils/useMediaQuery';
 import { useRouter } from 'next/router';
 import { escalationTooltip } from 'components/chloropleth/tooltips/region/escalationTooltip';
-import MDToHTMLString from 'utils/MDToHTMLString';
+import { MDToHTMLString } from 'utils/MDToHTMLString';
 import { National } from 'types/data';
 import { MunicipalityProperties } from 'components/chloropleth/shared';
 

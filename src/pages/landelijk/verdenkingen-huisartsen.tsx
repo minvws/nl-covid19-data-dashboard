@@ -6,7 +6,7 @@ import { LineChart } from 'components/charts/index';
 
 import Arts from 'assets/arts.svg';
 
-import formatNumber from 'utils/formatNumber';
+import { formatNumber } from 'utils/formatNumber';
 
 import siteText from 'locale';
 

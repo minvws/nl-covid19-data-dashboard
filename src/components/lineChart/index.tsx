@@ -8,8 +8,8 @@ import ChartTimeControls, {
   TimeframeOption,
 } from 'components/chartTimeControls';
 
-import formatNumber from 'utils/formatNumber';
-import formatDate from 'utils/formatDate';
+import { formatNumber } from 'utils/formatNumber';
+import { formatDate } from 'utils/formatDate';
 import { getFilteredValues } from 'components/chartTimeControls/chartTimeControlUtils';
 
 type Value = {
