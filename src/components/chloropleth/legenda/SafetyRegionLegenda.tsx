@@ -1,13 +1,13 @@
 import { TRegionMetricName } from '../shared';
-import ChloroplethLegenda from './ChloroplethLegenda';
-import useSafetyRegionLegendaData from './hooks/useSafetyRegionLegendaData';
+import { ChloroplethLegenda } from './ChloroplethLegenda';
+import { useSafetyRegionLegendaData } from './hooks/useSafetyRegionLegendaData';
 
 export type TProps = {
   metricName: TRegionMetricName;
   title: string;
 };
 
-export default function SafetyRegionLegenda(props: TProps) {
+export function SafetyRegionLegenda(props: TProps) {
   const { metricName, title } = props;
   const items = useSafetyRegionLegendaData(metricName);
 

@@ -7,23 +7,21 @@ import safetyRegions from '~/data/index';
 import { WithChildren } from '~/types/index';
 import { ISafetyRegionData } from '~/static-props/safetyregion-data';
 
-import useMediaQuery from '~/utils/useMediaQuery';
+import { useMediaQuery } from '~/utils/useMediaQuery';
 import { getSewerWaterBarScaleData } from '~/utils/sewer-water/safety-region-sewer-water.util';
 
 import { PositivelyTestedPeopleBarScale } from '~/components/veiligheidsregio/positive-tested-people-barscale';
 import { IntakeHospitalBarScale } from '~/components/veiligheidsregio/intake-hospital-barscale';
 import { SewerWaterBarScale } from '~/components/veiligheidsregio/sewer-water-barscale';
 
-import TitleWithIcon from '~/components/titleWithIcon';
+import { TitleWithIcon } from '~/components/titleWithIcon';
 import { getLayout as getSiteLayout } from '~/components/layout';
-import Combobox from '~/components/comboBox';
+import { ComboBox } from '~/components/comboBox';
 
 import GetestIcon from '~/assets/test.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import Arrow from '~/assets/arrow.svg';
-
-export default SafetyRegionLayout;
 
 export function getSafetyRegionLayout() {
   return function (
@@ -129,7 +127,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
           </Link>
         )}
         <aside className="safety-region-aside">
-          <Combobox<TSafetyRegion>
+          <ComboBox<TSafetyRegion>
             placeholder={siteText.common.zoekveld_placeholder_regio}
             handleSelect={handleSafeRegionSelect}
             options={safetyRegions}

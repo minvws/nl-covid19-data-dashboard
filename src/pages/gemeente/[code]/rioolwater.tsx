@@ -6,11 +6,9 @@ import { SewerWaterBarScale } from '~/components/gemeente/sewer-water-barscale';
 
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 
-import siteText from '~/locale/index';
-
-import RegionalSewerWaterLineChart from '~/components/lineChart/regionalSewerWaterLineChart';
+import { RegionalSewerWaterLineChart } from '~/components/lineChart/regionalSewerWaterLineChart';
 import { useMemo } from 'react';
-import BarChart from '~/components/barChart';
+import { BarChart } from '~/components/charts';
 import {
   getSewerWaterBarScaleData,
   getSewerWaterLineChartData,
@@ -22,6 +20,8 @@ import {
   IMunicipalityData,
 } from '~/static-props/municipality-data';
 import { getLocalTitleForMuncipality } from '~/utils/getLocalTitleForCode';
+
+import siteText from '~/locale/index';
 
 const text: typeof siteText.gemeente_rioolwater_metingen =
   siteText.gemeente_rioolwater_metingen;

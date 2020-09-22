@@ -16,9 +16,9 @@ import {
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
 import { getLocalTitleForRegion } from '~/utils/getLocalTitleForCode';
-import hospitalAdmissionsTooltip from '~/components/chloropleth/tooltips/municipal/hospitalAdmissionsTooltip';
-import MunicipalityLegenda from '~/components/chloropleth/legenda/MunicipalityLegenda';
-import MunicipalityChloropleth from '~/components/chloropleth/MunicipalityChloropleth';
+import { hospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/municipal/hospitalAdmissionsTooltip';
+import { MunicipalityLegenda } from '~/components/chloropleth/legenda/MunicipalityLegenda';
+import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
 import regionCodeToMunicipalCodeLookup from '~/data/regionCodeToMunicipalCodeLookup';
 
 const text: typeof siteText.veiligheidsregio_ziekenhuisopnames_per_dag =

@@ -6,8 +6,7 @@ import { LineChart } from '~/components/charts/index';
 import { SuspectedPatientsBarScale } from '~/components/landelijk/suspected-patients-barscale';
 
 import Arts from '~/assets/arts.svg';
-
-import formatNumber from '~/utils/formatNumber';
+import { formatNumber } from '~/utils/formatNumber';
 
 import siteText from '~/locale/index';
 

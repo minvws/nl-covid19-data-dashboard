@@ -23,7 +23,7 @@ export type TSafetyRegionDataInfo<T> = [TGetRegionFunc<T>, boolean];
  * @param featureCollection
  * @param metricProperty
  */
-export default function useRegionData<
+export function useSafetyRegionData<
   T extends TRegionMetricName,
   K extends Regions[T],
   ReturnType extends K[number] & { value: number } & SafetyRegionProperties

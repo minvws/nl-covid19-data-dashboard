@@ -10,7 +10,7 @@ export type TProps = {
   items: ILegendaItem[];
 };
 
-export default function ChloroplethLegenda(props: TProps) {
+export function ChloroplethLegenda(props: TProps) {
   const { items, title } = props;
 
   return (

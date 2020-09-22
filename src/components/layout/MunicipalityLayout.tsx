@@ -8,24 +8,22 @@ import municipalities from '~/data/gemeente_veiligheidsregio.json';
 import { IMunicipalityData } from '~/static-props/municipality-data';
 
 import { getLocalTitleForMuncipality } from '~/utils/getLocalTitleForCode';
-import getSafetyRegionForMunicipalityCode from '~/utils/getSafetyRegionForMunicipalityCode';
+import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMunicipalityCode';
 import { getSewerWaterBarScaleData } from '~/utils/sewer-water/municipality-sewer-water.util';
-import useMediaQuery from '~/utils/useMediaQuery';
+import { useMediaQuery } from '~/utils/useMediaQuery';
 
 import { PositivelyTestedPeopleBarScale } from '~/components/gemeente/positively-tested-people-barscale';
 import { IntakeHospitalBarScale } from '~/components/gemeente/intake-hospital-barscale';
 import { SewerWaterBarScale } from '~/components/gemeente/sewer-water-barscale';
 
-import TitleWithIcon from '~/components/titleWithIcon';
+import { TitleWithIcon } from '~/components/titleWithIcon';
 import { getLayout as getSiteLayout } from '~/components/layout';
-import Combobox from '~/components/comboBox';
+import { ComboBox } from '~/components/comboBox';
 
 import GetestIcon from '~/assets/test.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import Arrow from '~/assets/arrow.svg';
-
-export default MunicipalityLayout;
 
 interface IMunicipality {
   name: string;
@@ -128,7 +126,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
           </Link>
         )}
         <aside className="municipality-aside">
-          <Combobox<IMunicipality>
+          <ComboBox<IMunicipality>
             placeholder={siteText.common.zoekveld_placeholder_gemeente}
             handleSelect={handleMunicipalitySelect}
             options={municipalities}

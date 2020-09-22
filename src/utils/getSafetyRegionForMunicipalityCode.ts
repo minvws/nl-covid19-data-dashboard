@@ -7,7 +7,7 @@ import regios from '~/data/index';
  *
  * @param code
  */
-export default function getSafetyRegionForMunicipalityCode(
+export function getSafetyRegionForMunicipalityCode(
   code: string
 ): { name: string; code: string; id: number } | undefined {
   const municipality = municipalities.find((mun) => mun.gemcode === code);

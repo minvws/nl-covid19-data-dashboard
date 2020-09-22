@@ -1,7 +1,6 @@
 import { FCWithLayout } from '~/components/layout';
 import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
 import { ContentHeader } from '~/components/layout/Content';
-import { IntakeHospitalBarScale } from '~/components/gemeente/intake-hospital-barscale';
 
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 
@@ -15,14 +14,16 @@ import {
   IMunicipalityData,
 } from '~/static-props/municipality-data';
 
+import { IntakeHospitalBarScale } from '~/components/gemeente/intake-hospital-barscale';
+
 import { getLocalTitleForMuncipality } from '~/utils/getLocalTitleForCode';
 
 const text: typeof siteText.gemeente_ziekenhuisopnames_per_dag =
   siteText.gemeente_ziekenhuisopnames_per_dag;
 
-import MunicipalityChloropleth from '~/components/chloropleth/MunicipalityChloropleth';
-import hospitalAdmissionsTooltip from '~/components/chloropleth/tooltips/municipal/hospitalAdmissionsTooltip';
-import MunicipalityLegenda from '~/components/chloropleth/legenda/MunicipalityLegenda';
+import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
+import { hospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/municipal/hospitalAdmissionsTooltip';
+import { MunicipalityLegenda } from '~/components/chloropleth/legenda/MunicipalityLegenda';
 
 const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
   const { data } = props;

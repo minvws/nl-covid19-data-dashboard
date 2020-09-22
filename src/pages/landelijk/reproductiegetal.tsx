@@ -1,8 +1,9 @@
-import Legenda from '~/components/legenda';
+import { Legenda } from '~/components/legenda';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { AreaChart } from '~/components/charts/index';
 import { ContentHeader } from '~/components/layout/Content';
+
 import { ReproductionIndexBarScale } from '~/components/landelijk/reproduction-index-barscale';
 
 import Repro from '~/assets/reproductiegetal.svg';

@@ -118,7 +118,13 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de trend van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
+    "barscale_keys": [
+      "0 tot 20",
+      "20 tot 40",
+      "40 tot 60",
+      "60 tot 80",
+      "80+"
+    ],
     "cluster_datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "cluster_bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
@@ -526,13 +532,6 @@
       "verpleeghuis": "Verpleeghuiszorg"
     }
   },
-  "gemeente_layout": {
-    "headings": {
-      "medisch": "Medische indicatoren",
-      "overig": "Vroegsignalering",
-      "verpleeghuis": "Verpleeghuiszorg"
-    }
-  },
   "veiligheidsregio_metadata": {
     "title": "Regionaal Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
     "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
@@ -543,12 +542,12 @@
   },
   "veiligheidsregio_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Ziekenhuisopnames per dag",
-    "titel": "Ziekenhuisopnames per dag in {{safetyRegion}}",
+    "titel": "Ziekenhuisopnames per dag van inwoners {{safetyRegion}}",
     "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen.",
     "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
     "screen_reader_graph_content": "{{value}} opnames.",
     "barscale_titel": "Ziekenhuisopnames per dag",
-    "extra_uitleg": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen.",
+    "extra_uitleg": "Aantal mensen uit deze veiligheidsregio met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen.",
     "map_titel": "Verdeling ziekenhuisopnames in {{safetyRegion}}",
     "map_toelichting": "Deze grafieken laten zien hoe de verdeling van ziekenhuisopnames is in Nederland per dag.",
     "linechart_titel": "Ziekenhuisopnames over tijd",
@@ -576,7 +575,13 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de trend van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
+    "barscale_keys": [
+      "0 tot 20",
+      "20 tot 40",
+      "40 tot 60",
+      "60 tot 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -619,12 +624,12 @@
   },
   "gemeente_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Ziekenhuisopnames per dag",
-    "titel": "Ziekenhuisopnames per dag in {{municipality}}",
+    "titel": "Ziekenhuisopnames per dag van inwoners {{municipality}}",
     "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen.",
     "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
     "screen_reader_graph_content": "{{value}} opnames.",
     "barscale_titel": "Ziekenhuisopnames per dag",
-    "extra_uitleg": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen.",
+    "extra_uitleg": "Aantal mensen uit deze gemeente met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen.",
     "map_titel": "Verdeling ziekenhuisopnames in {{municipality}}",
     "map_toelichting": "Deze grafieken laten zien hoe de verdeling van ziekenhuisopnames is in Nederland per dag.",
     "linechart_titel": "Ziekenhuisopnames over tijd",
@@ -652,7 +657,13 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de trend van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": ["0 to 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 tot 40",
+      "40 tot 60",
+      "60 tot 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -714,5 +725,12 @@
       "titel": "Legenda"
     },
     "valid_from": "Geldig vanaf {{validFrom}}"
+  },
+  "gemeente_layout": {
+    "headings": {
+      "medisch": "Medische indicatoren",
+      "overig": "Vroegsignalering",
+      "verpleeghuis": "Verpleeghuiszorg"
+    }
   }
 }

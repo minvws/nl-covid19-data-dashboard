@@ -13,9 +13,7 @@ const createLabel = (list: ChloroplethThresholdsValue[], index: number) => {
   return `${list[index].threshold} - ${list[index + 1].threshold}`;
 };
 
-export default function useLegendaItems(
-  thresholds?: ChloroplethThresholdsValue[]
-) {
+export function useLegendaItems(thresholds?: ChloroplethThresholdsValue[]) {
   return useMemo(() => {
     if (!thresholds) {
       return;
