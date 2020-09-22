@@ -12,6 +12,7 @@ import styles from './lineChart.module.scss';
 import { formatNumber } from '~/utils/formatNumber';
 import { formatDate } from '~/utils/formatDate';
 import { getWeekStartEndByIndex, Week } from '~/utils/getWeekStartEndByIndex';
+import { assert } from '~/utils/assert';
 
 interface Value {
   date: number;
@@ -97,11 +98,10 @@ function getOptions(values: Value[]): Highcharts.Options {
         // types say `rotation` needs to be a number,
         // but that doesn’t work.
         rotation: '0' as any,
-        formatter: function (): string {
-          if (this.isFirst || this.isLast) {
-            return formatDate(this.value * 1000, 'axis');
-          }
-          return '';
+        formatter: function () {
+          return this.isFirst || this.isLast
+            ? formatDate(this.value * 1000, 'axis')
+            : '';
         },
       },
     },
@@ -109,11 +109,13 @@ function getOptions(values: Value[]): Highcharts.Options {
       backgroundColor: '#FFF',
       borderColor: '#01689B',
       borderRadius: 0,
-      formatter: function (): string {
+      formatter: function () {
         const { start, end } = getWeekStartEndByIndex(
           values.map((x) => x.week),
           this.point.index
         );
+        assert(typeof start === 'number' && typeof end === 'number');
+
         return `<strong>${formatDate(start * 1000, 'short')} - ${formatDate(
           end * 1000,
           'short'
