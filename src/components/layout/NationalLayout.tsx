@@ -32,8 +32,6 @@ import { WithChildren } from 'types';
 
 import { INationalData } from 'static-props/nl-data';
 
-export default NationalLayout;
-
 export function getNationalLayout() {
   return function (
     page: React.ReactNode,

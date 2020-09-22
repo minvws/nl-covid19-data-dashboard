@@ -23,8 +23,6 @@ import Ziekenhuis from 'assets/ziekenhuis.svg';
 import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
 import Arrow from 'assets/arrow.svg';
 
-export default SafetyRegionLayout;
-
 export function getSafetyRegionLayout() {
   return function (
     page: React.ReactNode,

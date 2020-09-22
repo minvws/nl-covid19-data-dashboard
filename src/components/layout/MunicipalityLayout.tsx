@@ -25,8 +25,6 @@ import Ziekenhuis from 'assets/ziekenhuis.svg';
 import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
 import Arrow from 'assets/arrow.svg';
 
-export default MunicipalityLayout;
-
 interface IMunicipality {
   name: string;
   safetyRegion: string;
