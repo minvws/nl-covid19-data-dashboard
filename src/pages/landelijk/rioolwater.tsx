@@ -12,9 +12,7 @@ import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 
 const text: typeof siteText.rioolwater_metingen = siteText.rioolwater_metingen;
 
-const SewerWater: FCWithLayout<INationalData> = (props: {
-  data: RioolwaterMetingen | undefined;
-}) => {
+const SewerWater: FCWithLayout<INationalData> = (props) => {
   const { data: state } = props;
 
   const data: RioolwaterMetingen | undefined = state?.rioolwater_metingen;
@@ -54,7 +52,6 @@ const SewerWater: FCWithLayout<INationalData> = (props: {
             values={data.values.map((value) => ({
               value: Number(value.average),
               date: value.week_unix,
-              // TO DO: add start_week and end_week
               // week: { start: value.week_start_unix, end: value.week_end_unix }
             }))}
           />
