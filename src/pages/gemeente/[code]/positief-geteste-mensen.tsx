@@ -1,4 +1,4 @@
-import BarScale from 'components/barScale';
+import { BarScale } from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
 import { getMunicipalityLayout } from 'components/layout/MunicipalityLayout';
 
@@ -8,7 +8,7 @@ import { LineChart } from 'components/charts/index';
 import { ContentHeader } from 'components/layout/Content';
 
 import Getest from 'assets/test.svg';
-import formatDecimal from 'utils/formatNumber';
+import { formatNumber } from 'utils/formatNumber';
 import { PositiveTestedPeople } from 'types/data.d';
 import {
   getMunicipalityData,
@@ -17,9 +17,9 @@ import {
 } from 'static-props/municipality-data';
 import { getLocalTitleForMuncipality } from 'utils/getLocalTitleForCode';
 
-import MunicipalityChloropleth from 'components/chloropleth/MunicipalityChloropleth';
-import positiveTestedPeopleTooltip from 'components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
-import MunicipalityLegenda from 'components/chloropleth/legenda/MunicipalityLegenda';
+import { MunicipalityChloropleth } from 'components/chloropleth/MunicipalityChloropleth';
+import { positiveTestedPeopleMunicipalTooltip } from 'components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
+import { MunicipalityLegenda } from 'components/chloropleth/legenda/MunicipalityLegenda';
 
 const text: typeof siteText.gemeente_positief_geteste_personen =
   siteText.gemeente_positief_geteste_personen;
@@ -91,7 +91,7 @@ const PostivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
             <h3>
               {text.kpi_titel}{' '}
               <span className="text-blue kpi">
-                {formatDecimal(
+                {formatNumber(
                   positivelyTestedPeople.last_value.infected_daily_total
                 )}
               </span>
@@ -129,7 +129,7 @@ const PostivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
           <MunicipalityChloropleth
             selected={data.code}
             metricName="positive_tested_people"
-            tooltipContent={positiveTestedPeopleTooltip}
+            tooltipContent={positiveTestedPeopleMunicipalTooltip}
           />
         </div>
       </article>

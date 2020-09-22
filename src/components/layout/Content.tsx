@@ -1,10 +1,8 @@
-import Metadata from 'components/metadata';
-import TitleWithIcon from 'components/titleWithIcon';
+import { Metadata } from 'components/metadata';
+import { TitleWithIcon } from 'components/titleWithIcon';
 import styles from './layout.module.scss';
 
-export { ContentHeader };
-
-function ContentHeader(props: IContentHeaderProps) {
+export function ContentHeader(props: IContentHeaderProps) {
   const { category, Icon, title, subtitle, metadata } = props;
 
   return (

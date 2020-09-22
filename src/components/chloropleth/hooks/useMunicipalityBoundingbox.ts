@@ -10,7 +10,7 @@ import { useMemo } from 'react';
  * @param regionGeo
  * @param selectedMunicipality
  */
-export default function useMunicipalityBoundingbox(
+export function useMunicipalityBoundingbox(
   regionGeo: FeatureCollection<MultiPolygon, SafetyRegionProperties>,
   selectedMunicipality?: string
 ): [FeatureCollection<MultiPolygon>, string] | [undefined, undefined] {

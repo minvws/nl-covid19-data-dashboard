@@ -1,6 +1,6 @@
 import styles from './chartTimeControls.module.scss';
 
-import RadioGroup, { IRadioGroupItem } from 'components/radioGroup';
+import { RadioGroup, IRadioGroupItem } from 'components/radioGroup';
 
 import text from 'locale';
 
@@ -12,9 +12,7 @@ interface IProps {
   timeframeOptions: TimeframeOption[];
 }
 
-export default ChartTimeControls;
-
-function ChartTimeControls(props: IProps) {
+export function ChartTimeControls(props: IProps) {
   const { timeframe, onChange, timeframeOptions } = props;
 
   const values = timeframeOptions.map<IRadioGroupItem>((key) => ({

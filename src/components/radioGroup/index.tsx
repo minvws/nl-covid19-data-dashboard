@@ -19,7 +19,7 @@ export interface IProps {
  *
  * @param props
  */
-export default function RadioGroup(props: IProps) {
+export function RadioGroup(props: IProps) {
   const { onChange, values, className, value } = props;
   const [selected, setSelected] = useState<string>(value ?? values?.[0].value);
 

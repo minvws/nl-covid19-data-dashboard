@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import styles from 'components/chloropleth/chloropleth.module.scss';
 import { SafetyRegionProperties } from 'components/chloropleth/shared';
 
-export default function hospitalAdmissionsTooltip(
+export function hospitalAdmissionsTooltip(
   context: SafetyRegionProperties & { value: number }
 ): ReactNode {
   return (

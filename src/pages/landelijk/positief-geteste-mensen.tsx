@@ -1,14 +1,14 @@
 import { useState } from 'react';
 
-import BarScale from 'components/barScale';
+import { BarScale } from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
 import { getNationalLayout } from 'components/layout/NationalLayout';
 import { LineChart, BarChart } from 'components/charts/index';
 import { ContentHeader } from 'components/layout/Content';
-import ChartRegionControls from 'components/chartRegionControls';
+import { ChartRegionControls } from 'components/chartRegionControls';
 
 import Getest from 'assets/test.svg';
-import formatDecimal from 'utils/formatNumber';
+import { formatNumber } from 'utils/formatNumber';
 
 import siteText from 'locale';
 
@@ -19,12 +19,12 @@ import {
 } from 'types/data.d';
 
 import getNlData, { INationalData } from 'static-props/nl-data';
-import MunicipalityChloropleth from 'components/chloropleth/MunicipalityChloropleth';
-import SafetyRegionChloropleth from 'components/chloropleth/SafetyRegionChloropleth';
-import positiveTestedPeopleTooltip from 'components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
-import positiveTestedPeopleTooltipRegion from 'components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
-import MunicipalityLegenda from 'components/chloropleth/legenda/MunicipalityLegenda';
-import SafetyRegionLegenda from 'components/chloropleth/legenda/SafetyRegionLegenda';
+import { MunicipalityChloropleth } from 'components/chloropleth/MunicipalityChloropleth';
+import { SafetyRegionChloropleth } from 'components/chloropleth/SafetyRegionChloropleth';
+import { positiveTestedPeopleMunicipalTooltip } from 'components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
+import { positiveTestedPeopleRegionTooltip } from 'components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
+import { MunicipalityLegenda } from 'components/chloropleth/legenda/MunicipalityLegenda';
+import { SafetyRegionLegenda } from 'components/chloropleth/legenda/SafetyRegionLegenda';
 
 const text: typeof siteText.positief_geteste_personen =
   siteText.positief_geteste_personen;
@@ -113,7 +113,7 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
             <h3>
               {text.kpi_titel}{' '}
               <span className="text-blue kpi">
-                {formatDecimal(total.last_value.infected_daily_total)}
+                {formatNumber(total.last_value.infected_daily_total)}
               </span>
             </h3>
           )}
@@ -147,13 +147,13 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           {selectedMap === 'municipal' && (
             <MunicipalityChloropleth
               metricName="positive_tested_people"
-              tooltipContent={positiveTestedPeopleTooltip}
+              tooltipContent={positiveTestedPeopleMunicipalTooltip}
             />
           )}
           {selectedMap === 'region' && (
             <SafetyRegionChloropleth
               metricName="positive_tested_people"
-              tooltipContent={positiveTestedPeopleTooltipRegion}
+              tooltipContent={positiveTestedPeopleRegionTooltip}
             />
           )}
         </div>

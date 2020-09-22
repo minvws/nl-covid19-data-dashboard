@@ -8,9 +8,9 @@ import text from 'locale';
 import styles from 'components/chloropleth/chloropleth.module.scss';
 
 import { ReactNode } from 'react';
-import MunicipalityChloropleth from 'components/chloropleth/MunicipalityChloropleth';
+import { MunicipalityChloropleth } from 'components/chloropleth/MunicipalityChloropleth';
 import { MunicipalityProperties } from 'components/chloropleth/shared';
-import useMediaQuery from 'utils/useMediaQuery';
+import { useMediaQuery } from 'utils/useMediaQuery';
 
 const tooltipContent = (router: NextRouter) => {
   return (context: MunicipalityProperties): ReactNode => {

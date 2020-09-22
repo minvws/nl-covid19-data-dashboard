@@ -1,7 +1,7 @@
 import { NextRouter } from 'next/router';
 import { ReactNode } from 'react';
-import formatDate from 'utils/formatDate';
-import replaceVariablesInText from 'utils/replaceVariablesInText';
+import { formatDate } from 'utils/formatDate';
+import { replaceVariablesInText } from 'utils/replaceVariablesInText';
 
 import text from 'locale';
 import styles from '../tooltip.module.scss';

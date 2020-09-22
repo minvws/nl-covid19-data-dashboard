@@ -2,14 +2,15 @@ import { useMemo, useState } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-import ChartTimeControls, {
+import {
+  ChartTimeControls,
   TimeframeOption,
 } from 'components/chartTimeControls';
 
+import { formatNumber } from 'utils/formatNumber';
+import { formatDate } from 'utils/formatDate';
 import text from 'locale';
 
-import formatNumber from 'utils/formatNumber';
-import formatDate from 'utils/formatDate';
 import { getFilteredValues } from 'components/chartTimeControls/chartTimeControlUtils';
 
 if (typeof Highcharts === 'object') {
@@ -36,8 +37,6 @@ type IGetOptions = Omit<AreaChartProps, 'data'> & {
   rangeData: TRange[];
   lineData: TLine[];
 };
-
-export default AreaChart;
 
 function getOptions(props: IGetOptions): Highcharts.Options {
   const {
@@ -176,7 +175,7 @@ function getOptions(props: IGetOptions): Highcharts.Options {
   return options;
 }
 
-function AreaChart(props: AreaChartProps) {
+export default function AreaChart(props: AreaChartProps) {
   const {
     rangeLegendLabel,
     lineLegendLabel,

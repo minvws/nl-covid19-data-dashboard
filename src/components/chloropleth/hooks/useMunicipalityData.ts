@@ -24,7 +24,7 @@ export type TMunicipalityDataInfo<T> = [TGetMunicipalityFunc<T>, boolean];
  * @param metricName
  * @param featureCollection
  */
-export default function useMunicipalityData<
+export function useMunicipalityData<
   T extends TMunicipalityMetricName,
   ItemType extends Municipalities[T][number],
   ReturnType extends ItemType & MunicipalityProperties & { value: number }

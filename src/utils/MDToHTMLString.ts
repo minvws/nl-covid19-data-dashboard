@@ -17,6 +17,6 @@ const processor = unified()
   .use(remark2rehype)
   .use(html);
 
-export default function MDToHTMLString(str: string): string {
+export function MDToHTMLString(str: string): string {
   return processor.processSync(str).toString();
 }

@@ -1,4 +1,4 @@
-import BarScale from 'components/barScale';
+import { BarScale } from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
 import { getSafetyRegionLayout } from 'components/layout/SafetyRegionLayout';
 import { LineChart } from 'components/charts/index';
@@ -7,7 +7,7 @@ import { ContentHeader } from 'components/layout/Content';
 import siteText from 'locale';
 
 import Getest from 'assets/test.svg';
-import formatDecimal from 'utils/formatNumber';
+import { formatNumber } from 'utils/formatNumber';
 import { ResultsPerRegion } from 'types/data.d';
 
 import {
@@ -16,9 +16,9 @@ import {
   ISafetyRegionData,
 } from 'static-props/safetyregion-data';
 import { getLocalTitleForRegion } from 'utils/getLocalTitleForCode';
-import positiveTestedPeopleTooltip from 'components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
-import MunicipalityLegenda from 'components/chloropleth/legenda/MunicipalityLegenda';
-import MunicipalityChloropleth from 'components/chloropleth/MunicipalityChloropleth';
+import { positiveTestedPeopleMunicipalTooltip } from 'components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
+import { MunicipalityLegenda } from 'components/chloropleth/legenda/MunicipalityLegenda';
+import { MunicipalityChloropleth } from 'components/chloropleth/MunicipalityChloropleth';
 import regionCodeToMunicipalCodeLookup from 'data/regionCodeToMunicipalCodeLookup';
 
 const text: typeof siteText.veiligheidsregio_positief_geteste_personen =
@@ -102,7 +102,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
             <h3>
               {text.kpi_titel}{' '}
               <span className="text-blue kpi">
-                {formatDecimal(
+                {formatNumber(
                   Math.round(
                     resultsPerRegion.last_value
                       .total_reported_increase_per_region
@@ -143,7 +143,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
             selected={selectedMunicipalCode}
             highlightSelection={false}
             metricName="positive_tested_people"
-            tooltipContent={positiveTestedPeopleTooltip}
+            tooltipContent={positiveTestedPeopleMunicipalTooltip}
           />
         </div>
       </article>

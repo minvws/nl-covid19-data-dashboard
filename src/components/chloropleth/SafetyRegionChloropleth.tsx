@@ -6,14 +6,14 @@ import {
 } from './shared';
 import { Regions } from 'types/data';
 import { CSSProperties, ReactNode, useCallback } from 'react';
-import useChartDimensions from './hooks/useChartDimensions';
-import Chloropleth from './Chloropleth';
+import { useChartDimensions } from './hooks/useChartDimensions';
+import { Chloropleth } from './Chloropleth';
 import { countryGeo, regionGeo } from './topology';
 import { Feature, MultiPolygon } from 'geojson';
 import styles from './chloropleth.module.scss';
-import useSafetyRegionBoundingbox from './hooks/useSafetyRegionBoundingbox';
-import useChloroplethColorScale from './hooks/useChloroplethColorScale';
-import useSafetyRegionData from './hooks/useSafetyRegionData';
+import { useSafetyRegionBoundingbox } from './hooks/useSafetyRegionBoundingbox';
+import { useChloroplethColorScale } from './hooks/useChloroplethColorScale';
+import { useSafetyRegionData } from './hooks/useSafetyRegionData';
 
 type RegionalThresholds = ChloroplethThresholds<TRegionMetricName>;
 
@@ -128,7 +128,7 @@ export type TProps<
  *
  * @param props
  */
-export default function SafetyRegionChloropleth<
+export function SafetyRegionChloropleth<
   T extends TRegionMetricName,
   ItemType extends Regions[T][number],
   ReturnType extends ItemType & { value: number },

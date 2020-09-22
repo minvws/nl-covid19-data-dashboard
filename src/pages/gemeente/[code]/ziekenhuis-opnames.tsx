@@ -1,4 +1,4 @@
-import BarScale from 'components/barScale';
+import { BarScale } from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
 import { getMunicipalityLayout } from 'components/layout/MunicipalityLayout';
 import { ContentHeader } from 'components/layout/Content';
@@ -20,9 +20,9 @@ import { getLocalTitleForMuncipality } from 'utils/getLocalTitleForCode';
 const text: typeof siteText.gemeente_ziekenhuisopnames_per_dag =
   siteText.gemeente_ziekenhuisopnames_per_dag;
 
-import MunicipalityChloropleth from 'components/chloropleth/MunicipalityChloropleth';
-import hospitalAdmissionsTooltip from 'components/chloropleth/tooltips/municipal/hospitalAdmissionsTooltip';
-import MunicipalityLegenda from 'components/chloropleth/legenda/MunicipalityLegenda';
+import { MunicipalityChloropleth } from 'components/chloropleth/MunicipalityChloropleth';
+import { hospitalAdmissionsTooltip } from 'components/chloropleth/tooltips/municipal/hospitalAdmissionsTooltip';
+import { MunicipalityLegenda } from 'components/chloropleth/legenda/MunicipalityLegenda';
 
 export function IntakeHospitalBarScale(props: {
   data: HospitalAdmissions | undefined;
