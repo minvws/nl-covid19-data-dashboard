@@ -1,5 +1,5 @@
 import styles from './maxWidth.module.scss';
-import { WithChildren } from 'types';
+import { WithChildren } from '@/types/index';
 
 export default MaxWidth;
 

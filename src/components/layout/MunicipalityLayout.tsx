@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import siteText from '@/locale/index';
-import { WithChildren } from 'types';
+import { WithChildren } from '@/types/index';
 import municipalities from '@/data/gemeente_veiligheidsregio.json';
 import { IMunicipalityData } from '@/static-props/municipality-data';
 

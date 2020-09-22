@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { WithChildren } from 'types';
+import { WithChildren } from '@/types/index';
 import text from '@/locale/index';
 import { ILastGeneratedData } from '@/static-props/last-generated-data';
 import styles from './layout.module.scss';

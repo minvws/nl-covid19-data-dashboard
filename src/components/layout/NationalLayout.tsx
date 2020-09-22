@@ -28,7 +28,7 @@ import Notification from '@/assets/notification.svg';
 
 import siteText from '@/locale/index';
 
-import { WithChildren } from 'types';
+import { WithChildren } from '@/types/index';
 
 import { INationalData } from '@/static-props/nl-data';
 

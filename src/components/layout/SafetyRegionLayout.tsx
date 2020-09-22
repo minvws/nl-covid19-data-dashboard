@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 
 import siteText from '@/locale/index';
 import safetyRegions from '@/data/index';
-import { WithChildren } from 'types';
+import { WithChildren } from '@types/index';
 import { ISafetyRegionData } from '@/static-props/safetyregion-data';
 
 import useMediaQuery from '@/utils/useMediaQuery';
