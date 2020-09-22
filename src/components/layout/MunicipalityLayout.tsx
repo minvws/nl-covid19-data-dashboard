@@ -12,9 +12,9 @@ import getSafetyRegionForMunicipalityCode from '@/utils/getSafetyRegionForMunici
 import { getSewerWaterBarScaleData } from '@/utils/sewer-water/municipality-sewer-water.util';
 import useMediaQuery from '@/utils/useMediaQuery';
 
-import { PostivelyTestedPeopleBarScale } from '@/pages/gemeente/[code]/positief-geteste-mensen';
-import { IntakeHospitalBarScale } from '@/pages/gemeente/[code]/ziekenhuis-opnames';
-import { SewerWaterBarScale } from '@/pages/gemeente/[code]/rioolwater';
+import { PositivelyTestedPeopleBarScale } from '@/components/veiligheidsregio/positive-tested-people-barscale';
+import { IntakeHospitalBarScale } from '@/components/veiligheidsregio/intake-hospital-barscale';
+import { SewerWaterBarScale } from '@/components/veiligheidsregio/sewer-water-barscale';
 
 import TitleWithIcon from '@/components/titleWithIcon';
 import { getLayout as getSiteLayout } from '@/components/layout';
@@ -176,7 +176,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                         }
                       />
                       <span>
-                        <PostivelyTestedPeopleBarScale
+                        <PositivelyTestedPeopleBarScale
                           data={data?.positive_tested_people}
                           showAxis={true}
                         />

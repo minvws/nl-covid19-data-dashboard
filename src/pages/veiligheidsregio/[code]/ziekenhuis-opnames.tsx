@@ -1,4 +1,3 @@
-import BarScale from '@/components/barScale';
 import { FCWithLayout } from '@/components/layout';
 import { getSafetyRegionLayout } from '@/components/layout/SafetyRegionLayout';
 import { ContentHeader } from '@/components/layout/Content';
@@ -9,6 +8,7 @@ import siteText from '@/locale/index';
 
 import { ResultsPerRegion } from '@/types/data.d';
 import { LineChart } from '@/components/charts/index';
+import { IntakeHospitalBarScale } from '@/components/veiligheidsregio/intake-hospital-barscale';
 
 import {
   getSafetyRegionData,
@@ -23,33 +23,6 @@ import regionCodeToMunicipalCodeLookup from '@/data/regionCodeToMunicipalCodeLoo
 
 const text: typeof siteText.veiligheidsregio_ziekenhuisopnames_per_dag =
   siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
-
-export function IntakeHospitalBarScale(props: {
-  data: ResultsPerRegion | undefined;
-  showAxis: boolean;
-}) {
-  const { data, showAxis } = props;
-
-  if (!data) return null;
-
-  return (
-    <BarScale
-      min={0}
-      max={100}
-      screenReaderText={text.barscale_screenreader_text}
-      value={data.last_value.hospital_moving_avg_per_region}
-      id="opnames"
-      rangeKey="hospital_moving_avg_per_region"
-      gradient={[
-        {
-          color: '#3391CC',
-          value: 0,
-        },
-      ]}
-      showAxis={showAxis}
-    />
-  );
-}
 
 const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
   const { data } = props;

@@ -1,10 +1,11 @@
 import Link from 'next/link';
 
-import BarScale from '@/components/barScale';
 import Legenda from '@/components/legenda';
 import { FCWithLayout } from '@/components/layout';
 import { getNationalLayout } from '@/components/layout/NationalLayout';
 import { AreaChart } from '@/components/charts/index';
+
+import { InfectiousPeopleBarScale } from '@/components/landelijk/infectious-people-barscale';
 
 import Ziektegolf from '@/assets/ziektegolf.svg';
 
@@ -21,33 +22,6 @@ import getNlData, { INationalData } from '@/static-props/nl-data';
 
 const text: typeof siteText.besmettelijke_personen =
   siteText.besmettelijke_personen;
-
-export function InfectiousPeopleBarScale(props: {
-  data: InfectiousPeopleCountNormalized | undefined;
-  showAxis: boolean;
-}) {
-  const { data, showAxis } = props;
-
-  if (!data) return null;
-
-  return (
-    <BarScale
-      min={0}
-      max={80}
-      screenReaderText={text.barscale_screenreader_text}
-      value={data.last_value.infectious_avg_normalized}
-      id="besmettelijk"
-      rangeKey="infectious_normalized_high"
-      gradient={[
-        {
-          color: '#3391CC',
-          value: 0,
-        },
-      ]}
-      showAxis={showAxis}
-    />
-  );
-}
 
 const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
   const { data } = props;

@@ -10,8 +10,7 @@
       "@/locale/*": ["./src/locale/*"],
       "@/static-props/*": ["./src/static-props/*"],
       "@/types/*": ["./src/types/*"],
-      "@/utils/*": ["./src/utils/*"],
-      "@/pages/*": ["./src/pages/*"]
+      "@/utils/*": ["./src/utils/*"]
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
