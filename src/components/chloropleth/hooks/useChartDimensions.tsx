@@ -53,7 +53,7 @@ const useChartDimensions = (
    * The ref will be initialized from the outside by mutating the return value of this
    * hook. This is a bit funky.
    *
-   * @TODO pass ref as prop
+   * @REF https://trello.com/c/i25FG3jk/548-usechartdemensions-pass-ref-as-prop
    */
   const ref = useRef<HTMLElement | null>(null);
 
