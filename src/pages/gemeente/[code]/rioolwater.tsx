@@ -1,27 +1,27 @@
-import BarScale from 'components/barScale';
-import { FCWithLayout } from 'components/layout';
-import { getMunicipalityLayout } from 'components/layout/MunicipalityLayout';
-import { ContentHeader } from 'components/layout/Content';
+import BarScale from '@/components/barScale';
+import { FCWithLayout } from '@/components/layout';
+import { getMunicipalityLayout } from '@/components/layout/MunicipalityLayout';
+import { ContentHeader } from '@/components/layout/Content';
 
-import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
+import RioolwaterMonitoring from '@/assets/rioolwater-monitoring.svg';
 
-import siteText from 'locale';
+import siteText from '@/locale/index';
 
-import RegionalSewerWaterLineChart from 'components/lineChart/regionalSewerWaterLineChart';
+import RegionalSewerWaterLineChart from '@/components/lineChart/regionalSewerWaterLineChart';
 import { useMemo } from 'react';
-import BarChart from 'components/barChart';
+import BarChart from '@/components/barChart';
 import {
   SewerWaterBarScaleData,
   getSewerWaterBarScaleData,
   getSewerWaterLineChartData,
   getSewerWaterBarChartData,
-} from 'utils/sewer-water/municipality-sewer-water.util';
+} from '@/utils/sewer-water/municipality-sewer-water.util';
 import {
   getMunicipalityData,
   getMunicipalityPaths,
   IMunicipalityData,
-} from 'static-props/municipality-data';
-import { getLocalTitleForMuncipality } from 'utils/getLocalTitleForCode';
+} from '@/static-props/municipality-data';
+import { getLocalTitleForMuncipality } from '@/utils/getLocalTitleForCode';
 
 const text: typeof siteText.gemeente_rioolwater_metingen =
   siteText.gemeente_rioolwater_metingen;

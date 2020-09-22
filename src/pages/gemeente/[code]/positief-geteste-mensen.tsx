@@ -1,25 +1,25 @@
-import BarScale from 'components/barScale';
-import { FCWithLayout } from 'components/layout';
-import { getMunicipalityLayout } from 'components/layout/MunicipalityLayout';
+import BarScale from '@/components/barScale';
+import { FCWithLayout } from '@/components/layout';
+import { getMunicipalityLayout } from '@/components/layout/MunicipalityLayout';
 
-import siteText from 'locale';
+import siteText from '@/locale/index';
 
-import { LineChart } from 'components/charts/index';
-import { ContentHeader } from 'components/layout/Content';
+import { LineChart } from '@/components/charts/index';
+import { ContentHeader } from '@/components/layout/Content';
 
-import Getest from 'assets/test.svg';
-import formatDecimal from 'utils/formatNumber';
-import { PositiveTestedPeople } from 'types/data.d';
+import Getest from '@/assets/test.svg';
+import formatDecimal from '@/utils/formatNumber';
+import { PositiveTestedPeople } from '@/types/data.d';
 import {
   getMunicipalityData,
   getMunicipalityPaths,
   IMunicipalityData,
-} from 'static-props/municipality-data';
-import { getLocalTitleForMuncipality } from 'utils/getLocalTitleForCode';
+} from '@/static-props/municipality-data';
+import { getLocalTitleForMuncipality } from '@/utils/getLocalTitleForCode';
 
-import MunicipalityChloropleth from 'components/chloropleth/MunicipalityChloropleth';
-import positiveTestedPeopleTooltip from 'components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
-import MunicipalityLegenda from 'components/chloropleth/legenda/MunicipalityLegenda';
+import MunicipalityChloropleth from '@/components/chloropleth/MunicipalityChloropleth';
+import positiveTestedPeopleTooltip from '@/components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
+import MunicipalityLegenda from '@/components/chloropleth/legenda/MunicipalityLegenda';
 
 const text: typeof siteText.gemeente_positief_geteste_personen =
   siteText.gemeente_positief_geteste_personen;

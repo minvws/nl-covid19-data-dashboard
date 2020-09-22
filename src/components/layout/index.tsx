@@ -3,17 +3,17 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { WithChildren } from 'types';
-import text from 'locale';
-import { ILastGeneratedData } from 'static-props/last-generated-data';
+import text from '@/locale/index';
+import { ILastGeneratedData } from '@/static-props/last-generated-data';
 import styles from './layout.module.scss';
 
-import useMediaQuery from 'utils/useMediaQuery';
-import formatDate from 'utils/formatDate';
-import replaceVariablesInText from 'utils/replaceVariablesInText';
-import getLocale from 'utils/getLocale';
+import useMediaQuery from '@/utils/useMediaQuery';
+import formatDate from '@/utils/formatDate';
+import replaceVariablesInText from '@/utils/replaceVariablesInText';
+import getLocale from '@/utils/getLocale';
 
-import SEOHead from 'components/seoHead';
-import MaxWidth from 'components/maxWidth';
+import SEOHead from '@/components/seoHead';
+import MaxWidth from '@/components/maxWidth';
 
 export interface LayoutProps {
   url?: string;

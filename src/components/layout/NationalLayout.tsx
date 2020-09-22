@@ -2,35 +2,35 @@ import Link from 'next/link';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-import TitleWithIcon from 'components/titleWithIcon';
-import { getLayout as getSiteLayout } from 'components/layout';
-import { ReproductionIndexBarScale } from 'pages/landelijk/reproductiegetal';
-import { PostivelyTestedPeopleBarScale } from 'pages/landelijk/positief-geteste-mensen';
-import { InfectiousPeopleBarScale } from 'pages/landelijk/besmettelijke-mensen';
-import { IntakeHospitalBarScale } from 'pages/landelijk/ziekenhuis-opnames';
-import { IntakeIntensiveCareBarscale } from 'pages/landelijk/intensive-care-opnames';
-import { SuspectedPatientsBarScale } from 'pages/landelijk/verdenkingen-huisartsen';
-import { SewerWaterBarScale } from 'pages/landelijk/rioolwater';
-import { NursingHomeInfectedPeopleBarScale } from 'pages/landelijk/verpleeghuis-positief-geteste-personen';
-import { NursingHomeInfectedLocationsBarScale } from 'pages/landelijk/verpleeghuis-besmette-locaties';
-import { NursingHomeDeathsBarScale } from 'pages/landelijk/verpleeghuis-sterfte';
+import TitleWithIcon from '@/components/titleWithIcon';
+import { getLayout as getSiteLayout } from '@/components/layout';
+import { ReproductionIndexBarScale } from '@/pages/landelijk/reproductiegetal';
+import { PostivelyTestedPeopleBarScale } from '@/pages/landelijk/positief-geteste-mensen';
+import { InfectiousPeopleBarScale } from '@/pages/landelijk/besmettelijke-mensen';
+import { IntakeHospitalBarScale } from '@/pages/landelijk/ziekenhuis-opnames';
+import { IntakeIntensiveCareBarscale } from '@/pages/landelijk/intensive-care-opnames';
+import { SuspectedPatientsBarScale } from '@/pages/landelijk/verdenkingen-huisartsen';
+import { SewerWaterBarScale } from '@/pages/landelijk/rioolwater';
+import { NursingHomeInfectedPeopleBarScale } from '@/pages/landelijk/verpleeghuis-positief-geteste-personen';
+import { NursingHomeInfectedLocationsBarScale } from '@/pages/landelijk/verpleeghuis-besmette-locaties';
+import { NursingHomeDeathsBarScale } from '@/pages/landelijk/verpleeghuis-sterfte';
 
-import GetestIcon from 'assets/test.svg';
-import ReproIcon from 'assets/reproductiegetal.svg';
-import Ziektegolf from 'assets/ziektegolf.svg';
-import Ziekenhuis from 'assets/ziekenhuis.svg';
-import Arts from 'assets/arts.svg';
-import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
-import Locatie from 'assets/locaties.svg';
-import CoronaVirus from 'assets/coronavirus.svg';
-import Arrow from 'assets/arrow.svg';
-import Notification from 'assets/notification.svg';
+import GetestIcon from '@/assets/test.svg';
+import ReproIcon from '@/assets/reproductiegetal.svg';
+import Ziektegolf from '@/assets/ziektegolf.svg';
+import Ziekenhuis from '@/assets/ziekenhuis.svg';
+import Arts from '@/assets/arts.svg';
+import RioolwaterMonitoring from '@/assets/rioolwater-monitoring.svg';
+import Locatie from '@/assets/locaties.svg';
+import CoronaVirus from '@/assets/coronavirus.svg';
+import Arrow from '@/assets/arrow.svg';
+import Notification from '@/assets/notification.svg';
 
-import siteText from 'locale';
+import siteText from '@/locale/index';
 
 import { WithChildren } from 'types';
 
-import { INationalData } from 'static-props/nl-data';
+import { INationalData } from '@/static-props/nl-data';
 
 export default NationalLayout;
 

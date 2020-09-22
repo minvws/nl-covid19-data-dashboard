@@ -1,27 +1,27 @@
-import BarScale from 'components/barScale';
-import { FCWithLayout } from 'components/layout';
-import { getSafetyRegionLayout } from 'components/layout/SafetyRegionLayout';
-import { ContentHeader } from 'components/layout/Content';
+import BarScale from '@/components/barScale';
+import { FCWithLayout } from '@/components/layout';
+import { getSafetyRegionLayout } from '@/components/layout/SafetyRegionLayout';
+import { ContentHeader } from '@/components/layout/Content';
 
-import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
+import RioolwaterMonitoring from '@/assets/rioolwater-monitoring.svg';
 
-import siteText from 'locale';
+import siteText from '@/locale/index';
 
-import RegionalSewerWaterLineChart from 'components/lineChart/regionalSewerWaterLineChart';
+import RegionalSewerWaterLineChart from '@/components/lineChart/regionalSewerWaterLineChart';
 import { useMemo } from 'react';
-import BarChart from 'components/barChart';
+import BarChart from '@/components/barChart';
 import {
   SewerWaterBarScaleData,
   getSewerWaterBarScaleData,
   getSewerWaterLineChartData,
   getSewerWaterBarChartData,
-} from 'utils/sewer-water/safety-region-sewer-water.util';
+} from '@/utils/sewer-water/safety-region-sewer-water.util';
 import {
   getSafetyRegionData,
   getSafetyRegionPaths,
   ISafetyRegionData,
-} from 'static-props/safetyregion-data';
-import { getLocalTitleForRegion } from 'utils/getLocalTitleForCode';
+} from '@/static-props/safetyregion-data';
+import { getLocalTitleForRegion } from '@/utils/getLocalTitleForCode';
 
 const text: typeof siteText.veiligheidsregio_rioolwater_metingen =
   siteText.veiligheidsregio_rioolwater_metingen;

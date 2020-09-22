@@ -1,15 +1,15 @@
-import BarScale from 'components/barScale';
-import { FCWithLayout } from 'components/layout';
-import { getNationalLayout } from 'components/layout/NationalLayout';
-import { ContentHeader } from 'components/layout/Content';
-import { LineChart } from 'components/charts/index';
+import BarScale from '@/components/barScale';
+import { FCWithLayout } from '@/components/layout';
+import { getNationalLayout } from '@/components/layout/NationalLayout';
+import { ContentHeader } from '@/components/layout/Content';
+import { LineChart } from '@/components/charts/index';
 
-import Getest from 'assets/test.svg';
+import Getest from '@/assets/test.svg';
 
-import siteText from 'locale';
+import siteText from '@/locale/index';
 
-import { InfectedPeopleNurseryCountDaily } from 'types/data.d';
-import getNlData, { INationalData } from 'static-props/nl-data';
+import { InfectedPeopleNurseryCountDaily } from '@/types/data.d';
+import getNlData, { INationalData } from '@/static-props/nl-data';
 
 const text: typeof siteText.verpleeghuis_positief_geteste_personen =
   siteText.verpleeghuis_positief_geteste_personen;

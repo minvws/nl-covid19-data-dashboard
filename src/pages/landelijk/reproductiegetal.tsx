@@ -1,17 +1,17 @@
-import BarScale from 'components/barScale';
-import Legenda from 'components/legenda';
-import { FCWithLayout } from 'components/layout';
-import { getNationalLayout } from 'components/layout/NationalLayout';
-import { AreaChart } from 'components/charts/index';
-import { ContentHeader } from 'components/layout/Content';
+import BarScale from '@/components/barScale';
+import Legenda from '@/components/legenda';
+import { FCWithLayout } from '@/components/layout';
+import { getNationalLayout } from '@/components/layout/NationalLayout';
+import { AreaChart } from '@/components/charts/index';
+import { ContentHeader } from '@/components/layout/Content';
 
-import Repro from 'assets/reproductiegetal.svg';
+import Repro from '@/assets/reproductiegetal.svg';
 
-import siteText from 'locale';
+import siteText from '@/locale/index';
 
-import { ReproductionIndex as ReproductionIndexData } from 'types/data.d';
+import { ReproductionIndex as ReproductionIndexData } from '@/types/data.d';
 
-import getNlData, { INationalData } from 'static-props/nl-data';
+import getNlData, { INationalData } from '@/static-props/nl-data';
 
 const text: typeof siteText.reproductiegetal = siteText.reproductiegetal;
 

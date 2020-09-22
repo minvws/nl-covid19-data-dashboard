@@ -1,30 +1,30 @@
 import { useState } from 'react';
 
-import BarScale from 'components/barScale';
-import { FCWithLayout } from 'components/layout';
-import { getNationalLayout } from 'components/layout/NationalLayout';
-import { LineChart, BarChart } from 'components/charts/index';
-import { ContentHeader } from 'components/layout/Content';
-import ChartRegionControls from 'components/chartRegionControls';
+import BarScale from '@/components/barScale';
+import { FCWithLayout } from '@/components/layout';
+import { getNationalLayout } from '@/components/layout/NationalLayout';
+import { LineChart, BarChart } from '@/components/charts/index';
+import { ContentHeader } from '@/components/layout/Content';
+import ChartRegionControls from '@/components/chartRegionControls';
 
-import Getest from 'assets/test.svg';
-import formatDecimal from 'utils/formatNumber';
+import Getest from '@/assets/test.svg';
+import formatDecimal from '@/utils/formatNumber';
 
-import siteText from 'locale';
+import siteText from '@/locale/index';
 
 import {
   InfectedPeopleDeltaNormalized,
   InfectedPeopleTotal,
   IntakeShareAgeGroups,
-} from 'types/data.d';
+} from '@/types/data.d';
 
-import getNlData, { INationalData } from 'static-props/nl-data';
-import MunicipalityChloropleth from 'components/chloropleth/MunicipalityChloropleth';
-import SafetyRegionChloropleth from 'components/chloropleth/SafetyRegionChloropleth';
-import positiveTestedPeopleTooltip from 'components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
-import positiveTestedPeopleTooltipRegion from 'components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
-import MunicipalityLegenda from 'components/chloropleth/legenda/MunicipalityLegenda';
-import SafetyRegionLegenda from 'components/chloropleth/legenda/SafetyRegionLegenda';
+import getNlData, { INationalData } from '@/static-props/nl-data';
+import MunicipalityChloropleth from '@/components/chloropleth/MunicipalityChloropleth';
+import SafetyRegionChloropleth from '@/components/chloropleth/SafetyRegionChloropleth';
+import positiveTestedPeopleTooltip from '@/components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
+import positiveTestedPeopleTooltipRegion from '@/components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
+import MunicipalityLegenda from '@/components/chloropleth/legenda/MunicipalityLegenda';
+import SafetyRegionLegenda from '@/components/chloropleth/legenda/SafetyRegionLegenda';
 
 const text: typeof siteText.positief_geteste_personen =
   siteText.positief_geteste_personen;

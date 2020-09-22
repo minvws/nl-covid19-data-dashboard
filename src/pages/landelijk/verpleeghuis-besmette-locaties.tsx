@@ -1,21 +1,21 @@
-import BarScale from 'components/barScale';
-import { ContentHeader } from 'components/layout/Content';
-import { FCWithLayout } from 'components/layout';
-import { getNationalLayout } from 'components/layout/NationalLayout';
-import { LineChart } from 'components/charts/index';
+import BarScale from '@/components/barScale';
+import { ContentHeader } from '@/components/layout/Content';
+import { FCWithLayout } from '@/components/layout';
+import { getNationalLayout } from '@/components/layout/NationalLayout';
+import { LineChart } from '@/components/charts/index';
 
-import Locatie from 'assets/locaties.svg';
+import Locatie from '@/assets/locaties.svg';
 
-import formatNumber from 'utils/formatNumber';
+import formatNumber from '@/utils/formatNumber';
 
-import siteText from 'locale';
+import siteText from '@/locale/index';
 
 import {
   TotalNewlyReportedLocations,
   TotalReportedLocations,
-} from 'types/data.d';
+} from '@/types/data.d';
 
-import getNlData, { INationalData } from 'static-props/nl-data';
+import getNlData, { INationalData } from '@/static-props/nl-data';
 
 const text: typeof siteText.verpleeghuis_besmette_locaties =
   siteText.verpleeghuis_besmette_locaties;

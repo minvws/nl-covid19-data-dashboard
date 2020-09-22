@@ -1,17 +1,17 @@
-import BarScale from 'components/barScale';
-import { ContentHeader } from 'components/layout/Content';
-import { FCWithLayout } from 'components/layout';
-import { getNationalLayout } from 'components/layout/NationalLayout';
-import { LineChart } from 'components/charts/index';
+import BarScale from '@/components/barScale';
+import { ContentHeader } from '@/components/layout/Content';
+import { FCWithLayout } from '@/components/layout';
+import { getNationalLayout } from '@/components/layout/NationalLayout';
+import { LineChart } from '@/components/charts/index';
 
-import Arts from 'assets/arts.svg';
+import Arts from '@/assets/arts.svg';
 
-import formatNumber from 'utils/formatNumber';
+import formatNumber from '@/utils/formatNumber';
 
-import siteText from 'locale';
+import siteText from '@/locale/index';
 
-import { VerdenkingenHuisartsen } from 'types/data.d';
-import getNlData, { INationalData } from 'static-props/nl-data';
+import { VerdenkingenHuisartsen } from '@/types/data.d';
+import getNlData, { INationalData } from '@/static-props/nl-data';
 
 const text: typeof siteText.verdenkingen_huisartsen =
   siteText.verdenkingen_huisartsen;

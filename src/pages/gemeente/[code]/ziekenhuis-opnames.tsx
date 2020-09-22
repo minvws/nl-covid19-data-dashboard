@@ -1,28 +1,28 @@
-import BarScale from 'components/barScale';
-import { FCWithLayout } from 'components/layout';
-import { getMunicipalityLayout } from 'components/layout/MunicipalityLayout';
-import { ContentHeader } from 'components/layout/Content';
+import BarScale from '@/components/barScale';
+import { FCWithLayout } from '@/components/layout';
+import { getMunicipalityLayout } from '@/components/layout/MunicipalityLayout';
+import { ContentHeader } from '@/components/layout/Content';
 
-import Ziekenhuis from 'assets/ziekenhuis.svg';
+import Ziekenhuis from '@/assets/ziekenhuis.svg';
 
-import siteText from 'locale';
+import siteText from '@/locale/index';
 
-import { HospitalAdmissions } from 'types/data.d';
-import { LineChart } from 'components/charts/index';
+import { HospitalAdmissions } from '@/types/data.d';
+import { LineChart } from '@/components/charts/index';
 import {
   getMunicipalityData,
   getMunicipalityPaths,
   IMunicipalityData,
-} from 'static-props/municipality-data';
+} from '@/static-props/municipality-data';
 
-import { getLocalTitleForMuncipality } from 'utils/getLocalTitleForCode';
+import { getLocalTitleForMuncipality } from '@/utils/getLocalTitleForCode';
 
 const text: typeof siteText.gemeente_ziekenhuisopnames_per_dag =
   siteText.gemeente_ziekenhuisopnames_per_dag;
 
-import MunicipalityChloropleth from 'components/chloropleth/MunicipalityChloropleth';
-import hospitalAdmissionsTooltip from 'components/chloropleth/tooltips/municipal/hospitalAdmissionsTooltip';
-import MunicipalityLegenda from 'components/chloropleth/legenda/MunicipalityLegenda';
+import MunicipalityChloropleth from '@/components/chloropleth/MunicipalityChloropleth';
+import hospitalAdmissionsTooltip from '@/components/chloropleth/tooltips/municipal/hospitalAdmissionsTooltip';
+import MunicipalityLegenda from '@/components/chloropleth/legenda/MunicipalityLegenda';
 
 export function IntakeHospitalBarScale(props: {
   data: HospitalAdmissions | undefined;

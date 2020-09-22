@@ -1,15 +1,15 @@
-import BarScale from 'components/barScale';
-import { ContentHeader } from 'components/layout/Content';
-import { FCWithLayout } from 'components/layout';
-import { getNationalLayout } from 'components/layout/NationalLayout';
-import { LineChart } from 'components/charts/index';
+import BarScale from '@/components/barScale';
+import { ContentHeader } from '@/components/layout/Content';
+import { FCWithLayout } from '@/components/layout';
+import { getNationalLayout } from '@/components/layout/NationalLayout';
+import { LineChart } from '@/components/charts/index';
 
-import CoronaVirus from 'assets/coronavirus.svg';
+import CoronaVirus from '@/assets/coronavirus.svg';
 
-import siteText from 'locale';
+import siteText from '@/locale/index';
 
-import { DeceasedPeopleNurseryCountDaily } from 'types/data.d';
-import getNlData, { INationalData } from 'static-props/nl-data';
+import { DeceasedPeopleNurseryCountDaily } from '@/types/data.d';
+import getNlData, { INationalData } from '@/static-props/nl-data';
 
 const text: typeof siteText.verpleeghuis_oversterfte =
   siteText.verpleeghuis_oversterfte;
