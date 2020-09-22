@@ -2,15 +2,16 @@ import React, { useMemo, useState } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import styles from './lineChart.module.scss';
-import text from 'locale';
+import text from '~/locale/index';
 
-import ChartTimeControls, {
+import {
+  ChartTimeControls,
   TimeframeOption,
-} from 'components/chartTimeControls';
+} from '~/components/chartTimeControls';
 
-import formatNumber from 'utils/formatNumber';
-import formatDate from 'utils/formatDate';
-import { getFilteredValues } from 'components/chartTimeControls/chartTimeControlUtils';
+import { formatNumber } from '~/utils/formatNumber';
+import { formatDate } from '~/utils/formatDate';
+import { getFilteredValues } from '~/components/chartTimeControls/chartTimeControlUtils';
 
 type Value = {
   date: number;
@@ -24,8 +25,6 @@ interface LineChartProps {
   signaalwaarde?: number;
   timeframeOptions?: TimeframeOption[];
 }
-
-export default LineChart;
 
 function getChartOptions(values: Value[], signaalwaarde?: number | undefined) {
   const options: Highcharts.Options = {
@@ -167,7 +166,7 @@ function getChartOptions(values: Value[], signaalwaarde?: number | undefined) {
   return options;
 }
 
-function LineChart({
+export default function LineChart({
   title,
   description,
   values,

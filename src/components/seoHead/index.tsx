@@ -1,8 +1,6 @@
 import Head from 'next/head';
 
-import siteText from 'locale';
-
-export default SEOHead;
+import siteText from '~/locale/index';
 
 export type SEOHeadProps = {
   title?: string;
@@ -20,7 +18,7 @@ SEOHead.defaultProps = {
   url: siteText.seoHead.default_url,
 };
 
-function SEOHead(props: SEOHeadProps): any {
+export function SEOHead(props: SEOHeadProps): any {
   const { description, openGraphImage, title, twitterImage, url } = props;
 
   return (

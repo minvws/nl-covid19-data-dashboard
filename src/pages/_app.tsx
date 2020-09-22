@@ -1,9 +1,9 @@
 import '@reach/combobox/styles.css';
 import './index.css';
-import 'scss/style.scss';
+import '~/scss/style.scss';
 
-import 'components/legenda/legenda.scss';
-import 'components/comboBox/comboBox.scss';
+import '~/components/legenda/legenda.scss';
+import '~/components/comboBox/comboBox.scss';
 
 // Import Preact DevTools in development
 // if (process.env.NODE_ENV === 'development') {

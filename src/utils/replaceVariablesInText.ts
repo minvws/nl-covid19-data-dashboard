@@ -16,10 +16,10 @@ const curlyBracketRegex = /\{\{(.+?)\}\}/g;
  * @param variables - An object with keys representing any variable available for replacement.
  */
 
-const replaceVariablesInText = (
+export function replaceVariablesInText(
   translation?: string | undefined | null,
   variables?: { [key: string]: string | undefined }
-): string => {
+): string {
   if (!translation) return '';
 
   return translation.replace(curlyBracketRegex, (_string, variableName) => {
@@ -27,6 +27,4 @@ const replaceVariablesInText = (
 
     return variables[variableName.trim()] ?? '';
   });
-};
-
-export default replaceVariablesInText;
+}

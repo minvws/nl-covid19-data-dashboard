@@ -18,7 +18,7 @@ export type TGetFillColor = (id: string) => string;
  * @param gradient
  * @param defaultColor
  */
-export default function useChloroplethColorScale(
+export function useChloroplethColorScale(
   getData: (id: string) => any,
   thresholds?: ChloroplethThresholdsValue[],
   defaultColor = 'white'

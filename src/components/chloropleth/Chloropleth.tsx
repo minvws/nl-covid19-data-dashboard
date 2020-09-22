@@ -1,6 +1,6 @@
 import { Mercator } from '@vx/geo';
 import { Feature, FeatureCollection, MultiPolygon } from 'geojson';
-import { MutableRefObject, ReactNode, useMemo, useRef } from 'react';
+import { MutableRefObject, ReactNode, useRef } from 'react';
 
 import create, { UseStore } from 'zustand';
 
@@ -9,8 +9,8 @@ import { TCombinedChartDimensions } from './hooks/useChartDimensions';
 import styles from './chloropleth.module.scss';
 import { localPoint } from '@vx/event';
 
-import Tooltip from './tooltips/tooltip';
-import useMediaQuery from 'utils/useMediaQuery';
+import { Tooltip } from './tooltips/tooltip';
+import { useMediaQuery } from '~/utils/useMediaQuery';
 
 export type TooltipState = {
   tooltip: TooltipSettings | null;
@@ -84,7 +84,7 @@ export type TProps<TFeatureProperties> = {
  *
  * @param props
  */
-export default function Chloropleth<T>(props: TProps<T>) {
+export function Chloropleth<T>(props: TProps<T>) {
   const {
     featureCollection,
     overlays,
@@ -132,9 +132,7 @@ export default function Chloropleth<T>(props: TProps<T>) {
     boundedHeight,
   } = dimensions;
 
-  const sizeToFit: [[number, number], FeatureCollection] = useMemo(() => {
-    return [[boundedWidth, boundedHeight], boundingbox];
-  }, [boundedWidth, boundedHeight, boundingbox]);
+  const sizeToFit = [[boundedWidth, boundedHeight], boundingbox];
 
   const showTooltip = tooltipStore.current((state) => state.showTooltip);
   const hideTooltip = tooltipStore.current((state) => state.hideTooltip);

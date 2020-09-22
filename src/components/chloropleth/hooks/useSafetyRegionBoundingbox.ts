@@ -8,7 +8,7 @@ import { useMemo } from 'react';
  *
  * @param selectedRegion
  */
-export default function useSafetyRegionBoundingbox(
+export function useSafetyRegionBoundingbox(
   regionGeo: FeatureCollection<MultiPolygon, SafetyRegionProperties>,
   selectedRegion?: string
 ) {

@@ -2,8 +2,8 @@ import React, { useMemo } from 'react';
 import Highcharts, { SeriesLineOptions } from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-import formatNumber from 'utils/formatNumber';
-import formatDate from 'utils/formatDate';
+import { formatNumber } from '~/utils/formatNumber';
+import { formatDate } from '~/utils/formatDate';
 
 type TranslationStrings = Record<string, string>;
 
@@ -23,8 +23,6 @@ type RegionalSewerWaterLineChartProps = {
   averageValues: Value[];
   text: TranslationStrings;
 };
-
-export default RegionalSewerWaterLineChart;
 
 function getOptions(
   averageValues: Value[],
@@ -155,7 +153,7 @@ function getOptions(
   return options;
 }
 
-function RegionalSewerWaterLineChart({
+export function RegionalSewerWaterLineChart({
   averageValues,
   text,
 }: RegionalSewerWaterLineChartProps) {

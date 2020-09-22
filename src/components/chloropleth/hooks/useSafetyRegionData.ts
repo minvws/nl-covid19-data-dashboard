@@ -1,7 +1,7 @@
 import { FeatureCollection, MultiPolygon } from 'geojson';
 import { useMemo } from 'react';
 import useSWR from 'swr';
-import { Regions } from 'types/data';
+import { Regions } from '~/types/data';
 import { SafetyRegionProperties, TRegionMetricName } from '../shared';
 
 export type TGetRegionFunc<T> = (id: string) => T | SafetyRegionProperties;
@@ -23,7 +23,7 @@ export type TSafetyRegionDataInfo<T> = [TGetRegionFunc<T>, boolean];
  * @param featureCollection
  * @param metricProperty
  */
-export default function useRegionData<
+export function useSafetyRegionData<
   T extends TRegionMetricName,
   K extends Regions[T],
   ReturnType extends K[number] & { value: number } & SafetyRegionProperties

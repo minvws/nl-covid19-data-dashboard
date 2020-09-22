@@ -4,7 +4,6 @@
   "private": true,
   "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
   "dependencies": {
-    "@juggle/resize-observer": "^3.2.0",
     "@reach/combobox": "^0.11.2",
     "@types/geojson": "^7946.0.7",
     "@vx/event": "^0.0.198",
@@ -34,6 +33,7 @@
     "topojson-client": "^3.1.0",
     "unfetch": "^4.1.0",
     "unified": "^9.2.0",
+    "use-resize-observer": "^6.1.0",
     "zustand": "^3.1.2"
   },
   "devDependencies": {
