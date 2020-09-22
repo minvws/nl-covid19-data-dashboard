@@ -1,12 +1,12 @@
-import { ResizeObserver } from '@juggle/resize-observer';
-import { useRef, useState, useEffect, MutableRefObject } from 'react';
+import { useRef, MutableRefObject } from 'react';
+import useResizeObserver from 'use-resize-observer/polyfilled';
 
 /**
- * This custom hook has been taken from the wonderful blog of
- * Amelia Wattenberger. https://wattenberger.com/blog/react-and-d3
- * We tried using @vx/responsive but felt it lacking in documentation and
- * it didn't work on IE11. This way we have more control over how we resize
- * our charts. Plus, who doesn't love D3 margin conventions?
+ * This code was originally inspired by https://wattenberger.com/blog/react-and-d3
+ *
+ * However the ResizeObserver from the original wasn't working properly and the
+ * useResizeObserver hook allows us to cut out pretty much all of the complexity
+ * while making it more React-like.
  */
 const combineChartDimensions = (
   dimensions: TChartDimensions = {}
@@ -20,28 +20,15 @@ const combineChartDimensions = (
     marginLeft = 0,
   } = dimensions;
 
-  const parsedDimensions = {
+  return {
     width,
     height,
     marginTop,
     marginRight,
     marginBottom,
     marginLeft,
-  };
-  return {
-    ...parsedDimensions,
-    boundedHeight: Math.max(
-      parsedDimensions.height -
-        parsedDimensions.marginTop -
-        parsedDimensions.marginBottom,
-      0
-    ),
-    boundedWidth: Math.max(
-      parsedDimensions.width -
-        parsedDimensions.marginLeft -
-        parsedDimensions.marginRight,
-      0
-    ),
+    boundedHeight: Math.max(height - marginTop - marginBottom, 0),
+    boundedWidth: Math.max(width - marginLeft - marginRight, 0),
   };
 };
 
@@ -60,52 +47,31 @@ export type TCombinedChartDimensions = TChartDimensions & {
 };
 
 export const useChartDimensions = (
-  passedSettings?: TChartDimensions
+  chartDimensions: TChartDimensions = {}
 ): [MutableRefObject<HTMLElement | null>, TCombinedChartDimensions] => {
+  /**
+   * The ref will be initialized from the outside by mutating the return value of this
+   * hook. This is a bit funky.
+   *
+   * @REF https://trello.com/c/i25FG3jk/548-usechartdemensions-pass-ref-as-prop
+   */
   const ref = useRef<HTMLElement | null>(null);
-  const dimensions = combineChartDimensions(passedSettings);
 
-  const [width, setWidth] = useState(0);
-  const [height, setHeight] = useState(0);
+  const { width, height } = useResizeObserver({ ref });
 
-  if (dimensions.width && dimensions.height) {
-    setWidth(dimensions.width);
-    setHeight(dimensions.height);
-  }
+  /**
+   * The previous useChartDimensions implementation allowed the passed in width and height to overrule any
+   * observed sizes. This is not currently used in the app, so we could decide
+   * to take it out. This implementation follows that same behavior for now.
+   */
+  const shouldOverruleWidthAndHeight =
+    chartDimensions.width && chartDimensions.height;
 
-  useEffect(() => {
-    // If we provide an explicit width and height, we simply return the dimensions
-    // as they are, but run through combineChartDimensions. In other words,
-    // when both width and height are set we don't need to set up a ResizeObserver
-    if (width && height) {
-      return;
-    }
-
-    const element = ref.current;
-
-    if (!element) {
-      return;
-    }
-
-    const resizeObserver = new ResizeObserver((entries) => {
-      if (!Array.isArray(entries)) return;
-      if (!entries.length) return;
-
-      const entry = entries[0];
-
-      if (width != entry.contentRect.width) setWidth(entry.contentRect.width);
-      if (height != entry.contentRect.height)
-        setHeight(entry.contentRect.height);
-    });
-    resizeObserver.observe(element);
-    return () => resizeObserver.unobserve(element);
-  }, [width, height]);
-
-  const newSettings = combineChartDimensions({
-    ...dimensions,
-    width: dimensions.width || width,
-    height: dimensions.height || height,
-  });
-
-  return [ref, newSettings];
+  return [
+    ref,
+    combineChartDimensions({
+      width: shouldOverruleWidthAndHeight ? chartDimensions.width : width,
+      height: shouldOverruleWidthAndHeight ? chartDimensions.height : height,
+    }),
+  ];
 };

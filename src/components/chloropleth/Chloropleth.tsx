@@ -1,6 +1,6 @@
 import { Mercator } from '@vx/geo';
 import { Feature, FeatureCollection, MultiPolygon } from 'geojson';
-import { MutableRefObject, ReactNode, useMemo, useRef } from 'react';
+import { MutableRefObject, ReactNode, useRef } from 'react';
 
 import create, { UseStore } from 'zustand';
 
@@ -132,9 +132,7 @@ export function Chloropleth<T>(props: TProps<T>) {
     boundedHeight,
   } = dimensions;
 
-  const sizeToFit: [[number, number], FeatureCollection] = useMemo(() => {
-    return [[boundedWidth, boundedHeight], boundingbox];
-  }, [boundedWidth, boundedHeight, boundingbox]);
+  const sizeToFit = [[boundedWidth, boundedHeight], boundingbox];
 
   const showTooltip = tooltipStore.current((state) => state.showTooltip);
   const hideTooltip = tooltipStore.current((state) => state.hideTooltip);
