@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import Highcharts, { SeriesLineOptions } from 'highcharts';
+import Highcharts, { SeriesAreaOptions } from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
 import ChartTimeControls, {
@@ -35,7 +35,7 @@ function getOptions(values: Value[]): Highcharts.Options {
 
   const weeklyMeasurements: Week[] = values.map((value) => value.week);
 
-  const series: SeriesLineOptions[] = [
+  const series: SeriesAreaOptions[] = [
     {
       type: 'area',
       data: values.map((value) => [value.date, value.value]),
