@@ -185,6 +185,19 @@
 }
 
 @media (max-width: 999px) {
+  .national-layout,
+  .safety-region-layout,
+  .municipality-layout {
+    > section {
+      padding-top: 0;
+      margin-top: 0.5em;
+    }
+
+    .index-article {
+      margin-top: 0;
+    }
+  }
+
   .small-screen-aside-tendency {
     .national-content {
       display: none;
