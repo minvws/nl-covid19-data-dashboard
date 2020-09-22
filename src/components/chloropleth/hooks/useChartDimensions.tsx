@@ -1,5 +1,5 @@
 import { useRef, MutableRefObject } from 'react';
-import useResizeObserver from 'use-resize-observer';
+import useResizeObserver from 'use-resize-observer/polyfilled';
 
 /**
  * This code was originally inspired by https://wattenberger.com/blog/react-and-d3
