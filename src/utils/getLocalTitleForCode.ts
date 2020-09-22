@@ -1,4 +1,4 @@
-import replaceVariablesInText from './replaceVariablesInText';
+import { replaceVariablesInText } from './replaceVariablesInText';
 
 import regios from 'data';
 import municipalities from 'data/gemeente_veiligheidsregio.json';

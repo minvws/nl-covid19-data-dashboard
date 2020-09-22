@@ -8,10 +8,10 @@ import {
   ComboboxOption,
 } from '@reach/combobox';
 
-import useThrottle from 'utils/useThrottle';
+import { useThrottle } from 'utils/useThrottle';
 
 import text from 'locale';
-import useMediaQuery from 'utils/useMediaQuery';
+import { useMediaQuery } from 'utils/useMediaQuery';
 
 type TOption = {
   displayName?: string;
@@ -23,8 +23,6 @@ type TProps<Option extends TOption> = {
   placeholder: string;
   handleSelect: (option: Option) => void;
 };
-
-export default ComboBox;
 
 /*
  * Combox is an accessible dropdown with search.
@@ -41,7 +39,7 @@ export default ComboBox;
  * />
  * ```
  */
-function ComboBox<Option extends TOption>(props: TProps<Option>) {
+export function ComboBox<Option extends TOption>(props: TProps<Option>) {
   const { options, placeholder, handleSelect } = props;
 
   const inputRef = useRef<HTMLInputElement>();

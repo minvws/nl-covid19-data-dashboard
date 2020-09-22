@@ -4,10 +4,10 @@ import {
   SewerMeasurementsLastValue,
   ResultsPerSewerInstallationPerMunicipalityLastValue,
 } from 'types/data.d';
-import formatDate from 'utils/formatDate';
-import formatNumber from 'utils/formatNumber';
+import { formatDate } from 'utils/formatDate';
+import { formatNumber } from 'utils/formatNumber';
 import { XrangePointOptionsObject } from 'highcharts';
-import replaceVariablesInText from 'utils/replaceVariablesInText';
+import { replaceVariablesInText } from 'utils/replaceVariablesInText';
 
 import siteText from 'locale';
 

@@ -1,5 +1,5 @@
 import { FCWithLayout, getLayoutWithMetadata } from 'components/layout';
-import MaxWidth from 'components/maxWidth';
+import { MaxWidth } from 'components/maxWidth';
 
 import getLastGeneratedData from 'static-props/last-generated-data';
 

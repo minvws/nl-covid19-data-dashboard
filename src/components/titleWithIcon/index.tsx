@@ -10,9 +10,7 @@ interface IProps {
   as?: 'h2' | 'h3';
 }
 
-export default TitleWithIcon;
-
-function TitleWithIcon(props: IProps) {
+export function TitleWithIcon(props: IProps) {
   const { Icon, title, regio, headingRef, as = 'h3' } = props;
 
   return (

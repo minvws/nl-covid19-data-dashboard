@@ -10,12 +10,13 @@ import EscalationLevel3 from 'assets/niveau-3.svg';
 import styles from 'components/chloropleth/tooltips/tooltip.module.scss';
 
 import siteText from 'locale';
-import MDToHTMLString from 'utils/MDToHTMLString';
+import { MDToHTMLString } from 'utils/MDToHTMLString';
 
-import SafetyRegionChloropleth, {
+import {
+  SafetyRegionChloropleth,
   thresholds,
 } from 'components/chloropleth/SafetyRegionChloropleth';
-import useMediaQuery from 'utils/useMediaQuery';
+import { useMediaQuery } from 'utils/useMediaQuery';
 import { escalationTooltip } from 'components/chloropleth/tooltips/region/escalationTooltip';
 
 const escalationThresholds = thresholds.escalation_levels.thresholds;

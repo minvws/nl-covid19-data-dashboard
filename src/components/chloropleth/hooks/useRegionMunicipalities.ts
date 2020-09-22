@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import getSafetyRegionMunicipalsForMunicipalCode from 'utils/getSafetyRegionMunicipalsForMunicipalCode';
+import { getSafetyRegionMunicipalsForMunicipalCode } from 'utils/getSafetyRegionMunicipalsForMunicipalCode';
 
 /**
  * This hook returns all the municipal codes that belong to the same safety region
@@ -7,7 +7,7 @@ import getSafetyRegionMunicipalsForMunicipalCode from 'utils/getSafetyRegionMuni
  *
  * @param municipalCode
  */
-export default function useRegionMunicipalities(
+export function useRegionMunicipalities(
   municipalCode?: string
 ): string[] | undefined {
   return useMemo(() => {

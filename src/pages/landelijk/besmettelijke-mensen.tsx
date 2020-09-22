@@ -1,14 +1,14 @@
 import Link from 'next/link';
 
-import BarScale from 'components/barScale';
-import Legenda from 'components/legenda';
+import { BarScale } from 'components/barScale';
+import { Legenda } from 'components/legenda';
 import { FCWithLayout } from 'components/layout';
 import { getNationalLayout } from 'components/layout/NationalLayout';
 import { AreaChart } from 'components/charts/index';
 
 import Ziektegolf from 'assets/ziektegolf.svg';
 
-import formatNumber from 'utils/formatNumber';
+import { formatNumber } from 'utils/formatNumber';
 
 import siteText from 'locale';
 

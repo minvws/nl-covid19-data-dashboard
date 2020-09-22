@@ -1,4 +1,4 @@
-import BarScale from 'components/barScale';
+import { BarScale } from 'components/barScale';
 import { ContentHeader } from 'components/layout/Content';
 import { FCWithLayout } from 'components/layout';
 import { getNationalLayout } from 'components/layout/NationalLayout';
@@ -6,7 +6,7 @@ import { LineChart } from 'components/charts/index';
 
 import Locatie from 'assets/locaties.svg';
 
-import formatNumber from 'utils/formatNumber';
+import { formatNumber } from 'utils/formatNumber';
 
 import siteText from 'locale';
 

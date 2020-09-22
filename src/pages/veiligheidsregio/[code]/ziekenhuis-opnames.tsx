@@ -1,4 +1,4 @@
-import BarScale from 'components/barScale';
+import { BarScale } from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
 import { getSafetyRegionLayout } from 'components/layout/SafetyRegionLayout';
 import { ContentHeader } from 'components/layout/Content';
@@ -16,9 +16,9 @@ import {
   ISafetyRegionData,
 } from 'static-props/safetyregion-data';
 import { getLocalTitleForRegion } from 'utils/getLocalTitleForCode';
-import hospitalAdmissionsTooltip from 'components/chloropleth/tooltips/municipal/hospitalAdmissionsTooltip';
-import MunicipalityLegenda from 'components/chloropleth/legenda/MunicipalityLegenda';
-import MunicipalityChloropleth from 'components/chloropleth/MunicipalityChloropleth';
+import { hospitalAdmissionsTooltip } from 'components/chloropleth/tooltips/municipal/hospitalAdmissionsTooltip';
+import { MunicipalityLegenda } from 'components/chloropleth/legenda/MunicipalityLegenda';
+import { MunicipalityChloropleth } from 'components/chloropleth/MunicipalityChloropleth';
 import regionCodeToMunicipalCodeLookup from 'data/regionCodeToMunicipalCodeLookup';
 
 const text: typeof siteText.veiligheidsregio_ziekenhuisopnames_per_dag =
