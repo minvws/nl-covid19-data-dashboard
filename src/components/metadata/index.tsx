@@ -20,9 +20,7 @@ interface IProps {
 
 const text: typeof siteText.common.metadata = siteText.common.metadata;
 
-export default Metadata;
-
-function Metadata(props: IProps) {
+export function Metadata(props: IProps) {
   const { dataSource, datumsText, dateUnix, dateInsertedUnix } = props;
 
   if (!dateUnix) return null;

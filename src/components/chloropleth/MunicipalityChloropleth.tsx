@@ -5,18 +5,18 @@ import {
   TMunicipalityMetricName,
 } from './shared';
 
-import Chloropleth from './Chloropleth';
+import { Chloropleth } from './Chloropleth';
 import { Feature, GeoJsonProperties, MultiPolygon } from 'geojson';
-import useChartDimensions from './hooks/useChartDimensions';
+import { useChartDimensions } from './hooks/useChartDimensions';
 
 import styles from './chloropleth.module.scss';
 import { CSSProperties, ReactNode, useCallback } from 'react';
 import { Municipalities } from 'types/data';
-import useMunicipalityData from './hooks/useMunicipalityData';
-import useChloroplethColorScale from './hooks/useChloroplethColorScale';
-import useMunicipalityBoundingbox from './hooks/useMunicipalityBoundingbox';
+import { useMunicipalityData } from './hooks/useMunicipalityData';
+import { useChloroplethColorScale } from './hooks/useChloroplethColorScale';
+import { useMunicipalityBoundingbox } from './hooks/useMunicipalityBoundingbox';
 import { MunicipalityProperties } from './shared';
-import useRegionMunicipalities from './hooks/useRegionMunicipalities';
+import { useRegionMunicipalities } from './hooks/useRegionMunicipalities';
 import { countryGeo, municipalGeo, regionGeo } from './topology';
 
 type MunicipalThresholds = ChloroplethThresholds<TMunicipalityMetricName>;
@@ -113,7 +113,7 @@ export type TProps<
  *
  * @param props
  */
-export default function MunicipalityChloropleth<
+export function MunicipalityChloropleth<
   T extends TMunicipalityMetricName,
   ItemType extends Municipalities[T][number],
   ReturnType extends ItemType & { value: number },

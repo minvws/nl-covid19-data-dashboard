@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-import TitleWithIcon from 'components/titleWithIcon';
+import { TitleWithIcon } from 'components/titleWithIcon';
 import { getLayout as getSiteLayout } from 'components/layout';
 import { ReproductionIndexBarScale } from 'pages/landelijk/reproductiegetal';
 import { PostivelyTestedPeopleBarScale } from 'pages/landelijk/positief-geteste-mensen';

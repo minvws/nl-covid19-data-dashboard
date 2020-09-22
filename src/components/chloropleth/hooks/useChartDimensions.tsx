@@ -59,7 +59,7 @@ export type TCombinedChartDimensions = TChartDimensions & {
   boundedHeight: number;
 };
 
-const useChartDimensions = (
+export const useChartDimensions = (
   passedSettings?: TChartDimensions
 ): [MutableRefObject<HTMLElement | null>, TCombinedChartDimensions] => {
   const ref = useRef<HTMLElement | null>(null);
@@ -109,5 +109,3 @@ const useChartDimensions = (
 
   return [ref, newSettings];
 };
-
-export default useChartDimensions;

@@ -4,7 +4,8 @@ import HighchartsReact from 'highcharts-react-official';
 import styles from './lineChart.module.scss';
 import text from 'locale';
 
-import ChartTimeControls, {
+import {
+  ChartTimeControls,
   TimeframeOption,
 } from 'components/chartTimeControls';
 
@@ -24,8 +25,6 @@ interface LineChartProps {
   signaalwaarde?: number;
   timeframeOptions?: TimeframeOption[];
 }
-
-export default LineChart;
 
 function getChartOptions(values: Value[], signaalwaarde?: number | undefined) {
   const options: Highcharts.Options = {
@@ -167,7 +166,7 @@ function getChartOptions(values: Value[], signaalwaarde?: number | undefined) {
   return options;
 }
 
-function LineChart({
+export default function LineChart({
   title,
   description,
   values,

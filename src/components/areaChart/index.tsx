@@ -2,7 +2,8 @@ import { useMemo, useState } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-import ChartTimeControls, {
+import {
+  ChartTimeControls,
   TimeframeOption,
 } from 'components/chartTimeControls';
 
@@ -34,8 +35,6 @@ type IGetOptions = Omit<AreaChartProps, 'data'> & {
   rangeData: TRange[];
   lineData: TLine[];
 };
-
-export default AreaChart;
 
 function getOptions(props: IGetOptions): Highcharts.Options {
   const {
@@ -163,7 +162,7 @@ function getOptions(props: IGetOptions): Highcharts.Options {
   return options;
 }
 
-function AreaChart(props: AreaChartProps) {
+export default function AreaChart(props: AreaChartProps) {
   const {
     rangeLegendLabel,
     lineLegendLabel,

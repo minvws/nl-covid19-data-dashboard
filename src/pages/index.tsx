@@ -12,15 +12,14 @@ import { INationalData } from 'static-props/nl-data';
 
 import styles from './index.module.scss';
 
-import TitleWithIcon from 'components/titleWithIcon';
-import ChartRegionControls from 'components/chartRegionControls';
-import MunicipalityChloropleth from 'components/chloropleth/MunicipalityChloropleth';
-import SafetyRegionChloropleth from 'components/chloropleth/SafetyRegionChloropleth';
-import positiveTestedPeopleTooltip from 'components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
-import positiveTestedPeopleTooltipRegion from 'components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
+import { TitleWithIcon } from 'components/titleWithIcon';
+import { ChartRegionControls } from 'components/chartRegionControls';
+import { MunicipalityChloropleth } from 'components/chloropleth/MunicipalityChloropleth';
+import { SafetyRegionChloropleth } from 'components/chloropleth/SafetyRegionChloropleth';
+import { positiveTestedPeopleTooltip } from 'components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
 import { useState } from 'react';
-import MunicipalityLegenda from 'components/chloropleth/legenda/MunicipalityLegenda';
-import SafetyRegionLegenda from 'components/chloropleth/legenda/SafetyRegionLegenda';
+import { MunicipalityLegenda } from 'components/chloropleth/legenda/MunicipalityLegenda';
+import { SafetyRegionLegenda } from 'components/chloropleth/legenda/SafetyRegionLegenda';
 import Link from 'next/link';
 import { EscalationMapLegenda } from './veiligheidsregio';
 import { useMediaQuery } from 'utils/useMediaQuery';
@@ -148,7 +147,7 @@ const Home: FCWithLayout<INationalData> = (props) => {
           {selectedMap === 'region' && (
             <SafetyRegionChloropleth
               metricName="positive_tested_people"
-              tooltipContent={positiveTestedPeopleTooltipRegion}
+              tooltipContent={positiveTestedPeopleTooltip}
               onSelect={onSelectRegion}
             />
           )}

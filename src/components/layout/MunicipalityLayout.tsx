@@ -16,9 +16,9 @@ import { PostivelyTestedPeopleBarScale } from 'pages/gemeente/[code]/positief-ge
 import { IntakeHospitalBarScale } from 'pages/gemeente/[code]/ziekenhuis-opnames';
 import { SewerWaterBarScale } from 'pages/gemeente/[code]/rioolwater';
 
-import TitleWithIcon from 'components/titleWithIcon';
+import { TitleWithIcon } from 'components/titleWithIcon';
 import { getLayout as getSiteLayout } from 'components/layout';
-import Combobox from 'components/comboBox';
+import { ComboBox } from 'components/comboBox';
 
 import GetestIcon from 'assets/test.svg';
 import Ziekenhuis from 'assets/ziekenhuis.svg';
@@ -128,7 +128,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
           </Link>
         )}
         <aside className="municipality-aside">
-          <Combobox<IMunicipality>
+          <ComboBox<IMunicipality>
             placeholder={siteText.common.zoekveld_placeholder_gemeente}
             handleSelect={handleMunicipalitySelect}
             options={municipalities}

@@ -1,7 +1,7 @@
 import styles from './styles.module.scss';
 import { useRef } from 'react';
 import { formatNumber } from 'utils/formatNumber';
-import ScreenReaderOnly from 'components/screenReaderOnly';
+import { ScreenReaderOnly } from 'components/screenReaderOnly';
 import { replaceVariablesInText } from 'utils/replaceVariablesInText';
 import { scaleQuantile, scaleThreshold } from 'd3-scale';
 
@@ -25,9 +25,7 @@ type BarscaleProps = {
   showAxis?: boolean;
 };
 
-export default BarScale;
-
-function BarScale({
+export function BarScale({
   min,
   max,
   value,

@@ -1,5 +1,5 @@
-import BarScale from 'components/barScale';
-import Legenda from 'components/legenda';
+import { BarScale } from 'components/barScale';
+import { Legenda } from 'components/legenda';
 import { FCWithLayout } from 'components/layout';
 import { getNationalLayout } from 'components/layout/NationalLayout';
 import { AreaChart } from 'components/charts/index';

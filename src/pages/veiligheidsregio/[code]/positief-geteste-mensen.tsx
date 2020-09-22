@@ -1,4 +1,4 @@
-import BarScale from 'components/barScale';
+import { BarScale } from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
 import { getSafetyRegionLayout } from 'components/layout/SafetyRegionLayout';
 import { LineChart } from 'components/charts/index';
@@ -16,9 +16,9 @@ import {
   ISafetyRegionData,
 } from 'static-props/safetyregion-data';
 import { getLocalTitleForRegion } from 'utils/getLocalTitleForCode';
-import positiveTestedPeopleTooltip from 'components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
-import MunicipalityLegenda from 'components/chloropleth/legenda/MunicipalityLegenda';
-import MunicipalityChloropleth from 'components/chloropleth/MunicipalityChloropleth';
+import { positiveTestedPeopleTooltip } from 'components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
+import { MunicipalityLegenda } from 'components/chloropleth/legenda/MunicipalityLegenda';
+import { MunicipalityChloropleth } from 'components/chloropleth/MunicipalityChloropleth';
 import regionCodeToMunicipalCodeLookup from 'data/regionCodeToMunicipalCodeLookup';
 
 const text: typeof siteText.veiligheidsregio_positief_geteste_personen =

@@ -8,7 +8,7 @@ export type TTooltipProps = {
   getTooltipContent: (id: string) => ReactNode;
 };
 
-export default function Tooltip(props: TTooltipProps) {
+export function Tooltip(props: TTooltipProps) {
   const { tooltipStore, getTooltipContent } = props;
   const ref = useRef<HTMLDivElement | undefined>();
   const [tooltip, updateTooltip] = tooltipStore((state: TooltipState) => [

@@ -12,7 +12,8 @@ import styles from 'components/chloropleth/tooltips/tooltip.module.scss';
 import siteText from 'locale';
 import { MDToHTMLString } from 'utils/MDToHTMLString';
 
-import SafetyRegionChloropleth, {
+import {
+  SafetyRegionChloropleth,
   thresholds,
 } from 'components/chloropleth/SafetyRegionChloropleth';
 import { useMediaQuery } from 'utils/useMediaQuery';

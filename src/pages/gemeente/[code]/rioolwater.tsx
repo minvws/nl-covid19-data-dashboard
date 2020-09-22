@@ -1,4 +1,4 @@
-import BarScale from 'components/barScale';
+import { BarScale } from 'components/barScale';
 import { FCWithLayout } from 'components/layout';
 import { getMunicipalityLayout } from 'components/layout/MunicipalityLayout';
 import { ContentHeader } from 'components/layout/Content';
@@ -7,9 +7,9 @@ import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
 
 import siteText from 'locale';
 
-import RegionalSewerWaterLineChart from 'components/lineChart/regionalSewerWaterLineChart';
+import { RegionalSewerWaterLineChart } from 'components/lineChart/regionalSewerWaterLineChart';
 import { useMemo } from 'react';
-import BarChart from 'components/barChart';
+import { BarChart } from 'components/charts';
 import {
   SewerWaterBarScaleData,
   getSewerWaterBarScaleData,

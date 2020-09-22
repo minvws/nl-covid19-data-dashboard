@@ -24,8 +24,6 @@ type TProps<Option extends TOption> = {
   handleSelect: (option: Option) => void;
 };
 
-export default ComboBox;
-
 /*
  * Combox is an accessible dropdown with search.
  *
@@ -41,7 +39,7 @@ export default ComboBox;
  * />
  * ```
  */
-function ComboBox<Option extends TOption>(props: TProps<Option>) {
+export function ComboBox<Option extends TOption>(props: TProps<Option>) {
   const { options, placeholder, handleSelect } = props;
 
   const inputRef = useRef<HTMLInputElement>();

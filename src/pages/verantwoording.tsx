@@ -5,7 +5,7 @@ import { Fragment } from 'react';
 import Head from 'next/head';
 
 import { getLayoutWithMetadata, FCWithLayout } from 'components/layout';
-import MaxWidth from 'components/maxWidth';
+import { MaxWidth } from 'components/maxWidth';
 
 import styles from './over.module.scss';
 import siteText from 'locale';

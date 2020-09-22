@@ -9,7 +9,7 @@ import { TCombinedChartDimensions } from './hooks/useChartDimensions';
 import styles from './chloropleth.module.scss';
 import { localPoint } from '@vx/event';
 
-import Tooltip from './tooltips/tooltip';
+import { Tooltip } from './tooltips/tooltip';
 import { useMediaQuery } from 'utils/useMediaQuery';
 
 export type TooltipState = {
@@ -84,7 +84,7 @@ export type TProps<TFeatureProperties> = {
  *
  * @param props
  */
-export default function Chloropleth<T>(props: TProps<T>) {
+export function Chloropleth<T>(props: TProps<T>) {
   const {
     featureCollection,
     overlays,

@@ -7,7 +7,7 @@ import { getSafetyRegionMunicipalsForMunicipalCode } from 'utils/getSafetyRegion
  *
  * @param municipalCode
  */
-export default function useRegionMunicipalities(
+export function useRegionMunicipalities(
   municipalCode?: string
 ): string[] | undefined {
   return useMemo(() => {

@@ -17,8 +17,6 @@ type RegionalSewerWaterLineChartProps = {
   text: TranslationStrings;
 };
 
-export default RegionalSewerWaterLineChart;
-
 function getOptions(
   averageValues: Value[],
   text: TranslationStrings
@@ -139,7 +137,7 @@ function getOptions(
   return options;
 }
 
-function RegionalSewerWaterLineChart({
+export function RegionalSewerWaterLineChart({
   averageValues,
   text,
 }: RegionalSewerWaterLineChartProps) {

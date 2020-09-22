@@ -12,8 +12,8 @@ import { formatDate } from 'utils/formatDate';
 import { replaceVariablesInText } from 'utils/replaceVariablesInText';
 import { getLocale } from 'utils/getLocale';
 
-import SEOHead from 'components/seoHead';
-import MaxWidth from 'components/maxWidth';
+import { SEOHead } from 'components/seoHead';
+import { MaxWidth } from 'components/maxWidth';
 
 export interface LayoutProps {
   url?: string;

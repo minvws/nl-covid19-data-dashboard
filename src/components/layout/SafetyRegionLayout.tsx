@@ -14,9 +14,9 @@ import { PostivelyTestedPeopleBarScale } from 'pages/veiligheidsregio/[code]/pos
 import { IntakeHospitalBarScale } from 'pages/veiligheidsregio/[code]/ziekenhuis-opnames';
 import { SewerWaterBarScale } from 'pages/veiligheidsregio/[code]/rioolwater';
 
-import TitleWithIcon from 'components/titleWithIcon';
+import { TitleWithIcon } from 'components/titleWithIcon';
 import { getLayout as getSiteLayout } from 'components/layout';
-import Combobox from 'components/comboBox';
+import { ComboBox } from 'components/comboBox';
 
 import GetestIcon from 'assets/test.svg';
 import Ziekenhuis from 'assets/ziekenhuis.svg';
@@ -129,7 +129,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
           </Link>
         )}
         <aside className="safety-region-aside">
-          <Combobox<TSafetyRegion>
+          <ComboBox<TSafetyRegion>
             placeholder={siteText.common.zoekveld_placeholder_regio}
             handleSelect={handleSafeRegionSelect}
             options={safetyRegions}
