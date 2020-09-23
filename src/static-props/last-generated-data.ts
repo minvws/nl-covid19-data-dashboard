@@ -1,6 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-import { exit } from 'process';
 
 export interface ILastGeneratedData {
   lastGenerated: string;
@@ -49,8 +48,10 @@ export async function getLastGeneratedData(): Promise<IProps> {
       );
       nlData = await res.json();
     } else {
-      throw new Error('no!');
-      exit(1);
+      console.error(
+        'You are running a production build without having the files available locally. To prevent a DoS attack on the production server your build will now fail. To resolve this, get a copy of the local data on your machine in /public/json/'
+      );
+      process.exit(1);
     }
   }
 

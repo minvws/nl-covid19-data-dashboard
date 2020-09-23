@@ -18,7 +18,6 @@ import {
 } from '~/components/chloropleth/SafetyRegionChloropleth';
 import { useMediaQuery } from '~/utils/useMediaQuery';
 import { escalationTooltip } from '~/components/chloropleth/tooltips/region/escalationTooltip';
-import { exit } from 'process';
 
 const escalationThresholds = thresholds.escalation_levels.thresholds;
 
@@ -131,8 +130,10 @@ export async function getStaticProps(): Promise<StaticProps> {
       );
       data = await res.json();
     } else {
-      throw new Error('no!');
-      exit(1);
+      console.error(
+        'You are running a production build without having the files available locally. To prevent a DoS attack on the production server your build will now fail. To resolve this, get a copy of the local data on your machine in /public/json/'
+      );
+      process.exit(1);
     }
   }
 

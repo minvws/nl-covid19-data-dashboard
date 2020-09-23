@@ -4,7 +4,6 @@ import path from 'path';
 import { Regionaal } from '~/types/data.d';
 
 import safetyRegions from '~/data/index';
-import { exit } from 'process';
 
 export interface ISafetyRegionData {
   data: Regionaal;
@@ -67,8 +66,10 @@ export function getSafetyRegionData() {
         );
         safetyRegionData = await res.json();
       } else {
-        throw new Error('no!');
-        exit(1);
+        console.error(
+          'You are running a production build without having the files available locally. To prevent a DoS attack on the production server your build will now fail. To resolve this, get a copy of the local data on your machine in /public/json/'
+        );
+        process.exit(1);
       }
     }
 
