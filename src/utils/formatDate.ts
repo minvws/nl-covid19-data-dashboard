@@ -36,7 +36,7 @@ const Day = new Intl.DateTimeFormat(locale, {
 });
 
 export function formatDate(
-  epochOrDate: number,
+  epochOrDate: number | Date,
   style?: 'long' | 'medium' | 'short' | 'relative' | 'iso' | 'axis'
 ): string {
   /**
@@ -44,18 +44,21 @@ export function formatDate(
    * formatted by the format() function needs to be multiplied by 1000
    * to format to an accurate dateTime
    */
-  epochOrDate = epochOrDate * 1000;
+  const epoch =
+    typeof epochOrDate === 'number'
+      ? epochOrDate
+      : epochOrDate.getMilliseconds();
 
-  if (style === 'iso') return new Date(epochOrDate).toISOString(); // '2020-07-23T10:01:16.000Z'
-  if (style === 'long') return Long.format(epochOrDate); // '23 juli 2020 om 12:01'
-  if (style === 'medium') return Medium.format(epochOrDate); // '23 juli 2020'
+  if (style === 'iso') return new Date(epoch).toISOString(); // '2020-07-23T10:01:16.000Z'
+  if (style === 'long') return Long.format(epoch); // '23 juli 2020 om 12:01'
+  if (style === 'medium') return Medium.format(epoch); // '23 juli 2020'
   if (style === 'axis')
-    return `${Day.format(epochOrDate)} ${MonthShort.format(epochOrDate)}`; // '23 jul.'
+    return `${Day.format(epoch)} ${MonthShort.format(epoch)}`; // '23 jul.'
 
   if (style === 'relative') {
-    if (isToday(epochOrDate)) return siteText.utils.date_today;
-    if (isYesterday(epochOrDate)) return siteText.utils.date_yesterday;
+    if (isToday(epoch)) return siteText.utils.date_today;
+    if (isYesterday(epoch)) return siteText.utils.date_yesterday;
   }
 
-  return DayMonth.format(epochOrDate);
+  return DayMonth.format(epoch);
 }
