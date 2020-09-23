@@ -157,7 +157,7 @@ describe('Component: Choropleth', () => {
     expect(pathReceiveClick).toBeTruthy();
   });
 
-  it('Should call the tooltip content handler when paths are clicked on on a small screen', () => {
+  it('Should show the tooltip content handler when paths are clicked on on a small screen', () => {
     // Arrange
     const testMunicipalCode = 'GM0003';
 
@@ -183,11 +183,8 @@ describe('Component: Choropleth', () => {
       expect(id).toEqual(testMunicipalCode);
     };
 
-    let tooltipRequested = false;
     const getTooltipContent = (id: string) => {
-      tooltipRequested = true;
-      expect(id).toEqual(testMunicipalCode);
-      return <div />;
+      return <div>Tooltip:{id}</div>;
     };
 
     const props: TProps<MunicipalityProperties> = {
@@ -213,7 +210,8 @@ describe('Component: Choropleth', () => {
 
     // Assert
     expect(pathReceiveClick).toBeFalsy();
-    expect(tooltipRequested).toBeTruthy();
+    const tooltips = renderResult.getAllByText(`Tooltip:${testMunicipalCode}`);
+    expect(tooltips.length).toEqual(1);
   });
 
   it('Should call the tooltip content handler when paths are mouse-overed', () => {
@@ -236,11 +234,8 @@ describe('Component: Choropleth', () => {
       );
     };
 
-    let tooltipRequested = false;
     const getTooltipContent = (id: string) => {
-      tooltipRequested = true;
-      expect(id).toEqual(testMunicipalCode);
-      return <div />;
+      return <div>Tooltip:{id}</div>;
     };
 
     const props: TProps<MunicipalityProperties> = {
@@ -265,6 +260,7 @@ describe('Component: Choropleth', () => {
     fireEvent.mouseOver(gemeente);
 
     // Assert
-    expect(tooltipRequested).toBeTruthy();
+    const tooltips = renderResult.getAllByText(`Tooltip:${testMunicipalCode}`);
+    expect(tooltips.length).toEqual(1);
   });
 });
