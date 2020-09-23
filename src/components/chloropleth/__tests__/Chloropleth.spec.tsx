@@ -4,16 +4,9 @@ import { Chloropleth, TProps } from '~/components/chloropleth/Chloropleth';
 import { MunicipalityProperties } from '../shared';
 import { Feature, MultiPolygon } from 'geojson';
 import { countryGeo, municipalGeo } from '../topology';
+import { mockMatchMedia } from '~/utils/testhelpers/mockMatchMedia';
 
 describe('Component: Choropleth', () => {
-  function mockMatchMedia(shouldMatchMedia: boolean) {
-    global.window.matchMedia = jest.fn().mockReturnValue({
-      matches: shouldMatchMedia,
-      addListener: () => {},
-      removeListener: () => {},
-    });
-  }
-
   const featureCollection = municipalGeo;
   const overlays = countryGeo;
   const hovers = municipalGeo;
