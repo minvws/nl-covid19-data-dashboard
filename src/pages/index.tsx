@@ -169,6 +169,7 @@ interface StaticProps {
 }
 
 export async function getStaticProps(): Promise<StaticProps> {
+  let data;
   const text = require('../locale/index').default;
 
   const serializedContent = MDToHTMLString(
@@ -178,8 +179,17 @@ export async function getStaticProps(): Promise<StaticProps> {
   text.veiligheidsregio_index.selecteer_toelichting = serializedContent;
 
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
-  const fileContents = fs.readFileSync(filePath, 'utf8');
-  const data = JSON.parse(fileContents) as National;
+
+  if (fs.existsSync(filePath)) {
+    const fileContents = fs.readFileSync(filePath, 'utf8');
+    data = JSON.parse(fileContents) as National;
+  } else {
+    const res = await fetch(
+      'https://coronadashboard.rijksoverheid.nl/json/NL.json'
+    );
+    data = await res.json();
+  }
+
   const lastGenerated = data.last_generated;
 
   return { props: { data, text, lastGenerated } };
