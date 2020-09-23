@@ -15,7 +15,7 @@ import {
   TotalReportedLocations,
 } from '~/types/data.d';
 
-import getNlData, { INationalData } from '~/static-props/nl-data';
+import { getNlData, INationalData } from '~/static-props/nl-data';
 
 const text: typeof siteText.verpleeghuis_besmette_locaties =
   siteText.verpleeghuis_besmette_locaties;

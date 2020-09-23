@@ -12,7 +12,7 @@ import styles from '~/components/chloropleth/chloropleth.module.scss';
 
 import { IntakeHospitalMa } from '~/types/data.d';
 import { ReactNode, useState } from 'react';
-import getNlData, { INationalData } from '~/static-props/nl-data';
+import { getNlData, INationalData } from '~/static-props/nl-data';
 import { ChartRegionControls } from '~/components/chartRegionControls';
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
 import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';

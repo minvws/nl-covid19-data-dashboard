@@ -1,6 +1,6 @@
 import siteText from '~/locale/index';
 import { VerdenkingenHuisartsen } from '~/types/data.d';
-import getNlData, { INationalData } from '~/static-props/nl-data';
+import { getNlData, INationalData } from '~/static-props/nl-data';
 
 import { ContentHeader } from '~/components/layout/Content';
 import { FCWithLayout } from '~/components/layout';

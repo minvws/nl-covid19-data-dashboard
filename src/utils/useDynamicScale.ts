@@ -23,7 +23,11 @@ export function useDynamicScale(
   dataKey: string,
   value?: number | null
 ): IDynamicScale {
-  const { data, isValidating } = useSWR('/json/RANGES.json');
+  const urlToFetch =
+    process.env.NODE_ENV === 'development'
+      ? '/json/RANGES.json'
+      : 'https://coronadashboard.rijksoverheid.nl/json/RANGES.json';
+  const { data, isValidating } = useSWR(urlToFetch);
 
   let dataMax;
 

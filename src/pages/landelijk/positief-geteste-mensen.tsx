@@ -19,7 +19,7 @@ import {
   IntakeShareAgeGroups,
 } from '~/types/data.d';
 
-import getNlData, { INationalData } from '~/static-props/nl-data';
+import { getNlData, INationalData } from '~/static-props/nl-data';
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
 import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
 import { positiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';

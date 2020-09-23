@@ -1,6 +1,6 @@
 import siteText from '~/locale/index';
 import { RioolwaterMetingen } from '~/types/data.d';
-import getNlData, { INationalData } from '~/static-props/nl-data';
+import { getNlData, INationalData } from '~/static-props/nl-data';
 
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';

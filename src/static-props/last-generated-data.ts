@@ -34,7 +34,7 @@ interface IProps {
  * }
  * ```
  */
-export async function getStaticProps(): Promise<IProps> {
+export async function getLastGeneratedData(): Promise<IProps> {
   let nlData;
 
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');

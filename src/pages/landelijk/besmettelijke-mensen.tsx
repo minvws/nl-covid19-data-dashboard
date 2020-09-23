@@ -17,7 +17,7 @@ import {
   InfectiousPeopleCountNormalized,
 } from '~/types/data.d';
 import { ContentHeader } from '~/components/layout/Content';
-import getNlData, { INationalData } from '~/static-props/nl-data';
+import { getNlData, INationalData } from '~/static-props/nl-data';
 
 const text: typeof siteText.besmettelijke_personen =
   siteText.besmettelijke_personen;

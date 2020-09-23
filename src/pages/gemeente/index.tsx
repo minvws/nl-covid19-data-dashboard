@@ -2,7 +2,7 @@ import { FCWithLayout } from '~/components/layout';
 import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
 import { NextRouter, useRouter } from 'next/router';
 
-import getLastGeneratedData from '~/static-props/last-generated-data';
+import { getLastGeneratedData } from '~/static-props/last-generated-data';
 
 import text from '~/locale/index';
 import styles from '~/components/chloropleth/chloropleth.module.scss';
