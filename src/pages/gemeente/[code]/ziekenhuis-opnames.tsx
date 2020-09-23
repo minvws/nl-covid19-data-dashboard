@@ -24,9 +24,12 @@ const text: typeof siteText.gemeente_ziekenhuisopnames_per_dag =
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
 import { hospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/municipal/hospitalAdmissionsTooltip';
 import { MunicipalityLegenda } from '~/components/chloropleth/legenda/MunicipalityLegenda';
+import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
+import { useRouter } from 'next/router';
 
 const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
   const { data } = props;
+  const router = useRouter();
 
   const hospitalAdmissions: HospitalAdmissions | undefined =
     data?.hospital_admissions;
@@ -87,6 +90,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
             selected={data.code}
             metricName="hospital_admissions"
             tooltipContent={hospitalAdmissionsTooltip}
+            onSelect={createSelectMunicipalHandler(router)}
           />
         </div>
       </article>

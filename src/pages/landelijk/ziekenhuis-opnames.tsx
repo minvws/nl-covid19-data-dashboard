@@ -8,49 +8,30 @@ import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-b
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 
 import siteText from '~/locale/index';
-import styles from '~/components/chloropleth/chloropleth.module.scss';
 
 import { IntakeHospitalMa } from '~/types/data.d';
-import { ReactNode, useState } from 'react';
+import { useState } from 'react';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 import { ChartRegionControls } from '~/components/chartRegionControls';
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
 import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
 import { MunicipalityLegenda } from '~/components/chloropleth/legenda/MunicipalityLegenda';
 import { SafetyRegionLegenda } from '~/components/chloropleth/legenda/SafetyRegionLegenda';
+import { hospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/municipal/hospitalAdmissionsTooltip';
+import { hospitalAdmissionsTooltip as regionHospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/region/hospitalAdmissionsTooltip';
+import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
+import { useRouter } from 'next/router';
+import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
 
 const text: typeof siteText.ziekenhuisopnames_per_dag =
   siteText.ziekenhuisopnames_per_dag;
-
-const tooltipMunicipalContent = (context: any): ReactNode => {
-  return (
-    context && (
-      <div className={styles.defaultTooltip}>
-        <strong>{context.gemnaam}</strong>
-        <br />
-        {context.value}
-      </div>
-    )
-  );
-};
-
-const tooltipRegionContent = (context: any): ReactNode => {
-  return (
-    context && (
-      <div className={styles.defaultTooltip}>
-        <strong>{context.vrname}</strong>
-        <br />
-        {context.value}
-      </div>
-    )
-  );
-};
 
 const IntakeHospital: FCWithLayout<INationalData> = (props) => {
   const { data: state } = props;
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
     'municipal'
   );
+  const router = useRouter();
 
   const data: IntakeHospitalMa | undefined = state?.intake_hospital_ma;
 
@@ -106,13 +87,15 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
           {selectedMap === 'municipal' && (
             <MunicipalityChloropleth
               metricName="hospital_admissions"
-              tooltipContent={tooltipMunicipalContent}
+              tooltipContent={hospitalAdmissionsTooltip}
+              onSelect={createSelectMunicipalHandler(router)}
             />
           )}
           {selectedMap === 'region' && (
             <SafetyRegionChloropleth
               metricName="hospital_admissions"
-              tooltipContent={tooltipRegionContent}
+              tooltipContent={regionHospitalAdmissionsTooltip}
+              onSelect={createSelectRegionHandler(router)}
             />
           )}
         </div>
