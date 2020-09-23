@@ -10,7 +10,7 @@ describe('Component: Choropleth', () => {
   const featureCollection = municipalGeo;
   const overlays = countryGeo;
   const hovers = municipalGeo;
-  const boundingbox = municipalGeo;
+  const boundingBox = municipalGeo;
   const dimensions = {
     boundedWidth: 500,
     boundedHeight: 500,
@@ -39,27 +39,20 @@ describe('Component: Choropleth', () => {
 
   it('Should call the correct callbacks for the given feature collections', () => {
     // Arrange
-    let featureCallbackWasCalled = false;
-    let overlayCallbackWasCalled = false;
-    let hoverCallbackWasCalled = false;
 
     const featureCallback = (
       feature: Feature<MultiPolygon, MunicipalityProperties>,
       _path: string,
       _index: number
     ) => {
-      featureCallbackWasCalled = true;
-      expect(featureCollection.features.indexOf(feature)).toBeGreaterThan(-1);
       return <path key={`feature-${feature.properties.gemcode}`} />;
     };
 
     const overlayCallback = (
-      feature: Feature<MultiPolygon>,
+      _feature: Feature<MultiPolygon>,
       _path: string,
       index: number
     ) => {
-      overlayCallbackWasCalled = true;
-      expect(overlays.features.indexOf(feature)).toBeGreaterThan(-1);
       return <path key={`overlay-${index}`} />;
     };
 
@@ -68,8 +61,6 @@ describe('Component: Choropleth', () => {
       _path: string,
       _index: number
     ) => {
-      hoverCallbackWasCalled = true;
-      expect(featureCollection.features.indexOf(feature)).toBeGreaterThan(-1);
       return <path key={`hover-${feature.properties.gemcode}`} />;
     };
 
@@ -77,7 +68,7 @@ describe('Component: Choropleth', () => {
       featureCollection,
       overlays,
       hovers,
-      boundingBox: boundingbox,
+      boundingBox,
       dimensions,
       featureCallback,
       overlayCallback,
@@ -99,10 +90,11 @@ describe('Component: Choropleth', () => {
     } catch (e) {}
 
     // Assert
-    expect(featureCallbackWasCalled).toBeTruthy();
-    expect(overlayCallbackWasCalled).toBeTruthy();
-    expect(hoverCallbackWasCalled).toBeTruthy();
     // Check if there are exactly 4 <g> elements. One container, and one for each feature collection
+    expect(groups?.[0].children.length).toEqual(3);
+    expect(groups?.[1].children.length).toEqual(355); // municipal features
+    expect(groups?.[2].children.length).toEqual(1); // country outline
+    expect(groups?.[3].children.length).toEqual(355); // hover outlines
     expect(groups?.length).toEqual(4);
   });
 
@@ -136,7 +128,7 @@ describe('Component: Choropleth', () => {
       featureCollection,
       overlays,
       hovers,
-      boundingBox: boundingbox,
+      boundingBox: boundingBox,
       dimensions,
       featureCallback,
       overlayCallback: defaultOverlayCallback,
@@ -191,7 +183,7 @@ describe('Component: Choropleth', () => {
       featureCollection,
       overlays,
       hovers,
-      boundingBox: boundingbox,
+      boundingBox: boundingBox,
       dimensions,
       featureCallback,
       overlayCallback: defaultOverlayCallback,
@@ -242,7 +234,7 @@ describe('Component: Choropleth', () => {
       featureCollection,
       overlays,
       hovers,
-      boundingBox: boundingbox,
+      boundingBox: boundingBox,
       dimensions,
       featureCallback,
       overlayCallback: defaultOverlayCallback,
