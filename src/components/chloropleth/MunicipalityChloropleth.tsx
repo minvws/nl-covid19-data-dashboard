@@ -256,7 +256,7 @@ export function MunicipalityChloropleth<
         featureCollection={municipalGeo}
         overlays={overlays}
         hovers={hasData ? municipalGeo : undefined}
-        boundingbox={boundingbox || countryGeo}
+        boundingBox={boundingbox || countryGeo}
         dimensions={dimensions}
         featureCallback={featureCallback}
         overlayCallback={overlayCallback}

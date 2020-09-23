@@ -9,7 +9,6 @@ describe('Component: Choropleth', () => {
   function mockMatchMedia(shouldMatchMedia: boolean) {
     global.window.matchMedia = jest.fn().mockReturnValue({
       matches: shouldMatchMedia,
-      mock: true,
       addListener: () => {},
       removeListener: () => {},
     });
@@ -85,7 +84,7 @@ describe('Component: Choropleth', () => {
       featureCollection,
       overlays,
       hovers,
-      boundingbox,
+      boundingBox: boundingbox,
       dimensions,
       featureCallback,
       overlayCallback,
@@ -110,6 +109,7 @@ describe('Component: Choropleth', () => {
     expect(featureCallbackWasCalled).toBeTruthy();
     expect(overlayCallbackWasCalled).toBeTruthy();
     expect(hoverCallbackWasCalled).toBeTruthy();
+    // Check if there are exactly 4 <g> elements. One container, and one for each feature collection
     expect(groups?.length).toEqual(4);
   });
 
@@ -143,7 +143,7 @@ describe('Component: Choropleth', () => {
       featureCollection,
       overlays,
       hovers,
-      boundingbox,
+      boundingBox: boundingbox,
       dimensions,
       featureCallback,
       overlayCallback: defaultOverlayCallback,
@@ -201,7 +201,7 @@ describe('Component: Choropleth', () => {
       featureCollection,
       overlays,
       hovers,
-      boundingbox,
+      boundingBox: boundingbox,
       dimensions,
       featureCallback,
       overlayCallback: defaultOverlayCallback,
@@ -254,7 +254,7 @@ describe('Component: Choropleth', () => {
       featureCollection,
       overlays,
       hovers,
-      boundingbox,
+      boundingBox: boundingbox,
       dimensions,
       featureCallback,
       overlayCallback: defaultOverlayCallback,
