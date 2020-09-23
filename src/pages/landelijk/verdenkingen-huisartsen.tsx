@@ -1,17 +1,15 @@
+import siteText from '~/locale/index';
+import { VerdenkingenHuisartsen } from '~/types/data.d';
+import getNlData, { INationalData } from '~/static-props/nl-data';
+
 import { ContentHeader } from '~/components/layout/Content';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
-import { LineChart } from '~/components/charts/index';
-
+import { LineChart } from '~/components/lineChart/lineChartWithWeekTooltip';
 import { SuspectedPatientsBarScale } from '~/components/landelijk/suspected-patients-barscale';
 
 import Arts from '~/assets/arts.svg';
 import { formatNumber } from '~/utils/formatNumber';
-
-import siteText from '~/locale/index';
-
-import { VerdenkingenHuisartsen } from '~/types/data.d';
-import getNlData, { INationalData } from '~/static-props/nl-data';
 
 const text: typeof siteText.verdenkingen_huisartsen =
   siteText.verdenkingen_huisartsen;
@@ -66,6 +64,7 @@ const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
             values={data.values.map((value) => ({
               value: value.incidentie,
               date: value.week_unix,
+              week: { start: value.week_start_unix, end: value.week_end_unix },
             }))}
           />
         </article>

@@ -1,17 +1,14 @@
+import siteText from '~/locale/index';
+import { RioolwaterMetingen } from '~/types/data.d';
+import getNlData, { INationalData } from '~/static-props/nl-data';
+
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
-import { LineChart } from '~/components/charts/index';
+import { LineChart } from '~/components/lineChart/lineChartWithWeekTooltip';
 import { ContentHeader } from '~/components/layout/Content';
-
 import { SewerWaterBarScale } from '~/components/landelijk/sewer-water-barscale';
 
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
-
-import siteText from '~/locale/index';
-
-import { RioolwaterMetingen } from '~/types/data.d';
-
-import getNlData, { INationalData } from '~/static-props/nl-data';
 
 const text: typeof siteText.rioolwater_metingen = siteText.rioolwater_metingen;
 
@@ -55,6 +52,7 @@ const SewerWater: FCWithLayout<INationalData> = (props) => {
             values={data.values.map((value) => ({
               value: Number(value.average),
               date: value.week_unix,
+              week: { start: value.week_start_unix, end: value.week_end_unix },
             }))}
           />
         </article>

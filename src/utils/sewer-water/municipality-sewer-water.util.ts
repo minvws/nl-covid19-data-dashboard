@@ -29,6 +29,8 @@ export interface SewerWaterBarScaleData {
 interface SewerWaterLineChartValue {
   date: number;
   value: number;
+  week_start_unix: number;
+  week_end_unix: number;
 }
 
 export interface SewerWaterLineChartData {

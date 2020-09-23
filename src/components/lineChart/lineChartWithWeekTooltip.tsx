@@ -1,18 +1,22 @@
-import React, { useMemo } from 'react';
-import Highcharts, { SeriesLineOptions } from 'highcharts';
+import React, { useMemo, useState } from 'react';
+import Highcharts, { SeriesAreaOptions } from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
+import {
+  TimeframeOption,
+  ChartTimeControls,
+} from '~/components/chartTimeControls';
+import { getFilteredValues } from '~/components/chartTimeControls/chartTimeControlUtils';
+
+import styles from './lineChart.module.scss';
 import { formatNumber } from '~/utils/formatNumber';
 import { formatDate } from '~/utils/formatDate';
 import { getItemFromArray } from '~/utils/getItemFromArray';
 
-type TranslationStrings = Record<string, string>;
-
 interface Value {
   date: number;
   value?: number;
-  week_start_unix: number;
-  week_end_unix: number;
+  week: Week;
 }
 
 type Week = {
@@ -20,28 +24,24 @@ type Week = {
   end: number;
 };
 
-type RegionalSewerWaterLineChartProps = {
-  averageValues: Value[];
-  text: TranslationStrings;
+type LineChartProps = {
+  values: Value[];
+  title: string;
+  description?: string;
+  timeframeOptions?: TimeframeOption[];
 };
 
-function getOptions(
-  averageValues: Value[],
-  text: TranslationStrings
-): Highcharts.Options {
-  const hasMultipleValues = averageValues.length > 1;
-  const weekSet: Week[] = averageValues.map((value) => ({
-    start: value.week_start_unix,
-    end: value.week_end_unix,
-  }));
+function getOptions(values: Value[]): Highcharts.Options {
+  const hasMultipleValues = values.length > 1;
 
-  const series: SeriesLineOptions[] = [
+  const series: SeriesAreaOptions[] = [
     {
-      type: 'line',
-      data: averageValues.map((x) => [x.date, x.value]),
-      name: text.average_label_text,
-      showInLegend: true,
+      type: 'area',
+      data: values.map((x) => [x.date, x.value]),
+      name: '',
+      showInLegend: false,
       color: '#3391CC',
+      fillColor: 'rgba(51, 145, 204, 0.2)',
       allowPointSelect: false,
       marker: {
         symbol: 'circle',
@@ -68,7 +68,7 @@ function getOptions(
       borderWidth: 0,
       colorCount: 10,
       displayErrors: true,
-      height: 225,
+      height: 175,
     },
     legend: {
       itemWidth: 300,
@@ -97,7 +97,7 @@ function getOptions(
       title: {
         text: null,
       },
-      categories: averageValues.map((value) => value?.date.toString()),
+      categories: values.map((value) => value?.date.toString()),
       labels: {
         align: 'right',
         // types say `rotation` needs to be a number,
@@ -114,11 +114,12 @@ function getOptions(
       backgroundColor: '#FFF',
       borderColor: '#01689B',
       borderRadius: 0,
-      formatter: function (): false | string {
-        if (this.series.name !== text.average_label_text) {
-          return false;
-        }
-        const { start, end } = getItemFromArray(weekSet, this.point.index);
+      formatter: function () {
+        const { start, end } = getItemFromArray(
+          values.map((x) => x.week),
+          this.point.index
+        );
+
         return `<strong>${formatDate(start * 1000, 'short')} - ${formatDate(
           end * 1000,
           'short'
@@ -150,13 +151,39 @@ function getOptions(
   return options;
 }
 
-export function RegionalSewerWaterLineChart({
-  averageValues,
-  text,
-}: RegionalSewerWaterLineChartProps) {
-  const chartOptions = useMemo(() => {
-    return getOptions(averageValues, text);
-  }, [averageValues, text]);
+export function LineChart({
+  values,
+  title,
+  description,
+  timeframeOptions,
+}: LineChartProps) {
+  const [timeframe, setTimeframe] = useState<TimeframeOption>('5weeks');
 
-  return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;
+  const chartOptions = useMemo(() => {
+    const filteredValues = getFilteredValues<Value>(
+      values,
+      timeframe,
+      (value: Value) => value.date * 1000
+    );
+    return getOptions(filteredValues);
+  }, [values, timeframe]);
+
+  return (
+    <section className={styles.root}>
+      <header className={styles.header}>
+        <div className={styles.titleAndDescription}>
+          {title && <h3>{title}</h3>}
+          {description && <p>{description}</p>}
+        </div>
+        <div>
+          <ChartTimeControls
+            timeframe={timeframe}
+            timeframeOptions={timeframeOptions}
+            onChange={setTimeframe}
+          />
+        </div>
+      </header>
+      <HighchartsReact highcharts={Highcharts} options={chartOptions} />
+    </section>
+  );
 }
