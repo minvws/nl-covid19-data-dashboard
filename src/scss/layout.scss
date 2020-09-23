@@ -198,21 +198,23 @@
     }
   }
 
-  .small-screen-aside-tendency {
-    .national-content {
-      display: none;
-    }
-    .safety-region-aside,
-    .municipality-aside {
-      min-height: 6em;
-    }
+  .safety-region-aside,
+  .municipality-aside {
+    min-height: 6em;
   }
 
-  .small-screen-content-tendency {
-    .national-aside,
-    .safety-region-aside,
-    .municipality-aside {
-      display: none;
+  .js {
+    .has-menu-opened {
+      .national-content,
+      .back-button {
+        display: none;
+      }
+    }
+
+    .has-menu-closed {
+      .national-aside {
+        display: none;
+      }
     }
   }
 }
