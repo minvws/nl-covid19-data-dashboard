@@ -213,11 +213,9 @@ function calculateYMax(values: Value[], signaalwaarde = -Infinity) {
    * scale the y-axis
    */
   const maxValue = values
+    .map((x) => x.value)
     .filter(isDefined)
-    .reduce(
-      (acc, { value }) => (value && value > acc ? value : acc),
-      -Infinity
-    );
+    .reduce((acc, value) => (value > acc ? value : acc), -Infinity);
 
   return Math.max(maxValue, signaalwaarde + 10);
 }
