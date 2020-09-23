@@ -47,8 +47,9 @@ interface IParams {
  * }
  * ```
  */
+
 export function getSafetyRegionData() {
-  return async function ({ params }: IParams): IProps {
+  return async function ({ params }: IParams): Promise<IProps> {
     const { code } = params;
 
     let safetyRegionData: Regionaal;

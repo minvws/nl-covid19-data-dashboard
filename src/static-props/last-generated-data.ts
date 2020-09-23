@@ -34,27 +34,25 @@ interface IProps {
  * }
  * ```
  */
-export default function getLastGeneratedData(): () => IProps {
-  return async function () {
-    let nlData;
+export async function getStaticProps(): Promise<IProps> {
+  let nlData;
 
-    const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
-    if (fs.existsSync(filePath)) {
-      const fileContents = fs.readFileSync(filePath, 'utf8');
-      nlData = JSON.parse(fileContents);
-    } else {
-      const res = await fetch(
-        'https://coronadashboard.rijksoverheid.nl/json/NL.json'
-      );
-      nlData = await res.json();
-    }
+  const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
+  if (fs.existsSync(filePath)) {
+    const fileContents = fs.readFileSync(filePath, 'utf8');
+    nlData = JSON.parse(fileContents);
+  } else {
+    const res = await fetch(
+      'https://coronadashboard.rijksoverheid.nl/json/NL.json'
+    );
+    nlData = await res.json();
+  }
 
-    const lastGenerated = nlData.last_generated;
+  const lastGenerated = nlData.last_generated;
 
-    return {
-      props: {
-        lastGenerated,
-      },
-    };
+  return {
+    props: {
+      lastGenerated,
+    },
   };
 }
