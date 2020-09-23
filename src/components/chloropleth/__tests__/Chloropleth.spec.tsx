@@ -30,9 +30,7 @@ describe('Component: Choropleth', () => {
   };
 
   const defaultHoverCallback = (
-    feature: Feature<MultiPolygon, MunicipalityProperties>,
-    _path: string,
-    _index: number
+    feature: Feature<MultiPolygon, MunicipalityProperties>
   ) => {
     return <path key={`hover-${feature.properties.gemcode}`} />;
   };
@@ -41,9 +39,7 @@ describe('Component: Choropleth', () => {
     // Arrange
 
     const featureCallback = (
-      feature: Feature<MultiPolygon, MunicipalityProperties>,
-      _path: string,
-      _index: number
+      feature: Feature<MultiPolygon, MunicipalityProperties>
     ) => {
       return <path key={`feature-${feature.properties.gemcode}`} />;
     };
@@ -57,9 +53,7 @@ describe('Component: Choropleth', () => {
     };
 
     const hoverCallback = (
-      feature: Feature<MultiPolygon, MunicipalityProperties>,
-      _path: string,
-      _index: number
+      feature: Feature<MultiPolygon, MunicipalityProperties>
     ) => {
       return <path key={`hover-${feature.properties.gemcode}`} />;
     };
@@ -90,8 +84,7 @@ describe('Component: Choropleth', () => {
     } catch (e) {}
 
     // Assert
-    // Check if there are exactly 4 <g> elements. One container, and one for each feature collection
-    expect(groups?.[0].children.length).toEqual(3);
+    expect(groups?.[0].children.length).toEqual(3); // main group holding 3 groups
     expect(groups?.[1].children.length).toEqual(355); // municipal features
     expect(groups?.[2].children.length).toEqual(1); // country outline
     expect(groups?.[3].children.length).toEqual(355); // hover outlines
@@ -105,9 +98,7 @@ describe('Component: Choropleth', () => {
     mockMatchMedia(true);
 
     const featureCallback = (
-      feature: Feature<MultiPolygon, MunicipalityProperties>,
-      _path: string,
-      _index: number
+      feature: Feature<MultiPolygon, MunicipalityProperties>
     ) => {
       return (
         <path
@@ -118,9 +109,9 @@ describe('Component: Choropleth', () => {
       );
     };
 
-    let pathReceiveClick = false;
+    let hasPathReceivedClick = false;
     const onPathClick = (id: string) => {
-      pathReceiveClick = true;
+      hasPathReceivedClick = true;
       expect(id).toEqual(testMunicipalCode);
     };
 
@@ -146,7 +137,7 @@ describe('Component: Choropleth', () => {
     fireEvent.click(gemeente);
 
     // Assert
-    expect(pathReceiveClick).toBeTruthy();
+    expect(hasPathReceivedClick).toBeTruthy();
   });
 
   it('Should show the tooltip content handler when paths are clicked on on a small screen', () => {
@@ -156,9 +147,7 @@ describe('Component: Choropleth', () => {
     mockMatchMedia(false);
 
     const featureCallback = (
-      feature: Feature<MultiPolygon, MunicipalityProperties>,
-      _path: string,
-      _index: number
+      feature: Feature<MultiPolygon, MunicipalityProperties>
     ) => {
       return (
         <path
@@ -169,9 +158,9 @@ describe('Component: Choropleth', () => {
       );
     };
 
-    let pathReceiveClick = false;
+    let hasPathReceivedClick = false;
     const onPathClick = (id: string) => {
-      pathReceiveClick = true;
+      hasPathReceivedClick = true;
       expect(id).toEqual(testMunicipalCode);
     };
 
@@ -201,7 +190,7 @@ describe('Component: Choropleth', () => {
     fireEvent.click(gemeente);
 
     // Assert
-    expect(pathReceiveClick).toBeFalsy();
+    expect(hasPathReceivedClick).toBeFalsy();
     const tooltips = renderResult.getAllByText(`Tooltip:${testMunicipalCode}`);
     expect(tooltips.length).toEqual(1);
   });
