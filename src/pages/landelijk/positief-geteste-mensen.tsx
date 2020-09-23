@@ -22,10 +22,13 @@ import {
 import getNlData, { INationalData } from '~/static-props/nl-data';
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
 import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
-import { positiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
-import { positiveTestedPeopleRegionTooltip } from '~/components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
+import { positiveTestedPeopleTooltip } from '~/components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
+import { positiveTestedPeopleTooltip as regionPositiveTestedPeopleTooltip } from '~/components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
 import { MunicipalityLegenda } from '~/components/chloropleth/legenda/MunicipalityLegenda';
 import { SafetyRegionLegenda } from '~/components/chloropleth/legenda/SafetyRegionLegenda';
+import { onSelectMunicipal } from '~/components/chloropleth/selectHandlers/onSelectMunicipal';
+import { useRouter } from 'next/router';
+import { onSelectRegion } from '~/components/chloropleth/selectHandlers/onSelectRegion';
 
 const text: typeof siteText.positief_geteste_personen =
   siteText.positief_geteste_personen;
@@ -35,6 +38,7 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
     'municipal'
   );
+  const router = useRouter();
 
   const delta: InfectedPeopleDeltaNormalized | undefined =
     data?.infected_people_delta_normalized;
@@ -112,13 +116,15 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           {selectedMap === 'municipal' && (
             <MunicipalityChloropleth
               metricName="positive_tested_people"
-              tooltipContent={positiveTestedPeopleMunicipalTooltip}
+              tooltipContent={positiveTestedPeopleTooltip}
+              onSelect={onSelectMunicipal(router)}
             />
           )}
           {selectedMap === 'region' && (
             <SafetyRegionChloropleth
               metricName="positive_tested_people"
-              tooltipContent={positiveTestedPeopleRegionTooltip}
+              tooltipContent={regionPositiveTestedPeopleTooltip}
+              onSelect={onSelectRegion(router)}
             />
           )}
         </div>
