@@ -1,5 +1,4 @@
-import fs from 'fs';
-import path from 'path';
+import { readFromFSorFetch } from './utils/readFromFSorFetch';
 
 import { National } from '~/types/data.d';
 
@@ -36,26 +35,11 @@ interface IProps {
  * ```
  */
 export async function getNlData(): Promise<IProps> {
-  let nlData: National;
+  const NL = readFromFSorFetch('NL.json');
 
-  const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
-  if (fs.existsSync(filePath)) {
-    const fileContents = fs.readFileSync(filePath, 'utf8');
-    nlData = JSON.parse(fileContents);
-  } else {
-    if (process.env.NODE_ENV === 'development') {
-      const res = await fetch(
-        'https://coronadashboard.rijksoverheid.nl/json/NL.json'
-      );
-      nlData = await res.json();
-    } else {
-      console.error(
-        'You are running a production build without having the files available locally. To prevent a DoS attack on the production server your build will now fail. To resolve this, get a copy of the local data on your machine in /public/json/'
-      );
-      process.exit(1);
-    }
-  }
+  const values = await Promise.all([NL]);
 
+  const nlData: National = values[0];
   const lastGenerated = nlData.last_generated;
 
   return {

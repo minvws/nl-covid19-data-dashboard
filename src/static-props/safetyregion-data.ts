@@ -1,12 +1,12 @@
-import fs from 'fs';
-import path from 'path';
-
-import { Regionaal } from '~/types/data.d';
+import { Regionaal, Regions } from '~/types/data.d';
 
 import safetyRegions from '~/data/index';
 
+import { readFromFSorFetch } from './utils/readFromFSorFetch';
+
 export interface ISafetyRegionData {
   data: Regionaal;
+  municipalities: Regions;
   lastGenerated: string;
 }
 
@@ -52,34 +52,20 @@ export function getSafetyRegionData() {
   return async function ({ params }: IParams): Promise<IProps> {
     const { code } = params;
 
-    let safetyRegionData: Regionaal;
+    const safety = readFromFSorFetch(`${code}.json`);
+    const municipalities = readFromFSorFetch('MUNICIPALITIES.json');
 
-    const filePath = path.join(process.cwd(), 'public', 'json', `${code}.json`);
+    const values = await Promise.all([safety, municipalities]);
 
-    if (fs.existsSync(filePath)) {
-      const fileContents = fs.readFileSync(filePath, 'utf8');
-      safetyRegionData = JSON.parse(fileContents);
-    } else {
-      if (process.env.NODE_ENV === 'development') {
-        const res = await fetch(
-          `https://coronadashboard.rijksoverheid.nl/json/${code}.json`
-        );
-        safetyRegionData = await res.json();
-      } else {
-        console.error(
-          'You are running a production build without having the files available locally. To prevent a DoS attack on the production server your build will now fail. To resolve this, get a copy of the local data on your machine in /public/json/'
-        );
-        process.exit(1);
-      }
-    }
-
-    // get data for the page
+    const safetyRegionData: Regionaal = values[0];
+    const municipalitiesData = values[1];
 
     const lastGenerated = safetyRegionData.last_generated;
 
     return {
       props: {
         data: safetyRegionData,
+        municipalities: municipalitiesData,
         lastGenerated,
       },
     };
