@@ -32,12 +32,7 @@ export function useSafetyRegionData<
   featureCollection: FeatureCollection<MultiPolygon, SafetyRegionProperties>,
   metricProperty?: string
 ): TSafetyRegionDataInfo<ReturnType> {
-  const urlToFetch =
-    process.env.NODE_ENV === 'development'
-      ? 'https://coronadashboard.rijksoverheid.nl/json/MUNICIPALITIES.json'
-      : '/json/MUNICIPALITIES.json';
-
-  const { data } = useSWR<Regions>(urlToFetch);
+  const { data } = useSWR<Regions>('/json/MUNICIPALITIES.json');
 
   const metricItems = metricName && data ? data[metricName] : undefined;
   metricProperty = metricProperty ?? metricName;
