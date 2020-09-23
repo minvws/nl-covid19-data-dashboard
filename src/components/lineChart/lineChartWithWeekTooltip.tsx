@@ -27,6 +27,7 @@ type Week = {
 type LineChartProps = {
   values: Value[];
   title: string;
+  description?: string;
   timeframeOptions?: TimeframeOption[];
 };
 
@@ -150,7 +151,12 @@ function getOptions(values: Value[]): Highcharts.Options {
   return options;
 }
 
-export function LineChart({ values, title, timeframeOptions }: LineChartProps) {
+export function LineChart({
+  values,
+  title,
+  description,
+  timeframeOptions,
+}: LineChartProps) {
   const [timeframe, setTimeframe] = useState<TimeframeOption>('5weeks');
 
   const chartOptions = useMemo(() => {
@@ -167,6 +173,7 @@ export function LineChart({ values, title, timeframeOptions }: LineChartProps) {
       <header className={styles.header}>
         <div className={styles.titleAndDescription}>
           {title && <h3>{title}</h3>}
+          {description && <p>{description}</p>}
         </div>
         <div>
           <ChartTimeControls
