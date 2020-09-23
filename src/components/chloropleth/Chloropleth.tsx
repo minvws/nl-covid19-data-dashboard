@@ -240,14 +240,14 @@ const positionTooltip = (
   }
 };
 
-const svgMouseOver = (timout: MutableRefObject<any>, showTooltip: any) => {
+const svgMouseOver = (timeout: MutableRefObject<any>, showTooltip: any) => {
   return (event: any) => {
     const elm = event.target;
 
     if (elm.attributes['data-id']) {
-      if (timout.current > -1) {
-        clearTimeout(timout.current);
-        timout.current = -1;
+      if (timeout.current > -1) {
+        clearTimeout(timeout.current);
+        timeout.current = -1;
       }
 
       const id = elm.attributes['data-id'].value;
@@ -256,10 +256,10 @@ const svgMouseOver = (timout: MutableRefObject<any>, showTooltip: any) => {
   };
 };
 
-const svgMouseOut = (timout: MutableRefObject<any>, hideTooltip: any) => {
+const svgMouseOut = (timeout: MutableRefObject<any>, hideTooltip: any) => {
   return () => {
-    if (timout.current < 0) {
-      timout.current = setTimeout(() => {
+    if (timeout.current < 0) {
+      timeout.current = setTimeout(() => {
         hideTooltip();
       }, 500);
     }
