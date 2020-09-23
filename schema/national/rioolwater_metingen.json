@@ -3,7 +3,13 @@
     "item": {
       "title": "rioolwater_metingen_last_value",
       "type": "object",
-      "required": ["week_unix", "average", "date_of_insertion_unix"],
+      "required": [
+        "week_unix",
+        "average",
+        "date_of_insertion_unix",
+        "week_start_unix",
+        "week_end_unix"
+      ],
       "additionalProperties": false,
       "properties": {
         "week_unix": {
@@ -13,6 +19,12 @@
           "type": "number"
         },
         "date_of_insertion_unix": {
+          "type": "integer"
+        },
+        "week_start_unix": {
+          "type": "integer"
+        },
+        "week_end_unix": {
           "type": "integer"
         }
       }
