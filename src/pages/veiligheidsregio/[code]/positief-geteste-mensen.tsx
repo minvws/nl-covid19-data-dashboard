@@ -21,7 +21,7 @@ import { positiveTestedPeopleTooltip } from '~/components/chloropleth/tooltips/m
 import { MunicipalityLegenda } from '~/components/chloropleth/legenda/MunicipalityLegenda';
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
 import regionCodeToMunicipalCodeLookup from '~/data/regionCodeToMunicipalCodeLookup';
-import { onSelectMunicipal } from '~/components/chloropleth/selectHandlers/onSelectMunicipal';
+import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
 import { useRouter } from 'next/router';
 
 const text: typeof siteText.veiligheidsregio_positief_geteste_personen =
@@ -112,7 +112,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
             highlightSelection={false}
             metricName="positive_tested_people"
             tooltipContent={positiveTestedPeopleTooltip}
-            onSelect={onSelectMunicipal(router)}
+            onSelect={createSelectMunicipalHandler(router)}
           />
         </div>
       </article>

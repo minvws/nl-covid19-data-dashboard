@@ -21,7 +21,7 @@ import { getLocalTitleForMuncipality } from '~/utils/getLocalTitleForCode';
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
 import { positiveTestedPeopleTooltip } from '~/components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
 import { MunicipalityLegenda } from '~/components/chloropleth/legenda/MunicipalityLegenda';
-import { onSelectMunicipal } from '~/components/chloropleth/selectHandlers/onSelectMunicipal';
+import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
 import { useRouter } from 'next/router';
 
 const text: typeof siteText.gemeente_positief_geteste_personen =
@@ -107,7 +107,7 @@ const PostivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
             selected={data.code}
             metricName="positive_tested_people"
             tooltipContent={positiveTestedPeopleTooltip}
-            onSelect={onSelectMunicipal(router)}
+            onSelect={createSelectMunicipalHandler(router)}
           />
         </div>
       </article>

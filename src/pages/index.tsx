@@ -29,8 +29,8 @@ import { escalationTooltip } from '~/components/chloropleth/tooltips/region/esca
 import { MDToHTMLString } from '~/utils/MDToHTMLString';
 import { National } from '~/types/data';
 
-import { onSelectRegion } from '~/components/chloropleth/selectHandlers/onSelectRegion';
-import { onSelectMunicipal } from '~/components/chloropleth/selectHandlers/onSelectMunicipal';
+import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
+import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
 
 const Home: FCWithLayout<INationalData> = (props) => {
   const { text } = props;
@@ -92,7 +92,7 @@ const Home: FCWithLayout<INationalData> = (props) => {
             metricName="escalation_levels"
             metricProperty="escalation_level"
             style={{ height: mapHeight }}
-            onSelect={onSelectRegion(router)}
+            onSelect={createSelectRegionHandler(router)}
             tooltipContent={escalationTooltip(router)}
           />
         </div>
@@ -130,14 +130,14 @@ const Home: FCWithLayout<INationalData> = (props) => {
             <MunicipalityChloropleth
               metricName="positive_tested_people"
               tooltipContent={positiveTestedPeopleTooltip}
-              onSelect={onSelectMunicipal(router)}
+              onSelect={createSelectMunicipalHandler(router)}
             />
           )}
           {selectedMap === 'region' && (
             <SafetyRegionChloropleth
               metricName="positive_tested_people"
               tooltipContent={regionPositiveTestedPeopleTooltip}
-              onSelect={onSelectRegion(router)}
+              onSelect={createSelectRegionHandler(router)}
             />
           )}
         </div>

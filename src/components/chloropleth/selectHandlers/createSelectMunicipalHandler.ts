@@ -5,7 +5,7 @@ export type MunicipalitySelectionHandler = (
   context: MunicipalityProperties
 ) => void;
 
-export function onSelectMunicipal(
+export function createSelectMunicipalHandler(
   router: NextRouter
 ): MunicipalitySelectionHandler {
   return (context: MunicipalityProperties) => {

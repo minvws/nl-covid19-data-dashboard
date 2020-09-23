@@ -26,9 +26,9 @@ import { positiveTestedPeopleTooltip } from '~/components/chloropleth/tooltips/m
 import { positiveTestedPeopleTooltip as regionPositiveTestedPeopleTooltip } from '~/components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
 import { MunicipalityLegenda } from '~/components/chloropleth/legenda/MunicipalityLegenda';
 import { SafetyRegionLegenda } from '~/components/chloropleth/legenda/SafetyRegionLegenda';
-import { onSelectMunicipal } from '~/components/chloropleth/selectHandlers/onSelectMunicipal';
+import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
+import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
 import { useRouter } from 'next/router';
-import { onSelectRegion } from '~/components/chloropleth/selectHandlers/onSelectRegion';
 
 const text: typeof siteText.positief_geteste_personen =
   siteText.positief_geteste_personen;
@@ -117,14 +117,14 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
             <MunicipalityChloropleth
               metricName="positive_tested_people"
               tooltipContent={positiveTestedPeopleTooltip}
-              onSelect={onSelectMunicipal(router)}
+              onSelect={createSelectMunicipalHandler(router)}
             />
           )}
           {selectedMap === 'region' && (
             <SafetyRegionChloropleth
               metricName="positive_tested_people"
               tooltipContent={regionPositiveTestedPeopleTooltip}
-              onSelect={onSelectRegion(router)}
+              onSelect={createSelectRegionHandler(router)}
             />
           )}
         </div>

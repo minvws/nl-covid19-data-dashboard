@@ -19,9 +19,9 @@ import { MunicipalityLegenda } from '~/components/chloropleth/legenda/Municipali
 import { SafetyRegionLegenda } from '~/components/chloropleth/legenda/SafetyRegionLegenda';
 import { hospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/municipal/hospitalAdmissionsTooltip';
 import { hospitalAdmissionsTooltip as regionHospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/region/hospitalAdmissionsTooltip';
-import { onSelectMunicipal } from '~/components/chloropleth/selectHandlers/onSelectMunicipal';
+import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
 import { useRouter } from 'next/router';
-import { onSelectRegion } from '~/components/chloropleth/selectHandlers/onSelectRegion';
+import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
 
 const text: typeof siteText.ziekenhuisopnames_per_dag =
   siteText.ziekenhuisopnames_per_dag;
@@ -88,14 +88,14 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
             <MunicipalityChloropleth
               metricName="hospital_admissions"
               tooltipContent={hospitalAdmissionsTooltip}
-              onSelect={onSelectMunicipal(router)}
+              onSelect={createSelectMunicipalHandler(router)}
             />
           )}
           {selectedMap === 'region' && (
             <SafetyRegionChloropleth
               metricName="hospital_admissions"
               tooltipContent={regionHospitalAdmissionsTooltip}
-              onSelect={onSelectRegion(router)}
+              onSelect={createSelectRegionHandler(router)}
             />
           )}
         </div>

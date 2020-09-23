@@ -20,7 +20,7 @@ import { hospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/mun
 import { MunicipalityLegenda } from '~/components/chloropleth/legenda/MunicipalityLegenda';
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
 import regionCodeToMunicipalCodeLookup from '~/data/regionCodeToMunicipalCodeLookup';
-import { onSelectMunicipal } from '~/components/chloropleth/selectHandlers/onSelectMunicipal';
+import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
 import { useRouter } from 'next/router';
 
 const text: typeof siteText.veiligheidsregio_ziekenhuisopnames_per_dag =
@@ -91,7 +91,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
             highlightSelection={false}
             metricName="hospital_admissions"
             tooltipContent={hospitalAdmissionsTooltip}
-            onSelect={onSelectMunicipal(router)}
+            onSelect={createSelectMunicipalHandler(router)}
           />
         </div>
       </article>

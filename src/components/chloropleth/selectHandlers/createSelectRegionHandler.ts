@@ -3,7 +3,9 @@ import { SafetyRegionProperties } from '../shared';
 
 export type RegionSelectionHandler = (context: SafetyRegionProperties) => void;
 
-export function onSelectRegion(router: NextRouter): RegionSelectionHandler {
+export function createSelectRegionHandler(
+  router: NextRouter
+): RegionSelectionHandler {
   return (context: SafetyRegionProperties) => {
     router.push(
       '/veiligheidsregio/[code]/positief-geteste-mensen',
