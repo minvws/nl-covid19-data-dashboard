@@ -8,9 +8,9 @@
     "proto_name",
     "name",
     "code",
+    "escalation_levels",
     "hospital_admissions",
-    "positive_tested_people",
-    "escalation_levels"
+    "positive_tested_people"
   ],
   "properties": {
     "last_generated": {
@@ -51,6 +51,7 @@
     },
     "escalation_levels": {
       "type": "array",
+      "minItems": 25,
       "maxItems": 25,
       "items": {
         "$ref": "escalation_levels.json"

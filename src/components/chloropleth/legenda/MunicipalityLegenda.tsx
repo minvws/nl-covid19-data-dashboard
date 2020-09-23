@@ -1,16 +1,15 @@
 import { TMunicipalityMetricName } from '../shared';
-import ChloroplethLegenda from './ChloroplethLegenda';
-import useMunicipalLegendaData from './hooks/useMunicipalLegendaData';
+import { ChloroplethLegenda } from './ChloroplethLegenda';
+import { useMunicipalLegendaData } from './hooks/useMunicipalLegendaData';
 
 export type TProps = {
   metricName: TMunicipalityMetricName;
   title: string;
-  gradients?: [minColor: string, maxColor: string];
 };
 
-export default function MunicipalityLegenda(props: TProps) {
-  const { metricName, title, gradients = ['#C0E8FC', '#0579B3'] } = props;
-  const items = useMunicipalLegendaData(metricName, gradients);
+export function MunicipalityLegenda(props: TProps) {
+  const { metricName, title } = props;
+  const items = useMunicipalLegendaData(metricName);
 
   if (!items) {
     return null;

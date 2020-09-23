@@ -1,22 +1,23 @@
-import BarScale from 'components/barScale';
-import { FCWithLayout } from 'components/layout';
-import { getNationalLayout } from 'components/layout/NationalLayout';
-import { LineChart } from 'components/charts/index';
-import { ContentHeader } from 'components/layout/Content';
+import { FCWithLayout } from '~/components/layout';
+import { getNationalLayout } from '~/components/layout/NationalLayout';
+import { LineChart } from '~/components/charts/index';
+import { ContentHeader } from '~/components/layout/Content';
 
-import Ziekenhuis from 'assets/ziekenhuis.svg';
+import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-barscale';
 
-import siteText from 'locale';
-import styles from 'components/chloropleth/chloropleth.module.scss';
+import Ziekenhuis from '~/assets/ziekenhuis.svg';
 
-import { IntakeHospitalMa } from 'types/data.d';
+import siteText from '~/locale/index';
+import styles from '~/components/chloropleth/chloropleth.module.scss';
+
+import { IntakeHospitalMa } from '~/types/data.d';
 import { ReactNode, useState } from 'react';
-import getNlData, { INationalData } from 'static-props/nl-data';
-import ChartRegionControls from 'components/chartRegionControls';
-import MunicipalityChloropleth from 'components/chloropleth/MunicipalityChloropleth';
-import SafetyRegionChloropleth from 'components/chloropleth/SafetyRegionChloropleth';
-import MunicipalityLegenda from 'components/chloropleth/legenda/MunicipalityLegenda';
-import SafetyRegionLegenda from 'components/chloropleth/legenda/SafetyRegionLegenda';
+import getNlData, { INationalData } from '~/static-props/nl-data';
+import { ChartRegionControls } from '~/components/chartRegionControls';
+import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
+import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
+import { MunicipalityLegenda } from '~/components/chloropleth/legenda/MunicipalityLegenda';
+import { SafetyRegionLegenda } from '~/components/chloropleth/legenda/SafetyRegionLegenda';
 
 const text: typeof siteText.ziekenhuisopnames_per_dag =
   siteText.ziekenhuisopnames_per_dag;
@@ -45,42 +46,6 @@ const tooltipRegionContent = (context: any): ReactNode => {
   );
 };
 
-export function IntakeHospitalBarScale(props: {
-  data: IntakeHospitalMa | undefined;
-  showAxis: boolean;
-}) {
-  const { data, showAxis } = props;
-
-  if (!data) return null;
-
-  return (
-    <BarScale
-      min={0}
-      max={100}
-      signaalwaarde={40}
-      screenReaderText={text.barscale_screenreader_text}
-      value={data.last_value.moving_average_hospital}
-      id="opnames"
-      rangeKey="moving_average_hospital"
-      gradient={[
-        {
-          color: '#69c253',
-          value: 0,
-        },
-        {
-          color: '#D3A500',
-          value: 40,
-        },
-        {
-          color: '#f35065',
-          value: 90,
-        },
-      ]}
-      showAxis={showAxis}
-    />
-  );
-}
-
 const IntakeHospital: FCWithLayout<INationalData> = (props) => {
   const { data: state } = props;
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
@@ -92,7 +57,7 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
   return (
     <>
       <ContentHeader
-        category="Medische indicatoren"
+        category={siteText.nationaal_layout.headings.medisch}
         title={text.titel}
         Icon={Ziekenhuis}
         subtitle={text.pagina_toelichting}
@@ -141,35 +106,30 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
           {selectedMap === 'municipal' && (
             <MunicipalityChloropleth
               metricName="hospital_admissions"
-              gradient={['#D2F3FF', '#005684']}
               tooltipContent={tooltipMunicipalContent}
             />
           )}
           {selectedMap === 'region' && (
             <SafetyRegionChloropleth
               metricName="hospital_admissions"
-              gradient={['#D2F3FF', '#005684']}
               tooltipContent={tooltipRegionContent}
             />
           )}
         </div>
       </article>
 
-      <article className="metric-article">
-        <h3>{text.linechart_titel}</h3>
-
-        {data && (
-          <>
-            <LineChart
-              values={data.values.map((value: any) => ({
-                value: value.moving_average_hospital,
-                date: value.date_of_report_unix,
-              }))}
-              signaalwaarde={40}
-            />
-          </>
-        )}
-      </article>
+      {data && (
+        <article className="metric-article">
+          <LineChart
+            title={text.linechart_titel}
+            values={data.values.map((value: any) => ({
+              value: value.moving_average_hospital,
+              date: value.date_of_report_unix,
+            }))}
+            signaalwaarde={40}
+          />
+        </article>
+      )}
     </>
   );
 };

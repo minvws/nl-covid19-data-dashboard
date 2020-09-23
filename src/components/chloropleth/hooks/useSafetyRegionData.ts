@@ -1,17 +1,12 @@
 import { FeatureCollection, MultiPolygon } from 'geojson';
 import { useMemo } from 'react';
 import useSWR from 'swr';
-import { Regions } from 'types/data';
-import useExtent from 'utils/useExtent';
+import { Regions } from '~/types/data';
 import { SafetyRegionProperties, TRegionMetricName } from '../shared';
 
 export type TGetRegionFunc<T> = (id: string) => T | SafetyRegionProperties;
 
-export type TSafetyRegionDataInfo<T> = [
-  TGetRegionFunc<T>,
-  boolean,
-  [min: number, max: number] | undefined
-];
+export type TSafetyRegionDataInfo<T> = [TGetRegionFunc<T>, boolean];
 
 /**
  * This hook takes a metric name, extracts the associated data from the json/regions.json
@@ -28,7 +23,7 @@ export type TSafetyRegionDataInfo<T> = [
  * @param featureCollection
  * @param metricProperty
  */
-export default function useRegionData<
+export function useSafetyRegionData<
   T extends TRegionMetricName,
   K extends Regions[T],
   ReturnType extends K[number] & { value: number } & SafetyRegionProperties
@@ -41,11 +36,6 @@ export default function useRegionData<
 
   const metricItems = metricName && data ? data[metricName] : undefined;
   metricProperty = metricProperty ?? metricName;
-
-  const domain = useExtent(
-    metricItems,
-    (item: any) => item[metricProperty as any]
-  );
 
   const mergedData = useMemo<Record<string, ReturnType>>(() => {
     if (!metricName || !metricItems) {
@@ -90,6 +80,5 @@ export default function useRegionData<
   return [
     getData,
     mergedData ? Boolean(Object.keys(mergedData).length) : false,
-    domain,
   ];
 }

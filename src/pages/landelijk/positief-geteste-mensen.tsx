@@ -1,69 +1,34 @@
 import { useState } from 'react';
 
-import BarScale from 'components/barScale';
-import { FCWithLayout } from 'components/layout';
-import { getNationalLayout } from 'components/layout/NationalLayout';
-import { LineChart, BarChart } from 'components/charts/index';
-import { ContentHeader } from 'components/layout/Content';
-import ChartRegionControls from 'components/chartRegionControls';
+import { FCWithLayout } from '~/components/layout';
+import { getNationalLayout } from '~/components/layout/NationalLayout';
+import { LineChart, BarChart } from '~/components/charts/index';
+import { ContentHeader } from '~/components/layout/Content';
+import { ChartRegionControls } from '~/components/chartRegionControls';
 
-import Getest from 'assets/test.svg';
-import formatDecimal from 'utils/formatNumber';
+import Getest from '~/assets/test.svg';
+import { formatNumber } from '~/utils/formatNumber';
 
-import siteText from 'locale';
+import { PositiveTestedPeopleBarScale } from '~/components/landelijk/positive-tested-people-barscale';
+
+import siteText from '~/locale/index';
 
 import {
   InfectedPeopleDeltaNormalized,
   InfectedPeopleTotal,
   IntakeShareAgeGroups,
-} from 'types/data.d';
+} from '~/types/data.d';
 
-import getNlData, { INationalData } from 'static-props/nl-data';
-import MunicipalityChloropleth from 'components/chloropleth/MunicipalityChloropleth';
-import SafetyRegionChloropleth from 'components/chloropleth/SafetyRegionChloropleth';
-import positiveTestedPeopleTooltip from 'components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
-import positiveTestedPeopleTooltipRegion from 'components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
-import MunicipalityLegenda from 'components/chloropleth/legenda/MunicipalityLegenda';
-import SafetyRegionLegenda from 'components/chloropleth/legenda/SafetyRegionLegenda';
+import getNlData, { INationalData } from '~/static-props/nl-data';
+import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
+import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
+import { positiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
+import { positiveTestedPeopleRegionTooltip } from '~/components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
+import { MunicipalityLegenda } from '~/components/chloropleth/legenda/MunicipalityLegenda';
+import { SafetyRegionLegenda } from '~/components/chloropleth/legenda/SafetyRegionLegenda';
 
 const text: typeof siteText.positief_geteste_personen =
   siteText.positief_geteste_personen;
-
-export function PostivelyTestedPeopleBarScale(props: {
-  data: InfectedPeopleDeltaNormalized | undefined;
-  showAxis: boolean;
-}) {
-  const { data, showAxis } = props;
-
-  if (!data) return null;
-
-  return (
-    <BarScale
-      min={0}
-      max={10}
-      screenReaderText={text.barscale_screenreader_text}
-      value={data.last_value.infected_daily_increase}
-      id="positief"
-      rangeKey="infected_daily_increase"
-      gradient={[
-        {
-          color: '#69c253',
-          value: 0,
-        },
-        {
-          color: '#D3A500',
-          value: 7,
-        },
-        {
-          color: '#f35065',
-          value: 10,
-        },
-      ]}
-      signaalwaarde={7}
-      showAxis={showAxis}
-    />
-  );
-}
 
 const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
   const { data } = props;
@@ -86,7 +51,7 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
   return (
     <>
       <ContentHeader
-        category="Medische indicatoren"
+        category={siteText.nationaal_layout.headings.medisch}
         title={text.titel}
         Icon={Getest}
         subtitle={text.pagina_toelichting}
@@ -103,7 +68,7 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           <h3>{text.barscale_titel}</h3>
 
           {delta && (
-            <PostivelyTestedPeopleBarScale data={delta} showAxis={true} />
+            <PositiveTestedPeopleBarScale data={delta} showAxis={true} />
           )}
           <p>{text.barscale_toelichting}</p>
         </article>
@@ -113,7 +78,7 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
             <h3>
               {text.kpi_titel}{' '}
               <span className="text-blue kpi">
-                {formatDecimal(total.last_value.infected_daily_total)}
+                {formatNumber(total.last_value.infected_daily_total)}
               </span>
             </h3>
           )}
@@ -147,34 +112,31 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           {selectedMap === 'municipal' && (
             <MunicipalityChloropleth
               metricName="positive_tested_people"
-              tooltipContent={positiveTestedPeopleTooltip}
+              tooltipContent={positiveTestedPeopleMunicipalTooltip}
             />
           )}
           {selectedMap === 'region' && (
             <SafetyRegionChloropleth
               metricName="positive_tested_people"
-              tooltipContent={positiveTestedPeopleTooltipRegion}
+              tooltipContent={positiveTestedPeopleRegionTooltip}
             />
           )}
         </div>
       </article>
 
-      <article className="metric-article">
-        <div className="article-text">
-          <h3>{text.linechart_titel}</h3>
-          <p>{text.linechart_toelichting}</p>
-        </div>
-
-        {delta && (
+      {delta && (
+        <article className="metric-article">
           <LineChart
+            title={text.linechart_titel}
+            description={text.linechart_toelichting}
             values={delta.values.map((value) => ({
               value: value.infected_daily_increase,
               date: value.date_of_report_unix,
             }))}
             signaalwaarde={7}
           />
-        )}
-      </article>
+        </article>
+      )}
 
       <article className="metric-article layout-two-column">
         <div className="column-item column-item-extra-margin">

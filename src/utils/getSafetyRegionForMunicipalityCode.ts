@@ -1,5 +1,5 @@
-import municipalities from 'data/gemeente_veiligheidsregio.json';
-import regios from 'data';
+import municipalities from '~/data/gemeente_veiligheidsregio.json';
+import regios from '~/data/index';
 
 /**
  * This function returns the safety region information for the given
@@ -7,7 +7,7 @@ import regios from 'data';
  *
  * @param code
  */
-export default function getSafetyRegionForMunicipalityCode(
+export function getSafetyRegionForMunicipalityCode(
   code: string
 ): { name: string; code: string; id: number } | undefined {
   const municipality = municipalities.find((mun) => mun.gemcode === code);

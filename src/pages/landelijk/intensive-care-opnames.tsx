@@ -1,54 +1,18 @@
-import BarScale from 'components/barScale';
-import { FCWithLayout } from 'components/layout';
-import { getNationalLayout } from 'components/layout/NationalLayout';
-import { LineChart } from 'components/charts/index';
-import { ContentHeader } from 'components/layout/Content';
+import { FCWithLayout } from '~/components/layout';
+import { getNationalLayout } from '~/components/layout/NationalLayout';
+import { LineChart } from '~/components/charts/index';
+import { ContentHeader } from '~/components/layout/Content';
+import { IntakeIntensiveCareBarscale } from '~/components/landelijk/intake-intensive-care-barscale';
 
-import Arts from 'assets/arts.svg';
+import Arts from '~/assets/arts.svg';
 
-import siteText from 'locale';
+import siteText from '~/locale/index';
 
-import { IntakeIntensivecareMa } from 'types/data.d';
+import { IntakeIntensivecareMa } from '~/types/data.d';
 
-import getNlData, { INationalData } from 'static-props/nl-data';
+import getNlData, { INationalData } from '~/static-props/nl-data';
 
 const text: typeof siteText.ic_opnames_per_dag = siteText.ic_opnames_per_dag;
-
-export function IntakeIntensiveCareBarscale(props: {
-  data: IntakeIntensivecareMa | undefined;
-  showAxis: boolean;
-}) {
-  const { data, showAxis } = props;
-
-  if (!data) return null;
-
-  return (
-    <BarScale
-      min={0}
-      max={30}
-      gradient={[
-        {
-          color: '#69c253',
-          value: 0,
-        },
-        {
-          color: '#D3A500',
-          value: 10,
-        },
-        {
-          color: '#f35065',
-          value: 20,
-        },
-      ]}
-      rangeKey="moving_average_ic"
-      screenReaderText={text.barscale_screenreader_text}
-      signaalwaarde={10}
-      value={data.last_value.moving_average_ic}
-      id="ic"
-      showAxis={showAxis}
-    />
-  );
-}
 
 const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
   const { data: state } = props;
@@ -59,7 +23,7 @@ const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
   return (
     <>
       <ContentHeader
-        category="Medische indicatoren"
+        category={siteText.nationaal_layout.headings.medisch}
         title={text.titel}
         Icon={Arts}
         subtitle={text.pagina_toelichting}
@@ -82,19 +46,18 @@ const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
         </div>
       </article>
 
-      <article className="metric-article">
-        <h3>{text.linechart_titel}</h3>
-
-        {data && (
+      {data && (
+        <article className="metric-article">
           <LineChart
+            title={text.linechart_titel}
             values={data.values.map((value) => ({
               value: value.moving_average_ic,
               date: value.date_of_report_unix,
             }))}
             signaalwaarde={10}
           />
-        )}
-      </article>
+        </article>
+      )}
     </>
   );
 };

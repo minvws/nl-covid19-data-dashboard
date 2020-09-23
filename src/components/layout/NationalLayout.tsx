@@ -2,37 +2,37 @@ import Link from 'next/link';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-import TitleWithIcon from 'components/titleWithIcon';
-import { getLayout as getSiteLayout } from 'components/layout';
-import { ReproductionIndexBarScale } from 'pages/landelijk/reproductiegetal';
-import { PostivelyTestedPeopleBarScale } from 'pages/landelijk/positief-geteste-mensen';
-import { InfectiousPeopleBarScale } from 'pages/landelijk/besmettelijke-mensen';
-import { IntakeHospitalBarScale } from 'pages/landelijk/ziekenhuis-opnames';
-import { IntakeIntensiveCareBarscale } from 'pages/landelijk/intensive-care-opnames';
-import { SuspectedPatientsBarScale } from 'pages/landelijk/verdenkingen-huisartsen';
-import { SewerWaterBarScale } from 'pages/landelijk/rioolwater';
-import { NursingHomeInfectedPeopleBarScale } from 'pages/landelijk/verpleeghuis-positief-geteste-personen';
-import { NursingHomeInfectedLocationsBarScale } from 'pages/landelijk/verpleeghuis-besmette-locaties';
-import { NursingHomeDeathsBarScale } from 'pages/landelijk/verpleeghuis-sterfte';
+import { TitleWithIcon } from '~/components/titleWithIcon';
+import { getLayout as getSiteLayout } from '~/components/layout';
 
-import GetestIcon from 'assets/test.svg';
-import ReproIcon from 'assets/reproductiegetal.svg';
-import Ziektegolf from 'assets/ziektegolf.svg';
-import Ziekenhuis from 'assets/ziekenhuis.svg';
-import Arts from 'assets/arts.svg';
-import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
-import Locatie from 'assets/locaties.svg';
-import CoronaVirus from 'assets/coronavirus.svg';
-import Arrow from 'assets/arrow.svg';
-import Notification from 'assets/notification.svg';
+import { ReproductionIndexBarScale } from '~/components/landelijk/reproduction-index-barscale';
+import { PositiveTestedPeopleBarScale } from '~/components/landelijk/positive-tested-people-barscale';
+import { InfectiousPeopleBarScale } from '~/components/landelijk/infectious-people-barscale';
+import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-barscale';
 
-import siteText from 'locale';
+import { IntakeIntensiveCareBarscale } from '~/components/landelijk/intake-intensive-care-barscale';
+import { SuspectedPatientsBarScale } from '~/components/landelijk/suspected-patients-barscale';
+import { SewerWaterBarScale } from '~/components/landelijk/sewer-water-barscale';
+import { NursingHomeInfectedPeopleBarScale } from '~/components/landelijk/nursing-home-infected-people-barscale';
+import { NursingHomeInfectedLocationsBarScale } from '~/components/landelijk/nursing-home-infected-locations-barscale';
+import { NursingHomeDeathsBarScale } from '~/components/landelijk/nursing-home-deaths-barscale';
 
-import { WithChildren } from 'types';
+import GetestIcon from '~/assets/test.svg';
+import ReproIcon from '~/assets/reproductiegetal.svg';
+import Ziektegolf from '~/assets/ziektegolf.svg';
+import Ziekenhuis from '~/assets/ziekenhuis.svg';
+import Arts from '~/assets/arts.svg';
+import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
+import Locatie from '~/assets/locaties.svg';
+import CoronaVirus from '~/assets/coronavirus.svg';
+import Arrow from '~/assets/arrow.svg';
+import Notification from '~/assets/notification.svg';
 
-import { INationalData } from 'static-props/nl-data';
+import siteText from '~/locale/index';
 
-export default NationalLayout;
+import { WithChildren } from '~/types/index';
+
+import { INationalData } from '~/static-props/nl-data';
 
 export function getNationalLayout() {
   return function (
@@ -139,7 +139,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
                       title={siteText.positief_geteste_personen.titel_sidebar}
                     />
                     <span>
-                      <PostivelyTestedPeopleBarScale
+                      <PositiveTestedPeopleBarScale
                         data={data?.infected_people_delta_normalized}
                         showAxis={true}
                       />
@@ -290,7 +290,8 @@ function NationalLayout(props: WithChildren<INationalData>) {
                     <TitleWithIcon
                       Icon={GetestIcon}
                       title={
-                        siteText.verpleeghuis_positief_geteste_personen.titel
+                        siteText.verpleeghuis_positief_geteste_personen
+                          .titel_sidebar
                       }
                     />
                     <span>
@@ -317,7 +318,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
                     />
                     <span>
                       <NursingHomeInfectedLocationsBarScale
-                        data={data?.total_newly_reported_locations}
+                        data={data?.total_reported_locations}
                         showAxis={true}
                       />
                     </span>
@@ -333,7 +334,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
                   >
                     <TitleWithIcon
                       Icon={CoronaVirus}
-                      title={siteText.verpleeghuis_oversterfte.titel}
+                      title={siteText.verpleeghuis_oversterfte.titel_sidebar}
                     />
                     <span>
                       <NursingHomeDeathsBarScale
