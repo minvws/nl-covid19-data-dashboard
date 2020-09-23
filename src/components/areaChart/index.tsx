@@ -81,7 +81,7 @@ function getOptions(props: IGetOptions): Highcharts.Options {
         rotation: '0' as any,
         formatter: function () {
           return this.isFirst || this.isLast
-            ? formatDate(this.value * 1000, 'axis')
+            ? formatDate(this.value, 'axis')
             : '';
         },
       },

@@ -105,7 +105,7 @@ function getOptions(values: Value[]): Highcharts.Options {
         rotation: '0' as any,
         formatter: function () {
           return this.isFirst || this.isLast
-            ? formatDate(this.value * 1000, 'axis')
+            ? formatDate(this.value, 'axis')
             : '';
         },
       },
@@ -120,7 +120,7 @@ function getOptions(values: Value[]): Highcharts.Options {
           this.point.index
         );
 
-        return `<strong>${formatDate(start * 1000, 'short')} - ${formatDate(
+        return `<strong>${formatDate(start, 'short')} - ${formatDate(
           end * 1000,
           'short'
         )}:</strong> ${formatNumber(this.y)}`;

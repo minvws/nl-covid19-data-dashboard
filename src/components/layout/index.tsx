@@ -68,7 +68,7 @@ function Layout(props: WithChildren<LayoutProps & ILastGeneratedData>) {
   const dateTime = new Date(Number(lastGenerated) * 1000).toISOString();
 
   const dateOfInsertion = lastGenerated
-    ? formatDate(Number(lastGenerated) * 1000, 'long')
+    ? formatDate(Number(lastGenerated), 'long')
     : undefined;
 
   return (

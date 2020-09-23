@@ -182,8 +182,7 @@ export function getSewerWaterBarChartData(
         color: '#3391CC',
         label: data?.average_sewer_installation_per_region?.last_value
           ? `${formatDate(
-              data.average_sewer_installation_per_region.last_value.week_unix *
-                1000,
+              data.average_sewer_installation_per_region.last_value.week_unix,
               'short'
             )}: ${formatNumber(
               data.average_sewer_installation_per_region.last_value.average
@@ -197,7 +196,7 @@ export function getSewerWaterBarChartData(
             color: '#C1C1C1',
             label: installation?.last_value
               ? `${formatDate(
-                  installation.last_value.date_measurement_unix * 1000,
+                  installation.last_value.date_measurement_unix,
                   'short'
                 )}: ${formatNumber(installation.last_value.rna_per_ml)}`
               : false,
