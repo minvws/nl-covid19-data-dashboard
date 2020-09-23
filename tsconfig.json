@@ -2,15 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "~/components/*": ["./src/components/*"],
-      "~/scss/*": ["./src/scss/*"],
-      "~/assets/*": ["./src/assets/*"],
-      "~/data/*": ["./src/data/*"],
-      "~/lib/*": ["./src/lib/*"],
-      "~/locale/*": ["./src/locale/*"],
-      "~/static-props/*": ["./src/static-props/*"],
-      "~/types/*": ["./src/types/*"],
-      "~/utils/*": ["./src/utils/*"]
+      "~/*": ["src/*"]
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],

@@ -9,10 +9,10 @@
     "title": "Laatst bijgewerkt"
   },
   "notificatie": {
-    "titel": "Risiconiveaus per regio bekend",
-    "bericht": "De afgelopen week (9 t/m 15 september) is het aantal nieuwe positief geteste personen wederom sterk  toegenomen. De sterkste stijgingen waren weer te zien in de provincies Zuid-Holland en Noord-Holland. De nieuwe besmettingen nemen toe in alle leeftijdsgroepen, maar de meeste nieuwe besmettingen zijn gemeld in de leeftijdsgroep van 20-24 jaar. Ook het reproductiegetal is verder gestegen tot 1,38. De aantallen patiënten die vanwege COVID-19 zijn opgenomen in het ziekenhuis of op de intensive care zijn ook gestegen.\n\nHet risiconiveau per regio kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2) of ‘ernstig’ (niveau 3) zijn. In 6 van de 25 regio’s is de situatie zorgelijk.",
+    "titel": "Sterke stijging Covid-19 besmettingen, opnames in ziekenhuizen en op de IC",
+    "bericht": "De afgelopen week (16 t/m 22 september) is het aantal nieuwe positief geteste personen met 60% toegenomen. Zuid-Holland, Noord-Holland, Utrecht en Groningen waren de provincies met de meeste nieuwe besmettingen. Er is een stijgende trend zichtbaar in het aantal positief geteste verpleeghuisbewoners. De aantallen patiënten die vanwege COVID-19 zijn opgenomen in het ziekenhuis of op de intensive care zijn ook flink gestegen.  \n\nHet risiconiveau per regio kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2) of ‘ernstig’ (niveau 3) zijn. In 6 van de 25 regio’s is de situatie zorgelijk.",
     "link": {
-      "text": "Bekijk de actuele informatie van het RIVM",
+      "text": "Bekijk de toelichting van het RIVM",
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel"
     }
   },
