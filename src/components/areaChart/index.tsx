@@ -79,11 +79,10 @@ function getOptions(props: IGetOptions): Highcharts.Options {
         align: 'right',
         x: 10,
         rotation: '0' as any,
-        formatter: function (): string {
-          if (this.isFirst || this.isLast) {
-            return formatDate(this.value, 'axis');
-          }
-          return '';
+        formatter: function () {
+          return this.isFirst || this.isLast
+            ? formatDate(this.value * 1000, 'axis')
+            : '';
         },
       },
     },
