@@ -58,11 +58,10 @@ function getChartOptions(values: Value[], signaalwaarde?: number | undefined) {
         // types say `rotation` needs to be a number,
         // but that doesn’t work.
         rotation: '0' as any,
-        formatter: function (): string {
-          if (this.isFirst || this.isLast) {
-            return formatDate(this.value * 1000, 'axis');
-          }
-          return '';
+        formatter: function () {
+          return this.isFirst || this.isLast
+            ? formatDate(this.value * 1000, 'axis')
+            : '';
         },
       },
     },
