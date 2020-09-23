@@ -146,9 +146,9 @@ export function Chloropleth<T>(props: TProps<T>) {
         width={width}
         height={height}
         className={styles.svgMap}
-        onMouseOver={svgMouseOver(timout, showTooltip)}
-        onMouseOut={svgMouseOut(timout, hideTooltip)}
-        onClick={svgClick(onPathClick, showTooltip, isLargeScreen)}
+        onMouseOver={createSvgMouseOverHandler(timout, showTooltip)}
+        onMouseOut={createSvgMouseOutHandler(timout, hideTooltip)}
+        onClick={createSvgClickHandler(onPathClick, showTooltip, isLargeScreen)}
       >
         <clipPath id={clipPathId.current}>
           <rect
@@ -205,7 +205,7 @@ const renderFeature = (callback: TRenderCallback) => {
   );
 };
 
-const svgClick = (
+const createSvgClickHandler = (
   onPathClick: (id: string) => void,
   showTooltip: (settings: TooltipSettings) => void,
   isLargeScreen: boolean
@@ -240,7 +240,10 @@ const positionTooltip = (
   }
 };
 
-const svgMouseOver = (timeout: MutableRefObject<any>, showTooltip: any) => {
+const createSvgMouseOverHandler = (
+  timeout: MutableRefObject<any>,
+  showTooltip: any
+) => {
   return (event: any) => {
     const elm = event.target;
 
@@ -256,7 +259,10 @@ const svgMouseOver = (timeout: MutableRefObject<any>, showTooltip: any) => {
   };
 };
 
-const svgMouseOut = (timeout: MutableRefObject<any>, hideTooltip: any) => {
+const createSvgMouseOutHandler = (
+  timeout: MutableRefObject<any>,
+  hideTooltip: any
+) => {
   return () => {
     if (timeout.current < 0) {
       timeout.current = setTimeout(() => {
