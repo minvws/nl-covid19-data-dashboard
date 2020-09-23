@@ -51,7 +51,7 @@ export function useDynamicScale(
         // never breaks.
       }
     } else if (isValueHigherThanMax) {
-      scaleMax = value;
+      scaleMax = value * 1.05;
     }
   }
 
