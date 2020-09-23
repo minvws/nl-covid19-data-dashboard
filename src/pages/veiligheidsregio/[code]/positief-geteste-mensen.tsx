@@ -17,16 +17,19 @@ import {
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
 import { getLocalTitleForRegion } from '~/utils/getLocalTitleForCode';
-import { positiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
+import { positiveTestedPeopleTooltip } from '~/components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
 import { MunicipalityLegenda } from '~/components/chloropleth/legenda/MunicipalityLegenda';
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
 import regionCodeToMunicipalCodeLookup from '~/data/regionCodeToMunicipalCodeLookup';
+import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
+import { useRouter } from 'next/router';
 
 const text: typeof siteText.veiligheidsregio_positief_geteste_personen =
   siteText.veiligheidsregio_positief_geteste_personen;
 
 const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
   const { data } = props;
+  const router = useRouter();
 
   const resultsPerRegion: ResultsPerRegion | undefined =
     data?.results_per_region;
@@ -108,7 +111,8 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
             selected={selectedMunicipalCode}
             highlightSelection={false}
             metricName="positive_tested_people"
-            tooltipContent={positiveTestedPeopleMunicipalTooltip}
+            tooltipContent={positiveTestedPeopleTooltip}
+            onSelect={createSelectMunicipalHandler(router)}
           />
         </div>
       </article>

@@ -16,8 +16,8 @@ import { TitleWithIcon } from '~/components/titleWithIcon';
 import { ChartRegionControls } from '~/components/chartRegionControls';
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
 import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
-import { positiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
-import { positiveTestedPeopleRegionTooltip } from '~/components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
+import { positiveTestedPeopleTooltip } from '~/components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
+import { positiveTestedPeopleTooltip as regionPositiveTestedPeopleTooltip } from '~/components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
 import { useState } from 'react';
 import { MunicipalityLegenda } from '~/components/chloropleth/legenda/MunicipalityLegenda';
 import { SafetyRegionLegenda } from '~/components/chloropleth/legenda/SafetyRegionLegenda';
@@ -28,7 +28,9 @@ import { useRouter } from 'next/router';
 import { escalationTooltip } from '~/components/chloropleth/tooltips/region/escalationTooltip';
 import { MDToHTMLString } from '~/utils/MDToHTMLString';
 import { National } from '~/types/data';
-import { MunicipalityProperties } from '~/components/chloropleth/shared';
+
+import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
+import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
 
 const Home: FCWithLayout<INationalData> = (props) => {
   const { text } = props;
@@ -38,20 +40,6 @@ const Home: FCWithLayout<INationalData> = (props) => {
   );
 
   const isLargeScreen = useMediaQuery('(min-width: 1000px)');
-
-  const onSelectRegion = (context: any) => {
-    router.push(
-      '/veiligheidsregio/[code]/positief-geteste-mensen',
-      `/veiligheidsregio/${context.vrcode}/positief-geteste-mensen`
-    );
-  };
-
-  const onSelectMunicipal = (context: MunicipalityProperties) => {
-    router.push(
-      '/gemeente/[code]/positief-geteste-mensen',
-      `/gemeente/${context.gemcode}/positief-geteste-mensen`
-    );
-  };
 
   const mapHeight = isLargeScreen ? '500px' : '400px';
 
@@ -104,7 +92,7 @@ const Home: FCWithLayout<INationalData> = (props) => {
             metricName="escalation_levels"
             metricProperty="escalation_level"
             style={{ height: mapHeight }}
-            onSelect={onSelectRegion}
+            onSelect={createSelectRegionHandler(router)}
             tooltipContent={escalationTooltip(router)}
           />
         </div>
@@ -141,15 +129,15 @@ const Home: FCWithLayout<INationalData> = (props) => {
           {selectedMap === 'municipal' && (
             <MunicipalityChloropleth
               metricName="positive_tested_people"
-              tooltipContent={positiveTestedPeopleMunicipalTooltip}
-              onSelect={onSelectMunicipal}
+              tooltipContent={positiveTestedPeopleTooltip}
+              onSelect={createSelectMunicipalHandler(router)}
             />
           )}
           {selectedMap === 'region' && (
             <SafetyRegionChloropleth
               metricName="positive_tested_people"
-              tooltipContent={positiveTestedPeopleRegionTooltip}
-              onSelect={onSelectRegion}
+              tooltipContent={regionPositiveTestedPeopleTooltip}
+              onSelect={createSelectRegionHandler(router)}
             />
           )}
         </div>
