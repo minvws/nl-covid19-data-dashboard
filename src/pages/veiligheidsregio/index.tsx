@@ -18,6 +18,7 @@ import {
 } from '~/components/chloropleth/SafetyRegionChloropleth';
 import { useMediaQuery } from '~/utils/useMediaQuery';
 import { escalationTooltip } from '~/components/chloropleth/tooltips/region/escalationTooltip';
+import { exit } from 'process';
 
 const escalationThresholds = thresholds.escalation_levels.thresholds;
 
@@ -124,10 +125,15 @@ export async function getStaticProps(): Promise<StaticProps> {
     const fileContents = fs.readFileSync(filePath, 'utf8');
     data = JSON.parse(fileContents);
   } else {
-    const res = await fetch(
-      'https://coronadashboard.rijksoverheid.nl/json/NL.json'
-    );
-    data = await res.json();
+    if (process.env.NODE_ENV === 'development') {
+      const res = await fetch(
+        'https://coronadashboard.rijksoverheid.nl/json/NL.json'
+      );
+      data = await res.json();
+    } else {
+      throw new Error('no!');
+      exit(1);
+    }
   }
 
   const lastGenerated = data.last_generated;

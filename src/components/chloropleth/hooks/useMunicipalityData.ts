@@ -32,7 +32,12 @@ export function useMunicipalityData<
   metricName: T | undefined,
   featureCollection: FeatureCollection<MultiPolygon, MunicipalityProperties>
 ): TMunicipalityDataInfo<ReturnType> {
-  const { data } = useSWR<Municipalities>('/json/MUNICIPALITIES.json');
+  const urlToFetch =
+    process.env.NODE_ENV === 'development'
+      ? 'https://coronadashboard.rijksoverheid.nl/json/MUNICIPALITIES.json'
+      : '/json/MUNICIPALITIES.json';
+
+  const { data } = useSWR<Municipalities>(urlToFetch);
 
   const metricItems: ItemType[] | undefined =
     metricName && data ? (data[metricName] as ItemType[]) : undefined;

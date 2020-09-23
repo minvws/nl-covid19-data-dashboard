@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { exit } from 'process';
 
 export interface ILastGeneratedData {
   lastGenerated: string;
@@ -42,10 +43,15 @@ export async function getLastGeneratedData(): Promise<IProps> {
     const fileContents = fs.readFileSync(filePath, 'utf8');
     nlData = JSON.parse(fileContents);
   } else {
-    const res = await fetch(
-      'https://coronadashboard.rijksoverheid.nl/json/NL.json'
-    );
-    nlData = await res.json();
+    if (process.env.NODE_ENV === 'development') {
+      const res = await fetch(
+        'https://coronadashboard.rijksoverheid.nl/json/NL.json'
+      );
+      nlData = await res.json();
+    } else {
+      throw new Error('no!');
+      exit(1);
+    }
   }
 
   const lastGenerated = nlData.last_generated;

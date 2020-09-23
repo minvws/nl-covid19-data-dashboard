@@ -11,6 +11,7 @@ import styles from './over.module.scss';
 import siteText from '~/locale/index';
 
 import { MDToHTMLString } from '~/utils/MDToHTMLString';
+import { exit } from 'process';
 
 interface IVraagEnAntwoord {
   vraag: string;
@@ -25,6 +26,7 @@ interface StaticProps {
 }
 
 export async function getStaticProps(): Promise<StaticProps> {
+  let data;
   const text = require('../locale/index').default;
   const serializedContent = text.over_veelgestelde_vragen.vragen.map(function (
     item: IVraagEnAntwoord
@@ -33,10 +35,24 @@ export async function getStaticProps(): Promise<StaticProps> {
   });
 
   text.over_veelgestelde_vragen.vragen = serializedContent;
-
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
-  const fileContents = fs.readFileSync(filePath, 'utf8');
-  const lastGenerated = JSON.parse(fileContents).last_generated;
+
+  if (fs.existsSync(filePath)) {
+    const fileContents = fs.readFileSync(filePath, 'utf8');
+    data = JSON.parse(fileContents);
+  } else {
+    if (process.env.NODE_ENV === 'development') {
+      const res = await fetch(
+        'https://coronadashboard.rijksoverheid.nl/json/NL.json'
+      );
+      data = await res.json();
+    } else {
+      throw new Error('no!');
+      exit(1);
+    }
+  }
+
+  const lastGenerated = data.last_generated;
 
   return { props: { text, lastGenerated } };
 }

@@ -4,6 +4,7 @@ import path from 'path';
 import { Regionaal } from '~/types/data.d';
 
 import safetyRegions from '~/data/index';
+import { exit } from 'process';
 
 export interface ISafetyRegionData {
   data: Regionaal;
@@ -60,10 +61,15 @@ export function getSafetyRegionData() {
       const fileContents = fs.readFileSync(filePath, 'utf8');
       safetyRegionData = JSON.parse(fileContents);
     } else {
-      const res = await fetch(
-        `https://coronadashboard.rijksoverheid.nl/json/${code}.json`
-      );
-      safetyRegionData = await res.json();
+      if (process.env.NODE_ENV === 'development') {
+        const res = await fetch(
+          `https://coronadashboard.rijksoverheid.nl/json/${code}.json`
+        );
+        safetyRegionData = await res.json();
+      } else {
+        throw new Error('no!');
+        exit(1);
+      }
     }
 
     // get data for the page

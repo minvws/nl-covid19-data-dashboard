@@ -184,10 +184,12 @@ export async function getStaticProps(): Promise<StaticProps> {
     const fileContents = fs.readFileSync(filePath, 'utf8');
     data = JSON.parse(fileContents) as National;
   } else {
-    const res = await fetch(
-      'https://coronadashboard.rijksoverheid.nl/json/NL.json'
-    );
-    data = await res.json();
+    if (process.env.NODE_ENV === 'development') {
+      const res = await fetch(
+        'https://coronadashboard.rijksoverheid.nl/json/NL.json'
+      );
+      data = await res.json();
+    }
   }
 
   const lastGenerated = data.last_generated;
