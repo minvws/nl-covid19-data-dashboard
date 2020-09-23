@@ -11,14 +11,18 @@ import { getFilteredValues } from '~/components/chartTimeControls/chartTimeContr
 import styles from './lineChart.module.scss';
 import { formatNumber } from '~/utils/formatNumber';
 import { formatDate } from '~/utils/formatDate';
-import { getWeekStartEndByIndex, Week } from '~/utils/getWeekStartEndByIndex';
-import { assert } from '~/utils/assert';
+import { getItemFromArray } from '~/utils/getItemFromArray';
 
 interface Value {
   date: number;
-  value: number | undefined;
+  value?: number;
   week: Week;
 }
+
+type Week = {
+  start: number;
+  end: number;
+};
 
 type LineChartProps = {
   values: Value[];
@@ -110,11 +114,10 @@ function getOptions(values: Value[]): Highcharts.Options {
       borderColor: '#01689B',
       borderRadius: 0,
       formatter: function () {
-        const { start, end } = getWeekStartEndByIndex(
+        const { start, end } = getItemFromArray(
           values.map((x) => x.week),
           this.point.index
         );
-        assert(typeof start === 'number' && typeof end === 'number');
 
         return `<strong>${formatDate(start * 1000, 'short')} - ${formatDate(
           end * 1000,

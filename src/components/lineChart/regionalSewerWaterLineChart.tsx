@@ -4,16 +4,21 @@ import HighchartsReact from 'highcharts-react-official';
 
 import { formatNumber } from '~/utils/formatNumber';
 import { formatDate } from '~/utils/formatDate';
-import { getWeekStartEndByIndex, Week } from '~/utils/getWeekStartEndByIndex';
+import { getItemFromArray } from '~/utils/getItemFromArray';
 
 type TranslationStrings = Record<string, string>;
 
 interface Value {
   date: number;
-  value: number | undefined;
+  value?: number;
   week_start_unix: number;
   week_end_unix: number;
 }
+
+type Week = {
+  start: number;
+  end: number;
+};
 
 type RegionalSewerWaterLineChartProps = {
   averageValues: Value[];
@@ -113,10 +118,7 @@ function getOptions(
         if (this.series.name !== text.average_label_text) {
           return false;
         }
-        const { start, end } = getWeekStartEndByIndex(
-          weekSet,
-          this.point.index
-        );
+        const { start, end } = getItemFromArray(weekSet, this.point.index);
         return `<strong>${formatDate(start * 1000, 'short')} - ${formatDate(
           end * 1000,
           'short'
