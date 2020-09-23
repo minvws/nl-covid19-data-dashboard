@@ -1,10 +1,11 @@
 {
   "name": "corona-dashboard",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "private": true,
   "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
   "dependencies": {
     "@reach/combobox": "^0.11.2",
+    "@testing-library/react": "^11.0.4",
     "@types/geojson": "^7946.0.7",
     "@vx/event": "^0.0.198",
     "@vx/geo": "latest",

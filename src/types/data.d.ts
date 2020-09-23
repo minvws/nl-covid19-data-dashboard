@@ -289,6 +289,8 @@ export interface RioolwaterMetingenLastValue {
   week_unix: number;
   average: number;
   date_of_insertion_unix: number;
+  week_start_unix: number;
+  week_end_unix: number;
 }
 export interface RioolwaterMetingenPerRwzi {
   values: RioolwaterMetingenPerRwziLastValue[];
