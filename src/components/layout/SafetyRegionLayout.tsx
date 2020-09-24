@@ -22,6 +22,7 @@ import GetestIcon from '~/assets/test.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import Arrow from '~/assets/arrow.svg';
+import { useMenuState } from './useMenuState';
 
 export function getSafetyRegionLayout() {
   return function (
@@ -70,11 +71,10 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
   const isMainRoute =
     router.route === '/veiligheidsregio' ||
     router.route === `/veiligheidsregio/[code]`;
-  const displayTendency = isMainRoute ? 'aside' : 'content';
 
   const showMetricLinks = router.route !== '/veiligheidsregio';
-  // remove focus after navigation
-  const blur = (evt: any) => evt.target.blur();
+
+  const { isMenuOpen, openMenu, handleMenuClick } = useMenuState(isMainRoute);
 
   function getClassName(path: string) {
     return router.pathname === path
@@ -113,19 +113,16 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
       </Head>
 
       <div
-        className={`safety-region-layout  small-screen-${displayTendency}-tendency`}
+        className={`safety-region-layout  has-menu-${
+          isMainRoute ? 'and-content-opened' : isMenuOpen ? 'opened' : 'closed'
+        }`}
       >
-        {!isMainRoute && (
-          <Link
-            href="/veiligheidsregio/[code]"
-            as={`/veiligheidsregio/${code}`}
-          >
-            <a className="back-button">
-              <Arrow />
-              {siteText.nav.terug_naar_alle_cijfers}
-            </a>
-          </Link>
-        )}
+        <Link href="/veiligheidsregio/[code]" as={`/veiligheidsregio/${code}`}>
+          <a className="back-button" onClick={openMenu}>
+            <Arrow />
+            {siteText.nav.terug_naar_alle_cijfers}
+          </a>
+        </Link>
         <aside className="safety-region-aside">
           <ComboBox<TSafetyRegion>
             placeholder={siteText.common.zoekveld_placeholder_regio}
@@ -144,7 +141,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                     as={`/veiligheidsregio/${code}/positief-geteste-mensen`}
                   >
                     <a
-                      onClick={blur}
+                      onClick={handleMenuClick}
                       className={getClassName(
                         `/veiligheidsregio/[code]/positief-geteste-mensen`
                       )}
@@ -172,7 +169,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                     as={`/veiligheidsregio/${code}/ziekenhuis-opnames`}
                   >
                     <a
-                      onClick={blur}
+                      onClick={handleMenuClick}
                       className={getClassName(
                         `/veiligheidsregio/[code]/ziekenhuis-opnames`
                       )}
@@ -203,7 +200,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                     as={`/veiligheidsregio/${code}/rioolwater`}
                   >
                     <a
-                      onClick={blur}
+                      onClick={handleMenuClick}
                       className={getClassName(
                         `/veiligheidsregio/[code]/rioolwater`
                       )}
