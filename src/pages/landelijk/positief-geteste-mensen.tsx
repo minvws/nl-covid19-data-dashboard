@@ -68,7 +68,10 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
       />
 
       <div className="layout-two-column">
-        <article className="metric-article column-item">
+        <article
+          className="metric-article column-item"
+          data-cy="infected_daily_increase"
+        >
           <h3>{text.barscale_titel}</h3>
 
           {delta && (
