@@ -426,19 +426,11 @@ a.metric-link {
     &:first-of-type {
       margin-right: $default-margin;
     }
-
-    &:nth-of-type(2) {
-      margin-left: $default-margin;
-    }
   }
 
   .column-item-extra-margin {
     &:first-of-type {
       margin-right: $default-margin * 3;
-    }
-
-    &:nth-of-type(2) {
-      margin-left: $default-margin * 3;
     }
   }
 
@@ -446,9 +438,47 @@ a.metric-link {
     &:first-of-type {
       margin-right: 0;
     }
+  }
+}
 
-    &:nth-of-type(2) {
-      margin-left: 0;
+/**
+  This layout should be integrated with the chloropleth component once we have
+  one based on styled-components
+  */
+.layout-chloropleth {
+  $chloropleth-breakpoint: 1200px;
+
+  @media (min-width: $chloropleth-breakpoint) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      'a c'
+      'b c';
+  }
+
+  .chloropleth-header {
+    grid-area: a;
+    margin-bottom: 2em;
+    @media (min-width: $chloropleth-breakpoint) {
+      margin-bottom: 0;
+    }
+  }
+
+  .chloropleth-legend {
+    grid-area: b;
+  }
+
+  .chloropleth-chart {
+    grid-area: c;
+  }
+
+  .chloropleth-controls {
+    display: flex;
+    justify-content: center;
+
+    @media (min-width: $chloropleth-breakpoint) {
+      justify-content: flex-start;
     }
   }
 }
