@@ -90,29 +90,16 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         </article>
       </div>
 
-      <article className="metric-article layout-two-column">
-        <div className="column-item column-item-extra-margin">
+      <article className="metric-article layout-chloropleth">
+        <div className="chloropleth-header">
           <h3>{text.map_titel}</h3>
           <p>{text.map_toelichting}</p>
           <ChartRegionControls
             onChange={(val: 'region' | 'municipal') => setSelectedMap(val)}
           />
-          {selectedMap === 'municipal' && (
-            <MunicipalityLegenda
-              metricName="positive_tested_people"
-              title={text.chloropleth_legenda.titel}
-            />
-          )}
-
-          {selectedMap === 'region' && (
-            <SafetyRegionLegenda
-              metricName="positive_tested_people"
-              title={text.chloropleth_legenda.titel}
-            />
-          )}
         </div>
 
-        <div className="column-item column-item-extra-margin">
+        <div className="chloropleth-chart">
           {selectedMap === 'municipal' && (
             <MunicipalityChloropleth
               metricName="positive_tested_people"
@@ -125,6 +112,22 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
               metricName="positive_tested_people"
               tooltipContent={regionPositiveTestedPeopleTooltip}
               onSelect={createSelectRegionHandler(router)}
+            />
+          )}
+        </div>
+
+        <div className="chloropleth-legend">
+          {selectedMap === 'municipal' && (
+            <MunicipalityLegenda
+              metricName="positive_tested_people"
+              title={text.chloropleth_legenda.titel}
+            />
+          )}
+
+          {selectedMap === 'region' && (
+            <SafetyRegionLegenda
+              metricName="positive_tested_people"
+              title={text.chloropleth_legenda.titel}
             />
           )}
         </div>
