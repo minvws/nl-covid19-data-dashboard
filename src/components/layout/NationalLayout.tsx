@@ -33,32 +33,7 @@ import siteText from '~/locale/index';
 import { WithChildren } from '~/types/index';
 
 import { INationalData } from '~/static-props/nl-data';
-import { useState } from 'react';
-
-interface MenuStateReturn {
-  isMenuOpen: boolean;
-  openMenu: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
-  closeMenu: () => void;
-}
-
-function useMenuState(defaultOpen = false): MenuStateReturn {
-  const [isMenuOpen, setMenu] = useState(defaultOpen);
-  const openMenu = (
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ): void => {
-    event.preventDefault();
-    setMenu(true);
-  };
-  const closeMenu = () => {
-    // event.target.blur();
-    setMenu(false);
-  };
-  return {
-    isMenuOpen,
-    openMenu,
-    closeMenu,
-  };
-}
+import { useMenuState } from '~/utils/useMenuState';
 
 export function getNationalLayout() {
   return function (
@@ -94,9 +69,6 @@ function NationalLayout(props: WithChildren<INationalData>) {
   const isMainRoute = router.route === '/';
 
   const { isMenuOpen, openMenu, closeMenu } = useMenuState(isMainRoute);
-
-  // // remove focus after navigation
-  // const blur = (evt: any) => evt.target.blur();
 
   function getClassName(path: string) {
     return router.pathname === path
