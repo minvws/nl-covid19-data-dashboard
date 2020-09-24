@@ -5,9 +5,10 @@
   "type": "object",
   "properties": {
     "newly_reported": { "$ref": "#/definitions/time_series_value" },
+    "total_reported": { "$ref": "#/definitions/time_series_value" },
     "sourced_from": { "$ref": "#/definitions/sourced_from" }
   },
-  "required": ["newly_reported", "sourced_from"],
+  "required": ["newly_reported", "total_reported", "sourced_from"],
   "additionalProperties": false,
   "definitions": {
     "time_series": {
