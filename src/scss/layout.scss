@@ -432,6 +432,9 @@ a.active-metric-link {
   .chloropleth-header {
     grid-area: a;
     margin-bottom: 1em;
+    @media (min-width: 1200px) {
+      margin-bottom: 0;
+    }
   }
 
   .chloropleth-legend {
