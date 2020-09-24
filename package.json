@@ -32,6 +32,7 @@
     "remark-rehype": "^7.0.0",
     "swr": "^0.3.1",
     "topojson-client": "^3.1.0",
+    "ts-is-present": "^1.1.5",
     "unfetch": "^4.1.0",
     "unified": "^9.2.0",
     "use-resize-observer": "^6.1.0",
