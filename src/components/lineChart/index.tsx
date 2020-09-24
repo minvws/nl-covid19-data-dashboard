@@ -63,7 +63,7 @@ function getChartOptions(values: Value[], signaalwaarde?: number) {
         rotation: '0' as any,
         formatter: function () {
           return this.isFirst || this.isLast
-            ? formatDate(this.value * 1000, 'axis')
+            ? formatDate(this.value, 'axis')
             : '';
         },
       },
@@ -72,8 +72,8 @@ function getChartOptions(values: Value[], signaalwaarde?: number) {
       backgroundColor: '#FFF',
       borderColor: '#01689B',
       borderRadius: 0,
-      formatter: function () {
-        return `${formatDate(this.x * 1000)}: ${formatNumber(this.y)}`;
+      formatter: function (): string {
+        return `${formatDate(this.x)}: ${formatNumber(this.y)}`;
       },
     },
     yAxis: {

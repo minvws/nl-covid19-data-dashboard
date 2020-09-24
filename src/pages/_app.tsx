@@ -33,6 +33,7 @@ function MyApp(props: IProps): React.ReactElement {
   const getLayout = Component.getLayout || page;
 
   useEffect(() => {
+    window.document.documentElement.className += ' js';
     const handleRouteChange = () => {
       window.scrollTo(0, 0);
       piwik.pageview();

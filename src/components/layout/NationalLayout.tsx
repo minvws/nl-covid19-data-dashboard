@@ -33,6 +33,7 @@ import siteText from '~/locale/index';
 import { WithChildren } from '~/types/index';
 
 import { INationalData } from '~/static-props/nl-data';
+import { useMenuState } from './useMenuState';
 
 export function getNationalLayout() {
   return function (
@@ -65,11 +66,9 @@ export function getNationalLayout() {
 function NationalLayout(props: WithChildren<INationalData>) {
   const { children, data } = props;
   const router = useRouter();
-  const isMainRoute = router.route === '/landelijk';
-  const displayTendency = isMainRoute ? 'aside' : 'content';
+  const isMainRoute = router.route === '/';
 
-  // remove focus after navigation
-  const blur = (evt: any) => evt.target.blur();
+  const { isMenuOpen, openMenu, handleMenuClick } = useMenuState(isMainRoute);
 
   function getClassName(path: string) {
     return router.pathname === path
@@ -94,25 +93,25 @@ function NationalLayout(props: WithChildren<INationalData>) {
       </Head>
 
       <div
-        className={`national-layout small-screen-${displayTendency}-tendency`}
+        className={`national-layout has-menu-${
+          isMenuOpen ? 'opened' : 'closed'
+        }`}
       >
-        {!isMainRoute && (
-          <Link href="/landelijk">
-            <a className="back-button">
-              <Arrow />
-              {router.pathname === '/'
-                ? siteText.nav.terug_naar_alle_cijfers_homepage
-                : siteText.nav.terug_naar_alle_cijfers}
-            </a>
-          </Link>
-        )}
+        <Link href="/landelijk">
+          <a className="back-button" onClick={openMenu}>
+            <Arrow />
+            {router.pathname === '/'
+              ? siteText.nav.terug_naar_alle_cijfers_homepage
+              : siteText.nav.terug_naar_alle_cijfers}
+          </a>
+        </Link>
         <aside className="national-aside">
           <nav aria-label="metric navigation">
             <ul className="last-developments">
               <li>
                 <Link href="/">
                   <a
-                    onClick={blur}
+                    onClick={handleMenuClick}
                     className={`last-developments-link ${getClassName('/')}`}
                   >
                     <TitleWithIcon
@@ -129,7 +128,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
               <li>
                 <Link href="/landelijk/positief-geteste-mensen">
                   <a
-                    onClick={blur}
+                    onClick={handleMenuClick}
                     className={getClassName(
                       '/landelijk/positief-geteste-mensen'
                     )}
@@ -151,7 +150,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
               <li>
                 <Link href="/landelijk/besmettelijke-mensen">
                   <a
-                    onClick={blur}
+                    onClick={handleMenuClick}
                     className={getClassName('/landelijk/besmettelijke-mensen')}
                   >
                     <TitleWithIcon
@@ -171,7 +170,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
               <li>
                 <Link href="/landelijk/reproductiegetal">
                   <a
-                    onClick={blur}
+                    onClick={handleMenuClick}
                     className={getClassName('/landelijk/reproductiegetal')}
                   >
                     <TitleWithIcon
@@ -192,7 +191,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
               <li>
                 <Link href="/landelijk/ziekenhuis-opnames">
                   <a
-                    onClick={blur}
+                    onClick={handleMenuClick}
                     className={getClassName('/landelijk/ziekenhuis-opnames')}
                   >
                     <TitleWithIcon
@@ -212,7 +211,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
               <li>
                 <Link href="/landelijk/intensive-care-opnames">
                   <a
-                    onClick={blur}
+                    onClick={handleMenuClick}
                     className={getClassName(
                       '/landelijk/intensive-care-opnames'
                     )}
@@ -237,7 +236,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
               <li>
                 <Link href="/landelijk/verdenkingen-huisartsen">
                   <a
-                    onClick={blur}
+                    onClick={handleMenuClick}
                     className={getClassName(
                       '/landelijk/verdenkingen-huisartsen'
                     )}
@@ -259,7 +258,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
               <li>
                 <Link href="/landelijk/rioolwater">
                   <a
-                    onClick={blur}
+                    onClick={handleMenuClick}
                     className={getClassName('/landelijk/rioolwater')}
                   >
                     <TitleWithIcon
@@ -282,7 +281,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
               <li>
                 <Link href="/landelijk/verpleeghuis-positief-geteste-personen">
                   <a
-                    onClick={blur}
+                    onClick={handleMenuClick}
                     className={getClassName(
                       '/landelijk/verpleeghuis-positief-geteste-personen'
                     )}
@@ -307,7 +306,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
               <li>
                 <Link href="/landelijk/verpleeghuis-besmette-locaties">
                   <a
-                    onClick={blur}
+                    onClick={handleMenuClick}
                     className={getClassName(
                       '/landelijk/verpleeghuis-besmette-locaties'
                     )}
@@ -329,7 +328,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
               <li>
                 <Link href="/landelijk/verpleeghuis-sterfte">
                   <a
-                    onClick={blur}
+                    onClick={handleMenuClick}
                     className={getClassName('/landelijk/verpleeghuis-sterfte')}
                   >
                     <TitleWithIcon

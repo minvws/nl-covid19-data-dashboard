@@ -103,7 +103,7 @@ export type TProps<
  * This component renders a map of the Netherlands with the outlines of all the municipalities which
  * receive a fill color based on the specified Municipality metric data.
  *
- * The metricName specifies which exact metric is visualised. The color scale is calculated using
+ * The metricName specifies which exact metric is visualized. The color scale is calculated using
  * the specified metric and the given gradient.
  *
  * When a selected municipal code is specified, the map will zoom in on the safety region to which
@@ -182,7 +182,7 @@ export function MunicipalityChloropleth<
         SafetyRegionProperties | GeoJsonProperties
       >,
       path: string,
-      index: number
+      _index: number
     ) => {
       const { vrcode } = feature.properties as SafetyRegionProperties;
       const className = classNames(
@@ -193,7 +193,7 @@ export function MunicipalityChloropleth<
         <path
           className={className}
           shapeRendering="optimizeQuality"
-          key={`municipality-map-overlay-${index}`}
+          key={`municipality-map-overlay-${vrcode}`}
           d={path}
           fill={'none'}
         />
@@ -256,7 +256,7 @@ export function MunicipalityChloropleth<
         featureCollection={municipalGeo}
         overlays={overlays}
         hovers={hasData ? municipalGeo : undefined}
-        boundingbox={boundingbox || countryGeo}
+        boundingBox={boundingbox || countryGeo}
         dimensions={dimensions}
         featureCallback={featureCallback}
         overlayCallback={overlayCallback}

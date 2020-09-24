@@ -24,6 +24,7 @@ import GetestIcon from '~/assets/test.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import Arrow from '~/assets/arrow.svg';
+import { useMenuState } from './useMenuState';
 
 interface IMunicipality {
   name: string;
@@ -73,10 +74,8 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
 
   const isMainRoute =
     router.route === '/gemeente' || router.route === `/gemeente/[code]`;
-  const displayTendency = isMainRoute ? 'aside' : 'content';
 
-  // remove focus after navigation
-  const blur = (evt: any) => evt.target.blur();
+  const { isMenuOpen, openMenu, handleMenuClick } = useMenuState(isMainRoute);
 
   function getClassName(path: string) {
     return router.pathname === path
@@ -115,16 +114,16 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
         />
       </Head>
       <div
-        className={`municipality-layout small-screen-${displayTendency}-tendency`}
+        className={`municipality-layout has-menu-${
+          isMainRoute ? 'and-content-opened' : isMenuOpen ? 'opened' : 'closed'
+        }`}
       >
-        {!isMainRoute && (
-          <Link href="/gemeente/[code]" as={`/gemeente/${code}`}>
-            <a className="back-button">
-              <Arrow />
-              {siteText.nav.terug_naar_alle_cijfers}
-            </a>
-          </Link>
-        )}
+        <Link href="/gemeente/[code]" as={`/gemeente/${code}`}>
+          <a className="back-button" onClick={openMenu}>
+            <Arrow />
+            {siteText.nav.terug_naar_alle_cijfers}
+          </a>
+        </Link>
         <aside className="municipality-aside">
           <ComboBox<IMunicipality>
             placeholder={siteText.common.zoekveld_placeholder_gemeente}
@@ -148,7 +147,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                       href="/veiligheidsregio/[code]/positief-geteste-mensen"
                       as={`/veiligheidsregio/${safetyRegion.code}/positief-geteste-mensen`}
                     >
-                      <a>{safetyRegion.name}</a>
+                      <a onClick={handleMenuClick}>{safetyRegion.name}</a>
                     </Link>
                   </p>
                 )}
@@ -161,7 +160,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                     as={`/gemeente/${code}/positief-geteste-mensen`}
                   >
                     <a
-                      onClick={blur}
+                      onClick={handleMenuClick}
                       className={getClassName(
                         `/gemeente/[code]/positief-geteste-mensen`
                       )}
@@ -189,7 +188,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                     as={`/gemeente/${code}/ziekenhuis-opnames`}
                   >
                     <a
-                      onClick={blur}
+                      onClick={handleMenuClick}
                       className={getClassName(
                         `/gemeente/[code]/ziekenhuis-opnames`
                       )}
@@ -221,7 +220,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                       as={`/gemeente/${code}/rioolwater`}
                     >
                       <a
-                        onClick={blur}
+                        onClick={handleMenuClick}
                         className={getClassName(`/gemeente/[code]/rioolwater`)}
                       >
                         <TitleWithIcon
