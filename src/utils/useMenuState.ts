@@ -4,11 +4,14 @@ import { Router } from 'next/router';
 interface MenuStateReturn {
   isMenuOpen: boolean;
   openMenu: (event?: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
-  closeMenu: (event?: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
+  handleMenuClick: (
+    event?: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => void;
 }
 
 /**
  * Keep track of the menu state and handle the opening and closing.
+ * Returns controls to the state.
  * @param defaultOpen
  */
 export function useMenuState(defaultOpen = false): MenuStateReturn {
@@ -23,15 +26,20 @@ export function useMenuState(defaultOpen = false): MenuStateReturn {
     setMenu(true);
   };
 
-  const closeMenu = (
+  const handleMenuClick = (
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent> | undefined
   ) => {
-    /* Do not immediately close the menu, it is too instant */
     if (event?.currentTarget) {
       event.currentTarget.blur();
     }
   };
 
+  /**
+   * Handle the closing of the menu
+   * If closed with handleMenuClick the menu would open too soon
+   * This closes the menu at the moment the content is loaded and displayed,
+   * (just as non-JS would kept displayed)
+   * */
   useEffect(() => {
     const handleCloseMenu = () => {
       setMenu(false);
@@ -45,6 +53,6 @@ export function useMenuState(defaultOpen = false): MenuStateReturn {
   return {
     isMenuOpen,
     openMenu,
-    closeMenu,
+    handleMenuClick,
   };
 }

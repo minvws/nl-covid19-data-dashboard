@@ -74,7 +74,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
 
   const showMetricLinks = router.route !== '/veiligheidsregio';
 
-  const { isMenuOpen, openMenu, closeMenu } = useMenuState(isMainRoute);
+  const { isMenuOpen, openMenu, handleMenuClick } = useMenuState(isMainRoute);
 
   function getClassName(path: string) {
     return router.pathname === path
@@ -141,7 +141,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                     as={`/veiligheidsregio/${code}/positief-geteste-mensen`}
                   >
                     <a
-                      onClick={closeMenu}
+                      onClick={handleMenuClick}
                       className={getClassName(
                         `/veiligheidsregio/[code]/positief-geteste-mensen`
                       )}
@@ -169,7 +169,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                     as={`/veiligheidsregio/${code}/ziekenhuis-opnames`}
                   >
                     <a
-                      onClick={closeMenu}
+                      onClick={handleMenuClick}
                       className={getClassName(
                         `/veiligheidsregio/[code]/ziekenhuis-opnames`
                       )}
@@ -200,7 +200,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                     as={`/veiligheidsregio/${code}/rioolwater`}
                   >
                     <a
-                      onClick={closeMenu}
+                      onClick={handleMenuClick}
                       className={getClassName(
                         `/veiligheidsregio/[code]/rioolwater`
                       )}

@@ -75,7 +75,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
   const isMainRoute =
     router.route === '/gemeente' || router.route === `/gemeente/[code]`;
 
-  const { isMenuOpen, openMenu, closeMenu } = useMenuState(isMainRoute);
+  const { isMenuOpen, openMenu, handleMenuClick } = useMenuState(isMainRoute);
 
   function getClassName(path: string) {
     return router.pathname === path
@@ -147,7 +147,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                       href="/veiligheidsregio/[code]/positief-geteste-mensen"
                       as={`/veiligheidsregio/${safetyRegion.code}/positief-geteste-mensen`}
                     >
-                      <a onClick={closeMenu}>{safetyRegion.name}</a>
+                      <a onClick={handleMenuClick}>{safetyRegion.name}</a>
                     </Link>
                   </p>
                 )}
@@ -160,7 +160,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                     as={`/gemeente/${code}/positief-geteste-mensen`}
                   >
                     <a
-                      onClick={closeMenu}
+                      onClick={handleMenuClick}
                       className={getClassName(
                         `/gemeente/[code]/positief-geteste-mensen`
                       )}
@@ -188,7 +188,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                     as={`/gemeente/${code}/ziekenhuis-opnames`}
                   >
                     <a
-                      onClick={closeMenu}
+                      onClick={handleMenuClick}
                       className={getClassName(
                         `/gemeente/[code]/ziekenhuis-opnames`
                       )}
@@ -220,7 +220,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                       as={`/gemeente/${code}/rioolwater`}
                     >
                       <a
-                        onClick={closeMenu}
+                        onClick={handleMenuClick}
                         className={getClassName(`/gemeente/[code]/rioolwater`)}
                       >
                         <TitleWithIcon
