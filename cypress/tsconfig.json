@@ -5,7 +5,8 @@
       "~/*": ["src/*"]
     },
     "target": "es5",
-    "lib": ["es5", "dom"],
+    "lib": ["dom", "esnext"],
+    "module": "esnext",
     "types": ["cypress"]
   },
   "include": ["../src/types/data.d.ts", "**/*.ts"]
