@@ -1,6 +1,5 @@
 import { Context } from 'mocha';
 /// <reference types="cypress" />
-/// <reference types="../../src/types/data" />
 
 import { National } from '../../src/types/data';
 import { formatNumber } from '../../src/utils/formatNumber';
