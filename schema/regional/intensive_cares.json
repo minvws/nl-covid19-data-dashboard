@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "regional_intensive_cares",
+  "title": "intensive_cares",
+  "type": "object",
+  "properties": {
+    "intake_average": { "$ref": "#/definitions/time_series_value" },
+    "capacity_percentage": {
+      "type": "number"
+    },
+    "sourced_from": { "$ref": "#/definitions/sourced_from" }
+  },
+  "required": ["intake_average", "capacity_percentage", "sourced_from"],
+  "additionalProperties": false,
+  "definitions": {
+    "time_series": {
+      "title": "time_series",
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/time_series_value"
+          }
+        },
+        "last_value": {
+          "$ref": "#/definitions/time_series_value"
+        }
+      },
+      "required": ["values", "last_value"],
+      "additionalProperties": false
+    },
+    "time_series_value": {
+      "title": "time_series_value",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "number"
+        },
+        "reported_at": {
+          "type": "integer"
+        },
+        "inserted_at": {
+          "type": "integer"
+        }
+      },
+      "required": ["value", "reported_at", "inserted_at"],
+      "additionalProperties": false
+    },
+    "sourced_from": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "required": ["title", "url"],
+      "additionalProperties": false
+    }
+  }
+}
