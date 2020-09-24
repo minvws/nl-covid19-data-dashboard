@@ -1,11 +1,13 @@
 {
   "compilerOptions": {
+    "baseUrl": "../",
+    "paths": {
+      "~/*": ["src/*"]
+    },
     "target": "es5",
     "lib": ["es5", "dom"],
-    "paths": {
-      "~/*": ["../src/types/*"]
-    },
     "types": ["cypress"]
   },
-  "include": ["**/*.ts"]
+  "include": ["../src/types/data.d.ts", "**/*.ts"]
+  //"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.js"]
 }
