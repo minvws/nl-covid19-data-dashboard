@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Router } from 'next/router';
 
-interface MenuStateReturn {
+interface MenuState {
   isMenuOpen: boolean;
   openMenu: (event?: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
   handleMenuClick: (
@@ -12,26 +12,21 @@ interface MenuStateReturn {
 /**
  * Keep track of the menu state and handle the opening and closing.
  * Returns controls to the state.
- * @param defaultOpen
  */
-export function useMenuState(defaultOpen = false): MenuStateReturn {
-  const [isMenuOpen, setMenu] = useState<boolean>(defaultOpen);
+export function useMenuState(defaultOpen = false): MenuState {
+  const [isMenuOpen, setMenuOpen] = useState<boolean>(defaultOpen);
 
   const openMenu = (
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent> | undefined
   ): void => {
-    if (event) {
-      event.preventDefault();
-    }
-    setMenu(true);
+    event?.preventDefault();
+    setMenuOpen(true);
   };
 
   const handleMenuClick = (
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent> | undefined
   ) => {
-    if (event?.currentTarget) {
-      event.currentTarget.blur();
-    }
+    event?.currentTarget?.blur();
   };
 
   /**
@@ -42,13 +37,13 @@ export function useMenuState(defaultOpen = false): MenuStateReturn {
    * */
   useEffect(() => {
     const handleCloseMenu = () => {
-      setMenu(false);
+      setMenuOpen(false);
     };
     Router.events.on('beforeHistoryChange', handleCloseMenu);
     return () => {
       Router.events.off('beforeHistoryChange', handleCloseMenu);
     };
-  });
+  }, []);
 
   return {
     isMenuOpen,

@@ -22,7 +22,7 @@ import GetestIcon from '~/assets/test.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import Arrow from '~/assets/arrow.svg';
-import { useMenuState } from '~/utils/useMenuState';
+import { useMenuState } from '~/components/layout/useMenuState';
 
 export function getSafetyRegionLayout() {
   return function (
