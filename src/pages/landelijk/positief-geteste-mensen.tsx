@@ -68,7 +68,10 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
       />
 
       <div className="layout-two-column">
-        <article className="metric-article column-item">
+        <article
+          className="metric-article column-item"
+          data-cy="infected_daily_increase"
+        >
           <h3>{text.barscale_titel}</h3>
 
           {delta && (
@@ -81,7 +84,7 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           {total && (
             <h3>
               {text.kpi_titel}{' '}
-              <span className="text-blue kpi">
+              <span className="text-blue kpi" data-cy="infected_daily_total">
                 {formatNumber(total.last_value.infected_daily_total)}
               </span>
             </h3>
@@ -118,7 +121,7 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           )}
         </div>
 
-        <div className="chloropleth-legend">
+        <div className="chloropleth-legend" data-cy="chloropleths">
           {selectedMap === 'municipal' && (
             <MunicipalityLegenda
               metricName="positive_tested_people"

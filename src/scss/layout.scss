@@ -198,21 +198,49 @@
     }
   }
 
-  .small-screen-aside-tendency {
-    .national-content {
-      display: none;
+  .safety-region-aside,
+  .municipality-aside {
+    min-height: 6em;
+  }
+
+  /**
+   * Menu and content only show/hides with JavaScript enabled
+   */
+  .js {
+    .has-menu-and-content-opened {
+      .back-button {
+        display: none;
+      }
     }
-    .safety-region-aside,
-    .municipality-aside {
-      min-height: 6em;
+
+    .has-menu-opened {
+      .national-content,
+      .safety-region-content,
+      .municipality-content,
+      .back-button {
+        display: none;
+      }
+    }
+
+    .has-menu-closed {
+      .national-aside,
+      .safety-region-aside,
+      .municipality-aside {
+        display: none;
+      }
     }
   }
 
-  .small-screen-content-tendency {
+  // Tweaks to display the non-JS aside + content well
+  html:not(.js) {
+    .back-button {
+      display: none;
+    }
+
     .national-aside,
     .safety-region-aside,
     .municipality-aside {
-      display: none;
+      margin-bottom: 2em;
     }
   }
 }
@@ -361,12 +389,14 @@ a.metric-link {
   }
 }
 
-a.active-metric-link {
-  background: $page-background-active;
-  border-right: 5px solid $red;
+@media (min-width: 1000px) {
+  a.active-metric-link {
+    background: $page-background-active;
+    border-right: 5px solid $red;
 
-  &::after {
-    content: none;
+    &::after {
+      content: none;
+    }
   }
 }
 
