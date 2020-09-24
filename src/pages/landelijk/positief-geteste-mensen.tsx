@@ -81,7 +81,7 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           {total && (
             <h3>
               {text.kpi_titel}{' '}
-              <span className="text-blue kpi">
+              <span className="text-blue kpi" data-cy="infected_daily_total">
                 {formatNumber(total.last_value.infected_daily_total)}
               </span>
             </h3>
