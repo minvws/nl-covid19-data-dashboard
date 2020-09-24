@@ -94,9 +94,11 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         <div className="chloropleth-header">
           <h3>{text.map_titel}</h3>
           <p>{text.map_toelichting}</p>
-          <ChartRegionControls
-            onChange={(val: 'region' | 'municipal') => setSelectedMap(val)}
-          />
+          <div className="chloropleth-controls">
+            <ChartRegionControls
+              onChange={(val: 'region' | 'municipal') => setSelectedMap(val)}
+            />
+          </div>
         </div>
 
         <div className="chloropleth-chart">

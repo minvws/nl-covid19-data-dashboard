@@ -416,7 +416,9 @@ a.active-metric-link {
   one based on styled-components
   */
 .layout-chloropleth {
-  @media (min-width: 1200px) {
+  $chloropleth-breakpoint: 1200px;
+
+  @media (min-width: $chloropleth-breakpoint) {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto;
@@ -425,14 +427,10 @@ a.active-metric-link {
       'b c';
   }
 
-  & > * {
-    outline: 1px solid hotpink;
-  }
-
   .chloropleth-header {
     grid-area: a;
-    margin-bottom: 1em;
-    @media (min-width: 1200px) {
+    margin-bottom: 2em;
+    @media (min-width: $chloropleth-breakpoint) {
       margin-bottom: 0;
     }
   }
@@ -443,5 +441,14 @@ a.active-metric-link {
 
   .chloropleth-chart {
     grid-area: c;
+  }
+
+  .chloropleth-controls {
+    display: flex;
+    justify-content: center;
+
+    @media (min-width: $chloropleth-breakpoint) {
+      justify-content: flex-start;
+    }
   }
 }
