@@ -33,7 +33,7 @@ import siteText from '~/locale/index';
 import { WithChildren } from '~/types/index';
 
 import { INationalData } from '~/static-props/nl-data';
-import { useMenuState } from '~/components/layout/useMenuState';
+import { useMenuState } from './useMenuState';
 
 export function getNationalLayout() {
   return function (
