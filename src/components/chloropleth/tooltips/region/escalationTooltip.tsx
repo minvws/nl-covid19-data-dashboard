@@ -56,10 +56,7 @@ export const escalationTooltip = (router: NextRouter) => {
                 </strong>
                 <br />
                 {replaceVariablesInText(text.escalatie_niveau.valid_from, {
-                  validFrom: formatDate(
-                    context.valid_from_unix * 1000,
-                    'short'
-                  ),
+                  validFrom: formatDate(context.valid_from_unix, 'short'),
                 })}
               </div>
             </div>

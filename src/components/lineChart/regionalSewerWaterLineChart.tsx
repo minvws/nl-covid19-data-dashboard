@@ -119,8 +119,8 @@ function getOptions(
           return false;
         }
         const { start, end } = getItemFromArray(weekSet, this.point.index);
-        return `<strong>${formatDate(start * 1000, 'short')} - ${formatDate(
-          end * 1000,
+        return `<strong>${formatDate(start, 'short')} - ${formatDate(
+          end,
           'short'
         )}:</strong> ${formatNumber(this.y)}`;
       },

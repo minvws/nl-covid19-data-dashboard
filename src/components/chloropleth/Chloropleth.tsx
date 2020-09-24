@@ -43,7 +43,7 @@ export type TProps<TFeatureProperties> = {
   hovers?: FeatureCollection<MultiPolygon, TFeatureProperties>;
   // The boundingbox is calculated based on these features, this can be used to
   // zoom in on a specific part of the map upon initialisation.
-  boundingbox: FeatureCollection<MultiPolygon>;
+  boundingBox: FeatureCollection<MultiPolygon>;
   // Height, width, etc
   dimensions: TCombinedChartDimensions;
   // This callback is invoked for each of the features in the featureCollection property.
@@ -89,7 +89,7 @@ export function Chloropleth<T>(props: TProps<T>) {
     featureCollection,
     overlays,
     hovers,
-    boundingbox,
+    boundingBox,
     dimensions,
     featureCallback,
     overlayCallback,
@@ -120,7 +120,7 @@ export function Chloropleth<T>(props: TProps<T>) {
   );
 
   const clipPathId = useRef(`_${Math.random().toString(36).substring(2, 15)}`);
-  const timout = useRef<any>(-1);
+  const timeout = useRef<any>(-1);
   const isLargeScreen = useMediaQuery('(min-width: 1000px)');
 
   const {
@@ -134,11 +134,13 @@ export function Chloropleth<T>(props: TProps<T>) {
 
   const sizeToFit: [[number, number], any] = [
     [boundedWidth, boundedHeight],
-    boundingbox,
+    boundingBox,
   ];
 
-  const showTooltip = tooltipStore.current((state) => state.showTooltip);
-  const hideTooltip = tooltipStore.current((state) => state.hideTooltip);
+  const [showTooltip, hideTooltip] = tooltipStore.current((state) => [
+    state.showTooltip,
+    state.hideTooltip,
+  ]);
 
   return (
     <>
@@ -146,9 +148,9 @@ export function Chloropleth<T>(props: TProps<T>) {
         width={width}
         height={height}
         className={styles.svgMap}
-        onMouseOver={svgMouseOver(timout, showTooltip)}
-        onMouseOut={svgMouseOut(timout, hideTooltip)}
-        onClick={svgClick(onPathClick, showTooltip, isLargeScreen)}
+        onMouseOver={createSvgMouseOverHandler(timeout, showTooltip)}
+        onMouseOut={createSvgMouseOutHandler(timeout, hideTooltip)}
+        onClick={createSvgClickHandler(onPathClick, showTooltip, isLargeScreen)}
       >
         <clipPath id={clipPathId.current}>
           <rect
@@ -205,7 +207,7 @@ const renderFeature = (callback: TRenderCallback) => {
   );
 };
 
-const svgClick = (
+const createSvgClickHandler = (
   onPathClick: (id: string) => void,
   showTooltip: (settings: TooltipSettings) => void,
   isLargeScreen: boolean
@@ -240,14 +242,17 @@ const positionTooltip = (
   }
 };
 
-const svgMouseOver = (timout: MutableRefObject<any>, showTooltip: any) => {
+const createSvgMouseOverHandler = (
+  timeout: MutableRefObject<any>,
+  showTooltip: any
+) => {
   return (event: any) => {
     const elm = event.target;
 
     if (elm.attributes['data-id']) {
-      if (timout.current > -1) {
-        clearTimeout(timout.current);
-        timout.current = -1;
+      if (timeout.current > -1) {
+        clearTimeout(timeout.current);
+        timeout.current = -1;
       }
 
       const id = elm.attributes['data-id'].value;
@@ -256,10 +261,13 @@ const svgMouseOver = (timout: MutableRefObject<any>, showTooltip: any) => {
   };
 };
 
-const svgMouseOut = (timout: MutableRefObject<any>, hideTooltip: any) => {
+const createSvgMouseOutHandler = (
+  timeout: MutableRefObject<any>,
+  hideTooltip: any
+) => {
   return () => {
-    if (timout.current < 0) {
-      timout.current = setTimeout(() => {
+    if (timeout.current < 0) {
+      timeout.current = setTimeout(() => {
         hideTooltip();
       }, 500);
     }

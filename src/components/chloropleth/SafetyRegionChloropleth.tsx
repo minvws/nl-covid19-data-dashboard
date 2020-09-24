@@ -253,7 +253,7 @@ export function SafetyRegionChloropleth<
         featureCollection={regionGeo}
         overlays={countryGeo}
         hovers={hasData ? regionGeo : undefined}
-        boundingbox={boundingbox || countryGeo}
+        boundingBox={boundingbox || countryGeo}
         dimensions={dimensions}
         featureCallback={featureCallback}
         overlayCallback={overlayCallback}

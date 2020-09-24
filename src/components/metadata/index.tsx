@@ -25,9 +25,9 @@ export function Metadata(props: IProps) {
 
   if (!dateUnix) return null;
 
-  const dateOfReport = formatDate(dateUnix * 1000, 'relative');
+  const dateOfReport = formatDate(dateUnix, 'relative');
   const dateOfInsertion = dateInsertedUnix
-    ? formatDate(dateInsertedUnix * 1000, 'relative')
+    ? formatDate(dateInsertedUnix, 'relative')
     : undefined;
 
   return (
