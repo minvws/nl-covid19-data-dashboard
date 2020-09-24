@@ -5,9 +5,12 @@
   "type": "object",
   "properties": {
     "intake_average": { "$ref": "#/definitions/time_series_value" },
+    "beds_occupied": {
+      "type": "number"
+    },
     "sourced_from": { "$ref": "#/definitions/sourced_from" }
   },
-  "required": ["intake_average", "capacity_percentage", "sourced_from"],
+  "required": ["intake_average", "beds_occupied", "sourced_from"],
   "additionalProperties": false,
   "definitions": {
     "time_series": {
