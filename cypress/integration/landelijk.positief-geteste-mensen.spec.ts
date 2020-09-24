@@ -1,4 +1,5 @@
 import { Context } from 'mocha';
+import { runInContext } from 'node_modules/cypress/types/lodash/index';
 /// <reference types="cypress" />
 
 import { National } from '../../src/types/data';
@@ -29,5 +30,23 @@ context('Landelijk - Positief geteste mensen', () => {
     );
 
     cy.get('[data-cy=infected_daily_increase] text').contains(testValue);
+  });
+
+  it('Should navigate to the appropriate municipality page after clicking on the chloropleth', function (this: Context & {
+    national: National;
+  }) {
+    const testMunicipalCode = 'GM0003';
+
+    const aPath = cy.get(
+      `[data-cy=chloropleths] [data-cy=choropleth-hovers] path[data-id=${testMunicipalCode}]`
+    );
+
+    aPath.click().then(() => {
+      cy.location().should((loc) => {
+        expect(loc.pathname).to.eq(
+          `/gemeente/${testMunicipalCode}/positief-geteste-mensen`
+        );
+      });
+    });
   });
 });

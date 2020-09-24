@@ -115,7 +115,10 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           )}
         </div>
 
-        <div className="column-item column-item-extra-margin">
+        <div
+          className="column-item column-item-extra-margin"
+          data-cy="chloropleths"
+        >
           {selectedMap === 'municipal' && (
             <MunicipalityChloropleth
               metricName="positive_tested_people"
