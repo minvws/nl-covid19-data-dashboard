@@ -9,5 +9,4 @@
     "types": ["cypress"]
   },
   "include": ["../src/types/data.d.ts", "**/*.ts"]
-  //"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.js"]
 }
