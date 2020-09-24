@@ -1,5 +1,5 @@
 import { FeatureCollection, MultiPolygon } from 'geojson';
-import { Municipalities, Regions } from 'types/data';
+import { Municipalities, Regions } from '~/types/data';
 
 type TMetricHolder<T> = keyof Omit<
   T,
@@ -33,6 +33,7 @@ export type RegionGeoJOSN = FeatureCollection<
 
 export type ChloroplethThresholds<T extends string> = {
   dataKey: T;
+  svgClass?: string;
   thresholds: ChloroplethThresholdsValue[];
 };
 

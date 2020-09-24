@@ -1,4 +1,4 @@
-import replaceVariablesInText from '../replaceVariablesInText';
+import { replaceVariablesInText } from '../replaceVariablesInText';
 
 describe('Util: replaceVariablesInText', () => {
   it('Should return the translation string if no variables are present', () => {

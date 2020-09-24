@@ -1,11 +1,12 @@
 import fs from 'fs';
 import path from 'path';
 
-import { National } from 'types/data.d';
+import { National } from '~/types/data.d';
 
 export interface INationalData {
   data: National;
   lastGenerated: string;
+  text?: any;
 }
 
 interface IProps {

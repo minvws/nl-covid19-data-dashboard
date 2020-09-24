@@ -10,12 +10,13 @@ export type TProps = {
   items: ILegendaItem[];
 };
 
-export default function ChloroplethLegenda(props: TProps) {
+export function ChloroplethLegenda(props: TProps) {
   const { items, title } = props;
+
   return (
     <>
       <h4>{title}</h4>
-      <ul className={styles.legenda}>
+      <ul className={styles.legenda} aria-label="legend">
         {items.map((item) => (
           <li key={item.color} className={styles.legendaItem}>
             <div

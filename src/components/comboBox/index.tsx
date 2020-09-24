@@ -8,9 +8,10 @@ import {
   ComboboxOption,
 } from '@reach/combobox';
 
-import useThrottle from 'utils/useThrottle';
+import { useThrottle } from '~/utils/useThrottle';
 
-import text from 'locale';
+import text from '~/locale/index';
+import { useMediaQuery } from '~/utils/useMediaQuery';
 
 type TOption = {
   displayName?: string;
@@ -22,8 +23,6 @@ type TProps<Option extends TOption> = {
   placeholder: string;
   handleSelect: (option: Option) => void;
 };
-
-export default ComboBox;
 
 /*
  * Combox is an accessible dropdown with search.
@@ -40,12 +39,13 @@ export default ComboBox;
  * />
  * ```
  */
-function ComboBox<Option extends TOption>(props: TProps<Option>) {
+export function ComboBox<Option extends TOption>(props: TProps<Option>) {
   const { options, placeholder, handleSelect } = props;
 
   const inputRef = useRef<HTMLInputElement>();
   const [term, setTerm] = useState<string>('');
   const results = useSearchedOptions<Option>(term, options);
+  const isLargeScreen = useMediaQuery('(min-width: 1000px)');
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>): void {
     setTerm(event.target.value);
@@ -66,10 +66,10 @@ function ComboBox<Option extends TOption>(props: TProps<Option>) {
   }
 
   useEffect(() => {
-    if (!inputRef?.current?.value) {
+    if (!inputRef?.current?.value && isLargeScreen) {
       inputRef?.current?.focus();
     }
-  }, []);
+  }, [isLargeScreen]);
 
   return (
     <Combobox openOnFocus onSelect={onSelect}>

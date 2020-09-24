@@ -2,55 +2,53 @@ import React, { useMemo } from 'react';
 import Highcharts, { SeriesLineOptions } from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-import formatNumber from 'utils/formatNumber';
-import formatDate from 'utils/formatDate';
+import { formatNumber } from '~/utils/formatNumber';
+import { formatDate } from '~/utils/formatDate';
+import { getItemFromArray } from '~/utils/getItemFromArray';
 
 type TranslationStrings = Record<string, string>;
 
 interface Value {
   date: number;
-  value: number | undefined | null;
+  value?: number;
+  week_start_unix: number;
+  week_end_unix: number;
 }
+
+type Week = {
+  start: number;
+  end: number;
+};
 
 type RegionalSewerWaterLineChartProps = {
   averageValues: Value[];
-  allValues: Value[][];
   text: TranslationStrings;
 };
 
-export default RegionalSewerWaterLineChart;
-
 function getOptions(
   averageValues: Value[],
-  allValues: Value[][],
   text: TranslationStrings
 ): Highcharts.Options {
-  const multipleAverageValues = averageValues.length > 1;
-
-  // If any of the RWZI locations has more than 1 value, we trigger different styling
-  const multipleAllValues =
-    allValues &&
-    allValues.length &&
-    allValues
-      .map((values: Value[]) => values.length)
-      .reduce((max, amount) => Math.max(max, amount)) > 1;
+  const hasMultipleValues = averageValues.length > 1;
+  const weekSet: Week[] = averageValues.map((value) => ({
+    start: value.week_start_unix,
+    end: value.week_end_unix,
+  }));
 
   const series: SeriesLineOptions[] = [
     {
       type: 'line',
-      data: averageValues.map((value) => [value.date, value.value]),
+      data: averageValues.map((x) => [x.date, x.value]),
       name: text.average_label_text,
       showInLegend: true,
       color: '#3391CC',
       allowPointSelect: false,
       marker: {
         symbol: 'circle',
-        enabled: !multipleAverageValues,
+        enabled: !hasMultipleValues,
       },
       events: {
-        legendItemClick: function () {
-          return false;
-        },
+        legendItemClick: () => false,
       },
       states: {
         inactive: {
@@ -59,31 +57,6 @@ function getOptions(
       },
     },
   ];
-
-  allValues.forEach((values, index) => {
-    series.unshift({
-      type: 'line',
-      data: values.map((value) => [value.date, value.value]),
-      name: text.secondary_label_text,
-      showInLegend: index === 0,
-      color: '#D2D2D2',
-      allowPointSelect: false,
-      marker: {
-        enabled: !multipleAllValues,
-      },
-      events: {
-        legendItemClick: () => false,
-      },
-      states: {
-        hover: {
-          enabled: false,
-        },
-        inactive: {
-          opacity: 1,
-        },
-      },
-    });
-  });
 
   const options: Highcharts.Options = {
     chart: {
@@ -130,11 +103,10 @@ function getOptions(
         // types say `rotation` needs to be a number,
         // but that doesn’t work.
         rotation: '0' as any,
-        formatter: function (): string {
-          if (this.isFirst || this.isLast) {
-            return formatDate(this.value * 1000, 'axis');
-          }
-          return '';
+        formatter: function () {
+          return this.isFirst || this.isLast
+            ? formatDate(this.value * 1000, 'axis')
+            : '';
         },
       },
     },
@@ -146,7 +118,11 @@ function getOptions(
         if (this.series.name !== text.average_label_text) {
           return false;
         }
-        return `${formatDate(this.x * 1000)}: ${formatNumber(this.y)}`;
+        const { start, end } = getItemFromArray(weekSet, this.point.index);
+        return `<strong>${formatDate(start, 'short')} - ${formatDate(
+          end,
+          'short'
+        )}:</strong> ${formatNumber(this.y)}`;
       },
     },
     yAxis: {
@@ -174,14 +150,13 @@ function getOptions(
   return options;
 }
 
-function RegionalSewerWaterLineChart({
+export function RegionalSewerWaterLineChart({
   averageValues,
-  allValues,
   text,
 }: RegionalSewerWaterLineChartProps) {
   const chartOptions = useMemo(() => {
-    return getOptions(averageValues, allValues, text);
-  }, [averageValues, allValues, text]);
+    return getOptions(averageValues, text);
+  }, [averageValues, text]);
 
   return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;
 }

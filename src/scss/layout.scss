@@ -67,12 +67,12 @@
   margin: 0 -2rem;
 }
 
+.index-article,
 .metric-article {
   background: white;
   padding: 2em;
   border-radius: 5px;
-  margin: 0 -2rem;
-  margin-top: 2rem;
+  margin: 2rem -2rem 0;
   box-shadow: $box-shadow;
 
   .article-text {
@@ -83,6 +83,10 @@
     margin: 0;
     margin-top: 2rem;
   }
+}
+
+.index-article:first-of-type() {
+  margin-top: -1rem;
 }
 
 .escalation-article {
@@ -134,6 +138,7 @@
   /* will become display: flex at wider screens */
   display: block;
   flex-direction: column;
+  margin-bottom: 2rem;
 
   .back-button {
     background: white;
@@ -180,19 +185,62 @@
 }
 
 @media (max-width: 999px) {
-  .small-screen-aside-tendency {
-    .national-content,
-    .safety-region-content,
-    .municipality-content {
-      display: none;
+  .national-layout,
+  .safety-region-layout,
+  .municipality-layout {
+    > section {
+      padding-top: 0;
+      margin-top: 0.5em;
+    }
+
+    .index-article {
+      margin-top: 0;
     }
   }
 
-  .small-screen-content-tendency {
+  .safety-region-aside,
+  .municipality-aside {
+    min-height: 6em;
+  }
+
+  /**
+   * Menu and content only show/hides with JavaScript enabled
+   */
+  .js {
+    .has-menu-and-content-opened {
+      .back-button {
+        display: none;
+      }
+    }
+
+    .has-menu-opened {
+      .national-content,
+      .safety-region-content,
+      .municipality-content,
+      .back-button {
+        display: none;
+      }
+    }
+
+    .has-menu-closed {
+      .national-aside,
+      .safety-region-aside,
+      .municipality-aside {
+        display: none;
+      }
+    }
+  }
+
+  // Tweaks to display the non-JS aside + content well
+  html:not(.js) {
+    .back-button {
+      display: none;
+    }
+
     .national-aside,
     .safety-region-aside,
     .municipality-aside {
-      display: none;
+      margin-bottom: 2em;
     }
   }
 }
@@ -224,7 +272,7 @@
   .safety-region-layout,
   .municipality-layout {
     max-width: 1400px;
-    margin: 0 auto;
+    margin: 0 auto 2rem;
     padding: 0 1em;
   }
 }
@@ -247,6 +295,8 @@
   z-index: 2;
 
   h2 {
+    font-size: 1.42383rem;
+    line-height: 1.40466;
     padding: 1rem;
     padding-bottom: 0.5rem;
     padding-top: 2rem;
@@ -339,12 +389,14 @@ a.metric-link {
   }
 }
 
-a.active-metric-link {
-  background: $page-background-active;
-  border-right: 5px solid $red;
+@media (min-width: 1000px) {
+  a.active-metric-link {
+    background: $page-background-active;
+    border-right: 5px solid $red;
 
-  &::after {
-    content: none;
+    &::after {
+      content: none;
+    }
   }
 }
 

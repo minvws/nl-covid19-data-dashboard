@@ -1,4 +1,4 @@
-@import 'scss/variables.scss';
+@import '~/scss/variables.scss';
 
 $language-switcher-offset: 55px;
 
@@ -142,8 +142,6 @@ $language-switcher-offset: 55px;
   padding: 2em 0;
   z-index: 4;
   position: relative;
-
-  margin-top: 2em;
 }
 
 .grid {
@@ -239,9 +237,9 @@ $language-switcher-offset: 55px;
 }
 
 .category {
-  font-size: 1.42383rem;
+  font-size: 1.4rem;
   font-weight: 600;
-  color: #9d9d9d;
+  color: #6b6b6b;
   margin: 0;
   margin-bottom: 0.3rem;
   margin-left: 4rem;

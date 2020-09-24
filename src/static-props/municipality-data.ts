@@ -1,6 +1,6 @@
-import { Municipal } from 'types/data.d';
+import { Municipal } from '~/types/data.d';
 
-import municipalities from 'data/gemeente_veiligheidsregio.json';
+import municipalities from '~/data/gemeente_veiligheidsregio.json';
 import { getSafetyRegionData } from './safetyregion-data';
 
 export interface IMunicipalityData {

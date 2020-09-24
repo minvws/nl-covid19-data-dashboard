@@ -3,13 +3,13 @@ import {
   ResultsPerSewerInstallationPerMunicipalityItem,
   SewerMeasurementsLastValue,
   ResultsPerSewerInstallationPerMunicipalityLastValue,
-} from 'types/data.d';
-import formatDate from 'utils/formatDate';
-import formatNumber from 'utils/formatNumber';
+} from '~/types/data.d';
+import { formatDate } from '~/utils/formatDate';
+import { formatNumber } from '~/utils/formatNumber';
 import { XrangePointOptionsObject } from 'highcharts';
-import replaceVariablesInText from 'utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
-import siteText from 'locale';
+import siteText from '~/locale/index';
 
 const text: typeof siteText.gemeente_rioolwater_metingen =
   siteText.gemeente_rioolwater_metingen;
@@ -29,11 +29,12 @@ export interface SewerWaterBarScaleData {
 interface SewerWaterLineChartValue {
   date: number;
   value: number;
+  week_start_unix: number;
+  week_end_unix: number;
 }
 
 export interface SewerWaterLineChartData {
   averageValues: SewerWaterLineChartValue[];
-  allValues: SewerWaterLineChartValue[][];
   averageLabelText: string;
 }
 
@@ -135,7 +136,6 @@ export function getSewerWaterLineChartData(
           };
         })
         .sort((a: any, b: any) => b.date - a.date),
-      allValues: [],
       averageLabelText: replaceVariablesInText(
         text.graph_average_label_text_rwzi,
         {
@@ -151,8 +151,6 @@ export function getSewerWaterLineChartData(
   // Average line === the averages from `sewer_measurements`
   // Grey lines are the RWZI locations
   const averageValues = data?.sewer_measurements?.values || [];
-  const allValues =
-    data?.results_per_sewer_installation_per_municipality?.values || [];
 
   return {
     averageValues: averageValues
@@ -164,19 +162,6 @@ export function getSewerWaterLineChartData(
         };
       })
       .sort((a: any, b: any) => b.date - a.date),
-    allValues: allValues.map(
-      (installation: ResultsPerSewerInstallationPerMunicipalityItem) => {
-        return installation?.values
-          .map((value: any) => {
-            return {
-              ...value,
-              value: value.rna_per_ml || 0,
-              date: value.date_measurement_unix,
-            };
-          })
-          .sort((a: any, b: any) => b.date - a.date);
-      }
-    ),
     averageLabelText: text.graph_average_label_text,
   };
 }
@@ -221,7 +206,7 @@ export function getSewerWaterBarChartData(
         color: '#3391CC',
         label: data?.sewer_measurements?.last_value
           ? `${formatDate(
-              data.sewer_measurements.last_value.week_unix * 1000,
+              data.sewer_measurements.last_value.week_unix,
               'short'
             )}: ${formatNumber(data.sewer_measurements.last_value.average)}`
           : false,
@@ -235,7 +220,7 @@ export function getSewerWaterBarChartData(
             color: '#C1C1C1',
             label: installation?.last_value
               ? `${formatDate(
-                  installation.last_value.date_measurement_unix * 1000,
+                  installation.last_value.date_measurement_unix,
                   'short'
                 )}: ${formatNumber(installation.last_value.rna_per_ml)}`
               : false,

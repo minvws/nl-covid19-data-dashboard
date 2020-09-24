@@ -1,4 +1,4 @@
-@import 'scss/variables.scss';
+@import '~/scss/variables.scss';
 
 .legenda {
   list-style: none;
@@ -20,11 +20,11 @@
   }
 
   li.blue::after {
-    background: #3391CC;
+    background: #3391cc;
   }
 
   li.gray::after {
-    background: #C4C4C4;
+    background: #c4c4c4;
   }
 
   li.square::after {

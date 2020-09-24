@@ -4,16 +4,16 @@ import {
   SafetyRegionProperties,
   TRegionMetricName,
 } from './shared';
-import { Regions } from 'types/data';
+import { Regions } from '~/types/data';
 import { CSSProperties, ReactNode, useCallback } from 'react';
-import useChartDimensions from './hooks/useChartDimensions';
-import Chloropleth from './Chloropleth';
+import { useChartDimensions } from './hooks/useChartDimensions';
+import { Chloropleth } from './Chloropleth';
 import { countryGeo, regionGeo } from './topology';
 import { Feature, MultiPolygon } from 'geojson';
 import styles from './chloropleth.module.scss';
-import useSafetyRegionBoundingbox from './hooks/useSafetyRegionBoundingbox';
-import useChloroplethColorScale from './hooks/useChloroplethColorScale';
-import useSafetyRegionData from './hooks/useSafetyRegionData';
+import { useSafetyRegionBoundingbox } from './hooks/useSafetyRegionBoundingbox';
+import { useChloroplethColorScale } from './hooks/useChloroplethColorScale';
+import { useSafetyRegionData } from './hooks/useSafetyRegionData';
 
 type RegionalThresholds = ChloroplethThresholds<TRegionMetricName>;
 
@@ -75,17 +75,18 @@ const hospitalAdmissionsThresholds: RegionalThresholds = {
 
 const escalationThresholds: RegionalThresholds = {
   dataKey: 'escalation_levels',
+  svgClass: 'escalationMap',
   thresholds: [
     {
-      color: '#FFF7A3',
+      color: '#F291BC',
       threshold: 1,
     },
     {
-      color: '#FACB3E',
+      color: '#D95790',
       threshold: 2,
     },
     {
-      color: '#F5512D',
+      color: '#A11050',
       threshold: 3,
     },
   ],
@@ -127,7 +128,7 @@ export type TProps<
  *
  * @param props
  */
-export default function SafetyRegionChloropleth<
+export function SafetyRegionChloropleth<
   T extends TRegionMetricName,
   ItemType extends Regions[T][number],
   ReturnType extends ItemType & { value: number },
@@ -153,10 +154,10 @@ export default function SafetyRegionChloropleth<
     metricProperty
   );
 
-  const thresholdValues = metricName ? thresholds[metricName] : undefined;
+  const selectedThreshold = metricName ? thresholds[metricName] : undefined;
   const getFillColor = useChloroplethColorScale(
     getData,
-    thresholdValues?.thresholds
+    selectedThreshold?.thresholds
   );
 
   const featureCallback = useCallback(
@@ -235,19 +236,24 @@ export default function SafetyRegionChloropleth<
     return null;
   };
 
+  const className = classNames(
+    styles.chloroplethContainer,
+    selectedThreshold?.svgClass ? styles[selectedThreshold.svgClass] : undefined
+  );
+
   return (
     <div
       ref={(elm) => {
         ref.current = elm;
       }}
-      className={styles.chloroplethContainer}
+      className={className}
       style={style}
     >
       <Chloropleth
         featureCollection={regionGeo}
         overlays={countryGeo}
         hovers={hasData ? regionGeo : undefined}
-        boundingbox={boundingbox || countryGeo}
+        boundingBox={boundingbox || countryGeo}
         dimensions={dimensions}
         featureCallback={featureCallback}
         overlayCallback={overlayCallback}

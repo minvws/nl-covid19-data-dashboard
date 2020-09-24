@@ -1,16 +1,15 @@
 {
   "name": "corona-dashboard",
-  "version": "2.0.1",
+  "version": "2.1.1",
   "private": true,
   "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
   "dependencies": {
-    "@juggle/resize-observer": "^3.2.0",
     "@reach/combobox": "^0.11.2",
+    "@testing-library/react": "^11.0.4",
     "@types/geojson": "^7946.0.7",
     "@vx/event": "^0.0.198",
     "@vx/geo": "latest",
     "@vx/scale": "latest",
-    "@vx/tooltip": "^0.0.198",
     "classnames": "^2.2.6",
     "d3-scale": "2",
     "date-fns": "^2.15.0",
@@ -34,7 +33,9 @@
     "swr": "^0.3.1",
     "topojson-client": "^3.1.0",
     "unfetch": "^4.1.0",
-    "unified": "^9.2.0"
+    "unified": "^9.2.0",
+    "use-resize-observer": "^6.1.0",
+    "zustand": "^3.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.11.4",
@@ -61,6 +62,7 @@
     "babel-plugin-inline-react-svg": "^1.1.1",
     "babel-plugin-module-resolver": "^4.0.0",
     "cross-env": "^7.0.2",
+    "cypress": "^5.2.0",
     "eslint": "^7.7.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-react": "^7.20.6",
@@ -78,6 +80,7 @@
     "node-sass": "^4.14.1",
     "prettier": "^2.0.5",
     "react-refresh": "^0.8.3",
+    "start-server-and-test": "^1.11.4",
     "typescript": "^4.0.2"
   },
   "husky": {
@@ -105,6 +108,11 @@
     "type-check": "tsc --pretty --noEmit",
     "validate-json": "node schema/validator/validate-json.js",
     "validate-single": "node schema/validator/validate-single.js",
-    "generate-typescript": "node schema/validator/generate-typescript.js"
+    "generate-typescript": "node schema/validator/generate-typescript.js",
+    "e2e": "start-test dev 3000 cy:open",
+    "e2e:release": "yarn build && start-test 3000 cy:open",
+    "cy:open": "cypress open",
+    "e2e:ci": "yarn build && start-test 3000 cy:ci",
+    "cy:ci": "cypress run --headless --browser chrome"
   }
 }

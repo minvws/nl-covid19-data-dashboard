@@ -1,22 +1,15 @@
 import { isToday, isYesterday } from 'date-fns';
 
-import siteText from 'locale';
-import getLocale from 'utils/getLocale';
+import siteText from '~/locale/index';
+import { getLocale } from '~/utils/getLocale';
 
 const locale = getLocale();
-
-export default formatDate;
 
 // TypeScript is missing some types for `Intl.DateTimeFormat`.
 // https://github.com/microsoft/TypeScript/issues/35865
 interface DateTimeFormatOptions extends Intl.DateTimeFormatOptions {
   dateStyle?: 'full' | 'long' | 'medium' | 'short';
   timeStyle?: 'full' | 'long' | 'medium' | 'short';
-}
-
-interface DateTimeFormatPart {
-  type: string;
-  value: string;
 }
 
 const Long = new Intl.DateTimeFormat(locale, {
@@ -42,10 +35,17 @@ const Day = new Intl.DateTimeFormat(locale, {
   day: 'numeric',
 });
 
-function formatDate(
-  value: number | Date,
+export function formatDate(
+  seconds: number,
   style?: 'long' | 'medium' | 'short' | 'relative' | 'iso' | 'axis'
 ): string {
+  /**
+   * JavaScript uses milliseconds since EPOCH, therefore the value
+   * formatted by the format() function needs to be multiplied by 1000
+   * to format to an accurate dateTime
+   */
+  const value = seconds * 1000;
+
   if (style === 'iso') return new Date(value).toISOString(); // '2020-07-23T10:01:16.000Z'
   if (style === 'long') return Long.format(value); // '23 juli 2020 om 12:01'
   if (style === 'medium') return Medium.format(value); // '23 juli 2020'

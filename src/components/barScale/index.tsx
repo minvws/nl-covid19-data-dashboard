@@ -1,12 +1,13 @@
 import styles from './styles.module.scss';
 import { useRef } from 'react';
-import formatNumber from 'utils/formatNumber';
-import ScreenReaderOnly from 'components/screenReaderOnly';
-import replaceVariablesInText from 'utils/replaceVariablesInText';
+
+import { formatNumber } from '~/utils/formatNumber';
+import { ScreenReaderOnly } from '~/components/screenReaderOnly';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { scaleQuantile, scaleThreshold } from 'd3-scale';
 
-import useDynamicScale from 'utils/useDynamicScale';
-import siteText from 'locale';
+import { useDynamicScale } from '~/utils/useDynamicScale';
+import siteText from '~/locale/index';
 
 type GradientStop = {
   color: string;
@@ -25,9 +26,7 @@ type BarscaleProps = {
   showAxis?: boolean;
 };
 
-export default BarScale;
-
-function BarScale({
+export function BarScale({
   min,
   max,
   value,
@@ -44,8 +43,6 @@ function BarScale({
   const { scale: x } = useDynamicScale(min, max, rangeKey, value);
 
   const text: typeof siteText.common.barScale = siteText.common.barScale;
-
-  const clipPathId = useRef(`cut-off${id}-${rand.current}`);
 
   if (!x) {
     return null;
@@ -77,7 +74,7 @@ function BarScale({
       <div className={styles.root} aria-hidden="true">
         <svg xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <clipPath id={clipPathId.current}>
+            <clipPath id={`cut-off${id}-${rand.current}`}>
               <rect
                 x="0"
                 y={36}
@@ -110,7 +107,7 @@ function BarScale({
               ry="2"
               width="100%"
               height="10"
-              clipPath={`url(#${clipPathId.current})`}
+              clipPath={`url(#cut-off${id}-${rand.current})`}
               fill={`url(#barColor${id}-${rand.current})`}
             />
             <rect
