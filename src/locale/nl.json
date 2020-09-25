@@ -10,7 +10,7 @@
   },
   "notificatie": {
     "titel": "Sterke stijging Covid-19 besmettingen, opnames in ziekenhuizen en op de IC",
-    "bericht": "De afgelopen week (16 t/m 22 september) is het aantal nieuwe positief geteste personen met 60% toegenomen. Zuid-Holland, Noord-Holland, Utrecht en Groningen waren de provincies met de meeste nieuwe besmettingen. Er is een stijgende trend zichtbaar in het aantal positief geteste verpleeghuisbewoners. De aantallen patiënten die vanwege COVID-19 zijn opgenomen in het ziekenhuis of op de intensive care zijn ook flink gestegen.  \n\nHet risiconiveau per regio kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2) of ‘ernstig’ (niveau 3) zijn. In 6 van de 25 regio’s is de situatie zorgelijk.",
+    "bericht": "De afgelopen week (16 t/m 22 september) is het aantal nieuwe positief geteste personen met 60% toegenomen. Zuid-Holland, Noord-Holland, Utrecht en Groningen waren de provincies met de meeste nieuwe besmettingen. Er is een stijgende trend zichtbaar in het aantal positief geteste verpleeghuisbewoners. De aantallen patiënten die vanwege COVID-19 zijn opgenomen in het ziekenhuis of op de intensive care zijn ook flink gestegen.  \n\nHet risiconiveau per regio kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2) of ‘ernstig’ (niveau 3) zijn. In 14 van de 25 regio’s is de situatie zorgelijk.",
     "link": {
       "text": "Bekijk de toelichting van het RIVM",
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel"
@@ -118,7 +118,13 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de trend van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
+    "barscale_keys": [
+      "0 tot 20",
+      "20 tot 40",
+      "40 tot 60",
+      "60 tot 80",
+      "80+"
+    ],
     "cluster_datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "cluster_bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
@@ -138,22 +144,6 @@
       "geen_meldingen": "Geen meldingen"
     },
     "titel_sidebar": "Positief geteste mensen per 100.000 inwoners per dag"
-  },
-  "positief_geteste_personen_ggd": {
-    "titel": "Percentage positief geteste personen via GGD teststraten",
-    "summary_title": "{{percentage}} van de GGD testen waren positief",
-    "summary_link_cta": "Lees meer",
-    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "bron": {
-      "href": "https://www.rivm.nl/documenten/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
-      "text": "RIVM"
-    },
-    "toelichting": "Dit getal zegt iets over het totaal aantal personen dat via de GGD getest is, en hoeveel daarvan een positieve uitslag hadden. Let op dat de meeste testen via de GGD lopen, maar dit niet voor alle testen geldt. Daarom wijkt het absolute aantal positief geteste personen af van het aantal positief geteste personen door de GGD.",
-    "totaal_getest_week_titel": "Aantal geteste personen via GGD",
-    "totaal_getest_week_uitleg": "Aantal personen die in één week via de GGD getest zijn.",
-    "positief_getest_week_titel": "Positief getest personen",
-    "positief_getest_week_uitleg": "Aantal en percentage positief geteste personen die in één week via de GGD getest zijn.",
-    "positief_getest_getest_week_uitleg": "Dit zijn {{numerator}} van {{denominator}} geteste personen"
   },
   "besmettelijke_personen": {
     "title": "Aantal besmettelijke mensen",
@@ -435,7 +425,7 @@
       },
       {
         "cijfer": "Rioolwatermeting",
-        "verantwoording": "In rioolwater kun je ziekteverwekkers zoals het nieuwe coronavirus meten omdat die met ontlasting via de wc in het rioolwater komen. Dit onderzoek laat zien hoeveel virusdeeltjes in het rioolwater zitten afkomstig uit ontlasting van een deel van de besmette personen. Op elke locatie testen onderzoekers van het RIVM eens per week rioolwater dat over 24 uur verzameld is. Per week kan het aantal gemeten locaties variëren, omdat niet elke meting succesvol wordt afgerond. In het open data bestand staat per datum bij welke locaties gemeten is. Let op dat de cijfers van vóór 20 juli zijn gebaseerd op circa 28 locaties. De cijfers tussen 20 juli en 31 augustus zijn gebaseerd op circa 80 locaties. Vanaf 31 augustus wordt er gemeten op circa 300 locaties. In het huidige onderzoek kunnen trends in aantallen virusdeeltjes zoals een stijging of daling worden gezien. Meer onderzoek is nodig om conclusies aan deze trends te kunnen verbinden.De aantallen kunnen niet vergeleken worden tussen locaties. Deze duiding volgt nog. \n\nDe gegevens worden wekelijks (op dinsdag) geleverd als open data door het [RIVM](https://data.rivm.nl/covid-19/COVID-19_rioolwaterdata.csv). Met het beschikbaar komen van meer gegevens kan het aantal virusdeeltjes nauwkeuriger bepaald worden. Het RIVM hanteert sinds 18 augustus een aangepaste rekenmethode om het aantal virusdeeltjes per milliliter te bepalen. In het open data bestand staat aangegeven of een meting representatief is of niet, in het dashboard maken we alleen gebruik van representatieve data.\n\nIn de grafiek staat op de Y-as het aantal virusdeeltjes in een milliliter rioolwater. Op de X-as staat de datum waarop het het rioolwater is verzameld. Het landelijk en regionale gemiddelde betreft een weekgemiddelde. De som van de geleverde waarden in de week, wordt gedeeld door het aantal locaties waarover meetwaarden voor die week geleverd zijn. De gerapporteerde weken lopen van maandag t/m zondag. De gemeten waarden per afzonderlijke locatie staan in de grafiek op de datum waarop de monstername van het rioolwater is gestart.\n\nDe getoonde virusdeeltjes per milliliter kunnen worden beïnvloed door een aantal extra factoren. Regenval bijvoorbeeld kan het aantal gemeten deeltjes per milliliter verlagen, doordat het rioolwater door hemelwater wordt verdund. Ook kunnen aangesloten industriegebieden ditzelfde effect hebben, omdat daar in het rioolwater meestal geen of nauwelijks menselijke ontlasting te vinden is. Tevens kunnen de aantal virusdeeltjes per milliliter zo laag zijn, dat het niet gemeten wordt. Dit leidt dan tot een meting met een waarde van nul deeltjes per milliliter.\n\nOm te bepalen welke locatie tot welke veiligheidsregio behoort, wordt gekeken naar het verzorgingsgebied van de locatie. Dit is het gebied waarvoor de zuiveringsinstallatie afvalwater zuivert. Het RIVM levert per locatie aan voor hoeveel procent deze in een veiligheidsregio valt. Deze verdeling is nog niet volledig accuraat en wordt de komende tijd verder uitgewerkt. Sommige locaties hebben een verzorgingsgebied dat meerdere veiligheidsregio’s bevat. Indien dat zo is, wordt de locatie op het dashboard volledig toegewezen aan de veiligheidsregio dat het grootste deel van het verzorgingsgebied omvat. Voor het koppelen van locaties met gemeenten wordt momenteel gekeken naar de postcode van de locatie. Met gebruik van de CBS indeling gemeente voor postcode wordt vervolgens deze postcode vertaald naar een gemeente. In een paar gevallen kwam hier geen match uit. Voor die uitzonderingen is handmatig op basis van coördinaten gekeken op de kaart tot welke gemeente de locaties behoren. Let op: deze koppelingen zijn mogelijk niet volledig accuraat, want het verzorgingsgebied van een zuiveringsinstallatie hoeft niet gelijk te lopen met gemeentegrenzen. Er wordt gewerkt aan een meer nauwkeurige koppeling tussen locatie en gemeente."
+        "verantwoording": "In rioolwater kun je ziekteverwekkers zoals het nieuwe coronavirus meten omdat die met ontlasting via de wc in het rioolwater komen. Dit onderzoek laat zien hoeveel virusdeeltjes in het rioolwater zitten afkomstig uit ontlasting van een deel van de besmette personen. Op elke locatie testen onderzoekers van het RIVM eens per week rioolwater dat over 24 uur verzameld is. Per week kan het aantal gemeten locaties variëren, omdat niet elke meting succesvol wordt afgerond. In het open data bestand staat per datum bij welke locaties gemeten is. Let op dat de cijfers van vóór 20 juli zijn gebaseerd op circa 28 locaties. De cijfers tussen 20 juli en 31 augustus zijn gebaseerd op circa 80 locaties. Vanaf 31 augustus wordt er gemeten op circa 300 locaties. In het huidige onderzoek kunnen trends in aantallen virusdeeltjes zoals een stijging of daling worden gezien. Meer onderzoek is nodig om conclusies aan deze trends te kunnen verbinden.De aantallen kunnen niet vergeleken worden tussen locaties. Deze duiding volgt nog. \n\nDe gegevens worden wekelijks (op dinsdag) geleverd als open data door het [RIVM](https://data.rivm.nl/covid-19/COVID-19_rioolwaterdata.csv). Met het beschikbaar komen van meer gegevens kan het aantal virusdeeltjes nauwkeuriger bepaald worden. Het RIVM hanteert sinds 18 augustus een aangepaste rekenmethode om het aantal virusdeeltjes per milliliter te bepalen. In het open data bestand staat aangegeven of een meting representatief is of niet, in het dashboard maken we alleen gebruik van representatieve data.\n\nIn de grafiek staat op de Y-as het aantal virusdeeltjes in een milliliter rioolwater. Op de X-as staat de datum waarop het het rioolwater is verzameld. Het landelijk en regionale gemiddelde betreft een weekgemiddelde. De som van de geleverde waarden in de week, wordt gedeeld door het aantal locaties waarover meetwaarden voor die week geleverd zijn. De gerapporteerde weken lopen van maandag t/m zondag. De gemeten waarden per afzonderlijke locatie staan in de grafiek op de datum waarop de monstername van het rioolwater is gestart.\n\nDe getoonde virusdeeltjes per milliliter kunnen worden beïnvloed door een aantal extra factoren. Regenval bijvoorbeeld kan het aantal gemeten deeltjes per milliliter verlagen, doordat het rioolwater door hemelwater wordt verdund. Ook kunnen aangesloten industriegebieden ditzelfde effect hebben, omdat daar in het rioolwater meestal geen of nauwelijks menselijke ontlasting te vinden is. Tevens kan het aantal virusdeeltjes per milliliter zo laag zijn, dat het niet gemeten wordt. Dit leidt dan tot een meting met een waarde van nul deeltjes per milliliter.\n\nOm te bepalen welke locatie tot welke veiligheidsregio behoort, wordt gekeken naar het verzorgingsgebied van de locatie. Dit is het gebied waarvoor de zuiveringsinstallatie afvalwater zuivert. Het RIVM levert per locatie aan voor hoeveel procent deze in een veiligheidsregio valt. Deze verdeling is nog niet volledig accuraat en wordt de komende tijd verder uitgewerkt. Sommige locaties hebben een verzorgingsgebied dat meerdere veiligheidsregio’s bevat. Indien dat zo is, wordt de locatie op het dashboard volledig toegewezen aan de veiligheidsregio dat het grootste deel van het verzorgingsgebied omvat. Voor het koppelen van locaties met gemeenten wordt momenteel gekeken naar de postcode van de locatie. Met gebruik van de CBS indeling gemeente voor postcode wordt vervolgens deze postcode vertaald naar een gemeente. In een paar gevallen kwam hier geen match uit. Voor die uitzonderingen is handmatig op basis van coördinaten gekeken op de kaart tot welke gemeente de locaties behoren. Let op: deze koppelingen zijn mogelijk niet volledig accuraat, want het verzorgingsgebied van een zuiveringsinstallatie hoeft niet gelijk te lopen met gemeentegrenzen. Er wordt gewerkt aan een meer nauwkeurige koppeling tussen locatie en gemeente."
       },
       {
         "cijfer": "“Waarde van” en “Verkregen”",
@@ -585,7 +575,13 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de trend van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
+    "barscale_keys": [
+      "0 tot 20",
+      "20 tot 40",
+      "40 tot 60",
+      "60 tot 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -661,7 +657,13 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de trend van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": ["0 to 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 tot 40",
+      "40 tot 60",
+      "60 tot 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -690,7 +692,7 @@
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Risiconiveaus",
-    "selecteer_toelichting": "De kaart geeft het risiconiveau per regio weer. Dat kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2) of ‘ernstig’ (niveau 3) zijn. Per regio worden passende maatregelen genomen.\n\n[Regionale maatregelen](https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/nederlandse-maatregelen-tegen-het-coronavirus/lokale-maatregelen-tegen-verspreiding-coronavirus)\n\n[Meer over de risiconiveaus](/verantwoording)"
+    "selecteer_toelichting": "De kaart geeft het risiconiveau per regio weer. Dat kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2) of ‘ernstig’ (niveau 3) zijn. Per regio worden passende maatregelen genomen.\n\n[Regionale maatregelen](https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/nederlandse-maatregelen-tegen-het-coronavirus/lokale-maatregelen-tegen-verspreiding-coronavirus/in-de-regio)\n\n[Meer over de risiconiveaus](/verantwoording)"
   },
   "gemeente_index": {
     "selecteer_titel": "Selecteer een gemeente",
@@ -704,7 +706,7 @@
   },
   "escalatie_niveau": {
     "titel": "Risiconiveaus",
-    "toelichting": "De kaart geeft het risiconiveau per regio weer. Dat kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2) of ‘ernstig’ (niveau 3) zijn. Per regio worden passende maatregelen genomen.\n\n[Regionale maatregelen](https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/nederlandse-maatregelen-tegen-het-coronavirus/lokale-maatregelen-tegen-verspreiding-coronavirus)\n\n[Meer over de risiconiveaus](/verantwoording)",
+    "toelichting": "De kaart geeft het risiconiveau per regio weer. Dat kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2) of ‘ernstig’ (niveau 3) zijn. Per regio worden passende maatregelen genomen.\n\n[Regionale maatregelen](https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/nederlandse-maatregelen-tegen-het-coronavirus/lokale-maatregelen-tegen-verspreiding-coronavirus/in-de-regio)\n\n[Meer over de risiconiveaus](/verantwoording)",
     "types": {
       "1": {
         "titel": "Waakzaam",
@@ -730,5 +732,21 @@
       "overig": "Vroegsignalering",
       "verpleeghuis": "Verpleeghuiszorg"
     }
+  },
+  "positief_geteste_personen_ggd": {
+    "titel": "Percentage positief geteste personen via GGD teststraten",
+    "summary_title": "{{percentage}} van de GGD testen waren positief",
+    "summary_link_cta": "Lees meer",
+    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "bron": {
+      "href": "https://www.rivm.nl/documenten/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "text": "RIVM"
+    },
+    "toelichting": "Dit getal zegt iets over het totaal aantal personen dat via de GGD getest is, en hoeveel daarvan een positieve uitslag hadden. Let op dat de meeste testen via de GGD lopen, maar dit niet voor alle testen geldt. Daarom wijkt het absolute aantal positief geteste personen af van het aantal positief geteste personen door de GGD.",
+    "totaal_getest_week_titel": "Aantal geteste personen via GGD",
+    "totaal_getest_week_uitleg": "Aantal personen die in één week via de GGD getest zijn.",
+    "positief_getest_week_titel": "Positief getest personen",
+    "positief_getest_week_uitleg": "Aantal en percentage positief geteste personen die in één week via de GGD getest zijn.",
+    "positief_getest_getest_week_uitleg": "Dit zijn {{numerator}} van {{denominator}} geteste personen"
   }
 }
