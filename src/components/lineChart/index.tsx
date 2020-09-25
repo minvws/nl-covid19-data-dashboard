@@ -12,10 +12,11 @@ import {
 import { formatNumber } from '~/utils/formatNumber';
 import { formatDate } from '~/utils/formatDate';
 import { getFilteredValues } from '~/components/chartTimeControls/chartTimeControlUtils';
+import { isDefined } from 'ts-is-present';
 
 type Value = {
   date: number;
-  value: number | undefined | null;
+  value?: number;
 };
 
 interface LineChartProps {
@@ -26,7 +27,9 @@ interface LineChartProps {
   timeframeOptions?: TimeframeOption[];
 }
 
-function getChartOptions(values: Value[], signaalwaarde?: number | undefined) {
+function getChartOptions(values: Value[], signaalwaarde?: number) {
+  const yMax = calculateYMax(values, signaalwaarde);
+
   const options: Highcharts.Options = {
     chart: {
       alignTicks: true,
@@ -76,7 +79,7 @@ function getChartOptions(values: Value[], signaalwaarde?: number | undefined) {
     yAxis: {
       min: 0,
       minRange: 0.1,
-      max: values.length > 0 ? null : signaalwaarde ? signaalwaarde + 1 : 1,
+      max: yMax,
       allowDecimals: false,
       lineColor: '#C4C4C4',
       gridLineColor: '#C4C4C4',
@@ -201,4 +204,17 @@ export default function LineChart({
       <HighchartsReact highcharts={Highcharts} options={chartOptions} />
     </section>
   );
+}
+
+function calculateYMax(values: Value[], signaalwaarde = -Infinity) {
+  /**
+   * From all the defined values, extract the highest number so we know how to
+   * scale the y-axis
+   */
+  const maxValue = values
+    .map((x) => x.value)
+    .filter(isDefined)
+    .reduce((acc, value) => (value > acc ? value : acc), -Infinity);
+
+  return Math.max(maxValue, signaalwaarde + 10);
 }

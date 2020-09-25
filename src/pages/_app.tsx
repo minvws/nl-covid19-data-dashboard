@@ -16,14 +16,10 @@ import { useEffect } from 'react';
 import Router from 'next/router';
 import * as piwik from '../lib/piwik';
 
-import { SWRConfig } from 'swr';
-
 interface IProps {
   Component: any;
   pageProps: any;
 }
-
-const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
 export default MyApp;
 
@@ -45,13 +41,5 @@ function MyApp(props: IProps): React.ReactElement {
     };
   }, []);
 
-  return (
-    <SWRConfig
-      value={{
-        fetcher,
-      }}
-    >
-      {getLayout(<Component {...pageProps} />, pageProps)}
-    </SWRConfig>
-  );
+  return getLayout(<Component {...pageProps} />, pageProps);
 }
