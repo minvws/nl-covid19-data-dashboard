@@ -692,7 +692,7 @@
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Risiconiveaus",
-    "selecteer_toelichting": "De kaart geeft het risiconiveau per regio weer. Dat kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2) of ‘ernstig’ (niveau 3) zijn. Per regio worden passende maatregelen genomen.\n\n[Regionale maatregelen](https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/nederlandse-maatregelen-tegen-het-coronavirus/lokale-maatregelen-tegen-verspreiding-coronavirus)\n\n[Meer over de risiconiveaus](/verantwoording)"
+    "selecteer_toelichting": "De kaart geeft het risiconiveau per regio weer. Dat kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2) of ‘ernstig’ (niveau 3) zijn. Per regio worden passende maatregelen genomen.\n\n[Regionale maatregelen](https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/nederlandse-maatregelen-tegen-het-coronavirus/lokale-maatregelen-tegen-verspreiding-coronavirus/in-de-regio)\n\n[Meer over de risiconiveaus](/verantwoording)"
   },
   "gemeente_index": {
     "selecteer_titel": "Selecteer een gemeente",
@@ -706,7 +706,7 @@
   },
   "escalatie_niveau": {
     "titel": "Risiconiveaus",
-    "toelichting": "De kaart geeft het risiconiveau per regio weer. Dat kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2) of ‘ernstig’ (niveau 3) zijn. Per regio worden passende maatregelen genomen.\n\n[Regionale maatregelen](https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/nederlandse-maatregelen-tegen-het-coronavirus/lokale-maatregelen-tegen-verspreiding-coronavirus)\n\n[Meer over de risiconiveaus](/verantwoording)",
+    "toelichting": "De kaart geeft het risiconiveau per regio weer. Dat kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2) of ‘ernstig’ (niveau 3) zijn. Per regio worden passende maatregelen genomen.\n\n[Regionale maatregelen](https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/nederlandse-maatregelen-tegen-het-coronavirus/lokale-maatregelen-tegen-verspreiding-coronavirus/in-de-regio)\n\n[Meer over de risiconiveaus](/verantwoording)",
     "types": {
       "1": {
         "titel": "Waakzaam",
