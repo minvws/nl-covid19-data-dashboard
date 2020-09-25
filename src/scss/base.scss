@@ -53,10 +53,18 @@ svg {
   font-variant-numeric: tabular-nums;
 }
 
-.additional-kpi {
-  font-size: 0.90909090909em;
-}
-
 .text-max-width {
   max-width: 20em;
+}
+
+.ggd-summary {
+  h4 {
+    font-size: 1.2em;
+    line-height: 1.5em;
+    margin: 1.5em 0 0;
+
+    & + p {
+      margin-top: 0;
+    }
+  }
 }

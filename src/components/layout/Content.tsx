@@ -3,10 +3,10 @@ import { TitleWithIcon } from '~/components/titleWithIcon';
 import styles from './layout.module.scss';
 
 export function ContentHeader(props: IContentHeaderProps) {
-  const { category, Icon, title, subtitle, metadata } = props;
+  const { category, Icon, title, subtitle, metadata, id } = props;
 
   return (
-    <header>
+    <header id={id}>
       <p className={styles.category}>{category}</p>
       <TitleWithIcon Icon={Icon} title={title} as="h2" />
 
@@ -35,4 +35,5 @@ interface IContentHeaderProps {
       text: string;
     };
   };
+  id?: string;
 }

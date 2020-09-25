@@ -21,7 +21,7 @@ import {
 } from '~/types/data.d';
 
 import { positiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
-import { positiveTestedPeopleRegionTooltip } from '~/components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
+import { positiveTestedPeopleRegionalTooltip } from '~/components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
 import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
@@ -29,7 +29,7 @@ import { MunicipalityLegenda } from '~/components/chloropleth/legenda/Municipali
 import { SafetyRegionLegenda } from '~/components/chloropleth/legenda/SafetyRegionLegenda';
 import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
 import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
-import replaceKpisInText from '~/utils/replaceKpisInText';
+import { replaceKpisInText } from '~/utils/replaceKpisInText';
 
 const text: typeof siteText.positief_geteste_personen =
   siteText.positief_geteste_personen;
@@ -95,6 +95,26 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
             </h3>
           )}
           <p>{text.kpi_toelichting}</p>
+          {percentageDataGGD && (
+            <div className="ggd-summary">
+              <h4
+                dangerouslySetInnerHTML={{
+                  __html: replaceKpisInText(percentageGgdText.summary_title, [
+                    {
+                      name: 'percentage',
+                      value: `${formatNumber(
+                        percentageDataGGD?.percentage_infected_ggd
+                      )}%`,
+                      className: 'text-light-blue',
+                    },
+                  ]),
+                }}
+              ></h4>
+              <p>
+                <a href="#ggd">{percentageGgdText.summary_link_cta}</a>
+              </p>
+            </div>
+          )}
         </article>
       </div>
 
@@ -134,7 +154,7 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           {selectedMap === 'region' && (
             <SafetyRegionChloropleth
               metricName="positive_tested_people"
-              tooltipContent={positiveTestedPeopleRegionTooltip}
+              tooltipContent={positiveTestedPeopleRegionalTooltip}
               onSelect={createSelectRegionHandler(router)}
             />
           )}
@@ -184,6 +204,7 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           <ContentHeader
             category={'\u00A0'}
             title={percentageGgdText.titel}
+            id="ggd"
             Icon={Fragment}
             subtitle={percentageGgdText.toelichting}
             metadata={{
@@ -198,8 +219,8 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
             <article className="metric-article column-item">
               <h3>
                 {percentageGgdText.totaal_getest_week_titel}{' '}
-                <span className="text-dark-blue kpi">
-                  {formatDecimal(percentageDataGGD?.total_tested_ggd)}
+                <span className="text-light-blue kpi">
+                  {formatNumber(percentageDataGGD?.total_tested_ggd)}
                 </span>
               </h3>
 
@@ -210,24 +231,27 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
               <h3>
                 {percentageGgdText.positief_getest_week_titel}{' '}
                 <span className="text-light-blue kpi">
-                  {formatDecimal(percentageDataGGD?.infected_ggd)}
+                  {`${formatNumber(
+                    percentageDataGGD?.percentage_infected_ggd
+                  )}%`}
                 </span>
-                <span
+              </h3>
+              <p>{percentageGgdText.positief_getest_week_uitleg}</p>
+              <p>
+                <strong
                   className="additional-kpi"
                   dangerouslySetInnerHTML={{
                     __html: replaceKpisInText(
                       percentageGgdText.positief_getest_getest_week_uitleg,
                       [
                         {
-                          name: 'percentage',
-                          value: `${formatDecimal(
-                            percentageDataGGD?.percentage_infected_ggd
-                          )}%`,
+                          name: 'numerator',
+                          value: formatNumber(percentageDataGGD?.infected_ggd),
                           className: 'text-light-blue',
                         },
                         {
-                          name: 'totaal',
-                          value: formatDecimal(
+                          name: 'denominator',
+                          value: formatNumber(
                             percentageDataGGD?.total_tested_ggd
                           ),
                           className: 'text-dark-blue',
@@ -235,9 +259,8 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
                       ]
                     ),
                   }}
-                ></span>
-              </h3>
-              <p>{percentageGgdText.positief_getest_week_uitleg}</p>
+                ></strong>
+              </p>
             </article>
           </div>
         </>

@@ -1,4 +1,4 @@
-import replaceVariablesInText from './replaceVariablesInText';
+import { replaceVariablesInText } from './replaceVariablesInText';
 
 interface Kpi {
   name: string;
@@ -22,10 +22,10 @@ interface Kpi {
  * @param kpis - An object with keys representing kpi object containing a value and class name available for replacement.
  */
 
-const replaceKpisInText = (
+export function replaceKpisInText(
   translation?: string | undefined | null,
   kpis?: Kpi[]
-): string => {
+): string {
   const variables: { [key: string]: string | undefined } = {};
   kpis?.forEach((kpi) => {
     variables[kpi.name] = `<span class="${kpi.className || ''} inline-kpi">${
@@ -34,6 +34,4 @@ const replaceKpisInText = (
   });
 
   return replaceVariablesInText(translation, variables);
-};
-
-export default replaceKpisInText;
+}
