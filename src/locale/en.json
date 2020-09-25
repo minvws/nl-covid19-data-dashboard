@@ -10,7 +10,7 @@
   },
   "notificatie": {
     "titel": "Strong increase in new COVID-19 infections, hospital and ICU admissions ",
-    "bericht": "The number of people who newly tested positive has increased by 60% in the past week (16 to 22 September). The provinces of South-Holland, North-Holland, Utrecht and Groningen had most new infections. There is a rising trend of infections among nursing home residents. The number of admissions of Covid-19 patients to the hospital and ICU also strongly increased. \n\nRisk level per region can be ‘watchful’ (level 1), ‘worrisome’ (level 2) or ‘serious’ (level 3). The situation is worrisome in 6 out of 25 safety regions.",
+    "bericht": "The number of people who newly tested positive has increased by 60% in the past week (16 to 22 September). The provinces of South-Holland, North-Holland, Utrecht and Groningen had most new infections. There is a rising trend of infections among nursing home residents. The number of admissions of Covid-19 patients to the hospital and ICU also strongly increased. \n\nRisk level per region can be ‘watchful’ (level 1), ‘worrisome’ (level 2) or ‘serious’ (level 3). The situation is worrisome in 14 out of 25 safety regions.",
     "link": {
       "text": "View the full message from the RIVM",
       "href": "https://www.rivm.nl/en/novel-coronavirus-covid-19/current-information"
