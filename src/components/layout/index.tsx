@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -65,10 +65,14 @@ function Layout(props: WithChildren<LayoutProps & ILastGeneratedData>) {
   const locale = getLocale();
   const showSmallLogo = useMediaQuery('(max-width: 480px)', true);
 
-  const dateTime = formatDate(Number(lastGenerated), 'iso');
-  const dateOfInsertion = lastGenerated
-    ? formatDate(Number(lastGenerated), 'long')
-    : undefined;
+  const { dateTime, dateOfInsertion } = useMemo(() => {
+    const dateTime = formatDate(Number(lastGenerated), 'iso');
+    const dateOfInsertion = lastGenerated
+      ? formatDate(Number(lastGenerated), 'long')
+      : undefined;
+
+    return { dateTime, dateOfInsertion };
+  }, [lastGenerated]);
 
   return (
     <>
