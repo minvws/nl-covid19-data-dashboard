@@ -1,4 +1,4 @@
-import { useState, Fragment } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 
 import { FCWithLayout } from '~/components/layout';
@@ -93,7 +93,7 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
             </h3>
           )}
           <p>{text.kpi_toelichting}</p>
-          {ggdData && (
+          {ggdData && ggdData.percentage_infected_ggd && (
             <div className="ggd-summary">
               <h4
                 dangerouslySetInnerHTML={{
@@ -101,7 +101,7 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
                     {
                       name: 'percentage',
                       value: `${formatNumber(
-                        ggdData?.percentage_infected_ggd
+                        ggdData.percentage_infected_ggd
                       )}%`,
                       className: 'text-light-blue',
                     },
@@ -200,10 +200,8 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
       {ggdData && (
         <>
           <ContentHeader
-            category={'\u00A0'}
             title={ggdText.titel}
             id="ggd"
-            Icon={Fragment}
             subtitle={ggdText.toelichting}
             metadata={{
               datumsText: ggdText.datums,
