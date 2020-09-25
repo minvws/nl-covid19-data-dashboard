@@ -17,21 +17,20 @@ interface Kpi {
  *
  * - If a specific variable is NOT given, it will replace it with an empty string.
  * - If no translation is given, an empty string will be returned.
- *
- * @param translation - Translation string with curly brackets for variables.
- * @param kpis - An object with keys representing kpi object containing a value and class name available for replacement.
  */
 
-export function replaceKpisInText(
-  translation?: string | undefined | null,
-  kpis?: Kpi[]
-): string {
-  const variables: { [key: string]: string | undefined } = {};
-  kpis?.forEach((kpi) => {
-    variables[kpi.name] = `<span class="${kpi.className || ''} inline-kpi">${
-      kpi.value
-    }</span>`;
-  });
+export function replaceKpisInText(translation: string, kpis: Kpi[]): string {
+  const variables: { [key: string]: string } = kpis.reduce(
+    (accumulator, kpi) => {
+      return {
+        ...accumulator,
+        [kpi.name]: `<span class="${kpi.className || ''} inline-kpi">${
+          kpi.value
+        }</span>`,
+      };
+    },
+    {}
+  );
 
   return replaceVariablesInText(translation, variables);
 }
