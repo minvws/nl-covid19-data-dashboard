@@ -2174,7 +2174,7 @@
     "@types/react" "*"
     "@vx/point" "0.0.198"
 
-"@vx/geo@latest":
+"@vx/geo@^0.0.199":
   version "0.0.199"
   resolved "https://registry.yarnpkg.com/@vx/geo/-/geo-0.0.199.tgz#2579bc040a75f5a32b2f413730ca573d4bb5dc4b"
   integrity sha512-/jLj0gs6l1uXttn0+t6aIeWa9u3qfidAHmjblXgI9Gkfe5UO8TytQXjoXuvINly4Rxx606mn1vyuFfCAWovRdw==
@@ -2203,7 +2203,7 @@
   resolved "https://registry.yarnpkg.com/@vx/point/-/point-0.0.198.tgz#9c55f085e26fa6a921a9313c4c3b40cf947f8104"
   integrity sha512-oFlw8uBLf4JDX7OJc+7eQXcnlLszdQgEs531u0t6HNpARQY/jTeeMLVUlp8sNF0XBOC+iVHU8Qe8TJdz/ONBAA==
 
-"@vx/scale@latest":
+"@vx/scale@^0.0.199":
   version "0.0.199"
   resolved "https://registry.yarnpkg.com/@vx/scale/-/scale-0.0.199.tgz#bd3b0b7add5e99c0b8240ca72edfad3b96bbd700"
   integrity sha512-AbrPbQUEYFR0oxMHry7LqvLbyXxXek2aDAnwzzp7C+Yh1wfUk63hSuaRp13CO7+3r3gIy+99yrsaYPsgt2I6Nw==
@@ -4214,7 +4214,7 @@ d3-interpolate@1, d3-interpolate@^1.4.0:
   dependencies:
     d3-color "1 - 2"
 
-d3-scale@2:
+d3-scale@2.2.2:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/d3-scale/-/d3-scale-2.2.2.tgz#4e880e0b2745acaaddd3ede26a9e908a9e17b81f"
   integrity sha512-LbeEvGgIb8UMcAa0EATLNX0lelKWGYDQiPdHj+gLblGVhGLyNbaCn3EvrJf0A3Y/uOOU5aD6MTh5ZFCdEwGiCw==
@@ -7126,11 +7126,6 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.1.6.tgz#1c00c743b433cd0a4e80758f7b64a57440d9ff00"
   integrity sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=
 
-linkifyjs@^2.1.9:
-  version "2.1.9"
-  resolved "https://registry.yarnpkg.com/linkifyjs/-/linkifyjs-2.1.9.tgz#af06e45a2866ff06c4766582590d098a4d584702"
-  integrity sha512-74ivurkK6WHvHFozVaGtQWV38FzBwSTGNmJolEgFp7QgR2bl6ArUWlvT4GcHKbPe1z3nWYi+VUdDZk16zDOVug==
-
 lint-staged@^10.2.11:
   version "10.4.0"
   resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-10.4.0.tgz#d18628f737328e0bbbf87d183f4020930e9a984e"
@@ -9290,11 +9285,6 @@ react-refresh@0.8.3, react-refresh@^0.8.3:
   version "0.8.3"
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.8.3.tgz#721d4657672d400c5e3c75d063c4a85fb2d5d68f"
   integrity sha512-X8jZHc7nCMjaCqoU+V2I0cOhNW+QMBwSUkeXnTi8IPe6zaRWfn60ZzvFDZqWPfmSJfjub7dDW1SP0jaHWLu/hg==
-
-"react-ssr-prepass@npm:preact-ssr-prepass@^1.0.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/preact-ssr-prepass/-/preact-ssr-prepass-1.1.1.tgz#1031e50c3b80cbdd8e155e520d0e97b9bc425faa"
-  integrity sha512-AszER25gPq8GMcUP+PruRCRg6FEgeoVfR8tlquz7QCPbRLSqkmHkTNwRiwx0zeRl0wd0CtFN4D9r6zCPeVo8Hg==
 
 react@^16.13.1:
   version "16.13.1"
