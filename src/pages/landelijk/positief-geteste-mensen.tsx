@@ -31,10 +31,8 @@ import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHan
 import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 
-const text: typeof siteText.positief_geteste_personen =
-  siteText.positief_geteste_personen;
-const percentageGgdText: typeof siteText.positief_geteste_personen_ggd =
-  siteText.positief_geteste_personen_ggd;
+const text = siteText.positief_geteste_personen;
+const percentageGgdText = siteText.positief_geteste_personen_ggd;
 
 const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
   const { data } = props;
