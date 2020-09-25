@@ -170,14 +170,14 @@ export function Chloropleth<T>(props: TProps<T>) {
           clipPath={`url(#${clipPathId.current})`}
         >
           <Mercator data={featureCollection.features} fitSize={sizeToFit}>
-            {renderFeature(featureCallback)}
+            {renderFeature(featureCallback, 'choropleth-features')}
           </Mercator>
           <Mercator data={overlays.features} fitSize={sizeToFit}>
-            {renderFeature(overlayCallback)}
+            {renderFeature(overlayCallback, 'choropleth-overlays')}
           </Mercator>
           {hovers && (
             <Mercator data={hovers.features} fitSize={sizeToFit}>
-              {renderFeature(hoverCallback)}
+              {renderFeature(hoverCallback, 'choropleth-hovers')}
             </Mercator>
           )}
         </g>
@@ -190,9 +190,9 @@ export function Chloropleth<T>(props: TProps<T>) {
   );
 }
 
-const renderFeature = (callback: TRenderCallback) => {
+const renderFeature = (callback: TRenderCallback, dataCy: string) => {
   return (mercator: any) => (
-    <g>
+    <g data-cy={dataCy}>
       {mercator.features.map(
         (
           { feature, path }: { feature: Feature; path: string },
