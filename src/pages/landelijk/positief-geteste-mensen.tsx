@@ -32,7 +32,7 @@ import { createSelectRegionHandler } from '~/components/chloropleth/selectHandle
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 
 const text = siteText.positief_geteste_personen;
-const percentageGgdText = siteText.positief_geteste_personen_ggd;
+const ggdText = siteText.positief_geteste_personen_ggd;
 
 const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
   const { data } = props;
@@ -46,7 +46,7 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
   const age: IntakeShareAgeGroups | undefined = data?.intake_share_age_groups;
   const total: InfectedPeopleTotal | undefined = data?.infected_people_total;
 
-  const percentageDataGGD = data?.infected_people_percentage?.last_value;
+  const ggdData = data?.infected_people_percentage?.last_value;
 
   const barChartTotal: number = age?.values
     ? age.values.reduce((mem: number, part): number => {
@@ -93,15 +93,15 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
             </h3>
           )}
           <p>{text.kpi_toelichting}</p>
-          {percentageDataGGD && (
+          {ggdData && (
             <div className="ggd-summary">
               <h4
                 dangerouslySetInnerHTML={{
-                  __html: replaceKpisInText(percentageGgdText.summary_title, [
+                  __html: replaceKpisInText(ggdText.summary_title, [
                     {
                       name: 'percentage',
                       value: `${formatNumber(
-                        percentageDataGGD?.percentage_infected_ggd
+                        ggdData?.percentage_infected_ggd
                       )}%`,
                       className: 'text-light-blue',
                     },
@@ -109,7 +109,7 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
                 }}
               ></h4>
               <p>
-                <a href="#ggd">{percentageGgdText.summary_link_cta}</a>
+                <a href="#ggd">{ggdText.summary_link_cta}</a>
               </p>
             </div>
           )}
@@ -197,61 +197,57 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         )}
       </article>
 
-      {percentageDataGGD && (
+      {ggdData && (
         <>
           <ContentHeader
             category={'\u00A0'}
-            title={percentageGgdText.titel}
+            title={ggdText.titel}
             id="ggd"
             Icon={Fragment}
-            subtitle={percentageGgdText.toelichting}
+            subtitle={ggdText.toelichting}
             metadata={{
-              datumsText: percentageGgdText.datums,
-              dateUnix: percentageDataGGD.date_of_report_unix,
-              dateInsertedUnix: percentageDataGGD.date_of_insertion_unix,
-              dataSource: percentageGgdText.bron,
+              datumsText: ggdText.datums,
+              dateUnix: ggdData.date_of_report_unix,
+              dateInsertedUnix: ggdData.date_of_insertion_unix,
+              dataSource: ggdText.bron,
             }}
           />
 
           <div className="layout-two-column">
             <article className="metric-article column-item">
               <h3>
-                {percentageGgdText.totaal_getest_week_titel}{' '}
+                {ggdText.totaal_getest_week_titel}{' '}
                 <span className="text-light-blue kpi">
-                  {formatNumber(percentageDataGGD?.total_tested_ggd)}
+                  {formatNumber(ggdData?.total_tested_ggd)}
                 </span>
               </h3>
 
-              <p>{percentageGgdText.totaal_getest_week_uitleg}</p>
+              <p>{ggdText.totaal_getest_week_uitleg}</p>
             </article>
 
             <article className="metric-article column-item">
               <h3>
-                {percentageGgdText.positief_getest_week_titel}{' '}
+                {ggdText.positief_getest_week_titel}{' '}
                 <span className="text-light-blue kpi">
-                  {`${formatNumber(
-                    percentageDataGGD?.percentage_infected_ggd
-                  )}%`}
+                  {`${formatNumber(ggdData?.percentage_infected_ggd)}%`}
                 </span>
               </h3>
-              <p>{percentageGgdText.positief_getest_week_uitleg}</p>
+              <p>{ggdText.positief_getest_week_uitleg}</p>
               <p>
                 <strong
                   className="additional-kpi"
                   dangerouslySetInnerHTML={{
                     __html: replaceKpisInText(
-                      percentageGgdText.positief_getest_getest_week_uitleg,
+                      ggdText.positief_getest_getest_week_uitleg,
                       [
                         {
                           name: 'numerator',
-                          value: formatNumber(percentageDataGGD?.infected_ggd),
+                          value: formatNumber(ggdData?.infected_ggd),
                           className: 'text-light-blue',
                         },
                         {
                           name: 'denominator',
-                          value: formatNumber(
-                            percentageDataGGD?.total_tested_ggd
-                          ),
+                          value: formatNumber(ggdData?.total_tested_ggd),
                           className: 'text-dark-blue',
                         },
                       ]
