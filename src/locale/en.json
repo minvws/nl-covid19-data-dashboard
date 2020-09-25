@@ -10,7 +10,7 @@
   },
   "notificatie": {
     "titel": "Strong increase in new COVID-19 infections, hospital and ICU admissions ",
-    "bericht": "The number of people who newly tested positive has increased by 60% in the past week (16 to 22 September). The provinces of South-Holland, North-Holland, Utrecht and Groningen had most new infections. There is a rising trend of infections among nursing home residents. The number of admissions of Covid-19 patients to the hospital and ICU also strongly increased. \n\nRisk level per region can be ‘watchful’ (level 1), ‘worrisome’ (level 2) or ‘serious’ (level 3). The situation is worrisome in 6 out of 25 safety regions.",
+    "bericht": "The number of people who newly tested positive has increased by 60% in the past week (16 to 22 September). The provinces of South-Holland, North-Holland, Utrecht and Groningen had most new infections. There is a rising trend of infections among nursing home residents. The number of admissions of Covid-19 patients to the hospital and ICU also strongly increased. \n\nRisk level per region can be ‘watchful’ (level 1), ‘worrisome’ (level 2) or ‘serious’ (level 3). The situation is worrisome in 14 out of 25 safety regions.",
     "link": {
       "text": "View the full message from the RIVM",
       "href": "https://www.rivm.nl/en/novel-coronavirus-covid-19/current-information"
@@ -118,7 +118,13 @@
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the progression over time in the number of new cases by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "cluster_datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
     "cluster_bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
@@ -138,22 +144,6 @@
       "geen_meldingen": "No confirmed cases"
     },
     "titel_sidebar": "Confirmed cases per 100,000 inhabitants per day"
-  },
-  "positief_geteste_personen_ggd": {
-    "titel": "Percentage positief geteste personen via GGD teststraten",
-    "summary_title": "{{percentage}} van de GGD testen waren positief.",
-    "summary_link_cta": "Lees meer",
-    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "bron": {
-      "href": "https://www.rivm.nl/documenten/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
-      "text": "RIVM"
-    },
-    "toelichting": "Dit getal zegt iets over het totaal aantal personen dat via de GGD getest is, en hoeveel daarvan een positieve uitslag hadden. Let op dat de meeste testen via de GGD lopen, maar dit niet voor alle testen geldt. Daarom wijkt het absolute aantal positief geteste personen af van het aantal positief geteste personen door de GGD.",
-    "totaal_getest_week_titel": "Aantal geteste personen via GGD",
-    "totaal_getest_week_uitleg": "Aantal personen die in één week via de GGD getest zijn.",
-    "positief_getest_week_titel": "Positief getest personen",
-    "positief_getest_week_uitleg": "Aantal en percentage positief geteste personen die in één week via de GGD getest zijn.",
-    "positief_getest_getest_week_uitleg": "Dit zijn {{numerator}} van {{denominator}} geteste personen"
   },
   "besmettelijke_personen": {
     "title": "Number of infectious people",
@@ -585,7 +575,13 @@
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the progression over time in the number of positive tests by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -661,7 +657,13 @@
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the change in the number of confirmed cases by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -730,5 +732,21 @@
       "overig": "Early warning",
       "verpleeghuis": "Nursing homes"
     }
+  },
+  "positief_geteste_personen_ggd": {
+    "titel": "",
+    "summary_title": "",
+    "summary_link_cta": "",
+    "datums": "",
+    "bron": {
+      "href": "",
+      "text": ""
+    },
+    "toelichting": "",
+    "totaal_getest_week_titel": "",
+    "totaal_getest_week_uitleg": "",
+    "positief_getest_week_titel": "",
+    "positief_getest_week_uitleg": "",
+    "positief_getest_getest_week_uitleg": ""
   }
 }
