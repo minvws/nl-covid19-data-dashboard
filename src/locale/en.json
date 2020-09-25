@@ -10,7 +10,7 @@
   },
   "notificatie": {
     "titel": "Strong increase in new COVID-19 infections, hospital and ICU admissions ",
-    "bericht": "The number of people who newly tested positive has increased by 60% in the past week (16 to 22 September). The provinces of South-Holland, North-Holland, Utrecht and Groningen had most new infections. There is a rising trend of infections among nursing home residents. The number of admissions of Covid-19 patients to the hospital and ICU also strongly increased. \n\nRisk level per region can be ‘watchful’ (level 1), ‘worrisome’ (level 2) or ‘serious’ (level 3). The situation is worrisome in 6 out of 25 safety regions.",
+    "bericht": "The number of people who newly tested positive has increased by 60% in the past week (16 to 22 September). The provinces of South-Holland, North-Holland, Utrecht and Groningen had most new infections. There is a rising trend of infections among nursing home residents. The number of admissions of Covid-19 patients to the hospital and ICU also strongly increased. \n\nRisk level per region can be ‘watchful’ (level 1), ‘worrisome’ (level 2) or ‘serious’ (level 3). The situation is worrisome in 14 out of 25 safety regions.",
     "link": {
       "text": "View the full message from the RIVM",
       "href": "https://www.rivm.nl/en/novel-coronavirus-covid-19/current-information"
@@ -118,7 +118,13 @@
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the progression over time in the number of new cases by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "cluster_datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
     "cluster_bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
@@ -138,22 +144,6 @@
       "geen_meldingen": "No confirmed cases"
     },
     "titel_sidebar": "Confirmed cases per 100,000 inhabitants per day"
-  },
-  "positief_geteste_personen_ggd": {
-    "titel": "Percentage positief geteste personen via GGD teststraten",
-    "summary_title": "{{percentage}} van de GGD testen waren positief.",
-    "summary_link_cta": "Lees meer",
-    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "bron": {
-      "href": "https://www.rivm.nl/documenten/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
-      "text": "RIVM"
-    },
-    "toelichting": "Dit getal zegt iets over het totaal aantal personen dat via de GGD getest is, en hoeveel daarvan een positieve uitslag hadden. Let op dat de meeste testen via de GGD lopen, maar dit niet voor alle testen geldt. Daarom wijkt het absolute aantal positief geteste personen af van het aantal positief geteste personen door de GGD.",
-    "totaal_getest_week_titel": "Aantal geteste personen via GGD",
-    "totaal_getest_week_uitleg": "Aantal personen die in één week via de GGD getest zijn.",
-    "positief_getest_week_titel": "Positief getest personen",
-    "positief_getest_week_uitleg": "Aantal en percentage positief geteste personen die in één week via de GGD getest zijn.",
-    "positief_getest_getest_week_uitleg": "Dit zijn {{numerator}} van {{denominator}} geteste personen"
   },
   "besmettelijke_personen": {
     "title": "Number of infectious people",
@@ -435,7 +425,7 @@
       },
       {
         "cijfer": "Sewage water examination",
-        "verantwoording": "In rioolwater kun je ziekteverwekkers zoals het nieuwe coronavirus meten omdat die met ontlasting via de wc in het rioolwater komen. Dit onderzoek laat zien hoeveel virusdeeltjes in het rioolwater zitten afkomstig uit ontlasting van een deel van de besmette personen. Op elke locatie testen onderzoekers van het RIVM eens per week rioolwater dat over 24 uur verzameld is. Per week kan het aantal gemeten locaties variëren, omdat niet elke meting succesvol wordt afgerond. In het open data bestand staat per datum bij welke locaties gemeten is. Let op dat de cijfers van vóór 20 juli zijn gebaseerd op circa 28 locaties. De cijfers tussen 20 juli en 31 augustus zijn gebaseerd op circa 80 locaties. Vanaf 31 augustus wordt er gemeten op circa 300 locaties. In het huidige onderzoek kunnen trends in aantallen virusdeeltjes zoals een stijging of daling worden gezien. Meer onderzoek is nodig om conclusies aan deze trends te kunnen verbinden.De aantallen kunnen niet vergeleken worden tussen locaties. Deze duiding volgt nog. \n\nDe gegevens worden wekelijks (op dinsdag) geleverd als open data door het [RIVM](https://data.rivm.nl/covid-19/COVID-19_rioolwaterdata.csv). Met het beschikbaar komen van meer gegevens kan het aantal virusdeeltjes nauwkeuriger bepaald worden. Het RIVM hanteert sinds 18 augustus een aangepaste rekenmethode om het aantal virusdeeltjes per milliliter te bepalen. In het open data bestand staat aangegeven of een meting representatief is of niet, in het dashboard maken we alleen gebruik van representatieve data.\n\nIn de grafiek staat op de Y-as het aantal virusdeeltjes in een milliliter rioolwater. Op de X-as staat de datum waarop het het rioolwater is verzameld. Het landelijk en regionale gemiddelde betreft een weekgemiddelde. De som van de geleverde waarden in de week, wordt gedeeld door het aantal locaties waarover meetwaarden voor die week geleverd zijn. De gerapporteerde weken lopen van maandag t/m zondag. De gemeten waarden per afzonderlijke locatie staan in de grafiek op de datum waarop de monstername van het rioolwater is gestart.\n\nDe getoonde virusdeeltjes per milliliter kunnen worden beïnvloed door een aantal extra factoren. Regenval bijvoorbeeld kan het aantal gemeten deeltjes per milliliter verlagen, doordat het rioolwater door hemelwater wordt verdund. Ook kunnen aangesloten industriegebieden ditzelfde effect hebben, omdat daar in het rioolwater meestal geen of nauwelijks menselijke ontlasting te vinden is. Tevens kunnen de aantal virusdeeltjes per milliliter zo laag zijn, dat het niet gemeten wordt. Dit leidt dan tot een meting met een waarde van nul deeltjes per milliliter.\n\nOm te bepalen welke locatie tot welke veiligheidsregio behoort, wordt gekeken naar het verzorgingsgebied van de locatie. Dit is het gebied waarvoor de zuiveringsinstallatie afvalwater zuivert. Het RIVM levert per locatie aan voor hoeveel procent deze in een veiligheidsregio valt. Deze verdeling is nog niet volledig accuraat en wordt de komende tijd verder uitgewerkt. Sommige locaties hebben een verzorgingsgebied dat meerdere veiligheidsregio’s bevat. Indien dat zo is, wordt de locatie op het dashboard volledig toegewezen aan de veiligheidsregio dat het grootste deel van het verzorgingsgebied omvat. Voor het koppelen van locaties met gemeenten wordt momenteel gekeken naar de postcode van de locatie. Met gebruik van de CBS indeling gemeente voor postcode wordt vervolgens deze postcode vertaald naar een gemeente. In een paar gevallen kwam hier geen match uit. Voor die uitzonderingen is handmatig op basis van coördinaten gekeken op de kaart tot welke gemeente de locaties behoren. Let op: deze koppelingen zijn mogelijk niet volledig accuraat, want het verzorgingsgebied van een zuiveringsinstallatie hoeft niet gelijk te lopen met gemeentegrenzen. Er wordt gewerkt aan een meer nauwkeurige koppeling tussen locatie en gemeente."
+        "verantwoording": "It is possible to test samples of sewage water for pathogens like the novel coronavirus, because they enter the sewage system via the faeces.  Once a week at each site, researchers from the National Institute for Health and Environment (RIVM) examine samples of sewage water collected over a period of 24 hours. These tests show how many virus particles are in the sewage water. Each week the number of sites may vary, because not every test can be completed successfully. Please note that the values from before 20 July are based on about 28 sites. The figures between 20 July and 31 August are based on about 80 sites. From 31 August sewage water from about 300 sites is examined. In the current research we can see trends in the amount of virus particles, like an increase or decrease. We cannot yet compare the number of particles found at different sites. More research is necessary in order to be able to draw conclusions based on the findings.\n\nOnce a week (on Tuesdays), this information is delivered [as an open data file by the RIVM](https://data.rivm.nl/covid-19/COVID-19_rioolwaterdata.csv). With the availability of more data, the number of virus particles can be determined more accurately. Therefore, the RIVM has adapted their method to calculate the virus particles per milliliter since 18 August. In the open data file you can see if a measurement in representative of not. For the dashboard we only use representative data.\n\nThe graph’s y-axis shows the concentration of virus particles in one milliliter of sewage water. The x-axis shows the date on which the samples were collected. The national and regional average are weekly averages. The sum of the reported values in the week is divided by the number of sites that completed the tests that week. The reported weeks are from Monday up and until Sunday. These weekly averages are shown in the graph on the Monday of the week.\n\nThe virus particles per milliliter shown on the dashboard can be influenced by a number of other factors. For instance, due to rainfall, the number of virus particles per milliliter can be decreased, because the sewage water is diluted. Furthermore, industrial areas in the catchment areas can bring about this effect, because in the sewage water of industrial areas little to no amount of human faeces can be found. If the concentration of virus particles is too low, it will no longer be found by the test. This will then result in a measurement of zero particles per milliliter.\n\nTo determine which location belongs to which safety regions, we look at the catchment area. This is the area for which the sewage treatment plant purifies the water. The RIVM shares per site the percentage that the catchment area is part of the safety region. This is not entirely accurate and will be improved on in the future. Some sites have a catchment area that contains multiple safety regions. If this is the case, the site is attributed completed to the safety region covering the largest part of the catchment area.\n\nTo match the sites to the municipalities, we currently use the postal code of the site. Using the Statistics Netherlands (CBS) allocation of municipalities, these postal codes are translated to a municipality. In a few cases, no match was found. For these exceptions the municipalities are established by hand, using coordinates of the sites and a map. Please note: the matching of these sites with municipalities can be partly inaccurate, because the catchment area of purification site is not necessarily similar to the borders of the municipalities. This matching between sites and municipalities is currently being improved on."
       },
       {
         "cijfer": "“Value of ” and “Obtained”",
@@ -585,7 +575,13 @@
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the progression over time in the number of positive tests by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -661,7 +657,13 @@
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the change in the number of confirmed cases by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -690,7 +692,7 @@
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Level of risk",
-    "selecteer_toelichting": "The map indicates the level of risk per region. This can be ‘watchful’ (level 1), ‘worrisome’ (level 2) or ‘serious’ (level 3). Appropriate measures are taken per region.\n\n[Regional measures](https://www.rijksoverheid.nl/actueel/nieuws/2020/09/18/nieuwe-regionale-maatregelen-om-het-virus-in-te-dammen)\n\n[More about risk levels](/verantwoording)"
+    "selecteer_toelichting": "The map indicates the level of risk per region. This can be ‘watchful’ (level 1), ‘worrisome’ (level 2) or ‘serious’ (level 3). Appropriate measures are taken per region.\n\n[Regional measures](https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/nederlandse-maatregelen-tegen-het-coronavirus/lokale-maatregelen-tegen-verspreiding-coronavirus/in-de-regio)\n\n[More about risk levels](/verantwoording)"
   },
   "gemeente_index": {
     "selecteer_titel": "Select your municipality",
@@ -704,7 +706,7 @@
   },
   "escalatie_niveau": {
     "titel": "Level of risk",
-    "toelichting": "The map indicates the level of risk per region. This can be ‘watchful’ (level 1), ‘worrisome’ (level 2) or ‘serious’ (level 3). Appropriate measures are taken per region.\n\n[Regional measures](https://www.rijksoverheid.nl/actueel/nieuws/2020/09/18/nieuwe-regionale-maatregelen-om-het-virus-in-te-dammen)\n\n[More about risk levels](/verantwoording)",
+    "toelichting": "The map indicates the level of risk per region. This can be ‘watchful’ (level 1), ‘worrisome’ (level 2) or ‘serious’ (level 3). Appropriate measures are taken per region.\n\n[Regional measures](https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/nederlandse-maatregelen-tegen-het-coronavirus/lokale-maatregelen-tegen-verspreiding-coronavirus/in-de-regio)\n\n[More about risk levels](/verantwoording)",
     "types": {
       "1": {
         "titel": "Watchful",
@@ -730,5 +732,21 @@
       "overig": "Early warning",
       "verpleeghuis": "Nursing homes"
     }
+  },
+  "positief_geteste_personen_ggd": {
+    "titel": "",
+    "summary_title": "",
+    "summary_link_cta": "",
+    "datums": "",
+    "bron": {
+      "href": "",
+      "text": ""
+    },
+    "toelichting": "",
+    "totaal_getest_week_titel": "",
+    "totaal_getest_week_uitleg": "",
+    "positief_getest_week_titel": "",
+    "positief_getest_week_uitleg": "",
+    "positief_getest_getest_week_uitleg": ""
   }
 }
