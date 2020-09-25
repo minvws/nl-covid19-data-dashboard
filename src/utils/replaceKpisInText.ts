@@ -7,7 +7,7 @@ interface Kpi {
 }
 
 /**
- * Small utility that accepts a translation string with placeholders
+ * Small utility that accepts a text string with placeholders
  * for variabels. For example:
  * "An example placeholder string with {{type}} brackets"
  * Where everything between curly brackets is accepted as a placeholder
@@ -16,10 +16,9 @@ interface Kpi {
  * { type: 'curly' }
  *
  * - If a specific variable is NOT given, it will replace it with an empty string.
- * - If no translation is given, an empty string will be returned.
  */
 
-export function replaceKpisInText(translation: string, kpis: Kpi[]): string {
+export function replaceKpisInText(text: string, kpis: Kpi[]): string {
   const variables: { [key: string]: string } = kpis.reduce(
     (accumulator, kpi) => {
       return {
@@ -32,5 +31,5 @@ export function replaceKpisInText(translation: string, kpis: Kpi[]): string {
     {}
   );
 
-  return replaceVariablesInText(translation, variables);
+  return replaceVariablesInText(text, variables);
 }
