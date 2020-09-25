@@ -245,6 +245,14 @@ $language-switcher-offset: 55px;
   margin-left: 4rem;
 }
 
+.withoutCategory {
+  margin-top: 2rem;
+}
+
+.withoutIcon h2 {
+  margin-left: 4rem;
+}
+
 @media (min-width: 1200px) {
   .text {
     display: flex;

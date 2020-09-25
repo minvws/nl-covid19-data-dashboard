@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
@@ -19,19 +20,19 @@ import {
   IntakeShareAgeGroups,
 } from '~/types/data.d';
 
+import { positiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
+import { positiveTestedPeopleRegionalTooltip } from '~/components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
 import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
-import { positiveTestedPeopleTooltip } from '~/components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
-import { positiveTestedPeopleTooltip as regionPositiveTestedPeopleTooltip } from '~/components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
 import { MunicipalityLegenda } from '~/components/chloropleth/legenda/MunicipalityLegenda';
 import { SafetyRegionLegenda } from '~/components/chloropleth/legenda/SafetyRegionLegenda';
 import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
 import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
-import { useRouter } from 'next/router';
+import { replaceKpisInText } from '~/utils/replaceKpisInText';
 
-const text: typeof siteText.positief_geteste_personen =
-  siteText.positief_geteste_personen;
+const text = siteText.positief_geteste_personen;
+const ggdText = siteText.positief_geteste_personen_ggd;
 
 const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
   const { data } = props;
@@ -44,6 +45,8 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
     data?.infected_people_delta_normalized;
   const age: IntakeShareAgeGroups | undefined = data?.intake_share_age_groups;
   const total: InfectedPeopleTotal | undefined = data?.infected_people_total;
+
+  const ggdData = data?.infected_people_percentage?.last_value;
 
   const barChartTotal: number = age?.values
     ? age.values.reduce((mem: number, part): number => {
@@ -90,6 +93,26 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
             </h3>
           )}
           <p>{text.kpi_toelichting}</p>
+          {ggdData && ggdData.percentage_infected_ggd && (
+            <div className="ggd-summary">
+              <h4
+                dangerouslySetInnerHTML={{
+                  __html: replaceKpisInText(ggdText.summary_title, [
+                    {
+                      name: 'percentage',
+                      value: `${formatNumber(
+                        ggdData.percentage_infected_ggd
+                      )}%`,
+                      className: 'text-light-blue',
+                    },
+                  ]),
+                }}
+              ></h4>
+              <p>
+                <a href="#ggd">{ggdText.summary_link_cta}</a>
+              </p>
+            </div>
+          )}
         </article>
       </div>
 
@@ -108,14 +131,14 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           {selectedMap === 'municipal' && (
             <MunicipalityChloropleth
               metricName="positive_tested_people"
-              tooltipContent={positiveTestedPeopleTooltip}
+              tooltipContent={positiveTestedPeopleMunicipalTooltip}
               onSelect={createSelectMunicipalHandler(router)}
             />
           )}
           {selectedMap === 'region' && (
             <SafetyRegionChloropleth
               metricName="positive_tested_people"
-              tooltipContent={regionPositiveTestedPeopleTooltip}
+              tooltipContent={positiveTestedPeopleRegionalTooltip}
               onSelect={createSelectRegionHandler(router)}
             />
           )}
@@ -175,6 +198,67 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           </>
         )}
       </article>
+
+      {ggdData && (
+        <>
+          <ContentHeader
+            title={ggdText.titel}
+            id="ggd"
+            subtitle={ggdText.toelichting}
+            metadata={{
+              datumsText: ggdText.datums,
+              dateUnix: ggdData.date_of_report_unix,
+              dateInsertedUnix: ggdData.date_of_insertion_unix,
+              dataSource: ggdText.bron,
+            }}
+          />
+
+          <div className="layout-two-column">
+            <article className="metric-article column-item">
+              <h3>
+                {ggdText.totaal_getest_week_titel}{' '}
+                <span className="text-light-blue kpi">
+                  {formatNumber(ggdData?.total_tested_ggd)}
+                </span>
+              </h3>
+
+              <p>{ggdText.totaal_getest_week_uitleg}</p>
+            </article>
+
+            <article className="metric-article column-item">
+              <h3>
+                {ggdText.positief_getest_week_titel}{' '}
+                <span className="text-light-blue kpi">
+                  {`${formatNumber(ggdData?.percentage_infected_ggd)}%`}
+                </span>
+              </h3>
+              <p>{ggdText.positief_getest_week_uitleg}</p>
+              <p>
+                <strong
+                  className="additional-kpi"
+                  dangerouslySetInnerHTML={{
+                    __html: replaceKpisInText(
+                      ggdText.positief_getest_getest_week_uitleg,
+                      [
+                        {
+                          name: 'numerator',
+                          value: formatNumber(ggdData?.infected_ggd),
+                          className: 'text-light-blue',
+                        },
+                        {
+                          name: 'denominator',
+                          value: formatNumber(ggdData?.total_tested_ggd),
+                          className: 'text-dark-blue',
+                        },
+                      ]
+                    ),
+                  }}
+                ></strong>
+              </p>
+            </article>
+          </div>
+        </>
+      )}
     </>
   );
 };
