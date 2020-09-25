@@ -94,7 +94,7 @@
     "linechart_titel": "Ziekenhuisopnames over tijd",
     "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "chloropleth_legenda": {
-      "titel": "Ziekenhuis opnames",
+      "titel": "Ziekenhuisopnames",
       "geen_meldingen": "Geen meldingen"
     }
   },
