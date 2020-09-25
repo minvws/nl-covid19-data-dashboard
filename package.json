@@ -30,7 +30,7 @@
     "remark-external-links": "^7.0.0",
     "remark-parse": "^8.0.3",
     "remark-rehype": "^7.0.0",
-    "swr": "^0.3.1",
+    "swr": "^0.3.4",
     "topojson-client": "^3.1.0",
     "ts-is-present": "^1.1.5",
     "unfetch": "^4.1.0",
