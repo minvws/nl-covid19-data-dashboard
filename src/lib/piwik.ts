@@ -1,3 +1,5 @@
+import { isBrowser } from '~/utils/isBrowser';
+
 /* eslint-disable no-console */
 declare global {
   interface Window {
@@ -5,14 +7,12 @@ declare global {
   }
 }
 // client-side-only code
-if (process.browser) {
-  if (window) {
-    window._paq = window._paq || {};
-  }
+if (isBrowser) {
+  window._paq = window._paq || {};
 }
 
 export const pageview = (): void => {
-  if (process.browser) {
+  if (isBrowser) {
     if (window?._paq?.push) {
       window._paq.push(['trackPageView']);
     } else {
@@ -31,7 +31,7 @@ type EventTypes = {
 
 export function event(eventOptions: EventTypes): void {
   const { category, action, name, value, dimensions } = eventOptions;
-  if (process.browser) {
+  if (isBrowser) {
     if (window?._paq?.push) {
       window._paq.push([
         'trackEvent',

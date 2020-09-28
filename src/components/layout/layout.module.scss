@@ -1,4 +1,4 @@
-@import 'scss/variables.scss';
+@import '~/scss/variables.scss';
 
 $language-switcher-offset: 55px;
 
@@ -242,6 +242,14 @@ $language-switcher-offset: 55px;
   color: #6b6b6b;
   margin: 0;
   margin-bottom: 0.3rem;
+  margin-left: 4rem;
+}
+
+.withoutCategory {
+  margin-top: 2rem;
+}
+
+.withoutIcon h2 {
   margin-left: 4rem;
 }
 

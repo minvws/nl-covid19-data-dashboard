@@ -1,58 +1,35 @@
-import BarScale from 'components/barScale';
-import { FCWithLayout } from 'components/layout';
-import { getMunicipalityLayout } from 'components/layout/MunicipalityLayout';
+import { FCWithLayout } from '~/components/layout';
+import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
 
-import siteText from 'locale';
+import siteText from '~/locale/index';
 
-import { LineChart } from 'components/charts/index';
-import { ContentHeader } from 'components/layout/Content';
+import { LineChart } from '~/components/charts/index';
+import { ContentHeader } from '~/components/layout/Content';
 
-import Getest from 'assets/test.svg';
-import formatDecimal from 'utils/formatNumber';
-import { PositiveTestedPeople } from 'types/data.d';
+import { PositivelyTestedPeopleBarScale } from '~/components/gemeente/positively-tested-people-barscale';
+
+import Getest from '~/assets/test.svg';
+import { formatNumber } from '~/utils/formatNumber';
+import { PositiveTestedPeople } from '~/types/data.d';
 import {
   getMunicipalityData,
   getMunicipalityPaths,
   IMunicipalityData,
-} from 'static-props/municipality-data';
-import { getLocalTitleForMuncipality } from 'utils/getLocalTitleForCode';
+} from '~/static-props/municipality-data';
+import { getLocalTitleForMunicipality } from '~/utils/getLocalTitleForCode';
 
-import MunicipalityChloropleth from 'components/chloropleth/MunicipalityChloropleth';
-import positiveTestedPeopleTooltip from 'components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
-import MunicipalityLegenda from 'components/chloropleth/legenda/MunicipalityLegenda';
+import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
+import { positiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
+import { MunicipalityLegenda } from '~/components/chloropleth/legenda/MunicipalityLegenda';
+import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
+import { useRouter } from 'next/router';
 
 const text: typeof siteText.gemeente_positief_geteste_personen =
   siteText.gemeente_positief_geteste_personen;
 
-export function PostivelyTestedPeopleBarScale(props: {
-  data: PositiveTestedPeople | undefined;
-  showAxis: boolean;
-}) {
-  const { data, showAxis } = props;
-
-  if (!data) return null;
-
-  return (
-    <BarScale
-      min={0}
-      max={10}
-      screenReaderText={text.screen_reader_graph_content}
-      value={data.last_value.infected_daily_increase}
-      id="positief"
-      rangeKey="infected_daily_increase"
-      gradient={[
-        {
-          color: '#3391CC',
-          value: 0,
-        },
-      ]}
-      showAxis={showAxis}
-    />
-  );
-}
-
-const PostivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
+const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
   const { data } = props;
+  const router = useRouter();
 
   const positivelyTestedPeople: PositiveTestedPeople | undefined =
     data?.positive_tested_people;
@@ -60,8 +37,8 @@ const PostivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
   return (
     <>
       <ContentHeader
-        category="Medische indicatoren"
-        title={getLocalTitleForMuncipality(text.titel, data.code)}
+        category={siteText.gemeente_layout.headings.medisch}
+        title={getLocalTitleForMunicipality(text.titel, data.code)}
         Icon={Getest}
         subtitle={text.pagina_toelichting}
         metadata={{
@@ -78,7 +55,7 @@ const PostivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
           <h3>{text.barscale_titel}</h3>
 
           {positivelyTestedPeople && (
-            <PostivelyTestedPeopleBarScale
+            <PositivelyTestedPeopleBarScale
               data={positivelyTestedPeople}
               showAxis={true}
             />
@@ -91,7 +68,7 @@ const PostivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
             <h3>
               {text.kpi_titel}{' '}
               <span className="text-blue kpi">
-                {formatDecimal(
+                {formatNumber(
                   positivelyTestedPeople.last_value.infected_daily_total
                 )}
               </span>
@@ -114,22 +91,25 @@ const PostivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
         </article>
       )}
 
-      <article className="metric-article layout-two-column">
-        <div className="column-item column-item-extra-margin">
-          <h3>{getLocalTitleForMuncipality(text.map_titel, data.code)}</h3>
+      <article className="metric-article layout-chloropleth">
+        <div className="chloropleth-header">
+          <h3>{getLocalTitleForMunicipality(text.map_titel, data.code)}</h3>
           <p>{text.map_toelichting}</p>
-
-          <MunicipalityLegenda
-            metricName="positive_tested_people"
-            title={siteText.positief_geteste_personen.chloropleth_legenda.titel}
-          />
         </div>
 
-        <div className="column-item column-item-extra-margin">
+        <div className="chloropleth-chart">
           <MunicipalityChloropleth
             selected={data.code}
             metricName="positive_tested_people"
-            tooltipContent={positiveTestedPeopleTooltip}
+            tooltipContent={positiveTestedPeopleMunicipalTooltip}
+            onSelect={createSelectMunicipalHandler(router)}
+          />
+        </div>
+
+        <div className="chloropleth-legend">
+          <MunicipalityLegenda
+            metricName="positive_tested_people"
+            title={siteText.positief_geteste_personen.chloropleth_legenda.titel}
           />
         </div>
       </article>
@@ -137,9 +117,9 @@ const PostivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
   );
 };
 
-PostivelyTestedPeople.getLayout = getMunicipalityLayout();
+PositivelyTestedPeople.getLayout = getMunicipalityLayout();
 
 export const getStaticProps = getMunicipalityData();
 export const getStaticPaths = getMunicipalityPaths();
 
-export default PostivelyTestedPeople;
+export default PositivelyTestedPeople;

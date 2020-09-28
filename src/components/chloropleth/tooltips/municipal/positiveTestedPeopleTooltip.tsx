@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
 import { MunicipalityProperties } from '../../shared';
-import styles from 'components/chloropleth/chloropleth.module.scss';
+import styles from '~/components/chloropleth/chloropleth.module.scss';
 
-export default function positiveTestedPeopleTooltip(
+export function positiveTestedPeopleMunicipalTooltip(
   context: MunicipalityProperties & { value: number }
 ): ReactNode {
   return (

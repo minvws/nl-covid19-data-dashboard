@@ -1,5 +1,5 @@
 import { SafetyRegionProperties } from '../shared';
-import municipalCodeToRegionCodeLookup from 'data/municipalCodeToRegionCodeLookup';
+import municipalCodeToRegionCodeLookup from '~/data/municipalCodeToRegionCodeLookup';
 import { FeatureCollection, MultiPolygon } from 'geojson';
 import { useMemo } from 'react';
 
@@ -10,7 +10,7 @@ import { useMemo } from 'react';
  * @param regionGeo
  * @param selectedMunicipality
  */
-export default function useMunicipalityBoundingbox(
+export function useMunicipalityBoundingbox(
   regionGeo: FeatureCollection<MultiPolygon, SafetyRegionProperties>,
   selectedMunicipality?: string
 ): [FeatureCollection<MultiPolygon>, string] | [undefined, undefined] {

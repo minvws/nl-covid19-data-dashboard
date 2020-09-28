@@ -1,47 +1,18 @@
-import BarScale from 'components/barScale';
-import { ContentHeader } from 'components/layout/Content';
-import { FCWithLayout } from 'components/layout';
-import { getNationalLayout } from 'components/layout/NationalLayout';
-import { LineChart } from 'components/charts/index';
+import siteText from '~/locale/index';
+import { VerdenkingenHuisartsen } from '~/types/data.d';
+import getNlData, { INationalData } from '~/static-props/nl-data';
 
-import Arts from 'assets/arts.svg';
+import { ContentHeader } from '~/components/layout/Content';
+import { FCWithLayout } from '~/components/layout';
+import { getNationalLayout } from '~/components/layout/NationalLayout';
+import { LineChart } from '~/components/lineChart/lineChartWithWeekTooltip';
+import { SuspectedPatientsBarScale } from '~/components/landelijk/suspected-patients-barscale';
 
-import formatNumber from 'utils/formatNumber';
-
-import siteText from 'locale';
-
-import { VerdenkingenHuisartsen } from 'types/data.d';
-import getNlData, { INationalData } from 'static-props/nl-data';
+import Arts from '~/assets/arts.svg';
+import { formatNumber } from '~/utils/formatNumber';
 
 const text: typeof siteText.verdenkingen_huisartsen =
   siteText.verdenkingen_huisartsen;
-
-export function SuspectedPatientsBarScale(props: {
-  data: VerdenkingenHuisartsen | undefined;
-  showAxis: boolean;
-}) {
-  const { data, showAxis } = props;
-
-  if (!data) return null;
-
-  return (
-    <BarScale
-      min={0}
-      max={140}
-      screenReaderText={text.barscale_screenreader_text}
-      value={data.last_value.incidentie as number | null}
-      id="verdenkingen_huisartsen"
-      rangeKey="incidentie"
-      gradient={[
-        {
-          color: '#3391CC',
-          value: 0,
-        },
-      ]}
-      showAxis={showAxis}
-    />
-  );
-}
 
 const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
   const { data: state } = props;
@@ -54,7 +25,7 @@ const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
   return (
     <>
       <ContentHeader
-        category="Overige indicatoren"
+        category={siteText.gemeente_layout.headings.overig}
         title={text.titel}
         Icon={Arts}
         subtitle={text.pagina_toelichting}
@@ -93,6 +64,7 @@ const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
             values={data.values.map((value) => ({
               value: value.incidentie,
               date: value.week_unix,
+              week: { start: value.week_start_unix, end: value.week_end_unix },
             }))}
           />
         </article>

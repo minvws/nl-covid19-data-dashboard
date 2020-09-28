@@ -1,58 +1,30 @@
-import BarScale from 'components/barScale';
-import { FCWithLayout } from 'components/layout';
-import { getMunicipalityLayout } from 'components/layout/MunicipalityLayout';
-import { ContentHeader } from 'components/layout/Content';
+import { FCWithLayout } from '~/components/layout';
+import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
+import { ContentHeader } from '~/components/layout/Content';
 
-import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
+import { SewerWaterBarScale } from '~/components/gemeente/sewer-water-barscale';
 
-import siteText from 'locale';
+import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 
-import RegionalSewerWaterLineChart from 'components/lineChart/regionalSewerWaterLineChart';
+import { RegionalSewerWaterLineChart } from '~/components/lineChart/regionalSewerWaterLineChart';
 import { useMemo } from 'react';
-import BarChart from 'components/barChart';
+import { BarChart } from '~/components/charts';
 import {
-  SewerWaterBarScaleData,
   getSewerWaterBarScaleData,
   getSewerWaterLineChartData,
   getSewerWaterBarChartData,
-} from 'utils/sewer-water/municipality-sewer-water.util';
+} from '~/utils/sewer-water/municipality-sewer-water.util';
 import {
   getMunicipalityData,
   getMunicipalityPaths,
   IMunicipalityData,
-} from 'static-props/municipality-data';
-import { getLocalTitleForMuncipality } from 'utils/getLocalTitleForCode';
+} from '~/static-props/municipality-data';
+import { getLocalTitleForMunicipality } from '~/utils/getLocalTitleForCode';
+
+import siteText from '~/locale/index';
 
 const text: typeof siteText.gemeente_rioolwater_metingen =
   siteText.gemeente_rioolwater_metingen;
-
-export function SewerWaterBarScale(props: {
-  data: SewerWaterBarScaleData | null;
-  showAxis: boolean;
-}) {
-  const { data, showAxis } = props;
-
-  if (data === null)
-    return <p>{siteText.no_data_for_this_municipality.text}</p>;
-
-  return (
-    <BarScale
-      min={0}
-      max={100}
-      screenReaderText={text.screen_reader_graph_content}
-      value={Number(data.value)}
-      id="rioolwater_metingen"
-      rangeKey="average"
-      gradient={[
-        {
-          color: '#3391CC',
-          value: 0,
-        },
-      ]}
-      showAxis={showAxis}
-    />
-  );
-}
 
 const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
   const { data } = props;
@@ -68,8 +40,8 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
   return (
     <>
       <ContentHeader
-        category="Overige indicatoren"
-        title={getLocalTitleForMuncipality(text.titel, data.code)}
+        category={siteText.gemeente_layout.headings.overig}
+        title={getLocalTitleForMunicipality(text.titel, data.code)}
         Icon={RioolwaterMonitoring}
         subtitle={text.pagina_toelichting}
         metadata={{
@@ -109,7 +81,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
       {barChartData && (
         <article className="metric-article">
           <h3>
-            {getLocalTitleForMuncipality(text.bar_chart_title, data.code)}
+            {getLocalTitleForMunicipality(text.bar_chart_title, data.code)}
           </h3>
           <BarChart
             keys={barChartData.keys}

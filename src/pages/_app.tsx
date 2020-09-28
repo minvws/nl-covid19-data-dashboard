@@ -1,9 +1,9 @@
 import '@reach/combobox/styles.css';
 import './index.css';
-import 'scss/style.scss';
+import '~/scss/style.scss';
 
-import 'components/legenda/legenda.scss';
-import 'components/comboBox/comboBox.scss';
+import '~/components/legenda/legenda.scss';
+import '~/components/comboBox/comboBox.scss';
 
 // Import Preact DevTools in development
 // if (process.env.NODE_ENV === 'development') {
@@ -16,14 +16,10 @@ import { useEffect } from 'react';
 import Router from 'next/router';
 import * as piwik from '../lib/piwik';
 
-import { SWRConfig } from 'swr';
-
 interface IProps {
   Component: any;
   pageProps: any;
 }
-
-const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
 export default MyApp;
 
@@ -33,6 +29,7 @@ function MyApp(props: IProps): React.ReactElement {
   const getLayout = Component.getLayout || page;
 
   useEffect(() => {
+    window.document.documentElement.className += ' js';
     const handleRouteChange = () => {
       window.scrollTo(0, 0);
       piwik.pageview();
@@ -44,13 +41,5 @@ function MyApp(props: IProps): React.ReactElement {
     };
   }, []);
 
-  return (
-    <SWRConfig
-      value={{
-        fetcher,
-      }}
-    >
-      {getLayout(<Component {...pageProps} />, pageProps)}
-    </SWRConfig>
-  );
+  return getLayout(<Component {...pageProps} />, pageProps);
 }

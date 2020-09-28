@@ -1,16 +1,16 @@
 import { NextRouter } from 'next/router';
 import { ReactNode } from 'react';
-import formatDate from 'utils/formatDate';
-import replaceVariablesInText from 'utils/replaceVariablesInText';
+import { formatDate } from '~/utils/formatDate';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
-import text from 'locale';
+import text from '~/locale/index';
 import styles from '../tooltip.module.scss';
 
-import EscalationLevel1 from 'assets/niveau-1.svg';
-import EscalationLevel2 from 'assets/niveau-2.svg';
-import EscalationLevel3 from 'assets/niveau-3.svg';
+import EscalationLevel1 from '~/assets/niveau-1.svg';
+import EscalationLevel2 from '~/assets/niveau-2.svg';
+import EscalationLevel3 from '~/assets/niveau-3.svg';
 
-import { thresholds } from 'components/chloropleth/SafetyRegionChloropleth';
+import { thresholds } from '~/components/chloropleth/SafetyRegionChloropleth';
 
 const escalationThresholds = thresholds.escalation_levels.thresholds;
 
@@ -56,10 +56,7 @@ export const escalationTooltip = (router: NextRouter) => {
                 </strong>
                 <br />
                 {replaceVariablesInText(text.escalatie_niveau.valid_from, {
-                  validFrom: formatDate(
-                    context.valid_from_unix * 1000,
-                    'short'
-                  ),
+                  validFrom: formatDate(context.valid_from_unix, 'short'),
                 })}
               </div>
             </div>

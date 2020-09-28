@@ -4,11 +4,11 @@ import {
   SewerValue,
   AverageSewerInstallationPerRegionItem,
   SewerValueElement,
-} from 'types/data.d';
-import replaceVariablesInText from 'utils/replaceVariablesInText';
-import formatDate from 'utils/formatDate';
-import formatNumber from 'utils/formatNumber';
-import siteText from 'locale';
+} from '~/types/data.d';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { formatDate } from '~/utils/formatDate';
+import { formatNumber } from '~/utils/formatNumber';
+import siteText from '~/locale/index';
 
 const text: typeof siteText.veiligheidsregio_rioolwater_metingen =
   siteText.veiligheidsregio_rioolwater_metingen;
@@ -28,6 +28,8 @@ export interface SewerWaterBarScaleData {
 interface SewerWaterLineChartValue {
   date: number;
   value: number;
+  week_start_unix: number;
+  week_end_unix: number;
 }
 
 export interface SewerWaterLineChartData {
@@ -180,8 +182,7 @@ export function getSewerWaterBarChartData(
         color: '#3391CC',
         label: data?.average_sewer_installation_per_region?.last_value
           ? `${formatDate(
-              data.average_sewer_installation_per_region.last_value.week_unix *
-                1000,
+              data.average_sewer_installation_per_region.last_value.week_unix,
               'short'
             )}: ${formatNumber(
               data.average_sewer_installation_per_region.last_value.average
@@ -195,7 +196,7 @@ export function getSewerWaterBarChartData(
             color: '#C1C1C1',
             label: installation?.last_value
               ? `${formatDate(
-                  installation.last_value.date_measurement_unix * 1000,
+                  installation.last_value.date_measurement_unix,
                   'short'
                 )}: ${formatNumber(installation.last_value.rna_per_ml)}`
               : false,

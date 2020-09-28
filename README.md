@@ -16,9 +16,17 @@ The core team works directly from this open-source repository. If you plan to pr
 
 ## Setup
 
-This application uses Next.js as framework, which builds the pages of the application as static exports. We use Preact in production to keep the bundle as small as possible.
+This application uses Next.js as framework, which builds the pages of the application as static exports. ~~We use Preact in production to keep the bundle as small as possible.~~ We would like to use Preact, but we found out some bugs only occured when using Preact. For now, we've reverted to normal React. We'll enable Preact again once we find out why Reach UI's components do not play nice with Preact.
 
-We are using Next.js 9.5.
+We are using Next.js with static site generation. This means sometimes it can be a bit more complex to query data when you compare it against a solution such as SWR or react-query, but static builds are better for performance.
+
+If you want to change locale from `nl` - the default - to `en`, you need to make a `.env.local` file.
+
+**.env.local**
+
+```
+NEXT_PUBLIC_LOCALE=en
+```
 
 Run `yarn` to install all required packages.
 

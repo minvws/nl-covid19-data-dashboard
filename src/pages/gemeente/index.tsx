@@ -1,16 +1,16 @@
-import { FCWithLayout } from 'components/layout';
-import { getMunicipalityLayout } from 'components/layout/MunicipalityLayout';
+import { FCWithLayout } from '~/components/layout';
+import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
 import { NextRouter, useRouter } from 'next/router';
 
-import getLastGeneratedData from 'static-props/last-generated-data';
+import getLastGeneratedData from '~/static-props/last-generated-data';
 
-import text from 'locale';
-import styles from 'components/chloropleth/chloropleth.module.scss';
+import text from '~/locale/index';
+import styles from '~/components/chloropleth/chloropleth.module.scss';
 
 import { ReactNode } from 'react';
-import MunicipalityChloropleth from 'components/chloropleth/MunicipalityChloropleth';
-import { MunicipalityProperties } from 'components/chloropleth/shared';
-import useMediaQuery from 'utils/useMediaQuery';
+import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
+import { MunicipalityProperties } from '~/components/chloropleth/shared';
+import { useMediaQuery } from '~/utils/useMediaQuery';
 
 const tooltipContent = (router: NextRouter) => {
   return (context: MunicipalityProperties): ReactNode => {
@@ -42,7 +42,7 @@ const Municipality: FCWithLayout<any> = () => {
   const router = useRouter();
   const isLargeScreen = useMediaQuery('(min-width: 1000px)');
 
-  const onSelectMunicpal = (context: MunicipalityProperties) => {
+  const onSelectMunicipal = (context: MunicipalityProperties) => {
     router.push(
       '/gemeente/[code]/positief-geteste-mensen',
       `/gemeente/${context.gemcode}/positief-geteste-mensen`
@@ -52,25 +52,19 @@ const Municipality: FCWithLayout<any> = () => {
   const mapHeight = isLargeScreen ? '800px' : '400px';
 
   return (
-    <>
-      <article className="map-article layout-two-column">
-        <div className="column-item-no-margin column-item-small">
-          <h2 className="text-max-width">
-            {text.gemeente_index.selecteer_titel}
-          </h2>
-          <p className="text-max-width">
-            {text.gemeente_index.selecteer_toelichting}
-          </p>
-        </div>
-        <div className="column-item-no-margin column-item">
-          <MunicipalityChloropleth
-            tooltipContent={tooltipContent(router)}
-            style={{ height: mapHeight }}
-            onSelect={onSelectMunicpal}
-          />
-        </div>
-      </article>
-    </>
+    <article className="map-article layout-chloropleth">
+      <div className="chloropleth-header">
+        <h2>{text.gemeente_index.selecteer_titel}</h2>
+        <p>{text.gemeente_index.selecteer_toelichting}</p>
+      </div>
+      <div className="chloropleth-chart">
+        <MunicipalityChloropleth
+          tooltipContent={tooltipContent(router)}
+          style={{ height: mapHeight }}
+          onSelect={onSelectMunicipal}
+        />
+      </div>
+    </article>
   );
 };
 

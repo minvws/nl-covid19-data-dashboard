@@ -8,7 +8,10 @@ const fs = require('fs');
 function getSchemaNames() {
   const directoryPath = path.join(__dirname, '../');
   const contents = fs.readdirSync(directoryPath);
-  return contents.filter((item) => item !== 'validator');
+  return contents.filter((item) => {
+    const isDir = fs.lstatSync(path.join(directoryPath, item)).isDirectory();
+    return isDir && item !== 'validator';
+  });
 }
 
 module.exports = getSchemaNames;

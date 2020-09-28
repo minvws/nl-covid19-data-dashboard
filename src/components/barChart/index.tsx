@@ -8,9 +8,7 @@ interface IProps {
   axisTitle: string;
 }
 
-export default BarChart;
-
-function BarChart(props: IProps) {
+export default function BarChart(props: IProps) {
   const { data, keys, axisTitle } = props;
 
   const options = useMemo<HighCharts.Options>(() => {

@@ -185,21 +185,62 @@
 }
 
 @media (max-width: 999px) {
-  .small-screen-aside-tendency {
-    .national-content {
-      display: none;
+  .national-layout,
+  .safety-region-layout,
+  .municipality-layout {
+    > section {
+      padding-top: 0;
+      margin-top: 0.5em;
     }
-    .safety-region-aside,
-    .municipality-aside {
-      min-height: 6em;
+
+    .index-article {
+      margin-top: 0;
     }
   }
 
-  .small-screen-content-tendency {
+  .safety-region-aside,
+  .municipality-aside {
+    min-height: 6em;
+  }
+
+  /**
+   * Menu and content only show/hides with JavaScript enabled
+   */
+  .js {
+    .has-menu-and-content-opened {
+      .back-button {
+        display: none;
+      }
+    }
+
+    .has-menu-opened {
+      .national-content,
+      .safety-region-content,
+      .municipality-content,
+      .back-button {
+        display: none;
+      }
+    }
+
+    .has-menu-closed {
+      .national-aside,
+      .safety-region-aside,
+      .municipality-aside {
+        display: none;
+      }
+    }
+  }
+
+  // Tweaks to display the non-JS aside + content well
+  html:not(.js) {
+    .back-button {
+      display: none;
+    }
+
     .national-aside,
     .safety-region-aside,
     .municipality-aside {
-      display: none;
+      margin-bottom: 2em;
     }
   }
 }
@@ -348,12 +389,14 @@ a.metric-link {
   }
 }
 
-a.active-metric-link {
-  background: $page-background-active;
-  border-right: 5px solid $red;
+@media (min-width: 1000px) {
+  a.active-metric-link {
+    background: $page-background-active;
+    border-right: 5px solid $red;
 
-  &::after {
-    content: none;
+    &::after {
+      content: none;
+    }
   }
 }
 
@@ -383,19 +426,11 @@ a.active-metric-link {
     &:first-of-type {
       margin-right: $default-margin;
     }
-
-    &:nth-of-type(2) {
-      margin-left: $default-margin;
-    }
   }
 
   .column-item-extra-margin {
     &:first-of-type {
       margin-right: $default-margin * 3;
-    }
-
-    &:nth-of-type(2) {
-      margin-left: $default-margin * 3;
     }
   }
 
@@ -403,9 +438,47 @@ a.active-metric-link {
     &:first-of-type {
       margin-right: 0;
     }
+  }
+}
 
-    &:nth-of-type(2) {
-      margin-left: 0;
+/**
+  This layout should be integrated with the chloropleth component once we have
+  one based on styled-components
+  */
+.layout-chloropleth {
+  $chloropleth-breakpoint: 1200px;
+
+  @media (min-width: $chloropleth-breakpoint) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      'a c'
+      'b c';
+  }
+
+  .chloropleth-header {
+    grid-area: a;
+    margin-bottom: 2em;
+    @media (min-width: $chloropleth-breakpoint) {
+      margin-bottom: 0;
+    }
+  }
+
+  .chloropleth-legend {
+    grid-area: b;
+  }
+
+  .chloropleth-chart {
+    grid-area: c;
+  }
+
+  .chloropleth-controls {
+    display: flex;
+    justify-content: center;
+
+    @media (min-width: $chloropleth-breakpoint) {
+      justify-content: flex-start;
     }
   }
 }

@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
 import { SafetyRegionProperties } from '../../shared';
-import styles from 'components/chloropleth/chloropleth.module.scss';
+import styles from '~/components/chloropleth/chloropleth.module.scss';
 
-export default function positiveTestedPeopleTooltip(
+export function positiveTestedPeopleRegionalTooltip(
   context: SafetyRegionProperties & { value: number }
 ): ReactNode {
   return (

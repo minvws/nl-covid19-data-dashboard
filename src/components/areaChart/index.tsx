@@ -2,13 +2,16 @@ import { useMemo, useState } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-import ChartTimeControls, {
+import {
+  ChartTimeControls,
   TimeframeOption,
-} from 'components/chartTimeControls';
+} from '~/components/chartTimeControls';
 
-import formatNumber from 'utils/formatNumber';
-import formatDate from 'utils/formatDate';
-import { getFilteredValues } from 'components/chartTimeControls/chartTimeControlUtils';
+import { formatNumber } from '~/utils/formatNumber';
+import { formatDate } from '~/utils/formatDate';
+import text from '~/locale/index';
+
+import { getFilteredValues } from '~/components/chartTimeControls/chartTimeControlUtils';
 
 if (typeof Highcharts === 'object') {
   require('highcharts/highcharts-more')(Highcharts);
@@ -34,8 +37,6 @@ type IGetOptions = Omit<AreaChartProps, 'data'> & {
   rangeData: TRange[];
   lineData: TLine[];
 };
-
-export default AreaChart;
 
 function getOptions(props: IGetOptions): Highcharts.Options {
   const {
@@ -78,11 +79,10 @@ function getOptions(props: IGetOptions): Highcharts.Options {
         align: 'right',
         x: 10,
         rotation: '0' as any,
-        formatter: function (): string {
-          if (this.isFirst || this.isLast) {
-            return formatDate(this.value, 'axis');
-          }
-          return '';
+        formatter: function () {
+          return this.isFirst || this.isLast
+            ? formatDate(this.value, 'axis')
+            : '';
         },
       },
     },
@@ -157,13 +157,24 @@ function getOptions(props: IGetOptions): Highcharts.Options {
       value: signaalwaarde,
       width: 1,
       color: '#4f5458',
+      dashStyle: 'Dash',
+      zIndex: 1,
+      label: {
+        text: text.common.barScale.signaalwaarde,
+        align: 'right',
+        y: -8,
+        x: 0,
+        style: {
+          color: '#4f5458',
+        },
+      },
     });
   }
 
   return options;
 }
 
-function AreaChart(props: AreaChartProps) {
+export default function AreaChart(props: AreaChartProps) {
   const {
     rangeLegendLabel,
     lineLegendLabel,

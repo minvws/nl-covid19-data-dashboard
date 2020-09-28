@@ -5,18 +5,18 @@ import {
   TMunicipalityMetricName,
 } from './shared';
 
-import Chloropleth from './Chloropleth';
+import { Chloropleth } from './Chloropleth';
 import { Feature, GeoJsonProperties, MultiPolygon } from 'geojson';
-import useChartDimensions from './hooks/useChartDimensions';
+import { useChartDimensions } from './hooks/useChartDimensions';
 
 import styles from './chloropleth.module.scss';
 import { CSSProperties, ReactNode, useCallback } from 'react';
-import { Municipalities } from 'types/data';
-import useMunicipalityData from './hooks/useMunicipalityData';
-import useChloroplethColorScale from './hooks/useChloroplethColorScale';
-import useMunicipalityBoundingbox from './hooks/useMunicipalityBoundingbox';
+import { Municipalities } from '~/types/data';
+import { useMunicipalityData } from './hooks/useMunicipalityData';
+import { useChloroplethColorScale } from './hooks/useChloroplethColorScale';
+import { useMunicipalityBoundingbox } from './hooks/useMunicipalityBoundingbox';
 import { MunicipalityProperties } from './shared';
-import useRegionMunicipalities from './hooks/useRegionMunicipalities';
+import { useRegionMunicipalities } from './hooks/useRegionMunicipalities';
 import { countryGeo, municipalGeo, regionGeo } from './topology';
 
 type MunicipalThresholds = ChloroplethThresholds<TMunicipalityMetricName>;
@@ -103,7 +103,7 @@ export type TProps<
  * This component renders a map of the Netherlands with the outlines of all the municipalities which
  * receive a fill color based on the specified Municipality metric data.
  *
- * The metricName specifies which exact metric is visualised. The color scale is calculated using
+ * The metricName specifies which exact metric is visualized. The color scale is calculated using
  * the specified metric and the given gradient.
  *
  * When a selected municipal code is specified, the map will zoom in on the safety region to which
@@ -113,7 +113,7 @@ export type TProps<
  *
  * @param props
  */
-export default function MunicipalityChloropleth<
+export function MunicipalityChloropleth<
   T extends TMunicipalityMetricName,
   ItemType extends Municipalities[T][number],
   ReturnType extends ItemType & { value: number },
@@ -182,7 +182,7 @@ export default function MunicipalityChloropleth<
         SafetyRegionProperties | GeoJsonProperties
       >,
       path: string,
-      index: number
+      _index: number
     ) => {
       const { vrcode } = feature.properties as SafetyRegionProperties;
       const className = classNames(
@@ -193,7 +193,7 @@ export default function MunicipalityChloropleth<
         <path
           className={className}
           shapeRendering="optimizeQuality"
-          key={`municipality-map-overlay-${index}`}
+          key={`municipality-map-overlay-${vrcode}`}
           d={path}
           fill={'none'}
         />
@@ -256,7 +256,7 @@ export default function MunicipalityChloropleth<
         featureCollection={municipalGeo}
         overlays={overlays}
         hovers={hasData ? municipalGeo : undefined}
-        boundingbox={boundingbox || countryGeo}
+        boundingBox={boundingbox || countryGeo}
         dimensions={dimensions}
         featureCallback={featureCallback}
         overlayCallback={overlayCallback}

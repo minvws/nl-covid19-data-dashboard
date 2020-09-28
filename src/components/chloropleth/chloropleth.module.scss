@@ -1,4 +1,4 @@
-@import 'scss/variables.scss';
+@import '~/scss/variables.scss';
 
 .tooltipBase {
   padding: 0;
@@ -39,7 +39,7 @@
 
   path {
     pointer-events: all;
-    stroke: #01689b;
+    stroke: #505050;
     stroke-width: 0.5;
   }
 
@@ -60,13 +60,20 @@
     cursor: pointer;
   }
 
+  /**
+  Overlay is used outlining the VRs, but is currently styled the same
+  as municipalities paths. Faded is used to style VRs
+  when they have no data OR are not selected. This one is now also set to the
+  same color, so now probably redundant.
+  */
+
   path.faded {
-    stroke: #c4c4c4;
+    stroke: #505050;
   }
 
   path.overlay {
     pointer-events: none;
-    stroke: #01689b;
+    stroke: #505050;
     stroke-width: 0.5;
     fill: transparent;
   }
