@@ -16,7 +16,7 @@ import {
 
 import { IntakeHospitalBarScale } from '~/components/gemeente/intake-hospital-barscale';
 
-import { getLocalTitleForMuncipality } from '~/utils/getLocalTitleForCode';
+import { getLocalTitleForMunicipality } from '~/utils/getLocalTitleForCode';
 
 const text: typeof siteText.gemeente_ziekenhuisopnames_per_dag =
   siteText.gemeente_ziekenhuisopnames_per_dag;
@@ -38,7 +38,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
     <>
       <ContentHeader
         category={siteText.gemeente_layout.headings.medisch}
-        title={getLocalTitleForMuncipality(text.titel, data.code)}
+        title={getLocalTitleForMunicipality(text.titel, data.code)}
         Icon={Ziekenhuis}
         subtitle={text.pagina_toelichting}
         metadata={{
@@ -74,23 +74,25 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
         </article>
       )}
 
-      <article className="metric-article layout-two-column">
-        <div className="column-item column-item-extra-margin">
-          <h3>{getLocalTitleForMuncipality(text.map_titel, data.code)}</h3>
+      <article className="metric-article layout-chloropleth">
+        <div className="chloropleth-header">
+          <h3>{getLocalTitleForMunicipality(text.map_titel, data.code)}</h3>
           <p>{text.map_toelichting}</p>
-
-          <MunicipalityLegenda
-            metricName="hospital_admissions"
-            title={siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel}
-          />
         </div>
 
-        <div className="column-item column-item-extra-margin">
+        <div className="chloropleth-chart">
           <MunicipalityChloropleth
             selected={data.code}
             metricName="hospital_admissions"
             tooltipContent={hospitalAdmissionsTooltip}
             onSelect={createSelectMunicipalHandler(router)}
+          />
+        </div>
+
+        <div className="chloropleth-legend">
+          <MunicipalityLegenda
+            metricName="hospital_admissions"
+            title={siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel}
           />
         </div>
       </article>

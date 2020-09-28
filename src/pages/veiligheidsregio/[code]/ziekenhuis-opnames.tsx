@@ -74,24 +74,26 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
           />
         </article>
       )}
-      <article className="metric-article layout-two-column">
-        <div className="column-item column-item-extra-margin">
+      <article className="metric-article layout-chloropleth">
+        <div className="chloropleth-header">
           <h3>{getLocalTitleForRegion(text.map_titel, data.code)}</h3>
           <p>{text.map_toelichting}</p>
-
-          <MunicipalityLegenda
-            metricName="hospital_admissions"
-            title={siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel}
-          />
         </div>
 
-        <div className="column-item column-item-extra-margin">
+        <div className="chloropleth-chart">
           <MunicipalityChloropleth
             selected={selectedMunicipalCode}
             highlightSelection={false}
             metricName="hospital_admissions"
             tooltipContent={hospitalAdmissionsTooltip}
             onSelect={createSelectMunicipalHandler(router)}
+          />
+        </div>
+
+        <div className="chloropleth-legend">
+          <MunicipalityLegenda
+            metricName="hospital_admissions"
+            title={siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel}
           />
         </div>
       </article>

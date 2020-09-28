@@ -33,7 +33,7 @@ import { useRouter } from 'next/router';
 const text: typeof siteText.positief_geteste_personen =
   siteText.positief_geteste_personen;
 
-const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
+const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
   const { data } = props;
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
     'municipal'
@@ -93,7 +93,10 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         </article>
       </div>
 
-      <article className="metric-article layout-chloropleth">
+      <article
+        className="metric-article layout-chloropleth"
+        data-cy="chloropleths"
+      >
         <div className="chloropleth-header">
           <h3>{text.map_titel}</h3>
           <p>{text.map_toelichting}</p>
@@ -121,7 +124,7 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           )}
         </div>
 
-        <div className="chloropleth-legend" data-cy="chloropleths">
+        <div className="chloropleth-legend">
           {selectedMap === 'municipal' && (
             <MunicipalityLegenda
               metricName="positive_tested_people"
@@ -158,29 +161,27 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           <p>{text.barchart_toelichting}</p>
         </div>
         {age && (
-          <>
-            <BarChart
-              keys={text.barscale_keys}
-              data={age.values.map((value) => ({
-                y: value.infected_per_agegroup_increase || 0,
-                label: value?.infected_per_agegroup_increase
-                  ? `${(
-                      ((value.infected_per_agegroup_increase as number) * 100) /
-                      barChartTotal
-                    ).toFixed(0)}%`
-                  : false,
-              }))}
-              axisTitle={text.barchart_axis_titel}
-            />
-          </>
+          <BarChart
+            keys={text.barscale_keys}
+            data={age.values.map((value) => ({
+              y: value.infected_per_agegroup_increase || 0,
+              label: value?.infected_per_agegroup_increase
+                ? `${(
+                    ((value.infected_per_agegroup_increase as number) * 100) /
+                    barChartTotal
+                  ).toFixed(0)}%`
+                : false,
+            }))}
+            axisTitle={text.barchart_axis_titel}
+          />
         )}
       </article>
     </>
   );
 };
 
-PostivelyTestedPeople.getLayout = getNationalLayout();
+PositivelyTestedPeople.getLayout = getNationalLayout();
 
 export const getStaticProps = getNlData();
 
-export default PostivelyTestedPeople;
+export default PositivelyTestedPeople;

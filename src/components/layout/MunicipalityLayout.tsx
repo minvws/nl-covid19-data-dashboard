@@ -7,7 +7,7 @@ import { WithChildren } from '~/types/index';
 import municipalities from '~/data/gemeente_veiligheidsregio.json';
 import { IMunicipalityData } from '~/static-props/municipality-data';
 
-import { getLocalTitleForMuncipality } from '~/utils/getLocalTitleForCode';
+import { getLocalTitleForMunicipality } from '~/utils/getLocalTitleForCode';
 import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMunicipalityCode';
 import { getSewerWaterBarScaleData } from '~/utils/sewer-water/municipality-sewer-water.util';
 import { useMediaQuery } from '~/utils/useMediaQuery';
@@ -135,7 +135,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
             <nav aria-label="metric navigation">
               <div className="region-names">
                 <h2>
-                  {getLocalTitleForMuncipality(
+                  {getLocalTitleForMunicipality(
                     '{{municipality}}',
                     code as string
                   )}

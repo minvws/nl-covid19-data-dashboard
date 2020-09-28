@@ -61,29 +61,18 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
         </div>
       </article>
 
-      <article className="metric-article layout-two-column">
-        <div className="column-item column-item-extra-margin">
+      <article className="metric-article layout-chloropleth">
+        <div className="chloropleth-header">
           <h3>{text.map_titel}</h3>
           <p>{text.map_toelichting}</p>
-          <ChartRegionControls
-            onChange={(val: 'region' | 'municipal') => setSelectedMap(val)}
-          />
-          {selectedMap === 'municipal' && (
-            <MunicipalityLegenda
-              metricName="hospital_admissions"
-              title={text.chloropleth_legenda.titel}
+          <div className="chloropleth-controls">
+            <ChartRegionControls
+              onChange={(val: 'region' | 'municipal') => setSelectedMap(val)}
             />
-          )}
-
-          {selectedMap === 'region' && (
-            <SafetyRegionLegenda
-              metricName="hospital_admissions"
-              title={text.chloropleth_legenda.titel}
-            />
-          )}
+          </div>
         </div>
 
-        <div className="column-item column-item-extra-margin">
+        <div className="chloropleth-chart">
           {selectedMap === 'municipal' && (
             <MunicipalityChloropleth
               metricName="hospital_admissions"
@@ -96,6 +85,22 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
               metricName="hospital_admissions"
               tooltipContent={regionHospitalAdmissionsTooltip}
               onSelect={createSelectRegionHandler(router)}
+            />
+          )}
+        </div>
+
+        <div className="chloropleth-legend">
+          {selectedMap === 'municipal' && (
+            <MunicipalityLegenda
+              metricName="hospital_admissions"
+              title={text.chloropleth_legenda.titel}
+            />
+          )}
+
+          {selectedMap === 'region' && (
+            <SafetyRegionLegenda
+              metricName="hospital_admissions"
+              title={text.chloropleth_legenda.titel}
             />
           )}
         </div>
