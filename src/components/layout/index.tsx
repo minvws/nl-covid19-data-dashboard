@@ -230,6 +230,13 @@ function Layout(props: WithChildren<LayoutProps & ILastGeneratedData>) {
                       </Link>
                     </li>
                     <li>
+                      <Link href="/over-risiconiveaus">
+                        <a onClick={blur} className={styles.footerLink}>
+                          {text.nav.links.over_risiconiveaus}
+                        </a>
+                      </Link>
+                    </li>
+                    <li>
                       <Link href="/verantwoording">
                         <a onClick={blur} className={styles.footerLink}>
                           {text.nav.links.verantwoording}
