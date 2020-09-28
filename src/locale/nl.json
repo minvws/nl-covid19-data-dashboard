@@ -43,7 +43,8 @@
       "verantwoording": "Cijferverantwoording",
       "meer_href": "https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19",
       "veiligheidsregio": "Veiligheidsregio's",
-      "gemeente": "Gemeenten"
+      "gemeente": "Gemeenten",
+      "over_risiconiveaus": "Over de risiconiveaus"
     },
     "title": "Corona Dashboard",
     "terug_naar_alle_cijfers": "Terug naar alle cijfers",
@@ -725,5 +726,37 @@
       "titel": "Legenda"
     },
     "valid_from": "Geldig vanaf {{validFrom}}"
+  },
+  "over_risiconiveaus": {
+    "title": "Over risiconiveaus",
+    "toelichting": "Er zijn veel gegevens over het coronavirus. Iedere week wordt bekeken of de situatie zich positief of negatief ontwikkelt. Dan beoordelen het Rijk, de GGD’en, het RIVM en de veiligheidsregio’s samen de situatie en stellen risiconiveaus vast. Moeten we waakzaam zijn (niveau 1), is de situatie zorgelijk (niveau 2) of is de situatie zelfs ernstig te noemen (niveau 3)? Zo is voor iedereen in één oogopslag duidelijk hoe het ervoor staat met het coronavirus per regio. Afhankelijk van het risiconiveau kunnen bestuurders maatregelen treffen. Daarbij wordt altijd gekeken naar de effecten van de maatregelen op de samenleving en de economie. De maatregelen zijn maatwerk en kunnen per regio verschillen.\n\nWat betekenen de drie risiconiveaus? \n\n1. *Waakzaam*. Er is sprake van een beheersbare situatie. Het aantal nieuwe besmettingen is laag. Kwetsbare groepen dienen alert te zijn. Het bron-en contactonderzoek is overwegend effectief. Maatregelen worden voldoende nageleefd en zijn te handhaven. Er is voldoende regionale zorgcapaciteit beschikbaar. Aanvullende maatregelen zijn erop gericht om de bestaande aanpak beter te laten functioneren.\n\n2. *Zorgelijk*. De situatie ontwikkelt zich negatief. Het aantal nieuwe besmettingen neemt toe. Maatwerk is nodig om kwetsbaren groepen te beschermen. Als de situatie voortduurt, wordt het bron- en contactonderzoek ineffectief. Maatregelen worden onvoldoende nageleefd. De druk op de regionale zorgcapaciteit neemt toe. De bestaande aanpak moet met aanvullende maatregelen worden versterkt om de verspreiding van het virus weer onder controle te krijgen en terug te keren naar een beheersbare situatie.\n\n3. *Ernstig*. Hard ingrijpen is noodzakelijk om verdere escalatie te voorkomen en terug te keren naar een beheersbare situatie (waakzaam). Het aantal nieuwe besmettingen neemt snel toe. Het bron- en contactonderzoek is niet meer effectief, waardoor het zicht op de verspreiding afneemt. Maatregelen worden onvoldoende nageleefd. De regionale zorgcapaciteit is onvoldoende. Maatregelen zijn erop gericht om (regionale) overbelasting van de zorg te voorkomen, kwetsbaren te beschermen en weer zicht op de verspreiding van het virus te krijgen."
+  },
+  "over_risiconiveaus_metadata": {
+    "title": "Risiconiveaus Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
+    "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
+    "url": "https://coronadashboard.rijksoverheid.nl/over-risiconiveaus"
+  },
+  "gemeente_layout": {
+    "headings": {
+      "medisch": "Medische indicatoren",
+      "overig": "Vroegsignalering",
+      "verpleeghuis": "Verpleeghuiszorg"
+    }
+  },
+  "positief_geteste_personen_ggd": {
+    "titel": "Percentage positief geteste personen via GGD teststraten",
+    "summary_title": "{{percentage}} van de GGD testen waren positief",
+    "summary_link_cta": "Lees meer",
+    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "bron": {
+      "href": "https://www.rivm.nl/documenten/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "text": "RIVM"
+    },
+    "toelichting": "Dit getal zegt iets over het totaal aantal personen dat via de GGD getest is, en hoeveel daarvan een positieve uitslag hadden. Let op dat de meeste testen via de GGD lopen, maar dit niet voor alle testen geldt. Daarom wijkt het absolute aantal positief geteste personen af van het aantal positief geteste personen door de GGD.",
+    "totaal_getest_week_titel": "Aantal geteste personen via GGD",
+    "totaal_getest_week_uitleg": "Aantal personen die in één week via de GGD getest zijn.",
+    "positief_getest_week_titel": "Positief getest personen",
+    "positief_getest_week_uitleg": "Aantal en percentage positief geteste personen die in één week via de GGD getest zijn.",
+    "positief_getest_getest_week_uitleg": "Dit zijn {{numerator}} van {{denominator}} geteste personen"
   }
 }
