@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-
+import styles from './areaChart.module.scss';
 import {
   ChartTimeControls,
   TimeframeOption,
@@ -21,6 +21,8 @@ type TRange = [Date, number | null, number | null];
 type TLine = [Date, number | null];
 
 interface AreaChartProps {
+  title: string;
+  description?: string;
   rangeLegendLabel: string;
   lineLegendLabel: string;
   data: Array<{
@@ -33,12 +35,12 @@ interface AreaChartProps {
   timeframeOptions?: TimeframeOption[];
 }
 
-type IGetOptions = Omit<AreaChartProps, 'data'> & {
+type IGetOptions = Omit<AreaChartProps, 'data' | 'title' | 'description'> & {
   rangeData: TRange[];
   lineData: TLine[];
 };
 
-function getOptions(props: IGetOptions): Highcharts.Options {
+function getChartOptions(props: IGetOptions): Highcharts.Options {
   const {
     rangeData,
     signaalwaarde,
@@ -46,6 +48,8 @@ function getOptions(props: IGetOptions): Highcharts.Options {
     rangeLegendLabel,
     lineLegendLabel,
   } = props;
+
+  const yMax = calculateYMax(rangeData, signaalwaarde);
 
   const options: Highcharts.Options = {
     chart: {
@@ -88,6 +92,7 @@ function getOptions(props: IGetOptions): Highcharts.Options {
     },
     yAxis: {
       min: 0,
+      max: yMax,
       lineColor: '#C4C4C4',
       gridLineColor: '#C4C4C4',
       title: {
@@ -98,7 +103,44 @@ function getOptions(props: IGetOptions): Highcharts.Options {
           return formatNumber(this.value);
         },
       },
-      plotLines: [],
+      plotLines: signaalwaarde
+        ? [
+            {
+              value: signaalwaarde,
+              width: 1,
+              color: '#4f5458',
+              dashStyle: 'Dash',
+              zIndex: 1,
+              label: {
+                text: text.common.barScale.signaalwaarde,
+                align: 'right',
+                y: -8,
+                x: 0,
+                style: {
+                  color: '#4f5458',
+                },
+              },
+            },
+            /**
+             * In order to show the value of the signaalwaarde, we plot a second
+             * transparent line, and only use its label positioned at the
+             * y-axis.
+             */
+            {
+              value: signaalwaarde,
+              color: 'transparent',
+              label: {
+                text: `${signaalwaarde}`,
+                align: 'left',
+                y: -8,
+                x: 0,
+                style: {
+                  color: '#4f5458',
+                },
+              },
+            },
+          ]
+        : undefined,
     },
 
     tooltip: {
@@ -110,7 +152,9 @@ function getOptions(props: IGetOptions): Highcharts.Options {
       xDateFormat: '%d %b %y',
       formatter(): string {
         const rangePoint = rangeData.find((el) => el[0].getTime() === this.x);
-        // @ts-ignore
+
+        if (!rangePoint) return '';
+
         const [, minRangePoint, maxRangePoint] = rangePoint;
         const linePoint = lineData.find(
           (el: any) => el[0].getTime() === this.x
@@ -151,26 +195,6 @@ function getOptions(props: IGetOptions): Highcharts.Options {
     ],
   };
 
-  if (signaalwaarde) {
-    // @ts-ignore
-    options.yAxis.plotLines.push({
-      value: signaalwaarde,
-      width: 1,
-      color: '#4f5458',
-      dashStyle: 'Dash',
-      zIndex: 1,
-      label: {
-        text: text.common.barScale.signaalwaarde,
-        align: 'right',
-        y: -8,
-        x: 0,
-        style: {
-          color: '#4f5458',
-        },
-      },
-    });
-  }
-
   return options;
 }
 
@@ -181,6 +205,8 @@ export default function AreaChart(props: AreaChartProps) {
     data,
     signaalwaarde,
     timeframeOptions,
+    title,
+    description,
   } = props;
 
   const rangeData: TRange[] = useMemo(() => {
@@ -199,7 +225,7 @@ export default function AreaChart(props: AreaChartProps) {
 
   const chartOptions = useMemo(() => {
     const getOptionsThunk = (rangeData: TRange[], lineData: TLine[]) =>
-      getOptions({
+      getChartOptions({
         rangeData,
         lineData,
         signaalwaarde,
@@ -230,13 +256,41 @@ export default function AreaChart(props: AreaChartProps) {
   ]);
 
   return (
-    <>
-      <ChartTimeControls
-        timeframe={timeframe}
-        timeframeOptions={timeframeOptions}
-        onChange={(value) => setTimeframe(value)}
-      />
+    <section className={styles.root}>
+      <header className={styles.header}>
+        <div className={styles.titleAndDescription}>
+          {title && <h3>{title}</h3>}
+          {description && <p>{description}</p>}
+        </div>
+        <div className={styles.timeControls}>
+          <ChartTimeControls
+            timeframe={timeframe}
+            timeframeOptions={timeframeOptions}
+            onChange={(value) => setTimeframe(value)}
+          />
+        </div>
+      </header>
       <HighchartsReact highcharts={Highcharts} options={chartOptions} />
-    </>
+    </section>
   );
+}
+
+/**
+ * From all the defined range values, extract the highest number so we know how to
+ * scale the y-axis
+ */
+function calculateYMax(values: TRange[], signaalwaarde = -Infinity) {
+  const maxValue = values
+    /**
+     * Better data type definitions will avoid having to deal with this stuff in
+     * the future.
+     */
+    .filter(([_date, a, b]) => a !== null && b !== null)
+    .map(([_date, a, b]) => [a, b] as [number, number])
+    .reduce((acc, rangeValues) => {
+      const rangeMax = Math.max(...rangeValues);
+      return rangeMax > acc ? rangeMax : acc;
+    }, -Infinity);
+
+  return Math.max(maxValue, signaalwaarde + 10);
 }

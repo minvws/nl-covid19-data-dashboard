@@ -20,7 +20,7 @@ type Value = {
 };
 
 interface LineChartProps {
-  title?: string;
+  title: string;
   description?: string;
   values: Value[];
   signaalwaarde?: number;
@@ -206,11 +206,11 @@ export default function LineChart({
   );
 }
 
+/**
+ * From all the defined values, extract the highest number so we know how to
+ * scale the y-axis
+ */
 function calculateYMax(values: Value[], signaalwaarde = -Infinity) {
-  /**
-   * From all the defined values, extract the highest number so we know how to
-   * scale the y-axis
-   */
   const maxValue = values
     .map((x) => x.value)
     .filter(isDefined)

@@ -62,10 +62,10 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
         </div>
       </article>
 
-      <article className="metric-article">
-        <h3>{text.linechart_titel}</h3>
-        {data?.values && (
+      {data?.values && (
+        <article className="metric-article">
           <AreaChart
+            title={text.linechart_titel}
             data={data.values.map((value) => ({
               avg: value.reproduction_index_avg,
               min: value.reproduction_index_low,
@@ -77,13 +77,12 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
             lineLegendLabel={text.lineLegendLabel}
             timeframeOptions={['all', '5weeks']}
           />
-        )}
-
-        <Legenda>
-          <li className="blue">{text.legenda_r}</li>
-          <li className="gray square">{text.legenda_marge}</li>
-        </Legenda>
-      </article>
+          <Legenda>
+            <li className="blue">{text.legenda_r}</li>
+            <li className="gray square">{text.legenda_marge}</li>
+          </Legenda>
+        </article>
+      )}
     </>
   );
 };
