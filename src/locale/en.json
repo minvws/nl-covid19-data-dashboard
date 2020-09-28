@@ -744,19 +744,19 @@
     }
   },
   "positief_geteste_personen_ggd": {
-    "titel": "",
-    "summary_title": "",
-    "summary_link_cta": "",
-    "datums": "",
+    "titel": "Percentage confirmed cases by GGD",
+    "summary_title": "{{percentage}} of GGD tests had a positive result",
+    "summary_link_cta": "Read more",
+    "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
     "bron": {
-      "href": "",
-      "text": ""
+      "href": "https://www.rivm.nl/documenten/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "text": "RIVM"
     },
-    "toelichting": "",
-    "totaal_getest_week_titel": "",
-    "totaal_getest_week_uitleg": "",
-    "positief_getest_week_titel": "",
-    "positief_getest_week_uitleg": "",
-    "positief_getest_getest_week_uitleg": ""
+    "toelichting": "This number is about the total number of persons tested by the municipal health services (GGD) in one week, and how many people had a positive test result. Note that most, but not all tests are conducted by the GGD. That's why the absolute number of positive test cases might differ from the number shown here.",
+    "totaal_getest_week_titel": "Number of people tested by GGD",
+    "totaal_getest_week_uitleg": "Number of people tested by GGD in one week.",
+    "positief_getest_week_titel": "Confirmed cases by GGD",
+    "positief_getest_week_uitleg": "Number and percentage of confirmed cases tested by the GGD in one week.",
+    "positief_getest_getest_week_uitleg": "This is {{numerator}} of {{denominator}} tested people"
   }
 }
