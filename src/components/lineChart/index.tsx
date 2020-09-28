@@ -101,7 +101,7 @@ function getChartOptions(values: Value[], signaalwaarde?: number) {
               dashStyle: 'Dash',
               width: 1,
               color: '#4f5458',
-              zIndex: 1,
+              zIndex: 10,
               label: {
                 text: text.common.barScale.signaalwaarde,
                 align: 'right',
@@ -119,6 +119,7 @@ function getChartOptions(values: Value[], signaalwaarde?: number) {
             {
               value: signaalwaarde,
               color: 'transparent',
+              zIndex: 10,
               label: {
                 text: `${signaalwaarde}`,
                 align: 'left',

@@ -110,7 +110,7 @@ function getChartOptions(props: IGetOptions): Highcharts.Options {
               width: 1,
               color: '#4f5458',
               dashStyle: 'Dash',
-              zIndex: 1,
+              zIndex: 10,
               label: {
                 text: text.common.barScale.signaalwaarde,
                 align: 'right',
@@ -129,6 +129,7 @@ function getChartOptions(props: IGetOptions): Highcharts.Options {
             {
               value: signaalwaarde,
               color: 'transparent',
+              zIndex: 10,
               label: {
                 text: `${signaalwaarde}`,
                 align: 'left',
