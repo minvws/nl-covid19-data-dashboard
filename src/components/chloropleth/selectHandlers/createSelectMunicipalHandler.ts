@@ -1,6 +1,6 @@
 import { NextRouter } from 'next/router';
 import { MunicipalityProperties } from '../shared';
-import { PageNames } from './types';
+import { PageName } from './types';
 
 export type MunicipalitySelectionHandler = (
   context: MunicipalityProperties
@@ -8,7 +8,7 @@ export type MunicipalitySelectionHandler = (
 
 export function createSelectMunicipalHandler(
   router: NextRouter,
-  suffix: PageNames = 'positief-geteste-mensen'
+  pageName: PageName = 'positief-geteste-mensen'
 ): MunicipalitySelectionHandler {
   return (context: MunicipalityProperties) => {
     if (!context) {
@@ -16,8 +16,8 @@ export function createSelectMunicipalHandler(
     }
 
     router.push(
-      `/gemeente/[code]/${suffix}`,
-      `/gemeente/${context.gemcode}/${suffix}`
+      `/gemeente/[code]/${pageName}`,
+      `/gemeente/${context.gemcode}/${pageName}`
     );
   };
 }

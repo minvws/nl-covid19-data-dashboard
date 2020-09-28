@@ -1,12 +1,12 @@
 import { NextRouter } from 'next/router';
 import { SafetyRegionProperties } from '../shared';
-import { PageNames } from './types';
+import { PageName } from './types';
 
 export type RegionSelectionHandler = (context: SafetyRegionProperties) => void;
 
 export function createSelectRegionHandler(
   router: NextRouter,
-  suffix: PageNames = 'positief-geteste-mensen'
+  pageName: PageName = 'positief-geteste-mensen'
 ): RegionSelectionHandler {
   return (context: SafetyRegionProperties) => {
     if (!context) {
@@ -14,8 +14,8 @@ export function createSelectRegionHandler(
     }
 
     router.push(
-      `/veiligheidsregio/[code]/${suffix}`,
-      `/veiligheidsregio/${context.vrcode}/${suffix}`
+      `/veiligheidsregio/[code]/${pageName}`,
+      `/veiligheidsregio/${context.vrcode}/${pageName}`
     );
   };
 }
