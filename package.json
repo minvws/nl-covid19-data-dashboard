@@ -96,7 +96,7 @@
     "start": "next start",
     "test": "jest --watch",
     "test:ci": "jest --ci",
-    "format": "prettier --write **/*.{js,ts,tsx}",
+    "format": "prettier --write **/*.{js,ts,tsx} *.{js,json,md,yml}",
     "lint": "eslint .",
     "type-check": "tsc --pretty --noEmit",
     "validate-json": "node schema/validator/validate-json.js",

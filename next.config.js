@@ -62,9 +62,6 @@ const nextConfig = {
   },
 };
 
-const plugins = [
-  withTM,
-  withBundleAnalyzer,
-];
+const plugins = [withTM, withBundleAnalyzer];
 
 module.exports = withPlugins(plugins, nextConfig);
