@@ -152,10 +152,10 @@ function getChartOptions(props: IGetOptions): Highcharts.Options {
       borderColor: '#01689B',
       borderRadius: 0,
       xDateFormat: '%d %b %y',
-      formatter(): string {
+      formatter() {
         const rangePoint = rangeData.find((el) => el[0].getTime() === this.x);
 
-        if (!rangePoint) return '';
+        if (!rangePoint) return;
 
         const [, minRangePoint, maxRangePoint] = rangePoint;
         const linePoint = lineData.find(
