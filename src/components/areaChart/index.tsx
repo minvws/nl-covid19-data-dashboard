@@ -289,9 +289,6 @@ function calculateYMax(values: TRange[], signaalwaarde = -Infinity) {
        * the future.
        */
       .filter(([_date, a, b]) => a !== null && b !== null)
-      /**
-       * d3.max requires a flat list of string values :/
-       */
       .flatMap(([_date, a, b]) => [a, b] as [number, number])
   );
 
