@@ -5,7 +5,6 @@
   "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
   "dependencies": {
     "@reach/combobox": "^0.11.2",
-    "@types/d3-array": "^2.0.0",
     "@vx/event": "^0.0.198",
     "@vx/geo": "^0.0.199",
     "@vx/scale": "^0.0.199",
@@ -39,6 +38,7 @@
     "@svgr/webpack": "^5.4.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.0.4",
+    "@types/d3-array": "^2.0.0",
     "@types/d3-scale": "^2.2.0",
     "@types/geojson": "^7946.0.7",
     "@types/linkifyjs": "^2.1.3",
