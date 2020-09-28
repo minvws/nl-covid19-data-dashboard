@@ -16,7 +16,7 @@ import {
   getMunicipalityPaths,
   IMunicipalityData,
 } from '~/static-props/municipality-data';
-import { getLocalTitleForMuncipality } from '~/utils/getLocalTitleForCode';
+import { getLocalTitleForMunicipality } from '~/utils/getLocalTitleForCode';
 
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
 import { positiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
@@ -27,7 +27,7 @@ import { useRouter } from 'next/router';
 const text: typeof siteText.gemeente_positief_geteste_personen =
   siteText.gemeente_positief_geteste_personen;
 
-const PostivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
+const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
   const { data } = props;
   const router = useRouter();
 
@@ -38,7 +38,7 @@ const PostivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
     <>
       <ContentHeader
         category={siteText.gemeente_layout.headings.medisch}
-        title={getLocalTitleForMuncipality(text.titel, data.code)}
+        title={getLocalTitleForMunicipality(text.titel, data.code)}
         Icon={Getest}
         subtitle={text.pagina_toelichting}
         metadata={{
@@ -91,18 +91,13 @@ const PostivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
         </article>
       )}
 
-      <article className="metric-article layout-two-column">
-        <div className="column-item column-item-extra-margin">
-          <h3>{getLocalTitleForMuncipality(text.map_titel, data.code)}</h3>
+      <article className="metric-article layout-chloropleth">
+        <div className="chloropleth-header">
+          <h3>{getLocalTitleForMunicipality(text.map_titel, data.code)}</h3>
           <p>{text.map_toelichting}</p>
-
-          <MunicipalityLegenda
-            metricName="positive_tested_people"
-            title={siteText.positief_geteste_personen.chloropleth_legenda.titel}
-          />
         </div>
 
-        <div className="column-item column-item-extra-margin">
+        <div className="chloropleth-chart">
           <MunicipalityChloropleth
             selected={data.code}
             metricName="positive_tested_people"
@@ -110,14 +105,21 @@ const PostivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
             onSelect={createSelectMunicipalHandler(router)}
           />
         </div>
+
+        <div className="chloropleth-legend">
+          <MunicipalityLegenda
+            metricName="positive_tested_people"
+            title={siteText.positief_geteste_personen.chloropleth_legenda.titel}
+          />
+        </div>
       </article>
     </>
   );
 };
 
-PostivelyTestedPeople.getLayout = getMunicipalityLayout();
+PositivelyTestedPeople.getLayout = getMunicipalityLayout();
 
 export const getStaticProps = getMunicipalityData();
 export const getStaticPaths = getMunicipalityPaths();
 
-export default PostivelyTestedPeople;
+export default PositivelyTestedPeople;

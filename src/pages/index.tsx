@@ -74,20 +74,17 @@ const Home: FCWithLayout<INationalData> = (props) => {
         </Link>
       </article>
 
-      <article className="index-article layout-two-column">
-        <div className="column-item-no-margin column-item-small">
-          <h2 className="text-max-width">
-            {text.veiligheidsregio_index.selecteer_titel}
-          </h2>
-          <div
-            className="text-max-width"
+      <article className="index-article layout-chloropleth">
+        <div className="chloropleth-header">
+          <h2>{text.veiligheidsregio_index.selecteer_titel}</h2>
+          <p
             dangerouslySetInnerHTML={{
               __html: text.veiligheidsregio_index.selecteer_toelichting,
             }}
           />
           <EscalationMapLegenda text={text} />
         </div>
-        <div className="column-item-no-margin column-item">
+        <div className="chloropleth-chart">
           <SafetyRegionChloropleth
             metricName="escalation_levels"
             metricProperty="escalation_level"
@@ -98,34 +95,18 @@ const Home: FCWithLayout<INationalData> = (props) => {
         </div>
       </article>
 
-      <article className="metric-article layout-two-column">
-        <div className="column-item column-item-extra-margin">
+      <article className="metric-article chloropleth-layout">
+        <div className="chloropleth-header">
           <h3>{text.positief_geteste_personen.map_titel}</h3>
           <p>{text.positief_geteste_personen.map_toelichting}</p>
-          <ChartRegionControls
-            onChange={(val: 'region' | 'municipal') => setSelectedMap(val)}
-          />
-
-          {selectedMap === 'municipal' && (
-            <>
-              <MunicipalityLegenda
-                metricName="positive_tested_people"
-                title={text.positief_geteste_personen.chloropleth_legenda.titel}
-              />
-            </>
-          )}
-
-          {selectedMap === 'region' && (
-            <>
-              <SafetyRegionLegenda
-                metricName="positive_tested_people"
-                title={text.positief_geteste_personen.chloropleth_legenda.titel}
-              />
-            </>
-          )}
+          <div className="chloropleth-controls">
+            <ChartRegionControls
+              onChange={(val: 'region' | 'municipal') => setSelectedMap(val)}
+            />
+          </div>
         </div>
 
-        <div className="column-item column-item-extra-margin">
+        <div className="chloropleth-chart">
           {selectedMap === 'municipal' && (
             <MunicipalityChloropleth
               metricName="positive_tested_people"
@@ -138,6 +119,22 @@ const Home: FCWithLayout<INationalData> = (props) => {
               metricName="positive_tested_people"
               tooltipContent={positiveTestedPeopleRegionalTooltip}
               onSelect={createSelectRegionHandler(router)}
+            />
+          )}
+        </div>
+
+        <div className="chloropleth-legend">
+          {selectedMap === 'municipal' && (
+            <MunicipalityLegenda
+              metricName="positive_tested_people"
+              title={text.positief_geteste_personen.chloropleth_legenda.titel}
+            />
+          )}
+
+          {selectedMap === 'region' && (
+            <SafetyRegionLegenda
+              metricName="positive_tested_people"
+              title={text.positief_geteste_personen.chloropleth_legenda.titel}
             />
           )}
         </div>
