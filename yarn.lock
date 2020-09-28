@@ -1308,6 +1308,25 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@formatjs/ecma402-abstract@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@formatjs/ecma402-abstract/-/ecma402-abstract-1.2.2.tgz#4810bdbd696d3805c535fd0620b7c8f45ab3164f"
+  integrity sha512-mLCoAPGlXCVskb/ojBO6iurGqwo6sZvAl8pRC4N25bz4LPWExAM9LsOo057zN3Br1JxUM3RZHG4YGnVt+nSRYQ==
+
+"@formatjs/intl-datetimeformat@^2.6.7":
+  version "2.6.7"
+  resolved "https://registry.yarnpkg.com/@formatjs/intl-datetimeformat/-/intl-datetimeformat-2.6.7.tgz#b154aebe4c2c6670b3adb6d0751c1ead217a3974"
+  integrity sha512-LVp6swM9LyLv2N0jMvA4y2bxK9Z7GxO8E+2OnzgUxrG3o9uSLMzJ+06+6e8yNyOaRvcqxBBasJ70mZ1FuLBBmg==
+  dependencies:
+    "@formatjs/ecma402-abstract" "^1.2.2"
+
+"@formatjs/intl-getcanonicallocales@^1.4.5":
+  version "1.4.5"
+  resolved "https://registry.yarnpkg.com/@formatjs/intl-getcanonicallocales/-/intl-getcanonicallocales-1.4.5.tgz#948f0e7f5f30c3b86b0a922485c7fd467b6df06d"
+  integrity sha512-A+EmeFLR4X09viOhrFjVcWV4V2gjcJ6Yi1d38jTG/mWvhMFDQ7cQeR05H0sf82PmpAJUX9dyhNWOcDM/NUZs7A==
+  dependencies:
+    cldr-core "36.0.0"
+
 "@hapi/address@^4.1.0":
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/@hapi/address/-/address-4.1.0.tgz#d60c5c0d930e77456fdcde2598e77302e2955e1d"
@@ -3582,6 +3601,11 @@ classnames@2.2.6, classnames@^2.2.5, classnames@^2.2.6:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
   integrity sha512-JR/iSQOSt+LQIWwrwEzJ9uk0xfN3mTVYMwt1Ir5mUcSN6pU+V4zQFFaJsclJbPuAUQH+yfWef6tm7l1quW3C8Q==
+
+cldr-core@36.0.0:
+  version "36.0.0"
+  resolved "https://registry.yarnpkg.com/cldr-core/-/cldr-core-36.0.0.tgz#1d2148ed6802411845baeeb21432d7bbfde7d4f7"
+  integrity sha512-QLnAjt20rZe38c8h8OJ9jPND+O4o5O8Nw0TK/P3KpNn1cmOhMu0rk6Kc3ap96c5OStQ9gAngs9+Be2sum26NOw==
 
 clean-stack@^2.0.0:
   version "2.2.0"

@@ -4,7 +4,6 @@ const withTM = require('next-transpile-modules')([
   '@juggle/resize-observer',
   '@vx/tooltip',
   '@vx/event',
-  '@reach/combobox',
   'react-use-measure',
   'zustand',
 ]);

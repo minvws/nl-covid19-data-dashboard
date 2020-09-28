@@ -4,6 +4,8 @@
   "private": true,
   "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
   "dependencies": {
+    "@formatjs/intl-datetimeformat": "^2.6.7",
+    "@formatjs/intl-getcanonicallocales": "^1.4.5",
     "@reach/combobox": "^0.11.2",
     "@testing-library/react": "^11.0.4",
     "@types/geojson": "^7946.0.7",
@@ -102,7 +104,7 @@
     "analyze": "cross-env ANALYZE=true yarn build",
     "export": "next export",
     "dev": "next",
-    "build": "NEXT_TELEMETRY_DISABLED=1 && next build && next export",
+    "build": "cross-env NEXT_TELEMETRY_DISABLED=1 && next build && next export",
     "start": "next start",
     "test": "jest --watch",
     "test:ci": "jest --ci",
