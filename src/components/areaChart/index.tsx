@@ -10,8 +10,6 @@ import {
 import { formatNumber } from '~/utils/formatNumber';
 import { formatDate } from '~/utils/formatDate';
 import text from '~/locale/index';
-import { max } from 'd3-array';
-
 import { getFilteredValues } from '~/components/chartTimeControls/chartTimeControlUtils';
 
 if (typeof Highcharts === 'object') {
@@ -282,20 +280,18 @@ export default function AreaChart(props: AreaChartProps) {
  * scale the y-axis
  */
 function calculateYMax(values: TRange[], signaalwaarde = -Infinity) {
-  const maxValue = max<number>(
-    values
-      /**
-       * Better data type definitions will avoid having to deal with this stuff in
-       * the future.
-       */
-      .filter(([_date, a, b]) => a !== null && b !== null)
-      .flatMap(([_date, a, b]) => [a, b] as [number, number])
-  );
+  const flatValues = values
+    /**
+     * Better data type definitions will avoid having to deal with this stuff in
+     * the future.
+     */
+    .filter(([_date, a, b]) => a !== null && b !== null)
+    .flatMap(([_date, a, b]) => [a, b] as [number, number]);
 
   /**
    * Adding an absolute value to the yMax like in LineChart doesn't seem to
    * work well for AreaChart given the values it is rendered with. So for
    * now we use a (relative) 20% increase.
    */
-  return Math.max(maxValue || -Infinity, signaalwaarde * 1.2);
+  return Math.max(signaalwaarde * 1.2, ...flatValues);
 }
