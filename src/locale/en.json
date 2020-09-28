@@ -39,7 +39,6 @@
     "links": {
       "index": "National",
       "over": "About this dashboard",
-      "over_risiconiveaus": "About the risk levels",
       "meer": "More information on the coronavirus",
       "verantwoording": "Explanation of the data presented",
       "meer_href": "https://www.government.nl/topics/coronavirus-covid-19",
@@ -119,7 +118,13 @@
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the progression over time in the number of new cases by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "cluster_datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
     "cluster_bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
@@ -370,14 +375,14 @@
   "terug_naar_regio_selectie": {
     "text": "Back to selection of region"
   },
-  "over_risiconiveaus": {
-    "title": "Level of risk",
-    "toelichting": "The situation around the Coronavirus is evaluated weekly by the ministry, the municipal health services (GGD), the RIVM and the safety regions. Based on recent regional developments, should we remain watchful (level 1), is the situation worrisome (level 2) or is the situation serious (level 3)? The levels of risk serve to clearly communicate to everyone what the current situation per safety region is. Any measures taken are tailored to a specific region and depend on the severity of the situation. The impact on our society and the economy is considered when determining risk level and measures.\n\n1. *Watchful*. The situation is manageable. The number of new infections is low. Vulnerable groups need to be careful. The source and contact tracing is predominantly effective. Citizens adhere to the measures to prevent the spread of the virus and the measures can be enforced. The healthcare capacity is sufficient. Additional measures are focused on the improvement of the current approach.\n\n2. *Worrisome*. The situation is negatively developing. The number of new infections is increasing. Specific measures are needed to protect vulnerable groups. If the situation continues, source- and contact tracing becomes ineffective. Measures are not being adhered to. The healthcare capacity is under increased pressure. Additional measures are needed to gain control of the virus again and to return to a manageable situation.\n\n3. *Serious*. Strong intervention is needed to prevent further escalation and to return to a controllable situation (watchful). The number of new infections is increasing fast. The source- and contact tracing is ineffective, which leads to a decrease in the insight in the spread of the virus. Measures are not being adhered to. The regional healthcare capacity is insufficient. Measures are focused on preventing the (regional) healthcare capacity to be overwhelmed, protecting the vulnerable groups and to regain sight on the spread of the virus again."
-  },
   "verantwoording": {
     "title": "Explanation of the data presented",
     "paragraaf": "The dashboard presents a variety of data that give us an idea of how we are managing the COVID-19 epidemic. In this section we explain how we arrive at this data.",
     "cijfers": [
+      {
+        "cijfer": "Level of risk",
+        "verantwoording": "The situation around the Coronavirus is evaluated weekly by the ministry, the municipal health services (GGD), the RIVM and the safety regions. Based on recent regional developments, should we remain watchful (level 1), is the situation worrisome (level 2) or is the situation serious (level 3)? The levels of risk serve to clearly communicate to everyone what the current situation per safety region is. Any measures taken are tailored to a specific region and depend on the severity of the situation. The impact on our society and the economy is considered when determining risk level and measures.\n\n1. *Watchful*. The situation is manageable. The number of new infections is low. Vulnerable groups need to be careful. The source and contact tracing is predominantly effective. Citizens adhere to the measures to prevent the spread of the virus and the measures can be enforced. The healthcare capacity is sufficient. Additional measures are focused on the improvement of the current approach.\n\n2. *Worrisome*. The situation is negatively developing. The number of new infections is increasing. Specific measures are needed to protect vulnerable groups. If the situation continues, source- and contact tracing becomes ineffective. Measures are not being adhered to. The healthcare capacity is under increased pressure. Additional measures are needed to gain control of the virus again and to return to a manageable situation.\n\n3. *Serious*. Strong intervention is needed to prevent further escalation and to return to a controllable situation (watchful). The number of new infections is increasing fast. The source- and contact tracing is ineffective, which leads to a decrease in the insight in the spread of the virus. Measures are not being adhered to. The regional healthcare capacity is insufficient. Measures are focused on preventing the (regional) healthcare capacity to be overwhelmed, protecting the vulnerable groups and to regain sight on the spread of the virus again."
+      },
       {
         "cijfer": "Correction figures of 2 September in the number of confirmed cases",
         "verantwoording": "Due to a previous technical issue at the RIVM, a number of reports are missing in the figures of 1 September. These reports are added in the figures of 2 September. Because of this, the number of newly identified infections shown on 2 September (734) is nearly 300 reports higher than it was the day before (462)."
@@ -446,11 +451,6 @@
   },
   "notfound_metadata": {
     "title": "Page cannot be found | Government.nl"
-  },
-  "over_risiconiveaus_metadata": {
-    "title": "Risk levels Coronavirus COVID-19 Dashboard | Government.nl",
-    "description": "Information on the development of the coronavirus in the Netherlands.",
-    "url": "https://coronadashboard.rijksoverheid.nl/over-risiconiveaus"
   },
   "over_metadata": {
     "title": "About the Coronavirus COVID-19 Dashboard | Government.nl",
@@ -575,7 +575,13 @@
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the progression over time in the number of positive tests by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -651,7 +657,13 @@
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the change in the number of confirmed cases by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
