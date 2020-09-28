@@ -121,7 +121,7 @@ function getOptions(values: Value[]): Highcharts.Options {
         );
 
         return `<strong>${formatDate(start, 'short')} - ${formatDate(
-          end * 1000,
+          end,
           'short'
         )}:</strong> ${formatNumber(this.y)}`;
       },
