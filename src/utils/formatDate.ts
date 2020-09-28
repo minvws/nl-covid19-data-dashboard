@@ -15,24 +15,29 @@ interface DateTimeFormatOptions extends Intl.DateTimeFormatOptions {
 const Long = new Intl.DateTimeFormat(locale, {
   dateStyle: 'long',
   timeStyle: 'short',
+  timeZone: 'Europe/Amsterdam',
 } as DateTimeFormatOptions);
 
 const Medium = new Intl.DateTimeFormat(locale, {
   dateStyle: 'long',
+  timeZone: 'Europe/Amsterdam',
 } as DateTimeFormatOptions);
 
 // Day Month or Month Day depending on the locale
 const DayMonth = new Intl.DateTimeFormat(locale, {
   month: 'long',
   day: 'numeric',
+  timeZone: 'Europe/Amsterdam',
 });
 
 const MonthShort = new Intl.DateTimeFormat(locale, {
   month: 'short',
+  timeZone: 'Europe/Amsterdam',
 });
 
 const Day = new Intl.DateTimeFormat(locale, {
   day: 'numeric',
+  timeZone: 'Europe/Amsterdam',
 });
 
 export function formatDate(
