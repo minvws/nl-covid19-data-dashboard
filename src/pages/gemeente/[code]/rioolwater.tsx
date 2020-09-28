@@ -19,7 +19,7 @@ import {
   getMunicipalityPaths,
   IMunicipalityData,
 } from '~/static-props/municipality-data';
-import { getLocalTitleForMuncipality } from '~/utils/getLocalTitleForCode';
+import { getLocalTitleForMunicipality } from '~/utils/getLocalTitleForCode';
 
 import siteText from '~/locale/index';
 
@@ -41,7 +41,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
     <>
       <ContentHeader
         category={siteText.gemeente_layout.headings.overig}
-        title={getLocalTitleForMuncipality(text.titel, data.code)}
+        title={getLocalTitleForMunicipality(text.titel, data.code)}
         Icon={RioolwaterMonitoring}
         subtitle={text.pagina_toelichting}
         metadata={{
@@ -81,7 +81,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
       {barChartData && (
         <article className="metric-article">
           <h3>
-            {getLocalTitleForMuncipality(text.bar_chart_title, data.code)}
+            {getLocalTitleForMunicipality(text.bar_chart_title, data.code)}
           </h3>
           <BarChart
             keys={barChartData.keys}

@@ -65,31 +65,34 @@ const SafetyRegion: FCWithLayout<any> = (props) => {
   const mapHeight = isLargeScreen ? '500px' : '400px';
 
   return (
-    <>
-      <article className="index-article layout-two-column">
-        <div className="column-item-no-margin column-item-small">
-          <h2 className="text-max-width">
-            {text.veiligheidsregio_index.selecteer_titel}
-          </h2>
-          <div
-            className="text-max-width"
-            dangerouslySetInnerHTML={{
-              __html: text.veiligheidsregio_index.selecteer_toelichting,
-            }}
-          />
-          <EscalationMapLegenda text={text} />
-        </div>
-        <div className="column-item-no-margin column-item">
-          <SafetyRegionChloropleth
-            metricName="escalation_levels"
-            metricProperty="escalation_level"
-            style={{ height: mapHeight }}
-            onSelect={createSelectRegionHandler(router)}
-            tooltipContent={escalationTooltip(router)}
-          />
-        </div>
-      </article>
-    </>
+    <article className="index-article layout-chloropleth">
+      <div className="chloropleth-header">
+        <h2>{text.veiligheidsregio_index.selecteer_titel}</h2>
+        {/**
+         * This is rendering html content which has been generated from
+         * markdown text.
+         */}
+        <p
+          dangerouslySetInnerHTML={{
+            __html: text.veiligheidsregio_index.selecteer_toelichting,
+          }}
+        />
+      </div>
+
+      <div className="chloropleth-chart">
+        <SafetyRegionChloropleth
+          metricName="escalation_levels"
+          metricProperty="escalation_level"
+          style={{ height: mapHeight }}
+          onSelect={createSelectRegionHandler(router)}
+          tooltipContent={escalationTooltip(router)}
+        />
+      </div>
+
+      <div className="chloropleth-legend">
+        <EscalationMapLegenda text={text} />
+      </div>
+    </article>
   );
 };
 

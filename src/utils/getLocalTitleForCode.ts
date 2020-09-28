@@ -3,9 +3,7 @@ import { replaceVariablesInText } from './replaceVariablesInText';
 import regios from '~/data/index';
 import municipalities from '~/data/gemeente_veiligheidsregio.json';
 
-export { getLocalTitleForRegion, getLocalTitleForMuncipality };
-
-function getLocalTitleForRegion(title: string, code: string): string {
+export function getLocalTitleForRegion(title: string, code: string): string {
   const regio = regios.find((regio) => regio.code === code);
 
   if (!regio) return '';
@@ -15,7 +13,10 @@ function getLocalTitleForRegion(title: string, code: string): string {
   });
 }
 
-function getLocalTitleForMuncipality(title: string, code: string): string {
+export function getLocalTitleForMunicipality(
+  title: string,
+  code: string
+): string {
   const municipality = municipalities.find((mun) => mun.gemcode === code);
 
   if (!municipality) return '';
