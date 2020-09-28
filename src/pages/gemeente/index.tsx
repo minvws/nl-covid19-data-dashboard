@@ -52,25 +52,19 @@ const Municipality: FCWithLayout<any> = () => {
   const mapHeight = isLargeScreen ? '800px' : '400px';
 
   return (
-    <>
-      <article className="map-article layout-two-column">
-        <div className="column-item-no-margin column-item-small">
-          <h2 className="text-max-width">
-            {text.gemeente_index.selecteer_titel}
-          </h2>
-          <p className="text-max-width">
-            {text.gemeente_index.selecteer_toelichting}
-          </p>
-        </div>
-        <div className="column-item-no-margin column-item">
-          <MunicipalityChloropleth
-            tooltipContent={tooltipContent(router)}
-            style={{ height: mapHeight }}
-            onSelect={onSelectMunicipal}
-          />
-        </div>
-      </article>
-    </>
+    <article className="map-article layout-chloropleth">
+      <div className="chloropleth-header">
+        <h2>{text.gemeente_index.selecteer_titel}</h2>
+        <p>{text.gemeente_index.selecteer_toelichting}</p>
+      </div>
+      <div className="chloropleth-chart">
+        <MunicipalityChloropleth
+          tooltipContent={tooltipContent(router)}
+          style={{ height: mapHeight }}
+          onSelect={onSelectMunicipal}
+        />
+      </div>
+    </article>
   );
 };
 

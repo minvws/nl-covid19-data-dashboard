@@ -1,10 +1,9 @@
 const withPlugins = require('next-compose-plugins');
-const withOptimizedImages = require('next-optimized-images');
+
 const withTM = require('next-transpile-modules')([
   '@juggle/resize-observer',
   '@vx/tooltip',
   '@vx/event',
-  'react-use-measure',
   'zustand',
 ]);
 
@@ -21,6 +20,7 @@ const nextConfig = {
   env: {
     COMMIT_ID: commitHash,
   },
+  reactStrictMode: true, // Enables react strict mode https://nextjs.org/docs/api-reference/next.config.js/react-strict-mode
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
@@ -62,10 +62,6 @@ const nextConfig = {
   },
 };
 
-const plugins = [
-  withTM,
-  withBundleAnalyzer,
-  [withOptimizedImages, { handleImages: ['jpeg', 'png', 'webp'] }],
-];
+const plugins = [withTM, withBundleAnalyzer];
 
 module.exports = withPlugins(plugins, nextConfig);
