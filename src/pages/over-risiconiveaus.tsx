@@ -20,8 +20,8 @@ interface StaticProps {
 
 export async function getStaticProps(): Promise<StaticProps> {
   const text = require('../locale/index').default;
-  text.over_risiconiveas.toelichting = MDToHTMLString(
-    text.over_risiconiveas.toelichting
+  text.over_risiconiveaus.toelichting = MDToHTMLString(
+    text.over_risiconiveaus.toelichting
   );
 
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
@@ -37,7 +37,7 @@ const OverRisicoNiveaus: FCWithLayout<{
 }> = (props) => {
   const { text } = props;
 
-  const { over_risiconiveas } = text;
+  const { over_risiconiveaus } = text;
 
   return (
     <>
@@ -58,10 +58,10 @@ const OverRisicoNiveaus: FCWithLayout<{
       <div className={styles.container}>
         <MaxWidth>
           <div className={styles.maxwidth}>
-            <h2>{over_risiconiveas.title}</h2>
+            <h2>{over_risiconiveaus.title}</h2>
             <div
               dangerouslySetInnerHTML={{
-                __html: over_risiconiveas.toelichting,
+                __html: over_risiconiveaus.toelichting,
               }}
             />
           </div>
@@ -72,7 +72,7 @@ const OverRisicoNiveaus: FCWithLayout<{
 };
 
 const metadata = {
-  ...siteText.over_risiconiveas_metadata,
+  ...siteText.over_risiconiveaus_metadata,
 };
 
 OverRisicoNiveaus.getLayout = getLayoutWithMetadata(metadata);
