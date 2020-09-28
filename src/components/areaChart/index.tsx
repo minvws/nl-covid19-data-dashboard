@@ -292,5 +292,10 @@ function calculateYMax(values: TRange[], signaalwaarde = -Infinity) {
       return rangeMax > acc ? rangeMax : acc;
     }, -Infinity);
 
-  return Math.max(maxValue, signaalwaarde + 10);
+  /**
+   * Adding an absolute value to the yMax like in LineChart doesn't seem to
+   * work well for AreaChart given the values it is rendered with. So for
+   * now we use a (relative) 20% increase.
+   */
+  return Math.max(maxValue, signaalwaarde * 1.2);
 }
