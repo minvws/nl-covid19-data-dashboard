@@ -39,6 +39,7 @@
     "links": {
       "index": "Landelijk",
       "over": "Over dit dashboard",
+      "over_risiconiveaus": "Over de risiconiveaus",
       "meer": "Meer informatie over het coronavirus",
       "verantwoording": "Cijferverantwoording",
       "meer_href": "https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19",
@@ -118,13 +119,7 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de trend van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": [
-      "0 tot 20",
-      "20 tot 40",
-      "40 tot 60",
-      "60 tot 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
     "cluster_datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "cluster_bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
@@ -375,14 +370,14 @@
   "terug_naar_regio_selectie": {
     "text": "Terug naar regio selectie"
   },
+  "over_risiconiveaus": {
+    "title": "Over risiconiveaus",
+    "toelichting": "Er zijn veel gegevens over het coronavirus. Iedere week wordt bekeken of de situatie zich positief of negatief ontwikkelt. Dan beoordelen het Rijk, de GGD’en, het RIVM en de veiligheidsregio’s samen de situatie en stellen risiconiveaus vast. Moeten we waakzaam zijn (niveau 1), is de situatie zorgelijk (niveau 2) of is de situatie zelfs ernstig te noemen (niveau 3)? Zo is voor iedereen in één oogopslag duidelijk hoe het ervoor staat met het coronavirus per regio. Afhankelijk van het risiconiveau kunnen bestuurders maatregelen treffen. Daarbij wordt altijd gekeken naar de effecten van de maatregelen op de samenleving en de economie. De maatregelen zijn maatwerk en kunnen per regio verschillen.\n\nWat betekenen de drie risiconiveaus? \n\n1. *Waakzaam*. Er is sprake van een beheersbare situatie. Het aantal nieuwe besmettingen is laag. Kwetsbare groepen dienen alert te zijn. Het bron-en contactonderzoek is overwegend effectief. Maatregelen worden voldoende nageleefd en zijn te handhaven. Er is voldoende regionale zorgcapaciteit beschikbaar. Aanvullende maatregelen zijn erop gericht om de bestaande aanpak beter te laten functioneren.\n\n2. *Zorgelijk*. De situatie ontwikkelt zich negatief. Het aantal nieuwe besmettingen neemt toe. Maatwerk is nodig om kwetsbaren groepen te beschermen. Als de situatie voortduurt, wordt het bron- en contactonderzoek ineffectief. Maatregelen worden onvoldoende nageleefd. De druk op de regionale zorgcapaciteit neemt toe. De bestaande aanpak moet met aanvullende maatregelen worden versterkt om de verspreiding van het virus weer onder controle te krijgen en terug te keren naar een beheersbare situatie.\n\n3. *Ernstig*. Hard ingrijpen is noodzakelijk om verdere escalatie te voorkomen en terug te keren naar een beheersbare situatie (waakzaam). Het aantal nieuwe besmettingen neemt snel toe. Het bron- en contactonderzoek is niet meer effectief, waardoor het zicht op de verspreiding afneemt. Maatregelen worden onvoldoende nageleefd. De regionale zorgcapaciteit is onvoldoende. Maatregelen zijn erop gericht om (regionale) overbelasting van de zorg te voorkomen, kwetsbaren te beschermen en weer zicht op de verspreiding van het virus te krijgen."
+  },
   "verantwoording": {
     "title": "Cijferverantwoording",
     "paragraaf": "In dit dashboard staan verschillende cijfers die ons vertellen hoe het ervoor staat met beheersen van COVID-19. Op deze plek geven we meer toelichting over de wijze waarop de cijfers zijn samengesteld.",
     "cijfers": [
-      {
-        "cijfer": "Risiconiveaus",
-        "verantwoording": "Er zijn veel gegevens over het coronavirus. Iedere week wordt bekeken of de situatie zich positief of negatief ontwikkelt. Dan beoordelen het Rijk, de GGD’en, het RIVM en de veiligheidsregio’s samen de situatie en stellen risiconiveaus vast. Moeten we waakzaam zijn (niveau 1), is de situatie zorgelijk (niveau 2) of is de situatie zelfs ernstig te noemen (niveau 3)? Zo is voor iedereen in één oogopslag duidelijk hoe het ervoor staat met het coronavirus per regio. Afhankelijk van het risiconiveau kunnen bestuurders maatregelen treffen. Daarbij wordt altijd gekeken naar de effecten van de maatregelen op de samenleving en de economie. De maatregelen zijn maatwerk en kunnen per regio verschillen.\n\nWat betekenen de drie risiconiveaus? \n\n1. *Waakzaam*. Er is sprake van een beheersbare situatie. Het aantal nieuwe besmettingen is laag. Kwetsbare groepen dienen alert te zijn. Het bron-en contactonderzoek is overwegend effectief. Maatregelen worden voldoende nageleefd en zijn te handhaven. Er is voldoende regionale zorgcapaciteit beschikbaar. Aanvullende maatregelen zijn erop gericht om de bestaande aanpak beter te laten functioneren.\n\n2. *Zorgelijk*. De situatie ontwikkelt zich negatief. Het aantal nieuwe besmettingen neemt toe. Maatwerk is nodig om kwetsbaren groepen te beschermen. Als de situatie voortduurt, wordt het bron- en contactonderzoek ineffectief. Maatregelen worden onvoldoende nageleefd. De druk op de regionale zorgcapaciteit neemt toe. De bestaande aanpak moet met aanvullende maatregelen worden versterkt om de verspreiding van het virus weer onder controle te krijgen en terug te keren naar een beheersbare situatie.\n\n3. *Ernstig*. Hard ingrijpen is noodzakelijk om verdere escalatie te voorkomen en terug te keren naar een beheersbare situatie (waakzaam). Het aantal nieuwe besmettingen neemt snel toe. Het bron- en contactonderzoek is niet meer effectief, waardoor het zicht op de verspreiding afneemt. Maatregelen worden onvoldoende nageleefd. De regionale zorgcapaciteit is onvoldoende. Maatregelen zijn erop gericht om (regionale) overbelasting van de zorg te voorkomen, kwetsbaren te beschermen en weer zicht op de verspreiding van het virus te krijgen."
-      },
       {
         "cijfer": "Correctie cijfers 2 september in aantal positief geteste mensen",
         "verantwoording": "Vanwege een eerdere technische storing bij het RIVM ontbreekt een aantal meldingen in de rapportage van 1 september. Deze meldingen zijn opgenomen in de rapportage van 2 september. Hierdoor is het aantal nieuwe positief geteste personen gemeld op 2 september (734) bijna 300 meldingen hoger dan op 1 september (462)."
@@ -451,6 +446,11 @@
   },
   "notfound_metadata": {
     "title": "Pagina kan niet gevonden worden | Rijksoverheid.nl"
+  },
+  "over_risiconiveaus_metadata": {
+    "title": "Risiconiveaus Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
+    "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
+    "url": "https://coronadashboard.rijksoverheid.nl/over-risiconiveaus"
   },
   "over_metadata": {
     "title": "Over het Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
@@ -575,13 +575,7 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de trend van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": [
-      "0 tot 20",
-      "20 tot 40",
-      "40 tot 60",
-      "60 tot 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -657,13 +651,7 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de trend van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": [
-      "0 to 20",
-      "20 tot 40",
-      "40 tot 60",
-      "60 tot 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 to 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
