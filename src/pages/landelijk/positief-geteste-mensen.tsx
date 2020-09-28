@@ -103,7 +103,7 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
                       value: `${formatNumber(
                         ggdData.percentage_infected_ggd
                       )}%`,
-                      className: 'text-light-blue',
+                      className: 'text-blue',
                     },
                   ]),
                 }}
@@ -217,7 +217,7 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
             <article className="metric-article column-item">
               <h3>
                 {ggdText.totaal_getest_week_titel}{' '}
-                <span className="text-light-blue kpi">
+                <span className="text-blue kpi">
                   {formatNumber(ggdData?.total_tested_ggd)}
                 </span>
               </h3>
@@ -228,7 +228,7 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
             <article className="metric-article column-item">
               <h3>
                 {ggdText.positief_getest_week_titel}{' '}
-                <span className="text-light-blue kpi">
+                <span className="text-blue kpi">
                   {`${formatNumber(ggdData?.percentage_infected_ggd)}%`}
                 </span>
               </h3>
@@ -243,12 +243,12 @@ const PostivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
                         {
                           name: 'numerator',
                           value: formatNumber(ggdData?.infected_ggd),
-                          className: 'text-light-blue',
+                          className: 'text-blue',
                         },
                         {
                           name: 'denominator',
                           value: formatNumber(ggdData?.total_tested_ggd),
-                          className: 'text-dark-blue',
+                          className: 'text-blue',
                         },
                       ]
                     ),
