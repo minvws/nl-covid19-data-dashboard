@@ -20,6 +20,8 @@ This application uses Next.js as framework, which builds the pages of the applic
 
 We are using Next.js with static site generation. This means sometimes it can be a bit more complex to query data when you compare it against a solution such as SWR or react-query, but static builds are better for performance.
 
+To get the data files from production into your local environment, run `yarn download`.
+
 If you want to change locale from `nl` - the default - to `en`, you need to make a `.env.local` file.
 
 **.env.local**
@@ -43,3 +45,6 @@ Runs the app in the development mode. Open http://localhost:3000 to view it in t
 
 `yarn build`
 Builds the app for production to the out folder. It correctly bundles React in production mode and optimizes the build for the best performance. All pages are output as static HTML files through next export, ready to be served on any static file server.
+
+`yarn download`
+This downloads the latest data files from the production server and places the data in the right folder.
