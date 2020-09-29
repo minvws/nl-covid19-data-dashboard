@@ -6,6 +6,7 @@
       "additionalProperties": false,
       "required": [
         "intake_moving_average",
+        "intake_daily",
         "beds_occupied",
         "beds_occupied_percentage",
         "beds_capacity",
@@ -14,6 +15,9 @@
       ],
       "properties": {
         "intake_moving_average": {
+          "type": "number"
+        },
+        "intake_daily": {
           "type": "number"
         },
         "beds_occupied": {
