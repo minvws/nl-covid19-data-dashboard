@@ -44,7 +44,7 @@
       "meer_href": "https://www.government.nl/topics/coronavirus-covid-19",
       "veiligheidsregio": "Safety regions",
       "gemeente": "Municipalities",
-      "over_risiconiveaus": ""
+      "over_risiconiveaus": "About the risk levels"
     },
     "title": "Corona Dashboard",
     "terug_naar_alle_cijfers": "Overview",
@@ -751,12 +751,12 @@
     "positief_getest_getest_week_uitleg": "This is {{numerator}} of {{denominator}} tested people"
   },
   "over_risiconiveaus": {
-    "title": "",
-    "toelichting": ""
+    "title": "Level of risk",
+    "toelichting": "The situation around the Coronavirus is evaluated weekly by the ministry, the municipal health services (GGD), the RIVM and the safety regions. Based on recent regional developments, should we remain watchful (level 1), is the situation worrisome (level 2) or is the situation serious (level 3)? The levels of risk serve to clearly communicate to everyone what the current situation per safety region is. Any measures taken are tailored to a specific region and depend on the severity of the situation. The impact on our society and the economy is considered when determining risk level and measures.\n\n1. *Watchful*. The situation is manageable. The number of new infections is low. Vulnerable groups need to be careful. The source and contact tracing is predominantly effective. Citizens adhere to the measures to prevent the spread of the virus and the measures can be enforced. The healthcare capacity is sufficient. Additional measures are focused on the improvement of the current approach.\n\n2. *Worrisome*. The situation is negatively developing. The number of new infections is increasing. Specific measures are needed to protect vulnerable groups. If the situation continues, source- and contact tracing becomes ineffective. Measures are not being adhered to. The healthcare capacity is under increased pressure. Additional measures are needed to gain control of the virus again and to return to a manageable situation.\n\n3. *Serious*. Strong intervention is needed to prevent further escalation and to return to a controllable situation (watchful). The number of new infections is increasing fast. The source- and contact tracing is ineffective, which leads to a decrease in the insight in the spread of the virus. Measures are not being adhered to. The regional healthcare capacity is insufficient. Measures are focused on preventing the (regional) healthcare capacity to be overwhelmed, protecting the vulnerable groups and to regain sight on the spread of the virus again."
   },
   "over_risiconiveaus_metadata": {
-    "title": "",
-    "description": "",
-    "url": ""
+    "title": "Risk levels Coronavirus COVID-19 Dashboard | Government.nl",
+    "description": "Information on the development of the coronavirus in the Netherlands.",
+    "url": "https://coronadashboard.government.nl/over-risiconiveaus"
   }
 }
