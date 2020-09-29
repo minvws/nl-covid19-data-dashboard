@@ -77,7 +77,7 @@ const Home: FCWithLayout<INationalData> = (props) => {
       <article className="index-article layout-chloropleth">
         <div className="chloropleth-header">
           <h2>{text.veiligheidsregio_index.selecteer_titel}</h2>
-          <p
+          <div
             dangerouslySetInnerHTML={{
               __html: text.veiligheidsregio_index.selecteer_toelichting,
             }}
