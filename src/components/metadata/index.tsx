@@ -50,7 +50,7 @@ export function Metadata(props: IProps) {
         </span>
         <p>
           {text.source}:{' '}
-          <a href={dataSource.href} rel="noopener noreferrer">
+          <a href={dataSource.href} rel="noopener noreferrer" target="_blank">
             {dataSource.text}
           </a>
         </p>
