@@ -19,6 +19,8 @@ type Value = {
   value?: number;
 };
 
+const SIGNAALWAARDE_Z_INDEX = 10;
+
 interface LineChartProps {
   title: string;
   description?: string;
@@ -101,7 +103,7 @@ function getChartOptions(values: Value[], signaalwaarde?: number) {
               dashStyle: 'Dash',
               width: 1,
               color: '#4f5458',
-              zIndex: 10,
+              zIndex: SIGNAALWAARDE_Z_INDEX,
               label: {
                 text: text.common.barScale.signaalwaarde,
                 align: 'right',
@@ -119,7 +121,7 @@ function getChartOptions(values: Value[], signaalwaarde?: number) {
             {
               value: signaalwaarde,
               color: 'transparent',
-              zIndex: 10,
+              zIndex: SIGNAALWAARDE_Z_INDEX,
               label: {
                 text: `${signaalwaarde}`,
                 align: 'left',

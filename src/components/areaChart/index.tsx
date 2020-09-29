@@ -19,6 +19,8 @@ if (typeof Highcharts === 'object') {
 type TRange = [Date, number | null, number | null];
 type TLine = [Date, number | null];
 
+const SIGNAALWAARDE_Z_INDEX = 10;
+
 interface AreaChartProps {
   title: string;
   description?: string;
@@ -109,7 +111,7 @@ function getChartOptions(props: IGetOptions): Highcharts.Options {
               width: 1,
               color: '#4f5458',
               dashStyle: 'Dash',
-              zIndex: 10,
+              zIndex: SIGNAALWAARDE_Z_INDEX,
               label: {
                 text: text.common.barScale.signaalwaarde,
                 align: 'right',
@@ -128,7 +130,7 @@ function getChartOptions(props: IGetOptions): Highcharts.Options {
             {
               value: signaalwaarde,
               color: 'transparent',
-              zIndex: 10,
+              zIndex: SIGNAALWAARDE_Z_INDEX,
               label: {
                 text: `${signaalwaarde}`,
                 align: 'left',
