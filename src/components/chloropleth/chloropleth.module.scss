@@ -33,6 +33,17 @@
   }
 }
 
+.selectorMap {
+  path {
+    /**
+    When a map is a selector map like gemeente/index, we need the line color
+    to be blue. There is a better way to do this once we move to styled
+    components, but for now this works.
+    */
+    stroke: #01689b !important;
+  }
+}
+
 .svgMap {
   display: block;
   background: transparent;

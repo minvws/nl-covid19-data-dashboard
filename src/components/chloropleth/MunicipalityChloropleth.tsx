@@ -97,6 +97,7 @@ export type TProps<
   style?: CSSProperties;
   onSelect?: (context: TContext) => void;
   tooltipContent?: (context: TContext) => ReactNode;
+  isSelectorMap?: boolean;
 };
 
 /**
@@ -126,6 +127,7 @@ export function MunicipalityChloropleth<
     onSelect,
     tooltipContent,
     highlightSelection = true,
+    isSelectorMap,
   } = props;
 
   const [ref, dimensions] = useChartDimensions();
@@ -263,6 +265,7 @@ export function MunicipalityChloropleth<
         hoverCallback={hoverCallback}
         onPathClick={onClick}
         getTooltipContent={getTooltipContent}
+        isSelectorMap={isSelectorMap}
       />
     </div>
   );
