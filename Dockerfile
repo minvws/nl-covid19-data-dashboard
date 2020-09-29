@@ -1,5 +1,5 @@
 # Stage 0 - Install dependancies
-FROM node:12 as react-build-base
+FROM node:14 as react-build-base
 WORKDIR /app
 COPY package.json yarn.lock ./
 RUN yarn
@@ -9,7 +9,7 @@ COPY . .
 RUN yarn validate-json && yarn generate-typescript
 
 # Stage 1 - Build NL application
-FROM node:12 as react-build-nl
+FROM node:14 as react-build-nl
 
 ARG NEXT_PUBLIC_LOCALE=nl
 
@@ -19,7 +19,7 @@ COPY . .
 RUN yarn build
 
 # Stage 2 - Build EN application
-FROM node:12 as react-build-en
+FROM node:14 as react-build-en
 
 ARG NEXT_PUBLIC_LOCALE=en
 

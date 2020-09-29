@@ -1,4 +1,4 @@
-@import 'scss/variables.scss';
+@import '~/scss/variables.scss';
 
 .notification {
   background: white;
@@ -59,7 +59,7 @@
 }
 
 .all-numbers {
-  padding: 3em 2em 2em;
+  padding: 3em 2em 1em;
   margin: 0 -2rem;
   text-align: center;
 

@@ -8959,7 +8959,7 @@
           "arcs": [[8, 9, 10, 11, 12, 13]],
           "type": "Polygon",
           "properties": {
-            "gemnaam": "Groningen (gemeente)",
+            "gemnaam": "Groningen",
             "gemcode": "GM0014"
           }
         },
@@ -9446,7 +9446,7 @@
         {
           "arcs": [[-330, 366, -337, -343, 367, -355, 368, 369]],
           "type": "Polygon",
-          "properties": { "gemnaam": "Utrecht (gemeente)", "gemcode": "GM0344" }
+          "properties": { "gemnaam": "Utrecht", "gemcode": "GM0344" }
         },
         {
           "arcs": [[-360, -229, -365, 370]],
@@ -9738,7 +9738,7 @@
           "arcs": [[557, 558, 559, 560, 561]],
           "type": "Polygon",
           "properties": {
-            "gemnaam": "'s-Gravenhage (gemeente)",
+            "gemnaam": "'s-Gravenhage",
             "gemcode": "GM0518"
           }
         },

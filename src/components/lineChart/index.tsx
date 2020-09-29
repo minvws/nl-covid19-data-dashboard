@@ -2,32 +2,36 @@ import React, { useMemo, useState } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import styles from './lineChart.module.scss';
-import text from 'locale';
+import text from '~/locale/index';
 
-import ChartTimeControls, {
+import {
+  ChartTimeControls,
   TimeframeOption,
-} from 'components/chartTimeControls';
+} from '~/components/chartTimeControls';
 
-import formatNumber from 'utils/formatNumber';
-import formatDate from 'utils/formatDate';
-import { getFilteredValues } from 'components/chartTimeControls/chartTimeControlUtils';
+import { formatNumber } from '~/utils/formatNumber';
+import { formatDate } from '~/utils/formatDate';
+import { getFilteredValues } from '~/components/chartTimeControls/chartTimeControlUtils';
+import { isDefined } from 'ts-is-present';
 
 type Value = {
   date: number;
-  value: number | undefined | null;
+  value?: number;
 };
 
+const SIGNAALWAARDE_Z_INDEX = 10;
+
 interface LineChartProps {
-  title?: string;
+  title: string;
   description?: string;
   values: Value[];
   signaalwaarde?: number;
   timeframeOptions?: TimeframeOption[];
 }
 
-export default LineChart;
+function getChartOptions(values: Value[], signaalwaarde?: number) {
+  const yMax = calculateYMax(values, signaalwaarde);
 
-function getChartOptions(values: Value[], signaalwaarde?: number | undefined) {
   const options: Highcharts.Options = {
     chart: {
       alignTicks: true,
@@ -59,11 +63,10 @@ function getChartOptions(values: Value[], signaalwaarde?: number | undefined) {
         // types say `rotation` needs to be a number,
         // but that doesn’t work.
         rotation: '0' as any,
-        formatter: function (): string {
-          if (this.isFirst || this.isLast) {
-            return formatDate(this.value * 1000, 'axis');
-          }
-          return '';
+        formatter: function () {
+          return this.isFirst || this.isLast
+            ? formatDate(this.value, 'axis')
+            : '';
         },
       },
     },
@@ -72,13 +75,13 @@ function getChartOptions(values: Value[], signaalwaarde?: number | undefined) {
       borderColor: '#01689B',
       borderRadius: 0,
       formatter: function (): string {
-        return `${formatDate(this.x * 1000)}: ${formatNumber(this.y)}`;
+        return `${formatDate(this.x)}: ${formatNumber(this.y)}`;
       },
     },
     yAxis: {
       min: 0,
       minRange: 0.1,
-      max: values.length > 0 ? null : signaalwaarde ? signaalwaarde + 1 : 1,
+      max: yMax,
       allowDecimals: false,
       lineColor: '#C4C4C4',
       gridLineColor: '#C4C4C4',
@@ -100,7 +103,7 @@ function getChartOptions(values: Value[], signaalwaarde?: number | undefined) {
               dashStyle: 'Dash',
               width: 1,
               color: '#4f5458',
-              zIndex: 1,
+              zIndex: SIGNAALWAARDE_Z_INDEX,
               label: {
                 text: text.common.barScale.signaalwaarde,
                 align: 'right',
@@ -118,6 +121,7 @@ function getChartOptions(values: Value[], signaalwaarde?: number | undefined) {
             {
               value: signaalwaarde,
               color: 'transparent',
+              zIndex: SIGNAALWAARDE_Z_INDEX,
               label: {
                 text: `${signaalwaarde}`,
                 align: 'left',
@@ -167,7 +171,7 @@ function getChartOptions(values: Value[], signaalwaarde?: number | undefined) {
   return options;
 }
 
-function LineChart({
+export default function LineChart({
   title,
   description,
   values,
@@ -203,4 +207,17 @@ function LineChart({
       <HighchartsReact highcharts={Highcharts} options={chartOptions} />
     </section>
   );
+}
+
+/**
+ * From all the defined values, extract the highest number so we know how to
+ * scale the y-axis
+ */
+function calculateYMax(values: Value[], signaalwaarde = -Infinity) {
+  const maxValue = values
+    .map((x) => x.value)
+    .filter(isDefined)
+    .reduce((acc, value) => (value > acc ? value : acc), -Infinity);
+
+  return Math.max(maxValue, signaalwaarde + 10);
 }

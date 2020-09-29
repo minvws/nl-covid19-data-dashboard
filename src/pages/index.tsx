@@ -1,33 +1,36 @@
-import { FCWithLayout } from 'components/layout';
-import { getNationalLayout } from 'components/layout/NationalLayout';
-import Notification from 'assets/notification.svg';
-import ExternalLink from 'assets/external-link.svg';
+import { FCWithLayout } from '~/components/layout';
+import { getNationalLayout } from '~/components/layout/NationalLayout';
+import Notification from '~/assets/notification.svg';
+import ExternalLink from '~/assets/external-link.svg';
 
 import path from 'path';
 import fs from 'fs';
 
-import siteText from 'locale';
+import siteText from '~/locale/index';
 
-import { INationalData } from 'static-props/nl-data';
+import { INationalData } from '~/static-props/nl-data';
 
 import styles from './index.module.scss';
 
-import TitleWithIcon from 'components/titleWithIcon';
-import ChartRegionControls from 'components/chartRegionControls';
-import MunicipalityChloropleth from 'components/chloropleth/MunicipalityChloropleth';
-import SafetyRegionChloropleth from 'components/chloropleth/SafetyRegionChloropleth';
-import positiveTestedPeopleTooltip from 'components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
-import positiveTestedPeopleTooltipRegion from 'components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
+import { TitleWithIcon } from '~/components/titleWithIcon';
+import { ChartRegionControls } from '~/components/chartRegionControls';
+import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
+import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
+import { positiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
+import { positiveTestedPeopleRegionalTooltip } from '~/components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
 import { useState } from 'react';
-import MunicipalityLegenda from 'components/chloropleth/legenda/MunicipalityLegenda';
-import SafetyRegionLegenda from 'components/chloropleth/legenda/SafetyRegionLegenda';
+import { MunicipalityLegenda } from '~/components/chloropleth/legenda/MunicipalityLegenda';
+import { SafetyRegionLegenda } from '~/components/chloropleth/legenda/SafetyRegionLegenda';
 import Link from 'next/link';
 import { EscalationMapLegenda } from './veiligheidsregio';
-import useMediaQuery from 'utils/useMediaQuery';
+import { useMediaQuery } from '~/utils/useMediaQuery';
 import { useRouter } from 'next/router';
-import { escalationTooltip } from 'components/chloropleth/tooltips/region/escalationTooltip';
-import MDToHTMLString from 'utils/MDToHTMLString';
-import { National } from 'types/data';
+import { escalationTooltip } from '~/components/chloropleth/tooltips/region/escalationTooltip';
+import { MDToHTMLString } from '~/utils/MDToHTMLString';
+import { National } from '~/types/data';
+
+import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
+import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
 
 const Home: FCWithLayout<INationalData> = (props) => {
   const { text } = props;
@@ -37,13 +40,6 @@ const Home: FCWithLayout<INationalData> = (props) => {
   );
 
   const isLargeScreen = useMediaQuery('(min-width: 1000px)');
-
-  const onSelectRegion = (context: any) => {
-    router.push(
-      '/veiligheidsregio/[code]/positief-geteste-mensen',
-      `/veiligheidsregio/${context.vrcode}/positief-geteste-mensen`
-    );
-  };
 
   const mapHeight = isLargeScreen ? '500px' : '400px';
 
@@ -78,68 +74,67 @@ const Home: FCWithLayout<INationalData> = (props) => {
         </Link>
       </article>
 
-      <article className="index-article layout-two-column">
-        <div className="column-item-no-margin column-item-small">
-          <h2 className="text-max-width">
-            {text.veiligheidsregio_index.selecteer_titel}
-          </h2>
+      <article className="index-article layout-chloropleth">
+        <div className="chloropleth-header">
+          <h2>{text.veiligheidsregio_index.selecteer_titel}</h2>
           <div
-            className="text-max-width"
             dangerouslySetInnerHTML={{
               __html: text.veiligheidsregio_index.selecteer_toelichting,
             }}
           />
           <EscalationMapLegenda text={text} />
         </div>
-        <div className="column-item-no-margin column-item">
+        <div className="chloropleth-chart">
           <SafetyRegionChloropleth
             metricName="escalation_levels"
             metricProperty="escalation_level"
             style={{ height: mapHeight }}
-            onSelect={onSelectRegion}
+            onSelect={createSelectRegionHandler(router)}
             tooltipContent={escalationTooltip(router)}
           />
         </div>
       </article>
 
-      <article className="metric-article layout-two-column">
-        <div className="column-item column-item-extra-margin">
+      <article className="metric-article layout-chloropleth">
+        <div className="chloropleth-header">
           <h3>{text.positief_geteste_personen.map_titel}</h3>
           <p>{text.positief_geteste_personen.map_toelichting}</p>
-          <ChartRegionControls
-            onChange={(val: 'region' | 'municipal') => setSelectedMap(val)}
-          />
-
-          {selectedMap === 'municipal' && (
-            <>
-              <MunicipalityLegenda
-                metricName="positive_tested_people"
-                title={text.positief_geteste_personen.chloropleth_legenda.titel}
-              />
-            </>
-          )}
-
-          {selectedMap === 'region' && (
-            <>
-              <SafetyRegionLegenda
-                metricName="positive_tested_people"
-                title={text.positief_geteste_personen.chloropleth_legenda.titel}
-              />
-            </>
-          )}
+          <div className="chloropleth-controls">
+            <ChartRegionControls
+              onChange={(val: 'region' | 'municipal') => setSelectedMap(val)}
+            />
+          </div>
         </div>
 
-        <div className="column-item column-item-extra-margin">
+        <div className="chloropleth-chart">
           {selectedMap === 'municipal' && (
             <MunicipalityChloropleth
               metricName="positive_tested_people"
-              tooltipContent={positiveTestedPeopleTooltip}
+              tooltipContent={positiveTestedPeopleMunicipalTooltip}
+              onSelect={createSelectMunicipalHandler(router)}
             />
           )}
           {selectedMap === 'region' && (
             <SafetyRegionChloropleth
               metricName="positive_tested_people"
-              tooltipContent={positiveTestedPeopleTooltipRegion}
+              tooltipContent={positiveTestedPeopleRegionalTooltip}
+              onSelect={createSelectRegionHandler(router)}
+            />
+          )}
+        </div>
+
+        <div className="chloropleth-legend">
+          {selectedMap === 'municipal' && (
+            <MunicipalityLegenda
+              metricName="positive_tested_people"
+              title={text.positief_geteste_personen.chloropleth_legenda.titel}
+            />
+          )}
+
+          {selectedMap === 'region' && (
+            <SafetyRegionLegenda
+              metricName="positive_tested_people"
+              title={text.positief_geteste_personen.chloropleth_legenda.titel}
             />
           )}
         </div>

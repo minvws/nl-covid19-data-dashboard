@@ -1,4 +1,4 @@
-import { Municipalities } from 'types/data';
+import { Municipalities } from '~/types/data';
 import { MunicipalityProperties, TMunicipalityMetricName } from '../shared';
 import { FeatureCollection, MultiPolygon } from 'geojson';
 import useSWR from 'swr';
@@ -24,7 +24,7 @@ export type TMunicipalityDataInfo<T> = [TGetMunicipalityFunc<T>, boolean];
  * @param metricName
  * @param featureCollection
  */
-export default function useMunicipalityData<
+export function useMunicipalityData<
   T extends TMunicipalityMetricName,
   ItemType extends Municipalities[T][number],
   ReturnType extends ItemType & MunicipalityProperties & { value: number }

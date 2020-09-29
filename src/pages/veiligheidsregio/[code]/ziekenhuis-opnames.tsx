@@ -1,58 +1,34 @@
-import BarScale from 'components/barScale';
-import { FCWithLayout } from 'components/layout';
-import { getSafetyRegionLayout } from 'components/layout/SafetyRegionLayout';
-import { ContentHeader } from 'components/layout/Content';
+import { FCWithLayout } from '~/components/layout';
+import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
+import { ContentHeader } from '~/components/layout/Content';
 
-import Ziekenhuis from 'assets/ziekenhuis.svg';
+import Ziekenhuis from '~/assets/ziekenhuis.svg';
 
-import siteText from 'locale';
+import siteText from '~/locale/index';
 
-import { ResultsPerRegion } from 'types/data.d';
-import { LineChart } from 'components/charts/index';
+import { ResultsPerRegion } from '~/types/data.d';
+import { LineChart } from '~/components/charts/index';
+import { IntakeHospitalBarScale } from '~/components/veiligheidsregio/intake-hospital-barscale';
 
 import {
   getSafetyRegionData,
   getSafetyRegionPaths,
   ISafetyRegionData,
-} from 'static-props/safetyregion-data';
-import { getLocalTitleForRegion } from 'utils/getLocalTitleForCode';
-import hospitalAdmissionsTooltip from 'components/chloropleth/tooltips/municipal/hospitalAdmissionsTooltip';
-import MunicipalityLegenda from 'components/chloropleth/legenda/MunicipalityLegenda';
-import MunicipalityChloropleth from 'components/chloropleth/MunicipalityChloropleth';
-import regionCodeToMunicipalCodeLookup from 'data/regionCodeToMunicipalCodeLookup';
+} from '~/static-props/safetyregion-data';
+import { getLocalTitleForRegion } from '~/utils/getLocalTitleForCode';
+import { hospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/municipal/hospitalAdmissionsTooltip';
+import { MunicipalityLegenda } from '~/components/chloropleth/legenda/MunicipalityLegenda';
+import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
+import regionCodeToMunicipalCodeLookup from '~/data/regionCodeToMunicipalCodeLookup';
+import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
+import { useRouter } from 'next/router';
 
 const text: typeof siteText.veiligheidsregio_ziekenhuisopnames_per_dag =
   siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
 
-export function IntakeHospitalBarScale(props: {
-  data: ResultsPerRegion | undefined;
-  showAxis: boolean;
-}) {
-  const { data, showAxis } = props;
-
-  if (!data) return null;
-
-  return (
-    <BarScale
-      min={0}
-      max={100}
-      screenReaderText={text.barscale_screenreader_text}
-      value={data.last_value.hospital_moving_avg_per_region}
-      id="opnames"
-      rangeKey="hospital_moving_avg_per_region"
-      gradient={[
-        {
-          color: '#3391CC',
-          value: 0,
-        },
-      ]}
-      showAxis={showAxis}
-    />
-  );
-}
-
 const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
   const { data } = props;
+  const router = useRouter();
 
   const resultsPerRegion: ResultsPerRegion | undefined =
     data?.results_per_region;
@@ -63,7 +39,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
   return (
     <>
       <ContentHeader
-        category="Medische indicatoren"
+        category={siteText.veiligheidsregio_layout.headings.medisch}
         title={getLocalTitleForRegion(text.titel, data.code)}
         Icon={Ziekenhuis}
         subtitle={text.pagina_toelichting}
@@ -98,23 +74,26 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
           />
         </article>
       )}
-      <article className="metric-article layout-two-column">
-        <div className="column-item column-item-extra-margin">
+      <article className="metric-article layout-chloropleth">
+        <div className="chloropleth-header">
           <h3>{getLocalTitleForRegion(text.map_titel, data.code)}</h3>
           <p>{text.map_toelichting}</p>
-
-          <MunicipalityLegenda
-            metricName="hospital_admissions"
-            title={siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel}
-          />
         </div>
 
-        <div className="column-item column-item-extra-margin">
+        <div className="chloropleth-chart">
           <MunicipalityChloropleth
             selected={selectedMunicipalCode}
             highlightSelection={false}
             metricName="hospital_admissions"
             tooltipContent={hospitalAdmissionsTooltip}
+            onSelect={createSelectMunicipalHandler(router)}
+          />
+        </div>
+
+        <div className="chloropleth-legend">
+          <MunicipalityLegenda
+            metricName="hospital_admissions"
+            title={siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel}
           />
         </div>
       </article>

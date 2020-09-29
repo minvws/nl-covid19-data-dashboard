@@ -3,13 +3,13 @@ import fs from 'fs';
 
 import Head from 'next/head';
 
-import { getLayoutWithMetadata, FCWithLayout } from 'components/layout';
-import MaxWidth from 'components/maxWidth';
+import { getLayoutWithMetadata, FCWithLayout } from '~/components/layout';
+import { MaxWidth } from '~/components/maxWidth';
 
 import styles from './over.module.scss';
-import siteText from 'locale';
+import siteText from '~/locale/index';
 
-import MDToHTMLString from 'utils/MDToHTMLString';
+import { MDToHTMLString } from '~/utils/MDToHTMLString';
 
 interface StaticProps {
   props: {

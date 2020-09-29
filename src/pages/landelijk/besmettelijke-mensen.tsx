@@ -1,53 +1,26 @@
 import Link from 'next/link';
 
-import BarScale from 'components/barScale';
-import Legenda from 'components/legenda';
-import { FCWithLayout } from 'components/layout';
-import { getNationalLayout } from 'components/layout/NationalLayout';
-import { AreaChart } from 'components/charts/index';
+import { Legenda } from '~/components/legenda';
+import { FCWithLayout } from '~/components/layout';
+import { getNationalLayout } from '~/components/layout/NationalLayout';
+import { AreaChart } from '~/components/charts/index';
 
-import Ziektegolf from 'assets/ziektegolf.svg';
+import { InfectiousPeopleBarScale } from '~/components/landelijk/infectious-people-barscale';
 
-import formatNumber from 'utils/formatNumber';
+import Ziektegolf from '~/assets/ziektegolf.svg';
+import { formatNumber } from '~/utils/formatNumber';
 
-import siteText from 'locale';
+import siteText from '~/locale/index';
 
 import {
   InfectiousPeopleCount,
   InfectiousPeopleCountNormalized,
-} from 'types/data.d';
-import { ContentHeader } from 'components/layout/Content';
-import getNlData, { INationalData } from 'static-props/nl-data';
+} from '~/types/data.d';
+import { ContentHeader } from '~/components/layout/Content';
+import getNlData, { INationalData } from '~/static-props/nl-data';
 
 const text: typeof siteText.besmettelijke_personen =
   siteText.besmettelijke_personen;
-
-export function InfectiousPeopleBarScale(props: {
-  data: InfectiousPeopleCountNormalized | undefined;
-  showAxis: boolean;
-}) {
-  const { data, showAxis } = props;
-
-  if (!data) return null;
-
-  return (
-    <BarScale
-      min={0}
-      max={80}
-      screenReaderText={text.barscale_screenreader_text}
-      value={data.last_value.infectious_avg_normalized}
-      id="besmettelijk"
-      rangeKey="infectious_normalized_high"
-      gradient={[
-        {
-          color: '#3391CC',
-          value: 0,
-        },
-      ]}
-      showAxis={showAxis}
-    />
-  );
-}
 
 const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
   const { data } = props;
@@ -60,13 +33,14 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
   return (
     <>
       <ContentHeader
-        category="Medische indicatoren"
+        category={siteText.nationaal_layout.headings.medisch}
         title={text.title}
         Icon={Ziektegolf}
         subtitle={text.toelichting_pagina}
         metadata={{
           datumsText: text.datums,
           dateUnix: count?.last_value?.date_of_report_unix,
+          dateInsertedUnix: count?.last_value?.date_of_insertion_unix,
           dataSource: text.bron,
         }}
       />
@@ -99,11 +73,10 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
         </article>
       </div>
 
-      <article className="metric-article">
-        <h3>{text.linechart_titel}</h3>
-
-        {count?.values && (
+      {count?.values && (
+        <article className="metric-article">
           <AreaChart
+            title={text.linechart_titel}
             data={count.values.map((value) => ({
               avg: value.infectious_avg,
               min: value.infectious_low,
@@ -114,13 +87,12 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
             lineLegendLabel={text.lineLegendLabel}
             timeframeOptions={['all', '5weeks']}
           />
-        )}
-
-        <Legenda>
-          <li className="blue">{text.legenda_line}</li>
-          <li className="gray square">{text.legenda_marge}</li>
-        </Legenda>
-      </article>
+          <Legenda>
+            <li className="blue">{text.legenda_line}</li>
+            <li className="gray square">{text.legenda_marge}</li>
+          </Legenda>
+        </article>
+      )}
     </>
   );
 };

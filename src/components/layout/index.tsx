@@ -2,18 +2,18 @@ import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { WithChildren } from 'types';
-import text from 'locale';
-import { ILastGeneratedData } from 'static-props/last-generated-data';
+import { WithChildren } from '~/types/index';
+import text from '~/locale/index';
+import { ILastGeneratedData } from '~/static-props/last-generated-data';
 import styles from './layout.module.scss';
 
-import useMediaQuery from 'utils/useMediaQuery';
-import formatDate from 'utils/formatDate';
-import replaceVariablesInText from 'utils/replaceVariablesInText';
-import getLocale from 'utils/getLocale';
+import { useMediaQuery } from '~/utils/useMediaQuery';
+import { formatDate } from '~/utils/formatDate';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { getLocale } from '~/utils/getLocale';
 
-import SEOHead from 'components/seoHead';
-import MaxWidth from 'components/maxWidth';
+import { SEOHead } from '~/components/seoHead';
+import { MaxWidth } from '~/components/maxWidth';
 
 export interface LayoutProps {
   url?: string;
@@ -65,10 +65,9 @@ function Layout(props: WithChildren<LayoutProps & ILastGeneratedData>) {
   const locale = getLocale();
   const showSmallLogo = useMediaQuery('(max-width: 480px)', true);
 
-  const dateTime = new Date(Number(lastGenerated) * 1000).toISOString();
-
+  const dateTime = formatDate(Number(lastGenerated), 'iso');
   const dateOfInsertion = lastGenerated
-    ? formatDate(Number(lastGenerated) * 1000, 'long')
+    ? formatDate(Number(lastGenerated), 'long')
     : undefined;
 
   return (
@@ -263,7 +262,7 @@ function Layout(props: WithChildren<LayoutProps & ILastGeneratedData>) {
                     __html: replaceVariablesInText(
                       text.laatst_bijgewerkt.message,
                       {
-                        dateOfInsertion: `<time dateTime=${dateTime}>${dateOfInsertion}</time>`,
+                        dateOfInsertion: `<time datetime=${dateTime}>${dateOfInsertion}</time>`,
                       }
                     ),
                   }}

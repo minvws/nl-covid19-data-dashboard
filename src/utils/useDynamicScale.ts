@@ -17,7 +17,7 @@ interface IDynamicScale {
  * if suddenly the value is higher than your desired min/max extent.
  */
 
-function useDynamicScale(
+export function useDynamicScale(
   min: number,
   max: number,
   dataKey: string,
@@ -64,5 +64,3 @@ function useDynamicScale(
   }
   return { scale, isValidating };
 }
-
-export default useDynamicScale;

@@ -1,22 +1,24 @@
 import path from 'path';
 import fs from 'fs';
 
-import { FCWithLayout } from 'components/layout';
-import { getSafetyRegionLayout } from 'components/layout/SafetyRegionLayout';
+import { FCWithLayout } from '~/components/layout';
+import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { useRouter } from 'next/router';
-import EscalationLevel1 from 'assets/niveau-1.svg';
-import EscalationLevel2 from 'assets/niveau-2.svg';
-import EscalationLevel3 from 'assets/niveau-3.svg';
-import styles from 'components/chloropleth/tooltips/tooltip.module.scss';
+import EscalationLevel1 from '~/assets/niveau-1.svg';
+import EscalationLevel2 from '~/assets/niveau-2.svg';
+import EscalationLevel3 from '~/assets/niveau-3.svg';
+import styles from '~/components/chloropleth/tooltips/tooltip.module.scss';
 
-import siteText from 'locale';
-import MDToHTMLString from 'utils/MDToHTMLString';
+import siteText from '~/locale/index';
+import { MDToHTMLString } from '~/utils/MDToHTMLString';
 
-import SafetyRegionChloropleth, {
+import {
+  SafetyRegionChloropleth,
   thresholds,
-} from 'components/chloropleth/SafetyRegionChloropleth';
-import useMediaQuery from 'utils/useMediaQuery';
-import { escalationTooltip } from 'components/chloropleth/tooltips/region/escalationTooltip';
+} from '~/components/chloropleth/SafetyRegionChloropleth';
+import { useMediaQuery } from '~/utils/useMediaQuery';
+import { escalationTooltip } from '~/components/chloropleth/tooltips/region/escalationTooltip';
+import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
 
 const escalationThresholds = thresholds.escalation_levels.thresholds;
 
@@ -60,41 +62,37 @@ const SafetyRegion: FCWithLayout<any> = (props) => {
 
   const { text } = props;
 
-  const onSelectRegion = (context: any) => {
-    router.push(
-      '/veiligheidsregio/[code]/positief-geteste-mensen',
-      `/veiligheidsregio/${context.vrcode}/positief-geteste-mensen`
-    );
-  };
-
   const mapHeight = isLargeScreen ? '500px' : '400px';
 
   return (
-    <>
-      <article className="index-article layout-two-column">
-        <div className="column-item-no-margin column-item-small">
-          <h2 className="text-max-width">
-            {text.veiligheidsregio_index.selecteer_titel}
-          </h2>
-          <div
-            className="text-max-width"
-            dangerouslySetInnerHTML={{
-              __html: text.veiligheidsregio_index.selecteer_toelichting,
-            }}
-          />
-          <EscalationMapLegenda text={text} />
-        </div>
-        <div className="column-item-no-margin column-item">
-          <SafetyRegionChloropleth
-            metricName="escalation_levels"
-            metricProperty="escalation_level"
-            style={{ height: mapHeight }}
-            onSelect={onSelectRegion}
-            tooltipContent={escalationTooltip(router)}
-          />
-        </div>
-      </article>
-    </>
+    <article className="index-article layout-chloropleth">
+      <div className="chloropleth-header">
+        <h2>{text.veiligheidsregio_index.selecteer_titel}</h2>
+        {/**
+         * This is rendering html content which has been generated from
+         * markdown text.
+         */}
+        <div
+          dangerouslySetInnerHTML={{
+            __html: text.veiligheidsregio_index.selecteer_toelichting,
+          }}
+        />
+      </div>
+
+      <div className="chloropleth-chart">
+        <SafetyRegionChloropleth
+          metricName="escalation_levels"
+          metricProperty="escalation_level"
+          style={{ height: mapHeight }}
+          onSelect={createSelectRegionHandler(router)}
+          tooltipContent={escalationTooltip(router)}
+        />
+      </div>
+
+      <div className="chloropleth-legend">
+        <EscalationMapLegenda text={text} />
+      </div>
+    </article>
   );
 };
 

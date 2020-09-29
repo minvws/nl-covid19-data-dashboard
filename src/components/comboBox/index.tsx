@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
+import { useRouter } from 'next/router';
 import matchSorter from 'match-sorter';
 import {
   Combobox,
@@ -8,10 +9,10 @@ import {
   ComboboxOption,
 } from '@reach/combobox';
 
-import useThrottle from 'utils/useThrottle';
+import { useThrottle } from '~/utils/useThrottle';
 
-import text from 'locale';
-import useMediaQuery from 'utils/useMediaQuery';
+import text from '~/locale/index';
+import { useMediaQuery } from '~/utils/useMediaQuery';
 
 type TOption = {
   displayName?: string;
@@ -23,8 +24,6 @@ type TProps<Option extends TOption> = {
   placeholder: string;
   handleSelect: (option: Option) => void;
 };
-
-export default ComboBox;
 
 /*
  * Combox is an accessible dropdown with search.
@@ -41,13 +40,17 @@ export default ComboBox;
  * />
  * ```
  */
-function ComboBox<Option extends TOption>(props: TProps<Option>) {
+export function ComboBox<Option extends TOption>(props: TProps<Option>) {
   const { options, placeholder, handleSelect } = props;
 
+  const router = useRouter();
   const inputRef = useRef<HTMLInputElement>();
   const [term, setTerm] = useState<string>('');
   const results = useSearchedOptions<Option>(term, options);
   const isLargeScreen = useMediaQuery('(min-width: 1000px)');
+  const hasRegionSelected =
+    router.pathname === '/gemeente/[code]/positief-geteste-mensen' ||
+    router.pathname === '/veiligheidsregio/[code]/positief-geteste-mensen';
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>): void {
     setTerm(event.target.value);
@@ -68,10 +71,10 @@ function ComboBox<Option extends TOption>(props: TProps<Option>) {
   }
 
   useEffect(() => {
-    if (!inputRef?.current?.value && isLargeScreen) {
+    if (!inputRef?.current?.value && isLargeScreen && !hasRegionSelected) {
       inputRef?.current?.focus();
     }
-  }, [isLargeScreen]);
+  }, [isLargeScreen, hasRegionSelected]);
 
   return (
     <Combobox openOnFocus onSelect={onSelect}>

@@ -2,45 +2,53 @@ import React, { useMemo } from 'react';
 import Highcharts, { SeriesLineOptions } from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-import formatNumber from 'utils/formatNumber';
-import formatDate from 'utils/formatDate';
+import { formatNumber } from '~/utils/formatNumber';
+import { formatDate } from '~/utils/formatDate';
+import { getItemFromArray } from '~/utils/getItemFromArray';
 
 type TranslationStrings = Record<string, string>;
 
 interface Value {
   date: number;
-  value: number | undefined | null;
+  value?: number;
+  week_start_unix: number;
+  week_end_unix: number;
 }
+
+type Week = {
+  start: number;
+  end: number;
+};
 
 type RegionalSewerWaterLineChartProps = {
   averageValues: Value[];
   text: TranslationStrings;
 };
 
-export default RegionalSewerWaterLineChart;
-
 function getOptions(
   averageValues: Value[],
   text: TranslationStrings
 ): Highcharts.Options {
-  const multipleAverageValues = averageValues.length > 1;
+  const hasMultipleValues = averageValues.length > 1;
+  const weekSet: Week[] = averageValues.map((value) => ({
+    start: value.week_start_unix,
+    end: value.week_end_unix,
+  }));
 
   const series: SeriesLineOptions[] = [
     {
       type: 'line',
-      data: averageValues.map((value) => [value.date, value.value]),
+      data: averageValues.map((x) => [x.date, x.value]),
       name: text.average_label_text,
       showInLegend: true,
       color: '#3391CC',
       allowPointSelect: false,
       marker: {
         symbol: 'circle',
-        enabled: !multipleAverageValues,
+        enabled: !hasMultipleValues,
       },
       events: {
-        legendItemClick: function () {
-          return false;
-        },
+        legendItemClick: () => false,
       },
       states: {
         inactive: {
@@ -95,11 +103,10 @@ function getOptions(
         // types say `rotation` needs to be a number,
         // but that doesn’t work.
         rotation: '0' as any,
-        formatter: function (): string {
-          if (this.isFirst || this.isLast) {
-            return formatDate(this.value * 1000, 'axis');
-          }
-          return '';
+        formatter: function () {
+          return this.isFirst || this.isLast
+            ? formatDate(this.value, 'axis')
+            : '';
         },
       },
     },
@@ -111,7 +118,11 @@ function getOptions(
         if (this.series.name !== text.average_label_text) {
           return false;
         }
-        return `${formatDate(this.x * 1000)}: ${formatNumber(this.y)}`;
+        const { start, end } = getItemFromArray(weekSet, this.point.index);
+        return `<strong>${formatDate(start, 'short')} - ${formatDate(
+          end,
+          'short'
+        )}:</strong> ${formatNumber(this.y)}`;
       },
     },
     yAxis: {
@@ -139,7 +150,7 @@ function getOptions(
   return options;
 }
 
-function RegionalSewerWaterLineChart({
+export function RegionalSewerWaterLineChart({
   averageValues,
   text,
 }: RegionalSewerWaterLineChartProps) {

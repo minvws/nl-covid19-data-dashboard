@@ -1,45 +1,19 @@
-import BarScale from 'components/barScale';
-import { FCWithLayout } from 'components/layout';
-import { getNationalLayout } from 'components/layout/NationalLayout';
-import { ContentHeader } from 'components/layout/Content';
-import { LineChart } from 'components/charts/index';
+import { FCWithLayout } from '~/components/layout';
+import { getNationalLayout } from '~/components/layout/NationalLayout';
+import { ContentHeader } from '~/components/layout/Content';
+import { LineChart } from '~/components/charts/index';
 
-import Getest from 'assets/test.svg';
+import { NursingHomeInfectedPeopleBarScale } from '~/components/landelijk/nursing-home-infected-people-barscale';
 
-import siteText from 'locale';
+import Getest from '~/assets/test.svg';
 
-import { InfectedPeopleNurseryCountDaily } from 'types/data.d';
-import getNlData, { INationalData } from 'static-props/nl-data';
+import siteText from '~/locale/index';
+
+import { InfectedPeopleNurseryCountDaily } from '~/types/data.d';
+import getNlData, { INationalData } from '~/static-props/nl-data';
 
 const text: typeof siteText.verpleeghuis_positief_geteste_personen =
   siteText.verpleeghuis_positief_geteste_personen;
-
-export function NursingHomeInfectedPeopleBarScale(props: {
-  data: InfectedPeopleNurseryCountDaily | undefined;
-  showAxis: boolean;
-}) {
-  const { data, showAxis } = props;
-
-  if (!data) return null;
-
-  return (
-    <BarScale
-      min={0}
-      max={100}
-      screenReaderText={text.barscale_screenreader_text}
-      value={data.last_value.infected_nursery_daily}
-      id="positief_verpleeghuis"
-      rangeKey="infected_nursery_daily"
-      gradient={[
-        {
-          color: '#3391CC',
-          value: 0,
-        },
-      ]}
-      showAxis={showAxis}
-    />
-  );
-}
 
 const NursingHomeInfectedPeople: FCWithLayout<INationalData> = (props) => {
   const { data: state } = props;
@@ -50,7 +24,7 @@ const NursingHomeInfectedPeople: FCWithLayout<INationalData> = (props) => {
   return (
     <>
       <ContentHeader
-        category="Verpleeghuiszorg"
+        category={siteText.nationaal_layout.headings.verpleeghuis}
         title={text.titel}
         Icon={Getest}
         subtitle={text.pagina_toelichting}

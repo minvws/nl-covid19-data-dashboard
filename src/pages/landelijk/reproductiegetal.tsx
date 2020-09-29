@@ -1,60 +1,20 @@
-import BarScale from 'components/barScale';
-import Legenda from 'components/legenda';
-import { FCWithLayout } from 'components/layout';
-import { getNationalLayout } from 'components/layout/NationalLayout';
-import { AreaChart } from 'components/charts/index';
-import { ContentHeader } from 'components/layout/Content';
+import { Legenda } from '~/components/legenda';
+import { FCWithLayout } from '~/components/layout';
+import { getNationalLayout } from '~/components/layout/NationalLayout';
+import { AreaChart } from '~/components/charts/index';
+import { ContentHeader } from '~/components/layout/Content';
 
-import Repro from 'assets/reproductiegetal.svg';
+import { ReproductionIndexBarScale } from '~/components/landelijk/reproduction-index-barscale';
 
-import siteText from 'locale';
+import Repro from '~/assets/reproductiegetal.svg';
 
-import { ReproductionIndex as ReproductionIndexData } from 'types/data.d';
+import siteText from '~/locale/index';
 
-import getNlData, { INationalData } from 'static-props/nl-data';
+import { ReproductionIndex as ReproductionIndexData } from '~/types/data.d';
+
+import getNlData, { INationalData } from '~/static-props/nl-data';
 
 const text: typeof siteText.reproductiegetal = siteText.reproductiegetal;
-
-export function ReproductionIndexBarScale(props: {
-  data: ReproductionIndexData | undefined;
-  lastKnown: ReproductionIndexData | undefined;
-  showAxis: boolean;
-}) {
-  const { data, lastKnown, showAxis } = props;
-
-  if (!data) return null;
-
-  return (
-    <BarScale
-      min={0}
-      max={2}
-      screenReaderText={text.barscale_screenreader_text}
-      signaalwaarde={1}
-      value={lastKnown?.last_value?.reproduction_index_avg}
-      id="repro"
-      rangeKey="reproduction_index_avg"
-      gradient={[
-        {
-          color: '#69c253',
-          value: 0,
-        },
-        {
-          color: '#69c253',
-          value: 1,
-        },
-        {
-          color: '#D3A500',
-          value: 1.0104,
-        },
-        {
-          color: '#f35065',
-          value: 1.125,
-        },
-      ]}
-      showAxis={showAxis}
-    />
-  );
-}
 
 const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
   const { data: state } = props;
@@ -67,14 +27,15 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
   return (
     <>
       <ContentHeader
-        category="Medische indicatoren"
+        category={siteText.nationaal_layout.headings.medisch}
         title={text.titel}
         Icon={Repro}
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: data?.last_value?.date_of_report_unix,
-          dateInsertedUnix: data?.last_value?.date_of_insertion_unix,
+          dateUnix: lastKnownValidData?.last_value?.date_of_report_unix,
+          dateInsertedUnix:
+            lastKnownValidData?.last_value?.date_of_insertion_unix,
           dataSource: text.bron,
         }}
       />
@@ -102,10 +63,10 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
         </div>
       </article>
 
-      <article className="metric-article">
-        <h3>{text.linechart_titel}</h3>
-        {data?.values && (
+      {data?.values && (
+        <article className="metric-article">
           <AreaChart
+            title={text.linechart_titel}
             data={data.values.map((value) => ({
               avg: value.reproduction_index_avg,
               min: value.reproduction_index_low,
@@ -117,13 +78,12 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
             lineLegendLabel={text.lineLegendLabel}
             timeframeOptions={['all', '5weeks']}
           />
-        )}
-
-        <Legenda>
-          <li className="blue">{text.legenda_r}</li>
-          <li className="gray square">{text.legenda_marge}</li>
-        </Legenda>
-      </article>
+          <Legenda>
+            <li className="blue">{text.legenda_r}</li>
+            <li className="gray square">{text.legenda_marge}</li>
+          </Legenda>
+        </article>
+      )}
     </>
   );
 };
