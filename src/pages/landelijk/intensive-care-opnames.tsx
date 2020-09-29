@@ -30,6 +30,7 @@ const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
         metadata={{
           datumsText: text.datums,
           dateUnix: data?.last_value?.date_of_report_unix,
+          dateInsertedUnix: data?.last_value?.date_of_insertion_unix,
           dataSource: text.bron,
         }}
       />
