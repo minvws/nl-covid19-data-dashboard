@@ -224,12 +224,12 @@ export default function AreaChart(props: AreaChartProps) {
   const rangeData: TRange[] = useMemo(() => {
     return data
       .sort((a, b) => a.date - b.date)
-      .map((d) => [new Date(d.date * 1000), d.min, d.max]);
+      .map((d) => [new Date(d.date), d.min, d.max]);
   }, [data]);
 
   const lineData: TLine[] = useMemo(() => {
     return data.map((value) => {
-      return [new Date(value.date * 1000), value.avg];
+      return [new Date(value.date), value.avg];
     });
   }, [data]);
 
