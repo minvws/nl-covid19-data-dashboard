@@ -4,9 +4,6 @@ import { shouldPolyfill as shouldPolyfillDateTimeFormat } from '@formatjs/intl-d
 
 import { targetLanguage } from '~/locale/index';
 
-import '@formatjs/intl-datetimeformat/locale-data/en';
-import '@formatjs/intl-datetimeformat/locale-data/nl';
-
 export async function polyfill() {
   // This platform already supports Intl.getCanonicalLocales
   if (shouldPolyfillCanonicalLocales()) {
