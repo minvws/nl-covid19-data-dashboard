@@ -10,7 +10,7 @@
   },
   "notificatie": {
     "titel": "Sterke stijging Covid-19 besmettingen, opnames in ziekenhuizen en op de IC",
-    "bericht": "De afgelopen week (16 t/m 22 september) is het aantal nieuwe positief geteste personen met 60% toegenomen. Zuid-Holland, Noord-Holland, Utrecht en Groningen waren de provincies met de meeste nieuwe besmettingen. Er is een stijgende trend zichtbaar in het aantal positief geteste verpleeghuisbewoners. De aantallen patiënten die vanwege COVID-19 zijn opgenomen in het ziekenhuis of op de intensive care zijn ook flink gestegen.  \n\nHet risiconiveau per regio kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2) of ‘ernstig’ (niveau 3) zijn. In 14 van de 25 regio’s is de situatie zorgelijk.",
+    "bericht": "De afgelopen week (16 t/m 22 september) is het aantal nieuwe positief geteste personen met 60% toegenomen. Zuid-Holland, Noord-Holland, Utrecht en Groningen waren de provincies met de meeste nieuwe besmettingen. Er is een stijgende trend zichtbaar in het aantal positief geteste verpleeghuisbewoners. De aantallen patiënten die vanwege COVID-19 zijn opgenomen in het ziekenhuis of op de intensive care zijn ook flink gestegen.  \n\nHet risiconiveau per regio kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2) of ‘ernstig’ (niveau 3) zijn. In 11 van de 25 regio’s is de situatie zorgelijk. De situatie in de 3 regio’s Amsterdam-Amstelland, Haaglanden en Rotterdam-Rijnmond is ernstig.",
     "link": {
       "text": "Bekijk de toelichting van het RIVM",
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel"
@@ -95,7 +95,7 @@
     "linechart_titel": "Ziekenhuisopnames over tijd",
     "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "chloropleth_legenda": {
-      "titel": "Ziekenhuis opnames",
+      "titel": "Ziekenhuisopnames",
       "geen_meldingen": "Geen meldingen"
     }
   },
@@ -148,7 +148,7 @@
   },
   "besmettelijke_personen": {
     "title": "Aantal besmettelijke mensen",
-    "datums": "Waarde van {{dateOfReport}}. Wordt wekelijks bijgewerkt.",
+    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/097155aa-75eb-4caa-8ed3-4c6edb80467e",
       "text": "RIVM"
@@ -238,7 +238,7 @@
       "text": "RIVM"
     },
     "titel": "Aantal besmette locaties",
-    "pagina_toelichting": "Dit getal is een inschatting van het aantal nieuwe verpleeghuislocaties waar sprake is van tenminste een COVID-19 besmetting op basis van een positieve test.",
+    "pagina_toelichting": "Dit getal is een inschatting van het aantal nieuwe verpleeghuislocaties waar sprake is van tenminste een COVID-19 besmetting op basis van een positieve test.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de cijferverantwoording.",
     "barscale_titel": "Aantal nieuwe locaties per dag",
     "barscale_toelichting": "Aantal nieuwe locaties waarbij tenminste één bewoner positief getest is. Een verpleeghuis wordt meegeteld als ‘nieuwe locatie’ wanneer er tenminste 28 dagen, dit is twee keer de incubatietijd, geen nieuwe patiënten zijn geweest.",
     "kpi_titel": "Totaal aantal besmette locaties",
@@ -255,7 +255,7 @@
     "titel": "Aantal positief geteste bewoners",
     "barscale_titel": "Aantal positief geteste bewoners in verpleeghuizen per dag",
     "extra_uitleg": "Aantal positief geteste bewoners in verpleeghuizen per dag.",
-    "pagina_toelichting": "Aantal positief geteste bewoners in verpleeghuizen per dag. Dit getal is een inschatting van het aantal gemelde bewoners in verpleeghuizen dat in Nederland positief getest is en COVID-19 heeft.",
+    "pagina_toelichting": "Aantal positief geteste bewoners in verpleeghuizen per dag. Dit getal is een inschatting van het aantal gemelde bewoners in verpleeghuizen dat in Nederland positief getest is en COVID-19 heeft.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de cijferverantwoording.",
     "linechart_titel": "Verloop over tijd",
     "barscale_screenreader_text": "{{value}} positief geteste bewoners.",
     "titel_sidebar": "Aantal positief geteste bewoners per dag"
@@ -406,7 +406,7 @@
       },
       {
         "cijfer": "Verpleeghuiszorg: positief geteste bewoners, besmette locaties en sterfte.",
-        "verantwoording": "Deze informatie over Verpleeghuiszorg wordt dagelijks beschikbaar gesteld door het RIVM en als JSON-file aangeleverd bij het ministerie van VWS. Het RIVM publiceert de informatie gelijktijdig met het beschikbaar stellen aan het Ministerie van VWS ook in een pdf bestand openbaar op de website. De waarden zoals weergeven in het bestand worden direct overgenomen op het dashboard."
+        "verantwoording": "Deze informatie over Verpleeghuiszorg wordt dagelijks beschikbaar gesteld door het RIVM en als JSON-file aangeleverd bij het ministerie van VWS. Het RIVM publiceert de informatie gelijktijdig met het beschikbaar stellen aan het Ministerie van VWS ook in een pdf bestand openbaar op de website. De waarden zoals weergeven in het bestand worden direct overgenomen op het dashboard.\n\nDe manier waarop ingeschat wordt hoeveel verpleeghuisbewoners en verpleeghuislocaties zijn besmet met corona is verbeterd. Sinds 1 juli registreren de GGD’en bij iedere melding of een nieuw besmette persoon in een verpleeghuis woont. Tot nog toe werd deze informatie echter nog niet benut en werden de aantallen via een andere methode geschat. Dit leidde tot een flinke overschatting van het aantal besmette verpleeghuislocaties. De cijfers geven daardoor - met terugwerkende kracht vanaf 1 juli - een veel beter beeld van het werkelijke aantal besmette personen en verpleeghuislocaties.\n\nOude definitie verpleeghuisbewoner:\nIemand wordt als een verpleeghuisbewoner geteld wanneer deze volgens het centrale administratiesysteem (OSIRIS):Op basis van zijn postcode gekoppeld kan worden aan een bekende verpleeghuislocatie of woonzorgcentrum voor ouderen ófEen setting (plaats waar de besmetting mogelijk heeft plaatsgevonden) ‘Verpleeghuis’  of een daaraan gerelateerde term heeft ófAan de hand van een andere term in het systeem in verband gebracht kan worden aan een verpleeghuis of woonzorgcentrum voor ouderen\nDaarnaast moet de persoon\n- ouder zijn dan 70 jaar én\n- een gezondheidsmedewerker zijn én\n- geen beroep hebben.\n\nNieuwe definitie verpleeghuisbewoner:\nSinds 1 juli vraagt de GGD voor iedere nieuw positief geteste persoon of dit een verpleeghuisbewoner of een bewoner van een woonzorgcentrum voor ouderen is. Deze informatie wordt gebruikt voor de nieuwe definitie.\nIemand wordt als een verpleeghuisbewoner aangemerkt wanneer deze volgens de gegevens van OSIRIS\n- Een bewoner is van een verpleeghuis of van een woonzorgcentrum voor ouderen\n- Indien het onbekend is of een persoon in een verpleeghuis of een woonzorgcentrum voor ouderen woont, wordt de oude definitie gebruikt.\n\nOude definitie besmette verpleeghuislocatie:\nEen verpleeghuislocatie is ooit besmet wanneer:\n- de locatie voorkomt in de door ons gebruikte lijst van bekende verpleeghuislocaties en woonzorgcentra voor ouderen\n- er tenminste 1 besmette persoon is die op basis van zijn postcode aan deze verpleeghuislocatie of woonzorgcentrum voor ouderen gekoppeld kan worden\n\nEen verpleeghuislocatie is nu besmet wanneer:\n- de verpleeghuislocatie of woonzorgcentrum voor ouderen voorkomt in de door ons gebruikte lijst van bekende verpleeghuislocaties en woonzorgcentra voor ouderen\n- er tenminste 1 besmette persoon is die op basis van zijn postcode aan deze verpleeghuislocatie of woonzorgcentrum voor ouderen gekoppeld kan worden waarvan de laatste eerste ziektedag minder dan 28 dagen geleden was\n\nNieuwe definitie besmette verpleeghuislocatie:\nEen verpleeghuislocatie is ooit besmet wanneer:\n- de locatie voorkomt in de door ons gebruikte lijst van bekende verpleeghuislocaties en woonzorgcentra voor ouderen\n- er tenminste 1 besmette bewoner is die op basis van zijn postcode aan deze verpleeghuislocatie of dit woonzorgcentrum voor ouderen gekoppeld kan worden\n\nEen verpleeghuislocatie is nu besmet wanneer:\n- de locatie voorkomt in de door ons gebruikte lijst van bekende verpleeghuislocaties en woonzorgcentra voor ouderen\n- er tenminste 1 besmette bewoner is die op basis van zijn postcode aan deze verpleeghuislocatie of dit woonzorgcentrum voor ouderen gekoppeld kan worden waarvan de laatste eerste ziektedag minder dan 28 dagen geleden was."
       },
       {
         "cijfer": "Verpleeghuiszorg: aantal besmette locaties",
@@ -492,7 +492,7 @@
   "regionaal_index": {
     "your_safety_region": "Veiligheidsregio",
     "select_safety_region_municipality": "Selecteer een veiligheidsregio of gemeente",
-    "label_municipalities": "Gemeentes",
+    "label_municipalities": "Gemeenten",
     "label_safety_regions": "Veiligheidsregio's",
     "select_municipality": "Selecteer een gemeente",
     "select_region_municipality_legend": "Selecteer een gemeente:",
@@ -570,7 +570,7 @@
     "kpi_titel": "Aantal positief geteste mensen:",
     "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn en COVID-19 hebben.",
     "map_titel": "Verdeling positief geteste mensen in {{safetyRegion}}",
-    "map_toelichting": "Deze kaart laat zien van hoeveel mensen in de gemeentes van deze veiligheidsregio's gisteren gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
+    "map_toelichting": "Deze kaart laat zien van hoeveel mensen in de gemeenten van deze veiligheidsregio's gisteren gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "linechart_titel": "Verloop over tijd",
     "linechart_toelichting": "Deze grafiek laat zien van hoeveel mensen afgelopen periode in deze veiligheidsregio gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
@@ -652,7 +652,7 @@
     "kpi_titel": "Aantal positief geteste mensen:",
     "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn en COVID-19 hebben.",
     "map_titel": "Verdeling positief geteste mensen in {{municipality}}",
-    "map_toelichting": "Deze kaart laat zien van hoeveel mensen in deze gemeentes gisteren gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
+    "map_toelichting": "Deze kaart laat zien van hoeveel mensen in deze gemeenten gisteren gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "linechart_titel": "Verloop over tijd",
     "linechart_toelichting": "Deze grafiek laat zien van hoeveel mensen afgelopen periode in deze gemeente gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
@@ -693,7 +693,7 @@
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Risiconiveaus",
-    "selecteer_toelichting": "De kaart geeft het risiconiveau per regio weer. Dat kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2) of ‘ernstig’ (niveau 3) zijn. Per regio worden passende maatregelen genomen.\n\n[Regionale maatregelen](https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/nederlandse-maatregelen-tegen-het-coronavirus/lokale-maatregelen-tegen-verspreiding-coronavirus/in-de-regio)\n\n[Meer over de risiconiveaus](/over-risiconiveaus)"
+    "selecteer_toelichting": "De kaart geeft het risiconiveau per regio weer. Dat kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2) of ‘ernstig’ (niveau 3) zijn. Per regio worden passende maatregelen genomen.\n\n[Landelijke maatregelen](https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/nieuws/2020/09/28/aangescherpte-maatregelen-om-de-verspreiding-van-het-virus-terug-te-dringen)\n\n[Regionale maatregelen](https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/nederlandse-maatregelen-tegen-het-coronavirus/lokale-maatregelen-tegen-verspreiding-coronavirus/in-de-regio)\n\n[Meer over de risiconiveaus](/over-risiconiveaus)"
   },
   "gemeente_index": {
     "selecteer_titel": "Selecteer een gemeente",
@@ -707,7 +707,7 @@
   },
   "escalatie_niveau": {
     "titel": "Risiconiveaus",
-    "toelichting": "De kaart geeft het risiconiveau per regio weer. Dat kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2) of ‘ernstig’ (niveau 3) zijn. Per regio worden passende maatregelen genomen.\n\n[Regionale maatregelen](https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/nederlandse-maatregelen-tegen-het-coronavirus/lokale-maatregelen-tegen-verspreiding-coronavirus/in-de-regio)\n\n[Meer over de risiconiveaus](/over-risiconiveaus)",
+    "toelichting": "De kaart geeft het risiconiveau per regio weer. Dat kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2) of ‘ernstig’ (niveau 3) zijn. Per regio worden passende maatregelen genomen.\n\n[Landelijke maatregelen](https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/nieuws/2020/09/28/aangescherpte-maatregelen-om-de-verspreiding-van-het-virus-terug-te-dringen)\n\n[Regionale maatregelen](https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/nederlandse-maatregelen-tegen-het-coronavirus/lokale-maatregelen-tegen-verspreiding-coronavirus/in-de-regio)\n\n[Meer over de risiconiveaus](/over-risiconiveaus)",
     "types": {
       "1": {
         "titel": "Waakzaam",
@@ -752,7 +752,7 @@
   },
   "over_risiconiveaus": {
     "title": "Over risiconiveaus",
-    "toelichting": "Er zijn veel gegevens over het coronavirus. Iedere week wordt bekeken of de situatie zich positief of negatief ontwikkelt. Dan beoordelen het Rijk, de GGD’en, het RIVM en de veiligheidsregio’s samen de situatie en stellen risiconiveaus vast. Moeten we waakzaam zijn (niveau 1), is de situatie zorgelijk (niveau 2) of is de situatie zelfs ernstig te noemen (niveau 3)? Zo is voor iedereen in één oogopslag duidelijk hoe het ervoor staat met het coronavirus per regio. Afhankelijk van het risiconiveau kunnen bestuurders maatregelen treffen. Daarbij wordt altijd gekeken naar de effecten van de maatregelen op de samenleving en de economie. De maatregelen zijn maatwerk en kunnen per regio verschillen.\n\nWat betekenen de drie risiconiveaus? \n\n1. *Waakzaam*. Er is sprake van een beheersbare situatie. Het aantal nieuwe besmettingen is laag. Kwetsbare groepen dienen alert te zijn. Het bron-en contactonderzoek is overwegend effectief. Maatregelen worden voldoende nageleefd en zijn te handhaven. Er is voldoende regionale zorgcapaciteit beschikbaar. Aanvullende maatregelen zijn erop gericht om de bestaande aanpak beter te laten functioneren.\n\n2. *Zorgelijk*. De situatie ontwikkelt zich negatief. Het aantal nieuwe besmettingen neemt toe. Maatwerk is nodig om kwetsbaren groepen te beschermen. Als de situatie voortduurt, wordt het bron- en contactonderzoek ineffectief. Maatregelen worden onvoldoende nageleefd. De druk op de regionale zorgcapaciteit neemt toe. De bestaande aanpak moet met aanvullende maatregelen worden versterkt om de verspreiding van het virus weer onder controle te krijgen en terug te keren naar een beheersbare situatie.\n\n3. *Ernstig*. Hard ingrijpen is noodzakelijk om verdere escalatie te voorkomen en terug te keren naar een beheersbare situatie (waakzaam). Het aantal nieuwe besmettingen neemt snel toe. Het bron- en contactonderzoek is niet meer effectief, waardoor het zicht op de verspreiding afneemt. Maatregelen worden onvoldoende nageleefd. De regionale zorgcapaciteit is onvoldoende. Maatregelen zijn erop gericht om (regionale) overbelasting van de zorg te voorkomen, kwetsbaren te beschermen en weer zicht op de verspreiding van het virus te krijgen."
+    "toelichting": "Iedere week wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. Dan beoordelen het Rijk, de GGD’en, het RIVM en de veiligheidsregio’s samen de situatie. De minister van VWS stelt vervolgens vast op welk risiconiveau een regio zit. Moeten we waakzaam zijn (niveau 1), is de situatie zorgelijk (niveau 2) of is de situatie zelfs ernstig te noemen (niveau 3)?\n\nOp basis van het risiconiveau nemen het Rijk of de veiligheidsregio passende maatregelen. Maatregelen zijn afhankelijk van de lokale situatie en kunnen daarom tussen regio’s verschillen.\n\n**Wat bepaalt het risiconiveau van een regio?**\n\nIn welk risiconiveau een regio zit, wordt bepaald door te kijken naar de situatie van een regio, die van de omliggende regio’s en de situatie in de rest van het land. Hiervoor wordt gekeken naar het coronadashboard, het weekrapport van het RIVM, de duiding van de GGD’en en de duiding van de veiligheidsregio’s.\n\nVoor het risiconiveau van een regio wordt gekeken naar een aantal aspecten, bijvoorbeeld:\n\n- Hoe snel neemt het aantal nieuwe besmettingen toe?\n- Zijn er extra maatregelen nodig voor kwetsbare groepen?\n- Hoe effectief is het bron- en contactonderzoek nog?\n- Hoe goed worden de maatregelen nageleefd?\n- Is er nog voldoende zorg beschikbaar?\n\n**Wanneer gaat een regio naar ‘zorgelijk’ of ‘ernstig’?**\n\nOm te beoordelen of een regio naar een zorgelijk of ernstig niveau moet, wordt ook gekeken naar een aantal cijfers. Dit zijn bijvoorbeeld het aantal en het percentage positieve testuitslagen:\n- Een regio gaat in principe van ‘waakzaam’ naar ‘zorgelijk’ als er in een week meer dan 50 positieve testuitslagen per 100.000 inwoners zijn. Dit komt overeen met het elke dag overschrijden van de signaalwaarde van 7 positieve testuitslagen per 100.000 inwoners. Ook telt mee als meer dan 5 procent van de afgenomen testen positief is.\n- Een regio gaat in principe van ‘zorgelijk’ naar ‘ernstig’ als er in een week meer dan 150 positieve testuitslagen per 100.000 inwoners zijn. Of als meer dan 10 procent van de afgenomen testen positief is.\n\nElke maandag berekent het RIVM welke regio’s hieraan voldoen. In de dagen erna wordt dieper in de situatie in deze regio’s gedoken. Als de situatie inderdaad zorgelijk of ernstig is, kan de minister van VWS (Hugo de Jonge) besluiten een regio op een hoger risiconiveau te zetten. Bovenstaande criteria zijn dus bedoeld als ‘leidraad’.\n\n**Wat betekenen de drie risiconiveaus?**\n\n1. *Waakzaam*. De situatie is beheersbaar. Het aantal nieuwe besmettingen is laag. Kwetsbare groepen dienen alert te zijn. Het bron-en contactonderzoek is overwegend effectief. Maatregelen worden voldoende nageleefd en zijn te handhaven. Er is voldoende zorgcapaciteit. Aanvullende maatregelen zijn erop gericht om de bestaande aanpak beter te laten functioneren.\n\n2. *Zorgelijk*. De situatie ontwikkelt zich negatief. Het aantal nieuwe besmettingen neemt toe. Maatwerk is nodig om kwetsbare groepen te beschermen. Als de situatie voortduurt, wordt het bron- en contactonderzoek ineffectief. Maatregelen worden onvoldoende nageleefd. De druk op de zorgcapaciteit neemt toe. De bestaande aanpak moet met aanvullende maatregelen worden versterkt om de verspreiding van het virus weer onder controle te krijgen en terug te keren naar een beheersbare situatie.\n\n3. *Ernstig*. Hard ingrijpen is noodzakelijk om verdere escalatie te voorkomen en terug te keren naar een beheersbare situatie. Het aantal nieuwe besmettingen neemt snel toe. Intensief maatwerk is nodig om kwetsbare groepen te beschermen. Het bron- en contactonderzoek is niet meer effectief, waardoor het zicht op de verspreiding afneemt. Maatregelen worden onvoldoende nageleefd. De zorgcapaciteit is onvoldoende. Maatregelen zijn erop gericht om (regionale) overbelasting van de zorg te voorkomen, kwetsbaren te beschermen en weer zicht op de verspreiding van het virus te krijgen."
   },
   "over_risiconiveaus_metadata": {
     "title": "Risiconiveaus Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
