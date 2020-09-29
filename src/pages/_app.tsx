@@ -5,6 +5,8 @@ import '~/scss/style.scss';
 import '~/components/legenda/legenda.scss';
 import '~/components/comboBox/comboBox.scss';
 
+import '~/lib/polyfills';
+
 // Import Preact DevTools in development
 // if (process.env.NODE_ENV === 'development') {
 //   // Must use require here as import statements are only allowed
