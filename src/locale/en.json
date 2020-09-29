@@ -693,7 +693,7 @@
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Level of risk",
-    "selecteer_toelichting": "The map indicates the level of risk per region. This can be ‘watchful’ (level 1), ‘worrisome’ (level 2) or ‘serious’ (level 3). Appropriate measures are taken per region.\n\n[Regional measures](https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/nederlandse-maatregelen-tegen-het-coronavirus/lokale-maatregelen-tegen-verspreiding-coronavirus/in-de-regio)\n\n[More about risk levels](/verantwoording)"
+    "selecteer_toelichting": "The map indicates the level of risk per region. This can be ‘watchful’ (level 1), ‘worrisome’ (level 2) or ‘serious’ (level 3). Appropriate measures are taken per region.\n\n[Country-wide measures](https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/nieuws/2020/09/28/aangescherpte-maatregelen-om-de-verspreiding-van-het-virus-terug-te-dringen)\n\n[Regional measures](https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/nederlandse-maatregelen-tegen-het-coronavirus/lokale-maatregelen-tegen-verspreiding-coronavirus/in-de-regio)\n\n[More about risk levels](/over-risiconiveaus)"
   },
   "gemeente_index": {
     "selecteer_titel": "Select your municipality",
@@ -707,7 +707,7 @@
   },
   "escalatie_niveau": {
     "titel": "Level of risk",
-    "toelichting": "The map indicates the level of risk per region. This can be ‘watchful’ (level 1), ‘worrisome’ (level 2) or ‘serious’ (level 3). Appropriate measures are taken per region.\n\n[Regional measures](https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/nederlandse-maatregelen-tegen-het-coronavirus/lokale-maatregelen-tegen-verspreiding-coronavirus/in-de-regio)\n\n[More about risk levels](/verantwoording)",
+    "toelichting": "The map indicates the level of risk per region. This can be ‘watchful’ (level 1), ‘worrisome’ (level 2) or ‘serious’ (level 3). Appropriate measures are taken per region.\n\n[Country-wide measures](https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/nieuws/2020/09/28/aangescherpte-maatregelen-om-de-verspreiding-van-het-virus-terug-te-dringen)\n\n[Regional measures](https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/nederlandse-maatregelen-tegen-het-coronavirus/lokale-maatregelen-tegen-verspreiding-coronavirus/in-de-regio)\n\n[More about risk levels](/over-risiconiveaus)",
     "types": {
       "1": {
         "titel": "Watchful",
