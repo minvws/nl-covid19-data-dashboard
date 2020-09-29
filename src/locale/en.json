@@ -9,8 +9,8 @@
     "title": "Last updated"
   },
   "notificatie": {
-    "titel": "Strong increase in new COVID-19 infections, hospital and ICU admissions ",
-    "bericht": "The number of people who newly tested positive has increased by 60% in the past week (16 to 22 September). The provinces of South-Holland, North-Holland, Utrecht and Groningen had most new infections. There is a rising trend of infections among nursing home residents. The number of admissions of Covid-19 patients to the hospital and ICU also strongly increased. \n\nRisk level per region can be ‘watchful’ (level 1), ‘worrisome’ (level 2) or ‘serious’ (level 3). The situation in 11 of the 25 safety regions is worrisome. In Amsterdam-Amstelland, Haaglanden and Rotterdam-Rijnmond, the situation is considered serious.",
+    "titel": "The strong increase in new COVID-19 infections, hospital and ICU admissions continues",
+    "bericht": "The number of people who newly tested positive has risen sharply in almost all regions and age groups in the past week (23 to 29 September). Also the number of admissions of Covid-19 patients to the hospital and ICU strongly increased. The percentage of people who tested positive in the GGD test centres increased from 2.5% in the last week of August to 7.4% in the past week. \n\nRisk level per region can be ‘watchful’ (level 1), ‘worrisome’ (level 2) or ‘serious’ (level 3). The situation in 11 of the 25 safety regions is worrisome. In Amsterdam-Amstelland, Haaglanden and Rotterdam-Rijnmond, the situation is considered serious.",
     "link": {
       "text": "View the full message from the RIVM",
       "href": "https://www.rivm.nl/en/novel-coronavirus-covid-19/current-information"
@@ -743,7 +743,7 @@
       "href": "https://www.rivm.nl/documenten/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     },
-    "toelichting": "This number is about the total number of persons tested by the municipal health services (GGD) in one week, and how many people had a positive test result. Note that most, but not all tests are conducted by the GGD. That's why the absolute number of positive test cases might differ from the number shown here.",
+    "toelichting": "This number is about the total number of persons tested by the municipal health services (GGD) in one week, for which a result is known and how many of those people had a positive test result. Note that most, but not all tests are conducted by the GGD. That's why the absolute number of positive test cases might differ from the number shown here.",
     "totaal_getest_week_titel": "Number of people tested by GGD",
     "totaal_getest_week_uitleg": "Number of people tested by GGD in one week.",
     "positief_getest_week_titel": "Confirmed cases by GGD",
