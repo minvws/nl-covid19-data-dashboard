@@ -73,6 +73,11 @@ export type TProps<TFeatureProperties> = {
   // This callback is invoked right before a tooltip is shown for one of the features in the featureCollection property.
   // The id is the value that is assigned to the data-id attribute in the featureCallback.
   getTooltipContent: (id: string) => ReactNode;
+
+  /**
+   * Some maps like the gemeente selection map needs different path styling
+   */
+  isSelectorMap?: boolean;
 };
 
 /**
@@ -96,6 +101,7 @@ export function Chloropleth<T>(props: TProps<T>) {
     hoverCallback,
     onPathClick,
     getTooltipContent,
+    isSelectorMap,
   } = props;
 
   const tooltipStore = useRef<UseStore<TooltipState>>(
@@ -147,7 +153,9 @@ export function Chloropleth<T>(props: TProps<T>) {
       <svg
         width={width}
         height={height}
-        className={styles.svgMap}
+        className={`${styles.svgMap} ${
+          isSelectorMap ? styles.selectorMap : ''
+        }`}
         onMouseOver={createSvgMouseOverHandler(timeout, showTooltip)}
         onMouseOut={createSvgMouseOutHandler(timeout, hideTooltip)}
         onClick={createSvgClickHandler(onPathClick, showTooltip, isLargeScreen)}
