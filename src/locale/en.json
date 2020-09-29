@@ -238,7 +238,7 @@
       "text": "RIVM"
     },
     "titel": "Number of infected locations",
-    "pagina_toelichting": "This number is an estimation of the number of new nursing home locations where there is at least one confirmed case.",
+    "pagina_toelichting": "This number is an estimation of the number of new nursing home locations where there is at least one confirmed case.\n\nThe calculation method has been changed on the 29th of September. Please also see the data explanation section.",
     "barscale_titel": "Number of new locations per day",
     "barscale_toelichting": "Number of new locations where there is at least one confirmed case. A nursing home is counted as a 'new location; when there have not been any confirmed cases for at least 28 days, which is twice the incubation period.",
     "kpi_titel": "Total number of infected locations",
@@ -255,7 +255,7 @@
     "titel": "Number of confirmed cases",
     "barscale_titel": "Number of confirmed cases in nursing homes per day",
     "extra_uitleg": "Number of confirmed cases in nursing homes per day.",
-    "pagina_toelichting": "Number of confirmed cases in nursing homes per day. This number is an estimation of the number confirmed cases in nursing home inhabitants.",
+    "pagina_toelichting": "Number of confirmed cases in nursing homes per day. This number is an estimation of the number confirmed cases in nursing home inhabitants.\n\nThe calculation method has been changed on the 29th of September. Please also see the data explanation section.",
     "linechart_titel": "Progression over time",
     "barscale_screenreader_text": "{{value}} Number of residents who tested positive (confirmed cases).",
     "titel_sidebar": "Number of residents who tested positive per day"
@@ -406,7 +406,7 @@
       },
       "6": {
         "cijfer": "Nursing Homes: number of residents testing positive, number of homes with outbreaks, number of deaths.",
-        "verantwoording": "The National Institute for Public Health and the Environment (RIVM) provides the Ministry of Health, Welfare and Sport with information about the COVID-19 situation in nursing homes every day. The data is delivered in JSON format. RIVM publishes this information on its website as a .PDF file at the same time that it is delivered to the ministry. The values in that file are copied directly onto the dashboard."
+        "verantwoording": "The National Institute for Public Health and the Environment (RIVM) provides the Ministry of Health, Welfare and Sport with information about the COVID-19 situation in nursing homes every day. The data is delivered in JSON format. RIVM publishes this information on its website as a .PDF file at the same time that it is delivered to the ministry. The values in that file are copied directly onto the dashboard.\n\nThe way it is estimated how many nursing home residents and nursing homes are infected has been improved. Since the 1st of July the GGD registers per confirmed case if the individual is a nursing home resident. Using this data is more accurate than the approach used before, where an esimation was done on the basis of the 6 character postcode of a positively tested person. This means that the data from the 1st of July onwards whill show a more accurate view of the actual amount of infeced nursing homes and residents."
       },
       "7": {
         "cijfer": "Nursing homes: number of infected locations",
