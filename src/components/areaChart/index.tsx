@@ -50,7 +50,17 @@ function getChartOptions(props: IGetOptions): Highcharts.Options {
     lineLegendLabel,
   } = props;
 
-  const yMax = calculateYMax(rangeData, signaalwaarde);
+  /**
+   * Adding an absolute value to the yMax like in LineChart doesn't seem to
+   * work well for AreaChart given the values it is rendered with. So for
+   * now we use a (relative) 20% increase.
+   */
+  const PADDING_INCREASE = 1.2;
+
+  const yMax = calculateYMax(
+    rangeData,
+    (signaalwaarde || -Infinity) * PADDING_INCREASE
+  );
 
   const options: Highcharts.Options = {
     chart: {
@@ -281,7 +291,7 @@ export default function AreaChart(props: AreaChartProps) {
  * From all the defined range values, extract the highest number so we know how to
  * scale the y-axis
  */
-function calculateYMax(values: TRange[], signaalwaarde = -Infinity) {
+function calculateYMax(values: TRange[], paddedSignaalwaarde: number) {
   const flatValues = values
     /**
      * Better data type definitions will avoid having to deal with this stuff in
@@ -290,10 +300,5 @@ function calculateYMax(values: TRange[], signaalwaarde = -Infinity) {
     .filter(([_date, a, b]) => a !== null && b !== null)
     .flatMap(([_date, a, b]) => [a, b] as [number, number]);
 
-  /**
-   * Adding an absolute value to the yMax like in LineChart doesn't seem to
-   * work well for AreaChart given the values it is rendered with. So for
-   * now we use a (relative) 20% increase.
-   */
-  return Math.max(signaalwaarde * 1.2, ...flatValues);
+  return Math.max(paddedSignaalwaarde, ...flatValues);
 }
