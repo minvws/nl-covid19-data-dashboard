@@ -72,11 +72,10 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
         </article>
       </div>
 
-      <article className="metric-article">
-        <h3>{text.linechart_titel}</h3>
-
-        {count?.values && (
+      {count?.values && (
+        <article className="metric-article">
           <AreaChart
+            title={text.linechart_titel}
             data={count.values.map((value) => ({
               avg: value.infectious_avg,
               min: value.infectious_low,
@@ -87,13 +86,12 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
             lineLegendLabel={text.lineLegendLabel}
             timeframeOptions={['all', '5weeks']}
           />
-        )}
-
-        <Legenda>
-          <li className="blue">{text.legenda_line}</li>
-          <li className="gray square">{text.legenda_marge}</li>
-        </Legenda>
-      </article>
+          <Legenda>
+            <li className="blue">{text.legenda_line}</li>
+            <li className="gray square">{text.legenda_marge}</li>
+          </Legenda>
+        </article>
+      )}
     </>
   );
 };
