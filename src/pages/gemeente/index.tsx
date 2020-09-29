@@ -52,12 +52,12 @@ const Municipality: FCWithLayout<any> = () => {
   const mapHeight = isLargeScreen ? '800px' : '400px';
 
   return (
-    <article className="map-article layout-chloropleth">
-      <div className="chloropleth-header">
+    <article className="map-article">
+      <div>
         <h2>{text.gemeente_index.selecteer_titel}</h2>
         <p>{text.gemeente_index.selecteer_toelichting}</p>
       </div>
-      <div className="chloropleth-chart">
+      <div>
         <MunicipalityChloropleth
           tooltipContent={tooltipContent(router)}
           style={{ height: mapHeight }}

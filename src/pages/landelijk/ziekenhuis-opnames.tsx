@@ -77,14 +77,17 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
             <MunicipalityChloropleth
               metricName="hospital_admissions"
               tooltipContent={hospitalAdmissionsTooltip}
-              onSelect={createSelectMunicipalHandler(router)}
+              onSelect={createSelectMunicipalHandler(
+                router,
+                'ziekenhuis-opnames'
+              )}
             />
           )}
           {selectedMap === 'region' && (
             <SafetyRegionChloropleth
               metricName="hospital_admissions"
               tooltipContent={regionHospitalAdmissionsTooltip}
-              onSelect={createSelectRegionHandler(router)}
+              onSelect={createSelectRegionHandler(router, 'ziekenhuis-opnames')}
             />
           )}
         </div>

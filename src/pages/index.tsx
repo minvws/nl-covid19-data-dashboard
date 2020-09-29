@@ -77,7 +77,7 @@ const Home: FCWithLayout<INationalData> = (props) => {
       <article className="index-article layout-chloropleth">
         <div className="chloropleth-header">
           <h2>{text.veiligheidsregio_index.selecteer_titel}</h2>
-          <p
+          <div
             dangerouslySetInnerHTML={{
               __html: text.veiligheidsregio_index.selecteer_toelichting,
             }}
@@ -95,7 +95,7 @@ const Home: FCWithLayout<INationalData> = (props) => {
         </div>
       </article>
 
-      <article className="metric-article chloropleth-layout">
+      <article className="metric-article layout-chloropleth">
         <div className="chloropleth-header">
           <h3>{text.positief_geteste_personen.map_titel}</h3>
           <p>{text.positief_geteste_personen.map_toelichting}</p>
