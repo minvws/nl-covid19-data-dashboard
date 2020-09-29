@@ -95,7 +95,7 @@ const Home: FCWithLayout<INationalData> = (props) => {
         </div>
       </article>
 
-      <article className="metric-article chloropleth-layout">
+      <article className="metric-article layout-chloropleth">
         <div className="chloropleth-header">
           <h3>{text.positief_geteste_personen.map_titel}</h3>
           <p>{text.positief_geteste_personen.map_toelichting}</p>
