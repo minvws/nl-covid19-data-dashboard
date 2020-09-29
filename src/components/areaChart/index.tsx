@@ -248,13 +248,13 @@ export default function AreaChart(props: AreaChartProps) {
     const filteredRange = getFilteredValues<TRange>(
       rangeData,
       timeframe,
-      (value: TRange) => value[0].getTime()
+      (value: TRange) => value[0].getTime() * 1000
     );
 
     const filteredLine = getFilteredValues<TLine>(
       lineData,
       timeframe,
-      (value: TLine) => value[0].getTime()
+      (value: TLine) => value[0].getTime() * 1000
     );
 
     return getOptionsThunk(filteredRange, filteredLine);
