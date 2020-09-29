@@ -222,6 +222,13 @@ function Layout(props: WithChildren<LayoutProps & ILastGeneratedData>) {
                       </Link>
                     </li>
                     <li>
+                      <Link href="/gemeente">
+                        <a onClick={blur} className={styles.footerLink}>
+                          {text.nav.links.gemeente}
+                        </a>
+                      </Link>
+                    </li>
+                    <li>
                       <Link href="/over">
                         <a onClick={blur} className={styles.footerLink}>
                           {text.nav.links.over}
