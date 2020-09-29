@@ -135,14 +135,14 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           {selectedMap === 'municipal' && (
             <MunicipalityChloropleth
               metricName="positive_tested_people"
-              tooltipContent={positiveTestedPeopleMunicipalTooltip}
+              tooltipContent={positiveTestedPeopleMunicipalTooltip(router)}
               onSelect={createSelectMunicipalHandler(router)}
             />
           )}
           {selectedMap === 'region' && (
             <SafetyRegionChloropleth
               metricName="positive_tested_people"
-              tooltipContent={positiveTestedPeopleRegionalTooltip}
+              tooltipContent={positiveTestedPeopleRegionalTooltip(router)}
               onSelect={createSelectRegionHandler(router)}
             />
           )}
