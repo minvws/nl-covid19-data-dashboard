@@ -95,7 +95,7 @@
     "linechart_titel": "Ziekenhuisopnames over tijd",
     "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "chloropleth_legenda": {
-      "titel": "Ziekenhuis opnames",
+      "titel": "Ziekenhuisopnames",
       "geen_meldingen": "Geen meldingen"
     }
   },
@@ -119,13 +119,7 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de trend van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": [
-      "0 tot 20",
-      "20 tot 40",
-      "40 tot 60",
-      "60 tot 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
     "cluster_datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "cluster_bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
@@ -492,7 +486,7 @@
   "regionaal_index": {
     "your_safety_region": "Veiligheidsregio",
     "select_safety_region_municipality": "Selecteer een veiligheidsregio of gemeente",
-    "label_municipalities": "Gemeentes",
+    "label_municipalities": "Gemeenten",
     "label_safety_regions": "Veiligheidsregio's",
     "select_municipality": "Selecteer een gemeente",
     "select_region_municipality_legend": "Selecteer een gemeente:",
@@ -570,19 +564,13 @@
     "kpi_titel": "Aantal positief geteste mensen:",
     "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn en COVID-19 hebben.",
     "map_titel": "Verdeling positief geteste mensen in {{safetyRegion}}",
-    "map_toelichting": "Deze kaart laat zien van hoeveel mensen in de gemeentes van deze veiligheidsregio's gisteren gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
+    "map_toelichting": "Deze kaart laat zien van hoeveel mensen in de gemeenten van deze veiligheidsregio's gisteren gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "linechart_titel": "Verloop over tijd",
     "linechart_toelichting": "Deze grafiek laat zien van hoeveel mensen afgelopen periode in deze veiligheidsregio gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de trend van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": [
-      "0 tot 20",
-      "20 tot 40",
-      "40 tot 60",
-      "60 tot 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -652,19 +640,13 @@
     "kpi_titel": "Aantal positief geteste mensen:",
     "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn en COVID-19 hebben.",
     "map_titel": "Verdeling positief geteste mensen in {{municipality}}",
-    "map_toelichting": "Deze kaart laat zien van hoeveel mensen in deze gemeentes gisteren gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
+    "map_toelichting": "Deze kaart laat zien van hoeveel mensen in deze gemeenten gisteren gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "linechart_titel": "Verloop over tijd",
     "linechart_toelichting": "Deze grafiek laat zien van hoeveel mensen afgelopen periode in deze gemeente gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de trend van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": [
-      "0 to 20",
-      "20 tot 40",
-      "40 tot 60",
-      "60 tot 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 to 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
