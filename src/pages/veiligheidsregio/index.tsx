@@ -72,7 +72,7 @@ const SafetyRegion: FCWithLayout<any> = (props) => {
          * This is rendering html content which has been generated from
          * markdown text.
          */}
-        <p
+        <div
           dangerouslySetInnerHTML={{
             __html: text.veiligheidsregio_index.selecteer_toelichting,
           }}

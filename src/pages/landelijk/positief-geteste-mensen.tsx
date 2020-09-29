@@ -8,6 +8,7 @@ import { ContentHeader } from '~/components/layout/Content';
 import { ChartRegionControls } from '~/components/chartRegionControls';
 
 import Getest from '~/assets/test.svg';
+import Afname from '~/assets/afname.svg';
 import { formatNumber } from '~/utils/formatNumber';
 
 import { PositiveTestedPeopleBarScale } from '~/components/landelijk/positive-tested-people-barscale';
@@ -205,6 +206,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           <ContentHeader
             title={ggdText.titel}
             id="ggd"
+            Icon={Afname}
             subtitle={ggdText.toelichting}
             metadata={{
               datumsText: ggdText.datums,

@@ -19,8 +19,10 @@ type Value = {
   value?: number;
 };
 
+const SIGNAALWAARDE_Z_INDEX = 10;
+
 interface LineChartProps {
-  title?: string;
+  title: string;
   description?: string;
   values: Value[];
   signaalwaarde?: number;
@@ -101,7 +103,7 @@ function getChartOptions(values: Value[], signaalwaarde?: number) {
               dashStyle: 'Dash',
               width: 1,
               color: '#4f5458',
-              zIndex: 1,
+              zIndex: SIGNAALWAARDE_Z_INDEX,
               label: {
                 text: text.common.barScale.signaalwaarde,
                 align: 'right',
@@ -119,6 +121,7 @@ function getChartOptions(values: Value[], signaalwaarde?: number) {
             {
               value: signaalwaarde,
               color: 'transparent',
+              zIndex: SIGNAALWAARDE_Z_INDEX,
               label: {
                 text: `${signaalwaarde}`,
                 align: 'left',
@@ -206,11 +209,11 @@ export default function LineChart({
   );
 }
 
+/**
+ * From all the defined values, extract the highest number so we know how to
+ * scale the y-axis
+ */
 function calculateYMax(values: Value[], signaalwaarde = -Infinity) {
-  /**
-   * From all the defined values, extract the highest number so we know how to
-   * scale the y-axis
-   */
   const maxValue = values
     .map((x) => x.value)
     .filter(isDefined)
