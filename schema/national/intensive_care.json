@@ -1,16 +1,28 @@
 {
   "definitions": {
     "item": {
-      "title": "intake_intensivecare_ma_last_value",
+      "title": "intensive_care_value",
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "moving_average_ic",
+        "intake_moving_average",
+        "beds_occupied",
+        "beds_occupied_percentage",
+        "beds_capacity",
         "date_of_report_unix",
         "date_of_insertion_unix"
       ],
       "properties": {
-        "moving_average_ic": {
+        "intake_moving_average": {
+          "type": "number"
+        },
+        "beds_occupied": {
+          "type": "number"
+        },
+        "beds_occupied_percentage": {
+          "type": "number"
+        },
+        "beds_capacity": {
           "type": "number"
         },
         "date_of_report_unix": {
@@ -23,8 +35,8 @@
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "intake_intensivecare_ma.json",
-  "title": "intake_intensivecare_ma",
+  "$id": "intensive_care.json",
+  "title": "intensive_care",
   "type": "object",
   "required": ["values", "last_value"],
   "additionalProperties": false,
