@@ -7,16 +7,20 @@ import { targetLanguage } from '~/locale/index';
 export async function polyfill() {
   // This platform already supports Intl.getCanonicalLocales
   if (shouldPolyfillCanonicalLocales()) {
+    console.log('shouldPolyfillCanonicalLocales');
     await import('@formatjs/intl-getcanonicallocales/polyfill');
   }
   if (shouldPolyfillDateTimeFormat()) {
+    console.log('shouldPolyfillDateTimeFormat');
     await import('@formatjs/intl-datetimeformat/polyfill');
+  } else {
+    console.log('no need to polyfill datetimeformat');
   }
 
   if (Intl.DateTimeFormat.polyfilled) {
+    console.log('datetimeformat is polyfilled. load some extra packages now');
     // Parallelize CLDR data loading
     const dataPolyfills = [import('@formatjs/intl-datetimeformat/add-all-tz')];
-
     switch (targetLanguage) {
       default:
         dataPolyfills.push(

@@ -5,7 +5,8 @@ import '~/scss/style.scss';
 import '~/components/legenda/legenda.scss';
 import '~/components/comboBox/comboBox.scss';
 
-import '~/lib/polyfills';
+import { polyfill } from '~/lib/polyfills';
+polyfill();
 
 // Import Preact DevTools in development
 // if (process.env.NODE_ENV === 'development') {
