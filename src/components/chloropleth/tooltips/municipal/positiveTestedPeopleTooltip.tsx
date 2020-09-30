@@ -1,6 +1,7 @@
 import { NextRouter } from 'next/router';
 import { ReactNode } from 'react';
 import { MunicipalityProperties } from '../../shared';
+import { createSelectMunicipalHandler } from '../../../chloropleth/selectHandlers/createSelectMunicipalHandler';
 import styles from '../tooltip.module.scss';
 
 export const createPositiveTestedPeopleMunicipalTooltip = (
@@ -8,10 +9,8 @@ export const createPositiveTestedPeopleMunicipalTooltip = (
 ) => (context: MunicipalityProperties & { value: number }): ReactNode => {
   const onSelectRegion = (event: any) => {
     event.stopPropagation();
-    router.push(
-      '/gemeente/[code]/positief-geteste-mensen',
-      `/gemeente/${context.gemcode}/positief-geteste-mensen`
-    );
+    const handler = createSelectMunicipalHandler(router);
+    handler(context);
   };
 
   return (

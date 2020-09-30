@@ -1,6 +1,7 @@
 import { NextRouter } from 'next/router';
 import { ReactNode } from 'react';
 import { SafetyRegionProperties } from '../../shared';
+import { createSelectRegionHandler } from '../../../chloropleth/selectHandlers/createSelectRegionHandler';
 import styles from '../tooltip.module.scss';
 
 export const createPositiveTestedPeopleRegionalTooltip = (
@@ -8,10 +9,8 @@ export const createPositiveTestedPeopleRegionalTooltip = (
 ) => (context: SafetyRegionProperties & { value: number }): ReactNode => {
   const onSelectRegion = (event: any) => {
     event.stopPropagation();
-    router.push(
-      '/veiligheidsregio/[code]/positief-geteste-mensen',
-      `/veiligheidsregio/${context.vrcode}/positief-geteste-mensen`
-    );
+    const handler = createSelectRegionHandler(router);
+    handler(context);
   };
 
   return (
