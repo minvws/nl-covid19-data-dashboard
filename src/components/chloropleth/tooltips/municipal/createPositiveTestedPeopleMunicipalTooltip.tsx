@@ -1,7 +1,7 @@
 import { NextRouter } from 'next/router';
 import { ReactNode } from 'react';
 import { MunicipalityProperties } from '../../shared';
-import { createSelectMunicipalHandler } from '../../../chloropleth/selectHandlers/createSelectMunicipalHandler';
+import { createSelectMunicipalHandler } from '../../selectHandlers/createSelectMunicipalHandler';
 import styles from '../tooltip.module.scss';
 
 export const createPositiveTestedPeopleMunicipalTooltip = (

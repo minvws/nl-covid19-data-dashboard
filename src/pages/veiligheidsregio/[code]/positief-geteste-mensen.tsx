@@ -17,7 +17,7 @@ import {
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
 import { getLocalTitleForRegion } from '~/utils/getLocalTitleForCode';
-import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
+import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/createPositiveTestedPeopleMunicipalTooltip';
 import { MunicipalityLegenda } from '~/components/chloropleth/legenda/MunicipalityLegenda';
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
 import regionCodeToMunicipalCodeLookup from '~/data/regionCodeToMunicipalCodeLookup';

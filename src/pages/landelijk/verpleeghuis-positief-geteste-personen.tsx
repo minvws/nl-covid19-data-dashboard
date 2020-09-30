@@ -13,12 +13,16 @@ import { InfectedPeopleNurseryCountDaily } from '~/types/data.d';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
 import { SafetyRegionLegenda } from '~/components/chloropleth/legenda/SafetyRegionLegenda';
+import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
+import { useRouter } from 'next/router';
+import { createPositiveTestedPeopleRegionalTooltip } from '~/components/chloropleth/tooltips/region/createPositiveTestedPeopleRegionalTooltip';
 
 const text: typeof siteText.verpleeghuis_positief_geteste_personen =
   siteText.verpleeghuis_positief_geteste_personen;
 
 const NursingHomeInfectedPeople: FCWithLayout<INationalData> = (props) => {
   const { data: state } = props;
+  const router = useRouter();
 
   const data: InfectedPeopleNurseryCountDaily | undefined =
     state?.infected_people_nursery_count_daily;
@@ -71,7 +75,7 @@ const NursingHomeInfectedPeople: FCWithLayout<INationalData> = (props) => {
         <div className="chloropleth-chart">
           <SafetyRegionChloropleth
             metricName="positive_tested_people"
-            tooltipContent={positiveTestedPeopleRegionalTooltip}
+            tooltipContent={createPositiveTestedPeopleRegionalTooltip(router)}
             onSelect={createSelectRegionHandler(router)}
           />
         </div>

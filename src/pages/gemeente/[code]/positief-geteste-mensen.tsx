@@ -19,7 +19,7 @@ import {
 import { getLocalTitleForMunicipality } from '~/utils/getLocalTitleForCode';
 
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
-import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
+import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/createPositiveTestedPeopleMunicipalTooltip';
 import { MunicipalityLegenda } from '~/components/chloropleth/legenda/MunicipalityLegenda';
 import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
 import { useRouter } from 'next/router';
