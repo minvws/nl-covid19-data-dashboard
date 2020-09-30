@@ -119,13 +119,7 @@
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the progression over time in the number of new cases by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": [
-      "0 to 20",
-      "20 to 40",
-      "40 to 60",
-      "60 to 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
     "cluster_datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
     "cluster_bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
@@ -406,7 +400,7 @@
       },
       {
         "cijfer": "Other data and alert indicators",
-        "verantwoording": "The National Institute for Public Health and the Environment (RIVM) provides the Ministry of Health, Welfare and Sport with information about the COVID-19 situation in nursing homes every day. The data is delivered in JSON format. RIVM publishes this information on its website as a .PDF file at the same time that it is delivered to the ministry. The values in that file are copied directly onto the dashboard.\n\nThe estimation how many nursing home residents and nursing homes are infected has been improved. Since the 1st of July the GGD registers per confirmed case if the individual is a nursing home resident. Using this data is more accurate than the approach used before, where an estimation was done on the basis of the 6 character postcode of a positively tested person. This means that the data from the 1st of July onwards will show a more accurate view of the actual amount of infeced nursing homes and residents."
+        "verantwoording": "The National Institute for Public Health and the Environment (RIVM) provides the Ministry of Health, Welfare and Sport with information about the COVID-19 situation in nursing homes every day. The data is delivered in JSON format. RIVM publishes this information on its website as a .PDF file at the same time that it is delivered to the ministry. The values in that file are copied directly onto the dashboard.\n\nThe way it is estimated how many nursing home residents and nursing homes are infected has been improved. Since the 1st of July the GGD registers per confirmed case if the individual is a nursing home resident. Using this data is more accurate than the approach used before, where an esimation was done on the basis of the 6 character postcode of a positively tested person. This means that the data from the 1st of July onwards whill show a more accurate view of the actual amount of infeced nursing homes and residents."
       },
       {
         "cijfer": "Nursing Homes: number of residents testing positive, number of homes with outbreaks, number of deaths.",
@@ -576,13 +570,7 @@
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the progression over time in the number of positive tests by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": [
-      "0 to 20",
-      "20 to 40",
-      "40 to 60",
-      "60 to 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -658,13 +646,7 @@
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the change in the number of confirmed cases by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": [
-      "0 to 20",
-      "20 to 40",
-      "40 to 60",
-      "60 to 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"

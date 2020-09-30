@@ -44,13 +44,12 @@ export function ComboBox<Option extends TOption>(props: TProps<Option>) {
   const { options, placeholder, handleSelect } = props;
 
   const router = useRouter();
+  const { code } = router.query;
   const inputRef = useRef<HTMLInputElement>();
   const [term, setTerm] = useState<string>('');
   const results = useSearchedOptions<Option>(term, options);
   const isLargeScreen = useMediaQuery('(min-width: 1000px)');
-  const hasRegionSelected =
-    router.pathname === '/gemeente/[code]/positief-geteste-mensen' ||
-    router.pathname === '/veiligheidsregio/[code]/positief-geteste-mensen';
+  const hasRegionSelected = !!code;
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>): void {
     setTerm(event.target.value);
