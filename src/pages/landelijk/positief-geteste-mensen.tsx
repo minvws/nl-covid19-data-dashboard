@@ -14,8 +14,8 @@ import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { LineChart, BarChart } from '~/components/charts/index';
 import { ContentHeader } from '~/components/layout/Content';
 import { ChartRegionControls } from '~/components/chartRegionControls';
-import { positiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
-import { positiveTestedPeopleRegionalTooltip } from '~/components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
+import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
+import { createPositiveTestedPeopleRegionalTooltip } from '~/components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
 import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
 import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
@@ -134,14 +134,16 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           {selectedMap === 'municipal' && (
             <MunicipalityChloropleth
               metricName="positive_tested_people"
-              tooltipContent={positiveTestedPeopleMunicipalTooltip}
+              tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
+                router
+              )}
               onSelect={createSelectMunicipalHandler(router)}
             />
           )}
           {selectedMap === 'region' && (
             <SafetyRegionChloropleth
               metricName="positive_tested_people"
-              tooltipContent={positiveTestedPeopleRegionalTooltip}
+              tooltipContent={createPositiveTestedPeopleRegionalTooltip(router)}
               onSelect={createSelectRegionHandler(router)}
             />
           )}

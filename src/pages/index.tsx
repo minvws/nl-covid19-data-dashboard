@@ -15,13 +15,13 @@ import { TitleWithIcon } from '~/components/titleWithIcon';
 import { ChartRegionControls } from '~/components/chartRegionControls';
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
 import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
-import { positiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
-import { positiveTestedPeopleRegionalTooltip } from '~/components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
-import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
-import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
+import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
+import { createPositiveTestedPeopleRegionalTooltip } from '~/components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
 import { escalationTooltip } from '~/components/chloropleth/tooltips/region/escalationTooltip';
 import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
 import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
+import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
+import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
 
 import Notification from '~/assets/notification.svg';
 import ExternalLink from '~/assets/external-link.svg';
@@ -108,14 +108,16 @@ const Home: FCWithLayout<INationalData> = (props) => {
           {selectedMap === 'municipal' && (
             <MunicipalityChloropleth
               metricName="positive_tested_people"
-              tooltipContent={positiveTestedPeopleMunicipalTooltip}
+              tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
+                router
+              )}
               onSelect={createSelectMunicipalHandler(router)}
             />
           )}
           {selectedMap === 'region' && (
             <SafetyRegionChloropleth
               metricName="positive_tested_people"
-              tooltipContent={positiveTestedPeopleRegionalTooltip}
+              tooltipContent={createPositiveTestedPeopleRegionalTooltip(router)}
               onSelect={createSelectRegionHandler(router)}
             />
           )}
