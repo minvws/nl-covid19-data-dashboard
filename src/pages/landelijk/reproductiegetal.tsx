@@ -33,8 +33,9 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: data?.last_value?.date_of_report_unix,
-          dateInsertedUnix: data?.last_value?.date_of_insertion_unix,
+          dateUnix: lastKnownValidData?.last_value?.date_of_report_unix,
+          dateInsertedUnix:
+            lastKnownValidData?.last_value?.date_of_insertion_unix,
           dataSource: text.bron,
         }}
       />

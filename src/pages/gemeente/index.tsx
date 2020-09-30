@@ -62,6 +62,7 @@ const Municipality: FCWithLayout<any> = () => {
           tooltipContent={tooltipContent(router)}
           style={{ height: mapHeight }}
           onSelect={onSelectMunicipal}
+          isSelectorMap={true}
         />
       </div>
     </article>
