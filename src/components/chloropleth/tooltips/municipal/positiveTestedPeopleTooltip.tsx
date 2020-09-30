@@ -7,9 +7,10 @@ import styles from '../tooltip.module.scss';
 export const createPositiveTestedPeopleMunicipalTooltip = (
   router: NextRouter
 ) => (context: MunicipalityProperties & { value: number }): ReactNode => {
+  const handler = createSelectMunicipalHandler(router);
+
   const onSelectRegion = (event: any) => {
     event.stopPropagation();
-    const handler = createSelectMunicipalHandler(router);
     handler(context);
   };
 
