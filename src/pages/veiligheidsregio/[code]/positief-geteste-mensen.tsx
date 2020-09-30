@@ -17,7 +17,7 @@ import {
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
 import { getLocalTitleForRegion } from '~/utils/getLocalTitleForCode';
-import { positiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
+import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
 import { MunicipalityLegenda } from '~/components/chloropleth/legenda/MunicipalityLegenda';
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
 import regionCodeToMunicipalCodeLookup from '~/data/regionCodeToMunicipalCodeLookup';
@@ -106,7 +106,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
             selected={selectedMunicipalCode}
             highlightSelection={false}
             metricName="positive_tested_people"
-            tooltipContent={positiveTestedPeopleMunicipalTooltip}
+            tooltipContent={createPositiveTestedPeopleMunicipalTooltip(router)}
             onSelect={createSelectMunicipalHandler(router)}
           />
         </div>

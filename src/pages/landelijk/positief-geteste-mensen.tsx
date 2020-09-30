@@ -21,8 +21,8 @@ import {
   IntakeShareAgeGroups,
 } from '~/types/data.d';
 
-import { positiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
-import { positiveTestedPeopleRegionalTooltip } from '~/components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
+import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
+import { createPositiveTestedPeopleRegionalTooltip } from '~/components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
 import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
@@ -135,14 +135,16 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           {selectedMap === 'municipal' && (
             <MunicipalityChloropleth
               metricName="positive_tested_people"
-              tooltipContent={positiveTestedPeopleMunicipalTooltip}
+              tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
+                router
+              )}
               onSelect={createSelectMunicipalHandler(router)}
             />
           )}
           {selectedMap === 'region' && (
             <SafetyRegionChloropleth
               metricName="positive_tested_people"
-              tooltipContent={positiveTestedPeopleRegionalTooltip}
+              tooltipContent={createPositiveTestedPeopleRegionalTooltip(router)}
               onSelect={createSelectRegionHandler(router)}
             />
           )}
