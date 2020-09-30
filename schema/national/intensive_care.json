@@ -65,13 +65,13 @@
       "title": "beds_occupied_value",
       "type": "object",
       "properties": {
-        "covid": {
+        "covid_occupied": {
           "type": "integer"
         },
-        "non_covid": {
+        "non_covid_occupied": {
           "type": "integer"
         },
-        "covid_percentage": {
+        "covid_percentage_of_all_occupied": {
           "type": "number"
         },
         "date_of_report_unix": {
@@ -82,9 +82,9 @@
         }
       },
       "required": [
-        "covid",
-        "non_covid",
-        "covid_percentage",
+        "covid_occupied",
+        "non_covid_occupied",
+        "covid_percentage_of_all_occupied",
         "date_of_report_unix",
         "date_of_insertion_unix"
       ],
