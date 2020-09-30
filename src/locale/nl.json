@@ -693,7 +693,7 @@
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Risiconiveaus",
-    "selecteer_toelichting": "De kaart geeft het risiconiveau per regio weer. Dat kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2) of ‘ernstig’ (niveau 3) zijn. Per regio worden passende maatregelen genomen.\n\n[Landelijke maatregelen](https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/nieuws/2020/09/28/aangescherpte-maatregelen-om-de-verspreiding-van-het-virus-terug-te-dringen)\n\n[Regionale maatregelen](https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/nederlandse-maatregelen-tegen-het-coronavirus/lokale-maatregelen-tegen-verspreiding-coronavirus/in-de-regio)\n\n[Meer over de risiconiveaus](/over-risiconiveaus)"
+    "selecteer_toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\nEr zijn [landelijke maatregelen](https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/nieuws/2020/09/28/aangescherpte-maatregelen-om-de-verspreiding-van-het-virus-terug-te-dringen) van kracht om de snelle verspreiding van het coronavirus tegen te gaan. Ook gelden er in sommige regio’s en steden aanvullende [lokale maatregelen](https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/nederlandse-maatregelen-tegen-het-coronavirus/lokale-maatregelen-tegen-verspreiding-coronavirus/in-de-regio).\n\n[Meer over de risiconiveaus](/over-risiconiveaus)"
   },
   "gemeente_index": {
     "selecteer_titel": "Selecteer een gemeente",
@@ -707,7 +707,7 @@
   },
   "escalatie_niveau": {
     "titel": "Risiconiveaus",
-    "toelichting": "De kaart geeft het risiconiveau per regio weer. Dat kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2) of ‘ernstig’ (niveau 3) zijn. Per regio worden passende maatregelen genomen.\n\n[Landelijke maatregelen](https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/nieuws/2020/09/28/aangescherpte-maatregelen-om-de-verspreiding-van-het-virus-terug-te-dringen)\n\n[Regionale maatregelen](https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/nederlandse-maatregelen-tegen-het-coronavirus/lokale-maatregelen-tegen-verspreiding-coronavirus/in-de-regio)\n\n[Meer over de risiconiveaus](/over-risiconiveaus)",
+    "toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\nEr zijn [landelijke maatregelen](https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/nieuws/2020/09/28/aangescherpte-maatregelen-om-de-verspreiding-van-het-virus-terug-te-dringen) van kracht om de snelle verspreiding van het coronavirus tegen te gaan. Ook gelden er in sommige regio’s en steden aanvullende [lokale maatregelen](https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/nederlandse-maatregelen-tegen-het-coronavirus/lokale-maatregelen-tegen-verspreiding-coronavirus/in-de-regio).\n\n[Meer over de risiconiveaus](/over-risiconiveaus)",
     "types": {
       "1": {
         "titel": "Waakzaam",
