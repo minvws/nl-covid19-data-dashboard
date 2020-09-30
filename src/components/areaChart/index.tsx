@@ -8,9 +8,10 @@ import {
 } from '~/components/chartTimeControls';
 
 import { formatNumber } from '~/utils/formatNumber';
-import { formatDate } from '~/utils/formatDate';
+import { formatDateFromMilliseconds } from '~/utils/formatDate';
 import text from '~/locale/index';
 import { getFilteredValues } from '~/components/chartTimeControls/chartTimeControlUtils';
+import { createDate } from '~/utils/createDate';
 
 if (typeof Highcharts === 'object') {
   require('highcharts/highcharts-more')(Highcharts);
@@ -96,7 +97,7 @@ function getChartOptions(props: IGetOptions): Highcharts.Options {
         rotation: '0' as any,
         formatter: function () {
           return this.isFirst || this.isLast
-            ? formatDate(this.value, 'axis')
+            ? formatDateFromMilliseconds(this.value, 'axis')
             : '';
         },
       },
@@ -173,7 +174,7 @@ function getChartOptions(props: IGetOptions): Highcharts.Options {
         );
         const x = this.x;
         return `
-            ${formatDate(x, 'medium')}<br/>
+            ${formatDateFromMilliseconds(x, 'medium')}<br/>
             <strong>${rangeLegendLabel}</strong> ${formatNumber(
           minRangePoint
         )} - ${formatNumber(maxRangePoint)}<br/>
@@ -224,12 +225,12 @@ export default function AreaChart(props: AreaChartProps) {
   const rangeData: TRange[] = useMemo(() => {
     return data
       .sort((a, b) => a.date - b.date)
-      .map((d) => [new Date(d.date), d.min, d.max]);
+      .map((d) => [createDate(d.date), d.min, d.max]);
   }, [data]);
 
   const lineData: TLine[] = useMemo(() => {
     return data.map((value) => {
-      return [new Date(value.date), value.avg];
+      return [createDate(value.date), value.avg];
     });
   }, [data]);
 
@@ -248,13 +249,13 @@ export default function AreaChart(props: AreaChartProps) {
     const filteredRange = getFilteredValues<TRange>(
       rangeData,
       timeframe,
-      (value: TRange) => value[0].getTime() * 1000
+      (value: TRange) => value[0].getTime()
     );
 
     const filteredLine = getFilteredValues<TLine>(
       lineData,
       timeframe,
-      (value: TLine) => value[0].getTime() * 1000
+      (value: TLine) => value[0].getTime()
     );
 
     return getOptionsThunk(filteredRange, filteredLine);

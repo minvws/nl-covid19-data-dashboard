@@ -11,13 +11,14 @@ const getDaysForTimeframe = (timeframe: TimeframeOption): number => {
   return Infinity;
 };
 
+const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
+
 const getMinimumUnixForTimeframe = (timeframe: TimeframeOption): number => {
   if (timeframe === 'all') {
     return 0;
   }
   const days = getDaysForTimeframe(timeframe);
-  const oneDay = 24 * 60 * 60 * 1000;
-  return new Date().getTime() - days * oneDay;
+  return new Date().getTime() - days * oneDayInMilliseconds;
 };
 
 type CompareCallbackFunction<T> = (value: T) => number;

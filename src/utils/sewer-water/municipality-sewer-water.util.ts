@@ -4,7 +4,7 @@ import {
   SewerMeasurementsLastValue,
   ResultsPerSewerInstallationPerMunicipalityLastValue,
 } from '~/types/data.d';
-import { formatDate } from '~/utils/formatDate';
+import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { XrangePointOptionsObject } from 'highcharts';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
@@ -205,7 +205,7 @@ export function getSewerWaterBarChartData(
         y: data?.sewer_measurements?.last_value.average,
         color: '#3391CC',
         label: data?.sewer_measurements?.last_value
-          ? `${formatDate(
+          ? `${formatDateFromSeconds(
               data.sewer_measurements.last_value.week_unix,
               'short'
             )}: ${formatNumber(data.sewer_measurements.last_value.average)}`
@@ -219,7 +219,7 @@ export function getSewerWaterBarChartData(
             y: installation?.last_value?.rna_per_ml,
             color: '#C1C1C1',
             label: installation?.last_value
-              ? `${formatDate(
+              ? `${formatDateFromSeconds(
                   installation.last_value.date_measurement_unix,
                   'short'
                 )}: ${formatNumber(installation.last_value.rna_per_ml)}`

@@ -6,7 +6,7 @@ import ClockIcon from '~/assets/clock.svg';
 import DatabaseIcon from '~/assets/database.svg';
 
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { formatDate } from '~/utils/formatDate';
+import { formatDateFromSeconds } from '~/utils/formatDate';
 
 interface IProps {
   dataSource: {
@@ -25,9 +25,9 @@ export function Metadata(props: IProps) {
 
   if (!dateUnix) return null;
 
-  const dateOfReport = formatDate(dateUnix, 'relative');
+  const dateOfReport = formatDateFromSeconds(dateUnix, 'relative');
   const dateOfInsertion = dateInsertedUnix
-    ? formatDate(dateInsertedUnix, 'relative')
+    ? formatDateFromSeconds(dateInsertedUnix, 'relative')
     : undefined;
 
   return (
