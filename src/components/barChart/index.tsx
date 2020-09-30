@@ -20,15 +20,17 @@ export default function BarChart(props: IProps) {
         borderColor: '#000',
         borderRadius: 0,
         borderWidth: 0,
-        className: 'undefined',
+        className: 'barchart-container',
         colorCount: 10,
         displayErrors: true,
         margin: [],
         height: data.length * 35 + 50,
+        maxWidth: 500,
       },
       title: { text: '' },
       tooltip: {
         enabled: true,
+        outside: true,
         formatter: function (): string | false {
           // @ts-ignore
           if (this.point.label) {
