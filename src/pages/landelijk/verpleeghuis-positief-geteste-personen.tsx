@@ -11,6 +11,8 @@ import siteText from '~/locale/index';
 
 import { InfectedPeopleNurseryCountDaily } from '~/types/data.d';
 import getNlData, { INationalData } from '~/static-props/nl-data';
+import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
+import { SafetyRegionLegenda } from '~/components/chloropleth/legenda/SafetyRegionLegenda';
 
 const text: typeof siteText.verpleeghuis_positief_geteste_personen =
   siteText.verpleeghuis_positief_geteste_personen;
@@ -59,6 +61,28 @@ const NursingHomeInfectedPeople: FCWithLayout<INationalData> = (props) => {
           />
         </article>
       )}
+
+      <article className="metric-article layout-chloropleth">
+        <div className="chloropleth-header">
+          <h3>{text.positief_geteste_personen.map_titel}</h3>
+          <p>{text.positief_geteste_personen.map_toelichting}</p>
+        </div>
+
+        <div className="chloropleth-chart">
+          <SafetyRegionChloropleth
+            metricName="positive_tested_people"
+            tooltipContent={positiveTestedPeopleRegionalTooltip}
+            onSelect={createSelectRegionHandler(router)}
+          />
+        </div>
+
+        <div className="chloropleth-legend">
+          <SafetyRegionLegenda
+            metricName="positive_tested_people"
+            title={text.positief_geteste_personen.chloropleth_legenda.titel}
+          />
+        </div>
+      </article>
     </>
   );
 };
