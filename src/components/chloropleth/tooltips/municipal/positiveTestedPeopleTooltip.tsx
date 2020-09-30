@@ -3,9 +3,9 @@ import { ReactNode } from 'react';
 import { MunicipalityProperties } from '../../shared';
 import styles from '../tooltip.module.scss';
 
-export const positiveTestedPeopleMunicipalTooltip = (router: NextRouter) => (
-  context: MunicipalityProperties & { value: number }
-): ReactNode => {
+export const createPositiveTestedPeopleMunicipalTooltip = (
+  router: NextRouter
+) => (context: MunicipalityProperties & { value: number }): ReactNode => {
   const onSelectRegion = (event: any) => {
     event.stopPropagation();
     router.push(

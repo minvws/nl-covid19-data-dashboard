@@ -3,9 +3,9 @@ import { ReactNode } from 'react';
 import { SafetyRegionProperties } from '../../shared';
 import styles from '../tooltip.module.scss';
 
-export const positiveTestedPeopleRegionalTooltip = (router: NextRouter) => (
-  context: SafetyRegionProperties & { value: number }
-): ReactNode => {
+export const createPositiveTestedPeopleRegionalTooltip = (
+  router: NextRouter
+) => (context: SafetyRegionProperties & { value: number }): ReactNode => {
   const onSelectRegion = (event: any) => {
     event.stopPropagation();
     router.push(
