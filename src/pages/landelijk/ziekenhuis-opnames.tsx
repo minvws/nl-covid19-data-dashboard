@@ -1,27 +1,26 @@
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+
+import siteText from '~/locale/index';
+import { IntakeHospitalMa } from '~/types/data.d';
+import getNlData, { INationalData } from '~/static-props/nl-data';
+
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { LineChart } from '~/components/charts/index';
 import { ContentHeader } from '~/components/layout/Content';
-
 import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-barscale';
-
-import Ziekenhuis from '~/assets/ziekenhuis.svg';
-
-import siteText from '~/locale/index';
-
-import { IntakeHospitalMa } from '~/types/data.d';
-import { useState } from 'react';
-import getNlData, { INationalData } from '~/static-props/nl-data';
 import { ChartRegionControls } from '~/components/chartRegionControls';
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
 import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
-import { MunicipalityLegenda } from '~/components/chloropleth/legenda/MunicipalityLegenda';
-import { SafetyRegionLegenda } from '~/components/chloropleth/legenda/SafetyRegionLegenda';
+import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
 import { hospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/municipal/hospitalAdmissionsTooltip';
 import { hospitalAdmissionsTooltip as regionHospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/region/hospitalAdmissionsTooltip';
 import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
-import { useRouter } from 'next/router';
 import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
+import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
+
+import Ziekenhuis from '~/assets/ziekenhuis.svg';
 
 const text: typeof siteText.ziekenhuisopnames_per_dag =
   siteText.ziekenhuisopnames_per_dag;
@@ -32,7 +31,7 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
     'municipal'
   );
   const router = useRouter();
-
+  const legendItems = useSafetyRegionLegendaData('hospital_admissions');
   const data: IntakeHospitalMa | undefined = state?.intake_hospital_ma;
 
   return (
@@ -94,16 +93,9 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
         </div>
 
         <div className="chloropleth-legend">
-          {selectedMap === 'municipal' && (
-            <MunicipalityLegenda
-              metricName="hospital_admissions"
-              title={text.chloropleth_legenda.titel}
-            />
-          )}
-
-          {selectedMap === 'region' && (
-            <SafetyRegionLegenda
-              metricName="hospital_admissions"
+          {legendItems && (
+            <ChloroplethLegenda
+              items={legendItems}
               title={text.chloropleth_legenda.titel}
             />
           )}
