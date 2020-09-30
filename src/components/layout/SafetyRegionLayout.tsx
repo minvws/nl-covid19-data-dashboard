@@ -22,7 +22,13 @@ import GetestIcon from '~/assets/test.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import Arrow from '~/assets/arrow.svg';
+import Locatie from '~/assets/locaties.svg';
+import CoronaVirus from '~/assets/coronavirus.svg';
+
 import { useMenuState } from './useMenuState';
+import { NursingHomeInfectedPeopleBarScale } from '~/components/landelijk/nursing-home-infected-people-barscale';
+import { NursingHomeInfectedLocationsBarScale } from '~/components/landelijk/nursing-home-infected-locations-barscale';
+import { NursingHomeDeathsBarScale } from '~/components/landelijk/nursing-home-deaths-barscale';
 
 export function getSafetyRegionLayout() {
   return function (
@@ -215,6 +221,87 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                       <span>
                         <SewerWaterBarScale
                           data={getSewerWaterBarScaleData(data)}
+                          showAxis={true}
+                        />
+                      </span>
+                    </a>
+                  </Link>
+                </li>
+              </ul>
+
+              <h2>{siteText.veiligheidsregio_layout.headings.verpleeghuis}</h2>
+              <ul>
+                <li>
+                  <Link
+                    href="/veiligheidsregio/[code]/verpleeghuis-positief-geteste-personen"
+                    as={`/veiligheidsregio/${code}/verpleeghuis-positief-geteste-personen`}
+                  >
+                    <a
+                      onClick={handleMenuClick}
+                      className={getClassName(
+                        '/veiligheidsregio/verpleeghuis-positief-geteste-personen'
+                      )}
+                    >
+                      <TitleWithIcon
+                        Icon={GetestIcon}
+                        title={
+                          siteText.verpleeghuis_positief_geteste_personen
+                            .titel_sidebar
+                        }
+                      />
+                      <span>
+                        <NursingHomeInfectedPeopleBarScale
+                          data={data?.infected_people_nursery_count_daily}
+                          showAxis={true}
+                        />
+                      </span>
+                    </a>
+                  </Link>
+                </li>
+
+                <li>
+                  <Link
+                    href="/veiligheidsregio/[code]/verpleeghuis-besmette-locaties"
+                    as={`/veiligheidsregio/${code}/verpleeghuis-besmette-locaties`}
+                  >
+                    <a
+                      onClick={handleMenuClick}
+                      className={getClassName(
+                        '/veiligheidsregio/verpleeghuis-besmette-locaties'
+                      )}
+                    >
+                      <TitleWithIcon
+                        Icon={Locatie}
+                        title={siteText.verpleeghuis_besmette_locaties.titel}
+                      />
+                      <span>
+                        <NursingHomeInfectedLocationsBarScale
+                          data={data?.total_reported_locations}
+                          showAxis={true}
+                        />
+                      </span>
+                    </a>
+                  </Link>
+                </li>
+
+                <li>
+                  <Link
+                    href="/veiligheidsregio/[code]/verpleeghuis-sterfte"
+                    as={`/veiligheidsregio/${code}/verpleeghuis-sterfte`}
+                  >
+                    <a
+                      onClick={handleMenuClick}
+                      className={getClassName(
+                        '/veiligheidsregio/verpleeghuis-sterfte'
+                      )}
+                    >
+                      <TitleWithIcon
+                        Icon={CoronaVirus}
+                        title={siteText.verpleeghuis_oversterfte.titel_sidebar}
+                      />
+                      <span>
+                        <NursingHomeDeathsBarScale
+                          data={data?.deceased_people_nursery_count_daily}
                           showAxis={true}
                         />
                       </span>
