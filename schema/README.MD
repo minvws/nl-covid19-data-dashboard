@@ -66,10 +66,18 @@ Use these guidelines when defining a new schema:
 2. The titles of the root and the definition, are used to generate the
    Typescript interfaces. To keep it simple name the definition with \_value
    suffix but keep otherwise the same as the root title.
-3. Property names should first describe what it is and then optionally postfix
-   how it is formatted, but the latter only if required for clarity, i.e.
+3. In order to not create clashes between national and regional types, the
+   regional data can have the `regional_` prefix in the titles of the
+   definitions, so that the generated Typescript interfaces are prefixed
+   with `Regional`. The same can be done for municipal.
+4. Property names should first say what it measuring is and then optionally postfix
+   the how it was measured, but the latter only if required for clarity, i.e.
    `date_of_report_unix` first describes what it is and then how it is
    formatted.
+5. Sometimes the JSON file contains only data for 1 measurement. In that case it is
+   probably already evident from the title (= generated type) what the subject is, and
+   then the property can just describe how it was measured. An example is
+   `moving_average` in `hospital_intake (HospitalIntake) > values (HospitalIntakeValue[]) > moving_average`
 
 Most files currently do not follow these guidelines. If you want to see examples
 look at `intensive_care_beds_occupied.json`, `intensive_care_intake.json` or `regional/nursing_home.json`.

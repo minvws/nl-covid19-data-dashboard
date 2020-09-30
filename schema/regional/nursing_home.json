@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "regional_nursing_home",
+  "type": "object",
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/value"
+      }
+    },
+    "last_value": {
+      "$ref": "#/definitions/value"
+    }
+  },
+  "required": ["values", "last_value"],
+  "additionalProperties": false,
+  "definitions": {
+    "value": {
+      "title": "regional_nursing_home_value",
+      "type": "object",
+      "properties": {
+        "positively_tested_daily": {
+          "type": "integer"
+        },
+        "infected_locations_total": {
+          "type": "integer"
+        },
+        "deaths_daily": {
+          "type": "integer"
+        },
+        "date_of_report_unix": {
+          "type": "integer"
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "positively_tested_daily",
+        "infected_locations_total",
+        "diseased_daily",
+        "date_of_report_unix",
+        "date_of_insertion_unix"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
