@@ -1,32 +1,50 @@
 {
-  "definitions": {
-    "item": {
-      "title": "intensive_care_value",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "intensive_care.json",
+  "title": "intensive_care",
+  "type": "object",
+  "properties": {
+    "intake_moving_average": {
       "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "intake_moving_average",
-        "intake_daily",
-        "beds_occupied",
-        "beds_occupied_percentage",
-        "beds_capacity",
-        "date_of_report_unix",
-        "date_of_insertion_unix"
-      ],
       "properties": {
-        "intake_moving_average": {
-          "type": "number"
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/intake_moving_average_value"
+          }
         },
-        "intake_daily": {
-          "type": "number"
+        "last_value": {
+          "$ref": "#/definitions/intake_moving_average_value"
+        }
+      },
+      "required": ["values", "last_value"],
+      "additionalProperties": false
+    },
+    "beds_occupied": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/beds_occupied_value"
+          }
         },
-        "beds_occupied": {
-          "type": "number"
-        },
-        "beds_occupied_percentage": {
-          "type": "number"
-        },
-        "beds_capacity": {
+        "last_value": {
+          "$ref": "#/definitions/beds_occupied_value"
+        }
+      },
+      "required": ["values", "last_value"],
+      "additionalProperties": false
+    }
+  },
+  "required": ["beds_occupied", "intake_moving_average"],
+  "additionalProperties": false,
+  "definitions": {
+    "intake_moving_average_value": {
+      "title": "intake_moving_average_value",
+      "type": "object",
+      "properties": {
+        "value": {
           "type": "number"
         },
         "date_of_report_unix": {
@@ -35,24 +53,42 @@
         "date_of_insertion_unix": {
           "type": "integer"
         }
-      }
-    }
-  },
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "intensive_care.json",
-  "title": "intensive_care",
-  "type": "object",
-  "required": ["values", "last_value"],
-  "additionalProperties": false,
-  "properties": {
-    "values": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/item"
-      }
+      },
+      "required": [
+        "value",
+        "date_of_report_unix",
+        "date_of_insertion_unix"
+      ],
+      "additionalProperties": false
     },
-    "last_value": {
-      "$ref": "#/definitions/item"
+    "beds_occupied_value": {
+      "title": "beds_occupied_value",
+      "type": "object",
+      "properties": {
+        "covid": {
+          "type": "integer"
+        },
+        "non_covid": {
+          "type": "integer"
+        },
+        "covid_percentage": {
+          "type": "number"
+        },
+        "date_of_report_unix": {
+          "type": "integer"
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "covid",
+        "non_covid",
+        "covid_percentage",
+        "date_of_report_unix",
+        "date_of_insertion_unix"
+      ],
+      "additionalProperties": false
     }
   }
 }
