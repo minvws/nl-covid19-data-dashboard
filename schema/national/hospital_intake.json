@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "hospital_intake",
+  "type": "object",
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/value"
+      }
+    },
+    "last_value": {
+      "$ref": "#/definitions/value"
+    }
+  },
+  "required": ["values", "last_value"],
+  "additionalProperties": false,
+  "definitions": {
+    "value": {
+      "title": "hospital_intake_value",
+      "type": "object",
+      "properties": {
+        "moving_average": {
+          "type": "number"
+        },
+        "date_of_report_unix": {
+          "type": "integer"
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "moving_average",
+        "date_of_report_unix",
+        "date_of_insertion_unix"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
