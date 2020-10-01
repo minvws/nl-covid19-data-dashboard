@@ -62,7 +62,7 @@
         "incidentie_old": {
           "type": "integer"
         },
-        "incidentie_diff": {
+        "incidentie_difference": {
           "type": "integer"
         },
         "geschat_aantal_new": {
@@ -71,7 +71,7 @@
         "geschat_aantal_old": {
           "type": "integer"
         },
-        "geschat_aantal_diff": {
+        "geschat_aantal_difference": {
           "type": "integer"
         },
         "date_of_report_unix_new": {
@@ -85,13 +85,17 @@
         }
       },
       "required": [
-        "value_new",
-        "value_old",
-        "value_difference",
+        "incidentie_new",
+        "incidentie_old",
+        "incidentie_difference",
+        "geschat_aantal_new",
+        "geschat_aantal_old",
+        "geschat_aantal_difference",
         "date_of_report_unix_new",
         "date_of_report_unix_old",
         "date_of_insertion_unix"
-      ]
+      ],
+      "additionalProperties": false
     }
   }
 }
