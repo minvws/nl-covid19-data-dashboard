@@ -20,18 +20,18 @@ Therefore it is also possible to execute this command with the given parameters:
 The schemas are located in the `<project-name>`/schema folder. This folder also
 contains a folder named _validator_ which contains the scripts that perform the
 actual validation logic. Each other folder contains a schema where the main
-entry point has the same name as its containing folder. I.e. The folder
-‘national’ contains a file called national.json. The other files present in the
-same folder are sub schemas that are referenced by the main one. This is done to
-keep things readable.
+entry point is `__index.json`. The other files in the folder are sub-schemas
+that are referenced by the entry point.
 
 ## Typescript generation
 
-The schemas are also used to generate Typescript interfaces from. This way the
-data shape is always synchronized with the frontend implementations. To execute
-this functionality run the `yarn generate-typescript` command from the project
-root directory. The output of this script is saved to the
-**src/types/data.d.ts** file.
+The schemas are also used to generate Typescript interfaces from their `title`
+attribute. This way the data shape is always synchronized with the frontend
+implementations. To execute this functionality run the `yarn generate-typescript` command from the project root directory. The output of this
+script is saved to the **src/types/data.d.ts** file. The titles are
+automatically PascalCased so spaces and \_ are replaced. In other to avoid
+naming conflicts it is advised to prefix the titles. See [Guidelines For New
+Definitions](#guidelines-for-new-definitions)
 
 ## JSON Dataformat
 
@@ -67,18 +67,18 @@ Use these guidelines when defining a new schema:
    Typescript interfaces. To keep it simple name the definition with \_value
    suffix but keep otherwise the same as the root title.
 3. In order to avoid Typescript interface name clashes between national and
-   regional and municipal types, the data should have the
-   `national_`, `regional_` etc prefix in the titles. That way we can tweak
-   definition per source without creating any inter dependencies. An example of
-   this is `nursing_home.json` which exists in both national and regional folders.
-4. Property names should first say what it measuring is and then optionally postfix
-   the how it was measured, but the latter only if required for clarity, i.e.
-   `date_of_report_unix` first describes what it is and then how it is
+   regional and municipal types, the data should have the `national_`,
+   `regional_` etc prefix in the titles. That way we can tweak definition per
+   source without creating any inter dependencies. An example of this is
+   `nursing_home.json` which exists in both national and regional folders.
+4. Property names should first say what it measuring is and then optionally
+   postfix the how it was measured, but the latter only if required for clarity,
+   i.e. `date_of_report_unix` first describes what it is and then how it is
    formatted.
-5. Sometimes the JSON file contains only data for 1 measurement. In that case it is
-   probably already evident from the title (= generated type) what the subject is, and
-   then the property can just describe how it was measured. An example is
-   `moving_average` in `hospital_intake (HospitalIntake) > values (HospitalIntakeValue[]) > moving_average`
+5. Sometimes the JSON file contains only data for 1 measurement. In that case it
+   is probably already evident from the title (= generated type) what the
+   subject is, and then the property can just describe how it was measured. An
+   example is `moving_average` in `hospital_intake (HospitalIntake) > values (HospitalIntakeValue[]) > moving_average`
 
 Most files currently do not follow these guidelines. If you want to see examples
 look at `intensive_care_beds_occupied.json`, `intensive_care_intake.json` or
