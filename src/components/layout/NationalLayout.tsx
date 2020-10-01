@@ -349,6 +349,15 @@ function NationalLayout(props: WithChildren<INationalData>) {
         </aside>
 
         <section className="national-content">{children}</section>
+
+        <Link href="/landelijk">
+          <a className="back-button back-button-footer" onClick={openMenu}>
+            <Arrow />
+            {router.pathname === '/'
+              ? siteText.nav.terug_naar_alle_cijfers_homepage
+              : siteText.nav.terug_naar_alle_cijfers}
+          </a>
+        </Link>
       </div>
     </>
   );

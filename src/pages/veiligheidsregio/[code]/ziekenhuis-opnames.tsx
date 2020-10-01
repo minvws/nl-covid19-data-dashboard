@@ -88,7 +88,10 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
             highlightSelection={false}
             metricName="hospital_admissions"
             tooltipContent={createMunicipalHospitalAdmissionsTooltip(router)}
-            onSelect={createSelectMunicipalHandler(router)}
+            onSelect={createSelectMunicipalHandler(
+              router,
+              'ziekenhuis-opnames'
+            )}
           />
         </div>
 
