@@ -1,18 +1,18 @@
-const Ajv = require('ajv');
-const fs = require('fs');
-const path = require('path');
+import Ajv, { ValidateFunction } from 'ajv';
+import fs from 'fs';
+import path from 'path';
 
 /**
  * Loads the given uri and parses its conts to JSON
  * @param {string} basePath The given base directory name
  * @param {string} uri The given filename
  */
-function loadSchema(basePath, uri) {
+function loadSchema(basePath: string, uri: string): Promise<any> {
   return fs.promises
     .readFile(path.join(basePath, uri), {
       encoding: 'utf8',
     })
-    .then((data) => JSON.parse(data));
+    .then((data: string) => JSON.parse(data));
 }
 
 /**
@@ -20,16 +20,17 @@ function loadSchema(basePath, uri) {
  * The instance returns a validator function that is able to validate a JSON object
  * according to the given schema.
  */
-class SchemaValidator {
-  constructor(schemaPath) {
+export class SchemaValidator {
+  private readonly basePath: string;
+
+  constructor(private readonly schemaPath: string) {
     this.basePath = path.dirname(schemaPath);
-    this.schemaPath = schemaPath;
   }
 
   /**
-   * @returns {Promise} A Promise object that will resolve to a validator function.
+   * @returns A Promise object that will resolve to a validator function.
    */
-  init() {
+  init(): PromiseLike<ValidateFunction> {
     const schema = JSON.parse(
       fs.readFileSync(this.schemaPath, {
         encoding: 'utf8',
@@ -39,11 +40,9 @@ class SchemaValidator {
     const validator = new Ajv({
       loadSchema: loadSchema.bind(null, this.basePath),
       $data: true,
-    }); // options can be passed, e.g. {allErrors: true}
-    return validator.compileAsync(schema).then(function (validate) {
+    });
+    return validator.compileAsync(schema).then((validate) => {
       return validate;
     });
   }
 }
-
-module.exports = SchemaValidator;

@@ -78,6 +78,7 @@
     "prettier": "^2.0.5",
     "react-refresh": "^0.8.3",
     "start-server-and-test": "^1.11.4",
+    "ts-node": "^9.0.0",
     "typescript": "^4.0.2"
   },
   "husky": {
@@ -105,7 +106,7 @@
     "type-check": "tsc --pretty --noEmit",
     "validate-json": "node schema/validator/validate-json.js",
     "validate-single": "node schema/validator/validate-single.js",
-    "generate-typescript": "node schema/validator/generate-typescript.js",
+    "generate-typescript": "ts-node src/tools/validator/generate-typescript.ts",
     "e2e": "start-test dev 3000 cy:open",
     "e2e:release": "yarn build && start-test 3000 cy:open",
     "cy:open": "cypress open",
