@@ -24,7 +24,9 @@ export const createRegionHospitalAdmissionsTooltip = (router: NextRouter) => (
           <div className={styles.positiveTestedPeopleInfo}>
             <div className={styles.escalationText}>
               <strong>
-                {context.value !== undefined ? context.value : '-'}
+                {context.value !== undefined
+                  ? `${context.value} / 100.000`
+                  : '-'}
               </strong>
             </div>
           </div>
