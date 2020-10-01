@@ -36,6 +36,9 @@
     },
     "results_per_region": {
       "$ref": "results_per_region.json"
-    }
+    },
+    "infected_people_per_region": {
+      "$ref": "infected_people_per_region.json"
+    },
   }
 }
