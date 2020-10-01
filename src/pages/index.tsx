@@ -21,7 +21,6 @@ import { createPositiveTestedPeopleRegionalTooltip } from '~/components/chloropl
 import { useState } from 'react';
 import { MunicipalityLegenda } from '~/components/chloropleth/legenda/MunicipalityLegenda';
 import { SafetyRegionLegenda } from '~/components/chloropleth/legenda/SafetyRegionLegenda';
-import Link from 'next/link';
 import { EscalationMapLegenda } from './veiligheidsregio';
 import { useMediaQuery } from '~/utils/useMediaQuery';
 import { useRouter } from 'next/router';
@@ -66,15 +65,7 @@ const Home: FCWithLayout<INationalData> = (props) => {
         </a>
       </article>
 
-      <article className={styles['all-numbers']}>
-        <Link href="/landelijk">
-          <a className={styles['all-numbers-link']}>
-            {text.laatste_ontwikkelingen.alle_cijfers_link}
-          </a>
-        </Link>
-      </article>
-
-      <article className="index-article layout-chloropleth">
+      <article className="metric-article layout-chloropleth">
         <div className="chloropleth-header">
           <h2>{text.veiligheidsregio_index.selecteer_titel}</h2>
           <div
