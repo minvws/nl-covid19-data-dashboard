@@ -21,6 +21,11 @@ export function useMenuState(defaultOpen = false): MenuState {
   ): void => {
     event?.preventDefault();
     setMenuOpen(true);
+
+    /* Ensure the top of the menu is in view */
+    requestAnimationFrame(() => {
+      window.document.querySelector('aside')?.scrollIntoView(true);
+    });
   };
 
   const handleMenuClick = (

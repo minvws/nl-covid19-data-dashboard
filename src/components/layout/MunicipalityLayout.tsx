@@ -260,6 +260,13 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
         </aside>
 
         <section className="municipality-content">{children}</section>
+
+        <Link href="/gemeente/[code]" as={`/gemeente/${code}`}>
+          <a className="back-button back-button-footer" onClick={openMenu}>
+            <Arrow />
+            {siteText.nav.terug_naar_alle_cijfers}
+          </a>
+        </Link>
       </div>
     </>
   );
