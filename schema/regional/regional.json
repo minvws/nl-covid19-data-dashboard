@@ -10,6 +10,7 @@
     "results_per_sewer_installation_per_region",
     "average_sewer_installation_per_region",
     "results_per_region",
+    "ggd",
     "nursing_home"
   ],
   "additionalProperties": false,

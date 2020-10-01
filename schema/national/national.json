@@ -22,9 +22,9 @@
     "rioolwater_metingen",
     "rioolwater_metingen_per_rwzi",
 
-    "hospital_intake",
+    "hospital_admissions",
     "hospital_beds_occupied",
-    "intensive_care_intake",
+    "intensive_care_admissions",
     "intensive_care_beds_occupied"
   ],
   "additionalProperties": false,
