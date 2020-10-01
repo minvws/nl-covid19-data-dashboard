@@ -9,11 +9,15 @@ export type TimeframeOption = 'all' | '5weeks' | 'week';
 interface IProps {
   timeframe: TimeframeOption;
   onChange: (value: TimeframeOption) => void;
-  timeframeOptions: TimeframeOption[];
+  timeframeOptions?: TimeframeOption[];
 }
 
 export function ChartTimeControls(props: IProps) {
-  const { timeframe, onChange, timeframeOptions } = props;
+  const {
+    timeframe,
+    onChange,
+    timeframeOptions = ['all', '5weeks', 'week'],
+  } = props;
 
   const values = timeframeOptions.map<IRadioGroupItem>((key) => ({
     label: text.charts.time_controls[key],
@@ -29,7 +33,3 @@ export function ChartTimeControls(props: IProps) {
     />
   );
 }
-
-ChartTimeControls.defaultProps = {
-  timeframeOptions: ['all', '5weeks', 'week'],
-};

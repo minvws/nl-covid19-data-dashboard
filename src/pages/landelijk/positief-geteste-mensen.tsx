@@ -1,36 +1,34 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 
-import { FCWithLayout } from '~/components/layout';
-import { getNationalLayout } from '~/components/layout/NationalLayout';
-import { LineChart, BarChart } from '~/components/charts/index';
-import { ContentHeader } from '~/components/layout/Content';
-import { ChartRegionControls } from '~/components/chartRegionControls';
-
-import Getest from '~/assets/test.svg';
-import Afname from '~/assets/afname.svg';
-import { formatNumber } from '~/utils/formatNumber';
-
-import { PositiveTestedPeopleBarScale } from '~/components/landelijk/positive-tested-people-barscale';
-
+import getNlData, { INationalData } from '~/static-props/nl-data';
 import siteText from '~/locale/index';
-
 import {
   InfectedPeopleDeltaNormalized,
   InfectedPeopleTotal,
   IntakeShareAgeGroups,
 } from '~/types/data.d';
 
+import { FCWithLayout } from '~/components/layout';
+import { getNationalLayout } from '~/components/layout/NationalLayout';
+import { LineChart, BarChart } from '~/components/charts/index';
+import { ContentHeader } from '~/components/layout/Content';
+import { ChartRegionControls } from '~/components/chartRegionControls';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
 import { createPositiveTestedPeopleRegionalTooltip } from '~/components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
-import getNlData, { INationalData } from '~/static-props/nl-data';
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
 import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
-import { MunicipalityLegenda } from '~/components/chloropleth/legenda/MunicipalityLegenda';
-import { SafetyRegionLegenda } from '~/components/chloropleth/legenda/SafetyRegionLegenda';
 import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
 import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
+import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
+import { PositiveTestedPeopleBarScale } from '~/components/landelijk/positive-tested-people-barscale';
+import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
+
+import Getest from '~/assets/test.svg';
+import Afname from '~/assets/afname.svg';
+
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
+import { formatNumber } from '~/utils/formatNumber';
 
 const text = siteText.positief_geteste_personen;
 const ggdText = siteText.positief_geteste_personen_ggd;
@@ -42,6 +40,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
   );
   const router = useRouter();
 
+  const legendItems = useSafetyRegionLegendaData('positive_tested_people');
   const delta: InfectedPeopleDeltaNormalized | undefined =
     data?.infected_people_delta_normalized;
   const age: IntakeShareAgeGroups | undefined = data?.intake_share_age_groups;
@@ -151,16 +150,9 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         </div>
 
         <div className="chloropleth-legend">
-          {selectedMap === 'municipal' && (
-            <MunicipalityLegenda
-              metricName="positive_tested_people"
-              title={text.chloropleth_legenda.titel}
-            />
-          )}
-
-          {selectedMap === 'region' && (
-            <SafetyRegionLegenda
-              metricName="positive_tested_people"
+          {legendItems && (
+            <ChloroplethLegenda
+              items={legendItems}
               title={text.chloropleth_legenda.titel}
             />
           )}
