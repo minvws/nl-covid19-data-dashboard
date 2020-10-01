@@ -47,7 +47,7 @@ Promise.all(results)
  */
 function validate(schemaName, fileNames) {
   const validatorInstance = new SchemaValidator(
-    path.join(__dirname, '..', schemaName, `${schemaName}.json`)
+    path.join(__dirname, '..', schemaName, `__index.json`)
   );
 
   return fileNames.map((fileName) => {
