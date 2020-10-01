@@ -66,10 +66,11 @@ Use these guidelines when defining a new schema:
 2. The titles of the root and the definition, are used to generate the
    Typescript interfaces. To keep it simple name the definition with \_value
    suffix but keep otherwise the same as the root title.
-3. In order to not create clashes between national and regional types, the
-   regional data can have the `regional_` prefix in the titles of the
-   definitions, so that the generated Typescript interfaces are prefixed
-   with `Regional`. The same can be done for municipal.
+3. In order to avoid Typescript interface name clashes between national and
+   regional and municipal types, the data should have the
+   `national_`, `regional_` etc prefix in the titles. That way we can tweak
+   definition per source without creating any inter dependencies. An example of
+   this is `nursing_home.json` which exists in both national and regional folders.
 4. Property names should first say what it measuring is and then optionally postfix
    the how it was measured, but the latter only if required for clarity, i.e.
    `date_of_report_unix` first describes what it is and then how it is

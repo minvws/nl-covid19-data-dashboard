@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "regional_nursing_home",
+  "title": "national_nursing_home",
   "type": "object",
   "properties": {
     "values": {
@@ -17,10 +17,13 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "regional_nursing_home_value",
+      "title": "national_nursing_home_value",
       "type": "object",
       "properties": {
         "newly_infected_people": {
+          "type": "integer"
+        },
+        "newly_infected_locations": {
           "type": "integer"
         },
         "infected_locations_total": {
@@ -41,6 +44,7 @@
       },
       "required": [
         "newly_infected_people",
+        "newly_infected_locations",
         "infected_locations_total",
         "infected_locations_percentage",
         "deceased_daily",
