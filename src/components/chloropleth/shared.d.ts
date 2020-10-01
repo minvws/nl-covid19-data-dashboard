@@ -21,12 +21,12 @@ export interface MunicipalityProperties {
   gemcode: string;
 }
 
-export type MunicipalGeoJOSN = FeatureCollection<
+export type MunicipalGeoJSON = FeatureCollection<
   MultiPolygon,
   MunicipalityProperties
 >;
 
-export type RegionGeoJOSN = FeatureCollection<
+export type RegionGeoJSON = FeatureCollection<
   MultiPolygon,
   SafetyRegionProperties
 >;
