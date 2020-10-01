@@ -1,28 +1,28 @@
-import { FCWithLayout } from '~/components/layout';
-import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
+import { useRouter } from 'next/router';
 
 import siteText from '~/locale/index';
-
-import { LineChart } from '~/components/charts/index';
-import { ContentHeader } from '~/components/layout/Content';
-
-import { PositivelyTestedPeopleBarScale } from '~/components/gemeente/positively-tested-people-barscale';
-
-import Getest from '~/assets/test.svg';
-import { formatNumber } from '~/utils/formatNumber';
 import { PositiveTestedPeople } from '~/types/data.d';
 import {
   getMunicipalityData,
   getMunicipalityPaths,
   IMunicipalityData,
 } from '~/static-props/municipality-data';
-import { getLocalTitleForMunicipality } from '~/utils/getLocalTitleForCode';
 
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
-import { MunicipalityLegenda } from '~/components/chloropleth/legenda/MunicipalityLegenda';
+import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
+import { useMunicipalLegendaData } from '~/components/chloropleth/legenda/hooks/useMunicipalLegendaData';
 import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
-import { useRouter } from 'next/router';
+import { LineChart } from '~/components/charts/index';
+import { ContentHeader } from '~/components/layout/Content';
+import { PositivelyTestedPeopleBarScale } from '~/components/gemeente/positively-tested-people-barscale';
+import { FCWithLayout } from '~/components/layout';
+import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
+
+import Getest from '~/assets/test.svg';
+
+import { formatNumber } from '~/utils/formatNumber';
+import { getLocalTitleForMunicipality } from '~/utils/getLocalTitleForCode';
 
 const text: typeof siteText.gemeente_positief_geteste_personen =
   siteText.gemeente_positief_geteste_personen;
@@ -31,6 +31,7 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
   const { data } = props;
   const router = useRouter();
 
+  const legendItems = useMunicipalLegendaData('positive_tested_people');
   const positivelyTestedPeople: PositiveTestedPeople | undefined =
     data?.positive_tested_people;
 
@@ -107,10 +108,14 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
         </div>
 
         <div className="chloropleth-legend">
-          <MunicipalityLegenda
-            metricName="positive_tested_people"
-            title={siteText.positief_geteste_personen.chloropleth_legenda.titel}
-          />
+          {legendItems && (
+            <ChloroplethLegenda
+              items={legendItems}
+              title={
+                siteText.positief_geteste_personen.chloropleth_legenda.titel
+              }
+            />
+          )}
         </div>
       </article>
     </>

@@ -1,36 +1,34 @@
-import { FCWithLayout } from '~/components/layout';
-import { getNationalLayout } from '~/components/layout/NationalLayout';
-import Notification from '~/assets/notification.svg';
-import ExternalLink from '~/assets/external-link.svg';
-
+import Link from 'next/link';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 import path from 'path';
 import fs from 'fs';
 
+import styles from './index.module.scss';
+import { National } from '~/types/data';
+import { INationalData } from '~/static-props/nl-data';
 import siteText from '~/locale/index';
 
-import { INationalData } from '~/static-props/nl-data';
-
-import styles from './index.module.scss';
-
+import { FCWithLayout } from '~/components/layout';
+import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { TitleWithIcon } from '~/components/titleWithIcon';
 import { ChartRegionControls } from '~/components/chartRegionControls';
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
 import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
 import { createPositiveTestedPeopleRegionalTooltip } from '~/components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
-import { useState } from 'react';
-import { MunicipalityLegenda } from '~/components/chloropleth/legenda/MunicipalityLegenda';
-import { SafetyRegionLegenda } from '~/components/chloropleth/legenda/SafetyRegionLegenda';
-import Link from 'next/link';
-import { EscalationMapLegenda } from './veiligheidsregio';
-import { useMediaQuery } from '~/utils/useMediaQuery';
-import { useRouter } from 'next/router';
 import { escalationTooltip } from '~/components/chloropleth/tooltips/region/escalationTooltip';
-import { MDToHTMLString } from '~/utils/MDToHTMLString';
-import { National } from '~/types/data';
-
 import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
 import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
+import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
+import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
+
+import Notification from '~/assets/notification.svg';
+import ExternalLink from '~/assets/external-link.svg';
+
+import { EscalationMapLegenda } from './veiligheidsregio';
+import { useMediaQuery } from '~/utils/useMediaQuery';
+import { MDToHTMLString } from '~/utils/MDToHTMLString';
 
 const Home: FCWithLayout<INationalData> = (props) => {
   const { text } = props;
@@ -40,7 +38,7 @@ const Home: FCWithLayout<INationalData> = (props) => {
   );
 
   const isLargeScreen = useMediaQuery('(min-width: 1000px)');
-
+  const legendItems = useSafetyRegionLegendaData('positive_tested_people');
   const mapHeight = isLargeScreen ? '500px' : '400px';
 
   return (
@@ -126,16 +124,9 @@ const Home: FCWithLayout<INationalData> = (props) => {
         </div>
 
         <div className="chloropleth-legend">
-          {selectedMap === 'municipal' && (
-            <MunicipalityLegenda
-              metricName="positive_tested_people"
-              title={text.positief_geteste_personen.chloropleth_legenda.titel}
-            />
-          )}
-
-          {selectedMap === 'region' && (
-            <SafetyRegionLegenda
-              metricName="positive_tested_people"
+          {legendItems && (
+            <ChloroplethLegenda
+              items={legendItems}
               title={text.positief_geteste_personen.chloropleth_legenda.titel}
             />
           )}

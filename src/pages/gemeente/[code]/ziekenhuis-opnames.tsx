@@ -1,36 +1,36 @@
-import { FCWithLayout } from '~/components/layout';
-import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
-import { ContentHeader } from '~/components/layout/Content';
-
-import Ziekenhuis from '~/assets/ziekenhuis.svg';
+import { useRouter } from 'next/router';
 
 import siteText from '~/locale/index';
-
 import { HospitalAdmissions } from '~/types/data.d';
-import { LineChart } from '~/components/charts/index';
 import {
   getMunicipalityData,
   getMunicipalityPaths,
   IMunicipalityData,
 } from '~/static-props/municipality-data';
 
+import { LineChart } from '~/components/charts/index';
+import { FCWithLayout } from '~/components/layout';
+import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
+import { ContentHeader } from '~/components/layout/Content';
 import { IntakeHospitalBarScale } from '~/components/gemeente/intake-hospital-barscale';
+import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
+import { hospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/municipal/hospitalAdmissionsTooltip';
+import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
+import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
+import { useMunicipalLegendaData } from '~/components/chloropleth/legenda/hooks/useMunicipalLegendaData';
 
 import { getLocalTitleForMunicipality } from '~/utils/getLocalTitleForCode';
 
+import Ziekenhuis from '~/assets/ziekenhuis.svg';
+
 const text: typeof siteText.gemeente_ziekenhuisopnames_per_dag =
   siteText.gemeente_ziekenhuisopnames_per_dag;
-
-import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
-import { hospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/municipal/hospitalAdmissionsTooltip';
-import { MunicipalityLegenda } from '~/components/chloropleth/legenda/MunicipalityLegenda';
-import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
-import { useRouter } from 'next/router';
 
 const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
   const { data } = props;
   const router = useRouter();
 
+  const legendItems = useMunicipalLegendaData('hospital_admissions');
   const hospitalAdmissions: HospitalAdmissions | undefined =
     data?.hospital_admissions;
 
@@ -90,10 +90,14 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
         </div>
 
         <div className="chloropleth-legend">
-          <MunicipalityLegenda
-            metricName="hospital_admissions"
-            title={siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel}
-          />
+          {legendItems && (
+            <ChloroplethLegenda
+              items={legendItems}
+              title={
+                siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel
+              }
+            />
+          )}
         </div>
       </article>
     </>
