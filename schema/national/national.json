@@ -94,14 +94,14 @@
     "rioolwater_metingen_per_rwzi": {
       "$ref": "rioolwater_metingen_per_rwzi.json"
     },
-    "hospital_intake": {
-      "$ref": "hospital_intake.json"
+    "hospital_admissions": {
+      "$ref": "hospital_admissions.json"
     },
     "hospital_beds_occupied": {
       "$ref": "hospital_beds_occupied.json"
     },
-    "intensive_care_intake": {
-      "$ref": "intensive_care_intake.json"
+    "intensive_care_admissions": {
+      "$ref": "intensive_care_admissions.json"
     },
     "intensive_care_beds_occupied": {
       "$ref": "intensive_care_beds_occupied.json"

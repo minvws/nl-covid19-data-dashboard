@@ -80,4 +80,18 @@ Use these guidelines when defining a new schema:
    `moving_average` in `hospital_intake (HospitalIntake) > values (HospitalIntakeValue[]) > moving_average`
 
 Most files currently do not follow these guidelines. If you want to see examples
-look at `intensive_care_beds_occupied.json`, `intensive_care_intake.json` or `regional/nursing_home.json`.
+look at `intensive_care_beds_occupied.json`, `intensive_care_intake.json` or
+`regional/nursing_home.json`.
+
+### Naming Choices
+
+A lot of things are named differently throughout the schemas. Below is a list of
+choices moving forward. Add to this list whenever you make new schema's and
+decide on a naming convension.
+
+- nursing_home over nursery
+- admissions over intake
+- deceased over deaths
+- infected over positively_tested
+- intensive_care over intensivecare
+- "kliniek" is simply referred to as "hospital" by lack of better term.

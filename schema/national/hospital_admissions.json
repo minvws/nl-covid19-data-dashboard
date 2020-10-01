@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "regional_nursing_home",
+  "title": "hospital_admissions",
   "type": "object",
   "properties": {
     "values": {
@@ -17,17 +17,11 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "regional_nursing_home_value",
+      "title": "hospital_admissions_value",
       "type": "object",
       "properties": {
-        "infected_people_daily": {
-          "type": "integer"
-        },
-        "infected_locations_total": {
-          "type": "integer"
-        },
-        "deceased_daily": {
-          "type": "integer"
+        "moving_average": {
+          "type": "number"
         },
         "date_of_report_unix": {
           "type": "integer"
@@ -37,9 +31,7 @@
         }
       },
       "required": [
-        "infected_daily",
-        "infected_locations_total",
-        "deceased_daily",
+        "moving_average",
         "date_of_report_unix",
         "date_of_insertion_unix"
       ],
