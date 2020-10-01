@@ -22,7 +22,6 @@ export const createPositiveTestedPeopleMunicipalTooltip = (
         </div>
         {
           <div className={styles.positiveTestedPeopleInfo}>
-            <div className={styles.bubble}></div>
             <div className={styles.escalationText}>
               <strong>
                 {context.value !== undefined ? context.value : '-'}
