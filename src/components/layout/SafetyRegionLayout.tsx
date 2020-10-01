@@ -227,6 +227,13 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
         </aside>
 
         <section className="safety-region-content">{children}</section>
+
+        <Link href="/veiligheidsregio/[code]" as={`/veiligheidsregio/${code}`}>
+          <a className="back-button back-button-footer" onClick={openMenu}>
+            <Arrow />
+            {siteText.nav.terug_naar_alle_cijfers}
+          </a>
+        </Link>
       </div>
     </>
   );
