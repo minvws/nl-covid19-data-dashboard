@@ -11,9 +11,12 @@
     },
     "last_value": {
       "$ref": "#/definitions/value"
+    },
+    "difference": {
+      "$ref": "#/definitions/value_difference"
     }
   },
-  "required": ["values", "last_value"],
+  "required": ["values", "last_value", "difference"],
   "additionalProperties": false,
   "definitions": {
     "value": {
@@ -48,6 +51,47 @@
         "date_of_insertion_unix"
       ],
       "additionalProperties": false
+    },
+    "value_difference": {
+      "title": "national_huisarts_verdenkingen_value_difference",
+      "type": "object",
+      "properties": {
+        "incidentie_new": {
+          "type": "integer"
+        },
+        "incidentie_old": {
+          "type": "integer"
+        },
+        "incidentie_diff": {
+          "type": "integer"
+        },
+        "geschat_aantal_new": {
+          "type": "integer"
+        },
+        "geschat_aantal_old": {
+          "type": "integer"
+        },
+        "geschat_aantal_diff": {
+          "type": "integer"
+        },
+        "date_of_report_unix_new": {
+          "type": "integer"
+        },
+        "date_of_report_unix_old": {
+          "type": "integer"
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "value_new",
+        "value_old",
+        "value_difference",
+        "date_of_report_unix_new",
+        "date_of_report_unix_old",
+        "date_of_insertion_unix"
+      ]
     }
   }
 }
