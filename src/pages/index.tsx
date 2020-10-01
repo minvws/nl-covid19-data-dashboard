@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import path from 'path';
@@ -64,15 +63,7 @@ const Home: FCWithLayout<INationalData> = (props) => {
         </a>
       </article>
 
-      <article className={styles['all-numbers']}>
-        <Link href="/landelijk">
-          <a className={styles['all-numbers-link']}>
-            {text.laatste_ontwikkelingen.alle_cijfers_link}
-          </a>
-        </Link>
-      </article>
-
-      <article className="index-article layout-chloropleth">
+      <article className="metric-article layout-chloropleth">
         <div className="chloropleth-header">
           <h2>{text.veiligheidsregio_index.selecteer_titel}</h2>
           <div
