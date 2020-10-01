@@ -8,7 +8,7 @@ import { ILastGeneratedData } from '~/static-props/last-generated-data';
 import styles from './layout.module.scss';
 
 import { useMediaQuery } from '~/utils/useMediaQuery';
-import { formatDate } from '~/utils/formatDate';
+import { formatDateFromSeconds } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { getLocale } from '~/utils/getLocale';
 
@@ -65,9 +65,9 @@ function Layout(props: WithChildren<LayoutProps & ILastGeneratedData>) {
   const locale = getLocale();
   const showSmallLogo = useMediaQuery('(max-width: 480px)', true);
 
-  const dateTime = formatDate(Number(lastGenerated), 'iso');
+  const dateTime = formatDateFromSeconds(Number(lastGenerated), 'iso');
   const dateOfInsertion = lastGenerated
-    ? formatDate(Number(lastGenerated), 'long')
+    ? formatDateFromSeconds(Number(lastGenerated), 'long')
     : undefined;
 
   return (
