@@ -100,7 +100,7 @@ function getOptions(values: Value[]): Highcharts.Options {
       categories: values.map((value) => value?.date.toString()),
       labels: {
         align: 'right',
-        // types say `rotation` needs to be a number,
+        // type definition says `rotation` needs to be a number,
         // but that doesn’t work.
         rotation: '0' as any,
         formatter: function () {
@@ -139,7 +139,6 @@ function getOptions(values: Value[]): Highcharts.Options {
       },
       labels: {
         formatter: function (): string {
-          // @ts-ignore
           return formatNumber(this.value);
         },
       },

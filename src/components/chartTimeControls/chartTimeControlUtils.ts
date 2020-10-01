@@ -1,6 +1,6 @@
 import { TimeframeOption } from '.';
 
-const getDaysForTimeframe = (timeframe: TimeframeOption): number => {
+export const getDaysForTimeframe = (timeframe: TimeframeOption): number => {
   // adds 1 extra day to capture the intended amount of days
   if (timeframe === 'week') {
     return 8;
@@ -13,7 +13,9 @@ const getDaysForTimeframe = (timeframe: TimeframeOption): number => {
 
 const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
 
-const getMinimumUnixForTimeframe = (timeframe: TimeframeOption): number => {
+export const getMinimumUnixForTimeframe = (
+  timeframe: TimeframeOption
+): number => {
   if (timeframe === 'all') {
     return 0;
   }
