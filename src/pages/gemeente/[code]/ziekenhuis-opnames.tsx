@@ -85,7 +85,10 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
             selected={data.code}
             metricName="hospital_admissions"
             tooltipContent={hospitalAdmissionsTooltip}
-            onSelect={createSelectMunicipalHandler(router)}
+            onSelect={createSelectMunicipalHandler(
+              router,
+              'ziekenhuis-opnames'
+            )}
           />
         </div>
 
