@@ -11,9 +11,8 @@ export const schemaDirectory = path.join(__dirname, '..', '..', '..', 'schema');
  * @returns {array} The list of schema names
  */
 export function getSchemaNames(): string[] {
-  const schemaDirectoryPath = schemaDirectory;
-  const contents = fs.readdirSync(schemaDirectoryPath);
-  return contents.filter((item) => fs
-      .lstatSync(path.join(schemaDirectoryPath, item))
-      .isDirectory());
+  const contents = fs.readdirSync(schemaDirectory);
+  return contents.filter((item) =>
+    fs.lstatSync(path.join(schemaDirectory, item)).isDirectory()
+  );
 }
