@@ -33,7 +33,9 @@ Promise.all(validationPromises)
     if (flatResult.indexOf(false) > -1) {
       throw new Error('Validation errors occurred...');
     }
-    console.info(chalk.bgGreenBright('Validation finished...'));
+    console.info(
+      chalk.bold.green('\n  All validations finished without errors!  \n')
+    );
   })
   .catch((error) => {
     console.error(chalk.bgRed.bold(`\n  ${error}  \n`));
