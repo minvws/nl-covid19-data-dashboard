@@ -30,7 +30,7 @@ export class SchemaValidator {
   /**
    * @returns A Promise object that will resolve to a validator function.
    */
-  init(): PromiseLike<ValidateFunction> {
+  init(): Promise<ValidateFunction> {
     const schema = JSON.parse(
       fs.readFileSync(this.schemaPath, {
         encoding: 'utf8',
@@ -43,6 +43,6 @@ export class SchemaValidator {
     });
     return validator.compileAsync(schema).then((validate) => {
       return validate;
-    });
+    }) as Promise<ValidateFunction>;
   }
 }

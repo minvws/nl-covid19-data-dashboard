@@ -1,9 +1,9 @@
 /* eslint no-console: 0 */
-const fs = require('fs');
-const path = require('path');
-const { compile, JSONSchema } = require('json-schema-to-typescript');
-const { SchemaValidator } = require('./schemaValidator');
-const { getSchemaNames, schemaDirectory } = require('./getSchemaNames');
+import fs from 'fs';
+import path from 'path';
+import { compile, JSONSchema } from 'json-schema-to-typescript';
+import { SchemaValidator } from '../validator/schemaValidator';
+import { getSchemaNames, schemaDirectory } from '../validator/getSchemaNames';
 
 // The directory where the resulting data.d.ts file will be saved
 const outputPath = path.join(__dirname, '..', '..', 'types');
@@ -25,12 +25,14 @@ Promise.all(promises).then((result) => {
  * @returns A Promise that will resolve to the generated typescript
  */
 function generateTypeScriptFromSchema(schemaName: string) {
-  const validator = new SchemaValidator(path.join(__dirname, schemaDirectory));
+  const validator = new SchemaValidator(
+    path.join(schemaDirectory, schemaName, `${schemaName}.json`)
+  );
 
   // Sets the current working directory (cwd) to the schema directory, in order
   // for the typescript generator to properly resolve external references
   const generateOptions = {
-    cwd: path.join(__dirname, schemaDirectory, schemaName),
+    cwd: path.join(schemaDirectory, schemaName),
     ignoreMinAndMaxItems: true,
     bannerComment: '',
   };

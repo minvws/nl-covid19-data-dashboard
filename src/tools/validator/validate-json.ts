@@ -1,13 +1,14 @@
 /* eslint no-console: 0 */
-const fs = require('fs');
-const path = require('path');
-const SchemaValidator = require('./schemaValidator');
-const jsonBasePath = require('./jsonBasePath');
+import fs from 'fs';
+import path from 'path';
+import { SchemaValidator } from './schemaValidator';
+import { jsonBasePath } from './jsonBasePath';
+import { schemaDirectory } from './getSchemaNames';
 
 const allJsonFiles = fs.readdirSync(jsonBasePath);
 
 // This struct defines which JSON files should be validated with which schema
-const schemaToJsonLookup = {
+const schemaToJsonLookup: Record<string, string[]> = {
   national: ['NL.json'],
   ranges: ['RANGES.json'],
   regional: filterFilenames(allJsonFiles, new RegExp('^VR[0-9]+\\.json$')),
@@ -17,20 +18,22 @@ const schemaToJsonLookup = {
 };
 
 // The validations are asynchronous so this reducer gathers all the Promises in one array.
-const results = Object.keys(schemaToJsonLookup).reduce((aggr, schemaName) => {
+const validationResults = Object.keys(schemaToJsonLookup).reduce<
+  PromiseLike<boolean>[]
+>((validationAggregate, schemaName) => {
   const promises = validate(schemaName, schemaToJsonLookup[schemaName]);
-  aggr.push(...promises);
-  return aggr;
+  validationAggregate.push(...promises);
+  return validationAggregate;
 }, []);
 
 // Here the script waits for all the validations to finish, the result of each run is simply
 // a true or false. So if the result array contains one or more false values, we
 // throw an error. That way the script finishes with an error code which can be picked
 // up by CI.
-Promise.all(results)
+Promise.all(validationResults)
   .then((validationResults) => {
     if (validationResults.indexOf(false) > -1) {
-      throw new Error('Validation errors occured...');
+      throw new Error('Validation errors occurred...');
     }
     console.info('Validation finished...');
   })
@@ -41,13 +44,14 @@ Promise.all(results)
 
 /** This function creates a SchemaValidator instance for the given schema
  * and loops through the given list of JSON files and validates each.
- * @param {string} schemaName the given schema name
- * @param {array} fileNames An array of json file names
+ *
+ * @param schemaName the given schema name
+ * @param fileNames An array of json file names
  * @returns An array of promises that will resolve either to true or false dependent on the validation result
  */
-function validate(schemaName, fileNames) {
+function validate(schemaName: string, fileNames: string[]) {
   const validatorInstance = new SchemaValidator(
-    path.join(__dirname, '..', schemaName, `${schemaName}.json`)
+    path.join(schemaDirectory, schemaName, `${schemaName}.json`)
   );
 
   return fileNames.map((fileName) => {
@@ -69,9 +73,7 @@ function validate(schemaName, fileNames) {
         console.log(`${fileName} is valid`);
         return true;
       })
-      .catch((e) => {
-        console.error(e.message);
-        console.log('');
+      .catch(() => {
         return false;
       });
   });
@@ -79,9 +81,10 @@ function validate(schemaName, fileNames) {
 
 /**
  * Filters the given list of file names according to the given regular expression
- * @param {array} fileList The given list of file names
- * @param {RegExp} pattern The given reular expression
+ *
+ * @param fileList The given list of file names
+ * @param pattern The given regular expression
  */
-function filterFilenames(fileList, pattern) {
+function filterFilenames(fileList: string[], pattern: RegExp) {
   return fileList.filter((filename) => filename.match(pattern));
 }

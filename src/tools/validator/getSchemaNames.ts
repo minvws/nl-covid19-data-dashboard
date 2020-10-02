@@ -1,6 +1,9 @@
 import path from 'path';
 import fs from 'fs';
 
+/**
+ * The fully qualified path to the schema root directory
+ */
 export const schemaDirectory = path.join(__dirname, '../../../schema');
 
 /**

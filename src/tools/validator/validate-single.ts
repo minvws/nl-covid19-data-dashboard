@@ -1,15 +1,15 @@
 /* eslint no-console: 0 */
-const fs = require('fs');
-const path = require('path');
-const SchemaValidator = require('./schemaValidator');
-const getSchemaNames = require('./getSchemaNames');
-const jsonBasePath = require('./jsonBasePath');
+import fs from 'fs';
+import path from 'path';
+import { SchemaValidator } from './schemaValidator';
+import { getSchemaNames, schemaDirectory } from './getSchemaNames';
+import { jsonBasePath } from './jsonBasePath';
 
 const validSchemaNames = getSchemaNames();
 
-var myArgs = process.argv.slice(2);
+const cliArgs = process.argv.slice(2);
 
-if (myArgs.length !== 2) {
+if (cliArgs.length !== 2) {
   console.error(
     `
 Expected two commandline arguments: schema name and json filename.
@@ -21,8 +21,8 @@ and json filename must a file present in the '${jsonBasePath}' directory.`
   process.exit(1);
 }
 
-const schemaName = myArgs[0];
-const jsonFileName = myArgs[1];
+const schemaName = cliArgs[0];
+const jsonFileName = cliArgs[1];
 
 if (!validSchemaNames.includes(schemaName)) {
   console.error(
@@ -41,7 +41,7 @@ if (!fs.existsSync(path.join(jsonBasePath, jsonFileName))) {
 }
 
 const validatorInstance = new SchemaValidator(
-  path.join(__dirname, `../${schemaName}/${schemaName}.json`)
+  path.join(schemaDirectory, schemaName, `${schemaName}.json`)
 );
 const contentAsString = fs.readFileSync(path.join(jsonBasePath, jsonFileName), {
   encoding: 'utf8',
