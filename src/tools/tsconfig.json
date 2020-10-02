@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "target": "es5",
+    "target": "es2017",
     "lib": ["esnext"],
     "allowJs": false,
     "skipLibCheck": false,
@@ -9,11 +9,8 @@
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "module": "commonjs",
+    "module": "CommonJS",
     "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
     "typeRoots": ["../../node_modules/@types"]
   },
   "exclude": ["node_modules"],

@@ -1,22 +1,35 @@
 /* eslint no-console: 0 */
 import fs from 'fs';
 import path from 'path';
-import { SchemaValidator } from './schemaValidator';
+import { createValidateFunction } from './createValidateFunction';
 import { getSchemaNames, schemaDirectory } from './getSchemaNames';
 import { jsonBasePath } from './jsonBasePath';
+import chalk from 'chalk';
+import meow from 'meow';
 
 const validSchemaNames = getSchemaNames();
 
-const cliArgs = process.argv.slice(2);
+const cli = meow(
+  `
+    Usage
+      $ validate-single <schema-name> <json-path>
+ 
+    Examples
+      $ validate-single national nl.json
+`
+);
+
+const cliArgs = cli.input;
 
 if (cliArgs.length !== 2) {
   console.error(
     `
-Expected two commandline arguments: schema name and json filename.
+Expected two commandline arguments: schema-name and json-filename.
 
-Where schema name must be one of these values: ${validSchemaNames.join(', ')}
+Where schema-name must be one of these values: ${validSchemaNames.join(', ')}
+and json-filename must be a file in the '${jsonBasePath}' directory.
 
-and json filename must a file present in the '${jsonBasePath}' directory.`
+`
   );
   process.exit(1);
 }
@@ -40,27 +53,25 @@ if (!fs.existsSync(path.join(jsonBasePath, jsonFileName))) {
   process.exit(1);
 }
 
-const validatorInstance = new SchemaValidator(
+createValidateFunction(
   path.join(schemaDirectory, schemaName, `${schemaName}.json`)
-);
-const contentAsString = fs.readFileSync(path.join(jsonBasePath, jsonFileName), {
-  encoding: 'utf8',
-});
-const data = JSON.parse(contentAsString);
-
-validatorInstance
-  .init()
-  .then((validate) => {
-    const valid = validate(data);
-    if (!valid) {
-      console.log('');
-      console.error(validate.errors);
-      throw new Error(`${jsonFileName} is invalid`);
+).then((validateFunction) => {
+  const contentAsString = fs.readFileSync(
+    path.join(jsonBasePath, jsonFileName),
+    {
+      encoding: 'utf8',
     }
-    console.log(`${jsonFileName} is valid`);
-  })
-  .catch((e) => {
-    console.error(e.message);
-    console.log('');
+  );
+
+  const data = JSON.parse(contentAsString);
+
+  const valid = validateFunction(data);
+
+  if (!valid) {
+    console.error(validateFunction.errors);
+    console.error(chalk.bgRed.bold(`  ${jsonFileName} is invalid  \n`));
     process.exit(1);
-  });
+  }
+
+  console.log(chalk.green.bold(`  ${jsonFileName} is valid  \n`));
+});

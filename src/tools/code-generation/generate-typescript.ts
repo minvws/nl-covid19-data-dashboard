@@ -2,7 +2,7 @@
 import fs from 'fs';
 import path from 'path';
 import { compile, JSONSchema } from 'json-schema-to-typescript';
-import { SchemaValidator } from '../validator/schemaValidator';
+import { createValidateFunction } from '../validator/createValidateFunction';
 import { getSchemaNames, schemaDirectory } from '../validator/getSchemaNames';
 
 // The directory where the resulting data.d.ts file will be saved
@@ -15,7 +15,7 @@ const schemaNames = getSchemaNames();
 const promises = schemaNames.map(generateTypeScriptFromSchema);
 
 Promise.all(promises).then((result) => {
-  saveFile(result.join('\n'));
+  saveDefinitionsFile(result.join('\n'));
 });
 
 /**
@@ -25,10 +25,6 @@ Promise.all(promises).then((result) => {
  * @returns A Promise that will resolve to the generated typescript
  */
 function generateTypeScriptFromSchema(schemaName: string) {
-  const validator = new SchemaValidator(
-    path.join(schemaDirectory, schemaName, `${schemaName}.json`)
-  );
-
   // Sets the current working directory (cwd) to the schema directory, in order
   // for the typescript generator to properly resolve external references
   const generateOptions = {
@@ -37,22 +33,26 @@ function generateTypeScriptFromSchema(schemaName: string) {
     bannerComment: '',
   };
 
-  return validator.init().then((validate) => {
+  return createValidateFunction(
+    path.join(schemaDirectory, schemaName, `${schemaName}.json`)
+  ).then((validate) => {
     return compile(
       validate.schema as JSONSchema,
       schemaName,
       generateOptions
-    ).then((ts) => {
-      console.info(`Generated typescript for schema '${schemaName}'`);
-      return ts;
+    ).then((typeDefinitions) => {
+      console.info(
+        `Generated typescript definitions for schema '${schemaName}'`
+      );
+      return typeDefinitions;
     });
   });
 }
 
-function saveFile(typescriptSources: string) {
+function saveDefinitionsFile(typeDefinitions: string) {
   const outputFile = path.join(outputPath, 'data.d.ts');
-  fs.writeFileSync(outputFile, `${bannerComment}${typescriptSources}`, {
+  fs.writeFileSync(outputFile, `${bannerComment}${typeDefinitions}`, {
     encoding: 'utf8',
   });
-  console.info(`Written typescript output to file '${outputFile}'`);
+  console.info(`Written typescript definitions output to file '${outputFile}'`);
 }

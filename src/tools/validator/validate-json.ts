@@ -1,9 +1,10 @@
 /* eslint no-console: 0 */
 import fs from 'fs';
 import path from 'path';
-import { SchemaValidator } from './schemaValidator';
+import { createValidateFunction } from './createValidateFunction';
 import { jsonBasePath } from './jsonBasePath';
 import { schemaDirectory } from './getSchemaNames';
+import chalk from 'chalk';
 
 const allJsonFiles = fs.readdirSync(jsonBasePath);
 
@@ -18,27 +19,24 @@ const schemaToJsonLookup: Record<string, string[]> = {
 };
 
 // The validations are asynchronous so this reducer gathers all the Promises in one array.
-const validationResults = Object.keys(schemaToJsonLookup).reduce<
-  PromiseLike<boolean>[]
->((validationAggregate, schemaName) => {
-  const promises = validate(schemaName, schemaToJsonLookup[schemaName]);
-  validationAggregate.push(...promises);
-  return validationAggregate;
-}, []);
+const validationPromises = Object.keys(schemaToJsonLookup).map<
+  Promise<boolean[]>
+>((schemaName) => validate(schemaName, schemaToJsonLookup[schemaName]));
 
 // Here the script waits for all the validations to finish, the result of each run is simply
 // a true or false. So if the result array contains one or more false values, we
 // throw an error. That way the script finishes with an error code which can be picked
 // up by CI.
-Promise.all(validationResults)
+Promise.all(validationPromises)
   .then((validationResults) => {
-    if (validationResults.indexOf(false) > -1) {
+    const flatResult = validationResults.flatMap((bools) => bools);
+    if (flatResult.indexOf(false) > -1) {
       throw new Error('Validation errors occurred...');
     }
-    console.info('Validation finished...');
+    console.info(chalk.bgGreenBright('Validation finished...'));
   })
   .catch((error) => {
-    console.error(error);
+    console.error(chalk.bgRed.bold(`\n  ${error}  \n`));
     process.exit(1);
   });
 
@@ -49,8 +47,8 @@ Promise.all(validationResults)
  * @param fileNames An array of json file names
  * @returns An array of promises that will resolve either to true or false dependent on the validation result
  */
-function validate(schemaName: string, fileNames: string[]) {
-  const validatorInstance = new SchemaValidator(
+async function validate(schemaName: string, fileNames: string[]) {
+  const validateFunction = await createValidateFunction(
     path.join(schemaDirectory, schemaName, `${schemaName}.json`)
   );
 
@@ -61,21 +59,16 @@ function validate(schemaName: string, fileNames: string[]) {
 
     const data = JSON.parse(contentAsString);
 
-    return validatorInstance
-      .init()
-      .then((validate) => {
-        const valid = validate(data);
-        if (!valid) {
-          console.log('');
-          console.error(validate.errors);
-          throw new Error(`${fileName} is invalid`);
-        }
-        console.log(`${fileName} is valid`);
-        return true;
-      })
-      .catch(() => {
-        return false;
-      });
+    const valid = validateFunction(data);
+    if (!valid) {
+      console.group();
+      console.error(validateFunction.errors);
+      console.error(chalk.bgRed.bold(`  ${fileName} is invalid  \n`));
+      console.groupEnd();
+      return false;
+    }
+    console.log(chalk.green.bold(`${fileName} is valid`));
+    return true;
   });
 }
 
