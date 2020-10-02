@@ -16,6 +16,6 @@
     "jsx": "preserve",
     "typeRoots": ["../../node_modules/@types"]
   },
-  "exclude": ["node_modules", ".next", "out", "cypress"],
-  "include": ["**/*.ts", "**/*.tsx", "**/*.js"]
+  "exclude": ["node_modules"],
+  "include": ["**/*.ts"]
 }
