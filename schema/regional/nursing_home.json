@@ -23,6 +23,9 @@
         "newly_infected_people": {
           "type": "integer"
         },
+        "newly_infected_locations": {
+          "type": "integer"
+        },
         "infected_locations_total": {
           "type": "integer"
         },
@@ -41,6 +44,7 @@
       },
       "required": [
         "newly_infected_people",
+        "newly_infected_locations",
         "infected_locations_total",
         "infected_locations_percentage",
         "deceased_daily",
