@@ -13,10 +13,7 @@ export const schemaDirectory = path.join(__dirname, '..', '..', '..', 'schema');
 export function getSchemaNames(): string[] {
   const schemaDirectoryPath = schemaDirectory;
   const contents = fs.readdirSync(schemaDirectoryPath);
-  return contents.filter((item) => {
-    const isDir = fs
+  return contents.filter((item) => fs
       .lstatSync(path.join(schemaDirectoryPath, item))
-      .isDirectory();
-    return isDir;
-  });
+      .isDirectory());
 }
