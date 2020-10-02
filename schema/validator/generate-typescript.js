@@ -26,7 +26,7 @@ Promise.all(promises).then((result) => {
  */
 function generateTypeScriptFromSchema(schemaName) {
   const validator = new SchemaValidator(
-    path.join(__dirname, '..', schemaName, `${schemaName}.json`)
+    path.join(__dirname, '..', schemaName, `__index.json`)
   );
 
   // Sets the current working directory (cwd) to the schema directory, in order

@@ -41,7 +41,7 @@ if (!fs.existsSync(path.join(jsonBasePath, jsonFileName))) {
 }
 
 const validatorInstance = new SchemaValidator(
-  path.join(__dirname, `../${schemaName}/${schemaName}.json`)
+  path.join(__dirname, `../${schemaName}/__index.json`)
 );
 const contentAsString = fs.readFileSync(path.join(jsonBasePath, jsonFileName), {
   encoding: 'utf8',
