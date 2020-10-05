@@ -3,7 +3,7 @@ import { BarScale } from '~/components/barScale';
 import { IntakeIntensivecareMa } from '~/types/data.d';
 import siteText from '~/locale/index';
 
-const text: typeof siteText.ic_opnames_per_dag = siteText.ic_opnames_per_dag;
+const text = siteText.ic_opnames_per_dag;
 
 export function IntakeIntensiveCareBarscale(props: {
   data: IntakeIntensivecareMa | undefined;

@@ -23,8 +23,7 @@ import { ContentHeader } from '~/components/layout/Content';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
-const text: typeof siteText.veiligheidsregio_ziekenhuisopnames_per_dag =
-  siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
+const text = siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
 
 const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
   const { data, safetyRegionName } = props;

@@ -19,8 +19,7 @@ import {
 import { ContentHeader } from '~/components/layout/Content';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 
-const text: typeof siteText.besmettelijke_personen =
-  siteText.besmettelijke_personen;
+const text = siteText.besmettelijke_personen;
 
 const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
   const { data } = props;

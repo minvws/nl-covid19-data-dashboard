@@ -22,8 +22,7 @@ import { useMunicipalLegendaData } from '~/components/chloropleth/legenda/hooks/
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
-const text: typeof siteText.gemeente_ziekenhuisopnames_per_dag =
-  siteText.gemeente_ziekenhuisopnames_per_dag;
+const text = siteText.gemeente_ziekenhuisopnames_per_dag;
 
 const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
   const { data, municipalityName } = props;

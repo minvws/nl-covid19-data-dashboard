@@ -10,8 +10,7 @@ export function SewerWaterBarScale(props: {
 
   if (!data) return null;
 
-  const text: typeof siteText.veiligheidsregio_rioolwater_metingen =
-    siteText.veiligheidsregio_rioolwater_metingen;
+  const text = siteText.veiligheidsregio_rioolwater_metingen;
 
   return (
     <BarScale

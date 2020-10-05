@@ -12,8 +12,7 @@ import siteText from '~/locale/index';
 import { InfectedPeopleNurseryCountDaily } from '~/types/data.d';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 
-const text: typeof siteText.verpleeghuis_positief_geteste_personen =
-  siteText.verpleeghuis_positief_geteste_personen;
+const text = siteText.verpleeghuis_positief_geteste_personen;
 
 const NursingHomeInfectedPeople: FCWithLayout<INationalData> = (props) => {
   const { data: state } = props;

@@ -4,8 +4,7 @@ import { TotalReportedLocations } from '~/types/data.d';
 
 import siteText from '~/locale/index';
 
-const text: typeof siteText.verpleeghuis_besmette_locaties =
-  siteText.verpleeghuis_besmette_locaties;
+const text = siteText.verpleeghuis_besmette_locaties;
 
 export function NursingHomeInfectedLocationsBarScale(props: {
   data: TotalReportedLocations | undefined;
