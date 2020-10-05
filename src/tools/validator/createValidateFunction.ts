@@ -4,8 +4,8 @@ import path from 'path';
 
 /**
  * Loads the given uri and parses its conts to JSON
- * @param {string} basePath The given base directory name
- * @param {string} uri The given filename
+ * @param basePath The given base directory name
+ * @param uri The given filename
  */
 function loadSchema(basePath: string, uri: string): Promise<any> {
   return fs.promises
