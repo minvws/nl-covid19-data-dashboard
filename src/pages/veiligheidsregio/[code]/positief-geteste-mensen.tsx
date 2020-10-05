@@ -21,15 +21,15 @@ import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHan
 import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
 
 import { formatNumber } from '~/utils/formatNumber';
-import { getLocalTitleForRegion } from '~/utils/getLocalTitleForCode';
 
 import Getest from '~/assets/test.svg';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text: typeof siteText.veiligheidsregio_positief_geteste_personen =
   siteText.veiligheidsregio_positief_geteste_personen;
 
 const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
-  const { data } = props;
+  const { data, safetyRegionName } = props;
   const router = useRouter();
 
   const resultsPerRegion: ResultsPerRegion | undefined =
@@ -43,7 +43,9 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
     <>
       <ContentHeader
         category={siteText.veiligheidsregio_layout.headings.medisch}
-        title={getLocalTitleForRegion(text.titel, data.code)}
+        title={replaceVariablesInText(text.titel, {
+          safetyRegion: safetyRegionName,
+        })}
         Icon={Getest}
         subtitle={text.pagina_toelichting}
         metadata={{
@@ -99,7 +101,11 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
       )}
       <article className="metric-article layout-chloropleth">
         <div className="chloropleth-header">
-          <h3>{getLocalTitleForRegion(text.map_titel, data.code)}</h3>
+          <h3>
+            {replaceVariablesInText(text.map_titel, {
+              safetyRegion: safetyRegionName,
+            })}
+          </h3>
           <p>{text.map_toelichting}</p>
         </div>
 

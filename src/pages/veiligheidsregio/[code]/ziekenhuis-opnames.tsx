@@ -20,15 +20,14 @@ import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { ContentHeader } from '~/components/layout/Content';
 
-import { getLocalTitleForRegion } from '~/utils/getLocalTitleForCode';
-
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text: typeof siteText.veiligheidsregio_ziekenhuisopnames_per_dag =
   siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
 
 const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
-  const { data } = props;
+  const { data, safetyRegionName } = props;
   const router = useRouter();
 
   const resultsPerRegion: ResultsPerRegion | undefined =
@@ -42,7 +41,9 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
     <>
       <ContentHeader
         category={siteText.veiligheidsregio_layout.headings.medisch}
-        title={getLocalTitleForRegion(text.titel, data.code)}
+        title={replaceVariablesInText(text.titel, {
+          safetyRegion: safetyRegionName,
+        })}
         Icon={Ziekenhuis}
         subtitle={text.pagina_toelichting}
         metadata={{
@@ -78,7 +79,11 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
       )}
       <article className="metric-article layout-chloropleth">
         <div className="chloropleth-header">
-          <h3>{getLocalTitleForRegion(text.map_titel, data.code)}</h3>
+          <h3>
+            {replaceVariablesInText(text.map_titel, {
+              safetyRegion: safetyRegionName,
+            })}
+          </h3>
           <p>{text.map_toelichting}</p>
         </div>
 
