@@ -466,6 +466,13 @@ a.metric-link {
 
   .chloropleth-legend {
     grid-area: b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @media (min-width: $chloropleth-breakpoint) {
+      align-items: flex-start;
+    }
   }
 
   .chloropleth-chart {
