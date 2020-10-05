@@ -24,9 +24,7 @@ export const createMunicipalHospitalAdmissionsTooltip = (
           <div className={styles.positiveTestedPeopleInfo}>
             <div className={styles.escalationText}>
               <strong>
-                {context.value !== undefined
-                  ? `${context.value} / 100.000`
-                  : '-'}
+                {context.value !== undefined ? context.value : '-'}
               </strong>
             </div>
           </div>
