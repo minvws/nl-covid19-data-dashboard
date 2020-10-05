@@ -9,14 +9,14 @@ export const createRegionHospitalAdmissionsTooltip = (router: NextRouter) => (
 ): ReactNode => {
   const handler = createSelectRegionHandler(router);
 
-  const onSelectRegion = (event: any) => {
+  const onSelect = (event: any) => {
     event.stopPropagation();
     handler(context);
   };
 
   return (
     context && (
-      <TooltipContent title={context.vrname} onSelectRegion={onSelectRegion}>
+      <TooltipContent title={context.vrname} onSelect={onSelect}>
         <strong>{context.value !== undefined ? context.value : '-'}</strong>
       </TooltipContent>
     )

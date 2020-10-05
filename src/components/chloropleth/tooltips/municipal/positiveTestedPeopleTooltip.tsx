@@ -9,14 +9,14 @@ export const createPositiveTestedPeopleMunicipalTooltip = (
 ) => (context: MunicipalityProperties & { value: number }): ReactNode => {
   const handler = createSelectMunicipalHandler(router);
 
-  const onSelectRegion = (event: any) => {
+  const onSelect = (event: any) => {
     event.stopPropagation();
     handler(context);
   };
 
   return (
     context && (
-      <TooltipContent title={context.gemnaam} onSelectRegion={onSelectRegion}>
+      <TooltipContent title={context.gemnaam} onSelect={onSelect}>
         <strong>
           {context.value !== undefined ? `${context.value} / 100.000` : '-'}
         </strong>

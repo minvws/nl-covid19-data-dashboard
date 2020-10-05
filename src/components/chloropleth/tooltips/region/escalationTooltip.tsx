@@ -23,7 +23,7 @@ export const escalationTooltip = (router: NextRouter) => {
       (value) => value.threshold === type
     );
 
-    const onSelectRegion = (event: any) => {
+    const onSelect = (event: any) => {
       event.stopPropagation();
       router.push(
         '/veiligheidsregio/[code]/positief-geteste-mensen',
@@ -34,7 +34,7 @@ export const escalationTooltip = (router: NextRouter) => {
     return (
       type &&
       thresholdInfo && (
-        <TooltipContent title={context.vrname} onSelectRegion={onSelectRegion}>
+        <TooltipContent title={context.vrname} onSelect={onSelect}>
           <div className={styles.escalationInfo}>
             <div className={styles.bubble}>
               {thresholdInfo.threshold === 1 && (

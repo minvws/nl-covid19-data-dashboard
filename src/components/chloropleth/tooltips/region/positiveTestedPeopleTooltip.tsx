@@ -9,14 +9,14 @@ export const createPositiveTestedPeopleRegionalTooltip = (
 ) => (context: SafetyRegionProperties & { value: number }): ReactNode => {
   const handler = createSelectRegionHandler(router);
 
-  const onSelectRegion = (event: any) => {
+  const onSelect = (event: any) => {
     event.stopPropagation();
     handler(context);
   };
 
   return (
     context && (
-      <TooltipContent title={context.vrname} onSelectRegion={onSelectRegion}>
+      <TooltipContent title={context.vrname} onSelect={onSelect}>
         <strong>
           {context.value !== undefined ? `${context.value} / 100.000` : '-'}
         </strong>
