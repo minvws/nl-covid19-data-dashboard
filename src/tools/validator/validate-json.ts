@@ -61,8 +61,8 @@ async function validate(schemaName: string, fileNames: string[]) {
 
     const data = JSON.parse(contentAsString);
 
-    const valid = validateFunction(data);
-    if (!valid) {
+    const isValid = validateFunction(data);
+    if (!isValid) {
       console.group();
       console.error(validateFunction.errors);
       console.error(chalk.bgRed.bold(`  ${fileName} is invalid  \n`));
