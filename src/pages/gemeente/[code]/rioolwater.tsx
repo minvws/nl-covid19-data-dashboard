@@ -19,15 +19,15 @@ import {
   getMunicipalityPaths,
   IMunicipalityData,
 } from '~/static-props/municipality-data';
-import { getLocalTitleForMunicipality } from '~/utils/getLocalTitleForCode';
 
 import siteText from '~/locale/index';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text: typeof siteText.gemeente_rioolwater_metingen =
   siteText.gemeente_rioolwater_metingen;
 
 const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
-  const { data } = props;
+  const { data, municipalityName } = props;
 
   const { barScaleData, lineChartData, barChartData } = useMemo(() => {
     return {
@@ -41,7 +41,9 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
     <>
       <ContentHeader
         category={siteText.gemeente_layout.headings.overig}
-        title={getLocalTitleForMunicipality(text.titel, data.code)}
+        title={replaceVariablesInText(text.titel, {
+          municipality: municipalityName,
+        })}
         Icon={RioolwaterMonitoring}
         subtitle={text.pagina_toelichting}
         metadata={{
@@ -81,7 +83,9 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
       {barChartData && (
         <article className="metric-article">
           <h3>
-            {getLocalTitleForMunicipality(text.bar_chart_title, data.code)}
+            {replaceVariablesInText(text.bar_chart_title, {
+              municipality: municipalityName,
+            })}
           </h3>
           <BarChart
             keys={barChartData.keys}

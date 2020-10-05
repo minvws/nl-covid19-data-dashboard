@@ -22,9 +22,11 @@ export function useMenuState(defaultOpen = false): MenuState {
     event?.preventDefault();
     setMenuOpen(true);
 
-    /* Ensure the top of the menu is in view */
+    /* Ensure the top of the main navigation (or if not found: the sidebar) is in view */
     requestAnimationFrame(() => {
-      window.document.querySelector('aside')?.scrollIntoView(true);
+      window.document
+        .querySelector('#main-navigation,aside')
+        ?.scrollIntoView(true);
     });
   };
 

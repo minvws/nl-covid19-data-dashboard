@@ -9,7 +9,7 @@ import { TCombinedChartDimensions } from './hooks/useChartDimensions';
 import styles from './chloropleth.module.scss';
 import { localPoint } from '@vx/event';
 
-import { Tooltip } from './tooltips/tooltip';
+import { Tooltip } from './tooltips/tooltipContainer';
 import { useMediaQuery } from '~/utils/useMediaQuery';
 
 export type TooltipState = {

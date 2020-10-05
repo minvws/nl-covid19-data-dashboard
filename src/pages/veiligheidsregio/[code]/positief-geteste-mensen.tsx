@@ -14,24 +14,24 @@ import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { LineChart } from '~/components/charts/index';
 import { ContentHeader } from '~/components/layout/Content';
 import { PositivelyTestedPeopleBarScale } from '~/components/veiligheidsregio/positive-tested-people-barscale';
-import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
+import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/createPositiveTestedPeopleMunicipalTooltip';
 import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
 import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
 import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
 
 import { formatNumber } from '~/utils/formatNumber';
-import { getLocalTitleForRegion } from '~/utils/getLocalTitleForCode';
 
 import Getest from '~/assets/test.svg';
 import Afname from '~/assets/afname.svg';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text = siteText.veiligheidsregio_positief_geteste_personen;
 const ggdText = siteText.veiligheidsregio_positief_geteste_personen_ggd;
 
 const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
-  const { data } = props;
+  const { data, safetyRegionName } = props;
   const router = useRouter();
 
   const resultsPerRegion: ResultsPerRegion | undefined =
@@ -47,7 +47,9 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
     <>
       <ContentHeader
         category={siteText.veiligheidsregio_layout.headings.medisch}
-        title={getLocalTitleForRegion(text.titel, data.code)}
+        title={replaceVariablesInText(text.titel, {
+          safetyRegion: safetyRegionName,
+        })}
         Icon={Getest}
         subtitle={text.pagina_toelichting}
         metadata={{
@@ -123,7 +125,11 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
       )}
       <article className="metric-article layout-chloropleth">
         <div className="chloropleth-header">
-          <h3>{getLocalTitleForRegion(text.map_titel, data.code)}</h3>
+          <h3>
+            {replaceVariablesInText(text.map_titel, {
+              safetyRegion: safetyRegionName,
+            })}
+          </h3>
           <p>{text.map_toelichting}</p>
         </div>
 
@@ -151,7 +157,9 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
       {ggdData && (
         <>
           <ContentHeader
-            title={getLocalTitleForRegion(ggdText.titel, data.code)}
+            title={replaceVariablesInText(ggdText.titel, {
+              safetyRegion: safetyRegionName,
+            })}
             id="ggd"
             Icon={Afname}
             subtitle={ggdText.toelichting}
