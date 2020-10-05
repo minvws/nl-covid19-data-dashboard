@@ -17,7 +17,7 @@ export const createRegionHospitalAdmissionsTooltip = (router: NextRouter) => (
   return (
     context && (
       <Tooltip title={context.vrname} onSelectRegion={onSelectRegion}>
-        {context.value !== undefined ? context.value : '-'}
+        <strong>{context.value !== undefined ? context.value : '-'}</strong>
       </Tooltip>
     )
   );

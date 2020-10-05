@@ -17,7 +17,9 @@ export const createPositiveTestedPeopleRegionalTooltip = (
   return (
     context && (
       <Tooltip title={context.vrname} onSelectRegion={onSelectRegion}>
-        {context.value !== undefined ? `${context.value} / 100.000` : '-'}
+        <strong>
+          {context.value !== undefined ? `${context.value} / 100.000` : '-'}
+        </strong>
       </Tooltip>
     )
   );

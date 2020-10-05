@@ -17,7 +17,7 @@ export const createMunicipalHospitalAdmissionsTooltip = (
   return (
     context && (
       <Tooltip title={context.gemnaam} onSelectRegion={onSelectRegion}>
-        {context.value !== undefined ? context.value : '-'}
+        <strong>{context.value !== undefined ? context.value : '-'}</strong>
       </Tooltip>
     )
   );

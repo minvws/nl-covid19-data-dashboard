@@ -17,9 +17,7 @@ export function Tooltip(props: IProps) {
       </div>
       {
         <div className={styles.positiveTestedPeopleInfo}>
-          <div className={styles.escalationText}>
-            <strong>{children}</strong>
-          </div>
+          <div className={styles.escalationText}>{children}</div>
         </div>
       }
     </div>

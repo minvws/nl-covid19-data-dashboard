@@ -17,7 +17,9 @@ export const createPositiveTestedPeopleMunicipalTooltip = (
   return (
     context && (
       <Tooltip title={context.gemnaam} onSelectRegion={onSelectRegion}>
-        {context.value !== undefined ? `${context.value} / 100.000` : '-'}
+        <strong>
+          {context.value !== undefined ? `${context.value} / 100.000` : '-'}
+        </strong>
       </Tooltip>
     )
   );
