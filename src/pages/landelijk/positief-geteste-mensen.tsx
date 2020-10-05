@@ -5,7 +5,7 @@ import getNlData, { INationalData } from '~/static-props/nl-data';
 import siteText from '~/locale/index';
 import {
   InfectedPeopleDeltaNormalized,
-  InfectedPeopleTotal,
+  NationalInfectedPeopleTotal,
   IntakeShareAgeGroups,
 } from '~/types/data.d';
 
@@ -44,7 +44,8 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
   const delta: InfectedPeopleDeltaNormalized | undefined =
     data?.infected_people_delta_normalized;
   const age: IntakeShareAgeGroups | undefined = data?.intake_share_age_groups;
-  const total: InfectedPeopleTotal | undefined = data?.infected_people_total;
+  const total: NationalInfectedPeopleTotal | undefined =
+    data?.infected_people_total;
 
   const ggdData = data?.infected_people_percentage?.last_value;
 

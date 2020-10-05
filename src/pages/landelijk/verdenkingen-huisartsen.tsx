@@ -1,5 +1,8 @@
 import siteText from '~/locale/index';
-import { VerdenkingenHuisartsen } from '~/types/data.d';
+import {
+  NationalHuisartsVerdenkingen,
+  NationalHuisartsVerdenkingenValue,
+} from '~/types/data.d';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 
 import { ContentHeader } from '~/components/layout/Content';
@@ -17,7 +20,7 @@ const text: typeof siteText.verdenkingen_huisartsen =
 const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
   const { data: state } = props;
 
-  const data: VerdenkingenHuisartsen | undefined =
+  const data: NationalHuisartsVerdenkingen | undefined =
     state?.verdenkingen_huisartsen;
 
   const total = state?.verdenkingen_huisartsen?.last_value?.geschat_aantal;
@@ -61,11 +64,16 @@ const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
           <LineChart
             title={text.linechart_titel}
             timeframeOptions={['all', '5weeks']}
-            values={data.values.map((value) => ({
-              value: value.incidentie,
-              date: value.week_unix,
-              week: { start: value.week_start_unix, end: value.week_end_unix },
-            }))}
+            values={data.values.map(
+              (value: NationalHuisartsVerdenkingenValue) => ({
+                value: value.incidentie,
+                date: value.week_unix,
+                week: {
+                  start: value.week_start_unix,
+                  end: value.week_end_unix,
+                },
+              })
+            )}
           />
         </article>
       )}
