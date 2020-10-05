@@ -1,8 +1,8 @@
 import { NextRouter } from 'next/router';
 import { ReactNode } from 'react';
-import styles from '~/components/chloropleth/tooltips/tooltip.module.scss';
 import { MunicipalityProperties } from '~/components/chloropleth/shared';
 import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
+import { Tooltip } from '~/components/chloropleth/tooltips/tooltipContent';
 
 export const createMunicipalHospitalAdmissionsTooltip = (
   router: NextRouter
@@ -16,20 +16,9 @@ export const createMunicipalHospitalAdmissionsTooltip = (
 
   return (
     context && (
-      <div className={styles.escalationTooltip} onClick={onSelectRegion}>
-        <div className={styles.escalationTooltipHeader}>
-          <h3>{context?.gemnaam}</h3>
-        </div>
-        {
-          <div className={styles.positiveTestedPeopleInfo}>
-            <div className={styles.escalationText}>
-              <strong>
-                {context.value !== undefined ? context.value : '-'}
-              </strong>
-            </div>
-          </div>
-        }
-      </div>
+      <Tooltip title={context.gemnaam} onSelectRegion={onSelectRegion}>
+        {context.value !== undefined ? context.value : '-'}
+      </Tooltip>
     )
   );
 };

@@ -2,7 +2,7 @@ import { NextRouter } from 'next/router';
 import { ReactNode } from 'react';
 import { MunicipalityProperties } from '../../shared';
 import { createSelectMunicipalHandler } from '../../../chloropleth/selectHandlers/createSelectMunicipalHandler';
-import styles from '../tooltip.module.scss';
+import { Tooltip } from '~/components/chloropleth/tooltips/tooltipContent';
 
 export const createPositiveTestedPeopleMunicipalTooltip = (
   router: NextRouter
@@ -16,22 +16,9 @@ export const createPositiveTestedPeopleMunicipalTooltip = (
 
   return (
     context && (
-      <div className={styles.escalationTooltip} onClick={onSelectRegion}>
-        <div className={styles.escalationTooltipHeader}>
-          <h3>{context?.gemnaam}</h3>
-        </div>
-        {
-          <div className={styles.positiveTestedPeopleInfo}>
-            <div className={styles.escalationText}>
-              <strong>
-                {context.value !== undefined
-                  ? `${context.value} / 100.000`
-                  : '-'}
-              </strong>
-            </div>
-          </div>
-        }
-      </div>
+      <Tooltip title={context.gemnaam} onSelectRegion={onSelectRegion}>
+        {context.value !== undefined ? `${context.value} / 100.000` : '-'}
+      </Tooltip>
     )
   );
 };
