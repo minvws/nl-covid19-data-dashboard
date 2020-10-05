@@ -16,8 +16,8 @@
       "$ref": "#/definitions/value_difference"
     }
   },
-  "required": ["values", "last_value", "difference"],
-  "additionalProperties": false,
+  "required": ["values", "last_value"],
+  "additionalProperties": true,
   "definitions": {
     "value": {
       "title": "national_huisarts_verdenkingen_value",
