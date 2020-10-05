@@ -54,7 +54,7 @@ if (!fs.existsSync(path.join(jsonBasePath, jsonFileName))) {
 }
 
 createValidateFunction(
-  path.join(schemaDirectory, schemaName, `${schemaName}.json`)
+  path.join(schemaDirectory, schemaName, `__index.json`)
 ).then((validateFunction) => {
   const contentAsString = fs.readFileSync(
     path.join(jsonBasePath, jsonFileName),

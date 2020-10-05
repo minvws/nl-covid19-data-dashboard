@@ -34,7 +34,7 @@ function generateTypeScriptFromSchema(schemaName: string) {
   };
 
   return createValidateFunction(
-    path.join(schemaDirectory, schemaName, `${schemaName}.json`)
+    path.join(schemaDirectory, schemaName, `__index.json`)
   ).then((validate) => {
     return compile(
       validate.schema as JSONSchema,
