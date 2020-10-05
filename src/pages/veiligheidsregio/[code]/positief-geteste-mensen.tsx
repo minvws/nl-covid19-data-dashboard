@@ -21,7 +21,6 @@ import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHan
 import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
 
 import { formatNumber } from '~/utils/formatNumber';
-import { getLocalTitleForRegion } from '~/utils/getLocalTitleForCode';
 
 import Getest from '~/assets/test.svg';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
@@ -102,7 +101,11 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
       )}
       <article className="metric-article layout-chloropleth">
         <div className="chloropleth-header">
-          <h3>{getLocalTitleForRegion(text.map_titel, data.code)}</h3>
+          <h3>
+            {replaceVariablesInText(text.map_titel, {
+              safetyRegion: safetyRegionName,
+            })}
+          </h3>
           <p>{text.map_toelichting}</p>
         </div>
 

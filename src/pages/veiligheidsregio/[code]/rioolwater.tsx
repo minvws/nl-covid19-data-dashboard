@@ -21,7 +21,6 @@ import {
   getSafetyRegionPaths,
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
-import { getLocalTitleForRegion } from '~/utils/getLocalTitleForCode';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text: typeof siteText.veiligheidsregio_rioolwater_metingen =
@@ -83,7 +82,11 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
 
       {barChartData && (
         <article className="metric-article">
-          <h3>{getLocalTitleForRegion(text.bar_chart_title, data.code)}</h3>
+          <h3>
+            {replaceVariablesInText(text.bar_chart_title, {
+              safetyRegion: safetyRegionName,
+            })}
+          </h3>
           <BarChart
             keys={barChartData.keys}
             data={barChartData.data}

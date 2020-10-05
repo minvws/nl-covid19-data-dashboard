@@ -20,8 +20,6 @@ import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { ContentHeader } from '~/components/layout/Content';
 
-import { getLocalTitleForRegion } from '~/utils/getLocalTitleForCode';
-
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
@@ -81,7 +79,11 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
       )}
       <article className="metric-article layout-chloropleth">
         <div className="chloropleth-header">
-          <h3>{getLocalTitleForRegion(text.map_titel, data.code)}</h3>
+          <h3>
+            {replaceVariablesInText(text.map_titel, {
+              safetyRegion: safetyRegionName,
+            })}
+          </h3>
           <p>{text.map_toelichting}</p>
         </div>
 
