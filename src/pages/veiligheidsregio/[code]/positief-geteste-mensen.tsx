@@ -27,9 +27,8 @@ import Getest from '~/assets/test.svg';
 import Afname from '~/assets/afname.svg';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 
-const text: typeof siteText.veiligheidsregio_positief_geteste_personen =
-  siteText.veiligheidsregio_positief_geteste_personen;
-const ggdText = siteText.positief_geteste_personen_ggd;
+const text = siteText.veiligheidsregio_positief_geteste_personen;
+const ggdText = siteText.veiligheidsregio_positief_geteste_personen_ggd;
 
 const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
   const { data } = props;
@@ -152,7 +151,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
       {ggdData && (
         <>
           <ContentHeader
-            title={ggdText.titel}
+            title={getLocalTitleForRegion(ggdText.titel, data.code)}
             id="ggd"
             Icon={Afname}
             subtitle={ggdText.toelichting}
