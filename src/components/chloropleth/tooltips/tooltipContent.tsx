@@ -15,7 +15,7 @@ export function TooltipContent(props: IProps) {
       <div className={styles.tooltipHeader}>
         <h3>{title}</h3>
       </div>
-      {<div className={styles.tooltipInfo}>{children}</div>}
+      <div className={styles.tooltipInfo}>{children}</div>
     </div>
   );
 }
