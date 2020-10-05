@@ -9,7 +9,7 @@ import {
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
 
-import { createMunicipalHospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/municipal/hospitalAdmissionsTooltip';
+import { createMunicipalHospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/municipal/createMunicipalHospitalAdmissionsTooltip';
 import { LineChart } from '~/components/charts/index';
 import { IntakeHospitalBarScale } from '~/components/veiligheidsregio/intake-hospital-barscale';
 import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';

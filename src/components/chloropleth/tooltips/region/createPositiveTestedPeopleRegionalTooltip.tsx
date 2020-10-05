@@ -1,7 +1,7 @@
 import { NextRouter } from 'next/router';
 import { ReactNode } from 'react';
 import { SafetyRegionProperties } from '../../shared';
-import { createSelectRegionHandler } from '../../../chloropleth/selectHandlers/createSelectRegionHandler';
+import { createSelectRegionHandler } from '../../selectHandlers/createSelectRegionHandler';
 import { TooltipContent } from '~/components/chloropleth/tooltips/tooltipContent';
 
 export const createPositiveTestedPeopleRegionalTooltip = (
