@@ -24,9 +24,12 @@ import { formatNumber } from '~/utils/formatNumber';
 import { getLocalTitleForRegion } from '~/utils/getLocalTitleForCode';
 
 import Getest from '~/assets/test.svg';
+import Afname from '~/assets/afname.svg';
+import { replaceKpisInText } from '~/utils/replaceKpisInText';
 
 const text: typeof siteText.veiligheidsregio_positief_geteste_personen =
   siteText.veiligheidsregio_positief_geteste_personen;
+const ggdText = siteText.positief_geteste_personen_ggd;
 
 const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
   const { data } = props;
@@ -34,6 +37,8 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
 
   const resultsPerRegion: ResultsPerRegion | undefined =
     data?.results_per_region;
+
+  const ggdData = data?.ggd?.last_value;
 
   const legendItems = useSafetyRegionLegendaData('positive_tested_people');
   const municipalCodes = regionCodeToMunicipalCodeLookup[data.code];
@@ -82,6 +87,26 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
             </h3>
           )}
           <p>{text.kpi_toelichting}</p>
+          {ggdData && ggdData.infected_percentage_daily && (
+            <div className="ggd-summary">
+              <h4
+                dangerouslySetInnerHTML={{
+                  __html: replaceKpisInText(ggdText.summary_title, [
+                    {
+                      name: 'percentage',
+                      value: `${formatNumber(
+                        ggdData.infected_percentage_daily
+                      )}%`,
+                      className: 'text-blue',
+                    },
+                  ]),
+                }}
+              ></h4>
+              <p>
+                <a href="#ggd">{ggdText.summary_link_cta}</a>
+              </p>
+            </div>
+          )}
         </article>
       </div>
       {resultsPerRegion && (
@@ -123,6 +148,68 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           )}
         </div>
       </article>
+
+      {ggdData && (
+        <>
+          <ContentHeader
+            title={ggdText.titel}
+            id="ggd"
+            Icon={Afname}
+            subtitle={ggdText.toelichting}
+            metadata={{
+              datumsText: ggdText.datums,
+              dateUnix: ggdData.date_of_report_unix,
+              dateInsertedUnix: ggdData.date_of_insertion_unix,
+              dataSource: ggdText.bron,
+            }}
+          />
+
+          <div className="layout-two-column">
+            <article className="metric-article column-item">
+              <h3>
+                {ggdText.totaal_getest_week_titel}{' '}
+                <span className="text-blue kpi">
+                  {formatNumber(ggdData.infected_daily)}
+                </span>
+              </h3>
+
+              <p>{ggdText.totaal_getest_week_uitleg}</p>
+            </article>
+
+            <article className="metric-article column-item">
+              <h3>
+                {ggdText.positief_getest_week_titel}{' '}
+                <span className="text-blue kpi">
+                  {`${formatNumber(ggdData.infected_percentage_daily)}%`}
+                </span>
+              </h3>
+              <p>{ggdText.positief_getest_week_uitleg}</p>
+              <p>
+                <strong
+                  className="additional-kpi"
+                  dangerouslySetInnerHTML={{
+                    __html: replaceKpisInText(
+                      ggdText.positief_getest_getest_week_uitleg,
+                      [
+                        {
+                          name: 'numerator',
+                          value: formatNumber(ggdData.infected_daily),
+                          className: 'text-blue',
+                        },
+                        {
+                          name: 'denominator',
+                          value: formatNumber(ggdData.tested_total_daily),
+                          className: 'text-blue',
+                        },
+                      ]
+                    ),
+                  }}
+                ></strong>
+              </p>
+            </article>
+          </div>
+        </>
+      )}
     </>
   );
 };
