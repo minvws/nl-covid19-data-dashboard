@@ -7,7 +7,7 @@ interface IProps {
   children: ReactNode;
 }
 
-export function Tooltip(props: IProps) {
+export function TooltipContent(props: IProps) {
   const { title, onSelectRegion, children } = props;
 
   return (
