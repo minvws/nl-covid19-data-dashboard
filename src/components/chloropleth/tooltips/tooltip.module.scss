@@ -1,6 +1,6 @@
 @import '~/scss/variables.scss';
 
-.tooltip {
+.tooltipContainer {
   background: white;
   position: absolute;
   z-index: 1000;
@@ -26,7 +26,7 @@
   }
 }
 
-.escalationTooltip {
+.tooltip {
   color: $text-color;
   width: 265px;
   background-color: white;
@@ -34,7 +34,7 @@
   pointer-events: all;
   cursor: pointer;
 
-  .escalationTooltipHeader {
+  .tooltipHeader {
     border-bottom: 1px solid #c4c4c4;
     margin: 0 -0.5rem;
     padding: 0.25rem 3rem 0.25rem 1rem;
@@ -64,13 +64,10 @@
   }
 
   .escalationInfo {
-    padding: 1em 0.5em;
-    font-size: 1rem;
     line-height: 1.5;
-    cursor: pointer;
   }
 
-  .positiveTestedPeopleInfo {
+  .tooltipInfo {
     padding: 1em 0.5em;
     font-size: 1rem;
     cursor: pointer;

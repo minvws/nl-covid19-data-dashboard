@@ -11,15 +11,11 @@ export function TooltipContent(props: IProps) {
   const { title, onSelectRegion, children } = props;
 
   return (
-    <div className={styles.escalationTooltip} onClick={onSelectRegion}>
-      <div className={styles.escalationTooltipHeader}>
+    <div className={styles.tooltip} onClick={onSelectRegion}>
+      <div className={styles.tooltipHeader}>
         <h3>{title}</h3>
       </div>
-      {
-        <div className={styles.positiveTestedPeopleInfo}>
-          <div className={styles.escalationText}>{children}</div>
-        </div>
-      }
+      {<div className={styles.tooltipInfo}>{children}</div>}
     </div>
   );
 }
