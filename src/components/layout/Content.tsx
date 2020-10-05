@@ -5,7 +5,7 @@ import styles from './layout.module.scss';
 export function ContentHeader(props: IContentHeaderProps) {
   const { category, Icon, title, subtitle, metadata, id } = props;
 
-  const layoutClasses = [];
+  const layoutClasses = [styles.contentHeader];
 
   if (!category) {
     layoutClasses.push(styles.withoutCategory);
