@@ -14,7 +14,7 @@ import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
 import { ContentHeader } from '~/components/layout/Content';
 import { IntakeHospitalBarScale } from '~/components/gemeente/intake-hospital-barscale';
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
-import { hospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/municipal/hospitalAdmissionsTooltip';
+import { createMunicipalHospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/municipal/createMunicipalHospitalAdmissionsTooltip';
 import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
 import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
 import { useMunicipalLegendaData } from '~/components/chloropleth/legenda/hooks/useMunicipalLegendaData';
@@ -84,7 +84,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
           <MunicipalityChloropleth
             selected={data.code}
             metricName="hospital_admissions"
-            tooltipContent={hospitalAdmissionsTooltip}
+            tooltipContent={createMunicipalHospitalAdmissionsTooltip(router)}
             onSelect={createSelectMunicipalHandler(
               router,
               'ziekenhuis-opnames'
