@@ -1,23 +1,16 @@
+import path from 'path';
+import fs from 'fs';
+
 import { Fragment } from 'react';
 import Head from 'next/head';
 
-import { getLayout, FCWithLayout } from 'components/layout';
-import MaxWidth from 'components/maxWidth';
+import { getLayoutWithMetadata, FCWithLayout } from '~/components/layout';
+import { MaxWidth } from '~/components/maxWidth';
 
 import styles from './over.module.scss';
-import siteText from 'locale';
+import siteText from '~/locale/index';
 
-import MDToHTMLString from 'utils/MDToHTMLString';
-
-import openGraphImageNL from 'assets/sharing/og-over.png?url';
-import twitterImageNL from 'assets/sharing/twitter-over.png?url';
-import openGraphImageEN from 'assets/sharing/og-about.png?url';
-import twitterImageEN from 'assets/sharing/twitter-about.png?url';
-import getLocale from 'utils/getLocale';
-
-const locale = getLocale();
-const openGraphImage = locale === 'nl' ? openGraphImageNL : openGraphImageEN;
-const twitterImage = locale === 'nl' ? twitterImageNL : twitterImageEN;
+import { MDToHTMLString } from '~/utils/MDToHTMLString';
 
 interface IVraagEnAntwoord {
   vraag: string;
@@ -27,6 +20,7 @@ interface IVraagEnAntwoord {
 interface StaticProps {
   props: {
     text: typeof siteText;
+    lastGenerated: string;
   };
 }
 
@@ -40,7 +34,11 @@ export async function getStaticProps(): Promise<StaticProps> {
 
   text.over_veelgestelde_vragen.vragen = serializedContent;
 
-  return { props: { text } };
+  const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
+  const fileContents = fs.readFileSync(filePath, 'utf8');
+  const lastGenerated = JSON.parse(fileContents).last_generated;
+
+  return { props: { text, lastGenerated } };
 }
 
 const Over: FCWithLayout<{ text: typeof siteText }> = (props) => {
@@ -72,16 +70,21 @@ const Over: FCWithLayout<{ text: typeof siteText }> = (props) => {
             <h2>{text.over_veelgestelde_vragen.text}</h2>
             <article className={styles.faqList}>
               {text.over_veelgestelde_vragen.vragen.map(
-                (item: IVraagEnAntwoord) => (
-                  <Fragment key={`item-${item.vraag}`}>
-                    <h3>{item.vraag}</h3>
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: item.antwoord,
-                      }}
-                    />
-                  </Fragment>
-                )
+                (item: IVraagEnAntwoord) => {
+                  //@TODO, Why does this sometimes return empty strings for the
+                  // antwoord key? Does this PR mess up something with promises/async behavior
+                  // in getStaticProps?
+                  return (
+                    <Fragment key={`item-${item.vraag}`}>
+                      <h3>{item.vraag}</h3>
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: item.antwoord,
+                        }}
+                      />
+                    </Fragment>
+                  );
+                }
               )}
             </article>
           </div>
@@ -91,10 +94,10 @@ const Over: FCWithLayout<{ text: typeof siteText }> = (props) => {
   );
 };
 
-Over.getLayout = getLayout({
+const metadata = {
   ...siteText.over_metadata,
-  openGraphImage,
-  twitterImage,
-});
+};
+
+Over.getLayout = getLayoutWithMetadata(metadata);
 
 export default Over;

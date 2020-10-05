@@ -1,12 +1,13 @@
 import fs from 'fs';
 import path from 'path';
 
-import { Municipal } from 'types/data';
+import { Municipal } from '~/types/data.d';
 
-import municipalities from 'data/gemeente_veiligheidsregio.json';
+import municipalities from '~/data/gemeente_veiligheidsregio.json';
 
 export interface IMunicipalityData {
   data: Municipal;
+  lastGenerated: string;
   name: string;
 }
 
@@ -56,11 +57,13 @@ export function getMunicipalityData() {
     const data = JSON.parse(fileContents);
 
     const name = municipalities.find((r) => r.gemcode === code)?.name || '';
+    const lastGenerated = data.last_generated;
 
     return {
       props: {
         data,
         name,
+        lastGenerated,
       },
     };
   };

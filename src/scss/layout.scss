@@ -60,13 +60,61 @@
   margin-bottom: $default-margin * 2;
 }
 
+.map-article {
+  background: transparent;
+  padding: 0 2em 2em 2em;
+  border-radius: 5px;
+  margin: 0 -2rem;
+}
+
+.index-article,
 .metric-article {
   background: white;
   padding: 2em;
   border-radius: 5px;
-  margin: 0;
+  margin: 2rem -2rem 0;
+  box-shadow: $box-shadow;
+
+  .article-text {
+    max-width: 30rem;
+  }
+
+  @media (min-width: 700px) {
+    margin: 0;
+    margin-top: 2rem;
+  }
+}
+
+.index-article:first-of-type() {
+  margin-top: -1rem;
+}
+
+.escalation-article {
+  background: white;
+  padding: 2em;
+  border-radius: 5px;
+  margin: 0 -2rem;
   margin-top: 2rem;
   box-shadow: $box-shadow;
+  display: flex;
+  flex-direction: column;
+
+  .article-text {
+    max-width: 30rem;
+  }
+
+  @media (min-width: 700px) {
+    margin: 0;
+    margin-top: 2rem;
+  }
+
+  @media (min-width: 1200px) {
+    flex-direction: row;
+  }
+
+  .column-item-no-margin {
+    position: relative;
+  }
 }
 
 /* Remove outline from programatically focussed elements. */
@@ -76,10 +124,11 @@
 
 .safety-region-aside,
 .municipality-aside {
-  min-height: 30em;
+  min-height: 35em;
 
   [data-reach-combobox] {
-    padding: 1em;
+    padding: 2em 1em;
+    padding-bottom: 0;
   }
 }
 
@@ -89,6 +138,7 @@
   /* will become display: flex at wider screens */
   display: block;
   flex-direction: column;
+  margin-bottom: 2rem;
 
   .back-button {
     background: white;
@@ -96,8 +146,14 @@
     width: 100%;
     padding: 1em;
     box-shadow: $box-shadow;
+    position: relative;
+    z-index: 2;
     text-decoration: none;
-    z-index: 3;
+
+    &.back-button-footer {
+      background: none;
+      box-shadow: none;
+    }
 
     &:hover,
     &:focus {
@@ -121,22 +177,69 @@
     flex-basis: 100%;
     padding-top: 3rem;
   }
+
+  .last-developments {
+    padding-top: 2em;
+  }
 }
 
-@media (max-width: 1000px) {
-  .small-screen-aside-tendency {
-    .national-content,
-    .safety-region-content,
-    .municipality-content {
-      display: none;
+@media (max-width: 999px) {
+  .national-layout,
+  .safety-region-layout,
+  .municipality-layout {
+    > section {
+      padding-top: 0;
+      margin-top: 2em;
+    }
+
+    .index-article {
+      margin-top: 0;
     }
   }
 
-  .small-screen-content-tendency {
+  .safety-region-aside,
+  .municipality-aside {
+    min-height: 6em;
+  }
+
+  /**
+   * Menu and content only show/hides with JavaScript enabled
+   */
+  .js {
+    .has-menu-and-content-opened {
+      .back-button {
+        display: none;
+      }
+    }
+
+    .has-menu-opened {
+      .national-content,
+      .safety-region-content,
+      .municipality-content,
+      .back-button {
+        display: none;
+      }
+    }
+
+    .has-menu-closed {
+      .national-aside,
+      .safety-region-aside,
+      .municipality-aside {
+        display: none;
+      }
+    }
+  }
+
+  // Tweaks to display the non-JS aside + content well
+  html:not(.js) {
+    .back-button {
+      display: none;
+    }
+
     .national-aside,
     .safety-region-aside,
     .municipality-aside {
-      display: none;
+      margin-bottom: 2em;
     }
   }
 }
@@ -168,7 +271,7 @@
   .safety-region-layout,
   .municipality-layout {
     max-width: 1400px;
-    margin: 0 auto;
+    margin: 0 auto 2rem;
     padding: 0 1em;
   }
 }
@@ -191,8 +294,11 @@
   z-index: 2;
 
   h2 {
+    font-size: 1.42383rem;
+    line-height: 1.40466;
     padding: 1rem;
-    padding-top: 3rem;
+    padding-bottom: 0.5rem;
+    padding-top: 2rem;
   }
 
   ul {
@@ -200,13 +306,25 @@
     margin: 0;
     padding: 0;
 
-    li:first-of-type a {
-      border-top: 2px solid $page-background;
-    }
+    li {
+      border-bottom: 1px solid #c4c4c4;
 
-    li a {
-      border-bottom: 2px solid $page-background;
+      &:first-child {
+        border-top: 1px solid #c4c4c4;
+      }
     }
+  }
+}
+
+.region-names {
+  h2 {
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+
+  p {
+    margin-top: 0;
+    padding: 0 1rem 1rem;
   }
 }
 
@@ -218,9 +336,12 @@ a.metric-link {
   text-decoration: none;
   position: relative;
 
-  &:hover,
-  &:focus {
+  &:hover {
     background: $page-background;
+  }
+
+  &:focus {
+    background: $page-background-active;
   }
 
   h3 {
@@ -231,9 +352,9 @@ a.metric-link {
     content: '';
     background-image: url('/images/chevron.svg');
     // match aspect ratio of chevron.svg
-    background-size: 1.1em 1.8em;
-    height: 1.8em;
-    width: 1.1em;
+    background-size: 0.6em 1.2em;
+    height: 1.2em;
+    width: 0.6em;
     display: block;
     position: absolute;
     right: 1em;
@@ -244,11 +365,38 @@ a.metric-link {
     display: block;
     margin: 0 2.5rem;
   }
+
+  &.last-developments-link {
+    &::after {
+      top: 2em;
+    }
+  }
 }
 
-a.active-metric-link {
-  background: $page-background;
-  border-right: 5px solid $red;
+.metric-not-available {
+  padding: 1rem;
+  color: $text-color-grey;
+
+  svg {
+    fill: currentColor;
+    color: $text-color-grey !important;
+  }
+
+  p {
+    margin-top: 0.5rem;
+    margin-left: 2.5rem;
+  }
+}
+
+@media (min-width: 1000px) {
+  a.active-metric-link {
+    background: $page-background-active;
+    border-right: 5px solid $red;
+
+    &::after {
+      content: none;
+    }
+  }
 }
 
 @media (min-width: 1200px) {
@@ -256,8 +404,18 @@ a.active-metric-link {
     display: flex;
     flex-direction: row;
 
+    .column-item-no-margin {
+      margin: 0;
+    }
+
     .column-item {
       flex: 1 1 50%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .column-item-small {
+      flex: 1 1 10%;
       display: flex;
       flex-direction: column;
     }
@@ -267,19 +425,59 @@ a.active-metric-link {
     &:first-of-type {
       margin-right: $default-margin;
     }
-
-    &:nth-of-type(2) {
-      margin-left: $default-margin;
-    }
   }
 
   .column-item-extra-margin {
     &:first-of-type {
       margin-right: $default-margin * 3;
     }
+  }
 
-    &:nth-of-type(2) {
-      margin-left: $default-margin * 3;
+  .column-item-no-margin {
+    &:first-of-type {
+      margin-right: 0;
+    }
+  }
+}
+
+/**
+  This layout should be integrated with the chloropleth component once we have
+  one based on styled-components
+  */
+.layout-chloropleth {
+  $chloropleth-breakpoint: 1200px;
+
+  @media (min-width: $chloropleth-breakpoint) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      'a c'
+      'b c';
+  }
+
+  .chloropleth-header {
+    grid-area: a;
+    margin-bottom: 2em;
+    @media (min-width: $chloropleth-breakpoint) {
+      margin-bottom: 0;
+    }
+  }
+
+  .chloropleth-legend {
+    grid-area: b;
+  }
+
+  .chloropleth-chart {
+    grid-area: c;
+  }
+
+  .chloropleth-controls {
+    display: flex;
+    justify-content: center;
+
+    @media (min-width: $chloropleth-breakpoint) {
+      justify-content: flex-start;
     }
   }
 }

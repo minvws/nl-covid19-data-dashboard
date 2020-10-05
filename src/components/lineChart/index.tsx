@@ -1,32 +1,37 @@
 import React, { useMemo, useState } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import styles from './lineChart.module.scss';
+import text from '~/locale/index';
 
-import ChartTimeControls, {
+import {
+  ChartTimeControls,
   TimeframeOption,
-} from 'components/chartTimeControls';
+} from '~/components/chartTimeControls';
 
-import formatNumber from 'utils/formatNumber';
-import formatDate from 'utils/formatDate';
-import { getFilteredValues } from 'components/chartTimeControls/chartTimeControlUtils';
+import { formatNumber } from '~/utils/formatNumber';
+import { formatDateFromSeconds } from '~/utils/formatDate';
+import { getFilteredValues } from '~/components/chartTimeControls/chartTimeControlUtils';
+import { isDefined } from 'ts-is-present';
 
-interface Value {
+type Value = {
   date: number;
-  value: number | undefined | null;
-}
+  value?: number;
+};
 
-type LineChartProps = {
+const SIGNAALWAARDE_Z_INDEX = 10;
+
+interface LineChartProps {
+  title: string;
+  description?: string;
   values: Value[];
   signaalwaarde?: number;
   timeframeOptions?: TimeframeOption[];
-};
+}
 
-export default LineChart;
+function getChartOptions(values: Value[], signaalwaarde?: number) {
+  const yMax = calculateYMax(values, signaalwaarde);
 
-function getOptions(
-  values: Value[],
-  signaalwaarde?: number | undefined
-): Highcharts.Options {
   const options: Highcharts.Options = {
     chart: {
       alignTicks: true,
@@ -58,11 +63,10 @@ function getOptions(
         // types say `rotation` needs to be a number,
         // but that doesn’t work.
         rotation: '0' as any,
-        formatter: function (): string {
-          if (this.isFirst || this.isLast) {
-            return formatDate(this.value * 1000, 'axis');
-          }
-          return '';
+        formatter: function () {
+          return this.isFirst || this.isLast
+            ? formatDateFromSeconds(this.value, 'axis')
+            : '';
         },
       },
     },
@@ -71,12 +75,13 @@ function getOptions(
       borderColor: '#01689B',
       borderRadius: 0,
       formatter: function (): string {
-        return `${formatDate(this.x * 1000)}: ${formatNumber(this.y)}`;
+        return `${formatDateFromSeconds(this.x)}: ${formatNumber(this.y)}`;
       },
     },
     yAxis: {
       min: 0,
-      max: values.length > 0 ? null : 1,
+      minRange: 0.1,
+      max: yMax,
       allowDecimals: false,
       lineColor: '#C4C4C4',
       gridLineColor: '#C4C4C4',
@@ -84,47 +89,91 @@ function getOptions(
         text: null,
       },
       labels: {
-        formatter: function (): string {
-          // @ts-ignore
+        formatter: function () {
           return formatNumber(this.value);
         },
       },
       accessibility: {
         rangeDescription: 'Range: 2010 to 2017',
       },
+      plotLines: signaalwaarde
+        ? [
+            {
+              value: signaalwaarde,
+              dashStyle: 'Dash',
+              width: 1,
+              color: '#4f5458',
+              zIndex: SIGNAALWAARDE_Z_INDEX,
+              label: {
+                text: text.common.barScale.signaalwaarde,
+                align: 'right',
+                y: -8,
+                x: 0,
+                style: {
+                  color: '#4f5458',
+                },
+              },
+            },
+            /**
+             * In order to show the value of the signaalwaarde, we plot a second
+             * transparent line, and only use its label positioned at the y-axis.
+             */
+            {
+              value: signaalwaarde,
+              color: 'transparent',
+              zIndex: SIGNAALWAARDE_Z_INDEX,
+              label: {
+                text: `${signaalwaarde}`,
+                align: 'left',
+                y: -8,
+                x: 0,
+                style: {
+                  color: '#4f5458',
+                },
+              },
+            },
+          ]
+        : undefined,
     },
     title: {
       text: undefined,
     },
     series: [
       {
-        type: 'line',
+        type: 'area',
         data: values.map((value) => value.value as number),
         name: '',
         showInLegend: false,
         color: '#3391CC',
+        // hex to rgb converted, added opacity
+        fillColor: 'rgba(51, 145, 204, 0.2)',
         marker: {
           enabled: false,
         },
       },
     ],
+    plotOptions: {
+      area: {
+        marker: {
+          enabled: false,
+          symbol: 'circle',
+          radius: 2,
+          states: {
+            hover: {
+              enabled: true,
+            },
+          },
+        },
+      },
+    },
   };
 
-  if (signaalwaarde) {
-    // @ts-ignore
-    options.yAxis.plotLines = [
-      {
-        value: signaalwaarde,
-        dashStyle: 'dash',
-        width: 1,
-        color: '#4f5458',
-      },
-    ];
-  }
   return options;
 }
 
-function LineChart({
+export default function LineChart({
+  title,
+  description,
   values,
   signaalwaarde,
   timeframeOptions,
@@ -137,17 +186,38 @@ function LineChart({
       timeframe,
       (value: Value) => value.date * 1000
     );
-    return getOptions(filteredValues, signaalwaarde);
+    return getChartOptions(filteredValues, signaalwaarde);
   }, [values, timeframe, signaalwaarde]);
 
   return (
-    <>
-      <ChartTimeControls
-        timeframe={timeframe}
-        timeframeOptions={timeframeOptions}
-        onChange={(value) => setTimeframe(value as TimeframeOption)}
-      />
+    <section className={styles.root}>
+      <header className={styles.header}>
+        <div className={styles.titleAndDescription}>
+          {title && <h3>{title}</h3>}
+          {description && <p>{description}</p>}
+        </div>
+        <div className={styles.timeControls}>
+          <ChartTimeControls
+            timeframe={timeframe}
+            timeframeOptions={timeframeOptions}
+            onChange={setTimeframe}
+          />
+        </div>
+      </header>
       <HighchartsReact highcharts={Highcharts} options={chartOptions} />
-    </>
+    </section>
   );
+}
+
+/**
+ * From all the defined values, extract the highest number so we know how to
+ * scale the y-axis
+ */
+function calculateYMax(values: Value[], signaalwaarde = -Infinity) {
+  const maxValue = values
+    .map((x) => x.value)
+    .filter(isDefined)
+    .reduce((acc, value) => (value > acc ? value : acc), -Infinity);
+
+  return Math.max(maxValue, signaalwaarde + 10);
 }

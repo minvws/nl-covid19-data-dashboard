@@ -1,0 +1,20 @@
+.legenda {
+  margin-top: 0;
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+
+  .legendaItem {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+
+    .box {
+      width: 50px;
+      height: 10px;
+      flex-grow: 0;
+      flex-shrink: 0;
+    }
+  }
+}

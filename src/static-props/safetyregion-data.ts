@@ -1,13 +1,14 @@
 import fs from 'fs';
 import path from 'path';
 
-import { Regionaal } from 'types/data';
+import { Regionaal } from '~/types/data.d';
 
-import safetyRegions from 'data';
+import safetyRegions from '~/data/index';
 
 export interface ISafetyRegionData {
   data: Regionaal;
   name: string;
+  lastGenerated: string;
 }
 
 interface IProps {
@@ -51,9 +52,12 @@ export function getSafetyRegionData() {
   return function ({ params }: IParams): IProps {
     const { code } = params;
 
+    // get data for the page
     const filePath = path.join(process.cwd(), 'public', 'json', `${code}.json`);
     const fileContents = fs.readFileSync(filePath, 'utf8');
-    const data = JSON.parse(fileContents);
+    const data = JSON.parse(fileContents) as Regionaal;
+
+    const lastGenerated = data.last_generated;
 
     const name = safetyRegions.find((r) => r.code === code)?.name || '';
 
@@ -61,6 +65,7 @@ export function getSafetyRegionData() {
       props: {
         data,
         name,
+        lastGenerated,
       },
     };
   };

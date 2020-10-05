@@ -1,8 +1,6 @@
 import Head from 'next/head';
 
-import siteText from 'locale';
-
-export default SEOHead;
+import siteText from '~/locale/index';
 
 export type SEOHeadProps = {
   title?: string;
@@ -14,18 +12,19 @@ export type SEOHeadProps = {
 
 SEOHead.defaultProps = {
   description: siteText.seoHead.default_description,
-  openGraphImage: '/banner.jpg',
+  openGraphImage: '/banner.png',
   title: siteText.seoHead.default_title,
-  twitterImage: '/banner.jpg',
+  twitterImage: '/banner-twitter.png',
   url: siteText.seoHead.default_url,
 };
 
-function SEOHead(props: SEOHeadProps): any {
+export function SEOHead(props: SEOHeadProps): any {
   const { description, openGraphImage, title, twitterImage, url } = props;
 
   return (
     <Head>
       <title key="title">{title}</title>
+      <meta name="version" key="version" content={process.env.COMMIT_ID} />
 
       <meta
         key="dc-title"
@@ -126,12 +125,6 @@ function SEOHead(props: SEOHeadProps): any {
         type="font/woff"
       />
 
-      <link
-        rel="preload"
-        href="/json/NL.json"
-        as="fetch"
-        crossOrigin="anonymous"
-      />
       <link
         rel="preload"
         href="/json/RANGES.json"

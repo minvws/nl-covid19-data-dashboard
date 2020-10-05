@@ -4,11 +4,11 @@ import {
   SewerValue,
   AverageSewerInstallationPerRegionItem,
   SewerValueElement,
-} from 'types/data';
-import replaceVariablesInText from 'utils/replaceVariablesInText';
-import formatDate from 'utils/formatDate';
-import formatNumber from 'utils/formatNumber';
-import siteText from 'locale';
+} from '~/types/data.d';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { formatDateFromSeconds } from '~/utils/formatDate';
+import { formatNumber } from '~/utils/formatNumber';
+import siteText from '~/locale/index';
 
 const text: typeof siteText.veiligheidsregio_rioolwater_metingen =
   siteText.veiligheidsregio_rioolwater_metingen;
@@ -28,11 +28,12 @@ export interface SewerWaterBarScaleData {
 interface SewerWaterLineChartValue {
   date: number;
   value: number;
+  week_start_unix: number;
+  week_end_unix: number;
 }
 
 export interface SewerWaterLineChartData {
   averageValues: SewerWaterLineChartValue[];
-  allValues: SewerWaterLineChartValue[][];
   averageLabelText: string;
 }
 
@@ -47,7 +48,8 @@ function getSewerWaterMetadata(
   const averagesAvailable = !!data?.average_sewer_installation_per_region
     ?.last_value;
 
-  const installationsAmount = data?.results_per_region?.values?.length;
+  const installationsAmount =
+    data?.results_per_sewer_installation_per_region?.values?.length;
 
   const oneInstallation = installationsAmount === 1;
 
@@ -118,7 +120,6 @@ export function getSewerWaterLineChartData(
           };
         })
         .sort((a: any, b: any) => b.date - a.date),
-      allValues: [],
       averageLabelText: replaceVariablesInText(
         text.graph_average_label_text_rwzi,
         {
@@ -135,8 +136,6 @@ export function getSewerWaterLineChartData(
   // Grey lines are the RWZI locations
   const averageValues =
     data?.average_sewer_installation_per_region?.values || [];
-  const allValues =
-    data?.results_per_sewer_installation_per_region?.values || [];
 
   return {
     averageValues: averageValues
@@ -148,17 +147,6 @@ export function getSewerWaterLineChartData(
         };
       })
       .sort((a: any, b: any) => b.date - a.date),
-    allValues: allValues.map((installation: SewerValueElement) => {
-      return installation?.values
-        .map((value: any) => {
-          return {
-            ...value,
-            value: value.rna_per_ml || 0,
-            date: value.date_measurement_unix,
-          };
-        })
-        .sort((a: any, b: any) => b.date - a.date);
-    }),
     averageLabelText: text.graph_average_label_text,
   };
 }
@@ -193,9 +181,8 @@ export function getSewerWaterBarChartData(
         y: data?.average_sewer_installation_per_region?.last_value.average,
         color: '#3391CC',
         label: data?.average_sewer_installation_per_region?.last_value
-          ? `${formatDate(
-              data.average_sewer_installation_per_region.last_value.week_unix *
-                1000,
+          ? `${formatDateFromSeconds(
+              data.average_sewer_installation_per_region.last_value.week_unix,
               'short'
             )}: ${formatNumber(
               data.average_sewer_installation_per_region.last_value.average
@@ -208,8 +195,8 @@ export function getSewerWaterBarChartData(
             y: installation?.last_value?.rna_per_ml,
             color: '#C1C1C1',
             label: installation?.last_value
-              ? `${formatDate(
-                  installation.last_value.date_measurement_unix * 1000,
+              ? `${formatDateFromSeconds(
+                  installation.last_value.date_measurement_unix,
                   'short'
                 )}: ${formatNumber(installation.last_value.rna_per_ml)}`
               : false,

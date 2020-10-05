@@ -1,13 +1,13 @@
 import styles from './chartregioncontrols.module.scss';
-import RadioGroup, { IRadioGroupItem } from 'components/radioGroup';
+import { RadioGroup, IRadioGroupItem } from '~/components/radioGroup';
 
-import text from 'locale';
+import text from '~/locale/index';
 
 export interface IProps {
   onChange: (value: any) => void;
 }
 
-export default function ChartRegionControls(props: IProps) {
+export function ChartRegionControls(props: IProps) {
   const { onChange } = props;
 
   const values: IRadioGroupItem[] = [

@@ -1,6 +1,6 @@
 import { TimeframeOption } from '.';
 
-const getDaysForTimeframe = (timeframe: TimeframeOption): number => {
+export const getDaysForTimeframe = (timeframe: TimeframeOption): number => {
   // adds 1 extra day to capture the intended amount of days
   if (timeframe === 'week') {
     return 8;
@@ -11,20 +11,23 @@ const getDaysForTimeframe = (timeframe: TimeframeOption): number => {
   return Infinity;
 };
 
-const getMinimumUnixForTimeframe = (timeframe: TimeframeOption): number => {
+const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
+
+export const getMinimumUnixForTimeframe = (
+  timeframe: TimeframeOption
+): number => {
   if (timeframe === 'all') {
     return 0;
   }
   const days = getDaysForTimeframe(timeframe);
-  const oneDay = 24 * 60 * 60 * 1000;
-  return new Date().getTime() - days * oneDay;
+  return new Date().getTime() - days * oneDayInMilliseconds;
 };
 
 type CompareCallbackFunction<T> = (value: T) => number;
 
 /**
  * Filter arrays of any provided types based on the timeframe.
- * Uses a callcack to retrieve the unix time zone to compare with.
+ * Uses a callback to retrieve the unix time zone to compare with.
  * @param values
  * @param timeframe
  * @param compareCallback

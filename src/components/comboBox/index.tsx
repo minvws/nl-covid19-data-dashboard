@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
+import { useRouter } from 'next/router';
 import matchSorter from 'match-sorter';
 import {
   Combobox,
@@ -8,9 +9,10 @@ import {
   ComboboxOption,
 } from '@reach/combobox';
 
-import useThrottle from 'utils/useThrottle';
+import { useThrottle } from '~/utils/useThrottle';
 
-import text from 'locale';
+import text from '~/locale/index';
+import { useMediaQuery } from '~/utils/useMediaQuery';
 
 type TOption = {
   displayName?: string;
@@ -22,8 +24,6 @@ type TProps<Option extends TOption> = {
   placeholder: string;
   handleSelect: (option: Option) => void;
 };
-
-export default ComboBox;
 
 /*
  * Combox is an accessible dropdown with search.
@@ -40,26 +40,40 @@ export default ComboBox;
  * />
  * ```
  */
-function ComboBox<Option extends TOption>(props: TProps<Option>) {
+export function ComboBox<Option extends TOption>(props: TProps<Option>) {
   const { options, placeholder, handleSelect } = props;
 
+  const router = useRouter();
+  const { code } = router.query;
   const inputRef = useRef<HTMLInputElement>();
   const [term, setTerm] = useState<string>('');
   const results = useSearchedOptions<Option>(term, options);
+  const isLargeScreen = useMediaQuery('(min-width: 1000px)');
+  const hasRegionSelected = !!code;
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>): void {
     setTerm(event.target.value);
   }
 
   function onSelect(name: string): void {
-    const option = options.find((option) => option.name === name);
+    if (!name) {
+      return;
+    }
+
+    const option = options.find(
+      (option) => option.name === name || option.displayName === name
+    );
+
+    inputRef?.current?.blur();
 
     handleSelect(option as Option);
   }
 
   useEffect(() => {
-    inputRef?.current?.focus();
-  }, []);
+    if (!inputRef?.current?.value && isLargeScreen && !hasRegionSelected) {
+      inputRef?.current?.focus();
+    }
+  }, [isLargeScreen, hasRegionSelected]);
 
   return (
     <Combobox openOnFocus onSelect={onSelect}>
@@ -72,7 +86,10 @@ function ComboBox<Option extends TOption>(props: TProps<Option>) {
         {results.length > 0 ? (
           <ComboboxList>
             {results.map((option) => (
-              <ComboboxOption key={option.name} value={option.name} />
+              <ComboboxOption
+                key={option.name}
+                value={option.displayName || option.name}
+              />
             ))}
           </ComboboxList>
         ) : (

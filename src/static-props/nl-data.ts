@@ -1,10 +1,12 @@
 import fs from 'fs';
 import path from 'path';
 
-import { National } from 'types/data';
+import { National } from '~/types/data.d';
 
 export interface INationalData {
   data: National;
+  lastGenerated: string;
+  text?: any;
 }
 
 interface IProps {
@@ -37,10 +39,14 @@ export default function getNlData(): () => IProps {
   return function () {
     const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
     const fileContents = fs.readFileSync(filePath, 'utf8');
+    const data = JSON.parse(fileContents) as National;
+
+    const lastGenerated = data.last_generated;
 
     return {
       props: {
-        data: JSON.parse(fileContents),
+        data,
+        lastGenerated,
       },
     };
   };

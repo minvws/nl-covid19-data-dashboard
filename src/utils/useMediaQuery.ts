@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export default function useMediaQuery(
+export function useMediaQuery(
   breakpoint: string,
   initialMatches = false
 ): boolean {

@@ -1,71 +1,44 @@
-import BarScale from 'components/barScale';
-import { FCWithLayout } from 'components/layout';
-import { getMunicipalityLayout } from 'components/layout/MunicipalityLayout';
-import { ContentHeader } from 'components/layout/Content';
+import { useRouter } from 'next/router';
 
-import Ziekenhuis from 'assets/ziekenhuis.svg';
-
-import siteText from 'locale';
-
-import { HospitalAdmissions } from 'types/data';
-import { LineChart } from 'components/charts/index';
-import replaceVariablesInText from 'utils/replaceVariablesInText';
+import siteText from '~/locale/index';
+import { HospitalAdmissions } from '~/types/data.d';
 import {
   getMunicipalityData,
   getMunicipalityPaths,
   IMunicipalityData,
-} from 'static-props/municipality-data';
-import getSafetyRegionForMunicipal from 'utils/getSafetyRegionForMunicipal';
-import MunicipalityMap from 'components/mapChart/MunicipalityMap';
+} from '~/static-props/municipality-data';
+
+import { LineChart } from '~/components/charts/index';
+import { FCWithLayout } from '~/components/layout';
+import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
+import { ContentHeader } from '~/components/layout/Content';
+import { IntakeHospitalBarScale } from '~/components/gemeente/intake-hospital-barscale';
+import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
+import { hospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/municipal/hospitalAdmissionsTooltip';
+import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
+import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
+import { useMunicipalLegendaData } from '~/components/chloropleth/legenda/hooks/useMunicipalLegendaData';
+
+import { getLocalTitleForMunicipality } from '~/utils/getLocalTitleForCode';
+
+import Ziekenhuis from '~/assets/ziekenhuis.svg';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+
 const text: typeof siteText.gemeente_ziekenhuisopnames_per_dag =
   siteText.gemeente_ziekenhuisopnames_per_dag;
 
-export function IntakeHospitalBarScale(props: {
-  data: HospitalAdmissions | undefined;
-}) {
-  const { data } = props;
-
-  if (!data) return null;
-
-  return (
-    <BarScale
-      min={0}
-      max={100}
-      signaalwaarde={40}
-      screenReaderText={text.screen_reader_graph_content}
-      value={data.last_value.moving_average_hospital}
-      id="opnames"
-      rangeKey="moving_average_hospital"
-      gradient={[
-        {
-          color: '#69c253',
-          value: 0,
-        },
-        {
-          color: '#D3A500',
-          value: 40,
-        },
-        {
-          color: '#f35065',
-          value: 90,
-        },
-      ]}
-    />
-  );
-}
-
 const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
   const { data, name } = props;
+  const router = useRouter();
 
-  const municipalCodes = getSafetyRegionForMunicipal(data.code);
-
+  const legendItems = useMunicipalLegendaData('hospital_admissions');
   const hospitalAdmissions: HospitalAdmissions | undefined =
     data?.hospital_admissions;
 
   return (
     <>
       <ContentHeader
-        category="Medische indicatoren"
+        category={siteText.gemeente_layout.headings.medisch}
         title={replaceVariablesInText(text.titel, {
           municipality: name,
         })}
@@ -84,7 +57,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
         <div className="column-item column-item-extra-margin">
           <h3>{text.barscale_titel}</h3>
 
-          <IntakeHospitalBarScale data={hospitalAdmissions} />
+          <IntakeHospitalBarScale data={hospitalAdmissions} showAxis={true} />
         </div>
 
         <div className="column-item column-item-extra-margin">
@@ -92,35 +65,43 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
         </div>
       </article>
 
-      <article className="metric-article">
-        <h3>{text.linechart_titel}</h3>
+      {hospitalAdmissions && (
+        <article className="metric-article">
+          <LineChart
+            title={text.linechart_titel}
+            values={hospitalAdmissions.values.map((value: any) => ({
+              value: value.moving_average_hospital,
+              date: value.date_of_report_unix,
+            }))}
+          />
+        </article>
+      )}
 
-        {hospitalAdmissions && (
-          <>
-            <LineChart
-              values={hospitalAdmissions.values.map((value: any) => ({
-                value: value.moving_average_hospital,
-                date: value.date_of_report_unix,
-              }))}
-              signaalwaarde={40}
-            />
-          </>
-        )}
-      </article>
-
-      <article className="metric-article layout-two-column">
-        <div className="column-item column-item-extra-margin">
-          <h3>{text.map_titel}</h3>
+      <article className="metric-article layout-chloropleth">
+        <div className="chloropleth-header">
+          <h3>{getLocalTitleForMunicipality(text.map_titel, data.code)}</h3>
           <p>{text.map_toelichting}</p>
         </div>
 
-        <div className="column-item column-item-extra-margin">
-          {municipalCodes && (
-            <MunicipalityMap
-              selected={data.code}
-              municipalCodes={municipalCodes}
-              metric="hospital_admissions"
-              gradient={['#9DDEFE', '#0290D6']}
+        <div className="chloropleth-chart">
+          <MunicipalityChloropleth
+            selected={data.code}
+            metricName="hospital_admissions"
+            tooltipContent={hospitalAdmissionsTooltip}
+            onSelect={createSelectMunicipalHandler(
+              router,
+              'ziekenhuis-opnames'
+            )}
+          />
+        </div>
+
+        <div className="chloropleth-legend">
+          {legendItems && (
+            <ChloroplethLegenda
+              items={legendItems}
+              title={
+                siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel
+              }
             />
           )}
         </div>

@@ -1,5 +1,5 @@
 import styles from './titleBlock.module.scss';
-import { WithChildren } from 'types';
+import { WithChildren } from '~/types/index';
 
 interface IProps {
   Icon: any;
@@ -7,9 +7,7 @@ interface IProps {
   children: WithChildren;
 }
 
-export default TitleBlock;
-
-function TitleBlock(props: WithChildren<IProps>) {
+export function TitleBlock(props: WithChildren<IProps>) {
   const { Icon, title, children } = props;
 
   return (

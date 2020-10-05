@@ -1,7 +1,9 @@
-import { FCWithLayout, getLayout } from 'components/layout';
-import MaxWidth from 'components/maxWidth';
+import { FCWithLayout, getLayoutWithMetadata } from '~/components/layout';
+import { MaxWidth } from '~/components/maxWidth';
 
-import text from 'locale';
+import getLastGeneratedData from '~/static-props/last-generated-data';
+
+import text from '~/locale/index';
 import styles from './error.module.scss';
 
 const ErrorPage: FCWithLayout = () => {
@@ -17,6 +19,7 @@ const ErrorPage: FCWithLayout = () => {
   );
 };
 
-ErrorPage.getLayout = getLayout(text.error_metadata);
+ErrorPage.getLayout = getLayoutWithMetadata(text.error_metadata);
+export const getStaticProps = getLastGeneratedData();
 
 export default ErrorPage;

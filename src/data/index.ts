@@ -1,6 +1,6 @@
 const regioData = [
   { name: 'Groningen', code: 'VR01', id: 1 },
-  { name: 'Friesland', code: 'VR02', id: 2 },
+  { name: 'Fryslân', code: 'VR02', id: 2, searchTerms: ['Friesland'] },
   { name: 'Drenthe', code: 'VR03', id: 3 },
   { name: 'IJsselland', code: 'VR04', id: 4 },
   { name: 'Twente', code: 'VR05', id: 5 },

@@ -7,17 +7,20 @@ import { useMemo } from 'react';
  * @param collection the given array
  * @param predicate the optional predicate
  */
-export default function useExtent(
-  collection: any[],
+export function useExtent(
+  collection?: any[],
   predicate?: (item: any) => number
-): [number, number] {
+): [number, number] | undefined {
   return useMemo(() => {
+    if (!collection?.length) {
+      return undefined;
+    }
     const numberCollection = predicate
       ? collection.map<number>(predicate)
       : collection;
 
     const min = Math.min(...numberCollection);
     const max = Math.max(...numberCollection);
-    return [min, max];
+    return [min !== Infinity ? min : 0, max !== -Infinity ? max : 0];
   }, [collection, predicate]);
 }

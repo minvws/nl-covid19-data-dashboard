@@ -4,7 +4,7 @@ The dashboard provides information on the outbreak and prevalence of COVID-19 in
 
 ## Disclaimer
 
-This dashboard is developed and maintained by a different team than the NL COVID19 Notification App. They are separate projects. If you want to get in touch with the team, please join the CODE for NL Slack and join the channel `#coronadashboard`.
+This dashboard is developed and maintained by a different team than the NL COVID-19 Notification App. They are separate projects. If you want to get in touch with the team, please join the CODE for NL Slack and join the channel `#coronadashboard`.
 
 Tamas Erkelens from the Municipality of Amsterdam is contact person for the project team that made the dashboard.
 
@@ -16,23 +16,35 @@ The core team works directly from this open-source repository. If you plan to pr
 
 ## Setup
 
-This application uses Next.js as framework, which builds the pages of the application as static exports. We use Preact in production to keep the bundle as small as possible.
+This application uses Next.js as framework, which builds the pages of the application as static exports. ~~We use Preact in production to keep the bundle as small as possible.~~ We would like to use Preact, but we found out some bugs only occured when using Preact. For now, we've reverted to normal React. We'll enable Preact again once we find out why Reach UI's components do not play nice with Preact.
 
-We are using Next.js 9.5.
+We are using Next.js with static site generation. This means sometimes it can be a bit more complex to query data when you compare it against a solution such as SWR or react-query, but static builds are better for performance.
+
+To get the data files from production into your local environment, run `yarn download`.
+
+If you want to change locale from `nl` - the default - to `en`, you need to make a `.env.local` file.
+
+**.env.local**
+
+```
+NEXT_PUBLIC_LOCALE=en
+```
 
 Run `yarn` to install all required packages.
 
 ### Data
 
-If you have data, you can place it in `/public/json/`. 
 The calculations for the data can be found in [nl-covid19-data-backend-processing](https://github.com/minvws/nl-covid19-data-backend-processing).
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-`yarn dev`  
+`yarn dev`
 Runs the app in the development mode. Open http://localhost:3000 to view it in the browser.
 
-`yarn build`  
+`yarn build`
 Builds the app for production to the out folder. It correctly bundles React in production mode and optimizes the build for the best performance. All pages are output as static HTML files through next export, ready to be served on any static file server.
+
+`yarn download`
+This downloads the latest data files from the production server and places the data in the right folder.

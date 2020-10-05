@@ -1,21 +1,23 @@
 import styles from './chartTimeControls.module.scss';
 
-import RadioGroup, { IRadioGroupItem } from 'components/radioGroup';
+import { RadioGroup, IRadioGroupItem } from '~/components/radioGroup';
 
-import text from 'locale';
+import text from '~/locale/index';
 
 export type TimeframeOption = 'all' | '5weeks' | 'week';
 
 interface IProps {
   timeframe: TimeframeOption;
   onChange: (value: TimeframeOption) => void;
-  timeframeOptions: TimeframeOption[];
+  timeframeOptions?: TimeframeOption[];
 }
 
-export default ChartTimeControls;
-
-function ChartTimeControls(props: IProps) {
-  const { timeframe, onChange, timeframeOptions } = props;
+export function ChartTimeControls(props: IProps) {
+  const {
+    timeframe,
+    onChange,
+    timeframeOptions = ['all', '5weeks', 'week'],
+  } = props;
 
   const values = timeframeOptions.map<IRadioGroupItem>((key) => ({
     label: text.charts.time_controls[key],
@@ -25,13 +27,9 @@ function ChartTimeControls(props: IProps) {
   return (
     <RadioGroup
       value={timeframe}
-      className={styles['chart-radio-group']}
+      className={styles.root}
       onChange={onChange}
       values={values}
     />
   );
 }
-
-ChartTimeControls.defaultProps = {
-  timeframeOptions: ['all', '5weeks', 'week'],
-};

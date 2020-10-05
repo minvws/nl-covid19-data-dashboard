@@ -1,64 +1,45 @@
-import BarScale from 'components/barScale';
-import { FCWithLayout } from 'components/layout';
-import { getMunicipalityLayout } from 'components/layout/MunicipalityLayout';
+import { useRouter } from 'next/router';
 
-import siteText from 'locale';
-
-import { LineChart } from 'components/charts/index';
-import { ContentHeader } from 'components/layout/Content';
-
-import Getest from 'assets/test.svg';
-import formatDecimal from 'utils/formatNumber';
-import { PositiveTestedPeople } from 'types/data';
-import replaceVariablesInText from 'utils/replaceVariablesInText';
+import siteText from '~/locale/index';
+import { PositiveTestedPeople } from '~/types/data.d';
 import {
   getMunicipalityData,
   getMunicipalityPaths,
   IMunicipalityData,
-} from 'static-props/municipality-data';
-import MunicipalityMap from 'components/mapChart/MunicipalityMap';
-import getSafetyRegionForMunicipal from 'utils/getSafetyRegionForMunicipal';
+} from '~/static-props/municipality-data';
+
+import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
+import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
+import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
+import { useMunicipalLegendaData } from '~/components/chloropleth/legenda/hooks/useMunicipalLegendaData';
+import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
+import { LineChart } from '~/components/charts/index';
+import { ContentHeader } from '~/components/layout/Content';
+import { PositivelyTestedPeopleBarScale } from '~/components/gemeente/positively-tested-people-barscale';
+import { FCWithLayout } from '~/components/layout';
+import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
+
+import Getest from '~/assets/test.svg';
+
+import { formatNumber } from '~/utils/formatNumber';
+import { getLocalTitleForMunicipality } from '~/utils/getLocalTitleForCode';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text: typeof siteText.gemeente_positief_geteste_personen =
   siteText.gemeente_positief_geteste_personen;
 
-export function PostivelyTestedPeopleBarScale(props: {
-  data: PositiveTestedPeople | undefined;
-}) {
-  const { data } = props;
-
-  if (!data) return null;
-
-  return (
-    <BarScale
-      min={0}
-      max={10}
-      screenReaderText={text.screen_reader_graph_content}
-      value={data.last_value.infected_daily_increase}
-      id="positief"
-      rangeKey="infected_daily_increase"
-      gradient={[
-        {
-          color: '#3391CC',
-          value: 0,
-        },
-      ]}
-    />
-  );
-}
-
-const PostivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
+const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
   const { data, name } = props;
+  const router = useRouter();
 
-  const municipalCodes = getSafetyRegionForMunicipal(data.code);
-
+  const legendItems = useMunicipalLegendaData('positive_tested_people');
   const positivelyTestedPeople: PositiveTestedPeople | undefined =
     data?.positive_tested_people;
 
   return (
     <>
       <ContentHeader
-        category="Medische indicatoren"
+        category={siteText.gemeente_layout.headings.medisch}
         title={replaceVariablesInText(text.titel, {
           municipality: name,
         })}
@@ -78,7 +59,10 @@ const PostivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
           <h3>{text.barscale_titel}</h3>
 
           {positivelyTestedPeople && (
-            <PostivelyTestedPeopleBarScale data={positivelyTestedPeople} />
+            <PositivelyTestedPeopleBarScale
+              data={positivelyTestedPeople}
+              showAxis={true}
+            />
           )}
           <p>{text.barscale_toelichting}</p>
         </article>
@@ -88,7 +72,7 @@ const PostivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
             <h3>
               {text.kpi_titel}{' '}
               <span className="text-blue kpi">
-                {formatDecimal(
+                {formatNumber(
                   positivelyTestedPeople.last_value.infected_daily_total
                 )}
               </span>
@@ -98,32 +82,41 @@ const PostivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
         </article>
       </div>
 
-      <article className="metric-article">
-        <h3>{text.linechart_titel}</h3>
-        <p>{text.linechart_toelichting}</p>
-        {positivelyTestedPeople && (
+      {positivelyTestedPeople && (
+        <article className="metric-article">
           <LineChart
+            title={text.linechart_titel}
+            description={text.linechart_toelichting}
             values={positivelyTestedPeople.values.map((value) => ({
-              value: value.infected_daily_total,
+              value: value.infected_daily_increase,
               date: value.date_of_report_unix,
             }))}
           />
-        )}
-      </article>
+        </article>
+      )}
 
-      <article className="metric-article layout-two-column">
-        <div className="column-item column-item-extra-margin">
-          <h3>{text.map_titel}</h3>
+      <article className="metric-article layout-chloropleth">
+        <div className="chloropleth-header">
+          <h3>{getLocalTitleForMunicipality(text.map_titel, data.code)}</h3>
           <p>{text.map_toelichting}</p>
         </div>
 
-        <div className="column-item column-item-extra-margin">
-          {municipalCodes && (
-            <MunicipalityMap
-              selected={data.code}
-              municipalCodes={municipalCodes}
-              metric="positive_tested_people"
-              gradient={['#9DDEFE', '#0290D6']}
+        <div className="chloropleth-chart">
+          <MunicipalityChloropleth
+            selected={data.code}
+            metricName="positive_tested_people"
+            tooltipContent={createPositiveTestedPeopleMunicipalTooltip(router)}
+            onSelect={createSelectMunicipalHandler(router)}
+          />
+        </div>
+
+        <div className="chloropleth-legend">
+          {legendItems && (
+            <ChloroplethLegenda
+              items={legendItems}
+              title={
+                siteText.positief_geteste_personen.chloropleth_legenda.titel
+              }
             />
           )}
         </div>
@@ -132,9 +125,9 @@ const PostivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
   );
 };
 
-PostivelyTestedPeople.getLayout = getMunicipalityLayout();
+PositivelyTestedPeople.getLayout = getMunicipalityLayout();
 
 export const getStaticProps = getMunicipalityData();
 export const getStaticPaths = getMunicipalityPaths();
 
-export default PostivelyTestedPeople;
+export default PositivelyTestedPeople;

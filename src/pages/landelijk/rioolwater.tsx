@@ -1,43 +1,16 @@
-import BarScale from 'components/barScale';
-import { FCWithLayout } from 'components/layout';
-import { getNationalLayout } from 'components/layout/NationalLayout';
-import { LineChart } from 'components/charts/index';
-import { ContentHeader } from 'components/layout/Content';
+import siteText from '~/locale/index';
+import { RioolwaterMetingen } from '~/types/data.d';
+import getNlData, { INationalData } from '~/static-props/nl-data';
 
-import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
+import { FCWithLayout } from '~/components/layout';
+import { getNationalLayout } from '~/components/layout/NationalLayout';
+import { LineChart } from '~/components/lineChart/lineChartWithWeekTooltip';
+import { ContentHeader } from '~/components/layout/Content';
+import { SewerWaterBarScale } from '~/components/landelijk/sewer-water-barscale';
 
-import siteText from 'locale';
-
-import { RioolwaterMetingen } from 'types/data';
-
-import getNlData, { INationalData } from 'static-props/nl-data';
+import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 
 const text: typeof siteText.rioolwater_metingen = siteText.rioolwater_metingen;
-
-export function SewerWaterBarScale(props: {
-  data: RioolwaterMetingen | undefined;
-}) {
-  const { data } = props;
-
-  if (!data) return null;
-
-  return (
-    <BarScale
-      min={0}
-      max={100}
-      screenReaderText={text.barscale_screenreader_text}
-      value={Number(data.last_value.average)}
-      id="rioolwater_metingen"
-      rangeKey="average"
-      gradient={[
-        {
-          color: '#3391CC',
-          value: 0,
-        },
-      ]}
-    />
-  );
-}
 
 const SewerWater: FCWithLayout<INationalData> = (props) => {
   const { data: state } = props;
@@ -47,7 +20,7 @@ const SewerWater: FCWithLayout<INationalData> = (props) => {
   return (
     <>
       <ContentHeader
-        category="Overige indicatoren"
+        category={siteText.gemeente_layout.headings.overig}
         title={text.titel}
         Icon={RioolwaterMonitoring}
         subtitle={text.pagina_toelichting}
@@ -63,7 +36,7 @@ const SewerWater: FCWithLayout<INationalData> = (props) => {
         <div className="column-item column-item-extra-margin">
           <h3>{text.barscale_titel}</h3>
 
-          <SewerWaterBarScale data={data} />
+          <SewerWaterBarScale data={data} showAxis={true} />
         </div>
 
         <div className="column-item column-item-extra-margin">
@@ -71,19 +44,19 @@ const SewerWater: FCWithLayout<INationalData> = (props) => {
         </div>
       </article>
 
-      <article className="metric-article">
-        <h3>{text.linechart_titel}</h3>
-
-        {data?.values && (
+      {data?.values && (
+        <article className="metric-article">
           <LineChart
+            title={text.linechart_titel}
             timeframeOptions={['all', '5weeks']}
             values={data.values.map((value) => ({
               value: Number(value.average),
               date: value.week_unix,
+              week: { start: value.week_start_unix, end: value.week_end_unix },
             }))}
           />
-        )}
-      </article>
+        </article>
+      )}
     </>
   );
 };

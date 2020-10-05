@@ -1,55 +1,31 @@
-import BarScale from 'components/barScale';
-import { FCWithLayout } from 'components/layout';
-import { getSafetyRegionLayout } from 'components/layout/SafetyRegionLayout';
-import { ContentHeader } from 'components/layout/Content';
+import { FCWithLayout } from '~/components/layout';
+import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
+import { ContentHeader } from '~/components/layout/Content';
 
-import RioolwaterMonitoring from 'assets/rioolwater-monitoring.svg';
+import { SewerWaterBarScale } from '~/components/veiligheidsregio/sewer-water-barscale';
 
-import siteText from 'locale';
+import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 
-import RegionalSewerWaterLineChart from 'components/lineChart/regionalSewerWaterLineChart';
-import replaceVariablesInText from 'utils/replaceVariablesInText';
+import siteText from '~/locale/index';
+
+import { RegionalSewerWaterLineChart } from '~/components/lineChart/regionalSewerWaterLineChart';
 import { useMemo } from 'react';
-import BarChart from 'components/barChart';
+import { BarChart } from '~/components/charts';
 import {
-  SewerWaterBarScaleData,
   getSewerWaterBarScaleData,
   getSewerWaterLineChartData,
   getSewerWaterBarChartData,
-} from 'utils/sewer-water/safety-region-sewer-water.util';
+} from '~/utils/sewer-water/safety-region-sewer-water.util';
 import {
   getSafetyRegionData,
   getSafetyRegionPaths,
   ISafetyRegionData,
-} from 'static-props/safetyregion-data';
+} from '~/static-props/safetyregion-data';
+import { getLocalTitleForRegion } from '~/utils/getLocalTitleForCode';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text: typeof siteText.veiligheidsregio_rioolwater_metingen =
   siteText.veiligheidsregio_rioolwater_metingen;
-
-export function SewerWaterBarScale(props: {
-  data: SewerWaterBarScaleData | null;
-}) {
-  const { data } = props;
-
-  if (!data) return null;
-
-  return (
-    <BarScale
-      min={0}
-      max={100}
-      screenReaderText={text.screen_reader_graph_content}
-      value={Number(data.value)}
-      id="rioolwater_metingen"
-      rangeKey="average"
-      gradient={[
-        {
-          color: '#3391CC',
-          value: 0,
-        },
-      ]}
-    />
-  );
-}
 
 const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
   const { data, name } = props;
@@ -65,7 +41,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
   return (
     <>
       <ContentHeader
-        category="Overige indicatoren"
+        category={siteText.veiligheidsregio_layout.headings.overig}
         title={replaceVariablesInText(text.titel, {
           safetyRegion: name,
         })}
@@ -83,7 +59,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
         <div className="column-item column-item-extra-margin">
           <h3>{text.barscale_titel}</h3>
 
-          <SewerWaterBarScale data={barScaleData} />
+          <SewerWaterBarScale data={barScaleData} showAxis={true} />
         </div>
 
         <div className="column-item column-item-extra-margin">
@@ -97,7 +73,6 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
         {lineChartData && (
           <RegionalSewerWaterLineChart
             averageValues={lineChartData.averageValues}
-            allValues={lineChartData.allValues}
             text={{
               average_label_text: lineChartData.averageLabelText,
               secondary_label_text: text.graph_secondary_label_text,
@@ -108,11 +83,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
 
       {barChartData && (
         <article className="metric-article">
-          <h3>
-            {replaceVariablesInText(text.bar_chart_title, {
-              safetyRegion: data.name,
-            })}
-          </h3>
+          <h3>{getLocalTitleForRegion(text.bar_chart_title, data.code)}</h3>
           <BarChart
             keys={barChartData.keys}
             data={barChartData.data}
