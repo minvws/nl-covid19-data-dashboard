@@ -14,6 +14,7 @@
     "intake_intensivecare_ma",
     "infected_people_nursery_count_daily",
     "deceased_people_nursery_count_daily",
+    "infected_people_percentage",
     "total_reported_locations",
     "total_newly_reported_locations",
     "infected_people_total",

@@ -69,6 +69,12 @@
     line-height: 1.5;
     cursor: pointer;
   }
+
+  .positiveTestedPeopleInfo {
+    padding: 1em 0.5em;
+    font-size: 1rem;
+    cursor: pointer;
+  }
 }
 
 .escalationInfo {
@@ -105,4 +111,13 @@
     font-size: 1.2rem;
     line-height: 1.8;
   }
+}
+
+.positivelyTestedPeopleTooltip {
+  color: $text-color;
+  width: 265px;
+  background-color: red;
+  border-radius: 4px;
+  pointer-events: all;
+  cursor: pointer;
 }
