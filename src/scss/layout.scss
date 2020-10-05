@@ -481,3 +481,33 @@ a.metric-link {
     }
   }
 }
+
+.layout-kpis {
+  $two-column: 1200px;
+  $small-screen: 700px;
+
+  margin: 2rem -2rem 0;
+
+  & > :not(:last-child) {
+    margin-bottom: 2em;
+  }
+
+  @media (min-width: $small-screen) {
+    margin: 2rem 0 0;
+  }
+
+  @media (min-width: $two-column) {
+    display: flex;
+
+    // outline: 1px solid hotpink;
+
+    & > :not(:last-child) {
+      margin-right: 1em;
+      margin-bottom: 0;
+    }
+
+    & > * {
+      flex: 1;
+    }
+  }
+}
