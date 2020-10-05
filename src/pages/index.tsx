@@ -6,7 +6,7 @@ import fs from 'fs';
 import styles from './index.module.scss';
 import { National } from '~/types/data';
 import { INationalData } from '~/static-props/nl-data';
-import siteText from '~/locale/index';
+import { TALLLanguages } from '~/locale/index';
 
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
@@ -132,7 +132,7 @@ Home.getLayout = getNationalLayout();
 interface StaticProps {
   props: {
     data: National;
-    text: typeof siteText;
+    text: TALLLanguages;
     lastGenerated: string;
   };
 }

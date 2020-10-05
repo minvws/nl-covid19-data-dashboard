@@ -14,7 +14,7 @@ import { ReproductionIndex as ReproductionIndexData } from '~/types/data.d';
 
 import getNlData, { INationalData } from '~/static-props/nl-data';
 
-const text: typeof siteText.reproductiegetal = siteText.reproductiegetal;
+const text = siteText.reproductiegetal;
 
 const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
   const { data: state } = props;

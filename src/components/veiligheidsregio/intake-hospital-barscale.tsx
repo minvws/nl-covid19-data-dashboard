@@ -10,8 +10,7 @@ export function IntakeHospitalBarScale(props: {
 
   if (!data) return null;
 
-  const text: typeof siteText.veiligheidsregio_ziekenhuisopnames_per_dag =
-    siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
+  const text = siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
 
   return (
     <BarScale

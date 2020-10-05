@@ -10,7 +10,7 @@ import { SewerWaterBarScale } from '~/components/landelijk/sewer-water-barscale'
 
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 
-const text: typeof siteText.rioolwater_metingen = siteText.rioolwater_metingen;
+const text = siteText.rioolwater_metingen;
 
 const SewerWater: FCWithLayout<INationalData> = (props) => {
   const { data: state } = props;

@@ -10,8 +10,7 @@ export function PositivelyTestedPeopleBarScale(props: {
 
   if (!data) return null;
 
-  const text: typeof siteText.veiligheidsregio_positief_geteste_personen =
-    siteText.veiligheidsregio_positief_geteste_personen;
+  const text = siteText.veiligheidsregio_positief_geteste_personen;
 
   return (
     <BarScale

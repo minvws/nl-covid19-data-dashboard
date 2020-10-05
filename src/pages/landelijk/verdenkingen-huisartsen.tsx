@@ -14,8 +14,7 @@ import { SuspectedPatientsBarScale } from '~/components/landelijk/suspected-pati
 import Arts from '~/assets/arts.svg';
 import { formatNumber } from '~/utils/formatNumber';
 
-const text: typeof siteText.verdenkingen_huisartsen =
-  siteText.verdenkingen_huisartsen;
+const text = siteText.verdenkingen_huisartsen;
 
 const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
   const { data: state } = props;

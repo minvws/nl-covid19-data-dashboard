@@ -2,8 +2,7 @@ import { BarScale } from '~/components/barScale';
 import { HospitalAdmissions } from '~/types/data.d';
 
 import siteText from '~/locale/index';
-const text: typeof siteText.gemeente_ziekenhuisopnames_per_dag =
-  siteText.gemeente_ziekenhuisopnames_per_dag;
+const text = siteText.gemeente_ziekenhuisopnames_per_dag;
 
 export function IntakeHospitalBarScale(props: {
   data: HospitalAdmissions | undefined;

@@ -24,8 +24,7 @@ import Getest from '~/assets/test.svg';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
-const text: typeof siteText.gemeente_positief_geteste_personen =
-  siteText.gemeente_positief_geteste_personen;
+const text = siteText.gemeente_positief_geteste_personen;
 
 const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
   const { data, municipalityName } = props;

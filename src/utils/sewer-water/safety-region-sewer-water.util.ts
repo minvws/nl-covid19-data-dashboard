@@ -10,8 +10,7 @@ import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import siteText from '~/locale/index';
 
-const text: typeof siteText.veiligheidsregio_rioolwater_metingen =
-  siteText.veiligheidsregio_rioolwater_metingen;
+const text = siteText.veiligheidsregio_rioolwater_metingen;
 
 // Specific interfaces to pass data between the formatting functions and the highcharts configs
 export interface SewerWaterMetadata {

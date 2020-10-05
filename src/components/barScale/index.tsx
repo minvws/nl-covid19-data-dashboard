@@ -42,7 +42,7 @@ export function BarScale({
 
   const { scale: x } = useDynamicScale(min, max, rangeKey, value);
 
-  const text: typeof siteText.common.barScale = siteText.common.barScale;
+  const text = siteText.common.barScale;
 
   if (!x) {
     return null;

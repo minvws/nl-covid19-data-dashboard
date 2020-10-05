@@ -23,8 +23,7 @@ import {
 import siteText from '~/locale/index';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
-const text: typeof siteText.gemeente_rioolwater_metingen =
-  siteText.gemeente_rioolwater_metingen;
+const text = siteText.gemeente_rioolwater_metingen;
 
 const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
   const { data, municipalityName } = props;

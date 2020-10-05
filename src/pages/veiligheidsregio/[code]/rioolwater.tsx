@@ -23,8 +23,7 @@ import {
 } from '~/static-props/safetyregion-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
-const text: typeof siteText.veiligheidsregio_rioolwater_metingen =
-  siteText.veiligheidsregio_rioolwater_metingen;
+const text = siteText.veiligheidsregio_rioolwater_metingen;
 
 const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
   const { data, safetyRegionName } = props;
