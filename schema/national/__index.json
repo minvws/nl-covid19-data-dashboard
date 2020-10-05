@@ -23,7 +23,10 @@
     "reproduction_index",
     "reproduction_index_last_known_average",
     "rioolwater_metingen",
-    "rioolwater_metingen_per_rwzi"
+    "rioolwater_metingen_per_rwzi",
+    "hospital_beds_occupied",
+    "intensive_care_beds_occupied",
+    "nursing_home"
   ],
   "additionalProperties": false,
   "properties": {
@@ -95,6 +98,15 @@
     },
     "rioolwater_metingen_per_rwzi": {
       "$ref": "rioolwater_metingen_per_rwzi.json"
+    },
+    "hospital_beds_occupied": {
+      "$ref": "hospital_beds_occupied.json"
+    },
+    "intensive_care_beds_occupied": {
+      "$ref": "intensive_care_beds_occupied.json"
+    },
+    "nursing_home": {
+      "$ref": "nursing_home.json"
     }
   }
 }

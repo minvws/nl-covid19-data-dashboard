@@ -9,7 +9,9 @@
     "code",
     "results_per_sewer_installation_per_region",
     "average_sewer_installation_per_region",
-    "results_per_region"
+    "results_per_region",
+    "ggd",
+    "nursing_home"
   ],
   "additionalProperties": false,
   "properties": {
@@ -36,6 +38,12 @@
     },
     "results_per_region": {
       "$ref": "results_per_region.json"
+    },
+    "ggd": {
+      "$ref": "ggd.json"
+    },
+    "nursing_home": {
+      "$ref": "nursing_home.json"
     }
   }
 }
