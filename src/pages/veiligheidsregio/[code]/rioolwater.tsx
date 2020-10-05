@@ -28,7 +28,7 @@ const text: typeof siteText.veiligheidsregio_rioolwater_metingen =
   siteText.veiligheidsregio_rioolwater_metingen;
 
 const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
-  const { data, name } = props;
+  const { data, safetyRegionName } = props;
 
   const { barScaleData, lineChartData, barChartData } = useMemo(() => {
     return {
@@ -43,7 +43,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
       <ContentHeader
         category={siteText.veiligheidsregio_layout.headings.overig}
         title={replaceVariablesInText(text.titel, {
-          safetyRegion: name,
+          safetyRegion: safetyRegionName,
         })}
         Icon={RioolwaterMonitoring}
         subtitle={text.pagina_toelichting}

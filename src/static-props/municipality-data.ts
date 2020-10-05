@@ -8,7 +8,7 @@ import municipalities from '~/data/gemeente_veiligheidsregio.json';
 export interface IMunicipalityData {
   data: Municipal;
   lastGenerated: string;
-  name: string;
+  municipalityName: string;
 }
 
 interface IPaths {
@@ -56,13 +56,14 @@ export function getMunicipalityData() {
     const fileContents = fs.readFileSync(filePath, 'utf8');
     const data = JSON.parse(fileContents);
 
-    const name = municipalities.find((r) => r.gemcode === code)?.name || '';
+    const municipalityName =
+      municipalities.find((r) => r.gemcode === code)?.name || '';
     const lastGenerated = data.last_generated;
 
     return {
       props: {
         data,
-        name,
+        municipalityName,
         lastGenerated,
       },
     };

@@ -22,14 +22,13 @@ import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
 import Getest from '~/assets/test.svg';
 
 import { formatNumber } from '~/utils/formatNumber';
-import { getLocalTitleForMunicipality } from '~/utils/getLocalTitleForCode';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text: typeof siteText.gemeente_positief_geteste_personen =
   siteText.gemeente_positief_geteste_personen;
 
 const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
-  const { data, name } = props;
+  const { data, municipalityName } = props;
   const router = useRouter();
 
   const legendItems = useMunicipalLegendaData('positive_tested_people');
@@ -41,7 +40,7 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
       <ContentHeader
         category={siteText.gemeente_layout.headings.medisch}
         title={replaceVariablesInText(text.titel, {
-          municipality: name,
+          municipality: municipalityName,
         })}
         Icon={Getest}
         subtitle={text.pagina_toelichting}
@@ -97,7 +96,11 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
 
       <article className="metric-article layout-chloropleth">
         <div className="chloropleth-header">
-          <h3>{getLocalTitleForMunicipality(text.map_titel, data.code)}</h3>
+          <h3>
+            {replaceVariablesInText(text.map_titel, {
+              municipality: municipalityName,
+            })}
+          </h3>
           <p>{text.map_toelichting}</p>
         </div>
 

@@ -7,7 +7,7 @@ import safetyRegions from '~/data/index';
 
 export interface ISafetyRegionData {
   data: Regionaal;
-  name: string;
+  safetyRegionName: string;
   lastGenerated: string;
 }
 
@@ -59,12 +59,13 @@ export function getSafetyRegionData() {
 
     const lastGenerated = data.last_generated;
 
-    const name = safetyRegions.find((r) => r.code === code)?.name || '';
+    const safetyRegionName =
+      safetyRegions.find((r) => r.code === code)?.name || '';
 
     return {
       props: {
         data,
-        name,
+        safetyRegionName,
         lastGenerated,
       },
     };

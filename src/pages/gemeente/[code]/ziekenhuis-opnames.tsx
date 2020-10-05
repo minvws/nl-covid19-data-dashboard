@@ -19,8 +19,6 @@ import { ChloroplethLegenda } from '~/components/chloropleth/legenda/Chloropleth
 import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
 import { useMunicipalLegendaData } from '~/components/chloropleth/legenda/hooks/useMunicipalLegendaData';
 
-import { getLocalTitleForMunicipality } from '~/utils/getLocalTitleForCode';
-
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
@@ -28,7 +26,7 @@ const text: typeof siteText.gemeente_ziekenhuisopnames_per_dag =
   siteText.gemeente_ziekenhuisopnames_per_dag;
 
 const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
-  const { data, name } = props;
+  const { data, municipalityName } = props;
   const router = useRouter();
 
   const legendItems = useMunicipalLegendaData('hospital_admissions');
@@ -40,7 +38,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
       <ContentHeader
         category={siteText.gemeente_layout.headings.medisch}
         title={replaceVariablesInText(text.titel, {
-          municipality: name,
+          municipality: municipalityName,
         })}
         Icon={Ziekenhuis}
         subtitle={text.pagina_toelichting}
@@ -79,7 +77,11 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
 
       <article className="metric-article layout-chloropleth">
         <div className="chloropleth-header">
-          <h3>{getLocalTitleForMunicipality(text.map_titel, data.code)}</h3>
+          <h3>
+            {replaceVariablesInText(text.map_titel, {
+              municipality: municipalityName,
+            })}
+          </h3>
           <p>{text.map_toelichting}</p>
         </div>
 

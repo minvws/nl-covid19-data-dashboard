@@ -29,7 +29,7 @@ const text: typeof siteText.veiligheidsregio_ziekenhuisopnames_per_dag =
   siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
 
 const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
-  const { data, name } = props;
+  const { data, safetyRegionName } = props;
   const router = useRouter();
 
   const resultsPerRegion: ResultsPerRegion | undefined =
@@ -44,7 +44,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
       <ContentHeader
         category={siteText.veiligheidsregio_layout.headings.medisch}
         title={replaceVariablesInText(text.titel, {
-          safetyRegion: name,
+          safetyRegion: safetyRegionName,
         })}
         Icon={Ziekenhuis}
         subtitle={text.pagina_toelichting}

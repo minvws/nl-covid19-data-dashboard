@@ -30,7 +30,7 @@ const text: typeof siteText.veiligheidsregio_positief_geteste_personen =
   siteText.veiligheidsregio_positief_geteste_personen;
 
 const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
-  const { data, name } = props;
+  const { data, safetyRegionName } = props;
   const router = useRouter();
 
   const resultsPerRegion: ResultsPerRegion | undefined =
@@ -45,7 +45,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
       <ContentHeader
         category={siteText.veiligheidsregio_layout.headings.medisch}
         title={replaceVariablesInText(text.titel, {
-          safetyRegion: name,
+          safetyRegion: safetyRegionName,
         })}
         Icon={Getest}
         subtitle={text.pagina_toelichting}
