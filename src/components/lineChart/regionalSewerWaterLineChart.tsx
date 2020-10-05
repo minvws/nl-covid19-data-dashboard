@@ -3,7 +3,7 @@ import Highcharts, { SeriesLineOptions } from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
 import { formatNumber } from '~/utils/formatNumber';
-import { formatDate } from '~/utils/formatDate';
+import { formatDateFromSeconds } from '~/utils/formatDate';
 import { getItemFromArray } from '~/utils/getItemFromArray';
 
 type TranslationStrings = Record<string, string>;
@@ -105,7 +105,7 @@ function getOptions(
         rotation: '0' as any,
         formatter: function () {
           return this.isFirst || this.isLast
-            ? formatDate(this.value, 'axis')
+            ? formatDateFromSeconds(this.value, 'axis')
             : '';
         },
       },
@@ -119,10 +119,12 @@ function getOptions(
           return false;
         }
         const { start, end } = getItemFromArray(weekSet, this.point.index);
-        return `<strong>${formatDate(start, 'short')} - ${formatDate(
-          end,
+        return `<strong>${formatDateFromSeconds(
+          start,
           'short'
-        )}:</strong> ${formatNumber(this.y)}`;
+        )} - ${formatDateFromSeconds(end, 'short')}:</strong> ${formatNumber(
+          this.y
+        )}`;
       },
     },
     yAxis: {

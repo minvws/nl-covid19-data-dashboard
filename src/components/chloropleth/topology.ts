@@ -1,22 +1,21 @@
 import { FeatureCollection, MultiPolygon } from 'geojson';
 import * as topojson from 'topojson-client';
-import municipalTopology from './municipalities.topo.json';
-import countryTopology from './netherlands.topo.json';
-import regionTopology from './safetyregions.topo.json';
 
-import { MunicipalGeoJOSN, RegionGeoJOSN } from './shared';
+// Load all the geographical data including the data entries (regions and municipalities)
+import topology from './geography-simplified.topo.json';
+import { MunicipalGeoJSON, RegionGeoJSON } from './shared';
 
 export const countryGeo = topojson.feature(
-  countryTopology,
-  countryTopology.objects.netherlands
+  topology,
+  topology.objects.netherlands
 ) as FeatureCollection<MultiPolygon>;
 
 export const regionGeo = topojson.feature(
-  regionTopology,
-  regionTopology.objects.safetyregions
-) as RegionGeoJOSN;
+  topology,
+  topology.objects.safetyregions
+) as RegionGeoJSON;
 
 export const municipalGeo = topojson.feature(
-  municipalTopology,
-  municipalTopology.objects.municipalities
-) as MunicipalGeoJOSN;
+  topology,
+  topology.objects.municipalities
+) as MunicipalGeoJSON;

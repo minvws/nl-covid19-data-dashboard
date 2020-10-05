@@ -245,6 +245,15 @@ $language-switcher-offset: 55px;
   margin-left: 4rem;
 }
 
+/*
+  Ensure skip link anchors to have a (non visible) start at the left side of the screen
+  This fixes odd skip-link behaviour in IE11
+*/
+.contentHeader[id] {
+  margin-left: -100vw;
+  padding-left: 100vw;
+}
+
 .withoutCategory {
   margin-top: 2rem;
 }

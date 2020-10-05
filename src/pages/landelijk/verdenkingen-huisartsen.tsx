@@ -1,5 +1,5 @@
 import siteText from '~/locale/index';
-import { VerdenkingenHuisartsen } from '~/types/data.d';
+import { NationalHuisartsVerdenkingen } from '~/types/data.d';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 
 import { ContentHeader } from '~/components/layout/Content';
@@ -11,13 +11,12 @@ import { SuspectedPatientsBarScale } from '~/components/landelijk/suspected-pati
 import Arts from '~/assets/arts.svg';
 import { formatNumber } from '~/utils/formatNumber';
 
-const text: typeof siteText.verdenkingen_huisartsen =
-  siteText.verdenkingen_huisartsen;
+const text = siteText.verdenkingen_huisartsen;
 
 const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
   const { data: state } = props;
 
-  const data: VerdenkingenHuisartsen | undefined =
+  const data: NationalHuisartsVerdenkingen | undefined =
     state?.verdenkingen_huisartsen;
 
   const total = state?.verdenkingen_huisartsen?.last_value?.geschat_aantal;

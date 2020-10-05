@@ -1,6 +1,6 @@
 import { NextRouter } from 'next/router';
 import { ReactNode } from 'react';
-import { formatDate } from '~/utils/formatDate';
+import { formatDateFromSeconds } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 import text from '~/locale/index';
@@ -56,7 +56,10 @@ export const escalationTooltip = (router: NextRouter) => {
                 </strong>
                 <br />
                 {replaceVariablesInText(text.escalatie_niveau.valid_from, {
-                  validFrom: formatDate(context.valid_from_unix, 'short'),
+                  validFrom: formatDateFromSeconds(
+                    context.valid_from_unix,
+                    'short'
+                  ),
                 })}
               </div>
             </div>
