@@ -9,7 +9,7 @@ import {
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
 
-import { hospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/municipal/hospitalAdmissionsTooltip';
+import { createMunicipalHospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/municipal/createMunicipalHospitalAdmissionsTooltip';
 import { LineChart } from '~/components/charts/index';
 import { IntakeHospitalBarScale } from '~/components/veiligheidsregio/intake-hospital-barscale';
 import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
@@ -87,7 +87,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
             selected={selectedMunicipalCode}
             highlightSelection={false}
             metricName="hospital_admissions"
-            tooltipContent={hospitalAdmissionsTooltip}
+            tooltipContent={createMunicipalHospitalAdmissionsTooltip(router)}
             onSelect={createSelectMunicipalHandler(
               router,
               'ziekenhuis-opnames'

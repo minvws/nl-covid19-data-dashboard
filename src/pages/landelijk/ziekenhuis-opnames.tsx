@@ -14,8 +14,8 @@ import { ChartRegionControls } from '~/components/chartRegionControls';
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
 import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
 import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
-import { hospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/municipal/hospitalAdmissionsTooltip';
-import { hospitalAdmissionsTooltip as regionHospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/region/hospitalAdmissionsTooltip';
+import { createMunicipalHospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/municipal/createMunicipalHospitalAdmissionsTooltip';
+import { createRegionHospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/region/createRegionHospitalAdmissionsTooltip';
 import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
 import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
 import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
@@ -76,7 +76,7 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
           {selectedMap === 'municipal' && (
             <MunicipalityChloropleth
               metricName="hospital_admissions"
-              tooltipContent={hospitalAdmissionsTooltip}
+              tooltipContent={createMunicipalHospitalAdmissionsTooltip(router)}
               onSelect={createSelectMunicipalHandler(
                 router,
                 'ziekenhuis-opnames'
@@ -86,7 +86,7 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
           {selectedMap === 'region' && (
             <SafetyRegionChloropleth
               metricName="hospital_admissions"
-              tooltipContent={regionHospitalAdmissionsTooltip}
+              tooltipContent={createRegionHospitalAdmissionsTooltip(router)}
               onSelect={createSelectRegionHandler(router, 'ziekenhuis-opnames')}
             />
           )}
