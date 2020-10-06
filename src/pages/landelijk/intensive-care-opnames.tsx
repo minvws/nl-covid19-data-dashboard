@@ -32,21 +32,6 @@ const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
         }}
       />
 
-      {/*
-      <div className="layout-kpis">
-        <Kpi title={text.barscale_titel} description={text.extra_uitleg}>
-          <IntakeIntensiveCareBarscale data={dataIntake} showAxis={true} />
-        </Kpi>
-
-        <Kpi
-          title={text.kpi_bedbezetting.title}
-          description={text.kpi_bedbezetting.description}
-          sourcedFrom={text.kpi_bedbezetting.sourced_from}
-        >
-          <MetricValue absolute={12312} />
-        </Kpi>
-      </div>
- */}
       <div className="layout-two-column">
         <article className="metric-article column-item">
           <div className="article-top">
