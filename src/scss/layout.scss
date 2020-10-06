@@ -65,6 +65,13 @@
   padding: 0 2em 2em 2em;
   border-radius: 5px;
   margin: 0 -2rem;
+
+  .map-container {
+    max-width: 750px;
+    height: 120vw;
+    max-height: 960px;
+    margin: 0 auto;
+  }
 }
 
 .index-article,
