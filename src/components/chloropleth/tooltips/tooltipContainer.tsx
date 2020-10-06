@@ -44,7 +44,7 @@ export function Tooltip(props: TTooltipProps) {
   return tooltip ? (
     <div
       ref={ref as any}
-      className={styles.tooltip}
+      className={styles.tooltipContainer}
       style={{
         left: tooltip.left,
         top: tooltip.top,

@@ -11,8 +11,7 @@ import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 import siteText from '~/locale/index';
 
-const text: typeof siteText.gemeente_rioolwater_metingen =
-  siteText.gemeente_rioolwater_metingen;
+const text = siteText.gemeente_rioolwater_metingen;
 
 // Specific interfaces to pass data between the formatting functions and the highcharts configs
 export interface SewerWaterMetadata {

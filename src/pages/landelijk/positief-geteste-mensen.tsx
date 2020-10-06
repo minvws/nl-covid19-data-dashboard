@@ -5,7 +5,7 @@ import getNlData, { INationalData } from '~/static-props/nl-data';
 import siteText from '~/locale/index';
 import {
   InfectedPeopleDeltaNormalized,
-  InfectedPeopleTotal,
+  NationalInfectedPeopleTotal,
   IntakeShareAgeGroups,
 } from '~/types/data.d';
 
@@ -14,8 +14,8 @@ import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { LineChart, BarChart } from '~/components/charts/index';
 import { ContentHeader } from '~/components/layout/Content';
 import { ChartRegionControls } from '~/components/chartRegionControls';
-import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
-import { createPositiveTestedPeopleRegionalTooltip } from '~/components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
+import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/createPositiveTestedPeopleMunicipalTooltip';
+import { createPositiveTestedPeopleRegionalTooltip } from '~/components/chloropleth/tooltips/region/createPositiveTestedPeopleRegionalTooltip';
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
 import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
 import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
@@ -44,7 +44,8 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
   const delta: InfectedPeopleDeltaNormalized | undefined =
     data?.infected_people_delta_normalized;
   const age: IntakeShareAgeGroups | undefined = data?.intake_share_age_groups;
-  const total: InfectedPeopleTotal | undefined = data?.infected_people_total;
+  const total: NationalInfectedPeopleTotal | undefined =
+    data?.infected_people_total;
 
   const ggdData = data?.infected_people_percentage?.last_value;
 

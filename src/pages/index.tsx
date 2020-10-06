@@ -6,7 +6,7 @@ import fs from 'fs';
 import styles from './index.module.scss';
 import { National } from '~/types/data';
 import { INationalData } from '~/static-props/nl-data';
-import siteText from '~/locale/index';
+import { TALLLanguages } from '~/locale/index';
 
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
@@ -14,8 +14,8 @@ import { TitleWithIcon } from '~/components/titleWithIcon';
 import { ChartRegionControls } from '~/components/chartRegionControls';
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
 import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
-import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/positiveTestedPeopleTooltip';
-import { createPositiveTestedPeopleRegionalTooltip } from '~/components/chloropleth/tooltips/region/positiveTestedPeopleTooltip';
+import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/createPositiveTestedPeopleMunicipalTooltip';
+import { createPositiveTestedPeopleRegionalTooltip } from '~/components/chloropleth/tooltips/region/createPositiveTestedPeopleRegionalTooltip';
 import { escalationTooltip } from '~/components/chloropleth/tooltips/region/escalationTooltip';
 import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
 import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
@@ -132,7 +132,7 @@ Home.getLayout = getNationalLayout();
 interface StaticProps {
   props: {
     data: National;
-    text: typeof siteText;
+    text: TALLLanguages;
     lastGenerated: string;
   };
 }

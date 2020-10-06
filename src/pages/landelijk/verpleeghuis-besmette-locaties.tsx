@@ -17,8 +17,7 @@ import {
 
 import getNlData, { INationalData } from '~/static-props/nl-data';
 
-const text: typeof siteText.verpleeghuis_besmette_locaties =
-  siteText.verpleeghuis_besmette_locaties;
+const text = siteText.verpleeghuis_besmette_locaties;
 
 const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
   const { data: state } = props;

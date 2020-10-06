@@ -42,7 +42,7 @@ export function BarScale({
 
   const { scale: x } = useDynamicScale(min, max, rangeKey, value);
 
-  const text: typeof siteText.common.barScale = siteText.common.barScale;
+  const text = siteText.common.barScale;
 
   if (!x) {
     return null;
@@ -155,7 +155,7 @@ export function BarScale({
                 y={72}
                 textAnchor={textAlign(x(signaalwaarde)) as any}
               >
-                {text.signaalwaarde}: {signaalwaarde}
+                {text.signaalwaarde}: {`${formatNumber(signaalwaarde)}`}
               </text>
             </g>
           )}
@@ -163,7 +163,7 @@ export function BarScale({
           {showAxis && (
             <g>
               <text x={`${x(xMin)}%`} y={64} className={styles.tick}>
-                {xMin}
+                {`${formatNumber(xMin)}`}
               </text>
               <text
                 x={`${x(xMax)}%`}
@@ -171,7 +171,7 @@ export function BarScale({
                 className={styles.tick}
                 textAnchor="end"
               >
-                {xMax}
+                {`${formatNumber(xMax)}`}
               </text>
             </g>
           )}
