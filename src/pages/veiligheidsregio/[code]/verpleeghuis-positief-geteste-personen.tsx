@@ -16,14 +16,22 @@ import {
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
+import { createPositiveTestedPeopleRegionalTooltip } from '~/components/chloropleth/tooltips/region/createPositiveTestedPeopleRegionalTooltip';
+import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
+import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
+import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
+import { useRouter } from 'next/router';
 
-const text: typeof siteText.veiligheidsregio_verpleeghuis_positief_geteste_personen =
-  siteText.veiligheidsregio_verpleeghuis_positief_geteste_personen;
+const text = siteText.veiligheidsregio_verpleeghuis_positief_geteste_personen;
 
 const NursingHomeInfectedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
   const { data: state, safetyRegionName } = props;
 
   const data: RegionalNursingHome | undefined = state?.nursing_home;
+
+  const router = useRouter();
+  const legendItems = useSafetyRegionLegendaData('positive_tested_people');
 
   return (
     <>
@@ -70,6 +78,30 @@ const NursingHomeInfectedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           />
         </article>
       )}
+
+      <article className="metric-article layout-chloropleth">
+        <div className="chloropleth-header">
+          <h3>{text.map_titel}</h3>
+          <p>{text.map_toelichting}</p>
+        </div>
+
+        <div className="chloropleth-chart">
+          <SafetyRegionChloropleth
+            metricName="positive_tested_people"
+            tooltipContent={createPositiveTestedPeopleRegionalTooltip(router)}
+            onSelect={createSelectRegionHandler(router)}
+          />
+        </div>
+
+        <div className="chloropleth-legend">
+          {legendItems && (
+            <ChloroplethLegenda
+              items={legendItems}
+              title={text.chloropleth_legenda.titel}
+            />
+          )}
+        </div>
+      </article>
     </>
   );
 };
