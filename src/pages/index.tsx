@@ -26,7 +26,6 @@ import Notification from '~/assets/notification.svg';
 import ExternalLink from '~/assets/external-link.svg';
 
 import { EscalationMapLegenda } from './veiligheidsregio';
-import { useMediaQuery } from '~/utils/useMediaQuery';
 import { MDToHTMLString } from '~/utils/MDToHTMLString';
 
 const Home: FCWithLayout<INationalData> = (props) => {
@@ -36,9 +35,7 @@ const Home: FCWithLayout<INationalData> = (props) => {
     'municipal'
   );
 
-  const isLargeScreen = useMediaQuery('(min-width: 1000px)');
   const legendItems = useSafetyRegionLegendaData('positive_tested_people');
-  const mapHeight = isLargeScreen ? '500px' : '400px';
 
   return (
     <>
@@ -77,7 +74,6 @@ const Home: FCWithLayout<INationalData> = (props) => {
           <SafetyRegionChloropleth
             metricName="escalation_levels"
             metricProperty="escalation_level"
-            style={{ height: mapHeight }}
             onSelect={createSelectRegionHandler(router)}
             tooltipContent={escalationTooltip(router)}
           />

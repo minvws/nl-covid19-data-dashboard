@@ -16,7 +16,6 @@ import {
   SafetyRegionChloropleth,
   thresholds,
 } from '~/components/chloropleth/SafetyRegionChloropleth';
-import { useMediaQuery } from '~/utils/useMediaQuery';
 import { escalationTooltip } from '~/components/chloropleth/tooltips/region/escalationTooltip';
 import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
 
@@ -58,11 +57,8 @@ export const EscalationMapLegenda = (props: any) => {
 // lots of unnecessary null checks on those pages.
 const SafetyRegion: FCWithLayout<any> = (props) => {
   const router = useRouter();
-  const isLargeScreen = useMediaQuery('(min-width: 1000px)');
 
   const { text } = props;
-
-  const mapHeight = isLargeScreen ? '500px' : '400px';
 
   return (
     <article className="index-article layout-chloropleth">
@@ -83,7 +79,6 @@ const SafetyRegion: FCWithLayout<any> = (props) => {
         <SafetyRegionChloropleth
           metricName="escalation_levels"
           metricProperty="escalation_level"
-          style={{ height: mapHeight }}
           onSelect={createSelectRegionHandler(router)}
           tooltipContent={escalationTooltip(router)}
         />

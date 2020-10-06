@@ -10,7 +10,6 @@ import styles from '~/components/chloropleth/chloropleth.module.scss';
 import { ReactNode } from 'react';
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
 import { MunicipalityProperties } from '~/components/chloropleth/shared';
-import { useMediaQuery } from '~/utils/useMediaQuery';
 
 const tooltipContent = (router: NextRouter) => {
   return (context: MunicipalityProperties): ReactNode => {
@@ -40,7 +39,6 @@ const tooltipContent = (router: NextRouter) => {
 // lots of unnecessary null checks on those pages.
 const Municipality: FCWithLayout<any> = () => {
   const router = useRouter();
-  const isLargeScreen = useMediaQuery('(min-width: 1000px)');
 
   const onSelectMunicipal = (context: MunicipalityProperties) => {
     router.push(
@@ -49,18 +47,15 @@ const Municipality: FCWithLayout<any> = () => {
     );
   };
 
-  const mapHeight = isLargeScreen ? '800px' : '400px';
-
   return (
     <article className="map-article">
       <div>
         <h2>{text.gemeente_index.selecteer_titel}</h2>
         <p>{text.gemeente_index.selecteer_toelichting}</p>
       </div>
-      <div>
+      <div className="map-container">
         <MunicipalityChloropleth
           tooltipContent={tooltipContent(router)}
-          style={{ height: mapHeight }}
           onSelect={onSelectMunicipal}
           isSelectorMap={true}
         />
