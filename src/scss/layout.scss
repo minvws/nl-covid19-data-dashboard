@@ -65,6 +65,13 @@
   padding: 0 2em 2em 2em;
   border-radius: 5px;
   margin: 0 -2rem;
+
+  .map-container {
+    max-width: 750px;
+    height: 120vw;
+    max-height: 960px;
+    margin: 0 auto;
+  }
 }
 
 .index-article,
@@ -309,6 +316,8 @@
     li {
       border-bottom: 1px solid #c4c4c4;
 
+      min-height: 144px;
+
       &:first-child {
         border-top: 1px solid #c4c4c4;
       }
@@ -466,6 +475,13 @@ a.metric-link {
 
   .chloropleth-legend {
     grid-area: b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @media (min-width: $chloropleth-breakpoint) {
+      align-items: flex-start;
+    }
   }
 
   .chloropleth-chart {

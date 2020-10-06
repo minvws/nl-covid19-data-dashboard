@@ -20,7 +20,7 @@ if (typeof Highcharts === 'object') {
 type TRange = [Date, number | null, number | null];
 type TLine = [Date, number | null];
 
-const SIGNAALWAARDE_Z_INDEX = 10;
+const SIGNAALWAARDE_Z_INDEX = 5;
 
 interface AreaChartProps {
   title: string;

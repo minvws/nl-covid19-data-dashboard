@@ -22,7 +22,13 @@ import GetestIcon from '~/assets/test.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import Arrow from '~/assets/arrow.svg';
+import Locatie from '~/assets/locaties.svg';
+import CoronaVirus from '~/assets/coronavirus.svg';
+
 import { useMenuState } from './useMenuState';
+import { NursingHomeInfectedPeopleBarScale } from '~/components/common/nursing-home-infected-people-barscale';
+import { NursingHomeInfectedLocationsBarScale } from '~/components/common/nursing-home-infected-locations-barscale';
+import { NursingHomeDeathsBarScale } from '~/components/common/nursing-home-deaths-barscale';
 
 export function getSafetyRegionLayout() {
   return function (
@@ -215,6 +221,94 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                       <span>
                         <SewerWaterBarScale
                           data={getSewerWaterBarScaleData(data)}
+                          showAxis={true}
+                        />
+                      </span>
+                    </a>
+                  </Link>
+                </li>
+              </ul>
+
+              <h2>{siteText.veiligheidsregio_layout.headings.verpleeghuis}</h2>
+              <ul>
+                <li>
+                  <Link
+                    href="/veiligheidsregio/[code]/verpleeghuis-positief-geteste-personen"
+                    as={`/veiligheidsregio/${code}/verpleeghuis-positief-geteste-personen`}
+                  >
+                    <a
+                      onClick={handleMenuClick}
+                      className={getClassName(
+                        '/veiligheidsregio/[code]/verpleeghuis-positief-geteste-personen'
+                      )}
+                    >
+                      <TitleWithIcon
+                        Icon={GetestIcon}
+                        title={
+                          siteText.verpleeghuis_positief_geteste_personen
+                            .titel_sidebar
+                        }
+                      />
+                      {data?.nursing_home.last_value.newly_infected_people && (
+                        <span>
+                          <NursingHomeInfectedPeopleBarScale
+                            value={
+                              data.nursing_home.last_value.newly_infected_people
+                            }
+                            showAxis={true}
+                          />
+                        </span>
+                      )}
+                    </a>
+                  </Link>
+                </li>
+
+                <li>
+                  <Link
+                    href="/veiligheidsregio/[code]/verpleeghuis-besmette-locaties"
+                    as={`/veiligheidsregio/${code}/verpleeghuis-besmette-locaties`}
+                  >
+                    <a
+                      onClick={handleMenuClick}
+                      className={getClassName(
+                        '/veiligheidsregio/[code]/verpleeghuis-besmette-locaties'
+                      )}
+                    >
+                      <TitleWithIcon
+                        Icon={Locatie}
+                        title={siteText.verpleeghuis_besmette_locaties.titel}
+                      />
+                      <span>
+                        <NursingHomeInfectedLocationsBarScale
+                          value={
+                            data?.nursing_home.last_value
+                              .infected_locations_total
+                          }
+                          showAxis={true}
+                        />
+                      </span>
+                    </a>
+                  </Link>
+                </li>
+
+                <li>
+                  <Link
+                    href="/veiligheidsregio/[code]/verpleeghuis-sterfte"
+                    as={`/veiligheidsregio/${code}/verpleeghuis-sterfte`}
+                  >
+                    <a
+                      onClick={handleMenuClick}
+                      className={getClassName(
+                        '/veiligheidsregio/[code]/verpleeghuis-sterfte'
+                      )}
+                    >
+                      <TitleWithIcon
+                        Icon={CoronaVirus}
+                        title={siteText.verpleeghuis_oversterfte.titel_sidebar}
+                      />
+                      <span>
+                        <NursingHomeDeathsBarScale
+                          value={data?.nursing_home.last_value.deceased_daily}
                           showAxis={true}
                         />
                       </span>

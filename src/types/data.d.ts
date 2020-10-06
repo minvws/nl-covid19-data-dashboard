@@ -124,7 +124,7 @@ export interface National {
   rioolwater_metingen_per_rwzi: RioolwaterMetingenPerRwzi;
   hospital_beds_occupied: HospitalBedsOccupied;
   intensive_care_beds_occupied: IntensiveCareBedsOccupied;
-  nursing_home: NationalNursingHome;
+  nursing_home?: NationalNursingHome;
 }
 export interface NationalHuisartsVerdenkingen {
   values: NationalHuisartsVerdenkingenValue[];
