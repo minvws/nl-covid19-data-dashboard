@@ -42,8 +42,8 @@
       },
       "required": [
         "infected_daily",
-        "infected_locations_total",
-        "deceased_daily",
+        "infected_percentage_daily",
+        "tested_total_daily",
         "date_of_report_unix",
         "date_of_insertion_unix",
         "vrcode"
