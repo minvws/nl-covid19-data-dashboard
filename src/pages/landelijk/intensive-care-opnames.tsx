@@ -64,39 +64,35 @@ const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
         </article>
       </div>
 
-      {dataIntake && (
-        <article className="metric-article">
-          <LineChart
-            title={text.linechart_titel}
-            values={dataIntake.values.map((value) => ({
-              value: value.moving_average_ic,
-              date: value.date_of_report_unix,
-            }))}
-            signaalwaarde={10}
-          />
-          <footer className="article-footer">
-            {siteText.common.metadata.source}:{' '}
-            <a href={text.bronnen.nice.href}>{text.bronnen.nice.text}</a>
-          </footer>
-        </article>
-      )}
+      <article className="metric-article">
+        <LineChart
+          title={text.linechart_titel}
+          values={dataIntake.values.map((value) => ({
+            value: value.moving_average_ic,
+            date: value.date_of_report_unix,
+          }))}
+          signaalwaarde={10}
+        />
+        <footer className="article-footer">
+          {siteText.common.metadata.source}:{' '}
+          <a href={text.bronnen.nice.href}>{text.bronnen.nice.text}</a>
+        </footer>
+      </article>
 
-      {dataBeds && (
-        <article className="metric-article">
-          <LineChart
-            title={text.chart_bedbezetting.title}
-            description={text.chart_bedbezetting.description}
-            values={dataBeds.values.map((value) => ({
-              value: value.covid_occupied,
-              date: value.date_of_report_unix,
-            }))}
-          />
-          <footer className="article-footer">
-            {siteText.common.metadata.source}:{' '}
-            <a href={text.bronnen.lnaz.href}>{text.bronnen.lnaz.text}</a>
-          </footer>
-        </article>
-      )}
+      <article className="metric-article">
+        <LineChart
+          title={text.chart_bedbezetting.title}
+          description={text.chart_bedbezetting.description}
+          values={dataBeds.values.map((value) => ({
+            value: value.covid_occupied,
+            date: value.date_of_report_unix,
+          }))}
+        />
+        <footer className="article-footer">
+          {siteText.common.metadata.source}:{' '}
+          <a href={text.bronnen.lnaz.href}>{text.bronnen.lnaz.text}</a>
+        </footer>
+      </article>
     </>
   );
 };
