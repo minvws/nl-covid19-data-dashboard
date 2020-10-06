@@ -2,35 +2,25 @@ import { NextRouter } from 'next/router';
 import { ReactNode } from 'react';
 import { SafetyRegionProperties } from '../../shared';
 import { createSelectRegionHandler } from '../../selectHandlers/createSelectRegionHandler';
-import styles from '../tooltip.module.scss';
+import { TooltipContent } from '~/components/chloropleth/tooltips/tooltipContent';
 
 export const createPositiveTestedPeopleRegionalTooltip = (
   router: NextRouter
 ) => (context: SafetyRegionProperties & { value: number }): ReactNode => {
   const handler = createSelectRegionHandler(router);
 
-  const onSelectRegion = (event: any) => {
+  const onSelect = (event: any) => {
     event.stopPropagation();
     handler(context);
   };
 
   return (
     context && (
-      <div className={styles.escalationTooltip} onClick={onSelectRegion}>
-        <div className={styles.escalationTooltipHeader}>
-          <h3>{context?.vrname}</h3>
-        </div>
-        {
-          <div className={styles.positiveTestedPeopleInfo}>
-            <div className={styles.bubble}></div>
-            <div className={styles.escalationText}>
-              <strong>
-                {context.value !== undefined ? context.value : '-'}
-              </strong>
-            </div>
-          </div>
-        }
-      </div>
+      <TooltipContent title={context.vrname} onSelect={onSelect}>
+        <strong>
+          {context.value !== undefined ? `${context.value} / 100.000` : '-'}
+        </strong>
+      </TooltipContent>
     )
   );
 };
