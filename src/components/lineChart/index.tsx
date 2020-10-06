@@ -19,7 +19,7 @@ type Value = {
   value?: number;
 };
 
-const SIGNAALWAARDE_Z_INDEX = 10;
+const SIGNAALWAARDE_Z_INDEX = 5;
 
 interface LineChartProps {
   title: string;
