@@ -1,5 +1,4 @@
 import { FCWithLayout } from '~/components/layout';
-import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { ContentHeader } from '~/components/layout/Content';
 import { LineChart } from '~/components/charts/index';
 
@@ -9,33 +8,42 @@ import Getest from '~/assets/test.svg';
 
 import siteText from '~/locale/index';
 
-import { InfectedPeopleNurseryCountDaily } from '~/types/data.d';
-import getNlData, { INationalData } from '~/static-props/nl-data';
+import { RegionalNursingHome } from '~/types/data.d';
+import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
+import {
+  getSafetyRegionData,
+  getSafetyRegionPaths,
+  ISafetyRegionData,
+} from '~/static-props/safetyregion-data';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
-import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
-import { useRouter } from 'next/router';
 import { createPositiveTestedPeopleRegionalTooltip } from '~/components/chloropleth/tooltips/region/createPositiveTestedPeopleRegionalTooltip';
+import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
 import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
 import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
+import { useRouter } from 'next/router';
 
-const text = siteText.verpleeghuis_positief_geteste_personen;
+const text = siteText.veiligheidsregio_verpleeghuis_positief_geteste_personen;
 
-const NursingHomeInfectedPeople: FCWithLayout<INationalData> = (props) => {
-  const { data: state } = props;
+const NursingHomeInfectedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
+  const { data: state, safetyRegionName } = props;
+
+  const data: RegionalNursingHome | undefined = state?.nursing_home;
+
   const router = useRouter();
-
   const legendItems = useSafetyRegionLegendaData('positive_tested_people');
-
-  const data: InfectedPeopleNurseryCountDaily | undefined =
-    state?.infected_people_nursery_count_daily;
 
   return (
     <>
       <ContentHeader
-        category={siteText.nationaal_layout.headings.verpleeghuis}
-        title={text.titel}
+        category={siteText.veiligheidsregio_layout.headings.verpleeghuis}
+        title={replaceVariablesInText(text.titel, {
+          safetyRegion: safetyRegionName,
+        })}
         Icon={Getest}
-        subtitle={text.pagina_toelichting}
+        subtitle={replaceVariablesInText(text.pagina_toelichting, {
+          safetyRegion: safetyRegionName,
+        })}
         metadata={{
           datumsText: text.datums,
           dateUnix: data?.last_value?.date_of_report_unix,
@@ -49,7 +57,7 @@ const NursingHomeInfectedPeople: FCWithLayout<INationalData> = (props) => {
           <h3>{text.barscale_titel}</h3>
 
           <NursingHomeInfectedPeopleBarScale
-            value={data.last_value.infected_nursery_daily}
+            value={data?.last_value.newly_infected_people}
             showAxis={true}
           />
         </div>
@@ -64,7 +72,7 @@ const NursingHomeInfectedPeople: FCWithLayout<INationalData> = (props) => {
           <LineChart
             title={text.linechart_titel}
             values={data.values.map((value) => ({
-              value: value.infected_nursery_daily,
+              value: value.newly_infected_people,
               date: value.date_of_report_unix,
             }))}
           />
@@ -81,7 +89,10 @@ const NursingHomeInfectedPeople: FCWithLayout<INationalData> = (props) => {
           <SafetyRegionChloropleth
             metricName="positive_tested_people"
             tooltipContent={createPositiveTestedPeopleRegionalTooltip(router)}
-            onSelect={createSelectRegionHandler(router)}
+            onSelect={createSelectRegionHandler(
+              router,
+              'verpleeghuis-positief-geteste-personen'
+            )}
           />
         </div>
 
@@ -98,8 +109,9 @@ const NursingHomeInfectedPeople: FCWithLayout<INationalData> = (props) => {
   );
 };
 
-NursingHomeInfectedPeople.getLayout = getNationalLayout();
+NursingHomeInfectedPeople.getLayout = getSafetyRegionLayout();
 
-export const getStaticProps = getNlData();
+export const getStaticProps = getSafetyRegionData();
+export const getStaticPaths = getSafetyRegionPaths();
 
 export default NursingHomeInfectedPeople;

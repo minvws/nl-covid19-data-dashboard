@@ -1,23 +1,22 @@
 import { BarScale } from '~/components/barScale';
 import siteText from '~/locale/index';
-import { DeceasedPeopleNurseryCountDaily } from '~/types/data.d';
 
 const text = siteText.verpleeghuis_oversterfte;
 
 export function NursingHomeDeathsBarScale(props: {
-  data: DeceasedPeopleNurseryCountDaily | undefined;
+  value: number | undefined;
   showAxis: boolean;
 }) {
-  const { data, showAxis } = props;
+  const { value, showAxis } = props;
 
-  if (!data) return null;
+  if (!value) return null;
 
   return (
     <BarScale
       min={0}
       max={50}
       screenReaderText={text.barscale_screenreader_text}
-      value={data.last_value.deceased_nursery_daily}
+      value={value}
       id="over"
       rangeKey="deceased_nursery_daily"
       gradient={[

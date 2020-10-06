@@ -1,6 +1,5 @@
 import { ContentHeader } from '~/components/layout/Content';
 import { FCWithLayout } from '~/components/layout';
-import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { LineChart } from '~/components/charts/index';
 
 import { NursingHomeDeathsBarScale } from '~/components/common/nursing-home-deaths-barscale';
@@ -9,22 +8,29 @@ import CoronaVirus from '~/assets/coronavirus.svg';
 
 import siteText from '~/locale/index';
 
-import { DeceasedPeopleNurseryCountDaily } from '~/types/data.d';
-import getNlData, { INationalData } from '~/static-props/nl-data';
+import { RegionalNursingHome } from '~/types/data.d';
+import {
+  getSafetyRegionData,
+  getSafetyRegionPaths,
+  ISafetyRegionData,
+} from '~/static-props/safetyregion-data';
+import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
-const text = siteText.verpleeghuis_oversterfte;
+const text = siteText.veiligheidsregio_verpleeghuis_oversterfte;
 
-const NursingHomeDeaths: FCWithLayout<INationalData> = (props) => {
-  const { data: state } = props;
+const NursingHomeDeaths: FCWithLayout<ISafetyRegionData> = (props) => {
+  const { data: state, safetyRegionName } = props;
 
-  const data: DeceasedPeopleNurseryCountDaily | undefined =
-    state?.deceased_people_nursery_count_daily;
+  const data: RegionalNursingHome | undefined = state?.nursing_home;
 
   return (
     <>
       <ContentHeader
-        category={siteText.nationaal_layout.headings.verpleeghuis}
-        title={text.titel}
+        category={siteText.veiligheidsregio_layout.headings.verpleeghuis}
+        title={replaceVariablesInText(text.titel, {
+          safetyRegion: safetyRegionName,
+        })}
         Icon={CoronaVirus}
         subtitle={text.pagina_toelichting}
         metadata={{
@@ -38,9 +44,8 @@ const NursingHomeDeaths: FCWithLayout<INationalData> = (props) => {
       <article className="metric-article layout-two-column">
         <div className="column-item column-item-extra-margin">
           <h3>{text.barscale_titel}</h3>
-
           <NursingHomeDeathsBarScale
-            value={data.last_value.deceased_nursery_daily}
+            value={data?.last_value.deceased_daily}
             showAxis={true}
           />
         </div>
@@ -55,7 +60,7 @@ const NursingHomeDeaths: FCWithLayout<INationalData> = (props) => {
           <LineChart
             title={text.linechart_titel}
             values={data.values.map((value) => ({
-              value: value.deceased_nursery_daily,
+              value: value.deceased_daily,
               date: value.date_of_report_unix,
             }))}
           />
@@ -65,8 +70,9 @@ const NursingHomeDeaths: FCWithLayout<INationalData> = (props) => {
   );
 };
 
-NursingHomeDeaths.getLayout = getNationalLayout();
+NursingHomeDeaths.getLayout = getSafetyRegionLayout();
 
-export const getStaticProps = getNlData();
+export const getStaticProps = getSafetyRegionData();
+export const getStaticPaths = getSafetyRegionPaths();
 
 export default NursingHomeDeaths;
