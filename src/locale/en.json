@@ -608,7 +608,7 @@
     "pagina_toelichting": "Average number of virus particles in one milliliter of sewage water of this region. To calculate this, the total number of measured virus particles in one week, is divided by the number of measurements.",
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis. ",
     "screen_reader_graph_content": "{{value}} virus particles in one milliliter of sewage water.",
-    "barscale_titel": "Calculation of average number of virus particles in one milliliter of sewage water in this safety region",
+    "barscale_titel": "Average number of virus particles in one milliliter of sewage water in this safety region",
     "extra_uitleg": "To calculate this, the total number of measured virus particles in one week, is divided by the number of measurements.",
     "barscale_screenreader_text": "{{value}} virus particles in one milliliter of sewage water, collected from 28 locations in the Netherlands.",
     "linechart_titel": "Progression over time",
@@ -738,7 +738,7 @@
     "titel": "Percentage confirmed cases by GGD",
     "summary_title": "{{percentage}} of GGD tests had a positive result",
     "summary_link_cta": "Read more",
-    "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
+    "datums": "Week of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
     "bron": {
       "href": "https://www.rivm.nl/documenten/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
