@@ -130,7 +130,7 @@ export function MunicipalityChloropleth<
     isSelectorMap,
   } = props;
 
-  const [ref, dimensions] = useChartDimensions(undefined, 1.2);
+  const [ref, dimensions] = useChartDimensions(1.2);
 
   const [boundingbox, selectedVrCode] = useMunicipalityBoundingbox(
     regionGeo,

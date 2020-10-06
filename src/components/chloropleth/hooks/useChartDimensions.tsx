@@ -47,7 +47,6 @@ export type TCombinedChartDimensions = TChartDimensions & {
 };
 
 export const useChartDimensions = (
-  chartDimensions: TChartDimensions = {},
   aspectRatio?: number
 ): [MutableRefObject<HTMLElement | null>, TCombinedChartDimensions] => {
   /**
@@ -60,23 +59,13 @@ export const useChartDimensions = (
 
   const { width, height } = useResizeObserver({ ref });
 
-  /**
-   * The previous useChartDimensions implementation allowed the passed in width and height to overrule any
-   * observed sizes. This is not currently used in the app, so we could decide
-   * to take it out. This implementation follows that same behavior for now.
-   */
-  const shouldOverruleWidthAndHeight =
-    chartDimensions.width && chartDimensions.height;
-
   const calculatedHeight = aspectRatio && width ? width * aspectRatio : height;
 
   return [
     ref,
     combineChartDimensions({
-      width: shouldOverruleWidthAndHeight ? chartDimensions.width : width,
-      height: shouldOverruleWidthAndHeight
-        ? chartDimensions.height
-        : calculatedHeight,
+      width,
+      height: calculatedHeight,
     }),
   ];
 };

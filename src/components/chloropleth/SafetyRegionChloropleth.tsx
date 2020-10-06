@@ -144,7 +144,7 @@ export function SafetyRegionChloropleth<
     tooltipContent,
   } = props;
 
-  const [ref, dimensions] = useChartDimensions(undefined, 1.2);
+  const [ref, dimensions] = useChartDimensions(1.2);
 
   const boundingbox = useSafetyRegionBoundingbox(regionGeo, selected);
 
