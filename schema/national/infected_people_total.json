@@ -13,7 +13,7 @@
     "last_value": {
       "$ref": "#/definitions/value"
     },
-    "difference": {
+    "last_value_difference": {
       "$ref": "#/definitions/value_difference"
     }
   },
@@ -45,32 +45,21 @@
       "title": "national_infected_people_total_value_difference",
       "type": "object",
       "properties": {
-        "infected_daily_total_new": {
-          "type": "integer"
-        },
         "infected_daily_total_old": {
           "type": "integer"
         },
         "infected_daily_total_difference": {
           "type": "integer"
         },
-        "date_of_report_unix_new": {
-          "type": "integer"
-        },
+
         "date_of_report_unix_old": {
-          "type": "integer"
-        },
-        "date_of_insertion_unix": {
           "type": "integer"
         }
       },
       "required": [
-        "infected_daily_total_new",
         "infected_daily_total_old",
         "infected_daily_total_difference",
-        "date_of_report_unix_new",
-        "date_of_report_unix_old",
-        "date_of_insertion_unix"
+        "date_of_report_unix_old"
       ],
       "additionalProperties": false
     }
