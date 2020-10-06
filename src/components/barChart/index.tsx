@@ -32,9 +32,7 @@ export default function BarChart(props: IProps) {
         enabled: true,
         outside: true,
         formatter: function (): string | false {
-          // @ts-ignore
           if (this.point.label) {
-            // @ts-ignore
             return this.point.label;
           }
           return false;
