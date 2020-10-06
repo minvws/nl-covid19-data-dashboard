@@ -100,6 +100,7 @@ const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
         <article className="metric-article">
           <LineChart
             title={text.chart_bedbezetting.title}
+            description={text.chart_bedbezetting.description}
             values={dataBeds.values.map((value) => ({
               value: value.covid_occupied,
               date: value.date_of_report_unix,

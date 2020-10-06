@@ -96,9 +96,15 @@
   },
   "ziekenhuisopnames_per_dag": {
     "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
-    "bron": {
-      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
-      "text": "RIVM"
+    "bronnen": {
+      "rivm": {
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
+        "text": "RIVM"
+      },
+      "lnaz": {
+        "href": "@TODO",
+        "text": "LNAZ"
+      }
     },
     "titel": "Ziekenhuisopnames per dag",
     "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen.",
@@ -111,6 +117,14 @@
     "chloropleth_legenda": {
       "titel": "Ziekenhuisopnames",
       "geen_meldingen": "Geen meldingen"
+    },
+    "kpi_bedbezetting": {
+      "title": "Aantal door COVID bezette ziekenhuisbedden",
+      "description": "Dit getal laat zien hoeveel ziekenhuisbedden gisteren bezet werden door COVID patiënten. Het percentage is ten opzichte van alle bezette ziekenhuisbedden, niet de capaciteit."
+    },
+    "chart_bedbezetting": {
+      "title": "Bezetting ziekenhuisbedden over tijd",
+      "description": "Dit cijfer toont het aantal bezette ziekenhuisbedden door COVID patiënten over tijd."
     }
   },
   "positief_geteste_personen": {
