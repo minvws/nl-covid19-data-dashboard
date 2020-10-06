@@ -40,8 +40,8 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: dataIntake?.last_value?.date_of_report_unix,
-          dateInsertedUnix: dataIntake?.last_value?.date_of_insertion_unix,
+          dateUnix: dataIntake.last_value.date_of_report_unix,
+          dateInsertedUnix: dataIntake.last_value.date_of_insertion_unix,
           dataSource: text.bronnen.rivm,
         }}
       />

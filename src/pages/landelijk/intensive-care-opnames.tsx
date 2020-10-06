@@ -13,9 +13,9 @@ const text = siteText.ic_opnames_per_dag;
 const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
   const { data: state } = props;
 
-  const dataIntake = state?.intake_intensivecare_ma;
+  const dataIntake = state.intake_intensivecare_ma;
 
-  const dataBeds = state?.intensive_care_beds_occupied;
+  const dataBeds = state.intensive_care_beds_occupied;
 
   return (
     <>
@@ -26,8 +26,8 @@ const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: dataIntake?.last_value?.date_of_report_unix,
-          dateInsertedUnix: dataIntake?.last_value?.date_of_insertion_unix,
+          dateUnix: dataIntake.last_value.date_of_report_unix,
+          dateInsertedUnix: dataIntake.last_value.date_of_insertion_unix,
           dataSource: text.bronnen.nice,
         }}
       />
