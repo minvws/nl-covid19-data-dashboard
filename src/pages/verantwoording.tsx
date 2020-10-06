@@ -8,7 +8,7 @@ import { getLayoutWithMetadata, FCWithLayout } from '~/components/layout';
 import { MaxWidth } from '~/components/maxWidth';
 
 import styles from './over.module.scss';
-import siteText from '~/locale/index';
+import siteText, { TALLLanguages } from '~/locale/index';
 
 import { MDToHTMLString } from '~/utils/MDToHTMLString';
 
@@ -19,7 +19,7 @@ interface ICijfer {
 
 interface StaticProps {
   props: {
-    text: typeof siteText;
+    text: TALLLanguages;
     lastGenerated: string;
   };
 }

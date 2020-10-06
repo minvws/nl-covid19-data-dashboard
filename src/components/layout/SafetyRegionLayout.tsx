@@ -26,9 +26,9 @@ import Locatie from '~/assets/locaties.svg';
 import CoronaVirus from '~/assets/coronavirus.svg';
 
 import { useMenuState } from './useMenuState';
-import { NursingHomeInfectedPeopleBarScale } from '~/components/landelijk/nursing-home-infected-people-barscale';
-import { NursingHomeInfectedLocationsBarScale } from '~/components/landelijk/nursing-home-infected-locations-barscale';
-import { NursingHomeDeathsBarScale } from '~/components/landelijk/nursing-home-deaths-barscale';
+import { NursingHomeInfectedPeopleBarScale } from '~/components/common/nursing-home-infected-people-barscale';
+import { NursingHomeInfectedLocationsBarScale } from '~/components/common/nursing-home-infected-locations-barscale';
+import { NursingHomeDeathsBarScale } from '~/components/common/nursing-home-deaths-barscale';
 
 export function getSafetyRegionLayout() {
   return function (
@@ -249,12 +249,16 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                             .titel_sidebar
                         }
                       />
-                      <span>
-                        <NursingHomeInfectedPeopleBarScale
-                          data={data?.infected_people_nursery_count_daily}
-                          showAxis={true}
-                        />
-                      </span>
+                      {data?.nursing_home.last_value.newly_infected_people && (
+                        <span>
+                          <NursingHomeInfectedPeopleBarScale
+                            value={
+                              data.nursing_home.last_value.newly_infected_people
+                            }
+                            showAxis={true}
+                          />
+                        </span>
+                      )}
                     </a>
                   </Link>
                 </li>
@@ -276,7 +280,10 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                       />
                       <span>
                         <NursingHomeInfectedLocationsBarScale
-                          data={data?.total_reported_locations}
+                          value={
+                            data?.nursing_home.last_value
+                              .infected_locations_total
+                          }
                           showAxis={true}
                         />
                       </span>
@@ -301,7 +308,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                       />
                       <span>
                         <NursingHomeDeathsBarScale
-                          data={data?.deceased_people_nursery_count_daily}
+                          value={data?.nursing_home.last_value.deceased_daily}
                           showAxis={true}
                         />
                       </span>

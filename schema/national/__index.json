@@ -25,8 +25,7 @@
     "rioolwater_metingen",
     "rioolwater_metingen_per_rwzi",
     "hospital_beds_occupied",
-    "intensive_care_beds_occupied",
-    "nursing_home"
+    "intensive_care_beds_occupied"
   ],
   "additionalProperties": false,
   "properties": {

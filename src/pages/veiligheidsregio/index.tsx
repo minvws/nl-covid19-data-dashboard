@@ -9,7 +9,7 @@ import EscalationLevel2 from '~/assets/niveau-2.svg';
 import EscalationLevel3 from '~/assets/niveau-3.svg';
 import styles from '~/components/chloropleth/tooltips/tooltip.module.scss';
 
-import siteText from '~/locale/index';
+import { TALLLanguages } from '~/locale/index';
 import { MDToHTMLString } from '~/utils/MDToHTMLString';
 
 import {
@@ -100,7 +100,7 @@ SafetyRegion.getLayout = getSafetyRegionLayout();
 
 interface StaticProps {
   props: {
-    text: typeof siteText;
+    text: TALLLanguages;
     lastGenerated: string;
   };
 }

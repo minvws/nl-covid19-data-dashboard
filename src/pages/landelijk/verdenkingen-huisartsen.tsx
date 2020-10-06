@@ -1,5 +1,8 @@
 import siteText from '~/locale/index';
-import { NationalHuisartsVerdenkingen } from '~/types/data.d';
+import {
+  NationalHuisartsVerdenkingen,
+  NationalHuisartsVerdenkingenValue,
+} from '~/types/data.d';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 
 import { ContentHeader } from '~/components/layout/Content';
@@ -60,11 +63,16 @@ const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
           <LineChart
             title={text.linechart_titel}
             timeframeOptions={['all', '5weeks']}
-            values={data.values.map((value) => ({
-              value: value.incidentie,
-              date: value.week_unix,
-              week: { start: value.week_start_unix, end: value.week_end_unix },
-            }))}
+            values={data.values.map(
+              (value: NationalHuisartsVerdenkingenValue) => ({
+                value: value.incidentie,
+                date: value.week_unix,
+                week: {
+                  start: value.week_start_unix,
+                  end: value.week_end_unix,
+                },
+              })
+            )}
           />
         </article>
       )}

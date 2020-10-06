@@ -14,7 +14,7 @@ export function ChloroplethLegenda(props: TProps) {
   const { items, title } = props;
 
   return (
-    <>
+    <div>
       <h4>{title}</h4>
       <ul className={styles.legenda} aria-label="legend">
         {items.map((item) => (
@@ -22,11 +22,11 @@ export function ChloroplethLegenda(props: TProps) {
             <div
               className={styles.box}
               style={{ backgroundColor: item.color }}
-            ></div>
+            />
             <div>{item.label}</div>
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 }

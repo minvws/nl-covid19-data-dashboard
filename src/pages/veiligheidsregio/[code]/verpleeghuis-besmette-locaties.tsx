@@ -9,43 +9,40 @@ import { formatNumber } from '~/utils/formatNumber';
 
 import siteText from '~/locale/index';
 
-import {
-  TotalNewlyReportedLocations,
-  TotalReportedLocations,
-} from '~/types/data.d';
-
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import {
   getSafetyRegionData,
   getSafetyRegionPaths,
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
-import { getLocalTitleForRegion } from '~/utils/getLocalTitleForCode';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
-const text: typeof siteText.veiligheidsregio_verpleeghuis_besmette_locaties =
-  siteText.veiligheidsregio_verpleeghuis_besmette_locaties;
+const text = siteText.veiligheidsregio_verpleeghuis_besmette_locaties;
 
 const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
   props
 ) => {
-  const { data: state } = props;
+  const { data: state, safetyRegionName } = props;
 
-  const newLocations: TotalNewlyReportedLocations | undefined =
-    state?.total_newly_reported_locations;
-  const totalLocations: TotalReportedLocations | undefined =
-    state?.total_reported_locations;
+  const newlyInfectedLocations =
+    state?.nursing_home.last_value.newly_infected_locations;
+  const infectedLocationsTotal =
+    state?.nursing_home.last_value.infected_locations_total;
 
   return (
     <>
       <ContentHeader
         category={siteText.veiligheidsregio_layout.headings.verpleeghuis}
-        title={getLocalTitleForRegion(text.titel, state.code)}
+        title={replaceVariablesInText(text.titel, {
+          safetyRegion: safetyRegionName,
+        })}
         Icon={Locatie}
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: newLocations?.last_value?.date_of_report_unix,
-          dateInsertedUnix: newLocations?.last_value?.date_of_insertion_unix,
+          dateUnix: state?.nursing_home.last_value?.date_of_report_unix,
+          dateInsertedUnix:
+            state?.nursing_home.last_value?.date_of_insertion_unix,
           dataSource: text.bron,
         }}
       />
@@ -58,7 +55,7 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
             min={0}
             max={30}
             screenReaderText={text.barscale_screenreader_text}
-            value={newLocations?.last_value.total_new_reported_locations}
+            value={newlyInfectedLocations}
             id="besmette_locaties_verpleeghuis"
             rangeKey="total_new_reported_locations"
             gradient={[
@@ -73,13 +70,11 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
         </article>
 
         <article className="metric-article column-item">
-          {totalLocations && (
+          {infectedLocationsTotal && (
             <h3>
               {text.kpi_titel}{' '}
               <span className="text-blue kpi">
-                {formatNumber(
-                  totalLocations.last_value.total_reported_locations
-                )}
+                {formatNumber(infectedLocationsTotal)}
               </span>
             </h3>
           )}
@@ -87,12 +82,12 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
         </article>
       </div>
 
-      {totalLocations && (
+      {infectedLocationsTotal && (
         <article className="metric-article">
           <LineChart
             title={text.linechart_titel}
-            values={totalLocations.values.map((value) => ({
-              value: value.total_reported_locations,
+            values={state?.nursing_home.values.map((value) => ({
+              value: value.infected_locations_total,
               date: value.date_of_report_unix,
             }))}
           />

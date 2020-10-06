@@ -2,37 +2,40 @@ import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/layout/Content';
 import { LineChart } from '~/components/charts/index';
 
-import { NursingHomeInfectedPeopleBarScale } from '~/components/landelijk/nursing-home-infected-people-barscale';
+import { NursingHomeInfectedPeopleBarScale } from '~/components/common/nursing-home-infected-people-barscale';
 
 import Getest from '~/assets/test.svg';
 
 import siteText from '~/locale/index';
 
-import { InfectedPeopleNurseryCountDaily } from '~/types/data.d';
+import { RegionalNursingHome } from '~/types/data.d';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import {
   getSafetyRegionData,
   getSafetyRegionPaths,
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
-import { getLocalTitleForRegion } from '~/utils/getLocalTitleForCode';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text: typeof siteText.veiligheidsregio_verpleeghuis_positief_geteste_personen =
   siteText.veiligheidsregio_verpleeghuis_positief_geteste_personen;
 
 const NursingHomeInfectedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
-  const { data: state } = props;
+  const { data: state, safetyRegionName } = props;
 
-  const data: InfectedPeopleNurseryCountDaily | undefined =
-    state?.infected_people_nursery_count_daily;
+  const data: RegionalNursingHome | undefined = state?.nursing_home;
 
   return (
     <>
       <ContentHeader
         category={siteText.veiligheidsregio_layout.headings.verpleeghuis}
-        title={getLocalTitleForRegion(text.titel, state.code)}
+        title={replaceVariablesInText(text.titel, {
+          safetyRegion: safetyRegionName,
+        })}
         Icon={Getest}
-        subtitle={getLocalTitleForRegion(text.pagina_toelichting, state.code)}
+        subtitle={replaceVariablesInText(text.pagina_toelichting, {
+          safetyRegion: safetyRegionName,
+        })}
         metadata={{
           datumsText: text.datums,
           dateUnix: data?.last_value?.date_of_report_unix,
@@ -45,7 +48,10 @@ const NursingHomeInfectedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
         <div className="column-item column-item-extra-margin">
           <h3>{text.barscale_titel}</h3>
 
-          <NursingHomeInfectedPeopleBarScale data={data} showAxis={true} />
+          <NursingHomeInfectedPeopleBarScale
+            value={data?.last_value.newly_infected_people}
+            showAxis={true}
+          />
         </div>
 
         <div className="column-item column-item-extra-margin">
@@ -58,7 +64,7 @@ const NursingHomeInfectedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           <LineChart
             title={text.linechart_titel}
             values={data.values.map((value) => ({
-              value: value.infected_nursery_daily,
+              value: value.newly_infected_people,
               date: value.date_of_report_unix,
             }))}
           />

@@ -13,9 +13,9 @@ import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-b
 import { IntakeIntensiveCareBarscale } from '~/components/landelijk/intake-intensive-care-barscale';
 import { SuspectedPatientsBarScale } from '~/components/landelijk/suspected-patients-barscale';
 import { SewerWaterBarScale } from '~/components/landelijk/sewer-water-barscale';
-import { NursingHomeInfectedPeopleBarScale } from '~/components/landelijk/nursing-home-infected-people-barscale';
-import { NursingHomeInfectedLocationsBarScale } from '~/components/landelijk/nursing-home-infected-locations-barscale';
-import { NursingHomeDeathsBarScale } from '~/components/landelijk/nursing-home-deaths-barscale';
+import { NursingHomeInfectedPeopleBarScale } from '~/components/common/nursing-home-infected-people-barscale';
+import { NursingHomeInfectedLocationsBarScale } from '~/components/common/nursing-home-infected-locations-barscale';
+import { NursingHomeDeathsBarScale } from '~/components/common/nursing-home-deaths-barscale';
 
 import GetestIcon from '~/assets/test.svg';
 import ReproIcon from '~/assets/reproductiegetal.svg';
@@ -295,7 +295,10 @@ function NationalLayout(props: WithChildren<INationalData>) {
                     />
                     <span>
                       <NursingHomeInfectedPeopleBarScale
-                        data={data?.infected_people_nursery_count_daily}
+                        value={
+                          data?.infected_people_nursery_count_daily.last_value
+                            .infected_nursery_daily
+                        }
                         showAxis={true}
                       />
                     </span>
@@ -317,7 +320,10 @@ function NationalLayout(props: WithChildren<INationalData>) {
                     />
                     <span>
                       <NursingHomeInfectedLocationsBarScale
-                        data={data?.total_reported_locations}
+                        value={
+                          data?.total_reported_locations.last_value
+                            .total_reported_locations
+                        }
                         showAxis={true}
                       />
                     </span>
@@ -337,7 +343,10 @@ function NationalLayout(props: WithChildren<INationalData>) {
                     />
                     <span>
                       <NursingHomeDeathsBarScale
-                        data={data?.deceased_people_nursery_count_daily}
+                        value={
+                          data?.deceased_people_nursery_count_daily.last_value
+                            .deceased_nursery_daily
+                        }
                         showAxis={true}
                       />
                     </span>

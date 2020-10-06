@@ -252,7 +252,13 @@
     "pagina_toelichting": "Aantal positief geteste bewoners in verpleeghuizen per dag. Dit getal is een inschatting van het aantal gemelde bewoners in verpleeghuizen dat in Nederland positief getest is en COVID-19 heeft.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de cijferverantwoording.",
     "linechart_titel": "Verloop over tijd",
     "barscale_screenreader_text": "{{value}} positief geteste bewoners.",
-    "titel_sidebar": "Aantal positief geteste bewoners per dag"
+    "titel_sidebar": "Aantal positief geteste bewoners per dag",
+    "chloropleth_legenda": {
+      "titel": "Aantal per 100.000 inwoners",
+      "geen_meldingen": "Geen meldingen"
+    },
+    "map_titel": "Verdeling positief geteste mensen in Nederland",
+    "map_toelichting": "Deze kaarten laten zien van hoeveel mensen gisteren is gemeld dat ze positief getest zijn op COVID-19, per 100.000 inwoners."
   },
   "verpleeghuis_oversterfte": {
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -763,6 +769,22 @@
   },
   "positief_geteste_personen_ggd": {
     "titel": "Percentage positief geteste personen via GGD teststraten",
+    "summary_title": "{{percentage}} van de GGD testen waren positief",
+    "summary_link_cta": "Lees meer",
+    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "bron": {
+      "href": "https://www.rivm.nl/documenten/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "text": "RIVM"
+    },
+    "toelichting": "Dit getal zegt iets over het totaal aantal personen dat via de GGD getest, waarvan een uitslag bekend is en hoeveel daarvan een positieve uitslag hadden. Let op dat de meeste testen via de GGD lopen, maar dit niet voor alle testen geldt. Daarom wijkt het absolute aantal positief geteste personen af van het aantal positief geteste personen door de GGD.",
+    "totaal_getest_week_titel": "Aantal geteste personen via GGD",
+    "totaal_getest_week_uitleg": "Aantal personen die in één week via de GGD getest zijn, en waarvan de testuitslag bekend is.",
+    "positief_getest_week_titel": "Positief getest personen",
+    "positief_getest_week_uitleg": "Aantal en percentage positief geteste personen die in één week via de GGD getest zijn. Voor het berekenen van het percentage worden alleen tests meegeteld waarvan de testuitslag bekend is.",
+    "positief_getest_getest_week_uitleg": "Dit zijn {{numerator}} van {{denominator}} geteste personen"
+  },
+  "veiligheidsregio_positief_geteste_personen_ggd": {
+    "titel": "Percentage positief geteste personen via GGD teststraten in {{safetyRegion}}",
     "summary_title": "{{percentage}} van de GGD testen waren positief",
     "summary_link_cta": "Lees meer",
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
