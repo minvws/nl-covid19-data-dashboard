@@ -1,12 +1,12 @@
 import { NextRouter } from 'next/router';
 import { SafetyRegionProperties } from '../shared';
-import { PageName } from './types';
+import { RegioPageName } from './types';
 
 export type RegionSelectionHandler = (context: SafetyRegionProperties) => void;
 
 export function createSelectRegionHandler(
   router: NextRouter,
-  pageName: PageName = 'positief-geteste-mensen'
+  pageName: RegioPageName = 'positief-geteste-mensen'
 ): RegionSelectionHandler {
   return (context: SafetyRegionProperties) => {
     if (!context) {
