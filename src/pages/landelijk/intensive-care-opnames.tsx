@@ -1,22 +1,21 @@
 import Arts from '~/assets/arts.svg';
 import { LineChart } from '~/components/charts/index';
-import { Kpi } from '~/components/kpi';
 import { IntakeIntensiveCareBarscale } from '~/components/landelijk/intake-intensive-care-barscale';
 import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/layout/Content';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
-import { MetricValue } from '~/components/metricValue';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
-import { IntakeIntensivecareMa } from '~/types/data.d';
+import { formatNumber } from '~/utils/formatNumber';
 
 const text = siteText.ic_opnames_per_dag;
 
 const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
   const { data: state } = props;
 
-  const data: IntakeIntensivecareMa | undefined =
-    state?.intake_intensivecare_ma;
+  const dataIntake = state?.intake_intensivecare_ma;
+
+  const dataBeds = state?.intensive_care_beds_occupied;
 
   return (
     <>
@@ -27,27 +26,16 @@ const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: data?.last_value?.date_of_report_unix,
-          dateInsertedUnix: data?.last_value?.date_of_insertion_unix,
-          dataSource: text.bron,
+          dateUnix: dataIntake?.last_value?.date_of_report_unix,
+          dateInsertedUnix: dataIntake?.last_value?.date_of_insertion_unix,
+          dataSource: text.bronnen.nice,
         }}
       />
 
-      <article className="metric-article layout-two-column">
-        <div className="column-item column-item-extra-margin">
-          <h3>{text.barscale_titel}</h3>
-
-          <IntakeIntensiveCareBarscale data={data} showAxis={true} />
-        </div>
-
-        <div className="column-item column-item-extra-margin">
-          <p>{text.extra_uitleg}</p>
-        </div>
-      </article>
-
+      {/*
       <div className="layout-kpis">
         <Kpi title={text.barscale_titel} description={text.extra_uitleg}>
-          <IntakeIntensiveCareBarscale data={data} showAxis={true} />
+          <IntakeIntensiveCareBarscale data={dataIntake} showAxis={true} />
         </Kpi>
 
         <Kpi
@@ -58,17 +46,69 @@ const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
           <MetricValue absolute={12312} />
         </Kpi>
       </div>
+ */}
+      <div className="layout-two-column">
+        <article className="metric-article column-item">
+          <div className="article-top">
+            <h3>{text.barscale_titel}</h3>
+            <IntakeIntensiveCareBarscale data={dataIntake} showAxis={true} />
+            <p>{text.extra_uitleg}</p>
+          </div>
+          <footer className="article-footer">
+            {siteText.common.metadata.source}:{' '}
+            <a href={text.bronnen.nice.href}>{text.bronnen.nice.text}</a>
+          </footer>
+        </article>
 
-      {data && (
+        <article className="metric-article column-item">
+          <div className="article-top">
+            <h3>{text.kpi_bedbezetting.title}</h3>
+            <div className="text-blue kpi">
+              {`${formatNumber(
+                dataBeds.last_value.covid_occupied
+              )} (${formatNumber(
+                dataBeds.last_value.covid_percentage_of_all_occupied
+              )}%)`}
+            </div>
+            <p>{text.kpi_bedbezetting.description}</p>
+          </div>
+          <footer className="article-footer">
+            {siteText.common.metadata.source}:{' '}
+            <a href={text.bronnen.lnaz.href}>{text.bronnen.lnaz.text}</a>
+          </footer>
+        </article>
+      </div>
+
+      {dataIntake && (
         <article className="metric-article">
           <LineChart
             title={text.linechart_titel}
-            values={data.values.map((value) => ({
+            values={dataIntake.values.map((value) => ({
               value: value.moving_average_ic,
               date: value.date_of_report_unix,
             }))}
             signaalwaarde={10}
           />
+          <footer className="article-footer">
+            {siteText.common.metadata.source}:{' '}
+            <a href={text.bronnen.nice.href}>{text.bronnen.nice.text}</a>
+          </footer>
+        </article>
+      )}
+
+      {dataBeds && (
+        <article className="metric-article">
+          <LineChart
+            title={text.chart_bedbezetting.title}
+            values={dataBeds.values.map((value) => ({
+              value: value.covid_occupied,
+              date: value.date_of_report_unix,
+            }))}
+          />
+          <footer className="article-footer">
+            {siteText.common.metadata.source}:{' '}
+            <a href={text.bronnen.lnaz.href}>{text.bronnen.lnaz.text}</a>
+          </footer>
         </article>
       )}
     </>
