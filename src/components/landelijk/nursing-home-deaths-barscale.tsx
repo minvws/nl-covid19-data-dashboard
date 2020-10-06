@@ -2,8 +2,7 @@ import { BarScale } from '~/components/barScale';
 import siteText from '~/locale/index';
 import { DeceasedPeopleNurseryCountDaily } from '~/types/data.d';
 
-const text: typeof siteText.verpleeghuis_oversterfte =
-  siteText.verpleeghuis_oversterfte;
+const text = siteText.verpleeghuis_oversterfte;
 
 export function NursingHomeDeathsBarScale(props: {
   data: DeceasedPeopleNurseryCountDaily | undefined;

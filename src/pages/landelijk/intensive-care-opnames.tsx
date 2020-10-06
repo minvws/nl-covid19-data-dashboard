@@ -12,7 +12,7 @@ import { IntakeIntensivecareMa } from '~/types/data.d';
 
 import getNlData, { INationalData } from '~/static-props/nl-data';
 
-const text: typeof siteText.ic_opnames_per_dag = siteText.ic_opnames_per_dag;
+const text = siteText.ic_opnames_per_dag;
 
 const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
   const { data: state } = props;

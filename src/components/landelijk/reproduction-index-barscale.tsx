@@ -3,7 +3,7 @@ import { BarScale } from '~/components/barScale';
 import { ReproductionIndex as ReproductionIndexData } from '~/types/data.d';
 
 import siteText from '~/locale/index';
-const text: typeof siteText.reproductiegetal = siteText.reproductiegetal;
+const text = siteText.reproductiegetal;
 
 export function ReproductionIndexBarScale(props: {
   data: ReproductionIndexData | undefined;

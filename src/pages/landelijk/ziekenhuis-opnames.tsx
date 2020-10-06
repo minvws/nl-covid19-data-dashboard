@@ -22,8 +22,7 @@ import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hoo
 
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 
-const text: typeof siteText.ziekenhuisopnames_per_dag =
-  siteText.ziekenhuisopnames_per_dag;
+const text = siteText.ziekenhuisopnames_per_dag;
 
 const IntakeHospital: FCWithLayout<INationalData> = (props) => {
   const { data: state } = props;

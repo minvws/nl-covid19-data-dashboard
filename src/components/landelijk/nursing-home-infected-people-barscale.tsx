@@ -2,8 +2,7 @@ import { BarScale } from '~/components/barScale';
 import { InfectedPeopleNurseryCountDaily } from '~/types/data.d';
 import siteText from '~/locale/index';
 
-const text: typeof siteText.verpleeghuis_positief_geteste_personen =
-  siteText.verpleeghuis_positief_geteste_personen;
+const text = siteText.verpleeghuis_positief_geteste_personen;
 
 export function NursingHomeInfectedPeopleBarScale(props: {
   data: InfectedPeopleNurseryCountDaily | undefined;

@@ -8,7 +8,7 @@ import { getLayoutWithMetadata, FCWithLayout } from '~/components/layout';
 import { MaxWidth } from '~/components/maxWidth';
 
 import styles from './over.module.scss';
-import siteText from '~/locale/index';
+import siteText, { TALLLanguages } from '~/locale/index';
 
 import { MDToHTMLString } from '~/utils/MDToHTMLString';
 
@@ -19,7 +19,7 @@ interface IVraagEnAntwoord {
 
 interface StaticProps {
   props: {
-    text: typeof siteText;
+    text: TALLLanguages;
     lastGenerated: string;
   };
 }
@@ -41,7 +41,7 @@ export async function getStaticProps(): Promise<StaticProps> {
   return { props: { text, lastGenerated } };
 }
 
-const Over: FCWithLayout<{ text: typeof siteText }> = (props) => {
+const Over: FCWithLayout<{ text: TALLLanguages }> = (props) => {
   const { text } = props;
 
   return (

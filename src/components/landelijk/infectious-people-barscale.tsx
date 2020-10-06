@@ -3,8 +3,7 @@ import { InfectiousPeopleCountNormalized } from '~/types/data.d';
 
 import siteText from '~/locale/index';
 
-const text: typeof siteText.besmettelijke_personen =
-  siteText.besmettelijke_personen;
+const text = siteText.besmettelijke_personen;
 
 export function InfectiousPeopleBarScale(props: {
   data: InfectiousPeopleCountNormalized | undefined;
