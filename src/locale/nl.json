@@ -119,7 +119,13 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de trend van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
+    "barscale_keys": [
+      "0 tot 20",
+      "20 tot 40",
+      "40 tot 60",
+      "60 tot 80",
+      "80+"
+    ],
     "cluster_datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "cluster_bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
@@ -570,7 +576,13 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de trend van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
+    "barscale_keys": [
+      "0 tot 20",
+      "20 tot 40",
+      "40 tot 60",
+      "60 tot 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -596,7 +608,7 @@
     "pagina_toelichting": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater van deze veiligheidsregio. Voor deze berekening wordt uitgegaan van het totaal aantal gemeten virusdeeltjes in één week, gedeeld door het aantal metingen.",
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
     "screen_reader_graph_content": "{{value}} virusdeeltjes in een milliliter rioolwater.",
-    "barscale_titel": "Berekening van het gemiddeld aantal virusdeeltjes in een milliliter rioolwater van deze veiligheidsregio",
+    "barscale_titel": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater van deze veiligheidsregio",
     "extra_uitleg": "Voor deze berekening wordt uitgegaan van het totaal aantal gemeten virusdeeltjes in één week, gedeeld door het aantal metingen.",
     "barscale_screenreader_text": "{{value}} virusdeeltjes in een milliliter rioolwater, afkomstig van 28 locaties in Nederland.",
     "linechart_titel": "Verloop over tijd",
@@ -646,7 +658,13 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de trend van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": ["0 to 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 tot 40",
+      "40 tot 60",
+      "60 tot 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -720,23 +738,7 @@
     "titel": "Percentage positief geteste personen via GGD teststraten",
     "summary_title": "{{percentage}} van de GGD testen waren positief",
     "summary_link_cta": "Lees meer",
-    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "bron": {
-      "href": "https://www.rivm.nl/documenten/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
-      "text": "RIVM"
-    },
-    "toelichting": "Dit getal zegt iets over het totaal aantal personen dat via de GGD getest, waarvan een uitslag bekend is en hoeveel daarvan een positieve uitslag hadden. Let op dat de meeste testen via de GGD lopen, maar dit niet voor alle testen geldt. Daarom wijkt het absolute aantal positief geteste personen af van het aantal positief geteste personen door de GGD.",
-    "totaal_getest_week_titel": "Aantal geteste personen via GGD",
-    "totaal_getest_week_uitleg": "Aantal personen die in één week via de GGD getest zijn, en waarvan de testuitslag bekend is.",
-    "positief_getest_week_titel": "Positief getest personen",
-    "positief_getest_week_uitleg": "Aantal en percentage positief geteste personen die in één week via de GGD getest zijn. Voor het berekenen van het percentage worden alleen tests meegeteld waarvan de testuitslag bekend is.",
-    "positief_getest_getest_week_uitleg": "Dit zijn {{numerator}} van {{denominator}} geteste personen"
-  },
-  "veiligheidsregio_positief_geteste_personen_ggd": {
-    "titel": "Percentage positief geteste personen via GGD teststraten in {{safetyRegion}}",
-    "summary_title": "{{percentage}} van de GGD testen waren positief",
-    "summary_link_cta": "Lees meer",
-    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "datums": "Week van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
     "bron": {
       "href": "https://www.rivm.nl/documenten/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -756,5 +758,21 @@
     "title": "Risiconiveaus Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
     "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
     "url": "https://coronadashboard.rijksoverheid.nl/over-risiconiveaus"
+  },
+  "veiligheidsregio_positief_geteste_personen_ggd": {
+    "titel": "Percentage positief geteste personen via GGD teststraten in {{safetyRegion}}",
+    "summary_title": "{{percentage}} van de GGD testen waren positief",
+    "summary_link_cta": "Lees meer",
+    "datums": "Week van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
+    "bron": {
+      "href": "https://www.rivm.nl/documenten/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "text": "RIVM"
+    },
+    "toelichting": "Dit getal zegt iets over het totaal aantal personen dat via de GGD getest, waarvan een uitslag bekend is en hoeveel daarvan een positieve uitslag hadden. Let op dat de meeste testen via de GGD lopen, maar dit niet voor alle testen geldt. Daarom wijkt het absolute aantal positief geteste personen af van het aantal positief geteste personen door de GGD.",
+    "totaal_getest_week_titel": "Aantal geteste personen via GGD",
+    "totaal_getest_week_uitleg": "Aantal personen die in één week via de GGD getest zijn, en waarvan de testuitslag bekend is.",
+    "positief_getest_week_titel": "Positief getest personen",
+    "positief_getest_week_uitleg": "Aantal en percentage positief geteste personen die in één week via de GGD getest zijn. Voor het berekenen van het percentage worden alleen tests meegeteld waarvan de testuitslag bekend is.",
+    "positief_getest_getest_week_uitleg": "Dit zijn {{numerator}} van {{denominator}} geteste personen"
   }
 }

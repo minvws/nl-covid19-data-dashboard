@@ -119,7 +119,13 @@
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the progression over time in the number of new cases by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "cluster_datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
     "cluster_bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
@@ -570,7 +576,13 @@
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the progression over time in the number of positive tests by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -596,7 +608,7 @@
     "pagina_toelichting": "Average number of virus particles in one milliliter of sewage water of this region. To calculate this, the total number of measured virus particles in one week, is divided by the number of measurements.",
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis. ",
     "screen_reader_graph_content": "{{value}} virus particles in one milliliter of sewage water.",
-    "barscale_titel": "Calculation of average number of virus particles in one milliliter of sewage water in this safety region",
+    "barscale_titel": "Average number of virus particles in one milliliter of sewage water in this safety region",
     "extra_uitleg": "To calculate this, the total number of measured virus particles in one week, is divided by the number of measurements.",
     "barscale_screenreader_text": "{{value}} virus particles in one milliliter of sewage water, collected from 28 locations in the Netherlands.",
     "linechart_titel": "Progression over time",
@@ -646,7 +658,13 @@
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the change in the number of confirmed cases by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -720,7 +738,7 @@
     "titel": "Percentage confirmed cases by GGD",
     "summary_title": "{{percentage}} of GGD tests had a positive result",
     "summary_link_cta": "Read more",
-    "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
+    "datums": "Week of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
     "bron": {
       "href": "https://www.rivm.nl/documenten/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -732,22 +750,6 @@
     "positief_getest_week_uitleg": "Number and percentage of confirmed cases tested by the GGD in one week. For calculating the percentage, only tests are taken into account of which the test result is known.",
     "positief_getest_getest_week_uitleg": "This is {{numerator}} of {{denominator}} tested people"
   },
-  "veiligheidsregio_positief_geteste_personen_ggd": {
-    "titel": "Percentage positief geteste personen via GGD teststraten in {{safetyRegion}}",
-    "summary_title": "{{percentage}} van de GGD testen waren positief",
-    "summary_link_cta": "Lees meer",
-    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "bron": {
-      "href": "https://www.rivm.nl/documenten/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
-      "text": "RIVM"
-    },
-    "toelichting": "Dit getal zegt iets over het totaal aantal personen dat via de GGD getest, waarvan een uitslag bekend is en hoeveel daarvan een positieve uitslag hadden. Let op dat de meeste testen via de GGD lopen, maar dit niet voor alle testen geldt. Daarom wijkt het absolute aantal positief geteste personen af van het aantal positief geteste personen door de GGD.",
-    "totaal_getest_week_titel": "Aantal geteste personen via GGD",
-    "totaal_getest_week_uitleg": "Aantal personen die in één week via de GGD getest zijn, en waarvan de testuitslag bekend is.",
-    "positief_getest_week_titel": "Positief getest personen",
-    "positief_getest_week_uitleg": "Aantal en percentage positief geteste personen die in één week via de GGD getest zijn. Voor het berekenen van het percentage worden alleen tests meegeteld waarvan de testuitslag bekend is.",
-    "positief_getest_getest_week_uitleg": "Dit zijn {{numerator}} van {{denominator}} geteste personen"
-  },
   "over_risiconiveaus": {
     "title": "Level of risk",
     "toelichting": "Each week the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. This assessment is carried out jointly by central government, the municipal health services (GGDs), the National Institute for Public Health and the Environment (RIVM) and the safety regions. The Minister of Health, Welfare and Sport then determines which risk level applies to each region. Do we need to exercise ‘caution’ (level 1), is the situation one of ‘concern’ (level 2) or is the situation ‘serious’ (level 3)?\n\nCentral government or the safety region in question will take appropriate measures based on the risk level. Measures depend on the local situation and may therefore vary from region to region.\n\nA region’s risk level is determined by looking at the situation in that region, in the surrounding regions and in the rest of the country. This is done on the basis of the coronavirus dashboard, RIVM’s weekly report and assessments by the GGDs and the safety regions. Several aspects are taken into consideration when determining the risk level:\n\n- How quickly is the number of new infections rising?\n- Are additional measures needed for vulnerable groups?\n- How effective is contact tracing?\n- How well are the measures being complied with?\n- Is there still sufficient healthcare capacity?\n\n**When is a region’s risk level raised to ‘concern’ or ‘serious’?**\nVarious figures are assessed to determine whether a region’s risk level needs to be raised to ‘concern’ or ‘serious’. This includes the number and percentage of positive tests:\n\n- A region’s risk level will in principle be raised from ‘caution’ to ‘concern’ if there are more than 50 positive tests per 100,000 inhabitants in one week. This means that the alert value of 7 positive tests per 100,000 inhabitants is exceeded each day. Or if more than 5% of tests are positive.\n\n- A region’s risk level will in principle be raised from ‘concern’ to ‘serious’ if there are more than 150 positive test results per 100,000 inhabitants in one week. Or if more than 10% of tests are positive.\n\nEvery Monday RIVM calculates to which regions this applies. A more in-depth assessment of the situation in these regions is carried out in the following days. If the situation in a region is one of ‘concern’ or ‘serious’, the Minister of Health, Welfare and Sport (Hugo de Jonge) may decide to assign a higher risk level to that region. The above criteria are intended as a guideline.\n\n**What do the three risk levels mean?**\n\n1. Caution. The situation is manageable. The number of new infections is low. Vulnerable groups must remain alert. Contact tracing is largely effective. Measures are being sufficiently complied with and are enforceable. There is sufficient healthcare capacity. Any additional measures are designed to make the existing approach more effective.\n\n2. Concern. The situation is moving in a negative direction. The number of new infections is increasing. A tailored approach is needed to protect vulnerable groups. If the situation continues, contact tracing will become ineffective. Measures are not being sufficiently complied with. Pressure on healthcare capacity is increasing. The existing approach needs to be strengthened through additional measures to get the virus under control again and return to a manageable situation.\n\n3. Serious. Severe measures are needed to prevent further escalation and return to a manageable situation. The number of new infections is increasing rapidly. An intensive tailored approach is needed to protect vulnerable groups. Contact tracing is no longer effective, making it more difficult to keep track of how the virus is spreading. Measures are not being sufficiently complied with. There is insufficient healthcare capacity. Measures to be taken are designed to prevent regional healthcare from becoming overburdened and to be able to track the spread of the virus again."
@@ -756,5 +758,21 @@
     "title": "Risk levels Coronavirus COVID-19 Dashboard | Government.nl",
     "description": "Information on the development of the coronavirus in the Netherlands.",
     "url": "https://coronadashboard.government.nl/over-risiconiveaus"
+  },
+  "veiligheidsregio_positief_geteste_personen_ggd": {
+    "titel": "",
+    "summary_title": "",
+    "summary_link_cta": "",
+    "datums": "Week of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
+    "bron": {
+      "href": "",
+      "text": ""
+    },
+    "toelichting": "",
+    "totaal_getest_week_titel": "",
+    "totaal_getest_week_uitleg": "",
+    "positief_getest_week_titel": "",
+    "positief_getest_week_uitleg": "",
+    "positief_getest_getest_week_uitleg": ""
   }
 }
