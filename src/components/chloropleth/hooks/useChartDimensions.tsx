@@ -47,7 +47,8 @@ export type TCombinedChartDimensions = TChartDimensions & {
 };
 
 export const useChartDimensions = (
-  chartDimensions: TChartDimensions = {}
+  chartDimensions: TChartDimensions = {},
+  aspectRatio?: number
 ): [MutableRefObject<HTMLElement | null>, TCombinedChartDimensions] => {
   /**
    * The ref will be initialized from the outside by mutating the return value of this
@@ -67,11 +68,15 @@ export const useChartDimensions = (
   const shouldOverruleWidthAndHeight =
     chartDimensions.width && chartDimensions.height;
 
+  const calculatedHeight = aspectRatio && width ? width * aspectRatio : height;
+
   return [
     ref,
     combineChartDimensions({
       width: shouldOverruleWidthAndHeight ? chartDimensions.width : width,
-      height: shouldOverruleWidthAndHeight ? chartDimensions.height : height,
+      height: shouldOverruleWidthAndHeight
+        ? chartDimensions.height
+        : calculatedHeight,
     }),
   ];
 };
