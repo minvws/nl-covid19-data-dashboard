@@ -26,9 +26,7 @@ interface StaticProps {
 
 export async function getStaticProps(): Promise<StaticProps> {
   const text = require('../locale/index').default;
-  const serializedContent = text.verantwoording.cijfers.map(function (
-    item: ICijfer
-  ) {
+  const serializedContent = text.verantwoording.cijfers.map((item: ICijfer) => {
     return { ...item, verantwoording: MDToHTMLString(item.verantwoording) };
   });
 
@@ -68,16 +66,19 @@ const Verantwoording: FCWithLayout<{ text: any; lastGenerated: string }> = (
             <h2>{text.verantwoording.title}</h2>
             <p>{text.verantwoording.paragraaf}</p>
             <article className={styles.faqList}>
-              {text.verantwoording.cijfers.map((item: ICijfer) => (
-                <Fragment key={`item-${item.cijfer}`}>
-                  <h3>{item.cijfer}</h3>
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: item.verantwoording,
-                    }}
-                  />
-                </Fragment>
-              ))}
+              {text.verantwoording.cijfers.map((item: ICijfer) => {
+                return item.cijfer.length > 0 &&
+                  item.verantwoording.length > 0 ? (
+                  <Fragment key={`item-${item.cijfer}`}>
+                    <h3>{item.cijfer}</h3>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: item.verantwoording,
+                      }}
+                    />
+                  </Fragment>
+                ) : null;
+              })}
             </article>
           </div>
         </MaxWidth>
