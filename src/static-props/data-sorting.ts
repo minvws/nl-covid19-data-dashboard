@@ -92,12 +92,12 @@ function sortTimeSeriesValues(values: Timestamped[]) {
    * to detect each of them.
    */
   if (isReportTimestamped(values)) {
-    return values.sort((a, b) => b.date_of_report_unix - a.date_of_report_unix);
+    return values.sort((a, b) => a.date_of_report_unix - b.date_of_report_unix);
   } else if (isWeekTimestamped(values)) {
-    return values.sort((a, b) => b.week_unix - a.week_unix);
+    return values.sort((a, b) => a.week_unix - b.week_unix);
   } else if (isMeasurementTimestamped(values)) {
     return values.sort(
-      (a, b) => b.date_measurement_unix - a.date_measurement_unix
+      (a, b) => a.date_measurement_unix - b.date_measurement_unix
     );
   }
 
