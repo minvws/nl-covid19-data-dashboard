@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { National } from '~/types/data.d';
+import { sortNationalTimeSeriesInDataInPlace } from './data-sorting';
 
 export interface INationalData {
   data: National;
@@ -42,7 +43,7 @@ export default function getNlData(): () => IProps {
 
     const lastGenerated = data.last_generated;
 
-    sortTimeSeriesInDataInPlace(data);
+    sortNationalTimeSeriesInDataInPlace(data);
 
     return {
       props: {
@@ -51,96 +52,4 @@ export default function getNlData(): () => IProps {
       },
     };
   };
-}
-
-/**
- * Sort all time series properties in the data in-place, meaning the input
- * data is mutated.
- */
-function sortTimeSeriesInDataInPlace(data: National) {
-  const timeSeriesPropertyNames = getTimeSeriesPropertyNames(data);
-  // console.log('+++ timeSeriesPropertyNames', timeSeriesPropertyNames);
-
-  for (const propertyName of timeSeriesPropertyNames) {
-    const timeSeries = data[propertyName] as TimeSeriesData<Timestamped>;
-    (data[propertyName] as TimeSeriesData<
-      Timestamped
-    >).values = sortTimeSeriesValues(timeSeries.values);
-  }
-}
-/**
- * From the data structure, retrieve all properties that hold a "values" field
- * in their content. All time series data is kept in this values field.
- */
-function getTimeSeriesPropertyNames(data: National) {
-  return Object.entries(data).reduce(
-    (acc, [propertyKey, propertyValue]) =>
-      isTimeSeries(propertyValue)
-        ? [...acc, propertyKey as keyof National]
-        : acc,
-    [] as (keyof National)[]
-  );
-}
-
-type Timestamped = ReportTimestamped | WeekTimestamped | MeasurementTimestamped;
-
-interface ReportTimestamped {
-  date_of_report_unix: number;
-}
-
-interface WeekTimestamped {
-  week_unix: number;
-}
-
-interface MeasurementTimestamped {
-  date_measurement_unix: number;
-}
-
-interface TimeSeriesData<T> {
-  values: T[];
-}
-
-function sortTimeSeriesValues(values: Timestamped[]): Timestamped[] {
-  if (isReportTimestamped(values)) {
-    return values.sort((a, b) => a.date_of_report_unix - b.date_of_report_unix);
-  } else if (isWeekTimestamped(values)) {
-    return values.sort((a, b) => a.week_unix - b.week_unix);
-  } else if (isMeasurementTimestamped(values)) {
-    return values.sort(
-      (a, b) => a.date_measurement_unix - b.date_measurement_unix
-    );
-  }
-
-  throw new Error(
-    `Unknown timestamp in value ${JSON.stringify(values[0], null, 2)}`
-  );
-}
-
-function isTimeSeries(
-  value: unknown | TimeSeriesData<Timestamped>
-): value is TimeSeriesData<Timestamped> {
-  return (value as TimeSeriesData<Timestamped>).values !== undefined;
-}
-
-function isReportTimestamped(
-  timeSeries: Timestamped[]
-): timeSeries is ReportTimestamped[] {
-  return (
-    (timeSeries as ReportTimestamped[])[0].date_of_report_unix !== undefined
-  );
-}
-
-function isWeekTimestamped(
-  timeSeries: Timestamped[]
-): timeSeries is WeekTimestamped[] {
-  return (timeSeries as WeekTimestamped[])[0].week_unix !== undefined;
-}
-
-function isMeasurementTimestamped(
-  timeSeries: Timestamped[]
-): timeSeries is MeasurementTimestamped[] {
-  return (
-    (timeSeries as MeasurementTimestamped[])[0].date_measurement_unix !==
-    undefined
-  );
 }
