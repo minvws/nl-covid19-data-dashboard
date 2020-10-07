@@ -11,9 +11,9 @@ import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHan
 import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
 import { createMunicipalHospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/municipal/createMunicipalHospitalAdmissionsTooltip';
 import { createRegionHospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/region/createRegionHospitalAdmissionsTooltip';
+import { ContentHeaderMetadataHack } from '~/components/contentHeaderMetadataHack';
 import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-barscale';
 import { FCWithLayout } from '~/components/layout';
-import { ContentHeader } from '~/components/layout/Content';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
@@ -33,7 +33,7 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
 
   return (
     <>
-      <ContentHeader
+      <ContentHeaderMetadataHack
         category={siteText.nationaal_layout.headings.medisch}
         title={text.titel}
         Icon={Ziekenhuis}
@@ -42,7 +42,8 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
           datumsText: text.datums,
           dateUnix: dataIntake.last_value.date_of_report_unix,
           dateInsertedUnix: dataIntake.last_value.date_of_insertion_unix,
-          dataSource: text.bronnen.rivm,
+          dataSourceA: text.bronnen.rivm,
+          dataSourceB: text.bronnen.lnaz,
         }}
       />
 
