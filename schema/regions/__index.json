@@ -56,6 +56,13 @@
       "items": {
         "$ref": "escalation_levels.json"
       }
+    },
+    "nursing_home": {
+      "type": "array",
+      "maxItems": 25,
+      "items": {
+        "$ref": "nursing_home.json"
+      }
     }
   }
 }
