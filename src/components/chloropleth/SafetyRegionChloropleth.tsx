@@ -72,7 +72,7 @@ export function SafetyRegionChloropleth<
     if (metricName && metricProperty) {
       return (regionThresholds as any)[metricName][metricProperty];
     } else if (metricName) {
-      return regionThresholds[metricName];
+      return (regionThresholds as any)[metricName];
     }
     return undefined;
   }

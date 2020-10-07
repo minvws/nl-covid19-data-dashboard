@@ -16,8 +16,10 @@ import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionCh
 import { escalationTooltip } from '~/components/chloropleth/tooltips/region/escalationTooltip';
 import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
 import { regionThresholds } from '~/components/chloropleth/regionThresholds';
+import { ChoroplethThresholdsValue } from '~/components/chloropleth/shared';
 
-const escalationThresholds = regionThresholds.escalation_levels.thresholds;
+const escalationThresholds = regionThresholds.escalation_levels
+  .thresholds as ChoroplethThresholdsValue[];
 
 export const EscalationMapLegenda = (props: any) => {
   const { text } = props;

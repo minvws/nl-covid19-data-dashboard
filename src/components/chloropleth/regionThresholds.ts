@@ -120,12 +120,12 @@ const nursingHomeThresholds: NursingHomeThresholds = {
 };
 
 export const regionThresholds: Record<
-  string,
+  TRegionMetricName,
   RegionalThresholds | Record<string, NursingHomeThresholds>
 > = {
-  [positiveTestedThresholds.dataKey]: positiveTestedThresholds,
-  [hospitalAdmissionsThresholds.dataKey]: hospitalAdmissionsThresholds,
-  [escalationThresholds.dataKey]: escalationThresholds,
+  positive_tested_people: positiveTestedThresholds,
+  hospital_admissions: hospitalAdmissionsThresholds,
+  escalation_levels: escalationThresholds,
   nursing_home: {
     [nursingHomeThresholds.dataKey]: nursingHomeThresholds,
   },
