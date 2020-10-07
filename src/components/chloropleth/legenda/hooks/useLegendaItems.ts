@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
 import { ILegendaItem } from '../ChloroplethLegenda';
 
-import { ChloroplethThresholdsValue } from '~/components/chloropleth/shared';
+import { ChoroplethThresholdsValue } from '~/components/chloropleth/shared';
 
-const createLabel = (list: ChloroplethThresholdsValue[], index: number) => {
+const createLabel = (list: ChoroplethThresholdsValue[], index: number) => {
   if (index === 0) {
     return `< ${list[1].threshold}`;
   }
@@ -13,14 +13,14 @@ const createLabel = (list: ChloroplethThresholdsValue[], index: number) => {
   return `${list[index].threshold} - ${list[index + 1].threshold}`;
 };
 
-export function useLegendaItems(thresholds?: ChloroplethThresholdsValue[]) {
+export function useLegendaItems(thresholds?: ChoroplethThresholdsValue[]) {
   return useMemo(() => {
     if (!thresholds) {
       return;
     }
 
     const legendaItems: ILegendaItem[] = thresholds.map<ILegendaItem>(
-      (threshold: ChloroplethThresholdsValue, index: number) => {
+      (threshold: ChoroplethThresholdsValue, index: number) => {
         return {
           color: threshold.color,
           label: createLabel(thresholds, index),

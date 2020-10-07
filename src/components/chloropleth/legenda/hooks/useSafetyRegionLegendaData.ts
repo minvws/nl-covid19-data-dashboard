@@ -1,10 +1,10 @@
 import { TRegionMetricName } from '../../shared';
 
 import { useLegendaItems } from './useLegendaItems';
-import { thresholds } from '~/components/chloropleth/SafetyRegionChloropleth';
+import { regionThresholds } from '~/components/chloropleth/regionThresholds';
 
 export function useSafetyRegionLegendaData(metric: TRegionMetricName) {
-  const ths = thresholds[metric];
+  const ths = regionThresholds[metric];
 
   return useLegendaItems(ths.thresholds);
 }

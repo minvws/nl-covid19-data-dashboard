@@ -1,9 +1,5 @@
 import classNames from 'classnames';
-import {
-  ChloroplethThresholds,
-  SafetyRegionProperties,
-  TRegionMetricName,
-} from './shared';
+import { SafetyRegionProperties, TRegionMetricName } from './shared';
 import { Regions } from '~/types/data';
 import { CSSProperties, ReactNode, useCallback } from 'react';
 import { useChartDimensions } from './hooks/useChartDimensions';
@@ -14,89 +10,7 @@ import styles from './chloropleth.module.scss';
 import { useSafetyRegionBoundingbox } from './hooks/useSafetyRegionBoundingbox';
 import { useChloroplethColorScale } from './hooks/useChloroplethColorScale';
 import { useSafetyRegionData } from './hooks/useSafetyRegionData';
-
-type RegionalThresholds = ChloroplethThresholds<TRegionMetricName>;
-
-const positiveTestedThresholds: RegionalThresholds = {
-  dataKey: 'positive_tested_people',
-  thresholds: [
-    {
-      color: '#C0E8FC',
-      threshold: 0,
-    },
-    {
-      color: '#8BD1FF',
-      threshold: 4,
-    },
-    {
-      color: '#61B6ED',
-      threshold: 7,
-    },
-    {
-      color: '#3597D4',
-      threshold: 10,
-    },
-    {
-      color: '#046899',
-      threshold: 20,
-    },
-    {
-      color: '#034566',
-      threshold: 30,
-    },
-  ],
-};
-
-const hospitalAdmissionsThresholds: RegionalThresholds = {
-  dataKey: 'hospital_admissions',
-  thresholds: [
-    {
-      color: '#c0e8fc',
-      threshold: 0,
-    },
-    {
-      color: '#87cbf8',
-      threshold: 10,
-    },
-    {
-      color: '#5dafe4',
-      threshold: 16,
-    },
-    {
-      color: '#3391cc',
-      threshold: 24,
-    },
-    {
-      color: '#0579b3',
-      threshold: 31,
-    },
-  ],
-};
-
-const escalationThresholds: RegionalThresholds = {
-  dataKey: 'escalation_levels',
-  svgClass: 'escalationMap',
-  thresholds: [
-    {
-      color: '#F291BC',
-      threshold: 1,
-    },
-    {
-      color: '#D95790',
-      threshold: 2,
-    },
-    {
-      color: '#A11050',
-      threshold: 3,
-    },
-  ],
-};
-
-export const thresholds: Record<TRegionMetricName, RegionalThresholds> = {
-  positive_tested_people: positiveTestedThresholds,
-  hospital_admissions: hospitalAdmissionsThresholds,
-  escalation_levels: escalationThresholds,
-};
+import { regionThresholds } from './regionThresholds';
 
 export type TProps<
   T extends TRegionMetricName,
@@ -146,7 +60,7 @@ export function SafetyRegionChloropleth<
 
   const [ref, dimensions] = useChartDimensions(1.2);
 
-  const boundingbox = useSafetyRegionBoundingbox(regionGeo, selected);
+  const boundingBox = useSafetyRegionBoundingbox(regionGeo, selected);
 
   const [getData, hasData] = useSafetyRegionData(
     metricName,
@@ -154,7 +68,9 @@ export function SafetyRegionChloropleth<
     metricProperty
   );
 
-  const selectedThreshold = metricName ? thresholds[metricName] : undefined;
+  const selectedThreshold = metricName
+    ? regionThresholds[metricName]
+    : undefined;
   const getFillColor = useChloroplethColorScale(
     getData,
     selectedThreshold?.thresholds
@@ -253,7 +169,7 @@ export function SafetyRegionChloropleth<
         featureCollection={regionGeo}
         overlays={countryGeo}
         hovers={hasData ? regionGeo : undefined}
-        boundingBox={boundingbox || countryGeo}
+        boundingBox={boundingBox || countryGeo}
         dimensions={dimensions}
         featureCallback={featureCallback}
         overlayCallback={overlayCallback}

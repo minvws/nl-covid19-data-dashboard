@@ -147,13 +147,7 @@
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the progression over time in the number of new cases by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": [
-      "0 to 20",
-      "20 to 40",
-      "40 to 60",
-      "60 to 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
     "cluster_datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
     "cluster_bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
@@ -272,7 +266,13 @@
     "kpi_titel": "Total number of infected locations",
     "kpi_toelichting": "This figure is an estimate of the number of nursing homes where in the past 28 days at least one (new) COVID-19 infection (confirmed by a positive test) is reported.",
     "linechart_titel": "Progression over time",
-    "barscale_screenreader_text": "{{value}} new locations where there is at least one confirmed case, per day."
+    "barscale_screenreader_text": "{{value}} new locations where there is at least one confirmed case, per day.",
+    "chloropleth_legenda": {
+      "titel": "Number per 100.000 residents",
+      "geen_meldingen": "No confirmed cases"
+    },
+    "map_titel": "Number of infected locations in the Netherlands",
+    "map_toelichting": ""
   },
   "verpleeghuis_positief_geteste_personen": {
     "datums": "Value of {{dateOfReport}}. Obtained:{{dateOfInsertion}}. Is updated on a daily basis.",
@@ -610,13 +610,7 @@
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the progression over time in the number of positive tests by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": [
-      "0 to 20",
-      "20 to 40",
-      "40 to 60",
-      "60 to 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -692,13 +686,7 @@
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the change in the number of confirmed cases by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": [
-      "0 to 20",
-      "20 to 40",
-      "40 to 60",
-      "60 to 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -852,12 +840,6 @@
     "pagina_toelichting": "Number of confirmed cases in nursing homes per day in {{safetyRegion}}. This number is an estimation of the number confirmed cases in nursing home inhabitants.\n\nThe calculation method has been changed on the 29th of September. Please also see the data explanation section.",
     "linechart_titel": "Progression over time",
     "barscale_screenreader_text": "{{value}} Number of residents who tested positive (confirmed cases).",
-    "titel_sidebar": "Confirmed cases per day",
-    "chloropleth_legenda": {
-      "titel": "Number per 100.000 residents",
-      "geen_meldingen": "No confirmed cases"
-    },
-    "map_titel": "Confirmed cases in the Netherlands",
-    "map_toelichting": "These maps show the number of confirmed cases per 100.000 residents."
+    "titel_sidebar": "Confirmed cases per day"
   }
 }
