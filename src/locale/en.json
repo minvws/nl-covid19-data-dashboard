@@ -9,8 +9,8 @@
     "title": "Last updated"
   },
   "notificatie": {
-    "titel": "The strong increase in new COVID-19 infections, hospital and ICU admissions continues",
-    "bericht": "The number of people who newly tested positive has risen sharply in almost all regions and age groups in the past week (23 to 29 September). Also the number of admissions of Covid-19 patients to the hospital and ICU strongly increased. The percentage of people who tested positive in the GGD test centres increased from 2.5% in the last week of August to 7.4% in the past week. \n\nRisk level per region can be ‘caution’ (level 1), ‘concern’ (level 2) or ‘serious’ (level 3). The situation in 11 of the 25 safety regions is concerning. In Amsterdam-Amstelland, Haaglanden and Rotterdam-Rijnmond, the situation is considered serious.",
+    "titel": "Increase in new COVID-19 infections, hospital and ICU admissions continues",
+    "bericht": "The new number of people who tested positive has continued to rise in all regions and age groups in the past week (30 September to 6 October). Also, the increase in the number of admissions of Covid-19 patients to the hospital and ICU has continued. The first impact of the government policy measures issued on 30 September is not expected to become visible until next week at the earliest. \n\nRisk level per region can be ‘caution’ (level 1), ‘concern’ (level 2) or ‘serious’ (level 3). The situation in 18 of the 25 safety regions is concerning. In Amsterdam-Amstelland, Haaglanden and Rotterdam-Rijnmond, the situation is considered serious.",
     "link": {
       "text": "View the full message from the RIVM",
       "href": "https://www.rivm.nl/en/novel-coronavirus-covid-19/current-information"
@@ -119,7 +119,13 @@
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the progression over time in the number of new cases by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "cluster_datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
     "cluster_bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
@@ -254,11 +260,11 @@
     "barscale_screenreader_text": "{{value}} Number of residents who tested positive (confirmed cases).",
     "titel_sidebar": "Number of confirmed cases per day",
     "chloropleth_legenda": {
-      "titel": "Number per 100.000 inhabitants",
+      "titel": "Confirmed cases per 100.000 residents",
       "geen_meldingen": "No confirmed cases"
     },
-    "map_titel": "Distribution of confirmed cases in the Netherlands",
-    "map_toelichting": "These maps show how many confirmed cases of COVID-19 were reported yesterday per 100,000 inhabitants."
+    "map_titel": "Confirmed cases in the Netherlands",
+    "map_toelichting": "These maps show the number of confirmed cases per 100.000 residents."
   },
   "verpleeghuis_oversterfte": {
     "datums": "Value of  {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -541,57 +547,6 @@
   "gemeente_metadata": {
     "title": "Municipality"
   },
-  "veiligheidsregio_verpleeghuis_oversterfte": {
-    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
-      "text": "RIVM"
-    },
-    "titel": "Sterfte in {{safetyRegion}}",
-    "pagina_toelichting": "Aantal overleden bewoners in verpleeghuizen met een vastgestelde COVID-19-besmetting per dag.",
-    "barscale_titel": "Aantal overleden bewoners",
-    "barscale_screenreader_text": "{{value}} overleden bewoners.",
-    "extra_uitleg": "Dit getal is een inschatting van het aantal gemelde verpleeghuisbewoners dat in Nederland overlijdt aan de gevolgen van het nieuwe coronavirus.",
-    "linechart_titel": "Verloop over tijd",
-    "map_titel": "Verpleeghuis oversterfte in Nederland",
-    "map_toelichting": "Deze grafieken laten zien hoe de oversterfte in verpleeghuizen is in Nederland per dag.",
-    "titel_sidebar": "Sterfte per dag"
-  },
-  "veiligheidsregio_verpleeghuis_besmette_locaties": {
-    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
-      "text": "RIVM"
-    },
-    "titel": "Aantal besmette locaties in {{safetyRegion}}",
-    "pagina_toelichting": "Dit getal is een inschatting van het aantal nieuwe verpleeghuislocaties waar sprake is van tenminste een COVID-19 besmetting op basis van een positieve test.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de cijferverantwoording.",
-    "barscale_titel": "Aantal nieuwe locaties per dag",
-    "barscale_toelichting": "Aantal nieuwe locaties waarbij tenminste één bewoner positief getest is. Een verpleeghuis wordt meegeteld als ‘nieuwe locatie’ wanneer er tenminste 28 dagen, dit is twee keer de incubatietijd, geen nieuwe patiënten zijn geweest.",
-    "kpi_titel": "Totaal aantal besmette locaties",
-    "kpi_toelichting": "Dit getal is een inschatting van het totaal aantal verpleeghuislocaties waar in de afgelopen 28 dagen minstens één (nieuwe) COVID-19 besmetting op basis van een positieve test, is gemeld.",
-    "linechart_titel": "Verloop over tijd",
-    "barscale_screenreader_text": "{{value}} nieuwe locaties waarbij tenminste één bewoner positief getest is, per dag."
-  },
-  "veiligheidsregio_verpleeghuis_positief_geteste_personen": {
-    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
-      "text": "RIVM"
-    },
-    "titel": "Aantal positief geteste bewoners in {{safetyRegion}}",
-    "barscale_titel": "Aantal positief geteste bewoners in verpleeghuizen per dag in {{safetyRegion}}",
-    "extra_uitleg": "Aantal positief geteste bewoners in verpleeghuizen per dag.",
-    "pagina_toelichting": "Aantal positief geteste bewoners in verpleeghuizen per dag in {{safetyRegion}}. Dit getal is een inschatting van het aantal gemelde bewoners in verpleeghuizen dat in Nederland positief getest is en COVID-19 heeft.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de cijferverantwoording.",
-    "linechart_titel": "Verloop over tijd",
-    "barscale_screenreader_text": "{{value}} positief geteste bewoners.",
-    "titel_sidebar": "Aantal positief geteste bewoners per dag",
-    "chloropleth_legenda": {
-      "titel": "Number per 100.000 inhabitants",
-      "geen_meldingen": "No confirmed cases"
-    },
-    "map_titel": "Distribution of confirmed cases in the Netherlands",
-    "map_toelichting": "These maps show how many confirmed cases of COVID-19 were reported yesterday per 100,000 inhabitants."
-  },
   "veiligheidsregio_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Hospital admissions per day",
     "titel": "Hospital admissions per day of residents in {{safetyRegion}}",
@@ -627,7 +582,13 @@
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the progression over time in the number of positive tests by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -703,7 +664,13 @@
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the change in the number of confirmed cases by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -813,5 +780,56 @@
     "positief_getest_week_titel": "",
     "positief_getest_week_uitleg": "",
     "positief_getest_getest_week_uitleg": ""
+  },
+  "veiligheidsregio_verpleeghuis_oversterfte": {
+    "datums": "Value of  {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
+    "bron": {
+      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "text": "RIVM"
+    },
+    "titel": "Mortality in {{safetyRegion}}",
+    "pagina_toelichting": "Daily number of deceased residents with confirmed cases of COVID-19 in nursing homes.",
+    "barscale_titel": "Number of deceased residents",
+    "barscale_screenreader_text": "{{value}} deceased residents",
+    "extra_uitleg": "This number is an estimation of the number of nursing home inhabitants that have died due to the novel coronavirus.",
+    "linechart_titel": "Progression over time",
+    "map_titel": "Nursing home excess mortality in the Netherlands",
+    "map_toelichting": "These figures show the excess mortality in nursing homes in the Netherlands per day.",
+    "titel_sidebar": "Mortality per day"
+  },
+  "veiligheidsregio_verpleeghuis_besmette_locaties": {
+    "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
+    "bron": {
+      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "text": "RIVM"
+    },
+    "titel": "Total number of infected locations",
+    "pagina_toelichting": "This number is an estimation of the number of new nursing home locations where there is at least one confirmed case.\n\nThe calculation method has been changed on the 29th of September. Please also see the data explanation section.",
+    "barscale_titel": "Number of new locations per day",
+    "barscale_toelichting": "Number of new locations where there is at least one confirmed case. A nursing home is counted as a 'new location; when there have not been any confirmed cases for at least 28 days, which is twice the incubation period.",
+    "kpi_titel": "Total number of infected locations",
+    "kpi_toelichting": "This figure is an estimate of the number of nursing homes where in the past 28 days at least one (new) COVID-19 infection (confirmed by a positive test) is reported.",
+    "linechart_titel": "Progression over time",
+    "barscale_screenreader_text": "{{value}} new locations where there is at least one confirmed case, per day."
+  },
+  "veiligheidsregio_verpleeghuis_positief_geteste_personen": {
+    "datums": "Value of {{dateOfReport}}. Obtained:{{dateOfInsertion}}. Is updated on a daily basis.",
+    "bron": {
+      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "text": "RIVM"
+    },
+    "titel": "Confirmed cases in {{safetyRegion}}",
+    "barscale_titel": "Number of confirmed cases in nursing homes per day",
+    "extra_uitleg": "Number of confirmed cases in nursing homes per day.",
+    "pagina_toelichting": "Number of confirmed cases in nursing homes per day in {{safetyRegion}}. This number is an estimation of the number confirmed cases in nursing home inhabitants.\n\nThe calculation method has been changed on the 29th of September. Please also see the data explanation section.",
+    "linechart_titel": "Progression over time",
+    "barscale_screenreader_text": "{{value}} Number of residents who tested positive (confirmed cases).",
+    "titel_sidebar": "Confirmed cases per day",
+    "chloropleth_legenda": {
+      "titel": "Number per 100.000 residents",
+      "geen_meldingen": "No confirmed cases"
+    },
+    "map_titel": "Confirmed cases in the Netherlands",
+    "map_toelichting": "These maps show the number of confirmed cases per 100.000 residents."
   }
 }
