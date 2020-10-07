@@ -52,16 +52,30 @@
   },
   "ic_opnames_per_dag": {
     "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
-    "bron": {
-      "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
-      "text": "Stichting NICE"
+    "bronnen": {
+      "nice": {
+        "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
+        "text": "Stichting NICE"
+      },
+      "lnaz": {
+        "href": "https://lcps.nu/datafeed/",
+        "text": "LNAZ"
+      }
     },
     "titel": "Intensive care admissions by day",
     "pagina_toelichting": "Number of confirmed COVID-19 cases who are admitted to a hospital intensive care unit (ICU) per day.",
     "barscale_titel": "Intensive care admissions per day",
     "barscale_screenreader_text": "{{value}} intensive care-admissions by day. Alert value: {{signaalwaarde}} admissions per day.",
     "extra_uitleg": "Number of confirmed COVID-19 cases who are admitted to a hospital intensive care unit (ICU) per day. This figure is an average for the daily admissions over the past three days.",
-    "linechart_titel": "Progression over time"
+    "linechart_titel": "Progression over time",
+    "kpi_bedbezetting": {
+      "title": "Aantal bezette IC bedden door COVID patiënten",
+      "description": "Dit getal laat zien hoeveel IC-bedden gisteren bezet werden door COVID patiënten. Het percentage is ten opzichte van alle bezette IC bedden, niet de capaciteit."
+    },
+    "chart_bedbezetting": {
+      "title": "Bezetting IC-bedden over tijd",
+      "description": "Dit cijfer toont het aantal bezette IC-bedden door COVID patiënten over tijd."
+    }
   },
   "verdenkingen_huisartsen": {
     "datums": "Value of  {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
@@ -82,9 +96,15 @@
   },
   "ziekenhuisopnames_per_dag": {
     "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
-    "bron": {
-      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
-      "text": "RIVM"
+    "bronnen": {
+      "rivm": {
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
+        "text": "RIVM"
+      },
+      "lnaz": {
+        "href": "https://lcps.nu/datafeed/",
+        "text": "LNAZ"
+      }
     },
     "titel": "Hospital admissions per day",
     "pagina_toelichting": "Number of confirmed COVID-19 cases who are admitted to a hospital per day.",
@@ -97,6 +117,14 @@
     "chloropleth_legenda": {
       "titel": "Hospital admissions",
       "geen_meldingen": "No reported admissions"
+    },
+    "kpi_bedbezetting": {
+      "title": "Aantal door COVID bezette ziekenhuisbedden",
+      "description": "Dit getal laat zien hoeveel ziekenhuisbedden gisteren bezet werden door COVID patiënten. Het percentage is ten opzichte van alle bezette ziekenhuisbedden, niet de capaciteit."
+    },
+    "chart_bedbezetting": {
+      "title": "Bezetting ziekenhuisbedden over tijd",
+      "description": "Dit cijfer toont het aantal bezette ziekenhuisbedden door COVID patiënten over tijd."
     }
   },
   "positief_geteste_personen": {

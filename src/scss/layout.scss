@@ -90,6 +90,18 @@
     margin: 0;
     margin-top: 2rem;
   }
+
+  /**
+  Use this inside a column-item to stretch the contents so that the footer
+  is pushed to the bottom.
+  */
+  .article-top {
+    flex: 1;
+  }
+
+  .article-footer {
+    margin-top: 1em;
+  }
 }
 
 .index-article:first-of-type() {
