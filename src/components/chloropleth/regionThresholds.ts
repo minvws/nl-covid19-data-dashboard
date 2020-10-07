@@ -127,6 +127,6 @@ export const regionThresholds: Record<
   hospital_admissions: hospitalAdmissionsThresholds,
   escalation_levels: escalationThresholds,
   nursing_home: {
-    [nursingHomeThresholds.dataKey]: nursingHomeThresholds,
+    infected_locations_total: nursingHomeThresholds,
   },
 };

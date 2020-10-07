@@ -70,7 +70,10 @@ export function SafetyRegionChloropleth<
 
   function getSelectedThreshold(metricName: any, metricProperty?: string) {
     if (metricName && metricProperty) {
-      return (regionThresholds as any)[metricName][metricProperty];
+      return (
+        (regionThresholds as any)[metricName][metricProperty] ??
+        (regionThresholds as any)[metricName]
+      );
     } else if (metricName) {
       return (regionThresholds as any)[metricName];
     }
