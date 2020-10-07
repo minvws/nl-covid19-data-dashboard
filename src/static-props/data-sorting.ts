@@ -45,6 +45,24 @@ export function sortMunicipalTimeSeriesInDataInPlace(data: Municipal) {
   const timeSeriesPropertyNames = getMunicipalTimeSeriesPropertyNames(data);
 
   for (const propertyName of timeSeriesPropertyNames) {
+    /**
+     * There is one property in the dataset that contains timeseries nested
+     * inside values, so we need to process that separately.
+     */
+    if (propertyName === 'results_per_sewer_installation_per_municipality') {
+      const nestedSeries = data[propertyName] as RegionalSewerTimeSeriesData<
+        Timestamped
+      >;
+
+      nestedSeries.values = nestedSeries.values.map((x) => {
+        x.values = sortTimeSeriesValues(x.values);
+        return x;
+      });
+
+      // Skip the remainder of this loop
+      continue;
+    }
+
     const timeSeries = data[propertyName] as TimeSeriesData<Timestamped>;
     (data[propertyName] as TimeSeriesData<
       Timestamped
