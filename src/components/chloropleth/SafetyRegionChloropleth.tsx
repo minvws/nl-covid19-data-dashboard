@@ -68,9 +68,17 @@ export function SafetyRegionChloropleth<
     metricProperty
   );
 
-  const selectedThreshold = metricName
-    ? regionThresholds[metricName]
-    : undefined;
+  function getSelectedThreshold(metricName: any, metricProperty?: string) {
+    if (metricName && metricProperty) {
+      return (regionThresholds as any)[metricName][metricProperty];
+    } else if (metricName) {
+      return regionThresholds[metricName];
+    }
+    return undefined;
+  }
+
+  const selectedThreshold = getSelectedThreshold(metricName, metricProperty);
+
   const getFillColor = useChloroplethColorScale(
     getData,
     selectedThreshold?.thresholds

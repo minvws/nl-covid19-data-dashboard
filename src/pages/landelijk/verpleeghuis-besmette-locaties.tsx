@@ -34,7 +34,10 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
     state?.total_reported_locations;
 
   const router = useRouter();
-  const legendItems = useSafetyRegionLegendaData('nursing_home');
+  const legendItems = useSafetyRegionLegendaData(
+    'nursing_home',
+    'infected_locations_total'
+  );
 
   return (
     <>

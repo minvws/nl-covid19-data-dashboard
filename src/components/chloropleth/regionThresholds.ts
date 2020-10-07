@@ -1,6 +1,14 @@
-import { ChoroplethThresholds, TRegionMetricName } from './shared';
+import {
+  ChoroplethThresholds,
+  TRegionMetricName,
+  TRegionsNursingHomeMetricName,
+} from './shared';
 
-type RegionalThresholds = ChoroplethThresholds<TRegionMetricName>;
+export type RegionalThresholds = ChoroplethThresholds<TRegionMetricName>;
+
+export type NursingHomeThresholds = ChoroplethThresholds<
+  TRegionsNursingHomeMetricName
+>;
 
 const positiveTestedThresholds: RegionalThresholds = {
   dataKey: 'positive_tested_people',
@@ -77,8 +85,8 @@ const escalationThresholds: RegionalThresholds = {
   ],
 };
 
-const nursingHomeThresholds: RegionalThresholds = {
-  dataKey: 'nursing_home',
+const nursingHomeThresholds: NursingHomeThresholds = {
+  dataKey: 'infected_locations_total',
   thresholds: [
     {
       color: '#CFFFFFF',
@@ -111,9 +119,14 @@ const nursingHomeThresholds: RegionalThresholds = {
   ],
 };
 
-export const regionThresholds: Record<TRegionMetricName, RegionalThresholds> = {
-  positive_tested_people: positiveTestedThresholds,
-  hospital_admissions: hospitalAdmissionsThresholds,
-  escalation_levels: escalationThresholds,
-  nursing_home: nursingHomeThresholds,
+export const regionThresholds: Record<
+  string,
+  RegionalThresholds | Record<string, NursingHomeThresholds>
+> = {
+  [positiveTestedThresholds.dataKey]: positiveTestedThresholds,
+  [hospitalAdmissionsThresholds.dataKey]: hospitalAdmissionsThresholds,
+  [escalationThresholds.dataKey]: escalationThresholds,
+  nursing_home: {
+    [nursingHomeThresholds.dataKey]: nursingHomeThresholds,
+  },
 };
