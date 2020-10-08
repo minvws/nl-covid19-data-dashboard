@@ -1,18 +1,16 @@
 import { Municipal, National, Regionaal } from '~/types/data.d';
 
 export function sortNationalTimeSeriesInDataInPlace(data: National) {
-  const timeSeriesPropertyNames = getNationalTimeSeriesPropertyNames(data);
+  const timeSeriesPropertyNames = getTimeSeriesPropertyNames(data);
 
   for (const propertyName of timeSeriesPropertyNames) {
     const timeSeries = data[propertyName] as TimeSeriesData<Timestamped>;
-    (data[propertyName] as TimeSeriesData<
-      Timestamped
-    >).values = sortTimeSeriesValues(timeSeries.values);
+    timeSeries.values = sortTimeSeriesValues(timeSeries.values);
   }
 }
 
 export function sortRegionalTimeSeriesInDataInPlace(data: Regionaal) {
-  const timeSeriesPropertyNames = getRegionalTimeSeriesPropertyNames(data);
+  const timeSeriesPropertyNames = getTimeSeriesPropertyNames(data);
 
   for (const propertyName of timeSeriesPropertyNames) {
     /**
@@ -34,15 +32,12 @@ export function sortRegionalTimeSeriesInDataInPlace(data: Regionaal) {
     }
 
     const timeSeries = data[propertyName] as TimeSeriesData<Timestamped>;
-
-    (data[propertyName] as TimeSeriesData<
-      Timestamped
-    >).values = sortTimeSeriesValues(timeSeries.values);
+    timeSeries.values = sortTimeSeriesValues(timeSeries.values);
   }
 }
 
 export function sortMunicipalTimeSeriesInDataInPlace(data: Municipal) {
-  const timeSeriesPropertyNames = getMunicipalTimeSeriesPropertyNames(data);
+  const timeSeriesPropertyNames = getTimeSeriesPropertyNames(data);
 
   for (const propertyName of timeSeriesPropertyNames) {
     /**
@@ -64,9 +59,7 @@ export function sortMunicipalTimeSeriesInDataInPlace(data: Municipal) {
     }
 
     const timeSeries = data[propertyName] as TimeSeriesData<Timestamped>;
-    (data[propertyName] as TimeSeriesData<
-      Timestamped
-    >).values = sortTimeSeriesValues(timeSeries.values);
+    timeSeries.values = sortTimeSeriesValues(timeSeries.values);
   }
 }
 
@@ -74,40 +67,18 @@ export function sortMunicipalTimeSeriesInDataInPlace(data: Municipal) {
  * From the data structure, retrieve all properties that hold a "values" field
  * in their content. All time series data is kept in this values field.
  */
-function getNationalTimeSeriesPropertyNames(data: National) {
+function getTimeSeriesPropertyNames<T>(data: T) {
   return Object.entries(data).reduce(
     (acc, [propertyKey, propertyValue]) =>
-      isTimeSeries(propertyValue)
-        ? [...acc, propertyKey as keyof National]
-        : acc,
-    [] as (keyof National)[]
-  );
-}
-
-function getRegionalTimeSeriesPropertyNames(data: Regionaal) {
-  return Object.entries(data).reduce(
-    (acc, [propertyKey, propertyValue]) =>
-      isTimeSeries(propertyValue)
-        ? [...acc, propertyKey as keyof Regionaal]
-        : acc,
-    [] as (keyof Regionaal)[]
-  );
-}
-
-function getMunicipalTimeSeriesPropertyNames(data: Municipal) {
-  return Object.entries(data).reduce(
-    (acc, [propertyKey, propertyValue]) =>
-      isTimeSeries(propertyValue)
-        ? [...acc, propertyKey as keyof Municipal]
-        : acc,
-    [] as (keyof Municipal)[]
+      isTimeSeries(propertyValue) ? [...acc, propertyKey as keyof T] : acc,
+    [] as (keyof T)[]
   );
 }
 
 function sortTimeSeriesValues(values: Timestamped[]) {
   /**
-   * There are 3 types of ways in which time series data is timestamped. We need
-   * to detect each of them.
+   * There are 3 ways in which time series data can be timestamped. We need
+   * to detect and handle each of them.
    */
   if (isReportTimestamped(values)) {
     return values.sort((a, b) => a.date_of_report_unix - b.date_of_report_unix);
@@ -149,6 +120,11 @@ interface TimeSeriesData<T> {
 interface RegionalSewerTimeSeriesData<T> {
   values: TimeSeriesData<T>[];
 }
+
+/**
+ * Some type guards to figure out types based on runtime properties.
+ * See: https://basarat.gitbook.io/typescript/type-system/typeguard#user-defined-type-guards
+ */
 function isTimeSeries(
   value: unknown | TimeSeriesData<Timestamped>
 ): value is TimeSeriesData<Timestamped> {
