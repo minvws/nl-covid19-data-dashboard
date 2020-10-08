@@ -16,6 +16,12 @@ import {
 } from '~/types/data.d';
 
 import getNlData, { INationalData } from '~/static-props/nl-data';
+import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
+import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
+import { useRouter } from 'next/router';
+import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
+import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
+import { createInfectedLocationsRegionalTooltip } from '~/components/chloropleth/tooltips/region/createInfectedLocationsRegionalTooltip';
 
 const text = siteText.verpleeghuis_besmette_locaties;
 
@@ -26,6 +32,12 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
     state?.total_newly_reported_locations;
   const totalLocations: TotalReportedLocations | undefined =
     state?.total_reported_locations;
+
+  const router = useRouter();
+  const legendItems = useSafetyRegionLegendaData(
+    'nursing_home',
+    'infected_locations_total'
+  );
 
   return (
     <>
@@ -71,7 +83,12 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
               <span className="text-blue kpi">
                 {formatNumber(
                   totalLocations.last_value.total_reported_locations
+                )}{' '}
+                (
+                {formatNumber(
+                  state.nursing_home.last_value.infected_locations_percentage
                 )}
+                %)
               </span>
             </h3>
           )}
@@ -90,6 +107,34 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
           />
         </article>
       )}
+
+      <article className="metric-article layout-chloropleth">
+        <div className="chloropleth-header">
+          <h3>{text.map_titel}</h3>
+          <p>{text.map_toelichting}</p>
+        </div>
+
+        <div className="chloropleth-chart">
+          <SafetyRegionChloropleth
+            metricName="nursing_home"
+            metricValueName="infected_locations_total"
+            tooltipContent={createInfectedLocationsRegionalTooltip(router)}
+            onSelect={createSelectRegionHandler(
+              router,
+              'verpleeghuis-besmette-locaties'
+            )}
+          />
+        </div>
+
+        <div className="chloropleth-legend">
+          {legendItems && (
+            <ChloroplethLegenda
+              items={legendItems}
+              title={text.chloropleth_legenda.titel}
+            />
+          )}
+        </div>
+      </article>
     </>
   );
 };

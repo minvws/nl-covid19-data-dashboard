@@ -137,8 +137,7 @@ function getOptions(
         text: null,
       },
       labels: {
-        formatter: function (): string {
-          // @ts-ignore
+        formatter: function () {
           return formatNumber(this.value);
         },
       },

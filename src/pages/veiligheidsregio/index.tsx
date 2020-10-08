@@ -12,14 +12,14 @@ import styles from '~/components/chloropleth/tooltips/tooltip.module.scss';
 import { TALLLanguages } from '~/locale/index';
 import { MDToHTMLString } from '~/utils/MDToHTMLString';
 
-import {
-  SafetyRegionChloropleth,
-  thresholds,
-} from '~/components/chloropleth/SafetyRegionChloropleth';
+import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
 import { escalationTooltip } from '~/components/chloropleth/tooltips/region/escalationTooltip';
 import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
+import { regionThresholds } from '~/components/chloropleth/regionThresholds';
+import { ChoroplethThresholds } from '~/components/chloropleth/shared';
 
-const escalationThresholds = thresholds.escalation_levels.thresholds;
+const escalationThresholds = (regionThresholds.escalation_levels as ChoroplethThresholds)
+  .thresholds;
 
 export const EscalationMapLegenda = (props: any) => {
   const { text } = props;
@@ -78,7 +78,7 @@ const SafetyRegion: FCWithLayout<any> = (props) => {
       <div className="chloropleth-chart">
         <SafetyRegionChloropleth
           metricName="escalation_levels"
-          metricProperty="escalation_level"
+          metricValueName="escalation_level"
           onSelect={createSelectRegionHandler(router)}
           tooltipContent={escalationTooltip(router)}
         />

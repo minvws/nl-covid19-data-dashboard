@@ -1,6 +1,6 @@
 import { scaleThreshold } from 'd3-scale';
 import { useCallback, useMemo } from 'react';
-import { ChloroplethThresholdsValue } from '../shared';
+import { ChoroplethThresholdsValue } from '../shared';
 
 export type TGetFillColor = (id: string) => string;
 
@@ -20,7 +20,7 @@ export type TGetFillColor = (id: string) => string;
  */
 export function useChloroplethColorScale(
   getData: (id: string) => any,
-  thresholds?: ChloroplethThresholdsValue[],
+  thresholds?: ChoroplethThresholdsValue[],
   defaultColor = 'white'
 ): TGetFillColor {
   const colorScale = useMemo<any>(() => {

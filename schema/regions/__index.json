@@ -10,7 +10,9 @@
     "code",
     "escalation_levels",
     "hospital_admissions",
-    "positive_tested_people"
+    "positive_tested_people",
+    "deceased",
+    "nursing_home"
   ],
   "properties": {
     "last_generated": {

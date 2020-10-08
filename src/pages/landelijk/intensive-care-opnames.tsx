@@ -1,8 +1,8 @@
 import Arts from '~/assets/arts.svg';
 import { LineChart } from '~/components/charts/index';
+import { ContentHeaderMetadataHack } from '~/components/contentHeaderMetadataHack';
 import { IntakeIntensiveCareBarscale } from '~/components/landelijk/intake-intensive-care-barscale';
 import { FCWithLayout } from '~/components/layout';
-import { ContentHeader } from '~/components/layout/Content';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
@@ -19,7 +19,7 @@ const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
 
   return (
     <>
-      <ContentHeader
+      <ContentHeaderMetadataHack
         category={siteText.nationaal_layout.headings.medisch}
         title={text.titel}
         Icon={Arts}
@@ -28,7 +28,8 @@ const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
           datumsText: text.datums,
           dateUnix: dataIntake.last_value.date_of_report_unix,
           dateInsertedUnix: dataIntake.last_value.date_of_insertion_unix,
-          dataSource: text.bronnen.nice,
+          dataSourceA: text.bronnen.nice,
+          dataSourceB: text.bronnen.lnaz,
         }}
       />
 
