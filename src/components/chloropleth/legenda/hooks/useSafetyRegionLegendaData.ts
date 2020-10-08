@@ -7,7 +7,7 @@ import {
 import { useLegendaItems } from './useLegendaItems';
 import { regionThresholds } from '~/components/chloropleth/regionThresholds';
 
-import get from 'lodash.get';
+import { get } from 'lodash';
 
 export function getSelectedThreshold(
   metricName?: TRegionMetricName,
