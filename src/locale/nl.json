@@ -841,5 +841,6 @@
     "linechart_titel": "Verloop over tijd",
     "barscale_screenreader_text": "{{value}} positief geteste bewoners.",
     "titel_sidebar": "Aantal positief geteste bewoners per dag"
-  }
+  },
+  "data_warning_text": "Let op: Deze data bevat niet de allerlaatste status van de huidige situatie. Deze zal spoedig weer beschikbaar zijn."
 }

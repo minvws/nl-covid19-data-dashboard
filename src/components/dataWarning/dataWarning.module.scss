@@ -1,0 +1,14 @@
+@import '~/scss/variables.scss';
+
+.dataWarning {
+  display: grid;
+  grid-template-columns: 25px 1fr;
+  grid-gap: 12px;
+  margin-bottom: 24px;
+
+  .dataWarningText {
+    margin: 0;
+    color: $text-color-grey;
+    max-width: 22em;
+  }
+}

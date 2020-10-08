@@ -19,6 +19,7 @@ import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHan
 import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { ContentHeader } from '~/components/layout/Content';
+import { DataWarning } from '~/components/dataWarning';
 
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
@@ -55,8 +56,8 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
       />
       <article className="metric-article layout-two-column">
         <div className="column-item column-item-extra-margin">
+          <DataWarning />
           <h3>{text.barscale_titel}</h3>
-
           <IntakeHospitalBarScale data={resultsPerRegion} showAxis={true} />
         </div>
 
@@ -67,6 +68,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
 
       {resultsPerRegion && (
         <article className="metric-article">
+          <DataWarning />
           <LineChart
             title={text.linechart_titel}
             values={resultsPerRegion.values.map((value: any) => ({

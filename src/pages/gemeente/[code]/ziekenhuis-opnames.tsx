@@ -18,6 +18,7 @@ import { createMunicipalHospitalAdmissionsTooltip } from '~/components/chlorople
 import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
 import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
 import { useMunicipalLegendaData } from '~/components/chloropleth/legenda/hooks/useMunicipalLegendaData';
+import { DataWarning } from '~/components/dataWarning';
 
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
@@ -52,6 +53,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
 
       <article className="metric-article layout-two-column">
         <div className="column-item column-item-extra-margin">
+          <DataWarning />
           <h3>{text.barscale_titel}</h3>
 
           <IntakeHospitalBarScale data={hospitalAdmissions} showAxis={true} />
@@ -64,6 +66,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
 
       {hospitalAdmissions && (
         <article className="metric-article">
+          <DataWarning />
           <LineChart
             title={text.linechart_titel}
             values={hospitalAdmissions.values.map((value: any) => ({
