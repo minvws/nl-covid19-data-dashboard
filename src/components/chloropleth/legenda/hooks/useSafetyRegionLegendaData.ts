@@ -11,14 +11,14 @@ import { get } from 'lodash';
 
 export function getSelectedThreshold(
   metricName?: TRegionMetricName,
-  metricPropertyName?: string
+  metricValueName?: string
 ) {
   if (!metricName) {
     return undefined;
   }
 
-  const thresholdInfo = metricPropertyName
-    ? get(regionThresholds, `${metricName}.${metricPropertyName}`) ??
+  const thresholdInfo = metricValueName
+    ? get(regionThresholds, `${metricName}.${metricValueName}`) ??
       regionThresholds[metricName]
     : regionThresholds[metricName];
 

@@ -19,7 +19,7 @@ export type TProps<
   TContext extends ReturnType | SafetyRegionProperties
 > = {
   metricName?: T;
-  metricProperty?: string;
+  metricValueName?: string;
   selected?: string;
   highlightSelection?: boolean;
   style?: CSSProperties;
@@ -33,8 +33,9 @@ export type TProps<
  *
  * The metricName specifies which exact metric is visualized. The color scale is calculated using
  * the specified metric and the given gradient.
- * An optional metricProperty name can be provided as well, when the metric key isn't the same name
- * as the actual value property.
+ * An optional metricValueName can be provided as well, when the metric key isn't the same name
+ * as the actual value name. Most of the time they are the same:
+ * e.g. hospital_admissions.hospital_admissions
  *
  * When a selected region code is specified, the map will zoom in on the safety region.
  *
@@ -53,7 +54,7 @@ export function SafetyRegionChloropleth<
     highlightSelection = true,
     style,
     metricName,
-    metricProperty,
+    metricValueName,
     onSelect,
     tooltipContent,
   } = props;
@@ -65,10 +66,10 @@ export function SafetyRegionChloropleth<
   const [getData, hasData] = useSafetyRegionData(
     metricName,
     regionGeo,
-    metricProperty
+    metricValueName
   );
 
-  const selectedThreshold = getSelectedThreshold(metricName, metricProperty);
+  const selectedThreshold = getSelectedThreshold(metricName, metricValueName);
 
   const getFillColor = useChloroplethColorScale(
     getData,

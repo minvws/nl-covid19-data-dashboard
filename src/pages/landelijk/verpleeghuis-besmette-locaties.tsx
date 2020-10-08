@@ -117,7 +117,7 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
         <div className="chloropleth-chart">
           <SafetyRegionChloropleth
             metricName="nursing_home"
-            metricProperty="infected_locations_total"
+            metricValueName="infected_locations_total"
             tooltipContent={createInfectedLocationsRegionalTooltip(router)}
             onSelect={createSelectRegionHandler(
               router,
