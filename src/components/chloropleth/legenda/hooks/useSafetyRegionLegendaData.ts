@@ -14,7 +14,7 @@ export function getSelectedThreshold(
   metricValueName?: string
 ) {
   if (!metricName) {
-    return undefined;
+    return;
   }
 
   // Even if a metricValueName is passed in, there's not necessarily
