@@ -36,13 +36,7 @@ export type RegionGeoJSON = FeatureCollection<
   SafetyRegionProperties
 >;
 
-export type ChoroplethThresholds<
-  T extends
-    | TMunicipalityMetricName
-    | TRegionMetricName
-    | TRegionsNursingHomeMetricName
-> = {
-  dataKey: T;
+export type ChoroplethThresholds = {
   svgClass?: string;
   thresholds: ChoroplethThresholdsValue[];
 };

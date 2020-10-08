@@ -1,9 +1,6 @@
 import { ChoroplethThresholds, TMunicipalityMetricName } from './shared';
 
-type MunicipalThresholds = ChoroplethThresholds<TMunicipalityMetricName>;
-
-const positiveTestedThresholds: MunicipalThresholds = {
-  dataKey: 'positive_tested_people',
+const positiveTestedThresholds: ChoroplethThresholds = {
   thresholds: [
     {
       color: '#C0E8FC',
@@ -32,8 +29,7 @@ const positiveTestedThresholds: MunicipalThresholds = {
   ],
 };
 
-const hospitalAdmissionsThresholds: MunicipalThresholds = {
-  dataKey: 'hospital_admissions',
+const hospitalAdmissionsThresholds: ChoroplethThresholds = {
   thresholds: [
     {
       color: '#c0e8fc',
@@ -60,7 +56,7 @@ const hospitalAdmissionsThresholds: MunicipalThresholds = {
 
 export const municipalThresholds: Record<
   TMunicipalityMetricName,
-  MunicipalThresholds
+  ChoroplethThresholds
 > = {
   positive_tested_people: positiveTestedThresholds,
   hospital_admissions: hospitalAdmissionsThresholds,

@@ -10,7 +10,7 @@ import styles from './chloropleth.module.scss';
 import { useSafetyRegionBoundingbox } from './hooks/useSafetyRegionBoundingbox';
 import { useChloroplethColorScale } from './hooks/useChloroplethColorScale';
 import { useSafetyRegionData } from './hooks/useSafetyRegionData';
-import { regionThresholds } from './regionThresholds';
+import { getSelectedThreshold } from './legenda/hooks/useSafetyRegionLegendaData';
 
 export type TProps<
   T extends TRegionMetricName,
@@ -67,18 +67,6 @@ export function SafetyRegionChloropleth<
     regionGeo,
     metricProperty
   );
-
-  function getSelectedThreshold(metricName: any, metricProperty?: string) {
-    if (metricName && metricProperty) {
-      return (
-        (regionThresholds as any)[metricName][metricProperty] ??
-        (regionThresholds as any)[metricName]
-      );
-    } else if (metricName) {
-      return (regionThresholds as any)[metricName];
-    }
-    return undefined;
-  }
 
   const selectedThreshold = getSelectedThreshold(metricName, metricProperty);
 
