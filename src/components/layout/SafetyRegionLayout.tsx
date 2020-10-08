@@ -249,7 +249,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                             .titel_sidebar
                         }
                       />
-                      {data?.nursing_home.last_value.newly_infected_people && (
+                      {data?.nursing_home?.last_value.newly_infected_people && (
                         <span>
                           <NursingHomeInfectedPeopleBarScale
                             value={
@@ -281,7 +281,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                       <span>
                         <NursingHomeInfectedLocationsBarScale
                           value={
-                            data?.nursing_home.last_value
+                            data?.nursing_home?.last_value
                               .infected_locations_total
                           }
                           showAxis={true}
@@ -308,7 +308,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                       />
                       <span>
                         <NursingHomeDeathsBarScale
-                          value={data?.nursing_home.last_value.deceased_daily}
+                          value={data?.nursing_home?.last_value.deceased_daily}
                           showAxis={true}
                         />
                       </span>

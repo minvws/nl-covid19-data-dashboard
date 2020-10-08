@@ -4,6 +4,7 @@ import path from 'path';
 import { Municipal } from '~/types/data.d';
 
 import municipalities from '~/data/gemeente_veiligheidsregio.json';
+import { sortMunicipalTimeSeriesInDataInPlace } from './data-sorting';
 
 export interface IMunicipalityData {
   data: Municipal;
@@ -32,18 +33,18 @@ interface IParams {
  *
  * Example:
  * ```ts
- * PostivelyTestedPeople.getLayout = getMunicipalityLayout();
+ * PositivelyTestedPeople.getLayout = getMunicipalityLayout();
  *
  * export const getStaticProps = getMunicipalityData();
  *
- * export default PostivelyTestedPeople;
+ * export default PositivelyTestedPeople;
  * ```
  *
- * The `IMunicipalityData` should be used in conjuction with `FCWithLayout`
+ * The `IMunicipalityData` should be used in conjunction with `FCWithLayout`
  *
  * Example:
  * ```ts
- * const PostivelyTestedPeople: FCWithLayout<IMunicipalityData> = props => {
+ * const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = props => {
  *   // ...
  * }
  * ```
@@ -54,7 +55,9 @@ export function getMunicipalityData() {
 
     const filePath = path.join(process.cwd(), 'public', 'json', `${code}.json`);
     const fileContents = fs.readFileSync(filePath, 'utf8');
-    const data = JSON.parse(fileContents);
+    const data = JSON.parse(fileContents) as Municipal;
+
+    sortMunicipalTimeSeriesInDataInPlace(data);
 
     const municipalityName =
       municipalities.find((r) => r.gemcode === code)?.name || '';
