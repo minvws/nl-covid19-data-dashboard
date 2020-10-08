@@ -17,6 +17,9 @@ export function getSelectedThreshold(
     return undefined;
   }
 
+  // Even if a metricValueName is passed in, there's not necessarily
+  // a threshold defined for this. In that case we fall back to the threshold
+  // that exists for the metric name.
   const thresholdInfo = metricValueName
     ? get(regionThresholds, `${metricName}.${metricValueName}`) ??
       regionThresholds[metricName]
