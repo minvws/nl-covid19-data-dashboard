@@ -66,19 +66,20 @@ const Verantwoording: FCWithLayout<{ text: any; lastGenerated: string }> = (
             <h2>{text.verantwoording.title}</h2>
             <p>{text.verantwoording.paragraaf}</p>
             <article className={styles.faqList}>
-              {text.verantwoording.cijfers.map((item: ICijfer) => {
-                return item.cijfer.length > 0 &&
-                  item.verantwoording.length > 0 ? (
-                  <Fragment key={`item-${item.cijfer}`}>
-                    <h3>{item.cijfer}</h3>
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: item.verantwoording,
-                      }}
-                    />
-                  </Fragment>
-                ) : null;
-              })}
+              {text.verantwoording.cijfers.map(
+                (item: ICijfer) =>
+                  item.verantwoording &&
+                  item.cijfer && (
+                    <Fragment key={`item-${item.cijfer}`}>
+                      <h3>{item.cijfer}</h3>
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: item.verantwoording,
+                        }}
+                      />
+                    </Fragment>
+                  )
+              )}
             </article>
           </div>
         </MaxWidth>
