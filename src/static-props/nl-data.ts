@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-
 import { National } from '~/types/data.d';
+import { sortNationalTimeSeriesInDataInPlace } from './data-sorting';
 
 export interface INationalData {
   data: National;
@@ -19,18 +19,18 @@ interface IProps {
  *
  * Example:
  * ```ts
- * PostivelyTestedPeople.getLayout = getNationalLayout();
+ * PositivelyTestedPeople.getLayout = getNationalLayout();
  *
  * export const getStaticProps = getNlData();
  *
- * export default PostivelyTestedPeople;
+ * export default PositivelyTestedPeople;
  * ```
  *
- * The `INationalData` should be used in conjuction with `FCWithLayout`
+ * The `INationalData` should be used in conjunction with `FCWithLayout`
  *
  * Example:
  * ```ts
- * const PostivelyTestedPeople: FCWithLayout<INationalData> = props => {
+ * const PositivelyTestedPeople: FCWithLayout<INationalData> = props => {
  *   // ...
  * }
  * ```
@@ -42,6 +42,8 @@ export default function getNlData(): () => IProps {
     const data = JSON.parse(fileContents) as National;
 
     const lastGenerated = data.last_generated;
+
+    sortNationalTimeSeriesInDataInPlace(data);
 
     return {
       props: {

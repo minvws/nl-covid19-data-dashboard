@@ -127,15 +127,15 @@ export function getSewerWaterLineChartData(
       data?.results_per_sewer_installation_per_municipality?.values[0].values ||
       [];
     return {
-      averageValues: averageValues
-        .map((value: ResultsPerSewerInstallationPerMunicipalityLastValue) => {
+      averageValues: averageValues.map(
+        (value: ResultsPerSewerInstallationPerMunicipalityLastValue) => {
           return {
             ...value,
             value: value.rna_per_ml,
             date: value.date_measurement_unix,
           };
-        })
-        .sort((a: any, b: any) => b.date - a.date),
+        }
+      ),
       averageLabelText: replaceVariablesInText(
         text.graph_average_label_text_rwzi,
         {
@@ -153,15 +153,13 @@ export function getSewerWaterLineChartData(
   const averageValues = data?.sewer_measurements?.values || [];
 
   return {
-    averageValues: averageValues
-      .map((value: SewerMeasurementsLastValue) => {
-        return {
-          ...value,
-          value: value.average,
-          date: value.week_unix,
-        };
-      })
-      .sort((a: any, b: any) => b.date - a.date),
+    averageValues: averageValues.map((value: SewerMeasurementsLastValue) => {
+      return {
+        ...value,
+        value: value.average,
+        date: value.week_unix,
+      };
+    }),
     averageLabelText: text.graph_average_label_text,
   };
 }

@@ -4,6 +4,7 @@ import path from 'path';
 import { Regionaal } from '~/types/data.d';
 
 import safetyRegions from '~/data/index';
+import { sortRegionalTimeSeriesInDataInPlace } from './data-sorting';
 
 export interface ISafetyRegionData {
   data: Regionaal;
@@ -55,6 +56,8 @@ export function getSafetyRegionData() {
     const filePath = path.join(process.cwd(), 'public', 'json', `${code}.json`);
     const fileContents = fs.readFileSync(filePath, 'utf8');
     const data = JSON.parse(fileContents) as Regionaal;
+
+    sortRegionalTimeSeriesInDataInPlace(data);
 
     const lastGenerated = data.last_generated;
 
