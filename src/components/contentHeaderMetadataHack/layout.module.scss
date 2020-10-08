@@ -1,0 +1,290 @@
+@import '~/scss/variables.scss';
+
+$language-switcher-offset: 55px;
+
+.logoWrapper {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: flex-start;
+  background: white;
+  width: 100%;
+}
+
+.logo {
+  margin-left: -50px;
+  transform: translateX(50%);
+}
+
+.header {
+  background: #cd005a;
+  color: white;
+  z-index: 4;
+  position: relative;
+
+  a:focus {
+    outline: 2px dotted #fff;
+    outline-offset: 0;
+  }
+
+  h1 {
+    margin-top: $default-margin * 2.5;
+    margin-bottom: 0;
+  }
+
+  p {
+    margin-bottom: $default-margin * 2;
+  }
+}
+
+.languageActive {
+  font-weight: 700;
+}
+
+.languageSwitcher {
+  height: $language-switcher-offset;
+  margin-top: -1 * $language-switcher-offset;
+  text-align: right;
+  color: $text-color;
+
+  a {
+    border-bottom-color: transparent;
+    border-bottom: 2px solid transparent;
+    color: inherit;
+    display: inline-block;
+    margin: 0 4px;
+    text-align: center;
+    text-decoration: none;
+    min-width: 24px;
+
+    &.languageActive,
+    &:hover,
+    &:focus {
+      border-color: $button-color;
+    }
+  }
+}
+
+.readMoreLink {
+  color: white;
+}
+
+.nav {
+  background: #aa004b;
+
+  @media (min-width: 768px) {
+    display: block;
+  }
+}
+
+.navList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  overflow-x: auto;
+
+  li {
+    white-space: nowrap;
+  }
+
+  > li:last-child {
+    display: none;
+    margin-left: auto;
+  }
+
+  @media (min-width: 768px) {
+    > li:last-child {
+      display: block;
+      margin-left: auto;
+    }
+  }
+}
+
+.link {
+  display: block;
+  background: transparent;
+  padding: 1em 0.75em;
+  color: white;
+  text-decoration: none;
+  font-size: 1em;
+
+  @media (min-width: 420px) {
+    font-size: 1.125em;
+  }
+
+  @media (min-width: 768px) {
+    padding: 1em 1.5em;
+  }
+
+  &:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    text-decoration: underline;
+    text-decoration-thickness: from-font;
+  }
+
+  &:focus {
+    outline: 2px dotted #fff;
+    outline-offset: -2px;
+  }
+
+  &.active {
+    background: rgba(255, 255, 255, 0.8);
+    color: black;
+    outline: 0;
+  }
+}
+
+.footer {
+  background: #01689b;
+  color: white;
+  padding: 2em 0;
+  z-index: 4;
+  position: relative;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+
+  p {
+    font-size: 1.125em;
+    max-width: 25em;
+  }
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+
+    & > div:not(:first-child) {
+      margin-left: 2em;
+      h3 {
+        margin-bottom: 1.125em;
+      }
+    }
+  }
+}
+
+.footerList {
+  padding: 0;
+  list-style: none;
+  font-size: 1.125em;
+
+  li {
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+  }
+
+  li:before {
+    content: '\203a';
+    margin-right: $default-margin / 2;
+  }
+}
+
+.footerLink {
+  display: inline-block;
+  color: white;
+  text-decoration: none;
+  padding: $default-padding / 2;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus {
+    outline: 2px dotted #fff;
+    outline-offset: 0;
+  }
+}
+
+.skiplinks {
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  left: 50%;
+  width: 100%;
+  transform: translateX(-50%);
+
+  a {
+    position: absolute;
+    font-size: 1.2em;
+    width: auto;
+    min-height: 44px;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    color: white;
+    background-color: $icon-color;
+    text-decoration: none;
+    top: -100vh;
+    left: -100vw;
+
+    &:focus {
+      position: absolute;
+      outline: 2px dotted white;
+      outline-offset: -2px;
+      top: $default-padding;
+      left: $default-margin;
+    }
+  }
+}
+
+.text {
+  p {
+    max-width: 30em;
+    margin-right: $default-margin;
+  }
+}
+
+.category {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #6b6b6b;
+  margin: 0;
+  margin-bottom: 0.3rem;
+  margin-left: 4rem;
+}
+
+/*
+  Ensure skip link anchors to have a (non visible) start at the left side of the screen
+  This fixes odd skip-link behaviour in IE11
+*/
+.contentHeader[id] {
+  margin-left: -100vw;
+  padding-left: 100vw;
+}
+
+.withoutCategory {
+  margin-top: 2rem;
+}
+
+.withoutIcon h2 {
+  margin-left: 4rem;
+}
+
+@media (min-width: 1200px) {
+  .text {
+    display: flex;
+    margin-left: 4rem;
+
+    p {
+      flex: 1 1 60%;
+    }
+
+    div {
+      flex: 0 1 40%;
+    }
+  }
+}
+
+.two-column {
+  display: flex;
+  flex-direction: column;
+
+  > * {
+    flex: 1 1 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
