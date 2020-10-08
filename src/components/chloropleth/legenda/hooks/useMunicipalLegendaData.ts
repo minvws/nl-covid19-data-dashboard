@@ -4,7 +4,7 @@ import { municipalThresholds } from '~/components/chloropleth/municipalThreshold
 import { useLegendaItems } from './useLegendaItems';
 
 export function useMunicipalLegendaData(metric: TMunicipalityMetricName) {
-  const ths = municipalThresholds[metric];
+  const thresholdInfo = municipalThresholds[metric];
 
-  return useLegendaItems(ths.thresholds);
+  return useLegendaItems(thresholdInfo.thresholds);
 }
