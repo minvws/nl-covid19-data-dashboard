@@ -26,9 +26,12 @@ interface StaticProps {
 
 export async function getStaticProps(): Promise<StaticProps> {
   const text = require('../locale/index').default;
-  const serializedContent = text.verantwoording.cijfers.map((item: ICijfer) => {
-    return { ...item, verantwoording: MDToHTMLString(item.verantwoording) };
-  });
+  const serializedContent = text.verantwoording.cijfers.map(
+    (item: ICijfer) => ({
+      ...item,
+      verantwoording: MDToHTMLString(item.verantwoording),
+    })
+  );
 
   text.verantwoording.cijfers = serializedContent;
 
@@ -70,7 +73,7 @@ const Verantwoording: FCWithLayout<{ text: any; lastGenerated: string }> = (
                 (item: ICijfer) =>
                   item.verantwoording &&
                   item.cijfer && (
-                    <Fragment key={`item-${item.cijfer}`}>
+                    <Fragment key={item.cijfer}>
                       <h3>{item.cijfer}</h3>
                       <div
                         dangerouslySetInnerHTML={{
