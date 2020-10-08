@@ -29,6 +29,9 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
   const infectedLocationsTotal =
     state?.nursing_home.last_value.infected_locations_total;
 
+  const infectedLocationsPercentage =
+    state?.nursing_home.last_value.infected_locations_percentage;
+
   return (
     <>
       <ContentHeader
@@ -74,7 +77,8 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
             <h3>
               {text.kpi_titel}{' '}
               <span className="text-blue kpi">
-                {formatNumber(infectedLocationsTotal)}
+                {formatNumber(infectedLocationsTotal)} (
+                {formatNumber(infectedLocationsPercentage)}%)
               </span>
             </h3>
           )}

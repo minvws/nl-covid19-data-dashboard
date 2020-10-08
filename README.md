@@ -48,3 +48,21 @@ Builds the app for production to the out folder. It correctly bundles React in p
 
 `yarn download`
 This downloads the latest data files from the production server and places the data in the right folder.
+
+`yarn validate-json`
+This validates the date downloaded by the `yarn download` command against the JSON schemas in the `schema` directory.
+
+`yarn validate-single <schema-name> <json-file>`
+This validates a single JSON file from the `public/json` folder against the given schema.
+
+`yarn generate-typescript`
+Generates the `src/types/data.d.ts` file based on the JSON schemas.
+
+`yarn test`
+Runs the unit test suite.
+
+`yarn e2e`
+Runs the Cypress tests against a development build
+
+`yarn e2e:release`
+Runs the Cypress tests against a production build

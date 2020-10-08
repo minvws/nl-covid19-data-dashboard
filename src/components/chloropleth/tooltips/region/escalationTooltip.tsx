@@ -11,9 +11,11 @@ import EscalationLevel2 from '~/assets/niveau-2.svg';
 import EscalationLevel3 from '~/assets/niveau-3.svg';
 
 import { TooltipContent } from '~/components/chloropleth/tooltips/tooltipContent';
-import { thresholds } from '~/components/chloropleth/SafetyRegionChloropleth';
+import { regionThresholds } from '~/components/chloropleth/regionThresholds';
+import { ChoroplethThresholds } from '../../shared';
 
-const escalationThresholds = thresholds.escalation_levels.thresholds;
+const escalationThresholds = (regionThresholds.escalation_levels as ChoroplethThresholds)
+  .thresholds;
 
 export const escalationTooltip = (router: NextRouter) => {
   return (context: any): ReactNode => {

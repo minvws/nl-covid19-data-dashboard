@@ -73,7 +73,7 @@ const Home: FCWithLayout<INationalData> = (props) => {
         <div className="chloropleth-chart">
           <SafetyRegionChloropleth
             metricName="escalation_levels"
-            metricProperty="escalation_level"
+            metricValueName="escalation_level"
             onSelect={createSelectRegionHandler(router)}
             tooltipContent={escalationTooltip(router)}
           />
