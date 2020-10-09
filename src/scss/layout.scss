@@ -96,7 +96,7 @@
   is pushed to the bottom.
   */
   .article-top {
-    flex: 1;
+    flex: 1 1 auto;
   }
 
   .article-footer {
@@ -474,10 +474,11 @@ a.metric-link {
   @media (min-width: $chloropleth-breakpoint) {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: auto 1fr auto;
     grid-template-areas:
       'a c'
-      'b c';
+      'b c'
+      'd c';
   }
 
   .chloropleth-header {
@@ -510,5 +511,9 @@ a.metric-link {
     @media (min-width: $chloropleth-breakpoint) {
       justify-content: flex-start;
     }
+  }
+
+  .chloropleth-footer {
+    grid-area: d;
   }
 }
