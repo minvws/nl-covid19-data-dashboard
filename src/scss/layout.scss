@@ -199,6 +199,10 @@
 
   .last-developments {
     padding-top: 2em;
+
+    li {
+      min-height: 0;
+    }
   }
 }
 
@@ -327,7 +331,6 @@
 
     li {
       border-bottom: 1px solid #c4c4c4;
-
       min-height: 144px;
 
       &:first-child {
