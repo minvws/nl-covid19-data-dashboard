@@ -54,15 +54,17 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
           dataSource: text.bron,
         }}
       />
-      <article className="metric-article layout-two-column">
-        <div className="column-item column-item-extra-margin">
-          <DataWarning />
-          <h3>{text.barscale_titel}</h3>
-          <IntakeHospitalBarScale data={resultsPerRegion} showAxis={true} />
-        </div>
+      <article className="metric-article layout-two-column-two-row">
+        <DataWarning />
+        <div className="row-item">
+          <div className="column-item column-item-extra-margin">
+            <h3>{text.barscale_titel}</h3>
+            <IntakeHospitalBarScale data={resultsPerRegion} showAxis={true} />
+          </div>
 
-        <div className="column-item column-item-extra-margin">
-          <p>{text.extra_uitleg}</p>
+          <div className="column-item column-item-extra-margin">
+            <p>{text.extra_uitleg}</p>
+          </div>
         </div>
       </article>
 

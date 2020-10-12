@@ -462,6 +462,19 @@ a.metric-link {
       margin-right: 0;
     }
   }
+
+  .layout-two-column-two-row {
+    display: flex;
+    flex-direction: column;
+
+    .row-item {
+      display: flex;
+
+      .column-item {
+        width: 50%;
+      }
+    }
+  }
 }
 
 /**
