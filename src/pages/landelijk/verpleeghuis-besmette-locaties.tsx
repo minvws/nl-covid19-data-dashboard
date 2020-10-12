@@ -96,18 +96,6 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
         </article>
       </div>
 
-      {totalLocations && (
-        <article className="metric-article">
-          <LineChart
-            title={text.linechart_titel}
-            values={totalLocations.values.map((value) => ({
-              value: value.total_reported_locations,
-              date: value.date_of_report_unix,
-            }))}
-          />
-        </article>
-      )}
-
       <article className="metric-article layout-chloropleth">
         <div className="chloropleth-header">
           <h3>{text.map_titel}</h3>
@@ -135,6 +123,18 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
           )}
         </div>
       </article>
+
+      {totalLocations && (
+        <article className="metric-article">
+          <LineChart
+            title={text.linechart_titel}
+            values={totalLocations.values.map((value) => ({
+              value: value.total_reported_locations,
+              date: value.date_of_report_unix,
+            }))}
+          />
+        </article>
+      )}
     </>
   );
 };
