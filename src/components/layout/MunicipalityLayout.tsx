@@ -126,7 +126,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
         <aside className="municipality-aside">
           <ComboBox<IMunicipality>
             placeholder={siteText.common.zoekveld_placeholder_gemeente}
-            handleSelect={handleMunicipalitySelect}
+            onSelect={handleMunicipalitySelect}
             options={municipalities}
           />
 

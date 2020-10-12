@@ -132,7 +132,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
         <aside className="safety-region-aside">
           <ComboBox<TSafetyRegion>
             placeholder={siteText.common.zoekveld_placeholder_regio}
-            handleSelect={handleSafeRegionSelect}
+            onSelect={handleSafeRegionSelect}
             options={safetyRegions}
           />
 
