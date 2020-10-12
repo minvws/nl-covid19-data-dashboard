@@ -120,7 +120,7 @@
     },
     "kpi_bedbezetting": {
       "title": "Aantal door COVID bezette ziekenhuisbedden",
-      "description": "Dit getal laat zien hoeveel ziekenhuisbedden gisteren bezet werden door COVID patiënten. Het percentage is ten opzichte van alle bezette ziekenhuisbedden, niet de capaciteit."
+      "description": "Dit getal laat zien hoeveel ziekenhuisbedden gisteren bezet werden door COVID patiënten."
     },
     "chart_bedbezetting": {
       "title": "Bezetting ziekenhuisbedden over tijd",
