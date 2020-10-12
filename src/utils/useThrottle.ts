@@ -6,20 +6,20 @@ import { useState, useEffect, useRef } from 'react';
 // ```
 // const throttledTerm = useThrottle<string>(term, 100);
 // ```
-export function useThrottle<Value>(value: Value, limit: number): Value {
-  const [throttledValue, setThrottledValue] = useState<Value>(value);
+export function useThrottle<T>(value: T, intervalMs: number): T {
+  const [throttledValue, setThrottledValue] = useState<T>(value);
   const lastRan = useRef(Date.now());
 
   useEffect(() => {
     const handler = window.setTimeout(() => {
-      if (Date.now() - lastRan.current >= limit) {
+      if (Date.now() - lastRan.current >= intervalMs) {
         setThrottledValue(value);
         lastRan.current = Date.now();
       }
-    }, limit - (Date.now() - lastRan.current));
+    }, intervalMs - (Date.now() - lastRan.current));
 
     return () => window.clearTimeout(handler);
-  }, [value, limit]);
+  }, [value, intervalMs]);
 
   return throttledValue;
 }
