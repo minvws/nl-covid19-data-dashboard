@@ -1,11 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 
-// This hook uses a generic type to match the input with the output.
-//
-// Example:
-// ```
-// const throttledTerm = useThrottle<string>(term, 100);
-// ```
 export function useThrottle<T>(value: T, intervalMs: number): T {
   const [throttledValue, setThrottledValue] = useState<T>(value);
   const lastRan = useRef(Date.now());
