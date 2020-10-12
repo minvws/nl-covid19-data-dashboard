@@ -219,5 +219,6 @@ function calculateYMax(values: Value[], signaalwaarde = -Infinity) {
     .filter(isDefined)
     .reduce((acc, value) => (value > acc ? value : acc), -Infinity);
 
-  return Math.max(maxValue, signaalwaarde + 10);
+  // Value cannot be 0, hence the 1
+  return Math.max(maxValue, signaalwaarde + 10, 1);
 }
