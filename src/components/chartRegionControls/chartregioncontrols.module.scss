@@ -5,7 +5,12 @@
   margin: 0 0 1rem;
   max-width: 100%;
   overflow: hidden;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto;
+
+  /* Extra specificity to overrule radio-group rules */
+  &.select-region-group {
+    label {
+      padding: 0.2em 1.5em;
+      flex: 0 1 auto;
+    }
+  }
 }
