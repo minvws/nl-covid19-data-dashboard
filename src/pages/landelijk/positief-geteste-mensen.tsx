@@ -28,7 +28,7 @@ import Getest from '~/assets/test.svg';
 import Afname from '~/assets/afname.svg';
 
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
-import { formatNumber } from '~/utils/formatNumber';
+import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 
 const text = siteText.positief_geteste_personen;
 const ggdText = siteText.positief_geteste_personen_ggd;
@@ -101,7 +101,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
                   __html: replaceKpisInText(ggdText.summary_title, [
                     {
                       name: 'percentage',
-                      value: `${formatNumber(
+                      value: `${formatPercentage(
                         ggdData.percentage_infected_ggd
                       )}%`,
                       className: 'text-blue',
@@ -227,7 +227,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
               <h3>
                 {ggdText.positief_getest_week_titel}{' '}
                 <span className="text-blue kpi">
-                  {`${formatNumber(ggdData?.percentage_infected_ggd)}%`}
+                  {`${formatPercentage(ggdData?.percentage_infected_ggd)}%`}
                 </span>
               </h3>
               <p>{ggdText.positief_getest_week_uitleg}</p>

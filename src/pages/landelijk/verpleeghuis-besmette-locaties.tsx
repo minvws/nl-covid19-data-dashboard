@@ -6,7 +6,7 @@ import { LineChart } from '~/components/charts/index';
 
 import Locatie from '~/assets/locaties.svg';
 
-import { formatNumber } from '~/utils/formatNumber';
+import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 
 import siteText from '~/locale/index';
 
@@ -85,7 +85,7 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
                   totalLocations.last_value.total_reported_locations
                 )}{' '}
                 (
-                {formatNumber(
+                {formatPercentage(
                   state.nursing_home.last_value.infected_locations_percentage
                 )}
                 %)

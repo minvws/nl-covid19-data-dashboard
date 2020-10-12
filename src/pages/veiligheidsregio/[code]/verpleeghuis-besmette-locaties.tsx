@@ -5,7 +5,7 @@ import { LineChart } from '~/components/charts/index';
 
 import Locatie from '~/assets/locaties.svg';
 
-import { formatNumber } from '~/utils/formatNumber';
+import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 
 import siteText from '~/locale/index';
 
@@ -78,7 +78,7 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
               {text.kpi_titel}{' '}
               <span className="text-blue kpi">
                 {formatNumber(infectedLocationsTotal)} (
-                {formatNumber(infectedLocationsPercentage)}%)
+                {formatPercentage(infectedLocationsPercentage)}%)
               </span>
             </h3>
           )}
