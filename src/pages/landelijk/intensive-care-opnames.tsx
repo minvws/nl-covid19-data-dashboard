@@ -42,7 +42,13 @@ const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
           </div>
           <footer className="article-footer">
             {siteText.common.metadata.source}:{' '}
-            <a href={text.bronnen.nice.href}>{text.bronnen.nice.text}</a>
+            <a
+              href={text.bronnen.nice.href}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              {text.bronnen.nice.text}
+            </a>
           </footer>
         </article>
 
@@ -60,7 +66,13 @@ const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
           </div>
           <footer className="article-footer">
             {siteText.common.metadata.source}:{' '}
-            <a href={text.bronnen.lnaz.href}>{text.bronnen.lnaz.text}</a>
+            <a
+              href={text.bronnen.lnaz.href}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              {text.bronnen.lnaz.text}
+            </a>
           </footer>
         </article>
       </div>
@@ -76,7 +88,13 @@ const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
         />
         <footer className="article-footer">
           {siteText.common.metadata.source}:{' '}
-          <a href={text.bronnen.nice.href}>{text.bronnen.nice.text}</a>
+          <a
+            href={text.bronnen.nice.href}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            {text.bronnen.nice.text}
+          </a>
         </footer>
       </article>
 
@@ -91,7 +109,13 @@ const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
         />
         <footer className="article-footer">
           {siteText.common.metadata.source}:{' '}
-          <a href={text.bronnen.lnaz.href}>{text.bronnen.lnaz.text}</a>
+          <a
+            href={text.bronnen.lnaz.href}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            {text.bronnen.lnaz.text}
+          </a>
         </footer>
       </article>
     </>
