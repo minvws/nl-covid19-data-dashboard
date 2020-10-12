@@ -52,8 +52,8 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
       />
 
       <article className="metric-article layout-two-column">
+        <DataWarning />
         <div className="column-item column-item-extra-margin">
-          <DataWarning />
           <h3>{text.barscale_titel}</h3>
 
           <IntakeHospitalBarScale data={hospitalAdmissions} showAxis={true} />

@@ -106,10 +106,13 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
       </article>
 
       <article className="metric-article layout-chloropleth">
+        <div className="data-warning">
+          <DataWarning />
+        </div>
         <div className="chloropleth-header">
           <h3>{text.map_titel}</h3>
           <p>{text.map_toelichting}</p>
-          <DataWarning />
+
           <div className="chloropleth-controls">
             <ChartRegionControls
               onChange={(val: 'region' | 'municipal') => setSelectedMap(val)}
