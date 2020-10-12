@@ -291,8 +291,8 @@
       "titel": "Aantal per 100.000 inwoners",
       "geen_meldingen": "Geen meldingen"
     },
-    "map_titel": "Verdeling positief geteste mensen in Nederland",
-    "map_toelichting": "Deze kaarten laten zien van hoeveel mensen gisteren is gemeld dat ze positief getest zijn op COVID-19, per 100.000 inwoners."
+    "map_titel": "Verdeling positief geteste bewoners in Nederland",
+    "map_toelichting": "Deze kaarten laten zien van hoeveel bewoners gisteren is gemeld dat ze positief getest zijn op COVID-19, per 100.000 inwoners."
   },
   "verpleeghuis_oversterfte": {
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",

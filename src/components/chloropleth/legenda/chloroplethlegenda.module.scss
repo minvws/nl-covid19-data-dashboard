@@ -16,6 +16,19 @@
       height: 10px;
       flex-grow: 0;
       flex-shrink: 0;
+      border-bottom: 1px solid lightgrey;
+      border-top: 1px solid lightgrey;
+    }
+
+    &:last-of-type {
+      .box {
+        border-right: 1px solid lightgrey;
+      }
+    }
+    &:first-of-type {
+      .box {
+        border-left: 1px solid lightgrey;
+      }
     }
   }
 }
