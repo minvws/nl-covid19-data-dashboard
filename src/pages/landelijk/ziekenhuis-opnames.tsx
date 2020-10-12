@@ -18,6 +18,7 @@ import { getNationalLayout } from '~/components/layout/NationalLayout';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 import { formatNumber } from '~/utils/formatNumber';
+import { DataWarning } from '~/components/dataWarning';
 
 const text = siteText.ziekenhuisopnames_per_dag;
 
@@ -78,6 +79,7 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
         <div className="chloropleth-header">
           <h3>{text.map_titel}</h3>
           <p>{text.map_toelichting}</p>
+          <DataWarning />
           <div className="chloropleth-controls">
             <ChartRegionControls
               onChange={(val: 'region' | 'municipal') => setSelectedMap(val)}
