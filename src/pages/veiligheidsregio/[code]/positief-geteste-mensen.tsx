@@ -20,7 +20,7 @@ import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityCh
 import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
 import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
 
-import { formatNumber } from '~/utils/formatNumber';
+import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 
 import Getest from '~/assets/test.svg';
 import Afname from '~/assets/afname.svg';
@@ -95,7 +95,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
                   __html: replaceKpisInText(ggdText.summary_title, [
                     {
                       name: 'percentage',
-                      value: `${formatNumber(
+                      value: `${formatPercentage(
                         ggdData.infected_percentage_daily
                       )}%`,
                       className: 'text-blue',

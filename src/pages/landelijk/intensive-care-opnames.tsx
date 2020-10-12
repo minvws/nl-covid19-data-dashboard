@@ -6,7 +6,7 @@ import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
-import { formatNumber } from '~/utils/formatNumber';
+import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 
 const text = siteText.ic_opnames_per_dag;
 
@@ -52,7 +52,7 @@ const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
             <div className="text-blue kpi">
               {`${formatNumber(
                 dataBeds.last_value.covid_occupied
-              )} (${formatNumber(
+              )} (${formatPercentage(
                 dataBeds.last_value.covid_percentage_of_all_occupied
               )}%)`}
             </div>

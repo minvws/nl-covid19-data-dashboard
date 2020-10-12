@@ -85,7 +85,7 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
                   totalLocations.last_value.total_reported_locations
                 )}{' '}
                 (
-                {formatNumber(
+                {formatPercentage(
                   state.nursing_home.last_value.infected_locations_percentage
                 )}
                 %)
