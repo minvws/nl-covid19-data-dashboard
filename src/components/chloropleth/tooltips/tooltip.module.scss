@@ -1,7 +1,7 @@
 @import '~/scss/variables.scss';
 
 .tooltipContainer {
-  background: white;
+  background: rgba(255, 255, 255, 0.9);
   position: absolute;
   z-index: 1000;
   color: rgb(102, 102, 102);
@@ -28,8 +28,8 @@
 
 .tooltip {
   color: $text-color;
-  width: 265px;
-  background-color: white;
+  width: 100%;
+  min-width: 160px;
   border-radius: 4px;
   pointer-events: all;
   cursor: pointer;
@@ -38,6 +38,7 @@
     border-bottom: 1px solid #c4c4c4;
     margin: 0 -0.5rem;
     padding: 0.25rem 3rem 0.25rem 1rem;
+    white-space: nowrap;
     font-size: 1.2em;
     cursor: pointer;
     position: relative;
@@ -45,6 +46,7 @@
 
     h3 {
       margin: 0;
+      font-size: 1.125em;
     }
 
     &::after {
