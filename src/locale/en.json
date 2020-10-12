@@ -10,7 +10,7 @@
   },
   "notificatie": {
     "titel": "Increase in new COVID-19 infections, hospital and ICU admissions continues",
-    "bericht": "The new number of people who tested positive has continued to rise in all regions and age groups in the past week (30 September to 6 October). Also, the increase in the number of admissions of Covid-19 patients to the hospital and ICU has continued. The first impact of the government policy measures issued on 30 September is not expected to become visible until next week at the earliest. \n\nRisk level per region can be ‘caution’ (level 1), ‘concern’ (level 2) or ‘serious’ (level 3). The situation in 18 of the 25 safety regions is concerning. In Amsterdam-Amstelland, Haaglanden and Rotterdam-Rijnmond, the situation is considered serious.",
+    "bericht": "The new number of people who tested positive has continued to rise in all regions and age groups in the past week (30 September to 6 October). Also, the increase in the number of admissions of Covid-19 patients to the hospital and ICU has continued. The first impact of the government policy measures issued on 30 September is not expected to become visible until next week at the earliest. \n\nRisk level per region can be ‘caution’ (level 1), ‘concern’ (level 2) or ‘serious’ (level 3). The situation in 18 of the 25 safety regions is concerning. In 7 regions the situation is considered serious.",
     "link": {
       "text": "View the full message from the RIVM",
       "href": "https://www.rivm.nl/en/novel-coronavirus-covid-19/current-information"
@@ -52,15 +52,9 @@
   },
   "ic_opnames_per_dag": {
     "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
-    "bronnen": {
-      "nice": {
-        "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
-        "text": "Stichting NICE"
-      },
-      "lnaz": {
-        "href": "https://lcps.nu/datafeed/",
-        "text": "LNAZ"
-      }
+    "bron": {
+      "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
+      "text": "Stichting NICE"
     },
     "titel": "Intensive care admissions by day",
     "pagina_toelichting": "Number of confirmed COVID-19 cases who are admitted to a hospital intensive care unit (ICU) per day.",
@@ -68,13 +62,23 @@
     "barscale_screenreader_text": "{{value}} intensive care-admissions by day. Alert value: {{signaalwaarde}} admissions per day.",
     "extra_uitleg": "Number of confirmed COVID-19 cases who are admitted to a hospital intensive care unit (ICU) per day. This figure is an average for the daily admissions over the past three days.",
     "linechart_titel": "Progression over time",
+    "bronnen": {
+      "nice": {
+        "href": "",
+        "text": ""
+      },
+      "lnaz": {
+        "href": "",
+        "text": ""
+      }
+    },
     "kpi_bedbezetting": {
-      "title": "Aantal bezette IC bedden door COVID patiënten",
-      "description": "Dit getal laat zien hoeveel IC-bedden gisteren bezet werden door COVID patiënten. Het percentage is ten opzichte van alle bezette IC bedden, niet de capaciteit."
+      "title": "",
+      "description": ""
     },
     "chart_bedbezetting": {
-      "title": "Bezetting IC-bedden over tijd",
-      "description": "Dit cijfer toont het aantal bezette IC-bedden door COVID patiënten over tijd."
+      "title": "",
+      "description": ""
     }
   },
   "verdenkingen_huisartsen": {
@@ -96,15 +100,9 @@
   },
   "ziekenhuisopnames_per_dag": {
     "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
-    "bronnen": {
-      "rivm": {
-        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
-        "text": "RIVM"
-      },
-      "lnaz": {
-        "href": "https://lcps.nu/datafeed/",
-        "text": "LNAZ"
-      }
+    "bron": {
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
+      "text": "RIVM"
     },
     "titel": "Hospital admissions per day",
     "pagina_toelichting": "Number of confirmed COVID-19 cases who are admitted to a hospital per day.",
@@ -118,13 +116,23 @@
       "titel": "Hospital admissions",
       "geen_meldingen": "No reported admissions"
     },
+    "bronnen": {
+      "rivm": {
+        "href": "",
+        "text": ""
+      },
+      "lnaz": {
+        "href": "",
+        "text": ""
+      }
+    },
     "kpi_bedbezetting": {
-      "title": "Aantal door COVID bezette ziekenhuisbedden",
-      "description": "Dit getal laat zien hoeveel ziekenhuisbedden gisteren bezet werden door COVID patiënten."
+      "title": "",
+      "description": ""
     },
     "chart_bedbezetting": {
-      "title": "Bezetting ziekenhuisbedden over tijd",
-      "description": "Dit cijfer toont het aantal bezette ziekenhuisbedden door COVID patiënten over tijd."
+      "title": "",
+      "description": ""
     }
   },
   "positief_geteste_personen": {
@@ -147,7 +155,13 @@
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the progression over time in the number of new cases by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "cluster_datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
     "cluster_bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
@@ -268,11 +282,11 @@
     "linechart_titel": "Progression over time",
     "barscale_screenreader_text": "{{value}} new locations where there is at least one confirmed case, per day.",
     "chloropleth_legenda": {
-      "titel": "Number per 100.000 residents",
-      "geen_meldingen": "No confirmed cases"
+      "titel": "",
+      "geen_meldingen": ""
     },
-    "map_titel": "Number of infected locations in the Netherlands",
-    "map_toelichting": ""
+    "map_titel": "",
+    "map_toelichting": "This maps shows an estimate of the number of nursing homes where in the past 28 days at least one (new) COVID-19 infection (confirmed by a positive test) is reported."
   },
   "verpleeghuis_positief_geteste_personen": {
     "datums": "Value of {{dateOfReport}}. Obtained:{{dateOfInsertion}}. Is updated on a daily basis.",
@@ -610,7 +624,13 @@
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the progression over time in the number of positive tests by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -686,7 +706,13 @@
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the change in the number of confirmed cases by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -793,7 +819,7 @@
     "toelichting": "",
     "totaal_getest_week_titel": "",
     "totaal_getest_week_uitleg": "",
-    "positief_getest_week_titel": "",
+    "positief_getest_week_titel": "Confirmed cases by GGD",
     "positief_getest_week_uitleg": "",
     "positief_getest_getest_week_uitleg": ""
   },
@@ -840,7 +866,13 @@
     "pagina_toelichting": "Number of confirmed cases in nursing homes per day in {{safetyRegion}}. This number is an estimation of the number confirmed cases in nursing home inhabitants.\n\nThe calculation method has been changed on the 29th of September. Please also see the data explanation section.",
     "linechart_titel": "Progression over time",
     "barscale_screenreader_text": "{{value}} Number of residents who tested positive (confirmed cases).",
-    "titel_sidebar": "Confirmed cases per day"
+    "titel_sidebar": "Confirmed cases per day",
+    "chloropleth_legenda": {
+      "titel": "Number per 100.000 residents",
+      "geen_meldingen": "No confirmed cases"
+    },
+    "map_titel": "Confirmed cases in the Netherlands",
+    "map_toelichting": "These maps show the number of confirmed cases per 100.000 residents."
   },
-  "data_warning_text": "Let op: Deze data bevat niet de allerlaatste status van de huidige situatie. Deze zal spoedig weer beschikbaar zijn."
+  "data_warning_text": ""
 }
