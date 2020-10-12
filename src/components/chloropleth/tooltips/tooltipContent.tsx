@@ -4,7 +4,7 @@ import styles from '~/components/chloropleth/tooltips/tooltip.module.scss';
 interface IProps {
   title: string;
   onSelect: (event: React.MouseEvent<HTMLInputElement>) => void;
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export function TooltipContent(props: IProps) {
@@ -15,7 +15,7 @@ export function TooltipContent(props: IProps) {
       <div className={styles.tooltipHeader}>
         <h3>{title}</h3>
       </div>
-      <div className={styles.tooltipInfo}>{children}</div>
+      {children && <div className={styles.tooltipInfo}>{children}</div>}
     </div>
   );
 }

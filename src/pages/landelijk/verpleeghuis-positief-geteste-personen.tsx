@@ -24,7 +24,10 @@ const NursingHomeInfectedPeople: FCWithLayout<INationalData> = (props) => {
   const { data: state } = props;
   const router = useRouter();
 
-  const legendItems = useSafetyRegionLegendaData('positive_tested_people');
+  const legendItems = useSafetyRegionLegendaData(
+    'nursing_home',
+    'newly_infected_people'
+  );
 
   const data: InfectedPeopleNurseryCountDaily | undefined =
     state?.infected_people_nursery_count_daily;
@@ -59,18 +62,6 @@ const NursingHomeInfectedPeople: FCWithLayout<INationalData> = (props) => {
         </div>
       </article>
 
-      {data && (
-        <article className="metric-article">
-          <LineChart
-            title={text.linechart_titel}
-            values={data.values.map((value) => ({
-              value: value.infected_nursery_daily,
-              date: value.date_of_report_unix,
-            }))}
-          />
-        </article>
-      )}
-
       <article className="metric-article layout-chloropleth">
         <div className="chloropleth-header">
           <h3>{text.map_titel}</h3>
@@ -81,7 +72,10 @@ const NursingHomeInfectedPeople: FCWithLayout<INationalData> = (props) => {
           <SafetyRegionChloropleth
             metricName="positive_tested_people"
             tooltipContent={createPositiveTestedPeopleRegionalTooltip(router)}
-            onSelect={createSelectRegionHandler(router)}
+            onSelect={createSelectRegionHandler(
+              router,
+              'verpleeghuis-positief-geteste-personen'
+            )}
           />
         </div>
 
@@ -94,6 +88,18 @@ const NursingHomeInfectedPeople: FCWithLayout<INationalData> = (props) => {
           )}
         </div>
       </article>
+
+      {data && (
+        <article className="metric-article">
+          <LineChart
+            title={text.linechart_titel}
+            values={data.values.map((value) => ({
+              value: value.infected_nursery_daily,
+              date: value.date_of_report_unix,
+            }))}
+          />
+        </article>
+      )}
     </>
   );
 };

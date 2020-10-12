@@ -119,5 +119,6 @@ export const regionThresholds: Record<
   escalation_levels: escalationThresholds,
   nursing_home: {
     infected_locations_total: nursingHomeThresholds,
+    newly_infected_people: nursingHomeThresholds,
   } as Record<Partial<TRegionsNursingHomeMetricName>, ChoroplethThresholds>,
 };

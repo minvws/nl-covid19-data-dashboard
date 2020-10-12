@@ -7,11 +7,11 @@ import { TooltipContent } from '~/components/chloropleth/tooltips/tooltipContent
 export const createPositiveTestedPeopleMunicipalTooltip = (
   router: NextRouter
 ) => (context: MunicipalityProperties & { value: number }): ReactNode => {
-  const handler = createSelectMunicipalHandler(router);
+  const onSelectHandler = createSelectMunicipalHandler(router);
 
   const onSelect = (event: any) => {
     event.stopPropagation();
-    handler(context);
+    onSelectHandler(context);
   };
 
   return (
