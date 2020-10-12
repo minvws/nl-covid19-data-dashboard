@@ -9,7 +9,7 @@ export function NursingHomeInfectedPeopleBarScale(props: {
 }) {
   const { value, showAxis } = props;
 
-  if (!value) return null;
+  if (value === undefined) return null;
 
   return (
     <BarScale

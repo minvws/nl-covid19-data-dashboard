@@ -7,7 +7,6 @@
     "date_of_report_unix",
     "vrcode",
     "positive_tested_people",
-    "total_positive_tested_people",
     "date_of_insertion_unix"
   ],
   "properties": {
