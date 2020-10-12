@@ -73,7 +73,7 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
         </article>
 
         <article className="metric-article column-item">
-          {infectedLocationsTotal && (
+          {infectedLocationsTotal !== undefined && (
             <h3>
               {text.kpi_titel}{' '}
               <span className="text-blue kpi">
@@ -86,7 +86,7 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
         </article>
       </div>
 
-      {infectedLocationsTotal && (
+      {infectedLocationsTotal !== undefined && (
         <article className="metric-article">
           <LineChart
             title={text.linechart_titel}
