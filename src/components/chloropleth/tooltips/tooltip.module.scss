@@ -35,8 +35,6 @@
   cursor: pointer;
 
   .tooltipHeader {
-    border-bottom: 1px solid #c4c4c4;
-    margin: 0 -0.5rem;
     padding: 0.25rem 3rem 0.25rem 1rem;
     white-space: nowrap;
     font-size: 1.2em;
@@ -53,7 +51,7 @@
       content: '';
       background-image: url('/images/chevron-black.svg');
       // match aspect ratio of chevron.svg
-      background-size: 0.6em 1em;
+      background-size: 0.5em 0.9em;
       background-position: 0 50%;
       background-repeat: no-repeat;
       width: 0.6em;
@@ -70,9 +68,11 @@
   }
 
   .tooltipInfo {
+    margin: 0 -0.5rem;
     padding: 1em 0.5em;
     font-size: 1rem;
     cursor: pointer;
+    border-top: 1px solid #c4c4c4;
   }
 }
 
