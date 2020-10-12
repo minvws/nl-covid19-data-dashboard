@@ -73,12 +73,12 @@
       }
     },
     "kpi_bedbezetting": {
-      "title": "",
-      "description": ""
+      "title": "ICU beds occupied by COVID-19 patients",
+      "description": "This number shows how many ICU beds are occupied by COVID-19 patients. The percentage shows what proportion of all occupied ICU beds this is. This is unrelated to maximum ICU capacity."
     },
     "chart_bedbezetting": {
-      "title": "",
-      "description": ""
+      "title": "ICU bed occupancy over time",
+      "description": "This graph shows the progression of the number of ICU beds occupied by COVID-19 patients."
     }
   },
   "verdenkingen_huisartsen": {
@@ -127,12 +127,12 @@
       }
     },
     "kpi_bedbezetting": {
-      "title": "",
-      "description": ""
+      "title": "Hospital beds occupied by COVID-19 patients",
+      "description": "This number shows how many non-ICU hospital beds are occupied by COVID-19 patients."
     },
     "chart_bedbezetting": {
-      "title": "",
-      "description": ""
+      "title": "Hospital bed occupancy over time",
+      "description": "This graph shows the progression of the number of non-ICU hospital beds occupied by COVID-19 patients."
     }
   },
   "positief_geteste_personen": {
@@ -434,7 +434,7 @@
       },
       {
         "cijfer": "Correction figures of 2 September in the number of confirmed cases",
-        "verantwoording": "Due to a previous technical issue at the RIVM, a number of reports are missing in the figures of 1 September. These reports are added in the figures of 2 September. Because of this, the number of newly identified infections shown on 2 September (734) is nearly 300 reports higher than it was the day before (462)."
+        "verantwoording": "ICU occupancy rates are obtained daily via the [LCPS](https://lcps.nu/wp-content/uploads/covid-19.csv) website. The data includes the number of ICU beds occupied by COVID-19 patients and the number of ICU beds occupied by all other patients. The percentage of ICU beds occupied by COVID-19 patients is calculated by dividing the number of ICU beds occupied by COVID-19 patients by the total number of occupied ICU beds."
       },
       {
         "cijfer": "Intensive care (ICU) admissions",
