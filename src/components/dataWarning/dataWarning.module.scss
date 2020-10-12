@@ -1,14 +1,12 @@
 @import '~/scss/variables.scss';
 
-.dataWarning {
-  display: grid;
-  grid-template-columns: 25px 1fr;
-  grid-gap: 12px;
-  margin-bottom: 24px;
+.root {
+  display: flex;
+  max-width: 22em;
+}
 
-  .dataWarningText {
-    margin: 0;
-    color: $text-color-grey;
-    max-width: 22em;
-  }
+.text {
+  margin: 0;
+  color: $text-color-grey;
+  width: 100%;
 }
