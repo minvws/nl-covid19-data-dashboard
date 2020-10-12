@@ -56,7 +56,13 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
           <p>{text.extra_uitleg}</p>
           <footer className="article-footer">
             {siteText.common.metadata.source}:{' '}
-            <a href={text.bronnen.rivm.href}>{text.bronnen.rivm.text}</a>
+            <a
+              href={text.bronnen.rivm.href}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              {text.bronnen.rivm.text}
+            </a>
           </footer>
         </article>
 
@@ -70,7 +76,13 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
           </div>
           <footer className="article-footer">
             {siteText.common.metadata.source}:{' '}
-            <a href={text.bronnen.lnaz.href}>{text.bronnen.lnaz.text}</a>
+            <a
+              href={text.bronnen.lnaz.href}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              {text.bronnen.lnaz.text}
+            </a>
           </footer>
         </article>
       </div>
@@ -86,7 +98,13 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
         />
         <footer className="article-footer">
           {siteText.common.metadata.source}:{' '}
-          <a href={text.bronnen.rivm.href}>{text.bronnen.rivm.text}</a>
+          <a
+            href={text.bronnen.rivm.href}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            {text.bronnen.rivm.text}
+          </a>
         </footer>
       </article>
 
@@ -101,7 +119,13 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
         />
         <footer className="article-footer">
           {siteText.common.metadata.source}:{' '}
-          <a href={text.bronnen.lnaz.href}>{text.bronnen.lnaz.text}</a>
+          <a
+            href={text.bronnen.lnaz.href}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            {text.bronnen.lnaz.text}
+          </a>
         </footer>
       </article>
 
@@ -150,7 +174,13 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
         </div>
         <footer className="chloropleth-footer">
           {siteText.common.metadata.source}:{' '}
-          <a href={text.bronnen.rivm.href}>{text.bronnen.rivm.text}</a>
+          <a
+            href={text.bronnen.rivm.href}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            {text.bronnen.rivm.text}
+          </a>
         </footer>
       </article>
     </>
