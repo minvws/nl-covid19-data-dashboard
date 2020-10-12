@@ -24,7 +24,7 @@
           "type": "integer"
         },
         "infected_percentage_daily": {
-          "type": "integer"
+          "type": "number"
         },
         "tested_total_daily": {
           "type": "integer"

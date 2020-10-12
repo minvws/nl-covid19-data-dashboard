@@ -79,7 +79,7 @@ const escalationThresholds: ChoroplethThresholds = {
 const nursingHomeThresholds: ChoroplethThresholds = {
   thresholds: [
     {
-      color: '#CFFFFFF',
+      color: '#FFFFFF',
       threshold: 0,
     },
     {

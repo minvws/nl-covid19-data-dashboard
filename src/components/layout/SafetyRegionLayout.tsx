@@ -249,7 +249,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                             .titel_sidebar
                         }
                       />
-                      {data?.nursing_home?.last_value.newly_infected_people && (
+                      {data?.nursing_home?.last_value && (
                         <span>
                           <NursingHomeInfectedPeopleBarScale
                             value={
