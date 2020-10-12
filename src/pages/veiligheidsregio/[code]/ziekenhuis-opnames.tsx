@@ -19,6 +19,7 @@ import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHan
 import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { ContentHeader } from '~/components/layout/Content';
+import { DataWarning } from '~/components/dataWarning';
 
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
@@ -53,20 +54,23 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
           dataSource: text.bron,
         }}
       />
-      <article className="metric-article layout-two-column">
-        <div className="column-item column-item-extra-margin">
-          <h3>{text.barscale_titel}</h3>
+      <article className="metric-article layout-two-column-two-row">
+        <DataWarning />
+        <div className="row-item">
+          <div className="column-item column-item-extra-margin">
+            <h3>{text.barscale_titel}</h3>
+            <IntakeHospitalBarScale data={resultsPerRegion} showAxis={true} />
+          </div>
 
-          <IntakeHospitalBarScale data={resultsPerRegion} showAxis={true} />
-        </div>
-
-        <div className="column-item column-item-extra-margin">
-          <p>{text.extra_uitleg}</p>
+          <div className="column-item column-item-extra-margin">
+            <p>{text.extra_uitleg}</p>
+          </div>
         </div>
       </article>
 
       {resultsPerRegion && (
         <article className="metric-article">
+          <DataWarning />
           <LineChart
             title={text.linechart_titel}
             values={resultsPerRegion.values.map((value: any) => ({

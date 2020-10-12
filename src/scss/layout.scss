@@ -462,6 +462,19 @@ a.metric-link {
       margin-right: 0;
     }
   }
+
+  .layout-two-column-two-row {
+    display: flex;
+    flex-direction: column;
+
+    .row-item {
+      display: flex;
+
+      .column-item {
+        width: 50%;
+      }
+    }
+  }
 }
 
 /**
@@ -474,11 +487,16 @@ a.metric-link {
   @media (min-width: $chloropleth-breakpoint) {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto auto 1fr auto;
     grid-template-areas:
+      'w w'
       'a c'
       'b c'
       'd c';
+  }
+
+  .data-warning {
+    grid-area: w;
   }
 
   .chloropleth-header {
