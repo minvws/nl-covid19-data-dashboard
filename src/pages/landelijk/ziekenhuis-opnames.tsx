@@ -113,7 +113,7 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
             />
           )}
         </div>
-        <footer className="article-footer">
+        <footer className="chloropleth-footer">
           {siteText.common.metadata.source}:{' '}
           <a href={text.bronnen.rivm.href}>{text.bronnen.rivm.text}</a>
         </footer>
