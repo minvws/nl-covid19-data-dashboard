@@ -51,7 +51,7 @@
 
     &::after {
       content: '';
-      background-image: url('/images/chevron-black.svg');
+      background-image: url('/public/images/chevron-black.svg');
       // match aspect ratio of chevron.svg
       background-size: 0.6em 1em;
       background-position: 0 50%;
