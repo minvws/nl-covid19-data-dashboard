@@ -10,7 +10,7 @@
   },
   "notificatie": {
     "titel": "Increase in new COVID-19 infections, hospital and ICU admissions continues",
-    "bericht": "The new number of people who tested positive has continued to rise in all regions and age groups in the past week (30 September to 6 October). Also, the increase in the number of admissions of Covid-19 patients to the hospital and ICU has continued. The first impact of the government policy measures issued on 30 September is not expected to become visible until next week at the earliest. \n\nRisk level per region can be ‘caution’ (level 1), ‘concern’ (level 2) or ‘serious’ (level 3). The situation in 18 of the 25 safety regions is concerning. In 7 regions the situation is considered serious.",
+    "bericht": "The new number of people who tested positive has continued to rise in all regions and age groups in the past week (30 September to 6 October). Also, the increase in the number of admissions of Covid-19 patients to the hospital and ICU has continued. The first impact of the government policy measures issued on 30 September is not expected to become visible until next week at the earliest. \n\nRisk level per region can be ‘caution’ (level 1), ‘concern’ (level 2), ‘serious’ (level 3) or ‘severe’ (level 4).",
     "link": {
       "text": "View the full message from the RIVM",
       "href": "https://www.rivm.nl/en/novel-coronavirus-covid-19/current-information"
@@ -198,15 +198,15 @@
     "legenda_marge": "The confidence interval shows the range between which the number of infectious people falls.",
     "rangeLegendLabel": "Confidence interval",
     "lineLegendLabel": "Infectious people",
-    "geen_signaalwaarde_beschikbaar": "Due to a technical problem the data is currently not showing as intended. This is being investigated.\n\nFor the number of infectious people, no alert value is available.",
+    "geen_signaalwaarde_beschikbaar": "Due to a technical problem the data is currently not showing as intended. This is being investigated.",
     "geen_signaalwaarde_beschikbaar_lees_waarom": "Read here why",
     "toelichting_pagina": "A person who carries coronavirus can infect other people within a certain time frame. How long someone is infectious for differs from one person to another. The number of infectious people is estimated using data from various sources. It is not possible to know exactly how many people are infectious, but we can indicate whether there are dozens, hundreds, thousands or even more.",
     "barscale_titel": "Average number of infectious people per 100.000 inhabitants.",
-    "barscale_screenreader_text": "{{value}} infectious people per 100.000 inhabitants.",
+    "barscale_screenreader_text": "{{value}} infectious people",
     "cijfer_titel": "Estimated number of infectious people in the Netherlands:",
-    "cijfer_toelichting": "Due to a technical problem the data is currently not showing as intended. This is being investigated.\n\nA calculation of how many people with COVID-19 can transmit the virus. This number is calculated by the RIVM.",
+    "cijfer_toelichting": "A calculation of how many people with COVID-19 can transmit the virus. This number is calculated by the RIVM.",
     "linechart_titel": "Progression over time",
-    "titel_sidebar": "Number of infectious people per 100,000 inhabitants"
+    "titel_sidebar": "Number of infectious people"
   },
   "reproductiegetal": {
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
