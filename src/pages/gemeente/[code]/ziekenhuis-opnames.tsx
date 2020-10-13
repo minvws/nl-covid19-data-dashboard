@@ -70,6 +70,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
           <DataWarning />
           <LineChart
             title={text.linechart_titel}
+            description={text.linechart_description}
             values={hospitalAdmissions.values.map((value: any) => ({
               value: value.moving_average_hospital,
               date: value.date_of_report_unix,

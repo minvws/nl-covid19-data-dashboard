@@ -95,6 +95,7 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
       <article className="metric-article">
         <LineChart
           title={text.linechart_titel}
+          description={text.linechart_description}
           values={dataIntake.values.map((value: any) => ({
             value: value.moving_average_hospital,
             date: value.date_of_report_unix,
