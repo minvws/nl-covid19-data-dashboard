@@ -73,6 +73,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
           <DataWarning />
           <LineChart
             title={text.linechart_titel}
+            description={text.linechart_description}
             values={resultsPerRegion.values.map((value: any) => ({
               value: value.hospital_moving_avg_per_region,
               date: value.date_of_report_unix,
