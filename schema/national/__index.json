@@ -93,6 +93,9 @@
     "reproduction_index_last_known_average": {
       "$ref": "reproduction_index_last_known_average.json"
     },
+    "infectious_people_last_known_average": {
+      "$ref": "infectious_people_last_known_average.json"
+    },
     "rioolwater_metingen": {
       "$ref": "rioolwater_metingen.json"
     },
