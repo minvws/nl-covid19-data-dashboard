@@ -39,23 +39,8 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
         }}
       />
 
-      <div className="layout-two-column">
-        <article className="metric-article column-item">
-          <h3>{text.barscale_titel}</h3>
-          <InfectiousPeopleBarScale
-            data={infectiousPeopleLastKnownEverage?.last_value}
-            showAxis={true}
-          />
-
-          <p>
-            {text.geen_signaalwaarde_beschikbaar}{' '}
-            <Link href="/verantwoording">
-              <a>{text.geen_signaalwaarde_beschikbaar_lees_waarom}</a>
-            </Link>
-          </p>
-        </article>
-
-        <article className="metric-article column-item">
+      <article className="metric-article layout-two-column">
+        <div className="column-item">
           <h3>
             {text.cijfer_titel}
 
@@ -67,10 +52,11 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
               </span>
             )}
           </h3>
-
+        </div>
+        <div className="column-item">
           <p>{text.cijfer_toelichting}</p>
-        </article>
-      </div>
+        </div>
+      </article>
 
       {count?.values && (
         <article className="metric-article">
