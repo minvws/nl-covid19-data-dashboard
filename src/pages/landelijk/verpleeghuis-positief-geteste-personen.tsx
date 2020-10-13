@@ -62,32 +62,41 @@ const NursingHomeInfectedPeople: FCWithLayout<INationalData> = (props) => {
         </div>
       </article>
 
-      <article className="metric-article layout-chloropleth">
-        <div className="chloropleth-header">
-          <h3>{text.map_titel}</h3>
-          <p>{text.map_toelichting}</p>
-        </div>
+      {
+        /**
+         * Re-enable this later
+         */
+        false && (
+          <article className="metric-article layout-chloropleth">
+            <div className="chloropleth-header">
+              <h3>{text.map_titel}</h3>
+              <p>{text.map_toelichting}</p>
+            </div>
 
-        <div className="chloropleth-chart">
-          <SafetyRegionChloropleth
-            metricName="positive_tested_people"
-            tooltipContent={createPositiveTestedPeopleRegionalTooltip(router)}
-            onSelect={createSelectRegionHandler(
-              router,
-              'verpleeghuis-positief-geteste-personen'
-            )}
-          />
-        </div>
+            <div className="chloropleth-chart">
+              <SafetyRegionChloropleth
+                metricName="positive_tested_people"
+                tooltipContent={createPositiveTestedPeopleRegionalTooltip(
+                  router
+                )}
+                onSelect={createSelectRegionHandler(
+                  router,
+                  'verpleeghuis-positief-geteste-personen'
+                )}
+              />
+            </div>
 
-        <div className="chloropleth-legend">
-          {legendItems && (
-            <ChloroplethLegenda
-              items={legendItems}
-              title={text.chloropleth_legenda.titel}
-            />
-          )}
-        </div>
-      </article>
+            <div className="chloropleth-legend">
+              {legendItems && (
+                <ChloroplethLegenda
+                  items={legendItems}
+                  title={text.chloropleth_legenda.titel}
+                />
+              )}
+            </div>
+          </article>
+        )
+      }
 
       {data && (
         <article className="metric-article">
