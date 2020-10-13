@@ -64,8 +64,8 @@
     "linechart_titel": "Progression over time",
     "bronnen": {
       "nice": {
-        "href": "",
-        "text": ""
+        "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
+        "text": "Stichting NICE"
       },
       "lnaz": {
         "href": "",
@@ -283,9 +283,9 @@
     "barscale_screenreader_text": "{{value}} new locations where there is at least one confirmed case, per day.",
     "chloropleth_legenda": {
       "titel": "Percentage of infected nursing homes",
-      "geen_meldingen": ""
+      "geen_meldingen": "No reports"
     },
-    "map_titel": "",
+    "map_titel": "Infected locations in the Netherlands",
     "map_toelichting": "This maps shows the percentage of nursing homes where in the past 28 days at least one (new) COVID-19 infection (confirmed by a positive test) is reported."
   },
   "verpleeghuis_positief_geteste_personen": {
