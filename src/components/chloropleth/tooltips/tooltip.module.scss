@@ -35,7 +35,7 @@
   cursor: pointer;
 
   .tooltipHeader {
-    padding: 0.25rem 3rem 0.25rem 1rem;
+    padding: 0.25rem 2rem 0.25rem 0.5rem;
     white-space: nowrap;
     font-size: 1.2em;
     cursor: pointer;
@@ -54,10 +54,10 @@
       background-size: 0.5em 0.9em;
       background-position: 0 50%;
       background-repeat: no-repeat;
-      width: 0.6em;
+      width: 0.5em;
       display: block;
       position: absolute;
-      right: 1em;
+      right: 0.5rem;
       top: 0;
       bottom: 0;
     }
@@ -69,7 +69,7 @@
 
   .tooltipInfo {
     margin: 0 -0.5rem;
-    padding: 1em 0.5em;
+    padding: 1em 1rem;
     font-size: 1rem;
     cursor: pointer;
     border-top: 1px solid #c4c4c4;
