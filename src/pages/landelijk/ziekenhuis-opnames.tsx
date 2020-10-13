@@ -1,8 +1,17 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import Ziekenhuis from '~/assets/ziekenhuis.svg';
+
+import siteText from '~/locale/index';
+import getNlData, { INationalData } from '~/static-props/nl-data';
+
+import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-barscale';
+import { FCWithLayout } from '~/components/layout';
+import { getNationalLayout } from '~/components/layout/NationalLayout';
+
 import { ChartRegionControls } from '~/components/chartRegionControls';
 import { LineChart } from '~/components/charts/index';
+import { ContentHeaderMetadataHack } from '~/components/contentHeaderMetadataHack';
+
 import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
 import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
@@ -11,14 +20,10 @@ import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHan
 import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
 import { createMunicipalHospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/municipal/createMunicipalHospitalAdmissionsTooltip';
 import { createRegionHospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/region/createRegionHospitalAdmissionsTooltip';
-import { ContentHeaderMetadataHack } from '~/components/contentHeaderMetadataHack';
-import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-barscale';
-import { FCWithLayout } from '~/components/layout';
-import { getNationalLayout } from '~/components/layout/NationalLayout';
-import siteText from '~/locale/index';
-import getNlData, { INationalData } from '~/static-props/nl-data';
-import { formatNumber } from '~/utils/formatNumber';
 import { DataWarning } from '~/components/dataWarning';
+
+import Ziekenhuis from '~/assets/ziekenhuis.svg';
+import { formatNumber } from '~/utils/formatNumber';
 
 const text = siteText.ziekenhuisopnames_per_dag;
 
