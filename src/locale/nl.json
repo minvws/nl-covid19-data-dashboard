@@ -101,8 +101,8 @@
   "ziekenhuisopnames_per_dag": {
     "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
     "bron": {
-      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
-      "text": "RIVM"
+      "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
+      "text": "Stichting NICE"
     },
     "titel": "Ziekenhuisopnames per dag",
     "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen.\n\nLet op: Sinds 13 oktober wordt een nieuwe bron gebruikt voor de ziekenhuisopnames. Lees meer in de [cijferverantwoording](https://coronadashboard.rijksoverheid.nl/verantwoording).",
@@ -118,8 +118,8 @@
     },
     "bronnen": {
       "rivm": {
-        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
-        "text": "RIVM"
+        "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
+        "text": "Stichting NICE"
       },
       "lnaz": {
         "href": "https://lcps.nu/datafeed/",

@@ -101,8 +101,8 @@
   "ziekenhuisopnames_per_dag": {
     "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
     "bron": {
-      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
-      "text": "RIVM"
+      "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
+      "text": "NICE foundation"
     },
     "titel": "Hospital admissions per day",
     "pagina_toelichting": "Number of confirmed COVID-19 cases who are admitted to a hospital per day.\n\nPlease note: as of 13 October 2020, data on hospital admissions is obtained from a new source. For more information see the [explanation of the data presented](https://coronadashboard.government.nl/verantwoording).",
@@ -118,12 +118,12 @@
     },
     "bronnen": {
       "rivm": {
-        "href": "",
-        "text": ""
+        "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
+        "text": "NICE foundation"
       },
       "lnaz": {
-        "href": "",
-        "text": ""
+        "href": "https://lcps.nu/datafeed/",
+        "text": "LCPS"
       }
     },
     "kpi_bedbezetting": {
