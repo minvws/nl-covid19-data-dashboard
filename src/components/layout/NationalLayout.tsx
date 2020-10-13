@@ -159,7 +159,9 @@ function NationalLayout(props: WithChildren<INationalData>) {
                     />
                     <span>
                       <InfectiousPeopleBarScale
-                        data={data?.infectious_people_count_normalized}
+                        data={
+                          data.infectious_people_last_known_average?.last_value
+                        }
                         showAxis={true}
                       />
                     </span>

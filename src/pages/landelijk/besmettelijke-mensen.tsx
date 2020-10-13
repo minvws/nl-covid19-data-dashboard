@@ -21,7 +21,6 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
   const { data } = props;
 
   const count = data.infectious_people_count;
-  const countNormalized = data.infectious_people_count_normalized;
   const infectiousPeopleLastKnownEverage =
     data.infectious_people_last_known_average;
 
@@ -43,7 +42,10 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
       <div className="layout-two-column">
         <article className="metric-article column-item">
           <h3>{text.barscale_titel}</h3>
-          <InfectiousPeopleBarScale data={countNormalized} showAxis={true} />
+          <InfectiousPeopleBarScale
+            data={infectiousPeopleLastKnownEverage?.last_value}
+            showAxis={true}
+          />
 
           <p>
             {text.geen_signaalwaarde_beschikbaar}{' '}
