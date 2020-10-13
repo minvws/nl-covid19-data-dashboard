@@ -282,7 +282,7 @@
     "linechart_titel": "Totaal aantal besmette locaties over tijd",
     "barscale_screenreader_text": "{{value}} nieuwe locaties waarbij tenminste één bewoner positief getest is, per dag.",
     "chloropleth_legenda": {
-      "titel": "Aantal per 100.000 inwoners",
+      "titel": "Percentage besmette locaties",
       "geen_meldingen": "Geen meldingen"
     },
     "map_titel": "Verdeling besmette locaties in Nederland",
