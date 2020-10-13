@@ -105,9 +105,9 @@
       "text": "RIVM"
     },
     "titel": "Hospital admissions per day",
-    "pagina_toelichting": "Number of confirmed COVID-19 cases who are admitted to a hospital per day.",
+    "pagina_toelichting": "Number of confirmed COVID-19 cases who are admitted to a hospital per day.\n\nPlease note: as of 13 October 2020, data on hospital admissions is obtained from a new source. For more information see the [explanation of the data presented](https://coronadashboard.government.nl/verantwoording).",
     "barscale_titel": "Hospital admissions per day",
-    "extra_uitleg": "Number of confirmed COVID-19 cases who are admitted to a hospital per day. This number is an average for daily admissions over the past 3 days.",
+    "extra_uitleg": "Number of confirmed COVID-19 cases who are admitted to a hospital per day. This number is an average for daily admissions over the past 3 days. This number is excluding the ICU admissions (which is a [separate number](https://coronadashboard.government.nl/landelijk/intensive-care-opnames)). \n\nPlease note: despite hospitals’ best efforts, there may be some backlog when it comes to registering COVID-19 patients.",
     "map_titel": "Distribution of hospital admissions in the Netherlands",
     "map_toelichting": "These figures show the daily hospital admissions in the Netherlands.",
     "linechart_titel": "Progression in hospital admissions over time",
@@ -278,15 +278,15 @@
     "barscale_titel": "Number of new locations per day",
     "barscale_toelichting": "Number of new locations where there is at least one confirmed case. A nursing home is counted as a 'new location; when there have not been any confirmed cases for at least 28 days, which is twice the incubation period.",
     "kpi_titel": "Total number of infected locations",
-    "kpi_toelichting": "This figure is an estimate of the number of nursing homes where in the past 28 days at least one (new) COVID-19 infection (confirmed by a positive test) is reported.",
-    "linechart_titel": "Progression over time",
+    "kpi_toelichting": "This figure is an estimate of the number of nursing homes where in the past 28 days at least one (new) COVID-19 infection (confirmed by a positive test) is reported. The percentage shows what proportion of the total number of nursing homes in the Netherlands this is.",
+    "linechart_titel": "Progression over time in the total number of infected locations",
     "barscale_screenreader_text": "{{value}} new locations where there is at least one confirmed case, per day.",
     "chloropleth_legenda": {
-      "titel": "",
+      "titel": "Percentage of infected nursing homes",
       "geen_meldingen": ""
     },
     "map_titel": "",
-    "map_toelichting": "This maps shows an estimate of the number of nursing homes where in the past 28 days at least one (new) COVID-19 infection (confirmed by a positive test) is reported."
+    "map_toelichting": "This maps shows the percentage of nursing homes where in the past 28 days at least one (new) COVID-19 infection (confirmed by a positive test) is reported."
   },
   "verpleeghuis_positief_geteste_personen": {
     "datums": "Value of {{dateOfReport}}. Obtained:{{dateOfInsertion}}. Is updated on a daily basis.",
@@ -358,7 +358,7 @@
     "text": "The dashboard is still under development, so some features aren’t yet available. After each step, we take a good look to see if the information is clear and understandable for everyone. We also want it to be easy to read on all devices, and available in both Dutch and English. If you have suggestions as to how the website could be improved, you can email them to coronadashboard@minvws.nl."
   },
   "over_beschrijving": {
-    "text": "The coronavirus dashboard gives up-to-date information about COVID-19 in the Netherlands. Picking up early signs that the rate of infection is increasing allows us to act in time to stop the virus from spreading. In this way, we want to prevent a new wave of infection and hospital admissions."
+    "text": "The coronavirus dashboard gives up-to-date information about COVID-19 in the Netherlands. Picking up signs that the rate of infection is increasing allows us to act to stop the virus from spreading."
   },
   "over_veelgestelde_vragen": {
     "text": "Frequently asked questions",
@@ -438,7 +438,7 @@
       },
       {
         "cijfer": "Intensive care (ICU) admissions",
-        "verantwoording": "These figures are supplied daily as open data by [Stichting NICE](https://stichting-nice.nl/covid-19/public/new-intake/confirmed/) (the National Intensive Care Evaluation Registry). The source data refers to the previous 24 hours. The calculation of the ICU admissions is based on patients with a confirmed infection of the COVID-19 virus.\n\nFrom the source file, we calculate the average admissions over the past three days. Thus, this does not include the number for the current day. The average is obtained by adding up each day’s values (the figures for one day, two days and three days ago), dividing the total by three and rounding off the answer to one decimal place."
+        "verantwoording": "These figures are supplied daily as [open data](https://stichting-nice.nl/covid-19/public/zkh/new-intake/confirmed) by the Stichting NICE (the National Intensive Care Evaluation Registry), which is a partnership of Dutch ICUs. These figures are continually updated and once every afternoon are uploaded to the dashboard. The average number of daily hospital admissions is calculated using the figures for one day ago, two days ago and three days ago. Data for the present day is not included in this calculation, as the present day is not yet over and registration data is therefore incomplete. Although hospitals strive to register COVID-19 patients as fast as possible, there is usually some delay. As a result, the figures for the previous several days tend to be incomplete. That is why data on the dashboard is refreshed daily.\n\nPreviously, the figures on the dashboard concerning hospital admissions were provided by [open data](https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv) from RIVM, which comes from the Osiris database. However, this database suffers from significant underreporting. The NICE database is more complete and uses a broader definition of hospital admission. RIVM figures include only those patients admitted to hospital because of COVID-19, whereas NICE figures also include patients who were admitted to the hospital for another reason but also have COVID-19.\n\nNICE figures cannot currently be broken down by safety region or municipality. Data at these levels is therefore still taken from the Osiris database. Work is being done to provide NICE figures for hospital admissions at safety region and municipal levels. \n\nHospital occupancy rates (non-ICU) are obtained daily via the [LCPS](https://lcps.nu/wp-content/uploads/covid-19.csv) website."
       },
       {
         "cijfer": "Hospital admissions",
@@ -454,7 +454,7 @@
       },
       {
         "cijfer": "Nursing Homes",
-        "verantwoording": "The National Institute for Public Health and the Environment (RIVM) provides the Ministry of Health, Welfare and Sport with information about the COVID-19 situation in nursing homes every day. The data is delivered in JSON format. RIVM publishes this information on its website as a .PDF file at the same time that it is delivered to the ministry. The values in that file are copied directly onto the dashboard.\n\nThe estimation how many nursing home residents and nursing homes are infected has been improved. Since the 1st of July the GGD registers per confirmed case if the individual is a nursing home resident. Using this data is more accurate than the approach used before, where an estimation was done on the basis of the 6 character postcode of a positively tested person. This means that the data from the 1st of July onwards will show a more accurate view of the actual amount of infeced nursing homes and residents."
+        "verantwoording": "The National Institute for Public Health and the Environment (RIVM) provides the Ministry of Health, Welfare and Sport with information about the COVID-19 situation in nursing homes on a daily basis. This data cannot always be clearly linked to a specific safety region. As a result, the total sum of numbers at the safety-region level may be less than the numbers at the national level. The number of deaths of nursing home residents is based on the date of death. However, when the date of death is unknown that death is not included in this statistic in the dashboard.\n\nThe method used to estimate the numbers of nursing homes and nursing home residents infected with coronavirus has been improved. Since 1 July 2020, for every person newly infected with coronavirus, the municipal health services (GGDs) have noted whether that person lives in a nursing home. Until the end of September 2020, no use was made of this data and a different method was used to calculate infection numbers, which led to a significant overestimate of the number of infected nursing homes. As of 29 September 2020, the estimates on the dashboard from 1 July 2020 onwards have been recalculated using the this data and therefore now give a much better picture of the actual number of infected nursing homes and nursing home residents.\n\nOld definition of a nursing home resident: A person was counted as a nursing home resident if, according to the central database OSIRIS: on the basis of their postcode, they can be linked to a registered nursing home or residential care home for the elderly, a setting (place where infection may have occurred) labelled as a ‘nursing home’ or something similar, or if there is any other term that links them in the database to a nursing home or residential care home for the elderly. In addition, the person:\n- must be over 70 years old\n- must not be a health worker, and\n- must not be employed.\n\nNew definition of a nursing home resident: As of 1 July 2020, every time a person tests positive for COVID-19, the GGD asks whether that person is a resident of a nursing home or residential care home for the elderly. This information is used in the new definition. A person is considered to be a nursing home resident if, according to the data in OSIRIS:\n- This person is a resident of a nursing home or a residential care home for the elderly.\n- If it is not known whether the person lives in a nursing home or residential care home for the elderly, the old definition is used.\n\nThe total number of nursing homes per safety region is provided by RIVM. Any nursing homes with the same postcode are counted as one nursing home. This is because the number of infected nursing homes is also determined by postcode. It is necessary to know the total number of nursing homes per safety region in order to calculate what percentage of nursing homes in the safety region is infected. The total number of nursing homes nationwide is the sum of the total number of nursing homes in all safety regions."
       },
       {
         "cijfer": "",
@@ -850,8 +850,8 @@
     "barscale_titel": "Number of new locations per day",
     "barscale_toelichting": "Number of new locations where there is at least one confirmed case. A nursing home is counted as a 'new location; when there have not been any confirmed cases for at least 28 days, which is twice the incubation period.",
     "kpi_titel": "Total number of infected locations",
-    "kpi_toelichting": "This figure is an estimate of the number of nursing homes where in the past 28 days at least one (new) COVID-19 infection (confirmed by a positive test) is reported.",
-    "linechart_titel": "Progression over time",
+    "kpi_toelichting": "This figure is an estimate of the number of nursing homes where in the past 28 days at least one (new) COVID-19 infection (confirmed by a positive test) is reported. The percentage shows what proportion of the total number of nursing homes in this safety region this is.",
+    "linechart_titel": "Progression over time in the total number of infected locations",
     "barscale_screenreader_text": "{{value}} new locations where there is at least one confirmed case, per day."
   },
   "veiligheidsregio_verpleeghuis_positief_geteste_personen": {
