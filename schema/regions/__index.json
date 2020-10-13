@@ -1,0 +1,70 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "regions",
+  "additionalProperties": false,
+  "required": [
+    "last_generated",
+    "proto_name",
+    "name",
+    "code",
+    "escalation_levels",
+    "hospital_admissions",
+    "positive_tested_people",
+    "deceased",
+    "nursing_home"
+  ],
+  "properties": {
+    "last_generated": {
+      "type": "string"
+    },
+    "proto_name": {
+      "type": "string",
+      "enum": ["REGIONS"]
+    },
+    "name": {
+      "type": "string",
+      "enum": ["REGIONS"]
+    },
+    "code": {
+      "type": "string",
+      "enum": ["REGIONS"]
+    },
+    "hospital_admissions": {
+      "type": "array",
+      "maxItems": 25,
+      "items": {
+        "$ref": "hospital_admissions.json"
+      }
+    },
+    "positive_tested_people": {
+      "type": "array",
+      "maxItems": 25,
+      "items": {
+        "$ref": "positive_tested_people.json"
+      }
+    },
+    "deceased": {
+      "type": "array",
+      "maxItems": 25,
+      "items": {
+        "$ref": "deceased.json"
+      }
+    },
+    "escalation_levels": {
+      "type": "array",
+      "minItems": 25,
+      "maxItems": 25,
+      "items": {
+        "$ref": "escalation_levels.json"
+      }
+    },
+    "nursing_home": {
+      "type": "array",
+      "maxItems": 25,
+      "items": {
+        "$ref": "nursing_home.json"
+      }
+    }
+  }
+}

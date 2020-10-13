@@ -10,7 +10,7 @@ import { getFilteredValues } from '~/components/chartTimeControls/chartTimeContr
 
 import styles from './lineChart.module.scss';
 import { formatNumber } from '~/utils/formatNumber';
-import { formatDate } from '~/utils/formatDate';
+import { formatDateFromSeconds } from '~/utils/formatDate';
 import { getItemFromArray } from '~/utils/getItemFromArray';
 
 interface Value {
@@ -100,12 +100,12 @@ function getOptions(values: Value[]): Highcharts.Options {
       categories: values.map((value) => value?.date.toString()),
       labels: {
         align: 'right',
-        // types say `rotation` needs to be a number,
+        // type definition says `rotation` needs to be a number,
         // but that doesn’t work.
         rotation: '0' as any,
         formatter: function () {
           return this.isFirst || this.isLast
-            ? formatDate(this.value, 'axis')
+            ? formatDateFromSeconds(this.value, 'axis')
             : '';
         },
       },
@@ -120,10 +120,12 @@ function getOptions(values: Value[]): Highcharts.Options {
           this.point.index
         );
 
-        return `<strong>${formatDate(start, 'short')} - ${formatDate(
-          end,
+        return `<strong>${formatDateFromSeconds(
+          start,
           'short'
-        )}:</strong> ${formatNumber(this.y)}`;
+        )} - ${formatDateFromSeconds(end, 'short')}:</strong> ${formatNumber(
+          this.y
+        )}`;
       },
     },
     yAxis: {
@@ -137,7 +139,6 @@ function getOptions(values: Value[]): Highcharts.Options {
       },
       labels: {
         formatter: function (): string {
-          // @ts-ignore
           return formatNumber(this.value);
         },
       },

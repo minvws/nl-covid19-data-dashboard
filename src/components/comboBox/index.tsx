@@ -1,18 +1,17 @@
-import { useState, useMemo, useEffect, useRef } from 'react';
-import { useRouter } from 'next/router';
-import matchSorter from 'match-sorter';
 import {
   Combobox,
   ComboboxInput,
-  ComboboxPopover,
   ComboboxList,
   ComboboxOption,
+  ComboboxPopover,
 } from '@reach/combobox';
-
-import { useThrottle } from '~/utils/useThrottle';
-
+import { assert } from '~/utils/assert';
+import matchSorter from 'match-sorter';
+import { useRouter } from 'next/router';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import text from '~/locale/index';
 import { useMediaQuery } from '~/utils/useMediaQuery';
+import { useThrottle } from '~/utils/useThrottle';
 
 type TOption = {
   displayName?: string;
@@ -22,13 +21,13 @@ type TOption = {
 type TProps<Option extends TOption> = {
   options: Option[];
   placeholder: string;
-  handleSelect: (option: Option) => void;
+  onSelect: (option: Option) => void;
 };
 
 /*
- * Combox is an accessible dropdown with search.
+ * Combobox is an accessible dropdown with search.
  *
- * @param options - Options to render. Needs to atleast contain a key `name` with a string as value.
+ * @param options - Options to render. Needs to at least contain a key `name` with a string as value.
  * @param handleSelect - Callback when an option has been selected
  *
  * ComboBox accept a generic type which extends `TOption` ({name: string}).
@@ -41,22 +40,21 @@ type TProps<Option extends TOption> = {
  * ```
  */
 export function ComboBox<Option extends TOption>(props: TProps<Option>) {
-  const { options, placeholder, handleSelect } = props;
+  const { options, placeholder } = props;
 
   const router = useRouter();
+  const { code } = router.query;
   const inputRef = useRef<HTMLInputElement>();
-  const [term, setTerm] = useState<string>('');
-  const results = useSearchedOptions<Option>(term, options);
+  const [inputValue, setInputValue] = useState<string>('');
+  const results = useSearchedOptions<Option>(inputValue, options);
   const isLargeScreen = useMediaQuery('(min-width: 1000px)');
-  const hasRegionSelected =
-    router.pathname === '/gemeente/[code]/positief-geteste-mensen' ||
-    router.pathname === '/veiligheidsregio/[code]/positief-geteste-mensen';
+  const hasRegionSelected = !!code;
 
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>): void {
-    setTerm(event.target.value);
+  function handleInputChange(event: React.ChangeEvent<HTMLInputElement>): void {
+    setInputValue(event.target.value);
   }
 
-  function onSelect(name: string): void {
+  function handleSelect(name: string): void {
     if (!name) {
       return;
     }
@@ -65,27 +63,34 @@ export function ComboBox<Option extends TOption>(props: TProps<Option>) {
       (option) => option.name === name || option.displayName === name
     );
 
-    inputRef?.current?.blur();
+    assert(option, `Failed to find option for name ${name}`);
 
-    handleSelect(option as Option);
+    props.onSelect(option);
+
+    /**
+     * If blur gets called immediately it does not work for some reason.
+     */
+    setTimeout(() => {
+      inputRef.current?.blur();
+    }, 1);
   }
 
   useEffect(() => {
-    if (!inputRef?.current?.value && isLargeScreen && !hasRegionSelected) {
-      inputRef?.current?.focus();
+    if (!inputRef.current?.value && isLargeScreen && !hasRegionSelected) {
+      inputRef.current?.focus();
     }
   }, [isLargeScreen, hasRegionSelected]);
 
   return (
-    <Combobox openOnFocus onSelect={onSelect}>
+    <Combobox openOnFocus onSelect={handleSelect}>
       <ComboboxInput
         ref={inputRef}
-        onChange={handleChange}
+        onChange={handleInputChange}
         placeholder={placeholder}
       />
       <ComboboxPopover>
         {results.length > 0 ? (
-          <ComboboxList>
+          <ComboboxList persistSelection>
             {results.map((option) => (
               <ComboboxOption
                 key={option.name}
@@ -105,13 +110,13 @@ function useSearchedOptions<Option extends TOption>(
   term: string,
   options: Option[]
 ): Option[] {
-  const throttledTerm = useThrottle<string>(term, 100);
+  const throttledTerm = useThrottle(term, 100);
   const sortByName = (a: Option, b: Option) => a.name.localeCompare(b.name);
 
   return useMemo(() => {
     if (throttledTerm.trim() === '') return options.sort(sortByName);
 
-    return matchSorter(options, throttledTerm, {
+    return matchSorter(options, throttledTerm.trim(), {
       keys: [(item: Option) => item.name, 'searchTerms', 'displayName'],
     });
   }, [throttledTerm, options]);

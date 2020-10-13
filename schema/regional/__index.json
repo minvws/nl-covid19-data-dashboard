@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "regionaal",
+  "required": [
+    "last_generated",
+    "proto_name",
+    "name",
+    "code",
+    "results_per_sewer_installation_per_region",
+    "average_sewer_installation_per_region",
+    "results_per_region",
+    "ggd",
+    "nursing_home"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "last_generated": {
+      "type": "string"
+    },
+    "proto_name": {
+      "type": "string",
+      "pattern": "^VR[0-9]+$"
+    },
+    "name": {
+      "type": "string",
+      "pattern": "^VR[0-9]+$"
+    },
+    "code": {
+      "type": "string",
+      "pattern": "^VR[0-9]+$"
+    },
+    "results_per_sewer_installation_per_region": {
+      "$ref": "results_per_sewer_installation_per_region.json"
+    },
+    "average_sewer_installation_per_region": {
+      "$ref": "average_sewer_installation_per_region.json"
+    },
+    "results_per_region": {
+      "$ref": "results_per_region.json"
+    },
+    "ggd": {
+      "$ref": "ggd.json"
+    },
+    "nursing_home": {
+      "$ref": "nursing_home.json"
+    }
+  }
+}

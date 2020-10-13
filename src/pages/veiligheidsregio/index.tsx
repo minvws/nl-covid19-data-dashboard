@@ -9,18 +9,17 @@ import EscalationLevel2 from '~/assets/niveau-2.svg';
 import EscalationLevel3 from '~/assets/niveau-3.svg';
 import styles from '~/components/chloropleth/tooltips/tooltip.module.scss';
 
-import siteText from '~/locale/index';
+import { TALLLanguages } from '~/locale/index';
 import { MDToHTMLString } from '~/utils/MDToHTMLString';
 
-import {
-  SafetyRegionChloropleth,
-  thresholds,
-} from '~/components/chloropleth/SafetyRegionChloropleth';
-import { useMediaQuery } from '~/utils/useMediaQuery';
+import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
 import { escalationTooltip } from '~/components/chloropleth/tooltips/region/escalationTooltip';
 import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
+import { regionThresholds } from '~/components/chloropleth/regionThresholds';
+import { ChoroplethThresholds } from '~/components/chloropleth/shared';
 
-const escalationThresholds = thresholds.escalation_levels.thresholds;
+const escalationThresholds = (regionThresholds.escalation_levels as ChoroplethThresholds)
+  .thresholds;
 
 export const EscalationMapLegenda = (props: any) => {
   const { text } = props;
@@ -58,11 +57,8 @@ export const EscalationMapLegenda = (props: any) => {
 // lots of unnecessary null checks on those pages.
 const SafetyRegion: FCWithLayout<any> = (props) => {
   const router = useRouter();
-  const isLargeScreen = useMediaQuery('(min-width: 1000px)');
 
   const { text } = props;
-
-  const mapHeight = isLargeScreen ? '500px' : '400px';
 
   return (
     <article className="index-article layout-chloropleth">
@@ -82,8 +78,7 @@ const SafetyRegion: FCWithLayout<any> = (props) => {
       <div className="chloropleth-chart">
         <SafetyRegionChloropleth
           metricName="escalation_levels"
-          metricProperty="escalation_level"
-          style={{ height: mapHeight }}
+          metricValueName="escalation_level"
           onSelect={createSelectRegionHandler(router)}
           tooltipContent={escalationTooltip(router)}
         />
@@ -100,7 +95,7 @@ SafetyRegion.getLayout = getSafetyRegionLayout();
 
 interface StaticProps {
   props: {
-    text: typeof siteText;
+    text: TALLLanguages;
     lastGenerated: string;
   };
 }

@@ -7,7 +7,6 @@ import { WithChildren } from '~/types/index';
 import municipalities from '~/data/gemeente_veiligheidsregio.json';
 import { IMunicipalityData } from '~/static-props/municipality-data';
 
-import { getLocalTitleForMunicipality } from '~/utils/getLocalTitleForCode';
 import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMunicipalityCode';
 import { getSewerWaterBarScaleData } from '~/utils/sewer-water/municipality-sewer-water.util';
 import { useMediaQuery } from '~/utils/useMediaQuery';
@@ -64,7 +63,7 @@ export function getMunicipalityLayout() {
  * https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
 function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
-  const { children, data } = props;
+  const { children, data, municipalityName } = props;
   const router = useRouter();
   const isLargeScreen = useMediaQuery('(min-width: 1000px)');
 
@@ -127,19 +126,14 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
         <aside className="municipality-aside">
           <ComboBox<IMunicipality>
             placeholder={siteText.common.zoekveld_placeholder_gemeente}
-            handleSelect={handleMunicipalitySelect}
+            onSelect={handleMunicipalitySelect}
             options={municipalities}
           />
 
           {showMetricLinks && (
             <nav aria-label="metric navigation">
               <div className="region-names">
-                <h2>
-                  {getLocalTitleForMunicipality(
-                    '{{municipality}}',
-                    code as string
-                  )}
-                </h2>
+                <h2>{municipalityName}</h2>
                 {safetyRegion && (
                   <p>
                     {siteText.common.veiligheidsregio_label}{' '}
@@ -260,6 +254,13 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
         </aside>
 
         <section className="municipality-content">{children}</section>
+
+        <Link href="/gemeente/[code]" as={`/gemeente/${code}`}>
+          <a className="back-button back-button-footer" onClick={openMenu}>
+            <Arrow />
+            {siteText.nav.terug_naar_alle_cijfers}
+          </a>
+        </Link>
       </div>
     </>
   );

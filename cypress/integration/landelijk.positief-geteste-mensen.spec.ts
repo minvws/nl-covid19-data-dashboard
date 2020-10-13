@@ -1,5 +1,4 @@
 import { Context } from 'mocha';
-import { runInContext } from 'node_modules/cypress/types/lodash/index';
 /// <reference types="cypress" />
 
 import { National } from '../../src/types/data';

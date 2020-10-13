@@ -3,8 +3,7 @@ import { BarScale } from '~/components/barScale';
 import { IntakeHospitalMa } from '~/types/data.d';
 import siteText from '~/locale/index';
 
-const text: typeof siteText.ziekenhuisopnames_per_dag =
-  siteText.ziekenhuisopnames_per_dag;
+const text = siteText.ziekenhuisopnames_per_dag;
 
 export function IntakeHospitalBarScale(props: {
   data: IntakeHospitalMa | undefined;

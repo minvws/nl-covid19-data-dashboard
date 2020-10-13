@@ -8,6 +8,7 @@ import { sortRegionalTimeSeriesInDataInPlace } from './data-sorting';
 
 export interface ISafetyRegionData {
   data: Regionaal;
+  safetyRegionName: string;
   lastGenerated: string;
 }
 
@@ -61,9 +62,13 @@ export function getSafetyRegionData() {
 
     const lastGenerated = data.last_generated;
 
+    const safetyRegionName =
+      safetyRegions.find((r) => r.code === code)?.name || '';
+
     return {
       props: {
-        data: data,
+        data,
+        safetyRegionName,
         lastGenerated,
       },
     };

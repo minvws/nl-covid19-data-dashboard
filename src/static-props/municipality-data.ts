@@ -75,7 +75,7 @@ export function getMunicipalityData() {
 
 /*
  * getMunicipalityPaths creates an array of all the allowed
- * `/veiligheidsregio/[code]` routes. This should be used
+ * `/gemeente/[code]` routes. This should be used
  * together with `getMunicipalityData`.
  */
 export function getMunicipalityPaths(): () => IPaths {

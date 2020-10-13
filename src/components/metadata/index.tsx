@@ -6,7 +6,7 @@ import ClockIcon from '~/assets/clock.svg';
 import DatabaseIcon from '~/assets/database.svg';
 
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { formatDate } from '~/utils/formatDate';
+import { formatDateFromSeconds } from '~/utils/formatDate';
 
 interface IProps {
   dataSource: {
@@ -18,16 +18,16 @@ interface IProps {
   datumsText: string;
 }
 
-const text: typeof siteText.common.metadata = siteText.common.metadata;
+const text = siteText.common.metadata;
 
 export function Metadata(props: IProps) {
   const { dataSource, datumsText, dateUnix, dateInsertedUnix } = props;
 
   if (!dateUnix) return null;
 
-  const dateOfReport = formatDate(dateUnix, 'relative');
+  const dateOfReport = formatDateFromSeconds(dateUnix, 'relative');
   const dateOfInsertion = dateInsertedUnix
-    ? formatDate(dateInsertedUnix, 'relative')
+    ? formatDateFromSeconds(dateInsertedUnix, 'relative')
     : undefined;
 
   return (
@@ -50,7 +50,7 @@ export function Metadata(props: IProps) {
         </span>
         <p>
           {text.source}:{' '}
-          <a href={dataSource.href} rel="noopener noreferrer">
+          <a href={dataSource.href} rel="noopener noreferrer" target="_blank">
             {dataSource.text}
           </a>
         </p>

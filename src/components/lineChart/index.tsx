@@ -10,7 +10,7 @@ import {
 } from '~/components/chartTimeControls';
 
 import { formatNumber } from '~/utils/formatNumber';
-import { formatDate } from '~/utils/formatDate';
+import { formatDateFromSeconds } from '~/utils/formatDate';
 import { getFilteredValues } from '~/components/chartTimeControls/chartTimeControlUtils';
 import { isDefined } from 'ts-is-present';
 
@@ -19,7 +19,7 @@ type Value = {
   value?: number;
 };
 
-const SIGNAALWAARDE_Z_INDEX = 10;
+const SIGNAALWAARDE_Z_INDEX = 5;
 
 interface LineChartProps {
   title: string;
@@ -65,7 +65,7 @@ function getChartOptions(values: Value[], signaalwaarde?: number) {
         rotation: '0' as any,
         formatter: function () {
           return this.isFirst || this.isLast
-            ? formatDate(this.value, 'axis')
+            ? formatDateFromSeconds(this.value, 'axis')
             : '';
         },
       },
@@ -75,7 +75,7 @@ function getChartOptions(values: Value[], signaalwaarde?: number) {
       borderColor: '#01689B',
       borderRadius: 0,
       formatter: function (): string {
-        return `${formatDate(this.x)}: ${formatNumber(this.y)}`;
+        return `${formatDateFromSeconds(this.x)}: ${formatNumber(this.y)}`;
       },
     },
     yAxis: {
@@ -219,5 +219,6 @@ function calculateYMax(values: Value[], signaalwaarde = -Infinity) {
     .filter(isDefined)
     .reduce((acc, value) => (value > acc ? value : acc), -Infinity);
 
-  return Math.max(maxValue, signaalwaarde + 10);
+  // Value cannot be 0, hence the 1
+  return Math.max(maxValue, signaalwaarde + 10, 1);
 }

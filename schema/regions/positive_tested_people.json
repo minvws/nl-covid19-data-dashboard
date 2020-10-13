@@ -20,6 +20,9 @@
     "positive_tested_people": {
       "type": "number"
     },
+    "total_positive_tested_people": {
+      "type": "integer"
+    },
     "date_of_insertion_unix": {
       "type": "integer"
     }
