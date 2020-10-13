@@ -120,6 +120,7 @@ export interface National {
   intake_share_age_groups: IntakeShareAgeGroups;
   reproduction_index: ReproductionIndex;
   reproduction_index_last_known_average: ReproductionIndexLastKnownAverage;
+  infectious_people_last_known_average?: InfectiousPeopleLastKnownAverage;
   rioolwater_metingen: RioolwaterMetingen;
   rioolwater_metingen_per_rwzi: RioolwaterMetingenPerRwzi;
   hospital_beds_occupied: HospitalBedsOccupied;
@@ -298,6 +299,17 @@ export interface ReproductionIndexLastKnownAverageLastValue {
   reproduction_index_low: number;
   reproduction_index_avg: number;
   reproduction_index_high: number;
+  date_of_report_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface InfectiousPeopleLastKnownAverage {
+  values: InfectiousPeopleLastKnownAverageValue[];
+  last_value: InfectiousPeopleLastKnownAverageValue;
+}
+export interface InfectiousPeopleLastKnownAverageValue {
+  infectious_people_low: number;
+  infectious_people_avg: number;
+  infectious_people_high: number;
   date_of_report_unix: number;
   date_of_insertion_unix: number;
 }
