@@ -11,23 +11,23 @@ import siteText from '~/locale/index';
 
 import { InfectedPeopleNurseryCountDaily } from '~/types/data.d';
 import getNlData, { INationalData } from '~/static-props/nl-data';
-import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
-import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
-import { useRouter } from 'next/router';
-import { createPositiveTestedPeopleRegionalTooltip } from '~/components/chloropleth/tooltips/region/createPositiveTestedPeopleRegionalTooltip';
-import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
-import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
+// import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
+// import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
+// import { useRouter } from 'next/router';
+// import { createPositiveTestedPeopleRegionalTooltip } from '~/components/chloropleth/tooltips/region/createPositiveTestedPeopleRegionalTooltip';
+// import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
+// import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
 
 const text = siteText.verpleeghuis_positief_geteste_personen;
 
 const NursingHomeInfectedPeople: FCWithLayout<INationalData> = (props) => {
   const { data: state } = props;
-  const router = useRouter();
+  // const router = useRouter();
 
-  const legendItems = useSafetyRegionLegendaData(
-    'nursing_home',
-    'newly_infected_people'
-  );
+  // const legendItems = useSafetyRegionLegendaData(
+  //   'nursing_home',
+  //   'newly_infected_people'
+  // );
 
   const data: InfectedPeopleNurseryCountDaily | undefined =
     state?.infected_people_nursery_count_daily;
@@ -62,41 +62,34 @@ const NursingHomeInfectedPeople: FCWithLayout<INationalData> = (props) => {
         </div>
       </article>
 
-      {
-        /**
-         * Re-enable this later
-         */
-        false && (
-          <article className="metric-article layout-chloropleth">
-            <div className="chloropleth-header">
-              <h3>{text.map_titel}</h3>
-              <p>{text.map_toelichting}</p>
-            </div>
+      {/*
+        <article className="metric-article layout-chloropleth">
+          <div className="chloropleth-header">
+            <h3>{text.map_titel}</h3>
+            <p>{text.map_toelichting}</p>
+          </div>
 
-            <div className="chloropleth-chart">
-              <SafetyRegionChloropleth
-                metricName="positive_tested_people"
-                tooltipContent={createPositiveTestedPeopleRegionalTooltip(
-                  router
-                )}
-                onSelect={createSelectRegionHandler(
-                  router,
-                  'verpleeghuis-positief-geteste-personen'
-                )}
-              />
-            </div>
-
-            <div className="chloropleth-legend">
-              {legendItems && (
-                <ChloroplethLegenda
-                  items={legendItems}
-                  title={text.chloropleth_legenda.titel}
-                />
+          <div className="chloropleth-chart">
+            <SafetyRegionChloropleth
+              metricName="positive_tested_people"
+              tooltipContent={createPositiveTestedPeopleRegionalTooltip(router)}
+              onSelect={createSelectRegionHandler(
+                router,
+                'verpleeghuis-positief-geteste-personen'
               )}
-            </div>
-          </article>
-        )
-      }
+            />
+          </div>
+
+          <div className="chloropleth-legend">
+            {legendItems ? (
+              <ChloroplethLegenda
+                items={legendItems}
+                title={text.chloropleth_legenda.titel}
+              />
+            ) : null}
+          </div>
+        </article>
+     */}
 
       {data && (
         <article className="metric-article">
