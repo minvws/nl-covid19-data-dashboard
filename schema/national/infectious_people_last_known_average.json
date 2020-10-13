@@ -5,20 +5,20 @@
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "infectious_people_low",
-        "infectious_people_avg",
-        "infectious_people_high",
+        "infectious_low",
+        "infectious_avg",
+        "infectious_high",
         "date_of_report_unix",
         "date_of_insertion_unix"
       ],
       "properties": {
-        "infectious_people_low": {
+        "infectious_low": {
           "type": "number"
         },
-        "infectious_people_avg": {
+        "infectious_avg": {
           "type": "number"
         },
-        "infectious_people_high": {
+        "infectious_high": {
           "type": "number"
         },
         "date_of_report_unix": {

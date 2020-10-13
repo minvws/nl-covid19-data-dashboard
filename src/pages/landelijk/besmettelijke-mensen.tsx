@@ -62,8 +62,7 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
             {count && (
               <span className="text-blue kpi">
                 {formatNumber(
-                  infectiousPeopleLastKnownEverage?.last_value
-                    .infectious_people_avg
+                  infectiousPeopleLastKnownEverage?.last_value.infectious_avg
                 )}
               </span>
             )}

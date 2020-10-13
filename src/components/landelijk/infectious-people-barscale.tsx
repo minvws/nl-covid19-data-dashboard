@@ -18,7 +18,7 @@ export function InfectiousPeopleBarScale(props: {
       min={0}
       max={80}
       screenReaderText={text.barscale_screenreader_text}
-      value={data.infectious_people_avg}
+      value={data.infectious_avg}
       id="besmettelijk"
       rangeKey="infectious_normalized_high"
       gradient={[

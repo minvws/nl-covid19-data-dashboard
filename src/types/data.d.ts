@@ -307,9 +307,9 @@ export interface InfectiousPeopleLastKnownAverage {
   last_value: InfectiousPeopleLastKnownAverageValue;
 }
 export interface InfectiousPeopleLastKnownAverageValue {
-  infectious_people_low: number;
-  infectious_people_avg: number;
-  infectious_people_high: number;
+  infectious_low: number;
+  infectious_avg: number;
+  infectious_high: number;
   date_of_report_unix: number;
   date_of_insertion_unix: number;
 }
