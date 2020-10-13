@@ -9,6 +9,7 @@ import styles from '../tooltip.module.scss';
 import EscalationLevel1 from '~/assets/niveau-1.svg';
 import EscalationLevel2 from '~/assets/niveau-2.svg';
 import EscalationLevel3 from '~/assets/niveau-3.svg';
+import EscalationLevel4 from '~/assets/niveau-4.svg';
 
 import { TooltipContent } from '~/components/chloropleth/tooltips/tooltipContent';
 import { regionThresholds } from '~/components/chloropleth/regionThresholds';
@@ -47,6 +48,9 @@ export const escalationTooltip = (router: NextRouter) => {
               )}
               {thresholdInfo.threshold === 3 && (
                 <EscalationLevel3 color={thresholdInfo.color} />
+              )}
+              {thresholdInfo.threshold === 4 && (
+                <EscalationLevel4 color={thresholdInfo.color} />
               )}
             </div>
             <div>

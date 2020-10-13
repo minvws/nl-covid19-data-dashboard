@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import EscalationLevel1 from '~/assets/niveau-1.svg';
 import EscalationLevel2 from '~/assets/niveau-2.svg';
 import EscalationLevel3 from '~/assets/niveau-3.svg';
+import EscalationLevel4 from '~/assets/niveau-4.svg';
 import styles from '~/components/chloropleth/tooltips/tooltip.module.scss';
 
 import { TALLLanguages } from '~/locale/index';
@@ -36,6 +37,7 @@ export const EscalationMapLegenda = (props: any) => {
             {info.threshold === 1 && <EscalationLevel1 color={info?.color} />}
             {info.threshold === 2 && <EscalationLevel2 color={info?.color} />}
             {info.threshold === 3 && <EscalationLevel3 color={info?.color} />}
+            {info.threshold === 4 && <EscalationLevel4 color={info?.color} />}
           </div>
           <div className={styles.escalationTextLegenda}>
             {

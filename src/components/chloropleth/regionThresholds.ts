@@ -66,12 +66,16 @@ const escalationThresholds: ChoroplethThresholds = {
       threshold: 1,
     },
     {
-      color: '#D95790',
+      color: '#DB5C94',
       threshold: 2,
     },
     {
-      color: '#A11050',
+      color: '#BC2166',
       threshold: 3,
+    },
+    {
+      color: '#68032F',
+      threshold: 4,
     },
   ],
 };
