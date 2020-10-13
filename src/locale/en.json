@@ -874,5 +874,5 @@
     "map_titel": "Confirmed cases in the Netherlands",
     "map_toelichting": "These maps show the number of confirmed cases per 100.000 residents."
   },
-  "data_warning_text": ""
+  "data_warning_text": "Please note: this information is not as recent as the information for the national level. We're working on a resolution. For more information, see the page \"explanation of the data presented\"."
 }
