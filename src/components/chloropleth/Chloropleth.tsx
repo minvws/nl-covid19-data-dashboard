@@ -36,13 +36,13 @@ export type TProps<TFeatureProperties> = {
   // be colored in as part of the chloropleth
   featureCollection: FeatureCollection<MultiPolygon, TFeatureProperties>;
   // These are features that are used as an overlay, overlays have no interactions
-  // they are simply there to beautify the map or emphasise certain parts.
+  // they are simply there to beautify the map or emphasize certain parts.
   overlays: FeatureCollection<MultiPolygon>;
   // These are features that are used as as the hover features, these are
   // typically activated when the user mouse overs them.
   hovers?: FeatureCollection<MultiPolygon, TFeatureProperties>;
-  // The boundingbox is calculated based on these features, this can be used to
-  // zoom in on a specific part of the map upon initialisation.
+  // The bounding box is calculated based on these features, this can be used to
+  // zoom in on a specific part of the map upon initialization.
   boundingBox: FeatureCollection<MultiPolygon>;
   // Height, width, etc
   dimensions: TCombinedChartDimensions;

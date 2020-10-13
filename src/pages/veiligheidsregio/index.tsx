@@ -1,27 +1,29 @@
-import path from 'path';
 import fs from 'fs';
-
-import { FCWithLayout } from '~/components/layout';
-import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { useRouter } from 'next/router';
+import path from 'path';
 import EscalationLevel1 from '~/assets/niveau-1.svg';
 import EscalationLevel2 from '~/assets/niveau-2.svg';
 import EscalationLevel3 from '~/assets/niveau-3.svg';
+import EscalationLevel4 from '~/assets/niveau-4.svg';
+import { regionThresholds } from '~/components/chloropleth/regionThresholds';
+import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
+import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
+import { ChoroplethThresholds } from '~/components/chloropleth/shared';
+import { escalationTooltip } from '~/components/chloropleth/tooltips/region/escalationTooltip';
 import styles from '~/components/chloropleth/tooltips/tooltip.module.scss';
-
+import { FCWithLayout } from '~/components/layout';
+import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { TALLLanguages } from '~/locale/index';
 import { MDToHTMLString } from '~/utils/MDToHTMLString';
-
-import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
-import { escalationTooltip } from '~/components/chloropleth/tooltips/region/escalationTooltip';
-import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
-import { regionThresholds } from '~/components/chloropleth/regionThresholds';
-import { ChoroplethThresholds } from '~/components/chloropleth/shared';
 
 const escalationThresholds = (regionThresholds.escalation_levels as ChoroplethThresholds)
   .thresholds;
 
-export const EscalationMapLegenda = (props: any) => {
+interface EscalationMapLegendaProps {
+  text: TALLLanguages;
+}
+
+export const EscalationMapLegenda = (props: EscalationMapLegendaProps) => {
   const { text } = props;
 
   return (
@@ -36,12 +38,10 @@ export const EscalationMapLegenda = (props: any) => {
             {info.threshold === 1 && <EscalationLevel1 color={info?.color} />}
             {info.threshold === 2 && <EscalationLevel2 color={info?.color} />}
             {info.threshold === 3 && <EscalationLevel3 color={info?.color} />}
+            {info.threshold === 4 && <EscalationLevel4 color={info?.color} />}
           </div>
           <div className={styles.escalationTextLegenda}>
-            {
-              (text.escalatie_niveau.types as any)[info.threshold.toString()]
-                .titel
-            }
+            {text.escalatie_niveau.types[info.threshold as 1 | 2 | 3 | 4].titel}
           </div>
         </div>
       ))}
@@ -55,6 +55,7 @@ export const EscalationMapLegenda = (props: any) => {
 // All other pages which use `getSafetyRegionLayout` can assume
 // the data is always there. Making the data optional would mean
 // lots of unnecessary null checks on those pages.
+
 const SafetyRegion: FCWithLayout<any> = (props) => {
   const router = useRouter();
 
@@ -94,13 +95,11 @@ const SafetyRegion: FCWithLayout<any> = (props) => {
 SafetyRegion.getLayout = getSafetyRegionLayout();
 
 interface StaticProps {
-  props: {
-    text: TALLLanguages;
-    lastGenerated: string;
-  };
+  text: TALLLanguages;
+  lastGenerated: string;
 }
 
-export async function getStaticProps(): Promise<StaticProps> {
+export async function getStaticProps(): Promise<{ props: StaticProps }> {
   const text = require('../../locale/index').default;
 
   const serializedContent = MDToHTMLString(

@@ -89,7 +89,7 @@ export interface PositiveTestedPeople {
   date_of_report_unix: number;
   gmcode: string;
   positive_tested_people: number;
-  total_positive_tested_people: number;
+  total_positive_tested_people?: number;
   date_of_insertion_unix: number;
 }
 export interface Deceased {

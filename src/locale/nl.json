@@ -775,6 +775,10 @@
       "3": {
         "titel": "Ernstig",
         "toelichting": ""
+      },
+      "4": {
+        "titel": "Zeer Ernstig",
+        "toelichting": ""
       }
     },
     "legenda": {
