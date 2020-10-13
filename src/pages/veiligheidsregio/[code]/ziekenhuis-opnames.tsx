@@ -81,6 +81,9 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
         </article>
       )}
       <article className="metric-article layout-chloropleth">
+        <div className="data-warning">
+          <DataWarning />
+        </div>
         <div className="chloropleth-header">
           <h3>
             {replaceVariablesInText(text.map_titel, {
