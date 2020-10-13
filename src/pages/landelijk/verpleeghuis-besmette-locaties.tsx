@@ -36,7 +36,7 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
   const router = useRouter();
   const legendItems = useSafetyRegionLegendaData(
     'nursing_home',
-    'infected_locations_total'
+    'infected_locations_percentage'
   );
 
   return (
@@ -105,7 +105,7 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
         <div className="chloropleth-chart">
           <SafetyRegionChloropleth
             metricName="nursing_home"
-            metricValueName="infected_locations_total"
+            metricValueName="infected_locations_percentage"
             tooltipContent={createInfectedLocationsRegionalTooltip(router)}
             onSelect={createSelectRegionHandler(
               router,

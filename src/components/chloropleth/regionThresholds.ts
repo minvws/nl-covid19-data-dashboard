@@ -109,6 +109,31 @@ const nursingHomeThresholds: ChoroplethThresholds = {
   ],
 };
 
+const nursingHomeInfectedLocationsPercentageThresholds: ChoroplethThresholds = {
+  thresholds: [
+    {
+      color: '#c0e8fc',
+      threshold: 0,
+    },
+    {
+      color: '#87cbf8',
+      threshold: 10,
+    },
+    {
+      color: '#5dafe4',
+      threshold: 20,
+    },
+    {
+      color: '#3391cc',
+      threshold: 30,
+    },
+    {
+      color: '#0579b3',
+      threshold: 40,
+    },
+  ],
+};
+
 export const regionThresholds: Record<
   TRegionMetricName,
   | ChoroplethThresholds
@@ -118,7 +143,7 @@ export const regionThresholds: Record<
   hospital_admissions: hospitalAdmissionsThresholds,
   escalation_levels: escalationThresholds,
   nursing_home: {
-    infected_locations_total: nursingHomeThresholds,
+    infected_locations_percentage: nursingHomeInfectedLocationsPercentageThresholds,
     newly_infected_people: nursingHomeThresholds,
   } as Record<Partial<TRegionsNursingHomeMetricName>, ChoroplethThresholds>,
 };
