@@ -20,11 +20,9 @@ export const createInfectedLocationsRegionalTooltip = (router: NextRouter) => (
     context && (
       <TooltipContent title={context.vrname} onSelect={onSelect}>
         <strong>
-          {`${
-            context.infected_locations_total !== undefined
-              ? context.infected_locations_total
-              : '-'
-          } (${formatNumber(context.infected_locations_percentage)}%)`}
+          {`${formatNumber(
+            context.infected_locations_percentage
+          )}% (${formatNumber(context.infected_locations_total)})`}
         </strong>
       </TooltipContent>
     )

@@ -109,7 +109,7 @@ const nursingHomeThresholds: ChoroplethThresholds = {
   ],
 };
 
-const nursingHomeInfectedThresholds: ChoroplethThresholds = {
+const nursingHomeInfectedLocationsPercentageThresholds: ChoroplethThresholds = {
   thresholds: [
     {
       color: '#c0e8fc',
@@ -143,7 +143,7 @@ export const regionThresholds: Record<
   hospital_admissions: hospitalAdmissionsThresholds,
   escalation_levels: escalationThresholds,
   nursing_home: {
-    infected_locations_percentage: nursingHomeInfectedThresholds,
+    infected_locations_percentage: nursingHomeInfectedLocationsPercentageThresholds,
     newly_infected_people: nursingHomeThresholds,
   } as Record<Partial<TRegionsNursingHomeMetricName>, ChoroplethThresholds>,
 };
