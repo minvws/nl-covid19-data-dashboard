@@ -10,7 +10,7 @@
   },
   "notificatie": {
     "titel": "Stijging van Covid-19 besmettingen en opnames in ziekenhuizen en op intensive care afdelingen zet door",
-    "bericht": "Het aantal meldingen is de afgelopen week (30 september t/m 6 oktober) verder toegenomen in alle regio’s en in alle leeftijdsgroepen. Ook de stijging van het aantal mensen dat vanwege COVID-19 in het ziekenhuis en op de IC is opgenomen zet door. De eerste effecten van de op 30 september door het kabinet afgekondigde maatregelen kunnen naar verwachting op zijn vroegst vanaf volgende week zichtbaar worden.\n\nHet risiconiveau per regio kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2) of ‘ernstig’ (niveau 3) zijn. In 18 van de 25 regio’s is de situatie zorgelijk. De situatie is in 7 regio’s ernstig.",
+    "bericht": "Het aantal meldingen is de afgelopen week (30 september t/m 6 oktober) verder toegenomen in alle regio’s en in alle leeftijdsgroepen. Ook de stijging van het aantal mensen dat vanwege COVID-19 in het ziekenhuis en op de IC is opgenomen zet door. De eerste effecten van de op 30 september door het kabinet afgekondigde maatregelen kunnen naar verwachting op zijn vroegst vanaf volgende week zichtbaar worden.\n\nHet risiconiveau per regio kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2), ‘ernstig’ (niveau 3), ‘zeer ernstig’ (niveau 4) zijn.",
     "link": {
       "text": "Bekijk de toelichting van het RIVM",
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel"
@@ -198,15 +198,15 @@
     "legenda_marge": "De onzekerheidsmarge toont tussen welke waarden het aantal besmettelijke mensen zich bevindt.",
     "rangeLegendLabel": "Onzekerheidsmarge",
     "lineLegendLabel": "Besmettelijke mensen",
-    "geen_signaalwaarde_beschikbaar": "Vanwege een storing is deze informatie op dit moment helaas niet compleet. Aan een oplossing wordt gewerkt.\n\nVoor het aantal besmettelijke mensen is geen signaalwaarde beschikbaar.",
+    "geen_signaalwaarde_beschikbaar": "Vanwege een storing is deze informatie op dit moment helaas niet compleet. Aan een oplossing wordt gewerkt.",
     "geen_signaalwaarde_beschikbaar_lees_waarom": "Lees hier waarom",
     "toelichting_pagina": "Als iemand het coronavirus oploopt, dan is deze persoon een tijd lang besmettelijk voor anderen. Hoe lang dit duurt verschilt van persoon tot persoon. Het aantal besmettelijke mensen is een schatting op basis van een aantal gegevensbronnen. Het exacte aantal is onbekend, maar we kunnen wel aangeven of het gaat om tientallen, honderden, duizenden of meer. ",
     "barscale_titel": "Gemiddeld aantal besmettelijke mensen per 100.000 inwoners",
-    "barscale_screenreader_text": "{{value}} besmettelijke mensen per 100.000 inwoners.",
+    "barscale_screenreader_text": "{{value}} besmettelijke mensen",
     "cijfer_titel": "Geschat aantal besmettelijke mensen in Nederland:",
-    "cijfer_toelichting": "Vanwege een storing is deze informatie op dit moment helaas niet compleet. Aan een oplossing wordt gewerkt.\n\nEen berekening van hoeveel mensen met COVID-19 besmettelijk zijn voor anderen. Dit getal wordt door het RIVM berekend.",
+    "cijfer_toelichting": "Een berekening van hoeveel mensen met COVID-19 besmettelijk zijn voor anderen. Dit getal wordt door het RIVM berekend.",
     "linechart_titel": "Verloop over tijd",
-    "titel_sidebar": "Aantal besmettelijke mensen per 100.000 inwoners"
+    "titel_sidebar": "Aantal besmettelijke mensen"
   },
   "reproductiegetal": {
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
