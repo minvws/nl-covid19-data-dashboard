@@ -4,7 +4,7 @@ import { SafetyRegionProperties } from '../../shared';
 import { createSelectRegionHandler } from '../../selectHandlers/createSelectRegionHandler';
 import { TooltipContent } from '~/components/chloropleth/tooltips/tooltipContent';
 import { RegionsNursingHome } from '~/types/data';
-import { formatNumber } from '~/utils/formatNumber';
+import { formatPercentage } from '~/utils/formatNumber';
 
 export const createInfectedLocationsRegionalTooltip = (router: NextRouter) => (
   context: RegionsNursingHome & SafetyRegionProperties & { value: number }
@@ -22,7 +22,7 @@ export const createInfectedLocationsRegionalTooltip = (router: NextRouter) => (
         <strong>
           {`${
             context.value !== undefined ? context.value : '-'
-          } (${formatNumber(context.infected_locations_percentage)}%)`}
+          } (${formatPercentage(context.infected_locations_percentage)}%)`}
         </strong>
       </TooltipContent>
     )
