@@ -2,3 +2,4 @@ package.json
 public
 out
 data.d.ts
+src/locale/*.json
