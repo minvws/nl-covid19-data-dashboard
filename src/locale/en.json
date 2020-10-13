@@ -61,7 +61,7 @@
     "barscale_titel": "Intensive care admissions per day",
     "barscale_screenreader_text": "{{value}} intensive care-admissions by day. Alert value: {{signaalwaarde}} admissions per day.",
     "extra_uitleg": "Number of confirmed COVID-19 cases who are admitted to a hospital intensive care unit (ICU) per day. This figure is an average for the daily admissions over the past three days.",
-    "linechart_titel": "Progression over time",
+    "linechart_titel": "ICU admissions over time",
     "bronnen": {
       "nice": {
         "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
@@ -126,8 +126,8 @@
         "text": "LCPS"
       },
       "rivmSource": {
-        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
-        "text": "RIVM"
+        "href": "",
+        "text": ""
       }
     },
     "kpi_bedbezetting": {
@@ -159,7 +159,13 @@
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the progression over time in the number of new cases by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "cluster_datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
     "cluster_bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
@@ -622,7 +628,13 @@
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the progression over time in the number of positive tests by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -698,7 +710,13 @@
     "barchart_titel": "New cases by age group (total number of new cases)",
     "barchart_toelichting": "This figure shows the change in the number of confirmed cases by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -819,7 +837,7 @@
     "pagina_toelichting": "Daily number of deceased residents with confirmed cases of COVID-19 in nursing homes.",
     "barscale_titel": "Number of deceased residents",
     "barscale_screenreader_text": "{{value}} deceased residents",
-    "extra_uitleg": "This number is an estimation of the number of nursing home inhabitants that have died due to the novel coronavirus.",
+    "extra_uitleg": "This number is an estimation of the number of nursing home inhabitants in this safety region that have died due to the novel coronavirus.",
     "linechart_titel": "Progression over time",
     "map_titel": "Nursing home excess mortality in the Netherlands",
     "map_toelichting": "These figures show the excess mortality in nursing homes in the Netherlands per day.",
