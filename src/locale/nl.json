@@ -105,9 +105,9 @@
       "text": "Stichting NICE"
     },
     "titel": "Ziekenhuisopnames per dag",
-    "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen.\n\nLet op: Sinds 13 oktober wordt een nieuwe bron gebruikt voor de ziekenhuisopnames. Lees meer in de [cijferverantwoording](https://coronadashboard.rijksoverheid.nl/verantwoording).",
+    "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen.\n\nLet op: Sinds 13 oktober wordt een nieuwe bron gebruikt voor de ziekenhuisopnames. Lees meer in de cijferverantwoording.",
     "barscale_titel": "Ziekenhuisopnames per dag",
-    "extra_uitleg": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen. Dit cijfer is exclusief intensive care-opnames (dat is een [apart cijfer](https://coronadashboard.rijksoverheid.nl/landelijk/intensive-care-opnames)).\n\nLet op: Hoewel ziekenhuizen proberen om COVID-19 patiënten snel te registreren, kan de registratie achterlopen.",
+    "extra_uitleg": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen. Dit cijfer is exclusief intensive care-opnames (dat is een apart cijfer).\n\nLet op: Hoewel ziekenhuizen proberen om COVID-19 patiënten snel te registreren, kan de registratie achterlopen.",
     "map_titel": "Verdeling ziekenhuisopnames in Nederland",
     "map_toelichting": "Deze grafieken laten zien hoe de verdeling van ziekenhuisopnames is in Nederland per dag.",
     "linechart_titel": "Ziekenhuisopnames over tijd",

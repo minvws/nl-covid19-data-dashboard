@@ -105,9 +105,9 @@
       "text": "NICE foundation"
     },
     "titel": "Hospital admissions per day",
-    "pagina_toelichting": "Number of confirmed COVID-19 cases who are admitted to a hospital per day.\n\nPlease note: as of 13 October 2020, data on hospital admissions is obtained from a new source. For more information see the [explanation of the data presented](https://coronadashboard.government.nl/verantwoording).",
+    "pagina_toelichting": "Number of confirmed COVID-19 cases who are admitted to a hospital per day.\n\nPlease note: as of 13 October 2020, data on hospital admissions is obtained from a new source. For more information see the explanation of the data presented.",
     "barscale_titel": "Hospital admissions per day",
-    "extra_uitleg": "Number of confirmed COVID-19 cases who are admitted to a hospital per day. This number is an average for daily admissions over the past 3 days. This number is excluding the ICU admissions (which is a [separate number](https://coronadashboard.government.nl/landelijk/intensive-care-opnames)). \n\nPlease note: despite hospitals’ best efforts, there may be some backlog when it comes to registering COVID-19 patients.",
+    "extra_uitleg": "Number of confirmed COVID-19 cases who are admitted to a hospital per day. This number is an average for daily admissions over the past 3 days. This number is excluding the ICU admissions (which is a separate number). \n\nPlease note: despite hospitals’ best efforts, there may be some backlog when it comes to registering COVID-19 patients.",
     "map_titel": "Distribution of hospital admissions in the Netherlands",
     "map_toelichting": "These figures show the daily hospital admissions in the Netherlands.",
     "linechart_titel": "Progression in hospital admissions over time",
