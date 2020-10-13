@@ -107,7 +107,7 @@
     "titel": "Hospital admissions per day",
     "pagina_toelichting": "Number of confirmed COVID-19 cases who are admitted to a hospital per day.\n\nPlease note: as of 13 October 2020, data on hospital admissions is obtained from a new source. For more information see the [explanation of the data presented](https://coronadashboard.government.nl/verantwoording).",
     "barscale_titel": "Hospital admissions per day",
-    "extra_uitleg": "Number of confirmed COVID-19 cases who are admitted to a hospital per day. This number is an average for daily admissions over the past 3 days.\n\nPlease note: despite hospitals’ best efforts, there may be some backlog when it comes to registering COVID-19 patients.",
+    "extra_uitleg": "Number of confirmed COVID-19 cases who are admitted to a hospital per day. This number is an average for daily admissions over the past 3 days. This number is excluding the ICU admissions (which is a [separate number](https://coronadashboard.government.nl/landelijk/intensive-care-opnames)). \n\nPlease note: despite hospitals’ best efforts, there may be some backlog when it comes to registering COVID-19 patients.",
     "map_titel": "Distribution of hospital admissions in the Netherlands",
     "map_toelichting": "These figures show the daily hospital admissions in the Netherlands.",
     "linechart_titel": "Progression in hospital admissions over time",
@@ -279,14 +279,14 @@
     "barscale_toelichting": "Number of new locations where there is at least one confirmed case. A nursing home is counted as a 'new location; when there have not been any confirmed cases for at least 28 days, which is twice the incubation period.",
     "kpi_titel": "Total number of infected locations",
     "kpi_toelichting": "This figure is an estimate of the number of nursing homes where in the past 28 days at least one (new) COVID-19 infection (confirmed by a positive test) is reported. The percentage shows what proportion of the total number of nursing homes in the Netherlands this is.",
-    "linechart_titel": "Progression over time",
+    "linechart_titel": "Progression over time in the total number of infected locations",
     "barscale_screenreader_text": "{{value}} new locations where there is at least one confirmed case, per day.",
     "chloropleth_legenda": {
-      "titel": "",
+      "titel": "Percentage of infected nursing homes",
       "geen_meldingen": ""
     },
     "map_titel": "",
-    "map_toelichting": "This maps shows an estimate of the number of nursing homes where in the past 28 days at least one (new) COVID-19 infection (confirmed by a positive test) is reported."
+    "map_toelichting": "This maps shows the percentage of nursing homes where in the past 28 days at least one (new) COVID-19 infection (confirmed by a positive test) is reported."
   },
   "verpleeghuis_positief_geteste_personen": {
     "datums": "Value of {{dateOfReport}}. Obtained:{{dateOfInsertion}}. Is updated on a daily basis.",
@@ -438,7 +438,7 @@
       },
       {
         "cijfer": "Intensive care (ICU) admissions",
-        "verantwoording": "These figures are supplied daily as [open data](https://stichting-nice.nl/covid-19/public/zkh/new-intake/confirmed) by the Stichting NICE (the National Intensive Care Evaluation Registry), which is a partnership of Dutch ICUs. These figures are continually updated and once every afternoon are uploaded to the dashboard. The average number of daily hospital admissions is calculated using the figures for one day ago, two days ago and three days ago. Data for the present day is not included in this calculation, as the present day is not yet over and registration data is therefore incomplete. Although hospitals strive to register COVID-19 patients as fast as possible, there is usually some delay. As a result, the figures for the previous several days tend to be incomplete. That is why data on the dashboard is refreshed daily.\n\nPreviously, the figures on the dashboard concerning hospital admissions were provided by [open data](https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv) from RIVM, which comes from the Osiris database. However, this database suffers from significant underreporting. The NICE database is more complete and uses a broader definition of hospital admission. RIVM figures include only those patients admitted to hospital because of COVID-19, whereas NICE figures also include patients who were admitted to the hospital for another reason but also have COVID-19.\n\nNICE figures cannot currently be broken down by safety region or municipality. Data at these levels is therefore still taken from the Osiris database. Work is being done to provide NICE figures for hospital admissions at safety region and municipal levels. \n"
+        "verantwoording": "These figures are supplied daily as [open data](https://stichting-nice.nl/covid-19/public/zkh/new-intake/confirmed) by the Stichting NICE (the National Intensive Care Evaluation Registry), which is a partnership of Dutch ICUs. These figures are continually updated and once every afternoon are uploaded to the dashboard. The average number of daily hospital admissions is calculated using the figures for one day ago, two days ago and three days ago. Data for the present day is not included in this calculation, as the present day is not yet over and registration data is therefore incomplete. Although hospitals strive to register COVID-19 patients as fast as possible, there is usually some delay. As a result, the figures for the previous several days tend to be incomplete. That is why data on the dashboard is refreshed daily.\n\nPreviously, the figures on the dashboard concerning hospital admissions were provided by [open data](https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv) from RIVM, which comes from the Osiris database. However, this database suffers from significant underreporting. The NICE database is more complete and uses a broader definition of hospital admission. RIVM figures include only those patients admitted to hospital because of COVID-19, whereas NICE figures also include patients who were admitted to the hospital for another reason but also have COVID-19.\n\nNICE figures cannot currently be broken down by safety region or municipality. Data at these levels is therefore still taken from the Osiris database. Work is being done to provide NICE figures for hospital admissions at safety region and municipal levels. \n\nHospital occupancy rates (non-ICU) are obtained daily via the [LCPS](https://lcps.nu/wp-content/uploads/covid-19.csv) website."
       },
       {
         "cijfer": "Hospital admissions",
@@ -851,7 +851,7 @@
     "barscale_toelichting": "Number of new locations where there is at least one confirmed case. A nursing home is counted as a 'new location; when there have not been any confirmed cases for at least 28 days, which is twice the incubation period.",
     "kpi_titel": "Total number of infected locations",
     "kpi_toelichting": "This figure is an estimate of the number of nursing homes where in the past 28 days at least one (new) COVID-19 infection (confirmed by a positive test) is reported. The percentage shows what proportion of the total number of nursing homes in this safety region this is.",
-    "linechart_titel": "Progression over time",
+    "linechart_titel": "Progression over time in the total number of infected locations",
     "barscale_screenreader_text": "{{value}} new locations where there is at least one confirmed case, per day."
   },
   "veiligheidsregio_verpleeghuis_positief_geteste_personen": {
