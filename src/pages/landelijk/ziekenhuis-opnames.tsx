@@ -180,11 +180,11 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
         <footer className="chloropleth-footer">
           {siteText.common.metadata.source}:{' '}
           <a
-            href={text.bronnen.rivm.href}
+            href={text.bronnen.rivmSource.href}
             rel="noopener noreferrer"
             target="_blank"
           >
-            {text.bronnen.rivm.text}
+            {text.bronnen.rivmSource.text}
           </a>
         </footer>
       </article>
