@@ -107,7 +107,7 @@
     "titel": "Hospital admissions per day",
     "pagina_toelichting": "Number of confirmed COVID-19 cases who are admitted to a hospital per day.\n\nPlease note: as of 13 October 2020, data on hospital admissions is obtained from a new source. For more information see the explanation of the data presented.",
     "barscale_titel": "Hospital admissions per day",
-    "extra_uitleg": "Number of confirmed COVID-19 cases who are admitted to a hospital per day. This number is an average for daily admissions over the past 3 days.",
+    "extra_uitleg": "Number of confirmed COVID-19 cases who are admitted to a hospital (excluding intensive care) per day. This number is an average for daily admissions over the past 3 days.\n\nNote: Although hospitals try to register COVID-19 patients promptly, it is likely that the numbers of the last days are yet incomplete",
     "map_titel": "Distribution of hospital admissions in the Netherlands",
     "map_toelichting": "These figures show the daily hospital admissions in the Netherlands.",
     "linechart_titel": "Progression in hospital admissions over time",
@@ -158,7 +158,7 @@
     "linechart_titel": "Progression over time",
     "linechart_toelichting": "This graph shows how many confirmed cases of COVID-19 were reported recently per 100,000 inhabitants.",
     "barchart_titel": "New cases by age group (total number of new cases)",
-    "barchart_toelichting": "This figure shows the progression over time in the number of new cases by age group.",
+    "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
     "barscale_keys": [
       "0 to 20",
@@ -628,7 +628,7 @@
     "linechart_titel": "Progression over time",
     "linechart_toelichting": "This graph shows how many confirmed cases of COVID-19 were reported recently in this safety region per 100,000 inhabitants.",
     "barchart_titel": "New cases by age group (total number of new cases)",
-    "barchart_toelichting": "This figure shows the progression over time in the number of positive tests by age group.",
+    "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
     "barscale_keys": [
       "0 to 20",
@@ -711,7 +711,7 @@
     "linechart_titel": "Progression over time",
     "linechart_toelichting": "This graph shows how many confirmed cases of COVID-19 were reported recently in this municipality per 100,000 inhabitants.",
     "barchart_titel": "New cases by age group (total number of new cases)",
-    "barchart_toelichting": "This figure shows the change in the number of confirmed cases by age group.",
+    "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group.",
     "barchart_axis_titel": "Total number of confirmed cases",
     "barscale_keys": [
       "0 to 20",

@@ -107,7 +107,7 @@
     "titel": "Ziekenhuisopnames per dag",
     "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen.\n\nLet op: Sinds 13 oktober wordt een nieuwe bron gebruikt voor de ziekenhuisopnames. Lees meer in de cijferverantwoording.",
     "barscale_titel": "Ziekenhuisopnames per dag",
-    "extra_uitleg": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen.",
+    "extra_uitleg": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis (exclusief IC) is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen.\n\nLet op: Hoewel ziekenhuizen proberen om COVID-19 patiënten snel te registreren, is het aannemelijk dat de registratie achter loopt. Om deze reden zijn de aantallen van de afgelopen dagen meestal nog onvolledig.",
     "map_titel": "Verdeling ziekenhuisopnames in Nederland",
     "map_toelichting": "Deze grafieken laten zien hoe de verdeling van ziekenhuisopnames is in Nederland per dag.",
     "linechart_titel": "Ziekenhuisopnames over tijd",
@@ -158,7 +158,7 @@
     "linechart_titel": "Verloop over tijd",
     "linechart_toelichting": "Deze grafiek laat zien van hoeveel mensen afgelopen periode gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
-    "barchart_toelichting": "Deze grafiek toont de trend van het aantal positieve tests over leeftijdsgroepen.",
+    "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
     "barscale_keys": [
       "0 tot 20",
@@ -628,7 +628,7 @@
     "linechart_titel": "Verloop over tijd",
     "linechart_toelichting": "Deze grafiek laat zien van hoeveel mensen afgelopen periode in deze veiligheidsregio gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
-    "barchart_toelichting": "Deze grafiek toont de trend van het aantal positieve tests over leeftijdsgroepen.",
+    "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
     "barscale_keys": [
       "0 tot 20",
@@ -711,7 +711,7 @@
     "linechart_titel": "Verloop over tijd",
     "linechart_toelichting": "Deze grafiek laat zien van hoeveel mensen afgelopen periode in deze gemeente gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
-    "barchart_toelichting": "Deze grafiek toont de trend van het aantal positieve tests over leeftijdsgroepen.",
+    "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
     "barscale_keys": [
       "0 to 20",
