@@ -1,30 +1,31 @@
-import { FCWithLayout } from '~/components/layout';
-import { getNationalLayout } from '~/components/layout/NationalLayout';
-import { LineChart } from '~/components/charts/index';
-import { ContentHeader } from '~/components/layout/Content';
-
-import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-barscale';
-
-import Ziekenhuis from '~/assets/ziekenhuis.svg';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 import siteText from '~/locale/index';
-
-import { IntakeHospitalMa } from '~/types/data.d';
-import { useState } from 'react';
 import getNlData, { INationalData } from '~/static-props/nl-data';
+
+import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-barscale';
+import { FCWithLayout } from '~/components/layout';
+import { getNationalLayout } from '~/components/layout/NationalLayout';
+
 import { ChartRegionControls } from '~/components/chartRegionControls';
+import { LineChart } from '~/components/charts/index';
+import { ContentHeaderMetadataHack } from '~/components/contentHeaderMetadataHack';
+
+import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
+import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
 import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
-import { MunicipalityLegenda } from '~/components/chloropleth/legenda/MunicipalityLegenda';
-import { SafetyRegionLegenda } from '~/components/chloropleth/legenda/SafetyRegionLegenda';
-import { hospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/municipal/hospitalAdmissionsTooltip';
-import { hospitalAdmissionsTooltip as regionHospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/region/hospitalAdmissionsTooltip';
 import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
-import { useRouter } from 'next/router';
 import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
+import { createMunicipalHospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/municipal/createMunicipalHospitalAdmissionsTooltip';
+import { createRegionHospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/region/createRegionHospitalAdmissionsTooltip';
+import { DataWarning } from '~/components/dataWarning';
 
-const text: typeof siteText.ziekenhuisopnames_per_dag =
-  siteText.ziekenhuisopnames_per_dag;
+import Ziekenhuis from '~/assets/ziekenhuis.svg';
+import { formatNumber } from '~/utils/formatNumber';
+
+const text = siteText.ziekenhuisopnames_per_dag;
 
 const IntakeHospital: FCWithLayout<INationalData> = (props) => {
   const { data: state } = props;
@@ -32,40 +33,116 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
     'municipal'
   );
   const router = useRouter();
-
-  const data: IntakeHospitalMa | undefined = state?.intake_hospital_ma;
+  const legendItems = useSafetyRegionLegendaData('hospital_admissions');
+  const dataIntake = state.intake_hospital_ma;
+  const dataBeds = state.hospital_beds_occupied;
 
   return (
     <>
-      <ContentHeader
+      <ContentHeaderMetadataHack
         category={siteText.nationaal_layout.headings.medisch}
         title={text.titel}
         Icon={Ziekenhuis}
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: data?.last_value?.date_of_report_unix,
-          dateInsertedUnix: data?.last_value?.date_of_insertion_unix,
-          dataSource: text.bron,
+          dateUnix: dataIntake.last_value.date_of_report_unix,
+          dateInsertedUnix: dataIntake.last_value.date_of_insertion_unix,
+          dataSourceA: text.bronnen.rivm,
+          dataSourceB: text.bronnen.lnaz,
         }}
       />
 
-      <article className="metric-article layout-two-column">
-        <div className="column-item column-item-extra-margin">
+      <div className="layout-two-column">
+        <article className="metric-article column-item">
           <h3>{text.barscale_titel}</h3>
 
-          <IntakeHospitalBarScale data={data} showAxis={true} />
-        </div>
-
-        <div className="column-item column-item-extra-margin">
+          <IntakeHospitalBarScale data={dataIntake} showAxis={true} />
           <p>{text.extra_uitleg}</p>
-        </div>
+          <footer className="article-footer">
+            {siteText.common.metadata.source}:{' '}
+            <a
+              href={text.bronnen.rivm.href}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              {text.bronnen.rivm.text}
+            </a>
+          </footer>
+        </article>
+
+        <article className="metric-article column-item">
+          <div className="article-top">
+            <h3>{text.kpi_bedbezetting.title}</h3>
+            <div className="text-blue kpi">
+              {formatNumber(dataBeds.last_value.covid_occupied)}
+            </div>
+            <p>{text.kpi_bedbezetting.description}</p>
+          </div>
+          <footer className="article-footer">
+            {siteText.common.metadata.source}:{' '}
+            <a
+              href={text.bronnen.lnaz.href}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              {text.bronnen.lnaz.text}
+            </a>
+          </footer>
+        </article>
+      </div>
+
+      <article className="metric-article">
+        <LineChart
+          title={text.linechart_titel}
+          description={text.linechart_description}
+          values={dataIntake.values.map((value: any) => ({
+            value: value.moving_average_hospital,
+            date: value.date_of_report_unix,
+          }))}
+          signaalwaarde={40}
+        />
+        <footer className="article-footer">
+          {siteText.common.metadata.source}:{' '}
+          <a
+            href={text.bronnen.rivm.href}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            {text.bronnen.rivm.text}
+          </a>
+        </footer>
+      </article>
+
+      <article className="metric-article">
+        <LineChart
+          title={text.chart_bedbezetting.title}
+          description={text.chart_bedbezetting.description}
+          values={dataBeds.values.map((value) => ({
+            value: value.covid_occupied,
+            date: value.date_of_report_unix,
+          }))}
+        />
+        <footer className="article-footer">
+          {siteText.common.metadata.source}:{' '}
+          <a
+            href={text.bronnen.lnaz.href}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            {text.bronnen.lnaz.text}
+          </a>
+        </footer>
       </article>
 
       <article className="metric-article layout-chloropleth">
+        <div className="data-warning">
+          <DataWarning />
+        </div>
         <div className="chloropleth-header">
           <h3>{text.map_titel}</h3>
           <p>{text.map_toelichting}</p>
+
           <div className="chloropleth-controls">
             <ChartRegionControls
               onChange={(val: 'region' | 'municipal') => setSelectedMap(val)}
@@ -77,48 +154,41 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
           {selectedMap === 'municipal' && (
             <MunicipalityChloropleth
               metricName="hospital_admissions"
-              tooltipContent={hospitalAdmissionsTooltip}
-              onSelect={createSelectMunicipalHandler(router)}
+              tooltipContent={createMunicipalHospitalAdmissionsTooltip(router)}
+              onSelect={createSelectMunicipalHandler(
+                router,
+                'ziekenhuis-opnames'
+              )}
             />
           )}
           {selectedMap === 'region' && (
             <SafetyRegionChloropleth
               metricName="hospital_admissions"
-              tooltipContent={regionHospitalAdmissionsTooltip}
-              onSelect={createSelectRegionHandler(router)}
+              tooltipContent={createRegionHospitalAdmissionsTooltip(router)}
+              onSelect={createSelectRegionHandler(router, 'ziekenhuis-opnames')}
             />
           )}
         </div>
 
         <div className="chloropleth-legend">
-          {selectedMap === 'municipal' && (
-            <MunicipalityLegenda
-              metricName="hospital_admissions"
-              title={text.chloropleth_legenda.titel}
-            />
-          )}
-
-          {selectedMap === 'region' && (
-            <SafetyRegionLegenda
-              metricName="hospital_admissions"
+          {legendItems && (
+            <ChloroplethLegenda
+              items={legendItems}
               title={text.chloropleth_legenda.titel}
             />
           )}
         </div>
+        <footer className="chloropleth-footer">
+          {siteText.common.metadata.source}:{' '}
+          <a
+            href={text.bronnen.rivmSource.href}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            {text.bronnen.rivmSource.text}
+          </a>
+        </footer>
       </article>
-
-      {data && (
-        <article className="metric-article">
-          <LineChart
-            title={text.linechart_titel}
-            values={data.values.map((value: any) => ({
-              value: value.moving_average_hospital,
-              date: value.date_of_report_unix,
-            }))}
-            signaalwaarde={40}
-          />
-        </article>
-      )}
     </>
   );
 };

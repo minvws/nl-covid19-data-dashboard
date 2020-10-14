@@ -3,7 +3,7 @@ import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { LineChart } from '~/components/charts/index';
 
-import { NursingHomeDeathsBarScale } from '~/components/landelijk/nursing-home-deaths-barscale';
+import { NursingHomeDeathsBarScale } from '~/components/common/nursing-home-deaths-barscale';
 
 import CoronaVirus from '~/assets/coronavirus.svg';
 
@@ -12,8 +12,7 @@ import siteText from '~/locale/index';
 import { DeceasedPeopleNurseryCountDaily } from '~/types/data.d';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 
-const text: typeof siteText.verpleeghuis_oversterfte =
-  siteText.verpleeghuis_oversterfte;
+const text = siteText.verpleeghuis_oversterfte;
 
 const NursingHomeDeaths: FCWithLayout<INationalData> = (props) => {
   const { data: state } = props;
@@ -40,7 +39,10 @@ const NursingHomeDeaths: FCWithLayout<INationalData> = (props) => {
         <div className="column-item column-item-extra-margin">
           <h3>{text.barscale_titel}</h3>
 
-          <NursingHomeDeathsBarScale data={data} showAxis={true} />
+          <NursingHomeDeathsBarScale
+            value={data.last_value.deceased_nursery_daily}
+            showAxis={true}
+          />
         </div>
 
         <div className="column-item column-item-extra-margin">

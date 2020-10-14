@@ -8,7 +8,7 @@ import { getLayoutWithMetadata, FCWithLayout } from '~/components/layout';
 import { MaxWidth } from '~/components/maxWidth';
 
 import styles from './over.module.scss';
-import siteText from '~/locale/index';
+import siteText, { TALLLanguages } from '~/locale/index';
 
 import { MDToHTMLString } from '~/utils/MDToHTMLString';
 
@@ -19,18 +19,19 @@ interface ICijfer {
 
 interface StaticProps {
   props: {
-    text: typeof siteText;
+    text: TALLLanguages;
     lastGenerated: string;
   };
 }
 
 export async function getStaticProps(): Promise<StaticProps> {
   const text = require('../locale/index').default;
-  const serializedContent = text.verantwoording.cijfers.map(function (
-    item: ICijfer
-  ) {
-    return { ...item, verantwoording: MDToHTMLString(item.verantwoording) };
-  });
+  const serializedContent = text.verantwoording.cijfers.map(
+    (item: ICijfer) => ({
+      ...item,
+      verantwoording: MDToHTMLString(item.verantwoording),
+    })
+  );
 
   text.verantwoording.cijfers = serializedContent;
 
@@ -68,16 +69,20 @@ const Verantwoording: FCWithLayout<{ text: any; lastGenerated: string }> = (
             <h2>{text.verantwoording.title}</h2>
             <p>{text.verantwoording.paragraaf}</p>
             <article className={styles.faqList}>
-              {text.verantwoording.cijfers.map((item: ICijfer) => (
-                <Fragment key={`item-${item.cijfer}`}>
-                  <h3>{item.cijfer}</h3>
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: item.verantwoording,
-                    }}
-                  />
-                </Fragment>
-              ))}
+              {text.verantwoording.cijfers.map(
+                (item: ICijfer) =>
+                  item.verantwoording &&
+                  item.cijfer && (
+                    <Fragment key={item.cijfer}>
+                      <h3>{item.cijfer}</h3>
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: item.verantwoording,
+                        }}
+                      />
+                    </Fragment>
+                  )
+              )}
             </article>
           </div>
         </MaxWidth>

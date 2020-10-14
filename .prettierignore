@@ -1,4 +1,5 @@
 package.json
-schema
 public
 out
+data.d.ts
+src/locale/*.json

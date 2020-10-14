@@ -1,0 +1,46 @@
+name: Main
+
+on:
+  push:
+    branches:
+      - master
+      - develop
+  pull_request:
+    branches:
+      - master
+      - develop
+
+jobs:
+  init:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancel previous workflow
+        uses: styfle/cancel-workflow-action@0.4.0
+        with:
+          access_token: ${{ github.token }}
+      # The bahmutov/npm-install uses caching, so by running it already in the
+      # init task, the other tasks running in parallel should install quickly.
+      - name: Check out repository
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1
+  lint:
+    runs-on: ubuntu-latest
+    needs: init
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1
+      - name: Lint code
+        run: yarn lint
+
+  test:
+    runs-on: ubuntu-latest
+    needs: init
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1
+      - run: yarn test:ci

@@ -1,16 +1,27 @@
 {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "national_huisarts_verdenkingen",
+  "type": "object",
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/value"
+      }
+    },
+    "last_value": {
+      "$ref": "#/definitions/value"
+    },
+    "last_value_difference": {
+      "$ref": "#/definitions/value_difference"
+    }
+  },
+  "required": ["values", "last_value"],
+  "additionalProperties": true,
   "definitions": {
-    "item": {
-      "title": "verdenkingen_huisartsen_last_value",
+    "value": {
+      "title": "national_huisarts_verdenkingen_value",
       "type": "object",
-      "required": [
-        "week_unix",
-        "week_start_unix",
-        "week_end_unix",
-        "incidentie",
-        "date_of_insertion_unix"
-      ],
-      "additionalProperties": false,
       "properties": {
         "week_unix": {
           "type": "integer"
@@ -30,24 +41,45 @@
         "date_of_insertion_unix": {
           "type": "integer"
         }
-      }
-    }
-  },
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "verdenkingen_huisartsen.json",
-  "title": "verdenkingen_huisartsen",
-  "type": "object",
-  "required": ["values", "last_value"],
-  "additionalProperties": false,
-  "properties": {
-    "values": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/item"
-      }
+      },
+      "required": [
+        "week_unix",
+        "week_start_unix",
+        "week_end_unix",
+        "incidentie",
+        "geschat_aantal",
+        "date_of_insertion_unix"
+      ],
+      "additionalProperties": false
     },
-    "last_value": {
-      "$ref": "#/definitions/item"
+    "value_difference": {
+      "title": "national_huisarts_verdenkingen_value_difference",
+      "type": "object",
+      "properties": {
+        "incidentie_old": {
+          "type": "integer"
+        },
+        "incidentie_difference": {
+          "type": "integer"
+        },
+        "geschat_aantal_old": {
+          "type": "integer"
+        },
+        "geschat_aantal_difference": {
+          "type": "integer"
+        },
+        "date_of_report_unix_old": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "incidentie_old",
+        "incidentie_difference",
+        "geschat_aantal_old",
+        "geschat_aantal_difference",
+        "date_of_report_unix_old"
+      ],
+      "additionalProperties": false
     }
   }
 }

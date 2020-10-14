@@ -6,12 +6,11 @@ import {
   SewerValueElement,
 } from '~/types/data.d';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { formatDate } from '~/utils/formatDate';
+import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import siteText from '~/locale/index';
 
-const text: typeof siteText.veiligheidsregio_rioolwater_metingen =
-  siteText.veiligheidsregio_rioolwater_metingen;
+const text = siteText.veiligheidsregio_rioolwater_metingen;
 
 // Specific interfaces to pass data between the formatting functions and the highcharts configs
 export interface SewerWaterMetadata {
@@ -179,7 +178,7 @@ export function getSewerWaterBarChartData(
         y: data?.average_sewer_installation_per_region?.last_value.average,
         color: '#3391CC',
         label: data?.average_sewer_installation_per_region?.last_value
-          ? `${formatDate(
+          ? `${formatDateFromSeconds(
               data.average_sewer_installation_per_region.last_value.week_unix,
               'short'
             )}: ${formatNumber(
@@ -193,7 +192,7 @@ export function getSewerWaterBarChartData(
             y: installation?.last_value?.rna_per_ml,
             color: '#C1C1C1',
             label: installation?.last_value
-              ? `${formatDate(
+              ? `${formatDateFromSeconds(
                   installation.last_value.date_measurement_unix,
                   'short'
                 )}: ${formatNumber(installation.last_value.rna_per_ml)}`

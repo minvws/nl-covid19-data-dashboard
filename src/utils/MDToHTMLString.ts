@@ -11,7 +11,7 @@ import externalLinks from 'remark-external-links';
 const processor = unified()
   .use(markdown)
   .use(externalLinks, {
-    target: false,
+    target: '_blank',
     rel: ['noopener', 'noreferrer'],
   })
   .use(remark2rehype)

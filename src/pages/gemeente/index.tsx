@@ -1,32 +1,34 @@
 import { FCWithLayout } from '~/components/layout';
 import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
-import { NextRouter, useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 
 import getLastGeneratedData from '~/static-props/last-generated-data';
 
 import text from '~/locale/index';
-import styles from '~/components/chloropleth/chloropleth.module.scss';
 
 import { ReactNode } from 'react';
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
 import { MunicipalityProperties } from '~/components/chloropleth/shared';
+import {
+  createSelectMunicipalHandler,
+  MunicipalitySelectionHandler,
+} from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
 import { useMediaQuery } from '~/utils/useMediaQuery';
+import { TooltipContent } from '~/components/chloropleth/tooltips/tooltipContent';
 
-const tooltipContent = (router: NextRouter) => {
+const tooltipContent = (selectedHandler: MunicipalitySelectionHandler) => {
   return (context: MunicipalityProperties): ReactNode => {
     const onSelectMunicipal = (event: any) => {
       event.stopPropagation();
-      router.push(
-        '/gemeente/[code]/positief-geteste-mensen',
-        `/gemeente/${context.gemcode}/positief-geteste-mensen`
-      );
+      selectedHandler(context);
     };
 
     return (
       context && (
-        <div className={styles.clickableTooltip} onClick={onSelectMunicipal}>
-          <strong>{context.gemnaam}</strong>
-        </div>
+        <TooltipContent
+          title={context.gemnaam}
+          onSelect={onSelectMunicipal}
+        ></TooltipContent>
       )
     );
   };
@@ -43,13 +45,12 @@ const Municipality: FCWithLayout<any> = () => {
   const isLargeScreen = useMediaQuery('(min-width: 1000px)');
 
   const onSelectMunicipal = (context: MunicipalityProperties) => {
+    const pageName = isLargeScreen ? '/positief-geteste-mensen' : '';
     router.push(
-      '/gemeente/[code]/positief-geteste-mensen',
-      `/gemeente/${context.gemcode}/positief-geteste-mensen`
+      `/gemeente/[code]${pageName}`,
+      `/gemeente/${context.gemcode}${pageName}`
     );
   };
-
-  const mapHeight = isLargeScreen ? '800px' : '400px';
 
   return (
     <article className="map-article">
@@ -57,11 +58,13 @@ const Municipality: FCWithLayout<any> = () => {
         <h2>{text.gemeente_index.selecteer_titel}</h2>
         <p>{text.gemeente_index.selecteer_toelichting}</p>
       </div>
-      <div>
+      <div className="map-container">
         <MunicipalityChloropleth
-          tooltipContent={tooltipContent(router)}
-          style={{ height: mapHeight }}
-          onSelect={onSelectMunicipal}
+          tooltipContent={tooltipContent(onSelectMunicipal)}
+          onSelect={createSelectMunicipalHandler(
+            router,
+            'positief-geteste-mensen'
+          )}
           isSelectorMap={true}
         />
       </div>

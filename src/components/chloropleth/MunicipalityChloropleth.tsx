@@ -1,9 +1,5 @@
 import classNames from 'classnames';
-import {
-  ChloroplethThresholds,
-  SafetyRegionProperties,
-  TMunicipalityMetricName,
-} from './shared';
+import { SafetyRegionProperties, TMunicipalityMetricName } from './shared';
 
 import { Chloropleth } from './Chloropleth';
 import { Feature, GeoJsonProperties, MultiPolygon } from 'geojson';
@@ -18,72 +14,7 @@ import { useMunicipalityBoundingbox } from './hooks/useMunicipalityBoundingbox';
 import { MunicipalityProperties } from './shared';
 import { useRegionMunicipalities } from './hooks/useRegionMunicipalities';
 import { countryGeo, municipalGeo, regionGeo } from './topology';
-
-type MunicipalThresholds = ChloroplethThresholds<TMunicipalityMetricName>;
-
-const positiveTestedThresholds: MunicipalThresholds = {
-  dataKey: 'positive_tested_people',
-  thresholds: [
-    {
-      color: '#C0E8FC',
-      threshold: 0,
-    },
-    {
-      color: '#8BD1FF',
-      threshold: 4,
-    },
-    {
-      color: '#61B6ED',
-      threshold: 7,
-    },
-    {
-      color: '#3597D4',
-      threshold: 10,
-    },
-    {
-      color: '#046899',
-      threshold: 20,
-    },
-    {
-      color: '#034566',
-      threshold: 30,
-    },
-  ],
-};
-
-const hospitalAdmissionsThresholds: MunicipalThresholds = {
-  dataKey: 'hospital_admissions',
-  thresholds: [
-    {
-      color: '#c0e8fc',
-      threshold: 0,
-    },
-    {
-      color: '#87cbf8',
-      threshold: 3,
-    },
-    {
-      color: '#5dafe4',
-      threshold: 6,
-    },
-    {
-      color: '#3391cc',
-      threshold: 9,
-    },
-    {
-      color: '#0579b3',
-      threshold: 15,
-    },
-  ],
-};
-
-export const thresholds: Record<
-  TMunicipalityMetricName,
-  MunicipalThresholds
-> = {
-  positive_tested_people: positiveTestedThresholds,
-  hospital_admissions: hospitalAdmissionsThresholds,
-};
+import { municipalThresholds } from './municipalThresholds';
 
 export type TProps<
   T extends TMunicipalityMetricName,
@@ -130,7 +61,7 @@ export function MunicipalityChloropleth<
     isSelectorMap,
   } = props;
 
-  const [ref, dimensions] = useChartDimensions();
+  const [ref, dimensions] = useChartDimensions(1.2);
 
   const [boundingbox, selectedVrCode] = useMunicipalityBoundingbox(
     regionGeo,
@@ -141,7 +72,9 @@ export function MunicipalityChloropleth<
 
   const safetyRegionMunicipalCodes = useRegionMunicipalities(selected);
 
-  const thresholdValues = metricName ? thresholds[metricName] : undefined;
+  const thresholdValues = metricName
+    ? municipalThresholds[metricName]
+    : undefined;
   const getFillColor = useChloroplethColorScale(
     getData,
     thresholdValues?.thresholds

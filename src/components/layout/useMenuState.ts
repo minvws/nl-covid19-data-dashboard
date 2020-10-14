@@ -21,6 +21,13 @@ export function useMenuState(defaultOpen = false): MenuState {
   ): void => {
     event?.preventDefault();
     setMenuOpen(true);
+
+    /* Ensure the top of the main navigation (or if not found: the sidebar) is in view */
+    requestAnimationFrame(() => {
+      window.document
+        .querySelector('#main-navigation,aside')
+        ?.scrollIntoView(true);
+    });
   };
 
   const handleMenuClick = (

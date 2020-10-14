@@ -1,7 +1,7 @@
 @import '~/scss/variables.scss';
 
-.tooltip {
-  background: white;
+.tooltipContainer {
+  background: rgba(255, 255, 255, 0.9);
   position: absolute;
   z-index: 1000;
   color: rgb(102, 102, 102);
@@ -26,18 +26,17 @@
   }
 }
 
-.escalationTooltip {
+.tooltip {
   color: $text-color;
-  width: 265px;
-  background-color: white;
+  width: 100%;
+  min-width: 160px;
   border-radius: 4px;
   pointer-events: all;
   cursor: pointer;
 
-  .escalationTooltipHeader {
-    border-bottom: 1px solid #c4c4c4;
-    margin: 0 -0.5rem;
-    padding: 0.25rem 3rem 0.25rem 1rem;
+  .tooltipHeader {
+    padding: 0.25rem 2rem 0.25rem 0.5rem;
+    white-space: nowrap;
     font-size: 1.2em;
     cursor: pointer;
     position: relative;
@@ -45,29 +44,35 @@
 
     h3 {
       margin: 0;
+      font-size: 1.125em;
     }
 
     &::after {
       content: '';
       background-image: url('/images/chevron-black.svg');
       // match aspect ratio of chevron.svg
-      background-size: 0.6em 1em;
+      background-size: 0.5em 0.9em;
       background-position: 0 50%;
       background-repeat: no-repeat;
-      width: 0.6em;
+      width: 0.5em;
       display: block;
       position: absolute;
-      right: 1em;
+      right: 0.5rem;
       top: 0;
       bottom: 0;
     }
   }
 
   .escalationInfo {
-    padding: 1em 0.5em;
-    font-size: 1rem;
     line-height: 1.5;
+  }
+
+  .tooltipInfo {
+    margin: 0 -0.5rem;
+    padding: 1em 1rem;
+    font-size: 1rem;
     cursor: pointer;
+    border-top: 1px solid #c4c4c4;
   }
 }
 
@@ -105,4 +110,13 @@
     font-size: 1.2rem;
     line-height: 1.8;
   }
+}
+
+.positivelyTestedPeopleTooltip {
+  color: $text-color;
+  width: 265px;
+  background-color: red;
+  border-radius: 4px;
+  pointer-events: all;
+  cursor: pointer;
 }

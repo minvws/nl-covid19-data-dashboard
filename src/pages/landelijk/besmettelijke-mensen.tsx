@@ -1,34 +1,24 @@
-import Link from 'next/link';
-
 import { Legenda } from '~/components/legenda';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { AreaChart } from '~/components/charts/index';
-
-import { InfectiousPeopleBarScale } from '~/components/landelijk/infectious-people-barscale';
 
 import Ziektegolf from '~/assets/ziektegolf.svg';
 import { formatNumber } from '~/utils/formatNumber';
 
 import siteText from '~/locale/index';
 
-import {
-  InfectiousPeopleCount,
-  InfectiousPeopleCountNormalized,
-} from '~/types/data.d';
 import { ContentHeader } from '~/components/layout/Content';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 
-const text: typeof siteText.besmettelijke_personen =
-  siteText.besmettelijke_personen;
+const text = siteText.besmettelijke_personen;
 
 const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
   const { data } = props;
 
-  const count: InfectiousPeopleCount | undefined =
-    data?.infectious_people_count;
-  const countNormalized: InfectiousPeopleCountNormalized | undefined =
-    data?.infectious_people_count_normalized;
+  const count = data.infectious_people_count;
+  const infectiousPeopleLastKnownEverage =
+    data.infectious_people_last_known_average;
 
   return (
     <>
@@ -45,33 +35,24 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
         }}
       />
 
-      <div className="layout-two-column">
-        <article className="metric-article column-item">
-          <h3>{text.barscale_titel}</h3>
-          <InfectiousPeopleBarScale data={countNormalized} showAxis={true} />
-
-          <p>
-            {text.geen_signaalwaarde_beschikbaar}{' '}
-            <Link href="/verantwoording">
-              <a>{text.geen_signaalwaarde_beschikbaar_lees_waarom}</a>
-            </Link>
-          </p>
-        </article>
-
-        <article className="metric-article column-item">
+      <article className="metric-article layout-two-column">
+        <div className="column-item">
           <h3>
             {text.cijfer_titel}
 
             {count && (
               <span className="text-blue kpi">
-                {formatNumber(count.last_value.infectious_avg)}
+                {formatNumber(
+                  infectiousPeopleLastKnownEverage?.last_value.infectious_avg
+                )}
               </span>
             )}
           </h3>
-
+        </div>
+        <div className="column-item">
           <p>{text.cijfer_toelichting}</p>
-        </article>
-      </div>
+        </div>
+      </article>
 
       {count?.values && (
         <article className="metric-article">

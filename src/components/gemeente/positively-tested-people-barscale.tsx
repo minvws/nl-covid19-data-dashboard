@@ -2,8 +2,7 @@ import { BarScale } from '~/components/barScale';
 import { PositiveTestedPeople } from '~/types/data.d';
 
 import siteText from '~/locale/index';
-const text: typeof siteText.gemeente_positief_geteste_personen =
-  siteText.gemeente_positief_geteste_personen;
+const text = siteText.gemeente_positief_geteste_personen;
 
 export function PositivelyTestedPeopleBarScale(props: {
   data: PositiveTestedPeople | undefined;
