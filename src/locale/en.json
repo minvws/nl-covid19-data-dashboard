@@ -10,7 +10,7 @@
   },
   "notificatie": {
     "titel": "Increase in new COVID-19 infections, hospital and ICU admissions continues",
-    "bericht": "The new number of people who tested positive has continued to rise in all regions and age groups in the past week (30 September to 6 October). Also, the increase in the number of admissions of Covid-19 patients to the hospital and ICU has continued. The first impact of the government policy measures issued on 30 September is not expected to become visible until next week at the earliest. \n\nRisk level per region can be ‘caution’ (level 1), ‘concern’ (level 2), ‘serious’ (level 3) or ‘severe’ (level 4).",
+    "bericht": "The new number of people who tested positive has continued to rise in all regions and in all age groups. There were 43.903 confirmed cased reported by the municipal health services (GGD). That is 16.000 more than in the week before, a rise of 60%. The rise in confirmed cases does not yet show signs of stabilising.\n\nRisk level per region can be ‘caution’ (level 1), ‘concern’ (level 2), ‘serious’ (level 3) or ‘severe’ (level 4).",
     "link": {
       "text": "View the full message from the RIVM",
       "href": "https://www.rivm.nl/en/novel-coronavirus-covid-19/current-information"
