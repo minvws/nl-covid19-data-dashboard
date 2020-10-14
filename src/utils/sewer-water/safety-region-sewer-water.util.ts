@@ -41,6 +41,16 @@ export interface SewerWaterBarChartData {
   data: XrangePointOptionsObject[];
 }
 
+export interface SewerWaterScatterPlotValue {
+  date: number;
+  value: number;
+  sewerInstallationName: string;
+}
+
+export interface SewerWaterScatterPlotData {
+  values: SewerWaterScatterPlotValue[];
+}
+
 function getSewerWaterMetadata(
   data: Regionaal | undefined
 ): SewerWaterMetadata {
@@ -92,6 +102,20 @@ export function getSewerWaterBarScaleData(
       dateInsertedUnix: barScaleData?.date_of_insertion_unix,
     };
   }
+}
+
+export function getSewerWaterScatterPlotData(
+  data?: Regionaal
+): SewerValue[] | null {
+  const { dataAvailable, oneInstallation } = getSewerWaterMetadata(data);
+
+  if (!data || !dataAvailable || oneInstallation) {
+    return null;
+  }
+
+  return data.results_per_sewer_installation_per_region.values.flatMap(
+    (value) => value.values
+  );
 }
 
 export function getSewerWaterLineChartData(

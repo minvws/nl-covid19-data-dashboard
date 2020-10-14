@@ -8,13 +8,13 @@ import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 
 import siteText from '~/locale/index';
 
-import { RegionalSewerWaterLineChart } from '~/components/lineChart/regionalSewerWaterLineChart';
 import { useMemo } from 'react';
 import { BarChart } from '~/components/charts';
 import {
   getSewerWaterBarScaleData,
   getSewerWaterLineChartData,
   getSewerWaterBarChartData,
+  getSewerWaterScatterPlotData,
 } from '~/utils/sewer-water/safety-region-sewer-water.util';
 import {
   getSafetyRegionData,
@@ -22,17 +22,24 @@ import {
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { RegionalSewerWaterLineChart2 } from '~/components/lineChart/regionalSewerWaterLineChart2';
 
 const text = siteText.veiligheidsregio_rioolwater_metingen;
 
 const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
   const { data, safetyRegionName } = props;
 
-  const { barScaleData, lineChartData, barChartData } = useMemo(() => {
+  const {
+    barScaleData,
+    lineChartData,
+    barChartData,
+    scatterPlotData,
+  } = useMemo(() => {
     return {
       barScaleData: getSewerWaterBarScaleData(data),
       lineChartData: getSewerWaterLineChartData(data),
       barChartData: getSewerWaterBarChartData(data),
+      scatterPlotData: getSewerWaterScatterPlotData(data),
     };
   }, [data]);
 
@@ -65,11 +72,12 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
         </div>
       </article>
 
-      <article className="metric-article">
+      <article>
         <h3>{text.linechart_titel}</h3>
 
-        {lineChartData && (
-          <RegionalSewerWaterLineChart
+        {scatterPlotData && lineChartData && (
+          <RegionalSewerWaterLineChart2
+            scatterPlotValues={scatterPlotData}
             averageValues={lineChartData.averageValues}
             text={{
               average_label_text: lineChartData.averageLabelText,
