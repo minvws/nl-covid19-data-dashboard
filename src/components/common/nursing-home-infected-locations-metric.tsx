@@ -1,4 +1,4 @@
-import { TotalReportedLocations } from '~/types/data.d';
+import { TotalReportedLocationsLastValue } from '~/types/data.d';
 import { MetricKPI } from '~/components/metricKPI';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
@@ -9,7 +9,7 @@ const text = siteText.common.metricKPI;
 const title = siteText.verpleeghuis_positief_geteste_personen.titel;
 
 export function NursingHomeInfectedLocationsMetric(props: {
-  data: TotalReportedLocations | undefined;
+  data: TotalReportedLocationsLastValue;
 }) {
   const { data } = props;
 

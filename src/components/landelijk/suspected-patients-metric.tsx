@@ -1,4 +1,4 @@
-import { NationalHuisartsVerdenkingen } from '~/types/data.d';
+import { NationalHuisartsVerdenkingenValue } from '~/types/data.d';
 import { MetricKPI } from '~/components/metricKPI';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
@@ -10,7 +10,7 @@ const text = siteText.common.metricKPI;
 const title = siteText.verdenkingen_huisartsen.kpi_titel;
 
 export function SuspectedPatientsMetric(props: {
-  data: NationalHuisartsVerdenkingen | undefined;
+  data: NationalHuisartsVerdenkingenValue;
 }) {
   const { data } = props;
 
