@@ -206,7 +206,7 @@
     "cijfer_titel": "Estimated number of infectious people in the Netherlands:",
     "cijfer_toelichting": "A calculation of how many people with COVID-19 can transmit the virus. This number is calculated by the RIVM.",
     "linechart_titel": "Progression over time",
-    "titel_sidebar": "Number of infectious people"
+    "titel_sidebar": "Infectious people"
   },
   "reproductiegetal": {
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
@@ -558,6 +558,9 @@
     },
     "barScale": {
       "signaalwaarde": "Alert value"
+    },
+    "metricKPI": {
+      "dateOfReport": "Waarde van {{dateOfReport}}"
     },
     "zoekveld_geen_resultaten": "No results",
     "zoekveld_placeholder_regio": "Search by safety region",

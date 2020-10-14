@@ -206,7 +206,7 @@
     "cijfer_titel": "Geschat aantal besmettelijke mensen in Nederland:",
     "cijfer_toelichting": "Een berekening van hoeveel mensen met COVID-19 besmettelijk zijn voor anderen. Dit getal wordt door het RIVM berekend.",
     "linechart_titel": "Verloop over tijd",
-    "titel_sidebar": "Aantal besmettelijke mensen"
+    "titel_sidebar": "Besmettelijke mensen"
   },
   "reproductiegetal": {
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
@@ -558,6 +558,9 @@
     },
     "barScale": {
       "signaalwaarde": "Signaalwaarde"
+    },
+    "metricKPI": {
+      "dateOfReport": "Waarde van {{dateOfReport}}"
     },
     "zoekveld_geen_resultaten": "Geen resultaten",
     "zoekveld_placeholder_regio": "Zoek op veiligheidsregio ",

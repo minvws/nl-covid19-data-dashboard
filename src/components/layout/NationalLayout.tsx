@@ -7,7 +7,7 @@ import { getLayout as getSiteLayout } from '~/components/layout';
 
 import { ReproductionIndexBarScale } from '~/components/landelijk/reproduction-index-barscale';
 import { PositiveTestedPeopleBarScale } from '~/components/landelijk/positive-tested-people-barscale';
-import { InfectiousPeopleBarScale } from '~/components/landelijk/infectious-people-barscale';
+import { InfectiousPeopleMetric } from '~/components/landelijk/infectious-people-metric';
 import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-barscale';
 
 import { IntakeIntensiveCareBarscale } from '~/components/landelijk/intake-intensive-care-barscale';
@@ -158,11 +158,10 @@ function NationalLayout(props: WithChildren<INationalData>) {
                       title={siteText.besmettelijke_personen.titel_sidebar}
                     />
                     <span>
-                      <InfectiousPeopleBarScale
+                      <InfectiousPeopleMetric
                         data={
                           data.infectious_people_last_known_average?.last_value
                         }
-                        showAxis={true}
                       />
                     </span>
                   </a>

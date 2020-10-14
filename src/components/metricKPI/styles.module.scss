@@ -1,0 +1,28 @@
+@import '~/scss/variables.scss';
+
+.root {
+  width: 100%;
+  height: 4rem;
+}
+
+.label {
+  margin-bottom: 0.5em;
+}
+
+.wrapper {
+  display: flex;
+}
+
+.wrapper > p {
+  margin: 0;
+}
+
+.value {
+  font-size: 1.25em;
+  font-weight: bold;
+}
+
+.description {
+  margin-left: 1em !important;
+  color: $text-color-grey;
+}
