@@ -1,4 +1,3 @@
-import { BarScale } from '~/components/barScale';
 import { ContentHeader } from '~/components/layout/Content';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
@@ -56,27 +55,6 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
 
       <div className="layout-two-column">
         <article className="metric-article column-item">
-          <h3>{text.barscale_titel}</h3>
-
-          <BarScale
-            min={0}
-            max={30}
-            screenReaderText={text.barscale_screenreader_text}
-            value={newLocations?.last_value.total_new_reported_locations}
-            id="besmette_locaties_verpleeghuis"
-            rangeKey="total_new_reported_locations"
-            gradient={[
-              {
-                color: '#3391CC',
-                value: 0,
-              },
-            ]}
-            showAxis={true}
-          />
-          <p>{text.barscale_toelichting}</p>
-        </article>
-
-        <article className="metric-article column-item">
           {totalLocations && (
             <h3>
               {text.kpi_titel}{' '}
@@ -93,6 +71,19 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
             </h3>
           )}
           <p>{text.kpi_toelichting}</p>
+        </article>
+
+        <article className="metric-article column-item">
+          <h3>
+            {text.barscale_titel}
+            <span className="text-blue kpi">
+              {formatNumber(
+                newLocations?.last_value.total_new_reported_locations
+              )}
+            </span>
+          </h3>
+
+          <p>{text.barscale_toelichting}</p>
         </article>
       </div>
 

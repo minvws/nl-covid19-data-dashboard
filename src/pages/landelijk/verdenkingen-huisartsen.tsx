@@ -9,7 +9,6 @@ import { ContentHeader } from '~/components/layout/Content';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { LineChart } from '~/components/lineChart/lineChartWithWeekTooltip';
-import { SuspectedPatientsBarScale } from '~/components/landelijk/suspected-patients-barscale';
 
 import Arts from '~/assets/arts.svg';
 import { formatNumber } from '~/utils/formatNumber';
@@ -23,6 +22,7 @@ const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
     state?.verdenkingen_huisartsen;
 
   const total = state?.verdenkingen_huisartsen?.last_value?.geschat_aantal;
+  const normalized = state?.verdenkingen_huisartsen?.last_value?.incidentie;
 
   return (
     <>
@@ -41,20 +41,20 @@ const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
 
       <div className="layout-two-column">
         <article className="metric-article column-item">
-          <h3>{text.barscale_titel}</h3>
+          <h3>
+            {text.kpi_titel}{' '}
+            <span className="text-blue kpi">{formatNumber(total)}</span>
+          </h3>
 
-          <SuspectedPatientsBarScale data={data} showAxis={true} />
           <p>{text.barscale_toelichting}</p>
         </article>
 
         <article className="metric-article column-item">
-          {total && (
-            <h3>
-              {text.kpi_titel}{' '}
-              <span className="text-blue kpi">{formatNumber(total)}</span>
-            </h3>
-          )}
-          <p>{text.kpi_toelichting}</p>
+          <h3>
+            {text.normalized_kpi_titel}{' '}
+            <span className="text-blue kpi">{formatNumber(normalized)}</span>
+          </h3>
+          <p>{text.normalized_kpi_toelichting}</p>
         </article>
       </div>
 
