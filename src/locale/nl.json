@@ -678,6 +678,10 @@
     "average": "Gemiddelde"
   },
   "gemeente_ziekenhuisopnames_per_dag": {
+    "metadata": {
+      "title": "Ziekenhuisopnames inwoners {{municipalityName}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Overzicht van het aantal mensen in de gemeente {{municipalityName}} die met COVID-19 in het ziekenhuis zijn opgenomen."
+    },
     "titel_sidebar": "Ziekenhuisopnames per dag",
     "titel": "Ziekenhuisopnames per dag van inwoners {{municipality}}",
     "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen.",
@@ -696,6 +700,10 @@
     "linechart_description": ""
   },
   "gemeente_positief_geteste_personen": {
+    "metadata": {
+      "title": "Positief geteste mensen in {{municipalityName}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Overzicht van het aantal mensen in de gemeente {{municipalityName}} die positief getest zijn en COVID-19 hebben."
+    },
     "titel_sidebar": "Positief geteste mensen per 100.000 inwoners per dag",
     "titel": "Positief geteste mensen in {{municipality}}",
     "pagina_toelichting": "Door het aantal positief geteste mensen bij te houden krijgen we een duidelijk beeld van hoe snel het virus zich verspreidt voordat het de intensive care bereikt. Hierdoor blijven we voorbereid.",
@@ -726,6 +734,10 @@
     }
   },
   "gemeente_rioolwater_metingen": {
+    "metadata": {
+      "title": "Rioolwatermeting in {{municipalityName}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Overzicht van rioolwatermetingen en de hoeveelheid aangetroffen COVID-19 virusdeeltjes in de gemeente {{municipalityName}}."
+    },
     "titel_sidebar": "Rioolwatermeting",
     "titel": "Rioolwatermeting in {{municipality}}",
     "pagina_toelichting": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater van deze gemeente. Voor deze berekening wordt uitgegaan van het totaal aantal gemeten virusdeeltjes in één week, gedeeld door het aantal metingen.",
@@ -751,6 +763,10 @@
     "selecteer_toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\nEr zijn [landelijke maatregelen](https://www.rijksoverheid.nl/actueel/nieuws/2020/10/13/gedeeltelijke-lockdown-om-besmettingen-terug-te-dringen) van kracht om de snelle verspreiding van het coronavirus tegen te gaan. Ook gelden er in sommige regio’s en steden aanvullende [lokale maatregelen](https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/nederlandse-maatregelen-tegen-het-coronavirus/lokale-maatregelen-tegen-verspreiding-coronavirus/in-de-regio).\n\n[Meer over de risiconiveaus](/over-risiconiveaus)"
   },
   "gemeente_index": {
+    "metadata": {
+      "title": "Overzicht gemeentes | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Overzichtspagina gemeentes in Nederland."
+    },
     "selecteer_titel": "Selecteer een gemeente",
     "selecteer_toelichting": ""
   },

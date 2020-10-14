@@ -678,6 +678,10 @@
     "average": "Average"
   },
   "gemeente_ziekenhuisopnames_per_dag": {
+    "metadata": {
+      "title": "Ziekenhuisopnames inwoners {{municipalityName}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Overzicht van het aantal mensen in de gemeente {{municipalityName}} die met COVID-19 in het ziekenhuis zijn opgenomen."
+    },
     "titel_sidebar": "Hospital admissions by day",
     "titel": "Hospital admissions per day of residents in {{municipality}}",
     "pagina_toelichting": "Number of confirmed COVID-19 cases who are admitted to a hospital per day.",
@@ -696,6 +700,10 @@
     "linechart_description": ""
   },
   "gemeente_positief_geteste_personen": {
+    "metadata": {
+      "title": "Positief geteste mensen in {{municipalityName}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Overzicht van het aantal mensen in de gemeente {{municipalityName}} die positief getest zijn en COVID-19 hebben."
+    },
     "titel_sidebar": "Confirmed cases per 100,000 inhabitants per day",
     "titel": "Confirmed cases in {{municipality}}",
     "pagina_toelichting": "By keeping track of the number of confirmed cases, we are able to determine the rate at which the virus is spreading before it reaches the intensive care. This keeps us prepared.",
@@ -726,6 +734,10 @@
     }
   },
   "gemeente_rioolwater_metingen": {
+    "metadata": {
+      "title": "Rioolwatermeting in {{municipalityName}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Overzicht van rioolwatermetingen en de hoeveelheid aangetroffen COVID-19 virusdeeltjes in de gemeente {{municipalityName}}."
+    },
     "titel_sidebar": "Sewage water examination",
     "titel": "Sewage water examination in {{municipality}}",
     "pagina_toelichting": "Average number of virus particles in one milliliter of sewage water of this municipality. To calculate this, the total number of measured virus particles in one week, is divided by the number of measurements.",
@@ -751,6 +763,10 @@
     "selecteer_toelichting": "The map indicates the level of risk per safety region.\n\nThere are [country-wide measures](https://www.rijksoverheid.nl/actueel/nieuws/2020/10/13/gedeeltelijke-lockdown-om-besmettingen-terug-te-dringen) to stop the quick spread of the coronavirus. In some regions or cities there are additional [local measures](https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/nederlandse-maatregelen-tegen-het-coronavirus/lokale-maatregelen-tegen-verspreiding-coronavirus/in-de-regio).\n\n[More about risk levels](/over-risiconiveaus)"
   },
   "gemeente_index": {
+    "metadata": {
+      "title": "Overzicht gemeentes | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Overzichtspagina gemeentes in Nederland."
+    },
     "selecteer_titel": "Select your municipality",
     "selecteer_toelichting": "There are different measures per safety region and municipality"
   },

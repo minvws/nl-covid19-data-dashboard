@@ -22,6 +22,7 @@ import {
 
 import siteText from '~/locale/index';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { SEOHead } from '~/components/seoHead';
 
 const text = siteText.gemeente_rioolwater_metingen;
 
@@ -38,6 +39,14 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
 
   return (
     <>
+      <SEOHead
+        title={replaceVariablesInText(text.metadata.title, {
+          municipalityName,
+        })}
+        description={replaceVariablesInText(text.metadata.description, {
+          municipalityName,
+        })}
+      />
       <ContentHeader
         category={siteText.gemeente_layout.headings.overig}
         title={replaceVariablesInText(text.titel, {

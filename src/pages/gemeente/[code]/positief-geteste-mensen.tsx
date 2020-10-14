@@ -23,6 +23,7 @@ import Getest from '~/assets/test.svg';
 
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { SEOHead } from '~/components/seoHead';
 
 const text = siteText.gemeente_positief_geteste_personen;
 
@@ -36,6 +37,14 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
 
   return (
     <>
+      <SEOHead
+        title={replaceVariablesInText(text.metadata.title, {
+          municipalityName,
+        })}
+        description={replaceVariablesInText(text.metadata.description, {
+          municipalityName,
+        })}
+      />
       <ContentHeader
         category={siteText.gemeente_layout.headings.medisch}
         title={replaceVariablesInText(text.titel, {
