@@ -11,6 +11,7 @@ import siteText from '~/locale/index';
 
 import { InfectedPeopleNurseryCountDaily } from '~/types/data.d';
 import getNlData, { INationalData } from '~/static-props/nl-data';
+import { SEOHead } from '~/components/seoHead';
 // import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
 // import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
 // import { useRouter } from 'next/router';
@@ -34,6 +35,10 @@ const NursingHomeInfectedPeople: FCWithLayout<INationalData> = (props) => {
 
   return (
     <>
+      <SEOHead
+        title={text.metadata.title}
+        description={text.metadata.description}
+      />
       <ContentHeader
         category={siteText.nationaal_layout.headings.verpleeghuis}
         title={text.titel}

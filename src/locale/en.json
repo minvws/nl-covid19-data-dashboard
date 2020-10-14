@@ -51,6 +51,10 @@
     "terug_naar_alle_cijfers_homepage": "Overview"
   },
   "ic_opnames_per_dag": {
+    "metadata": {
+      "title": "Intensive care-opnames | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Landelijk overzicht van het aantal mensen met bevestigd COVID-19 dat per dag op een intensive care-afdeling van een ziekenhuis is opgenomen."
+    },
     "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
     "bron": {
       "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
@@ -82,6 +86,10 @@
     }
   },
   "verdenkingen_huisartsen": {
+    "metadata": {
+      "title": "Aantal meldingen COVID-19 bij huisartsen | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Landelijk overzicht van het geschat aantal patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten per week."
+    },
     "datums": "Value of  {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
     "bron": {
       "href": "https://www.nivel.nl/en/nivel-primary-care-database",
@@ -99,6 +107,10 @@
     "titel_sidebar": "Patients who contact their GP for the first time because of symptoms that could indicate COVID-19 per 100.000 inhabitants"
   },
   "ziekenhuisopnames_per_dag": {
+    "metadata": {
+      "title": "Ziekenhuisopnames | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Landelijk overzicht van het aantal mensen met COVID-19 dat een ziekenhuis is opgenomen."
+    },
     "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
     "bron": {
       "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
@@ -141,6 +153,10 @@
     "linechart_description": ""
   },
   "positief_geteste_personen": {
+    "metadata": {
+      "title": "Positief geteste mensen | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Landelijk overzicht van inwoners die positief getest zijn en COVID-19 hebben."
+    },
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
@@ -188,6 +204,10 @@
     "titel_sidebar": "Confirmed cases per 100,000 inhabitants per day"
   },
   "besmettelijke_personen": {
+    "metadata": {
+      "title": "Besmettelijke mensen | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Landelijk overzicht van hoeveel mensen met COVID-19 besmettelijk zijn voor anderen."
+    },
     "title": "Number of infectious people",
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
     "bron": {
@@ -209,6 +229,10 @@
     "titel_sidebar": "Number of infectious people"
   },
   "reproductiegetal": {
+    "metadata": {
+      "title": "Reproductiegetal | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Het reproductiegetal laat zien hoe snel het virus zich verspreidt. Dit getal geeft aan hoeveel mensen gemiddeld besmet worden door één patiënt met COVID-19."
+    },
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
     "rangeLegendLabel": "Confidence interval",
     "lineLegendLabel": "Effective R",
@@ -273,6 +297,10 @@
     "text": "View the most important information for your safety region."
   },
   "verpleeghuis_besmette_locaties": {
+    "metadata": {
+      "title": "Besmette verpleeghuizen | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Landelijk overzicht van verpleeghuislocaties waar tenminste één COVID-19 besmetting is vastgesteld."
+    },
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
@@ -294,6 +322,10 @@
     "map_toelichting": "This maps shows the percentage of nursing homes where in the past 28 days at least one (new) COVID-19 infection (confirmed by a positive test) is reported."
   },
   "verpleeghuis_positief_geteste_personen": {
+    "metadata": {
+      "title": "Positief geteste bewoners verpleeghuizen | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Landelijk overzicht van het aantal bewoners van verpleeghuizen die positief getest zijn en COVID-19 hebben."
+    },
     "datums": "Value of {{dateOfReport}}. Obtained:{{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
@@ -314,6 +346,10 @@
     "map_toelichting": "These maps show the number of confirmed cases per 100.000 residents."
   },
   "verpleeghuis_oversterfte": {
+    "metadata": {
+      "title": "Overleden bewoners verpleeghuizen | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Landelijk aantal gemelde verpleeghuisbewoners dat in Nederland overlijdt aan de gevolgen van het coronavirus."
+    },
     "datums": "Value of  {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
@@ -337,6 +373,10 @@
     "text": "Select your region at the top of this page"
   },
   "rioolwater_metingen": {
+    "metadata": {
+      "title": "Rioolwatermeting | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater, afkomstig van circa 300 locaties in Nederland."
+    },
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
     "bron": {
       "text": "RIVM",

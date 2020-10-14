@@ -22,6 +22,7 @@ import { useRouter } from 'next/router';
 import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
 import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
 import { createInfectedLocationsRegionalTooltip } from '~/components/chloropleth/tooltips/region/createInfectedLocationsRegionalTooltip';
+import { SEOHead } from '~/components/seoHead';
 
 const text = siteText.verpleeghuis_besmette_locaties;
 
@@ -41,6 +42,10 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
 
   return (
     <>
+      <SEOHead
+        title={text.metadata.title}
+        description={text.metadata.description}
+      />
       <ContentHeader
         category={siteText.nationaal_layout.headings.verpleeghuis}
         title={text.titel}

@@ -24,6 +24,7 @@ import { DataWarning } from '~/components/dataWarning';
 
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { formatNumber } from '~/utils/formatNumber';
+import { SEOHead } from '~/components/seoHead';
 
 const text = siteText.ziekenhuisopnames_per_dag;
 
@@ -39,6 +40,10 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
 
   return (
     <>
+      <SEOHead
+        title={text.metadata.title}
+        description={text.metadata.description}
+      />
       <ContentHeaderMetadataHack
         category={siteText.nationaal_layout.headings.medisch}
         title={text.titel}

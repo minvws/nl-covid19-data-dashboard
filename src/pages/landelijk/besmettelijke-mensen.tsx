@@ -10,6 +10,7 @@ import siteText from '~/locale/index';
 
 import { ContentHeader } from '~/components/layout/Content';
 import getNlData, { INationalData } from '~/static-props/nl-data';
+import { SEOHead } from '~/components/seoHead';
 
 const text = siteText.besmettelijke_personen;
 
@@ -22,6 +23,10 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
 
   return (
     <>
+      <SEOHead
+        title={text.metadata.title}
+        description={text.metadata.description}
+      />
       <ContentHeader
         category={siteText.nationaal_layout.headings.medisch}
         title={text.title}
