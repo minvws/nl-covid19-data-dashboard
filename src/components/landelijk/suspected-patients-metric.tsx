@@ -1,4 +1,4 @@
-import { InfectiousPeopleLastKnownAverageValue } from '~/types/data.d';
+import { NationalHuisartsVerdenkingen } from '~/types/data.d';
 import { MetricKPI } from '~/components/metricKPI';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
@@ -7,17 +7,17 @@ import { formatDateFromSeconds } from '~/utils/formatDate';
 import siteText from '~/locale/index';
 
 const text = siteText.common.metricKPI;
-const title = siteText.besmettelijke_personen.title;
+const title = siteText.verdenkingen_huisartsen.kpi_titel;
 
-export function InfectiousPeopleMetric(props: {
-  data: InfectiousPeopleLastKnownAverageValue | undefined;
+export function SuspectedPatientsMetric(props: {
+  data: NationalHuisartsVerdenkingen | undefined;
 }) {
   const { data } = props;
 
-  const description = data?.date_of_report_unix
+  const description = data?.date_of_insertion_unix
     ? replaceVariablesInText(text.dateOfReport, {
         dateOfReport: formatDateFromSeconds(
-          data?.date_of_report_unix,
+          data.date_of_insertion_unix,
           'relative'
         ),
       })
@@ -28,7 +28,7 @@ export function InfectiousPeopleMetric(props: {
   return (
     <MetricKPI
       label={title}
-      value={data.infectious_avg}
+      value={Number(data.geschat_aantal)}
       format={formatNumber}
       description={description}
     />

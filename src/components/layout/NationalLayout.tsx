@@ -11,11 +11,11 @@ import { InfectiousPeopleMetric } from '~/components/landelijk/infectious-people
 import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-barscale';
 
 import { IntakeIntensiveCareBarscale } from '~/components/landelijk/intake-intensive-care-barscale';
-import { SuspectedPatientsBarScale } from '~/components/landelijk/suspected-patients-barscale';
-import { SewerWaterBarScale } from '~/components/landelijk/sewer-water-barscale';
-import { NursingHomeInfectedPeopleBarScale } from '~/components/common/nursing-home-infected-people-barscale';
-import { NursingHomeInfectedLocationsBarScale } from '~/components/common/nursing-home-infected-locations-barscale';
-import { NursingHomeDeathsBarScale } from '~/components/common/nursing-home-deaths-barscale';
+import { SuspectedPatientsMetric } from '~/components/landelijk/suspected-patients-metric';
+import { SewerWaterMetric } from '~/components/landelijk/sewer-water-metric';
+import { NursingHomeInfectedPeopleMetric } from '~/components/common/nursing-home-infected-people-metric';
+import { NursingHomeInfectedLocationsMetric } from '~/components/common/nursing-home-infected-locations-metric';
+import { NursingHomeDeathsMetric } from '~/components/common/nursing-home-deaths-metric';
 
 import GetestIcon from '~/assets/test.svg';
 import ReproIcon from '~/assets/reproductiegetal.svg';
@@ -247,9 +247,8 @@ function NationalLayout(props: WithChildren<INationalData>) {
                       title={siteText.verdenkingen_huisartsen.titel_sidebar}
                     />
                     <span>
-                      <SuspectedPatientsBarScale
-                        data={data?.verdenkingen_huisartsen}
-                        showAxis={true}
+                      <SuspectedPatientsMetric
+                        data={data?.verdenkingen_huisartsen.last_value}
                       />
                     </span>
                   </a>
@@ -267,10 +266,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
                       title={siteText.rioolwater_metingen.titel}
                     />
                     <span>
-                      <SewerWaterBarScale
-                        data={data?.rioolwater_metingen}
-                        showAxis={true}
-                      />
+                      <SewerWaterMetric data={data?.rioolwater_metingen} />
                     </span>
                   </a>
                 </Link>
@@ -295,12 +291,10 @@ function NationalLayout(props: WithChildren<INationalData>) {
                       }
                     />
                     <span>
-                      <NursingHomeInfectedPeopleBarScale
-                        value={
+                      <NursingHomeInfectedPeopleMetric
+                        data={
                           data?.infected_people_nursery_count_daily.last_value
-                            .infected_nursery_daily
                         }
-                        showAxis={true}
                       />
                     </span>
                   </a>
@@ -320,12 +314,8 @@ function NationalLayout(props: WithChildren<INationalData>) {
                       title={siteText.verpleeghuis_besmette_locaties.titel}
                     />
                     <span>
-                      <NursingHomeInfectedLocationsBarScale
-                        value={
-                          data?.total_reported_locations.last_value
-                            .total_reported_locations
-                        }
-                        showAxis={true}
+                      <NursingHomeInfectedLocationsMetric
+                        data={data?.total_reported_locations.last_value}
                       />
                     </span>
                   </a>
@@ -343,12 +333,10 @@ function NationalLayout(props: WithChildren<INationalData>) {
                       title={siteText.verpleeghuis_oversterfte.titel_sidebar}
                     />
                     <span>
-                      <NursingHomeDeathsBarScale
-                        value={
+                      <NursingHomeDeathsMetric
+                        data={
                           data?.deceased_people_nursery_count_daily.last_value
-                            .deceased_nursery_daily
                         }
-                        showAxis={true}
                       />
                     </span>
                   </a>
