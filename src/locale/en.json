@@ -595,6 +595,10 @@
     "title": "Municipality"
   },
   "veiligheidsregio_ziekenhuisopnames_per_dag": {
+    "metadata": {
+      "title": "Ziekenhuisopnames inwoners {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Overzicht van het aantal mensen in de veiligheidsregio {{safetyRegionName}} die met COVID-19 in het ziekenhuis zijn opgenomen."
+    },
     "titel_sidebar": "Hospital admissions per day",
     "titel": "Hospital admissions per day of residents in {{safetyRegion}}",
     "pagina_toelichting": "Number of confirmed COVID-19 cases who are admitted to a hospital per day.",
@@ -613,6 +617,10 @@
     "linechart_description": ""
   },
   "veiligheidsregio_positief_geteste_personen": {
+    "metadata": {
+      "title": "Positief geteste mensen in {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Overzicht van het aantal mensen in de veiligheidsregio {{safetyRegionName}} die positief getest zijn en COVID-19 hebben."
+    },
     "titel_sidebar": "Confirmed cases per 100,000 inhabitants per day",
     "titel": "Confirmed cases in {{safetyRegion}}",
     "pagina_toelichting": "By keeping track of the number of confirmed cases, we are able to determine the rate at which the virus is spreading before it reaches the intensive care. This keeps us prepared.",
@@ -657,6 +665,10 @@
     "cluster_linechart_toelichting": "---"
   },
   "veiligheidsregio_rioolwater_metingen": {
+    "metadata": {
+      "title": "Rioolwatermeting in {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Overzicht van rioolwatermetingen en aangetroffen COVID-19 virusdeeltjes in de veiligheidsregio {{safetyRegionName}}."
+    },
     "titel_sidebar": "Sewage water examination",
     "titel": "Sewage water examination in {{safetyRegion}}",
     "pagina_toelichting": "Average number of virus particles in one milliliter of sewage water of this region. To calculate this, the total number of measured virus particles in one week, is divided by the number of measurements.",
@@ -759,6 +771,10 @@
     "average": "Average"
   },
   "veiligheidsregio_index": {
+    "metadata": {
+      "title": "Risiconiveaus per veiligheidsregio | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Overzicht van het huidige risiconiveau per veiligheidsregio in Nederland."
+    },
     "selecteer_titel": "Level of risk",
     "selecteer_toelichting": "The map indicates the level of risk per safety region.\n\nThere are [country-wide measures](https://www.rijksoverheid.nl/actueel/nieuws/2020/10/13/gedeeltelijke-lockdown-om-besmettingen-terug-te-dringen) to stop the quick spread of the coronavirus. In some regions or cities there are additional [local measures](https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/nederlandse-maatregelen-tegen-het-coronavirus/lokale-maatregelen-tegen-verspreiding-coronavirus/in-de-regio).\n\n[More about risk levels](/over-risiconiveaus)"
   },
@@ -851,6 +867,10 @@
     "positief_getest_getest_week_uitleg": "This is {{numerator}} of {{denominator}} tested people"
   },
   "veiligheidsregio_verpleeghuis_oversterfte": {
+    "metadata": {
+      "title": "Overleden bewoners verpleeghuizen in {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Aantal gemelde verpleeghuisbewoners dat in veiligheidsregio {{safetyRegionName}} overlijdt aan de gevolgen van het coronavirus."
+    },
     "datums": "Value of  {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
@@ -867,6 +887,10 @@
     "titel_sidebar": "Mortality per day"
   },
   "veiligheidsregio_verpleeghuis_besmette_locaties": {
+    "metadata": {
+      "title": "Besmette verpleeghuizen in {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Overzicht van verpleeghuislocaties in veiligheidsregio {{safetyRegionName}} waar tenminste één COVID-19 besmetting is vastgesteld."
+    },
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
@@ -882,6 +906,10 @@
     "barscale_screenreader_text": "{{value}} new locations where there is at least one confirmed case, per day."
   },
   "veiligheidsregio_verpleeghuis_positief_geteste_personen": {
+    "metadata": {
+      "title": "Positief geteste bewoners verpleeghuizen in {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Overzicht aantal bewoners van verpleeghuizen in veiligheidsregio {{safetyRegionName}} waarbij COVID-19-besmetting is vastgesteld."
+    },
     "datums": "Value of {{dateOfReport}}. Obtained:{{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
       "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
