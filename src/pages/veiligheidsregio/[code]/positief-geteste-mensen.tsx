@@ -176,7 +176,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
               <h3>
                 {ggdText.totaal_getest_week_titel}{' '}
                 <span className="text-blue kpi">
-                  {formatNumber(ggdData.infected_daily)}
+                  {formatNumber(ggdData.tested_total_daily)}
                 </span>
               </h3>
 
