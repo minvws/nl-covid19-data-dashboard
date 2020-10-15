@@ -5,7 +5,7 @@ import { ChloroplethLegenda } from '~/components/chloropleth/legenda/Chloropleth
 import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
 import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
 import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
-import { createPositiveTestedPeopleRegionalTooltip } from '~/components/chloropleth/tooltips/region/createPositiveTestedPeopleRegionalTooltip';
+import { createNursingHomeNewlyInfectedTooltip } from '~/components/chloropleth/tooltips/region/createNursingHomeNewlyInfectedTooltip';
 import { NursingHomeInfectedPeopleBarScale } from '~/components/common/nursing-home-infected-people-barscale';
 import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/layout/Content';
@@ -64,7 +64,7 @@ const NursingHomeInfectedPeople: FCWithLayout<INationalData> = (props) => {
           <SafetyRegionChloropleth
             metricName="nursing_home"
             metricValueName="newly_infected_people"
-            tooltipContent={createPositiveTestedPeopleRegionalTooltip(router)}
+            tooltipContent={createNursingHomeNewlyInfectedTooltip(router)}
             onSelect={createSelectRegionHandler(
               router,
               'verpleeghuis-positief-geteste-personen'
