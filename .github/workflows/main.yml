@@ -35,9 +35,20 @@ jobs:
       - name: Lint code
         run: yarn lint
 
-  test:
+  compile:
     runs-on: ubuntu-latest
     needs: init
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1
+      - name: Compile code
+        run: npx tsc
+
+  test:
+    runs-on: ubuntu-latest
+    needs: compile
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
