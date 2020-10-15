@@ -1,24 +1,22 @@
-import { InfectedPeopleNurseryCountDailyLastValue } from '~/types/data.d';
+import { SewerWaterBarScaleData } from '~/utils/sewer-water/safety-region-sewer-water.util';
 import { MetricKPI } from '~/components/metricKPI';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { formatDateFromSeconds } from '~/utils/formatDate';
+
 import siteText from '~/locale/index';
 
 const text = siteText.common.metricKPI;
-const title = siteText.verpleeghuis_positief_geteste_personen.titel;
+const title = siteText.veiligheidsregio_rioolwater_metingen.barscale_titel;
 
-export function NursingHomeInfectedPeopleMetric(props: {
-  data: InfectedPeopleNurseryCountDailyLastValue;
+export function SewerWaterMetric(props: {
+  data: SewerWaterBarScaleData | null;
 }) {
   const { data } = props;
 
-  const description = data?.date_of_report_unix
+  const description = data?.dateInsertedUnix
     ? replaceVariablesInText(text.dateOfReport, {
-        dateOfReport: formatDateFromSeconds(
-          data.date_of_report_unix,
-          'relative'
-        ),
+        dateOfReport: formatDateFromSeconds(data?.dateInsertedUnix, 'relative'),
       })
     : undefined;
 
@@ -27,7 +25,7 @@ export function NursingHomeInfectedPeopleMetric(props: {
   return (
     <MetricKPI
       label={title}
-      value={Number(data.infected_nursery_daily)}
+      value={data.value}
       format={formatNumber}
       description={description}
     />

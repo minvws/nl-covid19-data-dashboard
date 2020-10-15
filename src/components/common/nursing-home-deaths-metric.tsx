@@ -13,10 +13,10 @@ export function NursingHomeDeathsMetric(props: {
 }) {
   const { data } = props;
 
-  const description = data?.date_of_insertion_unix
+  const description = data?.date_of_report_unix
     ? replaceVariablesInText(text.dateOfReport, {
         dateOfReport: formatDateFromSeconds(
-          data.date_of_insertion_unix,
+          data.date_of_report_unix,
           'relative'
         ),
       })
