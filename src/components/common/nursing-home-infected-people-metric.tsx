@@ -1,4 +1,4 @@
-import { InfectedPeopleNurseryCountDailyLastValue } from '~/types/data.d';
+import { NationalNursingHomeValue } from '~/types/data.d';
 import { MetricKPI } from '~/components/metricKPI';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
@@ -9,7 +9,7 @@ const text = siteText.common.metricKPI;
 const title = siteText.verpleeghuis_positief_geteste_personen.titel;
 
 export function NursingHomeInfectedPeopleMetric(props: {
-  data: InfectedPeopleNurseryCountDailyLastValue;
+  data: NationalNursingHomeValue;
 }) {
   const { data } = props;
 
@@ -27,7 +27,7 @@ export function NursingHomeInfectedPeopleMetric(props: {
   return (
     <MetricKPI
       label={title}
-      value={Number(data.newly_infected_people)}
+      value={data.newly_infected_people}
       format={formatNumber}
       description={description}
     />
