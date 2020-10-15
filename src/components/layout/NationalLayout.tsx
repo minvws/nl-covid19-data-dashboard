@@ -285,9 +285,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
                     />
                     <span>
                       <NursingHomeInfectedPeopleMetric
-                        data={
-                          data.nursing_home.last_value.newly_infected_people
-                        }
+                        data={data.nursing_home.last_value}
                       />
                     </span>
                   </a>
@@ -308,9 +306,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
                     />
                     <span>
                       <NursingHomeInfectedLocationsMetric
-                        data={
-                          data.nursing_home.last_value.infected_locations_total
-                        }
+                        data={data.nursing_home.last_value}
                       />
                     </span>
                   </a>
@@ -329,7 +325,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
                     />
                     <span>
                       <NursingHomeDeathsMetric
-                        data={data.nursing_home.last_value.deceased_daily}
+                        data={data.nursing_home.last_value}
                       />
                     </span>
                   </a>

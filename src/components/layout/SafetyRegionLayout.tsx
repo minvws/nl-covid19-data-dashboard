@@ -248,14 +248,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                       {data?.nursing_home?.last_value && (
                         <span>
                           <NursingHomeInfectedPeopleMetric
-                            data={{
-                              date_of_report_unix:
-                                data.nursing_home.last_value
-                                  .date_of_report_unix,
-                              infected_nursery_daily:
-                                data.nursing_home.last_value
-                                  .newly_infected_people,
-                            }}
+                            data={data.nursing_home.last_value}
                           />
                         </span>
                       )}
@@ -280,14 +273,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                       />
                       <span>
                         <NursingHomeInfectedLocationsMetric
-                          data={{
-                            date_of_insertion_unix:
-                              data?.nursing_home?.last_value
-                                .date_of_insertion_unix,
-                            total_reported_locations:
-                              data?.nursing_home?.last_value
-                                .infected_locations_total,
-                          }}
+                          data={data.nursing_home.last_value}
                         />
                       </span>
                     </a>
@@ -311,13 +297,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                       />
                       <span>
                         <NursingHomeDeathsMetric
-                          data={{
-                            deceased_nursery_daily:
-                              data?.nursing_home?.last_value.deceased_daily,
-                            date_of_report_unix:
-                              data?.nursing_home?.last_value
-                                .date_of_report_unix,
-                          }}
+                          data={data.nursing_home?.last_value}
                         />
                       </span>
                     </a>
