@@ -1,14 +1,15 @@
 import { NextRouter } from 'next/router';
 import { ReactNode } from 'react';
-import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
-import { SafetyRegionProperties } from '~/components/chloropleth/shared';
 import { TooltipContent } from '~/components/chloropleth/tooltips/tooltipContent';
 import { formatNumber } from '~/utils/formatNumber';
+import { createSelectRegionHandler } from '../../selectHandlers/createSelectRegionHandler';
+import { SafetyRegionProperties } from '../../shared';
 
-export const createRegionHospitalAdmissionsTooltip = (router: NextRouter) => (
+export const createNursingHomeNewlyInfectedTooltip = (router: NextRouter) => (
   context: SafetyRegionProperties & { value: number }
 ): ReactNode => {
   const handler = createSelectRegionHandler(router);
+  const value = context.value;
 
   const onSelect = (event: any) => {
     event.stopPropagation();
@@ -16,10 +17,8 @@ export const createRegionHospitalAdmissionsTooltip = (router: NextRouter) => (
   };
 
   return (
-    context && (
-      <TooltipContent title={context.vrname} onSelect={onSelect}>
-        <strong>{formatNumber(context.value)}</strong>
-      </TooltipContent>
-    )
+    <TooltipContent title={context.vrname} onSelect={onSelect}>
+      <strong>{`${formatNumber(value)} per 100.000`}</strong>
+    </TooltipContent>
   );
 };

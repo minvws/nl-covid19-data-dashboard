@@ -1,38 +1,31 @@
-import Link from 'next/link';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
-
-import { TitleWithIcon } from '~/components/titleWithIcon';
-import { getLayout as getSiteLayout } from '~/components/layout';
-
-import { ReproductionIndexBarScale } from '~/components/landelijk/reproduction-index-barscale';
-import { PositiveTestedPeopleBarScale } from '~/components/landelijk/positive-tested-people-barscale';
+import Arrow from '~/assets/arrow.svg';
+import Arts from '~/assets/arts.svg';
+import CoronaVirus from '~/assets/coronavirus.svg';
+import Locatie from '~/assets/locaties.svg';
+import Notification from '~/assets/notification.svg';
+import ReproIcon from '~/assets/reproductiegetal.svg';
+import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
+import GetestIcon from '~/assets/test.svg';
+import Ziekenhuis from '~/assets/ziekenhuis.svg';
+import Ziektegolf from '~/assets/ziektegolf.svg';
+import { NursingHomeDeathsMetric } from '~/components/common/nursing-home-deaths-metric';
+import { NursingHomeInfectedLocationsMetric } from '~/components/common/nursing-home-infected-locations-metric';
+import { NursingHomeInfectedPeopleMetric } from '~/components/common/nursing-home-infected-people-metric';
 import { InfectiousPeopleMetric } from '~/components/landelijk/infectious-people-metric';
 import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-barscale';
-
 import { IntakeIntensiveCareBarscale } from '~/components/landelijk/intake-intensive-care-barscale';
-import { SuspectedPatientsMetric } from '~/components/landelijk/suspected-patients-metric';
+import { PositiveTestedPeopleBarScale } from '~/components/landelijk/positive-tested-people-barscale';
+import { ReproductionIndexBarScale } from '~/components/landelijk/reproduction-index-barscale';
 import { SewerWaterMetric } from '~/components/landelijk/sewer-water-metric';
-import { NursingHomeInfectedPeopleMetric } from '~/components/common/nursing-home-infected-people-metric';
-import { NursingHomeInfectedLocationsMetric } from '~/components/common/nursing-home-infected-locations-metric';
-import { NursingHomeDeathsMetric } from '~/components/common/nursing-home-deaths-metric';
-
-import GetestIcon from '~/assets/test.svg';
-import ReproIcon from '~/assets/reproductiegetal.svg';
-import Ziektegolf from '~/assets/ziektegolf.svg';
-import Ziekenhuis from '~/assets/ziekenhuis.svg';
-import Arts from '~/assets/arts.svg';
-import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
-import Locatie from '~/assets/locaties.svg';
-import CoronaVirus from '~/assets/coronavirus.svg';
-import Arrow from '~/assets/arrow.svg';
-import Notification from '~/assets/notification.svg';
-
+import { SuspectedPatientsMetric } from '~/components/landelijk/suspected-patients-metric';
+import { getLayout as getSiteLayout } from '~/components/layout';
+import { TitleWithIcon } from '~/components/titleWithIcon';
 import siteText from '~/locale/index';
-
-import { WithChildren } from '~/types/index';
-
 import { INationalData } from '~/static-props/nl-data';
+import { WithChildren } from '~/types/index';
 import { useMenuState } from './useMenuState';
 
 export function getNationalLayout() {
@@ -293,7 +286,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
                     <span>
                       <NursingHomeInfectedPeopleMetric
                         data={
-                          data?.infected_people_nursery_count_daily.last_value
+                          data.nursing_home.last_value.newly_infected_people
                         }
                       />
                     </span>
@@ -315,7 +308,9 @@ function NationalLayout(props: WithChildren<INationalData>) {
                     />
                     <span>
                       <NursingHomeInfectedLocationsMetric
-                        data={data?.total_reported_locations.last_value}
+                        data={
+                          data.nursing_home.last_value.infected_locations_total
+                        }
                       />
                     </span>
                   </a>
@@ -334,9 +329,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
                     />
                     <span>
                       <NursingHomeDeathsMetric
-                        data={
-                          data?.deceased_people_nursery_count_daily.last_value
-                        }
+                        data={data.nursing_home.last_value.deceased_daily}
                       />
                     </span>
                   </a>

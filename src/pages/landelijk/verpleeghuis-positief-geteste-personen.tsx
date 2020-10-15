@@ -1,36 +1,28 @@
-import { FCWithLayout } from '~/components/layout';
-import { getNationalLayout } from '~/components/layout/NationalLayout';
-import { ContentHeader } from '~/components/layout/Content';
-import { LineChart } from '~/components/charts/index';
-
-import { NursingHomeInfectedPeopleBarScale } from '~/components/common/nursing-home-infected-people-barscale';
-
+import { useRouter } from 'next/router';
 import Getest from '~/assets/test.svg';
-
+import { LineChart } from '~/components/charts/index';
+import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
+import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
+import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
+import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
+import { createNursingHomeNewlyInfectedTooltip } from '~/components/chloropleth/tooltips/region/createNursingHomeNewlyInfectedTooltip';
+import { NursingHomeInfectedPeopleBarScale } from '~/components/common/nursing-home-infected-people-barscale';
+import { FCWithLayout } from '~/components/layout';
+import { ContentHeader } from '~/components/layout/Content';
+import { getNationalLayout } from '~/components/layout/NationalLayout';
 import siteText from '~/locale/index';
-
-import { InfectedPeopleNurseryCountDaily } from '~/types/data.d';
 import getNlData, { INationalData } from '~/static-props/nl-data';
-// import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
-// import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
-// import { useRouter } from 'next/router';
-// import { createPositiveTestedPeopleRegionalTooltip } from '~/components/chloropleth/tooltips/region/createPositiveTestedPeopleRegionalTooltip';
-// import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
-// import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
 
 const text = siteText.verpleeghuis_positief_geteste_personen;
 
 const NursingHomeInfectedPeople: FCWithLayout<INationalData> = (props) => {
-  const { data: state } = props;
-  // const router = useRouter();
+  const data = props.data.nursing_home;
+  const router = useRouter();
 
-  // const legendItems = useSafetyRegionLegendaData(
-  //   'nursing_home',
-  //   'newly_infected_people'
-  // );
-
-  const data: InfectedPeopleNurseryCountDaily | undefined =
-    state?.infected_people_nursery_count_daily;
+  const legendItems = useSafetyRegionLegendaData(
+    'nursing_home',
+    'newly_infected_people'
+  );
 
   return (
     <>
@@ -52,7 +44,7 @@ const NursingHomeInfectedPeople: FCWithLayout<INationalData> = (props) => {
           <h3>{text.barscale_titel}</h3>
 
           <NursingHomeInfectedPeopleBarScale
-            value={data.last_value.infected_nursery_daily}
+            value={data.last_value.newly_infected_people}
             showAxis={true}
           />
         </div>
@@ -62,41 +54,40 @@ const NursingHomeInfectedPeople: FCWithLayout<INationalData> = (props) => {
         </div>
       </article>
 
-      {/*
-        <article className="metric-article layout-chloropleth">
-          <div className="chloropleth-header">
-            <h3>{text.map_titel}</h3>
-            <p>{text.map_toelichting}</p>
-          </div>
+      <article className="metric-article layout-chloropleth">
+        <div className="chloropleth-header">
+          <h3>{text.map_titel}</h3>
+          <p>{text.map_toelichting}</p>
+        </div>
 
-          <div className="chloropleth-chart">
-            <SafetyRegionChloropleth
-              metricName="positive_tested_people"
-              tooltipContent={createPositiveTestedPeopleRegionalTooltip(router)}
-              onSelect={createSelectRegionHandler(
-                router,
-                'verpleeghuis-positief-geteste-personen'
-              )}
+        <div className="chloropleth-chart">
+          <SafetyRegionChloropleth
+            metricName="nursing_home"
+            metricValueName="newly_infected_people"
+            tooltipContent={createNursingHomeNewlyInfectedTooltip(router)}
+            onSelect={createSelectRegionHandler(
+              router,
+              'verpleeghuis-positief-geteste-personen'
+            )}
+          />
+        </div>
+
+        <div className="chloropleth-legend">
+          {legendItems ? (
+            <ChloroplethLegenda
+              items={legendItems}
+              title={text.chloropleth_legenda.titel}
             />
-          </div>
-
-          <div className="chloropleth-legend">
-            {legendItems ? (
-              <ChloroplethLegenda
-                items={legendItems}
-                title={text.chloropleth_legenda.titel}
-              />
-            ) : null}
-          </div>
-        </article>
-     */}
+          ) : null}
+        </div>
+      </article>
 
       {data && (
         <article className="metric-article">
           <LineChart
             title={text.linechart_titel}
             values={data.values.map((value) => ({
-              value: value.infected_nursery_daily,
+              value: value.newly_infected_locations,
               date: value.date_of_report_unix,
             }))}
           />

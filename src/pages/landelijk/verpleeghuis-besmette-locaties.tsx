@@ -1,37 +1,23 @@
-import { ContentHeader } from '~/components/layout/Content';
-import { FCWithLayout } from '~/components/layout';
-import { getNationalLayout } from '~/components/layout/NationalLayout';
-import { LineChart } from '~/components/charts/index';
-
+import { useRouter } from 'next/router';
 import Locatie from '~/assets/locaties.svg';
-
-import { formatNumber, formatPercentage } from '~/utils/formatNumber';
-
-import siteText from '~/locale/index';
-
-import {
-  TotalNewlyReportedLocations,
-  TotalReportedLocations,
-} from '~/types/data.d';
-
-import getNlData, { INationalData } from '~/static-props/nl-data';
+import { BarScale } from '~/components/barScale';
+import { LineChart } from '~/components/charts/index';
+import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
+import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
 import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
 import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
-import { useRouter } from 'next/router';
-import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
-import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
 import { createInfectedLocationsRegionalTooltip } from '~/components/chloropleth/tooltips/region/createInfectedLocationsRegionalTooltip';
+import { FCWithLayout } from '~/components/layout';
+import { ContentHeader } from '~/components/layout/Content';
+import { getNationalLayout } from '~/components/layout/NationalLayout';
+import siteText from '~/locale/index';
+import getNlData, { INationalData } from '~/static-props/nl-data';
+import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 
 const text = siteText.verpleeghuis_besmette_locaties;
 
 const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
-  const { data: state } = props;
-
-  const newLocations: TotalNewlyReportedLocations | undefined =
-    state?.total_newly_reported_locations;
-  const totalLocations: TotalReportedLocations | undefined =
-    state?.total_reported_locations;
-
+  const data = props.data.nursing_home;
   const router = useRouter();
   const legendItems = useSafetyRegionLegendaData(
     'nursing_home',
@@ -47,29 +33,51 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: newLocations?.last_value?.date_of_report_unix,
-          dateInsertedUnix: newLocations?.last_value?.date_of_insertion_unix,
+          dateUnix: data.last_value.date_of_report_unix,
+          dateInsertedUnix: data.last_value.date_of_insertion_unix,
           dataSource: text.bron,
         }}
       />
 
       <div className="layout-two-column">
         <article className="metric-article column-item">
-          {totalLocations && (
-            <h3>
-              {text.kpi_titel}{' '}
-              <span className="text-blue kpi">
-                {formatNumber(
-                  totalLocations.last_value.total_reported_locations
-                )}{' '}
-                (
-                {formatPercentage(
-                  state.nursing_home.last_value.infected_locations_percentage
-                )}
-                %)
-              </span>
-            </h3>
-          )}
+          <h3>
+            {text.kpi_titel}{' '}
+            <span className="text-blue kpi">
+              {formatNumber(data.last_value.infected_locations_total)} (
+              {formatPercentage(data.last_value.infected_locations_percentage)}
+              %)
+            </span>
+          </h3>
+          <h3>{text.barscale_titel}</h3>
+
+          <BarScale
+            min={0}
+            max={30}
+            screenReaderText={text.barscale_screenreader_text}
+            value={data.last_value.newly_infected_locations}
+            id="besmette_locaties_verpleeghuis"
+            rangeKey="total_new_reported_locations"
+            gradient={[
+              {
+                color: '#3391CC',
+                value: 0,
+              },
+            ]}
+            showAxis={true}
+          />
+          <p>{text.barscale_toelichting}</p>
+        </article>
+
+        <article className="metric-article column-item">
+          <h3>
+            {text.kpi_titel}{' '}
+            <span className="text-blue kpi">
+              {formatNumber(data.last_value.infected_locations_total)} (
+              {formatPercentage(data.last_value.infected_locations_percentage)}
+              %)
+            </span>
+          </h3>
           <p>{text.kpi_toelichting}</p>
         </article>
 
@@ -77,9 +85,7 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
           <h3>
             {text.barscale_titel}
             <span className="text-blue kpi">
-              {formatNumber(
-                newLocations?.last_value.total_new_reported_locations
-              )}
+              {formatNumber(data?.last_value.newly_infected_locations)}
             </span>
           </h3>
 
@@ -115,17 +121,15 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
         </div>
       </article>
 
-      {totalLocations && (
-        <article className="metric-article">
-          <LineChart
-            title={text.linechart_titel}
-            values={totalLocations.values.map((value) => ({
-              value: value.total_reported_locations,
-              date: value.date_of_report_unix,
-            }))}
-          />
-        </article>
-      )}
+      <article className="metric-article">
+        <LineChart
+          title={text.linechart_titel}
+          values={data.values.map((value) => ({
+            value: value.newly_infected_locations,
+            date: value.date_of_report_unix,
+          }))}
+        />
+      </article>
     </>
   );
 };
