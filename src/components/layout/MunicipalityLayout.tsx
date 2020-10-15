@@ -223,7 +223,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                         />
                         <span>
                           <SewerWaterMetric
-                            data={getSewerWaterBarScaleData(data)}
+                            data={getSewerWaterBarScaleData(data) ?? undefined}
                           />
                         </span>
                       </a>
@@ -238,7 +238,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                       />
                       <span>
                         <SewerWaterMetric
-                          data={getSewerWaterBarScaleData(data)}
+                          data={getSewerWaterBarScaleData(data) ?? undefined}
                         />
                       </span>
                     </div>
