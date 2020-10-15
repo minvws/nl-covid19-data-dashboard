@@ -157,8 +157,8 @@
     "map_toelichting": "These maps show how many confirmed cases of COVID-19 were reported yesterday per 100,000 inhabitants.",
     "linechart_titel": "Progression over time",
     "linechart_toelichting": "This graph shows how many confirmed cases of COVID-19 were reported recently per 100,000 inhabitants.",
-    "barchart_titel": "New cases by age group (total number of new cases)",
-    "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group.",
+    "barchart_titel": "New cases by age group",
+    "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
     "barscale_keys": [
       "0 to 20",
@@ -627,8 +627,8 @@
     "map_toelichting": "This map shows how many confirmed cases of COVID-19 were reported yesterday in the municipalities of this safety region per 100,000 inhabitants.",
     "linechart_titel": "Progression over time",
     "linechart_toelichting": "This graph shows how many confirmed cases of COVID-19 were reported recently in this safety region per 100,000 inhabitants.",
-    "barchart_titel": "New cases by age group (total number of new cases)",
-    "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group.",
+    "barchart_titel": "New cases by age group",
+    "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
     "barscale_keys": [
       "0 to 20",
@@ -710,8 +710,8 @@
     "map_toelichting": "This map shows how many confirmed cases of COVID-19 were reported yesterday in these municipalities per 100,000 inhabitants.",
     "linechart_titel": "Progression over time",
     "linechart_toelichting": "This graph shows how many confirmed cases of COVID-19 were reported recently in this municipality per 100,000 inhabitants.",
-    "barchart_titel": "New cases by age group (total number of new cases)",
-    "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group.",
+    "barchart_titel": "New cases by age group",
+    "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
     "barscale_keys": [
       "0 to 20",
