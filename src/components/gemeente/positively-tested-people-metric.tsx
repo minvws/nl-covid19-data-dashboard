@@ -1,4 +1,4 @@
-import { PositiveTestedPeople } from '~/types/data.d';
+import { PositiveTestedPeopleLastValue } from '~/types/data.d';
 import { MetricKPI } from '~/components/metricKPI';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
@@ -10,7 +10,7 @@ const text = siteText.common.metricKPI;
 const title = siteText.gemeente_positief_geteste_personen.barscale_titel;
 
 export function PositivelyTestedPeopleMetric(props: {
-  data: PositiveTestedPeople | undefined;
+  data: PositiveTestedPeopleLastValue | undefined;
 }) {
   const { data } = props;
 
