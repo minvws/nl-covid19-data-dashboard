@@ -1,19 +1,16 @@
 import { NextRouter } from 'next/router';
 import { ReactNode } from 'react';
-import { formatDateFromSeconds } from '~/utils/formatDate';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-
-import text from '~/locale/index';
-import styles from '../tooltip.module.scss';
-
 import EscalationLevel1 from '~/assets/niveau-1.svg';
 import EscalationLevel2 from '~/assets/niveau-2.svg';
 import EscalationLevel3 from '~/assets/niveau-3.svg';
 import EscalationLevel4 from '~/assets/niveau-4.svg';
-
-import { TooltipContent } from '~/components/chloropleth/tooltips/tooltipContent';
 import { regionThresholds } from '~/components/chloropleth/regionThresholds';
+import { TooltipContent } from '~/components/chloropleth/tooltips/tooltipContent';
+import text from '~/locale/index';
+import { formatDateFromSeconds } from '~/utils/formatDate';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { ChoroplethThresholds } from '../../shared';
+import styles from '../tooltip.module.scss';
 
 const escalationThresholds = (regionThresholds.escalation_levels as ChoroplethThresholds)
   .thresholds;

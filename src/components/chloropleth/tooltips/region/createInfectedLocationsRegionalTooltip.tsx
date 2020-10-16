@@ -1,13 +1,13 @@
 import { NextRouter } from 'next/router';
 import { ReactNode } from 'react';
-import { SafetyRegionProperties } from '../../shared';
-import { createSelectRegionHandler } from '../../selectHandlers/createSelectRegionHandler';
 import { TooltipContent } from '~/components/chloropleth/tooltips/tooltipContent';
 import { RegionsNursingHome } from '~/types/data';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
+import { createSelectRegionHandler } from '../../selectHandlers/createSelectRegionHandler';
+import { SafetyRegionProperties } from '../../shared';
 
 export const createInfectedLocationsRegionalTooltip = (router: NextRouter) => (
-  context: RegionsNursingHome & SafetyRegionProperties & { value: number }
+  context: RegionsNursingHome & SafetyRegionProperties
 ): ReactNode => {
   const handler = createSelectRegionHandler(router);
 

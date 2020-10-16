@@ -12,11 +12,7 @@
     "infectious_people_count",
     "infectious_people_count_normalized",
     "intake_intensivecare_ma",
-    "infected_people_nursery_count_daily",
-    "deceased_people_nursery_count_daily",
     "infected_people_percentage",
-    "total_reported_locations",
-    "total_newly_reported_locations",
     "infected_people_total",
     "infected_people_delta_normalized",
     "intake_share_age_groups",
@@ -60,23 +56,11 @@
     "intake_intensivecare_ma": {
       "$ref": "intake_intensivecare_ma.json"
     },
-    "infected_people_nursery_count_daily": {
-      "$ref": "infected_people_nursery_count_daily.json"
-    },
-    "deceased_people_nursery_count_daily": {
-      "$ref": "deceased_people_nursery_count_daily.json"
-    },
     "infected_people_clusters": {
       "$ref": "infected_people_clusters.json"
     },
     "infected_people_percentage": {
       "$ref": "infected_people_percentage.json"
-    },
-    "total_reported_locations": {
-      "$ref": "total_reported_locations.json"
-    },
-    "total_newly_reported_locations": {
-      "$ref": "total_newly_reported_locations.json"
     },
     "infected_people_total": {
       "$ref": "infected_people_total.json"

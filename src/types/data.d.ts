@@ -109,12 +109,8 @@ export interface National {
   infectious_people_count: InfectiousPeopleCount;
   infectious_people_count_normalized: InfectiousPeopleCountNormalized;
   intake_intensivecare_ma: IntakeIntensivecareMa;
-  infected_people_nursery_count_daily: InfectedPeopleNurseryCountDaily;
-  deceased_people_nursery_count_daily: DeceasedPeopleNurseryCountDaily;
   infected_people_clusters?: InfectedPeopleClusters;
   infected_people_percentage: InfectedPeoplePercentage;
-  total_reported_locations: TotalReportedLocations;
-  total_newly_reported_locations: TotalNewlyReportedLocations;
   infected_people_total: NationalInfectedPeopleTotal;
   infected_people_delta_normalized: InfectedPeopleDeltaNormalized;
   intake_share_age_groups: IntakeShareAgeGroups;
@@ -188,24 +184,6 @@ export interface IntakeIntensivecareMaLastValue {
   date_of_report_unix: number;
   date_of_insertion_unix: number;
 }
-export interface InfectedPeopleNurseryCountDaily {
-  values: InfectedPeopleNurseryCountDailyLastValue[];
-  last_value: InfectedPeopleNurseryCountDailyLastValue;
-}
-export interface InfectedPeopleNurseryCountDailyLastValue {
-  infected_nursery_daily: number;
-  date_of_report_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface DeceasedPeopleNurseryCountDaily {
-  values: DeceasedPeopleNurseryCountDailyLastValue[];
-  last_value: DeceasedPeopleNurseryCountDailyLastValue;
-}
-export interface DeceasedPeopleNurseryCountDailyLastValue {
-  deceased_nursery_daily: number;
-  date_of_report_unix: number;
-  date_of_insertion_unix: number;
-}
 export interface InfectedPeopleClusters {
   values: InfectedPeopleClustersLastValue[];
   last_value: InfectedPeopleClustersLastValue;
@@ -224,24 +202,6 @@ export interface InfectedPeoplePercentageLastValue {
   infected_ggd: number;
   percentage_infected_ggd: number;
   total_tested_ggd: number;
-  date_of_report_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface TotalReportedLocations {
-  values: TotalReportedLocationsLastValue[];
-  last_value: TotalReportedLocationsLastValue;
-}
-export interface TotalReportedLocationsLastValue {
-  total_reported_locations: number;
-  date_of_report_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface TotalNewlyReportedLocations {
-  values: TotalNewlyReportedLocationsLastValue[];
-  last_value: TotalNewlyReportedLocationsLastValue;
-}
-export interface TotalNewlyReportedLocationsLastValue {
-  total_new_reported_locations: number;
   date_of_report_unix: number;
   date_of_insertion_unix: number;
 }
@@ -365,10 +325,13 @@ export interface NationalNursingHome {
   last_value: NationalNursingHomeValue;
 }
 export interface NationalNursingHomeValue {
+  newly_infected_people: number;
+  deceased_daily: number;
+  newly_infected_locations: number;
+  infected_locations_total: number;
   infected_locations_percentage: number;
   date_of_report_unix: number;
   date_of_insertion_unix: number;
-  [k: string]: unknown;
 }
 
 export interface Ranges {
