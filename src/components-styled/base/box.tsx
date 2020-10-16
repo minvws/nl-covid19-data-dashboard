@@ -32,7 +32,8 @@ type BoxProps = SpaceProps &
   GridProps;
 
 /**
- * We use the Box component as a generic spacing/layout component throughout the app
+ * A fully generic styling component used for layouts throughout the app. For
+ * simple spacing we have the Spacer component.
  */
 export const Box = styled.div<BoxProps>`
   ${compose(

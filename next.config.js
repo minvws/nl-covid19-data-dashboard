@@ -21,13 +21,6 @@ const nextConfig = {
   },
   reactStrictMode: true, // Enables react strict mode https://nextjs.org/docs/api-reference/next.config.js/react-strict-mode
   webpack(config) {
-    // Fixes npm packages that depend on `fs` module
-    // if (!isServer) {
-    //   config.node = {
-    //     fs: 'empty',
-    //   };
-    // }
-
     config.module.rules.push({
       test: /\.svg$/,
       use: [

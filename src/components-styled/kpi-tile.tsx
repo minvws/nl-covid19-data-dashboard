@@ -1,5 +1,3 @@
-// import styled from 'styled-components';
-// import { space, layout, color, compose } from 'styled-system';
 import locale from '~/locale/index';
 import { Box, Spacer } from './base';
 import { ExternalLink } from './external-link';
@@ -13,8 +11,6 @@ interface KpiTileProps {
     href: string;
   };
 }
-
-// const Root = styled.article(compose(space, color, layout));
 
 /**
  * A generic KPI tile which composes its value content using the children prop.
