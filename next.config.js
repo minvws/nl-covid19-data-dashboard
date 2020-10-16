@@ -1,7 +1,6 @@
 const withPlugins = require('next-compose-plugins');
 
 const withTM = require('next-transpile-modules')([
-  '@juggle/resize-observer',
   '@vx/tooltip',
   '@vx/event',
   'zustand',
@@ -22,6 +21,13 @@ const nextConfig = {
   },
   reactStrictMode: true, // Enables react strict mode https://nextjs.org/docs/api-reference/next.config.js/react-strict-mode
   webpack(config) {
+    // Fixes npm packages that depend on `fs` module
+    // if (!isServer) {
+    //   config.node = {
+    //     fs: 'empty',
+    //   };
+    // }
+
     config.module.rules.push({
       test: /\.svg$/,
       use: [
