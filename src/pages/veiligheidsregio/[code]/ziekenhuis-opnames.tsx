@@ -23,6 +23,7 @@ import { DataWarning } from '~/components/dataWarning';
 
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { SEOHead } from '~/components/seoHead';
 
 const text = siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
 
@@ -39,6 +40,14 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
 
   return (
     <>
+      <SEOHead
+        title={replaceVariablesInText(text.metadata.title, {
+          safetyRegionName,
+        })}
+        description={replaceVariablesInText(text.metadata.description, {
+          safetyRegionName,
+        })}
+      />
       <ContentHeader
         category={siteText.veiligheidsregio_layout.headings.medisch}
         title={replaceVariablesInText(text.titel, {

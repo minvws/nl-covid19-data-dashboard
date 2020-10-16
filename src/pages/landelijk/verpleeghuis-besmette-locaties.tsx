@@ -7,6 +7,7 @@ import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hoo
 import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
 import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
 import { createInfectedLocationsRegionalTooltip } from '~/components/chloropleth/tooltips/region/createInfectedLocationsRegionalTooltip';
+import { SEOHead } from '~/components/seoHead';
 import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/layout/Content';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
@@ -26,6 +27,10 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
 
   return (
     <>
+      <SEOHead
+        title={text.metadata.title}
+        description={text.metadata.description}
+      />
       <ContentHeader
         category={siteText.nationaal_layout.headings.verpleeghuis}
         title={text.titel}

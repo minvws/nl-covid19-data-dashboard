@@ -16,6 +16,7 @@ import {
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { SEOHead } from '~/components/seoHead';
 
 const text = siteText.veiligheidsregio_verpleeghuis_positief_geteste_personen;
 
@@ -26,6 +27,14 @@ const NursingHomeInfectedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
 
   return (
     <>
+      <SEOHead
+        title={replaceVariablesInText(text.metadata.title, {
+          safetyRegionName,
+        })}
+        description={replaceVariablesInText(text.metadata.description, {
+          safetyRegionName,
+        })}
+      />
       <ContentHeader
         category={siteText.veiligheidsregio_layout.headings.verpleeghuis}
         title={replaceVariablesInText(text.titel, {
