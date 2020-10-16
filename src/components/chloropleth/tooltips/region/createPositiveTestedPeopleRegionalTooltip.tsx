@@ -1,8 +1,9 @@
 import { NextRouter } from 'next/router';
 import { ReactNode } from 'react';
-import { SafetyRegionProperties } from '../../shared';
-import { createSelectRegionHandler } from '../../selectHandlers/createSelectRegionHandler';
 import { TooltipContent } from '~/components/chloropleth/tooltips/tooltipContent';
+import { formatNumber } from '~/utils/formatNumber';
+import { createSelectRegionHandler } from '../../selectHandlers/createSelectRegionHandler';
+import { SafetyRegionProperties } from '../../shared';
 
 export const createPositiveTestedPeopleRegionalTooltip = (
   router: NextRouter
@@ -17,9 +18,7 @@ export const createPositiveTestedPeopleRegionalTooltip = (
   return (
     context && (
       <TooltipContent title={context.vrname} onSelect={onSelect}>
-        <span>
-          {context.value !== undefined ? `${context.value} per 100.000` : '-'}
-        </span>
+        <strong>{`${formatNumber(context.value)} per 100.000`}</strong>
       </TooltipContent>
     )
   );

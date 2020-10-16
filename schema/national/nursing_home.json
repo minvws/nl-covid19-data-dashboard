@@ -20,6 +20,18 @@
       "title": "national_nursing_home_value",
       "type": "object",
       "properties": {
+        "newly_infected_people": {
+          "type": "integer"
+        },
+        "deceased_daily": {
+          "type": "integer"
+        },
+        "newly_infected_locations": {
+          "type": "integer"
+        },
+        "infected_locations_total": {
+          "type": "integer"
+        },
         "infected_locations_percentage": {
           "type": "number"
         },
@@ -31,11 +43,15 @@
         }
       },
       "required": [
+        "newly_infected_people",
+        "deceased_daily",
+        "newly_infected_locations",
+        "infected_locations_total",
         "infected_locations_percentage",
         "date_of_report_unix",
         "date_of_insertion_unix"
       ],
-      "additionalProperties": true
+      "additionalProperties": false
     }
   }
 }
