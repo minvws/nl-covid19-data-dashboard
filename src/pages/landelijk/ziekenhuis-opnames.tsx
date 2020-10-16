@@ -20,6 +20,7 @@ import { DataWarning } from '~/components/dataWarning';
 import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-barscale';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
+import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 
@@ -37,6 +38,10 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
 
   return (
     <>
+      <SEOHead
+        title={text.metadata.title}
+        description={text.metadata.description}
+      />
       <ContentHeaderMetadataHack
         category={siteText.nationaal_layout.headings.medisch}
         title={text.titel}

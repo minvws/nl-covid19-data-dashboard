@@ -7,6 +7,7 @@ import { getNationalLayout } from '~/components/layout/NationalLayout';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
+import { SEOHead } from '~/components/seoHead';
 
 const text = siteText.ic_opnames_per_dag;
 
@@ -19,6 +20,10 @@ const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
 
   return (
     <>
+      <SEOHead
+        title={text.metadata.title}
+        description={text.metadata.description}
+      />
       <ContentHeaderMetadataHack
         category={siteText.nationaal_layout.headings.medisch}
         title={text.titel}

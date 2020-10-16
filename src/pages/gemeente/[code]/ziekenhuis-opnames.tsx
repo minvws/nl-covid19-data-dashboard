@@ -22,6 +22,7 @@ import { DataWarning } from '~/components/dataWarning';
 
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { SEOHead } from '~/components/seoHead';
 
 const text = siteText.gemeente_ziekenhuisopnames_per_dag;
 
@@ -35,6 +36,14 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
 
   return (
     <>
+      <SEOHead
+        title={replaceVariablesInText(text.metadata.title, {
+          municipalityName,
+        })}
+        description={replaceVariablesInText(text.metadata.description, {
+          municipalityName,
+        })}
+      />
       <ContentHeader
         category={siteText.gemeente_layout.headings.medisch}
         title={replaceVariablesInText(text.titel, {

@@ -26,6 +26,7 @@ import Getest from '~/assets/test.svg';
 import Afname from '~/assets/afname.svg';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { SEOHead } from '~/components/seoHead';
 
 const text = siteText.veiligheidsregio_positief_geteste_personen;
 const ggdText = siteText.veiligheidsregio_positief_geteste_personen_ggd;
@@ -45,6 +46,14 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
 
   return (
     <>
+      <SEOHead
+        title={replaceVariablesInText(text.metadata.title, {
+          safetyRegionName,
+        })}
+        description={replaceVariablesInText(text.metadata.description, {
+          safetyRegionName,
+        })}
+      />
       <ContentHeader
         category={siteText.veiligheidsregio_layout.headings.medisch}
         title={replaceVariablesInText(text.titel, {
