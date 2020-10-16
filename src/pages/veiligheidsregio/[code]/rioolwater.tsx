@@ -8,7 +8,7 @@ import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 
 import siteText from '~/locale/index';
 
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { BarChart } from '~/components/charts';
 import {
   getSewerWaterBarScaleData,
@@ -22,7 +22,11 @@ import {
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { RegionalSewerWaterLineChart2 } from '~/components/lineChart/regionalSewerWaterLineChart2';
+import { RegionalSewerWaterLineChart } from '~/components/lineChart/regionalSewerWaterLineChart';
+import {
+  ChartTimeControls,
+  TimeframeOption,
+} from '~/components/chartTimeControls';
 
 const text = siteText.veiligheidsregio_rioolwater_metingen;
 
@@ -42,6 +46,8 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
       scatterPlotData: getSewerWaterScatterPlotData(data),
     };
   }, [data]);
+
+  const [timeframe, setTimeframe] = useState<TimeframeOption>('all');
 
   return (
     <>
@@ -72,16 +78,26 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
         </div>
       </article>
 
-      <article>
-        <h3>{text.linechart_titel}</h3>
+      <article className="metric-article">
+        <div className="metric-article-header">
+          <h3>{text.linechart_titel}</h3>
+          <ChartTimeControls
+            timeframe={timeframe}
+            onChange={(value) => setTimeframe(value)}
+          />
+        </div>
 
         {scatterPlotData && lineChartData && (
-          <RegionalSewerWaterLineChart2
+          <RegionalSewerWaterLineChart
+            timeframe={timeframe}
             scatterPlotValues={scatterPlotData}
             averageValues={lineChartData.averageValues}
             text={{
               average_label_text: lineChartData.averageLabelText,
               secondary_label_text: text.graph_secondary_label_text,
+              daily_label_text: text.graph_daily_label_text_rwzi,
+              select_rwzi_placeholder: text.graph_selected_rwzi_placeholder,
+              range_description: text.graph_range_description,
             }}
           />
         )}

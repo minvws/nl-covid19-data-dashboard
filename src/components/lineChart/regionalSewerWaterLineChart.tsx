@@ -1,62 +1,160 @@
-import React, { useMemo } from 'react';
-import Highcharts, { SeriesLineOptions } from 'highcharts';
+import { useMemo, useState } from 'react';
+import Highcharts, {
+  SeriesLineOptions,
+  SeriesScatterOptions,
+} from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-
 import { formatNumber } from '~/utils/formatNumber';
-import { formatDateFromSeconds } from '~/utils/formatDate';
 import { getItemFromArray } from '~/utils/getItemFromArray';
+import { formatDateFromSeconds } from '~/utils/formatDate';
+import { SewerValue } from '~/types/data';
 
-type TranslationStrings = Record<string, string>;
+import styles from './lineChart.module.scss';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import Dot from '~/assets/dot.svg';
+import Line from '~/assets/line.svg';
+import { TimeframeOption } from '../chartTimeControls';
+import { getFilteredValues } from '../chartTimeControls/chartTimeControlUtils';
 
-interface Value {
+type Value = {
   date: number;
   value?: number;
   week_start_unix: number;
   week_end_unix: number;
-}
+};
+
+export type TProps = {
+  averageValues: Value[];
+  scatterPlotValues: SewerValue[];
+  text: TranslationStrings;
+  timeframe: TimeframeOption;
+};
 
 type Week = {
   start: number;
   end: number;
 };
 
-type RegionalSewerWaterLineChartProps = {
-  averageValues: Value[];
-  text: TranslationStrings;
+type TranslationStrings = {
+  average_label_text: string;
+  secondary_label_text: string;
+  select_rwzi_placeholder: string;
+  range_description: string;
+  daily_label_text: string;
 };
 
 function getOptions(
   averageValues: Value[],
-  text: TranslationStrings
-): Highcharts.Options {
+  scatterPlotValues: SewerValue[],
+  text: TranslationStrings,
+  selectedRWZI: string | undefined,
+  timeframe: TimeframeOption
+): [Highcharts.Options, string[]] {
   const hasMultipleValues = averageValues.length > 1;
+
+  averageValues = getFilteredValues(
+    averageValues,
+    timeframe,
+    (value) => value.date * 1000
+  );
+  scatterPlotValues = getFilteredValues(
+    scatterPlotValues,
+    timeframe,
+    (value) => value.date_measurement_unix * 1000
+  );
+
   const weekSet: Week[] = averageValues.map((value) => ({
     start: value.week_start_unix,
     end: value.week_end_unix,
   }));
 
-  const series: SeriesLineOptions[] = [
-    {
-      type: 'line',
-      data: averageValues.map((x) => [x.date, x.value]),
-      name: text.average_label_text,
-      showInLegend: true,
-      color: '#3391CC',
-      allowPointSelect: false,
-      marker: {
-        symbol: 'circle',
-        enabled: !hasMultipleValues,
-      },
-      events: {
-        legendItemClick: () => false,
-      },
-      states: {
-        inactive: {
-          opacity: 1,
-        },
+  const weekSets: Record<string, Week[]> = {
+    [text.average_label_text]: weekSet,
+  };
+
+  const sewerStationNames: string[] = [];
+
+  const scatterSerie: SeriesScatterOptions = {
+    type: 'scatter',
+    enableMouseTracking: false,
+    name: text.secondary_label_text,
+    description: text.secondary_label_text,
+    color: '#CDCDCD',
+    data: [],
+    marker: {
+      symbol: 'circle',
+      radius: 3,
+    },
+  };
+
+  scatterPlotValues?.forEach((value) => {
+    if (sewerStationNames.indexOf(value.rwzi_awzi_name) < 0) {
+      sewerStationNames.push(value.rwzi_awzi_name);
+    }
+    scatterSerie.data?.push({
+      x: value.date_measurement_unix,
+      y: value.rna_per_ml,
+    });
+  });
+
+  const series: (SeriesLineOptions | SeriesScatterOptions)[] = [scatterSerie];
+
+  series.push({
+    type: 'line',
+    data: averageValues.map((x) => [x.date, x.value]),
+    name: text.average_label_text,
+    description: text.average_label_text,
+    showInLegend: true,
+    color: selectedRWZI ? '#A9A9A9' : '#3391CC',
+    enableMouseTracking: selectedRWZI === undefined,
+    allowPointSelect: false,
+    marker: {
+      symbol: 'circle',
+      enabled: !hasMultipleValues,
+    },
+    states: {
+      inactive: {
+        opacity: 1,
       },
     },
-  ];
+  });
+
+  if (selectedRWZI) {
+    const scatterValues = scatterPlotValues.filter(
+      (value) => value.rwzi_awzi_name === selectedRWZI
+    );
+    if (scatterValues.length) {
+      series.push({
+        type: 'line',
+        data: scatterValues.map((scatterValue) => ({
+          x: scatterValue.date_measurement_unix,
+          y: scatterValue.rna_per_ml,
+        })),
+        name: selectedRWZI,
+        description: replaceVariablesInText(text.daily_label_text, {
+          name: selectedRWZI,
+        }),
+        color: '#004277',
+        allowPointSelect: false,
+        marker: {
+          symbol: 'circle',
+          enabled: false,
+        },
+        states: {
+          inactive: {
+            opacity: 1,
+          },
+        },
+      });
+    }
+
+    weekSets[selectedRWZI] = scatterPlotValues
+      .filter((plot) => plot.rwzi_awzi_name === selectedRWZI)
+      .map((value) => ({
+        start: value.week_start_unix,
+        end: value.week_end_unix,
+      }));
+  }
 
   const options: Highcharts.Options = {
     chart: {
@@ -71,18 +169,7 @@ function getOptions(
       height: 225,
     },
     legend: {
-      itemWidth: 300,
-      reversed: true,
-      itemHoverStyle: {
-        color: '#666',
-      },
-      itemStyle: {
-        color: '#666',
-        cursor: 'pointer',
-        fontSize: '12px',
-        fontWeight: 'normal',
-        textOverflow: 'ellipsis',
-      },
+      enabled: false,
     },
     credits: {
       enabled: false,
@@ -92,7 +179,7 @@ function getOptions(
       gridLineColor: '#ca005d',
       type: 'datetime',
       accessibility: {
-        rangeDescription: 'Verloop van tijd',
+        rangeDescription: text.range_description,
       },
       title: {
         text: null,
@@ -108,23 +195,6 @@ function getOptions(
             ? formatDateFromSeconds(this.value, 'axis')
             : '';
         },
-      },
-    },
-    tooltip: {
-      backgroundColor: '#FFF',
-      borderColor: '#01689B',
-      borderRadius: 0,
-      formatter: function (): false | string {
-        if (this.series.name !== text.average_label_text) {
-          return false;
-        }
-        const { start, end } = getItemFromArray(weekSet, this.point.index);
-        return `<strong>${formatDateFromSeconds(
-          start,
-          'short'
-        )} - ${formatDateFromSeconds(end, 'short')}:</strong> ${formatNumber(
-          this.y
-        )}`;
       },
     },
     yAxis: {
@@ -145,19 +215,115 @@ function getOptions(
     title: {
       text: undefined,
     },
+    tooltip: {
+      backgroundColor: '#FFF',
+      borderColor: '#01689B',
+      borderRadius: 0,
+      formatter: function (): false | string {
+        const weeks = weekSets[this.series.name];
+
+        if (!weeks) {
+          return false;
+        }
+
+        const { start, end } = getItemFromArray(weeks, this.point.index);
+
+        return `<strong>${formatDateFromSeconds(
+          start,
+          'short'
+        )} - ${formatDateFromSeconds(end, 'short')}:</strong> ${formatNumber(
+          this.y
+        )}<br/>(${this.series.name})`;
+      },
+    },
     series,
   };
 
-  return options;
+  return [options, sewerStationNames];
 }
 
-export function RegionalSewerWaterLineChart({
-  averageValues,
-  text,
-}: RegionalSewerWaterLineChartProps) {
-  const chartOptions = useMemo(() => {
-    return getOptions(averageValues, text);
-  }, [averageValues, text]);
+export function RegionalSewerWaterLineChart(props: TProps) {
+  const { averageValues, scatterPlotValues, text, timeframe } = props;
+  const [selectedRWZI, setSelectedRWZI] = useState<string | undefined>();
 
-  return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;
+  const [chartOptions, sewerStationNames] = useMemo(() => {
+    return getOptions(
+      averageValues,
+      scatterPlotValues,
+      text,
+      selectedRWZI,
+      timeframe
+    );
+  }, [averageValues, scatterPlotValues, text, selectedRWZI, timeframe]);
+
+  return (
+    <>
+      <div className={styles.selectorContainer}>
+        <RZWISelector
+          placeholderText={text.select_rwzi_placeholder}
+          onChange={setSelectedRWZI}
+          stationNames={sewerStationNames}
+        />
+      </div>
+      <HighchartsReact highcharts={Highcharts} options={chartOptions} />
+      <div>
+        <ul className={styles.legenda}>
+          {chartOptions.series?.map((serie) => (
+            <li key={serie.name}>
+              <div className={styles.legendaMarker}>
+                {serie.type === 'scatter' && <Dot fill={serie.color} />}
+                {serie.type === 'line' && <Line stroke={serie.color} />}
+              </div>
+              <div>{serie.description}</div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
+  );
+}
+
+type TSelectorProps = {
+  onChange: (value?: string) => void;
+  stationNames: string[];
+  placeholderText: string;
+};
+
+function RZWISelector(props: TSelectorProps) {
+  const { onChange, stationNames, placeholderText } = props;
+  const [selected, setSelected] = useState<string | undefined>();
+
+  if (selected) {
+    return (
+      <button
+        className={styles.rzwiButton}
+        onClick={() => {
+          setSelected(undefined);
+          onChange(undefined);
+        }}
+      >
+        {selected}
+      </button>
+    );
+  }
+
+  return (
+    <select
+      defaultValue=""
+      onChange={(event) => {
+        setSelected(event.target.value);
+        onChange(event.target.value);
+      }}
+      className={styles.rzwiSelector}
+    >
+      <option value="" disabled>
+        {placeholderText}
+      </option>
+      {stationNames.map((name) => (
+        <option value={name} key={name}>
+          {name}
+        </option>
+      ))}
+    </select>
+  );
 }

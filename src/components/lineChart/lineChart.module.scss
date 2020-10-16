@@ -24,6 +24,9 @@ $breakpoint: 1200px;
 
 .timeControls {
   flex: none;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.5em;
 
   /**
     This is a hack because chartTimeControls contains margin settings.
@@ -32,5 +35,51 @@ $breakpoint: 1200px;
     @media (min-width: $breakpoint) {
       margin: 0;
     }
+  }
+}
+
+.selectorContainer {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.rzwiButton {
+  min-width: 15em;
+  border: 1px solid lightgrey;
+  padding: 0.5em;
+  padding-right: 1.5em;
+  text-align: left;
+  background-color: white;
+  background: url('/images/close.svg');
+  background-repeat: no-repeat, repeat;
+  background-position: right 0.2em top 50%, 0 0;
+}
+
+.rzwiSelector {
+  min-width: 15em;
+  border-color: lightgrey;
+  appearance: none;
+  padding: 0.5em;
+  padding-right: 1.5em;
+  background: url('/images/chevron-down.svg');
+  background-repeat: no-repeat, repeat;
+  background-position: right 0.2em top 50%, 0 0;
+}
+
+.legenda li {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+}
+
+.legendaMarker {
+  height: 0.5em;
+  width: 0.5em;
+  margin-right: 0.5em;
+
+  svg {
+    height: 100%;
+    width: 100%;
   }
 }
