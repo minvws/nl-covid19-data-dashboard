@@ -434,8 +434,8 @@
     "paragraaf": "In dit dashboard staan verschillende cijfers die ons vertellen hoe het ervoor staat met beheersen van COVID-19. Op deze plek geven we meer toelichting over de wijze waarop de cijfers zijn samengesteld.",
     "cijfers": [
       {
-        "cijfer": "Correctie cijfers 2 september in aantal positief geteste mensen",
-        "verantwoording": "Vanwege een eerdere technische storing bij het RIVM ontbreekt een aantal meldingen in de rapportage van 1 september. Deze meldingen zijn opgenomen in de rapportage van 2 september. Hierdoor is het aantal nieuwe positief geteste personen gemeld op 2 september (734) bijna 300 meldingen hoger dan op 1 september (462)."
+        "cijfer": "Correctie in aantal positief geteste mensen",
+        "verantwoording": "Op 17 oktober 2020 is sprake van 233 nameldingen van GGD Noord-Holland-Noord.\n\nVanwege een eerdere technische storing bij het RIVM ontbreekt een aantal meldingen in de rapportage van 1 september. Deze meldingen zijn opgenomen in de rapportage van 2 september. Hierdoor is het aantal nieuwe positief geteste personen gemeld op 2 september (734) bijna 300 meldingen hoger dan op 1 september (462)."
       },
       {
         "cijfer": "Intensive care-bezetting",
