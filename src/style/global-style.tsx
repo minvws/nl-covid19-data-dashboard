@@ -18,17 +18,60 @@ html {
   box-sizing: inherit;
 }
 
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@font-face {
+  font-family: 'RO Sans';
+  font-weight: normal;
+  font-style: normal;
+  src: url('/webfonts/RO-SansWebText-Regular.woff2') format('woff2'),
+    url('/webfonts/RO-SansWebText-Regular.woff') format('woff');
+  font-display: swap;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@font-face {
+  font-family: 'RO Sans';
+  font-weight: normal;
+  font-style: italic;
+  src: url('/webfonts/RO-SansWebText-Italic.woff2') format('woff2'),
+    url('/webfonts/RO-SansWebText-Italic.woff') format('woff');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'RO Sans';
+  font-weight: bold;
+  font-style: normal;
+  src: url('/webfonts/RO-SansWebText-Bold.woff2') format('woff2'),
+    url('/webfonts/RO-SansWebText-Bold.woff') format('woff');
+  font-display: swap;
+}
+
+/*
+  Some global css copies from scss files
+*/
+html {
+  box-sizing: border-box;
+  -webkit-text-size-adjust: 100%;
+  line-height: 1.15;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'RO Sans', Calibri, sans-serif;
+  color: $text-color;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 150%;
+}
+
+
+#__next {
+  position: relative;
+  overflow: hidden;
+}
+
+img,
+svg {
+  max-width: 100%;
 }
 `;
