@@ -22,6 +22,7 @@ import {
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { SEOHead } from '~/components/seoHead';
 
 const text = siteText.veiligheidsregio_rioolwater_metingen;
 
@@ -38,6 +39,14 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
 
   return (
     <>
+      <SEOHead
+        title={replaceVariablesInText(text.metadata.title, {
+          safetyRegionName,
+        })}
+        description={replaceVariablesInText(text.metadata.description, {
+          safetyRegionName,
+        })}
+      />
       <ContentHeader
         category={siteText.veiligheidsregio_layout.headings.overig}
         title={replaceVariablesInText(text.titel, {

@@ -6,6 +6,7 @@ import { ContentHeader } from '~/components/layout/Content';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
+import { SEOHead } from '~/components/seoHead';
 
 const text = siteText.verpleeghuis_oversterfte;
 
@@ -14,6 +15,10 @@ const NursingHomeDeaths: FCWithLayout<INationalData> = (props) => {
 
   return (
     <>
+      <SEOHead
+        title={text.metadata.title}
+        description={text.metadata.description}
+      />
       <ContentHeader
         category={siteText.nationaal_layout.headings.verpleeghuis}
         title={text.titel}

@@ -15,6 +15,7 @@ import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { TALLLanguages } from '~/locale/index';
 import { MDToHTMLString } from '~/utils/MDToHTMLString';
+import { SEOHead } from '~/components/seoHead';
 
 const escalationThresholds = (regionThresholds.escalation_levels as ChoroplethThresholds)
   .thresholds;
@@ -62,33 +63,39 @@ const SafetyRegion: FCWithLayout<any> = (props) => {
   const { text } = props;
 
   return (
-    <article className="index-article layout-chloropleth">
-      <div className="chloropleth-header">
-        <h2>{text.veiligheidsregio_index.selecteer_titel}</h2>
-        {/**
-         * This is rendering html content which has been generated from
-         * markdown text.
-         */}
-        <div
-          dangerouslySetInnerHTML={{
-            __html: text.veiligheidsregio_index.selecteer_toelichting,
-          }}
-        />
-      </div>
+    <>
+      <SEOHead
+        title={text.veiligheidsregio_index.metadata.title}
+        description={text.veiligheidsregio_index.metadata.description}
+      />
+      <article className="index-article layout-chloropleth">
+        <div className="chloropleth-header">
+          <h2>{text.veiligheidsregio_index.selecteer_titel}</h2>
+          {/**
+           * This is rendering html content which has been generated from
+           * markdown text.
+           */}
+          <div
+            dangerouslySetInnerHTML={{
+              __html: text.veiligheidsregio_index.selecteer_toelichting,
+            }}
+          />
+        </div>
 
-      <div className="chloropleth-chart">
-        <SafetyRegionChloropleth
-          metricName="escalation_levels"
-          metricValueName="escalation_level"
-          onSelect={createSelectRegionHandler(router)}
-          tooltipContent={escalationTooltip(router)}
-        />
-      </div>
+        <div className="chloropleth-chart">
+          <SafetyRegionChloropleth
+            metricName="escalation_levels"
+            metricValueName="escalation_level"
+            onSelect={createSelectRegionHandler(router)}
+            tooltipContent={escalationTooltip(router)}
+          />
+        </div>
 
-      <div className="chloropleth-legend">
-        <EscalationMapLegenda text={text} />
-      </div>
-    </article>
+        <div className="chloropleth-legend">
+          <EscalationMapLegenda text={text} />
+        </div>
+      </article>
+    </>
   );
 };
 

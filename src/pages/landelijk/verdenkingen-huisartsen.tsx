@@ -12,6 +12,7 @@ import { LineChart } from '~/components/lineChart/lineChartWithWeekTooltip';
 
 import Arts from '~/assets/arts.svg';
 import { formatNumber } from '~/utils/formatNumber';
+import { SEOHead } from '~/components/seoHead';
 
 const text = siteText.verdenkingen_huisartsen;
 
@@ -26,6 +27,10 @@ const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
 
   return (
     <>
+      <SEOHead
+        title={text.metadata.title}
+        description={text.metadata.description}
+      />
       <ContentHeader
         category={siteText.gemeente_layout.headings.overig}
         title={text.titel}
