@@ -178,7 +178,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           />
         </article>
       )}
-
+      {/* the barscale's initial SSR output was incorrect, giving both columns a fixed width solves this*/}
       <article className="metric-article layout-two-column">
         <div className="column-item-fixed">
           <h3>{text.barchart_titel}</h3>
