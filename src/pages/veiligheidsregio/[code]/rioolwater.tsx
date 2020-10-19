@@ -23,7 +23,7 @@ import {
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { RegionalSewerWaterLineChart } from '~/components/lineChart/regionalSewerWaterLineChart';
+import { RegionalSewerWaterChart } from '~/components/lineChart/regionalSewerWaterChart';
 import {
   ChartTimeControls,
   TimeframeOption,
@@ -104,7 +104,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
                 />
               </div>
             )}
-            <RegionalSewerWaterLineChart
+            <RegionalSewerWaterChart
               timeframe={timeframe}
               scatterPlotValues={scatterPlotData}
               averageValues={lineChartData.averageValues}

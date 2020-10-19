@@ -113,7 +113,8 @@ export function getSewerWaterStationNames(data?: Regionaal): string[] {
 
   return data.results_per_sewer_installation_per_region.values
     .flatMap((value) => value.values)
-    .map((value) => value.rwzi_awzi_name);
+    .map((value) => value.rwzi_awzi_name)
+    .filter((value, index, arr) => arr.indexOf(value) === index);
 }
 
 export function getSewerWaterScatterPlotData(
