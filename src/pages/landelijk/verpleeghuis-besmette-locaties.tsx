@@ -45,8 +45,8 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
 
       <div className="layout-two-column">
         <article className="metric-article column-item">
+          <h3>{text.kpi_titel}</h3>
           <h3>
-            {text.kpi_titel}{' '}
             <span className="text-blue kpi">
               {formatNumber(data.last_value.infected_locations_total)} (
               {formatPercentage(data.last_value.infected_locations_percentage)}

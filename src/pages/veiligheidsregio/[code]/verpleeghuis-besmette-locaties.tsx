@@ -61,26 +61,22 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
       <div className="layout-two-column">
         <article className="metric-article column-item">
           <h3>{text.barscale_titel}</h3>
-
           <h3>
             <span className="text-blue kpi" data-cy="infected_daily_total">
               {formatNumber(newlyInfectedLocations)}
             </span>
           </h3>
-
           <p>{text.barscale_toelichting}</p>
         </article>
 
         <article className="metric-article column-item">
-          {infectedLocationsTotal !== undefined && (
-            <h3>
-              {text.kpi_titel}{' '}
-              <span className="text-blue kpi">
-                {formatNumber(infectedLocationsTotal)} (
-                {formatPercentage(infectedLocationsPercentage)}%)
-              </span>
-            </h3>
-          )}
+          <h3>{text.kpi_titel}</h3>
+          <h3>
+            <span className="text-blue kpi">
+              {formatNumber(infectedLocationsTotal)} (
+              {formatPercentage(infectedLocationsPercentage)}%)
+            </span>
+          </h3>
           <p>{text.kpi_toelichting}</p>
         </article>
       </div>

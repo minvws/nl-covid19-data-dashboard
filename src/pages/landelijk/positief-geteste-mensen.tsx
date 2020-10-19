@@ -90,14 +90,13 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         </article>
 
         <article className="metric-article column-item">
-          {total && (
-            <h3>
-              {text.kpi_titel}{' '}
-              <span className="text-blue kpi" data-cy="infected_daily_total">
-                {formatNumber(total.last_value.infected_daily_total)}
-              </span>
-            </h3>
-          )}
+          <h3>{text.kpi_titel}</h3>
+          <h3>
+            <span className="text-blue kpi" data-cy="infected_daily_total">
+              {formatNumber(total.last_value.infected_daily_total)}
+            </span>
+          </h3>
+
           <p>{text.kpi_toelichting}</p>
           {ggdData && ggdData.percentage_infected_ggd && (
             <div className="ggd-summary">
@@ -218,8 +217,8 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
 
           <div className="layout-two-column">
             <article className="metric-article column-item">
+              <h3>{ggdText.totaal_getest_week_titel}</h3>
               <h3>
-                {ggdText.totaal_getest_week_titel}{' '}
                 <span className="text-blue kpi">
                   {formatNumber(ggdData?.total_tested_ggd)}
                 </span>
@@ -229,8 +228,8 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
             </article>
 
             <article className="metric-article column-item">
+              <h3>{ggdText.positief_getest_week_titel}</h3>
               <h3>
-                {ggdText.positief_getest_week_titel}{' '}
                 <span className="text-blue kpi">
                   {`${formatPercentage(ggdData?.percentage_infected_ggd)}%`}
                 </span>

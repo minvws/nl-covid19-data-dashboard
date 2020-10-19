@@ -46,8 +46,8 @@ const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
 
       <div className="layout-two-column">
         <article className="metric-article column-item">
+          <h3>{text.kpi_titel}</h3>
           <h3>
-            {text.kpi_titel}{' '}
             <span className="text-blue kpi">{formatNumber(total)}</span>
           </h3>
 
@@ -55,8 +55,8 @@ const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
         </article>
 
         <article className="metric-article column-item">
+          <h3>{text.normalized_kpi_titel}</h3>
           <h3>
-            {text.normalized_kpi_titel}{' '}
             <span className="text-blue kpi">{formatNumber(normalized)}</span>
           </h3>
           <p>{text.normalized_kpi_toelichting}</p>
