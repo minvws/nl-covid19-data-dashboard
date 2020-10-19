@@ -12,8 +12,6 @@
     "infectious_people_count",
     "infectious_people_count_normalized",
     "intake_intensivecare_ma",
-    "infected_people_percentage",
-    "infected_people_total",
     "infected_people_delta_normalized",
     "intake_share_age_groups",
     "reproduction_index",
@@ -59,9 +57,6 @@
     },
     "infected_people_clusters": {
       "$ref": "infected_people_clusters.json"
-    },
-    "infected_people_percentage": {
-      "$ref": "infected_people_percentage.json"
     },
     "infected_people_total": {
       "$ref": "infected_people_total.json"
