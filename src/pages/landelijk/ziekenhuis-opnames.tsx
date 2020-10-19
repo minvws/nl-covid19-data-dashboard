@@ -75,19 +75,6 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
         </KpiTile>
       </TwoKpiSection>
 
-      {/**
-       * An example of how a two kpi section renders with just one kpi
-       */}
-      <TwoKpiSection>
-        <KpiTile
-          title={text.kpi_bedbezetting.title}
-          description={text.kpi_bedbezetting.description}
-          sourcedFrom={text.bronnen.lnaz}
-        >
-          <KpiValue absolute={dataBeds.last_value.covid_occupied} />
-        </KpiTile>
-      </TwoKpiSection>
-
       <article className="metric-article">
         <LineChart
           title={text.linechart_titel}
