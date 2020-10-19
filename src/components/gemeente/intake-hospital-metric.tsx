@@ -27,7 +27,7 @@ export function IntakeHospitalMetric(props: {
 
   return (
     <MetricKPI
-      label={title}
+      title={title}
       value={data.moving_average_hospital}
       format={formatNumber}
       description={description}
