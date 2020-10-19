@@ -20,7 +20,7 @@ export type TProps = {
   scatterPlotValues: SewerValue[];
   text: TranslationStrings;
   timeframe: TimeframeOption;
-  selectedRWZI?: string;
+  selectedInstallation?: string;
 };
 
 export type TranslationStrings = {
@@ -36,7 +36,7 @@ export function RegionalSewerWaterChart(props: TProps) {
     scatterPlotValues,
     text,
     timeframe,
-    selectedRWZI,
+    selectedInstallation: selectedRWZI,
   } = props;
 
   const chartOptions = useRegionalSewerWaterChartOptions(
@@ -51,10 +51,10 @@ export function RegionalSewerWaterChart(props: TProps) {
     <>
       <HighchartsReact highcharts={Highcharts} options={chartOptions} />
       <div>
-        <ul className={styles.legenda}>
+        <ul className={styles.legend}>
           {chartOptions.series?.map((serie) => (
             <li key={serie.name}>
-              <div className={styles.legendaMarker}>
+              <div className={styles.legendMarker}>
                 {serie.type === 'scatter' && <Dot fill={serie.color} />}
                 {serie.type === 'line' && <Line stroke={serie.color} />}
               </div>

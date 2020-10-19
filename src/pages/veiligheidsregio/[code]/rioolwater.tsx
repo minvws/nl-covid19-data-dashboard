@@ -15,7 +15,7 @@ import {
   getSewerWaterLineChartData,
   getSewerWaterBarChartData,
   getSewerWaterScatterPlotData,
-  getSewerWaterStationNames,
+  getInstallationNames,
 } from '~/utils/sewer-water/safety-region-sewer-water.util';
 import {
   getSafetyRegionData,
@@ -29,8 +29,8 @@ import {
   ChartTimeControls,
   TimeframeOption,
 } from '~/components/chartTimeControls';
-import { RWZISelector } from '~/components/lineChart/rwziSelector';
-import styles from '~/components/lineChart/rwziselector.module.scss';
+import { InstallationSelector } from '~/components/lineChart/installationSelector';
+import styles from '~/components/lineChart/installationselector.module.scss';
 
 const text = siteText.veiligheidsregio_rioolwater_metingen;
 
@@ -49,12 +49,14 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
       lineChartData: getSewerWaterLineChartData(data),
       barChartData: getSewerWaterBarChartData(data),
       scatterPlotData: getSewerWaterScatterPlotData(data),
-      sewerStationNames: getSewerWaterStationNames(data),
+      sewerStationNames: getInstallationNames(data),
     };
   }, [data]);
 
   const [timeframe, setTimeframe] = useState<TimeframeOption>('all');
-  const [selectedRWZI, setSelectedRWZI] = useState<string | undefined>();
+  const [selectedInstallation, setSelectedInstallation] = useState<
+    string | undefined
+  >();
 
   return (
     <>
@@ -106,9 +108,9 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
           <>
             {sewerStationNames.length > 0 && (
               <div className={styles.selectorContainer}>
-                <RWZISelector
+                <InstallationSelector
                   placeholderText={text.graph_selected_rwzi_placeholder}
-                  onChange={setSelectedRWZI}
+                  onChange={setSelectedInstallation}
                   stationNames={sewerStationNames}
                 />
               </div>
@@ -117,7 +119,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
               timeframe={timeframe}
               scatterPlotValues={scatterPlotData}
               averageValues={lineChartData.averageValues}
-              selectedRWZI={selectedRWZI}
+              selectedInstallation={selectedInstallation}
               text={{
                 average_label_text: lineChartData.averageLabelText,
                 secondary_label_text: text.graph_secondary_label_text,

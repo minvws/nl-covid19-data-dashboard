@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import styles from './rwziselector.module.scss';
+import styles from './installationselector.module.scss';
 
 type TProps = {
   onChange: (value?: string) => void;
@@ -8,14 +8,14 @@ type TProps = {
   placeholderText: string;
 };
 
-export function RWZISelector(props: TProps) {
+export function InstallationSelector(props: TProps) {
   const { onChange, stationNames, placeholderText } = props;
   const [selected, setSelected] = useState<string | undefined>();
 
   if (selected) {
     return (
       <button
-        className={styles.rwziButton}
+        className={styles.installationButton}
         onClick={() => {
           setSelected(undefined);
           onChange(undefined);
@@ -33,7 +33,7 @@ export function RWZISelector(props: TProps) {
         setSelected(event.target.value);
         onChange(event.target.value);
       }}
-      className={styles.rwziSelector}
+      className={styles.installationSelector}
     >
       <option value="" disabled>
         {placeholderText}

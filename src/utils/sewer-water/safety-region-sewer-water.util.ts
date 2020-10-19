@@ -94,7 +94,7 @@ export function getSewerWaterBarScaleData(
   }
 }
 
-export function getSewerWaterStationNames(data?: Regionaal): string[] {
+export function getInstallationNames(data?: Regionaal): string[] {
   const { dataAvailable, oneInstallation } = getSewerWaterMetadata(data);
 
   if (!data || !dataAvailable || oneInstallation) {
