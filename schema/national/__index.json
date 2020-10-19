@@ -22,6 +22,7 @@
     "rioolwater_metingen_per_rwzi",
     "hospital_beds_occupied",
     "intensive_care_beds_occupied",
+    "ggd",
     "nursing_home"
   ],
   "additionalProperties": false,
@@ -91,6 +92,9 @@
     },
     "intensive_care_beds_occupied": {
       "$ref": "intensive_care_beds_occupied.json"
+    },
+    "ggd": {
+      "$ref": "ggd.json"
     },
     "nursing_home": {
       "$ref": "nursing_home.json"
