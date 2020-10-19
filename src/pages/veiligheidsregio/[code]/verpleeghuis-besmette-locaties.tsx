@@ -1,4 +1,3 @@
-import { BarScale } from '~/components/barScale';
 import { ContentHeader } from '~/components/layout/Content';
 import { FCWithLayout } from '~/components/layout';
 import { LineChart } from '~/components/charts/index';
@@ -63,21 +62,12 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
         <article className="metric-article column-item">
           <h3>{text.barscale_titel}</h3>
 
-          <BarScale
-            min={0}
-            max={30}
-            screenReaderText={text.barscale_screenreader_text}
-            value={newlyInfectedLocations}
-            id="besmette_locaties_verpleeghuis"
-            rangeKey="total_new_reported_locations"
-            gradient={[
-              {
-                color: '#3391CC',
-                value: 0,
-              },
-            ]}
-            showAxis={true}
-          />
+          <h3>
+            <span className="text-blue kpi" data-cy="infected_daily_total">
+              {formatNumber(newlyInfectedLocations)}
+            </span>
+          </h3>
+
           <p>{text.barscale_toelichting}</p>
         </article>
 

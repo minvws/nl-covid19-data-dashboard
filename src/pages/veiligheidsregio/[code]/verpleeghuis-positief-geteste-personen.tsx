@@ -2,7 +2,7 @@ import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/layout/Content';
 import { LineChart } from '~/components/charts/index';
 
-import { NursingHomeInfectedPeopleBarScale } from '~/components/common/nursing-home-infected-people-barscale';
+import { formatNumber } from '~/utils/formatNumber';
 
 import Getest from '~/assets/test.svg';
 
@@ -56,10 +56,11 @@ const NursingHomeInfectedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
         <div className="column-item column-item-extra-margin">
           <h3>{text.barscale_titel}</h3>
 
-          <NursingHomeInfectedPeopleBarScale
-            value={data?.last_value.newly_infected_people}
-            showAxis={true}
-          />
+          <h3>
+            <span className="text-blue kpi" data-cy="infected_daily_total">
+              {formatNumber(data?.last_value.newly_infected_people)}
+            </span>
+          </h3>
         </div>
 
         <div className="column-item column-item-extra-margin">
