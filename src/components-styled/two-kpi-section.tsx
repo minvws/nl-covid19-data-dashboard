@@ -17,9 +17,25 @@ export function TwoKpiSection({ children }: TwoKpiSectionProps) {
   const childrenArray = React.Children.toArray(children);
 
   return (
-    // The mb here could alternatively be set using a <Spacer/> in the page markup
-    <Box display="flex" mb={4}>
-      <Box flex="1 1 50%" mr={3}>
+    <Box
+      display={{ lg: 'flex' }}
+      /**
+       * The mb here could alternatively be applied using a <Spacer/> in the
+       * page markup. It's a choice, whether we like to include the bottom
+       * margin on all our commonly used components or keep everything flexible
+       * and use spacers in the context where the component is used.
+       */
+      mb={4}
+      /**
+       * The ml and mr negative margins should not be part of this component
+       * ideally, but are the results of the page layout having paddings even on
+       * small screens. We can remove this once we make all page section
+       * elements full-width and remove the padding from the page layout.
+       */
+      ml={{ _: -4, sm: 0 }}
+      mr={{ _: -4, sm: 0 }}
+    >
+      <Box flex="1 1 50%" mr={{ lg: 3 }} mb={{ _: 4, lg: 0 }}>
         {childrenArray[0]}
       </Box>
       <Box flex="1 1 50%">{childrenArray[1]}</Box>
