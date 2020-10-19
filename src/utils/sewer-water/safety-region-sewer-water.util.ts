@@ -41,16 +41,6 @@ export interface SewerWaterBarChartData {
   data: XrangePointOptionsObject[];
 }
 
-export interface SewerWaterScatterPlotValue {
-  date: number;
-  value: number;
-  sewerInstallationName: string;
-}
-
-export interface SewerWaterScatterPlotData {
-  values: SewerWaterScatterPlotValue[];
-}
-
 function getSewerWaterMetadata(
   data: Regionaal | undefined
 ): SewerWaterMetadata {
