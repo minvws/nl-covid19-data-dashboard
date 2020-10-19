@@ -50,19 +50,15 @@ export function useRegionalSewerWaterChartOptions(
       name: text.secondary_label_text,
       description: text.secondary_label_text,
       color: '#CDCDCD',
-      data: [],
+      data: scatterPlotValues?.map((value) => ({
+        x: value.date_measurement_unix,
+        y: value.rna_per_ml,
+      })),
       marker: {
         symbol: 'circle',
         radius: 3,
       },
     };
-
-    scatterPlotValues?.forEach((value) => {
-      scatterSerie.data?.push({
-        x: value.date_measurement_unix,
-        y: value.rna_per_ml,
-      });
-    });
 
     const series: (SeriesLineOptions | SeriesScatterOptions)[] = [scatterSerie];
 
