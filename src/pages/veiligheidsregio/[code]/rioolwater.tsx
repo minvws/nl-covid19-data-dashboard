@@ -15,6 +15,7 @@ import {
   getSewerWaterLineChartData,
   getSewerWaterBarChartData,
   getSewerWaterScatterPlotData,
+  getSewerWaterStationNames,
 } from '~/utils/sewer-water/safety-region-sewer-water.util';
 import {
   getSafetyRegionData,
@@ -27,6 +28,8 @@ import {
   ChartTimeControls,
   TimeframeOption,
 } from '~/components/chartTimeControls';
+import { RWZISelector } from '~/components/lineChart/rwziSelector';
+import styles from '~/components/lineChart/rwziselector.module.scss';
 
 const text = siteText.veiligheidsregio_rioolwater_metingen;
 
@@ -38,16 +41,19 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
     lineChartData,
     barChartData,
     scatterPlotData,
+    sewerStationNames,
   } = useMemo(() => {
     return {
       barScaleData: getSewerWaterBarScaleData(data),
       lineChartData: getSewerWaterLineChartData(data),
       barChartData: getSewerWaterBarChartData(data),
       scatterPlotData: getSewerWaterScatterPlotData(data),
+      sewerStationNames: getSewerWaterStationNames(data),
     };
   }, [data]);
 
   const [timeframe, setTimeframe] = useState<TimeframeOption>('all');
+  const [selectedRWZI, setSelectedRWZI] = useState<string | undefined>();
 
   return (
     <>
@@ -88,18 +94,29 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
         </div>
 
         {scatterPlotData && lineChartData && (
-          <RegionalSewerWaterLineChart
-            timeframe={timeframe}
-            scatterPlotValues={scatterPlotData}
-            averageValues={lineChartData.averageValues}
-            text={{
-              average_label_text: lineChartData.averageLabelText,
-              secondary_label_text: text.graph_secondary_label_text,
-              daily_label_text: text.graph_daily_label_text_rwzi,
-              select_rwzi_placeholder: text.graph_selected_rwzi_placeholder,
-              range_description: text.graph_range_description,
-            }}
-          />
+          <>
+            {sewerStationNames.length > 0 && (
+              <div className={styles.selectorContainer}>
+                <RWZISelector
+                  placeholderText={text.graph_selected_rwzi_placeholder}
+                  onChange={setSelectedRWZI}
+                  stationNames={sewerStationNames}
+                />
+              </div>
+            )}
+            <RegionalSewerWaterLineChart
+              timeframe={timeframe}
+              scatterPlotValues={scatterPlotData}
+              averageValues={lineChartData.averageValues}
+              selectedRWZI={selectedRWZI}
+              text={{
+                average_label_text: lineChartData.averageLabelText,
+                secondary_label_text: text.graph_secondary_label_text,
+                daily_label_text: text.graph_daily_label_text_rwzi,
+                range_description: text.graph_range_description,
+              }}
+            />
+          </>
         )}
       </article>
 

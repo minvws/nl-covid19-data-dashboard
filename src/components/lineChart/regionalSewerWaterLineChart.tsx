@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import Highcharts, {
   SeriesLineOptions,
   SeriesScatterOptions,
@@ -28,6 +28,7 @@ export type TProps = {
   scatterPlotValues: SewerValue[];
   text: TranslationStrings;
   timeframe: TimeframeOption;
+  selectedRWZI?: string;
 };
 
 type Week = {
@@ -38,7 +39,6 @@ type Week = {
 type TranslationStrings = {
   average_label_text: string;
   secondary_label_text: string;
-  select_rwzi_placeholder: string;
   range_description: string;
   daily_label_text: string;
 };
@@ -72,8 +72,6 @@ function getOptions(
     [text.average_label_text]: weekSet,
   };
 
-  const sewerStationNames: string[] = [];
-
   const scatterSerie: SeriesScatterOptions = {
     type: 'scatter',
     enableMouseTracking: false,
@@ -88,9 +86,6 @@ function getOptions(
   };
 
   scatterPlotValues?.forEach((value) => {
-    if (sewerStationNames.indexOf(value.rwzi_awzi_name) < 0) {
-      sewerStationNames.push(value.rwzi_awzi_name);
-    }
     scatterSerie.data?.push({
       x: value.date_measurement_unix,
       y: value.rna_per_ml,
@@ -239,14 +234,19 @@ function getOptions(
     series,
   };
 
-  return [options, sewerStationNames];
+  return options;
 }
 
 export function RegionalSewerWaterLineChart(props: TProps) {
-  const { averageValues, scatterPlotValues, text, timeframe } = props;
-  const [selectedRWZI, setSelectedRWZI] = useState<string | undefined>();
+  const {
+    averageValues,
+    scatterPlotValues,
+    text,
+    timeframe,
+    selectedRWZI,
+  } = props;
 
-  const [chartOptions, sewerStationNames] = useMemo(() => {
+  const chartOptions = useMemo(() => {
     return getOptions(
       averageValues,
       scatterPlotValues,
@@ -258,13 +258,6 @@ export function RegionalSewerWaterLineChart(props: TProps) {
 
   return (
     <>
-      <div className={styles.selectorContainer}>
-        <RZWISelector
-          placeholderText={text.select_rwzi_placeholder}
-          onChange={setSelectedRWZI}
-          stationNames={sewerStationNames}
-        />
-      </div>
       <HighchartsReact highcharts={Highcharts} options={chartOptions} />
       <div>
         <ul className={styles.legenda}>
@@ -280,50 +273,5 @@ export function RegionalSewerWaterLineChart(props: TProps) {
         </ul>
       </div>
     </>
-  );
-}
-
-type TSelectorProps = {
-  onChange: (value?: string) => void;
-  stationNames: string[];
-  placeholderText: string;
-};
-
-function RZWISelector(props: TSelectorProps) {
-  const { onChange, stationNames, placeholderText } = props;
-  const [selected, setSelected] = useState<string | undefined>();
-
-  if (selected) {
-    return (
-      <button
-        className={styles.rzwiButton}
-        onClick={() => {
-          setSelected(undefined);
-          onChange(undefined);
-        }}
-      >
-        {selected}
-      </button>
-    );
-  }
-
-  return (
-    <select
-      defaultValue=""
-      onChange={(event) => {
-        setSelected(event.target.value);
-        onChange(event.target.value);
-      }}
-      className={styles.rzwiSelector}
-    >
-      <option value="" disabled>
-        {placeholderText}
-      </option>
-      {stationNames.map((name) => (
-        <option value={name} key={name}>
-          {name}
-        </option>
-      ))}
-    </select>
   );
 }

@@ -104,6 +104,18 @@ export function getSewerWaterBarScaleData(
   }
 }
 
+export function getSewerWaterStationNames(data?: Regionaal): string[] {
+  const { dataAvailable, oneInstallation } = getSewerWaterMetadata(data);
+
+  if (!data || !dataAvailable || oneInstallation) {
+    return [];
+  }
+
+  return data.results_per_sewer_installation_per_region.values
+    .flatMap((value) => value.values)
+    .map((value) => value.rwzi_awzi_name);
+}
+
 export function getSewerWaterScatterPlotData(
   data?: Regionaal
 ): SewerValue[] | null {
