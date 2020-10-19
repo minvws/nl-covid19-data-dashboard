@@ -55,19 +55,21 @@ html {
   scroll-behavior: smooth;
 }
 
-body {
+#__next {
+  position: relative;
+  overflow: hidden;
+}
+
+/*
+  The default below can go once we're using components everywhere in layouts.
+*/
+ body {
   font-family: 'RO Sans', Calibri, sans-serif;
   color: $text-color;
   font-style: normal;
   font-weight: normal;
-  font-size: 16px;
-  line-height: 150%;
-}
-
-
-#__next {
-  position: relative;
-  overflow: hidden;
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
 img,
