@@ -79,6 +79,10 @@
     "chart_bedbezetting": {
       "title": "ICU bed occupancy over time",
       "description": "This graph shows the progression of the number of ICU beds occupied by COVID-19 patients."
+    },
+    "metadata": {
+      "title": "",
+      "description": ""
     }
   },
   "verdenkingen_huisartsen": {
@@ -96,7 +100,11 @@
     "kpi_toelichting": "Estimated number of patients who contact the general practitioner for the first time due to COVID-19 like symptoms, per 100.000 inhabitants, per week.",
     "linechart_titel": "Progression over time",
     "barscale_screenreader_text": "{{value}} patients who contact the general practitioner for the first time due to COVID-19 like symptoms, per 100.000 inhabitants, per week.",
-    "titel_sidebar": "Patients who contact their GP for the first time because of symptoms that could indicate COVID-19 per 100.000 inhabitants"
+    "titel_sidebar": "Patients who contact their GP for the first time because of symptoms that could indicate COVID-19 per 100.000 inhabitants",
+    "metadata": {
+      "title": "",
+      "description": ""
+    }
   },
   "ziekenhuisopnames_per_dag": {
     "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
@@ -138,7 +146,11 @@
       "title": "Hospital bed occupancy over time",
       "description": "This graph shows the progression of the number of non-ICU hospital beds occupied by COVID-19 patients."
     },
-    "linechart_description": ""
+    "linechart_description": "",
+    "metadata": {
+      "title": "",
+      "description": ""
+    }
   },
   "positief_geteste_personen": {
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -185,7 +197,11 @@
       "titel": "Number per 100.000 inhabitants",
       "geen_meldingen": "No confirmed cases"
     },
-    "titel_sidebar": "Confirmed cases per 100,000 inhabitants per day"
+    "titel_sidebar": "Confirmed cases per 100,000 inhabitants per day",
+    "metadata": {
+      "title": "",
+      "description": ""
+    }
   },
   "besmettelijke_personen": {
     "title": "Number of infectious people",
@@ -206,7 +222,11 @@
     "cijfer_titel": "Estimated number of infectious people in the Netherlands:",
     "cijfer_toelichting": "A calculation of how many people with COVID-19 can transmit the virus. This number is calculated by the RIVM.",
     "linechart_titel": "Progression over time",
-    "titel_sidebar": "Number of infectious people"
+    "titel_sidebar": "Number of infectious people",
+    "metadata": {
+      "title": "",
+      "description": ""
+    }
   },
   "reproductiegetal": {
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
@@ -225,7 +245,11 @@
     "barscale_toelichting": "Number of people infected by one infectious person.",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
     "extra_uitleg": "The reproduction number shows how fast the virus is spreading. This number shows how many people are on average infected by one patient with COVID-19. The number of transmissions remains more or less constant when the reproduction number is 1, declines when it is less than 1 and increases when the number is above 1.",
-    "linechart_titel": "Progression over time"
+    "linechart_titel": "Progression over time",
+    "metadata": {
+      "title": "",
+      "description": ""
+    }
   },
   "overige_gegevens": {
     "title": "To be developed",
@@ -291,7 +315,11 @@
       "geen_meldingen": "No reports"
     },
     "map_titel": "Infected locations in the Netherlands",
-    "map_toelichting": "This maps shows the percentage of nursing homes where in the past 28 days at least one (new) COVID-19 infection (confirmed by a positive test) is reported."
+    "map_toelichting": "This maps shows the percentage of nursing homes where in the past 28 days at least one (new) COVID-19 infection (confirmed by a positive test) is reported.",
+    "metadata": {
+      "title": "",
+      "description": ""
+    }
   },
   "verpleeghuis_positief_geteste_personen": {
     "datums": "Value of {{dateOfReport}}. Obtained:{{dateOfInsertion}}. Is updated on a daily basis.",
@@ -311,7 +339,11 @@
       "geen_meldingen": "No confirmed cases"
     },
     "map_titel": "Confirmed cases in the Netherlands",
-    "map_toelichting": "These maps show the number of confirmed cases per 100.000 residents."
+    "map_toelichting": "These maps show the number of confirmed cases per 100.000 residents.",
+    "metadata": {
+      "title": "",
+      "description": ""
+    }
   },
   "verpleeghuis_oversterfte": {
     "datums": "Value of  {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -327,7 +359,11 @@
     "linechart_titel": "Progression over time",
     "map_titel": "Nursing home excess mortality in the Netherlands",
     "map_toelichting": "These figures show the excess mortality in nursing homes in the Netherlands per day.",
-    "titel_sidebar": "Mortality per day"
+    "titel_sidebar": "Mortality per day",
+    "metadata": {
+      "title": "",
+      "description": ""
+    }
   },
   "blok_verpleeghuis_zorg": {
     "title": "Nursing homes",
@@ -347,7 +383,11 @@
     "barscale_titel": "Average number of virus particles in one milliliter of sewage water",
     "extra_uitleg": "The national value is based on the total number of measured virus particles in one week, divided by the number of measurements.",
     "barscale_screenreader_text": "{{value}} virus particles in one milliliter of sewage water, collected from about 300 sites in the Netherlands.",
-    "linechart_titel": "Progression over time"
+    "linechart_titel": "Progression over time",
+    "metadata": {
+      "title": "",
+      "description": ""
+    }
   },
   "notfound_titel": {
     "text": "Something went wrong"
@@ -490,8 +530,8 @@
         "verantwoording": "This dashboard was developed in a short amount of time. So far, we have therefore not been able to publish the code for inputting the data and constructing the .JSON files. However, this will be done soon. The web application code was published on [Github](https://github.com/minvws/nl-covid19-data-dashboard) on 5 June 2020. The [data calculations](https://github.com/minvws/nl-covid19-data-backend-processing) are available via Github as well."
       },
       {
-        "cijfer": "Update of 31 July on the alert value for number of infectious people",
-        "verantwoording": "Originally, it was announced that an alert value would be developed for the number of infectious people. However, the modelling experts at the National Institute for Public Health and the Environment (RIVM) have advised us not to do this, as the number of infectious people is not based exclusively on measurable data but also on assumptions, about how long people remain infectious, for instance."
+        "cijfer": "",
+        "verantwoording": ""
       }
     ]
   },
@@ -610,7 +650,11 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
     },
-    "linechart_description": ""
+    "linechart_description": "",
+    "metadata": {
+      "title": "",
+      "description": ""
+    }
   },
   "veiligheidsregio_positief_geteste_personen": {
     "titel_sidebar": "Confirmed cases per 100,000 inhabitants per day",
@@ -654,7 +698,11 @@
     "cluster_gemiddelde_titel": "Average size of active clusters",
     "cluster_gemiddelde_toelichting": "---.",
     "cluster_linechart_titel": "Progression of active clusters over time",
-    "cluster_linechart_toelichting": "---"
+    "cluster_linechart_toelichting": "---",
+    "metadata": {
+      "title": "",
+      "description": ""
+    }
   },
   "veiligheidsregio_rioolwater_metingen": {
     "titel_sidebar": "Sewage water examination",
@@ -678,7 +726,11 @@
     "graph_daily_label_text_rwzi": "Daily viral particle count in 1 mL sewage water ({{name}})",
     "graph_selected_rwzi_placeholder": "Select site",
     "graph_range_description": "Progress over time",
-    "average": "Average"
+    "average": "Average",
+    "metadata": {
+      "title": "",
+      "description": ""
+    }
   },
   "gemeente_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Hospital admissions by day",
@@ -696,7 +748,11 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
     },
-    "linechart_description": ""
+    "linechart_description": "",
+    "metadata": {
+      "title": "",
+      "description": ""
+    }
   },
   "gemeente_positief_geteste_personen": {
     "titel_sidebar": "Confirmed cases per 100,000 inhabitants per day",
@@ -726,6 +782,10 @@
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
+    },
+    "metadata": {
+      "title": "",
+      "description": ""
     }
   },
   "gemeente_rioolwater_metingen": {
@@ -747,15 +807,27 @@
     "graph_average_label_text": "Average value of all tested sites.",
     "graph_secondary_label_text": "Measured value per tested site.",
     "graph_average_label_text_rwzi": "Value of waste water collection service at {{name}}",
-    "average": "Average"
+    "average": "Average",
+    "metadata": {
+      "title": "",
+      "description": ""
+    }
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Level of risk",
-    "selecteer_toelichting": "The map indicates the level of risk per safety region.\n\nThere are [country-wide measures](https://www.rijksoverheid.nl/actueel/nieuws/2020/10/13/gedeeltelijke-lockdown-om-besmettingen-terug-te-dringen) to stop the quick spread of the coronavirus. \n\n[More about risk levels](/over-risiconiveaus)"
+    "selecteer_toelichting": "The map indicates the level of risk per safety region.\n\nThere are [country-wide measures](https://www.rijksoverheid.nl/actueel/nieuws/2020/10/13/gedeeltelijke-lockdown-om-besmettingen-terug-te-dringen) to stop the quick spread of the coronavirus. \n\n[More about risk levels](/over-risiconiveaus)",
+    "metadata": {
+      "title": "",
+      "description": ""
+    }
   },
   "gemeente_index": {
     "selecteer_titel": "Select your municipality",
-    "selecteer_toelichting": "There are different measures per safety region and municipality"
+    "selecteer_toelichting": "There are different measures per safety region and municipality",
+    "metadata": {
+      "title": "",
+      "description": ""
+    }
   },
   "laatste_ontwikkelingen": {
     "title": "Latest developments",
@@ -851,7 +923,11 @@
     "linechart_titel": "Progression over time",
     "map_titel": "Nursing home excess mortality in the Netherlands",
     "map_toelichting": "These figures show the excess mortality in nursing homes in the Netherlands per day.",
-    "titel_sidebar": "Mortality per day"
+    "titel_sidebar": "Mortality per day",
+    "metadata": {
+      "title": "",
+      "description": ""
+    }
   },
   "veiligheidsregio_verpleeghuis_besmette_locaties": {
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -866,7 +942,11 @@
     "kpi_titel": "Total number of infected locations",
     "kpi_toelichting": "This figure is an estimate of the number of nursing homes where in the past 28 days at least one (new) COVID-19 infection (confirmed by a positive test) is reported. The percentage shows what proportion of the total number of nursing homes in this safety region this is.",
     "linechart_titel": "Progression over time in the total number of infected locations",
-    "barscale_screenreader_text": "{{value}} new locations where there is at least one confirmed case, per day."
+    "barscale_screenreader_text": "{{value}} new locations where there is at least one confirmed case, per day.",
+    "metadata": {
+      "title": "",
+      "description": ""
+    }
   },
   "veiligheidsregio_verpleeghuis_positief_geteste_personen": {
     "datums": "Value of {{dateOfReport}}. Obtained:{{dateOfInsertion}}. Is updated on a daily basis.",
@@ -886,7 +966,11 @@
       "geen_meldingen": "No confirmed cases"
     },
     "map_titel": "Confirmed cases in the Netherlands",
-    "map_toelichting": "These maps show the number of confirmed cases per 100.000 residents."
+    "map_toelichting": "These maps show the number of confirmed cases per 100.000 residents.",
+    "metadata": {
+      "title": "",
+      "description": ""
+    }
   },
   "data_warning_text": "Please note: this information is not as recent as the information for the national level. We're working on a resolution. For more information, see the page \"explanation of the data presented\"."
 }

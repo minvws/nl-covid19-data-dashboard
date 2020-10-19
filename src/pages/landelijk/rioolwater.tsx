@@ -9,6 +9,7 @@ import { ContentHeader } from '~/components/layout/Content';
 import { SewerWaterBarScale } from '~/components/landelijk/sewer-water-barscale';
 
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
+import { SEOHead } from '~/components/seoHead';
 
 const text = siteText.rioolwater_metingen;
 
@@ -19,6 +20,10 @@ const SewerWater: FCWithLayout<INationalData> = (props) => {
 
   return (
     <>
+      <SEOHead
+        title={text.metadata.title}
+        description={text.metadata.description}
+      />
       <ContentHeader
         category={siteText.gemeente_layout.headings.overig}
         title={text.titel}

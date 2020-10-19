@@ -29,6 +29,7 @@ import Afname from '~/assets/afname.svg';
 
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
+import { SEOHead } from '~/components/seoHead';
 
 const text = siteText.positief_geteste_personen;
 const ggdText = siteText.positief_geteste_personen_ggd;
@@ -58,6 +59,10 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
 
   return (
     <>
+      <SEOHead
+        title={text.metadata.title}
+        description={text.metadata.description}
+      />
       <ContentHeader
         category={siteText.nationaal_layout.headings.medisch}
         title={text.titel}
