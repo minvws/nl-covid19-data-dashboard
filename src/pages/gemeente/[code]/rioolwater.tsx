@@ -70,7 +70,6 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
               {formatNumber(barScaleData?.value)}
             </span>
           </h3>
-          {/* <SewerWaterBarScale data={barScaleData} showAxis={true} /> */}
         </div>
 
         <div className="column-item column-item-extra-margin">
