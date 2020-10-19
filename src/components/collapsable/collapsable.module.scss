@@ -1,0 +1,81 @@
+@import '~/scss/variables.scss';
+
+.root {
+  display: block;
+  @media (min-width: 1000px) {
+    border-top: 1px solid #dfdfdf;
+  }
+}
+
+.summary {
+  /* reset @reach/disclosure */
+  background: transparent;
+  border: none;
+  margin: 0;
+  text-align: left;
+  width: 100%;
+
+  /* our styling */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75em;
+  color: $icon-color;
+  cursor: pointer;
+  font-size: 1.125em;
+  font-weight: bold;
+
+  @media (min-width: 1000px) {
+    font-size: 1.25em;
+  }
+
+  &:hover[data-state='collapsed'],
+  &:focus[data-state='collapsed'] {
+    background: #f3f3f3;
+  }
+
+  &:focus {
+    outline: 1px dashed $icon-color;
+  }
+
+  &:active[data-state='collapsed'] {
+    background: #ebebeb;
+  }
+
+  &:after {
+    content: '';
+    flex: 0 0 1.9em;
+    margin-right: -0.5em;
+    min-height: 0.55em;
+    padding: 0 0.5em;
+    background-image: url('/images/chevron-down.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 0.9em 0.55em;
+  }
+
+  &[data-state='open']:after {
+    transform: rotate(180deg);
+  }
+}
+
+.content {
+  display: block;
+  transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out;
+  overflow: hidden;
+  padding: 0 1.125 * 0.75em;
+  opacity: 0;
+
+  @media (min-width: 1000px) {
+    padding: 0 1.25 * 0.75em;
+  }
+
+  &[data-state='open'] {
+    opacity: 1;
+  }
+
+  &[data-state='collapsed'] {
+    /* max-height will be set to DOM via JS, hence the !important */
+    max-height: 0 !important;
+  }
+}
