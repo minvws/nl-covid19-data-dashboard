@@ -37,7 +37,7 @@
         }
       },
       "required": [
-        "tested_total_daily",
+        "tested_total",
         "infected_percentage_daily",
         "infected_daily",
         "date_of_report_unix",

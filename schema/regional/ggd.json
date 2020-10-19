@@ -43,7 +43,7 @@
       "required": [
         "infected_daily",
         "infected_percentage_daily",
-        "tested_total_daily",
+        "tested_total",
         "date_of_report_unix",
         "date_of_insertion_unix",
         "vrcode"
