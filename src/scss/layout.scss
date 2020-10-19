@@ -432,6 +432,12 @@ a.metric-link {
       margin: 0;
     }
 
+    .column-item-fixed {
+      flex: 0 0 50%;
+      display: flex;
+      flex-direction: column;
+    }
+
     .column-item {
       flex: 1 1 50%;
       display: flex;
