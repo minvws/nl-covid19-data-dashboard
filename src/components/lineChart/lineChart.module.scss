@@ -24,9 +24,6 @@ $breakpoint: 1200px;
 
 .timeControls {
   flex: none;
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 0.5em;
 
   /**
     This is a hack because chartTimeControls contains margin settings.
