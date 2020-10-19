@@ -2,7 +2,7 @@ import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { ContentHeader } from '~/components/layout/Content';
 
-import { SewerWaterBarScale } from '~/components/veiligheidsregio/sewer-water-barscale';
+import { formatNumber } from '~/utils/formatNumber';
 
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 
@@ -66,7 +66,11 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
         <div className="column-item column-item-extra-margin">
           <h3>{text.barscale_titel}</h3>
 
-          <SewerWaterBarScale data={barScaleData} showAxis={true} />
+          <h3>
+            <span className="text-blue kpi" data-cy="infected_daily_total">
+              {formatNumber(barScaleData?.value)}
+            </span>
+          </h3>
         </div>
 
         <div className="column-item column-item-extra-margin">
