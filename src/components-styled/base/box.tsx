@@ -4,7 +4,6 @@ import {
   BorderProps,
   color,
   ColorProps,
-  compose,
   flexbox,
   FlexboxProps,
   grid,
@@ -34,17 +33,18 @@ type BoxProps = SpaceProps &
 /**
  * A fully generic styling component used for layouts throughout the app. For
  * simple spacing we have the Spacer component.
+ *
+ * See https://styled-system.com/guides/build-a-box
  */
-export const Box = styled.div<BoxProps>`
-  ${compose(
-    space,
-    layout,
-    flexbox,
-    color,
-    position,
-    typography,
-    border,
-    shadow,
-    grid
-  )}
-`;
+export const Box = styled.div<BoxProps>(
+  { boxSizing: 'border-box', minWidth: 0 },
+  space,
+  layout,
+  flexbox,
+  color,
+  position,
+  typography,
+  border,
+  shadow,
+  grid
+);

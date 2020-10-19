@@ -1,6 +1,7 @@
 import locale from '~/locale/index';
 import { Box, Spacer } from './base';
 import { ExternalLink } from './external-link';
+import { Text, Heading } from './typography';
 
 interface KpiTileProps {
   title: string;
@@ -33,10 +34,11 @@ export function KpiTile({
       boxShadow="tile"
       height="100%"
     >
-      <h3>{title}</h3>
+      <Heading level={3}>{title}</Heading>
       <Box mb={4}>{children}</Box>
       {description && (
-        <div
+        <Text
+          as="div"
           dangerouslySetInnerHTML={{
             __html: description,
           }}
@@ -46,9 +48,9 @@ export function KpiTile({
         <>
           {/* Using a spacer to push the footer down */}
           <Spacer m="auto" />
-          <Box as="footer" mt={3}>
+          <Text as="footer" mt={3}>
             {locale.common.metadata.source}: <ExternalLink {...sourcedFrom} />
-          </Box>
+          </Text>
         </>
       )}
     </Box>
