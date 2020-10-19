@@ -49,7 +49,7 @@ function getOptions(
   text: TranslationStrings,
   selectedRWZI: string | undefined,
   timeframe: TimeframeOption
-): [Highcharts.Options, string[]] {
+): Highcharts.Options {
   const hasMultipleValues = averageValues.length > 1;
 
   averageValues = getFilteredValues(
