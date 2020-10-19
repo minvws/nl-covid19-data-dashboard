@@ -6,7 +6,7 @@ import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { LineChart } from '~/components/lineChart/lineChartWithWeekTooltip';
 import { ContentHeader } from '~/components/layout/Content';
-import { SewerWaterBarScale } from '~/components/landelijk/sewer-water-barscale';
+import { formatNumber } from '~/utils/formatNumber';
 
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import { SEOHead } from '~/components/seoHead';
@@ -41,7 +41,11 @@ const SewerWater: FCWithLayout<INationalData> = (props) => {
         <div className="column-item column-item-extra-margin">
           <h3>{text.barscale_titel}</h3>
 
-          <SewerWaterBarScale data={data} showAxis={true} />
+          <h3>
+            <span className="text-blue kpi" data-cy="infected_daily_total">
+              {formatNumber(data.last_value.average)}
+            </span>
+          </h3>
         </div>
 
         <div className="column-item column-item-extra-margin">
