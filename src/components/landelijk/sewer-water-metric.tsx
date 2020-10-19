@@ -27,7 +27,7 @@ export function SewerWaterMetric(props: {
 
   return (
     <MetricKPI
-      label={title}
+      title={title}
       value={Number(data.last_value.average)}
       format={formatNumber}
       description={description}
