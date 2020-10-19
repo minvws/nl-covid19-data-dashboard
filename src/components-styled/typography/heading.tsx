@@ -20,7 +20,7 @@ interface HeadingProps extends StyledHeadingProps {
 
 /**
  * A generic heading component. The level determines the styling for the
- * element and it's default heading tag. Using the "as" prop you can then
+ * element and its default heading tag. Using the "as" prop you can then
  * override the tag so that it matches the required html semantics html in
  * cases where the styling differs from the actual hierarchy.
  */
