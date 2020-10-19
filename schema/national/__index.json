@@ -92,6 +92,9 @@
     "intensive_care_beds_occupied": {
       "$ref": "intensive_care_beds_occupied.json"
     },
+    "ggd": {
+      "$ref": "ggd.json"
+    },
     "nursing_home": {
       "$ref": "nursing_home.json"
     }
