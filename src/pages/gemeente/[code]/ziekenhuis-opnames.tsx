@@ -12,7 +12,7 @@ import { LineChart } from '~/components/charts/index';
 import { FCWithLayout } from '~/components/layout';
 import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
 import { ContentHeader } from '~/components/layout/Content';
-import { IntakeHospitalBarScale } from '~/components/gemeente/intake-hospital-barscale';
+import { formatNumber } from '~/utils/formatNumber';
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
 import { createMunicipalHospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/municipal/createMunicipalHospitalAdmissionsTooltip';
 import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
@@ -65,7 +65,13 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
         <div className="row-item">
           <div className="column-item column-item-extra-margin">
             <h3>{text.barscale_titel}</h3>
-            <IntakeHospitalBarScale data={hospitalAdmissions} showAxis={true} />
+            <h3>
+              <span className="text-blue kpi" data-cy="infected_daily_total">
+                {formatNumber(
+                  hospitalAdmissions.last_value.moving_average_hospital
+                )}
+              </span>
+            </h3>
           </div>
 
           <div className="column-item column-item-extra-margin">
