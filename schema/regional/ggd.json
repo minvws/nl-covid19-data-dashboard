@@ -29,12 +29,6 @@
         "tested_total_daily": {
           "type": "integer"
         },
-        "tested_percentage_daily": {
-          "type": "integer"
-        },
-        "tested_positive_daily": {
-          "type": "integer"
-        },
         "date_of_report_unix": {
           "type": "integer"
         },
@@ -50,8 +44,6 @@
         "infected_daily",
         "infected_percentage_daily",
         "tested_total_daily",
-        "tested_percentage_daily",
-        "tested_positive_daily",
         "date_of_report_unix",
         "date_of_insertion_unix",
         "vrcode"
