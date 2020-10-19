@@ -3,12 +3,12 @@ import styles from './styles.module.scss';
 type IProps = {
   title?: string;
   value: number | null | undefined;
-  format: any | false;
+  format: (value: number | null | undefined) => string | false;
   description?: string;
 };
 
 export function MetricKPI(props: IProps) {
-  const { value, format, title, description } = props;
+  const { value, format = false, title, description } = props;
 
   return (
     <div className={styles.root}>
