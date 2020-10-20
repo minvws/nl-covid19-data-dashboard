@@ -14,13 +14,14 @@ export function SewerWaterMetric(props: {
 }) {
   const { data } = props;
 
-  const description = data?.dateInsertedUnix
-    ? replaceVariablesInText(text.dateOfReport, {
-        dateOfReport: formatDateFromSeconds(data?.dateInsertedUnix, 'relative'),
-      })
-    : undefined;
-
   if (!data) return null;
+
+  const description = replaceVariablesInText(text.dateOfReport, {
+    dateOfReport: formatDateFromSeconds(
+      Number(data.dateInsertedUnix),
+      'relative'
+    ),
+  });
 
   return (
     <MetricKPI

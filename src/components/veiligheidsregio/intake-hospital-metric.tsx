@@ -15,16 +15,14 @@ export function IntakeHospitalMetric(props: {
 }) {
   const { data } = props;
 
-  const description = data?.last_value.date_of_report_unix
-    ? replaceVariablesInText(text.dateOfReport, {
-        dateOfReport: formatDateFromSeconds(
-          data?.last_value.date_of_report_unix,
-          'relative'
-        ),
-      })
-    : undefined;
-
   if (!data) return null;
+
+  const description = replaceVariablesInText(text.dateOfReport, {
+    dateOfReport: formatDateFromSeconds(
+      data?.last_value.date_of_report_unix,
+      'relative'
+    ),
+  });
 
   return (
     <MetricKPI

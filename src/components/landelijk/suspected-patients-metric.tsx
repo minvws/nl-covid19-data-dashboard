@@ -14,16 +14,14 @@ export function SuspectedPatientsMetric(props: {
 }) {
   const { data } = props;
 
-  const description = data?.date_of_insertion_unix
-    ? replaceVariablesInText(text.dateOfReport, {
-        dateOfReport: formatDateFromSeconds(
-          data.date_of_insertion_unix,
-          'relative'
-        ),
-      })
-    : undefined;
-
   if (!data) return null;
+
+  const description = replaceVariablesInText(text.dateOfReport, {
+    dateOfReport: formatDateFromSeconds(
+      data.date_of_insertion_unix,
+      'relative'
+    ),
+  });
 
   return (
     <MetricKPI
