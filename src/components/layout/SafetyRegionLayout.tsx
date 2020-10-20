@@ -11,6 +11,8 @@ import { useMediaQuery } from '~/utils/useMediaQuery';
 import { getSewerWaterBarScaleData } from '~/utils/sewer-water/safety-region-sewer-water.util';
 
 import { PositivelyTestedPeopleBarScale } from '~/components/veiligheidsregio/positive-tested-people-barscale';
+import { PositivelyTestedPeopleMetric } from '~/components/veiligheidsregio/positive-tested-people-metric';
+
 import { IntakeHospitalMetric } from '~/components/veiligheidsregio/intake-hospital-metric';
 import { SewerWaterMetric } from '~/components/veiligheidsregio/sewer-water-metric';
 
@@ -160,9 +162,12 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                         }
                       />
                       <span>
+                        <PositivelyTestedPeopleMetric
+                          data={data?.results_per_region.last_value}
+                        />
                         <PositivelyTestedPeopleBarScale
                           data={data?.results_per_region}
-                          showAxis={true}
+                          showAxis={false}
                         />
                       </span>
                     </a>
