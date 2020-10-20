@@ -1,9 +1,13 @@
 import '@reach/combobox/styles.css';
-import './index.css';
-import '~/scss/style.scss';
-
-import '~/components/legenda/legenda.scss';
+import Router from 'next/router';
+import { useEffect } from 'react';
 import '~/components/comboBox/comboBox.scss';
+import '~/components/legenda/legenda.scss';
+import * as piwik from '~/lib/piwik';
+import '~/scss/style.scss';
+import { ThemeProvider } from 'styled-components';
+import theme from '~/style/theme';
+import { GlobalStyle } from '~/style/global-style';
 
 // Import Preact DevTools in development
 // if (process.env.NODE_ENV === 'development') {
@@ -12,18 +16,12 @@ import '~/components/comboBox/comboBox.scss';
 //   require('preact/debug');
 // }
 
-import { useEffect } from 'react';
-import Router from 'next/router';
-import * as piwik from '../lib/piwik';
-
-interface IProps {
+interface AppProps {
   Component: any;
   pageProps: any;
 }
 
-export default MyApp;
-
-function MyApp(props: IProps): React.ReactElement {
+export default function App(props: AppProps) {
   const { Component, pageProps } = props;
   const page = (page: React.ReactNode) => page;
   const getLayout = Component.getLayout || page;
@@ -41,5 +39,12 @@ function MyApp(props: IProps): React.ReactElement {
     };
   }, []);
 
-  return getLayout(<Component {...pageProps} />, pageProps);
+  const pageWithLayout = getLayout(<Component {...pageProps} />, pageProps);
+
+  return (
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      {pageWithLayout}
+    </ThemeProvider>
+  );
 }

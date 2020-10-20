@@ -1,7 +1,6 @@
 const withPlugins = require('next-compose-plugins');
 
 const withTM = require('next-transpile-modules')([
-  '@juggle/resize-observer',
   '@vx/tooltip',
   '@vx/event',
   'zustand',
