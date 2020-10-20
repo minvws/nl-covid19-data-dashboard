@@ -1,0 +1,28 @@
+.selectorContainer {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.installationButton {
+  min-width: 15em;
+  border: 1px solid lightgrey;
+  padding: 0.5em;
+  padding-right: 1.5em;
+  text-align: left;
+  background-color: white;
+  background: url('/images/close.svg');
+  background-repeat: no-repeat, repeat;
+  background-position: right 0.2em top 50%, 0 0;
+}
+
+.installationSelector {
+  min-width: 15em;
+  border-color: lightgrey;
+  appearance: none;
+  padding: 0.5em;
+  padding-right: 1.5em;
+  background: url('/images/chevron-down.svg');
+  background-repeat: no-repeat, repeat;
+  background-position: right 0.2em top 50%, 0 0;
+}

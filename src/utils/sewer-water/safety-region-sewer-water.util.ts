@@ -94,6 +94,33 @@ export function getSewerWaterBarScaleData(
   }
 }
 
+export function getInstallationNames(data?: Regionaal): string[] {
+  const { dataAvailable, oneInstallation } = getSewerWaterMetadata(data);
+
+  if (!data || !dataAvailable || oneInstallation) {
+    return [];
+  }
+
+  return data.results_per_sewer_installation_per_region.values
+    .flatMap((value) => value.values)
+    .map((value) => value.rwzi_awzi_name)
+    .filter((value, index, arr) => arr.indexOf(value) === index);
+}
+
+export function getSewerWaterScatterPlotData(
+  data?: Regionaal
+): SewerValue[] | null {
+  const { dataAvailable, oneInstallation } = getSewerWaterMetadata(data);
+
+  if (!data || !dataAvailable || oneInstallation) {
+    return null;
+  }
+
+  return data.results_per_sewer_installation_per_region.values.flatMap(
+    (value) => value.values
+  );
+}
+
 export function getSewerWaterLineChartData(
   data: Regionaal | undefined
 ): SewerWaterLineChartData | null {

@@ -13,7 +13,7 @@ import text from '~/locale/index';
 import { useMediaQuery } from '~/utils/useMediaQuery';
 import { useThrottle } from '~/utils/useThrottle';
 
-type TOption = {
+export type TOption = {
   displayName?: string;
   name: string;
 };

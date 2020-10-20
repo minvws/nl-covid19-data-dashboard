@@ -151,7 +151,7 @@ function getOptions(
   return options;
 }
 
-export function RegionalSewerWaterLineChart({
+export function MunicipalSewerWaterLineChart({
   averageValues,
   text,
 }: RegionalSewerWaterLineChartProps) {

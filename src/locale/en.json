@@ -727,9 +727,12 @@
       "text": "RIVM",
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
     },
-    "graph_average_label_text": "Average value of all tested sites.",
-    "graph_secondary_label_text": "Measured value by location.",
+    "graph_average_label_text": "Average viral particle count in 1 mL sewage water.",
+    "graph_secondary_label_text": "Individual site measurements.",
     "graph_average_label_text_rwzi": "Value of waste water collection service at {{name}}",
+    "graph_daily_label_text_rwzi": "Daily viral particle count in 1 mL sewage water ({{name}})",
+    "graph_selected_rwzi_placeholder": "Select site",
+    "graph_range_description": "Progress over time",
     "average": "Average",
     "metadata": {
       "title": "",

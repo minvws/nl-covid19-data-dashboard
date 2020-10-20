@@ -34,3 +34,20 @@ $breakpoint: 1200px;
     }
   }
 }
+
+.legend li {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+}
+
+.legendMarker {
+  height: 0.5em;
+  width: 0.5em;
+  margin-right: 0.5em;
+
+  svg {
+    height: 100%;
+    width: 100%;
+  }
+}

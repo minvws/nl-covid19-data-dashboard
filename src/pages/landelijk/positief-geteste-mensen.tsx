@@ -175,27 +175,29 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           />
         </article>
       )}
-
+      {/* the barscale's initial SSR output was incorrect, giving both columns a fixed width solves this*/}
       <article className="metric-article layout-two-column">
-        <div className="column-item column-item-extra-margin">
+        <div className="column-item-fixed">
           <h3>{text.barchart_titel}</h3>
           <p>{text.barchart_toelichting}</p>
         </div>
-        {age && (
-          <BarChart
-            keys={text.barscale_keys}
-            data={age.values.map((value) => ({
-              y: value.infected_per_agegroup_increase || 0,
-              label: value?.infected_per_agegroup_increase
-                ? `${(
-                    ((value.infected_per_agegroup_increase as number) * 100) /
-                    barChartTotal
-                  ).toFixed(0)}%`
-                : false,
-            }))}
-            axisTitle={text.barchart_axis_titel}
-          />
-        )}
+        <div className="column-item-fixed">
+          {age && (
+            <BarChart
+              keys={text.barscale_keys}
+              data={age.values.map((value) => ({
+                y: value.infected_per_agegroup_increase || 0,
+                label: value?.infected_per_agegroup_increase
+                  ? `${(
+                      ((value.infected_per_agegroup_increase as number) * 100) /
+                      barChartTotal
+                    ).toFixed(0)}%`
+                  : false,
+              }))}
+              axisTitle={text.barchart_axis_titel}
+            />
+          )}
+        </div>
       </article>
 
       {ggdData && (
