@@ -58,11 +58,11 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
         </div>
       </article>
 
-      {lastKnownValidData.values && (
+      {data.reproduction_index.values && (
         <article className="metric-article">
           <AreaChart
             title={text.linechart_titel}
-            data={lastKnownValidData.values.map((value) => ({
+            data={data.reproduction_index.values.map((value) => ({
               avg: value.reproduction_index_avg,
               min: value.reproduction_index_low,
               max: value.reproduction_index_high,
