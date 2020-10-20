@@ -18,7 +18,7 @@ export function useRegionalSewerWaterChartOptions(
   averageValues: Value[],
   scatterPlotValues: SewerValue[],
   text: TranslationStrings,
-  selectedRWZI: string | undefined,
+  selectedRWZI?: string,
   timeframe: TimeframeOption
 ): Highcharts.Options {
   return useMemo(() => {
