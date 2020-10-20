@@ -11,7 +11,7 @@ import {
 
 import { createMunicipalHospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/municipal/createMunicipalHospitalAdmissionsTooltip';
 import { LineChart } from '~/components/charts/index';
-import { IntakeHospitalBarScale } from '~/components/veiligheidsregio/intake-hospital-barscale';
+import { formatNumber } from '~/utils/formatNumber';
 import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
 import { useMunicipalLegendaData } from '~/components/chloropleth/legenda/hooks/useMunicipalLegendaData';
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
@@ -68,7 +68,11 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
         <div className="row-item">
           <div className="column-item column-item-extra-margin">
             <h3>{text.barscale_titel}</h3>
-            <IntakeHospitalBarScale data={resultsPerRegion} showAxis={true} />
+            <p className="text-blue kpi" data-cy="infected_daily_total">
+              {formatNumber(
+                resultsPerRegion.last_value.hospital_increase_per_region
+              )}
+            </p>
           </div>
 
           <div className="column-item column-item-extra-margin">

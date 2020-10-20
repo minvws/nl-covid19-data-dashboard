@@ -1,4 +1,3 @@
-import { BarScale } from '~/components/barScale';
 import { ContentHeader } from '~/components/layout/Content';
 import { FCWithLayout } from '~/components/layout';
 import { LineChart } from '~/components/charts/index';
@@ -62,35 +61,18 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
       <div className="layout-two-column">
         <article className="metric-article column-item">
           <h3>{text.barscale_titel}</h3>
-
-          <BarScale
-            min={0}
-            max={30}
-            screenReaderText={text.barscale_screenreader_text}
-            value={newlyInfectedLocations}
-            id="besmette_locaties_verpleeghuis"
-            rangeKey="total_new_reported_locations"
-            gradient={[
-              {
-                color: '#3391CC',
-                value: 0,
-              },
-            ]}
-            showAxis={true}
-          />
+          <p className="text-blue kpi" data-cy="infected_daily_total">
+            {formatNumber(newlyInfectedLocations)}
+          </p>
           <p>{text.barscale_toelichting}</p>
         </article>
 
         <article className="metric-article column-item">
-          {infectedLocationsTotal !== undefined && (
-            <h3>
-              {text.kpi_titel}{' '}
-              <span className="text-blue kpi">
-                {formatNumber(infectedLocationsTotal)} (
-                {formatPercentage(infectedLocationsPercentage)}%)
-              </span>
-            </h3>
-          )}
+          <h3>{text.kpi_titel}</h3>
+          <p className="text-blue kpi">
+            {formatNumber(infectedLocationsTotal)} (
+            {formatPercentage(infectedLocationsPercentage)}%)
+          </p>
           <p>{text.kpi_toelichting}</p>
         </article>
       </div>

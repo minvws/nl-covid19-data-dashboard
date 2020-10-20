@@ -2,7 +2,7 @@ import { FCWithLayout } from '~/components/layout';
 import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
 import { ContentHeader } from '~/components/layout/Content';
 
-import { SewerWaterBarScale } from '~/components/gemeente/sewer-water-barscale';
+import { formatNumber } from '~/utils/formatNumber';
 
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 
@@ -65,8 +65,9 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
       <article className="metric-article layout-two-column">
         <div className="column-item column-item-extra-margin">
           <h3>{text.barscale_titel}</h3>
-
-          <SewerWaterBarScale data={barScaleData} showAxis={true} />
+          <p className="text-blue kpi" data-cy="infected_daily_total">
+            {formatNumber(barScaleData?.value)}
+          </p>
         </div>
 
         <div className="column-item column-item-extra-margin">

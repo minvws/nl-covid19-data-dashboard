@@ -5,13 +5,14 @@ import styles from './titleWithIcon.module.scss';
 interface IProps {
   Icon?: React.ComponentType;
   title: string;
+  subtitle?: string;
   regio?: string;
   headingRef?: React.RefObject<HTMLHeadingElement>;
   as?: 'h2' | 'h3';
 }
 
 export function TitleWithIcon(props: IProps) {
-  const { Icon, title, regio, headingRef, as = 'h3' } = props;
+  const { Icon, title, subtitle, regio, headingRef, as = 'h3' } = props;
 
   return (
     <div className={styles.titleWithIcon}>
@@ -30,17 +31,23 @@ export function TitleWithIcon(props: IProps) {
       after the region is changed.
       */}
       {as === 'h3' && (
-        <h3 ref={headingRef} tabIndex={headingRef ? -1 : undefined}>
-          {title}
-          {regio && ` in ${regio}`}
-        </h3>
+        <div>
+          <h3 ref={headingRef} tabIndex={headingRef ? -1 : undefined}>
+            {title}
+            {regio && ` in ${regio}`}
+          </h3>
+          {subtitle}
+        </div>
       )}
 
       {as === 'h2' && (
-        <h2 ref={headingRef} tabIndex={headingRef ? -1 : undefined}>
-          {title}
-          {regio && ` in ${regio}`}
-        </h2>
+        <div>
+          <h2 ref={headingRef} tabIndex={headingRef ? -1 : undefined}>
+            {title}
+            {regio && ` in ${regio}`}
+          </h2>
+          {subtitle}
+        </div>
       )}
     </div>
   );

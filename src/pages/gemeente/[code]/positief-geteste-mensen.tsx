@@ -15,7 +15,6 @@ import { useMunicipalLegendaData } from '~/components/chloropleth/legenda/hooks/
 import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
 import { LineChart } from '~/components/charts/index';
 import { ContentHeader } from '~/components/layout/Content';
-import { PositivelyTestedPeopleBarScale } from '~/components/gemeente/positively-tested-people-barscale';
 import { FCWithLayout } from '~/components/layout';
 import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
 
@@ -64,27 +63,21 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
       <div className="layout-two-column">
         <article className="metric-article column-item">
           <h3>{text.barscale_titel}</h3>
-
-          {positivelyTestedPeople && (
-            <PositivelyTestedPeopleBarScale
-              data={positivelyTestedPeople}
-              showAxis={true}
-            />
-          )}
+          <p className="text-blue kpi" data-cy="infected_daily_total">
+            {formatNumber(
+              positivelyTestedPeople.last_value.infected_daily_increase
+            )}
+          </p>
           <p>{text.barscale_toelichting}</p>
         </article>
 
         <article className="metric-article column-item">
-          {positivelyTestedPeople && (
-            <h3>
-              {text.kpi_titel}{' '}
-              <span className="text-blue kpi">
-                {formatNumber(
-                  positivelyTestedPeople.last_value.infected_daily_total
-                )}
-              </span>
-            </h3>
-          )}
+          <h3>{text.kpi_titel}</h3>
+          <p className="text-blue kpi">
+            {formatNumber(
+              positivelyTestedPeople.last_value.infected_daily_total
+            )}
+          </p>
           <p>{text.kpi_toelichting}</p>
         </article>
       </div>

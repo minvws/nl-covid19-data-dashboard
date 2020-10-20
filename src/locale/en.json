@@ -98,6 +98,8 @@
     "barscale_toelichting": "Number of patients who contact the general practitioner for the first time due to COVID-19 like symptoms, per 100.000 inhabitants, per week.",
     "kpi_titel": "Estimated number of patients where COVID-19 is suspected",
     "kpi_toelichting": "Estimated number of patients who contact the general practitioner for the first time due to COVID-19 like symptoms, per 100.000 inhabitants, per week.",
+    "normalized_kpi_titel": "Gemiddeld aantal patiënten met verdenking van COVID-19 per 100.000 inwoners",
+    "normalized_kpi_toelichting": "Geschat aantal patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten per week.",
     "linechart_titel": "Progression over time",
     "barscale_screenreader_text": "{{value}} patients who contact the general practitioner for the first time due to COVID-19 like symptoms, per 100.000 inhabitants, per week.",
     "titel_sidebar": "Patients who contact their GP for the first time because of symptoms that could indicate COVID-19 per 100.000 inhabitants",
@@ -218,6 +220,7 @@
     "geen_signaalwaarde_beschikbaar_lees_waarom": "Read here why",
     "toelichting_pagina": "A person who carries coronavirus can infect other people within a certain time frame. How long someone is infectious for differs from one person to another. The number of infectious people is estimated using data from various sources. It is not possible to know exactly how many people are infectious, but we can indicate whether there are dozens, hundreds, thousands or even more.",
     "barscale_titel": "Average number of infectious people per 100.000 inhabitants.",
+    "barscale_toelichting": "Een berekening van hoeveel mensen met COVID-19 per 100.000 inwoners besmettelijk zijn voor anderen. Dit getal wordt door het RIVM berekend.",
     "barscale_screenreader_text": "{{value}} infectious people",
     "cijfer_titel": "Estimated number of infectious people in the Netherlands:",
     "cijfer_toelichting": "A calculation of how many people with COVID-19 can transmit the virus. This number is calculated by the RIVM.",
@@ -599,6 +602,9 @@
     "barScale": {
       "signaalwaarde": "Alert value"
     },
+    "metricKPI": {
+      "dateOfReport": "Waarde van {{dateOfReport}}"
+    },
     "zoekveld_geen_resultaten": "No results",
     "zoekveld_placeholder_regio": "Search by safety region",
     "zoekveld_placeholder_gemeente": "Search by municipality",
@@ -614,6 +620,7 @@
   },
   "nationaal_layout": {
     "headings": {
+      "laatste": "Laatste ontwikkelingen",
       "medisch": "Medical indicators",
       "overig": "Early indicators",
       "verpleeghuis": "Nursing homes"

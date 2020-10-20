@@ -11,8 +11,8 @@ import { useMediaQuery } from '~/utils/useMediaQuery';
 import { getSewerWaterBarScaleData } from '~/utils/sewer-water/safety-region-sewer-water.util';
 
 import { PositivelyTestedPeopleBarScale } from '~/components/veiligheidsregio/positive-tested-people-barscale';
-import { IntakeHospitalBarScale } from '~/components/veiligheidsregio/intake-hospital-barscale';
-import { SewerWaterBarScale } from '~/components/veiligheidsregio/sewer-water-barscale';
+import { IntakeHospitalMetric } from '~/components/veiligheidsregio/intake-hospital-metric';
+import { SewerWaterMetric } from '~/components/veiligheidsregio/sewer-water-metric';
 
 import { TitleWithIcon } from '~/components/titleWithIcon';
 import { getLayout as getSiteLayout } from '~/components/layout';
@@ -26,9 +26,9 @@ import Locatie from '~/assets/locaties.svg';
 import CoronaVirus from '~/assets/coronavirus.svg';
 
 import { useMenuState } from './useMenuState';
-import { NursingHomeInfectedPeopleBarScale } from '~/components/common/nursing-home-infected-people-barscale';
-import { NursingHomeInfectedLocationsBarScale } from '~/components/common/nursing-home-infected-locations-barscale';
-import { NursingHomeDeathsBarScale } from '~/components/common/nursing-home-deaths-barscale';
+import { NursingHomeInfectedPeopleMetric } from '~/components/common/nursing-home-infected-people-metric';
+import { NursingHomeInfectedLocationsMetric } from '~/components/common/nursing-home-infected-locations-metric';
+import { NursingHomeDeathsMetric } from '~/components/common/nursing-home-deaths-metric';
 
 export function getSafetyRegionLayout() {
   return function (
@@ -188,10 +188,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                         }
                       />
                       <span>
-                        <IntakeHospitalBarScale
-                          data={data?.results_per_region}
-                          showAxis={true}
-                        />
+                        <IntakeHospitalMetric data={data?.results_per_region} />
                       </span>
                     </a>
                   </Link>
@@ -219,9 +216,8 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                         }
                       />
                       <span>
-                        <SewerWaterBarScale
+                        <SewerWaterMetric
                           data={getSewerWaterBarScaleData(data)}
-                          showAxis={true}
                         />
                       </span>
                     </a>
@@ -251,11 +247,8 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                       />
                       {data?.nursing_home?.last_value && (
                         <span>
-                          <NursingHomeInfectedPeopleBarScale
-                            value={
-                              data.nursing_home.last_value.newly_infected_people
-                            }
-                            showAxis={true}
+                          <NursingHomeInfectedPeopleMetric
+                            data={data.nursing_home.last_value}
                           />
                         </span>
                       )}
@@ -279,12 +272,8 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                         title={siteText.verpleeghuis_besmette_locaties.titel}
                       />
                       <span>
-                        <NursingHomeInfectedLocationsBarScale
-                          value={
-                            data?.nursing_home?.last_value
-                              .infected_locations_total
-                          }
-                          showAxis={true}
+                        <NursingHomeInfectedLocationsMetric
+                          data={data.nursing_home.last_value}
                         />
                       </span>
                     </a>
@@ -307,9 +296,8 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                         title={siteText.verpleeghuis_oversterfte.titel_sidebar}
                       />
                       <span>
-                        <NursingHomeDeathsBarScale
-                          value={data?.nursing_home?.last_value.deceased_daily}
-                          showAxis={true}
+                        <NursingHomeDeathsMetric
+                          data={data.nursing_home?.last_value}
                         />
                       </span>
                     </a>
