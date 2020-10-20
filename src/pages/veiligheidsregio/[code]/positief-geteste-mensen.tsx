@@ -83,19 +83,15 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
         </article>
 
         <article className="metric-article column-item">
-          {resultsPerRegion && (
-            <h3>
-              {text.kpi_titel}{' '}
-              <span className="text-blue kpi">
-                {formatNumber(
-                  Math.round(
-                    resultsPerRegion.last_value
-                      .total_reported_increase_per_region
-                  )
-                )}
-              </span>
-            </h3>
-          )}
+          <h3>{text.kpi_titel}</h3>
+          <p className="text-blue kpi">
+            {formatNumber(
+              Math.round(
+                resultsPerRegion.last_value.total_reported_increase_per_region
+              )
+            )}
+          </p>
+
           <p>{text.kpi_toelichting}</p>
           {ggdData && ggdData.infected_percentage_daily && (
             <div className="ggd-summary">
@@ -182,8 +178,8 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
 
           <div className="layout-two-column">
             <article className="metric-article column-item">
+              <h3>{ggdText.totaal_getest_week_titel}</h3>
               <h3>
-                {ggdText.totaal_getest_week_titel}{' '}
                 <span className="text-blue kpi">
                   {formatNumber(ggdData.tested_total_daily)}
                 </span>
@@ -193,8 +189,8 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
             </article>
 
             <article className="metric-article column-item">
+              <h3>{ggdText.positief_getest_week_titel}</h3>
               <h3>
-                {ggdText.positief_getest_week_titel}{' '}
                 <span className="text-blue kpi">
                   {`${formatNumber(ggdData.infected_percentage_daily)}%`}
                 </span>
