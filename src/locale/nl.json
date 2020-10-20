@@ -727,9 +727,12 @@
       "text": "RIVM",
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
     },
-    "graph_average_label_text": "Gemiddelde waarde van gemeten locaties.",
-    "graph_secondary_label_text": "Gemeten waarde per locatie.",
+    "graph_average_label_text": "Gemiddelde waarde aantal virusdeeltjes in 1 mL rioolwater.",
+    "graph_secondary_label_text": "Individuele RWZI waardes.",
     "graph_average_label_text_rwzi": "Waarde van RWZI-locatie {{name}}",
+    "graph_daily_label_text_rwzi": "Dagwaarde aantal virusdeeltjes in 1 mL rioolwater ({{name}})",
+    "graph_selected_rwzi_placeholder": "Selecteer RWZI",
+    "graph_range_description": "Verloop over tijd",
     "average": "Gemiddelde",
     "metadata": {
       "title": "Rioolwatermeting in {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",

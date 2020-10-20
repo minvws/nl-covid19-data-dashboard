@@ -74,6 +74,24 @@
   }
 }
 
+.metric-article-header {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+
+  div {
+    margin-left: auto;
+    margin-top: 0;
+  }
+
+  @media (max-width: 1000px) {
+    flex-direction: column;
+    div {
+      margin-left: 0;
+    }
+  }
+}
+
 .index-article,
 .metric-article {
   background: white;
