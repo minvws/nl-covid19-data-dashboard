@@ -42,10 +42,6 @@ export function BarScale({
 
   const text = siteText.common.barScale;
 
-  if (value === undefined) {
-    return null;
-  }
-
   const [xMin, xMax] = scale.domain();
 
   const textAlign = scaleThreshold()
