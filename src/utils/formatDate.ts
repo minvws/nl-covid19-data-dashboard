@@ -88,7 +88,8 @@ export function formatDateFromMilliseconds(
   if (style === 'axis')
     return `${Day.format(milliseconds)} ${MonthShort.format(milliseconds)}`; // '23 jul.'
 
-  if (style === 'relative') {
+  /* Relative date formatting is disabled for server-side rendering */
+  if (style === 'relative' && typeof window !== 'undefined') {
     if (isToday(milliseconds)) return siteText.utils.date_today;
     if (isYesterday(milliseconds)) return siteText.utils.date_yesterday;
   }
