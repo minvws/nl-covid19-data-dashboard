@@ -100,6 +100,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
         </Link>
         <aside className="national-aside">
           <nav aria-label="metric navigation">
+            <h2>{siteText.nationaal_layout.headings.laatste}</h2>
             <ul className="last-developments">
               <li>
                 <Link href="/">

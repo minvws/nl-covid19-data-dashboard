@@ -620,6 +620,7 @@
   },
   "nationaal_layout": {
     "headings": {
+      "laatste": "Laatste ontwikkelingen",
       "medisch": "Medical indicators",
       "overig": "Early indicators",
       "verpleeghuis": "Nursing homes"

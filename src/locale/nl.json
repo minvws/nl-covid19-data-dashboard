@@ -620,6 +620,7 @@
   },
   "nationaal_layout": {
     "headings": {
+      "laatste": "Laatste ontwikkelingen",
       "medisch": "Medische indicatoren",
       "overig": "Vroegsignalering",
       "verpleeghuis": "Verpleeghuiszorg"
