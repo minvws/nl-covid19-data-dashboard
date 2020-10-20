@@ -1,29 +1,20 @@
-import { Legenda } from '~/components/legenda';
-import { FCWithLayout } from '~/components/layout';
-import { getNationalLayout } from '~/components/layout/NationalLayout';
-import { AreaChart } from '~/components/charts/index';
-import { ContentHeader } from '~/components/layout/Content';
-
-import { ReproductionIndexBarScale } from '~/components/landelijk/reproduction-index-barscale';
-
 import Repro from '~/assets/reproductiegetal.svg';
-
-import siteText from '~/locale/index';
-
-import { ReproductionIndex as ReproductionIndexData } from '~/types/data.d';
-
-import getNlData, { INationalData } from '~/static-props/nl-data';
+import { AreaChart } from '~/components/charts/index';
+import { ReproductionIndexBarScale } from '~/components/landelijk/reproduction-index-barscale';
+import { FCWithLayout } from '~/components/layout';
+import { ContentHeader } from '~/components/layout/Content';
+import { getNationalLayout } from '~/components/layout/NationalLayout';
+import { Legenda } from '~/components/legenda';
 import { SEOHead } from '~/components/seoHead';
+import siteText from '~/locale/index';
+import getNlData, { INationalData } from '~/static-props/nl-data';
 
 const text = siteText.reproductiegetal;
 
 const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
-  const { data: state } = props;
+  const { data } = props;
 
-  const lastKnownValidData: ReproductionIndexData | undefined =
-    state?.reproduction_index_last_known_average;
-
-  const data: ReproductionIndexData | undefined = state?.reproduction_index;
+  const lastKnownValidData = data.reproduction_index_last_known_average;
 
   return (
     <>
@@ -38,9 +29,9 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: lastKnownValidData?.last_value?.date_of_report_unix,
+          dateUnix: lastKnownValidData.last_value.date_of_report_unix,
           dateInsertedUnix:
-            lastKnownValidData?.last_value?.date_of_insertion_unix,
+            lastKnownValidData.last_value.date_of_insertion_unix,
           dataSource: text.bron,
         }}
       />
@@ -49,8 +40,7 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
         <div className="column-item column-item-extra-margin">
           <h3>{text.barscale_titel}</h3>
           <ReproductionIndexBarScale
-            data={data}
-            lastKnown={lastKnownValidData}
+            data={lastKnownValidData}
             showAxis={true}
           />
           <p>{text.barscale_toelichting}</p>
@@ -68,11 +58,11 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
         </div>
       </article>
 
-      {data?.values && (
+      {data.reproduction_index.values && (
         <article className="metric-article">
           <AreaChart
             title={text.linechart_titel}
-            data={data.values.map((value) => ({
+            data={data.reproduction_index.values.map((value) => ({
               avg: value.reproduction_index_avg,
               min: value.reproduction_index_low,
               max: value.reproduction_index_high,
