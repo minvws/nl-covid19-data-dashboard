@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
 import Locatie from '~/assets/locaties.svg';
-import { BarScale } from '~/components/barScale';
 import { LineChart } from '~/components/charts/index';
 import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
 import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
@@ -46,36 +45,21 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
 
       <div className="layout-two-column">
         <article className="metric-article column-item">
-          <h3>{text.barscale_titel}</h3>
-
-          <BarScale
-            min={0}
-            max={30}
-            screenReaderText={text.barscale_screenreader_text}
-            value={data.last_value.newly_infected_locations}
-            id="besmette_locaties_verpleeghuis"
-            rangeKey="total_new_reported_locations"
-            gradient={[
-              {
-                color: '#3391CC',
-                value: 0,
-              },
-            ]}
-            showAxis={true}
-          />
-          <p>{text.barscale_toelichting}</p>
+          <h3>{text.kpi_titel}</h3>
+          <p className="text-blue kpi">
+            {formatNumber(data.last_value.infected_locations_total)} (
+            {formatPercentage(data.last_value.infected_locations_percentage)}
+            %)
+          </p>
+          <p>{text.kpi_toelichting}</p>
         </article>
 
         <article className="metric-article column-item">
-          <h3>
-            {text.kpi_titel}{' '}
-            <span className="text-blue kpi">
-              {formatNumber(data.last_value.infected_locations_total)} (
-              {formatPercentage(data.last_value.infected_locations_percentage)}
-              %)
-            </span>
-          </h3>
-          <p>{text.kpi_toelichting}</p>
+          <h3>{text.barscale_titel}</h3>
+          <p className="text-blue kpi">
+            {formatNumber(data?.last_value.newly_infected_locations)}
+          </p>
+          <p>{text.barscale_toelichting}</p>
         </article>
       </div>
 

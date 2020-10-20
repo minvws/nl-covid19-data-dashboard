@@ -6,7 +6,7 @@ import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hoo
 import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
 import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
 import { createNursingHomeNewlyInfectedTooltip } from '~/components/chloropleth/tooltips/region/createNursingHomeNewlyInfectedTooltip';
-import { NursingHomeInfectedPeopleBarScale } from '~/components/common/nursing-home-infected-people-barscale';
+import { formatNumber } from '~/utils/formatNumber';
 import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/layout/Content';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
@@ -47,11 +47,9 @@ const NursingHomeInfectedPeople: FCWithLayout<INationalData> = (props) => {
       <article className="metric-article layout-two-column">
         <div className="column-item column-item-extra-margin">
           <h3>{text.barscale_titel}</h3>
-
-          <NursingHomeInfectedPeopleBarScale
-            value={data.last_value.newly_infected_people}
-            showAxis={true}
-          />
+          <p className="text-blue kpi" data-cy="infected_daily_total">
+            {formatNumber(data.last_value.newly_infected_people)}
+          </p>
         </div>
 
         <div className="column-item column-item-extra-margin">

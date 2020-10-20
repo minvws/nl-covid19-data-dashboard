@@ -11,9 +11,9 @@ import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMu
 import { getSewerWaterBarScaleData } from '~/utils/sewer-water/municipality-sewer-water.util';
 import { useMediaQuery } from '~/utils/useMediaQuery';
 
-import { PositivelyTestedPeopleBarScale } from '~/components/gemeente/positively-tested-people-barscale';
-import { IntakeHospitalBarScale } from '~/components/gemeente/intake-hospital-barscale';
-import { SewerWaterBarScale } from '~/components/gemeente/sewer-water-barscale';
+import { PositivelyTestedPeopleMetric } from '~/components/gemeente/positively-tested-people-metric';
+import { IntakeHospitalMetric } from '~/components/gemeente/intake-hospital-metric';
+import { SewerWaterMetric } from '~/components/gemeente/sewer-water-metric';
 
 import { TitleWithIcon } from '~/components/titleWithIcon';
 import { getLayout as getSiteLayout } from '~/components/layout';
@@ -167,9 +167,8 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                         }
                       />
                       <span>
-                        <PositivelyTestedPeopleBarScale
-                          data={data?.positive_tested_people}
-                          showAxis={true}
+                        <PositivelyTestedPeopleMetric
+                          data={data?.positive_tested_people.last_value}
                         />
                       </span>
                     </a>
@@ -195,9 +194,8 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                         }
                       />
                       <span>
-                        <IntakeHospitalBarScale
-                          data={data?.hospital_admissions}
-                          showAxis={true}
+                        <IntakeHospitalMetric
+                          data={data?.hospital_admissions.last_value}
                         />
                       </span>
                     </a>
@@ -224,9 +222,8 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                           }
                         />
                         <span>
-                          <SewerWaterBarScale
+                          <SewerWaterMetric
                             data={getSewerWaterBarScaleData(data)}
-                            showAxis={true}
                           />
                         </span>
                       </a>
@@ -240,9 +237,8 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                         }
                       />
                       <span>
-                        <SewerWaterBarScale
+                        <SewerWaterMetric
                           data={getSewerWaterBarScaleData(data)}
-                          showAxis={true}
                         />
                       </span>
                     </div>

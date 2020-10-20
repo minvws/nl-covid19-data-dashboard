@@ -11,16 +11,16 @@ import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import Ziektegolf from '~/assets/ziektegolf.svg';
-import { NursingHomeDeathsBarScale } from '~/components/common/nursing-home-deaths-barscale';
-import { NursingHomeInfectedLocationsBarScale } from '~/components/common/nursing-home-infected-locations-barscale';
-import { NursingHomeInfectedPeopleBarScale } from '~/components/common/nursing-home-infected-people-barscale';
-import { InfectiousPeopleBarScale } from '~/components/landelijk/infectious-people-barscale';
+import { NursingHomeDeathsMetric } from '~/components/common/nursing-home-deaths-metric';
+import { NursingHomeInfectedLocationsMetric } from '~/components/common/nursing-home-infected-locations-metric';
+import { NursingHomeInfectedPeopleMetric } from '~/components/common/nursing-home-infected-people-metric';
+import { InfectiousPeopleMetric } from '~/components/landelijk/infectious-people-metric';
 import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-barscale';
 import { IntakeIntensiveCareBarscale } from '~/components/landelijk/intake-intensive-care-barscale';
 import { PositiveTestedPeopleBarScale } from '~/components/landelijk/positive-tested-people-barscale';
 import { ReproductionIndexBarScale } from '~/components/landelijk/reproduction-index-barscale';
-import { SewerWaterBarScale } from '~/components/landelijk/sewer-water-barscale';
-import { SuspectedPatientsBarScale } from '~/components/landelijk/suspected-patients-barscale';
+import { SewerWaterMetric } from '~/components/landelijk/sewer-water-metric';
+import { SuspectedPatientsMetric } from '~/components/landelijk/suspected-patients-metric';
 import { getLayout as getSiteLayout } from '~/components/layout';
 import { TitleWithIcon } from '~/components/titleWithIcon';
 import siteText from '~/locale/index';
@@ -100,6 +100,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
         </Link>
         <aside className="national-aside">
           <nav aria-label="metric navigation">
+            <h2>{siteText.nationaal_layout.headings.laatste}</h2>
             <ul className="last-developments">
               <li>
                 <Link href="/">
@@ -151,11 +152,10 @@ function NationalLayout(props: WithChildren<INationalData>) {
                       title={siteText.besmettelijke_personen.titel_sidebar}
                     />
                     <span>
-                      <InfectiousPeopleBarScale
+                      <InfectiousPeopleMetric
                         data={
                           data.infectious_people_last_known_average?.last_value
                         }
-                        showAxis={true}
                       />
                     </span>
                   </a>
@@ -241,9 +241,8 @@ function NationalLayout(props: WithChildren<INationalData>) {
                       title={siteText.verdenkingen_huisartsen.titel_sidebar}
                     />
                     <span>
-                      <SuspectedPatientsBarScale
-                        data={data?.verdenkingen_huisartsen}
-                        showAxis={true}
+                      <SuspectedPatientsMetric
+                        data={data?.verdenkingen_huisartsen.last_value}
                       />
                     </span>
                   </a>
@@ -261,10 +260,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
                       title={siteText.rioolwater_metingen.titel}
                     />
                     <span>
-                      <SewerWaterBarScale
-                        data={data?.rioolwater_metingen}
-                        showAxis={true}
-                      />
+                      <SewerWaterMetric data={data?.rioolwater_metingen} />
                     </span>
                   </a>
                 </Link>
@@ -289,11 +285,8 @@ function NationalLayout(props: WithChildren<INationalData>) {
                       }
                     />
                     <span>
-                      <NursingHomeInfectedPeopleBarScale
-                        value={
-                          data.nursing_home.last_value.newly_infected_people
-                        }
-                        showAxis={true}
+                      <NursingHomeInfectedPeopleMetric
+                        data={data.nursing_home.last_value}
                       />
                     </span>
                   </a>
@@ -313,11 +306,8 @@ function NationalLayout(props: WithChildren<INationalData>) {
                       title={siteText.verpleeghuis_besmette_locaties.titel}
                     />
                     <span>
-                      <NursingHomeInfectedLocationsBarScale
-                        value={
-                          data.nursing_home.last_value.infected_locations_total
-                        }
-                        showAxis={true}
+                      <NursingHomeInfectedLocationsMetric
+                        data={data.nursing_home.last_value}
                       />
                     </span>
                   </a>
@@ -335,9 +325,8 @@ function NationalLayout(props: WithChildren<INationalData>) {
                       title={siteText.verpleeghuis_oversterfte.titel_sidebar}
                     />
                     <span>
-                      <NursingHomeDeathsBarScale
-                        value={data.nursing_home.last_value.deceased_daily}
-                        showAxis={true}
+                      <NursingHomeDeathsMetric
+                        data={data.nursing_home.last_value}
                       />
                     </span>
                   </a>

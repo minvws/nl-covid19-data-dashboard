@@ -18,8 +18,10 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
   const { data } = props;
 
   const count = data.infectious_people_count;
-  const infectiousPeopleLastKnownEverage =
+  const infectiousPeopleLastKnownAverage =
     data.infectious_people_last_known_average;
+  const infectiousPeopleLastKnownNormalizedAverage =
+    data.infectious_people_count_normalized;
 
   return (
     <>
@@ -40,24 +42,45 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
         }}
       />
 
-      <article className="metric-article layout-two-column">
-        <div className="column-item">
+      <div className="layout-two-column">
+        <article
+          className="metric-article column-item"
+          data-cy="infected_daily_increase"
+        >
           <h3>
             {text.cijfer_titel}
 
             {count && (
               <span className="text-blue kpi">
                 {formatNumber(
-                  infectiousPeopleLastKnownEverage?.last_value.infectious_avg
+                  infectiousPeopleLastKnownAverage?.last_value.infectious_avg
                 )}
               </span>
             )}
           </h3>
-        </div>
-        <div className="column-item">
-          <p>{text.cijfer_toelichting}</p>
-        </div>
-      </article>
+          <div className="column-item">
+            <p>{text.cijfer_toelichting}</p>
+          </div>
+        </article>
+
+        <article className="metric-article column-item">
+          <h3>
+            {text.barscale_titel}
+
+            {count && (
+              <span className="text-blue kpi">
+                {formatNumber(
+                  infectiousPeopleLastKnownNormalizedAverage?.last_value
+                    .infectious_avg_normalized
+                )}
+              </span>
+            )}
+          </h3>
+          <div className="column-item">
+            <p>{text.barscale_toelichting}</p>
+          </div>
+        </article>
+      </div>
 
       {count?.values && (
         <article className="metric-article">
