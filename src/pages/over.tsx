@@ -11,10 +11,13 @@ import styles from './over.module.scss';
 import siteText, { TALLLanguages } from '~/locale/index';
 
 import { MDToHTMLString } from '~/utils/MDToHTMLString';
+import { Collapsable } from '~/components/collapsable';
+import { ensureUniqueSkipLinkIds, getSkipLinkId } from '~/utils/skipLinks';
 
 interface IVraagEnAntwoord {
   vraag: string;
   antwoord: string;
+  id?: string;
 }
 
 interface StaticProps {
@@ -29,9 +32,14 @@ export async function getStaticProps(): Promise<StaticProps> {
   const serializedContent = text.over_veelgestelde_vragen.vragen.map(function (
     item: IVraagEnAntwoord
   ) {
-    return { ...item, antwoord: MDToHTMLString(item.antwoord) };
+    return {
+      ...item,
+      id: getSkipLinkId(item.vraag),
+      antwoord: MDToHTMLString(item.antwoord),
+    };
   });
 
+  ensureUniqueSkipLinkIds(serializedContent);
   text.over_veelgestelde_vragen.vragen = serializedContent;
 
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
@@ -75,14 +83,17 @@ const Over: FCWithLayout<{ text: TALLLanguages }> = (props) => {
                   // antwoord key? Does this PR mess up something with promises/async behavior
                   // in getStaticProps?
                   return (
-                    <Fragment key={`item-${item.vraag}`}>
-                      <h3>{item.vraag}</h3>
+                    <Collapsable
+                      key={item.id}
+                      id={item.id}
+                      summary={item.vraag}
+                    >
                       <div
                         dangerouslySetInnerHTML={{
                           __html: item.antwoord,
                         }}
-                      />
-                    </Fragment>
+                      ></div>
+                    </Collapsable>
                   );
                 }
               )}

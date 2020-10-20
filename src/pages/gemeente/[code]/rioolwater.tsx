@@ -6,7 +6,7 @@ import { formatNumber } from '~/utils/formatNumber';
 
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 
-import { RegionalSewerWaterLineChart } from '~/components/lineChart/regionalSewerWaterLineChart';
+import { MunicipalSewerWaterLineChart } from '~/components/lineChart/municipalSewerWaterLineChart';
 import { useMemo } from 'react';
 import { BarChart } from '~/components/charts';
 import {
@@ -79,7 +79,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
         <h3>{text.linechart_titel}</h3>
 
         {lineChartData && (
-          <RegionalSewerWaterLineChart
+          <MunicipalSewerWaterLineChart
             averageValues={lineChartData.averageValues}
             text={{
               average_label_text: lineChartData.averageLabelText,

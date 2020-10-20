@@ -1,13 +1,11 @@
-import styles from './styles.module.scss';
-import { useRef } from 'react';
-
-import { formatNumber } from '~/utils/formatNumber';
-import { ScreenReaderOnly } from '~/components/screenReaderOnly';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { scaleQuantile, scaleThreshold } from 'd3-scale';
-
-import { useDynamicScale } from '~/utils/useDynamicScale';
+import { useRef } from 'react';
+import { ScreenReaderOnly } from '~/components/screenReaderOnly';
 import siteText from '~/locale/index';
+import { formatNumber } from '~/utils/formatNumber';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { useDynamicScale } from '~/utils/useDynamicScale';
+import styles from './styles.module.scss';
 
 type GradientStop = {
   color: string;
@@ -17,7 +15,7 @@ type GradientStop = {
 type BarscaleProps = {
   min: number;
   max: number;
-  value: number | null | undefined;
+  value: number;
   signaalwaarde?: number;
   gradient: GradientStop[];
   id: string;
@@ -40,19 +38,11 @@ export function BarScale({
   // Generate a random ID used for clipPath and linearGradient ID's.
   const rand = useRef(Math.random().toString(36).substring(2, 15));
 
-  const { scale: x } = useDynamicScale(min, max, rangeKey, value);
+  const { scale } = useDynamicScale(min, max, rangeKey, value);
 
   const text = siteText.common.barScale;
 
-  if (!x) {
-    return null;
-  }
-
-  if (typeof value === 'undefined' || value === null) {
-    return null;
-  }
-
-  const [xMin, xMax] = x.domain();
+  const [xMin, xMax] = scale.domain();
 
   const textAlign = scaleThreshold()
     .domain([20, 80])
@@ -80,7 +70,7 @@ export function BarScale({
                 y={36}
                 rx="2"
                 ry="2"
-                width={`${x(value)}%`}
+                width={`${scale(value)}%`}
                 height="10"
                 fill="black"
               />
@@ -93,7 +83,7 @@ export function BarScale({
                 <stop
                   key={`stop-${value}`}
                   stopColor={color(value) as any}
-                  offset={`${x(value)}%`}
+                  offset={`${scale(value)}%`}
                 />
               ))}
             </linearGradient>
@@ -123,8 +113,8 @@ export function BarScale({
 
           <g>
             <line
-              x1={`${x(value)}%`}
-              x2={`${x(value)}%`}
+              x1={`${scale(value)}%`}
+              x2={`${scale(value)}%`}
               y1={46}
               y2={26}
               strokeWidth="3"
@@ -133,17 +123,17 @@ export function BarScale({
 
             <text
               className={styles.value}
-              x={`${x(value)}%`}
+              x={`${scale(value)}%`}
               y={16}
-              textAnchor={textAlign(x(value)) as any}
+              textAnchor={textAlign(scale(value) ?? 0) as any}
             >{`${formatNumber(value)}`}</text>
           </g>
 
           {signaalwaarde && showAxis && (
             <g>
               <line
-                x1={`${x(signaalwaarde)}%`}
-                x2={`${x(signaalwaarde)}%`}
+                x1={`${scale(signaalwaarde)}%`}
+                x2={`${scale(signaalwaarde)}%`}
                 y1={56}
                 y2={46}
                 strokeWidth="3"
@@ -151,9 +141,9 @@ export function BarScale({
               />
               <text
                 className={styles.criticalValue}
-                x={`${x(signaalwaarde)}%`}
+                x={`${scale(signaalwaarde)}%`}
                 y={72}
-                textAnchor={textAlign(x(signaalwaarde)) as any}
+                textAnchor={textAlign(scale(signaalwaarde) ?? 0) as any}
               >
                 {text.signaalwaarde}: {`${formatNumber(signaalwaarde)}`}
               </text>
@@ -162,11 +152,11 @@ export function BarScale({
 
           {showAxis && (
             <g>
-              <text x={`${x(xMin)}%`} y={64} className={styles.tick}>
+              <text x={`${scale(xMin)}%`} y={64} className={styles.tick}>
                 {`${formatNumber(xMin)}`}
               </text>
               <text
-                x={`${x(xMax)}%`}
+                x={`${scale(xMax)}%`}
                 y={64}
                 className={styles.tick}
                 textAnchor="end"
