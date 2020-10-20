@@ -18,8 +18,8 @@ export function useRegionalSewerWaterChartOptions(
   averageValues: Value[],
   scatterPlotValues: SewerValue[],
   text: TranslationStrings,
-  selectedRWZI?: string,
-  timeframe: TimeframeOption
+  timeframe: TimeframeOption,
+  selectedRWZI?: string
 ): Highcharts.Options {
   return useMemo(() => {
     const hasMultipleValues = averageValues.length > 1;

@@ -43,8 +43,8 @@ export function RegionalSewerWaterChart(props: TProps) {
     averageValues,
     scatterPlotValues,
     text,
-    selectedRWZI,
-    timeframe
+    timeframe,
+    selectedRWZI
   );
 
   return (
