@@ -6,7 +6,6 @@ import {
 import { ReactNode, useState, createRef, useEffect, useCallback } from 'react';
 
 import styles from './collapsable.module.scss';
-import { useRouter } from 'next/router';
 
 interface CollapsableProps {
   summary: string;
@@ -61,13 +60,17 @@ export function Collapsable(props: CollapsableProps) {
   }, [open, panelReference]);
 
   useEffect(() => {
+    checkLocationHash();
     setLinkTabability();
     setContentHeight();
-    checkLocationHash();
   }, [checkLocationHash, setLinkTabability, setContentHeight]);
 
-  const router = useRouter();
-  router.events?.on('hashChangeComplete', checkLocationHash);
+  useEffect(() => {
+    window.addEventListener('hashchange', checkLocationHash, false);
+    return () => {
+      window.removeEventListener('hashchange', checkLocationHash, false);
+    };
+  }, []); // should not use dependancies in array: use effect mimics mount / unmount
 
   return (
     <section id={id} className={styles.root}>
