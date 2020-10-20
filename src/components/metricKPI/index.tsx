@@ -12,7 +12,7 @@ export function MetricKPI(props: IProps) {
 
   return (
     <div className={styles.root}>
-      <p className={styles.title}>{title}</p>
+      <h4 className={styles.title}>{title}</h4>
       <div className={styles.wrapper}>
         <p className={styles.value}>{format ? format(value) : value}</p>
         <p className={styles.description}>{description}</p>
