@@ -68,13 +68,11 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
         <div className="row-item">
           <div className="column-item column-item-extra-margin">
             <h3>{text.barscale_titel}</h3>
-            <h3>
-              <span className="text-blue kpi" data-cy="infected_daily_total">
-                {formatNumber(
-                  resultsPerRegion.last_value.hospital_increase_per_region
-                )}
-              </span>
-            </h3>
+            <p className="text-blue kpi" data-cy="infected_daily_total">
+              {formatNumber(
+                resultsPerRegion.last_value.hospital_increase_per_region
+              )}
+            </p>
           </div>
 
           <div className="column-item column-item-extra-margin">

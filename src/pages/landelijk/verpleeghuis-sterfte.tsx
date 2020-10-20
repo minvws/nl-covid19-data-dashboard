@@ -35,12 +35,11 @@ const NursingHomeDeaths: FCWithLayout<INationalData> = (props) => {
       <article className="metric-article layout-two-column">
         <div className="column-item column-item-extra-margin">
           <h3>{text.barscale_titel}</h3>
-
-          <h3>
+          <p>
             <span className="text-blue kpi" data-cy="infected_daily_total">
               {formatNumber(data.last_value.deceased_daily)}
             </span>
-          </h3>
+          </p>
         </div>
 
         <div className="column-item column-item-extra-margin">

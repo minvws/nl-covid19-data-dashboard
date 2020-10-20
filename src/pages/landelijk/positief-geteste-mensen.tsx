@@ -91,11 +91,9 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
 
         <article className="metric-article column-item">
           <h3>{text.kpi_titel}</h3>
-          <h3>
-            <span className="text-blue kpi" data-cy="infected_daily_total">
-              {formatNumber(total.last_value.infected_daily_total)}
-            </span>
-          </h3>
+          <p className="text-blue kpi" data-cy="infected_daily_total">
+            {formatNumber(total.last_value.infected_daily_total)}
+          </p>
 
           <p>{text.kpi_toelichting}</p>
           {ggdData && ggdData.percentage_infected_ggd && (

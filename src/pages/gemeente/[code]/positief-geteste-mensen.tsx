@@ -63,25 +63,21 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
       <div className="layout-two-column">
         <article className="metric-article column-item">
           <h3>{text.barscale_titel}</h3>
-          <h3>
-            <span className="text-blue kpi" data-cy="infected_daily_total">
-              {formatNumber(
-                positivelyTestedPeople.last_value.infected_daily_increase
-              )}
-            </span>
-          </h3>
+          <p className="text-blue kpi" data-cy="infected_daily_total">
+            {formatNumber(
+              positivelyTestedPeople.last_value.infected_daily_increase
+            )}
+          </p>
           <p>{text.barscale_toelichting}</p>
         </article>
 
         <article className="metric-article column-item">
           <h3>{text.kpi_titel}</h3>
-          <h3>
-            <span className="text-blue kpi">
-              {formatNumber(
-                positivelyTestedPeople.last_value.infected_daily_total
-              )}
-            </span>
-          </h3>
+          <p className="text-blue kpi">
+            {formatNumber(
+              positivelyTestedPeople.last_value.infected_daily_total
+            )}
+          </p>
           <p>{text.kpi_toelichting}</p>
         </article>
       </div>
