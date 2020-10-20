@@ -26,7 +26,7 @@
         "infected_percentage_daily": {
           "type": "number"
         },
-        "tested_total": {
+        "tested_total_daily": {
           "type": "integer"
         },
         "date_of_report_unix": {
@@ -37,7 +37,7 @@
         }
       },
       "required": [
-        "tested_total",
+        "tested_total_daily",
         "infected_percentage_daily",
         "infected_daily",
         "date_of_report_unix",
