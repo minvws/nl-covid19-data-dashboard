@@ -2,7 +2,7 @@ import styles from './styles.module.scss';
 
 type IProps = {
   title?: string;
-  value: number | undefined;
+  value?: number;
   format?: (value?: number) => string;
   description?: string;
 };
