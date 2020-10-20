@@ -15,16 +15,14 @@
   display: flex;
 }
 
-.wrapper > p {
-  margin: 0;
-}
-
 .value {
   font-size: 1.25em;
   font-weight: bold;
+  margin: 0;
 }
 
 .description {
-  margin-left: 1em !important;
+  margin: 0;
+  margin-left: 1em;
   color: $text-color-grey;
 }
