@@ -1,7 +1,6 @@
 import { BarScale } from '~/components/barScale';
-
-import { IntakeIntensivecareMa } from '~/types/data.d';
 import siteText from '~/locale/index';
+import { IntakeIntensivecareMa } from '~/types/data.d';
 
 const text = siteText.ic_opnames_per_dag;
 

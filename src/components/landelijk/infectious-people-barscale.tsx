@@ -1,7 +1,6 @@
 import { BarScale } from '~/components/barScale';
-import { InfectiousPeopleLastKnownAverageValue } from '~/types/data.d';
-
 import siteText from '~/locale/index';
+import { InfectiousPeopleLastKnownAverageValue } from '~/types/data.d';
 
 const text = siteText.besmettelijke_personen;
 

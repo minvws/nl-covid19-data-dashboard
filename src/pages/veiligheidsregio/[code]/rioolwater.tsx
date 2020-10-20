@@ -1,36 +1,32 @@
-import { FCWithLayout } from '~/components/layout';
-import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
-import { ContentHeader } from '~/components/layout/Content';
-
-import { formatNumber } from '~/utils/formatNumber';
-
-import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
-
-import siteText from '~/locale/index';
-
 import { useMemo, useState } from 'react';
+import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import { BarChart } from '~/components/charts';
 import {
-  getSewerWaterBarScaleData,
-  getSewerWaterLineChartData,
-  getSewerWaterBarChartData,
-  getSewerWaterScatterPlotData,
-  getInstallationNames,
-} from '~/utils/sewer-water/safety-region-sewer-water.util';
+  ChartTimeControls,
+  TimeframeOption,
+} from '~/components/chartTimeControls';
+import { FCWithLayout } from '~/components/layout';
+import { ContentHeader } from '~/components/layout/Content';
+import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
+import { InstallationSelector } from '~/components/lineChart/installationSelector';
+import styles from '~/components/lineChart/installationselector.module.scss';
+import { RegionalSewerWaterChart } from '~/components/lineChart/regionalSewerWaterChart';
+import { SEOHead } from '~/components/seoHead';
+import siteText from '~/locale/index';
 import {
   getSafetyRegionData,
   getSafetyRegionPaths,
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
+import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { SEOHead } from '~/components/seoHead';
-import { RegionalSewerWaterChart } from '~/components/lineChart/regionalSewerWaterChart';
 import {
-  ChartTimeControls,
-  TimeframeOption,
-} from '~/components/chartTimeControls';
-import { InstallationSelector } from '~/components/lineChart/installationSelector';
-import styles from '~/components/lineChart/installationselector.module.scss';
+  getInstallationNames,
+  getSewerWaterBarChartData,
+  getSewerWaterBarScaleData,
+  getSewerWaterLineChartData,
+  getSewerWaterScatterPlotData,
+} from '~/utils/sewer-water/safety-region-sewer-water.util';
 
 const text = siteText.veiligheidsregio_rioolwater_metingen;
 

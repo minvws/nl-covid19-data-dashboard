@@ -1,18 +1,13 @@
-import path from 'path';
 import fs from 'fs';
-
-import { Fragment } from 'react';
 import Head from 'next/head';
-
-import { getLayoutWithMetadata, FCWithLayout } from '~/components/layout';
-import { MaxWidth } from '~/components/maxWidth';
-
-import styles from './over.module.scss';
-import siteText, { TALLLanguages } from '~/locale/index';
-
-import { MDToHTMLString } from '~/utils/MDToHTMLString';
+import path from 'path';
 import { Collapsable } from '~/components/collapsable';
+import { FCWithLayout, getLayoutWithMetadata } from '~/components/layout';
+import { MaxWidth } from '~/components/maxWidth';
+import siteText, { TALLLanguages } from '~/locale/index';
+import { MDToHTMLString } from '~/utils/MDToHTMLString';
 import { ensureUniqueSkipLinkIds, getSkipLinkId } from '~/utils/skipLinks';
+import styles from './over.module.scss';
 
 interface IVraagEnAntwoord {
   vraag: string;

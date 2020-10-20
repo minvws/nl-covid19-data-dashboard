@@ -1,5 +1,5 @@
-import styles from './screenReaderOnly.module.scss';
 import { WithChildren } from '~/types/index';
+import styles from './screenReaderOnly.module.scss';
 
 /**
  * A small utility component that renders text which is only

@@ -1,16 +1,13 @@
-import { Legenda } from '~/components/legenda';
-import { FCWithLayout } from '~/components/layout';
-import { getNationalLayout } from '~/components/layout/NationalLayout';
-import { AreaChart } from '~/components/charts/index';
-
 import Ziektegolf from '~/assets/ziektegolf.svg';
-import { formatNumber } from '~/utils/formatNumber';
-
-import siteText from '~/locale/index';
-
+import { AreaChart } from '~/components/charts/index';
+import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/layout/Content';
-import getNlData, { INationalData } from '~/static-props/nl-data';
+import { getNationalLayout } from '~/components/layout/NationalLayout';
+import { Legenda } from '~/components/legenda';
 import { SEOHead } from '~/components/seoHead';
+import siteText from '~/locale/index';
+import getNlData, { INationalData } from '~/static-props/nl-data';
+import { formatNumber } from '~/utils/formatNumber';
 
 const text = siteText.besmettelijke_personen;
 

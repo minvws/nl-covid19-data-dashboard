@@ -1,21 +1,18 @@
-import { FCWithLayout } from '~/components/layout';
-import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
 import { useRouter } from 'next/router';
-
-import getLastGeneratedData from '~/static-props/last-generated-data';
-
-import text from '~/locale/index';
-
 import { ReactNode } from 'react';
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
-import { MunicipalityProperties } from '~/components/chloropleth/shared';
 import {
   createSelectMunicipalHandler,
   MunicipalitySelectionHandler,
 } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
-import { useMediaQuery } from '~/utils/useMediaQuery';
+import { MunicipalityProperties } from '~/components/chloropleth/shared';
 import { TooltipContent } from '~/components/chloropleth/tooltips/tooltipContent';
+import { FCWithLayout } from '~/components/layout';
+import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
 import { SEOHead } from '~/components/seoHead';
+import text from '~/locale/index';
+import getLastGeneratedData from '~/static-props/last-generated-data';
+import { useMediaQuery } from '~/utils/useMediaQuery';
 
 const tooltipContent = (selectedHandler: MunicipalitySelectionHandler) => {
   return (context: MunicipalityProperties): ReactNode => {

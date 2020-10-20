@@ -1,18 +1,16 @@
+import Arts from '~/assets/arts.svg';
+import { FCWithLayout } from '~/components/layout';
+import { ContentHeader } from '~/components/layout/Content';
+import { getNationalLayout } from '~/components/layout/NationalLayout';
+import { LineChart } from '~/components/lineChart/lineChartWithWeekTooltip';
+import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
+import getNlData, { INationalData } from '~/static-props/nl-data';
 import {
   NationalHuisartsVerdenkingen,
   NationalHuisartsVerdenkingenValue,
 } from '~/types/data.d';
-import getNlData, { INationalData } from '~/static-props/nl-data';
-
-import { ContentHeader } from '~/components/layout/Content';
-import { FCWithLayout } from '~/components/layout';
-import { getNationalLayout } from '~/components/layout/NationalLayout';
-import { LineChart } from '~/components/lineChart/lineChartWithWeekTooltip';
-
-import Arts from '~/assets/arts.svg';
 import { formatNumber } from '~/utils/formatNumber';
-import { SEOHead } from '~/components/seoHead';
 
 const text = siteText.verdenkingen_huisartsen;
 

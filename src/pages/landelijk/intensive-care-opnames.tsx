@@ -4,10 +4,10 @@ import { ContentHeaderMetadataHack } from '~/components/contentHeaderMetadataHac
 import { IntakeIntensiveCareBarscale } from '~/components/landelijk/intake-intensive-care-barscale';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
+import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
-import { SEOHead } from '~/components/seoHead';
 
 const text = siteText.ic_opnames_per_dag;
 

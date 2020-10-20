@@ -1,15 +1,13 @@
-import siteText from '~/locale/index';
-import { RioolwaterMetingen } from '~/types/data.d';
-import getNlData, { INationalData } from '~/static-props/nl-data';
-
+import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import { FCWithLayout } from '~/components/layout';
+import { ContentHeader } from '~/components/layout/Content';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { LineChart } from '~/components/lineChart/lineChartWithWeekTooltip';
-import { ContentHeader } from '~/components/layout/Content';
-import { formatNumber } from '~/utils/formatNumber';
-
-import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import { SEOHead } from '~/components/seoHead';
+import siteText from '~/locale/index';
+import getNlData, { INationalData } from '~/static-props/nl-data';
+import { RioolwaterMetingen } from '~/types/data.d';
+import { formatNumber } from '~/utils/formatNumber';
 
 const text = siteText.rioolwater_metingen;
 

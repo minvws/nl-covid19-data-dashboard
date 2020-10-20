@@ -1,10 +1,8 @@
-import { getLayoutWithMetadata, FCWithLayout } from '~/components/layout';
+import { FCWithLayout, getLayoutWithMetadata } from '~/components/layout';
 import { MaxWidth } from '~/components/maxWidth';
-
 import text from '~/locale/index';
-import styles from './over.module.scss';
-
 import getLastGeneratedData from '~/static-props/last-generated-data';
+import styles from './over.module.scss';
 
 const NotFound: FCWithLayout = () => {
   return (

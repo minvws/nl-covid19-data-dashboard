@@ -1,8 +1,7 @@
 import { BarScale } from '~/components/barScale';
-
+import siteText from '~/locale/index';
 import { RioolwaterMetingen } from '~/types/data.d';
 
-import siteText from '~/locale/index';
 const text = siteText.rioolwater_metingen;
 
 export function SewerWaterBarScale(props: {
