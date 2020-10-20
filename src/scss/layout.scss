@@ -448,6 +448,13 @@ a.metric-link {
       margin: 0;
     }
 
+    // in some cases a fixed column width is needed in order to make sure 'SSR-ed' charts render correctly:
+    .column-item-fixed {
+      flex: 0 0 50%;
+      display: flex;
+      flex-direction: column;
+    }
+
     .column-item {
       flex: 1 1 50%;
       display: flex;
