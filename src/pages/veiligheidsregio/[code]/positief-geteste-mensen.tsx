@@ -84,15 +84,13 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
 
         <article className="metric-article column-item">
           <h3>{text.kpi_titel}</h3>
-          <h3>
-            <span className="text-blue kpi">
-              {formatNumber(
-                Math.round(
-                  resultsPerRegion.last_value.total_reported_increase_per_region
-                )
-              )}
-            </span>
-          </h3>
+          <p className="text-blue kpi">
+            {formatNumber(
+              Math.round(
+                resultsPerRegion.last_value.total_reported_increase_per_region
+              )
+            )}
+          </p>
 
           <p>{text.kpi_toelichting}</p>
           {ggdData && ggdData.infected_percentage_daily && (
