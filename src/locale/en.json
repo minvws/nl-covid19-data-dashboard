@@ -9,8 +9,8 @@
     "title": "Last updated"
   },
   "notificatie": {
-    "titel": "Increase in new COVID-19 infections, hospital and ICU admissions continues",
-    "bericht": "The new number of people who tested positive has continued to rise in all regions and in all age groups. There were 43.903 confirmed cased reported by the municipal health services (GGD). That is 16.000 more than in the week before, a rise of 60%. The rise in confirmed cases does not yet show signs of stabilising.\n\nRisk level per region can be ‘caution’ (level 1), ‘concern’ (level 2), ‘serious’ (level 3) or ‘severe’ (level 4).",
+    "titel": "Slower increase in new COVID-19 infections ",
+    "bericht": "In the past week (14 to 20 October) the number of people who newly tested positive rose, as did the number of COVID-19 patients admitted to hospital and ICU. However, the speed at which new infections increased seems to have slowed somewhat. This might be a result of the government policy measures issued late September. However, the number of hospital admissions continues to rise at the same pace. \n\nRisk level per region can be ‘caution’ (level 1), ‘concern’ (level 2), ‘serious’ (level 3) or ‘very serious’ (level 4). At this moment the risk level of 16 regions is ‘very serious’, for 7 it is ‘serious’ and for 2 it is ‘concern’.",
     "link": {
       "text": "View the full message from the RIVM",
       "href": "https://www.rivm.nl/en/novel-coronavirus-covid-19/current-information"
@@ -81,8 +81,8 @@
       "description": "This graph shows the progression of the number of ICU beds occupied by COVID-19 patients."
     },
     "metadata": {
-      "title": "",
-      "description": ""
+      "title": "Intensive care admissions | Dashboard Coronavirus | Government.nl",
+      "description": "National overview of confirmed COVID-19 cases who are admitted to a hospital intensive care unit (ICU)."
     }
   },
   "verdenkingen_huisartsen": {
@@ -98,15 +98,15 @@
     "barscale_toelichting": "Number of patients who contact the general practitioner for the first time due to COVID-19 like symptoms, per 100.000 inhabitants, per week.",
     "kpi_titel": "Estimated number of patients where COVID-19 is suspected",
     "kpi_toelichting": "Estimated number of patients who contact the general practitioner for the first time due to COVID-19 like symptoms, per 100.000 inhabitants, per week.",
-    "normalized_kpi_titel": "Gemiddeld aantal patiënten met verdenking van COVID-19 per 100.000 inwoners",
-    "normalized_kpi_toelichting": "Geschat aantal patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten per week.",
     "linechart_titel": "Progression over time",
     "barscale_screenreader_text": "{{value}} patients who contact the general practitioner for the first time due to COVID-19 like symptoms, per 100.000 inhabitants, per week.",
     "titel_sidebar": "Patients who contact their GP for the first time because of symptoms that could indicate COVID-19 per 100.000 inhabitants",
     "metadata": {
-      "title": "",
-      "description": ""
-    }
+      "title": "Number of suspected COVID-19 reports by general practitioners | Dashboard Coronavirus | Government.nl",
+      "description": "National (estimated) number of patients who contact the general practitioner for the first time due to COVID-19 like symptoms."
+    },
+    "normalized_kpi_titel": "Estimated number of patients who contact the general practitioner for the first time with COVID-19 symptoms",
+    "normalized_kpi_toelichting": "Number of patients who contact the general practitioner for the first time due to COVID-19 like symptoms, per 100.000 inhabitants, per week."
   },
   "ziekenhuisopnames_per_dag": {
     "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
@@ -150,8 +150,8 @@
     },
     "linechart_description": "",
     "metadata": {
-      "title": "",
-      "description": ""
+      "title": "Hospital admissions | Dashboard Coronavirus | Government.nl",
+      "description": "Number of confirmed COVID-19 cases who are admitted to a hospital in the Netherlands."
     }
   },
   "positief_geteste_personen": {
@@ -201,8 +201,8 @@
     },
     "titel_sidebar": "Confirmed cases per 100,000 inhabitants per day",
     "metadata": {
-      "title": "",
-      "description": ""
+      "title": "Confirmed cases | Dashboard Coronavirus | Government.nl",
+      "description": "National overview of confirmed cases in inhabitants with COVID-19."
     }
   },
   "besmettelijke_personen": {
@@ -220,16 +220,16 @@
     "geen_signaalwaarde_beschikbaar_lees_waarom": "Read here why",
     "toelichting_pagina": "A person who carries coronavirus can infect other people within a certain time frame. How long someone is infectious for differs from one person to another. The number of infectious people is estimated using data from various sources. It is not possible to know exactly how many people are infectious, but we can indicate whether there are dozens, hundreds, thousands or even more.",
     "barscale_titel": "Average number of infectious people per 100.000 inhabitants.",
-    "barscale_toelichting": "Een berekening van hoeveel mensen met COVID-19 per 100.000 inwoners besmettelijk zijn voor anderen. Dit getal wordt door het RIVM berekend.",
     "barscale_screenreader_text": "{{value}} infectious people",
     "cijfer_titel": "Estimated number of infectious people in the Netherlands:",
     "cijfer_toelichting": "A calculation of how many people with COVID-19 can transmit the virus. This number is calculated by the RIVM.",
     "linechart_titel": "Progression over time",
     "titel_sidebar": "Number of infectious people",
     "metadata": {
-      "title": "",
-      "description": ""
-    }
+      "title": "Number of infectious people | Dashboard Coronavirus | Government.nl",
+      "description": "National overview of how many people with COVID-19 can transmit the virus. This number is calculated by the RIVM."
+    },
+    "barscale_toelichting": ""
   },
   "reproductiegetal": {
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
@@ -250,8 +250,8 @@
     "extra_uitleg": "The reproduction number shows how fast the virus is spreading. This number shows how many people are on average infected by one patient with COVID-19. The number of transmissions remains more or less constant when the reproduction number is 1, declines when it is less than 1 and increases when the number is above 1.",
     "linechart_titel": "Progression over time",
     "metadata": {
-      "title": "",
-      "description": ""
+      "title": "Reproduction number | Dashboard Coronavirus | Government.nl",
+      "description": "The reproduction number shows how fast the virus is spreading. This number shows how many people are on average infected by one patient with COVID-19."
     }
   },
   "overige_gegevens": {
@@ -320,8 +320,8 @@
     "map_titel": "Infected locations in the Netherlands",
     "map_toelichting": "This maps shows the percentage of nursing homes where in the past 28 days at least one (new) COVID-19 infection (confirmed by a positive test) is reported.",
     "metadata": {
-      "title": "",
-      "description": ""
+      "title": "Infected nursing homes | Dashboard Coronavirus | Government.nl",
+      "description": "National number of nursing homes with at least one confirmed case of COVID-19."
     }
   },
   "verpleeghuis_positief_geteste_personen": {
@@ -344,8 +344,8 @@
     "map_titel": "Confirmed cases in the Netherlands",
     "map_toelichting": "These maps show the number of confirmed cases per 100.000 residents.",
     "metadata": {
-      "title": "",
-      "description": ""
+      "title": "Confirmed cases in nursing homes | Dashboard Coronavirus | Government.nl",
+      "description": "Number of confirmed cases of COVID-19 in nursing homes in the Netherlands."
     }
   },
   "verpleeghuis_oversterfte": {
@@ -364,8 +364,8 @@
     "map_toelichting": "These figures show the excess mortality in nursing homes in the Netherlands per day.",
     "titel_sidebar": "Mortality per day",
     "metadata": {
-      "title": "",
-      "description": ""
+      "title": "Number of confirmed cases in nursing homes | Dashboard Coronavirus | Government.nl",
+      "description": "National number of deceased residents with confirmed cases of COVID-19 in nursing homes."
     }
   },
   "blok_verpleeghuis_zorg": {
@@ -388,8 +388,8 @@
     "barscale_screenreader_text": "{{value}} virus particles in one milliliter of sewage water, collected from about 300 sites in the Netherlands.",
     "linechart_titel": "Progression over time",
     "metadata": {
-      "title": "",
-      "description": ""
+      "title": "Sewage water examination | Dashboard Coronavirus | Government.nl",
+      "description": "Average number of virus particles in one milliliter of sewage water, collected from about 300 sites in the Netherlands."
     }
   },
   "notfound_titel": {
@@ -482,11 +482,11 @@
       },
       {
         "cijfer": "Correction figures of 2 September in the number of confirmed cases",
-        "verantwoording": "ICU occupancy rates are obtained daily via the [LCPS](https://lcps.nu/wp-content/uploads/covid-19.csv) website. The data includes the number of ICU beds occupied by COVID-19 patients and the number of ICU beds occupied by all other patients. The percentage of ICU beds occupied by COVID-19 patients is calculated by dividing the number of ICU beds occupied by COVID-19 patients by the total number of occupied ICU beds."
+        "verantwoording": "These figures are supplied daily as open data by '[Stichting NICE]'(https://stichting-nice.nl/covid-19/public/new-intake/confirmed/) (the National Intensive Care Evaluation Registry). The source data refers to the previous 24 hours. The calculation of the ICU admissions is based on patients with a confirmed infection of the COVID-19 virus.\n\nFrom the source file, we calculate the average admissions over the past three days. Thus, this does not include the number for the current day. The average is obtained by adding up each day’s values (the figures for one day, two days and three days ago), dividing the total by three and rounding off the result to one decimal place.\n\nICU occupancy rates are obtained daily via the [LCPS](https://lcps.nu/wp-content/uploads/covid-19.csv) website. The data includes the number of ICU beds occupied by COVID-19 patients and the number of ICU beds occupied by all other patients. The percentage of ICU beds occupied by COVID-19 patients is calculated by dividing the number of ICU beds occupied by COVID-19 patients by the total number of occupied ICU beds. The total ICU occupancy numbers are not available prior to the 1st of June because certain quality checks have not been performed before this date. Therefore that data might be flawed and is not published by LCPS."
       },
       {
         "cijfer": "Intensive care (ICU) admissions",
-        "verantwoording": "These figures are supplied daily as [open data](https://stichting-nice.nl/covid-19/public/zkh/new-intake/confirmed) by the Stichting NICE (the National Intensive Care Evaluation Registry), which is a partnership of Dutch ICUs. These figures are continually updated and once every afternoon are uploaded to the dashboard. The average number of daily hospital admissions is calculated using the figures for one day ago, two days ago and three days ago. Data for the present day is not included in this calculation, as the present day is not yet over and registration data is therefore incomplete. Although hospitals strive to register COVID-19 patients as fast as possible, there is usually some delay. As a result, the figures for the previous several days tend to be incomplete. That is why data on the dashboard is refreshed daily.\n\nPreviously, the figures on the dashboard concerning hospital admissions were provided by [open data](https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv) from RIVM, which comes from the Osiris database. However, this database suffers from significant underreporting. The NICE database is more complete and uses a broader definition of hospital admission. RIVM figures include only those patients admitted to hospital because of COVID-19, whereas NICE figures also include patients who were admitted to the hospital for another reason but also have COVID-19.\n\nNICE figures cannot currently be broken down by safety region or municipality. Data at these levels is therefore still taken from the Osiris database. Work is being done to provide NICE figures for hospital admissions at safety region and municipal levels. \n\nHospital occupancy rates (non-ICU) are obtained daily via the [LCPS](https://lcps.nu/wp-content/uploads/covid-19.csv) website."
+        "verantwoording": "These figures are supplied daily as [open data](https://stichting-nice.nl/covid-19/public/zkh/new-intake/confirmed) by the Stichting NICE (the National Intensive Care Evaluation Registry), which is a partnership of Dutch ICUs. These figures are continually updated and once every afternoon are uploaded to the dashboard. The average number of daily hospital admissions is calculated using the figures for one day ago, two days ago and three days ago. Data for the present day is not included in this calculation, as the present day is not yet over and registration data is therefore incomplete. Although hospitals strive to register COVID-19 patients as fast as possible, there is usually some delay. As a result, the figures for the previous several days tend to be incomplete. That is why data on the dashboard is refreshed daily.\n\nPreviously, the figures on the dashboard concerning hospital admissions were provided by [open data](https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv) from RIVM, which comes from the Osiris database. However, this database suffers from significant underreporting. The NICE database is more complete and uses a broader definition of hospital admission. RIVM figures include only those patients admitted to hospital because of COVID-19, whereas NICE figures also include patients who were admitted to the hospital for another reason but also have COVID-19.\n\nNICE figures cannot currently be broken down by safety region or municipality. Data at these levels is therefore still taken from the Osiris database. Work is being done to provide NICE figures for hospital admissions at safety region and municipal levels. \n\nHospital occupancy rates (non-ICU) are obtained daily via the [LCPS](https://lcps.nu/wp-content/uploads/covid-19.csv) website. The total occupancy numbers are not available prior to the 1st of June because certain quality checks have not been performed before this date. Therefore that data might be flawed and is not published by LCPS."
       },
       {
         "cijfer": "Hospital admissions",
@@ -602,13 +602,13 @@
     "barScale": {
       "signaalwaarde": "Alert value"
     },
-    "metricKPI": {
-      "dateOfReport": "Waarde van {{dateOfReport}}"
-    },
     "zoekveld_geen_resultaten": "No results",
     "zoekveld_placeholder_regio": "Search by safety region",
     "zoekveld_placeholder_gemeente": "Search by municipality",
-    "veiligheidsregio_label": "Safety region:"
+    "veiligheidsregio_label": "Safety region:",
+    "metricKPI": {
+      "dateOfReport": ""
+    }
   },
   "seoHead": {
     "default_description": "Information on the development of the coronavirus in The Netherlands.",
@@ -620,10 +620,10 @@
   },
   "nationaal_layout": {
     "headings": {
-      "laatste": "Laatste ontwikkelingen",
       "medisch": "Medical indicators",
       "overig": "Early indicators",
-      "verpleeghuis": "Nursing homes"
+      "verpleeghuis": "Nursing homes",
+      "laatste": ""
     }
   },
   "veiligheidsregio_layout": {
@@ -659,8 +659,8 @@
     },
     "linechart_description": "",
     "metadata": {
-      "title": "",
-      "description": ""
+      "title": "Hospital admissions residents {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
+      "description": "Confirmed cases of COVID-19 in safety region {{safetyRegionName}} who are admitted to a hospital."
     }
   },
   "veiligheidsregio_positief_geteste_personen": {
@@ -707,8 +707,8 @@
     "cluster_linechart_titel": "Progression of active clusters over time",
     "cluster_linechart_toelichting": "---",
     "metadata": {
-      "title": "",
-      "description": ""
+      "title": "Confirmed cases in {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
+      "description": "Overview of confirmed cases in safety region {{safetyRegionName}}."
     }
   },
   "veiligheidsregio_rioolwater_metingen": {
@@ -727,17 +727,17 @@
       "text": "RIVM",
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
     },
-    "graph_average_label_text": "Average viral particle count in 1 mL sewage water.",
-    "graph_secondary_label_text": "Individual site measurements.",
+    "graph_average_label_text": "Average value of all tested sites.",
+    "graph_secondary_label_text": "Measured value by location.",
     "graph_average_label_text_rwzi": "Value of waste water collection service at {{name}}",
-    "graph_daily_label_text_rwzi": "Daily viral particle count in 1 mL sewage water ({{name}})",
-    "graph_selected_rwzi_placeholder": "Select site",
-    "graph_range_description": "Progress over time",
     "average": "Average",
     "metadata": {
-      "title": "",
-      "description": ""
-    }
+      "title": "Sewage water examination in {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
+      "description": "Sewage water examination in {{safetyRegionName}} | Dashboard Coronavirus | Government.nl"
+    },
+    "graph_daily_label_text_rwzi": "",
+    "graph_selected_rwzi_placeholder": "",
+    "graph_range_description": ""
   },
   "gemeente_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Hospital admissions by day",
@@ -757,8 +757,8 @@
     },
     "linechart_description": "",
     "metadata": {
-      "title": "",
-      "description": ""
+      "title": "Hospital admissions {{municipalityName}} | Dashboard Coronavirus | Government.nl",
+      "description": "Overview of the number of confirmed COVID-19 cases in {{municipalityName}} who are admitted to a hospital per day."
     }
   },
   "gemeente_positief_geteste_personen": {
@@ -791,8 +791,8 @@
       "text": "RIVM"
     },
     "metadata": {
-      "title": "",
-      "description": ""
+      "title": "Confirmed cases in  {{municipalityName}} | Dashboard Coronavirus | Government.nl",
+      "description": "Overview of confirmed cases in municipality {{municipalityName}}"
     }
   },
   "gemeente_rioolwater_metingen": {
@@ -816,24 +816,24 @@
     "graph_average_label_text_rwzi": "Value of waste water collection service at {{name}}",
     "average": "Average",
     "metadata": {
-      "title": "",
-      "description": ""
+      "title": "Sewage water examination in {{municipalityName}} | Dashboard Coronavirus | Government.nl",
+      "description": "Overview of sewage water examination and the number of measured COVID-19 virus particles in municipality {{municipalityName}}."
     }
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Level of risk",
     "selecteer_toelichting": "The map indicates the level of risk per safety region.\n\nThere are [country-wide measures](https://www.rijksoverheid.nl/actueel/nieuws/2020/10/13/gedeeltelijke-lockdown-om-besmettingen-terug-te-dringen) to stop the quick spread of the coronavirus. \n\n[More about risk levels](/over-risiconiveaus)",
     "metadata": {
-      "title": "",
-      "description": ""
+      "title": "Level of risk per safety region | Dashboard Coronavirus | Government.nl",
+      "description": "Overview of the level of risk per safety region in the Netherlands."
     }
   },
   "gemeente_index": {
     "selecteer_titel": "Select your municipality",
     "selecteer_toelichting": "There are different measures per safety region and municipality",
     "metadata": {
-      "title": "",
-      "description": ""
+      "title": "Municipality overview | Dashboard Coronavirus | Government.nl",
+      "description": "Overview of municipalities in the Netherlands"
     }
   },
   "laatste_ontwikkelingen": {
@@ -932,8 +932,8 @@
     "map_toelichting": "These figures show the excess mortality in nursing homes in the Netherlands per day.",
     "titel_sidebar": "Mortality per day",
     "metadata": {
-      "title": "",
-      "description": ""
+      "title": "Deceased residents nursing homes in {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
+      "description": "Number of deceased residents with confirmed cases of COVID-19 in nursing homes within safety region {{safetyRegionName}}."
     }
   },
   "veiligheidsregio_verpleeghuis_besmette_locaties": {
@@ -951,8 +951,8 @@
     "linechart_titel": "Progression over time in the total number of infected locations",
     "barscale_screenreader_text": "{{value}} new locations where there is at least one confirmed case, per day.",
     "metadata": {
-      "title": "",
-      "description": ""
+      "title": "Infected nursing home locations in {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
+      "description": "Number of nursing homes in safety region {{safetyRegionName}} with at least one confirmed case of COVID-19."
     }
   },
   "veiligheidsregio_verpleeghuis_positief_geteste_personen": {
@@ -975,8 +975,8 @@
     "map_titel": "Confirmed cases in the Netherlands",
     "map_toelichting": "These maps show the number of confirmed cases per 100.000 residents.",
     "metadata": {
-      "title": "",
-      "description": ""
+      "title": "Confirmed cases in nursing homes in safety region {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
+      "description": "Number of confirmed cases of COVID-19 under nursing home residents in safety region {{safetyRegionName}}."
     }
   },
   "data_warning_text": "Please note: this information is not as recent as the information for the national level. We're working on a resolution. For more information, see the page \"explanation of the data presented\"."
