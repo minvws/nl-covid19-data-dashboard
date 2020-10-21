@@ -2,6 +2,15 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Afname from '~/assets/afname.svg';
 import Getest from '~/assets/test.svg';
+import { Anchor } from '~/components-styled/anchor';
+import { Box } from '~/components-styled/base';
+import { ChoroplethSection } from '~/components-styled/choropleth/choropleth-section';
+import { ChoroplethHeader } from '~/components-styled/choropleth/choropleth-header';
+import { ChoroplethLegend } from '~/components-styled/choropleth/choropleth-legend';
+import { KpiTile } from '~/components-styled/kpi-tile';
+import { KpiValue } from '~/components-styled/kpi-value';
+import { TwoKpiSection } from '~/components-styled/two-kpi-section';
+import { Heading, Text } from '~/components-styled/typography';
 import { ChartRegionControls } from '~/components/chartRegionControls';
 import { BarChart, LineChart } from '~/components/charts/index';
 import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
@@ -39,12 +48,12 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
 
   const legendItems = useSafetyRegionLegendaData('positive_tested_people');
   const delta: InfectedPeopleDeltaNormalized | undefined =
-    data?.infected_people_delta_normalized;
-  const age: IntakeShareAgeGroups | undefined = data?.intake_share_age_groups;
+    data.infected_people_delta_normalized;
+  const age: IntakeShareAgeGroups | undefined = data.intake_share_age_groups;
   const total: NationalInfectedPeopleTotal | undefined =
     data?.infected_people_total;
 
-  const ggdData = data?.infected_people_percentage?.last_value;
+  const ggdData = data.infected_people_percentage.last_value;
 
   const barChartTotal: number = age?.values
     ? age.values.reduce((mem: number, part): number => {
@@ -72,64 +81,56 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         }}
       />
 
-      <div className="layout-two-column">
-        <article
-          className="metric-article column-item"
-          data-cy="infected_daily_increase"
-        >
-          <h3>{text.barscale_titel}</h3>
-
+      <TwoKpiSection>
+        <KpiTile title={text.barscale_titel} data-cy="infected_daily_increase">
           {delta && (
             <PositiveTestedPeopleBarScale data={delta} showAxis={true} />
           )}
-          <p>{text.barscale_toelichting}</p>
-        </article>
+          <Text>{text.barscale_toelichting}</Text>
+        </KpiTile>
 
-        <article className="metric-article column-item">
-          <h3>{text.kpi_titel}</h3>
-          <p className="text-blue kpi" data-cy="infected_daily_total">
-            {formatNumber(total.last_value.infected_daily_total)}
-          </p>
-
-          <p>{text.kpi_toelichting}</p>
-          {ggdData && ggdData.percentage_infected_ggd && (
-            <div className="ggd-summary">
-              <h4
-                dangerouslySetInnerHTML={{
-                  __html: replaceKpisInText(ggdText.summary_title, [
-                    {
-                      name: 'percentage',
-                      value: `${formatPercentage(
-                        ggdData.percentage_infected_ggd
-                      )}%`,
-                      className: 'text-blue',
-                    },
-                  ]),
-                }}
-              ></h4>
-              <p>
-                <a href="#ggd">{ggdText.summary_link_cta}</a>
-              </p>
-            </div>
+        <KpiTile title={text.kpi_titel}>
+          <KpiValue
+            data-cy="infected_daily_total"
+            absolute={total.last_value.infected_daily_total}
+          />
+          <Text>{text.kpi_toelichting}</Text>
+          {ggdData.percentage_infected_ggd !== undefined && (
+            <Box>
+              <Heading level={4} fontSize={'1.2em'} mt={'1.5em'} mb={0}>
+                <span
+                  dangerouslySetInnerHTML={{
+                    __html: replaceKpisInText(ggdText.summary_title, [
+                      {
+                        name: 'percentage',
+                        value: `${formatPercentage(
+                          ggdData.percentage_infected_ggd
+                        )}%`,
+                        className: 'text-blue',
+                      },
+                    ]),
+                  }}
+                ></span>
+              </Heading>
+              <Text mt={0} lineHeight={1}>
+                <Anchor anchorName="ggd" text={ggdText.summary_link_cta} />
+              </Text>
+            </Box>
           )}
-        </article>
-      </div>
+        </KpiTile>
+      </TwoKpiSection>
 
-      <article
-        className="metric-article layout-chloropleth"
-        data-cy="chloropleths"
-      >
-        <div className="chloropleth-header">
-          <h3>{text.map_titel}</h3>
-          <p>{text.map_toelichting}</p>
-          <div className="chloropleth-controls">
+      <ChoroplethSection data-cy="chloropleths">
+        <ChoroplethHeader>
+          <Heading level={3}>{text.map_titel}</Heading>
+          <Text>{text.map_toelichting}</Text>
+          <Box>
             <ChartRegionControls
               onChange={(val: 'region' | 'municipal') => setSelectedMap(val)}
             />
-          </div>
-        </div>
-
-        <div className="chloropleth-chart">
+          </Box>
+        </ChoroplethHeader>
+        <Box gridArea={'c'}>
           {selectedMap === 'municipal' && (
             <MunicipalityChloropleth
               metricName="positive_tested_people"
@@ -146,17 +147,18 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
               onSelect={createSelectRegionHandler(router)}
             />
           )}
-        </div>
-
-        <div className="chloropleth-legend">
-          {legendItems && (
-            <ChloroplethLegenda
-              items={legendItems}
-              title={text.chloropleth_legenda.titel}
-            />
-          )}
-        </div>
-      </article>
+        </Box>
+        <ChoroplethLegend>
+          <div className="chloropleth-legend">
+            {legendItems && (
+              <ChloroplethLegenda
+                items={legendItems}
+                title={text.chloropleth_legenda.titel}
+              />
+            )}
+          </div>
+        </ChoroplethLegend>
+      </ChoroplethSection>
 
       {delta && (
         <article className="metric-article">

@@ -121,6 +121,7 @@ export interface National {
   rioolwater_metingen_per_rwzi: RioolwaterMetingenPerRwzi;
   hospital_beds_occupied: HospitalBedsOccupied;
   intensive_care_beds_occupied: IntensiveCareBedsOccupied;
+  ggd: NationalGgd;
   nursing_home: NationalNursingHome;
 }
 export interface NationalHuisartsVerdenkingen {
@@ -320,6 +321,17 @@ export interface IntensiveCareBedsOccupiedValue {
   date_of_report_unix: number;
   date_of_insertion_unix: number;
 }
+export interface NationalGgd {
+  values: NationalGgdValue[];
+  last_value: NationalGgdValue;
+}
+export interface NationalGgdValue {
+  infected_daily: number;
+  infected_percentage_daily: number;
+  tested_total_daily: number;
+  date_of_report_unix: number;
+  date_of_insertion_unix: number;
+}
 export interface NationalNursingHome {
   values: NationalNursingHomeValue[];
   last_value: NationalNursingHomeValue;
@@ -447,6 +459,7 @@ export interface AverageSewerInstallationPerRegionItem {
   week_end_unix: number;
   vrcode: string;
   average: number;
+  total_installation_count: number;
   date_of_insertion_unix: number;
 }
 export interface ResultsPerRegion {
