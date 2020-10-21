@@ -75,9 +75,8 @@ export function RadioGroup(props: RadioGroupProps) {
   return (
     <Box bg="white" display="flex" justifyContent="center">
       {items.map((item, index) => (
-        <>
+        <span key={`radiogroup-${id}-input-${index}`}>
           <StyledInput
-            key={`radiogroup-${id}-input-${index}`}
             onChange={() => onLocalChange(item.value)}
             id={`radiogroup-${id}-${index}`}
             type="radio"
@@ -85,13 +84,10 @@ export function RadioGroup(props: RadioGroupProps) {
             value={item.value}
             checked={selectedValue === item.value}
           />
-          <StyledLabel
-            htmlFor={`radiogroup-${id}-${index}`}
-            key={`radiogroup-${id}-label-${index}`}
-          >
+          <StyledLabel htmlFor={`radiogroup-${id}-${index}`}>
             {item.label}
           </StyledLabel>
-        </>
+        </span>
       ))}
     </Box>
   );
