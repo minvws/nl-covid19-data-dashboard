@@ -1,11 +1,5 @@
-import { useRouter } from 'next/router';
 import Getest from '~/assets/test.svg';
 import { LineChart } from '~/components/charts/index';
-import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
-import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
-import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
-import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
-import { createNursingHomeNewlyInfectedTooltip } from '~/components/chloropleth/tooltips/region/createNursingHomeNewlyInfectedTooltip';
 import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/layout/Content';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
@@ -17,13 +11,6 @@ import { formatNumber } from '~/utils/formatNumber';
 const text = siteText.verpleeghuis_positief_geteste_personen;
 
 const NursingHomeInfectedPeople: FCWithLayout<INationalData> = ({ data }) => {
-  const router = useRouter();
-
-  const legendItems = useSafetyRegionLegendaData(
-    'nursing_home',
-    'newly_infected_people'
-  );
-
   return (
     <>
       <SEOHead
@@ -53,34 +40,6 @@ const NursingHomeInfectedPeople: FCWithLayout<INationalData> = ({ data }) => {
 
         <div className="column-item column-item-extra-margin">
           <p>{text.extra_uitleg}</p>
-        </div>
-      </article>
-
-      <article className="metric-article layout-chloropleth">
-        <div className="chloropleth-header">
-          <h3>{text.map_titel}</h3>
-          <p>{text.map_toelichting}</p>
-        </div>
-
-        <div className="chloropleth-chart">
-          <SafetyRegionChloropleth
-            metricName="nursing_home"
-            metricValueName="newly_infected_people"
-            tooltipContent={createNursingHomeNewlyInfectedTooltip(router)}
-            onSelect={createSelectRegionHandler(
-              router,
-              'verpleeghuis-positief-geteste-personen'
-            )}
-          />
-        </div>
-
-        <div className="chloropleth-legend">
-          {legendItems ? (
-            <ChloroplethLegenda
-              items={legendItems}
-              title={text.chloropleth_legenda.titel}
-            />
-          ) : null}
         </div>
       </article>
 
