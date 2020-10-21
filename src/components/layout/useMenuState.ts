@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Router } from 'next/router';
+import { useRouter, Router } from 'next/router';
 
 interface MenuState {
   isMenuOpen: boolean;
@@ -16,24 +16,28 @@ interface MenuState {
 export function useMenuState(defaultOpen = false): MenuState {
   const [isMenuOpen, setMenuOpen] = useState<boolean>(defaultOpen);
 
+  const router = useRouter();
+
   const openMenu = (
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent> | undefined
   ): void => {
     event?.preventDefault();
-    setMenuOpen(true);
 
-    /* Ensure the top of the main navigation (or if not found: the sidebar) is in view */
-    requestAnimationFrame(() => {
-      window.document
-        .querySelector('#main-navigation,aside')
-        ?.scrollIntoView(true);
-    });
+    router.push(
+      router.pathname + '?menu',
+      router.asPath.split('?')[0] + '?menu',
+      { shallow: true }
+    );
   };
 
   const handleMenuClick = (
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent> | undefined
   ) => {
     event?.currentTarget?.blur();
+  };
+
+  const setMenuFromRouterState = (url: string) => {
+    setMenuOpen(url.indexOf('?menu') !== -1);
   };
 
   /**
@@ -43,12 +47,11 @@ export function useMenuState(defaultOpen = false): MenuState {
    * (just as non-JS would kept displayed)
    * */
   useEffect(() => {
-    const handleCloseMenu = () => {
-      setMenuOpen(false);
-    };
-    Router.events.on('beforeHistoryChange', handleCloseMenu);
+    Router.events.on('beforeHistoryChange', setMenuFromRouterState);
+    Router.events.on('routeChangeComplete', setMenuFromRouterState);
     return () => {
-      Router.events.off('beforeHistoryChange', handleCloseMenu);
+      Router.events.off('beforeHistoryChange', setMenuFromRouterState);
+      Router.events.off('routeChangeComplete', setMenuFromRouterState);
     };
   }, []);
 
