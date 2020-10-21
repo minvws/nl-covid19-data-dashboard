@@ -20,15 +20,7 @@ const fonts = {
   code: "source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace",
 };
 
-interface FontSizes extends Array<string> {
-  xs?: string;
-  sm?: string;
-  md?: string;
-  lg?: string;
-  xl?: string;
-}
-
-const fontSizes: FontSizes = [
+const fontSizes = [
   '0.6875rem', // 11px, used in chart dates labels
   '0.875rem', // 14px, made up to fill the gap.
   '1rem',
@@ -36,12 +28,6 @@ const fontSizes: FontSizes = [
   '2rem',
   '2.02729rem',
 ];
-
-fontSizes.xs = fontSizes[0];
-fontSizes.sm = fontSizes[1];
-fontSizes.md = fontSizes[2];
-fontSizes.lg = fontSizes[3];
-fontSizes.xl = fontSizes[4];
 
 const lineHeights = [1.2, 1.4, 1.5];
 
@@ -94,7 +80,6 @@ const colors = {
   icon: '#01689b',
   button: '#01689b',
   shadow: '#e5e5e5',
-  primary: 'hotpink',
 };
 
 const radii = [0, 5, 10];
