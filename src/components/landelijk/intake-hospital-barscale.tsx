@@ -1,7 +1,6 @@
 import { BarScale } from '~/components/barScale';
-
-import { IntakeHospitalMa } from '~/types/data.d';
 import siteText from '~/locale/index';
+import { IntakeHospitalMa } from '~/types/data.d';
 
 const text = siteText.ziekenhuisopnames_per_dag;
 

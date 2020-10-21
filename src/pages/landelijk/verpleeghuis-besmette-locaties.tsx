@@ -6,10 +6,10 @@ import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hoo
 import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
 import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
 import { createInfectedLocationsRegionalTooltip } from '~/components/chloropleth/tooltips/region/createInfectedLocationsRegionalTooltip';
-import { SEOHead } from '~/components/seoHead';
 import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/layout/Content';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
+import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';

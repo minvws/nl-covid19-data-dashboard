@@ -1,5 +1,5 @@
-import styles from './loadingPlaceholder.module.scss';
 import { WithChildren } from '~/types/index';
+import styles from './loadingPlaceholder.module.scss';
 
 export function LoadingPlaceholder({ children }: WithChildren) {
   return (

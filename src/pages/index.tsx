@@ -1,32 +1,28 @@
-import { useState } from 'react';
+import fs from 'fs';
 import { useRouter } from 'next/router';
 import path from 'path';
-import fs from 'fs';
-
-import styles from './index.module.scss';
-import { National } from '~/types/data';
-import { INationalData } from '~/static-props/nl-data';
-import { TALLLanguages } from '~/locale/index';
-
-import { FCWithLayout } from '~/components/layout';
-import { getNationalLayout } from '~/components/layout/NationalLayout';
-import { TitleWithIcon } from '~/components/titleWithIcon';
+import { useState } from 'react';
+import ExternalLink from '~/assets/external-link.svg';
+import Notification from '~/assets/notification.svg';
 import { ChartRegionControls } from '~/components/chartRegionControls';
+import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
+import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
 import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
+import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
+import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/createPositiveTestedPeopleMunicipalTooltip';
 import { createPositiveTestedPeopleRegionalTooltip } from '~/components/chloropleth/tooltips/region/createPositiveTestedPeopleRegionalTooltip';
 import { escalationTooltip } from '~/components/chloropleth/tooltips/region/escalationTooltip';
-import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
-import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
-import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
-import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
-
-import Notification from '~/assets/notification.svg';
-import ExternalLink from '~/assets/external-link.svg';
-
-import { EscalationMapLegenda } from './veiligheidsregio';
+import { FCWithLayout } from '~/components/layout';
+import { getNationalLayout } from '~/components/layout/NationalLayout';
+import { TitleWithIcon } from '~/components/titleWithIcon';
+import { TALLLanguages } from '~/locale/index';
+import { INationalData } from '~/static-props/nl-data';
+import { National } from '~/types/data';
 import { MDToHTMLString } from '~/utils/MDToHTMLString';
+import styles from './index.module.scss';
+import { EscalationMapLegenda } from './veiligheidsregio';
 
 const Home: FCWithLayout<INationalData> = (props) => {
   const { text } = props;

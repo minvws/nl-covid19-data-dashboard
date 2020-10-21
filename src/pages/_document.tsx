@@ -1,12 +1,12 @@
 import Document, {
-  Html,
+  DocumentContext,
   Head,
+  Html,
   Main,
   NextScript,
-  DocumentContext,
 } from 'next/document';
-import { getLocale } from '~/utils/getLocale';
 import { ServerStyleSheet } from 'styled-components';
+import { getLocale } from '~/utils/getLocale';
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {

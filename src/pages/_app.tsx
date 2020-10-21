@@ -1,13 +1,13 @@
 import '@reach/combobox/styles.css';
 import Router from 'next/router';
 import { useEffect } from 'react';
+import { ThemeProvider } from 'styled-components';
 import '~/components/comboBox/comboBox.scss';
 import '~/components/legenda/legenda.scss';
 import * as piwik from '~/lib/piwik';
 import '~/scss/style.scss';
-import { ThemeProvider } from 'styled-components';
-import theme from '~/style/theme';
 import { GlobalStyle } from '~/style/global-style';
+import theme from '~/style/theme';
 
 // Import Preact DevTools in development
 // if (process.env.NODE_ENV === 'development') {

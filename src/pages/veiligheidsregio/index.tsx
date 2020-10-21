@@ -13,9 +13,9 @@ import { escalationTooltip } from '~/components/chloropleth/tooltips/region/esca
 import styles from '~/components/chloropleth/tooltips/tooltip.module.scss';
 import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
+import { SEOHead } from '~/components/seoHead';
 import { TALLLanguages } from '~/locale/index';
 import { MDToHTMLString } from '~/utils/MDToHTMLString';
-import { SEOHead } from '~/components/seoHead';
 
 const escalationThresholds = (regionThresholds.escalation_levels as ChoroplethThresholds)
   .thresholds;

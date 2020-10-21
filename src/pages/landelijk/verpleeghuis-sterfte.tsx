@@ -1,12 +1,12 @@
 import CoronaVirus from '~/assets/coronavirus.svg';
 import { LineChart } from '~/components/charts/index';
-import { formatNumber } from '~/utils/formatNumber';
 import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/layout/Content';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
+import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
-import { SEOHead } from '~/components/seoHead';
+import { formatNumber } from '~/utils/formatNumber';
 
 const text = siteText.verpleeghuis_oversterfte;
 
