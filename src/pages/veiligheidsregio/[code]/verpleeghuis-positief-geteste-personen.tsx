@@ -15,9 +15,10 @@ import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text = siteText.veiligheidsregio_verpleeghuis_positief_geteste_personen;
 
-const NursingHomeInfectedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
-  const { data, safetyRegionName } = props;
-
+const NursingHomeInfectedPeople: FCWithLayout<ISafetyRegionData> = ({
+  data,
+  safetyRegionName,
+}) => {
   return (
     <>
       <SEOHead
