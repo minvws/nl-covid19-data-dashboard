@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { Fragment, useRef, useState } from 'react';
 import { Box } from './base';
 import { css } from '@styled-system/css';
 import styled from 'styled-components';
@@ -75,7 +75,7 @@ export function RadioGroup(props: RadioGroupProps) {
   return (
     <Box bg="white" display="flex" justifyContent="center">
       {items.map((item, index) => (
-        <span key={`radiogroup-${id}-input-${index}`}>
+        <Fragment key={`radiogroup-${id}-input-${index}`}>
           <StyledInput
             onChange={() => onLocalChange(item.value)}
             id={`radiogroup-${id}-${index}`}
@@ -87,7 +87,7 @@ export function RadioGroup(props: RadioGroupProps) {
           <StyledLabel htmlFor={`radiogroup-${id}-${index}`}>
             {item.label}
           </StyledLabel>
-        </span>
+        </Fragment>
       ))}
     </Box>
   );
