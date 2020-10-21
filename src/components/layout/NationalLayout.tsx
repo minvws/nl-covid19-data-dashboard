@@ -137,11 +137,12 @@ function NationalLayout(props: WithChildren<INationalData>) {
                     />
                     <span>
                       <PositiveTestedPeopleMetric
-                        data={data?.infected_people_delta_normalized.last_value}
+                        data={data.infected_people_delta_normalized.last_value}
                       />
                       <PositiveTestedPeopleBarScale
                         data={data.infected_people_delta_normalized}
-                        showAxis={true}
+                        showAxis={false}
+                        showValue={false}
                       />
                     </span>
                   </a>
@@ -182,12 +183,13 @@ function NationalLayout(props: WithChildren<INationalData>) {
                     <span>
                       <ReproductionIndexMetric
                         data={
-                          data?.reproduction_index_last_known_average.last_value
+                          data.reproduction_index_last_known_average.last_value
                         }
                       />
                       <ReproductionIndexBarScale
                         data={data.reproduction_index_last_known_average}
-                        showAxis={true}
+                        showAxis={false}
+                        showValue={false}
                       />
                     </span>
                   </a>
@@ -206,11 +208,12 @@ function NationalLayout(props: WithChildren<INationalData>) {
                     />
                     <span>
                       <IntakeHospitalMetric
-                        data={data?.intake_hospital_ma.last_value}
+                        data={data.intake_hospital_ma.last_value}
                       />
                       <IntakeHospitalBarScale
                         data={data.intake_hospital_ma}
-                        showAxis={true}
+                        showAxis={false}
+                        showValue={false}
                       />
                     </span>
                   </a>
@@ -231,11 +234,12 @@ function NationalLayout(props: WithChildren<INationalData>) {
                     />
                     <span>
                       <IntakeIntensiveCareMetric
-                        data={data?.intake_intensivecare_ma.last_value}
+                        data={data.intake_intensivecare_ma.last_value}
                       />
                       <IntakeIntensiveCareBarscale
                         data={data.intake_intensivecare_ma}
-                        showAxis={true}
+                        showAxis={false}
+                        showValue={false}
                       />
                     </span>
                   </a>

@@ -7,8 +7,9 @@ const text = siteText.ziekenhuisopnames_per_dag;
 export function IntakeHospitalBarScale(props: {
   data: IntakeHospitalMa | undefined;
   showAxis: boolean;
+  showValue?: boolean;
 }) {
-  const { data, showAxis } = props;
+  const { data, showAxis, showValue } = props;
 
   if (!data) return null;
 
@@ -36,6 +37,7 @@ export function IntakeHospitalBarScale(props: {
         },
       ]}
       showAxis={showAxis}
+      showValue={showValue}
     />
   );
 }

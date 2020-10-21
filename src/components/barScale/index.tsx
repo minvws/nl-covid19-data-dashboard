@@ -22,6 +22,7 @@ type BarscaleProps = {
   screenReaderText: string;
   rangeKey: string;
   showAxis?: boolean;
+  showValue?: boolean;
 };
 
 export function BarScale({
@@ -34,6 +35,7 @@ export function BarScale({
   screenReaderText,
   rangeKey,
   showAxis,
+  showValue = true,
 }: BarscaleProps) {
   // Generate a random ID used for clipPath and linearGradient ID's.
   const rand = useRef(Math.random().toString(36).substring(2, 15));
@@ -121,12 +123,16 @@ export function BarScale({
               stroke="#000"
             />
 
-            <text
-              className={styles.value}
-              x={`${scale(value)}%`}
-              y={16}
-              textAnchor={textAlign(scale(value) ?? 0) as any}
-            >{`${formatNumber(value)}`}</text>
+            {showValue && (
+              <text
+                className={styles.value}
+                x={`${scale(value)}%`}
+                y={16}
+                textAnchor={textAlign(scale(value) ?? 0) as any}
+              >
+                {`${formatNumber(value)}`}
+              </text>
+            )}
           </g>
 
           {signaalwaarde && showAxis && (
