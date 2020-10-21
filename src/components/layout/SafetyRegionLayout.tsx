@@ -168,6 +168,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                         <PositivelyTestedPeopleBarScale
                           data={data?.results_per_region}
                           showAxis={false}
+                          showValue={false}
                         />
                       </span>
                     </a>
