@@ -1,10 +1,7 @@
-import styles from './chartTimeControls.module.scss';
-
-import { RadioGroup, IRadioGroupItem } from '~/components/radioGroup';
-
+import { IRadioGroupItem, RadioGroup } from '~/components/radioGroup';
 import text from '~/locale/index';
-
-export type TimeframeOption = 'all' | '5weeks' | 'week';
+import { TimeframeOption } from '~/utils/timeframe';
+import styles from './chartTimeControls.module.scss';
 
 interface IProps {
   timeframe: TimeframeOption;
