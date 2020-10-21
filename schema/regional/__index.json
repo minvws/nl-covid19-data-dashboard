@@ -36,6 +36,12 @@
     "average_sewer_installation_per_region": {
       "$ref": "average_sewer_installation_per_region.json"
     },
+    "sewer_average_daily": {
+      "$ref": "sewer_average_daily.json"
+    },
+    "sewer_per_installation_daily": {
+      "$ref": "sewer_per_installation_daily.json"
+    },
     "results_per_region": {
       "$ref": "results_per_region.json"
     },
