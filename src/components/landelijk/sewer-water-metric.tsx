@@ -1,10 +1,9 @@
-import { RioolwaterMetingen } from '~/types/data.d';
 import { MetricKPI } from '~/components/metricKPI';
+import siteText from '~/locale/index';
+import { RioolwaterMetingen } from '~/types/data.d';
+import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { formatDateFromSeconds } from '~/utils/formatDate';
-
-import siteText from '~/locale/index';
 
 const text = siteText.common.metricKPI;
 const title = siteText.rioolwater_metingen.titel;

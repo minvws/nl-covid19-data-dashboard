@@ -1,17 +1,12 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-
-import siteText from '~/locale/index';
-import getNlData, { INationalData } from '~/static-props/nl-data';
-
-import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-barscale';
-import { FCWithLayout } from '~/components/layout';
-import { getNationalLayout } from '~/components/layout/NationalLayout';
-
+import Ziekenhuis from '~/assets/ziekenhuis.svg';
+import { Spacer } from '~/components-styled/base';
+import { KpiTile } from '~/components-styled/kpi-tile';
+import { KpiValue } from '~/components-styled/kpi-value';
+import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { ChartRegionControls } from '~/components/chartRegionControls';
 import { LineChart } from '~/components/charts/index';
-import { ContentHeaderMetadataHack } from '~/components/contentHeaderMetadataHack';
-
 import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
 import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
@@ -20,11 +15,14 @@ import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHan
 import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
 import { createMunicipalHospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/municipal/createMunicipalHospitalAdmissionsTooltip';
 import { createRegionHospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/region/createRegionHospitalAdmissionsTooltip';
+import { ContentHeaderMetadataHack } from '~/components/contentHeaderMetadataHack';
 import { DataWarning } from '~/components/dataWarning';
-
-import Ziekenhuis from '~/assets/ziekenhuis.svg';
-import { formatNumber } from '~/utils/formatNumber';
+import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-barscale';
+import { FCWithLayout } from '~/components/layout';
+import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
+import siteText from '~/locale/index';
+import getNlData, { INationalData } from '~/static-props/nl-data';
 
 const text = siteText.ziekenhuisopnames_per_dag;
 
@@ -57,45 +55,25 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
           dataSourceB: text.bronnen.lnaz,
         }}
       />
+      <Spacer mb={4} />
 
-      <div className="layout-two-column">
-        <article className="metric-article column-item">
-          <h3>{text.barscale_titel}</h3>
-
+      <TwoKpiSection>
+        <KpiTile
+          title={text.barscale_titel}
+          description={text.extra_uitleg}
+          sourcedFrom={text.bronnen.rivm}
+        >
           <IntakeHospitalBarScale data={dataIntake} showAxis={true} />
-          <p>{text.extra_uitleg}</p>
-          <footer className="article-footer">
-            {siteText.common.metadata.source}:{' '}
-            <a
-              href={text.bronnen.rivm.href}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              {text.bronnen.rivm.text}
-            </a>
-          </footer>
-        </article>
+        </KpiTile>
 
-        <article className="metric-article column-item">
-          <div className="article-top">
-            <h3>{text.kpi_bedbezetting.title}</h3>
-            <div className="text-blue kpi">
-              {formatNumber(dataBeds.last_value.covid_occupied)}
-            </div>
-            <p>{text.kpi_bedbezetting.description}</p>
-          </div>
-          <footer className="article-footer">
-            {siteText.common.metadata.source}:{' '}
-            <a
-              href={text.bronnen.lnaz.href}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              {text.bronnen.lnaz.text}
-            </a>
-          </footer>
-        </article>
-      </div>
+        <KpiTile
+          title={text.kpi_bedbezetting.title}
+          description={text.kpi_bedbezetting.description}
+          sourcedFrom={text.bronnen.lnaz}
+        >
+          <KpiValue absolute={dataBeds.last_value.covid_occupied} />
+        </KpiTile>
+      </TwoKpiSection>
 
       <article className="metric-article">
         <LineChart

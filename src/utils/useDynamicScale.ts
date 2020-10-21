@@ -3,7 +3,6 @@ import useSWR from 'swr';
 
 interface IDynamicScale {
   isValidating: boolean;
-  error?: Error;
   scale: ScaleLinear<number, number>;
 }
 
@@ -21,7 +20,7 @@ export function useDynamicScale(
   min: number,
   max: number,
   dataKey: string,
-  value?: number | null
+  value: number
 ): IDynamicScale {
   const { data, isValidating } = useSWR('/json/RANGES.json');
 
@@ -33,8 +32,8 @@ export function useDynamicScale(
 
   let scaleMax = max;
 
-  const isValueHigherThanMax = value && value !== null && value > max;
-  const isDataMaxHigherThanMax = dataMax && dataMax !== null && dataMax > max;
+  const isValueHigherThanMax = value > max;
+  const isDataMaxHigherThanMax = dataMax > max;
 
   if (value) {
     // The first and most important check, did we find an absolute max value across

@@ -1,29 +1,26 @@
 import { useRouter } from 'next/router';
-
-import siteText from '~/locale/index';
+import Ziekenhuis from '~/assets/ziekenhuis.svg';
+import { LineChart } from '~/components/charts/index';
+import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
+import { useMunicipalLegendaData } from '~/components/chloropleth/legenda/hooks/useMunicipalLegendaData';
+import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
+import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
+import { createMunicipalHospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/municipal/createMunicipalHospitalAdmissionsTooltip';
+import { DataWarning } from '~/components/dataWarning';
+import { FCWithLayout } from '~/components/layout';
+import { ContentHeader } from '~/components/layout/Content';
+import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
+import { SEOHead } from '~/components/seoHead';
 import regionCodeToMunicipalCodeLookup from '~/data/regionCodeToMunicipalCodeLookup';
-import { ResultsPerRegion } from '~/types/data.d';
+import siteText from '~/locale/index';
 import {
   getSafetyRegionData,
   getSafetyRegionPaths,
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
-
-import { createMunicipalHospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/municipal/createMunicipalHospitalAdmissionsTooltip';
-import { LineChart } from '~/components/charts/index';
+import { ResultsPerRegion } from '~/types/data.d';
 import { formatNumber } from '~/utils/formatNumber';
-import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
-import { useMunicipalLegendaData } from '~/components/chloropleth/legenda/hooks/useMunicipalLegendaData';
-import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
-import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
-import { FCWithLayout } from '~/components/layout';
-import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
-import { ContentHeader } from '~/components/layout/Content';
-import { DataWarning } from '~/components/dataWarning';
-
-import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { SEOHead } from '~/components/seoHead';
 
 const text = siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
 

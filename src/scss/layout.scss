@@ -74,6 +74,24 @@
   }
 }
 
+.metric-article-header {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+
+  div {
+    margin-left: auto;
+    margin-top: 0;
+  }
+
+  @media (max-width: 1000px) {
+    flex-direction: column;
+    div {
+      margin-left: 0;
+    }
+  }
+}
+
 .index-article,
 .metric-article {
   background: white;
@@ -86,7 +104,7 @@
     max-width: 30rem;
   }
 
-  @media (min-width: 700px) {
+  @media (min-width: 768px) {
     margin: 0;
     margin-top: 2rem;
   }
@@ -122,7 +140,7 @@
     max-width: 30rem;
   }
 
-  @media (min-width: 700px) {
+  @media (min-width: 768px) {
     margin: 0;
     margin-top: 2rem;
   }
@@ -428,6 +446,13 @@ a.metric-link {
 
     .column-item-no-margin {
       margin: 0;
+    }
+
+    // in some cases a fixed column width is needed in order to make sure 'SSR-ed' charts render correctly:
+    .column-item-fixed {
+      flex: 0 0 50%;
+      display: flex;
+      flex-direction: column;
     }
 
     .column-item {

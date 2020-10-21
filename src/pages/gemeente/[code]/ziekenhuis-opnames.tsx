@@ -1,28 +1,25 @@
 import { useRouter } from 'next/router';
-
+import Ziekenhuis from '~/assets/ziekenhuis.svg';
+import { LineChart } from '~/components/charts/index';
+import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
+import { useMunicipalLegendaData } from '~/components/chloropleth/legenda/hooks/useMunicipalLegendaData';
+import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
+import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
+import { createMunicipalHospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/municipal/createMunicipalHospitalAdmissionsTooltip';
+import { DataWarning } from '~/components/dataWarning';
+import { FCWithLayout } from '~/components/layout';
+import { ContentHeader } from '~/components/layout/Content';
+import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
+import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
-import { HospitalAdmissions } from '~/types/data.d';
 import {
   getMunicipalityData,
   getMunicipalityPaths,
   IMunicipalityData,
 } from '~/static-props/municipality-data';
-
-import { LineChart } from '~/components/charts/index';
-import { FCWithLayout } from '~/components/layout';
-import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
-import { ContentHeader } from '~/components/layout/Content';
+import { HospitalAdmissions } from '~/types/data.d';
 import { formatNumber } from '~/utils/formatNumber';
-import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
-import { createMunicipalHospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/municipal/createMunicipalHospitalAdmissionsTooltip';
-import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
-import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
-import { useMunicipalLegendaData } from '~/components/chloropleth/legenda/hooks/useMunicipalLegendaData';
-import { DataWarning } from '~/components/dataWarning';
-
-import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { SEOHead } from '~/components/seoHead';
 
 const text = siteText.gemeente_ziekenhuisopnames_per_dag;
 

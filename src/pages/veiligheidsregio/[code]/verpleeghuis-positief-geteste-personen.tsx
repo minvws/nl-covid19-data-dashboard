@@ -1,22 +1,18 @@
+import Getest from '~/assets/test.svg';
+import { LineChart } from '~/components/charts/index';
 import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/layout/Content';
-import { LineChart } from '~/components/charts/index';
-
-import { formatNumber } from '~/utils/formatNumber';
-
-import Getest from '~/assets/test.svg';
-
-import siteText from '~/locale/index';
-
-import { RegionalNursingHome } from '~/types/data.d';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
+import { SEOHead } from '~/components/seoHead';
+import siteText from '~/locale/index';
 import {
   getSafetyRegionData,
   getSafetyRegionPaths,
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
+import { RegionalNursingHome } from '~/types/data.d';
+import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { SEOHead } from '~/components/seoHead';
 
 const text = siteText.veiligheidsregio_verpleeghuis_positief_geteste_personen;
 

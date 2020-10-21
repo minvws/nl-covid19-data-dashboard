@@ -1,28 +1,24 @@
 import { useRouter } from 'next/router';
-
+import Getest from '~/assets/test.svg';
+import { LineChart } from '~/components/charts/index';
+import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
+import { useMunicipalLegendaData } from '~/components/chloropleth/legenda/hooks/useMunicipalLegendaData';
+import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
+import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
+import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/createPositiveTestedPeopleMunicipalTooltip';
+import { FCWithLayout } from '~/components/layout';
+import { ContentHeader } from '~/components/layout/Content';
+import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
+import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
-import { PositiveTestedPeople } from '~/types/data.d';
 import {
   getMunicipalityData,
   getMunicipalityPaths,
   IMunicipalityData,
 } from '~/static-props/municipality-data';
-
-import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
-import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/createPositiveTestedPeopleMunicipalTooltip';
-import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
-import { useMunicipalLegendaData } from '~/components/chloropleth/legenda/hooks/useMunicipalLegendaData';
-import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
-import { LineChart } from '~/components/charts/index';
-import { ContentHeader } from '~/components/layout/Content';
-import { FCWithLayout } from '~/components/layout';
-import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
-
-import Getest from '~/assets/test.svg';
-
+import { PositiveTestedPeople } from '~/types/data.d';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { SEOHead } from '~/components/seoHead';
 
 const text = siteText.gemeente_positief_geteste_personen;
 

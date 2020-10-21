@@ -1,15 +1,11 @@
-import path from 'path';
 import fs from 'fs';
-
 import Head from 'next/head';
-
-import { getLayoutWithMetadata, FCWithLayout } from '~/components/layout';
+import path from 'path';
+import { FCWithLayout, getLayoutWithMetadata } from '~/components/layout';
 import { MaxWidth } from '~/components/maxWidth';
-
-import styles from './over.module.scss';
 import siteText, { TALLLanguages } from '~/locale/index';
-
 import { MDToHTMLString } from '~/utils/MDToHTMLString';
+import styles from './over.module.scss';
 
 interface StaticProps {
   props: {

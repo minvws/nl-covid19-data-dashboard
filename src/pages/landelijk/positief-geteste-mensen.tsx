@@ -1,35 +1,31 @@
-import { useState } from 'react';
 import { useRouter } from 'next/router';
-
-import getNlData, { INationalData } from '~/static-props/nl-data';
-import siteText from '~/locale/index';
-import {
-  InfectedPeopleDeltaNormalized,
-  NationalInfectedPeopleTotal,
-  IntakeShareAgeGroups,
-} from '~/types/data.d';
-
-import { FCWithLayout } from '~/components/layout';
-import { getNationalLayout } from '~/components/layout/NationalLayout';
-import { LineChart, BarChart } from '~/components/charts/index';
-import { ContentHeader } from '~/components/layout/Content';
+import { useState } from 'react';
+import Afname from '~/assets/afname.svg';
+import Getest from '~/assets/test.svg';
 import { ChartRegionControls } from '~/components/chartRegionControls';
-import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/createPositiveTestedPeopleMunicipalTooltip';
-import { createPositiveTestedPeopleRegionalTooltip } from '~/components/chloropleth/tooltips/region/createPositiveTestedPeopleRegionalTooltip';
+import { BarChart, LineChart } from '~/components/charts/index';
+import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
+import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
 import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
 import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
 import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
-import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
+import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/createPositiveTestedPeopleMunicipalTooltip';
+import { createPositiveTestedPeopleRegionalTooltip } from '~/components/chloropleth/tooltips/region/createPositiveTestedPeopleRegionalTooltip';
 import { PositiveTestedPeopleBarScale } from '~/components/landelijk/positive-tested-people-barscale';
-import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
-
-import Getest from '~/assets/test.svg';
-import Afname from '~/assets/afname.svg';
-
-import { replaceKpisInText } from '~/utils/replaceKpisInText';
-import { formatNumber, formatPercentage } from '~/utils/formatNumber';
+import { FCWithLayout } from '~/components/layout';
+import { ContentHeader } from '~/components/layout/Content';
+import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
+import siteText from '~/locale/index';
+import getNlData, { INationalData } from '~/static-props/nl-data';
+import {
+  InfectedPeopleDeltaNormalized,
+  IntakeShareAgeGroups,
+  NationalInfectedPeopleTotal,
+} from '~/types/data.d';
+import { formatNumber, formatPercentage } from '~/utils/formatNumber';
+import { replaceKpisInText } from '~/utils/replaceKpisInText';
 
 const text = siteText.positief_geteste_personen;
 const ggdText = siteText.positief_geteste_personen_ggd;
@@ -175,27 +171,29 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           />
         </article>
       )}
-
+      {/* the barscale's initial SSR output was incorrect, giving both columns a fixed width solves this*/}
       <article className="metric-article layout-two-column">
-        <div className="column-item column-item-extra-margin">
+        <div className="column-item-fixed">
           <h3>{text.barchart_titel}</h3>
           <p>{text.barchart_toelichting}</p>
         </div>
-        {age && (
-          <BarChart
-            keys={text.barscale_keys}
-            data={age.values.map((value) => ({
-              y: value.infected_per_agegroup_increase || 0,
-              label: value?.infected_per_agegroup_increase
-                ? `${(
-                    ((value.infected_per_agegroup_increase as number) * 100) /
-                    barChartTotal
-                  ).toFixed(0)}%`
-                : false,
-            }))}
-            axisTitle={text.barchart_axis_titel}
-          />
-        )}
+        <div className="column-item-fixed">
+          {age && (
+            <BarChart
+              keys={text.barscale_keys}
+              data={age.values.map((value) => ({
+                y: value.infected_per_agegroup_increase || 0,
+                label: value?.infected_per_agegroup_increase
+                  ? `${(
+                      ((value.infected_per_agegroup_increase as number) * 100) /
+                      barChartTotal
+                    ).toFixed(0)}%`
+                  : false,
+              }))}
+              axisTitle={text.barchart_axis_titel}
+            />
+          )}
+        </div>
       </article>
 
       {ggdData && (

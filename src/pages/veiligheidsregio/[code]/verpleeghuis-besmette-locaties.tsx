@@ -1,21 +1,17 @@
-import { ContentHeader } from '~/components/layout/Content';
-import { FCWithLayout } from '~/components/layout';
-import { LineChart } from '~/components/charts/index';
-
 import Locatie from '~/assets/locaties.svg';
-
-import { formatNumber, formatPercentage } from '~/utils/formatNumber';
-
-import siteText from '~/locale/index';
-
+import { LineChart } from '~/components/charts/index';
+import { FCWithLayout } from '~/components/layout';
+import { ContentHeader } from '~/components/layout/Content';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
+import { SEOHead } from '~/components/seoHead';
+import siteText from '~/locale/index';
 import {
   getSafetyRegionData,
   getSafetyRegionPaths,
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
+import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { SEOHead } from '~/components/seoHead';
 
 const text = siteText.veiligheidsregio_verpleeghuis_besmette_locaties;
 

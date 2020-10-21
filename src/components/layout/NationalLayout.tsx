@@ -140,8 +140,8 @@ function NationalLayout(props: WithChildren<INationalData>) {
                         data={data?.infected_people_delta_normalized.last_value}
                       />
                       <PositiveTestedPeopleBarScale
-                        data={data?.infected_people_delta_normalized}
-                        showAxis={false}
+                        data={data.infected_people_delta_normalized}
+                        showAxis={true}
                       />
                     </span>
                   </a>
@@ -186,9 +186,8 @@ function NationalLayout(props: WithChildren<INationalData>) {
                         }
                       />
                       <ReproductionIndexBarScale
-                        data={data?.reproduction_index}
-                        lastKnown={data?.reproduction_index_last_known_average}
-                        showAxis={false}
+                        data={data.reproduction_index_last_known_average}
+                        showAxis={true}
                       />
                     </span>
                   </a>
@@ -210,8 +209,8 @@ function NationalLayout(props: WithChildren<INationalData>) {
                         data={data?.intake_hospital_ma.last_value}
                       />
                       <IntakeHospitalBarScale
-                        data={data?.intake_hospital_ma}
-                        showAxis={false}
+                        data={data.intake_hospital_ma}
+                        showAxis={true}
                       />
                     </span>
                   </a>
@@ -235,8 +234,8 @@ function NationalLayout(props: WithChildren<INationalData>) {
                         data={data?.intake_intensivecare_ma.last_value}
                       />
                       <IntakeIntensiveCareBarscale
-                        data={data?.intake_intensivecare_ma}
-                        showAxis={false}
+                        data={data.intake_intensivecare_ma}
+                        showAxis={true}
                       />
                     </span>
                   </a>
@@ -260,7 +259,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
                     />
                     <span>
                       <SuspectedPatientsMetric
-                        data={data?.verdenkingen_huisartsen.last_value}
+                        data={data.verdenkingen_huisartsen.last_value}
                       />
                     </span>
                   </a>
@@ -278,7 +277,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
                       title={siteText.rioolwater_metingen.titel}
                     />
                     <span>
-                      <SewerWaterMetric data={data?.rioolwater_metingen} />
+                      <SewerWaterMetric data={data.rioolwater_metingen} />
                     </span>
                   </a>
                 </Link>

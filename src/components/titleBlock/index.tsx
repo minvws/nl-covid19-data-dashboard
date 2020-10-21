@@ -1,5 +1,5 @@
-import styles from './titleBlock.module.scss';
 import { WithChildren } from '~/types/index';
+import styles from './titleBlock.module.scss';
 
 interface IProps {
   Icon: any;

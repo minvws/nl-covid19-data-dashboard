@@ -1,28 +1,24 @@
-import { FCWithLayout } from '~/components/layout';
-import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
-import { ContentHeader } from '~/components/layout/Content';
-
-import { formatNumber } from '~/utils/formatNumber';
-
-import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
-
-import { RegionalSewerWaterLineChart } from '~/components/lineChart/regionalSewerWaterLineChart';
 import { useMemo } from 'react';
+import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import { BarChart } from '~/components/charts';
-import {
-  getSewerWaterBarScaleData,
-  getSewerWaterLineChartData,
-  getSewerWaterBarChartData,
-} from '~/utils/sewer-water/municipality-sewer-water.util';
+import { FCWithLayout } from '~/components/layout';
+import { ContentHeader } from '~/components/layout/Content';
+import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
+import { MunicipalSewerWaterLineChart } from '~/components/lineChart/municipalSewerWaterLineChart';
+import { SEOHead } from '~/components/seoHead';
+import siteText from '~/locale/index';
 import {
   getMunicipalityData,
   getMunicipalityPaths,
   IMunicipalityData,
 } from '~/static-props/municipality-data';
-
-import siteText from '~/locale/index';
+import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { SEOHead } from '~/components/seoHead';
+import {
+  getSewerWaterBarChartData,
+  getSewerWaterBarScaleData,
+  getSewerWaterLineChartData,
+} from '~/utils/sewer-water/municipality-sewer-water.util';
 
 const text = siteText.gemeente_rioolwater_metingen;
 
@@ -79,7 +75,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
         <h3>{text.linechart_titel}</h3>
 
         {lineChartData && (
-          <RegionalSewerWaterLineChart
+          <MunicipalSewerWaterLineChart
             averageValues={lineChartData.averageValues}
             text={{
               average_label_text: lineChartData.averageLabelText,

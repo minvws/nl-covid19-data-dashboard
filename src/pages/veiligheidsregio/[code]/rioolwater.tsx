@@ -1,41 +1,58 @@
-import { FCWithLayout } from '~/components/layout';
-import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
-import { ContentHeader } from '~/components/layout/Content';
-
-import { formatNumber } from '~/utils/formatNumber';
-
+import { useMemo, useState } from 'react';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
-
-import siteText from '~/locale/index';
-
-import { RegionalSewerWaterLineChart } from '~/components/lineChart/regionalSewerWaterLineChart';
-import { useMemo } from 'react';
 import { BarChart } from '~/components/charts';
 import {
-  getSewerWaterBarScaleData,
-  getSewerWaterLineChartData,
-  getSewerWaterBarChartData,
-} from '~/utils/sewer-water/safety-region-sewer-water.util';
+  ChartTimeControls,
+  TimeframeOption,
+} from '~/components/chartTimeControls';
+import { FCWithLayout } from '~/components/layout';
+import { ContentHeader } from '~/components/layout/Content';
+import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
+import { InstallationSelector } from '~/components/lineChart/installationSelector';
+import styles from '~/components/lineChart/installationselector.module.scss';
+import { RegionalSewerWaterChart } from '~/components/lineChart/regionalSewerWaterChart';
+import { SEOHead } from '~/components/seoHead';
+import siteText from '~/locale/index';
 import {
   getSafetyRegionData,
   getSafetyRegionPaths,
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
+import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { SEOHead } from '~/components/seoHead';
+import {
+  getInstallationNames,
+  getSewerWaterBarChartData,
+  getSewerWaterBarScaleData,
+  getSewerWaterLineChartData,
+  getSewerWaterScatterPlotData,
+} from '~/utils/sewer-water/safety-region-sewer-water.util';
 
 const text = siteText.veiligheidsregio_rioolwater_metingen;
 
 const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
   const { data, safetyRegionName } = props;
 
-  const { barScaleData, lineChartData, barChartData } = useMemo(() => {
+  const {
+    barScaleData,
+    lineChartData,
+    barChartData,
+    scatterPlotData,
+    sewerStationNames,
+  } = useMemo(() => {
     return {
       barScaleData: getSewerWaterBarScaleData(data),
       lineChartData: getSewerWaterLineChartData(data),
       barChartData: getSewerWaterBarChartData(data),
+      scatterPlotData: getSewerWaterScatterPlotData(data),
+      sewerStationNames: getInstallationNames(data),
     };
   }, [data]);
+
+  const [timeframe, setTimeframe] = useState<TimeframeOption>('all');
+  const [selectedInstallation, setSelectedInstallation] = useState<
+    string | undefined
+  >();
 
   return (
     <>
@@ -76,16 +93,38 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
       </article>
 
       <article className="metric-article">
-        <h3>{text.linechart_titel}</h3>
-
-        {lineChartData && (
-          <RegionalSewerWaterLineChart
-            averageValues={lineChartData.averageValues}
-            text={{
-              average_label_text: lineChartData.averageLabelText,
-              secondary_label_text: text.graph_secondary_label_text,
-            }}
+        <div className="metric-article-header">
+          <h3>{text.linechart_titel}</h3>
+          <ChartTimeControls
+            timeframe={timeframe}
+            onChange={(value) => setTimeframe(value)}
           />
+        </div>
+
+        {scatterPlotData && lineChartData && (
+          <>
+            {sewerStationNames.length > 0 && (
+              <div className={styles.selectorContainer}>
+                <InstallationSelector
+                  placeholderText={text.graph_selected_rwzi_placeholder}
+                  onChange={setSelectedInstallation}
+                  stationNames={sewerStationNames}
+                />
+              </div>
+            )}
+            <RegionalSewerWaterChart
+              timeframe={timeframe}
+              scatterPlotValues={scatterPlotData}
+              averageValues={lineChartData.averageValues}
+              selectedInstallation={selectedInstallation}
+              text={{
+                average_label_text: lineChartData.averageLabelText,
+                secondary_label_text: text.graph_secondary_label_text,
+                daily_label_text: text.graph_daily_label_text_rwzi,
+                range_description: text.graph_range_description,
+              }}
+            />
+          </>
         )}
       </article>
 
