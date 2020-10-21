@@ -2,7 +2,7 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import React, { useMemo, useState } from 'react';
 import { isDefined } from 'ts-is-present';
-import { ChartTimeControls } from '~/components/chartTimeControls';
+import { ChartTimeControls } from '~/components-styled/chart-time-controls';
 import text from '~/locale/index';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';

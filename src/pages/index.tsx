@@ -4,7 +4,7 @@ import path from 'path';
 import { useState } from 'react';
 import ExternalLink from '~/assets/external-link.svg';
 import Notification from '~/assets/notification.svg';
-import { ChartRegionControls } from '~/components/chartRegionControls';
+import { ChartRegionControls } from '~/components-styled/chart-region-controls';
 import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
 import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';

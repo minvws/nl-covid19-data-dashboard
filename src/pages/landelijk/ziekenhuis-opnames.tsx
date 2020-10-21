@@ -5,7 +5,7 @@ import { Spacer } from '~/components-styled/base';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { ChartRegionControls } from '~/components/chartRegionControls';
+import { ChartRegionControls } from '~/components-styled/chart-region-controls';
 import { LineChart } from '~/components/charts/index';
 import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
 import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';

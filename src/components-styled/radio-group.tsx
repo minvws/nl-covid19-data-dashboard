@@ -1,49 +1,4 @@
-// @import '~/scss/variables.scss';
-
-// .select-radio-group {
-//   background: white;
-//   display: flex;
-
-//   input {
-//     position: absolute;
-//     clip: rect(0, 0, 0, 0);
-
-//     &:checked + label {
-//       background: $button-color;
-//       color: white;
-//     }
-
-//     &:focus + label {
-//       outline: 2px dotted #cc005a;
-//     }
-//   }
-
-// label {
-//   flex: 1 1 auto;
-//   text-align: center;
-//   padding: 0.2em;
-//   border: 1px solid $button-color;
-//   border-width: 1px 0 1px 1px;
-//   color: $button-color;
-//   font-size: 14px;
-
-//   &:hover,
-//   &:focus {
-//     background-color: #cae1ed;
-//   }
-
-//   &:last-child {
-//     border-right-width: 1px;
-//   }
-
-//   @media (min-width: 768px) {
-//     font-size: 16px;
-//     padding: 0.2em 1.5em;
-//   }
-// }
-// }
-
-import { useMemo, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Box } from './base';
 import { css } from '@styled-system/css';
 import styled from 'styled-components';
@@ -58,7 +13,7 @@ const StyledInput = styled.input(
     position: 'absolute',
     clip: 'rect(0, 0, 0, 0)',
     '&:checked + label': {
-      background: 'button',
+      bg: 'button',
       color: 'white',
     },
     '&:focus + label': {
@@ -69,21 +24,25 @@ const StyledInput = styled.input(
 
 const StyledLabel = styled.label(
   css({
-    flex: '1 1 auto',
-    textAlign: 'center',
-    padding: '0.2em',
-    border: '1px solid $button-color',
-    borderWidth: '1px 0 1px 1px',
+    flex: '0 1 auto',
     color: 'button',
-    fontSize: '14px',
+    fontSize: 1,
+    textAlign: 'center',
+    p: '0.2em 1.5em',
+    borderStyle: 'solid',
+    borderColor: 'button',
+    borderWidth: '1px 0 1px 1px',
+
+    '&:last-child': {
+      borderRightWidth: '1px',
+    },
 
     '&:hover, &:focus': {
-      backgroundColor: '#cae1ed',
+      bg: '#cae1ed',
     },
 
     '@media (min-width: 768px)': {
-      fontSize: '16px',
-      padding: '0.2em 1.5em',
+      fontSize: 2,
     },
   })
 );
@@ -104,7 +63,7 @@ export function RadioGroup(props: RadioGroupProps) {
     value ?? items[0].value
   );
 
-  const id = useMemo(() => Math.random().toString(36).substr(2), []);
+  const id = useComponentId();
 
   const onLocalChange = (value: string): void => {
     if (value !== selectedValue) {
@@ -114,7 +73,7 @@ export function RadioGroup(props: RadioGroupProps) {
   };
 
   return (
-    <Box bg="white" display="flex">
+    <Box bg="white" display="flex" justifyContent="center">
       {items.map((item, index) => (
         <>
           <StyledInput
@@ -133,4 +92,25 @@ export function RadioGroup(props: RadioGroupProps) {
       ))}
     </Box>
   );
+}
+
+/**
+ * Generic hook for using a unique component id
+ * See https://gist.github.com/sqren/fc897c1629979e669714893df966b1b7#gistcomment-3189166
+ *
+ * @TODO move to own file
+ */
+
+let uniqueId = 0;
+const getUniqueId = () => String(uniqueId++);
+
+// This was the previous uid generator
+// const getUniqueId = () => Math.random().toString(36).substr(2);
+
+export function useComponentId() {
+  const idRef = useRef<string>();
+  if (idRef.current === undefined) {
+    idRef.current = getUniqueId();
+  }
+  return idRef.current;
 }
