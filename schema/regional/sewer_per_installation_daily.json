@@ -26,9 +26,9 @@
         "date_measurement_unix",
         "date_of_report_unix",
         "date_of_insertion_unix",
-        "vrcode",
         "rwzi_awzi_code",
         "rwzi_awzi_name",
+        "vrcode",
         "vrnaam",
         "gmcode",
         "rna_per_ml"
