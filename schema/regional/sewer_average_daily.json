@@ -1,0 +1,55 @@
+{
+  "definitions": {
+    "value": {
+      "title": "regional_sewer_average_daily_value",
+      "additionalProperties": false,
+      "required": [
+        "date_of_report_unix",
+        "date_of_insertion_unix",
+        "vrcode",
+        "average",
+        "installation_count"
+      ],
+      "properties": {
+        "week_unix": {
+          "type": "integer"
+        },
+        "week_start_unix": {
+          "type": "integer"
+        },
+        "week_end_unix": {
+          "type": "integer"
+        },
+        "vrcode": {
+          "type": "string",
+          "pattern": "^VR[0-9]+$"
+        },
+        "average": {
+          "type": "number"
+        },
+        "total_installation_count": {
+          "type": "number"
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "regional_sewer_average_daily",
+  "required": ["values", "last_value"],
+  "additionalProperties": false,
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/value"
+      }
+    },
+    "last_value": {
+      "$ref": "#/definitions/value"
+    }
+  }
+}
