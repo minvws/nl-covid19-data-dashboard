@@ -97,8 +97,10 @@ export function RadioGroup(props: RadioGroupProps) {
 /**
  * Generic hook for using a unique component id
  * See https://gist.github.com/sqren/fc897c1629979e669714893df966b1b7#gistcomment-3189166
+ *
+ * Currently only used here, so it's kept local, but if we start using it
+ * elsewhere it should be moved of course.
  */
-
 let uniqueId = 0;
 const getUniqueId = () => String(uniqueId++);
 
