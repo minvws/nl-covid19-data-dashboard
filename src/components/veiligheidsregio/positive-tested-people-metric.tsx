@@ -7,7 +7,7 @@ import { formatDateFromSeconds } from '~/utils/formatDate';
 import siteText from '~/locale/index';
 
 const text = siteText.common.metricKPI;
-const title = siteText.gemeente_positief_geteste_personen.barscale_titel;
+const title = siteText.gemeente_positief_geteste_personen.titel_kpi;
 
 export function PositivelyTestedPeopleMetric(props: {
   data: RegionaalValue | undefined;
@@ -23,7 +23,7 @@ export function PositivelyTestedPeopleMetric(props: {
   return (
     <MetricKPI
       title={title}
-      value={data.infected_increase_per_region}
+      value={data.total_reported_increase_per_region}
       format={formatNumber}
       description={description}
     />

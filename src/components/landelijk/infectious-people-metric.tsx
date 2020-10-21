@@ -6,7 +6,7 @@ import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text = siteText.common.metricKPI;
-const title = siteText.besmettelijke_personen.title;
+const title = siteText.besmettelijke_personen.titel_kpi;
 
 export function InfectiousPeopleMetric(props: {
   data: InfectiousPeopleLastKnownAverageValue | undefined;

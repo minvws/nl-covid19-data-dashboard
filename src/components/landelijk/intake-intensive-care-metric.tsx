@@ -7,7 +7,7 @@ import { formatDateFromSeconds } from '~/utils/formatDate';
 import siteText from '~/locale/index';
 
 const text = siteText.common.metricKPI;
-const title = siteText.besmettelijke_personen.title;
+const title = siteText.ic_opnames_per_dag.titel_kpi;
 
 export function IntakeIntensiveCareMetric(props: {
   data: IntakeIntensivecareMaLastValue | undefined;

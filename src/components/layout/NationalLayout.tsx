@@ -137,10 +137,36 @@ function NationalLayout(props: WithChildren<INationalData>) {
                     />
                     <span>
                       <PositiveTestedPeopleMetric
-                        data={data.infected_people_delta_normalized.last_value}
+                        data={data.infected_people_total.last_value}
                       />
                       <PositiveTestedPeopleBarScale
                         data={data.infected_people_delta_normalized}
+                        showAxis={false}
+                        showValue={false}
+                      />
+                    </span>
+                  </a>
+                </Link>
+              </li>
+
+              <li>
+                <Link href="/landelijk/reproductiegetal">
+                  <a
+                    onClick={handleMenuClick}
+                    className={getClassName('/landelijk/reproductiegetal')}
+                  >
+                    <TitleWithIcon
+                      Icon={ReproIcon}
+                      title={siteText.reproductiegetal.titel_sidebar}
+                    />
+                    <span>
+                      <ReproductionIndexMetric
+                        data={
+                          data.reproduction_index_last_known_average.last_value
+                        }
+                      />
+                      <ReproductionIndexBarScale
+                        data={data.reproduction_index_last_known_average}
                         showAxis={false}
                         showValue={false}
                       />
@@ -171,32 +197,6 @@ function NationalLayout(props: WithChildren<INationalData>) {
               </li>
 
               <li>
-                <Link href="/landelijk/reproductiegetal">
-                  <a
-                    onClick={handleMenuClick}
-                    className={getClassName('/landelijk/reproductiegetal')}
-                  >
-                    <TitleWithIcon
-                      Icon={ReproIcon}
-                      title={siteText.reproductiegetal.titel}
-                    />
-                    <span>
-                      <ReproductionIndexMetric
-                        data={
-                          data.reproduction_index_last_known_average.last_value
-                        }
-                      />
-                      <ReproductionIndexBarScale
-                        data={data.reproduction_index_last_known_average}
-                        showAxis={false}
-                        showValue={false}
-                      />
-                    </span>
-                  </a>
-                </Link>
-              </li>
-
-              <li>
                 <Link href="/landelijk/ziekenhuis-opnames">
                   <a
                     onClick={handleMenuClick}
@@ -204,7 +204,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
                   >
                     <TitleWithIcon
                       Icon={Ziekenhuis}
-                      title={siteText.ziekenhuisopnames_per_dag.titel}
+                      title={siteText.ziekenhuisopnames_per_dag.titel_sidebar}
                     />
                     <span>
                       <IntakeHospitalMetric
@@ -230,7 +230,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
                   >
                     <TitleWithIcon
                       Icon={Arts}
-                      title={siteText.ic_opnames_per_dag.titel}
+                      title={siteText.ic_opnames_per_dag.titel_sidebar}
                     />
                     <span>
                       <IntakeIntensiveCareMetric
@@ -278,7 +278,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
                   >
                     <TitleWithIcon
                       Icon={RioolwaterMonitoring}
-                      title={siteText.rioolwater_metingen.titel}
+                      title={siteText.rioolwater_metingen.titel_sidebar}
                     />
                     <span>
                       <SewerWaterMetric data={data.rioolwater_metingen} />
@@ -324,7 +324,9 @@ function NationalLayout(props: WithChildren<INationalData>) {
                   >
                     <TitleWithIcon
                       Icon={Locatie}
-                      title={siteText.verpleeghuis_besmette_locaties.titel}
+                      title={
+                        siteText.verpleeghuis_besmette_locaties.titel_sidebar
+                      }
                     />
                     <span>
                       <NursingHomeInfectedLocationsMetric

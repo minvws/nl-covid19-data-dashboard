@@ -7,8 +7,7 @@ import { formatDateFromSeconds } from '~/utils/formatDate';
 import siteText from '~/locale/index';
 
 const text = siteText.common.metricKPI;
-const title =
-  siteText.veiligheidsregio_ziekenhuisopnames_per_dag.barscale_titel;
+const title = siteText.veiligheidsregio_ziekenhuisopnames_per_dag.titel_kpi;
 
 export function IntakeHospitalMetric(props: {
   data: ResultsPerRegion | undefined;

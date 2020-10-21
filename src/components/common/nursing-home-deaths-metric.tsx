@@ -6,7 +6,7 @@ import { formatDateFromSeconds } from '~/utils/formatDate';
 import siteText from '~/locale/index';
 
 const text = siteText.common.metricKPI;
-const title = siteText.verpleeghuis_oversterfte.titel;
+const title = siteText.verpleeghuis_oversterfte.titel_kpi;
 
 export function NursingHomeDeathsMetric(props: {
   data: NationalNursingHomeValue;

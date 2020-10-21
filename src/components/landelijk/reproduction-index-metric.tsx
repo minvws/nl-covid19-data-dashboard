@@ -7,7 +7,7 @@ import { formatDateFromSeconds } from '~/utils/formatDate';
 import siteText from '~/locale/index';
 
 const text = siteText.common.metricKPI;
-const title = siteText.besmettelijke_personen.title;
+const title = siteText.reproductiegetal.titel_kpi;
 
 export function ReproductionIndexMetric(props: {
   data: ReproductionIndexLastKnownAverageLastValue | undefined;
