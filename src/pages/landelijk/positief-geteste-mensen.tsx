@@ -4,6 +4,9 @@ import Afname from '~/assets/afname.svg';
 import Getest from '~/assets/test.svg';
 import { ChartRegionControls } from '~/components/chartRegionControls';
 import { BarChart, LineChart } from '~/components/charts/index';
+import NewLineChart from '~/components/new-line-chart/index';
+import { ParentSize } from '@visx/responsive';
+
 import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
 import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
@@ -169,6 +172,20 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
             }))}
             signaalwaarde={7}
           />
+          <ParentSize>
+            {(parent) => (
+              <NewLineChart
+                parentWidth={parent.width}
+                title={text.linechart_titel}
+                description={text.linechart_toelichting}
+                values={delta.values.map((value) => ({
+                  value: value.infected_daily_increase,
+                  date: value.date_of_report_unix,
+                }))}
+                signaalwaarde={7}
+              />
+            )}
+          </ParentSize>
         </article>
       )}
       {/* the barscale's initial SSR output was incorrect, giving both columns a fixed width solves this*/}

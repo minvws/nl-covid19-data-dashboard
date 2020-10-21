@@ -14,14 +14,14 @@ import { formatDateFromSeconds } from '~/utils/formatDate';
 import { getFilteredValues } from '~/components/chartTimeControls/chartTimeControlUtils';
 import { isDefined } from 'ts-is-present';
 
-type Value = {
+export type Value = {
   date: number;
   value?: number;
 };
 
 const SIGNAALWAARDE_Z_INDEX = 5;
 
-interface LineChartProps {
+export interface LineChartProps {
   title: string;
   description?: string;
   values: Value[];
