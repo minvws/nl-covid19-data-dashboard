@@ -6,6 +6,7 @@ import {
 import { ReactNode, useState, createRef, useEffect, useCallback } from 'react';
 
 import styles from './collapsable.module.scss';
+import { useWindowResizeDebounce } from '~/utils/useWindowResizeDebounce';
 
 interface CollapsableProps {
   summary: string;
@@ -39,10 +40,8 @@ export function Collapsable(props: CollapsableProps) {
    * This is done on page load and before opening or closing the collapsable.
    */
   const setContentHeight = useCallback(() => {
-    if (!panelReference.current) {
-      return;
-    }
-    panelReference.current.style.maxHeight = `${panelReference.current.scrollHeight}px`;
+    const node = panelReference.current as HTMLDivElement;
+    node.style.maxHeight = `${node.scrollHeight}px`;
   }, [panelReference]);
 
   /**
@@ -71,6 +70,8 @@ export function Collapsable(props: CollapsableProps) {
       window.removeEventListener('hashchange', checkLocationHash, false);
     };
   }, []); // should not use dependancies in array: use effect mimics mount / unmount
+
+  useWindowResizeDebounce(setContentHeight, 400);
 
   return (
     <section id={id} className={styles.root}>
