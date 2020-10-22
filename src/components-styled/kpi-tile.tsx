@@ -1,9 +1,10 @@
 import locale from '~/locale/index';
-import { Box, BoxProps, Spacer } from './base';
+import { Box, Spacer } from './base';
 import { ExternalLink } from './external-link';
 import { Text, Heading } from './typography';
+import { Tile } from './layout';
 
-interface KpiTileProps extends BoxProps {
+interface KpiTileProps {
   title: string;
   description?: string;
   children: React.ReactNode;
@@ -12,20 +13,6 @@ interface KpiTileProps extends BoxProps {
     href: string;
   };
 }
-
-export const Tile = (props: { children: React.ReactNode } & BoxProps) => (
-  <Box
-    as="article"
-    display="flex"
-    flexDirection="column"
-    bg="white"
-    p={4}
-    borderRadius={1}
-    boxShadow="tile"
-    height="100%"
-    {...(props as any)}
-  />
-);
 
 /**
  * A generic KPI tile which composes its value content using the children prop.
@@ -36,10 +23,9 @@ export function KpiTile({
   description,
   children,
   sourcedFrom,
-  ...props
 }: KpiTileProps) {
   return (
-    <Tile {...(props as any)}>
+    <Tile height="100%">
       <Heading level={3}>{title}</Heading>
       <Box mb={4}>{children}</Box>
       {description && (

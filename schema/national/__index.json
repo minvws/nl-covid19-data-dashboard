@@ -60,9 +60,6 @@
     "infected_people_clusters": {
       "$ref": "infected_people_clusters.json"
     },
-    "infected_people_percentage": {
-      "$ref": "infected_people_percentage.json"
-    },
     "infected_people_total": {
       "$ref": "infected_people_total.json"
     },

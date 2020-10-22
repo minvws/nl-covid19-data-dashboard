@@ -7,8 +7,9 @@ const text = siteText.ic_opnames_per_dag;
 export function IntakeIntensiveCareBarscale(props: {
   data: IntakeIntensivecareMa | undefined;
   showAxis: boolean;
+  showValue?: boolean;
 }) {
-  const { data, showAxis } = props;
+  const { data, showAxis, showValue } = props;
 
   if (!data) return null;
 
@@ -36,6 +37,7 @@ export function IntakeIntensiveCareBarscale(props: {
       value={data.last_value.moving_average_ic}
       id="ic"
       showAxis={showAxis}
+      showValue={showValue}
     />
   );
 }

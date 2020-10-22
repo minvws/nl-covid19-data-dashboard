@@ -11,6 +11,8 @@ import { useMediaQuery } from '~/utils/useMediaQuery';
 import { getSewerWaterBarScaleData } from '~/utils/sewer-water/safety-region-sewer-water.util';
 
 import { PositivelyTestedPeopleBarScale } from '~/components/veiligheidsregio/positive-tested-people-barscale';
+import { PositivelyTestedPeopleMetric } from '~/components/veiligheidsregio/positive-tested-people-metric';
+
 import { IntakeHospitalMetric } from '~/components/veiligheidsregio/intake-hospital-metric';
 import { SewerWaterMetric } from '~/components/veiligheidsregio/sewer-water-metric';
 
@@ -160,9 +162,13 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                         }
                       />
                       <span>
+                        <PositivelyTestedPeopleMetric
+                          data={data.results_per_region.last_value}
+                        />
                         <PositivelyTestedPeopleBarScale
-                          data={data?.results_per_region}
-                          showAxis={true}
+                          data={data.results_per_region}
+                          showAxis={false}
+                          showValue={false}
                         />
                       </span>
                     </a>
@@ -188,7 +194,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                         }
                       />
                       <span>
-                        <IntakeHospitalMetric data={data?.results_per_region} />
+                        <IntakeHospitalMetric data={data.results_per_region} />
                       </span>
                     </a>
                   </Link>
@@ -245,13 +251,11 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                             .titel_sidebar
                         }
                       />
-                      {data?.nursing_home?.last_value && (
-                        <span>
-                          <NursingHomeInfectedPeopleMetric
-                            data={data.nursing_home.last_value}
-                          />
-                        </span>
-                      )}
+                      <span>
+                        <NursingHomeInfectedPeopleMetric
+                          data={data.nursing_home.last_value}
+                        />
+                      </span>
                     </a>
                   </Link>
                 </li>
@@ -297,7 +301,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                       />
                       <span>
                         <NursingHomeDeathsMetric
-                          data={data.nursing_home?.last_value}
+                          data={data.nursing_home.last_value}
                         />
                       </span>
                     </a>

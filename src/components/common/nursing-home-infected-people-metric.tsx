@@ -6,14 +6,14 @@ import { formatDateFromSeconds } from '~/utils/formatDate';
 import siteText from '~/locale/index';
 
 const text = siteText.common.metricKPI;
-const title = siteText.verpleeghuis_positief_geteste_personen.titel;
+const title = siteText.verpleeghuis_positief_geteste_personen.titel_kpi;
 
 export function NursingHomeInfectedPeopleMetric(props: {
-  data: NationalNursingHomeValue;
+  data: NationalNursingHomeValue | undefined;
 }) {
   const { data } = props;
 
-  if (!data) return null;
+  if (data === undefined) return null;
 
   const description = replaceVariablesInText(text.dateOfReport, {
     dateOfReport: formatDateFromSeconds(data.date_of_report_unix, 'relative'),

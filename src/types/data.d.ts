@@ -48,6 +48,7 @@ export interface SewerMeasurementsLastValue {
   week_end_unix: number;
   gmcode: string;
   average: number;
+  total_installation_count: number;
   date_of_insertion_unix: number;
 }
 export interface ResultsPerSewerInstallationPerMunicipality {
@@ -110,7 +111,6 @@ export interface National {
   infectious_people_count_normalized: InfectiousPeopleCountNormalized;
   intake_intensivecare_ma: IntakeIntensivecareMa;
   infected_people_clusters?: InfectedPeopleClusters;
-  infected_people_percentage: InfectedPeoplePercentage;
   infected_people_total: NationalInfectedPeopleTotal;
   infected_people_delta_normalized: InfectedPeopleDeltaNormalized;
   intake_share_age_groups: IntakeShareAgeGroups;
@@ -195,17 +195,6 @@ export interface InfectedPeopleClustersLastValue {
   date_of_report_unix: number;
   date_of_insertion_unix: number;
 }
-export interface InfectedPeoplePercentage {
-  values: InfectedPeoplePercentageLastValue[];
-  last_value: InfectedPeoplePercentageLastValue;
-}
-export interface InfectedPeoplePercentageLastValue {
-  infected_ggd: number;
-  percentage_infected_ggd: number;
-  total_tested_ggd: number;
-  date_of_report_unix: number;
-  date_of_insertion_unix: number;
-}
 export interface NationalInfectedPeopleTotal {
   values: NationalInfectedPeopleTotalValue[];
   last_value: NationalInfectedPeopleTotalValue;
@@ -281,6 +270,7 @@ export interface RioolwaterMetingen {
 export interface RioolwaterMetingenLastValue {
   week_unix: number;
   average: number;
+  total_installation_count: number;
   date_of_insertion_unix: number;
   week_start_unix: number;
   week_end_unix: number;
