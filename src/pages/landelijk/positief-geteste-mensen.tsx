@@ -58,12 +58,12 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
   const ggdLastValue = data.ggd.last_value;
   const ggdValues = data.ggd.values;
 
-  const barChartTotal: number = age?.values
-    ? age.values.reduce((mem: number, part): number => {
-        const amount = part.infected_per_agegroup_increase || 0;
-        return mem + ((amount as number) || 0);
-      }, 0)
-    : 0;
+  const barChartTotal: number = age.values.reduce(
+    (mem: number, part): number => {
+      return mem + part.infected_per_agegroup_increase;
+    },
+    0
+  );
 
   return (
     <>
@@ -180,13 +180,14 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           <BarChart
             keys={text.barscale_keys}
             data={age.values.map((value) => ({
-              y: value.infected_per_agegroup_increase || 0,
-              label: value?.infected_per_agegroup_increase
-                ? `${(
-                    ((value.infected_per_agegroup_increase as number) * 100) /
-                    barChartTotal
-                  ).toFixed(0)}%`
-                : false,
+              y: value.infected_per_agegroup_increase,
+              label:
+                barChartTotal > 0
+                  ? `${(
+                      (value.infected_per_agegroup_increase * 100) /
+                      barChartTotal
+                    ).toFixed(0)}%`
+                  : false,
             }))}
             axisTitle={text.barchart_axis_titel}
           />
