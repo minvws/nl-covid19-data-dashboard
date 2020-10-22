@@ -1,5 +1,5 @@
 import locale from '~/locale/index';
-import { Box, Spacer } from './base';
+import { Box, BoxProps, Spacer } from './base';
 import { ExternalLink } from './external-link';
 import { Text, Heading } from './typography';
 
@@ -13,6 +13,20 @@ interface KpiTileProps {
   };
 }
 
+export const Tile = (props: BoxProps) => (
+  <Box
+    as="article"
+    display="flex"
+    flexDirection="column"
+    bg="white"
+    p={4}
+    borderRadius={1}
+    boxShadow="tile"
+    height="100%"
+    {...props}
+  />
+);
+
 /**
  * A generic KPI tile which composes its value content using the children prop.
  * Description can be both plain text and html strings.
@@ -24,16 +38,7 @@ export function KpiTile({
   sourcedFrom,
 }: KpiTileProps) {
   return (
-    <Box
-      as="article"
-      display="flex"
-      flexDirection="column"
-      bg="white"
-      p={4}
-      borderRadius={1}
-      boxShadow="tile"
-      height="100%"
-    >
+    <Tile>
       <Heading level={3}>{title}</Heading>
       <Box mb={4}>{children}</Box>
       {description && (
@@ -53,6 +58,6 @@ export function KpiTile({
           </Text>
         </>
       )}
-    </Box>
+    </Tile>
   );
 }

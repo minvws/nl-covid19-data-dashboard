@@ -35,6 +35,7 @@ import {
 } from '~/types/data.d';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
+import { KpiSection } from '~/components-styled/kpi-section';
 
 const text = siteText.positief_geteste_personen;
 const ggdText = siteText.positief_geteste_personen_ggd;
@@ -47,11 +48,10 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
   const router = useRouter();
 
   const legendItems = useSafetyRegionLegendaData('positive_tested_people');
-  const delta: InfectedPeopleDeltaNormalized | undefined =
+  const delta: InfectedPeopleDeltaNormalized =
     data.infected_people_delta_normalized;
-  const age: IntakeShareAgeGroups | undefined = data.intake_share_age_groups;
-  const total: NationalInfectedPeopleTotal | undefined =
-    data?.infected_people_total;
+  const age: IntakeShareAgeGroups = data.intake_share_age_groups;
+  const total: NationalInfectedPeopleTotal = data?.infected_people_total;
 
   const ggdData = data.infected_people_percentage.last_value;
 
@@ -95,28 +95,26 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
             absolute={total.last_value.infected_daily_total}
           />
           <Text>{text.kpi_toelichting}</Text>
-          {ggdData.percentage_infected_ggd !== undefined && (
-            <Box>
-              <Heading level={4} fontSize={'1.2em'} mt={'1.5em'} mb={0}>
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: replaceKpisInText(ggdText.summary_title, [
-                      {
-                        name: 'percentage',
-                        value: `${formatPercentage(
-                          ggdData.percentage_infected_ggd
-                        )}%`,
-                        className: 'text-blue',
-                      },
-                    ]),
-                  }}
-                ></span>
-              </Heading>
-              <Text mt={0} lineHeight={1}>
-                <Anchor anchorName="ggd" text={ggdText.summary_link_cta} />
-              </Text>
-            </Box>
-          )}
+          <Box>
+            <Heading level={4} fontSize={'1.2em'} mt={'1.5em'} mb={0}>
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: replaceKpisInText(ggdText.summary_title, [
+                    {
+                      name: 'percentage',
+                      value: `${formatPercentage(
+                        ggdData.percentage_infected_ggd
+                      )}%`,
+                      className: 'text-blue',
+                    },
+                  ]),
+                }}
+              ></span>
+            </Heading>
+            <Text mt={0} lineHeight={1}>
+              <Anchor anchorName="ggd" text={ggdText.summary_link_cta} />
+            </Text>
+          </Box>
         </KpiTile>
       </TwoKpiSection>
 
@@ -160,43 +158,37 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         </ChoroplethLegend>
       </ChoroplethSection>
 
-      {delta && (
-        <article className="metric-article">
-          <LineChart
-            title={text.linechart_titel}
-            description={text.linechart_toelichting}
-            values={delta.values.map((value) => ({
-              value: value.infected_daily_increase,
-              date: value.date_of_report_unix,
-            }))}
-            signaalwaarde={7}
-          />
-        </article>
-      )}
-      {/* the barscale's initial SSR output was incorrect, giving both columns a fixed width solves this*/}
-      <article className="metric-article layout-two-column">
-        <div className="column-item-fixed">
-          <h3>{text.barchart_titel}</h3>
-          <p>{text.barchart_toelichting}</p>
-        </div>
-        <div className="column-item-fixed">
-          {age && (
-            <BarChart
-              keys={text.barscale_keys}
-              data={age.values.map((value) => ({
-                y: value.infected_per_agegroup_increase || 0,
-                label: value?.infected_per_agegroup_increase
-                  ? `${(
-                      ((value.infected_per_agegroup_increase as number) * 100) /
-                      barChartTotal
-                    ).toFixed(0)}%`
-                  : false,
-              }))}
-              axisTitle={text.barchart_axis_titel}
-            />
-          )}
-        </div>
-      </article>
+      <KpiSection>
+        <LineChart
+          title={text.linechart_titel}
+          description={text.linechart_toelichting}
+          values={delta.values.map((value) => ({
+            value: value.infected_daily_increase,
+            date: value.date_of_report_unix,
+          }))}
+          signaalwaarde={7}
+        />
+      </KpiSection>
+
+      <TwoKpiSection fixed={true} bg="white" borderRadius={5}>
+        <Box>
+          <Heading level={3}>{text.barchart_titel}</Heading>
+          <Text>{text.barchart_toelichting}</Text>
+        </Box>
+        <BarChart
+          keys={text.barscale_keys}
+          data={age.values.map((value) => ({
+            y: value.infected_per_agegroup_increase || 0,
+            label: value?.infected_per_agegroup_increase
+              ? `${(
+                  ((value.infected_per_agegroup_increase as number) * 100) /
+                  barChartTotal
+                ).toFixed(0)}%`
+              : false,
+          }))}
+          axisTitle={text.barchart_axis_titel}
+        />
+      </TwoKpiSection>
 
       {ggdData && (
         <>

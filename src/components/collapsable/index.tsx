@@ -70,6 +70,7 @@ export function Collapsable(props: CollapsableProps) {
     return () => {
       window.removeEventListener('hashchange', checkLocationHash, false);
     };
+    // eslint-disable-next-line
   }, []); // should not use dependancies in array: use effect mimics mount / unmount
 
   return (

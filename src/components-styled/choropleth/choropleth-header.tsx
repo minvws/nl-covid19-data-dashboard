@@ -8,4 +8,3 @@ export const ChoroplethHeader = styled(Box)(
     mb: [0, 2],
   } as any) as any
 );
-// { md: 2, sm: 0 }
