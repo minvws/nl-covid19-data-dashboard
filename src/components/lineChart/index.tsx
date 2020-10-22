@@ -1,18 +1,13 @@
-import React, { useMemo, useState } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import styles from './lineChart.module.scss';
-import text from '~/locale/index';
-
-import {
-  ChartTimeControls,
-  TimeframeOption,
-} from '~/components/chartTimeControls';
-
-import { formatNumber } from '~/utils/formatNumber';
-import { formatDateFromSeconds } from '~/utils/formatDate';
-import { getFilteredValues } from '~/components/chartTimeControls/chartTimeControlUtils';
+import React, { useMemo, useState } from 'react';
 import { isDefined } from 'ts-is-present';
+import { ChartTimeControls } from '~/components-styled/chart-time-controls';
+import text from '~/locale/index';
+import { formatDateFromSeconds } from '~/utils/formatDate';
+import { formatNumber } from '~/utils/formatNumber';
+import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
+import styles from './lineChart.module.scss';
 
 type Value = {
   date: number;

@@ -1,4 +1,4 @@
-import { getDaysForTimeframe } from '../chartTimeControlUtils';
+import { getDaysForTimeframe } from '..';
 
 describe('Utils: getDaysForTimeframe', () => {
   it('should return 8 for week', () => {

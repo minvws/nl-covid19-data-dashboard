@@ -1,4 +1,4 @@
-import { getFilteredValues } from '../chartTimeControlUtils';
+import { getFilteredValues } from '..';
 
 const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
 
