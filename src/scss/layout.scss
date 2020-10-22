@@ -354,6 +354,11 @@
       }
     }
   }
+
+  .metric-wrapper > div:not(:first-child) {
+    height: 4rem;
+    margin-top: -1em;
+  }
 }
 
 .region-names {
