@@ -11,8 +11,7 @@
         "gmcode",
         "average",
         "total_installation_count",
-        "date_of_insertion_unix",
-        "total_"
+        "date_of_insertion_unix"
       ],
       "properties": {
         "week_unix": {
