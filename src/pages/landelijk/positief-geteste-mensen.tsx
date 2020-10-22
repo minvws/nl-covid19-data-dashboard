@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Afname from '~/assets/afname.svg';
 import Getest from '~/assets/test.svg';
-import { ChartRegionControls } from '~/components/chartRegionControls';
+import { ChartRegionControls } from '~/components-styled/chart-region-controls';
 import { BarChart, LineChart } from '~/components/charts/index';
 import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
 import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';

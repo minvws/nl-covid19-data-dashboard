@@ -1,4 +1,4 @@
-import { PositiveTestedPeopleLastValue } from '~/types/data.d';
+import { RegionaalValue } from '~/types/data.d';
 import { MetricKPI } from '~/components/metricKPI';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
@@ -10,7 +10,7 @@ const text = siteText.common.metricKPI;
 const title = siteText.gemeente_positief_geteste_personen.titel_kpi;
 
 export function PositivelyTestedPeopleMetric(props: {
-  data: PositiveTestedPeopleLastValue | undefined;
+  data: RegionaalValue | undefined;
 }) {
   const { data } = props;
 
@@ -23,7 +23,7 @@ export function PositivelyTestedPeopleMetric(props: {
   return (
     <MetricKPI
       title={title}
-      value={data.infected_daily_total}
+      value={data.total_reported_increase_per_region}
       format={formatNumber}
       description={description}
     />
