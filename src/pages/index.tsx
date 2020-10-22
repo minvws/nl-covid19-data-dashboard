@@ -22,10 +22,30 @@ import { National, Regions, EscalationLevels } from '~/types/data';
 import { MDToHTMLString } from '~/utils/MDToHTMLString';
 import styles from './index.module.scss';
 import { EscalationMapLegenda } from './veiligheidsregio';
-import { EscalationSummary } from '~/components/escalation-summary';
+import { assert } from '~/utils/assert';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+
+interface StaticProps {
+  props: INationalHomepageData;
+}
+
+interface INationalHomepageData {
+  data: National;
+  text: TALLLanguages;
+  lastGenerated: string;
+  escalationLevelAmounts: EscalationLevelAmounts;
+}
+
+interface EscalationLevelAmounts {
+  escalationLevel1: number;
+  escalationLevel2: number;
+  escalationLevel3: number;
+  escalationLevel4: number;
+  escalationLevel5: number;
+}
 
 const Home: FCWithLayout<INationalHomepageData> = (props) => {
-  const { text, escalationLevels } = props;
+  const { text, escalationLevelAmounts } = props;
   const router = useRouter();
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
     'municipal'
@@ -43,7 +63,12 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
       <article className={`${styles.notification} metric-article`}>
         <div className={styles.textgroup}>
           <h3 className={styles.header}>{text.notificatie.titel}</h3>
-          <p>{text.notificatie.bericht}</p>
+          <p>
+            {replaceVariablesInText(
+              text.notificatie.bericht,
+              (escalationLevelAmounts as unknown) as { [key: string]: string }
+            )}
+          </p>
         </div>
         <a
           className={styles.link}
@@ -54,8 +79,6 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
           <ExternalLink />
           <span>{text.notificatie.link.text}</span>
         </a>
-
-        <EscalationSummary></EscalationSummary>
       </article>
 
       <article className="metric-article layout-chloropleth">
@@ -123,16 +146,33 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
 
 Home.getLayout = getNationalLayout();
 
-interface StaticProps {
-  props: INationalHomepageData;
-}
+/**
+ * Calculate the amounts of regions with a certain escalation level
+ */
+const getEcalationAmounts = (
+  escalationLevels: EscalationLevels[] | undefined
+): EscalationLevelAmounts => {
+  const amounts: EscalationLevelAmounts = {
+    escalationLevel1: 0,
+    escalationLevel2: 0,
+    escalationLevel3: 0,
+    escalationLevel4: 0,
+    escalationLevel5: 0,
+  };
 
-interface INationalHomepageData {
-  data: National;
-  text: TALLLanguages;
-  lastGenerated: string;
-  escalationLevels?: EscalationLevels[];
-}
+  if (escalationLevels) {
+    escalationLevels.forEach((region) => {
+      assert(
+        [1, 2, 3, 4, 5].indexOf(region.escalation_level) !== -1,
+        'Escalation level amount not supported. Value needs to be 1-5.'
+      );
+      const key = `escalationLevel${region.escalation_level}` as keyof EscalationLevelAmounts;
+      amounts[key] += 1;
+    });
+  }
+
+  return amounts;
+};
 
 export async function getStaticProps(): Promise<StaticProps> {
   const text = require('../locale/index').default;
@@ -158,8 +198,9 @@ export async function getStaticProps(): Promise<StaticProps> {
   const regionsData = JSON.parse(regionsFileContents) as Regions;
 
   const escalationLevels = regionsData.escalation_levels;
+  const escalationLevelAmounts = getEcalationAmounts(escalationLevels);
 
-  return { props: { data, escalationLevels, text, lastGenerated } };
+  return { props: { data, escalationLevelAmounts, text, lastGenerated } };
 }
 
 export default Home;
