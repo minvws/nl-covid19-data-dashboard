@@ -1,10 +1,7 @@
 import { useMemo, useState } from 'react';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import { BarChart } from '~/components/charts';
-import {
-  ChartTimeControls,
-  TimeframeOption,
-} from '~/components/chartTimeControls';
+import { ChartTimeControls } from '~/components-styled/chart-time-controls';
 import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/layout/Content';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
@@ -27,6 +24,7 @@ import {
   getSewerWaterLineChartData,
   getSewerWaterScatterPlotData,
 } from '~/utils/sewer-water/safety-region-sewer-water.util';
+import { TimeframeOption } from '~/utils/timeframe';
 
 const text = siteText.veiligheidsregio_rioolwater_metingen;
 

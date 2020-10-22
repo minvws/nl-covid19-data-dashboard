@@ -1,4 +1,4 @@
-import { getMinimumUnixForTimeframe } from '../chartTimeControlUtils';
+import { getMinimumUnixForTimeframe } from '..';
 
 describe('Utils: getMinimumUnixForTimeframe', () => {
   it('should return zero for all', () => {
