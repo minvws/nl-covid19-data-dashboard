@@ -14,7 +14,7 @@ export function IntakeHospitalMetric(props: {
 }) {
   const { data } = props;
 
-  if (data === undefined) return null;
+  if (!data) return null;
 
   const description = replaceVariablesInText(text.dateOfReport, {
     dateOfReport: formatDateFromSeconds(data?.date_of_report_unix, 'relative'),
