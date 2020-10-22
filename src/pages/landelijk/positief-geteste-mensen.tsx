@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Afname from '~/assets/afname.svg';
 import Getest from '~/assets/test.svg';
+import { ChartRegionControls } from '~/components-styled/chart-region-controls';
 import { Anchor } from '~/components-styled/anchor';
 import { Box } from '~/components-styled/base';
 import { ChoroplethSection } from '~/components-styled/choropleth/choropleth-section';

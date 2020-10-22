@@ -1,4 +1,4 @@
-import { TimeframeOption } from '.';
+export type TimeframeOption = 'all' | '5weeks' | 'week';
 
 export const getDaysForTimeframe = (timeframe: TimeframeOption): number => {
   // adds 1 extra day to capture the intended amount of days

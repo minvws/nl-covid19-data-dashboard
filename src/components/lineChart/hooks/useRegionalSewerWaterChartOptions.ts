@@ -1,7 +1,6 @@
 import { SeriesLineOptions, SeriesScatterOptions } from 'highcharts';
 import { useMemo } from 'react';
-import { TimeframeOption } from '~/components/chartTimeControls';
-import { getFilteredValues } from '~/components/chartTimeControls/chartTimeControlUtils';
+import { TimeframeOption, getFilteredValues } from '~/utils/timeframe';
 import { SewerValue } from '~/types/data';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';

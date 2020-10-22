@@ -1,11 +1,5 @@
-import { useRouter } from 'next/router';
 import Getest from '~/assets/test.svg';
 import { LineChart } from '~/components/charts/index';
-import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
-import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
-import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
-import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
-import { createNursingHomeNewlyInfectedTooltip } from '~/components/chloropleth/tooltips/region/createNursingHomeNewlyInfectedTooltip';
 import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/layout/Content';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
@@ -16,15 +10,7 @@ import { formatNumber } from '~/utils/formatNumber';
 
 const text = siteText.verpleeghuis_positief_geteste_personen;
 
-const NursingHomeInfectedPeople: FCWithLayout<INationalData> = (props) => {
-  const data = props.data.nursing_home;
-  const router = useRouter();
-
-  const legendItems = useSafetyRegionLegendaData(
-    'nursing_home',
-    'newly_infected_people'
-  );
-
+const NursingHomeInfectedPeople: FCWithLayout<INationalData> = ({ data }) => {
   return (
     <>
       <SEOHead
@@ -38,8 +24,8 @@ const NursingHomeInfectedPeople: FCWithLayout<INationalData> = (props) => {
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: data?.last_value?.date_of_report_unix,
-          dateInsertedUnix: data?.last_value?.date_of_insertion_unix,
+          dateUnix: data.nursing_home.last_value.date_of_report_unix,
+          dateInsertedUnix: data.nursing_home.last_value.date_of_insertion_unix,
           dataSource: text.bron,
         }}
       />
@@ -48,7 +34,7 @@ const NursingHomeInfectedPeople: FCWithLayout<INationalData> = (props) => {
         <div className="column-item column-item-extra-margin">
           <h3>{text.barscale_titel}</h3>
           <p className="text-blue kpi" data-cy="infected_daily_total">
-            {formatNumber(data.last_value.newly_infected_people)}
+            {formatNumber(data.nursing_home.last_value.newly_infected_people)}
           </p>
         </div>
 
@@ -57,45 +43,15 @@ const NursingHomeInfectedPeople: FCWithLayout<INationalData> = (props) => {
         </div>
       </article>
 
-      <article className="metric-article layout-chloropleth">
-        <div className="chloropleth-header">
-          <h3>{text.map_titel}</h3>
-          <p>{text.map_toelichting}</p>
-        </div>
-
-        <div className="chloropleth-chart">
-          <SafetyRegionChloropleth
-            metricName="nursing_home"
-            metricValueName="newly_infected_people"
-            tooltipContent={createNursingHomeNewlyInfectedTooltip(router)}
-            onSelect={createSelectRegionHandler(
-              router,
-              'verpleeghuis-positief-geteste-personen'
-            )}
-          />
-        </div>
-
-        <div className="chloropleth-legend">
-          {legendItems ? (
-            <ChloroplethLegenda
-              items={legendItems}
-              title={text.chloropleth_legenda.titel}
-            />
-          ) : null}
-        </div>
+      <article className="metric-article">
+        <LineChart
+          title={text.linechart_titel}
+          values={data.nursing_home.values.map((value) => ({
+            value: value.newly_infected_locations,
+            date: value.date_of_report_unix,
+          }))}
+        />
       </article>
-
-      {data && (
-        <article className="metric-article">
-          <LineChart
-            title={text.linechart_titel}
-            values={data.values.map((value) => ({
-              value: value.newly_infected_locations,
-              date: value.date_of_report_unix,
-            }))}
-          />
-        </article>
-      )}
     </>
   );
 };

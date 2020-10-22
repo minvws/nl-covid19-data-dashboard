@@ -10,17 +10,15 @@ import {
   getSafetyRegionPaths,
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
-import { RegionalNursingHome } from '~/types/data.d';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text = siteText.veiligheidsregio_verpleeghuis_positief_geteste_personen;
 
-const NursingHomeInfectedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
-  const { data: state, safetyRegionName } = props;
-
-  const data: RegionalNursingHome | undefined = state?.nursing_home;
-
+const NursingHomeInfectedPeople: FCWithLayout<ISafetyRegionData> = ({
+  data,
+  safetyRegionName,
+}) => {
   return (
     <>
       <SEOHead
@@ -42,8 +40,8 @@ const NursingHomeInfectedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
         })}
         metadata={{
           datumsText: text.datums,
-          dateUnix: data?.last_value?.date_of_report_unix,
-          dateInsertedUnix: data?.last_value?.date_of_insertion_unix,
+          dateUnix: data.nursing_home.last_value.date_of_report_unix,
+          dateInsertedUnix: data.nursing_home.last_value.date_of_insertion_unix,
           dataSource: text.bron,
         }}
       />
@@ -52,7 +50,7 @@ const NursingHomeInfectedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
         <div className="column-item column-item-extra-margin">
           <h3>{text.barscale_titel}</h3>
           <p className="text-blue kpi" data-cy="infected_daily_total">
-            {formatNumber(data?.last_value.newly_infected_people)}
+            {formatNumber(data.nursing_home.last_value.newly_infected_people)}
           </p>
         </div>
 
@@ -61,17 +59,15 @@ const NursingHomeInfectedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
         </div>
       </article>
 
-      {data && (
-        <article className="metric-article">
-          <LineChart
-            title={text.linechart_titel}
-            values={data.values.map((value) => ({
-              value: value.newly_infected_people,
-              date: value.date_of_report_unix,
-            }))}
-          />
-        </article>
-      )}
+      <article className="metric-article">
+        <LineChart
+          title={text.linechart_titel}
+          values={data.nursing_home.values.map((value) => ({
+            value: value.newly_infected_people,
+            date: value.date_of_report_unix,
+          }))}
+        />
+      </article>
     </>
   );
 };

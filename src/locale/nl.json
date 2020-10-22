@@ -9,8 +9,8 @@
     "title": "Laatst bijgewerkt"
   },
   "notificatie": {
-    "titel": "Stijging van Covid-19 besmettingen en opnames in ziekenhuizen en op intensive care afdelingen zet door",
-    "bericht": "In alle regio’s en in alle leeftijdsgroepen neemt het aantal meldingen van COVID-19 verder toe. De afgelopen week zijn er 43.903 positief geteste personen door de GGD gemeld. Ruim 16.000 meer dan in de week daarvoor, een stijging van 60%. Het aantal meldingen van positief geteste personen toont nog geen stabilisatie.\n\nHet risiconiveau per regio kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2), ‘ernstig’ (niveau 3), ‘zeer ernstig’ (niveau 4) zijn.",
+    "titel": "Minder sterkte stijging aantal meldingen COVID-19",
+    "bericht": "Afgelopen week (14 t/m 20 oktober) steeg het aantal meldingen van mensen die positief testen op COVID-19, het aantal patiënten in de ziekenhuizen en het aantal intensive care-opnames verder. De snelheid waarmee het aantal nieuwe meldingen van mensen die positief testen stijgt, lijkt echter iets af te nemen. Dit zou een gevolg kunnen zijn van de maatregelen die eind september van kracht werden. Echter het aantal ziekenhuisopnames stijgt onveranderd door. \n\nHet risiconiveau per regio kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2), ‘ernstig’ (niveau 3), ‘zeer ernstig’ (niveau 4) zijn. Op dit moment zijn 16 regio’s ingeschaald op ‘zeer ernstig’, 7 op ‘ernstig’ en 2 op ‘zorgelijk.’",
     "link": {
       "text": "Bekijk de toelichting van het RIVM",
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel"
@@ -98,15 +98,15 @@
     "barscale_toelichting": "Aantal patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten, per 100.000 inwoners, per week.",
     "kpi_titel": "Geschat aantal patiënten met verdenking van COVID-19",
     "kpi_toelichting": "Geschat aantal patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten per week.",
-    "normalized_kpi_titel": "Gemiddeld aantal patiënten met verdenking van COVID-19 per 100.000 inwoners",
-    "normalized_kpi_toelichting": "Geschat aantal patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten per week.",
     "linechart_titel": "Verloop over tijd",
     "barscale_screenreader_text": "{{value}} patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten, per 100.000 inwoners, per week.",
     "titel_sidebar": "Patiënten met eerste melding van COVID-19 klachten bij de huisarts per 100.000 inwoners",
     "metadata": {
-      "title": "Aantal meldingen COVID-19 bij huisartsen | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Aantal meldingen COVID-19 verdenking van huisartsen | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Landelijk overzicht van het geschat aantal patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten per week."
-    }
+    },
+    "normalized_kpi_titel": "Gemiddeld aantal patiënten met verdenking van COVID-19 per 100.000 inwoners",
+    "normalized_kpi_toelichting": "Geschat aantal patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten per week."
   },
   "ziekenhuisopnames_per_dag": {
     "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
@@ -220,7 +220,6 @@
     "geen_signaalwaarde_beschikbaar_lees_waarom": "Lees hier waarom",
     "toelichting_pagina": "Als iemand het coronavirus oploopt, dan is deze persoon een tijd lang besmettelijk voor anderen. Hoe lang dit duurt verschilt van persoon tot persoon. Het aantal besmettelijke mensen is een schatting op basis van een aantal gegevensbronnen. Het exacte aantal is onbekend, maar we kunnen wel aangeven of het gaat om tientallen, honderden, duizenden of meer. ",
     "barscale_titel": "Gemiddeld aantal besmettelijke mensen per 100.000 inwoners",
-    "barscale_toelichting": "Een berekening van hoeveel mensen met COVID-19 per 100.000 inwoners besmettelijk zijn voor anderen. Dit getal wordt door het RIVM berekend.",
     "barscale_screenreader_text": "{{value}} besmettelijke mensen",
     "cijfer_titel": "Geschat aantal besmettelijke mensen in Nederland:",
     "cijfer_toelichting": "Een schatting van hoeveel mensen met COVID-19 besmettelijk zijn voor anderen. Dit getal wordt door het RIVM berekend.",
@@ -228,8 +227,9 @@
     "titel_sidebar": "Aantal besmettelijke mensen",
     "metadata": {
       "title": "Besmettelijke mensen | Dashboard Coronavirus | Rijksoverheid.nl",
-      "description": "Landelijk overzicht van hoeveel mensen met COVID-19 besmettelijk zijn voor anderen."
-    }
+      "description": "Landelijk overzicht van hoeveel mensen met COVID-19 besmettelijk zijn voor anderen. Dit getal wordt door het RIVM berekend."
+    },
+    "barscale_toelichting": "Een berekening van hoeveel mensen met COVID-19 per 100.000 inwoners besmettelijk zijn voor anderen. Dit getal wordt door het RIVM berekend."
   },
   "reproductiegetal": {
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
@@ -602,13 +602,13 @@
     "barScale": {
       "signaalwaarde": "Signaalwaarde"
     },
-    "metricKPI": {
-      "dateOfReport": "Waarde van {{dateOfReport}}"
-    },
     "zoekveld_geen_resultaten": "Geen resultaten",
     "zoekveld_placeholder_regio": "Zoek op veiligheidsregio ",
     "zoekveld_placeholder_gemeente": "Zoek op gemeente ",
-    "veiligheidsregio_label": "Veiligheidsregio:"
+    "veiligheidsregio_label": "Veiligheidsregio:",
+    "metricKPI": {
+      "dateOfReport": "Waarde van {{dateOfReport}}"
+    }
   },
   "seoHead": {
     "default_description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
@@ -620,10 +620,10 @@
   },
   "nationaal_layout": {
     "headings": {
-      "laatste": "Laatste ontwikkelingen",
       "medisch": "Medische indicatoren",
       "overig": "Vroegsignalering",
-      "verpleeghuis": "Verpleeghuiszorg"
+      "verpleeghuis": "Verpleeghuiszorg",
+      "laatste": "Laatste ontwikkelingen"
     }
   },
   "veiligheidsregio_layout": {
@@ -730,14 +730,14 @@
     "graph_average_label_text": "Gemiddelde waarde aantal virusdeeltjes in 1 mL rioolwater.",
     "graph_secondary_label_text": "Individuele RWZI waardes.",
     "graph_average_label_text_rwzi": "Waarde van RWZI-locatie {{name}}",
-    "graph_daily_label_text_rwzi": "Dagwaarde aantal virusdeeltjes in 1 mL rioolwater ({{name}})",
-    "graph_selected_rwzi_placeholder": "Selecteer RWZI",
-    "graph_range_description": "Verloop over tijd",
     "average": "Gemiddelde",
     "metadata": {
       "title": "Rioolwatermeting in {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van rioolwatermetingen en aangetroffen COVID-19 virusdeeltjes in de veiligheidsregio {{safetyRegionName}}."
-    }
+    },
+    "graph_daily_label_text_rwzi": "Dagwaarde aantal virusdeeltjes in 1 mL rioolwater ({{name}})",
+    "graph_selected_rwzi_placeholder": "Selecteer RWZI",
+    "graph_range_description": "Verloop over tijd"
   },
   "gemeente_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Ziekenhuisopnames per dag",
