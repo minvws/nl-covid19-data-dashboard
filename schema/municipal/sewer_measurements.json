@@ -10,6 +10,7 @@
         "week_end_unix",
         "gmcode",
         "average",
+        "total_installation_count",
         "date_of_insertion_unix"
       ],
       "properties": {
@@ -28,6 +29,9 @@
         },
         "average": {
           "type": "number"
+        },
+        "total_installation_count": {
+          "type": "integer"
         },
         "date_of_insertion_unix": {
           "type": "integer"
