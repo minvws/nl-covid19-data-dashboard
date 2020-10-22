@@ -13,7 +13,7 @@ interface KpiTileProps {
   };
 }
 
-export const Tile = (props: BoxProps) => (
+export const Tile = (props: { children: React.ReactNode } & BoxProps) => (
   <Box
     as="article"
     display="flex"
@@ -23,7 +23,7 @@ export const Tile = (props: BoxProps) => (
     borderRadius={1}
     boxShadow="tile"
     height="100%"
-    {...props}
+    {...(props as any)}
   />
 );
 

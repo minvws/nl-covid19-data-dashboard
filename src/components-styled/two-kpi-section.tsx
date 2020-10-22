@@ -43,7 +43,7 @@ export function TwoKpiSection({
        */
       ml={{ _: -4, sm: 0 }}
       mr={{ _: -4, sm: 0 }}
-      {...props}
+      {...(props as any)}
     >
       <Box flex={flexValue} mr={{ lg: 3 }} mb={{ _: 4, lg: 0 }}>
         {childrenArray[0]}

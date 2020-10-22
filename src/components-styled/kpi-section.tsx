@@ -1,6 +1,6 @@
 import { Box, BoxProps } from './base';
 
-export const KpiSection = (props: BoxProps) => (
+export const KpiSection = (props: { children: React.ReactNode } & BoxProps) => (
   <Box
     as="article"
     bg="white"
@@ -10,6 +10,6 @@ export const KpiSection = (props: BoxProps) => (
     mb={4}
     ml={{ _: -4, sm: 0 }}
     mr={{ _: -4, sm: 0 }}
-    {...props}
+    {...(props as any)}
   ></Box>
 );
