@@ -3,7 +3,7 @@ import { Box, BoxProps, Spacer } from './base';
 import { ExternalLink } from './external-link';
 import { Text, Heading } from './typography';
 
-interface KpiTileProps {
+interface KpiTileProps extends BoxProps {
   title: string;
   description?: string;
   children: React.ReactNode;
@@ -36,9 +36,10 @@ export function KpiTile({
   description,
   children,
   sourcedFrom,
+  ...props
 }: KpiTileProps) {
   return (
-    <Tile>
+    <Tile {...(props as any)}>
       <Heading level={3}>{title}</Heading>
       <Box mb={4}>{children}</Box>
       {description && (

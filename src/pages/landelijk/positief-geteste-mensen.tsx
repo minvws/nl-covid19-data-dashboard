@@ -36,6 +36,7 @@ import {
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { KpiSection } from '~/components-styled/kpi-section';
+import { ChoroplethChart } from '~/components-styled/choropleth/choropleth-chart';
 
 const text = siteText.positief_geteste_personen;
 const ggdText = siteText.positief_geteste_personen_ggd;
@@ -128,7 +129,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
             />
           </Box>
         </ChoroplethHeader>
-        <Box gridArea={'c'}>
+        <ChoroplethChart>
           {selectedMap === 'municipal' && (
             <MunicipalityChloropleth
               metricName="positive_tested_people"
@@ -145,16 +146,14 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
               onSelect={createSelectRegionHandler(router)}
             />
           )}
-        </Box>
+        </ChoroplethChart>
         <ChoroplethLegend>
-          <div className="chloropleth-legend">
-            {legendItems && (
-              <ChloroplethLegenda
-                items={legendItems}
-                title={text.chloropleth_legenda.titel}
-              />
-            )}
-          </div>
+          {legendItems && (
+            <ChloroplethLegenda
+              items={legendItems}
+              title={text.chloropleth_legenda.titel}
+            />
+          )}
         </ChoroplethLegend>
       </ChoroplethSection>
 
@@ -170,87 +169,73 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         />
       </KpiSection>
 
-      <TwoKpiSection fixed={true} bg="white" borderRadius={5}>
-        <Box>
+      <KpiSection>
+        <Box flex="0 0 50%">
           <Heading level={3}>{text.barchart_titel}</Heading>
           <Text>{text.barchart_toelichting}</Text>
         </Box>
-        <BarChart
-          keys={text.barscale_keys}
-          data={age.values.map((value) => ({
-            y: value.infected_per_agegroup_increase || 0,
-            label: value?.infected_per_agegroup_increase
-              ? `${(
-                  ((value.infected_per_agegroup_increase as number) * 100) /
-                  barChartTotal
-                ).toFixed(0)}%`
-              : false,
-          }))}
-          axisTitle={text.barchart_axis_titel}
-        />
-      </TwoKpiSection>
-
-      {ggdData && (
-        <>
-          <ContentHeader
-            title={ggdText.titel}
-            id="ggd"
-            Icon={Afname}
-            subtitle={ggdText.toelichting}
-            metadata={{
-              datumsText: ggdText.datums,
-              dateUnix: ggdData.date_of_report_unix,
-              dateInsertedUnix: ggdData.date_of_insertion_unix,
-              dataSource: ggdText.bron,
-            }}
+        <Box flex="0 0 50%">
+          <BarChart
+            keys={text.barscale_keys}
+            data={age.values.map((value) => ({
+              y: value.infected_per_agegroup_increase || 0,
+              label: value?.infected_per_agegroup_increase
+                ? `${(
+                    ((value.infected_per_agegroup_increase as number) * 100) /
+                    barChartTotal
+                  ).toFixed(0)}%`
+                : false,
+            }))}
+            axisTitle={text.barchart_axis_titel}
           />
+        </Box>
+      </KpiSection>
 
-          <div className="layout-two-column">
-            <article className="metric-article column-item">
-              <h3>{ggdText.totaal_getest_week_titel}</h3>
-              <h3>
-                <span className="text-blue kpi">
-                  {formatNumber(ggdData?.total_tested_ggd)}
-                </span>
-              </h3>
+      <ContentHeader
+        title={ggdText.titel}
+        id="ggd"
+        Icon={Afname}
+        subtitle={ggdText.toelichting}
+        metadata={{
+          datumsText: ggdText.datums,
+          dateUnix: ggdData.date_of_report_unix,
+          dateInsertedUnix: ggdData.date_of_insertion_unix,
+          dataSource: ggdText.bron,
+        }}
+      />
 
-              <p>{ggdText.totaal_getest_week_uitleg}</p>
-            </article>
-
-            <article className="metric-article column-item">
-              <h3>{ggdText.positief_getest_week_titel}</h3>
-              <h3>
-                <span className="text-blue kpi">
-                  {`${formatPercentage(ggdData?.percentage_infected_ggd)}%`}
-                </span>
-              </h3>
-              <p>{ggdText.positief_getest_week_uitleg}</p>
-              <p>
-                <strong
-                  className="additional-kpi"
-                  dangerouslySetInnerHTML={{
-                    __html: replaceKpisInText(
-                      ggdText.positief_getest_getest_week_uitleg,
-                      [
-                        {
-                          name: 'numerator',
-                          value: formatNumber(ggdData?.infected_ggd),
-                          className: 'text-blue',
-                        },
-                        {
-                          name: 'denominator',
-                          value: formatNumber(ggdData?.total_tested_ggd),
-                          className: 'text-blue',
-                        },
-                      ]
-                    ),
-                  }}
-                ></strong>
-              </p>
-            </article>
-          </div>
-        </>
-      )}
+      <TwoKpiSection>
+        <KpiTile title={ggdText.totaal_getest_week_titel}>
+          <KpiValue absolute={ggdData.total_tested_ggd} />
+          <Text>{ggdText.totaal_getest_week_uitleg}</Text>
+        </KpiTile>
+        <KpiTile title={ggdText.positief_getest_week_titel}>
+          <KpiValue absolute={ggdData.percentage_infected_ggd} />
+          <Text>{ggdText.positief_getest_week_uitleg}</Text>
+          <Text>
+            <strong
+              className="additional-kpi"
+              dangerouslySetInnerHTML={{
+                __html: replaceKpisInText(
+                  ggdText.positief_getest_getest_week_uitleg,
+                  [
+                    {
+                      name: 'numerator',
+                      value: formatNumber(ggdData?.infected_ggd),
+                      className: 'text-blue',
+                    },
+                    {
+                      name: 'denominator',
+                      value: formatNumber(ggdData?.total_tested_ggd),
+                      className: 'text-blue',
+                    },
+                  ]
+                ),
+              }}
+            />
+          </Text>
+        </KpiTile>
+      </TwoKpiSection>
     </>
   );
 };

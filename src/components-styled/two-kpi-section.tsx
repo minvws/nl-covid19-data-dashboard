@@ -4,17 +4,9 @@ import { Box, BoxProps } from './base';
 
 interface TwoKpiSectionProps extends BoxProps {
   children: React.ReactNode;
-  /**
-   * If true the shrink and grow flex settings are turned off for the two columns
-   */
-  fixed?: boolean;
 }
 
-export function TwoKpiSection({
-  children,
-  fixed,
-  ...props
-}: TwoKpiSectionProps) {
+export function TwoKpiSection({ children, ...props }: TwoKpiSectionProps) {
   const childrenCount = React.Children.count(children);
 
   assert(
@@ -23,7 +15,6 @@ export function TwoKpiSection({
   );
 
   const childrenArray = React.Children.toArray(children);
-  const flexValue = fixed ? '0 0 50%' : '1 1 50%';
 
   return (
     <Box
@@ -45,10 +36,10 @@ export function TwoKpiSection({
       mr={{ _: -4, sm: 0 }}
       {...(props as any)}
     >
-      <Box flex={flexValue} mr={{ lg: 3 }} mb={{ _: 4, lg: 0 }}>
+      <Box flex="1 1 50%" mr={{ lg: 3 }} mb={{ _: 4, lg: 0 }}>
         {childrenArray[0]}
       </Box>
-      <Box flex={flexValue}>{childrenArray[1]}</Box>
+      <Box flex="1 1 50%">{childrenArray[1]}</Box>
     </Box>
   );
 }
