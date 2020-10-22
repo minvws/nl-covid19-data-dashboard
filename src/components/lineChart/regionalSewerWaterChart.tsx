@@ -5,7 +5,7 @@ import { SewerValue } from '~/types/data';
 import styles from './lineChart.module.scss';
 import Dot from '~/assets/dot.svg';
 import Line from '~/assets/line.svg';
-import { TimeframeOption } from '../chartTimeControls';
+import { TimeframeOption } from '~/utils/timeframe';
 import { useRegionalSewerWaterChartOptions } from './hooks/useRegionalSewerWaterChartOptions';
 
 export type Value = {

@@ -7,8 +7,9 @@ const text = siteText.reproductiegetal;
 export function ReproductionIndexBarScale(props: {
   data: ReproductionIndexData;
   showAxis: boolean;
+  showValue?: boolean;
 }) {
-  const { data, showAxis } = props;
+  const { data, showAxis, showValue } = props;
 
   if (!data.last_value.reproduction_index_avg) {
     return null;
@@ -42,6 +43,7 @@ export function ReproductionIndexBarScale(props: {
         },
       ]}
       showAxis={showAxis}
+      showValue={showValue}
     />
   );
 }

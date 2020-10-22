@@ -1,4 +1,4 @@
-import { PositiveTestedPeopleLastValue } from '~/types/data.d';
+import { ReproductionIndexLastKnownAverageLastValue } from '~/types/data.d';
 import { MetricKPI } from '~/components/metricKPI';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
@@ -7,10 +7,10 @@ import { formatDateFromSeconds } from '~/utils/formatDate';
 import siteText from '~/locale/index';
 
 const text = siteText.common.metricKPI;
-const title = siteText.gemeente_positief_geteste_personen.titel_kpi;
+const title = siteText.reproductiegetal.titel_kpi;
 
-export function PositivelyTestedPeopleMetric(props: {
-  data: PositiveTestedPeopleLastValue | undefined;
+export function ReproductionIndexMetric(props: {
+  data: ReproductionIndexLastKnownAverageLastValue | undefined;
 }) {
   const { data } = props;
 
@@ -23,7 +23,7 @@ export function PositivelyTestedPeopleMetric(props: {
   return (
     <MetricKPI
       title={title}
-      value={data.infected_daily_total}
+      value={data.reproduction_index_avg}
       format={formatNumber}
       description={description}
     />

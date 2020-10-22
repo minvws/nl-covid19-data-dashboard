@@ -21,13 +21,4 @@ $breakpoint: 1200px;
 
 .timeControls {
   flex: none;
-
-  /**
-    This is a hack because chartTimeControls contains margin settings.
-  */
-  > div {
-    @media (min-width: $breakpoint) {
-      margin: 0;
-    }
-  }
 }
