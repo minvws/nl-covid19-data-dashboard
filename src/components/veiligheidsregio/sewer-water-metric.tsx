@@ -10,11 +10,11 @@ const text = siteText.common.metricKPI;
 const title = siteText.veiligheidsregio_rioolwater_metingen.titel_kpi;
 
 export function SewerWaterMetric(props: {
-  data: SewerWaterBarScaleData | undefined;
+  data: SewerWaterBarScaleData | null;
 }) {
   const { data } = props;
 
-  if (data === undefined) return null;
+  if (!data) return null;
 
   const description = replaceVariablesInText(text.dateOfReport, {
     dateOfReport: formatDateFromSeconds(

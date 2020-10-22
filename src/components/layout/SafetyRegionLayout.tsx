@@ -163,10 +163,10 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                       />
                       <span>
                         <PositivelyTestedPeopleMetric
-                          data={data?.results_per_region.last_value}
+                          data={data.results_per_region.last_value}
                         />
                         <PositivelyTestedPeopleBarScale
-                          data={data?.results_per_region}
+                          data={data.results_per_region}
                           showAxis={false}
                           showValue={false}
                         />
@@ -194,7 +194,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                         }
                       />
                       <span>
-                        <IntakeHospitalMetric data={data?.results_per_region} />
+                        <IntakeHospitalMetric data={data.results_per_region} />
                       </span>
                     </a>
                   </Link>
@@ -251,13 +251,11 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                             .titel_sidebar
                         }
                       />
-                      {data?.nursing_home?.last_value && (
-                        <span>
-                          <NursingHomeInfectedPeopleMetric
-                            data={data.nursing_home.last_value}
-                          />
-                        </span>
-                      )}
+                      <span>
+                        <NursingHomeInfectedPeopleMetric
+                          data={data.nursing_home.last_value}
+                        />
+                      </span>
                     </a>
                   </Link>
                 </li>
@@ -303,7 +301,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                       />
                       <span>
                         <NursingHomeDeathsMetric
-                          data={data.nursing_home?.last_value}
+                          data={data.nursing_home.last_value}
                         />
                       </span>
                     </a>
