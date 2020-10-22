@@ -48,6 +48,7 @@ export interface SewerMeasurementsLastValue {
   week_end_unix: number;
   gmcode: string;
   average: number;
+  total_installation_count: number;
   date_of_insertion_unix: number;
 }
 export interface ResultsPerSewerInstallationPerMunicipality {
@@ -280,6 +281,7 @@ export interface RioolwaterMetingen {
 export interface RioolwaterMetingenLastValue {
   week_unix: number;
   average: number;
+  total_installation_count: number;
   date_of_insertion_unix: number;
   week_start_unix: number;
   week_end_unix: number;
@@ -447,6 +449,7 @@ export interface AverageSewerInstallationPerRegionItem {
   week_end_unix: number;
   vrcode: string;
   average: number;
+  total_installation_count: number;
   date_of_insertion_unix: number;
 }
 export interface ResultsPerRegion {
