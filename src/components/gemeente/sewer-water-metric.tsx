@@ -10,11 +10,11 @@ const text = siteText.common.metricKPI;
 const title = siteText.gemeente_rioolwater_metingen.barscale_titel;
 
 export function SewerWaterMetric(props: {
-  data: SewerWaterBarScaleData | null;
+  data: SewerWaterBarScaleData | undefined;
 }) {
   const { data } = props;
 
-  if (!data) return null;
+  if (data === undefined) return null;
 
   const description = replaceVariablesInText(text.dateOfReport, {
     dateOfReport: formatDateFromSeconds(Number(data.unix), 'relative'),

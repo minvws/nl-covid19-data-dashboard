@@ -9,11 +9,11 @@ const text = siteText.common.metricKPI;
 const title = siteText.verdenkingen_huisartsen.titel_kpi;
 
 export function SuspectedPatientsMetric(props: {
-  data: NationalHuisartsVerdenkingenValue;
+  data: NationalHuisartsVerdenkingenValue | undefined;
 }) {
   const { data } = props;
 
-  if (!data) return null;
+  if (data === undefined) return null;
 
   const description = replaceVariablesInText(text.dateOfReport, {
     dateOfReport: formatDateFromSeconds(
