@@ -111,7 +111,6 @@ export interface National {
   infectious_people_count_normalized: InfectiousPeopleCountNormalized;
   intake_intensivecare_ma: IntakeIntensivecareMa;
   infected_people_clusters?: InfectedPeopleClusters;
-  infected_people_percentage: InfectedPeoplePercentage;
   infected_people_total: NationalInfectedPeopleTotal;
   infected_people_delta_normalized: InfectedPeopleDeltaNormalized;
   intake_share_age_groups: IntakeShareAgeGroups;
@@ -122,6 +121,7 @@ export interface National {
   rioolwater_metingen_per_rwzi: RioolwaterMetingenPerRwzi;
   hospital_beds_occupied: HospitalBedsOccupied;
   intensive_care_beds_occupied: IntensiveCareBedsOccupied;
+  ggd: NationalGgd;
   nursing_home: NationalNursingHome;
 }
 export interface NationalHuisartsVerdenkingen {
@@ -192,17 +192,6 @@ export interface InfectedPeopleClusters {
 export interface InfectedPeopleClustersLastValue {
   active_clusters: number | null;
   cluster_average: number | null;
-  date_of_report_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface InfectedPeoplePercentage {
-  values: InfectedPeoplePercentageLastValue[];
-  last_value: InfectedPeoplePercentageLastValue;
-}
-export interface InfectedPeoplePercentageLastValue {
-  infected_ggd: number;
-  percentage_infected_ggd: number;
-  total_tested_ggd: number;
   date_of_report_unix: number;
   date_of_insertion_unix: number;
 }
@@ -319,6 +308,17 @@ export interface IntensiveCareBedsOccupiedValue {
   covid_occupied: number;
   non_covid_occupied: number;
   covid_percentage_of_all_occupied: number;
+  date_of_report_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NationalGgd {
+  values: NationalGgdValue[];
+  last_value: NationalGgdValue;
+}
+export interface NationalGgdValue {
+  infected_daily: number;
+  infected_percentage_daily: number;
+  tested_total_daily: number;
   date_of_report_unix: number;
   date_of_insertion_unix: number;
 }
