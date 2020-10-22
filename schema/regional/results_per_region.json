@@ -16,7 +16,7 @@
       ],
       "properties": {
         "date_of_report_unix": { "type": "integer" },
-        "vrcode": { "type": "string", "pattern": "^VR[0-9]+$" },
+        "vrcode": { "equalsRootProperty": "code" },
         "total_reported_increase_per_region": { "type": "number" },
         "infected_total_counts_per_region": { "type": "number" },
         "hospital_total_counts_per_region": { "type": "number" },
