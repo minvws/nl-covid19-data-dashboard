@@ -18,6 +18,24 @@ const schemaToJsonLookup: Record<string, string[]> = {
   regions: ['REGIONS.json'],
 };
 
+if (schemaToJsonLookup.regional.length !== 25) {
+  console.error(
+    chalk.bgRed.bold(
+      `\n Expected 25 region files, actually found ${schemaToJsonLookup.regional.length} \n`
+    )
+  );
+  process.exit(1);
+}
+
+if (schemaToJsonLookup.municipal.length !== 355) {
+  console.error(
+    chalk.bgRed.bold(
+      `\n Expected 355 municipal files, actually found ${schemaToJsonLookup.municipal.length} \n`
+    )
+  );
+  process.exit(1);
+}
+
 // The validations are asynchronous so this reducer gathers all the Promises in one array.
 const validationPromises = Object.keys(schemaToJsonLookup).map<
   Promise<boolean[]>
