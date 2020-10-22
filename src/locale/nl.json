@@ -9,7 +9,7 @@
     "title": "Laatst bijgewerkt"
   },
   "notificatie": {
-    "titel": "Minder sterkte stijging aantal meldingen COVID-19",
+    "titel": "Minder sterke stijging aantal meldingen COVID-19",
     "bericht": "Afgelopen week (14 t/m 20 oktober) steeg het aantal meldingen van mensen die positief testen op COVID-19, het aantal patiënten in de ziekenhuizen en het aantal intensive care-opnames verder. De snelheid waarmee het aantal nieuwe meldingen van mensen die positief testen stijgt, lijkt echter iets af te nemen. Dit zou een gevolg kunnen zijn van de maatregelen die eind september van kracht werden. Echter het aantal ziekenhuisopnames stijgt onveranderd door. \n\nHet risiconiveau per regio kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2), ‘ernstig’ (niveau 3), ‘zeer ernstig’ (niveau 4) zijn. Op dit moment zijn 16 regio’s ingeschaald op ‘zeer ernstig’, 7 op ‘ernstig’ en 2 op ‘zorgelijk’.",
     "link": {
       "text": "Bekijk de toelichting van het RIVM",
@@ -60,7 +60,7 @@
     "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag op de intensive care is opgenomen.",
     "barscale_titel": "Intensive care-opnames per dag",
     "barscale_screenreader_text": "{{value}} intensive care-opnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
-    "extra_uitleg": "Aantal mensen met bevestigd COVID-19 dat per dag op een intensive care-afdeling van een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de afgelopen drie dagen.",
+    "extra_uitleg": "Aantal mensen met bevestigd COVID-19 dat per dag op een intensive care-afdeling van een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de afgelopen drie dagen.\n\nLet op: Hoewel ziekenhuizen proberen om COVID-19 patiënten snel te registreren, is het aannemelijk dat de registratie achter loopt. Om deze reden zijn de aantallen van de afgelopen dagen meestal nog onvolledig.",
     "linechart_titel": "Intensive care-opnames over tijd",
     "bronnen": {
       "nice": {
