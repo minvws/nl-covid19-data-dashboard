@@ -37,6 +37,7 @@ import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { KpiSection } from '~/components-styled/kpi-section';
 import { ChoroplethChart } from '~/components-styled/choropleth/choropleth-chart';
+import { MultipleLineChart } from '~/components/lineChart/multipleLineChart';
 
 const text = siteText.positief_geteste_personen;
 const ggdText = siteText.positief_geteste_personen_ggd;
@@ -54,7 +55,8 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
   const age: IntakeShareAgeGroups = data.intake_share_age_groups;
   const total: NationalInfectedPeopleTotal = data?.infected_people_total;
 
-  const ggdData = data.infected_people_percentage.last_value;
+  const ggdLastValue = data.ggd.last_value;
+  const ggdValues = data.ggd.values;
 
   const barChartTotal: number = age?.values
     ? age.values.reduce((mem: number, part): number => {
@@ -104,7 +106,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
                     {
                       name: 'percentage',
                       value: `${formatPercentage(
-                        ggdData.percentage_infected_ggd
+                        ggdLastValue.infected_percentage_daily
                       )}%`,
                       className: 'text-blue',
                     },
@@ -198,19 +200,19 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         subtitle={ggdText.toelichting}
         metadata={{
           datumsText: ggdText.datums,
-          dateUnix: ggdData.date_of_report_unix,
-          dateInsertedUnix: ggdData.date_of_insertion_unix,
+          dateUnix: ggdLastValue.date_of_report_unix,
+          dateInsertedUnix: ggdLastValue.date_of_insertion_unix,
           dataSource: ggdText.bron,
         }}
       />
 
       <TwoKpiSection>
         <KpiTile title={ggdText.totaal_getest_week_titel}>
-          <KpiValue absolute={ggdData.total_tested_ggd} />
+          <KpiValue absolute={ggdLastValue.tested_total_daily} />
           <Text>{ggdText.totaal_getest_week_uitleg}</Text>
         </KpiTile>
         <KpiTile title={ggdText.positief_getest_week_titel}>
-          <KpiValue absolute={ggdData.percentage_infected_ggd} />
+          <KpiValue absolute={ggdLastValue.infected_percentage_daily} />
           <Text>{ggdText.positief_getest_week_uitleg}</Text>
           <Text>
             <strong
@@ -221,12 +223,12 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
                   [
                     {
                       name: 'numerator',
-                      value: formatNumber(ggdData?.infected_ggd),
+                      value: formatNumber(ggdLastValue.infected_daily),
                       className: 'text-blue',
                     },
                     {
                       name: 'denominator',
-                      value: formatNumber(ggdData?.total_tested_ggd),
+                      value: formatNumber(ggdLastValue.tested_total_daily),
                       className: 'text-blue',
                     },
                   ]
@@ -236,6 +238,36 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           </Text>
         </KpiTile>
       </TwoKpiSection>
+
+      <KpiSection>
+        <LineChart
+          title={ggdText.linechart_percentage_titel}
+          description={ggdText.linechart_percentage_toelichting}
+          values={ggdValues.map((value) => ({
+            value: value.infected_percentage_daily,
+            date: value.date_of_report_unix,
+          }))}
+          signaalwaarde={7}
+        />
+      </KpiSection>
+
+      <KpiSection>
+        <MultipleLineChart
+          title={ggdText.linechart_totaltests_titel}
+          description={ggdText.linechart_totaltests_toelichting}
+          values={[
+            ggdValues.map((value) => ({
+              value: value.tested_total_daily,
+              date: value.date_of_report_unix,
+            })),
+            ggdValues.map((value) => ({
+              value: value.infected_daily,
+              date: value.date_of_report_unix,
+            })),
+          ]}
+          signaalwaarde={7}
+        />
+      </KpiSection>
     </>
   );
 };
