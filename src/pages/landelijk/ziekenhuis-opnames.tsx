@@ -6,7 +6,6 @@ import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { ChartRegionControls } from '~/components-styled/chart-region-controls';
-import { LineChart } from '~/components/charts/index';
 import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
 import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
@@ -23,6 +22,7 @@ import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
+import { LineChartTile } from '~/components-styled/line-chart-tile';
 
 const text = siteText.ziekenhuisopnames_per_dag;
 
@@ -75,48 +75,26 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
         </KpiTile>
       </TwoKpiSection>
 
-      <article className="metric-article">
-        <LineChart
-          title={text.linechart_titel}
-          description={text.linechart_description}
-          values={dataIntake.values.map((value: any) => ({
-            value: value.moving_average_hospital,
-            date: value.date_of_report_unix,
-          }))}
-          signaalwaarde={40}
-        />
-        <footer className="article-footer">
-          {siteText.common.metadata.source}:{' '}
-          <a
-            href={text.bronnen.rivm.href}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            {text.bronnen.rivm.text}
-          </a>
-        </footer>
-      </article>
+      <LineChartTile
+        title={text.linechart_titel}
+        description={text.linechart_description}
+        values={dataIntake.values.map((value: any) => ({
+          value: value.moving_average_hospital,
+          date: value.date_of_report_unix,
+        }))}
+        signaalwaarde={40}
+        sourcedFrom={text.bronnen.rivm}
+      />
 
-      <article className="metric-article">
-        <LineChart
-          title={text.chart_bedbezetting.title}
-          description={text.chart_bedbezetting.description}
-          values={dataBeds.values.map((value) => ({
-            value: value.covid_occupied,
-            date: value.date_of_report_unix,
-          }))}
-        />
-        <footer className="article-footer">
-          {siteText.common.metadata.source}:{' '}
-          <a
-            href={text.bronnen.lnaz.href}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            {text.bronnen.lnaz.text}
-          </a>
-        </footer>
-      </article>
+      <LineChartTile
+        title={text.chart_bedbezetting.title}
+        description={text.chart_bedbezetting.description}
+        values={dataBeds.values.map((value) => ({
+          value: value.covid_occupied,
+          date: value.date_of_report_unix,
+        }))}
+        sourcedFrom={text.bronnen.lnaz}
+      />
 
       <article className="metric-article layout-chloropleth">
         <div className="data-warning">

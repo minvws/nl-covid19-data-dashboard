@@ -9,14 +9,14 @@ import { formatNumber } from '~/utils/formatNumber';
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
 import styles from './lineChart.module.scss';
 
-type Value = {
+export type Value = {
   date: number;
-  value?: number;
+  value: number;
 };
 
 const SIGNAALWAARDE_Z_INDEX = 5;
 
-interface LineChartProps {
+export interface LineChartProps {
   title: string;
   description?: string;
   values: Value[];
