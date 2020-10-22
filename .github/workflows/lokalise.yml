@@ -1,0 +1,13 @@
+name: Lokalise
+
+on:
+  pull_request:
+    branches:
+      - master
+      - develop
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'test'
