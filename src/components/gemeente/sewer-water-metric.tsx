@@ -14,7 +14,7 @@ export function SewerWaterMetric(props: {
 }) {
   const { data } = props;
 
-  if (!data) return null;
+  if (data === undefined) return null;
 
   const description = replaceVariablesInText(text.dateOfReport, {
     dateOfReport: formatDateFromSeconds(Number(data.unix), 'relative'),
