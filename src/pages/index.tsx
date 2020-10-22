@@ -18,14 +18,14 @@ import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { TitleWithIcon } from '~/components/titleWithIcon';
 import { TALLLanguages } from '~/locale/index';
-import { INationalData } from '~/static-props/nl-data';
-import { National } from '~/types/data';
+import { National, Regions, EscalationLevels } from '~/types/data';
 import { MDToHTMLString } from '~/utils/MDToHTMLString';
 import styles from './index.module.scss';
 import { EscalationMapLegenda } from './veiligheidsregio';
+import { EscalationSummary } from '~/components/escalation-summary';
 
-const Home: FCWithLayout<INationalData> = (props) => {
-  const { text } = props;
+const Home: FCWithLayout<INationalHomepageData> = (props) => {
+  const { text, escalationLevels } = props;
   const router = useRouter();
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
     'municipal'
@@ -54,6 +54,8 @@ const Home: FCWithLayout<INationalData> = (props) => {
           <ExternalLink />
           <span>{text.notificatie.link.text}</span>
         </a>
+
+        <EscalationSummary></EscalationSummary>
       </article>
 
       <article className="metric-article layout-chloropleth">
@@ -122,11 +124,14 @@ const Home: FCWithLayout<INationalData> = (props) => {
 Home.getLayout = getNationalLayout();
 
 interface StaticProps {
-  props: {
-    data: National;
-    text: TALLLanguages;
-    lastGenerated: string;
-  };
+  props: INationalHomepageData;
+}
+
+interface INationalHomepageData {
+  data: National;
+  text: TALLLanguages;
+  lastGenerated: string;
+  escalationLevels?: EscalationLevels[];
 }
 
 export async function getStaticProps(): Promise<StaticProps> {
@@ -143,7 +148,18 @@ export async function getStaticProps(): Promise<StaticProps> {
   const data = JSON.parse(fileContents) as National;
   const lastGenerated = data.last_generated;
 
-  return { props: { data, text, lastGenerated } };
+  const regionsFilePath = path.join(
+    process.cwd(),
+    'public',
+    'json',
+    'REGIONS.json'
+  );
+  const regionsFileContents = fs.readFileSync(regionsFilePath, 'utf8');
+  const regionsData = JSON.parse(regionsFileContents) as Regions;
+
+  const escalationLevels = regionsData.escalation_levels;
+
+  return { props: { data, escalationLevels, text, lastGenerated } };
 }
 
 export default Home;
