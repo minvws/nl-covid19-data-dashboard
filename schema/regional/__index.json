@@ -23,9 +23,11 @@
       "pattern": "^VR[0-9]+$"
     },
     "name": {
+      "type": "string",
       "const": { "$data": "1/proto_name" }
     },
     "code": {
+      "type": "string",
       "const": { "$data": "1/proto_name" }
     },
     "results_per_sewer_installation_per_region": {

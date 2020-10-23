@@ -35,6 +35,7 @@
           "type": "string"
         },
         "gmcode": {
+          "type": "string",
           "equalsRootProperty": "code"
         },
         "rna_per_ml": {
