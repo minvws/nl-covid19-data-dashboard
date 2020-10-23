@@ -18,14 +18,39 @@ import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { TitleWithIcon } from '~/components/titleWithIcon';
 import { TALLLanguages } from '~/locale/index';
-import { INationalData } from '~/static-props/nl-data';
-import { National } from '~/types/data';
+import { National, Regions, EscalationLevels } from '~/types/data';
 import { MDToHTMLString } from '~/utils/MDToHTMLString';
 import styles from './index.module.scss';
 import { EscalationMapLegenda } from './veiligheidsregio';
+import { assert } from '~/utils/assert';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
-const Home: FCWithLayout<INationalData> = (props) => {
-  const { text } = props;
+interface StaticProps {
+  props: INationalHomepageData;
+}
+
+interface INationalHomepageData {
+  data: National;
+  text: TALLLanguages;
+  lastGenerated: string;
+  escalationLevelCounts: EscalationLevelCounts;
+}
+
+/*
+ * The keys in this object are used to find and replace values in the translation files.
+ * Adjustments here need to be applied in Lokalize too.
+ * This is also why the keys are a bit more verbose.
+ */
+interface EscalationLevelCounts {
+  escalationLevel1: number;
+  escalationLevel2: number;
+  escalationLevel3: number;
+  escalationLevel4: number;
+  escalationLevel5: number;
+}
+
+const Home: FCWithLayout<INationalHomepageData> = (props) => {
+  const { text, escalationLevelCounts } = props;
   const router = useRouter();
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
     'municipal'
@@ -43,7 +68,12 @@ const Home: FCWithLayout<INationalData> = (props) => {
       <article className={`${styles.notification} metric-article`}>
         <div className={styles.textgroup}>
           <h3 className={styles.header}>{text.notificatie.titel}</h3>
-          <p>{text.notificatie.bericht}</p>
+          <p>
+            {replaceVariablesInText(
+              text.notificatie.bericht,
+              (escalationLevelCounts as unknown) as { [key: string]: string }
+            )}
+          </p>
         </div>
         <a
           className={styles.link}
@@ -121,13 +151,33 @@ const Home: FCWithLayout<INationalData> = (props) => {
 
 Home.getLayout = getNationalLayout();
 
-interface StaticProps {
-  props: {
-    data: National;
-    text: TALLLanguages;
-    lastGenerated: string;
+/**
+ * Calculate the counts of regions with a certain escalation level
+ */
+const getEscalationCounts = (
+  escalationLevels?: EscalationLevels[]
+): EscalationLevelCounts => {
+  const counts: EscalationLevelCounts = {
+    escalationLevel1: 0,
+    escalationLevel2: 0,
+    escalationLevel3: 0,
+    escalationLevel4: 0,
+    escalationLevel5: 0,
   };
-}
+
+  if (escalationLevels) {
+    escalationLevels.forEach((region) => {
+      assert(
+        [1, 2, 3, 4, 5].indexOf(region.escalation_level) !== -1,
+        'Escalation level not supported. Value needs to be 1-5.'
+      );
+      const key = `escalationLevel${region.escalation_level}` as keyof EscalationLevelCounts;
+      counts[key] += 1;
+    });
+  }
+
+  return counts;
+};
 
 export async function getStaticProps(): Promise<StaticProps> {
   const text = require('../locale/index').default;
@@ -143,7 +193,19 @@ export async function getStaticProps(): Promise<StaticProps> {
   const data = JSON.parse(fileContents) as National;
   const lastGenerated = data.last_generated;
 
-  return { props: { data, text, lastGenerated } };
+  const regionsFilePath = path.join(
+    process.cwd(),
+    'public',
+    'json',
+    'REGIONS.json'
+  );
+  const regionsFileContents = fs.readFileSync(regionsFilePath, 'utf8');
+  const regionsData = JSON.parse(regionsFileContents) as Regions;
+
+  const escalationLevels = regionsData.escalation_levels;
+  const escalationLevelCounts = getEscalationCounts(escalationLevels);
+
+  return { props: { data, escalationLevelCounts, text, lastGenerated } };
 }
 
 export default Home;
