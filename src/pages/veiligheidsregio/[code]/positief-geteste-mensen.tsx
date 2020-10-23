@@ -180,7 +180,10 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           <Text>{ggdText.totaal_getest_week_uitleg}</Text>
         </KpiTile>
         <KpiTile title={ggdText.positief_getest_week_titel}>
-          <KpiValue absolute={ggdData.infected_percentage_daily} />
+          <KpiValue
+            absolute={ggdData.infected_daily}
+            percentage={ggdData.infected_percentage_daily}
+          />
           <Text>{ggdText.positief_getest_week_uitleg}</Text>
           <Text>
             <strong

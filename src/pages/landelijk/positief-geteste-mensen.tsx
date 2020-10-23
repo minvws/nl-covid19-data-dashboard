@@ -214,7 +214,10 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           <Text>{ggdText.totaal_getest_week_uitleg}</Text>
         </KpiTile>
         <KpiTile title={ggdText.positief_getest_week_titel}>
-          <KpiValue absolute={ggdLastValue.infected_percentage_daily} />
+          <KpiValue
+            absolute={ggdLastValue.infected_daily}
+            percentage={ggdLastValue.infected_percentage_daily}
+          />
           <Text>{ggdText.positief_getest_week_uitleg}</Text>
           <Text>
             <strong
