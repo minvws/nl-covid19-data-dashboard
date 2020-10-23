@@ -17,8 +17,7 @@
           "type": "integer"
         },
         "gmcode": {
-          "type": "string",
-          "pattern": "^GM[0-9]+$"
+          "equalsRootProperty": "code"
         },
         "municipality_name": {
           "type": "string"
