@@ -434,6 +434,10 @@
     "paragraaf": "In dit dashboard staan verschillende cijfers die ons vertellen hoe het ervoor staat met beheersen van COVID-19. Op deze plek geven we meer toelichting over de wijze waarop de cijfers zijn samengesteld.",
     "cijfers": [
       {
+        "cijfer": "Nameldingen besmettingen door wijziging GGD-systeem",
+        "verantwoording": "Op woensdagavond 14 oktober is er een wijziging geweest in CoronIT, het systeem waarin de GGD’en coronatestuitslagen registreren. Het gevolg hiervan was dat een aantal positieve uitslagen niet is gerapporteerd aan het RIVM. Dit speelde in een aantal GGD-regio’s.\n\nNadat dit is ontdekt, zijn deze GGD’en de gemiste besmettingen alsnog gaan melden bij het RIVM. Deze zijn vervolgens verwerkt in de dagcijfers. Dit proces is uiterlijk maandag 26 oktober afgerond. Het gaat in totaal om ongeveer 1400 later gemelde positieve testuitslagen, over een periode van 12 dagen. Dit heeft geen gevolgen voor het totaalbeeld van de ontwikkeling van het aantal besmettingen. Het RIVM ziet geen grote trendmatige afwijkingen.\n\nNameldingen komen overigens zeer regelmatig voor, door diverse oorzaken. Dagcijfers kunnen door nameldingen soms sterk fluctueren. Weekcijfers bieden een beter beeld van de feitelijke ontwikkeling van het virus."
+      },
+      {
         "cijfer": "Correctie in aantal positief geteste mensen",
         "verantwoording": "Op 17 oktober 2020 is sprake van 233 nameldingen van GGD Noord-Holland Noord.\n\nVanwege een eerdere technische storing bij het RIVM ontbreekt een aantal meldingen in de rapportage van 1 september. Deze meldingen zijn opgenomen in de rapportage van 2 september. Hierdoor is het aantal nieuwe positief geteste personen gemeld op 2 september (734) bijna 300 meldingen hoger dan op 1 september (462)."
       },
