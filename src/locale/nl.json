@@ -39,6 +39,7 @@
     "links": {
       "index": "Landelijk",
       "over": "Over dit dashboard",
+      "veelgestelde_vragen": "Veelgestelde vragen",
       "meer": "Meer informatie over het coronavirus",
       "verantwoording": "Cijferverantwoording",
       "meer_href": "https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19",
@@ -180,11 +181,16 @@
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
     "barscale_keys": [
-      "0 tot 20",
-      "20 tot 40",
-      "40 tot 60",
-      "60 tot 80",
-      "80+"
+      "0 tot 10",
+      "10 tot 20",
+      "20 tot 30",
+      "30 tot 40",
+      "40 tot 50",
+      "50 tot 60",
+      "60 tot 70",
+      "70 tot 80",
+      "80 tot 90",
+      "90+"
     ],
     "cluster_datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "cluster_bron": {
@@ -424,7 +430,8 @@
     "text": "Het dashboard coronavirus geeft informatie over de ontwikkeling van het coronavirus in Nederland. Met deze informatie kunnen signalen van oplevingen worden opgepikt. Zo kunnen maatregelen genomen worden om het virus te stoppen."
   },
   "over_veelgestelde_vragen": {
-    "text": "Veelgestelde vragen",
+    "titel": "Veelgestelde vragen",
+    "paragraaf": "",
     "vragen": [
       {
         "vraag": "Wat doet dit dashboard?",
@@ -568,6 +575,11 @@
     "title": "Over het Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
     "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
     "url": "https://coronadashboard.rijksoverheid.nl/over"
+  },
+  "veelgestelde_vragen_metadata": {
+    "title": "Veelgestelde vragen Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
+    "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
+    "url": "https://coronadashboard.rijksoverheid.nl/veelgestelde-vragen"
   },
   "regionaal_metadata": {
     "title": "Regionaal Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
@@ -797,11 +809,11 @@
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
     "barscale_keys": [
-      "0 to 20",
-      "20 tot 40",
-      "40 tot 60",
-      "60 tot 80",
-      "80+"
+      "0 to 10",
+      "10 tot 20",
+      "20 tot 30",
+      "30 tot 40",
+      "40 tot 50"
     ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",

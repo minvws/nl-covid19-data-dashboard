@@ -39,6 +39,7 @@
     "links": {
       "index": "National",
       "over": "About this dashboard",
+      "veelgestelde_vragen": "Veelgestelde vragen",
       "meer": "More information on the coronavirus",
       "verantwoording": "Explanation of the data presented",
       "meer_href": "https://www.government.nl/topics/coronavirus-covid-19",
@@ -180,11 +181,16 @@
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
     "barscale_keys": [
-      "0 to 20",
-      "20 to 40",
-      "40 to 60",
-      "60 to 80",
-      "80+"
+      "0 to 10",
+      "10 to 20",
+      "20 to 30",
+      "30 to 40",
+      "40 to 50",
+      "50 to 60",
+      "60 to 70",
+      "70 to 80",
+      "80 to 90",
+      "90+"
     ],
     "cluster_datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
     "cluster_bron": {
@@ -424,7 +430,8 @@
     "text": "The coronavirus dashboard gives up-to-date information about COVID-19 in the Netherlands. Picking up signs that the rate of infection is increasing allows us to act to stop the virus from spreading."
   },
   "over_veelgestelde_vragen": {
-    "text": "Frequently asked questions",
+    "titel": "Frequently asked questions",
+    "paragraaf": "",
     "vragen": [
       {
         "vraag": "What is the dashboard for?",
@@ -568,6 +575,11 @@
     "title": "About the Coronavirus COVID-19 Dashboard | Government.nl",
     "description": "Information on the development of the coronavirus in the Netherlands.",
     "url": "https://coronadashboard.government.nl/over"
+  },
+  "veelgestelde_vragen_metadata": {
+    "title": "Veelgestelde vragen Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
+    "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
+    "url": "https://coronadashboard.government.nl/veelgestelde-vragen"
   },
   "regionaal_metadata": {
     "title": "Regional Dashboard Coronavirus COVID-19 | Government.nl",
@@ -797,11 +809,11 @@
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
     "barscale_keys": [
-      "0 to 20",
-      "20 to 40",
-      "40 to 60",
-      "60 to 80",
-      "80+"
+      "0 to 10",
+      "10 to 20",
+      "20 to 30",
+      "30 to 40",
+      "40 to 50"
     ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",

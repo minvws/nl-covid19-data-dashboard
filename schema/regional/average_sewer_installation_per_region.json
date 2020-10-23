@@ -23,6 +23,7 @@
           "type": "integer"
         },
         "vrcode": {
+          "type": "string",
           "equalsRootProperty": "code"
         },
         "average": {

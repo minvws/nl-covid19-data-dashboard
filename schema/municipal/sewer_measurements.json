@@ -24,6 +24,7 @@
           "type": "integer"
         },
         "gmcode": {
+          "type": "string",
           "equalsRootProperty": "code"
         },
         "average": {
