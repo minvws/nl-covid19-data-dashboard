@@ -1,4 +1,5 @@
 const withPlugins = require('next-compose-plugins');
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 
 const withTM = require('next-transpile-modules')([
   '@vx/tooltip',
@@ -33,6 +34,8 @@ const nextConfig = {
         test: /\.(js|ts)x?$/,
       },
     });
+
+    config.plugins.push(new LodashModuleReplacementPlugin());
 
     // if (!dev) {
     //   // Move Preact into the framework chunk instead of duplicating in routes:
