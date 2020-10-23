@@ -8,7 +8,7 @@ import chalk from 'chalk';
 
 const allJsonFiles = fs.readdirSync(jsonBasePath);
 
-// This struct defines which JSON files should be validated with which schema
+// This struct defines which JSON files should be validated with which schema.
 const schemaToJsonLookup: Record<string, string[]> = {
   national: ['NL.json'],
   ranges: ['RANGES.json'],
