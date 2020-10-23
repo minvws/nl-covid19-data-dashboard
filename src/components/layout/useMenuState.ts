@@ -1,12 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Router } from 'next/router';
+import { useRouter, Router } from 'next/router';
 
 interface MenuState {
   isMenuOpen: boolean;
   openMenu: (event?: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
-  handleMenuClick: (
-    event?: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ) => void;
 }
 
 /**
@@ -16,45 +13,66 @@ interface MenuState {
 export function useMenuState(defaultOpen = false): MenuState {
   const [isMenuOpen, setMenuOpen] = useState<boolean>(defaultOpen);
 
+  const router = useRouter();
+
+  /*
+   * Retrieve the URL for the current route with menu state,
+   * including query params.
+   */
+  function getFullMenuUrl(): string {
+    let fullMenuUrl = `${router.pathname}?menu`;
+
+    if (router.query.code) {
+      fullMenuUrl = fullMenuUrl.replace('[code]', router.query.code as string);
+    }
+
+    const queryParams = Object.entries(router.query)
+      .filter(([key]) => !['menu', 'code'].includes(key))
+      .map(([key, value]) => {
+        return [
+          encodeURIComponent(key),
+          encodeURIComponent(value as string),
+        ].join('=');
+      })
+      .join('&');
+
+    if (queryParams) {
+      fullMenuUrl += `&${queryParams}`;
+    }
+
+    return fullMenuUrl;
+  }
+
   const openMenu = (
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent> | undefined
   ): void => {
     event?.preventDefault();
-    setMenuOpen(true);
 
-    /* Ensure the top of the main navigation (or if not found: the sidebar) is in view */
-    requestAnimationFrame(() => {
-      window.document
-        .querySelector('#main-navigation,aside')
-        ?.scrollIntoView(true);
-    });
+    const fullMenuUrl = getFullMenuUrl();
+    router.push(router.pathname, fullMenuUrl, { shallow: true });
   };
 
-  const handleMenuClick = (
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent> | undefined
-  ) => {
-    event?.currentTarget?.blur();
+  const setMenuFromRouterState = (url: string) => {
+    setMenuOpen(url.includes('?menu'));
   };
 
   /**
    * Handle the closing of the menu
-   * If closed with handleMenuClick the menu would open too soon
+   * If closed with blur the menu would open too soon
    * This closes the menu at the moment the content is loaded and displayed,
    * (just as non-JS would kept displayed)
    * */
   useEffect(() => {
-    const handleCloseMenu = () => {
-      setMenuOpen(false);
-    };
-    Router.events.on('beforeHistoryChange', handleCloseMenu);
+    Router.events.on('beforeHistoryChange', setMenuFromRouterState);
+    Router.events.on('routeChangeComplete', setMenuFromRouterState);
     return () => {
-      Router.events.off('beforeHistoryChange', handleCloseMenu);
+      Router.events.off('beforeHistoryChange', setMenuFromRouterState);
+      Router.events.off('routeChangeComplete', setMenuFromRouterState);
     };
   }, []);
 
   return {
     isMenuOpen,
     openMenu,
-    handleMenuClick,
   };
 }
