@@ -434,6 +434,10 @@
     "paragraaf": "The dashboard presents a variety of data that give us an idea of how we are managing the COVID-19 epidemic. In this section we explain how we arrive at this data.",
     "cijfers": [
       {
+        "cijfer": "Nameldingen besmettingen door wijziging GGD-systeem",
+        "verantwoording": "Op woensdagavond 14 oktober is er een wijziging geweest in CoronIT, het systeem waarin de GGD’en coronatestuitslagen registreren. Het gevolg hiervan was dat een aantal positieve uitslagen niet is gerapporteerd aan het RIVM. Dit speelde in een aantal GGD-regio’s.\n\nNadat dit is ontdekt, zijn deze GGD’en de gemiste besmettingen alsnog gaan melden bij het RIVM. Deze zijn vervolgens verwerkt in de dagcijfers. Dit proces is uiterlijk maandag 26 oktober afgerond. Het gaat in totaal om ongeveer 1400 later gemelde positieve testuitslagen, over een periode van 12 dagen. Dit heeft geen gevolgen voor het totaalbeeld van de ontwikkeling van het aantal besmettingen. Het RIVM ziet geen grote trendmatige afwijkingen.\n\nNameldingen komen overigens zeer regelmatig voor, door diverse oorzaken. Dagcijfers kunnen door nameldingen soms sterk fluctueren. Weekcijfers bieden een beter beeld van de feitelijke ontwikkeling van het virus."
+      },
+      {
         "cijfer": "Correction in the number of confirmed cases",
         "verantwoording": "On 17 october 2020 there are 233 additional cases reported from the municipal health service Noord-Holland Noord due to an administrative delay.\n\nDue to a technical malfunction there were a number of confirmed cases missing in the reports of 1 september 2020. These have been included in the report of 2 september 2020. This means the new number of confirmed cases on 2 september 2020 (734) includes around 300 additional reports from 1 september 2020 (462)."
       },
