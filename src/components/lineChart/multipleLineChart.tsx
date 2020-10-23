@@ -22,7 +22,7 @@ type LineConfig = {
 
 const SIGNAALWAARDE_Z_INDEX = 5;
 
-const secondsInSixDays = 518400;
+const sixDaysInSeconds = 518400;
 
 interface LineChartProps {
   title: string;
@@ -97,7 +97,7 @@ function getChartOptions(
           ((this.points as any[])[1].y * 100) / (this.points as any[])[0].y;
 
         return `${formatDateFromSeconds(
-          +this.x - +secondsInSixDays
+          +this.x - +sixDaysInSeconds
         )} - ${formatDateFromSeconds(+this.x)}<br/>
         <span style="height: 0.5em;width: 0.5em;background-color: ${
           linesConfig[0].color

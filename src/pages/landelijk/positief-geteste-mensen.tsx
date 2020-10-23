@@ -170,7 +170,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           value: value.infected_daily_increase,
           date: value.date_of_report_unix,
         }))}
-      ></LineChartTile>
+      />
 
       <KpiSection>
         <Box flex="0 0 50%">
