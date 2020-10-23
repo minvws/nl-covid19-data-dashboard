@@ -797,11 +797,11 @@
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
     "barscale_keys": [
-      "0 to 20",
-      "20 tot 40",
-      "40 tot 60",
-      "60 tot 80",
-      "80+"
+      "0 to 10",
+      "10 tot 20",
+      "20 tot 30",
+      "30 tot 40",
+      "40 tot 50"
     ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
