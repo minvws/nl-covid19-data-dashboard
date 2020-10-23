@@ -37,6 +37,7 @@ import { ResultsPerRegion } from '~/types/data.d';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { LineChartTile } from '~/components-styled/line-chart-tile';
 
 const text = siteText.veiligheidsregio_positief_geteste_personen;
 const ggdText = siteText.veiligheidsregio_positief_geteste_personen_ggd;
@@ -118,17 +119,15 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
         </KpiTile>
       </TwoKpiSection>
 
-      <KpiSection>
-        <LineChart
-          title={text.linechart_titel}
-          description={text.linechart_toelichting}
-          values={resultsPerRegion.values.map((value) => ({
-            value: value.infected_increase_per_region,
-            date: value.date_of_report_unix,
-          }))}
-          signaalwaarde={7}
-        />
-      </KpiSection>
+      <LineChartTile
+        title={text.linechart_titel}
+        description={text.linechart_toelichting}
+        signaalwaarde={7}
+        values={resultsPerRegion.values.map((value) => ({
+          value: value.infected_increase_per_region,
+          date: value.date_of_report_unix,
+        }))}
+      />
 
       <ChoroplethSection>
         <ChoroplethHeader>
