@@ -57,8 +57,6 @@
       "text": "Stichting NICE"
     },
     "titel": "Intensive care-opnames per dag",
-    "titel_sidebar": "Intensive care-opnames",
-    "titel_kpi": "Intensive care-opnames per dag",
     "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag op de intensive care is opgenomen.",
     "barscale_titel": "Intensive care-opnames per dag",
     "barscale_screenreader_text": "{{value}} intensive care-opnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
@@ -85,7 +83,9 @@
     "metadata": {
       "title": "Intensive care-opnames | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Landelijk overzicht van het aantal mensen met bevestigd COVID-19 dat per dag op een intensive care-afdeling van een ziekenhuis is opgenomen."
-    }
+    },
+    "titel_sidebar": "Intensive care-opnames",
+    "titel_kpi": "Intensive care-opnames per dag"
   },
   "verdenkingen_huisartsen": {
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
@@ -103,13 +103,13 @@
     "linechart_titel": "Verloop over tijd",
     "barscale_screenreader_text": "{{value}} patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten, per 100.000 inwoners, per week.",
     "titel_sidebar": "Huisartsverdenkingen",
-    "titel_kpi": "Patiënten met eerste melding van COVID-19 klachten bij de huisarts",
     "metadata": {
       "title": "Aantal meldingen COVID-19 verdenking van huisartsen | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Landelijk overzicht van het geschat aantal patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten per week."
     },
     "normalized_kpi_titel": "Gemiddeld aantal patiënten met verdenking van COVID-19 per 100.000 inwoners",
-    "normalized_kpi_toelichting": "Geschat aantal patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten per week."
+    "normalized_kpi_toelichting": "Geschat aantal patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten per week.",
+    "titel_kpi": "Patiënten met eerste melding van COVID-19 klachten bij de huisarts"
   },
   "ziekenhuisopnames_per_dag": {
     "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
@@ -118,8 +118,6 @@
       "text": "Stichting NICE"
     },
     "titel": "Ziekenhuisopnames per dag",
-    "titel_sidebar": "Ziekenhuisopnames",
-    "titel_kpi": "Ziekenhuisopnames per dag",
     "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen.\n\nLet op: Sinds 13 oktober wordt een nieuwe bron gebruikt voor de ziekenhuisopnames. Lees meer in de cijferverantwoording.",
     "barscale_titel": "Ziekenhuisopnames per dag",
     "extra_uitleg": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis (exclusief IC) is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen.\n\nLet op: Hoewel ziekenhuizen proberen om COVID-19 patiënten snel te registreren, is het aannemelijk dat de registratie achter loopt. Om deze reden zijn de aantallen van de afgelopen dagen meestal nog onvolledig.",
@@ -157,7 +155,9 @@
     "metadata": {
       "title": "Ziekenhuisopnames | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Landelijk overzicht van het aantal mensen met COVID-19 dat een ziekenhuis is opgenomen."
-    }
+    },
+    "titel_sidebar": "Ziekenhuisopnames",
+    "titel_kpi": "Ziekenhuisopnames per dag"
   },
   "positief_geteste_personen": {
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -205,11 +205,11 @@
       "geen_meldingen": "Geen meldingen"
     },
     "titel_sidebar": "Positieve testen",
-    "titel_kpi": "Positief geteste mensen per dag",
     "metadata": {
       "title": "Positief geteste mensen | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Landelijk overzicht van inwoners die positief getest zijn en COVID-19 hebben."
-    }
+    },
+    "titel_kpi": "Positief geteste mensen per dag"
   },
   "besmettelijke_personen": {
     "title": "Aantal besmettelijke mensen",
@@ -231,12 +231,12 @@
     "cijfer_toelichting": "Een schatting van hoeveel mensen met COVID-19 besmettelijk zijn voor anderen. Dit getal wordt door het RIVM berekend.",
     "linechart_titel": "Verloop over tijd",
     "titel_sidebar": "Besmettelijke mensen",
-    "titel_kpi": "Aantal besmettelijke mensen",
     "metadata": {
       "title": "Besmettelijke mensen | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Landelijk overzicht van hoeveel mensen met COVID-19 besmettelijk zijn voor anderen. Dit getal wordt door het RIVM berekend."
     },
-    "barscale_toelichting": "Een berekening van hoeveel mensen met COVID-19 per 100.000 inwoners besmettelijk zijn voor anderen. Dit getal wordt door het RIVM berekend."
+    "barscale_toelichting": "Een berekening van hoeveel mensen met COVID-19 per 100.000 inwoners besmettelijk zijn voor anderen. Dit getal wordt door het RIVM berekend.",
+    "titel_kpi": "Aantal besmettelijke mensen"
   },
   "reproductiegetal": {
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
@@ -250,8 +250,6 @@
     "legenda_marge": "De onzekerheidsmarge toont tussen welke waarden de R zich bevindt. Dit wordt wekelijks bijgewerkt.",
     "reproductie_explainer_alt": "Ondersteunende afbeelding bij bovenstaande uitleg",
     "titel": "Reproductiegetal",
-    "titel_sidebar": "Reproductiegetal",
-    "titel_kpi": "Effectieve reproductiegetal",
     "pagina_toelichting": "Het reproductiegetal laat zien hoe snel het virus zich verspreidt. Dit getal geeft aan hoeveel mensen gemiddeld besmet worden door één patiënt met COVID-19.",
     "barscale_titel": "Meest recente reproductiegetal",
     "barscale_toelichting": "Aantal mensen dat besmet wordt door één besmettelijke persoon.",
@@ -261,7 +259,9 @@
     "metadata": {
       "title": "Reproductiegetal | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Het reproductiegetal laat zien hoe snel het virus zich verspreidt. Dit getal geeft aan hoeveel mensen gemiddeld besmet worden door één patiënt met COVID-19."
-    }
+    },
+    "titel_sidebar": "Reproductiegetal",
+    "titel_kpi": "Effectieve reproductiegetal"
   },
   "overige_gegevens": {
     "title": "Nog te ontwikkelen",
@@ -315,8 +315,6 @@
       "text": "RIVM"
     },
     "titel": "Besmette locaties",
-    "titel_sidebar": "Besmette locaties",
-    "titel_kpi": "Aantal besmette locaties",
     "pagina_toelichting": "Dit getal is een inschatting van het aantal nieuwe verpleeghuislocaties waar sprake is van tenminste een COVID-19 besmetting op basis van een positieve test.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de cijferverantwoording.",
     "barscale_titel": "Aantal nieuwe locaties per dag",
     "barscale_toelichting": "Aantal nieuwe locaties waarbij tenminste één bewoner positief getest is. Een verpleeghuis wordt meegeteld als ‘nieuwe locatie’ wanneer er tenminste 28 dagen, dit is twee keer de incubatietijd, geen nieuwe patiënten zijn geweest.",
@@ -333,7 +331,9 @@
     "metadata": {
       "title": "Besmette verpleeghuizen | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Landelijk overzicht van verpleeghuislocaties waar tenminste één COVID-19 besmetting is vastgesteld."
-    }
+    },
+    "titel_sidebar": "Besmette locaties",
+    "titel_kpi": "Aantal besmette locaties"
   },
   "verpleeghuis_positief_geteste_personen": {
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -348,7 +348,6 @@
     "linechart_titel": "Verloop over tijd",
     "barscale_screenreader_text": "{{value}} positief geteste bewoners.",
     "titel_sidebar": "Positief geteste bewoners",
-    "titel_kpi": "Aantal positief geteste bewoners per dag",
     "chloropleth_legenda": {
       "titel": "Aantal per 100.000 inwoners",
       "geen_meldingen": "Geen meldingen"
@@ -358,7 +357,8 @@
     "metadata": {
       "title": "Positief geteste bewoners verpleeghuizen | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Landelijk overzicht van het aantal bewoners van verpleeghuizen die positief getest zijn en COVID-19 hebben."
-    }
+    },
+    "titel_kpi": "Aantal positief geteste bewoners per dag"
   },
   "verpleeghuis_oversterfte": {
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -375,11 +375,11 @@
     "map_titel": "Verpleeghuis oversterfte in Nederland",
     "map_toelichting": "Deze grafieken laten zien hoe de oversterfte in verpleeghuizen is in Nederland per dag.",
     "titel_sidebar": "Sterfte",
-    "titel_kpi": "Sterfte per dag",
     "metadata": {
       "title": "Overleden bewoners verpleeghuizen | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Landelijk aantal gemelde verpleeghuisbewoners dat in Nederland overlijdt aan de gevolgen van het coronavirus."
-    }
+    },
+    "titel_kpi": "Sterfte per dag"
   },
   "blok_verpleeghuis_zorg": {
     "title": "Verpleeghuiszorg",
@@ -395,8 +395,6 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
     },
     "titel": "Rioolwatermeting",
-    "titel_sidebar": "Rioolwatermeting",
-    "titel_kpi": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater",
     "pagina_toelichting": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater, afkomstig van circa 300 locaties in Nederland. Voor het landelijke cijfer wordt uitgegaan van het totaal aantal gemeten virusdeeltjes dat wordt aangetroffen in een week, gedeeld door het aantal metingen.",
     "barscale_titel": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater",
     "extra_uitleg": "Voor het landelijke cijfer wordt uitgegaan van het totaal aantal gemeten virusdeeltjes dat wordt aangetroffen in een week, gedeeld door het aantal metingen.",
@@ -405,7 +403,9 @@
     "metadata": {
       "title": "Rioolwatermeting | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater, afkomstig van circa 300 locaties in Nederland."
-    }
+    },
+    "titel_sidebar": "Rioolwatermeting",
+    "titel_kpi": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater"
   },
   "notfound_titel": {
     "text": "Er is iets misgegaan"
@@ -492,8 +492,8 @@
     "paragraaf": "In dit dashboard staan verschillende cijfers die ons vertellen hoe het ervoor staat met beheersen van COVID-19. Op deze plek geven we meer toelichting over de wijze waarop de cijfers zijn samengesteld.",
     "cijfers": [
       {
-        "cijfer": "Correctie cijfers 2 september in aantal positief geteste mensen",
-        "verantwoording": "Vanwege een eerdere technische storing bij het RIVM ontbreekt een aantal meldingen in de rapportage van 1 september. Deze meldingen zijn opgenomen in de rapportage van 2 september. Hierdoor is het aantal nieuwe positief geteste personen gemeld op 2 september (734) bijna 300 meldingen hoger dan op 1 september (462)."
+        "cijfer": "Correctie in aantal positief geteste mensen",
+        "verantwoording": "Op 17 oktober 2020 is sprake van 233 nameldingen van GGD Noord-Holland Noord.\n\nVanwege een eerdere technische storing bij het RIVM ontbreekt een aantal meldingen in de rapportage van 1 september. Deze meldingen zijn opgenomen in de rapportage van 2 september. Hierdoor is het aantal nieuwe positief geteste personen gemeld op 2 september (734) bijna 300 meldingen hoger dan op 1 september (462)."
       },
       {
         "cijfer": "Intensive care-bezetting",
@@ -501,7 +501,7 @@
       },
       {
         "cijfer": "Ziekenhuisopnames",
-        "verantwoording": "Deze gegevens worden dagelijks aangeleverd als [open data bestand](https://stichting-nice.nl/covid-19/public/zkh/new-intake/confirmed) door Stichting Nationale Intensive Care Evaluatie (NICE), een samenwerkingsverband van intensivecareafdelingen van Nederlandse ziekenhuizen. Dit bestand wordt continu bijgewerkt en elke middag éénmaal door het dashboard overgenomen. Aan de hand van de data wordt het gemiddelde berekend van de afgelopen drie dagen (gisteren, eergisteren en de dag daarvoor). Let op dat hierbij dus niet ziekenhuisopnames van de lopende dag (vandaag) worden meegenomen. Dit omdat die dag nog niet verstreken is en daardoor de registratie van vandaag nog zeer onvolledig zal zijn. Hoewel ziekenhuizen proberen om COVID-19 patiënten snel te registreren, is het aannemelijk dat de registratie achter loopt. Om deze reden zijn de aantallen van de afgelopen dagen meestal ook nog onvolledig. Deze gegevens worden op het dashboard daarom elke dag ververst.\n\nVoorheen gebruikte het dashboard een [open data bestand](https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv) van het RIVM voor ziekenhuisopnames. Deze is gebaseerd op de Osiris database. Echter is hier sprake van aanzienlijke onderrapportage. Het bestand van NICE is completer, maar hanteert ook een ruimere definitie van ziekenhuisopname. Het RIVM rapport neemt alleen de patiënten mee die vanwege COVID-19 in het ziekenhuis liggen, terwijl NICE dat onderscheid niet maakt en dus ook ziekenhuisopnames van patiënten met COVID-19 die om een andere reden in het ziekenhuis zijn opgenomen, meeneemt. \n\nNICE gegevens kunnen op dit moment nog niet vertaald worden naar gegevens op veiligheidsregio en gemeenteniveau. Voor deze niveaus wordt daarom nog gebruik gemaakt van gegevens uit Osiris. Er wordt aan gewerkt om ook op deze niveaus de data van Stichting NICE te kunnen tonen. \n\nDe bezetting van ziekenhuisbedden (exclusief IC-bedden) wordt dagelijks verkregen via de website van het [LCPS](https://lcps.nu/wp-content/uploads/covid-19.csv)."
+        "verantwoording": "Deze gegevens worden dagelijks aangeleverd als [open data bestand](https://stichting-nice.nl/covid-19/public/zkh/new-intake/confirmed) door Stichting Nationale Intensive Care Evaluatie (NICE), een samenwerkingsverband van intensivecareafdelingen van Nederlandse ziekenhuizen. Dit bestand wordt continu bijgewerkt en elke middag éénmaal door het dashboard overgenomen. Aan de hand van de data wordt het gemiddelde berekend van de afgelopen drie dagen (gisteren, eergisteren en de dag daarvoor). Let op dat hierbij dus niet ziekenhuisopnames van de lopende dag (vandaag) worden meegenomen. Dit omdat die dag nog niet verstreken is en daardoor de registratie van vandaag nog zeer onvolledig zal zijn. Hoewel ziekenhuizen proberen om COVID-19 patiënten snel te registreren, is het aannemelijk dat de registratie achter loopt. Om deze reden zijn de aantallen van de afgelopen dagen meestal ook nog onvolledig. Deze gegevens worden op het dashboard daarom elke dag ververst.\n\nVoorheen gebruikte het dashboard een [open data bestand](https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv) van het RIVM voor ziekenhuisopnames. Deze is gebaseerd op de Osiris database. Echter is hier sprake van aanzienlijke onderrapportage. Het bestand van NICE is completer, maar hanteert ook een ruimere definitie van ziekenhuisopname. Het RIVM rapport neemt alleen de patiënten mee die vanwege COVID-19 in het ziekenhuis liggen, terwijl NICE dat onderscheid niet maakt en dus ook ziekenhuisopnames van patiënten met COVID-19 die om een andere reden in het ziekenhuis zijn opgenomen, meeneemt. \n\nNICE gegevens kunnen op dit moment nog niet vertaald worden naar gegevens op veiligheidsregio en gemeenteniveau. Voor deze niveaus wordt daarom nog gebruik gemaakt van gegevens uit Osiris. Er wordt aan gewerkt om ook op deze niveaus de data van Stichting NICE te kunnen tonen. \n\nDe bezetting van ziekenhuisbedden (exclusief IC-bedden) wordt dagelijks verkregen via de website van het [LCPS](https://lcps.nu/wp-content/uploads/covid-19.csv). De bedbezetting cijfers van vóór 1 juni zijn niet beschikbaar omdat bepaalde kwaliteitscontroles niet hebben plaatsgevonden vóór deze datum. Daardoor kunnen deze gegevens onvolkomenheden bevatten en worden die niet door het LCPS gepubliceerd."
       },
       {
         "cijfer": "Aantal positief geteste mensen",
@@ -512,20 +512,12 @@
         "verantwoording": "Deze gegevens worden wekelijks (op dinsdag) aangeleverd als open data door het [RIVM](https://data.rivm.nl/covid-19/COVID-19_reproductiegetal.json). De waarden zoals weergeven in het bestand worden direct overgenomen op het dashboard. Het reproductiegetal is geen exacte waarde maar een betrouwbare schatting. Voor Rt schattingen minder dan twee weken geleden is de betrouwbaarheid niet groot, omdat de Rt afhangt van de tijd tussen infectie en ziek worden (incubatieperiode) en de tijd tussen ziek worden en melding (rapportagevertraging). Daarom loopt de R-lijn niet door in de laatste twee weken.\n\nOp 11 juni is er een trendbreuk zichtbaar. Vanaf deze datum wordt de R berekend op basis van het aantal positief geteste mensen met COVID-19 en het aantal ziekenhuisopnames. Voorheen werd dit berekend op basis van alleen het aantal nieuwe ziekenhuisopnames. Bij een laag aantal nieuwe ziekenhuisopnames, is het aantal positief geteste mensen een betere basis voor deze berekening."
       },
       {
-        "cijfer": "Andere data en signaalindicatoren",
-        "verantwoording": "Deze informatie is niet beschikbaar in dit dashboard en nog niet gedeeld met het Ministerie van VWS. Deze zijn daarom niet in dit dashboard opgenomen."
-      },
-      {
         "cijfer": "Verpleeghuiszorg",
-        "verantwoording": "De informatie over verpleeghuiszorg wordt dagelijks beschikbaar gesteld door het RIVM en aangeleverd bij het ministerie van VWS. In de aangeleverde gegevens is soms de veiligheidsregio onbekend. Dit heeft als gevolg dat het totaal van de weergegeven cijfers op veiligheidsregio niveau, minder kan zijn dan wat er op landelijk niveau wordt getoond. Het aantal overleden verpleeghuisbewoners wordt getoond op basis van de datum van overlijden. De overlijdensdatum is echter niet altijd bekend. Als dit zo is, dan zijn die gevallen niet op het dashboard zichtbaar.\n\nDe manier waarop ingeschat wordt hoeveel verpleeghuisbewoners en verpleeghuislocaties zijn besmet met corona is verbeterd. Sinds 1 juli registreren de GGD’en bij iedere melding of een nieuw besmette persoon in een verpleeghuis woont. Tot eind september 2020 werd deze informatie echter niet benut en werden de aantallen via een andere methode geschat. Dit leidde tot een flinke overschatting van het aantal besmette verpleeghuislocaties. De cijfers op het dashboard geven daardoor vanaf 29 september - met terugwerkende kracht vanaf 1 juli - een veel beter beeld van het werkelijke aantal besmette personen en verpleeghuislocaties.\n\nOude definitie verpleeghuisbewoner: Iemand wordt als een verpleeghuisbewoner geteld wanneer deze volgens het centrale administratiesysteem (OSIRIS): Op basis van zijn postcode gekoppeld kan worden aan een bekende verpleeghuislocatie of woonzorgcentrum voor ouderen óf een setting (plaats waar de besmetting mogelijk heeft plaatsgevonden) ‘Verpleeghuis’ of een daaraan gerelateerde term heeft óf aan de hand van een andere term in het systeem in verband gebracht kan worden aan een verpleeghuis of woonzorgcentrum voor ouderen. Daarnaast moet de persoon\n- ouder zijn dan 70 jaar én\n- geen gezondheidsmedewerker zijn én\n- geen beroep hebben.\n\nNieuwe definitie verpleeghuisbewoner: Sinds 1 juli vraagt de GGD voor iedere nieuw positief geteste persoon of dit een verpleeghuisbewoner of een bewoner van een woonzorgcentrum voor ouderen is. Deze informatie wordt gebruikt voor de nieuwe definitie. Iemand wordt als een verpleeghuisbewoner aangemerkt wanneer deze volgens de gegevens van OSIRIS\n- Een bewoner is van een verpleeghuis of van een woonzorgcentrum voor ouderen.\n- Indien het onbekend is of een persoon in een verpleeghuis of een woonzorgcentrum voor ouderen woont, wordt de oude definitie gebruikt.\n\nHet totaal aantal verpleeghuislocaties per veiligheidsregio is door het RIVM aangeleverd. Eventuele verpleeghuizen met dezelfde postcode worden hierbij gerekend tot één verpleeghuislocatie. Dit is gedaan omdat het aantal besmette locaties ook met dezelfde logica wordt bepaald. Het totaal aantal verpleeghuislocaties per veiligheidsregio is nodig om het percentage besmette verpleeghuislocaties te berekenen. Voor het landelijke totaal aantal verpleeghuislocaties, worden de totalen van alle veiligheidsregio's bij elkaar opgeteld."
-      },
-      {
-        "cijfer": "",
-        "verantwoording": ""
+        "verantwoording": "De informatie over verpleeghuiszorg wordt dagelijks beschikbaar gesteld door het RIVM en aangeleverd bij het ministerie van VWS. In de aangeleverde gegevens is soms de veiligheidsregio onbekend. Dit heeft als gevolg dat het totaal van de weergegeven cijfers op veiligheidsregio niveau, minder kan zijn dan wat er op landelijk niveau wordt getoond. Het aantal overleden verpleeghuisbewoners wordt getoond op basis van de datum van overlijden. De overlijdensdatum is echter niet altijd bekend. Als dit zo is, dan zijn die gevallen niet op het dashboard zichtbaar.\n\nDe manier waarop ingeschat wordt hoeveel verpleeghuisbewoners en verpleeghuislocaties zijn besmet met corona is verbeterd. Sinds 1 juli registreren de GGD’en bij iedere melding of een nieuw besmette persoon in een verpleeghuis woont. Tot eind september 2020 werd deze informatie echter niet benut en werden de aantallen via een andere methode geschat. Dit leidde tot een flinke overschatting van het aantal besmette verpleeghuislocaties. De cijfers op het dashboard geven daardoor vanaf 29 september - met terugwerkende kracht vanaf 1 juli - een veel beter beeld van het werkelijke aantal besmette personen en verpleeghuislocaties.\n\nOude definitie verpleeghuisbewoner: Iemand wordt als een verpleeghuisbewoner geteld wanneer deze volgens het centrale administratiesysteem (OSIRIS): Op basis van zijn postcode gekoppeld kan worden aan een bekende verpleeghuislocatie of woonzorgcentrum voor ouderen óf een setting (plaats waar de besmetting mogelijk heeft plaatsgevonden) ‘Verpleeghuis’ of een daaraan gerelateerde term heeft óf aan de hand van een andere term in het systeem in verband gebracht kan worden aan een verpleeghuis of woonzorgcentrum voor ouderen. Daarnaast moet de persoon\n- ouder zijn dan 70 jaar én\n- geen gezondheidsmedewerker zijn én\n- geen beroep hebben.\n\nNieuwe definitie verpleeghuisbewoner: Sinds 1 juli vraagt de GGD voor iedere nieuw positief geteste persoon of dit een verpleeghuisbewoner of een bewoner van een woonzorgcentrum voor ouderen is. Deze informatie wordt gebruikt voor de nieuwe definitie. Iemand wordt als een verpleeghuisbewoner aangemerkt wanneer deze volgens de gegevens van OSIRIS\n- Een bewoner is van een verpleeghuis of van een woonzorgcentrum voor ouderen.\n- Indien het onbekend is of een persoon in een verpleeghuis of een woonzorgcentrum voor ouderen woont, wordt de oude definitie gebruikt.\n\nHet totaal aantal verpleeghuislocaties per veiligheidsregio is door het RIVM aangeleverd. Eventuele verpleeghuizen met dezelfde postcode worden hierbij gerekend tot één verpleeghuislocatie. Dit is gedaan omdat het aantal besmette locaties ook met dezelfde logica wordt bepaald. Het totaal aantal verpleeghuislocaties per veiligheidsregio is nodig om het percentage besmette verpleeghuislocaties te berekenen. Voor het landelijke totaal aantal verpleeghuislocaties, worden de totalen van alle veiligheidsregio's bij elkaar opgeteld.\n"
       },
       {
         "cijfer": "Aantal besmettelijke mensen",
-        "verantwoording": "Deze gegevens worden wekelijks (op dinsdag) aangeleverd als open data door het [RIVM](https://data.rivm.nl/covid-19/COVID-19_prevalentie.json). De waarden zoals weergeven in het bestand worden direct overgenomen op het dashboard. Daarnaast berekenen we op basis van de absolute aantallen het genormaliseerde aantal besmettelijke mensen. Dit doen we door het aantal inwoners van Nederland te delen door 100.000. Vervolgens gebruiken we het getal dat daaruit komt en delen we het absolute aantal zoals aangeven in het bronbestand. De uitkomst hiervan vormt het getal per 100.000.\n\nHet RIVM baseert de berekening achter het aantal besmettelijke mensen op het aantal meldingen van COVID-19 per dag. Tot 30 juni was deze gebaseerd op het aantal mensen met COVID-19 dat per dag werd opgenomen op de intensive care. Omdat het aantal intensive care opnamen laag is, is het aantal COVID-19 meldingen een meer geschikte indicator om het tijdsverloop in aantal besmettelijke mensen te volgen. Het geschat aantal besmettelijke mensen wordt door het RIVM berekend op basis van het aantal besmettingen en de duur van de besmettelijke periode. De duur van de besmettelijke periode is per persoon verschillend. Deze kan variëren tussen 6 en 10 dagen. Het aantal besmettingen baseert het RIVM op het aantal COVID-19 meldingen. Ook gebruikt het RIVM een omrekenfactor om rekening te houden met het aantal besmettingen dat niet gemeld wordt. De omrekenfactor leidt het RIVM af uit de waargenomen ziekenhuisopnames met COVID 19 en uit het percentage van de mensen met antistoffen in het bloed tegen het virus dat COVID19 veroorzaakt. Het RIVM houdt er rekening mee dat een heel klein percentage van de testen een onterechte positieve uitslag kan geven.\n\nVoor het aantal besmettelijke mensen is geen signaalwaarde beschikbaar omdat dit aantal een inschatting is gebaseerd op een berekening.\n\nDe rekenmethode van het aantal besmettelijke personen is op 13 oktober verder verbeterd. Tussen 1 juni tot 13 oktober werd dit cijfer berekend op basis van de data uit de eerste ronde van het [Pienter Corona onderzoek] (hyperlink: https://www.rivm.nl/pienter-corona-studie), het aantal ziekenhuisopnames en het aantal positieve testen. Vanaf 13 oktober wordt dit cijfer berekend op basis van de data uit de tweede ronde van het Pienter Corona onderzoek en het aantal ziekenhuisopnames. In de tweede ronde van het Pienter Corona onderzoek is een grotere groep mensen op een besmetting met het virus onderzocht. Ook is er meer inzicht gekregen of en hoe besmettelijk COVID-19-patienten zijn."
+        "verantwoording": "Deze gegevens worden wekelijks (op dinsdag) aangeleverd als open data door het [RIVM](https://data.rivm.nl/covid-19/COVID-19_prevalentie.json). De waarden zoals weergeven in het bestand worden direct overgenomen op het dashboard. Daarnaast berekenen we op basis van de absolute aantallen het genormaliseerde aantal besmettelijke mensen. Dit doen we door het aantal inwoners van Nederland te delen door 100.000. Vervolgens gebruiken we het getal dat daaruit komt en delen we het absolute aantal zoals aangeven in het bronbestand. De uitkomst hiervan vormt het getal per 100.000.\n\nHet RIVM baseert de berekening achter het aantal besmettelijke mensen op het aantal meldingen van COVID-19 per dag. Tot 30 juni was deze gebaseerd op het aantal mensen met COVID-19 dat per dag werd opgenomen op de intensive care. Omdat het aantal intensive care opnamen laag is, is het aantal COVID-19 meldingen een meer geschikte indicator om het tijdsverloop in aantal besmettelijke mensen te volgen. Het geschat aantal besmettelijke mensen wordt door het RIVM berekend op basis van het aantal besmettingen en de duur van de besmettelijke periode. De duur van de besmettelijke periode is per persoon verschillend. Deze kan variëren tussen 6 en 10 dagen. Het aantal besmettingen baseert het RIVM op het aantal COVID-19 meldingen. Ook gebruikt het RIVM een omrekenfactor om rekening te houden met het aantal besmettingen dat niet gemeld wordt. De omrekenfactor leidt het RIVM af uit de waargenomen ziekenhuisopnames met COVID 19 en uit het percentage van de mensen met antistoffen in het bloed tegen het virus dat COVID19 veroorzaakt. Het RIVM houdt er rekening mee dat een heel klein percentage van de testen een onterechte positieve uitslag kan geven.\n\nVoor het aantal besmettelijke mensen is geen signaalwaarde beschikbaar omdat dit aantal een inschatting is gebaseerd op een berekening.\n\nDe rekenmethode van het aantal besmettelijke personen is op 13 oktober verder verbeterd. Tussen 1 juni tot 13 oktober werd dit cijfer berekend op basis van de data uit de eerste ronde van het [Pienter Corona onderzoek] (https://www.rivm.nl/pienter-corona-studie), het aantal ziekenhuisopnames en het aantal positieve testen. Vanaf 13 oktober wordt dit cijfer berekend op basis van de data uit de tweede ronde van het Pienter Corona onderzoek en het aantal ziekenhuisopnames. In de tweede ronde van het Pienter Corona onderzoek is een grotere groep mensen op een besmetting met het virus onderzocht. Ook is er meer inzicht gekregen of en hoe besmettelijk COVID-19-patienten zijn."
       },
       {
         "cijfer": "Aantal patiënten met eerste melding van COVID-19 klachten bij de huisarts",
@@ -537,15 +529,23 @@
       },
       {
         "cijfer": "“Waarde van” en “Verkregen”",
-        "verantwoording": "\"In de tegels van het dashboard wordt de term “Waarde van” gebruikt om aan te geven op wanneer de getoonde waarde betrekking heeft. De term “Verkregen op” wordt gebruikt om aan te geven wanneer de data is ontvangen. Het doel is duidelijker te maken hoe actueel de data is, met name voor indicatoren die altijd terugkijken. Reproductiegetal R bijvoorbeeld wordt één keer per week gepubliceerd door het RIVM maar de waarde voor de laatste bekende R betreft altijd een datum van twee weken geleden. We melden dan bij “Waarde van” de datum van twee weken geleden en “Verkregen op” wanneer de R-waarde voor het laatst is gepubliceerd is door het RIVM (deze week)."
+        "verantwoording": "In de tegels van het dashboard wordt de term “Waarde van” gebruikt om aan te geven op wanneer de getoonde waarde betrekking heeft. De term “Verkregen op” wordt gebruikt om aan te geven wanneer de data is ontvangen. Het doel is duidelijker te maken hoe actueel de data is, met name voor indicatoren die altijd terugkijken. Reproductiegetal R bijvoorbeeld wordt één keer per week gepubliceerd door het RIVM maar de waarde voor de laatste bekende R betreft altijd een datum van twee weken geleden. We melden dan bij “Waarde van” de datum van twee weken geleden en “Verkregen op” wanneer de R-waarde voor het laatst is gepubliceerd is door het RIVM (deze week)."
       },
       {
         "cijfer": "Open source data verwerking",
         "verantwoording": "Dit dashboard is in korte tijd tot stand gekomen. Het is daarom nog niet gelukt om de code voor het inlezen van de data en het construeren van de JSON- bestanden open source beschikbaar te stellen. Dit zal binnen afzienbare tijd beschikbaar worden gesteld. De code van de webapplicatie is op 5 juni 2020 gepubliceerd op [GitHub](https://github.com/minvws/nl-covid19-data-dashboard). De [databerekeningen](https://github.com/minvws/nl-covid19-data-backend-processing) zijn ook beschikbaar via Github."
       },
       {
-        "cijfer": "Update 31 juli over signaalwaarde aantal besmettelijke personen",
-        "verantwoording": "Oorspronkelijk is op het dashboard gecommuniceerd dat er een signaalwaarde zou komen voor het aantal besmettelijke personen. Op advies van de modelleurs van het RIVM wordt deze niet aan het dashboard toegevoegd. Dit omdat dit een inschatting is die niet puur op berekeningen berust maar ook op aannames, zoals over infectieuze periode."
+        "cijfer": "",
+        "verantwoording": ""
+      },
+      {
+        "cijfer": "",
+        "verantwoording": ""
+      },
+      {
+        "cijfer": "",
+        "verantwoording": ""
       },
       {
         "cijfer": "",
@@ -658,7 +658,6 @@
   },
   "veiligheidsregio_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Ziekenhuisopnames",
-    "titel_kpi": "Ziekenhuisopnames per dag",
     "titel": "Ziekenhuisopnames per dag van inwoners {{safetyRegion}}",
     "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen.",
     "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
@@ -677,7 +676,8 @@
     "metadata": {
       "title": "Ziekenhuisopnames inwoners {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van het aantal mensen in de veiligheidsregio {{safetyRegionName}} die met COVID-19 in het ziekenhuis zijn opgenomen."
-    }
+    },
+    "titel_kpi": "Ziekenhuisopnames per dag"
   },
   "veiligheidsregio_positief_geteste_personen": {
     "titel_sidebar": "Positief geteste mensen",
@@ -729,7 +729,6 @@
   },
   "veiligheidsregio_rioolwater_metingen": {
     "titel_sidebar": "Rioolwatermeting",
-    "titel_kpi": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater",
     "titel": "Rioolwatermeting in {{safetyRegion}}",
     "pagina_toelichting": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater van deze veiligheidsregio. Voor deze berekening wordt uitgegaan van het totaal aantal gemeten virusdeeltjes in één week, gedeeld door het aantal metingen.",
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
@@ -754,7 +753,8 @@
     },
     "graph_daily_label_text_rwzi": "Dagwaarde aantal virusdeeltjes in 1 mL rioolwater ({{name}})",
     "graph_selected_rwzi_placeholder": "Selecteer RWZI",
-    "graph_range_description": "Verloop over tijd"
+    "graph_range_description": "Verloop over tijd",
+    "titel_kpi": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater"
   },
   "gemeente_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Ziekenhuisopnames per dag",
@@ -780,7 +780,6 @@
   },
   "gemeente_positief_geteste_personen": {
     "titel_sidebar": "Positief geteste mensen",
-    "titel_kpi": "Positief geteste mensen per dag",
     "titel": "Positief geteste mensen in {{municipality}}",
     "pagina_toelichting": "Door het aantal positief geteste mensen bij te houden krijgen we een duidelijk beeld van hoe snel het virus zich verspreidt voordat het de intensive care bereikt. Hierdoor blijven we voorbereid.",
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -811,7 +810,8 @@
     "metadata": {
       "title": "Positief geteste mensen in {{municipalityName}} | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van het aantal mensen in de gemeente {{municipalityName}} die positief getest zijn en COVID-19 hebben."
-    }
+    },
+    "titel_kpi": "Positief geteste mensen per dag"
   },
   "gemeente_rioolwater_metingen": {
     "titel_sidebar": "Rioolwatermeting",

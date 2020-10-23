@@ -12,7 +12,6 @@
     "infectious_people_count",
     "infectious_people_count_normalized",
     "intake_intensivecare_ma",
-    "infected_people_percentage",
     "infected_people_total",
     "infected_people_delta_normalized",
     "intake_share_age_groups",
@@ -35,12 +34,10 @@
       "enum": ["NL"]
     },
     "name": {
-      "type": "string",
-      "enum": ["NL"]
+      "const": { "$data": "1/proto_name" }
     },
     "code": {
-      "type": "string",
-      "enum": ["NL"]
+      "const": { "$data": "1/proto_name" }
     },
     "verdenkingen_huisartsen": {
       "$ref": "verdenkingen_huisartsen.json"

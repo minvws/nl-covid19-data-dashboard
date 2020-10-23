@@ -31,6 +31,39 @@ export function createValidateFunction(schemaPath: string) {
   const validator = new Ajv({
     loadSchema: loadSchema.bind(null, basePath),
     $data: true,
+    allErrors: true,
+  });
+  validator.addKeyword('equalsRootProperty', {
+    type: 'string',
+    validate: function equalsRootProperty(
+      schema: any,
+      data: any,
+      _parentSchema?: any,
+      _dataPath?: string,
+      _parentData?: any | any[],
+      _parentDataProperty?: string | number,
+      rootData?: any | any[]
+    ): boolean {
+      if (rootData) {
+        const rootValue = (rootData as any)[schema as string];
+        const validated = data === rootValue;
+        if (!validated) {
+          (equalsRootProperty as any).errors = [
+            {
+              keyword: 'equalsRootProperty',
+              message: `the property '${_dataPath}' value '${data}' must be equal to the root property '${schema}' value '${rootValue}'`,
+              params: {
+                keyword: 'equalsRootProperty',
+                value: schema,
+              },
+            },
+          ];
+        }
+        return validated;
+      }
+      return true;
+    },
+    errors: true,
   });
   return validator.compileAsync(schema).then((validate) => {
     return validate;

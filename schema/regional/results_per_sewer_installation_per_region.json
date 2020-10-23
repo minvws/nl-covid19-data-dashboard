@@ -55,8 +55,7 @@
           "type": "string"
         },
         "vrcode": {
-          "type": "string",
-          "pattern": "^VR[0-9]+$"
+          "equalsRootProperty": "code"
         },
         "vrnaam": {
           "type": "string"
