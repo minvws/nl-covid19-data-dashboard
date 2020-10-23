@@ -5,9 +5,12 @@ import Getest from '~/assets/test.svg';
 import { ChartRegionControls } from '~/components-styled/chart-region-controls';
 import { Anchor } from '~/components-styled/anchor';
 import { Box } from '~/components-styled/base';
-import { ChoroplethSection } from '~/components-styled/choropleth/choropleth-section';
-import { ChoroplethHeader } from '~/components-styled/choropleth/choropleth-header';
-import { ChoroplethLegend } from '~/components-styled/choropleth/choropleth-legend';
+import {
+  ChoroplethChart,
+  ChoroplethHeader,
+  ChoroplethLegend,
+  ChoroplethSection,
+} from '~/components-styled/layout/choropleth';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
@@ -36,8 +39,8 @@ import {
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { KpiSection } from '~/components-styled/kpi-section';
-import { ChoroplethChart } from '~/components-styled/choropleth/choropleth-chart';
 import { MultipleLineChart } from '~/components/lineChart/multipleLineChart';
+import { LineChartTile } from '~/components-styled/line-chart-tile';
 
 const text = siteText.positief_geteste_personen;
 const ggdText = siteText.positief_geteste_personen_ggd;
@@ -159,17 +162,15 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         </ChoroplethLegend>
       </ChoroplethSection>
 
-      <KpiSection>
-        <LineChart
-          title={text.linechart_titel}
-          description={text.linechart_toelichting}
-          values={delta.values.map((value) => ({
-            value: value.infected_daily_increase,
-            date: value.date_of_report_unix,
-          }))}
-          signaalwaarde={7}
-        />
-      </KpiSection>
+      <LineChartTile
+        title={text.linechart_titel}
+        description={text.linechart_toelichting}
+        signaalwaarde={7}
+        values={delta.values.map((value) => ({
+          value: value.infected_daily_increase,
+          date: value.date_of_report_unix,
+        }))}
+      ></LineChartTile>
 
       <KpiSection>
         <Box flex="0 0 50%">

@@ -3,10 +3,12 @@ import Afname from '~/assets/afname.svg';
 import Getest from '~/assets/test.svg';
 import { Anchor } from '~/components-styled/anchor';
 import { Box } from '~/components-styled/base';
-import { ChoroplethChart } from '~/components-styled/choropleth/choropleth-chart';
-import { ChoroplethHeader } from '~/components-styled/choropleth/choropleth-header';
-import { ChoroplethLegend } from '~/components-styled/choropleth/choropleth-legend';
-import { ChoroplethSection } from '~/components-styled/choropleth/choropleth-section';
+import {
+  ChoroplethChart,
+  ChoroplethHeader,
+  ChoroplethLegend,
+  ChoroplethSection,
+} from '~/components-styled/layout/choropleth';
 import { KpiSection } from '~/components-styled/kpi-section';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';

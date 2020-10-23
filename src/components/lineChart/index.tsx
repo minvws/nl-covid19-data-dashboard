@@ -47,7 +47,7 @@ function getChartOptions(values: Value[], signaalwaarde?: number) {
       gridLineColor: '#ca005d',
       type: 'datetime',
       accessibility: {
-        rangeDescription: 'Verloop van tijd',
+        rangeDescription: '',
       },
       title: {
         text: null,
