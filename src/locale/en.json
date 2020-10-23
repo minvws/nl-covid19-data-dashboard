@@ -39,6 +39,7 @@
     "links": {
       "index": "National",
       "over": "About this dashboard",
+      "veelgestelde_vragen": "Veelgestelde vragen",
       "meer": "More information on the coronavirus",
       "verantwoording": "Explanation of the data presented",
       "meer_href": "https://www.government.nl/topics/coronavirus-covid-19",
@@ -429,7 +430,8 @@
     "text": "The coronavirus dashboard gives up-to-date information about COVID-19 in the Netherlands. Picking up signs that the rate of infection is increasing allows us to act to stop the virus from spreading."
   },
   "over_veelgestelde_vragen": {
-    "text": "Frequently asked questions",
+    "titel": "Frequently asked questions",
+    "paragraaf": "",
     "vragen": [
       {
         "vraag": "What is the dashboard for?",
@@ -573,6 +575,11 @@
     "title": "About the Coronavirus COVID-19 Dashboard | Government.nl",
     "description": "Information on the development of the coronavirus in the Netherlands.",
     "url": "https://coronadashboard.government.nl/over"
+  },
+  "veelgestelde_vragen_metadata": {
+    "title": "Veelgestelde vragen Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
+    "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
+    "url": "https://coronadashboard.government.nl/veelgestelde-vragen"
   },
   "regionaal_metadata": {
     "title": "Regional Dashboard Coronavirus COVID-19 | Government.nl",
