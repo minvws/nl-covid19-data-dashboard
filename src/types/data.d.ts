@@ -5,6 +5,7 @@
 * and run 'yarn generate-typescript' to regenerate this file.
 */
 
+
 export interface Municipal {
   last_generated: string;
   proto_name: string;
