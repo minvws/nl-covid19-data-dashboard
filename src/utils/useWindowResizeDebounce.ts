@@ -18,5 +18,5 @@ export const useWindowResizeDebounce = (
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [callback, delay]);
 };

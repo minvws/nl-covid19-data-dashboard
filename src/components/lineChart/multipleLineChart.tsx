@@ -225,7 +225,7 @@ export function MultipleLineChart({
       );
     });
     return getChartOptions(filteredValueLists, linesConfig, signaalwaarde);
-  }, [values, timeframe, signaalwaarde]);
+  }, [values, linesConfig, timeframe, signaalwaarde]);
 
   return (
     <section className={styles.root}>
