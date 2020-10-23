@@ -66,9 +66,6 @@ function getChartOptions(
       lineColor: '#C4C4C4',
       gridLineColor: '#ca005d',
       type: 'datetime',
-      accessibility: {
-        rangeDescription: 'Verloop over tijd',
-      },
       title: {
         text: null,
       },
@@ -125,9 +122,6 @@ function getChartOptions(
         formatter: function () {
           return formatNumber(this.value);
         },
-      },
-      accessibility: {
-        rangeDescription: 'Range: 2010 to 2017',
       },
       plotLines: signaalwaarde
         ? [
