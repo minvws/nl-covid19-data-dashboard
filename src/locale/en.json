@@ -797,11 +797,11 @@
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
     "barscale_keys": [
-      "0 to 20",
-      "20 to 40",
-      "40 to 60",
-      "60 to 80",
-      "80+"
+      "0 to 10",
+      "10 to 20",
+      "20 to 30",
+      "30 to 40",
+      "40 to 50"
     ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
