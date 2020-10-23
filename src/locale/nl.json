@@ -39,6 +39,7 @@
     "links": {
       "index": "Landelijk",
       "over": "Over dit dashboard",
+      "veelgestelde_vragen": "Veelgestelde vragen",
       "meer": "Meer informatie over het coronavirus",
       "verantwoording": "Cijferverantwoording",
       "meer_href": "https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19",
@@ -429,7 +430,8 @@
     "text": "Het dashboard coronavirus geeft informatie over de ontwikkeling van het coronavirus in Nederland. Met deze informatie kunnen signalen van oplevingen worden opgepikt. Zo kunnen maatregelen genomen worden om het virus te stoppen."
   },
   "over_veelgestelde_vragen": {
-    "text": "Veelgestelde vragen",
+    "titel": "Veelgestelde vragen",
+    "paragraaf": "",
     "vragen": [
       {
         "vraag": "Wat doet dit dashboard?",
@@ -573,6 +575,11 @@
     "title": "Over het Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
     "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
     "url": "https://coronadashboard.rijksoverheid.nl/over"
+  },
+  "veelgestelde_vragen_metadata": {
+    "title": "Veelgestelde vragen Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
+    "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
+    "url": "https://coronadashboard.rijksoverheid.nl/veelgestelde-vragen"
   },
   "regionaal_metadata": {
     "title": "Regionaal Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",

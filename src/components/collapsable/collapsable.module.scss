@@ -2,9 +2,7 @@
 
 .root {
   display: block;
-  @media (min-width: 1000px) {
-    border-top: 1px solid #dfdfdf;
-  }
+  border-top: 1px solid #dfdfdf;
 }
 
 .summary {
@@ -18,7 +16,7 @@
   /* our styling */
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   padding: 0.75em;
   color: $icon-color;
   cursor: pointer;
@@ -46,7 +44,8 @@
     content: '';
     flex: 0 0 1.9em;
     margin-right: -0.5em;
-    min-height: 0.55em;
+    margin-top: 0.35em;
+    height: 0.55em;
     padding: 0 0.5em;
     background-image: url('/images/chevron-down.svg');
     background-position: center;
