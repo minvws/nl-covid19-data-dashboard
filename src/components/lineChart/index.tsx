@@ -46,9 +46,6 @@ function getChartOptions(values: Value[], signaalwaarde?: number) {
       lineColor: '#C4C4C4',
       gridLineColor: '#ca005d',
       type: 'datetime',
-      accessibility: {
-        rangeDescription: '',
-      },
       title: {
         text: null,
       },
@@ -87,9 +84,6 @@ function getChartOptions(values: Value[], signaalwaarde?: number) {
         formatter: function () {
           return formatNumber(this.value);
         },
-      },
-      accessibility: {
-        rangeDescription: 'Range: 2010 to 2017',
       },
       plotLines: signaalwaarde
         ? [
