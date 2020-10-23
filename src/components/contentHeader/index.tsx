@@ -1,4 +1,4 @@
-import { Metadata } from '~/components/metadata';
+import { Metadata } from './metadata';
 import { TitleWithIcon } from '~/components/titleWithIcon';
 import styles from './layout.module.scss';
 

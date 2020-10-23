@@ -8,7 +8,7 @@ import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHan
 import { createMunicipalHospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/municipal/createMunicipalHospitalAdmissionsTooltip';
 import { DataWarning } from '~/components/dataWarning';
 import { FCWithLayout } from '~/components/layout';
-import { ContentHeader } from '~/components/layout/Content';
+import { ContentHeader } from '~/components/contentHeader';
 import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';

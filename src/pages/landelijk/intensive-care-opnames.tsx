@@ -1,6 +1,6 @@
 import Arts from '~/assets/arts.svg';
 import { LineChart } from '~/components/charts/index';
-import { ContentHeaderMetadataHack } from '~/components/contentHeaderMetadataHack';
+import { ContentHeader_sourcesHack } from '~/components/contentHeader_sourcesHack';
 import { IntakeIntensiveCareBarscale } from '~/components/landelijk/intake-intensive-care-barscale';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
@@ -24,7 +24,7 @@ const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
         title={text.metadata.title}
         description={text.metadata.description}
       />
-      <ContentHeaderMetadataHack
+      <ContentHeader_sourcesHack
         category={siteText.nationaal_layout.headings.medisch}
         title={text.titel}
         Icon={Arts}

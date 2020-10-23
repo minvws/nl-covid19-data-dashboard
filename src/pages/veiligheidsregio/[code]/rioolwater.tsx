@@ -3,7 +3,7 @@ import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import { BarChart } from '~/components/charts';
 import { ChartTimeControls } from '~/components-styled/chart-time-controls';
 import { FCWithLayout } from '~/components/layout';
-import { ContentHeader } from '~/components/layout/Content';
+import { ContentHeader } from '~/components/contentHeader';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { InstallationSelector } from '~/components/lineChart/installationSelector';
 import styles from '~/components/lineChart/installationselector.module.scss';

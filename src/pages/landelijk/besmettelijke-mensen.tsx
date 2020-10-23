@@ -1,7 +1,7 @@
 import Ziektegolf from '~/assets/ziektegolf.svg';
 import { AreaChart } from '~/components/charts/index';
 import { FCWithLayout } from '~/components/layout';
-import { ContentHeader } from '~/components/layout/Content';
+import { ContentHeader } from '~/components/contentHeader';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { Legenda } from '~/components/legenda';
 import { SEOHead } from '~/components/seoHead';

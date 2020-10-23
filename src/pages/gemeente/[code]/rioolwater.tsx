@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import { BarChart } from '~/components/charts';
 import { FCWithLayout } from '~/components/layout';
-import { ContentHeader } from '~/components/layout/Content';
+import { ContentHeader } from '~/components/contentHeader';
 import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
 import { MunicipalSewerWaterLineChart } from '~/components/lineChart/municipalSewerWaterLineChart';
 import { SEOHead } from '~/components/seoHead';

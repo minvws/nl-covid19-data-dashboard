@@ -1,6 +1,6 @@
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
+import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRangeHack';
 import { FCWithLayout } from '~/components/layout';
-import { ContentHeader } from '~/components/layout/Content';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { LineChart } from '~/components/lineChart/lineChartWithWeekTooltip';
 import { SEOHead } from '~/components/seoHead';
@@ -22,7 +22,7 @@ const SewerWater: FCWithLayout<INationalData> = (props) => {
         title={text.metadata.title}
         description={text.metadata.description}
       />
-      <ContentHeader
+      <ContentHeader_weekRangeHack
         category={siteText.gemeente_layout.headings.overig}
         title={text.titel}
         Icon={RioolwaterMonitoring}
@@ -31,7 +31,7 @@ const SewerWater: FCWithLayout<INationalData> = (props) => {
           datumsText: text.datums,
           dateUnix: data?.last_value?.week_unix,
           dateInsertedUnix: data?.last_value?.date_of_insertion_unix,
-          dataSource: text.bron,
+          dataSourceA: text.bron,
         }}
       />
 

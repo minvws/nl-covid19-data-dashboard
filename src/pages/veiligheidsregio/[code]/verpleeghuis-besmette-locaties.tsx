@@ -1,7 +1,7 @@
 import Locatie from '~/assets/locaties.svg';
 import { LineChart } from '~/components/charts/index';
 import { FCWithLayout } from '~/components/layout';
-import { ContentHeader } from '~/components/layout/Content';
+import { ContentHeader } from '~/components/contentHeader';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
