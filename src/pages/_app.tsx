@@ -28,8 +28,16 @@ export default function App(props: AppProps) {
 
   useEffect(() => {
     window.document.documentElement.className += ' js';
-    const handleRouteChange = () => {
-      window.scrollTo(0, 0);
+    const handleRouteChange = (url: string) => {
+      if (url.indexOf('?menu') !== -1) {
+        /* Ope ing a menu on mobile scrolls to the top of the menus */
+        window.document
+          .querySelector('#main-navigation,aside')
+          ?.scrollIntoView(true);
+      } else {
+        /* Any other page scrolls to the top */
+        window.scrollTo(0, 0);
+      }
       piwik.pageview();
     };
 

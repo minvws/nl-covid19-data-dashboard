@@ -82,7 +82,10 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
 
   const showMetricLinks = router.route !== '/veiligheidsregio';
 
-  const { isMenuOpen, openMenu, handleMenuClick } = useMenuState(isMainRoute);
+  const { isMenuOpen, openMenu } = useMenuState(isMainRoute);
+
+  // remove focus after navigation
+  const blur = (evt: any) => evt.currentTarget.blur();
 
   function getClassName(path: string) {
     return router.pathname === path
@@ -149,7 +152,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                     as={`/veiligheidsregio/${code}/positief-geteste-mensen`}
                   >
                     <a
-                      onClick={handleMenuClick}
+                      onClick={blur}
                       className={getClassName(
                         `/veiligheidsregio/[code]/positief-geteste-mensen`
                       )}
@@ -181,7 +184,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                     as={`/veiligheidsregio/${code}/ziekenhuis-opnames`}
                   >
                     <a
-                      onClick={handleMenuClick}
+                      onClick={blur}
                       className={getClassName(
                         `/veiligheidsregio/[code]/ziekenhuis-opnames`
                       )}
@@ -209,7 +212,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                     as={`/veiligheidsregio/${code}/rioolwater`}
                   >
                     <a
-                      onClick={handleMenuClick}
+                      onClick={blur}
                       className={getClassName(
                         `/veiligheidsregio/[code]/rioolwater`
                       )}
@@ -239,7 +242,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                     as={`/veiligheidsregio/${code}/verpleeghuis-positief-geteste-personen`}
                   >
                     <a
-                      onClick={handleMenuClick}
+                      onClick={blur}
                       className={getClassName(
                         '/veiligheidsregio/[code]/verpleeghuis-positief-geteste-personen'
                       )}
@@ -266,7 +269,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                     as={`/veiligheidsregio/${code}/verpleeghuis-besmette-locaties`}
                   >
                     <a
-                      onClick={handleMenuClick}
+                      onClick={blur}
                       className={getClassName(
                         '/veiligheidsregio/[code]/verpleeghuis-besmette-locaties'
                       )}
@@ -290,7 +293,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                     as={`/veiligheidsregio/${code}/verpleeghuis-sterfte`}
                   >
                     <a
-                      onClick={handleMenuClick}
+                      onClick={blur}
                       className={getClassName(
                         '/veiligheidsregio/[code]/verpleeghuis-sterfte'
                       )}
