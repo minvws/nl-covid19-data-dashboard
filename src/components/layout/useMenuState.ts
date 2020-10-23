@@ -27,7 +27,7 @@ export function useMenuState(defaultOpen = false): MenuState {
     }
 
     const queryParams = Object.entries(router.query)
-      .filter(([key]) => ['menu', 'code'].indexOf(key) === -1)
+      .filter(([key]) => !['menu', 'code'].includes(key))
       .map(([key, value]) => {
         return [
           encodeURIComponent(key),
@@ -53,7 +53,7 @@ export function useMenuState(defaultOpen = false): MenuState {
   };
 
   const setMenuFromRouterState = (url: string) => {
-    setMenuOpen(url.indexOf('?menu') !== -1);
+    setMenuOpen(url.includes('?menu'));
   };
 
   /**
