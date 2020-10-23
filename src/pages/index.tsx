@@ -154,7 +154,7 @@ Home.getLayout = getNationalLayout();
 /**
  * Calculate the counts of regions with a certain escalation level
  */
-const getEcalationCounts = (
+const getEscalationCounts = (
   escalationLevels?: EscalationLevels[]
 ): EscalationLevelCounts => {
   const counts: EscalationLevelCounts = {
@@ -203,7 +203,7 @@ export async function getStaticProps(): Promise<StaticProps> {
   const regionsData = JSON.parse(regionsFileContents) as Regions;
 
   const escalationLevels = regionsData.escalation_levels;
-  const escalationLevelCounts = getEcalationCounts(escalationLevels);
+  const escalationLevelCounts = getEscalationCounts(escalationLevels);
 
   return { props: { data, escalationLevelCounts, text, lastGenerated } };
 }
