@@ -1,7 +1,10 @@
 import { useEffect, useRef } from 'react';
 
-export const useWindowResizeDebounce = (callback: any, delay: number): void => {
-  const timeout = useRef<number | null>(null);
+export const useWindowResizeDebounce = (
+  callback: () => void,
+  delay: number
+): void => {
+  const timeout = useRef<number>();
 
   useEffect(() => {
     const handleResize = () => {

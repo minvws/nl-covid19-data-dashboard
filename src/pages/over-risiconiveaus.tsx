@@ -8,10 +8,12 @@ import { MDToHTMLString } from '~/utils/MDToHTMLString';
 import styles from './over.module.scss';
 
 interface StaticProps {
-  props: {
-    text: TALLLanguages;
-    lastGenerated: string;
-  };
+  props: OverRisiconiveausProps;
+}
+
+interface OverRisiconiveausProps {
+  text: TALLLanguages;
+  lastGenerated: string;
 }
 
 export async function getStaticProps(): Promise<StaticProps> {
@@ -27,10 +29,7 @@ export async function getStaticProps(): Promise<StaticProps> {
   return { props: { text, lastGenerated } };
 }
 
-const OverRisicoNiveaus: FCWithLayout<{
-  text: any;
-  lastGenerated: string;
-}> = (props) => {
+const OverRisicoNiveaus: FCWithLayout<OverRisiconiveausProps> = (props) => {
   const { text } = props;
 
   const { over_risiconiveaus } = text;

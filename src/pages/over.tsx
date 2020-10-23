@@ -7,10 +7,12 @@ import siteText, { TALLLanguages } from '~/locale/index';
 import styles from './over.module.scss';
 
 interface StaticProps {
-  props: {
-    text: TALLLanguages;
-    lastGenerated: string;
-  };
+  props: OverProps;
+}
+
+interface OverProps {
+  text: TALLLanguages;
+  lastGenerated: string;
 }
 
 export async function getStaticProps(): Promise<StaticProps> {
@@ -23,7 +25,7 @@ export async function getStaticProps(): Promise<StaticProps> {
   return { props: { text, lastGenerated } };
 }
 
-const Over: FCWithLayout<{ text: TALLLanguages }> = (props) => {
+const Over: FCWithLayout<OverProps> = (props) => {
   const { text } = props;
 
   return (

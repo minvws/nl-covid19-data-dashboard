@@ -16,14 +16,16 @@ interface IVraagEnAntwoord {
 }
 
 interface StaticProps {
-  props: {
-    text: TALLLanguages;
-    lastGenerated: string;
-  };
+  props: VeelgesteldeVragenProps;
+}
+
+interface VeelgesteldeVragenProps {
+  text: TALLLanguages;
+  lastGenerated: string;
 }
 
 export async function getStaticProps(): Promise<StaticProps> {
-  const text = require('../locale/index').default;
+  const text: TALLLanguages = require('../locale/index').default;
   const serializedContent = text.over_veelgestelde_vragen.vragen.map(function (
     item: IVraagEnAntwoord
   ) {
@@ -44,9 +46,7 @@ export async function getStaticProps(): Promise<StaticProps> {
   return { props: { text, lastGenerated } };
 }
 
-const Verantwoording: FCWithLayout<{ text: any; lastGenerated: string }> = (
-  props
-) => {
+const Verantwoording: FCWithLayout<VeelgesteldeVragenProps> = (props) => {
   const { text } = props;
 
   return (

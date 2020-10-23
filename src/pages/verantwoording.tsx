@@ -16,10 +16,12 @@ interface ICijfer {
 }
 
 interface StaticProps {
-  props: {
-    text: TALLLanguages;
-    lastGenerated: string;
-  };
+  props: VerantwoordingProps;
+}
+
+interface VerantwoordingProps {
+  text: TALLLanguages;
+  lastGenerated: string;
 }
 
 export async function getStaticProps(): Promise<StaticProps> {
@@ -43,9 +45,7 @@ export async function getStaticProps(): Promise<StaticProps> {
   return { props: { text, lastGenerated } };
 }
 
-const Verantwoording: FCWithLayout<{ text: any; lastGenerated: string }> = (
-  props
-) => {
+const Verantwoording: FCWithLayout<VerantwoordingProps> = (props) => {
   const { text } = props;
 
   return (
