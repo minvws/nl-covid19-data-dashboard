@@ -33,10 +33,15 @@ interface INationalHomepageData {
   data: National;
   text: TALLLanguages;
   lastGenerated: string;
-  escalationLevelAmounts: EscalationLevelAmounts;
+  escalationLevelCounts: EscalationLevelCounts;
 }
 
-interface EscalationLevelAmounts {
+/*
+ * The keys in this object are used to find and replace values in the translation files.
+ * Adjustments here need to be applied in Lokalize too.
+ * This is also why the keys are a bit more verbose.
+ */
+interface EscalationLevelCounts {
   escalationLevel1: number;
   escalationLevel2: number;
   escalationLevel3: number;
@@ -45,7 +50,7 @@ interface EscalationLevelAmounts {
 }
 
 const Home: FCWithLayout<INationalHomepageData> = (props) => {
-  const { text, escalationLevelAmounts } = props;
+  const { text, escalationLevelCounts } = props;
   const router = useRouter();
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
     'municipal'
@@ -66,7 +71,7 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
           <p>
             {replaceVariablesInText(
               text.notificatie.bericht,
-              (escalationLevelAmounts as unknown) as { [key: string]: string }
+              (escalationLevelCounts as unknown) as { [key: string]: string }
             )}
           </p>
         </div>
@@ -147,12 +152,12 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
 Home.getLayout = getNationalLayout();
 
 /**
- * Calculate the amounts of regions with a certain escalation level
+ * Calculate the counts of regions with a certain escalation level
  */
-const getEcalationAmounts = (
-  escalationLevels: EscalationLevels[] | undefined
-): EscalationLevelAmounts => {
-  const amounts: EscalationLevelAmounts = {
+const getEcalationCounts = (
+  escalationLevels?: EscalationLevels[]
+): EscalationLevelCounts => {
+  const counts: EscalationLevelCounts = {
     escalationLevel1: 0,
     escalationLevel2: 0,
     escalationLevel3: 0,
@@ -164,14 +169,14 @@ const getEcalationAmounts = (
     escalationLevels.forEach((region) => {
       assert(
         [1, 2, 3, 4, 5].indexOf(region.escalation_level) !== -1,
-        'Escalation level amount not supported. Value needs to be 1-5.'
+        'Escalation level not supported. Value needs to be 1-5.'
       );
-      const key = `escalationLevel${region.escalation_level}` as keyof EscalationLevelAmounts;
-      amounts[key] += 1;
+      const key = `escalationLevel${region.escalation_level}` as keyof EscalationLevelCounts;
+      counts[key] += 1;
     });
   }
 
-  return amounts;
+  return counts;
 };
 
 export async function getStaticProps(): Promise<StaticProps> {
@@ -198,9 +203,9 @@ export async function getStaticProps(): Promise<StaticProps> {
   const regionsData = JSON.parse(regionsFileContents) as Regions;
 
   const escalationLevels = regionsData.escalation_levels;
-  const escalationLevelAmounts = getEcalationAmounts(escalationLevels);
+  const escalationLevelCounts = getEcalationCounts(escalationLevels);
 
-  return { props: { data, escalationLevelAmounts, text, lastGenerated } };
+  return { props: { data, escalationLevelCounts, text, lastGenerated } };
 }
 
 export default Home;
