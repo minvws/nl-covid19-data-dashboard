@@ -5,6 +5,7 @@
 * and run 'yarn generate-typescript' to regenerate this file.
 */
 
+
 export interface Municipal {
   last_generated: string;
   proto_name: string;
@@ -74,8 +75,8 @@ export interface ResultsPerSewerInstallationPerMunicipalityLastValue {
 export interface Municipalities {
   last_generated: string;
   proto_name: "MUNICIPALITIES";
-  name: "MUNICIPALITIES";
-  code: "MUNICIPALITIES";
+  name: string;
+  code: string;
   hospital_admissions: HospitalAdmissions[];
   positive_tested_people: PositiveTestedPeople[];
   deceased: Deceased[];
@@ -103,8 +104,8 @@ export interface Deceased {
 export interface National {
   last_generated: string;
   proto_name: "NL";
-  name: "NL";
-  code: "NL";
+  name: string;
+  code: string;
   verdenkingen_huisartsen: NationalHuisartsVerdenkingen;
   intake_hospital_ma: IntakeHospitalMa;
   infectious_people_count: InfectiousPeopleCount;
@@ -128,7 +129,6 @@ export interface NationalHuisartsVerdenkingen {
   values: NationalHuisartsVerdenkingenValue[];
   last_value: NationalHuisartsVerdenkingenValue;
   last_value_difference?: NationalHuisartsVerdenkingenValueDifference;
-  [k: string]: unknown;
 }
 export interface NationalHuisartsVerdenkingenValue {
   week_unix: number;
@@ -199,7 +199,6 @@ export interface NationalInfectedPeopleTotal {
   values: NationalInfectedPeopleTotalValue[];
   last_value: NationalInfectedPeopleTotalValue;
   last_value_difference?: NationalInfectedPeopleTotalValueDifference;
-  [k: string]: unknown;
 }
 export interface NationalInfectedPeopleTotalValue {
   infected_daily_total: number;
@@ -499,8 +498,8 @@ export interface RegionalNursingHomeValue {
 export interface Regions {
   last_generated: string;
   proto_name: "REGIONS";
-  name: "REGIONS";
-  code: "REGIONS";
+  name: string;
+  code: string;
   hospital_admissions: RegionHospitalAdmissions[];
   positive_tested_people: RegionPositiveTestedPeople[];
   deceased: RegionDeceased[];

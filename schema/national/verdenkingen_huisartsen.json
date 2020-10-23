@@ -17,7 +17,7 @@
     }
   },
   "required": ["values", "last_value"],
-  "additionalProperties": true,
+  "additionalProperties": false,
   "definitions": {
     "value": {
       "title": "national_huisarts_verdenkingen_value",

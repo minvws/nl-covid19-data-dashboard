@@ -34,9 +34,11 @@
       "enum": ["NL"]
     },
     "name": {
+      "type": "string",
       "const": { "$data": "1/proto_name" }
     },
     "code": {
+      "type": "string",
       "const": { "$data": "1/proto_name" }
     },
     "verdenkingen_huisartsen": {
