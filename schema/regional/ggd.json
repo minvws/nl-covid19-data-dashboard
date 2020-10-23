@@ -36,8 +36,7 @@
           "type": "integer"
         },
         "vrcode": {
-          "type": "string",
-          "pattern": "^VR[0-9]+$"
+          "equalsRootProperty": "code"
         }
       },
       "required": [

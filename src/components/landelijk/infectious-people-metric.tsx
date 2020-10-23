@@ -6,14 +6,14 @@ import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text = siteText.common.metricKPI;
-const title = siteText.besmettelijke_personen.title;
+const title = siteText.besmettelijke_personen.titel_kpi;
 
 export function InfectiousPeopleMetric(props: {
   data: InfectiousPeopleLastKnownAverageValue | undefined;
 }) {
   const { data } = props;
 
-  if (!data) return null;
+  if (data === undefined) return null;
 
   const description = replaceVariablesInText(text.dateOfReport, {
     dateOfReport: formatDateFromSeconds(data?.date_of_report_unix, 'relative'),

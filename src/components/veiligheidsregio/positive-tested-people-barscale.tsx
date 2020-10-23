@@ -5,8 +5,9 @@ import siteText from '~/locale/index';
 export function PositivelyTestedPeopleBarScale(props: {
   data: ResultsPerRegion | undefined;
   showAxis: boolean;
+  showValue?: boolean;
 }) {
-  const { data, showAxis } = props;
+  const { data, showAxis, showValue } = props;
 
   if (!data) return null;
 
@@ -36,6 +37,7 @@ export function PositivelyTestedPeopleBarScale(props: {
       ]}
       signaalwaarde={7}
       showAxis={showAxis}
+      showValue={showValue}
     />
   );
 }
