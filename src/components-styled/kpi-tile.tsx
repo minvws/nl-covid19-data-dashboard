@@ -2,6 +2,7 @@ import locale from '~/locale/index';
 import { Box, Spacer } from './base';
 import { ExternalLink } from './external-link';
 import { Text, Heading } from './typography';
+import { Tile } from './layout';
 
 interface KpiTileProps {
   title: string;
@@ -24,16 +25,7 @@ export function KpiTile({
   sourcedFrom,
 }: KpiTileProps) {
   return (
-    <Box
-      as="article"
-      display="flex"
-      flexDirection="column"
-      bg="white"
-      p={4}
-      borderRadius={1}
-      boxShadow="tile"
-      height="100%"
-    >
+    <Tile height="100%">
       <Heading level={3}>{title}</Heading>
       <Box mb={4}>{children}</Box>
       {description && (
@@ -53,6 +45,6 @@ export function KpiTile({
           </Text>
         </>
       )}
-    </Box>
+    </Tile>
   );
 }

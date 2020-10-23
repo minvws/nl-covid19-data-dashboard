@@ -19,11 +19,6 @@ import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
-import {
-  InfectedPeopleDeltaNormalized,
-  IntakeShareAgeGroups,
-  NationalInfectedPeopleTotal,
-} from '~/types/data.d';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 
@@ -38,13 +33,11 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
   const router = useRouter();
 
   const legendItems = useSafetyRegionLegendaData('positive_tested_people');
-  const delta: InfectedPeopleDeltaNormalized | undefined =
-    data?.infected_people_delta_normalized;
-  const age: IntakeShareAgeGroups | undefined = data?.intake_share_age_groups;
-  const total: NationalInfectedPeopleTotal | undefined =
-    data?.infected_people_total;
+  const delta = data.infected_people_delta_normalized;
+  const age = data.intake_share_age_groups;
+  const total = data.infected_people_total;
 
-  const ggdData = data?.infected_people_percentage?.last_value;
+  const ggdData = data.ggd.last_value;
 
   const barChartTotal: number = age?.values
     ? age.values.reduce((mem: number, part): number => {
@@ -92,7 +85,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           </p>
 
           <p>{text.kpi_toelichting}</p>
-          {ggdData && ggdData.percentage_infected_ggd && (
+          {ggdData.infected_percentage_daily && (
             <div className="ggd-summary">
               <h4
                 dangerouslySetInnerHTML={{
@@ -100,7 +93,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
                     {
                       name: 'percentage',
                       value: `${formatPercentage(
-                        ggdData.percentage_infected_ggd
+                        ggdData.infected_percentage_daily
                       )}%`,
                       className: 'text-blue',
                     },
@@ -216,7 +209,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
               <h3>{ggdText.totaal_getest_week_titel}</h3>
               <h3>
                 <span className="text-blue kpi">
-                  {formatNumber(ggdData?.total_tested_ggd)}
+                  {formatNumber(ggdData.tested_total_daily)}
                 </span>
               </h3>
 
@@ -227,7 +220,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
               <h3>{ggdText.positief_getest_week_titel}</h3>
               <h3>
                 <span className="text-blue kpi">
-                  {`${formatPercentage(ggdData?.percentage_infected_ggd)}%`}
+                  {`${formatPercentage(ggdData.infected_percentage_daily)}%`}
                 </span>
               </h3>
               <p>{ggdText.positief_getest_week_uitleg}</p>
@@ -240,12 +233,12 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
                       [
                         {
                           name: 'numerator',
-                          value: formatNumber(ggdData?.infected_ggd),
+                          value: formatNumber(ggdData.infected_daily),
                           className: 'text-blue',
                         },
                         {
                           name: 'denominator',
-                          value: formatNumber(ggdData?.total_tested_ggd),
+                          value: formatNumber(ggdData.tested_total_daily),
                           className: 'text-blue',
                         },
                       ]
