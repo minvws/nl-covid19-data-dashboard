@@ -4,9 +4,6 @@ import { useRouter, Router } from 'next/router';
 interface MenuState {
   isMenuOpen: boolean;
   openMenu: (event?: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
-  handleMenuClick: (
-    event?: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ) => void;
 }
 
 /**
@@ -18,22 +15,41 @@ export function useMenuState(defaultOpen = false): MenuState {
 
   const router = useRouter();
 
+  /*
+   * Retrieve the URL for the current route with menu state,
+   * including query params.
+   */
+  function getFullMenuUrl(): string {
+    let fullMenuUrl = `${router.pathname}?menu`;
+
+    if (router.query.code) {
+      fullMenuUrl = fullMenuUrl.replace('[code]', router.query.code as string);
+    }
+
+    const queryParams = Object.entries(router.query)
+      .filter(([key]) => ['menu', 'code'].indexOf(key) === -1)
+      .map(([key, value]) => {
+        return [
+          encodeURIComponent(key),
+          encodeURIComponent(value as string),
+        ].join('=');
+      })
+      .join('&');
+
+    if (queryParams) {
+      fullMenuUrl += `&${queryParams}`;
+    }
+
+    return fullMenuUrl;
+  }
+
   const openMenu = (
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent> | undefined
   ): void => {
     event?.preventDefault();
 
-    router.push(
-      router.pathname + '?menu',
-      router.asPath.split('?')[0] + '?menu',
-      { shallow: true }
-    );
-  };
-
-  const handleMenuClick = (
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent> | undefined
-  ) => {
-    event?.currentTarget?.blur();
+    const fullMenuUrl = getFullMenuUrl();
+    router.push(router.pathname, fullMenuUrl, { shallow: true });
   };
 
   const setMenuFromRouterState = (url: string) => {
@@ -42,7 +58,7 @@ export function useMenuState(defaultOpen = false): MenuState {
 
   /**
    * Handle the closing of the menu
-   * If closed with handleMenuClick the menu would open too soon
+   * If closed with blur the menu would open too soon
    * This closes the menu at the moment the content is loaded and displayed,
    * (just as non-JS would kept displayed)
    * */
@@ -58,6 +74,5 @@ export function useMenuState(defaultOpen = false): MenuState {
   return {
     isMenuOpen,
     openMenu,
-    handleMenuClick,
   };
 }

@@ -65,7 +65,10 @@ function NationalLayout(props: WithChildren<INationalData>) {
   const router = useRouter();
   const isMainRoute = router.route === '/';
 
-  const { isMenuOpen, openMenu, handleMenuClick } = useMenuState(isMainRoute);
+  const { isMenuOpen, openMenu } = useMenuState(isMainRoute);
+
+  // remove focus after navigation
+  const blur = (evt: any) => evt.currentTarget.blur();
 
   function getClassName(path: string) {
     return router.pathname === path
@@ -109,7 +112,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
               <li>
                 <Link href="/">
                   <a
-                    onClick={handleMenuClick}
+                    onClick={blur}
                     className={`last-developments-link ${getClassName('/')}`}
                   >
                     <TitleWithIcon
@@ -126,7 +129,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
               <li>
                 <Link href="/landelijk/positief-geteste-mensen">
                   <a
-                    onClick={handleMenuClick}
+                    onClick={blur}
                     className={getClassName(
                       '/landelijk/positief-geteste-mensen'
                     )}
@@ -152,7 +155,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
               <li>
                 <Link href="/landelijk/reproductiegetal">
                   <a
-                    onClick={handleMenuClick}
+                    onClick={blur}
                     className={getClassName('/landelijk/reproductiegetal')}
                   >
                     <TitleWithIcon
@@ -178,7 +181,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
               <li>
                 <Link href="/landelijk/besmettelijke-mensen">
                   <a
-                    onClick={handleMenuClick}
+                    onClick={blur}
                     className={getClassName('/landelijk/besmettelijke-mensen')}
                   >
                     <TitleWithIcon
@@ -199,7 +202,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
               <li>
                 <Link href="/landelijk/ziekenhuis-opnames">
                   <a
-                    onClick={handleMenuClick}
+                    onClick={blur}
                     className={getClassName('/landelijk/ziekenhuis-opnames')}
                   >
                     <TitleWithIcon
@@ -223,7 +226,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
               <li>
                 <Link href="/landelijk/intensive-care-opnames">
                   <a
-                    onClick={handleMenuClick}
+                    onClick={blur}
                     className={getClassName(
                       '/landelijk/intensive-care-opnames'
                     )}
@@ -252,7 +255,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
               <li>
                 <Link href="/landelijk/verdenkingen-huisartsen">
                   <a
-                    onClick={handleMenuClick}
+                    onClick={blur}
                     className={getClassName(
                       '/landelijk/verdenkingen-huisartsen'
                     )}
@@ -273,7 +276,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
               <li>
                 <Link href="/landelijk/rioolwater">
                   <a
-                    onClick={handleMenuClick}
+                    onClick={blur}
                     className={getClassName('/landelijk/rioolwater')}
                   >
                     <TitleWithIcon
@@ -293,7 +296,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
               <li>
                 <Link href="/landelijk/verpleeghuis-positief-geteste-personen">
                   <a
-                    onClick={handleMenuClick}
+                    onClick={blur}
                     className={getClassName(
                       '/landelijk/verpleeghuis-positief-geteste-personen'
                     )}
@@ -317,7 +320,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
               <li>
                 <Link href="/landelijk/verpleeghuis-besmette-locaties">
                   <a
-                    onClick={handleMenuClick}
+                    onClick={blur}
                     className={getClassName(
                       '/landelijk/verpleeghuis-besmette-locaties'
                     )}
@@ -340,7 +343,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
               <li>
                 <Link href="/landelijk/verpleeghuis-sterfte">
                   <a
-                    onClick={handleMenuClick}
+                    onClick={blur}
                     className={getClassName('/landelijk/verpleeghuis-sterfte')}
                   >
                     <TitleWithIcon
