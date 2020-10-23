@@ -266,6 +266,16 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
               date: value.date_of_report_unix,
             })),
           ]}
+          linesConfig={[
+            {
+              color: '#154273',
+              legendLabel: ggdText.linechart_totaltests_legend_label,
+            },
+            {
+              color: '#3391CC',
+              legendLabel: ggdText.linechart_positivetests_legend_label,
+            },
+          ]}
           signaalwaarde={7}
         />
       </KpiSection>

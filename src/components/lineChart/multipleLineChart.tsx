@@ -4,27 +4,40 @@ import React, { useMemo, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { ChartTimeControls } from '~/components-styled/chart-time-controls';
 import text from '~/locale/index';
+import { assert } from '~/utils/assert';
 import { formatDateFromSeconds } from '~/utils/formatDate';
-import { formatNumber } from '~/utils/formatNumber';
+import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
 import styles from './lineChart.module.scss';
 
 type Value = {
   date: number;
-  value?: number;
+  value: number;
+};
+
+type LineConfig = {
+  color: string;
+  legendLabel: string;
 };
 
 const SIGNAALWAARDE_Z_INDEX = 5;
+
+const secondsInSixDays = 518400;
 
 interface LineChartProps {
   title: string;
   description?: string;
   values: Value[][];
+  linesConfig: LineConfig[];
   signaalwaarde?: number;
   timeframeOptions?: TimeframeOption[];
 }
 
-function getChartOptions(values: Value[][], signaalwaarde?: number) {
+function getChartOptions(
+  values: Value[][],
+  linesConfig: LineConfig[],
+  signaalwaarde?: number
+) {
   const yMax = values.reduce((max, list) => {
     const listMax = calculateYMax(list, signaalwaarde);
     return Math.max(max, listMax);
@@ -54,7 +67,7 @@ function getChartOptions(values: Value[][], signaalwaarde?: number) {
       gridLineColor: '#ca005d',
       type: 'datetime',
       accessibility: {
-        rangeDescription: 'Verloop van tijd',
+        rangeDescription: 'Verloop over tijd',
       },
       title: {
         text: null,
@@ -71,13 +84,31 @@ function getChartOptions(values: Value[][], signaalwaarde?: number) {
             : '';
         },
       },
+      crosshair: true,
     },
     tooltip: {
       backgroundColor: '#FFF',
       borderColor: '#01689B',
       borderRadius: 0,
+      shared: true,
+      useHTML: true,
       formatter: function (): string {
-        return `${formatDateFromSeconds(this.x)}: ${formatNumber(this.y)}`;
+        const percentage =
+          ((this.points as any[])[1].y * 100) / (this.points as any[])[0].y;
+
+        return `${formatDateFromSeconds(
+          +this.x - +secondsInSixDays
+        )} - ${formatDateFromSeconds(+this.x)}<br/>
+        <span style="height: 0.5em;width: 0.5em;background-color: ${
+          linesConfig[0].color
+        };border-radius: 50%;display: inline-block;"></span> ${formatNumber(
+          (this.points as any[])[0].y
+        )}<br/>
+        <span style="height: 0.5em;width: 0.5em;background-color: ${
+          linesConfig[1].color
+        };border-radius: 50%;display: inline-block;"></span> ${formatNumber(
+          (this.points as any[])[1].y
+        )} (${formatPercentage(percentage)}%)`;
       },
     },
     yAxis: {
@@ -140,12 +171,12 @@ function getChartOptions(values: Value[][], signaalwaarde?: number) {
     title: {
       text: undefined,
     },
-    series: values.map((list) => ({
+    series: values.map((list, index) => ({
       type: 'line',
       data: list.map((value) => value.value as number),
-      name: '',
-      showInLegend: false,
-      color: '#3391CC',
+      name: linesConfig[index].legendLabel,
+      showInLegend: true,
+      color: linesConfig[index].color,
       // hex to rgb converted, added opacity
       marker: {
         enabled: false,
@@ -174,10 +205,16 @@ export function MultipleLineChart({
   title,
   description,
   values,
+  linesConfig,
   signaalwaarde,
   timeframeOptions,
 }: LineChartProps) {
   const [timeframe, setTimeframe] = useState<TimeframeOption>('5weeks');
+
+  assert(
+    values.length === linesConfig.length,
+    'values length must equal linesConfig length'
+  );
 
   const chartOptions = useMemo(() => {
     const filteredValueLists = values.map((lineValues) => {
@@ -187,7 +224,7 @@ export function MultipleLineChart({
         (value: Value) => value.date * 1000
       );
     });
-    return getChartOptions(filteredValueLists, signaalwaarde);
+    return getChartOptions(filteredValueLists, linesConfig, signaalwaarde);
   }, [values, timeframe, signaalwaarde]);
 
   return (
