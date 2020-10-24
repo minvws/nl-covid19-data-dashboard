@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
-import { BarChart } from '~/components/charts';
 import { ChartTimeControls } from '~/components-styled/chart-time-controls';
+import { BarChart } from '~/components/charts';
+import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRangeHack';
 import { FCWithLayout } from '~/components/layout';
-import { ContentHeader } from '~/components/contentHeader';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { InstallationSelector } from '~/components/lineChart/installationSelector';
 import styles from '~/components/lineChart/installationselector.module.scss';
@@ -47,6 +47,8 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
     };
   }, [data]);
 
+  const sewerAverages = data.average_sewer_installation_per_region;
+
   const [timeframe, setTimeframe] = useState<TimeframeOption>('all');
   const [selectedInstallation, setSelectedInstallation] = useState<
     string | undefined
@@ -62,7 +64,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
           safetyRegionName,
         })}
       />
-      <ContentHeader
+      <ContentHeader_weekRangeHack
         category={siteText.veiligheidsregio_layout.headings.overig}
         title={replaceVariablesInText(text.titel, {
           safetyRegion: safetyRegionName,
@@ -71,8 +73,9 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: barScaleData?.unix,
-          dateInsertedUnix: barScaleData?.dateInsertedUnix,
+          weekStartUnix: sewerAverages.last_value.week_start_unix,
+          weekEndUnix: sewerAverages.last_value.week_end_unix,
+          dateOfInsertionUnix: sewerAverages.last_value.date_of_insertion_unix,
           dataSource: text.bron,
         }}
       />

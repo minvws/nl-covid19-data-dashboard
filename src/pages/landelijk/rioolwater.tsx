@@ -11,7 +11,7 @@ import { formatNumber } from '~/utils/formatNumber';
 const text = siteText.rioolwater_metingen;
 
 const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
-  const rioolwaterMetingen = data.rioolwater_metingen;
+  const sewerAverages = data.rioolwater_metingen;
 
   return (
     <>
@@ -26,12 +26,9 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          weekStartUnix: rioolwaterMetingen.last_value.week_start_unix,
-          weekEndUnix: rioolwaterMetingen.last_value.week_end_unix,
-          // weekStartUnix: 234232544,
-          // weekEndUnix: 231454245,
-          dateOfInsertionUnix:
-            rioolwaterMetingen.last_value.date_of_insertion_unix,
+          weekStartUnix: sewerAverages.last_value.week_start_unix,
+          weekEndUnix: sewerAverages.last_value.week_end_unix,
+          dateOfInsertionUnix: sewerAverages.last_value.date_of_insertion_unix,
           dataSource: text.bron,
         }}
       />
@@ -40,7 +37,7 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
         <div className="column-item column-item-extra-margin">
           <h3>{text.barscale_titel}</h3>
           <p className="text-blue kpi" data-cy="infected_daily_total">
-            {formatNumber(rioolwaterMetingen.last_value.average)}
+            {formatNumber(sewerAverages.last_value.average)}
           </p>
         </div>
 
@@ -49,12 +46,12 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
         </div>
       </article>
 
-      {rioolwaterMetingen.values && (
+      {sewerAverages.values && (
         <article className="metric-article">
           <LineChart
             title={text.linechart_titel}
             timeframeOptions={['all', '5weeks']}
-            values={rioolwaterMetingen.values.map((value) => ({
+            values={sewerAverages.values.map((value) => ({
               value: Number(value.average),
               date: value.week_unix,
               week: { start: value.week_start_unix, end: value.week_end_unix },

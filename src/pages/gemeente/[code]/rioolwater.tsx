@@ -2,7 +2,6 @@ import { useMemo } from 'react';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import { BarChart } from '~/components/charts';
 import { FCWithLayout } from '~/components/layout';
-import { ContentHeader } from '~/components/contentHeader';
 import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
 import { MunicipalSewerWaterLineChart } from '~/components/lineChart/municipalSewerWaterLineChart';
 import { SEOHead } from '~/components/seoHead';
@@ -19,6 +18,8 @@ import {
   getSewerWaterBarScaleData,
   getSewerWaterLineChartData,
 } from '~/utils/sewer-water/municipality-sewer-water.util';
+import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRangeHack';
+import { assert } from '~/utils/assert';
 
 const text = siteText.gemeente_rioolwater_metingen;
 
@@ -33,6 +34,9 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
     };
   }, [data]);
 
+  const sewerAverages = data.sewer_measurements;
+  assert(sewerAverages, 'Missing sewer measurements data');
+
   return (
     <>
       <SEOHead
@@ -43,7 +47,8 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
           municipalityName,
         })}
       />
-      <ContentHeader
+
+      <ContentHeader_weekRangeHack
         category={siteText.gemeente_layout.headings.overig}
         title={replaceVariablesInText(text.titel, {
           municipality: municipalityName,
@@ -52,8 +57,9 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: barScaleData?.unix,
-          dateInsertedUnix: barScaleData?.dateInsertedUnix,
+          weekStartUnix: sewerAverages.last_value.week_start_unix,
+          weekEndUnix: sewerAverages.last_value.week_end_unix,
+          dateOfInsertionUnix: sewerAverages.last_value.date_of_insertion_unix,
           dataSource: text.bron,
         }}
       />
