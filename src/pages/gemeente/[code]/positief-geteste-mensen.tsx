@@ -1,5 +1,7 @@
 import { useRouter } from 'next/router';
 
+import Markdown from 'markdown-to-jsx';
+
 import siteText from '~/locale/index';
 import { PositiveTestedPeople } from '~/types/data.d';
 import {
@@ -76,7 +78,7 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
               </span>
             </h3>
           )}
-          <p>{text.kpi_toelichting}</p>
+          <Markdown>{text.kpi_toelichting}</Markdown>
         </article>
       </div>
 

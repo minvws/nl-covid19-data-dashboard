@@ -1,5 +1,7 @@
 import { useRouter } from 'next/router';
 
+import Markdown from 'markdown-to-jsx';
+
 import siteText from '~/locale/index';
 import { ResultsPerRegion } from '~/types/data.d';
 import {
@@ -87,7 +89,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
               </span>
             </h3>
           )}
-          <p>{text.kpi_toelichting}</p>
+          <Markdown>{text.kpi_toelichting}</Markdown>
           {ggdData && ggdData.infected_percentage_daily && (
             <div className="ggd-summary">
               <h4

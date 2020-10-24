@@ -16,6 +16,7 @@
     "highcharts": "^8.2.0",
     "highcharts-react-official": "^3.0.0",
     "jsdom": "^16.4.0",
+    "markdown-to-jsx": "^7.0.1",
     "match-sorter": "^4.2.0",
     "next": "9.5.2",
     "react": "^16.13.1",

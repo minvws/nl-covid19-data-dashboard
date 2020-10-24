@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 
+import Markdown from 'markdown-to-jsx';
+
 import getNlData, { INationalData } from '~/static-props/nl-data';
 import siteText from '~/locale/index';
 import {
@@ -93,7 +95,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
               </span>
             </h3>
           )}
-          <p>{text.kpi_toelichting}</p>
+          <Markdown>{text.kpi_toelichting}</Markdown>
           {ggdData && ggdData.percentage_infected_ggd && (
             <div className="ggd-summary">
               <h4
