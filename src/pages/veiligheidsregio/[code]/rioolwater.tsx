@@ -25,6 +25,9 @@ import {
   getSewerWaterScatterPlotData,
 } from '~/utils/sewer-water/safety-region-sewer-water.util';
 import { TimeframeOption } from '~/utils/timeframe';
+import { TwoKpiSection } from '~/components-styled/two-kpi-section';
+import { KpiTile } from '~/components-styled/kpi-tile';
+import { KpiValue } from '~/components-styled/kpi-value';
 
 const text = siteText.veiligheidsregio_rioolwater_metingen;
 
@@ -76,6 +79,28 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
           dataSource: text.bron,
         }}
       />
+
+      {barScaleData && barScaleData.value !== undefined && (
+        <TwoKpiSection>
+          <KpiTile title={text.barscale_titel} description={text.extra_uitleg}>
+            <KpiValue
+              absolute={barScaleData.value}
+              data-cy="infected_daily_total"
+            />
+          </KpiTile>
+          <KpiTile
+            title={text.total_installation_count_titel}
+            description={text.total_installation_count_description}
+          >
+            <KpiValue
+              absolute={
+                data.average_sewer_installation_per_region.last_value
+                  .total_installation_count
+              }
+            />
+          </KpiTile>
+        </TwoKpiSection>
+      )}
 
       <article className="metric-article layout-two-column">
         <div className="column-item column-item-extra-margin">
