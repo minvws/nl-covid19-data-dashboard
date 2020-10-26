@@ -49,13 +49,13 @@
 
   path {
     pointer-events: all;
-    stroke: #505050;
+    stroke: #fff;
     stroke-width: 0.5;
   }
 
   path.selectedPath {
     stroke: #000000;
-    stroke-width: 1.5;
+    stroke-width: 3;
     fill: none;
   }
 
@@ -78,12 +78,11 @@
   */
 
   path.faded {
-    stroke: #505050;
+    stroke: #c4c4c4;
   }
 
   path.overlay {
     pointer-events: none;
-    stroke: #505050;
     stroke-width: 0.5;
     fill: transparent;
   }
