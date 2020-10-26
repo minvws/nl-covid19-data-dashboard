@@ -761,7 +761,7 @@
       "title": "Sewage water examination in {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
       "description": "Sewage water examination in {{safetyRegionName}} | Dashboard Coronavirus | Government.nl"
     },
-    "graph_daily_label_text_rwzi": "",
+    "graph_daily_label_text_rwzi": "Measurements for ({{name}})",
     "graph_selected_rwzi_placeholder": "Select location",
     "graph_range_description": "Progression over time",
     "titel_kpi": "",
