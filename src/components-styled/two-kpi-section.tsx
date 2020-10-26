@@ -1,12 +1,12 @@
 import React from 'react';
 import { assert } from '~/utils/assert';
-import { Box } from './base';
+import { Box, BoxProps } from './base';
 
-interface TwoKpiSectionProps {
+interface TwoKpiSectionProps extends BoxProps {
   children: React.ReactNode;
 }
 
-export function TwoKpiSection({ children }: TwoKpiSectionProps) {
+export function TwoKpiSection({ children, ...props }: TwoKpiSectionProps) {
   const childrenCount = React.Children.count(children);
 
   assert(
@@ -34,6 +34,7 @@ export function TwoKpiSection({ children }: TwoKpiSectionProps) {
        */
       ml={{ _: -4, sm: 0 }}
       mr={{ _: -4, sm: 0 }}
+      {...(props as any)}
     >
       <Box flex="1 1 50%" mr={{ lg: 3 }} mb={{ _: 4, lg: 0 }}>
         {childrenArray[0]}

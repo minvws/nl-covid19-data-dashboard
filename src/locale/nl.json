@@ -411,7 +411,9 @@
       "description": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater, afkomstig van circa 300 locaties in Nederland."
     },
     "titel_sidebar": "Rioolwatermeting",
-    "titel_kpi": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater"
+    "titel_kpi": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater",
+    "total_installation_count_titel": "Aantal RWZI-locaties",
+    "total_installation_count_description": "Aantal locaties dat wordt meegenomen in het berekenen van het gemiddelde.\nRWZI = Rioolwaterzuiveringsinstallatie."
   },
   "notfound_titel": {
     "text": "Er is iets misgegaan"
@@ -766,7 +768,9 @@
     "graph_daily_label_text_rwzi": "Dagwaarde aantal virusdeeltjes in 1 mL rioolwater ({{name}})",
     "graph_selected_rwzi_placeholder": "Selecteer RWZI",
     "graph_range_description": "Verloop over tijd",
-    "titel_kpi": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater"
+    "titel_kpi": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater",
+    "total_installation_count_titel": "Aantal RWZI-locaties",
+    "total_installation_count_description": "Aantal locaties dat wordt meegenomen in het berekenen van het gemiddelde.\nRWZI = Rioolwaterzuiveringsinstallatie."
   },
   "gemeente_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Ziekenhuisopnames per dag",
@@ -919,7 +923,13 @@
     "totaal_getest_week_uitleg": "Aantal personen die in één week via de GGD getest zijn, en waarvan de testuitslag bekend is.",
     "positief_getest_week_titel": "Positief geteste personen",
     "positief_getest_week_uitleg": "Aantal en percentage positief geteste personen die in één week via de GGD getest zijn. Voor het berekenen van het percentage worden alleen tests meegeteld waarvan de testuitslag bekend is.",
-    "positief_getest_getest_week_uitleg": "Dit zijn {{numerator}} van {{denominator}} geteste personen"
+    "positief_getest_getest_week_uitleg": "Dit zijn {{numerator}} van {{denominator}} geteste personen",
+    "linechart_percentage_titel": "Percentage positieve testen over tijd",
+    "linechart_percentage_toelichting": "Deze grafiek toont het percentage positief geteste mensen door de GGD over tijd",
+    "linechart_totaltests_titel": "Aantal testen over tijd",
+    "linechart_totaltests_toelichting": "Deze grafiek toont het aantal afgenomen testen over tijd in vergelijking met het aantal positieve testen.",
+    "linechart_totaltests_legend_label": "Alle GGD tests",
+    "linechart_positivetests_legend_label": "Alle positieve testen van de GGD"
   },
   "over_risiconiveaus": {
     "title": "Over risiconiveaus",
@@ -944,7 +954,13 @@
     "totaal_getest_week_uitleg": "Aantal personen die in één week via de GGD getest zijn, en waarvan de testuitslag bekend is.",
     "positief_getest_week_titel": "Positief geteste personen",
     "positief_getest_week_uitleg": "Aantal en percentage positief geteste personen die in één week via de GGD getest zijn. Voor het berekenen van het percentage worden alleen tests meegeteld waarvan de testuitslag bekend is.",
-    "positief_getest_getest_week_uitleg": "Dit zijn {{numerator}} van {{denominator}} geteste personen"
+    "positief_getest_getest_week_uitleg": "Dit zijn {{numerator}} van {{denominator}} geteste personen",
+    "linechart_percentage_titel": "Percentage positieve testen over tijd",
+    "linechart_percentage_toelichting": "Deze grafiek toont het percentage positief geteste mensen door de GGD over tijd",
+    "linechart_totaltests_titel": "Aantal testen over tijd",
+    "linechart_totaltests_toelichting": "Deze grafiek toont het aantal afgenomen testen over tijd in vergelijking met het aantal positieve testen.",
+    "linechart_totaltests_legend_label": "Alle GGD tests",
+    "linechart_positivetests_legend_label": "Alle positieve testen van de GGD"
   },
   "veiligheidsregio_verpleeghuis_oversterfte": {
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",

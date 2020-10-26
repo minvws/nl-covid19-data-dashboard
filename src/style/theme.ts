@@ -1,3 +1,5 @@
+import { ScaleThemeProperties, ThemeBreakPoints } from '@styled-system/css';
+
 const space = [
   0,
   '0.25rem', // 4px at default zoom
@@ -75,6 +77,8 @@ const mediaQueries = {
   xl: `@media screen and (min-width: ${breakpoints[4]})`,
 };
 
+type TMediaQueries = typeof mediaQueries;
+
 const colors = {
   blue: '#01689b',
   icon: '#01689b',
@@ -88,14 +92,19 @@ const shadows = {
   tile: `0 -1px 1px 0 ${colors.shadow}, 0 1px 1px 0 ${colors.shadow}, 0 2px 2px 0 ${colors.shadow}, 0 4px 4px 0 ${colors.shadow}, 0 6px 6px 0 ${colors.shadow}`,
 };
 
-export default {
+type TDashboardTheme = ScaleThemeProperties &
+  ThemeBreakPoints & { mediaQueries: TMediaQueries };
+
+const theme: TDashboardTheme = {
   fonts,
   fontSizes,
   lineHeights,
-  breakpoints,
+  breakpoints: breakpoints as any,
   mediaQueries,
   space,
   colors,
   radii,
   shadows,
 };
+
+export default theme;

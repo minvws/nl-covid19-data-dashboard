@@ -30,14 +30,18 @@ const StyledValue = styled.div(
 /**
  * Display a blue KPI value with optionally a percentage behind it.
  */
-export function KpiValue({ absolute, percentage }: KpiValueProps) {
+export function KpiValue({ absolute, percentage, ...props }: KpiValueProps) {
   if (isDefined(percentage)) {
     return (
-      <StyledValue color="blue">
+      <StyledValue color="blue" {...(props as any)}>
         {`${formatNumber(absolute)} (${formatPercentage(percentage)}%)`}
       </StyledValue>
     );
   } else {
-    return <StyledValue color="blue">{formatNumber(absolute)}</StyledValue>;
+    return (
+      <StyledValue color="blue" {...(props as any)}>
+        {formatNumber(absolute)}
+      </StyledValue>
+    );
   }
 }
