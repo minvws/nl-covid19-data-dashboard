@@ -20,21 +20,26 @@ export function useRegionalSewerWaterChartOptions(
   timeframe: TimeframeOption,
   selectedRWZI?: string
 ): Highcharts.Options {
+  const filteredAverageValues = useMemo(
+    () =>
+      getFilteredValues(averageValues, timeframe, (value) => value.date * 1000),
+    [averageValues, timeframe]
+  );
+
+  const filteredScatterPlotValues = useMemo(
+    () =>
+      getFilteredValues(
+        scatterPlotValues,
+        timeframe,
+        (value) => value.date_measurement_unix * 1000
+      ),
+    [scatterPlotValues, timeframe]
+  );
+
   return useMemo(() => {
-    const hasMultipleValues = averageValues.length > 1;
+    const hasMultipleValues = filteredAverageValues.length > 1;
 
-    averageValues = getFilteredValues(
-      averageValues,
-      timeframe,
-      (value) => value.date * 1000
-    );
-    scatterPlotValues = getFilteredValues(
-      scatterPlotValues,
-      timeframe,
-      (value) => value.date_measurement_unix * 1000
-    );
-
-    const weekSet: Week[] = averageValues.map((value) => ({
+    const weekSet: Week[] = filteredAverageValues.map((value) => ({
       start: value.week_start_unix,
       end: value.week_end_unix,
     }));
@@ -49,7 +54,7 @@ export function useRegionalSewerWaterChartOptions(
       name: text.secondary_label_text,
       description: text.secondary_label_text,
       color: '#CDCDCD',
-      data: scatterPlotValues?.map((value) => ({
+      data: filteredScatterPlotValues?.map((value) => ({
         x: value.date_measurement_unix,
         y: value.rna_per_ml,
       })),
@@ -63,7 +68,7 @@ export function useRegionalSewerWaterChartOptions(
 
     series.push({
       type: 'line',
-      data: averageValues.map((x) => [x.date, x.value]),
+      data: filteredAverageValues.map((x) => [x.date, x.value]),
       name: text.average_label_text,
       description: text.average_label_text,
       showInLegend: true,
@@ -82,7 +87,7 @@ export function useRegionalSewerWaterChartOptions(
     });
 
     if (selectedRWZI) {
-      const scatterValues = scatterPlotValues.filter(
+      const scatterValues = filteredScatterPlotValues.filter(
         (value) => value.rwzi_awzi_name === selectedRWZI
       );
       if (scatterValues.length) {
@@ -110,7 +115,7 @@ export function useRegionalSewerWaterChartOptions(
         });
       }
 
-      weekSets[selectedRWZI] = scatterPlotValues
+      weekSets[selectedRWZI] = filteredScatterPlotValues
         .filter((plot) => plot.rwzi_awzi_name === selectedRWZI)
         .map((value) => ({
           start: value.week_start_unix,
@@ -146,7 +151,9 @@ export function useRegionalSewerWaterChartOptions(
         title: {
           text: null,
         },
-        categories: averageValues.map((value) => value?.date.toString()),
+        categories: filteredAverageValues.map((value) =>
+          value?.date.toString()
+        ),
         labels: {
           align: 'right',
           // types say `rotation` needs to be a number,
@@ -202,5 +209,5 @@ export function useRegionalSewerWaterChartOptions(
     };
 
     return options;
-  }, [averageValues, scatterPlotValues, text, selectedRWZI, timeframe]);
+  }, [filteredAverageValues, filteredScatterPlotValues, text, selectedRWZI]);
 }

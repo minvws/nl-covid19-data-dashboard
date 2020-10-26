@@ -8,18 +8,18 @@ import { getItemFromArray } from '~/utils/getItemFromArray';
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
 import styles from './lineChart.module.scss';
 
-interface Value {
+export interface Value {
   date: number;
   value?: number;
   week: Week;
 }
 
-type Week = {
+export type Week = {
   start: number;
   end: number;
 };
 
-type LineChartProps = {
+export type LineChartProps = {
   values: Value[];
   title: string;
   description?: string;
@@ -148,9 +148,9 @@ function getOptions(values: Value[]): Highcharts.Options {
 }
 
 export function LineChart({
-  values,
   title,
   description,
+  values,
   timeframeOptions,
 }: LineChartProps) {
   const [timeframe, setTimeframe] = useState<TimeframeOption>('5weeks');

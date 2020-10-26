@@ -354,6 +354,11 @@
       }
     }
   }
+
+  .metric-wrapper > div:not(:first-child) {
+    height: 4rem;
+    margin-top: -1em;
+  }
 }
 
 .region-names {
@@ -398,7 +403,7 @@ a.metric-link {
     display: block;
     position: absolute;
     right: 1em;
-    top: 4em;
+    top: 1.35em;
   }
 
   span {
@@ -408,7 +413,7 @@ a.metric-link {
 
   &.last-developments-link {
     &::after {
-      top: 2em;
+      top: 1.15em;
     }
   }
 }
@@ -551,7 +556,6 @@ a.metric-link {
 
     margin: 0 0 1rem;
     max-width: 100%;
-    overflow: hidden;
 
     @media (min-width: $chloropleth-breakpoint) {
       justify-content: flex-start;

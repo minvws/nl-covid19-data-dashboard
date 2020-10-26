@@ -1,12 +1,14 @@
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
+import { KpiTile } from '~/components-styled/kpi-tile';
+import { KpiValue } from '~/components-styled/kpi-value';
+import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRangeHack';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
-import { LineChart } from '~/components/lineChart/lineChartWithWeekTooltip';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
-import { formatNumber } from '~/utils/formatNumber';
 
 const text = siteText.rioolwater_metingen;
 
@@ -33,32 +35,32 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
         }}
       />
 
-      <article className="metric-article layout-two-column">
-        <div className="column-item column-item-extra-margin">
-          <h3>{text.barscale_titel}</h3>
-          <p className="text-blue kpi" data-cy="infected_daily_total">
-            {formatNumber(sewerAverages.last_value.average)}
-          </p>
-        </div>
-
-        <div className="column-item column-item-extra-margin">
-          <p>{text.extra_uitleg}</p>
-        </div>
-      </article>
-
-      {sewerAverages.values && (
-        <article className="metric-article">
-          <LineChart
-            title={text.linechart_titel}
-            timeframeOptions={['all', '5weeks']}
-            values={sewerAverages.values.map((value) => ({
-              value: Number(value.average),
-              date: value.week_unix,
-              week: { start: value.week_start_unix, end: value.week_end_unix },
-            }))}
+      <TwoKpiSection>
+        <KpiTile title={text.barscale_titel} description={text.extra_uitleg}>
+          <KpiValue
+            absolute={sewerAverages.last_value.average}
+            data-cy="infected_daily_total"
           />
-        </article>
-      )}
+        </KpiTile>
+        <KpiTile
+          title={text.total_installation_count_titel}
+          description={text.total_installation_count_description}
+        >
+          <KpiValue
+            absolute={sewerAverages.last_value.total_installation_count}
+          />
+        </KpiTile>
+      </TwoKpiSection>
+
+      <LineChartTile
+        title={text.linechart_titel}
+        timeframeOptions={['all', '5weeks']}
+        values={sewerAverages.values.map((value) => ({
+          value: Number(value.average),
+          date: value.week_unix,
+          week: { start: value.week_start_unix, end: value.week_end_unix },
+        }))}
+      />
     </>
   );
 };

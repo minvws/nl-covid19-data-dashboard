@@ -1,7 +1,6 @@
-import { LineChart } from '~/components/charts';
 // Props type needs to be imported from lineChart directly because charts only works with
 // default export.
-import { LineChartProps } from '~/components/lineChart';
+import LineChart, { LineChartProps } from '~/components/lineChart';
 import locale from '~/locale/index';
 import { Spacer } from './base';
 import { ExternalLink } from './external-link';
