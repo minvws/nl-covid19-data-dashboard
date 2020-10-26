@@ -164,7 +164,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                             .titel_sidebar
                         }
                       />
-                      <span>
+                      <span className="metric-wrapper">
                         <PositivelyTestedPeopleMetric
                           data={data.results_per_region.last_value}
                         />

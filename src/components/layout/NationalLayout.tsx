@@ -138,7 +138,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
                       Icon={GetestIcon}
                       title={siteText.positief_geteste_personen.titel_sidebar}
                     />
-                    <span>
+                    <span className="metric-wrapper">
                       <PositiveTestedPeopleMetric
                         data={data.infected_people_total.last_value}
                       />
@@ -162,7 +162,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
                       Icon={ReproIcon}
                       title={siteText.reproductiegetal.titel_sidebar}
                     />
-                    <span>
+                    <span className="metric-wrapper">
                       <ReproductionIndexMetric
                         data={
                           data.reproduction_index_last_known_average.last_value
@@ -209,7 +209,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
                       Icon={Ziekenhuis}
                       title={siteText.ziekenhuisopnames_per_dag.titel_sidebar}
                     />
-                    <span>
+                    <span className="metric-wrapper">
                       <IntakeHospitalMetric
                         data={data.intake_hospital_ma.last_value}
                       />
@@ -235,7 +235,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
                       Icon={Arts}
                       title={siteText.ic_opnames_per_dag.titel_sidebar}
                     />
-                    <span>
+                    <span className="metric-wrapper">
                       <IntakeIntensiveCareMetric
                         data={data.intake_intensivecare_ma.last_value}
                       />
