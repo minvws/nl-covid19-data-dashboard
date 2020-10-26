@@ -40,6 +40,9 @@ export function Collapsable(props: CollapsableProps) {
    * This is done on page load and before opening or closing the collapsable.
    */
   const setContentHeight = useCallback(() => {
+    if (!panelReference?.current) {
+      return;
+    }
     const node = panelReference.current as HTMLDivElement;
     node.style.maxHeight = `${node.scrollHeight}px`;
   }, [panelReference]);
@@ -71,7 +74,11 @@ export function Collapsable(props: CollapsableProps) {
     };
   }, []); // should not use dependancies in array: use effect mimics mount / unmount
 
-  useWindowResizeDebounce(setContentHeight, 400);
+  /*
+   * On resize, the max-height should be re-applied
+   * Uses a wraping arrow function to provide the correct panelReference context
+   */
+  useWindowResizeDebounce(() => setContentHeight(), 400);
 
   return (
     <section id={id} className={styles.root}>
