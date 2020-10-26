@@ -413,7 +413,8 @@
     "titel_sidebar": "",
     "titel_kpi": "",
     "total_installation_count_titel": "Number of measurement locations",
-    "total_installation_count_description": "Weekly number of wastewater treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful."
+    "total_installation_count_description": "Weekly number of wastewater treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful.",
+    "rwzi_abbrev": "RWZI = Rioolwaterzuiveringsinstallatie."
   },
   "notfound_titel": {
     "text": "Something went wrong"
@@ -769,7 +770,8 @@
     "graph_range_description": "Progression over time",
     "titel_kpi": "",
     "total_installation_count_titel": "Number of measurement locations",
-    "total_installation_count_description": "Weekly number of wastewater treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful."
+    "total_installation_count_description": "Weekly number of wastewater treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful.",
+    "rwzi_abbrev": "RWZI = Rioolwaterzuiveringsinstallatie."
   },
   "gemeente_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Hospital admissions by day",

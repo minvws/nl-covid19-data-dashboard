@@ -44,7 +44,10 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
         </KpiTile>
         <KpiTile
           title={text.total_installation_count_titel}
-          description={text.total_installation_count_description}
+          description={
+            text.total_installation_count_description +
+            `<p style="color:#595959">${text.rwzi_abbrev}</p>`
+          }
         >
           <KpiValue
             absolute={sewerAverages.last_value.total_installation_count}

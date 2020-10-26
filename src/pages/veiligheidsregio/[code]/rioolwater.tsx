@@ -15,7 +15,6 @@ import {
   getSafetyRegionPaths,
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
-import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import {
   getInstallationNames,
@@ -93,7 +92,10 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
           </KpiTile>
           <KpiTile
             title={text.total_installation_count_titel}
-            description={text.total_installation_count_description}
+            description={
+              text.total_installation_count_description +
+              `<p style="color:#595959">${text.rwzi_abbrev}</p>`
+            }
           >
             <KpiValue
               absolute={
@@ -105,23 +107,11 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
         </TwoKpiSection>
       )}
 
-      <article className="metric-article layout-two-column">
-        <div className="column-item column-item-extra-margin">
-          <h3>{text.barscale_titel}</h3>
-          <p className="text-blue kpi" data-cy="infected_daily_total">
-            {formatNumber(barScaleData?.value)}
-          </p>
-        </div>
-
-        <div className="column-item column-item-extra-margin">
-          <p>{text.extra_uitleg}</p>
-        </div>
-      </article>
-
       <article className="metric-article">
         <div className="metric-article-header">
           <h3>{text.linechart_titel}</h3>
           <ChartTimeControls
+            timeframeOptions={['all', '5weeks']}
             timeframe={timeframe}
             onChange={(value) => setTimeframe(value)}
           />

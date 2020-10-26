@@ -413,7 +413,8 @@
     "titel_sidebar": "Rioolwatermeting",
     "titel_kpi": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater",
     "total_installation_count_titel": "Aantal RWZI-locaties",
-    "total_installation_count_description": "Aantal locaties dat wordt meegenomen in het berekenen van het gemiddelde.\n\nRWZI = Rioolwaterzuiveringsinstallatie."
+    "total_installation_count_description": "Aantal locaties dat wordt meegenomen in het berekenen van het gemiddelde.",
+    "rwzi_abbrev": "RWZI = Rioolwaterzuiveringsinstallatie."
   },
   "notfound_titel": {
     "text": "Er is iets misgegaan"
@@ -769,7 +770,8 @@
     "graph_range_description": "Verloop over tijd",
     "titel_kpi": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater",
     "total_installation_count_titel": "Aantal RWZI-locaties",
-    "total_installation_count_description": "Aantal locaties dat wordt meegenomen in het berekenen van het gemiddelde.\n\nRWZI = Rioolwaterzuiveringsinstallatie."
+    "total_installation_count_description": "Aantal locaties dat wordt meegenomen in het berekenen van het gemiddelde.",
+    "rwzi_abbrev": "RWZI = Rioolwaterzuiveringsinstallatie."
   },
   "gemeente_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Ziekenhuisopnames per dag",
