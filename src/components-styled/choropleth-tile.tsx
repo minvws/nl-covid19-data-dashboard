@@ -44,9 +44,9 @@ export function ChoroplethTile<T>({
       ml={{ _: -4, sm: 0 }}
       mr={{ _: -4, sm: 0 }}
       display={{ _: 'flex', lg: 'grid' }}
-      gridTemplateColumns={{ lg: '1fr 1fr' }}
-      gridTemplateRows={{ lg: 'auto auto 1fr auto' }}
-      gridTemplateAreas={{ lg: `'w w' 'a c' 'b c' 'd c'` }}
+      gridTemplateColumns={'1fr 1fr'}
+      gridTemplateRows={'auto auto 1fr auto'}
+      gridTemplateAreas={`'w w' 'a c' 'b c' 'd c'`}
     >
       <Box gridArea="a" mb={[0, 2]}>
         <Heading level={3}>{title}</Heading>
