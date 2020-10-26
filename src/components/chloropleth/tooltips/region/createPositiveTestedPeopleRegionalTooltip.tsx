@@ -31,7 +31,7 @@ export const createPositiveTestedPeopleRegionalTooltip = (
         <p className="info-value">{formatNumber(value)} per 100.000</p>
         <p className="info-total">
           {replaceVariablesInText(text.positive_tested_people, {
-            totalPositiveTestedPeople: total_positive_tested_people,
+            totalPositiveTestedPeople: `${total_positive_tested_people}`,
           })}
         </p>
       </TooltipContent>
