@@ -41,6 +41,7 @@ import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { KpiSection } from '~/components-styled/kpi-section';
 import { MultipleLineChart } from '~/components/lineChart/multipleLineChart';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { formatDateFromSeconds } from '~/utils/formatDate';
 
 const text = siteText.positief_geteste_personen;
 const ggdText = siteText.positief_geteste_personen_ggd;
@@ -252,7 +253,9 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
             value: value.infected_percentage_daily,
             date: value.date_of_report_unix,
           }))}
-          signaalwaarde={7}
+          formatTooltip={(x: number, y: number) => {
+            return `${formatDateFromSeconds(x)}: ${formatPercentage(y)}%`;
+          }}
         />
       </KpiSection>
 
@@ -280,7 +283,6 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
               legendLabel: ggdText.linechart_positivetests_legend_label,
             },
           ]}
-          signaalwaarde={7}
         />
       </KpiSection>
     </>
