@@ -41,8 +41,8 @@ export function ChoroplethTile<T>({
   return (
     <Tile
       mb={4}
-      ml={{ _: -4, md: 0 }}
-      mr={{ _: -4, md: 0 }}
+      ml={{ _: -4, sm: 0 }}
+      mr={{ _: -4, sm: 0 }}
       display={{ _: 'flex', lg: 'grid' }}
       gridTemplateColumns={{ lg: '1fr 1fr' }}
       gridTemplateRows={{ lg: 'auto auto 1fr auto' }}
