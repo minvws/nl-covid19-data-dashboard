@@ -10,7 +10,7 @@
   },
   "notificatie": {
     "titel": "Slower increase in new COVID-19 infections ",
-    "bericht": "In the past week (14 to 20 October) the number of people who newly tested positive rose, as did the number of COVID-19 patients admitted to hospital and ICU. However, the speed at which new infections increased seems to have slowed somewhat. This might be a result of the government policy measures issued late September. However, the number of hospital admissions continues to rise at the same pace. \n\nRisk level per region can be ‘caution’ (level 1), ‘concern’ (level 2), ‘serious’ (level 3) or ‘severe’ (level 4). At this moment the risk level of 16 regions is 'severe', for 7 it is ‘serious’ and for 2 it is ‘concern’.",
+    "bericht": "In the past week (14 to 20 October) the number of people who newly tested positive rose, as did the number of COVID-19 patients admitted to hospital and ICU. However, the speed at which new infections increased seems to have slowed somewhat. This might be a result of the government policy measures issued late September. However, the number of hospital admissions continues to rise at the same pace. \n\nRisk level per region can be ‘caution’ (level 1), ‘concern’ (level 2), ‘serious’ (level 3) or ‘severe’ (level 4). At this moment the risk level of {{escalationLevel4}} regions is 'severe', for {{escalationLevel3}} it is ‘serious’, for {{escalationLevel2}} it is ‘concern’ and for {{escalationLevel1}} it is ‘caution’.",
     "link": {
       "text": "View the full message from the RIVM",
       "href": "https://www.rivm.nl/en/novel-coronavirus-covid-19/current-information"
@@ -39,13 +39,13 @@
     "links": {
       "index": "National",
       "over": "About this dashboard",
-      "veelgestelde_vragen": "Veelgestelde vragen",
       "meer": "More information on the coronavirus",
       "verantwoording": "Explanation of the data presented",
       "meer_href": "https://www.government.nl/topics/coronavirus-covid-19",
       "veiligheidsregio": "Safety regions",
       "gemeente": "Municipalities",
-      "over_risiconiveaus": "About the risk levels"
+      "over_risiconiveaus": "About the risk levels",
+      "veelgestelde_vragen": ""
     },
     "title": "Corona Dashboard",
     "terug_naar_alle_cijfers": "Overview",
@@ -395,7 +395,7 @@
     "text": "Select your region at the top of this page"
   },
   "rioolwater_metingen": {
-    "datums": "Value of {{weekStart}} to {{weekEnd}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
+    "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
     "bron": {
       "text": "RIVM",
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
@@ -405,15 +405,15 @@
     "barscale_titel": "Average number of virus particles in one milliliter of sewage water",
     "extra_uitleg": "The national value is based on the total number of measured virus particles in one week, divided by the number of measurements.",
     "barscale_screenreader_text": "{{value}} virus particles in one milliliter of sewage water, collected from about 300 sites in the Netherlands.",
-    "linechart_titel": "Progression over time",
+    "linechart_titel": "Viral particles per millilitre of waste water over time",
     "metadata": {
       "title": "Sewage water examination | Dashboard Coronavirus | Government.nl",
       "description": "Average number of virus particles in one milliliter of sewage water, collected from about 300 sites in the Netherlands."
     },
     "titel_sidebar": "",
     "titel_kpi": "",
-    "total_installation_count_titel": "Aantal RWZI-locaties",
-    "total_installation_count_description": "Aantal locaties dat wordt meegenomen in het berekenen van het gemiddelde.\nRWZI = Rioolwaterzuiveringsinstallatie."
+    "total_installation_count_titel": "Number of measurement locations",
+    "total_installation_count_description": "Weekly number of wastewater treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful."
   },
   "notfound_titel": {
     "text": "Something went wrong"
@@ -432,8 +432,7 @@
     "text": "The coronavirus dashboard gives up-to-date information about COVID-19 in the Netherlands. Picking up signs that the rate of infection is increasing allows us to act to stop the virus from spreading."
   },
   "over_veelgestelde_vragen": {
-    "titel": "Frequently asked questions",
-    "paragraaf": "",
+    "text": "Frequently asked questions",
     "vragen": [
       {
         "vraag": "What is the dashboard for?",
@@ -491,7 +490,9 @@
         "vraag": "Why do I find a different value for the total number of confirmed cases (people who tested positive) as shown on the site, if I add all the reported confirmed cases per safety region? ",
         "antwoord": "We calculate the increase in the number of confirmed cases (people who tested positive) by deducting the current day’s cumulative number of confirmed cases reported from the cumulative number reported the day before. Any corrections to historical data, such as double counting, are processed by the RIVM on the day the error was discovered. This means the number of new cases reported for that day is lower than the actual number, but this is offset by the numbers being too high on previous days. Because of such corrections, it is possible for the current day’s cumulative number to be lower than the number for the day before. This is then depicted as 0 (zero) on the dashboard, as a negative number is confusing. This is why discrepancies arise when regional data is aggregated into national data. If you would use the negative values of the safety regions to calculate the daily number of confirmed cases, you would find the correct values. "
       }
-    ]
+    ],
+    "titel": "",
+    "paragraaf": ""
   },
   "terug_naar_regio_selectie": {
     "text": "Back to selection of region"
@@ -577,11 +578,6 @@
     "title": "About the Coronavirus COVID-19 Dashboard | Government.nl",
     "description": "Information on the development of the coronavirus in the Netherlands.",
     "url": "https://coronadashboard.government.nl/over"
-  },
-  "veelgestelde_vragen_metadata": {
-    "title": "Veelgestelde vragen Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
-    "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
-    "url": "https://coronadashboard.government.nl/veelgestelde-vragen"
   },
   "regionaal_metadata": {
     "title": "Regional Dashboard Coronavirus COVID-19 | Government.nl",
@@ -750,7 +746,7 @@
     "barscale_titel": "Average number of virus particles in one milliliter of sewage water in this safety region",
     "extra_uitleg": "To calculate this, the total number of measured virus particles in one week, is divided by the number of measurements.",
     "barscale_screenreader_text": "{{value}} virus particles in one milliliter of sewage water, collected from 28 locations in the Netherlands.",
-    "linechart_titel": "Progression over time",
+    "linechart_titel": "Viral particles per millilitre of waste water over time",
     "bar_chart_title": "Last known value by RWZI-location in {{safetyRegion}}",
     "bar_chart_axis_title": "Number of virus particles per milliliter of sewage water",
     "bron": {
@@ -766,11 +762,11 @@
       "description": "Sewage water examination in {{safetyRegionName}} | Dashboard Coronavirus | Government.nl"
     },
     "graph_daily_label_text_rwzi": "",
-    "graph_selected_rwzi_placeholder": "",
-    "graph_range_description": "",
+    "graph_selected_rwzi_placeholder": "Select location",
+    "graph_range_description": "Progression over time",
     "titel_kpi": "",
-    "total_installation_count_titel": "Aantal RWZI-locaties",
-    "total_installation_count_description": "Aantal locaties dat wordt meegenomen in het berekenen van het gemiddelde.\nRWZI = Rioolwaterzuiveringsinstallatie."
+    "total_installation_count_titel": "Number of measurement locations",
+    "total_installation_count_description": "Weekly number of wastewater treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful."
   },
   "gemeente_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Hospital admissions by day",
@@ -838,7 +834,7 @@
     "barscale_titel": "Average number of virus particles in one milliliter of sewage water in this municipality",
     "extra_uitleg": "To calculate this, the total number of measured virus particles in one week, is divided by the number of measurements.",
     "barscale_screenreader_text": "{{value}} virus particles in one milliliter of sewage water, collected from 300 sites in the Netherlands.",
-    "linechart_titel": "Progression over time",
+    "linechart_titel": "Viral particles per millilitre of waste water over time",
     "bar_chart_title": "Last known value per RWZI location in {{municipality}}",
     "bar_chart_axis_title": "Number of virus particles per milliliter of sewage water",
     "bron": {
@@ -924,12 +920,12 @@
     "positief_getest_week_titel": "Confirmed cases by GGD",
     "positief_getest_week_uitleg": "Number and percentage of confirmed cases tested by the GGD in one week. For calculating the percentage, only tests are taken into account of which the test result is known.",
     "positief_getest_getest_week_uitleg": "This is {{numerator}} of {{denominator}} tested people",
-    "linechart_percentage_titel": "Percentage positieve testen over tijd",
-    "linechart_percentage_toelichting": "Deze grafiek toont het percentage positief geteste mensen door de GGD over tijd",
-    "linechart_totaltests_titel": "Aantal testen over tijd",
-    "linechart_totaltests_toelichting": "Deze grafiek toont het aantal afgenomen testen over tijd in vergelijking met het aantal positieve testen.",
-    "linechart_totaltests_legend_label": "Alle GGD tests",
-    "linechart_positivetests_legend_label": "Alle positieve testen van de GGD"
+    "linechart_percentage_titel": "Percentage of positive tests over time ",
+    "linechart_percentage_toelichting": "This graph shows the change over time in the percentage of GGD tests that return a positive result ",
+    "linechart_totaltests_titel": "Number of tests with results over time",
+    "linechart_totaltests_toelichting": "This graph shows the change over time in the number of GGD tests with results, in relation to the share of tests with a positive result",
+    "linechart_totaltests_legend_label": "All tests with results",
+    "linechart_positivetests_legend_label": "Number of positive tests"
   },
   "over_risiconiveaus": {
     "title": "Level of risk",
@@ -955,12 +951,12 @@
     "positief_getest_week_titel": "Confirmed cases by GGD",
     "positief_getest_week_uitleg": "Number and percentage of confirmed cases tested by the GGD in one week. For calculating the percentage, only tests are taken into account of which the test result is known.",
     "positief_getest_getest_week_uitleg": "This is {{numerator}} of {{denominator}} tested people",
-    "linechart_percentage_titel": "Percentage positieve testen over tijd",
-    "linechart_percentage_toelichting": "Deze grafiek toont het percentage positief geteste mensen door de GGD over tijd",
-    "linechart_totaltests_titel": "Aantal testen over tijd",
-    "linechart_totaltests_toelichting": "Deze grafiek toont het aantal afgenomen testen over tijd in vergelijking met het aantal positieve testen.",
-    "linechart_totaltests_legend_label": "Alle GGD tests",
-    "linechart_positivetests_legend_label": "Alle positieve testen van de GGD"
+    "linechart_percentage_titel": "Percentage of positive tests over time ",
+    "linechart_percentage_toelichting": "This graph shows the change over time in the percentage of GGD tests that return a positive result ",
+    "linechart_totaltests_titel": "Number of tests with results over time",
+    "linechart_totaltests_toelichting": "This graph shows the change over time in the number of GGD tests with results, in relation to the share of tests with a positive result",
+    "linechart_totaltests_legend_label": "All tests with results",
+    "linechart_positivetests_legend_label": "Number of positive tests"
   },
   "veiligheidsregio_verpleeghuis_oversterfte": {
     "datums": "Value of  {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -1025,5 +1021,10 @@
       "description": "Number of confirmed cases of COVID-19 under nursing home residents in safety region {{safetyRegionName}}."
     }
   },
-  "data_warning_text": "Please note: this information is not as recent as the information for the national level. We're working on a resolution. For more information, see the page \"explanation of the data presented\"."
+  "data_warning_text": "Please note: this information is not as recent as the information for the national level. We're working on a resolution. For more information, see the page \"explanation of the data presented\".",
+  "veelgestelde_vragen_metadata": {
+    "title": "",
+    "description": "",
+    "url": ""
+  }
 }
