@@ -18,5 +18,6 @@ export const useWindowResizeDebounce = (
     return () => {
       window.removeEventListener('resize', handleResize);
     };
+    /* eslint-disable-next-line */
   }, []);
 };
