@@ -119,6 +119,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
         <div className="metric-article-header">
           <h3>{text.linechart_titel}</h3>
           <ChartTimeControls
+            timeframeOptions={['all', '5weeks']}
             timeframe={timeframe}
             onChange={(value) => setTimeframe(value)}
           />

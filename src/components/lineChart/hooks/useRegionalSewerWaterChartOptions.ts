@@ -44,19 +44,20 @@ export function useRegionalSewerWaterChartOptions(
       end: value.week_end_unix,
     }));
 
-    const weekSets: Record<string, Week[] | boolean> = {
+    const tooltipTypes: Record<string, Week[] | 'rwzi' | 'scatter'> = {
       [text.average_label_text]: weekSet,
+      [text.secondary_label_text]: 'scatter',
     };
 
     const scatterSerie: SeriesScatterOptions = {
       type: 'scatter',
-      enableMouseTracking: false,
       name: text.secondary_label_text,
       description: text.secondary_label_text,
       color: '#CDCDCD',
       data: filteredScatterPlotValues?.map((value) => ({
         x: value.date_measurement_unix,
         y: value.rna_per_ml,
+        installationName: value.rwzi_awzi_name,
       })),
       marker: {
         symbol: 'circle',
@@ -116,7 +117,7 @@ export function useRegionalSewerWaterChartOptions(
         });
       }
 
-      weekSets[selectedRWZI] = true;
+      tooltipTypes[selectedRWZI] = 'rwzi';
     }
 
     const options: Highcharts.Options = {
@@ -185,14 +186,17 @@ export function useRegionalSewerWaterChartOptions(
         borderColor: '#01689B',
         borderRadius: 0,
         formatter: function (): false | string {
-          const weeks = weekSets[this.series.name];
+          const tooltipType = tooltipTypes[this.series.name];
 
-          if (!weeks) {
+          if (!tooltipType) {
             return false;
           }
 
-          if (Array.isArray(weeks)) {
-            const { start, end } = getItemFromArray(weeks, this.point.index);
+          if (Array.isArray(tooltipType)) {
+            const { start, end } = getItemFromArray(
+              tooltipType,
+              this.point.index
+            );
 
             return `<strong>${formatDateFromSeconds(
               start,
@@ -201,10 +205,14 @@ export function useRegionalSewerWaterChartOptions(
               end,
               'short'
             )}:</strong> ${formatNumber(this.y)}<br/>(${this.series.name})`;
-          } else if (weeks === true) {
-            return `<strong>${formatDateFromSeconds(
-              this.point.x
-            )}</strong><br/>(${this.series.name})`;
+          } else if (tooltipType === 'rwzi') {
+            return `<strong>${formatDateFromSeconds(this.point.x)}:</strong> ${
+              this.point.y
+            }<br/>(${this.series.name})`;
+          } else if (tooltipType === 'scatter') {
+            return `<strong>${formatDateFromSeconds(this.point.x)}:</strong> ${
+              this.point.y
+            }<br/>(${(this.point as any).installationName})`;
           }
 
           return false;
