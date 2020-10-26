@@ -411,7 +411,7 @@
       "description": "Average number of virus particles in one milliliter of sewage water, collected from about 300 sites in the Netherlands."
     },
     "titel_sidebar": "Sewage water examination",
-    "titel_kpi": "",
+    "titel_kpi": "Average number of virus particles per milliliter of sewage water",
     "total_installation_count_titel": "Number of measurement locations",
     "total_installation_count_description": "Weekly number of wastewater treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful.",
     "rwzi_abbrev": ""
@@ -745,11 +745,11 @@
     "titel_sidebar": "Sewage water examination",
     "titel": "Sewage water examination in {{safetyRegion}}",
     "pagina_toelichting": "Average number of virus particles in one milliliter of sewage water of this region. To calculate this, the total number of measured virus particles in one week, is divided by the number of measurements.",
-    "datums": "Value of {{weekStart}} to {{weekEnd}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis. ",
+    "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis. ",
     "screen_reader_graph_content": "{{value}} virus particles in one milliliter of sewage water.",
     "barscale_titel": "Average number of virus particles in one milliliter of sewage water in this safety region",
     "extra_uitleg": "To calculate this, the total number of measured virus particles in one week, is divided by the number of measurements.",
-    "barscale_screenreader_text": "{{value}} virus particles in one milliliter of sewage water, collected from 28 locations in the Netherlands.",
+    "barscale_screenreader_text": "{{value}} virus particles in one milliliter of sewage water.",
     "linechart_titel": "Viral particles per millilitre of sewage water over time",
     "bar_chart_title": "Most recent measurement per location in {{safetyRegion}}",
     "bar_chart_axis_title": "Number of virus particles per milliliter of sewage water",
@@ -768,7 +768,7 @@
     "graph_daily_label_text_rwzi": "Measurements for ({{name}})",
     "graph_selected_rwzi_placeholder": "Select location",
     "graph_range_description": "Progression over time",
-    "titel_kpi": "",
+    "titel_kpi": "Average number of virus particles per milliliter of sewage water",
     "total_installation_count_titel": "Number of measurement locations",
     "total_installation_count_description": "Weekly number of wastewater treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful.",
     "rwzi_abbrev": ""
@@ -832,10 +832,9 @@
   },
   "gemeente_rioolwater_metingen": {
     "titel_sidebar": "Sewage water examination",
-    "nodata_sidebar": "This information is unavailable for this municipality.",
     "titel": "Sewage water examination in {{municipality}}",
     "pagina_toelichting": "Average number of virus particles in one milliliter of sewage water of this municipality. To calculate this, the total number of measured virus particles in one week, is divided by the number of measurements.",
-    "datums": "Value of {{weekStart}} to {{weekEnd}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
+    "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
     "screen_reader_graph_content": "{{value}} virus particles in one milliliter of sewage water.",
     "barscale_titel": "Average number of virus particles in one milliliter of sewage water in this municipality",
     "extra_uitleg": "To calculate this, the total number of measured virus particles in one week, is divided by the number of measurements.",
@@ -854,7 +853,8 @@
     "metadata": {
       "title": "Sewage water examination in {{municipalityName}} | Dashboard Coronavirus | Government.nl",
       "description": "Overview of sewage water examination and the number of measured COVID-19 virus particles in municipality {{municipalityName}}."
-    }
+    },
+    "nodata_sidebar": ""
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Level of risk",

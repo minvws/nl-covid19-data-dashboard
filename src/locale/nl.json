@@ -832,7 +832,6 @@
   },
   "gemeente_rioolwater_metingen": {
     "titel_sidebar": "Rioolwatermeting",
-    "nodata_sidebar": "Deze informatie is niet beschikbaar voor deze gemeente.",
     "titel": "Rioolwatermeting in {{municipality}}",
     "pagina_toelichting": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater van deze gemeente. Voor deze berekening wordt uitgegaan van het totaal aantal gemeten virusdeeltjes in één week, gedeeld door het aantal metingen.",
     "datums": "Waarde van {{weekStart}} tot {{weekEnd}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -854,7 +853,8 @@
     "metadata": {
       "title": "Rioolwatermeting in {{municipalityName}} | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van rioolwatermetingen en de hoeveelheid aangetroffen COVID-19 virusdeeltjes in de gemeente {{municipalityName}}."
-    }
+    },
+    "nodata_sidebar": "Deze informatie is niet beschikbaar voor deze gemeente."
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Risiconiveaus",
