@@ -1,6 +1,6 @@
 import { Metadata } from './metadata';
 import { TitleWithIcon } from '~/components/titleWithIcon';
-import styles from './layout.module.scss';
+import styles from '../layout/layout.module.scss';
 
 export function ContentHeader(props: IContentHeaderProps) {
   const { category, Icon, title, subtitle, metadata, id } = props;
