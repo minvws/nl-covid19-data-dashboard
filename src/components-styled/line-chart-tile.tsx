@@ -20,7 +20,6 @@ export function LineChartTile({
 }: LineChartTileProps) {
   return (
     <Tile
-      as="article"
       /**
        * The mb here could alternatively be applied using a <Spacer/> in the
        * page markup. It's a choice, whether we like to include the bottom
