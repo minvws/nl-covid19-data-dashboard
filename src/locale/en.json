@@ -832,6 +832,7 @@
   },
   "gemeente_rioolwater_metingen": {
     "titel_sidebar": "Sewage water examination",
+    "nodata_sidebar": "This information is unavailable for this municipality.",
     "titel": "Sewage water examination in {{municipality}}",
     "pagina_toelichting": "Average number of virus particles in one milliliter of sewage water of this municipality. To calculate this, the total number of measured virus particles in one week, is divided by the number of measurements.",
     "datums": "Value of {{weekStart}} to {{weekEnd}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",

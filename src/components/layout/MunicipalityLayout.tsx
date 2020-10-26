@@ -100,6 +100,8 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
     | { name: string; code: string; id: number }
     | undefined = getSafetyRegionForMunicipalityCode(code as string);
 
+  const sewerWaterBarScaleData = getSewerWaterBarScaleData(data);
+
   return (
     <>
       <Head>
@@ -209,7 +211,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
               <h2>{siteText.nationaal_layout.headings.overig}</h2>
               <ul>
                 <li>
-                  {getSewerWaterBarScaleData(data) ? (
+                  {sewerWaterBarScaleData ? (
                     <Link
                       href="/gemeente/[code]/rioolwater"
                       as={`/gemeente/${code}/rioolwater`}
@@ -225,9 +227,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                           }
                         />
                         <span>
-                          <SewerWaterMetric
-                            data={getSewerWaterBarScaleData(data)}
-                          />
+                          <SewerWaterMetric data={sewerWaterBarScaleData} />
                         </span>
                       </a>
                     </Link>
@@ -239,11 +239,9 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                           siteText.gemeente_rioolwater_metingen.titel_sidebar
                         }
                       />
-                      <span>
-                        <SewerWaterMetric
-                          data={getSewerWaterBarScaleData(data)}
-                        />
-                      </span>
+                      <p>
+                        {siteText.gemeente_rioolwater_metingen.nodata_sidebar}
+                      </p>
                     </div>
                   )}
                 </li>
