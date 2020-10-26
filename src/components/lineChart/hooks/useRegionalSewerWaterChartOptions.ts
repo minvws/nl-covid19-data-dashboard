@@ -14,14 +14,14 @@ type Week = {
 };
 
 function calculateDaysBetween(date1: number, date2: number) {
-  const ONE_DAY = 1000 * 60 * 60 * 24;
+  const OneDay = 1000 * 60 * 60 * 24;
 
   const date1Milliseconds = date1 * 1000;
   const date2Milliseconds = date2 * 1000;
 
   const difference_ms = Math.abs(date1Milliseconds - date2Milliseconds);
 
-  return Math.floor(difference_ms / ONE_DAY);
+  return Math.floor(difference_ms / OneDay);
 }
 
 /**
