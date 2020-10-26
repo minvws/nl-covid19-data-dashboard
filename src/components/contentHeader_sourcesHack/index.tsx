@@ -1,9 +1,9 @@
 import { TitleWithIcon } from '~/components/titleWithIcon';
 import styles from './layout.module.scss';
-import { MetadataHack } from './metadataHack';
+import { MetadataHack } from './metadata_sourcesHack';
 
 /**
- * An alteration from layout/ContentHeader in order to render two sources in metadata.
+ * An alteration from ContentHeader in order to render two sources in metadata.
  * This component will be thrown out in the next sprint probably because then
  * metadata will be taken out and the original is not worth fixing since it
  * requires a different kind of abstraction.
@@ -11,7 +11,7 @@ import { MetadataHack } from './metadataHack';
  * The Metadata component is also copied and adjusted here locally for the same
  * reasons.
  */
-export function ContentHeaderMetadataHack(props: IContentHeaderProps) {
+export function ContentHeader_sourcesHack(props: IContentHeaderProps) {
   const { category, Icon, title, subtitle, metadata, id } = props;
 
   const layoutClasses = [styles.contentHeader];

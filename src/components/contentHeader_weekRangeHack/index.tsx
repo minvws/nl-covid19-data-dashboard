@@ -1,8 +1,19 @@
-import { Metadata } from '~/components/metadata';
+import { Metadata } from './metadata_weekRangeHack';
 import { TitleWithIcon } from '~/components/titleWithIcon';
-import styles from './layout.module.scss';
+import styles from '../layout/layout.module.scss';
 
-export function ContentHeader(props: IContentHeaderProps) {
+/**
+ * An alteration from ContentHeader in order to render two sources in metadata.
+ * This component will be thrown out in the next sprint probably because then
+ * metadata will be taken out and the original is not worth fixing since it
+ * requires a different kind of abstraction.
+ *
+ * The Metadata component is also copied and adjusted here locally for the same
+ * reasons.
+ */
+export function ContentHeader_weekRangeHack(
+  props: ContentHeader_weekRangeHackProps
+) {
   const { category, Icon, title, subtitle, metadata, id } = props;
 
   const layoutClasses = [styles.contentHeader];
@@ -30,13 +41,14 @@ export function ContentHeader(props: IContentHeaderProps) {
   );
 }
 
-interface IContentHeaderProps {
+interface ContentHeader_weekRangeHackProps {
   title: string;
   subtitle: string;
   metadata: {
     datumsText: string;
-    dateUnix?: number;
-    dateInsertedUnix?: number;
+    weekStartUnix: number;
+    weekEndUnix: number;
+    dateOfInsertionUnix: number;
     dataSource: {
       href: string;
       text: string;

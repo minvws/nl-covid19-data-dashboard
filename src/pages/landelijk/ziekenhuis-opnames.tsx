@@ -14,8 +14,7 @@ import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHan
 import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
 import { createMunicipalHospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/municipal/createMunicipalHospitalAdmissionsTooltip';
 import { createRegionHospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/region/createRegionHospitalAdmissionsTooltip';
-import { ContentHeaderMetadataHack } from '~/components/contentHeaderMetadataHack';
-import { DataWarning } from '~/components/dataWarning';
+import { ContentHeader_sourcesHack } from '~/components/contentHeader_sourcesHack';
 import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-barscale';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
@@ -23,6 +22,7 @@ import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { DataWarning } from '~/components/dataWarning';
 
 const text = siteText.ziekenhuisopnames_per_dag;
 
@@ -42,7 +42,7 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
         title={text.metadata.title}
         description={text.metadata.description}
       />
-      <ContentHeaderMetadataHack
+      <ContentHeader_sourcesHack
         category={siteText.nationaal_layout.headings.medisch}
         title={text.titel}
         Icon={Ziekenhuis}

@@ -21,7 +21,7 @@ import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityCh
 import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/createPositiveTestedPeopleMunicipalTooltip';
 import { FCWithLayout } from '~/components/layout';
-import { ContentHeader } from '~/components/layout/Content';
+import { ContentHeader } from '~/components/contentHeader';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { MultipleLineChart } from '~/components/lineChart/multipleLineChart';
 import { SEOHead } from '~/components/seoHead';

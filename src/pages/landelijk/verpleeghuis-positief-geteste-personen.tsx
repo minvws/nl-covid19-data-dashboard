@@ -1,7 +1,7 @@
 import Getest from '~/assets/test.svg';
 import { LineChart } from '~/components/charts/index';
 import { FCWithLayout } from '~/components/layout';
-import { ContentHeader } from '~/components/layout/Content';
+import { ContentHeader } from '~/components/contentHeader';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';

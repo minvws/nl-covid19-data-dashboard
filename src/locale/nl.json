@@ -395,7 +395,7 @@
     "text": "Selecteer uw regio bovenaan deze pagina"
   },
   "rioolwater_metingen": {
-    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
+    "datums": "Waarde van {{weekStart}} tot {{weekEnd}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
     "bron": {
       "text": "RIVM",
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
