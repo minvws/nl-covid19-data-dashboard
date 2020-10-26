@@ -38,6 +38,7 @@ import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { formatDateFromSeconds } from '~/utils/formatDate';
 
 const text = siteText.veiligheidsregio_positief_geteste_personen;
 const ggdText = siteText.veiligheidsregio_positief_geteste_personen_ggd;
@@ -218,7 +219,12 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
             value: value.infected_percentage_daily,
             date: value.date_of_report_unix,
           }))}
-          signaalwaarde={7}
+          formatTooltip={(x: number, y: number) => {
+            return `${formatDateFromSeconds(x)}: ${formatPercentage(y)}%`;
+          }}
+          formatYAxis={(y: number) => {
+            return `${formatPercentage(y)}%`;
+          }}
         />
       </KpiSection>
 
@@ -246,7 +252,6 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
               legendLabel: ggdText.linechart_positivetests_legend_label,
             },
           ]}
-          signaalwaarde={7}
         />
       </KpiSection>
     </>

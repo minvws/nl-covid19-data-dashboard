@@ -23,12 +23,14 @@ export interface LineChartProps {
   signaalwaarde?: number;
   timeframeOptions?: TimeframeOption[];
   formatTooltip?: (x: number, y: number) => string;
+  formatYAxis?: (y: number) => string;
 }
 
 function getChartOptions(
   values: Value[],
   signaalwaarde?: number,
-  formatTooltip?: (x: number, y: number) => string
+  formatTooltip?: (x: number, y: number) => string,
+  formatYAxis?: (y: number) => string
 ) {
   const yMax = calculateYMax(values, signaalwaarde);
 
@@ -90,6 +92,9 @@ function getChartOptions(
       },
       labels: {
         formatter: function () {
+          if (formatYAxis) {
+            return formatYAxis(this.value);
+          }
           return formatNumber(this.value);
         },
       },
@@ -175,6 +180,7 @@ export default function LineChart({
   signaalwaarde,
   timeframeOptions,
   formatTooltip,
+  formatYAxis,
 }: LineChartProps) {
   const [timeframe, setTimeframe] = useState<TimeframeOption>('5weeks');
 
@@ -184,8 +190,13 @@ export default function LineChart({
       timeframe,
       (value: Value) => value.date * 1000
     );
-    return getChartOptions(filteredValues, signaalwaarde, formatTooltip);
-  }, [values, timeframe, signaalwaarde, formatTooltip]);
+    return getChartOptions(
+      filteredValues,
+      signaalwaarde,
+      formatTooltip,
+      formatYAxis
+    );
+  }, [values, timeframe, signaalwaarde, formatTooltip, formatYAxis]);
 
   return (
     <section className={styles.root}>

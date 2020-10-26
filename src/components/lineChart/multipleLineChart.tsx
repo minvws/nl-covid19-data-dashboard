@@ -57,7 +57,7 @@ function getChartOptions(
       borderWidth: 0,
       colorCount: 10,
       displayErrors: true,
-      height: 175,
+      height: 212,
     },
     credits: {
       enabled: false,
@@ -176,6 +176,12 @@ function getChartOptions(
         enabled: false,
       },
     })),
+    legend: {
+      align: 'left',
+      itemStyle: {
+        fontWeight: 'normal',
+      },
+    },
     plotOptions: {
       line: {
         marker: {

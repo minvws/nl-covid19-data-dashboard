@@ -256,6 +256,9 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           formatTooltip={(x: number, y: number) => {
             return `${formatDateFromSeconds(x)}: ${formatPercentage(y)}%`;
           }}
+          formatYAxis={(y: number) => {
+            return `${formatPercentage(y)}%`;
+          }}
         />
       </KpiSection>
 
