@@ -22,9 +22,14 @@ export interface LineChartProps {
   values: Value[];
   signaalwaarde?: number;
   timeframeOptions?: TimeframeOption[];
+  formatTooltip?: (x: number, y: number) => string;
 }
 
-function getChartOptions(values: Value[], signaalwaarde?: number) {
+function getChartOptions(
+  values: Value[],
+  signaalwaarde?: number,
+  formatTooltip?: (x: number, y: number) => string
+) {
   const yMax = calculateYMax(values, signaalwaarde);
 
   const options: Highcharts.Options = {
@@ -67,6 +72,9 @@ function getChartOptions(values: Value[], signaalwaarde?: number) {
       borderColor: '#01689B',
       borderRadius: 0,
       formatter: function (): string {
+        if (formatTooltip) {
+          return formatTooltip(this.x, this.y);
+        }
         return `${formatDateFromSeconds(this.x)}: ${formatNumber(this.y)}`;
       },
     },
@@ -166,6 +174,7 @@ export default function LineChart({
   values,
   signaalwaarde,
   timeframeOptions,
+  formatTooltip,
 }: LineChartProps) {
   const [timeframe, setTimeframe] = useState<TimeframeOption>('5weeks');
 
@@ -175,8 +184,8 @@ export default function LineChart({
       timeframe,
       (value: Value) => value.date * 1000
     );
-    return getChartOptions(filteredValues, signaalwaarde);
-  }, [values, timeframe, signaalwaarde]);
+    return getChartOptions(filteredValues, signaalwaarde, formatTooltip);
+  }, [values, timeframe, signaalwaarde, formatTooltip]);
 
   return (
     <section className={styles.root}>
