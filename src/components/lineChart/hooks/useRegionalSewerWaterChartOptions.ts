@@ -16,10 +16,10 @@ type Week = {
 function calculateDaysBetween(date1: number, date2: number) {
   const ONE_DAY = 1000 * 60 * 60 * 24;
 
-  const date1_ms = date1 * 1000;
-  const date2_ms = date2 * 1000;
+  const date1Milliseconds = date1 * 1000;
+  const date2Milliseconds = date2 * 1000;
 
-  const difference_ms = Math.abs(date1_ms - date2_ms);
+  const difference_ms = Math.abs(date1Milliseconds - date2Milliseconds);
 
   return Math.floor(difference_ms / ONE_DAY);
 }
@@ -30,10 +30,10 @@ function calculateDaysBetween(date1: number, date2: number) {
  * at the end of the averages.
  */
 function createRemainingDaysData(value: Value, maxDate: number) {
-  const datapointLength =
+  const dataPointLength =
     calculateDaysBetween(value.week_start_unix, maxDate) + 1;
 
-  const data = [...new Array(datapointLength)];
+  const data = [...new Array(dataPointLength)];
   const oneDay = 60 * 60 * 24;
 
   return data.map((_, index) => {
