@@ -128,7 +128,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         <ChoroplethHeader>
           <Heading level={3}>{text.map_titel}</Heading>
           <Text>{text.map_toelichting}</Text>
-          <Box>
+          <Box display="flex" justifyContent="flex-start">
             <ChartRegionControls
               onChange={(val: 'region' | 'municipal') => setSelectedMap(val)}
             />
