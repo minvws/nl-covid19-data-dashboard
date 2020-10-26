@@ -19,7 +19,6 @@ import {
   getSewerWaterLineChartData,
 } from '~/utils/sewer-water/municipality-sewer-water.util';
 import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRangeHack';
-import { assert } from '~/utils/assert';
 
 const text = siteText.gemeente_rioolwater_metingen;
 
@@ -35,7 +34,15 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
   }, [data]);
 
   const sewerAverages = data.sewer_measurements;
-  assert(sewerAverages, 'Missing sewer measurements data');
+
+  if (!sewerAverages) {
+    /**
+     * It is possible that there is no sewer data available for this GM. Then
+     * this page should never be linked because the sidebar item is then
+     * disabled.
+     */
+    return null;
+  }
 
   return (
     <>
