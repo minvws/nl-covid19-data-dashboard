@@ -10,7 +10,7 @@
   },
   "notificatie": {
     "titel": "Minder sterkte stijging aantal meldingen COVID-19",
-    "bericht": "Afgelopen week (14 t/m 20 oktober) steeg het aantal meldingen van mensen die positief testen op COVID-19, het aantal patiënten in de ziekenhuizen en het aantal intensive care-opnames verder. De snelheid waarmee het aantal nieuwe meldingen van mensen die positief testen stijgt, lijkt echter iets af te nemen. Dit zou een gevolg kunnen zijn van de maatregelen die eind september van kracht werden. Echter het aantal ziekenhuisopnames stijgt onveranderd door. \n\nHet risiconiveau per regio kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2), ‘ernstig’ (niveau 3), ‘zeer ernstig’ (niveau 4) zijn. Op dit moment zijn 16 regio’s ingeschaald op ‘zeer ernstig’, 7 op ‘ernstig’ en 2 op ‘zorgelijk.’",
+    "bericht": "Afgelopen week (14 t/m 20 oktober) steeg het aantal meldingen van mensen die positief testen op COVID-19, het aantal patiënten in de ziekenhuizen en het aantal intensive care-opnames verder. De snelheid waarmee het aantal nieuwe meldingen van mensen die positief testen stijgt, lijkt echter iets af te nemen. Dit zou een gevolg kunnen zijn van de maatregelen die eind september van kracht werden. Echter het aantal ziekenhuisopnames stijgt onveranderd door. \n\nHet risiconiveau per regio kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2), ‘ernstig’ (niveau 3), ‘zeer ernstig’ (niveau 4) zijn. Op dit moment zijn {{escalationLevel4}} regio’s ingeschaald op ‘zeer ernstig’, {{escalationLevel3}} op ‘ernstig’, {{escalationLevel2}} op ‘zorgelijk’ en {{escalationLevel1}} op ‘waakzaam.‘",
     "link": {
       "text": "Bekijk de toelichting van het RIVM",
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel"
@@ -39,13 +39,13 @@
     "links": {
       "index": "Landelijk",
       "over": "Over dit dashboard",
-      "veelgestelde_vragen": "Veelgestelde vragen",
       "meer": "Meer informatie over het coronavirus",
       "verantwoording": "Cijferverantwoording",
       "meer_href": "https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19",
       "veiligheidsregio": "Veiligheidsregio's",
       "gemeente": "Gemeentes",
-      "over_risiconiveaus": "Over de risiconiveaus"
+      "over_risiconiveaus": "Over de risiconiveaus",
+      "veelgestelde_vragen": "Veelgestelde vragen"
     },
     "title": "Corona Dashboard",
     "terug_naar_alle_cijfers": "Terug naar alle cijfers",
@@ -405,7 +405,7 @@
     "barscale_titel": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater",
     "extra_uitleg": "Voor het landelijke cijfer wordt uitgegaan van het totaal aantal gemeten virusdeeltjes dat wordt aangetroffen in een week, gedeeld door het aantal metingen.",
     "barscale_screenreader_text": "{{value}} virusdeeltjes in een milliliter rioolwater, afkomstig van 300 locaties in Nederland.",
-    "linechart_titel": "Verloop over tijd",
+    "linechart_titel": "Virusdeeltjes per milliliter rioolwater over tijd",
     "metadata": {
       "title": "Rioolwatermeting | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater, afkomstig van circa 300 locaties in Nederland."
@@ -432,8 +432,7 @@
     "text": "Het dashboard coronavirus geeft informatie over de ontwikkeling van het coronavirus in Nederland. Met deze informatie kunnen signalen van oplevingen worden opgepikt. Zo kunnen maatregelen genomen worden om het virus te stoppen."
   },
   "over_veelgestelde_vragen": {
-    "titel": "Veelgestelde vragen",
-    "paragraaf": "",
+    "text": "Veelgestelde vragen",
     "vragen": [
       {
         "vraag": "Wat doet dit dashboard?",
@@ -491,7 +490,9 @@
         "vraag": "Hoe komt het dat als ik het aantal positief geteste mensen per regio bij elkaar optel, er een ander getal uitkomt dan het landelijke cijfer?",
         "antwoord": "We berekenen de toename van het aantal positief geteste mensen door het gerapporteerde cumulatief aantal meldingen van positief geteste mensen van vandaag, af te trekken van het cumulatief aantal van gisteren. Correcties over oude data, zoals dubbeltellingen, worden door het RIVM verwerkt op de datum dat dit bekend is. Het gerapporteerde nieuwe aantal meldingen voor die dag ligt dan lager dan het feitelijk aantal die dag. Daar staat tegenover dat voorgaande dagen er dus teveel gevallen zijn gerapporteerd. Door correctie kan het cumulatieve aantal van vandaag lager zijn dan het cumulatieve aantal van gisteren. In die gevallen wordt er op het dashboard de waarde 0 gepresenteerd in plaats van een negatief waarde; een negatieve waarde is namelijk verwarrend. Daarom krijg je uiteindelijk verschillen als je regio's optelt naar landelijk. Als je de negatieve waarden zou meerekenen kom je wel op de juiste getallen uit."
       }
-    ]
+    ],
+    "titel": "Veelgestelde vragen",
+    "paragraaf": ""
   },
   "terug_naar_regio_selectie": {
     "text": "Terug naar regio selectie"
@@ -577,11 +578,6 @@
     "title": "Over het Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
     "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
     "url": "https://coronadashboard.rijksoverheid.nl/over"
-  },
-  "veelgestelde_vragen_metadata": {
-    "title": "Veelgestelde vragen Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
-    "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
-    "url": "https://coronadashboard.rijksoverheid.nl/veelgestelde-vragen"
   },
   "regionaal_metadata": {
     "title": "Regionaal Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
@@ -750,7 +746,7 @@
     "barscale_titel": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater van deze veiligheidsregio",
     "extra_uitleg": "Voor deze berekening wordt uitgegaan van het totaal aantal gemeten virusdeeltjes in één week, gedeeld door het aantal metingen.",
     "barscale_screenreader_text": "{{value}} virusdeeltjes in een milliliter rioolwater, afkomstig van 28 locaties in Nederland.",
-    "linechart_titel": "Verloop over tijd",
+    "linechart_titel": "Virusdeeltjes per milliliter rioolwater over tijd",
     "bar_chart_title": "Laatste bekende waarde per RWZI-locatie in {{safetyRegion}}",
     "bar_chart_axis_title": "Aantal virusdeeltjes in milliliter rioolwater",
     "bron": {
@@ -766,7 +762,7 @@
       "description": "Overzicht van rioolwatermetingen en aangetroffen COVID-19 virusdeeltjes in de veiligheidsregio {{safetyRegionName}}."
     },
     "graph_daily_label_text_rwzi": "Dagwaarde aantal virusdeeltjes in 1 mL rioolwater ({{name}})",
-    "graph_selected_rwzi_placeholder": "Selecteer RWZI",
+    "graph_selected_rwzi_placeholder": "Selecteer locatie",
     "graph_range_description": "Verloop over tijd",
     "titel_kpi": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater",
     "total_installation_count_titel": "Aantal RWZI-locaties",
@@ -838,7 +834,7 @@
     "barscale_titel": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater van deze gemeente",
     "extra_uitleg": "Voor deze berekening wordt uitgegaan van het totaal aantal gemeten virusdeeltjes in één week, gedeeld door het aantal metingen.",
     "barscale_screenreader_text": "{{value}} virusdeeltjes in een milliliter rioolwater, afkomstig van 300 locaties in Nederland.",
-    "linechart_titel": "Verloop over tijd",
+    "linechart_titel": "Virusdeeltjes per milliliter rioolwater over tijd",
     "bar_chart_title": "Laatste bekende waarde per RWZI-locatie in {{municipality}}",
     "bar_chart_axis_title": "Aantal virusdeeltjes in milliliter rioolwater",
     "bron": {
@@ -1025,5 +1021,10 @@
       "description": "Overzicht aantal bewoners van verpleeghuizen in veiligheidsregio {{safetyRegionName}} waarbij COVID-19-besmetting is vastgesteld."
     }
   },
-  "data_warning_text": "Let op: De regionale gegevens zijn minder actueel dan de landelijk gegevens. We werken eraan om deze gelijk te trekken. Voor uitleg zie de cijferverantwoording."
+  "data_warning_text": "Let op: De regionale gegevens zijn minder actueel dan de landelijk gegevens. We werken eraan om deze gelijk te trekken. Voor uitleg zie de cijferverantwoording.",
+  "veelgestelde_vragen_metadata": {
+    "title": "Veelgestelde vragen Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
+    "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
+    "url": "https://coronadashboard.rijksoverheid.nl/veelgestelde-vragen"
+  }
 }
