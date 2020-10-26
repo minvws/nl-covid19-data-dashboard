@@ -26,7 +26,7 @@ import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/chlorop
 import { createPositiveTestedPeopleRegionalTooltip } from '~/components/chloropleth/tooltips/region/createPositiveTestedPeopleRegionalTooltip';
 import { PositiveTestedPeopleBarScale } from '~/components/landelijk/positive-tested-people-barscale';
 import { FCWithLayout } from '~/components/layout';
-import { ContentHeader } from '~/components/layout/Content';
+import { ContentHeader } from '~/components/contentHeader';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';

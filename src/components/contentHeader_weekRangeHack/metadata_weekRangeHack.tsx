@@ -1,34 +1,42 @@
-import siteText from '~/locale/index';
-
-import styles from './metadata.module.scss';
-
 import ClockIcon from '~/assets/clock.svg';
 import DatabaseIcon from '~/assets/database.svg';
-
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import siteText from '~/locale/index';
 import { formatDateFromSeconds } from '~/utils/formatDate';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import styles from './metadata.module.scss';
 
 interface IProps {
   dataSource: {
     href: string;
     text: string;
   };
-  dateUnix?: number;
-  dateInsertedUnix?: number;
+  /**
+   * These all depend on each other so really the text should be passed in
+   * already formatted. There is no point in using separate props for this.
+   */
+  weekStartUnix: number;
+  weekEndUnix: number;
+  dateOfInsertionUnix: number;
   datumsText: string;
 }
 
 const text = siteText.common.metadata;
 
 export function Metadata(props: IProps) {
-  const { dataSource, datumsText, dateUnix, dateInsertedUnix } = props;
+  const {
+    dataSource,
+    datumsText,
+    weekStartUnix,
+    weekEndUnix,
+    dateOfInsertionUnix,
+  } = props;
 
-  if (!dateUnix) return null;
-
-  const dateOfReport = formatDateFromSeconds(dateUnix, 'relative');
-  const dateOfInsertion = dateInsertedUnix
-    ? formatDateFromSeconds(dateInsertedUnix, 'relative')
-    : undefined;
+  const weekStart = formatDateFromSeconds(weekStartUnix, 'relative');
+  const weekEnd = formatDateFromSeconds(weekEndUnix, 'relative');
+  const dateOfInsertion = formatDateFromSeconds(
+    dateOfInsertionUnix,
+    'relative'
+  );
 
   return (
     <div>
@@ -38,7 +46,8 @@ export function Metadata(props: IProps) {
         </span>
         <p>
           {replaceVariablesInText(datumsText, {
-            dateOfReport,
+            weekStart,
+            weekEnd,
             dateOfInsertion,
           })}
         </p>

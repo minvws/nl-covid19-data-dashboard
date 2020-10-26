@@ -2,7 +2,7 @@ import Repro from '~/assets/reproductiegetal.svg';
 import { AreaChart } from '~/components/charts/index';
 import { ReproductionIndexBarScale } from '~/components/landelijk/reproduction-index-barscale';
 import { FCWithLayout } from '~/components/layout';
-import { ContentHeader } from '~/components/layout/Content';
+import { ContentHeader } from '~/components/contentHeader';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { Legenda } from '~/components/legenda';
 import { SEOHead } from '~/components/seoHead';
