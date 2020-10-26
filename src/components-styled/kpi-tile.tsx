@@ -25,7 +25,7 @@ export function KpiTile({
   sourcedFrom,
 }: KpiTileProps) {
   return (
-    <Tile height="100%">
+    <Tile height="100%" as="article">
       <Heading level={3}>{title}</Heading>
       <Box mb={4}>{children}</Box>
       {description && (
