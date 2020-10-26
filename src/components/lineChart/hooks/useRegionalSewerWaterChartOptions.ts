@@ -13,6 +13,35 @@ type Week = {
   end: number;
 };
 
+function calculateDaysBetween(date1: number, date2: number) {
+  const ONE_DAY = 1000 * 60 * 60 * 24;
+
+  const date1_ms = date1 * 1000;
+  const date2_ms = date2 * 1000;
+
+  const difference_ms = Math.abs(date1_ms - date2_ms);
+
+  return Math.floor(difference_ms / ONE_DAY);
+}
+
+/**
+ * This function calculates the difference in days between the last RWZI measurement
+ * and the last average and returns an array of data that is used to draw the dashed line
+ * at the end of the averages.
+ */
+function createRemainingDaysData(value: Value, maxDate: number) {
+  const datapointLength =
+    calculateDaysBetween(value.week_start_unix, maxDate) + 1;
+
+  const data = [...new Array(datapointLength)];
+  const oneDay = 60 * 60 * 24;
+
+  return data.map((_, index) => {
+    const extraDays = index * oneDay;
+    return [value.week_start_unix + extraDays, value.value];
+  });
+}
+
 export function useRegionalSewerWaterChartOptions(
   averageValues: Value[],
   scatterPlotValues: SewerValue[],
@@ -44,6 +73,13 @@ export function useRegionalSewerWaterChartOptions(
       end: value.week_end_unix,
     }));
 
+    let maxDate = filteredAverageValues.reduce((max, value) => {
+      return Math.max(max, value.week_end_unix);
+    }, 0);
+    maxDate = filteredScatterPlotValues.reduce((max, value) => {
+      return Math.max(max, value.date_measurement_unix);
+    }, maxDate);
+
     const tooltipTypes: Record<string, Week[] | 'rwzi' | 'scatter'> = {
       [text.average_label_text]: weekSet,
       [text.secondary_label_text]: 'scatter',
@@ -54,6 +90,7 @@ export function useRegionalSewerWaterChartOptions(
       name: text.secondary_label_text,
       description: text.secondary_label_text,
       color: '#CDCDCD',
+      enableMouseTracking: selectedRWZI === undefined,
       data: filteredScatterPlotValues?.map((value) => ({
         x: value.date_measurement_unix,
         y: value.rna_per_ml,
@@ -86,6 +123,35 @@ export function useRegionalSewerWaterChartOptions(
         },
       },
     });
+
+    if (
+      maxDate >
+      filteredAverageValues[filteredAverageValues.length - 1].week_end_unix
+    ) {
+      series.push({
+        type: 'line',
+        data: createRemainingDaysData(
+          filteredAverageValues[filteredAverageValues.length - 1],
+          maxDate
+        ),
+        name: '',
+        description: '',
+        showInLegend: false,
+        color: selectedRWZI ? '#A9A9A9' : '#3391CC',
+        enableMouseTracking: false,
+        allowPointSelect: false,
+        dashStyle: 'ShortDash',
+        marker: {
+          symbol: 'circle',
+          enabled: !hasMultipleValues,
+        },
+        states: {
+          inactive: {
+            opacity: 1,
+          },
+        },
+      });
+    }
 
     if (selectedRWZI) {
       const scatterValues = filteredScatterPlotValues.filter(
