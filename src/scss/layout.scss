@@ -539,11 +539,7 @@ a.metric-link {
     grid-area: b;
     display: flex;
     flex-direction: column;
-    align-items: center;
-
-    @media (min-width: $chloropleth-breakpoint) {
-      align-items: flex-start;
-    }
+    align-items: flex-start;
   }
 
   .chloropleth-chart {
