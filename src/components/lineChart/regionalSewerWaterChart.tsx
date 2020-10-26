@@ -52,15 +52,17 @@ export function RegionalSewerWaterChart(props: TProps) {
       <HighchartsReact highcharts={Highcharts} options={chartOptions} />
       <div>
         <ul className={styles.legend}>
-          {chartOptions.series?.map((serie) => (
-            <li key={serie.name}>
-              <div className={styles.legendMarker}>
-                {serie.type === 'scatter' && <Dot fill={serie.color} />}
-                {serie.type === 'line' && <Line stroke={serie.color} />}
-              </div>
-              <div>{serie.description}</div>
-            </li>
-          ))}
+          {chartOptions.series
+            ?.filter((serie) => serie.description?.length)
+            .map((serie) => (
+              <li key={serie.name}>
+                <div className={styles.legendMarker}>
+                  {serie.type === 'scatter' && <Dot fill={serie.color} />}
+                  {serie.type === 'line' && <Line stroke={serie.color} />}
+                </div>
+                <div>{serie.description}</div>
+              </li>
+            ))}
         </ul>
       </div>
     </>
