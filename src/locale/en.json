@@ -45,7 +45,7 @@
       "veiligheidsregio": "Safety regions",
       "gemeente": "Municipalities",
       "over_risiconiveaus": "About the risk levels",
-      "veelgestelde_vragen": ""
+      "veelgestelde_vragen": "Frequently asked questions"
     },
     "title": "Corona Dashboard",
     "terug_naar_alle_cijfers": "Overview",
@@ -395,7 +395,7 @@
     "text": "Select your region at the top of this page"
   },
   "rioolwater_metingen": {
-    "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
+    "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
       "text": "RIVM",
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
@@ -414,7 +414,7 @@
     "titel_kpi": "",
     "total_installation_count_titel": "Number of measurement locations",
     "total_installation_count_description": "Weekly number of wastewater treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful.",
-    "rwzi_abbrev": "RWZI = Rioolwaterzuiveringsinstallatie."
+    "rwzi_abbrev": ""
   },
   "notfound_titel": {
     "text": "Something went wrong"
@@ -492,7 +492,7 @@
         "antwoord": "We calculate the increase in the number of confirmed cases (people who tested positive) by deducting the current day’s cumulative number of confirmed cases reported from the cumulative number reported the day before. Any corrections to historical data, such as double counting, are processed by the RIVM on the day the error was discovered. This means the number of new cases reported for that day is lower than the actual number, but this is offset by the numbers being too high on previous days. Because of such corrections, it is possible for the current day’s cumulative number to be lower than the number for the day before. This is then depicted as 0 (zero) on the dashboard, as a negative number is confusing. This is why discrepancies arise when regional data is aggregated into national data. If you would use the negative values of the safety regions to calculate the daily number of confirmed cases, you would find the correct values. "
       }
     ],
-    "titel": "",
+    "titel": "Frequently asked questions",
     "paragraaf": ""
   },
   "terug_naar_regio_selectie": {
@@ -745,7 +745,7 @@
     "titel_sidebar": "Sewage water examination",
     "titel": "Sewage water examination in {{safetyRegion}}",
     "pagina_toelichting": "Average number of virus particles in one milliliter of sewage water of this region. To calculate this, the total number of measured virus particles in one week, is divided by the number of measurements.",
-    "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis. ",
+    "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis. ",
     "screen_reader_graph_content": "{{value}} virus particles in one milliliter of sewage water.",
     "barscale_titel": "Average number of virus particles in one milliliter of sewage water in this safety region",
     "extra_uitleg": "To calculate this, the total number of measured virus particles in one week, is divided by the number of measurements.",
@@ -771,7 +771,7 @@
     "titel_kpi": "",
     "total_installation_count_titel": "Number of measurement locations",
     "total_installation_count_description": "Weekly number of wastewater treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful.",
-    "rwzi_abbrev": "RWZI = Rioolwaterzuiveringsinstallatie."
+    "rwzi_abbrev": ""
   },
   "gemeente_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Hospital admissions by day",
@@ -834,7 +834,7 @@
     "titel_sidebar": "Sewage water examination",
     "titel": "Sewage water examination in {{municipality}}",
     "pagina_toelichting": "Average number of virus particles in one milliliter of sewage water of this municipality. To calculate this, the total number of measured virus particles in one week, is divided by the number of measurements.",
-    "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
+    "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
     "screen_reader_graph_content": "{{value}} virus particles in one milliliter of sewage water.",
     "barscale_titel": "Average number of virus particles in one milliliter of sewage water in this municipality",
     "extra_uitleg": "To calculate this, the total number of measured virus particles in one week, is divided by the number of measurements.",
@@ -1028,7 +1028,7 @@
   },
   "data_warning_text": "Please note: this information is not as recent as the information for the national level. We're working on a resolution. For more information, see the page \"explanation of the data presented\".",
   "veelgestelde_vragen_metadata": {
-    "title": "",
+    "title": "Frequently asked questions | Dashboard Coronavirus COVID-19 | Government.nl",
     "description": "",
     "url": ""
   }

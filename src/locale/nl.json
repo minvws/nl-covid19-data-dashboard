@@ -395,7 +395,7 @@
     "text": "Selecteer uw regio bovenaan deze pagina"
   },
   "rioolwater_metingen": {
-    "datums": "Waarde van {{weekStart}} tot {{weekEnd}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
+    "datums": "Waarde van {{weekStart}} tot {{weekEnd}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "bron": {
       "text": "RIVM",
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
@@ -745,7 +745,7 @@
     "titel_sidebar": "Rioolwatermeting",
     "titel": "Rioolwatermeting in {{safetyRegion}}",
     "pagina_toelichting": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater van deze veiligheidsregio. Voor deze berekening wordt uitgegaan van het totaal aantal gemeten virusdeeltjes in één week, gedeeld door het aantal metingen.",
-    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
+    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "screen_reader_graph_content": "{{value}} virusdeeltjes in een milliliter rioolwater.",
     "barscale_titel": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater van deze veiligheidsregio",
     "extra_uitleg": "Voor deze berekening wordt uitgegaan van het totaal aantal gemeten virusdeeltjes in één week, gedeeld door het aantal metingen.",
@@ -834,7 +834,7 @@
     "titel_sidebar": "Rioolwatermeting",
     "titel": "Rioolwatermeting in {{municipality}}",
     "pagina_toelichting": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater van deze gemeente. Voor deze berekening wordt uitgegaan van het totaal aantal gemeten virusdeeltjes in één week, gedeeld door het aantal metingen.",
-    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
+    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "screen_reader_graph_content": "{{value}} virusdeeltjes in een milliliter rioolwater.",
     "barscale_titel": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater van deze gemeente",
     "extra_uitleg": "Voor deze berekening wordt uitgegaan van het totaal aantal gemeten virusdeeltjes in één week, gedeeld door het aantal metingen.",
@@ -1028,7 +1028,7 @@
   },
   "data_warning_text": "Let op: De regionale gegevens zijn minder actueel dan de landelijk gegevens. We werken eraan om deze gelijk te trekken. Voor uitleg zie de cijferverantwoording.",
   "veelgestelde_vragen_metadata": {
-    "title": "Veelgestelde vragen Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
+    "title": "Veelgestelde vragen | Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
     "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
     "url": "https://coronadashboard.rijksoverheid.nl/veelgestelde-vragen"
   }
