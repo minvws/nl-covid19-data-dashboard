@@ -633,6 +633,9 @@
     "veiligheidsregio_label": "Safety region:",
     "metricKPI": {
       "dateOfReport": ""
+    },
+    "tooltip": {
+      "positive_tested_people": "{{totalPositiveTestedPeople}} in total"
     }
   },
   "seoHead": {
