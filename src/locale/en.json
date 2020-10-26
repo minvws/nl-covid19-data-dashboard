@@ -395,7 +395,7 @@
     "text": "Select your region at the top of this page"
   },
   "rioolwater_metingen": {
-    "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
+    "datums": "Value of {{weekStart}} to {{weekEnd}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
       "text": "RIVM",
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
