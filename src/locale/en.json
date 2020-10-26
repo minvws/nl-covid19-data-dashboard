@@ -923,7 +923,13 @@
     "totaal_getest_week_uitleg": "Number of people tested by GGD in one week, and of which the test result is known.",
     "positief_getest_week_titel": "Confirmed cases by GGD",
     "positief_getest_week_uitleg": "Number and percentage of confirmed cases tested by the GGD in one week. For calculating the percentage, only tests are taken into account of which the test result is known.",
-    "positief_getest_getest_week_uitleg": "This is {{numerator}} of {{denominator}} tested people"
+    "positief_getest_getest_week_uitleg": "This is {{numerator}} of {{denominator}} tested people",
+    "linechart_percentage_titel": "Percentage positieve testen over tijd",
+    "linechart_percentage_toelichting": "Deze grafiek toont het percentage positief geteste mensen door de GGD over tijd",
+    "linechart_totaltests_titel": "Aantal testen over tijd",
+    "linechart_totaltests_toelichting": "Deze grafiek toont het aantal afgenomen testen over tijd in vergelijking met het aantal positieve testen.",
+    "linechart_totaltests_legend_label": "Alle GGD tests",
+    "linechart_positivetests_legend_label": "Alle positieve testen van de GGD"
   },
   "over_risiconiveaus": {
     "title": "Level of risk",
@@ -948,7 +954,13 @@
     "totaal_getest_week_uitleg": "Number of people tested by GGD in one week, and of which the test result is known.",
     "positief_getest_week_titel": "Confirmed cases by GGD",
     "positief_getest_week_uitleg": "Number and percentage of confirmed cases tested by the GGD in one week. For calculating the percentage, only tests are taken into account of which the test result is known.",
-    "positief_getest_getest_week_uitleg": "This is {{numerator}} of {{denominator}} tested people"
+    "positief_getest_getest_week_uitleg": "This is {{numerator}} of {{denominator}} tested people",
+    "linechart_percentage_titel": "Percentage positieve testen over tijd",
+    "linechart_percentage_toelichting": "Deze grafiek toont het percentage positief geteste mensen door de GGD over tijd",
+    "linechart_totaltests_titel": "Aantal testen over tijd",
+    "linechart_totaltests_toelichting": "Deze grafiek toont het aantal afgenomen testen over tijd in vergelijking met het aantal positieve testen.",
+    "linechart_totaltests_legend_label": "Alle GGD tests",
+    "linechart_positivetests_legend_label": "Alle positieve testen van de GGD"
   },
   "veiligheidsregio_verpleeghuis_oversterfte": {
     "datums": "Value of  {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
