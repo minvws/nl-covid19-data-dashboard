@@ -44,7 +44,7 @@ export function useRegionalSewerWaterChartOptions(
       end: value.week_end_unix,
     }));
 
-    const weekSets: Record<string, Week[]> = {
+    const weekSets: Record<string, Week[] | boolean> = {
       [text.average_label_text]: weekSet,
     };
 
@@ -96,6 +96,7 @@ export function useRegionalSewerWaterChartOptions(
           data: scatterValues.map((scatterValue) => ({
             x: scatterValue.date_measurement_unix,
             y: scatterValue.rna_per_ml,
+            rwzi: true,
           })),
           name: selectedRWZI,
           description: replaceVariablesInText(text.daily_label_text, {
@@ -115,12 +116,7 @@ export function useRegionalSewerWaterChartOptions(
         });
       }
 
-      weekSets[selectedRWZI] = filteredScatterPlotValues
-        .filter((plot) => plot.rwzi_awzi_name === selectedRWZI)
-        .map((value) => ({
-          start: value.week_start_unix,
-          end: value.week_end_unix,
-        }));
+      weekSets[selectedRWZI] = true;
     }
 
     const options: Highcharts.Options = {
@@ -195,14 +191,23 @@ export function useRegionalSewerWaterChartOptions(
             return false;
           }
 
-          const { start, end } = getItemFromArray(weeks, this.point.index);
+          if (Array.isArray(weeks)) {
+            const { start, end } = getItemFromArray(weeks, this.point.index);
 
-          return `<strong>${formatDateFromSeconds(
-            start,
-            'short'
-          )} - ${formatDateFromSeconds(end, 'short')}:</strong> ${formatNumber(
-            this.y
-          )}<br/>(${this.series.name})`;
+            return `<strong>${formatDateFromSeconds(
+              start,
+              'short'
+            )} - ${formatDateFromSeconds(
+              end,
+              'short'
+            )}:</strong> ${formatNumber(this.y)}<br/>(${this.series.name})`;
+          } else if (weeks === true) {
+            return `<strong>${formatDateFromSeconds(
+              this.point.x
+            )}</strong><br/>(${this.series.name})`;
+          }
+
+          return false;
         },
       },
       series,
