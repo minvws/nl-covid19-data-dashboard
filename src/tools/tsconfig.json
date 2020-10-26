@@ -11,7 +11,8 @@
     "esModuleInterop": true,
     "module": "CommonJS",
     "moduleResolution": "node",
-    "typeRoots": ["../../node_modules/@types"]
+    "typeRoots": ["../../node_modules/@types"],
+    "resolveJsonModule": true
   },
   "exclude": ["node_modules"],
   "include": ["**/*.ts"]
