@@ -52,6 +52,8 @@ html {
 */
 html {
   -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   line-height: 1.15;
   scroll-behavior: smooth;
 }
