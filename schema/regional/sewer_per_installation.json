@@ -1,7 +1,7 @@
 {
   "definitions": {
-    "item": {
-      "title": "sewer_value_element",
+    "installation": {
+      "title": "regional_sewer_per_installation_installation",
       "additionalProperties": false,
       "required": ["rwzi_awzi_code", "values", "last_value"],
       "properties": {
@@ -19,8 +19,8 @@
         }
       }
     },
-    "valueDef": {
-      "title": "sewer_value",
+    "value": {
+      "title": "regional_sewer_per_installation_value",
       "additionalProperties": false,
       "required": [
         "date_measurement_unix",
@@ -32,7 +32,7 @@
         "vrcode",
         "vrnaam",
         "gmcode",
-        "rna_per_ml",
+        "rna_corrected",
         "date_of_insertion_unix"
       ],
       "properties": {
@@ -65,7 +65,7 @@
           "type": "string",
           "pattern": "^GM[0-9]+$"
         },
-        "rna_per_ml": {
+        "rna_corrected": {
           "type": "number"
         },
         "date_of_insertion_unix": {
@@ -76,14 +76,14 @@
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-  "title": "results_per_sewer_installation_per_region",
+  "title": "regional_sewer_per_installation",
   "required": ["values"],
   "additionalProperties": false,
   "properties": {
     "values": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/item"
+        "$ref": "#/definitions/installation"
       }
     }
   }

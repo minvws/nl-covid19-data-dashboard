@@ -1,7 +1,7 @@
 {
   "definitions": {
-    "item": {
-      "title": "results_per_sewer_installation_per_municipality_last_value",
+    "value": {
+      "title": "municipal_sewer_per_installation_value",
       "type": "object",
       "additionalProperties": false,
       "required": [
@@ -12,7 +12,7 @@
         "rwzi_awzi_code",
         "rwzi_awzi_name",
         "gmcode",
-        "rna_per_ml",
+        "rna_corrected",
         "date_of_insertion_unix"
       ],
       "properties": {
@@ -38,7 +38,7 @@
           "type": "string",
           "equalsRootProperty": "code"
         },
-        "rna_per_ml": {
+        "rna_corrected": {
           "type": "number"
         },
         "date_of_insertion_unix": {
@@ -46,8 +46,8 @@
         }
       }
     },
-    "installation_item": {
-      "title": "results_per_sewer_installation_per_municipality_item",
+    "installation": {
+      "title": "municipal_sewer_per_installation_installation",
       "type": "object",
       "additionalProperties": false,
       "required": ["rwzi_awzi_code", "values", "last_value"],
@@ -58,18 +58,17 @@
         "values": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/item"
+            "$ref": "#/definitions/value"
           }
         },
         "last_value": {
-          "$ref": "#/definitions/item"
+          "$ref": "#/definitions/value"
         }
       }
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "results_per_sewer_installation_per_municipality.json",
-  "title": "results_per_sewer_installation_per_municipality",
+  "title": "municipal_sewer_per_installation",
   "type": "object",
   "required": ["values"],
   "additionalProperties": false,
@@ -77,7 +76,7 @@
     "values": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/installation_item"
+        "$ref": "#/definitions/installation"
       }
     }
   }
