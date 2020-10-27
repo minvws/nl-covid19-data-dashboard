@@ -1,3 +1,4 @@
+import { isDefined } from 'ts-is-present';
 /**
  * This validation function loops recursively through all of the properties in the given input object
  * and for all string values extracts and validates any existing placeholders.
@@ -10,7 +11,7 @@
  *
  */
 export const validPlaceholders = (
-  input: any,
+  input: Record<string, unknown>,
   parentName?: string
 ): string[] | undefined => {
   const parentSuffix = parentName ? `${parentName}.` : '';
@@ -21,7 +22,7 @@ export const validPlaceholders = (
         const result = validatePlaceHolders(value);
         if (result.length) {
           return result.map(
-            (placeholder: string) =>
+            (placeholder) =>
               `Invalid placeholder '${placeholder}' found in ${parentSuffix}${propertyName}`
           );
         }
@@ -32,12 +33,12 @@ export const validPlaceholders = (
         return validPlaceholders(value, `${parentSuffix}${propertyName}`);
       }
     })
-    .filter(Boolean) as string[];
+    .filter(isDefined);
 
   return result.length ? result : undefined;
 };
 
-function validatePlaceHolders(text: string): string[] {
+function validatePlaceHolders(text: string) {
   const matches = [...(text.matchAll(/({[^}]+[}]+)/g) as any)];
 
   return matches
@@ -56,5 +57,5 @@ function validatePlaceHolders(text: string): string[] {
       }
       return undefined;
     })
-    .filter(Boolean) as string[];
+    .filter(isDefined);
 }
