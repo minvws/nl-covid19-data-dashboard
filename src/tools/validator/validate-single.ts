@@ -1,9 +1,9 @@
 /* eslint no-console: 0 */
 import fs from 'fs';
 import path from 'path';
-import { createValidateFunction } from './createValidateFunction';
-import { getSchemaNames, schemaDirectory } from './getSchemaNames';
-import { jsonBasePath, localeBasePath } from './BasePaths';
+import { createValidateFunction } from './create-validate-function';
+import { getSchemaNames, schemaDirectory } from './get-schema-names';
+import { jsonBasePath, localeBasePath } from './base-paths';
 import chalk from 'chalk';
 import meow from 'meow';
 

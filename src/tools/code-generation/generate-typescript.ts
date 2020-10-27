@@ -2,8 +2,8 @@
 import fs from 'fs';
 import path from 'path';
 import { compile, JSONSchema } from 'json-schema-to-typescript';
-import { createValidateFunction } from '../validator/createValidateFunction';
-import { getSchemaNames, schemaDirectory } from '../validator/getSchemaNames';
+import { createValidateFunction } from '../validator/create-validate-function';
+import { getSchemaNames, schemaDirectory } from '../validator/get-schema-names';
 
 // The directory where the resulting data.d.ts file will be saved
 const outputPath = path.join(__dirname, '..', '..', 'types');

@@ -1,9 +1,9 @@
 /* eslint no-console: 0 */
 import fs from 'fs';
 import path from 'path';
-import { createValidateFunction } from './createValidateFunction';
-import { jsonBasePath, localeBasePath } from './BasePaths';
-import { schemaDirectory } from './getSchemaNames';
+import { createValidateFunction } from './create-validate-function';
+import { jsonBasePath, localeBasePath } from './base-paths';
+import { schemaDirectory } from './get-schema-names';
 import chalk from 'chalk';
 import { validPlaceholders } from './custom-validations/valid-placeholders';
 
