@@ -3,7 +3,6 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import siteText from '~/locale/index';
-import { WithChildren } from '~/types/index';
 import municipalities from '~/data/gemeente_veiligheidsregio.json';
 import { IMunicipalityData } from '~/static-props/municipality-data';
 
@@ -62,7 +61,9 @@ export function getMunicipalityLayout() {
  * More info on persistent layouts:
  * https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
-function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
+function MunicipalityLayout(
+  props: IMunicipalityData & { children: React.ReactNode }
+) {
   const { children, data, municipalityName } = props;
   const router = useRouter();
   const isLargeScreen = useMediaQuery('(min-width: 1000px)');

@@ -1,13 +1,12 @@
-import { WithChildren } from '~/types/index';
 import styles from './titleBlock.module.scss';
 
 interface IProps {
   Icon: any;
   title: string;
-  children: WithChildren;
+  children: React.ReactNode;
 }
 
-export function TitleBlock(props: WithChildren<IProps>) {
+export function TitleBlock(props: IProps) {
   const { Icon, title, children } = props;
 
   return (
