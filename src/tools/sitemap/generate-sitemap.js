@@ -1,13 +1,22 @@
 /* eslint no-console: 0 */
-import fs from 'fs';
-import globby from 'globby';
-import prettier from 'prettier';
-import regioData from '../../data/index';
-import gemeenteData from '../../data/gemeente_veiligheidsregio.json';
+const fs = require('fs');
+const globby = require('globby');
+const prettier = require('prettier');
+const gemeenteData = require('../../data/gemeente_veiligheidsregio.json');
 
-(async () => {
-  console.log('Generating sitemap...');
+const regioData = [...Array(25).keys()].map((n) =>
+  n + 1 < 10 ? `VR0${n + 1}` : `VR${n + 1}`
+);
+
+const generateSitemap = async function (locale) {
+  console.log(`Generating sitemap '${locale || 'nl'}'`);
+  console.log(regioData);
+
   const prettierConfig = await prettier.resolveConfig('./.prettierrc.js');
+
+  const domain = `${
+    process.env.NEXT_PUBLIC_LOCALE === 'en' ? 'government' : 'rijksoverheid'
+  }`;
 
   // Ignore Next.js specific files and API routes.
   const pages = await globby([
@@ -16,7 +25,7 @@ import gemeenteData from '../../data/gemeente_veiligheidsregio.json';
     '!./src/pages/api',
   ]);
 
-  const paths = pages.map((page: string) =>
+  const paths = pages.map((page) =>
     page
       .replace('./src/pages', '')
       .replace('.tsx', '')
@@ -43,33 +52,25 @@ import gemeenteData from '../../data/gemeente_veiligheidsregio.json';
     };
   });
 
-  type Path = {
-    path: string;
-    priority: number;
-  };
-
-  type Regio = { name: string; code: string; id: number };
-  type Gemeente = { name: string; safetyRegion: string; gemcode: string };
-
   const allPaths = pathsWithPriorities.filter(
-    (p: Path) => !p.path.includes('code') && p.path !== ''
+    (p) => !p.path.includes('code') && p.path !== ''
   );
   const regioPaths = pathsWithPriorities.filter(
-    (p: Path) => p.path.includes('code') && p.path.includes('veiligheidsregio')
+    (p) => p.path.includes('code') && p.path.includes('veiligheidsregio')
   );
   const gemeentePaths = pathsWithPriorities.filter(
-    (p: Path) => p.path.includes('code') && p.path.includes('gemeente')
+    (p) => p.path.includes('code') && p.path.includes('gemeente')
   );
 
   regioPaths.forEach((p) => {
-    regioData.forEach((regio: Regio) => {
-      const pathWithCode = p.path.replace('[code]', regio.code);
+    regioData.forEach((regioCode) => {
+      const pathWithCode = p.path.replace('[code]', regioCode);
       allPaths.push({ path: pathWithCode, priority: p.priority });
     });
   });
 
   gemeentePaths.forEach((p) => {
-    gemeenteData.forEach((gemeente: Gemeente) => {
+    gemeenteData.forEach((gemeente) => {
       const pathWithCode = p.path.replace('[code]', gemeente.gemcode);
       allPaths.push({ path: pathWithCode, priority: p.priority });
     });
@@ -85,10 +86,10 @@ import gemeenteData from '../../data/gemeente_veiligheidsregio.json';
         <priority>1.00</priority>
       </url>
       ${allPaths
-        .map((p: Path) => {
+        .map((p) => {
           return `
                 <url>
-                    <loc>${`https://coronadashboard.rijksoverheid.nl${p.path}`}</loc>
+                    <loc>${`https://coronadashboard.${domain}.nl${p.path}`}</loc>
                     <priority>${p.priority}</priority>
                 </url>
             `;
@@ -103,4 +104,8 @@ import gemeenteData from '../../data/gemeente_veiligheidsregio.json';
   });
 
   fs.writeFileSync('public/sitemap.xml', formatted);
-})();
+};
+
+module.exports = {
+  generateSitemap,
+};
