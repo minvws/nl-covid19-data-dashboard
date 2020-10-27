@@ -1,7 +1,7 @@
 {
   "definitions": {
-    "item": {
-      "title": "average_sewer_installation_per_region_item",
+    "value": {
+      "title": "regional_sewer_value",
       "additionalProperties": false,
       "required": [
         "week_unix",
@@ -40,18 +40,18 @@
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-  "title": "average_sewer_installation_per_region",
+  "title": "regional_sewer",
   "required": ["values", "last_value"],
   "additionalProperties": false,
   "properties": {
     "values": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/item"
+        "$ref": "#/definitions/value"
       }
     },
     "last_value": {
-      "$ref": "#/definitions/item"
+      "$ref": "#/definitions/value"
     }
   }
 }
