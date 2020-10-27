@@ -65,6 +65,13 @@
       "items": {
         "$ref": "nursing_home.json"
       }
+    },
+    "sewer": {
+      "type": "array",
+      "maxItems": 25,
+      "items": {
+        "$ref": "sewer.json"
+      }
     }
   }
 }
