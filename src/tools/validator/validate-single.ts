@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { createValidateFunction } from './createValidateFunction';
 import { getSchemaNames, schemaDirectory } from './getSchemaNames';
-import { jsonBasePath } from './jsonBasePath';
+import { jsonBasePath, localeBasePath } from './BasePaths';
 import chalk from 'chalk';
 import meow from 'meow';
 
@@ -46,9 +46,11 @@ if (!validSchemaNames.includes(schemaName)) {
   process.exit(1);
 }
 
-if (!fs.existsSync(path.join(jsonBasePath, jsonFileName))) {
+const basePath = schemaName === 'locale' ? localeBasePath : jsonBasePath;
+
+if (!fs.existsSync(path.join(basePath, jsonFileName))) {
   console.error(
-    `Invalid json filename argument '${jsonFileName}', file does not exist in directory ${jsonBasePath}`
+    `Invalid json filename argument '${jsonFileName}', file does not exist in directory ${basePath}`
   );
   process.exit(1);
 }
@@ -56,12 +58,9 @@ if (!fs.existsSync(path.join(jsonBasePath, jsonFileName))) {
 createValidateFunction(
   path.join(schemaDirectory, schemaName, `__index.json`)
 ).then((validateFunction) => {
-  const contentAsString = fs.readFileSync(
-    path.join(jsonBasePath, jsonFileName),
-    {
-      encoding: 'utf8',
-    }
-  );
+  const contentAsString = fs.readFileSync(path.join(basePath, jsonFileName), {
+    encoding: 'utf8',
+  });
 
   const data = JSON.parse(contentAsString);
 
