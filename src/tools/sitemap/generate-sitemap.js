@@ -5,8 +5,8 @@ const prettier = require('prettier');
 const gemeenteData = require('../../data/gemeente_veiligheidsregio.json');
 
 // regioData being generated as we can't import an ES export into CommonJS
-const regioData = [...Array(25).keys()].map((n) =>
-  n + 1 < 10 ? `VR0${n + 1}` : `VR${n + 1}`
+const regioData = [...Array(25).keys()].map(
+  (n) => `VR${(n + 1).toString().padStart(2, '0')}`
 );
 
 /**
@@ -86,7 +86,7 @@ const generateSitemap = async function (locale) {
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
       <url>
-        <loc>https://coronadashboard.rijksoverheid.nl/</loc>
+        <loc>${`https://coronadashboard.${domain}.nl/`}</loc>
         <priority>1.00</priority>
       </url>
       ${allPaths
