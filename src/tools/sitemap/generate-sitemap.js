@@ -9,6 +9,11 @@ const regioData = [...Array(25).keys()].map((n) =>
   n + 1 < 10 ? `VR0${n + 1}` : `VR${n + 1}`
 );
 
+/**
+ * Generates an xml sitemap depending on the given locale.
+ *
+ * @param locale
+ */
 const generateSitemap = async function (locale) {
   console.log(`Generating sitemap '${locale || 'nl'}'`);
   const prettierConfig = await prettier.resolveConfig('./.prettierrc.js');
