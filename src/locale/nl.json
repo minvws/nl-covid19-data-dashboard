@@ -854,7 +854,10 @@
       "title": "Rioolwatermeting in {{municipalityName}} | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van rioolwatermetingen en de hoeveelheid aangetroffen COVID-19 virusdeeltjes in de gemeente {{municipalityName}}."
     },
-    "nodata_sidebar": "Deze informatie is niet beschikbaar voor deze gemeente."
+    "nodata_sidebar": "Deze informatie is niet beschikbaar voor deze gemeente.",
+    "total_installation_count_titel": "Aantal RWZI-locaties",
+    "total_installation_count_description": "Aantal locaties dat wordt meegenomen in het berekenen van het gemiddelde.",
+    "rwzi_abbrev": "RWZI = Rioolwaterzuiveringsinstallatie."
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Risiconiveaus",
