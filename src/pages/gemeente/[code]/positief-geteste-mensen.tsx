@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import Getest from '~/assets/test.svg';
 import { LineChart } from '~/components/charts/index';
-import { ChoroplethLegenda } from '~/components/choropleth/legenda/choroplethLegenda';
+import { ChoroplethLegenda } from '~/components/choropleth/legenda/ChoroplethLegenda';
 import { useMunicipalLegendaData } from '~/components/choropleth/legenda/hooks/useMunicipalLegendaData';
 import { MunicipalityChoropleth } from '~/components/choropleth/MunicipalityChoropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth/selectHandlers/createSelectMunicipalHandler';

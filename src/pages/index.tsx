@@ -5,7 +5,7 @@ import { useState } from 'react';
 import ExternalLink from '~/assets/external-link.svg';
 import Notification from '~/assets/notification.svg';
 import { ChartRegionControls } from '~/components-styled/chart-region-controls';
-import { ChoroplethLegenda } from '~/components/choropleth/legenda/choroplethLegenda';
+import { ChoroplethLegenda } from '~/components/choropleth/legenda/ChoroplethLegenda';
 import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/useSafetyRegionLegendaData';
 import { MunicipalityChoropleth } from '~/components/choropleth/MunicipalityChoropleth';
 import { SafetyRegionChoropleth } from '~/components/choropleth/SafetyRegionChoropleth';
