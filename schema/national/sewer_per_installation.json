@@ -12,7 +12,7 @@
         "gm_code",
         "vrcode",
         "vrnaam",
-        "rna_corrected",
+        "rna_normalized",
         "date_of_insertion_unix"
       ],
       "additionalProperties": false,
@@ -43,7 +43,7 @@
         "vrnaam": {
           "type": "string"
         },
-        "rna_corrected": {
+        "rna_normalized": {
           "type": "number"
         },
         "date_of_insertion_unix": {

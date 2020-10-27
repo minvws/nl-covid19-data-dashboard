@@ -12,7 +12,7 @@
         "rwzi_awzi_code",
         "rwzi_awzi_name",
         "gmcode",
-        "rna_corrected",
+        "rna_normalized",
         "date_of_insertion_unix"
       ],
       "properties": {
@@ -38,7 +38,7 @@
           "type": "string",
           "equalsRootProperty": "code"
         },
-        "rna_corrected": {
+        "rna_normalized": {
           "type": "number"
         },
         "date_of_insertion_unix": {
