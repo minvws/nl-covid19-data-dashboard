@@ -5,7 +5,7 @@ import {
 } from '../../shared';
 
 import { useLegendaItems } from './useLegendaItems';
-import { regionThresholds } from '~/components/chloropleth/regionThresholds';
+import { regionThresholds } from '~/components/choropleth/regionThresholds';
 
 export function getSelectedThreshold(
   metricName?: TRegionMetricName,

@@ -1,12 +1,12 @@
 import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
-import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
+import { MunicipalityChoropleth } from '~/components/choropleth/MunicipalityChoropleth';
 import {
   createSelectMunicipalHandler,
   MunicipalitySelectionHandler,
-} from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
-import { MunicipalityProperties } from '~/components/chloropleth/shared';
-import { TooltipContent } from '~/components/chloropleth/tooltips/tooltipContent';
+} from '~/components/choropleth/selectHandlers/createSelectMunicipalHandler';
+import { MunicipalityProperties } from '~/components/choropleth/shared';
+import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
 import { FCWithLayout } from '~/components/layout';
 import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
 import { SEOHead } from '~/components/seoHead';
@@ -62,7 +62,7 @@ const Municipality: FCWithLayout<any> = () => {
           <p>{text.gemeente_index.selecteer_toelichting}</p>
         </div>
         <div className="map-container">
-          <MunicipalityChloropleth
+          <MunicipalityChoropleth
             tooltipContent={tooltipContent(onSelectMunicipal)}
             onSelect={createSelectMunicipalHandler(
               router,

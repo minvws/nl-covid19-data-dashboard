@@ -1,15 +1,15 @@
 import classNames from 'classnames';
 import { SafetyRegionProperties, TMunicipalityMetricName } from './shared';
 
-import { Chloropleth } from './Chloropleth';
+import { Choropleth } from './Choropleth';
 import { Feature, GeoJsonProperties, MultiPolygon } from 'geojson';
 import { useChartDimensions } from './hooks/useChartDimensions';
 
-import styles from './chloropleth.module.scss';
+import styles from './choropleth.module.scss';
 import { CSSProperties, ReactNode, useCallback } from 'react';
 import { Municipalities } from '~/types/data';
 import { useMunicipalityData } from './hooks/useMunicipalityData';
-import { useChloroplethColorScale } from './hooks/useChloroplethColorScale';
+import { useChoroplethColorScale } from './hooks/useChoroplethColorScale';
 import { useMunicipalityBoundingbox } from './hooks/useMunicipalityBoundingbox';
 import { MunicipalityProperties } from './shared';
 import { useRegionMunicipalities } from './hooks/useRegionMunicipalities';
@@ -45,7 +45,7 @@ export type TProps<
  *
  * @param props
  */
-export function MunicipalityChloropleth<
+export function MunicipalityChoropleth<
   T extends TMunicipalityMetricName,
   ItemType extends Municipalities[T][number],
   ReturnType extends ItemType & { value: number },
@@ -75,7 +75,7 @@ export function MunicipalityChloropleth<
   const thresholdValues = metricName
     ? municipalThresholds[metricName]
     : undefined;
-  const getFillColor = useChloroplethColorScale(
+  const getFillColor = useChoroplethColorScale(
     getData,
     thresholdValues?.thresholds
   );
@@ -184,10 +184,10 @@ export function MunicipalityChloropleth<
       ref={(elm) => {
         ref.current = elm;
       }}
-      className={styles.chloroplethContainer}
+      className={styles.choroplethContainer}
       style={style}
     >
-      <Chloropleth
+      <Choropleth
         featureCollection={municipalGeo}
         overlays={overlays}
         hovers={hasData ? municipalGeo : undefined}
