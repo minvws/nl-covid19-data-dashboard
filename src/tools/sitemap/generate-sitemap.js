@@ -10,8 +10,6 @@ const regioData = [...Array(25).keys()].map((n) =>
 
 const generateSitemap = async function (locale) {
   console.log(`Generating sitemap '${locale || 'nl'}'`);
-  console.log(regioData);
-
   const prettierConfig = await prettier.resolveConfig('./.prettierrc.js');
 
   const domain = `${
