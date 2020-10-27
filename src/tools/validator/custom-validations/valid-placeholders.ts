@@ -25,6 +25,7 @@ export const validPlaceholders = (
               `Invalid placeholder '${placeholder}' found in ${parentSuffix}${propertyName}`
           );
         }
+        return;
       }
 
       if (typeof value === 'object') {
