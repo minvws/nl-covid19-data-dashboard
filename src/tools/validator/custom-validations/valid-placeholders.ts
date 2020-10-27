@@ -37,7 +37,7 @@ export const validPlaceholders = (
 };
 
 function validatePlaceHolders(text: string): string[] {
-  const matches = [...text.matchAll(/({[^}]+[}]+)/g)];
+  const matches = [...(text.matchAll(/({[^}]+[}]+)/g) as any)];
 
   return matches
     .map((matchInfo: string[]) => {
