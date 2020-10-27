@@ -4,6 +4,7 @@ const globby = require('globby');
 const prettier = require('prettier');
 const gemeenteData = require('../../data/gemeente_veiligheidsregio.json');
 
+// regioData being generated as we can't import an ES export into CommonJS
 const regioData = [...Array(25).keys()].map((n) =>
   n + 1 < 10 ? `VR0${n + 1}` : `VR${n + 1}`
 );
