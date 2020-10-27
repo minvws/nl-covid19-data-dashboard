@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import styles from '~/components/chloropleth/tooltips/tooltip.module.scss';
+import styles from '~/components/choropleth/tooltips/tooltip.module.scss';
 
 interface IProps {
   title: string;

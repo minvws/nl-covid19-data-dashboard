@@ -3,12 +3,12 @@ import { SafetyRegionProperties, TRegionMetricName } from './shared';
 import { Regions } from '~/types/data';
 import { CSSProperties, ReactNode, useCallback } from 'react';
 import { useChartDimensions } from './hooks/useChartDimensions';
-import { Chloropleth } from './Chloropleth';
+import { Choropleth } from './Choropleth';
 import { countryGeo, regionGeo } from './topology';
 import { Feature, MultiPolygon } from 'geojson';
-import styles from './chloropleth.module.scss';
+import styles from './choropleth.module.scss';
 import { useSafetyRegionBoundingbox } from './hooks/useSafetyRegionBoundingbox';
-import { useChloroplethColorScale } from './hooks/useChloroplethColorScale';
+import { useChoroplethColorScale } from './hooks/useChoroplethColorScale';
 import { useSafetyRegionData } from './hooks/useSafetyRegionData';
 import { getSelectedThreshold } from './legenda/hooks/useSafetyRegionLegendaData';
 
@@ -43,7 +43,7 @@ export type TProps<
  *
  * @param props
  */
-export function SafetyRegionChloropleth<
+export function SafetyRegionChoropleth<
   T extends TRegionMetricName,
   ItemType extends Regions[T][number],
   ReturnType extends ItemType & { value: number },
@@ -71,7 +71,7 @@ export function SafetyRegionChloropleth<
 
   const selectedThreshold = getSelectedThreshold(metricName, metricValueName);
 
-  const getFillColor = useChloroplethColorScale(
+  const getFillColor = useChoroplethColorScale(
     getData,
     selectedThreshold?.thresholds
   );
@@ -153,7 +153,7 @@ export function SafetyRegionChloropleth<
   };
 
   const className = classNames(
-    styles.chloroplethContainer,
+    styles.choroplethContainer,
     selectedThreshold?.svgClass ? styles[selectedThreshold.svgClass] : undefined
   );
 
@@ -165,7 +165,7 @@ export function SafetyRegionChloropleth<
       className={className}
       style={style}
     >
-      <Chloropleth
+      <Choropleth
         featureCollection={regionGeo}
         overlays={countryGeo}
         hovers={hasData ? regionGeo : undefined}

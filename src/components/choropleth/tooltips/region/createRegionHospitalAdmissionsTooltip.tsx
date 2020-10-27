@@ -1,8 +1,8 @@
 import { NextRouter } from 'next/router';
 import { ReactNode } from 'react';
-import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
-import { SafetyRegionProperties } from '~/components/chloropleth/shared';
-import { TooltipContent } from '~/components/chloropleth/tooltips/tooltipContent';
+import { createSelectRegionHandler } from '~/components/choropleth/selectHandlers/createSelectRegionHandler';
+import { SafetyRegionProperties } from '~/components/choropleth/shared';
+import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
 import { formatNumber } from '~/utils/formatNumber';
 
 export const createRegionHospitalAdmissionsTooltip = (router: NextRouter) => (

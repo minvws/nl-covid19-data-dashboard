@@ -1,4 +1,4 @@
-import styles from './chloroplethlegenda.module.scss';
+import styles from './choroplethlegenda.module.scss';
 
 export interface ILegendaItem {
   color: string;
@@ -10,7 +10,7 @@ export type TProps = {
   items: ILegendaItem[];
 };
 
-export function ChloroplethLegenda(props: TProps) {
+export function ChoroplethLegenda(props: TProps) {
   const { items, title } = props;
 
   return (

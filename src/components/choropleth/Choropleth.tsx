@@ -6,7 +6,7 @@ import create, { UseStore } from 'zustand';
 
 import { TCombinedChartDimensions } from './hooks/useChartDimensions';
 
-import styles from './chloropleth.module.scss';
+import styles from './choropleth.module.scss';
 import { localPoint } from '@vx/event';
 
 import { Tooltip } from './tooltips/tooltipContainer';
@@ -33,7 +33,7 @@ export type TRenderCallback = (
 
 export type TProps<TFeatureProperties> = {
   // This is the main feature collection that displays the features that will
-  // be colored in as part of the chloropleth
+  // be colored in as part of the choropleth
   featureCollection: FeatureCollection<MultiPolygon, TFeatureProperties>;
   // These are features that are used as an overlay, overlays have no interactions
   // they are simply there to beautify the map or emphasize certain parts.
@@ -81,7 +81,7 @@ export type TProps<TFeatureProperties> = {
 };
 
 /**
- * Generic chloropleth component that takes featurecollection that is considered the data layer
+ * Generic choropleth component that takes featurecollection that is considered the data layer
  * and another that is considered the overlay layer.
  * It implements a click and mouseover/mouseout system where the value that is assigned to the
  * data-id attribute of a path is propagated to the injected onPatchClick and getTooltipContent
@@ -89,7 +89,7 @@ export type TProps<TFeatureProperties> = {
  *
  * @param props
  */
-export function Chloropleth<T>(props: TProps<T>) {
+export function Choropleth<T>(props: TProps<T>) {
   const {
     featureCollection,
     overlays,
