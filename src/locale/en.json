@@ -86,7 +86,7 @@
       "description": "National overview of confirmed COVID-19 cases who are admitted to a hospital intensive care unit (ICU)."
     },
     "titel_sidebar": "Intensive care units admissions per day",
-    "titel_kpi": ""
+    "titel_kpi": "Intensive care admissions by day"
   },
   "verdenkingen_huisartsen": {
     "datums": "Value of  {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
@@ -103,14 +103,14 @@
     "kpi_toelichting": "Estimated number of patients who contact the general practitioner for the first time due to COVID-19 like symptoms, per 100.000 inhabitants, per week.",
     "linechart_titel": "Progression over time",
     "barscale_screenreader_text": "{{value}} patients who contact the general practitioner for the first time due to COVID-19 like symptoms, per 100.000 inhabitants, per week.",
-    "titel_sidebar": "Patients who contact their GP for the first time because of symptoms that could indicate COVID-19 per 100.000 inhabitants",
+    "titel_sidebar": "Diagnoses by general practitioners",
     "metadata": {
       "title": "Number of suspected COVID-19 reports by general practitioners | Dashboard Coronavirus | Government.nl",
       "description": "National (estimated) number of patients who contact the general practitioner for the first time due to COVID-19 like symptoms."
     },
     "normalized_kpi_titel": "Estimated number of patients who contact the general practitioner for the first time with COVID-19 symptoms",
     "normalized_kpi_toelichting": "Number of patients who contact the general practitioner for the first time due to COVID-19 like symptoms, per 100.000 inhabitants, per week.",
-    "titel_kpi": ""
+    "titel_kpi": "Patients who contact the general practitioner for the first time due to COVID-19 symptoms"
   },
   "ziekenhuisopnames_per_dag": {
     "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
@@ -215,7 +215,7 @@
       "title": "Confirmed cases | Dashboard Coronavirus | Government.nl",
       "description": "National overview of confirmed cases in inhabitants with COVID-19."
     },
-    "titel_kpi": ""
+    "titel_kpi": "Confirmed cases per day"
   },
   "besmettelijke_personen": {
     "title": "Number of infectious people",
@@ -242,7 +242,7 @@
       "description": "National overview of how many people with COVID-19 can transmit the virus. This number is calculated by the RIVM."
     },
     "barscale_toelichting": "",
-    "titel_kpi": ""
+    "titel_kpi": "Number of infectious people"
   },
   "reproductiegetal": {
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
@@ -267,7 +267,7 @@
       "description": "The reproduction number shows how fast the virus is spreading. This number shows how many people are on average infected by one patient with COVID-19."
     },
     "titel_sidebar": "Reproduction number",
-    "titel_kpi": ""
+    "titel_kpi": "Effective reproduction number"
   },
   "overige_gegevens": {
     "title": "To be developed",
@@ -339,7 +339,7 @@
       "description": "National number of nursing homes with at least one confirmed case of COVID-19."
     },
     "titel_sidebar": "Number of infected locations",
-    "titel_kpi": ""
+    "titel_kpi": "Number of infected locations"
   },
   "verpleeghuis_positief_geteste_personen": {
     "datums": "Value of {{dateOfReport}}. Obtained:{{dateOfInsertion}}. Is updated on a daily basis.",
@@ -385,7 +385,7 @@
       "title": "Number of confirmed cases in nursing homes | Dashboard Coronavirus | Government.nl",
       "description": "National number of deceased residents with confirmed cases of COVID-19 in nursing homes."
     },
-    "titel_kpi": ""
+    "titel_kpi": "Mortality per day"
   },
   "blok_verpleeghuis_zorg": {
     "title": "Nursing homes",
@@ -828,7 +828,7 @@
       "title": "Confirmed cases in  {{municipalityName}} | Dashboard Coronavirus | Government.nl",
       "description": "Overview of confirmed cases in municipality {{municipalityName}}"
     },
-    "titel_kpi": ""
+    "titel_kpi": "Confirmed cases per day"
   },
   "gemeente_rioolwater_metingen": {
     "titel_sidebar": "Sewage water examination",
