@@ -1,8 +1,11 @@
 version: '3'
 
 services:
-  web:
+  nextjs:
     build:
-      context: .
+      context: ./
+  nginx:
+    build:
+      context: ./nginx
     ports:
       - '8080:8080'
