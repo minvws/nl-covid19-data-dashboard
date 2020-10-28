@@ -83,7 +83,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
       />
 
       <TwoKpiSection>
-        {barScaleData && barScaleData.value !== undefined && (
+        {barScaleData?.value !== undefined && (
           <KpiTile title={text.barscale_titel} description={text.extra_uitleg}>
             <KpiValue absolute={barScaleData.value} />
           </KpiTile>
