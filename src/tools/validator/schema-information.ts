@@ -20,17 +20,17 @@ export const schemaInformation: Record<string, SchemaInfo> = {
   national: { files: ['NL.json'], basePath: jsonBasePath },
   ranges: { files: ['RANGES.json'], basePath: jsonBasePath },
   regional: {
-    files: filterFilenames(allJsonFiles, new RegExp('^VR[0-9]+\\.json$')),
+    files: filterFilenames(allJsonFiles, /^VR[0-9]+.json$/),
     basePath: jsonBasePath,
   },
   municipal: {
-    files: filterFilenames(allJsonFiles, new RegExp('^GM[0-9]+\\.json$')),
+    files: filterFilenames(allJsonFiles, /^GM[0-9]+.json$/),
     basePath: jsonBasePath,
   },
   municipalities: { files: ['MUNICIPALITIES.json'], basePath: jsonBasePath },
   regions: { files: ['REGIONS.json'], basePath: jsonBasePath },
   locale: {
-    files: filterFilenames(localeJsons, new RegExp('[^\\.]+\\.json$')),
+    files: filterFilenames(localeJsons, /[^.]+.json$/),
     basePath: localeBasePath,
     customValidations: [validPlaceholders],
   },
