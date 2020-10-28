@@ -17,7 +17,7 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "national_ggd_value",
+      "title": "national_behavior_value",
       "type": "object",
       "properties": {
         "number_of_participants": {

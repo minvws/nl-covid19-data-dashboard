@@ -17,7 +17,7 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "regional_ggd_value",
+      "title": "regional_behavior_value",
       "type": "object",
       "properties": {
         "number_of_participants": {
