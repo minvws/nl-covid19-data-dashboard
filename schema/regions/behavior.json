@@ -27,7 +27,7 @@
     "wear_mask_public_transport": {
       "type": "integer"
     },
-    "sneeze_couch_elbow": {
+    "sneeze_cough_elbow": {
       "type": "integer"
     },
     "max_visitors_home": {
@@ -49,7 +49,7 @@
     "symptoms_get_tested",
     "wear_mask_public_space",
     "wear_mask_public_transport",
-    "sneeze_couch_elbow",
+    "sneeze_cough_elbow",
     "max_visitors_home",
     "date_of_report_unix",
     "date_of_insertion_unix"
