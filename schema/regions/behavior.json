@@ -6,34 +6,64 @@
     "number_of_participants": {
       "type": "integer"
     },
-    "wash_hands": {
+    "wash_hands_compliance": {
       "type": "integer"
     },
-    "keep_distance": {
+    "keep_distance_compliance": {
       "type": "integer"
     },
-    "work_from_home": {
+    "work_from_home_compliance": {
       "type": "integer"
     },
-    "avoid_crowds": {
+    "avoid_crowds_compliance": {
       "type": "integer"
     },
-    "symptoms_stay_home": {
+    "symptoms_stay_home_compliance": {
       "type": "integer"
     },
-    "symptoms_get_tested": {
+    "symptoms_get_tested_compliance": {
       "type": "integer"
     },
-    "wear_mask_public_space": {
+    "wear_mask_public_space_compliance": {
       "type": "integer"
     },
-    "wear_mask_public_transport": {
+    "wear_mask_public_transport_compliance": {
       "type": "integer"
     },
-    "sneeze_cough_elbow": {
+    "sneeze_cough_elbow_compliance": {
       "type": "integer"
     },
-    "max_visitors_home": {
+    "max_visitors_compliance": {
+      "type": "integer"
+    },
+    "wash_hands_support": {
+      "type": "integer"
+    },
+    "keep_distance_support": {
+      "type": "integer"
+    },
+    "work_from_home_support": {
+      "type": "integer"
+    },
+    "avoid_crowds_support": {
+      "type": "integer"
+    },
+    "symptoms_stay_home_support": {
+      "type": "integer"
+    },
+    "symptoms_get_tested_support": {
+      "type": "integer"
+    },
+    "wear_mask_public_space_support": {
+      "type": "integer"
+    },
+    "wear_mask_public_transport_support": {
+      "type": "integer"
+    },
+    "sneeze_cough_elbow_support": {
+      "type": "integer"
+    },
+    "max_visitors_support": {
       "type": "integer"
     },
     "date_of_report_unix": {
@@ -45,16 +75,25 @@
   },
   "required": [
     "number_of_participants",
-    "wash_hands",
-    "keep_distance",
-    "work_from_home",
-    "avoid_crowds",
-    "symptoms_stay_home",
-    "symptoms_get_tested",
-    "wear_mask_public_space",
-    "wear_mask_public_transport",
-    "sneeze_cough_elbow",
-    "max_visitors_home",
+    "wash_hands_compliance",
+    "keep_distance_compliance",
+    "work_from_home_compliance",
+    "avoid_crowds_compliance",
+    "symptoms_stay_home_compliance",
+    "symptoms_get_tested_compliance",
+    "wear_mask_public_space_compliance",
+    "wear_mask_public_transport_compliance",
+    "sneeze_cough_elbow_compliance",
+    "wash_hands_support",
+    "keep_distance_support",
+    "work_from_home_support",
+    "avoid_crowds_support",
+    "symptoms_stay_home_support",
+    "symptoms_get_tested_support",
+    "wear_mask_public_space_support",
+    "wear_mask_public_transport_support",
+    "sneeze_cough_elbow_support",
+    "max_visitors_support",
     "date_of_report_unix",
     "date_of_insertion_unix"
   ],
