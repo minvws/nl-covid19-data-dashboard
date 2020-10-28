@@ -854,7 +854,10 @@
       "title": "Sewage water examination in {{municipalityName}} | Dashboard Coronavirus | Government.nl",
       "description": "Overview of sewage water examination and the number of measured COVID-19 virus particles in municipality {{municipalityName}}."
     },
-    "nodata_sidebar": ""
+    "nodata_sidebar": "",
+    "total_installation_count_titel": "Number of measurement locations",
+    "total_installation_count_description": "Weekly number of wastewater treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful.",
+    "rwzi_abbrev": ""
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Level of risk",
