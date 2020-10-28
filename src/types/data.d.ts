@@ -5,7 +5,6 @@
 * and run 'yarn generate-typescript' to regenerate this file.
 */
 
-
 export interface Municipal {
   last_generated: string;
   proto_name: string;
@@ -416,6 +415,7 @@ export interface Regionaal {
   results_per_region: ResultsPerRegion;
   ggd: RegionalGgd;
   nursing_home: RegionalNursingHome;
+  restrictions?: RegionRestrictions;
 }
 export interface ResultsPerSewerInstallationPerRegion {
   values: SewerValueElement[];
@@ -494,6 +494,10 @@ export interface RegionalNursingHomeValue {
   date_of_insertion_unix: number;
   vrcode: string;
 }
+export interface RegionRestrictions {
+  vrcode: string;
+  values: number[];
+}
 
 export interface Regions {
   last_generated: string;
@@ -541,4 +545,19 @@ export interface RegionsNursingHome {
   date_of_report_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;
+}
+
+export interface Restrictions {
+  last_generated: string;
+  proto_name: string;
+  name: string;
+  code: string;
+  values: RestrictionDef[];
+}
+export interface RestrictionDef {
+  identifier: number;
+  target_region: "nl" | "vr";
+  escalation_level: number;
+  category_id: string;
+  restriction_order: number;
 }

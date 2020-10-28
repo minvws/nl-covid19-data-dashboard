@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "region_restrictions",
+  "additionalProperties": false,
+  "required": ["vrcode", "values"],
+  "properties": {
+    "vrcode": { "type": "string", "equalsRootProperty": "code" },
+    "values": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    }
+  }
+}
