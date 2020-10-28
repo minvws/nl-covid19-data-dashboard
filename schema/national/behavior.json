@@ -20,6 +20,9 @@
       "title": "national_ggd_value",
       "type": "object",
       "properties": {
+        "number_of_participants": {
+          "type": "integer"
+        },
         "wash_hands": {
           "type": "integer"
         },
@@ -58,6 +61,7 @@
         }
       },
       "required": [
+        "number_of_participants",
         "wash_hands",
         "keep_distance",
         "work_from_home",
