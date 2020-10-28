@@ -9,8 +9,8 @@
     "title": "Last updated"
   },
   "notificatie": {
-    "titel": "Slower increase in new COVID-19 infections ",
-    "bericht": "In the past week (14 to 20 October) the number of people who newly tested positive rose, as did the number of COVID-19 patients admitted to hospital and ICU. However, the speed at which new infections increased seems to have slowed somewhat. This might be a result of the government policy measures issued late September. However, the number of hospital admissions continues to rise at the same pace. \n\nRisk level per region can be ‘caution’ (level 1), ‘concern’ (level 2), ‘serious’ (level 3) or ‘severe’ (level 4). At this moment the risk level of {{escalationLevel4}} regions is 'severe', for {{escalationLevel3}} it is ‘serious’, for {{escalationLevel2}} it is ‘concern’ and for {{escalationLevel1}} it is ‘caution’.",
+    "titel": "Increase in new COVID-19 infections,  but less strong",
+    "bericht": "In the past week (21 to 27 October) the number of people who newly tested positive rose. However, like last week,  the speed at which new infections increased has slowed again.  This probably results from the government policy measures issued late September and mid-October. The number of COVID-19 patients admitted to hospital and ICU increased further.\n\nRisk level per region can be ‘caution’ (level 1), ‘concern’ (level 2), ‘serious’ (level 3) or ‘severe’ (level 4). At this moment the risk level of {{escalationLevel4}} regions is 'severe', for {{escalationLevel3}} it is ‘serious’, for {{escalationLevel2}} it is ‘concern’ and for {{escalationLevel1}} it is ‘caution’.",
     "link": {
       "text": "View the full message from the RIVM",
       "href": "https://www.rivm.nl/en/novel-coronavirus-covid-19/current-information"
@@ -172,7 +172,7 @@
     "barscale_toelichting": "This figure shows how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
     "kpi_titel": "Number of confirmed cases:",
-    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday.",
+    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.",
     "map_titel": "Distribution of confirmed cases in the Netherlands",
     "map_toelichting": "These maps show how many confirmed cases of COVID-19 were reported yesterday per 100,000 inhabitants.",
     "linechart_titel": "Progression over time",
@@ -703,7 +703,7 @@
     "barscale_toelichting": "This figure shows how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
     "kpi_titel": "Number of confirmed cases:",
-    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday.",
+    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.",
     "map_titel": "Distribution of confirmed cases in {{safetyRegion}}",
     "map_toelichting": "This map shows how many confirmed cases of COVID-19 were reported yesterday in the municipalities of this safety region per 100,000 inhabitants.",
     "linechart_titel": "Progression over time",
@@ -805,7 +805,7 @@
     "barscale_toelichting": "This number shows how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
     "kpi_titel": "Number of confirmed cases:",
-    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday.",
+    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.",
     "map_titel": "Distribution of confirmed cases in {{municipality}}",
     "map_toelichting": "This map shows how many confirmed cases of COVID-19 were reported yesterday in these municipalities per 100,000 inhabitants.",
     "linechart_titel": "Progression over time",
@@ -854,7 +854,10 @@
       "title": "Sewage water examination in {{municipalityName}} | Dashboard Coronavirus | Government.nl",
       "description": "Overview of sewage water examination and the number of measured COVID-19 virus particles in municipality {{municipalityName}}."
     },
-    "nodata_sidebar": ""
+    "nodata_sidebar": "",
+    "total_installation_count_titel": "",
+    "total_installation_count_description": "",
+    "rwzi_abbrev": ""
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Level of risk",

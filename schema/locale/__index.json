@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "locale",
+  "additionalProperties": true,
+  "required": [
+    "verantwoording",
+    "over_veelgestelde_vragen",
+    "positief_geteste_personen"
+  ],
+  "properties": {
+    "verantwoording": {
+      "type": "object",
+      "required": ["cijfers"],
+      "additionalProperties": true,
+      "properties": {
+        "cijfers": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "over_veelgestelde_vragen": {
+      "type": "object",
+      "required": ["vragen"],
+      "additionalProperties": true,
+      "properties": {
+        "vragen": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "positief_geteste_personen": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "barscale_keys": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

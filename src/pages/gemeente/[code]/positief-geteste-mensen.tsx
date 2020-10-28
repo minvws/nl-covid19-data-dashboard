@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
 import Getest from '~/assets/test.svg';
 import { LineChart } from '~/components/charts/index';
-import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
-import { useMunicipalLegendaData } from '~/components/chloropleth/legenda/hooks/useMunicipalLegendaData';
-import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
-import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
-import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/createPositiveTestedPeopleMunicipalTooltip';
+import { ChoroplethLegenda } from '~/components/choropleth/legenda/ChoroplethLegenda';
+import { useMunicipalLegendaData } from '~/components/choropleth/legenda/hooks/useMunicipalLegendaData';
+import { MunicipalityChoropleth } from '~/components/choropleth/MunicipalityChoropleth';
+import { createSelectMunicipalHandler } from '~/components/choropleth/selectHandlers/createSelectMunicipalHandler';
+import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/createPositiveTestedPeopleMunicipalTooltip';
 import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/contentHeader';
 import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
@@ -91,8 +91,8 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
         </article>
       )}
 
-      <article className="metric-article layout-chloropleth">
-        <div className="chloropleth-header">
+      <article className="metric-article layout-choropleth">
+        <div className="choropleth-header">
           <h3>
             {replaceVariablesInText(text.map_titel, {
               municipality: municipalityName,
@@ -101,8 +101,8 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
           <p>{text.map_toelichting}</p>
         </div>
 
-        <div className="chloropleth-chart">
-          <MunicipalityChloropleth
+        <div className="choropleth-chart">
+          <MunicipalityChoropleth
             selected={data.code}
             metricName="positive_tested_people"
             tooltipContent={createPositiveTestedPeopleMunicipalTooltip(router)}
@@ -110,9 +110,9 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
           />
         </div>
 
-        <div className="chloropleth-legend">
+        <div className="choropleth-legend">
           {legendItems && (
-            <ChloroplethLegenda
+            <ChoroplethLegenda
               items={legendItems}
               title={
                 siteText.positief_geteste_personen.chloropleth_legenda.titel

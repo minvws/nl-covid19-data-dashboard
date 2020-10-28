@@ -15,12 +15,12 @@
   pointer-events: all;
 }
 
-.chloroplethContainer {
+.choroplethContainer {
   position: relative;
   background: transparent;
 }
 
-.chloroplethContainer.escalationMap {
+.choroplethContainer.escalationMap {
   .svgMap {
     path {
       stroke: white;
