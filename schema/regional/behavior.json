@@ -1,0 +1,77 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "regional_behavior",
+  "type": "object",
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/value"
+      }
+    },
+    "last_value": {
+      "$ref": "#/definitions/value"
+    }
+  },
+  "required": ["values", "last_value"],
+  "additionalProperties": false,
+  "definitions": {
+    "value": {
+      "title": "regional_ggd_value",
+      "type": "object",
+      "properties": {
+        "wash_hands": {
+          "type": "integer"
+        },
+        "keep_distance": {
+          "type": "integer"
+        },
+        "work_from_home": {
+          "type": "integer"
+        },
+        "avoid_crowds": {
+          "type": "integer"
+        },
+        "symptoms_stay_home": {
+          "type": "integer"
+        },
+        "symptoms_get_tested": {
+          "type": "integer"
+        },
+        "wear_mask_public_space": {
+          "type": "integer"
+        },
+        "wear_mask_public_transport": {
+          "type": "integer"
+        },
+        "sneeze_couch_elbow": {
+          "type": "integer"
+        },
+        "max_visitors_home": {
+          "type": "integer"
+        },
+        "date_of_report_unix": {
+          "type": "integer"
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "wash_hands",
+        "keep_distance",
+        "work_from_home",
+        "avoid_crowds",
+        "symptoms_stay_home",
+        "symptoms_get_tested",
+        "wear_mask_public_space",
+        "wear_mask_public_transport",
+        "sneeze_couch_elbow",
+        "max_visitors_home",
+        "date_of_report_unix",
+        "date_of_insertion_unix"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
