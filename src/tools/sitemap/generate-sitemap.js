@@ -56,7 +56,7 @@ const generateSitemap = async function (locale) {
     };
   });
 
-  const allPaths = pathsWithPriorities.filter(
+  const allPathsWithPriorities = pathsWithPriorities.filter(
     (p) => !p.path.includes('code') && p.path !== ''
   );
   const regioPaths = pathsWithPriorities.filter(
@@ -69,14 +69,14 @@ const generateSitemap = async function (locale) {
   regioPaths.forEach((p) => {
     regioData.forEach((regioCode) => {
       const pathWithCode = p.path.replace('[code]', regioCode);
-      allPaths.push({ path: pathWithCode, priority: p.priority });
+      allPathsWithPriorities.push({ path: pathWithCode, priority: p.priority });
     });
   });
 
   gemeentePaths.forEach((p) => {
     gemeenteData.forEach((gemeente) => {
       const pathWithCode = p.path.replace('[code]', gemeente.gemcode);
-      allPaths.push({ path: pathWithCode, priority: p.priority });
+      allPathsWithPriorities.push({ path: pathWithCode, priority: p.priority });
     });
   });
 
@@ -89,7 +89,7 @@ const generateSitemap = async function (locale) {
         <loc>${`https://coronadashboard.${domain}.nl/`}</loc>
         <priority>1.00</priority>
       </url>
-      ${allPaths
+      ${allPathsWithPriorities
         .map((p) => {
           return `
                 <url>
