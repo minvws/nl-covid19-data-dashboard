@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "title": "regions",
-  "additionalProperties": false,
+  "additionalProperties": true,
   "required": [
     "last_generated",
     "proto_name",
@@ -12,7 +12,8 @@
     "hospital_admissions",
     "positive_tested_people",
     "deceased",
-    "nursing_home"
+    "nursing_home",
+    "sewer"
   ],
   "properties": {
     "last_generated": {

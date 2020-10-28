@@ -17,14 +17,14 @@
     "intake_share_age_groups",
     "reproduction_index",
     "reproduction_index_last_known_average",
-    "rioolwater_metingen",
-    "rioolwater_metingen_per_rwzi",
+    "sewer",
+    "sewer_per_installation",
     "hospital_beds_occupied",
     "intensive_care_beds_occupied",
     "ggd",
     "nursing_home"
   ],
-  "additionalProperties": false,
+  "additionalProperties": true,
   "properties": {
     "last_generated": {
       "type": "string"
