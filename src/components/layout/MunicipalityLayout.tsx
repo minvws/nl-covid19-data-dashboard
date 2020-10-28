@@ -87,12 +87,9 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
 
   function handleMunicipalitySelect(region: IMunicipality) {
     if (isLargeScreen) {
-      router.push(
-        '/gemeente/[code]/positief-geteste-mensen',
-        `/gemeente/${region.gemcode}/positief-geteste-mensen`
-      );
+      router.push(`/gemeente/${region.gemcode}/positief-geteste-mensen`);
     } else {
-      router.push('/gemeente/[code]', `/gemeente/${region.gemcode}`);
+      router.push(`/gemeente/${region.gemcode}`);
     }
   }
 
@@ -122,7 +119,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
           isMainRoute ? 'and-content-opened' : isMenuOpen ? 'opened' : 'closed'
         }`}
       >
-        <Link href="/gemeente/[code]" as={`/gemeente/${code}`}>
+        <Link href={`/gemeente/${code}`}>
           <a className="back-button" onClick={openMenu}>
             <Arrow />
             {siteText.nav.terug_naar_alle_cijfers}
@@ -143,8 +140,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                   <p>
                     {siteText.common.veiligheidsregio_label}{' '}
                     <Link
-                      href="/veiligheidsregio/[code]/positief-geteste-mensen"
-                      as={`/veiligheidsregio/${safetyRegion.code}/positief-geteste-mensen`}
+                      href={`/veiligheidsregio/${safetyRegion.code}/positief-geteste-mensen`}
                     >
                       <a onClick={blur}>{safetyRegion.name}</a>
                     </Link>
@@ -154,10 +150,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
               <h2>{siteText.nationaal_layout.headings.medisch}</h2>
               <ul>
                 <li>
-                  <Link
-                    href="/gemeente/[code]/positief-geteste-mensen"
-                    as={`/gemeente/${code}/positief-geteste-mensen`}
-                  >
+                  <Link href={`/gemeente/${code}/positief-geteste-mensen`}>
                     <a
                       onClick={blur}
                       className={getClassName(
@@ -181,10 +174,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                 </li>
 
                 <li>
-                  <Link
-                    href="/gemeente/[code]/ziekenhuis-opnames"
-                    as={`/gemeente/${code}/ziekenhuis-opnames`}
-                  >
+                  <Link href={`/gemeente/${code}/ziekenhuis-opnames`}>
                     <a
                       onClick={blur}
                       className={getClassName(
@@ -212,10 +202,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
               <ul>
                 <li>
                   {sewerWaterBarScaleData ? (
-                    <Link
-                      href="/gemeente/[code]/rioolwater"
-                      as={`/gemeente/${code}/rioolwater`}
-                    >
+                    <Link href={`/gemeente/${code}/rioolwater`}>
                       <a
                         onClick={blur}
                         className={getClassName(`/gemeente/[code]/rioolwater`)}
@@ -252,7 +239,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
 
         <section className="municipality-content">{children}</section>
 
-        <Link href="/gemeente/[code]" as={`/gemeente/${code}`}>
+        <Link href={`/gemeente/${code}`}>
           <a className="back-button back-button-footer" onClick={openMenu}>
             <Arrow />
             {siteText.nav.terug_naar_alle_cijfers}
