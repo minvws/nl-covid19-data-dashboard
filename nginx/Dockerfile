@@ -1,4 +1,14 @@
-FROM bitnami/nginx:latest
-COPY nginx.conf nginx_headers.conf nginx_common.conf nginx_en.conf nginx_nl.conf /opt/bitnami/nginx/conf/
-EXPOSE 8080
-CMD ["nginx", "-g", "daemon off;"]
+FROM nginx:alpine
+
+# Remove any existing config files
+RUN rm /etc/nginx/conf.d/*
+
+# Copy config files
+# *.conf files in "conf.d/" dir get included in main config
+COPY ./default.conf ./headers.conf /etc/nginx/conf.d/
+
+# Expose the listening port
+EXPOSE 80
+
+# Launch NGINX
+CMD [ "nginx", "-g", "daemon off;" ]
