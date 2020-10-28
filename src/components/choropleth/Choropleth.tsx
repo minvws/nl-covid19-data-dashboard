@@ -1,6 +1,7 @@
 import { Mercator } from '@vx/geo';
 import { Feature, FeatureCollection, MultiPolygon } from 'geojson';
-import { MutableRefObject, ReactNode, useRef } from 'react';
+import { ReactNode, useRef } from 'react';
+import { debounce } from 'lodash';
 
 import create, { UseStore } from 'zustand';
 
@@ -14,9 +15,11 @@ import { useMediaQuery } from '~/utils/useMediaQuery';
 
 export type TooltipState = {
   tooltip: TooltipSettings | null;
-  updateTooltip: (tooltip: TooltipSettings) => void;
-  showTooltip: (settings: TooltipSettings) => void;
-  hideTooltip: () => void;
+  update: (tooltip: TooltipSettings) => void;
+
+  isEnabled: boolean;
+  enable: () => void;
+  disable: () => void;
 };
 
 export type TooltipSettings = {
@@ -104,29 +107,24 @@ export function Choropleth<T>(props: TProps<T>) {
     isSelectorMap,
   } = props;
 
-  const tooltipStore = useRef<UseStore<TooltipState>>(
-    create<TooltipState>((set) => ({
+  const tooltipStoreRef = useRef<UseStore<TooltipState>>(
+    create<TooltipState>((set, get) => ({
+      isEnabled: false,
+      enable: () => set({ isEnabled: true }),
+      disable: () => set({ isEnabled: true }),
+
       tooltip: null,
-      updateTooltip: (tooltip: TooltipSettings) => {
-        set({
-          tooltip,
-        });
-      },
-      showTooltip: (settings: TooltipSettings) => {
-        return set({
-          tooltip: {
-            left: settings.left,
-            top: settings.top,
-            data: settings.data,
-          },
-        });
-      },
-      hideTooltip: () => set({ tooltip: null }),
+      update: debounce((tooltip: TooltipSettings) => {
+        if (get().isEnabled) {
+          set({
+            tooltip,
+          });
+        }
+      }, 120),
     }))
   );
 
   const clipPathId = useRef(`_${Math.random().toString(36).substring(2, 15)}`);
-  const timeout = useRef<any>(-1);
   const isLargeScreen = useMediaQuery('(min-width: 1000px)');
 
   const {
@@ -143,10 +141,7 @@ export function Choropleth<T>(props: TProps<T>) {
     boundingBox,
   ];
 
-  const [showTooltip, hideTooltip] = tooltipStore.current((state) => [
-    state.showTooltip,
-    state.hideTooltip,
-  ]);
+  const tooltipStore = tooltipStoreRef.current();
 
   return (
     <>
@@ -156,9 +151,14 @@ export function Choropleth<T>(props: TProps<T>) {
         className={`${styles.svgMap} ${
           isSelectorMap ? styles.selectorMap : ''
         }`}
-        onMouseOver={createSvgMouseOverHandler(timeout, showTooltip)}
-        onMouseOut={createSvgMouseOutHandler(timeout, hideTooltip)}
-        onClick={createSvgClickHandler(onPathClick, showTooltip, isLargeScreen)}
+        onMouseEnter={tooltipStore.enable}
+        onMouseLeave={tooltipStore.disable}
+        onMouseOver={createSvgMouseOverHandler(tooltipStore.update)}
+        onClick={createSvgClickHandler(
+          onPathClick,
+          tooltipStore.update,
+          isLargeScreen
+        )}
       >
         <clipPath id={clipPathId.current}>
           <rect
@@ -190,10 +190,13 @@ export function Choropleth<T>(props: TProps<T>) {
           )}
         </g>
       </svg>
-      <Tooltip
-        tooltipStore={tooltipStore.current}
-        getTooltipContent={getTooltipContent}
-      />
+      {tooltipStore.isEnabled && (
+        <Tooltip
+          tooltipStore={tooltipStoreRef.current}
+          getTooltipContent={getTooltipContent}
+          disablePointerEvents={isLargeScreen}
+        />
+      )}
     </>
   );
 }
@@ -251,33 +254,14 @@ const positionTooltip = (
 };
 
 const createSvgMouseOverHandler = (
-  timeout: MutableRefObject<any>,
-  showTooltip: any
+  showTooltip: (settings: TooltipSettings) => void
 ) => {
   return (event: any) => {
     const elm = event.target;
 
     if (elm.attributes['data-id']) {
-      if (timeout.current > -1) {
-        clearTimeout(timeout.current);
-        timeout.current = -1;
-      }
-
       const id = elm.attributes['data-id'].value;
       positionTooltip(event, elm, showTooltip, id);
-    }
-  };
-};
-
-const createSvgMouseOutHandler = (
-  timeout: MutableRefObject<any>,
-  hideTooltip: any
-) => {
-  return () => {
-    if (timeout.current < 0) {
-      timeout.current = setTimeout(() => {
-        hideTooltip();
-      }, 500);
     }
   };
 };

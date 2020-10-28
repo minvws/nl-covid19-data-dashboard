@@ -1,19 +1,21 @@
 import { ReactNode, useEffect, useRef } from 'react';
 import { UseStore } from 'zustand';
+import classNames from 'classnames';
 import { TooltipState } from '../Choropleth';
 import styles from './tooltip.module.scss';
 
 export type TTooltipProps = {
+  disablePointerEvents?: boolean;
   tooltipStore: UseStore<TooltipState>;
   getTooltipContent: (id: string) => ReactNode;
 };
 
 export function Tooltip(props: TTooltipProps) {
-  const { tooltipStore, getTooltipContent } = props;
-  const ref = useRef<HTMLDivElement | undefined>();
+  const { tooltipStore, getTooltipContent, disablePointerEvents } = props;
+  const ref = useRef<HTMLDivElement>(null);
   const [tooltip, updateTooltip] = tooltipStore((state: TooltipState) => [
     state.tooltip,
-    state.updateTooltip,
+    state.update,
   ]);
 
   useEffect(() => {
@@ -43,12 +45,20 @@ export function Tooltip(props: TTooltipProps) {
 
   return tooltip ? (
     <div
-      ref={ref as any}
-      className={styles.tooltipContainer}
+      ref={ref}
+      className={classNames(
+        styles.tooltipContainer,
+        disablePointerEvents && styles.tooltipNonInteractive
+      )}
       style={{
         left: tooltip.left,
         top: tooltip.top,
       }}
+      /**
+       * Prevent recycle of existing tooltip dom elements in order to trigger
+       * css mount animations.
+       */
+      key={tooltip.data}
     >
       {getTooltipContent(tooltip.data)}
     </div>
