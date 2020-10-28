@@ -47,12 +47,7 @@ function validatePlaceHolders(text: string) {
       const prefix = matched.substr(0, 2);
       const suffix = matched.substr(-2);
       const middle = matched.substr(2, matched.length - 4);
-      if (
-        prefix !== '{{' ||
-        suffix !== '}}' ||
-        middle.indexOf('{') > -1 ||
-        middle.indexOf('}') > -1
-      ) {
+      if (prefix !== '{{' || suffix !== '}}' || middle.indexOf('{') > -1) {
         return matched;
       }
       return undefined;
