@@ -39,14 +39,11 @@ export const validPlaceholders = (
 };
 
 function validatePlaceHolders(text: string) {
-  const matches = [...(text.matchAll(/([{]+)([^}]+)([}]+)/g) as any)];
+  const matches = [...(text.matchAll(/[{]+[^}]+[}]+/g) as any)];
 
   return matches
     .map((matchInfo: string[]) => {
-      const prefix = matchInfo[1];
-      const middle = matchInfo[2];
-      const suffix = matchInfo[3];
-      if (prefix !== '{{' || suffix !== '}}' || middle.indexOf('{') > -1) {
+      if (!matchInfo[0].match(/[{]{2}[^{}]+[}]{2}/)) {
         return matchInfo[0];
       }
       return undefined;
