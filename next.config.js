@@ -20,6 +20,7 @@ const nextConfig = {
   env: {
     COMMIT_ID: commitHash,
   },
+  poweredByHeader: false,
   reactStrictMode: true, // Enables react strict mode https://nextjs.org/docs/api-reference/next.config.js/react-strict-mode
   webpack(config) {
     config.module.rules.push({
