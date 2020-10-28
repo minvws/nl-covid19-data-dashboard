@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "region_restrictions",
+  "additionalProperties": false,
+  "required": ["last_generated", "proto_name", "name", "code", "values"],
+  "properties": {
+    "last_generated": {
+      "type": "string"
+    },
+    "proto_name": {
+      "type": "string",
+      "pattern": "^VR[0-9]+$"
+    },
+    "name": {
+      "type": "string",
+      "const": { "$data": "1/proto_name" }
+    },
+    "code": {
+      "type": "string",
+      "const": { "$data": "1/proto_name" }
+    },
+    "values": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    }
+  }
+}

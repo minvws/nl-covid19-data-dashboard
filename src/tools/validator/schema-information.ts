@@ -10,6 +10,7 @@ export type SchemaInfo = {
   files: string[];
   basePath: string;
   customValidations?: CustomValidationFunction[];
+  optional?: boolean;
 };
 
 const localeJsons = fs.readdirSync(localeBasePath);
@@ -33,6 +34,16 @@ export const schemaInformation: Record<string, SchemaInfo> = {
     files: filterFilenames(localeJsons, /[^.]+.json$/),
     basePath: localeBasePath,
     customValidations: [validPlaceholders],
+  },
+  restrictions: {
+    files: ['RESTRICTIONS.json'],
+    basePath: jsonBasePath,
+    optional: true,
+  },
+  regionrestrictions: {
+    files: ['REGIONRESTRICTIONS.json'],
+    basePath: jsonBasePath,
+    optional: true,
   },
 };
 

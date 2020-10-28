@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "restrictions",
+  "additionalProperties": false,
+  "required": ["last_generated", "proto_name", "name", "code", "values"],
+  "properties": {
+    "last_generated": {
+      "type": "string"
+    },
+    "proto_name": {
+      "type": "string",
+      "const": "RESTRICTIONS"
+    },
+    "name": {
+      "type": "string",
+      "const": { "$data": "1/proto_name" }
+    },
+    "code": {
+      "type": "string",
+      "const": { "$data": "1/proto_name" }
+    },
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/restrictionDef"
+      }
+    }
+  },
+  "definitions": {
+    "restrictionDef": {
+      "additionalProperties": false,
+      "required": [
+        "identifier",
+        "target_region",
+        "escalation_level",
+        "category_id",
+        "restriction_order"
+      ],
+      "properties": {
+        "identifier": {
+          "type": "number"
+        },
+        "target_region": {
+          "type": "string",
+          "enum": ["nl", "vr"]
+        },
+        "escalation_level": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "category_id": {
+          "type": "string"
+        },
+        "restriction_order": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}
