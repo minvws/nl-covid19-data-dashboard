@@ -20,20 +20,6 @@ const nextConfig = {
   env: {
     COMMIT_ID: commitHash,
   },
-  i18n: {
-    locales: ['nl', 'en'],
-    defaultLocale: 'nl',
-    domains: [
-      {
-        domain: 'coronadashboard.rijksoverheid.nl',
-        defaultLocale: 'nl',
-      },
-      {
-        domain: 'coronadashboard.government.nl',
-        defaultLocale: 'en',
-      },
-    ],
-  },
   reactStrictMode: true, // Enables react strict mode https://nextjs.org/docs/api-reference/next.config.js/react-strict-mode
   webpack(config) {
     config.module.rules.push({
