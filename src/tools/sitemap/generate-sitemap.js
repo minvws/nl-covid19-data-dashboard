@@ -29,7 +29,7 @@ const generateSitemap = async function (locale) {
     '!./src/pages/api',
   ]);
 
-  const paths = pages.map((page) =>
+  const pathsFromPages = pages.map((page) =>
     page
       .replace('./src/pages', '')
       .replace('.tsx', '')
@@ -45,14 +45,14 @@ const generateSitemap = async function (locale) {
     { path: 'regio', value: 0.8 },
   ];
 
-  const pathsWithPriorities = paths.map((path) => {
+  const pathsWithPriorities = pathsFromPages.map((path) => {
     const priority = priorities.find((priority) =>
       path.includes(priority.path)
     );
 
     return {
       path: path,
-      priority: priority != undefined ? priority.value : 0.6,
+      priority: priority !== undefined ? priority.value : 0.6,
     };
   });
 
