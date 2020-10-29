@@ -2,8 +2,10 @@ import fs from 'fs';
 import Head from 'next/head';
 import path from 'path';
 
+import { groq } from 'next-sanity';
+
 import BlockContent from '@sanity/block-content-to-react';
-import client, { localize } from '~/lib/sanity';
+import { getClient, usePreviewSubscription, localize } from '~/lib/sanity';
 
 import { targetLanguage } from '../locale/index';
 
@@ -25,30 +27,35 @@ interface StaticProps {
 
 interface VeelgesteldeVragenProps {
   lastGenerated: string;
-  veelgesteldeVragen: any;
+  data: any;
 }
+
+const query = groq`
+  *[_id == 'veelgesteldeVragen']
+  {
+   ...
+  }[0]
+`;
 
 export async function getStaticProps(): Promise<StaticProps> {
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const lastGenerated = JSON.parse(fileContents).last_generated;
 
-  const sanityData = await client.fetch(
-    `
-    *[_id == 'veelgesteldeVragen']
-    {
-      ...
-    }[0]
-  `
-  );
+  const data = await getClient(true).fetch(query);
 
-  const veelgesteldeVragen = localize(sanityData, [targetLanguage, 'nl']);
-
-  return { props: { lastGenerated, veelgesteldeVragen } };
+  return { props: { lastGenerated, data } };
 }
 
 const Verantwoording: FCWithLayout<VeelgesteldeVragenProps> = (props) => {
-  const { veelgesteldeVragen } = props;
+  const { data } = props;
+
+  const { data: previewData } = usePreviewSubscription(query, {
+    initialData: data,
+    enabled: true,
+  });
+
+  const veelgesteldeVragen = localize(previewData, [targetLanguage, 'nl']);
 
   return (
     <>
