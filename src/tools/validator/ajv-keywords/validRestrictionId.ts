@@ -16,19 +16,14 @@ export const validRestrictionId = {
   ): boolean {
     if (rootData) {
       const restriction = _parentData as RestrictionsValue;
-      const identifierParts = data.split('_');
+      const prefix = data.substr(0, data.lastIndexOf('_'));
+      const suffix = data.substr(data.lastIndexOf('_') + 1);
 
-      let validated = identifierParts.length === 3;
-      if (validated) {
-        const suffix = identifierParts.pop() as string;
+      const isPrefixValid =
+        prefix === `${restriction.escalation_level}_${restriction.category_id}`;
+      const isSuffixValid = !isNaN(+suffix);
 
-        const isPrefixValid =
-          identifierParts.join('_') ===
-          `${restriction.escalation_level}_${restriction.category_id}`;
-        const isSuffixValid = !isNaN(+suffix);
-
-        validated = isPrefixValid && isSuffixValid;
-      }
+      const validated = isPrefixValid && isSuffixValid;
 
       if (!validated) {
         (validateRestrictionId as any).errors = [
