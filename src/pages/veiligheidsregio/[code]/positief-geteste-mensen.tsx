@@ -15,11 +15,11 @@ import { KpiValue } from '~/components-styled/kpi-value';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
 import { LineChart } from '~/components/charts/index';
-import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
-import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
-import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
-import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
-import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/createPositiveTestedPeopleMunicipalTooltip';
+import { ChoroplethLegenda } from '~/components/choropleth/legenda/ChoroplethLegenda';
+import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/useSafetyRegionLegendaData';
+import { MunicipalityChoropleth } from '~/components/choropleth/MunicipalityChoropleth';
+import { createSelectMunicipalHandler } from '~/components/choropleth/selectHandlers/createSelectMunicipalHandler';
+import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/createPositiveTestedPeopleMunicipalTooltip';
 import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/contentHeader';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
@@ -140,7 +140,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           <Text>{text.map_toelichting}</Text>
         </ChoroplethHeader>
         <ChoroplethChart>
-          <MunicipalityChloropleth
+          <MunicipalityChoropleth
             selected={selectedMunicipalCode}
             highlightSelection={false}
             metricName="positive_tested_people"
@@ -150,7 +150,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
         </ChoroplethChart>
         <ChoroplethLegend>
           {legendItems && (
-            <ChloroplethLegenda
+            <ChoroplethLegenda
               items={legendItems}
               title={
                 siteText.positief_geteste_personen.chloropleth_legenda.titel

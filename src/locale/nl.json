@@ -9,8 +9,8 @@
     "title": "Laatst bijgewerkt"
   },
   "notificatie": {
-    "titel": "Minder sterkte stijging aantal meldingen COVID-19",
-    "bericht": "Afgelopen week (14 t/m 20 oktober) steeg het aantal meldingen van mensen die positief testen op COVID-19, het aantal patiënten in de ziekenhuizen en het aantal intensive care-opnames verder. De snelheid waarmee het aantal nieuwe meldingen van mensen die positief testen stijgt, lijkt echter iets af te nemen. Dit zou een gevolg kunnen zijn van de maatregelen die eind september van kracht werden. Echter het aantal ziekenhuisopnames stijgt onveranderd door. \n\nHet risiconiveau per regio kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2), ‘ernstig’ (niveau 3), ‘zeer ernstig’ (niveau 4) zijn. Op dit moment zijn {{escalationLevel4}} regio’s ingeschaald op ‘zeer ernstig’, {{escalationLevel3}} op ‘ernstig’, {{escalationLevel2}} op ‘zorgelijk’ en {{escalationLevel1}} op ‘waakzaam.‘",
+    "titel": "Aantal meldingen COVID-19 stijgt nog steeds, maar minder hard",
+    "bericht": "Afgelopen week (21-27 oktober) is het aantal meldingen van COVID-19 verder gestegen. Wel nam het aantal nieuwe meldingen opnieuw minder snel toe dan de week hiervoor. Dat is waarschijnlijk het effect van de maatregelen die eind september en medio oktober van kracht werden. Het aantal patiënten in de ziekenhuizen en het aantal intensive care -opnames nam nog verder toe.\n\nHet risiconiveau per regio kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2), ‘ernstig’ (niveau 3), ‘zeer ernstig’ (niveau 4) zijn. Op dit moment zijn {{escalationLevel4}} regio’s ingeschaald op ‘zeer ernstig’, {{escalationLevel3}} op ‘ernstig’, {{escalationLevel2}} op ‘zorgelijk’ en {{escalationLevel1}} op ‘waakzaam.‘",
     "link": {
       "text": "Bekijk de toelichting van het RIVM",
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel"
@@ -172,7 +172,7 @@
     "barscale_toelichting": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
     "barscale_screenreader_text": "{{value}} positief geteste mensen per dag.",
     "kpi_titel": "Aantal positief geteste mensen:",
-    "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn en COVID-19 hebben.",
+    "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn en COVID-19 hebben. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.",
     "map_titel": "Verdeling positief geteste mensen in Nederland",
     "map_toelichting": "Deze kaarten laten zien van hoeveel mensen gisteren is gemeld dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "linechart_titel": "Verloop over tijd",
@@ -412,8 +412,8 @@
     },
     "titel_sidebar": "Rioolwatermeting",
     "titel_kpi": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater",
-    "total_installation_count_titel": "Aantal RWZI-locaties",
-    "total_installation_count_description": "Aantal locaties dat wordt meegenomen in het berekenen van het gemiddelde.",
+    "total_installation_count_titel": "Aantal meetlocaties",
+    "total_installation_count_description": "Wekelijks aantal rioolwaterzuiveringsinstallaties die minimaal één keer een meting hebben gerapporteerd. Het weekgemiddelde wordt berekend door het gemiddelde te nemen van alle metingen op deze locaties. Per week kan dit aantal variëren omdat niet alle metingen altijd lukken.",
     "rwzi_abbrev": "RWZI = Rioolwaterzuiveringsinstallatie."
   },
   "notfound_titel": {
@@ -528,7 +528,7 @@
       },
       {
         "cijfer": "Aantal besmettelijke mensen",
-        "verantwoording": "Deze gegevens worden wekelijks (op dinsdag) aangeleverd als open data door het [RIVM](https://data.rivm.nl/covid-19/COVID-19_prevalentie.json). De waarden zoals weergeven in het bestand worden direct overgenomen op het dashboard. Daarnaast berekenen we op basis van de absolute aantallen het genormaliseerde aantal besmettelijke mensen. Dit doen we door het aantal inwoners van Nederland te delen door 100.000. Vervolgens gebruiken we het getal dat daaruit komt en delen we het absolute aantal zoals aangeven in het bronbestand. De uitkomst hiervan vormt het getal per 100.000.\n\nHet RIVM baseert de berekening achter het aantal besmettelijke mensen op het aantal meldingen van COVID-19 per dag. Tot 30 juni was deze gebaseerd op het aantal mensen met COVID-19 dat per dag werd opgenomen op de intensive care. Omdat het aantal intensive care opnamen laag is, is het aantal COVID-19 meldingen een meer geschikte indicator om het tijdsverloop in aantal besmettelijke mensen te volgen. Het geschat aantal besmettelijke mensen wordt door het RIVM berekend op basis van het aantal besmettingen en de duur van de besmettelijke periode. De duur van de besmettelijke periode is per persoon verschillend. Deze kan variëren tussen 6 en 10 dagen. Het aantal besmettingen baseert het RIVM op het aantal COVID-19 meldingen. Ook gebruikt het RIVM een omrekenfactor om rekening te houden met het aantal besmettingen dat niet gemeld wordt. De omrekenfactor leidt het RIVM af uit de waargenomen ziekenhuisopnames met COVID 19 en uit het percentage van de mensen met antistoffen in het bloed tegen het virus dat COVID19 veroorzaakt. Het RIVM houdt er rekening mee dat een heel klein percentage van de testen een onterechte positieve uitslag kan geven.\n\nVoor het aantal besmettelijke mensen is geen signaalwaarde beschikbaar omdat dit aantal een inschatting is gebaseerd op een berekening.\n\nDe rekenmethode van het aantal besmettelijke personen is op 13 oktober verder verbeterd. Tussen 1 juni tot 13 oktober werd dit cijfer berekend op basis van de data uit de eerste ronde van het [Pienter Corona onderzoek] (https://www.rivm.nl/pienter-corona-studie), het aantal ziekenhuisopnames en het aantal positieve testen. Vanaf 13 oktober wordt dit cijfer berekend op basis van de data uit de tweede ronde van het Pienter Corona onderzoek en het aantal ziekenhuisopnames. In de tweede ronde van het Pienter Corona onderzoek is een grotere groep mensen op een besmetting met het virus onderzocht. Ook is er meer inzicht gekregen of en hoe besmettelijk COVID-19-patienten zijn."
+        "verantwoording": "Als iemand het nieuwe coronavirus oploopt,  is deze persoon een tijd lang besmettelijk voor anderen. Hoe lang dit duurt, verschilt van persoon tot persoon. De schatting van het totale aantal besmettelijke personen gaat gepaard met onzekerheid. Het exacte aantal besmettingen is onbekend, maar we kunnen wel berekenen tussen welke waarden het zich waarschijnlijk bevindt.  Zie ook de toelichting van het [RIVM](https://www.rivm.nl/coronavirus-covid-19/hoe-berekeningen-bijdragen-aan-bestrijding-van-virus).\n\nTussen 1 juni en 13 oktober werd dit cijfer berekend op basis van de data uit de eerste ronde van het [Pienter Corona onderzoek](https://www.rivm.nl/pienter-corona-studie), het aantal ziekenhuisopnames en het aantal positieve testen. Vanaf 13 oktober wordt dit cijfer berekend op basis van de data uit de tweede ronde van het Pienter Corona onderzoek en het aantal ziekenhuisopnames. In de tweede ronde van het Pienter Corona onderzoek is een grotere groep mensen op een besmetting met het virus onderzocht. Ook is er meer inzicht gekregen of en hoe besmettelijk COVID-19-patienten zijn. \n\nDeze gegevens worden wekelijks (op dinsdag) door het RIVM aangeleverd als open data bestand. Deze gegevens worden direct overgenomen op het dashboard. Voor het aantal besmettelijke mensen is geen signaalwaarde beschikbaar omdat dit aantal een inschatting is gebaseerd op een berekening."
       },
       {
         "cijfer": "Aantal patiënten met eerste melding van COVID-19 klachten bij de huisarts",
@@ -703,7 +703,7 @@
     "barscale_toelichting": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
     "barscale_screenreader_text": "{{value}} positief geteste mensen per dag.",
     "kpi_titel": "Aantal positief geteste mensen:",
-    "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn en COVID-19 hebben.",
+    "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn en COVID-19 hebben. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.",
     "map_titel": "Verdeling positief geteste mensen in {{safetyRegion}}",
     "map_toelichting": "Deze kaart laat zien van hoeveel mensen in de gemeenten van deze veiligheidsregio's gisteren gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "linechart_titel": "Verloop over tijd",
@@ -770,7 +770,7 @@
     "graph_range_description": "Verloop over tijd",
     "titel_kpi": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater",
     "total_installation_count_titel": "Aantal RWZI-locaties",
-    "total_installation_count_description": "Aantal locaties dat wordt meegenomen in het berekenen van het gemiddelde.",
+    "total_installation_count_description": "Wekelijks aantal rioolwaterzuiveringsinstallaties die minimaal één keer een meting hebben gerapporteerd. Het weekgemiddelde wordt berekend door het gemiddelde te nemen van alle metingen op deze locaties. Per week kan dit aantal variëren omdat niet alle metingen altijd lukken.",
     "rwzi_abbrev": "RWZI = Rioolwaterzuiveringsinstallatie."
   },
   "gemeente_ziekenhuisopnames_per_dag": {
@@ -805,7 +805,7 @@
     "barscale_toelichting": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
     "barscale_screenreader_text": "{{value}} positief geteste mensen per dag.",
     "kpi_titel": "Aantal positief geteste mensen:",
-    "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn en COVID-19 hebben.",
+    "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn en COVID-19 hebben. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.",
     "map_titel": "Verdeling positief geteste mensen in {{municipality}}",
     "map_toelichting": "Deze kaart laat zien van hoeveel mensen in deze gemeenten gisteren gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "linechart_titel": "Verloop over tijd",
@@ -854,7 +854,10 @@
       "title": "Rioolwatermeting in {{municipalityName}} | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van rioolwatermetingen en de hoeveelheid aangetroffen COVID-19 virusdeeltjes in de gemeente {{municipalityName}}."
     },
-    "nodata_sidebar": "Deze informatie is niet beschikbaar voor deze gemeente."
+    "nodata_sidebar": "Deze informatie is niet beschikbaar voor deze gemeente.",
+    "total_installation_count_titel": "Aantal RWZI-locaties",
+    "total_installation_count_description": "Aantal locaties dat wordt meegenomen in het berekenen van het gemiddelde.",
+    "rwzi_abbrev": "RWZI = Rioolwaterzuiveringsinstallatie."
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Risiconiveaus",

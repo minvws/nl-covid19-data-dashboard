@@ -11,3 +11,12 @@ export const jsonBasePath = path.join(
   'public',
   'json'
 );
+
+export const localeBasePath = path.join(
+  __dirname,
+  '..',
+  '..',
+  '..',
+  'src',
+  'locale'
+);

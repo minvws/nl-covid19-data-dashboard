@@ -5,12 +5,12 @@ import EscalationLevel1 from '~/assets/niveau-1.svg';
 import EscalationLevel2 from '~/assets/niveau-2.svg';
 import EscalationLevel3 from '~/assets/niveau-3.svg';
 import EscalationLevel4 from '~/assets/niveau-4.svg';
-import { regionThresholds } from '~/components/chloropleth/regionThresholds';
-import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
-import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
-import { ChoroplethThresholds } from '~/components/chloropleth/shared';
-import { escalationTooltip } from '~/components/chloropleth/tooltips/region/escalationTooltip';
-import styles from '~/components/chloropleth/tooltips/tooltip.module.scss';
+import { regionThresholds } from '~/components/choropleth/regionThresholds';
+import { SafetyRegionChoropleth } from '~/components/choropleth/SafetyRegionChoropleth';
+import { createSelectRegionHandler } from '~/components/choropleth/selectHandlers/createSelectRegionHandler';
+import { ChoroplethThresholds } from '~/components/choropleth/shared';
+import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalationTooltip';
+import styles from '~/components/choropleth/tooltips/tooltip.module.scss';
 import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { SEOHead } from '~/components/seoHead';
@@ -68,8 +68,8 @@ const SafetyRegion: FCWithLayout<any> = (props) => {
         title={text.veiligheidsregio_index.metadata.title}
         description={text.veiligheidsregio_index.metadata.description}
       />
-      <article className="index-article layout-chloropleth">
-        <div className="chloropleth-header">
+      <article className="index-article layout-choropleth">
+        <div className="choropleth-header">
           <h2>{text.veiligheidsregio_index.selecteer_titel}</h2>
           {/**
            * This is rendering html content which has been generated from
@@ -82,8 +82,8 @@ const SafetyRegion: FCWithLayout<any> = (props) => {
           />
         </div>
 
-        <div className="chloropleth-chart">
-          <SafetyRegionChloropleth
+        <div className="choropleth-chart">
+          <SafetyRegionChoropleth
             metricName="escalation_levels"
             metricValueName="escalation_level"
             onSelect={createSelectRegionHandler(router)}
@@ -91,7 +91,7 @@ const SafetyRegion: FCWithLayout<any> = (props) => {
           />
         </div>
 
-        <div className="chloropleth-legend">
+        <div className="choropleth-legend">
           <EscalationMapLegenda text={text} />
         </div>
       </article>

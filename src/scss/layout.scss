@@ -506,13 +506,13 @@ a.metric-link {
 }
 
 /**
-  This layout should be integrated with the chloropleth component once we have
+  This layout should be integrated with the choropleth component once we have
   one based on styled-components
   */
-.layout-chloropleth {
-  $chloropleth-breakpoint: 1200px;
+.layout-choropleth {
+  $choropleth-breakpoint: 1200px;
 
-  @media (min-width: $chloropleth-breakpoint) {
+  @media (min-width: $choropleth-breakpoint) {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto 1fr auto;
@@ -527,38 +527,38 @@ a.metric-link {
     grid-area: w;
   }
 
-  .chloropleth-header {
+  .choropleth-header {
     grid-area: a;
     margin-bottom: 2em;
-    @media (min-width: $chloropleth-breakpoint) {
+    @media (min-width: $choropleth-breakpoint) {
       margin-bottom: 0;
     }
   }
 
-  .chloropleth-legend {
+  .choropleth-legend {
     grid-area: b;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .chloropleth-chart {
+  .choropleth-chart {
     grid-area: c;
   }
 
-  .chloropleth-controls {
+  .choropleth-controls {
     display: flex;
     justify-content: center;
 
     margin: 0 0 1rem;
     max-width: 100%;
 
-    @media (min-width: $chloropleth-breakpoint) {
+    @media (min-width: $choropleth-breakpoint) {
       justify-content: flex-start;
     }
   }
 
-  .chloropleth-footer {
+  .choropleth-footer {
     grid-area: d;
   }
 }

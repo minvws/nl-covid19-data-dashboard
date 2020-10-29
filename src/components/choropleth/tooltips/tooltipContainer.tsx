@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useRef } from 'react';
 import { UseStore } from 'zustand';
-import { TooltipState } from '../Chloropleth';
+import { TooltipState } from '../Choropleth';
 import styles from './tooltip.module.scss';
 
 export type TTooltipProps = {

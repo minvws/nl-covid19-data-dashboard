@@ -1,8 +1,8 @@
 import { NextRouter } from 'next/router';
 import { ReactNode } from 'react';
-import { MunicipalityProperties } from '~/components/chloropleth/shared';
-import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
-import { TooltipContent } from '~/components/chloropleth/tooltips/tooltipContent';
+import { MunicipalityProperties } from '~/components/choropleth/shared';
+import { createSelectMunicipalHandler } from '~/components/choropleth/selectHandlers/createSelectMunicipalHandler';
+import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
 
 export const createMunicipalHospitalAdmissionsTooltip = (
   router: NextRouter

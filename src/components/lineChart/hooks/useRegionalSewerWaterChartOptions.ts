@@ -73,12 +73,12 @@ export function useRegionalSewerWaterChartOptions(
       end: value.week_end_unix,
     }));
 
-    let maxDate = filteredAverageValues.reduce((max, value) => {
-      return Math.max(max, value.week_end_unix);
+    const averagesMaxDate = filteredAverageValues.reduce((max, value) => {
+      return Math.max(max, value.week_start_unix);
     }, 0);
-    maxDate = filteredScatterPlotValues.reduce((max, value) => {
+    const scatterMaxDate = filteredScatterPlotValues.reduce((max, value) => {
       return Math.max(max, value.date_measurement_unix);
-    }, maxDate);
+    }, 0);
 
     const tooltipTypes: Record<string, Week[] | 'rwzi' | 'scatter'> = {
       [text.average_label_text]: weekSet,
@@ -124,15 +124,17 @@ export function useRegionalSewerWaterChartOptions(
       },
     });
 
-    if (
-      maxDate >
-      filteredAverageValues[filteredAverageValues.length - 1].week_end_unix
-    ) {
+    // If the max scatter plot date is higher than the averages, we want to draw
+    // a dotted line for the missing days between the max scatter date
+    // and the max averages date:
+    if (scatterMaxDate > averagesMaxDate) {
       series.push({
         type: 'line',
         data: createRemainingDaysData(
-          filteredAverageValues[filteredAverageValues.length - 1],
-          maxDate
+          filteredAverageValues.find(
+            (value) => value.date === averagesMaxDate
+          ) as Value,
+          scatterMaxDate
         ),
         name: '',
         description: '',
@@ -140,7 +142,7 @@ export function useRegionalSewerWaterChartOptions(
         color: selectedRWZI ? '#A9A9A9' : '#3391CC',
         enableMouseTracking: false,
         allowPointSelect: false,
-        dashStyle: 'ShortDash',
+        dashStyle: 'ShortDot',
         marker: {
           symbol: 'circle',
           enabled: !hasMultipleValues,
