@@ -1,5 +1,6 @@
 import '@reach/combobox/styles.css';
 import Router from 'next/router';
+import { AppProps } from 'next/app';
 import { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import '~/components/comboBox/comboBox.scss';
@@ -9,19 +10,16 @@ import '~/scss/style.scss';
 import { GlobalStyle } from '~/style/global-style';
 import theme from '~/style/theme';
 
-// Import Preact DevTools in development
-// if (process.env.NODE_ENV === 'development') {
-//   // Must use require here as import statements are only allowed
-//   // to exist at the top of a file.
-//   require('preact/debug');
-// }
+type AppPropsWithLayout = AppProps & {
+  Component: AppProps['Component'] & {
+    getLayout: (
+      page: React.ReactNode,
+      props: AppProps['pageProps']
+    ) => JSX.Element;
+  };
+};
 
-interface AppProps {
-  Component: any;
-  pageProps: any;
-}
-
-export default function App(props: AppProps) {
+export default function App(props: AppPropsWithLayout) {
   const { Component, pageProps } = props;
   const page = (page: React.ReactNode) => page;
   const getLayout = Component.getLayout || page;
@@ -30,7 +28,7 @@ export default function App(props: AppProps) {
     window.document.documentElement.className += ' js';
     const handleRouteChange = (url: string) => {
       if (url.indexOf('?menu') !== -1) {
-        /* Ope ing a menu on mobile scrolls to the top of the menus */
+        /* Opening a menu on mobile scrolls to the top of the menus */
         window.document
           .querySelector('#main-navigation,aside')
           ?.scrollIntoView(true);
