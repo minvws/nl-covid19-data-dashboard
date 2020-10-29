@@ -28,7 +28,7 @@
     }
   },
   "definitions": {
-    "restrictionDef": {
+    "value": {
       "title": "restriction_info",
       "additionalProperties": false,
       "required": [
