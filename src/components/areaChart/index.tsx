@@ -147,7 +147,7 @@ function getChartOptions(props: IGetOptions): Highcharts.Options {
       displayErrors: true,
       height: 175,
     },
-    legend: false as any,
+    legend: { enabled: false },
     credits: {
       enabled: false,
     },
