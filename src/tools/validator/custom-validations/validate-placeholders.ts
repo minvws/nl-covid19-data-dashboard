@@ -10,7 +10,7 @@ import { isDefined } from 'ts-is-present';
  * the error occurred along with the offending placeholder.
  *
  */
-export const validPlaceholders = (
+export const validatePlaceholders = (
   input: Record<string, unknown>,
   parentName?: string
 ): string[] | undefined => {
@@ -19,7 +19,7 @@ export const validPlaceholders = (
   const result = Object.entries(input)
     .flatMap(([propertyName, value]: [string, any]) => {
       if (typeof value === 'string') {
-        const result = validatePlaceHolders(value);
+        const result = validate(value);
         if (result.length) {
           return result.map(
             (placeholder) =>
@@ -30,7 +30,7 @@ export const validPlaceholders = (
       }
 
       if (typeof value === 'object') {
-        return validPlaceholders(value, `${parentSuffix}${propertyName}`);
+        return validatePlaceholders(value, `${parentSuffix}${propertyName}`);
       }
     })
     .filter(isDefined);
@@ -38,7 +38,7 @@ export const validPlaceholders = (
   return result.length ? result : undefined;
 };
 
-function validatePlaceHolders(text: string) {
+function validate(text: string) {
   const matches = [...(text.matchAll(/{+[^}]+}+/g) as any)];
 
   return matches
