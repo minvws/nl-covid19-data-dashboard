@@ -17,7 +17,8 @@ interface OverRisiconiveausProps {
 }
 
 export async function getStaticProps(): Promise<StaticProps> {
-  const text = require('../locale/index').default;
+  const text = (await import('../locale/index')).default;
+
   text.over_risiconiveaus.toelichting = MDToHTMLString(
     text.over_risiconiveaus.toelichting
   );

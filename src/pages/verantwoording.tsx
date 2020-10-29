@@ -25,7 +25,7 @@ interface VerantwoordingProps {
 }
 
 export async function getStaticProps(): Promise<StaticProps> {
-  const text = require('../locale/index').default;
+  const text = (await import('../locale/index')).default;
   const serializedContent = text.verantwoording.cijfers.map(
     (item: ICijfer) => ({
       ...item,
