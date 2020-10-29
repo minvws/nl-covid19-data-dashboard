@@ -1,6 +1,6 @@
 import { Mercator } from '@vx/geo';
 import { Feature, FeatureCollection, MultiPolygon } from 'geojson';
-import { ReactNode, useRef } from 'react';
+import { ReactNode, useRef, useState } from 'react';
 import { debounce } from 'lodash';
 
 import create, { UseStore } from 'zustand';
@@ -11,15 +11,11 @@ import styles from './choropleth.module.scss';
 import { localPoint } from '@vx/event';
 
 import { Tooltip } from './tooltips/tooltipContainer';
-import { useMediaQuery } from '~/utils/useMediaQuery';
 
 export type TooltipState = {
   tooltip: TooltipSettings | null;
-  update: (tooltip: TooltipSettings) => void;
-
-  isEnabled: boolean;
-  enable: () => void;
-  disable: () => void;
+  update: (tooltip: TooltipSettings | null) => void;
+  clear: () => void;
 };
 
 export type TooltipSettings = {
@@ -108,24 +104,18 @@ export function Choropleth<T>(props: TProps<T>) {
   } = props;
 
   const tooltipStoreRef = useRef<UseStore<TooltipState>>(
-    create<TooltipState>((set, get) => ({
-      isEnabled: false,
-      enable: () => set({ isEnabled: true }),
-      disable: () => set({ isEnabled: true }),
-
+    create<TooltipState>((set) => ({
       tooltip: null,
-      update: debounce((tooltip: TooltipSettings) => {
-        if (get().isEnabled) {
-          set({
-            tooltip,
-          });
-        }
-      }, 120),
+      clear: () => set({ tooltip: null }),
+      update: debounce(
+        (tooltip: TooltipSettings | null) => set({ tooltip }),
+        120
+      ),
     }))
   );
 
   const clipPathId = useRef(`_${Math.random().toString(36).substring(2, 15)}`);
-  const isLargeScreen = useMediaQuery('(min-width: 1000px)');
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   const {
     width = 0,
@@ -151,13 +141,18 @@ export function Choropleth<T>(props: TProps<T>) {
         className={`${styles.svgMap} ${
           isSelectorMap ? styles.selectorMap : ''
         }`}
-        onMouseEnter={tooltipStore.enable}
-        onMouseLeave={tooltipStore.disable}
-        onMouseOver={createSvgMouseOverHandler(tooltipStore.update)}
+        onTouchStart={() => {
+          setIsTouchDevice(true);
+        }}
+        onMouseLeave={() => tooltipStore.update(null)}
+        onMouseOver={createSvgMouseOverHandler(
+          tooltipStore.update,
+          tooltipStore.clear
+        )}
         onClick={createSvgClickHandler(
           onPathClick,
           tooltipStore.update,
-          isLargeScreen
+          isTouchDevice
         )}
       >
         <clipPath id={clipPathId.current}>
@@ -190,11 +185,11 @@ export function Choropleth<T>(props: TProps<T>) {
           )}
         </g>
       </svg>
-      {tooltipStore.isEnabled && (
+      {tooltipStore.tooltip && (
         <Tooltip
           tooltipStore={tooltipStoreRef.current}
           getTooltipContent={getTooltipContent}
-          disablePointerEvents={isLargeScreen}
+          disablePointerEvents={!isTouchDevice}
         />
       )}
     </>
@@ -221,16 +216,16 @@ const renderFeature = (callback: TRenderCallback, dataCy: string) => {
 const createSvgClickHandler = (
   onPathClick: (id: string) => void,
   showTooltip: (settings: TooltipSettings) => void,
-  isLargeScreen: boolean
+  isTouchDevice: boolean
 ) => {
   return (event: any) => {
     const elm = event.target;
     if (elm.attributes['data-id']) {
       const id = elm.attributes['data-id'].value;
-      if (isLargeScreen) {
-        onPathClick(id);
-      } else {
+      if (isTouchDevice) {
         positionTooltip(event, elm, showTooltip, id);
+      } else {
+        onPathClick(id);
       }
     }
   };
@@ -254,14 +249,20 @@ const positionTooltip = (
 };
 
 const createSvgMouseOverHandler = (
-  showTooltip: (settings: TooltipSettings) => void
+  updateTooltip: (settings: TooltipSettings | null) => void,
+  clearTooltip: () => void
 ) => {
-  return (event: any) => {
-    const elm = event.target;
+  return (event: React.MouseEvent) => {
+    const elm = event.target as HTMLElement;
 
-    if (elm.attributes['data-id']) {
-      const id = elm.attributes['data-id'].value;
-      positionTooltip(event, elm, showTooltip, id);
+    if (elm.tagName.toLowerCase() === 'svg') {
+      return clearTooltip();
+    }
+
+    const id = elm.getAttribute('data-id') as string | undefined;
+
+    if (id) {
+      positionTooltip(event, elm, updateTooltip, id);
     }
   };
 };

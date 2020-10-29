@@ -48,17 +48,12 @@ export function Tooltip(props: TTooltipProps) {
       ref={ref}
       className={classNames(
         styles.tooltipContainer,
-        disablePointerEvents && styles.tooltipNonInteractive
+        disablePointerEvents && styles['is-nonInteractive']
       )}
       style={{
         left: tooltip.left,
         top: tooltip.top,
       }}
-      /**
-       * Prevent recycle of existing tooltip dom elements in order to trigger
-       * css mount animations.
-       */
-      key={tooltip.data}
     >
       {getTooltipContent(tooltip.data)}
     </div>
