@@ -415,7 +415,7 @@ export interface Regionaal {
   results_per_region: ResultsPerRegion;
   ggd: RegionalGgd;
   nursing_home: RegionalNursingHome;
-  restrictions?: RegionRestrictions;
+  restrictions?: RegionalRestrictions;
 }
 export interface ResultsPerSewerInstallationPerRegion {
   values: SewerValueElement[];
@@ -494,7 +494,7 @@ export interface RegionalNursingHomeValue {
   date_of_insertion_unix: number;
   vrcode: string;
 }
-export interface RegionRestrictions {
+export interface RegionalRestrictions {
   vrcode: string;
   values: number[];
 }
@@ -552,9 +552,9 @@ export interface Restrictions {
   proto_name: string;
   name: string;
   code: string;
-  values: RestrictionDef[];
+  values: RestrictionsValue[];
 }
-export interface RestrictionDef {
+export interface RestrictionsValue {
   identifier: number;
   target_region: "nl" | "vr";
   escalation_level: number;

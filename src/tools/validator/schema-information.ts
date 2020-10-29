@@ -1,7 +1,7 @@
 import fs from 'fs';
 
 import { jsonBasePath, localeBasePath } from './base-paths';
-import { validPlaceholders } from './custom-validations/valid-placeholders';
+import { validatePlaceholders } from './custom-validations/validate-placeholders';
 // import { validRestrictionIds } from './custom-validations/valid-restriction-ds';
 
 export type CustomValidationFunction = (
@@ -35,7 +35,7 @@ export const schemaInformation: Record<string, SchemaInfo> = {
   locale: {
     files: filterFilenames(localeJsons, /[^.]+.json$/),
     basePath: localeBasePath,
-    customValidations: [validPlaceholders],
+    customValidations: [validatePlaceholders],
   },
   restrictions: {
     files: ['RESTRICTIONS.json'],
