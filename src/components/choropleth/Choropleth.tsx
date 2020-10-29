@@ -1,6 +1,6 @@
 import { Mercator } from '@vx/geo';
 import { Feature, FeatureCollection, MultiPolygon } from 'geojson';
-import { MutableRefObject, ReactNode, useRef } from 'react';
+import { memo, MutableRefObject, ReactNode, useRef } from 'react';
 
 import create, { UseStore } from 'zustand';
 
@@ -89,21 +89,8 @@ export type TProps<TFeatureProperties> = {
  *
  * @param props
  */
-export function Choropleth<T>(props: TProps<T>) {
-  const {
-    featureCollection,
-    overlays,
-    hovers,
-    boundingBox,
-    dimensions,
-    featureCallback,
-    overlayCallback,
-    hoverCallback,
-    onPathClick,
-    getTooltipContent,
-    isSelectorMap,
-  } = props;
 
+export function Choropleth<T>({ getTooltipContent, ...props }: TProps<T>) {
   const tooltipStore = useRef<UseStore<TooltipState>>(
     create<TooltipState>((set) => ({
       tooltip: null,
@@ -125,6 +112,47 @@ export function Choropleth<T>(props: TProps<T>) {
     }))
   );
 
+  const [showTooltip, hideTooltip] = tooltipStore.current((state) => [
+    state.showTooltip,
+    state.hideTooltip,
+  ]);
+
+  return (
+    <>
+      <ChoroplethMap
+        {...props}
+        showTooltip={showTooltip}
+        hideTooltip={hideTooltip}
+      />
+      <Tooltip
+        tooltipStore={tooltipStore.current}
+        getTooltipContent={getTooltipContent}
+      />
+    </>
+  );
+}
+
+const ChoroplethMap: <T>(
+  props: Omit<TProps<T>, 'getTooltipContent'> & {
+    showTooltip: (tooltip: TooltipSettings) => void;
+    hideTooltip: () => void;
+  }
+) => JSX.Element | null = memo((props) => {
+  const {
+    featureCollection,
+    overlays,
+    hovers,
+    boundingBox,
+    dimensions,
+    featureCallback,
+    overlayCallback,
+    hoverCallback,
+    onPathClick,
+    isSelectorMap,
+    showTooltip,
+    hideTooltip,
+  } = props;
+
   const clipPathId = useRef(`_${Math.random().toString(36).substring(2, 15)}`);
   const timeout = useRef<any>(-1);
   const isLargeScreen = useMediaQuery('(min-width: 1000px)');
@@ -142,11 +170,6 @@ export function Choropleth<T>(props: TProps<T>) {
     [boundedWidth, boundedHeight],
     boundingBox,
   ];
-
-  const [showTooltip, hideTooltip] = tooltipStore.current((state) => [
-    state.showTooltip,
-    state.hideTooltip,
-  ]);
 
   return (
     <>
@@ -190,13 +213,9 @@ export function Choropleth<T>(props: TProps<T>) {
           )}
         </g>
       </svg>
-      <Tooltip
-        tooltipStore={tooltipStore.current}
-        getTooltipContent={getTooltipContent}
-      />
     </>
   );
-}
+});
 
 const renderFeature = (callback: TRenderCallback, dataCy: string) => {
   return (mercator: any) => (
