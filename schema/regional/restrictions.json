@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-  "title": "region_restrictions",
+  "title": "regional_restrictions",
   "additionalProperties": false,
   "required": ["vrcode", "values"],
   "properties": {
