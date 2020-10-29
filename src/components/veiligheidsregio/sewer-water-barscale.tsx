@@ -8,8 +8,6 @@ export function SewerWaterBarScale(props: {
 }) {
   const { data, showAxis } = props;
 
-  if (!data) return null;
-
   const text = siteText.veiligheidsregio_rioolwater_metingen;
 
   return (

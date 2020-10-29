@@ -11,9 +11,6 @@ export function SewerWaterBarScale(props: {
 }) {
   const { data, showAxis } = props;
 
-  if (data === undefined)
-    return <p>{siteText.no_data_for_this_municipality.text}</p>;
-
   return (
     <BarScale
       min={0}
