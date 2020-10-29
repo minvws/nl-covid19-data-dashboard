@@ -24,7 +24,7 @@ export const validateRestrictionIds = (
       fs.readFileSync(sourcePath, { encoding: 'utf8' })
     );
 
-    const restrictionIds = restrictionData.values.map((x) => x.identifier);
+    const restrictionIds = restrictionData.values.map((x) => x.restriction_id);
 
     const result = regionalRestrictions.values
       .map((restrictionIdentifier) => {
