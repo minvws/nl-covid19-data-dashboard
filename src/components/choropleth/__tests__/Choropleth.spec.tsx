@@ -140,7 +140,7 @@ describe('Component: Choropleth', () => {
     expect(hasPathReceivedClick).toBeTruthy();
   });
 
-  it('Should show the tooltip content handler when paths are clicked on on a small screen', () => {
+  it('Should show the tooltip content handler when paths are clicked on on a touch device', (done) => {
     // Arrange
     const testMunicipalCode = 'GM0003';
 
@@ -187,15 +187,22 @@ describe('Component: Choropleth', () => {
       `feature-${testMunicipalCode}`
     )[0];
 
+    fireEvent.touchStart(gemeente);
     fireEvent.click(gemeente);
 
-    // Assert
-    expect(hasPathReceivedClick).toBeFalsy();
-    const tooltips = renderResult.getAllByText(`Tooltip:${testMunicipalCode}`);
-    expect(tooltips.length).toEqual(1);
+    setTimeout(() => {
+      // Assert
+      expect(hasPathReceivedClick).toBeFalsy();
+      const tooltips = renderResult.getAllByText(
+        `Tooltip:${testMunicipalCode}`
+      );
+      expect(tooltips.length).toEqual(1);
+
+      done();
+    }, 500);
   });
 
-  it('Should call the tooltip content handler when paths are mouse-overed', () => {
+  it('Should call the tooltip content handler when paths are mouse-overed', (done) => {
     // Arrange
     const testMunicipalCode = 'GM0003';
 
@@ -240,8 +247,13 @@ describe('Component: Choropleth', () => {
 
     fireEvent.mouseOver(gemeente);
 
-    // Assert
-    const tooltips = renderResult.getAllByText(`Tooltip:${testMunicipalCode}`);
-    expect(tooltips.length).toEqual(1);
+    setTimeout(() => {
+      // Assert
+      const tooltips = renderResult.getAllByText(
+        `Tooltip:${testMunicipalCode}`
+      );
+      expect(tooltips.length).toEqual(1);
+      done();
+    }, 500);
   });
 });
