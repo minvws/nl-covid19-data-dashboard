@@ -13,6 +13,10 @@ import { localPoint } from '@vx/event';
 import { Tooltip } from './tooltips/tooltipContainer';
 
 export type TooltipState = {
+  isEnabled: boolean;
+  enable: () => void;
+  disable: () => void;
+
   tooltip: TooltipSettings | null;
   update: (tooltip: TooltipSettings | null) => void;
   clear: () => void;
@@ -104,11 +108,16 @@ export function Choropleth<T>(props: TProps<T>) {
   } = props;
 
   const tooltipStoreRef = useRef<UseStore<TooltipState>>(
-    create<TooltipState>((set) => ({
+    create<TooltipState>((set, get) => ({
+      isEnabled: false,
+      enable: () => set({ isEnabled: true }),
+      disable: () => set({ isEnabled: false }),
+
       tooltip: null,
       clear: () => set({ tooltip: null }),
       update: debounce(
-        (tooltip: TooltipSettings | null) => set({ tooltip }),
+        (tooltip: TooltipSettings | null) =>
+          get().isEnabled && set({ tooltip }),
         120
       ),
     }))
@@ -141,17 +150,12 @@ export function Choropleth<T>(props: TProps<T>) {
         className={`${styles.svgMap} ${
           isSelectorMap ? styles.selectorMap : ''
         }`}
-        onTouchStart={() => {
-          setIsTouchDevice(true);
-        }}
-        onMouseLeave={() => tooltipStore.update(null)}
-        onMouseOver={createSvgMouseOverHandler(
-          tooltipStore.update,
-          tooltipStore.clear
-        )}
+        onTouchStart={() => setIsTouchDevice(true)}
+        onMouseEnter={tooltipStore.enable}
+        onMouseOver={createSvgMouseOverHandler(tooltipStore)}
         onClick={createSvgClickHandler(
+          tooltipStore,
           onPathClick,
-          tooltipStore.update,
           isTouchDevice
         )}
       >
@@ -185,7 +189,7 @@ export function Choropleth<T>(props: TProps<T>) {
           )}
         </g>
       </svg>
-      {tooltipStore.tooltip && (
+      {tooltipStore.isEnabled && (
         <Tooltip
           tooltipStore={tooltipStoreRef.current}
           getTooltipContent={getTooltipContent}
@@ -214,55 +218,50 @@ const renderFeature = (callback: TRenderCallback, dataCy: string) => {
 };
 
 const createSvgClickHandler = (
+  tooltipStore: TooltipState,
   onPathClick: (id: string) => void,
-  showTooltip: (settings: TooltipSettings) => void,
   isTouchDevice: boolean
 ) => {
   return (event: any) => {
-    const elm = event.target;
-    if (elm.attributes['data-id']) {
-      const id = elm.attributes['data-id'].value;
-      if (isTouchDevice) {
-        positionTooltip(event, elm, showTooltip, id);
-      } else {
-        onPathClick(id);
-      }
+    const elm = event.target as HTMLElement;
+    const id = elm.getAttribute('data-id') as string | undefined;
+
+    if (!id) return;
+
+    if (isTouchDevice) {
+      if (!tooltipStore.isEnabled) tooltipStore.enable();
+      tooltipStore.update(positionTooltip(event, elm, id));
+    } else {
+      onPathClick(id);
     }
   };
 };
 
-const positionTooltip = (
-  event: any,
-  element: any,
-  showTooltip: (settings: TooltipSettings) => void,
-  id: string
-) => {
-  const coords = localPoint(element.ownerSVGElement, event);
-
-  if (coords) {
-    showTooltip({
-      left: coords.x + 5,
-      top: coords.y + 5,
-      data: id,
-    });
-  }
-};
-
-const createSvgMouseOverHandler = (
-  updateTooltip: (settings: TooltipSettings | null) => void,
-  clearTooltip: () => void
-) => {
+const createSvgMouseOverHandler = (tooltipStore: TooltipState) => {
   return (event: React.MouseEvent) => {
     const elm = event.target as HTMLElement;
 
     if (elm.tagName.toLowerCase() === 'svg') {
-      return clearTooltip();
+      return tooltipStore.disable();
     }
 
     const id = elm.getAttribute('data-id') as string | undefined;
 
     if (id) {
-      positionTooltip(event, elm, updateTooltip, id);
+      if (!tooltipStore.isEnabled) tooltipStore.enable();
+      tooltipStore.update(positionTooltip(event, elm, id));
     }
+  };
+};
+
+const positionTooltip = (event: any, element: any, id: string) => {
+  const coords = localPoint(element.ownerSVGElement, event);
+
+  if (!coords) return null;
+
+  return {
+    left: coords.x + 5,
+    top: coords.y + 5,
+    data: id,
   };
 };
