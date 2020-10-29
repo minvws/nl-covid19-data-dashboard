@@ -1,6 +1,12 @@
 import fs from 'fs';
 import Head from 'next/head';
 import path from 'path';
+
+import BlockContent from '@sanity/block-content-to-react';
+import client, { localize } from '~/lib/sanity';
+
+import { targetLanguage } from '../locale/index';
+
 import { Collapsable } from '~/components/collapsable';
 import { FCWithLayout, getLayoutWithMetadata } from '~/components/layout';
 import { MaxWidth } from '~/components/maxWidth';
@@ -22,6 +28,7 @@ interface StaticProps {
 interface VerantwoordingProps {
   text: TALLLanguages;
   lastGenerated: string;
+  verantwoording: any;
 }
 
 export async function getStaticProps(): Promise<StaticProps> {
@@ -42,11 +49,24 @@ export async function getStaticProps(): Promise<StaticProps> {
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const lastGenerated = JSON.parse(fileContents).last_generated;
 
-  return { props: { text, lastGenerated } };
+  const sanityData = await client.fetch(
+    `
+    *[_type == 'cijferVerantwoording']
+    {
+      title,
+      beschrijving,
+      content,
+    }[0]
+  `
+  );
+
+  const verantwoording = localize(sanityData, [targetLanguage, 'nl']);
+
+  return { props: { lastGenerated, verantwoording } };
 }
 
 const Verantwoording: FCWithLayout<VerantwoordingProps> = (props) => {
-  const { text } = props;
+  const { verantwoording } = props;
 
   return (
     <>
@@ -67,17 +87,13 @@ const Verantwoording: FCWithLayout<VerantwoordingProps> = (props) => {
       <div className={styles.container}>
         <MaxWidth>
           <div className={styles.maxwidth}>
-            <h2>{text.verantwoording.title}</h2>
-            <p>{text.verantwoording.paragraaf}</p>
+            <h2>{verantwoording.title}</h2>
+            <BlockContent blocks={verantwoording.beschrijving} />
             <article className={styles.faqList}>
-              {text.verantwoording.cijfers.map((item: ICijfer) =>
-                item.verantwoording && item.cijfer ? (
-                  <Collapsable key={item.id} id={item.id} summary={item.cijfer}>
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: item.verantwoording,
-                      }}
-                    ></div>
+              {verantwoording.content.map((item: any) =>
+                item.titel && item.verantwoording ? (
+                  <Collapsable key={item.id} id={item.id} summary={item.titel}>
+                    <BlockContent blocks={item.verantwoording} />
                   </Collapsable>
                 ) : null
               )}

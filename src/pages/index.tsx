@@ -1,6 +1,12 @@
 import fs from 'fs';
 import { useRouter } from 'next/router';
 import path from 'path';
+
+import BlockContent from '@sanity/block-content-to-react';
+import client, { localize } from '~/lib/sanity';
+
+import { targetLanguage } from '../locale/index';
+
 import { useState } from 'react';
 import ExternalLink from '~/assets/external-link.svg';
 import Notification from '~/assets/notification.svg';
@@ -23,7 +29,6 @@ import { MDToHTMLString } from '~/utils/MDToHTMLString';
 import styles from './index.module.scss';
 import { EscalationMapLegenda } from './veiligheidsregio';
 import { assert } from '~/utils/assert';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 interface StaticProps {
   props: INationalHomepageData;
@@ -34,6 +39,7 @@ interface INationalHomepageData {
   text: TALLLanguages;
   lastGenerated: string;
   escalationLevelCounts: EscalationLevelCounts;
+  ontwikkelingen: any;
 }
 
 /*
@@ -50,7 +56,7 @@ interface EscalationLevelCounts {
 }
 
 const Home: FCWithLayout<INationalHomepageData> = (props) => {
-  const { text, escalationLevelCounts } = props;
+  const { text, ontwikkelingen } = props;
   const router = useRouter();
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
     'municipal'
@@ -67,13 +73,8 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
       />
       <article className={`${styles.notification} metric-article`}>
         <div className={styles.textgroup}>
-          <h3 className={styles.header}>{text.notificatie.titel}</h3>
-          <p>
-            {replaceVariablesInText(
-              text.notificatie.bericht,
-              (escalationLevelCounts as unknown) as { [key: string]: string }
-            )}
-          </p>
+          <h3 className={styles.header}>{ontwikkelingen.title}</h3>
+          <BlockContent blocks={ontwikkelingen.description} />
         </div>
         <a
           className={styles.link}
@@ -205,7 +206,32 @@ export async function getStaticProps(): Promise<StaticProps> {
   const escalationLevels = regionsData.escalation_levels;
   const escalationLevelCounts = getEscalationCounts(escalationLevels);
 
-  return { props: { data, escalationLevelCounts, text, lastGenerated } };
+  const laatsteOntwikkelingen = await client.fetch(
+    `
+    *[_type == 'laatsteOntwikkelingen']
+    {
+      _id,
+      title,
+      description,
+      externalLink,  
+    }[0]
+  `
+  );
+
+  const ontwikkelingen = localize(laatsteOntwikkelingen, [
+    targetLanguage,
+    'nl',
+  ]);
+
+  return {
+    props: {
+      data,
+      escalationLevelCounts,
+      text,
+      lastGenerated,
+      ontwikkelingen,
+    },
+  };
 }
 
 export default Home;

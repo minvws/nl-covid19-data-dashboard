@@ -8,6 +8,8 @@
     "@formatjs/intl-getcanonicallocales": "^1.4.5",
     "@reach/combobox": "^0.11.2",
     "@reach/disclosure": "^0.11.2",
+    "@sanity/block-content-to-react": "^2.0.7",
+    "@sanity/client": "^2.0.1",
     "@styled-system/css": "^5.1.5",
     "@vx/event": "^0.0.198",
     "@vx/geo": "^0.0.199",
