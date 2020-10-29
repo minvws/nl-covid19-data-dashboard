@@ -19,27 +19,23 @@ export const validateRestrictionIds = (
     ];
   }
 
-  let restrictionData: Restrictions | undefined;
   try {
-    restrictionData = JSON.parse(
+    const restrictionData: Restrictions = JSON.parse(
       fs.readFileSync(sourcePath, { encoding: 'utf8' })
     );
-    /* eslint-disable-next-line */
-  } catch (e) {}
 
-  if (restrictionData === undefined) {
+    const restrictionIds = restrictionData.values.map((x) => x.identifier);
+
+    const result = regionalRestrictions.values
+      .map((restrictionIdentifier) => {
+        if (!restrictionIds.includes(restrictionIdentifier)) {
+          return `Restriction id '${restrictionIdentifier}' was not found in ${sourcePath}`;
+        }
+      })
+      .filter(isDefined);
+
+    return result.length ? result : undefined;
+  } catch (e) {
     return [`Restrictions file '${sourcePath}' could not be parsed to JSON.`];
   }
-
-  const restrictionIds = restrictionData.values.map((x) => x.identifier);
-
-  const result = regionalRestrictions.values
-    .map((restrictionIdentifier) => {
-      if (!restrictionIds.includes(restrictionIdentifier)) {
-        return `Restriction id '${restrictionIdentifier}' was not found in ${sourcePath}`;
-      }
-    })
-    .filter(isDefined);
-
-  return result.length ? result : undefined;
 };
