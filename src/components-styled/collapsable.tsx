@@ -154,7 +154,7 @@ export const Collapsable = ({ summary, children, id }: CollapsableProps) => {
   }, [checkLocationHash]);
 
   return (
-    <Box as="section" borderTop={`1px solid lightGray`} id={id}>
+    <Box as="section" borderTop="1px solid" borderTopColor="lightGray" id={id}>
       <Disclosure open={open} onChange={toggle}>
         <Summary>{summary}</Summary>
         <Panel
