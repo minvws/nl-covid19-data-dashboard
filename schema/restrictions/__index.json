@@ -32,14 +32,14 @@
       "title": "restrictions_value",
       "additionalProperties": false,
       "required": [
-        "identifier",
+        "restriction_id",
         "target_region",
         "escalation_level",
         "category_id",
         "restriction_order"
       ],
       "properties": {
-        "identifier": {
+        "restriction_id": {
           "type": "string",
           "validRestrictionId": true
         },

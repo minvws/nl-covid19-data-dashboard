@@ -555,7 +555,7 @@ export interface Restrictions {
   values: RestrictionsValue[];
 }
 export interface RestrictionsValue {
-  identifier: string;
+  restriction_id: string;
   target_region: "nl" | "vr";
   escalation_level: number;
   category_id:
