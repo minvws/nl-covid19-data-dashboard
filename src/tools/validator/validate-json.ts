@@ -66,12 +66,27 @@ async function validate(schemaName: string, schemaInfo: SchemaInfo) {
   );
 
   return schemaInfo.files.map((fileName) => {
-    const contentAsString = fs.readFileSync(
-      path.join(schemaInfo.basePath, fileName),
-      {
-        encoding: 'utf8',
+    const jsonFilePath = path.join(schemaInfo.basePath, fileName);
+    if (!fs.existsSync(jsonFilePath)) {
+      if (schemaInfo.optional) {
+        console.group();
+        console.warn(
+          chalk.bgBlue.bold(
+            `  ${fileName} does not exist, but is optional, so no problem  \n`
+          )
+        );
+        console.groupEnd();
+        return true;
+      } else {
+        console.group();
+        console.error(chalk.bgRed.bold(`  ${fileName} does not exist  \n`));
+        console.groupEnd();
+        return false;
       }
-    );
+    }
+    const contentAsString = fs.readFileSync(jsonFilePath, {
+      encoding: 'utf8',
+    });
 
     let data: any = null;
     try {

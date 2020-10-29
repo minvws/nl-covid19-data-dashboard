@@ -1,7 +1,8 @@
 import fs from 'fs';
 
 import { jsonBasePath, localeBasePath } from './base-paths';
-import { validPlaceholders } from './custom-validations/valid-placeholders';
+import { validatePlaceholders } from './custom-validations/validate-placeholders';
+// import { validRestrictionIds } from './custom-validations/valid-restriction-ds';
 
 export type CustomValidationFunction = (
   input: Record<string, unknown>
@@ -10,6 +11,7 @@ export type SchemaInfo = {
   files: string[];
   basePath: string;
   customValidations?: CustomValidationFunction[];
+  optional?: boolean;
 };
 
 const localeJsons = fs.readdirSync(localeBasePath);
@@ -22,6 +24,8 @@ export const schemaInformation: Record<string, SchemaInfo> = {
   regional: {
     files: filterFilenames(allJsonFiles, /^VR[0-9]+.json$/),
     basePath: jsonBasePath,
+    // COmmenting this out for now until we have actual data:
+    // customValidations: [validRestrictionIds],
   },
   municipal: {
     files: filterFilenames(allJsonFiles, /^GM[0-9]+.json$/),
@@ -32,7 +36,12 @@ export const schemaInformation: Record<string, SchemaInfo> = {
   locale: {
     files: filterFilenames(localeJsons, /[^.]+.json$/),
     basePath: localeBasePath,
-    customValidations: [validPlaceholders],
+    customValidations: [validatePlaceholders],
+  },
+  restrictions: {
+    files: ['RESTRICTIONS.json'],
+    basePath: jsonBasePath,
+    optional: true,
   },
 };
 
