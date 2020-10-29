@@ -79,7 +79,7 @@ const mediaQueries = {
 
 type TMediaQueries = typeof mediaQueries;
 
-export const colors = {
+const colors = {
   blue: '#01689b',
   icon: '#01689b',
   button: '#01689b',

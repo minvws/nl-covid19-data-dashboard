@@ -8,14 +8,13 @@ import { ReactNode, useState, useEffect, useCallback, useRef } from 'react';
 import { BoxProps, Box } from './base';
 import styled from 'styled-components';
 import { css } from '@styled-system/css';
-import { colors } from '~/style/theme';
 
 const Summary = styled(DisclosureButton)(
   css({
     alignItems: 'flex-start',
     bg: 'transparent',
     border: 'none',
-    color: colors.blue,
+    color: 'blue',
     cursor: 'pointer',
     display: 'flex',
     fontSize: 3,
@@ -27,11 +26,13 @@ const Summary = styled(DisclosureButton)(
     width: '100%',
 
     '&:focus': {
-      outline: `1px dashed ${colors.blue}`,
+      outlineWidth: '1px',
+      outlineStyle: 'dashed',
+      outlineColor: 'blue',
     },
 
     '&:active[data-state="collapsed"]': {
-      bg: colors.shadow,
+      bg: 'shadow',
     },
 
     '&::after': {
@@ -78,19 +79,7 @@ export const Collapsable = ({ summary, children, id }: CollapsableProps) => {
   const [open, setOpen] = useState(false);
   const [panelHeight, setPanelHeight] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
-
-  /* Needs to explicitly use undefined to use panelReference as dependancy for useCallback */
-  // let panelReference: HTMLDivElement | undefined = undefined;
-
   const panelReference = useRef<HTMLDivElement>(null);
-
-  /* Store the latest reference to the panel */
-  // const setPanelReference = (element: HTMLDivElement) => {
-  //   if (!element) {
-  //     return;
-  //   }
-  //   panelReference = element;
-  // };
 
   function toggle() {
     if (isAnimating) {
@@ -165,7 +154,7 @@ export const Collapsable = ({ summary, children, id }: CollapsableProps) => {
   }, [checkLocationHash]);
 
   return (
-    <Box as="section" borderTop={`1px solid ${colors.lightGray}`} id={id}>
+    <Box as="section" borderTop={`1px solid lightGray`} id={id}>
       <Disclosure open={open} onChange={toggle}>
         <Summary>{summary}</Summary>
         <Panel
