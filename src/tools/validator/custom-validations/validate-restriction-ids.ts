@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { isDefined } from 'ts-is-present';
 import { jsonBasePath } from '../base-paths';
-import { Restrictions } from '../../../types/data';
+import { RegionalRestrictions, Restrictions } from '../../../types/data';
 
 export const validateRestrictionIds = (
   input: Record<string, unknown>
@@ -10,7 +10,7 @@ export const validateRestrictionIds = (
   if (!input.restrictions) {
     return [`Property 'restrictions' doesn't exist`];
   }
-  const regionRestrictions = input.restrictions as any;
+  const regionalRestrictions = input.restrictions as RegionalRestrictions;
 
   const sourcePath = path.join(jsonBasePath, 'RESTRICTIONS.js');
   if (!fs.existsSync(sourcePath)) {
@@ -32,10 +32,10 @@ export const validateRestrictionIds = (
   }
 
   const restrictionIds = restrictionData.values.map(
-    (value: any) => value.identifier
+    (value) => value.identifier
   );
 
-  const result = regionRestrictions.values
+  const result = regionalRestrictions.values
     .map((id: number) => {
       if (!restrictionIds.includes(id)) {
         return `Restriction id '${id}' was not found in ${sourcePath}`;
