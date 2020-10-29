@@ -1,0 +1,31 @@
+name: Lokalize PR check
+on:
+  pull_request:
+    branches:
+      - 'lokalize-*'
+jobs:
+  autoapprove:
+    runs-on: ubuntu-latest
+    steps:
+      - id: file_changes
+        uses: trilom/file-changes-action@v1.2.3
+      - name: test
+        run: cat $HOME/files.json
+        with:
+          script: |
+            if steps.file_changes.outputs.files.length !== 2 {
+              throw new Error("More than 2 files were changed in this lokalize PR");
+            }
+  automerge:
+    name: Auto merge after successful checks
+    # By default, jobs run in parallel. To run the jobs sequentially, they keywords "needs" is needed.
+    # Auto merge action can be done only when the PR is approved, hence this automerge needs autoapprove as a prerequisite
+    needs: autoapprove
+    runs-on: ubuntu-latest
+    steps:
+      - name: Auto merge
+        # Custom action for auto merging already available on marketplace
+        uses: pascalgn/automerge-action@v0.12.0
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          MERGE_METHOD: squash
