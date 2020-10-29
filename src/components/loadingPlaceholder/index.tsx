@@ -1,10 +1,10 @@
 import styles from './loadingPlaceholder.module.scss';
 
-interface IProps {
+interface LoadingPlaceholderProps {
   children: React.ReactNode;
 }
 
-export function LoadingPlaceholder(props: IProps) {
+export function LoadingPlaceholder(props: LoadingPlaceholderProps) {
   const { children } = props;
   return (
     <span className={styles.loadingPlaceholder} aria-hidden="true">

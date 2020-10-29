@@ -30,6 +30,10 @@ interface IMunicipality {
   gemcode: string;
 }
 
+interface MunicipalityLayoutProps extends IMunicipalityData {
+  children: React.ReactNode;
+}
+
 export function getMunicipalityLayout() {
   return function (
     page: React.ReactNode,
@@ -61,9 +65,7 @@ export function getMunicipalityLayout() {
  * More info on persistent layouts:
  * https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
-function MunicipalityLayout(
-  props: IMunicipalityData & { children: React.ReactNode }
-) {
+function MunicipalityLayout(props: MunicipalityLayoutProps) {
   const { children, data, municipalityName } = props;
   const router = useRouter();
   const isLargeScreen = useMediaQuery('(min-width: 1000px)');

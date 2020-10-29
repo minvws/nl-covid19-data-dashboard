@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-interface IProps {
+interface LegendProps {
   children: React.ReactNode;
 }
 
@@ -8,7 +8,7 @@ interface IProps {
  * Takes `li` elements as children.
  * Use `.blue` and `.gray` to add list marker colors to a list item.
  */
-export function Legenda(props: IProps) {
+export function Legenda(props: LegendProps) {
   const { children } = props;
   return <ul className="legenda">{children}</ul>;
 }

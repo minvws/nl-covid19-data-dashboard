@@ -43,6 +43,10 @@ export function getSafetyRegionLayout() {
   };
 }
 
+interface SafetyRegionLayoutProps extends ISafetyRegionData {
+  children: React.ReactNode;
+}
+
 type TSafetyRegion = {
   name: string;
   displayName?: string;
@@ -67,9 +71,7 @@ type TSafetyRegion = {
  * More info on persistent layouts:
  * https:adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
-function SafetyRegionLayout(
-  props: ISafetyRegionData & { children: React.ReactNode }
-) {
+function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
   const { children, data } = props;
 
   const router = useRouter();
