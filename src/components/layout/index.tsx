@@ -14,13 +14,12 @@ import { getLocale } from '~/utils/getLocale';
 import { SEOHead } from '~/components/seoHead';
 import { MaxWidth } from '~/components/maxWidth';
 
-export interface LayoutProps extends ILastGeneratedData {
+export interface LayoutProps {
   url?: string;
   title: string;
   description?: string;
   openGraphImage?: string;
   twitterImage?: string;
-  children: React.ReactNode;
 }
 
 export type FCWithLayout<Props = void> = React.FC<Props> & {
@@ -46,7 +45,9 @@ export function getLayout(layoutProps: LayoutProps, lastGenerated: string) {
 
 export default Layout;
 
-function Layout(props: LayoutProps) {
+function Layout(
+  props: LayoutProps & ILastGeneratedData & { children: React.ReactNode }
+) {
   const {
     children,
     title,
