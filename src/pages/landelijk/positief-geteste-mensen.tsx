@@ -173,12 +173,12 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         }))}
       />
 
-      <KpiSection>
-        <Box flex="0 0 50%">
+      <KpiSection flexDirection="column">
+        <Box>
           <Heading level={3}>{text.barchart_titel}</Heading>
           <Text>{text.barchart_toelichting}</Text>
         </Box>
-        <Box flex="0 0 50%">
+        <Box>
           <BarChart
             keys={text.barscale_keys}
             data={age.values.map((value) => ({
