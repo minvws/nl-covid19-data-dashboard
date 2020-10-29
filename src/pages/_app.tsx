@@ -3,6 +3,7 @@ import Router from 'next/router';
 import { AppProps } from 'next/app';
 import { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
+import { FCWithLayout } from '~/components/layout';
 import '~/components/comboBox/comboBox.scss';
 import '~/components/legenda/legenda.scss';
 import * as piwik from '~/lib/piwik';
@@ -11,12 +12,7 @@ import { GlobalStyle } from '~/style/global-style';
 import theme from '~/style/theme';
 
 type AppPropsWithLayout = AppProps & {
-  Component: AppProps['Component'] & {
-    getLayout: (
-      page: React.ReactNode,
-      props: AppProps['pageProps']
-    ) => JSX.Element;
-  };
+  Component: FCWithLayout;
 };
 
 export default function App(props: AppPropsWithLayout) {
