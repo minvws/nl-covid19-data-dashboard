@@ -16,6 +16,7 @@ jobs:
             if steps.file_changes.outputs.files.length !== 2 {
               throw new Error("More than 2 files were changed in this lokalize PR");
             }
+            throw new Error("I really wanna fail");
   automerge:
     name: Auto merge after successful checks
     # By default, jobs run in parallel. To run the jobs sequentially, they keywords "needs" is needed.
