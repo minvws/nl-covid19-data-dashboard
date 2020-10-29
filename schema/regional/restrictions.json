@@ -10,7 +10,7 @@
       "type": "array",
       "items": {
         "type": "string",
-        "pattern": "^[0-9]+_[a-z]_[0-9]$"
+        "pattern": "^[0-9]+_[a-z_]+_[0-9]+$"
       }
     }
   }
