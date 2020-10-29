@@ -1,7 +1,7 @@
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import React, { useMemo, useState } from 'react';
-import { isDefined } from 'ts-is-present';
+import { isFilled } from 'ts-is-present';
 import { ChartTimeControls } from '~/components-styled/chart-time-controls';
 import text from '~/locale/index';
 import { formatDateFromSeconds } from '~/utils/formatDate';
@@ -11,7 +11,7 @@ import styles from './lineChart.module.scss';
 
 export type Value = {
   date: number;
-  value: number;
+  value: number | null;
 };
 
 const SIGNAALWAARDE_Z_INDEX = 5;
@@ -24,13 +24,15 @@ export interface LineChartProps {
   timeframeOptions?: TimeframeOption[];
   formatTooltip?: (x: number, y: number) => string;
   formatYAxis?: (y: number) => string;
+  showFill?: boolean;
 }
 
 function getChartOptions(
   values: Value[],
   signaalwaarde?: number,
   formatTooltip?: (x: number, y: number) => string,
-  formatYAxis?: (y: number) => string
+  formatYAxis?: (y: number) => string,
+  showFill?: boolean
 ) {
   const yMax = calculateYMax(values, signaalwaarde);
 
@@ -148,7 +150,12 @@ function getChartOptions(
         showInLegend: false,
         color: '#3391CC',
         // hex to rgb converted, added opacity
-        fillColor: 'rgba(51, 145, 204, 0.2)',
+        /* since this chart has type 'area', a fillColor of `undefined` will return
+        a colored fill equal to che line color, when showFill is false, it returns a
+        transparent fill */
+        fillColor: showFill
+          ? 'rgba(51, 145, 204, 0.2)'
+          : 'rgba(255, 255, 255, 1.0)',
         marker: {
           enabled: false,
         },
@@ -181,6 +188,7 @@ export default function LineChart({
   timeframeOptions,
   formatTooltip,
   formatYAxis,
+  showFill = true,
 }: LineChartProps) {
   const [timeframe, setTimeframe] = useState<TimeframeOption>('5weeks');
 
@@ -194,9 +202,10 @@ export default function LineChart({
       filteredValues,
       signaalwaarde,
       formatTooltip,
-      formatYAxis
+      formatYAxis,
+      showFill
     );
-  }, [values, timeframe, signaalwaarde, formatTooltip, formatYAxis]);
+  }, [values, timeframe, signaalwaarde, formatTooltip, formatYAxis, showFill]);
 
   return (
     <section className={styles.root}>
@@ -225,9 +234,10 @@ export default function LineChart({
 function calculateYMax(values: Value[], signaalwaarde = -Infinity) {
   const maxValue = values
     .map((x) => x.value)
-    .filter(isDefined)
+    .filter(isFilled)
     .reduce((acc, value) => (value > acc ? value : acc), -Infinity);
 
   // Value cannot be 0, hence the 1
-  return Math.max(maxValue, signaalwaarde + 10, 1);
+  // If the value is below signaalwaarde, make sure the signaalwaarde floats in the middle
+  return Math.max(maxValue, signaalwaarde * 2, 1);
 }
