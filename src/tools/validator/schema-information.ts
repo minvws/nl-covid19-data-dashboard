@@ -24,6 +24,7 @@ export const schemaInformation: Record<string, SchemaInfo> = {
   regional: {
     files: filterFilenames(allJsonFiles, /^VR[0-9]+.json$/),
     basePath: jsonBasePath,
+    // COmmenting this out for now until we have actual data:
     // customValidations: [validRestrictionIds],
   },
   municipal: {
