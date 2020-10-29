@@ -6,13 +6,10 @@ import siteText from '~/locale/index';
 const text = siteText.gemeente_rioolwater_metingen;
 
 export function SewerWaterBarScale(props: {
-  data: SewerWaterBarScaleData | null;
+  data: SewerWaterBarScaleData;
   showAxis: boolean;
 }) {
   const { data, showAxis } = props;
-
-  if (data === null)
-    return <p>{siteText.no_data_for_this_municipality.text}</p>;
 
   return (
     <BarScale

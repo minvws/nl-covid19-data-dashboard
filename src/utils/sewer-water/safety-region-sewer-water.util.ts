@@ -66,12 +66,8 @@ function getSewerWaterMetadata(
 
 export function getSewerWaterBarScaleData(
   data: Regionaal | undefined
-): SewerWaterBarScaleData | null {
-  const { dataAvailable, oneInstallation } = getSewerWaterMetadata(data);
-
-  if (!dataAvailable) {
-    return null;
-  }
+): SewerWaterBarScaleData {
+  const { oneInstallation } = getSewerWaterMetadata(data);
 
   if (oneInstallation) {
     const barScaleData =
@@ -123,12 +119,8 @@ export function getSewerWaterScatterPlotData(
 
 export function getSewerWaterLineChartData(
   data: Regionaal | undefined
-): SewerWaterLineChartData | null {
-  const { dataAvailable, oneInstallation } = getSewerWaterMetadata(data);
-
-  if (!dataAvailable) {
-    return null;
-  }
+): SewerWaterLineChartData {
+  const { oneInstallation } = getSewerWaterMetadata(data);
 
   if (oneInstallation) {
     // One RWZI installation:
