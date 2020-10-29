@@ -5,15 +5,15 @@ import { useState } from 'react';
 import ExternalLink from '~/assets/external-link.svg';
 import Notification from '~/assets/notification.svg';
 import { ChartRegionControls } from '~/components-styled/chart-region-controls';
-import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
-import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
-import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
-import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
-import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
-import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
-import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/createPositiveTestedPeopleMunicipalTooltip';
-import { createPositiveTestedPeopleRegionalTooltip } from '~/components/chloropleth/tooltips/region/createPositiveTestedPeopleRegionalTooltip';
-import { escalationTooltip } from '~/components/chloropleth/tooltips/region/escalationTooltip';
+import { ChoroplethLegenda } from '~/components/choropleth/legenda/ChoroplethLegenda';
+import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/useSafetyRegionLegendaData';
+import { MunicipalityChoropleth } from '~/components/choropleth/MunicipalityChoropleth';
+import { SafetyRegionChoropleth } from '~/components/choropleth/SafetyRegionChoropleth';
+import { createSelectMunicipalHandler } from '~/components/choropleth/selectHandlers/createSelectMunicipalHandler';
+import { createSelectRegionHandler } from '~/components/choropleth/selectHandlers/createSelectRegionHandler';
+import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/createPositiveTestedPeopleMunicipalTooltip';
+import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/createPositiveTestedPeopleRegionalTooltip';
+import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalationTooltip';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { TitleWithIcon } from '~/components/titleWithIcon';
@@ -86,8 +86,8 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
         </a>
       </article>
 
-      <article className="metric-article layout-chloropleth">
-        <div className="chloropleth-header">
+      <article className="metric-article layout-choropleth">
+        <div className="choropleth-header">
           <h2>{text.veiligheidsregio_index.selecteer_titel}</h2>
           <div
             dangerouslySetInnerHTML={{
@@ -96,8 +96,8 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
           />
           <EscalationMapLegenda text={text} />
         </div>
-        <div className="chloropleth-chart">
-          <SafetyRegionChloropleth
+        <div className="choropleth-chart">
+          <SafetyRegionChoropleth
             metricName="escalation_levels"
             metricValueName="escalation_level"
             onSelect={createSelectRegionHandler(router)}
@@ -106,20 +106,20 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
         </div>
       </article>
 
-      <article className="metric-article layout-chloropleth">
-        <div className="chloropleth-header">
+      <article className="metric-article layout-choropleth">
+        <div className="choropleth-header">
           <h3>{text.positief_geteste_personen.map_titel}</h3>
           <p>{text.positief_geteste_personen.map_toelichting}</p>
-          <div className="chloropleth-controls">
+          <div className="choropleth-controls">
             <ChartRegionControls
               onChange={(val: 'region' | 'municipal') => setSelectedMap(val)}
             />
           </div>
         </div>
 
-        <div className="chloropleth-chart">
+        <div className="choropleth-chart">
           {selectedMap === 'municipal' && (
-            <MunicipalityChloropleth
+            <MunicipalityChoropleth
               metricName="positive_tested_people"
               tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
                 router
@@ -128,7 +128,7 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
             />
           )}
           {selectedMap === 'region' && (
-            <SafetyRegionChloropleth
+            <SafetyRegionChoropleth
               metricName="positive_tested_people"
               tooltipContent={createPositiveTestedPeopleRegionalTooltip(router)}
               onSelect={createSelectRegionHandler(router)}
@@ -136,9 +136,9 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
           )}
         </div>
 
-        <div className="chloropleth-legend">
+        <div className="choropleth-legend">
           {legendItems && (
-            <ChloroplethLegenda
+            <ChoroplethLegenda
               items={legendItems}
               title={text.positief_geteste_personen.chloropleth_legenda.titel}
             />
