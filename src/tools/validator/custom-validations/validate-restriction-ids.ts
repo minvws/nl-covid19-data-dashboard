@@ -31,14 +31,12 @@ export const validateRestrictionIds = (
     return [`Restrictions file '${sourcePath}' could not be parsed to JSON.`];
   }
 
-  const restrictionIds = restrictionData.values.map(
-    (value) => value.identifier
-  );
+  const restrictionIds = restrictionData.values.map((x) => x.identifier);
 
   const result = regionalRestrictions.values
-    .map((id: number) => {
-      if (!restrictionIds.includes(id)) {
-        return `Restriction id '${id}' was not found in ${sourcePath}`;
+    .map((restrictionIdentifier) => {
+      if (!restrictionIds.includes(restrictionIdentifier)) {
+        return `Restriction id '${restrictionIdentifier}' was not found in ${sourcePath}`;
       }
     })
     .filter(isDefined);

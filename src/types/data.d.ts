@@ -496,7 +496,7 @@ export interface RegionalNursingHomeValue {
 }
 export interface RegionalRestrictions {
   vrcode: string;
-  values: number[];
+  values: string[];
 }
 
 export interface Regions {
@@ -555,9 +555,23 @@ export interface Restrictions {
   values: RestrictionsValue[];
 }
 export interface RestrictionsValue {
-  identifier: number;
+  identifier: string;
   target_region: "nl" | "vr";
   escalation_level: number;
-  category_id: string;
+  category_id:
+    | "er_op_uit"
+    | "bezoek"
+    | "samenkomst"
+    | "huwelijk"
+    | "verpleeghuis"
+    | "horeca"
+    | "sport"
+    | "reizen_binnenland"
+    | "ov"
+    | "uitvaart"
+    | "onderwijs"
+    | "werk"
+    | "winkels"
+    | "alcohol";
   restriction_order: number;
 }

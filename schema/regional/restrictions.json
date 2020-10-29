@@ -9,7 +9,8 @@
     "values": {
       "type": "array",
       "items": {
-        "type": "number"
+        "type": "string",
+        "pattern": "^[0-9]+_[a-z]_[0-9]$"
       }
     }
   }

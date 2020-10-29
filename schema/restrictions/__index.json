@@ -40,7 +40,8 @@
       ],
       "properties": {
         "identifier": {
-          "type": "number"
+          "type": "string",
+          "validRestrictionId": true
         },
         "target_region": {
           "type": "string",
@@ -52,7 +53,23 @@
           "maximum": 5
         },
         "category_id": {
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "er_op_uit",
+            "bezoek",
+            "samenkomst",
+            "huwelijk",
+            "verpleeghuis",
+            "horeca",
+            "sport",
+            "reizen_binnenland",
+            "ov",
+            "uitvaart",
+            "onderwijs",
+            "werk",
+            "winkels",
+            "alcohol"
+          ]
         },
         "restriction_order": {
           "type": "number"
