@@ -79,11 +79,12 @@ const mediaQueries = {
 
 type TMediaQueries = typeof mediaQueries;
 
-const colors = {
+export const colors = {
   blue: '#01689b',
   icon: '#01689b',
   button: '#01689b',
   shadow: '#e5e5e5',
+  lightGray: '#dfdfdf',
 };
 
 const radii = [0, 5, 10];

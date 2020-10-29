@@ -8,13 +8,14 @@ import { ReactNode, useState, useEffect, useCallback } from 'react';
 import { BoxProps, Box } from './base';
 import styled from 'styled-components';
 import { css } from '@styled-system/css';
+import { colors } from '~/style/theme';
 
 const Summary = styled(DisclosureButton)(
   css({
     alignItems: 'flex-start',
     bg: 'transparent',
     border: 'none',
-    color: '#01689b',
+    color: colors.blue,
     cursor: 'pointer',
     display: 'flex',
     fontSize: 3,
@@ -26,11 +27,11 @@ const Summary = styled(DisclosureButton)(
     width: '100%',
 
     '&:focus': {
-      outline: '1px dashed #01689b',
+      outline: `1px dashed ${colors.blue}`,
     },
 
     '&:active[data-state="collapsed"]': {
-      bg: '#ebebeb',
+      bg: colors.shadow,
     },
 
     '&::after': {
@@ -73,13 +74,12 @@ interface CollapsableProps extends BoxProps {
   id?: string;
 }
 
-export const Collapsable = (props: CollapsableProps) => {
-  const { summary, children, id } = props;
-
+export const Collapsable = ({ summary, children, id }: CollapsableProps) => {
   const [open, setOpen] = useState(false);
   const [panelHeight, setPanelHeight] = useState<number>(0);
   const [isAnimating, setIsAnimating] = useState(false);
 
+  /* Needs to explicitly use undefined to use panelReference as dependancy for useCallback */
   let panelReference: HTMLDivElement | undefined = undefined;
 
   /* Store the latest reference to the panel */
@@ -95,10 +95,8 @@ export const Collapsable = (props: CollapsableProps) => {
       return;
     }
     setOpen(!open);
-    requestAnimationFrame(() => {
-      setLinkTabability(!open);
-      startAnimation(!open);
-    });
+    setLinkTabability(!open);
+    startAnimation(!open);
   }
 
   /**
@@ -120,9 +118,9 @@ export const Collapsable = (props: CollapsableProps) => {
    */
   const animatePanelHeight = (from: number, to: number) => {
     setPanelHeight(from);
-    requestAnimationFrame(() => {
+    setTimeout(() => {
       setPanelHeight(to);
-    });
+    }, 67);
   };
 
   /**
@@ -166,7 +164,7 @@ export const Collapsable = (props: CollapsableProps) => {
   }, []); // should not use dependencies in array: use effect mimics mount / unmount
 
   return (
-    <Box as="section" borderTop={'1px solid #dfdfdf'} {...(props as any)}>
+    <Box as="section" borderTop={`1px solid ${colors.lightGray}`} id={id}>
       <Disclosure open={open} onChange={toggle}>
         <Summary>{summary}</Summary>
         <Panel
