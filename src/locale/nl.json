@@ -412,8 +412,8 @@
     },
     "titel_sidebar": "Rioolwatermeting",
     "titel_kpi": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater",
-    "total_installation_count_titel": "Aantal RWZI-locaties",
-    "total_installation_count_description": "Aantal locaties dat wordt meegenomen in het berekenen van het gemiddelde.",
+    "total_installation_count_titel": "Aantal meetlocaties",
+    "total_installation_count_description": "Wekelijks aantal rioolwaterzuiveringsinstallaties die minimaal één keer een meting hebben gerapporteerd. Het weekgemiddelde wordt berekend door het gemiddelde te nemen van alle metingen op deze locaties. Per week kan dit aantal variëren omdat niet alle metingen altijd lukken.",
     "rwzi_abbrev": "RWZI = Rioolwaterzuiveringsinstallatie."
   },
   "notfound_titel": {
@@ -528,7 +528,7 @@
       },
       {
         "cijfer": "Aantal besmettelijke mensen",
-        "verantwoording": "Als iemand het nieuwe coronavirus oploopt,  is deze persoon een tijd lang besmettelijk voor anderen. Hoe lang dit duurt, verschilt van persoon tot persoon. De schatting van het totale aantal besmettelijke personen gaat gepaard met onzekerheid. Het exacte aantal besmettingen is onbekend, maar we kunnen wel berekenen tussen welke waarden het zich waarschijnlijk bevindt.  Zie ook de toelichting van het [RIVM] (https://www.rivm.nl/coronavirus-covid-19/hoe-berekeningen-bijdragen-aan-bestrijding-van-virus).\n\nTussen 1 juni en 13 oktober werd dit cijfer berekend op basis van de data uit de eerste ronde van het [Pienter Corona onderzoek] (https://www.rivm.nl/pienter-corona-studie), het aantal ziekenhuisopnames en het aantal positieve testen. Vanaf 13 oktober wordt dit cijfer berekend op basis van de data uit de tweede ronde van het Pienter Corona onderzoek en het aantal ziekenhuisopnames. In de tweede ronde van het Pienter Corona onderzoek is een grotere groep mensen op een besmetting met het virus onderzocht. Ook is er meer inzicht gekregen of en hoe besmettelijk COVID-19-patienten zijn. \n\nDeze gegevens worden wekelijks (op dinsdag) door het RIVM aangeleverd als open data bestand. Deze gegevens worden direct overgenomen op het dashboard. Voor het aantal besmettelijke mensen is geen signaalwaarde beschikbaar omdat dit aantal een inschatting is gebaseerd op een berekening."
+        "verantwoording": "Als iemand het nieuwe coronavirus oploopt,  is deze persoon een tijd lang besmettelijk voor anderen. Hoe lang dit duurt, verschilt van persoon tot persoon. De schatting van het totale aantal besmettelijke personen gaat gepaard met onzekerheid. Het exacte aantal besmettingen is onbekend, maar we kunnen wel berekenen tussen welke waarden het zich waarschijnlijk bevindt.  Zie ook de toelichting van het [RIVM](https://www.rivm.nl/coronavirus-covid-19/hoe-berekeningen-bijdragen-aan-bestrijding-van-virus).\n\nTussen 1 juni en 13 oktober werd dit cijfer berekend op basis van de data uit de eerste ronde van het [Pienter Corona onderzoek](https://www.rivm.nl/pienter-corona-studie), het aantal ziekenhuisopnames en het aantal positieve testen. Vanaf 13 oktober wordt dit cijfer berekend op basis van de data uit de tweede ronde van het Pienter Corona onderzoek en het aantal ziekenhuisopnames. In de tweede ronde van het Pienter Corona onderzoek is een grotere groep mensen op een besmetting met het virus onderzocht. Ook is er meer inzicht gekregen of en hoe besmettelijk COVID-19-patienten zijn. \n\nDeze gegevens worden wekelijks (op dinsdag) door het RIVM aangeleverd als open data bestand. Deze gegevens worden direct overgenomen op het dashboard. Voor het aantal besmettelijke mensen is geen signaalwaarde beschikbaar omdat dit aantal een inschatting is gebaseerd op een berekening."
       },
       {
         "cijfer": "Aantal patiënten met eerste melding van COVID-19 klachten bij de huisarts",
@@ -770,7 +770,7 @@
     "graph_range_description": "Verloop over tijd",
     "titel_kpi": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater",
     "total_installation_count_titel": "Aantal RWZI-locaties",
-    "total_installation_count_description": "Aantal locaties dat wordt meegenomen in het berekenen van het gemiddelde.",
+    "total_installation_count_description": "Wekelijks aantal rioolwaterzuiveringsinstallaties die minimaal één keer een meting hebben gerapporteerd. Het weekgemiddelde wordt berekend door het gemiddelde te nemen van alle metingen op deze locaties. Per week kan dit aantal variëren omdat niet alle metingen altijd lukken.",
     "rwzi_abbrev": "RWZI = Rioolwaterzuiveringsinstallatie."
   },
   "gemeente_ziekenhuisopnames_per_dag": {
