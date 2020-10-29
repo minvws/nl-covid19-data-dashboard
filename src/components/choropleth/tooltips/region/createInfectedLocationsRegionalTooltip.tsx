@@ -1,6 +1,6 @@
 import { NextRouter } from 'next/router';
 import { ReactNode } from 'react';
-import { TooltipContent } from '~/components/chloropleth/tooltips/tooltipContent';
+import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
 import { RegionsNursingHome } from '~/types/data';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { createSelectRegionHandler } from '../../selectHandlers/createSelectRegionHandler';

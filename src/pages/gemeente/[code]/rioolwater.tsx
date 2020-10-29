@@ -1,6 +1,10 @@
 import { useMemo } from 'react';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
+import { KpiTile } from '~/components-styled/kpi-tile';
+import { KpiValue } from '~/components-styled/kpi-value';
+import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { BarChart } from '~/components/charts';
+import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRangeHack';
 import { FCWithLayout } from '~/components/layout';
 import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
 import { MunicipalSewerWaterLineChart } from '~/components/lineChart/municipalSewerWaterLineChart';
@@ -11,14 +15,12 @@ import {
   getMunicipalityPaths,
   IMunicipalityData,
 } from '~/static-props/municipality-data';
-import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import {
   getSewerWaterBarChartData,
   getSewerWaterBarScaleData,
   getSewerWaterLineChartData,
 } from '~/utils/sewer-water/municipality-sewer-water.util';
-import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRangeHack';
 
 const text = siteText.gemeente_rioolwater_metingen;
 
@@ -71,18 +73,25 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
         }}
       />
 
-      <article className="metric-article layout-two-column">
-        <div className="column-item column-item-extra-margin">
-          <h3>{text.barscale_titel}</h3>
-          <p className="text-blue kpi" data-cy="infected_daily_total">
-            {formatNumber(barScaleData?.value)}
-          </p>
-        </div>
+      <TwoKpiSection>
+        {barScaleData?.value !== undefined && (
+          <KpiTile title={text.barscale_titel} description={text.extra_uitleg}>
+            <KpiValue absolute={barScaleData.value} />
+          </KpiTile>
+        )}
 
-        <div className="column-item column-item-extra-margin">
-          <p>{text.extra_uitleg}</p>
-        </div>
-      </article>
+        <KpiTile
+          title={text.total_installation_count_titel}
+          description={
+            text.total_installation_count_description +
+            `<p style="color:#595959">${text.rwzi_abbrev}</p>`
+          }
+        >
+          <KpiValue
+            absolute={sewerAverages.last_value.total_installation_count}
+          />
+        </KpiTile>
+      </TwoKpiSection>
 
       <article className="metric-article">
         <h3>{text.linechart_titel}</h3>

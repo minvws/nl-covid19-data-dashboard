@@ -1,6 +1,6 @@
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
-import { Chloropleth, TProps } from '~/components/chloropleth/Chloropleth';
+import { Choropleth, TProps } from '~/components/choropleth/Choropleth';
 import { MunicipalityProperties } from '../shared';
 import { Feature, MultiPolygon } from 'geojson';
 import { countryGeo, municipalGeo } from '../topology';
@@ -72,7 +72,7 @@ describe('Component: Choropleth', () => {
     };
 
     // Act
-    const renderResult = render(<Chloropleth {...props} />);
+    const renderResult = render(<Choropleth {...props} />);
 
     let groups = null;
     try {
@@ -129,7 +129,7 @@ describe('Component: Choropleth', () => {
     };
 
     // Act
-    const renderResult = render(<Chloropleth {...props} />);
+    const renderResult = render(<Choropleth {...props} />);
     const gemeente = renderResult.getAllByTestId(
       `feature-${testMunicipalCode}`
     )[0];
@@ -182,7 +182,7 @@ describe('Component: Choropleth', () => {
     };
 
     // Act
-    const renderResult = render(<Chloropleth {...props} />);
+    const renderResult = render(<Choropleth {...props} />);
     const gemeente = renderResult.getAllByTestId(
       `feature-${testMunicipalCode}`
     )[0];
@@ -233,7 +233,7 @@ describe('Component: Choropleth', () => {
     };
 
     // Act
-    const renderResult = render(<Chloropleth {...props} />);
+    const renderResult = render(<Choropleth {...props} />);
     const gemeente = renderResult.getAllByTestId(
       `feature-${testMunicipalCode}`
     )[0];

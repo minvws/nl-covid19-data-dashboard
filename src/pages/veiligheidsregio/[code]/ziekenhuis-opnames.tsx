@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { LineChart } from '~/components/charts/index';
-import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
-import { useMunicipalLegendaData } from '~/components/chloropleth/legenda/hooks/useMunicipalLegendaData';
-import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
-import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
-import { createMunicipalHospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/municipal/createMunicipalHospitalAdmissionsTooltip';
+import { ChoroplethLegenda } from '~/components/choropleth/legenda/ChoroplethLegenda';
+import { useMunicipalLegendaData } from '~/components/choropleth/legenda/hooks/useMunicipalLegendaData';
+import { MunicipalityChoropleth } from '~/components/choropleth/MunicipalityChoropleth';
+import { createSelectMunicipalHandler } from '~/components/choropleth/selectHandlers/createSelectMunicipalHandler';
+import { createMunicipalHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/municipal/createMunicipalHospitalAdmissionsTooltip';
 import { DataWarning } from '~/components/dataWarning';
 import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/contentHeader';
@@ -91,11 +91,11 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
           />
         </article>
       )}
-      <article className="metric-article layout-chloropleth">
+      <article className="metric-article layout-choropleth">
         <div className="data-warning">
           <DataWarning />
         </div>
-        <div className="chloropleth-header">
+        <div className="choropleth-header">
           <h3>
             {replaceVariablesInText(text.map_titel, {
               safetyRegion: safetyRegionName,
@@ -104,8 +104,8 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
           <p>{text.map_toelichting}</p>
         </div>
 
-        <div className="chloropleth-chart">
-          <MunicipalityChloropleth
+        <div className="choropleth-chart">
+          <MunicipalityChoropleth
             selected={selectedMunicipalCode}
             highlightSelection={false}
             metricName="hospital_admissions"
@@ -117,9 +117,9 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
           />
         </div>
 
-        <div className="chloropleth-legend">
+        <div className="choropleth-legend">
           {legendItems && (
-            <ChloroplethLegenda
+            <ChoroplethLegenda
               items={legendItems}
               title={
                 siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel
