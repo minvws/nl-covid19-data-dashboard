@@ -3,7 +3,7 @@ import {
   DisclosureButton,
   DisclosurePanel,
 } from '@reach/disclosure';
-import { ReactNode, useState, useEffect, useCallback } from 'react';
+import { ReactNode, useState, useEffect, useCallback, useRef } from 'react';
 
 import { BoxProps, Box } from './base';
 import styled from 'styled-components';
@@ -76,19 +76,21 @@ interface CollapsableProps extends BoxProps {
 
 export const Collapsable = ({ summary, children, id }: CollapsableProps) => {
   const [open, setOpen] = useState(false);
-  const [panelHeight, setPanelHeight] = useState<number>(0);
+  const [panelHeight, setPanelHeight] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
 
   /* Needs to explicitly use undefined to use panelReference as dependancy for useCallback */
-  let panelReference: HTMLDivElement | undefined = undefined;
+  // let panelReference: HTMLDivElement | undefined = undefined;
+
+  const panelReference = useRef<HTMLDivElement>(null);
 
   /* Store the latest reference to the panel */
-  const setPanelReference = (element: HTMLDivElement) => {
-    if (!element) {
-      return;
-    }
-    panelReference = element;
-  };
+  // const setPanelReference = (element: HTMLDivElement) => {
+  //   if (!element) {
+  //     return;
+  //   }
+  //   panelReference = element;
+  // };
 
   function toggle() {
     if (isAnimating) {
@@ -104,7 +106,7 @@ export const Collapsable = ({ summary, children, id }: CollapsableProps) => {
    */
   const startAnimation = (opening: boolean) => {
     setIsAnimating(true);
-    const height = panelReference?.scrollHeight ?? 0;
+    const height = panelReference.current?.scrollHeight ?? 0;
     const from = opening ? 0 : height;
     const to = opening ? height : 0;
     animatePanelHeight(from, to);
@@ -138,11 +140,11 @@ export const Collapsable = ({ summary, children, id }: CollapsableProps) => {
    */
   const setLinkTabability = useCallback(
     (open) => {
-      if (!panelReference) {
+      if (!panelReference.current) {
         return;
       }
 
-      const links = panelReference.querySelectorAll('a');
+      const links = panelReference.current?.querySelectorAll('a');
       Array.from(links).forEach((link) => {
         link.setAttribute('tabindex', open ? '0' : '-1');
       });
@@ -160,15 +162,14 @@ export const Collapsable = ({ summary, children, id }: CollapsableProps) => {
     return () => {
       window.removeEventListener('hashchange', checkLocationHash, false);
     };
-    /* eslint-disable-next-line */
-  }, []); // should not use dependencies in array: use effect mimics mount / unmount
+  }, [checkLocationHash]);
 
   return (
     <Box as="section" borderTop={`1px solid ${colors.lightGray}`} id={id}>
       <Disclosure open={open} onChange={toggle}>
         <Summary>{summary}</Summary>
         <Panel
-          ref={setPanelReference}
+          ref={panelReference}
           onTransitionEnd={() => setIsAnimating(false)}
           style={{
             /* panel max height is only controlled when collapsed, or during animations */
