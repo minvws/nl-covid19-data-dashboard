@@ -414,7 +414,7 @@
     "titel_kpi": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater",
     "total_installation_count_titel": "Aantal meetlocaties",
     "total_installation_count_description": "Wekelijks aantal rioolwaterzuiveringsinstallaties die minimaal één keer een meting hebben gerapporteerd. Het weekgemiddelde wordt berekend door het gemiddelde te nemen van alle metingen op deze locaties. Per week kan dit aantal variëren omdat niet alle metingen altijd lukken.",
-    "rwzi_abbrev": "RWZI = Rioolwaterzuiveringsinstallatie."
+    "rwzi_abbrev": ""
   },
   "notfound_titel": {
     "text": "Er is iets misgegaan"
@@ -757,9 +757,9 @@
       "text": "RIVM",
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
     },
-    "graph_average_label_text": "Gemiddelde waarde aantal virusdeeltjes in 1 mL rioolwater.",
-    "graph_secondary_label_text": "Individuele RWZI waardes.",
-    "graph_average_label_text_rwzi": "Waarde van RWZI-locatie {{name}}",
+    "graph_average_label_text": "Weekgemiddelde veiligheidsregio",
+    "graph_secondary_label_text": "Individuele meetwaardes.",
+    "graph_average_label_text_rwzi": "Meetwaarde locatie {{name}}",
     "average": "Gemiddelde",
     "metadata": {
       "title": "Rioolwatermeting in {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
@@ -767,11 +767,11 @@
     },
     "graph_daily_label_text_rwzi": "Meetwaarden locatie ({{name}})",
     "graph_selected_rwzi_placeholder": "Selecteer locatie",
-    "graph_range_description": "Verloop over tijd",
+    "graph_range_description": "Virusdeeltjes per milliliter rioolwater over tijd",
     "titel_kpi": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater",
-    "total_installation_count_titel": "Aantal RWZI-locaties",
+    "total_installation_count_titel": "Aantal meetlocaties",
     "total_installation_count_description": "Wekelijks aantal rioolwaterzuiveringsinstallaties die minimaal één keer een meting hebben gerapporteerd. Het weekgemiddelde wordt berekend door het gemiddelde te nemen van alle metingen op deze locaties. Per week kan dit aantal variëren omdat niet alle metingen altijd lukken.",
-    "rwzi_abbrev": "RWZI = Rioolwaterzuiveringsinstallatie."
+    "rwzi_abbrev": ""
   },
   "gemeente_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Ziekenhuisopnames per dag",
@@ -846,18 +846,18 @@
       "text": "RIVM",
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
     },
-    "graph_average_label_text": "Gemiddelde waarde van gemeten locaties.",
+    "graph_average_label_text": "Weekgemiddelde gemeente",
     "graph_secondary_label_text": "Gemeten waarde per locatie.",
-    "graph_average_label_text_rwzi": "Waarde van RWZI-locatie {{name}}",
+    "graph_average_label_text_rwzi": "Meetwaarde locatie {{name}}",
     "average": "Gemiddelde",
     "metadata": {
       "title": "Rioolwatermeting in {{municipalityName}} | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van rioolwatermetingen en de hoeveelheid aangetroffen COVID-19 virusdeeltjes in de gemeente {{municipalityName}}."
     },
     "nodata_sidebar": "Deze informatie is niet beschikbaar voor deze gemeente.",
-    "total_installation_count_titel": "Aantal RWZI-locaties",
-    "total_installation_count_description": "Aantal locaties dat wordt meegenomen in het berekenen van het gemiddelde.",
-    "rwzi_abbrev": "RWZI = Rioolwaterzuiveringsinstallatie."
+    "total_installation_count_titel": "Aantal meetlocaties",
+    "total_installation_count_description": "Wekelijks aantal rioolwaterzuiveringsinstallaties die minimaal één keer een meting hebben gerapporteerd. Het weekgemiddelde wordt berekend door het gemiddelde te nemen van alle metingen op deze locaties. Per week kan dit aantal variëren omdat niet alle metingen altijd lukken.",
+    "rwzi_abbrev": ""
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Risiconiveaus",

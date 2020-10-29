@@ -395,7 +395,7 @@
     "text": "Select your region at the top of this page"
   },
   "rioolwater_metingen": {
-    "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
+    "datums": "Value of {{weekStart}} till {{weekEnd}}.  Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
       "text": "RIVM",
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
@@ -413,7 +413,7 @@
     "titel_sidebar": "Sewage water examination",
     "titel_kpi": "Average number of virus particles per milliliter of sewage water",
     "total_installation_count_titel": "Number of measurement locations",
-    "total_installation_count_description": "Weekly number of wastewater treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful.",
+    "total_installation_count_description": "Weekly number of sewage water treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful.",
     "rwzi_abbrev": ""
   },
   "notfound_titel": {
@@ -759,7 +759,7 @@
     },
     "graph_average_label_text": "Weekly average for safety region",
     "graph_secondary_label_text": "Individual measurements",
-    "graph_average_label_text_rwzi": "Value of sewage water collection service at {{name}}",
+    "graph_average_label_text_rwzi": "Measurements for {{name}}",
     "average": "Average",
     "metadata": {
       "title": "Sewage water examination in {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
@@ -767,10 +767,10 @@
     },
     "graph_daily_label_text_rwzi": "Measurements for ({{name}})",
     "graph_selected_rwzi_placeholder": "Select location",
-    "graph_range_description": "Progression over time",
+    "graph_range_description": "Viral particles per millilitre of waste water over time",
     "titel_kpi": "Average number of virus particles per milliliter of sewage water",
     "total_installation_count_titel": "Number of measurement locations",
-    "total_installation_count_description": "Weekly number of wastewater treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful.",
+    "total_installation_count_description": "Weekly number of sewage water treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful.",
     "rwzi_abbrev": ""
   },
   "gemeente_ziekenhuisopnames_per_dag": {
@@ -848,15 +848,15 @@
     },
     "graph_average_label_text": "Weekly average of measured locations",
     "graph_secondary_label_text": "Individual measurements",
-    "graph_average_label_text_rwzi": "Value of sewage water collection service at {{name}}",
+    "graph_average_label_text_rwzi": "Measurements for {{name}}",
     "average": "Average",
     "metadata": {
       "title": "Sewage water examination in {{municipalityName}} | Dashboard Coronavirus | Government.nl",
       "description": "Overview of sewage water examination and the number of measured COVID-19 virus particles in municipality {{municipalityName}}."
     },
     "nodata_sidebar": "",
-    "total_installation_count_titel": "",
-    "total_installation_count_description": "",
+    "total_installation_count_titel": "Number of measurement locations",
+    "total_installation_count_description": "Weekly number of sewage water treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful.",
     "rwzi_abbrev": ""
   },
   "veiligheidsregio_index": {
