@@ -5,7 +5,7 @@ import {
 import { Box } from './base';
 import {
   ChartRegionControls,
-  RegionControlOptions,
+  RegionControlOption,
 } from './chart-region-controls';
 import { Tile } from './layout';
 import { Heading, Text } from './typography';
@@ -23,7 +23,7 @@ interface DataProps {
 interface ChoroplethTileProps extends DataProps {
   title: string;
   description?: string;
-  onChangeControls?: (v: RegionControlOptions) => void;
+  onChangeControls?: (v: RegionControlOption) => void;
   children: React.ReactNode;
   legend?: {
     title: string;

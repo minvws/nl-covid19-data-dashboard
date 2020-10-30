@@ -137,11 +137,11 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
          * the switching of charts, and the state involved, are all handled by
          * the component. The page does not have to be bothered with this.
          *
-         * Ideally the ChoroplethTile would just receive some props with the data
-         * it needs to render either "A Choropleth" without it caring about
+         * Ideally the ChoroplethTile would receive some props with the data
+         * it needs to render either Choropleth without it caring about
          * MunicipalityChloropleth or SafetyRegionChloropleth, that data would
-         * make the chart and define the tooltip layout for each. But maybe for
-         * now that is a bridge to far. Let's take it one step at a time.
+         * make the chart and define the tooltip layout for each, but maybe for
+         * now that is a bridge too far. Let's take it one step at a time.
          */}
         {selectedMap === 'municipal' && (
           <MunicipalityChloropleth
