@@ -2,31 +2,70 @@ name: Lokalize PR check
 on:
   pull_request:
     branches:
-      - 'lokalize-*'
+      - master
+      - develop
+    paths:
+      - 'src/locale/*.json'
 jobs:
-  autoapprove:
+  autocheckandapprove:
     runs-on: ubuntu-latest
     steps:
-      - id: file_changes
-        uses: trilom/file-changes-action@v1.2.3
-      - name: test
-        run: cat $HOME/files.json
+      - name: Remove label
+        # More handy functions: https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#startswith
+        if: github.actor == 'VWSCoronaDashboard' && startsWith(github.head_ref, 'lokalise-') == true
+        uses: buildsville/add-remove-label@v1
         with:
-          script: |
-            if steps.file_changes.outputs.files.length !== 2 {
-              throw new Error("More than 2 files were changed in this lokalize PR");
-            }
-            throw new Error("I really wanna fail");
+          token: ${{ github.token }}
+          label: lokalise
+          type: remove
+
+      - name: Checkout repo
+        uses: actions/checkout@v2
+        if: github.actor == 'VWSCoronaDashboard' && startsWith(github.head_ref, 'lokalise-') == true
+
+      - name: yarn install
+        if: github.actor == 'VWSCoronaDashboard' && startsWith(github.head_ref, 'lokalise-') == true
+        uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: install
+
+      - name: EN locale validation
+        if: github.actor == 'VWSCoronaDashboard' && startsWith(github.head_ref, 'lokalise-') == true
+        uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: validate-single locale en.json
+
+      - name: NL locale validation
+        if: github.actor == 'VWSCoronaDashboard' && startsWith(github.head_ref, 'lokalise-') == true
+        uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: validate-single locale nl.json
+
+      - name: Add label
+        uses: buildsville/add-remove-label@v1
+        if: github.actor == 'VWSCoronaDashboard' && startsWith(github.head_ref, 'lokalise-') == true
+        with:
+          token: ${{ github.token }}
+          label: lokalise
+          type: add
+
+      - name: Auto approve
+        uses: hmarr/auto-approve-action@v2.0.0
+        if: github.actor == 'VWSCoronaDashboard' && startsWith(github.head_ref, 'lokalise-') == true
+        with:
+          github-token: ${{ github.token }}
   automerge:
     name: Auto merge after successful checks
     # By default, jobs run in parallel. To run the jobs sequentially, they keywords "needs" is needed.
-    # Auto merge action can be done only when the PR is approved, hence this automerge needs autoapprove as a prerequisite
-    needs: autoapprove
+    # Auto merge action can be done only when the PR is approved, hence this automerge needs autocheckandapprove as a prerequisite
+    needs: autocheckandapprove
     runs-on: ubuntu-latest
     steps:
       - name: Auto merge
-        # Custom action for auto merging already available on marketplace
         uses: pascalgn/automerge-action@v0.12.0
+        if: github.actor == 'VWSCoronaDashboard' && startsWith(github.head_ref, 'lokalise-') == true
         env:
           GITHUB_TOKEN: ${{ github.token }}
+          MERGE_LABELS: lokalise
           MERGE_METHOD: squash
+          MERGE_DELETE_BRANCH: true
