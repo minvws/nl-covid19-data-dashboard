@@ -68,7 +68,7 @@ export interface ResultsPerSewerInstallationPerMunicipalityLastValue {
   rwzi_awzi_code: string;
   rwzi_awzi_name: string;
   gmcode: string;
-  rna_per_ml: number;
+  rna_normalized: number;
   date_of_insertion_unix: number;
 }
 
@@ -287,7 +287,7 @@ export interface RioolwaterMetingenPerRwziLastValue {
   gm_code: string;
   vrcode: string;
   vrnaam: string;
-  rna_per_ml: number;
+  rna_normalized: number;
   date_of_insertion_unix: number;
 }
 export interface HospitalBedsOccupied {
@@ -398,12 +398,12 @@ export interface MinMaxValuesItem {
   min_total_new_reported_locations: number;
   max_average: number;
   min_average: number;
-  max_latest_rna_per_ml: number;
-  min_latest_rna_per_ml: number;
+  max_latest_rna_normalized: number;
+  min_latest_rna_normalized: number;
   max_average_per_region: number;
   min_average_per_region: number;
-  max_rna_per_ml: number;
-  min_rna_per_ml: number;
+  max_rna_normalized: number;
+  min_rna_normalized: number;
 }
 
 export interface Regionaal {
@@ -435,7 +435,7 @@ export interface SewerValue {
   vrcode: string;
   vrnaam: string;
   gmcode: string;
-  rna_per_ml: number;
+  rna_normalized: number;
   date_of_insertion_unix: number;
 }
 export interface AverageSewerInstallationPerRegion {

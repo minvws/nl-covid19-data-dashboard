@@ -89,7 +89,7 @@ export function getSewerWaterBarScaleData(
         .last_value;
 
     return {
-      value: barScaleData?.rna_per_ml,
+      value: barScaleData?.rna_normalized,
       unix: barScaleData?.date_measurement_unix,
       dateInsertedUnix: barScaleData?.date_of_insertion_unix,
     };
@@ -130,7 +130,7 @@ export function getSewerWaterLineChartData(
         (value: ResultsPerSewerInstallationPerMunicipalityLastValue) => {
           return {
             ...value,
-            value: value.rna_per_ml,
+            value: value.rna_normalized,
             date: value.date_measurement_unix,
           };
         }
@@ -183,7 +183,7 @@ export function getSewerWaterBarChartData(
         a: ResultsPerSewerInstallationPerMunicipalityItem,
         b: ResultsPerSewerInstallationPerMunicipalityItem
       ) => {
-        return b?.last_value?.rna_per_ml - a?.last_value?.rna_per_ml;
+        return b?.last_value?.rna_normalized - a?.last_value?.rna_normalized;
       }
     ) || [];
 
@@ -213,13 +213,13 @@ export function getSewerWaterBarChartData(
           installation: ResultsPerSewerInstallationPerMunicipalityItem
         ): XrangePointOptionsObject =>
           ({
-            y: installation?.last_value?.rna_per_ml,
+            y: installation?.last_value?.rna_normalized,
             color: '#C1C1C1',
             label: installation?.last_value
               ? `${formatDateFromSeconds(
                   installation.last_value.date_measurement_unix,
                   'short'
-                )}: ${formatNumber(installation.last_value.rna_per_ml)}`
+                )}: ${formatNumber(installation.last_value.rna_normalized)}`
               : false,
           } as XrangePointOptionsObject)
       ),

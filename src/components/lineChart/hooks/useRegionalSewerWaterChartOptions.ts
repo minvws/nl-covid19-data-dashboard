@@ -93,7 +93,7 @@ export function useRegionalSewerWaterChartOptions(
       enableMouseTracking: selectedRWZI === undefined,
       data: filteredScatterPlotValues?.map((value) => ({
         x: value.date_measurement_unix,
-        y: value.rna_per_ml,
+        y: value.rna_normalized,
         installationName: value.rwzi_awzi_name,
       })),
       marker: {
@@ -164,7 +164,7 @@ export function useRegionalSewerWaterChartOptions(
           type: 'line',
           data: scatterValues.map((scatterValue) => ({
             x: scatterValue.date_measurement_unix,
-            y: scatterValue.rna_per_ml,
+            y: scatterValue.rna_normalized,
             rwzi: true,
           })),
           name: selectedRWZI,
