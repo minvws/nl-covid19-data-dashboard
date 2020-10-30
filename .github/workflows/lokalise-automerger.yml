@@ -13,6 +13,10 @@ jobs:
     name: Validate, label and approve
     runs-on: ubuntu-latest
     steps:
+      - name: Update Node version
+        uses: actions/setup-node@v2-beta
+        with:
+          node-version: '14'
       - name: Remove label
         uses: buildsville/add-remove-label@v1
         with:
