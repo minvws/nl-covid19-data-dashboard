@@ -9,9 +9,7 @@
     "name",
     "code",
     "hospital_admissions",
-    "positive_tested_people",
-    "sewer",
-    "sewer_per_installation"
+    "positive_tested_people"
   ],
   "properties": {
     "last_generated": {
