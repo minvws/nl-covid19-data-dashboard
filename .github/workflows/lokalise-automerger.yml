@@ -1,4 +1,4 @@
-name: Lokalize PR check
+name: Lokalise PR validation, auto approve and merge
 on:
   pull_request:
     branches:
