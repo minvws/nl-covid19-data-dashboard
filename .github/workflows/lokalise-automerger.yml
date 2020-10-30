@@ -8,11 +8,12 @@ on:
       - 'src/locale/*.json'
 jobs:
   autocheckandapprove:
+    # More handy functions: https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#startswith
+    if: github.actor == 'VWSCoronaDashboard' && startsWith(github.head_ref, 'lokalise-') == true
+    name: Validate, label and approve
     runs-on: ubuntu-latest
     steps:
       - name: Remove label
-        # More handy functions: https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#startswith
-        if: github.actor == 'VWSCoronaDashboard' && startsWith(github.head_ref, 'lokalise-') == true
         uses: buildsville/add-remove-label@v1
         with:
           token: ${{ github.token }}
@@ -21,29 +22,24 @@ jobs:
 
       - name: Checkout repo
         uses: actions/checkout@v2
-        if: github.actor == 'VWSCoronaDashboard' && startsWith(github.head_ref, 'lokalise-') == true
 
       - name: yarn install
-        if: github.actor == 'VWSCoronaDashboard' && startsWith(github.head_ref, 'lokalise-') == true
         uses: borales/actions-yarn@v2.0.0
         with:
           cmd: install
 
       - name: EN locale validation
-        if: github.actor == 'VWSCoronaDashboard' && startsWith(github.head_ref, 'lokalise-') == true
         uses: borales/actions-yarn@v2.0.0
         with:
           cmd: validate-single locale en.json
 
       - name: NL locale validation
-        if: github.actor == 'VWSCoronaDashboard' && startsWith(github.head_ref, 'lokalise-') == true
         uses: borales/actions-yarn@v2.0.0
         with:
           cmd: validate-single locale nl.json
 
       - name: Add label
         uses: buildsville/add-remove-label@v1
-        if: github.actor == 'VWSCoronaDashboard' && startsWith(github.head_ref, 'lokalise-') == true
         with:
           token: ${{ github.token }}
           label: lokalise
@@ -51,12 +47,12 @@ jobs:
 
       - name: Auto approve
         uses: hmarr/auto-approve-action@v2.0.0
-        if: github.actor == 'VWSCoronaDashboard' && startsWith(github.head_ref, 'lokalise-') == true
         with:
           github-token: ${{ github.token }}
 
   automerge:
     name: Auto merge after successful checks
+    if: github.actor == 'VWSCoronaDashboard' && startsWith(github.head_ref, 'lokalise-') == true
     # By default, jobs run in parallel. To run the jobs sequentially, the keyword "needs" is needed.
     # Auto merge action can be done only when the PR is approved, hence this automerge needs autocheckandapprove as a prerequisite
     needs: autocheckandapprove
@@ -64,7 +60,6 @@ jobs:
     steps:
       - name: Auto merge
         uses: pascalgn/automerge-action@v0.12.0
-        if: github.actor == 'VWSCoronaDashboard' && startsWith(github.head_ref, 'lokalise-') == true
         env:
           GITHUB_TOKEN: ${{ github.token }}
           MERGE_LABELS: lokalise
