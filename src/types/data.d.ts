@@ -14,7 +14,6 @@ export interface Municipal {
   positive_tested_people: PositiveTestedPeople;
   sewer?: MunicipalSewer;
   sewer_per_installation?: MunicipalSewerPerInstallation;
-  [k: string]: unknown;
 }
 export interface HospitalAdmissions {
   values: HospitalAdmissionsLastValue[];
@@ -80,7 +79,6 @@ export interface Municipalities {
   hospital_admissions: HospitalAdmissions[];
   positive_tested_people: PositiveTestedPeople[];
   deceased: Deceased[];
-  [k: string]: unknown;
 }
 export interface HospitalAdmissions {
   date_of_report_unix: number;
@@ -125,7 +123,6 @@ export interface National {
   intensive_care_beds_occupied: IntensiveCareBedsOccupied;
   ggd: NationalGgd;
   nursing_home: NationalNursingHome;
-  [k: string]: unknown;
 }
 export interface NationalHuisartsVerdenkingen {
   values: NationalHuisartsVerdenkingenValue[];
@@ -418,7 +415,6 @@ export interface Regionaal {
   results_per_region: ResultsPerRegion;
   ggd: RegionalGgd;
   nursing_home: RegionalNursingHome;
-  [k: string]: unknown;
 }
 export interface RegionalSewer {
   values: RegionalSewerValue[];
@@ -509,7 +505,6 @@ export interface Regions {
   escalation_levels: EscalationLevels[];
   nursing_home: RegionsNursingHome[];
   sewer: RegionsSewer[];
-  [k: string]: unknown;
 }
 export interface RegionHospitalAdmissions {
   date_of_report_unix: number;

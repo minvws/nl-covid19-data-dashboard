@@ -24,7 +24,7 @@
     "ggd",
     "nursing_home"
   ],
-  "additionalProperties": true,
+  "additionalProperties": false,
   "properties": {
     "last_generated": {
       "type": "string"
