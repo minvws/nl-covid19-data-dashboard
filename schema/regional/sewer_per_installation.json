@@ -11,11 +11,11 @@
         "values": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/valueDef"
+            "$ref": "#/definitions/value"
           }
         },
         "last_value": {
-          "$ref": "#/definitions/valueDef"
+          "$ref": "#/definitions/value"
         }
       }
     },
