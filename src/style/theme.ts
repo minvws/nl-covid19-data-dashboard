@@ -84,6 +84,7 @@ const colors = {
   icon: '#01689b',
   button: '#01689b',
   shadow: '#e5e5e5',
+  lightGray: '#dfdfdf',
 };
 
 const radii = [0, 5, 10];
