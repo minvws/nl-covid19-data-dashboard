@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "restrictions",
+  "additionalProperties": false,
+  "required": ["last_generated", "proto_name", "name", "code", "values"],
+  "properties": {
+    "last_generated": {
+      "type": "string"
+    },
+    "proto_name": {
+      "type": "string",
+      "const": "RESTRICTIONS"
+    },
+    "name": {
+      "type": "string",
+      "const": { "$data": "1/proto_name" }
+    },
+    "code": {
+      "type": "string",
+      "const": { "$data": "1/proto_name" }
+    },
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/value"
+      }
+    }
+  },
+  "definitions": {
+    "value": {
+      "title": "restrictions_value",
+      "additionalProperties": false,
+      "required": [
+        "restriction_id",
+        "target_region",
+        "escalation_level",
+        "category_id",
+        "restriction_order"
+      ],
+      "properties": {
+        "restriction_id": {
+          "type": "string",
+          "validRestrictionId": true
+        },
+        "target_region": {
+          "type": "string",
+          "enum": ["nl", "vr"]
+        },
+        "escalation_level": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "category_id": {
+          "type": "string",
+          "enum": [
+            "er_op_uit",
+            "bezoek",
+            "samenkomst",
+            "huwelijk",
+            "verpleeghuis",
+            "horeca",
+            "sport",
+            "reizen_binnenland",
+            "ov",
+            "uitvaart",
+            "onderwijs",
+            "werk",
+            "winkels",
+            "alcohol"
+          ]
+        },
+        "restriction_order": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}

@@ -6,14 +6,14 @@ import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { ChartRegionControls } from '~/components-styled/chart-region-controls';
-import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
-import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
-import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
-import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
-import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
-import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
-import { createMunicipalHospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/municipal/createMunicipalHospitalAdmissionsTooltip';
-import { createRegionHospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/region/createRegionHospitalAdmissionsTooltip';
+import { ChoroplethLegenda } from '~/components/choropleth/legenda/ChoroplethLegenda';
+import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/useSafetyRegionLegendaData';
+import { MunicipalityChoropleth } from '~/components/choropleth/MunicipalityChoropleth';
+import { SafetyRegionChoropleth } from '~/components/choropleth/SafetyRegionChoropleth';
+import { createSelectMunicipalHandler } from '~/components/choropleth/selectHandlers/createSelectMunicipalHandler';
+import { createSelectRegionHandler } from '~/components/choropleth/selectHandlers/createSelectRegionHandler';
+import { createMunicipalHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/municipal/createMunicipalHospitalAdmissionsTooltip';
+import { createRegionHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/region/createRegionHospitalAdmissionsTooltip';
 import { ContentHeader_sourcesHack } from '~/components/contentHeader_sourcesHack';
 import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-barscale';
 import { FCWithLayout } from '~/components/layout';
@@ -96,24 +96,24 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
         sourcedFrom={text.bronnen.lnaz}
       />
 
-      <article className="metric-article layout-chloropleth">
+      <article className="metric-article layout-choropleth">
         <div className="data-warning">
           <DataWarning />
         </div>
-        <div className="chloropleth-header">
+        <div className="choropleth-header">
           <h3>{text.map_titel}</h3>
           <p>{text.map_toelichting}</p>
 
-          <div className="chloropleth-controls">
+          <div className="choropleth-controls">
             <ChartRegionControls
               onChange={(val: 'region' | 'municipal') => setSelectedMap(val)}
             />
           </div>
         </div>
 
-        <div className="chloropleth-chart">
+        <div className="choropleth-chart">
           {selectedMap === 'municipal' && (
-            <MunicipalityChloropleth
+            <MunicipalityChoropleth
               metricName="hospital_admissions"
               tooltipContent={createMunicipalHospitalAdmissionsTooltip(router)}
               onSelect={createSelectMunicipalHandler(
@@ -123,7 +123,7 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
             />
           )}
           {selectedMap === 'region' && (
-            <SafetyRegionChloropleth
+            <SafetyRegionChoropleth
               metricName="hospital_admissions"
               tooltipContent={createRegionHospitalAdmissionsTooltip(router)}
               onSelect={createSelectRegionHandler(router, 'ziekenhuis-opnames')}
@@ -131,15 +131,15 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
           )}
         </div>
 
-        <div className="chloropleth-legend">
+        <div className="choropleth-legend">
           {legendItems && (
-            <ChloroplethLegenda
+            <ChoroplethLegenda
               items={legendItems}
               title={text.chloropleth_legenda.titel}
             />
           )}
         </div>
-        <footer className="chloropleth-footer">
+        <footer className="choropleth-footer">
           {siteText.common.metadata.source}:{' '}
           <a
             href={text.bronnen.rivmSource.href}

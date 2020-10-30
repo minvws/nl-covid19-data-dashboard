@@ -25,7 +25,6 @@ import { getLayout as getSiteLayout } from '~/components/layout';
 import { TitleWithIcon } from '~/components/titleWithIcon';
 import siteText from '~/locale/index';
 import { INationalData } from '~/static-props/nl-data';
-import { WithChildren } from '~/types/index';
 import { useMenuState } from './useMenuState';
 import { PositiveTestedPeopleMetric } from '~/components/landelijk/positive-tested-people-metric';
 import { ReproductionIndexMetric } from '~/components/landelijk/reproduction-index-metric';
@@ -44,6 +43,10 @@ export function getNationalLayout() {
   };
 }
 
+interface NationalLayoutProps extends INationalData {
+  children: React.ReactNode;
+}
+
 /*
  * NationalLayout is a composition of persistent layouts.
  *
@@ -60,7 +63,7 @@ export function getNationalLayout() {
  * More info on persistent layouts:
  * https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
-function NationalLayout(props: WithChildren<INationalData>) {
+function NationalLayout(props: NationalLayoutProps) {
   const { children, data } = props;
   const router = useRouter();
   const isMainRoute = router.route === '/';

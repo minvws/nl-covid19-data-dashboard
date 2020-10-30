@@ -44,6 +44,9 @@
     },
     "nursing_home": {
       "$ref": "nursing_home.json"
+    },
+    "restrictions": {
+      "$ref": "restrictions.json"
     }
   }
 }

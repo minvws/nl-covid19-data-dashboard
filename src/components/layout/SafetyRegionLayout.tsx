@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 
 import siteText from '~/locale/index';
 import safetyRegions from '~/data/index';
-import { WithChildren } from '~/types/index';
 import { ISafetyRegionData } from '~/static-props/safetyregion-data';
 
 import { useMediaQuery } from '~/utils/useMediaQuery';
@@ -44,6 +43,10 @@ export function getSafetyRegionLayout() {
   };
 }
 
+interface SafetyRegionLayoutProps extends ISafetyRegionData {
+  children: React.ReactNode;
+}
+
 type TSafetyRegion = {
   name: string;
   displayName?: string;
@@ -68,7 +71,7 @@ type TSafetyRegion = {
  * More info on persistent layouts:
  * https:adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
-function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
+function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
   const { children, data } = props;
 
   const router = useRouter();
