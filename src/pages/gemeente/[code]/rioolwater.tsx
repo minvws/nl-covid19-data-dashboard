@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import { BarChart } from '~/components/charts';
+import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRangeHack';
 import { FCWithLayout } from '~/components/layout';
 import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
 import { MunicipalSewerWaterLineChart } from '~/components/lineChart/municipalSewerWaterLineChart';
@@ -18,7 +19,6 @@ import {
   getSewerWaterBarScaleData,
   getSewerWaterLineChartData,
 } from '~/utils/sewer-water/municipality-sewer-water.util';
-import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRangeHack';
 
 const text = siteText.gemeente_rioolwater_metingen;
 
@@ -33,7 +33,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
     };
   }, [data]);
 
-  const sewerAverages = data.sewer_measurements;
+  const sewerAverages = data.sewer;
 
   if (!sewerAverages) {
     /**

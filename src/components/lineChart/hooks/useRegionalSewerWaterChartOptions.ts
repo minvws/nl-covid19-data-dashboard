@@ -1,7 +1,7 @@
 import { SeriesLineOptions, SeriesScatterOptions } from 'highcharts';
 import { useMemo } from 'react';
 import { TimeframeOption, getFilteredValues } from '~/utils/timeframe';
-import { SewerValue } from '~/types/data';
+import { RegionalSewerPerInstallationValue } from '~/types/data';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { getItemFromArray } from '~/utils/getItemFromArray';
@@ -44,7 +44,7 @@ function createRemainingDaysData(value: Value, maxDate: number) {
 
 export function useRegionalSewerWaterChartOptions(
   averageValues: Value[],
-  scatterPlotValues: SewerValue[],
+  scatterPlotValues: RegionalSewerPerInstallationValue[],
   text: TranslationStrings,
   timeframe: TimeframeOption,
   selectedRWZI?: string

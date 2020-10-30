@@ -13,7 +13,7 @@ import getNlData, { INationalData } from '~/static-props/nl-data';
 const text = siteText.rioolwater_metingen;
 
 const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
-  const sewerAverages = data.rioolwater_metingen;
+  const sewerAverages = data.sewer;
 
   return (
     <>
