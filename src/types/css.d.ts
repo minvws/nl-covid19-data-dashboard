@@ -1,5 +1,4 @@
 import { CssFunctionReturnType } from '@styled-system/css';
-import {} from 'react';
 
 declare module 'react' {
   interface HTMLAttributes<T> extends DOMAttributes<T> {
