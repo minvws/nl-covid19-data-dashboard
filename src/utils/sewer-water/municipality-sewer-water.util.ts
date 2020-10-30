@@ -90,7 +90,7 @@ export function getSewerWaterBarScaleData(
     };
   } else {
     assert(data.sewer, 'Missing sewer data');
-    const barScaleData = data.sewer?.last_value;
+    const barScaleData = data.sewer.last_value;
 
     return {
       value: barScaleData.average,
