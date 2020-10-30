@@ -55,12 +55,12 @@
         "min_total_new_reported_locations",
         "max_average",
         "min_average",
-        "max_latest_rna_per_ml",
-        "min_latest_rna_per_ml",
+        "max_latest_rna_normalized",
+        "min_latest_rna_normalized",
         "max_average_per_region",
         "min_average_per_region",
-        "max_rna_per_ml",
-        "min_rna_per_ml"
+        "max_rna_normalized",
+        "min_rna_normalized"
       ],
       "properties": {
         "date_of_report_unix": { "type": "number" },
@@ -114,12 +114,12 @@
         "min_total_new_reported_locations": { "type": "number" },
         "max_average": { "type": "number" },
         "min_average": { "type": "number" },
-        "max_latest_rna_per_ml": { "type": "number" },
-        "min_latest_rna_per_ml": { "type": "number" },
+        "max_latest_rna_normalized": { "type": "number" },
+        "min_latest_rna_normalized": { "type": "number" },
         "max_average_per_region": { "type": "number" },
         "min_average_per_region": { "type": "number" },
-        "max_rna_per_ml": { "type": "number" },
-        "min_rna_per_ml": { "type": "number" }
+        "max_rna_normalized": { "type": "number" },
+        "min_rna_normalized": { "type": "number" }
       }
     }
   },
