@@ -2,10 +2,12 @@ import styled from 'styled-components';
 import { color } from 'styled-system';
 import { isDefined } from 'ts-is-present';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
+import { ValueAnnotation } from '~/components-styled/value-annotation';
 
 interface KpiValueProps {
   absolute: number;
   percentage?: number;
+  valueAnnotation?: string;
 }
 
 /**
@@ -30,18 +32,24 @@ const StyledValue = styled.div(
 /**
  * Display a blue KPI value with optionally a percentage behind it.
  */
-export function KpiValue({ absolute, percentage, ...props }: KpiValueProps) {
-  if (isDefined(percentage)) {
-    return (
-      <StyledValue color="blue" {...(props as any)}>
-        {`${formatNumber(absolute)} (${formatPercentage(percentage)}%)`}
-      </StyledValue>
-    );
-  } else {
-    return (
-      <StyledValue color="blue" {...(props as any)}>
-        {formatNumber(absolute)}
-      </StyledValue>
-    );
-  }
+export function KpiValue({
+  absolute,
+  percentage,
+  valueAnnotation,
+  ...props
+}: KpiValueProps) {
+  return (
+    <>
+      {isDefined(percentage) ? (
+        <StyledValue color="blue" {...(props as any)}>
+          {`${formatNumber(absolute)} (${formatPercentage(percentage)}%)`}
+        </StyledValue>
+      ) : (
+        <StyledValue color="blue" {...(props as any)}>
+          {formatNumber(absolute)}
+        </StyledValue>
+      )}
+      {valueAnnotation && <ValueAnnotation>{valueAnnotation}</ValueAnnotation>}
+    </>
+  );
 }

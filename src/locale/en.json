@@ -1,4 +1,7 @@
 {
+  "waarde_annotaties": {
+    "riool_normalized": "x100 billion"
+  },
   "andere_gegevens": "Other data",
   "blok_andere_gegevens": {
     "title": "Other data",

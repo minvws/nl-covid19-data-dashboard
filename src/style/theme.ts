@@ -85,6 +85,7 @@ const colors = {
   button: '#01689b',
   shadow: '#e5e5e5',
   lightGray: '#dfdfdf',
+  annotation: '#595959',
 };
 
 const radii = [0, 5, 10];
