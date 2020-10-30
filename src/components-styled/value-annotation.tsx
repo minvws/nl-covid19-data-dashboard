@@ -8,5 +8,6 @@ import css from '@styled-system/css';
 export const ValueAnnotation = styled(Text).attrs({ as: 'div' })(
   css({
     color: 'annotation',
+    fontSize: 1,
   })
 );

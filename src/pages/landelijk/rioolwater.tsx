@@ -74,6 +74,7 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
             'short'
           )}:</strong> ${formatNumber(x.value)}`;
         }}
+        valueAnnotation={siteText.waarde_annotaties.riool_normalized}
       />
     </>
   );
