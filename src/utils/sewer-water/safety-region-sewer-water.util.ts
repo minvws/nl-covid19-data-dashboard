@@ -1,16 +1,16 @@
 import { XrangePointOptionsObject } from 'highcharts';
-import {
-  Regionaal,
-  SewerValue,
-  AverageSewerInstallationPerRegionItem,
-  SewerValueElement,
-} from '~/types/data.d';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import siteText from '~/locale/index';
+import { Regionaal, RegionalSewerPerInstallationValue } from '~/types/data.d';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
-import siteText from '~/locale/index';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text = siteText.veiligheidsregio_rioolwater_metingen;
+
+/**
+ * @TODO these helpers for VR and GM should be merged into one using generics.
+ * All of this code seems duplicate now that the type names are unified.
+ */
 
 // Specific interfaces to pass data between the formatting functions and the highcharts configs
 export interface SewerWaterMetadata {
@@ -41,22 +41,13 @@ export interface SewerWaterBarChartData {
   data: XrangePointOptionsObject[];
 }
 
-function getSewerWaterMetadata(
-  data: Regionaal | undefined
-): SewerWaterMetadata {
-  const averagesAvailable = !!data?.average_sewer_installation_per_region
-    ?.last_value;
+function getSewerWaterMetadata(data: Regionaal): SewerWaterMetadata {
+  const installationCount = data.sewer_per_installation.values.length;
 
-  const installationsAmount =
-    data?.results_per_sewer_installation_per_region?.values?.length;
-
-  const oneInstallation = installationsAmount === 1;
+  const oneInstallation = installationCount === 1;
 
   // Data is available in case there is 1 or more installation
-  // If there are more than 1, averages also need to be available
-  const dataAvailable =
-    !!installationsAmount &&
-    (installationsAmount > 1 ? averagesAvailable : true);
+  const dataAvailable = installationCount > 0;
 
   return {
     dataAvailable,
@@ -65,79 +56,75 @@ function getSewerWaterMetadata(
 }
 
 export function getSewerWaterBarScaleData(
-  data: Regionaal | undefined
-): SewerWaterBarScaleData | null {
+  data: Regionaal
+): SewerWaterBarScaleData | undefined {
   const { dataAvailable, oneInstallation } = getSewerWaterMetadata(data);
 
   if (!dataAvailable) {
-    return null;
+    return;
   }
 
   if (oneInstallation) {
-    const barScaleData =
-      data?.results_per_sewer_installation_per_region?.values[0].last_value;
+    const barScaleData = data.sewer_per_installation.values[0].last_value;
 
     return {
-      value: barScaleData?.rna_normalized,
-      unix: barScaleData?.date_measurement_unix,
-      dateInsertedUnix: barScaleData?.date_of_insertion_unix,
+      value: barScaleData.rna_normalized,
+      unix: barScaleData.date_measurement_unix,
+      dateInsertedUnix: barScaleData.date_of_insertion_unix,
     };
   } else {
-    const barScaleData =
-      data?.average_sewer_installation_per_region?.last_value;
+    const barScaleData = data.sewer.values[0];
 
     return {
-      value: barScaleData?.average,
-      unix: barScaleData?.week_unix,
-      dateInsertedUnix: barScaleData?.date_of_insertion_unix,
+      value: barScaleData.average,
+      unix: barScaleData.week_unix,
+      dateInsertedUnix: barScaleData.date_of_insertion_unix,
     };
   }
 }
 
-export function getInstallationNames(data?: Regionaal): string[] {
+export function getInstallationNames(data: Regionaal): string[] {
   const { dataAvailable, oneInstallation } = getSewerWaterMetadata(data);
 
   if (!data || !dataAvailable || oneInstallation) {
     return [];
   }
 
-  return data.results_per_sewer_installation_per_region.values
+  return data.sewer_per_installation.values
     .flatMap((value) => value.values)
     .map((value) => value.rwzi_awzi_name)
     .filter((value, index, arr) => arr.indexOf(value) === index);
 }
 
 export function getSewerWaterScatterPlotData(
-  data?: Regionaal
-): SewerValue[] | null {
+  data: Regionaal
+): RegionalSewerPerInstallationValue[] | undefined {
   const { dataAvailable, oneInstallation } = getSewerWaterMetadata(data);
 
   if (!data || !dataAvailable || oneInstallation) {
-    return null;
+    return;
   }
 
-  return data.results_per_sewer_installation_per_region.values.flatMap(
-    (value) => value.values
-  );
+  return data.sewer_per_installation.values.flatMap((value) => value.values);
 }
 
 export function getSewerWaterLineChartData(
-  data: Regionaal | undefined
-): SewerWaterLineChartData | null {
+  data: Regionaal
+): SewerWaterLineChartData | undefined {
   const { dataAvailable, oneInstallation } = getSewerWaterMetadata(data);
 
   if (!dataAvailable) {
-    return null;
+    return;
   }
 
   if (oneInstallation) {
     // One RWZI installation:
     // Average line === the installations data
     // No grey lines
-    const averageValues =
-      data?.results_per_sewer_installation_per_region?.values[0].values || [];
+    const averageValues = data.sewer_per_installation.values[0].values;
+
     return {
-      averageValues: averageValues.map((value: SewerValue) => {
+      averageValues: averageValues.map((value) => {
         return {
           ...value,
           value: value.rna_normalized,
@@ -147,9 +134,7 @@ export function getSewerWaterLineChartData(
       averageLabelText: replaceVariablesInText(
         text.graph_average_label_text_rwzi,
         {
-          name:
-            data?.results_per_sewer_installation_per_region?.values[0]
-              .last_value.rwzi_awzi_name,
+          name: data.sewer_per_installation.values[0].last_value.rwzi_awzi_name,
         }
       ),
     };
@@ -158,67 +143,59 @@ export function getSewerWaterLineChartData(
   // More than one RWZI installation:
   // Average line === the averages from `sewer_measurements`
   // Grey lines are the RWZI locations
-  const averageValues =
-    data?.average_sewer_installation_per_region?.values || [];
+  const averageValues = data.sewer.values;
 
   return {
-    averageValues: averageValues.map(
-      (value: AverageSewerInstallationPerRegionItem) => {
-        return {
-          ...value,
-          value: value.average,
-          date: value.week_unix,
-        };
-      }
-    ),
+    averageValues: averageValues.map((value) => {
+      return {
+        ...value,
+        value: value.average,
+        date: value.week_unix,
+      };
+    }),
     averageLabelText: text.graph_average_label_text,
   };
 }
 
 export function getSewerWaterBarChartData(
-  data: Regionaal | undefined
-): SewerWaterBarChartData | null {
+  data: Regionaal
+): SewerWaterBarChartData | undefined {
   const { dataAvailable, oneInstallation } = getSewerWaterMetadata(data);
 
   if (!dataAvailable || oneInstallation) {
-    return null;
+    return;
   }
 
-  const installations =
-    data?.results_per_sewer_installation_per_region?.values?.sort(
-      (a: SewerValueElement, b: SewerValueElement) => {
-        return b?.last_value?.rna_normalized - a?.last_value?.rna_normalized;
-      }
-    ) || [];
+  const sortedInstallations = data.sewer_per_installation.values.sort(
+    (a, b) => {
+      return b.last_value.rna_normalized - a.last_value.rna_normalized;
+    }
+  );
 
   // Concat keys and data to glue the "average" as first bar and then
   // the RWZI-locations from highest to lowest
   return {
     keys: [
       text.average,
-      ...installations.map(
-        (i: SewerValueElement) => i?.last_value?.rwzi_awzi_name
-      ),
+      ...sortedInstallations.map((i) => i.last_value.rwzi_awzi_name),
     ],
     data: [
       {
-        y: data?.average_sewer_installation_per_region?.last_value.average,
+        y: data.sewer.last_value.average,
         color: '#3391CC',
-        label: data?.average_sewer_installation_per_region?.last_value
+        label: data.sewer.last_value
           ? `${formatDateFromSeconds(
-              data.average_sewer_installation_per_region.last_value.week_unix,
+              data.sewer.last_value.week_unix,
               'short'
-            )}: ${formatNumber(
-              data.average_sewer_installation_per_region.last_value.average
-            )}`
+            )}: ${formatNumber(data.sewer.last_value.average)}`
           : false,
       } as XrangePointOptionsObject,
-      ...installations.map(
-        (installation: SewerValueElement): XrangePointOptionsObject =>
+      ...sortedInstallations.map(
+        (installation) =>
           ({
-            y: installation?.last_value?.rna_normalized,
+            y: installation.last_value.rna_normalized,
             color: '#C1C1C1',
-            label: installation?.last_value
+            label: installation.last_value
               ? `${formatDateFromSeconds(
                   installation.last_value.date_measurement_unix,
                   'short'

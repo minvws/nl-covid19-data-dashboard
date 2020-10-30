@@ -1934,7 +1934,7 @@ const data = {
       date_of_insertion_unix: 1598392779,
     },
   },
-  results_per_sewer_installation_per_region: {
+  sewer_per_installation: {
     values: [
       {
         rwzi_awzi_code: '11014',

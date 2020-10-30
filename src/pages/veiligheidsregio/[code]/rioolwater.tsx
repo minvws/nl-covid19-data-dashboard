@@ -49,7 +49,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
     };
   }, [data]);
 
-  const sewerAverages = data.average_sewer_installation_per_region;
+  const sewerAverages = data.sewer_per_installation;
 
   const [timeframe, setTimeframe] = useState<TimeframeOption>('all');
   const [selectedInstallation, setSelectedInstallation] = useState<
@@ -99,8 +99,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
           >
             <KpiValue
               absolute={
-                data.average_sewer_installation_per_region.last_value
-                  .total_installation_count
+                data.sewer_per_installation.last_value.total_installation_count
               }
             />
           </KpiTile>
