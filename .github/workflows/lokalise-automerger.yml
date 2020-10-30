@@ -56,7 +56,7 @@ jobs:
           github-token: ${{ github.token }}
   automerge:
     name: Auto merge after successful checks
-    # By default, jobs run in parallel. To run the jobs sequentially, they keywords "needs" is needed.
+    # By default, jobs run in parallel. To run the jobs sequentially, the keyword "needs" is needed.
     # Auto merge action can be done only when the PR is approved, hence this automerge needs autocheckandapprove as a prerequisite
     needs: autocheckandapprove
     runs-on: ubuntu-latest
