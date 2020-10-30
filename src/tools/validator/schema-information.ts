@@ -15,7 +15,9 @@ export type SchemaInfo = {
 };
 
 const localeJsons = fs.readdirSync(localeBasePath);
-const allJsonFiles = fs.readdirSync(jsonBasePath).concat(localeJsons);
+const allJsonFiles = fs.existsSync(jsonBasePath)
+  ? fs.readdirSync(jsonBasePath).concat(localeJsons)
+  : localeJsons;
 
 // This struct defines which JSON files should be validated with which schema.
 export const schemaInformation: Record<string, SchemaInfo> = {
