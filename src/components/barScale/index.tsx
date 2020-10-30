@@ -46,13 +46,13 @@ export function BarScale({
 
   const [xMin, xMax] = scale.domain();
 
-  const textAlign = scaleThreshold()
+  const textAlign = scaleThreshold<number, 'start' | 'middle' | 'end'>()
     .domain([20, 80])
-    .range(['start', 'middle', 'end'] as any);
+    .range(['start', 'middle', 'end']);
 
-  const color = scaleQuantile()
+  const color = scaleQuantile<string>()
     .domain(gradient.map((el) => el.value))
-    .range(gradient.map((el) => el.color) as any);
+    .range(gradient.map((el) => el.color));
 
   return (
     <>
@@ -81,10 +81,10 @@ export function BarScale({
               id={`barColor${id}-${rand.current}`}
               gradientUnits="userSpaceOnUse"
             >
-              {color.domain().map((value: any) => (
+              {color.domain().map((value) => (
                 <stop
                   key={`stop-${value}`}
-                  stopColor={color(value) as any}
+                  stopColor={color(value)}
                   offset={`${scale(value)}%`}
                 />
               ))}
@@ -128,7 +128,7 @@ export function BarScale({
                 className={styles.value}
                 x={`${scale(value)}%`}
                 y={16}
-                textAnchor={textAlign(scale(value) ?? 0) as any}
+                textAnchor={textAlign(scale(value) ?? 0)}
               >
                 {`${formatNumber(value)}`}
               </text>
@@ -149,7 +149,7 @@ export function BarScale({
                 className={styles.criticalValue}
                 x={`${scale(signaalwaarde)}%`}
                 y={72}
-                textAnchor={textAlign(scale(signaalwaarde) ?? 0) as any}
+                textAnchor={textAlign(scale(signaalwaarde) ?? 0)}
               >
                 {text.signaalwaarde}: {`${formatNumber(signaalwaarde)}`}
               </text>
