@@ -142,11 +142,11 @@ export const Collapsable = ({ summary, children, id }: CollapsableProps) => {
   );
 
   useEffect(() => {
-    checkLocationHash();
     setLinkTabability(open);
-  }, [checkLocationHash, setLinkTabability, open]);
+  }, [setLinkTabability, open]);
 
   useEffect(() => {
+    requestAnimationFrame(() => checkLocationHash());
     window.addEventListener('hashchange', checkLocationHash, false);
     return () => {
       window.removeEventListener('hashchange', checkLocationHash, false);
