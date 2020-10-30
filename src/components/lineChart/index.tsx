@@ -44,7 +44,7 @@ function getChartOptions(
       borderWidth: 0,
       colorCount: 10,
       displayErrors: true,
-      height: 175,
+      height: 250,
     },
     credits: {
       enabled: false,
