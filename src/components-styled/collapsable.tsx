@@ -86,7 +86,6 @@ export const Collapsable = ({ summary, children, id }: CollapsableProps) => {
       return;
     }
     setOpen(!open);
-    setLinkTabability(!open);
     startAnimation(!open);
   }
 
@@ -141,16 +140,10 @@ export const Collapsable = ({ summary, children, id }: CollapsableProps) => {
     [panelReference]
   );
 
-  useEffect(() => {
-    setLinkTabability(open);
-  }, [setLinkTabability, open]);
+  useEffect(() => setLinkTabability(open), [setLinkTabability, open]);
 
   useEffect(() => {
     requestAnimationFrame(() => checkLocationHash());
-    window.addEventListener('hashchange', checkLocationHash, false);
-    return () => {
-      window.removeEventListener('hashchange', checkLocationHash, false);
-    };
   }, [checkLocationHash]);
 
   return (
