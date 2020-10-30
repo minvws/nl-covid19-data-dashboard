@@ -1,12 +1,12 @@
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import { RegionalSewerPerInstallationValue } from '~/types/data';
-
-import styles from './lineChart.module.scss';
 import Dot from '~/assets/dot.svg';
 import Line from '~/assets/line.svg';
+import { ValueAnnotation } from '~/components-styled/value-annotation';
+import { RegionalSewerPerInstallationValue } from '~/types/data';
 import { TimeframeOption } from '~/utils/timeframe';
 import { useRegionalSewerWaterChartOptions } from './hooks/useRegionalSewerWaterChartOptions';
+import styles from './lineChart.module.scss';
 
 export type Value = {
   date: number;
@@ -21,6 +21,7 @@ export type TProps = {
   text: TranslationStrings;
   timeframe: TimeframeOption;
   selectedInstallation?: string;
+  valueAnnotation?: string;
 };
 
 export type TranslationStrings = {
@@ -37,6 +38,7 @@ export function RegionalSewerWaterChart(props: TProps) {
     text,
     timeframe,
     selectedInstallation: selectedRWZI,
+    valueAnnotation,
   } = props;
 
   const chartOptions = useRegionalSewerWaterChartOptions(
@@ -49,6 +51,9 @@ export function RegionalSewerWaterChart(props: TProps) {
 
   return (
     <>
+      {valueAnnotation && (
+        <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
+      )}
       <HighchartsReact highcharts={Highcharts} options={chartOptions} />
       <div>
         <ul className={styles.legend}>

@@ -89,7 +89,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
           <KpiTile title={text.barscale_titel} description={text.extra_uitleg}>
             <KpiValue
               absolute={barScaleData.value}
-              data-cy="infected_daily_total"
+              valueAnnotation={siteText.waarde_annotaties.riool_normalized}
             />
           </KpiTile>
           <KpiTile
@@ -138,6 +138,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
                 daily_label_text: text.graph_daily_label_text_rwzi,
                 range_description: text.graph_range_description,
               }}
+              valueAnnotation={siteText.waarde_annotaties.riool_normalized}
             />
           </>
         )}
@@ -154,6 +155,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
             keys={barChartData.keys}
             data={barChartData.data}
             axisTitle={text.bar_chart_axis_title}
+            valueAnnotation={siteText.waarde_annotaties.riool_normalized}
           />
         </article>
       )}
