@@ -3,7 +3,6 @@ import siteText from '~/locale/index';
 import { Regionaal, RegionalSewerPerInstallationValue } from '~/types/data.d';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text = siteText.veiligheidsregio_rioolwater_metingen;
 
@@ -41,55 +40,19 @@ export interface SewerWaterBarChartData {
   data: XrangePointOptionsObject[];
 }
 
-function getSewerWaterMetadata(data: Regionaal): SewerWaterMetadata {
-  const installationCount = data.sewer_per_installation.values.length;
-
-  const oneInstallation = installationCount === 1;
-
-  // Data is available in case there is 1 or more installation
-  const dataAvailable = installationCount > 0;
+export function getSewerWaterBarScaleData(
+  data: Regionaal
+): SewerWaterBarScaleData {
+  const barScaleData = data.sewer_per_installation.values[0].last_value;
 
   return {
-    dataAvailable,
-    oneInstallation,
+    value: barScaleData.rna_normalized,
+    unix: barScaleData.date_measurement_unix,
+    dateInsertedUnix: barScaleData.date_of_insertion_unix,
   };
 }
 
-export function getSewerWaterBarScaleData(
-  data: Regionaal
-): SewerWaterBarScaleData | undefined {
-  const { dataAvailable, oneInstallation } = getSewerWaterMetadata(data);
-
-  if (!dataAvailable) {
-    return;
-  }
-
-  if (oneInstallation) {
-    const barScaleData = data.sewer_per_installation.values[0].last_value;
-
-    return {
-      value: barScaleData.rna_normalized,
-      unix: barScaleData.date_measurement_unix,
-      dateInsertedUnix: barScaleData.date_of_insertion_unix,
-    };
-  } else {
-    const barScaleData = data.sewer.values[0];
-
-    return {
-      value: barScaleData.average,
-      unix: barScaleData.week_unix,
-      dateInsertedUnix: barScaleData.date_of_insertion_unix,
-    };
-  }
-}
-
 export function getInstallationNames(data: Regionaal): string[] {
-  const { dataAvailable, oneInstallation } = getSewerWaterMetadata(data);
-
-  if (!data || !dataAvailable || oneInstallation) {
-    return [];
-  }
-
   return data.sewer_per_installation.values
     .flatMap((value) => value.values)
     .map((value) => value.rwzi_awzi_name)
@@ -99,47 +62,12 @@ export function getInstallationNames(data: Regionaal): string[] {
 export function getSewerWaterScatterPlotData(
   data: Regionaal
 ): RegionalSewerPerInstallationValue[] | undefined {
-  const { dataAvailable, oneInstallation } = getSewerWaterMetadata(data);
-
-  if (!data || !dataAvailable || oneInstallation) {
-    return;
-  }
-
   return data.sewer_per_installation.values.flatMap((value) => value.values);
 }
 
 export function getSewerWaterLineChartData(
   data: Regionaal
 ): SewerWaterLineChartData | undefined {
-  const { dataAvailable, oneInstallation } = getSewerWaterMetadata(data);
-
-  if (!dataAvailable) {
-    return;
-  }
-
-  if (oneInstallation) {
-    // One RWZI installation:
-    // Average line === the installations data
-    // No grey lines
-    const averageValues = data.sewer_per_installation.values[0].values;
-
-    return {
-      averageValues: averageValues.map((value) => {
-        return {
-          ...value,
-          value: value.rna_normalized,
-          date: value.date_measurement_unix,
-        };
-      }),
-      averageLabelText: replaceVariablesInText(
-        text.graph_average_label_text_rwzi,
-        {
-          name: data.sewer_per_installation.values[0].last_value.rwzi_awzi_name,
-        }
-      ),
-    };
-  }
-
   // More than one RWZI installation:
   // Average line === the averages from `sewer_measurements`
   // Grey lines are the RWZI locations
@@ -160,12 +88,6 @@ export function getSewerWaterLineChartData(
 export function getSewerWaterBarChartData(
   data: Regionaal
 ): SewerWaterBarChartData | undefined {
-  const { dataAvailable, oneInstallation } = getSewerWaterMetadata(data);
-
-  if (!dataAvailable || oneInstallation) {
-    return;
-  }
-
   const sortedInstallations = data.sewer_per_installation.values.sort(
     (a, b) => {
       return b.last_value.rna_normalized - a.last_value.rna_normalized;
