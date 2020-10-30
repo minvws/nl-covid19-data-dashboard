@@ -54,6 +54,7 @@ jobs:
         if: github.actor == 'VWSCoronaDashboard' && startsWith(github.head_ref, 'lokalise-') == true
         with:
           github-token: ${{ github.token }}
+
   automerge:
     name: Auto merge after successful checks
     # By default, jobs run in parallel. To run the jobs sequentially, the keyword "needs" is needed.
