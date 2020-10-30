@@ -59,7 +59,7 @@ export function SafetyRegionChoropleth<
     tooltipContent,
   } = props;
 
-  const [ref, dimensions] = useChartDimensions(1.2);
+  const [ref, dimensions] = useChartDimensions<HTMLDivElement>(1.2);
 
   const boundingBox = useSafetyRegionBoundingbox(regionGeo, selected);
 
@@ -158,13 +158,7 @@ export function SafetyRegionChoropleth<
   );
 
   return (
-    <div
-      ref={(elm) => {
-        ref.current = elm;
-      }}
-      className={className}
-      style={style}
-    >
+    <div ref={ref} className={className} style={style}>
       <Choropleth
         featureCollection={regionGeo}
         overlays={countryGeo}
