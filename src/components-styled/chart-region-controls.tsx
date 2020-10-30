@@ -2,10 +2,10 @@ import { RadioGroup } from '~/components-styled/radio-group';
 
 import text from '~/locale/index';
 
-export type RegionControlOptions = 'municipal' | 'region';
+export type RegionControlOption = 'municipal' | 'region';
 
 export interface ChartRegionControlsProps {
-  onChange: (value: RegionControlOptions) => void;
+  onChange: (value: RegionControlOption) => void;
 }
 
 export function ChartRegionControls(props: ChartRegionControlsProps) {
