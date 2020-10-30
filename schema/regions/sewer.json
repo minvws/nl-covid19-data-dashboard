@@ -23,7 +23,7 @@
     },
     "vrcode": {
       "type": "string",
-      "equalsRootProperty": "code"
+      "pattern": "^VR[0-9]+$"
     },
     "average": {
       "type": "number"
