@@ -12,23 +12,27 @@ const positiveTestedThresholds: ChoroplethThresholds = {
     },
     {
       color: '#8BD1FF',
-      threshold: 4,
-    },
-    {
-      color: '#61B6ED',
-      threshold: 7,
-    },
-    {
-      color: '#3597D4',
       threshold: 10,
     },
     {
-      color: '#046899',
+      color: '#61B6ED',
       threshold: 20,
     },
     {
-      color: '#034566',
-      threshold: 30,
+      color: '#3389c4',
+      threshold: 40,
+    },
+    {
+      color: '#04537e',
+      threshold: 60,
+    },
+    {
+      color: '#06416e',
+      threshold: 80,
+    },
+    {
+      color: '#2f2657',
+      threshold: 100,
     },
   ],
 };
