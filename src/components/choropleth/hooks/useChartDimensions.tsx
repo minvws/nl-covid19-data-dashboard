@@ -1,4 +1,4 @@
-import { useRef, MutableRefObject } from 'react';
+import { useRef } from 'react';
 import useResizeObserver from 'use-resize-observer/polyfilled';
 
 /**
