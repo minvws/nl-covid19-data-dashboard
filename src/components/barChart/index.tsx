@@ -32,10 +32,8 @@ export default function BarChart(props: IProps) {
         enabled: true,
         outside: true,
         formatter: function (): string | false {
-          // @ts-ignore
-          if (this.point.label) {
-            // @ts-ignore
-            return this.point.label;
+          if ((this.point as any).label) {
+            return (this.point as any).label;
           }
           return false;
         },

@@ -1,4 +1,4 @@
-import { useRef, MutableRefObject } from 'react';
+import { useRef } from 'react';
 import useResizeObserver from 'use-resize-observer/polyfilled';
 
 /**
@@ -46,16 +46,16 @@ export type TCombinedChartDimensions = TChartDimensions & {
   boundedHeight: number;
 };
 
-export const useChartDimensions = (
+export const useChartDimensions = <T extends HTMLElement>(
   aspectRatio?: number
-): [MutableRefObject<HTMLElement | null>, TCombinedChartDimensions] => {
+) => {
   /**
    * The ref will be initialized from the outside by mutating the return value of this
    * hook. This is a bit funky.
    *
    * @REF https://trello.com/c/i25FG3jk/548-usechartdemensions-pass-ref-as-prop
    */
-  const ref = useRef<HTMLElement | null>(null);
+  const ref = useRef<T>(null);
 
   const { width, height } = useResizeObserver({ ref });
 
@@ -67,5 +67,5 @@ export const useChartDimensions = (
       width,
       height: calculatedHeight,
     }),
-  ];
+  ] as const;
 };

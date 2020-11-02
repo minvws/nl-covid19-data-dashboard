@@ -116,7 +116,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
               ></span>
             </Heading>
             <Text mt={0} lineHeight={1}>
-              <Anchor anchorName="ggd" text={ggdText.summary_link_cta} />
+              <Anchor name="ggd" text={ggdText.summary_link_cta} />
             </Text>
           </Box>
         </KpiTile>

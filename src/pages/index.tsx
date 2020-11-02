@@ -41,13 +41,13 @@ interface INationalHomepageData {
  * Adjustments here need to be applied in Lokalize too.
  * This is also why the keys are a bit more verbose.
  */
-interface EscalationLevelCounts {
+type EscalationLevelCounts = {
   escalationLevel1: number;
   escalationLevel2: number;
   escalationLevel3: number;
   escalationLevel4: number;
   escalationLevel5: number;
-}
+};
 
 const Home: FCWithLayout<INationalHomepageData> = (props) => {
   const { text, escalationLevelCounts } = props;
@@ -71,7 +71,7 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
           <p>
             {replaceVariablesInText(
               text.notificatie.bericht,
-              (escalationLevelCounts as unknown) as { [key: string]: string }
+              escalationLevelCounts
             )}
           </p>
         </div>
@@ -180,7 +180,7 @@ const getEscalationCounts = (
 };
 
 export async function getStaticProps(): Promise<StaticProps> {
-  const text = require('../locale/index').default;
+  const text = (await import('../locale/index')).default;
 
   const serializedContent = MDToHTMLString(
     text.veiligheidsregio_index.selecteer_toelichting
