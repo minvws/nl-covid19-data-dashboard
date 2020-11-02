@@ -120,7 +120,9 @@ function getOptions(
       formatter:
         tooltipFormatter ??
         function () {
-          const { originalData } = this.point as any;
+          const { originalData } = (this.point as unknown) as {
+            originalData: Value;
+          };
 
           return `<strong>${formatDateFromSeconds(
             originalData.week.start,
