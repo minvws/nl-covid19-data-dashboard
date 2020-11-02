@@ -125,8 +125,7 @@
     "cy:open": "cypress open",
     "e2e:ci": "yarn build && start-test 3000 cy:ci",
     "cy:ci": "cypress run --headless --browser chrome",
-    "download": "download https://coronadashboard.rijksoverheid.nl/latest-data.zip -e -o public/",
-    "compile": "tsc --noEmit"
+    "download": "download https://coronadashboard.rijksoverheid.nl/latest-data.zip -e -o public/"
   },
   "browserslist": [
     "defaults",
