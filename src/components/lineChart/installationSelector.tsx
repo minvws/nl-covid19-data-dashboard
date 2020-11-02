@@ -42,7 +42,7 @@ const InstallationButton = styled.button(
   css({
     minWidth: '15em',
     border: '1px solid lightGray',
-    padding: '0.5em',
+    padding: 2,
     paddingRight: '1.5em',
     textAlign: 'left',
     backgroundColor: 'white',
