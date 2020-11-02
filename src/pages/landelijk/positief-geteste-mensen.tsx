@@ -11,7 +11,11 @@ import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
-import { BarChart, LineChart } from '~/components/charts/index';
+import { BarChart } from '~/components/charts/index';
+import {
+  LineChart,
+  Value,
+} from '~/components/lineChart/lineChartWithWeekTooltip';
 import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/useSafetyRegionLegendaData';
 import { MunicipalityChoropleth } from '~/components/choropleth/MunicipalityChoropleth';
 import { SafetyRegionChoropleth } from '~/components/choropleth/SafetyRegionChoropleth';
@@ -103,7 +107,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
                     {
                       name: 'percentage',
                       value: `${formatPercentage(
-                        ggdLastValue.infected_percentage_daily
+                        ggdLastValue.infected_percentage
                       )}%`,
                       className: 'text-blue',
                     },
@@ -199,7 +203,6 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         subtitle={ggdText.toelichting}
         metadata={{
           datumsText: ggdText.datums,
-          dateUnix: ggdLastValue.date_of_report_unix,
           dateInsertedUnix: ggdLastValue.date_of_insertion_unix,
           dataSource: ggdText.bron,
         }}
@@ -207,13 +210,13 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
 
       <TwoKpiSection>
         <KpiTile title={ggdText.totaal_getest_week_titel}>
-          <KpiValue absolute={ggdLastValue.tested_total_daily} />
+          <KpiValue absolute={ggdLastValue.tested_total} />
           <Text>{ggdText.totaal_getest_week_uitleg}</Text>
         </KpiTile>
         <KpiTile title={ggdText.positief_getest_week_titel}>
           <KpiValue
-            absolute={ggdLastValue.infected_daily}
-            percentage={ggdLastValue.infected_percentage_daily}
+            absolute={ggdLastValue.infected}
+            percentage={ggdLastValue.infected_percentage}
           />
           <Text>{ggdText.positief_getest_week_uitleg}</Text>
           <Text>
@@ -225,12 +228,12 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
                   [
                     {
                       name: 'numerator',
-                      value: formatNumber(ggdLastValue.infected_daily),
+                      value: formatNumber(ggdLastValue.infected),
                       className: 'text-blue',
                     },
                     {
                       name: 'denominator',
-                      value: formatNumber(ggdLastValue.tested_total_daily),
+                      value: formatNumber(ggdLastValue.tested_total),
                       className: 'text-blue',
                     },
                   ]
@@ -246,11 +249,23 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           title={ggdText.linechart_percentage_titel}
           description={ggdText.linechart_percentage_toelichting}
           values={ggdValues.map((value) => ({
-            value: value.infected_percentage_daily,
-            date: value.date_of_report_unix,
+            value: value.infected_percentage,
+            date: value.week_unix,
+            week: {
+              start: value.week_start_unix,
+              end: value.week_end_unix,
+            },
           }))}
-          formatTooltip={(x: number, y: number) => {
-            return `${formatDateFromSeconds(x)}: ${formatPercentage(y)}%`;
+          tooltipFormatter={function () {
+            const { originalData }: { originalData: Value } = this.point as any;
+
+            return `<strong>${formatDateFromSeconds(
+              originalData.week.start,
+              'short'
+            )} - ${formatDateFromSeconds(
+              originalData.week.end,
+              'short'
+            )}:</strong> ${formatPercentage(this.y)}%`;
           }}
           formatYAxis={(y: number) => {
             return `${formatPercentage(y)}%`;
@@ -264,12 +279,20 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           description={ggdText.linechart_totaltests_toelichting}
           values={[
             ggdValues.map((value) => ({
-              value: value.tested_total_daily,
-              date: value.date_of_report_unix,
+              value: value.tested_total,
+              date: value.week_unix,
+              week: {
+                start: value.week_start_unix,
+                end: value.week_end_unix,
+              },
             })),
             ggdValues.map((value) => ({
-              value: value.infected_daily,
-              date: value.date_of_report_unix,
+              value: value.infected,
+              date: value.week_unix,
+              week: {
+                start: value.week_start_unix,
+                end: value.week_end_unix,
+              },
             })),
           ]}
           linesConfig={[
