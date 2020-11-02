@@ -1,7 +1,7 @@
 import {
-  ChloroplethLegenda,
+  ChoroplethLegenda,
   ILegendaItem,
-} from '~/components/chloropleth/legenda/ChloroplethLegenda';
+} from '~/components/choropleth/legenda/ChoroplethLegenda';
 import { Box } from './base';
 import {
   ChartRegionControls,
@@ -65,7 +65,7 @@ export function ChoroplethTile<T>({
           flexDirection="column"
           alignItems={{ _: 'center', lg: 'flex-start' }}
         >
-          <ChloroplethLegenda items={legend.items} title={legend.title} />
+          <ChoroplethLegenda items={legend.items} title={legend.title} />
         </Box>
       )}
     </Tile>
