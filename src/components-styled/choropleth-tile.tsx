@@ -40,7 +40,7 @@ export function ChoroplethTile<T>({
   children,
 }: ChoroplethTileProps) {
   const breakpoints = useBreakpoints();
-  const legendComponent = legend && (
+  const legendaComponent = legend && (
     <ChoroplethLegenda items={legend.items} title={legend.title} />
   );
 
@@ -62,9 +62,9 @@ export function ChoroplethTile<T>({
                 </Box>
               )}
             </Box>
-            {legendComponent && breakpoints.lg && (
+            {legendaComponent && breakpoints.lg && (
               <Box display="flex" flexDirection="row" alignItems="flex-center">
-                {legendComponent}
+                {legendaComponent}
               </Box>
             )}
           </div>
@@ -72,9 +72,9 @@ export function ChoroplethTile<T>({
         <Box flex={{ lg: 1 }}>
           <div>{children}</div>
 
-          {legendComponent && !breakpoints.lg && (
+          {legendaComponent && !breakpoints.lg && (
             <Box display="flex" justifyContent="center">
-              {legendComponent}
+              {legendaComponent}
             </Box>
           )}
         </Box>
