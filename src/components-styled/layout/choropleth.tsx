@@ -36,6 +36,6 @@ export const ChoroplethSection = styled(Box)(
     display: [null, null, null, 'grid'],
     gridTemplateColumns: [null, null, null, '1fr 1fr'],
     gridTemplateRows: [null, null, null, 'auto auto 1fr auto'],
-    gridTemplateAreas: [null, null, null, `'w w' 'a c' 'b c' 'd c'`],
+    gridTemplateAreas: [null, null, null, `'w w' 'a c' 'b c' 'metadata c'`],
   })
 );

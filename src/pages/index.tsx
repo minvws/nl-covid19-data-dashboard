@@ -24,6 +24,7 @@ import styles from './index.module.scss';
 import { EscalationMapLegenda } from './veiligheidsregio';
 import { assert } from '~/utils/assert';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { Metadata } from '~/components-styled/metadata';
 
 interface StaticProps {
   props: INationalHomepageData;
@@ -50,7 +51,7 @@ interface EscalationLevelCounts {
 }
 
 const Home: FCWithLayout<INationalHomepageData> = (props) => {
-  const { text, escalationLevelCounts } = props;
+  const { data, text, escalationLevelCounts, lastGenerated } = props;
   const router = useRouter();
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
     'municipal'
@@ -104,6 +105,7 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
             tooltipContent={escalationTooltip(router)}
           />
         </div>
+        <Metadata date={+lastGenerated} />
       </article>
 
       <article className="metric-article layout-choropleth">
@@ -144,6 +146,13 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
             />
           )}
         </div>
+        <Metadata
+          date={
+            data.infected_people_delta_normalized.last_value
+              ?.date_of_report_unix
+          }
+          source={text.positief_geteste_personen.bron}
+        />
       </article>
     </>
   );

@@ -24,7 +24,7 @@ const SIGNAALWAARDE_Z_INDEX = 5;
 
 const sixDaysInSeconds = 518400;
 
-interface LineChartProps {
+export interface MultipleLineChartProps {
   title: string;
   description?: string;
   values: Value[][];
@@ -208,7 +208,7 @@ export function MultipleLineChart({
   linesConfig,
   signaalwaarde,
   timeframeOptions,
-}: LineChartProps) {
+}: MultipleLineChartProps) {
   const [timeframe, setTimeframe] = useState<TimeframeOption>('5weeks');
 
   assert(

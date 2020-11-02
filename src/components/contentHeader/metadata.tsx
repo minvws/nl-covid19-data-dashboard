@@ -22,9 +22,9 @@ export function Metadata(props: IProps) {
 
   if (!dateUnix) return null;
 
-  const dateOfReport = formatDateFromSeconds(dateUnix, 'relative');
+  const dateOfReport = formatDateFromSeconds(dateUnix, 'weekday-medium');
   const dateOfInsertion = dateInsertedUnix
-    ? formatDateFromSeconds(dateInsertedUnix, 'relative')
+    ? formatDateFromSeconds(dateInsertedUnix, 'weekday-medium')
     : undefined;
 
   return (

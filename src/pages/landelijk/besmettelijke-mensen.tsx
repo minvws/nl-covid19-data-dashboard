@@ -7,7 +7,11 @@ import { Legenda } from '~/components/legenda';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
-import { formatNumber } from '~/utils/formatNumber';
+import { TwoKpiSection } from '~/components-styled/two-kpi-section';
+import { KpiTile } from '~/components-styled/kpi-tile';
+import { KpiValue } from '~/components-styled/kpi-value';
+import { Text } from '~/components-styled/typography';
+import { Metadata } from '~/components-styled/metadata';
 
 const text = siteText.besmettelijke_personen;
 
@@ -39,45 +43,39 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
         }}
       />
 
-      <div className="layout-two-column">
-        <article
-          className="metric-article column-item"
+      <TwoKpiSection>
+        <KpiTile
+          title={text.cijfer_titel}
           data-cy="infected_daily_increase"
+          metadata={{
+            date: count?.last_value?.date_of_report_unix,
+            source: text.bron,
+          }}
         >
-          <h3>
-            {text.cijfer_titel}
+          <KpiValue
+            absolute={
+              infectiousPeopleLastKnownAverage?.last_value.infectious_avg
+            }
+          />
+          <Text>{text.cijfer_toelichting}</Text>
+        </KpiTile>
 
-            {count && (
-              <span className="text-blue kpi">
-                {formatNumber(
-                  infectiousPeopleLastKnownAverage?.last_value.infectious_avg
-                )}
-              </span>
-            )}
-          </h3>
-          <div className="column-item">
-            <p>{text.cijfer_toelichting}</p>
-          </div>
-        </article>
-
-        <article className="metric-article column-item">
-          <h3>
-            {text.barscale_titel}
-
-            {count && (
-              <span className="text-blue kpi">
-                {formatNumber(
-                  infectiousPeopleLastKnownNormalizedAverage?.last_value
-                    .infectious_avg_normalized
-                )}
-              </span>
-            )}
-          </h3>
-          <div className="column-item">
-            <p>{text.barscale_toelichting}</p>
-          </div>
-        </article>
-      </div>
+        <KpiTile
+          title={text.barscale_titel}
+          metadata={{
+            date: count?.last_value?.date_of_report_unix,
+            source: text.bron,
+          }}
+        >
+          <KpiValue
+            absolute={
+              infectiousPeopleLastKnownNormalizedAverage?.last_value
+                .infectious_avg_normalized ?? undefined
+            }
+          />
+          <Text>{text.barscale_toelichting}</Text>
+        </KpiTile>
+      </TwoKpiSection>
 
       {count?.values && (
         <article className="metric-article">
@@ -97,6 +95,10 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
             <li className="blue">{text.legenda_line}</li>
             <li className="gray square">{text.legenda_marge}</li>
           </Legenda>
+          <Metadata
+            date={count?.last_value?.date_of_report_unix}
+            source={text.bron}
+          />
         </article>
       )}
     </>

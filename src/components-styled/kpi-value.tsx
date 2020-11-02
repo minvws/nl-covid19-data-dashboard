@@ -4,7 +4,7 @@ import { isDefined } from 'ts-is-present';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 
 interface KpiValueProps {
-  absolute: number;
+  absolute?: number;
   percentage?: number;
 }
 

@@ -8,6 +8,7 @@ import { Legenda } from '~/components/legenda';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
+import { Metadata } from '~/components-styled/metadata';
 
 const text = siteText.reproductiegetal;
 
@@ -44,6 +45,10 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
             showAxis={true}
           />
           <p>{text.barscale_toelichting}</p>
+          <Metadata
+            date={lastKnownValidData.last_value.date_of_report_unix}
+            source={text.bron}
+          />
         </div>
 
         <div className="column-item column-item-extra-margin">
@@ -77,6 +82,10 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
             <li className="blue">{text.legenda_r}</li>
             <li className="gray square">{text.legenda_marge}</li>
           </Legenda>
+          <Metadata
+            date={lastKnownValidData.last_value.date_of_report_unix}
+            source={text.bron}
+          />
         </article>
       )}
     </>

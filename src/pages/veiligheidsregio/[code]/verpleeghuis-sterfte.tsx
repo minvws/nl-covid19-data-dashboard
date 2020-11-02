@@ -13,6 +13,7 @@ import {
 import { RegionalNursingHome } from '~/types/data.d';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { Metadata } from '~/components-styled/metadata';
 
 const text = siteText.veiligheidsregio_verpleeghuis_oversterfte;
 
@@ -52,6 +53,10 @@ const NursingHomeDeaths: FCWithLayout<ISafetyRegionData> = (props) => {
           <p className="text-blue kpi" data-cy="infected_daily_total">
             {formatNumber(data?.last_value.deceased_daily)}
           </p>
+          <Metadata
+            date={data?.last_value?.date_of_report_unix}
+            source={text.bron}
+          />
         </div>
 
         <div className="column-item column-item-extra-margin">
@@ -67,6 +72,10 @@ const NursingHomeDeaths: FCWithLayout<ISafetyRegionData> = (props) => {
               value: value.deceased_daily,
               date: value.date_of_report_unix,
             }))}
+          />
+          <Metadata
+            date={data?.last_value?.date_of_report_unix}
+            source={text.bron}
           />
         </article>
       )}
