@@ -633,7 +633,8 @@
     "zoekveld_placeholder_gemeente": "Search by municipality",
     "veiligheidsregio_label": "Safety region:",
     "metricKPI": {
-      "dateOfReport": "Value of {{dateOfReport}}"
+      "dateOfReport": "Value of {{dateOfReport}}",
+      "dateRangeOfReport": "Value of {{startDate}} - {{endDate}}"
     },
     "tooltip": {
       "positive_tested_people": ""

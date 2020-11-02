@@ -633,7 +633,8 @@
     "zoekveld_placeholder_gemeente": "Zoek op gemeente ",
     "veiligheidsregio_label": "Veiligheidsregio:",
     "metricKPI": {
-      "dateOfReport": "Waarde van {{dateOfReport}}"
+      "dateOfReport": "Waarde van {{dateOfReport}}",
+      "dateRangeOfReport": "Waarde van {{startDate}} - {{endDate}}"
     },
     "tooltip": {
       "positive_tested_people": "{{totalPositiveTestedPeople}} in totaal"
