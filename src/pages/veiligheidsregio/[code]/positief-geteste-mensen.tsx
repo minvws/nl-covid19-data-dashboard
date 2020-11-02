@@ -10,7 +10,10 @@ import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
-import { LineChart } from '~/components/lineChart/lineChartWithWeekTooltip';
+import {
+  LineChart,
+  Value,
+} from '~/components/lineChart/lineChartWithWeekTooltip';
 import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/useSafetyRegionLegendaData';
 import { MunicipalityChoropleth } from '~/components/choropleth/MunicipalityChoropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth/selectHandlers/createSelectMunicipalHandler';
@@ -211,7 +214,9 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
             },
           }))}
           tooltipFormatter={function () {
-            const { originalData } = this.point as any;
+            const { originalData } = (this.point as unknown) as {
+              originalData: Value;
+            };
 
             return `<strong>${formatDateFromSeconds(
               originalData.week.start,
