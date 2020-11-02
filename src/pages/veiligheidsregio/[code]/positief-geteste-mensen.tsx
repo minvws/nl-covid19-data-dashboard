@@ -3,25 +3,20 @@ import Afname from '~/assets/afname.svg';
 import Getest from '~/assets/test.svg';
 import { Anchor } from '~/components-styled/anchor';
 import { Box } from '~/components-styled/base';
-import {
-  ChoroplethChart,
-  ChoroplethHeader,
-  ChoroplethLegend,
-  ChoroplethSection,
-} from '~/components-styled/layout/choropleth';
+import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { KpiSection } from '~/components-styled/kpi-section';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
+import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
 import { LineChart } from '~/components/charts/index';
-import { ChoroplethLegenda } from '~/components/choropleth/legenda/ChoroplethLegenda';
 import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/useSafetyRegionLegendaData';
 import { MunicipalityChoropleth } from '~/components/choropleth/MunicipalityChoropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth/selectHandlers/createSelectMunicipalHandler';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/createPositiveTestedPeopleMunicipalTooltip';
-import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/contentHeader';
+import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { MultipleLineChart } from '~/components/lineChart/multipleLineChart';
 import { SEOHead } from '~/components/seoHead';
@@ -34,11 +29,10 @@ import {
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
 import { ResultsPerRegion } from '~/types/data.d';
+import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { LineChartTile } from '~/components-styled/line-chart-tile';
-import { formatDateFromSeconds } from '~/utils/formatDate';
 
 const text = siteText.veiligheidsregio_positief_geteste_personen;
 const ggdText = siteText.veiligheidsregio_positief_geteste_personen_ggd;
@@ -130,35 +124,29 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
         }))}
       />
 
-      <ChoroplethSection>
-        <ChoroplethHeader>
-          <Heading level={3}>
-            {replaceVariablesInText(text.map_titel, {
-              safetyRegion: safetyRegionName,
-            })}
-          </Heading>
-          <Text>{text.map_toelichting}</Text>
-        </ChoroplethHeader>
-        <ChoroplethChart>
-          <MunicipalityChoropleth
-            selected={selectedMunicipalCode}
-            highlightSelection={false}
-            metricName="positive_tested_people"
-            tooltipContent={createPositiveTestedPeopleMunicipalTooltip(router)}
-            onSelect={createSelectMunicipalHandler(router)}
-          />
-        </ChoroplethChart>
-        <ChoroplethLegend>
-          {legendItems && (
-            <ChoroplethLegenda
-              items={legendItems}
-              title={
-                siteText.positief_geteste_personen.chloropleth_legenda.titel
+      <ChoroplethTile
+        title={replaceVariablesInText(text.map_titel, {
+          safetyRegion: safetyRegionName,
+        })}
+        description={text.map_toelichting}
+        legend={
+          legendItems // this data value should probably not be optional
+            ? {
+                title:
+                  siteText.positief_geteste_personen.chloropleth_legenda.titel,
+                items: legendItems,
               }
-            />
-          )}
-        </ChoroplethLegend>
-      </ChoroplethSection>
+            : undefined
+        }
+      >
+        <MunicipalityChoropleth
+          selected={selectedMunicipalCode}
+          highlightSelection={false}
+          metricName="positive_tested_people"
+          tooltipContent={createPositiveTestedPeopleMunicipalTooltip(router)}
+          onSelect={createSelectMunicipalHandler(router)}
+        />
+      </ChoroplethTile>
 
       <ContentHeader
         title={replaceVariablesInText(ggdText.titel, {
