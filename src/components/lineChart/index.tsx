@@ -61,8 +61,10 @@ function getChartOptions(
       categories: values.map((value) => value.date.toString()),
       labels: {
         align: 'right',
-        // types say `rotation` needs to be a number,
-        // but that doesn’t work.
+        /**
+         * Types say `rotation` needs to be a number,
+         * but that doesn’t work.
+         */
         rotation: '0' as any,
         formatter: function () {
           return this.isFirst || this.isLast
@@ -149,10 +151,13 @@ function getChartOptions(
         name: '',
         showInLegend: false,
         color: '#3391CC',
-        // hex to rgb converted, added opacity
-        /* since this chart has type 'area', a fillColor of `undefined` will return
-        a colored fill equal to che line color, when showFill is false, it returns a
-        transparent fill */
+        /**
+         * HEX to rgb converted, added opacity.
+         * Since this chart has type 'area', a fillColor of `undefined` will return
+         * a colored fill equal to che line color, when showFill is false, it returns a
+         * transparent fill
+         */
+
         fillColor: showFill
           ? 'rgba(51, 145, 204, 0.2)'
           : 'rgba(255, 255, 255, 1.0)',
@@ -237,7 +242,9 @@ function calculateYMax(values: Value[], signaalwaarde = -Infinity) {
     .filter(isFilled)
     .reduce((acc, value) => (value > acc ? value : acc), -Infinity);
 
-  // Value cannot be 0, hence the 1
-  // If the value is below signaalwaarde, make sure the signaalwaarde floats in the middle
+  /**
+   * Value cannot be 0, hence the 1
+   * If the value is below signaalwaarde, make sure the signaalwaarde floats in the middle
+   */
   return Math.max(maxValue, signaalwaarde * 2, 1);
 }
