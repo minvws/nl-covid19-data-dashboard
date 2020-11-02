@@ -1,5 +1,5 @@
 import Repro from '~/assets/reproductiegetal.svg';
-import { AreaChart } from '~/components/charts/index';
+import { LineChart } from '~/components/charts/index';
 import { ReproductionIndexBarScale } from '~/components/landelijk/reproduction-index-barscale';
 import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/contentHeader';
@@ -60,22 +60,18 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
 
       {data.reproduction_index.values && (
         <article className="metric-article">
-          <AreaChart
+          <LineChart
             title={text.linechart_titel}
-            data={data.reproduction_index.values.map((value) => ({
-              avg: value.reproduction_index_avg,
-              min: value.reproduction_index_low,
-              max: value.reproduction_index_high,
+            values={data.reproduction_index.values.map((value) => ({
+              value: value.reproduction_index_avg,
               date: value.date_of_report_unix,
             }))}
             signaalwaarde={1}
-            rangeLegendLabel={text.rangeLegendLabel}
-            lineLegendLabel={text.lineLegendLabel}
             timeframeOptions={['all', '5weeks']}
+            showFill={false}
           />
           <Legenda>
             <li className="blue">{text.legenda_r}</li>
-            <li className="gray square">{text.legenda_marge}</li>
           </Legenda>
         </article>
       )}
