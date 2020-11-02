@@ -2,7 +2,7 @@ import { Box } from '../base';
 import { css } from '@styled-system/css';
 import styled from 'styled-components';
 
-export const Tile = styled(Box)(
+export const Tile = styled(Box).attrs({ as: 'article' })(
   css({
     display: 'flex',
     flexDirection: 'column',
