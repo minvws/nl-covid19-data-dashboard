@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components-styled/base';
 
-type TProps = {
+type InstallationSelectorProps = {
   onChange: (value?: string) => void;
   stationNames: string[];
   placeholderText: string;
@@ -53,7 +53,7 @@ const InstallationButton = styled.button(
   })
 );
 
-export function InstallationSelector(props: TProps) {
+export function InstallationSelector(props: InstallationSelectorProps) {
   const { onChange, stationNames, placeholderText } = props;
   const [selected, setSelected] = useState<string | undefined>();
 
