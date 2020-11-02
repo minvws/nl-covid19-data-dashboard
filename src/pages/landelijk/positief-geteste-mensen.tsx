@@ -12,6 +12,7 @@ import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
 import { BarChart, LineChart } from '~/components/charts/index';
+<<<<<<< HEAD
 import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
 import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
 import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
@@ -20,6 +21,16 @@ import { createSelectRegionHandler } from '~/components/chloropleth/selectHandle
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/createPositiveTestedPeopleMunicipalTooltip';
 import { createPositiveTestedPeopleRegionalTooltip } from '~/components/chloropleth/tooltips/region/createPositiveTestedPeopleRegionalTooltip';
 import { ContentHeader } from '~/components/contentHeader';
+=======
+import { ChoroplethLegenda } from '~/components/choropleth/legenda/ChoroplethLegenda';
+import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/useSafetyRegionLegendaData';
+import { MunicipalityChoropleth } from '~/components/choropleth/MunicipalityChoropleth';
+import { SafetyRegionChoropleth } from '~/components/choropleth/SafetyRegionChoropleth';
+import { createSelectMunicipalHandler } from '~/components/choropleth/selectHandlers/createSelectMunicipalHandler';
+import { createSelectRegionHandler } from '~/components/choropleth/selectHandlers/createSelectRegionHandler';
+import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/createPositiveTestedPeopleMunicipalTooltip';
+import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/createPositiveTestedPeopleRegionalTooltip';
+>>>>>>> develop
 import { PositiveTestedPeopleBarScale } from '~/components/landelijk/positive-tested-people-barscale';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
@@ -169,12 +180,12 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         }))}
       />
 
-      <KpiSection>
-        <Box flex="0 0 50%">
+      <KpiSection flexDirection="column">
+        <Box>
           <Heading level={3}>{text.barchart_titel}</Heading>
           <Text>{text.barchart_toelichting}</Text>
         </Box>
-        <Box flex="0 0 50%">
+        <Box>
           <BarChart
             keys={text.barscale_keys}
             data={age.values.map((value) => ({
@@ -251,6 +262,9 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           }))}
           formatTooltip={(x: number, y: number) => {
             return `${formatDateFromSeconds(x)}: ${formatPercentage(y)}%`;
+          }}
+          formatYAxis={(y: number) => {
+            return `${formatPercentage(y)}%`;
           }}
         />
       </KpiSection>

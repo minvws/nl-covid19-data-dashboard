@@ -12,6 +12,7 @@
   text-align: left;
   background-color: white;
   background: url('/images/close.svg');
+  background-size: 24px 24px;
   background-repeat: no-repeat, repeat;
   background-position: right 0.2em top 50%, 0 0;
 }
@@ -23,6 +24,13 @@
   padding: 0.5em;
   padding-right: 1.5em;
   background: url('/images/chevron-down.svg');
+  background-size: 14px 14px;
   background-repeat: no-repeat, repeat;
   background-position: right 0.2em top 50%, 0 0;
+
+  &:focus {
+    border-color: lightgrey;
+    outline: 0;
+    appearance: none;
+  }
 }

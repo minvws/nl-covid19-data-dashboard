@@ -11,10 +11,10 @@ import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
 import { LineChart } from '~/components/charts/index';
-import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
-import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
-import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
-import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/chloropleth/tooltips/municipal/createPositiveTestedPeopleMunicipalTooltip';
+import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/useSafetyRegionLegendaData';
+import { MunicipalityChoropleth } from '~/components/choropleth/MunicipalityChoropleth';
+import { createSelectMunicipalHandler } from '~/components/choropleth/selectHandlers/createSelectMunicipalHandler';
+import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/createPositiveTestedPeopleMunicipalTooltip';
 import { ContentHeader } from '~/components/contentHeader';
 import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
@@ -29,6 +29,7 @@ import {
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
 import { ResultsPerRegion } from '~/types/data.d';
+import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
@@ -138,7 +139,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
             : undefined
         }
       >
-        <MunicipalityChloropleth
+        <MunicipalityChoropleth
           selected={selectedMunicipalCode}
           highlightSelection={false}
           metricName="positive_tested_people"
@@ -206,7 +207,12 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
             value: value.infected_percentage_daily,
             date: value.date_of_report_unix,
           }))}
-          signaalwaarde={7}
+          formatTooltip={(x: number, y: number) => {
+            return `${formatDateFromSeconds(x)}: ${formatPercentage(y)}%`;
+          }}
+          formatYAxis={(y: number) => {
+            return `${formatPercentage(y)}%`;
+          }}
         />
       </KpiSection>
 
@@ -234,7 +240,6 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
               legendLabel: ggdText.linechart_positivetests_legend_label,
             },
           ]}
-          signaalwaarde={7}
         />
       </KpiSection>
     </>

@@ -1,5 +1,6 @@
 const withPlugins = require('next-compose-plugins');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+const sitemap = require('./src/tools/sitemap/generate-sitemap.js');
 
 const withTM = require('next-transpile-modules')([
   '@vx/tooltip',
@@ -21,7 +22,12 @@ const nextConfig = {
     COMMIT_ID: commitHash,
   },
   reactStrictMode: true, // Enables react strict mode https://nextjs.org/docs/api-reference/next.config.js/react-strict-mode
-  webpack(config) {
+
+  webpack(config, { isServer }) {
+    if (isServer) {
+      sitemap.generateSitemap(process.env.NEXT_PUBLIC_LOCALE);
+    }
+
     config.module.rules.push({
       test: /\.svg$/,
       use: [

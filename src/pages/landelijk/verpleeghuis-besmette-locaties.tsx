@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
 import Locatie from '~/assets/locaties.svg';
 import { LineChart } from '~/components/charts/index';
-import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
-import { useSafetyRegionLegendaData } from '~/components/chloropleth/legenda/hooks/useSafetyRegionLegendaData';
-import { SafetyRegionChloropleth } from '~/components/chloropleth/SafetyRegionChloropleth';
-import { createSelectRegionHandler } from '~/components/chloropleth/selectHandlers/createSelectRegionHandler';
-import { createInfectedLocationsRegionalTooltip } from '~/components/chloropleth/tooltips/region/createInfectedLocationsRegionalTooltip';
+import { ChoroplethLegenda } from '~/components/choropleth/legenda/ChoroplethLegenda';
+import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/useSafetyRegionLegendaData';
+import { SafetyRegionChoropleth } from '~/components/choropleth/SafetyRegionChoropleth';
+import { createSelectRegionHandler } from '~/components/choropleth/selectHandlers/createSelectRegionHandler';
+import { createInfectedLocationsRegionalTooltip } from '~/components/choropleth/tooltips/region/createInfectedLocationsRegionalTooltip';
 import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/contentHeader';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
@@ -63,14 +63,14 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
         </article>
       </div>
 
-      <article className="metric-article layout-chloropleth">
-        <div className="chloropleth-header">
+      <article className="metric-article layout-choropleth">
+        <div className="choropleth-header">
           <h3>{text.map_titel}</h3>
           <p>{text.map_toelichting}</p>
         </div>
 
-        <div className="chloropleth-chart">
-          <SafetyRegionChloropleth
+        <div className="choropleth-chart">
+          <SafetyRegionChoropleth
             metricName="nursing_home"
             metricValueName="infected_locations_percentage"
             tooltipContent={createInfectedLocationsRegionalTooltip(router)}
@@ -81,9 +81,9 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
           />
         </div>
 
-        <div className="chloropleth-legend">
+        <div className="choropleth-legend">
           {legendItems && (
-            <ChloroplethLegenda
+            <ChoroplethLegenda
               items={legendItems}
               title={text.chloropleth_legenda.titel}
             />
