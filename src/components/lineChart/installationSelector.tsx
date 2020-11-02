@@ -26,7 +26,7 @@ const InstallationSelect = styled.select(
     background: `url('/images/chevron-down.svg')`,
     backgroundSize: '14px 14px',
     backgroundRepeat: 'no-repeat, repeat',
-    backgroundPosition: 'right 0.5em top 50%, 0 0',
+    backgroundPosition: 'right 0.5em top 60%, 0 0',
     '&:focus': {
       borderColor: 'lightGray',
       outline: 0,
