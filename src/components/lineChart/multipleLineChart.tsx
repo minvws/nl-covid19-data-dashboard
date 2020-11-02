@@ -89,7 +89,7 @@ function getChartOptions(
         const percentage = (contextObjects[1].y * 100) / contextObjects[0].y;
 
         const { originalData }: { originalData: Value } = contextObjects[0]
-          .point as any;
+          .point as { originalData: Value };
 
         return `${formatDateFromSeconds(
           originalData.week.start,
