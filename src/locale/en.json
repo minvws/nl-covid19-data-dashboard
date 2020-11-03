@@ -1,7 +1,4 @@
 {
-  "waarde_annotaties": {
-    "riool_normalized": "x100 billion"
-  },
   "andere_gegevens": "Other data",
   "blok_andere_gegevens": {
     "title": "Other data",
@@ -184,15 +181,15 @@
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
     "barscale_keys": [
-      "0 to 9",
-      "10 to 19",
-      "20 to 29",
-      "30 to 39",
-      "40 to 49",
-      "50 to 59",
-      "60 to 69",
-      "70 to 79",
-      "80 to 89",
+      "0 to 10",
+      "10 to 20",
+      "20 to 30",
+      "30 to 40",
+      "40 to 50",
+      "50 to 60",
+      "60 to 70",
+      "70 to 80",
+      "80 to 90",
       "90+"
     ],
     "cluster_datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -404,9 +401,9 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
     },
     "titel": "Sewage water examination",
-    "pagina_toelichting": "Average number of virus particles in one milliliter of sewage water, collected from about 300 sites in the Netherlands. The national value is based on the total number of measured virus particles in one week, divided by the number of measurements.",
+    "pagina_toelichting": "Average number of coronavirus particles  per 100,000 inhabitants found in wastewater. The weekly average is calculated by adding up all the values measured at roughly 300 locations and dividing this by the number of measurements taken. This is done weekly.",
     "barscale_titel": "Average number of virus particles in one milliliter of sewage water",
-    "extra_uitleg": "The national value is based on the total number of measured virus particles in one week, divided by the number of measurements.",
+    "extra_uitleg": "The weekly average for all of the Netherlands is calculated by adding up all the values measured in one week and dividing this by the number of measurements taken.",
     "barscale_screenreader_text": "{{value}} virus particles in one milliliter of sewage water, collected from about 300 sites in the Netherlands.",
     "linechart_titel": "Viral particles per millilitre of sewage water over time",
     "metadata": {
@@ -414,7 +411,7 @@
       "description": "Average number of virus particles in one milliliter of sewage water, collected from about 300 sites in the Netherlands."
     },
     "titel_sidebar": "Sewage water examination",
-    "titel_kpi": "Average number of virus particles per milliliter of sewage water",
+    "titel_kpi": "Average number of coronavirus particles per 100,000 inhabitants found in wastewater in the Netherlands corrected for quantity",
     "total_installation_count_titel": "Number of measurement locations",
     "total_installation_count_description": "Weekly number of sewage water treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful.",
     "rwzi_abbrev": ""
@@ -539,7 +536,7 @@
       },
       {
         "cijfer": "Sewage water examination",
-        "verantwoording": "It is possible to test samples of sewage water for pathogens like the novel coronavirus, because they enter the sewage system via the faeces. Once a week at each site, researchers from the National Institute for Health and Environment (RIVM) examine samples of sewage water collected over a period of 24 hours. These tests show how many virus particles are in the sewage water. Each week the number of sites may vary, because not every test can be completed successfully. Please note that the values from before 20 July are based on about 28 sites. The figures between 20 July and 31 August are based on about 80 sites. From 31 August sewage water from about 300 sites is examined. In the current research we can see trends in the amount of virus particles, like an increase or decrease. We cannot yet compare the number of particles found at different sites. More research is necessary in order to be able to draw conclusions based on the findings.\n\nThe information is delivered as an open data file by the [RIVM](https://data.rivm.nl/covid-19/COVID-19_rioolwaterdata.csv). With the availability of more data, the number of virus particles can be determined more accurately. Therefore, the RIVM has adapted their method to calculate the virus particles per milliliter since 18 August. In the open data file you can see if a measurement in representative of not. For the dashboard we only use representative data.\n\nThe weekly average is calculated on the basis of the sum of the values reported in one week divided by the number of measurements. A week runs from Monday to Sunday. The weekly average is calculated on the following Tuesday, so that the week is complete and the RIVM has time to receive and analyse the samples, and report on them. Please note that additional data relating to the preceding week or even the weeks before that may be received after Tuesday. This is why the open data file is read every day and the weekly averages recalculated. The graph shows the value of the most recent sample for each location and the date on which it was collected.\n\nThe virus particles per milliliter shown on the dashboard can be influenced by a number of other factors. For instance, due to rainfall, the number of virus particles per milliliter can be decreased, because the sewage water is diluted. Furthermore, industrial areas in the catchment areas can bring about this effect, because in the sewage water of industrial areas little to no amount of human faeces can be found. If the concentration of virus particles is too low, it will no longer be found by the test. This will then result in a measurement of zero particles per milliliter.\n\nTo determine which location belongs to which safety regions, we look at the catchment area. This is the area for which the sewage treatment plant purifies the water. The RIVM shares per site the percentage that the catchment area is part of the safety region. This is not entirely accurate and will be improved on in the future. Some sites have a catchment area that contains multiple safety regions. If this is the case, the site is attributed completed to the safety region covering the largest part of the catchment area.\n\nTo match the sites to the municipalities, we currently use the postal code of the site. Using the Statistics Netherlands (CBS) allocation of municipalities, these postal codes are translated to a municipality. In a few cases, no match was found. For these exceptions the municipalities are established by hand, using coordinates of the sites and a map. Please note: the matching of these sites with municipalities can be partly inaccurate, because the catchment area of purification site is not necessarily similar to the borders of the municipalities. This matching between sites and municipalities is currently being improved on."
+        "verantwoording": "Human excrement flushed down the toilet can contain pathogens (viruses and bacteria that can make people sick), which can be measured in wastewater. These tests measure the concentration of coronavirus particles in wastewater that may (but do not always) come from the excrement of infected individuals. Measurements are collected at more than 300 wastewater treatment plants around the country. At least once a week at each location, researchers from the RIVM test a sample of wastewater collected over a 24-hour period. The weekly number of locations with new data varies however, because not every test is completed successfully. The open data file (https://data.rivm.nl/covid-19/COVID-19_rioolwaterdata.csv) shows at which locations tests were done on a given date. \n\nAs of 3 November 2020, the dashboard no longer shows the number of virus particles in one millilitre of wastewater. Instead it shows the number of virus particles per 100,000 inhabitants. Assisted by the water authorities, Statistics Netherlands (CBS) has calculated the number of inhabitants served by each wastewater treatment plant, so that RIVM can determine the number of virus particles per 100,000 inhabitants. RIVM now also corrects for the volume of water flowing into the plant at the time of sampling, which is called the flow rate. Rainwater, for example, has a diluting effect. However, it can only retrospectively correct the data from 7 September 2020, which means that data from before that date is no longer shown on the dashboard. This coincides with the fact that the number of testing locations was increased from roughly 80 to 317 on 7 September 2020.    \n\nIf the number of virus particles in a sample is too low to be measured, the value is recorded as 0. Sometimes RIVM will indicate that a measurement isn’t representative. These measurements are filtered out when data is entered in the dashboard. The current study makes trends visible, such as an increase or decrease in the number of virus particles. But more research is needed before any conclusions can be drawn about these trends. \n\nThe weekly average is calculated by adding up all the values measured in one week and dividing this by the number of measurements. A week runs from Monday to Sunday. The weekly average is calculated on the following Tuesday, so that the week is complete and the RIVM has time to receive and analyse the samples, and report on them. Please note that additional data relating to the preceding week or even the weeks before that may be received after Tuesday. This is why the open data file is read every day and the weekly averages recalculated. Any corrections relating to previous weeks are also entered in the dashboard. The graph shows the value of the sample for each location and the date on which it was collected.\n\nWastewater treatment plants are allocated to a safety region based on their catchment area, that is, the area from which wastewater flows to that plant to be treated. RIVM indicates what percentage of a location falls under a certain safety region. This distribution is not yet entirely accurate and will be finetuned in the coming period. The catchment area of some locations fall under more than one safety region. In that case, the location can be found on the dashboard under the safety region in which the biggest share of its catchment area falls. Locations are linked to municipalities on the basis of their postcode, using Statistics Netherlands’ distribution of postcodes per municipality. Sometimes this did not result in a match. In these exceptional cases, the location’s coordinates were looked up on a map to see which municipality it falls under. Please note that the link to a particular municipality may not be entirely accurate because a wastewater treatment plant’s catchment area may not coincide exactly with municipal boundaries. We are working to make a more accurate link between sewage treatment plant locations and municipalities."
       },
       {
         "cijfer": "“Value of ” and “Obtained”",
@@ -637,7 +634,7 @@
     "veiligheidsregio_label": "Safety region:",
     "metricKPI": {
       "dateOfReport": "Value of {{dateOfReport}}",
-      "dateRangeOfReport": "Value of {{startDate}} - {{endDate}}"
+      "dateRangeOfReport": ""
     },
     "tooltip": {
       "positive_tested_people": ""
@@ -748,15 +745,15 @@
   "veiligheidsregio_rioolwater_metingen": {
     "titel_sidebar": "Sewage water examination",
     "titel": "Sewage water examination in {{safetyRegion}}",
-    "pagina_toelichting": "Average number of virus particles in one milliliter of sewage water of this region. To calculate this, the total number of measured virus particles in one week, is divided by the number of measurements.",
+    "pagina_toelichting": "Average number of coronavirus particles per 100,000 inhabitants found in wastewater. The weekly average is calculated by adding up all the values measured in this safety region and dividing this by the number of measurements taken. This is done weekly.",
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis. ",
     "screen_reader_graph_content": "{{value}} virus particles in one milliliter of sewage water.",
-    "barscale_titel": "Average number of virus particles in one milliliter of sewage water in this safety region",
-    "extra_uitleg": "To calculate this, the total number of measured virus particles in one week, is divided by the number of measurements.",
+    "barscale_titel": "Average number of coronavirus particles per 100,000 inhabitants found in wastewater in this safety region, corrected for quantity",
+    "extra_uitleg": "The weekly average for the safety region is calculated by adding up all the values measured in one week and dividing this by the number of measurements taken.",
     "barscale_screenreader_text": "{{value}} virus particles in one milliliter of sewage water.",
     "linechart_titel": "Viral particles per millilitre of sewage water over time",
     "bar_chart_title": "Most recent measurement per location in {{safetyRegion}}",
-    "bar_chart_axis_title": "Number of virus particles per milliliter of sewage water",
+    "bar_chart_axis_title": "Average number of coronavirus particles per 100,000 inhabitants found in wastewater in this safety region, in relation to the daily volume of processed wastewater (flow rate).",
     "bron": {
       "text": "RIVM",
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
@@ -837,15 +834,15 @@
   "gemeente_rioolwater_metingen": {
     "titel_sidebar": "Sewage water examination",
     "titel": "Sewage water examination in {{municipality}}",
-    "pagina_toelichting": "Average number of virus particles in one milliliter of sewage water of this municipality. To calculate this, the total number of measured virus particles in one week, is divided by the number of measurements.",
+    "pagina_toelichting": "Average number of coronavirus particles per 100,000 inhabitants found in wastewater. The weekly average is calculated by adding up all the values measured in this municipality and dividing this by the number of measurements taken. This is done weekly.",
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
     "screen_reader_graph_content": "{{value}} virus particles in one milliliter of sewage water.",
-    "barscale_titel": "Average number of virus particles in one milliliter of sewage water in this municipality",
-    "extra_uitleg": "To calculate this, the total number of measured virus particles in one week, is divided by the number of measurements.",
+    "barscale_titel": "Average number of coronavirus particles per 100,000 inhabitants found in wastewater in this municipality, adjusted for the daily volume of processed wastewater.",
+    "extra_uitleg": "Average number of coronavirus particles per 100,000 inhabitants measured at locations in this safety region",
     "barscale_screenreader_text": "{{value}} virus particles in one milliliter of sewage water, collected from 300 sites in the Netherlands.",
     "linechart_titel": "Viral particles per millilitre of sewage water over time",
     "bar_chart_title": "Most recent measurement per location in {{municipality}}",
-    "bar_chart_axis_title": "Number of virus particles per milliliter of sewage water",
+    "bar_chart_axis_title": "Average number of coronavirus particles per 100,000 inhabitants found in wastewater at the Nieuwveen [variabele locatienaam] plant, adjusted for the daily volume of processed wastewater (flow rate).",
     "bron": {
       "text": "RIVM",
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
@@ -865,7 +862,7 @@
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Level of risk",
-    "selecteer_toelichting": "The map indicates the level of risk per safety region.\n\nThere are [country-wide measures](https://www.rijksoverheid.nl/actueel/nieuws/2020/10/13/gedeeltelijke-lockdown-om-besmettingen-terug-te-dringen) to stop the quick spread of the coronavirus. \n\n[More about risk levels](/over-risiconiveaus)",
+    "selecteer_toelichting": "The map indicates the level of risk per safety region.\n\nThere are [country-wide measures](https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/nederlandse-maatregelen-tegen-het-coronavirus) to stop the quick spread of the coronavirus. \n\n[More about risk levels](/over-risiconiveaus)",
     "metadata": {
       "title": "Level of risk per safety region | Dashboard Coronavirus | Government.nl",
       "description": "Overview of the level of risk per safety region in the Netherlands."
@@ -887,7 +884,7 @@
   },
   "escalatie_niveau": {
     "titel": "Level of risk",
-    "toelichting": "The map indicates the level of risk per safety region.\n\nThere are [country-wide measures](https://www.rijksoverheid.nl/actueel/nieuws/2020/10/13/gedeeltelijke-lockdown-om-besmettingen-terug-te-dringen) to stop the quick spread of the coronavirus. \n\n[More about risk levels](/over-risiconiveaus)",
+    "toelichting": "The map indicates the level of risk per safety region.\n\nThere are [country-wide measures](https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/nederlandse-maatregelen-tegen-het-coronavirus) to stop the quick spread of the coronavirus. \n\n[More about risk levels](/over-risiconiveaus)",
     "types": {
       "1": {
         "titel": "Caution",
@@ -1039,5 +1036,8 @@
     "title": "Frequently asked questions | Dashboard Coronavirus COVID-19 | Government.nl",
     "description": "",
     "url": ""
+  },
+  "waarde_annotaties": {
+    "riool_normalized": ""
   }
 }
