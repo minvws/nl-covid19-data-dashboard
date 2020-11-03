@@ -20,9 +20,7 @@ const text = siteText.common.metadata;
 export function Metadata(props: IProps) {
   const { dataSource, datumsText, dateUnix, dateInsertedUnix } = props;
 
-  const dateOfReport = dateUnix
-    ? formatDateFromSeconds(dateUnix, 'relative')
-    : undefined;
+  const dateOfReport = formatDateFromSeconds(dateUnix, 'relative');
   const dateOfInsertion = dateInsertedUnix
     ? formatDateFromSeconds(dateInsertedUnix, 'relative')
     : undefined;
