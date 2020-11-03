@@ -85,7 +85,7 @@
       "title": "Intensive care-opnames | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Landelijk overzicht van het aantal mensen met bevestigd COVID-19 dat per dag op een intensive care-afdeling van een ziekenhuis is opgenomen."
     },
-    "titel_sidebar": "Intensive care-opnames per dag",
+    "titel_sidebar": "Intensive care-opnames",
     "titel_kpi": "Gemiddeld aantal intensive care-opnames over 3 dagen"
   },
   "verdenkingen_huisartsen": {
@@ -158,7 +158,7 @@
       "description": "Landelijk overzicht van het aantal mensen met COVID-19 dat een ziekenhuis is opgenomen."
     },
     "titel_sidebar": "Ziekenhuisopnames",
-    "titel_kpi": "Gemiddeld aantal ziekenhuisopnames in 3 dagen"
+    "titel_kpi": "Gemiddeld aantal ziekenhuisopnames over 3 dagen"
   },
   "positief_geteste_personen": {
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -691,7 +691,7 @@
       "title": "Ziekenhuisopnames inwoners {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van het aantal mensen in de veiligheidsregio {{safetyRegionName}} die met COVID-19 in het ziekenhuis zijn opgenomen."
     },
-    "titel_kpi": "Gemiddeld aantal ziekenhuisopnames in 3 dagen"
+    "titel_kpi": "Gemiddeld aantal ziekenhuisopnames over 3 dagen"
   },
   "veiligheidsregio_positief_geteste_personen": {
     "titel_sidebar": "Positief geteste mensen",
@@ -774,7 +774,7 @@
     "rwzi_abbrev": ""
   },
   "gemeente_ziekenhuisopnames_per_dag": {
-    "titel_sidebar": "Ziekenhuisopnames per dag",
+    "titel_sidebar": "Ziekenhuisopnames",
     "titel": "Ziekenhuisopnames per dag van inwoners {{municipality}}",
     "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen.",
     "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
