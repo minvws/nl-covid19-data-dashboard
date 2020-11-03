@@ -6,10 +6,7 @@ import { LineChart } from '~/components/lineChart/lineChartWithWeekTooltip';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
-import {
-  NationalHuisartsVerdenkingen,
-  NationalHuisartsVerdenkingenValue,
-} from '~/types/data.d';
+import { NationalHuisartsVerdenkingen } from '~/types/data.d';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { KpiTile } from '~/components-styled/kpi-tile';
@@ -74,16 +71,14 @@ const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
           <LineChart
             title={text.linechart_titel}
             timeframeOptions={['all', '5weeks']}
-            values={data.values.map(
-              (value: NationalHuisartsVerdenkingenValue) => ({
-                value: value.incidentie,
-                date: value.week_unix,
-                week: {
-                  start: value.week_start_unix,
-                  end: value.week_end_unix,
-                },
-              })
-            )}
+            values={data.values.map((value) => ({
+              value: value.incidentie,
+              date: value.week_unix,
+              week: {
+                start: value.week_start_unix,
+                end: value.week_end_unix,
+              },
+            }))}
           />
           <Metadata date={data.last_value.week_unix} source={text.bron} />
         </article>

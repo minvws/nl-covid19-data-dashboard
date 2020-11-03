@@ -25,6 +25,8 @@ const generateSitemap = async function (locale) {
   // Ignore Next.js specific files and API routes.
   const pages = await globby([
     './src/pages/**/*{.tsx,.mdx}',
+    '!./src/pages/404.tsx',
+    '!./src/pages/500.tsx',
     '!./src/pages/_*.tsx',
     '!./src/pages/api',
   ]);
@@ -38,8 +40,6 @@ const generateSitemap = async function (locale) {
   );
 
   const priorities = [
-    { path: '404', value: 0 },
-    { path: '500', value: 0 },
     { path: 'landelijk', value: 0.8 },
     { path: 'gemeente', value: 0.8 },
     { path: 'regio', value: 0.8 },

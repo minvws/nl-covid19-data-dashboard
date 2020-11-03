@@ -59,20 +59,6 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
 
       <TwoKpiSection>
         <KpiTile
-          title={text.barscale_titel}
-          metadata={{
-            date: state?.nursing_home.last_value?.date_of_report_unix,
-            source: text.bron,
-          }}
-        >
-          <KpiValue
-            data-cy="infected_daily_total"
-            absolute={newlyInfectedLocations}
-          />
-          <Text>{text.barscale_toelichting}</Text>
-        </KpiTile>
-
-        <KpiTile
           title={text.kpi_titel}
           metadata={{
             date: state?.nursing_home.last_value?.date_of_report_unix,
@@ -84,6 +70,19 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
             percentage={infectedLocationsPercentage}
           />
           <Text>{text.kpi_toelichting}</Text>
+        </KpiTile>
+        <KpiTile
+          title={text.barscale_titel}
+          metadata={{
+            date: state?.nursing_home.last_value?.date_of_report_unix,
+            source: text.bron,
+          }}
+        >
+          <KpiValue
+            data-cy="infected_daily_total"
+            absolute={newlyInfectedLocations}
+          />
+          <Text>{text.barscale_toelichting}</Text>
         </KpiTile>
       </TwoKpiSection>
 

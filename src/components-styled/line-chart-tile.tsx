@@ -1,15 +1,18 @@
 // Props type needs to be imported from lineChart directly because charts only works with
 // default export.
-import LineChart, { LineChartProps } from '~/components/lineChart';
+import LineChart, { LineChartProps, Value } from '~/components/lineChart';
 import { Spacer } from './base';
 import { Tile } from './layout';
 import { Metadata, MetadataProps } from './metadata';
 
-interface LineChartTileProps extends LineChartProps {
+interface LineChartTileProps<T> extends LineChartProps<T> {
   metadata: MetadataProps;
 }
 
-export function LineChartTile({ metadata, ...chartProps }: LineChartTileProps) {
+export function LineChartTile<T extends Value>({
+  metadata,
+  ...chartProps
+}: LineChartTileProps<T>) {
   return (
     <Tile
       /**

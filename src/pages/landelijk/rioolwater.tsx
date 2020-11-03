@@ -9,6 +9,8 @@ import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
+import { formatDateFromSeconds } from '~/utils/formatDate';
+import { formatNumber } from '~/utils/formatNumber';
 
 const text = siteText.rioolwater_metingen;
 
@@ -77,6 +79,15 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
         metadata={{
           date: sewerAverages.last_value.week_end_unix,
           source: text.bron,
+        }}
+        formatTooltip={(x) => {
+          return `<strong>${formatDateFromSeconds(
+            x.week.start,
+            'short'
+          )} - ${formatDateFromSeconds(
+            x.week.end,
+            'short'
+          )}:</strong> ${formatNumber(x.value)}`;
         }}
       />
     </>

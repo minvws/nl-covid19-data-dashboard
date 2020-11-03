@@ -10,7 +10,7 @@ interface IProps {
     href: string;
     text: string;
   };
-  dateUnix?: number;
+  dateUnix: number;
   dateInsertedUnix?: number;
   datumsText: string;
 }

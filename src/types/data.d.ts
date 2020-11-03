@@ -100,6 +100,7 @@ export interface Deceased {
   date_of_insertion_unix: number;
 }
 
+
 export interface National {
   last_generated: string;
   proto_name: "NL";
@@ -116,7 +117,7 @@ export interface National {
   intake_share_age_groups: IntakeShareAgeGroups;
   reproduction_index: ReproductionIndex;
   reproduction_index_last_known_average: ReproductionIndexLastKnownAverage;
-  infectious_people_last_known_average?: InfectiousPeopleLastKnownAverage;
+  infectious_people_last_known_average: InfectiousPeopleLastKnownAverage;
   rioolwater_metingen: RioolwaterMetingen;
   rioolwater_metingen_per_rwzi: RioolwaterMetingenPerRwzi;
   hospital_beds_occupied: HospitalBedsOccupied;
@@ -314,10 +315,12 @@ export interface NationalGgd {
   last_value: NationalGgdValue;
 }
 export interface NationalGgdValue {
-  infected_daily: number;
-  infected_percentage_daily: number;
-  tested_total_daily: number;
-  date_of_report_unix: number;
+  infected: number;
+  infected_percentage: number;
+  tested_total: number;
+  week_unix: number;
+  week_start_unix: number;
+  week_end_unix: number;
   date_of_insertion_unix: number;
 }
 export interface NationalNursingHome {
@@ -473,10 +476,12 @@ export interface RegionalGgd {
   last_value: RegionalGgdValue;
 }
 export interface RegionalGgdValue {
-  infected_daily: number;
-  infected_percentage_daily: number;
-  tested_total_daily: number;
-  date_of_report_unix: number;
+  infected: number;
+  infected_percentage: number;
+  tested_total: number;
+  week_unix: number;
+  week_start_unix: number;
+  week_end_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;
 }

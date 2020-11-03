@@ -2,9 +2,9 @@ import React from 'react';
 
 interface AnchorProps {
   text: string;
-  anchorName: string;
+  name: string;
 }
 
-export function Anchor({ text, anchorName }: AnchorProps) {
-  return <a href={`#${anchorName}`}>{text}</a>;
+export function Anchor({ text, name }: AnchorProps) {
+  return <a href={`#${name}`}>{text}</a>;
 }

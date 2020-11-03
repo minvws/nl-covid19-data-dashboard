@@ -25,7 +25,7 @@ interface VeelgesteldeVragenProps {
 }
 
 export async function getStaticProps(): Promise<StaticProps> {
-  const text: TALLLanguages = require('../locale/index').default;
+  const text: TALLLanguages = (await import('../locale/index')).default;
   const serializedContent = text.over_veelgestelde_vragen.vragen.map(function (
     item: IVraagEnAntwoord
   ) {

@@ -13,6 +13,7 @@ import { MunicipalityChoropleth } from '~/components/choropleth/MunicipalityChor
 import { createSelectMunicipalHandler } from '~/components/choropleth/selectHandlers/createSelectMunicipalHandler';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/createPositiveTestedPeopleMunicipalTooltip';
 import { ContentHeader } from '~/components/contentHeader';
+import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRangeHack';
 import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { SEOHead } from '~/components/seoHead';
@@ -109,7 +110,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
                     {
                       name: 'percentage',
                       value: `${formatPercentage(
-                        ggdData.infected_percentage_daily
+                        ggdData.infected_percentage
                       )}%`,
                       className: 'text-blue',
                     },
@@ -118,7 +119,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
               ></span>
             </Heading>
             <Text mt={0} lineHeight={1}>
-              <Anchor anchorName="ggd" text={ggdText.summary_link_cta} />
+              <Anchor name="ggd" text={ggdText.summary_link_cta} />
             </Text>
           </Box>
         </KpiTile>
@@ -162,7 +163,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
         />
       </ChoroplethTile>
 
-      <ContentHeader
+      <ContentHeader_weekRangeHack
         title={replaceVariablesInText(ggdText.titel, {
           safetyRegion: safetyRegionName,
         })}
@@ -171,8 +172,9 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
         subtitle={ggdText.toelichting}
         metadata={{
           datumsText: ggdText.datums,
-          dateUnix: ggdData.date_of_report_unix,
-          dateInsertedUnix: ggdData.date_of_insertion_unix,
+          dateOfInsertionUnix: ggdData.date_of_insertion_unix,
+          weekStartUnix: ggdData.week_start_unix,
+          weekEndUnix: ggdData.week_start_unix,
           dataSource: ggdText.bron,
         }}
       />
@@ -185,7 +187,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
             source: ggdText.bron,
           }}
         >
-          <KpiValue absolute={ggdData.tested_total_daily} />
+          <KpiValue absolute={ggdData.tested_total} />
           <Text>{ggdText.totaal_getest_week_uitleg}</Text>
         </KpiTile>
         <KpiTile
@@ -196,8 +198,8 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           }}
         >
           <KpiValue
-            absolute={ggdData.infected_daily}
-            percentage={ggdData.infected_percentage_daily}
+            absolute={ggdData.infected}
+            percentage={ggdData.infected_percentage}
           />
           <Text>{ggdText.positief_getest_week_uitleg}</Text>
           <Text>
@@ -209,12 +211,12 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
                   [
                     {
                       name: 'numerator',
-                      value: formatNumber(ggdData.infected_daily),
+                      value: formatNumber(ggdData.infected),
                       className: 'text-blue',
                     },
                     {
                       name: 'denominator',
-                      value: formatNumber(ggdData.tested_total_daily),
+                      value: formatNumber(ggdData.tested_total),
                       className: 'text-blue',
                     },
                   ]
@@ -226,14 +228,25 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
       </TwoKpiSection>
 
       <LineChartTile
+        timeframeOptions={['all', '5weeks']}
         title={ggdText.linechart_percentage_titel}
         description={ggdText.linechart_percentage_toelichting}
         values={ggdValues.map((value) => ({
-          value: value.infected_percentage_daily,
-          date: value.date_of_report_unix,
+          value: value.infected_percentage,
+          date: value.week_unix,
+          week: {
+            start: value.week_start_unix,
+            end: value.week_end_unix,
+          },
         }))}
-        formatTooltip={(x: number, y: number) => {
-          return `${formatDateFromSeconds(x)}: ${formatPercentage(y)}%`;
+        formatTooltip={(x) => {
+          return `<strong>${formatDateFromSeconds(
+            x.week.start,
+            'short'
+          )} - ${formatDateFromSeconds(
+            x.week.end,
+            'short'
+          )}:</strong> ${formatPercentage(x.value)}%`;
         }}
         formatYAxis={(y: number) => {
           return `${formatPercentage(y)}%`;
@@ -245,16 +258,25 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
       />
 
       <MultipleLineChartTile
+        timeframeOptions={['all', '5weeks']}
         title={ggdText.linechart_totaltests_titel}
         description={ggdText.linechart_totaltests_toelichting}
         values={[
           ggdValues.map((value) => ({
-            value: value.tested_total_daily,
-            date: value.date_of_report_unix,
+            value: value.tested_total,
+            date: value.week_unix,
+            week: {
+              start: value.week_start_unix,
+              end: value.week_end_unix,
+            },
           })),
           ggdValues.map((value) => ({
-            value: value.infected_daily,
-            date: value.date_of_report_unix,
+            value: value.infected,
+            date: value.week_unix,
+            week: {
+              start: value.week_start_unix,
+              end: value.week_end_unix,
+            },
           })),
         ]}
         linesConfig={[

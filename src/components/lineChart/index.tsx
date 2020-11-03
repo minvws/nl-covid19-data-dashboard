@@ -16,21 +16,21 @@ export type Value = {
 
 const SIGNAALWAARDE_Z_INDEX = 5;
 
-export interface LineChartProps {
+export interface LineChartProps<T> {
   title: string;
   description?: string;
-  values: Value[];
+  values: T[];
   signaalwaarde?: number;
   timeframeOptions?: TimeframeOption[];
-  formatTooltip?: (x: number, y: number) => string;
+  formatTooltip?: (value: T) => string;
   formatYAxis?: (y: number) => string;
   showFill?: boolean;
 }
 
-function getChartOptions(
-  values: Value[],
+function getChartOptions<T extends Value>(
+  values: T[],
   signaalwaarde?: number,
-  formatTooltip?: (x: number, y: number) => string,
+  formatTooltip?: (value: T) => string,
   formatYAxis?: (y: number) => string,
   showFill?: boolean
 ) {
@@ -79,7 +79,7 @@ function getChartOptions(
       borderRadius: 0,
       formatter: function (): string {
         if (formatTooltip) {
-          return formatTooltip(this.x, this.y);
+          return formatTooltip(values[this.point.index]);
         }
         return `${formatDateFromSeconds(this.x)}: ${formatNumber(this.y)}`;
       },
@@ -158,9 +158,7 @@ function getChartOptions(
          * transparent fill
          */
 
-        fillColor: showFill
-          ? 'rgba(51, 145, 204, 0.2)'
-          : 'rgba(255, 255, 255, 1.0)',
+        fillColor: showFill ? 'rgba(51, 145, 204, 0.2)' : 'transparent',
         marker: {
           enabled: false,
         },
@@ -185,7 +183,7 @@ function getChartOptions(
   return options;
 }
 
-export default function LineChart({
+export default function LineChart<T extends Value>({
   title,
   description,
   values,
@@ -194,16 +192,16 @@ export default function LineChart({
   formatTooltip,
   formatYAxis,
   showFill = true,
-}: LineChartProps) {
+}: LineChartProps<T>) {
   const [timeframe, setTimeframe] = useState<TimeframeOption>('5weeks');
 
   const chartOptions = useMemo(() => {
-    const filteredValues = getFilteredValues<Value>(
+    const filteredValues = getFilteredValues<T>(
       values,
       timeframe,
-      (value: Value) => value.date * 1000
+      (value: T) => value.date * 1000
     );
-    return getChartOptions(
+    return getChartOptions<T>(
       filteredValues,
       signaalwaarde,
       formatTooltip,

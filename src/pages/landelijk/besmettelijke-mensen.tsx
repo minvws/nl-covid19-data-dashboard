@@ -1,16 +1,15 @@
 import Ziektegolf from '~/assets/ziektegolf.svg';
+import { KpiTile } from '~/components-styled/kpi-tile';
+import { KpiValue } from '~/components-styled/kpi-value';
+import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { AreaChart } from '~/components/charts/index';
-import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/contentHeader';
+import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { Legenda } from '~/components/legenda';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
-import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { KpiTile } from '~/components-styled/kpi-tile';
-import { KpiValue } from '~/components-styled/kpi-value';
-import { Text } from '~/components-styled/typography';
 import { Metadata } from '~/components-styled/metadata';
 
 const text = siteText.besmettelijke_personen;
@@ -21,8 +20,6 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
   const count = data.infectious_people_count;
   const infectiousPeopleLastKnownAverage =
     data.infectious_people_last_known_average;
-  const infectiousPeopleLastKnownNormalizedAverage =
-    data.infectious_people_count_normalized;
 
   return (
     <>
@@ -37,44 +34,27 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
         subtitle={text.toelichting_pagina}
         metadata={{
           datumsText: text.datums,
-          dateUnix: count?.last_value?.date_of_report_unix,
-          dateInsertedUnix: count?.last_value?.date_of_insertion_unix,
+          dateUnix:
+            infectiousPeopleLastKnownAverage.last_value.date_of_report_unix,
+          dateInsertedUnix:
+            infectiousPeopleLastKnownAverage.last_value.date_of_insertion_unix,
           dataSource: text.bron,
         }}
       />
 
       <TwoKpiSection>
-        <KpiTile
-          title={text.cijfer_titel}
-          data-cy="infected_daily_increase"
-          metadata={{
-            date: count?.last_value?.date_of_report_unix,
-            source: text.bron,
-          }}
-        >
-          <KpiValue
-            absolute={
-              infectiousPeopleLastKnownAverage?.last_value.infectious_avg
-            }
-          />
-          <Text>{text.cijfer_toelichting}</Text>
-        </KpiTile>
-
-        <KpiTile
-          title={text.barscale_titel}
-          metadata={{
-            date: count?.last_value?.date_of_report_unix,
-            source: text.bron,
-          }}
-        >
-          <KpiValue
-            absolute={
-              infectiousPeopleLastKnownNormalizedAverage?.last_value
-                .infectious_avg_normalized ?? undefined
-            }
-          />
-          <Text>{text.barscale_toelichting}</Text>
-        </KpiTile>
+        {infectiousPeopleLastKnownAverage && (
+          <KpiTile
+            title={text.cijfer_titel}
+            description={text.cijfer_toelichting}
+          >
+            <KpiValue
+              absolute={
+                infectiousPeopleLastKnownAverage.last_value.infectious_avg
+              }
+            />
+          </KpiTile>
+        )}
       </TwoKpiSection>
 
       {count?.values && (

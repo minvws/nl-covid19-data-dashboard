@@ -1,4 +1,4 @@
-import Highcharts from 'highcharts';
+import Highcharts, { TooltipFormatterContextObject } from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import React, { useMemo, useState } from 'react';
 import { isDefined } from 'ts-is-present';
@@ -8,12 +8,8 @@ import { assert } from '~/utils/assert';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
+import { Value } from './lineChartWithWeekTooltip';
 import styles from './lineChart.module.scss';
-
-type Value = {
-  date: number;
-  value: number;
-};
 
 type LineConfig = {
   color: string;
@@ -21,8 +17,6 @@ type LineConfig = {
 };
 
 const SIGNAALWAARDE_Z_INDEX = 5;
-
-const sixDaysInSeconds = 518400;
 
 export interface MultipleLineChartProps {
   title: string;
@@ -90,21 +84,27 @@ function getChartOptions(
       shared: true,
       useHTML: true,
       formatter: function (): string {
-        const percentage =
-          ((this.points as any[])[1].y * 100) / (this.points as any[])[0].y;
+        const contextObjects = this.points as TooltipFormatterContextObject[];
+
+        const percentage = (contextObjects[1].y * 100) / contextObjects[0].y;
+
+        const { originalData } = (contextObjects[0].point as unknown) as {
+          originalData: Value;
+        };
 
         return `${formatDateFromSeconds(
-          +this.x - +sixDaysInSeconds
-        )} - ${formatDateFromSeconds(+this.x)}<br/>
+          originalData.week.start,
+          'short'
+        )} - ${formatDateFromSeconds(originalData.week.end, 'short')}<br/>
         <span style="height: 0.5em;width: 0.5em;background-color: ${
           linesConfig[0].color
         };border-radius: 50%;display: inline-block;"></span> ${formatNumber(
-          (this.points as any[])[0].y
+          contextObjects[0].y
         )}<br/>
         <span style="height: 0.5em;width: 0.5em;background-color: ${
           linesConfig[1].color
         };border-radius: 50%;display: inline-block;"></span> ${formatNumber(
-          (this.points as any[])[1].y
+          contextObjects[1].y
         )} (${formatPercentage(percentage)}%)`;
       },
     },
@@ -167,7 +167,7 @@ function getChartOptions(
     },
     series: values.map((list, index) => ({
       type: 'line',
-      data: list.map((value) => value.value as number),
+      data: list.map((value) => ({ y: value.value, originalData: value })),
       name: linesConfig[index].legendLabel,
       showInLegend: true,
       color: linesConfig[index].color,
@@ -177,9 +177,17 @@ function getChartOptions(
       },
     })),
     legend: {
-      align: 'left',
+      itemWidth: 300,
+      reversed: true,
+      itemHoverStyle: {
+        color: '#666',
+      },
       itemStyle: {
+        color: '#666',
+        cursor: 'pointer',
+        fontSize: '12px',
         fontWeight: 'normal',
+        textOverflow: 'ellipsis',
       },
     },
     plotOptions: {

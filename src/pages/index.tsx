@@ -4,8 +4,6 @@ import path from 'path';
 import { useState } from 'react';
 import ExternalLink from '~/assets/external-link.svg';
 import Notification from '~/assets/notification.svg';
-import { ChartRegionControls } from '~/components-styled/chart-region-controls';
-import { ChoroplethLegenda } from '~/components/choropleth/legenda/ChoroplethLegenda';
 import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/useSafetyRegionLegendaData';
 import { MunicipalityChoropleth } from '~/components/choropleth/MunicipalityChoropleth';
 import { SafetyRegionChoropleth } from '~/components/choropleth/SafetyRegionChoropleth';
@@ -24,7 +22,8 @@ import styles from './index.module.scss';
 import { EscalationMapLegenda } from './veiligheidsregio';
 import { assert } from '~/utils/assert';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { Metadata } from '~/components-styled/metadata';
+import { ChoroplethTile } from '~/components-styled/choropleth-tile';
+import css from '@styled-system/css';
 
 interface StaticProps {
   props: INationalHomepageData;
@@ -42,16 +41,16 @@ interface INationalHomepageData {
  * Adjustments here need to be applied in Lokalize too.
  * This is also why the keys are a bit more verbose.
  */
-interface EscalationLevelCounts {
+type EscalationLevelCounts = {
   escalationLevel1: number;
   escalationLevel2: number;
   escalationLevel3: number;
   escalationLevel4: number;
   escalationLevel5: number;
-}
+};
 
 const Home: FCWithLayout<INationalHomepageData> = (props) => {
-  const { data, text, escalationLevelCounts, lastGenerated } = props;
+  const { text, escalationLevelCounts } = props;
   const router = useRouter();
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
     'municipal'
@@ -66,13 +65,16 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
         title={text.laatste_ontwikkelingen.title}
         as="h2"
       />
-      <article className={`${styles.notification} metric-article`}>
+      <article
+        className={styles.notification}
+        css={css({ mb: 4, ml: [-4, null, 0], mr: [-4, null, 0] })}
+      >
         <div className={styles.textgroup}>
           <h3 className={styles.header}>{text.notificatie.titel}</h3>
           <p>
             {replaceVariablesInText(
               text.notificatie.bericht,
-              (escalationLevelCounts as unknown) as { [key: string]: string }
+              escalationLevelCounts
             )}
           </p>
         </div>
@@ -87,73 +89,55 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
         </a>
       </article>
 
-      <article className="metric-article layout-choropleth">
-        <div className="choropleth-header">
-          <h2>{text.veiligheidsregio_index.selecteer_titel}</h2>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: text.veiligheidsregio_index.selecteer_toelichting,
-            }}
-          />
-          <EscalationMapLegenda text={text} />
-        </div>
-        <div className="choropleth-chart">
-          <SafetyRegionChoropleth
-            metricName="escalation_levels"
-            metricValueName="escalation_level"
-            onSelect={createSelectRegionHandler(router)}
-            tooltipContent={escalationTooltip(router)}
-          />
-        </div>
-        <Metadata date={+lastGenerated} />
-      </article>
-
-      <article className="metric-article layout-choropleth">
-        <div className="choropleth-header">
-          <h3>{text.positief_geteste_personen.map_titel}</h3>
-          <p>{text.positief_geteste_personen.map_toelichting}</p>
-          <div className="choropleth-controls">
-            <ChartRegionControls
-              onChange={(val: 'region' | 'municipal') => setSelectedMap(val)}
+      <ChoroplethTile
+        title={text.veiligheidsregio_index.selecteer_titel}
+        description={
+          <>
+            <span
+              dangerouslySetInnerHTML={{
+                __html: text.veiligheidsregio_index.selecteer_toelichting,
+              }}
             />
-          </div>
-        </div>
-
-        <div className="choropleth-chart">
-          {selectedMap === 'municipal' && (
-            <MunicipalityChoropleth
-              metricName="positive_tested_people"
-              tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
-                router
-              )}
-              onSelect={createSelectMunicipalHandler(router)}
-            />
-          )}
-          {selectedMap === 'region' && (
-            <SafetyRegionChoropleth
-              metricName="positive_tested_people"
-              tooltipContent={createPositiveTestedPeopleRegionalTooltip(router)}
-              onSelect={createSelectRegionHandler(router)}
-            />
-          )}
-        </div>
-
-        <div className="choropleth-legend">
-          {legendItems && (
-            <ChoroplethLegenda
-              items={legendItems}
-              title={text.positief_geteste_personen.chloropleth_legenda.titel}
-            />
-          )}
-        </div>
-        <Metadata
-          date={
-            data.infected_people_delta_normalized.last_value
-              ?.date_of_report_unix
-          }
-          source={text.positief_geteste_personen.bron}
+            <EscalationMapLegenda text={text} />
+          </>
+        }
+      >
+        <SafetyRegionChoropleth
+          metricName="escalation_levels"
+          metricValueName="escalation_level"
+          onSelect={createSelectRegionHandler(router)}
+          tooltipContent={escalationTooltip(router)}
         />
-      </article>
+      </ChoroplethTile>
+
+      <ChoroplethTile
+        title={text.positief_geteste_personen.map_titel}
+        description={text.positief_geteste_personen.map_toelichting}
+        onChangeControls={setSelectedMap}
+        legend={
+          legendItems // this data value should probably not be optional
+            ? {
+                title: text.positief_geteste_personen.chloropleth_legenda.titel,
+                items: legendItems,
+              }
+            : undefined
+        }
+      >
+        {selectedMap === 'municipal' && (
+          <MunicipalityChoropleth
+            metricName="positive_tested_people"
+            tooltipContent={createPositiveTestedPeopleMunicipalTooltip(router)}
+            onSelect={createSelectMunicipalHandler(router)}
+          />
+        )}
+        {selectedMap === 'region' && (
+          <SafetyRegionChoropleth
+            metricName="positive_tested_people"
+            tooltipContent={createPositiveTestedPeopleRegionalTooltip(router)}
+            onSelect={createSelectRegionHandler(router)}
+          />
+        )}
+      </ChoroplethTile>
     </>
   );
 };
@@ -189,7 +173,7 @@ const getEscalationCounts = (
 };
 
 export async function getStaticProps(): Promise<StaticProps> {
-  const text = require('../locale/index').default;
+  const text = (await import('../locale/index')).default;
 
   const serializedContent = MDToHTMLString(
     text.veiligheidsregio_index.selecteer_toelichting
