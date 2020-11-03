@@ -206,6 +206,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
 
       <KpiSection>
         <LineChart
+          timeframeOptions={['all', '5weeks']}
           title={ggdText.linechart_percentage_titel}
           description={ggdText.linechart_percentage_toelichting}
           values={ggdValues.map((value) => ({
@@ -237,6 +238,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
 
       <KpiSection>
         <MultipleLineChart
+          timeframeOptions={['all', '5weeks']}
           title={ggdText.linechart_totaltests_titel}
           description={ggdText.linechart_totaltests_toelichting}
           values={[

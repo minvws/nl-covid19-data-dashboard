@@ -8,8 +8,8 @@ import { assert } from '~/utils/assert';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
-import styles from './lineChart.module.scss';
 import { Value } from './lineChartWithWeekTooltip';
+import styles from './lineChart.module.scss';
 
 type LineConfig = {
   color: string;
@@ -177,9 +177,17 @@ function getChartOptions(
       },
     })),
     legend: {
-      align: 'left',
+      itemWidth: 300,
+      reversed: true,
+      itemHoverStyle: {
+        color: '#666',
+      },
       itemStyle: {
+        color: '#666',
+        cursor: 'pointer',
+        fontSize: '12px',
         fontWeight: 'normal',
+        textOverflow: 'ellipsis',
       },
     },
     plotOptions: {
