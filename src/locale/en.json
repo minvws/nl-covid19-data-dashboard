@@ -86,7 +86,7 @@
       "description": "National overview of confirmed COVID-19 cases who are admitted to a hospital intensive care unit (ICU)."
     },
     "titel_sidebar": "Intensive care units admissions per day",
-    "titel_kpi": "Intensive care admissions by day"
+    "titel_kpi": "Average number of intensive care admissions in 3 days"
   },
   "verdenkingen_huisartsen": {
     "datums": "Value of  {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
@@ -691,7 +691,7 @@
       "title": "Hospital admissions residents {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
       "description": "Confirmed cases of COVID-19 in safety region {{safetyRegionName}} who are admitted to a hospital."
     },
-    "titel_kpi": "Hospital admissions per day"
+    "titel_kpi": "Average number of hospital admissions in 3 days"
   },
   "veiligheidsregio_positief_geteste_personen": {
     "titel_sidebar": "Confirmed cases per 100,000 inhabitants per day",
