@@ -11,6 +11,9 @@ import '~/scss/style.scss';
 import { GlobalStyle } from '~/style/global-style';
 import theme from '~/style/theme';
 
+/* Polyfill for flatMap */
+import 'core-js/features/array/flat-map';
+
 type AppPropsWithLayout = AppProps & {
   Component: FCWithLayout;
 };
