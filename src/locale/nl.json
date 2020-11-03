@@ -866,7 +866,7 @@
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Risiconiveaus",
-    "selecteer_toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\nEr zijn [landelijke maatregelen](https://www.rijksoverheid.nl/actueel/nieuws/2020/10/13/gedeeltelijke-lockdown-om-besmettingen-terug-te-dringen) van kracht om de snelle verspreiding van het coronavirus tegen te gaan. \n\n[Meer over de risiconiveaus](/over-risiconiveaus)",
+    "selecteer_toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\nEr zijn [landelijke maatregelen](https://www.rijksoverheid.nl/actueel/nieuws/2020/11/03/tijdelijke-verzwaring-van-de-gedeeltelijke-lockdown) van kracht om de snelle verspreiding van het coronavirus tegen te gaan. \n\n[Meer over de risiconiveaus](/over-risiconiveaus)",
     "metadata": {
       "title": "Risiconiveaus per veiligheidsregio | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van het huidige risiconiveau per veiligheidsregio in Nederland."
@@ -888,7 +888,7 @@
   },
   "escalatie_niveau": {
     "titel": "Risiconiveaus",
-    "toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\nEr zijn [landelijke maatregelen](https://www.rijksoverheid.nl/actueel/nieuws/2020/10/13/gedeeltelijke-lockdown-om-besmettingen-terug-te-dringen) van kracht om de snelle verspreiding van het coronavirus tegen te gaan. \n\n[Meer over de risiconiveaus](/over-risiconiveaus)",
+    "toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\nEr zijn [landelijke maatregelen](https://www.rijksoverheid.nl/actueel/nieuws/2020/11/03/tijdelijke-verzwaring-van-de-gedeeltelijke-lockdown) van kracht om de snelle verspreiding van het coronavirus tegen te gaan. \n\n[Meer over de risiconiveaus](/over-risiconiveaus)",
     "types": {
       "1": {
         "titel": "Waakzaam",
