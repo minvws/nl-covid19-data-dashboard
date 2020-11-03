@@ -12,6 +12,7 @@ interface LineChartTileProps<T> extends LineChartProps<T> {
     text: string;
     href: string;
   };
+  valueAnnotation?: string;
 }
 
 export function LineChartTile<T extends Value>({

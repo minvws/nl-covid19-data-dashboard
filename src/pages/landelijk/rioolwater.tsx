@@ -41,7 +41,7 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
         <KpiTile title={text.barscale_titel} description={text.extra_uitleg}>
           <KpiValue
             absolute={sewerAverages.last_value.average}
-            data-cy="infected_daily_total"
+            valueAnnotation={siteText.waarde_annotaties.riool_normalized}
           />
         </KpiTile>
         <KpiTile
@@ -74,6 +74,7 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
             'short'
           )}:</strong> ${formatNumber(x.value)}`;
         }}
+        valueAnnotation={siteText.waarde_annotaties.riool_normalized}
       />
     </>
   );

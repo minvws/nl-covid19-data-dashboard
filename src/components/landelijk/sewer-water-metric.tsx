@@ -24,6 +24,7 @@ export function SewerWaterMetric(props: { data: NationalSewer }) {
       value={data.last_value.average}
       format={formatNumber}
       description={description}
+      valueAnnotation={siteText.waarde_annotaties.riool_normalized}
     />
   );
 }

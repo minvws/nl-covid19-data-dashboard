@@ -30,7 +30,12 @@ interface IMunicipality {
   gemcode: string;
 }
 
-interface MunicipalityLayoutProps extends IMunicipalityData {
+/**
+ * When you navigate to /gemeente root from the top menu, there is no GM code
+ * and the data will be undefined. That's why we use Partial here, so that TS
+ * knows that data and other props from data are not guaranteed to be present.
+ */
+interface MunicipalityLayoutProps extends Partial<IMunicipalityData> {
   children: React.ReactNode;
 }
 
@@ -103,7 +108,9 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
     | { name: string; code: string; id: number }
     | undefined = getSafetyRegionForMunicipalityCode(code as string);
 
-  const sewerWaterBarScaleData = getSewerWaterBarScaleData(data);
+  const sewerWaterBarScaleData = data
+    ? getSewerWaterBarScaleData(data)
+    : undefined;
 
   return (
     <>

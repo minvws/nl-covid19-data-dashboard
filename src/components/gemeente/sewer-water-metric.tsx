@@ -26,6 +26,7 @@ export function SewerWaterMetric(props: { data: SewerWaterBarScaleData }) {
       value={data.value}
       format={formatNumber}
       description={description}
+      valueAnnotation={siteText.waarde_annotaties.riool_normalized}
     />
   );
 }
