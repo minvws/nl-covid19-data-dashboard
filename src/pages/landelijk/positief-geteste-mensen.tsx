@@ -237,7 +237,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         <KpiTile
           title={ggdText.totaal_getest_week_titel}
           metadata={{
-            date: ggdLastValue.date_of_report_unix,
+            date: ggdLastValue.week_end_unix,
             source: ggdText.bron,
           }}
         >
@@ -247,7 +247,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         <KpiTile
           title={ggdText.positief_getest_week_titel}
           metadata={{
-            date: ggdLastValue.date_of_report_unix,
+            date: ggdLastValue.week_end_unix,
             source: ggdText.bron,
           }}
         >
@@ -306,7 +306,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           return `${formatPercentage(y)}%`;
         }}
         metadata={{
-          date: ggdLastValue.date_of_report_unix,
+          date: ggdLastValue.week_end_unix,
           source: ggdText.bron,
         }}
       />
@@ -343,7 +343,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           },
         ]}
         metadata={{
-          date: ggdLastValue.date_of_report_unix,
+          date: ggdLastValue.week_end_unix,
           source: ggdText.bron,
         }}
       />

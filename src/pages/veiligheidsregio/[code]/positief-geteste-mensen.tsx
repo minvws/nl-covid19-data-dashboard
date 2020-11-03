@@ -178,7 +178,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           datumsText: ggdText.datums,
           dateOfInsertionUnix: ggdData.date_of_insertion_unix,
           weekStartUnix: ggdData.week_start_unix,
-          weekEndUnix: ggdData.week_start_unix,
+          weekEndUnix: ggdData.week_end_unix,
           dataSource: ggdText.bron,
         }}
       />
@@ -187,7 +187,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
         <KpiTile
           title={ggdText.totaal_getest_week_titel}
           metadata={{
-            date: ggdData.date_of_report_unix,
+            date: ggdData.week_end_unix,
             source: ggdText.bron,
           }}
         >
@@ -197,7 +197,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
         <KpiTile
           title={ggdText.positief_getest_week_titel}
           metadata={{
-            date: ggdData.date_of_report_unix,
+            date: ggdData.week_end_unix,
             source: ggdText.bron,
           }}
         >
@@ -256,7 +256,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           return `${formatPercentage(y)}%`;
         }}
         metadata={{
-          date: ggdData.date_of_report_unix,
+          date: ggdData.week_end_unix,
           source: ggdText.bron,
         }}
       />
@@ -294,7 +294,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           },
         ]}
         metadata={{
-          date: ggdData.date_of_report_unix,
+          date: ggdData.week_end_unix,
           source: ggdText.bron,
         }}
       />
