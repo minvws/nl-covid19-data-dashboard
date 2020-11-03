@@ -401,7 +401,7 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
     },
     "titel": "Sewage water examination",
-    "pagina_toelichting": "Average number of coronavirus particles  per 100,000 inhabitants found in wastewater. The weekly average is calculated by adding up all the values measured at roughly 300 locations and dividing this by the number of measurements taken. This is done weekly.",
+    "pagina_toelichting": "Average number of coronavirus particles per 100.000 inhabitants found in wastewater. The weekly average is calculated by adding up all the values measured at roughly 300 locations and dividing this by the number of measurements taken.",
     "barscale_titel": "Average number of virus particles per 100.000 inhabitants",
     "extra_uitleg": "The weekly average for all of the Netherlands is calculated by adding up all the values measured in one week and dividing this by the number of measurements taken.",
     "barscale_screenreader_text": "{{value}} virus particles per 100.000 inhabitants",
@@ -749,7 +749,7 @@
   "veiligheidsregio_rioolwater_metingen": {
     "titel_sidebar": "Sewage water examination",
     "titel": "Sewage water examination in {{safetyRegion}}",
-    "pagina_toelichting": "Average number of coronavirus particles per 100,000 inhabitants found in wastewater. The weekly average is calculated by adding up all the values measured in this safety region and dividing this by the number of measurements taken. This is done weekly.",
+    "pagina_toelichting": "Average number of coronavirus particles per 100.000 inhabitants found in wastewater. The weekly average is calculated by adding up all the values measured in this safety region and dividing this by the number of measurements taken.",
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis. ",
     "screen_reader_graph_content": "{{value}} virus particles per 100.000 inhabitants",
     "barscale_titel": "Average number of coronavirus particles per 100,000 inhabitants",
@@ -838,7 +838,7 @@
   "gemeente_rioolwater_metingen": {
     "titel_sidebar": "Sewage water examination",
     "titel": "Sewage water examination in {{municipality}}",
-    "pagina_toelichting": "Average number of coronavirus particles per 100,000 inhabitants found in wastewater. The weekly average is calculated by adding up all the values measured in this municipality and dividing this by the number of measurements taken. This is done weekly.",
+    "pagina_toelichting": "Average number of coronavirus particles per 100.000 inhabitants found in wastewater. The weekly average is calculated by adding up all the values measured in this municipality and dividing this by the number of measurements taken.",
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
     "screen_reader_graph_content": "{{value}} virus particles per 100.000 inhabitants",
     "barscale_titel": "Average number of virus particles per 100,000 inhabitants",
