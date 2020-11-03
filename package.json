@@ -130,7 +130,8 @@
   },
   "browserslist": [
     "defaults",
-    "edge >= 17",
+    "edge 17",
+    "edge 18",
     "not ie < 11"
   ]
 }
