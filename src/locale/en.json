@@ -418,7 +418,7 @@
     "map_titel": "Average number of virus particles per 100.000 inhabitants",
     "map_toelichting": "This map shows the average number of virus particles per 100.000 inhabitants, per safety region.",
     "legenda_titel": "",
-    "map_tooltip": ""
+    "map_tooltip": "{{value}} x100 billion virus particles per 100.000 inhabitants"
   },
   "notfound_titel": {
     "text": "Something went wrong"
@@ -1042,6 +1042,6 @@
     "url": ""
   },
   "waarde_annotaties": {
-    "riool_normalized": ""
+    "riool_normalized": "x100 billion"
   }
 }
