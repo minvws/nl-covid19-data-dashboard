@@ -100,6 +100,7 @@ export interface Deceased {
   date_of_insertion_unix: number;
 }
 
+
 export interface National {
   last_generated: string;
   proto_name: "NL";
