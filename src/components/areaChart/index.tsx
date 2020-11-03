@@ -9,6 +9,9 @@ import { formatNumber } from '~/utils/formatNumber';
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
 import styles from './areaChart.module.scss';
 
+/* Polyfill for flatMap */
+import 'core-js/features/array/flat-map';
+
 if (typeof Highcharts === 'object') {
   require('highcharts/highcharts-more')(Highcharts);
 }

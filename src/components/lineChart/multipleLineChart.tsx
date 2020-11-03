@@ -11,6 +11,9 @@ import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
 import { Value } from './lineChartWithWeekTooltip';
 import styles from './lineChart.module.scss';
 
+/* Polyfill for flatMap */
+import 'core-js/features/array/flat-map';
+
 type LineConfig = {
   color: string;
   legendLabel: string;

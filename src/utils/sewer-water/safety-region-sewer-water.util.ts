@@ -10,6 +10,9 @@ import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import siteText from '~/locale/index';
 
+/* Polyfill for flatMap */
+import 'core-js/features/array/flat-map';
+
 const text = siteText.veiligheidsregio_rioolwater_metingen;
 
 // Specific interfaces to pass data between the formatting functions and the highcharts configs
