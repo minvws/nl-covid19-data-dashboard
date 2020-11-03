@@ -158,7 +158,7 @@ function getChartOptions(props: IGetOptions): Highcharts.Options {
       lineColor: '#C4C4C4',
       gridLineColor: '#ca005d',
       type: 'datetime',
-      categories: rangeData.map((el) => el[0].getTime().toString()),
+      categories: rangeData.map((el) => el[0].getTime() as any),
       title: {
         text: null,
       },
