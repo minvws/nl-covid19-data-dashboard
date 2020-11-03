@@ -143,6 +143,10 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
         title={replaceVariablesInText(text.map_titel, {
           safetyRegion: safetyRegionName,
         })}
+        metadata={{
+          date: resultsPerRegion.last_value.date_of_report_unix,
+          source: text.bron,
+        }}
         description={text.map_toelichting}
         legend={
           legendItems // this data value should probably not be optional

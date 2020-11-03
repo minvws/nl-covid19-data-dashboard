@@ -47,6 +47,11 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
           <KpiTile
             title={text.cijfer_titel}
             description={text.cijfer_toelichting}
+            metadata={{
+              date:
+                infectiousPeopleLastKnownAverage.last_value.date_of_report_unix,
+              source: text.bron,
+            }}
           >
             <KpiValue
               absolute={

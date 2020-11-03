@@ -136,6 +136,10 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
       <ChoroplethTile
         data-cy="chloropleths"
         title={text.map_titel}
+        metadata={{
+          date: delta?.last_value?.date_of_report_unix,
+          source: text.bron,
+        }}
         description={text.map_toelichting}
         onChangeControls={setSelectedMap}
         legend={
