@@ -158,9 +158,7 @@ function getChartOptions(
          * transparent fill
          */
 
-        fillColor: showFill
-          ? 'rgba(51, 145, 204, 0.2)'
-          : 'rgba(255, 255, 255, 1.0)',
+        fillColor: showFill ? 'rgba(51, 145, 204, 0.2)' : 'transparent',
         marker: {
           enabled: false,
         },
