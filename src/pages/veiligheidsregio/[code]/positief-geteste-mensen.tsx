@@ -10,17 +10,18 @@ import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
-import {
-  LineChart,
-  Value,
-} from '~/components/lineChart/lineChartWithWeekTooltip';
 import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/useSafetyRegionLegendaData';
 import { MunicipalityChoropleth } from '~/components/choropleth/MunicipalityChoropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth/selectHandlers/createSelectMunicipalHandler';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/createPositiveTestedPeopleMunicipalTooltip';
 import { ContentHeader } from '~/components/contentHeader';
+import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRangeHack';
 import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
+import {
+  LineChart,
+  Value,
+} from '~/components/lineChart/lineChartWithWeekTooltip';
 import { MultipleLineChart } from '~/components/lineChart/multipleLineChart';
 import { SEOHead } from '~/components/seoHead';
 import { PositivelyTestedPeopleBarScale } from '~/components/veiligheidsregio/positive-tested-people-barscale';
@@ -151,7 +152,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
         />
       </ChoroplethTile>
 
-      <ContentHeader
+      <ContentHeader_weekRangeHack
         title={replaceVariablesInText(ggdText.titel, {
           safetyRegion: safetyRegionName,
         })}
@@ -160,7 +161,9 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
         subtitle={ggdText.toelichting}
         metadata={{
           datumsText: ggdText.datums,
-          dateInsertedUnix: ggdData.date_of_insertion_unix,
+          dateOfInsertionUnix: ggdData.date_of_insertion_unix,
+          weekStartUnix: ggdData.week_start_unix,
+          weekEndUnix: ggdData.week_start_unix,
           dataSource: ggdText.bron,
         }}
       />

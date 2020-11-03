@@ -918,7 +918,7 @@
     "titel": "Percentage positief geteste personen via GGD teststraten",
     "summary_title": "{{percentage}} van de GGD testen waren positief",
     "summary_link_cta": "Lees meer",
-    "datums": "Week van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
+    "datums": "Week van {{weekStart}} tot {{weekEnd}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
     "bron": {
       "href": "https://www.rivm.nl/documenten/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
