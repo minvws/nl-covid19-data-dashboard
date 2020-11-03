@@ -1,23 +1,23 @@
 // Props type needs to be imported from lineChart directly because charts only works with
 // default export.
-import LineChart, { LineChartProps } from '~/components/lineChart';
+import LineChart, { LineChartProps, Value } from '~/components/lineChart';
 import locale from '~/locale/index';
 import { Spacer } from './base';
 import { ExternalLink } from './external-link';
 import { Tile } from './layout';
 import { Text } from './typography';
 
-interface LineChartTileProps extends LineChartProps {
+interface LineChartTileProps<T> extends LineChartProps<T> {
   sourcedFrom?: {
     text: string;
     href: string;
   };
 }
 
-export function LineChartTile({
+export function LineChartTile<T extends Value>({
   sourcedFrom,
   ...chartProps
-}: LineChartTileProps) {
+}: LineChartTileProps<T>) {
   return (
     <Tile
       /**

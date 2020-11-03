@@ -9,8 +9,16 @@ import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
+import { formatDateFromSeconds } from '~/utils/formatDate';
+import { formatNumber } from '~/utils/formatNumber';
 
 const text = siteText.rioolwater_metingen;
+
+interface LineChartValue {
+  value: number;
+  date: number;
+  week: { start: number; end: number };
+}
 
 const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
   const sewerAverages = data.rioolwater_metingen;
@@ -58,11 +66,23 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
       <LineChartTile
         title={text.linechart_titel}
         timeframeOptions={['all', '5weeks']}
-        values={sewerAverages.values.map((value) => ({
-          value: Number(value.average),
-          date: value.week_unix,
-          week: { start: value.week_start_unix, end: value.week_end_unix },
-        }))}
+        values={sewerAverages.values.map(
+          (value) =>
+            ({
+              value: Number(value.average),
+              date: value.week_unix,
+              week: { start: value.week_start_unix, end: value.week_end_unix },
+            } as LineChartValue)
+        )}
+        formatTooltip={(x) => {
+          return `<strong>${formatDateFromSeconds(
+            x.week.start,
+            'short'
+          )} - ${formatDateFromSeconds(
+            x.week.end,
+            'short'
+          )}:</strong> ${formatNumber(x.value)}`;
+        }}
       />
     </>
   );
