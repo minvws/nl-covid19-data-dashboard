@@ -10,8 +10,10 @@ import {
   getSafetyRegionPaths,
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
-import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { TwoKpiSection } from '~/components-styled/two-kpi-section';
+import { KpiTile } from '~/components-styled/kpi-tile';
+import { KpiValue } from '~/components-styled/kpi-value';
 
 const text = siteText.veiligheidsregio_verpleeghuis_besmette_locaties;
 
@@ -54,24 +56,21 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
         }}
       />
 
-      <div className="layout-two-column">
-        <article className="metric-article column-item">
-          <h3>{text.barscale_titel}</h3>
-          <p className="text-blue kpi" data-cy="infected_daily_total">
-            {formatNumber(newlyInfectedLocations)}
-          </p>
-          <p>{text.barscale_toelichting}</p>
-        </article>
+      <TwoKpiSection>
+        <KpiTile title={text.kpi_titel} description={text.kpi_toelichting}>
+          <KpiValue
+            absolute={infectedLocationsTotal}
+            percentage={infectedLocationsPercentage}
+          />
+        </KpiTile>
 
-        <article className="metric-article column-item">
-          <h3>{text.kpi_titel}</h3>
-          <p className="text-blue kpi">
-            {formatNumber(infectedLocationsTotal)} (
-            {formatPercentage(infectedLocationsPercentage)}%)
-          </p>
-          <p>{text.kpi_toelichting}</p>
-        </article>
-      </div>
+        <KpiTile
+          title={text.barscale_titel}
+          description={text.barscale_toelichting}
+        >
+          <KpiValue absolute={newlyInfectedLocations} />
+        </KpiTile>
+      </TwoKpiSection>
 
       {infectedLocationsTotal !== undefined && (
         <article className="metric-article">

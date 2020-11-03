@@ -70,11 +70,11 @@ breakpoints.lg = breakpoints[3];
 breakpoints.xl = breakpoints[4];
 
 const mediaQueries = {
-  xs: `@media screen and (min-width: ${breakpoints[0]})`,
-  sm: `@media screen and (min-width: ${breakpoints[1]})`,
-  md: `@media screen and (min-width: ${breakpoints[2]})`,
-  lg: `@media screen and (min-width: ${breakpoints[3]})`,
-  xl: `@media screen and (min-width: ${breakpoints[4]})`,
+  xs: `screen and (min-width: ${breakpoints[0]})`,
+  sm: `screen and (min-width: ${breakpoints[1]})`,
+  md: `screen and (min-width: ${breakpoints[2]})`,
+  lg: `screen and (min-width: ${breakpoints[3]})`,
+  xl: `screen and (min-width: ${breakpoints[4]})`,
 };
 
 type TMediaQueries = typeof mediaQueries;
@@ -84,6 +84,8 @@ const colors = {
   icon: '#01689b',
   button: '#01689b',
   shadow: '#e5e5e5',
+  lightGray: '#dfdfdf',
+  annotation: '#595959',
 };
 
 const radii = [0, 5, 10];
@@ -108,3 +110,11 @@ const theme: TDashboardTheme = {
 };
 
 export default theme;
+
+/**
+ * Tell styled-components the shape of our theme
+ */
+declare module 'styled-components' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  export interface DefaultTheme extends TDashboardTheme {}
+}

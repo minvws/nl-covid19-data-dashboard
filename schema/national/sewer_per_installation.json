@@ -1,7 +1,7 @@
 {
   "definitions": {
-    "item": {
-      "title": "rioolwater_metingen_per_rwzi_last_value",
+    "value": {
+      "title": "national_sewer_per_installation_value",
       "type": "object",
       "required": [
         "week_start_unix",
@@ -12,7 +12,7 @@
         "gm_code",
         "vrcode",
         "vrnaam",
-        "rna_per_ml",
+        "rna_normalized",
         "date_of_insertion_unix"
       ],
       "additionalProperties": false,
@@ -43,7 +43,7 @@
         "vrnaam": {
           "type": "string"
         },
-        "rna_per_ml": {
+        "rna_normalized": {
           "type": "number"
         },
         "date_of_insertion_unix": {
@@ -53,8 +53,7 @@
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "rioolwater_metingen_per_rwzi.json",
-  "title": "rioolwater_metingen_per_rwzi",
+  "title": "national_sewer_per_installation",
   "type": "object",
   "required": ["values", "last_value"],
   "additionalProperties": false,
@@ -62,11 +61,11 @@
     "values": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/item"
+        "$ref": "#/definitions/value"
       }
     },
     "last_value": {
-      "$ref": "#/definitions/item"
+      "$ref": "#/definitions/value"
     }
   }
 }

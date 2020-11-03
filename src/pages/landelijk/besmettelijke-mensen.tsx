@@ -1,7 +1,7 @@
 import Ziektegolf from '~/assets/ziektegolf.svg';
 import { AreaChart } from '~/components/charts/index';
-import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/contentHeader';
+import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { Legenda } from '~/components/legenda';
 import { SEOHead } from '~/components/seoHead';
@@ -17,8 +17,6 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
   const count = data.infectious_people_count;
   const infectiousPeopleLastKnownAverage =
     data.infectious_people_last_known_average;
-  const infectiousPeopleLastKnownNormalizedAverage =
-    data.infectious_people_count_normalized;
 
   return (
     <>
@@ -33,51 +31,51 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
         subtitle={text.toelichting_pagina}
         metadata={{
           datumsText: text.datums,
-          dateUnix: count?.last_value?.date_of_report_unix,
-          dateInsertedUnix: count?.last_value?.date_of_insertion_unix,
+          dateUnix:
+            infectiousPeopleLastKnownAverage.last_value.date_of_report_unix,
+          dateInsertedUnix:
+            infectiousPeopleLastKnownAverage.last_value.date_of_insertion_unix,
           dataSource: text.bron,
         }}
       />
 
-      <div className="layout-two-column">
-        <article
-          className="metric-article column-item"
-          data-cy="infected_daily_increase"
-        >
-          <h3>
-            {text.cijfer_titel}
+      {/*
+        @TODO make this replace the code below. Maybe extend TwoKpiSection so that
+        it renders the KPI full-width if there is only one child.
 
-            {count && (
-              <span className="text-blue kpi">
-                {formatNumber(
-                  infectiousPeopleLastKnownAverage?.last_value.infectious_avg
-                )}
-              </span>
+        Discuss with design. https://trello.com/c/gnDOKkZ2/780-regressie-gemiddeld-aantal-besmettelijke-mensen-per-100k
+
+      <TwoKpiSection>
+        {infectiousPeopleLastKnownAverage && (
+          <KpiTile
+            title={text.cijfer_titel}
+            description={text.cijfer_toelichting}
+          >
+            <KpiValue
+              absolute={
+                infectiousPeopleLastKnownAverage.last_value.infectious_avg
+              }
+            />
+          </KpiTile>
+        )}
+      </TwoKpiSection>
+
+      */}
+
+      <article className="metric-article layout-two-column">
+        <div className="column-item column-item-extra-margin">
+          <h3>{text.cijfer_titel}</h3>
+          <p className="text-blue kpi" data-cy="infected_daily_total">
+            {formatNumber(
+              infectiousPeopleLastKnownAverage.last_value.infectious_avg
             )}
-          </h3>
-          <div className="column-item">
-            <p>{text.cijfer_toelichting}</p>
-          </div>
-        </article>
+          </p>
+        </div>
 
-        <article className="metric-article column-item">
-          <h3>
-            {text.barscale_titel}
-
-            {count && (
-              <span className="text-blue kpi">
-                {formatNumber(
-                  infectiousPeopleLastKnownNormalizedAverage?.last_value
-                    .infectious_avg_normalized
-                )}
-              </span>
-            )}
-          </h3>
-          <div className="column-item">
-            <p>{text.barscale_toelichting}</p>
-          </div>
-        </article>
-      </div>
+        <div className="column-item column-item-extra-margin">
+          <p>{text.cijfer_toelichting}</p>
+        </div>
+      </article>
 
       {count?.values && (
         <article className="metric-article">

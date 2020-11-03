@@ -3,7 +3,6 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import siteText from '~/locale/index';
-import { WithChildren } from '~/types/index';
 import municipalities from '~/data/gemeente_veiligheidsregio.json';
 import { IMunicipalityData } from '~/static-props/municipality-data';
 
@@ -29,6 +28,15 @@ interface IMunicipality {
   name: string;
   safetyRegion: string;
   gemcode: string;
+}
+
+/**
+ * When you navigate to /gemeente root from the top menu, there is no GM code
+ * and the data will be undefined. That's why we use Partial here, so that TS
+ * knows that data and other props from data are not guaranteed to be present.
+ */
+interface MunicipalityLayoutProps extends Partial<IMunicipalityData> {
+  children: React.ReactNode;
 }
 
 export function getMunicipalityLayout() {
@@ -62,7 +70,7 @@ export function getMunicipalityLayout() {
  * More info on persistent layouts:
  * https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
-function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
+function MunicipalityLayout(props: MunicipalityLayoutProps) {
   const { children, data, municipalityName } = props;
   const router = useRouter();
   const isLargeScreen = useMediaQuery('(min-width: 1000px)');
@@ -100,7 +108,9 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
     | { name: string; code: string; id: number }
     | undefined = getSafetyRegionForMunicipalityCode(code as string);
 
-  const sewerWaterBarScaleData = getSewerWaterBarScaleData(data);
+  const sewerWaterBarScaleData = data
+    ? getSewerWaterBarScaleData(data)
+    : undefined;
 
   return (
     <>

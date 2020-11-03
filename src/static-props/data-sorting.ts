@@ -17,7 +17,7 @@ export function sortRegionalTimeSeriesInDataInPlace(data: Regionaal) {
      * There is one property in the dataset that contains timeseries nested
      * inside values, so we need to process that separately.
      */
-    if (propertyName === 'results_per_sewer_installation_per_region') {
+    if (propertyName === 'sewer_per_installation') {
       const nestedSeries = data[propertyName] as SewerTimeSeriesData<
         Timestamped
       >;
@@ -44,7 +44,7 @@ export function sortMunicipalTimeSeriesInDataInPlace(data: Municipal) {
      * There is one property in the dataset that contains timeseries nested
      * inside values, so we need to process that separately.
      */
-    if (propertyName === 'results_per_sewer_installation_per_municipality') {
+    if (propertyName === 'sewer_per_installation') {
       const nestedSeries = data[propertyName] as SewerTimeSeriesData<
         Timestamped
       >;

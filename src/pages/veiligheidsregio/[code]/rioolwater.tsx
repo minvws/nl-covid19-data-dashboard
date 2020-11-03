@@ -1,15 +1,14 @@
 import { useMemo, useState } from 'react';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import { ChartTimeControls } from '~/components-styled/chart-time-controls';
-import { KpiTile } from '~/components-styled/kpi-tile';
-import { KpiValue } from '~/components-styled/kpi-value';
-import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { BarChart } from '~/components/charts';
 import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRangeHack';
 import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
-import { InstallationSelector } from '~/components/lineChart/installationSelector';
-import styles from '~/components/lineChart/installationselector.module.scss';
+import {
+  InstallationSelector,
+  InstallationSelectorBox,
+} from '~/components/lineChart/installationSelector';
 import { RegionalSewerWaterChart } from '~/components/lineChart/regionalSewerWaterChart';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
@@ -27,6 +26,9 @@ import {
   getSewerWaterScatterPlotData,
 } from '~/utils/sewer-water/safety-region-sewer-water.util';
 import { TimeframeOption } from '~/utils/timeframe';
+import { TwoKpiSection } from '~/components-styled/two-kpi-section';
+import { KpiTile } from '~/components-styled/kpi-tile';
+import { KpiValue } from '~/components-styled/kpi-value';
 
 const text = siteText.veiligheidsregio_rioolwater_metingen;
 
@@ -49,7 +51,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
     };
   }, [data]);
 
-  const sewerAverages = data.average_sewer_installation_per_region;
+  const sewerAverages = data.sewer;
 
   const [timeframe, setTimeframe] = useState<TimeframeOption>('all');
   const [selectedInstallation, setSelectedInstallation] = useState<
@@ -82,24 +84,27 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
         }}
       />
 
-      <TwoKpiSection>
-        {barScaleData?.value !== undefined && (
+      {barScaleData && barScaleData.value !== undefined && (
+        <TwoKpiSection>
           <KpiTile title={text.barscale_titel} description={text.extra_uitleg}>
-            <KpiValue absolute={barScaleData.value} />
+            <KpiValue
+              absolute={barScaleData.value}
+              valueAnnotation={siteText.waarde_annotaties.riool_normalized}
+            />
           </KpiTile>
-        )}
-        <KpiTile
-          title={text.total_installation_count_titel}
-          description={
-            text.total_installation_count_description +
-            `<p style="color:#595959">${text.rwzi_abbrev}</p>`
-          }
-        >
-          <KpiValue
-            absolute={sewerAverages.last_value.total_installation_count}
-          />
-        </KpiTile>
-      </TwoKpiSection>
+          <KpiTile
+            title={text.total_installation_count_titel}
+            description={
+              text.total_installation_count_description +
+              `<p style="color:#595959">${text.rwzi_abbrev}</p>`
+            }
+          >
+            <KpiValue
+              absolute={data.sewer.last_value.total_installation_count}
+            />
+          </KpiTile>
+        </TwoKpiSection>
+      )}
 
       <article className="metric-article">
         <div className="metric-article-header">
@@ -114,13 +119,13 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
         {scatterPlotData && lineChartData && (
           <>
             {sewerStationNames.length > 0 && (
-              <div className={styles.selectorContainer}>
+              <InstallationSelectorBox>
                 <InstallationSelector
                   placeholderText={text.graph_selected_rwzi_placeholder}
                   onChange={setSelectedInstallation}
                   stationNames={sewerStationNames}
                 />
-              </div>
+              </InstallationSelectorBox>
             )}
             <RegionalSewerWaterChart
               timeframe={timeframe}
@@ -133,6 +138,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
                 daily_label_text: text.graph_daily_label_text_rwzi,
                 range_description: text.graph_range_description,
               }}
+              valueAnnotation={siteText.waarde_annotaties.riool_normalized}
             />
           </>
         )}
@@ -149,6 +155,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
             keys={barChartData.keys}
             data={barChartData.data}
             axisTitle={text.bar_chart_axis_title}
+            valueAnnotation={siteText.waarde_annotaties.riool_normalized}
           />
         </article>
       )}

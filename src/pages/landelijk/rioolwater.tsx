@@ -9,11 +9,13 @@ import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
+import { formatDateFromSeconds } from '~/utils/formatDate';
+import { formatNumber } from '~/utils/formatNumber';
 
 const text = siteText.rioolwater_metingen;
 
 const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
-  const sewerAverages = data.rioolwater_metingen;
+  const sewerAverages = data.sewer;
 
   return (
     <>
@@ -39,7 +41,7 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
         <KpiTile title={text.barscale_titel} description={text.extra_uitleg}>
           <KpiValue
             absolute={sewerAverages.last_value.average}
-            data-cy="infected_daily_total"
+            valueAnnotation={siteText.waarde_annotaties.riool_normalized}
           />
         </KpiTile>
         <KpiTile
@@ -63,6 +65,16 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
           date: value.week_unix,
           week: { start: value.week_start_unix, end: value.week_end_unix },
         }))}
+        formatTooltip={(x) => {
+          return `<strong>${formatDateFromSeconds(
+            x.week.start,
+            'short'
+          )} - ${formatDateFromSeconds(
+            x.week.end,
+            'short'
+          )}:</strong> ${formatNumber(x.value)}`;
+        }}
+        valueAnnotation={siteText.waarde_annotaties.riool_normalized}
       />
     </>
   );

@@ -1,9 +1,9 @@
-import React, { useMemo } from 'react';
 import Highcharts, { SeriesLineOptions } from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-
-import { formatNumber } from '~/utils/formatNumber';
+import React, { useMemo } from 'react';
+import { ValueAnnotation } from '~/components-styled/value-annotation';
 import { formatDateFromSeconds } from '~/utils/formatDate';
+import { formatNumber } from '~/utils/formatNumber';
 import { getItemFromArray } from '~/utils/getItemFromArray';
 
 type TranslationStrings = Record<string, string>;
@@ -23,6 +23,7 @@ type Week = {
 type RegionalSewerWaterLineChartProps = {
   averageValues: Value[];
   text: TranslationStrings;
+  valueAnnotation?: string;
 };
 
 function getOptions(
@@ -154,10 +155,18 @@ function getOptions(
 export function MunicipalSewerWaterLineChart({
   averageValues,
   text,
+  valueAnnotation,
 }: RegionalSewerWaterLineChartProps) {
   const chartOptions = useMemo(() => {
     return getOptions(averageValues, text);
   }, [averageValues, text]);
 
-  return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;
+  return (
+    <>
+      {valueAnnotation && (
+        <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
+      )}
+      <HighchartsReact highcharts={Highcharts} options={chartOptions} />
+    </>
+  );
 }

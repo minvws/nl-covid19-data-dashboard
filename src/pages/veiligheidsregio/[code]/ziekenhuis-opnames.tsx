@@ -67,7 +67,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
             <h3>{text.barscale_titel}</h3>
             <p className="text-blue kpi" data-cy="infected_daily_total">
               {formatNumber(
-                resultsPerRegion.last_value.hospital_increase_per_region
+                resultsPerRegion.last_value.hospital_moving_avg_per_region
               )}
             </p>
           </div>

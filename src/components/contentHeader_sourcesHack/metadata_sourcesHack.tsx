@@ -17,7 +17,7 @@ interface IProps {
     href: string;
     text: string;
   };
-  dateUnix?: number;
+  dateUnix: number;
   dateInsertedUnix?: number;
   datumsText: string;
 }
@@ -32,8 +32,6 @@ export function MetadataHack(props: IProps) {
     dateUnix,
     dateInsertedUnix,
   } = props;
-
-  if (!dateUnix) return null;
 
   const dateOfReport = formatDateFromSeconds(dateUnix, 'relative');
   const dateOfInsertion = dateInsertedUnix

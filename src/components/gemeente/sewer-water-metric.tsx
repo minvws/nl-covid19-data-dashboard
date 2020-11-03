@@ -9,16 +9,16 @@ import siteText from '~/locale/index';
 const text = siteText.common.metricKPI;
 const title = siteText.gemeente_rioolwater_metingen.barscale_titel;
 
-export function SewerWaterMetric(props: {
-  data: SewerWaterBarScaleData | null;
-}) {
+export function SewerWaterMetric(props: { data: SewerWaterBarScaleData }) {
   const { data } = props;
 
-  if (!data) return null;
-
-  const description = replaceVariablesInText(text.dateOfReport, {
-    dateOfReport: formatDateFromSeconds(Number(data.unix), 'relative'),
-  });
+  const description =
+    data.week_start_unix && data.week_end_unix
+      ? replaceVariablesInText(text.dateRangeOfReport, {
+          startDate: formatDateFromSeconds(data.week_start_unix, 'axis'),
+          endDate: formatDateFromSeconds(data.week_end_unix, 'axis'),
+        })
+      : undefined;
 
   return (
     <MetricKPI
@@ -26,6 +26,7 @@ export function SewerWaterMetric(props: {
       value={data.value}
       format={formatNumber}
       description={description}
+      valueAnnotation={siteText.waarde_annotaties.riool_normalized}
     />
   );
 }

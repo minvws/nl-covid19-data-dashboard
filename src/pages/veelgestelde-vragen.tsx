@@ -1,13 +1,13 @@
 import fs from 'fs';
 import Head from 'next/head';
 import path from 'path';
-import { Collapsable } from '~/components/collapsable';
 import { FCWithLayout, getLayoutWithMetadata } from '~/components/layout';
 import { MaxWidth } from '~/components/maxWidth';
 import siteText, { TALLLanguages } from '~/locale/index';
 import { MDToHTMLString } from '~/utils/MDToHTMLString';
 import { ensureUniqueSkipLinkIds, getSkipLinkId } from '~/utils/skipLinks';
 import styles from './over.module.scss';
+import { Collapsable } from '~/components-styled/collapsable';
 
 interface IVraagEnAntwoord {
   vraag: string;
@@ -25,7 +25,7 @@ interface VeelgesteldeVragenProps {
 }
 
 export async function getStaticProps(): Promise<StaticProps> {
-  const text: TALLLanguages = require('../locale/index').default;
+  const text: TALLLanguages = (await import('../locale/index')).default;
   const serializedContent = text.over_veelgestelde_vragen.vragen.map(function (
     item: IVraagEnAntwoord
   ) {

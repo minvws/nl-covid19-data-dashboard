@@ -16,21 +16,20 @@ import { NursingHomeInfectedLocationsMetric } from '~/components/common/nursing-
 import { NursingHomeInfectedPeopleMetric } from '~/components/common/nursing-home-infected-people-metric';
 import { InfectiousPeopleMetric } from '~/components/landelijk/infectious-people-metric';
 import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-barscale';
+import { IntakeHospitalMetric } from '~/components/landelijk/intake-hospital-metric';
 import { IntakeIntensiveCareBarscale } from '~/components/landelijk/intake-intensive-care-barscale';
+import { IntakeIntensiveCareMetric } from '~/components/landelijk/intake-intensive-care-metric';
 import { PositiveTestedPeopleBarScale } from '~/components/landelijk/positive-tested-people-barscale';
+import { PositiveTestedPeopleMetric } from '~/components/landelijk/positive-tested-people-metric';
 import { ReproductionIndexBarScale } from '~/components/landelijk/reproduction-index-barscale';
+import { ReproductionIndexMetric } from '~/components/landelijk/reproduction-index-metric';
 import { SewerWaterMetric } from '~/components/landelijk/sewer-water-metric';
 import { SuspectedPatientsMetric } from '~/components/landelijk/suspected-patients-metric';
 import { getLayout as getSiteLayout } from '~/components/layout';
 import { TitleWithIcon } from '~/components/titleWithIcon';
 import siteText from '~/locale/index';
 import { INationalData } from '~/static-props/nl-data';
-import { WithChildren } from '~/types/index';
 import { useMenuState } from './useMenuState';
-import { PositiveTestedPeopleMetric } from '~/components/landelijk/positive-tested-people-metric';
-import { ReproductionIndexMetric } from '~/components/landelijk/reproduction-index-metric';
-import { IntakeHospitalMetric } from '~/components/landelijk/intake-hospital-metric';
-import { IntakeIntensiveCareMetric } from '~/components/landelijk/intake-intensive-care-metric';
 
 export function getNationalLayout() {
   return function (
@@ -42,6 +41,10 @@ export function getNationalLayout() {
       pageProps.lastGenerated
     )(<NationalLayout {...pageProps}>{page}</NationalLayout>);
   };
+}
+
+interface NationalLayoutProps extends INationalData {
+  children: React.ReactNode;
 }
 
 /*
@@ -60,7 +63,7 @@ export function getNationalLayout() {
  * More info on persistent layouts:
  * https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
-function NationalLayout(props: WithChildren<INationalData>) {
+function NationalLayout(props: NationalLayoutProps) {
   const { children, data } = props;
   const router = useRouter();
   const isMainRoute = router.route === '/';
@@ -284,7 +287,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
                       title={siteText.rioolwater_metingen.titel_sidebar}
                     />
                     <span>
-                      <SewerWaterMetric data={data.rioolwater_metingen} />
+                      <SewerWaterMetric data={data.sewer} />
                     </span>
                   </a>
                 </Link>

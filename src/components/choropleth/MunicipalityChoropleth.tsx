@@ -61,7 +61,7 @@ export function MunicipalityChoropleth<
     isSelectorMap,
   } = props;
 
-  const [ref, dimensions] = useChartDimensions(1.2);
+  const [ref, dimensions] = useChartDimensions<HTMLDivElement>(1.2);
 
   const [boundingbox, selectedVrCode] = useMunicipalityBoundingbox(
     regionGeo,
@@ -180,13 +180,7 @@ export function MunicipalityChoropleth<
   };
 
   return (
-    <div
-      ref={(elm) => {
-        ref.current = elm;
-      }}
-      className={styles.choroplethContainer}
-      style={style}
-    >
+    <div ref={ref} className={styles.choroplethContainer} style={style}>
       <Choropleth
         featureCollection={municipalGeo}
         overlays={overlays}

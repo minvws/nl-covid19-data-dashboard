@@ -1,15 +1,17 @@
 import { useMemo } from 'react';
 import HighCharts, { XrangePointOptionsObject } from 'highcharts';
 import HighChartsReact from 'highcharts-react-official';
+import { ValueAnnotation } from '~/components-styled/value-annotation';
 
 interface IProps {
   data: XrangePointOptionsObject[];
   keys: string[];
   axisTitle: string;
+  valueAnnotation?: string;
 }
 
 export default function BarChart(props: IProps) {
-  const { data, keys, axisTitle } = props;
+  const { data, keys, axisTitle, valueAnnotation } = props;
 
   const options = useMemo<HighCharts.Options>(() => {
     const max = data.reduce((acc, value) => Math.max(acc, value.y || 0), 1);
@@ -32,10 +34,8 @@ export default function BarChart(props: IProps) {
         enabled: true,
         outside: true,
         formatter: function (): string | false {
-          // @ts-ignore
-          if (this.point.label) {
-            // @ts-ignore
-            return this.point.label;
+          if ((this.point as any).label) {
+            return (this.point as any).label;
           }
           return false;
         },
@@ -72,5 +72,12 @@ export default function BarChart(props: IProps) {
     };
   }, [data, keys, axisTitle]);
 
-  return <HighChartsReact highcharts={HighCharts} options={options} />;
+  return (
+    <>
+      {valueAnnotation && (
+        <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
+      )}
+      <HighChartsReact highcharts={HighCharts} options={options} />
+    </>
+  );
 }
