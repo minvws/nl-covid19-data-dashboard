@@ -838,7 +838,7 @@
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
     "screen_reader_graph_content": "{{value}} virus particles in one milliliter of sewage water.",
     "barscale_titel": "Average number of coronavirus particles per 100,000 inhabitants found in wastewater in this municipality, adjusted for the daily volume of processed wastewater.",
-    "extra_uitleg": "Average number of coronavirus particles per 100,000 inhabitants measured at locations in this safety region",
+    "extra_uitleg": "The weekly average for the municipality is calculated by adding up all the values measured in one week and dividing this by the number of measurements taken.",
     "barscale_screenreader_text": "{{value}} virus particles in one milliliter of sewage water, collected from 300 sites in the Netherlands.",
     "linechart_titel": "Viral particles per millilitre of sewage water over time",
     "bar_chart_title": "Most recent measurement per location in {{municipality}}",
