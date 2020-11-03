@@ -2,21 +2,16 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Afname from '~/assets/afname.svg';
 import Getest from '~/assets/test.svg';
-import { ChartRegionControls } from '~/components-styled/chart-region-controls';
 import { Anchor } from '~/components-styled/anchor';
 import { Box } from '~/components-styled/base';
-import {
-  ChoroplethChart,
-  ChoroplethHeader,
-  ChoroplethLegend,
-  ChoroplethSection,
-} from '~/components-styled/layout/choropleth';
+import { ChoroplethTile } from '~/components-styled/choropleth-tile';
+import { KpiSection } from '~/components-styled/kpi-section';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
+import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
 import { BarChart } from '~/components/charts/index';
-import { ChoroplethLegenda } from '~/components/choropleth/legenda/ChoroplethLegenda';
 import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/useSafetyRegionLegendaData';
 import { MunicipalityChoropleth } from '~/components/choropleth/MunicipalityChoropleth';
 import { SafetyRegionChoropleth } from '~/components/choropleth/SafetyRegionChoropleth';
@@ -24,9 +19,9 @@ import { createSelectMunicipalHandler } from '~/components/choropleth/selectHand
 import { createSelectRegionHandler } from '~/components/choropleth/selectHandlers/createSelectRegionHandler';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/createPositiveTestedPeopleMunicipalTooltip';
 import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/createPositiveTestedPeopleRegionalTooltip';
+import { ContentHeader } from '~/components/contentHeader';
 import { PositiveTestedPeopleBarScale } from '~/components/landelijk/positive-tested-people-barscale';
 import { FCWithLayout } from '~/components/layout';
-import { ContentHeader } from '~/components/contentHeader';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
@@ -38,8 +33,6 @@ import {
 } from '~/types/data.d';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
-import { KpiSection } from '~/components-styled/kpi-section';
-import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { Metadata } from '~/components-styled/metadata';
 import { MultipleLineChartTile } from '~/components-styled/multiple-line-chart-tile';
@@ -139,47 +132,46 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         </KpiTile>
       </TwoKpiSection>
 
-      <ChoroplethSection data-cy="choropleths">
-        <ChoroplethHeader>
-          <Heading level={3}>{text.map_titel}</Heading>
-          <Text>{text.map_toelichting}</Text>
-          <Box display="flex" justifyContent="flex-start">
-            <ChartRegionControls
-              onChange={(val: 'region' | 'municipal') => setSelectedMap(val)}
-            />
-          </Box>
-        </ChoroplethHeader>
-        <ChoroplethChart>
-          {selectedMap === 'municipal' && (
-            <MunicipalityChoropleth
-              metricName="positive_tested_people"
-              tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
-                router
-              )}
-              onSelect={createSelectMunicipalHandler(router)}
-            />
-          )}
-          {selectedMap === 'region' && (
-            <SafetyRegionChoropleth
-              metricName="positive_tested_people"
-              tooltipContent={createPositiveTestedPeopleRegionalTooltip(router)}
-              onSelect={createSelectRegionHandler(router)}
-            />
-          )}
-        </ChoroplethChart>
-        <ChoroplethLegend>
-          {legendItems && (
-            <ChoroplethLegenda
-              items={legendItems}
-              title={text.chloropleth_legenda.titel}
-            />
-          )}
-        </ChoroplethLegend>
-        <Metadata
-          date={delta?.last_value?.date_of_report_unix}
-          source={text.bron}
-        />
-      </ChoroplethSection>
+      <ChoroplethTile
+        data-cy="chloropleths"
+        title={text.map_titel}
+        description={text.map_toelichting}
+        onChangeControls={setSelectedMap}
+        legend={
+          legendItems // this data value should probably not be optional
+            ? {
+                title: text.chloropleth_legenda.titel,
+                items: legendItems,
+              }
+            : undefined
+        }
+      >
+        {/**
+         * It's probably a good idea to abstract this even further, so that
+         * the switching of charts, and the state involved, are all handled by
+         * the component. The page does not have to be bothered with this.
+         *
+         * Ideally the ChoroplethTile would receive some props with the data
+         * it needs to render either Choropleth without it caring about
+         * MunicipalityChloropleth or SafetyRegionChloropleth, that data would
+         * make the chart and define the tooltip layout for each, but maybe for
+         * now that is a bridge too far. Let's take it one step at a time.
+         */}
+        {selectedMap === 'municipal' && (
+          <MunicipalityChoropleth
+            metricName="positive_tested_people"
+            tooltipContent={createPositiveTestedPeopleMunicipalTooltip(router)}
+            onSelect={createSelectMunicipalHandler(router)}
+          />
+        )}
+        {selectedMap === 'region' && (
+          <SafetyRegionChoropleth
+            metricName="positive_tested_people"
+            tooltipContent={createPositiveTestedPeopleRegionalTooltip(router)}
+            onSelect={createSelectRegionHandler(router)}
+          />
+        )}
+      </ChoroplethTile>
 
       <LineChartTile
         title={text.linechart_titel}

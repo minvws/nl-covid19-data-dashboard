@@ -57,7 +57,7 @@ function getChartOptions(
       borderWidth: 0,
       colorCount: 10,
       displayErrors: true,
-      height: 212,
+      height: 275,
     },
     credits: {
       enabled: false,

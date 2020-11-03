@@ -63,7 +63,7 @@ function getOptions(values: Value[]): Highcharts.Options {
       borderWidth: 0,
       colorCount: 10,
       displayErrors: true,
-      height: 175,
+      height: 250,
     },
     legend: {
       itemWidth: 300,
