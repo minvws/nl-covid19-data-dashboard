@@ -158,7 +158,7 @@
       "description": "Number of confirmed COVID-19 cases who are admitted to a hospital in the Netherlands."
     },
     "titel_sidebar": "Hospital admissions per day",
-    "titel_kpi": "Hospital admissions per day"
+    "titel_kpi": "Average number of hospital admissions in 3 days"
   },
   "positief_geteste_personen": {
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
