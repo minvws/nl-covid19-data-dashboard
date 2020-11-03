@@ -12,8 +12,8 @@ export interface Municipal {
   code: string;
   hospital_admissions: HospitalAdmissions;
   positive_tested_people: PositiveTestedPeople;
-  sewer_measurements?: SewerMeasurements;
-  results_per_sewer_installation_per_municipality?: ResultsPerSewerInstallationPerMunicipality;
+  sewer?: MunicipalSewer;
+  sewer_per_installation?: MunicipalSewerPerInstallation;
 }
 export interface HospitalAdmissions {
   values: HospitalAdmissionsLastValue[];
@@ -38,11 +38,11 @@ export interface PositiveTestedPeopleLastValue {
   infected_daily_increase: number;
   date_of_insertion_unix: number;
 }
-export interface SewerMeasurements {
-  values: SewerMeasurementsLastValue[];
-  last_value: SewerMeasurementsLastValue;
+export interface MunicipalSewer {
+  values: MunicipalSewerValue[];
+  last_value: MunicipalSewerValue;
 }
-export interface SewerMeasurementsLastValue {
+export interface MunicipalSewerValue {
   week_unix: number;
   week_start_unix: number;
   week_end_unix: number;
@@ -51,15 +51,15 @@ export interface SewerMeasurementsLastValue {
   total_installation_count: number;
   date_of_insertion_unix: number;
 }
-export interface ResultsPerSewerInstallationPerMunicipality {
-  values: ResultsPerSewerInstallationPerMunicipalityItem[];
+export interface MunicipalSewerPerInstallation {
+  values: MunicipalSewerPerInstallationInstallation[];
 }
-export interface ResultsPerSewerInstallationPerMunicipalityItem {
+export interface MunicipalSewerPerInstallationInstallation {
   rwzi_awzi_code: string;
-  values: ResultsPerSewerInstallationPerMunicipalityLastValue[];
-  last_value: ResultsPerSewerInstallationPerMunicipalityLastValue;
+  values: MunicipalSewerPerInstallationValue[];
+  last_value: MunicipalSewerPerInstallationValue;
 }
-export interface ResultsPerSewerInstallationPerMunicipalityLastValue {
+export interface MunicipalSewerPerInstallationValue {
   date_measurement_unix: number;
   week_start_unix: number;
   week_end_unix: number;
@@ -67,7 +67,7 @@ export interface ResultsPerSewerInstallationPerMunicipalityLastValue {
   rwzi_awzi_code: string;
   rwzi_awzi_name: string;
   gmcode: string;
-  rna_per_ml: number;
+  rna_normalized: number;
   date_of_insertion_unix: number;
 }
 
@@ -100,7 +100,6 @@ export interface Deceased {
   date_of_insertion_unix: number;
 }
 
-
 export interface National {
   last_generated: string;
   proto_name: "NL";
@@ -118,8 +117,8 @@ export interface National {
   reproduction_index: ReproductionIndex;
   reproduction_index_last_known_average: ReproductionIndexLastKnownAverage;
   infectious_people_last_known_average: InfectiousPeopleLastKnownAverage;
-  rioolwater_metingen: RioolwaterMetingen;
-  rioolwater_metingen_per_rwzi: RioolwaterMetingenPerRwzi;
+  sewer: NationalSewer;
+  sewer_per_installation: NationalSewerPerInstallation;
   hospital_beds_occupied: HospitalBedsOccupied;
   intensive_care_beds_occupied: IntensiveCareBedsOccupied;
   ggd: NationalGgd;
@@ -262,11 +261,11 @@ export interface InfectiousPeopleLastKnownAverageValue {
   date_of_report_unix: number;
   date_of_insertion_unix: number;
 }
-export interface RioolwaterMetingen {
-  values: RioolwaterMetingenLastValue[];
-  last_value: RioolwaterMetingenLastValue;
+export interface NationalSewer {
+  values: NationalSewerValue[];
+  last_value: NationalSewerValue;
 }
-export interface RioolwaterMetingenLastValue {
+export interface NationalSewerValue {
   week_unix: number;
   average: number;
   total_installation_count: number;
@@ -274,11 +273,11 @@ export interface RioolwaterMetingenLastValue {
   week_start_unix: number;
   week_end_unix: number;
 }
-export interface RioolwaterMetingenPerRwzi {
-  values: RioolwaterMetingenPerRwziLastValue[];
-  last_value: RioolwaterMetingenPerRwziLastValue;
+export interface NationalSewerPerInstallation {
+  values: NationalSewerPerInstallationValue[];
+  last_value: NationalSewerPerInstallationValue;
 }
-export interface RioolwaterMetingenPerRwziLastValue {
+export interface NationalSewerPerInstallationValue {
   week_start_unix: number;
   week_end_unix: number;
   date_measurement_unix: number;
@@ -287,7 +286,7 @@ export interface RioolwaterMetingenPerRwziLastValue {
   gm_code: string;
   vrcode: string;
   vrnaam: string;
-  rna_per_ml: number;
+  rna_normalized: number;
   date_of_insertion_unix: number;
 }
 export interface HospitalBedsOccupied {
@@ -400,12 +399,12 @@ export interface MinMaxValuesItem {
   min_total_new_reported_locations: number;
   max_average: number;
   min_average: number;
-  max_latest_rna_per_ml: number;
-  min_latest_rna_per_ml: number;
+  max_latest_rna_normalized: number;
+  min_latest_rna_normalized: number;
   max_average_per_region: number;
   min_average_per_region: number;
-  max_rna_per_ml: number;
-  min_rna_per_ml: number;
+  max_rna_normalized: number;
+  min_rna_normalized: number;
 }
 
 export interface Regionaal {
@@ -413,22 +412,35 @@ export interface Regionaal {
   proto_name: string;
   name: string;
   code: string;
-  results_per_sewer_installation_per_region: ResultsPerSewerInstallationPerRegion;
-  average_sewer_installation_per_region: AverageSewerInstallationPerRegion;
+  sewer: RegionalSewer;
+  sewer_per_installation: RegionalSewerPerInstallation;
   results_per_region: ResultsPerRegion;
   ggd: RegionalGgd;
   nursing_home: RegionalNursingHome;
   restrictions?: RegionalRestrictions;
 }
-export interface ResultsPerSewerInstallationPerRegion {
-  values: SewerValueElement[];
+export interface RegionalSewer {
+  values: RegionalSewerValue[];
+  last_value: RegionalSewerValue;
 }
-export interface SewerValueElement {
+export interface RegionalSewerValue {
+  week_unix: number;
+  week_start_unix: number;
+  week_end_unix: number;
+  vrcode: string;
+  average: number;
+  total_installation_count: number;
+  date_of_insertion_unix: number;
+}
+export interface RegionalSewerPerInstallation {
+  values: RegionalSewerPerInstallationInstallation[];
+}
+export interface RegionalSewerPerInstallationInstallation {
   rwzi_awzi_code: string;
-  values: SewerValue[];
-  last_value: SewerValue;
+  values: RegionalSewerPerInstallationValue[];
+  last_value: RegionalSewerPerInstallationValue;
 }
-export interface SewerValue {
+export interface RegionalSewerPerInstallationValue {
   date_measurement_unix: number;
   week: number;
   week_start_unix: number;
@@ -438,20 +450,7 @@ export interface SewerValue {
   vrcode: string;
   vrnaam: string;
   gmcode: string;
-  rna_per_ml: number;
-  date_of_insertion_unix: number;
-}
-export interface AverageSewerInstallationPerRegion {
-  values: AverageSewerInstallationPerRegionItem[];
-  last_value: AverageSewerInstallationPerRegionItem;
-}
-export interface AverageSewerInstallationPerRegionItem {
-  week_unix: number;
-  week_start_unix: number;
-  week_end_unix: number;
-  vrcode: string;
-  average: number;
-  total_installation_count: number;
+  rna_normalized: number;
   date_of_insertion_unix: number;
 }
 export interface ResultsPerRegion {
@@ -514,6 +513,7 @@ export interface Regions {
   deceased: RegionDeceased[];
   escalation_levels: EscalationLevels[];
   nursing_home: RegionsNursingHome[];
+  sewer: RegionsSewer[];
 }
 export interface RegionHospitalAdmissions {
   date_of_report_unix: number;
@@ -550,6 +550,15 @@ export interface RegionsNursingHome {
   date_of_report_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;
+}
+export interface RegionsSewer {
+  week_unix: number;
+  week_start_unix: number;
+  week_end_unix: number;
+  vrcode: string;
+  average: number;
+  total_installation_count: number;
+  date_of_insertion_unix: number;
 }
 
 export interface Restrictions {

@@ -17,9 +17,9 @@
     "intake_share_age_groups",
     "reproduction_index",
     "reproduction_index_last_known_average",
+    "sewer",
+    "sewer_per_installation",
     "infectious_people_last_known_average",
-    "rioolwater_metingen",
-    "rioolwater_metingen_per_rwzi",
     "hospital_beds_occupied",
     "intensive_care_beds_occupied",
     "ggd",
@@ -78,11 +78,11 @@
     "infectious_people_last_known_average": {
       "$ref": "infectious_people_last_known_average.json"
     },
-    "rioolwater_metingen": {
-      "$ref": "rioolwater_metingen.json"
+    "sewer": {
+      "$ref": "sewer.json"
     },
-    "rioolwater_metingen_per_rwzi": {
-      "$ref": "rioolwater_metingen_per_rwzi.json"
+    "sewer_per_installation": {
+      "$ref": "sewer_per_installation.json"
     },
     "hospital_beds_occupied": {
       "$ref": "hospital_beds_occupied.json"

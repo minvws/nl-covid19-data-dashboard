@@ -3,6 +3,7 @@ import HighchartsReact from 'highcharts-react-official';
 import React, { useMemo, useState } from 'react';
 import { isFilled } from 'ts-is-present';
 import { ChartTimeControls } from '~/components-styled/chart-time-controls';
+import { ValueAnnotation } from '~/components-styled/value-annotation';
 import text from '~/locale/index';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
@@ -25,6 +26,7 @@ export interface LineChartProps<T> {
   formatTooltip?: (value: T) => string;
   formatYAxis?: (y: number) => string;
   showFill?: boolean;
+  valueAnnotation?: string;
 }
 
 function getChartOptions<T extends Value>(
@@ -191,6 +193,7 @@ export default function LineChart<T extends Value>({
   timeframeOptions,
   formatTooltip,
   formatYAxis,
+  valueAnnotation,
   showFill = true,
 }: LineChartProps<T>) {
   const [timeframe, setTimeframe] = useState<TimeframeOption>('5weeks');
@@ -225,6 +228,9 @@ export default function LineChart<T extends Value>({
           />
         </div>
       </header>
+      {valueAnnotation && (
+        <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
+      )}
       <HighchartsReact highcharts={Highcharts} options={chartOptions} />
     </section>
   );

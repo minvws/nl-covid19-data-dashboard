@@ -12,7 +12,8 @@
     "hospital_admissions",
     "positive_tested_people",
     "deceased",
-    "nursing_home"
+    "nursing_home",
+    "sewer"
   ],
   "properties": {
     "last_generated": {
@@ -64,6 +65,13 @@
       "maxItems": 25,
       "items": {
         "$ref": "nursing_home.json"
+      }
+    },
+    "sewer": {
+      "type": "array",
+      "maxItems": 25,
+      "items": {
+        "$ref": "sewer.json"
       }
     }
   }

@@ -7,6 +7,7 @@ import { Metadata, MetadataProps } from './metadata';
 
 interface LineChartTileProps<T> extends LineChartProps<T> {
   metadata: MetadataProps;
+  valueAnnotation?: string;
 }
 
 export function LineChartTile<T extends Value>({

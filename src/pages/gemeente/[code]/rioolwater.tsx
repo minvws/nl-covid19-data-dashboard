@@ -36,7 +36,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
     };
   }, [data]);
 
-  const sewerAverages = data.sewer_measurements;
+  const sewerAverages = data.sewer;
 
   if (!sewerAverages) {
     /**
@@ -84,7 +84,10 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
               source: text.bron,
             }}
           >
-            <KpiValue absolute={barScaleData.value} />
+            <KpiValue
+              absolute={barScaleData.value}
+              valueAnnotation={siteText.waarde_annotaties.riool_normalized}
+            />
           </KpiTile>
         )}
 
@@ -115,6 +118,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
               average_label_text: lineChartData.averageLabelText,
               secondary_label_text: text.graph_secondary_label_text,
             }}
+            valueAnnotation={siteText.waarde_annotaties.riool_normalized}
           />
         )}
         <Metadata
@@ -134,6 +138,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
             keys={barChartData.keys}
             data={barChartData.data}
             axisTitle={text.bar_chart_axis_title}
+            valueAnnotation={siteText.waarde_annotaties.riool_normalized}
           />
           <Metadata
             date={sewerAverages.last_value.week_end_unix}

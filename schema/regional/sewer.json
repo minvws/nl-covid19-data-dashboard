@@ -1,14 +1,13 @@
 {
   "definitions": {
-    "item": {
-      "title": "sewer_measurements_last_value",
-      "type": "object",
+    "value": {
+      "title": "regional_sewer_value",
       "additionalProperties": false,
       "required": [
         "week_unix",
         "week_start_unix",
         "week_end_unix",
-        "gmcode",
+        "vrcode",
         "average",
         "total_installation_count",
         "date_of_insertion_unix"
@@ -23,7 +22,7 @@
         "week_end_unix": {
           "type": "integer"
         },
-        "gmcode": {
+        "vrcode": {
           "type": "string",
           "equalsRootProperty": "code"
         },
@@ -31,7 +30,7 @@
           "type": "number"
         },
         "total_installation_count": {
-          "type": "integer"
+          "type": "number"
         },
         "date_of_insertion_unix": {
           "type": "integer"
@@ -40,20 +39,19 @@
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "sewer_measurements.json",
-  "title": "sewer_measurements",
   "type": "object",
+  "title": "regional_sewer",
   "required": ["values", "last_value"],
   "additionalProperties": false,
   "properties": {
     "values": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/item"
+        "$ref": "#/definitions/value"
       }
     },
     "last_value": {
-      "$ref": "#/definitions/item"
+      "$ref": "#/definitions/value"
     }
   }
 }

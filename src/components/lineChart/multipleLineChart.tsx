@@ -221,7 +221,7 @@ export function MultipleLineChart({
 
   assert(
     values.length === linesConfig.length,
-    'values length must equal linesConfig length'
+    'Values length must equal linesConfig length'
   );
 
   const chartOptions = useMemo(() => {

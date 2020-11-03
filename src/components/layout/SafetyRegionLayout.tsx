@@ -1,35 +1,28 @@
-import Link from 'next/link';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
-
-import siteText from '~/locale/index';
-import safetyRegions from '~/data/index';
-import { ISafetyRegionData } from '~/static-props/safetyregion-data';
-
-import { useMediaQuery } from '~/utils/useMediaQuery';
-import { getSewerWaterBarScaleData } from '~/utils/sewer-water/safety-region-sewer-water.util';
-
-import { PositivelyTestedPeopleBarScale } from '~/components/veiligheidsregio/positive-tested-people-barscale';
-import { PositivelyTestedPeopleMetric } from '~/components/veiligheidsregio/positive-tested-people-metric';
-
-import { IntakeHospitalMetric } from '~/components/veiligheidsregio/intake-hospital-metric';
-import { SewerWaterMetric } from '~/components/veiligheidsregio/sewer-water-metric';
-
-import { TitleWithIcon } from '~/components/titleWithIcon';
-import { getLayout as getSiteLayout } from '~/components/layout';
-import { ComboBox } from '~/components/comboBox';
-
+import Arrow from '~/assets/arrow.svg';
+import CoronaVirus from '~/assets/coronavirus.svg';
+import Locatie from '~/assets/locaties.svg';
+import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
-import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
-import Arrow from '~/assets/arrow.svg';
-import Locatie from '~/assets/locaties.svg';
-import CoronaVirus from '~/assets/coronavirus.svg';
-
-import { useMenuState } from './useMenuState';
-import { NursingHomeInfectedPeopleMetric } from '~/components/common/nursing-home-infected-people-metric';
-import { NursingHomeInfectedLocationsMetric } from '~/components/common/nursing-home-infected-locations-metric';
+import { ComboBox } from '~/components/comboBox';
 import { NursingHomeDeathsMetric } from '~/components/common/nursing-home-deaths-metric';
+import { NursingHomeInfectedLocationsMetric } from '~/components/common/nursing-home-infected-locations-metric';
+import { NursingHomeInfectedPeopleMetric } from '~/components/common/nursing-home-infected-people-metric';
+import { getLayout as getSiteLayout } from '~/components/layout';
+import { TitleWithIcon } from '~/components/titleWithIcon';
+import { IntakeHospitalMetric } from '~/components/veiligheidsregio/intake-hospital-metric';
+import { PositivelyTestedPeopleBarScale } from '~/components/veiligheidsregio/positive-tested-people-barscale';
+import { PositivelyTestedPeopleMetric } from '~/components/veiligheidsregio/positive-tested-people-metric';
+import { SewerWaterMetric } from '~/components/veiligheidsregio/sewer-water-metric';
+import safetyRegions from '~/data/index';
+import siteText from '~/locale/index';
+import { ISafetyRegionData } from '~/static-props/safetyregion-data';
+import { getSewerWaterBarScaleData } from '~/utils/sewer-water/safety-region-sewer-water.util';
+import { useMediaQuery } from '~/utils/useMediaQuery';
+import { useMenuState } from './useMenuState';
 
 export function getSafetyRegionLayout() {
   return function (
@@ -41,10 +34,6 @@ export function getSafetyRegionLayout() {
       pageProps.lastGenerated
     )(<SafetyRegionLayout {...pageProps}>{page}</SafetyRegionLayout>);
   };
-}
-
-interface SafetyRegionLayoutProps extends ISafetyRegionData {
-  children: React.ReactNode;
 }
 
 type TSafetyRegion = {
@@ -71,7 +60,9 @@ type TSafetyRegion = {
  * More info on persistent layouts:
  * https:adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
-function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
+function SafetyRegionLayout(
+  props: ISafetyRegionData & { children: React.ReactNode }
+) {
   const { children, data } = props;
 
   const router = useRouter();

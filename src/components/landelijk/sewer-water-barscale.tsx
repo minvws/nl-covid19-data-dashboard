@@ -1,16 +1,14 @@
 import { BarScale } from '~/components/barScale';
 import siteText from '~/locale/index';
-import { RioolwaterMetingen } from '~/types/data.d';
+import { NationalSewer } from '~/types/data.d';
 
 const text = siteText.rioolwater_metingen;
 
 export function SewerWaterBarScale(props: {
-  data: RioolwaterMetingen | undefined;
+  data: NationalSewer;
   showAxis: boolean;
 }) {
   const { data, showAxis } = props;
-
-  if (!data) return null;
 
   return (
     <BarScale

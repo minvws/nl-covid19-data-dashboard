@@ -15,7 +15,7 @@ import { formatNumber } from '~/utils/formatNumber';
 const text = siteText.rioolwater_metingen;
 
 const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
-  const sewerAverages = data.rioolwater_metingen;
+  const sewerAverages = data.sewer;
 
   return (
     <>
@@ -48,7 +48,7 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
         >
           <KpiValue
             absolute={sewerAverages.last_value.average}
-            data-cy="infected_daily_total"
+            valueAnnotation={siteText.waarde_annotaties.riool_normalized}
           />
         </KpiTile>
         <KpiTile
@@ -89,6 +89,7 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
             'short'
           )}:</strong> ${formatNumber(x.value)}`;
         }}
+        valueAnnotation={siteText.waarde_annotaties.riool_normalized}
       />
     </>
   );
