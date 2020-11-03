@@ -158,7 +158,7 @@
       "description": "Landelijk overzicht van het aantal mensen met COVID-19 dat een ziekenhuis is opgenomen."
     },
     "titel_sidebar": "Ziekenhuisopnames per dag",
-    "titel_kpi": "Ziekenhuisopnames per dag"
+    "titel_kpi": "Gemiddeld aantal ziekenhuisopnames in 3 dagen"
   },
   "positief_geteste_personen": {
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
