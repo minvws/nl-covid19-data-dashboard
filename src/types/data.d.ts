@@ -314,10 +314,12 @@ export interface NationalGgd {
   last_value: NationalGgdValue;
 }
 export interface NationalGgdValue {
-  infected_daily: number;
-  infected_percentage_daily: number;
-  tested_total_daily: number;
-  date_of_report_unix: number;
+  infected: number;
+  infected_percentage: number;
+  tested_total: number;
+  week_unix: number;
+  week_start_unix: number;
+  week_end_unix: number;
   date_of_insertion_unix: number;
 }
 export interface NationalNursingHome {
@@ -473,10 +475,12 @@ export interface RegionalGgd {
   last_value: RegionalGgdValue;
 }
 export interface RegionalGgdValue {
-  infected_daily: number;
-  infected_percentage_daily: number;
-  tested_total_daily: number;
-  date_of_report_unix: number;
+  infected: number;
+  infected_percentage: number;
+  tested_total: number;
+  week_unix: number;
+  week_start_unix: number;
+  week_end_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;
 }

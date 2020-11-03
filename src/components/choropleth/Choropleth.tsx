@@ -1,13 +1,13 @@
-import { Mercator } from '@vx/geo';
-import { Feature, FeatureCollection, MultiPolygon } from 'geojson';
+import { Feature, FeatureCollection, Geometry, MultiPolygon } from 'geojson';
+import { GeoPermissibleObjects } from 'd3-geo';
+import { localPoint } from '@vx/event';
 import { memo, MutableRefObject, ReactNode, useRef } from 'react';
-
+import { Mercator } from '@vx/geo';
 import create, { UseStore } from 'zustand';
 
 import { TCombinedChartDimensions } from './hooks/useChartDimensions';
 
 import styles from './choropleth.module.scss';
-import { localPoint } from '@vx/event';
 
 import { Tooltip } from './tooltips/tooltipContainer';
 import { useMediaQuery } from '~/utils/useMediaQuery';
@@ -154,7 +154,7 @@ const ChoroplethMap: <T>(
   } = props;
 
   const clipPathId = useRef(`_${Math.random().toString(36).substring(2, 15)}`);
-  const timeout = useRef<any>(-1);
+  const timeout = useRef(-1);
   const isLargeScreen = useMediaQuery('(min-width: 1000px)');
 
   const {
@@ -200,16 +200,24 @@ const ChoroplethMap: <T>(
           transform={`translate(${marginLeft},${marginTop})`}
           clipPath={`url(#${clipPathId.current})`}
         >
-          <Mercator data={featureCollection.features} fitSize={sizeToFit}>
-            {renderFeature(featureCallback, 'choropleth-features')}
-          </Mercator>
-          <Mercator data={overlays.features} fitSize={sizeToFit}>
-            {renderFeature(overlayCallback, 'choropleth-overlays')}
-          </Mercator>
+          <MercatorGroup
+            data={featureCollection.features}
+            render={featureCallback}
+            fitSize={sizeToFit}
+          />
+
+          <MercatorGroup
+            data={overlays.features}
+            render={overlayCallback}
+            fitSize={sizeToFit}
+          />
+
           {hovers && (
-            <Mercator data={hovers.features} fitSize={sizeToFit}>
-              {renderFeature(hoverCallback, 'choropleth-hovers')}
-            </Mercator>
+            <MercatorGroup
+              data={hovers.features}
+              render={hoverCallback}
+              fitSize={sizeToFit}
+            />
           )}
         </g>
       </svg>
@@ -217,48 +225,80 @@ const ChoroplethMap: <T>(
   );
 });
 
-const renderFeature = (callback: TRenderCallback, dataCy: string) => {
-  return (mercator: any) => (
-    <g data-cy={dataCy}>
-      {mercator.features.map(
-        (
-          { feature, path }: { feature: Feature; path: string },
-          index: number
-        ) => {
-          if (path) {
-            return callback(feature, path, index);
-          }
-        }
+interface MercatorGroupProps<G extends Geometry, P> {
+  data: Array<Feature<G, P>>;
+  render: any;
+  fitSize: [[number, number], any];
+}
+
+function MercatorGroup<G extends Geometry, P>(props: MercatorGroupProps<G, P>) {
+  const { data, fitSize, render } = props;
+
+  return (
+    <Mercator
+      /**
+       * @TODO It looks like there are some discrepancies between types coming
+       * from geojson and d3-geo.
+       * Our data uses geojson, the Mercator component depends on d3-geo.
+       */
+      data={(data as unknown) as GeoPermissibleObjects[]}
+      fitSize={fitSize}
+    >
+      {({ features }) => (
+        <g data-cy="choropleth-features">
+          {features.map(
+            ({ feature, path, index }) => path && render(feature, path, index)
+          )}
+        </g>
       )}
-    </g>
+    </Mercator>
   );
-};
+}
 
 const createSvgClickHandler = (
   onPathClick: (id: string) => void,
   showTooltip: (settings: TooltipSettings) => void,
   isLargeScreen: boolean
 ) => {
-  return (event: any) => {
-    const elm = event.target;
-    if (elm.attributes['data-id']) {
-      const id = elm.attributes['data-id'].value;
+  return (event: React.MouseEvent) => {
+    const elm = event.target as HTMLElement | SVGElement;
+    const id = elm.getAttribute('data-id');
+
+    if (id) {
       if (isLargeScreen) {
         onPathClick(id);
       } else {
-        positionTooltip(event, elm, showTooltip, id);
+        positionTooltip(event, showTooltip, id);
       }
     }
   };
 };
 
+const createSvgMouseOverHandler = (
+  timeout: MutableRefObject<number>,
+  showTooltip: (settings: TooltipSettings) => void
+) => {
+  return (event: React.MouseEvent) => {
+    const elm = event.target as HTMLElement | SVGElement;
+    const id = elm.getAttribute('data-id');
+
+    if (id) {
+      if (timeout.current > -1) {
+        clearTimeout(timeout.current);
+        timeout.current = -1;
+      }
+
+      positionTooltip(event, showTooltip, id);
+    }
+  };
+};
+
 const positionTooltip = (
-  event: any,
-  element: any,
+  event: React.MouseEvent,
   showTooltip: (settings: TooltipSettings) => void,
   id: string
 ) => {
-  const coords = localPoint(element.ownerSVGElement, event);
+  const coords = localPoint(event);
 
   if (coords) {
     showTooltip({
@@ -269,34 +309,13 @@ const positionTooltip = (
   }
 };
 
-const createSvgMouseOverHandler = (
-  timeout: MutableRefObject<any>,
-  showTooltip: any
-) => {
-  return (event: any) => {
-    const elm = event.target;
-
-    if (elm.attributes['data-id']) {
-      if (timeout.current > -1) {
-        clearTimeout(timeout.current);
-        timeout.current = -1;
-      }
-
-      const id = elm.attributes['data-id'].value;
-      positionTooltip(event, elm, showTooltip, id);
-    }
-  };
-};
-
 const createSvgMouseOutHandler = (
-  timeout: MutableRefObject<any>,
-  hideTooltip: any
+  timeout: MutableRefObject<number>,
+  hideTooltip: () => void
 ) => {
   return () => {
     if (timeout.current < 0) {
-      timeout.current = setTimeout(() => {
-        hideTooltip();
-      }, 500);
+      timeout.current = window.setTimeout(hideTooltip, 500);
     }
   };
 };

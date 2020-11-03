@@ -8,8 +8,10 @@ import { BarChart } from '~/components/charts';
 import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRangeHack';
 import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
-import { InstallationSelector } from '~/components/lineChart/installationSelector';
-import styles from '~/components/lineChart/installationselector.module.scss';
+import {
+  InstallationSelector,
+  InstallationSelectorBox,
+} from '~/components/lineChart/installationSelector';
 import { RegionalSewerWaterChart } from '~/components/lineChart/regionalSewerWaterChart';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
@@ -114,13 +116,13 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
         {scatterPlotData && lineChartData && (
           <>
             {sewerStationNames.length > 0 && (
-              <div className={styles.selectorContainer}>
+              <InstallationSelectorBox>
                 <InstallationSelector
                   placeholderText={text.graph_selected_rwzi_placeholder}
                   onChange={setSelectedInstallation}
                   stationNames={sewerStationNames}
                 />
-              </div>
+              </InstallationSelectorBox>
             )}
             <RegionalSewerWaterChart
               timeframe={timeframe}

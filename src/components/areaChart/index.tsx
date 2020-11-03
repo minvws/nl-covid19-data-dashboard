@@ -147,7 +147,7 @@ function getChartOptions(props: IGetOptions): Highcharts.Options {
       displayErrors: true,
       height: 175,
     },
-    legend: false as any,
+    legend: { enabled: false },
     credits: {
       enabled: false,
     },
@@ -165,7 +165,11 @@ function getChartOptions(props: IGetOptions): Highcharts.Options {
       labels: {
         align: 'right',
         x: 10,
-        rotation: '0' as any,
+        /**
+         * The number 0 doesn't work properly, probably because highcharts does
+         * some buggy `if(labels.rotation) {}` which yields false for the number 0.
+         */
+        rotation: ('0' as unknown) as number,
         formatter: function () {
           return this.isFirst || this.isLast
             ? formatDateFromMilliseconds(this.value, 'axis')
@@ -240,9 +244,7 @@ function getChartOptions(props: IGetOptions): Highcharts.Options {
         if (!rangePoint) return;
 
         const [, minRangePoint, maxRangePoint] = rangePoint;
-        const linePoint = lineData.find(
-          (el: any) => el[0].getTime() === this.x
-        );
+        const linePoint = lineData.find((el) => el[0].getTime() === this.x);
         const x = this.x;
         return `
             ${formatDateFromMilliseconds(x, 'medium')}<br/>
