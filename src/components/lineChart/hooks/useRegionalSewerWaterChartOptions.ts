@@ -1,7 +1,7 @@
 import { SeriesLineOptions, SeriesScatterOptions } from 'highcharts';
 import { useMemo } from 'react';
 import { TimeframeOption, getFilteredValues } from '~/utils/timeframe';
-import { SewerValue } from '~/types/data';
+import { RegionalSewerPerInstallationValue } from '~/types/data';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { getItemFromArray } from '~/utils/getItemFromArray';
@@ -46,7 +46,7 @@ function createRemainingDaysData(value: Value | undefined, maxDate: number) {
 
 export function useRegionalSewerWaterChartOptions(
   averageValues: Value[],
-  scatterPlotValues: SewerValue[],
+  scatterPlotValues: RegionalSewerPerInstallationValue[],
   text: TranslationStrings,
   timeframe: TimeframeOption,
   selectedRWZI?: string
@@ -95,7 +95,7 @@ export function useRegionalSewerWaterChartOptions(
       enableMouseTracking: selectedRWZI === undefined,
       data: filteredScatterPlotValues?.map((value) => ({
         x: value.date_measurement_unix,
-        y: value.rna_per_ml,
+        y: value.rna_normalized,
         installationName: value.rwzi_awzi_name,
       })),
       marker: {
@@ -164,7 +164,7 @@ export function useRegionalSewerWaterChartOptions(
           type: 'line',
           data: scatterValues.map((scatterValue) => ({
             x: scatterValue.date_measurement_unix,
-            y: scatterValue.rna_per_ml,
+            y: scatterValue.rna_normalized,
             rwzi: true,
           })),
           name: selectedRWZI,

@@ -1,7 +1,7 @@
 {
   "definitions": {
-    "item": {
-      "title": "rioolwater_metingen_last_value",
+    "value": {
+      "title": "national_sewer_value",
       "type": "object",
       "required": [
         "week_unix",
@@ -35,8 +35,7 @@
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "rioolwater_metingen.json",
-  "title": "rioolwater_metingen",
+  "title": "national_sewer",
   "type": "object",
   "required": ["values", "last_value"],
   "additionalProperties": false,
@@ -44,11 +43,11 @@
     "values": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/item"
+        "$ref": "#/definitions/value"
       }
     },
     "last_value": {
-      "$ref": "#/definitions/item"
+      "$ref": "#/definitions/value"
     }
   }
 }

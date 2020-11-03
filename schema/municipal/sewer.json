@@ -1,13 +1,14 @@
 {
   "definitions": {
-    "item": {
-      "title": "average_sewer_installation_per_region_item",
+    "value": {
+      "title": "municipal_sewer_value",
+      "type": "object",
       "additionalProperties": false,
       "required": [
         "week_unix",
         "week_start_unix",
         "week_end_unix",
-        "vrcode",
+        "gmcode",
         "average",
         "total_installation_count",
         "date_of_insertion_unix"
@@ -22,7 +23,7 @@
         "week_end_unix": {
           "type": "integer"
         },
-        "vrcode": {
+        "gmcode": {
           "type": "string",
           "equalsRootProperty": "code"
         },
@@ -30,7 +31,7 @@
           "type": "number"
         },
         "total_installation_count": {
-          "type": "number"
+          "type": "integer"
         },
         "date_of_insertion_unix": {
           "type": "integer"
@@ -39,19 +40,19 @@
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "municipal_sewer",
   "type": "object",
-  "title": "average_sewer_installation_per_region",
   "required": ["values", "last_value"],
   "additionalProperties": false,
   "properties": {
     "values": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/item"
+        "$ref": "#/definitions/value"
       }
     },
     "last_value": {
-      "$ref": "#/definitions/item"
+      "$ref": "#/definitions/value"
     }
   }
 }

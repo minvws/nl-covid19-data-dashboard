@@ -1,15 +1,16 @@
 import { BarScale } from '~/components/barScale';
-
-import { SewerWaterBarScaleData } from '~/utils/sewer-water/municipality-sewer-water.util';
 import siteText from '~/locale/index';
+import { SewerWaterBarScaleData } from '~/utils/sewer-water/municipality-sewer-water.util';
 
 const text = siteText.gemeente_rioolwater_metingen;
 
 export function SewerWaterBarScale(props: {
-  data: SewerWaterBarScaleData;
+  data: SewerWaterBarScaleData | undefined;
   showAxis: boolean;
 }) {
   const { data, showAxis } = props;
+
+  if (!data) return <p>{siteText.no_data_for_this_municipality.text}</p>;
 
   return (
     <BarScale

@@ -287,7 +287,7 @@ function NationalLayout(props: NationalLayoutProps) {
                       title={siteText.rioolwater_metingen.titel_sidebar}
                     />
                     <span>
-                      <SewerWaterMetric data={data.rioolwater_metingen} />
+                      <SewerWaterMetric data={data.sewer} />
                     </span>
                   </a>
                 </Link>

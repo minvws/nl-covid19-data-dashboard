@@ -1,6 +1,6 @@
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import { SewerValue } from '~/types/data';
+import { RegionalSewerPerInstallationValue } from '~/types/data';
 
 import styles from './lineChart.module.scss';
 import Dot from '~/assets/dot.svg';
@@ -17,7 +17,7 @@ export type Value = {
 
 export type TProps = {
   averageValues: Value[];
-  scatterPlotValues: SewerValue[];
+  scatterPlotValues: RegionalSewerPerInstallationValue[];
   text: TranslationStrings;
   timeframe: TimeframeOption;
   selectedInstallation?: string;

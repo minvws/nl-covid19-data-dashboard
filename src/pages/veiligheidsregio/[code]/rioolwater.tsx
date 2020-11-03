@@ -1,9 +1,6 @@
 import { useMemo, useState } from 'react';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import { ChartTimeControls } from '~/components-styled/chart-time-controls';
-import { KpiTile } from '~/components-styled/kpi-tile';
-import { KpiValue } from '~/components-styled/kpi-value';
-import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { BarChart } from '~/components/charts';
 import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRangeHack';
 import { FCWithLayout } from '~/components/layout';
@@ -29,6 +26,9 @@ import {
   getSewerWaterScatterPlotData,
 } from '~/utils/sewer-water/safety-region-sewer-water.util';
 import { TimeframeOption } from '~/utils/timeframe';
+import { TwoKpiSection } from '~/components-styled/two-kpi-section';
+import { KpiTile } from '~/components-styled/kpi-tile';
+import { KpiValue } from '~/components-styled/kpi-value';
 
 const text = siteText.veiligheidsregio_rioolwater_metingen;
 
@@ -51,7 +51,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
     };
   }, [data]);
 
-  const sewerAverages = data.average_sewer_installation_per_region;
+  const sewerAverages = data.sewer;
 
   const [timeframe, setTimeframe] = useState<TimeframeOption>('all');
   const [selectedInstallation, setSelectedInstallation] = useState<
@@ -84,24 +84,27 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
         }}
       />
 
-      <TwoKpiSection>
-        {barScaleData?.value !== undefined && (
+      {barScaleData && barScaleData.value !== undefined && (
+        <TwoKpiSection>
           <KpiTile title={text.barscale_titel} description={text.extra_uitleg}>
-            <KpiValue absolute={barScaleData.value} />
+            <KpiValue
+              absolute={barScaleData.value}
+              data-cy="infected_daily_total"
+            />
           </KpiTile>
-        )}
-        <KpiTile
-          title={text.total_installation_count_titel}
-          description={
-            text.total_installation_count_description +
-            `<p style="color:#595959">${text.rwzi_abbrev}</p>`
-          }
-        >
-          <KpiValue
-            absolute={sewerAverages.last_value.total_installation_count}
-          />
-        </KpiTile>
-      </TwoKpiSection>
+          <KpiTile
+            title={text.total_installation_count_titel}
+            description={
+              text.total_installation_count_description +
+              `<p style="color:#595959">${text.rwzi_abbrev}</p>`
+            }
+          >
+            <KpiValue
+              absolute={data.sewer.last_value.total_installation_count}
+            />
+          </KpiTile>
+        </TwoKpiSection>
+      )}
 
       <article className="metric-article">
         <div className="metric-article-header">

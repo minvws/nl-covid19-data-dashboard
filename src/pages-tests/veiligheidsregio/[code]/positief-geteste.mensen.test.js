@@ -1934,7 +1934,7 @@ const data = {
       date_of_insertion_unix: 1598392779,
     },
   },
-  results_per_sewer_installation_per_region: {
+  sewer_per_installation: {
     values: [
       {
         rwzi_awzi_code: '11014',
@@ -1949,7 +1949,7 @@ const data = {
             vrcode: 'VR13',
             vrnaam: 'Amsterdam-Amstelland',
             gmcode: 'GM0363',
-            rna_per_ml: 434,
+            rna_normalized: 434,
             date_of_insertion_unix: 1598392779,
           },
           {
@@ -1962,7 +1962,7 @@ const data = {
             vrcode: 'VR13',
             vrnaam: 'Amsterdam-Amstelland',
             gmcode: 'GM0363',
-            rna_per_ml: 1226,
+            rna_normalized: 1226,
             date_of_insertion_unix: 1598392779,
           },
           {
@@ -1975,7 +1975,7 @@ const data = {
             vrcode: 'VR13',
             vrnaam: 'Amsterdam-Amstelland',
             gmcode: 'GM0363',
-            rna_per_ml: 470,
+            rna_normalized: 470,
             date_of_insertion_unix: 1598392779,
           },
           {
@@ -1988,7 +1988,7 @@ const data = {
             vrcode: 'VR13',
             vrnaam: 'Amsterdam-Amstelland',
             gmcode: 'GM0363',
-            rna_per_ml: 1041,
+            rna_normalized: 1041,
             date_of_insertion_unix: 1598392779,
           },
           {
@@ -2001,7 +2001,7 @@ const data = {
             vrcode: 'VR13',
             vrnaam: 'Amsterdam-Amstelland',
             gmcode: 'GM0363',
-            rna_per_ml: 361,
+            rna_normalized: 361,
             date_of_insertion_unix: 1598392779,
           },
         ],
@@ -2015,7 +2015,7 @@ const data = {
           vrcode: 'VR13',
           vrnaam: 'Amsterdam-Amstelland',
           gmcode: 'GM0363',
-          rna_per_ml: 361,
+          rna_normalized: 361,
           date_of_insertion_unix: 1598392779,
         },
       },

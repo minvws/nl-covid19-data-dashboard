@@ -7,11 +7,11 @@
     "proto_name",
     "name",
     "code",
-    "results_per_sewer_installation_per_region",
-    "average_sewer_installation_per_region",
     "results_per_region",
     "ggd",
-    "nursing_home"
+    "nursing_home",
+    "sewer",
+    "sewer_per_installation"
   ],
   "additionalProperties": false,
   "properties": {
@@ -30,11 +30,11 @@
       "type": "string",
       "const": { "$data": "1/proto_name" }
     },
-    "results_per_sewer_installation_per_region": {
-      "$ref": "results_per_sewer_installation_per_region.json"
+    "sewer": {
+      "$ref": "sewer.json"
     },
-    "average_sewer_installation_per_region": {
-      "$ref": "average_sewer_installation_per_region.json"
+    "sewer_per_installation": {
+      "$ref": "sewer_per_installation.json"
     },
     "results_per_region": {
       "$ref": "results_per_region.json"

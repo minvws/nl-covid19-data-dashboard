@@ -214,7 +214,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
               <h2>{siteText.nationaal_layout.headings.overig}</h2>
               <ul>
                 <li>
-                  {sewerWaterBarScaleData.value !== undefined ? (
+                  {sewerWaterBarScaleData ? (
                     <Link
                       href="/gemeente/[code]/rioolwater"
                       as={`/gemeente/${code}/rioolwater`}

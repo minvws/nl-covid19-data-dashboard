@@ -1,4 +1,30 @@
-import { RestrictionsValue } from '../../../types/data';
+/**
+ * Copied from data.d.ts because otherwise the type generator depends on the
+ * types that it generated earlier. This is a problem if you decide to delete
+ * the typing file for example.
+ */
+
+interface RestrictionsValue {
+  restriction_id: string;
+  target_region: 'nl' | 'vr';
+  escalation_level: number;
+  category_id:
+    | 'er_op_uit'
+    | 'bezoek'
+    | 'samenkomst'
+    | 'huwelijk'
+    | 'verpleeghuis'
+    | 'horeca'
+    | 'sport'
+    | 'reizen_binnenland'
+    | 'ov'
+    | 'uitvaart'
+    | 'onderwijs'
+    | 'werk'
+    | 'winkels'
+    | 'alcohol';
+  restriction_order: number;
+}
 
 /**
  * This keyword checks whether a restriction id follows the formatting of <escalation-level>_<category-id>_<unique-number>
