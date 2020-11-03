@@ -1,13 +1,15 @@
 import Ziektegolf from '~/assets/ziektegolf.svg';
+import { KpiTile } from '~/components-styled/kpi-tile';
+import { KpiValue } from '~/components-styled/kpi-value';
+import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { AreaChart } from '~/components/charts/index';
-import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/contentHeader';
+import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { Legenda } from '~/components/legenda';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
-import { formatNumber } from '~/utils/formatNumber';
 
 const text = siteText.besmettelijke_personen;
 
@@ -17,8 +19,6 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
   const count = data.infectious_people_count;
   const infectiousPeopleLastKnownAverage =
     data.infectious_people_last_known_average;
-  const infectiousPeopleLastKnownNormalizedAverage =
-    data.infectious_people_count_normalized;
 
   return (
     <>
@@ -39,45 +39,20 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
         }}
       />
 
-      <div className="layout-two-column">
-        <article
-          className="metric-article column-item"
-          data-cy="infected_daily_increase"
-        >
-          <h3>
-            {text.cijfer_titel}
-
-            {count && (
-              <span className="text-blue kpi">
-                {formatNumber(
-                  infectiousPeopleLastKnownAverage?.last_value.infectious_avg
-                )}
-              </span>
-            )}
-          </h3>
-          <div className="column-item">
-            <p>{text.cijfer_toelichting}</p>
-          </div>
-        </article>
-
-        <article className="metric-article column-item">
-          <h3>
-            {text.barscale_titel}
-
-            {count && (
-              <span className="text-blue kpi">
-                {formatNumber(
-                  infectiousPeopleLastKnownNormalizedAverage?.last_value
-                    .infectious_avg_normalized
-                )}
-              </span>
-            )}
-          </h3>
-          <div className="column-item">
-            <p>{text.barscale_toelichting}</p>
-          </div>
-        </article>
-      </div>
+      <TwoKpiSection>
+        {infectiousPeopleLastKnownAverage && (
+          <KpiTile
+            title={text.cijfer_titel}
+            description={text.cijfer_toelichting}
+          >
+            <KpiValue
+              absolute={
+                infectiousPeopleLastKnownAverage.last_value.infectious_avg
+              }
+            />
+          </KpiTile>
+        )}
+      </TwoKpiSection>
 
       {count?.values && (
         <article className="metric-article">
