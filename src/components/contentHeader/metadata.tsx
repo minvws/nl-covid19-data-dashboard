@@ -10,7 +10,7 @@ interface IProps {
     href: string;
     text: string;
   };
-  dateUnix?: number;
+  dateUnix: number;
   dateInsertedUnix?: number;
   datumsText: string;
 }
@@ -34,12 +34,10 @@ export function Metadata(props: IProps) {
           <ClockIcon aria-hidden />
         </span>
         <p>
-          {dateOfReport !== undefined &&
-            dateOfInsertion !== undefined &&
-            replaceVariablesInText(datumsText, {
-              dateOfReport,
-              dateOfInsertion,
-            })}
+          {replaceVariablesInText(datumsText, {
+            dateOfReport,
+            dateOfInsertion,
+          })}
         </p>
       </div>
 

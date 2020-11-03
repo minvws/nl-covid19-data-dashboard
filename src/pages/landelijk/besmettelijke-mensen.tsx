@@ -34,7 +34,7 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
         metadata={{
           datumsText: text.datums,
           dateUnix:
-            infectiousPeopleLastKnownAverage?.last_value?.date_of_report_unix,
+            infectiousPeopleLastKnownAverage.last_value.date_of_report_unix,
           dateInsertedUnix:
             infectiousPeopleLastKnownAverage?.last_value
               ?.date_of_insertion_unix,
