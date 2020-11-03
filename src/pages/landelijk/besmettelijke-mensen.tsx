@@ -1,7 +1,4 @@
 import Ziektegolf from '~/assets/ziektegolf.svg';
-import { KpiTile } from '~/components-styled/kpi-tile';
-import { KpiValue } from '~/components-styled/kpi-value';
-import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { AreaChart } from '~/components/charts/index';
 import { ContentHeader } from '~/components/contentHeader';
 import { FCWithLayout } from '~/components/layout';
@@ -10,6 +7,7 @@ import { Legenda } from '~/components/legenda';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
+import { formatNumber } from '~/utils/formatNumber';
 
 const text = siteText.besmettelijke_personen;
 
@@ -41,6 +39,12 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
         }}
       />
 
+      {/*
+        @TODO make this replace the code below. Maybe extend TwoKpiSection so that
+        it renders the KPI full-width if there is only one child.
+
+        Discuss with design. https://trello.com/c/gnDOKkZ2/780-regressie-gemiddeld-aantal-besmettelijke-mensen-per-100k
+
       <TwoKpiSection>
         {infectiousPeopleLastKnownAverage && (
           <KpiTile
@@ -55,6 +59,23 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
           </KpiTile>
         )}
       </TwoKpiSection>
+
+      */}
+
+      <article className="metric-article layout-two-column">
+        <div className="column-item column-item-extra-margin">
+          <h3>{text.cijfer_titel}</h3>
+          <p className="text-blue kpi" data-cy="infected_daily_total">
+            {formatNumber(
+              infectiousPeopleLastKnownAverage.last_value.infectious_avg
+            )}
+          </p>
+        </div>
+
+        <div className="column-item column-item-extra-margin">
+          <p>{text.cijfer_toelichting}</p>
+        </div>
+      </article>
 
       {count?.values && (
         <article className="metric-article">
