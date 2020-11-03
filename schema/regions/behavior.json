@@ -24,7 +24,7 @@
     "symptoms_get_tested_compliance": {
       "type": "integer"
     },
-    "wear_mask_public_space_compliance": {
+    "wear_mask_public_indoors_compliance": {
       "type": "integer"
     },
     "wear_mask_public_transport_compliance": {
@@ -54,7 +54,7 @@
     "symptoms_get_tested_support": {
       "type": "integer"
     },
-    "wear_mask_public_space_support": {
+    "wear_mask_public_indoors_support": {
       "type": "integer"
     },
     "wear_mask_public_transport_support": {
@@ -81,7 +81,7 @@
     "avoid_crowds_compliance",
     "symptoms_stay_home_compliance",
     "symptoms_get_tested_compliance",
-    "wear_mask_public_space_compliance",
+    "wear_mask_public_indoors_compliance",
     "wear_mask_public_transport_compliance",
     "sneeze_cough_elbow_compliance",
     "wash_hands_support",
@@ -90,7 +90,7 @@
     "avoid_crowds_support",
     "symptoms_stay_home_support",
     "symptoms_get_tested_support",
-    "wear_mask_public_space_support",
+    "wear_mask_public_indoors_support",
     "wear_mask_public_transport_support",
     "sneeze_cough_elbow_support",
     "max_visitors_support",
