@@ -30,7 +30,7 @@ const generateSitemap = async function (locale) {
     '!./src/pages/_*.tsx',
     '!./src/pages/api',
   ]);
-  
+
   const pathsFromPages = pages.map((page) =>
     page
       .replace('./src/pages', '')

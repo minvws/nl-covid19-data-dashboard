@@ -34,10 +34,12 @@ export function Metadata(props: IProps) {
           <ClockIcon aria-hidden />
         </span>
         <p>
-          {replaceVariablesInText(datumsText, {
-            dateOfReport,
-            dateOfInsertion,
-          })}
+          {dateOfReport !== undefined &&
+            dateOfInsertion !== undefined &&
+            replaceVariablesInText(datumsText, {
+              dateOfReport,
+              dateOfInsertion,
+            })}
         </p>
       </div>
 
