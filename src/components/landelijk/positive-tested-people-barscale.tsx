@@ -1,15 +1,15 @@
 import { BarScale } from '~/components/barScale';
-
+import siteText from '~/locale/index';
 import { InfectedPeopleDeltaNormalized } from '~/types/data.d';
 
-import siteText from '~/locale/index';
 const text = siteText.positief_geteste_personen;
 
 export function PositiveTestedPeopleBarScale(props: {
   data: InfectedPeopleDeltaNormalized | undefined;
   showAxis: boolean;
+  showValue?: boolean;
 }) {
-  const { data, showAxis } = props;
+  const { data, showAxis, showValue } = props;
 
   if (!data) return null;
 
@@ -37,6 +37,7 @@ export function PositiveTestedPeopleBarScale(props: {
       ]}
       signaalwaarde={7}
       showAxis={showAxis}
+      showValue={showValue}
     />
   );
 }

@@ -2,7 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { WithChildren } from '~/types/index';
 import text from '~/locale/index';
 import { ILastGeneratedData } from '~/static-props/last-generated-data';
 import styles from './layout.module.scss';
@@ -46,7 +45,9 @@ export function getLayout(layoutProps: LayoutProps, lastGenerated: string) {
 
 export default Layout;
 
-function Layout(props: WithChildren<LayoutProps & ILastGeneratedData>) {
+function Layout(
+  props: LayoutProps & ILastGeneratedData & { children: React.ReactNode }
+) {
   const {
     children,
     title,
@@ -232,6 +233,13 @@ function Layout(props: WithChildren<LayoutProps & ILastGeneratedData>) {
                       <Link href="/over">
                         <a onClick={blur} className={styles.footerLink}>
                           {text.nav.links.over}
+                        </a>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/veelgestelde-vragen">
+                        <a onClick={blur} className={styles.footerLink}>
+                          {text.nav.links.veelgestelde_vragen}
                         </a>
                       </Link>
                     </li>

@@ -1,39 +1,35 @@
-import Link from 'next/link';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
-
-import { TitleWithIcon } from '~/components/titleWithIcon';
-import { getLayout as getSiteLayout } from '~/components/layout';
-
-import { ReproductionIndexBarScale } from '~/components/landelijk/reproduction-index-barscale';
-import { PositiveTestedPeopleBarScale } from '~/components/landelijk/positive-tested-people-barscale';
-import { InfectiousPeopleBarScale } from '~/components/landelijk/infectious-people-barscale';
-import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-barscale';
-
-import { IntakeIntensiveCareBarscale } from '~/components/landelijk/intake-intensive-care-barscale';
-import { SuspectedPatientsBarScale } from '~/components/landelijk/suspected-patients-barscale';
-import { SewerWaterBarScale } from '~/components/landelijk/sewer-water-barscale';
-import { NursingHomeInfectedPeopleBarScale } from '~/components/common/nursing-home-infected-people-barscale';
-import { NursingHomeInfectedLocationsBarScale } from '~/components/common/nursing-home-infected-locations-barscale';
-import { NursingHomeDeathsBarScale } from '~/components/common/nursing-home-deaths-barscale';
-
-import GetestIcon from '~/assets/test.svg';
-import ReproIcon from '~/assets/reproductiegetal.svg';
-import Ziektegolf from '~/assets/ziektegolf.svg';
-import Ziekenhuis from '~/assets/ziekenhuis.svg';
-import Arts from '~/assets/arts.svg';
-import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
-import Locatie from '~/assets/locaties.svg';
-import CoronaVirus from '~/assets/coronavirus.svg';
 import Arrow from '~/assets/arrow.svg';
+import Arts from '~/assets/arts.svg';
+import CoronaVirus from '~/assets/coronavirus.svg';
+import Locatie from '~/assets/locaties.svg';
 import Notification from '~/assets/notification.svg';
-
+import ReproIcon from '~/assets/reproductiegetal.svg';
+import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
+import GetestIcon from '~/assets/test.svg';
+import Ziekenhuis from '~/assets/ziekenhuis.svg';
+import Ziektegolf from '~/assets/ziektegolf.svg';
+import { NursingHomeDeathsMetric } from '~/components/common/nursing-home-deaths-metric';
+import { NursingHomeInfectedLocationsMetric } from '~/components/common/nursing-home-infected-locations-metric';
+import { NursingHomeInfectedPeopleMetric } from '~/components/common/nursing-home-infected-people-metric';
+import { InfectiousPeopleMetric } from '~/components/landelijk/infectious-people-metric';
+import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-barscale';
+import { IntakeIntensiveCareBarscale } from '~/components/landelijk/intake-intensive-care-barscale';
+import { PositiveTestedPeopleBarScale } from '~/components/landelijk/positive-tested-people-barscale';
+import { ReproductionIndexBarScale } from '~/components/landelijk/reproduction-index-barscale';
+import { SewerWaterMetric } from '~/components/landelijk/sewer-water-metric';
+import { SuspectedPatientsMetric } from '~/components/landelijk/suspected-patients-metric';
+import { getLayout as getSiteLayout } from '~/components/layout';
+import { TitleWithIcon } from '~/components/titleWithIcon';
 import siteText from '~/locale/index';
-
-import { WithChildren } from '~/types/index';
-
 import { INationalData } from '~/static-props/nl-data';
 import { useMenuState } from './useMenuState';
+import { PositiveTestedPeopleMetric } from '~/components/landelijk/positive-tested-people-metric';
+import { ReproductionIndexMetric } from '~/components/landelijk/reproduction-index-metric';
+import { IntakeHospitalMetric } from '~/components/landelijk/intake-hospital-metric';
+import { IntakeIntensiveCareMetric } from '~/components/landelijk/intake-intensive-care-metric';
 
 export function getNationalLayout() {
   return function (
@@ -45,6 +41,10 @@ export function getNationalLayout() {
       pageProps.lastGenerated
     )(<NationalLayout {...pageProps}>{page}</NationalLayout>);
   };
+}
+
+interface NationalLayoutProps extends INationalData {
+  children: React.ReactNode;
 }
 
 /*
@@ -63,12 +63,15 @@ export function getNationalLayout() {
  * More info on persistent layouts:
  * https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
-function NationalLayout(props: WithChildren<INationalData>) {
+function NationalLayout(props: NationalLayoutProps) {
   const { children, data } = props;
   const router = useRouter();
   const isMainRoute = router.route === '/';
 
-  const { isMenuOpen, openMenu, handleMenuClick } = useMenuState(isMainRoute);
+  const { isMenuOpen, openMenu } = useMenuState(isMainRoute);
+
+  // remove focus after navigation
+  const blur = (evt: any) => evt.currentTarget.blur();
 
   function getClassName(path: string) {
     return router.pathname === path
@@ -107,18 +110,19 @@ function NationalLayout(props: WithChildren<INationalData>) {
         </Link>
         <aside className="national-aside">
           <nav aria-label="metric navigation">
+            <h2>{siteText.nationaal_layout.headings.laatste}</h2>
             <ul className="last-developments">
               <li>
                 <Link href="/">
                   <a
-                    onClick={handleMenuClick}
+                    onClick={blur}
                     className={`last-developments-link ${getClassName('/')}`}
                   >
                     <TitleWithIcon
                       Icon={Notification}
                       title={siteText.laatste_ontwikkelingen.title}
+                      subtitle={siteText.laatste_ontwikkelingen.menu_subtitle}
                     />
-                    <span>{siteText.laatste_ontwikkelingen.menu_subtitle}</span>
                   </a>
                 </Link>
               </li>
@@ -128,7 +132,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
               <li>
                 <Link href="/landelijk/positief-geteste-mensen">
                   <a
-                    onClick={handleMenuClick}
+                    onClick={blur}
                     className={getClassName(
                       '/landelijk/positief-geteste-mensen'
                     )}
@@ -137,32 +141,14 @@ function NationalLayout(props: WithChildren<INationalData>) {
                       Icon={GetestIcon}
                       title={siteText.positief_geteste_personen.titel_sidebar}
                     />
-                    <span>
-                      <PositiveTestedPeopleBarScale
-                        data={data?.infected_people_delta_normalized}
-                        showAxis={true}
+                    <span className="metric-wrapper">
+                      <PositiveTestedPeopleMetric
+                        data={data.infected_people_total.last_value}
                       />
-                    </span>
-                  </a>
-                </Link>
-              </li>
-
-              <li>
-                <Link href="/landelijk/besmettelijke-mensen">
-                  <a
-                    onClick={handleMenuClick}
-                    className={getClassName('/landelijk/besmettelijke-mensen')}
-                  >
-                    <TitleWithIcon
-                      Icon={Ziektegolf}
-                      title={siteText.besmettelijke_personen.titel_sidebar}
-                    />
-                    <span>
-                      <InfectiousPeopleBarScale
-                        data={
-                          data.infectious_people_last_known_average?.last_value
-                        }
-                        showAxis={true}
+                      <PositiveTestedPeopleBarScale
+                        data={data.infected_people_delta_normalized}
+                        showAxis={false}
+                        showValue={false}
                       />
                     </span>
                   </a>
@@ -172,18 +158,44 @@ function NationalLayout(props: WithChildren<INationalData>) {
               <li>
                 <Link href="/landelijk/reproductiegetal">
                   <a
-                    onClick={handleMenuClick}
+                    onClick={blur}
                     className={getClassName('/landelijk/reproductiegetal')}
                   >
                     <TitleWithIcon
                       Icon={ReproIcon}
-                      title={siteText.reproductiegetal.titel}
+                      title={siteText.reproductiegetal.titel_sidebar}
+                    />
+                    <span className="metric-wrapper">
+                      <ReproductionIndexMetric
+                        data={
+                          data.reproduction_index_last_known_average.last_value
+                        }
+                      />
+                      <ReproductionIndexBarScale
+                        data={data.reproduction_index_last_known_average}
+                        showAxis={false}
+                        showValue={false}
+                      />
+                    </span>
+                  </a>
+                </Link>
+              </li>
+
+              <li>
+                <Link href="/landelijk/besmettelijke-mensen">
+                  <a
+                    onClick={blur}
+                    className={getClassName('/landelijk/besmettelijke-mensen')}
+                  >
+                    <TitleWithIcon
+                      Icon={Ziektegolf}
+                      title={siteText.besmettelijke_personen.titel_sidebar}
                     />
                     <span>
-                      <ReproductionIndexBarScale
-                        data={data?.reproduction_index}
-                        lastKnown={data?.reproduction_index_last_known_average}
-                        showAxis={true}
+                      <InfectiousPeopleMetric
+                        data={
+                          data.infectious_people_last_known_average?.last_value
+                        }
                       />
                     </span>
                   </a>
@@ -193,17 +205,21 @@ function NationalLayout(props: WithChildren<INationalData>) {
               <li>
                 <Link href="/landelijk/ziekenhuis-opnames">
                   <a
-                    onClick={handleMenuClick}
+                    onClick={blur}
                     className={getClassName('/landelijk/ziekenhuis-opnames')}
                   >
                     <TitleWithIcon
                       Icon={Ziekenhuis}
-                      title={siteText.ziekenhuisopnames_per_dag.titel}
+                      title={siteText.ziekenhuisopnames_per_dag.titel_sidebar}
                     />
-                    <span>
+                    <span className="metric-wrapper">
+                      <IntakeHospitalMetric
+                        data={data.intake_hospital_ma.last_value}
+                      />
                       <IntakeHospitalBarScale
-                        data={data?.intake_hospital_ma}
-                        showAxis={true}
+                        data={data.intake_hospital_ma}
+                        showAxis={false}
+                        showValue={false}
                       />
                     </span>
                   </a>
@@ -213,19 +229,23 @@ function NationalLayout(props: WithChildren<INationalData>) {
               <li>
                 <Link href="/landelijk/intensive-care-opnames">
                   <a
-                    onClick={handleMenuClick}
+                    onClick={blur}
                     className={getClassName(
                       '/landelijk/intensive-care-opnames'
                     )}
                   >
                     <TitleWithIcon
                       Icon={Arts}
-                      title={siteText.ic_opnames_per_dag.titel}
+                      title={siteText.ic_opnames_per_dag.titel_sidebar}
                     />
-                    <span>
+                    <span className="metric-wrapper">
+                      <IntakeIntensiveCareMetric
+                        data={data.intake_intensivecare_ma.last_value}
+                      />
                       <IntakeIntensiveCareBarscale
-                        data={data?.intake_intensivecare_ma}
-                        showAxis={true}
+                        data={data.intake_intensivecare_ma}
+                        showAxis={false}
+                        showValue={false}
                       />
                     </span>
                   </a>
@@ -238,7 +258,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
               <li>
                 <Link href="/landelijk/verdenkingen-huisartsen">
                   <a
-                    onClick={handleMenuClick}
+                    onClick={blur}
                     className={getClassName(
                       '/landelijk/verdenkingen-huisartsen'
                     )}
@@ -248,9 +268,8 @@ function NationalLayout(props: WithChildren<INationalData>) {
                       title={siteText.verdenkingen_huisartsen.titel_sidebar}
                     />
                     <span>
-                      <SuspectedPatientsBarScale
-                        data={data?.verdenkingen_huisartsen}
-                        showAxis={true}
+                      <SuspectedPatientsMetric
+                        data={data.verdenkingen_huisartsen.last_value}
                       />
                     </span>
                   </a>
@@ -260,18 +279,15 @@ function NationalLayout(props: WithChildren<INationalData>) {
               <li>
                 <Link href="/landelijk/rioolwater">
                   <a
-                    onClick={handleMenuClick}
+                    onClick={blur}
                     className={getClassName('/landelijk/rioolwater')}
                   >
                     <TitleWithIcon
                       Icon={RioolwaterMonitoring}
-                      title={siteText.rioolwater_metingen.titel}
+                      title={siteText.rioolwater_metingen.titel_sidebar}
                     />
                     <span>
-                      <SewerWaterBarScale
-                        data={data?.rioolwater_metingen}
-                        showAxis={true}
-                      />
+                      <SewerWaterMetric data={data.rioolwater_metingen} />
                     </span>
                   </a>
                 </Link>
@@ -283,7 +299,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
               <li>
                 <Link href="/landelijk/verpleeghuis-positief-geteste-personen">
                   <a
-                    onClick={handleMenuClick}
+                    onClick={blur}
                     className={getClassName(
                       '/landelijk/verpleeghuis-positief-geteste-personen'
                     )}
@@ -296,12 +312,8 @@ function NationalLayout(props: WithChildren<INationalData>) {
                       }
                     />
                     <span>
-                      <NursingHomeInfectedPeopleBarScale
-                        value={
-                          data?.infected_people_nursery_count_daily.last_value
-                            .infected_nursery_daily
-                        }
-                        showAxis={true}
+                      <NursingHomeInfectedPeopleMetric
+                        data={data.nursing_home.last_value}
                       />
                     </span>
                   </a>
@@ -311,22 +323,20 @@ function NationalLayout(props: WithChildren<INationalData>) {
               <li>
                 <Link href="/landelijk/verpleeghuis-besmette-locaties">
                   <a
-                    onClick={handleMenuClick}
+                    onClick={blur}
                     className={getClassName(
                       '/landelijk/verpleeghuis-besmette-locaties'
                     )}
                   >
                     <TitleWithIcon
                       Icon={Locatie}
-                      title={siteText.verpleeghuis_besmette_locaties.titel}
+                      title={
+                        siteText.verpleeghuis_besmette_locaties.titel_sidebar
+                      }
                     />
                     <span>
-                      <NursingHomeInfectedLocationsBarScale
-                        value={
-                          data?.total_reported_locations.last_value
-                            .total_reported_locations
-                        }
-                        showAxis={true}
+                      <NursingHomeInfectedLocationsMetric
+                        data={data.nursing_home.last_value}
                       />
                     </span>
                   </a>
@@ -336,7 +346,7 @@ function NationalLayout(props: WithChildren<INationalData>) {
               <li>
                 <Link href="/landelijk/verpleeghuis-sterfte">
                   <a
-                    onClick={handleMenuClick}
+                    onClick={blur}
                     className={getClassName('/landelijk/verpleeghuis-sterfte')}
                   >
                     <TitleWithIcon
@@ -344,12 +354,8 @@ function NationalLayout(props: WithChildren<INationalData>) {
                       title={siteText.verpleeghuis_oversterfte.titel_sidebar}
                     />
                     <span>
-                      <NursingHomeDeathsBarScale
-                        value={
-                          data?.deceased_people_nursery_count_daily.last_value
-                            .deceased_nursery_daily
-                        }
-                        showAxis={true}
+                      <NursingHomeDeathsMetric
+                        data={data.nursing_home.last_value}
                       />
                     </span>
                   </a>

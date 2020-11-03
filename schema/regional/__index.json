@@ -24,11 +24,11 @@
     },
     "name": {
       "type": "string",
-      "pattern": "^VR[0-9]+$"
+      "const": { "$data": "1/proto_name" }
     },
     "code": {
       "type": "string",
-      "pattern": "^VR[0-9]+$"
+      "const": { "$data": "1/proto_name" }
     },
     "results_per_sewer_installation_per_region": {
       "$ref": "results_per_sewer_installation_per_region.json"
@@ -44,6 +44,9 @@
     },
     "nursing_home": {
       "$ref": "nursing_home.json"
+    },
+    "restrictions": {
+      "$ref": "restrictions.json"
     }
   }
 }

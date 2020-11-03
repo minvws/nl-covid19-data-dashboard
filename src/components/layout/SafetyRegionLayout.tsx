@@ -4,15 +4,16 @@ import { useRouter } from 'next/router';
 
 import siteText from '~/locale/index';
 import safetyRegions from '~/data/index';
-import { WithChildren } from '~/types/index';
 import { ISafetyRegionData } from '~/static-props/safetyregion-data';
 
 import { useMediaQuery } from '~/utils/useMediaQuery';
 import { getSewerWaterBarScaleData } from '~/utils/sewer-water/safety-region-sewer-water.util';
 
 import { PositivelyTestedPeopleBarScale } from '~/components/veiligheidsregio/positive-tested-people-barscale';
-import { IntakeHospitalBarScale } from '~/components/veiligheidsregio/intake-hospital-barscale';
-import { SewerWaterBarScale } from '~/components/veiligheidsregio/sewer-water-barscale';
+import { PositivelyTestedPeopleMetric } from '~/components/veiligheidsregio/positive-tested-people-metric';
+
+import { IntakeHospitalMetric } from '~/components/veiligheidsregio/intake-hospital-metric';
+import { SewerWaterMetric } from '~/components/veiligheidsregio/sewer-water-metric';
 
 import { TitleWithIcon } from '~/components/titleWithIcon';
 import { getLayout as getSiteLayout } from '~/components/layout';
@@ -26,9 +27,9 @@ import Locatie from '~/assets/locaties.svg';
 import CoronaVirus from '~/assets/coronavirus.svg';
 
 import { useMenuState } from './useMenuState';
-import { NursingHomeInfectedPeopleBarScale } from '~/components/common/nursing-home-infected-people-barscale';
-import { NursingHomeInfectedLocationsBarScale } from '~/components/common/nursing-home-infected-locations-barscale';
-import { NursingHomeDeathsBarScale } from '~/components/common/nursing-home-deaths-barscale';
+import { NursingHomeInfectedPeopleMetric } from '~/components/common/nursing-home-infected-people-metric';
+import { NursingHomeInfectedLocationsMetric } from '~/components/common/nursing-home-infected-locations-metric';
+import { NursingHomeDeathsMetric } from '~/components/common/nursing-home-deaths-metric';
 
 export function getSafetyRegionLayout() {
   return function (
@@ -40,6 +41,10 @@ export function getSafetyRegionLayout() {
       pageProps.lastGenerated
     )(<SafetyRegionLayout {...pageProps}>{page}</SafetyRegionLayout>);
   };
+}
+
+interface SafetyRegionLayoutProps extends ISafetyRegionData {
+  children: React.ReactNode;
 }
 
 type TSafetyRegion = {
@@ -66,7 +71,7 @@ type TSafetyRegion = {
  * More info on persistent layouts:
  * https:adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
-function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
+function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
   const { children, data } = props;
 
   const router = useRouter();
@@ -80,7 +85,10 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
 
   const showMetricLinks = router.route !== '/veiligheidsregio';
 
-  const { isMenuOpen, openMenu, handleMenuClick } = useMenuState(isMainRoute);
+  const { isMenuOpen, openMenu } = useMenuState(isMainRoute);
+
+  // remove focus after navigation
+  const blur = (evt: any) => evt.currentTarget.blur();
 
   function getClassName(path: string) {
     return router.pathname === path
@@ -147,7 +155,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                     as={`/veiligheidsregio/${code}/positief-geteste-mensen`}
                   >
                     <a
-                      onClick={handleMenuClick}
+                      onClick={blur}
                       className={getClassName(
                         `/veiligheidsregio/[code]/positief-geteste-mensen`
                       )}
@@ -159,10 +167,14 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                             .titel_sidebar
                         }
                       />
-                      <span>
+                      <span className="metric-wrapper">
+                        <PositivelyTestedPeopleMetric
+                          data={data.results_per_region.last_value}
+                        />
                         <PositivelyTestedPeopleBarScale
-                          data={data?.results_per_region}
-                          showAxis={true}
+                          data={data.results_per_region}
+                          showAxis={false}
+                          showValue={false}
                         />
                       </span>
                     </a>
@@ -175,7 +187,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                     as={`/veiligheidsregio/${code}/ziekenhuis-opnames`}
                   >
                     <a
-                      onClick={handleMenuClick}
+                      onClick={blur}
                       className={getClassName(
                         `/veiligheidsregio/[code]/ziekenhuis-opnames`
                       )}
@@ -188,10 +200,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                         }
                       />
                       <span>
-                        <IntakeHospitalBarScale
-                          data={data?.results_per_region}
-                          showAxis={true}
-                        />
+                        <IntakeHospitalMetric data={data.results_per_region} />
                       </span>
                     </a>
                   </Link>
@@ -206,7 +215,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                     as={`/veiligheidsregio/${code}/rioolwater`}
                   >
                     <a
-                      onClick={handleMenuClick}
+                      onClick={blur}
                       className={getClassName(
                         `/veiligheidsregio/[code]/rioolwater`
                       )}
@@ -219,9 +228,8 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                         }
                       />
                       <span>
-                        <SewerWaterBarScale
+                        <SewerWaterMetric
                           data={getSewerWaterBarScaleData(data)}
-                          showAxis={true}
                         />
                       </span>
                     </a>
@@ -237,7 +245,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                     as={`/veiligheidsregio/${code}/verpleeghuis-positief-geteste-personen`}
                   >
                     <a
-                      onClick={handleMenuClick}
+                      onClick={blur}
                       className={getClassName(
                         '/veiligheidsregio/[code]/verpleeghuis-positief-geteste-personen'
                       )}
@@ -249,16 +257,11 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                             .titel_sidebar
                         }
                       />
-                      {data?.nursing_home?.last_value && (
-                        <span>
-                          <NursingHomeInfectedPeopleBarScale
-                            value={
-                              data.nursing_home.last_value.newly_infected_people
-                            }
-                            showAxis={true}
-                          />
-                        </span>
-                      )}
+                      <span>
+                        <NursingHomeInfectedPeopleMetric
+                          data={data.nursing_home.last_value}
+                        />
+                      </span>
                     </a>
                   </Link>
                 </li>
@@ -269,7 +272,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                     as={`/veiligheidsregio/${code}/verpleeghuis-besmette-locaties`}
                   >
                     <a
-                      onClick={handleMenuClick}
+                      onClick={blur}
                       className={getClassName(
                         '/veiligheidsregio/[code]/verpleeghuis-besmette-locaties'
                       )}
@@ -279,12 +282,8 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                         title={siteText.verpleeghuis_besmette_locaties.titel}
                       />
                       <span>
-                        <NursingHomeInfectedLocationsBarScale
-                          value={
-                            data?.nursing_home?.last_value
-                              .infected_locations_total
-                          }
-                          showAxis={true}
+                        <NursingHomeInfectedLocationsMetric
+                          data={data.nursing_home.last_value}
                         />
                       </span>
                     </a>
@@ -297,7 +296,7 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                     as={`/veiligheidsregio/${code}/verpleeghuis-sterfte`}
                   >
                     <a
-                      onClick={handleMenuClick}
+                      onClick={blur}
                       className={getClassName(
                         '/veiligheidsregio/[code]/verpleeghuis-sterfte'
                       )}
@@ -307,9 +306,8 @@ function SafetyRegionLayout(props: WithChildren<ISafetyRegionData>) {
                         title={siteText.verpleeghuis_oversterfte.titel_sidebar}
                       />
                       <span>
-                        <NursingHomeDeathsBarScale
-                          value={data?.nursing_home?.last_value.deceased_daily}
-                          showAxis={true}
+                        <NursingHomeDeathsMetric
+                          data={data.nursing_home.last_value}
                         />
                       </span>
                     </a>

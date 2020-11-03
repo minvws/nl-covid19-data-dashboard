@@ -1,17 +1,12 @@
-import siteText from '~/locale/index';
-import {
-  NationalHuisartsVerdenkingen,
-  NationalHuisartsVerdenkingenValue,
-} from '~/types/data.d';
-import getNlData, { INationalData } from '~/static-props/nl-data';
-
-import { ContentHeader } from '~/components/layout/Content';
+import Arts from '~/assets/arts.svg';
 import { FCWithLayout } from '~/components/layout';
+import { ContentHeader } from '~/components/contentHeader';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { LineChart } from '~/components/lineChart/lineChartWithWeekTooltip';
-import { SuspectedPatientsBarScale } from '~/components/landelijk/suspected-patients-barscale';
-
-import Arts from '~/assets/arts.svg';
+import { SEOHead } from '~/components/seoHead';
+import siteText from '~/locale/index';
+import getNlData, { INationalData } from '~/static-props/nl-data';
+import { NationalHuisartsVerdenkingen } from '~/types/data.d';
 import { formatNumber } from '~/utils/formatNumber';
 
 const text = siteText.verdenkingen_huisartsen;
@@ -23,9 +18,14 @@ const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
     state?.verdenkingen_huisartsen;
 
   const total = state?.verdenkingen_huisartsen?.last_value?.geschat_aantal;
+  const normalized = state?.verdenkingen_huisartsen?.last_value?.incidentie;
 
   return (
     <>
+      <SEOHead
+        title={text.metadata.title}
+        description={text.metadata.description}
+      />
       <ContentHeader
         category={siteText.gemeente_layout.headings.overig}
         title={text.titel}
@@ -41,20 +41,15 @@ const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
 
       <div className="layout-two-column">
         <article className="metric-article column-item">
-          <h3>{text.barscale_titel}</h3>
-
-          <SuspectedPatientsBarScale data={data} showAxis={true} />
+          <h3>{text.kpi_titel}</h3>
+          <p className="text-blue kpi">{formatNumber(total)}</p>
           <p>{text.barscale_toelichting}</p>
         </article>
 
         <article className="metric-article column-item">
-          {total && (
-            <h3>
-              {text.kpi_titel}{' '}
-              <span className="text-blue kpi">{formatNumber(total)}</span>
-            </h3>
-          )}
-          <p>{text.kpi_toelichting}</p>
+          <h3>{text.normalized_kpi_titel}</h3>
+          <p className="text-blue kpi">{formatNumber(normalized)}</p>
+          <p>{text.normalized_kpi_toelichting}</p>
         </article>
       </div>
 
@@ -63,16 +58,14 @@ const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
           <LineChart
             title={text.linechart_titel}
             timeframeOptions={['all', '5weeks']}
-            values={data.values.map(
-              (value: NationalHuisartsVerdenkingenValue) => ({
-                value: value.incidentie,
-                date: value.week_unix,
-                week: {
-                  start: value.week_start_unix,
-                  end: value.week_end_unix,
-                },
-              })
-            )}
+            values={data.values.map((value) => ({
+              value: value.incidentie,
+              date: value.week_unix,
+              week: {
+                start: value.week_start_unix,
+                end: value.week_end_unix,
+              },
+            }))}
           />
         </article>
       )}

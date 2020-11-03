@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render } from '~/test-utils/render';
 
 import PositiefGetesteMensen from '../../../pages/veiligheidsregio/[code]/positief-geteste-mensen';
 
@@ -1882,7 +1882,7 @@ const data = {
       date_of_insertion_unix: 1598877431,
     },
   },
-  average_sewer_installation_per_region: {
+  ggd: {
     values: [
       {
         week_unix: 1595203200,

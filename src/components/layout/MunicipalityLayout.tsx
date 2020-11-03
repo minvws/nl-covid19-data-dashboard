@@ -3,7 +3,6 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import siteText from '~/locale/index';
-import { WithChildren } from '~/types/index';
 import municipalities from '~/data/gemeente_veiligheidsregio.json';
 import { IMunicipalityData } from '~/static-props/municipality-data';
 
@@ -11,9 +10,9 @@ import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMu
 import { getSewerWaterBarScaleData } from '~/utils/sewer-water/municipality-sewer-water.util';
 import { useMediaQuery } from '~/utils/useMediaQuery';
 
-import { PositivelyTestedPeopleBarScale } from '~/components/gemeente/positively-tested-people-barscale';
-import { IntakeHospitalBarScale } from '~/components/gemeente/intake-hospital-barscale';
-import { SewerWaterBarScale } from '~/components/gemeente/sewer-water-barscale';
+import { PositivelyTestedPeopleMetric } from '~/components/gemeente/positively-tested-people-metric';
+import { IntakeHospitalMetric } from '~/components/gemeente/intake-hospital-metric';
+import { SewerWaterMetric } from '~/components/gemeente/sewer-water-metric';
 
 import { TitleWithIcon } from '~/components/titleWithIcon';
 import { getLayout as getSiteLayout } from '~/components/layout';
@@ -29,6 +28,10 @@ interface IMunicipality {
   name: string;
   safetyRegion: string;
   gemcode: string;
+}
+
+interface MunicipalityLayoutProps extends IMunicipalityData {
+  children: React.ReactNode;
 }
 
 export function getMunicipalityLayout() {
@@ -62,7 +65,7 @@ export function getMunicipalityLayout() {
  * More info on persistent layouts:
  * https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
-function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
+function MunicipalityLayout(props: MunicipalityLayoutProps) {
   const { children, data, municipalityName } = props;
   const router = useRouter();
   const isLargeScreen = useMediaQuery('(min-width: 1000px)');
@@ -74,7 +77,10 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
   const isMainRoute =
     router.route === '/gemeente' || router.route === `/gemeente/[code]`;
 
-  const { isMenuOpen, openMenu, handleMenuClick } = useMenuState(isMainRoute);
+  const { isMenuOpen, openMenu } = useMenuState(isMainRoute);
+
+  // remove focus after navigation
+  const blur = (evt: any) => evt.currentTarget.blur();
 
   function getClassName(path: string) {
     return router.pathname === path
@@ -96,6 +102,8 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
   const safetyRegion:
     | { name: string; code: string; id: number }
     | undefined = getSafetyRegionForMunicipalityCode(code as string);
+
+  const sewerWaterBarScaleData = getSewerWaterBarScaleData(data);
 
   return (
     <>
@@ -141,7 +149,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                       href="/veiligheidsregio/[code]/positief-geteste-mensen"
                       as={`/veiligheidsregio/${safetyRegion.code}/positief-geteste-mensen`}
                     >
-                      <a onClick={handleMenuClick}>{safetyRegion.name}</a>
+                      <a onClick={blur}>{safetyRegion.name}</a>
                     </Link>
                   </p>
                 )}
@@ -154,7 +162,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                     as={`/gemeente/${code}/positief-geteste-mensen`}
                   >
                     <a
-                      onClick={handleMenuClick}
+                      onClick={blur}
                       className={getClassName(
                         `/gemeente/[code]/positief-geteste-mensen`
                       )}
@@ -167,9 +175,8 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                         }
                       />
                       <span>
-                        <PositivelyTestedPeopleBarScale
-                          data={data?.positive_tested_people}
-                          showAxis={true}
+                        <PositivelyTestedPeopleMetric
+                          data={data?.positive_tested_people.last_value}
                         />
                       </span>
                     </a>
@@ -182,7 +189,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                     as={`/gemeente/${code}/ziekenhuis-opnames`}
                   >
                     <a
-                      onClick={handleMenuClick}
+                      onClick={blur}
                       className={getClassName(
                         `/gemeente/[code]/ziekenhuis-opnames`
                       )}
@@ -195,9 +202,8 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                         }
                       />
                       <span>
-                        <IntakeHospitalBarScale
-                          data={data?.hospital_admissions}
-                          showAxis={true}
+                        <IntakeHospitalMetric
+                          data={data?.hospital_admissions.last_value}
                         />
                       </span>
                     </a>
@@ -208,13 +214,13 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
               <h2>{siteText.nationaal_layout.headings.overig}</h2>
               <ul>
                 <li>
-                  {getSewerWaterBarScaleData(data) ? (
+                  {sewerWaterBarScaleData.value !== undefined ? (
                     <Link
                       href="/gemeente/[code]/rioolwater"
                       as={`/gemeente/${code}/rioolwater`}
                     >
                       <a
-                        onClick={handleMenuClick}
+                        onClick={blur}
                         className={getClassName(`/gemeente/[code]/rioolwater`)}
                       >
                         <TitleWithIcon
@@ -224,10 +230,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                           }
                         />
                         <span>
-                          <SewerWaterBarScale
-                            data={getSewerWaterBarScaleData(data)}
-                            showAxis={true}
-                          />
+                          <SewerWaterMetric data={sewerWaterBarScaleData} />
                         </span>
                       </a>
                     </Link>
@@ -239,12 +242,9 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                           siteText.gemeente_rioolwater_metingen.titel_sidebar
                         }
                       />
-                      <span>
-                        <SewerWaterBarScale
-                          data={getSewerWaterBarScaleData(data)}
-                          showAxis={true}
-                        />
-                      </span>
+                      <p>
+                        {siteText.gemeente_rioolwater_metingen.nodata_sidebar}
+                      </p>
                     </div>
                   )}
                 </li>

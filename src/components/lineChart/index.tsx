@@ -1,35 +1,39 @@
-import React, { useMemo, useState } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import styles from './lineChart.module.scss';
+import React, { useMemo, useState } from 'react';
+import { isFilled } from 'ts-is-present';
+import { ChartTimeControls } from '~/components-styled/chart-time-controls';
 import text from '~/locale/index';
-
-import {
-  ChartTimeControls,
-  TimeframeOption,
-} from '~/components/chartTimeControls';
-
-import { formatNumber } from '~/utils/formatNumber';
 import { formatDateFromSeconds } from '~/utils/formatDate';
-import { getFilteredValues } from '~/components/chartTimeControls/chartTimeControlUtils';
-import { isDefined } from 'ts-is-present';
+import { formatNumber } from '~/utils/formatNumber';
+import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
+import styles from './lineChart.module.scss';
 
-type Value = {
+export type Value = {
   date: number;
-  value?: number;
+  value: number | null;
 };
 
 const SIGNAALWAARDE_Z_INDEX = 5;
 
-interface LineChartProps {
+export interface LineChartProps<T> {
   title: string;
   description?: string;
-  values: Value[];
+  values: T[];
   signaalwaarde?: number;
   timeframeOptions?: TimeframeOption[];
+  formatTooltip?: (value: T) => string;
+  formatYAxis?: (y: number) => string;
+  showFill?: boolean;
 }
 
-function getChartOptions(values: Value[], signaalwaarde?: number) {
+function getChartOptions<T extends Value>(
+  values: T[],
+  signaalwaarde?: number,
+  formatTooltip?: (value: T) => string,
+  formatYAxis?: (y: number) => string,
+  showFill?: boolean
+) {
   const yMax = calculateYMax(values, signaalwaarde);
 
   const options: Highcharts.Options = {
@@ -42,7 +46,7 @@ function getChartOptions(values: Value[], signaalwaarde?: number) {
       borderWidth: 0,
       colorCount: 10,
       displayErrors: true,
-      height: 175,
+      height: 250,
     },
     credits: {
       enabled: false,
@@ -51,17 +55,16 @@ function getChartOptions(values: Value[], signaalwaarde?: number) {
       lineColor: '#C4C4C4',
       gridLineColor: '#ca005d',
       type: 'datetime',
-      accessibility: {
-        rangeDescription: 'Verloop van tijd',
-      },
       title: {
         text: null,
       },
       categories: values.map((value) => value.date.toString()),
       labels: {
         align: 'right',
-        // types say `rotation` needs to be a number,
-        // but that doesn’t work.
+        /**
+         * Types say `rotation` needs to be a number,
+         * but that doesn’t work.
+         */
         rotation: '0' as any,
         formatter: function () {
           return this.isFirst || this.isLast
@@ -75,6 +78,9 @@ function getChartOptions(values: Value[], signaalwaarde?: number) {
       borderColor: '#01689B',
       borderRadius: 0,
       formatter: function (): string {
+        if (formatTooltip) {
+          return formatTooltip(values[this.point.index]);
+        }
         return `${formatDateFromSeconds(this.x)}: ${formatNumber(this.y)}`;
       },
     },
@@ -90,11 +96,11 @@ function getChartOptions(values: Value[], signaalwaarde?: number) {
       },
       labels: {
         formatter: function () {
+          if (formatYAxis) {
+            return formatYAxis(this.value);
+          }
           return formatNumber(this.value);
         },
-      },
-      accessibility: {
-        rangeDescription: 'Range: 2010 to 2017',
       },
       plotLines: signaalwaarde
         ? [
@@ -145,8 +151,14 @@ function getChartOptions(values: Value[], signaalwaarde?: number) {
         name: '',
         showInLegend: false,
         color: '#3391CC',
-        // hex to rgb converted, added opacity
-        fillColor: 'rgba(51, 145, 204, 0.2)',
+        /**
+         * HEX to rgb converted, added opacity.
+         * Since this chart has type 'area', a fillColor of `undefined` will return
+         * a colored fill equal to che line color, when showFill is false, it returns a
+         * transparent fill
+         */
+
+        fillColor: showFill ? 'rgba(51, 145, 204, 0.2)' : 'transparent',
         marker: {
           enabled: false,
         },
@@ -171,23 +183,32 @@ function getChartOptions(values: Value[], signaalwaarde?: number) {
   return options;
 }
 
-export default function LineChart({
+export default function LineChart<T extends Value>({
   title,
   description,
   values,
   signaalwaarde,
   timeframeOptions,
-}: LineChartProps) {
+  formatTooltip,
+  formatYAxis,
+  showFill = true,
+}: LineChartProps<T>) {
   const [timeframe, setTimeframe] = useState<TimeframeOption>('5weeks');
 
   const chartOptions = useMemo(() => {
-    const filteredValues = getFilteredValues<Value>(
+    const filteredValues = getFilteredValues<T>(
       values,
       timeframe,
-      (value: Value) => value.date * 1000
+      (value: T) => value.date * 1000
     );
-    return getChartOptions(filteredValues, signaalwaarde);
-  }, [values, timeframe, signaalwaarde]);
+    return getChartOptions<T>(
+      filteredValues,
+      signaalwaarde,
+      formatTooltip,
+      formatYAxis,
+      showFill
+    );
+  }, [values, timeframe, signaalwaarde, formatTooltip, formatYAxis, showFill]);
 
   return (
     <section className={styles.root}>
@@ -216,9 +237,12 @@ export default function LineChart({
 function calculateYMax(values: Value[], signaalwaarde = -Infinity) {
   const maxValue = values
     .map((x) => x.value)
-    .filter(isDefined)
+    .filter(isFilled)
     .reduce((acc, value) => (value > acc ? value : acc), -Infinity);
 
-  // Value cannot be 0, hence the 1
-  return Math.max(maxValue, signaalwaarde + 10, 1);
+  /**
+   * Value cannot be 0, hence the 1
+   * If the value is below signaalwaarde, make sure the signaalwaarde floats in the middle
+   */
+  return Math.max(maxValue, signaalwaarde * 2, 1);
 }

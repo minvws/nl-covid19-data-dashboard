@@ -21,11 +21,11 @@
     },
     "name": {
       "type": "string",
-      "pattern": "^GM[0-9]+$"
+      "const": { "$data": "1/proto_name" }
     },
     "code": {
       "type": "string",
-      "pattern": "^GM[0-9]+$"
+      "const": { "$data": "1/proto_name" }
     },
     "hospital_admissions": {
       "$ref": "hospital_admissions.json"

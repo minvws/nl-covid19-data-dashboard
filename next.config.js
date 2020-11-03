@@ -1,7 +1,8 @@
 const withPlugins = require('next-compose-plugins');
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+const sitemap = require('./src/tools/sitemap/generate-sitemap.js');
 
 const withTM = require('next-transpile-modules')([
-  '@juggle/resize-observer',
   '@vx/tooltip',
   '@vx/event',
   'zustand',
@@ -21,7 +22,16 @@ const nextConfig = {
     COMMIT_ID: commitHash,
   },
   reactStrictMode: true, // Enables react strict mode https://nextjs.org/docs/api-reference/next.config.js/react-strict-mode
-  webpack(config) {
+
+  webpack(config, { isServer }) {
+    if (
+      isServer &&
+      process.env.DISABLE_SITEMAP !== '1' &&
+      !process.env.DISABLE_SITEMAP
+    ) {
+      sitemap.generateSitemap(process.env.NEXT_PUBLIC_LOCALE);
+    }
+
     config.module.rules.push({
       test: /\.svg$/,
       use: [
@@ -34,6 +44,8 @@ const nextConfig = {
         test: /\.(js|ts)x?$/,
       },
     });
+
+    config.plugins.push(new LodashModuleReplacementPlugin());
 
     // if (!dev) {
     //   // Move Preact into the framework chunk instead of duplicating in routes:

@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "national_ggd",
+  "type": "object",
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/value"
+      }
+    },
+    "last_value": {
+      "$ref": "#/definitions/value"
+    }
+  },
+  "required": ["values", "last_value"],
+  "additionalProperties": false,
+  "definitions": {
+    "value": {
+      "title": "national_ggd_value",
+      "type": "object",
+      "properties": {
+        "infected": {
+          "type": "integer"
+        },
+        "infected_percentage": {
+          "type": "number"
+        },
+        "tested_total": {
+          "type": "integer"
+        },
+        "week_unix": {
+          "type": "integer"
+        },
+        "week_start_unix": {
+          "type": "integer"
+        },
+        "week_end_unix": {
+          "type": "integer"
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "tested_total",
+        "infected_percentage",
+        "infected",
+        "week_unix",
+        "week_start_unix",
+        "week_end_unix",
+        "date_of_insertion_unix"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,30 @@
+@import '~/scss/variables.scss';
+
+.root {
+  width: 100%;
+  min-height: 4rem;
+}
+
+.title {
+  font-size: 1em;
+  font-weight: normal;
+  margin-bottom: 0.5em;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.value {
+  font-size: 1.42383rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.description {
+  margin: 0;
+  margin-left: 1em;
+  color: $text-color-grey;
+  font-size: 0.875rem;
+}

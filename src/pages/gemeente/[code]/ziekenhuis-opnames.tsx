@@ -1,26 +1,24 @@
 import { useRouter } from 'next/router';
-
+import Ziekenhuis from '~/assets/ziekenhuis.svg';
+import { LineChart } from '~/components/charts/index';
+import { ChoroplethLegenda } from '~/components/choropleth/legenda/ChoroplethLegenda';
+import { useMunicipalLegendaData } from '~/components/choropleth/legenda/hooks/useMunicipalLegendaData';
+import { MunicipalityChoropleth } from '~/components/choropleth/MunicipalityChoropleth';
+import { createSelectMunicipalHandler } from '~/components/choropleth/selectHandlers/createSelectMunicipalHandler';
+import { createMunicipalHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/municipal/createMunicipalHospitalAdmissionsTooltip';
+import { DataWarning } from '~/components/dataWarning';
+import { FCWithLayout } from '~/components/layout';
+import { ContentHeader } from '~/components/contentHeader';
+import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
+import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
-import { HospitalAdmissions } from '~/types/data.d';
 import {
   getMunicipalityData,
   getMunicipalityPaths,
   IMunicipalityData,
 } from '~/static-props/municipality-data';
-
-import { LineChart } from '~/components/charts/index';
-import { FCWithLayout } from '~/components/layout';
-import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
-import { ContentHeader } from '~/components/layout/Content';
-import { IntakeHospitalBarScale } from '~/components/gemeente/intake-hospital-barscale';
-import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
-import { createMunicipalHospitalAdmissionsTooltip } from '~/components/chloropleth/tooltips/municipal/createMunicipalHospitalAdmissionsTooltip';
-import { ChloroplethLegenda } from '~/components/chloropleth/legenda/ChloroplethLegenda';
-import { createSelectMunicipalHandler } from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
-import { useMunicipalLegendaData } from '~/components/chloropleth/legenda/hooks/useMunicipalLegendaData';
-import { DataWarning } from '~/components/dataWarning';
-
-import Ziekenhuis from '~/assets/ziekenhuis.svg';
+import { HospitalAdmissions } from '~/types/data.d';
+import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text = siteText.gemeente_ziekenhuisopnames_per_dag;
@@ -35,6 +33,14 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
 
   return (
     <>
+      <SEOHead
+        title={replaceVariablesInText(text.metadata.title, {
+          municipalityName,
+        })}
+        description={replaceVariablesInText(text.metadata.description, {
+          municipalityName,
+        })}
+      />
       <ContentHeader
         category={siteText.gemeente_layout.headings.medisch}
         title={replaceVariablesInText(text.titel, {
@@ -56,7 +62,11 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
         <div className="row-item">
           <div className="column-item column-item-extra-margin">
             <h3>{text.barscale_titel}</h3>
-            <IntakeHospitalBarScale data={hospitalAdmissions} showAxis={true} />
+            <p className="text-blue kpi" data-cy="infected_daily_total">
+              {formatNumber(
+                hospitalAdmissions.last_value.moving_average_hospital
+              )}
+            </p>
           </div>
 
           <div className="column-item column-item-extra-margin">
@@ -79,11 +89,11 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
         </article>
       )}
 
-      <article className="metric-article layout-chloropleth">
+      <article className="metric-article layout-choropleth">
         <div className="data-warning">
           <DataWarning />
         </div>
-        <div className="chloropleth-header">
+        <div className="choropleth-header">
           <h3>
             {replaceVariablesInText(text.map_titel, {
               municipality: municipalityName,
@@ -92,8 +102,8 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
           <p>{text.map_toelichting}</p>
         </div>
 
-        <div className="chloropleth-chart">
-          <MunicipalityChloropleth
+        <div className="choropleth-chart">
+          <MunicipalityChoropleth
             selected={data.code}
             metricName="hospital_admissions"
             tooltipContent={createMunicipalHospitalAdmissionsTooltip(router)}
@@ -104,9 +114,9 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
           />
         </div>
 
-        <div className="chloropleth-legend">
+        <div className="choropleth-legend">
           {legendItems && (
-            <ChloroplethLegenda
+            <ChoroplethLegenda
               items={legendItems}
               title={
                 siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel

@@ -74,6 +74,24 @@
   }
 }
 
+.metric-article-header {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+
+  div {
+    margin-left: auto;
+    margin-top: 0;
+  }
+
+  @media (max-width: 1000px) {
+    flex-direction: column;
+    div {
+      margin-left: 0;
+    }
+  }
+}
+
 .index-article,
 .metric-article {
   background: white;
@@ -86,7 +104,7 @@
     max-width: 30rem;
   }
 
-  @media (min-width: 700px) {
+  @media (min-width: 768px) {
     margin: 0;
     margin-top: 2rem;
   }
@@ -122,7 +140,7 @@
     max-width: 30rem;
   }
 
-  @media (min-width: 700px) {
+  @media (min-width: 768px) {
     margin: 0;
     margin-top: 2rem;
   }
@@ -198,8 +216,6 @@
   }
 
   .last-developments {
-    padding-top: 2em;
-
     li {
       min-height: 0;
     }
@@ -338,6 +354,11 @@
       }
     }
   }
+
+  .metric-wrapper > div:not(:first-child) {
+    height: 3.5rem;
+    margin-top: -1.25em;
+  }
 }
 
 .region-names {
@@ -382,7 +403,7 @@ a.metric-link {
     display: block;
     position: absolute;
     right: 1em;
-    top: 4em;
+    top: 1.35em;
   }
 
   span {
@@ -392,7 +413,7 @@ a.metric-link {
 
   &.last-developments-link {
     &::after {
-      top: 2em;
+      top: 1.15em;
     }
   }
 }
@@ -430,6 +451,13 @@ a.metric-link {
 
     .column-item-no-margin {
       margin: 0;
+    }
+
+    // in some cases a fixed column width is needed in order to make sure 'SSR-ed' charts render correctly:
+    .column-item-fixed {
+      flex: 0 0 50%;
+      display: flex;
+      flex-direction: column;
     }
 
     .column-item {
@@ -478,13 +506,13 @@ a.metric-link {
 }
 
 /**
-  This layout should be integrated with the chloropleth component once we have
+  This layout should be integrated with the choropleth component once we have
   one based on styled-components
   */
-.layout-chloropleth {
-  $chloropleth-breakpoint: 1200px;
+.layout-choropleth {
+  $choropleth-breakpoint: 1200px;
 
-  @media (min-width: $chloropleth-breakpoint) {
+  @media (min-width: $choropleth-breakpoint) {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto 1fr auto;
@@ -499,39 +527,38 @@ a.metric-link {
     grid-area: w;
   }
 
-  .chloropleth-header {
+  .choropleth-header {
     grid-area: a;
     margin-bottom: 2em;
-    @media (min-width: $chloropleth-breakpoint) {
+    @media (min-width: $choropleth-breakpoint) {
       margin-bottom: 0;
     }
   }
 
-  .chloropleth-legend {
+  .choropleth-legend {
     grid-area: b;
     display: flex;
     flex-direction: column;
-    align-items: center;
-
-    @media (min-width: $chloropleth-breakpoint) {
-      align-items: flex-start;
-    }
+    align-items: flex-start;
   }
 
-  .chloropleth-chart {
+  .choropleth-chart {
     grid-area: c;
   }
 
-  .chloropleth-controls {
+  .choropleth-controls {
     display: flex;
     justify-content: center;
 
-    @media (min-width: $chloropleth-breakpoint) {
+    margin: 0 0 1rem;
+    max-width: 100%;
+
+    @media (min-width: $choropleth-breakpoint) {
       justify-content: flex-start;
     }
   }
 
-  .chloropleth-footer {
+  .choropleth-footer {
     grid-area: d;
   }
 }

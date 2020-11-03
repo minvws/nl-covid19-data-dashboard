@@ -1,18 +1,19 @@
 import { BarScale } from '~/components/barScale';
-
+import siteText from '~/locale/index';
 import { ReproductionIndex as ReproductionIndexData } from '~/types/data.d';
 
-import siteText from '~/locale/index';
 const text = siteText.reproductiegetal;
 
 export function ReproductionIndexBarScale(props: {
-  data: ReproductionIndexData | undefined;
-  lastKnown: ReproductionIndexData | undefined;
+  data: ReproductionIndexData;
   showAxis: boolean;
+  showValue?: boolean;
 }) {
-  const { data, lastKnown, showAxis } = props;
+  const { data, showAxis, showValue } = props;
 
-  if (!data) return null;
+  if (!data.last_value.reproduction_index_avg) {
+    return null;
+  }
 
   return (
     <BarScale
@@ -20,7 +21,7 @@ export function ReproductionIndexBarScale(props: {
       max={2}
       screenReaderText={text.barscale_screenreader_text}
       signaalwaarde={1}
-      value={lastKnown?.last_value?.reproduction_index_avg}
+      value={data.last_value.reproduction_index_avg}
       id="repro"
       rangeKey="reproduction_index_avg"
       gradient={[
@@ -42,6 +43,7 @@ export function ReproductionIndexBarScale(props: {
         },
       ]}
       showAxis={showAxis}
+      showValue={showValue}
     />
   );
 }

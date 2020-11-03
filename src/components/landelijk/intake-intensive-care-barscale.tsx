@@ -1,15 +1,15 @@
 import { BarScale } from '~/components/barScale';
-
-import { IntakeIntensivecareMa } from '~/types/data.d';
 import siteText from '~/locale/index';
+import { IntakeIntensivecareMa } from '~/types/data.d';
 
 const text = siteText.ic_opnames_per_dag;
 
 export function IntakeIntensiveCareBarscale(props: {
   data: IntakeIntensivecareMa | undefined;
   showAxis: boolean;
+  showValue?: boolean;
 }) {
-  const { data, showAxis } = props;
+  const { data, showAxis, showValue } = props;
 
   if (!data) return null;
 
@@ -37,6 +37,7 @@ export function IntakeIntensiveCareBarscale(props: {
       value={data.last_value.moving_average_ic}
       id="ic"
       showAxis={showAxis}
+      showValue={showValue}
     />
   );
 }

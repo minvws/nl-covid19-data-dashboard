@@ -9,6 +9,7 @@
         "week_end_unix",
         "vrcode",
         "average",
+        "total_installation_count",
         "date_of_insertion_unix"
       ],
       "properties": {
@@ -23,9 +24,12 @@
         },
         "vrcode": {
           "type": "string",
-          "pattern": "^VR[0-9]+$"
+          "equalsRootProperty": "code"
         },
         "average": {
+          "type": "number"
+        },
+        "total_installation_count": {
           "type": "number"
         },
         "date_of_insertion_unix": {

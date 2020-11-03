@@ -1,20 +1,17 @@
-import { ContentHeader } from '~/components/layout/Content';
-import { FCWithLayout } from '~/components/layout';
-import { LineChart } from '~/components/charts/index';
-
-import { NursingHomeDeathsBarScale } from '~/components/common/nursing-home-deaths-barscale';
-
 import CoronaVirus from '~/assets/coronavirus.svg';
-
+import { LineChart } from '~/components/charts/index';
+import { FCWithLayout } from '~/components/layout';
+import { ContentHeader } from '~/components/contentHeader';
+import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
+import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
-
-import { RegionalNursingHome } from '~/types/data.d';
 import {
   getSafetyRegionData,
   getSafetyRegionPaths,
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
-import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
+import { RegionalNursingHome } from '~/types/data.d';
+import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text = siteText.veiligheidsregio_verpleeghuis_oversterfte;
@@ -26,6 +23,14 @@ const NursingHomeDeaths: FCWithLayout<ISafetyRegionData> = (props) => {
 
   return (
     <>
+      <SEOHead
+        title={replaceVariablesInText(text.metadata.title, {
+          safetyRegionName,
+        })}
+        description={replaceVariablesInText(text.metadata.description, {
+          safetyRegionName,
+        })}
+      />
       <ContentHeader
         category={siteText.veiligheidsregio_layout.headings.verpleeghuis}
         title={replaceVariablesInText(text.titel, {
@@ -44,10 +49,9 @@ const NursingHomeDeaths: FCWithLayout<ISafetyRegionData> = (props) => {
       <article className="metric-article layout-two-column">
         <div className="column-item column-item-extra-margin">
           <h3>{text.barscale_titel}</h3>
-          <NursingHomeDeathsBarScale
-            value={data?.last_value.deceased_daily}
-            showAxis={true}
-          />
+          <p className="text-blue kpi" data-cy="infected_daily_total">
+            {formatNumber(data?.last_value.deceased_daily)}
+          </p>
         </div>
 
         <div className="column-item column-item-extra-margin">

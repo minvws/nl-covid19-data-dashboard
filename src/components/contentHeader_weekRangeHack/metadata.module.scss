@@ -1,0 +1,19 @@
+@import '~/scss/variables.scss';
+
+.item {
+  display: flex;
+  align-items: flex-start;
+  color: $text-color-grey;
+  margin: 1rem 0;
+
+  p:first-of-type {
+    margin: 0;
+  }
+
+  span {
+    display: flex;
+    align-items: center;
+    min-width: 1.8rem;
+    margin-top: 4px;
+  }
+}

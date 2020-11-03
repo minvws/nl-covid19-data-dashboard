@@ -2,6 +2,7 @@ import '@formatjs/intl-getcanonicallocales/polyfill';
 import '@formatjs/intl-datetimeformat/polyfill';
 import '@formatjs/intl-datetimeformat/locale-data/en';
 import '@formatjs/intl-datetimeformat/locale-data/nl';
+import { assert } from '~/utils/assert';
 
 // Adding the Europe/Amsterdam time zone manually since its the only being used.
 // The data was pulled from the @formatjs/add-golden-ts.js file.
@@ -68,11 +69,14 @@ export function formatDateFromSeconds(
   seconds: number,
   style?: 'long' | 'medium' | 'short' | 'relative' | 'iso' | 'axis'
 ): string {
+  assert(!isNaN(seconds), 'seconds is NaN');
+
   /**
    * JavaScript uses milliseconds since EPOCH, therefore the value
    * formatted by the format() function needs to be multiplied by 1000
    * to format to an accurate dateTime
    */
+
   const milliseconds = seconds * 1000;
 
   return formatDateFromMilliseconds(milliseconds, style);
@@ -82,13 +86,16 @@ export function formatDateFromMilliseconds(
   milliseconds: number,
   style?: 'long' | 'medium' | 'short' | 'relative' | 'iso' | 'axis'
 ): string {
+  assert(!isNaN(milliseconds), 'milliseconds is NaN');
+
   if (style === 'iso') return new Date(milliseconds).toISOString(); // '2020-07-23T10:01:16.000Z'
   if (style === 'long') return Long.format(milliseconds); // '23 juli 2020 om 12:01'
   if (style === 'medium') return Medium.format(milliseconds); // '23 juli 2020'
   if (style === 'axis')
     return `${Day.format(milliseconds)} ${MonthShort.format(milliseconds)}`; // '23 jul.'
 
-  if (style === 'relative') {
+  /* Relative date formatting is disabled for server-side rendering */
+  if (style === 'relative' && typeof window !== 'undefined') {
     if (isToday(milliseconds)) return siteText.utils.date_today;
     if (isYesterday(milliseconds)) return siteText.utils.date_yesterday;
   }

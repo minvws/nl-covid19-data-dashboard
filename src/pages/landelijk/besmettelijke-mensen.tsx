@@ -1,15 +1,13 @@
-import { Legenda } from '~/components/legenda';
+import Ziektegolf from '~/assets/ziektegolf.svg';
+import { AreaChart } from '~/components/charts/index';
+import { ContentHeader } from '~/components/contentHeader';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
-import { AreaChart } from '~/components/charts/index';
-
-import Ziektegolf from '~/assets/ziektegolf.svg';
-import { formatNumber } from '~/utils/formatNumber';
-
+import { Legenda } from '~/components/legenda';
+import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
-
-import { ContentHeader } from '~/components/layout/Content';
 import getNlData, { INationalData } from '~/static-props/nl-data';
+import { formatNumber } from '~/utils/formatNumber';
 
 const text = siteText.besmettelijke_personen;
 
@@ -17,11 +15,15 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
   const { data } = props;
 
   const count = data.infectious_people_count;
-  const infectiousPeopleLastKnownEverage =
+  const infectiousPeopleLastKnownAverage =
     data.infectious_people_last_known_average;
 
   return (
     <>
+      <SEOHead
+        title={text.metadata.title}
+        description={text.metadata.description}
+      />
       <ContentHeader
         category={siteText.nationaal_layout.headings.medisch}
         title={text.title}
@@ -29,27 +31,48 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
         subtitle={text.toelichting_pagina}
         metadata={{
           datumsText: text.datums,
-          dateUnix: count?.last_value?.date_of_report_unix,
-          dateInsertedUnix: count?.last_value?.date_of_insertion_unix,
+          dateUnix:
+            infectiousPeopleLastKnownAverage.last_value.date_of_report_unix,
+          dateInsertedUnix:
+            infectiousPeopleLastKnownAverage.last_value.date_of_insertion_unix,
           dataSource: text.bron,
         }}
       />
 
-      <article className="metric-article layout-two-column">
-        <div className="column-item">
-          <h3>
-            {text.cijfer_titel}
+      {/*
+        @TODO make this replace the code below. Maybe extend TwoKpiSection so that
+        it renders the KPI full-width if there is only one child.
 
-            {count && (
-              <span className="text-blue kpi">
-                {formatNumber(
-                  infectiousPeopleLastKnownEverage?.last_value.infectious_avg
-                )}
-              </span>
+        Discuss with design. https://trello.com/c/gnDOKkZ2/780-regressie-gemiddeld-aantal-besmettelijke-mensen-per-100k
+
+      <TwoKpiSection>
+        {infectiousPeopleLastKnownAverage && (
+          <KpiTile
+            title={text.cijfer_titel}
+            description={text.cijfer_toelichting}
+          >
+            <KpiValue
+              absolute={
+                infectiousPeopleLastKnownAverage.last_value.infectious_avg
+              }
+            />
+          </KpiTile>
+        )}
+      </TwoKpiSection>
+
+      */}
+
+      <article className="metric-article layout-two-column">
+        <div className="column-item column-item-extra-margin">
+          <h3>{text.cijfer_titel}</h3>
+          <p className="text-blue kpi" data-cy="infected_daily_total">
+            {formatNumber(
+              infectiousPeopleLastKnownAverage.last_value.infectious_avg
             )}
-          </h3>
+          </p>
         </div>
-        <div className="column-item">
+
+        <div className="column-item column-item-extra-margin">
           <p>{text.cijfer_toelichting}</p>
         </div>
       </article>

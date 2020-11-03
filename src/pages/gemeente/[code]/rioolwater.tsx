@@ -1,27 +1,26 @@
+import { useMemo } from 'react';
+import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
+import { KpiTile } from '~/components-styled/kpi-tile';
+import { KpiValue } from '~/components-styled/kpi-value';
+import { TwoKpiSection } from '~/components-styled/two-kpi-section';
+import { BarChart } from '~/components/charts';
+import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRangeHack';
 import { FCWithLayout } from '~/components/layout';
 import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
-import { ContentHeader } from '~/components/layout/Content';
-
-import { SewerWaterBarScale } from '~/components/gemeente/sewer-water-barscale';
-
-import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
-
-import { RegionalSewerWaterLineChart } from '~/components/lineChart/regionalSewerWaterLineChart';
-import { useMemo } from 'react';
-import { BarChart } from '~/components/charts';
-import {
-  getSewerWaterBarScaleData,
-  getSewerWaterLineChartData,
-  getSewerWaterBarChartData,
-} from '~/utils/sewer-water/municipality-sewer-water.util';
+import { MunicipalSewerWaterLineChart } from '~/components/lineChart/municipalSewerWaterLineChart';
+import { SEOHead } from '~/components/seoHead';
+import siteText from '~/locale/index';
 import {
   getMunicipalityData,
   getMunicipalityPaths,
   IMunicipalityData,
 } from '~/static-props/municipality-data';
-
-import siteText from '~/locale/index';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import {
+  getSewerWaterBarChartData,
+  getSewerWaterBarScaleData,
+  getSewerWaterLineChartData,
+} from '~/utils/sewer-water/municipality-sewer-water.util';
 
 const text = siteText.gemeente_rioolwater_metingen;
 
@@ -36,9 +35,29 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
     };
   }, [data]);
 
+  const sewerAverages = data.sewer_measurements;
+
+  if (!sewerAverages) {
+    /**
+     * It is possible that there is no sewer data available for this GM. Then
+     * this page should never be linked because the sidebar item is then
+     * disabled.
+     */
+    return null;
+  }
+
   return (
     <>
-      <ContentHeader
+      <SEOHead
+        title={replaceVariablesInText(text.metadata.title, {
+          municipalityName,
+        })}
+        description={replaceVariablesInText(text.metadata.description, {
+          municipalityName,
+        })}
+      />
+
+      <ContentHeader_weekRangeHack
         category={siteText.gemeente_layout.headings.overig}
         title={replaceVariablesInText(text.titel, {
           municipality: municipalityName,
@@ -47,29 +66,38 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: barScaleData?.unix,
-          dateInsertedUnix: barScaleData?.dateInsertedUnix,
+          weekStartUnix: sewerAverages.last_value.week_start_unix,
+          weekEndUnix: sewerAverages.last_value.week_end_unix,
+          dateOfInsertionUnix: sewerAverages.last_value.date_of_insertion_unix,
           dataSource: text.bron,
         }}
       />
 
-      <article className="metric-article layout-two-column">
-        <div className="column-item column-item-extra-margin">
-          <h3>{text.barscale_titel}</h3>
+      <TwoKpiSection>
+        {barScaleData.value !== undefined && (
+          <KpiTile title={text.barscale_titel} description={text.extra_uitleg}>
+            <KpiValue absolute={barScaleData.value} />
+          </KpiTile>
+        )}
 
-          <SewerWaterBarScale data={barScaleData} showAxis={true} />
-        </div>
-
-        <div className="column-item column-item-extra-margin">
-          <p>{text.extra_uitleg}</p>
-        </div>
-      </article>
+        <KpiTile
+          title={text.total_installation_count_titel}
+          description={
+            text.total_installation_count_description +
+            `<p style="color:#595959">${text.rwzi_abbrev}</p>`
+          }
+        >
+          <KpiValue
+            absolute={sewerAverages.last_value.total_installation_count}
+          />
+        </KpiTile>
+      </TwoKpiSection>
 
       <article className="metric-article">
         <h3>{text.linechart_titel}</h3>
 
         {lineChartData && (
-          <RegionalSewerWaterLineChart
+          <MunicipalSewerWaterLineChart
             averageValues={lineChartData.averageValues}
             text={{
               average_label_text: lineChartData.averageLabelText,

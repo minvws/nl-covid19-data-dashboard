@@ -1,37 +1,40 @@
-import path from 'path';
 import fs from 'fs';
-
-import { Fragment } from 'react';
 import Head from 'next/head';
-
-import { getLayoutWithMetadata, FCWithLayout } from '~/components/layout';
+import path from 'path';
+import { FCWithLayout, getLayoutWithMetadata } from '~/components/layout';
 import { MaxWidth } from '~/components/maxWidth';
-
-import styles from './over.module.scss';
 import siteText, { TALLLanguages } from '~/locale/index';
-
 import { MDToHTMLString } from '~/utils/MDToHTMLString';
+import { ensureUniqueSkipLinkIds, getSkipLinkId } from '~/utils/skipLinks';
+import styles from './over.module.scss';
+import { Collapsable } from '~/components-styled/collapsable';
 
 interface ICijfer {
   cijfer: string;
   verantwoording: string;
+  id?: string;
 }
 
 interface StaticProps {
-  props: {
-    text: TALLLanguages;
-    lastGenerated: string;
-  };
+  props: VerantwoordingProps;
+}
+
+interface VerantwoordingProps {
+  text: TALLLanguages;
+  lastGenerated: string;
 }
 
 export async function getStaticProps(): Promise<StaticProps> {
-  const text = require('../locale/index').default;
+  const text = (await import('../locale/index')).default;
   const serializedContent = text.verantwoording.cijfers.map(
     (item: ICijfer) => ({
       ...item,
+      id: getSkipLinkId(item.cijfer),
       verantwoording: MDToHTMLString(item.verantwoording),
     })
   );
+
+  ensureUniqueSkipLinkIds(serializedContent);
 
   text.verantwoording.cijfers = serializedContent;
 
@@ -42,9 +45,7 @@ export async function getStaticProps(): Promise<StaticProps> {
   return { props: { text, lastGenerated } };
 }
 
-const Verantwoording: FCWithLayout<{ text: any; lastGenerated: string }> = (
-  props
-) => {
+const Verantwoording: FCWithLayout<VerantwoordingProps> = (props) => {
   const { text } = props;
 
   return (
@@ -69,19 +70,16 @@ const Verantwoording: FCWithLayout<{ text: any; lastGenerated: string }> = (
             <h2>{text.verantwoording.title}</h2>
             <p>{text.verantwoording.paragraaf}</p>
             <article className={styles.faqList}>
-              {text.verantwoording.cijfers.map(
-                (item: ICijfer) =>
-                  item.verantwoording &&
-                  item.cijfer && (
-                    <Fragment key={item.cijfer}>
-                      <h3>{item.cijfer}</h3>
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: item.verantwoording,
-                        }}
-                      />
-                    </Fragment>
-                  )
+              {text.verantwoording.cijfers.map((item: ICijfer) =>
+                item.verantwoording && item.cijfer ? (
+                  <Collapsable key={item.id} id={item.id} summary={item.cijfer}>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: item.verantwoording,
+                      }}
+                    ></div>
+                  </Collapsable>
+                ) : null
               )}
             </article>
           </div>

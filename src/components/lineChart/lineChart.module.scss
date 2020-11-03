@@ -3,6 +3,7 @@
 $breakpoint: 1200px;
 
 .root {
+  width: 100%;
 }
 
 .header {
@@ -24,13 +25,26 @@ $breakpoint: 1200px;
 
 .timeControls {
   flex: none;
+  margin: 1em 0;
 
-  /**
-    This is a hack because chartTimeControls contains margin settings.
-  */
-  > div {
-    @media (min-width: $breakpoint) {
-      margin: 0;
-    }
+  @media (min-width: $breakpoint) {
+    margin: 0;
+  }
+}
+
+.legend li {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+}
+
+.legendMarker {
+  height: 0.5em;
+  width: 0.5em;
+  margin-right: 0.5em;
+
+  svg {
+    height: 100%;
+    width: 100%;
   }
 }

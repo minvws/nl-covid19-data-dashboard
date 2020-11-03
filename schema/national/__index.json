@@ -12,20 +12,17 @@
     "infectious_people_count",
     "infectious_people_count_normalized",
     "intake_intensivecare_ma",
-    "infected_people_nursery_count_daily",
-    "deceased_people_nursery_count_daily",
-    "infected_people_percentage",
-    "total_reported_locations",
-    "total_newly_reported_locations",
     "infected_people_total",
     "infected_people_delta_normalized",
     "intake_share_age_groups",
     "reproduction_index",
     "reproduction_index_last_known_average",
+    "infectious_people_last_known_average",
     "rioolwater_metingen",
     "rioolwater_metingen_per_rwzi",
     "hospital_beds_occupied",
     "intensive_care_beds_occupied",
+    "ggd",
     "nursing_home"
   ],
   "additionalProperties": false,
@@ -39,11 +36,11 @@
     },
     "name": {
       "type": "string",
-      "enum": ["NL"]
+      "const": { "$data": "1/proto_name" }
     },
     "code": {
       "type": "string",
-      "enum": ["NL"]
+      "const": { "$data": "1/proto_name" }
     },
     "verdenkingen_huisartsen": {
       "$ref": "verdenkingen_huisartsen.json"
@@ -60,23 +57,8 @@
     "intake_intensivecare_ma": {
       "$ref": "intake_intensivecare_ma.json"
     },
-    "infected_people_nursery_count_daily": {
-      "$ref": "infected_people_nursery_count_daily.json"
-    },
-    "deceased_people_nursery_count_daily": {
-      "$ref": "deceased_people_nursery_count_daily.json"
-    },
     "infected_people_clusters": {
       "$ref": "infected_people_clusters.json"
-    },
-    "infected_people_percentage": {
-      "$ref": "infected_people_percentage.json"
-    },
-    "total_reported_locations": {
-      "$ref": "total_reported_locations.json"
-    },
-    "total_newly_reported_locations": {
-      "$ref": "total_newly_reported_locations.json"
     },
     "infected_people_total": {
       "$ref": "infected_people_total.json"
@@ -107,6 +89,9 @@
     },
     "intensive_care_beds_occupied": {
       "$ref": "intensive_care_beds_occupied.json"
+    },
+    "ggd": {
+      "$ref": "ggd.json"
     },
     "nursing_home": {
       "$ref": "nursing_home.json"

@@ -20,16 +20,22 @@
       "title": "regional_ggd_value",
       "type": "object",
       "properties": {
-        "infected_daily": {
+        "infected": {
           "type": "integer"
         },
-        "infected_percentage_daily": {
+        "infected_percentage": {
           "type": "number"
         },
-        "tested_total_daily": {
+        "tested_total": {
           "type": "integer"
         },
-        "date_of_report_unix": {
+        "week_unix": {
+          "type": "integer"
+        },
+        "week_start_unix": {
+          "type": "integer"
+        },
+        "week_end_unix": {
           "type": "integer"
         },
         "date_of_insertion_unix": {
@@ -37,14 +43,16 @@
         },
         "vrcode": {
           "type": "string",
-          "pattern": "^VR[0-9]+$"
+          "equalsRootProperty": "code"
         }
       },
       "required": [
-        "infected_daily",
-        "infected_percentage_daily",
-        "tested_total_daily",
-        "date_of_report_unix",
+        "infected",
+        "infected_percentage",
+        "tested_total",
+        "week_unix",
+        "week_start_unix",
+        "week_end_unix",
         "date_of_insertion_unix",
         "vrcode"
       ],

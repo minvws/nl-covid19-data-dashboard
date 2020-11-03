@@ -1,6 +1,6 @@
-import text from '~/locale/index';
-import styles from '~/components/dataWarning/dataWarning.module.scss';
 import Warning from '~/assets/warning.svg';
+import styles from '~/components/dataWarning/dataWarning.module.scss';
+import text from '~/locale/index';
 
 export function DataWarning() {
   return (

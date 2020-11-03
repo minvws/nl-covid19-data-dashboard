@@ -48,6 +48,7 @@ export interface SewerMeasurementsLastValue {
   week_end_unix: number;
   gmcode: string;
   average: number;
+  total_installation_count: number;
   date_of_insertion_unix: number;
 }
 export interface ResultsPerSewerInstallationPerMunicipality {
@@ -73,8 +74,8 @@ export interface ResultsPerSewerInstallationPerMunicipalityLastValue {
 export interface Municipalities {
   last_generated: string;
   proto_name: "MUNICIPALITIES";
-  name: "MUNICIPALITIES";
-  code: "MUNICIPALITIES";
+  name: string;
+  code: string;
   hospital_admissions: HospitalAdmissions[];
   positive_tested_people: PositiveTestedPeople[];
   deceased: Deceased[];
@@ -99,39 +100,35 @@ export interface Deceased {
   date_of_insertion_unix: number;
 }
 
+
 export interface National {
   last_generated: string;
   proto_name: "NL";
-  name: "NL";
-  code: "NL";
+  name: string;
+  code: string;
   verdenkingen_huisartsen: NationalHuisartsVerdenkingen;
   intake_hospital_ma: IntakeHospitalMa;
   infectious_people_count: InfectiousPeopleCount;
   infectious_people_count_normalized: InfectiousPeopleCountNormalized;
   intake_intensivecare_ma: IntakeIntensivecareMa;
-  infected_people_nursery_count_daily: InfectedPeopleNurseryCountDaily;
-  deceased_people_nursery_count_daily: DeceasedPeopleNurseryCountDaily;
   infected_people_clusters?: InfectedPeopleClusters;
-  infected_people_percentage: InfectedPeoplePercentage;
-  total_reported_locations: TotalReportedLocations;
-  total_newly_reported_locations: TotalNewlyReportedLocations;
   infected_people_total: NationalInfectedPeopleTotal;
   infected_people_delta_normalized: InfectedPeopleDeltaNormalized;
   intake_share_age_groups: IntakeShareAgeGroups;
   reproduction_index: ReproductionIndex;
   reproduction_index_last_known_average: ReproductionIndexLastKnownAverage;
-  infectious_people_last_known_average?: InfectiousPeopleLastKnownAverage;
+  infectious_people_last_known_average: InfectiousPeopleLastKnownAverage;
   rioolwater_metingen: RioolwaterMetingen;
   rioolwater_metingen_per_rwzi: RioolwaterMetingenPerRwzi;
   hospital_beds_occupied: HospitalBedsOccupied;
   intensive_care_beds_occupied: IntensiveCareBedsOccupied;
+  ggd: NationalGgd;
   nursing_home: NationalNursingHome;
 }
 export interface NationalHuisartsVerdenkingen {
   values: NationalHuisartsVerdenkingenValue[];
   last_value: NationalHuisartsVerdenkingenValue;
   last_value_difference?: NationalHuisartsVerdenkingenValueDifference;
-  [k: string]: unknown;
 }
 export interface NationalHuisartsVerdenkingenValue {
   week_unix: number;
@@ -188,24 +185,6 @@ export interface IntakeIntensivecareMaLastValue {
   date_of_report_unix: number;
   date_of_insertion_unix: number;
 }
-export interface InfectedPeopleNurseryCountDaily {
-  values: InfectedPeopleNurseryCountDailyLastValue[];
-  last_value: InfectedPeopleNurseryCountDailyLastValue;
-}
-export interface InfectedPeopleNurseryCountDailyLastValue {
-  infected_nursery_daily: number;
-  date_of_report_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface DeceasedPeopleNurseryCountDaily {
-  values: DeceasedPeopleNurseryCountDailyLastValue[];
-  last_value: DeceasedPeopleNurseryCountDailyLastValue;
-}
-export interface DeceasedPeopleNurseryCountDailyLastValue {
-  deceased_nursery_daily: number;
-  date_of_report_unix: number;
-  date_of_insertion_unix: number;
-}
 export interface InfectedPeopleClusters {
   values: InfectedPeopleClustersLastValue[];
   last_value: InfectedPeopleClustersLastValue;
@@ -216,40 +195,10 @@ export interface InfectedPeopleClustersLastValue {
   date_of_report_unix: number;
   date_of_insertion_unix: number;
 }
-export interface InfectedPeoplePercentage {
-  values: InfectedPeoplePercentageLastValue[];
-  last_value: InfectedPeoplePercentageLastValue;
-}
-export interface InfectedPeoplePercentageLastValue {
-  infected_ggd: number;
-  percentage_infected_ggd: number;
-  total_tested_ggd: number;
-  date_of_report_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface TotalReportedLocations {
-  values: TotalReportedLocationsLastValue[];
-  last_value: TotalReportedLocationsLastValue;
-}
-export interface TotalReportedLocationsLastValue {
-  total_reported_locations: number;
-  date_of_report_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface TotalNewlyReportedLocations {
-  values: TotalNewlyReportedLocationsLastValue[];
-  last_value: TotalNewlyReportedLocationsLastValue;
-}
-export interface TotalNewlyReportedLocationsLastValue {
-  total_new_reported_locations: number;
-  date_of_report_unix: number;
-  date_of_insertion_unix: number;
-}
 export interface NationalInfectedPeopleTotal {
   values: NationalInfectedPeopleTotalValue[];
   last_value: NationalInfectedPeopleTotalValue;
   last_value_difference?: NationalInfectedPeopleTotalValueDifference;
-  [k: string]: unknown;
 }
 export interface NationalInfectedPeopleTotalValue {
   infected_daily_total: number;
@@ -320,6 +269,7 @@ export interface RioolwaterMetingen {
 export interface RioolwaterMetingenLastValue {
   week_unix: number;
   average: number;
+  total_installation_count: number;
   date_of_insertion_unix: number;
   week_start_unix: number;
   week_end_unix: number;
@@ -360,15 +310,31 @@ export interface IntensiveCareBedsOccupiedValue {
   date_of_report_unix: number;
   date_of_insertion_unix: number;
 }
+export interface NationalGgd {
+  values: NationalGgdValue[];
+  last_value: NationalGgdValue;
+}
+export interface NationalGgdValue {
+  infected: number;
+  infected_percentage: number;
+  tested_total: number;
+  week_unix: number;
+  week_start_unix: number;
+  week_end_unix: number;
+  date_of_insertion_unix: number;
+}
 export interface NationalNursingHome {
   values: NationalNursingHomeValue[];
   last_value: NationalNursingHomeValue;
 }
 export interface NationalNursingHomeValue {
+  newly_infected_people: number;
+  deceased_daily: number;
+  newly_infected_locations: number;
+  infected_locations_total: number;
   infected_locations_percentage: number;
   date_of_report_unix: number;
   date_of_insertion_unix: number;
-  [k: string]: unknown;
 }
 
 export interface Ranges {
@@ -452,6 +418,7 @@ export interface Regionaal {
   results_per_region: ResultsPerRegion;
   ggd: RegionalGgd;
   nursing_home: RegionalNursingHome;
+  restrictions?: RegionalRestrictions;
 }
 export interface ResultsPerSewerInstallationPerRegion {
   values: SewerValueElement[];
@@ -484,6 +451,7 @@ export interface AverageSewerInstallationPerRegionItem {
   week_end_unix: number;
   vrcode: string;
   average: number;
+  total_installation_count: number;
   date_of_insertion_unix: number;
 }
 export interface ResultsPerRegion {
@@ -508,10 +476,12 @@ export interface RegionalGgd {
   last_value: RegionalGgdValue;
 }
 export interface RegionalGgdValue {
-  infected_daily: number;
-  infected_percentage_daily: number;
-  tested_total_daily: number;
-  date_of_report_unix: number;
+  infected: number;
+  infected_percentage: number;
+  tested_total: number;
+  week_unix: number;
+  week_start_unix: number;
+  week_end_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;
 }
@@ -529,12 +499,16 @@ export interface RegionalNursingHomeValue {
   date_of_insertion_unix: number;
   vrcode: string;
 }
+export interface RegionalRestrictions {
+  vrcode: string;
+  values: string[];
+}
 
 export interface Regions {
   last_generated: string;
   proto_name: "REGIONS";
-  name: "REGIONS";
-  code: "REGIONS";
+  name: string;
+  code: string;
   hospital_admissions: RegionHospitalAdmissions[];
   positive_tested_people: RegionPositiveTestedPeople[];
   deceased: RegionDeceased[];
@@ -576,4 +550,33 @@ export interface RegionsNursingHome {
   date_of_report_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;
+}
+
+export interface Restrictions {
+  last_generated: string;
+  proto_name: string;
+  name: string;
+  code: string;
+  values: RestrictionsValue[];
+}
+export interface RestrictionsValue {
+  restriction_id: string;
+  target_region: "nl" | "vr";
+  escalation_level: number;
+  category_id:
+    | "er_op_uit"
+    | "bezoek"
+    | "samenkomst"
+    | "huwelijk"
+    | "verpleeghuis"
+    | "horeca"
+    | "sport"
+    | "reizen_binnenland"
+    | "ov"
+    | "uitvaart"
+    | "onderwijs"
+    | "werk"
+    | "winkels"
+    | "alcohol";
+  restriction_order: number;
 }

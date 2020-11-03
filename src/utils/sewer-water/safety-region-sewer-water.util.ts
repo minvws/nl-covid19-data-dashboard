@@ -22,6 +22,8 @@ export interface SewerWaterBarScaleData {
   value: number | undefined;
   unix: number | undefined;
   dateInsertedUnix: number | undefined;
+  week_end_unix: number | undefined;
+  week_start_unix: number | undefined;
 }
 
 interface SewerWaterLineChartValue {
@@ -66,12 +68,8 @@ function getSewerWaterMetadata(
 
 export function getSewerWaterBarScaleData(
   data: Regionaal | undefined
-): SewerWaterBarScaleData | null {
-  const { dataAvailable, oneInstallation } = getSewerWaterMetadata(data);
-
-  if (!dataAvailable) {
-    return null;
-  }
+): SewerWaterBarScaleData {
+  const { oneInstallation } = getSewerWaterMetadata(data);
 
   if (oneInstallation) {
     const barScaleData =
@@ -81,6 +79,8 @@ export function getSewerWaterBarScaleData(
       value: barScaleData?.rna_per_ml,
       unix: barScaleData?.date_measurement_unix,
       dateInsertedUnix: barScaleData?.date_of_insertion_unix,
+      week_end_unix: barScaleData?.week_end_unix,
+      week_start_unix: barScaleData?.week_start_unix,
     };
   } else {
     const barScaleData =
@@ -90,18 +90,43 @@ export function getSewerWaterBarScaleData(
       value: barScaleData?.average,
       unix: barScaleData?.week_unix,
       dateInsertedUnix: barScaleData?.date_of_insertion_unix,
+      week_end_unix: barScaleData?.week_end_unix,
+      week_start_unix: barScaleData?.week_start_unix,
     };
   }
 }
 
-export function getSewerWaterLineChartData(
-  data: Regionaal | undefined
-): SewerWaterLineChartData | null {
+export function getInstallationNames(data?: Regionaal): string[] {
   const { dataAvailable, oneInstallation } = getSewerWaterMetadata(data);
 
-  if (!dataAvailable) {
+  if (!data || !dataAvailable || oneInstallation) {
+    return [];
+  }
+
+  return data.results_per_sewer_installation_per_region.values
+    .flatMap((value) => value.values)
+    .map((value) => value.rwzi_awzi_name)
+    .filter((value, index, arr) => arr.indexOf(value) === index);
+}
+
+export function getSewerWaterScatterPlotData(
+  data?: Regionaal
+): SewerValue[] | null {
+  const { dataAvailable, oneInstallation } = getSewerWaterMetadata(data);
+
+  if (!data || !dataAvailable || oneInstallation) {
     return null;
   }
+
+  return data.results_per_sewer_installation_per_region.values.flatMap(
+    (value) => value.values
+  );
+}
+
+export function getSewerWaterLineChartData(
+  data: Regionaal | undefined
+): SewerWaterLineChartData {
+  const { oneInstallation } = getSewerWaterMetadata(data);
 
   if (oneInstallation) {
     // One RWZI installation:

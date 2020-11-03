@@ -24,11 +24,11 @@
     },
     "name": {
       "type": "string",
-      "enum": ["REGIONS"]
+      "const": { "$data": "1/proto_name" }
     },
     "code": {
       "type": "string",
-      "enum": ["REGIONS"]
+      "const": { "$data": "1/proto_name" }
     },
     "hospital_admissions": {
       "type": "array",

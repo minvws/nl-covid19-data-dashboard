@@ -1,21 +1,19 @@
-import { BarScale } from '~/components/barScale';
-import { ContentHeader } from '~/components/layout/Content';
-import { FCWithLayout } from '~/components/layout';
-import { LineChart } from '~/components/charts/index';
-
 import Locatie from '~/assets/locaties.svg';
-
-import { formatNumber, formatPercentage } from '~/utils/formatNumber';
-
-import siteText from '~/locale/index';
-
+import { LineChart } from '~/components/charts/index';
+import { FCWithLayout } from '~/components/layout';
+import { ContentHeader } from '~/components/contentHeader';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
+import { SEOHead } from '~/components/seoHead';
+import siteText from '~/locale/index';
 import {
   getSafetyRegionData,
   getSafetyRegionPaths,
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { TwoKpiSection } from '~/components-styled/two-kpi-section';
+import { KpiTile } from '~/components-styled/kpi-tile';
+import { KpiValue } from '~/components-styled/kpi-value';
 
 const text = siteText.veiligheidsregio_verpleeghuis_besmette_locaties;
 
@@ -34,6 +32,14 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
 
   return (
     <>
+      <SEOHead
+        title={replaceVariablesInText(text.metadata.title, {
+          safetyRegionName,
+        })}
+        description={replaceVariablesInText(text.metadata.description, {
+          safetyRegionName,
+        })}
+      />
       <ContentHeader
         category={siteText.veiligheidsregio_layout.headings.verpleeghuis}
         title={replaceVariablesInText(text.titel, {
@@ -50,41 +56,21 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
         }}
       />
 
-      <div className="layout-two-column">
-        <article className="metric-article column-item">
-          <h3>{text.barscale_titel}</h3>
-
-          <BarScale
-            min={0}
-            max={30}
-            screenReaderText={text.barscale_screenreader_text}
-            value={newlyInfectedLocations}
-            id="besmette_locaties_verpleeghuis"
-            rangeKey="total_new_reported_locations"
-            gradient={[
-              {
-                color: '#3391CC',
-                value: 0,
-              },
-            ]}
-            showAxis={true}
+      <TwoKpiSection>
+        <KpiTile title={text.kpi_titel} description={text.kpi_toelichting}>
+          <KpiValue
+            absolute={infectedLocationsTotal}
+            percentage={infectedLocationsPercentage}
           />
-          <p>{text.barscale_toelichting}</p>
-        </article>
+        </KpiTile>
 
-        <article className="metric-article column-item">
-          {infectedLocationsTotal !== undefined && (
-            <h3>
-              {text.kpi_titel}{' '}
-              <span className="text-blue kpi">
-                {formatNumber(infectedLocationsTotal)} (
-                {formatPercentage(infectedLocationsPercentage)}%)
-              </span>
-            </h3>
-          )}
-          <p>{text.kpi_toelichting}</p>
-        </article>
-      </div>
+        <KpiTile
+          title={text.barscale_titel}
+          description={text.barscale_toelichting}
+        >
+          <KpiValue absolute={newlyInfectedLocations} />
+        </KpiTile>
+      </TwoKpiSection>
 
       {infectedLocationsTotal !== undefined && (
         <article className="metric-article">

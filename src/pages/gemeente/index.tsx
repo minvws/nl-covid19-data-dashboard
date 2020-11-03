@@ -1,20 +1,18 @@
-import { FCWithLayout } from '~/components/layout';
-import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
 import { useRouter } from 'next/router';
-
-import getLastGeneratedData from '~/static-props/last-generated-data';
-
-import text from '~/locale/index';
-
 import { ReactNode } from 'react';
-import { MunicipalityChloropleth } from '~/components/chloropleth/MunicipalityChloropleth';
-import { MunicipalityProperties } from '~/components/chloropleth/shared';
+import { MunicipalityChoropleth } from '~/components/choropleth/MunicipalityChoropleth';
 import {
   createSelectMunicipalHandler,
   MunicipalitySelectionHandler,
-} from '~/components/chloropleth/selectHandlers/createSelectMunicipalHandler';
+} from '~/components/choropleth/selectHandlers/createSelectMunicipalHandler';
+import { MunicipalityProperties } from '~/components/choropleth/shared';
+import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
+import { FCWithLayout } from '~/components/layout';
+import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
+import { SEOHead } from '~/components/seoHead';
+import text from '~/locale/index';
+import getLastGeneratedData from '~/static-props/last-generated-data';
 import { useMediaQuery } from '~/utils/useMediaQuery';
-import { TooltipContent } from '~/components/chloropleth/tooltips/tooltipContent';
 
 const tooltipContent = (selectedHandler: MunicipalitySelectionHandler) => {
   return (context: MunicipalityProperties): ReactNode => {
@@ -53,22 +51,28 @@ const Municipality: FCWithLayout<any> = () => {
   };
 
   return (
-    <article className="map-article">
-      <div>
-        <h2>{text.gemeente_index.selecteer_titel}</h2>
-        <p>{text.gemeente_index.selecteer_toelichting}</p>
-      </div>
-      <div className="map-container">
-        <MunicipalityChloropleth
-          tooltipContent={tooltipContent(onSelectMunicipal)}
-          onSelect={createSelectMunicipalHandler(
-            router,
-            'positief-geteste-mensen'
-          )}
-          isSelectorMap={true}
-        />
-      </div>
-    </article>
+    <>
+      <SEOHead
+        title={text.gemeente_index.metadata.title}
+        description={text.gemeente_index.metadata.description}
+      />
+      <article className="map-article">
+        <div>
+          <h2>{text.gemeente_index.selecteer_titel}</h2>
+          <p>{text.gemeente_index.selecteer_toelichting}</p>
+        </div>
+        <div className="map-container">
+          <MunicipalityChoropleth
+            tooltipContent={tooltipContent(onSelectMunicipal)}
+            onSelect={createSelectMunicipalHandler(
+              router,
+              'positief-geteste-mensen'
+            )}
+            isSelectorMap={true}
+          />
+        </div>
+      </article>
+    </>
   );
 };
 

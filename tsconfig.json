@@ -17,7 +17,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "typeRoots": ["./src/@types", "./node_modules/@types"]
+    "typeRoots": ["./src/@types", "./node_modules/@types"],
+    "types": ["react", "jest"]
   },
   "exclude": ["node_modules", ".next", "out", "cypress"],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.js"]

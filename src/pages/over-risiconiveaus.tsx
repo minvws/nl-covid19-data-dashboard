@@ -1,25 +1,24 @@
-import path from 'path';
 import fs from 'fs';
-
 import Head from 'next/head';
-
-import { getLayoutWithMetadata, FCWithLayout } from '~/components/layout';
+import path from 'path';
+import { FCWithLayout, getLayoutWithMetadata } from '~/components/layout';
 import { MaxWidth } from '~/components/maxWidth';
-
-import styles from './over.module.scss';
 import siteText, { TALLLanguages } from '~/locale/index';
-
 import { MDToHTMLString } from '~/utils/MDToHTMLString';
+import styles from './over.module.scss';
 
 interface StaticProps {
-  props: {
-    text: TALLLanguages;
-    lastGenerated: string;
-  };
+  props: OverRisiconiveausProps;
+}
+
+interface OverRisiconiveausProps {
+  text: TALLLanguages;
+  lastGenerated: string;
 }
 
 export async function getStaticProps(): Promise<StaticProps> {
-  const text = require('../locale/index').default;
+  const text = (await import('../locale/index')).default;
+
   text.over_risiconiveaus.toelichting = MDToHTMLString(
     text.over_risiconiveaus.toelichting
   );
@@ -31,10 +30,7 @@ export async function getStaticProps(): Promise<StaticProps> {
   return { props: { text, lastGenerated } };
 }
 
-const OverRisicoNiveaus: FCWithLayout<{
-  text: any;
-  lastGenerated: string;
-}> = (props) => {
+const OverRisicoNiveaus: FCWithLayout<OverRisiconiveausProps> = (props) => {
   const { text } = props;
 
   const { over_risiconiveaus } = text;

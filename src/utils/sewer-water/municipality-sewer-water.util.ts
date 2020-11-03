@@ -23,6 +23,8 @@ export interface SewerWaterBarScaleData {
   value: number | undefined;
   unix: number | undefined;
   dateInsertedUnix: number | undefined;
+  week_start_unix: number | undefined;
+  week_end_unix: number | undefined;
 }
 
 interface SewerWaterLineChartValue {
@@ -76,12 +78,8 @@ function getSewerWaterMetadata(
  */
 export function getSewerWaterBarScaleData(
   data: Municipal | undefined
-): SewerWaterBarScaleData | null {
-  const { dataAvailable, oneInstallation } = getSewerWaterMetadata(data);
-
-  if (!dataAvailable) {
-    return null;
-  }
+): SewerWaterBarScaleData {
+  const { oneInstallation } = getSewerWaterMetadata(data);
 
   if (oneInstallation) {
     const barScaleData =
@@ -92,6 +90,8 @@ export function getSewerWaterBarScaleData(
       value: barScaleData?.rna_per_ml,
       unix: barScaleData?.date_measurement_unix,
       dateInsertedUnix: barScaleData?.date_of_insertion_unix,
+      week_end_unix: barScaleData?.week_end_unix,
+      week_start_unix: barScaleData?.week_start_unix,
     };
   } else {
     const barScaleData = data?.sewer_measurements?.last_value;
@@ -100,6 +100,8 @@ export function getSewerWaterBarScaleData(
       value: barScaleData?.average,
       unix: barScaleData?.week_unix,
       dateInsertedUnix: barScaleData?.date_of_insertion_unix,
+      week_end_unix: barScaleData?.week_end_unix,
+      week_start_unix: barScaleData?.week_start_unix,
     };
   }
 }
@@ -111,12 +113,8 @@ export function getSewerWaterBarScaleData(
  */
 export function getSewerWaterLineChartData(
   data: Municipal | undefined
-): SewerWaterLineChartData | null {
-  const { dataAvailable, oneInstallation } = getSewerWaterMetadata(data);
-
-  if (!dataAvailable) {
-    return null;
-  }
+): SewerWaterLineChartData {
+  const { oneInstallation } = getSewerWaterMetadata(data);
 
   if (oneInstallation) {
     // One RWZI installation:
@@ -171,9 +169,9 @@ export function getSewerWaterLineChartData(
 export function getSewerWaterBarChartData(
   data: Municipal | undefined
 ): SewerWaterBarChartData | null {
-  const { dataAvailable, oneInstallation } = getSewerWaterMetadata(data);
+  const { oneInstallation } = getSewerWaterMetadata(data);
 
-  if (!dataAvailable || oneInstallation) {
+  if (oneInstallation) {
     return null;
   }
 
