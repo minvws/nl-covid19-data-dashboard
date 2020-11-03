@@ -1,4 +1,5 @@
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
+import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
@@ -11,11 +12,18 @@ import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
+import { SafetyRegionChoropleth } from '~/components/choropleth/SafetyRegionChoropleth';
+import { createSelectRegionHandler } from '~/components/choropleth/selectHandlers/createSelectRegionHandler';
+import { useRouter } from 'next/router';
+import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/useSafetyRegionLegendaData';
+import { createSewerRegionalTooltip } from '~/components/choropleth/tooltips/region/createSewerRegionalTooltip';
 
 const text = siteText.rioolwater_metingen;
 
 const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
   const sewerAverages = data.sewer;
+  const router = useRouter();
+  const legendItems = useSafetyRegionLegendaData('sewer');
 
   return (
     <>
@@ -76,6 +84,26 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
         }}
         valueAnnotation={siteText.waarde_annotaties.riool_normalized}
       />
+
+      <ChoroplethTile
+        title={text.map_titel}
+        description={text.map_toelichting}
+        legend={
+          legendItems // this data value should probably not be optional
+            ? {
+                title: text.legenda_titel,
+                items: legendItems,
+              }
+            : undefined
+        }
+      >
+        <SafetyRegionChoropleth
+          metricName="sewer"
+          metricValueName="average"
+          tooltipContent={createSewerRegionalTooltip(router)}
+          onSelect={createSelectRegionHandler(router)}
+        />
+      </ChoroplethTile>
     </>
   );
 };
