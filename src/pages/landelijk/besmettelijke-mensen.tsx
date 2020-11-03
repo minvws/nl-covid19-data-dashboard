@@ -33,8 +33,10 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
         subtitle={text.toelichting_pagina}
         metadata={{
           datumsText: text.datums,
-          dateUnix: count?.last_value?.date_of_report_unix,
-          dateInsertedUnix: count?.last_value?.date_of_insertion_unix,
+          dateUnix:
+            infectiousPeopleLastKnownAverage.last_value.date_of_report_unix,
+          dateInsertedUnix:
+            infectiousPeopleLastKnownAverage.last_value.date_of_insertion_unix,
           dataSource: text.bron,
         }}
       />
