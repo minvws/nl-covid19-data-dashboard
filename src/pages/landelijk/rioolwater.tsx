@@ -101,7 +101,7 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
           metricName="sewer"
           metricValueName="average"
           tooltipContent={createSewerRegionalTooltip(router)}
-          onSelect={createSelectRegionHandler(router)}
+          onSelect={createSelectRegionHandler(router, 'rioolwater')}
         />
       </ChoroplethTile>
     </>
