@@ -85,7 +85,7 @@
       "title": "Intensive care admissions | Dashboard Coronavirus | Government.nl",
       "description": "National overview of confirmed COVID-19 cases who are admitted to a hospital intensive care unit (ICU)."
     },
-    "titel_sidebar": "Intensive care units admissions per day",
+    "titel_sidebar": "Intensive care units admissions",
     "titel_kpi": "Average number of intensive care admissions in 3 days"
   },
   "verdenkingen_huisartsen": {
@@ -157,7 +157,7 @@
       "title": "Hospital admissions | Dashboard Coronavirus | Government.nl",
       "description": "Number of confirmed COVID-19 cases who are admitted to a hospital in the Netherlands."
     },
-    "titel_sidebar": "Hospital admissions per day",
+    "titel_sidebar": "Hospital admissions",
     "titel_kpi": "Average number of hospital admissions in 3 days"
   },
   "positief_geteste_personen": {
@@ -210,7 +210,7 @@
       "titel": "Number per 100.000 inhabitants",
       "geen_meldingen": "No confirmed cases"
     },
-    "titel_sidebar": "Confirmed cases per 100,000 inhabitants per day",
+    "titel_sidebar": "Confirmed cases",
     "metadata": {
       "title": "Confirmed cases | Dashboard Coronavirus | Government.nl",
       "description": "National overview of confirmed cases in inhabitants with COVID-19."
@@ -236,7 +236,7 @@
     "cijfer_titel": "Estimated number of infectious people in the Netherlands:",
     "cijfer_toelichting": "A calculation of how many people with COVID-19 can transmit the virus. This number is calculated by the RIVM.",
     "linechart_titel": "Progression over time",
-    "titel_sidebar": "Number of infectious people",
+    "titel_sidebar": "Infectious people",
     "metadata": {
       "title": "Number of infectious people | Dashboard Coronavirus | Government.nl",
       "description": "National overview of how many people with COVID-19 can transmit the virus. This number is calculated by the RIVM."
@@ -338,7 +338,7 @@
       "title": "Infected nursing homes | Dashboard Coronavirus | Government.nl",
       "description": "National number of nursing homes with at least one confirmed case of COVID-19."
     },
-    "titel_sidebar": "Number of infected locations",
+    "titel_sidebar": "Infected locations",
     "titel_kpi": "Number of infected locations"
   },
   "verpleeghuis_positief_geteste_personen": {
@@ -353,7 +353,7 @@
     "pagina_toelichting": "Number of new confirmed cases in nursing homes that have been reported per day. This number is an estimation of the number confirmed cases in nursing home inhabitants.\n\nThe calculation method has been changed on the 29th of September. Please also see the data explanation section.",
     "linechart_titel": "Progression over time",
     "barscale_screenreader_text": "{{value}} Number of residents who tested positive (confirmed cases).",
-    "titel_sidebar": "Number of confirmed cases per day",
+    "titel_sidebar": "Confirmed cases",
     "chloropleth_legenda": {
       "titel": "Confirmed cases per 100.000 residents",
       "geen_meldingen": "No confirmed cases"
@@ -380,7 +380,7 @@
     "linechart_titel": "Progression over time",
     "map_titel": "Nursing home excess mortality in the Netherlands",
     "map_toelichting": "These figures show the excess mortality in nursing homes in the Netherlands per day.",
-    "titel_sidebar": "Mortality per day",
+    "titel_sidebar": "Mortality",
     "metadata": {
       "title": "Number of confirmed cases in nursing homes | Dashboard Coronavirus | Government.nl",
       "description": "National number of deceased residents with confirmed cases of COVID-19 in nursing homes."
@@ -671,7 +671,7 @@
     "title": "Municipality"
   },
   "veiligheidsregio_ziekenhuisopnames_per_dag": {
-    "titel_sidebar": "Hospital admissions per day",
+    "titel_sidebar": "Hospital admissions",
     "titel": "Hospital admissions per day of residents in {{safetyRegion}}",
     "pagina_toelichting": "Number of confirmed COVID-19 cases who are admitted to a hospital per day.",
     "datums": "Calculated: {{dateOfReport}}. Updated daily.",
@@ -694,7 +694,7 @@
     "titel_kpi": "Average number of hospital admissions in 3 days"
   },
   "veiligheidsregio_positief_geteste_personen": {
-    "titel_sidebar": "Confirmed cases per 100,000 inhabitants per day",
+    "titel_sidebar": "Confirmed cases",
     "titel": "Confirmed cases in {{safetyRegion}}",
     "pagina_toelichting": "By keeping track of the number of confirmed cases, we are able to determine the rate at which the virus is spreading before it reaches the intensive care. This keeps us prepared.",
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis. ",
@@ -774,7 +774,7 @@
     "rwzi_abbrev": ""
   },
   "gemeente_ziekenhuisopnames_per_dag": {
-    "titel_sidebar": "Hospital admissions by day",
+    "titel_sidebar": "Hospital admissions",
     "titel": "Hospital admissions per day of residents in {{municipality}}",
     "pagina_toelichting": "Number of confirmed COVID-19 cases who are admitted to a hospital per day.",
     "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
@@ -796,7 +796,7 @@
     }
   },
   "gemeente_positief_geteste_personen": {
-    "titel_sidebar": "Confirmed cases per 100,000 inhabitants per day",
+    "titel_sidebar": "Confirmed cases",
     "titel": "Confirmed cases in {{municipality}}",
     "pagina_toelichting": "By keeping track of the number of confirmed cases, we are able to determine the rate at which the virus is spreading before it reaches the intensive care. This keeps us prepared.",
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -981,7 +981,7 @@
     "linechart_titel": "Progression over time",
     "map_titel": "Nursing home excess mortality in the Netherlands",
     "map_toelichting": "These figures show the excess mortality in nursing homes in the Netherlands per day.",
-    "titel_sidebar": "Mortality per day",
+    "titel_sidebar": "Mortality",
     "metadata": {
       "title": "Deceased residents nursing homes in {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
       "description": "Number of deceased residents with confirmed cases of COVID-19 in nursing homes within safety region {{safetyRegionName}}."
@@ -1018,7 +1018,7 @@
     "pagina_toelichting": "Number of confirmed cases in nursing homes per day in {{safetyRegion}}. This number is an estimation of the number confirmed cases in nursing home inhabitants.\n\nThe calculation method has been changed on the 29th of September. Please also see the data explanation section.",
     "linechart_titel": "Progression over time",
     "barscale_screenreader_text": "{{value}} Number of residents who tested positive (confirmed cases).",
-    "titel_sidebar": "Confirmed cases per day",
+    "titel_sidebar": "Confirmed cases",
     "chloropleth_legenda": {
       "titel": "Number per 100.000 residents",
       "geen_meldingen": "No confirmed cases"

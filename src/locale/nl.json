@@ -157,7 +157,7 @@
       "title": "Ziekenhuisopnames | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Landelijk overzicht van het aantal mensen met COVID-19 dat een ziekenhuis is opgenomen."
     },
-    "titel_sidebar": "Ziekenhuisopnames per dag",
+    "titel_sidebar": "Ziekenhuisopnames",
     "titel_kpi": "Gemiddeld aantal ziekenhuisopnames in 3 dagen"
   },
   "positief_geteste_personen": {
@@ -1018,7 +1018,7 @@
     "pagina_toelichting": "Aantal positief geteste bewoners in verpleeghuizen per dag in {{safetyRegion}}. Dit getal is een inschatting van het aantal gemelde bewoners in verpleeghuizen dat in Nederland positief getest is en COVID-19 heeft.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de cijferverantwoording.",
     "linechart_titel": "Verloop over tijd",
     "barscale_screenreader_text": "{{value}} positief geteste bewoners.",
-    "titel_sidebar": "Aantal positief geteste bewoners per dag",
+    "titel_sidebar": "Positief geteste bewoners",
     "chloropleth_legenda": {
       "titel": "Aantal per 100.000 inwoners",
       "geen_meldingen": "Geen meldingen"
