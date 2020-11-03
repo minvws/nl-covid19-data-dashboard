@@ -11,17 +11,17 @@ const title = siteText.rioolwater_metingen.titel_kpi;
 export function SewerWaterMetric(props: { data: NationalSewer }) {
   const { data } = props;
 
-  const description = replaceVariablesInText(text.dateOfReport, {
-    dateOfReport: formatDateFromSeconds(
-      data?.last_value.date_of_insertion_unix,
-      'relative'
-    ),
+  if (data === undefined) return null;
+
+  const description = replaceVariablesInText(text.dateRangeOfReport, {
+    startDate: formatDateFromSeconds(data.last_value.week_start_unix, 'axis'),
+    endDate: formatDateFromSeconds(data.last_value.week_end_unix, 'axis'),
   });
 
   return (
     <MetricKPI
       title={title}
-      value={Number(data.last_value.average)}
+      value={data.last_value.average}
       format={formatNumber}
       description={description}
     />

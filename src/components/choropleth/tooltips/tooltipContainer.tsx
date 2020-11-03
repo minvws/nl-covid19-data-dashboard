@@ -10,7 +10,7 @@ export type TTooltipProps = {
 
 export function Tooltip(props: TTooltipProps) {
   const { tooltipStore, getTooltipContent } = props;
-  const ref = useRef<HTMLDivElement | undefined>();
+  const ref = useRef<HTMLDivElement>(null);
   const [tooltip, updateTooltip] = tooltipStore((state: TooltipState) => [
     state.tooltip,
     state.updateTooltip,
@@ -43,7 +43,7 @@ export function Tooltip(props: TTooltipProps) {
 
   return tooltip ? (
     <div
-      ref={ref as any}
+      ref={ref}
       className={styles.tooltipContainer}
       style={{
         left: tooltip.left,

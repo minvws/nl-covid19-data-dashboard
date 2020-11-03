@@ -107,7 +107,7 @@ interface StaticProps {
 }
 
 export async function getStaticProps(): Promise<{ props: StaticProps }> {
-  const text = require('../../locale/index').default;
+  const text = (await import('../../locale/index')).default;
 
   const serializedContent = MDToHTMLString(
     text.veiligheidsregio_index.selecteer_toelichting

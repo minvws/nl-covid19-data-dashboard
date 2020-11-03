@@ -16,10 +16,7 @@ export function SuspectedPatientsMetric(props: {
   if (data === undefined) return null;
 
   const description = replaceVariablesInText(text.dateOfReport, {
-    dateOfReport: formatDateFromSeconds(
-      data.date_of_insertion_unix,
-      'relative'
-    ),
+    dateOfReport: formatDateFromSeconds(data.week_unix, 'relative'),
   });
 
   return (

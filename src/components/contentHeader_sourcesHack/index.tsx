@@ -44,7 +44,7 @@ interface IContentHeaderProps {
   subtitle: string;
   metadata: {
     datumsText: string;
-    dateUnix?: number;
+    dateUnix: number;
     dateInsertedUnix?: number;
     dataSourceA: {
       href: string;

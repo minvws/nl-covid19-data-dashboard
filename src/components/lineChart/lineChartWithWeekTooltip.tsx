@@ -1,16 +1,18 @@
-import Highcharts, { SeriesAreaOptions } from 'highcharts';
+import Highcharts, {
+  SeriesAreaOptions,
+  TooltipFormatterCallbackFunction,
+} from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import React, { useMemo, useState } from 'react';
 import { ChartTimeControls } from '~/components-styled/chart-time-controls';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
-import { getItemFromArray } from '~/utils/getItemFromArray';
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
 import styles from './lineChart.module.scss';
 
 export interface Value {
   date: number;
-  value?: number;
+  value: number;
   week: Week;
 }
 
@@ -24,15 +26,21 @@ export type LineChartProps = {
   title: string;
   description?: string;
   timeframeOptions?: TimeframeOption[];
+  formatYAxis?: (y: number) => string;
+  tooltipFormatter?: TooltipFormatterCallbackFunction;
 };
 
-function getOptions(values: Value[]): Highcharts.Options {
+function getOptions(
+  values: Value[],
+  tooltipFormatter?: TooltipFormatterCallbackFunction,
+  formatYAxis?: (y: number) => string
+): Highcharts.Options {
   const hasMultipleValues = values.length > 1;
 
   const series: SeriesAreaOptions[] = [
     {
       type: 'area',
-      data: values.map((x) => [x.date, x.value]),
+      data: values.map((x) => ({ x: x.date, y: x.value, originalData: x })),
       name: '',
       showInLegend: false,
       color: '#3391CC',
@@ -109,19 +117,21 @@ function getOptions(values: Value[]): Highcharts.Options {
       backgroundColor: '#FFF',
       borderColor: '#01689B',
       borderRadius: 0,
-      formatter: function () {
-        const { start, end } = getItemFromArray(
-          values.map((x) => x.week),
-          this.point.index
-        );
+      formatter:
+        tooltipFormatter ??
+        function () {
+          const { originalData } = (this.point as unknown) as {
+            originalData: Value;
+          };
 
-        return `<strong>${formatDateFromSeconds(
-          start,
-          'short'
-        )} - ${formatDateFromSeconds(end, 'short')}:</strong> ${formatNumber(
-          this.y
-        )}`;
-      },
+          return `<strong>${formatDateFromSeconds(
+            originalData.week.start,
+            'short'
+          )} - ${formatDateFromSeconds(
+            originalData.week.end,
+            'short'
+          )}:</strong> ${formatNumber(this.y)}`;
+        },
     },
     yAxis: {
       min: 0,
@@ -133,7 +143,10 @@ function getOptions(values: Value[]): Highcharts.Options {
         text: null,
       },
       labels: {
-        formatter: function (): string {
+        formatter: function () {
+          if (formatYAxis) {
+            return formatYAxis(this.value);
+          }
           return formatNumber(this.value);
         },
       },
@@ -152,6 +165,8 @@ export function LineChart({
   description,
   values,
   timeframeOptions,
+  formatYAxis,
+  tooltipFormatter,
 }: LineChartProps) {
   const [timeframe, setTimeframe] = useState<TimeframeOption>('5weeks');
 
@@ -161,8 +176,8 @@ export function LineChart({
       timeframe,
       (value: Value) => value.date * 1000
     );
-    return getOptions(filteredValues);
-  }, [values, timeframe]);
+    return getOptions(filteredValues, tooltipFormatter, formatYAxis);
+  }, [values, timeframe, tooltipFormatter, formatYAxis]);
 
   return (
     <section className={styles.root}>

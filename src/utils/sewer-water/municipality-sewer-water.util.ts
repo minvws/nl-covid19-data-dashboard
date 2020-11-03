@@ -24,6 +24,8 @@ export interface SewerWaterBarScaleData {
   value: number | undefined;
   unix: number | undefined;
   dateInsertedUnix: number | undefined;
+  week_start_unix: number | undefined;
+  week_end_unix: number | undefined;
 }
 
 interface SewerWaterLineChartValue {
@@ -87,6 +89,8 @@ export function getSewerWaterBarScaleData(
       value: barScaleData.rna_normalized,
       unix: barScaleData.date_measurement_unix,
       dateInsertedUnix: barScaleData.date_of_insertion_unix,
+      week_end_unix: barScaleData.week_end_unix,
+      week_start_unix: barScaleData.week_start_unix,
     };
   } else {
     assert(data.sewer, 'Missing sewer data');
@@ -96,6 +100,8 @@ export function getSewerWaterBarScaleData(
       value: barScaleData.average,
       unix: barScaleData.week_unix,
       dateInsertedUnix: barScaleData.date_of_insertion_unix,
+      week_end_unix: barScaleData.week_end_unix,
+      week_start_unix: barScaleData.week_start_unix,
     };
   }
 }

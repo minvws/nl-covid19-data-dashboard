@@ -29,7 +29,9 @@ function calculateDaysBetween(date1: number, date2: number) {
  * and the last average and returns an array of data that is used to draw the dashed line
  * at the end of the averages.
  */
-function createRemainingDaysData(value: Value, maxDate: number) {
+function createRemainingDaysData(value: Value | undefined, maxDate: number) {
+  if (!value) return;
+
   const dataPointLength =
     calculateDaysBetween(value.week_start_unix, maxDate) + 1;
 
@@ -131,9 +133,7 @@ export function useRegionalSewerWaterChartOptions(
       series.push({
         type: 'line',
         data: createRemainingDaysData(
-          filteredAverageValues.find(
-            (value) => value.date === averagesMaxDate
-          ) as Value,
+          filteredAverageValues.find((value) => value.date === averagesMaxDate),
           scatterMaxDate
         ),
         name: '',

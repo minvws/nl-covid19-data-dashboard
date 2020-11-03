@@ -16,11 +16,6 @@ module.exports = {
   moduleNameMapper: {
     '\\.svg': '<rootDir>/__mocks__/svgrMock.js',
     '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
-    '^~/assets(.*)$': '<rootDir>/src/assets$1',
-    '^~/components(.*)$': '<rootDir>/src/components$1',
-    '^~/locale(.*)$': '<rootDir>/src/locale$1',
-    '^~/data(.*)$': '<rootDir>/src/data$1',
-    '^~/utils(.*)$': '<rootDir>/src/utils$1',
-    '^~/static-props(.*)$': '<rootDir>/src/static-props$1',
+    '^~/(.*)$': '<rootDir>/src/$1',
   },
 };
