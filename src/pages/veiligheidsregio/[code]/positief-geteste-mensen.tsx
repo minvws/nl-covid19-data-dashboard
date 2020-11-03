@@ -204,37 +204,31 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
         </KpiTile>
       </TwoKpiSection>
 
-      <KpiSection>
-        <LineChart
-          timeframeOptions={['all', '5weeks']}
-          title={ggdText.linechart_percentage_titel}
-          description={ggdText.linechart_percentage_toelichting}
-          values={ggdValues.map((value) => ({
-            value: value.infected_percentage,
-            date: value.week_unix,
-            week: {
-              start: value.week_start_unix,
-              end: value.week_end_unix,
-            },
-          }))}
-          tooltipFormatter={function () {
-            const { originalData } = (this.point as unknown) as {
-              originalData: Value;
-            };
-
-            return `<strong>${formatDateFromSeconds(
-              originalData.week.start,
-              'short'
-            )} - ${formatDateFromSeconds(
-              originalData.week.end,
-              'short'
-            )}:</strong> ${formatPercentage(this.y)}%`;
-          }}
-          formatYAxis={(y: number) => {
-            return `${formatPercentage(y)}%`;
-          }}
-        />
-      </KpiSection>
+      <LineChartTile
+        timeframeOptions={['all', '5weeks']}
+        title={ggdText.linechart_percentage_titel}
+        description={ggdText.linechart_percentage_toelichting}
+        values={ggdValues.map((value) => ({
+          value: value.infected_percentage,
+          date: value.week_unix,
+          week: {
+            start: value.week_start_unix,
+            end: value.week_end_unix,
+          },
+        }))}
+        formatTooltip={(x) => {
+          return `<strong>${formatDateFromSeconds(
+            x.week.start,
+            'short'
+          )} - ${formatDateFromSeconds(
+            x.week.end,
+            'short'
+          )}:</strong> ${formatPercentage(x.value)}%`;
+        }}
+        formatYAxis={(y: number) => {
+          return `${formatPercentage(y)}%`;
+        }}
+      />
 
       <KpiSection>
         <MultipleLineChart
