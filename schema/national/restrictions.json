@@ -34,9 +34,8 @@
           "const": "nl"
         },
         "escalation_level": {
-          "type": "number",
-          "minimum": 1,
-          "maximum": 5
+          "type": "integer",
+          "enum": [0, 1, 2, 3, 4, 41]
         },
         "category_id": {
           "type": "string",
@@ -58,7 +57,10 @@
           ]
         },
         "restriction_order": {
-          "type": "number"
+          "type": "integer"
+        },
+        "valid_from_unix": {
+          "type": "integer"
         }
       }
     }
