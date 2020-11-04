@@ -3,9 +3,8 @@
   "type": "object",
   "title": "regional_restrictions",
   "additionalProperties": false,
-  "required": ["vrcode", "values"],
+  "required": ["values"],
   "properties": {
-    "vrcode": { "type": "string", "equalsRootProperty": "code" },
     "values": {
       "type": "array",
       "items": {
