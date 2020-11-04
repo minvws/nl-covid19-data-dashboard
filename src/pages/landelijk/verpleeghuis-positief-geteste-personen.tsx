@@ -7,6 +7,7 @@ import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 import { formatNumber } from '~/utils/formatNumber';
+import { Metadata } from '~/components-styled/metadata';
 
 const text = siteText.verpleeghuis_positief_geteste_personen;
 
@@ -36,6 +37,10 @@ const NursingHomeInfectedPeople: FCWithLayout<INationalData> = ({ data }) => {
           <p className="text-blue kpi" data-cy="infected_daily_total">
             {formatNumber(data.nursing_home.last_value.newly_infected_people)}
           </p>
+          <Metadata
+            date={data.nursing_home.last_value.date_of_report_unix}
+            source={text.bron}
+          />
         </div>
 
         <div className="column-item column-item-extra-margin">
@@ -50,6 +55,10 @@ const NursingHomeInfectedPeople: FCWithLayout<INationalData> = ({ data }) => {
             value: value.newly_infected_people,
             date: value.date_of_report_unix,
           }))}
+        />
+        <Metadata
+          date={data.nursing_home.last_value.date_of_report_unix}
+          source={text.bron}
         />
       </article>
     </>

@@ -24,7 +24,6 @@ import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRang
 import { PositiveTestedPeopleBarScale } from '~/components/landelijk/positive-tested-people-barscale';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
-import { MultipleLineChart } from '~/components/lineChart/multipleLineChart';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
@@ -33,9 +32,11 @@ import {
   IntakeShareAgeGroups,
   NationalInfectedPeopleTotal,
 } from '~/types/data.d';
-import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
+import { formatDateFromSeconds } from '~/utils/formatDate';
+import { Metadata } from '~/components-styled/metadata';
+import { MultipleLineChartTile } from '~/components-styled/multiple-line-chart-tile';
 import { RegionControlOption } from '~/components-styled/chart-region-controls';
 
 const text = siteText.positief_geteste_personen;
@@ -84,14 +85,27 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
       />
 
       <TwoKpiSection>
-        <KpiTile title={text.barscale_titel} data-cy="infected_daily_increase">
+        <KpiTile
+          title={text.barscale_titel}
+          data-cy="infected_daily_increase"
+          metadata={{
+            date: delta?.last_value?.date_of_report_unix,
+            source: text.bron,
+          }}
+        >
           {delta && (
             <PositiveTestedPeopleBarScale data={delta} showAxis={true} />
           )}
           <Text>{text.barscale_toelichting}</Text>
         </KpiTile>
 
-        <KpiTile title={text.kpi_titel}>
+        <KpiTile
+          title={text.kpi_titel}
+          metadata={{
+            date: delta?.last_value?.date_of_report_unix,
+            source: text.bron,
+          }}
+        >
           <KpiValue
             data-cy="infected_daily_total"
             absolute={total.last_value.infected_daily_total}
@@ -123,6 +137,10 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
       <ChoroplethTile
         data-cy="chloropleths"
         title={text.map_titel}
+        metadata={{
+          date: delta?.last_value?.date_of_report_unix,
+          source: text.bron,
+        }}
         description={text.map_toelichting}
         onChangeControls={setSelectedMap}
         legend={
@@ -169,6 +187,10 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           value: value.infected_daily_increase,
           date: value.date_of_report_unix,
         }))}
+        metadata={{
+          date: delta?.last_value?.date_of_report_unix,
+          source: text.bron,
+        }}
       />
 
       <KpiSection flexDirection="column">
@@ -192,6 +214,10 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
             axisTitle={text.barchart_axis_titel}
           />
         </Box>
+        <Metadata
+          date={delta?.last_value?.date_of_report_unix}
+          source={text.bron}
+        />
       </KpiSection>
 
       <ContentHeader_weekRangeHack
@@ -209,11 +235,23 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
       />
 
       <TwoKpiSection>
-        <KpiTile title={ggdText.totaal_getest_week_titel}>
+        <KpiTile
+          title={ggdText.totaal_getest_week_titel}
+          metadata={{
+            date: ggdLastValue.week_end_unix,
+            source: ggdText.bron,
+          }}
+        >
           <KpiValue absolute={ggdLastValue.tested_total} />
           <Text>{ggdText.totaal_getest_week_uitleg}</Text>
         </KpiTile>
-        <KpiTile title={ggdText.positief_getest_week_titel}>
+        <KpiTile
+          title={ggdText.positief_getest_week_titel}
+          metadata={{
+            date: ggdLastValue.week_end_unix,
+            source: ggdText.bron,
+          }}
+        >
           <KpiValue
             absolute={ggdLastValue.infected}
             percentage={ggdLastValue.infected_percentage}
@@ -268,43 +306,48 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         formatYAxis={(y: number) => {
           return `${formatPercentage(y)}%`;
         }}
+        metadata={{
+          date: ggdLastValue.week_end_unix,
+          source: ggdText.bron,
+        }}
       />
 
-      <KpiSection>
-        <MultipleLineChart
-          timeframeOptions={['all', '5weeks']}
-          title={ggdText.linechart_totaltests_titel}
-          description={ggdText.linechart_totaltests_toelichting}
-          values={[
-            ggdValues.map((value) => ({
-              value: value.tested_total,
-              date: value.week_unix,
-              week: {
-                start: value.week_start_unix,
-                end: value.week_end_unix,
-              },
-            })),
-            ggdValues.map((value) => ({
-              value: value.infected,
-              date: value.week_unix,
-              week: {
-                start: value.week_start_unix,
-                end: value.week_end_unix,
-              },
-            })),
-          ]}
-          linesConfig={[
-            {
-              color: '#154273',
-              legendLabel: ggdText.linechart_totaltests_legend_label,
+      <MultipleLineChartTile
+        title={ggdText.linechart_totaltests_titel}
+        description={ggdText.linechart_totaltests_toelichting}
+        values={[
+          ggdValues.map((value) => ({
+            value: value.tested_total,
+            date: value.week_unix,
+            week: {
+              start: value.week_start_unix,
+              end: value.week_end_unix,
             },
-            {
-              color: '#3391CC',
-              legendLabel: ggdText.linechart_positivetests_legend_label,
+          })),
+          ggdValues.map((value) => ({
+            value: value.infected,
+            date: value.week_unix,
+            week: {
+              start: value.week_start_unix,
+              end: value.week_end_unix,
             },
-          ]}
-        />
-      </KpiSection>
+          })),
+        ]}
+        linesConfig={[
+          {
+            color: '#154273',
+            legendLabel: ggdText.linechart_totaltests_legend_label,
+          },
+          {
+            color: '#3391CC',
+            legendLabel: ggdText.linechart_positivetests_legend_label,
+          },
+        ]}
+        metadata={{
+          date: ggdLastValue.week_end_unix,
+          source: ggdText.bron,
+        }}
+      />
     </>
   );
 };

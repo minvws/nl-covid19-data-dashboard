@@ -7,6 +7,7 @@ import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 import { formatNumber } from '~/utils/formatNumber';
+import { Metadata } from '~/components-styled/metadata';
 
 const text = siteText.verpleeghuis_oversterfte;
 
@@ -40,6 +41,10 @@ const NursingHomeDeaths: FCWithLayout<INationalData> = (props) => {
               {formatNumber(data.last_value.deceased_daily)}
             </span>
           </p>
+          <Metadata
+            date={data.last_value.date_of_report_unix}
+            source={text.bron}
+          />
         </div>
 
         <div className="column-item column-item-extra-margin">
@@ -55,6 +60,10 @@ const NursingHomeDeaths: FCWithLayout<INationalData> = (props) => {
               value: value.deceased_daily,
               date: value.date_of_report_unix,
             }))}
+          />
+          <Metadata
+            date={data.last_value.date_of_report_unix}
+            source={text.bron}
           />
         </article>
       )}

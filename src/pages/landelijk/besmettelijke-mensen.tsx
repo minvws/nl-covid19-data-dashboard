@@ -7,6 +7,7 @@ import { Legenda } from '~/components/legenda';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
+import { Metadata } from '~/components-styled/metadata';
 import { formatNumber } from '~/utils/formatNumber';
 
 const text = siteText.besmettelijke_personen;
@@ -50,6 +51,11 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
           <KpiTile
             title={text.cijfer_titel}
             description={text.cijfer_toelichting}
+            metadata={{
+              date:
+                infectiousPeopleLastKnownAverage.last_value.date_of_report_unix,
+              source: text.bron,
+            }}
           >
             <KpiValue
               absolute={
@@ -95,6 +101,10 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
             <li className="blue">{text.legenda_line}</li>
             <li className="gray square">{text.legenda_marge}</li>
           </Legenda>
+          <Metadata
+            date={count?.last_value?.date_of_report_unix}
+            source={text.bron}
+          />
         </article>
       )}
     </>

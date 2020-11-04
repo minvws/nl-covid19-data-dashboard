@@ -1,19 +1,21 @@
 // Props type needs to be imported from lineChart directly because charts only works with
 // default export.
-import LineChart, { LineChartProps, Value } from '~/components/lineChart';
+import {
+  MultipleLineChart,
+  MultipleLineChartProps,
+} from '~/components/lineChart/multipleLineChart.tsx';
 import { Spacer } from './base';
 import { Tile } from './layout';
 import { Metadata, MetadataProps } from './metadata';
 
-interface LineChartTileProps<T> extends LineChartProps<T> {
+interface MultipleLineChartTileProps extends MultipleLineChartProps {
   metadata: MetadataProps;
-  valueAnnotation?: string;
 }
 
-export function LineChartTile<T extends Value>({
+export function MultipleLineChartTile({
   metadata,
   ...chartProps
-}: LineChartTileProps<T>) {
+}: MultipleLineChartTileProps) {
   return (
     <Tile
       /**
@@ -32,7 +34,7 @@ export function LineChartTile<T extends Value>({
       ml={{ _: -4, sm: 0 }}
       mr={{ _: -4, sm: 0 }}
     >
-      <LineChart {...chartProps} />
+      <MultipleLineChart {...chartProps} />
 
       {/* Using a spacer to push the footer down */}
       <Spacer m="auto" />

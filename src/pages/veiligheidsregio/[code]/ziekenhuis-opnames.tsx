@@ -21,6 +21,7 @@ import {
 import { ResultsPerRegion } from '~/types/data.d';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { Metadata } from '~/components-styled/metadata';
 
 const text = siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
 
@@ -76,6 +77,10 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
             <p>{text.extra_uitleg}</p>
           </div>
         </div>
+        <Metadata
+          date={resultsPerRegion?.last_value?.date_of_report_unix}
+          source={text.bron}
+        />
       </article>
 
       {resultsPerRegion && (
@@ -88,6 +93,10 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
               value: value.hospital_moving_avg_per_region,
               date: value.date_of_report_unix,
             }))}
+          />
+          <Metadata
+            date={resultsPerRegion?.last_value?.date_of_report_unix}
+            source={text.bron}
           />
         </article>
       )}
@@ -127,6 +136,10 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
             />
           )}
         </div>
+        <Metadata
+          date={resultsPerRegion?.last_value?.date_of_report_unix}
+          source={text.bron}
+        />
       </article>
     </>
   );

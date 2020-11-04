@@ -52,7 +52,14 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
 
 
       <TwoKpiSection>
-        <KpiTile title={text.barscale_titel} description={text.extra_uitleg}>
+        <KpiTile
+          title={text.barscale_titel}
+          description={text.extra_uitleg}
+          metadata={{
+            date: sewerAverages.last_value.week_end_unix,
+            source: text.bron,
+          }}
+        >
           <KpiValue
             absolute={sewerAverages.last_value.average}
             valueAnnotation={siteText.waarde_annotaties.riool_normalized}
@@ -64,6 +71,10 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
             text.total_installation_count_description +
             `<p style="color:#595959">${text.rwzi_abbrev}</p>`
           }
+          metadata={{
+            date: sewerAverages.last_value.week_end_unix,
+            source: text.bron,
+          }}
         >
           <KpiValue
             absolute={sewerAverages.last_value.total_installation_count}
@@ -95,6 +106,10 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
           date: value.week_unix,
           week: { start: value.week_start_unix, end: value.week_end_unix },
         }))}
+        metadata={{
+          date: sewerAverages.last_value.week_end_unix,
+          source: text.bron,
+        }}
         formatTooltip={(x) => {
           return `<strong>${formatDateFromSeconds(
             x.week.start,

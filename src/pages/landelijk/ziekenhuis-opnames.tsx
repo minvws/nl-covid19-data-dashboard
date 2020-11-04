@@ -23,6 +23,7 @@ import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { DataWarning } from '~/components/dataWarning';
+import { Metadata } from '~/components-styled/metadata';
 
 const text = siteText.ziekenhuisopnames_per_dag;
 
@@ -61,7 +62,10 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
         <KpiTile
           title={text.barscale_titel}
           description={text.extra_uitleg}
-          sourcedFrom={text.bronnen.rivm}
+          metadata={{
+            date: dataIntake.last_value.date_of_report_unix,
+            source: text.bronnen.rivm,
+          }}
         >
           <IntakeHospitalBarScale data={dataIntake} showAxis={true} />
         </KpiTile>
@@ -69,7 +73,10 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
         <KpiTile
           title={text.kpi_bedbezetting.title}
           description={text.kpi_bedbezetting.description}
-          sourcedFrom={text.bronnen.lnaz}
+          metadata={{
+            date: dataIntake.last_value.date_of_report_unix,
+            source: text.bronnen.lnaz,
+          }}
         >
           <KpiValue absolute={dataBeds.last_value.covid_occupied} />
         </KpiTile>
@@ -83,7 +90,10 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
           date: value.date_of_report_unix,
         }))}
         signaalwaarde={40}
-        sourcedFrom={text.bronnen.rivm}
+        metadata={{
+          date: dataIntake.last_value.date_of_report_unix,
+          source: text.bronnen.rivm,
+        }}
       />
 
       <LineChartTile
@@ -93,7 +103,10 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
           value: value.covid_occupied,
           date: value.date_of_report_unix,
         }))}
-        sourcedFrom={text.bronnen.lnaz}
+        metadata={{
+          date: dataIntake.last_value.date_of_report_unix,
+          source: text.bronnen.lnaz,
+        }}
       />
 
       <article className="metric-article layout-choropleth">
@@ -139,16 +152,10 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
             />
           )}
         </div>
-        <footer className="choropleth-footer">
-          {siteText.common.metadata.source}:{' '}
-          <a
-            href={text.bronnen.rivmSource.href}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            {text.bronnen.rivmSource.text}
-          </a>
-        </footer>
+        <Metadata
+          date={dataIntake.last_value.date_of_report_unix}
+          source={text.bronnen.rivmSource}
+        />
       </article>
     </>
   );

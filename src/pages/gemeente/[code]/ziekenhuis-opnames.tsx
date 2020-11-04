@@ -20,6 +20,7 @@ import {
 import { HospitalAdmissions } from '~/types/data.d';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { Metadata } from '~/components-styled/metadata';
 
 const text = siteText.gemeente_ziekenhuisopnames_per_dag;
 
@@ -73,6 +74,11 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
             <p>{text.extra_uitleg}</p>
           </div>
         </div>
+
+        <Metadata
+          date={hospitalAdmissions?.last_value?.date_of_report_unix}
+          source={text.bron}
+        />
       </article>
 
       {hospitalAdmissions && (
@@ -85,6 +91,10 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
               value: value.moving_average_hospital,
               date: value.date_of_report_unix,
             }))}
+          />
+          <Metadata
+            date={hospitalAdmissions?.last_value?.date_of_report_unix}
+            source={text.bron}
           />
         </article>
       )}
@@ -124,6 +134,10 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
             />
           )}
         </div>
+        <Metadata
+          date={hospitalAdmissions?.last_value?.date_of_report_unix}
+          source={text.bron}
+        />
       </article>
     </>
   );
