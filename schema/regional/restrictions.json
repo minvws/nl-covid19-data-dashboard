@@ -21,7 +21,8 @@
         "target_region",
         "escalation_level",
         "category_id",
-        "restriction_order"
+        "restriction_order",
+        "valid_from_unix"
       ],
       "properties": {
         "restriction_id": {
@@ -34,7 +35,7 @@
         },
         "escalation_level": {
           "type": "integer",
-          "enum": [0, 1, 2, 3, 4, 41]
+          "enum": [0, 1, 2, 3, 4, 41, 401]
         },
         "category_id": {
           "type": "string",
