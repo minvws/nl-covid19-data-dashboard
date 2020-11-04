@@ -9,7 +9,7 @@
     "title": "Laatst bijgewerkt"
   },
   "notificatie": {
-    "titel": "Aantal meldingen COVID-19 stijgt nog steeds, maar minder hard",
+    "titel": "Lichte daling COVID-19 meldingen",
     "bericht": "Afgelopen week (28 oktober-3 november) is het aantal nieuwe meldingen van COVID-19 iets gedaald. Dat is waarschijnlijk het effect van de maatregelen die eind september en medio oktober van kracht werden. Het aantal nieuwe ziekenhuisopnames is licht toegenomen, terwijl het aantal opnames op de IC iets daalde.\n\nHet risiconiveau per regio kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2), ‘ernstig’ (niveau 3), ‘zeer ernstig’ (niveau 4) zijn. Op dit moment zijn {{escalationLevel4}} regio’s ingeschaald op ‘zeer ernstig’, {{escalationLevel3}} op ‘ernstig’, {{escalationLevel2}} op ‘zorgelijk’ en {{escalationLevel1}} op ‘waakzaam.‘",
     "link": {
       "text": "Bekijk de toelichting van het RIVM",

@@ -9,7 +9,7 @@
     "title": "Last updated"
   },
   "notificatie": {
-    "titel": "Increase in new COVID-19 infections,  but less strong",
+    "titel": "Slight decrease in new COVID-19 infections",
     "bericht": "In the past week (28 October to 3 November) the number of people who newly tested positive for COVID-19 decreased somewhat. This probably results from the government policy measures issued late September and mid-October. The number of COVID-19 patients admitted to hospital increased slightly, while there was a small decrease in the number of admissions to the ICU.\n\nRisk level per region can be ‘caution’ (level 1), ‘concern’ (level 2), ‘serious’ (level 3) or ‘severe’ (level 4). At this moment the risk level of {{escalationLevel4}} regions is 'severe', for {{escalationLevel3}} it is ‘serious’, for {{escalationLevel2}} it is ‘concern’ and for {{escalationLevel1}} it is ‘caution’.",
     "link": {
       "text": "View the full message from the RIVM",
