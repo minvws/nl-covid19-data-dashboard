@@ -20,8 +20,6 @@ const text = siteText.common.metadata;
 export function Metadata(props: IProps) {
   const { dataSource, datumsText, dateUnix, dateInsertedUnix } = props;
 
-  if (!dateUnix) return null;
-
   const dateOfReport = formatDateFromSeconds(dateUnix, 'weekday-medium');
   const dateOfInsertion = dateInsertedUnix
     ? formatDateFromSeconds(dateInsertedUnix, 'weekday-medium')
