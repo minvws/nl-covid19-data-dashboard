@@ -110,7 +110,7 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
         <LineChart
           title={text.linechart_titel}
           values={data.values.map((value) => ({
-            value: value.newly_infected_locations,
+            value: value.infected_locations_total,
             date: value.date_of_report_unix,
           }))}
         />
