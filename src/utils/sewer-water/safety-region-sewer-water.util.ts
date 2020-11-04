@@ -45,11 +45,11 @@ export interface SewerWaterBarChartData {
 export function getSewerWaterBarScaleData(
   data: Regionaal
 ): SewerWaterBarScaleData {
-  const barScaleData = data.sewer_per_installation.values[0].last_value;
+  const barScaleData = data.sewer.last_value;
 
   return {
-    value: barScaleData.rna_normalized,
-    unix: barScaleData.date_measurement_unix,
+    value: barScaleData.average,
+    unix: barScaleData.week_end_unix,
     dateInsertedUnix: barScaleData.date_of_insertion_unix,
     week_start_unix: barScaleData.week_start_unix,
     week_end_unix: barScaleData.week_end_unix,

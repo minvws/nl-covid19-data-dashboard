@@ -1,8 +1,13 @@
+import { useRouter } from 'next/router';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
-import { KpiTile } from '~/components-styled/kpi-tile';
-import { KpiValue } from '~/components-styled/kpi-value';
+import { Spacer } from '~/components-styled/base';
+import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
-import { TwoKpiSection } from '~/components-styled/two-kpi-section';
+import { ValueAnnotation } from '~/components-styled/value-annotation';
+import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/useSafetyRegionLegendaData';
+import { SafetyRegionChoropleth } from '~/components/choropleth/SafetyRegionChoropleth';
+import { createSelectRegionHandler } from '~/components/choropleth/selectHandlers/createSelectRegionHandler';
+import { createSewerRegionalTooltip } from '~/components/choropleth/tooltips/region/createSewerRegionalTooltip';
 import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRangeHack';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
@@ -16,6 +21,8 @@ const text = siteText.rioolwater_metingen;
 
 const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
   const sewerAverages = data.sewer;
+  const router = useRouter();
+  const legendItems = useSafetyRegionLegendaData('sewer');
 
   return (
     <>
@@ -36,6 +43,13 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
           dataSource: text.bron,
         }}
       />
+
+      {/*
+        @TODO make this replace the code below. Maybe extend TwoKpiSection so that
+        it renders the KPI full-width if there is only one child.
+
+        Discuss with design. https://trello.com/c/gnDOKkZ2/780-regressie-gemiddeld-aantal-besmettelijke-mensen-per-100k
+
 
       <TwoKpiSection>
         <KpiTile
@@ -67,6 +81,22 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
           />
         </KpiTile>
       </TwoKpiSection>
+        */}
+
+      <article className="metric-article layout-two-column">
+        <div className="column-item column-item-extra-margin">
+          <h3>{text.barscale_titel}</h3>
+          <p className="text-blue kpi" data-cy="infected_daily_total">
+            {formatNumber(sewerAverages.last_value.average)}
+          </p>
+        </div>
+
+        <div className="column-item column-item-extra-margin">
+          <p>{text.extra_uitleg}</p>
+          <ValueAnnotation>x100 miljard</ValueAnnotation>
+        </div>
+      </article>
+      <Spacer mb={4} />
 
       <LineChartTile
         title={text.linechart_titel}
@@ -91,6 +121,26 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
         }}
         valueAnnotation={siteText.waarde_annotaties.riool_normalized}
       />
+
+      <ChoroplethTile
+        title={text.map_titel}
+        description={text.map_toelichting}
+        legend={
+          legendItems // this data value should probably not be optional
+            ? {
+                title: text.legenda_titel,
+                items: legendItems,
+              }
+            : undefined
+        }
+      >
+        <SafetyRegionChoropleth
+          metricName="sewer"
+          metricValueName="average"
+          tooltipContent={createSewerRegionalTooltip(router)}
+          onSelect={createSelectRegionHandler(router, 'rioolwater')}
+        />
+      </ChoroplethTile>
     </>
   );
 };

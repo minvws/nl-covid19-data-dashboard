@@ -37,13 +37,14 @@ import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { Metadata } from '~/components-styled/metadata';
 import { MultipleLineChartTile } from '~/components-styled/multiple-line-chart-tile';
+import { RegionControlOption } from '~/components-styled/chart-region-controls';
 
 const text = siteText.positief_geteste_personen;
 const ggdText = siteText.positief_geteste_personen_ggd;
 
 const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
   const { data } = props;
-  const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
+  const [selectedMap, setSelectedMap] = useState<RegionControlOption>(
     'municipal'
   );
   const router = useRouter();
