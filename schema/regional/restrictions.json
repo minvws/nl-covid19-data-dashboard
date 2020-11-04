@@ -9,8 +9,57 @@
     "values": {
       "type": "array",
       "items": {
-        "type": "string",
-        "pattern": "^[0-9]+_[a-z_]+_[0-9]+$"
+        "$ref": "#/definitions/value"
+      }
+    }
+  },
+  "definitions": {
+    "value": {
+      "title": "regional_restriction_value",
+      "additionalProperties": false,
+      "required": [
+        "restriction_id",
+        "target_region",
+        "escalation_level",
+        "category_id",
+        "restriction_order"
+      ],
+      "properties": {
+        "restriction_id": {
+          "type": "string",
+          "validRestrictionId": true
+        },
+        "target_region": {
+          "type": "string",
+          "enum": ["nl", "vr"]
+        },
+        "escalation_level": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "category_id": {
+          "type": "string",
+          "enum": [
+            "er_op_uit",
+            "bezoek",
+            "samenkomst",
+            "huwelijk",
+            "verpleeghuis",
+            "horeca",
+            "sport",
+            "reizen_binnenland",
+            "ov",
+            "uitvaart",
+            "onderwijs",
+            "werk",
+            "winkels",
+            "alcohol"
+          ]
+        },
+        "restriction_order": {
+          "type": "number"
+        }
       }
     }
   }
