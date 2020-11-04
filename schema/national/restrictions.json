@@ -1,25 +1,11 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-  "title": "restrictions",
+  "title": "national_restrictions",
   "additionalProperties": false,
-  "required": ["last_generated", "proto_name", "name", "code", "values"],
+  "required": ["vrcode", "values"],
   "properties": {
-    "last_generated": {
-      "type": "string"
-    },
-    "proto_name": {
-      "type": "string",
-      "const": "RESTRICTIONS"
-    },
-    "name": {
-      "type": "string",
-      "const": { "$data": "1/proto_name" }
-    },
-    "code": {
-      "type": "string",
-      "const": { "$data": "1/proto_name" }
-    },
+    "vrcode": { "type": "string", "equalsRootProperty": "code" },
     "values": {
       "type": "array",
       "items": {
@@ -29,7 +15,7 @@
   },
   "definitions": {
     "value": {
-      "title": "restrictions_value",
+      "title": "national_restriction_value",
       "additionalProperties": false,
       "required": [
         "restriction_id",
@@ -45,7 +31,7 @@
         },
         "target_region": {
           "type": "string",
-          "enum": ["nl", "vr"]
+          "const": "nl"
         },
         "escalation_level": {
           "type": "number",
