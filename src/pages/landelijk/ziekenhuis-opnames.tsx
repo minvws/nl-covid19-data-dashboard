@@ -105,7 +105,7 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
         }))}
         metadata={{
           date: dataIntake.last_value.date_of_report_unix,
-          source: text.bronnen.rivm,
+          source: text.bronnen.lnaz,
         }}
       />
 

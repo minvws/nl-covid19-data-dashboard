@@ -34,7 +34,7 @@ export function KpiTile({
       )}
       {/* Using a spacer to push the footer down */}
       <Spacer m="auto" />
-      <Metadata {...metadata}></Metadata>
+      <Metadata {...metadata} />
     </Tile>
   );
 }

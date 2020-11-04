@@ -15,8 +15,8 @@ export interface MetadataProps {
 
 export function Metadata(metadata: MetadataProps) {
   return (
-    <Box as="footer" mt={3} gridArea={'metadata'}>
-      <Text color={'annotation'} fontSize={1}>
+    <Box as="footer" mt={3}>
+      <Text color="annotation" fontSize={1}>
         {metadata.date
           ? replaceVariablesInText(locale.common.metadata.date, {
               date: formatDateFromSeconds(metadata.date, 'weekday-medium'),

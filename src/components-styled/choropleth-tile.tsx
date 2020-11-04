@@ -82,7 +82,7 @@ export function ChoroplethTile<T>({
           )}
         </Box>
       </Box>
-      <Metadata {...metadata} />
+      {metadata && <Metadata {...metadata} />}
     </Tile>
   );
 }
