@@ -57,7 +57,7 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
         <article className="metric-article column-item">
           <h3>{text.barscale_titel}</h3>
           <p className="text-blue kpi">
-            {formatNumber(data?.last_value.newly_infected_locations)}
+            {formatNumber(data.last_value.newly_infected_locations)}
           </p>
           <p>{text.barscale_toelichting}</p>
         </article>
@@ -95,7 +95,7 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
         <LineChart
           title={text.linechart_titel}
           values={data.values.map((value) => ({
-            value: value.newly_infected_locations,
+            value: value.infected_locations_total,
             date: value.date_of_report_unix,
           }))}
         />
