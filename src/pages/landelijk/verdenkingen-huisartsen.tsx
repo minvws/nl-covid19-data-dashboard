@@ -7,7 +7,11 @@ import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 import { NationalHuisartsVerdenkingen } from '~/types/data.d';
-import { formatNumber } from '~/utils/formatNumber';
+import { TwoKpiSection } from '~/components-styled/two-kpi-section';
+import { KpiValue } from '~/components-styled/kpi-value';
+import { KpiTile } from '~/components-styled/kpi-tile';
+import { Text } from '~/components-styled/typography';
+import { Metadata } from '~/components-styled/metadata';
 
 const text = siteText.verdenkingen_huisartsen;
 
@@ -39,19 +43,28 @@ const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
         }}
       />
 
-      <div className="layout-two-column">
-        <article className="metric-article column-item">
-          <h3>{text.kpi_titel}</h3>
-          <p className="text-blue kpi">{formatNumber(total)}</p>
-          <p>{text.barscale_toelichting}</p>
-        </article>
-
-        <article className="metric-article column-item">
-          <h3>{text.normalized_kpi_titel}</h3>
-          <p className="text-blue kpi">{formatNumber(normalized)}</p>
-          <p>{text.normalized_kpi_toelichting}</p>
-        </article>
-      </div>
+      <TwoKpiSection>
+        <KpiTile
+          title={text.kpi_titel}
+          metadata={{
+            date: data.last_value.week_unix,
+            source: text.bron,
+          }}
+        >
+          <KpiValue absolute={total} />
+          <Text>{text.barscale_toelichting}</Text>
+        </KpiTile>
+        <KpiTile
+          title={text.normalized_kpi_titel}
+          metadata={{
+            date: data.last_value.week_unix,
+            source: text.bron,
+          }}
+        >
+          <KpiValue absolute={normalized} />
+          <Text>{text.normalized_kpi_toelichting}</Text>
+        </KpiTile>
+      </TwoKpiSection>
 
       {data && (
         <article className="metric-article">
@@ -67,6 +80,7 @@ const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
               },
             }))}
           />
+          <Metadata date={data.last_value.week_unix} source={text.bron} />
         </article>
       )}
     </>

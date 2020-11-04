@@ -627,6 +627,7 @@
   },
   "common": {
     "metadata": {
+      "date": "Waarde van {{date}}",
       "source": "Source"
     },
     "barScale": {

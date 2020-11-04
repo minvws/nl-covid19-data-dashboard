@@ -37,6 +37,15 @@ interface DateTimeFormatOptions extends Intl.DateTimeFormatOptions {
   timeStyle?: 'full' | 'long' | 'medium' | 'short';
 }
 
+type formatStyle =
+  | 'long'
+  | 'medium'
+  | 'short'
+  | 'relative'
+  | 'iso'
+  | 'axis'
+  | 'weekday-medium';
+
 const Long = new Intl.DateTimeFormat(locale, {
   dateStyle: 'long',
   timeStyle: 'short',
@@ -65,9 +74,16 @@ const Day = new Intl.DateTimeFormat(locale, {
   timeZone: 'Europe/Amsterdam',
 });
 
+const WeekdayMedium = new Intl.DateTimeFormat(locale, {
+  weekday: 'long',
+  month: 'long',
+  day: 'numeric',
+  timeZone: 'Europe/Amsterdam',
+} as DateTimeFormatOptions);
+
 export function formatDateFromSeconds(
   seconds: number,
-  style?: 'long' | 'medium' | 'short' | 'relative' | 'iso' | 'axis'
+  style?: formatStyle
 ): string {
   assert(!isNaN(seconds), 'seconds is NaN');
 
@@ -84,7 +100,7 @@ export function formatDateFromSeconds(
 
 export function formatDateFromMilliseconds(
   milliseconds: number,
-  style?: 'long' | 'medium' | 'short' | 'relative' | 'iso' | 'axis'
+  style?: formatStyle
 ): string {
   assert(!isNaN(milliseconds), 'milliseconds is NaN');
 
@@ -93,6 +109,7 @@ export function formatDateFromMilliseconds(
   if (style === 'medium') return Medium.format(milliseconds); // '23 juli 2020'
   if (style === 'axis')
     return `${Day.format(milliseconds)} ${MonthShort.format(milliseconds)}`; // '23 jul.'
+  if (style === 'weekday-medium') return WeekdayMedium.format(milliseconds);
 
   /* Relative date formatting is disabled for server-side rendering */
   if (style === 'relative' && typeof window !== 'undefined') {

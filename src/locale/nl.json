@@ -627,7 +627,8 @@
   },
   "common": {
     "metadata": {
-      "source": "Bron data"
+      "date": "Waarde van {{date}}",
+      "source": "Bron"
     },
     "barScale": {
       "signaalwaarde": "Signaalwaarde"

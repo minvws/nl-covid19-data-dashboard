@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
 import Getest from '~/assets/test.svg';
-import { LineChart } from '~/components/charts/index';
 import { ChoroplethLegenda } from '~/components/choropleth/legenda/ChoroplethLegenda';
 import { useMunicipalLegendaData } from '~/components/choropleth/legenda/hooks/useMunicipalLegendaData';
 import { MunicipalityChoropleth } from '~/components/choropleth/MunicipalityChoropleth';
@@ -17,8 +16,13 @@ import {
   IMunicipalityData,
 } from '~/static-props/municipality-data';
 import { PositiveTestedPeople } from '~/types/data.d';
-import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { TwoKpiSection } from '~/components-styled/two-kpi-section';
+import { KpiTile } from '~/components-styled/kpi-tile';
+import { KpiValue } from '~/components-styled/kpi-value';
+import { Text } from '~/components-styled/typography';
+import { Metadata } from '~/components-styled/metadata';
+import { LineChartTile } from '~/components-styled/line-chart-tile';
 
 const text = siteText.gemeente_positief_geteste_personen;
 
@@ -56,39 +60,50 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
         }}
       />
 
-      <div className="layout-two-column">
-        <article className="metric-article column-item">
-          <h3>{text.barscale_titel}</h3>
-          <p className="text-blue kpi" data-cy="infected_daily_total">
-            {formatNumber(
-              positivelyTestedPeople.last_value.infected_daily_increase
-            )}
-          </p>
-          <p>{text.barscale_toelichting}</p>
-        </article>
+      <TwoKpiSection>
+        <KpiTile
+          title={text.barscale_titel}
+          data-cy="infected_daily_increase"
+          metadata={{
+            date: positivelyTestedPeople?.last_value?.date_of_report_unix,
+            source: text.bron,
+          }}
+        >
+          <KpiValue
+            data-cy="infected_daily_total"
+            absolute={positivelyTestedPeople.last_value.infected_daily_increase}
+          />
+          <Text>{text.barscale_toelichting}</Text>
+        </KpiTile>
 
-        <article className="metric-article column-item">
-          <h3>{text.kpi_titel}</h3>
-          <p className="text-blue kpi">
-            {formatNumber(
-              positivelyTestedPeople.last_value.infected_daily_total
-            )}
-          </p>
-          <p>{text.kpi_toelichting}</p>
-        </article>
-      </div>
+        <KpiTile
+          title={text.kpi_titel}
+          metadata={{
+            date: positivelyTestedPeople?.last_value?.date_of_report_unix,
+            source: text.bron,
+          }}
+        >
+          <KpiValue
+            data-cy="infected_daily_total"
+            absolute={positivelyTestedPeople.last_value.infected_daily_total}
+          />
+          <Text>{text.kpi_toelichting}</Text>
+        </KpiTile>
+      </TwoKpiSection>
 
       {positivelyTestedPeople && (
-        <article className="metric-article">
-          <LineChart
-            title={text.linechart_titel}
-            description={text.linechart_toelichting}
-            values={positivelyTestedPeople.values.map((value) => ({
-              value: value.infected_daily_increase,
-              date: value.date_of_report_unix,
-            }))}
-          />
-        </article>
+        <LineChartTile
+          title={text.linechart_titel}
+          description={text.linechart_toelichting}
+          values={positivelyTestedPeople.values.map((value) => ({
+            value: value.infected_daily_increase,
+            date: value.date_of_report_unix,
+          }))}
+          metadata={{
+            date: positivelyTestedPeople?.last_value?.date_of_report_unix,
+            source: text.bron,
+          }}
+        />
       )}
 
       <article className="metric-article layout-choropleth">
@@ -120,6 +135,10 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
             />
           )}
         </div>
+        <Metadata
+          date={positivelyTestedPeople?.last_value?.date_of_report_unix}
+          source={text.bron}
+        />
       </article>
     </>
   );

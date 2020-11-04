@@ -1,5 +1,4 @@
 import Arts from '~/assets/arts.svg';
-import { LineChart } from '~/components/charts/index';
 import { ContentHeader_sourcesHack } from '~/components/contentHeader_sourcesHack';
 import { IntakeIntensiveCareBarscale } from '~/components/landelijk/intake-intensive-care-barscale';
 import { FCWithLayout } from '~/components/layout';
@@ -7,7 +6,11 @@ import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
-import { formatNumber, formatPercentage } from '~/utils/formatNumber';
+import { TwoKpiSection } from '~/components-styled/two-kpi-section';
+import { KpiTile } from '~/components-styled/kpi-tile';
+import { KpiValue } from '~/components-styled/kpi-value';
+import { Text } from '~/components-styled/typography';
+import { LineChartTile } from '~/components-styled/line-chart-tile';
 
 const text = siteText.ic_opnames_per_dag;
 
@@ -38,91 +41,58 @@ const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
         }}
       />
 
-      <div className="layout-two-column">
-        <article className="metric-article column-item">
-          <div className="article-top">
-            <h3>{text.barscale_titel}</h3>
-            <IntakeIntensiveCareBarscale data={dataIntake} showAxis={true} />
-            <p>{text.extra_uitleg}</p>
-          </div>
-          <footer className="article-footer">
-            {siteText.common.metadata.source}:{' '}
-            <a
-              href={text.bronnen.nice.href}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              {text.bronnen.nice.text}
-            </a>
-          </footer>
-        </article>
+      <TwoKpiSection>
+        <KpiTile
+          title={text.barscale_titel}
+          metadata={{
+            date: dataIntake.last_value.date_of_report_unix,
+            source: text.bronnen.nice,
+          }}
+        >
+          <IntakeIntensiveCareBarscale data={dataIntake} showAxis={true} />
+          <Text>{text.extra_uitleg}</Text>
+        </KpiTile>
 
-        <article className="metric-article column-item">
-          <div className="article-top">
-            <h3>{text.kpi_bedbezetting.title}</h3>
-            <div className="text-blue kpi">
-              {`${formatNumber(
-                dataBeds.last_value.covid_occupied
-              )} (${formatPercentage(
-                dataBeds.last_value.covid_percentage_of_all_occupied
-              )}%)`}
-            </div>
-            <p>{text.kpi_bedbezetting.description}</p>
-          </div>
-          <footer className="article-footer">
-            {siteText.common.metadata.source}:{' '}
-            <a
-              href={text.bronnen.lnaz.href}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              {text.bronnen.lnaz.text}
-            </a>
-          </footer>
-        </article>
-      </div>
+        <KpiTile
+          title={text.kpi_bedbezetting.title}
+          metadata={{
+            date: dataBeds.last_value.date_of_report_unix,
+            source: text.bronnen.lnaz,
+          }}
+        >
+          <KpiValue
+            absolute={dataBeds.last_value.covid_occupied}
+            percentage={dataBeds.last_value.covid_percentage_of_all_occupied}
+          />
+          <Text>{text.kpi_bedbezetting.description}</Text>
+        </KpiTile>
+      </TwoKpiSection>
 
-      <article className="metric-article">
-        <LineChart
-          title={text.linechart_titel}
-          values={dataIntake.values.map((value) => ({
-            value: value.moving_average_ic,
-            date: value.date_of_report_unix,
-          }))}
-          signaalwaarde={10}
-        />
-        <footer className="article-footer">
-          {siteText.common.metadata.source}:{' '}
-          <a
-            href={text.bronnen.nice.href}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            {text.bronnen.nice.text}
-          </a>
-        </footer>
-      </article>
+      <LineChartTile
+        title={text.linechart_titel}
+        values={dataIntake.values.map((value) => ({
+          value: value.moving_average_ic,
+          date: value.date_of_report_unix,
+        }))}
+        signaalwaarde={10}
+        metadata={{
+          date: dataIntake.last_value.date_of_report_unix,
+          source: text.bronnen.nice,
+        }}
+      />
 
-      <article className="metric-article">
-        <LineChart
-          title={text.chart_bedbezetting.title}
-          description={text.chart_bedbezetting.description}
-          values={dataBeds.values.map((value) => ({
-            value: value.covid_occupied,
-            date: value.date_of_report_unix,
-          }))}
-        />
-        <footer className="article-footer">
-          {siteText.common.metadata.source}:{' '}
-          <a
-            href={text.bronnen.lnaz.href}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            {text.bronnen.lnaz.text}
-          </a>
-        </footer>
-      </article>
+      <LineChartTile
+        title={text.chart_bedbezetting.title}
+        description={text.chart_bedbezetting.description}
+        values={dataBeds.values.map((value) => ({
+          value: value.covid_occupied,
+          date: value.date_of_report_unix,
+        }))}
+        metadata={{
+          date: dataBeds.last_value.date_of_report_unix,
+          source: text.bronnen.lnaz,
+        }}
+      />
     </>
   );
 };
