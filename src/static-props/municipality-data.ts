@@ -1,10 +1,10 @@
-import fs from 'fs';
 import path from 'path';
 
 import { Municipal } from '~/types/data.d';
 
 import municipalities from '~/data/gemeente_veiligheidsregio.json';
 import { sortMunicipalTimeSeriesInDataInPlace } from './data-sorting';
+import { loadJsonFromFile } from './utils/load-json-from-file';
 
 export interface IMunicipalityData {
   data: Municipal;
@@ -53,9 +53,9 @@ export function getMunicipalityData() {
   return function ({ params }: IParams): IProps {
     const { code } = params;
 
-    const filePath = path.join(process.cwd(), 'public', 'json', `${code}.json`);
-    const fileContents = fs.readFileSync(filePath, 'utf8');
-    const data = JSON.parse(fileContents) as Municipal;
+    const data = loadJsonFromFile<Municipal>(
+      path.join(process.cwd(), 'public', 'json', `${code}.json`)
+    );
 
     sortMunicipalTimeSeriesInDataInPlace(data);
 
