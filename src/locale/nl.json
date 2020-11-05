@@ -51,22 +51,24 @@
     "terug_naar_alle_cijfers": "Terug naar alle cijfers",
     "terug_naar_alle_cijfers_homepage": "Terug naar alle cijfers"
   },
-  "restriction_categories": {
-    "er_op_uit":"Er op uit",
-    "bezoek":"Thuisbezoek familie en vrienden",
-    "samenkomst":"Samenkomsten",
-    "huwelijk":"Huwelijksvoltrekkingen",
-    "verpleeghuis":"Verpleeghuizen",
-    "horeca":"Horeca",
-    "sport":"Sport",
-    "reizen_binnenland":"Binnenlandse reizen",
-    "ov":"OV",
-    "uitvaart":"Uitvaart",
-    "onderwijs":"Onderwijs",
-    "werk":"Werk",
-    "winkels":"Winkels",
-    "alcohol":"Alcohol en softdrugs",
-    "algemeen": "Algemeen"
+  "restrictions": {
+    "categories": {
+      "er_op_uit":"Er op uit",
+      "bezoek":"Thuisbezoek familie en vrienden",
+      "samenkomst":"Samenkomsten",
+      "huwelijk":"Huwelijksvoltrekkingen",
+      "verpleeghuis":"Verpleeghuizen",
+      "horeca":"Horeca",
+      "sport":"Sport",
+      "reizen_binnenland":"Binnenlandse reizen",
+      "ov":"OV",
+      "uitvaart":"Uitvaart",
+      "onderwijs":"Onderwijs",
+      "werk":"Werk",
+      "winkels":"Winkels",
+      "alcohol":"Alcohol en softdrugs",
+      "algemeen": "Algemeen"
+    }
   },
   "ic_opnames_per_dag": {
     "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",

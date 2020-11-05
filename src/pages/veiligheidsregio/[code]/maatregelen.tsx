@@ -66,7 +66,9 @@ const RegionalRestrictions: FCWithLayout<ISafetyRegionData> = (props) => {
           </Box>
           <Box display="flex" flexDirection="column">
             <Text>{text.toelichting_risiconiveau}</Text>
-            <Link href="/over-risiconiveaus">{text.linktext_riskpage}</Link>
+            <Link href="/over-risiconiveaus">
+              <a>{text.linktext_riskpage}</a>
+            </Link>
           </Box>
         </Box>
       </KpiSection>

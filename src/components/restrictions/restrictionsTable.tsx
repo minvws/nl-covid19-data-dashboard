@@ -8,7 +8,7 @@ export type RestrictionsTableProps = {
   data: RestrictionsTableData;
 };
 
-const text = siteText.restriction_categories;
+const text = siteText.restrictions.categories;
 
 export function RestrictionsTable(props: RestrictionsTableProps) {
   const { data } = props;

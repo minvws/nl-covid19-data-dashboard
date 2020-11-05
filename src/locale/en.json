@@ -51,22 +51,24 @@
     "terug_naar_alle_cijfers": "Overview",
     "terug_naar_alle_cijfers_homepage": "Overview"
   },
-  "restriction_categories": {
-    "er_op_uit":"",
-    "bezoek":"",
-    "samenkomst":"",
-    "huwelijk":"",
-    "verpleeghuis":"",
-    "horeca":"",
-    "sport":"",
-    "reizen_binnenland":"",
-    "ov":"",
-    "uitvaart":"",
-    "onderwijs":"",
-    "werk":"",
-    "winkels":"",
-    "alcohol":"",
-    "algemeen": ""
+  "restriction": {
+    "categories":{
+      "er_op_uit":"",
+      "bezoek":"",
+      "samenkomst":"",
+      "huwelijk":"",
+      "verpleeghuis":"",
+      "horeca":"",
+      "sport":"",
+      "reizen_binnenland":"",
+      "ov":"",
+      "uitvaart":"",
+      "onderwijs":"",
+      "werk":"",
+      "winkels":"",
+      "alcohol":"",
+      "algemeen": ""
+    }
   },
   "ic_opnames_per_dag": {
     "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
