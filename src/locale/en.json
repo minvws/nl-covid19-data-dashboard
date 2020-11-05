@@ -676,6 +676,9 @@
   "gemeente_metadata": {
     "title": "Municipality"
   },
+  "veiligheidsregio_maatregelen": {
+    "title": ""
+  },
   "veiligheidsregio_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Hospital admissions",
     "titel": "Hospital admissions per day of residents in {{safetyRegion}}",

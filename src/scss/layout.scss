@@ -220,6 +220,13 @@
       min-height: 0;
     }
   }
+
+  .regional-restrictions {
+    margin-top: 1.5em;
+    li {
+      min-height: 0;
+    }
+  }
 }
 
 @media (max-width: 999px) {
@@ -412,6 +419,12 @@ a.metric-link {
   }
 
   &.last-developments-link {
+    &::after {
+      top: 1.15em;
+    }
+  }
+
+  &.regional-restrictions-link {
     &::after {
       top: 1.15em;
     }

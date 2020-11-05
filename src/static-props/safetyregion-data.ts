@@ -1,15 +1,16 @@
-import fs from 'fs';
 import path from 'path';
 
-import { Regionaal } from '~/types/data.d';
+import { Regionaal, Regions } from '~/types/data.d';
 
 import safetyRegions from '~/data/index';
 import { sortRegionalTimeSeriesInDataInPlace } from './data-sorting';
+import { loadJsonFromFile } from './utils/load-json-from-file';
 
 export interface ISafetyRegionData {
   data: Regionaal;
   safetyRegionName: string;
   lastGenerated: string;
+  escalationLevel: number;
 }
 
 interface IProps {
@@ -53,10 +54,21 @@ export function getSafetyRegionData() {
   return function ({ params }: IParams): IProps {
     const { code } = params;
 
+    const publicJsonPath = path.join(process.cwd(), 'public', 'json');
+
     // get data for the page
-    const filePath = path.join(process.cwd(), 'public', 'json', `${code}.json`);
-    const fileContents = fs.readFileSync(filePath, 'utf8');
-    const data = JSON.parse(fileContents) as Regionaal;
+    const data = loadJsonFromFile<Regionaal>(
+      path.join(publicJsonPath, `${code}.json`)
+    );
+
+    // get the regions file and extract the escalation level for this region from it
+    const regionsData = loadJsonFromFile<Regions>(
+      path.join(publicJsonPath, `REGIONS.json`)
+    );
+
+    const escalationLevel =
+      regionsData.escalation_levels.find((item) => item.vrcode === code)
+        ?.escalation_level ?? 0;
 
     sortRegionalTimeSeriesInDataInPlace(data);
 
@@ -70,6 +82,7 @@ export function getSafetyRegionData() {
         data,
         safetyRegionName,
         lastGenerated,
+        escalationLevel,
       },
     };
   };

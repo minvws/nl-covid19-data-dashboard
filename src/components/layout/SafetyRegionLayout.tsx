@@ -63,7 +63,7 @@ type TSafetyRegion = {
 function SafetyRegionLayout(
   props: ISafetyRegionData & { children: React.ReactNode }
 ) {
-  const { children, data } = props;
+  const { children, data, escalationLevel } = props;
 
   const router = useRouter();
   const isLargeScreen = useMediaQuery('(min-width: 1000px)', true);
@@ -137,6 +137,27 @@ function SafetyRegionLayout(
 
           {showMetricLinks && (
             <nav aria-label="metric navigation">
+              <ul className="regional-restrictions">
+                <li>
+                  <Link
+                    href="/veiligheidsregio/[code]/maatregelen"
+                    as={`/veiligheidsregio/${code}/maatregelen`}
+                  >
+                    <a
+                      onClick={blur}
+                      className={`regional-restrictions-link ${getClassName(
+                        '/veiligheidsregio/[code]/maatregelen'
+                      )}`}
+                    >
+                      <TitleWithIcon
+                        title={siteText.veiligheidsregio_maatregelen.title}
+                        subtitle={escalationLevel.toString()}
+                      />
+                    </a>
+                  </Link>
+                </li>
+              </ul>
+
               <h2>{siteText.veiligheidsregio_layout.headings.medisch}</h2>
 
               <ul>

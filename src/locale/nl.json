@@ -676,6 +676,9 @@
   "gemeente_metadata": {
     "title": "Gemeente"
   },
+  "veiligheidsregio_maatregelen": {
+    "title": "Risiconiveau en Maatregelen"
+  },
   "veiligheidsregio_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Ziekenhuisopnames",
     "titel": "Ziekenhuisopnames per dag van inwoners {{safetyRegion}}",
