@@ -24,7 +24,7 @@ export type TProps = {
   highlightSelection?: boolean;
   style?: CSSProperties;
   onSelect?: (context: MunicipalityProperties) => void;
-  tooltipContent?: (context: MunicipalityProperties) => ReactNode; // @TODO add number?
+  tooltipContent?: (context: MunicipalityProperties) => ReactNode;
   isSelectorMap?: boolean;
 };
 

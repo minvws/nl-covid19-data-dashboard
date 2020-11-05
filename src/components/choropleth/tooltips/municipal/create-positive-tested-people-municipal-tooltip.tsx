@@ -11,8 +11,8 @@ export const createPositiveTestedPeopleMunicipalTooltip = (
   router: NextRouter
 ) => (
   context: MunicipalityProperties & {
-    value: number;
-    total_positive_tested_people: number;
+    value?: number;
+    total_positive_tested_people?: number;
   }
 ): ReactNode => {
   const onSelectHandler = createSelectMunicipalHandler(router);

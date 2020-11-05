@@ -6,7 +6,7 @@ import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent'
 
 export const createMunicipalHospitalAdmissionsTooltip = (
   router: NextRouter
-) => (context: MunicipalityProperties & { value: number }): ReactNode => {
+) => (context: MunicipalityProperties & { value?: number }): ReactNode => {
   const handler = createSelectMunicipalHandler(router);
 
   const onSelect = (event: any) => {
