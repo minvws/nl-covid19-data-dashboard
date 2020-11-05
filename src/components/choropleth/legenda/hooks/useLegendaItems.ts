@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { ILegendaItem } from '../ChoroplethLegenda';
+import { ILegendaItem } from '../../../../components-styled/choropleth-legenda';
 
 import { ChoroplethThresholdsValue } from '~/components/choropleth/shared';
 
