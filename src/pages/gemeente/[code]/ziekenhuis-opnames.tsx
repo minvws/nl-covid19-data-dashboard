@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { LineChart } from '~/components/charts/index';
 import { ChoroplethLegenda } from '~/components/choropleth2/legenda/ChoroplethLegenda';
-import { useMunicipalLegendaData } from '~/components/choropleth2/legenda/hooks/useMunicipalLegendaData';
+import { useMunicipalLegendaData } from '~/components/choropleth2/legenda/hooks/use-municipal-legenda-data';
 import { MunicipalityChoropleth } from '~/components/choropleth2/municipality-choropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth2/selectHandlers/createSelectMunicipalHandler';
 import { createMunicipalHospitalAdmissionsTooltip } from '~/components/choropleth2/tooltips/municipal/createMunicipalHospitalAdmissionsTooltip';

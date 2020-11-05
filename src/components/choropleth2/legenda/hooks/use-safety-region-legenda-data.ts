@@ -1,6 +1,6 @@
 import { TRegionMetricName, TRegionsNursingHomeMetricName } from '../../shared';
 import { getSelectedThreshold } from '../utils';
-import { useLegendaItems } from './useLegendaItems';
+import { useLegendaItems } from './use-legenda-items';
 
 export function useSafetyRegionLegendaData(
   metric: TRegionMetricName,

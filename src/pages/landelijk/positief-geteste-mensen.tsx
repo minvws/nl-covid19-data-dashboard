@@ -12,7 +12,7 @@ import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
 import { BarChart } from '~/components/charts/index';
-import { useSafetyRegionLegendaData } from '~/components/choropleth2/legenda/hooks/useSafetyRegionLegendaData';
+import { useSafetyRegionLegendaData } from '~/components/choropleth2/legenda/hooks/use-safety-region-legenda-data';
 import { MunicipalityChoropleth } from '~/components/choropleth2/municipality-choropleth';
 import { SafetyRegionChoropleth } from '~/components/choropleth2/safety-region-choropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth2/selectHandlers/createSelectMunicipalHandler';

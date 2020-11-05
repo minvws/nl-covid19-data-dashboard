@@ -8,7 +8,7 @@ import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
-import { useSafetyRegionLegendaData } from '~/components/choropleth2/legenda/hooks/useSafetyRegionLegendaData';
+import { useSafetyRegionLegendaData } from '~/components/choropleth2/legenda/hooks/use-safety-region-legenda-data';
 import { MunicipalityChoropleth } from '~/components/choropleth2/municipality-choropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth2/selectHandlers/createSelectMunicipalHandler';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth2/tooltips/municipal/createPositiveTestedPeopleMunicipalTooltip';

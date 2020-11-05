@@ -4,7 +4,7 @@ import path from 'path';
 import { useState } from 'react';
 import ExternalLink from '~/assets/external-link.svg';
 import Notification from '~/assets/notification.svg';
-import { useSafetyRegionLegendaData } from '~/components/choropleth2/legenda/hooks/useSafetyRegionLegendaData';
+import { useSafetyRegionLegendaData } from '~/components/choropleth2/legenda/hooks/use-safety-region-legenda-data';
 import { MunicipalityChoropleth } from '~/components/choropleth2/municipality-choropleth';
 import { SafetyRegionChoropleth } from '~/components/choropleth2/safety-region-choropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth2/selectHandlers/createSelectMunicipalHandler';

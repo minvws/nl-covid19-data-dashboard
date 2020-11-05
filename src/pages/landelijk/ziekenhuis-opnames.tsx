@@ -7,7 +7,7 @@ import { KpiValue } from '~/components-styled/kpi-value';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { ChartRegionControls } from '~/components-styled/chart-region-controls';
 import { ChoroplethLegenda } from '~/components/choropleth2/legenda/ChoroplethLegenda';
-import { useSafetyRegionLegendaData } from '~/components/choropleth2/legenda/hooks/useSafetyRegionLegendaData';
+import { useSafetyRegionLegendaData } from '~/components/choropleth2/legenda/hooks/use-safety-region-legenda-data';
 import { MunicipalityChoropleth } from '~/components/choropleth2/municipality-choropleth';
 import { SafetyRegionChoropleth } from '~/components/choropleth2/safety-region-choropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth2/selectHandlers/createSelectMunicipalHandler';
