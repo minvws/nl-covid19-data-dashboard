@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { isDefined } from 'ts-is-present';
 import { jsonBasePath } from '../base-paths';
-import { RegionalRestrictions, Restrictions } from '../../../types/data';
+import { RegionalRestrictions } from '../../../types/data';
 
 export const validateRestrictionIds = (
   input: Record<string, unknown>
@@ -20,16 +20,16 @@ export const validateRestrictionIds = (
   }
 
   try {
-    const restrictionData: Restrictions = JSON.parse(
+    const restrictionData: RegionalRestrictions = JSON.parse(
       fs.readFileSync(sourcePath, { encoding: 'utf8' })
     );
 
     const restrictionIds = restrictionData.values.map((x) => x.restriction_id);
 
     const result = regionalRestrictions.values
-      .map((restrictionIdentifier) => {
-        if (!restrictionIds.includes(restrictionIdentifier)) {
-          return `Restriction id '${restrictionIdentifier}' was not found in ${sourcePath}`;
+      .map((value) => {
+        if (!restrictionIds.includes(value.restriction_id)) {
+          return `Restriction id '${value.restriction_id}' was not found in ${sourcePath}`;
         }
       })
       .filter(isDefined);
