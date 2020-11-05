@@ -13,7 +13,7 @@
       "$ref": "#/definitions/diff_integer"
     }
   },
-  "required": ["huisarts_verdenkingen"],
+  "required": ["huisarts_verdenkingen__incidentie", "huisarts_verdenkingen__geschat_aantal", "infected_people_total__infected_daily_total"],
   "additionalProperties": false,
   "definitions": {
     "diff_integer": {
