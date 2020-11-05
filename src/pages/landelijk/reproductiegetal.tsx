@@ -70,10 +70,7 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
           <Legenda>
             <li className="blue">{text.legenda_r}</li>
           </Legenda>
-          <Metadata
-            date={lastKnownValidData.last_value.date_of_report_unix}
-            source={text.bron}
-          />
+          <Metadata source={text.bron} />
         </article>
       )}
     </>

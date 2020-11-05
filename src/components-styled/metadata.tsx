@@ -20,19 +20,16 @@ function formatMetadataDate(date: number | [number, number]): string {
     });
   }
 
-  return replaceVariablesInText(
-    'Waarde vannneh : {{dateFrom}} TOOO {{dateTo}}',
-    {
-      dateFrom: formatDateFromSeconds(date[0], 'weekday-medium'),
-      dateTo: formatDateFromSeconds(date[1], 'weekday-medium'),
-    }
-  );
+  return replaceVariablesInText(locale.common.metadata.dateFromTo, {
+    dateFrom: formatDateFromSeconds(date[0], 'weekday-medium'),
+    dateTo: formatDateFromSeconds(date[1], 'weekday-medium'),
+  });
 }
 
 export function Metadata({ date, source }: MetadataProps) {
   const dateString = date ? formatMetadataDate(date) : null;
   return (
-    <Box as="footer" mt={3}>
+    <Box as="footer" mt={3} gridArea="metadata">
       <Text color="annotation" fontSize={1}>
         {dateString}
         {dateString && source ? ' · ' : null}

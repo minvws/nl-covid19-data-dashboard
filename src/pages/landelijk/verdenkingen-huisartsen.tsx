@@ -80,7 +80,7 @@ const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
               },
             }))}
           />
-          <Metadata date={data.last_value.week_unix} source={text.bron} />
+          <Metadata source={text.bron} />
         </article>
       )}
     </>

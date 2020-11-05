@@ -93,10 +93,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
               date: value.date_of_report_unix,
             }))}
           />
-          <Metadata
-            date={resultsPerRegion.last_value.date_of_report_unix}
-            source={text.bron}
-          />
+          <Metadata source={text.bron} />
         </article>
       )}
       <article className="metric-article layout-choropleth">

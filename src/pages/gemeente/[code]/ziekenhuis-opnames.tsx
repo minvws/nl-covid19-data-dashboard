@@ -92,10 +92,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
               date: value.date_of_report_unix,
             }))}
           />
-          <Metadata
-            date={hospitalAdmissions.last_value.date_of_report_unix}
-            source={text.bron}
-          />
+          <Metadata source={text.bron} />
         </article>
       )}
 

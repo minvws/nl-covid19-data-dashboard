@@ -57,7 +57,7 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
           title={text.barscale_titel}
           description={text.extra_uitleg}
           metadata={{
-            date: sewerAverages.last_value.week_end_unix,
+            date: [sewerAverages.last_value.week_start_unix, sewerAverages.last_value.week_end_unix],
             source: text.bron,
           }}
         >
@@ -73,7 +73,7 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
             `<p style="color:#595959">${text.rwzi_abbrev}</p>`
           }
           metadata={{
-            date: sewerAverages.last_value.week_end_unix,
+            date: [sewerAverages.last_value.week_start_unix, sewerAverages.last_value.week_end_unix],
             source: text.bron,
           }}
         >
