@@ -7,4 +7,5 @@ export type RegioPageName =
   | PageName
   | 'verpleeghuis-positief-geteste-personen'
   | 'verpleeghuis-besmette-locaties'
-  | 'verpleeghuis-sterfte';
+  | 'verpleeghuis-sterfte'
+  | 'maatregelen';

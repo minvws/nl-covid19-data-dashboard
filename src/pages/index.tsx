@@ -1,4 +1,3 @@
-import fs from 'fs';
 import { useRouter } from 'next/router';
 import path from 'path';
 import { useState } from 'react';
@@ -24,6 +23,7 @@ import { assert } from '~/utils/assert';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import css from '@styled-system/css';
+import { loadJsonFromFile } from '~/static-props/utils/load-json-from-file';
 
 interface StaticProps {
   props: INationalHomepageData;
@@ -187,19 +187,15 @@ export async function getStaticProps(): Promise<StaticProps> {
 
   text.veiligheidsregio_index.selecteer_toelichting = serializedContent;
 
-  const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
-  const fileContents = fs.readFileSync(filePath, 'utf8');
-  const data = JSON.parse(fileContents) as National;
+  const data = loadJsonFromFile<National>(
+    path.join(process.cwd(), 'public', 'json', 'NL.json')
+  );
+
   const lastGenerated = data.last_generated;
 
-  const regionsFilePath = path.join(
-    process.cwd(),
-    'public',
-    'json',
-    'REGIONS.json'
+  const regionsData = loadJsonFromFile<Regions>(
+    path.join(process.cwd(), 'public', 'json', 'REGIONS.json')
   );
-  const regionsFileContents = fs.readFileSync(regionsFilePath, 'utf8');
-  const regionsData = JSON.parse(regionsFileContents) as Regions;
 
   const escalationLevels = regionsData.escalation_levels;
   const escalationLevelCounts = getEscalationCounts(escalationLevels);

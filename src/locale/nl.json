@@ -51,6 +51,22 @@
     "terug_naar_alle_cijfers": "Terug naar alle cijfers",
     "terug_naar_alle_cijfers_homepage": "Terug naar alle cijfers"
   },
+  "restriction_categories": {
+    "er_op_uit":"Er op uit",
+    "bezoek":"Thuisbezoek familie en vrienden",
+    "samenkomst":"Samenkomsten",
+    "huwelijk":"Huwelijksvoltrekkingen",
+    "verpleeghuis":"Verpleeghuizen",
+    "horeca":"Horeca",
+    "sport":"Sport",
+    "reizen_binnenland":"Binnenlandse reizen",
+    "ov":"OV",
+    "uitvaart":"Uitvaart",
+    "onderwijs":"Onderwijs",
+    "werk":"Werk",
+    "winkels":"Winkels",
+    "alcohol":"Alcohol en softdrugs"
+  },
   "ic_opnames_per_dag": {
     "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
     "bron": {
@@ -663,6 +679,7 @@
   },
   "veiligheidsregio_layout": {
     "headings": {
+      "maatregelen": "Maatregelen",
       "medisch": "Medische indicatoren",
       "overig": "Vroegsignalering",
       "verpleeghuis": "Verpleeghuiszorg"
@@ -677,7 +694,45 @@
     "title": "Gemeente"
   },
   "veiligheidsregio_maatregelen": {
-    "title": "Risiconiveau en Maatregelen"
+    "titel_sidebar": "Risiconiveau en Maatregelen",
+    "titel": "Risiconiveau en Maatregelen in {{safetyRegionName}}",
+    "titel_risiconiveau": "Risiconiveau",
+    "toelichting_risiconiveau": "De situatie in deze regio is zorgelijk en ontwikkelt zich negatief. Daarom zijn er naast de landelijke maatregelen aanvullende maatregelen getroffen.",
+    "linktext_riskpage": "Meer over de risiconiveaus",
+    "linktext_regionpage": "Website veiligheidsregio {{safetyRegionName}}",
+    "titel_aanvullendemaatregelen": "Aanvullende maatregelen",
+    "toelichting_aanvullendemaatregelen": "Lokaal of regionaal kunnen aanvullend nog strengere maatregelen gelden. Kijk hiervoor op de website van de veiligheidsregio.",
+    "metadata": {
+      "title": "Risiconiveau en Maatregelen in {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Overzicht van de corona maatregelen in de veiligheidsregio {{safetyRegionName}}."
+    }
+  },
+  "veiligheidsregio_maatregelen_urls": {
+    "VR01": "",
+    "VR02": "http://www.google.com",
+    "VR03": "",
+    "VR04": "",
+    "VR05": "",
+    "VR06": "",
+    "VR07": "",
+    "VR08": "",
+    "VR09": "",
+    "VR10": "",
+    "VR11": "",
+    "VR12": "",
+    "VR13": "",
+    "VR14": "",
+    "VR15": "",
+    "VR16": "",
+    "VR17": "",
+    "VR18": "",
+    "VR19": "",
+    "VR20": "",
+    "VR21": "",
+    "VR22": "",
+    "VR23": "",
+    "VR24": "",
+    "VR25": ""
   },
   "veiligheidsregio_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Ziekenhuisopnames",
@@ -914,7 +969,8 @@
     "legenda": {
       "titel": "Legenda"
     },
-    "valid_from": "Geldig vanaf {{validFrom}}"
+    "valid_from": "Geldig vanaf {{validFrom}}",
+    "sidebar_label": "Risiconiveau:"
   },
   "gemeente_layout": {
     "headings": {

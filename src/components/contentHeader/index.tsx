@@ -1,9 +1,10 @@
 import { Metadata } from './metadata';
 import { TitleWithIcon } from '~/components/titleWithIcon';
 import styles from '../layout/layout.module.scss';
+import { ReactNode } from 'react';
 
-export function ContentHeader(props: IContentHeaderProps) {
-  const { category, Icon, title, subtitle, metadata, id } = props;
+export function GenericContentHeader(props: ISmallContentHeaderProps) {
+  const { category, Icon, title, id, children } = props;
 
   const layoutClasses = [styles.contentHeader];
 
@@ -18,7 +19,16 @@ export function ContentHeader(props: IContentHeaderProps) {
     <header id={id} className={layoutClasses.join(' ')}>
       {category && <p className={styles.category}>{category}</p>}
       <TitleWithIcon Icon={Icon} title={title} as="h2" />
+      {children}
+    </header>
+  );
+}
 
+export function ContentHeader(props: IContentHeaderProps) {
+  const { category, Icon, title, subtitle, metadata, id } = props;
+
+  return (
+    <GenericContentHeader title={title} id={id} category={category} Icon={Icon}>
       <div className={styles.text}>
         <p>{subtitle}</p>
 
@@ -26,12 +36,20 @@ export function ContentHeader(props: IContentHeaderProps) {
           <Metadata {...metadata} />
         </div>
       </div>
-    </header>
+    </GenericContentHeader>
   );
 }
 
-interface IContentHeaderProps {
+interface ISmallContentHeaderProps {
+  category?: string;
+  Icon?: React.ComponentType;
   title: string;
+  id?: string;
+  children?: ReactNode;
+}
+
+interface IContentHeaderProps
+  extends Omit<ISmallContentHeaderProps, 'children'> {
   subtitle: string;
   metadata: {
     datumsText: string;
@@ -42,7 +60,4 @@ interface IContentHeaderProps {
       text: string;
     };
   };
-  category?: string;
-  Icon?: React.ComponentType;
-  id?: string;
 }

@@ -1,4 +1,3 @@
-import fs from 'fs';
 import { useRouter } from 'next/router';
 import path from 'path';
 import EscalationLevel1 from '~/assets/niveau-1.svg';
@@ -15,6 +14,8 @@ import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { SEOHead } from '~/components/seoHead';
 import { TALLLanguages } from '~/locale/index';
+import { loadJsonFromFile } from '~/static-props/utils/load-json-from-file';
+import { National } from '~/types/data';
 import { MDToHTMLString } from '~/utils/MDToHTMLString';
 
 const escalationThresholds = (regionThresholds.escalation_levels as ChoroplethThresholds)
@@ -86,7 +87,7 @@ const SafetyRegion: FCWithLayout<any> = (props) => {
           <SafetyRegionChoropleth
             metricName="escalation_levels"
             metricValueName="escalation_level"
-            onSelect={createSelectRegionHandler(router)}
+            onSelect={createSelectRegionHandler(router, 'maatregelen')}
             tooltipContent={escalationTooltip(router)}
           />
         </div>
@@ -115,9 +116,11 @@ export async function getStaticProps(): Promise<{ props: StaticProps }> {
 
   text.veiligheidsregio_index.selecteer_toelichting = serializedContent;
 
-  const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
-  const fileContents = fs.readFileSync(filePath, 'utf8');
-  const lastGenerated = JSON.parse(fileContents).last_generated;
+  const data = loadJsonFromFile<National>(
+    path.join(process.cwd(), 'public', 'json', 'NL.json')
+  );
+
+  const lastGenerated = data.last_generated;
 
   return { props: { text, lastGenerated } };
 }

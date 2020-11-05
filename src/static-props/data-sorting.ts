@@ -10,7 +10,9 @@ export function sortNationalTimeSeriesInDataInPlace(data: National) {
 }
 
 export function sortRegionalTimeSeriesInDataInPlace(data: Regionaal) {
-  const timeSeriesPropertyNames = getTimeSeriesPropertyNames(data);
+  const timeSeriesPropertyNames = getTimeSeriesPropertyNames(data).filter(
+    (propertyName) => propertyName !== 'restrictions'
+  );
 
   for (const propertyName of timeSeriesPropertyNames) {
     /**

@@ -22,6 +22,7 @@ import siteText from '~/locale/index';
 import { ISafetyRegionData } from '~/static-props/safetyregion-data';
 import { getSewerWaterBarScaleData } from '~/utils/sewer-water/safety-region-sewer-water.util';
 import { useMediaQuery } from '~/utils/useMediaQuery';
+import { EscalationLevelInfo } from '../common/escalation-level';
 import { useMenuState } from './useMenuState';
 
 export function getSafetyRegionLayout() {
@@ -150,8 +151,14 @@ function SafetyRegionLayout(
                       )}`}
                     >
                       <TitleWithIcon
-                        title={siteText.veiligheidsregio_maatregelen.title}
-                        subtitle={escalationLevel.toString()}
+                        title={
+                          siteText.veiligheidsregio_maatregelen.titel_sidebar
+                        }
+                        subtitle={
+                          <EscalationLevelInfo
+                            escalationLevel={escalationLevel}
+                          />
+                        }
                       />
                     </a>
                   </Link>

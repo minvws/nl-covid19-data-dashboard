@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 import styles from './titleWithIcon.module.scss';
 
 interface IProps {
   Icon?: React.ComponentType;
   title: string;
-  subtitle?: string;
+  subtitle?: ReactNode;
   regio?: string;
   headingRef?: React.RefObject<HTMLHeadingElement>;
   as?: 'h2' | 'h3';

@@ -51,6 +51,22 @@
     "terug_naar_alle_cijfers": "Overview",
     "terug_naar_alle_cijfers_homepage": "Overview"
   },
+  "restriction_categories": {
+    "er_op_uit":"",
+    "bezoek":"",
+    "samenkomst":"",
+    "huwelijk":"",
+    "verpleeghuis":"",
+    "horeca":"",
+    "sport":"",
+    "reizen_binnenland":"",
+    "ov":"",
+    "uitvaart":"",
+    "onderwijs":"",
+    "werk":"",
+    "winkels":"",
+    "alcohol":""
+  },
   "ic_opnames_per_dag": {
     "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
     "bron": {
@@ -663,6 +679,7 @@
   },
   "veiligheidsregio_layout": {
     "headings": {
+      "maatregelen": "Restrictions",
       "medisch": "Medical indicators",
       "overig": "Other indicators",
       "verpleeghuis": "Nursing homes"
@@ -677,7 +694,45 @@
     "title": "Municipality"
   },
   "veiligheidsregio_maatregelen": {
-    "title": ""
+    "titel_sidebar": "",
+    "titel": "",
+    "titel_risiconiveau": "",
+    "toelichting_risiconiveau": "",
+    "linktext_riskpage": "",
+    "linktext_regionpage": "",
+    "titel_aanvullendemaatregelen": "",
+    "toelichting_aanvullendemaatregelen": "",
+    "metadata": {
+      "title": "",
+      "description": "{{safetyRegionName}}."
+    }
+  },
+  "veiligheidsregio_maatregelen_urls": {
+    "VR01": "",
+    "VR02": "",
+    "VR03": "",
+    "VR04": "",
+    "VR05": "",
+    "VR06": "",
+    "VR07": "",
+    "VR08": "",
+    "VR09": "",
+    "VR10": "",
+    "VR11": "",
+    "VR12": "",
+    "VR13": "",
+    "VR14": "",
+    "VR15": "",
+    "VR16": "",
+    "VR17": "",
+    "VR18": "",
+    "VR19": "",
+    "VR20": "",
+    "VR21": "",
+    "VR22": "",
+    "VR23": "",
+    "VR24": "",
+    "VR25": ""
   },
   "veiligheidsregio_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Hospital admissions",
@@ -914,7 +969,8 @@
     "legenda": {
       "titel": "Legend"
     },
-    "valid_from": "Valid from {{validFrom}}"
+    "valid_from": "Valid from {{validFrom}}",
+    "sidebar_label": "Risiconiveau"
   },
   "gemeente_layout": {
     "headings": {

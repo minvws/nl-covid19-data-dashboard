@@ -2,7 +2,6 @@ import fs from 'fs';
 
 import { jsonBasePath, localeBasePath } from './base-paths';
 import { validatePlaceholders } from './custom-validations/validate-placeholders';
-// import { validRestrictionIds } from './custom-validations/valid-restriction-ds';
 
 export type CustomValidationFunction = (
   input: Record<string, unknown>
@@ -26,8 +25,6 @@ export const schemaInformation: Record<string, SchemaInfo> = {
   regional: {
     files: filterFilenames(allJsonFiles, /^VR[0-9]+.json$/),
     basePath: jsonBasePath,
-    // COmmenting this out for now until we have actual data:
-    // customValidations: [validRestrictionIds],
   },
   municipal: {
     files: filterFilenames(allJsonFiles, /^GM[0-9]+.json$/),

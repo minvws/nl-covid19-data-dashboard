@@ -11,7 +11,8 @@
     "ggd",
     "nursing_home",
     "sewer",
-    "sewer_per_installation"
+    "sewer_per_installation",
+    "restrictions"
   ],
   "additionalProperties": false,
   "properties": {
