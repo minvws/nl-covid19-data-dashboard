@@ -141,7 +141,7 @@ export interface National {
 export interface NationalDifference {
   infected_people_delta_normalized__infected_daily_increase: NationalDifferenceDecimal;
   infected_people_total__infected_daily_total: NationalDifferenceInteger;
-  ggd__infected: NationalDifferenceInteger;
+  ggd__tested_total: NationalDifferenceInteger;
   ggd__infected_percentage: NationalDifferenceDecimal;
   reproduction_index_last_known_average__reproduction_index_avg: NationalDifferenceDecimal;
   infectious_people_count_normalized__infectious_avg_normalized: NationalDifferenceInteger;
@@ -476,7 +476,7 @@ export interface Regionaal {
 export interface RegionalDifference {
   results_per_region__infected_increase_per_region: RegionalDifferenceInteger;
   results_per_region__total_reported_increase_per_region: RegionalDifferenceInteger;
-  ggd__infected: RegionalDifferenceInteger;
+  ggd__tested_total: RegionalDifferenceInteger;
   ggd__infected_percentage: RegionalDifferenceDecimal;
   results_per_region__hospital_moving_avg_per_region: RegionalDifferenceInteger;
   results_per_region__hospital_total_counts_per_region: RegionalDifferenceInteger;
