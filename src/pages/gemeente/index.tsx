@@ -4,7 +4,7 @@ import { MunicipalityChoropleth } from '~/components/choropleth2/municipality-ch
 import {
   createSelectMunicipalHandler,
   MunicipalitySelectionHandler,
-} from '~/components/choropleth2/selectHandlers/createSelectMunicipalHandler';
+} from '~/components/choropleth2/select-handlers/create-select-municipal-handler';
 import { MunicipalityProperties } from '~/components/choropleth2/shared';
 import { TooltipContent } from '~/components/choropleth2/tooltips/tooltipContent';
 import { FCWithLayout } from '~/components/layout';

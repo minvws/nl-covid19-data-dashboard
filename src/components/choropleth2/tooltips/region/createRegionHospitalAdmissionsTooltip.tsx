@@ -1,6 +1,6 @@
 import { NextRouter } from 'next/router';
 import { ReactNode } from 'react';
-import { createSelectRegionHandler } from '~/components/choropleth2/selectHandlers/createSelectRegionHandler';
+import { createSelectRegionHandler } from '~/components/choropleth2/select-handlers/create-select-region-handler';
 import { SafetyRegionProperties } from '~/components/choropleth2/shared';
 import { TooltipContent } from '~/components/choropleth2/tooltips/tooltipContent';
 import { formatNumber } from '~/utils/formatNumber';

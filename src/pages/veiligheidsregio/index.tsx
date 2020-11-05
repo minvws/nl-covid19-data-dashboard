@@ -7,7 +7,7 @@ import EscalationLevel3 from '~/assets/niveau-3.svg';
 import EscalationLevel4 from '~/assets/niveau-4.svg';
 import { regionThresholds } from '~/components/choropleth2/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth2/safety-region-choropleth';
-import { createSelectRegionHandler } from '~/components/choropleth2/selectHandlers/createSelectRegionHandler';
+import { createSelectRegionHandler } from '~/components/choropleth2/select-handlers/create-select-region-handler';
 import { ChoroplethThresholds } from '~/components/choropleth2/shared';
 import { escalationTooltip } from '~/components/choropleth2/tooltips/region/escalationTooltip';
 import styles from '~/components/choropleth2/tooltips/tooltip.module.scss';

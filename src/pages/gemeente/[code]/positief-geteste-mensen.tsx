@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
 import Getest from '~/assets/test.svg';
-import { ChoroplethLegenda } from '~/components/choropleth2/legenda/ChoroplethLegenda';
+import { ChoroplethLegenda } from '~/components/choropleth2/legenda/choropleth-legenda';
 import { useMunicipalLegendaData } from '~/components/choropleth2/legenda/hooks/use-municipal-legenda-data';
 import { MunicipalityChoropleth } from '~/components/choropleth2/municipality-choropleth';
-import { createSelectMunicipalHandler } from '~/components/choropleth2/selectHandlers/createSelectMunicipalHandler';
+import { createSelectMunicipalHandler } from '~/components/choropleth2/select-handlers/create-select-municipal-handler';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth2/tooltips/municipal/createPositiveTestedPeopleMunicipalTooltip';
 import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/contentHeader';

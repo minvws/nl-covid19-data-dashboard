@@ -1,7 +1,7 @@
 import { NextRouter } from 'next/router';
 import { ReactNode } from 'react';
 import { MunicipalityProperties } from '../../shared';
-import { createSelectMunicipalHandler } from '../../selectHandlers/createSelectMunicipalHandler';
+import { createSelectMunicipalHandler } from '../../select-handlers/create-select-municipal-handler';
 import { TooltipContent } from '~/components/choropleth2/tooltips/tooltipContent';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import siteText from '~/locale/index';

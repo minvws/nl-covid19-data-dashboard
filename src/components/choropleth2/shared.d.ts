@@ -13,14 +13,14 @@ export type TMunicipalityMetricName = TMetricHolder<
 export type TMunicipalityMetricType = ValueOf<
   Pick<Municipalities, TMunicipalityMetricName>
 >[number] &
-  Partial<MunicipalityProperties>; // & { value: number };
+  Partial<MunicipalityProperties>;
 
 export type TRegionMetricName = TMetricHolder<Omit<Regions, 'deceased'>>;
 
 export type TRegionMetricType = ValueOf<
   Pick<Regions, TRegionMetricName>
 >[number] &
-  Partial<SafetyRegionProperties>; // & { value: number };
+  Partial<SafetyRegionProperties>;
 
 export type TRegionsNursingHomeMetricName = keyof Omit<
   RegionsNursingHome,
