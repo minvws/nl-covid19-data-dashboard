@@ -17,7 +17,7 @@ import {
   getMunicipalityPaths,
   IMunicipalityData,
 } from '~/static-props/municipality-data';
-import { HospitalAdmissions } from '~/types/data.d';
+import { MunicipalHospitalAdmissions } from '~/types/data.d';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { Metadata } from '~/components-styled/metadata';
@@ -29,7 +29,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
   const router = useRouter();
 
   const legendItems = useMunicipalLegendaData('hospital_admissions');
-  const hospitalAdmissions: HospitalAdmissions | undefined =
+  const hospitalAdmissions: MunicipalHospitalAdmissions | undefined =
     data?.hospital_admissions;
 
   return (

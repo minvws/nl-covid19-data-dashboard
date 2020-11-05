@@ -15,7 +15,7 @@ import {
   getMunicipalityPaths,
   IMunicipalityData,
 } from '~/static-props/municipality-data';
-import { PositiveTestedPeople } from '~/types/data.d';
+import { MunicipalPositiveTestedPeople } from '~/types/data.d';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { KpiTile } from '~/components-styled/kpi-tile';
@@ -31,7 +31,7 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
   const router = useRouter();
 
   const legendItems = useMunicipalLegendaData('positive_tested_people');
-  const positivelyTestedPeople: PositiveTestedPeople | undefined =
+  const positivelyTestedPeople: MunicipalPositiveTestedPeople | undefined =
     data?.positive_tested_people;
 
   return (

@@ -1,33 +1,27 @@
 import classNames from 'classnames';
 import { SafetyRegionProperties, TMunicipalityMetricName } from './shared';
 
-import { Choropleth } from './Choropleth';
+import { Choropleth } from './choropleth';
 import { Feature, GeoJsonProperties, MultiPolygon } from 'geojson';
-import { useChartDimensions } from './hooks/useChartDimensions';
+import { useChartDimensions } from './hooks/use-chart-dimensions';
 
 import styles from './choropleth.module.scss';
 import { CSSProperties, ReactNode, useCallback } from 'react';
-import { Municipalities } from '~/types/data';
-import { useMunicipalityData } from './hooks/useMunicipalityData';
-import { useChoroplethColorScale } from './hooks/useChoroplethColorScale';
-import { useMunicipalityBoundingbox } from './hooks/useMunicipalityBoundingbox';
+import { useMunicipalityData } from './hooks/use-municipality-data';
+import { useChoroplethColorScale } from './hooks/use-choropleth-color-scale';
+import { useMunicipalityBoundingbox } from './hooks/use-municipality-boundingbox';
 import { MunicipalityProperties } from './shared';
-import { useRegionMunicipalities } from './hooks/useRegionMunicipalities';
+import { useRegionMunicipalities } from './hooks/use-region-municipalities';
 import { countryGeo, municipalGeo, regionGeo } from './topology';
-import { municipalThresholds } from './municipalThresholds';
+import { municipalThresholds } from './municipal-thresholds';
 
-export type TProps<
-  T extends TMunicipalityMetricName,
-  ItemType extends Municipalities[T][number],
-  ReturnType extends ItemType & { value: number },
-  TContext extends ReturnType | MunicipalityProperties
-> = {
-  metricName?: T;
+export type TProps = {
+  metricName?: TMunicipalityMetricName;
   selected?: string;
   highlightSelection?: boolean;
   style?: CSSProperties;
-  onSelect?: (context: TContext) => void;
-  tooltipContent?: (context: TContext) => ReactNode;
+  onSelect?: (context: MunicipalityProperties) => void;
+  tooltipContent?: (context: MunicipalityProperties) => ReactNode;
   isSelectorMap?: boolean;
 };
 
@@ -45,12 +39,7 @@ export type TProps<
  *
  * @param props
  */
-export function MunicipalityChoropleth<
-  T extends TMunicipalityMetricName,
-  ItemType extends Municipalities[T][number],
-  ReturnType extends ItemType & { value: number },
-  TContext extends ReturnType | MunicipalityProperties
->(props: TProps<T, ItemType, ReturnType, TContext>) {
+export function MunicipalityChoropleth(props: TProps) {
   const {
     selected,
     style,
@@ -75,6 +64,7 @@ export function MunicipalityChoropleth<
   const thresholdValues = metricName
     ? municipalThresholds[metricName]
     : undefined;
+
   const getFillColor = useChoroplethColorScale(
     getData,
     thresholdValues?.thresholds

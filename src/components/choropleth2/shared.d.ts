@@ -10,7 +10,17 @@ export type TMunicipalityMetricName = TMetricHolder<
   Omit<Municipalities, 'deceased'>
 >;
 
+export type TMunicipalityMetricType = ValueOf<
+  Pick<Municipalities, TMunicipalityMetricName>
+>[number] &
+  Partial<MunicipalityProperties>; // & { value: number };
+
 export type TRegionMetricName = TMetricHolder<Omit<Regions, 'deceased'>>;
+
+export type TRegionMetricType = ValueOf<
+  Pick<Regions, TRegionMetricName>
+>[number] &
+  Partial<SafetyRegionProperties>; // & { value: number };
 
 export type TRegionsNursingHomeMetricName = keyof Omit<
   RegionsNursingHome,

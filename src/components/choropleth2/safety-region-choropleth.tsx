@@ -2,14 +2,14 @@ import classNames from 'classnames';
 import { SafetyRegionProperties, TRegionMetricName } from './shared';
 import { Regions } from '~/types/data';
 import { CSSProperties, ReactNode, useCallback } from 'react';
-import { useChartDimensions } from './hooks/useChartDimensions';
-import { Choropleth } from './Choropleth';
+import { useChartDimensions } from './hooks/use-chart-dimensions';
+import { Choropleth } from './choropleth';
 import { countryGeo, regionGeo } from './topology';
 import { Feature, MultiPolygon } from 'geojson';
 import styles from './choropleth.module.scss';
-import { useSafetyRegionBoundingbox } from './hooks/useSafetyRegionBoundingbox';
-import { useChoroplethColorScale } from './hooks/useChoroplethColorScale';
-import { useSafetyRegionData } from './hooks/useSafetyRegionData';
+import { useSafetyRegionBoundingbox } from './hooks/use-safety-regionboundingbox';
+import { useChoroplethColorScale } from './hooks/use-choropleth-color-scale';
+import { useSafetyRegionData } from './hooks/use-safety-region-data';
 import { getSelectedThreshold } from './legenda/hooks/useSafetyRegionLegendaData';
 
 export type TProps<

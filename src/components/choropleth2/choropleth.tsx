@@ -5,7 +5,7 @@ import { memo, MutableRefObject, ReactNode, useRef } from 'react';
 import { Mercator } from '@vx/geo';
 import create, { UseStore } from 'zustand';
 
-import { TCombinedChartDimensions } from './hooks/useChartDimensions';
+import { TCombinedChartDimensions } from './hooks/use-chart-dimensions';
 
 import styles from './choropleth.module.scss';
 
