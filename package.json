@@ -75,7 +75,6 @@
     "download-cli": "^1.1.1",
     "eslint": "^7.7.0",
     "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-compat": "^3.8.0",
     "eslint-plugin-react": "^7.20.6",
     "eslint-plugin-react-hooks": "^4.1.0",
     "globby": "^11.0.1",
@@ -132,8 +131,6 @@
   },
   "browserslist": [
     "defaults",
-    "edge 17",
-    "edge 18",
     "not ie < 11"
   ]
 }
