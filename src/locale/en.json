@@ -65,7 +65,8 @@
     "onderwijs":"",
     "werk":"",
     "winkels":"",
-    "alcohol":""
+    "alcohol":"",
+    "algemeen": ""
   },
   "ic_opnames_per_dag": {
     "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",

@@ -65,7 +65,8 @@
     "onderwijs":"Onderwijs",
     "werk":"Werk",
     "winkels":"Winkels",
-    "alcohol":"Alcohol en softdrugs"
+    "alcohol":"Alcohol en softdrugs",
+    "algemeen": "Algemeen"
   },
   "ic_opnames_per_dag": {
     "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
@@ -709,7 +710,7 @@
   },
   "veiligheidsregio_maatregelen_urls": {
     "VR01": "",
-    "VR02": "http://www.google.com",
+    "VR02": "",
     "VR03": "",
     "VR04": "",
     "VR05": "",
