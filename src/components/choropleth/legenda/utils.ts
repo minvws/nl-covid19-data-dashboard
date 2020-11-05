@@ -1,4 +1,4 @@
-import { regionThresholds } from '~/components/choropleth2/region-thresholds';
+import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { ChoroplethThresholds, TRegionMetricName } from '../shared';
 
 export function getSelectedThreshold(

@@ -1,12 +1,12 @@
 import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
-import { MunicipalityChoropleth } from '~/components/choropleth2/municipality-choropleth';
+import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import {
   createSelectMunicipalHandler,
   MunicipalitySelectionHandler,
-} from '~/components/choropleth2/select-handlers/create-select-municipal-handler';
-import { MunicipalityProperties } from '~/components/choropleth2/shared';
-import { TooltipContent } from '~/components/choropleth2/tooltips/tooltipContent';
+} from '~/components/choropleth/select-handlers/create-select-municipal-handler';
+import { MunicipalityProperties } from '~/components/choropleth/shared';
+import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
 import { FCWithLayout } from '~/components/layout';
 import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
 import { SEOHead } from '~/components/seoHead';

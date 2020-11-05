@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router';
 import Getest from '~/assets/test.svg';
-import { ChoroplethLegenda } from '~/components/choropleth2/legenda/choropleth-legenda';
-import { useMunicipalLegendaData } from '~/components/choropleth2/legenda/hooks/use-municipal-legenda-data';
-import { MunicipalityChoropleth } from '~/components/choropleth2/municipality-choropleth';
-import { createSelectMunicipalHandler } from '~/components/choropleth2/select-handlers/create-select-municipal-handler';
-import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth2/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
+import { ChoroplethLegenda } from '~/components/choropleth/legenda/choropleth-legenda';
+import { useMunicipalLegendaData } from '~/components/choropleth/legenda/hooks/use-municipal-legenda-data';
+import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
+import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
+import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
 import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/contentHeader';
 import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
