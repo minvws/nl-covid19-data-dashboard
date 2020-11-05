@@ -9,7 +9,7 @@ import { regionThresholds } from '~/components/choropleth2/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth2/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth2/select-handlers/create-select-region-handler';
 import { ChoroplethThresholds } from '~/components/choropleth2/shared';
-import { escalationTooltip } from '~/components/choropleth2/tooltips/region/escalationTooltip';
+import { escalationTooltip } from '~/components/choropleth2/tooltips/region/escalation-tooltip';
 import styles from '~/components/choropleth2/tooltips/tooltip.module.scss';
 import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';

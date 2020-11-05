@@ -17,8 +17,8 @@ import { MunicipalityChoropleth } from '~/components/choropleth2/municipality-ch
 import { SafetyRegionChoropleth } from '~/components/choropleth2/safety-region-choropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth2/select-handlers/create-select-municipal-handler';
 import { createSelectRegionHandler } from '~/components/choropleth2/select-handlers/create-select-region-handler';
-import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth2/tooltips/municipal/createPositiveTestedPeopleMunicipalTooltip';
-import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth2/tooltips/region/createPositiveTestedPeopleRegionalTooltip';
+import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth2/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
+import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth2/tooltips/region/create-positive-tested-people-regional-tooltip';
 import { ContentHeader } from '~/components/contentHeader';
 import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRangeHack';
 import { PositiveTestedPeopleBarScale } from '~/components/landelijk/positive-tested-people-barscale';

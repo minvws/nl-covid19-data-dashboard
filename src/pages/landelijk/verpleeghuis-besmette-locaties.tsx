@@ -5,7 +5,7 @@ import { ChoroplethLegenda } from '~/components/choropleth2/legenda/choropleth-l
 import { useSafetyRegionLegendaData } from '~/components/choropleth2/legenda/hooks/use-safety-region-legenda-data';
 import { SafetyRegionChoropleth } from '~/components/choropleth2/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth2/select-handlers/create-select-region-handler';
-import { createInfectedLocationsRegionalTooltip } from '~/components/choropleth2/tooltips/region/createInfectedLocationsRegionalTooltip';
+import { createInfectedLocationsRegionalTooltip } from '~/components/choropleth2/tooltips/region/create-infected-locations-regional-tooltip';
 import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/contentHeader';
 import { getNationalLayout } from '~/components/layout/NationalLayout';

@@ -9,9 +9,9 @@ import { MunicipalityChoropleth } from '~/components/choropleth2/municipality-ch
 import { SafetyRegionChoropleth } from '~/components/choropleth2/safety-region-choropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth2/select-handlers/create-select-municipal-handler';
 import { createSelectRegionHandler } from '~/components/choropleth2/select-handlers/create-select-region-handler';
-import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth2/tooltips/municipal/createPositiveTestedPeopleMunicipalTooltip';
-import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth2/tooltips/region/createPositiveTestedPeopleRegionalTooltip';
-import { escalationTooltip } from '~/components/choropleth2/tooltips/region/escalationTooltip';
+import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth2/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
+import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth2/tooltips/region/create-positive-tested-people-regional-tooltip';
+import { escalationTooltip } from '~/components/choropleth2/tooltips/region/escalation-tooltip';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { TitleWithIcon } from '~/components/titleWithIcon';

@@ -4,7 +4,7 @@ import { ChoroplethLegenda } from '~/components/choropleth2/legenda/choropleth-l
 import { useMunicipalLegendaData } from '~/components/choropleth2/legenda/hooks/use-municipal-legenda-data';
 import { MunicipalityChoropleth } from '~/components/choropleth2/municipality-choropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth2/select-handlers/create-select-municipal-handler';
-import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth2/tooltips/municipal/createPositiveTestedPeopleMunicipalTooltip';
+import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth2/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
 import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/contentHeader';
 import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';

@@ -5,7 +5,7 @@ import { ChoroplethLegenda } from '~/components/choropleth2/legenda/choropleth-l
 import { useMunicipalLegendaData } from '~/components/choropleth2/legenda/hooks/use-municipal-legenda-data';
 import { MunicipalityChoropleth } from '~/components/choropleth2/municipality-choropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth2/select-handlers/create-select-municipal-handler';
-import { createMunicipalHospitalAdmissionsTooltip } from '~/components/choropleth2/tooltips/municipal/createMunicipalHospitalAdmissionsTooltip';
+import { createMunicipalHospitalAdmissionsTooltip } from '~/components/choropleth2/tooltips/municipal/create-municipal-hospital-admissions-tooltip';
 import { DataWarning } from '~/components/dataWarning';
 import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/contentHeader';
