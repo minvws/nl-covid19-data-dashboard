@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
 import Locatie from '~/assets/locaties.svg';
 import { LineChart } from '~/components/charts/index';
-import { ChoroplethLegenda } from '~/components/choropleth/legenda/ChoroplethLegenda';
-import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/useSafetyRegionLegendaData';
-import { SafetyRegionChoropleth } from '~/components/choropleth/SafetyRegionChoropleth';
-import { createSelectRegionHandler } from '~/components/choropleth/selectHandlers/createSelectRegionHandler';
-import { createInfectedLocationsRegionalTooltip } from '~/components/choropleth/tooltips/region/createInfectedLocationsRegionalTooltip';
+import { ChoroplethLegenda } from '~/components/choropleth2/legenda/ChoroplethLegenda';
+import { useSafetyRegionLegendaData } from '~/components/choropleth2/legenda/hooks/useSafetyRegionLegendaData';
+import { SafetyRegionChoropleth } from '~/components/choropleth2/safety-region-choropleth';
+import { createSelectRegionHandler } from '~/components/choropleth2/selectHandlers/createSelectRegionHandler';
+import { createInfectedLocationsRegionalTooltip } from '~/components/choropleth2/tooltips/region/createInfectedLocationsRegionalTooltip';
 import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/contentHeader';
 import { getNationalLayout } from '~/components/layout/NationalLayout';

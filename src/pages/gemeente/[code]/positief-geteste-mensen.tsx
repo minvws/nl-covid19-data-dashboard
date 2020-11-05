@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router';
 import Getest from '~/assets/test.svg';
-import { ChoroplethLegenda } from '~/components/choropleth/legenda/ChoroplethLegenda';
-import { useMunicipalLegendaData } from '~/components/choropleth/legenda/hooks/useMunicipalLegendaData';
-import { MunicipalityChoropleth } from '~/components/choropleth/MunicipalityChoropleth';
-import { createSelectMunicipalHandler } from '~/components/choropleth/selectHandlers/createSelectMunicipalHandler';
-import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/createPositiveTestedPeopleMunicipalTooltip';
+import { ChoroplethLegenda } from '~/components/choropleth2/legenda/ChoroplethLegenda';
+import { useMunicipalLegendaData } from '~/components/choropleth2/legenda/hooks/useMunicipalLegendaData';
+import { MunicipalityChoropleth } from '~/components/choropleth2/municipality-choropleth';
+import { createSelectMunicipalHandler } from '~/components/choropleth2/selectHandlers/createSelectMunicipalHandler';
+import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth2/tooltips/municipal/createPositiveTestedPeopleMunicipalTooltip';
 import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/contentHeader';
 import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';

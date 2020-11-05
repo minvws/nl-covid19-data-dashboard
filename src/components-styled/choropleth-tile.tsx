@@ -1,7 +1,7 @@
 import {
   ChoroplethLegenda,
   ILegendaItem,
-} from '~/components/choropleth/legenda/ChoroplethLegenda';
+} from '~/components/choropleth2/legenda/ChoroplethLegenda';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { Box } from './base';
 import {
