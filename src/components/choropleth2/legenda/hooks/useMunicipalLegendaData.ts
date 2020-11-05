@@ -1,5 +1,5 @@
-import { municipalThresholds } from '~/components/choropleth/municipalThresholds';
-import { TMunicipalityMetricName } from '~/components/choropleth/shared';
+import { municipalThresholds } from '~/components/choropleth2/municipal-thresholds';
+import { TMunicipalityMetricName } from '~/components/choropleth2/shared';
 import { useLegendaItems } from './useLegendaItems';
 
 export function useMunicipalLegendaData(metric: TMunicipalityMetricName) {
