@@ -1,12 +1,12 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "national_difference",
+  "title": "regional_difference",
   "type": "object",
   "properties": {
-    "infected_people_delta_normalized__infected_daily_increase": {
-      "$ref": "#/definitions/diff_decimal"
+    "results_per_region__infected_increase_per_region": {
+      "$ref": "#/definitions/diff_integer"
     },
-    "infected_people_total__infected_daily_total": {
+    "results_per_region__total_reported_increase_per_region": {
       "$ref": "#/definitions/diff_integer"
     },
     "ggd__infected": {
@@ -15,28 +15,10 @@
     "ggd__infected_percentage": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "reproduction_index_last_known_average__reproduction_index_avg": {
-      "$ref": "#/definitions/diff_decimal"
-    },
-    "infectious_people_count_normalized__infectious_avg_normalized": {
+    "results_per_region__hospital_moving_avg_per_region": {
       "$ref": "#/definitions/diff_integer"
     },
-    "intake_hospital_ma__moving_average_hospital": {
-      "$ref": "#/definitions/diff_integer"
-    },
-    "hospital_beds_occupied__covid_occupied": {
-      "$ref": "#/definitions/diff_integer"
-    },
-    "intake_intensivecare_ma__moving_average_ic": {
-      "$ref": "#/definitions/diff_integer"
-    },
-    "intensive_care_beds_occupied__covid_occupied": {
-      "$ref": "#/definitions/diff_integer"
-    },
-    "huisarts_verdenkingen__incidentie": {
-      "$ref": "#/definitions/diff_decimal"
-    },
-    "huisarts_verdenkingen__geschat_aantal": {
+    "results_per_region__hospital_total_counts_per_region": {
       "$ref": "#/definitions/diff_integer"
     },
     "sewer__average": {
@@ -53,18 +35,12 @@
     }
   },
   "required": [
-    "infected_people_delta_normalized__infected_daily_increase",
-    "infected_people_total__infected_daily_total",
+    "results_per_region__infected_increase_per_region",
+    "results_per_region__total_reported_increase_per_region",
     "ggd__infected",
     "ggd__infected_percentage",
-    "reproduction_index_last_known_average__reproduction_index_avg",
-    "infectious_people_count_normalized__infectious_avg_normalized",
-    "intake_hospital_ma__moving_average_hospital",
-    "hospital_beds_occupied__covid_occupied",
-    "intake_intensivecare_ma__moving_average_ic",
-    "intensive_care_beds_occupied__covid_occupied",
-    "huisarts_verdenkingen__incidentie",
-    "huisarts_verdenkingen__geschat_aantal",
+    "results_per_region__hospital_moving_avg_per_region",
+    "results_per_region__hospital_total_counts_per_region",
     "sewer__average",
     "nursing_home__newly_infected_people",
     "nursing_home__infected_locations_total",
@@ -73,7 +49,7 @@
   "additionalProperties": false,
   "definitions": {
     "diff_integer": {
-      "title": "national_difference_integer",
+      "title": "regional_difference_integer",
       "type": "object",
       "properties": {
         "old_value": {
@@ -90,7 +66,7 @@
       "additionalProperties": false
     },
     "diff_decimal": {
-      "title": "national_difference_decimal",
+      "title": "regional_difference_decimal",
       "type": "object",
       "properties": {
         "old_value": {
