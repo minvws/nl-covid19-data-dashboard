@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "national_differences",
+  "type": "object",
+  "properties": {
+    "huisarts_verdenkingen__incidentie": {
+      "$ref": "#/definitions/diff_integer"
+    },
+    "huisarts_verdenkingen__geschat_aantal": {
+      "$ref": "#/definitions/diff_integer"
+    },
+    "infected_people_total__infected_daily_total": {
+      "$ref": "#/definitions/diff_integer"
+    }
+  },
+  "required": ["huisarts_verdenkingen"],
+  "additionalProperties": false,
+  "definitions": {
+    "diff_integer": {
+      "title": "national_diff_integer",
+      "type": "object",
+      "properties": {
+        "old_value": {
+          "type": "integer"
+        },
+        "difference": {
+          "type": "integer"
+        },
+        "old_date_of_report_unix": {
+          "type": "integer"
+        }
+      },
+      "required": ["old_value", "difference", "old_date_of_report_unix"],
+      "additionalProperties": false
+    },
+    "diff_decimal": {
+      "title": "national_diff_decimal",
+      "type": "object",
+      "properties": {
+        "old_value": {
+          "type": "number"
+        },
+        "difference": {
+          "type": "number"
+        },
+        "old_date_of_report_unix": {
+          "type": "number"
+        }
+      },
+      "required": ["old_value", "difference", "old_date_of_report_unix"],
+      "additionalProperties": false
+    }
+  }
+}
