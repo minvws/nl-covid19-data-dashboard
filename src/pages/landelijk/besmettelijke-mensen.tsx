@@ -102,7 +102,7 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
             <li className="gray square">{text.legenda_marge}</li>
           </Legenda>
           <Metadata
-            date={count?.last_value?.date_of_report_unix}
+            date={count.last_value.date_of_report_unix}
             source={text.bron}
           />
         </article>

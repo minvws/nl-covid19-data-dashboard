@@ -121,10 +121,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
             valueAnnotation={siteText.waarde_annotaties.riool_normalized}
           />
         )}
-        <Metadata
-          date={sewerAverages.last_value.week_end_unix}
-          source={text.bron}
-        />
+        <Metadata source={text.bron} />
       </article>
 
       {barChartData && (

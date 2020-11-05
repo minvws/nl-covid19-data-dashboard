@@ -155,10 +155,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
           </>
         )}
 
-        <Metadata
-          date={sewerAverages.last_value.week_end_unix}
-          source={text.bron}
-        />
+        <Metadata source={text.bron} />
       </article>
 
       {barChartData && (
