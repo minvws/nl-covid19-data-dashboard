@@ -1,16 +1,18 @@
 import classNames from 'classnames';
-import { SafetyRegionProperties, TRegionMetricName } from './shared';
-import { Regions } from '~/types/data';
-import { CSSProperties, ReactNode, useCallback } from 'react';
-import { useChartDimensions } from './hooks/use-chart-dimensions';
-import { Choropleth } from './choropleth';
-import { countryGeo, regionGeo } from './topology';
 import { Feature, MultiPolygon } from 'geojson';
+import { CSSProperties, ReactNode, useCallback } from 'react';
+import { Regions } from '~/types/data';
+import { Choropleth } from './choropleth';
 import styles from './choropleth.module.scss';
-import { useSafetyRegionBoundingbox } from './hooks/use-safety-regionboundingbox';
-import { useChoroplethColorScale } from './hooks/use-choropleth-color-scale';
-import { useSafetyRegionData } from './hooks/use-safety-region-data';
-import { getSelectedThreshold } from './legenda/hooks/useSafetyRegionLegendaData';
+import {
+  useChartDimensions,
+  useChoroplethColorScale,
+  useSafetyRegionBoundingbox,
+  useSafetyRegionData,
+} from './hooks';
+import { getSelectedThreshold } from './legenda/utils';
+import { SafetyRegionProperties, TRegionMetricName } from './shared';
+import { countryGeo, regionGeo } from './topology';
 
 export type TProps<
   T extends TRegionMetricName,

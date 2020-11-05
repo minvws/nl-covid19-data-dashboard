@@ -1,19 +1,22 @@
 import classNames from 'classnames';
-import { SafetyRegionProperties, TMunicipalityMetricName } from './shared';
-
-import { Choropleth } from './choropleth';
 import { Feature, GeoJsonProperties, MultiPolygon } from 'geojson';
-import { useChartDimensions } from './hooks/use-chart-dimensions';
-
-import styles from './choropleth.module.scss';
 import { CSSProperties, ReactNode, useCallback } from 'react';
-import { useMunicipalityData } from './hooks/use-municipality-data';
-import { useChoroplethColorScale } from './hooks/use-choropleth-color-scale';
-import { useMunicipalityBoundingbox } from './hooks/use-municipality-boundingbox';
-import { MunicipalityProperties } from './shared';
-import { useRegionMunicipalities } from './hooks/use-region-municipalities';
-import { countryGeo, municipalGeo, regionGeo } from './topology';
+import { Choropleth } from './choropleth';
+import styles from './choropleth.module.scss';
+import {
+  useChartDimensions,
+  useChoroplethColorScale,
+  useMunicipalityBoundingbox,
+  useMunicipalityData,
+  useRegionMunicipalities,
+} from './hooks';
 import { municipalThresholds } from './municipal-thresholds';
+import {
+  MunicipalityProperties,
+  SafetyRegionProperties,
+  TMunicipalityMetricName,
+} from './shared';
+import { countryGeo, municipalGeo, regionGeo } from './topology';
 
 export type TProps = {
   metricName?: TMunicipalityMetricName;
