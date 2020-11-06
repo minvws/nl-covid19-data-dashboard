@@ -1,4 +1,4 @@
-import Getest from '~/assets/test.svg';
+import Gedrag from '~/assets/gedrag.svg';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { Tile } from '~/components-styled/layout';
@@ -25,7 +25,7 @@ const BehaviorPage: FCWithLayout<INationalData> = (props) => {
       <ContentHeader_weekRangeHack
         category={siteText.nationaal_layout.headings.medisch}
         title={text.pagina.titel}
-        Icon={Getest}
+        Icon={Gedrag}
         subtitle={text.pagina.toelichting}
         metadata={{
           datumsText: text.datums,
@@ -39,7 +39,7 @@ const BehaviorPage: FCWithLayout<INationalData> = (props) => {
       <TwoKpiSection>
         <Tile height="100%">
           <Heading level={3}>{text.onderzoek_uitleg.titel}</Heading>
-          <Text>text.onderzoek_uitleg.beschrijving</Text>
+          <Text>{text.onderzoek_uitleg.toelichting}</Text>
         </Tile>
 
         <KpiTile

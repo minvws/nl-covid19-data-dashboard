@@ -173,7 +173,7 @@
     "sidebar": {
       "titel": "Naleving en Draagvlak"
     },
-    "datums": "",
+     "datums": "Waarde van {{weekStart}} tot {{weekEnd}}. Verkregen: {{dateOfInsertion}}. Wordt driewekelijks bijgewerkt.",
     "bron": {
       "text": "Naam bron",
       "href": "link naar de bron"
