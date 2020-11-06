@@ -1,6 +1,6 @@
 import Head from 'next/head';
-
-import siteText from '~/locale/index';
+import { useContext } from 'react';
+import LocaleContext, { ILocale } from '~/locale/localeContext';
 
 export type SEOHeadProps = {
   title?: string;
@@ -10,32 +10,33 @@ export type SEOHeadProps = {
   twitterImage?: string;
 };
 
-SEOHead.defaultProps = {
-  description: siteText.seoHead.default_description,
-  openGraphImage: '/banner.png',
-  title: siteText.seoHead.default_title,
-  twitterImage: '/banner-twitter.png',
-  url: siteText.seoHead.default_url,
-};
-
 export function SEOHead(props: SEOHeadProps): any {
   const { description, openGraphImage, title, twitterImage, url } = props;
+  const { siteText }: ILocale = useContext(LocaleContext);
+
+  const data = {
+    description: description || siteText.seoHead.default_description,
+    openGraphImage: openGraphImage || '/banner.png',
+    title: title || siteText.seoHead.default_title,
+    twitterImage: twitterImage || '/banner-twitter.png',
+    url: url || siteText.seoHead.default_url,
+  };
 
   return (
     <Head>
-      <title key="title">{title}</title>
+      <title key="title">{data.title}</title>
       <meta name="version" key="version" content={process.env.COMMIT_ID} />
 
       <meta
         key="dc-title"
         property="dcterms:title"
-        content={title}
+        content={data.title}
         xml-lang="nl"
       />
       <meta
         key="dc-identifier"
         property="dcterms:identifier"
-        content={url}
+        content={data.url}
         datatype="xsd:anyURI"
       />
       <meta
@@ -132,35 +133,39 @@ export function SEOHead(props: SEOHeadProps): any {
         crossOrigin="anonymous"
       />
 
-      <meta key="description" name="description" content={description} />
+      <meta key="description" name="description" content={data.description} />
       <meta
         key="image"
         name="image"
-        content={`https://coronadashboard.rijksoverheid.nl${openGraphImage}`}
+        content={`https://coronadashboard.rijksoverheid.nl${data.openGraphImage}`}
       />
 
       <meta key="ogLocale" name="og:locale" content="nl_NL" />
-      <meta key="ogTitle" property="og:title" content={title} />
-      <meta key="ogDesc" property="og:description" content={description} />
+      <meta key="ogTitle" property="og:title" content={data.title} />
+      <meta key="ogDesc" property="og:description" content={data.description} />
       <meta
         key="ogImage"
         name="og:image:url"
-        content={`https://coronadashboard.rijksoverheid.nl${openGraphImage}`}
+        content={`https://coronadashboard.rijksoverheid.nl${data.openGraphImage}`}
       />
       <meta
         key="ogImageSecureUrl"
         name="og:image:secure_url"
-        content={`https://coronadashboard.rijksoverheid.nl${openGraphImage}`}
+        content={`https://coronadashboard.rijksoverheid.nl${data.openGraphImage}`}
       />
-      <meta key="ogUrl" name="og:url" content={url} />
+      <meta key="ogUrl" name="og:url" content={data.url} />
       <meta key="ogType" property="og:type" content="website" />
 
-      <meta key="twTitle" name="twitter:title" content={title} />
-      <meta key="twDesc" name="twitter:description" content={description} />
+      <meta key="twTitle" name="twitter:title" content={data.title} />
+      <meta
+        key="twDesc"
+        name="twitter:description"
+        content={data.description}
+      />
       <meta
         key="twImg"
         name="twitter:image"
-        content={`https://coronadashboard.rijksoverheid.nl${twitterImage}`}
+        content={`https://coronadashboard.rijksoverheid.nl${data.twitterImage}`}
       />
       <meta key="twCard" name="twitter:card" content="summary_large_image" />
     </Head>
