@@ -73,7 +73,7 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
           <h3 className={styles.header}>{siteText.notificatie.titel}</h3>
           <p>
             {replaceVariablesInText(
-              text.notificatie.bericht,
+              siteText.notificatie.bericht,
               escalationLevelCounts
             )}
           </p>
@@ -98,7 +98,7 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
                 __html: siteText.veiligheidsregio_index.selecteer_toelichting,
               }}
             />
-            <EscalationMapLegenda text={siteText} />
+            <EscalationMapLegenda siteText={siteText} />
           </>
         }
       >
