@@ -12,7 +12,7 @@ import {
   TypographyProps,
 } from 'styled-system';
 
-type TextProps = SpaceProps &
+export type TextProps = SpaceProps &
   LayoutProps &
   ColorProps &
   PositionProps &

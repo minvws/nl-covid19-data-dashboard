@@ -53,7 +53,11 @@ const RegionalRestrictions: FCWithLayout<ISafetyRegionData> = (props) => {
       />
       <KpiSection flexDirection="column">
         <Heading level={3}>{text.titel_risiconiveau}</Heading>
-        <Box display="flex" flexDirection="row" justifyContent="flex-start">
+        <Box
+          display="flex"
+          flexDirection={['column', 'row']}
+          justifyContent="flex-start"
+        >
           <Box
             flexShrink={0}
             display="flex"
@@ -77,16 +81,20 @@ const RegionalRestrictions: FCWithLayout<ISafetyRegionData> = (props) => {
         <RestrictionsTable data={restrictionsTable} />
       </KpiSection>
 
-      <KpiSection>
-        <Box borderRight="1px solid lightgrey">
+      <KpiSection display="flex" flexDirection={['column', 'row']}>
+        <Box
+          borderRight={{ lg: '1px solid lightgrey' }}
+          borderBottom={{ xs: '1px solid lightgrey' }}
+        >
           <Heading level={3}>{text.titel_aanvullendemaatregelen}</Heading>
           <Box>{text.toelichting_aanvullendemaatregelen}</Box>
         </Box>
-        <Box ml={3} flexShrink={0} display="flex">
+        <Box ml={[0, 3]} pt={[2, 0]} flexShrink={0} display="flex">
           {regioUrl.length > 0 && (
             <>
               <ExternalLinkIcon />
               <ExternalLink
+                pl={1}
                 href={regioUrl}
                 text={replaceVariablesInText(text.linktext_regionpage, {
                   safetyRegionName,
