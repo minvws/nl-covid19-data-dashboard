@@ -2,7 +2,7 @@ import { SeriesLineOptions, SeriesScatterOptions } from 'highcharts';
 import { useMemo } from 'react';
 import { TimeframeOption, getFilteredValues } from '~/utils/timeframe';
 import { RegionalSewerPerInstallationValue } from '~/types/data';
-import { formatDateFromSeconds } from '~/utils/formatDate';
+import { Utils, formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { getItemFromArray } from '~/utils/getItemFromArray';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
@@ -45,6 +45,7 @@ function createRemainingDaysData(value: Value | undefined, maxDate: number) {
 }
 
 export function useRegionalSewerWaterChartOptions(
+  utils: Utils,
   averageValues: Value[],
   scatterPlotValues: RegionalSewerPerInstallationValue[],
   text: TranslationStrings,
@@ -226,7 +227,7 @@ export function useRegionalSewerWaterChartOptions(
           rotation: '0' as any,
           formatter: function () {
             return this.isFirst || this.isLast
-              ? formatDateFromSeconds(this.value, 'axis')
+              ? formatDateFromSeconds(utils, this.value, 'axis')
               : '';
           },
         },
@@ -267,20 +268,26 @@ export function useRegionalSewerWaterChartOptions(
             );
 
             return `<strong>${formatDateFromSeconds(
+              utils,
               start,
               'short'
             )} - ${formatDateFromSeconds(
+              utils,
               end,
               'short'
             )}:</strong> ${formatNumber(this.y)}<br/>(${this.series.name})`;
           } else if (tooltipType === 'rwzi') {
-            return `<strong>${formatDateFromSeconds(this.point.x)}:</strong> ${
-              this.point.y
-            }<br/>(${this.series.name})`;
+            return `<strong>${formatDateFromSeconds(
+              utils,
+              this.point.x
+            )}:</strong> ${this.point.y}<br/>(${this.series.name})`;
           } else if (tooltipType === 'scatter') {
-            return `<strong>${formatDateFromSeconds(this.point.x)}:</strong> ${
-              this.point.y
-            }<br/>(${(this.point as any).installationName})`;
+            return `<strong>${formatDateFromSeconds(
+              utils,
+              this.point.x
+            )}:</strong> ${this.point.y}<br/>(${
+              (this.point as any).installationName
+            })`;
           }
 
           return false;
@@ -290,5 +297,11 @@ export function useRegionalSewerWaterChartOptions(
     };
 
     return options;
-  }, [filteredAverageValues, filteredScatterPlotValues, text, selectedRWZI]);
+  }, [
+    filteredAverageValues,
+    filteredScatterPlotValues,
+    utils,
+    text,
+    selectedRWZI,
+  ]);
 }

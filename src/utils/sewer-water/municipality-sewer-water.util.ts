@@ -3,16 +3,12 @@ import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { XrangePointOptionsObject } from 'highcharts';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-
-import siteText from '~/locale/index';
 import { assert } from '../assert';
 
 /**
  * @TODO these helpers for VR and GM should be merged into one using generics.
  * All of this code seems duplicate now that the type names are unified.
  */
-
-const text = siteText.gemeente_rioolwater_metingen;
 
 // Specific interfaces to pass data between the formatting functions and the highcharts configs
 export interface SewerWaterMetadata {
@@ -43,6 +39,11 @@ export interface SewerWaterLineChartData {
 export interface SewerWaterBarChartData {
   keys: string[];
   data: XrangePointOptionsObject[];
+}
+
+interface Utils {
+  date_today: string;
+  date_yesterday: string;
 }
 
 /**
@@ -112,6 +113,7 @@ export function getSewerWaterBarScaleData(
  * @param data
  */
 export function getSewerWaterLineChartData(
+  text: { [key: string]: string },
   data: Municipal
 ): SewerWaterLineChartData | undefined {
   const { dataAvailable, oneInstallation } = getSewerWaterMetadata(data);
@@ -168,8 +170,10 @@ export function getSewerWaterLineChartData(
  * @param data
  */
 export function getSewerWaterBarChartData(
+  text: { [key: string]: string },
+  utils: Utils,
   data: Municipal
-): SewerWaterBarChartData | undefined {
+): SewerWaterBarChartData | null {
   const { dataAvailable, oneInstallation } = getSewerWaterMetadata(data);
 
   if (!dataAvailable || oneInstallation) {
@@ -196,6 +200,7 @@ export function getSewerWaterBarChartData(
         color: '#3391CC',
         label: data.sewer.last_value
           ? `${formatDateFromSeconds(
+              utils,
               data.sewer.last_value.week_unix,
               'short'
             )}: ${formatNumber(data.sewer.last_value.average)}`
@@ -208,6 +213,7 @@ export function getSewerWaterBarChartData(
             color: '#C1C1C1',
             label: installation.last_value
               ? `${formatDateFromSeconds(
+                  utils,
                   installation.last_value.date_measurement_unix,
                   'short'
                 )}: ${formatNumber(installation.last_value.rna_normalized)}`

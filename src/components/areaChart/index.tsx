@@ -1,10 +1,10 @@
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import { useMemo, useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
+import LocaleContext, { ILocale } from '~/locale/localeContext';
 import { ChartTimeControls } from '~/components-styled/chart-time-controls';
-import text from '~/locale/index';
 import { createDate } from '~/utils/createDate';
-import { formatDateFromMilliseconds } from '~/utils/formatDate';
+import { Utils, formatDateFromMilliseconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
 import styles from './areaChart.module.scss';
@@ -30,10 +30,12 @@ interface AreaChartProps {
     max: number | null;
   }>;
   signaalwaarde?: number;
+  signaalwaardeLabel?: string;
   timeframeOptions?: TimeframeOption[];
 }
 
 type IGetOptions = Omit<AreaChartProps, 'data' | 'title' | 'description'> & {
+  utils: Utils;
   rangeData: TRange[];
   lineData: TLine[];
 };
@@ -48,6 +50,7 @@ export default function AreaChart(props: AreaChartProps) {
     title,
     description,
   } = props;
+  const { siteText }: ILocale = useContext(LocaleContext);
 
   const rangeData: TRange[] = useMemo(() => {
     return data.map((d) => [createDate(d.date), d.min, d.max]);
@@ -62,11 +65,15 @@ export default function AreaChart(props: AreaChartProps) {
   const [timeframe, setTimeframe] = useState<TimeframeOption>('5weeks');
 
   const chartOptions = useMemo(() => {
+    const { utils } = siteText;
+    const signaalwaardeLabel = siteText.common.barScale.signaalwaarde;
     const getOptionsThunk = (rangeData: TRange[], lineData: TLine[]) =>
       getChartOptions({
+        utils,
         rangeData,
         lineData,
         signaalwaarde,
+        signaalwaardeLabel,
         rangeLegendLabel,
         lineLegendLabel,
       });
@@ -91,6 +98,7 @@ export default function AreaChart(props: AreaChartProps) {
     lineLegendLabel,
     rangeLegendLabel,
     timeframe,
+    siteText,
   ]);
 
   return (
@@ -105,6 +113,7 @@ export default function AreaChart(props: AreaChartProps) {
             timeframe={timeframe}
             timeframeOptions={timeframeOptions}
             onChange={(value) => setTimeframe(value)}
+            timeControls={siteText.charts.time_controls}
           />
         </div>
       </header>
@@ -115,8 +124,10 @@ export default function AreaChart(props: AreaChartProps) {
 
 function getChartOptions(props: IGetOptions): Highcharts.Options {
   const {
+    utils,
     rangeData,
     signaalwaarde,
+    signaalwaardeLabel,
     lineData,
     rangeLegendLabel,
     lineLegendLabel,
@@ -172,7 +183,7 @@ function getChartOptions(props: IGetOptions): Highcharts.Options {
         rotation: ('0' as unknown) as number,
         formatter: function () {
           return this.isFirst || this.isLast
-            ? formatDateFromMilliseconds(this.value, 'axis')
+            ? formatDateFromMilliseconds(utils, this.value, 'axis')
             : '';
         },
       },
@@ -199,7 +210,7 @@ function getChartOptions(props: IGetOptions): Highcharts.Options {
               dashStyle: 'Dash',
               zIndex: SIGNAALWAARDE_Z_INDEX,
               label: {
-                text: text.common.barScale.signaalwaarde,
+                text: signaalwaardeLabel,
                 align: 'right',
                 y: -8,
                 x: 0,
@@ -247,7 +258,7 @@ function getChartOptions(props: IGetOptions): Highcharts.Options {
         const linePoint = lineData.find((el) => el[0].getTime() === this.x);
         const x = this.x;
         return `
-            ${formatDateFromMilliseconds(x, 'medium')}<br/>
+            ${formatDateFromMilliseconds(utils, x, 'medium')}<br/>
             <strong>${rangeLegendLabel}</strong> ${formatNumber(
           minRangePoint
         )} - ${formatNumber(maxRangePoint)}<br/>

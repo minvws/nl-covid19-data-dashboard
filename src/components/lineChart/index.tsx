@@ -1,11 +1,11 @@
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import React, { useMemo, useState } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
+import LocaleContext, { ILocale } from '~/locale/localeContext';
 import { isFilled } from 'ts-is-present';
 import { ChartTimeControls } from '~/components-styled/chart-time-controls';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
-import text from '~/locale/index';
-import { formatDateFromSeconds } from '~/utils/formatDate';
+import { Utils, formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
 import styles from './lineChart.module.scss';
@@ -30,6 +30,7 @@ export interface LineChartProps<T> {
 }
 
 function getChartOptions<T extends Value>(
+  utils: Utils,
   values: T[],
   signaalwaarde?: number,
   formatTooltip?: (value: T) => string,
@@ -70,7 +71,7 @@ function getChartOptions<T extends Value>(
         rotation: '0' as any,
         formatter: function () {
           return this.isFirst || this.isLast
-            ? formatDateFromSeconds(this.value, 'axis')
+            ? formatDateFromSeconds(utils, this.value, 'axis')
             : '';
         },
       },
@@ -83,7 +84,9 @@ function getChartOptions<T extends Value>(
         if (formatTooltip) {
           return formatTooltip(values[this.point.index]);
         }
-        return `${formatDateFromSeconds(this.x)}: ${formatNumber(this.y)}`;
+        return `${formatDateFromSeconds(utils, this.x)}: ${formatNumber(
+          this.y
+        )}`;
       },
     },
     yAxis: {
@@ -113,7 +116,7 @@ function getChartOptions<T extends Value>(
               color: '#4f5458',
               zIndex: SIGNAALWAARDE_Z_INDEX,
               label: {
-                text: text.common.barScale.signaalwaarde,
+                text: signaalwaardeLabel,
                 align: 'right',
                 y: -8,
                 x: 0,
@@ -197,6 +200,8 @@ export default function LineChart<T extends Value>({
   showFill = true,
 }: LineChartProps<T>) {
   const [timeframe, setTimeframe] = useState<TimeframeOption>('5weeks');
+  const { siteText }: ILocale = useContext(LocaleContext);
+  const signaalwaardeLabel = siteText.common.barScale.signaalwaarde;
 
   const chartOptions = useMemo(() => {
     const filteredValues = getFilteredValues<T>(
@@ -205,13 +210,24 @@ export default function LineChart<T extends Value>({
       (value: T) => value.date * 1000
     );
     return getChartOptions<T>(
+      siteText.utils,
       filteredValues,
+      signaalwaardeLabel,
       signaalwaarde,
       formatTooltip,
       formatYAxis,
       showFill
     );
-  }, [values, timeframe, signaalwaarde, formatTooltip, formatYAxis, showFill]);
+  }, [
+    siteText.utils,
+    values,
+    timeframe,
+    signaalwaarde,
+    signaalwaardeLabel,
+    formatTooltip,
+    formatYAxis,
+    showFill,
+  ]);
 
   return (
     <section className={styles.root}>
@@ -225,6 +241,7 @@ export default function LineChart<T extends Value>({
             timeframe={timeframe}
             timeframeOptions={timeframeOptions}
             onChange={setTimeframe}
+            timeControls={siteText.charts.time_controls}
           />
         </div>
       </header>

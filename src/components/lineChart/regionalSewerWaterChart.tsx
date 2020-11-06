@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import LocaleContext, { ILocale } from '~/locale/localeContext';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import Dot from '~/assets/dot.svg';
@@ -40,8 +42,10 @@ export function RegionalSewerWaterChart(props: TProps) {
     selectedInstallation: selectedRWZI,
     valueAnnotation,
   } = props;
+  const { siteText }: ILocale = useContext(LocaleContext);
 
   const chartOptions = useRegionalSewerWaterChartOptions(
+    siteText.utils,
     averageValues,
     scatterPlotValues,
     text,

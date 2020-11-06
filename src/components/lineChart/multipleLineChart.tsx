@@ -1,11 +1,11 @@
 import Highcharts, { TooltipFormatterContextObject } from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import React, { useMemo, useState } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
+import LocaleContext, { ILocale } from '~/locale/localeContext';
 import { isDefined } from 'ts-is-present';
 import { ChartTimeControls } from '~/components-styled/chart-time-controls';
-import text from '~/locale/index';
 import { assert } from '~/utils/assert';
-import { formatDateFromSeconds } from '~/utils/formatDate';
+import { Utils, formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
 import { Value } from './lineChartWithWeekTooltip';
@@ -28,8 +28,10 @@ export interface MultipleLineChartProps {
 }
 
 function getChartOptions(
+  utils: Utils,
   values: Value[][],
   linesConfig: LineConfig[],
+  signaalwaardeLabel: string,
   signaalwaarde?: number
 ) {
   const yMax = values.reduce((max, list) => {
@@ -71,7 +73,7 @@ function getChartOptions(
         rotation: '0' as any,
         formatter: function () {
           return this.isFirst || this.isLast
-            ? formatDateFromSeconds(this.value, 'axis')
+            ? formatDateFromSeconds(utils, this.value, 'axis')
             : '';
         },
       },
@@ -93,9 +95,10 @@ function getChartOptions(
         };
 
         return `${formatDateFromSeconds(
+          utils,
           originalData.week.start,
           'short'
-        )} - ${formatDateFromSeconds(originalData.week.end, 'short')}<br/>
+        )} - ${formatDateFromSeconds(utils, riginalData.week.end, 'short')}<br/>
         <span style="height: 0.5em;width: 0.5em;background-color: ${
           linesConfig[0].color
         };border-radius: 50%;display: inline-block;"></span> ${formatNumber(
@@ -132,7 +135,7 @@ function getChartOptions(
               color: '#4f5458',
               zIndex: SIGNAALWAARDE_Z_INDEX,
               label: {
-                text: text.common.barScale.signaalwaarde,
+                text: signaalwaardeLabel,
                 align: 'right',
                 y: -8,
                 x: 0,
@@ -214,10 +217,11 @@ export function MultipleLineChart({
   description,
   values,
   linesConfig,
-  signaalwaarde,
   timeframeOptions,
 }: MultipleLineChartProps) {
   const [timeframe, setTimeframe] = useState<TimeframeOption>('5weeks');
+  const { siteText }: ILocale = useContext(LocaleContext);
+  const signaalwaardeLabel = siteText.common.barScale.signaalwaarde;
 
   assert(
     values.length === linesConfig.length,
@@ -232,8 +236,13 @@ export function MultipleLineChart({
         (value: Value) => value.date * 1000
       );
     });
-    return getChartOptions(filteredValueLists, linesConfig, signaalwaarde);
-  }, [values, linesConfig, timeframe, signaalwaarde]);
+    return getChartOptions(
+      siteText.utils,
+      filteredValueLists,
+      linesConfig,
+      signaalwaardeLabel
+    );
+  }, [values, linesConfig, timeframe, signaalwaardeLabel, siteText]);
 
   return (
     <section className={styles.root}>
@@ -247,6 +256,7 @@ export function MultipleLineChart({
             timeframe={timeframe}
             timeframeOptions={timeframeOptions}
             onChange={setTimeframe}
+            timeControls={siteText.charts.time_controls}
           />
         </div>
       </header>

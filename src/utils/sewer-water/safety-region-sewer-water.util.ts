@@ -1,10 +1,7 @@
 import { XrangePointOptionsObject } from 'highcharts';
-import siteText from '~/locale/index';
 import { Regionaal, RegionalSewerPerInstallationValue } from '~/types/data.d';
-import { formatDateFromSeconds } from '~/utils/formatDate';
+import { Utils, formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
-
-const text = siteText.veiligheidsregio_rioolwater_metingen;
 
 /**
  * @TODO these helpers for VR and GM should be merged into one using generics.
@@ -70,6 +67,7 @@ export function getSewerWaterScatterPlotData(
 }
 
 export function getSewerWaterLineChartData(
+  text: { [key: string]: string },
   data: Regionaal
 ): SewerWaterLineChartData | undefined {
   // More than one RWZI installation:
@@ -90,6 +88,8 @@ export function getSewerWaterLineChartData(
 }
 
 export function getSewerWaterBarChartData(
+  text: { [key: string]: string },
+  utils: Utils,
   data: Regionaal
 ): SewerWaterBarChartData | undefined {
   const sortedInstallations = data.sewer_per_installation.values.sort(
@@ -111,6 +111,7 @@ export function getSewerWaterBarChartData(
         color: '#3391CC',
         label: data.sewer.last_value
           ? `${formatDateFromSeconds(
+              utils,
               data.sewer.last_value.week_unix,
               'short'
             )}: ${formatNumber(data.sewer.last_value.average)}`
@@ -123,6 +124,7 @@ export function getSewerWaterBarChartData(
             color: '#C1C1C1',
             label: installation.last_value
               ? `${formatDateFromSeconds(
+                  utils,
                   installation.last_value.date_measurement_unix,
                   'short'
                 )}: ${formatNumber(installation.last_value.rna_normalized)}`

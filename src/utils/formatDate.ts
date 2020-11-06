@@ -25,11 +25,13 @@ if ('__setDefaultTimeZone' in Intl.DateTimeFormat) {
 
 import { isToday, isYesterday } from 'date-fns';
 
-import siteText from '~/locale/index';
 import { getLocale } from '~/utils/getLocale';
 
 const locale = getLocale();
-
+export interface Utils {
+  date_today: string;
+  date_yesterday: string;
+}
 // TypeScript is missing some types for `Intl.DateTimeFormat`.
 // https://github.com/microsoft/TypeScript/issues/35865
 interface DateTimeFormatOptions extends Intl.DateTimeFormatOptions {
@@ -82,6 +84,7 @@ const WeekdayMedium = new Intl.DateTimeFormat(locale, {
 } as DateTimeFormatOptions);
 
 export function formatDateFromSeconds(
+  utils: Utils,
   seconds: number,
   style?: formatStyle
 ): string {
@@ -95,10 +98,11 @@ export function formatDateFromSeconds(
 
   const milliseconds = seconds * 1000;
 
-  return formatDateFromMilliseconds(milliseconds, style);
+  return formatDateFromMilliseconds(utils, milliseconds, style);
 }
 
 export function formatDateFromMilliseconds(
+  utils: Utils,
   milliseconds: number,
   style?: formatStyle
 ): string {
@@ -113,8 +117,8 @@ export function formatDateFromMilliseconds(
 
   /* Relative date formatting is disabled for server-side rendering */
   if (style === 'relative' && typeof window !== 'undefined') {
-    if (isToday(milliseconds)) return siteText.utils.date_today;
-    if (isYesterday(milliseconds)) return siteText.utils.date_yesterday;
+    if (isToday(milliseconds)) return utils.date_today;
+    if (isYesterday(milliseconds)) return utils.date_yesterday;
   }
 
   return DayMonth.format(milliseconds);

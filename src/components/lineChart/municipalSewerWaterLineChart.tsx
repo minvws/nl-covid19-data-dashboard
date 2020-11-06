@@ -1,8 +1,9 @@
 import Highcharts, { SeriesLineOptions } from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import React, { useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
+import LocaleContext, { ILocale } from '~/locale/localeContext';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
-import { formatDateFromSeconds } from '~/utils/formatDate';
+import { Utils, formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { getItemFromArray } from '~/utils/getItemFromArray';
 
@@ -27,6 +28,7 @@ type RegionalSewerWaterLineChartProps = {
 };
 
 function getOptions(
+  utils: Utils,
   averageValues: Value[],
   text: TranslationStrings
 ): Highcharts.Options {
@@ -106,7 +108,7 @@ function getOptions(
         rotation: '0' as any,
         formatter: function () {
           return this.isFirst || this.isLast
-            ? formatDateFromSeconds(this.value, 'axis')
+            ? formatDateFromSeconds(utils, this.value, 'axis')
             : '';
         },
       },
@@ -121,11 +123,14 @@ function getOptions(
         }
         const { start, end } = getItemFromArray(weekSet, this.point.index);
         return `<strong>${formatDateFromSeconds(
+          utils,
           start,
           'short'
-        )} - ${formatDateFromSeconds(end, 'short')}:</strong> ${formatNumber(
-          this.y
-        )}`;
+        )} - ${formatDateFromSeconds(
+          utils,
+          end,
+          'short'
+        )}:</strong> ${formatNumber(this.y)}`;
       },
     },
     yAxis: {
@@ -157,9 +162,10 @@ export function MunicipalSewerWaterLineChart({
   text,
   valueAnnotation,
 }: RegionalSewerWaterLineChartProps) {
+  const { siteText }: ILocale = useContext(LocaleContext);
   const chartOptions = useMemo(() => {
-    return getOptions(averageValues, text);
-  }, [averageValues, text]);
+    return getOptions(siteText.utils, averageValues, text);
+  }, [averageValues, siteText, text]);
 
   return (
     <>
