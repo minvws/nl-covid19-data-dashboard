@@ -6,7 +6,6 @@ import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 
 type IProps = {
-  title?: string;
   textKey: string;
   value?: number;
   format?: (value?: number) => string;
@@ -15,7 +14,7 @@ type IProps = {
 };
 
 export function MetricKPI(props: IProps) {
-  const { value, format, title, descriptionDate, valueAnnotation } = props;
+  const { value, format, textKey, descriptionDate, valueAnnotation } = props;
   const { siteText }: ILocale = useContext(LocaleContext);
 
   const description = (text: { dateOfReport: string }) =>

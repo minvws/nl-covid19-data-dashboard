@@ -187,7 +187,7 @@ export function LineChart({
       tooltipFormatter,
       formatYAxis
     );
-  }, [values, timeframe, tooltipFormatter, formatYAxis]);
+  }, [siteText.utils, values, timeframe, tooltipFormatter, formatYAxis]);
 
   return (
     <section className={styles.root}>
