@@ -1,6 +1,8 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import { useContext } from 'react';
 import { useRouter } from 'next/router';
+import LocaleContext, { ILocale } from '~/locale/localeContext';
 import Arrow from '~/assets/arrow.svg';
 import Arts from '~/assets/arts.svg';
 import CoronaVirus from '~/assets/coronavirus.svg';
@@ -27,7 +29,6 @@ import { SewerWaterMetric } from '~/components/landelijk/sewer-water-metric';
 import { SuspectedPatientsMetric } from '~/components/landelijk/suspected-patients-metric';
 import { getLayout as getSiteLayout } from '~/components/layout';
 import { TitleWithIcon } from '~/components/titleWithIcon';
-import siteText from '~/locale/index';
 import { INationalData } from '~/static-props/nl-data';
 import { useMenuState } from './useMenuState';
 
@@ -37,7 +38,7 @@ export function getNationalLayout() {
     pageProps: INationalData
   ): React.ReactNode {
     return getSiteLayout(
-      siteText.nationaal_metadata,
+      'nationaal_metadata',
       pageProps.lastGenerated
     )(<NationalLayout {...pageProps}>{page}</NationalLayout>);
   };
@@ -66,6 +67,7 @@ interface NationalLayoutProps extends INationalData {
 function NationalLayout(props: NationalLayoutProps) {
   const { children, data } = props;
   const router = useRouter();
+  const { siteText }: ILocale = useContext(LocaleContext);
   const isMainRoute = router.route === '/';
 
   const { isMenuOpen, openMenu } = useMenuState(isMainRoute);

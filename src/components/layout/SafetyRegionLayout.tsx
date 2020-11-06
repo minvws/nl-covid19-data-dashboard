@@ -1,6 +1,8 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import { useContext } from 'react';
 import { useRouter } from 'next/router';
+import LocaleContext, { ILocale } from '~/locale/localeContext';
 import Arrow from '~/assets/arrow.svg';
 import CoronaVirus from '~/assets/coronavirus.svg';
 import Locatie from '~/assets/locaties.svg';
@@ -18,7 +20,6 @@ import { PositivelyTestedPeopleBarScale } from '~/components/veiligheidsregio/po
 import { PositivelyTestedPeopleMetric } from '~/components/veiligheidsregio/positive-tested-people-metric';
 import { SewerWaterMetric } from '~/components/veiligheidsregio/sewer-water-metric';
 import safetyRegions from '~/data/index';
-import siteText from '~/locale/index';
 import { ISafetyRegionData } from '~/static-props/safetyregion-data';
 import { getSewerWaterBarScaleData } from '~/utils/sewer-water/safety-region-sewer-water.util';
 import { useMediaQuery } from '~/utils/useMediaQuery';
@@ -30,7 +31,7 @@ export function getSafetyRegionLayout() {
     pageProps: ISafetyRegionData
   ): React.ReactNode {
     return getSiteLayout(
-      siteText.veiligheidsregio_metadata,
+      'veiligheidsregio_metadata',
       pageProps.lastGenerated
     )(<SafetyRegionLayout {...pageProps}>{page}</SafetyRegionLayout>);
   };
@@ -66,6 +67,7 @@ function SafetyRegionLayout(
   const { children, data } = props;
 
   const router = useRouter();
+  const { siteText }: ILocale = useContext(LocaleContext);
   const isLargeScreen = useMediaQuery('(min-width: 1000px)', true);
 
   const { code } = router.query;
@@ -133,6 +135,7 @@ function SafetyRegionLayout(
             placeholder={siteText.common.zoekveld_placeholder_regio}
             onSelect={handleSafeRegionSelect}
             options={safetyRegions}
+            noResults={siteText.common.zoekveld_geen_resultaten}
           />
 
           {showMetricLinks && (

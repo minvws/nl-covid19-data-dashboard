@@ -9,7 +9,6 @@ import { assert } from '~/utils/assert';
 import matchSorter from 'match-sorter';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import text from '~/locale/index';
 import { useMediaQuery } from '~/utils/useMediaQuery';
 import { useThrottle } from '~/utils/useThrottle';
 
@@ -22,6 +21,7 @@ type TProps<Option extends TOption> = {
   options: Option[];
   placeholder: string;
   onSelect: (option: Option) => void;
+  noResults: string;
 };
 
 /*
@@ -40,7 +40,7 @@ type TProps<Option extends TOption> = {
  * ```
  */
 export function ComboBox<Option extends TOption>(props: TProps<Option>) {
-  const { options, placeholder } = props;
+  const { options, placeholder, noResults } = props;
 
   const router = useRouter();
   const { code } = router.query;
@@ -99,7 +99,7 @@ export function ComboBox<Option extends TOption>(props: TProps<Option>) {
             ))}
           </ComboboxList>
         ) : (
-          <span>{text.common.zoekveld_geen_resultaten}</span>
+          <span>{noResults}</span>
         )}
       </ComboboxPopover>
     </Combobox>

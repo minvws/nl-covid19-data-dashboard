@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import Head from 'next/head';
+import { useContext } from 'react';
 import { useRouter } from 'next/router';
 
-import siteText from '~/locale/index';
+import LocaleContext, { ILocale } from '~/locale/localeContext';
 import municipalities from '~/data/gemeente_veiligheidsregio.json';
 import { IMunicipalityData } from '~/static-props/municipality-data';
 
@@ -37,6 +38,7 @@ interface IMunicipality {
  */
 interface MunicipalityLayoutProps extends Partial<IMunicipalityData> {
   children: React.ReactNode;
+  siteText?: any;
 }
 
 export function getMunicipalityLayout() {
@@ -48,7 +50,7 @@ export function getMunicipalityLayout() {
   ): React.ReactNode {
     const lastGenerated = pageProps.lastGenerated;
     return getSiteLayout(
-      siteText.gemeente_metadata,
+      'gemeente_metadata',
       lastGenerated
     )(<MunicipalityLayout {...pageProps}>{page}</MunicipalityLayout>);
   };
@@ -73,6 +75,7 @@ export function getMunicipalityLayout() {
 function MunicipalityLayout(props: MunicipalityLayoutProps) {
   const { children, data, municipalityName } = props;
   const router = useRouter();
+  const { siteText }: ILocale = useContext(LocaleContext);
   const isLargeScreen = useMediaQuery('(min-width: 1000px)');
 
   const { code } = router.query;
@@ -143,6 +146,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
             placeholder={siteText.common.zoekveld_placeholder_gemeente}
             onSelect={handleMunicipalitySelect}
             options={municipalities}
+            noResults={siteText.common.zoekveld_geen_resultaten}
           />
 
           {showMetricLinks && (

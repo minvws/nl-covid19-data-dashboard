@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import text from '~/locale/index';
+import LocaleContext, { ILocale } from '~/locale/localeContext';
 import { ILastGeneratedData } from '~/static-props/last-generated-data';
 import styles from './layout.module.scss';
 
@@ -26,17 +26,19 @@ export type FCWithLayout<Props = void> = React.FC<Props> & {
   getLayout: (page: React.ReactNode, pageProps: Props) => React.ReactNode;
 };
 
-export function getLayoutWithMetadata(metadata: LayoutProps) {
+export function getLayoutWithMetadata(metadataKey: string) {
   return function (page: React.ReactNode, pageProps: any) {
-    const lastGenerated = pageProps.lastGenerated;
-    return getLayout(metadata, lastGenerated)(<>{page}</>);
+    const { lastGenerated } = pageProps;
+    return getLayout(metadataKey, lastGenerated)(<>{page}</>);
   };
 }
 
-export function getLayout(layoutProps: LayoutProps, lastGenerated: string) {
+export function getLayout(metadataKey: string, lastGenerated: string) {
   return function (page: React.ReactNode): React.ReactNode {
+    const { siteText }: ILocale = useContext(LocaleContext);
+
     return (
-      <Layout {...layoutProps} lastGenerated={lastGenerated}>
+      <Layout {...siteText[metadataKey]} lastGenerated={lastGenerated}>
         {page}
       </Layout>
     );
@@ -59,6 +61,7 @@ function Layout(
   } = props;
 
   const router = useRouter();
+  const { siteText }: ILocale = useContext(LocaleContext);
 
   // remove focus after navigation
   const blur = (evt: any) => evt.target.blur();
@@ -66,9 +69,13 @@ function Layout(
   const locale = getLocale();
   const showSmallLogo = useMediaQuery('(max-width: 480px)', true);
 
-  const dateTime = formatDateFromSeconds(Number(lastGenerated), 'iso');
+  const dateTime = formatDateFromSeconds(
+    siteText.utils,
+    Number(lastGenerated),
+    'iso'
+  );
   const dateOfInsertion = lastGenerated
-    ? formatDateFromSeconds(Number(lastGenerated), 'long')
+    ? formatDateFromSeconds(siteText.utils, Number(lastGenerated), 'long')
     : undefined;
 
   return (
@@ -82,8 +89,8 @@ function Layout(
       />
 
       <div className={styles.skiplinks}>
-        <a href="#content">{text.skiplinks.inhoud}</a>
-        <a href="#main-navigation">{text.skiplinks.nav}</a>
+        <a href="#content">{siteText.skiplinks.inhoud}</a>
+        <a href="#main-navigation">{siteText.skiplinks.nav}</a>
       </div>
 
       <header className={styles.header}>
@@ -95,7 +102,7 @@ function Layout(
                 ? '/images/logo-ro-small.svg'
                 : '/images/logo-ro.svg'
             }
-            alt={text.header.logo_alt}
+            alt={siteText.header.logo_alt}
             // loading="lazy"
             width={showSmallLogo ? 40 : 314}
             height={showSmallLogo ? 76 : 125}
@@ -124,11 +131,11 @@ function Layout(
               EN
             </a>
           </div>
-          <h1>{text.header.title}</h1>
+          <h1>{siteText.header.title}</h1>
           <p>
-            {text.header.text}{' '}
+            {siteText.header.text}{' '}
             <Link href="/over">
-              <a className={styles.readMoreLink}>{text.header.link}</a>
+              <a className={styles.readMoreLink}>{siteText.header.link}</a>
             </Link>
           </p>
         </MaxWidth>
@@ -147,7 +154,7 @@ function Layout(
                         : styles.link
                     }
                   >
-                    {text.nav.links.index}
+                    {siteText.nav.links.index}
                   </a>
                 </Link>
               </li>
@@ -161,7 +168,7 @@ function Layout(
                         : styles.link
                     }
                   >
-                    {text.nav.links.veiligheidsregio}
+                    {siteText.nav.links.veiligheidsregio}
                   </a>
                 </Link>
               </li>
@@ -175,7 +182,7 @@ function Layout(
                         : styles.link
                     }
                   >
-                    {text.nav.links.gemeente}
+                    {siteText.nav.links.gemeente}
                   </a>
                 </Link>
               </li>
@@ -189,7 +196,7 @@ function Layout(
                         : styles.link
                     }
                   >
-                    {text.nav.links.over}
+                    {siteText.nav.links.over}
                   </a>
                 </Link>
               </li>
@@ -205,77 +212,77 @@ function Layout(
           <MaxWidth>
             <div className={styles.grid}>
               <div className={styles.footerColumn}>
-                <h3>{text.nav.title}</h3>
+                <h3>{siteText.nav.title}</h3>
                 <nav>
                   <ul className={styles.footerList}>
                     <li>
                       <Link href="/">
                         <a onClick={blur} className={styles.footerLink}>
-                          {text.nav.links.index}
+                          {siteText.nav.links.index}
                         </a>
                       </Link>
                     </li>
                     <li>
                       <Link href="/veiligheidsregio">
                         <a onClick={blur} className={styles.footerLink}>
-                          {text.nav.links.veiligheidsregio}
+                          {siteText.nav.links.veiligheidsregio}
                         </a>
                       </Link>
                     </li>
                     <li>
                       <Link href="/gemeente">
                         <a onClick={blur} className={styles.footerLink}>
-                          {text.nav.links.gemeente}
+                          {siteText.nav.links.gemeente}
                         </a>
                       </Link>
                     </li>
                     <li>
                       <Link href="/over">
                         <a onClick={blur} className={styles.footerLink}>
-                          {text.nav.links.over}
+                          {siteText.nav.links.over}
                         </a>
                       </Link>
                     </li>
                     <li>
                       <Link href="/veelgestelde-vragen">
                         <a onClick={blur} className={styles.footerLink}>
-                          {text.nav.links.veelgestelde_vragen}
+                          {siteText.nav.links.veelgestelde_vragen}
                         </a>
                       </Link>
                     </li>
                     <li>
                       <Link href="/over-risiconiveaus">
                         <a onClick={blur} className={styles.footerLink}>
-                          {text.nav.links.over_risiconiveaus}
+                          {siteText.nav.links.over_risiconiveaus}
                         </a>
                       </Link>
                     </li>
                     <li>
                       <Link href="/verantwoording">
                         <a onClick={blur} className={styles.footerLink}>
-                          {text.nav.links.verantwoording}
+                          {siteText.nav.links.verantwoording}
                         </a>
                       </Link>
                     </li>
                     <li>
                       <a
-                        href={text.nav.links.meer_href}
+                        href={siteText.nav.links.meer_href}
                         target="_blank"
                         rel="noopener noreferrer"
                         className={styles.footerLink}
                       >
-                        {text.nav.links.meer}
+                        {siteText.nav.links.meer}
                       </a>
                     </li>
                   </ul>
                 </nav>
               </div>
               <div className={styles.footerColumn}>
-                <h3>{text.laatst_bijgewerkt.title}</h3>
+                <h3>{siteText.laatst_bijgewerkt.title}</h3>
                 <p
                   dangerouslySetInnerHTML={{
                     __html: replaceVariablesInText(
-                      text.laatst_bijgewerkt.message,
+                      siteText.laatst_bijgewerkt.message,
                       {
                         dateOfInsertion: `<time datetime=${dateTime}>${dateOfInsertion}</time>`,
                       }
