@@ -63,12 +63,12 @@ const Municipality: FCWithLayout<any> = () => {
         </div>
         <div className="map-container">
           <MunicipalityChoropleth
+            isSelectorMap
             tooltipContent={tooltipContent(onSelectMunicipal)}
             onSelect={createSelectMunicipalHandler(
               router,
               'positief-geteste-mensen'
             )}
-            isSelectorMap={true}
           />
         </div>
       </article>

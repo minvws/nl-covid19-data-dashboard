@@ -11,6 +11,7 @@ import {
   useSafetyRegionData,
 } from './hooks';
 import { getSelectedThreshold } from './legenda/utils';
+import { Path } from './path';
 import { SafetyRegionProperties, TRegionMetricName } from './shared';
 import { countryGeo, regionGeo } from './topology';
 
@@ -85,17 +86,16 @@ export function SafetyRegionChoropleth<
       _index: number
     ) => {
       const { vrcode } = feature.properties;
-
-      const className = classNames(!hasData ? styles.noData : undefined);
+      const fill = getFillColor(vrcode);
 
       return (
-        <path
-          className={className}
-          shapeRendering="optimizeQuality"
-          data-id={vrcode}
-          key={`safetyregion-map-feature-${vrcode}`}
-          d={path || ''}
-          fill={getFillColor(vrcode)}
+        <Path
+          key={vrcode}
+          id={vrcode}
+          d={path}
+          fill={hasData && fill ? fill : '#fff'}
+          stroke="#fff"
+          strokeWidth={1}
         />
       );
     },
@@ -103,36 +103,27 @@ export function SafetyRegionChoropleth<
   );
 
   const overlayCallback = (
-    _feature: Feature<MultiPolygon>,
-    path: string,
-    index: number
+    feature: Feature<MultiPolygon, SafetyRegionProperties>,
+    path: string
   ) => {
-    return (
-      <path
-        className={styles.overlay}
-        shapeRendering="optimizeQuality"
-        key={`safetyregion-map-overlay-${index}`}
-        d={path}
-        fill={'none'}
-      />
-    );
+    const { vrcode } = feature.properties;
+
+    return <Path key={vrcode} d={path} stroke="#c4c4c4" strokeWidth={1} />;
   };
 
   const hoverCallback = useCallback(
     (feature: Feature<MultiPolygon, SafetyRegionProperties>, path: string) => {
       const { vrcode } = feature.properties;
       const isSelected = vrcode === selected && highlightSelection;
-      const className = classNames(
-        isSelected ? styles.selectedPath : styles.hoverLayer
-      );
 
       return (
-        <path
-          className={className}
-          data-id={vrcode}
-          shapeRendering="optimizeQuality"
-          key={`safetyregion-map-hover-${vrcode}`}
+        <Path
+          hoverable
+          id={vrcode}
+          key={vrcode}
           d={path}
+          stroke={isSelected ? '#000' : undefined}
+          strokeWidth={isSelected ? 3 : undefined}
         />
       );
     },

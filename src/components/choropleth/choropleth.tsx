@@ -45,7 +45,7 @@ export type TProps<TFeatureProperties> = {
   // This callback is invoked for each of the features in the overlays property.
   // This will usually return a <path/> element.
   overlayCallback: (
-    feature: Feature<MultiPolygon>,
+    feature: Feature<MultiPolygon, TFeatureProperties>,
     path: string,
     index: number
   ) => ReactNode;
@@ -62,11 +62,6 @@ export type TProps<TFeatureProperties> = {
   // This callback is invoked right before a tooltip is shown for one of the features in the featureCollection property.
   // The id is the value that is assigned to the data-id attribute in the featureCallback.
   getTooltipContent: (id: string) => ReactNode;
-
-  /**
-   * Some maps like the gemeente selection map needs different path styling
-   */
-  isSelectorMap?: boolean;
 };
 
 /**
@@ -118,7 +113,6 @@ const ChoroplethMap: <T>(
     overlayCallback,
     hoverCallback,
     onPathClick,
-    isSelectorMap,
     setTooltip,
   } = props;
 
@@ -145,9 +139,7 @@ const ChoroplethMap: <T>(
       <svg
         width={width}
         height={height}
-        className={`${styles.svgMap} ${
-          isSelectorMap ? styles.selectorMap : ''
-        }`}
+        className={styles.svgMap}
         onMouseMove={createSvgMouseOverHandler(timeout, setTooltip)}
         onMouseOut={
           isTouch ? undefined : createSvgMouseOutHandler(timeout, setTooltip)
