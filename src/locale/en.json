@@ -165,8 +165,13 @@
       "title": "Naleving en Draagvlak | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Landelijk overzicht van naleving en draagvlak."
     },
-    "pagina_titel": "Naleving en Draagvlak",
-    "pagina_toelichting": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dapibus convallis turpis in mattis. In pellentesque a dui sit amet dapibus. Sed lacus quam, facilisis egestas condimentum ac, suscipit sed eros. Aenean placerat velit porta ornare tincidunt. Cras gravida, mauris ut efficitur maximus, nisi leo accumsan mauris, at luctus ipsum felis eget purus.",
+    "pagina": {
+      "titel": "Naleving en Draagvlak",
+      "toelichting": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dapibus convallis turpis in mattis. In pellentesque a dui sit amet dapibus. Sed lacus quam, facilisis egestas condimentum ac, suscipit sed eros. Aenean placerat velit porta ornare tincidunt. Cras gravida, mauris ut efficitur maximus, nisi leo accumsan mauris, at luctus ipsum felis eget purus."
+    },
+    "sidebar": {
+      "titel": "Naleving en Draagvlak"
+    },
     "datums": "",
     "bron": {
       "text": "Naam bron",

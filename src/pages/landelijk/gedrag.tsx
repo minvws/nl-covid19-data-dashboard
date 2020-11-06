@@ -24,9 +24,9 @@ const BehaviorPage: FCWithLayout<INationalData> = (props) => {
       />
       <ContentHeader_weekRangeHack
         category={siteText.nationaal_layout.headings.medisch}
-        title={text.pagina_titel}
+        title={text.pagina.titel}
         Icon={Getest}
-        subtitle={text.pagina_toelichting}
+        subtitle={text.pagina.toelichting}
         metadata={{
           datumsText: text.datums,
           weekStartUnix: behaviorData.last_value.week_start_unix,
@@ -43,9 +43,9 @@ const BehaviorPage: FCWithLayout<INationalData> = (props) => {
         </Tile>
 
         <KpiTile
-          title={text.kpi_aantal_respondenten.titel}
+          title={text.kpi.aantal_respondenten.titel}
           metadata={{
-            source: text.kpi_aantal_respondenten.bron,
+            source: text.kpi.aantal_respondenten.bron,
             date: [
               behaviorData.last_value.week_start_unix,
               behaviorData.last_value.week_end_unix,
@@ -53,7 +53,7 @@ const BehaviorPage: FCWithLayout<INationalData> = (props) => {
           }}
         >
           <KpiValue absolute={behaviorData.last_value.number_of_participants} />
-          <Text>{text.kpi_aantal_respondenten.toelichting}</Text>
+          <Text>{text.kpi.aantal_respondenten.toelichting}</Text>
         </KpiTile>
       </TwoKpiSection>
     </>
