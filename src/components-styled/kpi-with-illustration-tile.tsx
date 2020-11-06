@@ -3,31 +3,31 @@ import { Text, Heading } from './typography';
 import { Tile } from './layout';
 import { MetadataProps, Metadata } from './metadata';
 
-interface Example {
+interface Illustration {
   image: string;
   alt: string;
   description: string;
 }
 
-interface KpiExampleProps {
+interface KpiWithIllustrationProps {
   title: string;
   description?: string;
   children: React.ReactNode;
   metadata: MetadataProps;
-  example: Example;
+  illustration: Illustration;
 }
 
 /**
  * A generic KPI tile which composes its value content using the children prop.
  * Description can be both plain text and html strings.
  */
-export function KpiExampleTile({
+export function KpiWithIllustrationTile({
   title,
   description,
   children,
   metadata,
-  example,
-}: KpiExampleProps) {
+  illustration,
+}: KpiWithIllustrationProps) {
   return (
     <Tile>
       <Box display="flex" flexWrap="wrap">
@@ -36,7 +36,7 @@ export function KpiExampleTile({
           flexGrow={0}
           flexShrink={0}
           flexBasis={{ _: '100%', lg: '50%' }}
-          pr={{ _: 0, lg: 4 }}
+          pr={{ lg: 4 }}
         >
           <Heading level={3}>{title}</Heading>
           {children}
@@ -53,16 +53,16 @@ export function KpiExampleTile({
           flexGrow={0}
           flexShrink={0}
           flexBasis={{ _: '100%', lg: '50%' }}
-          pl={{ _: 0, lg: 4 }}
+          pl={{ lg: 4 }}
         >
           <img
             width={315}
             height={100}
             loading="lazy"
-            src={example.image}
-            alt={example.alt}
+            src={illustration.image}
+            alt={illustration.alt}
           />
-          <p>{example.description}</p>
+          <p>{illustration.description}</p>
         </Box>
       </Box>
       <Metadata {...metadata} />

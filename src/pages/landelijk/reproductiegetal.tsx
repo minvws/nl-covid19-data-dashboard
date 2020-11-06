@@ -10,7 +10,7 @@ import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 import { Metadata } from '~/components-styled/metadata';
 import { Text } from '~/components-styled/typography';
-import { KpiExampleTile } from '~/components-styled/kpi-example-tile';
+import { KpiWithIllustrationTile } from '~/components-styled/kpi-with-illustration-tile';
 
 const text = siteText.reproductiegetal;
 
@@ -39,13 +39,13 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
         }}
       />
 
-      <KpiExampleTile
+      <KpiWithIllustrationTile
         title={text.barscale_titel}
         metadata={{
           date: lastKnownValidData.last_value.date_of_report_unix,
           source: text.bron,
         }}
-        example={{
+        illustration={{
           image: '/images/reproductie-explainer.svg',
           alt: text.reproductie_explainer_alt,
           description: text.extra_uitleg,
@@ -53,7 +53,7 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
       >
         <ReproductionIndexBarScale data={lastKnownValidData} showAxis={true} />
         <Text>{text.barscale_toelichting}</Text>
-      </KpiExampleTile>
+      </KpiWithIllustrationTile>
 
       {data.reproduction_index.values && (
         <article className="metric-article">
