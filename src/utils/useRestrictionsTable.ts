@@ -5,8 +5,8 @@ import {
 } from '~/types/data';
 import siteText from '~/locale/index';
 
-const restrictionTexts = siteText.maatregelen.teksten;
-const restrictionIcons = siteText.maatregelen.icons;
+const restrictionTexts: Record<string, string> = siteText.maatregelen.teksten;
+const restrictionIcons: Record<string, string> = siteText.maatregelen.icons;
 
 /**
  * This is a hard-coded list of categories that dictates where a restriction category
