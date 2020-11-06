@@ -41,8 +41,8 @@ const NursingHomeDeaths: FCWithLayout<ISafetyRegionData> = (props) => {
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: data?.last_value?.date_of_report_unix,
-          dateInsertedUnix: data?.last_value?.date_of_insertion_unix,
+          dateUnix: data.last_value.date_of_report_unix,
+          dateInsertedUnix: data.last_value.date_of_insertion_unix,
           dataSource: text.bron,
         }}
       />
@@ -54,7 +54,7 @@ const NursingHomeDeaths: FCWithLayout<ISafetyRegionData> = (props) => {
             {formatNumber(data?.last_value.deceased_daily)}
           </p>
           <Metadata
-            date={data?.last_value?.date_of_report_unix}
+            date={data.last_value.date_of_report_unix}
             source={text.bron}
           />
         </div>
@@ -73,10 +73,7 @@ const NursingHomeDeaths: FCWithLayout<ISafetyRegionData> = (props) => {
               date: value.date_of_report_unix,
             }))}
           />
-          <Metadata
-            date={data?.last_value?.date_of_report_unix}
-            source={text.bron}
-          />
+          <Metadata source={text.bron} />
         </article>
       )}
     </>

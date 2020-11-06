@@ -50,9 +50,9 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: state?.nursing_home.last_value?.date_of_report_unix,
+          dateUnix: state.nursing_home.last_value.date_of_report_unix,
           dateInsertedUnix:
-            state?.nursing_home.last_value?.date_of_insertion_unix,
+            state.nursing_home.last_value.date_of_insertion_unix,
           dataSource: text.bron,
         }}
       />
@@ -61,7 +61,7 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
         <KpiTile
           title={text.kpi_titel}
           metadata={{
-            date: state?.nursing_home.last_value?.date_of_report_unix,
+            date: state.nursing_home.last_value.date_of_report_unix,
             source: text.bron,
           }}
         >
@@ -74,7 +74,7 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
         <KpiTile
           title={text.barscale_titel}
           metadata={{
-            date: state?.nursing_home.last_value?.date_of_report_unix,
+            date: state.nursing_home.last_value.date_of_report_unix,
             source: text.bron,
           }}
         >
@@ -94,7 +94,6 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
             date: value.date_of_report_unix,
           }))}
           metadata={{
-            date: state?.nursing_home.last_value?.date_of_report_unix,
             source: text.bron,
           }}
         />

@@ -6,27 +6,37 @@ import { Text } from './typography';
 import { Box } from './base';
 
 export interface MetadataProps {
-  date?: number;
+  date?: number | [number, number];
   source?: {
     text: string;
     href: string;
   };
 }
 
-export function Metadata(metadata: MetadataProps) {
+function formatMetadataDate(date: number | [number, number]): string {
+  if (typeof date === 'number') {
+    return replaceVariablesInText(locale.common.metadata.date, {
+      date: formatDateFromSeconds(date, 'weekday-medium'),
+    });
+  }
+
+  return replaceVariablesInText(locale.common.metadata.dateFromTo, {
+    dateFrom: formatDateFromSeconds(date[0], 'weekday-medium'),
+    dateTo: formatDateFromSeconds(date[1], 'weekday-medium'),
+  });
+}
+
+export function Metadata({ date, source }: MetadataProps) {
+  const dateString = date ? formatMetadataDate(date) : null;
   return (
-    <Box as="footer" mt={3}>
+    <Box as="footer" mt={3} gridArea="metadata">
       <Text color="annotation" fontSize={1}>
-        {metadata.date
-          ? replaceVariablesInText(locale.common.metadata.date, {
-              date: formatDateFromSeconds(metadata.date, 'weekday-medium'),
-            })
-          : null}
-        {metadata.date && metadata.source ? ' · ' : null}
-        {metadata.source ? (
+        {dateString}
+        {dateString && source ? ' · ' : null}
+        {source ? (
           <>
             {locale.common.metadata.source}
-            {': '} <ExternalLink {...metadata.source} />
+            {': '} <ExternalLink {...source} />
           </>
         ) : null}
       </Text>

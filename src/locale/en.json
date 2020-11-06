@@ -628,7 +628,8 @@
   "common": {
     "metadata": {
       "source": "Source",
-      "date": ""
+      "date": "Waarde van {{date}}",
+      "dateFromTo": "Waarde van {{dateFrom}} tot {{dateTo}}"
     },
     "barScale": {
       "signaalwaarde": "Alert value"

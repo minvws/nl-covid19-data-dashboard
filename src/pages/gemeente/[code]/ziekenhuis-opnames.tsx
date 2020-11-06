@@ -51,9 +51,9 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: hospitalAdmissions?.last_value?.date_of_report_unix,
+          dateUnix: hospitalAdmissions.last_value.date_of_report_unix,
           dateInsertedUnix:
-            hospitalAdmissions?.last_value?.date_of_insertion_unix,
+            hospitalAdmissions.last_value.date_of_insertion_unix,
           dataSource: text.bron,
         }}
       />
@@ -76,7 +76,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
         </div>
 
         <Metadata
-          date={hospitalAdmissions?.last_value?.date_of_report_unix}
+          date={hospitalAdmissions.last_value.date_of_report_unix}
           source={text.bron}
         />
       </article>
@@ -92,10 +92,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
               date: value.date_of_report_unix,
             }))}
           />
-          <Metadata
-            date={hospitalAdmissions?.last_value?.date_of_report_unix}
-            source={text.bron}
-          />
+          <Metadata source={text.bron} />
         </article>
       )}
 
@@ -135,7 +132,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
           )}
         </div>
         <Metadata
-          date={hospitalAdmissions?.last_value?.date_of_report_unix}
+          date={hospitalAdmissions.last_value.date_of_report_unix}
           source={text.bron}
         />
       </article>

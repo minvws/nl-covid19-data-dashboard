@@ -76,6 +76,12 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
               infectiousPeopleLastKnownAverage.last_value.infectious_avg
             )}
           </p>
+          <Metadata
+            date={
+              infectiousPeopleLastKnownAverage.last_value.date_of_report_unix
+            }
+            source={text.bron}
+          />
         </div>
 
         <div className="column-item column-item-extra-margin">
@@ -101,10 +107,7 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
             <li className="blue">{text.legenda_line}</li>
             <li className="gray square">{text.legenda_marge}</li>
           </Legenda>
-          <Metadata
-            date={count?.last_value?.date_of_report_unix}
-            source={text.bron}
-          />
+          <Metadata source={text.bron} />
         </article>
       )}
     </>

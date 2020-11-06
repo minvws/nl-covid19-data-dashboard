@@ -628,7 +628,8 @@
   "common": {
     "metadata": {
       "source": "Bron",
-      "date": "Waarde van {{date}}"
+      "date": "Waarde van {{date}}",
+      "dateFromTo": "Waarde van {{dateFrom}} tot {{dateTo}}"
     },
     "barScale": {
       "signaalwaarde": "Signaalwaarde"

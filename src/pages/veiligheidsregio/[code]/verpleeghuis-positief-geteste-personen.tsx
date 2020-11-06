@@ -72,10 +72,7 @@ const NursingHomeInfectedPeople: FCWithLayout<ISafetyRegionData> = ({
             date: value.date_of_report_unix,
           }))}
         />
-        <Metadata
-          date={data.nursing_home.last_value.date_of_report_unix}
-          source={text.bron}
-        />
+        <Metadata source={text.bron} />
       </article>
     </>
   );

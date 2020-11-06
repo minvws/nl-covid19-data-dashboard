@@ -16,6 +16,7 @@ import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
+import { Metadata } from '~/components-styled/metadata';
 
 const text = siteText.rioolwater_metingen;
 
@@ -56,7 +57,7 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
           title={text.barscale_titel}
           description={text.extra_uitleg}
           metadata={{
-            date: sewerAverages.last_value.week_end_unix,
+            date: [sewerAverages.last_value.week_start_unix, sewerAverages.last_value.week_end_unix],
             source: text.bron,
           }}
         >
@@ -72,7 +73,7 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
             `<p style="color:#595959">${text.rwzi_abbrev}</p>`
           }
           metadata={{
-            date: sewerAverages.last_value.week_end_unix,
+            date: [sewerAverages.last_value.week_start_unix, sewerAverages.last_value.week_end_unix],
             source: text.bron,
           }}
         >
@@ -89,6 +90,14 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
           <p className="text-blue kpi" data-cy="infected_daily_total">
             {formatNumber(sewerAverages.last_value.average)}
           </p>
+
+          <Metadata
+            date={[
+              sewerAverages.last_value.week_start_unix,
+              sewerAverages.last_value.week_end_unix,
+            ]}
+            source={text.bron}
+          />
         </div>
 
         <div className="column-item column-item-extra-margin">
@@ -107,7 +116,6 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
           week: { start: value.week_start_unix, end: value.week_end_unix },
         }))}
         metadata={{
-          date: sewerAverages.last_value.week_end_unix,
           source: text.bron,
         }}
         formatTooltip={(x) => {
@@ -125,6 +133,13 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
       <ChoroplethTile
         title={text.map_titel}
         description={text.map_toelichting}
+        metadata={{
+          date: [
+            sewerAverages.last_value.week_start_unix,
+            sewerAverages.last_value.week_end_unix,
+          ],
+          source: text.bron,
+        }}
         legend={
           legendItems // this data value should probably not be optional
             ? {

@@ -76,7 +76,6 @@ const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
         }))}
         signaalwaarde={10}
         metadata={{
-          date: dataIntake.last_value.date_of_report_unix,
           source: text.bronnen.nice,
         }}
       />
@@ -89,7 +88,6 @@ const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
           date: value.date_of_report_unix,
         }))}
         metadata={{
-          date: dataBeds.last_value.date_of_report_unix,
           source: text.bronnen.lnaz,
         }}
       />
