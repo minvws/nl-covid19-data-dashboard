@@ -160,6 +160,31 @@
     "titel_sidebar": "Hospital admissions",
     "titel_kpi": "Average number of hospital admissions in 3 days"
   },
+  "nl_gedrag": {
+    "metadata": {
+      "title": "Naleving en Draagvlak | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Landelijk overzicht van naleving en draagvlak."
+    },
+    "pagina_titel": "Naleving en Draagvlak",
+    "pagina_toelichting": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dapibus convallis turpis in mattis. In pellentesque a dui sit amet dapibus. Sed lacus quam, facilisis egestas condimentum ac, suscipit sed eros. Aenean placerat velit porta ornare tincidunt. Cras gravida, mauris ut efficitur maximus, nisi leo accumsan mauris, at luctus ipsum felis eget purus.",
+    "datums": "",
+    "bron": {
+      "text": "Naam bron",
+      "href": "link naar de bron"
+    },
+    "onderzoek_uitleg":{
+      "titel": "Onderzoek onder de Nederlandse bevolking",
+      "toelichting": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dapibus convallis turpis in mattis. In pellentesque a dui sit amet dapibus. Sed lacus quam, facilisis egestas condimentum ac, suscipit sed eros. Aenean placerat velit porta ornare tincidunt. Cras gravida, mauris ut efficitur maximus, nisi leo accumsan mauris, at luctus ipsum felis eget purus."
+    },
+    "kpi_aantal_respondenten": {
+      "titel": "Aantal respondenten",
+      "toelichting": "Sed accumsan rutrum velit posuere efficitur. Nam vestibulum turpis sed sapien mollis semper non ac risus. Proin consectetur libero eget tortor ullamcorper, vel viverra lorem ultrices.",
+      "bron": {
+        "text": "Naam bron",
+        "href": "link naar de bron"
+      }
+    }
+  },
   "positief_geteste_personen": {
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
