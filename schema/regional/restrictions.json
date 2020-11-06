@@ -35,7 +35,7 @@
         },
         "escalation_level": {
           "type": "integer",
-          "enum": [0, 1, 2, 3, 4, 41, 401]
+          "enum": [0, 1, 2, 3, 4, 41, 401, 402]
         },
         "category_id": {
           "type": "string",

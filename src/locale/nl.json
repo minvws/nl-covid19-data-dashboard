@@ -69,6 +69,15 @@
       "alcohol":"Alcohol en softdrugs",
       "algemeen": "Algemeen"
     },
+    "headings": {
+      "1": "",
+      "2": "",
+      "3": "",
+      "4": "",
+      "401": "",
+      "402": "",
+      "41": ""
+    },
     "teksten": {
       "4_er_op_uit_1": "Maximaal 4 inclusief jezelf",
       "4_bezoek_2": "Maximaal 3 van een ander huishouden",

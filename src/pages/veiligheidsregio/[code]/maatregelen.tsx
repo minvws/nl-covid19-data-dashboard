@@ -19,6 +19,7 @@ import Link from 'next/link';
 import ExternalLinkIcon from '~/assets/external-link.svg';
 import { useRestrictionsTable } from '~/utils/useRestrictionsTable';
 import { RestrictionsTable } from '~/components/restrictions/restrictionsTable';
+import { useRestrictionLevel } from '~/utils/useRestrictionLevel';
 
 const text = siteText.veiligheidsregio_maatregelen;
 type VRCode = keyof typeof siteText.veiligheidsregio_maatregelen_urls;
@@ -34,6 +35,8 @@ const RegionalRestrictions: FCWithLayout<ISafetyRegionData> = (props) => {
   const regioUrl = siteText.veiligheidsregio_maatregelen_urls[vrcode];
 
   const restrictionsTable = useRestrictionsTable(data.restrictions.values);
+
+  const restrictionLevel = useRestrictionLevel(data.restrictions.values);
 
   return (
     <>
@@ -77,7 +80,10 @@ const RegionalRestrictions: FCWithLayout<ISafetyRegionData> = (props) => {
         </Box>
       </KpiSection>
 
-      <KpiSection>
+      <KpiSection display="flex" flexDirection="column">
+        <Box>
+          <Text>{restrictionLevel}</Text>
+        </Box>
         <RestrictionsTable data={restrictionsTable} />
       </KpiSection>
 

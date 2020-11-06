@@ -71,7 +71,7 @@ function DesktopRestrictionsTable(props: RestrictionsTableProps) {
           <Row key={row.category}>
             <Cell
               borderTop={'1px solid black'}
-              width="20em"
+              width="250em"
               pt={3}
               pb={3}
               verticalAlign="top"
