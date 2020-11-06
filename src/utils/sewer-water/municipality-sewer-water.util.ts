@@ -173,7 +173,7 @@ export function getSewerWaterBarChartData(
   text: { [key: string]: string },
   utils: Utils,
   data: Municipal
-): SewerWaterBarChartData | null {
+): SewerWaterBarChartData | undefined {
   const { dataAvailable, oneInstallation } = getSewerWaterMetadata(data);
 
   if (!dataAvailable || oneInstallation) {

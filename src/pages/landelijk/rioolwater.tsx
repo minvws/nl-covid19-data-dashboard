@@ -125,9 +125,11 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
         }}
         formatTooltip={(x) => {
           return `<strong>${formatDateFromSeconds(
+            siteText.utils,
             x.week.start,
             'short'
           )} - ${formatDateFromSeconds(
+            siteText.utils,
             x.week.end,
             'short'
           )}:</strong> ${formatNumber(x.value)}`;

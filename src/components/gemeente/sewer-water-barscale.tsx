@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import LocaleContext, { ILocale } from '~/locale/localeContext';
 import { BarScale } from '~/components/barScale';
 import { SewerWaterBarScaleData } from '~/utils/sewer-water/municipality-sewer-water.util';
 
@@ -6,6 +8,7 @@ export function SewerWaterBarScale(props: {
   showAxis: boolean;
 }) {
   const { data, showAxis } = props;
+  const { siteText }: ILocale = useContext(LocaleContext);
 
   if (!data) return <p>{siteText.no_data_for_this_municipality.text}</p>;
 

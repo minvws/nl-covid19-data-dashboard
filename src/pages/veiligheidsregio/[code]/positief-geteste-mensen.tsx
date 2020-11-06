@@ -246,9 +246,11 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
         }))}
         formatTooltip={(x) => {
           return `<strong>${formatDateFromSeconds(
+            siteText.utils,
             x.week.start,
             'short'
           )} - ${formatDateFromSeconds(
+            siteText.utils,
             x.week.end,
             'short'
           )}:</strong> ${formatPercentage(x.value)}%`;

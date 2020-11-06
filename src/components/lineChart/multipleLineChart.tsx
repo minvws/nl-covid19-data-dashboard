@@ -98,7 +98,11 @@ function getChartOptions(
           utils,
           originalData.week.start,
           'short'
-        )} - ${formatDateFromSeconds(utils, riginalData.week.end, 'short')}<br/>
+        )} - ${formatDateFromSeconds(
+          utils,
+          originalData.week.end,
+          'short'
+        )}<br/>
         <span style="height: 0.5em;width: 0.5em;background-color: ${
           linesConfig[0].color
         };border-radius: 50%;display: inline-block;"></span> ${formatNumber(
