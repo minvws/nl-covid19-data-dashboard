@@ -1,8 +1,12 @@
-import { ReactNode, useMemo } from 'react';
+import { useMemo } from 'react';
 import {
   NationalRestrictionValue,
   RegionalRestrictionValue,
 } from '~/types/data';
+import siteText from '~/locale/index';
+
+const restrictionTexts = siteText.maatregelen.teksten;
+const restrictionIcons = siteText.maatregelen.icons;
 
 /**
  * This is a hard-coded list of categories that dictates where a restriction category
@@ -31,7 +35,7 @@ export type EscalationLevel = RegionalRestrictionValue['escalation_level'];
 export type TargetRegion = RegionalRestrictionValue['target_region'];
 
 export type RestrictionLineData = {
-  Icon?: ReactNode;
+  icon?: string;
   text: string;
 };
 
@@ -77,7 +81,7 @@ function createLines(
     .filter((value) => value.category_id === category)
     .sort((left, right) => left.restriction_order - right.restriction_order)
     .map<RestrictionLineData>((value) => ({
-      Icon: undefined,
-      text: value.restriction_id,
+      icon: restrictionIcons[value.restriction_id],
+      text: restrictionTexts[value.restriction_id] ?? value.restriction_id,
     }));
 }

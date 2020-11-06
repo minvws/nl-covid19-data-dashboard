@@ -11,7 +11,7 @@ export type RestrictionsTableProps = {
   data: RestrictionsTableData;
 };
 
-const text = siteText.restrictions.categories;
+const categoryLabels = siteText.maatregelen.categories;
 
 export function RestrictionsTable(props: RestrictionsTableProps) {
   const { data } = props;
@@ -39,7 +39,7 @@ function MobileRestrictionsTable(props: RestrictionsTableProps) {
                 verticalAlign="top"
               >
                 <Text as="span" fontWeight="bold">
-                  {text[row.category]}
+                  {categoryLabels[row.category]}
                 </Text>
               </Cell>
             </Row>
@@ -48,7 +48,7 @@ function MobileRestrictionsTable(props: RestrictionsTableProps) {
                 <Box display="flex" flexDirection="column">
                   {row.restrictions.map((value) => (
                     <Box key={value.text} display="flex" flexDirection="row">
-                      {value.Icon}
+                      {value.icon}
                       {value.text}
                     </Box>
                   ))}
@@ -77,7 +77,7 @@ function DesktopRestrictionsTable(props: RestrictionsTableProps) {
               verticalAlign="top"
             >
               <Text as="span" fontWeight="bold">
-                {text[row.category]}
+                {categoryLabels[row.category]}
               </Text>
             </Cell>
             <Cell
@@ -90,7 +90,7 @@ function DesktopRestrictionsTable(props: RestrictionsTableProps) {
               <Box display="flex" flexDirection="column">
                 {row.restrictions.map((value) => (
                   <Box key={value.text} display="flex" flexDirection="row">
-                    {value.Icon}
+                    <RestrictionIcon iconName={value.icon} />
                     {value.text}
                   </Box>
                 ))}
@@ -100,5 +100,29 @@ function DesktopRestrictionsTable(props: RestrictionsTableProps) {
         ))}
       </TableBody>
     </Table>
+  );
+}
+
+type RestrictionIconProps = {
+  iconName?: string;
+};
+
+function RestrictionIcon(props: RestrictionIconProps) {
+  const { iconName } = props;
+
+  if (!iconName?.length) {
+    return <Box width="24px" height="24px" mr={1} />;
+  }
+
+  return (
+    <Box
+      backgroundImage={`url(/images/restrictions/${iconName}.svg)`}
+      backgroundSize={'24px 24px'}
+      backgroundPosition={'0 0'}
+      backgroundRepeat={'no-repeat'}
+      width="24px"
+      height="24px"
+      mr={1}
+    />
   );
 }

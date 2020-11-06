@@ -105,7 +105,7 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
         <SafetyRegionChoropleth
           metricName="escalation_levels"
           metricValueName="escalation_level"
-          onSelect={createSelectRegionHandler(router)}
+          onSelect={createSelectRegionHandler(router, 'maatregelen')}
           tooltipContent={escalationTooltip(router)}
         />
       </ChoroplethTile>
