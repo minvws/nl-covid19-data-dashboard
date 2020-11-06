@@ -1,6 +1,7 @@
+import { useContext } from 'react';
+import LocaleContext, { ILocale } from '~/locale/localeContext';
 import ClockIcon from '~/assets/clock.svg';
 import DatabaseIcon from '~/assets/database.svg';
-import siteText from '~/locale/index';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import styles from './metadata.module.scss';
@@ -20,8 +21,6 @@ interface IProps {
   datumsText: string;
 }
 
-const text = siteText.common.metadata;
-
 export function Metadata(props: IProps) {
   const {
     dataSource,
@@ -30,10 +29,20 @@ export function Metadata(props: IProps) {
     weekEndUnix,
     dateOfInsertionUnix,
   } = props;
+  const { siteText }: ILocale = useContext(LocaleContext);
 
-  const weekStart = formatDateFromSeconds(weekStartUnix, 'relative');
-  const weekEnd = formatDateFromSeconds(weekEndUnix, 'relative');
+  const weekStart = formatDateFromSeconds(
+    siteText.utils,
+    weekStartUnix,
+    'relative'
+  );
+  const weekEnd = formatDateFromSeconds(
+    siteText.utils,
+    weekEndUnix,
+    'relative'
+  );
   const dateOfInsertion = formatDateFromSeconds(
+    siteText.utils,
     dateOfInsertionUnix,
     'relative'
   );
@@ -58,7 +67,7 @@ export function Metadata(props: IProps) {
           <DatabaseIcon aria-hidden />
         </span>
         <p>
-          {text.source}:{' '}
+          {siteText.common.metadata.source}:{' '}
           <a href={dataSource.href} rel="noopener noreferrer" target="_blank">
             {dataSource.text}
           </a>

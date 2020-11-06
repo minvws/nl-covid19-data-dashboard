@@ -1,4 +1,5 @@
-import siteText from '~/locale/index';
+import { useContext } from 'react';
+import LocaleContext, { ILocale } from '~/locale/localeContext';
 
 import styles from './metadata.module.scss';
 
@@ -22,8 +23,6 @@ interface IProps {
   datumsText: string;
 }
 
-const text = siteText.common.metadata;
-
 export function MetadataHack(props: IProps) {
   const {
     dataSourceA,
@@ -32,10 +31,16 @@ export function MetadataHack(props: IProps) {
     dateUnix,
     dateInsertedUnix,
   } = props;
+  const { siteText }: ILocale = useContext(LocaleContext);
+  const text = siteText.common.metadata;
 
-  const dateOfReport = formatDateFromSeconds(dateUnix, 'relative');
+  const dateOfReport = formatDateFromSeconds(
+    siteText.utils,
+    dateUnix,
+    'relative'
+  );
   const dateOfInsertion = dateInsertedUnix
-    ? formatDateFromSeconds(dateInsertedUnix, 'relative')
+    ? formatDateFromSeconds(siteText.utils, dateInsertedUnix, 'relative')
     : undefined;
 
   return (

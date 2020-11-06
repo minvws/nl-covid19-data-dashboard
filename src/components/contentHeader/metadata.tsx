@@ -1,6 +1,7 @@
+import { useContext } from 'react';
+import LocaleContext, { ILocale } from '~/locale/localeContext';
 import ClockIcon from '~/assets/clock.svg';
 import DatabaseIcon from '~/assets/database.svg';
-import siteText from '~/locale/index';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import styles from './metadata.module.scss';
@@ -15,14 +16,17 @@ interface IProps {
   datumsText: string;
 }
 
-const text = siteText.common.metadata;
-
 export function Metadata(props: IProps) {
   const { dataSource, datumsText, dateUnix, dateInsertedUnix } = props;
+  const { siteText }: ILocale = useContext(LocaleContext);
 
-  const dateOfReport = formatDateFromSeconds(dateUnix, 'weekday-medium');
+  const dateOfReport = formatDateFromSeconds(
+    siteText.utils,
+    dateUnix,
+    'weekday-medium'
+  );
   const dateOfInsertion = dateInsertedUnix
-    ? formatDateFromSeconds(dateInsertedUnix, 'weekday-medium')
+    ? formatDateFromSeconds(siteText.utils, dateInsertedUnix, 'weekday-medium')
     : undefined;
 
   return (
@@ -44,7 +48,7 @@ export function Metadata(props: IProps) {
           <DatabaseIcon aria-hidden />
         </span>
         <p>
-          {text.source}:{' '}
+          {siteText.common.metadata.source}:{' '}
           <a href={dataSource.href} rel="noopener noreferrer" target="_blank">
             {dataSource.text}
           </a>
