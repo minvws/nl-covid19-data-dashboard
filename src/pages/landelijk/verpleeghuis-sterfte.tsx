@@ -1,18 +1,19 @@
+import { useContext } from 'react';
+import LocaleContext, { ILocale } from '~/locale/localeContext';
 import CoronaVirus from '~/assets/coronavirus.svg';
 import { LineChart } from '~/components/charts/index';
 import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/contentHeader';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
-import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 import { formatNumber } from '~/utils/formatNumber';
 import { Metadata } from '~/components-styled/metadata';
 
-const text = siteText.verpleeghuis_oversterfte;
-
 const NursingHomeDeaths: FCWithLayout<INationalData> = (props) => {
   const data = props.data.nursing_home;
+  const { siteText }: ILocale = useContext(LocaleContext);
+  const text = siteText.verpleeghuis_oversterfte;
 
   return (
     <>

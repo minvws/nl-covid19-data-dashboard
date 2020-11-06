@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import LocaleContext, { ILocale } from '~/locale/localeContext';
 import Repro from '~/assets/reproductiegetal.svg';
 import { LineChart } from '~/components/charts/index';
 import { ReproductionIndexBarScale } from '~/components/landelijk/reproduction-index-barscale';
@@ -6,16 +8,15 @@ import { ContentHeader } from '~/components/contentHeader';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { Legenda } from '~/components/legenda';
 import { SEOHead } from '~/components/seoHead';
-import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 import { Metadata } from '~/components-styled/metadata';
 import { Text } from '~/components-styled/typography';
 import { KpiWithIllustrationTile } from '~/components-styled/kpi-with-illustration-tile';
 
-const text = siteText.reproductiegetal;
-
 const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
   const { data } = props;
+  const { siteText }: ILocale = useContext(LocaleContext);
+  const text = siteText.reproductiegetal;
 
   const lastKnownValidData = data.reproduction_index_last_known_average;
 

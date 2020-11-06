@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import LocaleContext, { ILocale } from '~/locale/localeContext';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { Spacer } from '~/components-styled/base';
 import { KpiTile } from '~/components-styled/kpi-tile';
@@ -19,16 +20,16 @@ import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-b
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
-import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { DataWarning } from '~/components/dataWarning';
 import { Metadata } from '~/components-styled/metadata';
 
-const text = siteText.ziekenhuisopnames_per_dag;
-
 const IntakeHospital: FCWithLayout<INationalData> = (props) => {
   const { data: state } = props;
+  const { siteText }: ILocale = useContext(LocaleContext);
+  const text = siteText.ziekenhuisopnames_per_dag;
+
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
     'municipal'
   );
@@ -109,7 +110,7 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
 
       <article className="metric-article layout-choropleth">
         <div className="data-warning">
-          <DataWarning />
+          <DataWarning text={siteText.data_warning_text} />
         </div>
         <div className="choropleth-header">
           <h3>{text.map_titel}</h3>
@@ -117,6 +118,7 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
 
           <div className="choropleth-controls">
             <ChartRegionControls
+              controls={siteText.charts.region_controls}
               onChange={(val: 'region' | 'municipal') => setSelectedMap(val)}
             />
           </div>

@@ -1,4 +1,5 @@
-import { useMemo, useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
+import LocaleContext, { ILocale } from '~/locale/localeContext';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import { ChartTimeControls } from '~/components-styled/chart-time-controls';
 import { BarChart } from '~/components/charts';
@@ -11,7 +12,6 @@ import {
 } from '~/components/lineChart/installationSelector';
 import { RegionalSewerWaterChart } from '~/components/lineChart/regionalSewerWaterChart';
 import { SEOHead } from '~/components/seoHead';
-import siteText from '~/locale/index';
 import {
   getSafetyRegionData,
   getSafetyRegionPaths,
@@ -31,10 +31,10 @@ import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 
-const text = siteText.veiligheidsregio_rioolwater_metingen;
-
 const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
   const { data, safetyRegionName } = props;
+  const { siteText }: ILocale = useContext(LocaleContext);
+  const text = siteText.veiligheidsregio_rioolwater_metingen;
 
   const {
     barScaleData,
@@ -45,12 +45,12 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
   } = useMemo(() => {
     return {
       barScaleData: getSewerWaterBarScaleData(data),
-      lineChartData: getSewerWaterLineChartData(data),
-      barChartData: getSewerWaterBarChartData(data),
+      lineChartData: getSewerWaterLineChartData(text, data),
+      barChartData: getSewerWaterBarChartData(text, siteText.utils, data),
       scatterPlotData: getSewerWaterScatterPlotData(data),
       sewerStationNames: getInstallationNames(data),
     };
-  }, [data]);
+  }, [data, siteText, text]);
 
   const sewerAverages = data.sewer;
 
@@ -130,6 +130,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
           <ChartTimeControls
             timeframeOptions={['all', '5weeks']}
             timeframe={timeframe}
+            timeControls={siteText.charts.time_controls}
             onChange={(value) => setTimeframe(value)}
           />
         </div>

@@ -1,10 +1,11 @@
+import { useContext } from 'react';
+import LocaleContext, { ILocale } from '~/locale/localeContext';
 import Getest from '~/assets/test.svg';
 import { LineChart } from '~/components/charts/index';
 import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/contentHeader';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { SEOHead } from '~/components/seoHead';
-import siteText from '~/locale/index';
 import {
   getSafetyRegionData,
   getSafetyRegionPaths,
@@ -14,12 +15,13 @@ import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { Metadata } from '~/components-styled/metadata';
 
-const text = siteText.veiligheidsregio_verpleeghuis_positief_geteste_personen;
-
 const NursingHomeInfectedPeople: FCWithLayout<ISafetyRegionData> = ({
   data,
   safetyRegionName,
 }) => {
+  const { siteText }: ILocale = useContext(LocaleContext);
+  const text = siteText.veiligheidsregio_verpleeghuis_positief_geteste_personen;
+
   return (
     <>
       <SEOHead

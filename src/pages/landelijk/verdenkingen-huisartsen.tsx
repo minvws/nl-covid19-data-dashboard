@@ -1,10 +1,11 @@
+import { useContext } from 'react';
+import LocaleContext, { ILocale } from '~/locale/localeContext';
 import Arts from '~/assets/arts.svg';
 import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/contentHeader';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { LineChart } from '~/components/lineChart/lineChartWithWeekTooltip';
 import { SEOHead } from '~/components/seoHead';
-import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 import { NationalHuisartsVerdenkingen } from '~/types/data.d';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
@@ -13,10 +14,10 @@ import { KpiTile } from '~/components-styled/kpi-tile';
 import { Text } from '~/components-styled/typography';
 import { Metadata } from '~/components-styled/metadata';
 
-const text = siteText.verdenkingen_huisartsen;
-
 const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
   const { data: state } = props;
+  const { siteText }: ILocale = useContext(LocaleContext);
+  const text = siteText.verdenkingen_huisartsen;
 
   const data: NationalHuisartsVerdenkingen | undefined =
     state?.verdenkingen_huisartsen;

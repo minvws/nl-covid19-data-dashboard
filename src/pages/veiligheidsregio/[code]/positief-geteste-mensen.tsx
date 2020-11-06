@@ -1,4 +1,6 @@
+import { useContext } from 'react';
 import { useRouter } from 'next/router';
+import LocaleContext, { ILocale } from '~/locale/localeContext';
 import Afname from '~/assets/afname.svg';
 import Getest from '~/assets/test.svg';
 import { Anchor } from '~/components-styled/anchor';
@@ -19,7 +21,6 @@ import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { SEOHead } from '~/components/seoHead';
 import { PositivelyTestedPeopleBarScale } from '~/components/veiligheidsregio/positive-tested-people-barscale';
 import regionCodeToMunicipalCodeLookup from '~/data/regionCodeToMunicipalCodeLookup';
-import siteText from '~/locale/index';
 import {
   getSafetyRegionData,
   getSafetyRegionPaths,
@@ -33,17 +34,18 @@ import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { MultipleLineChartTile } from '~/components-styled/multiple-line-chart-tile';
 
-const text = siteText.veiligheidsregio_positief_geteste_personen;
-const ggdText = siteText.veiligheidsregio_positief_geteste_personen_ggd;
-
 const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
   const { data, safetyRegionName } = props;
   const router = useRouter();
+  const { siteText }: ILocale = useContext(LocaleContext);
 
-  const resultsPerRegion: ResultsPerRegion = data.results_per_region;
+  const text = siteText.veiligheidsregio_positief_geteste_personen;
+  const ggdText = siteText.veiligheidsregio_positief_geteste_personen_ggd;
 
   const ggdData = data.ggd.last_value;
   const ggdValues = data.ggd.values;
+
+  const resultsPerRegion: ResultsPerRegion = data.results_per_region;
 
   const legendItems = useSafetyRegionLegendaData('positive_tested_people');
   const municipalCodes = regionCodeToMunicipalCodeLookup[data.code];

@@ -1,5 +1,6 @@
+import { useContext, ReactNode } from 'react';
 import { useRouter } from 'next/router';
-import { ReactNode } from 'react';
+import LocaleContext, { ILocale } from '~/locale/localeContext';
 import { MunicipalityChoropleth } from '~/components/choropleth/MunicipalityChoropleth';
 import {
   createSelectMunicipalHandler,
@@ -10,7 +11,6 @@ import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent'
 import { FCWithLayout } from '~/components/layout';
 import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
 import { SEOHead } from '~/components/seoHead';
-import text from '~/locale/index';
 import getLastGeneratedData from '~/static-props/last-generated-data';
 import { useMediaQuery } from '~/utils/useMediaQuery';
 
@@ -40,6 +40,7 @@ const tooltipContent = (selectedHandler: MunicipalitySelectionHandler) => {
 // lots of unnecessary null checks on those pages.
 const Municipality: FCWithLayout<any> = () => {
   const router = useRouter();
+  const { siteText }: ILocale = useContext(LocaleContext);
   const isLargeScreen = useMediaQuery('(min-width: 1000px)');
 
   const onSelectMunicipal = (context: MunicipalityProperties) => {
@@ -53,13 +54,13 @@ const Municipality: FCWithLayout<any> = () => {
   return (
     <>
       <SEOHead
-        title={text.gemeente_index.metadata.title}
-        description={text.gemeente_index.metadata.description}
+        title={siteText.gemeente_index.metadata.title}
+        description={siteText.gemeente_index.metadata.description}
       />
       <article className="map-article">
         <div>
-          <h2>{text.gemeente_index.selecteer_titel}</h2>
-          <p>{text.gemeente_index.selecteer_toelichting}</p>
+          <h2>{siteText.gemeente_index.selecteer_titel}</h2>
+          <p>{siteText.gemeente_index.selecteer_toelichting}</p>
         </div>
         <div className="map-container">
           <MunicipalityChoropleth

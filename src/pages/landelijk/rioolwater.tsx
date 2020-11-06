@@ -1,4 +1,6 @@
 import { useRouter } from 'next/router';
+import { useContext } from 'react';
+import LocaleContext, { ILocale } from '~/locale/localeContext';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import { Spacer } from '~/components-styled/base';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
@@ -12,18 +14,18 @@ import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRang
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
-import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { Metadata } from '~/components-styled/metadata';
 
-const text = siteText.rioolwater_metingen;
-
 const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
   const sewerAverages = data.sewer;
   const router = useRouter();
   const legendItems = useSafetyRegionLegendaData('sewer');
+
+  const { siteText }: ILocale = useContext(LocaleContext);
+  const text = siteText.rioolwater_metingen;
 
   return (
     <>
@@ -113,7 +115,10 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
         values={sewerAverages.values.map((value) => ({
           value: Number(value.average),
           date: value.week_unix,
-          week: { start: value.week_start_unix, end: value.week_end_unix },
+          week: {
+            start: value.week_start_unix,
+            end: value.week_end_unix,
+          },
         }))}
         metadata={{
           source: text.bron,

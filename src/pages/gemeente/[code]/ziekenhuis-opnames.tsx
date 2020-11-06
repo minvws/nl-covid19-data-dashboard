@@ -1,4 +1,6 @@
+import { useContext } from 'react';
 import { useRouter } from 'next/router';
+import LocaleContext, { ILocale } from '~/locale/localeContext';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { LineChart } from '~/components/charts/index';
 import { ChoroplethLegenda } from '~/components/choropleth/legenda/ChoroplethLegenda';
@@ -11,7 +13,6 @@ import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/contentHeader';
 import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
 import { SEOHead } from '~/components/seoHead';
-import siteText from '~/locale/index';
 import {
   getMunicipalityData,
   getMunicipalityPaths,
@@ -22,11 +23,11 @@ import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { Metadata } from '~/components-styled/metadata';
 
-const text = siteText.gemeente_ziekenhuisopnames_per_dag;
-
 const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
   const { data, municipalityName } = props;
   const router = useRouter();
+  const { siteText }: ILocale = useContext(LocaleContext);
+  const text = siteText.gemeente_ziekenhuisopnames_per_dag;
 
   const legendItems = useMunicipalLegendaData('hospital_admissions');
   const hospitalAdmissions: HospitalAdmissions | undefined =
@@ -59,7 +60,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
       />
 
       <article className="metric-article layout-two-column-two-row">
-        <DataWarning />
+        <DataWarning text={siteText.data_warning_text} />
         <div className="row-item">
           <div className="column-item column-item-extra-margin">
             <h3>{text.barscale_titel}</h3>
@@ -83,7 +84,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
 
       {hospitalAdmissions && (
         <article className="metric-article">
-          <DataWarning />
+          <DataWarning text={siteText.data_warning_text} />
           <LineChart
             title={text.linechart_titel}
             description={text.linechart_description}
@@ -98,7 +99,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
 
       <article className="metric-article layout-choropleth">
         <div className="data-warning">
-          <DataWarning />
+          <DataWarning text={siteText.data_warning_text} />
         </div>
         <div className="choropleth-header">
           <h3>

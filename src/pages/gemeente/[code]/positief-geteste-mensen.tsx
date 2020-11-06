@@ -1,4 +1,6 @@
 import { useRouter } from 'next/router';
+import { useContext } from 'react';
+import LocaleContext, { ILocale } from '~/locale/localeContext';
 import Getest from '~/assets/test.svg';
 import { ChoroplethLegenda } from '~/components/choropleth/legenda/ChoroplethLegenda';
 import { useMunicipalLegendaData } from '~/components/choropleth/legenda/hooks/useMunicipalLegendaData';
@@ -9,7 +11,6 @@ import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/contentHeader';
 import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
 import { SEOHead } from '~/components/seoHead';
-import siteText from '~/locale/index';
 import {
   getMunicipalityData,
   getMunicipalityPaths,
@@ -24,11 +25,11 @@ import { Text } from '~/components-styled/typography';
 import { Metadata } from '~/components-styled/metadata';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 
-const text = siteText.gemeente_positief_geteste_personen;
-
 const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
   const { data, municipalityName } = props;
   const router = useRouter();
+  const { siteText }: ILocale = useContext(LocaleContext);
+  const text = siteText.gemeente_positief_geteste_personen;
 
   const legendItems = useMunicipalLegendaData('positive_tested_people');
   const positivelyTestedPeople: PositiveTestedPeople | undefined =

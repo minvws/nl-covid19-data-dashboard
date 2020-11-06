@@ -1,4 +1,6 @@
+import { useContext } from 'react';
 import { useRouter } from 'next/router';
+import LocaleContext, { ILocale } from '~/locale/localeContext';
 import Locatie from '~/assets/locaties.svg';
 import { LineChart } from '~/components/charts/index';
 import { ChoroplethLegenda } from '~/components/choropleth/legenda/ChoroplethLegenda';
@@ -10,7 +12,6 @@ import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/contentHeader';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
-import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { KpiTile } from '~/components-styled/kpi-tile';
@@ -18,11 +19,12 @@ import { KpiValue } from '~/components-styled/kpi-value';
 import { Text } from '~/components-styled/typography';
 import { Metadata } from '~/components-styled/metadata';
 
-const text = siteText.verpleeghuis_besmette_locaties;
-
 const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
   const data = props.data.nursing_home;
   const router = useRouter();
+  const { siteText }: ILocale = useContext(LocaleContext);
+  const text = siteText.verpleeghuis_besmette_locaties;
+
   const legendItems = useSafetyRegionLegendaData(
     'nursing_home',
     'infected_locations_percentage'

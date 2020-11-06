@@ -1,4 +1,6 @@
 import { useMemo } from 'react';
+import { useContext } from 'react';
+import LocaleContext, { ILocale } from '~/locale/localeContext';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
@@ -9,7 +11,6 @@ import { FCWithLayout } from '~/components/layout';
 import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
 import { MunicipalSewerWaterLineChart } from '~/components/lineChart/municipalSewerWaterLineChart';
 import { SEOHead } from '~/components/seoHead';
-import siteText from '~/locale/index';
 import {
   getMunicipalityData,
   getMunicipalityPaths,
@@ -23,18 +24,18 @@ import {
 } from '~/utils/sewer-water/municipality-sewer-water.util';
 import { Metadata } from '~/components-styled/metadata';
 
-const text = siteText.gemeente_rioolwater_metingen;
-
 const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
   const { data, municipalityName } = props;
+  const { siteText }: ILocale = useContext(LocaleContext);
+  const text = siteText.gemeente_rioolwater_metingen;
 
   const { barScaleData, lineChartData, barChartData } = useMemo(() => {
     return {
       barScaleData: getSewerWaterBarScaleData(data),
-      lineChartData: getSewerWaterLineChartData(data),
-      barChartData: getSewerWaterBarChartData(data),
+      lineChartData: getSewerWaterLineChartData(text, data),
+      barChartData: getSewerWaterBarChartData(text, siteText.utils, data),
     };
-  }, [data]);
+  }, [data, siteText, text]);
 
   const sewerAverages = data.sewer;
 

@@ -1,4 +1,6 @@
 import { useRouter } from 'next/router';
+import { useContext } from 'react';
+import LocaleContext, { ILocale } from '~/locale/localeContext';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { LineChart } from '~/components/charts/index';
 import { ChoroplethLegenda } from '~/components/choropleth/legenda/ChoroplethLegenda';
@@ -12,7 +14,6 @@ import { ContentHeader } from '~/components/contentHeader';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { SEOHead } from '~/components/seoHead';
 import regionCodeToMunicipalCodeLookup from '~/data/regionCodeToMunicipalCodeLookup';
-import siteText from '~/locale/index';
 import {
   getSafetyRegionData,
   getSafetyRegionPaths,
@@ -23,11 +24,10 @@ import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { Metadata } from '~/components-styled/metadata';
 
-const text = siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
-
 const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
   const { data, safetyRegionName } = props;
   const router = useRouter();
+  const { siteText }: ILocale = useContext(LocaleContext);
 
   const resultsPerRegion: ResultsPerRegion | undefined =
     data?.results_per_region;
@@ -35,6 +35,8 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
   const legendItems = useMunicipalLegendaData('hospital_admissions');
   const municipalCodes = regionCodeToMunicipalCodeLookup[data.code];
   const selectedMunicipalCode = municipalCodes ? municipalCodes[0] : undefined;
+
+  const text = siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
 
   return (
     <>
@@ -61,7 +63,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
         }}
       />
       <article className="metric-article layout-two-column-two-row">
-        <DataWarning />
+        <DataWarning text={siteText.data_warning_text} />
         <div className="row-item">
           <div className="column-item column-item-extra-margin">
             <h3>{text.barscale_titel}</h3>
@@ -84,7 +86,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
 
       {resultsPerRegion && (
         <article className="metric-article">
-          <DataWarning />
+          <DataWarning text={siteText.data_warning_text} />
           <LineChart
             title={text.linechart_titel}
             description={text.linechart_description}
@@ -98,7 +100,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
       )}
       <article className="metric-article layout-choropleth">
         <div className="data-warning">
-          <DataWarning />
+          <DataWarning text={siteText.data_warning_text} />
         </div>
         <div className="choropleth-header">
           <h3>

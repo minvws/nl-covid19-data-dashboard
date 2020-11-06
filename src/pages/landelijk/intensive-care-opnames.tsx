@@ -1,10 +1,11 @@
+import { useContext } from 'react';
+import LocaleContext, { ILocale } from '~/locale/localeContext';
 import Arts from '~/assets/arts.svg';
 import { ContentHeader_sourcesHack } from '~/components/contentHeader_sourcesHack';
 import { IntakeIntensiveCareBarscale } from '~/components/landelijk/intake-intensive-care-barscale';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
-import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { KpiTile } from '~/components-styled/kpi-tile';
@@ -12,13 +13,12 @@ import { KpiValue } from '~/components-styled/kpi-value';
 import { Text } from '~/components-styled/typography';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 
-const text = siteText.ic_opnames_per_dag;
-
 const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
   const { data: state } = props;
+  const { siteText }: ILocale = useContext(LocaleContext);
+  const text = siteText.ic_opnames_per_dag;
 
   const dataIntake = state.intake_intensivecare_ma;
-
   const dataBeds = state.intensive_care_beds_occupied;
 
   return (

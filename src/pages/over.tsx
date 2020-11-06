@@ -1,9 +1,10 @@
+import { useContext } from 'react';
+import LocaleContext, { ILocale } from '~/locale/localeContext';
 import fs from 'fs';
 import Head from 'next/head';
 import path from 'path';
 import { FCWithLayout, getLayoutWithMetadata } from '~/components/layout';
 import { MaxWidth } from '~/components/maxWidth';
-import siteText, { TALLLanguages } from '~/locale/index';
 import styles from './over.module.scss';
 
 interface StaticProps {
@@ -11,22 +12,19 @@ interface StaticProps {
 }
 
 interface OverProps {
-  text: TALLLanguages;
   lastGenerated: string;
 }
 
 export async function getStaticProps(): Promise<StaticProps> {
-  const text = (await import('../locale/index')).default;
-
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const lastGenerated = JSON.parse(fileContents).last_generated;
 
-  return { props: { text, lastGenerated } };
+  return { props: { lastGenerated } };
 }
 
-const Over: FCWithLayout<OverProps> = (props) => {
-  const { text } = props;
+const Over: FCWithLayout<OverProps> = () => {
+  const { siteText }: ILocale = useContext(LocaleContext);
 
   return (
     <>
@@ -47,10 +45,10 @@ const Over: FCWithLayout<OverProps> = (props) => {
       <div className={styles.container}>
         <MaxWidth>
           <div className={styles.maxwidth}>
-            <h2>{text.over_titel.text}</h2>
-            <p>{text.over_beschrijving.text}</p>
-            <h2>{text.over_disclaimer.title}</h2>
-            <p>{text.over_disclaimer.text}</p>
+            <h2>{siteText.over_titel.text}</h2>
+            <p>{siteText.over_beschrijving.text}</p>
+            <h2>{siteText.over_disclaimer.title}</h2>
+            <p>{siteText.over_disclaimer.text}</p>
           </div>
         </MaxWidth>
       </div>
@@ -58,10 +56,6 @@ const Over: FCWithLayout<OverProps> = (props) => {
   );
 };
 
-const metadata = {
-  ...siteText.over_metadata,
-};
-
-Over.getLayout = getLayoutWithMetadata(metadata);
+Over.getLayout = getLayoutWithMetadata('over_metadata');
 
 export default Over;

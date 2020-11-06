@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import LocaleContext, { ILocale } from '~/locale/localeContext';
 import Afname from '~/assets/afname.svg';
 import Getest from '~/assets/test.svg';
 import { Anchor } from '~/components-styled/anchor';
@@ -25,7 +26,6 @@ import { PositiveTestedPeopleBarScale } from '~/components/landelijk/positive-te
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
-import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 import {
   InfectedPeopleDeltaNormalized,
@@ -37,17 +37,15 @@ import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { Metadata } from '~/components-styled/metadata';
 import { MultipleLineChartTile } from '~/components-styled/multiple-line-chart-tile';
-import { RegionControlOption } from '~/components-styled/chart-region-controls';
 
-const text = siteText.positief_geteste_personen;
-const ggdText = siteText.positief_geteste_personen_ggd;
-
-const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
-  const { data } = props;
-  const [selectedMap, setSelectedMap] = useState<RegionControlOption>(
+const PositivelyTestedPeople: FCWithLayout<INationalData> = ({ data }) => {
+  const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
     'municipal'
   );
   const router = useRouter();
+  const { siteText }: ILocale = useContext(LocaleContext);
+  const text = siteText.positief_geteste_personen;
+  const ggdText = siteText.positief_geteste_personen_ggd;
 
   const legendItems = useSafetyRegionLegendaData('positive_tested_people');
   const delta: InfectedPeopleDeltaNormalized =

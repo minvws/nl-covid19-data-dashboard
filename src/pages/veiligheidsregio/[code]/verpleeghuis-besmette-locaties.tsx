@@ -1,9 +1,10 @@
+import { useContext } from 'react';
+import LocaleContext, { ILocale } from '~/locale/localeContext';
 import Locatie from '~/assets/locaties.svg';
 import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/contentHeader';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { SEOHead } from '~/components/seoHead';
-import siteText from '~/locale/index';
 import {
   getSafetyRegionData,
   getSafetyRegionPaths,
@@ -16,12 +17,12 @@ import { Text } from '~/components-styled/typography';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 
-const text = siteText.veiligheidsregio_verpleeghuis_besmette_locaties;
-
 const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
   props
 ) => {
   const { data: state, safetyRegionName } = props;
+  const { siteText }: ILocale = useContext(LocaleContext);
+  const text = siteText.veiligheidsregio_verpleeghuis_besmette_locaties;
 
   const newlyInfectedLocations =
     state?.nursing_home.last_value.newly_infected_locations;

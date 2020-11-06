@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import LocaleContext, { ILocale } from '~/locale/localeContext';
 import Ziektegolf from '~/assets/ziektegolf.svg';
 import { AreaChart } from '~/components/charts/index';
 import { ContentHeader } from '~/components/contentHeader';
@@ -5,15 +7,14 @@ import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { Legenda } from '~/components/legenda';
 import { SEOHead } from '~/components/seoHead';
-import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 import { Metadata } from '~/components-styled/metadata';
 import { formatNumber } from '~/utils/formatNumber';
 
-const text = siteText.besmettelijke_personen;
-
 const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
   const { data } = props;
+  const { siteText }: ILocale = useContext(LocaleContext);
+  const text = siteText.besmettelijke_personen;
 
   const count = data.infectious_people_count;
   const infectiousPeopleLastKnownAverage =
