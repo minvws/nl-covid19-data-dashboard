@@ -123,7 +123,7 @@ export interface National {
   intensive_care_beds_occupied: IntensiveCareBedsOccupied;
   ggd: NationalGgd;
   nursing_home: NationalNursingHome;
-  behavior?: NationalBehavior;
+  behavior: NationalBehavior;
   restrictions?: NationalRestrictions;
 }
 export interface NationalHuisartsVerdenkingen {
@@ -494,7 +494,7 @@ export interface Regionaal {
   results_per_region: ResultsPerRegion;
   ggd: RegionalGgd;
   nursing_home: RegionalNursingHome;
-  behavior?: RegionalBehavior;
+  behavior: RegionalBehavior;
   restrictions?: RegionalRestrictions;
 }
 export interface RegionalSewer {
@@ -662,7 +662,7 @@ export interface Regions {
   deceased: RegionDeceased[];
   escalation_levels: EscalationLevels[];
   nursing_home: RegionsNursingHome[];
-  behavior?: RegionsBehavior[];
+  behavior: RegionsBehavior[];
   sewer: RegionsSewer[];
 }
 export interface RegionHospitalAdmissions {
