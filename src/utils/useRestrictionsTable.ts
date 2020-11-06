@@ -4,6 +4,28 @@ import {
   RegionalRestrictionValue,
 } from '~/types/data';
 
+/**
+ * This is a hard-coded list of categories that dictates where a restriction category
+ * is rendered in the table.
+ */
+const rowOrder: EscalationCategory[] = [
+  'algemeen',
+  'er_op_uit',
+  'bezoek',
+  'samenkomst',
+  'huwelijk',
+  'verpleeghuis',
+  'horeca',
+  'sport',
+  'reizen_binnenland',
+  'ov',
+  'uitvaart',
+  'onderwijs',
+  'werk',
+  'winkels',
+  'alcohol',
+];
+
 export type EscalationCategory = RegionalRestrictionValue['category_id'];
 export type EscalationLevel = RegionalRestrictionValue['escalation_level'];
 export type TargetRegion = RegionalRestrictionValue['target_region'];
@@ -38,7 +60,8 @@ function createRows(
 ) {
   const uniqueCategories = data
     .map((value) => value.category_id)
-    .filter((value, index, list) => list.indexOf(value) === index);
+    .filter((value, index, list) => list.indexOf(value) === index)
+    .sort((left, right) => rowOrder.indexOf(left) - rowOrder.indexOf(right));
 
   return uniqueCategories.map<RestrictionsRowData>((category) => ({
     category: category,

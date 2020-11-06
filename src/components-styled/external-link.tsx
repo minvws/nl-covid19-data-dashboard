@@ -1,4 +1,5 @@
 import React from 'react';
+import { Text } from './typography';
 
 interface ExternalLinkProps {
   text: string;
@@ -7,8 +8,8 @@ interface ExternalLinkProps {
 
 export function ExternalLink({ text, href }: ExternalLinkProps) {
   return (
-    <a href={href} rel="noopener noreferrer" target="_blank">
+    <Text as="a" href={href} rel="noopener noreferrer" target="_blank">
       {text}
-    </a>
+    </Text>
   );
 }

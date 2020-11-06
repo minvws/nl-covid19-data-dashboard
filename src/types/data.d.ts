@@ -357,7 +357,8 @@ export interface NationalRestrictionValue {
     | "onderwijs"
     | "werk"
     | "winkels"
-    | "alcohol";
+    | "alcohol"
+    | "algemeen";
   restriction_order: number;
   valid_from_unix: number;
 }
@@ -545,7 +546,8 @@ export interface RegionalRestrictionValue {
     | "onderwijs"
     | "werk"
     | "winkels"
-    | "alcohol";
+    | "alcohol"
+    | "algemeen";
   restriction_order: number;
   valid_from_unix: number;
 }
