@@ -1,30 +1,19 @@
 import { NationalNursingHomeValue } from '~/types/data.d';
 import { MetricKPI } from '~/components/metricKPI';
 import { formatNumber } from '~/utils/formatNumber';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { formatDateFromSeconds } from '~/utils/formatDate';
-import siteText from '~/locale/index';
-
-const text = siteText.common.metricKPI;
-const title = siteText.verpleeghuis_positief_geteste_personen.titel_kpi;
 
 export function NursingHomeInfectedPeopleMetric(props: {
   data: NationalNursingHomeValue | undefined;
 }) {
   const { data } = props;
-
   if (data === undefined) return null;
-
-  const description = replaceVariablesInText(text.dateOfReport, {
-    dateOfReport: formatDateFromSeconds(data.date_of_report_unix, 'medium'),
-  });
 
   return (
     <MetricKPI
-      title={title}
+      textKey="verpleeghuis_positief_geteste_personen"
       value={data.newly_infected_people}
       format={formatNumber}
-      description={description}
+      descriptionDate={data?.date_of_report_unix}
     />
   );
 }

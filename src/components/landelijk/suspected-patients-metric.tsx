@@ -1,30 +1,26 @@
 import { MetricKPI } from '~/components/metricKPI';
-import siteText from '~/locale/index';
 import { NationalHuisartsVerdenkingenValue } from '~/types/data.d';
-import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-
-const text = siteText.common.metricKPI;
-const title = siteText.verdenkingen_huisartsen.titel_kpi;
 
 export function SuspectedPatientsMetric(props: {
   data: NationalHuisartsVerdenkingenValue | undefined;
 }) {
   const { data } = props;
-
   if (data === undefined) return null;
 
+<<<<<<< HEAD
   const description = replaceVariablesInText(text.dateOfReport, {
     dateOfReport: formatDateFromSeconds(data.week_unix, 'medium'),
   });
 
+=======
+>>>>>>> update all metrics to use context
   return (
     <MetricKPI
-      title={title}
+      textKey="verdenkingen_huisartsen"
       value={Number(data.geschat_aantal)}
       format={formatNumber}
-      description={description}
+      descriptionDate={data?.date_of_insertion_unix}
     />
   );
 }
