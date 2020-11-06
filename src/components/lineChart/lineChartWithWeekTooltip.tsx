@@ -3,9 +3,10 @@ import Highcharts, {
   TooltipFormatterCallbackFunction,
 } from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import React, { useMemo, useState } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
+import LocaleContext, { ILocale } from '~/locale/localeContext';
 import { ChartTimeControls } from '~/components-styled/chart-time-controls';
-import { formatDateFromSeconds } from '~/utils/formatDate';
+import { Utils, formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
 import styles from './lineChart.module.scss';
@@ -31,6 +32,7 @@ export type LineChartProps = {
 };
 
 function getOptions(
+  utils: Utils,
   values: Value[],
   tooltipFormatter?: TooltipFormatterCallbackFunction,
   formatYAxis?: (y: number) => string
@@ -108,7 +110,7 @@ function getOptions(
         rotation: '0' as any,
         formatter: function () {
           return this.isFirst || this.isLast
-            ? formatDateFromSeconds(this.value, 'axis')
+            ? formatDateFromSeconds(utils, this.value, 'axis')
             : '';
         },
       },
@@ -125,9 +127,11 @@ function getOptions(
           };
 
           return `<strong>${formatDateFromSeconds(
+            utils,
             originalData.week.start,
             'short'
           )} - ${formatDateFromSeconds(
+            utils,
             originalData.week.end,
             'short'
           )}:</strong> ${formatNumber(this.y)}`;
@@ -169,6 +173,7 @@ export function LineChart({
   tooltipFormatter,
 }: LineChartProps) {
   const [timeframe, setTimeframe] = useState<TimeframeOption>('5weeks');
+  const { siteText }: ILocale = useContext(LocaleContext);
 
   const chartOptions = useMemo(() => {
     const filteredValues = getFilteredValues<Value>(
@@ -176,7 +181,12 @@ export function LineChart({
       timeframe,
       (value: Value) => value.date * 1000
     );
-    return getOptions(filteredValues, tooltipFormatter, formatYAxis);
+    return getOptions(
+      siteText.utils,
+      filteredValues,
+      tooltipFormatter,
+      formatYAxis
+    );
   }, [values, timeframe, tooltipFormatter, formatYAxis]);
 
   return (
@@ -191,6 +201,7 @@ export function LineChart({
             timeframe={timeframe}
             timeframeOptions={timeframeOptions}
             onChange={setTimeframe}
+            timeControls={siteText.charts.time_controls}
           />
         </div>
       </header>

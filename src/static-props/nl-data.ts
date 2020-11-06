@@ -6,7 +6,7 @@ import { sortNationalTimeSeriesInDataInPlace } from './data-sorting';
 export interface INationalData {
   data: National;
   lastGenerated: string;
-  text?: any;
+  siteText?: any;
 }
 
 interface IProps {

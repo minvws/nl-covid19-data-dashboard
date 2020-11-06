@@ -1,12 +1,12 @@
 import { NextRouter } from 'next/router';
-import { ReactNode } from 'react';
+import { useContext, ReactNode } from 'react';
+import LocaleContext, { ILocale } from '~/locale/localeContext';
 import EscalationLevel1 from '~/assets/niveau-1.svg';
 import EscalationLevel2 from '~/assets/niveau-2.svg';
 import EscalationLevel3 from '~/assets/niveau-3.svg';
 import EscalationLevel4 from '~/assets/niveau-4.svg';
 import { regionThresholds } from '~/components/choropleth/regionThresholds';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
-import text from '~/locale/index';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { ChoroplethThresholds } from '../../shared';
@@ -17,6 +17,7 @@ const escalationThresholds = (regionThresholds.escalation_levels as ChoroplethTh
 
 export const escalationTooltip = (router: NextRouter) => {
   return (context: any): ReactNode => {
+    const { siteText }: ILocale = useContext(LocaleContext);
     const type: number = context?.value;
 
     const thresholdInfo = escalationThresholds.find(
@@ -52,11 +53,12 @@ export const escalationTooltip = (router: NextRouter) => {
             </div>
             <div>
               <strong>
-                {(text.escalatie_niveau.types as any)[type].titel}
+                {(siteText.escalatie_niveau.types as any)[type].titel}
               </strong>
               <br />
-              {replaceVariablesInText(text.escalatie_niveau.valid_from, {
+              {replaceVariablesInText(siteText.escalatie_niveau.valid_from, {
                 validFrom: formatDateFromSeconds(
+                  siteText.utils,
                   context.valid_from_unix,
                   'short'
                 ),
