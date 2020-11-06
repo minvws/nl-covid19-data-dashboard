@@ -656,10 +656,11 @@
   },
   "nationaal_layout": {
     "headings": {
-      "medisch": "Medical indicators",
-      "overig": "Early indicators",
-      "verpleeghuis": "Nursing homes",
-      "laatste": "Latest developments"
+      "laatste": "Latest developments",
+      "besmettingen": "[@todo] Besmettingen",
+      "ziekenhuizen": "[@todo] Ziekenhuizen",
+      "verpleeghuizen": "[@todo] Verpleeghuizen",
+      "vroege_signalen": "[@todo] Vroege signalen"
     }
   },
   "veiligheidsregio_layout": {

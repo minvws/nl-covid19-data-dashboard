@@ -656,10 +656,12 @@
   },
   "nationaal_layout": {
     "headings": {
-      "medisch": "Medische indicatoren",
-      "overig": "Vroegsignalering",
-      "verpleeghuis": "Verpleeghuiszorg",
-      "laatste": "Laatste ontwikkelingen"
+      "laatste": "Laatste ontwikkelingen",
+
+      "besmettingen": "Besmettingen",
+      "ziekenhuizen": "Ziekenhuizen",
+      "verpleeghuizen": "Verpleeghuizen",
+      "vroege_signalen": "Vroege signalen"
     }
   },
   "veiligheidsregio_layout": {
