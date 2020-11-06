@@ -1,4 +1,5 @@
-import locale from '~/locale/index';
+import { useContext } from 'react';
+import LocaleContext, { TLocale } from '~/locale/localeContext';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { ExternalLink } from './external-link';
@@ -13,21 +14,26 @@ export interface MetadataProps {
   };
 }
 
-function formatMetadataDate(date: number | [number, number]): string {
+function formatMetadataDate(
+  siteText: TLocale,
+  date: number | [number, number]
+): string {
   if (typeof date === 'number') {
-    return replaceVariablesInText(locale.common.metadata.date, {
-      date: formatDateFromSeconds(date, 'weekday-medium'),
+    return replaceVariablesInText(siteText.common.metadata.date, {
+      date: formatDateFromSeconds(siteText.utils, date, 'weekday-medium'),
     });
   }
 
-  return replaceVariablesInText(locale.common.metadata.dateFromTo, {
-    dateFrom: formatDateFromSeconds(date[0], 'weekday-medium'),
-    dateTo: formatDateFromSeconds(date[1], 'weekday-medium'),
+  return replaceVariablesInText(siteText.common.metadata.dateFromTo, {
+    dateFrom: formatDateFromSeconds(siteText.utils, date[0], 'weekday-medium'),
+    dateTo: formatDateFromSeconds(siteText.utils, date[1], 'weekday-medium'),
   });
 }
 
 export function Metadata({ date, source }: MetadataProps) {
-  const dateString = date ? formatMetadataDate(date) : null;
+  const { siteText }: TLocale = useContext(LocaleContext);
+  const dateString = date ? formatMetadataDate(siteText, date) : null;
+
   return (
     <Box as="footer" mt={3} gridArea="metadata">
       <Text color="annotation" fontSize={1}>
@@ -35,7 +41,7 @@ export function Metadata({ date, source }: MetadataProps) {
         {dateString && source ? ' · ' : null}
         {source ? (
           <>
-            {locale.common.metadata.source}
+            {siteText.common.metadata.source}
             {': '} <ExternalLink {...source} />
           </>
         ) : null}

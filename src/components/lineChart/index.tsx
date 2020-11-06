@@ -32,6 +32,7 @@ export interface LineChartProps<T> {
 function getChartOptions<T extends Value>(
   utils: Utils,
   values: T[],
+  signaalwaardeLabel: string,
   signaalwaarde?: number,
   formatTooltip?: (value: T) => string,
   formatYAxis?: (y: number) => string,

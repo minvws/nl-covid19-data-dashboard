@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import LocaleContext, { ILocale } from '~/locale/localeContext';
 import {
   ChoroplethLegenda,
   ILegendaItem,
@@ -46,6 +48,7 @@ export function ChoroplethTile<T>({
   const legendaComponent = legend && (
     <ChoroplethLegenda items={legend.items} title={legend.title} />
   );
+  const { siteText }: ILocale = useContext(LocaleContext);
 
   return (
     <Tile mb={4} ml={{ _: -4, sm: 0 }} mr={{ _: -4, sm: 0 }}>
@@ -61,7 +64,10 @@ export function ChoroplethTile<T>({
               )}
               {onChangeControls && (
                 <Box display="flex" justifyContent="flex-start">
-                  <ChartRegionControls onChange={onChangeControls} />
+                  <ChartRegionControls
+                    controls={siteText.charts.region_controls}
+                    onChange={onChangeControls}
+                  />
                 </Box>
               )}
             </Box>
