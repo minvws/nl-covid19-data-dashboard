@@ -123,8 +123,8 @@ export interface National {
   intensive_care_beds_occupied: IntensiveCareBedsOccupied;
   ggd: NationalGgd;
   nursing_home: NationalNursingHome;
-  behavior: NationalBehavior;
   restrictions?: NationalRestrictions;
+  behavior: NationalBehavior;
 }
 export interface NationalHuisartsVerdenkingen {
   values: NationalHuisartsVerdenkingenValue[];
@@ -337,6 +337,31 @@ export interface NationalNursingHomeValue {
   date_of_report_unix: number;
   date_of_insertion_unix: number;
 }
+export interface NationalRestrictions {
+  values: NationalRestrictionValue[];
+}
+export interface NationalRestrictionValue {
+  restriction_id: string;
+  target_region: string;
+  escalation_level: 0 | 1 | 2 | 3 | 4 | 41 | 401;
+  category_id:
+    | "er_op_uit"
+    | "bezoek"
+    | "samenkomst"
+    | "huwelijk"
+    | "verpleeghuis"
+    | "horeca"
+    | "sport"
+    | "reizen_binnenland"
+    | "ov"
+    | "uitvaart"
+    | "onderwijs"
+    | "werk"
+    | "winkels"
+    | "alcohol";
+  restriction_order: number;
+  valid_from_unix: number;
+}
 export interface NationalBehavior {
   values: NationalBehaviorValue[];
   last_value: NationalBehaviorValue;
@@ -386,31 +411,6 @@ export interface NationalBehaviorValue {
   week_start_unix: number;
   week_end_unix: number;
   date_of_insertion_unix: number;
-}
-export interface NationalRestrictions {
-  values: NationalRestrictionValue[];
-}
-export interface NationalRestrictionValue {
-  restriction_id: string;
-  target_region: string;
-  escalation_level: 0 | 1 | 2 | 3 | 4 | 41 | 401;
-  category_id:
-    | "er_op_uit"
-    | "bezoek"
-    | "samenkomst"
-    | "huwelijk"
-    | "verpleeghuis"
-    | "horeca"
-    | "sport"
-    | "reizen_binnenland"
-    | "ov"
-    | "uitvaart"
-    | "onderwijs"
-    | "werk"
-    | "winkels"
-    | "alcohol";
-  restriction_order: number;
-  valid_from_unix: number;
 }
 
 export interface Ranges {
@@ -494,8 +494,8 @@ export interface Regionaal {
   results_per_region: ResultsPerRegion;
   ggd: RegionalGgd;
   nursing_home: RegionalNursingHome;
-  behavior: RegionalBehavior;
   restrictions?: RegionalRestrictions;
+  behavior: RegionalBehavior;
 }
 export interface RegionalSewer {
   values: RegionalSewerValue[];
@@ -576,6 +576,31 @@ export interface RegionalNursingHomeValue {
   date_of_insertion_unix: number;
   vrcode: string;
 }
+export interface RegionalRestrictions {
+  values: RegionalRestrictionValue[];
+}
+export interface RegionalRestrictionValue {
+  restriction_id: string;
+  target_region: "nl" | "vr";
+  escalation_level: 0 | 1 | 2 | 3 | 4 | 41 | 401;
+  category_id:
+    | "er_op_uit"
+    | "bezoek"
+    | "samenkomst"
+    | "huwelijk"
+    | "verpleeghuis"
+    | "horeca"
+    | "sport"
+    | "reizen_binnenland"
+    | "ov"
+    | "uitvaart"
+    | "onderwijs"
+    | "werk"
+    | "winkels"
+    | "alcohol";
+  restriction_order: number;
+  valid_from_unix: number;
+}
 export interface RegionalBehavior {
   values: RegionalBehaviorValue[];
   last_value: RegionalBehaviorValue;
@@ -626,31 +651,6 @@ export interface RegionalBehaviorValue {
   week_end_unix: number;
   date_of_insertion_unix: number;
 }
-export interface RegionalRestrictions {
-  values: RegionalRestrictionValue[];
-}
-export interface RegionalRestrictionValue {
-  restriction_id: string;
-  target_region: "nl" | "vr";
-  escalation_level: 0 | 1 | 2 | 3 | 4 | 41 | 401;
-  category_id:
-    | "er_op_uit"
-    | "bezoek"
-    | "samenkomst"
-    | "huwelijk"
-    | "verpleeghuis"
-    | "horeca"
-    | "sport"
-    | "reizen_binnenland"
-    | "ov"
-    | "uitvaart"
-    | "onderwijs"
-    | "werk"
-    | "winkels"
-    | "alcohol";
-  restriction_order: number;
-  valid_from_unix: number;
-}
 
 export interface Regions {
   last_generated: string;
@@ -662,8 +662,8 @@ export interface Regions {
   deceased: RegionDeceased[];
   escalation_levels: EscalationLevels[];
   nursing_home: RegionsNursingHome[];
-  behavior: RegionsBehavior[];
   sewer: RegionsSewer[];
+  behavior: RegionsBehavior[];
 }
 export interface RegionHospitalAdmissions {
   date_of_report_unix: number;
@@ -700,6 +700,15 @@ export interface RegionsNursingHome {
   date_of_report_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;
+}
+export interface RegionsSewer {
+  week_unix: number;
+  week_start_unix: number;
+  week_end_unix: number;
+  vrcode: string;
+  average: number;
+  total_installation_count: number;
+  date_of_insertion_unix: number;
 }
 export interface RegionsBehavior {
   vrcode: string;
@@ -746,14 +755,5 @@ export interface RegionsBehavior {
   max_visitors_support_trend: "up" | "down" | "equal";
   week_start_unix: number;
   week_end_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface RegionsSewer {
-  week_unix: number;
-  week_start_unix: number;
-  week_end_unix: number;
-  vrcode: string;
-  average: number;
-  total_installation_count: number;
   date_of_insertion_unix: number;
 }

@@ -167,6 +167,39 @@ const sewerThresholds: ChoroplethThresholds = {
   ],
 };
 
+/**
+ * @TODO this is a placeholder to make the code compile. Need to set actual
+ * colors and threshold values still.
+ */
+const behaviorThresholds: ChoroplethThresholds = {
+  thresholds: [
+    {
+      color: '#C0E8FC',
+      threshold: 0,
+    },
+    {
+      color: '#8BD1FF',
+      threshold: 5,
+    },
+    {
+      color: '#61B6ED',
+      threshold: 50,
+    },
+    {
+      color: '#3597D4',
+      threshold: 100,
+    },
+    {
+      color: '#046899',
+      threshold: 150,
+    },
+    {
+      color: '#034566',
+      threshold: 200,
+    },
+  ],
+};
+
 export const regionThresholds: Record<
   TRegionMetricName,
   | ChoroplethThresholds
@@ -180,4 +213,5 @@ export const regionThresholds: Record<
     newly_infected_people: nursingHomeThresholds,
   } as Record<Partial<TRegionsNursingHomeMetricName>, ChoroplethThresholds>,
   sewer: sewerThresholds,
+  behavior: behaviorThresholds,
 };

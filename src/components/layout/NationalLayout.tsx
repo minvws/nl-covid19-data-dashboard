@@ -11,6 +11,7 @@ import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import Ziektegolf from '~/assets/ziektegolf.svg';
+import Gedrag from '~/assets/gedrag.svg';
 import { NursingHomeDeathsMetric } from '~/components/common/nursing-home-deaths-metric';
 import { NursingHomeInfectedLocationsMetric } from '~/components/common/nursing-home-infected-locations-metric';
 import { NursingHomeInfectedPeopleMetric } from '~/components/common/nursing-home-infected-people-metric';
@@ -358,6 +359,23 @@ function NationalLayout(props: NationalLayoutProps) {
                         data={data.nursing_home.last_value}
                       />
                     </span>
+                  </a>
+                </Link>
+              </li>
+            </ul>
+            <ul>
+              <h2>{siteText.nationaal_layout.headings.gedrag}</h2>
+              <li>
+                <Link href="/landelijk/gedrag">
+                  <a
+                    onClick={blur}
+                    className={getClassName('/landelijk/gedrag')}
+                  >
+                    <TitleWithIcon
+                      Icon={Gedrag}
+                      title={siteText.nl_gedrag.sidebar.titel}
+                    />
+                    <span>@TODO sidebar metric gedrag</span>
                   </a>
                 </Link>
               </li>
