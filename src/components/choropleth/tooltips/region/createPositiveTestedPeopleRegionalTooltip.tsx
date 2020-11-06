@@ -1,12 +1,11 @@
 import { NextRouter } from 'next/router';
-import { ReactNode } from 'react';
+import { useContext, ReactNode } from 'react';
+import LocaleContext, { ILocale } from '~/locale/localeContext';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
 import { formatNumber } from '~/utils/formatNumber';
 import { createSelectRegionHandler } from '../../selectHandlers/createSelectRegionHandler';
 import { SafetyRegionProperties } from '../../shared';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import siteText from '~/locale/index';
-const text = siteText.common.tooltip;
 
 export const createPositiveTestedPeopleRegionalTooltip = (
   router: NextRouter
@@ -17,6 +16,7 @@ export const createPositiveTestedPeopleRegionalTooltip = (
   }
 ): ReactNode => {
   const handler = createSelectRegionHandler(router);
+  const { siteText }: ILocale = useContext(LocaleContext);
 
   const { vrname, value, total_positive_tested_people } = context;
 
@@ -30,7 +30,7 @@ export const createPositiveTestedPeopleRegionalTooltip = (
       <TooltipContent title={vrname} onSelect={onSelect}>
         <p className="info-value">{formatNumber(value)} per 100.000</p>
         <p className="info-total">
-          {replaceVariablesInText(text.positive_tested_people, {
+          {replaceVariablesInText(siteText.positive_tested_people, {
             totalPositiveTestedPeople: `${total_positive_tested_people}`,
           })}
         </p>

@@ -1,8 +1,5 @@
 import { BarScale } from '~/components/barScale';
-import siteText from '~/locale/index';
 import { IntakeHospitalMa } from '~/types/data.d';
-
-const text = siteText.ziekenhuisopnames_per_dag;
 
 export function IntakeHospitalBarScale(props: {
   data: IntakeHospitalMa | undefined;
@@ -18,7 +15,7 @@ export function IntakeHospitalBarScale(props: {
       min={0}
       max={100}
       signaalwaarde={40}
-      screenReaderText={text.barscale_screenreader_text}
+      textKey="ziekenhuisopnames_per_dag"
       value={data.last_value.moving_average_hospital}
       id="opnames"
       rangeKey="moving_average_hospital"

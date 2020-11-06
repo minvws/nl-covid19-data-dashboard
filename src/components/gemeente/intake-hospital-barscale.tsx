@@ -1,9 +1,6 @@
 import { BarScale } from '~/components/barScale';
 import { HospitalAdmissions } from '~/types/data.d';
 
-import siteText from '~/locale/index';
-const text = siteText.gemeente_ziekenhuisopnames_per_dag;
-
 export function IntakeHospitalBarScale(props: {
   data: HospitalAdmissions | undefined;
   showAxis: boolean;
@@ -16,7 +13,7 @@ export function IntakeHospitalBarScale(props: {
     <BarScale
       min={0}
       max={100}
-      screenReaderText={text.screen_reader_graph_content}
+      textKey="gemeente_ziekenhuisopnames_per_dag"
       value={data.last_value.moving_average_hospital}
       id="opnames"
       rangeKey="moving_average_hospital"

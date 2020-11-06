@@ -1,7 +1,7 @@
 import { scaleQuantile, scaleThreshold } from 'd3-scale';
-import { useRef } from 'react';
+import { useContext, useRef } from 'react';
+import LocaleContext, { ILocale } from '~/locale/localeContext';
 import { ScreenReaderOnly } from '~/components/screenReaderOnly';
-import siteText from '~/locale/index';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useDynamicScale } from '~/utils/useDynamicScale';
@@ -19,7 +19,7 @@ type BarscaleProps = {
   signaalwaarde?: number;
   gradient: GradientStop[];
   id: string;
-  screenReaderText: string;
+  textKey: string;
   rangeKey: string;
   showAxis?: boolean;
   showValue?: boolean;
@@ -32,17 +32,16 @@ export function BarScale({
   signaalwaarde,
   gradient,
   id,
-  screenReaderText,
+  textKey,
   rangeKey,
   showAxis,
   showValue = true,
 }: BarscaleProps) {
   // Generate a random ID used for clipPath and linearGradient ID's.
   const rand = useRef(Math.random().toString(36).substring(2, 15));
+  const { siteText }: ILocale = useContext(LocaleContext);
 
   const { scale } = useDynamicScale(min, max, rangeKey, value);
-
-  const text = siteText.common.barScale;
 
   const [xMin, xMax] = scale.domain();
 
@@ -57,7 +56,7 @@ export function BarScale({
   return (
     <>
       <ScreenReaderOnly>
-        {replaceVariablesInText(screenReaderText, {
+        {replaceVariablesInText(siteText[textKey].barscale_screenreader_text, {
           value: String(value),
           signaalwaarde: String(signaalwaarde),
         })}
@@ -151,7 +150,8 @@ export function BarScale({
                 y={72}
                 textAnchor={textAlign(scale(signaalwaarde) ?? 0)}
               >
-                {text.signaalwaarde}: {`${formatNumber(signaalwaarde)}`}
+                {siteText.common.barScalesignaalwaarde}:{' '}
+                {`${formatNumber(signaalwaarde)}`}
               </text>
             </g>
           )}

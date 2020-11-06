@@ -1,8 +1,5 @@
 import { BarScale } from '~/components/barScale';
-import siteText from '~/locale/index';
 import { InfectedPeopleDeltaNormalized } from '~/types/data.d';
-
-const text = siteText.positief_geteste_personen;
 
 export function PositiveTestedPeopleBarScale(props: {
   data: InfectedPeopleDeltaNormalized | undefined;
@@ -17,7 +14,7 @@ export function PositiveTestedPeopleBarScale(props: {
     <BarScale
       min={0}
       max={10}
-      screenReaderText={text.barscale_screenreader_text}
+      textKey="positief_geteste_personen"
       value={data.last_value.infected_daily_increase}
       id="positief"
       rangeKey="infected_daily_increase"

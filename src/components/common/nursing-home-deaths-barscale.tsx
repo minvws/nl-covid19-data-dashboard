@@ -1,7 +1,4 @@
 import { BarScale } from '~/components/barScale';
-import siteText from '~/locale/index';
-
-const text = siteText.verpleeghuis_oversterfte;
 
 export function NursingHomeDeathsBarScale(props: {
   value: number | undefined;
@@ -15,7 +12,7 @@ export function NursingHomeDeathsBarScale(props: {
     <BarScale
       min={0}
       max={50}
-      screenReaderText={text.barscale_screenreader_text}
+      textKey="verpleeghuis_oversterfte"
       value={value}
       id="over"
       rangeKey="deceased_nursery_daily"

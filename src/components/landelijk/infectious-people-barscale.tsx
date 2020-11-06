@@ -1,8 +1,5 @@
 import { BarScale } from '~/components/barScale';
-import siteText from '~/locale/index';
 import { InfectiousPeopleLastKnownAverageValue } from '~/types/data.d';
-
-const text = siteText.besmettelijke_personen;
 
 export function InfectiousPeopleBarScale(props: {
   data: InfectiousPeopleLastKnownAverageValue | undefined;
@@ -16,7 +13,7 @@ export function InfectiousPeopleBarScale(props: {
     <BarScale
       min={0}
       max={80}
-      screenReaderText={text.barscale_screenreader_text}
+      textKey="besmettelijke_personen"
       value={data.infectious_avg}
       id="besmettelijk"
       rangeKey="infectious_normalized_high"

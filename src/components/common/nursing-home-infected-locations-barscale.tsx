@@ -1,9 +1,5 @@
 import { BarScale } from '~/components/barScale';
 
-import siteText from '~/locale/index';
-
-const text = siteText.verpleeghuis_besmette_locaties;
-
 export function NursingHomeInfectedLocationsBarScale(props: {
   value: number | undefined;
   showAxis: boolean;
@@ -16,7 +12,7 @@ export function NursingHomeInfectedLocationsBarScale(props: {
     <BarScale
       min={0}
       max={30}
-      screenReaderText={text.barscale_screenreader_text}
+      textKey="verpleeghuis_besmette_locaties"
       value={value}
       id="besmette_locaties_verpleeghuis"
       rangeKey="total_reported_locations"

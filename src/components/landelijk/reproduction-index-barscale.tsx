@@ -1,8 +1,5 @@
 import { BarScale } from '~/components/barScale';
-import siteText from '~/locale/index';
 import { ReproductionIndex as ReproductionIndexData } from '~/types/data.d';
-
-const text = siteText.reproductiegetal;
 
 export function ReproductionIndexBarScale(props: {
   data: ReproductionIndexData;
@@ -19,7 +16,7 @@ export function ReproductionIndexBarScale(props: {
     <BarScale
       min={0}
       max={2}
-      screenReaderText={text.barscale_screenreader_text}
+      textKey="reproductiegetal"
       signaalwaarde={1}
       value={data.last_value.reproduction_index_avg}
       id="repro"
