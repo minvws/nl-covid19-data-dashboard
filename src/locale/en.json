@@ -507,8 +507,8 @@
     "paragraaf": "The dashboard presents a variety of data that give us an idea of how we are managing the COVID-19 epidemic. In this section we explain how we arrive at this data.",
     "cijfers": [
       {
-        "cijfer": "Correction in the number of confirmed cases",
-        "verantwoording": "On 17 October 2020 there are 233 additional cases reported from the municipal health service Noord-Holland Noord due to an administrative delay.\n\nDue to a technical malfunction there were a number of confirmed cases missing in the reports of 1 September 2020. These have been included in the report of 2 September 2020. This means the new number of confirmed cases on 2 September 2020 (734) includes around 300 additional reports from 1 September 2020 (462)."
+        "cijfer": "",
+        "verantwoording": ""
       },
       {
         "cijfer": "ICU occupancy rates",
@@ -628,8 +628,8 @@
   "common": {
     "metadata": {
       "source": "Source",
-      "date": "Waarde van {{date}}",
-      "dateFromTo": "Waarde van {{dateFrom}} tot {{dateTo}}"
+      "date": "",
+      "dateFromTo": ""
     },
     "barScale": {
       "signaalwaarde": "Alert value"
