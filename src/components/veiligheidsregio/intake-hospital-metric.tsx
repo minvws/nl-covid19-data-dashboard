@@ -19,7 +19,7 @@ export function IntakeHospitalMetric(props: {
   const description = replaceVariablesInText(text.dateOfReport, {
     dateOfReport: formatDateFromSeconds(
       data?.last_value.date_of_report_unix,
-      'relative'
+      'medium'
     ),
   });
 
