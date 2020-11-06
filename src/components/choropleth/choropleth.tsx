@@ -3,7 +3,7 @@ import { Mercator } from '@vx/geo';
 import { GeoPermissibleObjects } from 'd3-geo';
 import { Feature, FeatureCollection, Geometry, MultiPolygon } from 'geojson';
 import { memo, MutableRefObject, ReactNode, useRef, useState } from 'react';
-import { useMediaQuery } from '~/utils/useMediaQuery';
+import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import styles from './choropleth.module.scss';
 import { TCombinedChartDimensions } from './hooks/use-chart-dimensions';
 import { Tooltip } from './tooltips/tooltipContainer';
@@ -81,15 +81,21 @@ export type TProps<TFeatureProperties> = {
 
 export function Choropleth<T>({ getTooltipContent, ...props }: TProps<T>) {
   const [tooltip, setTooltip] = useState<TooltipSettings>();
-
+  const isTouch = useIsTouchDevice();
   return (
     <>
       <ChoroplethMap {...props} setTooltip={setTooltip} />
 
       {tooltip && (
-        <Tooltip left={tooltip.left} top={tooltip.top} setTooltip={setTooltip}>
-          {getTooltipContent(tooltip.data)}
-        </Tooltip>
+        <div style={{ pointerEvents: isTouch ? 'all' : 'none' }}>
+          <Tooltip
+            left={tooltip.left}
+            top={tooltip.top}
+            setTooltip={setTooltip}
+          >
+            {getTooltipContent(tooltip.data)}
+          </Tooltip>
+        </div>
       )}
     </>
   );
@@ -118,7 +124,7 @@ const ChoroplethMap: <T>(
 
   const clipPathId = useRef(`_${Math.random().toString(36).substring(2, 15)}`);
   const timeout = useRef(-1);
-  const isLargeScreen = useMediaQuery('(min-width: 1000px)');
+  const isTouch = useIsTouchDevice();
 
   const {
     width = 0,
@@ -143,8 +149,10 @@ const ChoroplethMap: <T>(
           isSelectorMap ? styles.selectorMap : ''
         }`}
         onMouseMove={createSvgMouseOverHandler(timeout, setTooltip)}
-        onMouseOut={createSvgMouseOutHandler(timeout, setTooltip)}
-        onClick={createSvgClickHandler(onPathClick, setTooltip, isLargeScreen)}
+        onMouseOut={
+          isTouch ? undefined : createSvgMouseOutHandler(timeout, setTooltip)
+        }
+        onClick={createSvgClickHandler(onPathClick, setTooltip, isTouch)}
       >
         <clipPath id={clipPathId.current}>
           <rect
@@ -221,17 +229,17 @@ function MercatorGroup<G extends Geometry, P>(props: MercatorGroupProps<G, P>) {
 const createSvgClickHandler = (
   onPathClick: (id: string) => void,
   setTooltip: (settings: TooltipSettings | undefined) => void,
-  isLargeScreen: boolean
+  isTouch: boolean
 ) => {
   return (event: React.MouseEvent) => {
     const elm = event.target as HTMLElement | SVGElement;
     const id = elm.getAttribute('data-id');
 
     if (id) {
-      if (isLargeScreen) {
-        onPathClick(id);
-      } else {
+      if (isTouch) {
         positionTooltip(event, setTooltip, id);
+      } else {
+        onPathClick(id);
       }
     }
   };
