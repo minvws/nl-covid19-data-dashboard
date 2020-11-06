@@ -82,10 +82,7 @@ const RegionalRestrictions: FCWithLayout<ISafetyRegionData> = (props) => {
       </KpiSection>
 
       <KpiSection display="flex" flexDirection={['column', 'row']}>
-        <Box
-          borderRight={{ lg: '1px solid lightgrey' }}
-          borderBottom={{ xs: '1px solid lightgrey' }}
-        >
+        <Box borderRight={{ lg: '1px solid lightgrey' }} pr={[0, 2]}>
           <Heading level={3}>{text.titel_aanvullendemaatregelen}</Heading>
           <Box>{text.toelichting_aanvullendemaatregelen}</Box>
         </Box>

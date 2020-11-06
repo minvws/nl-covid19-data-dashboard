@@ -8,8 +8,8 @@ import {
   BackgroundRepeatProps,
   backgroundSize,
   BackgroundSizeProps,
-  border,
-  BorderProps,
+  borders,
+  BordersProps,
   color,
   ColorProps,
   flexbox,
@@ -34,7 +34,7 @@ export type BoxProps = SpaceProps &
   ColorProps &
   PositionProps &
   TypographyProps &
-  BorderProps &
+  BordersProps &
   ShadowProps &
   GridProps &
   BackgroundImageProps &
@@ -56,7 +56,7 @@ export const Box = styled.div<BoxProps>(
   color,
   position,
   typography,
-  border,
+  borders,
   shadow,
   grid,
   backgroundImage,
