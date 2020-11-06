@@ -1,28 +1,17 @@
-import { Feature, FeatureCollection, Geometry, MultiPolygon } from 'geojson';
-import { GeoPermissibleObjects } from 'd3-geo';
 import { localPoint } from '@vx/event';
-import { memo, MutableRefObject, ReactNode, useRef } from 'react';
 import { Mercator } from '@vx/geo';
-import create, { UseStore } from 'zustand';
-
-import { TCombinedChartDimensions } from './hooks/use-chart-dimensions';
-
-import styles from './choropleth.module.scss';
-
-import { Tooltip } from './tooltips/tooltipContainer';
+import { GeoPermissibleObjects } from 'd3-geo';
+import { Feature, FeatureCollection, Geometry, MultiPolygon } from 'geojson';
+import { memo, MutableRefObject, ReactNode, useRef, useState } from 'react';
 import { useMediaQuery } from '~/utils/useMediaQuery';
-
-export type TooltipState = {
-  tooltip: TooltipSettings | null;
-  updateTooltip: (tooltip: TooltipSettings) => void;
-  showTooltip: (settings: TooltipSettings) => void;
-  hideTooltip: () => void;
-};
+import styles from './choropleth.module.scss';
+import { TCombinedChartDimensions } from './hooks/use-chart-dimensions';
+import { Tooltip } from './tooltips/tooltipContainer';
 
 export type TooltipSettings = {
   left: number;
   top: number;
-  data: any;
+  data: string;
 };
 
 export type TRenderCallback = (
@@ -91,52 +80,27 @@ export type TProps<TFeatureProperties> = {
  */
 
 export function Choropleth<T>({ getTooltipContent, ...props }: TProps<T>) {
-  const tooltipStore = useRef<UseStore<TooltipState>>(
-    create<TooltipState>((set) => ({
-      tooltip: null,
-      updateTooltip: (tooltip: TooltipSettings) => {
-        set({
-          tooltip,
-        });
-      },
-      showTooltip: (settings: TooltipSettings) => {
-        return set({
-          tooltip: {
-            left: settings.left,
-            top: settings.top,
-            data: settings.data,
-          },
-        });
-      },
-      hideTooltip: () => set({ tooltip: null }),
-    }))
-  );
-
-  const [showTooltip, hideTooltip] = tooltipStore.current((state) => [
-    state.showTooltip,
-    state.hideTooltip,
-  ]);
+  const [tooltip, setTooltip] = useState<TooltipSettings>();
 
   return (
     <>
-      <ChoroplethMap
-        {...props}
-        showTooltip={showTooltip}
-        hideTooltip={hideTooltip}
-      />
-      <Tooltip
-        tooltipStore={tooltipStore.current}
-        getTooltipContent={getTooltipContent}
-      />
+      <ChoroplethMap {...props} setTooltip={setTooltip} />
+
+      {tooltip && (
+        <Tooltip left={tooltip.left} top={tooltip.top} setTooltip={setTooltip}>
+          {getTooltipContent(tooltip.data)}
+        </Tooltip>
+      )}
     </>
   );
 }
 
+type ChoroplethMapProps<T> = Omit<TProps<T>, 'getTooltipContent'> & {
+  setTooltip: (tooltip: TooltipSettings | undefined) => void;
+};
+
 const ChoroplethMap: <T>(
-  props: Omit<TProps<T>, 'getTooltipContent'> & {
-    showTooltip: (tooltip: TooltipSettings) => void;
-    hideTooltip: () => void;
-  }
+  props: ChoroplethMapProps<T>
 ) => JSX.Element | null = memo((props) => {
   const {
     featureCollection,
@@ -149,8 +113,7 @@ const ChoroplethMap: <T>(
     hoverCallback,
     onPathClick,
     isSelectorMap,
-    showTooltip,
-    hideTooltip,
+    setTooltip,
   } = props;
 
   const clipPathId = useRef(`_${Math.random().toString(36).substring(2, 15)}`);
@@ -179,9 +142,9 @@ const ChoroplethMap: <T>(
         className={`${styles.svgMap} ${
           isSelectorMap ? styles.selectorMap : ''
         }`}
-        onMouseOver={createSvgMouseOverHandler(timeout, showTooltip)}
-        onMouseOut={createSvgMouseOutHandler(timeout, hideTooltip)}
-        onClick={createSvgClickHandler(onPathClick, showTooltip, isLargeScreen)}
+        onMouseMove={createSvgMouseOverHandler(timeout, setTooltip)}
+        onMouseOut={createSvgMouseOutHandler(timeout, setTooltip)}
+        onClick={createSvgClickHandler(onPathClick, setTooltip, isLargeScreen)}
       >
         <clipPath id={clipPathId.current}>
           <rect
@@ -257,7 +220,7 @@ function MercatorGroup<G extends Geometry, P>(props: MercatorGroupProps<G, P>) {
 
 const createSvgClickHandler = (
   onPathClick: (id: string) => void,
-  showTooltip: (settings: TooltipSettings) => void,
+  setTooltip: (settings: TooltipSettings | undefined) => void,
   isLargeScreen: boolean
 ) => {
   return (event: React.MouseEvent) => {
@@ -268,7 +231,7 @@ const createSvgClickHandler = (
       if (isLargeScreen) {
         onPathClick(id);
       } else {
-        positionTooltip(event, showTooltip, id);
+        positionTooltip(event, setTooltip, id);
       }
     }
   };
@@ -276,7 +239,7 @@ const createSvgClickHandler = (
 
 const createSvgMouseOverHandler = (
   timeout: MutableRefObject<number>,
-  showTooltip: (settings: TooltipSettings) => void
+  setTooltip: (settings: TooltipSettings | undefined) => void
 ) => {
   return (event: React.MouseEvent) => {
     const elm = event.target as HTMLElement | SVGElement;
@@ -288,20 +251,20 @@ const createSvgMouseOverHandler = (
         timeout.current = -1;
       }
 
-      positionTooltip(event, showTooltip, id);
+      positionTooltip(event, setTooltip, id);
     }
   };
 };
 
 const positionTooltip = (
   event: React.MouseEvent,
-  showTooltip: (settings: TooltipSettings) => void,
+  setTooltip: (settings: TooltipSettings | undefined) => void,
   id: string
 ) => {
   const coords = localPoint(event);
 
   if (coords) {
-    showTooltip({
+    setTooltip({
       left: coords.x + 5,
       top: coords.y + 5,
       data: id,
@@ -311,11 +274,11 @@ const positionTooltip = (
 
 const createSvgMouseOutHandler = (
   timeout: MutableRefObject<number>,
-  hideTooltip: () => void
+  setTooltip: (settings: TooltipSettings | undefined) => void
 ) => {
   return () => {
     if (timeout.current < 0) {
-      timeout.current = window.setTimeout(hideTooltip, 500);
+      timeout.current = window.setTimeout(() => setTooltip(undefined), 500);
     }
   };
 };
