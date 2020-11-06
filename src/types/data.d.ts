@@ -123,6 +123,7 @@ export interface National {
   intensive_care_beds_occupied: IntensiveCareBedsOccupied;
   ggd: NationalGgd;
   nursing_home: NationalNursingHome;
+  behavior?: NationalBehavior;
   restrictions?: NationalRestrictions;
 }
 export interface NationalHuisartsVerdenkingen {
@@ -336,6 +337,56 @@ export interface NationalNursingHomeValue {
   date_of_report_unix: number;
   date_of_insertion_unix: number;
 }
+export interface NationalBehavior {
+  values: NationalBehaviorValue[];
+  last_value: NationalBehaviorValue;
+}
+export interface NationalBehaviorValue {
+  number_of_participants: number;
+  wash_hands_compliance: number;
+  wash_hands_compliance_trend: "up" | "down" | "equal";
+  keep_distance_compliance: number;
+  keep_distance_compliance_trend: "up" | "down" | "equal";
+  work_from_home_compliance: number;
+  work_from_home_compliance_trend: "up" | "down" | "equal";
+  avoid_crowds_compliance: number;
+  avoid_crowds_compliance_trend: "up" | "down" | "equal";
+  symptoms_stay_home_compliance: number;
+  symptoms_stay_home_compliance_trend: "up" | "down" | "equal";
+  symptoms_get_tested_compliance: number;
+  symptoms_get_tested_compliance_trend: "up" | "down" | "equal";
+  wear_mask_public_indoors_compliance?: number;
+  wear_mask_public_indoors_compliance_trend?: "up" | "down" | "equal";
+  wear_mask_public_transport_compliance?: number;
+  wear_mask_public_transport_compliance_trend?: "up" | "down" | "equal";
+  sneeze_cough_elbow_compliance?: number;
+  sneeze_cough_elbow_compliance_trend?: "up" | "down" | "equal";
+  max_visitors_compliance?: number;
+  max_visitors_compliance_trend?: "up" | "down" | "equal";
+  wash_hands_support: number;
+  wash_hands_support_trend: "up" | "down" | "equal";
+  keep_distance_support: number;
+  keep_distance_support_trend: "up" | "down" | "equal";
+  work_from_home_support: number;
+  work_from_home_support_trend: "up" | "down" | "equal";
+  avoid_crowds_support: number;
+  avoid_crowds_support_trend: "up" | "down" | "equal";
+  symptoms_stay_home_support: number;
+  symptoms_stay_home_support_trend: "up" | "down" | "equal";
+  symptoms_get_tested_support: number;
+  symptoms_get_tested_support_trend: "up" | "down" | "equal";
+  wear_mask_public_indoors_support?: number;
+  wear_mask_public_indoors_support_trend?: "up" | "down" | "equal";
+  wear_mask_public_transport_support?: number;
+  wear_mask_public_transport_support_trend?: "up" | "down" | "equal";
+  sneeze_cough_elbow_support?: number;
+  sneeze_cough_elbow_support_trend?: "up" | "down" | "equal";
+  max_visitors_support: number;
+  max_visitors_support_trend: "up" | "down" | "equal";
+  week_start_unix: number;
+  week_end_unix: number;
+  date_of_insertion_unix: number;
+}
 export interface NationalRestrictions {
   values: NationalRestrictionValue[];
 }
@@ -443,6 +494,7 @@ export interface Regionaal {
   results_per_region: ResultsPerRegion;
   ggd: RegionalGgd;
   nursing_home: RegionalNursingHome;
+  behavior?: RegionalBehavior;
   restrictions?: RegionalRestrictions;
 }
 export interface RegionalSewer {
@@ -524,6 +576,56 @@ export interface RegionalNursingHomeValue {
   date_of_insertion_unix: number;
   vrcode: string;
 }
+export interface RegionalBehavior {
+  values: RegionalBehaviorValue[];
+  last_value: RegionalBehaviorValue;
+}
+export interface RegionalBehaviorValue {
+  number_of_participants: number;
+  wash_hands_compliance: number;
+  wash_hands_compliance_trend: "up" | "down" | "equal";
+  keep_distance_compliance: number;
+  keep_distance_compliance_trend: "up" | "down" | "equal";
+  work_from_home_compliance: number;
+  work_from_home_compliance_trend: "up" | "down" | "equal";
+  avoid_crowds_compliance: number;
+  avoid_crowds_compliance_trend: "up" | "down" | "equal";
+  symptoms_stay_home_compliance: number;
+  symptoms_stay_home_compliance_trend: "up" | "down" | "equal";
+  symptoms_get_tested_compliance: number;
+  symptoms_get_tested_compliance_trend: "up" | "down" | "equal";
+  wear_mask_public_indoors_compliance?: number;
+  wear_mask_public_indoors_compliance_trend?: "up" | "down" | "equal";
+  wear_mask_public_transport_compliance?: number;
+  wear_mask_public_transport_compliance_trend?: "up" | "down" | "equal";
+  sneeze_cough_elbow_compliance?: number;
+  sneeze_cough_elbow_compliance_trend?: "up" | "down" | "equal";
+  max_visitors_compliance?: number;
+  max_visitors_compliance_trend?: "up" | "down" | "equal";
+  wash_hands_support: number;
+  wash_hands_support_trend: "up" | "down" | "equal";
+  keep_distance_support: number;
+  keep_distance_support_trend: "up" | "down" | "equal";
+  work_from_home_support: number;
+  work_from_home_support_trend: "up" | "down" | "equal";
+  avoid_crowds_support: number;
+  avoid_crowds_support_trend: "up" | "down" | "equal";
+  symptoms_stay_home_support: number;
+  symptoms_stay_home_support_trend: "up" | "down" | "equal";
+  symptoms_get_tested_support: number;
+  symptoms_get_tested_support_trend: "up" | "down" | "equal";
+  wear_mask_public_indoors_support?: number;
+  wear_mask_public_indoors_support_trend?: "up" | "down" | "equal";
+  wear_mask_public_transport_support?: number;
+  wear_mask_public_transport_support_trend?: "up" | "down" | "equal";
+  sneeze_cough_elbow_support?: number;
+  sneeze_cough_elbow_support_trend?: "up" | "down" | "equal";
+  max_visitors_support: number;
+  max_visitors_support_trend: "up" | "down" | "equal";
+  week_start_unix: number;
+  week_end_unix: number;
+  date_of_insertion_unix: number;
+}
 export interface RegionalRestrictions {
   values: RegionalRestrictionValue[];
 }
@@ -560,6 +662,7 @@ export interface Regions {
   deceased: RegionDeceased[];
   escalation_levels: EscalationLevels[];
   nursing_home: RegionsNursingHome[];
+  behavior?: RegionsBehavior[];
   sewer: RegionsSewer[];
 }
 export interface RegionHospitalAdmissions {
@@ -597,6 +700,53 @@ export interface RegionsNursingHome {
   date_of_report_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;
+}
+export interface RegionsBehavior {
+  vrcode: string;
+  number_of_participants: number;
+  wash_hands_compliance: number;
+  wash_hands_compliance_trend: "up" | "down" | "equal";
+  keep_distance_compliance: number;
+  keep_distance_compliance_trend: "up" | "down" | "equal";
+  work_from_home_compliance: number;
+  work_from_home_compliance_trend: "up" | "down" | "equal";
+  avoid_crowds_compliance: number;
+  avoid_crowds_compliance_trend: "up" | "down" | "equal";
+  symptoms_stay_home_compliance: number;
+  symptoms_stay_home_compliance_trend: "up" | "down" | "equal";
+  symptoms_get_tested_compliance: number;
+  symptoms_get_tested_compliance_trend: "up" | "down" | "equal";
+  wear_mask_public_indoors_compliance?: number;
+  wear_mask_public_indoors_compliance_trend?: "up" | "down" | "equal";
+  wear_mask_public_transport_compliance?: number;
+  wear_mask_public_transport_compliance_trend?: "up" | "down" | "equal";
+  sneeze_cough_elbow_compliance?: number;
+  sneeze_cough_elbow_compliance_trend?: "up" | "down" | "equal";
+  max_visitors_compliance?: number;
+  max_visitors_compliance_trend?: "up" | "down" | "equal";
+  wash_hands_support: number;
+  wash_hands_support_trend: "up" | "down" | "equal";
+  keep_distance_support: number;
+  keep_distance_support_trend: "up" | "down" | "equal";
+  work_from_home_support: number;
+  work_from_home_support_trend: "up" | "down" | "equal";
+  avoid_crowds_support: number;
+  avoid_crowds_support_trend: "up" | "down" | "equal";
+  symptoms_stay_home_support: number;
+  symptoms_stay_home_support_trend: "up" | "down" | "equal";
+  symptoms_get_tested_support: number;
+  symptoms_get_tested_support_trend: "up" | "down" | "equal";
+  wear_mask_public_indoors_support?: number;
+  wear_mask_public_indoors_support_trend?: "up" | "down" | "equal";
+  wear_mask_public_transport_support?: number;
+  wear_mask_public_transport_support_trend?: "up" | "down" | "equal";
+  sneeze_cough_elbow_support?: number;
+  sneeze_cough_elbow_support_trend?: "up" | "down" | "equal";
+  max_visitors_support: number;
+  max_visitors_support_trend: "up" | "down" | "equal";
+  week_start_unix: number;
+  week_end_unix: number;
+  date_of_insertion_unix: number;
 }
 export interface RegionsSewer {
   week_unix: number;
