@@ -14,22 +14,24 @@ import styles from '~/components/choropleth/tooltips/tooltip.module.scss';
 import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { SEOHead } from '~/components/seoHead';
-import { TALLLanguages } from '~/locale/index';
 import { MDToHTMLString } from '~/utils/MDToHTMLString';
+import { TLocale } from '~/locale/localeContext';
 
 const escalationThresholds = (regionThresholds.escalation_levels as ChoroplethThresholds)
   .thresholds;
 
 interface EscalationMapLegendaProps {
-  text: TALLLanguages;
+  siteText: TLocale;
 }
 
 export const EscalationMapLegenda = (props: EscalationMapLegendaProps) => {
-  const { text } = props;
+  const { siteText } = props;
 
   return (
     <div className={styles.legenda} aria-label="legend">
-      <h3 className="text-max-width">{text.escalatie_niveau.legenda.titel}</h3>
+      <h3 className="text-max-width">
+        {siteText.escalatie_niveau.legenda.titel}
+      </h3>
       {escalationThresholds.map((info) => (
         <div
           className={styles.escalationInfoLegenda}
@@ -42,7 +44,10 @@ export const EscalationMapLegenda = (props: EscalationMapLegendaProps) => {
             {info.threshold === 4 && <EscalationLevel4 color={info?.color} />}
           </div>
           <div className={styles.escalationTextLegenda}>
-            {text.escalatie_niveau.types[info.threshold as 1 | 2 | 3 | 4].titel}
+            {
+              siteText.escalatie_niveau.types[info.threshold as 1 | 2 | 3 | 4]
+                .titel
+            }
           </div>
         </div>
       ))}
@@ -57,27 +62,25 @@ export const EscalationMapLegenda = (props: EscalationMapLegendaProps) => {
 // the data is always there. Making the data optional would mean
 // lots of unnecessary null checks on those pages.
 
-const SafetyRegion: FCWithLayout<any> = (props) => {
+const SafetyRegion: FCWithLayout<any> = ({ siteText }) => {
   const router = useRouter();
-
-  const { text } = props;
 
   return (
     <>
       <SEOHead
-        title={text.veiligheidsregio_index.metadata.title}
-        description={text.veiligheidsregio_index.metadata.description}
+        title={siteText.veiligheidsregio_index.metadata.title}
+        description={siteText.veiligheidsregio_index.metadata.description}
       />
       <article className="index-article layout-choropleth">
         <div className="choropleth-header">
-          <h2>{text.veiligheidsregio_index.selecteer_titel}</h2>
+          <h2>{siteText.veiligheidsregio_index.selecteer_titel}</h2>
           {/**
            * This is rendering html content which has been generated from
            * markdown text.
            */}
           <div
             dangerouslySetInnerHTML={{
-              __html: text.veiligheidsregio_index.selecteer_toelichting,
+              __html: siteText.veiligheidsregio_index.selecteer_toelichting,
             }}
           />
         </div>
@@ -92,7 +95,7 @@ const SafetyRegion: FCWithLayout<any> = (props) => {
         </div>
 
         <div className="choropleth-legend">
-          <EscalationMapLegenda text={text} />
+          <EscalationMapLegenda siteText={siteText} />
         </div>
       </article>
     </>
@@ -102,24 +105,26 @@ const SafetyRegion: FCWithLayout<any> = (props) => {
 SafetyRegion.getLayout = getSafetyRegionLayout();
 
 interface StaticProps {
-  text: TALLLanguages;
+  siteText: TLocale;
   lastGenerated: string;
 }
 
 export async function getStaticProps(): Promise<{ props: StaticProps }> {
-  const text = (await import('../../locale/index')).default;
+  const siteText: TLocale = await import(
+    `~/locale/${process.env.NEXT_PUBLIC_LOCALE}.json`
+  ).then((text) => text.default);
 
   const serializedContent = MDToHTMLString(
-    text.veiligheidsregio_index.selecteer_toelichting
+    siteText.veiligheidsregio_index.selecteer_toelichting
   );
 
-  text.veiligheidsregio_index.selecteer_toelichting = serializedContent;
+  siteText.veiligheidsregio_index.selecteer_toelichting = serializedContent;
 
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const lastGenerated = JSON.parse(fileContents).last_generated;
 
-  return { props: { text, lastGenerated } };
+  return { props: { siteText, lastGenerated } };
 }
 
 export default SafetyRegion;
