@@ -98,6 +98,9 @@
     },
     "behavior": {
       "$ref": "behavior.json"
+    },
+    "restrictions": {
+      "$ref": "restrictions.json"
     }
   }
 }

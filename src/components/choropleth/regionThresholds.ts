@@ -138,39 +138,31 @@ const nursingHomeInfectedLocationsPercentageThresholds: ChoroplethThresholds = {
   ],
 };
 
-/**
- * @TODO set correct threshold colors and levels. This is a placeholder so that
- * the code compiles.
- */
 const sewerThresholds: ChoroplethThresholds = {
   thresholds: [
     {
-      color: '#FFFFFF',
+      color: '#C0E8FC',
       threshold: 0,
     },
     {
-      color: '#C0E8FC',
-      threshold: 1,
+      color: '#8BD1FF',
+      threshold: 5,
     },
     {
-      color: '#87CBF8',
-      threshold: 3,
+      color: '#61B6ED',
+      threshold: 50,
     },
     {
-      color: '#5DAFE4',
-      threshold: 7,
+      color: '#3597D4',
+      threshold: 100,
     },
     {
-      color: '#3391CC',
-      threshold: 11,
-    },
-    {
-      color: '#0579B3',
-      threshold: 21,
+      color: '#046899',
+      threshold: 150,
     },
     {
       color: '#034566',
-      threshold: 30,
+      threshold: 200,
     },
   ],
 };

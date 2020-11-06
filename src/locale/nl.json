@@ -9,8 +9,8 @@
     "title": "Laatst bijgewerkt"
   },
   "notificatie": {
-    "titel": "Aantal meldingen COVID-19 stijgt nog steeds, maar minder hard",
-    "bericht": "Afgelopen week (21-27 oktober) is het aantal meldingen van COVID-19 verder gestegen. Wel nam het aantal nieuwe meldingen opnieuw minder snel toe dan de week hiervoor. Dat is waarschijnlijk het effect van de maatregelen die eind september en medio oktober van kracht werden. Het aantal patiënten in de ziekenhuizen en het aantal intensive care -opnames nam nog verder toe.\n\nHet risiconiveau per regio kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2), ‘ernstig’ (niveau 3), ‘zeer ernstig’ (niveau 4) zijn. Op dit moment zijn {{escalationLevel4}} regio’s ingeschaald op ‘zeer ernstig’, {{escalationLevel3}} op ‘ernstig’, {{escalationLevel2}} op ‘zorgelijk’ en {{escalationLevel1}} op ‘waakzaam.‘",
+    "titel": "Lichte daling COVID-19 meldingen",
+    "bericht": "Afgelopen week (28 oktober-3 november) is het aantal nieuwe meldingen van COVID-19 iets gedaald. Dat is waarschijnlijk het effect van de maatregelen die eind september en medio oktober van kracht werden. Het aantal nieuwe ziekenhuisopnames is licht toegenomen, terwijl het aantal opnames op de IC iets daalde.\n\nHet risiconiveau per regio kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2), ‘ernstig’ (niveau 3), ‘zeer ernstig’ (niveau 4) zijn. Op dit moment zijn {{escalationLevel4}} regio’s ingeschaald op ‘zeer ernstig’, {{escalationLevel3}} op ‘ernstig’, {{escalationLevel2}} op ‘zorgelijk’ en {{escalationLevel1}} op ‘waakzaam.‘",
     "link": {
       "text": "Bekijk de toelichting van het RIVM",
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel"
@@ -401,20 +401,24 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
     },
     "titel": "Rioolwatermeting",
-    "pagina_toelichting": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners in rioolwater. Om het weekgemiddelde te berekenen worden alle meetwaarden van circa 300 locaties bij elkaar opgeteld en gedeeld door het aantal metingen. Dit gebeurt wekelijks.",
-    "barscale_titel": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater",
+    "pagina_toelichting": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners in rioolwater. Om het weekgemiddelde te berekenen worden alle meetwaarden van circa 300 locaties bij elkaar opgeteld en gedeeld door het aantal metingen.",
+    "barscale_titel": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners",
     "extra_uitleg": "Alle rioolmeetwaarden van één week worden bij elkaar opgeteld en gedeeld door het aantal metingen, om tot dit wekelijkse landelijke gemiddelde te komen.",
-    "barscale_screenreader_text": "{{value}} virusdeeltjes in een milliliter rioolwater, afkomstig van 300 locaties in Nederland.",
-    "linechart_titel": "Virusdeeltjes per milliliter rioolwater over tijd",
+    "barscale_screenreader_text": "{{value}} virusdeeltjes per 100.000 inwoners",
+    "linechart_titel": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners over tijd",
     "metadata": {
       "title": "Rioolwatermeting | Dashboard Coronavirus | Rijksoverheid.nl",
-      "description": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater, afkomstig van circa 300 locaties in Nederland."
+      "description": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners"
     },
     "titel_sidebar": "Rioolwatermeting",
-    "titel_kpi": "Gemiddelde aantal virusdeeltjes per 100.000 inwoners in rioolwater in Nederland omgerekend naar dagelijks hoeveelheid rioolwater",
+    "titel_kpi": "Gemiddelde aantal virusdeeltjes per 100.000 inwoners",
     "total_installation_count_titel": "Aantal meetlocaties",
     "total_installation_count_description": "Wekelijks aantal rioolwaterzuiveringsinstallaties die minimaal één keer een meting hebben gerapporteerd. Het weekgemiddelde wordt berekend door het gemiddelde te nemen van alle metingen op deze locaties. Per week kan dit aantal variëren omdat niet alle metingen altijd lukken.",
-    "rwzi_abbrev": ""
+    "rwzi_abbrev": "",
+    "map_titel": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners in rioolwater",
+    "map_toelichting": "Deze kaart toont het gemiddeld aantal virusdeeltjes per 100.000 inwoners, per veiligheidsregio.",
+    "legenda_titel": "Legenda",
+    "map_tooltip": "{{value}} x100 miljard deeltjes per 100.000 inwoners"
   },
   "notfound_titel": {
     "text": "Er is iets misgegaan"
@@ -516,7 +520,7 @@
       },
       {
         "cijfer": "Aantal positief geteste mensen",
-        "verantwoording": "Deze gegevens worden dagelijks gepubliceerd als open databestand door het [RIVM](https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv) Het bestand wordt dagelijks om 10:00 online gezet en registreert het aantal positief geteste mensen die aan het RIVM gemeld zijn in de afgelopen 24 uur. De datum die gebruikt wordt, is de datum van melding. Dat is dus niet hetzelfde als de datum waarop mensen zijn getest.\n\nHet RIVM kan met terugwerkende kracht correcties uitvoeren op eerder gepubliceerde cijfers. Deze correcties komen dan in het open databestand te staan en worden overgenomen door het dashboard.\n\nHet databestand registreert op niveau van veiligheidsregio en gemeente. Om tot landelijke gegevens te komen tellen we alle meldingen bij elkaar op. In het aanleverbestand wordt voor sommige meldingen de gemeente en/of veiligheidsregio niet vermeld, omdat die gegevens ontbreken. Die kunnen dan niet op dat niveau worden getoond, maar wel op landelijk niveau. \n\nWe berekenen op basis van de absolute aantallen het relatieve aantal positief geteste mensen naar rato van het aantal inwoners. Dit doen we door het aantal positief geteste mensen te delen door het aantal inwoners van Nederland. We geven dit weer als het aantal positief geteste personen per 100.000 inwoners. Het aantal inwoners wordt gebaseerd op [deze CBS-indeling](https://opendata.cbs.nl/#/CBS/nl/dataset/84721NED/table?dl=3A154).\n\nDe leeftijdsverdeling wordt bepaald op basis van een ander [open data bestand](https://data.rivm.nl/covid-19/COVID-19_casus_landelijk.csv) van het RIVM. In dit bestand staan namelijk wel leeftijdsgegevens. Echter is dit alleen op landelijk niveau beschikbaar, en niet per veiligheidsregio of gemeente. Op het dashboard wordt de leeftijdsverdeling getoond van alle nieuw gemelde gevallen, ten opzichte van de dag ervoor. Verder zitten in het bestand gevallen waarbij de leeftijd onbekend is, of waarbij alleen staat genoteerd dat de persoon onder de 50 is. Deze kunnen niet worden getoond in de gekozen leeftijdsgroepen, en worden daarom niet meegenomen bij het berekenen van de percentages. Dit zorgt er echter wel voor dat het totaal aantal gevallen in de leeftijdsverdeling, minder is dan het totaal aantal positief geteste mensen.\n\nDe signaalwaarde voor het aantal positief geteste mensen bedraagt 7 op de 100.000 inwoners. Dit betekent dat vanaf deze waarde mogelijk het aantal besmettingen te hard oploopt om het virus in de hand te houden. Deze waarde wordt bijvoorbeeld ook in Duitsland gehanteerd. Een signaalwaarde functioneert als een ‘alarmbel’ om met urgentie naar de situatie te kijken. \n\nHet percentage positief geteste mensen gaat alleen over de testen die via de GGD plaatsvinden, en waarvan de testuitslag bekend is. Er worden echter ook tests uitgevoerd die niet via de GGD gaan. De gegevens over de GGD teststraten worden wekelijks door het RIVM aangeleverd bij het ministerie van VWS."
+        "verantwoording": "Deze gegevens worden dagelijks gepubliceerd als open databestand door het [RIVM] (https://www.rivm.nl/nieuws/lichte-daling-aantal-nieuwe-COVID19-meldingen) en in de loop van middag gepubliceerd op het Dashboard Coronavirus. Het gaat om het aantal positief geteste mensen die het RIVM gemeld zijn in de afgelopen 24 uur, tot 10.00 op de dag van publicatie van het cijfer. De datum die gebruikt wordt, is de datum van melding door de GGD bij het RIVM. Dat is dus niet hetzelfde als de datum waarop mensen zijn getest. \n\nArtsen en laboratoria moeten besmettingen met infectieziekten melden bij de GGD. Er worden echter ook -steeds vaker- tests afgenomen door particuliere organisaties en door individuen. De uitslagen hiervan worden niet altijd bij de GGD gemeld of de melding telt niet mee omdat de test die gebruikt is niet voldoet aan de normen van het RIVM. Het (dagelijks)aantal besmettingen dat we op het dashboard weergeven geeft dus geen compleet beeld. Daar moet rekening mee gehouden worden bij het interpreteren van dit cijfer. \n\nHet doorgeven van cijfers is deels mensenwerk. Het komt voor dat op het moment dat het RIVM de balans opmaakt over het laatste etmaal nog niet alle besmettingen goed zijn doorgegeven door de GGD’en. Ontbrekende meldingen worden dan later alsnog doorgegeven. Het ontbreken van meldingen of het vertraagd doorgeven van meldingen kan het dagelijkse beeld vertekenen. Het voortschrijdende gemiddelde filtert dit soort fluctuaties eruit en geeft daarom vaak een beter beeld. \n\nHet RIVM kan ook met terugwerkende kracht correcties uitvoeren op eerder gepubliceerde cijfers. Deze correcties komen dan in het open databestand te staan en worden overgenomen door het dashboard.\nHet databestand registreert op niveau van veiligheidsregio en gemeente. Om tot landelijke gegevens te komen tellen we alle meldingen bij elkaar op. In het aanleverbestand wordt voor sommige meldingen de gemeente en/of veiligheidsregio niet vermeld, omdat die gegevens ontbreken. Die kunnen dan niet op dat niveau worden getoond, maar wel op landelijk niveau. \n\nWe berekenen op basis van de absolute aantallen het relatieve aantal positief geteste mensen naar rato van het aantal inwoners. Dit doen we door het aantal positief geteste mensen te delen door het aantal inwoners van Nederland. We geven dit weer als het aantal positief geteste personen per 100.000 inwoners. Het aantal inwoners wordt gebaseerd op [deze CBS-indeling] (https://opendata.cbs.nl/#/CBS/nl/dataset/84721NED/table?dl=3A154) leeftijdsverdeling wordt bepaald op basis van de landelijke cijfers, omdat in het gemeentelijke bestand geen leeftijden worden geregistreerd. Er kunnen daarom kleine verschillen ontstaan tussen de tabel zoals weergegeven in de 'wekelijks update epidemiologische situatie COVID-19 in Nederland' op de website van het RIVM en zoals weergeven op het dashboard.\n\nDe signaalwaarde voor het aantal positief geteste mensen bedraagt 7 op de 100.000 inwoners. Dit betekent dat vanaf deze waarde mogelijk het aantal besmettingen te hard oploopt om het virus in de hand te houden. Deze waarde wordt bijvoorbeeld ook in Duitsland gehanteerd. Een signaalwaarde functioneert als een ‘alarmbel’ om met urgentie naar de situatie te kijken. \n\nVoor het berekenen van het percentage positief geteste mensen wordt alleen gekeken naar de tests die via de GGD plaatsvinden en waarvan de testuitslag bekend is. De gegevens over de GGD teststraten worden wekelijks door het RIVM aangeleverd bij het ministerie van VWS."
       },
       {
         "cijfer": "Reproductiegetal",
@@ -536,7 +540,7 @@
       },
       {
         "cijfer": "Rioolwatermeting",
-        "verantwoording": "In rioolwater kun je ziekteverwekkers zoals het coronavirus meten omdat die met ontlasting via de wc in het rioolwater komen. Dit onderzoek laat zien hoeveel virusdeeltjes in het rioolwater zitten afkomstig uit ontlasting van besmette personen. Deze metingen worden gedaan bij meer dan 300 rioolwaterzuiveringsinstallaties in het hele land. Op elke locatie analyseren onderzoekers van het RIVM minimaal eens per week rioolwater dat in 24 uur verzameld is. Per week kan het aantal gemeten locaties variëren, omdat niet elke meting succesvol wordt afgerond. In het [open databestand](https://data.rivm.nl/covid-19/COVID-19_rioolwaterdata.csv) staat per datum bij welke locaties gemeten is. \n\nSinds 3 november wordt op het dashboard het aantal virusdeeltjes niet meer per milliliter rioolwater getoond, maar per 100.000 inwoners. Het CBS heeft in samenwerking met de waterschappen het aantal aangesloten inwoners per rioolwaterzuiveringsinstallatie in kaart gebracht. Dit stelt het RIVM in staat om het aantal virusdeeltjes per 100.000 inwoners te berekenen. Ook corrigeert het RIVM nu voor de hoeveelheid water die tijdens de meting bij de rioolwaterzuiveringsinstallatie binnenkomt (meer regenwater verdunt immers); dit wordt het debiet genoemd. Deze correctie wordt gedaan op gegevens vanaf 7 september. Daarom zijn de gegevens op het dashboard niet meer zichtbaar van vóór die datum. Dit valt samen met de uitbreiding op 7 september van het aantal locaties waar wordt gemeten van circa 80 naar 317.    \n\nBij een meting kan het aantal virusdeeltjes in het rioolwater zo laag zijn, dat het niet gemeten wordt. Dan staat de meetwaarde op 0. Voor sommige metingen geeft het RIVM aan dat ze niet representatief zijn. Deze metingen worden bij het inladen van de gegevens in het dashboard eruit gefilterd. In het huidige onderzoek kunnen trends in aantallen virusdeeltjes zoals een stijging of daling worden gezien. Meer onderzoek is nodig om conclusies aan deze trends te kunnen verbinden. \n\nHet weekgemiddelde wordt berekend door alle meetwaarden in een week op te tellen en dan te delen door het aantal metingen. De weken lopen van maandag t/m zondag. Het gemiddelde voor een week wordt pas berekend in de daarop volgende dinsdag. Dit zodat de week compleet is afgerond, en er tijd is geweest voor het RIVM om de monsters te ontvangen, te analyseren en erover te rapporteren. Let op: het kan voorkomen dat er na dinsdag alsnog gegevens bijkomen van de vorige week, of zelfs de weken daarvoor. Daarom wordt het open databestand dagelijks opnieuw ingelezen. De weekgemiddelden worden hierbij steeds opnieuw berekend. Eventuele correcties op eerdere weken worden doorgevoerd. De meetwaarden per afzonderlijke locatie staan in de grafiek op het dashboard op de datum waarop de meting is uitgevoerd.\n\nOm te bepalen welke zuiveringsinstallatie tot welke veiligheidsregio behoort, wordt gekeken naar het verzorgingsgebied van deze locatie. Dit is het gebied waarvoor de zuiveringsinstallatie rioolwater zuivert. Het RIVM levert per locatie voorhoeveel procent deze in een veiligheidsregio valt. Deze verdeling is nog niet volledig accuraat en wordt de komende tijd verder uitgewerkt. Sommige locaties hebben een verzorgingsgebied dat meerdere veiligheidsregio’s bevat. Als dat zo is, wordt de locatie op het dashboard volledig toegewezen aan de veiligheidsregio die het grootste deel van het verzorgingsgebied omvat. Voor het koppelen van locaties met gemeenten wordt momenteel gekeken naar de postcode van de locatie. Met gebruik van de CBS-indeling gemeente voor postcode wordt vervolgens deze postcode vertaald naar een gemeente. In een paar gevallen kwam hier geen match uit. Voor die uitzonderingen is handmatig op basis van coördinaten gekeken op de kaart tot welke gemeente de locaties behoren. Let op: deze koppelingen zijn mogelijk niet volledig accuraat, want het verzorgingsgebied van een zuiveringsinstallatie hoeft niet gelijk te lopen met gemeentegrenzen. Er wordt gewerkt aan een meer nauwkeurige koppeling tussen locatie en gemeente."
+        "verantwoording": "In rioolwater kun je ziekteverwekkers zoals het coronavirus meten omdat die met ontlasting via de wc in het rioolwater komen. Dit onderzoek laat zien hoeveel virusdeeltjes in het rioolwater zitten afkomstig uit ontlasting van besmette personen. Deze metingen worden gedaan bij meer dan 300 rioolwaterzuiveringsinstallaties in het hele land. Op elke locatie analyseren onderzoekers van het RIVM minimaal eens per week rioolwater dat in 24 uur verzameld is. Per week kan het aantal gemeten locaties variëren, omdat niet elke meting succesvol wordt afgerond. In het [open databestand](https://data.rivm.nl/covid-19/COVID-19_rioolwaterdata.csv) staat per datum bij welke locaties gemeten is. \n\nSinds 3 november wordt op het dashboard het aantal virusdeeltjes niet meer per milliliter rioolwater getoond, maar per 100.000 inwoners. Het CBS heeft in samenwerking met de waterschappen het aantal aangesloten inwoners per rioolwaterzuiveringsinstallatie in kaart gebracht. Dit stelt het RIVM in staat om het aantal virusdeeltjes per 100.000 inwoners te berekenen. Ook corrigeert het RIVM nu voor de hoeveelheid water die tijdens de meting bij de rioolwaterzuiveringsinstallatie binnenkomt (meer regenwater verdunt immers); dit wordt het debiet genoemd. Deze correctie wordt gedaan op gegevens vanaf 7 september. Daarom zijn de gegevens op het dashboard niet meer zichtbaar van vóór die datum. Dit valt samen met de uitbreiding op 7 september van het aantal locaties waar wordt gemeten van circa 80 naar 318.    \n\nBij een meting kan het aantal virusdeeltjes in het rioolwater zo laag zijn, dat het niet gemeten wordt. Dan staat de meetwaarde op 0. Voor sommige metingen geeft het RIVM aan dat ze niet representatief zijn. Deze metingen worden bij het inladen van de gegevens in het dashboard eruit gefilterd. In het huidige onderzoek kunnen trends in aantallen virusdeeltjes zoals een stijging of daling worden gezien. Meer onderzoek is nodig om conclusies aan deze trends te kunnen verbinden. \n\nHet weekgemiddelde wordt berekend door alle meetwaarden in een week op te tellen en dan te delen door het aantal metingen. De weken lopen van maandag t/m zondag. Het gemiddelde voor een week wordt pas berekend in de daarop volgende dinsdag. Dit zodat de week compleet is afgerond, en er tijd is geweest voor het RIVM om de monsters te ontvangen, te analyseren en erover te rapporteren. Let op: het kan voorkomen dat er na dinsdag alsnog gegevens bijkomen van de vorige week, of zelfs de weken daarvoor. Daarom wordt het open databestand dagelijks opnieuw ingelezen. De weekgemiddelden worden hierbij steeds opnieuw berekend. Eventuele correcties op eerdere weken worden doorgevoerd. De meetwaarden per afzonderlijke locatie staan in de grafiek op het dashboard op de datum waarop de meting is uitgevoerd.\n\nOm te bepalen welke zuiveringsinstallatie tot welke veiligheidsregio behoort, wordt gekeken naar het verzorgingsgebied van deze locatie. Dit is het gebied waarvoor de zuiveringsinstallatie rioolwater zuivert. Het RIVM levert per locatie voorhoeveel procent deze in een veiligheidsregio valt. Deze verdeling is nog niet volledig accuraat en wordt de komende tijd verder uitgewerkt. Sommige locaties hebben een verzorgingsgebied dat meerdere veiligheidsregio’s bevat. Als dat zo is, wordt de locatie op het dashboard volledig toegewezen aan de veiligheidsregio die het grootste deel van het verzorgingsgebied omvat. Voor het koppelen van locaties met gemeenten wordt momenteel gekeken naar de postcode van de locatie. Met gebruik van de CBS-indeling gemeente voor postcode wordt vervolgens deze postcode vertaald naar een gemeente. In een paar gevallen kwam hier geen match uit. Voor die uitzonderingen is handmatig op basis van coördinaten gekeken op de kaart tot welke gemeente de locaties behoren. Let op: deze koppelingen zijn mogelijk niet volledig accuraat, want het verzorgingsgebied van een zuiveringsinstallatie hoeft niet gelijk te lopen met gemeentegrenzen. Er wordt gewerkt aan een meer nauwkeurige koppeling tussen locatie en gemeente."
       },
       {
         "cijfer": "“Waarde van” en “Verkregen”",
@@ -623,7 +627,9 @@
   },
   "common": {
     "metadata": {
-      "source": "Bron data"
+      "source": "Bron",
+      "date": "Waarde van {{date}}",
+      "dateFromTo": "Waarde van {{dateFrom}} tot {{dateTo}}"
     },
     "barScale": {
       "signaalwaarde": "Signaalwaarde"
@@ -745,15 +751,15 @@
   "veiligheidsregio_rioolwater_metingen": {
     "titel_sidebar": "Rioolwatermeting",
     "titel": "Rioolwatermeting in {{safetyRegion}}",
-    "pagina_toelichting": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners in rioolwater. Om het weekgemiddelde te berekenen worden alle meetwaarden van deze veiligheidsregio bij elkaar opgeteld en gedeeld door het aantal metingen. Dit gebeurt wekelijks.",
+    "pagina_toelichting": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners in rioolwater. Om het weekgemiddelde te berekenen worden alle meetwaarden van deze veiligheidsregio bij elkaar opgeteld en gedeeld door het aantal metingen.",
     "datums": "Waarde van {{weekStart}} tot {{weekEnd}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "screen_reader_graph_content": "{{value}} virusdeeltjes in een milliliter rioolwater.",
-    "barscale_titel": "Gemiddelde aantal virusdeeltjes per 100.000 inwoners in rioolwater van deze veiligheidsregio omgerekend naar dagelijkse hoeveelheid rioolwater.",
-    "extra_uitleg": "Alle rioolmeetwaarden van één week worden bij elkaar opgeteld en gedeeld door het aantal metingen om tot dit wekelijkse gemiddelde te komen voor deze veiligheidsregio.",
-    "barscale_screenreader_text": "{{value}} virusdeeltjes in een milliliter rioolwater, afkomstig van 28 locaties in Nederland.",
-    "linechart_titel": "Virusdeeltjes per milliliter rioolwater over tijd",
+    "screen_reader_graph_content": "{{value}} virusdeeltjes per 100.000 inwoners",
+    "barscale_titel": "Gemiddelde aantal virusdeeltjes per 100.000 inwoners",
+    "extra_uitleg": "Alle rioolmeetwaarden van één week worden bij elkaar opgeteld en gedeeld door het aantal metingen om tot dit wekelijkse gemiddelde te komen.",
+    "barscale_screenreader_text": "{{value}} virusdeeltjes per 100.000 inwoners",
+    "linechart_titel": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners over tijd",
     "bar_chart_title": "Meest recente meetwaarde per locatie in {{safetyRegion}}",
-    "bar_chart_axis_title": "Gemiddelde virusdeeltjes per 100.000 inwoners in rioolwater van deze veiligheidsregio omgerekend naar dagelijkse hoeveelheid rioolwater.",
+    "bar_chart_axis_title": "Gemiddelde aantal virusdeeltjes per 100.000 inwoners",
     "bron": {
       "text": "RIVM",
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
@@ -768,8 +774,8 @@
     },
     "graph_daily_label_text_rwzi": "Meetwaarden locatie ({{name}})",
     "graph_selected_rwzi_placeholder": "Selecteer locatie",
-    "graph_range_description": "Virusdeeltjes per milliliter rioolwater over tijd",
-    "titel_kpi": "Gemiddeld aantal virusdeeltjes in een milliliter rioolwater",
+    "graph_range_description": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners over tijd",
+    "titel_kpi": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners",
     "total_installation_count_titel": "Aantal meetlocaties",
     "total_installation_count_description": "Wekelijks aantal rioolwaterzuiveringsinstallaties die minimaal één keer een meting hebben gerapporteerd. Het weekgemiddelde wordt berekend door het gemiddelde te nemen van alle metingen op deze locaties. Per week kan dit aantal variëren omdat niet alle metingen altijd lukken.",
     "rwzi_abbrev": ""
@@ -834,15 +840,15 @@
   "gemeente_rioolwater_metingen": {
     "titel_sidebar": "Rioolwatermeting",
     "titel": "Rioolwatermeting in {{municipality}}",
-    "pagina_toelichting": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners in rioolwater. Om het weekgemiddelde te berekenen worden alle meetwaarden van deze gemeente bij elkaar opgeteld en gedeeld door het aantal metingen. Dit gebeurt wekelijks.",
+    "pagina_toelichting": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners in rioolwater. Om het weekgemiddelde te berekenen worden alle meetwaarden van deze gemeente bij elkaar opgeteld en gedeeld door het aantal metingen.",
     "datums": "Waarde van {{weekStart}} tot {{weekEnd}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "screen_reader_graph_content": "{{value}} virusdeeltjes in een milliliter rioolwater.",
-    "barscale_titel": "Gemiddelde aantal virusdeeltjes per 100.000 inwoners in rioolwater van deze gemeente omgerekend naar dagelijkse hoeveelheid rioolwater.",
-    "extra_uitleg": "Gemiddelde virusdeeltjes per 100.000 inwoners van gemeten locaties in deze veiligheidsregio",
-    "barscale_screenreader_text": "{{value}} virusdeeltjes in een milliliter rioolwater, afkomstig van 300 locaties in Nederland.",
-    "linechart_titel": "Virusdeeltjes per milliliter rioolwater over tijd",
+    "screen_reader_graph_content": "{{value}} virusdeeltjes per 100.000 inwoners",
+    "barscale_titel": "Gemiddelde aantal virusdeeltjes per 100.000 inwoners",
+    "extra_uitleg": "Alle rioolmeetwaarden van één week worden bij elkaar opgeteld en gedeeld door het aantal metingen, om tot dit wekelijkse gemiddelde te komen voor deze gemeente.",
+    "barscale_screenreader_text": "{{value}} virusdeeltjes per 100.000 inwoners",
+    "linechart_titel": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners over tijd",
     "bar_chart_title": "Meest recente meetwaarde per locatie in {{municipality}}",
-    "bar_chart_axis_title": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners in rioolwater van deze locatie [Nieuwveen] (variable locatienaam) omgerekend naar dagelijkse hoeveelheid rioolwater (debiet).",
+    "bar_chart_axis_title": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners",
     "bron": {
       "text": "RIVM",
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
@@ -862,7 +868,7 @@
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Risiconiveaus",
-    "selecteer_toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\nEr zijn [landelijke maatregelen](https://www.rijksoverheid.nl/actueel/nieuws/2020/10/13/gedeeltelijke-lockdown-om-besmettingen-terug-te-dringen) van kracht om de snelle verspreiding van het coronavirus tegen te gaan. \n\n[Meer over de risiconiveaus](/over-risiconiveaus)",
+    "selecteer_toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\nEr zijn [landelijke maatregelen](https://www.rijksoverheid.nl/actueel/nieuws/2020/11/03/tijdelijke-verzwaring-van-de-gedeeltelijke-lockdown) van kracht om de snelle verspreiding van het coronavirus tegen te gaan. \n\n[Meer over de risiconiveaus](/over-risiconiveaus)",
     "metadata": {
       "title": "Risiconiveaus per veiligheidsregio | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van het huidige risiconiveau per veiligheidsregio in Nederland."
@@ -878,13 +884,13 @@
   },
   "laatste_ontwikkelingen": {
     "title": "Laatste ontwikkelingen",
-    "menu_subtitle": "Minder sterke stijging besmettingen",
+    "menu_subtitle": "Lichte daling COVID-19 meldingen",
     "alle_cijfers_header": "Benieuwd naar alle cijfers?",
     "alle_cijfers_link": "Bekijk alle cijfers"
   },
   "escalatie_niveau": {
     "titel": "Risiconiveaus",
-    "toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\nEr zijn [landelijke maatregelen](https://www.rijksoverheid.nl/actueel/nieuws/2020/10/13/gedeeltelijke-lockdown-om-besmettingen-terug-te-dringen) van kracht om de snelle verspreiding van het coronavirus tegen te gaan. \n\n[Meer over de risiconiveaus](/over-risiconiveaus)",
+    "toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\nEr zijn [landelijke maatregelen](https://www.rijksoverheid.nl/actueel/nieuws/2020/11/03/tijdelijke-verzwaring-van-de-gedeeltelijke-lockdown) van kracht om de snelle verspreiding van het coronavirus tegen te gaan. \n\n[Meer over de risiconiveaus](/over-risiconiveaus)",
     "types": {
       "1": {
         "titel": "Waakzaam",

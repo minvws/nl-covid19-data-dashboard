@@ -21,6 +21,7 @@ import {
 import { ResultsPerRegion } from '~/types/data.d';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { Metadata } from '~/components-styled/metadata';
 
 const text = siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
 
@@ -54,9 +55,8 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: resultsPerRegion?.last_value?.date_of_report_unix,
-          dateInsertedUnix:
-            resultsPerRegion?.last_value?.date_of_insertion_unix,
+          dateUnix: resultsPerRegion.last_value.date_of_report_unix,
+          dateInsertedUnix: resultsPerRegion.last_value.date_of_insertion_unix,
           dataSource: text.bron,
         }}
       />
@@ -76,6 +76,10 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
             <p>{text.extra_uitleg}</p>
           </div>
         </div>
+        <Metadata
+          date={resultsPerRegion.last_value.date_of_report_unix}
+          source={text.bron}
+        />
       </article>
 
       {resultsPerRegion && (
@@ -89,6 +93,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
               date: value.date_of_report_unix,
             }))}
           />
+          <Metadata source={text.bron} />
         </article>
       )}
       <article className="metric-article layout-choropleth">
@@ -127,6 +132,10 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
             />
           )}
         </div>
+        <Metadata
+          date={resultsPerRegion.last_value.date_of_report_unix}
+          source={text.bron}
+        />
       </article>
     </>
   );

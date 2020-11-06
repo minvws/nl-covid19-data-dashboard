@@ -3,14 +3,65 @@
   "type": "object",
   "title": "regional_restrictions",
   "additionalProperties": false,
-  "required": ["vrcode", "values"],
+  "required": ["values"],
   "properties": {
-    "vrcode": { "type": "string", "equalsRootProperty": "code" },
     "values": {
       "type": "array",
       "items": {
-        "type": "string",
-        "pattern": "^[0-9]+_[a-z_]+_[0-9]+$"
+        "$ref": "#/definitions/value"
+      }
+    }
+  },
+  "definitions": {
+    "value": {
+      "title": "regional_restriction_value",
+      "additionalProperties": false,
+      "required": [
+        "restriction_id",
+        "target_region",
+        "escalation_level",
+        "category_id",
+        "restriction_order",
+        "valid_from_unix"
+      ],
+      "properties": {
+        "restriction_id": {
+          "type": "string",
+          "validRestrictionId": true
+        },
+        "target_region": {
+          "type": "string",
+          "enum": ["nl", "vr"]
+        },
+        "escalation_level": {
+          "type": "integer",
+          "enum": [0, 1, 2, 3, 4, 41, 401]
+        },
+        "category_id": {
+          "type": "string",
+          "enum": [
+            "er_op_uit",
+            "bezoek",
+            "samenkomst",
+            "huwelijk",
+            "verpleeghuis",
+            "horeca",
+            "sport",
+            "reizen_binnenland",
+            "ov",
+            "uitvaart",
+            "onderwijs",
+            "werk",
+            "winkels",
+            "alcohol"
+          ]
+        },
+        "restriction_order": {
+          "type": "integer"
+        },
+        "valid_from_unix": {
+          "type": "integer"
+        }
       }
     }
   }
