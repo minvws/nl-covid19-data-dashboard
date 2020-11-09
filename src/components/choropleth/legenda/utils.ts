@@ -1,11 +1,5 @@
-import {
-  ChoroplethThresholds,
-  TRegionMetricName,
-  TRegionsNursingHomeMetricName,
-} from '../../shared';
-
-import { useLegendaItems } from './useLegendaItems';
-import { regionThresholds } from '~/components/choropleth/regionThresholds';
+import { regionThresholds } from '~/components/choropleth/region-thresholds';
+import { ChoroplethThresholds, TRegionMetricName } from '../shared';
 
 export function getSelectedThreshold(
   metricName?: TRegionMetricName,
@@ -24,12 +18,4 @@ export function getSelectedThreshold(
       : regionThresholds[metricName]) ?? regionThresholds[metricName];
 
   return thresholdInfo as ChoroplethThresholds;
-}
-
-export function useSafetyRegionLegendaData(
-  metric: TRegionMetricName,
-  metricPropertyName?: TRegionsNursingHomeMetricName
-) {
-  const thresholdInfo = getSelectedThreshold(metric, metricPropertyName);
-  return useLegendaItems(thresholdInfo?.thresholds);
 }

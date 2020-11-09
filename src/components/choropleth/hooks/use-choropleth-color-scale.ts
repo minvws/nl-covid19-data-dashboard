@@ -2,8 +2,6 @@ import { scaleThreshold } from 'd3-scale';
 import { useCallback, useMemo } from 'react';
 import { ChoroplethThresholdsValue } from '../shared';
 
-export type TGetFillColor = (id: string) => string;
-
 /**
  * This hook return a color scale for the given domain and gradient.
  * If either domain or gradient is undefined, it will return a method
@@ -22,8 +20,8 @@ export function useChoroplethColorScale(
   getData: (id: string) => any,
   thresholds?: ChoroplethThresholdsValue[],
   defaultColor = 'white'
-): TGetFillColor {
-  const colorScale = useMemo<any>(() => {
+) {
+  const colorScale = useMemo(() => {
     if (!thresholds) {
       return undefined;
     }

@@ -34,8 +34,7 @@
     "topojson-client": "^3.1.0",
     "ts-is-present": "^1.1.5",
     "unified": "^9.2.0",
-    "use-resize-observer": "^6.1.0",
-    "zustand": "^3.1.2"
+    "use-resize-observer": "^6.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.11.4",
