@@ -1,7 +1,6 @@
-import { SafetyRegionProperties } from '../shared';
-import municipalCodeToRegionCodeLookup from '~/data/municipalCodeToRegionCodeLookup';
-import { FeatureCollection, MultiPolygon } from 'geojson';
 import { useMemo } from 'react';
+import municipalCodeToRegionCodeLookup from '~/data/municipalCodeToRegionCodeLookup';
+import { RegionGeoJSON } from '../shared';
 
 /**
  * This hook returns the feature of the safety region to which the given municipality code belongs.
@@ -10,10 +9,11 @@ import { useMemo } from 'react';
  * @param regionGeo
  * @param selectedMunicipality
  */
+
 export function useMunicipalityBoundingbox(
-  regionGeo: FeatureCollection<MultiPolygon, SafetyRegionProperties>,
+  regionGeo: RegionGeoJSON,
   selectedMunicipality?: string
-): [FeatureCollection<MultiPolygon>, string] | [undefined, undefined] {
+): [RegionGeoJSON, string] | [undefined, undefined] {
   return useMemo(() => {
     if (!selectedMunicipality) {
       return [undefined, undefined];
@@ -22,16 +22,18 @@ export function useMunicipalityBoundingbox(
     const vrcode = municipalCodeToRegionCodeLookup[selectedMunicipality];
 
     if (vrcode) {
-      const feature = regionGeo.features.find(
+      const vrFeature = regionGeo.features.find(
         (feat) => feat.properties.vrcode === vrcode
       );
-      if (!feature) {
+
+      if (!vrFeature) {
         return [undefined, undefined];
       }
+
       return [
         {
           ...regionGeo,
-          features: [feature],
+          features: [vrFeature],
         },
         vrcode,
       ];

@@ -1,101 +1,11 @@
 @import '~/scss/variables.scss';
 
-.tooltipBase {
-  padding: 0;
-  position: absolute;
-  color: #666666;
-  border-radius: 3px;
-  font-size: 14px;
-  box-shadow: rgba(33, 33, 33, 0.2) 0px 1px 2px;
-  line-height: 1em;
-  pointer-events: none;
-}
-
-.clickableTooltip {
-  pointer-events: all;
-}
-
 .choroplethContainer {
   position: relative;
   background: transparent;
 }
 
-.choroplethContainer.escalationMap {
-  .svgMap {
-    path {
-      stroke: white;
-    }
-
-    path.overlay {
-      stroke: #595959;
-    }
-  }
-}
-
-.selectorMap {
-  path {
-    /**
-    When a map is a selector map like gemeente/index, we need the line color
-    to be blue. There is a better way to do this once we move to styled
-    components, but for now this works.
-    */
-    stroke: #01689b !important;
-  }
-}
-
 .svgMap {
   display: block;
   background: transparent;
-
-  path {
-    pointer-events: all;
-    stroke: #fff;
-    stroke-width: 0.5;
-  }
-
-  path.selectedPath {
-    stroke: #000000;
-    stroke-width: 3;
-    fill: none;
-  }
-
-  path.noData {
-    pointer-events: all;
-    fill: #fff;
-  }
-
-  path.noData:hover {
-    pointer-events: all;
-    fill: #62a0be;
-    cursor: pointer;
-  }
-
-  /**
-  Overlay is used outlining the VRs, but is currently styled the same
-  as municipalities paths. Faded is used to style VRs
-  when they have no data OR are not selected. This one is now also set to the
-  same color, so now probably redundant.
-  */
-
-  path.faded {
-    stroke: #c4c4c4;
-  }
-
-  path.overlay {
-    pointer-events: none;
-    stroke-width: 0.5;
-    fill: transparent;
-  }
-
-  path.hoverLayer {
-    pointer-events: all;
-    fill: none;
-    stroke: transparent;
-  }
-
-  path.hoverLayer:hover {
-    stroke: #000000;
-    stroke-width: 2;
-    cursor: pointer;
-  }
 }

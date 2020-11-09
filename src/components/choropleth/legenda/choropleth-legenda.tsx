@@ -1,4 +1,4 @@
-import styles from './choroplethlegenda.module.scss';
+import styles from './choropleth-legenda.module.scss';
 
 export interface ILegendaItem {
   color: string;

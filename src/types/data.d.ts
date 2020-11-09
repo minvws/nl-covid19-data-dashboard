@@ -10,12 +10,12 @@ export interface Municipal {
   proto_name: string;
   name: string;
   code: string;
-  hospital_admissions: HospitalAdmissions;
-  positive_tested_people: PositiveTestedPeople;
+  hospital_admissions: MunicipalHospitalAdmissions;
+  positive_tested_people: MunicipalPositiveTestedPeople;
   sewer?: MunicipalSewer;
   sewer_per_installation?: MunicipalSewerPerInstallation;
 }
-export interface HospitalAdmissions {
+export interface MunicipalHospitalAdmissions {
   values: HospitalAdmissionsLastValue[];
   last_value: HospitalAdmissionsLastValue;
 }
@@ -26,7 +26,7 @@ export interface HospitalAdmissionsLastValue {
   moving_average_hospital: number;
   date_of_insertion_unix: number;
 }
-export interface PositiveTestedPeople {
+export interface MunicipalPositiveTestedPeople {
   values: PositiveTestedPeopleLastValue[];
   last_value: PositiveTestedPeopleLastValue;
 }
@@ -76,17 +76,17 @@ export interface Municipalities {
   proto_name: "MUNICIPALITIES";
   name: string;
   code: string;
-  hospital_admissions: HospitalAdmissions[];
-  positive_tested_people: PositiveTestedPeople[];
+  hospital_admissions: MunicipalitiesHospitalAdmissions[];
+  positive_tested_people: MunicipalitiesPositiveTestedPeople[];
   deceased: Deceased[];
 }
-export interface HospitalAdmissions {
+export interface MunicipalitiesHospitalAdmissions {
   date_of_report_unix: number;
   gmcode: string;
   hospital_admissions: number;
   date_of_insertion_unix: number;
 }
-export interface PositiveTestedPeople {
+export interface MunicipalitiesPositiveTestedPeople {
   date_of_report_unix: number;
   gmcode: string;
   positive_tested_people: number;

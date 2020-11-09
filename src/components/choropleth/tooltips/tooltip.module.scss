@@ -9,7 +9,6 @@
   border-radius: 3px;
   font-size: 14px;
   box-shadow: rgba(33, 33, 33, 0.2) 0px 1px 2px;
-  pointer-events: none;
   line-height: 1em;
 }
 
@@ -31,7 +30,6 @@
   width: 100%;
   min-width: 160px;
   border-radius: 4px;
-  pointer-events: all;
   cursor: pointer;
 
   .tooltipHeader {
@@ -127,6 +125,5 @@
   width: 265px;
   background-color: red;
   border-radius: 4px;
-  pointer-events: all;
   cursor: pointer;
 }
