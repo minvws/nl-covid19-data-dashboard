@@ -1,25 +1,25 @@
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import ExternalLinkIcon from '~/assets/external-link.svg';
+import { Box } from '~/components-styled/base';
+import { ExternalLink } from '~/components-styled/external-link';
+import { KpiSection } from '~/components-styled/kpi-section';
+import { Heading, Text } from '~/components-styled/typography';
+import { EscalationLevelInfoLabel } from '~/components/common/escalation-level';
+import { GenericContentHeader } from '~/components/contentHeader';
 import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
+import { RestrictionsTable } from '~/components/restrictions/restrictionsTable';
 import { SEOHead } from '~/components/seoHead';
+import siteText from '~/locale/index';
 import {
   getSafetyRegionData,
   getSafetyRegionPaths,
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import siteText from '~/locale/index';
-import { GenericContentHeader } from '~/components/contentHeader';
-import { KpiSection } from '~/components-styled/kpi-section';
-import { Heading, Text } from '~/components-styled/typography';
-import { EscalationLevelInfoLabel } from '~/components/common/escalation-level';
-import { Box } from '~/components-styled/base';
-import { useRouter } from 'next/router';
-import { ExternalLink } from '~/components-styled/external-link';
-import Link from 'next/link';
-import ExternalLinkIcon from '~/assets/external-link.svg';
-import { useRestrictionsTable } from '~/utils/useRestrictionsTable';
-import { RestrictionsTable } from '~/components/restrictions/restrictionsTable';
 import { useRestrictionLevel } from '~/utils/useRestrictionLevel';
+import { useRestrictionsTable } from '~/utils/useRestrictionsTable';
 
 const text = siteText.veiligheidsregio_maatregelen;
 type VRCode = keyof typeof siteText.veiligheidsregio_maatregelen_urls;
@@ -84,7 +84,10 @@ const RegionalRestrictions: FCWithLayout<ISafetyRegionData> = (props) => {
         <Box>
           <Text>{restrictionLevel}</Text>
         </Box>
-        <RestrictionsTable data={restrictionsTable} />
+        <RestrictionsTable
+          data={restrictionsTable}
+          escalationLevel={escalationLevel}
+        />
       </KpiSection>
 
       <KpiSection display="flex" flexDirection={['column', 'row']}>

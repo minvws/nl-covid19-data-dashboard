@@ -82,7 +82,7 @@
       "4_er_op_uit_1": "Maximaal 4 inclusief jezelf",
       "4_bezoek_2": "Maximaal 3 van een ander huishouden",
       "4_bezoek_3": "Maximaal 1 bezoek per dag",
-      "4_samenkomst_4": "ijeenkomsten beperkt toegestaan met reservering en vaste zitplaats:",
+      "4_samenkomst_4": "Bijeenkomsten beperkt toegestaan met reservering en vaste zitplaats:",
       "4_samenkomst_5": "Geen evenementen",
       "4_samenkomst_6": "Maximaal 30 binnen",
       "4_huwelijk_7": "Maximaal 30",
@@ -195,7 +195,7 @@
       "41_alcohol_122": "Na 20:00 uur: Verbod op bezit / nuttigen alcohol in openbare ruimte"
     },
     "icons": {
-      "4_er_op_uit_1": "gezin"
+      "4_er_op_uit_1": "Gezin"
     }
   },
   "ic_opnames_per_dag": {

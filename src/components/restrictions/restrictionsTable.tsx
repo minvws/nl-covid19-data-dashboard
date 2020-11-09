@@ -1,31 +1,48 @@
 import { Fragment } from 'react';
-
+import { isDefined } from 'ts-is-present';
+import * as RestrictionIcons from '~/assets/restrictions';
 import { Box } from '~/components-styled/base';
-import { Table, Cell, Row, TableBody } from '~/components-styled/layout/table';
+import { Cell, Row, Table, TableBody } from '~/components-styled/layout/table';
 import { Text } from '~/components-styled/typography';
-import { RestrictionsTableData } from '~/utils/useRestrictionsTable';
+import { regionThresholds } from '~/components/choropleth/regionThresholds';
 import siteText from '~/locale/index';
 import { useBreakpoints } from '~/utils/useBreakpoints';
+import { RestrictionsTableData } from '~/utils/useRestrictionsTable';
+import { ChoroplethThresholds } from '../choropleth/shared';
 
 export type RestrictionsTableProps = {
   data: RestrictionsTableData;
+  escalationLevel: number;
+};
+
+export type TableProps = {
+  data: RestrictionsTableData;
+  color: string;
 };
 
 const categoryLabels = siteText.maatregelen.categories;
 
+const escalationThresholds = (regionThresholds.escalation_levels as ChoroplethThresholds)
+  .thresholds;
+
 export function RestrictionsTable(props: RestrictionsTableProps) {
-  const { data } = props;
+  const { data, escalationLevel } = props;
   const breakpoints = useBreakpoints();
 
+  const color =
+    escalationThresholds.find(
+      (threshold) => threshold.threshold === escalationLevel
+    )?.color ?? '#000';
+
   if (breakpoints.lg) {
-    return <DesktopRestrictionsTable data={data} />;
+    return <DesktopRestrictionsTable data={data} color={color} />;
   }
 
-  return <MobileRestrictionsTable data={data} />;
+  return <MobileRestrictionsTable data={data} color={color} />;
 }
 
-function MobileRestrictionsTable(props: RestrictionsTableProps) {
-  const { data } = props;
+function MobileRestrictionsTable(props: TableProps) {
+  const { data, color } = props;
   return (
     <Table width="100%">
       <TableBody>
@@ -48,7 +65,7 @@ function MobileRestrictionsTable(props: RestrictionsTableProps) {
                 <Box display="flex" flexDirection="column">
                   {row.restrictions.map((value) => (
                     <Box key={value.text} display="flex" flexDirection="row">
-                      {value.icon}
+                      {getIcon(value.icon, color)}
                       {value.text}
                     </Box>
                   ))}
@@ -62,8 +79,8 @@ function MobileRestrictionsTable(props: RestrictionsTableProps) {
   );
 }
 
-function DesktopRestrictionsTable(props: RestrictionsTableProps) {
-  const { data } = props;
+function DesktopRestrictionsTable(props: TableProps) {
+  const { data, color } = props;
   return (
     <Table width="100%">
       <TableBody>
@@ -90,7 +107,7 @@ function DesktopRestrictionsTable(props: RestrictionsTableProps) {
               <Box display="flex" flexDirection="column">
                 {row.restrictions.map((value) => (
                   <Box key={value.text} display="flex" flexDirection="row">
-                    <RestrictionIcon iconName={value.icon} />
+                    {getIcon(value.icon, color)}
                     {value.text}
                   </Box>
                 ))}
@@ -103,26 +120,11 @@ function DesktopRestrictionsTable(props: RestrictionsTableProps) {
   );
 }
 
-type RestrictionIconProps = {
-  iconName?: string;
-};
-
-function RestrictionIcon(props: RestrictionIconProps) {
-  const { iconName } = props;
-
-  if (!iconName?.length) {
-    return <Box width="24px" height="24px" mr={1} />;
+function getIcon(iconName: string | undefined, color: string) {
+  if (!isDefined(iconName)) {
+    return <Box as="span" width="24px" height="24px" />;
   }
 
-  return (
-    <Box
-      backgroundImage={`url(/images/restrictions/${iconName}.svg)`}
-      backgroundSize={'24px 24px'}
-      backgroundPosition={'0 0'}
-      backgroundRepeat={'no-repeat'}
-      width="24px"
-      height="24px"
-      mr={1}
-    />
-  );
+  const Icon = (RestrictionIcons as any)[`${iconName}Icon`];
+  return <Icon fill={color} />;
 }
