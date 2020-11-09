@@ -109,10 +109,6 @@ interface WeekTimestamped {
   week_end_unix: number;
 }
 
-interface WeekStartTimestamped {
-  week_unix: number;
-}
-
 interface MeasurementTimestamped {
   date_measurement_unix: number;
 }
