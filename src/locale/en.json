@@ -656,18 +656,21 @@
   },
   "nationaal_layout": {
     "headings": {
-      "laatste": "Latest developments",
-      "besmettingen": "[@todo] Besmettingen",
-      "ziekenhuizen": "[@todo] Ziekenhuizen",
-      "verpleeghuizen": "[@todo] Verpleeghuizen",
-      "vroege_signalen": "[@todo] Vroege signalen"
+      "algemeen": "[@TODO] Algemeen",
+      "besmettingen": "[@TODO] Besmettingen",
+      "ziekenhuizen": "[@TODO] Ziekenhuizen",
+      "verpleeghuizen": "[@TODO] Verpleeghuizen",
+      "vroege_signalen": "[@TODO] Vroege signalen",
+      "gedrag": "Gedrag"
     }
   },
   "veiligheidsregio_layout": {
     "headings": {
-      "medisch": "Medical indicators",
-      "overig": "Other indicators",
-      "verpleeghuis": "Nursing homes"
+      "besmettingen": "[@TODO] Besmettingen",
+      "ziekenhuizen": "[@TODO] Ziekenhuizen",
+      "verpleeghuizen": "[@TODO] Verpleeghuizen",
+      "vroege_signalen": "[@TODO] Vroege signalen",
+      "gedrag" :"[@TODO] gedrag"
     }
   },
   "veiligheidsregio_metadata": {

@@ -97,8 +97,8 @@ function NationalLayout(props: NationalLayoutProps) {
       </Head>
 
       <div
-        className={`national-layout has-menu-${
-          isMenuOpen ? 'opened' : 'closed'
+        className={`national-layout ${
+          isMenuOpen ? 'has-menu-opened' : 'has-menu-closed'
         }`}
       >
         <Link href="/landelijk">
@@ -111,7 +111,7 @@ function NationalLayout(props: NationalLayoutProps) {
         </Link>
         <aside className="national-aside">
           <nav aria-label="metric navigation">
-            <h2>{siteText.nationaal_layout.headings.laatste}</h2>
+            <h2>{siteText.nationaal_layout.headings.algemeen}</h2>
             <ul className="last-developments">
               <li>
                 <Link href="/">
