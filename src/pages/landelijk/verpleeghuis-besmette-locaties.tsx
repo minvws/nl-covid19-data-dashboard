@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import Locatie from '~/assets/locaties.svg';
 import { LineChart } from '~/components/charts/index';
-import { ChoroplethLegenda } from '~/components/choropleth/legenda/choropleth-legenda';
+import { ChoroplethLegenda } from '~/components-styled/choropleth-legenda';
 import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/use-safety-region-legenda-data';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
