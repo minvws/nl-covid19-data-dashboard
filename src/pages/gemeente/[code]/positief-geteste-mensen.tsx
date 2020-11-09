@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import Getest from '~/assets/test.svg';
-import { ChoroplethLegenda } from '~/components/choropleth/legenda/choropleth-legenda';
+import { ChoroplethLegenda } from '~/components-styled/choropleth-legenda';
 import { useMunicipalLegendaData } from '~/components/choropleth/legenda/hooks/use-municipal-legenda-data';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
