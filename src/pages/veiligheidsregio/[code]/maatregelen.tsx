@@ -38,9 +38,8 @@ const RegionalRestrictions: FCWithLayout<ISafetyRegionData> = (props) => {
 
   const restrictionLevel = useRestrictionLevel(data.restrictions.values);
 
-  const restrictionInfo = (siteText.maatregelen.headings as any)[
-    restrictionLevel.toString()
-  ] as typeof siteText.maatregelen.headings;
+  const key = restrictionLevel.toString() as keyof typeof siteText.maatregelen.headings;
+  const restrictionInfo = siteText.maatregelen.headings[key];
 
   return (
     <>
