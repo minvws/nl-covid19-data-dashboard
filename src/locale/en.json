@@ -801,7 +801,7 @@
       "title": "Hospital admissions {{municipalityName}} | Dashboard Coronavirus | Government.nl",
       "description": "Overview of the number of confirmed COVID-19 cases in {{municipalityName}} who are admitted to a hospital per day."
     },
-    "titel_kpi": "Average number of hospital admissions in 3 days"
+    "titel_kpi": ""
   },
   "gemeente_positief_geteste_personen": {
     "titel_sidebar": "Confirmed cases",
@@ -926,7 +926,7 @@
     "titel": "Percentage confirmed cases by GGD",
     "summary_title": "{{percentage}} of GGD tests had a positive result",
     "summary_link_cta": "Read more",
-    "datums": "Week of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
+    "datums": "Week of {{weekStart}} to {{weekEnd}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
     "bron": {
       "href": "https://www.rivm.nl/documenten/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -957,7 +957,7 @@
     "titel": "Percentage confirmed cases by GGD in {{safetyRegion}}",
     "summary_title": "{{percentage}} of GGD tests had a positive result",
     "summary_link_cta": "Read more",
-    "datums": "Week of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
+    "datums": "Week of {{weekStart}} to {{weekEnd}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
     "bron": {
       "href": "https://www.rivm.nl/documenten/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
