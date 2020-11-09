@@ -91,7 +91,10 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
             title={text.barscale_titel}
             description={text.extra_uitleg}
             metadata={{
-              date: sewerAverages.last_value.week_end_unix,
+              date: [
+                sewerAverages.last_value.week_start_unix,
+                sewerAverages.last_value.week_end_unix,
+              ],
               source: text.bron,
             }}
           >
@@ -107,7 +110,10 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
               `<p style="color:#595959">${text.rwzi_abbrev}</p>`
             }
             metadata={{
-              date: sewerAverages.last_value.week_end_unix,
+              date: [
+                sewerAverages.last_value.week_start_unix,
+                sewerAverages.last_value.week_end_unix,
+              ],
               source: text.bron,
             }}
           >
@@ -155,10 +161,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
           </>
         )}
 
-        <Metadata
-          date={sewerAverages.last_value.week_end_unix}
-          source={text.bron}
-        />
+        <Metadata source={text.bron} />
       </article>
 
       {barChartData && (
@@ -175,7 +178,10 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
             valueAnnotation={siteText.waarde_annotaties.riool_normalized}
           />
           <Metadata
-            date={sewerAverages.last_value.week_end_unix}
+            date={[
+              sewerAverages.last_value.week_start_unix,
+              sewerAverages.last_value.week_end_unix,
+            ]}
             source={text.bron}
           />
         </article>

@@ -123,6 +123,7 @@ export interface National {
   intensive_care_beds_occupied: IntensiveCareBedsOccupied;
   ggd: NationalGgd;
   nursing_home: NationalNursingHome;
+  restrictions?: NationalRestrictions;
 }
 export interface NationalHuisartsVerdenkingen {
   values: NationalHuisartsVerdenkingenValue[];
@@ -335,6 +336,31 @@ export interface NationalNursingHomeValue {
   date_of_report_unix: number;
   date_of_insertion_unix: number;
 }
+export interface NationalRestrictions {
+  values: NationalRestrictionValue[];
+}
+export interface NationalRestrictionValue {
+  restriction_id: string;
+  target_region: string;
+  escalation_level: 0 | 1 | 2 | 3 | 4 | 41 | 401;
+  category_id:
+    | "er_op_uit"
+    | "bezoek"
+    | "samenkomst"
+    | "huwelijk"
+    | "verpleeghuis"
+    | "horeca"
+    | "sport"
+    | "reizen_binnenland"
+    | "ov"
+    | "uitvaart"
+    | "onderwijs"
+    | "werk"
+    | "winkels"
+    | "alcohol";
+  restriction_order: number;
+  valid_from_unix: number;
+}
 
 export interface Ranges {
   last_generated: string;
@@ -499,8 +525,29 @@ export interface RegionalNursingHomeValue {
   vrcode: string;
 }
 export interface RegionalRestrictions {
-  vrcode: string;
-  values: string[];
+  values: RegionalRestrictionValue[];
+}
+export interface RegionalRestrictionValue {
+  restriction_id: string;
+  target_region: "nl" | "vr";
+  escalation_level: 0 | 1 | 2 | 3 | 4 | 41 | 401;
+  category_id:
+    | "er_op_uit"
+    | "bezoek"
+    | "samenkomst"
+    | "huwelijk"
+    | "verpleeghuis"
+    | "horeca"
+    | "sport"
+    | "reizen_binnenland"
+    | "ov"
+    | "uitvaart"
+    | "onderwijs"
+    | "werk"
+    | "winkels"
+    | "alcohol";
+  restriction_order: number;
+  valid_from_unix: number;
 }
 
 export interface Regions {
@@ -559,33 +606,4 @@ export interface RegionsSewer {
   average: number;
   total_installation_count: number;
   date_of_insertion_unix: number;
-}
-
-export interface Restrictions {
-  last_generated: string;
-  proto_name: string;
-  name: string;
-  code: string;
-  values: RestrictionsValue[];
-}
-export interface RestrictionsValue {
-  restriction_id: string;
-  target_region: "nl" | "vr";
-  escalation_level: number;
-  category_id:
-    | "er_op_uit"
-    | "bezoek"
-    | "samenkomst"
-    | "huwelijk"
-    | "verpleeghuis"
-    | "horeca"
-    | "sport"
-    | "reizen_binnenland"
-    | "ov"
-    | "uitvaart"
-    | "onderwijs"
-    | "werk"
-    | "winkels"
-    | "alcohol";
-  restriction_order: number;
 }

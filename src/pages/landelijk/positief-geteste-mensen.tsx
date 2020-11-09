@@ -78,8 +78,8 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: delta?.last_value?.date_of_report_unix,
-          dateInsertedUnix: delta?.last_value?.date_of_insertion_unix,
+          dateUnix: delta.last_value.date_of_report_unix,
+          dateInsertedUnix: delta.last_value.date_of_insertion_unix,
           dataSource: text.bron,
         }}
       />
@@ -89,7 +89,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           title={text.barscale_titel}
           data-cy="infected_daily_increase"
           metadata={{
-            date: delta?.last_value?.date_of_report_unix,
+            date: delta.last_value.date_of_report_unix,
             source: text.bron,
           }}
         >
@@ -102,7 +102,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         <KpiTile
           title={text.kpi_titel}
           metadata={{
-            date: delta?.last_value?.date_of_report_unix,
+            date: delta.last_value.date_of_report_unix,
             source: text.bron,
           }}
         >
@@ -138,7 +138,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         data-cy="chloropleths"
         title={text.map_titel}
         metadata={{
-          date: delta?.last_value?.date_of_report_unix,
+          date: delta.last_value.date_of_report_unix,
           source: text.bron,
         }}
         description={text.map_toelichting}
@@ -188,7 +188,6 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           date: value.date_of_report_unix,
         }))}
         metadata={{
-          date: delta?.last_value?.date_of_report_unix,
           source: text.bron,
         }}
       />
@@ -215,7 +214,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           />
         </Box>
         <Metadata
-          date={delta?.last_value?.date_of_report_unix}
+          date={delta.last_value.date_of_report_unix}
           source={text.bron}
         />
       </KpiSection>
@@ -238,7 +237,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         <KpiTile
           title={ggdText.totaal_getest_week_titel}
           metadata={{
-            date: ggdLastValue.week_end_unix,
+            date: [ggdLastValue.week_start_unix, ggdLastValue.week_end_unix],
             source: ggdText.bron,
           }}
         >
@@ -248,7 +247,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         <KpiTile
           title={ggdText.positief_getest_week_titel}
           metadata={{
-            date: ggdLastValue.week_end_unix,
+            date: [ggdLastValue.week_start_unix, ggdLastValue.week_end_unix],
             source: ggdText.bron,
           }}
         >
@@ -307,7 +306,6 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           return `${formatPercentage(y)}%`;
         }}
         metadata={{
-          date: ggdLastValue.week_end_unix,
           source: ggdText.bron,
         }}
       />
@@ -344,7 +342,6 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           },
         ]}
         metadata={{
-          date: ggdLastValue.week_end_unix,
           source: ggdText.bron,
         }}
       />

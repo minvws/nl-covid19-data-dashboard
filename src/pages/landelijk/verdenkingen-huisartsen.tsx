@@ -37,8 +37,8 @@ const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: data?.last_value?.week_unix,
-          dateInsertedUnix: data?.last_value?.date_of_insertion_unix,
+          dateUnix: data.last_value.week_unix,
+          dateInsertedUnix: data.last_value.date_of_insertion_unix,
           dataSource: text.bron,
         }}
       />
@@ -80,7 +80,7 @@ const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
               },
             }))}
           />
-          <Metadata date={data.last_value.week_unix} source={text.bron} />
+          <Metadata source={text.bron} />
         </article>
       )}
     </>

@@ -53,9 +53,9 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: positivelyTestedPeople?.last_value?.date_of_report_unix,
+          dateUnix: positivelyTestedPeople.last_value.date_of_report_unix,
           dateInsertedUnix:
-            positivelyTestedPeople?.last_value?.date_of_insertion_unix,
+            positivelyTestedPeople.last_value.date_of_insertion_unix,
           dataSource: text.bron,
         }}
       />
@@ -65,7 +65,7 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
           title={text.barscale_titel}
           data-cy="infected_daily_increase"
           metadata={{
-            date: positivelyTestedPeople?.last_value?.date_of_report_unix,
+            date: positivelyTestedPeople.last_value.date_of_report_unix,
             source: text.bron,
           }}
         >
@@ -79,7 +79,7 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
         <KpiTile
           title={text.kpi_titel}
           metadata={{
-            date: positivelyTestedPeople?.last_value?.date_of_report_unix,
+            date: positivelyTestedPeople.last_value.date_of_report_unix,
             source: text.bron,
           }}
         >
@@ -100,7 +100,6 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
             date: value.date_of_report_unix,
           }))}
           metadata={{
-            date: positivelyTestedPeople?.last_value?.date_of_report_unix,
             source: text.bron,
           }}
         />
@@ -136,7 +135,7 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
           )}
         </div>
         <Metadata
-          date={positivelyTestedPeople?.last_value?.date_of_report_unix}
+          date={positivelyTestedPeople.last_value.date_of_report_unix}
           source={text.bron}
         />
       </article>

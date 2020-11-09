@@ -9,6 +9,8 @@ import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 import { Metadata } from '~/components-styled/metadata';
+import { Text } from '~/components-styled/typography';
+import { KpiWithIllustrationTile } from '~/components-styled/kpi-with-illustration-tile';
 
 const text = siteText.reproductiegetal;
 
@@ -37,31 +39,21 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
         }}
       />
 
-      <article className="metric-article layout-two-column">
-        <div className="column-item column-item-extra-margin">
-          <h3>{text.barscale_titel}</h3>
-          <ReproductionIndexBarScale
-            data={lastKnownValidData}
-            showAxis={true}
-          />
-          <p>{text.barscale_toelichting}</p>
-          <Metadata
-            date={lastKnownValidData.last_value.date_of_report_unix}
-            source={text.bron}
-          />
-        </div>
-
-        <div className="column-item column-item-extra-margin">
-          <img
-            width={315}
-            height={100}
-            loading="lazy"
-            src="/images/reproductie-explainer.svg"
-            alt={text.reproductie_explainer_alt}
-          />
-          <p>{text.extra_uitleg}</p>
-        </div>
-      </article>
+      <KpiWithIllustrationTile
+        title={text.barscale_titel}
+        metadata={{
+          date: lastKnownValidData.last_value.date_of_report_unix,
+          source: text.bron,
+        }}
+        illustration={{
+          image: '/images/reproductie-explainer.svg',
+          alt: text.reproductie_explainer_alt,
+          description: text.extra_uitleg,
+        }}
+      >
+        <ReproductionIndexBarScale data={lastKnownValidData} showAxis={true} />
+        <Text>{text.barscale_toelichting}</Text>
+      </KpiWithIllustrationTile>
 
       {data.reproduction_index.values && (
         <article className="metric-article">
@@ -78,10 +70,7 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
           <Legenda>
             <li className="blue">{text.legenda_r}</li>
           </Legenda>
-          <Metadata
-            date={lastKnownValidData.last_value.date_of_report_unix}
-            source={text.bron}
-          />
+          <Metadata source={text.bron} />
         </article>
       )}
     </>
