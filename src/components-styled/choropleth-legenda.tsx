@@ -2,32 +2,37 @@ import { Box } from './base';
 import styled from 'styled-components';
 import { css } from '@styled-system/css';
 
-export interface ILegendaItem {
+export interface LegendaItem {
   color: string;
   label: string;
 }
 
-export type TProps = {
+export type ChoroplethLegendaProps = {
   title: string;
-  items: ILegendaItem[];
+  items: LegendaItem[];
 };
 
-const Ul = styled.ul(
+const List = styled.ul(
   css({
     marginTop: 0,
     paddingLeft: 0,
     listStyle: 'none',
     display: 'inline-flex',
-    flexDirection: 'row',
   })
 );
 
-const Li = styled.li(
+const Item = styled.li(
   css({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     fontSize: [0, null, 1],
+    '&:first-child div:first-child': {
+      borderLeft: '1px solid lightgrey',
+    },
+    '&:last-child div:first-child': {
+      borderRight: '1px solid lightgrey',
+    },
   })
 );
 
@@ -42,26 +47,20 @@ const LegendaItemBox = styled(Box)(
   })
 );
 
-export function ChoroplethLegenda(props: TProps) {
+export function ChoroplethLegenda(props: ChoroplethLegendaProps) {
   const { items, title } = props;
 
   return (
     <Box>
       <h4>{title}</h4>
-      <Ul aria-label="legend">
-        {items.map((item, index) => (
-          <Li key={item.color}>
-            <LegendaItemBox
-              borderLeft={index === 0 ? '1px solid lightgrey' : null}
-              borderRight={
-                index === items.length - 1 ? '1px solid lightgrey' : null
-              }
-              backgroundColor={item.color}
-            />
+      <List aria-label="legend">
+        {items.map((item) => (
+          <Item key={item.color}>
+            <LegendaItemBox backgroundColor={item.color} />
             <div>{item.label}</div>
-          </Li>
+          </Item>
         ))}
-      </Ul>
+      </List>
     </Box>
   );
 }
