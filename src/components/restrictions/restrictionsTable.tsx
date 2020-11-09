@@ -1,5 +1,4 @@
 import { Fragment } from 'react';
-import { isDefined } from 'ts-is-present';
 import * as RestrictionIcons from '~/assets/restrictions';
 import { Box } from '~/components-styled/base';
 import { Cell, Row, Table, TableBody } from '~/components-styled/layout/table';
@@ -127,10 +126,13 @@ function DesktopRestrictionsTable(props: TableProps) {
 }
 
 function getIcon(iconName: string | undefined, color: string) {
-  if (!isDefined(iconName)) {
-    return <Box width="24px" height="24px" />;
+  if (!iconName?.length) {
+    return <Box width="32px" height="32px" />;
   }
 
   const Icon = (RestrictionIcons as any)[`${iconName}Icon`];
+  if (!Icon) {
+    return null;
+  }
   return <Icon fill={color} />;
 }

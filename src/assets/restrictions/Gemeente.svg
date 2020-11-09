@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 18.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0) -->
-<svg width="24px" height="24px" viewBox="0 0 64 64">
+<svg width="32px" height="32px" viewBox="0 0 64 64">
 	<g id="_x36_4px_Boxes">
 		<rect fill="none" width="64" height="64" />
 	</g>
@@ -14,7 +14,7 @@
 			c-0.2761,0-0.5,0.2238-0.5,0.5V39h-4L9,50v11h17V50l7-11l6.9739,10.959c0.0088,0.001,0.0172,0.0032,0.0261,0.0041V50v11h7
 			c0,0-1.2-4.8125-1.2-8c0-0.0857-0.0112-0.1656-0.0129-0.2504C46.3015,52.9117,46.8487,53,47.4167,53
 			c2.9915,0,5.4166-2.4251,5.4166-5.4167c0-0.9248-0.2328-1.7948-0.6415-2.5565C53.772,43.9351,54.8333,41.9464,54.8333,39.6666z" />
-			<rect x="30" y="52" width="6" height="5" />
+			<rect x="30" y="52" width="6" height="5" fill="none" />
 		</g>
 	</g>
 </svg>
