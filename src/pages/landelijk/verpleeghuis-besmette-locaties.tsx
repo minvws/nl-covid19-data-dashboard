@@ -35,7 +35,7 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
         description={text.metadata.description}
       />
       <ContentHeader
-        category={siteText.nationaal_layout.headings.verpleeghuis}
+        category={siteText.nationaal_layout.headings.verpleeghuizen}
         title={text.titel}
         Icon={Locatie}
         subtitle={text.pagina_toelichting}

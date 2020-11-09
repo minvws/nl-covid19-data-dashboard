@@ -47,7 +47,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
         })}
       />
       <ContentHeader
-        category={siteText.veiligheidsregio_layout.headings.medisch}
+        category={siteText.veiligheidsregio_layout.headings.ziekenhuizen}
         title={replaceVariablesInText(text.titel, {
           safetyRegion: safetyRegionName,
         })}

@@ -673,6 +673,13 @@
       "gedrag" :"Gedrag"
     }
   },
+  "gemeente_layout": {
+    "headings": {
+      "besmettingen": "Besmettingen",
+      "ziekenhuizen": "Ziekenhuizen",
+      "vroege_signalen": "Vroege signalen"
+    }
+  },
   "veiligheidsregio_metadata": {
     "title": "Regionaal Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
     "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
@@ -917,13 +924,6 @@
       "titel": "Legenda"
     },
     "valid_from": "Geldig vanaf {{validFrom}}"
-  },
-  "gemeente_layout": {
-    "headings": {
-      "medisch": "Medische indicatoren",
-      "overig": "Vroegsignalering",
-      "verpleeghuis": "Verpleeghuiszorg"
-    }
   },
   "positief_geteste_personen_ggd": {
     "titel": "Percentage positief geteste personen via GGD teststraten",

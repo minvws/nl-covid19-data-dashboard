@@ -165,7 +165,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                   </p>
                 )}
               </div>
-              <h2>{siteText.nationaal_layout.headings.besmettingen}</h2>
+              <h2>{siteText.gemeente_layout.headings.besmettingen}</h2>
               <ul>
                 <li>
                   <Link
@@ -195,7 +195,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                 </li>
               </ul>
 
-              <h2>{siteText.nationaal_layout.headings.ziekenhuizen}</h2>
+              <h2>{siteText.gemeente_layout.headings.ziekenhuizen}</h2>
               <ul>
                 <li>
                   <Link
@@ -225,7 +225,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                 </li>
               </ul>
 
-              <h2>{siteText.nationaal_layout.headings.vroege_signalen}</h2>
+              <h2>{siteText.gemeente_layout.headings.vroege_signalen}</h2>
               <ul>
                 <li>
                   {sewerWaterBarScaleData ? (

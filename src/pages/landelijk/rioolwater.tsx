@@ -32,7 +32,7 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
         description={text.metadata.description}
       />
       <ContentHeader_weekRangeHack
-        category={siteText.gemeente_layout.headings.overig}
+        category={siteText.nationaal_layout.headings.vroege_signalen}
         title={text.titel}
         Icon={RioolwaterMonitoring}
         subtitle={text.pagina_toelichting}

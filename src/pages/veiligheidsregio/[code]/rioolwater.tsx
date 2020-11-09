@@ -70,7 +70,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
         })}
       />
       <ContentHeader_weekRangeHack
-        category={siteText.veiligheidsregio_layout.headings.overig}
+        category={siteText.veiligheidsregio_layout.headings.vroege_signalen}
         title={replaceVariablesInText(text.titel, {
           safetyRegion: safetyRegionName,
         })}
