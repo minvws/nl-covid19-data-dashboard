@@ -1,6 +1,6 @@
 import {
   ChoroplethLegenda,
-  ILegendaItem,
+  LegendaItem,
 } from '~/components-styled/choropleth-legenda';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { Box } from './base';
@@ -29,7 +29,7 @@ interface ChoroplethTileProps extends DataProps {
   children: React.ReactNode;
   legend?: {
     title: string;
-    items: ILegendaItem[];
+    items: LegendaItem[];
   };
   metadata?: MetadataProps;
 }
