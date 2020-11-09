@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 import { LegendaItem } from '~/components-styled/choropleth-legenda';
-
 import { ChoroplethThresholdsValue } from '~/components/choropleth/shared';
 
 const createLabel = (list: ChoroplethThresholdsValue[], index: number) => {
