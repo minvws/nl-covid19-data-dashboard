@@ -352,6 +352,7 @@ export interface NationalRestrictionValue {
     | "horeca"
     | "sport"
     | "reizen_binnenland"
+    | "reizen_buitenland"
     | "ov"
     | "uitvaart"
     | "onderwijs"
@@ -531,7 +532,7 @@ export interface RegionalRestrictions {
 export interface RegionalRestrictionValue {
   restriction_id: string;
   target_region: "nl" | "vr";
-  escalation_level: 0 | 1 | 2 | 3 | 4 | 41 | 401;
+  escalation_level: 0 | 1 | 2 | 3 | 4 | 41 | 401 | 402;
   category_id:
     | "er_op_uit"
     | "bezoek"
@@ -541,6 +542,7 @@ export interface RegionalRestrictionValue {
     | "horeca"
     | "sport"
     | "reizen_binnenland"
+    | "reizen_buitenland"
     | "ov"
     | "uitvaart"
     | "onderwijs"

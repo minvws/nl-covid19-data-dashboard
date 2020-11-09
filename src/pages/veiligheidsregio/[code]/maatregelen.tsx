@@ -38,6 +38,10 @@ const RegionalRestrictions: FCWithLayout<ISafetyRegionData> = (props) => {
 
   const restrictionLevel = useRestrictionLevel(data.restrictions.values);
 
+  const restrictionInfo = (siteText.maatregelen.headings as any)[
+    restrictionLevel.toString()
+  ] as typeof siteText.maatregelen.headings;
+
   return (
     <>
       <SEOHead
@@ -72,7 +76,7 @@ const RegionalRestrictions: FCWithLayout<ISafetyRegionData> = (props) => {
             <EscalationLevelInfoLabel escalationLevel={escalationLevel} />
           </Box>
           <Box display="flex" flexDirection="column">
-            <Text>{text.toelichting_risiconiveau}</Text>
+            <Text>{restrictionInfo.toelichting_risiconiveau}</Text>
             <Link href="/over-risiconiveaus">
               <a>{text.linktext_riskpage}</a>
             </Link>
@@ -81,8 +85,14 @@ const RegionalRestrictions: FCWithLayout<ISafetyRegionData> = (props) => {
       </KpiSection>
 
       <KpiSection display="flex" flexDirection="column">
+        <Heading level={3}>{restrictionInfo.extratoelichting.titel}</Heading>
         <Box>
-          <Text>{restrictionLevel}</Text>
+          <Text>
+            {replaceVariablesInText(
+              restrictionInfo.extratoelichting.toelichting,
+              { safetyRegionName }
+            )}
+          </Text>
         </Box>
         <RestrictionsTable
           data={restrictionsTable}

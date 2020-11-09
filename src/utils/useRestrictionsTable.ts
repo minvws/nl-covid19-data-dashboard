@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
+import siteText from '~/locale/index';
 import {
   NationalRestrictionValue,
   RegionalRestrictionValue,
 } from '~/types/data';
-import siteText from '~/locale/index';
 
 const restrictionTexts: Record<string, string> = siteText.maatregelen.teksten;
 const restrictionIcons: Record<string, string> = siteText.maatregelen.icons;
@@ -22,6 +22,7 @@ const rowOrder: EscalationCategory[] = [
   'horeca',
   'sport',
   'reizen_binnenland',
+  'reizen_buitenland',
   'ov',
   'uitvaart',
   'onderwijs',

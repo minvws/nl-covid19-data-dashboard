@@ -61,6 +61,7 @@
       "horeca":"Horeca",
       "sport":"Sport",
       "reizen_binnenland":"Binnenlandse reizen",
+      "reizen_buitenland":"Buitenlandse reizen",
       "ov":"OV",
       "uitvaart":"Uitvaart",
       "onderwijs":"Onderwijs",
@@ -70,13 +71,55 @@
       "algemeen": "Algemeen"
     },
     "headings": {
-      "1": "",
-      "2": "",
-      "3": "",
-      "4": "",
-      "401": "",
-      "402": "",
-      "41": ""
+      "1": {
+        "toelichting_risiconiveau": "Het aantal nieuwe besmettingen is laag. Maatregelen worden voldoende nageleefd. Er is voldoende zorgcapaciteit.",
+        "extratoelichting": {
+          "titel": "Maatregelen bij risiconiveau 1",
+          "toelichting": "Er gelden in {{safetyRegionName}} maatregelen die standaard horen bij risiconiveau 1. Het is mogelijk dat deze veiligheidsregio aanvullende maatregelen neemt. "
+        }
+      },
+      "2": {
+        "toelichting_risiconiveau": "Het aantal nieuwe besmettingen neemt toe. De druk op de zorg neemt toe. Er zijn aanvullende maatregelen nodig.",
+        "extratoelichting": {
+          "titel": "Maatregelen bij risiconiveau 2",
+          "toelichting": "Er gelden in {{safetyRegionName}} maatregelen die standaard horen bij risiconiveau 2. Het is mogelijk dat deze veiligheidsregio aanvullende maatregelen neemt."
+        }
+      },
+      "3": {
+        "toelichting_risiconiveau": "Het aantal nieuwe besmettingen neemt snel toe. De zorgcapaciteit is onvoldoende. Er zijn maatregelen nodig om weer zicht op de verspreiding van het virus te krijgen.",
+        "extratoelichting": {
+          "titel": "Maatregelen bij risiconiveau 3",
+          "toelichting": "Er gelden in {{safetyRegionName}} maatregelen die standaard horen bij risiconiveau 3. Het is mogelijk dat deze veiligheidsregio aanvullende maatregelen neemt."
+        }
+      },
+      "4": {
+        "toelichting_risiconiveau": "Er zijn zeer veel mensen besmettelijk en het dagelijks aantal nieuwe besmettingen is hoog. De regionale zorgcapaciteit is onvoldoende. Strenge, landelijke maatregelen zijn noodzakelijk.",
+        "extratoelichting": {
+          "titel": "Maatregelen bij risiconiveau 4",
+          "toelichting": "Er gelden in {{safetyRegionName}} maatregelen die standaard horen bij risiconiveau 4. Het is mogelijk dat deze veiligheidsregio aanvullende maatregelen neemt."
+        }
+      },
+      "401": {
+        "toelichting_risiconiveau": "Er zijn zeer veel mensen besmettelijk en het dagelijks aantal nieuwe besmettingen is hoog. De regionale zorgcapaciteit is onvoldoende. Strenge, landelijke maatregelen zijn noodzakelijk.",
+        "extratoelichting": {
+          "titel": "Maatregelen bij risiconiveau 4/ Gedeeltelijke lockdown",
+          "toelichting": "Er gelden momenteel landelijke maatregelen, ongeacht het risiconiveau in een bepaalde veiligheidsregio."
+        }
+      },
+      "402": {
+        "toelichting_risiconiveau": "Er zijn zeer veel mensen besmettelijk en het dagelijks aantal nieuwe besmettingen is hoog. De regionale zorgcapaciteit is onvoldoende. Strenge, landelijke maatregelen zijn noodzakelijk.",
+        "extratoelichting": {
+          "titel": "Maatregelen bij risiconiveau 4/ Tijdelijke verzwaring van de gedeeltelijke lockdown",
+          "toelichting": "Er gelden momenteel landelijke maatregelen, ongeacht het risiconiveau in een bepaalde veiligheidsregio."
+        }
+      },
+      "41": {
+        "toelichting_risiconiveau": "Er zijn zeer veel mensen besmettelijk en het dagelijks aantal nieuwe besmettingen is hoog. De regionale zorgcapaciteit is onvoldoende. Strenge, landelijke maatregelen zijn noodzakelijk.",
+        "extratoelichting": {
+          "titel": "Maatregelen bij risiconiveau 4/ Lockdown (regionaal)",
+          "toelichting": "In {{safetyRegionName}} is een regionale lockdown van kracht."
+        }
+      }
     },
     "teksten": {
       "4_er_op_uit_1": "Maximaal 4 inclusief jezelf",

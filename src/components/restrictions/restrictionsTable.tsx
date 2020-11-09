@@ -65,8 +65,10 @@ function MobileRestrictionsTable(props: TableProps) {
                 <Box display="flex" flexDirection="column">
                   {row.restrictions.map((value) => (
                     <Box key={value.text} display="flex" flexDirection="row">
-                      {getIcon(value.icon, color)}
-                      {value.text}
+                      <Box as="span" flexShrink={0}>
+                        {getIcon(value.icon, color)}
+                      </Box>
+                      <Box as="span">{value.text}</Box>
                     </Box>
                   ))}
                 </Box>
@@ -107,8 +109,12 @@ function DesktopRestrictionsTable(props: TableProps) {
               <Box display="flex" flexDirection="column">
                 {row.restrictions.map((value) => (
                   <Box key={value.text} display="flex" flexDirection="row">
-                    {getIcon(value.icon, color)}
-                    {value.text}
+                    <Box as="span" flexShrink={0}>
+                      {getIcon(value.icon, color)}
+                    </Box>
+                    <Box as="span" ml={1}>
+                      {value.text}
+                    </Box>
                   </Box>
                 ))}
               </Box>
@@ -122,7 +128,7 @@ function DesktopRestrictionsTable(props: TableProps) {
 
 function getIcon(iconName: string | undefined, color: string) {
   if (!isDefined(iconName)) {
-    return <Box as="span" width="24px" height="24px" />;
+    return <Box width="24px" height="24px" />;
   }
 
   const Icon = (RestrictionIcons as any)[`${iconName}Icon`];
