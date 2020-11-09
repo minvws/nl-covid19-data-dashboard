@@ -123,7 +123,7 @@ export interface National {
   intensive_care_beds_occupied: IntensiveCareBedsOccupied;
   ggd: NationalGgd;
   nursing_home: NationalNursingHome;
-  restrictions?: NationalRestrictions;
+  restrictions: NationalRestrictions;
 }
 export interface NationalHuisartsVerdenkingen {
   values: NationalHuisartsVerdenkingenValue[];
