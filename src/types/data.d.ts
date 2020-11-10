@@ -408,9 +408,9 @@ export interface NationalBehaviorValue {
   sneeze_cough_elbow_support_trend: ("up" | "down" | "equal") | null;
   max_visitors_support: number | null;
   max_visitors_support_trend: ("up" | "down" | "equal") | null;
-  week_start_unix: number | null;
-  week_end_unix: number | null;
-  date_of_insertion_unix: number | null;
+  week_start_unix: number;
+  week_end_unix: number;
+  date_of_insertion_unix: number;
 }
 
 export interface Ranges {
@@ -647,9 +647,9 @@ export interface RegionalBehaviorValue {
   sneeze_cough_elbow_support_trend: ("up" | "down" | "equal") | null;
   max_visitors_support: number | null;
   max_visitors_support_trend: ("up" | "down" | "equal") | null;
-  week_start_unix: number | null;
-  week_end_unix: number | null;
-  date_of_insertion_unix: number | null;
+  week_start_unix: number;
+  week_end_unix: number;
+  date_of_insertion_unix: number;
   vrcode: string;
 }
 
@@ -754,7 +754,7 @@ export interface RegionsBehavior {
   sneeze_cough_elbow_support_trend: ("up" | "down" | "equal") | null;
   max_visitors_support: number | null;
   max_visitors_support_trend: ("up" | "down" | "equal") | null;
-  week_start_unix: number | null;
-  week_end_unix: number | null;
-  date_of_insertion_unix: number | null;
+  week_start_unix: number;
+  week_end_unix: number;
+  date_of_insertion_unix: number;
 }

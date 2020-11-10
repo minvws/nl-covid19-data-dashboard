@@ -155,13 +155,13 @@
           "$ref": "#/definitions/value_trend"
         },
         "week_start_unix": {
-          "type": ["integer", "null"]
+          "type": "integer"
         },
         "week_end_unix": {
-          "type": ["integer", "null"]
+          "type": "integer"
         },
         "date_of_insertion_unix": {
-          "type": ["integer", "null"]
+          "type": "integer"
         }
       },
       "required": [
