@@ -12,5 +12,7 @@ export type BehaviorIdentifier =
   | 'sneeze_cough_elbow'
   | 'max_visitors_home';
 
+export type BehaviorTrendType = 'up' | 'down' | 'equal' | null;
+
 export type GedragText = typeof siteText.regionaal_gedrag &
   typeof siteText.nl_gedrag;

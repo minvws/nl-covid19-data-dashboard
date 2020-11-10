@@ -7,7 +7,7 @@ import PijlOmlaag from '~/assets/pijl_omlaag.svg';
 import { GedragText } from '../behavior-types';
 
 interface BehaviorTrendProps {
-  trend: string;
+  trend: BehaviorTrendType;
   text: GedragText;
 }
 

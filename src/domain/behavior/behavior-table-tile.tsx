@@ -6,7 +6,11 @@ import { Tile } from '~/components-styled/layout';
 import { PercentageBar } from '~/components-styled/percentage-bar';
 import { NationalBehaviorValue, RegionalBehaviorValue } from '~/types/data';
 import { formatPercentage } from '~/utils/formatNumber';
-import { BehaviorIdentifier, GedragText } from './behavior-types';
+import {
+  BehaviorIdentifier,
+  BehaviorTrendType,
+  GedragText,
+} from './behavior-types';
 import { BehaviorIcon } from './components/behavior-icon';
 import { BehaviorTrend } from './components/behavior-trend';
 import { BehaviorTypeControls } from './components/behavior-type-controls';
@@ -36,7 +40,7 @@ interface BehaviorFormatted {
   id: BehaviorIdentifier;
   description: string;
   percentage: number | null;
-  trend: 'up' | 'down' | 'equal' | null;
+  trend: BehaviorTrendType;
 }
 
 const MobileScroll = styled.div(
