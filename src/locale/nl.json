@@ -9,8 +9,8 @@
     "title": "Laatst bijgewerkt"
   },
   "notificatie": {
-    "titel": "Lichte daling COVID-19 meldingen",
-    "bericht": "Afgelopen week (28 oktober-3 november) is het aantal nieuwe meldingen van COVID-19 iets gedaald. Dat is waarschijnlijk het effect van de maatregelen die eind september en medio oktober van kracht werden. Het aantal nieuwe ziekenhuisopnames is licht toegenomen, terwijl het aantal opnames op de IC iets daalde.\n\nHet risiconiveau per regio kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2), ‘ernstig’ (niveau 3), ‘zeer ernstig’ (niveau 4) zijn. Op dit moment zijn {{escalationLevel4}} regio’s ingeschaald op ‘zeer ernstig’, {{escalationLevel3}} op ‘ernstig’, {{escalationLevel2}} op ‘zorgelijk’ en {{escalationLevel1}} op ‘waakzaam.‘",
+    "titel": "Afname COVID-19 meldingen ",
+    "bericht": "Afgelopen week (4 november-10 november) is in alle regio’s het aantal nieuwe meldingen van COVID-19 gedaald ten opzichte van de week daarvoor. Ook het aantal ziekenhuisopnames daalt. De afname is in lijn met de berekeningen die het RIVM voorafgaand aan maatregelen van 14 oktober heeft gemaakt. \n\nHet risiconiveau per regio kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2), ‘ernstig’ (niveau 3), ‘zeer ernstig’ (niveau 4) zijn. Op dit moment zijn {{escalationLevel4}} regio’s ingeschaald op ‘zeer ernstig’, {{escalationLevel3}} op ‘ernstig’, {{escalationLevel2}} op ‘zorgelijk’ en {{escalationLevel1}} op ‘waakzaam.‘",
     "link": {
       "text": "Bekijk de toelichting van het RIVM",
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel"
@@ -98,7 +98,7 @@
     "titel": "Aantal patiënten met eerste melding van COVID-19 klachten bij de huisarts",
     "pagina_toelichting": "Elke week berekent het Nivel aan de hand van de geregistreerde klachten door huisartsen, het aantal patiënten dat voor de eerste keer contact opneemt met de huisartsenpraktijk vanwege COVID-19-achtige klachten.",
     "barscale_titel": "Aantal patiënten met eerste melding van COVID-19 klachten bij de huisarts",
-    "barscale_toelichting": "Aantal patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten, per 100.000 inwoners, per week.",
+    "barscale_toelichting": "Aantal patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten, per week.",
     "kpi_titel": "Geschat aantal patiënten met verdenking van COVID-19",
     "kpi_toelichting": "Geschat aantal patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten per week.",
     "linechart_titel": "Verloop over tijd",
@@ -271,7 +271,7 @@
     ],
     "cluster_datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "cluster_bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     },
     "cluster_titel": "Clusters van positief geteste personen",
@@ -394,7 +394,7 @@
   "verpleeghuis_besmette_locaties": {
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
     },
     "titel": "Besmette locaties",
@@ -421,7 +421,7 @@
   "verpleeghuis_positief_geteste_personen": {
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
     },
     "titel": "Aantal positief geteste bewoners",
@@ -446,7 +446,7 @@
   "verpleeghuis_oversterfte": {
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
     },
     "titel": "Sterfte",
@@ -733,6 +733,10 @@
   },
   "nationaal_layout": {
     "headings": {
+      "medisch": "Medische indicatoren",
+      "overig": "Vroegsignalering",
+      "verpleeghuis": "Verpleeghuiszorg",
+      "laatste": "Laatste ontwikkelingen",
       "algemeen": "Algemeen",
       "besmettingen": "Besmettingen",
       "ziekenhuizen": "Ziekenhuizen",
@@ -743,18 +747,14 @@
   },
   "veiligheidsregio_layout": {
     "headings": {
+      "medisch": "Medische indicatoren",
+      "overig": "Vroegsignalering",
+      "verpleeghuis": "Verpleeghuiszorg",
       "besmettingen": "Besmettingen",
       "ziekenhuizen": "Ziekenhuizen",
       "verpleeghuizen": "Verpleeghuiszorg",
       "vroege_signalen": "Vroege signalen",
-      "gedrag" :"Gedrag"
-    }
-  },
-  "gemeente_layout": {
-    "headings": {
-      "besmettingen": "Besmettingen",
-      "ziekenhuizen": "Ziekenhuizen",
-      "vroege_signalen": "Vroege signalen"
+      "gedrag": "Gedrag"
     }
   },
   "veiligheidsregio_metadata": {
@@ -819,7 +819,7 @@
     },
     "cluster_datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "cluster_bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     },
     "cluster_titel": "Clusters van positief geteste personen",
@@ -973,7 +973,7 @@
   },
   "laatste_ontwikkelingen": {
     "title": "Laatste ontwikkelingen",
-    "menu_subtitle": "Lichte daling COVID-19 meldingen",
+    "menu_subtitle": "Afname COVID-19 meldingen ",
     "alle_cijfers_header": "Benieuwd naar alle cijfers?",
     "alle_cijfers_link": "Bekijk alle cijfers"
   },
@@ -1003,13 +1003,23 @@
     },
     "valid_from": "Geldig vanaf {{validFrom}}"
   },
+  "gemeente_layout": {
+    "headings": {
+      "medisch": "Medische indicatoren",
+      "overig": "Vroegsignalering",
+      "verpleeghuis": "Verpleeghuiszorg",
+      "besmettingen": "Besmettingen",
+      "ziekenhuizen": "Ziekenhuizen",
+      "vroege_signalen": "Vroege signalen"
+    }
+  },
   "positief_geteste_personen_ggd": {
     "titel": "Percentage positief geteste personen via GGD teststraten",
     "summary_title": "{{percentage}} van de GGD testen waren positief",
     "summary_link_cta": "Lees meer",
     "datums": "Week van {{weekStart}} tot {{weekEnd}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
     "bron": {
-      "href": "https://www.rivm.nl/documenten/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     },
     "toelichting": "Dit getal zegt iets over het totaal aantal personen dat via de GGD getest, waarvan een uitslag bekend is en hoeveel daarvan een positieve uitslag hadden. Let op dat de meeste testen via de GGD lopen, maar dit niet voor alle testen geldt. Daarom wijkt het absolute aantal positief geteste personen af van het aantal positief geteste personen door de GGD.",
@@ -1021,7 +1031,7 @@
     "linechart_percentage_titel": "Percentage positieve testen over tijd",
     "linechart_percentage_toelichting": "Deze grafiek toont het percentage positief geteste mensen door de GGD over tijd",
     "linechart_totaltests_titel": "Aantal testen over tijd",
-    "linechart_totaltests_toelichting": "Deze grafiek toont het aantal afgenomen testen over tijd in vergelijking met het aantal positieve testen.",
+    "linechart_totaltests_toelichting": "Deze grafiek toont het aantal afgenomen testen waarvan de uitslag bekend is over tijd, in vergelijking met het aantal positieve testen.",
     "linechart_totaltests_legend_label": "Alle GGD tests",
     "linechart_positivetests_legend_label": "Alle positieve testen van de GGD"
   },
@@ -1040,7 +1050,7 @@
     "summary_link_cta": "Lees meer",
     "datums": "Week van {{weekStart}} tot {{weekEnd}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
     "bron": {
-      "href": "https://www.rivm.nl/documenten/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     },
     "toelichting": "Dit getal zegt iets over het totaal aantal personen dat via de GGD getest, waarvan een uitslag bekend is en hoeveel daarvan een positieve uitslag hadden. Let op dat de meeste testen via de GGD lopen, maar dit niet voor alle testen geldt. Daarom wijkt het absolute aantal positief geteste personen af van het aantal positief geteste personen door de GGD.",
@@ -1052,14 +1062,14 @@
     "linechart_percentage_titel": "Percentage positieve testen over tijd",
     "linechart_percentage_toelichting": "Deze grafiek toont het percentage positief geteste mensen door de GGD over tijd",
     "linechart_totaltests_titel": "Aantal testen over tijd",
-    "linechart_totaltests_toelichting": "Deze grafiek toont het aantal afgenomen testen over tijd in vergelijking met het aantal positieve testen.",
+    "linechart_totaltests_toelichting": "Deze grafiek toont het aantal afgenomen testen waarvan de uitslag bekend is over tijd, in vergelijking met het aantal positieve testen.",
     "linechart_totaltests_legend_label": "Alle GGD tests",
     "linechart_positivetests_legend_label": "Alle positieve testen van de GGD"
   },
   "veiligheidsregio_verpleeghuis_oversterfte": {
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
     },
     "titel": "Sterfte in {{safetyRegion}}",
@@ -1079,7 +1089,7 @@
   "veiligheidsregio_verpleeghuis_besmette_locaties": {
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
     },
     "titel": "Aantal besmette locaties in {{safetyRegion}}",
@@ -1098,7 +1108,7 @@
   "veiligheidsregio_verpleeghuis_positief_geteste_personen": {
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
     },
     "titel": "Aantal positief geteste bewoners in {{safetyRegion}}",
