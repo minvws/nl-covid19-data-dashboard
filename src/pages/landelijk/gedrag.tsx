@@ -1,5 +1,4 @@
 import Gedrag from '~/assets/gedrag.svg';
-import { BehaviorTableTile } from '~/components-styled/common/behavior-table-tile';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { Tile } from '~/components-styled/layout';
@@ -9,6 +8,7 @@ import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRang
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
+import { BehaviorTableTile } from '~/domain/behavior/behavior-table-tile';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 
