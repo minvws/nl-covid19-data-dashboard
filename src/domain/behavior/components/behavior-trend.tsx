@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Gelijk from '~/assets/gelijk.svg';
 import PijlOmhoog from '~/assets/pijl_omhoog.svg';
 import PijlOmlaag from '~/assets/pijl_omlaag.svg';
-import { GedragText } from '../behavior-types';
+import { BehaviorTrendType, GedragText } from '../behavior-types';
 
 interface BehaviorTrendProps {
   trend: BehaviorTrendType;
