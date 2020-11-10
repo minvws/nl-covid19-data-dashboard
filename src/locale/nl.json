@@ -249,15 +249,15 @@
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
     "barscale_keys": [
-      "0 tot 9",
-      "10 tot 19",
-      "20 tot 29",
-      "30 tot 39",
-      "40 tot 49",
-      "50 tot 59",
-      "60 tot 69",
-      "70 tot 79",
-      "80 tot 89",
+      "0 tot 10",
+      "10 tot 20",
+      "20 tot 30",
+      "30 tot 40",
+      "40 tot 50",
+      "50 tot 60",
+      "60 tot 70",
+      "70 tot 80",
+      "80 tot 90",
       "90+"
     ],
     "cluster_datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -575,8 +575,8 @@
     "paragraaf": "In dit dashboard staan verschillende cijfers die ons vertellen hoe het ervoor staat met beheersen van COVID-19. Op deze plek geven we meer toelichting over de wijze waarop de cijfers zijn samengesteld.",
     "cijfers": [
       {
-        "cijfer": "Correctie in aantal positief geteste mensen",
-        "verantwoording": "Op 17 oktober 2020 is sprake van 233 nameldingen van GGD Noord-Holland Noord.\n\nVanwege een eerdere technische storing bij het RIVM ontbreekt een aantal meldingen in de rapportage van 1 september. Deze meldingen zijn opgenomen in de rapportage van 2 september. Hierdoor is het aantal nieuwe positief geteste personen gemeld op 2 september (734) bijna 300 meldingen hoger dan op 1 september (462)."
+        "cijfer": "",
+        "verantwoording": ""
       },
       {
         "cijfer": "Intensive care-bezetting",
@@ -724,18 +724,28 @@
   },
   "nationaal_layout": {
     "headings": {
-      "medisch": "Medische indicatoren",
-      "overig": "Vroegsignalering",
-      "verpleeghuis": "Verpleeghuiszorg",
-      "laatste": "Laatste ontwikkelingen",
+      "algemeen": "Algemeen",
+      "besmettingen": "Besmettingen",
+      "ziekenhuizen": "Ziekenhuizen",
+      "verpleeghuizen": "Verpleeghuiszorg",
+      "vroege_signalen": "Vroege signalen",
       "gedrag": "Gedrag"
     }
   },
   "veiligheidsregio_layout": {
     "headings": {
-      "medisch": "Medische indicatoren",
-      "overig": "Vroegsignalering",
-      "verpleeghuis": "Verpleeghuiszorg"
+      "besmettingen": "Besmettingen",
+      "ziekenhuizen": "Ziekenhuizen",
+      "verpleeghuizen": "Verpleeghuiszorg",
+      "vroege_signalen": "Vroege signalen",
+      "gedrag" :"Gedrag"
+    }
+  },
+  "gemeente_layout": {
+    "headings": {
+      "besmettingen": "Besmettingen",
+      "ziekenhuizen": "Ziekenhuizen",
+      "vroege_signalen": "Vroege signalen"
     }
   },
   "veiligheidsregio_metadata": {
@@ -869,7 +879,8 @@
     "metadata": {
       "title": "Ziekenhuisopnames inwoners {{municipalityName}} | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van het aantal mensen in de gemeente {{municipalityName}} die met COVID-19 in het ziekenhuis zijn opgenomen."
-    }
+    },
+    "titel_kpi": "Gemiddeld aantal ziekenhuisopnames over 3 dagen"
   },
   "gemeente_positief_geteste_personen": {
     "titel_sidebar": "Positief geteste mensen",
@@ -983,13 +994,6 @@
     },
     "valid_from": "Geldig vanaf {{validFrom}}"
   },
-  "gemeente_layout": {
-    "headings": {
-      "medisch": "Medische indicatoren",
-      "overig": "Vroegsignalering",
-      "verpleeghuis": "Verpleeghuiszorg"
-    }
-  },
   "positief_geteste_personen_ggd": {
     "titel": "Percentage positief geteste personen via GGD teststraten",
     "summary_title": "{{percentage}} van de GGD testen waren positief",
@@ -1025,7 +1029,7 @@
     "titel": "Percentage positief geteste personen via GGD teststraten in {{safetyRegion}}",
     "summary_title": "{{percentage}} van de GGD testen waren positief",
     "summary_link_cta": "Lees meer",
-    "datums": "Week van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
+    "datums": "Week van {{weekStart}} tot {{weekEnd}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
     "bron": {
       "href": "https://www.rivm.nl/documenten/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"

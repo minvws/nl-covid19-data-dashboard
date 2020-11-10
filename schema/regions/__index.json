@@ -68,18 +68,18 @@
         "$ref": "nursing_home.json"
       }
     },
-    "behavior": {
-      "type": "array",
-      "maxItems": 25,
-      "items": {
-        "$ref": "behavior.json"
-      }
-    },
     "sewer": {
       "type": "array",
       "maxItems": 25,
       "items": {
         "$ref": "sewer.json"
+      }
+    },
+    "behavior": {
+      "type": "array",
+      "maxItems": 25,
+      "items": {
+        "$ref": "behavior.json"
       }
     }
   }

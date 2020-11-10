@@ -97,11 +97,11 @@
     "nursing_home": {
       "$ref": "nursing_home.json"
     },
-    "behavior": {
-      "$ref": "behavior.json"
-    },
     "restrictions": {
       "$ref": "restrictions.json"
+    },
+    "behavior": {
+      "$ref": "behavior.json"
     }
   }
 }

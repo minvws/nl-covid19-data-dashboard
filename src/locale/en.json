@@ -574,8 +574,8 @@
     "paragraaf": "The dashboard presents a variety of data that give us an idea of how we are managing the COVID-19 epidemic. In this section we explain how we arrive at this data.",
     "cijfers": [
       {
-        "cijfer": "Correction in the number of confirmed cases",
-        "verantwoording": "On 17 October 2020 there are 233 additional cases reported from the municipal health service Noord-Holland Noord due to an administrative delay.\n\nDue to a technical malfunction there were a number of confirmed cases missing in the reports of 1 September 2020. These have been included in the report of 2 September 2020. This means the new number of confirmed cases on 2 September 2020 (734) includes around 300 additional reports from 1 September 2020 (462)."
+        "cijfer": "",
+        "verantwoording": ""
       },
       {
         "cijfer": "ICU occupancy rates",
@@ -695,8 +695,8 @@
   "common": {
     "metadata": {
       "source": "Source",
-      "date": "Waarde van {{date}}",
-      "dateFromTo": "Waarde van {{dateFrom}} tot {{dateTo}}"
+      "date": "",
+      "dateFromTo": ""
     },
     "barScale": {
       "signaalwaarde": "Alert value"
@@ -723,18 +723,36 @@
   },
   "nationaal_layout": {
     "headings": {
+<<<<<<< HEAD
       "medisch": "Medical indicators",
       "overig": "Early indicators",
       "verpleeghuis": "Nursing homes",
       "laatste": "Latest developments",
       "gedrag": "Behavior"
+=======
+      "algemeen": "[@TODO] Algemeen",
+      "besmettingen": "[@TODO] Besmettingen",
+      "ziekenhuizen": "[@TODO] Ziekenhuizen",
+      "verpleeghuizen": "[@TODO] Verpleeghuizen",
+      "vroege_signalen": "[@TODO] Vroege signalen",
+      "gedrag": "[@TODO] Gedrag"
+>>>>>>> 88c6a68967c760a24589cb19f05d8004b8a6d002
     }
   },
   "veiligheidsregio_layout": {
     "headings": {
-      "medisch": "Medical indicators",
-      "overig": "Other indicators",
-      "verpleeghuis": "Nursing homes"
+      "besmettingen": "[@TODO] Besmettingen",
+      "ziekenhuizen": "[@TODO] Ziekenhuizen",
+      "verpleeghuizen": "[@TODO] Verpleeghuizen",
+      "vroege_signalen": "[@TODO] Vroege signalen",
+      "gedrag" :"[@TODO] gedrag"
+    }
+  },
+  "gemeente_layout": {
+    "headings": {
+      "besmettingen": "[@TODO] Besmettingen",
+      "ziekenhuizen": "[@TODO] Ziekenhuizen",
+      "vroege_signalen": "[@TODO] Vroege signalen"
     }
   },
   "veiligheidsregio_metadata": {
@@ -868,7 +886,8 @@
     "metadata": {
       "title": "Hospital admissions {{municipalityName}} | Dashboard Coronavirus | Government.nl",
       "description": "Overview of the number of confirmed COVID-19 cases in {{municipalityName}} who are admitted to a hospital per day."
-    }
+    },
+    "titel_kpi": ""
   },
   "gemeente_positief_geteste_personen": {
     "titel_sidebar": "Confirmed cases",
@@ -982,18 +1001,11 @@
     },
     "valid_from": "Valid from {{validFrom}}"
   },
-  "gemeente_layout": {
-    "headings": {
-      "medisch": "Medical indicators",
-      "overig": "Early warning",
-      "verpleeghuis": "Nursing homes"
-    }
-  },
   "positief_geteste_personen_ggd": {
     "titel": "Percentage confirmed cases by GGD",
     "summary_title": "{{percentage}} of GGD tests had a positive result",
     "summary_link_cta": "Read more",
-    "datums": "Week of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
+    "datums": "Week of {{weekStart}} to {{weekEnd}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
     "bron": {
       "href": "https://www.rivm.nl/documenten/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -1024,7 +1036,7 @@
     "titel": "Percentage confirmed cases by GGD in {{safetyRegion}}",
     "summary_title": "{{percentage}} of GGD tests had a positive result",
     "summary_link_cta": "Read more",
-    "datums": "Week of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
+    "datums": "Week of {{weekStart}} to {{weekEnd}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
     "bron": {
       "href": "https://www.rivm.nl/documenten/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"

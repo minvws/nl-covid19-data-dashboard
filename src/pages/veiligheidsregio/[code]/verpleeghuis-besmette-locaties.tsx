@@ -42,7 +42,7 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
         })}
       />
       <ContentHeader
-        category={siteText.veiligheidsregio_layout.headings.verpleeghuis}
+        category={siteText.veiligheidsregio_layout.headings.verpleeghuizen}
         title={replaceVariablesInText(text.titel, {
           safetyRegion: safetyRegionName,
         })}

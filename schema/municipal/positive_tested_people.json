@@ -37,7 +37,7 @@
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "positive_tested_people.json",
-  "title": "positive_tested_people",
+  "title": "municipal_positive_tested_people",
   "type": "object",
   "required": ["values", "last_value"],
   "additionalProperties": false,

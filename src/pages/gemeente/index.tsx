@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
-import { MunicipalityChoropleth } from '~/components/choropleth/MunicipalityChoropleth';
+import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import {
   createSelectMunicipalHandler,
   MunicipalitySelectionHandler,
-} from '~/components/choropleth/selectHandlers/createSelectMunicipalHandler';
+} from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { MunicipalityProperties } from '~/components/choropleth/shared';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
 import { FCWithLayout } from '~/components/layout';
@@ -63,12 +63,12 @@ const Municipality: FCWithLayout<any> = () => {
         </div>
         <div className="map-container">
           <MunicipalityChoropleth
+            isSelectorMap
             tooltipContent={tooltipContent(onSelectMunicipal)}
             onSelect={createSelectMunicipalHandler(
               router,
               'positief-geteste-mensen'
             )}
-            isSelectorMap={true}
           />
         </div>
       </article>
