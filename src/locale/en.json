@@ -9,8 +9,8 @@
     "title": "Last updated"
   },
   "notificatie": {
-    "titel": "Slight decrease in new COVID-19 infections",
-    "bericht": "In the past week (28 October to 3 November) the number of people who newly tested positive for COVID-19 decreased somewhat. This probably results from the government policy measures issued late September and mid-October. The number of COVID-19 patients admitted to hospital increased slightly, while there was a small decrease in the number of admissions to the ICU.\n\nRisk level per region can be ‘caution’ (level 1), ‘concern’ (level 2), ‘serious’ (level 3) or ‘severe’ (level 4). At this moment the risk level of {{escalationLevel4}} regions is 'severe', for {{escalationLevel3}} it is ‘serious’, for {{escalationLevel2}} it is ‘concern’ and for {{escalationLevel1}} it is ‘caution’.",
+    "titel": "Decrease in new COVID-19 infections",
+    "bericht": "In the past week (4 November to 10 November) the number of newly tested COVID-19 positives decreased in all safety regions, compared to the week before. The number of COVID-19 patients admitted to the hospital also decreased. This decrease is in line with the calculations of the RIVM prior to the measures came into effect on 14 October. \n\nRisk level per region can be ‘caution’ (level 1), ‘concern’ (level 2), ‘serious’ (level 3) or ‘severe’ (level 4). At this moment the risk level of {{escalationLevel4}} regions is 'severe', for {{escalationLevel3}} it is ‘serious’, for {{escalationLevel2}} it is ‘concern’ and for {{escalationLevel1}} it is ‘caution’.",
     "link": {
       "text": "View the full message from the RIVM",
       "href": "https://www.rivm.nl/en/novel-coronavirus-covid-19/current-information"
@@ -98,7 +98,7 @@
     "titel": "Estimated number of patients who contact the general practitioner for the first time with COVID-19 symptoms",
     "pagina_toelichting": "Based on the registered diagnoses by general practitioners every week, NIVEL calculates the number patients who contact the general practitioner for the first time due to COVID-19 like symptoms.",
     "barscale_titel": "Estimated number of patients who contact the general practitioner for the first time with COVID-19 symptoms",
-    "barscale_toelichting": "Number of patients who contact the general practitioner for the first time due to COVID-19 like symptoms, per 100.000 inhabitants, per week.",
+    "barscale_toelichting": "Number of patients who contact the general practitioner for the first time due to COVID-19 like symptoms, per week.",
     "kpi_titel": "Estimated number of patients where COVID-19 is suspected",
     "kpi_toelichting": "Estimated number of patients who contact the general practitioner for the first time due to COVID-19 like symptoms, per 100.000 inhabitants, per week.",
     "linechart_titel": "Progression over time",
@@ -293,7 +293,7 @@
     ],
     "cluster_datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
     "cluster_bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     },
     "cluster_titel": "Clusters of confirmed cases",
@@ -416,7 +416,7 @@
   "verpleeghuis_besmette_locaties": {
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
     },
     "titel": "Number of infected locations",
@@ -443,7 +443,7 @@
   "verpleeghuis_positief_geteste_personen": {
     "datums": "Value of {{dateOfReport}}. Obtained:{{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
     },
     "titel": "Number of confirmed cases",
@@ -468,7 +468,7 @@
   "verpleeghuis_oversterfte": {
     "datums": "Value of  {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
     },
     "titel": "Mortality",
@@ -755,28 +755,28 @@
   },
   "nationaal_layout": {
     "headings": {
-      "algemeen": "[@TODO] Algemeen",
-      "besmettingen": "[@TODO] Besmettingen",
-      "ziekenhuizen": "[@TODO] Ziekenhuizen",
-      "verpleeghuizen": "[@TODO] Verpleeghuizen",
-      "vroege_signalen": "[@TODO] Vroege signalen",
-      "gedrag": "[@TODO] Gedrag"
+      "medisch": "Medical indicators",
+      "overig": "Early indicators",
+      "verpleeghuis": "Nursing homes",
+      "laatste": "Latest developments",
+      "algemeen": "",
+      "besmettingen": "",
+      "ziekenhuizen": "",
+      "verpleeghuizen": "",
+      "vroege_signalen": "",
+      "gedrag": ""
     }
   },
   "veiligheidsregio_layout": {
     "headings": {
-      "besmettingen": "[@TODO] Besmettingen",
-      "ziekenhuizen": "[@TODO] Ziekenhuizen",
-      "verpleeghuizen": "[@TODO] Verpleeghuizen",
-      "vroege_signalen": "[@TODO] Vroege signalen",
-      "gedrag" :"[@TODO] gedrag"
-    }
-  },
-  "gemeente_layout": {
-    "headings": {
-      "besmettingen": "[@TODO] Besmettingen",
-      "ziekenhuizen": "[@TODO] Ziekenhuizen",
-      "vroege_signalen": "[@TODO] Vroege signalen"
+      "medisch": "Medical indicators",
+      "overig": "Other indicators",
+      "verpleeghuis": "Nursing homes",
+      "besmettingen": "",
+      "ziekenhuizen": "",
+      "verpleeghuizen": "",
+      "vroege_signalen": "",
+      "gedrag": ""
     }
   },
   "veiligheidsregio_metadata": {
@@ -841,7 +841,7 @@
     },
     "cluster_datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
     "cluster_bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     },
     "cluster_titel": "Clusters of confirmed cases",
@@ -911,7 +911,7 @@
       "title": "Hospital admissions {{municipalityName}} | Dashboard Coronavirus | Government.nl",
       "description": "Overview of the number of confirmed COVID-19 cases in {{municipalityName}} who are admitted to a hospital per day."
     },
-    "titel_kpi": ""
+    "titel_kpi": "Average number of hospital admissions in 3 days"
   },
   "gemeente_positief_geteste_personen": {
     "titel_sidebar": "Confirmed cases",
@@ -995,7 +995,7 @@
   },
   "laatste_ontwikkelingen": {
     "title": "Latest developments",
-    "menu_subtitle": "Slight decrease in new COVID-19 infections",
+    "menu_subtitle": "Decrease in new COVID-19 infections",
     "alle_cijfers_header": "",
     "alle_cijfers_link": ""
   },
@@ -1025,13 +1025,23 @@
     },
     "valid_from": "Valid from {{validFrom}}"
   },
+  "gemeente_layout": {
+    "headings": {
+      "medisch": "Medical indicators",
+      "overig": "Early warning",
+      "verpleeghuis": "Nursing homes",
+      "besmettingen": "",
+      "ziekenhuizen": "",
+      "vroege_signalen": ""
+    }
+  },
   "positief_geteste_personen_ggd": {
     "titel": "Percentage confirmed cases by GGD",
     "summary_title": "{{percentage}} of GGD tests had a positive result",
     "summary_link_cta": "Read more",
     "datums": "Week of {{weekStart}} to {{weekEnd}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
     "bron": {
-      "href": "https://www.rivm.nl/documenten/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     },
     "toelichting": "This number is about the total number of persons tested by the municipal health services (GGD) in one week, for which a result is known and how many of those people had a positive test result. Note that most, but not all tests are conducted by the GGD. That's why the absolute number of positive test cases might differ from the number shown here.",
@@ -1043,7 +1053,7 @@
     "linechart_percentage_titel": "Percentage of positive tests over time ",
     "linechart_percentage_toelichting": "This graph shows the change over time in the percentage of GGD tests that return a positive result ",
     "linechart_totaltests_titel": "Number of tests with results over time",
-    "linechart_totaltests_toelichting": "This graph shows the change over time in the number of GGD tests with results, in relation to the share of tests with a positive result",
+    "linechart_totaltests_toelichting": "This graph shows the change over time in the number of GGD tests with known results, in relation to the share of tests with a positive result.",
     "linechart_totaltests_legend_label": "All tests with results",
     "linechart_positivetests_legend_label": "Number of positive tests"
   },
@@ -1062,7 +1072,7 @@
     "summary_link_cta": "Read more",
     "datums": "Week of {{weekStart}} to {{weekEnd}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
     "bron": {
-      "href": "https://www.rivm.nl/documenten/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     },
     "toelichting": "This number is about the total number of persons tested by the municipal health services (GGD) in one week, for which a result is known and how many of those people had a positive test result. Note that most, but not all tests are conducted by the GGD. That's why the absolute number of positive test cases might differ from the number shown here.",
@@ -1074,14 +1084,14 @@
     "linechart_percentage_titel": "Percentage of positive tests over time ",
     "linechart_percentage_toelichting": "This graph shows the change over time in the percentage of GGD tests that return a positive result ",
     "linechart_totaltests_titel": "Number of tests with results over time",
-    "linechart_totaltests_toelichting": "This graph shows the change over time in the number of GGD tests with results, in relation to the share of tests with a positive result",
+    "linechart_totaltests_toelichting": "This graph shows the change over time in the number of GGD tests with known results, in relation to the share of tests with a positive result.",
     "linechart_totaltests_legend_label": "All tests with results",
     "linechart_positivetests_legend_label": "Number of positive tests"
   },
   "veiligheidsregio_verpleeghuis_oversterfte": {
     "datums": "Value of  {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
     },
     "titel": "Mortality in {{safetyRegion}}",
@@ -1101,7 +1111,7 @@
   "veiligheidsregio_verpleeghuis_besmette_locaties": {
     "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
     },
     "titel": "Total number of infected locations",
@@ -1120,7 +1130,7 @@
   "veiligheidsregio_verpleeghuis_positief_geteste_personen": {
     "datums": "Value of {{dateOfReport}}. Obtained:{{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
     },
     "titel": "Confirmed cases in {{safetyRegion}}",
