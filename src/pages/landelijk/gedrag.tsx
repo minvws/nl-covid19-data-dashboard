@@ -1,4 +1,5 @@
 import Gedrag from '~/assets/gedrag.svg';
+import { BehaviorTableTile } from '~/components-styled/common/behavior-table-tile';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { Tile } from '~/components-styled/layout';
@@ -56,6 +57,11 @@ const BehaviorPage: FCWithLayout<INationalData> = (props) => {
           <Text>{text.kpi.aantal_respondenten.toelichting}</Text>
         </KpiTile>
       </TwoKpiSection>
+
+      <BehaviorTableTile behavior={behaviorData.last_value}>
+        <Heading level={3}>{text.onderzoek_uitleg.titel}</Heading>
+        <Text>{text.onderzoek_uitleg.toelichting}</Text>
+      </BehaviorTableTile>
     </>
   );
 };

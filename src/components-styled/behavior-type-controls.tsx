@@ -1,4 +1,5 @@
 import { RadioGroup } from '~/components-styled/radio-group';
+import text from '~/locale/index';
 
 export type BehaviorTypeControlOption = 'compliance' | 'support';
 
@@ -8,11 +9,11 @@ export interface BehaviorTypeControlsProps {
 
 const items = [
   {
-    label: 'compliance',
+    label: text.nl_gedrag.common.compliance,
     value: 'compliance',
   },
   {
-    label: 'support',
+    label: text.nl_gedrag.common.support,
     value: 'support',
   },
 ];
