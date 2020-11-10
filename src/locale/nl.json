@@ -9,8 +9,8 @@
     "title": "Laatst bijgewerkt"
   },
   "notificatie": {
-    "titel": "Lichte daling COVID-19 meldingen",
-    "bericht": "Afgelopen week (28 oktober-3 november) is het aantal nieuwe meldingen van COVID-19 iets gedaald. Dat is waarschijnlijk het effect van de maatregelen die eind september en medio oktober van kracht werden. Het aantal nieuwe ziekenhuisopnames is licht toegenomen, terwijl het aantal opnames op de IC iets daalde.\n\nHet risiconiveau per regio kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2), ‘ernstig’ (niveau 3), ‘zeer ernstig’ (niveau 4) zijn. Op dit moment zijn {{escalationLevel4}} regio’s ingeschaald op ‘zeer ernstig’, {{escalationLevel3}} op ‘ernstig’, {{escalationLevel2}} op ‘zorgelijk’ en {{escalationLevel1}} op ‘waakzaam.‘",
+    "titel": "Afname COVID-19 meldingen ",
+    "bericht": "Afgelopen week (4 november-10 november) is in alle regio’s het aantal nieuwe meldingen van COVID-19 gedaald ten opzichte van de week daarvoor. Ook het aantal ziekenhuisopnames daalt. De afname is in lijn met de berekeningen die het RIVM voorafgaand aan maatregelen van 14 oktober heeft gemaakt. \n\nHet risiconiveau per regio kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2), ‘ernstig’ (niveau 3), ‘zeer ernstig’ (niveau 4) zijn. Op dit moment zijn {{escalationLevel4}} regio’s ingeschaald op ‘zeer ernstig’, {{escalationLevel3}} op ‘ernstig’, {{escalationLevel2}} op ‘zorgelijk’ en {{escalationLevel1}} op ‘waakzaam.‘",
     "link": {
       "text": "Bekijk de toelichting van het RIVM",
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel"
@@ -896,7 +896,7 @@
   },
   "laatste_ontwikkelingen": {
     "title": "Laatste ontwikkelingen",
-    "menu_subtitle": "Lichte daling COVID-19 meldingen",
+    "menu_subtitle": "Afname COVID-19 meldingen ",
     "alle_cijfers_header": "Benieuwd naar alle cijfers?",
     "alle_cijfers_link": "Bekijk alle cijfers"
   },
