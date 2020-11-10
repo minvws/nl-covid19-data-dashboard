@@ -194,7 +194,7 @@
     ],
     "cluster_datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "cluster_bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     },
     "cluster_titel": "Clusters van positief geteste personen",
@@ -317,7 +317,7 @@
   "verpleeghuis_besmette_locaties": {
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
     },
     "titel": "Besmette locaties",
@@ -344,7 +344,7 @@
   "verpleeghuis_positief_geteste_personen": {
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
     },
     "titel": "Aantal positief geteste bewoners",
@@ -369,7 +369,7 @@
   "verpleeghuis_oversterfte": {
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
     },
     "titel": "Sterfte",
@@ -742,7 +742,7 @@
     },
     "cluster_datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "cluster_bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     },
     "cluster_titel": "Clusters van positief geteste personen",
@@ -942,7 +942,7 @@
     "summary_link_cta": "Lees meer",
     "datums": "Week van {{weekStart}} tot {{weekEnd}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
     "bron": {
-      "href": "https://www.rivm.nl/documenten/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     },
     "toelichting": "Dit getal zegt iets over het totaal aantal personen dat via de GGD getest, waarvan een uitslag bekend is en hoeveel daarvan een positieve uitslag hadden. Let op dat de meeste testen via de GGD lopen, maar dit niet voor alle testen geldt. Daarom wijkt het absolute aantal positief geteste personen af van het aantal positief geteste personen door de GGD.",
@@ -973,7 +973,7 @@
     "summary_link_cta": "Lees meer",
     "datums": "Week van {{weekStart}} tot {{weekEnd}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
     "bron": {
-      "href": "https://www.rivm.nl/documenten/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     },
     "toelichting": "Dit getal zegt iets over het totaal aantal personen dat via de GGD getest, waarvan een uitslag bekend is en hoeveel daarvan een positieve uitslag hadden. Let op dat de meeste testen via de GGD lopen, maar dit niet voor alle testen geldt. Daarom wijkt het absolute aantal positief geteste personen af van het aantal positief geteste personen door de GGD.",
@@ -992,7 +992,7 @@
   "veiligheidsregio_verpleeghuis_oversterfte": {
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
     },
     "titel": "Sterfte in {{safetyRegion}}",
@@ -1012,7 +1012,7 @@
   "veiligheidsregio_verpleeghuis_besmette_locaties": {
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
     },
     "titel": "Aantal besmette locaties in {{safetyRegion}}",
@@ -1031,7 +1031,7 @@
   "veiligheidsregio_verpleeghuis_positief_geteste_personen": {
     "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "bron": {
-      "href": "https://www.rivm.nl/documenten/dagelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
     },
     "titel": "Aantal positief geteste bewoners in {{safetyRegion}}",
