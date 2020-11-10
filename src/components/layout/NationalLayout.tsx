@@ -370,8 +370,8 @@ function NationalLayout(props: NationalLayoutProps) {
                 </Link>
               </li>
             </ul>
+            <h2>{siteText.nationaal_layout.headings.gedrag}</h2>
             <ul>
-              <h2>{siteText.nationaal_layout.headings.gedrag}</h2>
               <li>
                 <Link href="/landelijk/gedrag">
                   <a
