@@ -59,7 +59,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
       />
 
       <ContentHeader_weekRangeHack
-        category={siteText.gemeente_layout.headings.overig}
+        category={siteText.gemeente_layout.headings.vroege_signalen}
         title={replaceVariablesInText(text.titel, {
           municipality: municipalityName,
         })}

@@ -45,7 +45,7 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
         })}
       />
       <ContentHeader
-        category={siteText.gemeente_layout.headings.medisch}
+        category={siteText.gemeente_layout.headings.besmettingen}
         title={replaceVariablesInText(text.titel, {
           municipality: municipalityName,
         })}
