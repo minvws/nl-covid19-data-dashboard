@@ -89,6 +89,9 @@ const Footnote = styled.p(
 );
 
 function getTrend(trend: BehaviorFormatted['trend']): ReactNode {
+  if (trend === null) {
+    return <>-</>;
+  }
   if (trend === 'up') {
     return (
       <Trend>

@@ -21,7 +21,7 @@
       "pattern": "^VR[0-9]+$"
     },
     "number_of_participants": {
-      "type": ["integer", "null"]
+      "type": "integer"
     },
     "wash_hands_compliance": {
       "type": ["integer", "null"]
