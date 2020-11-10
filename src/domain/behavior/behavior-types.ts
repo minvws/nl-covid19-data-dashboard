@@ -1,3 +1,5 @@
+import siteText from '~/locale/index';
+
 export type BehaviorIdentifier =
   | 'wash_hands'
   | 'keep_distance'
@@ -9,3 +11,6 @@ export type BehaviorIdentifier =
   | 'wear_mask_public_transport'
   | 'sneeze_cough_elbow'
   | 'max_visitors_home';
+
+export type GedragText = typeof siteText.regionaal_gedrag &
+  typeof siteText.nl_gedrag;

@@ -58,7 +58,7 @@ const BehaviorPage: FCWithLayout<INationalData> = (props) => {
         </KpiTile>
       </TwoKpiSection>
 
-      <BehaviorTableTile behavior={behaviorData.last_value} />
+      <BehaviorTableTile text={text} behavior={behaviorData.last_value} />
     </>
   );
 };

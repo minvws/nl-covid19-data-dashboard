@@ -1,20 +1,16 @@
 import css from '@styled-system/css';
-import { ReactNode, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
-import Gelijk from '~/assets/gelijk.svg';
-import PijlOmhoog from '~/assets/pijl_omhoog.svg';
-import PijlOmlaag from '~/assets/pijl_omlaag.svg';
 import { Box } from '~/components-styled/base';
 import { Tile } from '~/components-styled/layout';
 import { PercentageBar } from '~/components-styled/percentage-bar';
-import siteText from '~/locale/index';
 import { NationalBehaviorValue, RegionalBehaviorValue } from '~/types/data';
 import { formatPercentage } from '~/utils/formatNumber';
-import { BehaviorIdentifier } from './behavior-types';
+import { BehaviorIdentifier, GedragText } from './behavior-types';
 import { BehaviorIcon } from './components/behavior-icon';
+import { BehaviorTrend } from './components/behavior-trend';
 import { BehaviorTypeControls } from './components/behavior-type-controls';
-
-const text = siteText.nl_gedrag.basisregels;
+import siteText from '~/locale/index';
 
 type BehaviorValue = NationalBehaviorValue | RegionalBehaviorValue;
 
@@ -32,6 +28,7 @@ const behaviorIdentifiers: BehaviorIdentifier[] = [
 ];
 
 interface BehaviorTileProps {
+  text: GedragText;
   behavior: BehaviorValue;
 }
 
@@ -39,7 +36,7 @@ interface BehaviorFormatted {
   id: BehaviorIdentifier;
   description: string;
   percentage: number | null;
-  trend: ReactNode;
+  trend: 'up' | 'down' | 'equal' | null;
 }
 
 const MobileScroll = styled.div(
@@ -71,50 +68,11 @@ const Cell = styled.td(
   })
 );
 
-const Trend = styled.span(
-  css({
-    svg: {
-      color: '#0090DB',
-      mr: 1,
-      width: '12px',
-      verticalAlign: 'middle',
-    },
-  })
-);
-
 const Footnote = styled.p(
   css({
     color: 'gray',
   })
 );
-
-function getTrend(trend: BehaviorFormatted['trend']): ReactNode {
-  if (trend === null) {
-    return <>-</>;
-  }
-  if (trend === 'up') {
-    return (
-      <Trend>
-        <PijlOmhoog />
-        {text.trend_hoger}
-      </Trend>
-    );
-  }
-  if (trend === 'down') {
-    return (
-      <Trend>
-        <PijlOmlaag />
-        {text.trend_lager}
-      </Trend>
-    );
-  }
-  return (
-    <Trend>
-      <Gelijk />
-      {text.trend_gelijk}
-    </Trend>
-  );
-}
 
 /* Format raw list of behaviors into list for compliance or for support */
 function formatBehaviorType(
@@ -133,7 +91,7 @@ function formatBehaviorType(
       id: identifier,
       description: siteText.gedrag_onderwerpen[identifier],
       percentage,
-      trend: getTrend(trend),
+      trend,
     };
   });
 }
@@ -174,7 +132,7 @@ function formatAndSortBehavior(
   return sortBehavior(compliance, support);
 }
 
-export function BehaviorTableTile({ behavior }: BehaviorTileProps) {
+export function BehaviorTableTile({ text, behavior }: BehaviorTileProps) {
   const { sortedCompliance, sortedSupport } = formatAndSortBehavior(behavior);
   const [behaviorType, onChangeControls] = useState<'compliance' | 'support'>(
     'compliance'
@@ -182,22 +140,24 @@ export function BehaviorTableTile({ behavior }: BehaviorTileProps) {
 
   return (
     <Tile>
-      <h3>{text.title}</h3>
+      <h3>{text.basisregels.title}</h3>
       <Box display="flex" justifyContent="start">
         <BehaviorTypeControls
           onChange={onChangeControls}
         ></BehaviorTypeControls>
       </Box>
 
-      <p>{text.intro[behaviorType]}</p>
+      <p>{text.basisregels.intro[behaviorType]}</p>
       <MobileScroll>
         <Table>
           <thead>
             <tr>
-              <HeaderCell colSpan={2}>{text.header_percentage}</HeaderCell>
+              <HeaderCell colSpan={2}>
+                {text.basisregels.header_percentage}
+              </HeaderCell>
               <th></th>
-              <HeaderCell>{text.header_basisregel}</HeaderCell>
-              <HeaderCell>{text.header_trend}</HeaderCell>
+              <HeaderCell>{text.basisregels.header_basisregel}</HeaderCell>
+              <HeaderCell>{text.basisregels.header_trend}</HeaderCell>
             </tr>
           </thead>
           {(behaviorType === 'compliance'
@@ -213,12 +173,14 @@ export function BehaviorTableTile({ behavior }: BehaviorTileProps) {
                 <BehaviorIcon name={behavior.id} />
               </Cell>
               <Cell>{behavior.description}</Cell>
-              <Cell>{behavior.trend}</Cell>
+              <Cell>
+                <BehaviorTrend text={text} trend={behavior.trend} />
+              </Cell>
             </tr>
           ))}
         </Table>
       </MobileScroll>
-      <Footnote>{text.voetnoot[behaviorType]}</Footnote>
+      <Footnote>{text.basisregels.voetnoot[behaviorType]}</Footnote>
     </Tile>
   );
 }
