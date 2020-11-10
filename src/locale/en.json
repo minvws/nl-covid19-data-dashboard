@@ -723,20 +723,12 @@
   },
   "nationaal_layout": {
     "headings": {
-<<<<<<< HEAD
-      "medisch": "Medical indicators",
-      "overig": "Early indicators",
-      "verpleeghuis": "Nursing homes",
-      "laatste": "Latest developments",
-      "gedrag": "Behavior"
-=======
       "algemeen": "[@TODO] Algemeen",
       "besmettingen": "[@TODO] Besmettingen",
       "ziekenhuizen": "[@TODO] Ziekenhuizen",
       "verpleeghuizen": "[@TODO] Verpleeghuizen",
       "vroege_signalen": "[@TODO] Vroege signalen",
       "gedrag": "[@TODO] Gedrag"
->>>>>>> 88c6a68967c760a24589cb19f05d8004b8a6d002
     }
   },
   "veiligheidsregio_layout": {

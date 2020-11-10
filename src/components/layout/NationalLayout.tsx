@@ -98,8 +98,9 @@ function NationalLayout(props: NationalLayoutProps) {
       </Head>
 
       <div
-        className={`national-layout ${isMenuOpen ? 'has-menu-opened' : 'has-menu-closed'
-          }`}
+        className={`national-layout ${
+          isMenuOpen ? 'has-menu-opened' : 'has-menu-closed'
+        }`}
       >
         <Link href="/landelijk">
           <a className="back-button" onClick={openMenu}>
@@ -322,100 +323,99 @@ function NationalLayout(props: NationalLayoutProps) {
                   </a>
                 </Link>
               </li>
+
+              <li>
+                <Link href="/landelijk/verpleeghuis-sterfte">
+                  <a
+                    onClick={blur}
+                    className={getClassName('/landelijk/verpleeghuis-sterfte')}
+                  >
+                    <TitleWithIcon
+                      Icon={CoronaVirus}
+                      title={siteText.verpleeghuis_oversterfte.titel_sidebar}
+                    />
+                    <span>
+                      <NursingHomeDeathsMetric
+                        data={data.nursing_home.last_value}
+                      />
+                    </span>
+                  </a>
+                </Link>
+              </li>
             </ul>
 
-            <li>
-              <Link href="/landelijk/verpleeghuis-sterfte">
-                <a
-                  onClick={blur}
-                  className={getClassName('/landelijk/verpleeghuis-sterfte')}
-                >
-                  <TitleWithIcon
-                    Icon={CoronaVirus}
-                    title={siteText.verpleeghuis_oversterfte.titel_sidebar}
-                  />
-                  <span>
-                    <NursingHomeDeathsMetric
-                      data={data.nursing_home.last_value}
+            <h2>{siteText.nationaal_layout.headings.vroege_signalen}</h2>
+
+            <ul>
+              <li>
+                <Link href="/landelijk/verdenkingen-huisartsen">
+                  <a
+                    onClick={blur}
+                    className={getClassName(
+                      '/landelijk/verdenkingen-huisartsen'
+                    )}
+                  >
+                    <TitleWithIcon
+                      Icon={Arts}
+                      title={siteText.verdenkingen_huisartsen.titel_sidebar}
                     />
-                  </span>
-                </a>
-              </Link>
-            </li>
+                    <span>
+                      <SuspectedPatientsMetric
+                        data={data.verdenkingen_huisartsen.last_value}
+                      />
+                    </span>
+                  </a>
+                </Link>
+              </li>
+
+              <li>
+                <Link href="/landelijk/rioolwater">
+                  <a
+                    onClick={blur}
+                    className={getClassName('/landelijk/rioolwater')}
+                  >
+                    <TitleWithIcon
+                      Icon={RioolwaterMonitoring}
+                      title={siteText.rioolwater_metingen.titel_sidebar}
+                    />
+                    <span>
+                      <SewerWaterMetric data={data.sewer} />
+                    </span>
+                  </a>
+                </Link>
+              </li>
             </ul>
-
-          <h2>{siteText.nationaal_layout.headings.vroege_signalen}</h2>
-
-          <ul>
-            <li>
-              <Link href="/landelijk/verdenkingen-huisartsen">
-                <a
-                  onClick={blur}
-                  className={getClassName(
-                    '/landelijk/verdenkingen-huisartsen'
-                  )}
-                >
-                  <TitleWithIcon
-                    Icon={Arts}
-                    title={siteText.verdenkingen_huisartsen.titel_sidebar}
-                  />
-                  <span>
-                    <SuspectedPatientsMetric
-                      data={data.verdenkingen_huisartsen.last_value}
+            <ul>
+              <h2>{siteText.nationaal_layout.headings.gedrag}</h2>
+              <li>
+                <Link href="/landelijk/gedrag">
+                  <a
+                    onClick={blur}
+                    className={getClassName('/landelijk/gedrag')}
+                  >
+                    <TitleWithIcon
+                      Icon={Gedrag}
+                      title={siteText.nl_gedrag.sidebar.titel}
                     />
-                  </span>
-                </a>
-              </Link>
-            </li>
-
-            <li>
-              <Link href="/landelijk/rioolwater">
-                <a
-                  onClick={blur}
-                  className={getClassName('/landelijk/rioolwater')}
-                >
-                  <TitleWithIcon
-                    Icon={RioolwaterMonitoring}
-                    title={siteText.rioolwater_metingen.titel_sidebar}
-                  />
-                  <span>
-                    <SewerWaterMetric data={data.sewer} />
-                  </span>
-                </a>
-              </Link>
-            </li>
-          </ul>
-          <ul>
-            <h2>{siteText.nationaal_layout.headings.gedrag}</h2>
-            <li>
-              <Link href="/landelijk/gedrag">
-                <a
-                  onClick={blur}
-                  className={getClassName('/landelijk/gedrag')}
-                >
-                  <TitleWithIcon
-                    Icon={Gedrag}
-                    title={siteText.nl_gedrag.sidebar.titel}
-                  />
-                  <span>@TODO sidebar metric gedrag</span>
-                </a>
-              </Link>
-            </li>
-          </ul>
+                    <span>@TODO sidebar metric gedrag</span>
+                  </a>
+                </Link>
+              </li>
+            </ul>
           </nav>
         </aside>
 
-      <section className="national-content">{children}</section>
+        <section className="national-content">{children}</section>
 
-      <Link href="/landelijk">
-        <a className="back-button back-button-footer" onClick={openMenu}>
-          <Arrow />
-          {router.pathname === '/'
-            ? siteText.nav.terug_naar_alle_cijfers_homepage
-            : siteText.nav.terug_naar_alle_cijfers}
-        </a>
-      </Link>
-    </div>
+        <Link href="/landelijk">
+          <a className="back-button back-button-footer" onClick={openMenu}>
+            <Arrow />
+            {router.pathname === '/'
+              ? siteText.nav.terug_naar_alle_cijfers_homepage
+              : siteText.nav.terug_naar_alle_cijfers}
+          </a>
+        </Link>
+      </div>
     </>
   );
 }

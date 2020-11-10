@@ -1,43 +1,22 @@
-import { NationalBehaviorValue, RegionalBehaviorValue } from '~/types/data';
-import { ReactNode, useState } from 'react';
-import { formatPercentage } from '~/utils/formatNumber';
-import styled from 'styled-components';
 import css from '@styled-system/css';
-import siteText from '~/locale/index';
+import { ReactNode, useState } from 'react';
+import styled from 'styled-components';
+import Gelijk from '~/assets/gelijk.svg';
 import PijlOmhoog from '~/assets/pijl_omhoog.svg';
 import PijlOmlaag from '~/assets/pijl_omlaag.svg';
-import Gelijk from '~/assets/gelijk.svg';
-
-import wash_hands from '~/assets/gedrag/wash_hands.svg';
-import keep_distance from '~/assets/gedrag/keep_distance.svg';
-import work_from_home from '~/assets/gedrag/work_from_home.svg';
-import avoid_crowds from '~/assets/gedrag/avoid_crowds.svg';
-import symptoms_stay_home from '~/assets/gedrag/symptoms_stay_home.svg';
-import symptoms_get_tested from '~/assets/gedrag/symptoms_get_tested.svg';
-import wear_mask_public_indoors from '~/assets/gedrag/wear_mask_public_indoors.svg';
-import wear_mask_public_transport from '~/assets/gedrag/wear_mask_public_transport.svg';
-import sneeze_cough_elbow from '~/assets/gedrag/sneeze_cough_elbow.svg';
-import max_visitors_home from '~/assets/gedrag/max_visitors_home.svg';
-import { PercentageBar } from '~/components-styled/percentage-bar';
-import { BehaviorTypeControls } from './components/behavior-type-controls';
 import { Box } from '~/components-styled/base';
-
+import { Tile } from '~/components-styled/layout';
+import { PercentageBar } from '~/components-styled/percentage-bar';
+import siteText from '~/locale/index';
+import { NationalBehaviorValue, RegionalBehaviorValue } from '~/types/data';
+import { formatPercentage } from '~/utils/formatNumber';
+import { BehaviorIdentifier } from './behavior-types';
+import { BehaviorIcon } from './components/behavior-icon';
+import { BehaviorTypeControls } from './components/behavior-type-controls';
 
 const text = siteText.nl_gedrag.basisregels;
 
 type BehaviorValue = NationalBehaviorValue | RegionalBehaviorValue;
-
-type BehaviorIdentifier =
-  | 'wash_hands'
-  | 'keep_distance'
-  | 'work_from_home'
-  | 'avoid_crowds'
-  | 'symptoms_stay_home'
-  | 'symptoms_get_tested'
-  | 'wear_mask_public_indoors'
-  | 'wear_mask_public_transport'
-  | 'sneeze_cough_elbow'
-  | 'max_visitors_home';
 
 const behaviorIdentifiers: BehaviorIdentifier[] = [
   'wash_hands',
@@ -56,11 +35,10 @@ interface BehaviorTileProps {
   behavior: BehaviorValue;
 }
 
-interface Behavior {
+interface BehaviorFormatted {
   id: BehaviorIdentifier;
-  icon: ReactNode;
   description: string;
-  percentage?: number;
+  percentage: number | null;
   trend: ReactNode;
 }
 
@@ -106,29 +84,11 @@ const Trend = styled.span(
 
 const Footnote = styled.p(
   css({
-    color: 'gray'
+    color: 'gray',
   })
 );
 
-const icons: Record<BehaviorIdentifier, () => any> = {
-  wash_hands,
-  keep_distance,
-  work_from_home,
-  avoid_crowds,
-  symptoms_stay_home,
-  symptoms_get_tested,
-  wear_mask_public_indoors,
-  wear_mask_public_transport,
-  sneeze_cough_elbow,
-  max_visitors_home,
-};
-
-function getIcon(iconName: BehaviorIdentifier): ReactNode {
-  const Icon = icons[iconName];
-  return <Icon />;
-}
-
-function getTrend(trend: Behavior['trend']): ReactNode {
+function getTrend(trend: BehaviorFormatted['trend']): ReactNode {
   if (trend === 'up') {
     return (
       <Trend>
@@ -153,33 +113,37 @@ function getTrend(trend: Behavior['trend']): ReactNode {
   );
 }
 
+/* Format raw list of behaviors into list for compliance or for support */
 function formatBehaviorType(
   behavior: BehaviorValue,
   type: 'compliance' | 'support'
-): Behavior[] {
+): BehaviorFormatted[] {
   return behaviorIdentifiers.map((identifier) => {
     const percentage = behavior[
       `${identifier}_${type}` as keyof BehaviorValue
-    ] as number | undefined;
+    ] as number | null;
     const trend = behavior[
       `${identifier}_${type}_trend` as keyof BehaviorValue
-    ] as Behavior['trend'] | undefined;
+    ] as BehaviorFormatted['trend'] | null;
 
     return {
       id: identifier,
       description: siteText.gedrag_onderwerpen[identifier],
-      icon: getIcon(identifier),
       percentage,
       trend: getTrend(trend),
     };
   });
 }
 
+/* Sort lists of formatted compliance and support behaviours */
 function sortBehavior(
-  compliance: Behavior[],
-  support: Behavior[]
-): { sortedCompliance: Behavior[]; sortedSupport: Behavior[] } {
-  /* Sort compliance on percentage, decreasing; percentage can be undefined */
+  compliance: BehaviorFormatted[],
+  support: BehaviorFormatted[]
+): {
+  sortedCompliance: BehaviorFormatted[];
+  sortedSupport: BehaviorFormatted[];
+} {
+  /* Sort compliance on percentage, decreasing; percentage can be null */
   const sortedCompliance = compliance.sort(
     (a, b) => (b.percentage ?? 0) - (a.percentage ?? 0)
   );
@@ -197,7 +161,10 @@ function sortBehavior(
 
 function formatAndSortBehavior(
   behavior: BehaviorValue
-): { sortedCompliance: Behavior[]; sortedSupport: Behavior[] } {
+): {
+  sortedCompliance: BehaviorFormatted[];
+  sortedSupport: BehaviorFormatted[];
+} {
   const compliance = formatBehaviorType(behavior, 'compliance');
   const support = formatBehaviorType(behavior, 'support');
 
@@ -214,7 +181,9 @@ export function BehaviorTableTile({ behavior }: BehaviorTileProps) {
     <Tile>
       <h3>{text.title}</h3>
       <Box display="flex" justifyContent="start">
-        <BehaviorTypeControls onChange={onChangeControls}></BehaviorTypeControls>
+        <BehaviorTypeControls
+          onChange={onChangeControls}
+        ></BehaviorTypeControls>
       </Box>
 
       <p>{text.intro[behaviorType]}</p>
@@ -222,13 +191,9 @@ export function BehaviorTableTile({ behavior }: BehaviorTileProps) {
         <Table>
           <thead>
             <tr>
-              <HeaderCell colSpan={2}>
-                {text.header_percentage}
-              </HeaderCell>
+              <HeaderCell colSpan={2}>{text.header_percentage}</HeaderCell>
               <th></th>
-              <HeaderCell>
-                {text.header_basisregel}
-              </HeaderCell>
+              <HeaderCell>{text.header_basisregel}</HeaderCell>
               <HeaderCell>{text.header_trend}</HeaderCell>
             </tr>
           </thead>
@@ -241,7 +206,9 @@ export function BehaviorTableTile({ behavior }: BehaviorTileProps) {
               <Cell>
                 <PercentageBar percentage={behavior.percentage ?? 0} />
               </Cell>
-              <Cell>{behavior.icon}</Cell>
+              <Cell>
+                <BehaviorIcon name={behavior.id} />
+              </Cell>
               <Cell>{behavior.description}</Cell>
               <Cell>{behavior.trend}</Cell>
             </tr>
@@ -249,6 +216,6 @@ export function BehaviorTableTile({ behavior }: BehaviorTileProps) {
         </Table>
       </MobileScroll>
       <Footnote>{text.voetnoot[behaviorType]}</Footnote>
-    </Tile >
+    </Tile>
   );
 }
