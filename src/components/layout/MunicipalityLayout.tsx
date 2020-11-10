@@ -132,8 +132,8 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
           isMainRoute
             ? 'has-menu-and-content-opened'
             : isMenuOpen
-            ? 'has-menu-and-opened'
-            : 'has-menu-and-closed'
+            ? 'has-menu-opened'
+            : 'has-menu-closed'
         }`}
       >
         <Link href="/gemeente/[code]" as={`/gemeente/${code}`}>
