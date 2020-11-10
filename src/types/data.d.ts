@@ -367,7 +367,7 @@ export interface NationalBehavior {
   last_value: NationalBehaviorValue;
 }
 export interface NationalBehaviorValue {
-  number_of_participants: number | null;
+  number_of_participants: number;
   wash_hands_compliance: number | null;
   wash_hands_compliance_trend: ("up" | "down" | "equal") | null;
   keep_distance_compliance: number | null;
@@ -606,7 +606,7 @@ export interface RegionalBehavior {
   last_value: RegionalBehaviorValue;
 }
 export interface RegionalBehaviorValue {
-  number_of_participants: number | null;
+  number_of_participants: number;
   wash_hands_compliance: number | null;
   wash_hands_compliance_trend: ("up" | "down" | "equal") | null;
   keep_distance_compliance: number | null;
@@ -713,7 +713,7 @@ export interface RegionsSewer {
 }
 export interface RegionsBehavior {
   vrcode: string;
-  number_of_participants: number | null;
+  number_of_participants: number;
   wash_hands_compliance: number | null;
   wash_hands_compliance_trend: ("up" | "down" | "equal") | null;
   keep_distance_compliance: number | null;
