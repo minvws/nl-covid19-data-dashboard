@@ -71,7 +71,8 @@ function NationalLayout(props: NationalLayoutProps) {
   const { isMenuOpen, openMenu } = useMenuState(isMainRoute);
 
   // remove focus after navigation
-  const blur = (evt: any) => evt.currentTarget.blur();
+  const blur = (evt: React.MouseEvent<HTMLAnchorElement>) =>
+    evt.currentTarget.blur();
 
   function getClassName(path: string) {
     return router.pathname === path
@@ -96,8 +97,8 @@ function NationalLayout(props: NationalLayoutProps) {
       </Head>
 
       <div
-        className={`national-layout has-menu-${
-          isMenuOpen ? 'opened' : 'closed'
+        className={`national-layout ${
+          isMenuOpen ? 'has-menu-opened' : 'has-menu-closed'
         }`}
       >
         <Link href="/landelijk">
@@ -110,7 +111,7 @@ function NationalLayout(props: NationalLayoutProps) {
         </Link>
         <aside className="national-aside">
           <nav aria-label="metric navigation">
-            <h2>{siteText.nationaal_layout.headings.laatste}</h2>
+            <h2>{siteText.nationaal_layout.headings.algemeen}</h2>
             <ul className="last-developments">
               <li>
                 <Link href="/">
@@ -127,7 +128,7 @@ function NationalLayout(props: NationalLayoutProps) {
                 </Link>
               </li>
             </ul>
-            <h2>{siteText.nationaal_layout.headings.medisch}</h2>
+            <h2>{siteText.nationaal_layout.headings.besmettingen}</h2>
             <ul>
               <li>
                 <Link href="/landelijk/positief-geteste-mensen">
@@ -149,6 +150,27 @@ function NationalLayout(props: NationalLayoutProps) {
                         data={data.infected_people_delta_normalized}
                         showAxis={false}
                         showValue={false}
+                      />
+                    </span>
+                  </a>
+                </Link>
+              </li>
+
+              <li>
+                <Link href="/landelijk/besmettelijke-mensen">
+                  <a
+                    onClick={blur}
+                    className={getClassName('/landelijk/besmettelijke-mensen')}
+                  >
+                    <TitleWithIcon
+                      Icon={Ziektegolf}
+                      title={siteText.besmettelijke_personen.titel_sidebar}
+                    />
+                    <span>
+                      <InfectiousPeopleMetric
+                        data={
+                          data.infectious_people_last_known_average?.last_value
+                        }
                       />
                     </span>
                   </a>
@@ -180,28 +202,11 @@ function NationalLayout(props: NationalLayoutProps) {
                   </a>
                 </Link>
               </li>
+            </ul>
 
-              <li>
-                <Link href="/landelijk/besmettelijke-mensen">
-                  <a
-                    onClick={blur}
-                    className={getClassName('/landelijk/besmettelijke-mensen')}
-                  >
-                    <TitleWithIcon
-                      Icon={Ziektegolf}
-                      title={siteText.besmettelijke_personen.titel_sidebar}
-                    />
-                    <span>
-                      <InfectiousPeopleMetric
-                        data={
-                          data.infectious_people_last_known_average?.last_value
-                        }
-                      />
-                    </span>
-                  </a>
-                </Link>
-              </li>
+            <h2>{siteText.nationaal_layout.headings.ziekenhuizen}</h2>
 
+            <ul>
               <li>
                 <Link href="/landelijk/ziekenhuis-opnames">
                   <a
@@ -253,48 +258,8 @@ function NationalLayout(props: NationalLayoutProps) {
               </li>
             </ul>
 
-            <h2>{siteText.nationaal_layout.headings.overig}</h2>
-            <ul>
-              <li>
-                <Link href="/landelijk/verdenkingen-huisartsen">
-                  <a
-                    onClick={blur}
-                    className={getClassName(
-                      '/landelijk/verdenkingen-huisartsen'
-                    )}
-                  >
-                    <TitleWithIcon
-                      Icon={Arts}
-                      title={siteText.verdenkingen_huisartsen.titel_sidebar}
-                    />
-                    <span>
-                      <SuspectedPatientsMetric
-                        data={data.verdenkingen_huisartsen.last_value}
-                      />
-                    </span>
-                  </a>
-                </Link>
-              </li>
+            <h2>{siteText.nationaal_layout.headings.verpleeghuizen}</h2>
 
-              <li>
-                <Link href="/landelijk/rioolwater">
-                  <a
-                    onClick={blur}
-                    className={getClassName('/landelijk/rioolwater')}
-                  >
-                    <TitleWithIcon
-                      Icon={RioolwaterMonitoring}
-                      title={siteText.rioolwater_metingen.titel_sidebar}
-                    />
-                    <span>
-                      <SewerWaterMetric data={data.sewer} />
-                    </span>
-                  </a>
-                </Link>
-              </li>
-            </ul>
-
-            <h2>{siteText.nationaal_layout.headings.verpleeghuis}</h2>
             <ul>
               <li>
                 <Link href="/landelijk/verpleeghuis-positief-geteste-personen">
@@ -357,6 +322,48 @@ function NationalLayout(props: NationalLayoutProps) {
                       <NursingHomeDeathsMetric
                         data={data.nursing_home.last_value}
                       />
+                    </span>
+                  </a>
+                </Link>
+              </li>
+            </ul>
+
+            <h2>{siteText.nationaal_layout.headings.vroege_signalen}</h2>
+
+            <ul>
+              <li>
+                <Link href="/landelijk/verdenkingen-huisartsen">
+                  <a
+                    onClick={blur}
+                    className={getClassName(
+                      '/landelijk/verdenkingen-huisartsen'
+                    )}
+                  >
+                    <TitleWithIcon
+                      Icon={Arts}
+                      title={siteText.verdenkingen_huisartsen.titel_sidebar}
+                    />
+                    <span>
+                      <SuspectedPatientsMetric
+                        data={data.verdenkingen_huisartsen.last_value}
+                      />
+                    </span>
+                  </a>
+                </Link>
+              </li>
+
+              <li>
+                <Link href="/landelijk/rioolwater">
+                  <a
+                    onClick={blur}
+                    className={getClassName('/landelijk/rioolwater')}
+                  >
+                    <TitleWithIcon
+                      Icon={RioolwaterMonitoring}
+                      title={siteText.rioolwater_metingen.titel_sidebar}
+                    />
+                    <span>
+                      <SewerWaterMetric data={data.sewer} />
                     </span>
                   </a>
                 </Link>

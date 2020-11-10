@@ -656,17 +656,28 @@
   },
   "nationaal_layout": {
     "headings": {
-      "medisch": "Medical indicators",
-      "overig": "Early indicators",
-      "verpleeghuis": "Nursing homes",
-      "laatste": "Latest developments"
+      "algemeen": "[@TODO] Algemeen",
+      "besmettingen": "[@TODO] Besmettingen",
+      "ziekenhuizen": "[@TODO] Ziekenhuizen",
+      "verpleeghuizen": "[@TODO] Verpleeghuizen",
+      "vroege_signalen": "[@TODO] Vroege signalen",
+      "gedrag": "[@TODO] Gedrag"
     }
   },
   "veiligheidsregio_layout": {
     "headings": {
-      "medisch": "Medical indicators",
-      "overig": "Other indicators",
-      "verpleeghuis": "Nursing homes"
+      "besmettingen": "[@TODO] Besmettingen",
+      "ziekenhuizen": "[@TODO] Ziekenhuizen",
+      "verpleeghuizen": "[@TODO] Verpleeghuizen",
+      "vroege_signalen": "[@TODO] Vroege signalen",
+      "gedrag" :"[@TODO] gedrag"
+    }
+  },
+  "gemeente_layout": {
+    "headings": {
+      "besmettingen": "[@TODO] Besmettingen",
+      "ziekenhuizen": "[@TODO] Ziekenhuizen",
+      "vroege_signalen": "[@TODO] Vroege signalen"
     }
   },
   "veiligheidsregio_metadata": {
@@ -914,13 +925,6 @@
       "titel": "Legend"
     },
     "valid_from": "Valid from {{validFrom}}"
-  },
-  "gemeente_layout": {
-    "headings": {
-      "medisch": "Medical indicators",
-      "overig": "Early warning",
-      "verpleeghuis": "Nursing homes"
-    }
   },
   "positief_geteste_personen_ggd": {
     "titel": "Percentage confirmed cases by GGD",

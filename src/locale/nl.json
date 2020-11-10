@@ -656,17 +656,28 @@
   },
   "nationaal_layout": {
     "headings": {
-      "medisch": "Medische indicatoren",
-      "overig": "Vroegsignalering",
-      "verpleeghuis": "Verpleeghuiszorg",
-      "laatste": "Laatste ontwikkelingen"
+      "algemeen": "Algemeen",
+      "besmettingen": "Besmettingen",
+      "ziekenhuizen": "Ziekenhuizen",
+      "verpleeghuizen": "Verpleeghuiszorg",
+      "vroege_signalen": "Vroege signalen",
+      "gedrag": "Gedrag"
     }
   },
   "veiligheidsregio_layout": {
     "headings": {
-      "medisch": "Medische indicatoren",
-      "overig": "Vroegsignalering",
-      "verpleeghuis": "Verpleeghuiszorg"
+      "besmettingen": "Besmettingen",
+      "ziekenhuizen": "Ziekenhuizen",
+      "verpleeghuizen": "Verpleeghuiszorg",
+      "vroege_signalen": "Vroege signalen",
+      "gedrag" :"Gedrag"
+    }
+  },
+  "gemeente_layout": {
+    "headings": {
+      "besmettingen": "Besmettingen",
+      "ziekenhuizen": "Ziekenhuizen",
+      "vroege_signalen": "Vroege signalen"
     }
   },
   "veiligheidsregio_metadata": {
@@ -914,13 +925,6 @@
       "titel": "Legenda"
     },
     "valid_from": "Geldig vanaf {{validFrom}}"
-  },
-  "gemeente_layout": {
-    "headings": {
-      "medisch": "Medische indicatoren",
-      "overig": "Vroegsignalering",
-      "verpleeghuis": "Verpleeghuiszorg"
-    }
   },
   "positief_geteste_personen_ggd": {
     "titel": "Percentage positief geteste personen via GGD teststraten",

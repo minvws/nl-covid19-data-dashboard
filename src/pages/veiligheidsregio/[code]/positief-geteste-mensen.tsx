@@ -60,7 +60,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
         })}
       />
       <ContentHeader
-        category={siteText.veiligheidsregio_layout.headings.medisch}
+        category={siteText.veiligheidsregio_layout.headings.besmettingen}
         title={replaceVariablesInText(text.titel, {
           safetyRegion: safetyRegionName,
         })}

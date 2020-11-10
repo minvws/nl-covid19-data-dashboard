@@ -26,7 +26,7 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
         description={text.metadata.description}
       />
       <ContentHeader
-        category={siteText.nationaal_layout.headings.medisch}
+        category={siteText.nationaal_layout.headings.besmettingen}
         title={text.titel}
         Icon={Repro}
         subtitle={text.pagina_toelichting}

@@ -43,7 +43,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
         })}
       />
       <ContentHeader
-        category={siteText.gemeente_layout.headings.medisch}
+        category={siteText.gemeente_layout.headings.ziekenhuizen}
         title={replaceVariablesInText(text.titel, {
           municipality: municipalityName,
         })}

@@ -28,7 +28,7 @@ const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
         description={text.metadata.description}
       />
       <ContentHeader_sourcesHack
-        category={siteText.nationaal_layout.headings.medisch}
+        category={siteText.nationaal_layout.headings.ziekenhuizen}
         title={text.titel}
         Icon={Arts}
         subtitle={text.pagina_toelichting}
