@@ -98,7 +98,7 @@
     "titel": "Estimated number of patients who contact the general practitioner for the first time with COVID-19 symptoms",
     "pagina_toelichting": "Based on the registered diagnoses by general practitioners every week, NIVEL calculates the number patients who contact the general practitioner for the first time due to COVID-19 like symptoms.",
     "barscale_titel": "Estimated number of patients who contact the general practitioner for the first time with COVID-19 symptoms",
-    "barscale_toelichting": "Number of patients who contact the general practitioner for the first time due to COVID-19 like symptoms, per 100.000 inhabitants, per week.",
+    "barscale_toelichting": "Number of patients who contact the general practitioner for the first time due to COVID-19 like symptoms, per week.",
     "kpi_titel": "Estimated number of patients where COVID-19 is suspected",
     "kpi_toelichting": "Estimated number of patients who contact the general practitioner for the first time due to COVID-19 like symptoms, per 100.000 inhabitants, per week.",
     "linechart_titel": "Progression over time",
