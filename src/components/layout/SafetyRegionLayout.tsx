@@ -7,6 +7,7 @@ import Locatie from '~/assets/locaties.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
+import Gedrag from '~/assets/gedrag.svg';
 import { ComboBox } from '~/components/comboBox';
 import { NursingHomeDeathsMetric } from '~/components/common/nursing-home-deaths-metric';
 import { NursingHomeInfectedLocationsMetric } from '~/components/common/nursing-home-infected-locations-metric';
@@ -311,6 +312,28 @@ function SafetyRegionLayout(
                           data={getSewerWaterBarScaleData(data)}
                         />
                       </span>
+                    </a>
+                  </Link>
+                </li>
+              </ul>
+              <h2>{siteText.nationaal_layout.headings.gedrag}</h2>
+              <ul>
+                <li>
+                  <Link
+                    href="/veiligheidsregio/[code]/gedrag"
+                    as={`/veiligheidsregio/${code}/gedrag`}
+                  >
+                    <a
+                      onClick={blur}
+                      className={getClassName(
+                        '/veiligheidsregio/[code]/gedrag'
+                      )}
+                    >
+                      <TitleWithIcon
+                        Icon={Gedrag}
+                        title={siteText.nl_gedrag.sidebar.titel}
+                      />
+                      <span>@TODO sidebar metric gedrag</span>
                     </a>
                   </Link>
                 </li>
