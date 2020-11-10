@@ -11,26 +11,29 @@ import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
 import { Value } from './lineChartWithWeekTooltip';
 import styles from './lineChart.module.scss';
 
-type LineConfig = {
-  color: string;
-  legendLabel: string;
-};
+type LineConfig = Omit<Highcharts.SeriesLineOptions, 'type'>;
 
 const SIGNAALWAARDE_Z_INDEX = 5;
 
 export interface MultipleLineChartProps {
   title: string;
-  description?: string;
+  description?: React.ReactNode;
   values: Value[][];
   linesConfig: LineConfig[];
   signaalwaarde?: number;
+  timeframeInitialValue?: TimeframeOption;
   timeframeOptions?: TimeframeOption[];
+  disableTimeControls?: boolean;
+  formatTooltip?: (value: Value) => string;
+  formatYAxis?: (value: number) => string;
 }
 
 function getChartOptions(
   values: Value[][],
   linesConfig: LineConfig[],
-  signaalwaarde?: number
+  signaalwaarde?: number,
+  formatTooltip?: (value: Value) => string,
+  formatYAxis?: (value: number) => string
 ) {
   const yMax = values.reduce((max, list) => {
     const listMax = calculateYMax(list, signaalwaarde);
@@ -85,12 +88,15 @@ function getChartOptions(
       useHTML: true,
       formatter: function (): string {
         const contextObjects = this.points as TooltipFormatterContextObject[];
-
-        const percentage = (contextObjects[1].y * 100) / contextObjects[0].y;
-
         const { originalData } = (contextObjects[0].point as unknown) as {
           originalData: Value;
         };
+
+        if (formatTooltip) {
+          return formatTooltip(originalData);
+        }
+
+        const percentage = (contextObjects[1].y * 100) / contextObjects[0].y;
 
         return `${formatDateFromSeconds(
           originalData.week.start,
@@ -120,7 +126,9 @@ function getChartOptions(
       },
       labels: {
         formatter: function () {
-          return formatNumber(this.value);
+          return formatYAxis
+            ? formatYAxis(this.value)
+            : formatNumber(this.value);
         },
       },
       plotLines: signaalwaarde
@@ -166,11 +174,9 @@ function getChartOptions(
       text: undefined,
     },
     series: values.map((list, index) => ({
+      ...(linesConfig[index] || {}),
       type: 'line',
       data: list.map((value) => ({ y: value.value, originalData: value })),
-      name: linesConfig[index].legendLabel,
-      showInLegend: true,
-      color: linesConfig[index].color,
       // hex to rgb converted, added opacity
       marker: {
         enabled: false,
@@ -215,9 +221,15 @@ export function MultipleLineChart({
   values,
   linesConfig,
   signaalwaarde,
+  timeframeInitialValue = '5weeks',
   timeframeOptions,
+  disableTimeControls,
+  formatTooltip,
+  formatYAxis,
 }: MultipleLineChartProps) {
-  const [timeframe, setTimeframe] = useState<TimeframeOption>('5weeks');
+  const [timeframe, setTimeframe] = useState<TimeframeOption>(
+    timeframeInitialValue
+  );
 
   assert(
     values.length === linesConfig.length,
@@ -232,23 +244,43 @@ export function MultipleLineChart({
         (value: Value) => value.date * 1000
       );
     });
-    return getChartOptions(filteredValueLists, linesConfig, signaalwaarde);
-  }, [values, linesConfig, timeframe, signaalwaarde]);
+    return getChartOptions(
+      filteredValueLists,
+      linesConfig,
+      signaalwaarde,
+      formatTooltip,
+      formatYAxis
+    );
+  }, [
+    values,
+    linesConfig,
+    timeframe,
+    signaalwaarde,
+    formatTooltip,
+    formatYAxis,
+  ]);
 
   return (
     <section className={styles.root}>
       <header className={styles.header}>
         <div className={styles.titleAndDescription}>
           {title && <h3>{title}</h3>}
-          {description && <p>{description}</p>}
+          {description &&
+            (typeof description === 'string' ? (
+              <p>{description}</p>
+            ) : (
+              description
+            ))}
         </div>
-        <div className={styles.timeControls}>
-          <ChartTimeControls
-            timeframe={timeframe}
-            timeframeOptions={timeframeOptions}
-            onChange={setTimeframe}
-          />
-        </div>
+        {!disableTimeControls && (
+          <div className={styles.timeControls}>
+            <ChartTimeControls
+              timeframe={timeframe}
+              timeframeOptions={timeframeOptions}
+              onChange={setTimeframe}
+            />
+          </div>
+        )}
       </header>
       <HighchartsReact highcharts={Highcharts} options={chartOptions} />
     </section>
