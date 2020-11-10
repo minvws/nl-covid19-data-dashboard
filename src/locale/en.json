@@ -98,7 +98,7 @@
     "titel": "Estimated number of patients who contact the general practitioner for the first time with COVID-19 symptoms",
     "pagina_toelichting": "Based on the registered diagnoses by general practitioners every week, NIVEL calculates the number patients who contact the general practitioner for the first time due to COVID-19 like symptoms.",
     "barscale_titel": "Estimated number of patients who contact the general practitioner for the first time with COVID-19 symptoms",
-    "barscale_toelichting": "Number of patients who contact the general practitioner for the first time due to COVID-19 like symptoms, per 100.000 inhabitants, per week.",
+    "barscale_toelichting": "Number of patients who contact the general practitioner for the first time due to COVID-19 like symptoms, per week.",
     "kpi_titel": "Estimated number of patients where COVID-19 is suspected",
     "kpi_toelichting": "Estimated number of patients who contact the general practitioner for the first time due to COVID-19 like symptoms, per 100.000 inhabitants, per week.",
     "linechart_titel": "Progression over time",
@@ -656,28 +656,28 @@
   },
   "nationaal_layout": {
     "headings": {
-      "algemeen": "[@TODO] Algemeen",
-      "besmettingen": "[@TODO] Besmettingen",
-      "ziekenhuizen": "[@TODO] Ziekenhuizen",
-      "verpleeghuizen": "[@TODO] Verpleeghuizen",
-      "vroege_signalen": "[@TODO] Vroege signalen",
-      "gedrag": "[@TODO] Gedrag"
+      "medisch": "Medical indicators",
+      "overig": "Early indicators",
+      "verpleeghuis": "Nursing homes",
+      "laatste": "Latest developments",
+      "algemeen": "",
+      "besmettingen": "",
+      "ziekenhuizen": "",
+      "verpleeghuizen": "",
+      "vroege_signalen": "",
+      "gedrag": ""
     }
   },
   "veiligheidsregio_layout": {
     "headings": {
-      "besmettingen": "[@TODO] Besmettingen",
-      "ziekenhuizen": "[@TODO] Ziekenhuizen",
-      "verpleeghuizen": "[@TODO] Verpleeghuizen",
-      "vroege_signalen": "[@TODO] Vroege signalen",
-      "gedrag" :"[@TODO] gedrag"
-    }
-  },
-  "gemeente_layout": {
-    "headings": {
-      "besmettingen": "[@TODO] Besmettingen",
-      "ziekenhuizen": "[@TODO] Ziekenhuizen",
-      "vroege_signalen": "[@TODO] Vroege signalen"
+      "medisch": "Medical indicators",
+      "overig": "Other indicators",
+      "verpleeghuis": "Nursing homes",
+      "besmettingen": "",
+      "ziekenhuizen": "",
+      "verpleeghuizen": "",
+      "vroege_signalen": "",
+      "gedrag": ""
     }
   },
   "veiligheidsregio_metadata": {
@@ -812,7 +812,7 @@
       "title": "Hospital admissions {{municipalityName}} | Dashboard Coronavirus | Government.nl",
       "description": "Overview of the number of confirmed COVID-19 cases in {{municipalityName}} who are admitted to a hospital per day."
     },
-    "titel_kpi": ""
+    "titel_kpi": "Average number of hospital admissions in 3 days"
   },
   "gemeente_positief_geteste_personen": {
     "titel_sidebar": "Confirmed cases",
@@ -925,6 +925,16 @@
       "titel": "Legend"
     },
     "valid_from": "Valid from {{validFrom}}"
+  },
+  "gemeente_layout": {
+    "headings": {
+      "medisch": "Medical indicators",
+      "overig": "Early warning",
+      "verpleeghuis": "Nursing homes",
+      "besmettingen": "",
+      "ziekenhuizen": "",
+      "vroege_signalen": ""
+    }
   },
   "positief_geteste_personen_ggd": {
     "titel": "Percentage confirmed cases by GGD",
