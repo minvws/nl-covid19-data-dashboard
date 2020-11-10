@@ -937,7 +937,7 @@
     "linechart_percentage_titel": "Percentage of positive tests over time ",
     "linechart_percentage_toelichting": "This graph shows the change over time in the percentage of GGD tests that return a positive result ",
     "linechart_totaltests_titel": "Number of tests with results over time",
-    "linechart_totaltests_toelichting": "This graph shows the change over time in the number of GGD tests with results, in relation to the share of tests with a positive result",
+    "linechart_totaltests_toelichting": "This graph shows the change over time in the number of GGD tests with known results, in relation to the share of tests with a positive result.",
     "linechart_totaltests_legend_label": "All tests with results",
     "linechart_positivetests_legend_label": "Number of positive tests"
   },
@@ -968,7 +968,7 @@
     "linechart_percentage_titel": "Percentage of positive tests over time ",
     "linechart_percentage_toelichting": "This graph shows the change over time in the percentage of GGD tests that return a positive result ",
     "linechart_totaltests_titel": "Number of tests with results over time",
-    "linechart_totaltests_toelichting": "This graph shows the change over time in the number of GGD tests with results, in relation to the share of tests with a positive result",
+    "linechart_totaltests_toelichting": "This graph shows the change over time in the number of GGD tests with known results, in relation to the share of tests with a positive result.",
     "linechart_totaltests_legend_label": "All tests with results",
     "linechart_positivetests_legend_label": "Number of positive tests"
   },
