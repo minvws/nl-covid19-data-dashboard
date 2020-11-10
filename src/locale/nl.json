@@ -98,7 +98,7 @@
     "titel": "Aantal patiënten met eerste melding van COVID-19 klachten bij de huisarts",
     "pagina_toelichting": "Elke week berekent het Nivel aan de hand van de geregistreerde klachten door huisartsen, het aantal patiënten dat voor de eerste keer contact opneemt met de huisartsenpraktijk vanwege COVID-19-achtige klachten.",
     "barscale_titel": "Aantal patiënten met eerste melding van COVID-19 klachten bij de huisarts",
-    "barscale_toelichting": "Aantal patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten, per 100.000 inwoners, per week.",
+    "barscale_toelichting": "Aantal patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten, per week.",
     "kpi_titel": "Geschat aantal patiënten met verdenking van COVID-19",
     "kpi_toelichting": "Geschat aantal patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten per week.",
     "linechart_titel": "Verloop over tijd",
