@@ -954,7 +954,7 @@
     "linechart_percentage_titel": "Percentage positieve testen over tijd",
     "linechart_percentage_toelichting": "Deze grafiek toont het percentage positief geteste mensen door de GGD over tijd",
     "linechart_totaltests_titel": "Aantal testen over tijd",
-    "linechart_totaltests_toelichting": "Deze grafiek toont het aantal afgenomen testen over tijd in vergelijking met het aantal positieve testen.",
+    "linechart_totaltests_toelichting": "Deze grafiek toont het aantal afgenomen testen waarvan de uitslag bekend is over tijd, in vergelijking met het aantal positieve testen.",
     "linechart_totaltests_legend_label": "Alle GGD tests",
     "linechart_positivetests_legend_label": "Alle positieve testen van de GGD"
   },
@@ -985,7 +985,7 @@
     "linechart_percentage_titel": "Percentage positieve testen over tijd",
     "linechart_percentage_toelichting": "Deze grafiek toont het percentage positief geteste mensen door de GGD over tijd",
     "linechart_totaltests_titel": "Aantal testen over tijd",
-    "linechart_totaltests_toelichting": "Deze grafiek toont het aantal afgenomen testen over tijd in vergelijking met het aantal positieve testen.",
+    "linechart_totaltests_toelichting": "Deze grafiek toont het aantal afgenomen testen waarvan de uitslag bekend is over tijd, in vergelijking met het aantal positieve testen.",
     "linechart_totaltests_legend_label": "Alle GGD tests",
     "linechart_positivetests_legend_label": "Alle positieve testen van de GGD"
   },
