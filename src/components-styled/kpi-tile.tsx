@@ -23,7 +23,7 @@ export function KpiTile({
   return (
     <Tile height="100%">
       <Heading level={3}>{title}</Heading>
-      <Box mb={4}>{children}</Box>
+      <Box>{children}</Box>
       {description && (
         <Text
           as="div"
