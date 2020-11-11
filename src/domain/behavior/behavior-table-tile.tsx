@@ -160,24 +160,26 @@ export function BehaviorTableTile({ text, behavior }: BehaviorTileProps) {
               <HeaderCell>{text.basisregels.header_trend}</HeaderCell>
             </tr>
           </thead>
-          {(behaviorType === 'compliance'
-            ? sortedCompliance
-            : sortedSupport
-          ).map((behavior) => (
-            <tr key={behavior.id}>
-              <Cell>{formatPercentage(behavior.percentage ?? 0)}%</Cell>
-              <Cell>
-                <PercentageBar percentage={behavior.percentage ?? 0} />
-              </Cell>
-              <Cell>
-                <BehaviorIcon name={behavior.id} />
-              </Cell>
-              <Cell>{behavior.description}</Cell>
-              <Cell>
-                <BehaviorTrend text={text} trend={behavior.trend} />
-              </Cell>
-            </tr>
-          ))}
+          <tbody>
+            {(behaviorType === 'compliance'
+              ? sortedCompliance
+              : sortedSupport
+            ).map((behavior) => (
+              <tr key={behavior.id}>
+                <Cell>{formatPercentage(behavior.percentage ?? 0)}%</Cell>
+                <Cell>
+                  <PercentageBar percentage={behavior.percentage ?? 0} />
+                </Cell>
+                <Cell>
+                  <BehaviorIcon name={behavior.id} />
+                </Cell>
+                <Cell>{behavior.description}</Cell>
+                <Cell>
+                  <BehaviorTrend text={text} trend={behavior.trend} />
+                </Cell>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
       <p css={css({ color: 'gray' })}>
