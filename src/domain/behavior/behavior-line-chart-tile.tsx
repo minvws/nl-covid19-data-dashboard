@@ -88,20 +88,36 @@ export function BehaviorLineChartTile({
           })
           .filter(isDefined)
       )}
-      linesConfig={behaviorIdentifierWithData.map(({ id }) => ({
+      linesConfig={behaviorIdentifierWithData.map(({ id, label }) => ({
         color: id === currentId ? '#05A0ED' : '#E7E7E7',
         zIndex: id === currentId ? 1 : 0,
-        enableMouseTracking: id === currentId,
+
+        /**
+         *  @TODO
+         * - tooltip content on hover aanpassen
+         * - on hover blauew kleur zetten
+         * - tooltip positie verbeteren
+         * - tooltip content:
+         *   | naleving: 78% - {regel} / zie slack
+         * - tooltip max breedte?
+         **/
+
+        // enableMouseTracking: id === currentId,
         showInLegend: false,
-        states: {
-          inactive: {
-            opacity: 1,
-          },
+        events: {
+          click: () => setCurrentId(id),
         },
+        // states: {
+        //   inactive: {
+        //     opacity: 1,
+        //   },
+        // },
       }))}
       metadata={metadata}
-      formatTooltip={({ date, value }) =>
-        `${formatDateFromSeconds(date)} <strong>${value}%</strong>`
+      formatTooltip={({ date, value, week }) =>
+        `${formatDateFromSeconds(week.start)} - ${formatDateFromSeconds(
+          week.end
+        )} <strong>${value}%</strong>`
       }
       formatYAxis={(x) => `${x}%`}
     />
