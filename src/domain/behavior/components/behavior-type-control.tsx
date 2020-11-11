@@ -3,8 +3,9 @@ import text from '~/locale/index';
 
 export type BehaviorTypeControlOption = 'compliance' | 'support';
 
-export interface BehaviorTypeControlsProps {
+export interface BehaviorTypeControlProps {
   onChange: (value: BehaviorTypeControlOption) => void;
+  value: BehaviorTypeControlOption;
 }
 
 const items = [
@@ -18,8 +19,6 @@ const items = [
   },
 ];
 
-export function BehaviorTypeControls(props: BehaviorTypeControlsProps) {
-  const { onChange } = props;
-
-  return <RadioGroup items={items} onChange={onChange} />;
+export function BehaviorTypeControl(props: BehaviorTypeControlProps) {
+  return <RadioGroup {...props} items={items} />;
 }

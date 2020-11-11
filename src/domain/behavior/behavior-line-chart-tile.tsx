@@ -12,8 +12,8 @@ import { BehaviorIdentifier, behaviorIdentifier } from './behavior-types';
 import { BehaviorLineChart, Value } from './components/behavior-line-chart';
 import {
   BehaviorTypeControlOption,
-  BehaviorTypeControls,
-} from './components/type-control';
+  BehaviorTypeControl,
+} from './components/behavior-type-control';
 
 interface BehaviorLineChartTileProps {
   values: NationalBehaviorValue[];
@@ -77,7 +77,7 @@ export function BehaviorLineChartTile({
         </Header>
 
         <Box display="flex" justifyContent="start">
-          <BehaviorTypeControls value={type} onChange={setType} />
+          <BehaviorTypeControl value={type} onChange={setType} />
         </Box>
 
         <Box

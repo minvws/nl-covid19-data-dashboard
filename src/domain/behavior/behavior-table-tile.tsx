@@ -13,7 +13,7 @@ import {
 } from './behavior-types';
 import { BehaviorIcon } from './components/behavior-icon';
 import { BehaviorTrend } from './components/behavior-trend';
-import { BehaviorTypeControls } from './components/behavior-type-controls';
+import { BehaviorTypeControl } from './components/behavior-type-control';
 import siteText from '~/locale/index';
 
 type BehaviorValue = NationalBehaviorValue | RegionalBehaviorValue;
@@ -144,7 +144,7 @@ export function BehaviorTableTile({ text, behavior }: BehaviorTileProps) {
     >
       <h3>{text.basisregels.title}</h3>
       <Box display="flex" justifyContent="start">
-        <BehaviorTypeControls onChange={setBehaviorType} />
+        <BehaviorTypeControl value={behaviorType} onChange={setBehaviorType} />
       </Box>
 
       <p>{text.basisregels.intro[behaviorType]}</p>
