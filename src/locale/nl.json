@@ -94,22 +94,22 @@
       "href": "https://www.nivel.nl/nl/nivel-zorgregistraties-eerste-lijn/nivel-zorgregistraties-eerste-lijn",
       "text": "Nivel Zorgregistraties Eerste Lijn"
     },
-    "estimated_amount_of_patients": "Geschat aantal patiënten met verdenking van COVID-19:",
+    "estimated_amount_of_patients": "Geschat aantal patiënten met COVID-19-achtige klachten:",
     "titel": "Aantal patiënten met eerste melding van COVID-19 klachten bij de huisarts",
     "pagina_toelichting": "Elke week berekent het Nivel aan de hand van de geregistreerde klachten door huisartsen, het aantal patiënten dat voor de eerste keer contact opneemt met de huisartsenpraktijk vanwege COVID-19-achtige klachten.",
     "barscale_titel": "Aantal patiënten met eerste melding van COVID-19 klachten bij de huisarts",
-    "barscale_toelichting": "Aantal patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten, per week.",
-    "kpi_titel": "Geschat aantal patiënten met verdenking van COVID-19",
+    "barscale_toelichting": "Geschat aantal patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten per week.",
+    "kpi_titel": "Geschat aantal patiënten met COVID-19-achtige klachten",
     "kpi_toelichting": "Geschat aantal patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten per week.",
     "linechart_titel": "Verloop over tijd",
     "barscale_screenreader_text": "{{value}} patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten, per 100.000 inwoners, per week.",
-    "titel_sidebar": "Huisartsverdenkingen",
+    "titel_sidebar": "Klachten bij huisartsen",
     "metadata": {
-      "title": "Aantal meldingen COVID-19 verdenking van huisartsen | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Aantal meldingen COVID-19-achtige klachten bij huisartsen | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Landelijk overzicht van het geschat aantal patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten per week."
     },
-    "normalized_kpi_titel": "Gemiddeld aantal patiënten met verdenking van COVID-19 per 100.000 inwoners",
-    "normalized_kpi_toelichting": "Geschat aantal patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten per week.",
+    "normalized_kpi_titel": "Aantal patiënten met COVID-19-achtige klachten per 100.000 inwoners",
+    "normalized_kpi_toelichting": "Aantal patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten, per week.",
     "titel_kpi": "Patiënten met eerste melding van COVID-19 klachten bij de huisarts"
   },
   "ziekenhuisopnames_per_dag": {
@@ -536,7 +536,7 @@
       },
       {
         "cijfer": "Aantal patiënten met eerste melding van COVID-19 klachten bij de huisarts",
-        "verantwoording": "Van een representatieve steekproef van zo’n 350 huisartsenpraktijken uit heel Nederland ontvangt Nivel Zorgregistraties Eerste Lijn wekelijks gegevens over verleende zorg aan hun patiënten. Op basis hiervan berekent Nivel het aantal patiënten met een verdenking op COVID-19 in de afgelopen week. Dit doet het Nivel op basis van diagnosecodes die door de huisartsen worden aangevinkt (‘Acute infectie bovenste luchtwegen’, ‘Andere infectie(s) luchtwegen’, ‘Influenza’, ‘Pneumonie’, ‘Andere virusziekte(n)’, ’Andere infectieziekte’, ‘Koorts’, ‘Benauwdheid’, ‘Hoesten’ ) en aanvullende omschrijvingen van de huisarts die wijzen op een verdenking van COVID-19. \n\nOm een grotere precisie te bereiken, berekent het Nivel ook de cijfers van de voorgaande weken opnieuw. Ze nemen daarbij eventueel later bekend geworden gegevens mee. Deze informatie wordt wekelijks (op donderdag) beschikbaar gesteld door Nivel Zorgregistraties Eerste Lijn en als JSON-file aangeleverd bij het ministerie van VWS. Het bronbestand rapport de aantallen per week. De weeknummers uit dit bestand worden omgezet naar de datum van de zondag van de betreffende week voor weergave op het dashboard. De waarden voor de betreffende weken uit het bestand worden daarbij direct overgenomen voor op het dashboard."
+        "verantwoording": "Van een representatieve steekproef van zo’n 350 huisartsenpraktijken uit heel Nederland ontvangt Nivel Zorgregistraties Eerste Lijn wekelijks gegevens over verleende zorg aan hun patiënten. Op basis hiervan berekent Nivel het aantal patiënten met COVID-19-achtige klachten in de afgelopen week. Dit doet het Nivel op basis van diagnosecodes die door de huisartsen worden aangevinkt (‘Acute infectie bovenste luchtwegen’, ‘Andere infectie(s) luchtwegen’, ‘Influenza’, ‘Pneumonie’, ‘Andere virusziekte(n)’, ’Andere infectieziekte’, ‘Koorts’, ‘Benauwdheid’, ‘Hoesten’ ) en aanvullende omschrijvingen van de huisarts die wijzen op COVID-19-achtige klachten. \n\nOm een grotere precisie te bereiken, berekent het Nivel ook de cijfers van de voorgaande weken opnieuw. Ze nemen daarbij eventueel later bekend geworden gegevens mee. Deze informatie wordt wekelijks (op donderdag) beschikbaar gesteld door Nivel Zorgregistraties Eerste Lijn en als JSON-file aangeleverd bij het ministerie van VWS. Het bronbestand rapport de aantallen per week. De weeknummers uit dit bestand worden omgezet naar de datum van de zondag van de betreffende week voor weergave op het dashboard. De waarden voor de betreffende weken uit het bestand worden daarbij direct overgenomen voor op het dashboard."
       },
       {
         "cijfer": "Rioolwatermeting",
