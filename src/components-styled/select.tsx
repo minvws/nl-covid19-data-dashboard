@@ -20,7 +20,7 @@ export function Select<T extends string>({
   placeholder,
 }: SelectProps<T>) {
   return (
-    <InstallationSelect
+    <StyledSelect
       value={value}
       onChange={(event) => onChange(event.target.value as T)}
     >
@@ -35,17 +35,22 @@ export function Select<T extends string>({
           {label}
         </option>
       ))}
-    </InstallationSelect>
+    </StyledSelect>
   );
 }
 
-const InstallationSelect = styled.select(
+const StyledSelect = styled.select(
   css({
     display: 'inline-block',
     minWidth: '15em',
-    border: '1px solid lightGray',
+    width: '100%',
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: 'lightGray',
+    fontFamily: 'body',
+    fontSize: 2,
     appearance: 'none',
-    padding: 2,
+    p: 2,
     pr: 4,
     background: `url('/images/chevron-down.svg')`,
     backgroundSize: '14px 14px',
