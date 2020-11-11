@@ -1,18 +1,19 @@
+import css from '@styled-system/css';
 import { useState } from 'react';
-import { MultipleLineChartTile } from '~/components-styled/multiple-line-chart-tile';
+import styled from 'styled-components';
+import { isDefined } from 'ts-is-present';
+import { Box, Spacer } from '~/components-styled/base';
+import { Tile } from '~/components-styled/layout';
+import { Metadata, MetadataProps } from '~/components-styled/metadata';
 import { Select } from '~/components-styled/select';
-import { NationalBehaviorValue } from '~/types/data';
 import siteText from '~/locale/index';
+import { NationalBehaviorValue } from '~/types/data';
+import { BehaviorIdentifier, behaviorIdentifier } from './behavior-types';
+import { BehaviorLineChart, Value } from './components/behavior-line-chart';
 import {
   BehaviorTypeControlOption,
   BehaviorTypeControls,
 } from './components/type-control';
-import { isDefined } from 'ts-is-present';
-import { formatDateFromSeconds } from '~/utils/formatDate';
-import { Value } from '~/components/lineChart/lineChartWithWeekTooltip';
-import { BehaviorIdentifier, behaviorIdentifier } from './behavior-types';
-import { MetadataProps } from '~/components-styled/metadata';
-import { Box, Spacer } from '~/components-styled/base';
 
 interface BehaviorLineChartTileProps {
   values: NationalBehaviorValue[];
@@ -51,81 +52,122 @@ export function BehaviorLineChartTile({
     .filter(isDefined);
 
   return (
-    <MultipleLineChartTile
-      disableTimeControls
-      title={siteText.nl_gedrag.basisregels.title}
-      timeframeInitialValue="all"
-      description={
-        <>
-          <Box display="flex" justifyContent="start">
-            <BehaviorTypeControls value={type} onChange={setType} />
+    <Tile
+      /**
+       * The mb here could alternatively be applied using a <Spacer/> in the
+       * page markup. It's a choice, whether we like to include the bottom
+       * margin on all our commonly used components or keep everything flexible
+       * and use spacers in the context where the component is used.
+       */
+      mb={4}
+      /**
+       * The ml and mr negative margins should not be part of this component
+       * ideally, but are the results of the page layout having paddings even on
+       * small screens. We can remove this once we make all page section
+       * elements full-width and remove the padding from the page layout.
+       */
+      ml={{ _: -4, sm: 0 }}
+      mr={{ _: -4, sm: 0 }}
+    >
+      <>
+        <Header>
+          <Box mr={{ lg: '1em' }} mb={{ lg: '1em' }}>
+            <h3>{siteText.nl_gedrag.basisregels.title}</h3>
           </Box>
-          <p>{siteText.nl_gedrag.basisregels.intro[type]}</p>
-          <Select
-            value={currentId}
-            onChange={setCurrentId}
-            options={behaviorIdentifierWithData.map(({ id, label }) => ({
-              value: id,
-              label,
-            }))}
-          />
-          <Spacer mb={3} />
-        </>
-      }
-      values={behaviorIdentifierWithData.map(({ valueKey }) =>
-        values
-          .map((value) => {
-            if (!(valueKey in value)) return undefined;
+        </Header>
 
-            return {
-              date: value.week_start_unix,
-              value: value[valueKey],
+        <Box display="flex" justifyContent="start">
+          <BehaviorTypeControls value={type} onChange={setType} />
+        </Box>
 
-              week: {
-                start: value.week_start_unix,
-                end: value.week_end_unix,
-              },
-            } as Value;
-          })
-          .filter(isDefined)
-      )}
-      isLineCrosshair
-      linesConfig={behaviorIdentifierWithData.map(({ id }) => ({
-        color: [currentId, hoverId].includes(id) ? '#05A0ED' : '#E7E7E7',
-        zIndex: [currentId, hoverId].includes(id) ? 1 : 0,
+        <Box
+          display="flex"
+          alignItems="baseline"
+          flexDirection={{ _: 'column', lg: 'row' }}
+        >
+          <Box flex="1" mr={{ lg: 2 }}>
+            <p>
+              {siteText.nl_gedrag.basisregels.intro[type]} 3i4uht hwerg iwerhg
+              iluehrgliu erhglksagh elrwgh lsdkfghelwrkgh
+              leisurghlweighleiurfghlwe hefkljgh lser gelkrghl sdkfjghdl kjh.
+            </p>
+          </Box>
+          <Box flex="1" display="flex" flexDirection="column" ml={{ lg: 2 }}>
+            <Select
+              value={currentId}
+              onChange={setCurrentId}
+              options={behaviorIdentifierWithData.map(({ id, label }) => ({
+                value: id,
+                label,
+              }))}
+            />
+          </Box>
+        </Box>
 
-        /**
-         *  @TODO
-         * - tooltip content on hover aanpassen
-         * - on hover blauew kleur zetten
-         * - tooltip positie verbeteren
-         * - tooltip content:
-         *   | naleving: 78% - {regel} / zie slack
-         * - tooltip max breedte?
-         **/
+        <Spacer mb={3} />
+      </>
 
-        showInLegend: false,
-        events: {
-          click: () => setCurrentId(id),
-          mouseOver: () => setHoverId(id),
-          mouseOut: () => setHoverId(undefined),
-        },
+      <BehaviorLineChart
+        values={behaviorIdentifierWithData.map(({ valueKey, label }) =>
+          values
+            .map((value) => {
+              if (!(valueKey in value)) return undefined;
 
-        cursor: 'pointer',
+              return {
+                label,
+                date: value.week_start_unix,
+                value: value[valueKey],
 
-        states: {
-          inactive: {
-            opacity: 1,
+                week: {
+                  start: value.week_start_unix,
+                  end: value.week_end_unix,
+                },
+              } as Value;
+            })
+            .filter(isDefined)
+        )}
+        linesConfig={behaviorIdentifierWithData.map(({ id }) => ({
+          color: [currentId, hoverId].includes(id) ? '#05A0ED' : '#E7E7E7',
+          zIndex: [currentId, hoverId].includes(id) ? 1 : 0,
+
+          /**
+           *  @TODO
+           * - tooltip content on hover aanpassen
+           * - on hover blauew kleur zetten
+           * - tooltip positie verbeteren
+           * - tooltip content:
+           *   | naleving: 78% - {regel} / zie slack
+           * - tooltip max breedte?
+           **/
+
+          showInLegend: false,
+          events: {
+            click: () => setCurrentId(id),
+            mouseOver: () => setHoverId(id),
+            mouseOut: () => setHoverId(undefined),
           },
-        },
-      }))}
-      metadata={metadata}
-      formatTooltip={({ date, value, week }) =>
-        `${formatDateFromSeconds(week.start)} - ${formatDateFromSeconds(
-          week.end
-        )} <strong>${value}%</strong>`
-      }
-      formatYAxis={(x) => `${x}%`}
-    />
+
+          cursor: 'pointer',
+
+          states: {
+            inactive: {
+              opacity: 1,
+            },
+          },
+        }))}
+      />
+
+      {/* Using a spacer to push the footer down */}
+      <Spacer m="auto" />
+      <Metadata {...metadata} />
+    </Tile>
   );
 }
+
+const Header = styled.header(
+  css({
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexDirection: ['column', null, null, 'row'],
+  })
+);

@@ -44,15 +44,11 @@ function getChartOptions(
     return Math.max(max, listMax);
   }, 0);
 
-  const categories = values.flatMap(
-    (value) =>
-      console.log({ value }) ||
-      value.map((value) => value.value && value.date.toString())
-  );
-  // .filter((date, index, self) => self.indexOf(date) === index);
-  console.log(categories);
-
-  // const categories = ['1111', '2222', '3333'];
+  const categories = values
+    .flatMap((value) =>
+      value.map((value) => (value.value && value.date).toString())
+    )
+    .filter((date, index, self) => self.indexOf(date) === index);
 
   const options: Highcharts.Options = {
     chart: {
@@ -88,12 +84,7 @@ function getChartOptions(
             : '';
         },
       },
-      crosshair: isLineCrosshair
-        ? {
-            color: '#3391CC',
-            width: 1,
-          }
-        : true,
+      crosshair: true,
     },
     tooltip: {
       backgroundColor: '#FFF',
