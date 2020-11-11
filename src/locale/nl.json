@@ -89,27 +89,27 @@
     "titel_kpi": "Gemiddeld aantal intensive care-opnames over 3 dagen"
   },
   "verdenkingen_huisartsen": {
-    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "bron": {
       "href": "https://www.nivel.nl/nl/nivel-zorgregistraties-eerste-lijn/nivel-zorgregistraties-eerste-lijn",
       "text": "Nivel Zorgregistraties Eerste Lijn"
     },
-    "estimated_amount_of_patients": "Geschat aantal patiënten met verdenking van COVID-19:",
+    "estimated_amount_of_patients": "Geschat aantal patiënten met COVID-19-achtige klachten:",
     "titel": "Aantal patiënten met eerste melding van COVID-19 klachten bij de huisarts",
     "pagina_toelichting": "Elke week berekent het Nivel aan de hand van de geregistreerde klachten door huisartsen, het aantal patiënten dat voor de eerste keer contact opneemt met de huisartsenpraktijk vanwege COVID-19-achtige klachten.",
     "barscale_titel": "Aantal patiënten met eerste melding van COVID-19 klachten bij de huisarts",
-    "barscale_toelichting": "Aantal patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten, per week.",
-    "kpi_titel": "Geschat aantal patiënten met verdenking van COVID-19",
+    "barscale_toelichting": "Geschat aantal patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten per week.",
+    "kpi_titel": "Geschat aantal patiënten met COVID-19-achtige klachten",
     "kpi_toelichting": "Geschat aantal patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten per week.",
     "linechart_titel": "Verloop over tijd",
     "barscale_screenreader_text": "{{value}} patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten, per 100.000 inwoners, per week.",
-    "titel_sidebar": "Huisartsverdenkingen",
+    "titel_sidebar": "Klachten bij huisartsen",
     "metadata": {
-      "title": "Aantal meldingen COVID-19 verdenking van huisartsen | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Aantal meldingen COVID-19-achtige klachten bij huisartsen | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Landelijk overzicht van het geschat aantal patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten per week."
     },
-    "normalized_kpi_titel": "Gemiddeld aantal patiënten met verdenking van COVID-19 per 100.000 inwoners",
-    "normalized_kpi_toelichting": "Geschat aantal patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten per week.",
+    "normalized_kpi_titel": "Aantal patiënten met COVID-19-achtige klachten per 100.000 inwoners",
+    "normalized_kpi_toelichting": "Aantal patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten, per week.",
     "titel_kpi": "Patiënten met eerste melding van COVID-19 klachten bij de huisarts"
   },
   "ziekenhuisopnames_per_dag": {
@@ -123,7 +123,7 @@
     "barscale_titel": "Ziekenhuisopnames per dag",
     "extra_uitleg": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis (exclusief IC) is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen.\n\nLet op: Hoewel ziekenhuizen proberen om COVID-19 patiënten snel te registreren, is het aannemelijk dat de registratie achter loopt. Om deze reden zijn de aantallen van de afgelopen dagen meestal nog onvolledig.",
     "map_titel": "Verdeling ziekenhuisopnames in Nederland",
-    "map_toelichting": "Deze grafieken laten zien hoe de verdeling van ziekenhuisopnames is in Nederland per dag.",
+    "map_toelichting": "Deze kaarten laten zien hoe de verdeling van ziekenhuisopnames is in Nederland per dag.",
     "linechart_titel": "Ziekenhuisopnames over tijd",
     "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "chloropleth_legenda": {
@@ -161,7 +161,7 @@
     "titel_kpi": "Gemiddeld aantal ziekenhuisopnames over 3 dagen"
   },
   "positief_geteste_personen": {
-    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -192,7 +192,7 @@
       "80 tot 90",
       "90+"
     ],
-    "cluster_datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "cluster_datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "cluster_bron": {
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -219,7 +219,7 @@
   },
   "besmettelijke_personen": {
     "title": "Aantal besmettelijke mensen",
-    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/097155aa-75eb-4caa-8ed3-4c6edb80467e",
       "text": "RIVM"
@@ -245,7 +245,7 @@
     "titel_kpi": "Aantal besmettelijke mensen"
   },
   "reproductiegetal": {
-    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
     "rangeLegendLabel": "Onzekerheidsmarge",
     "lineLegendLabel": "Effectieve R",
     "bron": {
@@ -315,7 +315,7 @@
     "text": "Bekijk de belangrijkste cijfers voor uw veiligheidsregio."
   },
   "verpleeghuis_besmette_locaties": {
-    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
@@ -342,7 +342,7 @@
     "titel_kpi": "Aantal besmette locaties"
   },
   "verpleeghuis_positief_geteste_personen": {
-    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
@@ -367,7 +367,7 @@
     "titel_kpi": "Aantal positief geteste bewoners per dag"
   },
   "verpleeghuis_oversterfte": {
-    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
@@ -379,7 +379,7 @@
     "extra_uitleg": "Dit getal is een inschatting van het aantal gemelde verpleeghuisbewoners dat in Nederland overlijdt aan de gevolgen van het nieuwe coronavirus.",
     "linechart_titel": "Verloop over tijd",
     "map_titel": "Verpleeghuis oversterfte in Nederland",
-    "map_toelichting": "Deze grafieken laten zien hoe de oversterfte in verpleeghuizen is in Nederland per dag.",
+    "map_toelichting": "Deze kaarten laten zien hoe de oversterfte in verpleeghuizen is in Nederland per dag.",
     "titel_sidebar": "Sterfte",
     "metadata": {
       "title": "Overleden bewoners verpleeghuizen | Dashboard Coronavirus | Rijksoverheid.nl",
@@ -395,7 +395,7 @@
     "text": "Selecteer uw regio bovenaan deze pagina"
   },
   "rioolwater_metingen": {
-    "datums": "Waarde van {{weekStart}} tot {{weekEnd}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "bron": {
       "text": "RIVM",
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
@@ -536,7 +536,7 @@
       },
       {
         "cijfer": "Aantal patiënten met eerste melding van COVID-19 klachten bij de huisarts",
-        "verantwoording": "Van een representatieve steekproef van zo’n 350 huisartsenpraktijken uit heel Nederland ontvangt Nivel Zorgregistraties Eerste Lijn wekelijks gegevens over verleende zorg aan hun patiënten. Op basis hiervan berekent Nivel het aantal patiënten met een verdenking op COVID-19 in de afgelopen week. Dit doet het Nivel op basis van diagnosecodes die door de huisartsen worden aangevinkt (‘Acute infectie bovenste luchtwegen’, ‘Andere infectie(s) luchtwegen’, ‘Influenza’, ‘Pneumonie’, ‘Andere virusziekte(n)’, ’Andere infectieziekte’, ‘Koorts’, ‘Benauwdheid’, ‘Hoesten’ ) en aanvullende omschrijvingen van de huisarts die wijzen op een verdenking van COVID-19. \n\nOm een grotere precisie te bereiken, berekent het Nivel ook de cijfers van de voorgaande weken opnieuw. Ze nemen daarbij eventueel later bekend geworden gegevens mee. Deze informatie wordt wekelijks (op donderdag) beschikbaar gesteld door Nivel Zorgregistraties Eerste Lijn en als JSON-file aangeleverd bij het ministerie van VWS. Het bronbestand rapport de aantallen per week. De weeknummers uit dit bestand worden omgezet naar de datum van de zondag van de betreffende week voor weergave op het dashboard. De waarden voor de betreffende weken uit het bestand worden daarbij direct overgenomen voor op het dashboard."
+        "verantwoording": "Van een representatieve steekproef van zo’n 350 huisartsenpraktijken uit heel Nederland ontvangt Nivel Zorgregistraties Eerste Lijn wekelijks gegevens over verleende zorg aan hun patiënten. Op basis hiervan berekent Nivel het aantal patiënten met COVID-19-achtige klachten in de afgelopen week. Dit doet het Nivel op basis van diagnosecodes die door de huisartsen worden aangevinkt (‘Acute infectie bovenste luchtwegen’, ‘Andere infectie(s) luchtwegen’, ‘Influenza’, ‘Pneumonie’, ‘Andere virusziekte(n)’, ’Andere infectieziekte’, ‘Koorts’, ‘Benauwdheid’, ‘Hoesten’ ) en aanvullende omschrijvingen van de huisarts die wijzen op COVID-19-achtige klachten. \n\nOm een grotere precisie te bereiken, berekent het Nivel ook de cijfers van de voorgaande weken opnieuw. Ze nemen daarbij eventueel later bekend geworden gegevens mee. Deze informatie wordt wekelijks (op donderdag) beschikbaar gesteld door Nivel Zorgregistraties Eerste Lijn en als JSON-file aangeleverd bij het ministerie van VWS. Het bronbestand rapport de aantallen per week. De weeknummers uit dit bestand worden omgezet naar de datum van de zondag van de betreffende week voor weergave op het dashboard. De waarden voor de betreffende weken uit het bestand worden daarbij direct overgenomen voor op het dashboard."
       },
       {
         "cijfer": "Rioolwatermeting",
@@ -697,7 +697,7 @@
     "barscale_titel": "Ziekenhuisopnames per dag",
     "extra_uitleg": "Aantal mensen uit deze veiligheidsregio met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen.",
     "map_titel": "Verdeling ziekenhuisopnames in {{safetyRegion}}",
-    "map_toelichting": "Deze grafieken laten zien hoe de verdeling van ziekenhuisopnames is in Nederland per dag.",
+    "map_toelichting": "Deze kaarten laten zien hoe de verdeling van ziekenhuisopnames is in Nederland per dag.",
     "linechart_titel": "Ziekenhuisopnames over tijd",
     "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "bron": {
@@ -715,7 +715,7 @@
     "titel_sidebar": "Positief geteste mensen",
     "titel": "Positief geteste mensen in {{safetyRegion}}",
     "pagina_toelichting": "Door het aantal positief geteste mensen bij te houden krijgen we een duidelijk beeld van hoe snel het virus zich verspreidt voordat het de intensive care bereikt. Hierdoor blijven we voorbereid.",
-    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
     "screen_reader_graph_content": "{{value}} positief geteste personen.",
     "barscale_titel": "Gemiddeld aantal positief geteste mensen per 100.000 inwoners",
     "barscale_toelichting": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
@@ -740,7 +740,7 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
     },
-    "cluster_datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "cluster_datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "cluster_bron": {
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -763,7 +763,7 @@
     "titel_sidebar": "Rioolwatermeting",
     "titel": "Rioolwatermeting in {{safetyRegion}}",
     "pagina_toelichting": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners in rioolwater. Om het weekgemiddelde te berekenen worden alle meetwaarden van deze veiligheidsregio bij elkaar opgeteld en gedeeld door het aantal metingen.",
-    "datums": "Waarde van {{weekStart}} tot {{weekEnd}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "screen_reader_graph_content": "{{value}} virusdeeltjes per 100.000 inwoners",
     "barscale_titel": "Gemiddelde aantal virusdeeltjes per 100.000 inwoners",
     "extra_uitleg": "Alle rioolmeetwaarden van één week worden bij elkaar opgeteld en gedeeld door het aantal metingen om tot dit wekelijkse gemiddelde te komen.",
@@ -800,7 +800,7 @@
     "barscale_titel": "Ziekenhuisopnames per dag",
     "extra_uitleg": "Aantal mensen uit deze gemeente met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen.",
     "map_titel": "Verdeling ziekenhuisopnames in {{municipality}}",
-    "map_toelichting": "Deze grafieken laten zien hoe de verdeling van ziekenhuisopnames is in Nederland per dag.",
+    "map_toelichting": "Deze kaarten laten zien hoe de verdeling van ziekenhuisopnames is in Nederland per dag.",
     "linechart_titel": "Ziekenhuisopnames over tijd",
     "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "bron": {
@@ -818,7 +818,7 @@
     "titel_sidebar": "Positief geteste mensen",
     "titel": "Positief geteste mensen in {{municipality}}",
     "pagina_toelichting": "Door het aantal positief geteste mensen bij te houden krijgen we een duidelijk beeld van hoe snel het virus zich verspreidt voordat het de intensive care bereikt. Hierdoor blijven we voorbereid.",
-    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "screen_reader_graph_content": "{{value}} positief geteste personen.",
     "barscale_titel": "Gemiddeld aantal positief geteste mensen per 100.000 inwoners",
     "barscale_toelichting": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
@@ -853,7 +853,7 @@
     "titel_sidebar": "Rioolwatermeting",
     "titel": "Rioolwatermeting in {{municipality}}",
     "pagina_toelichting": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners in rioolwater. Om het weekgemiddelde te berekenen worden alle meetwaarden van deze gemeente bij elkaar opgeteld en gedeeld door het aantal metingen.",
-    "datums": "Waarde van {{weekStart}} tot {{weekEnd}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "screen_reader_graph_content": "{{value}} virusdeeltjes per 100.000 inwoners",
     "barscale_titel": "Gemiddelde aantal virusdeeltjes per 100.000 inwoners",
     "extra_uitleg": "Alle rioolmeetwaarden van één week worden bij elkaar opgeteld en gedeeld door het aantal metingen, om tot dit wekelijkse gemiddelde te komen voor deze gemeente.",
@@ -940,7 +940,7 @@
     "titel": "Percentage positief geteste personen via GGD teststraten",
     "summary_title": "{{percentage}} van de GGD testen waren positief",
     "summary_link_cta": "Lees meer",
-    "datums": "Week van {{weekStart}} tot {{weekEnd}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
     "bron": {
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -971,7 +971,7 @@
     "titel": "Percentage positief geteste personen via GGD teststraten in {{safetyRegion}}",
     "summary_title": "{{percentage}} van de GGD testen waren positief",
     "summary_link_cta": "Lees meer",
-    "datums": "Week van {{weekStart}} tot {{weekEnd}}. Verkregen: {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
     "bron": {
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -990,7 +990,7 @@
     "linechart_positivetests_legend_label": "Alle positieve testen van de GGD"
   },
   "veiligheidsregio_verpleeghuis_oversterfte": {
-    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
@@ -1002,7 +1002,7 @@
     "extra_uitleg": "Dit getal is een inschatting van het aantal gemelde verpleeghuisbewoners uit deze veiligheidsregio dat overlijdt aan de gevolgen van het nieuwe coronavirus.",
     "linechart_titel": "Verloop over tijd",
     "map_titel": "Verpleeghuis oversterfte in Nederland",
-    "map_toelichting": "Deze grafieken laten zien hoe de oversterfte in verpleeghuizen is in Nederland per dag.",
+    "map_toelichting": "Deze kaarten laten zien hoe de oversterfte in verpleeghuizen is in Nederland per dag.",
     "titel_sidebar": "Sterfte per dag",
     "metadata": {
       "title": "Overleden bewoners verpleeghuizen in {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
@@ -1010,7 +1010,7 @@
     }
   },
   "veiligheidsregio_verpleeghuis_besmette_locaties": {
-    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
@@ -1029,7 +1029,7 @@
     }
   },
   "veiligheidsregio_verpleeghuis_positief_geteste_personen": {
-    "datums": "Waarde van {{dateOfReport}}. Verkregen: {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
