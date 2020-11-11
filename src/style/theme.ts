@@ -63,11 +63,11 @@ const breakpoints: Partial<Breakpoints> = [
   '100em',
 ];
 
-breakpoints.xs = breakpoints[0];
-breakpoints.sm = breakpoints[1];
-breakpoints.md = breakpoints[2];
-breakpoints.lg = breakpoints[3];
-breakpoints.xl = breakpoints[4];
+breakpoints.xs = breakpoints[0]; // ~420px
+breakpoints.sm = breakpoints[1]; // ~768px
+breakpoints.md = breakpoints[2]; // ~960px
+breakpoints.lg = breakpoints[3]; // ~1200px
+breakpoints.xl = breakpoints[4]; // ~1600px
 
 const mediaQueries = {
   xs: `screen and (min-width: ${breakpoints[0]})`,
