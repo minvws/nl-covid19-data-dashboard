@@ -628,8 +628,8 @@
   "common": {
     "metadata": {
       "source": "Source",
-      "date": "",
-      "dateFromTo": ""
+      "date": "Value of {{date}}",
+      "dateFromTo": "Value from {{dateFrom}} to {{dateTo}}"
     },
     "barScale": {
       "signaalwaarde": "Alert value"
@@ -640,7 +640,7 @@
     "veiligheidsregio_label": "Safety region:",
     "metricKPI": {
       "dateOfReport": "Value of {{dateOfReport}}",
-      "dateRangeOfReport": ""
+      "dateRangeOfReport": "Value from {{dateFrom}} - {{dateTo}}"
     },
     "tooltip": {
       "positive_tested_people": ""
@@ -660,12 +660,12 @@
       "overig": "Early indicators",
       "verpleeghuis": "Nursing homes",
       "laatste": "Latest developments",
-      "algemeen": "",
-      "besmettingen": "",
-      "ziekenhuizen": "",
-      "verpleeghuizen": "",
-      "vroege_signalen": "",
-      "gedrag": ""
+      "algemeen": "General",
+      "besmettingen": "Infections",
+      "ziekenhuizen": "Hospitals",
+      "verpleeghuizen": "Nursing homes",
+      "vroege_signalen": "Early indicators",
+      "gedrag": "Behaviour"
     }
   },
   "veiligheidsregio_layout": {
@@ -673,11 +673,11 @@
       "medisch": "Medical indicators",
       "overig": "Other indicators",
       "verpleeghuis": "Nursing homes",
-      "besmettingen": "",
-      "ziekenhuizen": "",
-      "verpleeghuizen": "",
-      "vroege_signalen": "",
-      "gedrag": ""
+      "besmettingen": "Infections",
+      "ziekenhuizen": "Hospitals",
+      "verpleeghuizen": "Nursing homes",
+      "vroege_signalen": "Early indicators",
+      "gedrag": "Behaviour"
     }
   },
   "veiligheidsregio_metadata": {
@@ -931,9 +931,9 @@
       "medisch": "Medical indicators",
       "overig": "Early warning",
       "verpleeghuis": "Nursing homes",
-      "besmettingen": "",
-      "ziekenhuizen": "",
-      "vroege_signalen": ""
+      "besmettingen": "Infections",
+      "ziekenhuizen": "Hospitals",
+      "vroege_signalen": "Early indicators"
     }
   },
   "positief_geteste_personen_ggd": {
@@ -1019,7 +1019,7 @@
     "pagina_toelichting": "This number is an estimation of the number of new nursing home locations where there is at least one confirmed case.\n\nThe calculation method has been changed on the 29th of September. Please also see the data explanation section.",
     "barscale_titel": "Number of new locations per day",
     "barscale_toelichting": "Number of new locations where there is at least one confirmed case. A nursing home is counted as a 'new location; when there have not been any confirmed cases for at least 28 days, which is twice the incubation period.",
-    "kpi_titel": "Total number of infected locations",
+    "kpi_titel": "Total no. of infected locations",
     "kpi_toelichting": "This figure is an estimate of the number of nursing homes where in the past 28 days at least one (new) COVID-19 infection (confirmed by a positive test) is reported. The percentage shows what proportion of the total number of nursing homes in this safety region this is.",
     "linechart_titel": "Progression over time in the total number of infected locations",
     "barscale_screenreader_text": "{{value}} new locations where there is at least one confirmed case, per day.",
