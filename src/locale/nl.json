@@ -123,7 +123,7 @@
     "barscale_titel": "Ziekenhuisopnames per dag",
     "extra_uitleg": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis (exclusief IC) is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen.\n\nLet op: Hoewel ziekenhuizen proberen om COVID-19 patiënten snel te registreren, is het aannemelijk dat de registratie achter loopt. Om deze reden zijn de aantallen van de afgelopen dagen meestal nog onvolledig.",
     "map_titel": "Verdeling ziekenhuisopnames in Nederland",
-    "map_toelichting": "Deze grafieken laten zien hoe de verdeling van ziekenhuisopnames is in Nederland per dag.",
+    "map_toelichting": "Deze kaarten laten zien hoe de verdeling van ziekenhuisopnames is in Nederland per dag.",
     "linechart_titel": "Ziekenhuisopnames over tijd",
     "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "chloropleth_legenda": {
@@ -379,7 +379,7 @@
     "extra_uitleg": "Dit getal is een inschatting van het aantal gemelde verpleeghuisbewoners dat in Nederland overlijdt aan de gevolgen van het nieuwe coronavirus.",
     "linechart_titel": "Verloop over tijd",
     "map_titel": "Verpleeghuis oversterfte in Nederland",
-    "map_toelichting": "Deze grafieken laten zien hoe de oversterfte in verpleeghuizen is in Nederland per dag.",
+    "map_toelichting": "Deze kaarten laten zien hoe de oversterfte in verpleeghuizen is in Nederland per dag.",
     "titel_sidebar": "Sterfte",
     "metadata": {
       "title": "Overleden bewoners verpleeghuizen | Dashboard Coronavirus | Rijksoverheid.nl",
@@ -684,7 +684,7 @@
     "barscale_titel": "Ziekenhuisopnames per dag",
     "extra_uitleg": "Aantal mensen uit deze veiligheidsregio met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen.",
     "map_titel": "Verdeling ziekenhuisopnames in {{safetyRegion}}",
-    "map_toelichting": "Deze grafieken laten zien hoe de verdeling van ziekenhuisopnames is in Nederland per dag.",
+    "map_toelichting": "Deze kaarten laten zien hoe de verdeling van ziekenhuisopnames is in Nederland per dag.",
     "linechart_titel": "Ziekenhuisopnames over tijd",
     "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "bron": {
@@ -787,7 +787,7 @@
     "barscale_titel": "Ziekenhuisopnames per dag",
     "extra_uitleg": "Aantal mensen uit deze gemeente met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen.",
     "map_titel": "Verdeling ziekenhuisopnames in {{municipality}}",
-    "map_toelichting": "Deze grafieken laten zien hoe de verdeling van ziekenhuisopnames is in Nederland per dag.",
+    "map_toelichting": "Deze kaarten laten zien hoe de verdeling van ziekenhuisopnames is in Nederland per dag.",
     "linechart_titel": "Ziekenhuisopnames over tijd",
     "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "bron": {
@@ -985,7 +985,7 @@
     "extra_uitleg": "Dit getal is een inschatting van het aantal gemelde verpleeghuisbewoners uit deze veiligheidsregio dat overlijdt aan de gevolgen van het nieuwe coronavirus.",
     "linechart_titel": "Verloop over tijd",
     "map_titel": "Verpleeghuis oversterfte in Nederland",
-    "map_toelichting": "Deze grafieken laten zien hoe de oversterfte in verpleeghuizen is in Nederland per dag.",
+    "map_toelichting": "Deze kaarten laten zien hoe de oversterfte in verpleeghuizen is in Nederland per dag.",
     "titel_sidebar": "Sterfte per dag",
     "metadata": {
       "title": "Overleden bewoners verpleeghuizen in {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
