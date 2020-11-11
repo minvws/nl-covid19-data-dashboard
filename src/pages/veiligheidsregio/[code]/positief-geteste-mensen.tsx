@@ -284,11 +284,11 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
         linesConfig={[
           {
             color: '#154273',
-            legendLabel: ggdText.linechart_totaltests_legend_label,
+            name: ggdText.linechart_totaltests_legend_label,
           },
           {
             color: '#3391CC',
-            legendLabel: ggdText.linechart_positivetests_legend_label,
+            name: ggdText.linechart_positivetests_legend_label,
           },
         ]}
         metadata={{
