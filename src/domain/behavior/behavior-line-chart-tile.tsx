@@ -86,13 +86,9 @@ export function BehaviorLineChartTile({
           flexDirection={{ _: 'column', lg: 'row' }}
         >
           <Box flex="1" mr={{ lg: 2 }}>
-            <p>
-              {siteText.nl_gedrag.basisregels.intro[type]} 3i4uht hwerg iwerhg
-              iluehrgliu erhglksagh elrwgh lsdkfghelwrkgh
-              leisurghlweighleiurfghlwe hefkljgh lser gelkrghl sdkfjghdl kjh.
-            </p>
+            <p>{siteText.nl_gedrag.basisregels.intro[type]}</p>
           </Box>
-          <Box flex="1" display="flex" flexDirection="column" ml={{ lg: 2 }}>
+          <Box flex="1" ml={{ lg: 2 }}>
             <Select
               value={currentId}
               onChange={setCurrentId}
@@ -110,49 +106,29 @@ export function BehaviorLineChartTile({
       <BehaviorLineChart
         values={behaviorIdentifierWithData.map(({ valueKey, label }) =>
           values
-            .map((value) => {
-              if (!(valueKey in value)) return undefined;
+            .map((value) =>
+              valueKey in value
+                ? ({
+                    label,
+                    date: value.week_start_unix,
+                    value: value[valueKey],
 
-              return {
-                label,
-                date: value.week_start_unix,
-                value: value[valueKey],
-
-                week: {
-                  start: value.week_start_unix,
-                  end: value.week_end_unix,
-                },
-              } as Value;
-            })
+                    week: {
+                      start: value.week_start_unix,
+                      end: value.week_end_unix,
+                    },
+                  } as Value)
+                : undefined
+            )
             .filter(isDefined)
         )}
         linesConfig={behaviorIdentifierWithData.map(({ id }) => ({
           color: [currentId, hoverId].includes(id) ? '#05A0ED' : '#E7E7E7',
           zIndex: [currentId, hoverId].includes(id) ? 1 : 0,
-
-          /**
-           *  @TODO
-           * - tooltip content on hover aanpassen
-           * - on hover blauew kleur zetten
-           * - tooltip positie verbeteren
-           * - tooltip content:
-           *   | naleving: 78% - {regel} / zie slack
-           * - tooltip max breedte?
-           **/
-
-          showInLegend: false,
           events: {
             click: () => setCurrentId(id),
             mouseOver: () => setHoverId(id),
             mouseOut: () => setHoverId(undefined),
-          },
-
-          cursor: 'pointer',
-
-          states: {
-            inactive: {
-              opacity: 1,
-            },
           },
         }))}
       />

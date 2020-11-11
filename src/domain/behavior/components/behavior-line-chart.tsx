@@ -1,7 +1,6 @@
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import React, { useMemo } from 'react';
-import { isDefined } from 'ts-is-present';
 import { assert } from '~/utils/assert';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
@@ -36,30 +35,20 @@ export function BehaviorLineChart({
     'Values length must equal linesConfig length'
   );
 
-  const chartOptions = useMemo(() => {
-    const filteredValueLists = values.map((lineValues) => {
-      return getFilteredValues<Value>(
-        lineValues,
-        timeframe,
-        (value: Value) => value.date * 1000
-      );
-    });
-    return getChartOptions(filteredValueLists, linesConfig);
-  }, [values, linesConfig, timeframe]);
+  const filteredValueLists = values.map((lineValues) => {
+    return getFilteredValues<Value>(
+      lineValues,
+      timeframe,
+      (value: Value) => value.date * 1000
+    );
+  });
 
-  return (
-    <section>
-      <HighchartsReact highcharts={Highcharts} options={chartOptions} />
-    </section>
-  );
+  const chartOptions = getChartOptions(filteredValueLists, linesConfig);
+
+  return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;
 }
 
 function getChartOptions(values: Value[][], linesConfig: LineConfig[]) {
-  const yMax = values.reduce((max, list) => {
-    const listMax = calculateYMax(list);
-    return Math.max(max, listMax);
-  }, 0);
-
   const categories = values
     .flatMap((value) => value.map((value) => value.date.toString()))
     .filter((date, index, self) => self.indexOf(date) === index);
@@ -76,9 +65,7 @@ function getChartOptions(values: Value[][], linesConfig: LineConfig[]) {
       displayErrors: true,
       height: 275,
     },
-    credits: {
-      enabled: false,
-    },
+    credits: { enabled: false },
     xAxis: {
       lineColor: '#C4C4C4',
       gridLineColor: '#ca005d',
@@ -110,31 +97,28 @@ function getChartOptions(values: Value[][], linesConfig: LineConfig[]) {
       shared: false,
       useHTML: true,
       formatter: function (): string {
-        const {
-          originalData: { value, week, label },
-        } = (this.point as unknown) as {
+        const { originalData: value } = (this.point as unknown) as {
           originalData: Value;
         };
 
         const [dateFrom, dateTo] = [
-          formatDateFromSeconds(week.start, 'axis'),
-          formatDateFromSeconds(week.end, 'axis'),
+          formatDateFromSeconds(value.week.start, 'axis'),
+          formatDateFromSeconds(value.week.end, 'axis'),
         ];
 
         return `
           <div style='margin-bottom: 0.5em'>
-            ${dateFrom} - ${dateTo}: <strong>${value}%</strong>
+            ${dateFrom} - ${dateTo}: <strong>${value.value}%</strong>
           </div>
           <div>
-            ${label}
+            ${value.label}
           </div>
         `;
       },
     },
     yAxis: {
       min: 0,
-      minRange: 0.1,
-      max: yMax,
+      max: 100,
       allowDecimals: false,
       lineColor: '#C4C4C4',
       gridLineColor: '#C4C4C4',
@@ -147,32 +131,20 @@ function getChartOptions(values: Value[][], linesConfig: LineConfig[]) {
         },
       },
     },
-    title: {
-      text: undefined,
-    },
+    title: { text: undefined },
     series: values.map((list, index) => ({
       ...(linesConfig[index] || {}),
+
       type: 'line',
+      cursor: 'pointer',
+      showInLegend: false,
+
       data: list.map((value) => ({ y: value.value, originalData: value })),
-      // hex to rgb converted, added opacity
-      marker: {
-        enabled: false,
-      },
+
+      marker: { enabled: false },
+      states: { inactive: { opacity: 1 } },
     })),
-    legend: {
-      itemWidth: 300,
-      reversed: true,
-      itemHoverStyle: {
-        color: '#666',
-      },
-      itemStyle: {
-        color: '#666',
-        cursor: 'pointer',
-        fontSize: '12px',
-        fontWeight: 'normal',
-        textOverflow: 'ellipsis',
-      },
-    },
+
     plotOptions: {
       line: {
         marker: {
@@ -190,18 +162,4 @@ function getChartOptions(values: Value[][], linesConfig: LineConfig[]) {
   };
 
   return options;
-}
-
-/**
- * From all the defined values, extract the highest number so we know how to
- * scale the y-axis
- */
-function calculateYMax(values: Value[], signaalwaarde = -Infinity) {
-  const maxValue = values
-    .map((x) => x.value)
-    .filter(isDefined)
-    .reduce((acc, value) => (value > acc ? value : acc), -Infinity);
-
-  // Value cannot be 0, hence the 1
-  return Math.max(maxValue, signaalwaarde + 10, 1);
 }
