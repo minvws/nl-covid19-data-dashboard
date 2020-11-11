@@ -57,6 +57,7 @@ const Cell = styled.td(
     borderBottomColor: 'lightGrey',
     px: 3,
     py: 2,
+    whiteSpace: ['nowrap', null, 'normal'],
   })
 );
 
@@ -155,7 +156,7 @@ export function BehaviorTableTile({ text, behavior }: BehaviorTileProps) {
               <HeaderCell colSpan={2}>
                 {text.basisregels.header_percentage}
               </HeaderCell>
-              <th></th>
+              <th />
               <HeaderCell>{text.basisregels.header_basisregel}</HeaderCell>
               <HeaderCell>{text.basisregels.header_trend}</HeaderCell>
             </tr>
@@ -171,9 +172,13 @@ export function BehaviorTableTile({ text, behavior }: BehaviorTileProps) {
                   <PercentageBar percentage={behavior.percentage ?? 0} />
                 </Cell>
                 <Cell>
-                  <BehaviorIcon name={behavior.id} />
+                  <Box minWidth={32}>
+                    <BehaviorIcon name={behavior.id} />
+                  </Box>
                 </Cell>
-                <Cell>{behavior.description}</Cell>
+                <Cell>
+                  <Box minWidth={220}>{behavior.description}</Box>
+                </Cell>
                 <Cell>
                   <BehaviorTrend text={text} trend={behavior.trend} />
                 </Cell>
