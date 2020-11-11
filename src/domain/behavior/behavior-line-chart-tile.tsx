@@ -10,7 +10,7 @@ import {
 import { isDefined } from 'ts-is-present';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { Value } from '~/components/lineChart/lineChartWithWeekTooltip';
-import { BehaviorIdentifier, behaviorIdentifier } from './types';
+import { BehaviorIdentifier, behaviorIdentifier } from './behavior-types';
 import { MetadataProps } from '~/components-styled/metadata';
 import { Box, Spacer } from '~/components-styled/base';
 
@@ -25,6 +25,7 @@ export function BehaviorLineChartTile({
 }: BehaviorLineChartTileProps) {
   const [type, setType] = useState<BehaviorTypeControlOption>('compliance');
   const [currentId, setCurrentId] = useState<BehaviorIdentifier>('wash_hands');
+  const [hoverId, setHoverId] = useState<BehaviorIdentifier>();
 
   const behaviorIdentifierWithData = behaviorIdentifier
     .map((id) => {
@@ -88,9 +89,10 @@ export function BehaviorLineChartTile({
           })
           .filter(isDefined)
       )}
-      linesConfig={behaviorIdentifierWithData.map(({ id, label }) => ({
-        color: id === currentId ? '#05A0ED' : '#E7E7E7',
-        zIndex: id === currentId ? 1 : 0,
+      isLineCrosshair
+      linesConfig={behaviorIdentifierWithData.map(({ id }) => ({
+        color: [currentId, hoverId].includes(id) ? '#05A0ED' : '#E7E7E7',
+        zIndex: [currentId, hoverId].includes(id) ? 1 : 0,
 
         /**
          *  @TODO
@@ -102,16 +104,20 @@ export function BehaviorLineChartTile({
          * - tooltip max breedte?
          **/
 
-        // enableMouseTracking: id === currentId,
         showInLegend: false,
         events: {
           click: () => setCurrentId(id),
+          mouseOver: () => setHoverId(id),
+          mouseOut: () => setHoverId(undefined),
         },
-        // states: {
-        //   inactive: {
-        //     opacity: 1,
-        //   },
-        // },
+
+        cursor: 'pointer',
+
+        states: {
+          inactive: {
+            opacity: 1,
+          },
+        },
       }))}
       metadata={metadata}
       formatTooltip={({ date, value, week }) =>

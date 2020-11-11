@@ -24,14 +24,18 @@ export interface MultipleLineChartProps {
   timeframeInitialValue?: TimeframeOption;
   timeframeOptions?: TimeframeOption[];
   disableTimeControls?: boolean;
+  shareTooltip?: boolean;
   formatTooltip?: (value: Value) => string;
   formatYAxis?: (value: number) => string;
+  isLineCrosshair?: boolean;
 }
 
 function getChartOptions(
   values: Value[][],
   linesConfig: LineConfig[],
   signaalwaarde?: number,
+  shareTooltip?: boolean,
+  isLineCrosshair?: boolean,
   formatTooltip?: (value: Value) => string,
   formatYAxis?: (value: number) => string
 ) {
@@ -40,9 +44,15 @@ function getChartOptions(
     return Math.max(max, listMax);
   }, 0);
 
-  const categories = values
-    .flatMap((value) => value.map((value) => value.date.toString()))
-    .filter((date, index, self) => self.indexOf(date) === index);
+  const categories = values.flatMap(
+    (value) =>
+      console.log({ value }) ||
+      value.map((value) => value.value && value.date.toString())
+  );
+  // .filter((date, index, self) => self.indexOf(date) === index);
+  console.log(categories);
+
+  // const categories = ['1111', '2222', '3333'];
 
   const options: Highcharts.Options = {
     chart: {
@@ -66,7 +76,7 @@ function getChartOptions(
       title: {
         text: null,
       },
-      categories: categories,
+      categories,
       labels: {
         align: 'right',
         // types say `rotation` needs to be a number,
@@ -78,15 +88,29 @@ function getChartOptions(
             : '';
         },
       },
-      crosshair: true,
+      crosshair: isLineCrosshair
+        ? {
+            color: '#3391CC',
+            width: 1,
+          }
+        : true,
     },
     tooltip: {
       backgroundColor: '#FFF',
       borderColor: '#01689B',
       borderRadius: 0,
-      shared: true,
+      shared: shareTooltip,
       useHTML: true,
       formatter: function (): string {
+        if (!shareTooltip) {
+          const { originalData } = (this.point as unknown) as {
+            originalData: Value;
+          };
+          if (formatTooltip) {
+            return formatTooltip(originalData);
+          }
+        }
+
         const contextObjects = this.points as TooltipFormatterContextObject[];
         const { originalData } = (contextObjects[0].point as unknown) as {
           originalData: Value;
@@ -226,6 +250,8 @@ export function MultipleLineChart({
   disableTimeControls,
   formatTooltip,
   formatYAxis,
+  shareTooltip = false,
+  isLineCrosshair = false,
 }: MultipleLineChartProps) {
   const [timeframe, setTimeframe] = useState<TimeframeOption>(
     timeframeInitialValue
@@ -248,6 +274,8 @@ export function MultipleLineChart({
       filteredValueLists,
       linesConfig,
       signaalwaarde,
+      shareTooltip,
+      isLineCrosshair,
       formatTooltip,
       formatYAxis
     );
@@ -256,8 +284,10 @@ export function MultipleLineChart({
     linesConfig,
     timeframe,
     signaalwaarde,
+    shareTooltip,
     formatTooltip,
     formatYAxis,
+    isLineCrosshair,
   ]);
 
   return (
