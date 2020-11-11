@@ -11,33 +11,26 @@ import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
 import { Value } from './lineChartWithWeekTooltip';
 import styles from './lineChart.module.scss';
 
-type LineConfig = Omit<Highcharts.SeriesLineOptions, 'type'>;
+type LineConfig = {
+  color: string;
+  legendLabel: string;
+};
 
 const SIGNAALWAARDE_Z_INDEX = 5;
 
 export interface MultipleLineChartProps {
   title: string;
-  description?: React.ReactNode;
+  description?: string;
   values: Value[][];
   linesConfig: LineConfig[];
   signaalwaarde?: number;
-  timeframeInitialValue?: TimeframeOption;
   timeframeOptions?: TimeframeOption[];
-  disableTimeControls?: boolean;
-  shareTooltip?: boolean;
-  formatTooltip?: (value: Value) => string;
-  formatYAxis?: (value: number) => string;
-  isLineCrosshair?: boolean;
 }
 
 function getChartOptions(
   values: Value[][],
   linesConfig: LineConfig[],
-  signaalwaarde?: number,
-  shareTooltip?: boolean,
-  isLineCrosshair?: boolean,
-  formatTooltip?: (value: Value) => string,
-  formatYAxis?: (value: number) => string
+  signaalwaarde?: number
 ) {
   const yMax = values.reduce((max, list) => {
     const listMax = calculateYMax(list, signaalwaarde);
@@ -45,9 +38,7 @@ function getChartOptions(
   }, 0);
 
   const categories = values
-    .flatMap((value) =>
-      value.map((value) => (value.value && value.date).toString())
-    )
+    .flatMap((value) => value.map((value) => value.date.toString()))
     .filter((date, index, self) => self.indexOf(date) === index);
 
   const options: Highcharts.Options = {
@@ -72,7 +63,7 @@ function getChartOptions(
       title: {
         text: null,
       },
-      categories,
+      categories: categories,
       labels: {
         align: 'right',
         // types say `rotation` needs to be a number,
@@ -90,28 +81,16 @@ function getChartOptions(
       backgroundColor: '#FFF',
       borderColor: '#01689B',
       borderRadius: 0,
-      shared: shareTooltip,
+      shared: true,
       useHTML: true,
       formatter: function (): string {
-        if (!shareTooltip) {
-          const { originalData } = (this.point as unknown) as {
-            originalData: Value;
-          };
-          if (formatTooltip) {
-            return formatTooltip(originalData);
-          }
-        }
-
         const contextObjects = this.points as TooltipFormatterContextObject[];
+
+        const percentage = (contextObjects[1].y * 100) / contextObjects[0].y;
+
         const { originalData } = (contextObjects[0].point as unknown) as {
           originalData: Value;
         };
-
-        if (formatTooltip) {
-          return formatTooltip(originalData);
-        }
-
-        const percentage = (contextObjects[1].y * 100) / contextObjects[0].y;
 
         return `${formatDateFromSeconds(
           originalData.week.start,
@@ -141,9 +120,7 @@ function getChartOptions(
       },
       labels: {
         formatter: function () {
-          return formatYAxis
-            ? formatYAxis(this.value)
-            : formatNumber(this.value);
+          return formatNumber(this.value);
         },
       },
       plotLines: signaalwaarde
@@ -189,9 +166,11 @@ function getChartOptions(
       text: undefined,
     },
     series: values.map((list, index) => ({
-      ...(linesConfig[index] || {}),
       type: 'line',
       data: list.map((value) => ({ y: value.value, originalData: value })),
+      name: linesConfig[index].legendLabel,
+      showInLegend: true,
+      color: linesConfig[index].color,
       // hex to rgb converted, added opacity
       marker: {
         enabled: false,
@@ -236,17 +215,9 @@ export function MultipleLineChart({
   values,
   linesConfig,
   signaalwaarde,
-  timeframeInitialValue = '5weeks',
   timeframeOptions,
-  disableTimeControls,
-  formatTooltip,
-  formatYAxis,
-  shareTooltip = false,
-  isLineCrosshair = false,
 }: MultipleLineChartProps) {
-  const [timeframe, setTimeframe] = useState<TimeframeOption>(
-    timeframeInitialValue
-  );
+  const [timeframe, setTimeframe] = useState<TimeframeOption>('5weeks');
 
   assert(
     values.length === linesConfig.length,
@@ -261,47 +232,23 @@ export function MultipleLineChart({
         (value: Value) => value.date * 1000
       );
     });
-    return getChartOptions(
-      filteredValueLists,
-      linesConfig,
-      signaalwaarde,
-      shareTooltip,
-      isLineCrosshair,
-      formatTooltip,
-      formatYAxis
-    );
-  }, [
-    values,
-    linesConfig,
-    timeframe,
-    signaalwaarde,
-    shareTooltip,
-    formatTooltip,
-    formatYAxis,
-    isLineCrosshair,
-  ]);
+    return getChartOptions(filteredValueLists, linesConfig, signaalwaarde);
+  }, [values, linesConfig, timeframe, signaalwaarde]);
 
   return (
     <section className={styles.root}>
       <header className={styles.header}>
         <div className={styles.titleAndDescription}>
           {title && <h3>{title}</h3>}
-          {description &&
-            (typeof description === 'string' ? (
-              <p>{description}</p>
-            ) : (
-              description
-            ))}
+          {description && <p>{description}</p>}
         </div>
-        {!disableTimeControls && (
-          <div className={styles.timeControls}>
-            <ChartTimeControls
-              timeframe={timeframe}
-              timeframeOptions={timeframeOptions}
-              onChange={setTimeframe}
-            />
-          </div>
-        )}
+        <div className={styles.timeControls}>
+          <ChartTimeControls
+            timeframe={timeframe}
+            timeframeOptions={timeframeOptions}
+            onChange={setTimeframe}
+          />
+        </div>
       </header>
       <HighchartsReact highcharts={Highcharts} options={chartOptions} />
     </section>
