@@ -89,7 +89,7 @@
     "titel_kpi": "Average number of intensive care admissions in 3 days"
   },
   "verdenkingen_huisartsen": {
-    "datums": "Value of  {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
+    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
     "bron": {
       "href": "https://www.nivel.nl/en/nivel-primary-care-database",
       "text": "Nivel Primary Care Database"
@@ -161,7 +161,7 @@
     "titel_kpi": "Average number of hospital admissions in 3 days"
   },
   "positief_geteste_personen": {
-    "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
+    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -192,7 +192,7 @@
       "80 to 90",
       "90+"
     ],
-    "cluster_datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
+    "cluster_datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "cluster_bron": {
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -219,7 +219,7 @@
   },
   "besmettelijke_personen": {
     "title": "Number of infectious people",
-    "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
+    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/097155aa-75eb-4caa-8ed3-4c6edb80467e",
       "text": "RIVM"
@@ -245,7 +245,7 @@
     "titel_kpi": "Number of infectious people"
   },
   "reproductiegetal": {
-    "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
+    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
     "rangeLegendLabel": "Confidence interval",
     "lineLegendLabel": "Effective R",
     "bron": {
@@ -315,7 +315,7 @@
     "text": "View the most important information for your safety region."
   },
   "verpleeghuis_besmette_locaties": {
-    "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
+    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
@@ -342,7 +342,7 @@
     "titel_kpi": "Number of infected locations"
   },
   "verpleeghuis_positief_geteste_personen": {
-    "datums": "Value of {{dateOfReport}}. Obtained:{{dateOfInsertion}}. Is updated on a daily basis.",
+    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
@@ -367,7 +367,7 @@
     "titel_kpi": "Number of confirmed cases per day"
   },
   "verpleeghuis_oversterfte": {
-    "datums": "Value of  {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
+    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
@@ -395,7 +395,7 @@
     "text": "Select your region at the top of this page"
   },
   "rioolwater_metingen": {
-    "datums": "Value of {{weekStart}} till {{weekEnd}}.  Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
+    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
       "text": "RIVM",
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
@@ -715,7 +715,7 @@
     "titel_sidebar": "Confirmed cases",
     "titel": "Confirmed cases in {{safetyRegion}}",
     "pagina_toelichting": "By keeping track of the number of confirmed cases, we are able to determine the rate at which the virus is spreading before it reaches the intensive care. This keeps us prepared.",
-    "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis. ",
+    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
     "screen_reader_graph_content": "{{value}} confirmed cases.",
     "barscale_titel": "Average number of confirmed cases per 100,000 inhabitants per day",
     "barscale_toelichting": "This figure shows how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
@@ -740,7 +740,7 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
     },
-    "cluster_datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
+    "cluster_datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "cluster_bron": {
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -763,7 +763,7 @@
     "titel_sidebar": "Sewage water examination",
     "titel": "Sewage water examination in {{safetyRegion}}",
     "pagina_toelichting": "Average number of coronavirus particles per 100.000 inhabitants found in wastewater. The weekly average is calculated by adding up all the values measured in this safety region and dividing this by the number of measurements taken.",
-    "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis. ",
+    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "screen_reader_graph_content": "{{value}} virus particles per 100.000 inhabitants",
     "barscale_titel": "Average number of coronavirus particles per 100,000 inhabitants",
     "extra_uitleg": "The weekly average is calculated by adding up all the values measured in one week and dividing this by the number of measurements taken.",
@@ -818,7 +818,7 @@
     "titel_sidebar": "Confirmed cases",
     "titel": "Confirmed cases in {{municipality}}",
     "pagina_toelichting": "By keeping track of the number of confirmed cases, we are able to determine the rate at which the virus is spreading before it reaches the intensive care. This keeps us prepared.",
-    "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
+    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "screen_reader_graph_content": "{{value}} confirmed cases.",
     "barscale_titel": "Average number of confirmed cases per 100,000 inhabitants per day",
     "barscale_toelichting": "This number shows how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
@@ -853,7 +853,7 @@
     "titel_sidebar": "Sewage water examination",
     "titel": "Sewage water examination in {{municipality}}",
     "pagina_toelichting": "Average number of coronavirus particles per 100.000 inhabitants found in wastewater. The weekly average is calculated by adding up all the values measured in this municipality and dividing this by the number of measurements taken.",
-    "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
+    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "screen_reader_graph_content": "{{value}} virus particles per 100.000 inhabitants",
     "barscale_titel": "Average number of virus particles per 100,000 inhabitants",
     "extra_uitleg": "The weekly average for the municipality is calculated by adding up all the values measured in one week and dividing this by the number of measurements taken.",
@@ -940,7 +940,7 @@
     "titel": "Percentage confirmed cases by GGD",
     "summary_title": "{{percentage}} of GGD tests had a positive result",
     "summary_link_cta": "Read more",
-    "datums": "Week of {{weekStart}} to {{weekEnd}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
+    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
     "bron": {
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -971,7 +971,7 @@
     "titel": "Percentage confirmed cases by GGD in {{safetyRegion}}",
     "summary_title": "{{percentage}} of GGD tests had a positive result",
     "summary_link_cta": "Read more",
-    "datums": "Week of {{weekStart}} to {{weekEnd}}. Obtained: {{dateOfInsertion}}. Is updated on a weekly basis.",
+    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
     "bron": {
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
@@ -990,7 +990,7 @@
     "linechart_positivetests_legend_label": "Number of positive tests"
   },
   "veiligheidsregio_verpleeghuis_oversterfte": {
-    "datums": "Value of  {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
+    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
@@ -1010,7 +1010,7 @@
     }
   },
   "veiligheidsregio_verpleeghuis_besmette_locaties": {
-    "datums": "Value of {{dateOfReport}}. Obtained: {{dateOfInsertion}}. Is updated on a daily basis.",
+    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
@@ -1029,7 +1029,7 @@
     }
   },
   "veiligheidsregio_verpleeghuis_positief_geteste_personen": {
-    "datums": "Value of {{dateOfReport}}. Obtained:{{dateOfInsertion}}. Is updated on a daily basis.",
+    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
