@@ -19,7 +19,7 @@ export type BehaviorSubject =
   | 'wear_mask_public_indoors'
   | 'wear_mask_public_transport'
   | 'sneeze_cough_elbow'
-  | 'max_visitors_home';
+  | 'max_visitors';
 
 export interface BehaviorIconProps {
   subject: BehaviorSubject;
@@ -47,7 +47,7 @@ export function BehaviorIcon({
       return IconWearMaskPublicTransport;
     case 'sneeze_cough_elbow':
       return IconSneezeCoughElbow;
-    case 'max_visitors_home':
+    case 'max_visitors':
       return IconMaxVisitorsHome;
     default:
       throw new Error(`Invalid behavior subject: ${subject}`);

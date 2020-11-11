@@ -7,7 +7,7 @@ import PijlOmlaag from '~/assets/pijl_omlaag.svg';
 import { BehaviorTrendType, GedragText } from '../behavior-types';
 
 interface BehaviorTrendProps {
-  trend: BehaviorTrendType;
+  trend: BehaviorTrendType | undefined;
   text: GedragText;
 }
 
@@ -23,7 +23,7 @@ const Trend = styled.span(
 );
 
 export function BehaviorTrend({ text, trend }: BehaviorTrendProps) {
-  if (trend === null) {
+  if (trend === undefined) {
     return <>-</>;
   }
   if (trend === 'up') {

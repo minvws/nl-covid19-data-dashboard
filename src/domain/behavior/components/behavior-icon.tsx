@@ -7,7 +7,7 @@ import symptoms_get_tested from '~/assets/gedrag/symptoms_get_tested.svg';
 import wear_mask_public_indoors from '~/assets/gedrag/wear_mask_public_indoors.svg';
 import wear_mask_public_transport from '~/assets/gedrag/wear_mask_public_transport.svg';
 import sneeze_cough_elbow from '~/assets/gedrag/sneeze_cough_elbow.svg';
-import max_visitors_home from '~/assets/gedrag/max_visitors_home.svg';
+import max_visitors from '~/assets/gedrag/max_visitors.svg';
 import { BehaviorIdentifier } from '../behavior-types';
 
 const icons: Record<BehaviorIdentifier, () => any> = {
@@ -20,7 +20,7 @@ const icons: Record<BehaviorIdentifier, () => any> = {
   wear_mask_public_indoors,
   wear_mask_public_transport,
   sneeze_cough_elbow,
-  max_visitors_home,
+  max_visitors,
 };
 
 interface BehaviorIconProps {

@@ -10,9 +10,9 @@ export type BehaviorIdentifier =
   | 'wear_mask_public_indoors'
   | 'wear_mask_public_transport'
   | 'sneeze_cough_elbow'
-  | 'max_visitors_home';
+  | 'max_visitors';
 
-export type BehaviorTrendType = 'up' | 'down' | 'equal' | null;
+export type BehaviorTrendType = 'up' | 'down' | 'equal';
 
 export type GedragText = typeof siteText.regionaal_gedrag &
   typeof siteText.nl_gedrag;

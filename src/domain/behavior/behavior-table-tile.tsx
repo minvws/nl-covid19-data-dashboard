@@ -28,7 +28,7 @@ const behaviorIdentifiers: BehaviorIdentifier[] = [
   'wear_mask_public_indoors',
   'wear_mask_public_transport',
   'sneeze_cough_elbow',
-  'max_visitors_home',
+  'max_visitors',
 ];
 
 interface BehaviorTileProps {
@@ -39,21 +39,9 @@ interface BehaviorTileProps {
 interface BehaviorFormatted {
   id: BehaviorIdentifier;
   description: string;
-  percentage: number | null;
-  trend: BehaviorTrendType;
+  percentage: number | undefined;
+  trend: BehaviorTrendType | undefined;
 }
-
-const MobileScroll = styled.div(
-  css({
-    overflow: 'auto',
-  })
-);
-
-const Table = styled.table(
-  css({
-    width: '100%',
-  })
-);
 
 const HeaderCell = styled.th(
   css({
@@ -72,12 +60,6 @@ const Cell = styled.td(
   })
 );
 
-const Footnote = styled.p(
-  css({
-    color: 'gray',
-  })
-);
-
 /* Format raw list of behaviors into list for compliance or for support */
 function formatBehaviorType(
   behavior: BehaviorValue,
@@ -87,15 +69,15 @@ function formatBehaviorType(
     const percentage = behavior[
       `${identifier}_${type}` as keyof BehaviorValue
     ] as number | null;
-    const trend = behavior[
+    const trend = (behavior[
       `${identifier}_${type}_trend` as keyof BehaviorValue
-    ] as BehaviorFormatted['trend'] | null;
+    ] ?? undefined) as BehaviorTrendType | null;
 
     return {
       id: identifier,
       description: siteText.gedrag_onderwerpen[identifier],
-      percentage,
-      trend,
+      percentage: percentage ?? undefined,
+      trend: trend ?? undefined,
     };
   });
 }
@@ -138,7 +120,7 @@ function formatAndSortBehavior(
 
 export function BehaviorTableTile({ text, behavior }: BehaviorTileProps) {
   const { sortedCompliance, sortedSupport } = formatAndSortBehavior(behavior);
-  const [behaviorType, onChangeControls] = useState<'compliance' | 'support'>(
+  const [behaviorType, setBehaviorType] = useState<'compliance' | 'support'>(
     'compliance'
   );
 
@@ -146,14 +128,12 @@ export function BehaviorTableTile({ text, behavior }: BehaviorTileProps) {
     <Tile>
       <h3>{text.basisregels.title}</h3>
       <Box display="flex" justifyContent="start">
-        <BehaviorTypeControls
-          onChange={onChangeControls}
-        ></BehaviorTypeControls>
+        <BehaviorTypeControls onChange={setBehaviorType} />
       </Box>
 
       <p>{text.basisregels.intro[behaviorType]}</p>
-      <MobileScroll>
-        <Table>
+      <div css={css({ overflow: 'auto' })}>
+        <table css={css({ width: '100%' })}>
           <thead>
             <tr>
               <HeaderCell colSpan={2}>
@@ -182,9 +162,11 @@ export function BehaviorTableTile({ text, behavior }: BehaviorTileProps) {
               </Cell>
             </tr>
           ))}
-        </Table>
-      </MobileScroll>
-      <Footnote>{text.basisregels.voetnoot[behaviorType]}</Footnote>
+        </table>
+      </div>
+      <p css={css({ color: 'gray' })}>
+        {text.basisregels.voetnoot[behaviorType]}
+      </p>
     </Tile>
   );
 }
