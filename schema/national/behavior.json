@@ -32,7 +32,7 @@
       "type": "object",
       "properties": {
         "number_of_participants": {
-          "type": ["integer", "null"]
+          "type": "integer"
         },
         "wash_hands_compliance": {
           "type": ["integer", "null"]
@@ -155,13 +155,13 @@
           "$ref": "#/definitions/value_trend"
         },
         "week_start_unix": {
-          "type": ["integer", "null"]
+          "type": "integer"
         },
         "week_end_unix": {
-          "type": ["integer", "null"]
+          "type": "integer"
         },
         "date_of_insertion_unix": {
-          "type": ["integer", "null"]
+          "type": "integer"
         }
       },
       "required": [

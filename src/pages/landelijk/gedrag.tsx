@@ -8,6 +8,7 @@ import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRang
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
+import { BehaviorTableTile } from '~/domain/behavior/behavior-table-tile';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 
@@ -56,6 +57,8 @@ const BehaviorPage: FCWithLayout<INationalData> = (props) => {
           <Text>{text.kpi.aantal_respondenten.toelichting}</Text>
         </KpiTile>
       </TwoKpiSection>
+
+      <BehaviorTableTile text={text} behavior={behaviorData.last_value} />
     </>
   );
 };

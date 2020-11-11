@@ -8,6 +8,7 @@ import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRang
 import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { SEOHead } from '~/components/seoHead';
+import { BehaviorTableTile } from '~/domain/behavior/behavior-table-tile';
 import siteText from '~/locale/index';
 import {
   getSafetyRegionData,
@@ -60,6 +61,8 @@ const BehaviorPage: FCWithLayout<ISafetyRegionData> = (props) => {
           <Text>{text.kpi.aantal_respondenten.toelichting}</Text>
         </KpiTile>
       </TwoKpiSection>
+
+      <BehaviorTableTile text={text} behavior={behaviorData.last_value} />
     </>
   );
 };

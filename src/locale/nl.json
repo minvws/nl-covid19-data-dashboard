@@ -169,14 +169,18 @@
     "symptoms_stay_home": "Bij klachten: blijf thuis",
     "symptoms_get_tested": "Bij klachten: laat je testen",
     "wear_mask_public_indoors": "Draag een mondkapje in publieke ruimtes",
-    "wear_mask_public_transport": "Hoest en nies in je elleboog",
-    "sneeze_cough_elbow": "Draag een mondkapje in het OV",
-    "max_visitors_home": "Ontvang het maximaal aantal personen thuis"
+    "wear_mask_public_transport": "Draag een mondkapje in het OV",
+    "sneeze_cough_elbow": "Hoest en nies in je elleboog",
+    "max_visitors": "Ontvang het maximaal aantal personen thuis"
   },
   "nl_gedrag": {
     "metadata": {
       "title": "Naleving en Draagvlak | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Landelijk overzicht van naleving en draagvlak."
+    },
+    "common": {
+      "compliance": "Naleving",
+      "support": "Draagvlak"
     },
     "pagina": {
       "titel": "Naleving en Draagvlak",
@@ -203,6 +207,23 @@
           "href": "link naar de bron"
         }
       }
+    },
+    "basisregels": {
+      "title": "Basisregels",
+      "intro": {
+        "compliance": "Intro naleving",
+        "support": "Intro draagvlak"
+      },
+      "voetnoot": {
+        "compliance": "Voetnoot naleving",
+        "support": "Voetnoot draagvlak"
+      },
+      "header_percentage": "Percentage",
+      "header_basisregel": "Basisregel",
+      "header_trend": "Verschil met vorige meting",
+      "trend_hoger": "hoger",
+      "trend_lager": "lager",
+      "trend_gelijk": "gelijk"
     }
   },
   "regionaal_gedrag": {
@@ -210,6 +231,10 @@
       "title": "Naleving en Draagvlak | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Landelijk overzicht van naleving en draagvlak."
     },
+    "common": {
+      "compliance": "Naleving",
+      "support": "Draagvlak"
+    },
     "pagina": {
       "titel": "Naleving en Draagvlak",
       "toelichting": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dapibus convallis turpis in mattis. In pellentesque a dui sit amet dapibus. Sed lacus quam, facilisis egestas condimentum ac, suscipit sed eros. Aenean placerat velit porta ornare tincidunt. Cras gravida, mauris ut efficitur maximus, nisi leo accumsan mauris, at luctus ipsum felis eget purus."
@@ -235,6 +260,23 @@
           "href": "link naar de bron"
         }
       }
+    },
+    "basisregels": {
+      "title": "Basisregels",
+      "intro": {
+        "compliance": "Intro naleving",
+        "support": "Intro draagvlak"
+      },
+      "voetnoot": {
+        "compliance": "Voetnoot naleving",
+        "support": "Voetnoot draagvlak"
+      },
+      "header_percentage": "Percentage",
+      "header_basisregel": "Basisregel",
+      "header_trend": "Verschil met vorige meting",
+      "trend_hoger": "hoger",
+      "trend_lager": "lager",
+      "trend_gelijk": "gelijk"
     }
   },
   "positief_geteste_personen": {

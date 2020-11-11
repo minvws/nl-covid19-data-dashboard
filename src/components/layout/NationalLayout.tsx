@@ -310,6 +310,21 @@ function NationalLayout(props: NationalLayoutProps) {
               </li>
 
               <li>
+                <Link href="/landelijk/gedrag">
+                  <a
+                    onClick={blur}
+                    className={getClassName('/landelijk/gedrag')}
+                  >
+                    <TitleWithIcon
+                      Icon={Gedrag}
+                      title={siteText.nl_gedrag.sidebar.titel}
+                    />
+                    <span>@TODO sidebar metric gedrag</span>
+                  </a>
+                </Link>
+              </li>
+
+              <li>
                 <Link href="/landelijk/verpleeghuis-sterfte">
                   <a
                     onClick={blur}
