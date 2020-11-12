@@ -552,6 +552,7 @@ export interface RegionalRestrictionValue {
     | "algemeen";
   restriction_order: number;
   valid_from_unix: number;
+  vrcode: string;
 }
 
 export interface Regions {

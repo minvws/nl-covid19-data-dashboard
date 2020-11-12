@@ -22,7 +22,8 @@
         "escalation_level",
         "category_id",
         "restriction_order",
-        "valid_from_unix"
+        "valid_from_unix",
+        "vrcode"
       ],
       "properties": {
         "restriction_id": {
@@ -63,6 +64,10 @@
         },
         "valid_from_unix": {
           "type": "integer"
+        },
+        "vrcode": {
+          "type": "string",
+          "equalsRootProperty": "code"
         }
       }
     }
