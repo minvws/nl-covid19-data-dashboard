@@ -10,8 +10,8 @@ interface ChartTimeControlsProps {
 
 export function ChartTimeControls(props: ChartTimeControlsProps) {
   const {
-    timeframe,
     onChange,
+    timeframe,
     timeframeOptions = ['all', '5weeks', 'week'],
   } = props;
 
