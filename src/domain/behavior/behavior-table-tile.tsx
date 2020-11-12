@@ -7,29 +7,17 @@ import { PercentageBar } from '~/components-styled/percentage-bar';
 import { NationalBehaviorValue, RegionalBehaviorValue } from '~/types/data';
 import { formatPercentage } from '~/utils/formatNumber';
 import {
+  behaviorIdentifiers,
   BehaviorIdentifier,
   BehaviorTrendType,
   GedragText,
 } from './behavior-types';
 import { BehaviorIcon } from './components/behavior-icon';
 import { BehaviorTrend } from './components/behavior-trend';
-import { BehaviorTypeControls } from './components/behavior-type-controls';
+import { BehaviorTypeControl } from './components/behavior-type-control';
 import siteText from '~/locale/index';
 
 type BehaviorValue = NationalBehaviorValue | RegionalBehaviorValue;
-
-const behaviorIdentifiers: BehaviorIdentifier[] = [
-  'wash_hands',
-  'keep_distance',
-  'work_from_home',
-  'avoid_crowds',
-  'symptoms_stay_home',
-  'symptoms_get_tested',
-  'wear_mask_public_indoors',
-  'wear_mask_public_transport',
-  'sneeze_cough_elbow',
-  'max_visitors',
-];
 
 interface BehaviorTileProps {
   text: GedragText;
@@ -57,6 +45,7 @@ const Cell = styled.td(
     borderBottomColor: 'lightGrey',
     px: 3,
     py: 2,
+    whiteSpace: ['nowrap', null, 'normal'],
   })
 );
 
@@ -125,10 +114,26 @@ export function BehaviorTableTile({ text, behavior }: BehaviorTileProps) {
   );
 
   return (
-    <Tile>
+    <Tile
+      /**
+       * The mb here could alternatively be applied using a <Spacer/> in the
+       * page markup. It's a choice, whether we like to include the bottom
+       * margin on all our commonly used components or keep everything flexible
+       * and use spacers in the context where the component is used.
+       */
+      mb={4}
+      /**
+       * The ml and mr negative margins should not be part of this component
+       * ideally, but are the results of the page layout having paddings even on
+       * small screens. We can remove this once we make all page section
+       * elements full-width and remove the padding from the page layout.
+       */
+      ml={{ _: -4, sm: 0 }}
+      mr={{ _: -4, sm: 0 }}
+    >
       <h3>{text.basisregels.title}</h3>
       <Box display="flex" justifyContent="start">
-        <BehaviorTypeControls onChange={setBehaviorType} />
+        <BehaviorTypeControl value={behaviorType} onChange={setBehaviorType} />
       </Box>
 
       <p>{text.basisregels.intro[behaviorType]}</p>
@@ -139,29 +144,35 @@ export function BehaviorTableTile({ text, behavior }: BehaviorTileProps) {
               <HeaderCell colSpan={2}>
                 {text.basisregels.header_percentage}
               </HeaderCell>
-              <th></th>
+              <th />
               <HeaderCell>{text.basisregels.header_basisregel}</HeaderCell>
               <HeaderCell>{text.basisregels.header_trend}</HeaderCell>
             </tr>
           </thead>
-          {(behaviorType === 'compliance'
-            ? sortedCompliance
-            : sortedSupport
-          ).map((behavior) => (
-            <tr key={behavior.id}>
-              <Cell>{formatPercentage(behavior.percentage ?? 0)}%</Cell>
-              <Cell>
-                <PercentageBar percentage={behavior.percentage ?? 0} />
-              </Cell>
-              <Cell>
-                <BehaviorIcon name={behavior.id} />
-              </Cell>
-              <Cell>{behavior.description}</Cell>
-              <Cell>
-                <BehaviorTrend text={text} trend={behavior.trend} />
-              </Cell>
-            </tr>
-          ))}
+          <tbody>
+            {(behaviorType === 'compliance'
+              ? sortedCompliance
+              : sortedSupport
+            ).map((behavior) => (
+              <tr key={behavior.id}>
+                <Cell>{formatPercentage(behavior.percentage ?? 0)}%</Cell>
+                <Cell>
+                  <PercentageBar percentage={behavior.percentage ?? 0} />
+                </Cell>
+                <Cell>
+                  <Box minWidth={32}>
+                    <BehaviorIcon name={behavior.id} />
+                  </Box>
+                </Cell>
+                <Cell>
+                  <Box minWidth={220}>{behavior.description}</Box>
+                </Cell>
+                <Cell>
+                  <BehaviorTrend text={text} trend={behavior.trend} />
+                </Cell>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
       <p css={css({ color: 'gray' })}>

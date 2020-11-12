@@ -13,6 +13,9 @@ interface BehaviorTrendProps {
 
 const Trend = styled.span(
   css({
+    whiteSpace: 'nowrap',
+    display: 'inline-block',
+
     svg: {
       color: '#0090DB',
       mr: 1,

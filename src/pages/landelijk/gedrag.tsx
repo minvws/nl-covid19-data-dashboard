@@ -9,6 +9,7 @@ import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
 import { BehaviorTableTile } from '~/domain/behavior/behavior-table-tile';
+import { BehaviorLineChartTile } from '~/domain/behavior/behavior-line-chart-tile';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 
@@ -59,6 +60,11 @@ const BehaviorPage: FCWithLayout<INationalData> = (props) => {
       </TwoKpiSection>
 
       <BehaviorTableTile text={text} behavior={behaviorData.last_value} />
+
+      <BehaviorLineChartTile
+        values={behaviorData.values}
+        metadata={{ source: text.bron }}
+      />
     </>
   );
 };
