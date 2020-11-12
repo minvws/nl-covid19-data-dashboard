@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import { Box } from '~/components-styled/base';
 import { Cell, Row, Table, TableBody } from '~/components-styled/layout/table';
 import { Text } from '~/components-styled/typography';
-import { regionThresholds } from '~/components/choropleth/regionThresholds';
+import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import siteText from '~/locale/index';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { RestrictionsTableData } from '~/utils/useRestrictionsTable';

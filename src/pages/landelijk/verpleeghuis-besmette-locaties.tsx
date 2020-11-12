@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
 import Locatie from '~/assets/locaties.svg';
 import { LineChart } from '~/components/charts/index';
-import { ChoroplethLegenda } from '~/components/choropleth/legenda/ChoroplethLegenda';
-import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/useSafetyRegionLegendaData';
-import { SafetyRegionChoropleth } from '~/components/choropleth/SafetyRegionChoropleth';
-import { createSelectRegionHandler } from '~/components/choropleth/selectHandlers/createSelectRegionHandler';
-import { createInfectedLocationsRegionalTooltip } from '~/components/choropleth/tooltips/region/createInfectedLocationsRegionalTooltip';
+import { ChoroplethLegenda } from '~/components-styled/choropleth-legenda';
+import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/use-safety-region-legenda-data';
+import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
+import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
+import { createInfectedLocationsRegionalTooltip } from '~/components/choropleth/tooltips/region/create-infected-locations-regional-tooltip';
 import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/contentHeader';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
@@ -35,7 +35,7 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
         description={text.metadata.description}
       />
       <ContentHeader
-        category={siteText.nationaal_layout.headings.verpleeghuis}
+        category={siteText.nationaal_layout.headings.verpleeghuizen}
         title={text.titel}
         Icon={Locatie}
         subtitle={text.pagina_toelichting}
@@ -114,10 +114,7 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
             date: value.date_of_report_unix,
           }))}
         />
-        <Metadata
-          date={data.last_value.date_of_report_unix}
-          source={text.bron}
-        />
+        <Metadata source={text.bron} />
       </article>
     </>
   );

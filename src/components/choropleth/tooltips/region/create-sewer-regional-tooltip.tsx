@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
 import { RegionalSewerValue } from '~/types/data';
 import { formatNumber } from '~/utils/formatNumber';
-import { createSelectRegionHandler } from '../../selectHandlers/createSelectRegionHandler';
+import { createSelectRegionHandler } from '../../select-handlers/create-select-region-handler';
 import { SafetyRegionProperties } from '../../shared';
 import siteText from '~/locale/index';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';

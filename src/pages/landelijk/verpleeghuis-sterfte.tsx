@@ -21,7 +21,7 @@ const NursingHomeDeaths: FCWithLayout<INationalData> = (props) => {
         description={text.metadata.description}
       />
       <ContentHeader
-        category={siteText.nationaal_layout.headings.verpleeghuis}
+        category={siteText.nationaal_layout.headings.verpleeghuizen}
         title={text.titel}
         Icon={CoronaVirus}
         subtitle={text.pagina_toelichting}
@@ -61,10 +61,7 @@ const NursingHomeDeaths: FCWithLayout<INationalData> = (props) => {
               date: value.date_of_report_unix,
             }))}
           />
-          <Metadata
-            date={data.last_value.date_of_report_unix}
-            source={text.bron}
-          />
+          <Metadata source={text.bron} />
         </article>
       )}
     </>

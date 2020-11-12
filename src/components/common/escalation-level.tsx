@@ -1,12 +1,12 @@
-import { regionThresholds } from '~/components/choropleth/regionThresholds';
-import { ChoroplethThresholds } from '../choropleth/shared';
 import EscalationLevel1 from '~/assets/niveau-1.svg';
 import EscalationLevel2 from '~/assets/niveau-2.svg';
 import EscalationLevel3 from '~/assets/niveau-3.svg';
 import EscalationLevel4 from '~/assets/niveau-4.svg';
-import siteText from '~/locale/index';
 import { Box } from '~/components-styled/base';
 import { Text } from '~/components-styled/typography';
+import { regionThresholds } from '~/components/choropleth/region-thresholds';
+import siteText from '~/locale/index';
+import { ChoroplethThresholds } from '../choropleth/shared';
 
 const escalationThresholds = (regionThresholds.escalation_levels as ChoroplethThresholds)
   .thresholds;

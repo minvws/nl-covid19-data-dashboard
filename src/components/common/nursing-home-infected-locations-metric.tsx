@@ -16,10 +16,7 @@ export function NursingHomeInfectedLocationsMetric(props: {
   if (!data) return null;
 
   const description = replaceVariablesInText(text.dateOfReport, {
-    dateOfReport: formatDateFromSeconds(
-      data.date_of_insertion_unix,
-      'relative'
-    ),
+    dateOfReport: formatDateFromSeconds(data.date_of_report_unix, 'medium'),
   });
 
   return (

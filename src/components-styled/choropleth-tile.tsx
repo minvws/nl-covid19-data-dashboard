@@ -1,7 +1,7 @@
 import {
   ChoroplethLegenda,
-  ILegendaItem,
-} from '~/components/choropleth/legenda/ChoroplethLegenda';
+  LegendaItem,
+} from '~/components-styled/choropleth-legenda';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { Box } from './base';
 import {
@@ -29,7 +29,7 @@ interface ChoroplethTileProps extends DataProps {
   children: React.ReactNode;
   legend?: {
     title: string;
-    items: ILegendaItem[];
+    items: LegendaItem[];
   };
   metadata?: MetadataProps;
 }
@@ -50,7 +50,7 @@ export function ChoroplethTile<T>({
   return (
     <Tile mb={4} ml={{ _: -4, sm: 0 }} mr={{ _: -4, sm: 0 }}>
       <Box display="flex" flexDirection={{ _: 'column', lg: 'row' }}>
-        <Box flex={{ lg: 1 }}>
+        <Box mb={3} flex={{ lg: 1 }}>
           <div>
             <Box mb={[0, 2]}>
               <Heading level={3}>{title}</Heading>

@@ -30,6 +30,7 @@ import { Metadata } from '~/components-styled/metadata';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
+import css from '@styled-system/css';
 
 const text = siteText.veiligheidsregio_rioolwater_metingen;
 
@@ -70,7 +71,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
         })}
       />
       <ContentHeader_weekRangeHack
-        category={siteText.veiligheidsregio_layout.headings.overig}
+        category={siteText.veiligheidsregio_layout.headings.vroege_signalen}
         title={replaceVariablesInText(text.titel, {
           safetyRegion: safetyRegionName,
         })}
@@ -91,7 +92,10 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
             title={text.barscale_titel}
             description={text.extra_uitleg}
             metadata={{
-              date: sewerAverages.last_value.week_end_unix,
+              date: [
+                sewerAverages.last_value.week_start_unix,
+                sewerAverages.last_value.week_end_unix,
+              ],
               source: text.bron,
             }}
           >
@@ -107,7 +111,10 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
               `<p style="color:#595959">${text.rwzi_abbrev}</p>`
             }
             metadata={{
-              date: sewerAverages.last_value.week_end_unix,
+              date: [
+                sewerAverages.last_value.week_start_unix,
+                sewerAverages.last_value.week_end_unix,
+              ],
               source: text.bron,
             }}
           >
@@ -120,7 +127,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
 
       <article className="metric-article">
         <div className="metric-article-header">
-          <h3>{text.linechart_titel}</h3>
+          <h3 css={css({ mr: 3, flex: 1 })}>{text.linechart_titel}</h3>
           <ChartTimeControls
             timeframeOptions={['all', '5weeks']}
             timeframe={timeframe}
@@ -155,10 +162,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
           </>
         )}
 
-        <Metadata
-          date={sewerAverages.last_value.week_end_unix}
-          source={text.bron}
-        />
+        <Metadata source={text.bron} />
       </article>
 
       {barChartData && (
@@ -175,7 +179,10 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
             valueAnnotation={siteText.waarde_annotaties.riool_normalized}
           />
           <Metadata
-            date={sewerAverages.last_value.week_end_unix}
+            date={[
+              sewerAverages.last_value.week_start_unix,
+              sewerAverages.last_value.week_end_unix,
+            ]}
             source={text.bron}
           />
         </article>

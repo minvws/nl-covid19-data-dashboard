@@ -60,7 +60,8 @@ export function getInstallationNames(data: Regionaal): string[] {
   return data.sewer_per_installation.values
     .flatMap((value) => value.values)
     .map((value) => value.rwzi_awzi_name)
-    .filter((value, index, arr) => arr.indexOf(value) === index);
+    .filter((value, index, arr) => arr.indexOf(value) === index)
+    .sort((a, b) => a.localeCompare(b));
 }
 
 export function getSewerWaterScatterPlotData(

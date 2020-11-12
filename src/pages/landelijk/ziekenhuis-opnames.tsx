@@ -6,14 +6,14 @@ import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { ChartRegionControls } from '~/components-styled/chart-region-controls';
-import { ChoroplethLegenda } from '~/components/choropleth/legenda/ChoroplethLegenda';
-import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/useSafetyRegionLegendaData';
-import { MunicipalityChoropleth } from '~/components/choropleth/MunicipalityChoropleth';
-import { SafetyRegionChoropleth } from '~/components/choropleth/SafetyRegionChoropleth';
-import { createSelectMunicipalHandler } from '~/components/choropleth/selectHandlers/createSelectMunicipalHandler';
-import { createSelectRegionHandler } from '~/components/choropleth/selectHandlers/createSelectRegionHandler';
-import { createMunicipalHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/municipal/createMunicipalHospitalAdmissionsTooltip';
-import { createRegionHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/region/createRegionHospitalAdmissionsTooltip';
+import { ChoroplethLegenda } from '~/components-styled/choropleth-legenda';
+import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/use-safety-region-legenda-data';
+import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
+import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
+import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
+import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
+import { createMunicipalHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/municipal/create-municipal-hospital-admissions-tooltip';
+import { createRegionHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/region/create-region-hospital-admissions-tooltip';
 import { ContentHeader_sourcesHack } from '~/components/contentHeader_sourcesHack';
 import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-barscale';
 import { FCWithLayout } from '~/components/layout';
@@ -44,7 +44,7 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
         description={text.metadata.description}
       />
       <ContentHeader_sourcesHack
-        category={siteText.nationaal_layout.headings.medisch}
+        category={siteText.nationaal_layout.headings.ziekenhuizen}
         title={text.titel}
         Icon={Ziekenhuis}
         subtitle={text.pagina_toelichting}
@@ -91,7 +91,6 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
         }))}
         signaalwaarde={40}
         metadata={{
-          date: dataIntake.last_value.date_of_report_unix,
           source: text.bronnen.rivm,
         }}
       />
@@ -104,7 +103,6 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
           date: value.date_of_report_unix,
         }))}
         metadata={{
-          date: dataIntake.last_value.date_of_report_unix,
           source: text.bronnen.lnaz,
         }}
       />

@@ -1,33 +1,30 @@
-import classNames from 'classnames';
-import { SafetyRegionProperties, TMunicipalityMetricName } from './shared';
-
-import { Choropleth } from './Choropleth';
 import { Feature, GeoJsonProperties, MultiPolygon } from 'geojson';
-import { useChartDimensions } from './hooks/useChartDimensions';
-
-import styles from './choropleth.module.scss';
 import { CSSProperties, ReactNode, useCallback } from 'react';
-import { Municipalities } from '~/types/data';
-import { useMunicipalityData } from './hooks/useMunicipalityData';
-import { useChoroplethColorScale } from './hooks/useChoroplethColorScale';
-import { useMunicipalityBoundingbox } from './hooks/useMunicipalityBoundingbox';
-import { MunicipalityProperties } from './shared';
-import { useRegionMunicipalities } from './hooks/useRegionMunicipalities';
+import { Choropleth } from './choropleth';
+import styles from './choropleth.module.scss';
+import {
+  useChartDimensions,
+  useChoroplethColorScale,
+  useMunicipalityBoundingbox,
+  useMunicipalityData,
+  useRegionMunicipalities,
+} from './hooks';
+import { municipalThresholds } from './municipal-thresholds';
+import { Path } from './path';
+import {
+  MunicipalityProperties,
+  SafetyRegionProperties,
+  TMunicipalityMetricName,
+} from './shared';
 import { countryGeo, municipalGeo, regionGeo } from './topology';
-import { municipalThresholds } from './municipalThresholds';
 
-export type TProps<
-  T extends TMunicipalityMetricName,
-  ItemType extends Municipalities[T][number],
-  ReturnType extends ItemType & { value: number },
-  TContext extends ReturnType | MunicipalityProperties
-> = {
-  metricName?: T;
+export type TProps = {
+  metricName?: TMunicipalityMetricName;
   selected?: string;
   highlightSelection?: boolean;
   style?: CSSProperties;
-  onSelect?: (context: TContext) => void;
-  tooltipContent?: (context: TContext) => ReactNode;
+  onSelect?: (context: MunicipalityProperties) => void;
+  tooltipContent?: (context: MunicipalityProperties) => ReactNode;
   isSelectorMap?: boolean;
 };
 
@@ -45,12 +42,7 @@ export type TProps<
  *
  * @param props
  */
-export function MunicipalityChoropleth<
-  T extends TMunicipalityMetricName,
-  ItemType extends Municipalities[T][number],
-  ReturnType extends ItemType & { value: number },
-  TContext extends ReturnType | MunicipalityProperties
->(props: TProps<T, ItemType, ReturnType, TContext>) {
+export function MunicipalityChoropleth(props: TProps) {
   const {
     selected,
     style,
@@ -75,6 +67,7 @@ export function MunicipalityChoropleth<
   const thresholdValues = metricName
     ? municipalThresholds[metricName]
     : undefined;
+
   const getFillColor = useChoroplethColorScale(
     getData,
     thresholdValues?.thresholds
@@ -88,26 +81,21 @@ export function MunicipalityChoropleth<
     ) => {
       const { gemcode } = feature.properties;
       const isInSameRegion =
-        (safetyRegionMunicipalCodes?.indexOf(gemcode) ?? 0) > -1;
-      const className = classNames(
-        !hasData ? styles.noData : undefined,
-        isInSameRegion ? undefined : styles.faded
-      );
-
-      const fillColor = isInSameRegion ? getFillColor(gemcode) : 'white';
+        safetyRegionMunicipalCodes?.includes(gemcode) ?? true;
+      const fill = isInSameRegion ? getFillColor(gemcode) : 'white';
 
       return (
-        <path
-          className={className}
-          shapeRendering="optimizeQuality"
-          data-id={gemcode}
-          key={`municipality-map-feature-${gemcode}`}
+        <Path
+          key={gemcode}
+          id={gemcode}
           d={path}
-          fill={fillColor}
+          fill={hasData && fill ? fill : '#fff'}
+          stroke={isSelectorMap ? '#01689b' : selected ? '#fff' : '#c4c4c4'}
+          strokeWidth={0.5}
         />
       );
     },
-    [getFillColor, hasData, safetyRegionMunicipalCodes]
+    [getFillColor, hasData, safetyRegionMunicipalCodes, selected, isSelectorMap]
   );
 
   const overlayCallback = useCallback(
@@ -120,17 +108,15 @@ export function MunicipalityChoropleth<
       _index: number
     ) => {
       const { vrcode } = feature.properties as SafetyRegionProperties;
-      const className = classNames(
-        hasData && vrcode !== selectedVrCode ? styles.faded : styles.overlay
-      );
-
       return (
-        <path
-          className={className}
-          shapeRendering="optimizeQuality"
-          key={`municipality-map-overlay-${vrcode}`}
+        <Path
+          key={vrcode}
           d={path}
-          fill={'none'}
+          fill="none"
+          stroke={
+            hasData && vrcode !== selectedVrCode ? '#c4c4c4' : 'transparent'
+          }
+          strokeWidth={0.5}
         />
       );
     },
@@ -140,28 +126,33 @@ export function MunicipalityChoropleth<
   const hoverCallback = useCallback(
     (feature: Feature<MultiPolygon, MunicipalityProperties>, path: string) => {
       const { gemcode } = feature.properties;
-      const isInSameRegion =
-        (safetyRegionMunicipalCodes?.indexOf(gemcode) ?? 0) > -1;
       const isSelected = gemcode === selected && highlightSelection;
-      const className = classNames(
-        isSelected ? styles.selectedPath : styles.hoverLayer
-      );
+      const isInSameRegion =
+        safetyRegionMunicipalCodes?.includes(gemcode) ?? true;
 
       if (hasData && selected && !isInSameRegion) {
         return null;
       }
 
       return (
-        <path
-          className={className}
-          data-id={gemcode}
-          shapeRendering="optimizeQuality"
-          key={`municipality-map-hover-${gemcode}`}
+        <Path
+          hoverable
+          id={gemcode}
+          key={gemcode}
           d={path}
+          stroke={isSelectorMap ? '#01689b' : isSelected ? '#000' : undefined}
+          strokeWidth={isSelected ? 3 : undefined}
+          fill={isSelectorMap ? '#01689b' : undefined}
         />
       );
     },
-    [hasData, selected, highlightSelection, safetyRegionMunicipalCodes]
+    [
+      selected,
+      highlightSelection,
+      safetyRegionMunicipalCodes,
+      hasData,
+      isSelectorMap,
+    ]
   );
 
   const onClick = (id: string) => {
@@ -184,7 +175,7 @@ export function MunicipalityChoropleth<
       <Choropleth
         featureCollection={municipalGeo}
         overlays={overlays}
-        hovers={hasData ? municipalGeo : undefined}
+        hovers={hasData || isSelectorMap ? municipalGeo : undefined}
         boundingBox={boundingbox || countryGeo}
         dimensions={dimensions}
         featureCallback={featureCallback}
@@ -192,7 +183,6 @@ export function MunicipalityChoropleth<
         hoverCallback={hoverCallback}
         onPathClick={onClick}
         getTooltipContent={getTooltipContent}
-        isSelectorMap={isSelectorMap}
       />
     </div>
   );

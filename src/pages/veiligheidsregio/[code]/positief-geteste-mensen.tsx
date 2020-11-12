@@ -8,10 +8,10 @@ import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
-import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/useSafetyRegionLegendaData';
-import { MunicipalityChoropleth } from '~/components/choropleth/MunicipalityChoropleth';
-import { createSelectMunicipalHandler } from '~/components/choropleth/selectHandlers/createSelectMunicipalHandler';
-import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/createPositiveTestedPeopleMunicipalTooltip';
+import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/use-safety-region-legenda-data';
+import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
+import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
+import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
 import { ContentHeader } from '~/components/contentHeader';
 import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRangeHack';
 import { FCWithLayout } from '~/components/layout';
@@ -60,7 +60,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
         })}
       />
       <ContentHeader
-        category={siteText.veiligheidsregio_layout.headings.medisch}
+        category={siteText.veiligheidsregio_layout.headings.besmettingen}
         title={replaceVariablesInText(text.titel, {
           safetyRegion: safetyRegionName,
         })}
@@ -69,7 +69,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
         metadata={{
           datumsText: text.datums,
           dateUnix: resultsPerRegion.last_value.date_of_report_unix,
-          dateInsertedUnix: resultsPerRegion.last_value?.date_of_insertion_unix,
+          dateInsertedUnix: resultsPerRegion.last_value.date_of_insertion_unix,
           dataSource: text.bron,
         }}
       />
@@ -134,7 +134,6 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           date: value.date_of_report_unix,
         }))}
         metadata={{
-          date: resultsPerRegion.last_value.date_of_report_unix,
           source: text.bron,
         }}
       />
@@ -187,7 +186,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
         <KpiTile
           title={ggdText.totaal_getest_week_titel}
           metadata={{
-            date: ggdData.week_end_unix,
+            date: [ggdData.week_start_unix, ggdData.week_end_unix],
             source: ggdText.bron,
           }}
         >
@@ -197,7 +196,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
         <KpiTile
           title={ggdText.positief_getest_week_titel}
           metadata={{
-            date: ggdData.week_end_unix,
+            date: [ggdData.week_start_unix, ggdData.week_end_unix],
             source: ggdText.bron,
           }}
         >
@@ -256,7 +255,6 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           return `${formatPercentage(y)}%`;
         }}
         metadata={{
-          date: ggdData.week_end_unix,
           source: ggdText.bron,
         }}
       />
@@ -294,7 +292,6 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           },
         ]}
         metadata={{
-          date: ggdData.week_end_unix,
           source: ggdText.bron,
         }}
       />

@@ -128,8 +128,12 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
         />
       </Head>
       <div
-        className={`municipality-layout has-menu-${
-          isMainRoute ? 'and-content-opened' : isMenuOpen ? 'opened' : 'closed'
+        className={`municipality-layout ${
+          isMainRoute
+            ? 'has-menu-and-content-opened'
+            : isMenuOpen
+            ? 'has-menu-opened'
+            : 'has-menu-closed'
         }`}
       >
         <Link href="/gemeente/[code]" as={`/gemeente/${code}`}>
@@ -161,7 +165,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                   </p>
                 )}
               </div>
-              <h2>{siteText.nationaal_layout.headings.medisch}</h2>
+              <h2>{siteText.gemeente_layout.headings.besmettingen}</h2>
               <ul>
                 <li>
                   <Link
@@ -189,7 +193,10 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                     </a>
                   </Link>
                 </li>
+              </ul>
 
+              <h2>{siteText.gemeente_layout.headings.ziekenhuizen}</h2>
+              <ul>
                 <li>
                   <Link
                     href="/gemeente/[code]/ziekenhuis-opnames"
@@ -218,7 +225,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                 </li>
               </ul>
 
-              <h2>{siteText.nationaal_layout.headings.overig}</h2>
+              <h2>{siteText.gemeente_layout.headings.vroege_signalen}</h2>
               <ul>
                 <li>
                   {sewerWaterBarScaleData ? (

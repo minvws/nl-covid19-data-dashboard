@@ -12,13 +12,13 @@ import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
 import { BarChart } from '~/components/charts/index';
-import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/useSafetyRegionLegendaData';
-import { MunicipalityChoropleth } from '~/components/choropleth/MunicipalityChoropleth';
-import { SafetyRegionChoropleth } from '~/components/choropleth/SafetyRegionChoropleth';
-import { createSelectMunicipalHandler } from '~/components/choropleth/selectHandlers/createSelectMunicipalHandler';
-import { createSelectRegionHandler } from '~/components/choropleth/selectHandlers/createSelectRegionHandler';
-import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/createPositiveTestedPeopleMunicipalTooltip';
-import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/createPositiveTestedPeopleRegionalTooltip';
+import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/use-safety-region-legenda-data';
+import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
+import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
+import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
+import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
+import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
+import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/create-positive-tested-people-regional-tooltip';
 import { ContentHeader } from '~/components/contentHeader';
 import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRangeHack';
 import { PositiveTestedPeopleBarScale } from '~/components/landelijk/positive-tested-people-barscale';
@@ -72,14 +72,14 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         description={text.metadata.description}
       />
       <ContentHeader
-        category={siteText.nationaal_layout.headings.medisch}
+        category={siteText.nationaal_layout.headings.besmettingen}
         title={text.titel}
         Icon={Getest}
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: delta?.last_value?.date_of_report_unix,
-          dateInsertedUnix: delta?.last_value?.date_of_insertion_unix,
+          dateUnix: delta.last_value.date_of_report_unix,
+          dateInsertedUnix: delta.last_value.date_of_insertion_unix,
           dataSource: text.bron,
         }}
       />
@@ -89,7 +89,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           title={text.barscale_titel}
           data-cy="infected_daily_increase"
           metadata={{
-            date: delta?.last_value?.date_of_report_unix,
+            date: delta.last_value.date_of_report_unix,
             source: text.bron,
           }}
         >
@@ -102,7 +102,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         <KpiTile
           title={text.kpi_titel}
           metadata={{
-            date: delta?.last_value?.date_of_report_unix,
+            date: delta.last_value.date_of_report_unix,
             source: text.bron,
           }}
         >
@@ -138,7 +138,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         data-cy="chloropleths"
         title={text.map_titel}
         metadata={{
-          date: delta?.last_value?.date_of_report_unix,
+          date: delta.last_value.date_of_report_unix,
           source: text.bron,
         }}
         description={text.map_toelichting}
@@ -188,7 +188,6 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           date: value.date_of_report_unix,
         }))}
         metadata={{
-          date: delta?.last_value?.date_of_report_unix,
           source: text.bron,
         }}
       />
@@ -215,7 +214,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           />
         </Box>
         <Metadata
-          date={delta?.last_value?.date_of_report_unix}
+          date={delta.last_value.date_of_report_unix}
           source={text.bron}
         />
       </KpiSection>
@@ -238,7 +237,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         <KpiTile
           title={ggdText.totaal_getest_week_titel}
           metadata={{
-            date: ggdLastValue.week_end_unix,
+            date: [ggdLastValue.week_start_unix, ggdLastValue.week_end_unix],
             source: ggdText.bron,
           }}
         >
@@ -248,7 +247,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         <KpiTile
           title={ggdText.positief_getest_week_titel}
           metadata={{
-            date: ggdLastValue.week_end_unix,
+            date: [ggdLastValue.week_start_unix, ggdLastValue.week_end_unix],
             source: ggdText.bron,
           }}
         >
@@ -307,7 +306,6 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           return `${formatPercentage(y)}%`;
         }}
         metadata={{
-          date: ggdLastValue.week_end_unix,
           source: ggdText.bron,
         }}
       />
@@ -344,7 +342,6 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           },
         ]}
         metadata={{
-          date: ggdLastValue.week_end_unix,
           source: ggdText.bron,
         }}
       />
