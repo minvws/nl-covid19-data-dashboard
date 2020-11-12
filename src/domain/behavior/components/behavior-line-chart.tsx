@@ -3,9 +3,13 @@ import HighchartsReact from 'highcharts-react-official';
 import React from 'react';
 import { assert } from '~/utils/assert';
 import { formatDateFromSeconds } from '~/utils/formatDate';
-import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
+import { getFilteredValues } from '~/utils/timeframe';
 
-type LineConfig = Omit<Highcharts.SeriesLineOptions, 'type'>;
+interface LineConfig<T> {
+  id: T;
+  isSelected: boolean;
+  onClick: (id: T) => void;
+}
 
 export interface Value {
   date: number;
@@ -19,36 +23,33 @@ interface Week {
   end: number;
 }
 
-interface MultipleLineChartProps {
+interface MultipleLineChartProps<T> {
   values: Value[][];
-  linesConfig: LineConfig[];
+  linesConfig: LineConfig<T>[];
 }
 
-export function BehaviorLineChart({
+const COLOR_FOCUS = '#05A0ED';
+const COLOR_BLUR = '#E7E7E7';
+
+export function BehaviorLineChart<T>({
   values,
   linesConfig,
-}: MultipleLineChartProps) {
-  const timeframe: TimeframeOption = 'all';
-
+}: MultipleLineChartProps<T>) {
   assert(
     values.length === linesConfig.length,
     'Values length must equal linesConfig length'
   );
 
-  const filteredValueLists = values.map((lineValues) => {
-    return getFilteredValues<Value>(
-      lineValues,
-      timeframe,
-      (value: Value) => value.date * 1000
-    );
-  });
+  const filteredValueLists = values.map((lineValues) =>
+    getFilteredValues(lineValues, 'all', (x) => x.date * 1000)
+  );
 
-  const chartOptions = getChartOptions(filteredValueLists, linesConfig);
+  const options = getChartOptions<T>(filteredValueLists, linesConfig);
 
-  return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;
+  return <HighchartsReact highcharts={Highcharts} options={options} />;
 }
 
-function getChartOptions(values: Value[][], linesConfig: LineConfig[]) {
+function getChartOptions<T>(values: Value[][], linesConfig: LineConfig<T>[]) {
   const categories = values
     .flatMap((value) => value.map((value) => value.date.toString()))
     .filter((date, index, self) => self.indexOf(date) === index);
@@ -132,33 +133,47 @@ function getChartOptions(values: Value[][], linesConfig: LineConfig[]) {
       },
     },
     title: { text: undefined },
-    series: values.map((list, index) => ({
-      ...(linesConfig[index] || {}),
+    series: values.map((list, index) => {
+      const { id, isSelected, onClick } = linesConfig[index];
 
-      type: 'line',
-      cursor: 'pointer',
-      showInLegend: false,
+      return {
+        type: 'line',
+        showInLegend: false,
 
-      data: list.map((value) => ({ y: value.value, originalData: value })),
+        data: list.map((value) => ({ y: value.value, originalData: value })),
 
-      marker: { enabled: false },
-      states: { inactive: { opacity: 1 } },
-    })),
+        states: {
+          inactive: {
+            opacity: 1,
+          },
+        },
 
-    plotOptions: {
-      line: {
+        color: isSelected ? COLOR_FOCUS : COLOR_BLUR,
+        lineWidth: isSelected ? 3 : 2,
+        zIndex: isSelected ? 2 : 1,
+        events: {
+          click: function () {
+            onClick(id);
+          },
+        },
+
         marker: {
           enabled: false,
           symbol: 'circle',
           radius: 2,
+          color: COLOR_FOCUS,
+          fillColor: COLOR_FOCUS,
+          cursor: 'pointer',
           states: {
             hover: {
               enabled: true,
             },
           },
         },
-      },
-    },
+
+        cursor: 'pointer',
+      };
+    }),
   };
 
   return options;

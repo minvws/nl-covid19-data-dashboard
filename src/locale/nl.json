@@ -224,6 +224,14 @@
       "trend_hoger": "hoger",
       "trend_lager": "lager",
       "trend_gelijk": "gelijk"
+    },
+
+    "basisregels_over_tijd": {
+      "title": "Basisregels over tijd",
+      "intro": {
+        "compliance": "Intro naleving",
+        "support": "Intro draagvlak"
+      }
     }
   },
   "regionaal_gedrag": {
@@ -277,6 +285,14 @@
       "trend_hoger": "hoger",
       "trend_lager": "lager",
       "trend_gelijk": "gelijk"
+    },
+
+    "basisregels_over_tijd": {
+      "title": "Basisregels over tijd",
+      "intro": {
+        "compliance": "Intro naleving",
+        "support": "Intro draagvlak"
+      }
     }
   },
   "positief_geteste_personen": {
