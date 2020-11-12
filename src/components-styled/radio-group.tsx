@@ -32,6 +32,7 @@ const StyledLabel = styled.label(
     borderStyle: 'solid',
     borderColor: 'button',
     borderWidth: '1px 0 1px 1px',
+    whiteSpace: 'nowrap',
 
     '&:last-child': {
       borderRightWidth: '1px',

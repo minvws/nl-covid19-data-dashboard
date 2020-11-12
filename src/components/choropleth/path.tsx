@@ -43,14 +43,17 @@ const StyledPath = styled.path<{ hoverable?: boolean }>(
     x.hoverable &&
     css({
       cursor: 'pointer',
-      fill: 'none',
+      fill: 'transparent',
       stroke: x.stroke ?? 'transparent',
       strokeWidth: x.strokeWidth ?? 0,
       pointerEvents: 'all',
-
+      transitionProperty: 'fill, stroke, stroke-width',
+      transitionDuration: '90ms',
+      transitionTimingFunction: 'ease-out',
       '&:hover': {
+        transitionDuration: '0ms',
         fill: x.fill ?? 'none',
-        stroke: x.stroke ?? '#000',
+        stroke: x.stroke ?? '#222',
         strokeWidth: x.strokeWidth ?? 2,
       },
     })

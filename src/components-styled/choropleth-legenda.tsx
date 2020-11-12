@@ -14,15 +14,17 @@ export type ChoroplethLegendaProps = {
 
 const List = styled.ul(
   css({
+    width: '100%',
     marginTop: 0,
     paddingLeft: 0,
     listStyle: 'none',
-    display: 'inline-flex',
+    display: 'flex',
   })
 );
 
 const Item = styled.li(
   css({
+    flex: 1,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -38,7 +40,8 @@ const Item = styled.li(
 
 const LegendaItemBox = styled(Box)(
   css({
-    width: ['50px', null, '60px'],
+    width: '100%',
+    maxWidth: 60,
     height: '10px',
     flexGrow: 0,
     flexShrink: 0,
@@ -51,7 +54,7 @@ export function ChoroplethLegenda(props: ChoroplethLegendaProps) {
   const { items, title } = props;
 
   return (
-    <Box>
+    <Box width="100%" maxWidth={300}>
       <h4>{title}</h4>
       <List aria-label="legend">
         {items.map((item) => (
