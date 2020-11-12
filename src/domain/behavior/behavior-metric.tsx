@@ -6,7 +6,7 @@ import { formatDateFromSeconds } from '~/utils/formatDate';
 
 const text = siteText.common.metricKPI;
 
-const title = siteText.nl_gedrag.sidebar.titel_kpi;
+const title = siteText.gedrag_common.titel_kpi;
 
 interface BehaviorMetricProps {
   data: NationalBehavior | RegionalBehavior;

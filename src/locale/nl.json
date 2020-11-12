@@ -183,7 +183,8 @@
       "trend_hoger": "hoger",
       "trend_lager": "lager",
       "trend_gelijk": "gelijk"
-    }
+    },
+    "titel_kpi": "Resultaten gedragsonderzoek"
   },
   "nl_gedrag": {
     "metadata": {
@@ -195,8 +196,7 @@
       "toelichting": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dapibus convallis turpis in mattis. In pellentesque a dui sit amet dapibus. Sed lacus quam, facilisis egestas condimentum ac, suscipit sed eros. Aenean placerat velit porta ornare tincidunt. Cras gravida, mauris ut efficitur maximus, nisi leo accumsan mauris, at luctus ipsum felis eget purus."
     },
     "sidebar": {
-      "titel": "Naleving en Draagvlak",
-      "titel_kpi": "Resultaten gedragsonderzoek"
+      "titel": "Naleving en Draagvlak"
     },
     "datums": "Waarde van {{weekStart}} tot {{weekEnd}}. Verkregen: {{dateOfInsertion}}. Wordt driewekelijks bijgewerkt.",
     "bron": {
