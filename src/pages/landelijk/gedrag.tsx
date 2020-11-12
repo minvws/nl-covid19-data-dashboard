@@ -8,8 +8,9 @@ import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRang
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
-import { BehaviorTableTile } from '~/domain/behavior/behavior-table-tile';
+import { BehaviorChoroplethTile } from '~/domain/behavior/behavior-choropleth-tile';
 import { BehaviorLineChartTile } from '~/domain/behavior/behavior-line-chart-tile';
+import { BehaviorTableTile } from '~/domain/behavior/behavior-table-tile';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 
@@ -24,6 +25,9 @@ const BehaviorPage: FCWithLayout<INationalData> = (props) => {
         title={text.metadata.title}
         description={text.metadata.description}
       />
+
+      <BehaviorChoroplethTile text={text} />
+
       <ContentHeader_weekRangeHack
         category={siteText.nationaal_layout.headings.gedrag}
         title={text.pagina.titel}
