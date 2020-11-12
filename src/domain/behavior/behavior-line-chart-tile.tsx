@@ -8,7 +8,7 @@ import { Metadata, MetadataProps } from '~/components-styled/metadata';
 import { Select } from '~/components-styled/select';
 import siteText from '~/locale/index';
 import { NationalBehaviorValue } from '~/types/data';
-import { BehaviorIdentifier, behaviorIdentifier } from './behavior-types';
+import { BehaviorIdentifier, behaviorIdentifiers } from './behavior-types';
 import { BehaviorLineChart, Value } from './components/behavior-line-chart';
 import {
   BehaviorTypeControlOption,
@@ -28,7 +28,7 @@ export function BehaviorLineChartTile({
   const [currentId, setCurrentId] = useState<BehaviorIdentifier>('wash_hands');
   const [hoverId, setHoverId] = useState<BehaviorIdentifier>();
 
-  const behaviorIdentifierWithData = behaviorIdentifier
+  const behaviorIdentifierWithData = behaviorIdentifiers
     .map((id) => {
       const label = siteText.gedrag_onderwerpen[id];
       const valueKey = `${id}_${type}` as keyof NationalBehaviorValue;

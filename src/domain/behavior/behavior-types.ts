@@ -1,6 +1,6 @@
 import siteText from '~/locale/index';
 
-export const behaviorIdentifier = [
+export const behaviorIdentifiers = [
   'wash_hands',
   'keep_distance',
   'work_from_home',
@@ -13,7 +13,7 @@ export const behaviorIdentifier = [
   'max_visitors',
 ] as const;
 
-export type BehaviorIdentifier = typeof behaviorIdentifier[number];
+export type BehaviorIdentifier = typeof behaviorIdentifiers[number];
 
 export type BehaviorTrendType = 'up' | 'down' | 'equal';
 
