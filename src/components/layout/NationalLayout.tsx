@@ -31,6 +31,7 @@ import { TitleWithIcon } from '~/components/titleWithIcon';
 import siteText from '~/locale/index';
 import { INationalData } from '~/static-props/nl-data';
 import { useMenuState } from './useMenuState';
+import { BehaviorMetric } from '~/domain/behavior/behavior-metric';
 
 export function getNationalLayout() {
   return function (
@@ -382,7 +383,9 @@ function NationalLayout(props: NationalLayoutProps) {
                       Icon={Gedrag}
                       title={siteText.nl_gedrag.sidebar.titel}
                     />
-                    <span>@TODO sidebar metric gedrag</span>
+                    <span>
+                      <BehaviorMetric data={data.behavior} />
+                    </span>
                   </a>
                 </Link>
               </li>

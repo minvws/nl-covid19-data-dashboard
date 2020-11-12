@@ -24,6 +24,7 @@ import { ISafetyRegionData } from '~/static-props/safetyregion-data';
 import { getSewerWaterBarScaleData } from '~/utils/sewer-water/safety-region-sewer-water.util';
 import { useMediaQuery } from '~/utils/useMediaQuery';
 import { useMenuState } from './useMenuState';
+import { BehaviorMetric } from '~/domain/behavior/behavior-metric';
 
 export function getSafetyRegionLayout() {
   return function (
@@ -333,7 +334,9 @@ function SafetyRegionLayout(
                         Icon={Gedrag}
                         title={siteText.nl_gedrag.sidebar.titel}
                       />
-                      <span>@TODO sidebar metric gedrag</span>
+                      <span>
+                        <BehaviorMetric data={data.behavior} />
+                      </span>
                     </a>
                   </Link>
                 </li>

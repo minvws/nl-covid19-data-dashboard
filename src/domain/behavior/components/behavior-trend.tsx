@@ -4,11 +4,13 @@ import styled from 'styled-components';
 import Gelijk from '~/assets/gelijk.svg';
 import PijlOmhoog from '~/assets/pijl_omhoog.svg';
 import PijlOmlaag from '~/assets/pijl_omlaag.svg';
-import { BehaviorTrendType, GedragText } from '../behavior-types';
+import { BehaviorTrendType } from '../behavior-types';
+import siteText from '~/locale/index';
+
+const commonText = siteText.gedrag_common;
 
 interface BehaviorTrendProps {
   trend: BehaviorTrendType | undefined;
-  text: GedragText;
 }
 
 const Trend = styled.span(
@@ -25,7 +27,7 @@ const Trend = styled.span(
   })
 );
 
-export function BehaviorTrend({ text, trend }: BehaviorTrendProps) {
+export function BehaviorTrend({ trend }: BehaviorTrendProps) {
   if (trend === undefined) {
     return <>-</>;
   }
@@ -33,7 +35,7 @@ export function BehaviorTrend({ text, trend }: BehaviorTrendProps) {
     return (
       <Trend>
         <PijlOmhoog />
-        {text.basisregels.trend_hoger}
+        {commonText.basisregels.trend_hoger}
       </Trend>
     );
   }
@@ -41,14 +43,14 @@ export function BehaviorTrend({ text, trend }: BehaviorTrendProps) {
     return (
       <Trend>
         <PijlOmlaag />
-        {text.basisregels.trend_lager}
+        {commonText.basisregels.trend_lager}
       </Trend>
     );
   }
   return (
     <Trend>
       <Gelijk />
-      {text.basisregels.trend_gelijk}
+      {commonText.basisregels.trend_gelijk}
     </Trend>
   );
 }

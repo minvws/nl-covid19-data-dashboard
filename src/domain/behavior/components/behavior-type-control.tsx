@@ -10,11 +10,11 @@ export interface BehaviorTypeControlProps {
 
 const items = [
   {
-    label: text.nl_gedrag.common.compliance,
+    label: text.gedrag_common.compliance,
     value: 'compliance',
   },
   {
-    label: text.nl_gedrag.common.support,
+    label: text.gedrag_common.support,
     value: 'support',
   },
 ];

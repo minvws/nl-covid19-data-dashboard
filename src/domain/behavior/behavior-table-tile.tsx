@@ -17,6 +17,8 @@ import { BehaviorTrend } from './components/behavior-trend';
 import { BehaviorTypeControl } from './components/behavior-type-control';
 import siteText from '~/locale/index';
 
+const commonText = siteText.gedrag_common;
+
 type BehaviorValue = NationalBehaviorValue | RegionalBehaviorValue;
 
 interface BehaviorTileProps {
@@ -142,11 +144,13 @@ export function BehaviorTableTile({ text, behavior }: BehaviorTileProps) {
           <thead>
             <tr>
               <HeaderCell colSpan={2}>
-                {text.basisregels.header_percentage}
+                {commonText.basisregels.header_percentage}
               </HeaderCell>
               <th />
-              <HeaderCell>{text.basisregels.header_basisregel}</HeaderCell>
-              <HeaderCell>{text.basisregels.header_trend}</HeaderCell>
+              <HeaderCell>
+                {commonText.basisregels.header_basisregel}
+              </HeaderCell>
+              <HeaderCell>{commonText.basisregels.header_trend}</HeaderCell>
             </tr>
           </thead>
           <tbody>
@@ -168,7 +172,7 @@ export function BehaviorTableTile({ text, behavior }: BehaviorTileProps) {
                   <Box minWidth={220}>{behavior.description}</Box>
                 </Cell>
                 <Cell>
-                  <BehaviorTrend text={text} trend={behavior.trend} />
+                  <BehaviorTrend trend={behavior.trend} />
                 </Cell>
               </tr>
             ))}
