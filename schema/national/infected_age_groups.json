@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "infected_age_groups.json",
+  "title": "infected_age_groups",
+  "type": "object",
+  "required": ["age_groups"],
+  "additionalProperties": false,
+  "properties": {
+    "age_groups": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/item"
+      }
+    }
+  },
+  "definitions": {
+    "item": {
+      "title": "infected_age_group",
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "age_group",
+        "infected_percentage",
+        "national_percentage",
+        "date_of_report_unix",
+        "date_of_insertion_unix"
+      ],
+      "properties": {
+        "age_group": {
+          "type": "string"
+        },
+        "infected_percentage": {
+          "type": "number"
+        },
+        "national_percentage": {
+          "type": "number"
+        },
+        "date_of_report_unix": {
+          "type": "integer"
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}
