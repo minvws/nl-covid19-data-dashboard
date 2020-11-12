@@ -76,7 +76,7 @@ export function BehaviorLineChartTile({
     >
       <Header>
         <Box mr={{ lg: '1em' }} mb={{ lg: '1em' }}>
-          <h3>{text.basisregels.title}</h3>
+          <h3>{text.basisregels_over_tijd.title}</h3>
         </Box>
       </Header>
 
@@ -90,7 +90,7 @@ export function BehaviorLineChartTile({
         flexDirection={{ _: 'column', lg: 'row' }}
       >
         <Box flex="1" mr={{ lg: 2 }}>
-          <p>{text.basisregels.intro[type]}</p>
+          <p>{text.basisregels_over_tijd.intro[type]}</p>
         </Box>
         <Box flex="1" ml={{ lg: 2 }}>
           <Select
