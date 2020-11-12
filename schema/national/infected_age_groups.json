@@ -3,10 +3,10 @@
   "$id": "infected_age_groups.json",
   "title": "infected_age_groups",
   "type": "object",
-  "required": ["age_groups"],
+  "required": ["values"],
   "additionalProperties": false,
   "properties": {
-    "age_groups": {
+    "values": {
       "type": "array",
       "items": {
         "$ref": "#/definitions/item"

@@ -220,7 +220,7 @@ export interface InfectedPeopleDeltaNormalizedLastValue {
   date_of_insertion_unix: number;
 }
 export interface InfectedAgeGroups {
-  age_groups: InfectedAgeGroup[];
+  values: InfectedAgeGroup[];
 }
 export interface InfectedAgeGroup {
   age_group: string;
