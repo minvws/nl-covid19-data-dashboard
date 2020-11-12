@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
 import { Box, Spacer } from '~/components-styled/base';
 import { Tile } from '~/components-styled/layout';
-import { Metadata, MetadataProps } from '~/components-styled/metadata';
 import { Select } from '~/components-styled/select';
 import siteText from '~/locale/index';
 import { NationalBehaviorValue } from '~/types/data';
@@ -22,13 +21,11 @@ import {
 interface BehaviorLineChartTileProps {
   text: GedragText;
   values: NationalBehaviorValue[];
-  metadata: MetadataProps;
 }
 
 export function BehaviorLineChartTile({
   text,
   values,
-  metadata,
 }: BehaviorLineChartTileProps) {
   const [type, setType] = useState<BehaviorTypeControlOption>('compliance');
   const [currentId, setCurrentId] = useState<BehaviorIdentifier>('wash_hands');
@@ -130,10 +127,6 @@ export function BehaviorLineChartTile({
           onClick: setCurrentId,
         }))}
       />
-
-      {/* Using a spacer to push the footer down */}
-      <Spacer m="auto" />
-      <Metadata {...metadata} />
     </Tile>
   );
 }
