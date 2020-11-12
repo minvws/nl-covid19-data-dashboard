@@ -1,5 +1,4 @@
 import { Fragment } from 'react';
-import * as RestrictionIcons from '~/assets/restrictions';
 import { Box } from '~/components-styled/base';
 import { Cell, Row, Table, TableBody } from '~/components-styled/layout/table';
 import { Text } from '~/components-styled/typography';
@@ -65,7 +64,7 @@ function MobileRestrictionsTable(props: TableProps) {
                   {row.restrictions.map((value) => (
                     <Box key={value.text} display="flex" flexDirection="row">
                       <Box as="span" flexShrink={0}>
-                        {getIcon(value.icon, color)}
+                        {getIcon(value.Icon, color)}
                       </Box>
                       <Box as="span">{value.text}</Box>
                     </Box>
@@ -109,7 +108,7 @@ function DesktopRestrictionsTable(props: TableProps) {
                 {row.restrictions.map((value) => (
                   <Box key={value.text} display="flex" flexDirection="row">
                     <Box as="span" flexShrink={0}>
-                      {getIcon(value.icon, color)}
+                      {getIcon(value.Icon, color)}
                     </Box>
                     <Box as="span" ml={1}>
                       {value.text}
@@ -125,14 +124,10 @@ function DesktopRestrictionsTable(props: TableProps) {
   );
 }
 
-function getIcon(iconName: string | undefined, color: string) {
-  if (!iconName?.length) {
+function getIcon(IconComponent: any | undefined, color: string) {
+  if (!IconComponent) {
     return <Box width="32px" height="32px" />;
   }
 
-  const Icon = (RestrictionIcons as any)[`${iconName}Icon`];
-  if (!Icon) {
-    return null;
-  }
-  return <Icon fill={color} />;
+  return <IconComponent fill={color} />;
 }

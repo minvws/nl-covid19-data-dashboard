@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { restrictionIcons } from '~/components/restrictions/restrictionIcons';
 import siteText from '~/locale/index';
 import {
   NationalRestrictionValue,
@@ -6,7 +7,6 @@ import {
 } from '~/types/data';
 
 const restrictionTexts: Record<string, string> = siteText.maatregelen.teksten;
-const restrictionIcons: Record<string, string> = siteText.maatregelen.icons;
 
 /**
  * This is a hard-coded list of categories that dictates where a restriction category
@@ -36,7 +36,7 @@ export type EscalationLevel = RegionalRestrictionValue['escalation_level'];
 export type TargetRegion = RegionalRestrictionValue['target_region'];
 
 export type RestrictionLineData = {
-  icon?: string;
+  Icon?: any;
   text: string;
 };
 
@@ -82,7 +82,7 @@ function createLines(
     .filter((value) => value.category_id === category)
     .sort((left, right) => left.restriction_order - right.restriction_order)
     .map<RestrictionLineData>((value) => ({
-      icon: restrictionIcons[value.restriction_id],
+      Icon: restrictionIcons[value.restriction_id],
       text: restrictionTexts[value.restriction_id] ?? value.restriction_id,
     }));
 }
