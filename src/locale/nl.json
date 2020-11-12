@@ -117,7 +117,7 @@
         "toelichting_risiconiveau": "Er zijn zeer veel mensen besmettelijk en het dagelijks aantal nieuwe besmettingen is hoog. De regionale zorgcapaciteit is onvoldoende. Strenge, landelijke maatregelen zijn noodzakelijk.",
         "extratoelichting": {
           "titel": "Maatregelen bij risiconiveau 4/ Lockdown (regionaal)",
-          "toelichting": "In {{safetyRegionName}} is een regionale lockdown van kracht."
+          "toelichting": "In {{safetyRegionName}} is een regionale lockdown van kracht. "
         }
       }
     },
