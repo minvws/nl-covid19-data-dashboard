@@ -7,6 +7,7 @@ import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 import { formatNumber } from '~/utils/formatNumber';
+import { Metadata } from '~/components-styled/metadata';
 
 const text = siteText.verpleeghuis_oversterfte;
 
@@ -20,7 +21,7 @@ const NursingHomeDeaths: FCWithLayout<INationalData> = (props) => {
         description={text.metadata.description}
       />
       <ContentHeader
-        category={siteText.nationaal_layout.headings.verpleeghuis}
+        category={siteText.nationaal_layout.headings.verpleeghuizen}
         title={text.titel}
         Icon={CoronaVirus}
         subtitle={text.pagina_toelichting}
@@ -40,6 +41,10 @@ const NursingHomeDeaths: FCWithLayout<INationalData> = (props) => {
               {formatNumber(data.last_value.deceased_daily)}
             </span>
           </p>
+          <Metadata
+            date={data.last_value.date_of_report_unix}
+            source={text.bron}
+          />
         </div>
 
         <div className="column-item column-item-extra-margin">
@@ -56,6 +61,7 @@ const NursingHomeDeaths: FCWithLayout<INationalData> = (props) => {
               date: value.date_of_report_unix,
             }))}
           />
+          <Metadata source={text.bron} />
         </article>
       )}
     </>

@@ -347,7 +347,6 @@
 
     li {
       border-bottom: 1px solid #c4c4c4;
-      min-height: 144px;
 
       &:first-child {
         border-top: 1px solid #c4c4c4;
@@ -520,7 +519,7 @@ a.metric-link {
       'w w'
       'a c'
       'b c'
-      'd c';
+      'metadata c';
   }
 
   .data-warning {
@@ -559,6 +558,6 @@ a.metric-link {
   }
 
   .choropleth-footer {
-    grid-area: d;
+    grid-area: metadata;
   }
 }

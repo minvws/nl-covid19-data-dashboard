@@ -1,17 +1,13 @@
-import locale from '~/locale/index';
 import { Box, Spacer } from './base';
-import { ExternalLink } from './external-link';
 import { Text, Heading } from './typography';
 import { Tile } from './layout';
+import { MetadataProps, Metadata } from './metadata';
 
 interface KpiTileProps {
   title: string;
   description?: string;
   children: React.ReactNode;
-  sourcedFrom?: {
-    text: string;
-    href: string;
-  };
+  metadata: MetadataProps;
 }
 
 /**
@@ -22,12 +18,12 @@ export function KpiTile({
   title,
   description,
   children,
-  sourcedFrom,
+  metadata,
 }: KpiTileProps) {
   return (
     <Tile height="100%">
       <Heading level={3}>{title}</Heading>
-      <Box mb={4}>{children}</Box>
+      <Box>{children}</Box>
       {description && (
         <Text
           as="div"
@@ -36,15 +32,9 @@ export function KpiTile({
           }}
         />
       )}
-      {sourcedFrom && (
-        <>
-          {/* Using a spacer to push the footer down */}
-          <Spacer m="auto" />
-          <Text as="footer" mt={3}>
-            {locale.common.metadata.source}: <ExternalLink {...sourcedFrom} />
-          </Text>
-        </>
-      )}
+      {/* Using a spacer to push the footer down */}
+      <Spacer m="auto" />
+      <Metadata {...metadata} />
     </Tile>
   );
 }

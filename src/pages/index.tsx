@@ -4,14 +4,14 @@ import path from 'path';
 import { useState } from 'react';
 import ExternalLink from '~/assets/external-link.svg';
 import Notification from '~/assets/notification.svg';
-import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/useSafetyRegionLegendaData';
-import { MunicipalityChoropleth } from '~/components/choropleth/MunicipalityChoropleth';
-import { SafetyRegionChoropleth } from '~/components/choropleth/SafetyRegionChoropleth';
-import { createSelectMunicipalHandler } from '~/components/choropleth/selectHandlers/createSelectMunicipalHandler';
-import { createSelectRegionHandler } from '~/components/choropleth/selectHandlers/createSelectRegionHandler';
-import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/createPositiveTestedPeopleMunicipalTooltip';
-import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/createPositiveTestedPeopleRegionalTooltip';
-import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalationTooltip';
+import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/use-safety-region-legenda-data';
+import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
+import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
+import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
+import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
+import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
+import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/create-positive-tested-people-regional-tooltip';
+import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { TitleWithIcon } from '~/components/titleWithIcon';
@@ -50,7 +50,7 @@ type EscalationLevelCounts = {
 };
 
 const Home: FCWithLayout<INationalHomepageData> = (props) => {
-  const { text, escalationLevelCounts } = props;
+  const { data, text, escalationLevelCounts } = props;
   const router = useRouter();
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
     'municipal'
@@ -112,6 +112,12 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
 
       <ChoroplethTile
         title={text.positief_geteste_personen.map_titel}
+        metadata={{
+          date:
+            data.infected_people_delta_normalized.last_value
+              .date_of_report_unix,
+          source: text.positief_geteste_personen.bron,
+        }}
         description={text.positief_geteste_personen.map_toelichting}
         onChangeControls={setSelectedMap}
         legend={

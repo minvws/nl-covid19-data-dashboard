@@ -40,11 +40,6 @@ export const schemaInformation: Record<string, SchemaInfo> = {
     basePath: localeBasePath,
     customValidations: [validatePlaceholders],
   },
-  restrictions: {
-    files: ['RESTRICTIONS.json'],
-    basePath: jsonBasePath,
-    optional: true,
-  },
 };
 
 /**

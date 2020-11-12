@@ -78,13 +78,13 @@ export function RadioGroup(props: RadioGroupProps) {
         <Fragment key={`radiogroup-${id}-input-${index}`}>
           <StyledInput
             onChange={() => onLocalChange(item.value)}
-            id={`radiogroup-${id}-${index}`}
+            id={`radiogroup-${item.value}-${id}-${index}`}
             type="radio"
             name={`radiogroup-${id}-item-${item.value}`}
             value={item.value}
             checked={selectedValue === item.value}
           />
-          <StyledLabel htmlFor={`radiogroup-${id}-${index}`}>
+          <StyledLabel htmlFor={`radiogroup-${item.value}-${id}-${index}`}>
             {item.label}
           </StyledLabel>
         </Fragment>

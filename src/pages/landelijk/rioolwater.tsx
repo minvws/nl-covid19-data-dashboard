@@ -1,13 +1,11 @@
 import { useRouter } from 'next/router';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
-import { Spacer } from '~/components-styled/base';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
-import { ValueAnnotation } from '~/components-styled/value-annotation';
-import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/useSafetyRegionLegendaData';
-import { SafetyRegionChoropleth } from '~/components/choropleth/SafetyRegionChoropleth';
-import { createSelectRegionHandler } from '~/components/choropleth/selectHandlers/createSelectRegionHandler';
-import { createSewerRegionalTooltip } from '~/components/choropleth/tooltips/region/createSewerRegionalTooltip';
+import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/use-safety-region-legenda-data';
+import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
+import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
+import { createSewerRegionalTooltip } from '~/components/choropleth/tooltips/region/create-sewer-regional-tooltip';
 import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRangeHack';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
@@ -16,6 +14,9 @@ import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
+import { TwoKpiSection } from '~/components-styled/two-kpi-section';
+import { KpiTile } from '~/components-styled/kpi-tile';
+import { KpiValue } from '~/components-styled/kpi-value';
 
 const text = siteText.rioolwater_metingen;
 
@@ -31,7 +32,7 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
         description={text.metadata.description}
       />
       <ContentHeader_weekRangeHack
-        category={siteText.gemeente_layout.headings.overig}
+        category={siteText.nationaal_layout.headings.vroege_signalen}
         title={text.titel}
         Icon={RioolwaterMonitoring}
         subtitle={text.pagina_toelichting}
@@ -44,15 +45,18 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
         }}
       />
 
-      {/*
-        @TODO make this replace the code below. Maybe extend TwoKpiSection so that
-        it renders the KPI full-width if there is only one child.
-
-        Discuss with design. https://trello.com/c/gnDOKkZ2/780-regressie-gemiddeld-aantal-besmettelijke-mensen-per-100k
-
-
       <TwoKpiSection>
-        <KpiTile title={text.barscale_titel} description={text.extra_uitleg}>
+        <KpiTile
+          title={text.barscale_titel}
+          description={text.extra_uitleg}
+          metadata={{
+            date: [
+              sewerAverages.last_value.week_start_unix,
+              sewerAverages.last_value.week_end_unix,
+            ],
+            source: text.bron,
+          }}
+        >
           <KpiValue
             absolute={sewerAverages.last_value.average}
             valueAnnotation={siteText.waarde_annotaties.riool_normalized}
@@ -64,28 +68,19 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
             text.total_installation_count_description +
             `<p style="color:#595959">${text.rwzi_abbrev}</p>`
           }
+          metadata={{
+            date: [
+              sewerAverages.last_value.week_start_unix,
+              sewerAverages.last_value.week_end_unix,
+            ],
+            source: text.bron,
+          }}
         >
           <KpiValue
             absolute={sewerAverages.last_value.total_installation_count}
           />
         </KpiTile>
       </TwoKpiSection>
-        */}
-
-      <article className="metric-article layout-two-column">
-        <div className="column-item column-item-extra-margin">
-          <h3>{text.barscale_titel}</h3>
-          <p className="text-blue kpi" data-cy="infected_daily_total">
-            {formatNumber(sewerAverages.last_value.average)}
-          </p>
-        </div>
-
-        <div className="column-item column-item-extra-margin">
-          <p>{text.extra_uitleg}</p>
-          <ValueAnnotation>x100 miljard</ValueAnnotation>
-        </div>
-      </article>
-      <Spacer mb={4} />
 
       <LineChartTile
         title={text.linechart_titel}
@@ -95,6 +90,9 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
           date: value.week_unix,
           week: { start: value.week_start_unix, end: value.week_end_unix },
         }))}
+        metadata={{
+          source: text.bron,
+        }}
         formatTooltip={(x) => {
           return `<strong>${formatDateFromSeconds(
             x.week.start,
@@ -110,6 +108,13 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
       <ChoroplethTile
         title={text.map_titel}
         description={text.map_toelichting}
+        metadata={{
+          date: [
+            sewerAverages.last_value.week_start_unix,
+            sewerAverages.last_value.week_end_unix,
+          ],
+          source: text.bron,
+        }}
         legend={
           legendItems // this data value should probably not be optional
             ? {

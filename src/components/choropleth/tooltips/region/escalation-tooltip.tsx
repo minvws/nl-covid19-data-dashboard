@@ -4,7 +4,7 @@ import EscalationLevel1 from '~/assets/niveau-1.svg';
 import EscalationLevel2 from '~/assets/niveau-2.svg';
 import EscalationLevel3 from '~/assets/niveau-3.svg';
 import EscalationLevel4 from '~/assets/niveau-4.svg';
-import { regionThresholds } from '~/components/choropleth/regionThresholds';
+import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
 import text from '~/locale/index';
 import { formatDateFromSeconds } from '~/utils/formatDate';

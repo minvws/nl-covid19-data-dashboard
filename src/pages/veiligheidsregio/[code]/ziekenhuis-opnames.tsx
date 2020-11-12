@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { LineChart } from '~/components/charts/index';
-import { ChoroplethLegenda } from '~/components/choropleth/legenda/ChoroplethLegenda';
-import { useMunicipalLegendaData } from '~/components/choropleth/legenda/hooks/useMunicipalLegendaData';
-import { MunicipalityChoropleth } from '~/components/choropleth/MunicipalityChoropleth';
-import { createSelectMunicipalHandler } from '~/components/choropleth/selectHandlers/createSelectMunicipalHandler';
-import { createMunicipalHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/municipal/createMunicipalHospitalAdmissionsTooltip';
+import { ChoroplethLegenda } from '~/components-styled/choropleth-legenda';
+import { useMunicipalLegendaData } from '~/components/choropleth/legenda/hooks/use-municipal-legenda-data';
+import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
+import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
+import { createMunicipalHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/municipal/create-municipal-hospital-admissions-tooltip';
 import { DataWarning } from '~/components/dataWarning';
 import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/contentHeader';
@@ -21,6 +21,7 @@ import {
 import { ResultsPerRegion } from '~/types/data.d';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { Metadata } from '~/components-styled/metadata';
 
 const text = siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
 
@@ -46,7 +47,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
         })}
       />
       <ContentHeader
-        category={siteText.veiligheidsregio_layout.headings.medisch}
+        category={siteText.veiligheidsregio_layout.headings.ziekenhuizen}
         title={replaceVariablesInText(text.titel, {
           safetyRegion: safetyRegionName,
         })}
@@ -54,9 +55,8 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: resultsPerRegion?.last_value?.date_of_report_unix,
-          dateInsertedUnix:
-            resultsPerRegion?.last_value?.date_of_insertion_unix,
+          dateUnix: resultsPerRegion.last_value.date_of_report_unix,
+          dateInsertedUnix: resultsPerRegion.last_value.date_of_insertion_unix,
           dataSource: text.bron,
         }}
       />
@@ -76,6 +76,10 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
             <p>{text.extra_uitleg}</p>
           </div>
         </div>
+        <Metadata
+          date={resultsPerRegion.last_value.date_of_report_unix}
+          source={text.bron}
+        />
       </article>
 
       {resultsPerRegion && (
@@ -89,6 +93,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
               date: value.date_of_report_unix,
             }))}
           />
+          <Metadata source={text.bron} />
         </article>
       )}
       <article className="metric-article layout-choropleth">
@@ -127,6 +132,10 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
             />
           )}
         </div>
+        <Metadata
+          date={resultsPerRegion.last_value.date_of_report_unix}
+          source={text.bron}
+        />
       </article>
     </>
   );

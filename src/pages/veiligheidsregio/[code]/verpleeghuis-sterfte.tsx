@@ -13,6 +13,7 @@ import {
 import { RegionalNursingHome } from '~/types/data.d';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { Metadata } from '~/components-styled/metadata';
 
 const text = siteText.veiligheidsregio_verpleeghuis_oversterfte;
 
@@ -32,7 +33,7 @@ const NursingHomeDeaths: FCWithLayout<ISafetyRegionData> = (props) => {
         })}
       />
       <ContentHeader
-        category={siteText.veiligheidsregio_layout.headings.verpleeghuis}
+        category={siteText.veiligheidsregio_layout.headings.verpleeghuizen}
         title={replaceVariablesInText(text.titel, {
           safetyRegion: safetyRegionName,
         })}
@@ -40,8 +41,8 @@ const NursingHomeDeaths: FCWithLayout<ISafetyRegionData> = (props) => {
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: data?.last_value?.date_of_report_unix,
-          dateInsertedUnix: data?.last_value?.date_of_insertion_unix,
+          dateUnix: data.last_value.date_of_report_unix,
+          dateInsertedUnix: data.last_value.date_of_insertion_unix,
           dataSource: text.bron,
         }}
       />
@@ -52,6 +53,10 @@ const NursingHomeDeaths: FCWithLayout<ISafetyRegionData> = (props) => {
           <p className="text-blue kpi" data-cy="infected_daily_total">
             {formatNumber(data?.last_value.deceased_daily)}
           </p>
+          <Metadata
+            date={data.last_value.date_of_report_unix}
+            source={text.bron}
+          />
         </div>
 
         <div className="column-item column-item-extra-margin">
@@ -68,6 +73,7 @@ const NursingHomeDeaths: FCWithLayout<ISafetyRegionData> = (props) => {
               date: value.date_of_report_unix,
             }))}
           />
+          <Metadata source={text.bron} />
         </article>
       )}
     </>

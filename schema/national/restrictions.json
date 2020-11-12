@@ -1,25 +1,10 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-  "title": "restrictions",
+  "title": "national_restrictions",
   "additionalProperties": false,
-  "required": ["last_generated", "proto_name", "name", "code", "values"],
+  "required": ["values"],
   "properties": {
-    "last_generated": {
-      "type": "string"
-    },
-    "proto_name": {
-      "type": "string",
-      "const": "RESTRICTIONS"
-    },
-    "name": {
-      "type": "string",
-      "const": { "$data": "1/proto_name" }
-    },
-    "code": {
-      "type": "string",
-      "const": { "$data": "1/proto_name" }
-    },
     "values": {
       "type": "array",
       "items": {
@@ -29,14 +14,15 @@
   },
   "definitions": {
     "value": {
-      "title": "restrictions_value",
+      "title": "national_restriction_value",
       "additionalProperties": false,
       "required": [
         "restriction_id",
         "target_region",
         "escalation_level",
         "category_id",
-        "restriction_order"
+        "restriction_order",
+        "valid_from_unix"
       ],
       "properties": {
         "restriction_id": {
@@ -45,12 +31,11 @@
         },
         "target_region": {
           "type": "string",
-          "enum": ["nl", "vr"]
+          "const": "nl"
         },
         "escalation_level": {
-          "type": "number",
-          "minimum": 1,
-          "maximum": 5
+          "type": "integer",
+          "enum": [0, 1, 2, 3, 4, 41, 401]
         },
         "category_id": {
           "type": "string",
@@ -72,7 +57,10 @@
           ]
         },
         "restriction_order": {
-          "type": "number"
+          "type": "integer"
+        },
+        "valid_from_unix": {
+          "type": "integer"
         }
       }
     }

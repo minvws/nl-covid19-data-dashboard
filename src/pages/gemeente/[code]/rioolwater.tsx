@@ -21,6 +21,7 @@ import {
   getSewerWaterBarScaleData,
   getSewerWaterLineChartData,
 } from '~/utils/sewer-water/municipality-sewer-water.util';
+import { Metadata } from '~/components-styled/metadata';
 
 const text = siteText.gemeente_rioolwater_metingen;
 
@@ -58,7 +59,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
       />
 
       <ContentHeader_weekRangeHack
-        category={siteText.gemeente_layout.headings.overig}
+        category={siteText.gemeente_layout.headings.vroege_signalen}
         title={replaceVariablesInText(text.titel, {
           municipality: municipalityName,
         })}
@@ -74,8 +75,18 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
       />
 
       <TwoKpiSection>
-        {barScaleData && barScaleData.value !== undefined && (
-          <KpiTile title={text.barscale_titel} description={text.extra_uitleg}>
+        {barScaleData?.value !== undefined && (
+          <KpiTile
+            title={text.barscale_titel}
+            description={text.extra_uitleg}
+            metadata={{
+              date: [
+                sewerAverages.last_value.week_start_unix,
+                sewerAverages.last_value.week_end_unix,
+              ],
+              source: text.bron,
+            }}
+          >
             <KpiValue
               absolute={barScaleData.value}
               valueAnnotation={siteText.waarde_annotaties.riool_normalized}
@@ -89,6 +100,13 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
             text.total_installation_count_description +
             `<p style="color:#595959">${text.rwzi_abbrev}</p>`
           }
+          metadata={{
+            date: [
+              sewerAverages.last_value.week_start_unix,
+              sewerAverages.last_value.week_end_unix,
+            ],
+            source: text.bron,
+          }}
         >
           <KpiValue
             absolute={sewerAverages.last_value.total_installation_count}
@@ -109,6 +127,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
             valueAnnotation={siteText.waarde_annotaties.riool_normalized}
           />
         )}
+        <Metadata source={text.bron} />
       </article>
 
       {barChartData && (
@@ -123,6 +142,13 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
             data={barChartData.data}
             axisTitle={text.bar_chart_axis_title}
             valueAnnotation={siteText.waarde_annotaties.riool_normalized}
+          />
+          <Metadata
+            date={[
+              sewerAverages.last_value.week_start_unix,
+              sewerAverages.last_value.week_end_unix,
+            ]}
+            source={text.bron}
           />
         </article>
       )}

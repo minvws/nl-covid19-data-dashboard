@@ -63,7 +63,7 @@ type TSafetyRegion = {
 function SafetyRegionLayout(
   props: ISafetyRegionData & { children: React.ReactNode }
 ) {
-  const { children, data } = props;
+  const { children, data, safetyRegionName } = props;
 
   const router = useRouter();
   const isLargeScreen = useMediaQuery('(min-width: 1000px)', true);
@@ -118,8 +118,12 @@ function SafetyRegionLayout(
       </Head>
 
       <div
-        className={`safety-region-layout  has-menu-${
-          isMainRoute ? 'and-content-opened' : isMenuOpen ? 'opened' : 'closed'
+        className={`safety-region-layout ${
+          isMainRoute
+            ? 'has-menu-and-content-opened'
+            : isMenuOpen
+            ? 'has-menu-opened'
+            : 'has-menu-closed'
         }`}
       >
         <Link href="/veiligheidsregio/[code]" as={`/veiligheidsregio/${code}`}>
@@ -137,8 +141,8 @@ function SafetyRegionLayout(
 
           {showMetricLinks && (
             <nav aria-label="metric navigation">
-              <h2>{siteText.veiligheidsregio_layout.headings.medisch}</h2>
-
+              <h2>{safetyRegionName}</h2>
+              <h2>{siteText.veiligheidsregio_layout.headings.besmettingen}</h2>
               <ul>
                 <li>
                   <Link
@@ -171,7 +175,9 @@ function SafetyRegionLayout(
                     </a>
                   </Link>
                 </li>
-
+              </ul>
+              <h2>{siteText.veiligheidsregio_layout.headings.ziekenhuizen}</h2>
+              <ul>
                 <li>
                   <Link
                     href="/veiligheidsregio/[code]/ziekenhuis-opnames"
@@ -197,38 +203,9 @@ function SafetyRegionLayout(
                   </Link>
                 </li>
               </ul>
-
-              <h2>{siteText.veiligheidsregio_layout.headings.overig}</h2>
-              <ul>
-                <li>
-                  <Link
-                    href="/veiligheidsregio/[code]/rioolwater"
-                    as={`/veiligheidsregio/${code}/rioolwater`}
-                  >
-                    <a
-                      onClick={blur}
-                      className={getClassName(
-                        `/veiligheidsregio/[code]/rioolwater`
-                      )}
-                    >
-                      <TitleWithIcon
-                        Icon={RioolwaterMonitoring}
-                        title={
-                          siteText.veiligheidsregio_rioolwater_metingen
-                            .titel_sidebar
-                        }
-                      />
-                      <span>
-                        <SewerWaterMetric
-                          data={getSewerWaterBarScaleData(data)}
-                        />
-                      </span>
-                    </a>
-                  </Link>
-                </li>
-              </ul>
-
-              <h2>{siteText.veiligheidsregio_layout.headings.verpleeghuis}</h2>
+              <h2>
+                {siteText.veiligheidsregio_layout.headings.verpleeghuizen}
+              </h2>
               <ul>
                 <li>
                   <Link
@@ -299,6 +276,39 @@ function SafetyRegionLayout(
                       <span>
                         <NursingHomeDeathsMetric
                           data={data.nursing_home.last_value}
+                        />
+                      </span>
+                    </a>
+                  </Link>
+                </li>
+              </ul>
+
+              <h2>
+                {siteText.veiligheidsregio_layout.headings.vroege_signalen}
+              </h2>
+
+              <ul>
+                <li>
+                  <Link
+                    href="/veiligheidsregio/[code]/rioolwater"
+                    as={`/veiligheidsregio/${code}/rioolwater`}
+                  >
+                    <a
+                      onClick={blur}
+                      className={getClassName(
+                        `/veiligheidsregio/[code]/rioolwater`
+                      )}
+                    >
+                      <TitleWithIcon
+                        Icon={RioolwaterMonitoring}
+                        title={
+                          siteText.veiligheidsregio_rioolwater_metingen
+                            .titel_sidebar
+                        }
+                      />
+                      <span>
+                        <SewerWaterMetric
+                          data={getSewerWaterBarScaleData(data)}
                         />
                       </span>
                     </a>

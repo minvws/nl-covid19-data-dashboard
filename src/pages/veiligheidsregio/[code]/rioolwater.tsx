@@ -26,6 +26,7 @@ import {
   getSewerWaterScatterPlotData,
 } from '~/utils/sewer-water/safety-region-sewer-water.util';
 import { TimeframeOption } from '~/utils/timeframe';
+import { Metadata } from '~/components-styled/metadata';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
@@ -69,7 +70,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
         })}
       />
       <ContentHeader_weekRangeHack
-        category={siteText.veiligheidsregio_layout.headings.overig}
+        category={siteText.veiligheidsregio_layout.headings.vroege_signalen}
         title={replaceVariablesInText(text.titel, {
           safetyRegion: safetyRegionName,
         })}
@@ -86,7 +87,17 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
 
       {barScaleData && barScaleData.value !== undefined && (
         <TwoKpiSection>
-          <KpiTile title={text.barscale_titel} description={text.extra_uitleg}>
+          <KpiTile
+            title={text.barscale_titel}
+            description={text.extra_uitleg}
+            metadata={{
+              date: [
+                sewerAverages.last_value.week_start_unix,
+                sewerAverages.last_value.week_end_unix,
+              ],
+              source: text.bron,
+            }}
+          >
             <KpiValue
               absolute={barScaleData.value}
               valueAnnotation={siteText.waarde_annotaties.riool_normalized}
@@ -98,6 +109,13 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
               text.total_installation_count_description +
               `<p style="color:#595959">${text.rwzi_abbrev}</p>`
             }
+            metadata={{
+              date: [
+                sewerAverages.last_value.week_start_unix,
+                sewerAverages.last_value.week_end_unix,
+              ],
+              source: text.bron,
+            }}
           >
             <KpiValue
               absolute={data.sewer.last_value.total_installation_count}
@@ -142,6 +160,8 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
             />
           </>
         )}
+
+        <Metadata source={text.bron} />
       </article>
 
       {barChartData && (
@@ -156,6 +176,13 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
             data={barChartData.data}
             axisTitle={text.bar_chart_axis_title}
             valueAnnotation={siteText.waarde_annotaties.riool_normalized}
+          />
+          <Metadata
+            date={[
+              sewerAverages.last_value.week_start_unix,
+              sewerAverages.last_value.week_end_unix,
+            ]}
+            source={text.bron}
           />
         </article>
       )}

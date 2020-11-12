@@ -4,21 +4,18 @@ import Getest from '~/assets/test.svg';
 import { Anchor } from '~/components-styled/anchor';
 import { Box } from '~/components-styled/base';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
-import { KpiSection } from '~/components-styled/kpi-section';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
-import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
-import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/useSafetyRegionLegendaData';
-import { MunicipalityChoropleth } from '~/components/choropleth/MunicipalityChoropleth';
-import { createSelectMunicipalHandler } from '~/components/choropleth/selectHandlers/createSelectMunicipalHandler';
-import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/createPositiveTestedPeopleMunicipalTooltip';
+import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/use-safety-region-legenda-data';
+import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
+import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
+import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
 import { ContentHeader } from '~/components/contentHeader';
 import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRangeHack';
 import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
-import { MultipleLineChart } from '~/components/lineChart/multipleLineChart';
 import { SEOHead } from '~/components/seoHead';
 import { PositivelyTestedPeopleBarScale } from '~/components/veiligheidsregio/positive-tested-people-barscale';
 import regionCodeToMunicipalCodeLookup from '~/data/regionCodeToMunicipalCodeLookup';
@@ -29,10 +26,12 @@ import {
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
 import { ResultsPerRegion } from '~/types/data.d';
-import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { formatDateFromSeconds } from '~/utils/formatDate';
+import { MultipleLineChartTile } from '~/components-styled/multiple-line-chart-tile';
 
 const text = siteText.veiligheidsregio_positief_geteste_personen;
 const ggdText = siteText.veiligheidsregio_positief_geteste_personen_ggd;
@@ -61,7 +60,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
         })}
       />
       <ContentHeader
-        category={siteText.veiligheidsregio_layout.headings.medisch}
+        category={siteText.veiligheidsregio_layout.headings.besmettingen}
         title={replaceVariablesInText(text.titel, {
           safetyRegion: safetyRegionName,
         })}
@@ -70,13 +69,19 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
         metadata={{
           datumsText: text.datums,
           dateUnix: resultsPerRegion.last_value.date_of_report_unix,
-          dateInsertedUnix: resultsPerRegion.last_value?.date_of_insertion_unix,
+          dateInsertedUnix: resultsPerRegion.last_value.date_of_insertion_unix,
           dataSource: text.bron,
         }}
       />
 
       <TwoKpiSection>
-        <KpiTile title={text.barscale_titel}>
+        <KpiTile
+          title={text.barscale_titel}
+          metadata={{
+            date: resultsPerRegion.last_value.date_of_report_unix,
+            source: text.bron,
+          }}
+        >
           <PositivelyTestedPeopleBarScale
             data={resultsPerRegion}
             showAxis={true}
@@ -84,7 +89,13 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           <Text>{text.barscale_toelichting}</Text>
         </KpiTile>
 
-        <KpiTile title={text.kpi_titel}>
+        <KpiTile
+          title={text.kpi_titel}
+          metadata={{
+            date: resultsPerRegion.last_value.date_of_report_unix,
+            source: text.bron,
+          }}
+        >
           <KpiValue
             absolute={Math.round(
               resultsPerRegion.last_value.total_reported_increase_per_region
@@ -122,12 +133,19 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           value: value.infected_increase_per_region,
           date: value.date_of_report_unix,
         }))}
+        metadata={{
+          source: text.bron,
+        }}
       />
 
       <ChoroplethTile
         title={replaceVariablesInText(text.map_titel, {
           safetyRegion: safetyRegionName,
         })}
+        metadata={{
+          date: resultsPerRegion.last_value.date_of_report_unix,
+          source: text.bron,
+        }}
         description={text.map_toelichting}
         legend={
           legendItems // this data value should probably not be optional
@@ -159,17 +177,29 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           datumsText: ggdText.datums,
           dateOfInsertionUnix: ggdData.date_of_insertion_unix,
           weekStartUnix: ggdData.week_start_unix,
-          weekEndUnix: ggdData.week_start_unix,
+          weekEndUnix: ggdData.week_end_unix,
           dataSource: ggdText.bron,
         }}
       />
 
       <TwoKpiSection>
-        <KpiTile title={ggdText.totaal_getest_week_titel}>
+        <KpiTile
+          title={ggdText.totaal_getest_week_titel}
+          metadata={{
+            date: [ggdData.week_start_unix, ggdData.week_end_unix],
+            source: ggdText.bron,
+          }}
+        >
           <KpiValue absolute={ggdData.tested_total} />
           <Text>{ggdText.totaal_getest_week_uitleg}</Text>
         </KpiTile>
-        <KpiTile title={ggdText.positief_getest_week_titel}>
+        <KpiTile
+          title={ggdText.positief_getest_week_titel}
+          metadata={{
+            date: [ggdData.week_start_unix, ggdData.week_end_unix],
+            source: ggdText.bron,
+          }}
+        >
           <KpiValue
             absolute={ggdData.infected}
             percentage={ggdData.infected_percentage}
@@ -224,43 +254,47 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
         formatYAxis={(y: number) => {
           return `${formatPercentage(y)}%`;
         }}
+        metadata={{
+          source: ggdText.bron,
+        }}
       />
 
-      <KpiSection>
-        <MultipleLineChart
-          timeframeOptions={['all', '5weeks']}
-          title={ggdText.linechart_totaltests_titel}
-          description={ggdText.linechart_totaltests_toelichting}
-          values={[
-            ggdValues.map((value) => ({
-              value: value.tested_total,
-              date: value.week_unix,
-              week: {
-                start: value.week_start_unix,
-                end: value.week_end_unix,
-              },
-            })),
-            ggdValues.map((value) => ({
-              value: value.infected,
-              date: value.week_unix,
-              week: {
-                start: value.week_start_unix,
-                end: value.week_end_unix,
-              },
-            })),
-          ]}
-          linesConfig={[
-            {
-              color: '#154273',
-              legendLabel: ggdText.linechart_totaltests_legend_label,
+      <MultipleLineChartTile
+        timeframeOptions={['all', '5weeks']}
+        title={ggdText.linechart_totaltests_titel}
+        description={ggdText.linechart_totaltests_toelichting}
+        values={[
+          ggdValues.map((value) => ({
+            value: value.tested_total,
+            date: value.week_unix,
+            week: {
+              start: value.week_start_unix,
+              end: value.week_end_unix,
             },
-            {
-              color: '#3391CC',
-              legendLabel: ggdText.linechart_positivetests_legend_label,
+          })),
+          ggdValues.map((value) => ({
+            value: value.infected,
+            date: value.week_unix,
+            week: {
+              start: value.week_start_unix,
+              end: value.week_end_unix,
             },
-          ]}
-        />
-      </KpiSection>
+          })),
+        ]}
+        linesConfig={[
+          {
+            color: '#154273',
+            legendLabel: ggdText.linechart_totaltests_legend_label,
+          },
+          {
+            color: '#3391CC',
+            legendLabel: ggdText.linechart_positivetests_legend_label,
+          },
+        ]}
+        metadata={{
+          source: ggdText.bron,
+        }}
+      />
     </>
   );
 };

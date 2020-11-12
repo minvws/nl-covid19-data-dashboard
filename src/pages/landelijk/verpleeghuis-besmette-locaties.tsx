@@ -1,18 +1,22 @@
 import { useRouter } from 'next/router';
 import Locatie from '~/assets/locaties.svg';
 import { LineChart } from '~/components/charts/index';
-import { ChoroplethLegenda } from '~/components/choropleth/legenda/ChoroplethLegenda';
-import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/useSafetyRegionLegendaData';
-import { SafetyRegionChoropleth } from '~/components/choropleth/SafetyRegionChoropleth';
-import { createSelectRegionHandler } from '~/components/choropleth/selectHandlers/createSelectRegionHandler';
-import { createInfectedLocationsRegionalTooltip } from '~/components/choropleth/tooltips/region/createInfectedLocationsRegionalTooltip';
+import { ChoroplethLegenda } from '~/components-styled/choropleth-legenda';
+import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/use-safety-region-legenda-data';
+import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
+import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
+import { createInfectedLocationsRegionalTooltip } from '~/components/choropleth/tooltips/region/create-infected-locations-regional-tooltip';
 import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/contentHeader';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
-import { formatNumber, formatPercentage } from '~/utils/formatNumber';
+import { TwoKpiSection } from '~/components-styled/two-kpi-section';
+import { KpiTile } from '~/components-styled/kpi-tile';
+import { KpiValue } from '~/components-styled/kpi-value';
+import { Text } from '~/components-styled/typography';
+import { Metadata } from '~/components-styled/metadata';
 
 const text = siteText.verpleeghuis_besmette_locaties;
 
@@ -31,7 +35,7 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
         description={text.metadata.description}
       />
       <ContentHeader
-        category={siteText.nationaal_layout.headings.verpleeghuis}
+        category={siteText.nationaal_layout.headings.verpleeghuizen}
         title={text.titel}
         Icon={Locatie}
         subtitle={text.pagina_toelichting}
@@ -43,25 +47,32 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
         }}
       />
 
-      <div className="layout-two-column">
-        <article className="metric-article column-item">
-          <h3>{text.kpi_titel}</h3>
-          <p className="text-blue kpi">
-            {formatNumber(data.last_value.infected_locations_total)} (
-            {formatPercentage(data.last_value.infected_locations_percentage)}
-            %)
-          </p>
-          <p>{text.kpi_toelichting}</p>
-        </article>
+      <TwoKpiSection>
+        <KpiTile
+          title={text.kpi_titel}
+          metadata={{
+            date: data.last_value.date_of_report_unix,
+            source: text.bron,
+          }}
+        >
+          <KpiValue
+            absolute={data.last_value.infected_locations_total}
+            percentage={data.last_value.infected_locations_percentage}
+          />
+          <Text>{text.kpi_toelichting}</Text>
+        </KpiTile>
 
-        <article className="metric-article column-item">
-          <h3>{text.barscale_titel}</h3>
-          <p className="text-blue kpi">
-            {formatNumber(data?.last_value.newly_infected_locations)}
-          </p>
-          <p>{text.barscale_toelichting}</p>
-        </article>
-      </div>
+        <KpiTile
+          title={text.barscale_titel}
+          metadata={{
+            date: data.last_value.date_of_report_unix,
+            source: text.bron,
+          }}
+        >
+          <KpiValue absolute={data?.last_value.newly_infected_locations} />
+          <Text>{text.barscale_toelichting}</Text>
+        </KpiTile>
+      </TwoKpiSection>
 
       <article className="metric-article layout-choropleth">
         <div className="choropleth-header">
@@ -89,6 +100,10 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
             />
           )}
         </div>
+        <Metadata
+          date={data.last_value.date_of_report_unix}
+          source={text.bron}
+        />
       </article>
 
       <article className="metric-article">
@@ -99,6 +114,7 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
             date: value.date_of_report_unix,
           }))}
         />
+        <Metadata source={text.bron} />
       </article>
     </>
   );

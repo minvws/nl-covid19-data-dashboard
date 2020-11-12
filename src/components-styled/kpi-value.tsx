@@ -5,7 +5,7 @@ import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 
 interface KpiValueProps {
-  absolute: number;
+  absolute?: number;
   percentage?: number;
   valueAnnotation?: string;
 }

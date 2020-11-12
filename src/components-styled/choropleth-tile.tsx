@@ -1,7 +1,7 @@
 import {
   ChoroplethLegenda,
-  ILegendaItem,
-} from '~/components/choropleth/legenda/ChoroplethLegenda';
+  LegendaItem,
+} from '~/components-styled/choropleth-legenda';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { Box } from './base';
 import {
@@ -10,6 +10,7 @@ import {
 } from './chart-region-controls';
 import { Tile } from './layout';
 import { Heading, Text } from './typography';
+import { Metadata, MetadataProps } from './metadata';
 
 /**
  * We could use strong typing here for the values and also enforce the data
@@ -28,8 +29,9 @@ interface ChoroplethTileProps extends DataProps {
   children: React.ReactNode;
   legend?: {
     title: string;
-    items: ILegendaItem[];
+    items: LegendaItem[];
   };
+  metadata?: MetadataProps;
 }
 
 export function ChoroplethTile<T>({
@@ -38,6 +40,7 @@ export function ChoroplethTile<T>({
   onChangeControls,
   legend,
   children,
+  metadata,
 }: ChoroplethTileProps) {
   const breakpoints = useBreakpoints();
   const legendaComponent = legend && (
@@ -79,6 +82,7 @@ export function ChoroplethTile<T>({
           )}
         </Box>
       </Box>
+      {metadata && <Metadata {...metadata} />}
     </Tile>
   );
 }
