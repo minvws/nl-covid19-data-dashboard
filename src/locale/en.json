@@ -218,6 +218,14 @@
         }
       }
     },
+
+    "verdeling_in_nederland": {
+      "titel": "Verdeling in Nederland",
+      "intro": "Selecteer een gedragsregel om de verdeling over de veiligheidsregio's te zien.",
+      "onbekend": "Onbekend",
+      "legenda_titel": "Percentage"
+    },
+
     "basisregels": {
       "title": "Basisregels",
       "intro": {

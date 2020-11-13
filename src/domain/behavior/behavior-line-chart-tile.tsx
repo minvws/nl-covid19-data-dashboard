@@ -10,24 +10,23 @@ import { NationalBehaviorValue } from '~/types/data';
 import {
   BehaviorIdentifier,
   behaviorIdentifiers,
-  GedragText,
+  BehaviorType,
 } from './behavior-types';
 import { BehaviorLineChart, Value } from './components/behavior-line-chart';
-import {
-  BehaviorTypeControl,
-  BehaviorTypeControlOption,
-} from './components/behavior-type-control';
+import { BehaviorTypeControl } from './components/behavior-type-control';
 
 interface BehaviorLineChartTileProps {
-  text: GedragText;
   values: NationalBehaviorValue[];
+  title: string;
+  introduction: Record<BehaviorType, string>;
 }
 
 export function BehaviorLineChartTile({
-  text,
+  title,
+  introduction,
   values,
 }: BehaviorLineChartTileProps) {
-  const [type, setType] = useState<BehaviorTypeControlOption>('compliance');
+  const [type, setType] = useState<BehaviorType>('compliance');
   const [currentId, setCurrentId] = useState<BehaviorIdentifier>('wash_hands');
 
   const behaviorIdentifierWithData = behaviorIdentifiers
@@ -73,7 +72,7 @@ export function BehaviorLineChartTile({
     >
       <Header>
         <Box mr={{ lg: '1em' }} mb={{ lg: '1em' }}>
-          <h3>{text.basisregels_over_tijd.title}</h3>
+          <h3>{title}</h3>
         </Box>
       </Header>
 
@@ -87,7 +86,7 @@ export function BehaviorLineChartTile({
         flexDirection={{ _: 'column', lg: 'row' }}
       >
         <Box flex="1" mr={{ lg: 2 }}>
-          <p>{text.basisregels_over_tijd.intro[type]}</p>
+          <p>{introduction[type]}</p>
         </Box>
         <Box flex="1" ml={{ lg: 2 }}>
           <Select

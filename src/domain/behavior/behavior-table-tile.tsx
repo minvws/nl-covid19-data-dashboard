@@ -10,7 +10,7 @@ import {
   behaviorIdentifiers,
   BehaviorIdentifier,
   BehaviorTrendType,
-  GedragText,
+  BehaviorType,
 } from './behavior-types';
 import { BehaviorIcon } from './components/behavior-icon';
 import { BehaviorTrend } from './components/behavior-trend';
@@ -22,8 +22,10 @@ const commonText = siteText.gedrag_common;
 type BehaviorValue = NationalBehaviorValue | RegionalBehaviorValue;
 
 interface BehaviorTileProps {
-  text: GedragText;
   behavior: BehaviorValue;
+  title: string;
+  introduction: Record<BehaviorType, string>;
+  footer: Record<BehaviorType, string>;
 }
 
 interface BehaviorFormatted {
@@ -54,7 +56,7 @@ const Cell = styled.td(
 /* Format raw list of behaviors into list for compliance or for support */
 function formatBehaviorType(
   behavior: BehaviorValue,
-  type: 'compliance' | 'support'
+  type: BehaviorType
 ): BehaviorFormatted[] {
   return behaviorIdentifiers.map((identifier) => {
     const percentage = behavior[
@@ -109,11 +111,14 @@ function formatAndSortBehavior(
   return sortBehavior(compliance, support);
 }
 
-export function BehaviorTableTile({ text, behavior }: BehaviorTileProps) {
+export function BehaviorTableTile({
+  behavior,
+  title,
+  introduction,
+  footer,
+}: BehaviorTileProps) {
   const { sortedCompliance, sortedSupport } = formatAndSortBehavior(behavior);
-  const [behaviorType, setBehaviorType] = useState<'compliance' | 'support'>(
-    'compliance'
-  );
+  const [behaviorType, setBehaviorType] = useState<BehaviorType>('compliance');
 
   return (
     <Tile
@@ -133,12 +138,12 @@ export function BehaviorTableTile({ text, behavior }: BehaviorTileProps) {
       ml={{ _: -4, sm: 0 }}
       mr={{ _: -4, sm: 0 }}
     >
-      <h3>{text.basisregels.title}</h3>
+      <h3>{title}</h3>
       <Box display="flex" justifyContent="start">
         <BehaviorTypeControl value={behaviorType} onChange={setBehaviorType} />
       </Box>
 
-      <p>{text.basisregels.intro[behaviorType]}</p>
+      <p>{introduction[behaviorType]}</p>
       <div css={css({ overflow: 'auto' })}>
         <table css={css({ width: '100%' })}>
           <thead>
@@ -179,9 +184,7 @@ export function BehaviorTableTile({ text, behavior }: BehaviorTileProps) {
           </tbody>
         </table>
       </div>
-      <p css={css({ color: 'gray' })}>
-        {text.basisregels.voetnoot[behaviorType]}
-      </p>
+      <p css={css({ color: 'gray' })}>{footer[behaviorType]}</p>
     </Tile>
   );
 }

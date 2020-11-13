@@ -174,28 +174,32 @@ const sewerThresholds: ChoroplethThresholds = {
 const behaviorThresholds: ChoroplethThresholds = {
   thresholds: [
     {
-      color: '#C0E8FC',
+      color: '#034566',
       threshold: 0,
     },
     {
-      color: '#8BD1FF',
-      threshold: 5,
+      color: '#0579B3',
+      threshold: 40,
     },
     {
-      color: '#61B6ED',
+      color: '#3391CC',
       threshold: 50,
     },
     {
-      color: '#3597D4',
-      threshold: 100,
+      color: '#5DAFE4',
+      threshold: 60,
     },
     {
-      color: '#046899',
-      threshold: 150,
+      color: '#87CBF8',
+      threshold: 70,
     },
     {
-      color: '#034566',
-      threshold: 200,
+      color: '#C0E8FC',
+      threshold: 80,
+    },
+    {
+      color: '#EBF8FF',
+      threshold: 90,
     },
   ],
 };
