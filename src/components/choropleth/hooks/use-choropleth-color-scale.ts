@@ -38,7 +38,7 @@ export function useChoroplethColorScale(
   return useCallback(
     (id: string) => {
       const data = getData(id);
-      if (colorScale && data?.value !== undefined) {
+      if (colorScale && data?.value !== undefined && data?.value !== null) {
         return colorScale(data.value);
       }
       return defaultColor;

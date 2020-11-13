@@ -7,7 +7,7 @@ import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hook
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
 import siteText from '~/locale/index';
-// import { NationalBehaviorValue } from '~/types/data';
+
 import {
   BehaviorIdentifier,
   behaviorIdentifiers,
@@ -20,17 +20,13 @@ import {
 
 interface BehaviorChoroplethTileProps {
   text: GedragText;
-  // value: NationalBehaviorValue;
 }
 
-export function BehaviorChoroplethTile({
-  text,
-}: // value,
-BehaviorChoroplethTileProps) {
-  const router = useRouter();
+export function BehaviorChoroplethTile({ text }: BehaviorChoroplethTileProps) {
   const [type, setType] = useState<BehaviorTypeControlOption>('compliance');
   const [currentId, setCurrentId] = useState<BehaviorIdentifier>('wash_hands');
   const legendItems = useSafetyRegionLegendaData('behavior');
+  const router = useRouter();
 
   const metricValueName = `${currentId}_${type}`;
 
@@ -43,12 +39,13 @@ BehaviorChoroplethTileProps) {
 
   return (
     <ChoroplethTile
-      title={'titel'}
+      title={text.verdeling_in_nederland.titel}
       description={
         <>
           <Box display="flex" justifyContent="start">
             <BehaviorTypeControl value={type} onChange={setType} />
           </Box>
+          <p>{text.verdeling_in_nederland.intro}</p>
           <Select
             value={currentId}
             onChange={setCurrentId}
@@ -60,12 +57,10 @@ BehaviorChoroplethTileProps) {
         </>
       }
       legend={
-        legendItems // this data value should probably not be optional
-          ? {
-              title: 'legenda_titel',
-              items: legendItems,
-            }
-          : undefined
+        legendItems && {
+          items: legendItems,
+          title: text.verdeling_in_nederland.legenda_titel,
+        }
       }
     >
       <SafetyRegionChoropleth
@@ -76,12 +71,14 @@ BehaviorChoroplethTileProps) {
             event.stopPropagation();
             gotoRegion(context.vrcode);
           };
+          const value = context[metricValueName];
 
           return (
             <TooltipContent title={context.vrname} onSelect={onSelect}>
               <p>
                 <strong>
-                  {text.common[type]}: {context[metricValueName]}%
+                  {text.common[type]}:{' '}
+                  {value ? `${value}%` : text.verdeling_in_nederland.onbekend}
                 </strong>
               </p>
               <p>{siteText.gedrag_onderwerpen[currentId]}</p>
