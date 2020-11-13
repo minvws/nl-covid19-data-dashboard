@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { Box } from '~/components-styled/base';
 import { TitleWithIcon } from '~/components/titleWithIcon';
 import styles from '../layout/layout.module.scss';
