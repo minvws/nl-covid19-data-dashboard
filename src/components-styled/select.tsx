@@ -58,7 +58,8 @@ const StyledSelect = styled.select(
     backgroundPosition: 'right 0.5em top 60%, 0 0',
     '&:focus': {
       borderColor: 'lightGray',
-      outline: 0,
+      outline: '2px dotted',
+      outlineColor: 'blue',
     },
     '&::-ms-expand': {
       display: 'none',
