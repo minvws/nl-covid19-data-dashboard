@@ -50,7 +50,7 @@ export function ChoroplethTile<T>({
   return (
     <Tile mb={4} ml={{ _: -4, sm: 0 }} mr={{ _: -4, sm: 0 }}>
       <Box display="flex" flexDirection={{ _: 'column', lg: 'row' }}>
-        <Box flex={{ lg: 1 }} mr={[0, 0, 3]}>
+        <Box mb={3} flex={{ lg: 1 }} mr={[0, 0, 3]}>
           <Box mb={[0, 4]}>
             <Heading level={3}>{title}</Heading>
             {typeof description === 'string' ? (

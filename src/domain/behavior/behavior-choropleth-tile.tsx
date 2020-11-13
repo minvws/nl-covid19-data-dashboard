@@ -5,8 +5,10 @@ import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { Select } from '~/components-styled/select';
 import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/use-safety-region-legenda-data';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
+import { SafetyRegionProperties } from '~/components/choropleth/shared';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
 import siteText from '~/locale/index';
+import { RegionsBehavior } from '~/types/data';
 import {
   BehaviorIdentifier,
   behaviorIdentifiers,
@@ -22,7 +24,7 @@ export function BehaviorChoroplethTile() {
   const legendItems = useSafetyRegionLegendaData('behavior');
   const router = useRouter();
 
-  const metricValueName = `${currentId}_${type}`;
+  const metricValueName = `${currentId}_${type}` as keyof RegionsBehavior;
 
   function gotoRegion(vrcode: string) {
     router.push(
@@ -60,7 +62,7 @@ export function BehaviorChoroplethTile() {
       <SafetyRegionChoropleth
         metricName="behavior"
         metricValueName={metricValueName}
-        tooltipContent={(context: any) => {
+        tooltipContent={(context: RegionsBehavior & SafetyRegionProperties) => {
           const onSelect = (event: React.MouseEvent) => {
             event.stopPropagation();
             gotoRegion(context.vrcode);
