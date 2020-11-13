@@ -1,11 +1,12 @@
 import AlcoholVerbodIcon from '~/assets/restrictions/AlcoholVerbod.svg';
 import AutoVooraanzichtIcon from '~/assets/restrictions/AutoVooraanzicht.svg';
 import Bezoek1Icon from '~/assets/restrictions/Bezoek1.svg';
-import CafeIcon from '~/assets/restrictions/Cafe.svg';
 import GeenBijeenkomstenIcon from '~/assets/restrictions/GeenBijeenkomsten.svg';
 import GeenEvenementenIcon from '~/assets/restrictions/GeenEvenementen.svg';
+import GeenSportwedstrijdenIcon from '~/assets/restrictions/GeenSportwedstrijden.svg';
 import Groep2PersonenIcon from '~/assets/restrictions/Groep2Personen.svg';
-import HorecaGeslotenIcon from '~/assets/restrictions/HorecaGesloten.svg';
+import GeenHorecaIcon from '~/assets/restrictions/HorecaGesloten.svg';
+import HorecaOpenIcon from '~/assets/restrictions/HorecaOpenIcon.svg';
 import KlembordMetVinkjesEnLijnenIcon from '~/assets/restrictions/KlembordMetVinkjesEnLijnen.svg';
 import KlokIcon from '~/assets/restrictions/Klok.svg';
 import LaptopIcon from '~/assets/restrictions/Laptop.svg';
@@ -33,7 +34,7 @@ export const restrictionIcons: Record<string, any> = {
   '4_samenkomst_6': '',
   '4_huwelijk_7': Groep2PersonenIcon,
   '4_verpleeghuis_8': VerzorgingstehuisIcon,
-  '4_horeca_9': HorecaGeslotenIcon,
+  '4_horeca_9': GeenHorecaIcon,
   '4_horeca_10': '',
   '4_sport_11': '',
   '4_sport_12': '',
@@ -68,7 +69,7 @@ export const restrictionIcons: Record<string, any> = {
   '2_samenkomst_49': Groep2PersonenIcon,
   '2_huwelijk_50': Groep2PersonenIcon,
   '2_verpleeghuis_51': VerzorgingstehuisIcon,
-  '2_horeca_52': HorecaGeslotenIcon,
+  '2_horeca_52': HorecaOpenIcon,
   '2_sport_53': VinkjeIcon,
   '2_reizen_binnenland_54': AutoVooraanzichtIcon,
   '2_reizen_buitenland_55': ReisbagageIcon,
@@ -84,7 +85,7 @@ export const restrictionIcons: Record<string, any> = {
   '3_samenkomst_65': Groep2PersonenIcon,
   '3_huwelijk_66': Groep2PersonenIcon,
   '3_verpleeghuis_67': VerzorgingstehuisIcon,
-  '3_horeca_68': HorecaGeslotenIcon,
+  '3_horeca_68': HorecaOpenIcon,
   '3_sport_69': GeenBijeenkomstenIcon,
   '3_reizen_binnenland_70': AutoVooraanzichtIcon,
   '3_reizen_buitenland_71': ReisbagageIcon,
@@ -95,36 +96,36 @@ export const restrictionIcons: Record<string, any> = {
   '3_winkels_76': KlokIcon,
   '3_winkels_77': OudeVrouwIcon,
   '3_alcohol_78': VinkjeIcon,
-  '4_er_op_uit_79': '',
-  '4_bezoek_80': '',
-  '4_bezoek_81': '',
-  '4_samenkomst_82': '',
-  '4_samenkomst_83': '',
+  '4_er_op_uit_79': Personen4Icon,
+  '4_bezoek_80': Personen3Icon,
+  '4_bezoek_81': Bezoek1Icon,
+  '4_samenkomst_82': Groep2PersonenIcon,
+  '4_samenkomst_83': GeenEvenementenIcon,
   '4_samenkomst_84': '',
-  '4_huwelijk_85': '',
-  '4_verpleeghuis_86': '',
-  '4_horeca_87': '',
+  '4_huwelijk_85': Groep2PersonenIcon,
+  '4_verpleeghuis_86': VerzorgingstehuisIcon,
+  '4_horeca_87': GeenHorecaIcon,
   '4_horeca_88': '',
-  '4_sport_89': '',
+  '4_sport_89': GeenSportwedstrijdenIcon,
   '4_sport_90': '',
   '4_sport_91': '',
-  '4_reizen_binnenland_92': '',
+  '4_reizen_binnenland_92': AutoVooraanzichtIcon,
   '4_reizen_buitenland_93': '',
-  '4_ov_94': '',
-  '4_uitvaart_95': '',
-  '4_onderwijs_96': '',
-  '4_werk_97': '',
-  '4_winkels_98': '',
-  '4_winkels_99': '',
-  '4_alcohol_100': '',
+  '4_ov_94': VrouwMetMondkapjeIcon,
+  '4_uitvaart_95': Groep2PersonenIcon,
+  '4_onderwijs_96': RugzakIcon,
+  '4_werk_97': LaptopIcon,
+  '4_winkels_98': KlokIcon,
+  '4_winkels_99': OudeVrouwIcon,
+  '4_alcohol_100': AlcoholVerbodIcon,
   '4_alcohol_101': '',
   '41_er_op_uit_102': Personen2Icon,
   '41_bezoek_103': ThuisblijvenIcon,
   '41_samenkomst_104': GeenBijeenkomstenIcon,
   '41_samenkomst_105': GeenEvenementenIcon,
-  '41_huwelijk_106': Groep2PersonenIcon,
+  '41_huwelijk_106': GeenBijeenkomstenIcon,
   '41_verpleeghuis_107': VerzorgingstehuisIcon,
-  '41_horeca_108': HorecaGeslotenIcon,
+  '41_horeca_108': GeenHorecaIcon,
   '41_horeca_109': '',
   '41_sport_110': VerbodSportactiviteitenIcon,
   '41_sport_111': '',
@@ -137,6 +138,6 @@ export const restrictionIcons: Record<string, any> = {
   '41_werk_118': LaptopIcon,
   '41_winkels_119': KlokIcon,
   '41_winkels_120': OudeVrouwIcon,
-  '41_alcohol_121': CafeIcon,
+  '41_alcohol_121': GeenHorecaIcon,
   '41_alcohol_122': '',
 };
