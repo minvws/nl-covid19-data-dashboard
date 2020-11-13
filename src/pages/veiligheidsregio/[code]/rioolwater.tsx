@@ -30,6 +30,7 @@ import { Metadata } from '~/components-styled/metadata';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
+import css from '@styled-system/css';
 
 const text = siteText.veiligheidsregio_rioolwater_metingen;
 
@@ -126,7 +127,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
 
       <article className="metric-article">
         <div className="metric-article-header">
-          <h3>{text.linechart_titel}</h3>
+          <h3 css={css({ mr: 3, flex: 1 })}>{text.linechart_titel}</h3>
           <ChartTimeControls
             timeframeOptions={['all', '5weeks']}
             timeframe={timeframe}
