@@ -6,7 +6,7 @@ import GeenEvenementenIcon from '~/assets/restrictions/GeenEvenementen.svg';
 import GeenSportwedstrijdenIcon from '~/assets/restrictions/GeenSportwedstrijden.svg';
 import Groep2PersonenIcon from '~/assets/restrictions/Groep2Personen.svg';
 import GeenHorecaIcon from '~/assets/restrictions/HorecaGesloten.svg';
-import HorecaOpenIcon from '~/assets/restrictions/HorecaOpenIcon.svg';
+import HorecaOpenIcon from '~/assets/restrictions/HorecaOpen.svg';
 import KlembordMetVinkjesEnLijnenIcon from '~/assets/restrictions/KlembordMetVinkjesEnLijnen.svg';
 import KlokIcon from '~/assets/restrictions/Klok.svg';
 import LaptopIcon from '~/assets/restrictions/Laptop.svg';
