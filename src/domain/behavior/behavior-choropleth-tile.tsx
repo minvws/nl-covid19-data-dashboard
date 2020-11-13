@@ -26,7 +26,7 @@ export function BehaviorChoroplethTile() {
 
   const metricValueName = `${currentId}_${type}` as keyof RegionsBehavior;
 
-  function gotoRegion(vrcode: string) {
+  function goToRegion(vrcode: string) {
     router.push(
       '/veiligheidsregio/[code]/gedrag',
       `/veiligheidsregio/${vrcode}/gedrag`
@@ -65,7 +65,7 @@ export function BehaviorChoroplethTile() {
         tooltipContent={(context: RegionsBehavior & SafetyRegionProperties) => {
           const onSelect = (event: React.MouseEvent) => {
             event.stopPropagation();
-            gotoRegion(context.vrcode);
+            goToRegion(context.vrcode);
           };
           const value = context[metricValueName];
 
@@ -81,7 +81,7 @@ export function BehaviorChoroplethTile() {
             </TooltipContent>
           );
         }}
-        onSelect={(x) => gotoRegion(x.vrcode)}
+        onSelect={(x) => goToRegion(x.vrcode)}
       />
     </ChoroplethTile>
   );
