@@ -1,16 +1,15 @@
 import path from 'path';
-
-import { Regionaal, Regions } from '~/types/data.d';
-
 import safetyRegions from '~/data/index';
+import { Regionaal, Regions } from '~/types/data.d';
 import { sortRegionalTimeSeriesInDataInPlace } from './data-sorting';
 import { loadJsonFromFile } from './utils/load-json-from-file';
 
 export interface ISafetyRegionData {
   data: Regionaal;
+  code: string;
   safetyRegionName: string;
   lastGenerated: string;
-  escalationLevel: number;
+  escalationLevel: Regions['escalation_levels'][number];
 }
 
 interface IProps {
@@ -66,9 +65,9 @@ export function getSafetyRegionData() {
       path.join(publicJsonPath, `REGIONS.json`)
     );
 
-    const escalationLevel =
-      regionsData.escalation_levels.find((item) => item.vrcode === code)
-        ?.escalation_level ?? 0;
+    const escalationLevelInfo =
+      regionsData.escalation_levels.find((item) => item.vrcode === code) ??
+      regionsData.escalation_levels[0];
 
     sortRegionalTimeSeriesInDataInPlace(data);
 
@@ -80,9 +79,10 @@ export function getSafetyRegionData() {
     return {
       props: {
         data,
+        code,
         safetyRegionName,
         lastGenerated,
-        escalationLevel,
+        escalationLevel: escalationLevelInfo,
       },
     };
   };

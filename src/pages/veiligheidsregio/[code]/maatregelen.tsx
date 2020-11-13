@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import ExternalLinkIcon from '~/assets/external-link.svg';
+import MaatregelenIcon from '~/assets/maatregelen.svg';
 import { Box } from '~/components-styled/base';
 import { ExternalLink } from '~/components-styled/external-link';
 import { KpiSection } from '~/components-styled/kpi-section';
@@ -17,6 +17,7 @@ import {
   getSafetyRegionPaths,
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
+import { formatDateFromSeconds } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useRestrictionLevel } from '~/utils/useRestrictionLevel';
 import { useRestrictionsTable } from '~/utils/useRestrictionsTable';
@@ -25,12 +26,9 @@ const text = siteText.veiligheidsregio_maatregelen;
 type VRCode = keyof typeof siteText.veiligheidsregio_maatregelen_urls;
 
 const RegionalRestrictions: FCWithLayout<ISafetyRegionData> = (props) => {
-  const { data, safetyRegionName, escalationLevel } = props;
-  const router = useRouter();
-  const { code } = router.query;
+  const { data, safetyRegionName, escalationLevel, code } = props;
 
-  const vrcode: VRCode =
-    code && !Array.isArray(code) ? (code as VRCode) : 'VR01';
+  const vrcode: VRCode = code as VRCode;
 
   const regioUrl = siteText.veiligheidsregio_maatregelen_urls[vrcode];
 
@@ -56,6 +54,7 @@ const RegionalRestrictions: FCWithLayout<ISafetyRegionData> = (props) => {
         title={replaceVariablesInText(text.titel, {
           safetyRegionName,
         })}
+        Icon={MaatregelenIcon}
       />
       <KpiSection flexDirection="column">
         <Heading level={3}>{text.titel_risiconiveau}</Heading>
@@ -63,19 +62,29 @@ const RegionalRestrictions: FCWithLayout<ISafetyRegionData> = (props) => {
           display="flex"
           flexDirection={['column', 'row']}
           justifyContent="flex-start"
+          alignItems="flex-start"
         >
-          <Box
-            flexShrink={0}
-            display="flex"
-            flexDirection="row"
-            justifyContent="flex-start"
-            alignItems="center"
-            mr={5}
-          >
-            <EscalationLevelInfoLabel escalationLevel={escalationLevel} />
+          <Box flexShrink={0} display="flex" flexDirection="column" mr={5}>
+            <Box
+              display="flex"
+              flexDirection="row"
+              justifyContent="flex-start"
+              alignItems="center"
+            >
+              <EscalationLevelInfoLabel
+                escalationLevel={escalationLevel.escalation_level}
+              />
+            </Box>
+            <Text>
+              {replaceVariablesInText(siteText.escalatie_niveau.valid_from, {
+                validFrom: formatDateFromSeconds(
+                  escalationLevel.valid_from_unix
+                ),
+              })}
+            </Text>
           </Box>
           <Box display="flex" flexDirection="column">
-            <Text>{restrictionInfo.toelichting_risiconiveau}</Text>
+            <Text m={0}>{restrictionInfo.toelichting_risiconiveau}</Text>
             <Link href="/over-risiconiveaus">
               <a>{text.linktext_riskpage}</a>
             </Link>
@@ -95,7 +104,7 @@ const RegionalRestrictions: FCWithLayout<ISafetyRegionData> = (props) => {
         </Box>
         <RestrictionsTable
           data={restrictionsTable}
-          escalationLevel={escalationLevel}
+          escalationLevel={escalationLevel.escalation_level}
         />
       </KpiSection>
 

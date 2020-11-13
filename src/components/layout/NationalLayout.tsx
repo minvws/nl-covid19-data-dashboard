@@ -5,6 +5,7 @@ import Arrow from '~/assets/arrow.svg';
 import Arts from '~/assets/arts.svg';
 import CoronaVirus from '~/assets/coronavirus.svg';
 import Locatie from '~/assets/locaties.svg';
+import MaatregelenIcon from '~/assets/maatregelen.svg';
 import Notification from '~/assets/notification.svg';
 import ReproIcon from '~/assets/reproductiegetal.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
@@ -125,6 +126,7 @@ function NationalLayout(props: NationalLayoutProps) {
                     <TitleWithIcon
                       title={siteText.nationaal_maatregelen.titel_sidebar}
                       subtitle={siteText.nationaal_maatregelen.subtitel_sidebar}
+                      Icon={MaatregelenIcon}
                     />
                   </a>
                 </Link>

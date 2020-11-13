@@ -1,12 +1,13 @@
 import fs from 'fs';
 import path from 'path';
+import { TALLLanguages } from '~/locale';
 import { National } from '~/types/data.d';
 import { sortNationalTimeSeriesInDataInPlace } from './data-sorting';
 
 export interface INationalData {
   data: National;
   lastGenerated: string;
-  text?: any;
+  text?: TALLLanguages;
 }
 
 interface IProps {

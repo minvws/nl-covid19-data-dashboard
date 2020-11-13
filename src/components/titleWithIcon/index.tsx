@@ -1,9 +1,9 @@
 import React, { ReactNode } from 'react';
-
 import styles from './titleWithIcon.module.scss';
 
 interface IProps {
-  Icon?: React.ComponentType;
+  Icon?: React.ElementType;
+  iconFill?: string;
   title: string;
   subtitle?: ReactNode;
   regio?: string;
@@ -12,7 +12,15 @@ interface IProps {
 }
 
 export function TitleWithIcon(props: IProps) {
-  const { Icon, title, subtitle, regio, headingRef, as = 'h3' } = props;
+  const {
+    Icon,
+    iconFill,
+    title,
+    subtitle,
+    regio,
+    headingRef,
+    as = 'h3',
+  } = props;
 
   return (
     <div className={styles.titleWithIcon}>
@@ -22,7 +30,8 @@ export function TitleWithIcon(props: IProps) {
             as === 'h2' ? styles['icon-large'] : styles['icon-small']
           }`}
         >
-          <Icon />
+          {iconFill && <Icon fill={iconFill} />}
+          {!iconFill && <Icon />}
         </div>
       )}
       {/*

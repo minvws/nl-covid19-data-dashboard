@@ -1,7 +1,7 @@
-import { Metadata } from './metadata';
+import { Box } from '~/components-styled/base';
 import { TitleWithIcon } from '~/components/titleWithIcon';
 import styles from '../layout/layout.module.scss';
-import { ReactNode } from 'react';
+import { Metadata } from './metadata';
 
 export function GenericContentHeader(props: ISmallContentHeaderProps) {
   const { category, Icon, title, id, children } = props;
@@ -20,6 +20,7 @@ export function GenericContentHeader(props: ISmallContentHeaderProps) {
       {category && <p className={styles.category}>{category}</p>}
       <TitleWithIcon Icon={Icon} title={title} as="h2" />
       {children}
+      {!children && <Box mb={4} />}
     </header>
   );
 }

@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import Arrow from '~/assets/arrow.svg';
 import CoronaVirus from '~/assets/coronavirus.svg';
 import Locatie from '~/assets/locaties.svg';
+import MaatregelenIcon from '~/assets/maatregelen.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
@@ -64,12 +65,10 @@ type TSafetyRegion = {
 function SafetyRegionLayout(
   props: ISafetyRegionData & { children: React.ReactNode }
 ) {
-  const { children, data, safetyRegionName, escalationLevel } = props;
+  const { children, data, safetyRegionName, escalationLevel, code } = props;
 
   const router = useRouter();
   const isLargeScreen = useMediaQuery('(min-width: 1000px)', true);
-
-  const { code } = router.query;
 
   const isMainRoute =
     router.route === '/veiligheidsregio' ||
@@ -160,9 +159,10 @@ function SafetyRegionLayout(
                         title={
                           siteText.veiligheidsregio_maatregelen.titel_sidebar
                         }
+                        Icon={MaatregelenIcon}
                         subtitle={
                           <EscalationLevelInfo
-                            escalationLevel={escalationLevel}
+                            escalationLevel={escalationLevel.escalation_level}
                           />
                         }
                       />
