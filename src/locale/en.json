@@ -267,7 +267,7 @@
       "description": "The reproduction number shows how fast the virus is spreading. This number shows how many people are on average infected by one patient with COVID-19."
     },
     "titel_sidebar": "Reproduction number",
-    "titel_kpi": "Effective reproduction number"
+    "titel_kpi": "Most recent reproduction number"
   },
   "overige_gegevens": {
     "title": "To be developed",
@@ -338,7 +338,7 @@
       "title": "Infected nursing homes | Dashboard Coronavirus | Government.nl",
       "description": "National number of nursing homes with at least one confirmed case of COVID-19."
     },
-    "titel_sidebar": "Infected locations",
+    "titel_sidebar": "Number of infected nursing home locations",
     "titel_kpi": "Number of infected locations"
   },
   "verpleeghuis_positief_geteste_personen": {
@@ -380,7 +380,7 @@
     "linechart_titel": "Progression over time",
     "map_titel": "Nursing home excess mortality in the Netherlands",
     "map_toelichting": "These maps show the excess mortality in nursing homes in the Netherlands per day.",
-    "titel_sidebar": "Mortality",
+    "titel_sidebar": "Deceased nursing home residents per day",
     "metadata": {
       "title": "Number of confirmed cases in nursing homes | Dashboard Coronavirus | Government.nl",
       "description": "National number of deceased residents with confirmed cases of COVID-19 in nursing homes."
@@ -1003,7 +1003,7 @@
     "linechart_titel": "Progression over time",
     "map_titel": "Nursing home excess mortality in the Netherlands",
     "map_toelichting": "These maps show the excess mortality in nursing homes in the Netherlands per day.",
-    "titel_sidebar": "Mortality",
+    "titel_sidebar": "Deceased nursing home residents",
     "metadata": {
       "title": "Deceased residents nursing homes in {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
       "description": "Number of deceased residents with confirmed cases of COVID-19 in nursing homes within safety region {{safetyRegionName}}."
