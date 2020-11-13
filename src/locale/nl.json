@@ -227,6 +227,14 @@
         "compliance": "Voetnoot naleving",
         "support": "Voetnoot draagvlak"
       }
+    },
+
+    "basisregels_over_tijd": {
+      "title": "Basisregels over tijd",
+      "intro": {
+        "compliance": "Intro naleving",
+        "support": "Intro draagvlak"
+      }
     }
   },
   "regionaal_gedrag": {
@@ -269,6 +277,14 @@
       "voetnoot": {
         "compliance": "Voetnoot naleving",
         "support": "Voetnoot draagvlak"
+      }
+    },
+
+    "basisregels_over_tijd": {
+      "title": "Basisregels over tijd",
+      "intro": {
+        "compliance": "Intro naleving",
+        "support": "Intro draagvlak"
       }
     }
   },

@@ -61,10 +61,7 @@ const BehaviorPage: FCWithLayout<INationalData> = (props) => {
 
       <BehaviorTableTile text={text} behavior={behaviorData.last_value} />
 
-      <BehaviorLineChartTile
-        values={behaviorData.values}
-        metadata={{ source: text.bron }}
-      />
+      <BehaviorLineChartTile text={text} values={behaviorData.values} />
     </>
   );
 };
