@@ -1,11 +1,10 @@
 import { RadioGroup } from '~/components-styled/radio-group';
 import text from '~/locale/index';
-
-export type BehaviorTypeControlOption = 'compliance' | 'support';
+import { BehaviorType } from '../behavior-types';
 
 export interface BehaviorTypeControlProps {
-  onChange: (value: BehaviorTypeControlOption) => void;
-  value: BehaviorTypeControlOption;
+  onChange: (value: BehaviorType) => void;
+  value: BehaviorType;
 }
 
 const items = [

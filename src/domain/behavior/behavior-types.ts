@@ -1,5 +1,3 @@
-import siteText from '~/locale/index';
-
 export const behaviorIdentifiers = [
   'wash_hands',
   'keep_distance',
@@ -17,5 +15,4 @@ export type BehaviorIdentifier = typeof behaviorIdentifiers[number];
 
 export type BehaviorTrendType = 'up' | 'down' | 'equal';
 
-export type GedragText = typeof siteText.regionaal_gedrag &
-  typeof siteText.nl_gedrag;
+export type BehaviorType = 'compliance' | 'support';

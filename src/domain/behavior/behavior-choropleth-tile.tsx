@@ -7,17 +7,17 @@ import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hook
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
 import siteText from '~/locale/index';
-
-import { BehaviorIdentifier, behaviorIdentifiers } from './behavior-types';
 import {
-  BehaviorTypeControl,
-  BehaviorTypeControlOption,
-} from './components/behavior-type-control';
+  BehaviorIdentifier,
+  behaviorIdentifiers,
+  BehaviorType,
+} from './behavior-types';
+import { BehaviorTypeControl } from './components/behavior-type-control';
 
 const text = siteText.nl_gedrag;
 
 export function BehaviorChoroplethTile() {
-  const [type, setType] = useState<BehaviorTypeControlOption>('compliance');
+  const [type, setType] = useState<BehaviorType>('compliance');
   const [currentId, setCurrentId] = useState<BehaviorIdentifier>('wash_hands');
   const legendItems = useSafetyRegionLegendaData('behavior');
   const router = useRouter();

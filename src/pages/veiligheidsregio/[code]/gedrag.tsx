@@ -63,9 +63,18 @@ const BehaviorPage: FCWithLayout<ISafetyRegionData> = (props) => {
         </KpiTile>
       </TwoKpiSection>
 
-      <BehaviorTableTile text={text} behavior={behaviorData.last_value} />
+      <BehaviorTableTile
+        behavior={behaviorData.last_value}
+        title={text.basisregels.title}
+        introduction={text.basisregels.intro}
+        footer={text.basisregels.voetnoot}
+      />
 
-      <BehaviorLineChartTile text={text} values={behaviorData.values} />
+      <BehaviorLineChartTile
+        title={text.basisregels_over_tijd.title}
+        introduction={text.basisregels_over_tijd.intro}
+        values={behaviorData.values}
+      />
     </>
   );
 };

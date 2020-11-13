@@ -26,8 +26,6 @@ const BehaviorPage: FCWithLayout<INationalData> = (props) => {
         description={text.metadata.description}
       />
 
-      <BehaviorChoroplethTile text={text} />
-
       <ContentHeader_weekRangeHack
         category={siteText.nationaal_layout.headings.gedrag}
         title={text.pagina.titel}
@@ -63,9 +61,20 @@ const BehaviorPage: FCWithLayout<INationalData> = (props) => {
         </KpiTile>
       </TwoKpiSection>
 
-      <BehaviorTableTile text={text} behavior={behaviorData.last_value} />
+      <BehaviorTableTile
+        behavior={behaviorData.last_value}
+        title={text.basisregels.title}
+        introduction={text.basisregels.intro}
+        footer={text.basisregels.voetnoot}
+      />
 
-      <BehaviorLineChartTile text={text} values={behaviorData.values} />
+      <BehaviorLineChartTile
+        values={behaviorData.values}
+        title={text.basisregels_over_tijd.title}
+        introduction={text.basisregels_over_tijd.intro}
+      />
+
+      <BehaviorChoroplethTile />
     </>
   );
 };
