@@ -144,7 +144,7 @@ function SafetyRegionLayout(
             <nav aria-label="metric navigation">
               <h2>{safetyRegionName}</h2>
 
-              <ul className="regional-restrictions">
+              <ul className="restrictions">
                 <li>
                   <Link
                     href="/veiligheidsregio/[code]/maatregelen"

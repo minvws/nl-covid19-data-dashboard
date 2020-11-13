@@ -1,7 +1,9 @@
 import { Municipal, National, Regionaal } from '~/types/data.d';
 
 export function sortNationalTimeSeriesInDataInPlace(data: National) {
-  const timeSeriesPropertyNames = getTimeSeriesPropertyNames(data);
+  const timeSeriesPropertyNames = getTimeSeriesPropertyNames(data).filter(
+    (propertyName) => propertyName !== 'restrictions'
+  );
 
   for (const propertyName of timeSeriesPropertyNames) {
     const timeSeries = data[propertyName] as TimeSeriesData<Timestamped>;

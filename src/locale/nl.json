@@ -876,6 +876,10 @@
   "gemeente_metadata": {
     "title": "Gemeente"
   },
+  "nationaal_maatregelen": {
+    "titel_sidebar": "Risiconiveau en Maatregelen",
+    "subtitel_sidebar": "Er gelden landelijke maatregelen"
+  },
   "veiligheidsregio_maatregelen": {
     "titel_sidebar": "Risiconiveau en Maatregelen",
     "titel": "Risiconiveau en Maatregelen in {{safetyRegionName}}",

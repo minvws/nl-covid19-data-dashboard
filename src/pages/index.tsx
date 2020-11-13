@@ -1,8 +1,10 @@
+import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import path from 'path';
 import { useState } from 'react';
 import ExternalLink from '~/assets/external-link.svg';
 import Notification from '~/assets/notification.svg';
+import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/use-safety-region-legenda-data';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
@@ -15,21 +17,19 @@ import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { TitleWithIcon } from '~/components/titleWithIcon';
 import { TALLLanguages } from '~/locale/index';
-import { National, Regions, EscalationLevels } from '~/types/data';
+import { loadJsonFromFile } from '~/static-props/utils/load-json-from-file';
+import { EscalationLevels, National, Regions } from '~/types/data';
+import { assert } from '~/utils/assert';
 import { MDToHTMLString } from '~/utils/MDToHTMLString';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import styles from './index.module.scss';
 import { EscalationMapLegenda } from './veiligheidsregio';
-import { assert } from '~/utils/assert';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { ChoroplethTile } from '~/components-styled/choropleth-tile';
-import css from '@styled-system/css';
-import { loadJsonFromFile } from '~/static-props/utils/load-json-from-file';
 
-interface StaticProps {
+export interface StaticProps {
   props: INationalHomepageData;
 }
 
-interface INationalHomepageData {
+export interface INationalHomepageData {
   data: National;
   text: TALLLanguages;
   lastGenerated: string;
@@ -41,7 +41,7 @@ interface INationalHomepageData {
  * Adjustments here need to be applied in Lokalize too.
  * This is also why the keys are a bit more verbose.
  */
-type EscalationLevelCounts = {
+export type EscalationLevelCounts = {
   escalationLevel1: number;
   escalationLevel2: number;
   escalationLevel3: number;

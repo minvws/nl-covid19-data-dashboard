@@ -112,6 +112,25 @@ function NationalLayout(props: NationalLayoutProps) {
         <aside className="national-aside">
           <nav aria-label="metric navigation">
             <h2>{siteText.nationaal_layout.headings.algemeen}</h2>
+
+            <ul className="restrictions">
+              <li>
+                <Link href="/landelijk/maatregelen" as="/landelijk/maatregelen">
+                  <a
+                    onClick={blur}
+                    className={`restrictions-link ${getClassName(
+                      '/landelijk/maatregelen'
+                    )}`}
+                  >
+                    <TitleWithIcon
+                      title={siteText.nationaal_maatregelen.titel_sidebar}
+                      subtitle={siteText.nationaal_maatregelen.subtitel_sidebar}
+                    />
+                  </a>
+                </Link>
+              </li>
+            </ul>
+
             <ul className="last-developments">
               <li>
                 <Link href="/">

@@ -876,6 +876,10 @@
   "gemeente_metadata": {
     "title": "Municipality"
   },
+  "nationaal_maatregelen": {
+    "titel_sidebar": "",
+    "subtitel_sidebar": ""
+  },
   "veiligheidsregio_maatregelen": {
     "titel_sidebar": "",
     "titel": "",
