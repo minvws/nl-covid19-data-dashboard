@@ -267,7 +267,7 @@
       "description": "Het reproductiegetal laat zien hoe snel het virus zich verspreidt. Dit getal geeft aan hoeveel mensen gemiddeld besmet worden door één patiënt met COVID-19."
     },
     "titel_sidebar": "Reproductiegetal",
-    "titel_kpi": "Effectieve reproductiegetal"
+    "titel_kpi": "Meest recente reproductiegetal"
   },
   "overige_gegevens": {
     "title": "Nog te ontwikkelen",
@@ -338,7 +338,7 @@
       "title": "Besmette verpleeghuizen | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Landelijk overzicht van verpleeghuislocaties waar tenminste één COVID-19 besmetting is vastgesteld."
     },
-    "titel_sidebar": "Besmette locaties",
+    "titel_sidebar": "Aantal besmette verpleeghuislocaties",
     "titel_kpi": "Aantal besmette locaties"
   },
   "verpleeghuis_positief_geteste_personen": {
@@ -380,7 +380,7 @@
     "linechart_titel": "Verloop over tijd",
     "map_titel": "Verpleeghuis oversterfte in Nederland",
     "map_toelichting": "Deze kaarten laten zien hoe de oversterfte in verpleeghuizen is in Nederland per dag.",
-    "titel_sidebar": "Sterfte",
+    "titel_sidebar": "Overleden bewoners verpleeghuizen per dag",
     "metadata": {
       "title": "Overleden bewoners verpleeghuizen | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Landelijk aantal gemelde verpleeghuisbewoners dat in Nederland overlijdt aan de gevolgen van het coronavirus."
