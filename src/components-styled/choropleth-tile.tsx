@@ -28,7 +28,7 @@ interface ChoroplethTileProps extends DataProps {
   onChangeControls?: (v: RegionControlOption) => void;
   children: React.ReactNode;
   legend?: {
-    title?: string;
+    title: string;
     items: LegendaItem[];
   };
   metadata?: MetadataProps;

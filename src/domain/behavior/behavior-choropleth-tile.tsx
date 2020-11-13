@@ -8,21 +8,15 @@ import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-ch
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
 import siteText from '~/locale/index';
 
-import {
-  BehaviorIdentifier,
-  behaviorIdentifiers,
-  GedragText,
-} from './behavior-types';
+import { BehaviorIdentifier, behaviorIdentifiers } from './behavior-types';
 import {
   BehaviorTypeControl,
   BehaviorTypeControlOption,
 } from './components/behavior-type-control';
 
-interface BehaviorChoroplethTileProps {
-  text: GedragText;
-}
+const text = siteText.nl_gedrag;
 
-export function BehaviorChoroplethTile({ text }: BehaviorChoroplethTileProps) {
+export function BehaviorChoroplethTile() {
   const [type, setType] = useState<BehaviorTypeControlOption>('compliance');
   const [currentId, setCurrentId] = useState<BehaviorIdentifier>('wash_hands');
   const legendItems = useSafetyRegionLegendaData('behavior');
