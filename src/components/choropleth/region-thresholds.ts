@@ -167,10 +167,6 @@ const sewerThresholds: ChoroplethThresholds = {
   ],
 };
 
-/**
- * @TODO this is a placeholder to make the code compile. Need to set actual
- * colors and threshold values still.
- */
 const behaviorThresholds: ChoroplethThresholds = {
   thresholds: [
     {

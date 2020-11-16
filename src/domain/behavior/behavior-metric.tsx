@@ -22,9 +22,10 @@ export function BehaviorMetric({ data }: BehaviorMetricProps) {
     <>
       <h4
         css={css({
-          fontSize: 1,
+          fontSize: 2,
           fontWeight: 'normal',
           mb: 2,
+          mt: 0,
         })}
       >
         {title}
