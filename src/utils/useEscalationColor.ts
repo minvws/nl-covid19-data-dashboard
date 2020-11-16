@@ -11,9 +11,9 @@ export function useEscalationColor(level: number | undefined) {
     const escalationThresholds = (regionThresholds.escalation_levels as ChoroplethThresholds)
       .thresholds;
 
-    const escalationColor = escalationThresholds.find(
-      (threshold) => threshold.threshold === level
-    )?.color;
+    const escalationColor =
+      escalationThresholds.find((threshold) => threshold.threshold === level)
+        ?.color ?? '#000000';
 
     return escalationColor;
   }, [level]);

@@ -2,11 +2,10 @@ import { Fragment } from 'react';
 import { Box } from '~/components-styled/base';
 import { Cell, Row, Table, TableBody } from '~/components-styled/layout/table';
 import { Text } from '~/components-styled/typography';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import siteText from '~/locale/index';
 import { useBreakpoints } from '~/utils/useBreakpoints';
+import { useEscalationColor } from '~/utils/useEscalationColor';
 import { RestrictionsTableData } from '~/utils/useRestrictionsTable';
-import { ChoroplethThresholds } from '../choropleth/shared';
 
 export type RestrictionsTableProps = {
   data: RestrictionsTableData;
@@ -20,17 +19,11 @@ export type TableProps = {
 
 const categoryLabels = siteText.maatregelen.categories;
 
-const escalationThresholds = (regionThresholds.escalation_levels as ChoroplethThresholds)
-  .thresholds;
-
 export function RestrictionsTable(props: RestrictionsTableProps) {
   const { data, escalationLevel } = props;
   const breakpoints = useBreakpoints();
 
-  const color =
-    escalationThresholds.find(
-      (threshold) => threshold.threshold === escalationLevel
-    )?.color ?? '#000';
+  const color = useEscalationColor(escalationLevel);
 
   if (breakpoints.lg) {
     return <DesktopRestrictionsTable data={data} color={color} />;
@@ -88,9 +81,11 @@ function DesktopRestrictionsTable(props: TableProps) {
           <Row key={row.category}>
             <Cell
               borderTop={'1px solid black'}
+              backgroundColor="#eeeeee"
               width="250em"
               pt={3}
               pb={3}
+              pl={1}
               verticalAlign="top"
             >
               <Text as="span" fontWeight="bold">
