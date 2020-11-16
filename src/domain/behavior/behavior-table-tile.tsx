@@ -43,8 +43,9 @@ const HeaderCell = styled.th(
   })
 );
 
-const Cell = styled.td(
+const Cell = styled.td((x) =>
   css({
+    color: x.color,
     borderBottom: '1px solid',
     borderBottomColor: 'lightGrey',
     px: 3,
@@ -144,6 +145,7 @@ export function BehaviorTableTile({
       </Box>
 
       <p>{introduction[behaviorType]}</p>
+
       <div css={css({ overflow: 'auto' })}>
         <table css={css({ width: '100%' })}>
           <thead>
@@ -165,7 +167,9 @@ export function BehaviorTableTile({
             ).map((behavior) => (
               <tr key={behavior.id}>
                 <Cell>{formatPercentage(behavior.percentage ?? 0)}%</Cell>
-                <Cell>
+                <Cell
+                  color={behaviorType === 'compliance' ? 'blue' : 'blueDark'}
+                >
                   <PercentageBar percentage={behavior.percentage ?? 0} />
                 </Cell>
                 <Cell>

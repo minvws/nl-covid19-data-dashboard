@@ -81,6 +81,7 @@ type TMediaQueries = typeof mediaQueries;
 
 const colors = {
   blue: '#01689b',
+  blueDark: '#144276',
   icon: '#01689b',
   button: '#01689b',
   shadow: '#e5e5e5',

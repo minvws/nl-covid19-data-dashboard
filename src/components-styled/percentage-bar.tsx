@@ -13,7 +13,7 @@ const Wrapper = styled.div(
 
 const Bar = styled.div(
   css({
-    backgroundColor: 'blue',
+    backgroundColor: 'currentcolor',
     borderRadius: '0.25em',
     height: '0.8em',
   })
