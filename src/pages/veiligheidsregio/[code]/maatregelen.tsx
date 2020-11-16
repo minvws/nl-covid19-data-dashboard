@@ -19,6 +19,7 @@ import {
 } from '~/static-props/safetyregion-data';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { useEscalationColor } from '~/utils/useEscalationColor';
 import { useRestrictionLevel } from '~/utils/useRestrictionLevel';
 import { useRestrictionsTable } from '~/utils/useRestrictionsTable';
 
@@ -39,6 +40,8 @@ const RegionalRestrictions: FCWithLayout<ISafetyRegionData> = (props) => {
   const key = restrictionLevel.toString() as keyof typeof siteText.maatregelen.headings;
   const restrictionInfo = siteText.maatregelen.headings[key];
 
+  const escalationColor = useEscalationColor(escalationLevel.escalation_level);
+
   return (
     <>
       <SEOHead
@@ -55,6 +58,9 @@ const RegionalRestrictions: FCWithLayout<ISafetyRegionData> = (props) => {
           safetyRegionName,
         })}
         Icon={MaatregelenIcon}
+        iconAttrs={{
+          style: { transform: 'scale(1.5)', color: escalationColor },
+        }}
       />
       <KpiSection flexDirection="column">
         <Heading level={3}>{text.titel_risiconiveau}</Heading>

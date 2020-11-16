@@ -1,17 +1,17 @@
 import Arts from '~/assets/arts.svg';
-import { FCWithLayout } from '~/components/layout';
+import { KpiTile } from '~/components-styled/kpi-tile';
+import { KpiValue } from '~/components-styled/kpi-value';
+import { Metadata } from '~/components-styled/metadata';
+import { TwoKpiSection } from '~/components-styled/two-kpi-section';
+import { Text } from '~/components-styled/typography';
 import { ContentHeader } from '~/components/contentHeader';
+import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { LineChart } from '~/components/lineChart/lineChartWithWeekTooltip';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 import { NationalHuisartsVerdenkingen } from '~/types/data.d';
-import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { KpiValue } from '~/components-styled/kpi-value';
-import { KpiTile } from '~/components-styled/kpi-tile';
-import { Text } from '~/components-styled/typography';
-import { Metadata } from '~/components-styled/metadata';
 
 const text = siteText.verdenkingen_huisartsen;
 
@@ -34,6 +34,11 @@ const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
         category={siteText.nationaal_layout.headings.vroege_signalen}
         title={text.titel}
         Icon={Arts}
+        iconAttrs={{
+          style: {
+            transform: 'scale(1.5)',
+          },
+        }}
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,

@@ -1,14 +1,15 @@
 import { useRouter } from 'next/router';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
-import { LineChart } from '~/components/charts/index';
 import { ChoroplethLegenda } from '~/components-styled/choropleth-legenda';
+import { Metadata } from '~/components-styled/metadata';
+import { LineChart } from '~/components/charts/index';
 import { useMunicipalLegendaData } from '~/components/choropleth/legenda/hooks/use-municipal-legenda-data';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createMunicipalHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/municipal/create-municipal-hospital-admissions-tooltip';
+import { ContentHeader } from '~/components/contentHeader';
 import { DataWarning } from '~/components/dataWarning';
 import { FCWithLayout } from '~/components/layout';
-import { ContentHeader } from '~/components/contentHeader';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { SEOHead } from '~/components/seoHead';
 import regionCodeToMunicipalCodeLookup from '~/data/regionCodeToMunicipalCodeLookup';
@@ -21,7 +22,6 @@ import {
 import { ResultsPerRegion } from '~/types/data.d';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { Metadata } from '~/components-styled/metadata';
 
 const text = siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
 
@@ -52,6 +52,11 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
           safetyRegion: safetyRegionName,
         })}
         Icon={Ziekenhuis}
+        iconAttrs={{
+          style: {
+            transform: 'scale(1.5)',
+          },
+        }}
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,

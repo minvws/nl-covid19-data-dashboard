@@ -127,6 +127,11 @@ function NationalLayout(props: NationalLayoutProps) {
                       title={siteText.nationaal_maatregelen.titel_sidebar}
                       subtitle={siteText.nationaal_maatregelen.subtitel_sidebar}
                       Icon={MaatregelenIcon}
+                      iconAttrs={{
+                        style: {
+                          transform: 'scale(1.5)',
+                        },
+                      }}
                     />
                   </a>
                 </Link>
@@ -207,6 +212,11 @@ function NationalLayout(props: NationalLayoutProps) {
                     <TitleWithIcon
                       Icon={ReproIcon}
                       title={siteText.reproductiegetal.titel_sidebar}
+                      iconAttrs={{
+                        style: {
+                          transform: 'scale(1.5)',
+                        },
+                      }}
                     />
                     <span className="metric-wrapper">
                       <ReproductionIndexMetric
@@ -236,6 +246,11 @@ function NationalLayout(props: NationalLayoutProps) {
                   >
                     <TitleWithIcon
                       Icon={Ziekenhuis}
+                      iconAttrs={{
+                        style: {
+                          transform: 'scale(1.5)',
+                        },
+                      }}
                       title={siteText.ziekenhuisopnames_per_dag.titel_sidebar}
                     />
                     <span className="metric-wrapper">
@@ -262,6 +277,11 @@ function NationalLayout(props: NationalLayoutProps) {
                   >
                     <TitleWithIcon
                       Icon={Arts}
+                      iconAttrs={{
+                        style: {
+                          transform: 'scale(1.5)',
+                        },
+                      }}
                       title={siteText.ic_opnames_per_dag.titel_sidebar}
                     />
                     <span className="metric-wrapper">
@@ -362,6 +382,11 @@ function NationalLayout(props: NationalLayoutProps) {
                   >
                     <TitleWithIcon
                       Icon={Arts}
+                      iconAttrs={{
+                        style: {
+                          transform: 'scale(1.5)',
+                        },
+                      }}
                       title={siteText.verdenkingen_huisartsen.titel_sidebar}
                     />
                     <span>

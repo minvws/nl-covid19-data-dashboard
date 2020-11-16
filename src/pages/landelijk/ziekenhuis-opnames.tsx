@@ -2,11 +2,13 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { Spacer } from '~/components-styled/base';
-import { KpiTile } from '~/components-styled/kpi-tile';
-import { KpiValue } from '~/components-styled/kpi-value';
-import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { ChartRegionControls } from '~/components-styled/chart-region-controls';
 import { ChoroplethLegenda } from '~/components-styled/choropleth-legenda';
+import { KpiTile } from '~/components-styled/kpi-tile';
+import { KpiValue } from '~/components-styled/kpi-value';
+import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { Metadata } from '~/components-styled/metadata';
+import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/use-safety-region-legenda-data';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
@@ -15,15 +17,13 @@ import { createSelectRegionHandler } from '~/components/choropleth/select-handle
 import { createMunicipalHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/municipal/create-municipal-hospital-admissions-tooltip';
 import { createRegionHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/region/create-region-hospital-admissions-tooltip';
 import { ContentHeader_sourcesHack } from '~/components/contentHeader_sourcesHack';
+import { DataWarning } from '~/components/dataWarning';
 import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-barscale';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
-import { LineChartTile } from '~/components-styled/line-chart-tile';
-import { DataWarning } from '~/components/dataWarning';
-import { Metadata } from '~/components-styled/metadata';
 
 const text = siteText.ziekenhuisopnames_per_dag;
 
@@ -47,6 +47,11 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
         category={siteText.nationaal_layout.headings.ziekenhuizen}
         title={text.titel}
         Icon={Ziekenhuis}
+        iconAttrs={{
+          style: {
+            transform: 'scale(1.5)',
+          },
+        }}
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,

@@ -12,7 +12,7 @@ import { MetadataHack } from './metadata_sourcesHack';
  * reasons.
  */
 export function ContentHeader_sourcesHack(props: IContentHeaderProps) {
-  const { category, Icon, title, subtitle, metadata, id } = props;
+  const { category, Icon, iconAttrs, title, subtitle, metadata, id } = props;
 
   const layoutClasses = [styles.contentHeader];
 
@@ -26,7 +26,7 @@ export function ContentHeader_sourcesHack(props: IContentHeaderProps) {
   return (
     <header id={id} className={layoutClasses.join(' ')}>
       {category && <p className={styles.category}>{category}</p>}
-      <TitleWithIcon Icon={Icon} title={title} as="h2" />
+      <TitleWithIcon Icon={Icon} iconAttrs={iconAttrs} title={title} as="h2" />
 
       <div className={styles.text}>
         <p>{subtitle}</p>
@@ -57,5 +57,6 @@ interface IContentHeaderProps {
   };
   category?: string;
   Icon?: React.ComponentType;
+  iconAttrs?: any;
   id?: string;
 }

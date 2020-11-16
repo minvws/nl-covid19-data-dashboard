@@ -5,7 +5,7 @@ import styles from '../layout/layout.module.scss';
 import { Metadata } from './metadata';
 
 export function GenericContentHeader(props: ISmallContentHeaderProps) {
-  const { category, Icon, title, id, children } = props;
+  const { category, Icon, iconAttrs, title, id, children } = props;
 
   const layoutClasses = [styles.contentHeader];
 
@@ -19,7 +19,7 @@ export function GenericContentHeader(props: ISmallContentHeaderProps) {
   return (
     <header id={id} className={layoutClasses.join(' ')}>
       {category && <p className={styles.category}>{category}</p>}
-      <TitleWithIcon Icon={Icon} title={title} as="h2" />
+      <TitleWithIcon Icon={Icon} iconAttrs={iconAttrs} title={title} as="h2" />
       {children}
       {!children && <Box mb={4} />}
     </header>
@@ -27,10 +27,16 @@ export function GenericContentHeader(props: ISmallContentHeaderProps) {
 }
 
 export function ContentHeader(props: IContentHeaderProps) {
-  const { category, Icon, title, subtitle, metadata, id } = props;
+  const { category, Icon, iconAttrs, title, subtitle, metadata, id } = props;
 
   return (
-    <GenericContentHeader title={title} id={id} category={category} Icon={Icon}>
+    <GenericContentHeader
+      title={title}
+      id={id}
+      category={category}
+      Icon={Icon}
+      iconAttrs={iconAttrs}
+    >
       <div className={styles.text}>
         <p>{subtitle}</p>
 
@@ -45,6 +51,7 @@ export function ContentHeader(props: IContentHeaderProps) {
 interface ISmallContentHeaderProps {
   category?: string;
   Icon?: React.ComponentType;
+  iconAttrs?: any;
   title: string;
   id?: string;
   children?: ReactNode;

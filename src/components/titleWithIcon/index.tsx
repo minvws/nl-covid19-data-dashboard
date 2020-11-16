@@ -3,7 +3,7 @@ import styles from './titleWithIcon.module.scss';
 
 interface IProps {
   Icon?: React.ElementType;
-  iconFill?: string;
+  iconAttrs?: any;
   title: string;
   subtitle?: ReactNode;
   regio?: string;
@@ -14,7 +14,7 @@ interface IProps {
 export function TitleWithIcon(props: IProps) {
   const {
     Icon,
-    iconFill,
+    iconAttrs,
     title,
     subtitle,
     regio,
@@ -30,8 +30,8 @@ export function TitleWithIcon(props: IProps) {
             as === 'h2' ? styles['icon-large'] : styles['icon-small']
           }`}
         >
-          {iconFill && <Icon fill={iconFill} />}
-          {!iconFill && <Icon />}
+          {iconAttrs !== undefined && <Icon {...iconAttrs} />}
+          {iconAttrs === undefined && <Icon />}
         </div>
       )}
       {/*

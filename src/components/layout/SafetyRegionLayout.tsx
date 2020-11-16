@@ -22,6 +22,7 @@ import safetyRegions from '~/data/index';
 import siteText from '~/locale/index';
 import { ISafetyRegionData } from '~/static-props/safetyregion-data';
 import { getSewerWaterBarScaleData } from '~/utils/sewer-water/safety-region-sewer-water.util';
+import { useEscalationColor } from '~/utils/useEscalationColor';
 import { useMediaQuery } from '~/utils/useMediaQuery';
 import { EscalationLevelInfo } from '../common/escalation-level';
 import { useMenuState } from './useMenuState';
@@ -77,6 +78,8 @@ function SafetyRegionLayout(
   const showMetricLinks = router.route !== '/veiligheidsregio';
 
   const { isMenuOpen, openMenu } = useMenuState(isMainRoute);
+
+  const escalationColor = useEscalationColor(escalationLevel?.escalation_level);
 
   // remove focus after navigation
   const blur = (evt: any) => evt.currentTarget.blur();
@@ -160,6 +163,12 @@ function SafetyRegionLayout(
                           siteText.veiligheidsregio_maatregelen.titel_sidebar
                         }
                         Icon={MaatregelenIcon}
+                        iconAttrs={{
+                          style: {
+                            transform: 'scale(1.5)',
+                            color: escalationColor,
+                          },
+                        }}
                         subtitle={
                           <EscalationLevelInfo
                             escalationLevel={escalationLevel.escalation_level}
@@ -221,6 +230,11 @@ function SafetyRegionLayout(
                     >
                       <TitleWithIcon
                         Icon={Ziekenhuis}
+                        iconAttrs={{
+                          style: {
+                            transform: 'scale(1.5)',
+                          },
+                        }}
                         title={
                           siteText.veiligheidsregio_ziekenhuisopnames_per_dag
                             .titel_sidebar

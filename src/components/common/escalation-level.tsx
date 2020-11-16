@@ -4,12 +4,8 @@ import EscalationLevel3 from '~/assets/niveau-3.svg';
 import EscalationLevel4 from '~/assets/niveau-4.svg';
 import { Box } from '~/components-styled/base';
 import { Text } from '~/components-styled/typography';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import siteText from '~/locale/index';
-import { ChoroplethThresholds } from '../choropleth/shared';
-
-const escalationThresholds = (regionThresholds.escalation_levels as ChoroplethThresholds)
-  .thresholds;
+import { useEscalationColor } from '~/utils/useEscalationColor';
 
 export type EscalationLevelLabelProps = {
   escalationLevel: number;
@@ -18,9 +14,7 @@ export type EscalationLevelLabelProps = {
 export function EscalationLevelInfoLabel(props: EscalationLevelLabelProps) {
   const { escalationLevel } = props;
 
-  const color = escalationThresholds.find(
-    (threshold) => threshold.threshold === escalationLevel
-  )?.color;
+  const color = useEscalationColor(escalationLevel);
 
   return (
     <>
