@@ -10,7 +10,7 @@ import sneeze_cough_elbow from '~/assets/gedrag/sneeze_cough_elbow.svg';
 import max_visitors from '~/assets/gedrag/max_visitors.svg';
 import { BehaviorIdentifier } from '../behavior-types';
 
-const icons: Record<BehaviorIdentifier, () => any> = {
+const icons: Record<BehaviorIdentifier, React.FunctionComponent> = {
   wash_hands,
   keep_distance,
   work_from_home,
