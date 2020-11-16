@@ -8,9 +8,9 @@ import {
   ChartRegionControls,
   RegionControlOption,
 } from './chart-region-controls';
-import { Tile } from './layout';
+import { ChartTileContainer } from './chart-tile-container';
+import { MetadataProps } from './metadata';
 import { Heading, Text } from './typography';
-import { Metadata, MetadataProps } from './metadata';
 
 /**
  * We could use strong typing here for the values and also enforce the data
@@ -32,6 +32,7 @@ interface ChoroplethTileProps extends DataProps {
     items: LegendaItem[];
   };
   metadata?: MetadataProps;
+  showDataWarning?: boolean;
 }
 
 export function ChoroplethTile<T>({
@@ -41,6 +42,7 @@ export function ChoroplethTile<T>({
   legend,
   children,
   metadata,
+  showDataWarning,
 }: ChoroplethTileProps) {
   const breakpoints = useBreakpoints();
   const legendaComponent = legend && (
@@ -48,7 +50,7 @@ export function ChoroplethTile<T>({
   );
 
   return (
-    <Tile mb={4} ml={{ _: -4, sm: 0 }} mr={{ _: -4, sm: 0 }}>
+    <ChartTileContainer metadata={metadata} showDataWarning={showDataWarning}>
       <Box display="flex" flexDirection={{ _: 'column', lg: 'row' }}>
         <Box mb={3} flex={{ lg: 1 }}>
           <div>
@@ -82,7 +84,6 @@ export function ChoroplethTile<T>({
           )}
         </Box>
       </Box>
-      {metadata && <Metadata {...metadata} />}
-    </Tile>
+    </ChartTileContainer>
   );
 }

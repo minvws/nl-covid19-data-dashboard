@@ -1,43 +1,47 @@
 import css from '@styled-system/css';
 import { useState } from 'react';
 import { TimeframeOption } from '~/utils/timeframe';
-import { Box, Spacer } from './base';
+import { Box } from './base';
+import { ChartTileContainer } from './chart-tile-container';
 import { ChartTimeControls } from './chart-time-controls';
-import { Tile } from './layout';
-import { Metadata, MetadataProps } from './metadata';
+import { MetadataProps } from './metadata';
 
 interface ChartTileProps {
-  title: string;
-  metadata: MetadataProps;
   children: React.ReactNode;
-}
-
-interface ChartTileWithTimeframeProps {
-  title: string;
   metadata: MetadataProps;
-  children: (timeframe: TimeframeOption) => React.ReactNode;
-  timeframeOptions: TimeframeOption[];
-  timeframeInitialValue: TimeframeOption;
+  title: string;
+  description?: React.ReactNode;
+  showDataWarning?: boolean;
 }
 
-export function ChartTile({ title, metadata, children }: ChartTileProps) {
+interface ChartTileWithTimeframeProps extends Omit<ChartTileProps, 'children'> {
+  children: (timeframe: TimeframeOption) => React.ReactNode;
+  timeframeOptions?: TimeframeOption[];
+  timeframeInitialValue?: TimeframeOption;
+}
+
+export function ChartTile({
+  title,
+  description,
+  metadata,
+  children,
+  showDataWarning,
+}: ChartTileProps) {
   return (
-    <ChartTileContainer>
-      <ChartTileHeader title={title} />
-
+    <ChartTileContainer metadata={metadata} showDataWarning={showDataWarning}>
+      <ChartTileHeader title={title} description={description} />
       {children}
-
-      <Spacer m="auto" />
-      <Metadata {...metadata} />
     </ChartTileContainer>
   );
 }
 
 export function ChartTileWithTimeframe({
   title,
+  description,
   metadata,
-  timeframeOptions,
-  timeframeInitialValue,
+  timeframeOptions = ['all', '5weeks', 'week'],
+  timeframeInitialValue = '5weeks',
+  showDataWarning,
   children,
 }: ChartTileWithTimeframeProps) {
   const [timeframe, setTimeframe] = useState<TimeframeOption>(
@@ -45,37 +49,28 @@ export function ChartTileWithTimeframe({
   );
 
   return (
-    <ChartTileContainer>
+    <ChartTileContainer metadata={metadata} showDataWarning={showDataWarning}>
       <ChartTileHeader
         title={title}
+        description={description}
         timeframe={timeframe}
         timeframeOptions={timeframeOptions}
         onTimeframeChange={setTimeframe}
       />
-
       {children(timeframe)}
-
-      <Spacer m="auto" />
-      <Metadata {...metadata} />
     </ChartTileContainer>
   );
 }
 
-function ChartTileContainer({ children }: { children: React.ReactNode }) {
-  return (
-    <Tile mb={4} ml={{ _: -4, sm: 0 }} mr={{ _: -4, sm: 0 }}>
-      {children}
-    </Tile>
-  );
-}
-
-function ChartTileHeader({
+export function ChartTileHeader({
   title,
+  description,
   timeframe,
   timeframeOptions,
   onTimeframeChange,
 }: {
   title: string;
+  description?: React.ReactNode;
   timeframe?: TimeframeOption;
   timeframeOptions?: TimeframeOption[];
   onTimeframeChange?: (timeframe: TimeframeOption) => void;
@@ -85,10 +80,17 @@ function ChartTileHeader({
       mb={3}
       display="flex"
       flexDirection={['column', null, null, null, 'row']}
+      justifyContent="space-between"
     >
-      <h3 css={css({ mb: [3, null, null, null, 0], mr: [0, 0, 2] })}>
-        {title}
-      </h3>
+      <div css={css({ mb: [3, null, null, null, 0], mr: [0, 0, 2] })}>
+        <h3>{title}</h3>
+        {description &&
+          (typeof description === 'string' ? (
+            <p css={css({ m: 0 })}>{description}</p>
+          ) : (
+            description
+          ))}
+      </div>
       {timeframe && onTimeframeChange && (
         <div css={css({ ml: [0, 0, 2] })}>
           <ChartTimeControls
