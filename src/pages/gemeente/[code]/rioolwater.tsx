@@ -21,7 +21,7 @@ import {
   getSewerWaterBarScaleData,
   getSewerWaterLineChartData,
 } from '~/utils/sewer-water/municipality-sewer-water.util';
-import { Metadata } from '~/components-styled/metadata';
+import { ChartTile } from '~/components-styled/chart-tile';
 
 const text = siteText.gemeente_rioolwater_metingen;
 
@@ -114,10 +114,11 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
         </KpiTile>
       </TwoKpiSection>
 
-      <article className="metric-article">
-        <h3>{text.linechart_titel}</h3>
-
-        {lineChartData && (
+      {lineChartData && (
+        <ChartTile
+          title={text.linechart_titel}
+          metadata={{ source: text.bron }}
+        >
           <MunicipalSewerWaterLineChart
             averageValues={lineChartData.averageValues}
             text={{
@@ -126,31 +127,29 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
             }}
             valueAnnotation={siteText.waarde_annotaties.riool_normalized}
           />
-        )}
-        <Metadata source={text.bron} />
-      </article>
+        </ChartTile>
+      )}
 
       {barChartData && (
-        <article className="metric-article">
-          <h3>
-            {replaceVariablesInText(text.bar_chart_title, {
-              municipality: municipalityName,
-            })}
-          </h3>
+        <ChartTile
+          title={replaceVariablesInText(text.bar_chart_title, {
+            municipality: municipalityName,
+          })}
+          metadata={{
+            date: [
+              sewerAverages.last_value.week_start_unix,
+              sewerAverages.last_value.week_end_unix,
+            ],
+            source: text.bron,
+          }}
+        >
           <BarChart
             keys={barChartData.keys}
             data={barChartData.data}
             axisTitle={text.bar_chart_axis_title}
             valueAnnotation={siteText.waarde_annotaties.riool_normalized}
           />
-          <Metadata
-            date={[
-              sewerAverages.last_value.week_start_unix,
-              sewerAverages.last_value.week_end_unix,
-            ]}
-            source={text.bron}
-          />
-        </article>
+        </ChartTile>
       )}
     </>
   );
