@@ -8,7 +8,6 @@ export const Tile = styled(Box).attrs({ as: 'article' })(
     flexDirection: 'column',
     bg: 'white',
     p: 4,
-    pb: 3,
     borderRadius: 1,
     boxShadow: 'tile',
   })

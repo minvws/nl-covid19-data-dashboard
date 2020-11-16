@@ -454,7 +454,7 @@
       "description": "Het reproductiegetal laat zien hoe snel het virus zich verspreidt. Dit getal geeft aan hoeveel mensen gemiddeld besmet worden door één patiënt met COVID-19."
     },
     "titel_sidebar": "Reproductiegetal",
-    "titel_kpi": "Effectieve reproductiegetal"
+    "titel_kpi": "Meest recente reproductiegetal"
   },
   "overige_gegevens": {
     "title": "Nog te ontwikkelen",
@@ -525,7 +525,7 @@
       "title": "Besmette verpleeghuizen | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Landelijk overzicht van verpleeghuislocaties waar tenminste één COVID-19 besmetting is vastgesteld."
     },
-    "titel_sidebar": "Besmette locaties",
+    "titel_sidebar": "Aantal besmette verpleeghuislocaties",
     "titel_kpi": "Aantal besmette locaties"
   },
   "verpleeghuis_positief_geteste_personen": {
@@ -567,7 +567,7 @@
     "linechart_titel": "Verloop over tijd",
     "map_titel": "Verpleeghuis oversterfte in Nederland",
     "map_toelichting": "Deze kaarten laten zien hoe de oversterfte in verpleeghuizen is in Nederland per dag.",
-    "titel_sidebar": "Sterfte",
+    "titel_sidebar": "Overleden bewoners verpleeghuizen per dag",
     "metadata": {
       "title": "Overleden bewoners verpleeghuizen | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Landelijk aantal gemelde verpleeghuisbewoners dat in Nederland overlijdt aan de gevolgen van het coronavirus."
@@ -621,7 +621,7 @@
     "text": ""
   },
   "over_beschrijving": {
-    "text": "Over dit dashboard\nHet dashboard coronavirus is ontwikkeld door het ministerie van VWS. Het geeft informatie over de ontwikkeling van het coronavirus in Nederland. Met deze informatie kunnen signalen van oplevingen worden opgepikt. Zo kunnen maatregelen genomen worden om het virus te stoppen.\n\nIn ontwikkeling\nHet dashboard wordt de komende tijd stap voor stap verder uitgebreid. Sommige functies zijn nu dus nog niet beschikbaar. Bij elke stap wordt goed gekeken of de informatie eenduidig en begrijpelijk is voor iedereen. Ook willen we dat de informatie op deze site goed te lezen is op iedere computer, tablet of telefoon. De informatie op deze site is in zowel Nederlands als Engels beschikbaar. \n\nContact\nAls u vragen heeft of suggesties om dit dashboard verder te verbeteren, dan kunt u mailen naar coronadashboard@minvws.nl. We lezen alle mails die daar binnen komen en doen onze uiterste best om iedereen op korte termijn te antwoorden. Vanwege drukte kan een reactie soms even op zich laten wachten. Veel antwoorden zijn al te vinden op onze pagina met [cijferverantwoording] (https://coronadashboard.rijksoverheid.nl/verantwoording) en die met antwoorden op [veel gestelde vragen] (https://coronadashboard.rijksoverheid.nl/veelgestelde-vragen).\n\nIT-ontwikkelaars kunnen suggesties delen via het platform Github. Voor vragen en suggesties die betrekking hebben op front-end kunt u [hier]( https://github.com/minvws/nl-covid19-data-dashboard) terecht. Voor vragen over onderliggende berekeningen kunt u [hier] (https://github.com/minvws/nl-covid19-data-backend-processing) terecht. \n\nAls u IT-kwetsbaarheden ziet op het dashboard geef die dan graag door. Wij werken daarvoor samen met het Nationaal Cyber Security Centrum (NCSC). Stel het NCSC zo snel mogelijk op de hoogte via het [formulier]  (https://www.ncsc.nl/contact/kwetsbaarheid-melden/cvd-meldingen-formulier) voordat u dit aan de buitenwereld kenbaar maakt. In samenwerking met het NCSC nemen we de melding in behandeling en lossen deze zo snel mogelijk op. Dank voor uw medewerking!\n\nAntwoord op veel vragen over het coronavirus zijn te vinden op [rijksoverheid.nl] (https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19). Als u het antwoord daar niet kunt vinden, kunt u terecht bij het publieksinformatienummer 0800 - 1351 (tussen 08:00 en 20:00 uur). Vanuit het buitenland is het nummer te bereiken door te bellen naar +31 20 205 1351."
+    "text": "Het dashboard coronavirus is ontwikkeld door het ministerie van VWS. Het geeft informatie over de ontwikkeling van het coronavirus in Nederland. Met deze informatie kunnen signalen van oplevingen worden opgepikt. Zo kunnen maatregelen genomen worden om het virus te stoppen.\n\n**In ontwikkeling**\nHet dashboard wordt de komende tijd stap voor stap verder uitgebreid. Sommige functies zijn nu dus nog niet beschikbaar. Bij elke stap wordt goed gekeken of de informatie eenduidig en begrijpelijk is voor iedereen. Ook willen we dat de informatie op deze site goed te lezen is op iedere computer, tablet of telefoon. De informatie op deze site is in zowel Nederlands als Engels beschikbaar. \n\n**Contact**\nAls u vragen heeft of suggesties om dit dashboard verder te verbeteren, dan kunt u mailen naar coronadashboard@minvws.nl. We lezen alle mails die daar binnen komen en doen onze uiterste best om iedereen op korte termijn te antwoorden. Vanwege drukte kan een reactie soms even op zich laten wachten. Veel antwoorden zijn al te vinden op onze pagina met [cijferverantwoording] (https://coronadashboard.rijksoverheid.nl/verantwoording) en die met antwoorden op [veel gestelde vragen] (https://coronadashboard.rijksoverheid.nl/veelgestelde-vragen).\n\nIT-ontwikkelaars kunnen suggesties delen via het platform Github. Voor vragen en suggesties die betrekking hebben op front-end kunt u [hier]( https://github.com/minvws/nl-covid19-data-dashboard) terecht. Voor vragen over onderliggende berekeningen kunt u [hier] (https://github.com/minvws/nl-covid19-data-backend-processing) terecht. \n\nAls u IT-kwetsbaarheden ziet op het dashboard geef die dan graag door. Wij werken daarvoor samen met het Nationaal Cyber Security Centrum (NCSC). Stel het NCSC zo snel mogelijk op de hoogte via het [formulier]  (https://www.ncsc.nl/contact/kwetsbaarheid-melden/cvd-meldingen-formulier) voordat u dit aan de buitenwereld kenbaar maakt. In samenwerking met het NCSC nemen we de melding in behandeling en lossen deze zo snel mogelijk op. Dank voor uw medewerking!\n\nAntwoord op veel vragen over het coronavirus zijn te vinden op [rijksoverheid.nl] (https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19). Als u het antwoord daar niet kunt vinden, kunt u terecht bij het publieksinformatienummer 0800 - 1351 (tussen 08:00 en 20:00 uur). Vanuit het buitenland is het nummer te bereiken door te bellen naar +31 20 205 1351."
   },
   "over_veelgestelde_vragen": {
     "text": "Veelgestelde vragen",
