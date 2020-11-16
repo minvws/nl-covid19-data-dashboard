@@ -36,10 +36,14 @@ export function TwoKpiSection({ children, ...props }: TwoKpiSectionProps) {
       mr={{ _: -4, sm: 0 }}
       {...(props as any)}
     >
-      <Box flex="1 1 50%" mr={{ lg: 3 }} mb={{ _: 4, lg: 0 }}>
+      <Box flex={`1 1 ${childrenCount === 2 ? 50 : 100}%`} mb={{ _: 4, lg: 0 }}>
         {childrenArray[0]}
       </Box>
-      <Box flex="1 1 50%">{childrenArray[1]}</Box>
+      {childrenArray[1] && (
+        <Box flex="1 1 50%" ml={{ lg: 3 }}>
+          {childrenArray[1]}
+        </Box>
+      )}
     </Box>
   );
 }
