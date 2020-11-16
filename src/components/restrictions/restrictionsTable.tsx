@@ -38,7 +38,7 @@ function MobileRestrictionsTable(props: TableProps) {
     <Table width="100%">
       <TableBody>
         {data.rows.map((row) => (
-          <Fragment key={row.category}>
+          <Fragment key={row.categoryColumn}>
             <Row>
               <Cell
                 borderTop={'1px solid black'}
@@ -47,14 +47,14 @@ function MobileRestrictionsTable(props: TableProps) {
                 verticalAlign="top"
               >
                 <Text as="span" fontWeight="bold">
-                  {categoryLabels[row.category]}
+                  {categoryLabels[row.categoryColumn]}
                 </Text>
               </Cell>
             </Row>
             <Row>
               <Cell pb={3} verticalAlign="top">
                 <Box display="flex" flexDirection="column">
-                  {row.restrictions.map((value) => (
+                  {row.restrictionsColumn.map((value) => (
                     <Box key={value.text} display="flex" flexDirection="row">
                       <Box as="span" flexShrink={0}>
                         {getIcon(value.Icon, color)}
@@ -78,7 +78,7 @@ function DesktopRestrictionsTable(props: TableProps) {
     <Table width="100%">
       <TableBody>
         {data.rows.map((row) => (
-          <Row key={row.category}>
+          <Row key={row.categoryColumn}>
             <Cell
               borderTop={'1px solid black'}
               backgroundColor="#eeeeee"
@@ -89,7 +89,7 @@ function DesktopRestrictionsTable(props: TableProps) {
               verticalAlign="top"
             >
               <Text as="span" fontWeight="bold">
-                {categoryLabels[row.category]}
+                {categoryLabels[row.categoryColumn]}
               </Text>
             </Cell>
             <Cell
@@ -100,7 +100,7 @@ function DesktopRestrictionsTable(props: TableProps) {
               verticalAlign="top"
             >
               <Box display="flex" flexDirection="column">
-                {row.restrictions.map((value) => (
+                {row.restrictionsColumn.map((value) => (
                   <Box key={value.text} display="flex" flexDirection="row">
                     <Box as="span" flexShrink={0}>
                       {getIcon(value.Icon, color)}
