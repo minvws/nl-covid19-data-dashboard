@@ -1,44 +1,38 @@
-// Props type needs to be imported from lineChart directly because charts only works with
-// default export.
 import {
   MultipleLineChart,
   MultipleLineChartProps,
 } from '~/components/lineChart/multipleLineChart.tsx';
-import { Spacer } from './base';
-import { Tile } from './layout';
-import { Metadata, MetadataProps } from './metadata';
+import { TimeframeOption } from '~/utils/timeframe';
+import { ChartTileWithTimeframe } from './chart-tile';
+import { MetadataProps } from './metadata';
 
 interface MultipleLineChartTileProps extends MultipleLineChartProps {
+  title: string;
   metadata: MetadataProps;
+  description?: string;
+  timeframeOptions?: TimeframeOption[];
+  timeframeInitialValue?: TimeframeOption;
 }
 
 export function MultipleLineChartTile({
   metadata,
+  title,
+  description,
+  timeframeInitialValue = '5weeks',
+  timeframeOptions,
   ...chartProps
 }: MultipleLineChartTileProps) {
   return (
-    <Tile
-      /**
-       * The mb here could alternatively be applied using a <Spacer/> in the
-       * page markup. It's a choice, whether we like to include the bottom
-       * margin on all our commonly used components or keep everything flexible
-       * and use spacers in the context where the component is used.
-       */
-      mb={4}
-      /**
-       * The ml and mr negative margins should not be part of this component
-       * ideally, but are the results of the page layout having paddings even on
-       * small screens. We can remove this once we make all page section
-       * elements full-width and remove the padding from the page layout.
-       */
-      ml={{ _: -4, sm: 0 }}
-      mr={{ _: -4, sm: 0 }}
+    <ChartTileWithTimeframe
+      title={title}
+      description={description}
+      metadata={metadata}
+      timeframeOptions={timeframeOptions}
+      timeframeInitialValue={timeframeInitialValue}
     >
-      <MultipleLineChart {...chartProps} />
-
-      {/* Using a spacer to push the footer down */}
-      <Spacer m="auto" />
-      <Metadata {...metadata} />
-    </Tile>
+      {(timeframe) => (
+        <MultipleLineChart {...chartProps} timeframe={timeframe} />
+      )}
+    </ChartTileWithTimeframe>
   );
 }
