@@ -2,10 +2,10 @@ import { Fragment } from 'react';
 import { Box } from '~/components-styled/base';
 import { Cell, Row, Table, TableBody } from '~/components-styled/layout/table';
 import { Text } from '~/components-styled/typography';
+import { RestrictionsTableData } from '~/components/restrictions/hooks/useRestrictionsTable';
 import siteText from '~/locale/index';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { useEscalationColor } from '~/utils/useEscalationColor';
-import { RestrictionsTableData } from '~/utils/useRestrictionsTable';
 
 export type RestrictionsTableProps = {
   data: RestrictionsTableData;

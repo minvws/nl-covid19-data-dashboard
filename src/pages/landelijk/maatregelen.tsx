@@ -9,12 +9,12 @@ import { escalationTooltip } from '~/components/choropleth/tooltips/region/escal
 import { GenericContentHeader } from '~/components/contentHeader';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
+import { useRestrictionsTable } from '~/components/restrictions/hooks/useRestrictionsTable';
 import { RestrictionsTable } from '~/components/restrictions/restrictionsTable';
 import { SEOHead } from '~/components/seoHead';
 import { EscalationMapLegenda } from '~/pages/veiligheidsregio';
 import { INationalData } from '~/static-props/nl-data';
 import { useRestrictionLevel } from '~/utils/useRestrictionLevel';
-import { useRestrictionsTable } from '~/utils/useRestrictionsTable';
 export { getStaticProps } from '~/pages';
 
 const NationalRestrictions: FCWithLayout<INationalData> = (props) => {

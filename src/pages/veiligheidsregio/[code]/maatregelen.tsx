@@ -9,6 +9,7 @@ import { EscalationLevelInfoLabel } from '~/components/common/escalation-level';
 import { GenericContentHeader } from '~/components/contentHeader';
 import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
+import { useRestrictionsTable } from '~/components/restrictions/hooks/useRestrictionsTable';
 import { RestrictionsTable } from '~/components/restrictions/restrictionsTable';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
@@ -21,7 +22,6 @@ import { formatDateFromSeconds } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useEscalationColor } from '~/utils/useEscalationColor';
 import { useRestrictionLevel } from '~/utils/useRestrictionLevel';
-import { useRestrictionsTable } from '~/utils/useRestrictionsTable';
 
 const text = siteText.veiligheidsregio_maatregelen;
 type VRCode = keyof typeof siteText.veiligheidsregio_maatregelen_urls;
