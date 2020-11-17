@@ -113,7 +113,7 @@ export interface National {
   infected_people_clusters?: InfectedPeopleClusters;
   infected_people_total: NationalInfectedPeopleTotal;
   infected_people_delta_normalized: InfectedPeopleDeltaNormalized;
-  infected_age_groups: InfectedAgeGroups;
+  infected_age_groups: NationalInfectedAgeGroups;
   reproduction_index: ReproductionIndex;
   reproduction_index_last_known_average: ReproductionIndexLastKnownAverage;
   infectious_people_last_known_average: InfectiousPeopleLastKnownAverage;
@@ -220,13 +220,13 @@ export interface InfectedPeopleDeltaNormalizedLastValue {
   date_of_report_unix: number;
   date_of_insertion_unix: number;
 }
-export interface InfectedAgeGroups {
-  values: InfectedAgeGroup[];
+export interface NationalInfectedAgeGroups {
+  values: NationalInfectedAgeGroupsValue[];
 }
-export interface InfectedAgeGroup {
-  age_group: string;
+export interface NationalInfectedAgeGroupsValue {
+  age_group_range: string;
   infected_percentage: number;
-  national_percentage: number;
+  age_group_percentage: number;
   date_of_report_unix: number;
   date_of_insertion_unix: number;
 }
