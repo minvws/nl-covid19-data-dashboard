@@ -87,7 +87,7 @@ function sortTimeSeriesValues(values: Timestamped[]) {
   if (isReportTimestamped(values)) {
     return values.sort((a, b) => a.date_of_report_unix - b.date_of_report_unix);
   } else if (isWeekTimestamped(values)) {
-    return values.sort((a, b) => a.week_unix - b.week_unix);
+    return values.sort((a, b) => a.week_end_unix - b.week_end_unix);
   } else if (isMeasurementTimestamped(values)) {
     return values.sort(
       (a, b) => a.date_measurement_unix - b.date_measurement_unix
@@ -110,7 +110,7 @@ interface ReportTimestamped {
 }
 
 interface WeekTimestamped {
-  week_unix: number;
+  week_end_unix: number;
 }
 
 interface MeasurementTimestamped {
@@ -146,7 +146,7 @@ function isReportTimestamped(
 function isWeekTimestamped(
   timeSeries: Timestamped[]
 ): timeSeries is WeekTimestamped[] {
-  return (timeSeries as WeekTimestamped[])[0].week_unix !== undefined;
+  return (timeSeries as WeekTimestamped[])[0].week_end_unix !== undefined;
 }
 
 function isMeasurementTimestamped(

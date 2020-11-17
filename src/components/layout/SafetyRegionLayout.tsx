@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Arrow from '~/assets/arrow.svg';
 import CoronaVirus from '~/assets/coronavirus.svg';
+import Gedrag from '~/assets/gedrag.svg';
 import Locatie from '~/assets/locaties.svg';
 import MaatregelenIcon from '~/assets/maatregelen.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
@@ -19,6 +20,7 @@ import { PositivelyTestedPeopleBarScale } from '~/components/veiligheidsregio/po
 import { PositivelyTestedPeopleMetric } from '~/components/veiligheidsregio/positive-tested-people-metric';
 import { SewerWaterMetric } from '~/components/veiligheidsregio/sewer-water-metric';
 import safetyRegions from '~/data/index';
+import { BehaviorMetric } from '~/domain/behavior/behavior-metric';
 import siteText from '~/locale/index';
 import { ISafetyRegionData } from '~/static-props/safetyregion-data';
 import { getSewerWaterBarScaleData } from '~/utils/sewer-water/safety-region-sewer-water.util';
@@ -165,7 +167,6 @@ function SafetyRegionLayout(
                         Icon={MaatregelenIcon}
                         iconAttrs={{
                           style: {
-                            transform: 'scale(1.5)',
                             color: escalationColor,
                           },
                         }}
@@ -230,11 +231,6 @@ function SafetyRegionLayout(
                     >
                       <TitleWithIcon
                         Icon={Ziekenhuis}
-                        iconAttrs={{
-                          style: {
-                            transform: 'scale(1.5)',
-                          },
-                        }}
                         title={
                           siteText.veiligheidsregio_ziekenhuisopnames_per_dag
                             .titel_sidebar
@@ -354,6 +350,30 @@ function SafetyRegionLayout(
                         <SewerWaterMetric
                           data={getSewerWaterBarScaleData(data)}
                         />
+                      </span>
+                    </a>
+                  </Link>
+                </li>
+              </ul>
+              <h2>{siteText.nationaal_layout.headings.gedrag}</h2>
+              <ul>
+                <li>
+                  <Link
+                    href="/veiligheidsregio/[code]/gedrag"
+                    as={`/veiligheidsregio/${code}/gedrag`}
+                  >
+                    <a
+                      onClick={blur}
+                      className={getClassName(
+                        '/veiligheidsregio/[code]/gedrag'
+                      )}
+                    >
+                      <TitleWithIcon
+                        Icon={Gedrag}
+                        title={siteText.nl_gedrag.sidebar.titel}
+                      />
+                      <span>
+                        <BehaviorMetric data={data.behavior} />
                       </span>
                     </a>
                   </Link>

@@ -55,7 +55,7 @@ export function ChoroplethLegenda(props: ChoroplethLegendaProps) {
 
   return (
     <Box width="100%" maxWidth={300}>
-      <h4>{title}</h4>
+      {title && <h4>{title}</h4>}
       <List aria-label="legend">
         {items.map((item) => (
           <Item key={item.color}>
