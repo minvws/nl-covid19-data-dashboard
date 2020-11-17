@@ -18,6 +18,7 @@ import {
   getSafetyRegionPaths,
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
+import theme from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useEscalationColor } from '~/utils/useEscalationColor';
@@ -115,7 +116,10 @@ const RegionalRestrictions: FCWithLayout<ISafetyRegionData> = (props) => {
       </KpiSection>
 
       <KpiSection display="flex" flexDirection={['column', 'row']}>
-        <Box borderRight={{ lg: '1px solid lightgrey' }} pr={[0, 2]}>
+        <Box
+          borderRight={{ lg: `1px solid ${theme.colors?.lightGray}` }}
+          pr={[0, 2]}
+        >
           <Heading level={3}>{text.titel_aanvullendemaatregelen}</Heading>
           <Box>{text.toelichting_aanvullendemaatregelen}</Box>
         </Box>

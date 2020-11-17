@@ -1,4 +1,5 @@
 import { ScaleThemeProperties, ThemeBreakPoints } from '@styled-system/css';
+import * as CSS from 'csstype';
 
 const space = [
   0,
@@ -79,7 +80,7 @@ const mediaQueries = {
 
 type TMediaQueries = typeof mediaQueries;
 
-const colors = {
+const colors: { [name: string]: CSS.Property.Color } = {
   blue: '#01689b',
   icon: '#01689b',
   button: '#01689b',
@@ -95,7 +96,9 @@ const shadows = {
 };
 
 type TDashboardTheme = ScaleThemeProperties &
-  ThemeBreakPoints & { mediaQueries: TMediaQueries };
+  ThemeBreakPoints & { mediaQueries: TMediaQueries } & {
+    colors: { [name: string]: CSS.Property.Color };
+  };
 
 const theme: TDashboardTheme = {
   fonts,
