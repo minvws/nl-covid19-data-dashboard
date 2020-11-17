@@ -18,20 +18,20 @@
       "additionalProperties": false,
       "type": "object",
       "required": [
-        "age_group",
+        "age_group_range",
         "infected_percentage",
-        "national_age_group_percentage",
+        "age_group_percentage",
         "date_of_report_unix",
         "date_of_insertion_unix"
       ],
       "properties": {
-        "age_group": {
+        "age_group_range": {
           "type": "string"
         },
         "infected_percentage": {
           "type": "number"
         },
-        "national_age_group_percentage": {
+        "age_group_percentage": {
           "type": "number"
         },
         "date_of_report_unix": {
