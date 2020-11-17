@@ -31,7 +31,7 @@ export function TitleWithIcon(props: IProps) {
           }`}
         >
           {iconAttrs !== undefined && <Icon {...iconAttrs} />}
-          {iconAttrs === undefined && <Icon />}
+          {iconAttrs === undefined && <Icon width="48" height="48" />}
         </div>
       )}
       {/*

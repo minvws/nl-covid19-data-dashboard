@@ -49,13 +49,15 @@ export type RestrictionsTableData = {
   rows: RestrictionsRowData[];
 };
 
+export type RestrictionValue =
+  | RegionalRestrictionValue
+  | NationalRestrictionValue;
+
 /**
  * This hook constructs table data structure from the given RegionalRestrictionValue or NationalRestrictionValue list.
  * The table data holds the restrictions in rows consisting of a category and a restrictions column.
  */
-export function useRestrictionsTable(
-  data: (RegionalRestrictionValue | NationalRestrictionValue)[]
-) {
+export function useRestrictionsTable(data: RestrictionValue[]) {
   return useMemo(() => {
     const table: RestrictionsTableData = {
       rows: createRows(data),
@@ -68,15 +70,26 @@ export function useRestrictionsTable(
  * Creates unique category rows sorted based on the hardcoded rowOrder list.
  * Each row has a category as its title and holds a list of columns
  */
-function createRows(
-  data: (RegionalRestrictionValue | NationalRestrictionValue)[]
-) {
-  const uniqueCategories = data
-    .map((value) => value.category_id)
-    .filter((value, index, list) => list.indexOf(value) === index)
-    .sort((left, right) => rowOrder.indexOf(left) - rowOrder.indexOf(right));
+function createRows(data: RestrictionValue[]) {
+  const selectCategory = (value: RestrictionValue) => value.category_id;
 
-  return uniqueCategories.map<RestrictionsRowData>((category) => ({
+  const makeUniqueList = (
+    value: EscalationCategory,
+    index: number,
+    list: EscalationCategory[]
+  ) => list.indexOf(value) === index;
+
+  const sortByRowOrder = (
+    left: EscalationCategory,
+    right: EscalationCategory
+  ) => rowOrder.indexOf(left) - rowOrder.indexOf(right);
+
+  const sortedRows = data
+    .map(selectCategory)
+    .filter(makeUniqueList)
+    .sort(sortByRowOrder);
+
+  return sortedRows.map<RestrictionsRowData>((category) => ({
     categoryColumn: category,
     restrictionsColumn: createColumn(data, category),
   }));
@@ -86,13 +99,18 @@ function createRows(
  * Creates a data column for the given category where the content of the column
  * is sorted by restriction order.
  */
-function createColumn(
-  data: (RegionalRestrictionValue | NationalRestrictionValue)[],
-  category: EscalationCategory
-) {
+function createColumn(data: RestrictionValue[], category: EscalationCategory) {
+  const filterByCategory = (value: RestrictionValue) =>
+    value.category_id === category;
+
+  const sortByRestrictionOrder = (
+    left: RestrictionValue,
+    right: RestrictionValue
+  ) => left.restriction_order - right.restriction_order;
+
   return data
-    .filter((value) => value.category_id === category)
-    .sort((left, right) => left.restriction_order - right.restriction_order)
+    .filter(filterByCategory)
+    .sort(sortByRestrictionOrder)
     .map<RestrictionColumnData>((value) => ({
       Icon: restrictionIcons[value.restriction_id],
       text: restrictionTexts[value.restriction_id] ?? value.restriction_id,
