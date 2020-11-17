@@ -79,7 +79,7 @@ function ChartTileHeader({
     <Box
       mb={3}
       display="flex"
-      flexDirection={['column', null, null, null, 'row']}
+      flexDirection={{ _: 'column', xl: 'row' }}
       justifyContent="space-between"
     >
       <div css={css({ mb: [3, null, null, null, 0], mr: [0, 0, 2] })}>
