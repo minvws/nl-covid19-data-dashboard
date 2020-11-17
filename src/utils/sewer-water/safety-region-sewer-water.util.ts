@@ -57,17 +57,21 @@ export function getSewerWaterBarScaleData(
 }
 
 export function getInstallationNames(data: Regionaal): string[] {
-  return data.sewer_per_installation.values
-    .flatMap((value) => value.values)
-    .map((value) => value.rwzi_awzi_name)
-    .filter((value, index, arr) => arr.indexOf(value) === index)
-    .sort((a, b) => a.localeCompare(b));
+  return (
+    data.sewer_per_installation?.values
+      .flatMap((value) => value.values)
+      .map((value) => value.rwzi_awzi_name)
+      .filter((value, index, arr) => arr.indexOf(value) === index)
+      .sort((a, b) => a.localeCompare(b)) ?? []
+  );
 }
 
 export function getSewerWaterScatterPlotData(
   data: Regionaal
 ): RegionalSewerPerInstallationValue[] | undefined {
-  return data.sewer_per_installation.values.flatMap((value) => value.values);
+  return (
+    data.sewer_per_installation?.values.flatMap((value) => value.values) ?? []
+  );
 }
 
 export function getSewerWaterLineChartData(
@@ -93,11 +97,10 @@ export function getSewerWaterLineChartData(
 export function getSewerWaterBarChartData(
   data: Regionaal
 ): SewerWaterBarChartData | undefined {
-  const sortedInstallations = data.sewer_per_installation.values.sort(
-    (a, b) => {
+  const sortedInstallations =
+    data.sewer_per_installation?.values.sort((a, b) => {
       return b.last_value.rna_normalized - a.last_value.rna_normalized;
-    }
-  );
+    }) ?? [];
 
   // Concat keys and data to glue the "average" as first bar and then
   // the RWZI-locations from highest to lowest
