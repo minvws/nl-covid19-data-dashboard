@@ -11,9 +11,11 @@ import {
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
 import { RegionalNursingHome } from '~/types/data.d';
-import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { Metadata } from '~/components-styled/metadata';
+import { KpiValue } from '~/components-styled/kpi-value';
+import { KpiTile } from '~/components-styled/kpi-tile';
+import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 
 const text = siteText.veiligheidsregio_verpleeghuis_oversterfte;
 
@@ -47,22 +49,18 @@ const NursingHomeDeaths: FCWithLayout<ISafetyRegionData> = (props) => {
         }}
       />
 
-      <article className="metric-article layout-two-column">
-        <div className="column-item column-item-extra-margin">
-          <h3>{text.barscale_titel}</h3>
-          <p className="text-blue kpi" data-cy="infected_daily_total">
-            {formatNumber(data?.last_value.deceased_daily)}
-          </p>
-          <Metadata
-            date={data.last_value.date_of_report_unix}
-            source={text.bron}
-          />
-        </div>
-
-        <div className="column-item column-item-extra-margin">
-          <p>{text.extra_uitleg}</p>
-        </div>
-      </article>
+      <TwoKpiSection>
+        <KpiTile
+          title={text.barscale_titel}
+          description={text.extra_uitleg}
+          metadata={{
+            date: data.last_value.date_of_report_unix,
+            source: text.bron,
+          }}
+        >
+          <KpiValue absolute={data.last_value.deceased_daily} />
+        </KpiTile>
+      </TwoKpiSection>
 
       {data && (
         <article className="metric-article">
