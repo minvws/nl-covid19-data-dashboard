@@ -629,7 +629,7 @@
     "metadata": {
       "source": "Bron",
       "date": "Waarde van {{date}}",
-      "dateFromTo": "Waarde van {{dateFrom}} tot {{dateTo}}"
+      "dateFromTo": "Waarde van {{dateFrom}} t/m {{dateTo}}"
     },
     "barScale": {
       "signaalwaarde": "Signaalwaarde"
