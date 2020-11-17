@@ -9,8 +9,8 @@
     "title": "Laatst bijgewerkt"
   },
   "notificatie": {
-    "titel": "Afname COVID-19 meldingen ",
-    "bericht": "Afgelopen week (11 november-17 november) is het aantal nieuwe COVID-19 meldingen in alle regio’s voor de tweede week op rij gedaald ten opzichte van de week daarvoor. De daling in het aantal positief geteste personen, ziekenhuis- en IC-opnames van deze week is echter minder groot dan de week daarvoor. De huidige afname van meldingen en ziekenhuisopnames is in lijn met de berekeningen die het RIVM  voorafgaand aan de maatregelen heeft gemaakt. \n\nHet risiconiveau per regio kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2), ‘ernstig’ (niveau 3), ‘zeer ernstig’ (niveau 4) zijn. Op dit moment zijn {{escalationLevel4}} regio’s ingeschaald op ‘zeer ernstig’, {{escalationLevel3}} op ‘ernstig’, {{escalationLevel2}} op ‘zorgelijk’ en {{escalationLevel1}} op ‘waakzaam.‘",
+    "titel": "Langzamere afname COVID-19 meldingen ",
+    "bericht": "Afgelopen week (11 november-17 november) is het aantal nieuwe COVID-19 meldingen in alle regio’s voor de tweede week op rij gedaald ten opzichte van de week daarvoor. De daling in het aantal positief geteste personen, ziekenhuis- en IC-opnames van deze week is echter minder groot dan de week daarvoor. De huidige afname van meldingen en ziekenhuisopnames is in lijn met de berekeningen die het RIVM voorafgaand aan de maatregelen heeft gemaakt. \n\nHet risiconiveau per regio kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2), ‘ernstig’ (niveau 3), ‘zeer ernstig’ (niveau 4) zijn. Op dit moment zijn {{escalationLevel4}} regio’s ingeschaald op ‘zeer ernstig’, {{escalationLevel3}} op ‘ernstig’, {{escalationLevel2}} op ‘zorgelijk’ en {{escalationLevel1}} op ‘waakzaam.‘",
     "link": {
       "text": "Bekijk de toelichting van het RIVM",
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel"
@@ -896,7 +896,7 @@
   },
   "laatste_ontwikkelingen": {
     "title": "Laatste ontwikkelingen",
-    "menu_subtitle": "Afname COVID-19 meldingen ",
+    "menu_subtitle": "Langzamere afname COVID-19 meldingen ",
     "alle_cijfers_header": "Benieuwd naar alle cijfers?",
     "alle_cijfers_link": "Bekijk alle cijfers"
   },
