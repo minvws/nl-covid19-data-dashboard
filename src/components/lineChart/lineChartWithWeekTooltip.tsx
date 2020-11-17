@@ -3,12 +3,10 @@ import Highcharts, {
   TooltipFormatterCallbackFunction,
 } from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import React, { useMemo, useState } from 'react';
-import { ChartTimeControls } from '~/components-styled/chart-time-controls';
+import React, { useMemo } from 'react';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
-import styles from './lineChart.module.scss';
 
 export interface Value {
   date: number;
@@ -21,11 +19,11 @@ export type Week = {
   end: number;
 };
 
-export type LineChartProps = {
+export type LineChartWithWeekProps = {
   values: Value[];
   title: string;
   description?: string;
-  timeframeOptions?: TimeframeOption[];
+  timeframe?: TimeframeOption;
   formatYAxis?: (y: number) => string;
   tooltipFormatter?: TooltipFormatterCallbackFunction;
 };
@@ -160,16 +158,12 @@ function getOptions(
   return options;
 }
 
-export function LineChart({
-  title,
-  description,
+export function LineChartWithWeekTooltip({
   values,
-  timeframeOptions,
   formatYAxis,
   tooltipFormatter,
-}: LineChartProps) {
-  const [timeframe, setTimeframe] = useState<TimeframeOption>('5weeks');
-
+  timeframe = '5weeks',
+}: LineChartWithWeekProps) {
   const chartOptions = useMemo(() => {
     const filteredValues = getFilteredValues<Value>(
       values,
@@ -179,22 +173,5 @@ export function LineChart({
     return getOptions(filteredValues, tooltipFormatter, formatYAxis);
   }, [values, timeframe, tooltipFormatter, formatYAxis]);
 
-  return (
-    <section className={styles.root}>
-      <header className={styles.header}>
-        <div className={styles.titleAndDescription}>
-          {title && <h3>{title}</h3>}
-          {description && <p>{description}</p>}
-        </div>
-        <div>
-          <ChartTimeControls
-            timeframe={timeframe}
-            timeframeOptions={timeframeOptions}
-            onChange={setTimeframe}
-          />
-        </div>
-      </header>
-      <HighchartsReact highcharts={Highcharts} options={chartOptions} />
-    </section>
-  );
+  return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;
 }

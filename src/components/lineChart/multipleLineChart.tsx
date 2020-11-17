@@ -1,30 +1,26 @@
 import Highcharts, { TooltipFormatterContextObject } from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
-import { ChartTimeControls } from '~/components-styled/chart-time-controls';
 import text from '~/locale/index';
 import { assert } from '~/utils/assert';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
 import { Value } from './lineChartWithWeekTooltip';
-import styles from './lineChart.module.scss';
 
-type LineConfig = {
+interface LineConfig {
   color: string;
   legendLabel: string;
-};
+}
 
 const SIGNAALWAARDE_Z_INDEX = 5;
 
 export interface MultipleLineChartProps {
-  title: string;
-  description?: string;
   values: Value[][];
   linesConfig: LineConfig[];
   signaalwaarde?: number;
-  timeframeOptions?: TimeframeOption[];
+  timeframe?: TimeframeOption;
 }
 
 function getChartOptions(
@@ -210,15 +206,11 @@ function getChartOptions(
 }
 
 export function MultipleLineChart({
-  title,
-  description,
   values,
   linesConfig,
   signaalwaarde,
-  timeframeOptions,
+  timeframe = '5weeks',
 }: MultipleLineChartProps) {
-  const [timeframe, setTimeframe] = useState<TimeframeOption>('5weeks');
-
   assert(
     values.length === linesConfig.length,
     'Values length must equal linesConfig length'
@@ -235,24 +227,7 @@ export function MultipleLineChart({
     return getChartOptions(filteredValueLists, linesConfig, signaalwaarde);
   }, [values, linesConfig, timeframe, signaalwaarde]);
 
-  return (
-    <section className={styles.root}>
-      <header className={styles.header}>
-        <div className={styles.titleAndDescription}>
-          {title && <h3>{title}</h3>}
-          {description && <p>{description}</p>}
-        </div>
-        <div className={styles.timeControls}>
-          <ChartTimeControls
-            timeframe={timeframe}
-            timeframeOptions={timeframeOptions}
-            onChange={setTimeframe}
-          />
-        </div>
-      </header>
-      <HighchartsReact highcharts={Highcharts} options={chartOptions} />
-    </section>
-  );
+  return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;
 }
 
 /**

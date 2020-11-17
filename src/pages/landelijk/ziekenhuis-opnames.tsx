@@ -5,8 +5,6 @@ import { Spacer } from '~/components-styled/base';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { ChartRegionControls } from '~/components-styled/chart-region-controls';
-import { ChoroplethLegenda } from '~/components-styled/choropleth-legenda';
 import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/use-safety-region-legenda-data';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
@@ -22,8 +20,7 @@ import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
-import { DataWarning } from '~/components/dataWarning';
-import { Metadata } from '~/components-styled/metadata';
+import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 
 const text = siteText.ziekenhuisopnames_per_dag;
 
@@ -107,54 +104,36 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
         }}
       />
 
-      <article className="metric-article layout-choropleth">
-        <div className="data-warning">
-          <DataWarning />
-        </div>
-        <div className="choropleth-header">
-          <h3>{text.map_titel}</h3>
-          <p>{text.map_toelichting}</p>
-
-          <div className="choropleth-controls">
-            <ChartRegionControls
-              onChange={(val: 'region' | 'municipal') => setSelectedMap(val)}
-            />
-          </div>
-        </div>
-
-        <div className="choropleth-chart">
-          {selectedMap === 'municipal' && (
-            <MunicipalityChoropleth
-              metricName="hospital_admissions"
-              tooltipContent={createMunicipalHospitalAdmissionsTooltip(router)}
-              onSelect={createSelectMunicipalHandler(
-                router,
-                'ziekenhuis-opnames'
-              )}
-            />
-          )}
-          {selectedMap === 'region' && (
-            <SafetyRegionChoropleth
-              metricName="hospital_admissions"
-              tooltipContent={createRegionHospitalAdmissionsTooltip(router)}
-              onSelect={createSelectRegionHandler(router, 'ziekenhuis-opnames')}
-            />
-          )}
-        </div>
-
-        <div className="choropleth-legend">
-          {legendItems && (
-            <ChoroplethLegenda
-              items={legendItems}
-              title={text.chloropleth_legenda.titel}
-            />
-          )}
-        </div>
-        <Metadata
-          date={dataIntake.last_value.date_of_report_unix}
-          source={text.bronnen.rivmSource}
-        />
-      </article>
+      <ChoroplethTile
+        title={text.map_titel}
+        description={text.map_toelichting}
+        onChangeControls={setSelectedMap}
+        legend={
+          legendItems && {
+            items: legendItems,
+            title: text.chloropleth_legenda.titel,
+          }
+        }
+        showDataWarning
+      >
+        {selectedMap === 'municipal' && (
+          <MunicipalityChoropleth
+            metricName="hospital_admissions"
+            tooltipContent={createMunicipalHospitalAdmissionsTooltip(router)}
+            onSelect={createSelectMunicipalHandler(
+              router,
+              'ziekenhuis-opnames'
+            )}
+          />
+        )}
+        {selectedMap === 'region' && (
+          <SafetyRegionChoropleth
+            metricName="hospital_admissions"
+            tooltipContent={createRegionHospitalAdmissionsTooltip(router)}
+            onSelect={createSelectRegionHandler(router, 'ziekenhuis-opnames')}
+          />
+        )}
+      </ChoroplethTile>
     </>
   );
 };
