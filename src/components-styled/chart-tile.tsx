@@ -39,7 +39,7 @@ export function ChartTileWithTimeframe({
   title,
   description,
   metadata,
-  timeframeOptions = TimeframeOption[],
+  timeframeOptions = ['all', '5weeks', 'week'],
   timeframeInitialValue = '5weeks',
   showDataWarning,
   children,
