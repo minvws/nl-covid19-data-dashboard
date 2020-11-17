@@ -1,19 +1,14 @@
 import { NextRouter } from 'next/router';
 import { ReactNode } from 'react';
-import EscalationLevel1 from '~/assets/niveau-1.svg';
-import EscalationLevel2 from '~/assets/niveau-2.svg';
-import EscalationLevel3 from '~/assets/niveau-3.svg';
-import EscalationLevel4 from '~/assets/niveau-4.svg';
+import { EscalationLevelIcon } from '~/components-styled/escalation-level-icon';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
 import text from '~/locale/index';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { ChoroplethThresholds } from '../../shared';
 import styles from '../tooltip.module.scss';
 
-const escalationThresholds = (regionThresholds.escalation_levels as ChoroplethThresholds)
-  .thresholds;
+const escalationThresholds = regionThresholds.escalation_levels.thresholds;
 
 export const escalationTooltip = (router: NextRouter) => {
   return (context: any): ReactNode => {
@@ -37,18 +32,7 @@ export const escalationTooltip = (router: NextRouter) => {
         <TooltipContent title={context.vrname} onSelect={onSelect}>
           <div className={styles.escalationInfo}>
             <div className={styles.bubble}>
-              {thresholdInfo.threshold === 1 && (
-                <EscalationLevel1 color={thresholdInfo.color} />
-              )}
-              {thresholdInfo.threshold === 2 && (
-                <EscalationLevel2 color={thresholdInfo.color} />
-              )}
-              {thresholdInfo.threshold === 3 && (
-                <EscalationLevel3 color={thresholdInfo.color} />
-              )}
-              {thresholdInfo.threshold === 4 && (
-                <EscalationLevel4 color={thresholdInfo.color} />
-              )}
+              <EscalationLevelIcon level={thresholdInfo.threshold} />
             </div>
             <div>
               <strong>

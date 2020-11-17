@@ -1,8 +1,4 @@
-import {
-  ChoroplethThresholds,
-  TRegionMetricName,
-  TRegionsNursingHomeMetricName,
-} from './shared';
+import { ChoroplethThresholds, TRegionsNursingHomeMetricName } from './shared';
 
 const positiveTestedThresholds: ChoroplethThresholds = {
   thresholds: [
@@ -58,23 +54,27 @@ const hospitalAdmissionsThresholds: ChoroplethThresholds = {
   ],
 };
 
-const escalationThresholds: ChoroplethThresholds = {
+const escalationThresholds: ChoroplethThresholds<1 | 2 | 3 | 4 | 5> = {
   thresholds: [
     {
-      color: '#F291BC',
+      color: '#F6B4D1',
       threshold: 1,
     },
     {
-      color: '#DB5C94',
+      color: '#D3719C',
       threshold: 2,
     },
     {
-      color: '#BC2166',
+      color: '#9E3A66',
       threshold: 3,
     },
     {
-      color: '#68032F',
+      color: '#64032D',
       threshold: 4,
+    },
+    {
+      color: '#000000',
+      threshold: 5,
     },
   ],
 };
@@ -199,11 +199,7 @@ const behaviorThresholds: ChoroplethThresholds = {
   ],
 };
 
-export const regionThresholds: Record<
-  TRegionMetricName,
-  | ChoroplethThresholds
-  | Record<Partial<TRegionsNursingHomeMetricName>, ChoroplethThresholds>
-> = {
+export const regionThresholds = {
   positive_tested_people: positiveTestedThresholds,
   hospital_admissions: hospitalAdmissionsThresholds,
   escalation_levels: escalationThresholds,
@@ -213,4 +209,4 @@ export const regionThresholds: Record<
   } as Record<Partial<TRegionsNursingHomeMetricName>, ChoroplethThresholds>,
   sewer: sewerThresholds,
   behavior: behaviorThresholds,
-};
+} as const;
