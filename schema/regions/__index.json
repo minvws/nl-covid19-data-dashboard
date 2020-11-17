@@ -67,6 +67,13 @@
         "$ref": "nursing_home.json"
       }
     },
+    "disability_care": {
+      "type": "array",
+      "maxItems": 25,
+      "items": {
+        "$ref": "disability_care.json"
+      }
+    },
     "sewer": {
       "type": "array",
       "maxItems": 25,
