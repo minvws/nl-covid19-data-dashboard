@@ -22,13 +22,13 @@
       "$ref": "#/definitions/diff_integer"
     },
     "intake_hospital_ma__moving_average_hospital": {
-      "$ref": "#/definitions/diff_integer"
+      "$ref": "#/definitions/diff_decimal"
     },
     "hospital_beds_occupied__covid_occupied": {
       "$ref": "#/definitions/diff_integer"
     },
     "intake_intensivecare_ma__moving_average_ic": {
-      "$ref": "#/definitions/diff_integer"
+      "$ref": "#/definitions/diff_decimal"
     },
     "intensive_care_beds_occupied__covid_occupied": {
       "$ref": "#/definitions/diff_integer"

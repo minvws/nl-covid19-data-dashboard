@@ -10,7 +10,7 @@
       "$ref": "#/definitions/diff_integer"
     },
     "hospital_admissions__moving_average_hospital": {
-      "$ref": "#/definitions/diff_integer"
+      "$ref": "#/definitions/diff_decimal"
     },
     "sewer__average": {
       "$ref": "#/definitions/diff_integer"
