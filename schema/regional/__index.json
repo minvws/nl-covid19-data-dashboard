@@ -31,6 +31,9 @@
       "type": "string",
       "const": { "$data": "1/proto_name" }
     },
+    "difference": {
+      "$ref": "__difference.json"
+    },
     "sewer": {
       "$ref": "sewer.json"
     },
