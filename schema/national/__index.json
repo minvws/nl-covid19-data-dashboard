@@ -23,7 +23,8 @@
     "hospital_beds_occupied",
     "intensive_care_beds_occupied",
     "ggd",
-    "nursing_home"
+    "nursing_home",
+    "behavior"
   ],
   "additionalProperties": false,
   "properties": {
@@ -98,6 +99,9 @@
     },
     "restrictions": {
       "$ref": "restrictions.json"
+    },
+    "behavior": {
+      "$ref": "behavior.json"
     }
   }
 }

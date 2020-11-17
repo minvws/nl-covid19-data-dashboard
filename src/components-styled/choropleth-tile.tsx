@@ -53,31 +53,31 @@ export function ChoroplethTile<T>({
     <ChartTileContainer metadata={metadata} showDataWarning={showDataWarning}>
       <Box display="flex" flexDirection={{ _: 'column', lg: 'row' }}>
         <Box mb={3} flex={{ lg: 1 }}>
-          <div>
-            <Box mb={[0, 2]}>
-              <Heading level={3}>{title}</Heading>
-              {typeof description === 'string' ? (
-                <Text>{description}</Text>
-              ) : (
-                description
-              )}
-              {onChangeControls && (
-                <Box
-                  display="flex"
-                  justifyContent={{ _: 'center', lg: 'flex-start' }}
-                >
-                  <ChartRegionControls onChange={onChangeControls} />
-                </Box>
-              )}
-            </Box>
-            {legendaComponent && breakpoints.lg && (
-              <Box display="flex" flexDirection="row" alignItems="flex-center">
-                {legendaComponent}
+          <Box mb={[0, 2]}>
+            <Heading level={3}>{title}</Heading>
+            {typeof description === 'string' ? (
+              <Text>{description}</Text>
+            ) : (
+              description
+            )}
+            {onChangeControls && (
+              <Box
+                display="flex"
+                justifyContent={{ _: 'center', lg: 'flex-start' }}
+              >
+                <ChartRegionControls onChange={onChangeControls} />
               </Box>
             )}
-          </div>
+          </Box>
+
+          {legendaComponent && breakpoints.lg && (
+            <Box display="flex" flexDirection="row" alignItems="flex-center">
+              {legendaComponent}
+            </Box>
+          )}
         </Box>
-        <Box flex={{ lg: 1 }}>
+
+        <Box flex={{ lg: 1 }} ml={[0, 0, 3]}>
           <div>{children}</div>
 
           {legendaComponent && !breakpoints.lg && (
