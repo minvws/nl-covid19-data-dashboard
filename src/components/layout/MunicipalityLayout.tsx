@@ -205,11 +205,6 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                     >
                       <TitleWithIcon
                         Icon={Ziekenhuis}
-                        iconAttrs={{
-                          style: {
-                            transform: 'scale(1.5)',
-                          },
-                        }}
                         title={
                           siteText.gemeente_ziekenhuisopnames_per_dag
                             .titel_sidebar

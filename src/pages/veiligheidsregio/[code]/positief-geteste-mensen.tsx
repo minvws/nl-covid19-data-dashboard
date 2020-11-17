@@ -133,9 +133,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           value: value.infected_increase_per_region,
           date: value.date_of_report_unix,
         }))}
-        metadata={{
-          source: text.bron,
-        }}
+        metadata={{ source: text.bron }}
       />
 
       <ChoroplethTile

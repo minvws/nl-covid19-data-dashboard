@@ -60,7 +60,9 @@ const RegionalRestrictions: FCWithLayout<ISafetyRegionData> = (props) => {
         })}
         Icon={MaatregelenIcon}
         iconAttrs={{
-          style: { transform: 'scale(1.5)', color: escalationColor },
+          style: {
+            color: escalationColor,
+          },
         }}
       />
       <KpiSection flexDirection="column">

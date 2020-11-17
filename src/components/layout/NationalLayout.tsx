@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import Arrow from '~/assets/arrow.svg';
 import Arts from '~/assets/arts.svg';
 import CoronaVirus from '~/assets/coronavirus.svg';
+import Gedrag from '~/assets/gedrag.svg';
 import Locatie from '~/assets/locaties.svg';
 import MaatregelenIcon from '~/assets/maatregelen.svg';
 import Notification from '~/assets/notification.svg';
@@ -12,7 +13,6 @@ import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import Ziektegolf from '~/assets/ziektegolf.svg';
-import Gedrag from '~/assets/gedrag.svg';
 import { NursingHomeDeathsMetric } from '~/components/common/nursing-home-deaths-metric';
 import { NursingHomeInfectedLocationsMetric } from '~/components/common/nursing-home-infected-locations-metric';
 import { NursingHomeInfectedPeopleMetric } from '~/components/common/nursing-home-infected-people-metric';
@@ -29,10 +29,10 @@ import { SewerWaterMetric } from '~/components/landelijk/sewer-water-metric';
 import { SuspectedPatientsMetric } from '~/components/landelijk/suspected-patients-metric';
 import { getLayout as getSiteLayout } from '~/components/layout';
 import { TitleWithIcon } from '~/components/titleWithIcon';
+import { BehaviorMetric } from '~/domain/behavior/behavior-metric';
 import siteText from '~/locale/index';
 import { INationalData } from '~/static-props/nl-data';
 import { useMenuState } from './useMenuState';
-import { BehaviorMetric } from '~/domain/behavior/behavior-metric';
 
 export function getNationalLayout() {
   return function (
@@ -129,11 +129,6 @@ function NationalLayout(props: NationalLayoutProps) {
                       title={siteText.nationaal_maatregelen.titel_sidebar}
                       subtitle={siteText.nationaal_maatregelen.subtitel_sidebar}
                       Icon={MaatregelenIcon}
-                      iconAttrs={{
-                        style: {
-                          transform: 'scale(1.5)',
-                        },
-                      }}
                     />
                   </a>
                 </Link>
@@ -214,11 +209,6 @@ function NationalLayout(props: NationalLayoutProps) {
                     <TitleWithIcon
                       Icon={ReproIcon}
                       title={siteText.reproductiegetal.titel_sidebar}
-                      iconAttrs={{
-                        style: {
-                          transform: 'scale(1.5)',
-                        },
-                      }}
                     />
                     <span className="metric-wrapper">
                       <ReproductionIndexMetric
@@ -248,11 +238,6 @@ function NationalLayout(props: NationalLayoutProps) {
                   >
                     <TitleWithIcon
                       Icon={Ziekenhuis}
-                      iconAttrs={{
-                        style: {
-                          transform: 'scale(1.5)',
-                        },
-                      }}
                       title={siteText.ziekenhuisopnames_per_dag.titel_sidebar}
                     />
                     <span className="metric-wrapper">
@@ -279,11 +264,6 @@ function NationalLayout(props: NationalLayoutProps) {
                   >
                     <TitleWithIcon
                       Icon={Arts}
-                      iconAttrs={{
-                        style: {
-                          transform: 'scale(1.5)',
-                        },
-                      }}
                       title={siteText.ic_opnames_per_dag.titel_sidebar}
                     />
                     <span className="metric-wrapper">
@@ -384,11 +364,6 @@ function NationalLayout(props: NationalLayoutProps) {
                   >
                     <TitleWithIcon
                       Icon={Arts}
-                      iconAttrs={{
-                        style: {
-                          transform: 'scale(1.5)',
-                        },
-                      }}
                       title={siteText.verdenkingen_huisartsen.titel_sidebar}
                     />
                     <span>

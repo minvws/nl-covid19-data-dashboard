@@ -1,9 +1,8 @@
-import classNames from 'classnames';
+import css from '@styled-system/css';
 import { Feature, MultiPolygon } from 'geojson';
-import { CSSProperties, ReactNode, useCallback } from 'react';
+import { ReactNode, useCallback } from 'react';
 import { Regions } from '~/types/data';
 import { Choropleth } from './choropleth';
-import styles from './choropleth.module.scss';
 import {
   useChartDimensions,
   useChoroplethColorScale,
@@ -25,7 +24,6 @@ export type TProps<
   metricValueName?: string;
   selected?: string;
   highlightSelection?: boolean;
-  style?: CSSProperties;
   onSelect?: (context: TContext) => void;
   tooltipContent?: (context: TContext) => ReactNode;
 };
@@ -55,7 +53,6 @@ export function SafetyRegionChoropleth<
   const {
     selected,
     highlightSelection = true,
-    style,
     metricName,
     metricValueName,
     onSelect,
@@ -145,13 +142,8 @@ export function SafetyRegionChoropleth<
     return null;
   };
 
-  const className = classNames(
-    styles.choroplethContainer,
-    selectedThreshold?.svgClass ? styles[selectedThreshold.svgClass] : undefined
-  );
-
   return (
-    <div ref={ref} className={className} style={style}>
+    <div ref={ref} css={css({ position: 'relative', bg: 'transparent' })}>
       <Choropleth
         featureCollection={regionGeo}
         overlays={countryGeo}

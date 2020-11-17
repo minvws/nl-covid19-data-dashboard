@@ -1,16 +1,16 @@
 import Repro from '~/assets/reproductiegetal.svg';
-import { LineChart } from '~/components/charts/index';
+import { KpiWithIllustrationTile } from '~/components-styled/kpi-with-illustration-tile';
+import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { TwoKpiSection } from '~/components-styled/two-kpi-section';
+import { Text } from '~/components-styled/typography';
+import { ContentHeader } from '~/components/contentHeader';
 import { ReproductionIndexBarScale } from '~/components/landelijk/reproduction-index-barscale';
 import { FCWithLayout } from '~/components/layout';
-import { ContentHeader } from '~/components/contentHeader';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { Legenda } from '~/components/legenda';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
-import { Metadata } from '~/components-styled/metadata';
-import { Text } from '~/components-styled/typography';
-import { KpiWithIllustrationTile } from '~/components-styled/kpi-with-illustration-tile';
 
 const text = siteText.reproductiegetal;
 
@@ -39,39 +39,44 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
         }}
       />
 
-      <KpiWithIllustrationTile
-        title={text.barscale_titel}
-        metadata={{
-          date: lastKnownValidData.last_value.date_of_report_unix,
-          source: text.bron,
-        }}
-        illustration={{
-          image: '/images/reproductie-explainer.svg',
-          alt: text.reproductie_explainer_alt,
-          description: text.extra_uitleg,
-        }}
-      >
-        <ReproductionIndexBarScale data={lastKnownValidData} showAxis={true} />
-        <Text>{text.barscale_toelichting}</Text>
-      </KpiWithIllustrationTile>
+      <TwoKpiSection>
+        <KpiWithIllustrationTile
+          title={text.barscale_titel}
+          metadata={{
+            date: lastKnownValidData.last_value.date_of_report_unix,
+            source: text.bron,
+          }}
+          illustration={{
+            image: '/images/reproductie-explainer.svg',
+            alt: text.reproductie_explainer_alt,
+            description: text.extra_uitleg,
+          }}
+        >
+          <ReproductionIndexBarScale
+            data={lastKnownValidData}
+            showAxis={true}
+          />
+          <Text>{text.barscale_toelichting}</Text>
+        </KpiWithIllustrationTile>
+      </TwoKpiSection>
 
       {data.reproduction_index.values && (
-        <article className="metric-article">
-          <LineChart
-            title={text.linechart_titel}
-            values={data.reproduction_index.values.map((value) => ({
-              value: value.reproduction_index_avg,
-              date: value.date_of_report_unix,
-            }))}
-            signaalwaarde={1}
-            timeframeOptions={['all', '5weeks']}
-            showFill={false}
-          />
-          <Legenda>
-            <li className="blue">{text.legenda_r}</li>
-          </Legenda>
-          <Metadata source={text.bron} />
-        </article>
+        <LineChartTile
+          metadata={{ source: text.bron }}
+          title={text.linechart_titel}
+          values={data.reproduction_index.values.map((value) => ({
+            value: value.reproduction_index_avg,
+            date: value.date_of_report_unix,
+          }))}
+          signaalwaarde={1}
+          timeframeOptions={['all', '5weeks']}
+          showFill={false}
+          footer={
+            <Legenda>
+              <li className="blue">{text.legenda_r}</li>
+            </Legenda>
+          }
+        />
       )}
     </>
   );
