@@ -1,16 +1,16 @@
-import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
-import { Metadata } from '~/components-styled/metadata';
+import { KpiTile } from '~/components-styled/kpi-tile';
+import { KpiValue } from '~/components-styled/kpi-value';
+import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { LineChart } from '~/components/charts/index';
 import { useMunicipalLegendaData } from '~/components/choropleth/legenda/hooks/use-municipal-legenda-data';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createMunicipalHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/municipal/create-municipal-hospital-admissions-tooltip';
 import { ContentHeader } from '~/components/contentHeader';
-import { DataWarning } from '~/components/dataWarning';
 import { FCWithLayout } from '~/components/layout';
 import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
 import { SEOHead } from '~/components/seoHead';
@@ -21,7 +21,6 @@ import {
   IMunicipalityData,
 } from '~/static-props/municipality-data';
 import { MunicipalHospitalAdmissions } from '~/types/data.d';
-import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text = siteText.gemeente_ziekenhuisopnames_per_dag;
@@ -61,31 +60,21 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
         }}
       />
 
-      <article
-        className="metric-article layout-two-column-two-row"
-        css={css({ mb: 4 })}
-      >
-        <DataWarning />
-        <div className="row-item">
-          <div className="column-item column-item-extra-margin">
-            <h3>{text.barscale_titel}</h3>
-            <p className="text-blue kpi" data-cy="infected_daily_total">
-              {formatNumber(
-                hospitalAdmissions.last_value.moving_average_hospital
-              )}
-            </p>
-          </div>
-
-          <div className="column-item column-item-extra-margin">
-            <p>{text.extra_uitleg}</p>
-          </div>
-        </div>
-
-        <Metadata
-          date={hospitalAdmissions.last_value.date_of_report_unix}
-          source={text.bron}
-        />
-      </article>
+      <TwoKpiSection>
+        <KpiTile
+          showDataWarning
+          title={text.barscale_titel}
+          description={text.extra_uitleg}
+          metadata={{
+            date: hospitalAdmissions.last_value.date_of_report_unix,
+            source: text.bron,
+          }}
+        >
+          <KpiValue
+            absolute={hospitalAdmissions.last_value.moving_average_hospital}
+          />
+        </KpiTile>
+      </TwoKpiSection>
 
       {hospitalAdmissions && (
         <ChartTileWithTimeframe

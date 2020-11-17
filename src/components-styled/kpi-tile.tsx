@@ -1,13 +1,15 @@
 import { Box, Spacer } from './base';
-import { Text, Heading } from './typography';
+import { Heading } from './typography';
 import { Tile } from './layout';
 import { MetadataProps, Metadata } from './metadata';
+import { DataWarning } from '~/components/dataWarning';
 
 interface KpiTileProps {
   title: string;
   description?: string;
   children: React.ReactNode;
   metadata: MetadataProps;
+  showDataWarning?: boolean /* TODO: remove this temporary attribute when it is not used anymore */;
 }
 
 /**
@@ -19,14 +21,20 @@ export function KpiTile({
   description,
   children,
   metadata,
+  showDataWarning,
 }: KpiTileProps) {
   return (
     <Tile height="100%">
+      {showDataWarning && <DataWarning />}
       <Heading level={3}>{title}</Heading>
       <Box>{children}</Box>
       {description && (
-        <Text
+        <Box
           as="div"
+          maxWidth="400px"
+          mt={3}
+          fontSize={2}
+          lineHeight={2}
           dangerouslySetInnerHTML={{
             __html: description,
           }}

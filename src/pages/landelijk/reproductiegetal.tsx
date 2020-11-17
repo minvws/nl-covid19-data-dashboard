@@ -1,6 +1,7 @@
 import Repro from '~/assets/reproductiegetal.svg';
 import { KpiWithIllustrationTile } from '~/components-styled/kpi-with-illustration-tile';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { ContentHeader } from '~/components/contentHeader';
 import { ReproductionIndexBarScale } from '~/components/landelijk/reproduction-index-barscale';
@@ -38,21 +39,26 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
         }}
       />
 
-      <KpiWithIllustrationTile
-        title={text.barscale_titel}
-        metadata={{
-          date: lastKnownValidData.last_value.date_of_report_unix,
-          source: text.bron,
-        }}
-        illustration={{
-          image: '/images/reproductie-explainer.svg',
-          alt: text.reproductie_explainer_alt,
-          description: text.extra_uitleg,
-        }}
-      >
-        <ReproductionIndexBarScale data={lastKnownValidData} showAxis={true} />
-        <Text>{text.barscale_toelichting}</Text>
-      </KpiWithIllustrationTile>
+      <TwoKpiSection>
+        <KpiWithIllustrationTile
+          title={text.barscale_titel}
+          metadata={{
+            date: lastKnownValidData.last_value.date_of_report_unix,
+            source: text.bron,
+          }}
+          illustration={{
+            image: '/images/reproductie-explainer.svg',
+            alt: text.reproductie_explainer_alt,
+            description: text.extra_uitleg,
+          }}
+        >
+          <ReproductionIndexBarScale
+            data={lastKnownValidData}
+            showAxis={true}
+          />
+          <Text>{text.barscale_toelichting}</Text>
+        </KpiWithIllustrationTile>
+      </TwoKpiSection>
 
       {data.reproduction_index.values && (
         <LineChartTile

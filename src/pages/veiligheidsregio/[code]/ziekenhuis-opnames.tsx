@@ -1,15 +1,15 @@
-import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
+import { KpiTile } from '~/components-styled/kpi-tile';
+import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
-import { Metadata } from '~/components-styled/metadata';
+import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { useMunicipalLegendaData } from '~/components/choropleth/legenda/hooks/use-municipal-legenda-data';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createMunicipalHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/municipal/create-municipal-hospital-admissions-tooltip';
 import { ContentHeader } from '~/components/contentHeader';
-import { DataWarning } from '~/components/dataWarning';
 import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { SEOHead } from '~/components/seoHead';
@@ -21,7 +21,6 @@ import {
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
 import { ResultsPerRegion } from '~/types/data.d';
-import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text = siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
@@ -61,30 +60,24 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
           dataSource: text.bron,
         }}
       />
-      <article
-        className="metric-article layout-two-column-two-row"
-        css={css({ mb: 4 })}
-      >
-        <DataWarning />
-        <div className="row-item">
-          <div className="column-item column-item-extra-margin">
-            <h3>{text.barscale_titel}</h3>
-            <p className="text-blue kpi" data-cy="infected_daily_total">
-              {formatNumber(
-                resultsPerRegion.last_value.hospital_moving_avg_per_region
-              )}
-            </p>
-          </div>
 
-          <div className="column-item column-item-extra-margin">
-            <p>{text.extra_uitleg}</p>
-          </div>
-        </div>
-        <Metadata
-          date={resultsPerRegion.last_value.date_of_report_unix}
-          source={text.bron}
-        />
-      </article>
+      <TwoKpiSection>
+        <KpiTile
+          showDataWarning
+          title={text.barscale_titel}
+          description={text.extra_uitleg}
+          metadata={{
+            date: resultsPerRegion.last_value.date_of_report_unix,
+            source: text.bron,
+          }}
+        >
+          <KpiValue
+            absolute={
+              resultsPerRegion.last_value.hospital_moving_avg_per_region
+            }
+          />
+        </KpiTile>
+      </TwoKpiSection>
 
       {resultsPerRegion && (
         <LineChartTile
