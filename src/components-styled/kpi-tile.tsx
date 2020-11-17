@@ -9,7 +9,7 @@ interface KpiTileProps {
   description?: string;
   children: React.ReactNode;
   metadata: MetadataProps;
-  dataWarning?: boolean /* TODO: remove this temporary attribute when it is not used anymore */;
+  showDataWarning?: boolean /* TODO: remove this temporary attribute when it is not used anymore */;
 }
 
 /**
@@ -21,18 +21,20 @@ export function KpiTile({
   description,
   children,
   metadata,
-  dataWarning,
+  showDataWarning,
 }: KpiTileProps) {
   return (
     <Tile height="100%">
-      {dataWarning && <DataWarning />}
+      {showDataWarning && <DataWarning />}
       <Heading level={3}>{title}</Heading>
       <Box>{children}</Box>
       {description && (
         <Box
           as="div"
           maxWidth="400px"
-          mt="3"
+          mt={3}
+          fontSize={2}
+          lineHeight={2}
           dangerouslySetInnerHTML={{
             __html: description,
           }}

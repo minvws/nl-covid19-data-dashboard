@@ -65,7 +65,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
 
       <TwoKpiSection>
         <KpiTile
-          dataWarning
+          showDataWarning
           title={text.barscale_titel}
           description={text.extra_uitleg}
           metadata={{
