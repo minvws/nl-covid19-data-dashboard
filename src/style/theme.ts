@@ -88,6 +88,7 @@ const colors: { [name: string]: CSS.Property.Color } = {
   shadow: '#e5e5e5',
   lightGray: '#dfdfdf',
   annotation: '#595959',
+  notification: '#cd005a',
 };
 
 const radii = [0, 5, 10];

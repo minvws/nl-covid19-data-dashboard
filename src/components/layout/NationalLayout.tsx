@@ -32,6 +32,7 @@ import { TitleWithIcon } from '~/components/titleWithIcon';
 import { BehaviorMetric } from '~/domain/behavior/behavior-metric';
 import siteText from '~/locale/index';
 import { INationalData } from '~/static-props/nl-data';
+import theme from '~/style/theme';
 import { useMenuState } from './useMenuState';
 
 export function getNationalLayout() {
@@ -144,6 +145,11 @@ function NationalLayout(props: NationalLayoutProps) {
                   >
                     <TitleWithIcon
                       Icon={Notification}
+                      iconAttrs={{
+                        style: {
+                          color: theme.colors.notification,
+                        },
+                      }}
                       title={siteText.laatste_ontwikkelingen.title}
                       subtitle={siteText.laatste_ontwikkelingen.menu_subtitle}
                     />

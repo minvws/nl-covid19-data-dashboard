@@ -18,6 +18,7 @@ import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { TitleWithIcon } from '~/components/titleWithIcon';
 import { TALLLanguages } from '~/locale/index';
 import { loadJsonFromFile } from '~/static-props/utils/load-json-from-file';
+import theme from '~/style/theme';
 import { EscalationLevels, National, Regions } from '~/types/data';
 import { assert } from '~/utils/assert';
 import { MDToHTMLString } from '~/utils/MDToHTMLString';
@@ -62,6 +63,11 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
     <>
       <TitleWithIcon
         Icon={Notification}
+        iconAttrs={{
+          style: {
+            color: theme.colors.notification,
+          },
+        }}
         title={text.laatste_ontwikkelingen.title}
         as="h2"
       />
