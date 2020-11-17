@@ -11,7 +11,8 @@
     "ggd",
     "nursing_home",
     "sewer",
-    "sewer_per_installation"
+    "sewer_per_installation",
+    "behavior"
   ],
   "additionalProperties": false,
   "properties": {
@@ -47,6 +48,9 @@
     },
     "restrictions": {
       "$ref": "restrictions.json"
+    },
+    "behavior": {
+      "$ref": "behavior.json"
     }
   }
 }

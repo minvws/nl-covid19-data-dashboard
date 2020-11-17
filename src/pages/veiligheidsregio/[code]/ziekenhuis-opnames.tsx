@@ -19,9 +19,11 @@ import {
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
 import { ResultsPerRegion } from '~/types/data.d';
-import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { Metadata } from '~/components-styled/metadata';
+import { TwoKpiSection } from '~/components-styled/two-kpi-section';
+import { KpiTile } from '~/components-styled/kpi-tile';
+import { KpiValue } from '~/components-styled/kpi-value';
 
 const text = siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
 
@@ -60,27 +62,24 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
           dataSource: text.bron,
         }}
       />
-      <article className="metric-article layout-two-column-two-row">
-        <DataWarning />
-        <div className="row-item">
-          <div className="column-item column-item-extra-margin">
-            <h3>{text.barscale_titel}</h3>
-            <p className="text-blue kpi" data-cy="infected_daily_total">
-              {formatNumber(
-                resultsPerRegion.last_value.hospital_moving_avg_per_region
-              )}
-            </p>
-          </div>
 
-          <div className="column-item column-item-extra-margin">
-            <p>{text.extra_uitleg}</p>
-          </div>
-        </div>
-        <Metadata
-          date={resultsPerRegion.last_value.date_of_report_unix}
-          source={text.bron}
-        />
-      </article>
+      <TwoKpiSection>
+        <KpiTile
+          showDataWarning
+          title={text.barscale_titel}
+          description={text.extra_uitleg}
+          metadata={{
+            date: resultsPerRegion.last_value.date_of_report_unix,
+            source: text.bron,
+          }}
+        >
+          <KpiValue
+            absolute={
+              resultsPerRegion.last_value.hospital_moving_avg_per_region
+            }
+          />
+        </KpiTile>
+      </TwoKpiSection>
 
       {resultsPerRegion && (
         <article className="metric-article">
