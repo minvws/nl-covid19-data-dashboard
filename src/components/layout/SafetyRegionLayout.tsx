@@ -7,6 +7,7 @@ import Locatie from '~/assets/locaties.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
+import Gedrag from '~/assets/gedrag.svg';
 import { ComboBox } from '~/components/comboBox';
 import { NursingHomeDeathsMetric } from '~/components/common/nursing-home-deaths-metric';
 import { NursingHomeInfectedLocationsMetric } from '~/components/common/nursing-home-infected-locations-metric';
@@ -23,6 +24,7 @@ import { ISafetyRegionData } from '~/static-props/safetyregion-data';
 import { getSewerWaterBarScaleData } from '~/utils/sewer-water/safety-region-sewer-water.util';
 import { useMediaQuery } from '~/utils/useMediaQuery';
 import { useMenuState } from './useMenuState';
+import { BehaviorMetric } from '~/domain/behavior/behavior-metric';
 
 export function getSafetyRegionLayout() {
   return function (
@@ -310,6 +312,30 @@ function SafetyRegionLayout(
                         <SewerWaterMetric
                           data={getSewerWaterBarScaleData(data)}
                         />
+                      </span>
+                    </a>
+                  </Link>
+                </li>
+              </ul>
+              <h2>{siteText.nationaal_layout.headings.gedrag}</h2>
+              <ul>
+                <li>
+                  <Link
+                    href="/veiligheidsregio/[code]/gedrag"
+                    as={`/veiligheidsregio/${code}/gedrag`}
+                  >
+                    <a
+                      onClick={blur}
+                      className={getClassName(
+                        '/veiligheidsregio/[code]/gedrag'
+                      )}
+                    >
+                      <TitleWithIcon
+                        Icon={Gedrag}
+                        title={siteText.nl_gedrag.sidebar.titel}
+                      />
+                      <span>
+                        <BehaviorMetric data={data.behavior} />
                       </span>
                     </a>
                   </Link>

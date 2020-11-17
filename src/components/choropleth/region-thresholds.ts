@@ -167,6 +167,39 @@ const sewerThresholds: ChoroplethThresholds = {
   ],
 };
 
+const behaviorThresholds: ChoroplethThresholds = {
+  thresholds: [
+    {
+      color: '#034566',
+      threshold: 0,
+    },
+    {
+      color: '#0579B3',
+      threshold: 40,
+    },
+    {
+      color: '#3391CC',
+      threshold: 50,
+    },
+    {
+      color: '#5DAFE4',
+      threshold: 60,
+    },
+    {
+      color: '#87CBF8',
+      threshold: 70,
+    },
+    {
+      color: '#C0E8FC',
+      threshold: 80,
+    },
+    {
+      color: '#EBF8FF',
+      threshold: 90,
+    },
+  ],
+};
+
 export const regionThresholds: Record<
   TRegionMetricName,
   | ChoroplethThresholds
@@ -180,4 +213,5 @@ export const regionThresholds: Record<
     newly_infected_people: nursingHomeThresholds,
   } as Record<Partial<TRegionsNursingHomeMetricName>, ChoroplethThresholds>,
   sewer: sewerThresholds,
+  behavior: behaviorThresholds,
 };

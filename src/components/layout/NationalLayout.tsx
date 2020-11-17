@@ -11,6 +11,7 @@ import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import Ziektegolf from '~/assets/ziektegolf.svg';
+import Gedrag from '~/assets/gedrag.svg';
 import { NursingHomeDeathsMetric } from '~/components/common/nursing-home-deaths-metric';
 import { NursingHomeInfectedLocationsMetric } from '~/components/common/nursing-home-infected-locations-metric';
 import { NursingHomeInfectedPeopleMetric } from '~/components/common/nursing-home-infected-people-metric';
@@ -30,6 +31,7 @@ import { TitleWithIcon } from '~/components/titleWithIcon';
 import siteText from '~/locale/index';
 import { INationalData } from '~/static-props/nl-data';
 import { useMenuState } from './useMenuState';
+import { BehaviorMetric } from '~/domain/behavior/behavior-metric';
 
 export function getNationalLayout() {
   return function (
@@ -364,6 +366,25 @@ function NationalLayout(props: NationalLayoutProps) {
                     />
                     <span>
                       <SewerWaterMetric data={data.sewer} />
+                    </span>
+                  </a>
+                </Link>
+              </li>
+            </ul>
+            <h2>{siteText.nationaal_layout.headings.gedrag}</h2>
+            <ul>
+              <li>
+                <Link href="/landelijk/gedrag">
+                  <a
+                    onClick={blur}
+                    className={getClassName('/landelijk/gedrag')}
+                  >
+                    <TitleWithIcon
+                      Icon={Gedrag}
+                      title={siteText.nl_gedrag.sidebar.titel}
+                    />
+                    <span>
+                      <BehaviorMetric data={data.behavior} />
                     </span>
                   </a>
                 </Link>
