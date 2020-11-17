@@ -11,6 +11,7 @@ import getNlData, { INationalData } from '~/static-props/nl-data';
 import { Metadata } from '~/components-styled/metadata';
 import { Text } from '~/components-styled/typography';
 import { KpiWithIllustrationTile } from '~/components-styled/kpi-with-illustration-tile';
+import { LineChartTile } from '~/components-styled/line-chart-tile';
 
 const text = siteText.reproductiegetal;
 
@@ -56,22 +57,22 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
       </KpiWithIllustrationTile>
 
       {data.reproduction_index.values && (
-        <article className="metric-article">
-          <LineChart
-            title={text.linechart_titel}
-            values={data.reproduction_index.values.map((value) => ({
-              value: value.reproduction_index_avg,
-              date: value.date_of_report_unix,
-            }))}
-            signaalwaarde={1}
-            timeframeOptions={['all', '5weeks']}
-            showFill={false}
-          />
-          <Legenda>
-            <li className="blue">{text.legenda_r}</li>
-          </Legenda>
-          <Metadata source={text.bron} />
-        </article>
+        <LineChartTile
+          metadata={{ source: text.bron }}
+          title={text.linechart_titel}
+          values={data.reproduction_index.values.map((value) => ({
+            value: value.reproduction_index_avg,
+            date: value.date_of_report_unix,
+          }))}
+          signaalwaarde={1}
+          timeframeOptions={['all', '5weeks']}
+          showFill={false}
+          footer={
+            <Legenda>
+              <li className="blue">{text.legenda_r}</li>
+            </Legenda>
+          }
+        />
       )}
     </>
   );

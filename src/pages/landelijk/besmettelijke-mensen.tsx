@@ -9,6 +9,8 @@ import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 import { Metadata } from '~/components-styled/metadata';
 import { formatNumber } from '~/utils/formatNumber';
+import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
+import css from '@styled-system/css';
 
 const text = siteText.besmettelijke_personen;
 
@@ -68,7 +70,10 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
 
       */}
 
-      <article className="metric-article layout-two-column">
+      <article
+        className="metric-article layout-two-column"
+        css={css({ mb: 4 })}
+      >
         <div className="column-item column-item-extra-margin">
           <h3>{text.cijfer_titel}</h3>
           <p className="text-blue kpi" data-cy="infected_daily_total">
@@ -90,25 +95,32 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
       </article>
 
       {count?.values && (
-        <article className="metric-article">
-          <AreaChart
-            title={text.linechart_titel}
-            data={count.values.map((value) => ({
-              avg: value.infectious_avg,
-              min: value.infectious_low,
-              max: value.infectious_high,
-              date: value.date_of_report_unix,
-            }))}
-            rangeLegendLabel={text.rangeLegendLabel}
-            lineLegendLabel={text.lineLegendLabel}
-            timeframeOptions={['all', '5weeks']}
-          />
-          <Legenda>
-            <li className="blue">{text.legenda_line}</li>
-            <li className="gray square">{text.legenda_marge}</li>
-          </Legenda>
-          <Metadata source={text.bron} />
-        </article>
+        <ChartTileWithTimeframe
+          metadata={{ source: text.bron }}
+          title={text.linechart_titel}
+          timeframeOptions={['all', '5weeks']}
+          timeframeInitialValue="5weeks"
+        >
+          {(timeframe) => (
+            <>
+              <AreaChart
+                timeframe={timeframe}
+                data={count.values.map((value) => ({
+                  avg: value.infectious_avg,
+                  min: value.infectious_low,
+                  max: value.infectious_high,
+                  date: value.date_of_report_unix,
+                }))}
+                rangeLegendLabel={text.rangeLegendLabel}
+                lineLegendLabel={text.lineLegendLabel}
+              />
+              <Legenda>
+                <li className="blue">{text.legenda_line}</li>
+                <li className="gray square">{text.legenda_marge}</li>
+              </Legenda>
+            </>
+          )}
+        </ChartTileWithTimeframe>
       )}
     </>
   );

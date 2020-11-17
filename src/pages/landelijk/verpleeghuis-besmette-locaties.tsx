@@ -17,6 +17,8 @@ import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { Text } from '~/components-styled/typography';
 import { Metadata } from '~/components-styled/metadata';
+import { ChoroplethTile } from '~/components-styled/choropleth-tile';
+import { LineChartTile } from '~/components-styled/line-chart-tile';
 
 const text = siteText.verpleeghuis_besmette_locaties;
 
@@ -74,48 +76,39 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
         </KpiTile>
       </TwoKpiSection>
 
-      <article className="metric-article layout-choropleth">
-        <div className="choropleth-header">
-          <h3>{text.map_titel}</h3>
-          <p>{text.map_toelichting}</p>
-        </div>
-
-        <div className="choropleth-chart">
-          <SafetyRegionChoropleth
-            metricName="nursing_home"
-            metricValueName="infected_locations_percentage"
-            tooltipContent={createInfectedLocationsRegionalTooltip(router)}
-            onSelect={createSelectRegionHandler(
-              router,
-              'verpleeghuis-besmette-locaties'
-            )}
-          />
-        </div>
-
-        <div className="choropleth-legend">
-          {legendItems && (
-            <ChoroplethLegenda
-              items={legendItems}
-              title={text.chloropleth_legenda.titel}
-            />
+      <ChoroplethTile
+        title={text.map_titel}
+        description={text.map_toelichting}
+        metadata={{
+          date: data.last_value.date_of_report_unix,
+          source: text.bron,
+        }}
+        legend={
+          legendItems && {
+            items: legendItems,
+            title: text.chloropleth_legenda.titel,
+          }
+        }
+      >
+        <SafetyRegionChoropleth
+          metricName="nursing_home"
+          metricValueName="infected_locations_percentage"
+          tooltipContent={createInfectedLocationsRegionalTooltip(router)}
+          onSelect={createSelectRegionHandler(
+            router,
+            'verpleeghuis-besmette-locaties'
           )}
-        </div>
-        <Metadata
-          date={data.last_value.date_of_report_unix}
-          source={text.bron}
         />
-      </article>
+      </ChoroplethTile>
 
-      <article className="metric-article">
-        <LineChart
-          title={text.linechart_titel}
-          values={data.values.map((value) => ({
-            value: value.infected_locations_total,
-            date: value.date_of_report_unix,
-          }))}
-        />
-        <Metadata source={text.bron} />
-      </article>
+      <LineChartTile
+        metadata={{ source: text.bron }}
+        title={text.linechart_titel}
+        values={data.values.map((value) => ({
+          value: value.infected_locations_total,
+          date: value.date_of_report_unix,
+        }))}
+      />
     </>
   );
 };

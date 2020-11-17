@@ -19,8 +19,6 @@ type TLine = [Date, number | null];
 const SIGNAALWAARDE_Z_INDEX = 5;
 
 interface AreaChartProps {
-  title: string;
-  description?: string;
   rangeLegendLabel: string;
   lineLegendLabel: string;
   data: Array<{
@@ -30,7 +28,7 @@ interface AreaChartProps {
     max: number | null;
   }>;
   signaalwaarde?: number;
-  timeframeOptions?: TimeframeOption[];
+  timeframe?: TimeframeOption;
 }
 
 type IGetOptions = Omit<AreaChartProps, 'data' | 'title' | 'description'> & {
@@ -44,9 +42,7 @@ export default function AreaChart(props: AreaChartProps) {
     lineLegendLabel,
     data,
     signaalwaarde,
-    timeframeOptions,
-    title,
-    description,
+    timeframe = '5weeks',
   } = props;
 
   const rangeData: TRange[] = useMemo(() => {
@@ -58,8 +54,6 @@ export default function AreaChart(props: AreaChartProps) {
       return [createDate(value.date), value.avg];
     });
   }, [data]);
-
-  const [timeframe, setTimeframe] = useState<TimeframeOption>('5weeks');
 
   const chartOptions = useMemo(() => {
     const getOptionsThunk = (rangeData: TRange[], lineData: TLine[]) =>
@@ -93,24 +87,7 @@ export default function AreaChart(props: AreaChartProps) {
     timeframe,
   ]);
 
-  return (
-    <section className={styles.root}>
-      <header className={styles.header}>
-        <div className={styles.titleAndDescription}>
-          {title && <h3>{title}</h3>}
-          {description && <p>{description}</p>}
-        </div>
-        <div className={styles.timeControls}>
-          <ChartTimeControls
-            timeframe={timeframe}
-            timeframeOptions={timeframeOptions}
-            onChange={(value) => setTimeframe(value)}
-          />
-        </div>
-      </header>
-      <HighchartsReact highcharts={Highcharts} options={chartOptions} />
-    </section>
-  );
+  return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;
 }
 
 function getChartOptions(props: IGetOptions): Highcharts.Options {

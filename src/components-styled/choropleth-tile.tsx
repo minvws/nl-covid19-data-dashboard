@@ -62,7 +62,10 @@ export function ChoroplethTile<T>({
                 description
               )}
               {onChangeControls && (
-                <Box display="flex" justifyContent="flex-start">
+                <Box
+                  display="flex"
+                  justifyContent={{ _: 'center', lg: 'flex-start' }}
+                >
                   <ChartRegionControls onChange={onChangeControls} />
                 </Box>
               )}

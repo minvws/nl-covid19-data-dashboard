@@ -2,6 +2,7 @@ import { Box } from './base';
 import { Text, Heading } from './typography';
 import { Tile } from './layout';
 import { MetadataProps, Metadata } from './metadata';
+import { ChartTileContainer } from './chart-tile-container';
 
 interface Illustration {
   image: string;
@@ -29,7 +30,7 @@ export function KpiWithIllustrationTile({
   illustration,
 }: KpiWithIllustrationProps) {
   return (
-    <Tile>
+    <ChartTileContainer metadata={metadata}>
       <Box display="flex" flexWrap="wrap">
         <Box
           mb={4}
@@ -65,7 +66,6 @@ export function KpiWithIllustrationTile({
           <p>{illustration.description}</p>
         </Box>
       </Box>
-      <Metadata {...metadata} />
-    </Tile>
+    </ChartTileContainer>
   );
 }
