@@ -1,7 +1,9 @@
+import css from '@styled-system/css';
 import CoronaVirus from '~/assets/coronavirus.svg';
-import { LineChart } from '~/components/charts/index';
-import { FCWithLayout } from '~/components/layout';
+import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { Metadata } from '~/components-styled/metadata';
 import { ContentHeader } from '~/components/contentHeader';
+import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
@@ -13,9 +15,6 @@ import {
 import { RegionalNursingHome } from '~/types/data.d';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { Metadata } from '~/components-styled/metadata';
-import { LineChartTile } from '~/components-styled/line-chart-tile';
-import css from '@styled-system/css';
 
 const text = siteText.veiligheidsregio_verpleeghuis_oversterfte;
 

@@ -1,7 +1,6 @@
 import { Box } from './base';
 import { Text, Heading } from './typography';
-import { Tile } from './layout';
-import { MetadataProps, Metadata } from './metadata';
+import { MetadataProps } from './metadata';
 import { ChartTileContainer } from './chart-tile-container';
 
 interface Illustration {

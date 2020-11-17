@@ -1,10 +1,10 @@
+import css from '@styled-system/css';
 import { localPoint } from '@vx/event';
 import { Mercator } from '@vx/geo';
 import { GeoPermissibleObjects } from 'd3-geo';
 import { Feature, FeatureCollection, Geometry, MultiPolygon } from 'geojson';
 import { memo, MutableRefObject, ReactNode, useRef, useState } from 'react';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
-import styles from './choropleth.module.scss';
 import { TCombinedChartDimensions } from './hooks/use-chart-dimensions';
 import { Tooltip } from './tooltips/tooltipContainer';
 
@@ -139,7 +139,7 @@ const ChoroplethMap: <T>(
       <svg
         width={width}
         height={height}
-        className={styles.svgMap}
+        css={css({ display: 'block', bg: 'transparent' })}
         onMouseMove={createSvgMouseOverHandler(timeout, setTooltip)}
         onMouseOut={
           isTouch ? undefined : createSvgMouseOutHandler(timeout, setTooltip)

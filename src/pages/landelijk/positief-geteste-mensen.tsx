@@ -5,7 +5,6 @@ import Getest from '~/assets/test.svg';
 import { Anchor } from '~/components-styled/anchor';
 import { Box } from '~/components-styled/base';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
-import { KpiSection } from '~/components-styled/kpi-section';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
@@ -35,7 +34,6 @@ import {
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { formatDateFromSeconds } from '~/utils/formatDate';
-import { Metadata } from '~/components-styled/metadata';
 import { MultipleLineChartTile } from '~/components-styled/multiple-line-chart-tile';
 import { RegionControlOption } from '~/components-styled/chart-region-controls';
 import { ChartTile } from '~/components-styled/chart-tile';

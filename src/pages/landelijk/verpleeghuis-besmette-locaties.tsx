@@ -1,24 +1,21 @@
 import { useRouter } from 'next/router';
 import Locatie from '~/assets/locaties.svg';
-import { LineChart } from '~/components/charts/index';
-import { ChoroplethLegenda } from '~/components-styled/choropleth-legenda';
+import { ChoroplethTile } from '~/components-styled/choropleth-tile';
+import { KpiTile } from '~/components-styled/kpi-tile';
+import { KpiValue } from '~/components-styled/kpi-value';
+import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { TwoKpiSection } from '~/components-styled/two-kpi-section';
+import { Text } from '~/components-styled/typography';
 import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/use-safety-region-legenda-data';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createInfectedLocationsRegionalTooltip } from '~/components/choropleth/tooltips/region/create-infected-locations-regional-tooltip';
-import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/contentHeader';
+import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
-import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { KpiTile } from '~/components-styled/kpi-tile';
-import { KpiValue } from '~/components-styled/kpi-value';
-import { Text } from '~/components-styled/typography';
-import { Metadata } from '~/components-styled/metadata';
-import { ChoroplethTile } from '~/components-styled/choropleth-tile';
-import { LineChartTile } from '~/components-styled/line-chart-tile';
 
 const text = siteText.verpleeghuis_besmette_locaties;
 

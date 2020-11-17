@@ -3,12 +3,10 @@ import Highcharts, {
   TooltipFormatterCallbackFunction,
 } from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import React, { useMemo, useState } from 'react';
-import { ChartTimeControls } from '~/components-styled/chart-time-controls';
+import React, { useMemo } from 'react';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
-import styles from './lineChart.module.scss';
 
 export interface Value {
   date: number;

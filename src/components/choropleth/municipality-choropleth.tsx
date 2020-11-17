@@ -1,7 +1,7 @@
+import css from '@styled-system/css';
 import { Feature, GeoJsonProperties, MultiPolygon } from 'geojson';
 import { CSSProperties, ReactNode, useCallback } from 'react';
 import { Choropleth } from './choropleth';
-import styles from './choropleth.module.scss';
 import {
   useChartDimensions,
   useChoroplethColorScale,
@@ -171,7 +171,11 @@ export function MunicipalityChoropleth(props: TProps) {
   };
 
   return (
-    <div ref={ref} className={styles.choroplethContainer} style={style}>
+    <div
+      ref={ref}
+      css={css({ bg: 'transparent', position: 'relative' })}
+      style={style}
+    >
       <Choropleth
         featureCollection={municipalGeo}
         overlays={overlays}

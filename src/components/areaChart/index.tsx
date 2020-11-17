@@ -1,13 +1,11 @@
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import { useMemo, useState } from 'react';
-import { ChartTimeControls } from '~/components-styled/chart-time-controls';
+import { useMemo } from 'react';
 import text from '~/locale/index';
 import { createDate } from '~/utils/createDate';
 import { formatDateFromMilliseconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
-import styles from './areaChart.module.scss';
 
 if (typeof Highcharts === 'object') {
   require('highcharts/highcharts-more')(Highcharts);

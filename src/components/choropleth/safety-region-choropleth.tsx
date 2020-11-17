@@ -1,9 +1,8 @@
-import classNames from 'classnames';
+import css from '@styled-system/css';
 import { Feature, MultiPolygon } from 'geojson';
 import { CSSProperties, ReactNode, useCallback } from 'react';
 import { Regions } from '~/types/data';
 import { Choropleth } from './choropleth';
-import styles from './choropleth.module.scss';
 import {
   useChartDimensions,
   useChoroplethColorScale,
@@ -145,13 +144,12 @@ export function SafetyRegionChoropleth<
     return null;
   };
 
-  const className = classNames(
-    styles.choroplethContainer,
-    selectedThreshold?.svgClass ? styles[selectedThreshold.svgClass] : undefined
-  );
-
   return (
-    <div ref={ref} className={className} style={style}>
+    <div
+      ref={ref}
+      style={style}
+      css={css({ position: 'relative', bg: 'transparent' })}
+    >
       <Choropleth
         featureCollection={regionGeo}
         overlays={countryGeo}

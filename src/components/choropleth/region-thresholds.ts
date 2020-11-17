@@ -59,7 +59,6 @@ const hospitalAdmissionsThresholds: ChoroplethThresholds = {
 };
 
 const escalationThresholds: ChoroplethThresholds = {
-  svgClass: 'escalationMap',
   thresholds: [
     {
       color: '#F291BC',

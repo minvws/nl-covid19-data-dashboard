@@ -1,15 +1,14 @@
+import css from '@styled-system/css';
 import Getest from '~/assets/test.svg';
-import { LineChart } from '~/components/charts/index';
-import { FCWithLayout } from '~/components/layout';
+import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { Metadata } from '~/components-styled/metadata';
 import { ContentHeader } from '~/components/contentHeader';
+import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 import { formatNumber } from '~/utils/formatNumber';
-import { Metadata } from '~/components-styled/metadata';
-import { LineChartTile } from '~/components-styled/line-chart-tile';
-import css from '@styled-system/css';
 
 const text = siteText.verpleeghuis_positief_geteste_personen;
 

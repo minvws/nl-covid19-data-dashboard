@@ -47,7 +47,6 @@ export type RegionGeoJSON = FeatureCollection<
 >;
 
 export type ChoroplethThresholds = {
-  svgClass?: string;
   thresholds: ChoroplethThresholdsValue[];
 };
 
