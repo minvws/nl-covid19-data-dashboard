@@ -62,7 +62,7 @@ export function ChartTileWithTimeframe({
   );
 }
 
-export function ChartTileHeader({
+function ChartTileHeader({
   title,
   description,
   timeframe,

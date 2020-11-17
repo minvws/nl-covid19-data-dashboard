@@ -1,6 +1,6 @@
 import css from '@styled-system/css';
 import { Feature, GeoJsonProperties, MultiPolygon } from 'geojson';
-import { CSSProperties, ReactNode, useCallback } from 'react';
+import { ReactNode, useCallback } from 'react';
 import { Choropleth } from './choropleth';
 import {
   useChartDimensions,
@@ -22,7 +22,6 @@ export type TProps = {
   metricName?: TMunicipalityMetricName;
   selected?: string;
   highlightSelection?: boolean;
-  style?: CSSProperties;
   onSelect?: (context: MunicipalityProperties) => void;
   tooltipContent?: (context: MunicipalityProperties) => ReactNode;
   isSelectorMap?: boolean;
@@ -45,7 +44,6 @@ export type TProps = {
 export function MunicipalityChoropleth(props: TProps) {
   const {
     selected,
-    style,
     metricName,
     onSelect,
     tooltipContent,
@@ -171,11 +169,7 @@ export function MunicipalityChoropleth(props: TProps) {
   };
 
   return (
-    <div
-      ref={ref}
-      css={css({ bg: 'transparent', position: 'relative' })}
-      style={style}
-    >
+    <div ref={ref} css={css({ bg: 'transparent', position: 'relative' })}>
       <Choropleth
         featureCollection={municipalGeo}
         overlays={overlays}

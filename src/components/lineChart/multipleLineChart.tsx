@@ -227,11 +227,7 @@ export function MultipleLineChart({
     return getChartOptions(filteredValueLists, linesConfig, signaalwaarde);
   }, [values, linesConfig, timeframe, signaalwaarde]);
 
-  return (
-    <section>
-      <HighchartsReact highcharts={Highcharts} options={chartOptions} />
-    </section>
-  );
+  return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;
 }
 
 /**
