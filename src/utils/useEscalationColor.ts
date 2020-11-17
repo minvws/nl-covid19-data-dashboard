@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { ChoroplethThresholds } from '~/components/choropleth/shared';
 
-export function useEscalationColor(level: number | undefined) {
+export function useEscalationColor(level?: number) {
   return useMemo(() => {
     if (level === undefined) {
       return '#000000';
