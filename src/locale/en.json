@@ -9,7 +9,7 @@
     "title": "Last updated"
   },
   "notificatie": {
-    "titel": "Decrease in new COVID-19 infections",
+    "titel": "Slower decrease in new COVID-19 infections",
     "bericht": "In the past week (November 11th to November 17th) the number of newly tested COVID-19 positives decreased in all safety regions, compared to the week before. However, the decrease in the number of positively tested persons, hospital and IC admissions this week is less than the week before. The current decrease is in line with the calculations of the RIVM prior to the measures came into effect.\n\nRisk level per region can be ‘caution’ (level 1), ‘concern’ (level 2), ‘serious’ (level 3) or ‘severe’ (level 4). At this moment the risk level of {{escalationLevel4}} regions is 'severe', for {{escalationLevel3}} it is ‘serious’, for {{escalationLevel2}} it is ‘concern’ and for {{escalationLevel1}} it is ‘caution’.",
     "link": {
       "text": "View the full message from the RIVM",
@@ -896,7 +896,7 @@
   },
   "laatste_ontwikkelingen": {
     "title": "Latest developments",
-    "menu_subtitle": "Decrease in new COVID-19 infections",
+    "menu_subtitle": "Slower decrease in new COVID-19 infections",
     "alle_cijfers_header": "",
     "alle_cijfers_link": ""
   },
