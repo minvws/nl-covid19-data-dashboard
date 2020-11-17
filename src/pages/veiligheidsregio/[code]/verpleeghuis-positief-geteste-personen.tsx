@@ -13,6 +13,8 @@ import {
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { Metadata } from '~/components-styled/metadata';
+import { LineChartTile } from '~/components-styled/line-chart-tile';
+import css from '@styled-system/css';
 
 const text = siteText.veiligheidsregio_verpleeghuis_positief_geteste_personen;
 
@@ -47,7 +49,10 @@ const NursingHomeInfectedPeople: FCWithLayout<ISafetyRegionData> = ({
         }}
       />
 
-      <article className="metric-article layout-two-column">
+      <article
+        className="metric-article layout-two-column"
+        css={css({ mb: 4 })}
+      >
         <div className="column-item column-item-extra-margin">
           <h3>{text.barscale_titel}</h3>
           <p className="text-blue kpi" data-cy="infected_daily_total">
@@ -64,16 +69,14 @@ const NursingHomeInfectedPeople: FCWithLayout<ISafetyRegionData> = ({
         </div>
       </article>
 
-      <article className="metric-article">
-        <LineChart
-          title={text.linechart_titel}
-          values={data.nursing_home.values.map((value) => ({
-            value: value.newly_infected_people,
-            date: value.date_of_report_unix,
-          }))}
-        />
-        <Metadata source={text.bron} />
-      </article>
+      <LineChartTile
+        metadata={{ source: text.bron }}
+        title={text.linechart_titel}
+        values={data.nursing_home.values.map((value) => ({
+          value: value.newly_infected_people,
+          date: value.date_of_report_unix,
+        }))}
+      />
     </>
   );
 };

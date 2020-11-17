@@ -22,6 +22,9 @@ import { ResultsPerRegion } from '~/types/data.d';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { Metadata } from '~/components-styled/metadata';
+import { LineChartTile } from '~/components-styled/line-chart-tile';
+import css from '@styled-system/css';
+import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 
 const text = siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
 
@@ -60,7 +63,10 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
           dataSource: text.bron,
         }}
       />
-      <article className="metric-article layout-two-column-two-row">
+      <article
+        className="metric-article layout-two-column-two-row"
+        css={css({ mb: 4 })}
+      >
         <DataWarning />
         <div className="row-item">
           <div className="column-item column-item-extra-margin">
@@ -83,60 +89,43 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
       </article>
 
       {resultsPerRegion && (
-        <article className="metric-article">
-          <DataWarning />
-          <LineChart
-            title={text.linechart_titel}
-            description={text.linechart_description}
-            values={resultsPerRegion.values.map((value: any) => ({
-              value: value.hospital_moving_avg_per_region,
-              date: value.date_of_report_unix,
-            }))}
-          />
-          <Metadata source={text.bron} />
-        </article>
-      )}
-      <article className="metric-article layout-choropleth">
-        <div className="data-warning">
-          <DataWarning />
-        </div>
-        <div className="choropleth-header">
-          <h3>
-            {replaceVariablesInText(text.map_titel, {
-              safetyRegion: safetyRegionName,
-            })}
-          </h3>
-          <p>{text.map_toelichting}</p>
-        </div>
-
-        <div className="choropleth-chart">
-          <MunicipalityChoropleth
-            selected={selectedMunicipalCode}
-            highlightSelection={false}
-            metricName="hospital_admissions"
-            tooltipContent={createMunicipalHospitalAdmissionsTooltip(router)}
-            onSelect={createSelectMunicipalHandler(
-              router,
-              'ziekenhuis-opnames'
-            )}
-          />
-        </div>
-
-        <div className="choropleth-legend">
-          {legendItems && (
-            <ChoroplethLegenda
-              items={legendItems}
-              title={
-                siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel
-              }
-            />
-          )}
-        </div>
-        <Metadata
-          date={resultsPerRegion.last_value.date_of_report_unix}
-          source={text.bron}
+        <LineChartTile
+          showDataWarning
+          metadata={{ source: text.bron }}
+          title={text.linechart_titel}
+          description={text.linechart_description}
+          values={resultsPerRegion.values.map((value: any) => ({
+            value: value.hospital_moving_avg_per_region,
+            date: value.date_of_report_unix,
+          }))}
         />
-      </article>
+      )}
+
+      <ChoroplethTile
+        showDataWarning
+        title={replaceVariablesInText(text.map_titel, {
+          safetyRegion: safetyRegionName,
+        })}
+        description={text.map_toelichting}
+        legend={
+          legendItems && {
+            items: legendItems,
+            title: siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel,
+          }
+        }
+        metadata={{
+          date: resultsPerRegion.last_value.date_of_report_unix,
+          source: text.bron,
+        }}
+      >
+        <MunicipalityChoropleth
+          selected={selectedMunicipalCode}
+          highlightSelection={false}
+          metricName="hospital_admissions"
+          tooltipContent={createMunicipalHospitalAdmissionsTooltip(router)}
+          onSelect={createSelectMunicipalHandler(router, 'ziekenhuis-opnames')}
+        />
+      </ChoroplethTile>
     </>
   );
 };
