@@ -1,12 +1,13 @@
+import css from '@styled-system/css';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import styled from 'styled-components';
 import Dot from '~/assets/dot.svg';
 import Line from '~/assets/line.svg';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import { RegionalSewerPerInstallationValue } from '~/types/data';
 import { TimeframeOption } from '~/utils/timeframe';
 import { useRegionalSewerWaterChartOptions } from './hooks/useRegionalSewerWaterChartOptions';
-import styles from './lineChart.module.scss';
 
 export type Value = {
   date: number;
@@ -56,20 +57,41 @@ export function RegionalSewerWaterChart(props: TProps) {
       )}
       <HighchartsReact highcharts={Highcharts} options={chartOptions} />
       <div>
-        <ul className={styles.legend}>
+        <ul>
           {chartOptions.series
             ?.filter((serie) => serie.description?.length)
             .map((serie) => (
-              <li key={serie.name}>
-                <div className={styles.legendMarker}>
+              <LegendItem key={serie.name}>
+                <LegendMarker>
                   {serie.type === 'scatter' && <Dot fill={serie.color} />}
                   {serie.type === 'line' && <Line stroke={serie.color} />}
-                </div>
+                </LegendMarker>
                 <div>{serie.description}</div>
-              </li>
+              </LegendItem>
             ))}
         </ul>
       </div>
     </>
   );
 }
+
+const LegendItem = styled.li(
+  css({
+    listStyle: 'none',
+    display: 'flex',
+    flexDirection: 'row',
+  })
+);
+
+const LegendMarker = styled.div(
+  css({
+    height: '0.5em',
+    width: '0.5em',
+    mr: '0.5em',
+
+    svg: {
+      height: '100%',
+      width: '100%',
+    },
+  })
+);

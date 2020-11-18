@@ -75,9 +75,7 @@ const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
           date: value.date_of_report_unix,
         }))}
         signaalwaarde={10}
-        metadata={{
-          source: text.bronnen.nice,
-        }}
+        metadata={{ source: text.bronnen.nice }}
       />
 
       <LineChartTile
@@ -87,9 +85,7 @@ const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
           value: value.covid_occupied,
           date: value.date_of_report_unix,
         }))}
-        metadata={{
-          source: text.bronnen.lnaz,
-        }}
+        metadata={{ source: text.bronnen.lnaz }}
       />
     </>
   );

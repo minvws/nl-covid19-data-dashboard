@@ -1,7 +1,10 @@
 import Getest from '~/assets/test.svg';
-import { LineChart } from '~/components/charts/index';
-import { FCWithLayout } from '~/components/layout';
+import { KpiTile } from '~/components-styled/kpi-tile';
+import { KpiValue } from '~/components-styled/kpi-value';
+import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { ContentHeader } from '~/components/contentHeader';
+import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
@@ -11,10 +14,6 @@ import {
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { Metadata } from '~/components-styled/metadata';
-import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { KpiTile } from '~/components-styled/kpi-tile';
-import { KpiValue } from '~/components-styled/kpi-value';
 
 const text = siteText.veiligheidsregio_verpleeghuis_positief_geteste_personen;
 
@@ -65,16 +64,14 @@ const NursingHomeInfectedPeople: FCWithLayout<ISafetyRegionData> = ({
         </KpiTile>
       </TwoKpiSection>
 
-      <article className="metric-article">
-        <LineChart
-          title={text.linechart_titel}
-          values={data.nursing_home.values.map((value) => ({
-            value: value.newly_infected_people,
-            date: value.date_of_report_unix,
-          }))}
-        />
-        <Metadata source={text.bron} />
-      </article>
+      <LineChartTile
+        metadata={{ source: text.bron }}
+        title={text.linechart_titel}
+        values={data.nursing_home.values.map((value) => ({
+          value: value.newly_infected_people,
+          date: value.date_of_report_unix,
+        }))}
+      />
     </>
   );
 };

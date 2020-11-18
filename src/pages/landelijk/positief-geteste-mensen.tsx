@@ -5,7 +5,6 @@ import Getest from '~/assets/test.svg';
 import { Anchor } from '~/components-styled/anchor';
 import { Box } from '~/components-styled/base';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
-import { KpiSection } from '~/components-styled/kpi-section';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
@@ -35,9 +34,9 @@ import {
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { formatDateFromSeconds } from '~/utils/formatDate';
-import { Metadata } from '~/components-styled/metadata';
 import { MultipleLineChartTile } from '~/components-styled/multiple-line-chart-tile';
 import { RegionControlOption } from '~/components-styled/chart-region-controls';
+import { ChartTile } from '~/components-styled/chart-tile';
 
 const text = siteText.positief_geteste_personen;
 const ggdText = siteText.positief_geteste_personen_ggd;
@@ -192,32 +191,29 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         }}
       />
 
-      <KpiSection flexDirection="column">
-        <Box>
-          <Heading level={3}>{text.barchart_titel}</Heading>
-          <Text>{text.barchart_toelichting}</Text>
-        </Box>
-        <Box>
-          <BarChart
-            keys={text.barscale_keys}
-            data={age.values.map((value) => ({
-              y: value.infected_per_agegroup_increase,
-              label:
-                barChartTotal > 0
-                  ? `${(
-                      (value.infected_per_agegroup_increase * 100) /
-                      barChartTotal
-                    ).toFixed(0)}%`
-                  : false,
-            }))}
-            axisTitle={text.barchart_axis_titel}
-          />
-        </Box>
-        <Metadata
-          date={delta.last_value.date_of_report_unix}
-          source={text.bron}
+      <ChartTile
+        title={text.barchart_titel}
+        description={text.barchart_toelichting}
+        metadata={{
+          date: delta.last_value.date_of_report_unix,
+          source: text.bron,
+        }}
+      >
+        <BarChart
+          keys={text.barscale_keys}
+          data={age.values.map((value) => ({
+            y: value.infected_per_agegroup_increase,
+            label:
+              barChartTotal > 0
+                ? `${(
+                    (value.infected_per_agegroup_increase * 100) /
+                    barChartTotal
+                  ).toFixed(0)}%`
+                : false,
+          }))}
+          axisTitle={text.barchart_axis_titel}
         />
-      </KpiSection>
+      </ChartTile>
 
       <ContentHeader_weekRangeHack
         title={ggdText.titel}

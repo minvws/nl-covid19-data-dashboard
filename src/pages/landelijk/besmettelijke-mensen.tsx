@@ -1,4 +1,8 @@
 import Ziektegolf from '~/assets/ziektegolf.svg';
+import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
+import { KpiTile } from '~/components-styled/kpi-tile';
+import { KpiValue } from '~/components-styled/kpi-value';
+import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { AreaChart } from '~/components/charts/index';
 import { ContentHeader } from '~/components/contentHeader';
 import { FCWithLayout } from '~/components/layout';
@@ -7,10 +11,6 @@ import { Legenda } from '~/components/legenda';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
-import { Metadata } from '~/components-styled/metadata';
-import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { KpiTile } from '~/components-styled/kpi-tile';
-import { KpiValue } from '~/components-styled/kpi-value';
 
 const text = siteText.besmettelijke_personen;
 
@@ -61,25 +61,32 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
       </TwoKpiSection>
 
       {count?.values && (
-        <article className="metric-article">
-          <AreaChart
-            title={text.linechart_titel}
-            data={count.values.map((value) => ({
-              avg: value.infectious_avg,
-              min: value.infectious_low,
-              max: value.infectious_high,
-              date: value.date_of_report_unix,
-            }))}
-            rangeLegendLabel={text.rangeLegendLabel}
-            lineLegendLabel={text.lineLegendLabel}
-            timeframeOptions={['all', '5weeks']}
-          />
-          <Legenda>
-            <li className="blue">{text.legenda_line}</li>
-            <li className="gray square">{text.legenda_marge}</li>
-          </Legenda>
-          <Metadata source={text.bron} />
-        </article>
+        <ChartTileWithTimeframe
+          metadata={{ source: text.bron }}
+          title={text.linechart_titel}
+          timeframeOptions={['all', '5weeks']}
+          timeframeInitialValue="5weeks"
+        >
+          {(timeframe) => (
+            <>
+              <AreaChart
+                timeframe={timeframe}
+                data={count.values.map((value) => ({
+                  avg: value.infectious_avg,
+                  min: value.infectious_low,
+                  max: value.infectious_high,
+                  date: value.date_of_report_unix,
+                }))}
+                rangeLegendLabel={text.rangeLegendLabel}
+                lineLegendLabel={text.lineLegendLabel}
+              />
+              <Legenda>
+                <li className="blue">{text.legenda_line}</li>
+                <li className="gray square">{text.legenda_marge}</li>
+              </Legenda>
+            </>
+          )}
+        </ChartTileWithTimeframe>
       )}
     </>
   );
