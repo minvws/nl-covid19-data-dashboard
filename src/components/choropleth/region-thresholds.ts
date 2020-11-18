@@ -1,29 +1,30 @@
 import { ChoroplethThresholds, TRegionsNursingHomeMetricName } from './shared';
+import { colors } from '~/style/theme';
 
 const positiveTestedThresholds: ChoroplethThresholds = {
   thresholds: [
     {
-      color: '#C0E8FC',
+      color: colors.chart.blueScale[0],
       threshold: 0,
     },
     {
-      color: '#8BD1FF',
+      color: colors.chart.blueScale[1],
       threshold: 4,
     },
     {
-      color: '#61B6ED',
+      color: colors.chart.blueScale[2],
       threshold: 7,
     },
     {
-      color: '#3597D4',
+      color: colors.chart.blueScale[3],
       threshold: 10,
     },
     {
-      color: '#046899',
+      color: colors.chart.blueScale[4],
       threshold: 20,
     },
     {
-      color: '#034566',
+      color: colors.chart.blueScale[5],
       threshold: 30,
     },
   ],
@@ -32,23 +33,23 @@ const positiveTestedThresholds: ChoroplethThresholds = {
 const hospitalAdmissionsThresholds: ChoroplethThresholds = {
   thresholds: [
     {
-      color: '#c0e8fc',
+      color: colors.chart.blueScale[0],
       threshold: 0,
     },
     {
-      color: '#87cbf8',
+      color: colors.chart.blueScale[1],
       threshold: 10,
     },
     {
-      color: '#5dafe4',
+      color: colors.chart.blueScale[2],
       threshold: 16,
     },
     {
-      color: '#3391cc',
+      color: colors.chart.blueScale[3],
       threshold: 24,
     },
     {
-      color: '#0579b3',
+      color: colors.chart.blueScale[4],
       threshold: 31,
     },
   ],
@@ -57,57 +58,20 @@ const hospitalAdmissionsThresholds: ChoroplethThresholds = {
 const escalationThresholds: ChoroplethThresholds<1 | 2 | 3 | 4 | 5> = {
   thresholds: [
     {
-      color: '#F6B4D1',
+      color: colors.chart.redScale[0],
       threshold: 1,
     },
     {
-      color: '#D3719C',
+      color: colors.chart.redScale[1],
       threshold: 2,
     },
     {
-      color: '#9E3A66',
+      color: colors.chart.redScale[2],
       threshold: 3,
     },
     {
-      color: '#64032D',
+      color: colors.chart.redScale[3],
       threshold: 4,
-    },
-    {
-      color: '#000000',
-      threshold: 5,
-    },
-  ],
-};
-
-const nursingHomeThresholds: ChoroplethThresholds = {
-  thresholds: [
-    {
-      color: '#FFFFFF',
-      threshold: 0,
-    },
-    {
-      color: '#C0E8FC',
-      threshold: 1,
-    },
-    {
-      color: '#87CBF8',
-      threshold: 3,
-    },
-    {
-      color: '#5DAFE4',
-      threshold: 7,
-    },
-    {
-      color: '#3391CC',
-      threshold: 11,
-    },
-    {
-      color: '#0579B3',
-      threshold: 21,
-    },
-    {
-      color: '#034566',
-      threshold: 30,
     },
   ],
 };
@@ -115,23 +79,23 @@ const nursingHomeThresholds: ChoroplethThresholds = {
 const nursingHomeInfectedLocationsPercentageThresholds: ChoroplethThresholds = {
   thresholds: [
     {
-      color: '#c0e8fc',
+      color: colors.chart.blueScale[0],
       threshold: 0,
     },
     {
-      color: '#87cbf8',
+      color: colors.chart.blueScale[1],
       threshold: 10,
     },
     {
-      color: '#5dafe4',
+      color: colors.chart.blueScale[2],
       threshold: 20,
     },
     {
-      color: '#3391cc',
+      color: colors.chart.blueScale[3],
       threshold: 30,
     },
     {
-      color: '#0579b3',
+      color: colors.chart.blueScale[4],
       threshold: 40,
     },
   ],
@@ -140,27 +104,27 @@ const nursingHomeInfectedLocationsPercentageThresholds: ChoroplethThresholds = {
 const sewerThresholds: ChoroplethThresholds = {
   thresholds: [
     {
-      color: '#C0E8FC',
+      color: colors.chart.blueScale[0],
       threshold: 0,
     },
     {
-      color: '#8BD1FF',
+      color: colors.chart.blueScale[1],
       threshold: 5,
     },
     {
-      color: '#61B6ED',
+      color: colors.chart.blueScale[2],
       threshold: 50,
     },
     {
-      color: '#3597D4',
+      color: colors.chart.blueScale[3],
       threshold: 100,
     },
     {
-      color: '#046899',
+      color: colors.chart.blueScale[4],
       threshold: 150,
     },
     {
-      color: '#034566',
+      color: colors.chart.blueScale[5],
       threshold: 200,
     },
   ],
@@ -169,31 +133,32 @@ const sewerThresholds: ChoroplethThresholds = {
 const behaviorThresholds: ChoroplethThresholds = {
   thresholds: [
     {
-      color: '#034566',
+      color: colors.chart.blueScale[5],
       threshold: 0,
     },
     {
-      color: '#0579B3',
+      color: colors.chart.blueScale[4],
       threshold: 40,
     },
     {
-      color: '#3391CC',
+      color: colors.chart.blueScale[3],
       threshold: 50,
     },
     {
-      color: '#5DAFE4',
+      color: colors.chart.blueScale[2],
       threshold: 60,
     },
     {
-      color: '#87CBF8',
+      color: colors.chart.blueScale[1],
       threshold: 70,
     },
     {
-      color: '#C0E8FC',
+      color: colors.chart.blueScale[0],
       threshold: 80,
     },
     {
-      color: '#EBF8FF',
+      // this color is not part of the scale (as discussed with design / AG)
+      color: '#DDEFF8',
       threshold: 90,
     },
   ],
@@ -205,7 +170,6 @@ export const regionThresholds = {
   escalation_levels: escalationThresholds,
   nursing_home: {
     infected_locations_percentage: nursingHomeInfectedLocationsPercentageThresholds,
-    newly_infected_people: nursingHomeThresholds,
   } as Record<Partial<TRegionsNursingHomeMetricName>, ChoroplethThresholds>,
   sewer: sewerThresholds,
   behavior: behaviorThresholds,

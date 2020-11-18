@@ -34,10 +34,7 @@ export const EscalationMapLegenda = (props: EscalationMapLegendaProps) => {
             <EscalationLevelIcon level={info.threshold} />
           </div>
           <div className={styles.escalationTextLegenda}>
-            {
-              text.escalatie_niveau.types[info.threshold as 1 | 2 | 3 | 4 | 5]
-                .titel
-            }
+            {text.escalatie_niveau.types[info.threshold].titel}
           </div>
         </div>
       ))}

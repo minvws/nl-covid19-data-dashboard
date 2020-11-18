@@ -168,7 +168,11 @@ export function BehaviorTableTile({
               <tr key={behavior.id}>
                 <Cell>{formatPercentage(behavior.percentage ?? 0)}%</Cell>
                 <Cell
-                  color={behaviorType === 'compliance' ? 'blue' : 'blueDark'}
+                  color={
+                    behaviorType === 'compliance'
+                      ? 'chart.blue'
+                      : 'chart.blueDark'
+                  }
                 >
                   <PercentageBar percentage={behavior.percentage ?? 0} />
                 </Cell>

@@ -2,6 +2,7 @@ import Highcharts, { SeriesLineOptions } from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import React, { useMemo } from 'react';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
+import { colors } from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { getItemFromArray } from '~/utils/getItemFromArray';
@@ -42,7 +43,7 @@ function getOptions(
       data: averageValues.map((x) => [x.date, x.value]),
       name: text.average_label_text,
       showInLegend: true,
-      color: '#3391CC',
+      color: colors.chart.blue,
       allowPointSelect: false,
       marker: {
         symbol: 'circle',

@@ -7,6 +7,7 @@ import { formatNumber } from '~/utils/formatNumber';
 import { getItemFromArray } from '~/utils/getItemFromArray';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { Value, TranslationStrings } from '../regionalSewerWaterChart';
+import { colors } from '~/style/theme';
 
 type Week = {
   start: number;
@@ -112,7 +113,7 @@ export function useRegionalSewerWaterChartOptions(
       name: text.average_label_text,
       description: text.average_label_text,
       showInLegend: true,
-      color: selectedRWZI ? '#A9A9A9' : '#3391CC',
+      color: selectedRWZI ? '#A9A9A9' : colors.chart.blue,
       enableMouseTracking: selectedRWZI === undefined,
       allowPointSelect: false,
       marker: {
@@ -139,7 +140,7 @@ export function useRegionalSewerWaterChartOptions(
         name: '',
         description: '',
         showInLegend: false,
-        color: selectedRWZI ? '#A9A9A9' : '#3391CC',
+        color: selectedRWZI ? '#A9A9A9' : colors.chart.blue,
         enableMouseTracking: false,
         allowPointSelect: false,
         dashStyle: 'ShortDot',
@@ -171,7 +172,7 @@ export function useRegionalSewerWaterChartOptions(
           description: replaceVariablesInText(text.daily_label_text, {
             name: selectedRWZI,
           }),
-          color: '#004277',
+          color: colors.chart.blueDark,
           allowPointSelect: false,
           marker: {
             symbol: 'circle',

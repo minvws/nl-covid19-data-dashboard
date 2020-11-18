@@ -1,5 +1,6 @@
 import { XrangePointOptionsObject } from 'highcharts';
 import siteText from '~/locale/index';
+import { colors } from '~/style/theme';
 import { Regionaal, RegionalSewerPerInstallationValue } from '~/types/data.d';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
@@ -109,7 +110,7 @@ export function getSewerWaterBarChartData(
     data: [
       {
         y: data.sewer.last_value.average,
-        color: '#3391CC',
+        color: colors.chart.blue,
         label: data.sewer.last_value
           ? `${formatDateFromSeconds(
               data.sewer.last_value.week_unix,
