@@ -172,11 +172,11 @@
     "barscale_toelichting": "This figure shows how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
     "kpi_titel": "Number of confirmed cases",
-    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.\n\nDue to an ICT issue, RIVM did not receive all positive test results. The issue has been solved. Today’s number is therefore distorted. The missing number is estimated to be around 1.000. These will be added as from tomorrow. Tomorrow’s number is therefore expected to be higher.",
+    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.",
     "map_titel": "Distribution of confirmed cases in the Netherlands",
     "map_toelichting": "These maps show how many confirmed cases of COVID-19 were reported yesterday per 100,000 inhabitants.",
     "linechart_titel": "Progression over time",
-    "linechart_toelichting": "This graph shows how many confirmed cases of COVID-19 were reported for the selected period per 100,000 inhabitants.",
+    "linechart_toelichting": "This graph shows how many confirmed cases of COVID-19 were reported in the selected period per 100,000 inhabitants.",
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
@@ -430,11 +430,11 @@
     "text": "About this dashboard"
   },
   "over_disclaimer": {
-    "title": "",
+    "title": "Disclaimer",
     "text": ""
   },
   "over_beschrijving": {
-    "text": "The coronavirus dashboard was developed by the Ministry of Health, Welfare and Sport. It gives up-to-date information about developments surrounding coronavirus in the Netherlands. This information can help us pick up early signs that the rate of infection is increasing, allowing us to act in time to stop the virus from spreading further."
+    "text": "The coronavirus dashboard was developed by the Ministry of Health, Welfare and Sport. It gives up-to-date information about developments surrounding coronavirus in the Netherlands. This information can help us pick up early signs that the rate of infection is increasing, allowing us to act in time to stop the virus from spreading further.\n\n###Development\nThe dashboard is still under development, so some features aren’t yet available. As we continue to develop the website, we look carefully to see that the information is clear and understandable for everyone, and that it can be properly viewed on any device. The dashboard is available in Dutch and English. \n\n###Contact\nIf you have suggestions for improving the website, you can email them to coronadashboard@minvws.nl. We read every email that comes in and do our best to reply to each one promptly. When it’s busy, this may take us a bit longer. In many cases, the answers to many questions are already provided on the [Explanation of the data presented](https://coronadashboard.government.nl/veelgestelde-vragen) and [Frequently asked questions](https://coronadashboard.rijksoverheid.nl/veelgestelde-vragen) pages.\n\nIT developers can share their feedback on Github. Front-end-related questions and suggestions can be submitted [here](https://github.com/minvws/nl-covid19-data-dashboard). Questions about the underlying calculations can be submitted [here](https://github.com/minvws/nl-covid19-data-backend-processing). \n\nIf you find that the dashboard has any technical vulnerabilities, we’d like to know. We work together with the National Cyber Security Centre (NCSC) in this area. Please notify them of what you’ve found as soon as possible using their [form](https://www.ncsc.nl/contact/kwetsbaarheid-melden/cvd-meldingen-formulier) before making the issue publicly known. Together with the NCSC we will address the issue and resolve it as quickly as possible. Thank you for your assistance!\n\nAnswers to many questions about coronavirus and COVID-19 are available on [government.nl](https://www.government.nl/topics/coronavirus-covid-19). If you cannot find the answer you are looking for there, you can call the public information number: 0800 1351 (between 8.00 and 20.00). From outside the Netherlands, call +31 20 205 1351."
   },
   "over_veelgestelde_vragen": {
     "text": "Frequently asked questions",
@@ -527,7 +527,7 @@
         "verantwoording": "These figures are supplied every Tuesday as open data by the National Institute for Public Health and the Environment (RIVM). The values in the file provided by RIVM are copied directly to the dashboard. \n\nThe reproduction number (R) is not an exact value but a reliable estimate. The value of R is based on (1) the number of ICU and hospital admissions, and (2) the day on which these ICU and hospital patients developed symptoms. The most up to date value of R provided on the coronavirus dashboard at any given time is always from at least two weeks ago. \n\nEstimates of R using data from less than 14 days ago could provide an indication of what the definitive value may be, but are not reliable predictors. Estimates using more recent data are less reliable because the data is not yet complete. It is, for instance, impossible to know how many newly confirmed cases will result in hospital admissions in the days ahead. \n\nUntil 3 November 2020, the graph showing the progression of R over time did not give a value of R for the most recent two weeks but did give a projection of this value in the form of a bandwidth. As of 3 November, the dashboard graph will no longer display this bandwidth."
       },
       {
-        "cijfer": "Nursing Homes",
+        "cijfer": "Nursing homes",
         "verantwoording": "The National Institute for Public Health and the Environment (RIVM) provides the Ministry of Health, Welfare and Sport with information about the COVID-19 situation in nursing homes on a daily basis via an [open data file](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a). This data cannot always be clearly linked to a specific safety region. As a result, the total sum of numbers at the safety-region level may be less than the numbers at the national level. The number of deaths of nursing home residents is based on the date of death. However, when the date of death is unknown that death is not included in this statistic in the dashboard.\n\nThe method used to estimate the numbers of nursing homes and nursing home residents infected with coronavirus has been improved. Since 1 July 2020, for every person newly infected with coronavirus, the municipal health services (GGDs) have noted whether that person lives in a nursing home. Until the end of September 2020, no use was made of this data and a different method was used to calculate infection numbers, which led to a significant overestimate of the number of infected nursing homes. As of 29 September 2020, the estimates on the dashboard from 1 July 2020 onwards have been recalculated using the this data and therefore now give a much better picture of the actual number of infected nursing homes and nursing home residents.\n\nOld definition of a nursing home resident: A person was counted as a nursing home resident if, according to the central database OSIRIS: on the basis of their postcode, they can be linked to a registered nursing home or residential care home for the elderly, a setting (place where infection may have occurred) labelled as a ‘nursing home’ or something similar, or if there is any other term that links them in the database to a nursing home or residential care home for the elderly. In addition, the person:\n- must be over 70 years old\n- must not be a health worker, and\n- must not be employed.\n\nNew definition of a nursing home resident: As of 1 July 2020, every time a person tests positive for COVID-19, the GGD asks whether that person is a resident of a nursing home or residential care home for the elderly. This information is used in the new definition. A person is considered to be a nursing home resident if, according to the data in OSIRIS:\n- This person is a resident of a nursing home or a residential care home for the elderly.\n- If it is not known whether the person lives in a nursing home or residential care home for the elderly, the old definition is used.\n\nThe total number of nursing homes per safety region is provided by RIVM. Any nursing homes with the same postcode are counted as one nursing home. This is because the number of infected nursing homes is also determined by postcode. It is necessary to know the total number of nursing homes per safety region in order to calculate what percentage of nursing homes in the safety region is infected. The total number of nursing homes nationwide is the sum of the total number of nursing homes in all safety regions."
       },
       {
@@ -721,7 +721,7 @@
     "barscale_toelichting": "This figure shows how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
     "kpi_titel": "Number of confirmed cases",
-    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.\n\nDue to an ICT issue, RIVM did not receive all positive test results. The issue has been solved. Today’s number is therefore distorted. The missing number is estimated to be around 1.000. These will be added as from tomorrow. Tomorrow’s number is therefore expected to be higher.",
+    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.",
     "map_titel": "Distribution of confirmed cases in {{safetyRegion}}",
     "map_toelichting": "This map shows how many confirmed cases of COVID-19 were reported yesterday in the municipalities of this safety region per 100,000 inhabitants.",
     "linechart_titel": "Progression over time",
@@ -824,7 +824,7 @@
     "barscale_toelichting": "This number shows how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
     "kpi_titel": "Number of confirmed cases",
-    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.\n\nDue to an ICT issue, RIVM did not receive all positive test results. The issue has been solved. Today’s number is therefore distorted. The missing number is estimated to be around 1.000. These will be added as from tomorrow. Tomorrow’s number is therefore expected to be higher.",
+    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.",
     "map_titel": "Distribution of confirmed cases in {{municipality}}",
     "map_toelichting": "This map shows how many confirmed cases of COVID-19 were reported yesterday in these municipalities per 100,000 inhabitants.",
     "linechart_titel": "Progression over time",
@@ -997,13 +997,13 @@
     },
     "titel": "Mortality in {{safetyRegion}}",
     "pagina_toelichting": "Daily number of deceased residents with confirmed cases of COVID-19 in nursing homes.",
-    "barscale_titel": "Number of deceased residents",
+    "barscale_titel": "Deceased nursing home residents",
     "barscale_screenreader_text": "{{value}} deceased residents",
     "extra_uitleg": "This number is an estimation of the number of nursing home inhabitants in this safety region that have died due to the novel coronavirus.",
     "linechart_titel": "Progression over time",
     "map_titel": "Nursing home excess mortality in the Netherlands",
     "map_toelichting": "These maps show the excess mortality in nursing homes in the Netherlands per day.",
-    "titel_sidebar": "Deceased nursing home residents",
+    "titel_sidebar": "Mortality",
     "metadata": {
       "title": "Deceased residents nursing homes in {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
       "description": "Number of deceased residents with confirmed cases of COVID-19 in nursing homes within safety region {{safetyRegionName}}."
@@ -1060,5 +1060,136 @@
   },
   "waarde_annotaties": {
     "riool_normalized": "x100 billion"
+  },
+  "gedrag_onderwerpen": {
+    "wash_hands": "",
+    "keep_distance": "",
+    "work_from_home": "",
+    "avoid_crowds": "",
+    "symptoms_stay_home": "",
+    "symptoms_get_tested": "",
+    "wear_mask_public_indoors": "",
+    "wear_mask_public_transport": "",
+    "sneeze_cough_elbow": "",
+    "max_visitors": ""
+  },
+  "gedrag_common": {
+    "compliance": "",
+    "support": "",
+    "basisregels": {
+      "header_percentage": "",
+      "header_basisregel": "",
+      "header_trend": "",
+      "trend_hoger": "",
+      "trend_lager": "",
+      "trend_gelijk": ""
+    },
+    "titel_kpi": ""
+  },
+  "nl_gedrag": {
+    "metadata": {
+      "title": "",
+      "description": ""
+    },
+    "pagina": {
+      "titel": "",
+      "toelichting": ""
+    },
+    "sidebar": {
+      "titel": ""
+    },
+    "datums": "",
+    "bron": {
+      "text": "",
+      "href": ""
+    },
+    "onderzoek_uitleg": {
+      "titel": "",
+      "toelichting": ""
+    },
+    "kpi": {
+      "aantal_respondenten": {
+        "titel": "",
+        "toelichting": "",
+        "bron": {
+          "text": "",
+          "href": ""
+        }
+      }
+    },
+    "verdeling_in_nederland": {
+      "titel": "",
+      "intro": "",
+      "onbekend": "",
+      "legenda_titel": ""
+    },
+    "basisregels": {
+      "title": "",
+      "intro": {
+        "compliance": "",
+        "support": ""
+      },
+      "voetnoot": {
+        "compliance": "",
+        "support": ""
+      }
+    },
+    "basisregels_over_tijd": {
+      "title": "",
+      "intro": {
+        "compliance": "",
+        "support": ""
+      }
+    }
+  },
+  "regionaal_gedrag": {
+    "metadata": {
+      "title": "",
+      "description": ""
+    },
+    "pagina": {
+      "titel": "",
+      "toelichting": ""
+    },
+    "sidebar": {
+      "titel": ""
+    },
+    "datums": "",
+    "bron": {
+      "text": "",
+      "href": ""
+    },
+    "onderzoek_uitleg": {
+      "titel": "",
+      "toelichting": ""
+    },
+    "kpi": {
+      "aantal_respondenten": {
+        "titel": "",
+        "toelichting": "",
+        "bron": {
+          "text": "",
+          "href": ""
+        }
+      }
+    },
+    "basisregels": {
+      "title": "",
+      "intro": {
+        "compliance": "",
+        "support": ""
+      },
+      "voetnoot": {
+        "compliance": "",
+        "support": ""
+      }
+    },
+    "basisregels_over_tijd": {
+      "title": "",
+      "intro": {
+        "compliance": "",
+        "support": ""
+      }
+    }
   }
 }
