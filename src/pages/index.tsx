@@ -32,7 +32,6 @@ interface StaticProps {
 interface INationalHomepageData {
   data: National;
   text: TALLLanguages;
-  lastGenerated: string;
   escalationLevelCounts: EscalationLevelCounts;
 }
 
@@ -191,6 +190,8 @@ export async function getStaticProps(): Promise<StaticProps> {
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const data = JSON.parse(fileContents);
 
+  // Strip away unused data (values) from staticProps
+  // keep last_values because we use them!
   for (const [key, value] of Object.entries(data)) {
     if (typeof value === 'object') {
       for (const [key2] of Object.entries(data[key])) {
@@ -200,8 +201,6 @@ export async function getStaticProps(): Promise<StaticProps> {
       }
     }
   }
-
-  const lastGenerated = data.last_generated;
 
   const regionsFilePath = path.join(
     process.cwd(),
@@ -215,7 +214,7 @@ export async function getStaticProps(): Promise<StaticProps> {
   const escalationLevels = regionsData.escalation_levels;
   const escalationLevelCounts = getEscalationCounts(escalationLevels);
 
-  return { props: { data, escalationLevelCounts, text, lastGenerated } };
+  return { props: { data, escalationLevelCounts, text } };
 }
 
 export default Home;
