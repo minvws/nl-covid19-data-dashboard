@@ -15,7 +15,7 @@ import {
   InstallationSelector,
   InstallationSelectorBox,
 } from '~/components/lineChart/installationSelector';
-import { RegionalSewerWaterChart } from '~/components/lineChart/regionalSewerWaterChart';
+import { SewerWaterChart } from '~/components/lineChart/sewer-water-chart';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import {
@@ -124,7 +124,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
         </TwoKpiSection>
       )}
 
-      {scatterPlotData && lineChartData && (
+      {lineChartData && (
         <ChartTileWithTimeframe
           title={text.linechart_titel}
           metadata={{ source: text.bron }}
@@ -142,7 +142,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
                   />
                 </InstallationSelectorBox>
               )}
-              <RegionalSewerWaterChart
+              <SewerWaterChart
                 timeframe={timeframe}
                 scatterPlotValues={scatterPlotData}
                 averageValues={lineChartData.averageValues}

@@ -1,5 +1,9 @@
 import { useMemo, useState } from 'react';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
+import {
+  ChartTile,
+  ChartTileWithTimeframe,
+} from '~/components-styled/chart-tile';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
@@ -7,6 +11,11 @@ import { BarChart } from '~/components/charts';
 import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRangeHack';
 import { FCWithLayout } from '~/components/layout';
 import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
+import {
+  InstallationSelector,
+  InstallationSelectorBox,
+} from '~/components/lineChart/installationSelector';
+import { SewerWaterChart } from '~/components/lineChart/sewer-water-chart';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import {
@@ -22,15 +31,6 @@ import {
   getSewerWaterLineChartData,
   getSewerWaterScatterPlotData,
 } from '~/utils/sewer-water/municipality-sewer-water.util';
-import {
-  ChartTile,
-  ChartTileWithTimeframe,
-} from '~/components-styled/chart-tile';
-import { MunicipalSewerWaterChart } from '~/components/lineChart/municipalSewerWaterChart';
-import {
-  InstallationSelector,
-  InstallationSelectorBox,
-} from '~/components/lineChart/installationSelector';
 
 const text = siteText.gemeente_rioolwater_metingen;
 
@@ -157,7 +157,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
                   />
                 </InstallationSelectorBox>
               )}
-              <MunicipalSewerWaterChart
+              <SewerWaterChart
                 timeframe={timeframe}
                 scatterPlotValues={
                   enableScatterPlot ? scatterPlotData : undefined
