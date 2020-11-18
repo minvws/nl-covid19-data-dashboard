@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
@@ -7,7 +7,6 @@ import { BarChart } from '~/components/charts';
 import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRangeHack';
 import { FCWithLayout } from '~/components/layout';
 import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
-import { MunicipalSewerWaterLineChart } from '~/components/lineChart/municipalSewerWaterLineChart';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import {
@@ -17,26 +16,46 @@ import {
 } from '~/static-props/municipality-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import {
+  getInstallationNames,
   getSewerWaterBarChartData,
   getSewerWaterBarScaleData,
   getSewerWaterLineChartData,
+  getSewerWaterScatterPlotData,
 } from '~/utils/sewer-water/municipality-sewer-water.util';
-import { ChartTile } from '~/components-styled/chart-tile';
+import {
+  ChartTile,
+  ChartTileWithTimeframe,
+} from '~/components-styled/chart-tile';
+import { MunicipalSewerWaterChart } from '~/components/lineChart/municipalSewerWaterChart';
+import {
+  InstallationSelector,
+  InstallationSelectorBox,
+} from '~/components/lineChart/installationSelector';
 
 const text = siteText.gemeente_rioolwater_metingen;
 
 const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
   const { data, municipalityName } = props;
 
-  const { barScaleData, lineChartData, barChartData } = useMemo(() => {
+  const {
+    barScaleData,
+    lineChartData,
+    scatterPlotData,
+    barChartData,
+    sewerStationNames,
+  } = useMemo(() => {
     return {
       barScaleData: getSewerWaterBarScaleData(data),
       lineChartData: getSewerWaterLineChartData(data),
+      scatterPlotData: getSewerWaterScatterPlotData(data),
       barChartData: getSewerWaterBarChartData(data),
+      sewerStationNames: getInstallationNames(data),
     };
   }, [data]);
 
   const sewerAverages = data.sewer;
+
+  const [selectedInstallation, setSelectedInstallation] = useState<string>();
 
   if (!sewerAverages) {
     /**
@@ -46,6 +65,12 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
      */
     return null;
   }
+
+  /**
+   * Only render a scatter plot when there's data coming from more than one
+   * sewer station
+   */
+  const enableScatterPlot = sewerStationNames.length > 1;
 
   return (
     <>
@@ -115,19 +140,41 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
       </TwoKpiSection>
 
       {lineChartData && (
-        <ChartTile
+        <ChartTileWithTimeframe
           title={text.linechart_titel}
           metadata={{ source: text.bron }}
+          timeframeOptions={['all', '5weeks']}
+          timeframeInitialValue="all"
         >
-          <MunicipalSewerWaterLineChart
-            averageValues={lineChartData.averageValues}
-            text={{
-              average_label_text: lineChartData.averageLabelText,
-              secondary_label_text: text.graph_secondary_label_text,
-            }}
-            valueAnnotation={siteText.waarde_annotaties.riool_normalized}
-          />
-        </ChartTile>
+          {(timeframe) => (
+            <>
+              {enableScatterPlot && (
+                <InstallationSelectorBox>
+                  <InstallationSelector
+                    placeholderText={text.graph_selected_rwzi_placeholder}
+                    onChange={setSelectedInstallation}
+                    stationNames={sewerStationNames}
+                  />
+                </InstallationSelectorBox>
+              )}
+              <MunicipalSewerWaterChart
+                timeframe={timeframe}
+                scatterPlotValues={
+                  enableScatterPlot ? scatterPlotData : undefined
+                }
+                averageValues={lineChartData.averageValues}
+                selectedInstallation={selectedInstallation}
+                text={{
+                  average_label_text: lineChartData.averageLabelText,
+                  secondary_label_text: text.graph_secondary_label_text,
+                  daily_label_text: text.graph_daily_label_text_rwzi,
+                  range_description: text.graph_range_description,
+                }}
+                valueAnnotation={siteText.waarde_annotaties.riool_normalized}
+              />
+            </>
+          )}
+        </ChartTileWithTimeframe>
       )}
 
       {barChartData && (
