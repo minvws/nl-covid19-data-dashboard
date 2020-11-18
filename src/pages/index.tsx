@@ -32,6 +32,7 @@ interface StaticProps {
 interface INationalHomepageData {
   data: National;
   text: TALLLanguages;
+  lastGenerated: string;
   escalationLevelCounts: EscalationLevelCounts;
 }
 
@@ -202,6 +203,7 @@ export async function getStaticProps(): Promise<StaticProps> {
     }
   }
 
+  const lastGenerated = data.last_generated;
   const regionsFilePath = path.join(
     process.cwd(),
     'public',
@@ -214,7 +216,7 @@ export async function getStaticProps(): Promise<StaticProps> {
   const escalationLevels = regionsData.escalation_levels;
   const escalationLevelCounts = getEscalationCounts(escalationLevels);
 
-  return { props: { data, escalationLevelCounts, text } };
+  return { props: { data, escalationLevelCounts, text, lastGenerated } };
 }
 
 export default Home;
