@@ -189,7 +189,18 @@ export async function getStaticProps(): Promise<StaticProps> {
 
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
   const fileContents = fs.readFileSync(filePath, 'utf8');
-  const data = JSON.parse(fileContents) as National;
+  const data = JSON.parse(fileContents);
+
+  for (const [key, value] of Object.entries(data)) {
+    if (typeof value === 'object') {
+      for (const [key2] of Object.entries(data[key])) {
+        if (key2 === 'values') {
+          delete data[key].values;
+        }
+      }
+    }
+  }
+
   const lastGenerated = data.last_generated;
 
   const regionsFilePath = path.join(
