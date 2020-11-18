@@ -81,6 +81,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           dateInsertedUnix: delta.last_value.date_of_insertion_unix,
           dataSource: text.bron,
         }}
+        reference={text.reference}
       />
 
       <TwoKpiSection>
@@ -227,6 +228,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           dateOfInsertionUnix: ggdLastValue.date_of_insertion_unix,
           dataSource: ggdText.bron,
         }}
+        reference={text.reference}
       />
 
       <TwoKpiSection>

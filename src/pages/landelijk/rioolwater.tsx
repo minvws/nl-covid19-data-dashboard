@@ -43,6 +43,7 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
           dateOfInsertionUnix: sewerAverages.last_value.date_of_insertion_unix,
           dataSource: text.bron,
         }}
+        reference={text.reference}
       />
 
       <TwoKpiSection>

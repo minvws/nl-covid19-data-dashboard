@@ -72,6 +72,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           dateInsertedUnix: resultsPerRegion.last_value.date_of_insertion_unix,
           dataSource: text.bron,
         }}
+        reference={text.reference}
       />
 
       <TwoKpiSection>
@@ -178,6 +179,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           weekEndUnix: ggdData.week_end_unix,
           dataSource: ggdText.bron,
         }}
+        reference={text.reference}
       />
 
       <TwoKpiSection>

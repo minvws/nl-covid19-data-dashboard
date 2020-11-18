@@ -14,7 +14,7 @@ import styles from '../layout/layout.module.scss';
 export function ContentHeader_weekRangeHack(
   props: ContentHeader_weekRangeHackProps
 ) {
-  const { category, Icon, title, subtitle, metadata, id } = props;
+  const { category, Icon, title, subtitle, metadata, id, reference } = props;
 
   const layoutClasses = [styles.contentHeader];
 
@@ -31,7 +31,12 @@ export function ContentHeader_weekRangeHack(
       <TitleWithIcon Icon={Icon} title={title} as="h2" />
 
       <div className={styles.text}>
-        <p>{subtitle}</p>
+        <p>
+          {subtitle}{' '}
+          {reference.text && reference.href && (
+            <a href={reference.href}>{reference.text}</a>
+          )}
+        </p>
 
         <div>
           <Metadata {...metadata} />
@@ -53,6 +58,10 @@ interface ContentHeader_weekRangeHackProps {
       href: string;
       text: string;
     };
+  };
+  reference: {
+    href: string;
+    text: string;
   };
   category?: string;
   Icon?: React.ComponentType;

@@ -52,6 +52,7 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
           dataSourceA: text.bronnen.rivm,
           dataSourceB: text.bronnen.lnaz,
         }}
+        reference={text.reference}
       />
       <Spacer mb={4} />
 

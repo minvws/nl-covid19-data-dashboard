@@ -41,6 +41,7 @@ const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
           dateInsertedUnix: data.last_value.date_of_insertion_unix,
           dataSource: text.bron,
         }}
+        reference={text.reference}
       />
 
       <TwoKpiSection>

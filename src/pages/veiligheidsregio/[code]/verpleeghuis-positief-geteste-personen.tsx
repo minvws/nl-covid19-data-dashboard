@@ -46,6 +46,7 @@ const NursingHomeInfectedPeople: FCWithLayout<ISafetyRegionData> = ({
           dateInsertedUnix: data.nursing_home.last_value.date_of_insertion_unix,
           dataSource: text.bron,
         }}
+        reference={text.reference}
       />
 
       <TwoKpiSection>
