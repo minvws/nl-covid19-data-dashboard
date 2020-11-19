@@ -60,7 +60,7 @@
   "additionalProperties": false,
   "definitions": {
     "diff_integer": {
-      "title": "national_difference_integer",
+      "title": "difference_integer",
       "type": "object",
       "properties": {
         "old_value": {
@@ -77,7 +77,7 @@
       "additionalProperties": false
     },
     "diff_decimal": {
-      "title": "national_difference_decimal",
+      "title": "difference_decimal",
       "type": "object",
       "properties": {
         "old_value": {
