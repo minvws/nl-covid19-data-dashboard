@@ -171,7 +171,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           safetyRegion: safetyRegionName,
         })}
         id="ggd"
-        Icon={Afname}
+        Icon={<Afname />}
         subtitle={ggdText.toelichting}
         metadata={{
           datumsText: ggdText.datums,

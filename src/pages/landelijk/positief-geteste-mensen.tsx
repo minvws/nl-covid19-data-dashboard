@@ -220,7 +220,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
       <ContentHeader_weekRangeHack
         title={ggdText.titel}
         id="ggd"
-        Icon={Afname}
+        Icon={<Afname />}
         subtitle={ggdText.toelichting}
         metadata={{
           datumsText: ggdText.datums,
