@@ -69,6 +69,7 @@ const ClearButton = styled.button(
 
 const StyledSelect = styled.select<{ isClearable: boolean }>((x) =>
   css({
+    display: 'block',
     minWidth: '15em',
     borderWidth: 1,
     borderStyle: 'solid',

@@ -81,9 +81,9 @@ export function BehaviorLineChartTile({
       </Box>
 
       <Box
-        display="flex"
+        display={{ lg: 'flex' }}
         alignItems="baseline"
-        flexDirection={{ _: 'column', lg: 'row' }}
+        flexDirection={{ lg: 'row' }}
       >
         <Box flex="1" mr={{ lg: 2 }}>
           <p>{introduction[type]}</p>
