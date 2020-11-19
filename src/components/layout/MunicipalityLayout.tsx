@@ -1,27 +1,22 @@
-import Link from 'next/link';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
-
-import siteText from '~/locale/index';
+import Arrow from '~/assets/arrow.svg';
+import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
+import GetestIcon from '~/assets/test.svg';
+import Ziekenhuis from '~/assets/ziekenhuis.svg';
+import { TitleWithIcon } from '~/components-styled/title-with-icon';
+import { ComboBox } from '~/components/comboBox';
+import { IntakeHospitalMetric } from '~/components/gemeente/intake-hospital-metric';
+import { PositivelyTestedPeopleMetric } from '~/components/gemeente/positively-tested-people-metric';
+import { SewerWaterMetric } from '~/components/gemeente/sewer-water-metric';
+import { getLayout as getSiteLayout } from '~/components/layout';
 import municipalities from '~/data/gemeente_veiligheidsregio.json';
+import siteText from '~/locale/index';
 import { IMunicipalityData } from '~/static-props/municipality-data';
-
 import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMunicipalityCode';
 import { getSewerWaterBarScaleData } from '~/utils/sewer-water/municipality-sewer-water.util';
 import { useMediaQuery } from '~/utils/useMediaQuery';
-
-import { PositivelyTestedPeopleMetric } from '~/components/gemeente/positively-tested-people-metric';
-import { IntakeHospitalMetric } from '~/components/gemeente/intake-hospital-metric';
-import { SewerWaterMetric } from '~/components/gemeente/sewer-water-metric';
-
-import { TitleWithIcon } from '~/components/titleWithIcon';
-import { getLayout as getSiteLayout } from '~/components/layout';
-import { ComboBox } from '~/components/comboBox';
-
-import GetestIcon from '~/assets/test.svg';
-import Ziekenhuis from '~/assets/ziekenhuis.svg';
-import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
-import Arrow from '~/assets/arrow.svg';
 import { useMenuState } from './useMenuState';
 
 interface IMunicipality {
@@ -179,7 +174,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                       )}
                     >
                       <TitleWithIcon
-                        Icon={GetestIcon}
+                        Icon={<GetestIcon />}
                         title={
                           siteText.gemeente_positief_geteste_personen
                             .titel_sidebar
@@ -209,7 +204,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                       )}
                     >
                       <TitleWithIcon
-                        Icon={Ziekenhuis}
+                        Icon={<Ziekenhuis />}
                         title={
                           siteText.gemeente_ziekenhuisopnames_per_dag
                             .titel_sidebar
@@ -238,7 +233,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                         className={getClassName(`/gemeente/[code]/rioolwater`)}
                       >
                         <TitleWithIcon
-                          Icon={RioolwaterMonitoring}
+                          Icon={<RioolwaterMonitoring />}
                           title={
                             siteText.gemeente_rioolwater_metingen.titel_sidebar
                           }
@@ -251,7 +246,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                   ) : (
                     <div className="metric-not-available">
                       <TitleWithIcon
-                        Icon={RioolwaterMonitoring}
+                        Icon={<RioolwaterMonitoring />}
                         title={
                           siteText.gemeente_rioolwater_metingen.titel_sidebar
                         }

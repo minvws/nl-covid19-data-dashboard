@@ -44,7 +44,7 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
       <ContentHeader
         category={siteText.nationaal_layout.headings.kwetsbare_groepen}
         title={positiveTestedPeopleText.titel}
-        Icon={Getest}
+        Icon={<Getest />}
         subtitle={positiveTestedPeopleText.pagina_toelichting}
         metadata={{
           datumsText: positiveTestedPeopleText.datums,
@@ -81,7 +81,7 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
 
       <ContentHeader
         title={infectedLocationsText.titel}
-        Icon={Locatie}
+        Icon={<Locatie />}
         subtitle={infectedLocationsText.pagina_toelichting}
         metadata={{
           datumsText: infectedLocationsText.datums,
@@ -158,7 +158,7 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
 
       <ContentHeader
         title={locationDeaths.titel}
-        Icon={CoronaVirus}
+        Icon={<CoronaVirus />}
         subtitle={locationDeaths.pagina_toelichting}
         metadata={{
           datumsText: locationDeaths.datums,

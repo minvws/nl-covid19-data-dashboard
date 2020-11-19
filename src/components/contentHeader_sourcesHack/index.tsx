@@ -1,4 +1,4 @@
-import { TitleWithIcon } from '~/components/titleWithIcon';
+import { TitleWithIcon } from '~/components-styled/title-with-icon';
 import styles from './layout.module.scss';
 import { MetadataHack } from './metadata_sourcesHack';
 
@@ -56,6 +56,6 @@ interface IContentHeaderProps {
     };
   };
   category?: string;
-  Icon?: React.ComponentType;
+  Icon?: React.ReactNode;
   id?: string;
 }

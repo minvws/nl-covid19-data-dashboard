@@ -1,9 +1,9 @@
-import * as CSS from 'csstype';
 import {
   ScaleThemeProperties,
   ThemeBreakPoints,
   ThemeValue,
 } from '@styled-system/css';
+import * as CSS from 'csstype';
 
 const space = [
   0,
@@ -91,6 +91,7 @@ export const colors = {
   shadow: '#e5e5e5',
   lightGray: '#dfdfdf',
   annotation: '#595959',
+  notification: '#cd005a',
 
   data: {
     primary: '#007BC7',

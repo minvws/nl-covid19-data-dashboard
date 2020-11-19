@@ -1,6 +1,6 @@
-import { Metadata } from './metadata';
-import { TitleWithIcon } from '~/components/titleWithIcon';
+import { TitleWithIcon } from '~/components-styled/title-with-icon';
 import styles from '../layout/layout.module.scss';
+import { Metadata } from './metadata';
 
 export function ContentHeader(props: IContentHeaderProps) {
   const { category, Icon, title, subtitle, metadata, id } = props;
@@ -43,6 +43,6 @@ interface IContentHeaderProps {
     };
   };
   category?: string;
-  Icon?: React.ComponentType;
+  Icon?: React.ReactNode;
   id?: string;
 }

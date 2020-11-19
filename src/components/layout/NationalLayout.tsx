@@ -11,6 +11,7 @@ import GetestIcon from '~/assets/test.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import Ziektegolf from '~/assets/ziektegolf.svg';
+import { TitleWithIcon } from '~/components-styled/title-with-icon';
 import { InfectiousPeopleMetric } from '~/components/landelijk/infectious-people-metric';
 import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-barscale';
 import { IntakeHospitalMetric } from '~/components/landelijk/intake-hospital-metric';
@@ -23,10 +24,10 @@ import { ReproductionIndexMetric } from '~/components/landelijk/reproduction-ind
 import { SewerWaterMetric } from '~/components/landelijk/sewer-water-metric';
 import { SuspectedPatientsMetric } from '~/components/landelijk/suspected-patients-metric';
 import { getLayout as getSiteLayout } from '~/components/layout';
-import { TitleWithIcon } from '~/components/titleWithIcon';
 import { BehaviorMetric } from '~/domain/behavior/behavior-metric';
 import siteText from '~/locale/index';
 import { INationalData } from '~/static-props/nl-data';
+import theme from '~/style/theme';
 import { NursingHomeInfectedPeopleMetric } from '../common/nursing-home-infected-people-metric';
 import { useMenuState } from './useMenuState';
 
@@ -119,7 +120,11 @@ function NationalLayout(props: NationalLayoutProps) {
                     className={`last-developments-link ${getClassName('/')}`}
                   >
                     <TitleWithIcon
-                      Icon={Notification}
+                      Icon={
+                        <Notification
+                          color={(theme.colors as any).notification}
+                        />
+                      }
                       title={siteText.laatste_ontwikkelingen.title}
                       subtitle={siteText.laatste_ontwikkelingen.menu_subtitle}
                     />
@@ -138,7 +143,7 @@ function NationalLayout(props: NationalLayoutProps) {
                     )}
                   >
                     <TitleWithIcon
-                      Icon={GetestIcon}
+                      Icon={<GetestIcon />}
                       title={siteText.positief_geteste_personen.titel_sidebar}
                     />
                     <span className="metric-wrapper">
@@ -162,7 +167,7 @@ function NationalLayout(props: NationalLayoutProps) {
                     className={getClassName('/landelijk/besmettelijke-mensen')}
                   >
                     <TitleWithIcon
-                      Icon={Ziektegolf}
+                      Icon={<Ziektegolf />}
                       title={siteText.besmettelijke_personen.titel_sidebar}
                     />
                     <span>
@@ -183,7 +188,7 @@ function NationalLayout(props: NationalLayoutProps) {
                     className={getClassName('/landelijk/reproductiegetal')}
                   >
                     <TitleWithIcon
-                      Icon={ReproIcon}
+                      Icon={<ReproIcon />}
                       title={siteText.reproductiegetal.titel_sidebar}
                     />
                     <span className="metric-wrapper">
@@ -213,7 +218,7 @@ function NationalLayout(props: NationalLayoutProps) {
                     className={getClassName('/landelijk/ziekenhuis-opnames')}
                   >
                     <TitleWithIcon
-                      Icon={Ziekenhuis}
+                      Icon={<Ziekenhuis />}
                       title={siteText.ziekenhuisopnames_per_dag.titel_sidebar}
                     />
                     <span className="metric-wrapper">
@@ -239,7 +244,7 @@ function NationalLayout(props: NationalLayoutProps) {
                     )}
                   >
                     <TitleWithIcon
-                      Icon={Arts}
+                      Icon={<Arts />}
                       title={siteText.ic_opnames_per_dag.titel_sidebar}
                     />
                     <span className="metric-wrapper">
@@ -267,7 +272,7 @@ function NationalLayout(props: NationalLayoutProps) {
                     className={getClassName('/landelijk/verpleeghuiszorg')}
                   >
                     <TitleWithIcon
-                      Icon={Verpleeghuiszorg}
+                      Icon={<Verpleeghuiszorg />}
                       title={
                         siteText.verpleeghuis_besmette_locaties.titel_sidebar
                       }
@@ -294,7 +299,7 @@ function NationalLayout(props: NationalLayoutProps) {
                     )}
                   >
                     <TitleWithIcon
-                      Icon={Arts}
+                      Icon={<Arts />}
                       title={siteText.verdenkingen_huisartsen.titel_sidebar}
                     />
                     <span>
@@ -313,7 +318,7 @@ function NationalLayout(props: NationalLayoutProps) {
                     className={getClassName('/landelijk/rioolwater')}
                   >
                     <TitleWithIcon
-                      Icon={RioolwaterMonitoring}
+                      Icon={<RioolwaterMonitoring />}
                       title={siteText.rioolwater_metingen.titel_sidebar}
                     />
                     <span>
@@ -332,7 +337,7 @@ function NationalLayout(props: NationalLayoutProps) {
                     className={getClassName('/landelijk/gedrag')}
                   >
                     <TitleWithIcon
-                      Icon={Gedrag}
+                      Icon={<Gedrag />}
                       title={siteText.nl_gedrag.sidebar.titel}
                     />
                     <span>

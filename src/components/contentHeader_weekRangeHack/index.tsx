@@ -1,6 +1,6 @@
-import { Metadata } from './metadata_weekRangeHack';
-import { TitleWithIcon } from '~/components/titleWithIcon';
+import { TitleWithIcon } from '~/components-styled/title-with-icon';
 import styles from '../layout/layout.module.scss';
+import { Metadata } from './metadata_weekRangeHack';
 
 /**
  * An alteration from ContentHeader in order to render two sources in metadata.
@@ -55,6 +55,6 @@ interface ContentHeader_weekRangeHackProps {
     };
   };
   category?: string;
-  Icon?: React.ComponentType;
+  Icon?: React.ReactNode;
   id?: string;
 }

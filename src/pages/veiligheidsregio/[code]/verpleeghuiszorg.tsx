@@ -49,7 +49,7 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
         title={replaceVariablesInText(positiveTestPeopleText.titel, {
           safetyRegion: safetyRegionName,
         })}
-        Icon={Getest}
+        Icon={<Getest />}
         subtitle={replaceVariablesInText(
           positiveTestPeopleText.pagina_toelichting,
           {
@@ -93,7 +93,7 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
         title={replaceVariablesInText(locationsText.titel, {
           safetyRegion: safetyRegionName,
         })}
-        Icon={Locatie}
+        Icon={<Locatie />}
         subtitle={locationsText.pagina_toelichting}
         metadata={{
           datumsText: locationsText.datums,
@@ -149,7 +149,7 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
         title={replaceVariablesInText(mortalityText.titel, {
           safetyRegion: safetyRegionName,
         })}
-        Icon={CoronaVirus}
+        Icon={<CoronaVirus />}
         subtitle={mortalityText.pagina_toelichting}
         metadata={{
           datumsText: mortalityText.datums,
