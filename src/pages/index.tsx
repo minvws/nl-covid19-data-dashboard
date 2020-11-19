@@ -194,7 +194,7 @@ export async function getStaticProps(): Promise<StaticProps> {
   // Strip away unused data (values) from staticProps
   // keep last_values because we use them!
   for (const [key, value] of Object.entries(data)) {
-    if (typeof value === 'object') {
+    if (typeof value === 'object' && value !== null) {
       for (const [key2] of Object.entries(data[key])) {
         if (key2 === 'values') {
           delete data[key].values;
