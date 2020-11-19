@@ -48,8 +48,53 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
           }
         )}
       />
+
       <ContentHeader
         category={siteText.veiligheidsregio_layout.headings.kwetsbare_groepen}
+        title={replaceVariablesInText(positiveTestPeopleText.titel, {
+          safetyRegion: safetyRegionName,
+        })}
+        Icon={Getest}
+        subtitle={replaceVariablesInText(
+          positiveTestPeopleText.pagina_toelichting,
+          {
+            safetyRegion: safetyRegionName,
+          }
+        )}
+        metadata={{
+          datumsText: positiveTestPeopleText.datums,
+          dateUnix: data.nursing_home.last_value.date_of_report_unix,
+          dateInsertedUnix: data.nursing_home.last_value.date_of_insertion_unix,
+          dataSource: positiveTestPeopleText.bron,
+        }}
+      />
+
+      <TwoKpiSection>
+        <KpiTile
+          title={positiveTestPeopleText.barscale_titel}
+          description={positiveTestPeopleText.extra_uitleg}
+          metadata={{
+            date: data.nursing_home.last_value.date_of_report_unix,
+            source: positiveTestPeopleText.bron,
+          }}
+        >
+          <KpiValue
+            data-cy="infected_daily_total"
+            absolute={data.nursing_home.last_value.newly_infected_people}
+          />
+        </KpiTile>
+      </TwoKpiSection>
+
+      <LineChartTile
+        metadata={{ source: positiveTestPeopleText.bron }}
+        title={positiveTestPeopleText.linechart_titel}
+        values={data.nursing_home.values.map((value) => ({
+          value: value.newly_infected_people,
+          date: value.date_of_report_unix,
+        }))}
+      />
+
+      <ContentHeader
         title={replaceVariablesInText(locationsText.titel, {
           safetyRegion: safetyRegionName,
         })}
@@ -104,50 +149,6 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
           }}
         />
       )}
-
-      <ContentHeader
-        title={replaceVariablesInText(positiveTestPeopleText.titel, {
-          safetyRegion: safetyRegionName,
-        })}
-        Icon={Getest}
-        subtitle={replaceVariablesInText(
-          positiveTestPeopleText.pagina_toelichting,
-          {
-            safetyRegion: safetyRegionName,
-          }
-        )}
-        metadata={{
-          datumsText: positiveTestPeopleText.datums,
-          dateUnix: data.nursing_home.last_value.date_of_report_unix,
-          dateInsertedUnix: data.nursing_home.last_value.date_of_insertion_unix,
-          dataSource: positiveTestPeopleText.bron,
-        }}
-      />
-
-      <TwoKpiSection>
-        <KpiTile
-          title={positiveTestPeopleText.barscale_titel}
-          description={positiveTestPeopleText.extra_uitleg}
-          metadata={{
-            date: data.nursing_home.last_value.date_of_report_unix,
-            source: positiveTestPeopleText.bron,
-          }}
-        >
-          <KpiValue
-            data-cy="infected_daily_total"
-            absolute={data.nursing_home.last_value.newly_infected_people}
-          />
-        </KpiTile>
-      </TwoKpiSection>
-
-      <LineChartTile
-        metadata={{ source: positiveTestPeopleText.bron }}
-        title={positiveTestPeopleText.linechart_titel}
-        values={data.nursing_home.values.map((value) => ({
-          value: value.newly_infected_people,
-          date: value.date_of_report_unix,
-        }))}
-      />
 
       <ContentHeader
         title={replaceVariablesInText(mortalityText.titel, {

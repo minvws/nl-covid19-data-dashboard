@@ -5,6 +5,7 @@ import Arrow from '~/assets/arrow.svg';
 import Gedrag from '~/assets/gedrag.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
+import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { ComboBox } from '~/components/comboBox';
 import { getLayout as getSiteLayout } from '~/components/layout';
@@ -19,7 +20,7 @@ import siteText from '~/locale/index';
 import { ISafetyRegionData } from '~/static-props/safetyregion-data';
 import { getSewerWaterBarScaleData } from '~/utils/sewer-water/safety-region-sewer-water.util';
 import { useMediaQuery } from '~/utils/useMediaQuery';
-import { NursingHomeInfectedLocationsMetric } from '../common/nursing-home-infected-locations-metric';
+import { NursingHomeInfectedPeopleMetric } from '../common/nursing-home-infected-people-metric';
 import { useMenuState } from './useMenuState';
 
 export function getSafetyRegionLayout() {
@@ -217,7 +218,7 @@ function SafetyRegionLayout(
                       )}
                     >
                       <TitleWithIcon
-                        Icon={GetestIcon}
+                        Icon={Verpleeghuiszorg}
                         title={
                           siteText
                             .veiligheidsregio_verpleeghuis_besmette_locaties
@@ -225,7 +226,7 @@ function SafetyRegionLayout(
                         }
                       />
                       <span>
-                        <NursingHomeInfectedLocationsMetric
+                        <NursingHomeInfectedPeopleMetric
                           data={data.nursing_home.last_value}
                         />
                       </span>

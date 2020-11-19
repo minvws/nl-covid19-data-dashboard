@@ -11,7 +11,6 @@ import GetestIcon from '~/assets/test.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import Ziektegolf from '~/assets/ziektegolf.svg';
-import { NursingHomeInfectedLocationsMetric } from '~/components/common/nursing-home-infected-locations-metric';
 import { InfectiousPeopleMetric } from '~/components/landelijk/infectious-people-metric';
 import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-barscale';
 import { IntakeHospitalMetric } from '~/components/landelijk/intake-hospital-metric';
@@ -28,6 +27,7 @@ import { TitleWithIcon } from '~/components/titleWithIcon';
 import { BehaviorMetric } from '~/domain/behavior/behavior-metric';
 import siteText from '~/locale/index';
 import { INationalData } from '~/static-props/nl-data';
+import { NursingHomeInfectedPeopleMetric } from '../common/nursing-home-infected-people-metric';
 import { useMenuState } from './useMenuState';
 
 export function getNationalLayout() {
@@ -273,7 +273,7 @@ function NationalLayout(props: NationalLayoutProps) {
                       }
                     />
                     <span>
-                      <NursingHomeInfectedLocationsMetric
+                      <NursingHomeInfectedPeopleMetric
                         data={data.nursing_home.last_value}
                       />
                     </span>

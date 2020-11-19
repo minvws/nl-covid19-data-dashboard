@@ -43,6 +43,43 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
 
       <ContentHeader
         category={siteText.nationaal_layout.headings.kwetsbare_groepen}
+        title={positiveTestedPeopleText.titel}
+        Icon={Getest}
+        subtitle={positiveTestedPeopleText.pagina_toelichting}
+        metadata={{
+          datumsText: positiveTestedPeopleText.datums,
+          dateUnix: nursinghomeData.last_value.date_of_report_unix,
+          dateInsertedUnix: nursinghomeData.last_value.date_of_insertion_unix,
+          dataSource: positiveTestedPeopleText.bron,
+        }}
+      />
+
+      <TwoKpiSection>
+        <KpiTile
+          title={positiveTestedPeopleText.barscale_titel}
+          description={positiveTestedPeopleText.extra_uitleg}
+          metadata={{
+            date: nursinghomeData.last_value.date_of_report_unix,
+            source: positiveTestedPeopleText.bron,
+          }}
+        >
+          <KpiValue
+            data-cy="infected_daily_total"
+            absolute={nursinghomeData.last_value.newly_infected_people}
+          />
+        </KpiTile>
+      </TwoKpiSection>
+
+      <LineChartTile
+        metadata={{ source: positiveTestedPeopleText.bron }}
+        title={positiveTestedPeopleText.linechart_titel}
+        values={nursinghomeData.values.map((value) => ({
+          value: value.newly_infected_people,
+          date: value.date_of_report_unix,
+        }))}
+      />
+
+      <ContentHeader
         title={infectedLocationsText.titel}
         Icon={Locatie}
         subtitle={infectedLocationsText.pagina_toelichting}
@@ -115,43 +152,6 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
         title={infectedLocationsText.linechart_titel}
         values={nursinghomeData.values.map((value) => ({
           value: value.infected_locations_total,
-          date: value.date_of_report_unix,
-        }))}
-      />
-
-      <ContentHeader
-        title={positiveTestedPeopleText.titel}
-        Icon={Getest}
-        subtitle={positiveTestedPeopleText.pagina_toelichting}
-        metadata={{
-          datumsText: positiveTestedPeopleText.datums,
-          dateUnix: nursinghomeData.last_value.date_of_report_unix,
-          dateInsertedUnix: nursinghomeData.last_value.date_of_insertion_unix,
-          dataSource: positiveTestedPeopleText.bron,
-        }}
-      />
-
-      <TwoKpiSection>
-        <KpiTile
-          title={positiveTestedPeopleText.barscale_titel}
-          description={positiveTestedPeopleText.extra_uitleg}
-          metadata={{
-            date: nursinghomeData.last_value.date_of_report_unix,
-            source: positiveTestedPeopleText.bron,
-          }}
-        >
-          <KpiValue
-            data-cy="infected_daily_total"
-            absolute={nursinghomeData.last_value.newly_infected_people}
-          />
-        </KpiTile>
-      </TwoKpiSection>
-
-      <LineChartTile
-        metadata={{ source: positiveTestedPeopleText.bron }}
-        title={positiveTestedPeopleText.linechart_titel}
-        values={nursinghomeData.values.map((value) => ({
-          value: value.newly_infected_people,
           date: value.date_of_report_unix,
         }))}
       />
