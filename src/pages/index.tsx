@@ -194,12 +194,12 @@ export async function getStaticProps(): Promise<StaticProps> {
   // Strip away unused data (values) from staticProps
   // keep last_values because we use them!
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  for (const [metricName, metric] of Object.entries(data)) {
+  for (const metric of Object.values(data)) {
     if (typeof metric === 'object' && metric !== null) {
       for (const [metricProperty, metricValue] of Object.entries(metric)) {
         if (metricProperty === 'values') {
           (metricValue as {
-            values: Array<number>;
+            values: Array<unknown>;
           }).values = [];
         }
       }
