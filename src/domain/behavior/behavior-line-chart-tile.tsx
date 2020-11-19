@@ -88,7 +88,7 @@ export function BehaviorLineChartTile({
         <Box flex="1" mr={{ lg: 2 }}>
           <p>{introduction[type]}</p>
         </Box>
-        <Box flex="1" ml={{ lg: 2 }}>
+        <Box flex="1" display="flex" justifyContent="flex-end" ml={{ lg: 2 }}>
           <Select
             value={currentId}
             onChange={setCurrentId}

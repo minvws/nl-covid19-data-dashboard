@@ -6,44 +6,70 @@ interface Option<T extends string> {
   label: string;
 }
 
-interface SelectProps<T extends string> {
+type SelectProps<T extends string> = {
   options: Option<T>[];
   value: string | undefined;
   onChange: (value: T) => void;
+  onClear?: () => void;
   placeholder?: string;
-}
+};
 
 export function Select<T extends string>({
   value,
   onChange,
+  onClear,
   options,
   placeholder,
 }: SelectProps<T>) {
   return (
-    <StyledSelect
-      value={value}
-      onChange={(event) => onChange(event.target.value as T)}
-    >
-      {placeholder && (
-        <option value="" disabled selected={value === undefined}>
-          {placeholder}
-        </option>
-      )}
+    <Container>
+      <StyledSelect
+        value={value}
+        onChange={(event) => onChange((event.target.value || undefined) as T)}
+        isClearable={!!onClear}
+      >
+        {placeholder && (
+          <option value="" disabled={!value} selected={value === undefined}>
+            {placeholder}
+          </option>
+        )}
 
-      {options.map(({ value, label }) => (
-        <option value={value} key={value}>
-          {label}
-        </option>
-      ))}
-    </StyledSelect>
+        {options.map(({ value, label }) => (
+          <option key={value} value={value}>
+            {label}
+          </option>
+        ))}
+      </StyledSelect>
+
+      {onClear && value && <ClearButton onClick={() => onClear && onClear()} />}
+    </Container>
   );
 }
 
-const StyledSelect = styled.select(
+const Container = styled.div(css({ position: 'relative' }));
+
+const ClearButton = styled.button(
   css({
-    display: 'inline-block',
+    width: 32,
+    height: '100%',
+    border: '1px solid lightGray',
+    padding: 2,
+    textAlign: 'left',
+    backgroundColor: 'white',
+    backgroundImage: `url('/images/close.svg')`,
+    backgroundSize: '24px 24px',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center center',
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    cursor: 'pointer',
+  })
+);
+
+const StyledSelect = styled.select<{ isClearable: boolean }>((x) =>
+  css({
     minWidth: '15em',
-    width: '100%',
     borderWidth: 1,
     borderStyle: 'solid',
     borderColor: 'lightGray',
@@ -51,7 +77,7 @@ const StyledSelect = styled.select(
     fontSize: 2,
     appearance: 'none',
     p: 2,
-    pr: 4,
+    pr: x.isClearable ? '2.4rem' : '2rem',
     background: `url('/images/chevron-down.svg')`,
     backgroundSize: '14px 14px',
     backgroundRepeat: 'no-repeat, repeat',
