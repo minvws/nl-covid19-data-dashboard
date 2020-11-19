@@ -1,18 +1,20 @@
 import { useMemo, useState } from 'react';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
-import { Box } from '~/components-styled/base';
 import {
   ChartTile,
   ChartTileWithTimeframe,
 } from '~/components-styled/chart-tile';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
-import { Select } from '~/components-styled/select';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { BarChart } from '~/components/charts';
 import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRangeHack';
 import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
+import {
+  InstallationSelector,
+  InstallationSelectorBox,
+} from '~/components/lineChart/installationSelector';
 import { RegionalSewerWaterChart } from '~/components/lineChart/regionalSewerWaterChart';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
@@ -132,18 +134,13 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
           {(timeframe) => (
             <>
               {sewerStationNames.length > 0 && (
-                <Box display="flex" justifyContent="flex-end">
-                  <Select
-                    options={sewerStationNames.map((x) => ({
-                      label: x,
-                      value: x,
-                    }))}
-                    value={selectedInstallation}
-                    placeholder={text.graph_selected_rwzi_placeholder}
+                <InstallationSelectorBox>
+                  <InstallationSelector
+                    placeholderText={text.graph_selected_rwzi_placeholder}
                     onChange={setSelectedInstallation}
-                    onClear={() => setSelectedInstallation(undefined)}
+                    stationNames={sewerStationNames}
                   />
-                </Box>
+                </InstallationSelectorBox>
               )}
               <RegionalSewerWaterChart
                 timeframe={timeframe}
