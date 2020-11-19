@@ -66,7 +66,7 @@ export function useSewerWaterChartOptions<
   T extends SewerPerInstallationBaseValue
 >(
   averageValues: Value[],
-  scatterPlotValues: T[] | undefined,
+  scatterPlotValues: T[],
   text: TranslationStrings,
   timeframe: TimeframeOption,
   selectedRWZI?: string

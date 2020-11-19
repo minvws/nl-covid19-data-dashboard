@@ -67,7 +67,16 @@ export function getInstallationNames(data: Regionaal): string[] {
 export function getSewerWaterScatterPlotData(
   data: Regionaal
 ): RegionalSewerPerInstallationValue[] | undefined {
-  return data.sewer_per_installation.values.flatMap((value) => value.values);
+  const values = data.sewer_per_installation.values.flatMap(
+    (value) => value.values
+  );
+  /**
+   * All individual `value.values`-arrays are already sorted correctly, but
+   * due to merging them into one array the sort might be off.
+   */
+  values.sort((a, b) => a.date_measurement_unix - b.date_measurement_unix);
+
+  return values;
 }
 
 export function getSewerWaterLineChartData(

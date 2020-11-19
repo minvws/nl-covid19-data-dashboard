@@ -229,13 +229,7 @@ export function getSewerWaterScatterPlotData(data: Municipal) {
    */
   values?.sort((a, b) => a.date_measurement_unix - b.date_measurement_unix);
 
-  /**
-   * Only return sewer water scatter plot data when there's more than 1
-   * sewer water installation.
-   */
-  if (countUnique(values, (x) => x.rwzi_awzi_code) > 1) {
-    return values;
-  }
+  return values;
 }
 
 export function getInstallationNames(data: Municipal): string[] {
@@ -244,8 +238,4 @@ export function getInstallationNames(data: Municipal): string[] {
     .map((value) => value.rwzi_awzi_name)
     .filter((value, index, arr) => arr.indexOf(value) === index)
     .sort((a, b) => a.localeCompare(b));
-}
-
-function countUnique<T>(list: T[] = [], get: (item: T) => unknown) {
-  return list.map(get).filter((x, i, list) => list.indexOf(x) === i).length;
 }

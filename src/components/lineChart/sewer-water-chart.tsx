@@ -27,7 +27,7 @@ export function SewerWaterChart<T extends SewerPerInstallationBaseValue>(
 ) {
   const {
     averageValues,
-    scatterPlotValues,
+    scatterPlotValues = [],
     text,
     timeframe,
     selectedInstallation: selectedRWZI,
@@ -48,7 +48,7 @@ export function SewerWaterChart<T extends SewerPerInstallationBaseValue>(
         <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
       )}
       <HighchartsReact highcharts={Highcharts} options={chartOptions} />
-      {scatterPlotValues && (
+      {scatterPlotValues.length > 1 && (
         <div>
           <ul>
             {chartOptions.series

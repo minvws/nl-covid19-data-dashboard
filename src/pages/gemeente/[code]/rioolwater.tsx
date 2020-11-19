@@ -159,9 +159,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
               )}
               <SewerWaterChart
                 timeframe={timeframe}
-                scatterPlotValues={
-                  enableScatterPlot ? scatterPlotData : undefined
-                }
+                scatterPlotValues={scatterPlotData}
                 averageValues={lineChartData.averageValues}
                 selectedInstallation={selectedInstallation}
                 text={{
