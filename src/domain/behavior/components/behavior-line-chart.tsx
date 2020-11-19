@@ -29,7 +29,7 @@ interface MultipleLineChartProps<T> {
   linesConfig: LineConfig<T>[];
 }
 
-const COLOR_FOCUS = colors.chart.blue;
+const COLOR_FOCUS = colors.data.primary;
 const COLOR_BLUR = '#E7E7E7';
 
 export function BehaviorLineChart<T>({

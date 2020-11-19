@@ -84,12 +84,12 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
                 items={[
                   {
                     label: text.legenda_line,
-                    color: 'chart.blue',
+                    color: 'data.primary',
                     shape: 'line',
                   },
                   {
                     label: text.legenda_marge,
-                    color: 'chart.blueFill',
+                    color: 'data.fill',
                     shape: 'square',
                   },
                 ]}

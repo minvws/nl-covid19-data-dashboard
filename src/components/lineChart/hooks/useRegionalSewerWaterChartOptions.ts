@@ -113,7 +113,7 @@ export function useRegionalSewerWaterChartOptions(
       name: text.average_label_text,
       description: text.average_label_text,
       showInLegend: true,
-      color: selectedRWZI ? '#A9A9A9' : colors.chart.blue,
+      color: selectedRWZI ? '#A9A9A9' : colors.data.primary,
       enableMouseTracking: selectedRWZI === undefined,
       allowPointSelect: false,
       marker: {
@@ -140,7 +140,7 @@ export function useRegionalSewerWaterChartOptions(
         name: '',
         description: '',
         showInLegend: false,
-        color: selectedRWZI ? '#A9A9A9' : colors.chart.blue,
+        color: selectedRWZI ? '#A9A9A9' : colors.data.primary,
         enableMouseTracking: false,
         allowPointSelect: false,
         dashStyle: 'ShortDot',
@@ -172,7 +172,7 @@ export function useRegionalSewerWaterChartOptions(
           description: replaceVariablesInText(text.daily_label_text, {
             name: selectedRWZI,
           }),
-          color: colors.chart.blueDark,
+          color: colors.data.secondary,
           allowPointSelect: false,
           marker: {
             symbol: 'circle',

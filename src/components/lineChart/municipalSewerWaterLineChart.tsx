@@ -43,7 +43,7 @@ function getOptions(
       data: averageValues.map((x) => [x.date, x.value]),
       name: text.average_label_text,
       showInLegend: true,
-      color: colors.chart.blue,
+      color: colors.data.primary,
       allowPointSelect: false,
       marker: {
         symbol: 'circle',

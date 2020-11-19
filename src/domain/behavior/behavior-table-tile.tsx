@@ -170,8 +170,8 @@ export function BehaviorTableTile({
                 <Cell
                   color={
                     behaviorType === 'compliance'
-                      ? 'chart.blue'
-                      : 'chart.blueDark'
+                      ? 'data.primary'
+                      : 'data.secondary'
                   }
                 >
                   <PercentageBar percentage={behavior.percentage ?? 0} />

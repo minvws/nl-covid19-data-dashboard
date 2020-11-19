@@ -85,7 +85,6 @@ const mediaQueries = {
 type TMediaQueries = typeof mediaQueries;
 
 export const colors = {
-  kpi: '#007BC7',
   blue: '#01689b',
   blueDark: '#144276',
   icon: '#01689b',
@@ -94,19 +93,14 @@ export const colors = {
   lightGray: '#dfdfdf',
   annotation: '#595959',
 
-  chart: {
-    blue: '#007BC7',
-    blueFill: 'rgba(0, 123, 199, .05)',
-    blueDark: '#154273',
-    blueScale: [
-      '#8FCAE7',
-      '#5BADDB',
-      '#248FCF',
-      '#0070BB',
-      '#00529D',
-      '#003580',
-    ],
-    redScale: ['#F6B4D1', '#D3719C', '#9E3A66', '#64032D', '#000000'],
+  data: {
+    primary: '#007BC7',
+    secondary: '#154273',
+    fill: 'rgba(0, 123, 199, .05)',
+    scale: {
+      blue: ['#8FCAE7', '#5BADDB', '#248FCF', '#0070BB', '#00529D', '#003580'],
+      red: ['#F6B4D1', '#D3719C', '#9E3A66', '#64032D', '#000000'],
+    },
   },
 } as const;
 

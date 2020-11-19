@@ -110,7 +110,7 @@ export function getSewerWaterBarChartData(
     data: [
       {
         y: data.sewer.last_value.average,
-        color: colors.chart.blue,
+        color: colors.data.primary,
         label: data.sewer.last_value
           ? `${formatDateFromSeconds(
               data.sewer.last_value.week_unix,

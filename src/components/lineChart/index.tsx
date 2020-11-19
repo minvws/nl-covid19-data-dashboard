@@ -149,7 +149,7 @@ function getChartOptions<T extends Value>(
         data: values.map((value) => value.value as number),
         name: '',
         showInLegend: false,
-        color: colors.chart.blue,
+        color: colors.data.primary,
         /**
          * HEX to rgb converted, added opacity.
          * Since this chart has type 'area', a fillColor of `undefined` will return
@@ -160,7 +160,7 @@ function getChartOptions<T extends Value>(
         fillColor: 'transparent',
 
         ...(showFill && {
-          fillColor: colors.chart.blueFill,
+          fillColor: colors.data.fill,
           opacity: 1,
           fillOpacity: 0.05,
         }),

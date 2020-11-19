@@ -61,7 +61,7 @@ export default function BarChart(props: IProps) {
         series: {
           minPointLength: 5,
           groupPadding: 0,
-          color: colors.chart.blue,
+          color: colors.data.primary,
         },
       },
       series: [

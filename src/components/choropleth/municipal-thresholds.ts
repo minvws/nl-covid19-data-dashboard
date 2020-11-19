@@ -4,27 +4,27 @@ import { ChoroplethThresholds, TMunicipalityMetricName } from './shared';
 const positiveTestedThresholds: ChoroplethThresholds = {
   thresholds: [
     {
-      color: colors.chart.blueScale[0],
+      color: colors.data.scale.blue[0],
       threshold: 0,
     },
     {
-      color: colors.chart.blueScale[1],
+      color: colors.data.scale.blue[1],
       threshold: 4,
     },
     {
-      color: colors.chart.blueScale[2],
+      color: colors.data.scale.blue[2],
       threshold: 7,
     },
     {
-      color: colors.chart.blueScale[3],
+      color: colors.data.scale.blue[3],
       threshold: 10,
     },
     {
-      color: colors.chart.blueScale[4],
+      color: colors.data.scale.blue[4],
       threshold: 20,
     },
     {
-      color: colors.chart.blueScale[5],
+      color: colors.data.scale.blue[5],
       threshold: 30,
     },
   ],
@@ -33,23 +33,23 @@ const positiveTestedThresholds: ChoroplethThresholds = {
 const hospitalAdmissionsThresholds: ChoroplethThresholds = {
   thresholds: [
     {
-      color: colors.chart.blueScale[0],
+      color: colors.data.scale.blue[0],
       threshold: 0,
     },
     {
-      color: colors.chart.blueScale[1],
+      color: colors.data.scale.blue[1],
       threshold: 3,
     },
     {
-      color: colors.chart.blueScale[2],
+      color: colors.data.scale.blue[2],
       threshold: 6,
     },
     {
-      color: colors.chart.blueScale[3],
+      color: colors.data.scale.blue[3],
       threshold: 9,
     },
     {
-      color: colors.chart.blueScale[4],
+      color: colors.data.scale.blue[4],
       threshold: 15,
     },
   ],

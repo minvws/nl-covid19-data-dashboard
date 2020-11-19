@@ -76,7 +76,7 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
               items={[
                 {
                   label: text.legenda_r,
-                  color: 'chart.blue',
+                  color: 'data.primary',
                   shape: 'line',
                 },
               ]}
