@@ -338,7 +338,7 @@
       "title": "Infected nursing homes | Dashboard Coronavirus | Government.nl",
       "description": "National number of nursing homes with at least one confirmed case of COVID-19."
     },
-    "titel_sidebar": "Number of infected nursing home locations",
+    "titel_sidebar": "Nursing home care",
     "titel_kpi": "Number of infected locations"
   },
   "verpleeghuis_positief_geteste_personen": {
@@ -663,7 +663,7 @@
       "algemeen": "General",
       "besmettingen": "Infections",
       "ziekenhuizen": "Hospitals",
-      "verpleeghuizen": "Nursing homes",
+      "kwetsbare_groepen": "Vulnerable groups",
       "vroege_signalen": "Early indicators",
       "gedrag": "Behaviour"
     }

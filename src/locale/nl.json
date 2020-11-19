@@ -338,7 +338,7 @@
       "title": "Besmette verpleeghuizen | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Landelijk overzicht van verpleeghuislocaties waar tenminste één COVID-19 besmetting is vastgesteld."
     },
-    "titel_sidebar": "Aantal besmette verpleeghuislocaties",
+    "titel_sidebar": "Verpleeghuiszorg",
     "titel_kpi": "Aantal besmette locaties"
   },
   "verpleeghuis_positief_geteste_personen": {
@@ -663,7 +663,7 @@
       "algemeen": "Algemeen",
       "besmettingen": "Besmettingen",
       "ziekenhuizen": "Ziekenhuizen",
-      "verpleeghuizen": "Verpleeghuiszorg",
+      "kwetsbare_groepen": "Kwetsbare groepen",
       "vroege_signalen": "Vroege signalen",
       "gedrag": "Gedrag"
     }

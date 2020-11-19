@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Arrow from '~/assets/arrow.svg';
 import Arts from '~/assets/arts.svg';
-import CoronaVirus from '~/assets/coronavirus.svg';
+import Gedrag from '~/assets/gedrag.svg';
 import Locatie from '~/assets/locaties.svg';
 import Notification from '~/assets/notification.svg';
 import ReproIcon from '~/assets/reproductiegetal.svg';
@@ -11,10 +11,7 @@ import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import Ziektegolf from '~/assets/ziektegolf.svg';
-import Gedrag from '~/assets/gedrag.svg';
-import { NursingHomeDeathsMetric } from '~/components/common/nursing-home-deaths-metric';
 import { NursingHomeInfectedLocationsMetric } from '~/components/common/nursing-home-infected-locations-metric';
-import { NursingHomeInfectedPeopleMetric } from '~/components/common/nursing-home-infected-people-metric';
 import { InfectiousPeopleMetric } from '~/components/landelijk/infectious-people-metric';
 import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-barscale';
 import { IntakeHospitalMetric } from '~/components/landelijk/intake-hospital-metric';
@@ -28,10 +25,10 @@ import { SewerWaterMetric } from '~/components/landelijk/sewer-water-metric';
 import { SuspectedPatientsMetric } from '~/components/landelijk/suspected-patients-metric';
 import { getLayout as getSiteLayout } from '~/components/layout';
 import { TitleWithIcon } from '~/components/titleWithIcon';
+import { BehaviorMetric } from '~/domain/behavior/behavior-metric';
 import siteText from '~/locale/index';
 import { INationalData } from '~/static-props/nl-data';
 import { useMenuState } from './useMenuState';
-import { BehaviorMetric } from '~/domain/behavior/behavior-metric';
 
 export function getNationalLayout() {
   return function (
@@ -260,40 +257,14 @@ function NationalLayout(props: NationalLayoutProps) {
               </li>
             </ul>
 
-            <h2>{siteText.nationaal_layout.headings.verpleeghuizen}</h2>
+            <h2>{siteText.nationaal_layout.headings.kwetsbare_groepen}</h2>
 
             <ul>
               <li>
-                <Link href="/landelijk/verpleeghuis-positief-geteste-personen">
+                <Link href="/landelijk/verpleeghuiszorg">
                   <a
                     onClick={blur}
-                    className={getClassName(
-                      '/landelijk/verpleeghuis-positief-geteste-personen'
-                    )}
-                  >
-                    <TitleWithIcon
-                      Icon={GetestIcon}
-                      title={
-                        siteText.verpleeghuis_positief_geteste_personen
-                          .titel_sidebar
-                      }
-                    />
-                    <span>
-                      <NursingHomeInfectedPeopleMetric
-                        data={data.nursing_home.last_value}
-                      />
-                    </span>
-                  </a>
-                </Link>
-              </li>
-
-              <li>
-                <Link href="/landelijk/verpleeghuis-besmette-locaties">
-                  <a
-                    onClick={blur}
-                    className={getClassName(
-                      '/landelijk/verpleeghuis-besmette-locaties'
-                    )}
+                    className={getClassName('/landelijk/verpleeghuiszorg')}
                   >
                     <TitleWithIcon
                       Icon={Locatie}
@@ -303,25 +274,6 @@ function NationalLayout(props: NationalLayoutProps) {
                     />
                     <span>
                       <NursingHomeInfectedLocationsMetric
-                        data={data.nursing_home.last_value}
-                      />
-                    </span>
-                  </a>
-                </Link>
-              </li>
-
-              <li>
-                <Link href="/landelijk/verpleeghuis-sterfte">
-                  <a
-                    onClick={blur}
-                    className={getClassName('/landelijk/verpleeghuis-sterfte')}
-                  >
-                    <TitleWithIcon
-                      Icon={CoronaVirus}
-                      title={siteText.verpleeghuis_oversterfte.titel_sidebar}
-                    />
-                    <span>
-                      <NursingHomeDeathsMetric
                         data={data.nursing_home.last_value}
                       />
                     </span>

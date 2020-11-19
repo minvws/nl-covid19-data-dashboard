@@ -1,5 +1,5 @@
-import styles from './styles.module.scss';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
+import styles from './styles.module.scss';
 
 type IProps = {
   title?: string;
