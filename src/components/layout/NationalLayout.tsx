@@ -12,6 +12,7 @@ import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import Ziektegolf from '~/assets/ziektegolf.svg';
 import { HeadingWithIcon } from '~/components-styled/heading-with-icon';
+import { NursingHomeInfectedPeopleMetric } from '~/components/common/nursing-home-infected-people-metric';
 import { InfectiousPeopleMetric } from '~/components/landelijk/infectious-people-metric';
 import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-barscale';
 import { IntakeHospitalMetric } from '~/components/landelijk/intake-hospital-metric';
@@ -23,27 +24,35 @@ import { ReproductionIndexBarScale } from '~/components/landelijk/reproduction-i
 import { ReproductionIndexMetric } from '~/components/landelijk/reproduction-index-metric';
 import { SewerWaterMetric } from '~/components/landelijk/sewer-water-metric';
 import { SuspectedPatientsMetric } from '~/components/landelijk/suspected-patients-metric';
-import { getLayout as getSiteLayout } from '~/components/layout';
+import Layout from '~/components/layout';
 import { BehaviorMetric } from '~/domain/behavior/behavior-metric';
 import siteText from '~/locale/index';
-import { INationalData } from '~/static-props/nl-data';
+import { NationalPageProps } from '~/static-props/nl-data';
 import theme from '~/style/theme';
-import { NursingHomeInfectedPeopleMetric } from '../common/nursing-home-infected-people-metric';
 import { useMenuState } from './useMenuState';
 
-export function getNationalLayout() {
-  return function (
-    page: React.ReactNode,
-    pageProps: INationalData
-  ): React.ReactNode {
-    return getSiteLayout(
-      siteText.nationaal_metadata,
-      pageProps.lastGenerated
-    )(<NationalLayout {...pageProps}>{page}</NationalLayout>);
-  };
+/**
+ * Using composition this can be a less confusing and more direct replacement
+ * for getSiteLayout.
+ *
+ * @TODO replace other use of getSiteLayout()
+ */
+export function getNationalLayout(
+  page: React.ReactNode,
+  pageProps: NationalPageProps
+) {
+  return (
+    <Layout
+      {...siteText.nationaal_metadata}
+      lastGenerated={pageProps.lastGenerated}
+    >
+      {/* {console.log('XXXXX', pageProps.data.difference)} */}
+      <NationalLayout {...pageProps}>{page}</NationalLayout>
+    </Layout>
+  );
 }
 
-interface NationalLayoutProps extends INationalData {
+interface NationalLayoutProps extends NationalPageProps {
   children: React.ReactNode;
 }
 

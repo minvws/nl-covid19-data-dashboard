@@ -31,6 +31,12 @@ const fontSizes = [
   '2.02729rem',
 ];
 
+const fontWeights = {
+  normal: 400,
+  bold: 600,
+  heavy: 700,
+};
+
 const lineHeights = [1.2, 1.4, 1.5];
 
 /**
@@ -115,6 +121,7 @@ type TDashboardTheme = ScaleThemeProperties &
 const theme: TDashboardTheme = {
   fonts,
   fontSizes,
+  fontWeights,
   lineHeights,
   breakpoints: breakpoints as any,
   mediaQueries,

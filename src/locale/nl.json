@@ -51,6 +51,20 @@
     "terug_naar_alle_cijfers": "Terug naar alle cijfers",
     "terug_naar_alle_cijfers_homepage": "Terug naar alle cijfers"
   },
+  "toe_en_afname": {
+    "toename": "meer dan",
+    "afname": "minder dan",
+    "gelijk": "gelijk aan",
+    "tijdverloop": {
+      "gisteren": "gisteren",
+      "geleden": "geleden",
+      "dagen": "dagen",
+      "week": {
+        "enkelvoud": "week",
+        "meervoud": "weken"
+      }
+    }
+  },
   "ic_opnames_per_dag": {
     "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
     "bron": {
