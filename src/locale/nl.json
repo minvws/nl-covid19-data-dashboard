@@ -644,7 +644,8 @@
     },
     "tooltip": {
       "positive_tested_people": "{{totalPositiveTestedPeople}} in totaal"
-    }
+    },
+    "niveau": "niveau"
   },
   "seoHead": {
     "default_description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
@@ -921,6 +922,10 @@
       },
       "4": {
         "titel": "Zeer Ernstig",
+        "toelichting": ""
+      },
+      "5": {
+        "titel": "Lockdown",
         "toelichting": ""
       }
     },

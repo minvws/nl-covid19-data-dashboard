@@ -6,6 +6,7 @@ import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 import siteText from '~/locale/index';
 import { assert } from '../assert';
+import { colors } from '~/style/theme';
 
 /**
  * @TODO these helpers for VR and GM should be merged into one using generics.
@@ -193,7 +194,7 @@ export function getSewerWaterBarChartData(
     data: [
       {
         y: data.sewer.last_value.average,
-        color: '#3391CC',
+        color: colors.data.primary,
         label: data.sewer.last_value
           ? `${formatDateFromSeconds(
               data.sewer.last_value.week_unix,

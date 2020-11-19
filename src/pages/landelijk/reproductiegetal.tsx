@@ -7,7 +7,7 @@ import { ContentHeader } from '~/components/contentHeader';
 import { ReproductionIndexBarScale } from '~/components/landelijk/reproduction-index-barscale';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
-import { Legenda } from '~/components/legenda';
+import { Legenda } from '~/components-styled/legenda';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
@@ -72,9 +72,15 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
           timeframeOptions={['all', '5weeks']}
           showFill={false}
           footer={
-            <Legenda>
-              <li className="blue">{text.legenda_r}</li>
-            </Legenda>
+            <Legenda
+              items={[
+                {
+                  label: text.legenda_r,
+                  color: 'data.primary',
+                  shape: 'line',
+                },
+              ]}
+            />
           }
         />
       )}

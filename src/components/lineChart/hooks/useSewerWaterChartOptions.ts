@@ -4,6 +4,7 @@ import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { getItemFromArray } from '~/utils/getItemFromArray';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { colors } from '~/style/theme';
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
 
 export interface SewerPerInstallationBaseValue {
@@ -134,7 +135,7 @@ export function useSewerWaterChartOptions<
       name: text.average_label_text,
       description: text.average_label_text,
       showInLegend: true,
-      color: selectedRWZI ? '#A9A9A9' : '#3391CC',
+      color: selectedRWZI ? '#A9A9A9' : colors.data.primary,
       enableMouseTracking: selectedRWZI === undefined,
       allowPointSelect: false,
       marker: {
@@ -161,7 +162,7 @@ export function useSewerWaterChartOptions<
         name: '',
         description: '',
         showInLegend: false,
-        color: selectedRWZI ? '#A9A9A9' : '#3391CC',
+        color: selectedRWZI ? '#A9A9A9' : colors.data.primary,
         enableMouseTracking: false,
         allowPointSelect: false,
         dashStyle: 'ShortDot',
@@ -193,7 +194,7 @@ export function useSewerWaterChartOptions<
           description: replaceVariablesInText(text.daily_label_text, {
             name: selectedRWZI,
           }),
-          color: '#004277',
+          color: colors.data.secondary,
           allowPointSelect: false,
           marker: {
             symbol: 'circle',

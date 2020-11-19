@@ -1,4 +1,9 @@
-import { ScaleThemeProperties, ThemeBreakPoints } from '@styled-system/css';
+import * as CSS from 'csstype';
+import {
+  ScaleThemeProperties,
+  ThemeBreakPoints,
+  ThemeValue,
+} from '@styled-system/css';
 
 const space = [
   0,
@@ -79,15 +84,24 @@ const mediaQueries = {
 
 type TMediaQueries = typeof mediaQueries;
 
-const colors = {
+export const colors = {
   blue: '#01689b',
-  blueDark: '#144276',
   icon: '#01689b',
   button: '#01689b',
   shadow: '#e5e5e5',
   lightGray: '#dfdfdf',
   annotation: '#595959',
-};
+
+  data: {
+    primary: '#007BC7',
+    secondary: '#154273',
+    fill: 'rgba(0, 123, 199, .05)',
+    scale: {
+      blue: ['#8FCAE7', '#5BADDB', '#248FCF', '#0070BB', '#00529D', '#003580'],
+      magenta: ['#F6B4D1', '#D3719C', '#9E3A66', '#64032D', '#000000'],
+    },
+  },
+} as const;
 
 const radii = [0, 5, 10];
 
@@ -105,7 +119,7 @@ const theme: TDashboardTheme = {
   breakpoints: breakpoints as any,
   mediaQueries,
   space,
-  colors,
+  colors: (colors as unknown) as ThemeValue<CSS.Property.Color>,
   radii,
   shadows,
 };
