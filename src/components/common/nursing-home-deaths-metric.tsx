@@ -1,9 +1,9 @@
+import { MetricKPI } from '~/components-styled/metric-kpi';
+import siteText from '~/locale/index';
 import { NationalNursingHomeValue } from '~/types/data.d';
-import { MetricKPI } from '~/components/metricKPI';
+import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { formatDateFromSeconds } from '~/utils/formatDate';
-import siteText from '~/locale/index';
 
 const text = siteText.common.metricKPI;
 const title = siteText.verpleeghuis_oversterfte.titel_kpi;
@@ -22,8 +22,7 @@ export function NursingHomeDeathsMetric(props: {
   return (
     <MetricKPI
       title={title}
-      value={data.deceased_daily}
-      format={formatNumber}
+      absolute={formatNumber(data.deceased_daily)}
       description={description}
     />
   );

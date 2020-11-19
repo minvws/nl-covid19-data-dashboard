@@ -320,7 +320,7 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
     },
-    "titel": "Besmette locaties",
+    "titel": "Verpleeghuiszorg - besmette locaties",
     "pagina_toelichting": "Dit getal is een inschatting van het aantal nieuwe verpleeghuislocaties waar sprake is van tenminste een COVID-19 besmetting op basis van een positieve test.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de cijferverantwoording.",
     "barscale_titel": "Aantal nieuwe locaties per dag",
     "barscale_toelichting": "Aantal nieuwe locaties waarbij tenminste één bewoner positief getest is. Een verpleeghuis wordt meegeteld als ‘nieuwe locatie’ wanneer er tenminste 28 dagen, dit is twee keer de incubatietijd, geen nieuwe patiënten zijn geweest.",
@@ -338,7 +338,7 @@
       "title": "Besmette verpleeghuizen | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Landelijk overzicht van verpleeghuislocaties waar tenminste één COVID-19 besmetting is vastgesteld."
     },
-    "titel_sidebar": "Aantal besmette verpleeghuislocaties",
+    "titel_sidebar": "Verpleeghuiszorg",
     "titel_kpi": "Aantal besmette locaties"
   },
   "verpleeghuis_positief_geteste_personen": {
@@ -347,7 +347,7 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
     },
-    "titel": "Aantal positief geteste bewoners",
+    "titel": "Verpleeghuiszorg - aantal positief geteste bewoners",
     "barscale_titel": "Aantal positief geteste bewoners in verpleeghuizen per dag",
     "extra_uitleg": "Aantal nieuwe positief geteste bewoners in verpleeghuizen dat per dag gemeld is.",
     "pagina_toelichting": "Aantal nieuwe positief geteste bewoners in verpleeghuizen dat per dag is gemeld. Dit getal is een inschatting van het aantal gemelde bewoners in verpleeghuizen dat in Nederland positief getest is en COVID-19 heeft.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de cijferverantwoording.",
@@ -372,7 +372,7 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
     },
-    "titel": "Sterfte",
+    "titel": "Verpleeghuiszorg - sterfte",
     "pagina_toelichting": "Aantal overleden bewoners in verpleeghuizen met een vastgestelde COVID-19-besmetting per dag.",
     "barscale_titel": "Aantal overleden bewoners",
     "barscale_screenreader_text": "{{value}} overleden bewoners.",
@@ -664,7 +664,7 @@
       "algemeen": "Algemeen",
       "besmettingen": "Besmettingen",
       "ziekenhuizen": "Ziekenhuizen",
-      "verpleeghuizen": "Verpleeghuiszorg",
+      "kwetsbare_groepen": "Kwetsbare groepen",
       "vroege_signalen": "Vroege signalen",
       "gedrag": "Gedrag"
     }
@@ -673,7 +673,7 @@
     "headings": {
       "medisch": "Medische indicatoren",
       "overig": "Vroegsignalering",
-      "verpleeghuis": "Verpleeghuiszorg",
+      "kwetsbare_groepen": "Kwetsbare groepen",
       "besmettingen": "Besmettingen",
       "ziekenhuizen": "Ziekenhuizen",
       "verpleeghuizen": "Verpleeghuiszorg",
@@ -1003,7 +1003,7 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
     },
-    "titel": "Sterfte in {{safetyRegion}}",
+    "titel": "Verpleeghuiszorg - Sterfte in {{safetyRegion}}",
     "pagina_toelichting": "Aantal overleden bewoners in verpleeghuizen met een vastgestelde COVID-19-besmetting per dag.",
     "barscale_titel": "Overleden bewoners verpleeghuizen",
     "barscale_screenreader_text": "{{value}} overleden bewoners.",
@@ -1023,7 +1023,7 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
     },
-    "titel": "Aantal besmette locaties in {{safetyRegion}}",
+    "titel": "Verpleeghuiszorg - Aantal besmette locaties in {{safetyRegion}}",
     "pagina_toelichting": "Dit getal is een inschatting van het aantal nieuwe verpleeghuislocaties waar sprake is van tenminste een COVID-19 besmetting op basis van een positieve test.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de cijferverantwoording.",
     "barscale_titel": "Aantal nieuwe locaties per dag",
     "barscale_toelichting": "Aantal nieuwe locaties waarbij tenminste één bewoner positief getest is. Een verpleeghuis wordt meegeteld als ‘nieuwe locatie’ wanneer er tenminste 28 dagen, dit is twee keer de incubatietijd, geen nieuwe patiënten zijn geweest.",
@@ -1034,7 +1034,8 @@
     "metadata": {
       "title": "Besmette verpleeghuizen in {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van verpleeghuislocaties in veiligheidsregio {{safetyRegionName}} waar tenminste één COVID-19 besmetting is vastgesteld."
-    }
+    },
+    "titel_sidebar": "Verpleeghuiszorg"
   },
   "veiligheidsregio_verpleeghuis_positief_geteste_personen": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -1042,7 +1043,7 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
     },
-    "titel": "Aantal positief geteste bewoners in {{safetyRegion}}",
+    "titel": "Verpleeghuiszorg - Aantal positief geteste bewoners in {{safetyRegion}}",
     "barscale_titel": "Aantal positief geteste bewoners in verpleeghuizen per dag",
     "extra_uitleg": "Aantal nieuwe positief geteste bewoners in verpleeghuizen dat per dag gemeld is.",
     "pagina_toelichting": "Aantal positief geteste bewoners in verpleeghuizen per dag in {{safetyRegion}}. Dit getal is een inschatting van het aantal gemelde bewoners in verpleeghuizen dat in Nederland positief getest is en COVID-19 heeft.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de cijferverantwoording.",
