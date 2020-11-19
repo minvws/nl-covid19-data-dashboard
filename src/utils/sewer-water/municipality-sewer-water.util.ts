@@ -233,9 +233,12 @@ export function getSewerWaterScatterPlotData(data: Municipal) {
 }
 
 export function getInstallationNames(data: Municipal): string[] {
-  return (data.sewer_per_installation?.values || [])
-    .flatMap((value) => value.values)
-    .map((value) => value.rwzi_awzi_name)
-    .filter((value, index, arr) => arr.indexOf(value) === index)
-    .sort((a, b) => a.localeCompare(b));
+  return (
+    (data.sewer_per_installation?.values || [])
+      .flatMap((value) => value.values)
+      .map((value) => value.rwzi_awzi_name)
+      // deduplicate installation names
+      .filter((value, index, arr) => arr.indexOf(value) === index)
+      .sort((a, b) => a.localeCompare(b))
+  );
 }
