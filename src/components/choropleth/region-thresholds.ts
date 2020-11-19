@@ -58,19 +58,19 @@ const hospitalAdmissionsThresholds: ChoroplethThresholds = {
 const escalationThresholds: ChoroplethThresholds<1 | 2 | 3 | 4 | 5> = {
   thresholds: [
     {
-      color: colors.data.scale.red[0],
+      color: colors.data.scale.magenta[0],
       threshold: 1,
     },
     {
-      color: colors.data.scale.red[1],
+      color: colors.data.scale.magenta[1],
       threshold: 2,
     },
     {
-      color: colors.data.scale.red[2],
+      color: colors.data.scale.magenta[2],
       threshold: 3,
     },
     {
-      color: colors.data.scale.red[3],
+      color: colors.data.scale.magenta[3],
       threshold: 4,
     },
   ],

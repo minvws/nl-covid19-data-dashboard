@@ -98,7 +98,7 @@ export const colors = {
     fill: 'rgba(0, 123, 199, .05)',
     scale: {
       blue: ['#8FCAE7', '#5BADDB', '#248FCF', '#0070BB', '#00529D', '#003580'],
-      red: ['#F6B4D1', '#D3719C', '#9E3A66', '#64032D', '#000000'],
+      magenta: ['#F6B4D1', '#D3719C', '#9E3A66', '#64032D', '#000000'],
     },
   },
 } as const;
