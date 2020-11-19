@@ -41,11 +41,11 @@ export function KpiValue({
   return (
     <>
       {isDefined(percentage) ? (
-        <StyledValue color="data.kpi" {...(props as any)}>
+        <StyledValue color="data.primary" {...(props as any)}>
           {`${formatNumber(absolute)} (${formatPercentage(percentage)}%)`}
         </StyledValue>
       ) : (
-        <StyledValue color="data.kpi" {...(props as any)}>
+        <StyledValue color="data.primary" {...(props as any)}>
           {formatNumber(absolute)}
         </StyledValue>
       )}

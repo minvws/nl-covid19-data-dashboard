@@ -107,7 +107,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           <Box>
             <Heading level={4} fontSize={'1.2em'} mt={'1.5em'} mb={0}>
               <span
-                css={css({ '& > span': { color: 'data.kpi' } })}
+                css={css({ '& > span': { color: 'data.primary' } })}
                 dangerouslySetInnerHTML={{
                   __html: replaceKpisInText(ggdText.summary_title, [
                     {
@@ -118,7 +118,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
                     },
                   ]),
                 }}
-              ></span>
+              />
             </Heading>
             <Text mt={0} lineHeight={1}>
               <Anchor name="ggd" text={ggdText.summary_link_cta} />
@@ -207,7 +207,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           <Text>{ggdText.positief_getest_week_uitleg}</Text>
           <Text>
             <strong
-              css={css({ '& > span': { color: 'data.kpi' } })}
+              css={css({ '& > span': { color: 'data.primary' } })}
               dangerouslySetInnerHTML={{
                 __html: replaceKpisInText(
                   ggdText.positief_getest_getest_week_uitleg,
