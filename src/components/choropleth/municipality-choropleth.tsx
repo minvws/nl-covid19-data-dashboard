@@ -98,10 +98,7 @@ export function MunicipalityChoropleth(props: TProps) {
 
   const overlayCallback = useCallback(
     (
-      feature: Feature<
-        MultiPolygon,
-        SafetyRegionProperties | GeoJsonProperties
-      >,
+      feature: Feature<MultiPolygon, GeoJsonProperties>,
       path: string,
       _index: number
     ) => {

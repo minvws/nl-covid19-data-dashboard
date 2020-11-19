@@ -1,5 +1,5 @@
 import css from '@styled-system/css';
-import { Feature, MultiPolygon } from 'geojson';
+import { Feature, GeoJsonProperties, MultiPolygon } from 'geojson';
 import { ReactNode, useCallback } from 'react';
 import { Regions } from '~/types/data';
 import { Choropleth } from './choropleth';
@@ -96,7 +96,7 @@ export function SafetyRegionChoropleth<
   );
 
   const overlayCallback = (
-    _feature: Feature<MultiPolygon, SafetyRegionProperties>,
+    _feature: Feature<MultiPolygon, GeoJsonProperties>,
     path: string,
     index: number
   ) => {
