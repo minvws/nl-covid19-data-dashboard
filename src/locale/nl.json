@@ -418,7 +418,8 @@
     "map_titel": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners in rioolwater",
     "map_toelichting": "Deze kaart toont het gemiddeld aantal virusdeeltjes per 100.000 inwoners, per veiligheidsregio.",
     "legenda_titel": "Legenda",
-    "map_tooltip": "{{value}} x100 miljard deeltjes per 100.000 inwoners"
+    "map_tooltip_value": "{{value}} x100 miljard",
+    "map_tooltip": "per 100.000 inwoners"
   },
   "notfound_titel": {
     "text": "Er is iets misgegaan"
