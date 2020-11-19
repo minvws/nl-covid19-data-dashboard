@@ -1,4 +1,4 @@
-import { MetricKPI } from '~/components/metricKPI';
+import { MetricKPI } from '~/components-styled/metric-kpi';
 import siteText from '~/locale/index';
 import { HospitalAdmissionsLastValue } from '~/types/data.d';
 import { formatDateFromSeconds } from '~/utils/formatDate';

@@ -672,7 +672,7 @@
     "headings": {
       "medisch": "Medical indicators",
       "overig": "Other indicators",
-      "verpleeghuis": "Nursing homes",
+      "kwetsbare_groepen": "Vulnerable groups",
       "besmettingen": "Infections",
       "ziekenhuizen": "Hospitals",
       "verpleeghuizen": "Nursing homes",
@@ -1026,7 +1026,8 @@
     "metadata": {
       "title": "Infected nursing home locations in {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
       "description": "Number of nursing homes in safety region {{safetyRegionName}} with at least one confirmed case of COVID-19."
-    }
+    },
+    "titel_sidebar": ""
   },
   "veiligheidsregio_verpleeghuis_positief_geteste_personen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",

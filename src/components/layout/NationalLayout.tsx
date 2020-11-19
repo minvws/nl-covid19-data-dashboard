@@ -4,11 +4,11 @@ import { useRouter } from 'next/router';
 import Arrow from '~/assets/arrow.svg';
 import Arts from '~/assets/arts.svg';
 import Gedrag from '~/assets/gedrag.svg';
-import Locatie from '~/assets/locaties.svg';
 import Notification from '~/assets/notification.svg';
 import ReproIcon from '~/assets/reproductiegetal.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
+import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import Ziektegolf from '~/assets/ziektegolf.svg';
 import { NursingHomeInfectedLocationsMetric } from '~/components/common/nursing-home-infected-locations-metric';
@@ -267,7 +267,7 @@ function NationalLayout(props: NationalLayoutProps) {
                     className={getClassName('/landelijk/verpleeghuiszorg')}
                   >
                     <TitleWithIcon
-                      Icon={Locatie}
+                      Icon={Verpleeghuiszorg}
                       title={
                         siteText.verpleeghuis_besmette_locaties.titel_sidebar
                       }

@@ -672,7 +672,7 @@
     "headings": {
       "medisch": "Medische indicatoren",
       "overig": "Vroegsignalering",
-      "verpleeghuis": "Verpleeghuiszorg",
+      "kwetsbare_groepen": "Kwetsbare groepen",
       "besmettingen": "Besmettingen",
       "ziekenhuizen": "Ziekenhuizen",
       "verpleeghuizen": "Verpleeghuiszorg",
@@ -1026,7 +1026,8 @@
     "metadata": {
       "title": "Besmette verpleeghuizen in {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van verpleeghuislocaties in veiligheidsregio {{safetyRegionName}} waar tenminste één COVID-19 besmetting is vastgesteld."
-    }
+    },
+    "titel_sidebar": "Verpleeghuiszorg"
   },
   "veiligheidsregio_verpleeghuis_positief_geteste_personen": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
