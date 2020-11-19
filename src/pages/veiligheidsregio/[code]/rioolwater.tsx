@@ -1,21 +1,19 @@
 import { useMemo, useState } from 'react';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
+import { Box } from '~/components-styled/base';
 import {
   ChartTile,
   ChartTileWithTimeframe,
 } from '~/components-styled/chart-tile';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
+import { Select } from '~/components-styled/select';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { BarChart } from '~/components/charts';
 import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRangeHack';
 import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
-import {
-  InstallationSelector,
-  InstallationSelectorBox,
-} from '~/components/lineChart/installationSelector';
-import { RegionalSewerWaterChart } from '~/components/lineChart/regionalSewerWaterChart';
+import { SewerWaterChart } from '~/components/lineChart/sewer-water-chart';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import {
@@ -124,7 +122,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
         </TwoKpiSection>
       )}
 
-      {scatterPlotData && lineChartData && (
+      {lineChartData && (
         <ChartTileWithTimeframe
           title={text.linechart_titel}
           metadata={{ source: text.bron }}
@@ -134,15 +132,20 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
           {(timeframe) => (
             <>
               {sewerStationNames.length > 0 && (
-                <InstallationSelectorBox>
-                  <InstallationSelector
-                    placeholderText={text.graph_selected_rwzi_placeholder}
+                <Box display="flex" justifyContent="flex-end">
+                  <Select
+                    options={sewerStationNames.map((x) => ({
+                      label: x,
+                      value: x,
+                    }))}
+                    value={selectedInstallation}
+                    placeholder={text.graph_selected_rwzi_placeholder}
                     onChange={setSelectedInstallation}
-                    stationNames={sewerStationNames}
+                    onClear={() => setSelectedInstallation(undefined)}
                   />
-                </InstallationSelectorBox>
+                </Box>
               )}
-              <RegionalSewerWaterChart
+              <SewerWaterChart
                 timeframe={timeframe}
                 scatterPlotValues={scatterPlotData}
                 averageValues={lineChartData.averageValues}
