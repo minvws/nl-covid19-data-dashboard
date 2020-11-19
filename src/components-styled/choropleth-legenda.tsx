@@ -41,7 +41,6 @@ const Item = styled.li(
 const LegendaItemBox = styled(Box)(
   css({
     width: '100%',
-    maxWidth: 60,
     height: '10px',
     flexGrow: 0,
     flexShrink: 0,
@@ -54,13 +53,13 @@ export function ChoroplethLegenda(props: ChoroplethLegendaProps) {
   const { items, title } = props;
 
   return (
-    <Box width="100%" maxWidth={300}>
+    <Box width="100%" maxWidth={400}>
       {title && <h4>{title}</h4>}
       <List aria-label="legend">
         {items.map((item) => (
           <Item key={item.color}>
             <LegendaItemBox backgroundColor={item.color} />
-            <div>{item.label}</div>
+            <Box p={1}>{item.label}</Box>
           </Item>
         ))}
       </List>
