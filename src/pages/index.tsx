@@ -190,8 +190,23 @@ export async function getStaticProps(): Promise<StaticProps> {
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const data = JSON.parse(fileContents) as National;
-  const lastGenerated = data.last_generated;
 
+  // Strip away unused data (values) from staticProps
+  // keep last_values because we use them!
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  for (const metric of Object.values(data)) {
+    if (typeof metric === 'object' && metric !== null) {
+      for (const [metricProperty, metricValue] of Object.entries(metric)) {
+        if (metricProperty === 'values') {
+          (metricValue as {
+            values: Array<unknown>;
+          }).values = [];
+        }
+      }
+    }
+  }
+
+  const lastGenerated = data.last_generated;
   const regionsFilePath = path.join(
     process.cwd(),
     'public',
