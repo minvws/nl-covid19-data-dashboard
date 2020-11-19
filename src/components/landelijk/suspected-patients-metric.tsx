@@ -22,8 +22,7 @@ export function SuspectedPatientsMetric(props: {
   return (
     <MetricKPI
       title={title}
-      absolute={Number(data.geschat_aantal)}
-      format={formatNumber}
+      absolute={formatNumber(data.geschat_aantal)}
       description={description}
     />
   );

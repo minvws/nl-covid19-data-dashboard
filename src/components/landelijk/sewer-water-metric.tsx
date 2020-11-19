@@ -21,8 +21,7 @@ export function SewerWaterMetric(props: { data: NationalSewer }) {
   return (
     <MetricKPI
       title={title}
-      absolute={data.last_value.average}
-      format={formatNumber}
+      absolute={formatNumber(data.last_value.average)}
       description={description}
       valueAnnotation={siteText.waarde_annotaties.riool_normalized}
     />

@@ -22,8 +22,7 @@ export function PositiveTestedPeopleMetric(props: {
   return (
     <MetricKPI
       title={title}
-      absolute={data.infected_daily_total}
-      format={formatNumber}
+      absolute={formatNumber(data.infected_daily_total)}
       description={description}
     />
   );

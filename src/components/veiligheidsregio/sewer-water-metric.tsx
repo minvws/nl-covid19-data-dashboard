@@ -22,8 +22,7 @@ export function SewerWaterMetric(props: { data: SewerWaterBarScaleData }) {
   return (
     <MetricKPI
       title={title}
-      absolute={data.value}
-      format={formatNumber}
+      absolute={formatNumber(data.value)}
       description={description}
       valueAnnotation={siteText.waarde_annotaties.riool_normalized}
     />

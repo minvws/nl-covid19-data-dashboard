@@ -4,24 +4,14 @@ import { Heading, Text } from './typography';
 
 type IProps = {
   title: string;
-  absolute?: number;
-  percentage?: number;
-  format?: (value?: number) => string;
-  formatPercentage?: (value: number, maximumFractionDigits: number) => string;
+  absolute?: string;
+  percentage?: string;
   description?: string;
   valueAnnotation?: string;
 };
 
 export function MetricKPI(props: IProps) {
-  const {
-    absolute: value,
-    percentage: percentageValue,
-    format,
-    formatPercentage,
-    title,
-    description,
-    valueAnnotation,
-  } = props;
+  const { absolute, percentage, title, description, valueAnnotation } = props;
 
   return (
     <Box width="100%" minHeight="4rem">
@@ -36,9 +26,9 @@ export function MetricKPI(props: IProps) {
       </Heading>
       <Box display="flex" alignItems="center">
         <Text display="inline-block" fontSize={3} fontWeight="bold" margin="0">
-          {format ? format(value) : value}
+          {absolute}
         </Text>
-        {percentageValue !== undefined && (
+        {percentage !== undefined && (
           <Text
             display="inline-block"
             fontSize={3}
@@ -46,9 +36,7 @@ export function MetricKPI(props: IProps) {
             margin="0"
             marginLeft={1}
           >
-            {formatPercentage
-              ? `(${formatPercentage(percentageValue, 1)}%)`
-              : `(${percentageValue}%)`}
+            ({percentage}%)
           </Text>
         )}
         <Text

@@ -25,8 +25,7 @@ export function IntakeHospitalMetric(props: {
   return (
     <MetricKPI
       title={title}
-      absolute={data.last_value.hospital_moving_avg_per_region}
-      format={formatNumber}
+      absolute={formatNumber(data.last_value.hospital_moving_avg_per_region)}
       description={description}
     />
   );
