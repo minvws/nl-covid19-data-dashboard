@@ -28,12 +28,7 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
 ) => {
   const { data, safetyRegionName } = props;
 
-  const newlyInfectedLocations =
-    data.nursing_home.last_value.newly_infected_locations;
-  const infectedLocationsTotal =
-    data.nursing_home.last_value.infected_locations_total;
-  const infectedLocationsPercentage =
-    data.nursing_home.last_value.infected_locations_percentage;
+  const nursinghomeData = data.nursing_home.last_value;
 
   return (
     <>
@@ -117,8 +112,8 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
           }}
         >
           <KpiValue
-            absolute={infectedLocationsTotal}
-            percentage={infectedLocationsPercentage}
+            absolute={nursinghomeData.infected_locations_total}
+            percentage={nursinghomeData.infected_locations_percentage}
           />
           <Text>{locationsText.kpi_toelichting}</Text>
         </KpiTile>
@@ -131,13 +126,13 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
         >
           <KpiValue
             data-cy="infected_daily_total"
-            absolute={newlyInfectedLocations}
+            absolute={nursinghomeData.newly_infected_locations}
           />
           <Text>{locationsText.barscale_toelichting}</Text>
         </KpiTile>
       </TwoKpiSection>
 
-      {infectedLocationsTotal !== undefined && (
+      {nursinghomeData.infected_locations_total !== undefined && (
         <LineChartTile
           title={locationsText.linechart_titel}
           values={data?.nursing_home.values.map((value) => ({
