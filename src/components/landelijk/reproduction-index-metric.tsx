@@ -22,7 +22,7 @@ export function ReproductionIndexMetric(props: {
   return (
     <MetricKPI
       title={title}
-      value={data.reproduction_index_avg}
+      absolute={data.reproduction_index_avg}
       format={formatNumber}
       description={description}
     />

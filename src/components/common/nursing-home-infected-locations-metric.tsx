@@ -22,8 +22,8 @@ export function NursingHomeInfectedLocationsMetric(props: {
   return (
     <MetricKPI
       title={title}
-      value={data.infected_locations_total}
-      percentageValue={data.infected_locations_percentage}
+      absolute={data.infected_locations_total}
+      percentage={data.infected_locations_percentage}
       format={formatNumber}
       formatPercentage={formatPercentage}
       description={description}

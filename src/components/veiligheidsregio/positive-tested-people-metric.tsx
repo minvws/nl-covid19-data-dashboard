@@ -22,7 +22,7 @@ export function PositivelyTestedPeopleMetric(props: {
   return (
     <MetricKPI
       title={title}
-      value={data.total_reported_increase_per_region}
+      absolute={data.total_reported_increase_per_region}
       format={formatNumber}
       description={description}
     />

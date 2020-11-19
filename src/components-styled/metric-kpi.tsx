@@ -3,9 +3,9 @@ import { Box } from './base';
 import { Heading, Text } from './typography';
 
 type IProps = {
-  title?: string;
-  value?: number;
-  percentageValue?: number;
+  title: string;
+  absolute?: number;
+  percentage?: number;
   format?: (value?: number) => string;
   formatPercentage?: (value: number, maximumFractionDigits: number) => string;
   description?: string;
@@ -14,8 +14,8 @@ type IProps = {
 
 export function MetricKPI(props: IProps) {
   const {
-    value,
-    percentageValue,
+    absolute: value,
+    percentage: percentageValue,
     format,
     formatPercentage,
     title,

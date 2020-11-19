@@ -22,7 +22,7 @@ export function InfectiousPeopleMetric(props: {
   return (
     <MetricKPI
       title={title}
-      value={data.infectious_avg}
+      absolute={data.infectious_avg}
       format={formatNumber}
       description={description}
     />

@@ -22,7 +22,7 @@ export function NursingHomeDeathsMetric(props: {
   return (
     <MetricKPI
       title={title}
-      value={data.deceased_daily}
+      absolute={data.deceased_daily}
       format={formatNumber}
       description={description}
     />

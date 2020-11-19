@@ -22,7 +22,7 @@ export function IntakeIntensiveCareMetric(props: {
   return (
     <MetricKPI
       title={title}
-      value={data.moving_average_ic}
+      absolute={data.moving_average_ic}
       format={formatNumber}
       description={description}
     />

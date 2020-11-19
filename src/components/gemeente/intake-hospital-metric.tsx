@@ -22,7 +22,7 @@ export function IntakeHospitalMetric(props: {
   return (
     <MetricKPI
       title={title}
-      value={data.moving_average_hospital}
+      absolute={data.moving_average_hospital}
       format={formatNumber}
       description={description}
     />

@@ -22,7 +22,7 @@ export function NursingHomeInfectedPeopleMetric(props: {
   return (
     <MetricKPI
       title={title}
-      value={data.newly_infected_people}
+      absolute={data.newly_infected_people}
       format={formatNumber}
       description={description}
     />
