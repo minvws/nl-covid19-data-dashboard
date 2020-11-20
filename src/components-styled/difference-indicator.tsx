@@ -17,6 +17,7 @@ import { DifferenceDecimal, DifferenceInteger } from '~/types/data';
 
 const text = siteText.toe_en_afname;
 const DAY_IN_SECONDS = 24 * 60 * 60;
+
 interface DifferenceIndicatorProps {
   value: DifferenceDecimal | DifferenceInteger;
   isContextSidebar?: boolean;
