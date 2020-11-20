@@ -66,7 +66,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
         title={replaceVariablesInText(text.titel, {
           safetyRegion: safetyRegionName,
         })}
-        Icon={<Getest />}
+        icon={<Getest />}
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
@@ -171,7 +171,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           safetyRegion: safetyRegionName,
         })}
         id="ggd"
-        Icon={<Afname />}
+        icon={<Afname />}
         subtitle={ggdText.toelichting}
         metadata={{
           datumsText: ggdText.datums,

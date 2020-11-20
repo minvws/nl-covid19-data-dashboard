@@ -30,7 +30,7 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
       <ContentHeader
         category={siteText.nationaal_layout.headings.besmettingen}
         title={text.title}
-        Icon={<Ziektegolf />}
+        icon={<Ziektegolf />}
         subtitle={text.toelichting_pagina}
         metadata={{
           datumsText: text.datums,

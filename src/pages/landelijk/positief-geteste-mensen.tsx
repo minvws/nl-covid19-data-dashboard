@@ -75,7 +75,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
       <ContentHeader
         category={siteText.nationaal_layout.headings.besmettingen}
         title={text.titel}
-        Icon={<Getest />}
+        icon={<Getest />}
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
@@ -220,7 +220,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
       <ContentHeader_weekRangeHack
         title={ggdText.titel}
         id="ggd"
-        Icon={<Afname />}
+        icon={<Afname />}
         subtitle={ggdText.toelichting}
         metadata={{
           datumsText: ggdText.datums,

@@ -33,7 +33,7 @@ const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
       <ContentHeader
         category={siteText.nationaal_layout.headings.vroege_signalen}
         title={text.titel}
-        Icon={<Arts />}
+        icon={<Arts />}
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,

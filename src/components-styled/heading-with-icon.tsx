@@ -5,13 +5,13 @@ import { Heading } from './typography';
 
 interface IProps {
   title: string;
-  Icon: React.ReactNode;
+  icon: JSX.Element;
   subtitle?: string;
   headingLevel?: 2 | 3;
 }
 
-export function TitleWithIcon(props: IProps) {
-  const { Icon, title, subtitle, headingLevel = 3 } = props;
+export function HeadingWithIcon(props: IProps) {
+  const { icon, title, subtitle, headingLevel = 3 } = props;
 
   const cssProps = useMemo(() => {
     return headingLevel === 3
@@ -46,7 +46,7 @@ export function TitleWithIcon(props: IProps) {
         marginRight={0}
         css={css(cssProps)}
       >
-        {Icon}
+        {icon}
       </Box>
 
       <Box>

@@ -6,7 +6,7 @@ import { useState } from 'react';
 import ExternalLink from '~/assets/external-link.svg';
 import Notification from '~/assets/notification.svg';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
-import { TitleWithIcon } from '~/components-styled/title-with-icon';
+import { HeadingWithIcon } from '~/components-styled/heading-with-icon';
 import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/use-safety-region-legenda-data';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
@@ -61,8 +61,8 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
 
   return (
     <>
-      <TitleWithIcon
-        Icon={<Notification color={(theme.colors as any).notification} />}
+      <HeadingWithIcon
+        icon={<Notification color={(theme.colors as any).notification} />}
         title={text.laatste_ontwikkelingen.title}
         headingLevel={2}
       />

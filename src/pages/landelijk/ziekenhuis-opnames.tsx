@@ -43,7 +43,7 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
       <ContentHeader_sourcesHack
         category={siteText.nationaal_layout.headings.ziekenhuizen}
         title={text.titel}
-        Icon={<Ziekenhuis />}
+        icon={<Ziekenhuis />}
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,

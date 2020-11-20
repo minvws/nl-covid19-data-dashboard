@@ -1,4 +1,5 @@
-import { TitleWithIcon } from '~/components-styled/title-with-icon';
+import { HeadingWithIcon } from '~/components-styled/heading-with-icon';
+import { Heading } from '~/components-styled/typography';
 import styles from '../layout/layout.module.scss';
 import { Metadata } from './metadata_weekRangeHack';
 
@@ -14,21 +15,22 @@ import { Metadata } from './metadata_weekRangeHack';
 export function ContentHeader_weekRangeHack(
   props: ContentHeader_weekRangeHackProps
 ) {
-  const { category, Icon, title, subtitle, metadata, id } = props;
+  const { category, icon, title, subtitle, metadata, id } = props;
 
   const layoutClasses = [styles.contentHeader];
 
   if (!category) {
     layoutClasses.push(styles.withoutCategory);
   }
-  if (!Icon) {
+  if (!icon) {
     layoutClasses.push(styles.withoutIcon);
   }
 
   return (
     <header id={id} className={layoutClasses.join(' ')}>
       {category && <p className={styles.category}>{category}</p>}
-      <TitleWithIcon Icon={Icon} title={title} headingLevel={2} />
+      {icon && <HeadingWithIcon icon={icon} title={title} headingLevel={2} />}
+      {!icon && <Heading level={2}>{title}</Heading>}
 
       <div className={styles.text}>
         <p>{subtitle}</p>
@@ -55,6 +57,6 @@ interface ContentHeader_weekRangeHackProps {
     };
   };
   category?: string;
-  Icon?: React.ReactNode;
+  icon?: JSX.Element;
   id?: string;
 }

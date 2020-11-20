@@ -5,7 +5,7 @@ import Arrow from '~/assets/arrow.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
-import { TitleWithIcon } from '~/components-styled/title-with-icon';
+import { HeadingWithIcon } from '~/components-styled/heading-with-icon';
 import { ComboBox } from '~/components/comboBox';
 import { IntakeHospitalMetric } from '~/components/gemeente/intake-hospital-metric';
 import { PositivelyTestedPeopleMetric } from '~/components/gemeente/positively-tested-people-metric';
@@ -173,8 +173,8 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                         `/gemeente/[code]/positief-geteste-mensen`
                       )}
                     >
-                      <TitleWithIcon
-                        Icon={<GetestIcon />}
+                      <HeadingWithIcon
+                        icon={<GetestIcon />}
                         title={
                           siteText.gemeente_positief_geteste_personen
                             .titel_sidebar
@@ -203,8 +203,8 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                         `/gemeente/[code]/ziekenhuis-opnames`
                       )}
                     >
-                      <TitleWithIcon
-                        Icon={<Ziekenhuis />}
+                      <HeadingWithIcon
+                        icon={<Ziekenhuis />}
                         title={
                           siteText.gemeente_ziekenhuisopnames_per_dag
                             .titel_sidebar
@@ -232,8 +232,8 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                         onClick={blur}
                         className={getClassName(`/gemeente/[code]/rioolwater`)}
                       >
-                        <TitleWithIcon
-                          Icon={<RioolwaterMonitoring />}
+                        <HeadingWithIcon
+                          icon={<RioolwaterMonitoring />}
                           title={
                             siteText.gemeente_rioolwater_metingen.titel_sidebar
                           }
@@ -245,8 +245,8 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                     </Link>
                   ) : (
                     <div className="metric-not-available">
-                      <TitleWithIcon
-                        Icon={<RioolwaterMonitoring />}
+                      <HeadingWithIcon
+                        icon={<RioolwaterMonitoring />}
                         title={
                           siteText.gemeente_rioolwater_metingen.titel_sidebar
                         }
