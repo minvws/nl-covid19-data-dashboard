@@ -9,7 +9,7 @@ describe('Safety region page: PositiefGetesteMensen', () => {
   const data = loadFixture<Regionaal>('VR13.json');
 
   it('should use total_reported_increase_per_region for Results per Region', () => {
-    const { getByText } = render(
+    const { container } = render(
       <PositiefGetesteMensen
         data={data as Regionaal}
         lastGenerated="test"
@@ -17,12 +17,16 @@ describe('Safety region page: PositiefGetesteMensen', () => {
       />
     );
 
+    const elm = container.querySelector(
+      '[data-cy="total_reported_increase_per_region"]'
+    );
+
     const value =
       formatNumber(
         data?.results_per_region.last_value.total_reported_increase_per_region
       ) ?? '';
 
-    getByText(value.toString());
+    expect(elm?.textContent).toEqual(value);
   });
 
   it('should show a signaalwaarde', () => {

@@ -9,7 +9,7 @@ describe('National page: PositiefGetesteMensen', () => {
   const data = loadFixture<National>('NL.json');
 
   it('should use infected_daily_total for Results per Region', () => {
-    const { getByText } = render(
+    const { container } = render(
       <PositiefGetesteMensen
         data={data as National}
         lastGenerated="test"
@@ -17,12 +17,14 @@ describe('National page: PositiefGetesteMensen', () => {
       />
     );
 
+    const elm = container.querySelector('[data-cy="infected_daily_total"]');
+
     const value =
       formatNumber(
         data?.infected_people_total.last_value.infected_daily_total
       ) ?? '';
 
-    getByText(value);
+    expect(elm?.textContent).toEqual(value);
   });
 
   it('should show a signaalwaarde', () => {
