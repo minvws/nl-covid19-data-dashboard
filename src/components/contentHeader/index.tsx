@@ -21,10 +21,7 @@ export function ContentHeader(props: IContentHeaderProps) {
 
       <div className={styles.text}>
         <p>
-          {subtitle}{' '}
-          {reference.text && reference.href && (
-            <a href={reference.href}>{reference.text}</a>
-          )}
+          {subtitle} <a href={reference.href}>{reference.text}</a>
         </p>
 
         <div>
