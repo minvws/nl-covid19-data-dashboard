@@ -79,15 +79,27 @@ const mediaQueries = {
 
 type TMediaQueries = typeof mediaQueries;
 
-const colors = {
+export const colors = {
   blue: '#01689b',
-  blueDark: '#144276',
   icon: '#01689b',
   button: '#01689b',
   shadow: '#e5e5e5',
   lightGray: '#dfdfdf',
   annotation: '#595959',
+  notification: '#cd005a',
+
+  data: {
+    primary: '#007BC7',
+    secondary: '#154273',
+    fill: 'rgba(0, 123, 199, .05)',
+    scale: {
+      blue: ['#8FCAE7', '#5BADDB', '#248FCF', '#0070BB', '#00529D', '#003580'],
+      magenta: ['#F6B4D1', '#D3719C', '#9E3A66', '#64032D', '#000000'],
+    },
+  },
 };
+
+export type ThemeColors = typeof colors;
 
 const radii = [0, 5, 10];
 
@@ -96,7 +108,9 @@ const shadows = {
 };
 
 type TDashboardTheme = ScaleThemeProperties &
-  ThemeBreakPoints & { mediaQueries: TMediaQueries };
+  ThemeBreakPoints & { mediaQueries: TMediaQueries } & {
+    colors: ThemeColors;
+  };
 
 const theme: TDashboardTheme = {
   fonts,

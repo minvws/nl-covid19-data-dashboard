@@ -22,6 +22,7 @@ const Trend = styled.span(
       color: '#0090DB',
       mr: 1,
       width: '12px',
+      height: '12px',
       verticalAlign: 'middle',
     },
   })

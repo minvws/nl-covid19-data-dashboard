@@ -2,12 +2,12 @@ import Ziektegolf from '~/assets/ziektegolf.svg';
 import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
+import { Legenda } from '~/components-styled/legenda';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { AreaChart } from '~/components/charts/index';
 import { ContentHeader } from '~/components/contentHeader';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
-import { Legenda } from '~/components/legenda';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
@@ -30,7 +30,7 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
       <ContentHeader
         category={siteText.nationaal_layout.headings.besmettingen}
         title={text.title}
-        Icon={Ziektegolf}
+        icon={<Ziektegolf />}
         subtitle={text.toelichting_pagina}
         metadata={{
           datumsText: text.datums,
@@ -80,10 +80,20 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
                 rangeLegendLabel={text.rangeLegendLabel}
                 lineLegendLabel={text.lineLegendLabel}
               />
-              <Legenda>
-                <li className="blue">{text.legenda_line}</li>
-                <li className="gray square">{text.legenda_marge}</li>
-              </Legenda>
+              <Legenda
+                items={[
+                  {
+                    label: text.legenda_line,
+                    color: 'data.primary',
+                    shape: 'line',
+                  },
+                  {
+                    label: text.legenda_marge,
+                    color: 'data.fill',
+                    shape: 'square',
+                  },
+                ]}
+              />
             </>
           )}
         </ChartTileWithTimeframe>

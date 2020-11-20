@@ -1,3 +1,4 @@
+import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import Afname from '~/assets/afname.svg';
 import Getest from '~/assets/test.svg';
@@ -6,6 +7,8 @@ import { Box } from '~/components-styled/base';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
+import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { MultipleLineChartTile } from '~/components-styled/multiple-line-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
 import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/use-safety-region-legenda-data';
@@ -25,13 +28,12 @@ import {
   getSafetyRegionPaths,
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
+import { colors } from '~/style/theme';
 import { ResultsPerRegion } from '~/types/data.d';
+import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { LineChartTile } from '~/components-styled/line-chart-tile';
-import { formatDateFromSeconds } from '~/utils/formatDate';
-import { MultipleLineChartTile } from '~/components-styled/multiple-line-chart-tile';
 
 const text = siteText.veiligheidsregio_positief_geteste_personen;
 const ggdText = siteText.veiligheidsregio_positief_geteste_personen_ggd;
@@ -64,7 +66,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
         title={replaceVariablesInText(text.titel, {
           safetyRegion: safetyRegionName,
         })}
-        Icon={Getest}
+        icon={<Getest />}
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
@@ -105,6 +107,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           <Box>
             <Heading level={4} fontSize={'1.2em'} mt={'1.5em'} mb={0}>
               <span
+                css={css({ '& > span': { color: 'data.primary' } })}
                 dangerouslySetInnerHTML={{
                   __html: replaceKpisInText(ggdText.summary_title, [
                     {
@@ -112,11 +115,10 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
                       value: `${formatPercentage(
                         ggdData.infected_percentage
                       )}%`,
-                      className: 'text-blue',
                     },
                   ]),
                 }}
-              ></span>
+              />
             </Heading>
             <Text mt={0} lineHeight={1}>
               <Anchor name="ggd" text={ggdText.summary_link_cta} />
@@ -169,7 +171,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           safetyRegion: safetyRegionName,
         })}
         id="ggd"
-        Icon={Afname}
+        icon={<Afname />}
         subtitle={ggdText.toelichting}
         metadata={{
           datumsText: ggdText.datums,
@@ -205,7 +207,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           <Text>{ggdText.positief_getest_week_uitleg}</Text>
           <Text>
             <strong
-              className="additional-kpi"
+              css={css({ '& > span': { color: 'data.primary' } })}
               dangerouslySetInnerHTML={{
                 __html: replaceKpisInText(
                   ggdText.positief_getest_getest_week_uitleg,
@@ -213,12 +215,10 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
                     {
                       name: 'numerator',
                       value: formatNumber(ggdData.infected),
-                      className: 'text-blue',
                     },
                     {
                       name: 'denominator',
                       value: formatNumber(ggdData.tested_total),
-                      className: 'text-blue',
                     },
                   ]
                 ),
@@ -281,11 +281,11 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
         ]}
         linesConfig={[
           {
-            color: '#154273',
+            color: colors.data.secondary,
             legendLabel: ggdText.linechart_totaltests_legend_label,
           },
           {
-            color: '#3391CC',
+            color: colors.data.primary,
             legendLabel: ggdText.linechart_positivetests_legend_label,
           },
         ]}

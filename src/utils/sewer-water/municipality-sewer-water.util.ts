@@ -6,6 +6,7 @@ import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 import siteText from '~/locale/index';
 import { assert } from '../assert';
+import { colors } from '~/style/theme';
 
 /**
  * @TODO these helpers for VR and GM should be merged into one using generics.
@@ -193,7 +194,7 @@ export function getSewerWaterBarChartData(
     data: [
       {
         y: data.sewer.last_value.average,
-        color: '#3391CC',
+        color: colors.data.primary,
         label: data.sewer.last_value
           ? `${formatDateFromSeconds(
               data.sewer.last_value.week_unix,
@@ -216,4 +217,29 @@ export function getSewerWaterBarChartData(
       ),
     ],
   };
+}
+
+export function getSewerWaterScatterPlotData(data: Municipal) {
+  const values = data.sewer_per_installation?.values.flatMap(
+    (value) => value.values
+  );
+
+  /**
+   * All individual `value.values`-arrays are already sorted correctly, but
+   * due to merging them into one array the sort might be off.
+   */
+  values?.sort((a, b) => a.date_measurement_unix - b.date_measurement_unix);
+
+  return values;
+}
+
+export function getInstallationNames(data: Municipal): string[] {
+  return (
+    (data.sewer_per_installation?.values || [])
+      .flatMap((value) => value.values)
+      .map((value) => value.rwzi_awzi_name)
+      // deduplicate installation names
+      .filter((value, index, arr) => arr.indexOf(value) === index)
+      .sort((a, b) => a.localeCompare(b))
+  );
 }

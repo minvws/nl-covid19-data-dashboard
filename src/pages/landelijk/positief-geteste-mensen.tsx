@@ -1,13 +1,17 @@
+import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Afname from '~/assets/afname.svg';
 import Getest from '~/assets/test.svg';
 import { Anchor } from '~/components-styled/anchor';
 import { Box } from '~/components-styled/base';
+import { RegionControlOption } from '~/components-styled/chart-region-controls';
+import { ChartTile } from '~/components-styled/chart-tile';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { MultipleLineChartTile } from '~/components-styled/multiple-line-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
 import { BarChart } from '~/components/charts/index';
@@ -26,17 +30,15 @@ import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
+import { colors } from '~/style/theme';
 import {
   InfectedPeopleDeltaNormalized,
   IntakeShareAgeGroups,
   NationalInfectedPeopleTotal,
 } from '~/types/data.d';
+import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
-import { formatDateFromSeconds } from '~/utils/formatDate';
-import { MultipleLineChartTile } from '~/components-styled/multiple-line-chart-tile';
-import { RegionControlOption } from '~/components-styled/chart-region-controls';
-import { ChartTile } from '~/components-styled/chart-tile';
 
 const text = siteText.positief_geteste_personen;
 const ggdText = siteText.positief_geteste_personen_ggd;
@@ -73,7 +75,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
       <ContentHeader
         category={siteText.nationaal_layout.headings.besmettingen}
         title={text.titel}
-        Icon={Getest}
+        icon={<Getest />}
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
@@ -113,6 +115,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           <Box>
             <Heading level={4} fontSize={'1.2em'} mt={'1.5em'} mb={0}>
               <span
+                css={css({ '& > span': { color: 'data.primary' } })}
                 dangerouslySetInnerHTML={{
                   __html: replaceKpisInText(ggdText.summary_title, [
                     {
@@ -120,11 +123,10 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
                       value: `${formatPercentage(
                         ggdLastValue.infected_percentage
                       )}%`,
-                      className: 'text-blue',
                     },
                   ]),
                 }}
-              ></span>
+              />
             </Heading>
             <Text mt={0} lineHeight={1}>
               <Anchor name="ggd" text={ggdText.summary_link_cta} />
@@ -218,7 +220,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
       <ContentHeader_weekRangeHack
         title={ggdText.titel}
         id="ggd"
-        Icon={Afname}
+        icon={<Afname />}
         subtitle={ggdText.toelichting}
         metadata={{
           datumsText: ggdText.datums,
@@ -254,7 +256,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           <Text>{ggdText.positief_getest_week_uitleg}</Text>
           <Text>
             <strong
-              className="additional-kpi"
+              css={css({ '& > span': { color: 'data.primary' } })}
               dangerouslySetInnerHTML={{
                 __html: replaceKpisInText(
                   ggdText.positief_getest_getest_week_uitleg,
@@ -262,12 +264,10 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
                     {
                       name: 'numerator',
                       value: formatNumber(ggdLastValue.infected),
-                      className: 'text-blue',
                     },
                     {
                       name: 'denominator',
                       value: formatNumber(ggdLastValue.tested_total),
-                      className: 'text-blue',
                     },
                   ]
                 ),
@@ -329,11 +329,11 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         ]}
         linesConfig={[
           {
-            color: '#154273',
+            color: colors.data.secondary,
             legendLabel: ggdText.linechart_totaltests_legend_label,
           },
           {
-            color: '#3391CC',
+            color: colors.data.primary,
             legendLabel: ggdText.linechart_positivetests_legend_label,
           },
         ]}

@@ -1,4 +1,4 @@
-import { MetricKPI } from '~/components/metricKPI';
+import { MetricKPI } from '~/components-styled/metric-kpi';
 import siteText from '~/locale/index';
 import { InfectiousPeopleLastKnownAverageValue } from '~/types/data.d';
 import { formatDateFromSeconds } from '~/utils/formatDate';
@@ -22,8 +22,7 @@ export function InfectiousPeopleMetric(props: {
   return (
     <MetricKPI
       title={title}
-      value={data.infectious_avg}
-      format={formatNumber}
+      absolute={formatNumber(data.infectious_avg)}
       description={description}
     />
   );

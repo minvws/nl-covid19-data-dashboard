@@ -1,7 +1,10 @@
 import { useRouter } from 'next/router';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
+import { KpiTile } from '~/components-styled/kpi-tile';
+import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/use-safety-region-legenda-data';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
@@ -14,9 +17,6 @@ import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
-import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { KpiTile } from '~/components-styled/kpi-tile';
-import { KpiValue } from '~/components-styled/kpi-value';
 
 const text = siteText.rioolwater_metingen;
 
@@ -34,7 +34,7 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
       <ContentHeader_weekRangeHack
         category={siteText.nationaal_layout.headings.vroege_signalen}
         title={text.titel}
-        Icon={RioolwaterMonitoring}
+        icon={<RioolwaterMonitoring />}
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
