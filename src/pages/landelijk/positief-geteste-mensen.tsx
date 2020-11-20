@@ -110,16 +110,9 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
             absolute={
               data.infected_people_total.last_value.infected_daily_total
             }
-            difference={{
-              difference:
-                data.difference.infected_people_total__infected_daily_total,
-              /**
-               * @TODO propose to add a duplicate of this timestamp in the
-               * difference data to avoid boilerplate and possible errors
-               */
-              lastDateOfReport:
-                data.infected_people_total.last_value.date_of_report_unix,
-            }}
+            difference={
+              data.difference.infected_people_total__infected_daily_total
+            }
           />
           <Text>{text.kpi_toelichting}</Text>
           <Box>

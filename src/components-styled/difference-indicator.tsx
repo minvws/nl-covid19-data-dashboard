@@ -18,16 +18,58 @@ import { DifferenceDecimal, DifferenceInteger } from '~/types/data';
 const text = siteText.toe_en_afname;
 const DAY_IN_SECONDS = 24 * 60 * 60;
 interface DifferenceIndicatorProps {
-  difference: DifferenceDecimal | DifferenceInteger;
-  lastDateOfReport: number;
+  value: DifferenceDecimal | DifferenceInteger;
+  isContextSidebar?: boolean;
 }
 
 export function DifferenceIndicator(props: DifferenceIndicatorProps) {
-  const { difference, old_date_of_report_unix } = props.difference;
+  const { isContextSidebar, value } = props;
+
+  return isContextSidebar
+    ? renderSidebarIndicator(value)
+    : renderTileIndicator(value);
+}
+
+function renderSidebarIndicator(value: DifferenceDecimal | DifferenceInteger) {
+  const { difference } = value;
+
+  if (difference > 0) {
+    return (
+      <Container>
+        <Span color="red">
+          <IconUp />
+        </Span>
+      </Container>
+    );
+  }
+
+  if (difference < 0) {
+    <Container>
+      <Span color="green">
+        <IconDown />
+      </Span>
+    </Container>;
+  }
+
+  return (
+    <Container>
+      <Span color="lightGray">
+        <IconGelijk />
+      </Span>
+    </Container>
+  );
+}
+
+function renderTileIndicator(value: DifferenceDecimal | DifferenceInteger) {
+  const {
+    difference,
+    old_date_of_report_unix,
+    new_date_of_report_unix,
+  } = value;
 
   const timespanText = getTimespanText(
     old_date_of_report_unix,
-    props.lastDateOfReport
+    new_date_of_report_unix
   );
 
   if (difference > 0) {
@@ -60,9 +102,6 @@ export function DifferenceIndicator(props: DifferenceIndicatorProps) {
     </Container>;
   }
 
-  /**
-   * @TODO discuss what to do for equal values. Maybe nothing
-   */
   return (
     <Container>
       <Span color="lightGray">
@@ -82,9 +121,7 @@ const Container = styled.div(
     whiteSpace: 'nowrap',
     display: 'inline-block',
     fontSize: 1,
-    lineHeight: 2,
     position: 'relative',
-
     svg: {
       mr: 1,
       width: '1em',

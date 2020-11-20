@@ -10,10 +10,7 @@ interface KpiValueProps {
   absolute?: number;
   percentage?: number;
   valueAnnotation?: string;
-  difference?: {
-    lastDateOfReport: number;
-    difference: DifferenceDecimal | DifferenceInteger;
-  };
+  difference?: DifferenceDecimal | DifferenceInteger;
 }
 
 /**
@@ -56,7 +53,7 @@ export function KpiValue({
           {formatNumber(absolute)}
         </StyledValue>
       )}
-      {difference && <DifferenceIndicator {...difference} />}
+      {difference && <DifferenceIndicator value={difference} />}
       {valueAnnotation && <ValueAnnotation>{valueAnnotation}</ValueAnnotation>}
     </>
   );
