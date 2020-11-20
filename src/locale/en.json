@@ -320,7 +320,7 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
     },
-    "titel": "Nursing homes - number of infected locations",
+    "titel": "Number of infected locations",
     "pagina_toelichting": "This number is an estimation of the number of new nursing home locations where there is at least one confirmed case.\n\nThe calculation method has been changed on the 29th of September. Please also see the data explanation section.",
     "barscale_titel": "Number of new locations per day",
     "barscale_toelichting": "Number of new locations where there is at least one confirmed case. A nursing home is counted as a 'new location; when there have not been any confirmed cases for at least 28 days, which is twice the incubation period.",
@@ -338,7 +338,7 @@
       "title": "Infected nursing homes | Dashboard Coronavirus | Government.nl",
       "description": "National number of nursing homes with at least one confirmed case of COVID-19."
     },
-    "titel_sidebar": "Nursing home care",
+    "titel_sidebar": "Number of infected nursing home locations",
     "titel_kpi": "Number of infected locations"
   },
   "verpleeghuis_positief_geteste_personen": {
@@ -347,7 +347,7 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
     },
-    "titel": "Nursing homes - number of confirmed cases",
+    "titel": "Number of confirmed cases",
     "barscale_titel": "Number of confirmed cases in nursing homes per day",
     "extra_uitleg": "Number of new confirmed cases in nursing homes that have been reported per day.",
     "pagina_toelichting": "Number of new confirmed cases in nursing homes that have been reported per day. This number is an estimation of the number confirmed cases in nursing home inhabitants.\n\nThe calculation method has been changed on the 29th of September. Please also see the data explanation section.",
@@ -372,7 +372,7 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
     },
-    "titel": "Nursing homes - mortality",
+    "titel": "Mortality",
     "pagina_toelichting": "Daily number of deceased residents with confirmed cases of COVID-19 in nursing homes.",
     "barscale_titel": "Number of deceased residents",
     "barscale_screenreader_text": "{{value}} deceased residents",
@@ -418,8 +418,8 @@
     "map_titel": "Average number of virus particles per 100.000 inhabitants",
     "map_toelichting": "This map shows the average number of virus particles per 100.000 inhabitants, per safety region.",
     "legenda_titel": "",
-    "map_tooltip_value": "{{value}} x100 billion",
-    "map_tooltip": "per 100.000 inhabitants"
+    "map_tooltip": "{{value}} x100 billion virus particles per 100.000 inhabitants",
+    "map_tooltip_value": ""
   },
   "notfound_titel": {
     "text": "Something went wrong"
@@ -435,7 +435,7 @@
     "text": ""
   },
   "over_beschrijving": {
-    "text": "The coronavirus dashboard was developed by the Ministry of Health, Welfare and Sport. It gives up-to-date information about developments surrounding coronavirus in the Netherlands. This information can help us pick up early signs that the rate of infection is increasing, allowing us to act in time to stop the virus from spreading further.\n\n###Development\nThe dashboard is still under development, so some features aren’t yet available. As we continue to develop the website, we look carefully to see that the information is clear and understandable for everyone, and that it can be properly viewed on any device. The dashboard is available in Dutch and English. \n\n###Contact\nIf you have suggestions for improving the website, you can email them to coronadashboard@minvws.nl. We read every email that comes in and do our best to reply to each one promptly. When it’s busy, this may take us a bit longer. In many cases, the answers to many questions are already provided on the [Explanation of the data presented](https://coronadashboard.government.nl/veelgestelde-vragen) and [Frequently asked questions](https://coronadashboard.rijksoverheid.nl/veelgestelde-vragen) pages.\n\nIT developers can share their feedback on Github. Front-end-related questions and suggestions can be submitted [here](https://github.com/minvws/nl-covid19-data-dashboard). Questions about the underlying calculations can be submitted [here](https://github.com/minvws/nl-covid19-data-backend-processing). \n\nIf you find that the dashboard has any technical vulnerabilities, we’d like to know. We work together with the National Cyber Security Centre (NCSC) in this area. Please notify them of what you’ve found as soon as possible using their [form](https://www.ncsc.nl/contact/kwetsbaarheid-melden/cvd-meldingen-formulier) before making the issue publicly known. Together with the NCSC we will address the issue and resolve it as quickly as possible. Thank you for your assistance!\n\nAnswers to many questions about coronavirus and COVID-19 are available on [government.nl](https://www.government.nl/topics/coronavirus-covid-19). If you cannot find the answer you are looking for there, you can call the public information number: 0800 1351 (between 8.00 and 20.00). From outside the Netherlands, call +31 20 205 1351."
+    "text": "The coronavirus dashboard was developed by the Ministry of Health, Welfare and Sport. It gives up-to-date information about developments surrounding coronavirus in the Netherlands. This information can help us pick up early signs that the rate of infection is increasing, allowing us to act in time to stop the virus from spreading further.\n\n### Development\n\nThe dashboard is still under development, so some features aren’t yet available. As we continue to develop the website, we look carefully to see that the information is clear and understandable for everyone, and that it can be properly viewed on any device. The dashboard is available in Dutch and English. \n\n### Contact\n\nIf you have suggestions for improving the website, you can email them to coronadashboard@minvws.nl. We read every email that comes in and do our best to reply to each one promptly. When it’s busy, this may take us a bit longer. In many cases, the answers to many questions are already provided on the [Explanation of the data presented](https://coronadashboard.government.nl/veelgestelde-vragen) and [Frequently asked questions](https://coronadashboard.rijksoverheid.nl/veelgestelde-vragen) pages.\n\nIT developers can share their feedback on Github. Front-end-related questions and suggestions can be submitted [here](https://github.com/minvws/nl-covid19-data-dashboard). Questions about the underlying calculations can be submitted [here](https://github.com/minvws/nl-covid19-data-backend-processing). \n\nIf you find that the dashboard has any technical vulnerabilities, we’d like to know. We work together with the National Cyber Security Centre (NCSC) in this area. Please notify them of what you’ve found as soon as possible using their [form](https://www.ncsc.nl/contact/kwetsbaarheid-melden/cvd-meldingen-formulier) before making the issue publicly known. Together with the NCSC we will address the issue and resolve it as quickly as possible. Thank you for your assistance!\n\nAnswers to many questions about coronavirus and COVID-19 are available on [government.nl](https://www.government.nl/topics/coronavirus-covid-19). If you cannot find the answer you are looking for there, you can call the public information number: 0800 1351 (between 8.00 and 20.00). From outside the Netherlands, call +31 20 205 1351."
   },
   "over_veelgestelde_vragen": {
     "text": "Frequently asked questions",
@@ -665,21 +665,23 @@
       "algemeen": "General",
       "besmettingen": "Infections",
       "ziekenhuizen": "Hospitals",
-      "kwetsbare_groepen": "Vulnerable groups",
+      "verpleeghuizen": "Nursing homes",
       "vroege_signalen": "Early indicators",
-      "gedrag": "Behaviour"
+      "gedrag": "Behaviour",
+      "kwetsbare_groepen": ""
     }
   },
   "veiligheidsregio_layout": {
     "headings": {
       "medisch": "Medical indicators",
       "overig": "Other indicators",
-      "kwetsbare_groepen": "Vulnerable groups",
+      "verpleeghuis": "Nursing homes",
       "besmettingen": "Infections",
       "ziekenhuizen": "Hospitals",
       "verpleeghuizen": "Nursing homes",
       "vroege_signalen": "Early indicators",
-      "gedrag": "Behaviour"
+      "gedrag": "Behaviour",
+      "kwetsbare_groepen": ""
     }
   },
   "veiligheidsregio_metadata": {
@@ -1004,7 +1006,7 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
     },
-    "titel": "Nursing homes - Mortality in {{safetyRegion}}",
+    "titel": "Mortality in {{safetyRegion}}",
     "pagina_toelichting": "Daily number of deceased residents with confirmed cases of COVID-19 in nursing homes.",
     "barscale_titel": "Deceased nursing home residents",
     "barscale_screenreader_text": "{{value}} deceased residents",
@@ -1024,7 +1026,7 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
     },
-    "titel": "Nursing homes - Total number of infected locations",
+    "titel": "Total number of infected locations",
     "pagina_toelichting": "This number is an estimation of the number of new nursing home locations where there is at least one confirmed case.\n\nThe calculation method has been changed on the 29th of September. Please also see the data explanation section.",
     "barscale_titel": "Number of new locations per day",
     "barscale_toelichting": "Number of new locations where there is at least one confirmed case. A nursing home is counted as a 'new location; when there have not been any confirmed cases for at least 28 days, which is twice the incubation period.",
@@ -1044,7 +1046,7 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
     },
-    "titel": "Nursing homes - Confirmed cases in {{safetyRegion}}",
+    "titel": "Confirmed cases in {{safetyRegion}}",
     "barscale_titel": "Number of confirmed cases in nursing homes per day",
     "extra_uitleg": "Number of new confirmed cases in nursing homes that have been reported per day.",
     "pagina_toelichting": "Number of confirmed cases in nursing homes per day in {{safetyRegion}}. This number is an estimation of the number confirmed cases in nursing home inhabitants.\n\nThe calculation method has been changed on the 29th of September. Please also see the data explanation section.",

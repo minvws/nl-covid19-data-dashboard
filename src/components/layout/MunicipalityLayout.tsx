@@ -90,12 +90,9 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
 
   function handleMunicipalitySelect(region: IMunicipality) {
     if (isLargeScreen) {
-      router.push(
-        '/gemeente/[code]/positief-geteste-mensen',
-        `/gemeente/${region.gemcode}/positief-geteste-mensen`
-      );
+      router.push(`/gemeente/${region.gemcode}/positief-geteste-mensen`);
     } else {
-      router.push('/gemeente/[code]', `/gemeente/${region.gemcode}`);
+      router.push(`/gemeente/${region.gemcode}`);
     }
   }
 
@@ -131,7 +128,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
             : 'has-menu-closed'
         }`}
       >
-        <Link href="/gemeente/[code]" as={`/gemeente/${code}`}>
+        <Link href={`/gemeente/${code}`}>
           <a className="back-button" onClick={openMenu}>
             <Arrow />
             {siteText.nav.terug_naar_alle_cijfers}
@@ -152,8 +149,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                   <p>
                     {siteText.common.veiligheidsregio_label}{' '}
                     <Link
-                      href="/veiligheidsregio/[code]/positief-geteste-mensen"
-                      as={`/veiligheidsregio/${safetyRegion.code}/positief-geteste-mensen`}
+                      href={`/veiligheidsregio/${safetyRegion.code}/positief-geteste-mensen`}
                     >
                       <a onClick={blur}>{safetyRegion.name}</a>
                     </Link>
@@ -163,10 +159,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
               <h2>{siteText.gemeente_layout.headings.besmettingen}</h2>
               <ul>
                 <li>
-                  <Link
-                    href="/gemeente/[code]/positief-geteste-mensen"
-                    as={`/gemeente/${code}/positief-geteste-mensen`}
-                  >
+                  <Link href={`/gemeente/${code}/positief-geteste-mensen`}>
                     <a
                       onClick={blur}
                       className={getClassName(
@@ -193,10 +186,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
               <h2>{siteText.gemeente_layout.headings.ziekenhuizen}</h2>
               <ul>
                 <li>
-                  <Link
-                    href="/gemeente/[code]/ziekenhuis-opnames"
-                    as={`/gemeente/${code}/ziekenhuis-opnames`}
-                  >
+                  <Link href={`/gemeente/${code}/ziekenhuis-opnames`}>
                     <a
                       onClick={blur}
                       className={getClassName(
@@ -224,10 +214,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
               <ul>
                 <li>
                   {sewerWaterBarScaleData ? (
-                    <Link
-                      href="/gemeente/[code]/rioolwater"
-                      as={`/gemeente/${code}/rioolwater`}
-                    >
+                    <Link href={`/gemeente/${code}/rioolwater`}>
                       <a
                         onClick={blur}
                         className={getClassName(`/gemeente/[code]/rioolwater`)}
@@ -264,7 +251,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
 
         <section className="municipality-content">{children}</section>
 
-        <Link href="/gemeente/[code]" as={`/gemeente/${code}`}>
+        <Link href={`/gemeente/${code}`}>
           <a className="back-button back-button-footer" onClick={openMenu}>
             <Arrow />
             {siteText.nav.terug_naar_alle_cijfers}

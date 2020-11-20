@@ -50,7 +50,6 @@ const Cell = styled.td((x) =>
     borderBottomColor: 'lightGrey',
     px: 3,
     py: 2,
-    whiteSpace: ['nowrap', null, 'normal'],
   })
 );
 
@@ -147,7 +146,7 @@ export function BehaviorTableTile({
       <p>{introduction[behaviorType]}</p>
 
       <div css={css({ overflow: 'auto' })}>
-        <table css={css({ width: '100%' })}>
+        <table css={css({ width: '100%', borderCollapse: 'collapse' })}>
           <thead>
             <tr>
               <HeaderCell colSpan={2}>
@@ -155,9 +154,20 @@ export function BehaviorTableTile({
               </HeaderCell>
               <th />
               <HeaderCell>
-                {commonText.basisregels.header_basisregel}
+                <span
+                  css={css({
+                    display: 'inline-block',
+                    minWidth: [180, 200, 250, 180],
+                  })}
+                >
+                  {commonText.basisregels.header_basisregel}
+                </span>
               </HeaderCell>
-              <HeaderCell>{commonText.basisregels.header_trend}</HeaderCell>
+              <HeaderCell>
+                <span css={css({ display: 'inline-block', minWidth: 100 })}>
+                  {commonText.basisregels.header_trend}
+                </span>
+              </HeaderCell>
             </tr>
           </thead>
           <tbody>
@@ -181,9 +191,7 @@ export function BehaviorTableTile({
                     <BehaviorIcon name={behavior.id} />
                   </Box>
                 </Cell>
-                <Cell>
-                  <Box minWidth={220}>{behavior.description}</Box>
-                </Cell>
+                <Cell>{behavior.description}</Cell>
                 <Cell>
                   <BehaviorTrend trend={behavior.trend} />
                 </Cell>
