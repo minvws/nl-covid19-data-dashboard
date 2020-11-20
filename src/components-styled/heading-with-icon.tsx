@@ -1,5 +1,5 @@
 import css from '@styled-system/css';
-import React, { useMemo } from 'react';
+import React from 'react';
 import { Box } from './base';
 import { Heading } from './typography';
 
@@ -13,8 +13,8 @@ interface IProps {
 export function HeadingWithIcon(props: IProps) {
   const { icon, title, subtitle, headingLevel = 3 } = props;
 
-  const cssProps = useMemo(() => {
-    return headingLevel === 3
+  const cssProps =
+    headingLevel === 3
       ? {
           width: '2.5rem',
           height: '2.5rem',
@@ -25,7 +25,6 @@ export function HeadingWithIcon(props: IProps) {
           height: '4rem',
           '& svg': { width: '4rem', height: '4rem' },
         };
-  }, [headingLevel]);
 
   return (
     <Box
