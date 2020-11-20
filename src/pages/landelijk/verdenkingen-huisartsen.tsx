@@ -1,16 +1,17 @@
 import Arts from '~/assets/arts.svg';
-import { FCWithLayout } from '~/components/layout';
+import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
+import { KpiTile } from '~/components-styled/kpi-tile';
+import { KpiValue } from '~/components-styled/kpi-value';
+import { TwoKpiSection } from '~/components-styled/two-kpi-section';
+import { Text } from '~/components-styled/typography';
 import { ContentHeader } from '~/components/contentHeader';
+import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
-import { LineChart } from '~/components/lineChart/lineChartWithWeekTooltip';
+import { LineChartWithWeekTooltip } from '~/components/lineChart/lineChartWithWeekTooltip';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
-import {
-  NationalHuisartsVerdenkingen,
-  NationalHuisartsVerdenkingenValue,
-} from '~/types/data.d';
-import { formatNumber } from '~/utils/formatNumber';
+import { NationalHuisartsVerdenkingen } from '~/types/data.d';
 
 const text = siteText.verdenkingen_huisartsen;
 
@@ -30,49 +31,62 @@ const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
         description={text.metadata.description}
       />
       <ContentHeader
-        category={siteText.gemeente_layout.headings.overig}
+        category={siteText.nationaal_layout.headings.vroege_signalen}
         title={text.titel}
-        Icon={Arts}
+        icon={<Arts />}
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: data?.last_value?.week_unix,
-          dateInsertedUnix: data?.last_value?.date_of_insertion_unix,
+          dateUnix: data.last_value.week_unix,
+          dateInsertedUnix: data.last_value.date_of_insertion_unix,
           dataSource: text.bron,
         }}
       />
 
-      <div className="layout-two-column">
-        <article className="metric-article column-item">
-          <h3>{text.kpi_titel}</h3>
-          <p className="text-blue kpi">{formatNumber(total)}</p>
-          <p>{text.barscale_toelichting}</p>
-        </article>
-
-        <article className="metric-article column-item">
-          <h3>{text.normalized_kpi_titel}</h3>
-          <p className="text-blue kpi">{formatNumber(normalized)}</p>
-          <p>{text.normalized_kpi_toelichting}</p>
-        </article>
-      </div>
+      <TwoKpiSection>
+        <KpiTile
+          title={text.kpi_titel}
+          metadata={{
+            date: data.last_value.week_unix,
+            source: text.bron,
+          }}
+        >
+          <KpiValue absolute={total} />
+          <Text>{text.barscale_toelichting}</Text>
+        </KpiTile>
+        <KpiTile
+          title={text.normalized_kpi_titel}
+          metadata={{
+            date: data.last_value.week_unix,
+            source: text.bron,
+          }}
+        >
+          <KpiValue absolute={normalized} />
+          <Text>{text.normalized_kpi_toelichting}</Text>
+        </KpiTile>
+      </TwoKpiSection>
 
       {data && (
-        <article className="metric-article">
-          <LineChart
-            title={text.linechart_titel}
-            timeframeOptions={['all', '5weeks']}
-            values={data.values.map(
-              (value: NationalHuisartsVerdenkingenValue) => ({
+        <ChartTileWithTimeframe
+          title={text.linechart_titel}
+          metadata={{ source: text.bron }}
+          timeframeOptions={['all', '5weeks']}
+        >
+          {(timeframe) => (
+            <LineChartWithWeekTooltip
+              title={text.linechart_titel}
+              timeframe={timeframe}
+              values={data.values.map((value) => ({
                 value: value.incidentie,
                 date: value.week_unix,
                 week: {
                   start: value.week_start_unix,
                   end: value.week_end_unix,
                 },
-              })
-            )}
-          />
-        </article>
+              }))}
+            />
+          )}
+        </ChartTileWithTimeframe>
       )}
     </>
   );

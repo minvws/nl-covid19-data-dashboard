@@ -14,6 +14,7 @@ export function TwoKpiSection({ children, ...props }: TwoKpiSectionProps) {
     `TwoKpiSection can only have 1 or 2 children, but received ${childrenCount}`
   );
 
+  const hasTwoChildren = childrenCount === 2;
   const childrenArray = React.Children.toArray(children);
 
   return (
@@ -36,10 +37,14 @@ export function TwoKpiSection({ children, ...props }: TwoKpiSectionProps) {
       mr={{ _: -4, sm: 0 }}
       {...(props as any)}
     >
-      <Box flex="1 1 50%" mr={{ lg: 3 }} mb={{ _: 4, lg: 0 }}>
+      <Box flex={`1 1 ${hasTwoChildren ? 50 : 100}%`} mb={{ _: 4, lg: 0 }}>
         {childrenArray[0]}
       </Box>
-      <Box flex="1 1 50%">{childrenArray[1]}</Box>
+      {hasTwoChildren && (
+        <Box flex="1 1 50%" ml={{ lg: 3 }}>
+          {childrenArray[1]}
+        </Box>
+      )}
     </Box>
   );
 }

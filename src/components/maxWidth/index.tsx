@@ -1,6 +1,10 @@
-import { WithChildren } from '~/types/index';
 import styles from './maxWidth.module.scss';
 
-export function MaxWidth({ children }: WithChildren) {
+interface MaxWidthProps {
+  children: React.ReactNode;
+}
+
+export function MaxWidth(props: MaxWidthProps) {
+  const { children } = props;
   return <div className={styles.maxWidth}>{children}</div>;
 }

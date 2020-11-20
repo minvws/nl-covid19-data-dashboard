@@ -10,7 +10,7 @@ interface IProps {
     href: string;
     text: string;
   };
-  dateUnix?: number;
+  dateUnix: number;
   dateInsertedUnix?: number;
   datumsText: string;
 }
@@ -20,11 +20,9 @@ const text = siteText.common.metadata;
 export function Metadata(props: IProps) {
   const { dataSource, datumsText, dateUnix, dateInsertedUnix } = props;
 
-  if (!dateUnix) return null;
-
-  const dateOfReport = formatDateFromSeconds(dateUnix, 'relative');
+  const dateOfReport = formatDateFromSeconds(dateUnix, 'weekday-medium');
   const dateOfInsertion = dateInsertedUnix
-    ? formatDateFromSeconds(dateInsertedUnix, 'relative')
+    ? formatDateFromSeconds(dateInsertedUnix, 'weekday-medium')
     : undefined;
 
   return (

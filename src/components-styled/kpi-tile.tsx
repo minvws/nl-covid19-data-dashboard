@@ -1,17 +1,15 @@
-import locale from '~/locale/index';
 import { Box, Spacer } from './base';
-import { ExternalLink } from './external-link';
-import { Text, Heading } from './typography';
+import { Heading } from './typography';
 import { Tile } from './layout';
+import { MetadataProps, Metadata } from './metadata';
+import { DataWarning } from '~/components/dataWarning';
 
 interface KpiTileProps {
   title: string;
   description?: string;
   children: React.ReactNode;
-  sourcedFrom?: {
-    text: string;
-    href: string;
-  };
+  metadata: MetadataProps;
+  showDataWarning?: boolean /* TODO: remove this temporary attribute when it is not used anymore */;
 }
 
 /**
@@ -22,29 +20,29 @@ export function KpiTile({
   title,
   description,
   children,
-  sourcedFrom,
+  metadata,
+  showDataWarning,
 }: KpiTileProps) {
   return (
     <Tile height="100%">
+      {showDataWarning && <DataWarning />}
       <Heading level={3}>{title}</Heading>
-      <Box mb={4}>{children}</Box>
+      <Box>{children}</Box>
       {description && (
-        <Text
+        <Box
           as="div"
+          maxWidth="400px"
+          mt={3}
+          fontSize={2}
+          lineHeight={2}
           dangerouslySetInnerHTML={{
             __html: description,
           }}
         />
       )}
-      {sourcedFrom && (
-        <>
-          {/* Using a spacer to push the footer down */}
-          <Spacer m="auto" />
-          <Text as="footer" mt={3}>
-            {locale.common.metadata.source}: <ExternalLink {...sourcedFrom} />
-          </Text>
-        </>
-      )}
+      {/* Using a spacer to push the footer down */}
+      <Spacer m="auto" />
+      <Metadata {...metadata} />
     </Tile>
   );
 }

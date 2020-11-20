@@ -1,16 +1,17 @@
-import Highcharts, { SeriesAreaOptions } from 'highcharts';
+import Highcharts, {
+  SeriesAreaOptions,
+  TooltipFormatterCallbackFunction,
+} from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import React, { useMemo, useState } from 'react';
-import { ChartTimeControls } from '~/components-styled/chart-time-controls';
+import React, { useMemo } from 'react';
+import { colors } from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
-import { getItemFromArray } from '~/utils/getItemFromArray';
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
-import styles from './lineChart.module.scss';
 
 export interface Value {
   date: number;
-  value?: number;
+  value: number;
   week: Week;
 }
 
@@ -19,24 +20,30 @@ export type Week = {
   end: number;
 };
 
-export type LineChartProps = {
+export type LineChartWithWeekProps = {
   values: Value[];
   title: string;
   description?: string;
-  timeframeOptions?: TimeframeOption[];
+  timeframe?: TimeframeOption;
+  formatYAxis?: (y: number) => string;
+  tooltipFormatter?: TooltipFormatterCallbackFunction;
 };
 
-function getOptions(values: Value[]): Highcharts.Options {
+function getOptions(
+  values: Value[],
+  tooltipFormatter?: TooltipFormatterCallbackFunction,
+  formatYAxis?: (y: number) => string
+): Highcharts.Options {
   const hasMultipleValues = values.length > 1;
 
   const series: SeriesAreaOptions[] = [
     {
       type: 'area',
-      data: values.map((x) => [x.date, x.value]),
+      data: values.map((x) => ({ x: x.date, y: x.value, originalData: x })),
       name: '',
       showInLegend: false,
-      color: '#3391CC',
-      fillColor: 'rgba(51, 145, 204, 0.2)',
+      color: colors.data.primary,
+      fillColor: colors.data.fill,
       allowPointSelect: false,
       marker: {
         symbol: 'circle',
@@ -63,7 +70,7 @@ function getOptions(values: Value[]): Highcharts.Options {
       borderWidth: 0,
       colorCount: 10,
       displayErrors: true,
-      height: 175,
+      height: 250,
     },
     legend: {
       itemWidth: 300,
@@ -109,19 +116,21 @@ function getOptions(values: Value[]): Highcharts.Options {
       backgroundColor: '#FFF',
       borderColor: '#01689B',
       borderRadius: 0,
-      formatter: function () {
-        const { start, end } = getItemFromArray(
-          values.map((x) => x.week),
-          this.point.index
-        );
+      formatter:
+        tooltipFormatter ??
+        function () {
+          const { originalData } = (this.point as unknown) as {
+            originalData: Value;
+          };
 
-        return `<strong>${formatDateFromSeconds(
-          start,
-          'short'
-        )} - ${formatDateFromSeconds(end, 'short')}:</strong> ${formatNumber(
-          this.y
-        )}`;
-      },
+          return `<strong>${formatDateFromSeconds(
+            originalData.week.start,
+            'short'
+          )} - ${formatDateFromSeconds(
+            originalData.week.end,
+            'short'
+          )}:</strong> ${formatNumber(this.y)}`;
+        },
     },
     yAxis: {
       min: 0,
@@ -133,7 +142,10 @@ function getOptions(values: Value[]): Highcharts.Options {
         text: null,
       },
       labels: {
-        formatter: function (): string {
+        formatter: function () {
+          if (formatYAxis) {
+            return formatYAxis(this.value);
+          }
           return formatNumber(this.value);
         },
       },
@@ -147,39 +159,20 @@ function getOptions(values: Value[]): Highcharts.Options {
   return options;
 }
 
-export function LineChart({
-  title,
-  description,
+export function LineChartWithWeekTooltip({
   values,
-  timeframeOptions,
-}: LineChartProps) {
-  const [timeframe, setTimeframe] = useState<TimeframeOption>('5weeks');
-
+  formatYAxis,
+  tooltipFormatter,
+  timeframe = '5weeks',
+}: LineChartWithWeekProps) {
   const chartOptions = useMemo(() => {
     const filteredValues = getFilteredValues<Value>(
       values,
       timeframe,
       (value: Value) => value.date * 1000
     );
-    return getOptions(filteredValues);
-  }, [values, timeframe]);
+    return getOptions(filteredValues, tooltipFormatter, formatYAxis);
+  }, [values, timeframe, tooltipFormatter, formatYAxis]);
 
-  return (
-    <section className={styles.root}>
-      <header className={styles.header}>
-        <div className={styles.titleAndDescription}>
-          {title && <h3>{title}</h3>}
-          {description && <p>{description}</p>}
-        </div>
-        <div>
-          <ChartTimeControls
-            timeframe={timeframe}
-            timeframeOptions={timeframeOptions}
-            onChange={setTimeframe}
-          />
-        </div>
-      </header>
-      <HighchartsReact highcharts={Highcharts} options={chartOptions} />
-    </section>
-  );
+  return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;
 }

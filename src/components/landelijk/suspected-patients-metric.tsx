@@ -1,4 +1,4 @@
-import { MetricKPI } from '~/components/metricKPI';
+import { MetricKPI } from '~/components-styled/metric-kpi';
 import siteText from '~/locale/index';
 import { NationalHuisartsVerdenkingenValue } from '~/types/data.d';
 import { formatDateFromSeconds } from '~/utils/formatDate';
@@ -16,17 +16,13 @@ export function SuspectedPatientsMetric(props: {
   if (data === undefined) return null;
 
   const description = replaceVariablesInText(text.dateOfReport, {
-    dateOfReport: formatDateFromSeconds(
-      data.date_of_insertion_unix,
-      'relative'
-    ),
+    dateOfReport: formatDateFromSeconds(data.week_unix, 'medium'),
   });
 
   return (
     <MetricKPI
       title={title}
-      value={Number(data.geschat_aantal)}
-      format={formatNumber}
+      absolute={formatNumber(data.geschat_aantal)}
       description={description}
     />
   );

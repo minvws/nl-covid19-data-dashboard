@@ -18,13 +18,17 @@ const curlyBracketRegex = /\{\{(.+?)\}\}/g;
 
 export function replaceVariablesInText(
   translation?: string | undefined | null,
-  variables?: { [key: string]: string | undefined }
+  variables?: { [key: string]: string | number | undefined }
 ): string {
   if (!translation) return '';
 
   return translation.replace(curlyBracketRegex, (_string, variableName) => {
+    /**
+     * @TODO Why are we replacing variables with empty strings? It feels like
+     * these cases should be reported somewhere.
+     */
     if (!variables) return '';
 
-    return variables[variableName.trim()] ?? '';
+    return (variables[variableName.trim()] ?? '').toString();
   });
 }

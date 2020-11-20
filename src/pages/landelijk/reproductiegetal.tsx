@@ -1,15 +1,16 @@
 import Repro from '~/assets/reproductiegetal.svg';
-import { AreaChart } from '~/components/charts/index';
+import { KpiWithIllustrationTile } from '~/components-styled/kpi-with-illustration-tile';
+import { Legenda } from '~/components-styled/legenda';
+import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { TwoKpiSection } from '~/components-styled/two-kpi-section';
+import { Text } from '~/components-styled/typography';
+import { ContentHeader } from '~/components/contentHeader';
 import { ReproductionIndexBarScale } from '~/components/landelijk/reproduction-index-barscale';
 import { FCWithLayout } from '~/components/layout';
-import { ContentHeader } from '~/components/contentHeader';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
-import { Legenda } from '~/components/legenda';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
-
-import Image from 'next/image';
 
 const text = siteText.reproductiegetal;
 
@@ -25,9 +26,9 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
         description={text.metadata.description}
       />
       <ContentHeader
-        category={siteText.nationaal_layout.headings.medisch}
+        category={siteText.nationaal_layout.headings.besmettingen}
         title={text.titel}
-        Icon={Repro}
+        icon={<Repro />}
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
@@ -38,47 +39,50 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
         }}
       />
 
-      <article className="metric-article layout-two-column">
-        <div className="column-item column-item-extra-margin">
-          <h3>{text.barscale_titel}</h3>
+      <TwoKpiSection>
+        <KpiWithIllustrationTile
+          title={text.barscale_titel}
+          metadata={{
+            date: lastKnownValidData.last_value.date_of_report_unix,
+            source: text.bron,
+          }}
+          illustration={{
+            image: '/images/reproductie-explainer.svg',
+            alt: text.reproductie_explainer_alt,
+            description: text.extra_uitleg,
+          }}
+        >
           <ReproductionIndexBarScale
             data={lastKnownValidData}
             showAxis={true}
           />
-          <p>{text.barscale_toelichting}</p>
-        </div>
-
-        <div className="column-item column-item-extra-margin">
-          <Image
-            src="/images/reproductie-explainer.svg"
-            width="315"
-            height="100"
-            alt={text.reproductie_explainer_alt}
-          />
-          <p>{text.extra_uitleg}</p>
-        </div>
-      </article>
+          <Text>{text.barscale_toelichting}</Text>
+        </KpiWithIllustrationTile>
+      </TwoKpiSection>
 
       {data.reproduction_index.values && (
-        <article className="metric-article">
-          <AreaChart
-            title={text.linechart_titel}
-            data={data.reproduction_index.values.map((value) => ({
-              avg: value.reproduction_index_avg,
-              min: value.reproduction_index_low,
-              max: value.reproduction_index_high,
-              date: value.date_of_report_unix,
-            }))}
-            signaalwaarde={1}
-            rangeLegendLabel={text.rangeLegendLabel}
-            lineLegendLabel={text.lineLegendLabel}
-            timeframeOptions={['all', '5weeks']}
-          />
-          <Legenda>
-            <li className="blue">{text.legenda_r}</li>
-            <li className="gray square">{text.legenda_marge}</li>
-          </Legenda>
-        </article>
+        <LineChartTile
+          metadata={{ source: text.bron }}
+          title={text.linechart_titel}
+          values={data.reproduction_index.values.map((value) => ({
+            value: value.reproduction_index_avg,
+            date: value.date_of_report_unix,
+          }))}
+          signaalwaarde={1}
+          timeframeOptions={['all', '5weeks']}
+          showFill={false}
+          footer={
+            <Legenda
+              items={[
+                {
+                  label: text.legenda_r,
+                  color: 'data.primary',
+                  shape: 'line',
+                },
+              ]}
+            />
+          }
+        />
       )}
     </>
   );

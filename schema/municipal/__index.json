@@ -33,11 +33,11 @@
     "positive_tested_people": {
       "$ref": "positive_tested_people.json"
     },
-    "sewer_measurements": {
-      "$ref": "sewer_measurements.json"
+    "sewer": {
+      "$ref": "sewer.json"
     },
-    "results_per_sewer_installation_per_municipality": {
-      "$ref": "results_per_sewer_installation_per_municipality.json"
+    "sewer_per_installation": {
+      "$ref": "sewer_per_installation.json"
     }
   }
 }

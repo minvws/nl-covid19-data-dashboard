@@ -12,5 +12,5 @@ export const KpiSection = (props: { children: React.ReactNode } & BoxProps) => (
     ml={{ _: -4, sm: 0 }}
     mr={{ _: -4, sm: 0 }}
     {...(props as any)}
-  ></Box>
+  />
 );

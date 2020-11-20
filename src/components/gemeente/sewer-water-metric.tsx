@@ -1,31 +1,30 @@
-import { SewerWaterBarScaleData } from '~/utils/sewer-water/municipality-sewer-water.util';
-import { MetricKPI } from '~/components/metricKPI';
+import { MetricKPI } from '~/components-styled/metric-kpi';
+import siteText from '~/locale/index';
+import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { formatDateFromSeconds } from '~/utils/formatDate';
-
-import siteText from '~/locale/index';
+import { SewerWaterBarScaleData } from '~/utils/sewer-water/municipality-sewer-water.util';
 
 const text = siteText.common.metricKPI;
 const title = siteText.gemeente_rioolwater_metingen.barscale_titel;
 
-export function SewerWaterMetric(props: {
-  data: SewerWaterBarScaleData | null;
-}) {
+export function SewerWaterMetric(props: { data: SewerWaterBarScaleData }) {
   const { data } = props;
 
-  if (!data) return null;
-
-  const description = replaceVariablesInText(text.dateOfReport, {
-    dateOfReport: formatDateFromSeconds(Number(data.unix), 'relative'),
-  });
+  const description =
+    data.week_start_unix && data.week_end_unix
+      ? replaceVariablesInText(text.dateRangeOfReport, {
+          startDate: formatDateFromSeconds(data.week_start_unix, 'axis'),
+          endDate: formatDateFromSeconds(data.week_end_unix, 'axis'),
+        })
+      : undefined;
 
   return (
     <MetricKPI
       title={title}
-      value={data.value}
-      format={formatNumber}
+      absolute={formatNumber(data.value)}
       description={description}
+      valueAnnotation={siteText.waarde_annotaties.riool_normalized}
     />
   );
 }

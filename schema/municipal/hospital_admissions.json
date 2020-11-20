@@ -33,7 +33,7 @@
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "hospital_admissions.json",
-  "title": "hospital_admissions",
+  "title": "municipal_hospital_admissions",
   "type": "object",
   "required": ["values", "last_value"],
   "additionalProperties": false,

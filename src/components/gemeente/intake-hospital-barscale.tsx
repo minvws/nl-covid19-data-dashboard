@@ -1,11 +1,11 @@
 import { BarScale } from '~/components/barScale';
-import { HospitalAdmissions } from '~/types/data.d';
+import { MunicipalHospitalAdmissions } from '~/types/data.d';
 
 import siteText from '~/locale/index';
 const text = siteText.gemeente_ziekenhuisopnames_per_dag;
 
 export function IntakeHospitalBarScale(props: {
-  data: HospitalAdmissions | undefined;
+  data: MunicipalHospitalAdmissions | undefined;
   showAxis: boolean;
 }) {
   const { data, showAxis } = props;

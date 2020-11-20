@@ -1,36 +1,37 @@
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import React, { useMemo, useState } from 'react';
-import { isDefined } from 'ts-is-present';
-import { ChartTimeControls } from '~/components-styled/chart-time-controls';
+import React, { useMemo } from 'react';
+import { isFilled } from 'ts-is-present';
+import { ValueAnnotation } from '~/components-styled/value-annotation';
 import text from '~/locale/index';
+import { colors } from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
-import styles from './lineChart.module.scss';
 
 export type Value = {
   date: number;
-  value: number;
+  value: number | null;
 };
 
 const SIGNAALWAARDE_Z_INDEX = 5;
 
-export interface LineChartProps {
-  title: string;
-  description?: string;
-  values: Value[];
+export interface LineChartProps<T> {
+  values: T[];
   signaalwaarde?: number;
-  timeframeOptions?: TimeframeOption[];
-  formatTooltip?: (x: number, y: number) => string;
+  timeframe?: TimeframeOption;
+  formatTooltip?: (value: T) => string;
   formatYAxis?: (y: number) => string;
+  showFill?: boolean;
+  valueAnnotation?: string;
 }
 
-function getChartOptions(
-  values: Value[],
+function getChartOptions<T extends Value>(
+  values: T[],
   signaalwaarde?: number,
-  formatTooltip?: (x: number, y: number) => string,
-  formatYAxis?: (y: number) => string
+  formatTooltip?: (value: T) => string,
+  formatYAxis?: (y: number) => string,
+  showFill?: boolean
 ) {
   const yMax = calculateYMax(values, signaalwaarde);
 
@@ -44,7 +45,7 @@ function getChartOptions(
       borderWidth: 0,
       colorCount: 10,
       displayErrors: true,
-      height: 175,
+      height: 250,
     },
     credits: {
       enabled: false,
@@ -59,8 +60,10 @@ function getChartOptions(
       categories: values.map((value) => value.date.toString()),
       labels: {
         align: 'right',
-        // types say `rotation` needs to be a number,
-        // but that doesn’t work.
+        /**
+         * Types say `rotation` needs to be a number,
+         * but that doesn’t work.
+         */
         rotation: '0' as any,
         formatter: function () {
           return this.isFirst || this.isLast
@@ -75,7 +78,7 @@ function getChartOptions(
       borderRadius: 0,
       formatter: function (): string {
         if (formatTooltip) {
-          return formatTooltip(this.x, this.y);
+          return formatTooltip(values[this.point.index]);
         }
         return `${formatDateFromSeconds(this.x)}: ${formatNumber(this.y)}`;
       },
@@ -146,9 +149,22 @@ function getChartOptions(
         data: values.map((value) => value.value as number),
         name: '',
         showInLegend: false,
-        color: '#3391CC',
-        // hex to rgb converted, added opacity
-        fillColor: 'rgba(51, 145, 204, 0.2)',
+        color: colors.data.primary,
+        /**
+         * HEX to rgb converted, added opacity.
+         * Since this chart has type 'area', a fillColor of `undefined` will return
+         * a colored fill equal to che line color, when showFill is false, it returns a
+         * transparent fill
+         */
+
+        fillColor: 'transparent',
+
+        ...(showFill && {
+          fillColor: colors.data.fill,
+          opacity: 1,
+          fillOpacity: 0.05,
+        }),
+
         marker: {
           enabled: false,
         },
@@ -173,46 +189,35 @@ function getChartOptions(
   return options;
 }
 
-export default function LineChart({
-  title,
-  description,
+export default function LineChart<T extends Value>({
   values,
   signaalwaarde,
-  timeframeOptions,
+  timeframe = '5weeks',
   formatTooltip,
   formatYAxis,
-}: LineChartProps) {
-  const [timeframe, setTimeframe] = useState<TimeframeOption>('5weeks');
-
+  valueAnnotation,
+  showFill = true,
+}: LineChartProps<T>) {
   const chartOptions = useMemo(() => {
-    const filteredValues = getFilteredValues<Value>(
+    const filteredValues = getFilteredValues<T>(
       values,
       timeframe,
-      (value: Value) => value.date * 1000
+      (value: T) => value.date * 1000
     );
-    return getChartOptions(
+    return getChartOptions<T>(
       filteredValues,
       signaalwaarde,
       formatTooltip,
-      formatYAxis
+      formatYAxis,
+      showFill
     );
-  }, [values, timeframe, signaalwaarde, formatTooltip, formatYAxis]);
+  }, [values, timeframe, signaalwaarde, formatTooltip, formatYAxis, showFill]);
 
   return (
-    <section className={styles.root}>
-      <header className={styles.header}>
-        <div className={styles.titleAndDescription}>
-          {title && <h3>{title}</h3>}
-          {description && <p>{description}</p>}
-        </div>
-        <div className={styles.timeControls}>
-          <ChartTimeControls
-            timeframe={timeframe}
-            timeframeOptions={timeframeOptions}
-            onChange={setTimeframe}
-          />
-        </div>
-      </header>
+    <section>
+      {valueAnnotation && (
+        <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
+      )}
       <HighchartsReact highcharts={Highcharts} options={chartOptions} />
     </section>
   );
@@ -225,9 +230,12 @@ export default function LineChart({
 function calculateYMax(values: Value[], signaalwaarde = -Infinity) {
   const maxValue = values
     .map((x) => x.value)
-    .filter(isDefined)
+    .filter(isFilled)
     .reduce((acc, value) => (value > acc ? value : acc), -Infinity);
 
-  // Value cannot be 0, hence the 1
-  return Math.max(maxValue, signaalwaarde + 10, 1);
+  /**
+   * Value cannot be 0, hence the 1
+   * If the value is below signaalwaarde, make sure the signaalwaarde floats in the middle
+   */
+  return Math.max(maxValue, signaalwaarde * 2, 1);
 }
