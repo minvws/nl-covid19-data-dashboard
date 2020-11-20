@@ -7,7 +7,6 @@ import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { createSelectRegionHandler } from '../../select-handlers/create-select-region-handler';
 import { SafetyRegionProperties } from '../../shared';
-
 const text = siteText.rioolwater_metingen;
 
 export const createSewerRegionalTooltip = (router: NextRouter) => (
@@ -23,11 +22,12 @@ export const createSewerRegionalTooltip = (router: NextRouter) => (
   return (
     context && (
       <TooltipContent title={context.vrname} onSelect={onSelect}>
-        <strong>{`${replaceVariablesInText(text.map_tooltip_value, {
-          value: formatNumber(context.average),
-        })}`}</strong>
-        <br />
-        {text.map_tooltip}
+        <p className="info-value">
+          {`${replaceVariablesInText(text.map_tooltip_value, {
+            value: formatNumber(context.average),
+          })}`}
+        </p>
+        <p className="info-total">{text.map_tooltip}</p>
       </TooltipContent>
     )
   );
