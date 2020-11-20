@@ -4,6 +4,7 @@ import path from 'path';
 import { FCWithLayout, getLayoutWithMetadata } from '~/components/layout';
 import { MaxWidth } from '~/components/maxWidth';
 import siteText, { TALLLanguages } from '~/locale/index';
+import { MDToHTMLString } from '~/utils/MDToHTMLString';
 import styles from './over.module.scss';
 
 interface StaticProps {
@@ -17,6 +18,8 @@ interface OverProps {
 
 export async function getStaticProps(): Promise<StaticProps> {
   const text = (await import('../locale/index')).default;
+
+  text.over_beschrijving.text = MDToHTMLString(text.over_beschrijving.text);
 
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
   const fileContents = fs.readFileSync(filePath, 'utf8');
@@ -48,9 +51,9 @@ const Over: FCWithLayout<OverProps> = (props) => {
         <MaxWidth>
           <div className={styles.maxwidth}>
             <h2>{text.over_titel.text}</h2>
-            <p>{text.over_beschrijving.text}</p>
-            <h2>{text.over_disclaimer.title}</h2>
-            <p>{text.over_disclaimer.text}</p>
+            <div
+              dangerouslySetInnerHTML={{ __html: text.over_beschrijving.text }}
+            />
           </div>
         </MaxWidth>
       </div>
