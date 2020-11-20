@@ -10,7 +10,6 @@ import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
-import { BarChart } from '~/components/charts/index';
 import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/use-safety-region-legenda-data';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
@@ -28,7 +27,6 @@ import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 import {
   InfectedPeopleDeltaNormalized,
-  IntakeShareAgeGroups,
   NationalInfectedPeopleTotal,
 } from '~/types/data.d';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
@@ -37,6 +35,7 @@ import { formatDateFromSeconds } from '~/utils/formatDate';
 import { MultipleLineChartTile } from '~/components-styled/multiple-line-chart-tile';
 import { RegionControlOption } from '~/components-styled/chart-region-controls';
 import { ChartTile } from '~/components-styled/chart-tile';
+import { AgeGroupChart } from '~/components-styled/age-group-chart';
 
 const text = siteText.positief_geteste_personen;
 const ggdText = siteText.positief_geteste_personen_ggd;
@@ -51,18 +50,10 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
   const legendItems = useSafetyRegionLegendaData('positive_tested_people');
   const delta: InfectedPeopleDeltaNormalized =
     data.infected_people_delta_normalized;
-  const age: IntakeShareAgeGroups = data.intake_share_age_groups;
   const total: NationalInfectedPeopleTotal = data?.infected_people_total;
 
   const ggdLastValue = data.ggd.last_value;
   const ggdValues = data.ggd.values;
-
-  const barChartTotal: number = age.values.reduce(
-    (mem: number, part): number => {
-      return mem + part.infected_per_agegroup_increase;
-    },
-    0
-  );
 
   return (
     <>
@@ -145,9 +136,9 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         legend={
           legendItems // this data value should probably not be optional
             ? {
-                title: text.chloropleth_legenda.titel,
-                items: legendItems,
-              }
+              title: text.chloropleth_legenda.titel,
+              items: legendItems,
+            }
             : undefined
         }
       >
@@ -191,7 +182,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         }}
       />
 
-      <ChartTile
+      {/* <ChartTile
         title={text.barchart_titel}
         description={text.barchart_toelichting}
         metadata={{
@@ -213,6 +204,17 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           }))}
           axisTitle={text.barchart_axis_titel}
         />
+      </ChartTile> */}
+
+      <ChartTile
+        title={text.barchart_titel}
+        description={text.barchart_toelichting}
+        metadata={{
+          date: delta.last_value.date_of_report_unix,
+          source: text.bron,
+        }}
+      >
+        <AgeGroupChart data={data.infected_age_groups} />
       </ChartTile>
 
       <ContentHeader_weekRangeHack

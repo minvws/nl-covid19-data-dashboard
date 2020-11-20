@@ -3,8 +3,8 @@ const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const sitemap = require('./src/tools/sitemap/generate-sitemap.js');
 
 const withTM = require('next-transpile-modules')([
-  '@vx/tooltip',
-  '@vx/event',
+  '@visx/tooltip',
+  '@visx/event',
   'zustand',
 ]);
 
