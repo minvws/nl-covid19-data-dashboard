@@ -1,12 +1,31 @@
 import { SeriesLineOptions, SeriesScatterOptions } from 'highcharts';
 import { useMemo } from 'react';
-import { TimeframeOption, getFilteredValues } from '~/utils/timeframe';
-import { RegionalSewerPerInstallationValue } from '~/types/data';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { getItemFromArray } from '~/utils/getItemFromArray';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { Value, TranslationStrings } from '../regionalSewerWaterChart';
+import { colors } from '~/style/theme';
+import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
+
+export interface SewerPerInstallationBaseValue {
+  date_measurement_unix: number;
+  rna_normalized: number;
+  rwzi_awzi_name: string;
+}
+
+export type Value = {
+  date: number;
+  value?: number;
+  week_start_unix: number;
+  week_end_unix: number;
+};
+
+export type TranslationStrings = {
+  average_label_text: string;
+  secondary_label_text: string;
+  range_description: string;
+  daily_label_text: string;
+};
 
 type Week = {
   start: number;
@@ -44,9 +63,11 @@ function createRemainingDaysData(value: Value | undefined, maxDate: number) {
   });
 }
 
-export function useRegionalSewerWaterChartOptions(
+export function useSewerWaterChartOptions<
+  T extends SewerPerInstallationBaseValue
+>(
   averageValues: Value[],
-  scatterPlotValues: RegionalSewerPerInstallationValue[],
+  scatterPlotValues: T[],
   text: TranslationStrings,
   timeframe: TimeframeOption,
   selectedRWZI?: string
@@ -59,11 +80,13 @@ export function useRegionalSewerWaterChartOptions(
 
   const filteredScatterPlotValues = useMemo(
     () =>
-      getFilteredValues(
-        scatterPlotValues,
-        timeframe,
-        (value) => value.date_measurement_unix * 1000
-      ),
+      scatterPlotValues
+        ? getFilteredValues(
+            scatterPlotValues,
+            timeframe,
+            (value) => value.date_measurement_unix * 1000
+          )
+        : [],
     [scatterPlotValues, timeframe]
   );
 
@@ -112,7 +135,7 @@ export function useRegionalSewerWaterChartOptions(
       name: text.average_label_text,
       description: text.average_label_text,
       showInLegend: true,
-      color: selectedRWZI ? '#A9A9A9' : '#3391CC',
+      color: selectedRWZI ? '#A9A9A9' : colors.data.primary,
       enableMouseTracking: selectedRWZI === undefined,
       allowPointSelect: false,
       marker: {
@@ -139,7 +162,7 @@ export function useRegionalSewerWaterChartOptions(
         name: '',
         description: '',
         showInLegend: false,
-        color: selectedRWZI ? '#A9A9A9' : '#3391CC',
+        color: selectedRWZI ? '#A9A9A9' : colors.data.primary,
         enableMouseTracking: false,
         allowPointSelect: false,
         dashStyle: 'ShortDot',
@@ -171,7 +194,7 @@ export function useRegionalSewerWaterChartOptions(
           description: replaceVariablesInText(text.daily_label_text, {
             name: selectedRWZI,
           }),
-          color: '#004277',
+          color: colors.data.secondary,
           allowPointSelect: false,
           marker: {
             symbol: 'circle',

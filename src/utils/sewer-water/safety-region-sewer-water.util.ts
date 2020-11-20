@@ -1,5 +1,6 @@
 import { XrangePointOptionsObject } from 'highcharts';
 import siteText from '~/locale/index';
+import { colors } from '~/style/theme';
 import { Regionaal, RegionalSewerPerInstallationValue } from '~/types/data.d';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
@@ -67,7 +68,16 @@ export function getInstallationNames(data: Regionaal): string[] {
 export function getSewerWaterScatterPlotData(
   data: Regionaal
 ): RegionalSewerPerInstallationValue[] | undefined {
-  return data.sewer_per_installation.values.flatMap((value) => value.values);
+  const values = data.sewer_per_installation.values.flatMap(
+    (value) => value.values
+  );
+  /**
+   * All individual `value.values`-arrays are already sorted correctly, but
+   * due to merging them into one array the sort might be off.
+   */
+  values.sort((a, b) => a.date_measurement_unix - b.date_measurement_unix);
+
+  return values;
 }
 
 export function getSewerWaterLineChartData(
@@ -109,7 +119,7 @@ export function getSewerWaterBarChartData(
     data: [
       {
         y: data.sewer.last_value.average,
-        color: '#3391CC',
+        color: colors.data.primary,
         label: data.sewer.last_value
           ? `${formatDateFromSeconds(
               data.sewer.last_value.week_unix,

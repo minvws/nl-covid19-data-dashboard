@@ -46,11 +46,11 @@ export type RegionGeoJSON = FeatureCollection<
   SafetyRegionProperties
 >;
 
-export type ChoroplethThresholds = {
-  thresholds: ChoroplethThresholdsValue[];
+export type ChoroplethThresholds<T extends number = number> = {
+  thresholds: ChoroplethThresholdsValue<T>[];
 };
 
-export type ChoroplethThresholdsValue = {
+export type ChoroplethThresholdsValue<T extends number = number> = {
   color: string;
-  threshold: number;
+  threshold: T;
 };

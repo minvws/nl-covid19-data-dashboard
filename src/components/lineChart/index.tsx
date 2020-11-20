@@ -4,6 +4,7 @@ import React, { useMemo } from 'react';
 import { isFilled } from 'ts-is-present';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import text from '~/locale/index';
+import { colors } from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
@@ -148,7 +149,7 @@ function getChartOptions<T extends Value>(
         data: values.map((value) => value.value as number),
         name: '',
         showInLegend: false,
-        color: '#3391CC',
+        color: colors.data.primary,
         /**
          * HEX to rgb converted, added opacity.
          * Since this chart has type 'area', a fillColor of `undefined` will return
@@ -156,7 +157,14 @@ function getChartOptions<T extends Value>(
          * transparent fill
          */
 
-        fillColor: showFill ? 'rgba(51, 145, 204, 0.2)' : 'transparent',
+        fillColor: 'transparent',
+
+        ...(showFill && {
+          fillColor: colors.data.fill,
+          opacity: 1,
+          fillOpacity: 0.05,
+        }),
+
         marker: {
           enabled: false,
         },

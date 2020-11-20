@@ -2,16 +2,12 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Arrow from '~/assets/arrow.svg';
-import CoronaVirus from '~/assets/coronavirus.svg';
-import Locatie from '~/assets/locaties.svg';
+import Gedrag from '~/assets/gedrag.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
+import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
-import Gedrag from '~/assets/gedrag.svg';
 import { ComboBox } from '~/components/comboBox';
-import { NursingHomeDeathsMetric } from '~/components/common/nursing-home-deaths-metric';
-import { NursingHomeInfectedLocationsMetric } from '~/components/common/nursing-home-infected-locations-metric';
-import { NursingHomeInfectedPeopleMetric } from '~/components/common/nursing-home-infected-people-metric';
 import { getLayout as getSiteLayout } from '~/components/layout';
 import { TitleWithIcon } from '~/components/titleWithIcon';
 import { IntakeHospitalMetric } from '~/components/veiligheidsregio/intake-hospital-metric';
@@ -19,12 +15,13 @@ import { PositivelyTestedPeopleBarScale } from '~/components/veiligheidsregio/po
 import { PositivelyTestedPeopleMetric } from '~/components/veiligheidsregio/positive-tested-people-metric';
 import { SewerWaterMetric } from '~/components/veiligheidsregio/sewer-water-metric';
 import safetyRegions from '~/data/index';
+import { BehaviorMetric } from '~/domain/behavior/behavior-metric';
 import siteText from '~/locale/index';
 import { ISafetyRegionData } from '~/static-props/safetyregion-data';
 import { getSewerWaterBarScaleData } from '~/utils/sewer-water/safety-region-sewer-water.util';
 import { useMediaQuery } from '~/utils/useMediaQuery';
+import { NursingHomeInfectedPeopleMetric } from '../common/nursing-home-infected-people-metric';
 import { useMenuState } from './useMenuState';
-import { BehaviorMetric } from '~/domain/behavior/behavior-metric';
 
 export function getSafetyRegionLayout() {
   return function (
@@ -206,77 +203,30 @@ function SafetyRegionLayout(
                 </li>
               </ul>
               <h2>
-                {siteText.veiligheidsregio_layout.headings.verpleeghuizen}
+                {siteText.veiligheidsregio_layout.headings.kwetsbare_groepen}
               </h2>
               <ul>
                 <li>
                   <Link
-                    href="/veiligheidsregio/[code]/verpleeghuis-positief-geteste-personen"
-                    as={`/veiligheidsregio/${code}/verpleeghuis-positief-geteste-personen`}
+                    href="/veiligheidsregio/[code]/verpleeghuiszorg"
+                    as={`/veiligheidsregio/${code}/verpleeghuiszorg`}
                   >
                     <a
                       onClick={blur}
                       className={getClassName(
-                        '/veiligheidsregio/[code]/verpleeghuis-positief-geteste-personen'
+                        '/veiligheidsregio/[code]/verpleeghuiszorg'
                       )}
                     >
                       <TitleWithIcon
-                        Icon={GetestIcon}
+                        Icon={Verpleeghuiszorg}
                         title={
-                          siteText.verpleeghuis_positief_geteste_personen
+                          siteText
+                            .veiligheidsregio_verpleeghuis_besmette_locaties
                             .titel_sidebar
                         }
                       />
                       <span>
                         <NursingHomeInfectedPeopleMetric
-                          data={data.nursing_home.last_value}
-                        />
-                      </span>
-                    </a>
-                  </Link>
-                </li>
-
-                <li>
-                  <Link
-                    href="/veiligheidsregio/[code]/verpleeghuis-besmette-locaties"
-                    as={`/veiligheidsregio/${code}/verpleeghuis-besmette-locaties`}
-                  >
-                    <a
-                      onClick={blur}
-                      className={getClassName(
-                        '/veiligheidsregio/[code]/verpleeghuis-besmette-locaties'
-                      )}
-                    >
-                      <TitleWithIcon
-                        Icon={Locatie}
-                        title={siteText.verpleeghuis_besmette_locaties.titel}
-                      />
-                      <span>
-                        <NursingHomeInfectedLocationsMetric
-                          data={data.nursing_home.last_value}
-                        />
-                      </span>
-                    </a>
-                  </Link>
-                </li>
-
-                <li>
-                  <Link
-                    href="/veiligheidsregio/[code]/verpleeghuis-sterfte"
-                    as={`/veiligheidsregio/${code}/verpleeghuis-sterfte`}
-                  >
-                    <a
-                      onClick={blur}
-                      className={getClassName(
-                        '/veiligheidsregio/[code]/verpleeghuis-sterfte'
-                      )}
-                    >
-                      <TitleWithIcon
-                        Icon={CoronaVirus}
-                        title={siteText.verpleeghuis_oversterfte.titel_sidebar}
-                      />
-                      <span>
-                        <NursingHomeDeathsMetric
                           data={data.nursing_home.last_value}
                         />
                       </span>

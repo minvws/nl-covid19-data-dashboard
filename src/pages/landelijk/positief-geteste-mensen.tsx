@@ -37,6 +37,8 @@ import { formatDateFromSeconds } from '~/utils/formatDate';
 import { MultipleLineChartTile } from '~/components-styled/multiple-line-chart-tile';
 import { RegionControlOption } from '~/components-styled/chart-region-controls';
 import { ChartTile } from '~/components-styled/chart-tile';
+import { colors } from '~/style/theme';
+import css from '@styled-system/css';
 
 const text = siteText.positief_geteste_personen;
 const ggdText = siteText.positief_geteste_personen_ggd;
@@ -114,6 +116,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           <Box>
             <Heading level={4} fontSize={'1.2em'} mt={'1.5em'} mb={0}>
               <span
+                css={css({ '& > span': { color: 'data.primary' } })}
                 dangerouslySetInnerHTML={{
                   __html: replaceKpisInText(ggdText.summary_title, [
                     {
@@ -121,11 +124,10 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
                       value: `${formatPercentage(
                         ggdLastValue.infected_percentage
                       )}%`,
-                      className: 'text-blue',
                     },
                   ]),
                 }}
-              ></span>
+              />
             </Heading>
             <Text mt={0} lineHeight={1}>
               <Anchor name="ggd" text={ggdText.summary_link_cta} />
@@ -256,7 +258,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           <Text>{ggdText.positief_getest_week_uitleg}</Text>
           <Text>
             <strong
-              className="additional-kpi"
+              css={css({ '& > span': { color: 'data.primary' } })}
               dangerouslySetInnerHTML={{
                 __html: replaceKpisInText(
                   ggdText.positief_getest_getest_week_uitleg,
@@ -264,12 +266,10 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
                     {
                       name: 'numerator',
                       value: formatNumber(ggdLastValue.infected),
-                      className: 'text-blue',
                     },
                     {
                       name: 'denominator',
                       value: formatNumber(ggdLastValue.tested_total),
-                      className: 'text-blue',
                     },
                   ]
                 ),
@@ -331,11 +331,11 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         ]}
         linesConfig={[
           {
-            color: '#154273',
+            color: colors.data.secondary,
             legendLabel: ggdText.linechart_totaltests_legend_label,
           },
           {
-            color: '#3391CC',
+            color: colors.data.primary,
             legendLabel: ggdText.linechart_positivetests_legend_label,
           },
         ]}

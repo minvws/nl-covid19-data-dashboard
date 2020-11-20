@@ -1,5 +1,5 @@
 import css from '@styled-system/css';
-import { Feature, MultiPolygon } from 'geojson';
+import { Feature, GeoJsonProperties, MultiPolygon } from 'geojson';
 import { ReactNode, useCallback } from 'react';
 import { Regions } from '~/types/data';
 import { Choropleth } from './choropleth';
@@ -77,11 +77,7 @@ export function SafetyRegionChoropleth<
   );
 
   const featureCallback = useCallback(
-    (
-      feature: Feature<MultiPolygon, SafetyRegionProperties>,
-      path: string,
-      _index: number
-    ) => {
+    (feature: Feature<MultiPolygon, SafetyRegionProperties>, path: string) => {
       const { vrcode } = feature.properties;
       const fill = getFillColor(vrcode);
 
@@ -100,12 +96,11 @@ export function SafetyRegionChoropleth<
   );
 
   const overlayCallback = (
-    feature: Feature<MultiPolygon, SafetyRegionProperties>,
-    path: string
+    _feature: Feature<MultiPolygon, GeoJsonProperties>,
+    path: string,
+    index: number
   ) => {
-    const { vrcode } = feature.properties;
-
-    return <Path key={vrcode} d={path} stroke="#c4c4c4" strokeWidth={1} />;
+    return <Path key={index} d={path} stroke="#c4c4c4" strokeWidth={1} />;
   };
 
   const hoverCallback = useCallback(

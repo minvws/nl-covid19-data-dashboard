@@ -1,7 +1,6 @@
 import css from '@styled-system/css';
 import { localPoint } from '@vx/event';
 import { Mercator } from '@vx/geo';
-import { GeoPermissibleObjects } from 'd3-geo';
 import { Feature, FeatureCollection, Geometry, MultiPolygon } from 'geojson';
 import { memo, MutableRefObject, ReactNode, useRef, useState } from 'react';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
@@ -20,16 +19,16 @@ export type TRenderCallback = (
   index: number
 ) => ReactNode;
 
-export type TProps<TFeatureProperties> = {
+export type TProps<T1, T2, T3> = {
   // This is the main feature collection that displays the features that will
   // be colored in as part of the choropleth
-  featureCollection: FeatureCollection<MultiPolygon, TFeatureProperties>;
+  featureCollection: FeatureCollection<MultiPolygon, T1>;
   // These are features that are used as an overlay, overlays have no interactions
   // they are simply there to beautify the map or emphasize certain parts.
-  overlays: FeatureCollection<MultiPolygon>;
+  overlays: FeatureCollection<MultiPolygon, T2>;
   // These are features that are used as as the hover features, these are
   // typically activated when the user mouse overs them.
-  hovers?: FeatureCollection<MultiPolygon, TFeatureProperties>;
+  hovers?: FeatureCollection<MultiPolygon, T3>;
   // The bounding box is calculated based on these features, this can be used to
   // zoom in on a specific part of the map upon initialization.
   boundingBox: FeatureCollection<MultiPolygon>;
@@ -38,21 +37,21 @@ export type TProps<TFeatureProperties> = {
   // This callback is invoked for each of the features in the featureCollection property.
   // This will usually return a <path/> element.
   featureCallback: (
-    feature: Feature<MultiPolygon, TFeatureProperties>,
+    feature: Feature<MultiPolygon, T1>,
     path: string,
     index: number
   ) => ReactNode;
   // This callback is invoked for each of the features in the overlays property.
   // This will usually return a <path/> element.
   overlayCallback: (
-    feature: Feature<MultiPolygon, TFeatureProperties>,
+    feature: Feature<MultiPolygon, T2>,
     path: string,
     index: number
   ) => ReactNode;
   // This callback is invoked for each of the features in the hovers property.
   // This will usually return a <path/> element.
   hoverCallback: (
-    feature: Feature<MultiPolygon, TFeatureProperties>,
+    feature: Feature<MultiPolygon, T3>,
     path: string,
     index: number
   ) => ReactNode;
@@ -74,7 +73,10 @@ export type TProps<TFeatureProperties> = {
  * @param props
  */
 
-export function Choropleth<T>({ getTooltipContent, ...props }: TProps<T>) {
+export function Choropleth<T1, T2, T3>({
+  getTooltipContent,
+  ...props
+}: TProps<T1, T2, T3>) {
   const [tooltip, setTooltip] = useState<TooltipSettings>();
   const isTouch = useIsTouchDevice();
   return (
@@ -96,12 +98,15 @@ export function Choropleth<T>({ getTooltipContent, ...props }: TProps<T>) {
   );
 }
 
-type ChoroplethMapProps<T> = Omit<TProps<T>, 'getTooltipContent'> & {
+type ChoroplethMapProps<T1, T2, T3> = Omit<
+  TProps<T1, T2, T3>,
+  'getTooltipContent'
+> & {
   setTooltip: (tooltip: TooltipSettings | undefined) => void;
 };
 
-const ChoroplethMap: <T>(
-  props: ChoroplethMapProps<T>
+const ChoroplethMap: <T1, T2, T3>(
+  props: ChoroplethMapProps<T1, T2, T3>
 ) => JSX.Element | null = memo((props) => {
   const {
     featureCollection,
@@ -189,8 +194,12 @@ const ChoroplethMap: <T>(
 });
 
 interface MercatorGroupProps<G extends Geometry, P> {
-  data: Array<Feature<G, P>>;
-  render: any;
+  data: Feature<G, P>[];
+  render: (
+    feature: Feature<G, P>,
+    path: string,
+    index: number
+  ) => React.ReactNode;
   fitSize: [[number, number], any];
 }
 
@@ -204,7 +213,7 @@ function MercatorGroup<G extends Geometry, P>(props: MercatorGroupProps<G, P>) {
        * from geojson and d3-geo.
        * Our data uses geojson, the Mercator component depends on d3-geo.
        */
-      data={(data as unknown) as GeoPermissibleObjects[]}
+      data={data}
       fitSize={fitSize}
     >
       {({ features }) => (

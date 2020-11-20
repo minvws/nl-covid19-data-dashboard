@@ -1,10 +1,9 @@
+import { MetricKPI } from '~/components-styled/metric-kpi';
+import siteText from '~/locale/index';
 import { IntakeHospitalMaLastValue } from '~/types/data.d';
-import { MetricKPI } from '~/components/metricKPI';
+import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { formatDateFromSeconds } from '~/utils/formatDate';
-
-import siteText from '~/locale/index';
 
 const text = siteText.common.metricKPI;
 const title = siteText.ziekenhuisopnames_per_dag.titel_kpi;
@@ -23,8 +22,7 @@ export function IntakeHospitalMetric(props: {
   return (
     <MetricKPI
       title={title}
-      value={data.moving_average_hospital}
-      format={formatNumber}
+      absolute={formatNumber(data.moving_average_hospital)}
       description={description}
     />
   );
