@@ -1,18 +1,50 @@
-import { Box } from './base';
-import styled from 'styled-components';
 import { css } from '@styled-system/css';
+import styled from 'styled-components';
 import { ChoroplethThresholdsValue } from '~/components/choropleth/shared';
-import { useLegendaItems } from '~/components/choropleth/legenda/hooks/use-legenda-items';
+import { Box } from './base';
 
-export interface LegendaItem {
-  color: string;
-  label: string;
-}
-
-export type ChoroplethLegendaProps = {
+interface ChoroplethLegendaProps {
   title: string;
   thresholds: ChoroplethThresholdsValue[];
-};
+}
+
+export function ChoroplethLegenda({
+  title,
+  thresholds,
+}: ChoroplethLegendaProps) {
+  const items = thresholds.map(
+    (threshold: ChoroplethThresholdsValue, index: number) => {
+      return {
+        color: threshold.color,
+        label: createLabel(thresholds, index),
+      };
+    }
+  );
+
+  return (
+    <Box width="100%" maxWidth={400}>
+      {title && <h4>{title}</h4>}
+      <List aria-label="legend">
+        {items.map((item) => (
+          <Item key={item.color}>
+            <LegendaItemBox backgroundColor={item.color} />
+            <Box p={1}>{item.label}</Box>
+          </Item>
+        ))}
+      </List>
+    </Box>
+  );
+}
+
+function createLabel(list: ChoroplethThresholdsValue[], index: number) {
+  if (index === 0) {
+    return `< ${list[1].threshold}`;
+  }
+  if (index === list.length - 1) {
+    return `> ${list[index].threshold}`;
+  }
+  return `${list[index].threshold} - ${list[index + 1].threshold}`;
+}
 
 const List = styled.ul(
   css({
@@ -50,24 +82,3 @@ const LegendaItemBox = styled(Box)(
     borderTop: '1px solid lightgrey',
   })
 );
-
-export function ChoroplethLegenda({
-  title,
-  thresholds,
-}: ChoroplethLegendaProps) {
-  const items = useLegendaItems(thresholds);
-
-  return (
-    <Box width="100%" maxWidth={400}>
-      {title && <h4>{title}</h4>}
-      <List aria-label="legend">
-        {items.map((item) => (
-          <Item key={item.color}>
-            <LegendaItemBox backgroundColor={item.color} />
-            <Box p={1}>{item.label}</Box>
-          </Item>
-        ))}
-      </List>
-    </Box>
-  );
-}
