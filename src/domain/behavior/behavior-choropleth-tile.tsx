@@ -27,10 +27,7 @@ export function BehaviorChoroplethTile() {
   const metricValueName = `${currentId}_${type}` as keyof RegionsBehavior;
 
   function goToRegion(vrcode: string) {
-    router.push(
-      '/veiligheidsregio/[code]/gedrag',
-      `/veiligheidsregio/${vrcode}/gedrag`
-    );
+    router.push(`/veiligheidsregio/${vrcode}/gedrag`);
   }
 
   return (

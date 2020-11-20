@@ -88,15 +88,9 @@ function SafetyRegionLayout(
 
   function handleSafeRegionSelect(region: TSafetyRegion) {
     if (isLargeScreen) {
-      router.push(
-        '/veiligheidsregio/[code]/positief-geteste-mensen',
-        `/veiligheidsregio/${region.code}/positief-geteste-mensen`
-      );
+      router.push(`/veiligheidsregio/${region.code}/positief-geteste-mensen`);
     } else {
-      router.push(
-        '/veiligheidsregio/[code]',
-        `/veiligheidsregio/${region.code}`
-      );
+      router.push(`/veiligheidsregio/${region.code}`);
     }
   }
 
@@ -125,7 +119,7 @@ function SafetyRegionLayout(
             : 'has-menu-closed'
         }`}
       >
-        <Link href="/veiligheidsregio/[code]" as={`/veiligheidsregio/${code}`}>
+        <Link href={`/veiligheidsregio/${code}`}>
           <a className="back-button" onClick={openMenu}>
             <Arrow />
             {siteText.nav.terug_naar_alle_cijfers}
@@ -145,8 +139,7 @@ function SafetyRegionLayout(
               <ul>
                 <li>
                   <Link
-                    href="/veiligheidsregio/[code]/positief-geteste-mensen"
-                    as={`/veiligheidsregio/${code}/positief-geteste-mensen`}
+                    href={`/veiligheidsregio/${code}/positief-geteste-mensen`}
                   >
                     <a
                       onClick={blur}
@@ -178,10 +171,7 @@ function SafetyRegionLayout(
               <h2>{siteText.veiligheidsregio_layout.headings.ziekenhuizen}</h2>
               <ul>
                 <li>
-                  <Link
-                    href="/veiligheidsregio/[code]/ziekenhuis-opnames"
-                    as={`/veiligheidsregio/${code}/ziekenhuis-opnames`}
-                  >
+                  <Link href={`/veiligheidsregio/${code}/ziekenhuis-opnames`}>
                     <a
                       onClick={blur}
                       className={getClassName(
@@ -207,10 +197,7 @@ function SafetyRegionLayout(
               </h2>
               <ul>
                 <li>
-                  <Link
-                    href="/veiligheidsregio/[code]/verpleeghuiszorg"
-                    as={`/veiligheidsregio/${code}/verpleeghuiszorg`}
-                  >
+                  <Link href={`/veiligheidsregio/${code}/verpleeghuiszorg`}>
                     <a
                       onClick={blur}
                       className={getClassName(
@@ -241,10 +228,7 @@ function SafetyRegionLayout(
 
               <ul>
                 <li>
-                  <Link
-                    href="/veiligheidsregio/[code]/rioolwater"
-                    as={`/veiligheidsregio/${code}/rioolwater`}
-                  >
+                  <Link href={`/veiligheidsregio/${code}/rioolwater`}>
                     <a
                       onClick={blur}
                       className={getClassName(
@@ -270,10 +254,7 @@ function SafetyRegionLayout(
               <h2>{siteText.nationaal_layout.headings.gedrag}</h2>
               <ul>
                 <li>
-                  <Link
-                    href="/veiligheidsregio/[code]/gedrag"
-                    as={`/veiligheidsregio/${code}/gedrag`}
-                  >
+                  <Link href={`/veiligheidsregio/${code}/gedrag`}>
                     <a
                       onClick={blur}
                       className={getClassName(
@@ -297,7 +278,7 @@ function SafetyRegionLayout(
 
         <section className="safety-region-content">{children}</section>
 
-        <Link href="/veiligheidsregio/[code]" as={`/veiligheidsregio/${code}`}>
+        <Link href={`/veiligheidsregio/${code}`}>
           <a className="back-button back-button-footer" onClick={openMenu}>
             <Arrow />
             {siteText.nav.terug_naar_alle_cijfers}
