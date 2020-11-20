@@ -26,11 +26,13 @@ export interface DifferenceInteger {
   old_value: number;
   difference: number;
   old_date_of_report_unix: number;
+  new_date_of_report_unix: number;
 }
 export interface DifferenceDecimal {
   old_value: number;
   difference: number;
   old_date_of_report_unix: number;
+  new_date_of_report_unix: number;
 }
 export interface MunicipalHospitalAdmissions {
   values: HospitalAdmissionsLastValue[];
@@ -166,11 +168,13 @@ export interface DifferenceDecimal {
   old_value: number;
   difference: number;
   old_date_of_report_unix: number;
+  new_date_of_report_unix: number;
 }
 export interface DifferenceInteger {
   old_value: number;
   difference: number;
   old_date_of_report_unix: number;
+  new_date_of_report_unix: number;
 }
 export interface NationalHuisartsVerdenkingen {
   values: NationalHuisartsVerdenkingenValue[];
@@ -546,11 +550,13 @@ export interface DifferenceInteger {
   old_value: number;
   difference: number;
   old_date_of_report_unix: number;
+  new_date_of_report_unix: number;
 }
 export interface DifferenceDecimal {
   old_value: number;
   difference: number;
   old_date_of_report_unix: number;
+  new_date_of_report_unix: number;
 }
 export interface RegionalSewer {
   values: RegionalSewerValue[];
