@@ -5,7 +5,6 @@ import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { useLegendaItems } from '~/components/choropleth/legenda/hooks/use-legenda-items';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
@@ -24,7 +23,6 @@ const text = siteText.rioolwater_metingen;
 const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
   const sewerAverages = data.sewer;
   const router = useRouter();
-  const legendItems = useLegendaItems(regionThresholds.sewer.thresholds);
 
   return (
     <>
@@ -117,14 +115,10 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
           ],
           source: text.bron,
         }}
-        legend={
-          legendItems // this data value should probably not be optional
-            ? {
-                title: text.legenda_titel,
-                items: legendItems,
-              }
-            : undefined
-        }
+        legend={{
+          title: text.legenda_titel,
+          thresholds: regionThresholds.sewer.thresholds,
+        }}
       >
         <SafetyRegionChoropleth
           metricName="sewer"

@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { Box } from '~/components-styled/base';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { Select } from '~/components-styled/select';
-import { useLegendaItems } from '~/components/choropleth/legenda/hooks/use-legenda-items';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { SafetyRegionProperties } from '~/components/choropleth/shared';
@@ -22,7 +21,6 @@ const text = siteText.nl_gedrag;
 export function BehaviorChoroplethTile() {
   const [type, setType] = useState<BehaviorType>('compliance');
   const [currentId, setCurrentId] = useState<BehaviorIdentifier>('wash_hands');
-  const legendItems = useLegendaItems(regionThresholds.behavior.thresholds);
   const router = useRouter();
 
   const metricValueName = `${currentId}_${type}` as keyof RegionsBehavior;
@@ -51,7 +49,7 @@ export function BehaviorChoroplethTile() {
         </>
       }
       legend={{
-        items: legendItems,
+        thresholds: regionThresholds.behavior.thresholds,
         title: text.verdeling_in_nederland.legenda_titel,
       }}
     >

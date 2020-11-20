@@ -15,7 +15,6 @@ import { MultipleLineChartTile } from '~/components-styled/multiple-line-chart-t
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
 import { BarChart } from '~/components/charts/index';
-import { useLegendaItems } from '~/components/choropleth/legenda/hooks/use-legenda-items';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
@@ -51,9 +50,6 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
   );
   const router = useRouter();
 
-  const legendItems = useLegendaItems(
-    regionThresholds.positive_tested_people.thresholds
-  );
   const delta: InfectedPeopleDeltaNormalized =
     data.infected_people_delta_normalized;
   const age: IntakeShareAgeGroups = data.intake_share_age_groups;
@@ -148,14 +144,10 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         }}
         description={text.map_toelichting}
         onChangeControls={setSelectedMap}
-        legend={
-          legendItems // this data value should probably not be optional
-            ? {
-                title: text.chloropleth_legenda.titel,
-                items: legendItems,
-              }
-            : undefined
-        }
+        legend={{
+          title: text.chloropleth_legenda.titel,
+          thresholds: regionThresholds.positive_tested_people.thresholds,
+        }}
       >
         {/**
          * It's probably a good idea to abstract this even further, so that

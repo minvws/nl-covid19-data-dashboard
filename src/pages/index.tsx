@@ -7,7 +7,6 @@ import ExternalLink from '~/assets/external-link.svg';
 import Notification from '~/assets/notification.svg';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { HeadingWithIcon } from '~/components-styled/heading-with-icon';
-import { useLegendaItems } from '~/components/choropleth/legenda/hooks/use-legenda-items';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
@@ -56,10 +55,6 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
   const router = useRouter();
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
     'municipal'
-  );
-
-  const legendItems = useLegendaItems(
-    regionThresholds.positive_tested_people.thresholds
   );
 
   return (
@@ -124,14 +119,10 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
         }}
         description={text.positief_geteste_personen.map_toelichting}
         onChangeControls={setSelectedMap}
-        legend={
-          legendItems // this data value should probably not be optional
-            ? {
-                title: text.positief_geteste_personen.chloropleth_legenda.titel,
-                items: legendItems,
-              }
-            : undefined
-        }
+        legend={{
+          thresholds: regionThresholds.positive_tested_people.thresholds,
+          title: text.positief_geteste_personen.chloropleth_legenda.titel,
+        }}
       >
         {selectedMap === 'municipal' && (
           <MunicipalityChoropleth

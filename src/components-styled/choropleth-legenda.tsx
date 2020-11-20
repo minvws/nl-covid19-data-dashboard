@@ -1,6 +1,8 @@
 import { Box } from './base';
 import styled from 'styled-components';
 import { css } from '@styled-system/css';
+import { ChoroplethThresholdsValue } from '~/components/choropleth/shared';
+import { useLegendaItems } from '~/components/choropleth/legenda/hooks/use-legenda-items';
 
 export interface LegendaItem {
   color: string;
@@ -9,7 +11,7 @@ export interface LegendaItem {
 
 export type ChoroplethLegendaProps = {
   title: string;
-  items: LegendaItem[];
+  thresholds: ChoroplethThresholdsValue[];
 };
 
 const List = styled.ul(
@@ -49,8 +51,11 @@ const LegendaItemBox = styled(Box)(
   })
 );
 
-export function ChoroplethLegenda(props: ChoroplethLegendaProps) {
-  const { items, title } = props;
+export function ChoroplethLegenda({
+  title,
+  thresholds,
+}: ChoroplethLegendaProps) {
+  const items = useLegendaItems(thresholds);
 
   return (
     <Box width="100%" maxWidth={400}>

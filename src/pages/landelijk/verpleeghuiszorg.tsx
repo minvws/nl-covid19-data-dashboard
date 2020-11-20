@@ -8,7 +8,6 @@ import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
-import { useLegendaItems } from '~/components/choropleth/legenda/hooks/use-legenda-items';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
@@ -30,9 +29,6 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
   const nursinghomeData = data.nursing_home;
 
   const router = useRouter();
-  const legendItems = useLegendaItems(
-    regionThresholds.nursing_home.infected_locations_percentage.thresholds
-  );
 
   return (
     <>
@@ -132,7 +128,9 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
           source: infectedLocationsText.bron,
         }}
         legend={{
-          items: legendItems,
+          thresholds:
+            regionThresholds.nursing_home.infected_locations_percentage
+              .thresholds,
           title: infectedLocationsText.chloropleth_legenda.titel,
         }}
       >

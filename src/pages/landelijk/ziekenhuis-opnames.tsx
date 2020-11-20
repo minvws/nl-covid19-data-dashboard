@@ -7,7 +7,6 @@ import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { useLegendaItems } from '~/components/choropleth/legenda/hooks/use-legenda-items';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
@@ -31,9 +30,6 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
     'municipal'
   );
   const router = useRouter();
-  const legendItems = useLegendaItems(
-    regionThresholds.hospital_admissions.thresholds
-  );
   const dataIntake = state.intake_hospital_ma;
   const dataBeds = state.hospital_beds_occupied;
 
@@ -113,7 +109,7 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
         description={text.map_toelichting}
         onChangeControls={setSelectedMap}
         legend={{
-          items: legendItems,
+          thresholds: regionThresholds.hospital_admissions.thresholds,
           title: text.chloropleth_legenda.titel,
         }}
         showDataWarning
