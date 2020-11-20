@@ -12,38 +12,23 @@ export function ChoroplethLegenda({
   title,
   thresholds,
 }: ChoroplethLegendaProps) {
-  const items = thresholds.map(
-    (threshold: ChoroplethThresholdsValue, index: number) => {
-      return {
-        color: threshold.color,
-        label: createLabel(thresholds, index),
-      };
-    }
-  );
-
   return (
-    <Box width="100%" maxWidth={400}>
+    <Box width="100%" maxWidth={300}>
       {title && <h4>{title}</h4>}
       <List aria-label="legend">
-        {items.map((item) => (
-          <Item key={item.color}>
-            <LegendaItemBox backgroundColor={item.color} />
-            <Box p={1}>{item.label}</Box>
+        {thresholds.map(({ color, threshold }, index) => (
+          <Item key={color + threshold}>
+            <LegendaColor
+              color={color}
+              first={index === 0}
+              last={index === thresholds.length - 1}
+            />
+            {index > 0 && <Label>{threshold}</Label>}
           </Item>
         ))}
       </List>
     </Box>
   );
-}
-
-function createLabel(list: ChoroplethThresholdsValue[], index: number) {
-  if (index === 0) {
-    return `< ${list[1].threshold}`;
-  }
-  if (index === list.length - 1) {
-    return `> ${list[index].threshold}`;
-  }
-  return `${list[index].threshold} - ${list[index + 1].threshold}`;
 }
 
 const List = styled.ul(
@@ -59,26 +44,29 @@ const List = styled.ul(
 const Item = styled.li(
   css({
     flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
     fontSize: [0, null, 1],
-    '&:first-child div:first-child': {
-      borderLeft: '1px solid lightgrey',
-    },
-    '&:last-child div:first-child': {
-      borderRight: '1px solid lightgrey',
-    },
   })
 );
 
-const LegendaItemBox = styled(Box)(
+const LegendaColor = styled.div<{
+  first: boolean;
+  last: boolean;
+  color: string;
+}>((x) =>
   css({
     width: '100%',
     height: '10px',
     flexGrow: 0,
     flexShrink: 0,
-    borderBottom: '1px solid lightgrey',
-    borderTop: '1px solid lightgrey',
+    borderRadius: x.first ? '2px 0 0 2px' : x.last ? '0 2px 2px 0' : 0,
+    backgroundColor: x.color,
+  })
+);
+
+const Label = styled.span(
+  css({
+    py: 1,
+    display: 'inline-block',
+    transform: 'translateX(-50%)',
   })
 );
