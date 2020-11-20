@@ -29,22 +29,24 @@ const customJsonPath = customJsonPathArg
 
 const schemaInformation = getSchemaInformation(customJsonPath);
 
-if (schemaInformation.regional.files.length !== 25) {
-  console.error(
-    chalk.bgRed.bold(
-      `\n Expected 25 region files, actually found ${schemaInformation.regional.files.length} \n`
-    )
-  );
-  process.exit(1);
-}
+if (!customJsonPathArg) {
+  if (schemaInformation.regional.files.length !== 25) {
+    console.error(
+      chalk.bgRed.bold(
+        `\n Expected 25 region files, actually found ${schemaInformation.regional.files.length} \n`
+      )
+    );
+    process.exit(1);
+  }
 
-if (schemaInformation.municipal.files.length !== 355) {
-  console.error(
-    chalk.bgRed.bold(
-      `\n Expected 355 municipal files, actually found ${schemaInformation.municipal.files.length} \n`
-    )
-  );
-  process.exit(1);
+  if (schemaInformation.municipal.files.length !== 355) {
+    console.error(
+      chalk.bgRed.bold(
+        `\n Expected 355 municipal files, actually found ${schemaInformation.municipal.files.length} \n`
+      )
+    );
+    process.exit(1);
+  }
 }
 
 // The validations are asynchronous so this reducer gathers all the Promises in one array.
