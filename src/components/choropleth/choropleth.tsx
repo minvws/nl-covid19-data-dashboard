@@ -4,6 +4,7 @@ import { Mercator } from '@vx/geo';
 import { Feature, FeatureCollection, Geometry, MultiPolygon } from 'geojson';
 import { memo, MutableRefObject, ReactNode, useRef, useState } from 'react';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
+import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { TCombinedChartDimensions } from './hooks/use-chart-dimensions';
 import { Tooltip } from './tooltips/tooltipContainer';
 
@@ -79,9 +80,14 @@ export function Choropleth<T1, T2, T3>({
 }: TProps<T1, T2, T3>) {
   const [tooltip, setTooltip] = useState<TooltipSettings>();
   const isTouch = useIsTouchDevice();
+  const ref = useRef<HTMLDivElement>(null);
+  useOnClickOutside(ref, () => setTooltip(undefined));
+
   return (
     <>
-      <ChoroplethMap {...props} setTooltip={setTooltip} />
+      <div ref={ref}>
+        <ChoroplethMap {...props} setTooltip={setTooltip} />
+      </div>
 
       {tooltip && (
         <div style={{ pointerEvents: isTouch ? 'all' : 'none' }}>
@@ -207,15 +213,7 @@ function MercatorGroup<G extends Geometry, P>(props: MercatorGroupProps<G, P>) {
   const { data, fitSize, render } = props;
 
   return (
-    <Mercator
-      /**
-       * @TODO It looks like there are some discrepancies between types coming
-       * from geojson and d3-geo.
-       * Our data uses geojson, the Mercator component depends on d3-geo.
-       */
-      data={data}
-      fitSize={fitSize}
-    >
+    <Mercator data={data} fitSize={fitSize}>
       {({ features }) => (
         <g data-cy="choropleth-features">
           {features.map(
