@@ -94,10 +94,9 @@ function sortTimeSeriesValues(values: Timestamped[]) {
    * If none match we throw, since it means an unknown timestamp is used and we
    * want to be sure we sort all data.
    */
-  // throw new Error(
-  //   `Unknown timestamp in value ${JSON.stringify(values[0], null, 2)}`
-  // );
-  return values;
+  throw new Error(
+    `Unknown timestamp in value ${JSON.stringify(values[0], null, 2)}`
+  );
 }
 
 type Timestamped = ReportTimestamped | WeekTimestamped | MeasurementTimestamped;
