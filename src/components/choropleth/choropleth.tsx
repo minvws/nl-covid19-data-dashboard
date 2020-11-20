@@ -6,7 +6,9 @@ import { memo, MutableRefObject, ReactNode, useRef, useState } from 'react';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { TCombinedChartDimensions } from './hooks/use-chart-dimensions';
+import { Path } from './path';
 import { Tooltip } from './tooltips/tooltipContainer';
+import { countryGeo } from './topology';
 
 export type TooltipSettings = {
   left: number;
@@ -24,9 +26,6 @@ export type TProps<T1, T2, T3> = {
   // This is the main feature collection that displays the features that will
   // be colored in as part of the choropleth
   featureCollection: FeatureCollection<MultiPolygon, T1>;
-  // These are features that are used as an overlay, overlays have no interactions
-  // they are simply there to beautify the map or emphasize certain parts.
-  overlays: FeatureCollection<MultiPolygon, T2>;
   // These are features that are used as as the hover features, these are
   // typically activated when the user mouse overs them.
   hovers?: FeatureCollection<MultiPolygon, T3>;
@@ -39,13 +38,6 @@ export type TProps<T1, T2, T3> = {
   // This will usually return a <path/> element.
   featureCallback: (
     feature: Feature<MultiPolygon, T1>,
-    path: string,
-    index: number
-  ) => ReactNode;
-  // This callback is invoked for each of the features in the overlays property.
-  // This will usually return a <path/> element.
-  overlayCallback: (
-    feature: Feature<MultiPolygon, T2>,
     path: string,
     index: number
   ) => ReactNode;
@@ -66,7 +58,7 @@ export type TProps<T1, T2, T3> = {
 
 /**
  * Generic choropleth component that takes featurecollection that is considered the data layer
- * and another that is considered the overlay layer.
+ * and another that is considered the interactive hover layer.
  * It implements a click and mouseover/mouseout system where the value that is assigned to the
  * data-id attribute of a path is propagated to the injected onPatchClick and getTooltipContent
  * callbacks.
@@ -104,6 +96,8 @@ export function Choropleth<T1, T2, T3>({
   );
 }
 
+type FitSize = [[number, number], any];
+
 type ChoroplethMapProps<T1, T2, T3> = Omit<
   TProps<T1, T2, T3>,
   'getTooltipContent'
@@ -116,12 +110,10 @@ const ChoroplethMap: <T1, T2, T3>(
 ) => JSX.Element | null = memo((props) => {
   const {
     featureCollection,
-    overlays,
     hovers,
     boundingBox,
     dimensions,
     featureCallback,
-    overlayCallback,
     hoverCallback,
     onPathClick,
     setTooltip,
@@ -140,10 +132,7 @@ const ChoroplethMap: <T1, T2, T3>(
     boundedHeight,
   } = dimensions;
 
-  const sizeToFit: [[number, number], any] = [
-    [boundedWidth, boundedHeight],
-    boundingBox,
-  ];
+  const fitSize: FitSize = [[boundedWidth, boundedHeight], boundingBox];
 
   return (
     <>
@@ -177,20 +166,16 @@ const ChoroplethMap: <T1, T2, T3>(
           <MercatorGroup
             data={featureCollection.features}
             render={featureCallback}
-            fitSize={sizeToFit}
+            fitSize={fitSize}
           />
 
-          <MercatorGroup
-            data={overlays.features}
-            render={overlayCallback}
-            fitSize={sizeToFit}
-          />
+          <Country fitSize={fitSize} />
 
           {hovers && (
             <MercatorGroup
               data={hovers.features}
               render={hoverCallback}
-              fitSize={sizeToFit}
+              fitSize={fitSize}
             />
           )}
         </g>
@@ -199,6 +184,20 @@ const ChoroplethMap: <T1, T2, T3>(
   );
 });
 
+function Country({ fitSize }: { fitSize: FitSize }) {
+  return (
+    <g css={css({ pointerEvents: 'none' })}>
+      <MercatorGroup
+        data={countryGeo.features}
+        render={(_, path, index) => (
+          <Path key={index} d={path} stroke="#c4c4c4" strokeWidth={0.5} />
+        )}
+        fitSize={fitSize}
+      />
+    </g>
+  );
+}
+
 interface MercatorGroupProps<G extends Geometry, P> {
   data: Feature<G, P>[];
   render: (
@@ -206,7 +205,7 @@ interface MercatorGroupProps<G extends Geometry, P> {
     path: string,
     index: number
   ) => React.ReactNode;
-  fitSize: [[number, number], any];
+  fitSize: FitSize;
 }
 
 function MercatorGroup<G extends Geometry, P>(props: MercatorGroupProps<G, P>) {
