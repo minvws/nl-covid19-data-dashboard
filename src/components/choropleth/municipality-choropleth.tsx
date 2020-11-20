@@ -1,5 +1,5 @@
 import css from '@styled-system/css';
-import { Feature, GeoJsonProperties, MultiPolygon } from 'geojson';
+import { Feature, MultiPolygon } from 'geojson';
 import { ReactNode, useCallback } from 'react';
 import { Choropleth } from './choropleth';
 import {
@@ -11,11 +11,7 @@ import {
 } from './hooks';
 import { municipalThresholds } from './municipal-thresholds';
 import { Path } from './path';
-import {
-  MunicipalityProperties,
-  SafetyRegionProperties,
-  TMunicipalityMetricName,
-} from './shared';
+import { MunicipalityProperties, TMunicipalityMetricName } from './shared';
 import { countryGeo, municipalGeo, regionGeo } from './topology';
 
 export type TProps = {
@@ -37,8 +33,6 @@ export type TProps = {
  * When a selected municipal code is specified, the map will zoom in on the safety region to which
  * the associated municipality belongs and all surrounding features will be rendered in a faded manner.
  *
- * As an overlay the safety region and country outlines are shown.
- *
  * @param props
  */
 export function MunicipalityChoropleth(props: TProps) {
@@ -53,10 +47,7 @@ export function MunicipalityChoropleth(props: TProps) {
 
   const [ref, dimensions] = useChartDimensions<HTMLDivElement>(1.2);
 
-  const [boundingbox, selectedVrCode] = useMunicipalityBoundingbox(
-    regionGeo,
-    selected
-  );
+  const [boundingbox] = useMunicipalityBoundingbox(regionGeo, selected);
 
   const [getData, hasData] = useMunicipalityData(metricName, municipalGeo);
 
@@ -88,34 +79,25 @@ export function MunicipalityChoropleth(props: TProps) {
           id={gemcode}
           d={path}
           fill={hasData && fill ? fill : '#fff'}
-          stroke={isSelectorMap ? '#01689b' : selected ? '#fff' : '#c4c4c4'}
-          strokeWidth={0.5}
-        />
-      );
-    },
-    [getFillColor, hasData, safetyRegionMunicipalCodes, selected, isSelectorMap]
-  );
-
-  const overlayCallback = useCallback(
-    (
-      feature: Feature<MultiPolygon, GeoJsonProperties>,
-      path: string,
-      _index: number
-    ) => {
-      const { vrcode } = feature.properties as SafetyRegionProperties;
-      return (
-        <Path
-          key={vrcode}
-          d={path}
-          fill="none"
           stroke={
-            hasData && vrcode !== selectedVrCode ? '#c4c4c4' : 'transparent'
+            isSelectorMap
+              ? '#01689b'
+              : selected
+              ? /**
+                 * If `selected` eq true, the map is zoomed in on a VR. Render
+                 * white strokes when we're rendering a municipality inside this
+                 * VR. Outside municipalities will have gray strokes.
+                 */
+                isInSameRegion
+                ? '#fff'
+                : '#c4c4c4'
+              : '#fff'
           }
           strokeWidth={0.5}
         />
       );
     },
-    [selectedVrCode, hasData]
+    [getFillColor, hasData, safetyRegionMunicipalCodes, selected, isSelectorMap]
   );
 
   const hoverCallback = useCallback(
@@ -169,12 +151,10 @@ export function MunicipalityChoropleth(props: TProps) {
     <div ref={ref} css={css({ bg: 'transparent', position: 'relative' })}>
       <Choropleth
         featureCollection={municipalGeo}
-        overlays={overlays}
         hovers={hasData || isSelectorMap ? municipalGeo : undefined}
         boundingBox={boundingbox || countryGeo}
         dimensions={dimensions}
         featureCallback={featureCallback}
-        overlayCallback={overlayCallback}
         hoverCallback={hoverCallback}
         onPathClick={onClick}
         getTooltipContent={getTooltipContent}
@@ -182,8 +162,3 @@ export function MunicipalityChoropleth(props: TProps) {
     </div>
   );
 }
-
-const overlays = {
-  ...countryGeo,
-  features: countryGeo.features.concat(regionGeo.features),
-};
