@@ -7,9 +7,9 @@ import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
+import { HeadingWithIcon } from '~/components-styled/heading-with-icon';
 import { ComboBox } from '~/components/comboBox';
 import { getLayout as getSiteLayout } from '~/components/layout';
-import { TitleWithIcon } from '~/components/titleWithIcon';
 import { IntakeHospitalMetric } from '~/components/veiligheidsregio/intake-hospital-metric';
 import { PositivelyTestedPeopleBarScale } from '~/components/veiligheidsregio/positive-tested-people-barscale';
 import { PositivelyTestedPeopleMetric } from '~/components/veiligheidsregio/positive-tested-people-metric';
@@ -154,8 +154,8 @@ function SafetyRegionLayout(
                         `/veiligheidsregio/[code]/positief-geteste-mensen`
                       )}
                     >
-                      <TitleWithIcon
-                        Icon={GetestIcon}
+                      <HeadingWithIcon
+                        icon={<GetestIcon />}
                         title={
                           siteText.veiligheidsregio_positief_geteste_personen
                             .titel_sidebar
@@ -188,8 +188,8 @@ function SafetyRegionLayout(
                         `/veiligheidsregio/[code]/ziekenhuis-opnames`
                       )}
                     >
-                      <TitleWithIcon
-                        Icon={Ziekenhuis}
+                      <HeadingWithIcon
+                        icon={<Ziekenhuis />}
                         title={
                           siteText.veiligheidsregio_ziekenhuisopnames_per_dag
                             .titel_sidebar
@@ -217,8 +217,8 @@ function SafetyRegionLayout(
                         '/veiligheidsregio/[code]/verpleeghuiszorg'
                       )}
                     >
-                      <TitleWithIcon
-                        Icon={Verpleeghuiszorg}
+                      <HeadingWithIcon
+                        icon={<Verpleeghuiszorg />}
                         title={
                           siteText
                             .veiligheidsregio_verpleeghuis_besmette_locaties
@@ -251,8 +251,8 @@ function SafetyRegionLayout(
                         `/veiligheidsregio/[code]/rioolwater`
                       )}
                     >
-                      <TitleWithIcon
-                        Icon={RioolwaterMonitoring}
+                      <HeadingWithIcon
+                        icon={<RioolwaterMonitoring />}
                         title={
                           siteText.veiligheidsregio_rioolwater_metingen
                             .titel_sidebar
@@ -280,8 +280,8 @@ function SafetyRegionLayout(
                         '/veiligheidsregio/[code]/gedrag'
                       )}
                     >
-                      <TitleWithIcon
-                        Icon={Gedrag}
+                      <HeadingWithIcon
+                        icon={<Gedrag />}
                         title={siteText.nl_gedrag.sidebar.titel}
                       />
                       <span>

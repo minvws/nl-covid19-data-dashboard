@@ -1,13 +1,17 @@
+import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Afname from '~/assets/afname.svg';
 import Getest from '~/assets/test.svg';
 import { Anchor } from '~/components-styled/anchor';
 import { Box } from '~/components-styled/base';
+import { RegionControlOption } from '~/components-styled/chart-region-controls';
+import { ChartTile } from '~/components-styled/chart-tile';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { MultipleLineChartTile } from '~/components-styled/multiple-line-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
 import { BarChart } from '~/components/charts/index';
@@ -26,19 +30,15 @@ import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
+import { colors } from '~/style/theme';
 import {
   InfectedPeopleDeltaNormalized,
   IntakeShareAgeGroups,
   NationalInfectedPeopleTotal,
 } from '~/types/data.d';
+import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
-import { formatDateFromSeconds } from '~/utils/formatDate';
-import { MultipleLineChartTile } from '~/components-styled/multiple-line-chart-tile';
-import { RegionControlOption } from '~/components-styled/chart-region-controls';
-import { ChartTile } from '~/components-styled/chart-tile';
-import { colors } from '~/style/theme';
-import css from '@styled-system/css';
 
 const text = siteText.positief_geteste_personen;
 const ggdText = siteText.positief_geteste_personen_ggd;
@@ -75,7 +75,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
       <ContentHeader
         category={siteText.nationaal_layout.headings.besmettingen}
         title={text.titel}
-        Icon={Getest}
+        icon={<Getest />}
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
@@ -220,7 +220,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
       <ContentHeader_weekRangeHack
         title={ggdText.titel}
         id="ggd"
-        Icon={Afname}
+        icon={<Afname />}
         subtitle={ggdText.toelichting}
         metadata={{
           datumsText: ggdText.datums,
