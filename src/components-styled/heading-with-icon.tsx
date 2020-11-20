@@ -10,21 +10,41 @@ interface IProps {
   headingLevel?: 2 | 3;
 }
 
+function Icon({
+  children,
+  small,
+}: {
+  children: React.ReactNode;
+  small: boolean;
+}) {
+  const size = small ? '2.5rem' : '4rem';
+
+  return (
+    <Box
+      flex="0 0 auto"
+      display="flex"
+      flexDirection="row"
+      flexWrap="nowrap"
+      justifyContent="center"
+      alignItems="center"
+      padding={0}
+      marginRight={0}
+      css={css({
+        width: size,
+        height: size,
+        '& svg': {
+          width: size,
+          height: size,
+        },
+      })}
+    >
+      {children}
+    </Box>
+  );
+}
+
 export function HeadingWithIcon(props: IProps) {
   const { icon, title, subtitle, headingLevel = 3 } = props;
-
-  const cssProps =
-    headingLevel === 3
-      ? {
-          width: '2.5rem',
-          height: '2.5rem',
-          '& svg': { width: '2.5rem', height: '2.5rem' },
-        }
-      : {
-          width: '4rem',
-          height: '4rem',
-          '& svg': { width: '4rem', height: '4rem' },
-        };
 
   return (
     <Box
@@ -34,19 +54,7 @@ export function HeadingWithIcon(props: IProps) {
       alignItems="center"
       mb={-2}
     >
-      <Box
-        flex="0 0 auto"
-        display="flex"
-        flexDirection="row"
-        flexWrap="nowrap"
-        justifyContent="center"
-        alignItems="center"
-        padding={0}
-        marginRight={0}
-        css={css(cssProps)}
-      >
-        {icon}
-      </Box>
+      <Icon small={headingLevel === 3}>{icon}</Icon>
 
       <Box>
         <Heading
