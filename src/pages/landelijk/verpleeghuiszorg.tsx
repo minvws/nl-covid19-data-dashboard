@@ -52,6 +52,7 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
           dateInsertedUnix: nursinghomeData.last_value.date_of_insertion_unix,
           dataSource: positiveTestedPeopleText.bron,
         }}
+        reference={positiveTestedPeopleText.reference}
       />
 
       <TwoKpiSection>
@@ -89,6 +90,7 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
           dateInsertedUnix: nursinghomeData.last_value.date_of_insertion_unix,
           dataSource: infectedLocationsText.bron,
         }}
+        reference={infectedLocationsText.reference}
       />
 
       <TwoKpiSection>
@@ -166,6 +168,7 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
           dateInsertedUnix: nursinghomeData.last_value.date_of_insertion_unix,
           dataSource: locationDeaths.bron,
         }}
+        reference={locationDeaths.reference}
       />
 
       <TwoKpiSection>

@@ -37,6 +37,7 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
             lastKnownValidData.last_value.date_of_insertion_unix,
           dataSource: text.bron,
         }}
+        reference={text.reference}
       />
 
       <TwoKpiSection>

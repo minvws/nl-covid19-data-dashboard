@@ -57,6 +57,10 @@
       "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
       "text": "Stichting NICE"
     },
+    "reference": {
+      "href": "/verantwoording",
+      "text": "Lees meer in de cijferverantwoording."
+    },
     "titel": "Intensive care-opnames per dag",
     "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag op de intensive care is opgenomen.",
     "barscale_titel": "Intensive care-opnames per dag",
@@ -94,6 +98,10 @@
       "href": "https://www.nivel.nl/nl/nivel-zorgregistraties-eerste-lijn/nivel-zorgregistraties-eerste-lijn",
       "text": "Nivel Zorgregistraties Eerste Lijn"
     },
+    "reference": {
+      "href": "/verantwoording",
+      "text": "Lees meer in de cijferverantwoording."
+    },
     "estimated_amount_of_patients": "Geschat aantal patiënten met COVID-19-achtige klachten:",
     "titel": "Aantal patiënten met eerste melding van COVID-19 klachten bij de huisarts",
     "pagina_toelichting": "Elke week berekent het Nivel aan de hand van de geregistreerde klachten door huisartsen, het aantal patiënten dat voor de eerste keer contact opneemt met de huisartsenpraktijk vanwege COVID-19-achtige klachten.",
@@ -117,6 +125,10 @@
     "bron": {
       "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
       "text": "Stichting NICE"
+    },
+    "reference": {
+      "href": "/verantwoording",
+      "text": "Lees meer in de cijferverantwoording."
     },
     "titel": "Ziekenhuisopnames per dag",
     "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen.\n\nLet op: Sinds 13 oktober wordt een nieuwe bron gebruikt voor de ziekenhuisopnames. Lees meer in de cijferverantwoording.",
@@ -165,6 +177,10 @@
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
+    },
+    "reference": {
+      "href": "/verantwoording",
+      "text": "Lees meer in de cijferverantwoording."
     },
     "titel": "Positief geteste mensen",
     "pagina_toelichting": "Door het aantal positief geteste mensen bij te houden krijgen we een duidelijk beeld van hoe snel het virus zich verspreidt voordat het de intensive care bereikt. Hierdoor blijven we voorbereid.",
@@ -224,6 +240,10 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/097155aa-75eb-4caa-8ed3-4c6edb80467e",
       "text": "RIVM"
     },
+    "reference": {
+      "href": "/verantwoording",
+      "text": "Lees meer in de cijferverantwoording."
+    },
     "legenda_line": "Het aantal besmettelijke mensen in Nederland.",
     "legenda_marge": "De onzekerheidsmarge toont tussen welke waarden het aantal besmettelijke mensen zich bevindt.",
     "rangeLegendLabel": "Onzekerheidsmarge",
@@ -251,6 +271,10 @@
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/ed0699d1-c9d5-4436-8517-27eb993eab6e",
       "text": "RIVM"
+    },
+    "reference": {
+      "href": "/verantwoording",
+      "text": "Lees meer in de cijferverantwoording."
     },
     "legenda_r": "De effectieve R is een schatting. Voor recente R schattingen is de betrouwbaarheid niet groot, daarom loopt de R-lijn niet door in de laatste twee weken.",
     "legenda_marge": "De onzekerheidsmarge toont tussen welke waarden de R zich bevindt. Dit wordt wekelijks bijgewerkt.",
@@ -320,6 +344,10 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
     },
+    "reference": {
+      "href": "/verantwoording",
+      "text": "Lees meer in de cijferverantwoording."
+    },
     "titel": "Verpleeghuiszorg - besmette locaties",
     "pagina_toelichting": "Dit getal is een inschatting van het aantal nieuwe verpleeghuislocaties waar sprake is van tenminste een COVID-19 besmetting op basis van een positieve test.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de cijferverantwoording.",
     "barscale_titel": "Aantal nieuwe locaties per dag",
@@ -347,6 +375,10 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
     },
+    "reference": {
+      "href": "/verantwoording",
+      "text": "Lees meer in de cijferverantwoording."
+    },
     "titel": "Verpleeghuiszorg - aantal positief geteste bewoners",
     "barscale_titel": "Aantal positief geteste bewoners in verpleeghuizen per dag",
     "extra_uitleg": "Aantal nieuwe positief geteste bewoners in verpleeghuizen dat per dag gemeld is.",
@@ -371,6 +403,10 @@
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
+    },
+    "reference": {
+      "href": "/verantwoording",
+      "text": "Lees meer in de cijferverantwoording."
     },
     "titel": "Verpleeghuiszorg - sterfte",
     "pagina_toelichting": "Aantal overleden bewoners in verpleeghuizen met een vastgestelde COVID-19-besmetting per dag.",
@@ -399,6 +435,10 @@
     "bron": {
       "text": "RIVM",
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
+    },
+    "reference": {
+      "href": "/verantwoording",
+      "text": "Lees meer in de cijferverantwoording."
     },
     "titel": "Rioolwatermeting",
     "pagina_toelichting": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners in rioolwater. Om het weekgemiddelde te berekenen worden alle meetwaarden van circa 300 locaties bij elkaar opgeteld en gedeeld door het aantal metingen.",
@@ -708,6 +748,10 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
     },
+    "reference": {
+      "href": "/verantwoording",
+      "text": "Lees meer in de cijferverantwoording."
+    },
     "linechart_description": "",
     "metadata": {
       "title": "Ziekenhuisopnames inwoners {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
@@ -744,6 +788,10 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
     },
+    "reference": {
+      "href": "/verantwoording",
+      "text": "Lees meer in de cijferverantwoording."
+    },
     "cluster_datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "cluster_bron": {
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
@@ -779,6 +827,10 @@
       "text": "RIVM",
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
     },
+    "reference": {
+      "href": "/verantwoording",
+      "text": "Lees meer in de cijferverantwoording."
+    },
     "graph_average_label_text": "Weekgemiddelde veiligheidsregio",
     "graph_secondary_label_text": "Individuele meetwaarden",
     "graph_average_label_text_rwzi": "Meetwaarde locatie {{name}}",
@@ -810,6 +862,10 @@
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
+    },
+    "reference": {
+      "href": "/verantwoording",
+      "text": "Lees meer in de cijferverantwoording."
     },
     "linechart_description": "",
     "metadata": {
@@ -847,6 +903,10 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
     },
+    "reference": {
+      "href": "/verantwoording",
+      "text": "Lees meer in de cijferverantwoording."
+    },
     "metadata": {
       "title": "Positief geteste mensen in {{municipalityName}} | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van het aantal mensen in de gemeente {{municipalityName}} die positief getest zijn en COVID-19 hebben."
@@ -868,6 +928,10 @@
     "bron": {
       "text": "RIVM",
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
+    },
+    "reference": {
+      "href": "/verantwoording",
+      "text": "Lees meer in de cijferverantwoording."
     },
     "graph_average_label_text": "Weekgemiddelde gemeente",
     "graph_secondary_label_text": "Gemeten waarde per locatie.",
@@ -956,6 +1020,10 @@
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     },
+    "reference": {
+      "href": "/verantwoording",
+      "text": "Lees meer in de cijferverantwoording."
+    },
     "toelichting": "Dit getal zegt iets over het totaal aantal personen dat via de GGD getest, waarvan een uitslag bekend is en hoeveel daarvan een positieve uitslag hadden. Let op dat de meeste testen via de GGD lopen, maar dit niet voor alle testen geldt. Daarom wijkt het absolute aantal positief geteste personen af van het aantal positief geteste personen door de GGD.",
     "totaal_getest_week_titel": "Aantal geteste personen via GGD",
     "totaal_getest_week_uitleg": "Aantal personen die in één week via de GGD getest zijn, en waarvan de testuitslag bekend is.",
@@ -987,6 +1055,10 @@
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     },
+    "reference": {
+      "href": "/verantwoording",
+      "text": "Lees meer in de cijferverantwoording."
+    },
     "toelichting": "Dit getal zegt iets over het totaal aantal personen dat via de GGD getest, waarvan een uitslag bekend is en hoeveel daarvan een positieve uitslag hadden. Let op dat de meeste testen via de GGD lopen, maar dit niet voor alle testen geldt. Daarom wijkt het absolute aantal positief geteste personen af van het aantal positief geteste personen door de GGD.",
     "totaal_getest_week_titel": "Aantal geteste personen via GGD",
     "totaal_getest_week_uitleg": "Aantal personen die in één week via de GGD getest zijn, en waarvan de testuitslag bekend is.",
@@ -1005,6 +1077,10 @@
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
+    },
+    "reference": {
+      "href": "/verantwoording",
+      "text": "Lees meer in de cijferverantwoording."
     },
     "titel": "Verpleeghuiszorg - Sterfte in {{safetyRegion}}",
     "pagina_toelichting": "Aantal overleden bewoners in verpleeghuizen met een vastgestelde COVID-19-besmetting per dag.",
@@ -1026,6 +1102,10 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
     },
+    "reference": {
+      "href": "/verantwoording",
+      "text": "Lees meer in de cijferverantwoording."
+    },
     "titel": "Verpleeghuiszorg - Aantal besmette locaties in {{safetyRegion}}",
     "pagina_toelichting": "Dit getal is een inschatting van het aantal nieuwe verpleeghuislocaties waar sprake is van tenminste een COVID-19 besmetting op basis van een positieve test.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de cijferverantwoording.",
     "barscale_titel": "Aantal nieuwe locaties per dag",
@@ -1045,6 +1125,10 @@
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
+    },
+    "reference": {
+      "href": "/verantwoording",
+      "text": "Lees meer in de cijferverantwoording."
     },
     "titel": "Verpleeghuiszorg - Aantal positief geteste bewoners in {{safetyRegion}}",
     "barscale_titel": "Aantal positief geteste bewoners in verpleeghuizen per dag",
@@ -1115,6 +1199,10 @@
       "text": "Naam bron",
       "href": "link naar de bron"
     },
+    "reference": {
+      "href": "/verantwoording",
+      "text": "Lees meer in de cijferverantwoording."
+    },
     "onderzoek_uitleg": {
       "titel": "Onderzoek onder de Nederlandse bevolking",
       "toelichting": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dapibus convallis turpis in mattis. In pellentesque a dui sit amet dapibus. Sed lacus quam, facilisis egestas condimentum ac, suscipit sed eros. Aenean placerat velit porta ornare tincidunt. Cras gravida, mauris ut efficitur maximus, nisi leo accumsan mauris, at luctus ipsum felis eget purus."
@@ -1170,6 +1258,10 @@
     "bron": {
       "text": "Naam bron",
       "href": "link naar de bron"
+    },
+    "reference": {
+      "href": "/verantwoording",
+      "text": "Lees meer in de cijferverantwoording."
     },
     "onderzoek_uitleg": {
       "titel": "Onderzoek onder de Nederlandse bevolking",

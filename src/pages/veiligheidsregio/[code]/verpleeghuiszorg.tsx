@@ -62,6 +62,7 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
           dateInsertedUnix: nursinghomeLastValue.date_of_insertion_unix,
           dataSource: positiveTestPeopleText.bron,
         }}
+        reference={positiveTestPeopleText.reference}
       />
 
       <TwoKpiSection>
@@ -101,6 +102,7 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
           dateInsertedUnix: nursinghomeLastValue.date_of_insertion_unix,
           dataSource: locationsText.bron,
         }}
+        reference={locationsText.reference}
       />
 
       <TwoKpiSection>
@@ -157,6 +159,7 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
           dateInsertedUnix: nursinghomeLastValue.date_of_insertion_unix,
           dataSource: mortalityText.bron,
         }}
+        reference={mortalityText.reference}
       />
 
       <TwoKpiSection>
