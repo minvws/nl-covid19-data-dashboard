@@ -7,9 +7,9 @@ import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
+import { HeadingWithIcon } from '~/components-styled/heading-with-icon';
 import { ComboBox } from '~/components/comboBox';
 import { getLayout as getSiteLayout } from '~/components/layout';
-import { TitleWithIcon } from '~/components/titleWithIcon';
 import { IntakeHospitalMetric } from '~/components/veiligheidsregio/intake-hospital-metric';
 import { PositivelyTestedPeopleBarScale } from '~/components/veiligheidsregio/positive-tested-people-barscale';
 import { PositivelyTestedPeopleMetric } from '~/components/veiligheidsregio/positive-tested-people-metric';
@@ -88,15 +88,9 @@ function SafetyRegionLayout(
 
   function handleSafeRegionSelect(region: TSafetyRegion) {
     if (isLargeScreen) {
-      router.push(
-        '/veiligheidsregio/[code]/positief-geteste-mensen',
-        `/veiligheidsregio/${region.code}/positief-geteste-mensen`
-      );
+      router.push(`/veiligheidsregio/${region.code}/positief-geteste-mensen`);
     } else {
-      router.push(
-        '/veiligheidsregio/[code]',
-        `/veiligheidsregio/${region.code}`
-      );
+      router.push(`/veiligheidsregio/${region.code}`);
     }
   }
 
@@ -125,7 +119,7 @@ function SafetyRegionLayout(
             : 'has-menu-closed'
         }`}
       >
-        <Link href="/veiligheidsregio/[code]" as={`/veiligheidsregio/${code}`}>
+        <Link href={`/veiligheidsregio/${code}`}>
           <a className="back-button" onClick={openMenu}>
             <Arrow />
             {siteText.nav.terug_naar_alle_cijfers}
@@ -145,8 +139,7 @@ function SafetyRegionLayout(
               <ul>
                 <li>
                   <Link
-                    href="/veiligheidsregio/[code]/positief-geteste-mensen"
-                    as={`/veiligheidsregio/${code}/positief-geteste-mensen`}
+                    href={`/veiligheidsregio/${code}/positief-geteste-mensen`}
                   >
                     <a
                       onClick={blur}
@@ -154,8 +147,8 @@ function SafetyRegionLayout(
                         `/veiligheidsregio/[code]/positief-geteste-mensen`
                       )}
                     >
-                      <TitleWithIcon
-                        Icon={GetestIcon}
+                      <HeadingWithIcon
+                        icon={<GetestIcon />}
                         title={
                           siteText.veiligheidsregio_positief_geteste_personen
                             .titel_sidebar
@@ -178,18 +171,15 @@ function SafetyRegionLayout(
               <h2>{siteText.veiligheidsregio_layout.headings.ziekenhuizen}</h2>
               <ul>
                 <li>
-                  <Link
-                    href="/veiligheidsregio/[code]/ziekenhuis-opnames"
-                    as={`/veiligheidsregio/${code}/ziekenhuis-opnames`}
-                  >
+                  <Link href={`/veiligheidsregio/${code}/ziekenhuis-opnames`}>
                     <a
                       onClick={blur}
                       className={getClassName(
                         `/veiligheidsregio/[code]/ziekenhuis-opnames`
                       )}
                     >
-                      <TitleWithIcon
-                        Icon={Ziekenhuis}
+                      <HeadingWithIcon
+                        icon={<Ziekenhuis />}
                         title={
                           siteText.veiligheidsregio_ziekenhuisopnames_per_dag
                             .titel_sidebar
@@ -207,18 +197,15 @@ function SafetyRegionLayout(
               </h2>
               <ul>
                 <li>
-                  <Link
-                    href="/veiligheidsregio/[code]/verpleeghuiszorg"
-                    as={`/veiligheidsregio/${code}/verpleeghuiszorg`}
-                  >
+                  <Link href={`/veiligheidsregio/${code}/verpleeghuiszorg`}>
                     <a
                       onClick={blur}
                       className={getClassName(
                         '/veiligheidsregio/[code]/verpleeghuiszorg'
                       )}
                     >
-                      <TitleWithIcon
-                        Icon={Verpleeghuiszorg}
+                      <HeadingWithIcon
+                        icon={<Verpleeghuiszorg />}
                         title={
                           siteText
                             .veiligheidsregio_verpleeghuis_besmette_locaties
@@ -241,18 +228,15 @@ function SafetyRegionLayout(
 
               <ul>
                 <li>
-                  <Link
-                    href="/veiligheidsregio/[code]/rioolwater"
-                    as={`/veiligheidsregio/${code}/rioolwater`}
-                  >
+                  <Link href={`/veiligheidsregio/${code}/rioolwater`}>
                     <a
                       onClick={blur}
                       className={getClassName(
                         `/veiligheidsregio/[code]/rioolwater`
                       )}
                     >
-                      <TitleWithIcon
-                        Icon={RioolwaterMonitoring}
+                      <HeadingWithIcon
+                        icon={<RioolwaterMonitoring />}
                         title={
                           siteText.veiligheidsregio_rioolwater_metingen
                             .titel_sidebar
@@ -270,18 +254,15 @@ function SafetyRegionLayout(
               <h2>{siteText.nationaal_layout.headings.gedrag}</h2>
               <ul>
                 <li>
-                  <Link
-                    href="/veiligheidsregio/[code]/gedrag"
-                    as={`/veiligheidsregio/${code}/gedrag`}
-                  >
+                  <Link href={`/veiligheidsregio/${code}/gedrag`}>
                     <a
                       onClick={blur}
                       className={getClassName(
                         '/veiligheidsregio/[code]/gedrag'
                       )}
                     >
-                      <TitleWithIcon
-                        Icon={Gedrag}
+                      <HeadingWithIcon
+                        icon={<Gedrag />}
                         title={siteText.nl_gedrag.sidebar.titel}
                       />
                       <span>
@@ -297,7 +278,7 @@ function SafetyRegionLayout(
 
         <section className="safety-region-content">{children}</section>
 
-        <Link href="/veiligheidsregio/[code]" as={`/veiligheidsregio/${code}`}>
+        <Link href={`/veiligheidsregio/${code}`}>
           <a className="back-button back-button-footer" onClick={openMenu}>
             <Arrow />
             {siteText.nav.terug_naar_alle_cijfers}

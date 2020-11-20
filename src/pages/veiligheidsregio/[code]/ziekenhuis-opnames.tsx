@@ -51,7 +51,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
         title={replaceVariablesInText(text.titel, {
           safetyRegion: safetyRegionName,
         })}
-        Icon={Ziekenhuis}
+        icon={<Ziekenhuis />}
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,

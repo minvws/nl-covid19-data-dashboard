@@ -1,5 +1,6 @@
 import Repro from '~/assets/reproductiegetal.svg';
 import { KpiWithIllustrationTile } from '~/components-styled/kpi-with-illustration-tile';
+import { Legenda } from '~/components-styled/legenda';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
@@ -7,7 +8,6 @@ import { ContentHeader } from '~/components/contentHeader';
 import { ReproductionIndexBarScale } from '~/components/landelijk/reproduction-index-barscale';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
-import { Legenda } from '~/components-styled/legenda';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
@@ -28,7 +28,7 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
       <ContentHeader
         category={siteText.nationaal_layout.headings.besmettingen}
         title={text.titel}
-        Icon={Repro}
+        icon={<Repro />}
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,

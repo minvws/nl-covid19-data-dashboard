@@ -2,8 +2,10 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { Spacer } from '~/components-styled/base';
+import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
+import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/use-safety-region-legenda-data';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
@@ -19,8 +21,6 @@ import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
-import { LineChartTile } from '~/components-styled/line-chart-tile';
-import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 
 const text = siteText.ziekenhuisopnames_per_dag;
 
@@ -43,7 +43,7 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
       <ContentHeader_sourcesHack
         category={siteText.nationaal_layout.headings.ziekenhuizen}
         title={text.titel}
-        Icon={Ziekenhuis}
+        icon={<Ziekenhuis />}
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,

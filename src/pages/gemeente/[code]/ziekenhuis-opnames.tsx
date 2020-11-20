@@ -49,7 +49,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
         title={replaceVariablesInText(text.titel, {
           municipality: municipalityName,
         })}
-        Icon={Ziekenhuis}
+        icon={<Ziekenhuis />}
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,

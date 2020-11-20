@@ -1,23 +1,25 @@
-import { Metadata } from './metadata';
-import { TitleWithIcon } from '~/components/titleWithIcon';
+import { HeadingWithIcon } from '~/components-styled/heading-with-icon';
+import { Heading } from '~/components-styled/typography';
 import styles from '../layout/layout.module.scss';
+import { Metadata } from './metadata';
 
 export function ContentHeader(props: IContentHeaderProps) {
-  const { category, Icon, title, subtitle, metadata, id, reference } = props;
+  const { category, icon, title, subtitle, metadata, id, reference } = props;
 
   const layoutClasses = [styles.contentHeader];
 
   if (!category) {
     layoutClasses.push(styles.withoutCategory);
   }
-  if (!Icon) {
+  if (!icon) {
     layoutClasses.push(styles.withoutIcon);
   }
 
   return (
     <header id={id} className={layoutClasses.join(' ')}>
       {category && <p className={styles.category}>{category}</p>}
-      <TitleWithIcon Icon={Icon} title={title} as="h2" />
+      {icon && <HeadingWithIcon icon={icon} title={title} headingLevel={2} />}
+      {!icon && <Heading level={2}>{title}</Heading>}
 
       <div className={styles.text}>
         <p>
@@ -49,6 +51,6 @@ interface IContentHeaderProps {
     text: string;
   };
   category?: string;
-  Icon?: React.ComponentType;
+  icon?: JSX.Element;
   id?: string;
 }

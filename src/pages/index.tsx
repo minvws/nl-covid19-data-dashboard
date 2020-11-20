@@ -1,9 +1,12 @@
+import css from '@styled-system/css';
 import fs from 'fs';
 import { useRouter } from 'next/router';
 import path from 'path';
 import { useState } from 'react';
 import ExternalLink from '~/assets/external-link.svg';
 import Notification from '~/assets/notification.svg';
+import { ChoroplethTile } from '~/components-styled/choropleth-tile';
+import { HeadingWithIcon } from '~/components-styled/heading-with-icon';
 import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/use-safety-region-legenda-data';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
@@ -14,16 +17,14 @@ import { createPositiveTestedPeopleRegionalTooltip } from '~/components/chorople
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
-import { TitleWithIcon } from '~/components/titleWithIcon';
 import { TALLLanguages } from '~/locale/index';
-import { National, Regions, EscalationLevels } from '~/types/data';
+import theme from '~/style/theme';
+import { EscalationLevels, National, Regions } from '~/types/data';
+import { assert } from '~/utils/assert';
 import { MDToHTMLString } from '~/utils/MDToHTMLString';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import styles from './index.module.scss';
 import { EscalationMapLegenda } from './veiligheidsregio';
-import { assert } from '~/utils/assert';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { ChoroplethTile } from '~/components-styled/choropleth-tile';
-import css from '@styled-system/css';
 
 interface StaticProps {
   props: INationalHomepageData;
@@ -60,10 +61,10 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
 
   return (
     <>
-      <TitleWithIcon
-        Icon={Notification}
+      <HeadingWithIcon
+        icon={<Notification color={theme.colors.notification} />}
         title={text.laatste_ontwikkelingen.title}
-        as="h2"
+        headingLevel={2}
       />
       <article
         className={styles.notification}

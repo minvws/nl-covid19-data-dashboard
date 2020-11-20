@@ -86,7 +86,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
         title={replaceVariablesInText(text.titel, {
           municipality: municipalityName,
         })}
-        Icon={RioolwaterMonitoring}
+        icon={RioolwaterMonitoring}
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,

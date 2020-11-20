@@ -37,7 +37,11 @@ const nextConfig = {
       use: [
         {
           loader: '@svgr/webpack',
-          options: { typescript: false },
+          options: {
+            typescript: false,
+            dimensions: true,
+            svgo: false,
+          },
         },
       ],
       issuer: {
