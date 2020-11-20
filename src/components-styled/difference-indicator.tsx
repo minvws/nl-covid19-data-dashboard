@@ -11,43 +11,12 @@ import {
 } from 'styled-system';
 import IconUp from '~/assets/pijl-omhoog.svg';
 import IconDown from '~/assets/pijl-omlaag.svg';
+import IconGelijk from '~/assets/gelijk.svg';
 import siteText from '~/locale/index';
 import { DifferenceDecimal, DifferenceInteger } from '~/types/data';
 
 const text = siteText.toe_en_afname;
-
-type SpanProps = SpaceProps & ColorProps & TypographyProps;
-
-const Span = styled.span<SpanProps>(
-  compose(
-    color,
-    space,
-    typography
-    // css({
-    //   whiteSpace: 'nowrap',
-    //   display: 'inline-block',
-    //   fontFamily: 'body',
-
-    //   lineHeight: 2,
-    // })
-  )
-);
-
-const Container = styled.div(
-  css({
-    whiteSpace: 'nowrap',
-    display: 'inline-block',
-    fontSize: 1,
-    lineHeight: 2,
-
-    svg: {
-      mr: 1,
-      width: '12px',
-      verticalAlign: 'middle',
-    },
-  })
-);
-
+const DAY_IN_SECONDS = 24 * 60 * 60;
 interface DifferenceIndicatorProps {
   difference: DifferenceDecimal | DifferenceInteger;
   lastDateOfReport: number;
@@ -94,10 +63,35 @@ export function DifferenceIndicator(props: DifferenceIndicatorProps) {
   /**
    * @TODO discuss what to do for equal values. Maybe nothing
    */
-  return null;
+  return (
+    <Container>
+      <Span color="lightGray">
+        <IconGelijk />
+      </Span>
+      <Span>{`${text.gelijk} ${timespanText}`}</Span>
+    </Container>
+  );
 }
 
-const DAY_IN_SECONDS = 24 * 60 * 60;
+type SpanProps = SpaceProps & ColorProps & TypographyProps;
+
+const Span = styled.span<SpanProps>(compose(color, space, typography));
+
+const Container = styled.div(
+  css({
+    whiteSpace: 'nowrap',
+    display: 'inline-block',
+    fontSize: 1,
+    lineHeight: 2,
+    position: 'relative',
+
+    svg: {
+      mr: 1,
+      width: '1em',
+      verticalAlign: 'middle',
+    },
+  })
+);
 
 function getTimespanText(oldDate: number, newDate: number) {
   const days = Math.round((newDate - oldDate) / DAY_IN_SECONDS);
