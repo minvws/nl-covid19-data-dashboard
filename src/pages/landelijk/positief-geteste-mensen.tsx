@@ -54,7 +54,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
   const delta: InfectedPeopleDeltaNormalized =
     data.infected_people_delta_normalized;
   const age: IntakeShareAgeGroups = data.intake_share_age_groups;
-  const total: NationalInfectedPeopleTotal = data?.infected_people_total;
+  const total: NationalInfectedPeopleTotal = data.infected_people_total;
 
   const ggdLastValue = data.ggd.last_value;
   const ggdValues = data.ggd.values;
@@ -309,6 +309,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
       />
 
       <MultipleLineChartTile
+        timeframeOptions={['all', '5weeks']}
         title={ggdText.linechart_totaltests_titel}
         description={ggdText.linechart_totaltests_toelichting}
         values={[

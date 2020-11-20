@@ -100,6 +100,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           }}
         >
           <KpiValue
+            data-cy="total_reported_increase_per_region"
             absolute={Math.round(
               resultsPerRegion.last_value.total_reported_increase_per_region
             )}
