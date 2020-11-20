@@ -56,12 +56,12 @@
     "afname": "less than",
     "gelijk": "equal to",
     "tijdverloop": {
-      "gisteren": "gisteren",
-      "geleden": "geleden",
-      "dagen": "dagen",
+      "gisteren": "yesterday",
+      "geleden": "ago",
+      "dagen": "days",
       "week": {
         "enkelvoud": "week",
-        "meervoud": "weken"
+        "meervoud": "weeks"
       }
     }
   },
