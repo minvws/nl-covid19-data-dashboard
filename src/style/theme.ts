@@ -1,9 +1,4 @@
-import {
-  ScaleThemeProperties,
-  ThemeBreakPoints,
-  ThemeValue,
-} from '@styled-system/css';
-import * as CSS from 'csstype';
+import { ScaleThemeProperties, ThemeBreakPoints } from '@styled-system/css';
 
 const space = [
   0,
@@ -102,7 +97,9 @@ export const colors = {
       magenta: ['#F6B4D1', '#D3719C', '#9E3A66', '#64032D', '#000000'],
     },
   },
-} as const;
+};
+
+export type ThemeColors = typeof colors;
 
 const radii = [0, 5, 10];
 
@@ -111,7 +108,9 @@ const shadows = {
 };
 
 type TDashboardTheme = ScaleThemeProperties &
-  ThemeBreakPoints & { mediaQueries: TMediaQueries };
+  ThemeBreakPoints & { mediaQueries: TMediaQueries } & {
+    colors: ThemeColors;
+  };
 
 const theme: TDashboardTheme = {
   fonts,
@@ -120,7 +119,7 @@ const theme: TDashboardTheme = {
   breakpoints: breakpoints as any,
   mediaQueries,
   space,
-  colors: (colors as unknown) as ThemeValue<CSS.Property.Color>,
+  colors,
   radii,
   shadows,
 };

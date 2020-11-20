@@ -62,7 +62,7 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
   return (
     <>
       <HeadingWithIcon
-        icon={<Notification color={(theme.colors as any).notification} />}
+        icon={<Notification color={theme.colors.notification} />}
         title={text.laatste_ontwikkelingen.title}
         headingLevel={2}
       />

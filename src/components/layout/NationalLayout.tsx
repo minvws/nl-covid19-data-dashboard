@@ -120,11 +120,7 @@ function NationalLayout(props: NationalLayoutProps) {
                     className={`last-developments-link ${getClassName('/')}`}
                   >
                     <HeadingWithIcon
-                      icon={
-                        <Notification
-                          color={(theme.colors as any).notification}
-                        />
-                      }
+                      icon={<Notification color={theme.colors.notification} />}
                       title={siteText.laatste_ontwikkelingen.title}
                       subtitle={siteText.laatste_ontwikkelingen.menu_subtitle}
                     />
