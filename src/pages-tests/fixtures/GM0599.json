@@ -1,0 +1,4314 @@
+{
+  "last_generated": "1605606377",
+  "proto_name": "GM0599",
+  "name": "GM0599",
+  "code": "GM0599",
+  "hospital_admissions": {
+    "values": [
+      {
+        "date_of_report_unix": 1584316800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1584403200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1584489600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1584576000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1584662400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 2.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1584748800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 4.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1584835200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 4.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1584921600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 7.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1585008000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 6.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1585094400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 8.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1585180800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 7.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1585267200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 9.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1585353600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 11.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1585440000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 13.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1585526400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 14.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1585612800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 13.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1585699200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 12.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1585785600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 14.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1585872000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 12.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1585958400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 12.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1586044800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 10.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1586131200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 12.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1586217600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 11.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1586304000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 15.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1586390400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 14.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1586476800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 14.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1586563200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 10.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1586649600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 11.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1586736000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 9.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1586822400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 11.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1586908800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 11.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1586995200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 12.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1587081600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 10.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1587168000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 8.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1587254400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 10.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1587340800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 9.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1587427200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 9.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1587513600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 7.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1587600000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 7.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1587686400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 6.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1587772800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 5.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1587859200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 5.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1587945600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 6.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1588032000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 6.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1588118400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 5.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1588204800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 6.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1588291200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 8.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1588377600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 9.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1588464000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 6.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1588550400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 3.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1588636800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 3.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1588723200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 2.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1588809600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 4.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1588896000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 3.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1588982400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 7.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1589068800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 6.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1589155200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 4.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1589241600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1589328000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 3.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1589414400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 4.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1589500800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 4.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1589587200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 3.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1589673600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 2.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1589760000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 2.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1589846400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 3.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1589932800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 3.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1590019200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 3.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1590105600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1590192000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1590278400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1590364800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1590451200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1590537600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1590624000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1590710400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1590796800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1590883200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1590969600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1591056000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1591142400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1591228800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1591315200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1591401600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1591488000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1591574400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1591660800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1591747200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1591833600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1591920000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1592006400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1592092800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1592179200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1592265600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1592352000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1592438400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1592524800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1592611200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1592697600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1592784000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1592870400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1592956800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1593043200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1593129600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1593216000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1593302400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1593388800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1593475200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1593561600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1593648000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1593734400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1593820800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1593907200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1593993600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1594080000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1594166400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1594252800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1594339200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1594425600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1594512000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1594598400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1594684800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1594771200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1594857600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1594944000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1595030400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1595116800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1595203200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1595289600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1595376000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1595462400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1595548800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1595635200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1595721600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1595808000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1595894400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1595980800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1596067200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1596153600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1596240000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1596326400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1596412800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1596499200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1596585600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1596672000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1596758400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1596844800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1596931200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1597017600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1597104000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1597190400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1597276800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 2.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1597363200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 2.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1597449600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 2.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1597536000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1597622400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1597708800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1597795200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1597881600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 2.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1597968000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 2.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1598054400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1598140800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1598227200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1598313600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 2.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1598400000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 4.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1598486400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 4.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1598572800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 3.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1598659200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1598745600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1598832000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1598918400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 2.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1599004800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1599091200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1599177600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1599264000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1599350400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1599436800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1599523200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1599609600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 2.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1599696000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 2.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1599782400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1599868800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1599955200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 2.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1600041600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 2.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1600128000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 3.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1600214400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1600300800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 2.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1600387200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 3.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1600473600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 4.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1600560000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 4.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1600646400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 3.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1600732800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 2.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1600819200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 2.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1600905600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 2.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1600992000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1601078400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1601164800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 2.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1601251200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 2.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1601337600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 2.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1601424000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 2.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1601510400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 4.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1601596800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 3.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1601683200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 3.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1601769600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 1.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1601856000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 4.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1601942400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 4.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1602028800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 5.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1602115200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 6.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1602201600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 6.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1602288000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 6.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1602374400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 5.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1602460800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 6.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1602547200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 6.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1602633600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 8.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1602720000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 8.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1602806400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 8.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1602892800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 5.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1602979200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 4.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1603065600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 3.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1603152000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 4.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1603238400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 7.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1603324800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 8.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1603411200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 9.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1603497600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 6.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1603584000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 5.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1603670400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 7.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1603756800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 11.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1603843200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 9.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1603929600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 7.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1604016000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 4.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1604102400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 8.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1604188800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 10.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1604275200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 12.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1604361600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 10.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1604448000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 9.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1604534400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 7.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1604620800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 7.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1604707200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 10.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1604793600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 13.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1604880000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 14.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1604966400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 11.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1605052800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "moving_average_hospital": 10.3,
+        "date_of_insertion_unix": 1605169739
+      }
+    ],
+    "last_value": {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0599",
+      "municipality_name": "Rotterdam",
+      "moving_average_hospital": 10.3,
+      "date_of_insertion_unix": 1605169739
+    }
+  },
+  "positive_tested_people": {
+    "values": [
+      {
+        "date_of_report_unix": 1583107200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 0.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1583193600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1583280000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 2.0,
+        "infected_daily_increase": 0.3,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1583366400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 0.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1583452800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1583539200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 4.0,
+        "infected_daily_increase": 0.6,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1583625600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 2.0,
+        "infected_daily_increase": 0.3,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1583712000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 2.0,
+        "infected_daily_increase": 0.3,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1583798400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 3.0,
+        "infected_daily_increase": 0.5,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1583884800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1583971200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 0.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1584057600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1584144000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 8.0,
+        "infected_daily_increase": 1.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1584230400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 2.0,
+        "infected_daily_increase": 0.3,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1584316800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 5.0,
+        "infected_daily_increase": 0.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1584403200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 11.0,
+        "infected_daily_increase": 1.7,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1584489600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 17.0,
+        "infected_daily_increase": 2.6,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1584576000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 23.0,
+        "infected_daily_increase": 3.5,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1584662400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 22.0,
+        "infected_daily_increase": 3.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1584748800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 18.0,
+        "infected_daily_increase": 2.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1584835200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 21.0,
+        "infected_daily_increase": 3.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1584921600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 8.0,
+        "infected_daily_increase": 1.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1585008000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 14.0,
+        "infected_daily_increase": 2.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1585094400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 23.0,
+        "infected_daily_increase": 3.5,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1585180800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 18.0,
+        "infected_daily_increase": 2.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1585267200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 44.0,
+        "infected_daily_increase": 6.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1585353600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 62.0,
+        "infected_daily_increase": 9.5,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1585440000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 34.0,
+        "infected_daily_increase": 5.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1585526400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 32.0,
+        "infected_daily_increase": 4.9,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1585612800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 28.0,
+        "infected_daily_increase": 4.3,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1585699200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 52.0,
+        "infected_daily_increase": 8.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1585785600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 48.0,
+        "infected_daily_increase": 7.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1585872000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 48.0,
+        "infected_daily_increase": 7.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1585958400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 36.0,
+        "infected_daily_increase": 5.5,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1586044800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 85.0,
+        "infected_daily_increase": 13.1,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1586131200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 82.0,
+        "infected_daily_increase": 12.6,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1586217600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 33.0,
+        "infected_daily_increase": 5.1,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1586304000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 73.0,
+        "infected_daily_increase": 11.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1586390400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 83.0,
+        "infected_daily_increase": 12.7,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1586476800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 39.0,
+        "infected_daily_increase": 6.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1586563200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 133.0,
+        "infected_daily_increase": 20.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1586649600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 60.0,
+        "infected_daily_increase": 9.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1586736000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 51.0,
+        "infected_daily_increase": 7.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1586822400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 52.0,
+        "infected_daily_increase": 8.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1586908800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 43.0,
+        "infected_daily_increase": 6.6,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1586995200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 50.0,
+        "infected_daily_increase": 7.7,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1587081600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 48.0,
+        "infected_daily_increase": 7.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1587168000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 81.0,
+        "infected_daily_increase": 12.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1587254400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 56.0,
+        "infected_daily_increase": 8.6,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1587340800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 30.0,
+        "infected_daily_increase": 4.6,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1587427200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 33.0,
+        "infected_daily_increase": 5.1,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1587513600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 30.0,
+        "infected_daily_increase": 4.6,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1587600000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 51.0,
+        "infected_daily_increase": 7.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1587686400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 45.0,
+        "infected_daily_increase": 6.9,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1587772800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 42.0,
+        "infected_daily_increase": 6.5,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1587859200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 35.0,
+        "infected_daily_increase": 5.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1587945600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 35.0,
+        "infected_daily_increase": 5.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1588032000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 6.0,
+        "infected_daily_increase": 0.9,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1588118400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 26.0,
+        "infected_daily_increase": 4.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1588204800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 38.0,
+        "infected_daily_increase": 5.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1588291200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 41.0,
+        "infected_daily_increase": 6.3,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1588377600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 32.0,
+        "infected_daily_increase": 4.9,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1588464000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 26.0,
+        "infected_daily_increase": 4.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1588550400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1588636800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 31.0,
+        "infected_daily_increase": 4.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1588723200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 5.0,
+        "infected_daily_increase": 0.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1588809600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 33.0,
+        "infected_daily_increase": 5.1,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1588896000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 8.0,
+        "infected_daily_increase": 1.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1588982400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 18.0,
+        "infected_daily_increase": 2.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1589068800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 13.0,
+        "infected_daily_increase": 2.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1589155200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 4.0,
+        "infected_daily_increase": 0.6,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1589241600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 21.0,
+        "infected_daily_increase": 3.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1589328000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 16.0,
+        "infected_daily_increase": 2.5,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1589414400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 18.0,
+        "infected_daily_increase": 2.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1589500800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 11.0,
+        "infected_daily_increase": 1.7,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1589587200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 22.0,
+        "infected_daily_increase": 3.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1589673600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 7.0,
+        "infected_daily_increase": 1.1,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1589760000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 22.0,
+        "infected_daily_increase": 3.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1589846400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 6.0,
+        "infected_daily_increase": 0.9,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1589932800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 9.0,
+        "infected_daily_increase": 1.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1590019200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 30.0,
+        "infected_daily_increase": 4.6,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1590105600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 13.0,
+        "infected_daily_increase": 2.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1590192000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 5.0,
+        "infected_daily_increase": 0.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1590278400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 10.0,
+        "infected_daily_increase": 1.5,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1590364800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 13.0,
+        "infected_daily_increase": 2.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1590451200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 4.0,
+        "infected_daily_increase": 0.6,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1590537600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 11.0,
+        "infected_daily_increase": 1.7,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1590624000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 6.0,
+        "infected_daily_increase": 0.9,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1590710400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 3.0,
+        "infected_daily_increase": 0.5,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1590796800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 6.0,
+        "infected_daily_increase": 0.9,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1590883200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 0.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1590969600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 3.0,
+        "infected_daily_increase": 0.5,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1591056000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 2.0,
+        "infected_daily_increase": 0.3,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1591142400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 5.0,
+        "infected_daily_increase": 0.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1591228800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 8.0,
+        "infected_daily_increase": 1.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1591315200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 21.0,
+        "infected_daily_increase": 3.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1591401600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 18.0,
+        "infected_daily_increase": 2.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1591488000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 20.0,
+        "infected_daily_increase": 3.1,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1591574400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 11.0,
+        "infected_daily_increase": 1.7,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1591660800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 14.0,
+        "infected_daily_increase": 2.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1591747200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 15.0,
+        "infected_daily_increase": 2.3,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1591833600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 12.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1591920000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 27.0,
+        "infected_daily_increase": 4.1,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1592006400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 19.0,
+        "infected_daily_increase": 2.9,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1592092800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 8.0,
+        "infected_daily_increase": 1.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1592179200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 10.0,
+        "infected_daily_increase": 1.5,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1592265600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 16.0,
+        "infected_daily_increase": 2.5,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1592352000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 9.0,
+        "infected_daily_increase": 1.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1592438400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 9.0,
+        "infected_daily_increase": 1.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1592524800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 9.0,
+        "infected_daily_increase": 1.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1592611200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 12.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1592697600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 6.0,
+        "infected_daily_increase": 0.9,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1592784000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 0.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1592870400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 4.0,
+        "infected_daily_increase": 0.6,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1592956800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 7.0,
+        "infected_daily_increase": 1.1,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1593043200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 7.0,
+        "infected_daily_increase": 1.1,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1593129600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 8.0,
+        "infected_daily_increase": 1.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1593216000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 8.0,
+        "infected_daily_increase": 1.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1593302400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 11.0,
+        "infected_daily_increase": 1.7,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1593388800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 8.0,
+        "infected_daily_increase": 1.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1593475200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 5.0,
+        "infected_daily_increase": 0.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1593561600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 8.0,
+        "infected_daily_increase": 1.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1593648000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 8.0,
+        "infected_daily_increase": 1.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1593734400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 5.0,
+        "infected_daily_increase": 0.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1593820800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 7.0,
+        "infected_daily_increase": 1.1,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1593907200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 7.0,
+        "infected_daily_increase": 1.1,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1593993600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 7.0,
+        "infected_daily_increase": 1.1,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1594080000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1594166400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 4.0,
+        "infected_daily_increase": 0.6,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1594252800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 11.0,
+        "infected_daily_increase": 1.7,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1594339200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 7.0,
+        "infected_daily_increase": 1.1,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1594425600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 14.0,
+        "infected_daily_increase": 2.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1594512000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 28.0,
+        "infected_daily_increase": 4.3,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1594598400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 8.0,
+        "infected_daily_increase": 1.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1594684800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 32.0,
+        "infected_daily_increase": 4.9,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1594771200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 20.0,
+        "infected_daily_increase": 3.1,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1594857600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 16.0,
+        "infected_daily_increase": 2.5,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1594944000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 14.0,
+        "infected_daily_increase": 2.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1595030400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 11.0,
+        "infected_daily_increase": 1.7,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1595116800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 22.0,
+        "infected_daily_increase": 3.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1595203200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 33.0,
+        "infected_daily_increase": 5.1,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1595289600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 23.0,
+        "infected_daily_increase": 3.5,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1595376000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 30.0,
+        "infected_daily_increase": 4.6,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1595462400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 35.0,
+        "infected_daily_increase": 5.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1595548800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 30.0,
+        "infected_daily_increase": 4.6,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1595635200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 41.0,
+        "infected_daily_increase": 6.3,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1595721600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 49.0,
+        "infected_daily_increase": 7.5,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1595808000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 39.0,
+        "infected_daily_increase": 6.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1595894400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 49.0,
+        "infected_daily_increase": 7.5,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1595980800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 44.0,
+        "infected_daily_increase": 6.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1596067200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 76.0,
+        "infected_daily_increase": 11.7,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1596153600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 64.0,
+        "infected_daily_increase": 9.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1596240000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 97.0,
+        "infected_daily_increase": 14.9,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1596326400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 75.0,
+        "infected_daily_increase": 11.5,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1596412800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 94.0,
+        "infected_daily_increase": 14.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1596499200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 93.0,
+        "infected_daily_increase": 14.3,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1596585600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 89.0,
+        "infected_daily_increase": 13.7,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1596672000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 90.0,
+        "infected_daily_increase": 13.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1596758400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 82.0,
+        "infected_daily_increase": 12.6,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1596844800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 51.0,
+        "infected_daily_increase": 7.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1596931200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 109.0,
+        "infected_daily_increase": 16.7,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1597017600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 111.0,
+        "infected_daily_increase": 17.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1597104000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 110.0,
+        "infected_daily_increase": 16.9,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1597190400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 126.0,
+        "infected_daily_increase": 19.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1597276800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 78.0,
+        "infected_daily_increase": 12.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1597363200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 73.0,
+        "infected_daily_increase": 11.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1597449600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 111.0,
+        "infected_daily_increase": 17.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1597536000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 59.0,
+        "infected_daily_increase": 9.1,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1597622400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 46.0,
+        "infected_daily_increase": 7.1,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1597708800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 58.0,
+        "infected_daily_increase": 8.9,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1597795200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 59.0,
+        "infected_daily_increase": 9.1,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1597881600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 70.0,
+        "infected_daily_increase": 10.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1597968000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 50.0,
+        "infected_daily_increase": 7.7,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1598054400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 59.0,
+        "infected_daily_increase": 9.1,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1598140800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 53.0,
+        "infected_daily_increase": 8.1,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1598227200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 56.0,
+        "infected_daily_increase": 8.6,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1598313600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 34.0,
+        "infected_daily_increase": 5.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1598400000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 64.0,
+        "infected_daily_increase": 9.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1598486400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 61.0,
+        "infected_daily_increase": 9.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1598572800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 55.0,
+        "infected_daily_increase": 8.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1598659200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 49.0,
+        "infected_daily_increase": 7.5,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1598745600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 50.0,
+        "infected_daily_increase": 7.7,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1598832000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 33.0,
+        "infected_daily_increase": 5.1,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1598918400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 60.0,
+        "infected_daily_increase": 9.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1599004800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 110.0,
+        "infected_daily_increase": 16.9,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1599091200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 69.0,
+        "infected_daily_increase": 10.6,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1599177600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 58.0,
+        "infected_daily_increase": 8.9,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1599264000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 45.0,
+        "infected_daily_increase": 6.9,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1599350400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 78.0,
+        "infected_daily_increase": 12.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1599436800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 76.0,
+        "infected_daily_increase": 11.7,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1599523200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 74.0,
+        "infected_daily_increase": 11.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1599609600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 86.0,
+        "infected_daily_increase": 13.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1599696000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 105.0,
+        "infected_daily_increase": 16.1,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1599782400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 121.0,
+        "infected_daily_increase": 18.6,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1599868800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 87.0,
+        "infected_daily_increase": 13.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1599955200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 107.0,
+        "infected_daily_increase": 16.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1600041600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 93.0,
+        "infected_daily_increase": 14.3,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1600128000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 100.0,
+        "infected_daily_increase": 15.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1600214400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 163.0,
+        "infected_daily_increase": 25.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1600300800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 163.0,
+        "infected_daily_increase": 25.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1600387200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 187.0,
+        "infected_daily_increase": 28.7,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1600473600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 118.0,
+        "infected_daily_increase": 18.1,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1600560000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 106.0,
+        "infected_daily_increase": 16.3,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1600646400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 222.0,
+        "infected_daily_increase": 34.1,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1600732800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 132.0,
+        "infected_daily_increase": 20.3,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1600819200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 162.0,
+        "infected_daily_increase": 24.9,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1600905600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 243.0,
+        "infected_daily_increase": 37.3,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1600992000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 172.0,
+        "infected_daily_increase": 26.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1601078400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 162.0,
+        "infected_daily_increase": 24.9,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1601164800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 283.0,
+        "infected_daily_increase": 43.5,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1601251200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 269.0,
+        "infected_daily_increase": 41.3,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1601337600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 242.0,
+        "infected_daily_increase": 37.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1601424000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 258.0,
+        "infected_daily_increase": 39.6,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1601510400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 278.0,
+        "infected_daily_increase": 42.7,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1601596800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 305.0,
+        "infected_daily_increase": 46.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1601683200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 289.0,
+        "infected_daily_increase": 44.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1601769600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 267.0,
+        "infected_daily_increase": 41.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1601856000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 396.0,
+        "infected_daily_increase": 60.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1601942400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 271.0,
+        "infected_daily_increase": 41.6,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1602028800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 326.0,
+        "infected_daily_increase": 50.1,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1602115200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 430.0,
+        "infected_daily_increase": 66.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1602201600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 450.0,
+        "infected_daily_increase": 69.1,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1602288000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 389.0,
+        "infected_daily_increase": 59.7,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1602374400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 385.0,
+        "infected_daily_increase": 59.1,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1602460800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 437.0,
+        "infected_daily_increase": 67.1,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1602547200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 426.0,
+        "infected_daily_increase": 65.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1602633600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 560.0,
+        "infected_daily_increase": 86.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1602720000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 473.0,
+        "infected_daily_increase": 72.6,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1602806400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 330.0,
+        "infected_daily_increase": 50.7,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1602892800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 413.0,
+        "infected_daily_increase": 63.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1602979200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 617.0,
+        "infected_daily_increase": 94.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1603065600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 547.0,
+        "infected_daily_increase": 84.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1603152000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 496.0,
+        "infected_daily_increase": 76.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1603238400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 478.0,
+        "infected_daily_increase": 73.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1603324800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 678.0,
+        "infected_daily_increase": 104.1,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1603411200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 557.0,
+        "infected_daily_increase": 85.5,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1603497600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 472.0,
+        "infected_daily_increase": 72.5,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1603584000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 627.0,
+        "infected_daily_increase": 96.3,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1603670400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 648.0,
+        "infected_daily_increase": 99.5,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1603756800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 599.0,
+        "infected_daily_increase": 92.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1603843200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 561.0,
+        "infected_daily_increase": 86.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1603929600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 574.0,
+        "infected_daily_increase": 88.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1604016000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 670.0,
+        "infected_daily_increase": 102.9,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1604102400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 646.0,
+        "infected_daily_increase": 99.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1604188800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 615.0,
+        "infected_daily_increase": 94.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1604275200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 507.0,
+        "infected_daily_increase": 77.9,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1604361600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 596.0,
+        "infected_daily_increase": 91.5,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1604448000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 414.0,
+        "infected_daily_increase": 63.6,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1604534400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 515.0,
+        "infected_daily_increase": 79.1,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1604620800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 534.0,
+        "infected_daily_increase": 82.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1604707200,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 422.0,
+        "infected_daily_increase": 64.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1604793600,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 379.0,
+        "infected_daily_increase": 58.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1604880000,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 338.0,
+        "infected_daily_increase": 51.9,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1604966400,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 196.0,
+        "infected_daily_increase": 30.1,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1605052800,
+        "gmcode": "GM0599",
+        "municipality_name": "Rotterdam",
+        "infected_daily_total": 285.0,
+        "infected_daily_increase": 43.8,
+        "date_of_insertion_unix": 1605178262
+      }
+    ],
+    "last_value": {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0599",
+      "municipality_name": "Rotterdam",
+      "infected_daily_total": 285.0,
+      "infected_daily_increase": 43.8,
+      "date_of_insertion_unix": 1605178262
+    }
+  },
+  "sewer_per_installation": {
+    "values": [
+      {
+        "rwzi_awzi_code": "15004",
+        "values": [
+          {
+            "date_measurement_unix": 1604275200,
+            "week_start_unix": 1604275200,
+            "week_end_unix": 1604793600,
+            "week": 45,
+            "rwzi_awzi_code": "15004",
+            "rwzi_awzi_name": "Nieuwe Waterweg",
+            "gmcode": "GM0599",
+            "rna_normalized": 215.0,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1603238400,
+            "week_start_unix": 1603065600,
+            "week_end_unix": 1603584000,
+            "week": 43,
+            "rwzi_awzi_code": "15004",
+            "rwzi_awzi_name": "Nieuwe Waterweg",
+            "gmcode": "GM0599",
+            "rna_normalized": 1984.46,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1603929600,
+            "week_start_unix": 1603670400,
+            "week_end_unix": 1604188800,
+            "week": 44,
+            "rwzi_awzi_code": "15004",
+            "rwzi_awzi_name": "Nieuwe Waterweg",
+            "gmcode": "GM0599",
+            "rna_normalized": 1681.56,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1601769600,
+            "week_start_unix": 1601251200,
+            "week_end_unix": 1601769600,
+            "week": 41,
+            "rwzi_awzi_code": "15004",
+            "rwzi_awzi_name": "Nieuwe Waterweg",
+            "gmcode": "GM0599",
+            "rna_normalized": 95.48,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1602374400,
+            "week_start_unix": 1601856000,
+            "week_end_unix": 1602374400,
+            "week": 42,
+            "rwzi_awzi_code": "15004",
+            "rwzi_awzi_name": "Nieuwe Waterweg",
+            "gmcode": "GM0599",
+            "rna_normalized": 1335.03,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1599436800,
+            "week_start_unix": 1599436800,
+            "week_end_unix": 1599955200,
+            "week": 37,
+            "rwzi_awzi_code": "15004",
+            "rwzi_awzi_name": "Nieuwe Waterweg",
+            "gmcode": "GM0599",
+            "rna_normalized": 0.0,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1600300800,
+            "week_start_unix": 1600041600,
+            "week_end_unix": 1600560000,
+            "week": 38,
+            "rwzi_awzi_code": "15004",
+            "rwzi_awzi_name": "Nieuwe Waterweg",
+            "gmcode": "GM0599",
+            "rna_normalized": 248.0,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1601251200,
+            "week_start_unix": 1601251200,
+            "week_end_unix": 1601769600,
+            "week": 40,
+            "rwzi_awzi_code": "15004",
+            "rwzi_awzi_name": "Nieuwe Waterweg",
+            "gmcode": "GM0599",
+            "rna_normalized": 132.51,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1600732800,
+            "week_start_unix": 1600646400,
+            "week_end_unix": 1601164800,
+            "week": 39,
+            "rwzi_awzi_code": "15004",
+            "rwzi_awzi_name": "Nieuwe Waterweg",
+            "gmcode": "GM0599",
+            "rna_normalized": 130.97,
+            "date_of_insertion_unix": 1605169572
+          }
+        ],
+        "last_value": {
+          "date_measurement_unix": 1600732800,
+          "week_start_unix": 1600646400,
+          "week_end_unix": 1601164800,
+          "week": 39,
+          "rwzi_awzi_code": "15004",
+          "rwzi_awzi_name": "Nieuwe Waterweg",
+          "gmcode": "GM0599",
+          "rna_normalized": 130.97,
+          "date_of_insertion_unix": 1605169572
+        }
+      },
+      {
+        "rwzi_awzi_code": "17070",
+        "values": [
+          {
+            "date_measurement_unix": 1604275200,
+            "week_start_unix": 1604275200,
+            "week_end_unix": 1604793600,
+            "week": 45,
+            "rwzi_awzi_code": "17070",
+            "rwzi_awzi_name": "Hoogvliet",
+            "gmcode": "GM0599",
+            "rna_normalized": 341.27,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1603584000,
+            "week_start_unix": 1603065600,
+            "week_end_unix": 1603584000,
+            "week": 44,
+            "rwzi_awzi_code": "17070",
+            "rwzi_awzi_name": "Hoogvliet",
+            "gmcode": "GM0599",
+            "rna_normalized": 1874.51,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1602979200,
+            "week_start_unix": 1602460800,
+            "week_end_unix": 1602979200,
+            "week": 43,
+            "rwzi_awzi_code": "17070",
+            "rwzi_awzi_name": "Hoogvliet",
+            "gmcode": "GM0599",
+            "rna_normalized": 684.96,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1602374400,
+            "week_start_unix": 1601856000,
+            "week_end_unix": 1602374400,
+            "week": 42,
+            "rwzi_awzi_code": "17070",
+            "rwzi_awzi_name": "Hoogvliet",
+            "gmcode": "GM0599",
+            "rna_normalized": 1525.82,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1601683200,
+            "week_start_unix": 1601251200,
+            "week_end_unix": 1601769600,
+            "week": 40,
+            "rwzi_awzi_code": "17070",
+            "rwzi_awzi_name": "Hoogvliet",
+            "gmcode": "GM0599",
+            "rna_normalized": 442.79,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1600041600,
+            "week_start_unix": 1600041600,
+            "week_end_unix": 1600560000,
+            "week": 38,
+            "rwzi_awzi_code": "17070",
+            "rwzi_awzi_name": "Hoogvliet",
+            "gmcode": "GM0599",
+            "rna_normalized": 120.13,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1599609600,
+            "week_start_unix": 1599436800,
+            "week_end_unix": 1599955200,
+            "week": 37,
+            "rwzi_awzi_code": "17070",
+            "rwzi_awzi_name": "Hoogvliet",
+            "gmcode": "GM0599",
+            "rna_normalized": 155.95,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1600387200,
+            "week_start_unix": 1600041600,
+            "week_end_unix": 1600560000,
+            "week": 38,
+            "rwzi_awzi_code": "17070",
+            "rwzi_awzi_name": "Hoogvliet",
+            "gmcode": "GM0599",
+            "rna_normalized": 60.16,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1601164800,
+            "week_start_unix": 1600646400,
+            "week_end_unix": 1601164800,
+            "week": 40,
+            "rwzi_awzi_code": "17070",
+            "rwzi_awzi_name": "Hoogvliet",
+            "gmcode": "GM0599",
+            "rna_normalized": 438.68,
+            "date_of_insertion_unix": 1605169572
+          }
+        ],
+        "last_value": {
+          "date_measurement_unix": 1601164800,
+          "week_start_unix": 1600646400,
+          "week_end_unix": 1601164800,
+          "week": 40,
+          "rwzi_awzi_code": "17070",
+          "rwzi_awzi_name": "Hoogvliet",
+          "gmcode": "GM0599",
+          "rna_normalized": 438.68,
+          "date_of_insertion_unix": 1605169572
+        }
+      },
+      {
+        "rwzi_awzi_code": "17057",
+        "values": [
+          {
+            "date_measurement_unix": 1603756800,
+            "week_start_unix": 1603670400,
+            "week_end_unix": 1604188800,
+            "week": 44,
+            "rwzi_awzi_code": "17057",
+            "rwzi_awzi_name": "Rozenburg",
+            "gmcode": "GM0599",
+            "rna_normalized": 494.44,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1603152000,
+            "week_start_unix": 1603065600,
+            "week_end_unix": 1603584000,
+            "week": 43,
+            "rwzi_awzi_code": "17057",
+            "rwzi_awzi_name": "Rozenburg",
+            "gmcode": "GM0599",
+            "rna_normalized": 1124.11,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1604361600,
+            "week_start_unix": 1604275200,
+            "week_end_unix": 1604793600,
+            "week": 45,
+            "rwzi_awzi_code": "17057",
+            "rwzi_awzi_name": "Rozenburg",
+            "gmcode": "GM0599",
+            "rna_normalized": 429.42,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1601942400,
+            "week_start_unix": 1601856000,
+            "week_end_unix": 1602374400,
+            "week": 41,
+            "rwzi_awzi_code": "17057",
+            "rwzi_awzi_name": "Rozenburg",
+            "gmcode": "GM0599",
+            "rna_normalized": 568.9,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1602460800,
+            "week_start_unix": 1602460800,
+            "week_end_unix": 1602979200,
+            "week": 42,
+            "rwzi_awzi_code": "17057",
+            "rwzi_awzi_name": "Rozenburg",
+            "gmcode": "GM0599",
+            "rna_normalized": 102.1,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1600041600,
+            "week_start_unix": 1600041600,
+            "week_end_unix": 1600560000,
+            "week": 38,
+            "rwzi_awzi_code": "17057",
+            "rwzi_awzi_name": "Rozenburg",
+            "gmcode": "GM0599",
+            "rna_normalized": 10.75,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1600646400,
+            "week_start_unix": 1600646400,
+            "week_end_unix": 1601164800,
+            "week": 39,
+            "rwzi_awzi_code": "17057",
+            "rwzi_awzi_name": "Rozenburg",
+            "gmcode": "GM0599",
+            "rna_normalized": 163.96,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1601164800,
+            "week_start_unix": 1600646400,
+            "week_end_unix": 1601164800,
+            "week": 40,
+            "rwzi_awzi_code": "17057",
+            "rwzi_awzi_name": "Rozenburg",
+            "gmcode": "GM0599",
+            "rna_normalized": 330.19,
+            "date_of_insertion_unix": 1605169572
+          }
+        ],
+        "last_value": {
+          "date_measurement_unix": 1601164800,
+          "week_start_unix": 1600646400,
+          "week_end_unix": 1601164800,
+          "week": 40,
+          "rwzi_awzi_code": "17057",
+          "rwzi_awzi_name": "Rozenburg",
+          "gmcode": "GM0599",
+          "rna_normalized": 330.19,
+          "date_of_insertion_unix": 1605169572
+        }
+      },
+      {
+        "rwzi_awzi_code": "17061",
+        "values": [
+          {
+            "date_measurement_unix": 1601164800,
+            "week_start_unix": 1600646400,
+            "week_end_unix": 1601164800,
+            "week": 40,
+            "rwzi_awzi_code": "17061",
+            "rwzi_awzi_name": "Dokhaven",
+            "gmcode": "GM0599",
+            "rna_normalized": 1941.58,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1600732800,
+            "week_start_unix": 1600646400,
+            "week_end_unix": 1601164800,
+            "week": 39,
+            "rwzi_awzi_code": "17061",
+            "rwzi_awzi_name": "Dokhaven",
+            "gmcode": "GM0599",
+            "rna_normalized": 400.74,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1600128000,
+            "week_start_unix": 1600041600,
+            "week_end_unix": 1600560000,
+            "week": 38,
+            "rwzi_awzi_code": "17061",
+            "rwzi_awzi_name": "Dokhaven",
+            "gmcode": "GM0599",
+            "rna_normalized": 208.56,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1599609600,
+            "week_start_unix": 1599436800,
+            "week_end_unix": 1599955200,
+            "week": 37,
+            "rwzi_awzi_code": "17061",
+            "rwzi_awzi_name": "Dokhaven",
+            "gmcode": "GM0599",
+            "rna_normalized": 0.0,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1603152000,
+            "week_start_unix": 1603065600,
+            "week_end_unix": 1603584000,
+            "week": 43,
+            "rwzi_awzi_code": "17061",
+            "rwzi_awzi_name": "Dokhaven",
+            "gmcode": "GM0599",
+            "rna_normalized": 997.77,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1602201600,
+            "week_start_unix": 1601856000,
+            "week_end_unix": 1602374400,
+            "week": 41,
+            "rwzi_awzi_code": "17061",
+            "rwzi_awzi_name": "Dokhaven",
+            "gmcode": "GM0599",
+            "rna_normalized": 3055.22,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1601683200,
+            "week_start_unix": 1601251200,
+            "week_end_unix": 1601769600,
+            "week": 40,
+            "rwzi_awzi_code": "17061",
+            "rwzi_awzi_name": "Dokhaven",
+            "gmcode": "GM0599",
+            "rna_normalized": 1101.07,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1604361600,
+            "week_start_unix": 1604275200,
+            "week_end_unix": 1604793600,
+            "week": 45,
+            "rwzi_awzi_code": "17061",
+            "rwzi_awzi_name": "Dokhaven",
+            "gmcode": "GM0599",
+            "rna_normalized": 48.12,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1604793600,
+            "week_start_unix": 1604275200,
+            "week_end_unix": 1604793600,
+            "week": 46,
+            "rwzi_awzi_code": "17061",
+            "rwzi_awzi_name": "Dokhaven",
+            "gmcode": "GM0599",
+            "rna_normalized": 1046.91,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1603843200,
+            "week_start_unix": 1603670400,
+            "week_end_unix": 1604188800,
+            "week": 44,
+            "rwzi_awzi_code": "17061",
+            "rwzi_awzi_name": "Dokhaven",
+            "gmcode": "GM0599",
+            "rna_normalized": 850.9,
+            "date_of_insertion_unix": 1605169572
+          }
+        ],
+        "last_value": {
+          "date_measurement_unix": 1603843200,
+          "week_start_unix": 1603670400,
+          "week_end_unix": 1604188800,
+          "week": 44,
+          "rwzi_awzi_code": "17061",
+          "rwzi_awzi_name": "Dokhaven",
+          "gmcode": "GM0599",
+          "rna_normalized": 850.9,
+          "date_of_insertion_unix": 1605169572
+        }
+      }
+    ]
+  },
+  "sewer": {
+    "values": [
+      {
+        "week_unix": 1599436800,
+        "week_start_unix": 1599436800,
+        "week_end_unix": 1599955200,
+        "gmcode": "GM0599",
+        "average": 51.98,
+        "total_installation_count": 3,
+        "date_of_insertion_unix": 1605169573
+      },
+      {
+        "week_unix": 1600041600,
+        "week_start_unix": 1600041600,
+        "week_end_unix": 1600560000,
+        "gmcode": "GM0599",
+        "average": 141.66,
+        "total_installation_count": 4,
+        "date_of_insertion_unix": 1605169573
+      },
+      {
+        "week_unix": 1600646400,
+        "week_start_unix": 1600646400,
+        "week_end_unix": 1601164800,
+        "gmcode": "GM0599",
+        "average": 638.65,
+        "total_installation_count": 4,
+        "date_of_insertion_unix": 1605169573
+      },
+      {
+        "week_unix": 1601251200,
+        "week_start_unix": 1601251200,
+        "week_end_unix": 1601769600,
+        "gmcode": "GM0599",
+        "average": 492.18,
+        "total_installation_count": 3,
+        "date_of_insertion_unix": 1605169573
+      },
+      {
+        "week_unix": 1601856000,
+        "week_start_unix": 1601856000,
+        "week_end_unix": 1602374400,
+        "gmcode": "GM0599",
+        "average": 1621.24,
+        "total_installation_count": 4,
+        "date_of_insertion_unix": 1605169573
+      },
+      {
+        "week_unix": 1602460800,
+        "week_start_unix": 1602460800,
+        "week_end_unix": 1602979200,
+        "gmcode": "GM0599",
+        "average": 393.53,
+        "total_installation_count": 2,
+        "date_of_insertion_unix": 1605169573
+      },
+      {
+        "week_unix": 1603065600,
+        "week_start_unix": 1603065600,
+        "week_end_unix": 1603584000,
+        "gmcode": "GM0599",
+        "average": 1495.21,
+        "total_installation_count": 4,
+        "date_of_insertion_unix": 1605169573
+      },
+      {
+        "week_unix": 1603670400,
+        "week_start_unix": 1603670400,
+        "week_end_unix": 1604188800,
+        "gmcode": "GM0599",
+        "average": 1008.97,
+        "total_installation_count": 3,
+        "date_of_insertion_unix": 1605169573
+      },
+      {
+        "week_unix": 1604275200,
+        "week_start_unix": 1604275200,
+        "week_end_unix": 1604793600,
+        "gmcode": "GM0599",
+        "average": 455.16,
+        "total_installation_count": 4,
+        "date_of_insertion_unix": 1605169573
+      }
+    ],
+    "last_value": {
+      "week_unix": 1604275200,
+      "week_start_unix": 1604275200,
+      "week_end_unix": 1604793600,
+      "gmcode": "GM0599",
+      "average": 455.16,
+      "total_installation_count": 4,
+      "date_of_insertion_unix": 1605169573
+    }
+  }
+}

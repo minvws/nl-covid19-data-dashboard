@@ -1,21 +1,12 @@
-import fs from 'fs';
-import path from 'path';
 import React from 'react';
+import PositiefGetesteMensen from '~/pages/landelijk/positief-geteste-mensen';
+import { loadFixture } from '~/test-utils/load-fixture';
 import { render } from '~/test-utils/render';
 import { National } from '~/types/data';
 import { formatNumber } from '~/utils/formatNumber';
-import PositiefGetesteMensen from '../../pages/landelijk/positief-geteste-mensen';
 
 describe('National page: PositiefGetesteMensen', () => {
-  let data: National | null = null;
-
-  beforeAll(() => {
-    const content = fs.readFileSync(
-      path.join(__dirname, '../../../public/json/NL.json'),
-      { encoding: 'utf8' }
-    );
-    data = JSON.parse(content) as National;
-  });
+  const data = loadFixture<National>('NL.json');
 
   it('should use infected_daily_total for Results per Region', () => {
     const { getByText } = render(

@@ -1,0 +1,3982 @@
+{
+  "last_generated": "1605606361",
+  "proto_name": "GM0118",
+  "name": "GM0118",
+  "code": "GM0118",
+  "hospital_admissions": {
+    "values": [
+      {
+        "date_of_report_unix": 1584316800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1584403200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1584489600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1584576000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1584662400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1584748800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1584835200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1584921600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1585008000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1585094400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1585180800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1585267200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1585353600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1585440000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1585526400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1585612800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1585699200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1585785600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 1.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1585872000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 1.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1585958400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 1.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1586044800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1586131200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1586217600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1586304000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 1.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1586390400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1586476800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1586563200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1586649600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1586736000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1586822400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1586908800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1586995200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1587081600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1587168000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1587254400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1587340800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1587427200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 1.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1587513600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 1.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1587600000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 1.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1587686400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1587772800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1587859200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1587945600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1588032000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1588118400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1588204800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1588291200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1588377600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1588464000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1588550400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1588636800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1588723200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1588809600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1588896000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1588982400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1589068800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1589155200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1589241600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1589328000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1589414400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1589500800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1589587200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1589673600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1589760000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1589846400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1589932800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1590019200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1590105600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1590192000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1590278400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1590364800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1590451200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1590537600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1590624000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1590710400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1590796800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1590883200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1590969600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1591056000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1591142400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1591228800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1591315200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1591401600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1591488000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1591574400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1591660800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1591747200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1591833600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1591920000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1592006400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1592092800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1592179200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1592265600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1592352000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1592438400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1592524800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1592611200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1592697600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1592784000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1592870400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1592956800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1593043200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1593129600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1593216000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1593302400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1593388800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1593475200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1593561600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1593648000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1593734400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1593820800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1593907200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1593993600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1594080000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1594166400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1594252800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1594339200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1594425600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1594512000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1594598400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1594684800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1594771200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1594857600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1594944000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1595030400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1595116800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1595203200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1595289600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1595376000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1595462400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1595548800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1595635200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1595721600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1595808000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1595894400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1595980800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1596067200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1596153600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1596240000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1596326400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1596412800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1596499200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1596585600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1596672000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1596758400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1596844800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1596931200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1597017600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1597104000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1597190400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1597276800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1597363200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1597449600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1597536000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1597622400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1597708800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1597795200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1597881600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1597968000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1598054400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1598140800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1598227200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1598313600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1598400000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1598486400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1598572800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1598659200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1598745600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1598832000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1598918400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1599004800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1599091200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1599177600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1599264000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1599350400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1599436800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1599523200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1599609600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1599696000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1599782400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1599868800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1599955200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1600041600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1600128000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1600214400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1600300800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1600387200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1600473600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1600560000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1600646400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1600732800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1600819200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1600905600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1600992000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1601078400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1601164800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1601251200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1601337600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1601424000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1601510400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1601596800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1601683200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1601769600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1601856000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1601942400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1602028800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1602115200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1602201600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1602288000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1602374400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 1.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1602460800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 1.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1602547200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 1.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1602633600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1602720000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1602806400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1602892800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1602979200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1603065600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1603152000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1603238400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1603324800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1603411200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1603497600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1603584000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1603670400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1603756800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1603843200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1603929600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1604016000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1604102400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1604188800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1604275200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1604361600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1604448000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1604534400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1604620800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.7,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1604707200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1604793600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1604880000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.0,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1604966400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      },
+      {
+        "date_of_report_unix": 1605052800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "moving_average_hospital": 0.3,
+        "date_of_insertion_unix": 1605169739
+      }
+    ],
+    "last_value": {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0118",
+      "municipality_name": "Hoogeveen",
+      "moving_average_hospital": 0.3,
+      "date_of_insertion_unix": 1605169739
+    }
+  },
+  "positive_tested_people": {
+    "values": [
+      {
+        "date_of_report_unix": 1583107200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1583193600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1583280000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1583366400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1583452800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1583539200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1583625600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1583712000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1583798400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1583884800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1583971200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1584057600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1584144000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1584230400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1584316800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1584403200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1584489600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1584576000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1584662400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1584748800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1584835200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1584921600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1585008000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1585094400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1585180800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1585267200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1585353600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1585440000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 3.0,
+        "infected_daily_increase": 5.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1585526400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1585612800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1585699200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1585785600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 2.0,
+        "infected_daily_increase": 3.6,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1585872000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 2.0,
+        "infected_daily_increase": 3.6,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1585958400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 2.0,
+        "infected_daily_increase": 3.6,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1586044800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 3.0,
+        "infected_daily_increase": 5.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1586131200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1586217600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1586304000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 2.0,
+        "infected_daily_increase": 3.6,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1586390400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 4.0,
+        "infected_daily_increase": 7.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1586476800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 4.0,
+        "infected_daily_increase": 7.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1586563200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1586649600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 4.0,
+        "infected_daily_increase": 7.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1586736000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1586822400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1586908800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1586995200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 3.0,
+        "infected_daily_increase": 5.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1587081600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 4.0,
+        "infected_daily_increase": 7.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1587168000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 4.0,
+        "infected_daily_increase": 7.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1587254400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 6.0,
+        "infected_daily_increase": 10.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1587340800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 4.0,
+        "infected_daily_increase": 7.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1587427200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1587513600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1587600000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 5.0,
+        "infected_daily_increase": 9.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1587686400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 5.0,
+        "infected_daily_increase": 9.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1587772800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1587859200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1587945600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 3.0,
+        "infected_daily_increase": 5.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1588032000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1588118400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1588204800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1588291200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1588377600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 2.0,
+        "infected_daily_increase": 3.6,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1588464000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1588550400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 2.0,
+        "infected_daily_increase": 3.6,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1588636800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1588723200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1588809600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1588896000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1588982400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1589068800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1589155200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1589241600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1589328000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1589414400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1589500800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1589587200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1589673600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1589760000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1589846400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1589932800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1590019200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1590105600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1590192000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1590278400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1590364800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1590451200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1590537600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1590624000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1590710400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1590796800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1590883200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1590969600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1591056000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1591142400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1591228800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1591315200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1591401600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1591488000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1591574400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1591660800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1591747200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1591833600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1591920000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1592006400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1592092800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1592179200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1592265600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1592352000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1592438400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1592524800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1592611200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1592697600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1592784000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1592870400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1592956800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1593043200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1593129600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1593216000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1593302400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1593388800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1593475200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1593561600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1593648000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1593734400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1593820800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1593907200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1593993600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1594080000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1594166400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1594252800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1594339200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1594425600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1594512000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1594598400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1594684800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1594771200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1594857600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1594944000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1595030400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1595116800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1595203200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1595289600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1595376000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1595462400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1595548800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1595635200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1595721600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1595808000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1595894400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1595980800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1596067200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1596153600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1596240000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1596326400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1596412800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1596499200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1596585600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 3.0,
+        "infected_daily_increase": 5.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1596672000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 3.0,
+        "infected_daily_increase": 5.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1596758400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1596844800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1596931200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1597017600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1597104000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1597190400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1597276800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1597363200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1597449600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1597536000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1597622400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1597708800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1597795200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1597881600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1597968000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1598054400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1598140800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1598227200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1598313600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1598400000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1598486400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1598572800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1598659200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1598745600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1598832000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1598918400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1599004800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1599091200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1599177600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1599264000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1599350400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1599436800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1599523200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1599609600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1599696000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1599782400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1599868800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1599955200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1600041600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1600128000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1600214400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1600300800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1600387200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1600473600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1600560000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 2.0,
+        "infected_daily_increase": 3.6,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1600646400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 3.0,
+        "infected_daily_increase": 5.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1600732800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1600819200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1600905600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1600992000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 9.0,
+        "infected_daily_increase": 16.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1601078400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 2.0,
+        "infected_daily_increase": 3.6,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1601164800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 3.0,
+        "infected_daily_increase": 5.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1601251200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 5.0,
+        "infected_daily_increase": 9.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1601337600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 1.0,
+        "infected_daily_increase": 1.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1601424000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 4.0,
+        "infected_daily_increase": 7.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1601510400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 2.0,
+        "infected_daily_increase": 3.6,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1601596800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 6.0,
+        "infected_daily_increase": 10.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1601683200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 5.0,
+        "infected_daily_increase": 9.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1601769600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 3.0,
+        "infected_daily_increase": 5.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1601856000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 8.0,
+        "infected_daily_increase": 14.4,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1601942400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 0.0,
+        "infected_daily_increase": 0.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1602028800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 5.0,
+        "infected_daily_increase": 9.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1602115200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 5.0,
+        "infected_daily_increase": 9.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1602201600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 9.0,
+        "infected_daily_increase": 16.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1602288000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 9.0,
+        "infected_daily_increase": 16.2,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1602374400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 36.0,
+        "infected_daily_increase": 64.6,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1602460800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 20.0,
+        "infected_daily_increase": 35.9,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1602547200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 13.0,
+        "infected_daily_increase": 23.3,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1602633600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 16.0,
+        "infected_daily_increase": 28.7,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1602720000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 16.0,
+        "infected_daily_increase": 28.7,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1602806400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 12.0,
+        "infected_daily_increase": 21.5,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1602892800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 22.0,
+        "infected_daily_increase": 39.5,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1602979200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 19.0,
+        "infected_daily_increase": 34.1,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1603065600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 36.0,
+        "infected_daily_increase": 64.6,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1603152000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 23.0,
+        "infected_daily_increase": 41.3,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1603238400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 23.0,
+        "infected_daily_increase": 41.3,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1603324800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 36.0,
+        "infected_daily_increase": 64.6,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1603411200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 26.0,
+        "infected_daily_increase": 46.7,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1603497600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 23.0,
+        "infected_daily_increase": 41.3,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1603584000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 25.0,
+        "infected_daily_increase": 44.9,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1603670400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 21.0,
+        "infected_daily_increase": 37.7,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1603756800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 10.0,
+        "infected_daily_increase": 18.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1603843200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 11.0,
+        "infected_daily_increase": 19.7,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1603929600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 12.0,
+        "infected_daily_increase": 21.5,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1604016000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 17.0,
+        "infected_daily_increase": 30.5,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1604102400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 24.0,
+        "infected_daily_increase": 43.1,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1604188800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 17.0,
+        "infected_daily_increase": 30.5,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1604275200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 24.0,
+        "infected_daily_increase": 43.1,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1604361600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 14.0,
+        "infected_daily_increase": 25.1,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1604448000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 12.0,
+        "infected_daily_increase": 21.5,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1604534400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 10.0,
+        "infected_daily_increase": 18.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1604620800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 11.0,
+        "infected_daily_increase": 19.7,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1604707200,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 10.0,
+        "infected_daily_increase": 18.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1604793600,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 6.0,
+        "infected_daily_increase": 10.8,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1604880000,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 5.0,
+        "infected_daily_increase": 9.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1604966400,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 10.0,
+        "infected_daily_increase": 18.0,
+        "date_of_insertion_unix": 1605178262
+      },
+      {
+        "date_of_report_unix": 1605052800,
+        "gmcode": "GM0118",
+        "municipality_name": "Hoogeveen",
+        "infected_daily_total": 7.0,
+        "infected_daily_increase": 12.6,
+        "date_of_insertion_unix": 1605178262
+      }
+    ],
+    "last_value": {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0118",
+      "municipality_name": "Hoogeveen",
+      "infected_daily_total": 7.0,
+      "infected_daily_increase": 12.6,
+      "date_of_insertion_unix": 1605178262
+    }
+  },
+  "sewer": {
+    "values": [
+      {
+        "week_unix": 1599436800,
+        "week_start_unix": 1599436800,
+        "week_end_unix": 1599955200,
+        "gmcode": "GM0118",
+        "average": 0.0,
+        "total_installation_count": 1,
+        "date_of_insertion_unix": 1605169573
+      },
+      {
+        "week_unix": 1600041600,
+        "week_start_unix": 1600041600,
+        "week_end_unix": 1600560000,
+        "gmcode": "GM0118",
+        "average": 0.0,
+        "total_installation_count": 1,
+        "date_of_insertion_unix": 1605169573
+      },
+      {
+        "week_unix": 1600646400,
+        "week_start_unix": 1600646400,
+        "week_end_unix": 1601164800,
+        "gmcode": "GM0118",
+        "average": 14.73,
+        "total_installation_count": 1,
+        "date_of_insertion_unix": 1605169573
+      },
+      {
+        "week_unix": 1601856000,
+        "week_start_unix": 1601856000,
+        "week_end_unix": 1602374400,
+        "gmcode": "GM0118",
+        "average": 59.34,
+        "total_installation_count": 1,
+        "date_of_insertion_unix": 1605169573
+      },
+      {
+        "week_unix": 1602460800,
+        "week_start_unix": 1602460800,
+        "week_end_unix": 1602979200,
+        "gmcode": "GM0118",
+        "average": 113.9,
+        "total_installation_count": 1,
+        "date_of_insertion_unix": 1605169573
+      },
+      {
+        "week_unix": 1603065600,
+        "week_start_unix": 1603065600,
+        "week_end_unix": 1603584000,
+        "gmcode": "GM0118",
+        "average": 277.23,
+        "total_installation_count": 1,
+        "date_of_insertion_unix": 1605169573
+      },
+      {
+        "week_unix": 1603670400,
+        "week_start_unix": 1603670400,
+        "week_end_unix": 1604188800,
+        "gmcode": "GM0118",
+        "average": 246.68,
+        "total_installation_count": 1,
+        "date_of_insertion_unix": 1605169573
+      },
+      {
+        "week_unix": 1604275200,
+        "week_start_unix": 1604275200,
+        "week_end_unix": 1604793600,
+        "gmcode": "GM0118",
+        "average": 125.79,
+        "total_installation_count": 1,
+        "date_of_insertion_unix": 1605169573
+      }
+    ],
+    "last_value": {
+      "week_unix": 1604275200,
+      "week_start_unix": 1604275200,
+      "week_end_unix": 1604793600,
+      "gmcode": "GM0118",
+      "average": 125.79,
+      "total_installation_count": 1,
+      "date_of_insertion_unix": 1605169573
+    }
+  },
+  "sewer_per_installation": {
+    "values": [
+      {
+        "rwzi_awzi_code": "3033",
+        "values": [
+          {
+            "date_measurement_unix": 1602547200,
+            "week_start_unix": 1602460800,
+            "week_end_unix": 1602979200,
+            "week": 42,
+            "rwzi_awzi_code": "3033",
+            "rwzi_awzi_name": "Echten",
+            "gmcode": "GM0118",
+            "rna_normalized": 26.64,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1602720000,
+            "week_start_unix": 1602460800,
+            "week_end_unix": 1602979200,
+            "week": 42,
+            "rwzi_awzi_code": "3033",
+            "rwzi_awzi_name": "Echten",
+            "gmcode": "GM0118",
+            "rna_normalized": 201.15,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1603065600,
+            "week_start_unix": 1603065600,
+            "week_end_unix": 1603584000,
+            "week": 43,
+            "rwzi_awzi_code": "3033",
+            "rwzi_awzi_name": "Echten",
+            "gmcode": "GM0118",
+            "rna_normalized": 291.78,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1602115200,
+            "week_start_unix": 1601856000,
+            "week_end_unix": 1602374400,
+            "week": 41,
+            "rwzi_awzi_code": "3033",
+            "rwzi_awzi_name": "Echten",
+            "gmcode": "GM0118",
+            "rna_normalized": 59.34,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1600732800,
+            "week_start_unix": 1600646400,
+            "week_end_unix": 1601164800,
+            "week": 39,
+            "rwzi_awzi_code": "3033",
+            "rwzi_awzi_name": "Echten",
+            "gmcode": "GM0118",
+            "rna_normalized": 0.0,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1600992000,
+            "week_start_unix": 1600646400,
+            "week_end_unix": 1601164800,
+            "week": 39,
+            "rwzi_awzi_code": "3033",
+            "rwzi_awzi_name": "Echten",
+            "gmcode": "GM0118",
+            "rna_normalized": 29.46,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1599523200,
+            "week_start_unix": 1599436800,
+            "week_end_unix": 1599955200,
+            "week": 37,
+            "rwzi_awzi_code": "3033",
+            "rwzi_awzi_name": "Echten",
+            "gmcode": "GM0118",
+            "rna_normalized": 0.0,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1600041600,
+            "week_start_unix": 1600041600,
+            "week_end_unix": 1600560000,
+            "week": 38,
+            "rwzi_awzi_code": "3033",
+            "rwzi_awzi_name": "Echten",
+            "gmcode": "GM0118",
+            "rna_normalized": 0.0,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1604448000,
+            "week_start_unix": 1604275200,
+            "week_end_unix": 1604793600,
+            "week": 45,
+            "rwzi_awzi_code": "3033",
+            "rwzi_awzi_name": "Echten",
+            "gmcode": "GM0118",
+            "rna_normalized": 125.79,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1603929600,
+            "week_start_unix": 1603670400,
+            "week_end_unix": 1604188800,
+            "week": 44,
+            "rwzi_awzi_code": "3033",
+            "rwzi_awzi_name": "Echten",
+            "gmcode": "GM0118",
+            "rna_normalized": 246.68,
+            "date_of_insertion_unix": 1605169572
+          },
+          {
+            "date_measurement_unix": 1603584000,
+            "week_start_unix": 1603065600,
+            "week_end_unix": 1603584000,
+            "week": 44,
+            "rwzi_awzi_code": "3033",
+            "rwzi_awzi_name": "Echten",
+            "gmcode": "GM0118",
+            "rna_normalized": 262.68,
+            "date_of_insertion_unix": 1605169572
+          }
+        ],
+        "last_value": {
+          "date_measurement_unix": 1603584000,
+          "week_start_unix": 1603065600,
+          "week_end_unix": 1603584000,
+          "week": 44,
+          "rwzi_awzi_code": "3033",
+          "rwzi_awzi_name": "Echten",
+          "gmcode": "GM0118",
+          "rna_normalized": 262.68,
+          "date_of_insertion_unix": 1605169572
+        }
+      }
+    ]
+  }
+}

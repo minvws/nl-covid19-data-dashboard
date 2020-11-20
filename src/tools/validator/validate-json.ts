@@ -1,13 +1,33 @@
 /* eslint no-console: 0 */
 
-import fs from 'fs';
-import path from 'path';
 import chalk from 'chalk';
-
+import fs from 'fs';
+import meow from 'meow';
+import path from 'path';
 import { createValidateFunction } from './create-validate-function';
-import { schemaDirectory } from './get-schema-names';
-import { SchemaInfo, schemaInformation } from './schema-information';
 import { executeValidations } from './execute-validations';
+import { schemaDirectory } from './get-schema-names';
+import { getSchemaInformation, SchemaInfo } from './schema-information';
+
+const cli = meow(
+  `
+    Usage
+      $ validate-json <optional-json-path>
+ 
+    Examples
+      $ validate-json src/pages-test/fixtures
+`
+);
+
+const cliArgs = cli.input;
+
+const customJsonPathArg = cliArgs[0];
+
+const customJsonPath = customJsonPathArg
+  ? path.join(__dirname, '..', '..', customJsonPathArg)
+  : undefined;
+
+const schemaInformation = getSchemaInformation(customJsonPath);
 
 if (schemaInformation.regional.files.length !== 25) {
   console.error(
@@ -73,14 +93,14 @@ async function validate(schemaName: string, schemaInfo: SchemaInfo) {
         console.group();
         console.warn(
           chalk.bgBlue.bold(
-            `  ${fileName} does not exist, but is optional, so no problem  \n`
+            `  ${jsonFilePath} does not exist, but is optional, so no problem  \n`
           )
         );
         console.groupEnd();
         return true;
       } else {
         console.group();
-        console.error(chalk.bgRed.bold(`  ${fileName} does not exist  \n`));
+        console.error(chalk.bgRed.bold(`  ${jsonFilePath} does not exist  \n`));
         console.groupEnd();
         return false;
       }

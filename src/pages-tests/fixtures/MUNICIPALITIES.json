@@ -1,0 +1,4626 @@
+{
+  "last_generated": "1605606396",
+  "proto_name": "MUNICIPALITIES",
+  "name": "MUNICIPALITIES",
+  "code": "MUNICIPALITIES",
+  "positive_tested_people": [
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0003",
+      "positive_tested_people": 0,
+      "total_positive_tested_people": 0,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0010",
+      "positive_tested_people": 4,
+      "total_positive_tested_people": 1,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0014",
+      "positive_tested_people": 15,
+      "total_positive_tested_people": 36,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0024",
+      "positive_tested_people": 10,
+      "total_positive_tested_people": 1,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0034",
+      "positive_tested_people": 40,
+      "total_positive_tested_people": 85,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0037",
+      "positive_tested_people": 18,
+      "total_positive_tested_people": 6,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0047",
+      "positive_tested_people": 3,
+      "total_positive_tested_people": 1,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0050",
+      "positive_tested_people": 17,
+      "total_positive_tested_people": 4,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0059",
+      "positive_tested_people": 3,
+      "total_positive_tested_people": 1,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0060",
+      "positive_tested_people": 0,
+      "total_positive_tested_people": 0,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0072",
+      "positive_tested_people": 6,
+      "total_positive_tested_people": 1,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0074",
+      "positive_tested_people": 33,
+      "total_positive_tested_people": 17,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0080",
+      "positive_tested_people": 5,
+      "total_positive_tested_people": 7,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0085",
+      "positive_tested_people": 19,
+      "total_positive_tested_people": 5,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0086",
+      "positive_tested_people": 20,
+      "total_positive_tested_people": 6,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0088",
+      "positive_tested_people": 0,
+      "total_positive_tested_people": 0,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0090",
+      "positive_tested_people": 12,
+      "total_positive_tested_people": 7,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0093",
+      "positive_tested_people": 0,
+      "total_positive_tested_people": 0,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0096",
+      "positive_tested_people": 0,
+      "total_positive_tested_people": 0,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0098",
+      "positive_tested_people": 19,
+      "total_positive_tested_people": 5,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0106",
+      "positive_tested_people": 19,
+      "total_positive_tested_people": 13,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0109",
+      "positive_tested_people": 19,
+      "total_positive_tested_people": 7,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0114",
+      "positive_tested_people": 26,
+      "total_positive_tested_people": 28,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0118",
+      "positive_tested_people": 12,
+      "total_positive_tested_people": 7,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0119",
+      "positive_tested_people": 2,
+      "total_positive_tested_people": 1,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0141",
+      "positive_tested_people": 45,
+      "total_positive_tested_people": 33,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0147",
+      "positive_tested_people": 17,
+      "total_positive_tested_people": 4,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0148",
+      "positive_tested_people": 10,
+      "total_positive_tested_people": 3,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0150",
+      "positive_tested_people": 12,
+      "total_positive_tested_people": 13,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0153",
+      "positive_tested_people": 25,
+      "total_positive_tested_people": 40,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0158",
+      "positive_tested_people": 24,
+      "total_positive_tested_people": 6,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0160",
+      "positive_tested_people": 37,
+      "total_positive_tested_people": 23,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0163",
+      "positive_tested_people": 22,
+      "total_positive_tested_people": 8,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0164",
+      "positive_tested_people": 35,
+      "total_positive_tested_people": 29,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0166",
+      "positive_tested_people": 22,
+      "total_positive_tested_people": 12,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0168",
+      "positive_tested_people": 22,
+      "total_positive_tested_people": 5,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0171",
+      "positive_tested_people": 27,
+      "total_positive_tested_people": 13,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0173",
+      "positive_tested_people": 31,
+      "total_positive_tested_people": 10,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0175",
+      "positive_tested_people": 11,
+      "total_positive_tested_people": 2,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0177",
+      "positive_tested_people": 26,
+      "total_positive_tested_people": 10,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0180",
+      "positive_tested_people": 0,
+      "total_positive_tested_people": 0,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0183",
+      "positive_tested_people": 61,
+      "total_positive_tested_people": 13,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0184",
+      "positive_tested_people": 95,
+      "total_positive_tested_people": 20,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0189",
+      "positive_tested_people": 36,
+      "total_positive_tested_people": 9,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0193",
+      "positive_tested_people": 21,
+      "total_positive_tested_people": 27,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0197",
+      "positive_tested_people": 25,
+      "total_positive_tested_people": 7,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0200",
+      "positive_tested_people": 13,
+      "total_positive_tested_people": 22,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0202",
+      "positive_tested_people": 22,
+      "total_positive_tested_people": 37,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0203",
+      "positive_tested_people": 49,
+      "total_positive_tested_people": 29,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0209",
+      "positive_tested_people": 19,
+      "total_positive_tested_people": 5,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0213",
+      "positive_tested_people": 24,
+      "total_positive_tested_people": 5,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0214",
+      "positive_tested_people": 22,
+      "total_positive_tested_people": 6,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0216",
+      "positive_tested_people": 24,
+      "total_positive_tested_people": 7,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0221",
+      "positive_tested_people": 18,
+      "total_positive_tested_people": 2,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0222",
+      "positive_tested_people": 29,
+      "total_positive_tested_people": 17,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0225",
+      "positive_tested_people": 15,
+      "total_positive_tested_people": 3,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0226",
+      "positive_tested_people": 19,
+      "total_positive_tested_people": 5,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0228",
+      "positive_tested_people": 33,
+      "total_positive_tested_people": 39,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0230",
+      "positive_tested_people": 21,
+      "total_positive_tested_people": 5,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0232",
+      "positive_tested_people": 6,
+      "total_positive_tested_people": 2,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0233",
+      "positive_tested_people": 3,
+      "total_positive_tested_people": 1,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0243",
+      "positive_tested_people": 26,
+      "total_positive_tested_people": 13,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0244",
+      "positive_tested_people": 8,
+      "total_positive_tested_people": 1,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0246",
+      "positive_tested_people": 0,
+      "total_positive_tested_people": 0,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0252",
+      "positive_tested_people": 12,
+      "total_positive_tested_people": 2,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0262",
+      "positive_tested_people": 17,
+      "total_positive_tested_people": 6,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0263",
+      "positive_tested_people": 36,
+      "total_positive_tested_people": 9,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0267",
+      "positive_tested_people": 27,
+      "total_positive_tested_people": 12,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0268",
+      "positive_tested_people": 18,
+      "total_positive_tested_people": 33,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0269",
+      "positive_tested_people": 29,
+      "total_positive_tested_people": 7,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0273",
+      "positive_tested_people": 33,
+      "total_positive_tested_people": 8,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0274",
+      "positive_tested_people": 25,
+      "total_positive_tested_people": 8,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0275",
+      "positive_tested_people": 20,
+      "total_positive_tested_people": 9,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0277",
+      "positive_tested_people": 0,
+      "total_positive_tested_people": 0,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0279",
+      "positive_tested_people": 40,
+      "total_positive_tested_people": 4,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0281",
+      "positive_tested_people": 21,
+      "total_positive_tested_people": 9,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0285",
+      "positive_tested_people": 8,
+      "total_positive_tested_people": 2,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0289",
+      "positive_tested_people": 45,
+      "total_positive_tested_people": 18,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0293",
+      "positive_tested_people": 13,
+      "total_positive_tested_people": 2,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0294",
+      "positive_tested_people": 13,
+      "total_positive_tested_people": 4,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0296",
+      "positive_tested_people": 14,
+      "total_positive_tested_people": 6,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0297",
+      "positive_tested_people": 48,
+      "total_positive_tested_people": 14,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0299",
+      "positive_tested_people": 13,
+      "total_positive_tested_people": 6,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0301",
+      "positive_tested_people": 22,
+      "total_positive_tested_people": 11,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0302",
+      "positive_tested_people": 25,
+      "total_positive_tested_people": 7,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0303",
+      "positive_tested_people": 24,
+      "total_positive_tested_people": 10,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0307",
+      "positive_tested_people": 29,
+      "total_positive_tested_people": 47,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0308",
+      "positive_tested_people": 20,
+      "total_positive_tested_people": 5,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0310",
+      "positive_tested_people": 37,
+      "total_positive_tested_people": 16,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0312",
+      "positive_tested_people": 39,
+      "total_positive_tested_people": 6,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0313",
+      "positive_tested_people": 41,
+      "total_positive_tested_people": 9,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0317",
+      "positive_tested_people": 75,
+      "total_positive_tested_people": 7,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0321",
+      "positive_tested_people": 39,
+      "total_positive_tested_people": 20,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0327",
+      "positive_tested_people": 23,
+      "total_positive_tested_people": 7,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0331",
+      "positive_tested_people": 41,
+      "total_positive_tested_people": 6,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0335",
+      "positive_tested_people": 50,
+      "total_positive_tested_people": 7,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0339",
+      "positive_tested_people": 36,
+      "total_positive_tested_people": 2,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0340",
+      "positive_tested_people": 54,
+      "total_positive_tested_people": 11,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0342",
+      "positive_tested_people": 32,
+      "total_positive_tested_people": 15,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0344",
+      "positive_tested_people": 22,
+      "total_positive_tested_people": 82,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0345",
+      "positive_tested_people": 37,
+      "total_positive_tested_people": 25,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0351",
+      "positive_tested_people": 37,
+      "total_positive_tested_people": 5,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0352",
+      "positive_tested_people": 25,
+      "total_positive_tested_people": 6,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0353",
+      "positive_tested_people": 38,
+      "total_positive_tested_people": 13,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0355",
+      "positive_tested_people": 16,
+      "total_positive_tested_people": 11,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0356",
+      "positive_tested_people": 25,
+      "total_positive_tested_people": 16,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0358",
+      "positive_tested_people": 40,
+      "total_positive_tested_people": 13,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0361",
+      "positive_tested_people": 24,
+      "total_positive_tested_people": 27,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0362",
+      "positive_tested_people": 29,
+      "total_positive_tested_people": 27,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0363",
+      "positive_tested_people": 37,
+      "total_positive_tested_people": 329,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0370",
+      "positive_tested_people": 59,
+      "total_positive_tested_people": 6,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0373",
+      "positive_tested_people": 23,
+      "total_positive_tested_people": 7,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0375",
+      "positive_tested_people": 21,
+      "total_positive_tested_people": 9,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0376",
+      "positive_tested_people": 52,
+      "total_positive_tested_people": 6,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0377",
+      "positive_tested_people": 8,
+      "total_positive_tested_people": 2,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0383",
+      "positive_tested_people": 22,
+      "total_positive_tested_people": 8,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0384",
+      "positive_tested_people": 32,
+      "total_positive_tested_people": 10,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0385",
+      "positive_tested_people": 80,
+      "total_positive_tested_people": 29,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0388",
+      "positive_tested_people": 32,
+      "total_positive_tested_people": 6,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0392",
+      "positive_tested_people": 11,
+      "total_positive_tested_people": 19,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0394",
+      "positive_tested_people": 16,
+      "total_positive_tested_people": 26,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0396",
+      "positive_tested_people": 10,
+      "total_positive_tested_people": 4,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0397",
+      "positive_tested_people": 11,
+      "total_positive_tested_people": 3,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0398",
+      "positive_tested_people": 24,
+      "total_positive_tested_people": 14,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0399",
+      "positive_tested_people": 29,
+      "total_positive_tested_people": 7,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0400",
+      "positive_tested_people": 19,
+      "total_positive_tested_people": 11,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0402",
+      "positive_tested_people": 33,
+      "total_positive_tested_people": 30,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0405",
+      "positive_tested_people": 32,
+      "total_positive_tested_people": 24,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0406",
+      "positive_tested_people": 50,
+      "total_positive_tested_people": 21,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0415",
+      "positive_tested_people": 34,
+      "total_positive_tested_people": 4,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0416",
+      "positive_tested_people": 10,
+      "total_positive_tested_people": 3,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0417",
+      "positive_tested_people": 44,
+      "total_positive_tested_people": 5,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0420",
+      "positive_tested_people": 20,
+      "total_positive_tested_people": 9,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0431",
+      "positive_tested_people": 20,
+      "total_positive_tested_people": 2,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0432",
+      "positive_tested_people": 16,
+      "total_positive_tested_people": 2,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0437",
+      "positive_tested_people": 57,
+      "total_positive_tested_people": 8,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0439",
+      "positive_tested_people": 35,
+      "total_positive_tested_people": 29,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0441",
+      "positive_tested_people": 12,
+      "total_positive_tested_people": 6,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0448",
+      "positive_tested_people": 0,
+      "total_positive_tested_people": 0,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0450",
+      "positive_tested_people": 0,
+      "total_positive_tested_people": 0,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0451",
+      "positive_tested_people": 20,
+      "total_positive_tested_people": 6,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0453",
+      "positive_tested_people": 14,
+      "total_positive_tested_people": 10,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0457",
+      "positive_tested_people": 35,
+      "total_positive_tested_people": 7,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0473",
+      "positive_tested_people": 23,
+      "total_positive_tested_people": 4,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0479",
+      "positive_tested_people": 45,
+      "total_positive_tested_people": 72,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0482",
+      "positive_tested_people": 54,
+      "total_positive_tested_people": 11,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0484",
+      "positive_tested_people": 48,
+      "total_positive_tested_people": 54,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0489",
+      "positive_tested_people": 30,
+      "total_positive_tested_people": 15,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0498",
+      "positive_tested_people": 20,
+      "total_positive_tested_people": 4,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0501",
+      "positive_tested_people": 17,
+      "total_positive_tested_people": 3,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0502",
+      "positive_tested_people": 31,
+      "total_positive_tested_people": 21,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0503",
+      "positive_tested_people": 31,
+      "total_positive_tested_people": 33,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0505",
+      "positive_tested_people": 69,
+      "total_positive_tested_people": 83,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0512",
+      "positive_tested_people": 72,
+      "total_positive_tested_people": 27,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0513",
+      "positive_tested_people": 47,
+      "total_positive_tested_people": 35,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0518",
+      "positive_tested_people": 31,
+      "total_positive_tested_people": 169,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0523",
+      "positive_tested_people": 87,
+      "total_positive_tested_people": 16,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0530",
+      "positive_tested_people": 34,
+      "total_positive_tested_people": 14,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0531",
+      "positive_tested_people": 44,
+      "total_positive_tested_people": 14,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0532",
+      "positive_tested_people": 27,
+      "total_positive_tested_people": 6,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0534",
+      "positive_tested_people": 31,
+      "total_positive_tested_people": 7,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0537",
+      "positive_tested_people": 47,
+      "total_positive_tested_people": 31,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0542",
+      "positive_tested_people": 37,
+      "total_positive_tested_people": 11,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0546",
+      "positive_tested_people": 37,
+      "total_positive_tested_people": 47,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0547",
+      "positive_tested_people": 37,
+      "total_positive_tested_people": 10,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0553",
+      "positive_tested_people": 43,
+      "total_positive_tested_people": 10,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0556",
+      "positive_tested_people": 33,
+      "total_positive_tested_people": 11,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0569",
+      "positive_tested_people": 31,
+      "total_positive_tested_people": 9,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0575",
+      "positive_tested_people": 25,
+      "total_positive_tested_people": 11,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0579",
+      "positive_tested_people": 24,
+      "total_positive_tested_people": 6,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0589",
+      "positive_tested_people": 19,
+      "total_positive_tested_people": 2,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0590",
+      "positive_tested_people": 46,
+      "total_positive_tested_people": 15,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0597",
+      "positive_tested_people": 58,
+      "total_positive_tested_people": 27,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0599",
+      "positive_tested_people": 43,
+      "total_positive_tested_people": 285,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0603",
+      "positive_tested_people": 22,
+      "total_positive_tested_people": 12,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0606",
+      "positive_tested_people": 62,
+      "total_positive_tested_people": 49,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0610",
+      "positive_tested_people": 79,
+      "total_positive_tested_people": 20,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0613",
+      "positive_tested_people": 35,
+      "total_positive_tested_people": 9,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0614",
+      "positive_tested_people": 6,
+      "total_positive_tested_people": 1,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0622",
+      "positive_tested_people": 58,
+      "total_positive_tested_people": 43,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0626",
+      "positive_tested_people": 27,
+      "total_positive_tested_people": 7,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0627",
+      "positive_tested_people": 41,
+      "total_positive_tested_people": 12,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0629",
+      "positive_tested_people": 30,
+      "total_positive_tested_people": 8,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0632",
+      "positive_tested_people": 32,
+      "total_positive_tested_people": 17,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0637",
+      "positive_tested_people": 26,
+      "total_positive_tested_people": 33,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0638",
+      "positive_tested_people": 23,
+      "total_positive_tested_people": 2,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0642",
+      "positive_tested_people": 64,
+      "total_positive_tested_people": 29,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0654",
+      "positive_tested_people": 13,
+      "total_positive_tested_people": 3,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0664",
+      "positive_tested_people": 15,
+      "total_positive_tested_people": 6,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0668",
+      "positive_tested_people": 25,
+      "total_positive_tested_people": 5,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0677",
+      "positive_tested_people": 47,
+      "total_positive_tested_people": 13,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0678",
+      "positive_tested_people": 7,
+      "total_positive_tested_people": 1,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0687",
+      "positive_tested_people": 4,
+      "total_positive_tested_people": 2,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0703",
+      "positive_tested_people": 13,
+      "total_positive_tested_people": 3,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0715",
+      "positive_tested_people": 23,
+      "total_positive_tested_people": 13,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0716",
+      "positive_tested_people": 7,
+      "total_positive_tested_people": 2,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0717",
+      "positive_tested_people": 13,
+      "total_positive_tested_people": 3,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0718",
+      "positive_tested_people": 24,
+      "total_positive_tested_people": 11,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0736",
+      "positive_tested_people": 31,
+      "total_positive_tested_people": 14,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0737",
+      "positive_tested_people": 15,
+      "total_positive_tested_people": 5,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0743",
+      "positive_tested_people": 23,
+      "total_positive_tested_people": 4,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0744",
+      "positive_tested_people": 0,
+      "total_positive_tested_people": 0,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0748",
+      "positive_tested_people": 41,
+      "total_positive_tested_people": 28,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0753",
+      "positive_tested_people": 33,
+      "total_positive_tested_people": 10,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0755",
+      "positive_tested_people": 18,
+      "total_positive_tested_people": 2,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0756",
+      "positive_tested_people": 6,
+      "total_positive_tested_people": 2,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0757",
+      "positive_tested_people": 16,
+      "total_positive_tested_people": 5,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0758",
+      "positive_tested_people": 26,
+      "total_positive_tested_people": 48,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0762",
+      "positive_tested_people": 43,
+      "total_positive_tested_people": 14,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0765",
+      "positive_tested_people": 0,
+      "total_positive_tested_people": 0,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0766",
+      "positive_tested_people": 30,
+      "total_positive_tested_people": 8,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0770",
+      "positive_tested_people": 72,
+      "total_positive_tested_people": 14,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0772",
+      "positive_tested_people": 40,
+      "total_positive_tested_people": 95,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0777",
+      "positive_tested_people": 18,
+      "total_positive_tested_people": 8,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0779",
+      "positive_tested_people": 27,
+      "total_positive_tested_people": 6,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0784",
+      "positive_tested_people": 22,
+      "total_positive_tested_people": 6,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0785",
+      "positive_tested_people": 37,
+      "total_positive_tested_people": 9,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0786",
+      "positive_tested_people": 72,
+      "total_positive_tested_people": 9,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0788",
+      "positive_tested_people": 48,
+      "total_positive_tested_people": 7,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0794",
+      "positive_tested_people": 50,
+      "total_positive_tested_people": 47,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0796",
+      "positive_tested_people": 32,
+      "total_positive_tested_people": 50,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0797",
+      "positive_tested_people": 44,
+      "total_positive_tested_people": 20,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0798",
+      "positive_tested_people": 51,
+      "total_positive_tested_people": 8,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0809",
+      "positive_tested_people": 38,
+      "total_positive_tested_people": 9,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0815",
+      "positive_tested_people": 27,
+      "total_positive_tested_people": 3,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0820",
+      "positive_tested_people": 29,
+      "total_positive_tested_people": 7,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0823",
+      "positive_tested_people": 58,
+      "total_positive_tested_people": 11,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0824",
+      "positive_tested_people": 30,
+      "total_positive_tested_people": 8,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0826",
+      "positive_tested_people": 35,
+      "total_positive_tested_people": 20,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0828",
+      "positive_tested_people": 28,
+      "total_positive_tested_people": 26,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0840",
+      "positive_tested_people": 26,
+      "total_positive_tested_people": 6,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0845",
+      "positive_tested_people": 47,
+      "total_positive_tested_people": 14,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0847",
+      "positive_tested_people": 31,
+      "total_positive_tested_people": 6,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0848",
+      "positive_tested_people": 52,
+      "total_positive_tested_people": 9,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0851",
+      "positive_tested_people": 28,
+      "total_positive_tested_people": 7,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0852",
+      "positive_tested_people": 63,
+      "total_positive_tested_people": 11,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0855",
+      "positive_tested_people": 33,
+      "total_positive_tested_people": 74,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0856",
+      "positive_tested_people": 19,
+      "total_positive_tested_people": 8,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0858",
+      "positive_tested_people": 54,
+      "total_positive_tested_people": 17,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0861",
+      "positive_tested_people": 48,
+      "total_positive_tested_people": 22,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0865",
+      "positive_tested_people": 30,
+      "total_positive_tested_people": 8,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0866",
+      "positive_tested_people": 51,
+      "total_positive_tested_people": 9,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0867",
+      "positive_tested_people": 49,
+      "total_positive_tested_people": 24,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0873",
+      "positive_tested_people": 36,
+      "total_positive_tested_people": 8,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0879",
+      "positive_tested_people": 27,
+      "total_positive_tested_people": 6,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0880",
+      "positive_tested_people": 49,
+      "total_positive_tested_people": 8,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0882",
+      "positive_tested_people": 21,
+      "total_positive_tested_people": 8,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0888",
+      "positive_tested_people": 6,
+      "total_positive_tested_people": 1,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0889",
+      "positive_tested_people": 7,
+      "total_positive_tested_people": 1,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0893",
+      "positive_tested_people": 30,
+      "total_positive_tested_people": 4,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0899",
+      "positive_tested_people": 28,
+      "total_positive_tested_people": 8,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0907",
+      "positive_tested_people": 5,
+      "total_positive_tested_people": 1,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0917",
+      "positive_tested_people": 16,
+      "total_positive_tested_people": 14,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0928",
+      "positive_tested_people": 15,
+      "total_positive_tested_people": 7,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0935",
+      "positive_tested_people": 28,
+      "total_positive_tested_people": 35,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0938",
+      "positive_tested_people": 21,
+      "total_positive_tested_people": 4,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0944",
+      "positive_tested_people": 25,
+      "total_positive_tested_people": 2,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0946",
+      "positive_tested_people": 23,
+      "total_positive_tested_people": 4,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0957",
+      "positive_tested_people": 34,
+      "total_positive_tested_people": 20,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0965",
+      "positive_tested_people": 28,
+      "total_positive_tested_people": 3,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0971",
+      "positive_tested_people": 16,
+      "total_positive_tested_people": 4,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0981",
+      "positive_tested_people": 9,
+      "total_positive_tested_people": 1,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0983",
+      "positive_tested_people": 43,
+      "total_positive_tested_people": 44,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0984",
+      "positive_tested_people": 57,
+      "total_positive_tested_people": 25,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0986",
+      "positive_tested_people": 16,
+      "total_positive_tested_people": 2,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0988",
+      "positive_tested_people": 47,
+      "total_positive_tested_people": 24,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0994",
+      "positive_tested_people": 18,
+      "total_positive_tested_people": 3,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0995",
+      "positive_tested_people": 29,
+      "total_positive_tested_people": 23,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1507",
+      "positive_tested_people": 37,
+      "total_positive_tested_people": 16,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1509",
+      "positive_tested_people": 40,
+      "total_positive_tested_people": 16,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1525",
+      "positive_tested_people": 56,
+      "total_positive_tested_people": 21,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1581",
+      "positive_tested_people": 30,
+      "total_positive_tested_people": 15,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1586",
+      "positive_tested_people": 23,
+      "total_positive_tested_people": 7,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1598",
+      "positive_tested_people": 44,
+      "total_positive_tested_people": 10,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1621",
+      "positive_tested_people": 17,
+      "total_positive_tested_people": 11,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1640",
+      "positive_tested_people": 33,
+      "total_positive_tested_people": 12,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1641",
+      "positive_tested_people": 20,
+      "total_positive_tested_people": 5,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1652",
+      "positive_tested_people": 42,
+      "total_positive_tested_people": 13,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1655",
+      "positive_tested_people": 49,
+      "total_positive_tested_people": 15,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1658",
+      "positive_tested_people": 31,
+      "total_positive_tested_people": 5,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1659",
+      "positive_tested_people": 53,
+      "total_positive_tested_people": 12,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1667",
+      "positive_tested_people": 68,
+      "total_positive_tested_people": 9,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1669",
+      "positive_tested_people": 34,
+      "total_positive_tested_people": 7,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1674",
+      "positive_tested_people": 50,
+      "total_positive_tested_people": 39,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1676",
+      "positive_tested_people": 26,
+      "total_positive_tested_people": 9,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1680",
+      "positive_tested_people": 19,
+      "total_positive_tested_people": 5,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1681",
+      "positive_tested_people": 15,
+      "total_positive_tested_people": 4,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1684",
+      "positive_tested_people": 23,
+      "total_positive_tested_people": 6,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1685",
+      "positive_tested_people": 50,
+      "total_positive_tested_people": 8,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1690",
+      "positive_tested_people": 16,
+      "total_positive_tested_people": 4,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1695",
+      "positive_tested_people": 13,
+      "total_positive_tested_people": 1,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1696",
+      "positive_tested_people": 32,
+      "total_positive_tested_people": 8,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1699",
+      "positive_tested_people": 3,
+      "total_positive_tested_people": 1,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1700",
+      "positive_tested_people": 23,
+      "total_positive_tested_people": 8,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1701",
+      "positive_tested_people": 5,
+      "total_positive_tested_people": 1,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1702",
+      "positive_tested_people": 17,
+      "total_positive_tested_people": 2,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1705",
+      "positive_tested_people": 15,
+      "total_positive_tested_people": 7,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1706",
+      "positive_tested_people": 23,
+      "total_positive_tested_people": 5,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1708",
+      "positive_tested_people": 9,
+      "total_positive_tested_people": 4,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1709",
+      "positive_tested_people": 18,
+      "total_positive_tested_people": 7,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1711",
+      "positive_tested_people": 25,
+      "total_positive_tested_people": 8,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1714",
+      "positive_tested_people": 56,
+      "total_positive_tested_people": 13,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1719",
+      "positive_tested_people": 44,
+      "total_positive_tested_people": 12,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1721",
+      "positive_tested_people": 51,
+      "total_positive_tested_people": 16,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1723",
+      "positive_tested_people": 68,
+      "total_positive_tested_people": 7,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1724",
+      "positive_tested_people": 64,
+      "total_positive_tested_people": 12,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1728",
+      "positive_tested_people": 117,
+      "total_positive_tested_people": 24,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1729",
+      "positive_tested_people": 7,
+      "total_positive_tested_people": 1,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1730",
+      "positive_tested_people": 3,
+      "total_positive_tested_people": 1,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1731",
+      "positive_tested_people": 36,
+      "total_positive_tested_people": 12,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1734",
+      "positive_tested_people": 25,
+      "total_positive_tested_people": 12,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1735",
+      "positive_tested_people": 51,
+      "total_positive_tested_people": 18,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1740",
+      "positive_tested_people": 20,
+      "total_positive_tested_people": 5,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1742",
+      "positive_tested_people": 23,
+      "total_positive_tested_people": 9,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1771",
+      "positive_tested_people": 47,
+      "total_positive_tested_people": 19,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1773",
+      "positive_tested_people": 27,
+      "total_positive_tested_people": 5,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1774",
+      "positive_tested_people": 37,
+      "total_positive_tested_people": 10,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1783",
+      "positive_tested_people": 47,
+      "total_positive_tested_people": 52,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1842",
+      "positive_tested_people": 46,
+      "total_positive_tested_people": 9,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1859",
+      "positive_tested_people": 36,
+      "total_positive_tested_people": 16,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1876",
+      "positive_tested_people": 27,
+      "total_positive_tested_people": 10,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1883",
+      "positive_tested_people": 21,
+      "total_positive_tested_people": 20,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1884",
+      "positive_tested_people": 18,
+      "total_positive_tested_people": 5,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1891",
+      "positive_tested_people": 10,
+      "total_positive_tested_people": 2,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1892",
+      "positive_tested_people": 29,
+      "total_positive_tested_people": 13,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1894",
+      "positive_tested_people": 27,
+      "total_positive_tested_people": 12,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1895",
+      "positive_tested_people": 7,
+      "total_positive_tested_people": 3,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1896",
+      "positive_tested_people": 8,
+      "total_positive_tested_people": 2,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1900",
+      "positive_tested_people": 27,
+      "total_positive_tested_people": 25,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1901",
+      "positive_tested_people": 60,
+      "total_positive_tested_people": 21,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1903",
+      "positive_tested_people": 7,
+      "total_positive_tested_people": 2,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1904",
+      "positive_tested_people": 35,
+      "total_positive_tested_people": 23,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1911",
+      "positive_tested_people": 20,
+      "total_positive_tested_people": 10,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1916",
+      "positive_tested_people": 35,
+      "total_positive_tested_people": 27,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1924",
+      "positive_tested_people": 48,
+      "total_positive_tested_people": 24,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1926",
+      "positive_tested_people": 34,
+      "total_positive_tested_people": 19,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1930",
+      "positive_tested_people": 46,
+      "total_positive_tested_people": 40,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1931",
+      "positive_tested_people": 58,
+      "total_positive_tested_people": 33,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1940",
+      "positive_tested_people": 7,
+      "total_positive_tested_people": 4,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1942",
+      "positive_tested_people": 41,
+      "total_positive_tested_people": 24,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1945",
+      "positive_tested_people": 28,
+      "total_positive_tested_people": 10,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1948",
+      "positive_tested_people": 34,
+      "total_positive_tested_people": 28,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1949",
+      "positive_tested_people": 6,
+      "total_positive_tested_people": 3,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1950",
+      "positive_tested_people": 3,
+      "total_positive_tested_people": 1,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1952",
+      "positive_tested_people": 8,
+      "total_positive_tested_people": 5,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1954",
+      "positive_tested_people": 25,
+      "total_positive_tested_people": 9,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1955",
+      "positive_tested_people": 19,
+      "total_positive_tested_people": 7,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1959",
+      "positive_tested_people": 51,
+      "total_positive_tested_people": 29,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1960",
+      "positive_tested_people": 33,
+      "total_positive_tested_people": 17,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1961",
+      "positive_tested_people": 51,
+      "total_positive_tested_people": 29,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1963",
+      "positive_tested_people": 28,
+      "total_positive_tested_people": 25,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1966",
+      "positive_tested_people": 6,
+      "total_positive_tested_people": 3,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1969",
+      "positive_tested_people": 6,
+      "total_positive_tested_people": 4,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1970",
+      "positive_tested_people": 8,
+      "total_positive_tested_people": 4,
+      "date_of_insertion_unix": 1605178262
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1978",
+      "positive_tested_people": 50,
+      "total_positive_tested_people": 22,
+      "date_of_insertion_unix": 1605178262
+    }
+  ],
+  "hospital_admissions": [
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0003",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0010",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0014",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0024",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0034",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0037",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0047",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0050",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0059",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0060",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0072",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0074",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0080",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0085",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0086",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0088",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0090",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0093",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0096",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0098",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0106",
+      "hospital_admissions": 0.7,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0109",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0114",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0118",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0119",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0141",
+      "hospital_admissions": 0.7,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0147",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0148",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0150",
+      "hospital_admissions": 0.7,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0153",
+      "hospital_admissions": 1.7,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0158",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0160",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0163",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0164",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0166",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0168",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0171",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0173",
+      "hospital_admissions": 0.7,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0175",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0177",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0180",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0183",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0184",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0189",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0193",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0197",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0200",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0202",
+      "hospital_admissions": 0.7,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0203",
+      "hospital_admissions": 0.7,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0209",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0213",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0214",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0216",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0221",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0222",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0225",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0226",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0228",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0230",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0232",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0233",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0243",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0244",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0246",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0252",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0262",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0263",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0267",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0268",
+      "hospital_admissions": 0.7,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0269",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0273",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0274",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0275",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0277",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0279",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0281",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0285",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0289",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0293",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0294",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0296",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0297",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0299",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0301",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0302",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0303",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0307",
+      "hospital_admissions": 1.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0308",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0310",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0312",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0313",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0317",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0321",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0327",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0331",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0335",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0339",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0340",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0342",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0344",
+      "hospital_admissions": 3.7,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0345",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0351",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0352",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0353",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0355",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0356",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0358",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0361",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0362",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0363",
+      "hospital_admissions": 1.7,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0370",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0373",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0375",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0376",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0377",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0383",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0384",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0385",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0388",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0392",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0394",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0396",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0397",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0398",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0399",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0400",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0402",
+      "hospital_admissions": 0.7,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0405",
+      "hospital_admissions": 0.7,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0406",
+      "hospital_admissions": 1.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0415",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0416",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0417",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0420",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0431",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0432",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0437",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0439",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0441",
+      "hospital_admissions": 0.7,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0448",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0450",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0451",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0453",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0457",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0473",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0479",
+      "hospital_admissions": 1.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0482",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0484",
+      "hospital_admissions": 0.7,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0489",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0498",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0501",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0502",
+      "hospital_admissions": 0.7,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0503",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0505",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0512",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0513",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0518",
+      "hospital_admissions": 1.7,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0523",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0530",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0531",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0532",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0534",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0537",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0542",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0546",
+      "hospital_admissions": 0.7,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0547",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0553",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0556",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0569",
+      "hospital_admissions": 0.7,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0575",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0579",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0589",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0590",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0597",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0599",
+      "hospital_admissions": 10.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0603",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0606",
+      "hospital_admissions": 2.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0610",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0613",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0614",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0622",
+      "hospital_admissions": 1.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0626",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0627",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0629",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0632",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0637",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0638",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0642",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0654",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0664",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0668",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0677",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0678",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0687",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0703",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0715",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0716",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0717",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0718",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0736",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0737",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0743",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0744",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0748",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0753",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0755",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0756",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0757",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0758",
+      "hospital_admissions": 0.7,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0762",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0765",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0766",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0770",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0772",
+      "hospital_admissions": 1.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0777",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0779",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0784",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0785",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0786",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0788",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0794",
+      "hospital_admissions": 1.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0796",
+      "hospital_admissions": 0.7,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0797",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0798",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0809",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0815",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0820",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0823",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0824",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0826",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0828",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0840",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0845",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0847",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0848",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0851",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0852",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0855",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0856",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0858",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0861",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0865",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0866",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0867",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0873",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0879",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0880",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0882",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0888",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0889",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0893",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0899",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0907",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0917",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0928",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0935",
+      "hospital_admissions": 0.7,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0938",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0944",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0946",
+      "hospital_admissions": 0.7,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0957",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0965",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0971",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0981",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0983",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0984",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0986",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0988",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0994",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM0995",
+      "hospital_admissions": 0.7,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1507",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1509",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1525",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1581",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1586",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1598",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1621",
+      "hospital_admissions": 0.7,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1640",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1641",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1652",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1655",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1658",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1659",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1667",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1669",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1674",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1676",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1680",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1681",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1684",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1685",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1690",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1695",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1696",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1699",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1700",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1701",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1702",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1705",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1706",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1708",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1709",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1711",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1714",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1719",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1721",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1723",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1724",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1728",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1729",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1730",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1731",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1734",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1735",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1740",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1742",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1771",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1773",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1774",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1783",
+      "hospital_admissions": 1.7,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1842",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1859",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1876",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1883",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1884",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1891",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1892",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1894",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1895",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1896",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1900",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1901",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1903",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1904",
+      "hospital_admissions": 0.7,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1911",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1916",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1924",
+      "hospital_admissions": 0.7,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1926",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1930",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1931",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1940",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1942",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1945",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1948",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1949",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1950",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1952",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1954",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1955",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1959",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1960",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1961",
+      "hospital_admissions": 0.3,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1963",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1966",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1969",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1970",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    },
+    {
+      "date_of_report_unix": 1605052800,
+      "gmcode": "GM1978",
+      "hospital_admissions": 0.0,
+      "date_of_insertion_unix": 1605169739
+    }
+  ],
+  "deceased": []
+}

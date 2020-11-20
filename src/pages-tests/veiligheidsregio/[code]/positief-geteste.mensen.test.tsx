@@ -1,21 +1,12 @@
-import fs from 'fs';
-import path from 'path';
 import React from 'react';
+import PositiefGetesteMensen from '~/pages/veiligheidsregio/[code]/positief-geteste-mensen';
+import { loadFixture } from '~/test-utils/load-fixture';
 import { render } from '~/test-utils/render';
 import { Regionaal } from '~/types/data';
 import { formatNumber } from '~/utils/formatNumber';
-import PositiefGetesteMensen from '../../../pages/veiligheidsregio/[code]/positief-geteste-mensen';
 
 describe('Safety region page: PositiefGetesteMensen', () => {
-  let data: Regionaal | null = null;
-
-  beforeAll(() => {
-    const content = fs.readFileSync(
-      path.join(__dirname, '../../../../public/json/VR13.json'),
-      { encoding: 'utf8' }
-    );
-    data = JSON.parse(content) as Regionaal;
-  });
+  const data = loadFixture<Regionaal>('VR13.json');
 
   it('should use total_reported_increase_per_region for Results per Region', () => {
     const { getByText } = render(
