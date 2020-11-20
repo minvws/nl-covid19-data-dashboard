@@ -7,16 +7,14 @@ interface IProps {
   title: string;
   Icon: React.ReactNode;
   subtitle?: string;
-  as?: 'h2' | 'h3';
+  headingLevel?: 2 | 3;
 }
 
 export function TitleWithIcon(props: IProps) {
-  const { Icon, title, subtitle, as = 'h3' } = props;
-
-  const headingLevel = as === 'h3' ? 3 : 2;
+  const { Icon, title, subtitle, headingLevel = 3 } = props;
 
   const cssProps = useMemo(() => {
-    return as === 'h3'
+    return headingLevel === 3
       ? {
           width: '2.5rem',
           height: '2.5rem',
@@ -27,7 +25,7 @@ export function TitleWithIcon(props: IProps) {
           height: '4rem',
           '& svg': { width: '4rem', height: '4rem' },
         };
-  }, [as]);
+  }, [headingLevel]);
 
   return (
     <Box
@@ -54,7 +52,7 @@ export function TitleWithIcon(props: IProps) {
       <Box>
         <Heading
           level={headingLevel}
-          fontSize={as === 'h3' ? 2 : undefined}
+          fontSize={headingLevel === 3 ? 2 : undefined}
           mb={0}
         >
           {title}

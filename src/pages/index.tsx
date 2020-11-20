@@ -64,7 +64,7 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
       <TitleWithIcon
         Icon={<Notification color={(theme.colors as any).notification} />}
         title={text.laatste_ontwikkelingen.title}
-        as="h2"
+        headingLevel={2}
       />
       <article
         className={styles.notification}

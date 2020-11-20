@@ -26,7 +26,7 @@ export function ContentHeader_sourcesHack(props: IContentHeaderProps) {
   return (
     <header id={id} className={layoutClasses.join(' ')}>
       {category && <p className={styles.category}>{category}</p>}
-      <TitleWithIcon Icon={Icon} title={title} as="h2" />
+      <TitleWithIcon Icon={Icon} title={title} headingLevel={2} />
 
       <div className={styles.text}>
         <p>{subtitle}</p>
