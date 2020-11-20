@@ -9,8 +9,6 @@ import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 
-import Image from 'next/image';
-
 const text = siteText.reproductiegetal;
 
 const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
@@ -49,10 +47,11 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
         </div>
 
         <div className="column-item column-item-extra-margin">
-          <Image
+          <img
+            width={315}
+            height={100}
+            loading="lazy"
             src="/images/reproductie-explainer.svg"
-            width="315"
-            height="100"
             alt={text.reproductie_explainer_alt}
           />
           <p>{text.extra_uitleg}</p>
