@@ -6,7 +6,8 @@ import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { LineChart } from '~/components/charts/index';
-import { useMunicipalLegendaData } from '~/components/choropleth/legenda/hooks/use-municipal-legenda-data';
+import { useLegendaItems } from '~/components/choropleth/legenda/hooks/use-legenda-items';
+import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createMunicipalHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/municipal/create-municipal-hospital-admissions-tooltip';
@@ -29,7 +30,10 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
   const { data, municipalityName } = props;
   const router = useRouter();
 
-  const legendItems = useMunicipalLegendaData('hospital_admissions');
+  const legendItems = useLegendaItems(
+    municipalThresholds.hospital_admissions.thresholds
+  );
+
   const hospitalAdmissions: MunicipalHospitalAdmissions | undefined =
     data?.hospital_admissions;
 

@@ -7,8 +7,9 @@ import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/use-safety-region-legenda-data';
+import { useLegendaItems } from '~/components/choropleth/legenda/hooks/use-legenda-items';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
+import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
@@ -30,7 +31,9 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
     'municipal'
   );
   const router = useRouter();
-  const legendItems = useSafetyRegionLegendaData('hospital_admissions');
+  const legendItems = useLegendaItems(
+    regionThresholds.hospital_admissions.thresholds
+  );
   const dataIntake = state.intake_hospital_ma;
   const dataBeds = state.hospital_beds_occupied;
 
@@ -109,12 +112,10 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
         title={text.map_titel}
         description={text.map_toelichting}
         onChangeControls={setSelectedMap}
-        legend={
-          legendItems && {
-            items: legendItems,
-            title: text.chloropleth_legenda.titel,
-          }
-        }
+        legend={{
+          items: legendItems,
+          title: text.chloropleth_legenda.titel,
+        }}
         showDataWarning
       >
         {selectedMap === 'municipal' && (

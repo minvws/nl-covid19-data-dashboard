@@ -7,8 +7,9 @@ import ExternalLink from '~/assets/external-link.svg';
 import Notification from '~/assets/notification.svg';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { HeadingWithIcon } from '~/components-styled/heading-with-icon';
-import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/use-safety-region-legenda-data';
+import { useLegendaItems } from '~/components/choropleth/legenda/hooks/use-legenda-items';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
+import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
@@ -57,7 +58,9 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
     'municipal'
   );
 
-  const legendItems = useSafetyRegionLegendaData('positive_tested_people');
+  const legendItems = useLegendaItems(
+    regionThresholds.positive_tested_people.thresholds
+  );
 
   return (
     <>

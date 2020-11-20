@@ -15,8 +15,9 @@ import { MultipleLineChartTile } from '~/components-styled/multiple-line-chart-t
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
 import { BarChart } from '~/components/charts/index';
-import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/use-safety-region-legenda-data';
+import { useLegendaItems } from '~/components/choropleth/legenda/hooks/use-legenda-items';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
+import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
@@ -50,7 +51,9 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
   );
   const router = useRouter();
 
-  const legendItems = useSafetyRegionLegendaData('positive_tested_people');
+  const legendItems = useLegendaItems(
+    regionThresholds.positive_tested_people.thresholds
+  );
   const delta: InfectedPeopleDeltaNormalized =
     data.infected_people_delta_normalized;
   const age: IntakeShareAgeGroups = data.intake_share_age_groups;
