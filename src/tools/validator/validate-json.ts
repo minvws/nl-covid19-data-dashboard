@@ -15,7 +15,7 @@ const cli = meow(
       $ validate-json <optional-json-path>
  
     Examples
-      $ validate-json src/pages-test/fixtures
+      $ validate-json pages-tests/fixtures
 `
 );
 
