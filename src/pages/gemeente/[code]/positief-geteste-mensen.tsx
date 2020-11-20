@@ -109,7 +109,7 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
         })}
         description={text.map_toelichting}
         legend={{
-          thresholds: municipalThresholds.positive_tested_people.thresholds,
+          thresholds: municipalThresholds.positive_tested_people,
           title: siteText.positief_geteste_personen.chloropleth_legenda.titel,
         }}
         metadata={{

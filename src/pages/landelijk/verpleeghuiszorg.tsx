@@ -129,8 +129,7 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
         }}
         legend={{
           thresholds:
-            regionThresholds.nursing_home.infected_locations_percentage
-              .thresholds,
+            regionThresholds.nursing_home.infected_locations_percentage,
           title: infectedLocationsText.chloropleth_legenda.titel,
         }}
       >

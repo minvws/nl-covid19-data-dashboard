@@ -72,7 +72,7 @@ export function SafetyRegionChoropleth<
   const DEFAULT_FILL = 'white';
   const getFillColor = useChoroplethColorScale(
     getData,
-    selectedThreshold?.thresholds,
+    selectedThreshold,
     DEFAULT_FILL
   );
 

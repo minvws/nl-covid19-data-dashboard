@@ -109,7 +109,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
         description={text.map_toelichting}
         legend={{
           title: siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel,
-          thresholds: municipalThresholds.hospital_admissions.thresholds,
+          thresholds: municipalThresholds.hospital_admissions,
         }}
       >
         <MunicipalityChoropleth
