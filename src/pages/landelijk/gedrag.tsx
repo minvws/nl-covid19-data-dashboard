@@ -29,7 +29,7 @@ const BehaviorPage: FCWithLayout<INationalData> = (props) => {
       <ContentHeader_weekRangeHack
         category={siteText.nationaal_layout.headings.gedrag}
         title={text.pagina.titel}
-        icon={Gedrag}
+        icon={<Gedrag />}
         subtitle={text.pagina.toelichting}
         metadata={{
           datumsText: text.datums,

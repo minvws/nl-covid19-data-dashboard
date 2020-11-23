@@ -86,7 +86,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
         title={replaceVariablesInText(text.titel, {
           municipality: municipalityName,
         })}
-        icon={RioolwaterMonitoring}
+        icon={<RioolwaterMonitoring />}
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
@@ -112,6 +112,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
             }}
           >
             <KpiValue
+              data-cy="barscale_value"
               absolute={barScaleData.value}
               valueAnnotation={siteText.waarde_annotaties.riool_normalized}
             />
@@ -133,6 +134,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
           }}
         >
           <KpiValue
+            data-cy="total_installation_count"
             absolute={sewerAverages.last_value.total_installation_count}
           />
         </KpiTile>

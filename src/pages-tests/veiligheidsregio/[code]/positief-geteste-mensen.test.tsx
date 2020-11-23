@@ -12,7 +12,7 @@ describe('Safety region page: PositiefGetesteMensen', () => {
   it('should use total_reported_increase_per_region for Results per Region', () => {
     const { container } = render(
       <PositiefGetesteMensen
-        data={data as Regionaal}
+        data={data}
         lastGenerated="test"
         safetyRegionName="Friesland"
       />
@@ -24,7 +24,7 @@ describe('Safety region page: PositiefGetesteMensen', () => {
     );
 
     const value = formatNumber(
-      data?.results_per_region.last_value.total_reported_increase_per_region
+      data.results_per_region.last_value.total_reported_increase_per_region
     );
 
     expect(increaseText).toEqual(value);

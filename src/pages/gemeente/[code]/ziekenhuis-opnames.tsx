@@ -30,8 +30,8 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
   const router = useRouter();
 
   const legendItems = useMunicipalLegendaData('hospital_admissions');
-  const hospitalAdmissions: MunicipalHospitalAdmissions | undefined =
-    data?.hospital_admissions;
+  const hospitalAdmissions: MunicipalHospitalAdmissions =
+    data.hospital_admissions;
 
   return (
     <>
@@ -72,6 +72,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
           }}
         >
           <KpiValue
+            data-cy="moving_average_hospital"
             absolute={hospitalAdmissions.last_value.moving_average_hospital}
           />
         </KpiTile>
