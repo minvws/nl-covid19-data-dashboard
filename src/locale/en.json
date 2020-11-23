@@ -57,10 +57,6 @@
       "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
       "text": "Stichting NICE"
     },
-    "reference": {
-      "href": "/verantwoording",
-      "text": "Lees meer in de cijferverantwoording."
-    },
     "titel": "Intensive care admissions by day",
     "pagina_toelichting": "Number of confirmed COVID-19 cases who are admitted to a hospital intensive care unit (ICU) per day.",
     "barscale_titel": "Intensive care admissions per day",
@@ -90,17 +86,17 @@
       "description": "National overview of confirmed COVID-19 cases who are admitted to a hospital intensive care unit (ICU)."
     },
     "titel_sidebar": "Intensive care units admissions",
-    "titel_kpi": "Average number of intensive care admissions in 3 days"
+    "titel_kpi": "Average number of intensive care admissions in 3 days",
+    "reference": {
+      "href": "",
+      "text": ""
+    }
   },
   "verdenkingen_huisartsen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
     "bron": {
       "href": "https://www.nivel.nl/en/nivel-primary-care-database",
       "text": "Nivel Primary Care Database"
-    },
-    "reference": {
-      "href": "/verantwoording",
-      "text": "Lees meer in de cijferverantwoording."
     },
     "estimated_amount_of_patients": "Estimated number of patients with symptoms that could indicate COVID-19:",
     "titel": "Estimated number of patients who contact the general practitioner for the first time with COVID-19 symptoms",
@@ -118,17 +114,17 @@
     },
     "normalized_kpi_titel": "Number of patients with symptoms that could indicate COVID-19 per 100.000 inhabitants",
     "normalized_kpi_toelichting": "Number of patients who contact the general practitioner for the first time due to COVID-19 like symptoms, per week.",
-    "titel_kpi": "Patients who contact the general practitioner for the first time due to COVID-19 symptoms"
+    "titel_kpi": "Patients who contact the general practitioner for the first time due to COVID-19 symptoms",
+    "reference": {
+      "href": "",
+      "text": ""
+    }
   },
   "ziekenhuisopnames_per_dag": {
     "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
     "bron": {
       "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
       "text": "NICE foundation"
-    },
-    "reference": {
-      "href": "/verantwoording",
-      "text": "Lees meer in de cijferverantwoording."
     },
     "titel": "Hospital admissions per day",
     "pagina_toelichting": "Number of confirmed COVID-19 cases who are admitted to a hospital per day.\n\nPlease note: as of 13 October 2020, data on hospital admissions is obtained from a new source. For more information see the explanation of the data presented.",
@@ -170,17 +166,17 @@
       "description": "Number of confirmed COVID-19 cases who are admitted to a hospital in the Netherlands."
     },
     "titel_sidebar": "Hospital admissions",
-    "titel_kpi": "Average number of hospital admissions in 3 days"
+    "titel_kpi": "Average number of hospital admissions in 3 days",
+    "reference": {
+      "href": "",
+      "text": ""
+    }
   },
   "positief_geteste_personen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
-    },
-    "reference": {
-      "href": "/verantwoording",
-      "text": "Lees meer in de cijferverantwoording."
     },
     "titel": "Number of confirmed cases",
     "pagina_toelichting": "By keeping track of the number of confirmed cases, we are able to determine the rate at which the virus is spreading before it reaches the intensive care. This keeps us prepared.",
@@ -231,7 +227,11 @@
       "title": "Confirmed cases | Dashboard Coronavirus | Government.nl",
       "description": "National overview of confirmed cases in inhabitants with COVID-19."
     },
-    "titel_kpi": "Confirmed cases per day"
+    "titel_kpi": "Confirmed cases per day",
+    "reference": {
+      "href": "",
+      "text": ""
+    }
   },
   "besmettelijke_personen": {
     "title": "Number of infectious people",
@@ -239,10 +239,6 @@
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/097155aa-75eb-4caa-8ed3-4c6edb80467e",
       "text": "RIVM"
-    },
-    "reference": {
-      "href": "/verantwoording",
-      "text": "Lees meer in de cijferverantwoording."
     },
     "legenda_line": "The number of infectious people in the Netherlands.",
     "legenda_marge": "The confidence interval shows the range between which the number of infectious people falls.",
@@ -262,7 +258,11 @@
       "description": "National overview of how many people with COVID-19 can transmit the virus. This number is calculated by the RIVM."
     },
     "barscale_toelichting": "",
-    "titel_kpi": "Number of infectious people"
+    "titel_kpi": "Number of infectious people",
+    "reference": {
+      "href": "",
+      "text": ""
+    }
   },
   "reproductiegetal": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
@@ -271,10 +271,6 @@
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/ed0699d1-c9d5-4436-8517-27eb993eab6e",
       "text": "RIVM"
-    },
-    "reference": {
-      "href": "/verantwoording",
-      "text": "Lees meer in de cijferverantwoording."
     },
     "legenda_r": "The reproduction number is not an exact value but a reliable estimate. Reproduction numbers (R) using data from less than two weeks ago are not reliable, therefore, the line depicting R stops at a date two weeks in the past. ",
     "legenda_marge": "The confidence interval shows the range between which the number R falls. This is updated on a weekly basis.",
@@ -291,7 +287,11 @@
       "description": "The reproduction number shows how fast the virus is spreading. This number shows how many people are on average infected by one patient with COVID-19."
     },
     "titel_sidebar": "Reproduction number",
-    "titel_kpi": "Most recent reproduction number"
+    "titel_kpi": "Most recent reproduction number",
+    "reference": {
+      "href": "",
+      "text": ""
+    }
   },
   "overige_gegevens": {
     "title": "To be developed",
@@ -344,11 +344,7 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
     },
-    "reference": {
-      "href": "/verantwoording",
-      "text": "Lees meer in de cijferverantwoording."
-    },
-    "titel": "Nursing homes - number of infected locations",
+    "titel": "Number of infected locations",
     "pagina_toelichting": "This number is an estimation of the number of new nursing home locations where there is at least one confirmed case.\n\nThe calculation method has been changed on the 29th of September. Please also see the data explanation section.",
     "barscale_titel": "Number of new locations per day",
     "barscale_toelichting": "Number of new locations where there is at least one confirmed case. A nursing home is counted as a 'new location; when there have not been any confirmed cases for at least 28 days, which is twice the incubation period.",
@@ -367,7 +363,11 @@
       "description": "National number of nursing homes with at least one confirmed case of COVID-19."
     },
     "titel_sidebar": "Number of infected nursing home locations",
-    "titel_kpi": "Number of infected locations"
+    "titel_kpi": "Number of infected locations",
+    "reference": {
+      "href": "",
+      "text": ""
+    }
   },
   "verpleeghuis_positief_geteste_personen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -375,11 +375,7 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
     },
-    "reference": {
-      "href": "/verantwoording",
-      "text": "Lees meer in de cijferverantwoording."
-    },
-    "titel": "Nursing homes - number of confirmed cases",
+    "titel": "Number of confirmed cases",
     "barscale_titel": "Number of confirmed cases in nursing homes per day",
     "extra_uitleg": "Number of new confirmed cases in nursing homes that have been reported per day.",
     "pagina_toelichting": "Number of new confirmed cases in nursing homes that have been reported per day. This number is an estimation of the number confirmed cases in nursing home inhabitants.\n\nThe calculation method has been changed on the 29th of September. Please also see the data explanation section.",
@@ -396,7 +392,11 @@
       "title": "Confirmed cases in nursing homes | Dashboard Coronavirus | Government.nl",
       "description": "Number of confirmed cases of COVID-19 in nursing homes in the Netherlands."
     },
-    "titel_kpi": "Number of confirmed cases per day"
+    "titel_kpi": "Number of confirmed cases per day",
+    "reference": {
+      "href": "",
+      "text": ""
+    }
   },
   "verpleeghuis_oversterfte": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -404,11 +404,7 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
     },
-    "reference": {
-      "href": "/verantwoording",
-      "text": "Lees meer in de cijferverantwoording."
-    },
-    "titel": "Nursing homes - mortality",
+    "titel": "Mortality",
     "pagina_toelichting": "Daily number of deceased residents with confirmed cases of COVID-19 in nursing homes.",
     "barscale_titel": "Number of deceased residents",
     "barscale_screenreader_text": "{{value}} deceased residents",
@@ -421,7 +417,11 @@
       "title": "Number of confirmed cases in nursing homes | Dashboard Coronavirus | Government.nl",
       "description": "National number of deceased residents with confirmed cases of COVID-19 in nursing homes."
     },
-    "titel_kpi": "Mortality per day"
+    "titel_kpi": "Mortality per day",
+    "reference": {
+      "href": "",
+      "text": ""
+    }
   },
   "blok_verpleeghuis_zorg": {
     "title": "Nursing homes",
@@ -435,10 +435,6 @@
     "bron": {
       "text": "RIVM",
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
-    },
-    "reference": {
-      "href": "/verantwoording",
-      "text": "Lees meer in de cijferverantwoording."
     },
     "titel": "Sewage water examination",
     "pagina_toelichting": "Average number of coronavirus particles per 100.000 inhabitants found in wastewater. The weekly average is calculated by adding up all the values measured at roughly 300 locations and dividing this by the number of measurements taken.",
@@ -459,7 +455,11 @@
     "map_toelichting": "This map shows the average number of virus particles per 100.000 inhabitants, per safety region.",
     "legenda_titel": "",
     "map_tooltip": "{{value}} x100 billion virus particles per 100.000 inhabitants",
-    "map_tooltip_value": ""
+    "map_tooltip_value": "",
+    "reference": {
+      "href": "",
+      "text": ""
+    }
   },
   "notfound_titel": {
     "text": "Something went wrong"
@@ -565,15 +565,15 @@
       },
       {
         "cijfer": "Reproduction number",
-        "verantwoording": "These figures are supplied every Tuesday as open data by the National Institute for Public Health and the Environment (RIVM). The values in the file provided by RIVM are copied directly to the dashboard. \n\nThe reproduction number (R) is not an exact value but a reliable estimate. The value of R is based on (1) the number of ICU and hospital admissions, and (2) the day on which these ICU and hospital patients developed symptoms. The most up to date value of R provided on the coronavirus dashboard at any given time is always from at least two weeks ago. \n\nEstimates of R using data from less than 14 days ago could provide an indication of what the definitive value may be, but are not reliable predictors. Estimates using more recent data are less reliable because the data is not yet complete. It is, for instance, impossible to know how many newly confirmed cases will result in hospital admissions in the days ahead. \n\nUntil 3 November 2020, the graph showing the progression of R over time did not give a value of R for the most recent two weeks but did give a projection of this value in the form of a bandwidth. As of 3 November, the dashboard graph will no longer display this bandwidth."
+        "verantwoording": "The reproduction number is supplied every Tuesday as [open data](https://data.rivm.nl/covid-19/COVID-19_reproductiegetal.json) by the National Institute for Public Health and the Environment (RIVM). The description of this dataset can be found [here](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/ed0699d1-c9d5-4436-8517-27eb993eab6e). The reproduction number (R) is not an exact value, but a reliable estimate. The value of R is based on (1) the number of ICU and hospital admissions, and (2) the day on which these ICU and hospital patients developed symptoms. The most up to date value of R provided on the coronavirus dashboard at any given time is always from at least two weeks ago. \n\nEstimates of R using data from less than 14 days ago could provide an indication of what the definitive value may be, but are not reliable predictors. Estimates using more recent data are less reliable because the data is not yet complete. It is, for instance, impossible to know how many newly confirmed cases will result in hospital admissions in the days ahead. \n\nUntil 3 November 2020, the graph showing the progression of R over time did not give a value of R for the most recent two weeks but did give a projection of this value in the form of a bandwidth. As of 3 November, the dashboard graph will no longer display this bandwidth."
       },
       {
         "cijfer": "Nursing homes",
-        "verantwoording": "The National Institute for Public Health and the Environment (RIVM) provides the Ministry of Health, Welfare and Sport with information about the COVID-19 situation in nursing homes on a daily basis via an [open data file](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a). This data cannot always be clearly linked to a specific safety region. As a result, the total sum of numbers at the safety-region level may be less than the numbers at the national level. The number of deaths of nursing home residents is based on the date of death. However, when the date of death is unknown that death is not included in this statistic in the dashboard.\n\nThe method used to estimate the numbers of nursing homes and nursing home residents infected with coronavirus has been improved. Since 1 July 2020, for every person newly infected with coronavirus, the municipal health services (GGDs) have noted whether that person lives in a nursing home. Until the end of September 2020, no use was made of this data and a different method was used to calculate infection numbers, which led to a significant overestimate of the number of infected nursing homes. As of 29 September 2020, the estimates on the dashboard from 1 July 2020 onwards have been recalculated using the this data and therefore now give a much better picture of the actual number of infected nursing homes and nursing home residents.\n\nOld definition of a nursing home resident: A person was counted as a nursing home resident if, according to the central database OSIRIS: on the basis of their postcode, they can be linked to a registered nursing home or residential care home for the elderly, a setting (place where infection may have occurred) labelled as a ‘nursing home’ or something similar, or if there is any other term that links them in the database to a nursing home or residential care home for the elderly. In addition, the person:\n- must be over 70 years old\n- must not be a health worker, and\n- must not be employed.\n\nNew definition of a nursing home resident: As of 1 July 2020, every time a person tests positive for COVID-19, the GGD asks whether that person is a resident of a nursing home or residential care home for the elderly. This information is used in the new definition. A person is considered to be a nursing home resident if, according to the data in OSIRIS:\n- This person is a resident of a nursing home or a residential care home for the elderly.\n- If it is not known whether the person lives in a nursing home or residential care home for the elderly, the old definition is used.\n\nThe total number of nursing homes per safety region is provided by RIVM. Any nursing homes with the same postcode are counted as one nursing home. This is because the number of infected nursing homes is also determined by postcode. It is necessary to know the total number of nursing homes per safety region in order to calculate what percentage of nursing homes in the safety region is infected. The total number of nursing homes nationwide is the sum of the total number of nursing homes in all safety regions."
+        "verantwoording": "The National Institute for Public Health and the Environment (RIVM) provides the Ministry of Health, Welfare and Sport with information about the COVID-19 situation in nursing homes on a daily basis via [open data](https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv). The description of this dataset can be found [here](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a). This data cannot always be clearly linked to a specific safety region. As a result, the total sum of numbers at the safety-region level may be less than the numbers at the national level. The number of deaths of nursing home residents is based on the date of death. However, when the date of death is unknown that death is not included in this statistic in the dashboard.\n\nThe method used to estimate the numbers of nursing homes and nursing home residents infected with coronavirus has been improved. Since 1 July 2020, for every person newly infected with coronavirus, the municipal health services (GGDs) have noted whether that person lives in a nursing home. Until the end of September 2020, no use was made of this data and a different method was used to calculate infection numbers, which led to a significant overestimate of the number of infected nursing homes. As of 29 September 2020, the estimates on the dashboard from 1 July 2020 onwards have been recalculated using the this data and therefore now give a much better picture of the actual number of infected nursing homes and nursing home residents.\n\nOld definition of a nursing home resident: A person was counted as a nursing home resident if, according to the central database OSIRIS: on the basis of their postcode, they can be linked to a registered nursing home or residential care home for the elderly, a setting (place where infection may have occurred) labelled as a ‘nursing home’ or something similar, or if there is any other term that links them in the database to a nursing home or residential care home for the elderly. In addition, the person:\n- must be over 70 years old\n- must not be a health worker, and\n- must not be employed.\n\nNew definition of a nursing home resident: As of 1 July 2020, every time a person tests positive for COVID-19, the GGD asks whether that person is a resident of a nursing home or residential care home for the elderly. This information is used in the new definition. A person is considered to be a nursing home resident if, according to the data in OSIRIS:\n- This person is a resident of a nursing home or a residential care home for the elderly.\n- If it is not known whether the person lives in a nursing home or residential care home for the elderly, the old definition is used.\n\nThe total number of nursing homes per safety region is provided by RIVM. Any nursing homes with the same postcode are counted as one nursing home. This is because the number of infected nursing homes is also determined by postcode. It is necessary to know the total number of nursing homes per safety region in order to calculate what percentage of nursing homes in the safety region is infected. The total number of nursing homes nationwide is the sum of the total number of nursing homes in all safety regions."
       },
       {
         "cijfer": "Infectious people",
-        "verantwoording": "A person who carries coronavirus can infect other people within a certain time frame. How long someone is infectious for differs from person to person. Using a range of data sources regarding the number of people infected with the virus in a specific time frame, it is possible to estimate the number of infectious people in the Netherlands. See [RIVM](https://www.rivm.nl/coronavirus-covid-19/hoe-berekeningen-bijdragen-aan-bestrijding-van-virus) for more information regarding the method.\n\nThe calculation method of the number of infectious people has been changed since 13 October. Between 1 June till 13 October this number was calculated based on the results of the first [Pienter Corona research](https://www.rivm.nl/pienter-corona-studie), the number of hospital admissions and the number of confirmed cases. From 13 October onwards, this number is calculated based on the results of the second Pienter Corona research and the number of hospital admissions. In this second research, a larger group of people have been examined. Besides, more insight in the infectiousness of people has been gained.\n\nThese figures are supplied weekly (on Tuesdays) as open data by the RIVM. The values in the file are copied directly onto the dashboard. There is no alert value for the number of infectious people as this number is an estimate based on a calculation."
+        "verantwoording": "The number of infectious people is published via [open data](https://data.rivm.nl/covid-19/COVID-19_prevalentie.json) by the RIVM on a weekly basis (on Tuesdays). The description of this dataset can be found [here](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/097155aa-75eb-4caa-8ed3-4c6edb80467e). A person who carries coronavirus can infect other people within a certain time frame. How long someone is infectious for differs from person to person. Using a range of data sources regarding the number of people infected with the virus in a specific time frame, it is possible to estimate the number of infectious people in the Netherlands. See [RIVM](https://www.rivm.nl/coronavirus-covid-19/hoe-berekeningen-bijdragen-aan-bestrijding-van-virus) for more information regarding the method. There is no alert value for the number of infectious people as this number is an estimate based on a calculation.\n\nThe calculation method of the number of infectious people has been changed since 13 October. Between 1 June till 13 October this number was calculated based on the results of the first [Pienter Corona research](https://www.rivm.nl/pienter-corona-studie), the number of hospital admissions and the number of confirmed cases. From 13 October onwards, this number is calculated based on the results of the second Pienter Corona research and the number of hospital admissions. In this second research, a larger group of people have been examined. Besides, more insight in the infectiousness of people has been gained."
       },
       {
         "cijfer": "General practitioners",
@@ -581,7 +581,7 @@
       },
       {
         "cijfer": "Sewage water",
-        "verantwoording": "Human excrement flushed down the toilet can contain pathogens (viruses and bacteria that can make people sick), which can be measured in wastewater. These tests measure the concentration of coronavirus particles in wastewater that may (but do not always) come from the excrement of infected individuals. Measurements are collected at more than 300 wastewater treatment plants around the country. At least once a week at each location, researchers from the RIVM test a sample of wastewater collected over a 24-hour period. The weekly number of locations with new data varies however, because not every test is completed successfully. The open data file (https://data.rivm.nl/covid-19/COVID-19_rioolwaterdata.csv) shows at which locations tests were done on a given date. \n\nAs of 3 November 2020, the dashboard no longer shows the number of virus particles in one millilitre of wastewater. Instead it shows the number of virus particles per 100,000 inhabitants. Assisted by the water authorities, Statistics Netherlands (CBS) has calculated the number of inhabitants served by each wastewater treatment plant, so that RIVM can determine the number of virus particles per 100,000 inhabitants. RIVM now also corrects for the volume of water flowing into the plant at the time of sampling, which is called the flow rate. Rainwater, for example, has a diluting effect. However, it can only retrospectively correct the data from 7 September 2020, which means that data from before that date is no longer shown on the dashboard. This coincides with the fact that the number of testing locations was increased from roughly 80 to 318 on 7 September 2020.    \n\nIf the number of virus particles in a sample is too low to be measured, the value is recorded as 0. Sometimes RIVM will indicate that a measurement isn’t representative. These measurements are filtered out when data is entered in the dashboard. The current study makes trends visible, such as an increase or decrease in the number of virus particles. But more research is needed before any conclusions can be drawn about these trends. \n\nThe weekly average is calculated by first determining the average of all measurements taken at a sampling site in a given week, and then using this to determine the average of all sampling sites for that week per municipality, safety region or for the country as a whole. A week runs from Monday to Sunday. The weekly average is calculated on the following Tuesday, so that the week is complete and the RIVM has time to receive and analyse the samples, and report on them. Please note that additional data relating to the preceding week or even the weeks before that may be received after Tuesday. This is why the open data file is read every day and the weekly averages recalculated. Any corrections relating to previous weeks are also entered in the dashboard. The graph shows the value of the sample for each location and the date on which it was collected.\n\nWastewater treatment plants are allocated to a safety region based on their catchment area, that is, the area from which wastewater flows to that plant to be treated. RIVM indicates what percentage of a location falls under a certain safety region. This distribution is not yet entirely accurate and will be finetuned in the coming period. The catchment area of some locations fall under more than one safety region. In that case, the location can be found on the dashboard under the safety region in which the biggest share of its catchment area falls. Locations are linked to municipalities on the basis of their postcode, using Statistics Netherlands’ distribution of postcodes per municipality. Sometimes this did not result in a match. In these exceptional cases, the location’s coordinates were looked up on a map to see which municipality it falls under. Please note that the link to a particular municipality may not be entirely accurate because a wastewater treatment plant’s catchment area may not coincide exactly with municipal boundaries. We are working to make a more accurate link between sewage treatment plant locations and municipalities."
+        "verantwoording": "Information on sewage water is made available via [open data](https://data.rivm.nl/covid-19/COVID-19_rioolwaterdata.csv) by the RIVM. The description of this dataset can be found [here](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9). Human excrement flushed down the toilet can contain pathogens (viruses and bacteria that can make people sick), which can be measured in wastewater. These tests measure the concentration of coronavirus particles in wastewater that may (but do not always) come from the excrement of infected individuals. Measurements are collected at more than 300 wastewater treatment plants around the country. At least once a week at each location, researchers from the RIVM test a sample of wastewater collected over a 24-hour period. The weekly number of locations with new data varies however, because not every test is completed successfully. The open data shows at which locations tests were done on a given date. \n\nAs of 3 November 2020, the dashboard no longer shows the number of virus particles in one millilitre of wastewater. Instead it shows the number of virus particles per 100,000 inhabitants. Assisted by the water authorities, Statistics Netherlands (CBS) has calculated the number of inhabitants served by each wastewater treatment plant, so that RIVM can determine the number of virus particles per 100,000 inhabitants. RIVM now also corrects for the volume of water flowing into the plant at the time of sampling, which is called the flow rate. Rainwater, for example, has a diluting effect. However, it can only retrospectively correct the data from 7 September 2020, which means that data from before that date is no longer shown on the dashboard. This coincides with the fact that the number of testing locations was increased from roughly 80 to 318 on 7 September 2020.    \n\nIf the number of virus particles in a sample is too low to be measured, the value is recorded as 0. Sometimes RIVM will indicate that a measurement isn’t representative. These measurements are filtered out when data is entered in the dashboard. The current study makes trends visible, such as an increase or decrease in the number of virus particles. But more research is needed before any conclusions can be drawn about these trends. \n\nThe weekly average is calculated by first determining the average of all measurements taken at a sampling site in a given week, and then using this to determine the average of all sampling sites for that week per municipality, safety region or for the country as a whole. A week runs from Monday to Sunday. The weekly average is calculated on the following Tuesday, so that the week is complete and the RIVM has time to receive and analyse the samples, and report on them. Please note that additional data relating to the preceding week or even the weeks before that may be received after Tuesday. This is why the open data file is read every day and the weekly averages recalculated. Any corrections relating to previous weeks are also entered in the dashboard. The graph shows the value of the sample for each location and the date on which it was collected.\n\nWastewater treatment plants are allocated to a safety region based on their catchment area, that is, the area from which wastewater flows to that plant to be treated. RIVM indicates what percentage of a location falls under a certain safety region. This distribution is not yet entirely accurate and will be finetuned in the coming period. The catchment area of some locations fall under more than one safety region. In that case, the location can be found on the dashboard under the safety region in which the biggest share of its catchment area falls. Locations are linked to municipalities on the basis of their postcode, using Statistics Netherlands’ distribution of postcodes per municipality. Sometimes this did not result in a match. In these exceptional cases, the location’s coordinates were looked up on a map to see which municipality it falls under. Please note that the link to a particular municipality may not be entirely accurate because a wastewater treatment plant’s catchment area may not coincide exactly with municipal boundaries. We are working to make a more accurate link between sewage treatment plant locations and municipalities."
       },
       {
         "cijfer": "“Value of ” and “Obtained”",
@@ -748,16 +748,16 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
     },
-    "reference": {
-      "href": "/verantwoording",
-      "text": "Lees meer in de cijferverantwoording."
-    },
     "linechart_description": "",
     "metadata": {
       "title": "Hospital admissions residents {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
       "description": "Confirmed cases of COVID-19 in safety region {{safetyRegionName}} who are admitted to a hospital."
     },
-    "titel_kpi": "Average number of hospital admissions in 3 days"
+    "titel_kpi": "Average number of hospital admissions in 3 days",
+    "reference": {
+      "href": "",
+      "text": ""
+    }
   },
   "veiligheidsregio_positief_geteste_personen": {
     "titel_sidebar": "Confirmed cases",
@@ -788,10 +788,6 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
     },
-    "reference": {
-      "href": "/verantwoording",
-      "text": "Lees meer in de cijferverantwoording."
-    },
     "cluster_datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "cluster_bron": {
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
@@ -809,6 +805,10 @@
     "metadata": {
       "title": "Confirmed cases in {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
       "description": "Overview of confirmed cases in safety region {{safetyRegionName}}."
+    },
+    "reference": {
+      "href": "",
+      "text": ""
     }
   },
   "veiligheidsregio_rioolwater_metingen": {
@@ -827,10 +827,6 @@
       "text": "RIVM",
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
     },
-    "reference": {
-      "href": "/verantwoording",
-      "text": "Lees meer in de cijferverantwoording."
-    },
     "graph_average_label_text": "Weekly average for safety region",
     "graph_secondary_label_text": "Individual measurements",
     "graph_average_label_text_rwzi": "Measurements for {{name}}",
@@ -845,7 +841,11 @@
     "titel_kpi": "Average number of virus particles per 100.000 inhabitants",
     "total_installation_count_titel": "Number of measurement locations",
     "total_installation_count_description": "Weekly number of sewage water treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful.",
-    "rwzi_abbrev": ""
+    "rwzi_abbrev": "",
+    "reference": {
+      "href": "",
+      "text": ""
+    }
   },
   "gemeente_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Hospital admissions",
@@ -863,16 +863,16 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
     },
-    "reference": {
-      "href": "/verantwoording",
-      "text": "Lees meer in de cijferverantwoording."
-    },
     "linechart_description": "",
     "metadata": {
       "title": "Hospital admissions {{municipalityName}} | Dashboard Coronavirus | Government.nl",
       "description": "Overview of the number of confirmed COVID-19 cases in {{municipalityName}} who are admitted to a hospital per day."
     },
-    "titel_kpi": "Average number of hospital admissions in 3 days"
+    "titel_kpi": "Average number of hospital admissions in 3 days",
+    "reference": {
+      "href": "",
+      "text": ""
+    }
   },
   "gemeente_positief_geteste_personen": {
     "titel_sidebar": "Confirmed cases",
@@ -903,15 +903,15 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
     },
-    "reference": {
-      "href": "/verantwoording",
-      "text": "Lees meer in de cijferverantwoording."
-    },
     "metadata": {
       "title": "Confirmed cases in  {{municipalityName}} | Dashboard Coronavirus | Government.nl",
       "description": "Overview of confirmed cases in municipality {{municipalityName}}"
     },
-    "titel_kpi": "Confirmed cases per day"
+    "titel_kpi": "Confirmed cases per day",
+    "reference": {
+      "href": "",
+      "text": ""
+    }
   },
   "gemeente_rioolwater_metingen": {
     "titel_sidebar": "Sewage water examination",
@@ -929,10 +929,6 @@
       "text": "RIVM",
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
     },
-    "reference": {
-      "href": "/verantwoording",
-      "text": "Lees meer in de cijferverantwoording."
-    },
     "graph_average_label_text": "Weekly average of measured locations",
     "graph_secondary_label_text": "Individual measurements",
     "graph_average_label_text_rwzi": "Measurements for {{name}}",
@@ -947,7 +943,11 @@
     "rwzi_abbrev": "",
     "graph_daily_label_text_rwzi": "",
     "graph_selected_rwzi_placeholder": "",
-    "graph_range_description": ""
+    "graph_range_description": "",
+    "reference": {
+      "href": "",
+      "text": ""
+    }
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Level of risk",
@@ -1020,10 +1020,6 @@
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     },
-    "reference": {
-      "href": "/verantwoording",
-      "text": "Lees meer in de cijferverantwoording."
-    },
     "toelichting": "This number is about the total number of persons tested by the municipal health services (GGD) in one week, for which a result is known and how many of those people had a positive test result. Note that most, but not all tests are conducted by the GGD. That's why the absolute number of positive test cases might differ from the number shown here.",
     "totaal_getest_week_titel": "Number of people tested by GGD",
     "totaal_getest_week_uitleg": "Number of people tested by GGD in one week, and of which the test result is known.",
@@ -1035,7 +1031,11 @@
     "linechart_totaltests_titel": "Number of tests with results over time",
     "linechart_totaltests_toelichting": "This graph shows the change over time in the number of GGD tests with known results, in relation to the share of tests with a positive result.",
     "linechart_totaltests_legend_label": "All tests with results",
-    "linechart_positivetests_legend_label": "Number of positive tests"
+    "linechart_positivetests_legend_label": "Number of positive tests",
+    "reference": {
+      "href": "",
+      "text": ""
+    }
   },
   "over_risiconiveaus": {
     "title": "Level of risk",
@@ -1055,10 +1055,6 @@
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     },
-    "reference": {
-      "href": "/verantwoording",
-      "text": "Lees meer in de cijferverantwoording."
-    },
     "toelichting": "This number is about the total number of persons tested by the municipal health services (GGD) in one week, for which a result is known and how many of those people had a positive test result. Note that most, but not all tests are conducted by the GGD. That's why the absolute number of positive test cases might differ from the number shown here.",
     "totaal_getest_week_titel": "Number of people tested by GGD",
     "totaal_getest_week_uitleg": "Number of people tested by GGD in one week, and of which the test result is known.",
@@ -1070,7 +1066,11 @@
     "linechart_totaltests_titel": "Number of tests with results over time",
     "linechart_totaltests_toelichting": "This graph shows the change over time in the number of GGD tests with known results, in relation to the share of tests with a positive result.",
     "linechart_totaltests_legend_label": "All tests with results",
-    "linechart_positivetests_legend_label": "Number of positive tests"
+    "linechart_positivetests_legend_label": "Number of positive tests",
+    "reference": {
+      "href": "",
+      "text": ""
+    }
   },
   "veiligheidsregio_verpleeghuis_oversterfte": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -1078,11 +1078,7 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
     },
-    "reference": {
-      "href": "/verantwoording",
-      "text": "Lees meer in de cijferverantwoording."
-    },
-    "titel": "Nursing homes - Mortality in {{safetyRegion}}",
+    "titel": "Mortality in {{safetyRegion}}",
     "pagina_toelichting": "Daily number of deceased residents with confirmed cases of COVID-19 in nursing homes.",
     "barscale_titel": "Deceased nursing home residents",
     "barscale_screenreader_text": "{{value}} deceased residents",
@@ -1094,6 +1090,10 @@
     "metadata": {
       "title": "Deceased residents nursing homes in {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
       "description": "Number of deceased residents with confirmed cases of COVID-19 in nursing homes within safety region {{safetyRegionName}}."
+    },
+    "reference": {
+      "href": "",
+      "text": ""
     }
   },
   "veiligheidsregio_verpleeghuis_besmette_locaties": {
@@ -1102,11 +1102,7 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
     },
-    "reference": {
-      "href": "/verantwoording",
-      "text": "Lees meer in de cijferverantwoording."
-    },
-    "titel": "Nursing homes - Total number of infected locations",
+    "titel": "Total number of infected locations",
     "pagina_toelichting": "This number is an estimation of the number of new nursing home locations where there is at least one confirmed case.\n\nThe calculation method has been changed on the 29th of September. Please also see the data explanation section.",
     "barscale_titel": "Number of new locations per day",
     "barscale_toelichting": "Number of new locations where there is at least one confirmed case. A nursing home is counted as a 'new location; when there have not been any confirmed cases for at least 28 days, which is twice the incubation period.",
@@ -1118,7 +1114,11 @@
       "title": "Infected nursing home locations in {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
       "description": "Number of nursing homes in safety region {{safetyRegionName}} with at least one confirmed case of COVID-19."
     },
-    "titel_sidebar": ""
+    "titel_sidebar": "",
+    "reference": {
+      "href": "",
+      "text": ""
+    }
   },
   "veiligheidsregio_verpleeghuis_positief_geteste_personen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -1126,11 +1126,7 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
       "text": "RIVM"
     },
-    "reference": {
-      "href": "/verantwoording",
-      "text": "Lees meer in de cijferverantwoording."
-    },
-    "titel": "Nursing homes - Confirmed cases in {{safetyRegion}}",
+    "titel": "Confirmed cases in {{safetyRegion}}",
     "barscale_titel": "Number of confirmed cases in nursing homes per day",
     "extra_uitleg": "Number of new confirmed cases in nursing homes that have been reported per day.",
     "pagina_toelichting": "Number of confirmed cases in nursing homes per day in {{safetyRegion}}. This number is an estimation of the number confirmed cases in nursing home inhabitants.\n\nThe calculation method has been changed on the 29th of September. Please also see the data explanation section.",
@@ -1146,6 +1142,10 @@
     "metadata": {
       "title": "Confirmed cases in nursing homes in safety region {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
       "description": "Number of confirmed cases of COVID-19 under nursing home residents in safety region {{safetyRegionName}}."
+    },
+    "reference": {
+      "href": "",
+      "text": ""
     }
   },
   "data_warning_text": "Please note: this information is not as recent as the information for the national level. We're working on a resolution. For more information, see the page \"explanation of the data presented\".",
@@ -1170,8 +1170,8 @@
     "max_visitors": ""
   },
   "gedrag_common": {
-    "compliance": "",
-    "support": "",
+    "compliance": "Compliance",
+    "support": "Support",
     "basisregels": {
       "header_percentage": "",
       "header_basisregel": "",
@@ -1180,37 +1180,33 @@
       "trend_lager": "",
       "trend_gelijk": ""
     },
-    "titel_kpi": ""
+    "titel_kpi": "Percentage of people who agree with the basic rules and the percentage of people who also follow those rules in practice."
   },
   "nl_gedrag": {
     "metadata": {
-      "title": "",
+      "title": "Compliance and support | Coronavirus dashboard | Government.nl",
       "description": ""
     },
     "pagina": {
-      "titel": "",
-      "toelichting": ""
+      "titel": "Compliance and support",
+      "toelichting": "The Netherlands’ approach is essentially to control the virus as much as possible, avoid overburdening the healthcare system and protect vulnerable groups. We can get coronavirus under control, but only if we all follow the basic rules."
     },
     "sidebar": {
-      "titel": ""
+      "titel": "Compliance and support"
     },
-    "datums": "",
+    "datums": "This survey was carried out between {{weekStart}} and {{weekEnd}}. Is updated every 3 weeks.",
     "bron": {
       "text": "",
       "href": ""
     },
-    "reference": {
-      "href": "/verantwoording",
-      "text": "Lees meer in de cijferverantwoording."
-    },
     "onderzoek_uitleg": {
-      "titel": "",
-      "toelichting": ""
+      "titel": "Survey of the Dutch public",
+      "toelichting": "Every three weeks a survey of a representative sample of the Dutch population is carried out. Survey respondents all answer the same questions about the basic rules that the government has laid down to combat coronavirus. The purpose of the survey is to find out to what extent the public supports and follows these rules. The survey is coordinated and published by RIVM, and carried out by Kantar Public. "
     },
     "kpi": {
       "aantal_respondenten": {
-        "titel": "",
-        "toelichting": "",
+        "titel": "Number of respondents",
+        "toelichting": "Number of people surveyed between 20 and 26 October 2020.",
         "bron": {
           "text": "",
           "href": ""
@@ -1224,14 +1220,14 @@
       "legenda_titel": ""
     },
     "basisregels": {
-      "title": "",
+      "title": "Basic rules",
       "intro": {
         "compliance": "",
         "support": ""
       },
       "voetnoot": {
-        "compliance": "",
-        "support": ""
+        "compliance": "This table shows the percentage of survey respondents who reported following each of the basic rules in their daily life. ",
+        "support": "This table shows the percentage of survey respondents who reported supporting each of the basic rules."
       }
     },
     "basisregels_over_tijd": {
@@ -1240,37 +1236,37 @@
         "compliance": "",
         "support": ""
       }
+    },
+    "reference": {
+      "href": "",
+      "text": ""
     }
   },
   "regionaal_gedrag": {
     "metadata": {
-      "title": "",
+      "title": "Compliance and support | Coronavirus dashboard | Government.nl",
       "description": ""
     },
     "pagina": {
-      "titel": "",
-      "toelichting": ""
+      "titel": "Compliance and support",
+      "toelichting": "The Netherlands’ approach is essentially to control the virus as much as possible, avoid overburdening the healthcare system and protect vulnerable groups. We can get coronavirus under control, but only if we all follow the basic rules."
     },
     "sidebar": {
-      "titel": ""
+      "titel": "Compliance and support"
     },
-    "datums": "",
+    "datums": "This survey was carried out between {{weekStart}} and {{weekEnd}}. Is updated every 3 weeks.",
     "bron": {
       "text": "",
       "href": ""
     },
-    "reference": {
-      "href": "/verantwoording",
-      "text": "Lees meer in de cijferverantwoording."
-    },
     "onderzoek_uitleg": {
-      "titel": "",
-      "toelichting": ""
+      "titel": "Survey of the Dutch public",
+      "toelichting": "Every three weeks a survey of a representative sample of the Dutch population is carried out. Survey respondents all answer the same questions about the basic rules that the government has laid down to combat coronavirus. The purpose of the survey is to find out to what extent the public supports and follows these rules. The survey is coordinated and published by RIVM, and carried out by Kantar Public. "
     },
     "kpi": {
       "aantal_respondenten": {
-        "titel": "",
-        "toelichting": "",
+        "titel": "Number of respondents",
+        "toelichting": "Number of people surveyed between 20 and 26 October 2020.",
         "bron": {
           "text": "",
           "href": ""
@@ -1278,22 +1274,26 @@
       }
     },
     "basisregels": {
-      "title": "",
+      "title": "Basic rules",
       "intro": {
         "compliance": "",
         "support": ""
       },
       "voetnoot": {
-        "compliance": "",
-        "support": ""
+        "compliance": "This table shows the percentage of survey respondents who reported following each of the basic rules in their daily life. ",
+        "support": "This table shows the percentage of survey respondents who reported supporting each of the basic rules."
       }
     },
     "basisregels_over_tijd": {
-      "title": "",
+      "title": "Basic rules over time",
       "intro": {
         "compliance": "",
         "support": ""
       }
+    },
+    "reference": {
+      "href": "",
+      "text": ""
     }
   }
 }
