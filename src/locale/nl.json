@@ -592,8 +592,8 @@
         "verantwoording": "Dit dashboard is in korte tijd tot stand gekomen. Het is daarom nog niet gelukt om de code voor het inlezen van de data en het construeren van de JSON- bestanden open source beschikbaar te stellen. Dit zal binnen afzienbare tijd beschikbaar worden gesteld. De code van de webapplicatie is op 5 juni 2020 gepubliceerd op [GitHub](https://github.com/minvws/nl-covid19-data-dashboard). De [databerekeningen](https://github.com/minvws/nl-covid19-data-backend-processing) zijn ook beschikbaar via Github."
       },
       {
-        "cijfer": "",
-        "verantwoording": ""
+        "cijfer": "Gedrag",
+        "verantwoording": "Deze gegevens worden elke drie weken geactualiseerd en als open databestand gepubliceerd door het RIVM. Op de dag dat het nieuwe bestand beschikbaar is, worden ook de gegevens op het Dashboard Coronavirus geactualiseerd. Het databestand bevat gegevens over het gedrag van de Nederlandse bevolking in relatie tot de corona gedragsregels. De basis hiervoor is een enquête.\n\nDe dataverzameling vindt telkens plaats via het internet (CAWI). Bij deze methode wordt de geprogrammeerde vragenlijst op internet geplaatst. De uitnodigingen voor het invullen van de enquête worden via e-mail verzonden. In de uitnodiging wordt het doel van het onderzoek toegelicht en RIVM als opdrachtgever genoemd. De Gedragsunit van het RIVM heeft de vragenlijst opgesteld. \n\nDe deelnemers aan het onderzoek zijn geselecteerd uit het Kantar Consumentenpanel (NIPObase). De steekproef bestaat uit respondenten van 16 jaar en ouder. De steekproeven zijn per veiligheidsregio representatief uitgezet naar geslacht, leeftijd (5 categorieën) en hoogst gevolgde opleiding (3 categorieën) (op randtotalen). Er is uitgegaan van een respons van 50%, waarbij een bruto steekproef van n=9.780 is uitgezet. \n\nDe vragenlijst is gedurende een week online beschikbaar voor de respondenten. Daarna wordt de dataverzameling afgesloten. Er vindt een controle plaats op de betrouwbaarheid van de antwoorden. Om de representativiteit voor de Nederlandse bevolking te verhogen worden de resultaten in twee stappen gewogen op basis van de de CBS populatiecijfers:\n\n1 Eerst is elke veiligheidsregio gewogen naar de ideaalcijfers van desbetreffende regio (op Sekse, Leeftijd en Opleiding).\n2 Vervolgens is elke veiligheidsregio ‘ingewogen’ in het totaal volgens het aandeel dat desbetreffende regio heeft in Nederland.\n\nVervolgens wordt de dataset verstuurd naar het RIVM. Het RIVM berekent op een gestandaardiseerde manier de indicatoren die in het open databestand zijn opgenomen."
       },
       {
         "cijfer": "",
@@ -1162,9 +1162,9 @@
     "keep_distance": "Houd 1,5 meter afstand",
     "work_from_home": "Werk zoveel mogelijk thuis",
     "avoid_crowds": "Vermijd drukke plekken",
-    "symptoms_stay_home": "Bij klachten: blijf thuis",
-    "symptoms_get_tested": "Bij klachten: laat je testen",
-    "wear_mask_public_indoors": "Draag een mondkapje in publieke ruimtes",
+    "symptoms_stay_home": "Blijf thuis bij klachten",
+    "symptoms_get_tested": "Laat je testen bij klachten",
+    "wear_mask_public_indoors": "Draag een mondkapje in publieke binnenruimtes",
     "wear_mask_public_transport": "Draag een mondkapje in het OV",
     "sneeze_cough_elbow": "Hoest en nies in je elleboog",
     "max_visitors": "Ontvang het maximaal aantal personen thuis"
@@ -1174,8 +1174,8 @@
     "support": "Draagvlak",
     "basisregels": {
       "header_percentage": "Percentage",
-      "header_basisregel": "Basisregel",
-      "header_trend": "Verschil met vorige meting",
+      "header_basisregel": "Gedragsregels",
+      "header_trend": "Verschil met vorige meting*",
       "trend_hoger": "hoger",
       "trend_lager": "lager",
       "trend_gelijk": "gelijk"
@@ -1196,8 +1196,8 @@
     },
     "datums": "Enquête is afgenomen tussen {{weekStart}} en {{weekEnd}}. Wordt 3-wekelijks bijgewerkt.",
     "bron": {
-      "text": "Naam bron",
-      "href": "link naar de bron"
+      "text": "RIVM",
+      "href": "https://data.rivm.nl/covid-19/COVID-19_gedrag.html"
     },
     "onderzoek_uitleg": {
       "titel": "Onderzoek onder de Nederlandse bevolking",
@@ -1208,33 +1208,33 @@
         "titel": "Aantal respondenten",
         "toelichting": "Aantal mensen dat heeft deelgenomen aan het onderzoek van 20 t/m 26 oktober.",
         "bron": {
-          "text": "Naam bron",
-          "href": "link naar de bron"
+          "text": "RIVM",
+          "href": "https://data.rivm.nl/covid-19/COVID-19_gedrag.html"
         }
       }
     },
     "verdeling_in_nederland": {
-      "titel": "Verdeling in Nederland",
-      "intro": "Selecteer een gedragsregel om de verdeling over de veiligheidsregio's te zien.",
+      "titel": "Verschillen tussen Veiligheidsregio's",
+      "intro": "Selecteer een gedragsregel om de verschillen tussen de Veiligheidsregio’s te zien.",
       "onbekend": "Onbekend",
       "legenda_titel": "Percentage"
     },
     "basisregels": {
       "title": "Gedragsregels",
       "intro": {
-        "compliance": "Intro naleving",
-        "support": "Intro draagvlak"
+        "compliance": "",
+        "support": ""
       },
       "voetnoot": {
-        "compliance": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft de gedragsregels te volgen in zijn/haar dagelijks leven ",
-        "support": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft achter de gedragsregel te staan."
+        "compliance": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft de gedragsregels te volgen in zijn/haar dagelijks leven \n* Als er een verschil is met de vorige meting kan dat met 95% zekerheid gezegd worden.",
+        "support": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft achter de gedragsregel te staan.\n* Als er een verschil is met de vorige meting kan dat met 95% zekerheid gezegd worden."
       }
     },
     "basisregels_over_tijd": {
       "title": "Basisregels over tijd",
       "intro": {
-        "compliance": "Intro naleving",
-        "support": "Intro draagvlak"
+        "compliance": "Deze grafiek toont veranderingen in de loop van de tijd van het percentage van de respondenten dat aangeeft de gedragsregel te volgen in zijn/haar dagelijks leven. ",
+        "support": "Deze grafiek toont veranderingen in de loop van de tijd van het percentage van de respondenten dat aangeeft achter de gedragsregel te staan."
       }
     },
     "reference": {
@@ -1256,8 +1256,8 @@
     },
     "datums": "Enquête is afgenomen tussen {{weekStart}} en {{weekEnd}}. Wordt 3-wekelijks bijgewerkt.",
     "bron": {
-      "text": "Naam bron",
-      "href": "link naar de bron"
+      "text": "RIVM",
+      "href": "https://data.rivm.nl/covid-19/COVID-19_gedrag.html"
     },
     "onderzoek_uitleg": {
       "titel": "Onderzoek onder de Nederlandse bevolking",
@@ -1268,27 +1268,27 @@
         "titel": "Aantal respondenten",
         "toelichting": "Aantal mensen dat heeft deelgenomen aan het onderzoek van 20 t/m 26 oktober.",
         "bron": {
-          "text": "Naam bron",
-          "href": "link naar de bron"
+          "text": "RIVM",
+          "href": "https://data.rivm.nl/covid-19/COVID-19_gedrag.html"
         }
       }
     },
     "basisregels": {
       "title": "Gedragsregels",
       "intro": {
-        "compliance": "Intro naleving",
-        "support": "Intro draagvlak"
+        "compliance": "",
+        "support": ""
       },
       "voetnoot": {
-        "compliance": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft de gedragsregels te volgen in zijn/haar dagelijks leven ",
-        "support": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft achter de gedragsregel te staan."
+        "compliance": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft de gedragsregels te volgen in zijn/haar dagelijks leven \n* Als er een verschil is met de vorige meting kan dat met 95% zekerheid gezegd worden.",
+        "support": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft achter de gedragsregel te staan.\n* Als er een verschil is met de vorige meting kan dat met 95% zekerheid gezegd worden."
       }
     },
     "basisregels_over_tijd": {
       "title": "Gedragsregels over tijd",
       "intro": {
-        "compliance": "Intro naleving",
-        "support": "Intro draagvlak"
+        "compliance": "Deze grafiek toont veranderingen in de loop van de tijd van het percentage van de respondenten dat aangeeft de gedragsregel te volgen in zijn/haar dagelijks leven. ",
+        "support": "Deze grafiek toont veranderingen in de loop van de tijd van het percentage van de respondenten dat aangeeft achter de gedragsregel te staan."
       }
     },
     "reference": {

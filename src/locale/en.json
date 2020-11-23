@@ -89,7 +89,7 @@
     "titel_kpi": "Average number of intensive care admissions in 3 days",
     "reference": {
       "href": "",
-      "text": ""
+      "text": "Read more in 'explanation of the data presented'."
     }
   },
   "verdenkingen_huisartsen": {
@@ -117,7 +117,7 @@
     "titel_kpi": "Patients who contact the general practitioner for the first time due to COVID-19 symptoms",
     "reference": {
       "href": "",
-      "text": ""
+      "text": "Read more in 'explanation of the data presented'."
     }
   },
   "ziekenhuisopnames_per_dag": {
@@ -169,7 +169,7 @@
     "titel_kpi": "Average number of hospital admissions in 3 days",
     "reference": {
       "href": "",
-      "text": ""
+      "text": "Read more in 'explanation of the data presented'."
     }
   },
   "positief_geteste_personen": {
@@ -230,7 +230,7 @@
     "titel_kpi": "Confirmed cases per day",
     "reference": {
       "href": "",
-      "text": ""
+      "text": "Read more in 'explanation of the data presented'."
     }
   },
   "besmettelijke_personen": {
@@ -261,7 +261,7 @@
     "titel_kpi": "Number of infectious people",
     "reference": {
       "href": "",
-      "text": ""
+      "text": "Read more in 'explanation of the data presented'."
     }
   },
   "reproductiegetal": {
@@ -290,7 +290,7 @@
     "titel_kpi": "Most recent reproduction number",
     "reference": {
       "href": "",
-      "text": ""
+      "text": "Read more in 'explanation of the data presented'."
     }
   },
   "overige_gegevens": {
@@ -366,7 +366,7 @@
     "titel_kpi": "Number of infected locations",
     "reference": {
       "href": "",
-      "text": ""
+      "text": "Read more in 'explanation of the data presented'."
     }
   },
   "verpleeghuis_positief_geteste_personen": {
@@ -395,7 +395,7 @@
     "titel_kpi": "Number of confirmed cases per day",
     "reference": {
       "href": "",
-      "text": ""
+      "text": "Read more in 'explanation of the data presented'."
     }
   },
   "verpleeghuis_oversterfte": {
@@ -420,7 +420,7 @@
     "titel_kpi": "Mortality per day",
     "reference": {
       "href": "",
-      "text": ""
+      "text": "Read more in 'explanation of the data presented'."
     }
   },
   "blok_verpleeghuis_zorg": {
@@ -458,7 +458,7 @@
     "map_tooltip_value": "",
     "reference": {
       "href": "",
-      "text": ""
+      "text": "Read more in 'explanation of the data presented'."
     }
   },
   "notfound_titel": {
@@ -592,8 +592,8 @@
         "verantwoording": "This dashboard was developed in a short amount of time. So far, we have therefore not been able to publish the code for inputting the data and constructing the .JSON files. However, this will be done soon. The web application code was published on [Github](https://github.com/minvws/nl-covid19-data-dashboard) on 5 June 2020. The [data calculations](https://github.com/minvws/nl-covid19-data-backend-processing) are available via Github as well."
       },
       {
-        "cijfer": "",
-        "verantwoording": ""
+        "cijfer": "Behaviour",
+        "verantwoording": "This data is updated every three weeks and is published as an open data file by the National Institute for Public Health and the Environment (RIVM). The information on the Coronavirus Dashboard is also updated on the day the new file is released. The data file contains information on the Dutch public’s behaviour in relation to the COVID-19 rules and is based on findings obtained by means of a survey.\n\nData is collected online via computer-assisted web interviewing (CAWI). This method involves posting a programmed questionnaire online. Invitations to complete the questionnaire are then sent by email, explaining the purpose of the survey and referring to RIVM as the commissioning authority. The questionnaire was drawn up by RIVM’s Corona Behavioural Unit. \n\nParticipants are selected from the Kantar Consumer Panel (TNS NIPObase) and are aged 16 and over. For each safety region, invitations are sent to a representative sample according to gender, age (5 categories) and highest level of education completed (3 categories) (based on marginal totals). Assuming a 50% response rate, a gross sample of n=9,780 is drawn. \n\nPeople in the study sample have one week to fill in the questionnaire online. After this, data collection is closed and responses are checked for reliability. To make the survey findings more representative for the entire Dutch population, the results are weighted in two steps on the basis of Statistics Netherlands’ population figures:\n\n1 Firstly, the sample in each safety region is weighted according to the actual population distribution by age, sex and level of education for the region in question.\n2 Secondly, each safety region is given a weight in the total, according to its share of the Dutch population.\n\nThe data set is then sent to RIVM which uses a standardised method to calculate values for the indicators included in the open data file.\n"
       },
       {
         "cijfer": "",
@@ -756,7 +756,7 @@
     "titel_kpi": "Average number of hospital admissions in 3 days",
     "reference": {
       "href": "",
-      "text": ""
+      "text": "Read more in 'explanation of the data presented'."
     }
   },
   "veiligheidsregio_positief_geteste_personen": {
@@ -808,7 +808,7 @@
     },
     "reference": {
       "href": "",
-      "text": ""
+      "text": "Read more in 'explanation of the data presented'."
     }
   },
   "veiligheidsregio_rioolwater_metingen": {
@@ -844,7 +844,7 @@
     "rwzi_abbrev": "",
     "reference": {
       "href": "",
-      "text": ""
+      "text": "Read more in 'explanation of the data presented'."
     }
   },
   "gemeente_ziekenhuisopnames_per_dag": {
@@ -871,7 +871,7 @@
     "titel_kpi": "Average number of hospital admissions in 3 days",
     "reference": {
       "href": "",
-      "text": ""
+      "text": "Read more in 'explanation of the data presented'."
     }
   },
   "gemeente_positief_geteste_personen": {
@@ -910,7 +910,7 @@
     "titel_kpi": "Confirmed cases per day",
     "reference": {
       "href": "",
-      "text": ""
+      "text": "Read more in 'explanation of the data presented'."
     }
   },
   "gemeente_rioolwater_metingen": {
@@ -946,7 +946,7 @@
     "graph_range_description": "",
     "reference": {
       "href": "",
-      "text": ""
+      "text": "Read more in 'explanation of the data presented'."
     }
   },
   "veiligheidsregio_index": {
@@ -1034,7 +1034,7 @@
     "linechart_positivetests_legend_label": "Number of positive tests",
     "reference": {
       "href": "",
-      "text": ""
+      "text": "Read more in 'explanation of the data presented'."
     }
   },
   "over_risiconiveaus": {
@@ -1069,7 +1069,7 @@
     "linechart_positivetests_legend_label": "Number of positive tests",
     "reference": {
       "href": "",
-      "text": ""
+      "text": "Read more in 'explanation of the data presented'."
     }
   },
   "veiligheidsregio_verpleeghuis_oversterfte": {
@@ -1093,7 +1093,7 @@
     },
     "reference": {
       "href": "",
-      "text": ""
+      "text": "Read more in 'explanation of the data presented'."
     }
   },
   "veiligheidsregio_verpleeghuis_besmette_locaties": {
@@ -1117,7 +1117,7 @@
     "titel_sidebar": "",
     "reference": {
       "href": "",
-      "text": ""
+      "text": "Read more in 'explanation of the data presented'."
     }
   },
   "veiligheidsregio_verpleeghuis_positief_geteste_personen": {
@@ -1145,7 +1145,7 @@
     },
     "reference": {
       "href": "",
-      "text": ""
+      "text": "Read more in 'explanation of the data presented'."
     }
   },
   "data_warning_text": "Please note: this information is not as recent as the information for the national level. We're working on a resolution. For more information, see the page \"explanation of the data presented\".",
@@ -1158,34 +1158,34 @@
     "riool_normalized": "x100 billion"
   },
   "gedrag_onderwerpen": {
-    "wash_hands": "",
-    "keep_distance": "",
-    "work_from_home": "",
-    "avoid_crowds": "",
-    "symptoms_stay_home": "",
-    "symptoms_get_tested": "",
-    "wear_mask_public_indoors": "",
-    "wear_mask_public_transport": "",
-    "sneeze_cough_elbow": "",
-    "max_visitors": ""
+    "wash_hands": "Wash your hands often",
+    "keep_distance": "Stay 1.5 metres away from other people",
+    "work_from_home": "Work from home if possible",
+    "avoid_crowds": "Avoid busy places",
+    "symptoms_stay_home": "Stay at home if you have symptoms",
+    "symptoms_get_tested": "Get tested if you have symptoms",
+    "wear_mask_public_indoors": "Wear a face mask in indoor public spaces",
+    "wear_mask_public_transport": "Wear a face mask on public transport",
+    "sneeze_cough_elbow": "Cough and sneeze into your elbow",
+    "max_visitors": "Do not exceed the maximum number of visitors at home "
   },
   "gedrag_common": {
     "compliance": "Compliance",
     "support": "Support",
     "basisregels": {
-      "header_percentage": "",
-      "header_basisregel": "",
-      "header_trend": "",
-      "trend_hoger": "",
-      "trend_lager": "",
-      "trend_gelijk": ""
+      "header_percentage": "Percentage",
+      "header_basisregel": "Rule",
+      "header_trend": "Compare to previous survey*",
+      "trend_hoger": "higher",
+      "trend_lager": "lower",
+      "trend_gelijk": "same"
     },
     "titel_kpi": "Percentage of people who agree with the basic rules and the percentage of people who also follow those rules in practice."
   },
   "nl_gedrag": {
     "metadata": {
       "title": "Compliance and support | Coronavirus dashboard | Government.nl",
-      "description": ""
+      "description": "National overview of compliance and support"
     },
     "pagina": {
       "titel": "Compliance and support",
@@ -1196,8 +1196,8 @@
     },
     "datums": "This survey was carried out between {{weekStart}} and {{weekEnd}}. Is updated every 3 weeks.",
     "bron": {
-      "text": "",
-      "href": ""
+      "text": "RIVM",
+      "href": "https://data.rivm.nl/covid-19/COVID-19_gedrag.html"
     },
     "onderzoek_uitleg": {
       "titel": "Survey of the Dutch public",
@@ -1208,16 +1208,16 @@
         "titel": "Number of respondents",
         "toelichting": "Number of people surveyed between 20 and 26 October 2020.",
         "bron": {
-          "text": "",
-          "href": ""
+          "text": "RIVM",
+          "href": "https://data.rivm.nl/covid-19/COVID-19_gedrag.html"
         }
       }
     },
     "verdeling_in_nederland": {
-      "titel": "",
-      "intro": "",
-      "onbekend": "",
-      "legenda_titel": ""
+      "titel": "Differences between safety regions",
+      "intro": "Select a basic rule to see the differences between safety regions.",
+      "onbekend": "Unknown",
+      "legenda_titel": "Percentage"
     },
     "basisregels": {
       "title": "Basic rules",
@@ -1226,74 +1226,74 @@
         "support": ""
       },
       "voetnoot": {
-        "compliance": "This table shows the percentage of survey respondents who reported following each of the basic rules in their daily life. ",
-        "support": "This table shows the percentage of survey respondents who reported supporting each of the basic rules."
-      }
-    },
-    "basisregels_over_tijd": {
-      "title": "",
-      "intro": {
-        "compliance": "",
-        "support": ""
-      }
-    },
-    "reference": {
-      "href": "",
-      "text": ""
-    }
-  },
-  "regionaal_gedrag": {
-    "metadata": {
-      "title": "Compliance and support | Coronavirus dashboard | Government.nl",
-      "description": ""
-    },
-    "pagina": {
-      "titel": "Compliance and support",
-      "toelichting": "The Netherlands’ approach is essentially to control the virus as much as possible, avoid overburdening the healthcare system and protect vulnerable groups. We can get coronavirus under control, but only if we all follow the basic rules."
-    },
-    "sidebar": {
-      "titel": "Compliance and support"
-    },
-    "datums": "This survey was carried out between {{weekStart}} and {{weekEnd}}. Is updated every 3 weeks.",
-    "bron": {
-      "text": "",
-      "href": ""
-    },
-    "onderzoek_uitleg": {
-      "titel": "Survey of the Dutch public",
-      "toelichting": "Every three weeks a survey of a representative sample of the Dutch population is carried out. Survey respondents all answer the same questions about the basic rules that the government has laid down to combat coronavirus. The purpose of the survey is to find out to what extent the public supports and follows these rules. The survey is coordinated and published by RIVM, and carried out by Kantar Public. "
-    },
-    "kpi": {
-      "aantal_respondenten": {
-        "titel": "Number of respondents",
-        "toelichting": "Number of people surveyed between 20 and 26 October 2020.",
-        "bron": {
-          "text": "",
-          "href": ""
-        }
-      }
-    },
-    "basisregels": {
-      "title": "Basic rules",
-      "intro": {
-        "compliance": "",
-        "support": ""
-      },
-      "voetnoot": {
-        "compliance": "This table shows the percentage of survey respondents who reported following each of the basic rules in their daily life. ",
-        "support": "This table shows the percentage of survey respondents who reported supporting each of the basic rules."
+        "compliance": "This table shows the percentage of survey respondents who reported following each of the basic rules in their daily life.\n* Any difference compared to the previous measurement can be shown with 95% certainty. ",
+        "support": "This table shows the percentage of survey respondents who reported supporting each of the basic rules.\n* Any difference compared to the previous measurement can be shown with 95% certainty. "
       }
     },
     "basisregels_over_tijd": {
       "title": "Basic rules over time",
       "intro": {
-        "compliance": "",
-        "support": ""
+        "compliance": "This graph shows the changes in the percentage of respondents who reported following the basic rule in their daily life. ",
+        "support": "This graph shows the changes in the percentage of respondents who reported supporting the basic rule."
       }
     },
     "reference": {
-      "href": "",
-      "text": ""
+      "href": "/verantwoording",
+      "text": "Read more in 'explanation of the data presented'."
+    }
+  },
+  "regionaal_gedrag": {
+    "metadata": {
+      "title": "Compliance and support | Coronavirus dashboard | Government.nl",
+      "description": "National overview of compliance and support"
+    },
+    "pagina": {
+      "titel": "Compliance and support",
+      "toelichting": "The Netherlands’ approach is essentially to control the virus as much as possible, avoid overburdening the healthcare system and protect vulnerable groups. We can get coronavirus under control, but only if we all follow the basic rules."
+    },
+    "sidebar": {
+      "titel": "Compliance and support"
+    },
+    "datums": "This survey was carried out between {{weekStart}} and {{weekEnd}}. Is updated every 3 weeks.",
+    "bron": {
+      "text": "RIVM",
+      "href": "https://data.rivm.nl/covid-19/COVID-19_gedrag.html"
+    },
+    "onderzoek_uitleg": {
+      "titel": "Survey of the Dutch public",
+      "toelichting": "Every three weeks a survey of a representative sample of the Dutch population is carried out. Survey respondents all answer the same questions about the basic rules that the government has laid down to combat coronavirus. The purpose of the survey is to find out to what extent the public supports and follows these rules. The survey is coordinated and published by RIVM, and carried out by Kantar Public. "
+    },
+    "kpi": {
+      "aantal_respondenten": {
+        "titel": "Number of respondents",
+        "toelichting": "Number of people surveyed between 20 and 26 October 2020.",
+        "bron": {
+          "text": "",
+          "href": "https://data.rivm.nl/covid-19/COVID-19_gedrag.html"
+        }
+      }
+    },
+    "basisregels": {
+      "title": "Basic rules",
+      "intro": {
+        "compliance": "",
+        "support": ""
+      },
+      "voetnoot": {
+        "compliance": "This table shows the percentage of survey respondents who reported following each of the basic rules in their daily life. \n* Any difference compared to the previous measurement can be shown with 95% certainty. ",
+        "support": "This table shows the percentage of survey respondents who reported supporting each of the basic rules.\n* Any difference compared to the previous measurement can be shown with 95% certainty. "
+      }
+    },
+    "basisregels_over_tijd": {
+      "title": "Basic rules over time",
+      "intro": {
+        "compliance": "This graph shows the changes in the percentage of respondents who reported following the basic rule in their daily life. ",
+        "support": "This graph shows the changes in the percentage of respondents who reported supporting the basic rule."
+      }
+    },
+    "reference": {
+      "href": "/verantwoording",
+      "text": "Read more in 'explanation of the data presented'."
     }
   }
 }
