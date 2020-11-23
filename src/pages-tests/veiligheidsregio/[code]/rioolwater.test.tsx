@@ -20,7 +20,7 @@ describe('Regional page: SewerWater', () => {
 
     const normalizedText = getTextByDataCy(container, 'riool_normalized');
 
-    const value = formatNumber(data.sewer.last_value.average) ?? '';
+    const value = formatNumber(data.sewer.last_value.average);
 
     expect(normalizedText).toEqual(value);
   });
