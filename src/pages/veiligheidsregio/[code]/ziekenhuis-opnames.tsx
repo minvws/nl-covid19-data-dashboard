@@ -29,8 +29,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
   const { data, safetyRegionName } = props;
   const router = useRouter();
 
-  const resultsPerRegion: ResultsPerRegion | undefined =
-    data?.results_per_region;
+  const resultsPerRegion: ResultsPerRegion = data.results_per_region;
 
   const legendItems = useMunicipalLegendaData('hospital_admissions');
   const municipalCodes = regionCodeToMunicipalCodeLookup[data.code];
@@ -73,6 +72,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
           }}
         >
           <KpiValue
+            data-cy="hospital_moving_avg_per_region"
             absolute={
               resultsPerRegion.last_value.hospital_moving_avg_per_region
             }

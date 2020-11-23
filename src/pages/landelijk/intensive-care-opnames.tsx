@@ -62,6 +62,7 @@ const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
           }}
         >
           <KpiValue
+            data-cy="covid_occupied"
             absolute={dataBeds.last_value.covid_occupied}
             percentage={dataBeds.last_value.covid_percentage_of_all_occupied}
           />

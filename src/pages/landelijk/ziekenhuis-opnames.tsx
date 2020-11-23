@@ -76,7 +76,10 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
             source: text.bronnen.lnaz,
           }}
         >
-          <KpiValue absolute={dataBeds.last_value.covid_occupied} />
+          <KpiValue
+            data-cy="covid_occupied"
+            absolute={dataBeds.last_value.covid_occupied}
+          />
         </KpiTile>
       </TwoKpiSection>
 

@@ -98,6 +98,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
             }}
           >
             <KpiValue
+              data-cy="riool_normalized"
               absolute={barScaleData.value}
               valueAnnotation={siteText.waarde_annotaties.riool_normalized}
             />
@@ -117,6 +118,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
             }}
           >
             <KpiValue
+              data-cy="total_installation_count"
               absolute={data.sewer.last_value.total_installation_count}
             />
           </KpiTile>

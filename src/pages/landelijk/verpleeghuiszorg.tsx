@@ -24,7 +24,7 @@ const positiveTestedPeopleText =
   siteText.verpleeghuis_positief_geteste_personen;
 const locationDeaths = siteText.verpleeghuis_oversterfte;
 
-const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
+const NursingHomeCare: FCWithLayout<INationalData> = (props) => {
   const { data } = props;
   const nursinghomeData = data.nursing_home;
 
@@ -65,7 +65,7 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
           }}
         >
           <KpiValue
-            data-cy="infected_daily_total"
+            data-cy="newly_infected_people"
             absolute={nursinghomeData.last_value.newly_infected_people}
           />
         </KpiTile>
@@ -102,6 +102,7 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
           }}
         >
           <KpiValue
+            data-cy="infected_locations_total"
             absolute={nursinghomeData.last_value.infected_locations_total}
             percentage={
               nursinghomeData.last_value.infected_locations_percentage
@@ -118,6 +119,7 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
           }}
         >
           <KpiValue
+            data-cy="newly_infected_locations"
             absolute={nursinghomeData?.last_value.newly_infected_locations}
           />
           <Text>{infectedLocationsText.barscale_toelichting}</Text>
@@ -180,7 +182,10 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
             source: locationDeaths.bron,
           }}
         >
-          <KpiValue absolute={nursinghomeData.last_value.deceased_daily} />
+          <KpiValue
+            data-cy="deceased_daily"
+            absolute={nursinghomeData.last_value.deceased_daily}
+          />
         </KpiTile>
       </TwoKpiSection>
 
@@ -198,8 +203,8 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
   );
 };
 
-NursingHomeInfectedLocations.getLayout = getNationalLayout();
+NursingHomeCare.getLayout = getNationalLayout();
 
 export const getStaticProps = getNlData();
 
-export default NursingHomeInfectedLocations;
+export default NursingHomeCare;

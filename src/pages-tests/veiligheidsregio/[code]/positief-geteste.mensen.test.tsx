@@ -1,5 +1,6 @@
 import React from 'react';
 import PositiefGetesteMensen from '~/pages/veiligheidsregio/[code]/positief-geteste-mensen';
+import { getTextByDataCy } from '~/test-utils/get-text-by-data-cy';
 import { loadFixture } from '~/test-utils/load-fixture';
 import { render } from '~/test-utils/render';
 import { Regionaal } from '~/types/data';
@@ -17,16 +18,16 @@ describe('Safety region page: PositiefGetesteMensen', () => {
       />
     );
 
-    const elm = container.querySelector(
-      '[data-cy="total_reported_increase_per_region"]'
+    const increaseText = getTextByDataCy(
+      container,
+      'total_reported_increase_per_region'
     );
 
-    const value =
-      formatNumber(
-        data?.results_per_region.last_value.total_reported_increase_per_region
-      ) ?? '';
+    const value = formatNumber(
+      data?.results_per_region.last_value.total_reported_increase_per_region
+    );
 
-    expect(elm?.textContent).toEqual(value);
+    expect(increaseText).toEqual(value);
   });
 
   it('should show a signaalwaarde', () => {

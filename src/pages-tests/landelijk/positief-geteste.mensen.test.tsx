@@ -1,5 +1,6 @@
 import React from 'react';
 import PositiefGetesteMensen from '~/pages/landelijk/positief-geteste-mensen';
+import { getTextByDataCy } from '~/test-utils/get-text-by-data-cy';
 import { loadFixture } from '~/test-utils/load-fixture';
 import { render } from '~/test-utils/render';
 import { National } from '~/types/data';
@@ -17,14 +18,13 @@ describe('National page: PositiefGetesteMensen', () => {
       />
     );
 
-    const elm = container.querySelector('[data-cy="infected_daily_total"]');
+    const infectedText = getTextByDataCy(container, 'infected_daily_total');
 
-    const value =
-      formatNumber(
-        data?.infected_people_total.last_value.infected_daily_total
-      ) ?? '';
+    const value = formatNumber(
+      data?.infected_people_total.last_value.infected_daily_total
+    );
 
-    expect(elm?.textContent).toEqual(value);
+    expect(infectedText).toEqual(value);
   });
 
   it('should show a signaalwaarde', () => {
