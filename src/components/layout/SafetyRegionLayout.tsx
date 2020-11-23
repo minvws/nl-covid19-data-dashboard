@@ -155,9 +155,7 @@ function SafetyRegionLayout(
                         }
                       />
                       <span className="metric-wrapper">
-                        <PositivelyTestedPeopleMetric
-                          data={data.results_per_region.last_value}
-                        />
+                        <PositivelyTestedPeopleMetric data={data} />
                         <PositivelyTestedPeopleBarScale
                           data={data.results_per_region}
                           showAxis={false}
@@ -185,8 +183,8 @@ function SafetyRegionLayout(
                             .titel_sidebar
                         }
                       />
-                      <span>
-                        <IntakeHospitalMetric data={data.results_per_region} />
+                      <span className="metric-wrapper">
+                        <IntakeHospitalMetric data={data} />
                       </span>
                     </a>
                   </Link>
@@ -212,7 +210,7 @@ function SafetyRegionLayout(
                             .titel_sidebar
                         }
                       />
-                      <span>
+                      <span className="metric-wrapper">
                         <NursingHomeInfectedPeopleMetric
                           data={data.nursing_home.last_value}
                         />
@@ -242,7 +240,7 @@ function SafetyRegionLayout(
                             .titel_sidebar
                         }
                       />
-                      <span>
+                      <span className="metric-wrapper">
                         <SewerWaterMetric
                           data={getSewerWaterBarScaleData(data)}
                         />
@@ -265,7 +263,7 @@ function SafetyRegionLayout(
                         icon={<Gedrag />}
                         title={siteText.nl_gedrag.sidebar.titel}
                       />
-                      <span>
+                      <span className="metric-wrapper">
                         <BehaviorMetric data={data.behavior} />
                       </span>
                     </a>
