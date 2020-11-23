@@ -1,19 +1,18 @@
 import fs from 'fs';
 import Head from 'next/head';
 import path from 'path';
-
-import BlockContent from '@sanity/block-content-to-react';
-import client, { localize } from '~/lib/sanity';
-
-import { targetLanguage } from '../locale/index';
-
-import { Collapsable } from '~/components/collapsable';
 import { FCWithLayout, getLayoutWithMetadata } from '~/components/layout';
 import { MaxWidth } from '~/components/maxWidth';
 import siteText, { TALLLanguages } from '~/locale/index';
 import { MDToHTMLString } from '~/utils/MDToHTMLString';
 import { ensureUniqueSkipLinkIds, getSkipLinkId } from '~/utils/skipLinks';
 import styles from './over.module.scss';
+import { Collapsable } from '~/components-styled/collapsable';
+
+import BlockContent from '@sanity/block-content-to-react';
+import client, { localize } from '~/lib/sanity';
+
+import { targetLanguage } from '../locale/index';
 
 interface ICijfer {
   cijfer: string;
@@ -32,7 +31,7 @@ interface VerantwoordingProps {
 }
 
 export async function getStaticProps(): Promise<StaticProps> {
-  const text = require('../locale/index').default;
+  const text = (await import('../locale/index')).default;
   const serializedContent = text.verantwoording.cijfers.map(
     (item: ICijfer) => ({
       ...item,

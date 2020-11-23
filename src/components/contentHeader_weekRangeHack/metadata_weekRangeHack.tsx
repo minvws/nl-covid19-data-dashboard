@@ -31,11 +31,11 @@ export function Metadata(props: IProps) {
     dateOfInsertionUnix,
   } = props;
 
-  const weekStart = formatDateFromSeconds(weekStartUnix, 'relative');
-  const weekEnd = formatDateFromSeconds(weekEndUnix, 'relative');
+  const weekStart = formatDateFromSeconds(weekStartUnix, 'weekday-medium');
+  const weekEnd = formatDateFromSeconds(weekEndUnix, 'weekday-medium');
   const dateOfInsertion = formatDateFromSeconds(
     dateOfInsertionUnix,
-    'relative'
+    'weekday-medium'
   );
 
   return (

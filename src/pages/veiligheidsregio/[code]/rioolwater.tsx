@@ -1,16 +1,19 @@
 import { useMemo, useState } from 'react';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
-import { ChartTimeControls } from '~/components-styled/chart-time-controls';
+import { Box } from '~/components-styled/base';
+import {
+  ChartTile,
+  ChartTileWithTimeframe,
+} from '~/components-styled/chart-tile';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
+import { Select } from '~/components-styled/select';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { BarChart } from '~/components/charts';
 import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRangeHack';
 import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
-import { InstallationSelector } from '~/components/lineChart/installationSelector';
-import styles from '~/components/lineChart/installationselector.module.scss';
-import { RegionalSewerWaterChart } from '~/components/lineChart/regionalSewerWaterChart';
+import { SewerWaterChart } from '~/components/lineChart/sewer-water-chart';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import {
@@ -26,7 +29,6 @@ import {
   getSewerWaterLineChartData,
   getSewerWaterScatterPlotData,
 } from '~/utils/sewer-water/safety-region-sewer-water.util';
-import { TimeframeOption } from '~/utils/timeframe';
 
 const text = siteText.veiligheidsregio_rioolwater_metingen;
 
@@ -49,9 +51,8 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
     };
   }, [data]);
 
-  const sewerAverages = data.average_sewer_installation_per_region;
+  const sewerAverages = data.sewer;
 
-  const [timeframe, setTimeframe] = useState<TimeframeOption>('all');
   const [selectedInstallation, setSelectedInstallation] = useState<
     string | undefined
   >();
@@ -67,11 +68,11 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
         })}
       />
       <ContentHeader_weekRangeHack
-        category={siteText.veiligheidsregio_layout.headings.overig}
+        category={siteText.veiligheidsregio_layout.headings.vroege_signalen}
         title={replaceVariablesInText(text.titel, {
           safetyRegion: safetyRegionName,
         })}
-        Icon={RioolwaterMonitoring}
+        icon={<RioolwaterMonitoring />}
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
@@ -80,77 +81,109 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
           dateOfInsertionUnix: sewerAverages.last_value.date_of_insertion_unix,
           dataSource: text.bron,
         }}
+        reference={text.reference}
       />
 
-      <TwoKpiSection>
-        {barScaleData?.value !== undefined && (
-          <KpiTile title={text.barscale_titel} description={text.extra_uitleg}>
-            <KpiValue absolute={barScaleData.value} />
-          </KpiTile>
-        )}
-        <KpiTile
-          title={text.total_installation_count_titel}
-          description={
-            text.total_installation_count_description +
-            `<p style="color:#595959">${text.rwzi_abbrev}</p>`
-          }
-        >
-          <KpiValue
-            absolute={sewerAverages.last_value.total_installation_count}
-          />
-        </KpiTile>
-      </TwoKpiSection>
-
-      <article className="metric-article">
-        <div className="metric-article-header">
-          <h3>{text.linechart_titel}</h3>
-          <ChartTimeControls
-            timeframeOptions={['all', '5weeks']}
-            timeframe={timeframe}
-            onChange={(value) => setTimeframe(value)}
-          />
-        </div>
-
-        {scatterPlotData && lineChartData && (
-          <>
-            {sewerStationNames.length > 0 && (
-              <div className={styles.selectorContainer}>
-                <InstallationSelector
-                  placeholderText={text.graph_selected_rwzi_placeholder}
-                  onChange={setSelectedInstallation}
-                  stationNames={sewerStationNames}
-                />
-              </div>
-            )}
-            <RegionalSewerWaterChart
-              timeframe={timeframe}
-              scatterPlotValues={scatterPlotData}
-              averageValues={lineChartData.averageValues}
-              selectedInstallation={selectedInstallation}
-              text={{
-                average_label_text: lineChartData.averageLabelText,
-                secondary_label_text: text.graph_secondary_label_text,
-                daily_label_text: text.graph_daily_label_text_rwzi,
-                range_description: text.graph_range_description,
-              }}
+      {barScaleData && barScaleData.value !== undefined && (
+        <TwoKpiSection>
+          <KpiTile
+            title={text.barscale_titel}
+            description={text.extra_uitleg}
+            metadata={{
+              date: [
+                sewerAverages.last_value.week_start_unix,
+                sewerAverages.last_value.week_end_unix,
+              ],
+              source: text.bron,
+            }}
+          >
+            <KpiValue
+              absolute={barScaleData.value}
+              valueAnnotation={siteText.waarde_annotaties.riool_normalized}
             />
-          </>
-        )}
-      </article>
+          </KpiTile>
+          <KpiTile
+            title={text.total_installation_count_titel}
+            description={
+              text.total_installation_count_description +
+              `<p style="color:#595959">${text.rwzi_abbrev}</p>`
+            }
+            metadata={{
+              date: [
+                sewerAverages.last_value.week_start_unix,
+                sewerAverages.last_value.week_end_unix,
+              ],
+              source: text.bron,
+            }}
+          >
+            <KpiValue
+              absolute={data.sewer.last_value.total_installation_count}
+            />
+          </KpiTile>
+        </TwoKpiSection>
+      )}
+
+      {lineChartData && (
+        <ChartTileWithTimeframe
+          title={text.linechart_titel}
+          metadata={{ source: text.bron }}
+          timeframeOptions={['all', '5weeks']}
+          timeframeInitialValue="all"
+        >
+          {(timeframe) => (
+            <>
+              {sewerStationNames.length > 0 && (
+                <Box display="flex" justifyContent="flex-end">
+                  <Select
+                    options={sewerStationNames.map((x) => ({
+                      label: x,
+                      value: x,
+                    }))}
+                    value={selectedInstallation}
+                    placeholder={text.graph_selected_rwzi_placeholder}
+                    onChange={setSelectedInstallation}
+                    onClear={() => setSelectedInstallation(undefined)}
+                  />
+                </Box>
+              )}
+              <SewerWaterChart
+                timeframe={timeframe}
+                scatterPlotValues={scatterPlotData}
+                averageValues={lineChartData.averageValues}
+                selectedInstallation={selectedInstallation}
+                text={{
+                  average_label_text: lineChartData.averageLabelText,
+                  secondary_label_text: text.graph_secondary_label_text,
+                  daily_label_text: text.graph_daily_label_text_rwzi,
+                  range_description: text.graph_range_description,
+                }}
+                valueAnnotation={siteText.waarde_annotaties.riool_normalized}
+              />
+            </>
+          )}
+        </ChartTileWithTimeframe>
+      )}
 
       {barChartData && (
-        <article className="metric-article">
-          <h3>
-            {replaceVariablesInText(text.bar_chart_title, {
-              safetyRegion: safetyRegionName,
-            })}
-          </h3>
+        <ChartTile
+          title={replaceVariablesInText(text.bar_chart_title, {
+            safetyRegion: safetyRegionName,
+          })}
+          metadata={{
+            date: [
+              sewerAverages.last_value.week_start_unix,
+              sewerAverages.last_value.week_end_unix,
+            ],
+            source: text.bron,
+          }}
+        >
           <BarChart
             keys={barChartData.keys}
             data={barChartData.data}
             axisTitle={text.bar_chart_axis_title}
+            valueAnnotation={siteText.waarde_annotaties.riool_normalized}
           />
-        </article>
+        </ChartTile>
       )}
     </>
   );

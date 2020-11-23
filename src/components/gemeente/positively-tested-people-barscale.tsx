@@ -1,11 +1,11 @@
 import { BarScale } from '~/components/barScale';
-import { PositiveTestedPeople } from '~/types/data.d';
+import { MunicipalPositiveTestedPeople } from '~/types/data.d';
 
 import siteText from '~/locale/index';
 const text = siteText.gemeente_positief_geteste_personen;
 
 export function PositivelyTestedPeopleBarScale(props: {
-  data: PositiveTestedPeople | undefined;
+  data: MunicipalPositiveTestedPeople | undefined;
   showAxis: boolean;
 }) {
   const { data, showAxis } = props;

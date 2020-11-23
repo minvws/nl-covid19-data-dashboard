@@ -24,7 +24,11 @@ const nextConfig = {
   reactStrictMode: true, // Enables react strict mode https://nextjs.org/docs/api-reference/next.config.js/react-strict-mode
 
   webpack(config, { isServer }) {
-    if (isServer) {
+    if (
+      isServer &&
+      process.env.DISABLE_SITEMAP !== '1' &&
+      !process.env.DISABLE_SITEMAP
+    ) {
       sitemap.generateSitemap(process.env.NEXT_PUBLIC_LOCALE);
     }
 
@@ -33,7 +37,11 @@ const nextConfig = {
       use: [
         {
           loader: '@svgr/webpack',
-          options: { typescript: false },
+          options: {
+            typescript: false,
+            dimensions: true,
+            svgo: false,
+          },
         },
       ],
       issuer: {

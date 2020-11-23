@@ -1,36 +1,26 @@
-import Highcharts from 'highcharts';
+import Highcharts, { TooltipFormatterContextObject } from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
-import { ChartTimeControls } from '~/components-styled/chart-time-controls';
 import text from '~/locale/index';
 import { assert } from '~/utils/assert';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
-import styles from './lineChart.module.scss';
+import { Value } from './lineChartWithWeekTooltip';
 
-type Value = {
-  date: number;
-  value: number;
-};
-
-type LineConfig = {
+interface LineConfig {
   color: string;
   legendLabel: string;
-};
+}
 
 const SIGNAALWAARDE_Z_INDEX = 5;
 
-const sixDaysInSeconds = 518400;
-
-interface LineChartProps {
-  title: string;
-  description?: string;
+export interface MultipleLineChartProps {
   values: Value[][];
   linesConfig: LineConfig[];
   signaalwaarde?: number;
-  timeframeOptions?: TimeframeOption[];
+  timeframe?: TimeframeOption;
 }
 
 function getChartOptions(
@@ -57,7 +47,7 @@ function getChartOptions(
       borderWidth: 0,
       colorCount: 10,
       displayErrors: true,
-      height: 212,
+      height: 275,
     },
     credits: {
       enabled: false,
@@ -90,21 +80,27 @@ function getChartOptions(
       shared: true,
       useHTML: true,
       formatter: function (): string {
-        const percentage =
-          ((this.points as any[])[1].y * 100) / (this.points as any[])[0].y;
+        const contextObjects = this.points as TooltipFormatterContextObject[];
+
+        const percentage = (contextObjects[1].y * 100) / contextObjects[0].y;
+
+        const { originalData } = (contextObjects[0].point as unknown) as {
+          originalData: Value;
+        };
 
         return `${formatDateFromSeconds(
-          +this.x - +sixDaysInSeconds
-        )} - ${formatDateFromSeconds(+this.x)}<br/>
+          originalData.week.start,
+          'short'
+        )} - ${formatDateFromSeconds(originalData.week.end, 'short')}<br/>
         <span style="height: 0.5em;width: 0.5em;background-color: ${
           linesConfig[0].color
         };border-radius: 50%;display: inline-block;"></span> ${formatNumber(
-          (this.points as any[])[0].y
+          contextObjects[0].y
         )}<br/>
         <span style="height: 0.5em;width: 0.5em;background-color: ${
           linesConfig[1].color
         };border-radius: 50%;display: inline-block;"></span> ${formatNumber(
-          (this.points as any[])[1].y
+          contextObjects[1].y
         )} (${formatPercentage(percentage)}%)`;
       },
     },
@@ -167,7 +163,7 @@ function getChartOptions(
     },
     series: values.map((list, index) => ({
       type: 'line',
-      data: list.map((value) => value.value as number),
+      data: list.map((value) => ({ y: value.value, originalData: value })),
       name: linesConfig[index].legendLabel,
       showInLegend: true,
       color: linesConfig[index].color,
@@ -177,9 +173,17 @@ function getChartOptions(
       },
     })),
     legend: {
-      align: 'left',
+      itemWidth: 300,
+      reversed: true,
+      itemHoverStyle: {
+        color: '#666',
+      },
       itemStyle: {
+        color: '#666',
+        cursor: 'pointer',
+        fontSize: '12px',
         fontWeight: 'normal',
+        textOverflow: 'ellipsis',
       },
     },
     plotOptions: {
@@ -202,18 +206,14 @@ function getChartOptions(
 }
 
 export function MultipleLineChart({
-  title,
-  description,
   values,
   linesConfig,
   signaalwaarde,
-  timeframeOptions,
-}: LineChartProps) {
-  const [timeframe, setTimeframe] = useState<TimeframeOption>('5weeks');
-
+  timeframe = '5weeks',
+}: MultipleLineChartProps) {
   assert(
     values.length === linesConfig.length,
-    'values length must equal linesConfig length'
+    'Values length must equal linesConfig length'
   );
 
   const chartOptions = useMemo(() => {
@@ -227,24 +227,7 @@ export function MultipleLineChart({
     return getChartOptions(filteredValueLists, linesConfig, signaalwaarde);
   }, [values, linesConfig, timeframe, signaalwaarde]);
 
-  return (
-    <section className={styles.root}>
-      <header className={styles.header}>
-        <div className={styles.titleAndDescription}>
-          {title && <h3>{title}</h3>}
-          {description && <p>{description}</p>}
-        </div>
-        <div className={styles.timeControls}>
-          <ChartTimeControls
-            timeframe={timeframe}
-            timeframeOptions={timeframeOptions}
-            onChange={setTimeframe}
-          />
-        </div>
-      </header>
-      <HighchartsReact highcharts={Highcharts} options={chartOptions} />
-    </section>
-  );
+  return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;
 }
 
 /**

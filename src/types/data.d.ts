@@ -5,18 +5,17 @@
 * and run 'yarn generate-typescript' to regenerate this file.
 */
 
-
 export interface Municipal {
   last_generated: string;
   proto_name: string;
   name: string;
   code: string;
-  hospital_admissions: HospitalAdmissions;
-  positive_tested_people: PositiveTestedPeople;
-  sewer_measurements?: SewerMeasurements;
-  results_per_sewer_installation_per_municipality?: ResultsPerSewerInstallationPerMunicipality;
+  hospital_admissions: MunicipalHospitalAdmissions;
+  positive_tested_people: MunicipalPositiveTestedPeople;
+  sewer?: MunicipalSewer;
+  sewer_per_installation?: MunicipalSewerPerInstallation;
 }
-export interface HospitalAdmissions {
+export interface MunicipalHospitalAdmissions {
   values: HospitalAdmissionsLastValue[];
   last_value: HospitalAdmissionsLastValue;
 }
@@ -27,7 +26,7 @@ export interface HospitalAdmissionsLastValue {
   moving_average_hospital: number;
   date_of_insertion_unix: number;
 }
-export interface PositiveTestedPeople {
+export interface MunicipalPositiveTestedPeople {
   values: PositiveTestedPeopleLastValue[];
   last_value: PositiveTestedPeopleLastValue;
 }
@@ -39,11 +38,11 @@ export interface PositiveTestedPeopleLastValue {
   infected_daily_increase: number;
   date_of_insertion_unix: number;
 }
-export interface SewerMeasurements {
-  values: SewerMeasurementsLastValue[];
-  last_value: SewerMeasurementsLastValue;
+export interface MunicipalSewer {
+  values: MunicipalSewerValue[];
+  last_value: MunicipalSewerValue;
 }
-export interface SewerMeasurementsLastValue {
+export interface MunicipalSewerValue {
   week_unix: number;
   week_start_unix: number;
   week_end_unix: number;
@@ -52,15 +51,15 @@ export interface SewerMeasurementsLastValue {
   total_installation_count: number;
   date_of_insertion_unix: number;
 }
-export interface ResultsPerSewerInstallationPerMunicipality {
-  values: ResultsPerSewerInstallationPerMunicipalityItem[];
+export interface MunicipalSewerPerInstallation {
+  values: MunicipalSewerPerInstallationInstallation[];
 }
-export interface ResultsPerSewerInstallationPerMunicipalityItem {
+export interface MunicipalSewerPerInstallationInstallation {
   rwzi_awzi_code: string;
-  values: ResultsPerSewerInstallationPerMunicipalityLastValue[];
-  last_value: ResultsPerSewerInstallationPerMunicipalityLastValue;
+  values: MunicipalSewerPerInstallationValue[];
+  last_value: MunicipalSewerPerInstallationValue;
 }
-export interface ResultsPerSewerInstallationPerMunicipalityLastValue {
+export interface MunicipalSewerPerInstallationValue {
   date_measurement_unix: number;
   week_start_unix: number;
   week_end_unix: number;
@@ -68,7 +67,7 @@ export interface ResultsPerSewerInstallationPerMunicipalityLastValue {
   rwzi_awzi_code: string;
   rwzi_awzi_name: string;
   gmcode: string;
-  rna_per_ml: number;
+  rna_normalized: number;
   date_of_insertion_unix: number;
 }
 
@@ -77,17 +76,17 @@ export interface Municipalities {
   proto_name: "MUNICIPALITIES";
   name: string;
   code: string;
-  hospital_admissions: HospitalAdmissions[];
-  positive_tested_people: PositiveTestedPeople[];
+  hospital_admissions: MunicipalitiesHospitalAdmissions[];
+  positive_tested_people: MunicipalitiesPositiveTestedPeople[];
   deceased: Deceased[];
 }
-export interface HospitalAdmissions {
+export interface MunicipalitiesHospitalAdmissions {
   date_of_report_unix: number;
   gmcode: string;
   hospital_admissions: number;
   date_of_insertion_unix: number;
 }
-export interface PositiveTestedPeople {
+export interface MunicipalitiesPositiveTestedPeople {
   date_of_report_unix: number;
   gmcode: string;
   positive_tested_people: number;
@@ -117,13 +116,15 @@ export interface National {
   intake_share_age_groups: IntakeShareAgeGroups;
   reproduction_index: ReproductionIndex;
   reproduction_index_last_known_average: ReproductionIndexLastKnownAverage;
-  infectious_people_last_known_average?: InfectiousPeopleLastKnownAverage;
-  rioolwater_metingen: RioolwaterMetingen;
-  rioolwater_metingen_per_rwzi: RioolwaterMetingenPerRwzi;
+  infectious_people_last_known_average: InfectiousPeopleLastKnownAverage;
+  sewer: NationalSewer;
+  sewer_per_installation: NationalSewerPerInstallation;
   hospital_beds_occupied: HospitalBedsOccupied;
   intensive_care_beds_occupied: IntensiveCareBedsOccupied;
   ggd: NationalGgd;
   nursing_home: NationalNursingHome;
+  restrictions?: NationalRestrictions;
+  behavior: NationalBehavior;
 }
 export interface NationalHuisartsVerdenkingen {
   values: NationalHuisartsVerdenkingenValue[];
@@ -262,11 +263,11 @@ export interface InfectiousPeopleLastKnownAverageValue {
   date_of_report_unix: number;
   date_of_insertion_unix: number;
 }
-export interface RioolwaterMetingen {
-  values: RioolwaterMetingenLastValue[];
-  last_value: RioolwaterMetingenLastValue;
+export interface NationalSewer {
+  values: NationalSewerValue[];
+  last_value: NationalSewerValue;
 }
-export interface RioolwaterMetingenLastValue {
+export interface NationalSewerValue {
   week_unix: number;
   average: number;
   total_installation_count: number;
@@ -274,11 +275,11 @@ export interface RioolwaterMetingenLastValue {
   week_start_unix: number;
   week_end_unix: number;
 }
-export interface RioolwaterMetingenPerRwzi {
-  values: RioolwaterMetingenPerRwziLastValue[];
-  last_value: RioolwaterMetingenPerRwziLastValue;
+export interface NationalSewerPerInstallation {
+  values: NationalSewerPerInstallationValue[];
+  last_value: NationalSewerPerInstallationValue;
 }
-export interface RioolwaterMetingenPerRwziLastValue {
+export interface NationalSewerPerInstallationValue {
   week_start_unix: number;
   week_end_unix: number;
   date_measurement_unix: number;
@@ -287,7 +288,7 @@ export interface RioolwaterMetingenPerRwziLastValue {
   gm_code: string;
   vrcode: string;
   vrnaam: string;
-  rna_per_ml: number;
+  rna_normalized: number;
   date_of_insertion_unix: number;
 }
 export interface HospitalBedsOccupied {
@@ -315,10 +316,12 @@ export interface NationalGgd {
   last_value: NationalGgdValue;
 }
 export interface NationalGgdValue {
-  infected_daily: number;
-  infected_percentage_daily: number;
-  tested_total_daily: number;
-  date_of_report_unix: number;
+  infected: number;
+  infected_percentage: number;
+  tested_total: number;
+  week_unix: number;
+  week_start_unix: number;
+  week_end_unix: number;
   date_of_insertion_unix: number;
 }
 export interface NationalNursingHome {
@@ -332,6 +335,81 @@ export interface NationalNursingHomeValue {
   infected_locations_total: number;
   infected_locations_percentage: number;
   date_of_report_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NationalRestrictions {
+  values: NationalRestrictionValue[];
+}
+export interface NationalRestrictionValue {
+  restriction_id: string;
+  target_region: string;
+  escalation_level: 0 | 1 | 2 | 3 | 4 | 41 | 401;
+  category_id:
+    | "er_op_uit"
+    | "bezoek"
+    | "samenkomst"
+    | "huwelijk"
+    | "verpleeghuis"
+    | "horeca"
+    | "sport"
+    | "reizen_binnenland"
+    | "ov"
+    | "uitvaart"
+    | "onderwijs"
+    | "werk"
+    | "winkels"
+    | "alcohol";
+  restriction_order: number;
+  valid_from_unix: number;
+}
+export interface NationalBehavior {
+  values: NationalBehaviorValue[];
+  last_value: NationalBehaviorValue;
+}
+export interface NationalBehaviorValue {
+  number_of_participants: number;
+  wash_hands_compliance: number | null;
+  wash_hands_compliance_trend: ("up" | "down" | "equal") | null;
+  keep_distance_compliance: number | null;
+  keep_distance_compliance_trend: ("up" | "down" | "equal") | null;
+  work_from_home_compliance: number | null;
+  work_from_home_compliance_trend: ("up" | "down" | "equal") | null;
+  avoid_crowds_compliance: number | null;
+  avoid_crowds_compliance_trend: ("up" | "down" | "equal") | null;
+  symptoms_stay_home_compliance: number | null;
+  symptoms_stay_home_compliance_trend: ("up" | "down" | "equal") | null;
+  symptoms_get_tested_compliance: number | null;
+  symptoms_get_tested_compliance_trend: ("up" | "down" | "equal") | null;
+  wear_mask_public_indoors_compliance: number | null;
+  wear_mask_public_indoors_compliance_trend: ("up" | "down" | "equal") | null;
+  wear_mask_public_transport_compliance: number | null;
+  wear_mask_public_transport_compliance_trend: ("up" | "down" | "equal") | null;
+  sneeze_cough_elbow_compliance: number | null;
+  sneeze_cough_elbow_compliance_trend: ("up" | "down" | "equal") | null;
+  max_visitors_compliance: number | null;
+  max_visitors_compliance_trend: ("up" | "down" | "equal") | null;
+  wash_hands_support: number | null;
+  wash_hands_support_trend: ("up" | "down" | "equal") | null;
+  keep_distance_support: number | null;
+  keep_distance_support_trend: ("up" | "down" | "equal") | null;
+  work_from_home_support: number | null;
+  work_from_home_support_trend: ("up" | "down" | "equal") | null;
+  avoid_crowds_support: number | null;
+  avoid_crowds_support_trend: ("up" | "down" | "equal") | null;
+  symptoms_stay_home_support: number | null;
+  symptoms_stay_home_support_trend: ("up" | "down" | "equal") | null;
+  symptoms_get_tested_support: number | null;
+  symptoms_get_tested_support_trend: ("up" | "down" | "equal") | null;
+  wear_mask_public_indoors_support: number | null;
+  wear_mask_public_indoors_support_trend: ("up" | "down" | "equal") | null;
+  wear_mask_public_transport_support?: number | null;
+  wear_mask_public_transport_support_trend?: ("up" | "down" | "equal") | null;
+  sneeze_cough_elbow_support: number | null;
+  sneeze_cough_elbow_support_trend: ("up" | "down" | "equal") | null;
+  max_visitors_support: number | null;
+  max_visitors_support_trend: ("up" | "down" | "equal") | null;
+  week_start_unix: number;
+  week_end_unix: number;
   date_of_insertion_unix: number;
 }
 
@@ -398,12 +476,12 @@ export interface MinMaxValuesItem {
   min_total_new_reported_locations: number;
   max_average: number;
   min_average: number;
-  max_latest_rna_per_ml: number;
-  min_latest_rna_per_ml: number;
+  max_latest_rna_normalized: number;
+  min_latest_rna_normalized: number;
   max_average_per_region: number;
   min_average_per_region: number;
-  max_rna_per_ml: number;
-  min_rna_per_ml: number;
+  max_rna_normalized: number;
+  min_rna_normalized: number;
 }
 
 export interface Regionaal {
@@ -411,21 +489,36 @@ export interface Regionaal {
   proto_name: string;
   name: string;
   code: string;
-  results_per_sewer_installation_per_region: ResultsPerSewerInstallationPerRegion;
-  average_sewer_installation_per_region: AverageSewerInstallationPerRegion;
+  sewer: RegionalSewer;
+  sewer_per_installation: RegionalSewerPerInstallation;
   results_per_region: ResultsPerRegion;
   ggd: RegionalGgd;
   nursing_home: RegionalNursingHome;
+  restrictions?: RegionalRestrictions;
+  behavior: RegionalBehavior;
 }
-export interface ResultsPerSewerInstallationPerRegion {
-  values: SewerValueElement[];
+export interface RegionalSewer {
+  values: RegionalSewerValue[];
+  last_value: RegionalSewerValue;
 }
-export interface SewerValueElement {
+export interface RegionalSewerValue {
+  week_unix: number;
+  week_start_unix: number;
+  week_end_unix: number;
+  vrcode: string;
+  average: number;
+  total_installation_count: number;
+  date_of_insertion_unix: number;
+}
+export interface RegionalSewerPerInstallation {
+  values: RegionalSewerPerInstallationInstallation[];
+}
+export interface RegionalSewerPerInstallationInstallation {
   rwzi_awzi_code: string;
-  values: SewerValue[];
-  last_value: SewerValue;
+  values: RegionalSewerPerInstallationValue[];
+  last_value: RegionalSewerPerInstallationValue;
 }
-export interface SewerValue {
+export interface RegionalSewerPerInstallationValue {
   date_measurement_unix: number;
   week: number;
   week_start_unix: number;
@@ -435,20 +528,7 @@ export interface SewerValue {
   vrcode: string;
   vrnaam: string;
   gmcode: string;
-  rna_per_ml: number;
-  date_of_insertion_unix: number;
-}
-export interface AverageSewerInstallationPerRegion {
-  values: AverageSewerInstallationPerRegionItem[];
-  last_value: AverageSewerInstallationPerRegionItem;
-}
-export interface AverageSewerInstallationPerRegionItem {
-  week_unix: number;
-  week_start_unix: number;
-  week_end_unix: number;
-  vrcode: string;
-  average: number;
-  total_installation_count: number;
+  rna_normalized: number;
   date_of_insertion_unix: number;
 }
 export interface ResultsPerRegion {
@@ -473,10 +553,12 @@ export interface RegionalGgd {
   last_value: RegionalGgdValue;
 }
 export interface RegionalGgdValue {
-  infected_daily: number;
-  infected_percentage_daily: number;
-  tested_total_daily: number;
-  date_of_report_unix: number;
+  infected: number;
+  infected_percentage: number;
+  tested_total: number;
+  week_unix: number;
+  week_start_unix: number;
+  week_end_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;
 }
@@ -494,6 +576,82 @@ export interface RegionalNursingHomeValue {
   date_of_insertion_unix: number;
   vrcode: string;
 }
+export interface RegionalRestrictions {
+  values: RegionalRestrictionValue[];
+}
+export interface RegionalRestrictionValue {
+  restriction_id: string;
+  target_region: "nl" | "vr";
+  escalation_level: 0 | 1 | 2 | 3 | 4 | 41 | 401;
+  category_id:
+    | "er_op_uit"
+    | "bezoek"
+    | "samenkomst"
+    | "huwelijk"
+    | "verpleeghuis"
+    | "horeca"
+    | "sport"
+    | "reizen_binnenland"
+    | "ov"
+    | "uitvaart"
+    | "onderwijs"
+    | "werk"
+    | "winkels"
+    | "alcohol";
+  restriction_order: number;
+  valid_from_unix: number;
+}
+export interface RegionalBehavior {
+  values: RegionalBehaviorValue[];
+  last_value: RegionalBehaviorValue;
+}
+export interface RegionalBehaviorValue {
+  number_of_participants: number;
+  wash_hands_compliance: number | null;
+  wash_hands_compliance_trend: ("up" | "down" | "equal") | null;
+  keep_distance_compliance: number | null;
+  keep_distance_compliance_trend: ("up" | "down" | "equal") | null;
+  work_from_home_compliance: number | null;
+  work_from_home_compliance_trend: ("up" | "down" | "equal") | null;
+  avoid_crowds_compliance: number | null;
+  avoid_crowds_compliance_trend: ("up" | "down" | "equal") | null;
+  symptoms_stay_home_compliance: number | null;
+  symptoms_stay_home_compliance_trend: ("up" | "down" | "equal") | null;
+  symptoms_get_tested_compliance: number | null;
+  symptoms_get_tested_compliance_trend: ("up" | "down" | "equal") | null;
+  wear_mask_public_indoors_compliance: number | null;
+  wear_mask_public_indoors_compliance_trend: ("up" | "down" | "equal") | null;
+  wear_mask_public_transport_compliance: number | null;
+  wear_mask_public_transport_compliance_trend: ("up" | "down" | "equal") | null;
+  sneeze_cough_elbow_compliance: number | null;
+  sneeze_cough_elbow_compliance_trend: ("up" | "down" | "equal") | null;
+  max_visitors_compliance: number | null;
+  max_visitors_compliance_trend: ("up" | "down" | "equal") | null;
+  wash_hands_support: number | null;
+  wash_hands_support_trend: ("up" | "down" | "equal") | null;
+  keep_distance_support: number | null;
+  keep_distance_support_trend: ("up" | "down" | "equal") | null;
+  work_from_home_support: number | null;
+  work_from_home_support_trend: ("up" | "down" | "equal") | null;
+  avoid_crowds_support: number | null;
+  avoid_crowds_support_trend: ("up" | "down" | "equal") | null;
+  symptoms_stay_home_support: number | null;
+  symptoms_stay_home_support_trend: ("up" | "down" | "equal") | null;
+  symptoms_get_tested_support: number | null;
+  symptoms_get_tested_support_trend: ("up" | "down" | "equal") | null;
+  wear_mask_public_indoors_support: number | null;
+  wear_mask_public_indoors_support_trend: ("up" | "down" | "equal") | null;
+  wear_mask_public_transport_support?: number | null;
+  wear_mask_public_transport_support_trend?: ("up" | "down" | "equal") | null;
+  sneeze_cough_elbow_support: number | null;
+  sneeze_cough_elbow_support_trend: ("up" | "down" | "equal") | null;
+  max_visitors_support: number | null;
+  max_visitors_support_trend: ("up" | "down" | "equal") | null;
+  week_start_unix: number;
+  week_end_unix: number;
+  date_of_insertion_unix: number;
+  vrcode: string;
+}
 
 export interface Regions {
   last_generated: string;
@@ -505,6 +663,8 @@ export interface Regions {
   deceased: RegionDeceased[];
   escalation_levels: EscalationLevels[];
   nursing_home: RegionsNursingHome[];
+  sewer: RegionsSewer[];
+  behavior: RegionsBehavior[];
 }
 export interface RegionHospitalAdmissions {
   date_of_report_unix: number;
@@ -541,4 +701,60 @@ export interface RegionsNursingHome {
   date_of_report_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;
+}
+export interface RegionsSewer {
+  week_unix: number;
+  week_start_unix: number;
+  week_end_unix: number;
+  vrcode: string;
+  average: number;
+  total_installation_count: number;
+  date_of_insertion_unix: number;
+}
+export interface RegionsBehavior {
+  vrcode: string;
+  number_of_participants: number;
+  wash_hands_compliance: number | null;
+  wash_hands_compliance_trend: ("up" | "down" | "equal") | null;
+  keep_distance_compliance: number | null;
+  keep_distance_compliance_trend: ("up" | "down" | "equal") | null;
+  work_from_home_compliance: number | null;
+  work_from_home_compliance_trend: ("up" | "down" | "equal") | null;
+  avoid_crowds_compliance: number | null;
+  avoid_crowds_compliance_trend: ("up" | "down" | "equal") | null;
+  symptoms_stay_home_compliance: number | null;
+  symptoms_stay_home_compliance_trend: ("up" | "down" | "equal") | null;
+  symptoms_get_tested_compliance: number | null;
+  symptoms_get_tested_compliance_trend: ("up" | "down" | "equal") | null;
+  wear_mask_public_indoors_compliance: number | null;
+  wear_mask_public_indoors_compliance_trend: ("up" | "down" | "equal") | null;
+  wear_mask_public_transport_compliance: number | null;
+  wear_mask_public_transport_compliance_trend: ("up" | "down" | "equal") | null;
+  sneeze_cough_elbow_compliance: number | null;
+  sneeze_cough_elbow_compliance_trend: ("up" | "down" | "equal") | null;
+  max_visitors_compliance: number | null;
+  max_visitors_compliance_trend: ("up" | "down" | "equal") | null;
+  wash_hands_support: number | null;
+  wash_hands_support_trend: ("up" | "down" | "equal") | null;
+  keep_distance_support: number | null;
+  keep_distance_support_trend: ("up" | "down" | "equal") | null;
+  work_from_home_support: number | null;
+  work_from_home_support_trend: ("up" | "down" | "equal") | null;
+  avoid_crowds_support: number | null;
+  avoid_crowds_support_trend: ("up" | "down" | "equal") | null;
+  symptoms_stay_home_support: number | null;
+  symptoms_stay_home_support_trend: ("up" | "down" | "equal") | null;
+  symptoms_get_tested_support: number | null;
+  symptoms_get_tested_support_trend: ("up" | "down" | "equal") | null;
+  wear_mask_public_indoors_support: number | null;
+  wear_mask_public_indoors_support_trend: ("up" | "down" | "equal") | null;
+  wear_mask_public_transport_support?: number | null;
+  wear_mask_public_transport_support_trend?: ("up" | "down" | "equal") | null;
+  sneeze_cough_elbow_support: number | null;
+  sneeze_cough_elbow_support_trend: ("up" | "down" | "equal") | null;
+  max_visitors_support: number | null;
+  max_visitors_support_trend: ("up" | "down" | "equal") | null;
+  week_start_unix: number;
+  week_end_unix: number;
+  date_of_insertion_unix: number;
 }

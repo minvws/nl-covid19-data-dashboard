@@ -63,28 +63,43 @@ const breakpoints: Partial<Breakpoints> = [
   '100em',
 ];
 
-breakpoints.xs = breakpoints[0];
-breakpoints.sm = breakpoints[1];
-breakpoints.md = breakpoints[2];
-breakpoints.lg = breakpoints[3];
-breakpoints.xl = breakpoints[4];
+breakpoints.xs = breakpoints[0]; // ~420px
+breakpoints.sm = breakpoints[1]; // ~768px
+breakpoints.md = breakpoints[2]; // ~960px
+breakpoints.lg = breakpoints[3]; // ~1200px
+breakpoints.xl = breakpoints[4]; // ~1600px
 
 const mediaQueries = {
-  xs: `@media screen and (min-width: ${breakpoints[0]})`,
-  sm: `@media screen and (min-width: ${breakpoints[1]})`,
-  md: `@media screen and (min-width: ${breakpoints[2]})`,
-  lg: `@media screen and (min-width: ${breakpoints[3]})`,
-  xl: `@media screen and (min-width: ${breakpoints[4]})`,
+  xs: `screen and (min-width: ${breakpoints[0]})`,
+  sm: `screen and (min-width: ${breakpoints[1]})`,
+  md: `screen and (min-width: ${breakpoints[2]})`,
+  lg: `screen and (min-width: ${breakpoints[3]})`,
+  xl: `screen and (min-width: ${breakpoints[4]})`,
 };
 
 type TMediaQueries = typeof mediaQueries;
 
-const colors = {
+export const colors = {
   blue: '#01689b',
   icon: '#01689b',
   button: '#01689b',
   shadow: '#e5e5e5',
+  lightGray: '#dfdfdf',
+  annotation: '#595959',
+  notification: '#cd005a',
+
+  data: {
+    primary: '#007BC7',
+    secondary: '#154273',
+    fill: 'rgba(0, 123, 199, .05)',
+    scale: {
+      blue: ['#8FCAE7', '#5BADDB', '#248FCF', '#0070BB', '#00529D', '#003580'],
+      magenta: ['#F6B4D1', '#D3719C', '#9E3A66', '#64032D', '#000000'],
+    },
+  },
 };
+
+export type ThemeColors = typeof colors;
 
 const radii = [0, 5, 10];
 
@@ -93,7 +108,9 @@ const shadows = {
 };
 
 type TDashboardTheme = ScaleThemeProperties &
-  ThemeBreakPoints & { mediaQueries: TMediaQueries };
+  ThemeBreakPoints & { mediaQueries: TMediaQueries } & {
+    colors: ThemeColors;
+  };
 
 const theme: TDashboardTheme = {
   fonts,
@@ -108,3 +125,11 @@ const theme: TDashboardTheme = {
 };
 
 export default theme;
+
+/**
+ * Tell styled-components the shape of our theme
+ */
+declare module 'styled-components' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  export interface DefaultTheme extends TDashboardTheme {}
+}

@@ -1,4 +1,5 @@
-import { TitleWithIcon } from '~/components/titleWithIcon';
+import { HeadingWithIcon } from '~/components-styled/heading-with-icon';
+import { Heading } from '~/components-styled/typography';
 import styles from './layout.module.scss';
 import { MetadataHack } from './metadata_sourcesHack';
 
@@ -12,24 +13,27 @@ import { MetadataHack } from './metadata_sourcesHack';
  * reasons.
  */
 export function ContentHeader_sourcesHack(props: IContentHeaderProps) {
-  const { category, Icon, title, subtitle, metadata, id } = props;
+  const { category, icon, title, subtitle, metadata, id, reference } = props;
 
   const layoutClasses = [styles.contentHeader];
 
   if (!category) {
     layoutClasses.push(styles.withoutCategory);
   }
-  if (!Icon) {
+  if (!icon) {
     layoutClasses.push(styles.withoutIcon);
   }
 
   return (
     <header id={id} className={layoutClasses.join(' ')}>
       {category && <p className={styles.category}>{category}</p>}
-      <TitleWithIcon Icon={Icon} title={title} as="h2" />
+      {icon && <HeadingWithIcon icon={icon} title={title} headingLevel={2} />}
+      {!icon && <Heading level={2}>{title}</Heading>}
 
       <div className={styles.text}>
-        <p>{subtitle}</p>
+        <p>
+          {subtitle} <a href={reference.href}>{reference.text}</a>
+        </p>
 
         <div>
           <MetadataHack {...metadata} />
@@ -44,7 +48,7 @@ interface IContentHeaderProps {
   subtitle: string;
   metadata: {
     datumsText: string;
-    dateUnix?: number;
+    dateUnix: number;
     dateInsertedUnix?: number;
     dataSourceA: {
       href: string;
@@ -55,7 +59,11 @@ interface IContentHeaderProps {
       text: string;
     };
   };
+  reference: {
+    href: string;
+    text: string;
+  };
   category?: string;
-  Icon?: React.ComponentType;
+  icon?: JSX.Element;
   id?: string;
 }

@@ -1,0 +1,63 @@
+name: Lokalise PR validation, auto approve and merge
+on:
+  pull_request:
+    branches:
+      - master
+      - develop
+    paths:
+      - 'src/locale/*.json'
+jobs:
+  autocheckandapprove:
+    # More handy functions: https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#startswith
+    if: github.actor == 'VWSCoronaDashboard' && startsWith(github.head_ref, 'lokalise-') == true
+    name: Validate, label and approve
+    runs-on: ubuntu-latest
+    steps:
+      - name: Remove label
+        uses: buildsville/add-remove-label@v1
+        with:
+          token: ${{ github.token }}
+          label: lokalise
+          type: remove
+
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Update Node version
+        uses: actions/setup-node@v2-beta
+        with:
+          node-version: '14'
+      - name: Yarn install
+        run: yarn install
+      - name: Validate en.json
+        run: yarn validate-single locale en.json
+      - name: Validate nl.json
+        run: yarn validate-single locale nl.json
+
+      - name: Add label
+        uses: buildsville/add-remove-label@v1
+        with:
+          token: ${{ github.token }}
+          label: lokalise
+          type: add
+
+      - name: Auto approve
+        uses: hmarr/auto-approve-action@v2.0.0
+        with:
+          github-token: ${{ github.token }}
+
+  automerge:
+    name: Auto merge after successful checks
+    if: github.actor == 'VWSCoronaDashboard' && startsWith(github.head_ref, 'lokalise-') == true
+    # By default, jobs run in parallel. To run the jobs sequentially, the keyword "needs" is needed.
+    # Auto merge action can be done only when the PR is approved, hence this automerge needs autocheckandapprove as a prerequisite
+    needs: autocheckandapprove
+    runs-on: ubuntu-latest
+    steps:
+      - name: Auto merge
+        uses: pascalgn/automerge-action@v0.12.0
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          MERGE_LABELS: lokalise
+          MERGE_METHOD: squash
+          MERGE_DELETE_BRANCH: true

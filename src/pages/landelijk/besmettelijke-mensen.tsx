@@ -1,13 +1,16 @@
 import Ziektegolf from '~/assets/ziektegolf.svg';
+import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
+import { KpiTile } from '~/components-styled/kpi-tile';
+import { KpiValue } from '~/components-styled/kpi-value';
+import { Legenda } from '~/components-styled/legenda';
+import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { AreaChart } from '~/components/charts/index';
-import { FCWithLayout } from '~/components/layout';
 import { ContentHeader } from '~/components/contentHeader';
+import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
-import { Legenda } from '~/components/legenda';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
-import { formatNumber } from '~/utils/formatNumber';
 
 const text = siteText.besmettelijke_personen;
 
@@ -17,8 +20,6 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
   const count = data.infectious_people_count;
   const infectiousPeopleLastKnownAverage =
     data.infectious_people_last_known_average;
-  const infectiousPeopleLastKnownNormalizedAverage =
-    data.infectious_people_count_normalized;
 
   return (
     <>
@@ -27,77 +28,76 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
         description={text.metadata.description}
       />
       <ContentHeader
-        category={siteText.nationaal_layout.headings.medisch}
+        category={siteText.nationaal_layout.headings.besmettingen}
         title={text.title}
-        Icon={Ziektegolf}
+        icon={<Ziektegolf />}
         subtitle={text.toelichting_pagina}
         metadata={{
           datumsText: text.datums,
-          dateUnix: count?.last_value?.date_of_report_unix,
-          dateInsertedUnix: count?.last_value?.date_of_insertion_unix,
+          dateUnix:
+            infectiousPeopleLastKnownAverage.last_value.date_of_report_unix,
+          dateInsertedUnix:
+            infectiousPeopleLastKnownAverage.last_value.date_of_insertion_unix,
           dataSource: text.bron,
         }}
+        reference={text.reference}
       />
 
-      <div className="layout-two-column">
-        <article
-          className="metric-article column-item"
-          data-cy="infected_daily_increase"
+      <TwoKpiSection>
+        <KpiTile
+          title={text.cijfer_titel}
+          description={text.cijfer_toelichting}
+          metadata={{
+            date:
+              infectiousPeopleLastKnownAverage.last_value.date_of_report_unix,
+            source: text.bron,
+          }}
         >
-          <h3>
-            {text.cijfer_titel}
-
-            {count && (
-              <span className="text-blue kpi">
-                {formatNumber(
-                  infectiousPeopleLastKnownAverage?.last_value.infectious_avg
-                )}
-              </span>
-            )}
-          </h3>
-          <div className="column-item">
-            <p>{text.cijfer_toelichting}</p>
-          </div>
-        </article>
-
-        <article className="metric-article column-item">
-          <h3>
-            {text.barscale_titel}
-
-            {count && (
-              <span className="text-blue kpi">
-                {formatNumber(
-                  infectiousPeopleLastKnownNormalizedAverage?.last_value
-                    .infectious_avg_normalized
-                )}
-              </span>
-            )}
-          </h3>
-          <div className="column-item">
-            <p>{text.barscale_toelichting}</p>
-          </div>
-        </article>
-      </div>
+          <KpiValue
+            absolute={
+              infectiousPeopleLastKnownAverage.last_value.infectious_avg
+            }
+          />
+        </KpiTile>
+      </TwoKpiSection>
 
       {count?.values && (
-        <article className="metric-article">
-          <AreaChart
-            title={text.linechart_titel}
-            data={count.values.map((value) => ({
-              avg: value.infectious_avg,
-              min: value.infectious_low,
-              max: value.infectious_high,
-              date: value.date_of_report_unix,
-            }))}
-            rangeLegendLabel={text.rangeLegendLabel}
-            lineLegendLabel={text.lineLegendLabel}
-            timeframeOptions={['all', '5weeks']}
-          />
-          <Legenda>
-            <li className="blue">{text.legenda_line}</li>
-            <li className="gray square">{text.legenda_marge}</li>
-          </Legenda>
-        </article>
+        <ChartTileWithTimeframe
+          metadata={{ source: text.bron }}
+          title={text.linechart_titel}
+          timeframeOptions={['all', '5weeks']}
+          timeframeInitialValue="5weeks"
+        >
+          {(timeframe) => (
+            <>
+              <AreaChart
+                timeframe={timeframe}
+                data={count.values.map((value) => ({
+                  avg: value.infectious_avg,
+                  min: value.infectious_low,
+                  max: value.infectious_high,
+                  date: value.date_of_report_unix,
+                }))}
+                rangeLegendLabel={text.rangeLegendLabel}
+                lineLegendLabel={text.lineLegendLabel}
+              />
+              <Legenda
+                items={[
+                  {
+                    label: text.legenda_line,
+                    color: 'data.primary',
+                    shape: 'line',
+                  },
+                  {
+                    label: text.legenda_marge,
+                    color: 'data.fill',
+                    shape: 'square',
+                  },
+                ]}
+              />
+            </>
+          )}
+        </ChartTileWithTimeframe>
       )}
     </>
   );

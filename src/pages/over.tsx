@@ -1,15 +1,10 @@
 import fs from 'fs';
 import Head from 'next/head';
 import path from 'path';
-
-import BlockContent from '@sanity/block-content-to-react';
-import client, { localize } from '~/lib/sanity';
-
-import { targetLanguage } from '../locale/index';
-
 import { FCWithLayout, getLayoutWithMetadata } from '~/components/layout';
 import { MaxWidth } from '~/components/maxWidth';
-import siteText from '~/locale/index';
+import siteText, { TALLLanguages } from '~/locale/index';
+import { MDToHTMLString } from '~/utils/MDToHTMLString';
 import styles from './over.module.scss';
 
 interface StaticProps {
@@ -17,31 +12,24 @@ interface StaticProps {
 }
 
 interface OverProps {
+  text: TALLLanguages;
   lastGenerated: string;
-  overDitDashboard: any;
 }
 
 export async function getStaticProps(): Promise<StaticProps> {
+  const text = (await import('../locale/index')).default;
+
+  text.over_beschrijving.text = MDToHTMLString(text.over_beschrijving.text);
+
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const lastGenerated = JSON.parse(fileContents).last_generated;
 
-  const sanityData = await client.fetch(
-    `
-    *[_id == 'overDitDashboard']
-    {
-      ...
-    }[0]
-  `
-  );
-
-  const overDitDashboard = localize(sanityData, [targetLanguage, 'nl']);
-
-  return { props: { lastGenerated, overDitDashboard } };
+  return { props: { text, lastGenerated } };
 }
 
 const Over: FCWithLayout<OverProps> = (props) => {
-  const { overDitDashboard } = props;
+  const { text } = props;
 
   return (
     <>
@@ -62,10 +50,10 @@ const Over: FCWithLayout<OverProps> = (props) => {
       <div className={styles.container}>
         <MaxWidth>
           <div className={styles.maxwidth}>
-            <h2>{overDitDashboard.title}</h2>
-            {overDitDashboard.content.map((item: any) => (
-              <BlockContent key={item['_key']} blocks={item} />
-            ))}
+            <h2>{text.over_titel.text}</h2>
+            <div
+              dangerouslySetInnerHTML={{ __html: text.over_beschrijving.text }}
+            />
           </div>
         </MaxWidth>
       </div>

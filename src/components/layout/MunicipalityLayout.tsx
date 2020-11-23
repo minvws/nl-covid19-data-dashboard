@@ -1,34 +1,37 @@
-import Link from 'next/link';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
-
-import siteText from '~/locale/index';
-import { WithChildren } from '~/types/index';
+import Arrow from '~/assets/arrow.svg';
+import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
+import GetestIcon from '~/assets/test.svg';
+import Ziekenhuis from '~/assets/ziekenhuis.svg';
+import { HeadingWithIcon } from '~/components-styled/heading-with-icon';
+import { ComboBox } from '~/components/comboBox';
+import { IntakeHospitalMetric } from '~/components/gemeente/intake-hospital-metric';
+import { PositivelyTestedPeopleMetric } from '~/components/gemeente/positively-tested-people-metric';
+import { SewerWaterMetric } from '~/components/gemeente/sewer-water-metric';
+import { getLayout as getSiteLayout } from '~/components/layout';
 import municipalities from '~/data/gemeente_veiligheidsregio.json';
+import siteText from '~/locale/index';
 import { IMunicipalityData } from '~/static-props/municipality-data';
-
 import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMunicipalityCode';
 import { getSewerWaterBarScaleData } from '~/utils/sewer-water/municipality-sewer-water.util';
 import { useMediaQuery } from '~/utils/useMediaQuery';
-
-import { PositivelyTestedPeopleMetric } from '~/components/gemeente/positively-tested-people-metric';
-import { IntakeHospitalMetric } from '~/components/gemeente/intake-hospital-metric';
-import { SewerWaterMetric } from '~/components/gemeente/sewer-water-metric';
-
-import { TitleWithIcon } from '~/components/titleWithIcon';
-import { getLayout as getSiteLayout } from '~/components/layout';
-import { ComboBox } from '~/components/comboBox';
-
-import GetestIcon from '~/assets/test.svg';
-import Ziekenhuis from '~/assets/ziekenhuis.svg';
-import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
-import Arrow from '~/assets/arrow.svg';
 import { useMenuState } from './useMenuState';
 
 interface IMunicipality {
   name: string;
   safetyRegion: string;
   gemcode: string;
+}
+
+/**
+ * When you navigate to /gemeente root from the top menu, there is no GM code
+ * and the data will be undefined. That's why we use Partial here, so that TS
+ * knows that data and other props from data are not guaranteed to be present.
+ */
+interface MunicipalityLayoutProps extends Partial<IMunicipalityData> {
+  children: React.ReactNode;
 }
 
 export function getMunicipalityLayout() {
@@ -62,7 +65,7 @@ export function getMunicipalityLayout() {
  * More info on persistent layouts:
  * https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
-function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
+function MunicipalityLayout(props: MunicipalityLayoutProps) {
   const { children, data, municipalityName } = props;
   const router = useRouter();
   const isLargeScreen = useMediaQuery('(min-width: 1000px)');
@@ -87,12 +90,9 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
 
   function handleMunicipalitySelect(region: IMunicipality) {
     if (isLargeScreen) {
-      router.push(
-        '/gemeente/[code]/positief-geteste-mensen',
-        `/gemeente/${region.gemcode}/positief-geteste-mensen`
-      );
+      router.push(`/gemeente/${region.gemcode}/positief-geteste-mensen`);
     } else {
-      router.push('/gemeente/[code]', `/gemeente/${region.gemcode}`);
+      router.push(`/gemeente/${region.gemcode}`);
     }
   }
 
@@ -100,7 +100,9 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
     | { name: string; code: string; id: number }
     | undefined = getSafetyRegionForMunicipalityCode(code as string);
 
-  const sewerWaterBarScaleData = getSewerWaterBarScaleData(data);
+  const sewerWaterBarScaleData = data
+    ? getSewerWaterBarScaleData(data)
+    : undefined;
 
   return (
     <>
@@ -118,11 +120,15 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
         />
       </Head>
       <div
-        className={`municipality-layout has-menu-${
-          isMainRoute ? 'and-content-opened' : isMenuOpen ? 'opened' : 'closed'
+        className={`municipality-layout ${
+          isMainRoute
+            ? 'has-menu-and-content-opened'
+            : isMenuOpen
+            ? 'has-menu-opened'
+            : 'has-menu-closed'
         }`}
       >
-        <Link href="/gemeente/[code]" as={`/gemeente/${code}`}>
+        <Link href={`/gemeente/${code}`}>
           <a className="back-button" onClick={openMenu}>
             <Arrow />
             {siteText.nav.terug_naar_alle_cijfers}
@@ -143,29 +149,25 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                   <p>
                     {siteText.common.veiligheidsregio_label}{' '}
                     <Link
-                      href="/veiligheidsregio/[code]/positief-geteste-mensen"
-                      as={`/veiligheidsregio/${safetyRegion.code}/positief-geteste-mensen`}
+                      href={`/veiligheidsregio/${safetyRegion.code}/positief-geteste-mensen`}
                     >
                       <a onClick={blur}>{safetyRegion.name}</a>
                     </Link>
                   </p>
                 )}
               </div>
-              <h2>{siteText.nationaal_layout.headings.medisch}</h2>
+              <h2>{siteText.gemeente_layout.headings.besmettingen}</h2>
               <ul>
                 <li>
-                  <Link
-                    href="/gemeente/[code]/positief-geteste-mensen"
-                    as={`/gemeente/${code}/positief-geteste-mensen`}
-                  >
+                  <Link href={`/gemeente/${code}/positief-geteste-mensen`}>
                     <a
                       onClick={blur}
                       className={getClassName(
                         `/gemeente/[code]/positief-geteste-mensen`
                       )}
                     >
-                      <TitleWithIcon
-                        Icon={GetestIcon}
+                      <HeadingWithIcon
+                        icon={<GetestIcon />}
                         title={
                           siteText.gemeente_positief_geteste_personen
                             .titel_sidebar
@@ -179,20 +181,20 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                     </a>
                   </Link>
                 </li>
+              </ul>
 
+              <h2>{siteText.gemeente_layout.headings.ziekenhuizen}</h2>
+              <ul>
                 <li>
-                  <Link
-                    href="/gemeente/[code]/ziekenhuis-opnames"
-                    as={`/gemeente/${code}/ziekenhuis-opnames`}
-                  >
+                  <Link href={`/gemeente/${code}/ziekenhuis-opnames`}>
                     <a
                       onClick={blur}
                       className={getClassName(
                         `/gemeente/[code]/ziekenhuis-opnames`
                       )}
                     >
-                      <TitleWithIcon
-                        Icon={Ziekenhuis}
+                      <HeadingWithIcon
+                        icon={<Ziekenhuis />}
                         title={
                           siteText.gemeente_ziekenhuisopnames_per_dag
                             .titel_sidebar
@@ -208,20 +210,17 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                 </li>
               </ul>
 
-              <h2>{siteText.nationaal_layout.headings.overig}</h2>
+              <h2>{siteText.gemeente_layout.headings.vroege_signalen}</h2>
               <ul>
                 <li>
                   {sewerWaterBarScaleData ? (
-                    <Link
-                      href="/gemeente/[code]/rioolwater"
-                      as={`/gemeente/${code}/rioolwater`}
-                    >
+                    <Link href={`/gemeente/${code}/rioolwater`}>
                       <a
                         onClick={blur}
                         className={getClassName(`/gemeente/[code]/rioolwater`)}
                       >
-                        <TitleWithIcon
-                          Icon={RioolwaterMonitoring}
+                        <HeadingWithIcon
+                          icon={<RioolwaterMonitoring />}
                           title={
                             siteText.gemeente_rioolwater_metingen.titel_sidebar
                           }
@@ -233,8 +232,8 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
                     </Link>
                   ) : (
                     <div className="metric-not-available">
-                      <TitleWithIcon
-                        Icon={RioolwaterMonitoring}
+                      <HeadingWithIcon
+                        icon={<RioolwaterMonitoring />}
                         title={
                           siteText.gemeente_rioolwater_metingen.titel_sidebar
                         }
@@ -252,7 +251,7 @@ function MunicipalityLayout(props: WithChildren<IMunicipalityData>) {
 
         <section className="municipality-content">{children}</section>
 
-        <Link href="/gemeente/[code]" as={`/gemeente/${code}`}>
+        <Link href={`/gemeente/${code}`}>
           <a className="back-button back-button-footer" onClick={openMenu}>
             <Arrow />
             {siteText.nav.terug_naar_alle_cijfers}

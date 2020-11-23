@@ -3,12 +3,10 @@ import { SewerWaterBarScaleData } from '~/utils/sewer-water/safety-region-sewer-
 import siteText from '~/locale/index';
 
 export function SewerWaterBarScale(props: {
-  data: SewerWaterBarScaleData | null;
+  data: SewerWaterBarScaleData;
   showAxis: boolean;
 }) {
   const { data, showAxis } = props;
-
-  if (!data) return null;
 
   const text = siteText.veiligheidsregio_rioolwater_metingen;
 
