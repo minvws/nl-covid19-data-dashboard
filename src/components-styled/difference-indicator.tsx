@@ -122,7 +122,6 @@ const Container = styled.div(
     whiteSpace: 'nowrap',
     display: 'inline-block',
     fontSize: 1,
-    position: 'relative',
     svg: {
       mr: 1,
       width: '1em',

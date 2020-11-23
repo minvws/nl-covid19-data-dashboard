@@ -46,7 +46,6 @@ export function getNationalLayout(
       {...siteText.nationaal_metadata}
       lastGenerated={pageProps.lastGenerated}
     >
-      {/* {console.log('XXXXX', pageProps.data.difference)} */}
       <NationalLayout {...pageProps}>{page}</NationalLayout>
     </Layout>
   );
@@ -152,9 +151,7 @@ function NationalLayout(props: NationalLayoutProps) {
                       title={siteText.positief_geteste_personen.titel_sidebar}
                     />
                     <span className="metric-wrapper">
-                      <PositiveTestedPeopleMetric
-                        data={data.infected_people_total.last_value}
-                      />
+                      <PositiveTestedPeopleMetric data={data} />
                       <PositiveTestedPeopleBarScale
                         data={data.infected_people_delta_normalized}
                         showAxis={false}
@@ -175,7 +172,7 @@ function NationalLayout(props: NationalLayoutProps) {
                       icon={<Ziektegolf />}
                       title={siteText.besmettelijke_personen.titel_sidebar}
                     />
-                    <span>
+                    <span className="metric-wrapper">
                       <InfectiousPeopleMetric
                         data={
                           data.infectious_people_last_known_average?.last_value
@@ -282,7 +279,7 @@ function NationalLayout(props: NationalLayoutProps) {
                         siteText.verpleeghuis_besmette_locaties.titel_sidebar
                       }
                     />
-                    <span>
+                    <span className="metric-wrapper">
                       <NursingHomeInfectedPeopleMetric
                         data={data.nursing_home.last_value}
                       />
@@ -307,7 +304,7 @@ function NationalLayout(props: NationalLayoutProps) {
                       icon={<Arts />}
                       title={siteText.verdenkingen_huisartsen.titel_sidebar}
                     />
-                    <span>
+                    <span className="metric-wrapper">
                       <SuspectedPatientsMetric
                         data={data.verdenkingen_huisartsen.last_value}
                       />
@@ -326,7 +323,7 @@ function NationalLayout(props: NationalLayoutProps) {
                       icon={<RioolwaterMonitoring />}
                       title={siteText.rioolwater_metingen.titel_sidebar}
                     />
-                    <span>
+                    <span className="metric-wrapper">
                       <SewerWaterMetric data={data.sewer} />
                     </span>
                   </a>
@@ -345,7 +342,7 @@ function NationalLayout(props: NationalLayoutProps) {
                       icon={<Gedrag />}
                       title={siteText.nl_gedrag.sidebar.titel}
                     />
-                    <span>
+                    <span className="metric-wrapper">
                       <BehaviorMetric data={data.behavior} />
                     </span>
                   </a>

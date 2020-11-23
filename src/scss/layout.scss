@@ -353,8 +353,13 @@
       }
     }
   }
+}
 
-  .metric-wrapper > div:not(:first-child) {
+.metric-wrapper {
+  display: block;
+  margin: 0 2.5rem;
+
+  & > div:not(:first-child) {
     height: 3.5rem;
     margin-top: -1.25em;
   }
@@ -403,11 +408,6 @@ a.metric-link {
     position: absolute;
     right: 1em;
     top: 1.35em;
-  }
-
-  span {
-    display: block;
-    margin: 0 2.5rem;
   }
 
   &.last-developments-link {
