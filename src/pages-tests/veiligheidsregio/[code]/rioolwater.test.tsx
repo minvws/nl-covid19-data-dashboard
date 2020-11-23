@@ -1,46 +1,39 @@
 import React from 'react';
 import SewerWater from '~/pages/veiligheidsregio/[code]/rioolwater';
-import { getTextByDataCy } from '~/test-utils/get-text-by-data-cy';
 import { loadFixture } from '~/test-utils/load-fixture';
 import { render } from '~/test-utils/render';
+import { testKpiValue } from '~/test-utils/test-kip-value';
 import { Regionaal } from '~/types/data';
 import { formatNumber } from '~/utils/formatNumber';
 
 describe('Regional page: SewerWater', () => {
   const data = loadFixture<Regionaal>('VR13.json');
+  let container: HTMLElement;
 
-  it('should use average for sewerwater averages', () => {
-    const { container } = render(
+  beforeEach(() => {
+    const renderResult = render(
       <SewerWater
         data={data}
         lastGenerated="test"
         safetyRegionName={'Test Region'}
       />
     );
+    container = renderResult.container;
+  });
 
-    const normalizedText = getTextByDataCy(container, 'riool_normalized');
-
-    const value = formatNumber(data.sewer.last_value.average);
-
-    expect(normalizedText).toEqual(value);
+  it('should use average for sewerwater averages', () => {
+    testKpiValue(
+      container,
+      'riool_normalized',
+      formatNumber(data.sewer.last_value.average)
+    );
   });
 
   it('should use total_installation_count for total installation count', () => {
-    const { container } = render(
-      <SewerWater
-        data={data}
-        lastGenerated="test"
-        safetyRegionName={'Test Region'}
-      />
-    );
-
-    const normalizedText = getTextByDataCy(
+    testKpiValue(
       container,
-      'total_installation_count'
+      'total_installation_count',
+      formatNumber(data.sewer.last_value.total_installation_count)
     );
-
-    const value = formatNumber(data.sewer.last_value.total_installation_count);
-
-    expect(normalizedText).toEqual(value);
   });
 });

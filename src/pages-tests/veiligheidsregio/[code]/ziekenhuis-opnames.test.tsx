@@ -1,32 +1,33 @@
 import React from 'react';
 import IntakeHospital from '~/pages/veiligheidsregio/[code]/ziekenhuis-opnames';
-import { getTextByDataCy } from '~/test-utils/get-text-by-data-cy';
 import { loadFixture } from '~/test-utils/load-fixture';
 import { render } from '~/test-utils/render';
+import { testKpiValue } from '~/test-utils/test-kip-value';
 import { Regionaal } from '~/types/data';
 import { formatNumber } from '~/utils/formatNumber';
 
 describe('Regional page: NursingHomeCare', () => {
   const data = loadFixture<Regionaal>('VR13.json');
+  let container: HTMLElement;
 
-  it('should use newly_infected_people for newly infected count', () => {
-    const { container } = render(
+  beforeEach(() => {
+    const renderResult = render(
       <IntakeHospital
         data={data}
         lastGenerated="test"
         safetyRegionName={'Test Region'}
       />
     );
+    container = renderResult.container;
+  });
 
-    const normalizedText = getTextByDataCy(
+  it('should use newly_infected_people for newly infected count', () => {
+    testKpiValue(
       container,
-      'hospital_moving_avg_per_region'
+      'hospital_moving_avg_per_region',
+      formatNumber(
+        data.results_per_region.last_value.hospital_moving_avg_per_region
+      )
     );
-
-    const value = formatNumber(
-      data.results_per_region.last_value.hospital_moving_avg_per_region
-    );
-
-    expect(normalizedText).toEqual(value);
   });
 });

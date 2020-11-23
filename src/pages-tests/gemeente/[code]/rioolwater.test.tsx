@@ -1,28 +1,32 @@
 import React from 'react';
 import SewerWater from '~/pages/gemeente/[code]/rioolwater';
-import { getTextByDataCy } from '~/test-utils/get-text-by-data-cy';
 import { loadFixture } from '~/test-utils/load-fixture';
 import { render } from '~/test-utils/render';
+import { testKpiValue } from '~/test-utils/test-kip-value';
 import { Municipal } from '~/types/data';
 import { formatNumber } from '~/utils/formatNumber';
 
 describe('Municipal page: SewerWater', () => {
   const data = loadFixture<Municipal>('GM0363.json');
+  let container: HTMLElement;
 
-  it('should use average for sewerwater chart kpi value when multiple installations are present', () => {
-    const { container } = render(
+  beforeEach(() => {
+    const renderResult = render(
       <SewerWater
         data={data}
         lastGenerated="test"
         municipalityName="Test gemeente"
       />
     );
+    container = renderResult.container;
+  });
 
-    const normalizedText = getTextByDataCy(container, 'barscale_value');
-
-    const value = formatNumber(data.sewer?.last_value.average);
-
-    expect(normalizedText).toEqual(value);
+  it('should use average for sewerwater chart kpi value when multiple installations are present', () => {
+    testKpiValue(
+      container,
+      'barscale_value',
+      formatNumber(data.sewer?.last_value.average)
+    );
   });
 
   it('should use rna_normalized for sewerwater chart kpi value when one installation is present', () => {
@@ -73,31 +77,20 @@ describe('Municipal page: SewerWater', () => {
       />
     );
 
-    const normalizedText = getTextByDataCy(container, 'barscale_value');
-
-    const value = formatNumber(
-      dataCopy.sewer_per_installation.values[0].last_value.rna_normalized
+    testKpiValue(
+      container,
+      'barscale_value',
+      formatNumber(
+        dataCopy.sewer_per_installation.values[0].last_value.rna_normalized
+      )
     );
-
-    expect(normalizedText).toEqual(value);
   });
 
   it('should use total_installation_count for total installation count', () => {
-    const { container } = render(
-      <SewerWater
-        data={data}
-        lastGenerated="test"
-        municipalityName="Test gemeente"
-      />
-    );
-
-    const normalizedText = getTextByDataCy(
+    testKpiValue(
       container,
-      'total_installation_count'
+      'total_installation_count',
+      formatNumber(data.sewer?.last_value.total_installation_count)
     );
-
-    const value = formatNumber(data.sewer?.last_value.total_installation_count);
-
-    expect(normalizedText).toEqual(value);
   });
 });

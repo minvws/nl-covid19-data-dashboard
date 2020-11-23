@@ -1,49 +1,44 @@
+import { ByRoleMatcher, Matcher } from '@testing-library/react';
 import React from 'react';
 import PositiefGetesteMensen from '~/pages/landelijk/positief-geteste-mensen';
-import { getTextByDataCy } from '~/test-utils/get-text-by-data-cy';
 import { loadFixture } from '~/test-utils/load-fixture';
 import { render } from '~/test-utils/render';
+import { testKpiValue } from '~/test-utils/test-kip-value';
 import { National } from '~/types/data';
 import { formatNumber } from '~/utils/formatNumber';
 
 describe('National page: PositiefGetesteMensen', () => {
   const data = loadFixture<National>('NL.json');
+  let container: HTMLElement;
+  let getByText: (text: Matcher, options?: any) => HTMLElement;
+  let getAllByRole: (
+    text: ByRoleMatcher,
+    options?: any,
+    waitforoptions?: any
+  ) => HTMLElement[];
+
+  beforeEach(() => {
+    const renderResult = render(
+      <PositiefGetesteMensen data={data} lastGenerated="test" />
+    );
+    container = renderResult.container;
+    getByText = renderResult.getByText;
+    getAllByRole = renderResult.getAllByRole;
+  });
 
   it('should use infected_daily_total for Results per Region', () => {
-    const { container } = render(
-      <PositiefGetesteMensen
-        data={data as National}
-        lastGenerated="test"
-        text={{}}
-      />
+    testKpiValue(
+      container,
+      'infected_daily_total',
+      formatNumber(data.infected_people_total.last_value.infected_daily_total)
     );
-
-    const infectedText = getTextByDataCy(container, 'infected_daily_total');
-
-    const value = formatNumber(
-      data?.infected_people_total.last_value.infected_daily_total
-    );
-
-    expect(infectedText).toEqual(value);
   });
 
   it('should show a signaalwaarde', () => {
-    const { getByText } = render(
-      <PositiefGetesteMensen
-        data={data as National}
-        lastGenerated="test"
-        text={{}}
-      />
-    );
-
     getByText(/signaalwaarde/i);
   });
 
   it("should show not show 'last week' option for GGD charts", () => {
-    const { getAllByRole } = render(
-      <PositiefGetesteMensen data={data as National} lastGenerated="test" />
-    );
-
     /**
      * Currently there are three charts shown on the positief-geteste-mensen page,
      * two of those charts should NOT have the 'Laatste week' option available since
