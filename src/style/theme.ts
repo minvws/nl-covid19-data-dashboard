@@ -93,6 +93,7 @@ export const colors = {
   lightGray: '#dfdfdf',
   annotation: '#595959',
   notification: '#cd005a',
+  red: '#F35363',
 
   data: {
     primary: '#007BC7',
