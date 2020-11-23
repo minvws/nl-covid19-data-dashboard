@@ -14,6 +14,7 @@ import styles from '~/components/choropleth/tooltips/tooltip.module.scss';
 import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { SEOHead } from '~/components/seoHead';
+import { MessageTile } from '~/components-styled/message-tile';
 import { TALLLanguages } from '~/locale/index';
 import { MDToHTMLString } from '~/utils/MDToHTMLString';
 
@@ -68,6 +69,17 @@ const SafetyRegion: FCWithLayout<any> = (props) => {
         title={text.veiligheidsregio_index.metadata.title}
         description={text.veiligheidsregio_index.metadata.description}
       />
+
+      {text.veiligheidsregio_index.belangrijk_bericht && (
+        <MessageTile>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: text.veiligheidsregio_index.belangrijk_bericht,
+            }}
+          />
+        </MessageTile>
+      )}
+
       <article className="index-article layout-choropleth">
         <div className="choropleth-header">
           <h2>{text.veiligheidsregio_index.selecteer_titel}</h2>
@@ -107,13 +119,17 @@ interface StaticProps {
 }
 
 export async function getStaticProps(): Promise<{ props: StaticProps }> {
-  const text = (await import('../../locale/index')).default;
+  const text = { ...(await import('../../locale/index')).default };
 
-  const serializedContent = MDToHTMLString(
-    text.veiligheidsregio_index.selecteer_toelichting
-  );
-
-  text.veiligheidsregio_index.selecteer_toelichting = serializedContent;
+  text.veiligheidsregio_index = {
+    ...text.veiligheidsregio_index,
+    selecteer_toelichting: MDToHTMLString(
+      text.veiligheidsregio_index.selecteer_toelichting
+    ),
+    belangrijk_bericht: MDToHTMLString(
+      text.veiligheidsregio_index.belangrijk_bericht
+    ),
+  };
 
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
   const fileContents = fs.readFileSync(filePath, 'utf8');

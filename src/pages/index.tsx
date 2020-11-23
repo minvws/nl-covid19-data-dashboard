@@ -23,6 +23,7 @@ import { EscalationMapLegenda } from './veiligheidsregio';
 import { assert } from '~/utils/assert';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
+import { MessageTile } from '~/components-styled/message-tile';
 import css from '@styled-system/css';
 
 interface StaticProps {
@@ -88,6 +89,16 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
           <span>{text.notificatie.link.text}</span>
         </a>
       </article>
+
+      {text.regionaal_index.belangrijk_bericht && (
+        <MessageTile>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: text.regionaal_index.belangrijk_bericht,
+            }}
+          />
+        </MessageTile>
+      )}
 
       <ChoroplethTile
         title={text.veiligheidsregio_index.selecteer_titel}
@@ -179,13 +190,19 @@ const getEscalationCounts = (
 };
 
 export async function getStaticProps(): Promise<StaticProps> {
-  const text = (await import('../locale/index')).default;
+  const text = { ...(await import('../locale/index')).default };
 
-  const serializedContent = MDToHTMLString(
-    text.veiligheidsregio_index.selecteer_toelichting
-  );
+  text.regionaal_index = {
+    ...text.regionaal_index,
+    belangrijk_bericht: MDToHTMLString(text.regionaal_index.belangrijk_bericht),
+  };
 
-  text.veiligheidsregio_index.selecteer_toelichting = serializedContent;
+  text.veiligheidsregio_index = {
+    ...text.veiligheidsregio_index,
+    selecteer_toelichting: MDToHTMLString(
+      text.veiligheidsregio_index.selecteer_toelichting
+    ),
+  };
 
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
   const fileContents = fs.readFileSync(filePath, 'utf8');
