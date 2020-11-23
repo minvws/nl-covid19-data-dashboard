@@ -8,8 +8,7 @@ import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 const text = siteText.common.metricKPI;
 const title = siteText.ziekenhuisopnames_per_dag.titel_kpi;
 
-export function IntakeHospitalMetric(props: { data: National }) {
-  const { data } = props;
+export function IntakeHospitalMetric({ data }: { data: National }) {
   const lastValue = data.intake_hospital_ma.last_value;
   const difference =
     data.difference.intake_hospital_ma__moving_average_hospital;

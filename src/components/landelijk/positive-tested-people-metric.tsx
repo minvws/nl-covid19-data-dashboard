@@ -8,12 +8,7 @@ import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 const text = siteText.common.metricKPI;
 const title = siteText.positief_geteste_personen.titel_kpi;
 
-/**
- * @TODO refactor / replace this with better abstraction
- */
-export function PositiveTestedPeopleMetric(props: { data: National }) {
-  const { data } = props;
-
+export function PositiveTestedPeopleMetric({ data }: { data: National }) {
   const lastValue = data.infected_people_total.last_value;
   const difference =
     data.difference.infected_people_total__infected_daily_total;
