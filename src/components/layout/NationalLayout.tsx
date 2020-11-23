@@ -224,9 +224,7 @@ function NationalLayout(props: NationalLayoutProps) {
                       title={siteText.ziekenhuisopnames_per_dag.titel_sidebar}
                     />
                     <span className="metric-wrapper">
-                      <IntakeHospitalMetric
-                        data={data.intake_hospital_ma.last_value}
-                      />
+                      <IntakeHospitalMetric data={data} />
                       <IntakeHospitalBarScale
                         data={data.intake_hospital_ma}
                         showAxis={false}
@@ -250,9 +248,7 @@ function NationalLayout(props: NationalLayoutProps) {
                       title={siteText.ic_opnames_per_dag.titel_sidebar}
                     />
                     <span className="metric-wrapper">
-                      <IntakeIntensiveCareMetric
-                        data={data.intake_intensivecare_ma.last_value}
-                      />
+                      <IntakeIntensiveCareMetric data={data} />
                       <IntakeIntensiveCareBarscale
                         data={data.intake_intensivecare_ma}
                         showAxis={false}

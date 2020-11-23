@@ -60,7 +60,7 @@ export function MetricKPI(props: IProps) {
           </InlineText>
         )}
 
-        {difference && (
+        {isDefined(difference) && (
           <Box as="span" fontSize={3} display="flex" alignItems="center">
             <DifferenceIndicator value={difference} isContextSidebar={true} />
           </Box>
