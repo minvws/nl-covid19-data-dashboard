@@ -48,6 +48,7 @@ export async function getStaticProps(): Promise<StaticProps> {
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const lastGenerated = JSON.parse(fileContents).last_generated;
 
+  // @ts-ignore
   const sanityData = await client.fetch(
     `
     *[_type == 'cijferVerantwoording']
@@ -61,7 +62,7 @@ export async function getStaticProps(): Promise<StaticProps> {
 
   const verantwoording = localize(sanityData, [targetLanguage, 'nl']);
 
-  return { props: { lastGenerated, verantwoording } };
+  return { props: { text, lastGenerated, verantwoording } };
 }
 
 const Verantwoording: FCWithLayout<VerantwoordingProps> = (props) => {
