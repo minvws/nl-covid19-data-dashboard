@@ -49,7 +49,7 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
           datumsText: text.datums,
           dateInfo: dataIntake.last_value.date_of_report_unix,
           dateOfInsertionUnix: dataIntake.last_value.date_of_insertion_unix,
-          dataSources: [text.bronnen.rivm, text.bronnen.lnaz],
+          dataSources: [text.bronnen.nice, text.bronnen.lnaz],
         }}
         reference={text.reference}
       />

@@ -62,8 +62,8 @@ export function Metadata(props: IContentHeaderMetadataProps) {
     });
   }
 
-  const dataDownload = dataSources
-    .filter((ds) => ds.download.length)
+  const dataDownloads = dataSources
+    .filter((ds) => Boolean(ds.download.trim()))
     .map((ds) => ({ href: ds.download, text: ds.text }));
 
   return (
@@ -87,20 +87,18 @@ export function Metadata(props: IContentHeaderMetadataProps) {
         label={text.source}
       />
 
-      {Boolean(dataDownload.length) && (
-        <MetadataItem
-          icon={
-            <DownloadIcon
-              aria-hidden
-              color={theme.colors.annotation}
-              width="14"
-              height="14"
-            />
-          }
-          items={dataDownload}
-          label={text.download}
-        />
-      )}
+      <MetadataItem
+        icon={
+          <DownloadIcon
+            aria-hidden
+            color={theme.colors.annotation}
+            width="14"
+            height="14"
+          />
+        }
+        items={dataDownloads}
+        label={text.download}
+      />
     </Box>
   );
 }
@@ -116,6 +114,11 @@ interface IMetadataItemProps {
 
 function MetadataItem(props: IMetadataItemProps) {
   const { icon, label, items } = props;
+
+  if (!items.length) {
+    return null;
+  }
+
   return (
     <Box
       display="flex"
@@ -138,13 +141,17 @@ function MetadataItem(props: IMetadataItemProps) {
                 <ExternalLink
                   href={item.href}
                   text={item.text}
-                  key={item.href}
+                  key={`label_${index}`}
                 />
               </>
             );
           }
           return (
-            <ExternalLink href={item.href} text={item.text} key={item.href} />
+            <ExternalLink
+              href={item.href}
+              text={item.text}
+              key={`label_${index}`}
+            />
           );
         })}
       </Text>
