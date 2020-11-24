@@ -47,7 +47,7 @@ function renderSidebarIndicator(value: DifferenceDecimal | DifferenceInteger) {
   if (difference < 0) {
     return (
       <Container>
-        <Span color="green">
+        <Span color="data.primary">
           <IconDown />
         </Span>
       </Container>
@@ -96,7 +96,7 @@ function renderTileIndicator(value: DifferenceDecimal | DifferenceInteger) {
 
     return (
       <Container>
-        <Span color="green">
+        <Span color="data.primary">
           <IconDown />
         </Span>
         <Span fontWeight="bold" mr="0.3em">
