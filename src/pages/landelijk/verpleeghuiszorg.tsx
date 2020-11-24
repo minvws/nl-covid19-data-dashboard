@@ -48,9 +48,10 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
         subtitle={positiveTestedPeopleText.pagina_toelichting}
         metadata={{
           datumsText: positiveTestedPeopleText.datums,
-          dateUnix: nursinghomeData.last_value.date_of_report_unix,
-          dateInsertedUnix: nursinghomeData.last_value.date_of_insertion_unix,
-          dataSource: positiveTestedPeopleText.bron,
+          dateInfo: nursinghomeData.last_value.date_of_report_unix,
+          dateOfInsertionUnix:
+            nursinghomeData.last_value.date_of_insertion_unix,
+          dataSources: [positiveTestedPeopleText.bronnen.rivm],
         }}
         reference={positiveTestedPeopleText.reference}
       />
@@ -61,7 +62,7 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
           description={positiveTestedPeopleText.extra_uitleg}
           metadata={{
             date: nursinghomeData.last_value.date_of_report_unix,
-            source: positiveTestedPeopleText.bron,
+            source: positiveTestedPeopleText.bronnen.rivm,
           }}
         >
           <KpiValue
@@ -72,7 +73,7 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
       </TwoKpiSection>
 
       <LineChartTile
-        metadata={{ source: positiveTestedPeopleText.bron }}
+        metadata={{ source: positiveTestedPeopleText.bronnen.rivm }}
         title={positiveTestedPeopleText.linechart_titel}
         values={nursinghomeData.values.map((value) => ({
           value: value.newly_infected_people,
@@ -86,9 +87,10 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
         subtitle={infectedLocationsText.pagina_toelichting}
         metadata={{
           datumsText: infectedLocationsText.datums,
-          dateUnix: nursinghomeData.last_value.date_of_report_unix,
-          dateInsertedUnix: nursinghomeData.last_value.date_of_insertion_unix,
-          dataSource: infectedLocationsText.bron,
+          dateInfo: nursinghomeData.last_value.date_of_report_unix,
+          dateOfInsertionUnix:
+            nursinghomeData.last_value.date_of_insertion_unix,
+          dataSources: [infectedLocationsText.bronnen.rivm],
         }}
         reference={infectedLocationsText.reference}
       />
@@ -98,7 +100,7 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
           title={infectedLocationsText.kpi_titel}
           metadata={{
             date: nursinghomeData.last_value.date_of_report_unix,
-            source: infectedLocationsText.bron,
+            source: infectedLocationsText.bronnen.rivm,
           }}
         >
           <KpiValue
@@ -114,7 +116,7 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
           title={infectedLocationsText.barscale_titel}
           metadata={{
             date: nursinghomeData.last_value.date_of_report_unix,
-            source: infectedLocationsText.bron,
+            source: infectedLocationsText.bronnen.rivm,
           }}
         >
           <KpiValue
@@ -129,7 +131,7 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
         description={infectedLocationsText.map_toelichting}
         metadata={{
           date: nursinghomeData.last_value.date_of_report_unix,
-          source: infectedLocationsText.bron,
+          source: infectedLocationsText.bronnen.rivm,
         }}
         legend={
           legendItems && {
@@ -150,7 +152,7 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
       </ChoroplethTile>
 
       <LineChartTile
-        metadata={{ source: infectedLocationsText.bron }}
+        metadata={{ source: infectedLocationsText.bronnen.rivm }}
         title={infectedLocationsText.linechart_titel}
         values={nursinghomeData.values.map((value) => ({
           value: value.infected_locations_total,
@@ -164,9 +166,10 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
         subtitle={locationDeaths.pagina_toelichting}
         metadata={{
           datumsText: locationDeaths.datums,
-          dateUnix: nursinghomeData.last_value.date_of_report_unix,
-          dateInsertedUnix: nursinghomeData.last_value.date_of_insertion_unix,
-          dataSource: locationDeaths.bron,
+          dateInfo: nursinghomeData.last_value.date_of_report_unix,
+          dateOfInsertionUnix:
+            nursinghomeData.last_value.date_of_insertion_unix,
+          dataSources: [locationDeaths.bronnen.rivm],
         }}
         reference={locationDeaths.reference}
       />
@@ -177,7 +180,7 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
           description={locationDeaths.extra_uitleg}
           metadata={{
             date: nursinghomeData.last_value.date_of_report_unix,
-            source: locationDeaths.bron,
+            source: locationDeaths.bronnen.rivm,
           }}
         >
           <KpiValue absolute={nursinghomeData.last_value.deceased_daily} />
@@ -186,7 +189,7 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
 
       {data && (
         <LineChartTile
-          metadata={{ source: locationDeaths.bron }}
+          metadata={{ source: locationDeaths.bronnen.rivm }}
           title={locationDeaths.linechart_titel}
           values={nursinghomeData.values.map((value) => ({
             value: value.deceased_daily,

@@ -14,7 +14,7 @@ import { createSelectMunicipalHandler } from '~/components/choropleth/select-han
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createMunicipalHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/municipal/create-municipal-hospital-admissions-tooltip';
 import { createRegionHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/region/create-region-hospital-admissions-tooltip';
-import { ContentHeader_sourcesHack } from '~/components/contentHeader_sourcesHack';
+import { ContentHeader } from '~/components/contentHeader';
 import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-barscale';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
@@ -25,14 +25,14 @@ import getNlData, { INationalData } from '~/static-props/nl-data';
 const text = siteText.ziekenhuisopnames_per_dag;
 
 const IntakeHospital: FCWithLayout<INationalData> = (props) => {
-  const { data: state } = props;
+  const { data } = props;
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
     'municipal'
   );
   const router = useRouter();
   const legendItems = useSafetyRegionLegendaData('hospital_admissions');
-  const dataIntake = state.intake_hospital_ma;
-  const dataBeds = state.hospital_beds_occupied;
+  const dataIntake = data.intake_hospital_ma;
+  const dataBeds = data.hospital_beds_occupied;
 
   return (
     <>
@@ -40,17 +40,16 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
         title={text.metadata.title}
         description={text.metadata.description}
       />
-      <ContentHeader_sourcesHack
+      <ContentHeader
         category={siteText.nationaal_layout.headings.ziekenhuizen}
         title={text.titel}
         icon={<Ziekenhuis />}
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: dataIntake.last_value.date_of_report_unix,
-          dateInsertedUnix: dataIntake.last_value.date_of_insertion_unix,
-          dataSourceA: text.bronnen.rivm,
-          dataSourceB: text.bronnen.lnaz,
+          dateInfo: dataIntake.last_value.date_of_report_unix,
+          dateOfInsertionUnix: dataIntake.last_value.date_of_insertion_unix,
+          dataSources: [text.bronnen.rivm, text.bronnen.lnaz],
         }}
         reference={text.reference}
       />

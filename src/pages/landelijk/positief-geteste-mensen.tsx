@@ -79,9 +79,9 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: delta.last_value.date_of_report_unix,
-          dateInsertedUnix: delta.last_value.date_of_insertion_unix,
-          dataSource: text.bron,
+          dateInfo: delta.last_value.date_of_report_unix,
+          dateOfInsertionUnix: delta.last_value.date_of_insertion_unix,
+          dataSources: [text.bronnen.rivm],
         }}
         reference={text.reference}
       />
@@ -92,7 +92,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           data-cy="infected_daily_increase"
           metadata={{
             date: delta.last_value.date_of_report_unix,
-            source: text.bron,
+            source: text.bronnen.rivm,
           }}
         >
           {delta && (
@@ -105,7 +105,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           title={text.kpi_titel}
           metadata={{
             date: delta.last_value.date_of_report_unix,
-            source: text.bron,
+            source: text.bronnen.rivm,
           }}
         >
           <KpiValue
@@ -141,7 +141,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         title={text.map_titel}
         metadata={{
           date: delta.last_value.date_of_report_unix,
-          source: text.bron,
+          source: text.bronnen.rivm,
         }}
         description={text.map_toelichting}
         onChangeControls={setSelectedMap}
@@ -190,7 +190,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           date: value.date_of_report_unix,
         }))}
         metadata={{
-          source: text.bron,
+          source: text.bronnen.rivm,
         }}
       />
 
@@ -199,7 +199,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         description={text.barchart_toelichting}
         metadata={{
           date: delta.last_value.date_of_report_unix,
-          source: text.bron,
+          source: text.bronnen.rivm,
         }}
       >
         <BarChart
@@ -228,7 +228,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           weekStartUnix: ggdLastValue.week_start_unix,
           weekEndUnix: ggdLastValue.week_end_unix,
           dateOfInsertionUnix: ggdLastValue.date_of_insertion_unix,
-          dataSource: ggdText.bron,
+          dataSource: ggdText.bronnen.rivm,
         }}
         reference={text.reference}
       />
@@ -238,7 +238,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           title={ggdText.totaal_getest_week_titel}
           metadata={{
             date: [ggdLastValue.week_start_unix, ggdLastValue.week_end_unix],
-            source: ggdText.bron,
+            source: ggdText.bronnen.rivm,
           }}
         >
           <KpiValue absolute={ggdLastValue.tested_total} />
@@ -248,7 +248,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           title={ggdText.positief_getest_week_titel}
           metadata={{
             date: [ggdLastValue.week_start_unix, ggdLastValue.week_end_unix],
-            source: ggdText.bron,
+            source: ggdText.bronnen.rivm,
           }}
         >
           <KpiValue
@@ -304,7 +304,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           return `${formatPercentage(y)}%`;
         }}
         metadata={{
-          source: ggdText.bron,
+          source: ggdText.bronnen.rivm,
         }}
       />
 
@@ -341,7 +341,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           },
         ]}
         metadata={{
-          source: ggdText.bron,
+          source: ggdText.bronnen.rivm,
         }}
       />
     </>

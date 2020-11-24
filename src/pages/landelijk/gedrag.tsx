@@ -4,7 +4,7 @@ import { KpiValue } from '~/components-styled/kpi-value';
 import { Tile } from '~/components-styled/layout';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
-import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRangeHack';
+import { ContentHeader } from '~/components/contentHeader';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
@@ -26,17 +26,19 @@ const BehaviorPage: FCWithLayout<INationalData> = (props) => {
         description={text.metadata.description}
       />
 
-      <ContentHeader_weekRangeHack
+      <ContentHeader
         category={siteText.nationaal_layout.headings.gedrag}
         title={text.pagina.titel}
         icon={Gedrag}
         subtitle={text.pagina.toelichting}
         metadata={{
           datumsText: text.datums,
-          weekStartUnix: behaviorData.last_value.week_start_unix,
-          weekEndUnix: behaviorData.last_value.week_end_unix,
+          dateInfo: {
+            weekStartUnix: behaviorData.last_value.week_start_unix,
+            weekEndUnix: behaviorData.last_value.week_end_unix,
+          },
           dateOfInsertionUnix: behaviorData.last_value.date_of_insertion_unix,
-          dataSource: text.bron,
+          dataSources: [text.bronnen.rivm],
         }}
         reference={text.reference}
       />

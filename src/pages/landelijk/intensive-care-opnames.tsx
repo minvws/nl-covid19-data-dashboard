@@ -4,7 +4,7 @@ import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
-import { ContentHeader_sourcesHack } from '~/components/contentHeader_sourcesHack';
+import { ContentHeader } from '~/components/contentHeader';
 import { IntakeIntensiveCareBarscale } from '~/components/landelijk/intake-intensive-care-barscale';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
@@ -15,11 +15,11 @@ import getNlData, { INationalData } from '~/static-props/nl-data';
 const text = siteText.ic_opnames_per_dag;
 
 const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
-  const { data: state } = props;
+  const { data } = props;
 
-  const dataIntake = state.intake_intensivecare_ma;
+  const dataIntake = data.intake_intensivecare_ma;
 
-  const dataBeds = state.intensive_care_beds_occupied;
+  const dataBeds = data.intensive_care_beds_occupied;
 
   return (
     <>
@@ -27,17 +27,16 @@ const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
         title={text.metadata.title}
         description={text.metadata.description}
       />
-      <ContentHeader_sourcesHack
+      <ContentHeader
         category={siteText.nationaal_layout.headings.ziekenhuizen}
         title={text.titel}
         icon={<Arts />}
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: dataIntake.last_value.date_of_report_unix,
-          dateInsertedUnix: dataIntake.last_value.date_of_insertion_unix,
-          dataSourceA: text.bronnen.nice,
-          dataSourceB: text.bronnen.lnaz,
+          dateInfo: dataIntake.last_value.date_of_report_unix,
+          dateOfInsertionUnix: dataIntake.last_value.date_of_insertion_unix,
+          dataSources: [text.bronnen.nice, text.bronnen.lnaz],
         }}
         reference={text.reference}
       />

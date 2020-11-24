@@ -9,7 +9,7 @@ import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hook
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createSewerRegionalTooltip } from '~/components/choropleth/tooltips/region/create-sewer-regional-tooltip';
-import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRangeHack';
+import { ContentHeader } from '~/components/contentHeader';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
@@ -31,17 +31,19 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
         title={text.metadata.title}
         description={text.metadata.description}
       />
-      <ContentHeader_weekRangeHack
+      <ContentHeader
         category={siteText.nationaal_layout.headings.vroege_signalen}
         title={text.titel}
         icon={<RioolwaterMonitoring />}
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          weekStartUnix: sewerAverages.last_value.week_start_unix,
-          weekEndUnix: sewerAverages.last_value.week_end_unix,
+          dateInfo: {
+            weekStartUnix: sewerAverages.last_value.week_start_unix,
+            weekEndUnix: sewerAverages.last_value.week_end_unix,
+          },
           dateOfInsertionUnix: sewerAverages.last_value.date_of_insertion_unix,
-          dataSource: text.bron,
+          dataSources: [text.bronnen.rivm],
         }}
         reference={text.reference}
       />
@@ -55,7 +57,7 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
               sewerAverages.last_value.week_start_unix,
               sewerAverages.last_value.week_end_unix,
             ],
-            source: text.bron,
+            source: text.bronnen.rivm,
           }}
         >
           <KpiValue
@@ -74,7 +76,7 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
               sewerAverages.last_value.week_start_unix,
               sewerAverages.last_value.week_end_unix,
             ],
-            source: text.bron,
+            source: text.bronnen.rivm,
           }}
         >
           <KpiValue
@@ -92,7 +94,7 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
           week: { start: value.week_start_unix, end: value.week_end_unix },
         }))}
         metadata={{
-          source: text.bron,
+          source: text.bronnen.rivm,
         }}
         formatTooltip={(x) => {
           return `<strong>${formatDateFromSeconds(
@@ -114,7 +116,7 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
             sewerAverages.last_value.week_start_unix,
             sewerAverages.last_value.week_end_unix,
           ],
-          source: text.bron,
+          source: text.bronnen.rivm,
         }}
         legend={
           legendItems // this data value should probably not be optional

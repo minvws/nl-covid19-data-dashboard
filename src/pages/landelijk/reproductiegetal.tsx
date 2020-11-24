@@ -32,10 +32,10 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: lastKnownValidData.last_value.date_of_report_unix,
-          dateInsertedUnix:
+          dateInfo: lastKnownValidData.last_value.date_of_report_unix,
+          dateOfInsertionUnix:
             lastKnownValidData.last_value.date_of_insertion_unix,
-          dataSource: text.bron,
+          dataSources: [text.bronnen.rivm],
         }}
         reference={text.reference}
       />
@@ -45,7 +45,7 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
           title={text.barscale_titel}
           metadata={{
             date: lastKnownValidData.last_value.date_of_report_unix,
-            source: text.bron,
+            source: text.bronnen.rivm,
           }}
           illustration={{
             image: '/images/reproductie-explainer.svg',
@@ -63,7 +63,7 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
 
       {data.reproduction_index.values && (
         <LineChartTile
-          metadata={{ source: text.bron }}
+          metadata={{ source: text.bronnen.rivm }}
           title={text.linechart_titel}
           values={data.reproduction_index.values.map((value) => ({
             value: value.reproduction_index_avg,

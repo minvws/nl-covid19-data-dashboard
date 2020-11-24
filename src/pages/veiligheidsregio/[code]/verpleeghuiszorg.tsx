@@ -58,9 +58,9 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
         )}
         metadata={{
           datumsText: positiveTestPeopleText.datums,
-          dateUnix: nursinghomeLastValue.date_of_report_unix,
-          dateInsertedUnix: nursinghomeLastValue.date_of_insertion_unix,
-          dataSource: positiveTestPeopleText.bron,
+          dateInfo: nursinghomeLastValue.date_of_report_unix,
+          dateOfInsertionUnix: nursinghomeLastValue.date_of_insertion_unix,
+          dataSources: [positiveTestPeopleText.bronnen.rivm],
         }}
         reference={positiveTestPeopleText.reference}
       />
@@ -71,7 +71,7 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
           description={positiveTestPeopleText.extra_uitleg}
           metadata={{
             date: nursinghomeLastValue.date_of_report_unix,
-            source: positiveTestPeopleText.bron,
+            source: positiveTestPeopleText.bronnen.rivm,
           }}
         >
           <KpiValue
@@ -82,7 +82,7 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
       </TwoKpiSection>
 
       <LineChartTile
-        metadata={{ source: positiveTestPeopleText.bron }}
+        metadata={{ source: positiveTestPeopleText.bronnen.rivm }}
         title={positiveTestPeopleText.linechart_titel}
         values={data.nursing_home.values.map((value) => ({
           value: value.newly_infected_people,
@@ -98,9 +98,9 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
         subtitle={locationsText.pagina_toelichting}
         metadata={{
           datumsText: locationsText.datums,
-          dateUnix: nursinghomeLastValue.date_of_report_unix,
-          dateInsertedUnix: nursinghomeLastValue.date_of_insertion_unix,
-          dataSource: locationsText.bron,
+          dateInfo: nursinghomeLastValue.date_of_report_unix,
+          dateOfInsertionUnix: nursinghomeLastValue.date_of_insertion_unix,
+          dataSources: [locationsText.bronnen.rivm],
         }}
         reference={locationsText.reference}
       />
@@ -110,7 +110,7 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
           title={locationsText.kpi_titel}
           metadata={{
             date: nursinghomeLastValue.date_of_report_unix,
-            source: locationsText.bron,
+            source: locationsText.bronnen.rivm,
           }}
         >
           <KpiValue
@@ -123,7 +123,7 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
           title={locationsText.barscale_titel}
           metadata={{
             date: nursinghomeLastValue.date_of_report_unix,
-            source: locationsText.bron,
+            source: locationsText.bronnen.rivm,
           }}
         >
           <KpiValue
@@ -142,7 +142,7 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
             date: value.date_of_report_unix,
           }))}
           metadata={{
-            source: locationsText.bron,
+            source: locationsText.bronnen.rivm,
           }}
         />
       )}
@@ -155,9 +155,9 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
         subtitle={mortalityText.pagina_toelichting}
         metadata={{
           datumsText: mortalityText.datums,
-          dateUnix: nursinghomeLastValue.date_of_report_unix,
-          dateInsertedUnix: nursinghomeLastValue.date_of_insertion_unix,
-          dataSource: mortalityText.bron,
+          dateInfo: nursinghomeLastValue.date_of_report_unix,
+          dateOfInsertionUnix: nursinghomeLastValue.date_of_insertion_unix,
+          dataSources: [mortalityText.bronnen.rivm],
         }}
         reference={mortalityText.reference}
       />
@@ -168,7 +168,7 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
           description={mortalityText.extra_uitleg}
           metadata={{
             date: nursinghomeLastValue.date_of_report_unix,
-            source: mortalityText.bron,
+            source: mortalityText.bronnen.rivm,
           }}
         >
           <KpiValue absolute={nursinghomeLastValue.deceased_daily} />
@@ -177,7 +177,7 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
 
       {data && (
         <LineChartTile
-          metadata={{ source: mortalityText.bron }}
+          metadata={{ source: mortalityText.bronnen.rivm }}
           title={mortalityText.linechart_titel}
           values={data.nursing_home.values.map((value) => ({
             value: value.deceased_daily,

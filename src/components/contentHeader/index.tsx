@@ -1,7 +1,10 @@
+import {
+  IContentHeaderMetadataProps,
+  Metadata,
+} from '~/components-styled/content-header-metadata';
 import { HeadingWithIcon } from '~/components-styled/heading-with-icon';
 import { Heading } from '~/components-styled/typography';
 import styles from '../layout/layout.module.scss';
-import { Metadata } from './metadata';
 
 export function ContentHeader(props: IContentHeaderProps) {
   const { category, icon, title, subtitle, metadata, id, reference } = props;
@@ -37,15 +40,7 @@ export function ContentHeader(props: IContentHeaderProps) {
 interface IContentHeaderProps {
   title: string;
   subtitle: string;
-  metadata: {
-    datumsText: string;
-    dateUnix: number;
-    dateInsertedUnix?: number;
-    dataSource: {
-      href: string;
-      text: string;
-    };
-  };
+  metadata: IContentHeaderMetadataProps;
   reference: {
     href: string;
     text: string;

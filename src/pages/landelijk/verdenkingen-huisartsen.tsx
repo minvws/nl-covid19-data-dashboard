@@ -11,18 +11,16 @@ import { LineChartWithWeekTooltip } from '~/components/lineChart/lineChartWithWe
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
-import { NationalHuisartsVerdenkingen } from '~/types/data.d';
 
 const text = siteText.verdenkingen_huisartsen;
 
 const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
-  const { data: state } = props;
+  const { data } = props;
 
-  const data: NationalHuisartsVerdenkingen | undefined =
-    state?.verdenkingen_huisartsen;
+  const doctorData = data.verdenkingen_huisartsen;
 
-  const total = state?.verdenkingen_huisartsen?.last_value?.geschat_aantal;
-  const normalized = state?.verdenkingen_huisartsen?.last_value?.incidentie;
+  const total = data.verdenkingen_huisartsen.last_value.geschat_aantal;
+  const normalized = data.verdenkingen_huisartsen.last_value.incidentie;
 
   return (
     <>
@@ -37,9 +35,9 @@ const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: data.last_value.week_unix,
-          dateInsertedUnix: data.last_value.date_of_insertion_unix,
-          dataSource: text.bron,
+          dateInfo: doctorData.last_value.week_unix,
+          dateOfInsertionUnix: doctorData.last_value.date_of_insertion_unix,
+          dataSources: [text.bronnen.nivel],
         }}
         reference={text.reference}
       />
@@ -48,8 +46,8 @@ const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
         <KpiTile
           title={text.kpi_titel}
           metadata={{
-            date: data.last_value.week_unix,
-            source: text.bron,
+            date: doctorData.last_value.week_unix,
+            source: text.bronnen.nivel,
           }}
         >
           <KpiValue absolute={total} />
@@ -58,8 +56,8 @@ const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
         <KpiTile
           title={text.normalized_kpi_titel}
           metadata={{
-            date: data.last_value.week_unix,
-            source: text.bron,
+            date: doctorData.last_value.week_unix,
+            source: text.bronnen.nivel,
           }}
         >
           <KpiValue absolute={normalized} />
@@ -67,17 +65,17 @@ const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
         </KpiTile>
       </TwoKpiSection>
 
-      {data && (
+      {doctorData && (
         <ChartTileWithTimeframe
           title={text.linechart_titel}
-          metadata={{ source: text.bron }}
+          metadata={{ source: text.bronnen.nivel }}
           timeframeOptions={['all', '5weeks']}
         >
           {(timeframe) => (
             <LineChartWithWeekTooltip
               title={text.linechart_titel}
               timeframe={timeframe}
-              values={data.values.map((value) => ({
+              values={doctorData.values.map((value) => ({
                 value: value.incidentie,
                 date: value.week_unix,
                 week: {
