@@ -1,4 +1,4 @@
-import css from '@styled-system/css';
+import css, { SystemStyleObject } from '@styled-system/css';
 import Link from 'next/link';
 import {
   IContentHeaderMetadataProps,
@@ -11,18 +11,14 @@ import { Box } from './base';
 export function ContentHeader(props: IContentHeaderProps) {
   const { category, icon, title, subtitle, metadata, id, reference } = props;
 
-  const cssRules: any = {
+  const cssRules: SystemStyleObject = {
     '&[id]': {
       marginLeft: '-100vw',
       paddingLeft: '-100vw',
     },
+    marginTop: category ? undefined : 4,
+    marginLeft: icon ? undefined : 5,
   };
-  if (!category) {
-    cssRules.marginTop = '2rem';
-  }
-  if (!icon) {
-    cssRules.marginLeft = '4rem';
-  }
 
   return (
     <Box as="header" id={id} css={css(cssRules)}>
