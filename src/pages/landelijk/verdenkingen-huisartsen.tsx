@@ -22,8 +22,8 @@ const SuspectedPatients: FCWithLayout<NationalPageProps> = (props) => {
 
   const doctorData = data.verdenkingen_huisartsen;
 
-  const total = data.verdenkingen_huisartsen.last_value.geschat_aantal;
-  const normalized = data.verdenkingen_huisartsen.last_value.incidentie;
+  const total = doctorData.last_value.geschat_aantal;
+  const normalized = doctorData.last_value.incidentie;
 
   return (
     <>
@@ -53,7 +53,7 @@ const SuspectedPatients: FCWithLayout<NationalPageProps> = (props) => {
             source: text.bronnen.nivel,
           }}
         >
-          <KpiValue absolute={total} />
+          <KpiValue absolute={total} data-cy="geschat_aantal" />
           <Text>{text.barscale_toelichting}</Text>
         </KpiTile>
         <KpiTile
@@ -63,7 +63,7 @@ const SuspectedPatients: FCWithLayout<NationalPageProps> = (props) => {
             source: text.bronnen.nivel,
           }}
         >
-          <KpiValue absolute={normalized} />
+          <KpiValue absolute={normalized} data-cy="incidentie" />
           <Text>{text.normalized_kpi_toelichting}</Text>
         </KpiTile>
       </TwoKpiSection>

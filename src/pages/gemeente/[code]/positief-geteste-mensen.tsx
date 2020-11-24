@@ -59,14 +59,13 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
       <TwoKpiSection>
         <KpiTile
           title={text.barscale_titel}
-          data-cy="infected_daily_increase"
           metadata={{
             date: positivelyTestedPeople.last_value.date_of_report_unix,
             source: text.bronnen.rivm,
           }}
         >
           <KpiValue
-            data-cy="infected_daily_total"
+            data-cy="infected_daily_increase"
             absolute={positivelyTestedPeople.last_value.infected_daily_increase}
           />
           <Text>{text.barscale_toelichting}</Text>

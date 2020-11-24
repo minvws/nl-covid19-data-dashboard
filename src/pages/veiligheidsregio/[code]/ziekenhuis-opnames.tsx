@@ -71,6 +71,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
           }}
         >
           <KpiValue
+            data-cy="hospital_moving_avg_per_region"
             absolute={
               resultsPerRegion.last_value.hospital_moving_avg_per_region
             }

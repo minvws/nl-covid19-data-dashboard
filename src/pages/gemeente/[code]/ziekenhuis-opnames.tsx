@@ -69,6 +69,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
           }}
         >
           <KpiValue
+            data-cy="moving_average_hospital"
             absolute={hospitalAdmissions.last_value.moving_average_hospital}
             difference={
               data.difference.hospital_admissions__moving_average_hospital
