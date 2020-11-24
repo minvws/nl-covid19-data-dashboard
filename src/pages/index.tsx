@@ -97,13 +97,7 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
       </article>
 
       {text.regionaal_index.belangrijk_bericht && (
-        <MessageTile>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: text.regionaal_index.belangrijk_bericht,
-            }}
-          />
-        </MessageTile>
+        <MessageTile message={text.regionaal_index.belangrijk_bericht} />
       )}
 
       <ChoroplethTile

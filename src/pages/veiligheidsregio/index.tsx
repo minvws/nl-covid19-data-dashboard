@@ -63,13 +63,7 @@ const SafetyRegion: FCWithLayout<any> = (props) => {
       />
 
       {text.regionaal_index.belangrijk_bericht && (
-        <MessageTile>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: text.regionaal_index.belangrijk_bericht,
-            }}
-          />
-        </MessageTile>
+        <MessageTile message={text.regionaal_index.belangrijk_bericht} />
       )}
 
       <article className="index-article layout-choropleth">

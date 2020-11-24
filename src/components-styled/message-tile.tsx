@@ -1,13 +1,14 @@
 import css from '@styled-system/css';
+import styled from 'styled-components';
 import Warning from '~/assets/warning.svg';
 import { Box } from './base';
 import { Tile } from './layout';
 
 interface MessageTileProps {
-  children: React.ReactNode;
+  message: React.ReactNode;
 }
 
-export function MessageTile({ children }: MessageTileProps) {
+export function MessageTile({ message }: MessageTileProps) {
   return (
     <Tile
       mb={4}
@@ -22,10 +23,25 @@ export function MessageTile({ children }: MessageTileProps) {
         <Box mr={3} width={38} flexShrink={0}>
           <Warning width={38} height={38} fill="black" />
         </Box>
-        <Box maxWidth={450} css={css({ p: { m: 0 } })}>
-          {children}
-        </Box>
+        {typeof message === 'string' ? (
+          <Children dangerouslySetInnerHTML={{ __html: message }} />
+        ) : (
+          <Children>{message}</Children>
+        )}
       </Box>
     </Tile>
   );
 }
+
+const Children = styled.div(
+  css({
+    maxWidth: 450,
+    '> *': {
+      mt: 0,
+      mb: 3,
+      ':last-child': {
+        mb: 0,
+      },
+    },
+  })
+);
