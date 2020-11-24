@@ -84,6 +84,9 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
           <KpiValue
             data-cy="infected_daily_total"
             absolute={positivelyTestedPeople.last_value.infected_daily_total}
+            difference={
+              data.difference.positive_tested_people__infected_daily_total
+            }
           />
           <Text>{text.kpi_toelichting}</Text>
         </KpiTile>

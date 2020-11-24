@@ -12,11 +12,14 @@ import { BehaviorChoroplethTile } from '~/domain/behavior/behavior-choropleth-ti
 import { BehaviorLineChartTile } from '~/domain/behavior/behavior-line-chart-tile';
 import { BehaviorTableTile } from '~/domain/behavior/behavior-table-tile';
 import siteText from '~/locale/index';
-import getNlData, { INationalData } from '~/static-props/nl-data';
+import {
+  getNationalStaticProps,
+  NationalPageProps,
+} from '~/static-props/nl-data';
 
 const text = siteText.nl_gedrag;
 
-const BehaviorPage: FCWithLayout<INationalData> = (props) => {
+const BehaviorPage: FCWithLayout<NationalPageProps> = (props) => {
   const behaviorData = props.data.behavior;
 
   return (
@@ -80,8 +83,8 @@ const BehaviorPage: FCWithLayout<INationalData> = (props) => {
   );
 };
 
-BehaviorPage.getLayout = getNationalLayout();
+BehaviorPage.getLayout = getNationalLayout;
 
-export const getStaticProps = getNlData();
+export const getStaticProps = getNationalStaticProps;
 
 export default BehaviorPage;

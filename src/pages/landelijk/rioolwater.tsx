@@ -14,13 +14,16 @@ import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
-import getNlData, { INationalData } from '~/static-props/nl-data';
+import {
+  getNationalStaticProps,
+  NationalPageProps,
+} from '~/static-props/nl-data';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 
 const text = siteText.rioolwater_metingen;
 
-const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
+const SewerWater: FCWithLayout<NationalPageProps> = ({ data }) => {
   const sewerAverages = data.sewer;
   const router = useRouter();
 
@@ -131,8 +134,8 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
   );
 };
 
-SewerWater.getLayout = getNationalLayout();
+SewerWater.getLayout = getNationalLayout;
 
-export const getStaticProps = getNlData();
+export const getStaticProps = getNationalStaticProps;
 
 export default SewerWater;

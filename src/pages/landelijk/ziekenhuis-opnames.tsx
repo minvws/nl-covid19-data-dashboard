@@ -20,11 +20,14 @@ import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
-import getNlData, { INationalData } from '~/static-props/nl-data';
+import {
+  getNationalStaticProps,
+  NationalPageProps,
+} from '~/static-props/nl-data';
 
 const text = siteText.ziekenhuisopnames_per_dag;
 
-const IntakeHospital: FCWithLayout<INationalData> = (props) => {
+const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
   const { data } = props;
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
     'municipal'
@@ -141,8 +144,8 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
   );
 };
 
-IntakeHospital.getLayout = getNationalLayout();
+IntakeHospital.getLayout = getNationalLayout;
 
-export const getStaticProps = getNlData();
+export const getStaticProps = getNationalStaticProps;
 
 export default IntakeHospital;

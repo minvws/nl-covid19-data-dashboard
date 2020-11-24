@@ -10,12 +10,15 @@ import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { LineChartWithWeekTooltip } from '~/components/lineChart/lineChartWithWeekTooltip';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
-import getNlData, { INationalData } from '~/static-props/nl-data';
+import {
+  getNationalStaticProps,
+  NationalPageProps,
+} from '~/static-props/nl-data';
 import { NationalHuisartsVerdenkingen } from '~/types/data.d';
 
 const text = siteText.verdenkingen_huisartsen;
 
-const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
+const SuspectedPatients: FCWithLayout<NationalPageProps> = (props) => {
   const { data: state } = props;
 
   const data: NationalHuisartsVerdenkingen | undefined =
@@ -93,8 +96,8 @@ const SuspectedPatients: FCWithLayout<INationalData> = (props) => {
   );
 };
 
-SuspectedPatients.getLayout = getNationalLayout();
+SuspectedPatients.getLayout = getNationalLayout;
 
-export const getStaticProps = getNlData();
+export const getStaticProps = getNationalStaticProps;
 
 export default SuspectedPatients;

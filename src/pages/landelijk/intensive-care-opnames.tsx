@@ -10,11 +10,14 @@ import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
-import getNlData, { INationalData } from '~/static-props/nl-data';
+import {
+  getNationalStaticProps,
+  NationalPageProps,
+} from '~/static-props/nl-data';
 
 const text = siteText.ic_opnames_per_dag;
 
-const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
+const IntakeIntensiveCare: FCWithLayout<NationalPageProps> = (props) => {
   const { data: state } = props;
 
   const dataIntake = state.intake_intensivecare_ma;
@@ -92,8 +95,8 @@ const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
   );
 };
 
-IntakeIntensiveCare.getLayout = getNationalLayout();
+IntakeIntensiveCare.getLayout = getNationalLayout;
 
-export const getStaticProps = getNlData();
+export const getStaticProps = getNationalStaticProps;
 
 export default IntakeIntensiveCare;
