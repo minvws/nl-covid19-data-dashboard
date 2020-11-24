@@ -9,7 +9,7 @@
     "title": "Laatst bijgewerkt"
   },
   "notificatie": {
-    "titel": "Langzamere afname COVID-19 meldingen ",
+    "titel": "Aantal COVID-19 meldingen stagneert",
     "bericht": "Afgelopen week (18 november-24 november) waren er bijna net zo veel nieuwe COVID-19 meldingen dan de week daarvoor. Het aantal mensen dat vanwege COVID-19 in het ziekenhuis of op de IC werden opgenomen daalde wel licht. De druk op de zorg vanwege COVID-19 blijft hoog. Het reproductiegetal van 6 november is gestegen ten opzichte van een week eerder en is nu 1,02 (ondergrens: 0,99 en bovengrens: 1,05). Dat betekent dat 100 mensen die COVID-19 hebben 102 andere mensen besmetten. \n\nHet risiconiveau per regio kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2), ‘ernstig’ (niveau 3), ‘zeer ernstig’ (niveau 4) zijn. Op dit moment zijn {{escalationLevel4}} regio’s ingeschaald op ‘zeer ernstig’, {{escalationLevel3}} op ‘ernstig’, {{escalationLevel2}} op ‘zorgelijk’ en {{escalationLevel1}} op ‘waakzaam.‘",
     "link": {
       "text": "Bekijk de toelichting van het RIVM",
@@ -102,18 +102,18 @@
     "titel": "Aantal patiënten met eerste melding van COVID-19 klachten bij de huisarts",
     "pagina_toelichting": "Elke week berekent het Nivel aan de hand van de geregistreerde klachten door huisartsen, het aantal patiënten dat voor de eerste keer contact opneemt met de huisartsenpraktijk vanwege COVID-19-achtige klachten.",
     "barscale_titel": "Aantal patiënten met eerste melding van COVID-19 klachten bij de huisarts",
-    "barscale_toelichting": "Geschat aantal patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten per week.",
+    "barscale_toelichting": "Geschat aantal patiënten dat voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten per week.",
     "kpi_titel": "Geschat aantal patiënten met COVID-19-achtige klachten",
-    "kpi_toelichting": "Geschat aantal patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten per week.",
+    "kpi_toelichting": "Geschat aantal patiënten dat voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten per week.",
     "linechart_titel": "Verloop over tijd",
     "barscale_screenreader_text": "{{value}} patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten, per 100.000 inwoners, per week.",
     "titel_sidebar": "Klachten bij huisartsen",
     "metadata": {
       "title": "Aantal meldingen COVID-19-achtige klachten bij huisartsen | Dashboard Coronavirus | Rijksoverheid.nl",
-      "description": "Landelijk overzicht van het geschat aantal patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten per week."
+      "description": "Landelijk overzicht van het geschat aantal patiënten dat voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten per week."
     },
     "normalized_kpi_titel": "Aantal patiënten met COVID-19-achtige klachten per 100.000 inwoners",
-    "normalized_kpi_toelichting": "Aantal patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten, per week.",
+    "normalized_kpi_toelichting": "Aantal patiënten, per 100.000 inwoners, dat voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten, per week.",
     "titel_kpi": "Patiënten met eerste melding van COVID-19 klachten bij de huisarts",
     "reference": {
       "href": "/verantwoording",
