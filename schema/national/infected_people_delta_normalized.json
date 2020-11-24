@@ -11,7 +11,7 @@
       ],
       "properties": {
         "infected_daily_increase": {
-          "type": "integer"
+          "type": "number"
         },
         "date_of_report_unix": {
           "type": "integer"

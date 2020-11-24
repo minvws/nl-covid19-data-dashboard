@@ -4,7 +4,7 @@
   "type": "object",
   "properties": {
     "results_per_region__infected_increase_per_region": {
-      "$ref": "#/definitions/diff_integer"
+      "$ref": "#/definitions/diff_decimal"
     },
     "results_per_region__total_reported_increase_per_region": {
       "$ref": "#/definitions/diff_integer"
