@@ -114,6 +114,10 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
             title: text.chloropleth_legenda.titel,
           }
         }
+        metadata={{
+          date: dataIntake.last_value.date_of_report_unix,
+          source: text.bronnen.rivmSource,
+        }}
         showDataWarning
       >
         {selectedMap === 'municipal' && (

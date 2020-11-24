@@ -141,7 +141,7 @@ function MetadataItem(props: IMetadataItemProps) {
                 <ExternalLink
                   href={item.href}
                   text={item.text}
-                  key={`label_${index}`}
+                  key={`label_${index}_${item.href}`}
                 />
               </>
             );
@@ -150,7 +150,7 @@ function MetadataItem(props: IMetadataItemProps) {
             <ExternalLink
               href={item.href}
               text={item.text}
-              key={`label_${index}`}
+              key={`label_${index}_${item.href}`}
             />
           );
         })}

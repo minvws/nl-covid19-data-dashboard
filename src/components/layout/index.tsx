@@ -60,9 +60,6 @@ function Layout(
 
   const router = useRouter();
 
-  // remove focus after navigation
-  const blur = (evt: any) => evt.target.blur();
-
   const locale = getLocale();
   const showSmallLogo = useMediaQuery('(max-width: 480px)', true);
 
@@ -133,13 +130,17 @@ function Layout(
           </p>
         </MaxWidth>
 
-        <nav id="main-navigation" className={styles.nav}>
+        <nav
+          /** re-mount when route changes in order to blur anchors */
+          key={router.route}
+          id="main-navigation"
+          className={styles.nav}
+        >
           <MaxWidth>
             <ul className={styles.navList}>
               <li>
                 <Link href="/">
                   <a
-                    onClick={blur}
                     className={
                       router.pathname.indexOf('/landelijk') === 0 ||
                       router.pathname === '/'
@@ -154,7 +155,6 @@ function Layout(
               <li>
                 <Link href="/veiligheidsregio">
                   <a
-                    onClick={blur}
                     className={
                       router.pathname.indexOf('/veiligheidsregio') === 0
                         ? styles.link + ' ' + styles.active
@@ -168,7 +168,6 @@ function Layout(
               <li>
                 <Link href="/gemeente">
                   <a
-                    onClick={blur}
                     className={
                       router.pathname.indexOf('/gemeente') === 0
                         ? styles.link + ' ' + styles.active
@@ -182,7 +181,6 @@ function Layout(
               <li>
                 <Link href="/over">
                   <a
-                    onClick={blur}
                     className={
                       router.pathname == '/over'
                         ? styles.link + ' ' + styles.active
@@ -200,7 +198,10 @@ function Layout(
 
       <main id="content">{children}</main>
 
-      <footer>
+      <footer
+        /** re-mount when route changes in order to blur anchors */
+        key={router.route}
+      >
         <div className={styles.footer}>
           <MaxWidth>
             <div className={styles.grid}>
@@ -210,49 +211,49 @@ function Layout(
                   <ul className={styles.footerList}>
                     <li>
                       <Link href="/">
-                        <a onClick={blur} className={styles.footerLink}>
+                        <a className={styles.footerLink}>
                           {text.nav.links.index}
                         </a>
                       </Link>
                     </li>
                     <li>
                       <Link href="/veiligheidsregio">
-                        <a onClick={blur} className={styles.footerLink}>
+                        <a className={styles.footerLink}>
                           {text.nav.links.veiligheidsregio}
                         </a>
                       </Link>
                     </li>
                     <li>
                       <Link href="/gemeente">
-                        <a onClick={blur} className={styles.footerLink}>
+                        <a className={styles.footerLink}>
                           {text.nav.links.gemeente}
                         </a>
                       </Link>
                     </li>
                     <li>
                       <Link href="/over">
-                        <a onClick={blur} className={styles.footerLink}>
+                        <a className={styles.footerLink}>
                           {text.nav.links.over}
                         </a>
                       </Link>
                     </li>
                     <li>
                       <Link href="/veelgestelde-vragen">
-                        <a onClick={blur} className={styles.footerLink}>
+                        <a className={styles.footerLink}>
                           {text.nav.links.veelgestelde_vragen}
                         </a>
                       </Link>
                     </li>
                     <li>
                       <Link href="/over-risiconiveaus">
-                        <a onClick={blur} className={styles.footerLink}>
+                        <a className={styles.footerLink}>
                           {text.nav.links.over_risiconiveaus}
                         </a>
                       </Link>
                     </li>
                     <li>
                       <Link href="/verantwoording">
-                        <a onClick={blur} className={styles.footerLink}>
+                        <a className={styles.footerLink}>
                           {text.nav.links.verantwoording}
                         </a>
                       </Link>

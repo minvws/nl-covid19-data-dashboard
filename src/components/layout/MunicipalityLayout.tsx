@@ -17,7 +17,6 @@ import { IMunicipalityData } from '~/static-props/municipality-data';
 import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMunicipalityCode';
 import { getSewerWaterBarScaleData } from '~/utils/sewer-water/municipality-sewer-water.util';
 import { useMediaQuery } from '~/utils/useMediaQuery';
-import { useMenuState } from './useMenuState';
 
 interface IMunicipality {
   name: string;
@@ -49,7 +48,7 @@ export function getMunicipalityLayout() {
   };
 }
 
-/*
+/**
  * MunicipalityLayout is a composition of persistent layouts.
  *
  * ## States
@@ -77,10 +76,11 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
   const isMainRoute =
     router.route === '/gemeente' || router.route === `/gemeente/[code]`;
 
-  const { isMenuOpen, openMenu } = useMenuState(isMainRoute);
-
-  // remove focus after navigation
-  const blur = (evt: any) => evt.currentTarget.blur();
+  const isMenuOpen = router.query.menu === '1';
+  const menuOpenUrl = {
+    pathname: router.pathname,
+    query: { ...router.query, menu: '1' },
+  };
 
   function getClassName(path: string) {
     return router.pathname === path
@@ -128,8 +128,8 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
             : 'has-menu-closed'
         }`}
       >
-        <Link href={`/gemeente/${code}`}>
-          <a className="back-button" onClick={openMenu}>
+        <Link href={menuOpenUrl}>
+          <a className="back-button">
             <Arrow />
             {siteText.nav.terug_naar_alle_cijfers}
           </a>
@@ -142,7 +142,11 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
           />
 
           {showMetricLinks && (
-            <nav aria-label="metric navigation">
+            <nav
+              /** re-mount when route changes in order to blur anchors */
+              key={router.asPath}
+              aria-label="metric navigation"
+            >
               <div className="region-names">
                 <h2>{municipalityName}</h2>
                 {safetyRegion && (
@@ -151,7 +155,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                     <Link
                       href={`/veiligheidsregio/${safetyRegion.code}/positief-geteste-mensen`}
                     >
-                      <a onClick={blur}>{safetyRegion.name}</a>
+                      <a>{safetyRegion.name}</a>
                     </Link>
                   </p>
                 )}
@@ -161,7 +165,6 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                 <li>
                   <Link href={`/gemeente/${code}/positief-geteste-mensen`}>
                     <a
-                      onClick={blur}
                       className={getClassName(
                         `/gemeente/[code]/positief-geteste-mensen`
                       )}
@@ -188,7 +191,6 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                 <li>
                   <Link href={`/gemeente/${code}/ziekenhuis-opnames`}>
                     <a
-                      onClick={blur}
                       className={getClassName(
                         `/gemeente/[code]/ziekenhuis-opnames`
                       )}
@@ -216,7 +218,6 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                   {sewerWaterBarScaleData ? (
                     <Link href={`/gemeente/${code}/rioolwater`}>
                       <a
-                        onClick={blur}
                         className={getClassName(`/gemeente/[code]/rioolwater`)}
                       >
                         <HeadingWithIcon
@@ -251,8 +252,8 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
 
         <section className="municipality-content">{children}</section>
 
-        <Link href={`/gemeente/${code}`}>
-          <a className="back-button back-button-footer" onClick={openMenu}>
+        <Link href={menuOpenUrl}>
+          <a className="back-button back-button-footer">
             <Arrow />
             {siteText.nav.terug_naar_alle_cijfers}
           </a>
