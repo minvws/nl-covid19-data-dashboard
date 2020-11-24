@@ -45,11 +45,13 @@ function renderSidebarIndicator(value: DifferenceDecimal | DifferenceInteger) {
   }
 
   if (difference < 0) {
-    <Container>
-      <Span color="green">
-        <IconDown />
-      </Span>
-    </Container>;
+    return (
+      <Container>
+        <Span color="green">
+          <IconDown />
+        </Span>
+      </Container>
+    );
   }
 
   return (
