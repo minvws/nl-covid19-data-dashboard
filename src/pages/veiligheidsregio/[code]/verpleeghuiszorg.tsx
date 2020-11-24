@@ -23,9 +23,7 @@ const positiveTestPeopleText =
   siteText.veiligheidsregio_verpleeghuis_positief_geteste_personen;
 const mortalityText = siteText.veiligheidsregio_verpleeghuis_oversterfte;
 
-const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
-  props
-) => {
+const NursingHomeCare: FCWithLayout<ISafetyRegionData> = (props) => {
   const { data, safetyRegionName } = props;
 
   const nursinghomeLastValue = data.nursing_home.last_value;
@@ -75,7 +73,7 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
           }}
         >
           <KpiValue
-            data-cy="infected_daily_total"
+            data-cy="newly_infected_people"
             absolute={nursinghomeLastValue.newly_infected_people}
           />
         </KpiTile>
@@ -114,6 +112,7 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
           }}
         >
           <KpiValue
+            data-cy="infected_locations_total"
             absolute={nursinghomeLastValue.infected_locations_total}
             percentage={nursinghomeLastValue.infected_locations_percentage}
           />
@@ -127,7 +126,7 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
           }}
         >
           <KpiValue
-            data-cy="infected_daily_total"
+            data-cy="newly_infected_locations"
             absolute={nursinghomeLastValue.newly_infected_locations}
           />
           <Text>{locationsText.barscale_toelichting}</Text>
@@ -171,7 +170,10 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
             source: mortalityText.bron,
           }}
         >
-          <KpiValue absolute={nursinghomeLastValue.deceased_daily} />
+          <KpiValue
+            data-cy="deceased_daily"
+            absolute={nursinghomeLastValue.deceased_daily}
+          />
         </KpiTile>
       </TwoKpiSection>
 
@@ -189,9 +191,9 @@ const NursingHomeInfectedLocations: FCWithLayout<ISafetyRegionData> = (
   );
 };
 
-NursingHomeInfectedLocations.getLayout = getSafetyRegionLayout();
+NursingHomeCare.getLayout = getSafetyRegionLayout();
 
 export const getStaticProps = getSafetyRegionData();
 export const getStaticPaths = getSafetyRegionPaths();
 
-export default NursingHomeInfectedLocations;
+export default NursingHomeCare;

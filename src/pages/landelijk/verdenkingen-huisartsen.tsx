@@ -19,13 +19,12 @@ import { NationalHuisartsVerdenkingen } from '~/types/data.d';
 const text = siteText.verdenkingen_huisartsen;
 
 const SuspectedPatients: FCWithLayout<NationalPageProps> = (props) => {
-  const { data: state } = props;
+  const { data } = props;
 
-  const data: NationalHuisartsVerdenkingen | undefined =
-    state?.verdenkingen_huisartsen;
+  const doctorData: NationalHuisartsVerdenkingen = data.verdenkingen_huisartsen;
 
-  const total = state?.verdenkingen_huisartsen?.last_value?.geschat_aantal;
-  const normalized = state?.verdenkingen_huisartsen?.last_value?.incidentie;
+  const total = doctorData.last_value.geschat_aantal;
+  const normalized = doctorData.last_value.incidentie;
 
   return (
     <>
@@ -40,8 +39,8 @@ const SuspectedPatients: FCWithLayout<NationalPageProps> = (props) => {
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: data.last_value.week_unix,
-          dateInsertedUnix: data.last_value.date_of_insertion_unix,
+          dateUnix: doctorData.last_value.week_unix,
+          dateInsertedUnix: doctorData.last_value.date_of_insertion_unix,
           dataSource: text.bron,
         }}
         reference={text.reference}
@@ -51,26 +50,26 @@ const SuspectedPatients: FCWithLayout<NationalPageProps> = (props) => {
         <KpiTile
           title={text.kpi_titel}
           metadata={{
-            date: data.last_value.week_unix,
+            date: doctorData.last_value.week_unix,
             source: text.bron,
           }}
         >
-          <KpiValue absolute={total} />
+          <KpiValue absolute={total} data-cy="geschat_aantal" />
           <Text>{text.barscale_toelichting}</Text>
         </KpiTile>
         <KpiTile
           title={text.normalized_kpi_titel}
           metadata={{
-            date: data.last_value.week_unix,
+            date: doctorData.last_value.week_unix,
             source: text.bron,
           }}
         >
-          <KpiValue absolute={normalized} />
+          <KpiValue absolute={normalized} data-cy="incidentie" />
           <Text>{text.normalized_kpi_toelichting}</Text>
         </KpiTile>
       </TwoKpiSection>
 
-      {data && (
+      {doctorData && (
         <ChartTileWithTimeframe
           title={text.linechart_titel}
           metadata={{ source: text.bron }}
@@ -80,7 +79,7 @@ const SuspectedPatients: FCWithLayout<NationalPageProps> = (props) => {
             <LineChartWithWeekTooltip
               title={text.linechart_titel}
               timeframe={timeframe}
-              values={data.values.map((value) => ({
+              values={doctorData.values.map((value) => ({
                 value: value.incidentie,
                 date: value.week_unix,
                 week: {

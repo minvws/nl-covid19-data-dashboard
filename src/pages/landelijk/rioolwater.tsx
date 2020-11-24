@@ -61,6 +61,7 @@ const SewerWater: FCWithLayout<NationalPageProps> = ({ data }) => {
           }}
         >
           <KpiValue
+            data-cy="sewer_average"
             absolute={sewerAverages.last_value.average}
             valueAnnotation={siteText.waarde_annotaties.riool_normalized}
           />
@@ -80,6 +81,7 @@ const SewerWater: FCWithLayout<NationalPageProps> = ({ data }) => {
           }}
         >
           <KpiValue
+            data-cy="total_installation_count"
             absolute={sewerAverages.last_value.total_installation_count}
           />
         </KpiTile>

@@ -1,112 +1,112 @@
 {
-	"last_generated": "1605621768",
+	"last_generated": "1606230700",
 	"proto_name": "REGIONS",
 	"name": "REGIONS",
 	"code": "REGIONS",
-	"escalation_levels": [
+	"behavior": [
 		{
-			"date_of_report_unix": 1605608313,
+			"week_start_unix": 1604880000,
+			"week_end_unix": 1605398400,
+			"number_of_participants": 198,
 			"vrcode": "VR13",
-			"escalation_level": 3,
-			"valid_from_unix": 1601251200,
-			"date_of_insertion_unix": 1605608313
-		}
-	],
-	"positive_tested_people": [
-		{
-			"date_of_report_unix": 1605052800,
-			"vrcode": "VR13",
-			"positive_tested_people": 37.3,
-			"total_positive_tested_people": 399,
-			"date_of_insertion_unix": 1605178249
-		}
-	],
-	"hospital_admissions": [
-		{
-			"date_of_report_unix": 1605052800,
-			"vrcode": "VR13",
-			"positive_tested_people": 2,
-			"date_of_insertion_unix": 1605178249
+			"wash_hands_compliance": 34,
+			"wash_hands_compliance_trend": null,
+			"keep_distance_compliance": 39,
+			"keep_distance_compliance_trend": null,
+			"work_from_home_compliance": 74,
+			"work_from_home_compliance_trend": "up",
+			"avoid_crowds_compliance": 62,
+			"avoid_crowds_compliance_trend": null,
+			"symptoms_stay_home_compliance": 21,
+			"symptoms_stay_home_compliance_trend": null,
+			"symptoms_get_tested_compliance": 36,
+			"symptoms_get_tested_compliance_trend": null,
+			"wear_mask_public_indoors_compliance": 70,
+			"wear_mask_public_indoors_compliance_trend": "up",
+			"wear_mask_public_transport_compliance": 94,
+			"wear_mask_public_transport_compliance_trend": null,
+			"sneeze_cough_elbow_compliance": 50,
+			"sneeze_cough_elbow_compliance_trend": null,
+			"max_visitors_compliance": 94,
+			"max_visitors_compliance_trend": null,
+			"wash_hands_support": 91,
+			"wash_hands_support_trend": null,
+			"keep_distance_support": 89,
+			"keep_distance_support_trend": null,
+			"work_from_home_support": 84,
+			"work_from_home_support_trend": null,
+			"avoid_crowds_support": 93,
+			"avoid_crowds_support_trend": null,
+			"symptoms_stay_home_support": 90,
+			"symptoms_stay_home_support_trend": null,
+			"symptoms_get_tested_support": 87,
+			"symptoms_get_tested_support_trend": null,
+			"wear_mask_public_indoors_support": 85,
+			"wear_mask_public_indoors_support_trend": null,
+			"wear_mask_public_transport_support": 87,
+			"wear_mask_public_transport_support_trend": null,
+			"sneeze_cough_elbow_support": 93,
+			"sneeze_cough_elbow_support_trend": null,
+			"max_visitors_support": 64,
+			"max_visitors_support_trend": null,
+			"date_of_insertion_unix": 1606178005
 		}
 	],
 	"deceased": [
 		{
-			"date_of_report_unix": 1605052800,
+			"date_of_report_unix": 1606089600,
 			"vrcode": "VR13",
-			"deceased": 3,
-			"date_of_insertion_unix": 1605178249
+			"deceased": 0,
+			"date_of_insertion_unix": 1606177096
+		}
+	],
+	"escalation_levels": [
+		{
+			"date_of_report_unix": 1606221693,
+			"vrcode": "VR13",
+			"escalation_level": 4,
+			"valid_from_unix": 1602547200,
+			"date_of_insertion_unix": 1606221693
+		}
+	],
+	"hospital_admissions": [
+		{
+			"date_of_report_unix": 1606089600,
+			"vrcode": "VR13",
+			"hospital_admissions": 4,
+			"date_of_insertion_unix": 1606177096
 		}
 	],
 	"nursing_home": [
 		{
-			"date_of_report_unix": 1605052800,
+			"date_of_report_unix": 1606089600,
 			"vrcode": "VR13",
-			"newly_infected_people": 1,
-			"newly_infected_locations": 0,
+			"newly_infected_people": 0,
+			"newly_infected_locations": 1,
 			"infected_locations_total": 31,
 			"infected_locations_percentage": 36.9,
 			"deceased_daily": 0,
-			"date_of_insertion_unix": 1605177680
+			"date_of_insertion_unix": 1606216388
+		}
+	],
+	"positive_tested_people": [
+		{
+			"date_of_report_unix": 1606089600,
+			"vrcode": "VR13",
+			"positive_tested_people": 26.6,
+			"total_positive_tested_people": 285,
+			"date_of_insertion_unix": 1606177096
 		}
 	],
 	"sewer": [
 		{
-			"week_unix": 1604275200,
-			"week_start_unix": 1604275200,
-			"week_end_unix": 1604793600,
+			"week_unix": 1605484800,
+			"week_start_unix": 1605484800,
+			"week_end_unix": 1606003200,
 			"vrcode": "VR13",
-			"average": 183.99,
-			"total_installation_count": 1,
-			"date_of_insertion_unix": 1605169571
-		}
-	],
-	"behavior": [
-		{
-			"week_start_unix": 1603065600,
-			"week_end_unix": 1603584000,
-			"number_of_participants": 215,
-			"vrcode": "VR13",
-			"wash_hands_compliance": 37,
-			"wash_hands_compliance_trend": "equal",
-			"keep_distance_compliance": 36,
-			"keep_distance_compliance_trend": "equal",
-			"work_from_home_compliance": 61,
-			"work_from_home_compliance_trend": null,
-			"avoid_crowds_compliance": 63,
-			"avoid_crowds_compliance_trend": "equal",
-			"symptoms_stay_home_compliance": 35,
-			"symptoms_stay_home_compliance_trend": "equal",
-			"symptoms_get_tested_compliance": 41,
-			"symptoms_get_tested_compliance_trend": "equal",
-			"wear_mask_public_indoors_compliance": 58,
-			"wear_mask_public_indoors_compliance_trend": null,
-			"wear_mask_public_transport_compliance": 96,
-			"wear_mask_public_transport_compliance_trend": null,
-			"sneeze_cough_elbow_compliance": 52,
-			"sneeze_cough_elbow_compliance_trend": null,
-			"max_visitors_compliance": 97,
-			"max_visitors_compliance_trend": "equal",
-			"wash_hands_support": 90,
-			"wash_hands_support_trend": "equal",
-			"keep_distance_support": 90,
-			"keep_distance_support_trend": "equal",
-			"work_from_home_support": 86,
-			"work_from_home_support_trend": "up",
-			"avoid_crowds_support": 93,
-			"avoid_crowds_support_trend": "equal",
-			"symptoms_stay_home_support": 91,
-			"symptoms_stay_home_support_trend": "equal",
-			"symptoms_get_tested_support": 83,
-			"symptoms_get_tested_support_trend": "up",
-			"wear_mask_public_indoors_support": 82,
-			"wear_mask_public_indoors_support_trend": null,
-			"wear_mask_public_transport_support": 85,
-			"wear_mask_public_transport_support_trend": null,
-			"sneeze_cough_elbow_support": 89,
-			"sneeze_cough_elbow_support_trend": null,
-			"max_visitors_support": 66,
-			"max_visitors_support_trend": "down",
-			"date_of_insertion_unix": 1605259240
+			"average": 1997.45,
+			"total_installation_count": 2,
+			"date_of_insertion_unix": 1606176964
 		}
 	]
 }

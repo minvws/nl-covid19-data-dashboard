@@ -1,8 +1,34 @@
 {
-  "last_generated": "1605606370",
+  "last_generated": "1606230684",
   "proto_name": "GM0363",
   "name": "GM0363",
   "code": "GM0363",
+  "difference": {
+    "hospital_admissions__moving_average_hospital": {
+      "old_date_of_report_unix": 1606003200,
+      "old_value": 2.3,
+      "difference": 1.4,
+      "new_date_of_report_unix": 1606089600
+    },
+    "positive_tested_people__infected_daily_increase": {
+      "old_date_of_report_unix": 1606003200,
+      "old_value": 38.0,
+      "difference": -11.0,
+      "new_date_of_report_unix": 1606089600
+    },
+    "positive_tested_people__infected_daily_total": {
+      "old_date_of_report_unix": 1606003200,
+      "old_value": 332.0,
+      "difference": -96.0,
+      "new_date_of_report_unix": 1606089600
+    },
+    "sewer__average": {
+      "old_date_of_report_unix": 1603670400,
+      "old_value": 519.62,
+      "difference": 432.22,
+      "new_date_of_report_unix": 1604880000
+    }
+  },
   "hospital_admissions": {
     "values": [
       {
@@ -10,1695 +36,1779 @@
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1584403200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 3.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1584489600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 4.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1584576000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 5.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1584662400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 6.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1584748800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 9.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1584835200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 11.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1584921600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 6.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1585008000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 7.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1585094400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 11.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1585180800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 12.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1585267200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 16.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1585353600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 17.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1585440000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 24.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1585526400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 21.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1585612800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 33.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1585699200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 26.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1585785600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 25.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1585872000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 14.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1585958400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 20.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1586044800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 20.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1586131200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 14.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1586217600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 11.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1586304000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 5.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1586390400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 4.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1586476800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 2.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1586563200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 5.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1586649600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 4.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1586736000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 6.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1586822400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 15.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1586908800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 19.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1586995200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 24.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1587081600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 17.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1587168000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 14.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1587254400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 11.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1587340800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 10.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1587427200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 9.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1587513600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 10.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1587600000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 9.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1587686400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 10.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1587772800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 8.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1587859200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 7.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1587945600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 5.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1588032000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 4.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1588118400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 5.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1588204800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 6.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1588291200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 6.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1588377600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 5.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1588464000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 4.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1588550400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 4.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1588636800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 4.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1588723200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 5.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1588809600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 4.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1588896000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 4.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1588982400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 2.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1589068800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 2.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1589155200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 2.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1589241600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 3.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1589328000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 3.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1589414400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 2.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1589500800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 2.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1589587200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 2.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1589673600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 1.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1589760000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1589846400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 2.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1589932800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 2.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1590019200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 1.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1590105600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1590192000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1590278400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1590364800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1590451200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1590537600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1590624000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1590710400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1590796800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1590883200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1590969600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1591056000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1591142400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1591228800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1591315200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1591401600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1591488000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1591574400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 1.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1591660800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 1.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1591747200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 1.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1591833600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1591920000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1592006400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1592092800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1592179200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1592265600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1592352000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1592438400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1592524800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 1.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1592611200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 1.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1592697600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1592784000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1592870400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1592956800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1593043200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1593129600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1593216000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1593302400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1593388800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1593475200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1593561600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1593648000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1593734400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1593820800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1593907200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1593993600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1594080000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1594166400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1594252800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1594339200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1594425600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1594512000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1594598400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1594684800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1594771200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1594857600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1594944000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1595030400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1595116800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1595203200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1595289600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 1.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1595376000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 1.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1595462400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1595548800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1595635200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 1.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1595721600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 1.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1595808000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1595894400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1595980800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 1.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1596067200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 1.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1596153600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 1.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1596240000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1596326400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1596412800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1596499200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 1.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1596585600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 1.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1596672000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 1.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1596758400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1596844800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 1.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1596931200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 2.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1597017600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 2.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1597104000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 2.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1597190400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 1.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1597276800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1597363200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 1.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1597449600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 1.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1597536000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 1.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1597622400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1597708800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1597795200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 1.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1597881600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 1.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1597968000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 1.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1598054400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1598140800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1598227200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1598313600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 1.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1598400000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 2.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1598486400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 3.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1598572800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 2.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1598659200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 1.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1598745600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1598832000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1598918400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1599004800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 1.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1599091200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 1.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1599177600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 1.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1599264000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1599350400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 1.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1599436800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 1.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1599523200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 1.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1599609600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 0.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1599696000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 3.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1599782400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 3.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1599868800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 3.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1599955200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 3.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1600041600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 2.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1600128000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 3.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1600214400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 2.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1600300800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 2.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1600387200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 2.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1600473600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 3.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1600560000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 4.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1600646400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 4.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1600732800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 4.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1600819200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 4.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1600905600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 5.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1600992000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 6.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1601078400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 5.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1601164800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 5.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1601251200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 5.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1601337600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 5.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1601424000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 4.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1601510400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 3.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1601596800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 3.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1601683200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 3.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1601769600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 5.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1601856000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 6.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1601942400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 8.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1602028800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 8.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1602115200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 8.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1602201600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 9.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1602288000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 7.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1602374400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 5.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1602460800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 5.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1602547200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 9.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1602633600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 9.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1602720000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 9.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1602806400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 7.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1602892800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 11.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1602979200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 10.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1603065600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 13.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1603152000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 8.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1603238400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 7.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1603324800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 8.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1603411200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 11.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1603497600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 14.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1603584000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
-        "moving_average_hospital": 11.7,
-        "date_of_insertion_unix": 1605169739
+        "moving_average_hospital": 11.3,
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1603670400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
-        "moving_average_hospital": 12.3,
-        "date_of_insertion_unix": 1605169739
+        "moving_average_hospital": 12.0,
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1603756800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
-        "moving_average_hospital": 9.3,
-        "date_of_insertion_unix": 1605169739
+        "moving_average_hospital": 9.0,
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1603843200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 9.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1603929600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 7.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1604016000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 8.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1604102400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 11.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1604188800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 13.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1604275200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 11.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1604361600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 9.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1604448000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 7.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1604534400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 7.3,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1604620800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 6.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1604707200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 3.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1604793600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 2.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1604880000,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 2.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1604966400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 2.0,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
       },
       {
         "date_of_report_unix": 1605052800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
         "moving_average_hospital": 1.7,
-        "date_of_insertion_unix": 1605169739
+        "date_of_insertion_unix": 1606177106
+      },
+      {
+        "date_of_report_unix": 1605139200,
+        "gmcode": "GM0363",
+        "municipality_name": "Amsterdam",
+        "moving_average_hospital": 4.0,
+        "date_of_insertion_unix": 1606177106
+      },
+      {
+        "date_of_report_unix": 1605225600,
+        "gmcode": "GM0363",
+        "municipality_name": "Amsterdam",
+        "moving_average_hospital": 5.7,
+        "date_of_insertion_unix": 1606177106
+      },
+      {
+        "date_of_report_unix": 1605312000,
+        "gmcode": "GM0363",
+        "municipality_name": "Amsterdam",
+        "moving_average_hospital": 5.3,
+        "date_of_insertion_unix": 1606177106
+      },
+      {
+        "date_of_report_unix": 1605398400,
+        "gmcode": "GM0363",
+        "municipality_name": "Amsterdam",
+        "moving_average_hospital": 5.0,
+        "date_of_insertion_unix": 1606177106
+      },
+      {
+        "date_of_report_unix": 1605484800,
+        "gmcode": "GM0363",
+        "municipality_name": "Amsterdam",
+        "moving_average_hospital": 7.7,
+        "date_of_insertion_unix": 1606177106
+      },
+      {
+        "date_of_report_unix": 1605571200,
+        "gmcode": "GM0363",
+        "municipality_name": "Amsterdam",
+        "moving_average_hospital": 9.7,
+        "date_of_insertion_unix": 1606177106
+      },
+      {
+        "date_of_report_unix": 1605657600,
+        "gmcode": "GM0363",
+        "municipality_name": "Amsterdam",
+        "moving_average_hospital": 9.3,
+        "date_of_insertion_unix": 1606177106
+      },
+      {
+        "date_of_report_unix": 1605744000,
+        "gmcode": "GM0363",
+        "municipality_name": "Amsterdam",
+        "moving_average_hospital": 6.0,
+        "date_of_insertion_unix": 1606177106
+      },
+      {
+        "date_of_report_unix": 1605830400,
+        "gmcode": "GM0363",
+        "municipality_name": "Amsterdam",
+        "moving_average_hospital": 4.0,
+        "date_of_insertion_unix": 1606177106
+      },
+      {
+        "date_of_report_unix": 1605916800,
+        "gmcode": "GM0363",
+        "municipality_name": "Amsterdam",
+        "moving_average_hospital": 3.3,
+        "date_of_insertion_unix": 1606177106
+      },
+      {
+        "date_of_report_unix": 1606003200,
+        "gmcode": "GM0363",
+        "municipality_name": "Amsterdam",
+        "moving_average_hospital": 2.3,
+        "date_of_insertion_unix": 1606177106
+      },
+      {
+        "date_of_report_unix": 1606089600,
+        "gmcode": "GM0363",
+        "municipality_name": "Amsterdam",
+        "moving_average_hospital": 3.7,
+        "date_of_insertion_unix": 1606177106
       }
     ],
     "last_value": {
-      "date_of_report_unix": 1605052800,
+      "date_of_report_unix": 1606089600,
       "gmcode": "GM0363",
       "municipality_name": "Amsterdam",
-      "moving_average_hospital": 1.7,
-      "date_of_insertion_unix": 1605169739
+      "moving_average_hospital": 3.7,
+      "date_of_insertion_unix": 1606177106
     }
   },
   "positive_tested_people": {
@@ -1709,7 +1819,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 1.0,
         "infected_daily_increase": 0.1,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1583193600,
@@ -1717,7 +1827,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 0.0,
         "infected_daily_increase": 0.0,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1583280000,
@@ -1725,7 +1835,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 0.0,
         "infected_daily_increase": 0.0,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1583366400,
@@ -1733,7 +1843,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 1.0,
         "infected_daily_increase": 0.1,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1583452800,
@@ -1741,7 +1851,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 0.0,
         "infected_daily_increase": 0.0,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1583539200,
@@ -1749,7 +1859,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 1.0,
         "infected_daily_increase": 0.1,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1583625600,
@@ -1757,7 +1867,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 1.0,
         "infected_daily_increase": 0.1,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1583712000,
@@ -1765,7 +1875,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 0.0,
         "infected_daily_increase": 0.0,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1583798400,
@@ -1773,7 +1883,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 4.0,
         "infected_daily_increase": 0.5,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1583884800,
@@ -1781,7 +1891,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 0.0,
         "infected_daily_increase": 0.0,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1583971200,
@@ -1789,7 +1899,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 3.0,
         "infected_daily_increase": 0.3,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1584057600,
@@ -1797,7 +1907,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 1.0,
         "infected_daily_increase": 0.1,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1584144000,
@@ -1805,7 +1915,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 19.0,
         "infected_daily_increase": 2.2,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1584230400,
@@ -1813,7 +1923,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 0.0,
         "infected_daily_increase": 0.0,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1584316800,
@@ -1821,7 +1931,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 8.0,
         "infected_daily_increase": 0.9,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1584403200,
@@ -1829,7 +1939,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 17.0,
         "infected_daily_increase": 1.9,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1584489600,
@@ -1837,7 +1947,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 6.0,
         "infected_daily_increase": 0.7,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1584576000,
@@ -1845,7 +1955,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 23.0,
         "infected_daily_increase": 2.6,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1584662400,
@@ -1853,7 +1963,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 42.0,
         "infected_daily_increase": 4.8,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1584748800,
@@ -1861,7 +1971,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 37.0,
         "infected_daily_increase": 4.2,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1584835200,
@@ -1869,7 +1979,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 30.0,
         "infected_daily_increase": 3.4,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1584921600,
@@ -1877,7 +1987,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 13.0,
         "infected_daily_increase": 1.5,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1585008000,
@@ -1885,7 +1995,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 45.0,
         "infected_daily_increase": 5.2,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1585094400,
@@ -1893,7 +2003,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 50.0,
         "infected_daily_increase": 5.7,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1585180800,
@@ -1901,7 +2011,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 51.0,
         "infected_daily_increase": 5.8,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1585267200,
@@ -1909,7 +2019,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 64.0,
         "infected_daily_increase": 7.3,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1585353600,
@@ -1917,7 +2027,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 66.0,
         "infected_daily_increase": 7.6,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1585440000,
@@ -1925,7 +2035,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 52.0,
         "infected_daily_increase": 6.0,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1585526400,
@@ -1933,7 +2043,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 42.0,
         "infected_daily_increase": 4.8,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1585612800,
@@ -1941,7 +2051,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 44.0,
         "infected_daily_increase": 5.0,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1585699200,
@@ -1949,7 +2059,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 45.0,
         "infected_daily_increase": 5.2,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1585785600,
@@ -1957,7 +2067,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 55.0,
         "infected_daily_increase": 6.3,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1585872000,
@@ -1965,7 +2075,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 38.0,
         "infected_daily_increase": 4.4,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1585958400,
@@ -1973,7 +2083,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 60.0,
         "infected_daily_increase": 6.9,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1586044800,
@@ -1981,7 +2091,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 57.0,
         "infected_daily_increase": 6.5,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1586131200,
@@ -1989,7 +2099,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 28.0,
         "infected_daily_increase": 3.2,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1586217600,
@@ -1997,7 +2107,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 25.0,
         "infected_daily_increase": 2.9,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1586304000,
@@ -2005,7 +2115,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 10.0,
         "infected_daily_increase": 1.1,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1586390400,
@@ -2013,7 +2123,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 54.0,
         "infected_daily_increase": 6.2,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1586476800,
@@ -2021,7 +2131,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 83.0,
         "infected_daily_increase": 9.5,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1586563200,
@@ -2029,7 +2139,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 54.0,
         "infected_daily_increase": 6.2,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1586649600,
@@ -2037,7 +2147,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 50.0,
         "infected_daily_increase": 5.7,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1586736000,
@@ -2045,7 +2155,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 27.0,
         "infected_daily_increase": 3.1,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1586822400,
@@ -2053,7 +2163,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 39.0,
         "infected_daily_increase": 4.5,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1586908800,
@@ -2061,7 +2171,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 28.0,
         "infected_daily_increase": 3.2,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1586995200,
@@ -2069,7 +2179,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 51.0,
         "infected_daily_increase": 5.8,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1587081600,
@@ -2077,7 +2187,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 73.0,
         "infected_daily_increase": 8.4,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1587168000,
@@ -2085,7 +2195,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 78.0,
         "infected_daily_increase": 8.9,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1587254400,
@@ -2093,7 +2203,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 46.0,
         "infected_daily_increase": 5.3,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1587340800,
@@ -2101,7 +2211,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 38.0,
         "infected_daily_increase": 4.4,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1587427200,
@@ -2109,7 +2219,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 39.0,
         "infected_daily_increase": 4.5,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1587513600,
@@ -2117,7 +2227,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 36.0,
         "infected_daily_increase": 4.1,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1587600000,
@@ -2125,7 +2235,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 47.0,
         "infected_daily_increase": 5.4,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1587686400,
@@ -2133,7 +2243,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 35.0,
         "infected_daily_increase": 4.0,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1587772800,
@@ -2141,7 +2251,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 43.0,
         "infected_daily_increase": 4.9,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1587859200,
@@ -2149,7 +2259,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 42.0,
         "infected_daily_increase": 4.8,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1587945600,
@@ -2157,7 +2267,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 19.0,
         "infected_daily_increase": 2.2,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1588032000,
@@ -2165,7 +2275,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 16.0,
         "infected_daily_increase": 1.8,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1588118400,
@@ -2173,7 +2283,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 36.0,
         "infected_daily_increase": 4.1,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1588204800,
@@ -2181,7 +2291,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 26.0,
         "infected_daily_increase": 3.0,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1588291200,
@@ -2189,7 +2299,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 32.0,
         "infected_daily_increase": 3.7,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1588377600,
@@ -2197,7 +2307,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 34.0,
         "infected_daily_increase": 3.9,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1588464000,
@@ -2205,7 +2315,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 14.0,
         "infected_daily_increase": 1.6,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1588550400,
@@ -2213,7 +2323,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 4.0,
         "infected_daily_increase": 0.5,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1588636800,
@@ -2221,7 +2331,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 38.0,
         "infected_daily_increase": 4.4,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1588723200,
@@ -2229,7 +2339,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 34.0,
         "infected_daily_increase": 3.9,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1588809600,
@@ -2237,7 +2347,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 36.0,
         "infected_daily_increase": 4.1,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1588896000,
@@ -2245,7 +2355,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 21.0,
         "infected_daily_increase": 2.4,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1588982400,
@@ -2253,7 +2363,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 15.0,
         "infected_daily_increase": 1.7,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1589068800,
@@ -2261,7 +2371,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 18.0,
         "infected_daily_increase": 2.1,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1589155200,
@@ -2269,7 +2379,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 21.0,
         "infected_daily_increase": 2.4,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1589241600,
@@ -2277,7 +2387,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 9.0,
         "infected_daily_increase": 1.0,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1589328000,
@@ -2285,7 +2395,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 9.0,
         "infected_daily_increase": 1.0,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1589414400,
@@ -2293,7 +2403,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 18.0,
         "infected_daily_increase": 2.1,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1589500800,
@@ -2301,7 +2411,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 15.0,
         "infected_daily_increase": 1.7,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1589587200,
@@ -2309,7 +2419,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 12.0,
         "infected_daily_increase": 1.4,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1589673600,
@@ -2317,7 +2427,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 7.0,
         "infected_daily_increase": 0.8,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1589760000,
@@ -2325,7 +2435,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 4.0,
         "infected_daily_increase": 0.5,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1589846400,
@@ -2333,7 +2443,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 4.0,
         "infected_daily_increase": 0.5,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1589932800,
@@ -2341,7 +2451,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 10.0,
         "infected_daily_increase": 1.1,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1590019200,
@@ -2349,7 +2459,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 12.0,
         "infected_daily_increase": 1.4,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1590105600,
@@ -2357,7 +2467,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 8.0,
         "infected_daily_increase": 0.9,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1590192000,
@@ -2365,7 +2475,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 7.0,
         "infected_daily_increase": 0.8,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1590278400,
@@ -2373,7 +2483,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 5.0,
         "infected_daily_increase": 0.6,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1590364800,
@@ -2381,7 +2491,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 6.0,
         "infected_daily_increase": 0.7,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1590451200,
@@ -2389,7 +2499,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 5.0,
         "infected_daily_increase": 0.6,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1590537600,
@@ -2397,7 +2507,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 5.0,
         "infected_daily_increase": 0.6,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1590624000,
@@ -2405,7 +2515,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 6.0,
         "infected_daily_increase": 0.7,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1590710400,
@@ -2413,7 +2523,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 11.0,
         "infected_daily_increase": 1.3,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1590796800,
@@ -2421,7 +2531,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 6.0,
         "infected_daily_increase": 0.7,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1590883200,
@@ -2429,7 +2539,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 9.0,
         "infected_daily_increase": 1.0,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1590969600,
@@ -2437,7 +2547,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 7.0,
         "infected_daily_increase": 0.8,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1591056000,
@@ -2445,7 +2555,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 1.0,
         "infected_daily_increase": 0.1,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1591142400,
@@ -2453,7 +2563,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 4.0,
         "infected_daily_increase": 0.5,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1591228800,
@@ -2461,7 +2571,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 0.0,
         "infected_daily_increase": 0.0,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1591315200,
@@ -2469,7 +2579,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 0.0,
         "infected_daily_increase": 0.0,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1591401600,
@@ -2477,7 +2587,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 0.0,
         "infected_daily_increase": 0.0,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1591488000,
@@ -2485,7 +2595,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 62.0,
         "infected_daily_increase": 7.1,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1591574400,
@@ -2493,7 +2603,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 17.0,
         "infected_daily_increase": 1.9,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1591660800,
@@ -2501,7 +2611,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 10.0,
         "infected_daily_increase": 1.1,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1591747200,
@@ -2509,7 +2619,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 22.0,
         "infected_daily_increase": 2.5,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1591833600,
@@ -2517,7 +2627,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 14.0,
         "infected_daily_increase": 1.6,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1591920000,
@@ -2525,7 +2635,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 8.0,
         "infected_daily_increase": 0.9,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1592006400,
@@ -2533,7 +2643,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 21.0,
         "infected_daily_increase": 2.4,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1592092800,
@@ -2541,7 +2651,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 11.0,
         "infected_daily_increase": 1.3,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1592179200,
@@ -2549,7 +2659,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 14.0,
         "infected_daily_increase": 1.6,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1592265600,
@@ -2557,7 +2667,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 19.0,
         "infected_daily_increase": 2.2,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1592352000,
@@ -2565,7 +2675,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 9.0,
         "infected_daily_increase": 1.0,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1592438400,
@@ -2573,7 +2683,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 11.0,
         "infected_daily_increase": 1.3,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1592524800,
@@ -2581,7 +2691,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 11.0,
         "infected_daily_increase": 1.3,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1592611200,
@@ -2589,7 +2699,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 8.0,
         "infected_daily_increase": 0.9,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1592697600,
@@ -2597,7 +2707,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 6.0,
         "infected_daily_increase": 0.7,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1592784000,
@@ -2605,7 +2715,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 6.0,
         "infected_daily_increase": 0.7,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1592870400,
@@ -2613,7 +2723,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 9.0,
         "infected_daily_increase": 1.0,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1592956800,
@@ -2621,7 +2731,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 11.0,
         "infected_daily_increase": 1.3,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1593043200,
@@ -2629,7 +2739,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 6.0,
         "infected_daily_increase": 0.7,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1593129600,
@@ -2637,7 +2747,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 13.0,
         "infected_daily_increase": 1.5,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1593216000,
@@ -2645,7 +2755,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 6.0,
         "infected_daily_increase": 0.7,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1593302400,
@@ -2653,7 +2763,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 1.0,
         "infected_daily_increase": 0.1,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1593388800,
@@ -2661,7 +2771,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 7.0,
         "infected_daily_increase": 0.8,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1593475200,
@@ -2669,7 +2779,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 4.0,
         "infected_daily_increase": 0.5,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1593561600,
@@ -2677,7 +2787,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 3.0,
         "infected_daily_increase": 0.3,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1593648000,
@@ -2685,7 +2795,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 4.0,
         "infected_daily_increase": 0.5,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1593734400,
@@ -2693,7 +2803,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 10.0,
         "infected_daily_increase": 1.1,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1593820800,
@@ -2701,7 +2811,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 7.0,
         "infected_daily_increase": 0.8,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1593907200,
@@ -2709,7 +2819,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 6.0,
         "infected_daily_increase": 0.7,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1593993600,
@@ -2717,7 +2827,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 2.0,
         "infected_daily_increase": 0.2,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1594080000,
@@ -2725,7 +2835,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 2.0,
         "infected_daily_increase": 0.2,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1594166400,
@@ -2733,7 +2843,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 6.0,
         "infected_daily_increase": 0.7,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1594252800,
@@ -2741,7 +2851,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 2.0,
         "infected_daily_increase": 0.2,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1594339200,
@@ -2749,7 +2859,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 9.0,
         "infected_daily_increase": 1.0,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1594425600,
@@ -2757,7 +2867,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 6.0,
         "infected_daily_increase": 0.7,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1594512000,
@@ -2765,7 +2875,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 4.0,
         "infected_daily_increase": 0.5,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1594598400,
@@ -2773,7 +2883,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 11.0,
         "infected_daily_increase": 1.3,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1594684800,
@@ -2781,7 +2891,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 6.0,
         "infected_daily_increase": 0.7,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1594771200,
@@ -2789,7 +2899,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 5.0,
         "infected_daily_increase": 0.6,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1594857600,
@@ -2797,7 +2907,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 19.0,
         "infected_daily_increase": 2.2,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1594944000,
@@ -2805,7 +2915,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 16.0,
         "infected_daily_increase": 1.8,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1595030400,
@@ -2813,7 +2923,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 16.0,
         "infected_daily_increase": 1.8,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1595116800,
@@ -2821,7 +2931,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 32.0,
         "infected_daily_increase": 3.7,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1595203200,
@@ -2829,7 +2939,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 28.0,
         "infected_daily_increase": 3.2,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1595289600,
@@ -2837,7 +2947,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 21.0,
         "infected_daily_increase": 2.4,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1595376000,
@@ -2845,7 +2955,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 18.0,
         "infected_daily_increase": 2.1,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1595462400,
@@ -2853,7 +2963,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 15.0,
         "infected_daily_increase": 1.7,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1595548800,
@@ -2861,7 +2971,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 16.0,
         "infected_daily_increase": 1.8,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1595635200,
@@ -2869,7 +2979,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 21.0,
         "infected_daily_increase": 2.4,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1595721600,
@@ -2877,7 +2987,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 30.0,
         "infected_daily_increase": 3.4,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1595808000,
@@ -2885,7 +2995,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 47.0,
         "infected_daily_increase": 5.4,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1595894400,
@@ -2893,7 +3003,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 29.0,
         "infected_daily_increase": 3.3,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1595980800,
@@ -2901,7 +3011,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 29.0,
         "infected_daily_increase": 3.3,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1596067200,
@@ -2909,7 +3019,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 66.0,
         "infected_daily_increase": 7.6,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1596153600,
@@ -2917,7 +3027,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 43.0,
         "infected_daily_increase": 4.9,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1596240000,
@@ -2925,7 +3035,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 61.0,
         "infected_daily_increase": 7.0,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1596326400,
@@ -2933,7 +3043,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 25.0,
         "infected_daily_increase": 2.9,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1596412800,
@@ -2941,7 +3051,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 44.0,
         "infected_daily_increase": 5.0,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1596499200,
@@ -2949,15 +3059,15 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 134.0,
         "infected_daily_increase": 15.4,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1596585600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
-        "infected_daily_total": 63.0,
-        "infected_daily_increase": 7.2,
-        "date_of_insertion_unix": 1605178262
+        "infected_daily_total": 62.0,
+        "infected_daily_increase": 7.1,
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1596672000,
@@ -2965,7 +3075,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 143.0,
         "infected_daily_increase": 16.4,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1596758400,
@@ -2973,7 +3083,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 78.0,
         "infected_daily_increase": 8.9,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1596844800,
@@ -2981,7 +3091,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 94.0,
         "infected_daily_increase": 10.8,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1596931200,
@@ -2989,7 +3099,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 82.0,
         "infected_daily_increase": 9.4,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1597017600,
@@ -2997,7 +3107,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 184.0,
         "infected_daily_increase": 21.1,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1597104000,
@@ -3005,15 +3115,15 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 102.0,
         "infected_daily_increase": 11.7,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1597190400,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
-        "infected_daily_total": 102.0,
-        "infected_daily_increase": 11.7,
-        "date_of_insertion_unix": 1605178262
+        "infected_daily_total": 101.0,
+        "infected_daily_increase": 11.6,
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1597276800,
@@ -3021,7 +3131,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 71.0,
         "infected_daily_increase": 8.1,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1597363200,
@@ -3029,7 +3139,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 121.0,
         "infected_daily_increase": 13.9,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1597449600,
@@ -3037,7 +3147,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 130.0,
         "infected_daily_increase": 14.9,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1597536000,
@@ -3045,7 +3155,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 95.0,
         "infected_daily_increase": 10.9,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1597622400,
@@ -3053,7 +3163,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 104.0,
         "infected_daily_increase": 11.9,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1597708800,
@@ -3061,15 +3171,15 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 122.0,
         "infected_daily_increase": 14.0,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1597795200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
-        "infected_daily_total": 95.0,
-        "infected_daily_increase": 10.9,
-        "date_of_insertion_unix": 1605178262
+        "infected_daily_total": 97.0,
+        "infected_daily_increase": 11.1,
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1597881600,
@@ -3077,7 +3187,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 101.0,
         "infected_daily_increase": 11.6,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1597968000,
@@ -3085,7 +3195,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 83.0,
         "infected_daily_increase": 9.5,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1598054400,
@@ -3093,7 +3203,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 47.0,
         "infected_daily_increase": 5.4,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1598140800,
@@ -3101,7 +3211,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 74.0,
         "infected_daily_increase": 8.5,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1598227200,
@@ -3109,7 +3219,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 122.0,
         "infected_daily_increase": 14.0,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1598313600,
@@ -3117,7 +3227,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 88.0,
         "infected_daily_increase": 10.1,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1598400000,
@@ -3125,7 +3235,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 81.0,
         "infected_daily_increase": 9.3,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1598486400,
@@ -3133,7 +3243,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 91.0,
         "infected_daily_increase": 10.4,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1598572800,
@@ -3141,7 +3251,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 79.0,
         "infected_daily_increase": 9.1,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1598659200,
@@ -3149,7 +3259,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 64.0,
         "infected_daily_increase": 7.3,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1598745600,
@@ -3157,7 +3267,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 64.0,
         "infected_daily_increase": 7.3,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1598832000,
@@ -3165,7 +3275,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 106.0,
         "infected_daily_increase": 12.1,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1598918400,
@@ -3173,7 +3283,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 73.0,
         "infected_daily_increase": 8.4,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1599004800,
@@ -3181,7 +3291,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 115.0,
         "infected_daily_increase": 13.2,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1599091200,
@@ -3189,7 +3299,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 73.0,
         "infected_daily_increase": 8.4,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1599177600,
@@ -3197,7 +3307,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 137.0,
         "infected_daily_increase": 15.7,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1599264000,
@@ -3205,7 +3315,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 110.0,
         "infected_daily_increase": 12.6,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1599350400,
@@ -3213,7 +3323,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 133.0,
         "infected_daily_increase": 15.2,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1599436800,
@@ -3221,7 +3331,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 134.0,
         "infected_daily_increase": 15.4,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1599523200,
@@ -3229,7 +3339,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 193.0,
         "infected_daily_increase": 22.1,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1599609600,
@@ -3237,7 +3347,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 137.0,
         "infected_daily_increase": 15.7,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1599696000,
@@ -3245,7 +3355,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 137.0,
         "infected_daily_increase": 15.7,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1599782400,
@@ -3253,7 +3363,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 188.0,
         "infected_daily_increase": 21.5,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1599868800,
@@ -3261,7 +3371,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 170.0,
         "infected_daily_increase": 19.5,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1599955200,
@@ -3269,7 +3379,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 198.0,
         "infected_daily_increase": 22.7,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1600041600,
@@ -3277,7 +3387,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 196.0,
         "infected_daily_increase": 22.5,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1600128000,
@@ -3285,7 +3395,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 248.0,
         "infected_daily_increase": 28.4,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1600214400,
@@ -3293,15 +3403,15 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 240.0,
         "infected_daily_increase": 27.5,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1600300800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
-        "infected_daily_total": 249.0,
-        "infected_daily_increase": 28.5,
-        "date_of_insertion_unix": 1605178262
+        "infected_daily_total": 248.0,
+        "infected_daily_increase": 28.4,
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1600387200,
@@ -3309,7 +3419,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 363.0,
         "infected_daily_increase": 41.6,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1600473600,
@@ -3317,7 +3427,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 295.0,
         "infected_daily_increase": 33.8,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1600560000,
@@ -3325,7 +3435,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 289.0,
         "infected_daily_increase": 33.1,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1600646400,
@@ -3333,7 +3443,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 269.0,
         "infected_daily_increase": 30.8,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1600732800,
@@ -3341,7 +3451,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 382.0,
         "infected_daily_increase": 43.8,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1600819200,
@@ -3349,7 +3459,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 258.0,
         "infected_daily_increase": 29.6,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1600905600,
@@ -3357,7 +3467,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 249.0,
         "infected_daily_increase": 28.5,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1600992000,
@@ -3365,7 +3475,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 358.0,
         "infected_daily_increase": 41.0,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1601078400,
@@ -3373,7 +3483,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 333.0,
         "infected_daily_increase": 38.2,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1601164800,
@@ -3381,7 +3491,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 468.0,
         "infected_daily_increase": 53.6,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1601251200,
@@ -3389,7 +3499,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 237.0,
         "infected_daily_increase": 27.2,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1601337600,
@@ -3397,7 +3507,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 389.0,
         "infected_daily_increase": 44.6,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1601424000,
@@ -3405,7 +3515,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 378.0,
         "infected_daily_increase": 43.3,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1601510400,
@@ -3413,7 +3523,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 347.0,
         "infected_daily_increase": 39.8,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1601596800,
@@ -3421,7 +3531,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 353.0,
         "infected_daily_increase": 40.4,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1601683200,
@@ -3429,7 +3539,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 369.0,
         "infected_daily_increase": 42.3,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1601769600,
@@ -3437,7 +3547,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 464.0,
         "infected_daily_increase": 53.2,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1601856000,
@@ -3445,7 +3555,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 351.0,
         "infected_daily_increase": 40.2,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1601942400,
@@ -3453,7 +3563,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 483.0,
         "infected_daily_increase": 55.3,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1602028800,
@@ -3461,7 +3571,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 463.0,
         "infected_daily_increase": 53.1,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1602115200,
@@ -3469,7 +3579,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 446.0,
         "infected_daily_increase": 51.1,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1602201600,
@@ -3477,7 +3587,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 500.0,
         "infected_daily_increase": 57.3,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1602288000,
@@ -3485,7 +3595,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 637.0,
         "infected_daily_increase": 73.0,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1602374400,
@@ -3493,15 +3603,15 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 422.0,
         "infected_daily_increase": 48.4,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1602460800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
-        "infected_daily_total": 579.0,
-        "infected_daily_increase": 66.3,
-        "date_of_insertion_unix": 1605178262
+        "infected_daily_total": 580.0,
+        "infected_daily_increase": 66.5,
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1602547200,
@@ -3509,15 +3619,15 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 734.0,
         "infected_daily_increase": 84.1,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1602633600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
-        "infected_daily_total": 642.0,
-        "infected_daily_increase": 73.6,
-        "date_of_insertion_unix": 1605178262
+        "infected_daily_total": 643.0,
+        "infected_daily_increase": 73.7,
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1602720000,
@@ -3525,7 +3635,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 512.0,
         "infected_daily_increase": 58.7,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1602806400,
@@ -3533,7 +3643,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 674.0,
         "infected_daily_increase": 77.2,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1602892800,
@@ -3541,7 +3651,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 685.0,
         "infected_daily_increase": 78.5,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1602979200,
@@ -3549,7 +3659,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 712.0,
         "infected_daily_increase": 81.6,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1603065600,
@@ -3557,7 +3667,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 538.0,
         "infected_daily_increase": 61.6,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1603152000,
@@ -3565,7 +3675,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 697.0,
         "infected_daily_increase": 79.9,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1603238400,
@@ -3573,15 +3683,15 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 766.0,
         "infected_daily_increase": 87.8,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1603324800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
-        "infected_daily_total": 804.0,
-        "infected_daily_increase": 92.1,
-        "date_of_insertion_unix": 1605178262
+        "infected_daily_total": 803.0,
+        "infected_daily_increase": 92.0,
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1603411200,
@@ -3589,7 +3699,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 747.0,
         "infected_daily_increase": 85.6,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1603497600,
@@ -3597,7 +3707,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 499.0,
         "infected_daily_increase": 57.2,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1603584000,
@@ -3605,7 +3715,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 839.0,
         "infected_daily_increase": 96.1,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1603670400,
@@ -3613,7 +3723,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 521.0,
         "infected_daily_increase": 59.7,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1603756800,
@@ -3621,23 +3731,23 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 687.0,
         "infected_daily_increase": 78.7,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1603843200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
-        "infected_daily_total": 338.0,
-        "infected_daily_increase": 38.7,
-        "date_of_insertion_unix": 1605178262
+        "infected_daily_total": 340.0,
+        "infected_daily_increase": 39.0,
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1603929600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
-        "infected_daily_total": 501.0,
-        "infected_daily_increase": 57.4,
-        "date_of_insertion_unix": 1605178262
+        "infected_daily_total": 502.0,
+        "infected_daily_increase": 57.5,
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1604016000,
@@ -3645,7 +3755,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 617.0,
         "infected_daily_increase": 70.7,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1604102400,
@@ -3653,7 +3763,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 568.0,
         "infected_daily_increase": 65.1,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1604188800,
@@ -3661,7 +3771,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 525.0,
         "infected_daily_increase": 60.2,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1604275200,
@@ -3669,15 +3779,15 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 323.0,
         "infected_daily_increase": 37.0,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1604361600,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
-        "infected_daily_total": 360.0,
-        "infected_daily_increase": 41.2,
-        "date_of_insertion_unix": 1605178262
+        "infected_daily_total": 361.0,
+        "infected_daily_increase": 41.4,
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1604448000,
@@ -3685,7 +3795,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 374.0,
         "infected_daily_increase": 42.9,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1604534400,
@@ -3693,7 +3803,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 369.0,
         "infected_daily_increase": 42.3,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1604620800,
@@ -3701,15 +3811,15 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 311.0,
         "infected_daily_increase": 35.6,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1604707200,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
-        "infected_daily_total": 380.0,
-        "infected_daily_increase": 43.5,
-        "date_of_insertion_unix": 1605178262
+        "infected_daily_total": 379.0,
+        "infected_daily_increase": 43.4,
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1604793600,
@@ -3717,7 +3827,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 332.0,
         "infected_daily_increase": 38.0,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1604880000,
@@ -3725,7 +3835,7 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 223.0,
         "infected_daily_increase": 25.6,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1604966400,
@@ -3733,31 +3843,384 @@
         "municipality_name": "Amsterdam",
         "infected_daily_total": 254.0,
         "infected_daily_increase": 29.1,
-        "date_of_insertion_unix": 1605178262
+        "date_of_insertion_unix": 1606177098
       },
       {
         "date_of_report_unix": 1605052800,
         "gmcode": "GM0363",
         "municipality_name": "Amsterdam",
-        "infected_daily_total": 329.0,
-        "infected_daily_increase": 37.7,
-        "date_of_insertion_unix": 1605178262
+        "infected_daily_total": 333.0,
+        "infected_daily_increase": 38.2,
+        "date_of_insertion_unix": 1606177098
+      },
+      {
+        "date_of_report_unix": 1605139200,
+        "gmcode": "GM0363",
+        "municipality_name": "Amsterdam",
+        "infected_daily_total": 393.0,
+        "infected_daily_increase": 45.0,
+        "date_of_insertion_unix": 1606177098
+      },
+      {
+        "date_of_report_unix": 1605225600,
+        "gmcode": "GM0363",
+        "municipality_name": "Amsterdam",
+        "infected_daily_total": 423.0,
+        "infected_daily_increase": 48.5,
+        "date_of_insertion_unix": 1606177098
+      },
+      {
+        "date_of_report_unix": 1605312000,
+        "gmcode": "GM0363",
+        "municipality_name": "Amsterdam",
+        "infected_daily_total": 309.0,
+        "infected_daily_increase": 35.4,
+        "date_of_insertion_unix": 1606177098
+      },
+      {
+        "date_of_report_unix": 1605398400,
+        "gmcode": "GM0363",
+        "municipality_name": "Amsterdam",
+        "infected_daily_total": 275.0,
+        "infected_daily_increase": 31.5,
+        "date_of_insertion_unix": 1606177098
+      },
+      {
+        "date_of_report_unix": 1605484800,
+        "gmcode": "GM0363",
+        "municipality_name": "Amsterdam",
+        "infected_daily_total": 284.0,
+        "infected_daily_increase": 32.5,
+        "date_of_insertion_unix": 1606177098
+      },
+      {
+        "date_of_report_unix": 1605571200,
+        "gmcode": "GM0363",
+        "municipality_name": "Amsterdam",
+        "infected_daily_total": 227.0,
+        "infected_daily_increase": 26.0,
+        "date_of_insertion_unix": 1606177098
+      },
+      {
+        "date_of_report_unix": 1605657600,
+        "gmcode": "GM0363",
+        "municipality_name": "Amsterdam",
+        "infected_daily_total": 241.0,
+        "infected_daily_increase": 27.6,
+        "date_of_insertion_unix": 1606177098
+      },
+      {
+        "date_of_report_unix": 1605744000,
+        "gmcode": "GM0363",
+        "municipality_name": "Amsterdam",
+        "infected_daily_total": 174.0,
+        "infected_daily_increase": 19.9,
+        "date_of_insertion_unix": 1606177098
+      },
+      {
+        "date_of_report_unix": 1605830400,
+        "gmcode": "GM0363",
+        "municipality_name": "Amsterdam",
+        "infected_daily_total": 340.0,
+        "infected_daily_increase": 39.0,
+        "date_of_insertion_unix": 1606177098
+      },
+      {
+        "date_of_report_unix": 1605916800,
+        "gmcode": "GM0363",
+        "municipality_name": "Amsterdam",
+        "infected_daily_total": 408.0,
+        "infected_daily_increase": 46.7,
+        "date_of_insertion_unix": 1606177098
+      },
+      {
+        "date_of_report_unix": 1606003200,
+        "gmcode": "GM0363",
+        "municipality_name": "Amsterdam",
+        "infected_daily_total": 332.0,
+        "infected_daily_increase": 38.0,
+        "date_of_insertion_unix": 1606177098
+      },
+      {
+        "date_of_report_unix": 1606089600,
+        "gmcode": "GM0363",
+        "municipality_name": "Amsterdam",
+        "infected_daily_total": 236.0,
+        "infected_daily_increase": 27.0,
+        "date_of_insertion_unix": 1606177098
       }
     ],
     "last_value": {
-      "date_of_report_unix": 1605052800,
+      "date_of_report_unix": 1606089600,
       "gmcode": "GM0363",
       "municipality_name": "Amsterdam",
-      "infected_daily_total": 329.0,
-      "infected_daily_increase": 37.7,
-      "date_of_insertion_unix": 1605178262
+      "infected_daily_total": 236.0,
+      "infected_daily_increase": 27.0,
+      "date_of_insertion_unix": 1606177098
+    }
+  },
+  "sewer": {
+    "values": [
+      {
+        "week_unix": 1599436800,
+        "week_start_unix": 1599436800,
+        "week_end_unix": 1599955200,
+        "gmcode": "GM0363",
+        "average": 205.67,
+        "total_installation_count": 2,
+        "date_of_insertion_unix": 1606207881
+      },
+      {
+        "week_unix": 1600646400,
+        "week_start_unix": 1600646400,
+        "week_end_unix": 1601164800,
+        "gmcode": "GM0363",
+        "average": 252.65,
+        "total_installation_count": 2,
+        "date_of_insertion_unix": 1606207881
+      },
+      {
+        "week_unix": 1601251200,
+        "week_start_unix": 1601251200,
+        "week_end_unix": 1601769600,
+        "gmcode": "GM0363",
+        "average": 4330.66,
+        "total_installation_count": 2,
+        "date_of_insertion_unix": 1606207881
+      },
+      {
+        "week_unix": 1601856000,
+        "week_start_unix": 1601856000,
+        "week_end_unix": 1602374400,
+        "gmcode": "GM0363",
+        "average": 518.94,
+        "total_installation_count": 2,
+        "date_of_insertion_unix": 1606207881
+      },
+      {
+        "week_unix": 1603065600,
+        "week_start_unix": 1603065600,
+        "week_end_unix": 1603584000,
+        "gmcode": "GM0363",
+        "average": 994.16,
+        "total_installation_count": 2,
+        "date_of_insertion_unix": 1606207881
+      },
+      {
+        "week_unix": 1603670400,
+        "week_start_unix": 1603670400,
+        "week_end_unix": 1604188800,
+        "gmcode": "GM0363",
+        "average": 519.62,
+        "total_installation_count": 2,
+        "date_of_insertion_unix": 1606207881
+      },
+      {
+        "week_unix": 1604880000,
+        "week_start_unix": 1604880000,
+        "week_end_unix": 1605398400,
+        "gmcode": "GM0363",
+        "average": 951.84,
+        "total_installation_count": 1,
+        "date_of_insertion_unix": 1606207881
+      }
+    ],
+    "last_value": {
+      "week_unix": 1604880000,
+      "week_start_unix": 1604880000,
+      "week_end_unix": 1605398400,
+      "gmcode": "GM0363",
+      "average": 951.84,
+      "total_installation_count": 1,
+      "date_of_insertion_unix": 1606207881
     }
   },
   "sewer_per_installation": {
     "values": [
       {
+        "rwzi_awzi_code": "11014",
+        "values": [
+          {
+            "date_measurement_unix": 1599436800,
+            "week_start_unix": 1599436800,
+            "week_end_unix": 1599955200,
+            "week": 37,
+            "rwzi_awzi_code": "11014",
+            "rwzi_awzi_name": "Amsterdam West",
+            "gmcode": "GM0363",
+            "rna_normalized": 178.29,
+            "date_of_insertion_unix": 1606202647
+          },
+          {
+            "date_measurement_unix": 1599955200,
+            "week_start_unix": 1599436800,
+            "week_end_unix": 1599955200,
+            "week": 37,
+            "rwzi_awzi_code": "11014",
+            "rwzi_awzi_name": "Amsterdam West",
+            "gmcode": "GM0363",
+            "rna_normalized": 291.52,
+            "date_of_insertion_unix": 1606202647
+          },
+          {
+            "date_measurement_unix": 1600732800,
+            "week_start_unix": 1600646400,
+            "week_end_unix": 1601164800,
+            "week": 39,
+            "rwzi_awzi_code": "11014",
+            "rwzi_awzi_name": "Amsterdam West",
+            "gmcode": "GM0363",
+            "rna_normalized": 292.71,
+            "date_of_insertion_unix": 1606202647
+          },
+          {
+            "date_measurement_unix": 1601251200,
+            "week_start_unix": 1601251200,
+            "week_end_unix": 1601769600,
+            "week": 40,
+            "rwzi_awzi_code": "11014",
+            "rwzi_awzi_name": "Amsterdam West",
+            "gmcode": "GM0363",
+            "rna_normalized": 341.53,
+            "date_of_insertion_unix": 1606202647
+          },
+          {
+            "date_measurement_unix": 1601769600,
+            "week_start_unix": 1601251200,
+            "week_end_unix": 1601769600,
+            "week": 40,
+            "rwzi_awzi_code": "11014",
+            "rwzi_awzi_name": "Amsterdam West",
+            "gmcode": "GM0363",
+            "rna_normalized": 5656.1,
+            "date_of_insertion_unix": 1606202647
+          },
+          {
+            "date_measurement_unix": 1601769600,
+            "week_start_unix": 1601251200,
+            "week_end_unix": 1601769600,
+            "week": 40,
+            "rwzi_awzi_code": "11014",
+            "rwzi_awzi_name": "Amsterdam West",
+            "gmcode": "GM0363",
+            "rna_normalized": 5656.1,
+            "date_of_insertion_unix": 1606202647
+          },
+          {
+            "date_measurement_unix": 1602288000,
+            "week_start_unix": 1601856000,
+            "week_end_unix": 1602374400,
+            "week": 41,
+            "rwzi_awzi_code": "11014",
+            "rwzi_awzi_name": "Amsterdam West",
+            "gmcode": "GM0363",
+            "rna_normalized": 654.41,
+            "date_of_insertion_unix": 1606202647
+          },
+          {
+            "date_measurement_unix": 1603065600,
+            "week_start_unix": 1603065600,
+            "week_end_unix": 1603584000,
+            "week": 43,
+            "rwzi_awzi_code": "11014",
+            "rwzi_awzi_name": "Amsterdam West",
+            "gmcode": "GM0363",
+            "rna_normalized": 525.31,
+            "date_of_insertion_unix": 1606202647
+          },
+          {
+            "date_measurement_unix": 1603065600,
+            "week_start_unix": 1603065600,
+            "week_end_unix": 1603584000,
+            "week": 43,
+            "rwzi_awzi_code": "11014",
+            "rwzi_awzi_name": "Amsterdam West",
+            "gmcode": "GM0363",
+            "rna_normalized": 525.31,
+            "date_of_insertion_unix": 1606202647
+          },
+          {
+            "date_measurement_unix": 1603584000,
+            "week_start_unix": 1603065600,
+            "week_end_unix": 1603584000,
+            "week": 43,
+            "rwzi_awzi_code": "11014",
+            "rwzi_awzi_name": "Amsterdam West",
+            "gmcode": "GM0363",
+            "rna_normalized": 1526.5,
+            "date_of_insertion_unix": 1606202647
+          },
+          {
+            "date_measurement_unix": 1604102400,
+            "week_start_unix": 1603670400,
+            "week_end_unix": 1604188800,
+            "week": 44,
+            "rwzi_awzi_code": "11014",
+            "rwzi_awzi_name": "Amsterdam West",
+            "gmcode": "GM0363",
+            "rna_normalized": 508.66,
+            "date_of_insertion_unix": 1606202647
+          },
+          {
+            "date_measurement_unix": 1604880000,
+            "week_start_unix": 1604880000,
+            "week_end_unix": 1605398400,
+            "week": 46,
+            "rwzi_awzi_code": "11014",
+            "rwzi_awzi_name": "Amsterdam West",
+            "gmcode": "GM0363",
+            "rna_normalized": 616.35,
+            "date_of_insertion_unix": 1606202647
+          },
+          {
+            "date_measurement_unix": 1605398400,
+            "week_start_unix": 1604880000,
+            "week_end_unix": 1605398400,
+            "week": 46,
+            "rwzi_awzi_code": "11014",
+            "rwzi_awzi_name": "Amsterdam West",
+            "gmcode": "GM0363",
+            "rna_normalized": 1287.32,
+            "date_of_insertion_unix": 1606202647
+          }
+        ],
+        "last_value": {
+          "date_measurement_unix": 1605398400,
+          "week_start_unix": 1604880000,
+          "week_end_unix": 1605398400,
+          "week": 46,
+          "rwzi_awzi_code": "11014",
+          "rwzi_awzi_name": "Amsterdam West",
+          "gmcode": "GM0363",
+          "rna_normalized": 1287.32,
+          "date_of_insertion_unix": 1606202647
+        }
+      },
+      {
         "rwzi_awzi_code": "31005",
         "values": [
+          {
+            "date_measurement_unix": 1599436800,
+            "week_start_unix": 1599436800,
+            "week_end_unix": 1599955200,
+            "week": 37,
+            "rwzi_awzi_code": "31005",
+            "rwzi_awzi_name": "Westpoort",
+            "gmcode": "GM0363",
+            "rna_normalized": 159.34,
+            "date_of_insertion_unix": 1606202647
+          },
+          {
+            "date_measurement_unix": 1599955200,
+            "week_start_unix": 1599436800,
+            "week_end_unix": 1599955200,
+            "week": 37,
+            "rwzi_awzi_code": "31005",
+            "rwzi_awzi_name": "Westpoort",
+            "gmcode": "GM0363",
+            "rna_normalized": 193.52,
+            "date_of_insertion_unix": 1606202647
+          },
           {
             "date_measurement_unix": 1600732800,
             "week_start_unix": 1600646400,
@@ -3767,7 +4230,7 @@
             "rwzi_awzi_name": "Westpoort",
             "gmcode": "GM0363",
             "rna_normalized": 212.59,
-            "date_of_insertion_unix": 1605169572
+            "date_of_insertion_unix": 1606202647
           },
           {
             "date_measurement_unix": 1601251200,
@@ -3778,51 +4241,18 @@
             "rwzi_awzi_name": "Westpoort",
             "gmcode": "GM0363",
             "rna_normalized": 538.37,
-            "date_of_insertion_unix": 1605169572
-          },
-          {
-            "date_measurement_unix": 1599436800,
-            "week_start_unix": 1599436800,
-            "week_end_unix": 1599955200,
-            "week": 37,
-            "rwzi_awzi_code": "31005",
-            "rwzi_awzi_name": "Westpoort",
-            "gmcode": "GM0363",
-            "rna_normalized": 159.34,
-            "date_of_insertion_unix": 1605169572
-          },
-          {
-            "date_measurement_unix": 1599955200,
-            "week_start_unix": 1599436800,
-            "week_end_unix": 1599955200,
-            "week": 38,
-            "rwzi_awzi_code": "31005",
-            "rwzi_awzi_name": "Westpoort",
-            "gmcode": "GM0363",
-            "rna_normalized": 193.52,
-            "date_of_insertion_unix": 1605169572
-          },
-          {
-            "date_measurement_unix": 1603065600,
-            "week_start_unix": 1603065600,
-            "week_end_unix": 1603584000,
-            "week": 43,
-            "rwzi_awzi_code": "31005",
-            "rwzi_awzi_name": "Westpoort",
-            "gmcode": "GM0363",
-            "rna_normalized": 673.21,
-            "date_of_insertion_unix": 1605169572
+            "date_of_insertion_unix": 1606202647
           },
           {
             "date_measurement_unix": 1601769600,
             "week_start_unix": 1601251200,
             "week_end_unix": 1601769600,
-            "week": 41,
+            "week": 40,
             "rwzi_awzi_code": "31005",
             "rwzi_awzi_name": "Westpoort",
             "gmcode": "GM0363",
             "rna_normalized": 10786.67,
-            "date_of_insertion_unix": 1605169572
+            "date_of_insertion_unix": 1606202647
           },
           {
             "date_measurement_unix": 1602288000,
@@ -3833,18 +4263,29 @@
             "rwzi_awzi_name": "Westpoort",
             "gmcode": "GM0363",
             "rna_normalized": 383.48,
-            "date_of_insertion_unix": 1605169572
+            "date_of_insertion_unix": 1606202647
+          },
+          {
+            "date_measurement_unix": 1603065600,
+            "week_start_unix": 1603065600,
+            "week_end_unix": 1603584000,
+            "week": 43,
+            "rwzi_awzi_code": "31005",
+            "rwzi_awzi_name": "Westpoort",
+            "gmcode": "GM0363",
+            "rna_normalized": 673.21,
+            "date_of_insertion_unix": 1606202647
           },
           {
             "date_measurement_unix": 1603584000,
             "week_start_unix": 1603065600,
             "week_end_unix": 1603584000,
-            "week": 44,
+            "week": 43,
             "rwzi_awzi_code": "31005",
             "rwzi_awzi_name": "Westpoort",
             "gmcode": "GM0363",
             "rna_normalized": 1251.65,
-            "date_of_insertion_unix": 1605169572
+            "date_of_insertion_unix": 1606202647
           },
           {
             "date_measurement_unix": 1604102400,
@@ -3855,7 +4296,7 @@
             "rwzi_awzi_name": "Westpoort",
             "gmcode": "GM0363",
             "rna_normalized": 530.57,
-            "date_of_insertion_unix": 1605169572
+            "date_of_insertion_unix": 1606202647
           }
         ],
         "last_value": {
@@ -3867,213 +4308,9 @@
           "rwzi_awzi_name": "Westpoort",
           "gmcode": "GM0363",
           "rna_normalized": 530.57,
-          "date_of_insertion_unix": 1605169572
-        }
-      },
-      {
-        "rwzi_awzi_code": "11014",
-        "values": [
-          {
-            "date_measurement_unix": 1599955200,
-            "week_start_unix": 1599436800,
-            "week_end_unix": 1599955200,
-            "week": 38,
-            "rwzi_awzi_code": "11014",
-            "rwzi_awzi_name": "Amsterdam West",
-            "gmcode": "GM0363",
-            "rna_normalized": 291.52,
-            "date_of_insertion_unix": 1605169572
-          },
-          {
-            "date_measurement_unix": 1599436800,
-            "week_start_unix": 1599436800,
-            "week_end_unix": 1599955200,
-            "week": 37,
-            "rwzi_awzi_code": "11014",
-            "rwzi_awzi_name": "Amsterdam West",
-            "gmcode": "GM0363",
-            "rna_normalized": 178.29,
-            "date_of_insertion_unix": 1605169572
-          },
-          {
-            "date_measurement_unix": 1601251200,
-            "week_start_unix": 1601251200,
-            "week_end_unix": 1601769600,
-            "week": 40,
-            "rwzi_awzi_code": "11014",
-            "rwzi_awzi_name": "Amsterdam West",
-            "gmcode": "GM0363",
-            "rna_normalized": 341.53,
-            "date_of_insertion_unix": 1605169572
-          },
-          {
-            "date_measurement_unix": 1600732800,
-            "week_start_unix": 1600646400,
-            "week_end_unix": 1601164800,
-            "week": 39,
-            "rwzi_awzi_code": "11014",
-            "rwzi_awzi_name": "Amsterdam West",
-            "gmcode": "GM0363",
-            "rna_normalized": 292.71,
-            "date_of_insertion_unix": 1605169572
-          },
-          {
-            "date_measurement_unix": 1602288000,
-            "week_start_unix": 1601856000,
-            "week_end_unix": 1602374400,
-            "week": 41,
-            "rwzi_awzi_code": "11014",
-            "rwzi_awzi_name": "Amsterdam West",
-            "gmcode": "GM0363",
-            "rna_normalized": 654.41,
-            "date_of_insertion_unix": 1605169572
-          },
-          {
-            "date_measurement_unix": 1601769600,
-            "week_start_unix": 1601251200,
-            "week_end_unix": 1601769600,
-            "week": 41,
-            "rwzi_awzi_code": "11014",
-            "rwzi_awzi_name": "Amsterdam West",
-            "gmcode": "GM0363",
-            "rna_normalized": 5656.1,
-            "date_of_insertion_unix": 1605169572
-          },
-          {
-            "date_measurement_unix": 1601769600,
-            "week_start_unix": 1601251200,
-            "week_end_unix": 1601769600,
-            "week": 41,
-            "rwzi_awzi_code": "11014",
-            "rwzi_awzi_name": "Amsterdam West",
-            "gmcode": "GM0363",
-            "rna_normalized": 5656.1,
-            "date_of_insertion_unix": 1605169572
-          },
-          {
-            "date_measurement_unix": 1603065600,
-            "week_start_unix": 1603065600,
-            "week_end_unix": 1603584000,
-            "week": 43,
-            "rwzi_awzi_code": "11014",
-            "rwzi_awzi_name": "Amsterdam West",
-            "gmcode": "GM0363",
-            "rna_normalized": 525.31,
-            "date_of_insertion_unix": 1605169572
-          },
-          {
-            "date_measurement_unix": 1603065600,
-            "week_start_unix": 1603065600,
-            "week_end_unix": 1603584000,
-            "week": 43,
-            "rwzi_awzi_code": "11014",
-            "rwzi_awzi_name": "Amsterdam West",
-            "gmcode": "GM0363",
-            "rna_normalized": 525.31,
-            "date_of_insertion_unix": 1605169572
-          },
-          {
-            "date_measurement_unix": 1604102400,
-            "week_start_unix": 1603670400,
-            "week_end_unix": 1604188800,
-            "week": 44,
-            "rwzi_awzi_code": "11014",
-            "rwzi_awzi_name": "Amsterdam West",
-            "gmcode": "GM0363",
-            "rna_normalized": 508.66,
-            "date_of_insertion_unix": 1605169572
-          },
-          {
-            "date_measurement_unix": 1603584000,
-            "week_start_unix": 1603065600,
-            "week_end_unix": 1603584000,
-            "week": 44,
-            "rwzi_awzi_code": "11014",
-            "rwzi_awzi_name": "Amsterdam West",
-            "gmcode": "GM0363",
-            "rna_normalized": 1526.5,
-            "date_of_insertion_unix": 1605169572
-          }
-        ],
-        "last_value": {
-          "date_measurement_unix": 1603584000,
-          "week_start_unix": 1603065600,
-          "week_end_unix": 1603584000,
-          "week": 44,
-          "rwzi_awzi_code": "11014",
-          "rwzi_awzi_name": "Amsterdam West",
-          "gmcode": "GM0363",
-          "rna_normalized": 1526.5,
-          "date_of_insertion_unix": 1605169572
+          "date_of_insertion_unix": 1606202647
         }
       }
     ]
-  },
-  "sewer": {
-    "values": [
-      {
-        "week_unix": 1599436800,
-        "week_start_unix": 1599436800,
-        "week_end_unix": 1599955200,
-        "gmcode": "GM0363",
-        "average": 205.67,
-        "total_installation_count": 2,
-        "date_of_insertion_unix": 1605169573
-      },
-      {
-        "week_unix": 1600646400,
-        "week_start_unix": 1600646400,
-        "week_end_unix": 1601164800,
-        "gmcode": "GM0363",
-        "average": 252.65,
-        "total_installation_count": 2,
-        "date_of_insertion_unix": 1605169573
-      },
-      {
-        "week_unix": 1601251200,
-        "week_start_unix": 1601251200,
-        "week_end_unix": 1601769600,
-        "gmcode": "GM0363",
-        "average": 4330.67,
-        "total_installation_count": 2,
-        "date_of_insertion_unix": 1605169573
-      },
-      {
-        "week_unix": 1601856000,
-        "week_start_unix": 1601856000,
-        "week_end_unix": 1602374400,
-        "gmcode": "GM0363",
-        "average": 518.95,
-        "total_installation_count": 2,
-        "date_of_insertion_unix": 1605169573
-      },
-      {
-        "week_unix": 1603065600,
-        "week_start_unix": 1603065600,
-        "week_end_unix": 1603584000,
-        "gmcode": "GM0363",
-        "average": 994.17,
-        "total_installation_count": 2,
-        "date_of_insertion_unix": 1605169573
-      },
-      {
-        "week_unix": 1603670400,
-        "week_start_unix": 1603670400,
-        "week_end_unix": 1604188800,
-        "gmcode": "GM0363",
-        "average": 519.61,
-        "total_installation_count": 2,
-        "date_of_insertion_unix": 1605169573
-      }
-    ],
-    "last_value": {
-      "week_unix": 1603670400,
-      "week_start_unix": 1603670400,
-      "week_end_unix": 1604188800,
-      "gmcode": "GM0363",
-      "average": 519.61,
-      "total_installation_count": 2,
-      "date_of_insertion_unix": 1605169573
-    }
   }
 }

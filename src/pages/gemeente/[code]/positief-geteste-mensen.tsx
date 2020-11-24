@@ -28,8 +28,8 @@ const text = siteText.gemeente_positief_geteste_personen;
 const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
   const { data, municipalityName } = props;
   const router = useRouter();
-  const positivelyTestedPeople: MunicipalPositiveTestedPeople | undefined =
-    data?.positive_tested_people;
+  const positivelyTestedPeople: MunicipalPositiveTestedPeople =
+    data.positive_tested_people;
 
   return (
     <>
@@ -61,14 +61,13 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
       <TwoKpiSection>
         <KpiTile
           title={text.barscale_titel}
-          data-cy="infected_daily_increase"
           metadata={{
             date: positivelyTestedPeople.last_value.date_of_report_unix,
             source: text.bron,
           }}
         >
           <KpiValue
-            data-cy="infected_daily_total"
+            data-cy="infected_daily_increase"
             absolute={positivelyTestedPeople.last_value.infected_daily_increase}
           />
           <Text>{text.barscale_toelichting}</Text>

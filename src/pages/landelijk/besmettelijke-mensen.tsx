@@ -57,6 +57,7 @@ const InfectiousPeople: FCWithLayout<NationalPageProps> = (props) => {
           }}
         >
           <KpiValue
+            data-cy="infectious_avg"
             absolute={
               infectiousPeopleLastKnownAverage.last_value.infectious_avg
             }
