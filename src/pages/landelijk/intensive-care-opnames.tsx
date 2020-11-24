@@ -1,10 +1,10 @@
 import Arts from '~/assets/arts.svg';
+import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
-import { ContentHeader } from '~/components/contentHeader';
 import { IntakeIntensiveCareBarscale } from '~/components/landelijk/intake-intensive-care-barscale';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';

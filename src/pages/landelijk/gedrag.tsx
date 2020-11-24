@@ -1,10 +1,10 @@
 import Gedrag from '~/assets/gedrag.svg';
+import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { Tile } from '~/components-styled/layout';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
-import { ContentHeader } from '~/components/contentHeader';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';

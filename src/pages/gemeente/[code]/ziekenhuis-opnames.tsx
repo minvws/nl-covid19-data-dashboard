@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
+import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
@@ -10,7 +11,6 @@ import { useMunicipalLegendaData } from '~/components/choropleth/legenda/hooks/u
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createMunicipalHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/municipal/create-municipal-hospital-admissions-tooltip';
-import { ContentHeader } from '~/components/contentHeader';
 import { FCWithLayout } from '~/components/layout';
 import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
 import { SEOHead } from '~/components/seoHead';

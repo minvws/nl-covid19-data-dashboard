@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import Getest from '~/assets/test.svg';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
+import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
@@ -10,7 +11,6 @@ import { useMunicipalLegendaData } from '~/components/choropleth/legenda/hooks/u
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
-import { ContentHeader } from '~/components/contentHeader';
 import { FCWithLayout } from '~/components/layout';
 import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
 import { SEOHead } from '~/components/seoHead';

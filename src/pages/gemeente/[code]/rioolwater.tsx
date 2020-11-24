@@ -5,12 +5,12 @@ import {
   ChartTile,
   ChartTileWithTimeframe,
 } from '~/components-styled/chart-tile';
+import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { Select } from '~/components-styled/select';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { BarChart } from '~/components/charts';
-import { ContentHeader } from '~/components/contentHeader';
 import { FCWithLayout } from '~/components/layout';
 import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
 import { SewerWaterChart } from '~/components/lineChart/sewer-water-chart';

@@ -1,11 +1,11 @@
 import Ziektegolf from '~/assets/ziektegolf.svg';
 import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
+import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { Legenda } from '~/components-styled/legenda';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { AreaChart } from '~/components/charts/index';
-import { ContentHeader } from '~/components/contentHeader';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';

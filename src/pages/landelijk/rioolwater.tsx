@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
+import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
@@ -9,7 +10,6 @@ import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hook
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createSewerRegionalTooltip } from '~/components/choropleth/tooltips/region/create-sewer-regional-tooltip';
-import { ContentHeader } from '~/components/contentHeader';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';

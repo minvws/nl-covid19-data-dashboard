@@ -1,12 +1,12 @@
 import CoronaVirus from '~/assets/coronavirus.svg';
 import Locatie from '~/assets/locaties.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
+import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
-import { ContentHeader } from '~/components/contentHeader';
 import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { SEOHead } from '~/components/seoHead';

@@ -87,6 +87,7 @@ export const colors = {
   lightGray: '#dfdfdf',
   annotation: '#595959',
   notification: '#cd005a',
+  category: '#6b6b6b',
 
   data: {
     primary: '#007BC7',
