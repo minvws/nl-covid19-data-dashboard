@@ -17,18 +17,18 @@ export interface Municipal {
   sewer_per_installation?: MunicipalSewerPerInstallation;
 }
 export interface MunicipalDifference {
-  positive_tested_people__infected_daily_increase?: DifferenceInteger;
+  positive_tested_people__infected_daily_increase?: DifferenceDecimal;
   positive_tested_people__infected_daily_total: DifferenceInteger;
   hospital_admissions__moving_average_hospital: DifferenceDecimal;
-  sewer__average?: DifferenceInteger;
+  sewer__average?: DifferenceDecimal;
 }
-export interface DifferenceInteger {
+export interface DifferenceDecimal {
   old_value: number;
   difference: number;
   old_date_of_report_unix: number;
   new_date_of_report_unix: number;
 }
-export interface DifferenceDecimal {
+export interface DifferenceInteger {
   old_value: number;
   difference: number;
   old_date_of_report_unix: number;
@@ -159,7 +159,7 @@ export interface NationalDifference {
   intensive_care_beds_occupied__covid_occupied?: DifferenceInteger;
   huisarts_verdenkingen__incidentie?: DifferenceDecimal;
   huisarts_verdenkingen__geschat_aantal?: DifferenceInteger;
-  sewer__average?: DifferenceInteger;
+  sewer__average?: DifferenceDecimal;
   nursing_home__newly_infected_people?: DifferenceInteger;
   nursing_home__infected_locations_total?: DifferenceInteger;
   nursing_home__deceased_daily?: DifferenceInteger;
@@ -535,24 +535,24 @@ export interface Regionaal {
   behavior: RegionalBehavior;
 }
 export interface RegionalDifference {
-  results_per_region__infected_increase_per_region?: DifferenceInteger;
+  results_per_region__infected_increase_per_region?: DifferenceDecimal;
   results_per_region__total_reported_increase_per_region: DifferenceInteger;
   ggd__tested_total?: DifferenceInteger;
   ggd__infected_percentage?: DifferenceDecimal;
   results_per_region__hospital_moving_avg_per_region: DifferenceDecimal;
   results_per_region__hospital_total_counts_per_region?: DifferenceInteger;
-  sewer__average?: DifferenceInteger;
+  sewer__average?: DifferenceDecimal;
   nursing_home__newly_infected_people?: DifferenceInteger;
   nursing_home__infected_locations_total?: DifferenceInteger;
   nursing_home__deceased_daily?: DifferenceInteger;
 }
-export interface DifferenceInteger {
+export interface DifferenceDecimal {
   old_value: number;
   difference: number;
   old_date_of_report_unix: number;
   new_date_of_report_unix: number;
 }
-export interface DifferenceDecimal {
+export interface DifferenceInteger {
   old_value: number;
   difference: number;
   old_date_of_report_unix: number;
