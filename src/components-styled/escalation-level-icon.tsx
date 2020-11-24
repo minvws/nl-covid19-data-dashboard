@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import text from '~/locale/index';
 
-const escalationThresholds = regionThresholds.escalation_levels.thresholds;
+const escalationThresholds = regionThresholds.escalation_levels;
 
 type EscalationLevel = 1 | 2 | 3 | 4 | 5;
 

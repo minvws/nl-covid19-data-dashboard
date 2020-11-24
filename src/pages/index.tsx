@@ -7,8 +7,8 @@ import ExternalLink from '~/assets/external-link.svg';
 import Notification from '~/assets/notification.svg';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { HeadingWithIcon } from '~/components-styled/heading-with-icon';
-import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/use-safety-region-legenda-data';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
+import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
@@ -57,8 +57,6 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
     'municipal'
   );
-
-  const legendItems = useSafetyRegionLegendaData('positive_tested_people');
 
   return (
     <>
@@ -131,14 +129,10 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
         }}
         description={text.positief_geteste_personen.map_toelichting}
         onChangeControls={setSelectedMap}
-        legend={
-          legendItems // this data value should probably not be optional
-            ? {
-                title: text.positief_geteste_personen.chloropleth_legenda.titel,
-                items: legendItems,
-              }
-            : undefined
-        }
+        legend={{
+          thresholds: regionThresholds.positive_tested_people,
+          title: text.positief_geteste_personen.chloropleth_legenda.titel,
+        }}
       >
         {selectedMap === 'municipal' && (
           <MunicipalityChoropleth

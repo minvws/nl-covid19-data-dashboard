@@ -57,10 +57,7 @@ export function MunicipalityChoropleth(props: TProps) {
     ? municipalThresholds[metricName]
     : undefined;
 
-  const getFillColor = useChoroplethColorScale(
-    getData,
-    thresholdValues?.thresholds
-  );
+  const getFillColor = useChoroplethColorScale(getData, thresholdValues);
 
   const featureCallback = useCallback(
     (

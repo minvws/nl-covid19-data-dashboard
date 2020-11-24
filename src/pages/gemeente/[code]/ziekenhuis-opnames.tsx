@@ -6,7 +6,7 @@ import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { LineChart } from '~/components/charts/index';
-import { useMunicipalLegendaData } from '~/components/choropleth/legenda/hooks/use-municipal-legenda-data';
+import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createMunicipalHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/municipal/create-municipal-hospital-admissions-tooltip';
@@ -29,7 +29,6 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
   const { data, municipalityName } = props;
   const router = useRouter();
 
-  const legendItems = useMunicipalLegendaData('hospital_admissions');
   const hospitalAdmissions: MunicipalHospitalAdmissions | undefined =
     data?.hospital_admissions;
 
@@ -108,15 +107,10 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
           source: text.bron,
         }}
         description={text.map_toelichting}
-        legend={
-          legendItems // this data value should probably not be optional
-            ? {
-                title:
-                  siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel,
-                items: legendItems,
-              }
-            : undefined
-        }
+        legend={{
+          title: siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel,
+          thresholds: municipalThresholds.hospital_admissions,
+        }}
       >
         <MunicipalityChoropleth
           selected={data.code}

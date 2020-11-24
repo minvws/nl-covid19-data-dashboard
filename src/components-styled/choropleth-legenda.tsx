@@ -1,16 +1,35 @@
-import { Box } from './base';
-import styled from 'styled-components';
 import { css } from '@styled-system/css';
+import styled from 'styled-components';
+import { ChoroplethThresholdsValue } from '~/components/choropleth/shared';
+import { Box } from './base';
 
-export interface LegendaItem {
-  color: string;
-  label: string;
+interface ChoroplethLegendaProps {
+  title: string;
+  thresholds: ChoroplethThresholdsValue[];
 }
 
-export type ChoroplethLegendaProps = {
-  title: string;
-  items: LegendaItem[];
-};
+export function ChoroplethLegenda({
+  title,
+  thresholds,
+}: ChoroplethLegendaProps) {
+  return (
+    <Box width="100%" maxWidth={300}>
+      {title && <h4>{title}</h4>}
+      <List aria-label="legend">
+        {thresholds.map(({ color, threshold }, index) => (
+          <Item key={color + threshold}>
+            <LegendaColor
+              color={color}
+              first={index === 0}
+              last={index === thresholds.length - 1}
+            />
+            {index > 0 && <Label>{threshold}</Label>}
+          </Item>
+        ))}
+      </List>
+    </Box>
+  );
+}
 
 const List = styled.ul(
   css({
@@ -25,44 +44,29 @@ const List = styled.ul(
 const Item = styled.li(
   css({
     flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
     fontSize: [0, null, 1],
-    '&:first-child div:first-child': {
-      borderLeft: '1px solid lightgrey',
-    },
-    '&:last-child div:first-child': {
-      borderRight: '1px solid lightgrey',
-    },
   })
 );
 
-const LegendaItemBox = styled(Box)(
+const LegendaColor = styled.div<{
+  first: boolean;
+  last: boolean;
+  color: string;
+}>((x) =>
   css({
     width: '100%',
     height: '10px',
     flexGrow: 0,
     flexShrink: 0,
-    borderBottom: '1px solid lightgrey',
-    borderTop: '1px solid lightgrey',
+    borderRadius: x.first ? '2px 0 0 2px' : x.last ? '0 2px 2px 0' : 0,
+    backgroundColor: x.color,
   })
 );
 
-export function ChoroplethLegenda(props: ChoroplethLegendaProps) {
-  const { items, title } = props;
-
-  return (
-    <Box width="100%" maxWidth={400}>
-      {title && <h4>{title}</h4>}
-      <List aria-label="legend">
-        {items.map((item) => (
-          <Item key={item.color}>
-            <LegendaItemBox backgroundColor={item.color} />
-            <Box p={1}>{item.label}</Box>
-          </Item>
-        ))}
-      </List>
-    </Box>
-  );
-}
+const Label = styled.span(
+  css({
+    py: 1,
+    display: 'inline-block',
+    transform: 'translateX(-50%)',
+  })
+);

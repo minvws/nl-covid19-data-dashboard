@@ -8,7 +8,7 @@ import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
-import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/use-safety-region-legenda-data';
+import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createInfectedLocationsRegionalTooltip } from '~/components/choropleth/tooltips/region/create-infected-locations-regional-tooltip';
@@ -29,10 +29,6 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
   const nursinghomeData = data.nursing_home;
 
   const router = useRouter();
-  const legendItems = useSafetyRegionLegendaData(
-    'nursing_home',
-    'infected_locations_percentage'
-  );
 
   return (
     <>
@@ -131,12 +127,11 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
           date: nursinghomeData.last_value.date_of_report_unix,
           source: infectedLocationsText.bron,
         }}
-        legend={
-          legendItems && {
-            items: legendItems,
-            title: infectedLocationsText.chloropleth_legenda.titel,
-          }
-        }
+        legend={{
+          thresholds:
+            regionThresholds.nursing_home.infected_locations_percentage,
+          title: infectedLocationsText.chloropleth_legenda.titel,
+        }}
       >
         <SafetyRegionChoropleth
           metricName="nursing_home"
