@@ -12,6 +12,7 @@ import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import Ziektegolf from '~/assets/ziektegolf.svg';
 import { HeadingWithIcon } from '~/components-styled/heading-with-icon';
+import { NursingHomeInfectedPeopleMetric } from '~/components/common/nursing-home-infected-people-metric';
 import { InfectiousPeopleMetric } from '~/components/landelijk/infectious-people-metric';
 import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-barscale';
 import { IntakeHospitalMetric } from '~/components/landelijk/intake-hospital-metric';
@@ -23,31 +24,38 @@ import { ReproductionIndexBarScale } from '~/components/landelijk/reproduction-i
 import { ReproductionIndexMetric } from '~/components/landelijk/reproduction-index-metric';
 import { SewerWaterMetric } from '~/components/landelijk/sewer-water-metric';
 import { SuspectedPatientsMetric } from '~/components/landelijk/suspected-patients-metric';
-import { getLayout as getSiteLayout } from '~/components/layout';
+import Layout from '~/components/layout';
 import { BehaviorMetric } from '~/domain/behavior/behavior-metric';
 import siteText from '~/locale/index';
-import { INationalData } from '~/static-props/nl-data';
+import { NationalPageProps } from '~/static-props/nl-data';
 import theme from '~/style/theme';
-import { NursingHomeInfectedPeopleMetric } from '../common/nursing-home-infected-people-metric';
-import { useMenuState } from './useMenuState';
+import { useBreakpoints } from '~/utils/useBreakpoints';
 
-export function getNationalLayout() {
-  return function (
-    page: React.ReactNode,
-    pageProps: INationalData
-  ): React.ReactNode {
-    return getSiteLayout(
-      siteText.nationaal_metadata,
-      pageProps.lastGenerated
-    )(<NationalLayout {...pageProps}>{page}</NationalLayout>);
-  };
+/**
+ * Using composition this can be a less confusing and more direct replacement
+ * for getSiteLayout.
+ *
+ * @TODO replace other use of getSiteLayout()
+ */
+export function getNationalLayout(
+  page: React.ReactNode,
+  pageProps: NationalPageProps
+) {
+  return (
+    <Layout
+      {...siteText.nationaal_metadata}
+      lastGenerated={pageProps.lastGenerated}
+    >
+      <NationalLayout {...pageProps}>{page}</NationalLayout>
+    </Layout>
+  );
 }
 
-interface NationalLayoutProps extends INationalData {
+interface NationalLayoutProps extends NationalPageProps {
   children: React.ReactNode;
 }
 
-/*
+/**
  * NationalLayout is a composition of persistent layouts.
  *
  * ## States
@@ -66,19 +74,22 @@ interface NationalLayoutProps extends INationalData {
 function NationalLayout(props: NationalLayoutProps) {
   const { children, data } = props;
   const router = useRouter();
-  const isMainRoute = router.route === '/';
-
-  const { isMenuOpen, openMenu } = useMenuState(isMainRoute);
-
-  // remove focus after navigation
-  const blur = (evt: React.MouseEvent<HTMLAnchorElement>) =>
-    evt.currentTarget.blur();
+  const breakpoints = useBreakpoints();
 
   function getClassName(path: string) {
     return router.pathname === path
       ? 'metric-link active-metric-link'
       : 'metric-link';
   }
+
+  const menuOpenUrl = {
+    pathname: router.pathname,
+    query: { ...router.query, menu: '1' },
+  };
+
+  const isMenuOpen =
+    (router.pathname === '/' && !('menu' in router.query)) ||
+    router.query.menu === '1';
 
   return (
     <>
@@ -101,8 +112,8 @@ function NationalLayout(props: NationalLayoutProps) {
           isMenuOpen ? 'has-menu-opened' : 'has-menu-closed'
         }`}
       >
-        <Link href="/landelijk">
-          <a className="back-button" onClick={openMenu}>
+        <Link href={menuOpenUrl}>
+          <a className="back-button">
             <Arrow />
             {router.pathname === '/'
               ? siteText.nav.terug_naar_alle_cijfers_homepage
@@ -110,15 +121,25 @@ function NationalLayout(props: NationalLayoutProps) {
           </a>
         </Link>
         <aside className="national-aside">
-          <nav aria-label="metric navigation">
+          <nav
+            /** re-mount when route changes in order to blur anchors */
+            key={router.asPath}
+            aria-label="metric navigation"
+          >
             <h2>{siteText.nationaal_layout.headings.algemeen}</h2>
             <ul className="last-developments">
               <li>
-                <Link href="/">
-                  <a
-                    onClick={blur}
-                    className={`last-developments-link ${getClassName('/')}`}
-                  >
+                <Link
+                  href={{
+                    pathname: '/',
+                    query: breakpoints.md
+                      ? {} // only add menu flags on narrow devices
+                      : isMenuOpen
+                      ? { menu: '0' }
+                      : { menu: '1' },
+                  }}
+                >
+                  <a className={`last-developments-link ${getClassName('/')}`}>
                     <HeadingWithIcon
                       icon={<Notification color={theme.colors.notification} />}
                       title={siteText.laatste_ontwikkelingen.title}
@@ -133,7 +154,6 @@ function NationalLayout(props: NationalLayoutProps) {
               <li>
                 <Link href="/landelijk/positief-geteste-mensen">
                   <a
-                    onClick={blur}
                     className={getClassName(
                       '/landelijk/positief-geteste-mensen'
                     )}
@@ -143,9 +163,7 @@ function NationalLayout(props: NationalLayoutProps) {
                       title={siteText.positief_geteste_personen.titel_sidebar}
                     />
                     <span className="metric-wrapper">
-                      <PositiveTestedPeopleMetric
-                        data={data.infected_people_total.last_value}
-                      />
+                      <PositiveTestedPeopleMetric data={data} />
                       <PositiveTestedPeopleBarScale
                         data={data.infected_people_delta_normalized}
                         showAxis={false}
@@ -159,14 +177,13 @@ function NationalLayout(props: NationalLayoutProps) {
               <li>
                 <Link href="/landelijk/besmettelijke-mensen">
                   <a
-                    onClick={blur}
                     className={getClassName('/landelijk/besmettelijke-mensen')}
                   >
                     <HeadingWithIcon
                       icon={<Ziektegolf />}
                       title={siteText.besmettelijke_personen.titel_sidebar}
                     />
-                    <span>
+                    <span className="metric-wrapper">
                       <InfectiousPeopleMetric
                         data={
                           data.infectious_people_last_known_average?.last_value
@@ -179,10 +196,7 @@ function NationalLayout(props: NationalLayoutProps) {
 
               <li>
                 <Link href="/landelijk/reproductiegetal">
-                  <a
-                    onClick={blur}
-                    className={getClassName('/landelijk/reproductiegetal')}
-                  >
+                  <a className={getClassName('/landelijk/reproductiegetal')}>
                     <HeadingWithIcon
                       icon={<ReproIcon />}
                       title={siteText.reproductiegetal.titel_sidebar}
@@ -209,18 +223,13 @@ function NationalLayout(props: NationalLayoutProps) {
             <ul>
               <li>
                 <Link href="/landelijk/ziekenhuis-opnames">
-                  <a
-                    onClick={blur}
-                    className={getClassName('/landelijk/ziekenhuis-opnames')}
-                  >
+                  <a className={getClassName('/landelijk/ziekenhuis-opnames')}>
                     <HeadingWithIcon
                       icon={<Ziekenhuis />}
                       title={siteText.ziekenhuisopnames_per_dag.titel_sidebar}
                     />
                     <span className="metric-wrapper">
-                      <IntakeHospitalMetric
-                        data={data.intake_hospital_ma.last_value}
-                      />
+                      <IntakeHospitalMetric data={data} />
                       <IntakeHospitalBarScale
                         data={data.intake_hospital_ma}
                         showAxis={false}
@@ -234,7 +243,6 @@ function NationalLayout(props: NationalLayoutProps) {
               <li>
                 <Link href="/landelijk/intensive-care-opnames">
                   <a
-                    onClick={blur}
                     className={getClassName(
                       '/landelijk/intensive-care-opnames'
                     )}
@@ -244,9 +252,7 @@ function NationalLayout(props: NationalLayoutProps) {
                       title={siteText.ic_opnames_per_dag.titel_sidebar}
                     />
                     <span className="metric-wrapper">
-                      <IntakeIntensiveCareMetric
-                        data={data.intake_intensivecare_ma.last_value}
-                      />
+                      <IntakeIntensiveCareMetric data={data} />
                       <IntakeIntensiveCareBarscale
                         data={data.intake_intensivecare_ma}
                         showAxis={false}
@@ -263,17 +269,14 @@ function NationalLayout(props: NationalLayoutProps) {
             <ul>
               <li>
                 <Link href="/landelijk/verpleeghuiszorg">
-                  <a
-                    onClick={blur}
-                    className={getClassName('/landelijk/verpleeghuiszorg')}
-                  >
+                  <a className={getClassName('/landelijk/verpleeghuiszorg')}>
                     <HeadingWithIcon
                       icon={<Verpleeghuiszorg />}
                       title={
                         siteText.verpleeghuis_besmette_locaties.titel_sidebar
                       }
                     />
-                    <span>
+                    <span className="metric-wrapper">
                       <NursingHomeInfectedPeopleMetric
                         data={data.nursing_home.last_value}
                       />
@@ -289,7 +292,6 @@ function NationalLayout(props: NationalLayoutProps) {
               <li>
                 <Link href="/landelijk/verdenkingen-huisartsen">
                   <a
-                    onClick={blur}
                     className={getClassName(
                       '/landelijk/verdenkingen-huisartsen'
                     )}
@@ -298,7 +300,7 @@ function NationalLayout(props: NationalLayoutProps) {
                       icon={<Arts />}
                       title={siteText.verdenkingen_huisartsen.titel_sidebar}
                     />
-                    <span>
+                    <span className="metric-wrapper">
                       <SuspectedPatientsMetric
                         data={data.verdenkingen_huisartsen.last_value}
                       />
@@ -309,15 +311,12 @@ function NationalLayout(props: NationalLayoutProps) {
 
               <li>
                 <Link href="/landelijk/rioolwater">
-                  <a
-                    onClick={blur}
-                    className={getClassName('/landelijk/rioolwater')}
-                  >
+                  <a className={getClassName('/landelijk/rioolwater')}>
                     <HeadingWithIcon
                       icon={<RioolwaterMonitoring />}
                       title={siteText.rioolwater_metingen.titel_sidebar}
                     />
-                    <span>
+                    <span className="metric-wrapper">
                       <SewerWaterMetric data={data.sewer} />
                     </span>
                   </a>
@@ -328,15 +327,12 @@ function NationalLayout(props: NationalLayoutProps) {
             <ul>
               <li>
                 <Link href="/landelijk/gedrag">
-                  <a
-                    onClick={blur}
-                    className={getClassName('/landelijk/gedrag')}
-                  >
+                  <a className={getClassName('/landelijk/gedrag')}>
                     <HeadingWithIcon
                       icon={<Gedrag />}
                       title={siteText.nl_gedrag.sidebar.titel}
                     />
-                    <span>
+                    <span className="metric-wrapper">
                       <BehaviorMetric data={data.behavior} />
                     </span>
                   </a>
@@ -348,8 +344,8 @@ function NationalLayout(props: NationalLayoutProps) {
 
         <section className="national-content">{children}</section>
 
-        <Link href="/landelijk">
-          <a className="back-button back-button-footer" onClick={openMenu}>
+        <Link href={menuOpenUrl}>
+          <a className="back-button back-button-footer">
             <Arrow />
             {router.pathname === '/'
               ? siteText.nav.terug_naar_alle_cijfers_homepage

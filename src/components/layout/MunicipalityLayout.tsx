@@ -17,7 +17,6 @@ import { IMunicipalityData } from '~/static-props/municipality-data';
 import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMunicipalityCode';
 import { getSewerWaterBarScaleData } from '~/utils/sewer-water/municipality-sewer-water.util';
 import { useMediaQuery } from '~/utils/useMediaQuery';
-import { useMenuState } from './useMenuState';
 
 interface IMunicipality {
   name: string;
@@ -49,7 +48,7 @@ export function getMunicipalityLayout() {
   };
 }
 
-/*
+/**
  * MunicipalityLayout is a composition of persistent layouts.
  *
  * ## States
@@ -77,10 +76,11 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
   const isMainRoute =
     router.route === '/gemeente' || router.route === `/gemeente/[code]`;
 
-  const { isMenuOpen, openMenu } = useMenuState(isMainRoute);
-
-  // remove focus after navigation
-  const blur = (evt: any) => evt.currentTarget.blur();
+  const isMenuOpen = router.query.menu === '1';
+  const menuOpenUrl = {
+    pathname: router.pathname,
+    query: { ...router.query, menu: '1' },
+  };
 
   function getClassName(path: string) {
     return router.pathname === path
@@ -100,9 +100,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
     | { name: string; code: string; id: number }
     | undefined = getSafetyRegionForMunicipalityCode(code as string);
 
-  const sewerWaterBarScaleData = data
-    ? getSewerWaterBarScaleData(data)
-    : undefined;
+  const sewerWaterBarScaleData = data && getSewerWaterBarScaleData(data);
 
   return (
     <>
@@ -128,8 +126,8 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
             : 'has-menu-closed'
         }`}
       >
-        <Link href={`/gemeente/${code}`}>
-          <a className="back-button" onClick={openMenu}>
+        <Link href={menuOpenUrl}>
+          <a className="back-button">
             <Arrow />
             {siteText.nav.terug_naar_alle_cijfers}
           </a>
@@ -142,7 +140,11 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
           />
 
           {showMetricLinks && (
-            <nav aria-label="metric navigation">
+            <nav
+              /** re-mount when route changes in order to blur anchors */
+              key={router.asPath}
+              aria-label="metric navigation"
+            >
               <div className="region-names">
                 <h2>{municipalityName}</h2>
                 {safetyRegion && (
@@ -151,64 +153,62 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                     <Link
                       href={`/veiligheidsregio/${safetyRegion.code}/positief-geteste-mensen`}
                     >
-                      <a onClick={blur}>{safetyRegion.name}</a>
+                      <a>{safetyRegion.name}</a>
                     </Link>
                   </p>
                 )}
               </div>
-              <h2>{siteText.gemeente_layout.headings.besmettingen}</h2>
-              <ul>
-                <li>
-                  <Link href={`/gemeente/${code}/positief-geteste-mensen`}>
-                    <a
-                      onClick={blur}
-                      className={getClassName(
-                        `/gemeente/[code]/positief-geteste-mensen`
-                      )}
-                    >
-                      <HeadingWithIcon
-                        icon={<GetestIcon />}
-                        title={
-                          siteText.gemeente_positief_geteste_personen
-                            .titel_sidebar
-                        }
-                      />
-                      <span>
-                        <PositivelyTestedPeopleMetric
-                          data={data?.positive_tested_people.last_value}
-                        />
-                      </span>
-                    </a>
-                  </Link>
-                </li>
-              </ul>
+              {data && (
+                <>
+                  <h2>{siteText.gemeente_layout.headings.besmettingen}</h2>
+                  <ul>
+                    <li>
+                      <Link href={`/gemeente/${code}/positief-geteste-mensen`}>
+                        <a
+                          className={getClassName(
+                            `/gemeente/[code]/positief-geteste-mensen`
+                          )}
+                        >
+                          <HeadingWithIcon
+                            icon={<GetestIcon />}
+                            title={
+                              siteText.gemeente_positief_geteste_personen
+                                .titel_sidebar
+                            }
+                          />
+                          <span className="metric-wrapper">
+                            <PositivelyTestedPeopleMetric data={data} />
+                          </span>
+                        </a>
+                      </Link>
+                    </li>
+                  </ul>
 
-              <h2>{siteText.gemeente_layout.headings.ziekenhuizen}</h2>
-              <ul>
-                <li>
-                  <Link href={`/gemeente/${code}/ziekenhuis-opnames`}>
-                    <a
-                      onClick={blur}
-                      className={getClassName(
-                        `/gemeente/[code]/ziekenhuis-opnames`
-                      )}
-                    >
-                      <HeadingWithIcon
-                        icon={<Ziekenhuis />}
-                        title={
-                          siteText.gemeente_ziekenhuisopnames_per_dag
-                            .titel_sidebar
-                        }
-                      />
-                      <span>
-                        <IntakeHospitalMetric
-                          data={data?.hospital_admissions.last_value}
-                        />
-                      </span>
-                    </a>
-                  </Link>
-                </li>
-              </ul>
+                  <h2>{siteText.gemeente_layout.headings.ziekenhuizen}</h2>
+                  <ul>
+                    <li>
+                      <Link href={`/gemeente/${code}/ziekenhuis-opnames`}>
+                        <a
+                          className={getClassName(
+                            `/gemeente/[code]/ziekenhuis-opnames`
+                          )}
+                        >
+                          <HeadingWithIcon
+                            icon={<Ziekenhuis />}
+                            title={
+                              siteText.gemeente_ziekenhuisopnames_per_dag
+                                .titel_sidebar
+                            }
+                          />
+                          <span className="metric-wrapper">
+                            <IntakeHospitalMetric data={data} />
+                          </span>
+                        </a>
+                      </Link>
+                    </li>
+                  </ul>
+                </>
+              )}
 
               <h2>{siteText.gemeente_layout.headings.vroege_signalen}</h2>
               <ul>
@@ -216,7 +216,6 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                   {sewerWaterBarScaleData ? (
                     <Link href={`/gemeente/${code}/rioolwater`}>
                       <a
-                        onClick={blur}
                         className={getClassName(`/gemeente/[code]/rioolwater`)}
                       >
                         <HeadingWithIcon
@@ -225,7 +224,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                             siteText.gemeente_rioolwater_metingen.titel_sidebar
                           }
                         />
-                        <span>
+                        <span className="metric-wrapper">
                           <SewerWaterMetric data={sewerWaterBarScaleData} />
                         </span>
                       </a>
@@ -251,8 +250,8 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
 
         <section className="municipality-content">{children}</section>
 
-        <Link href={`/gemeente/${code}`}>
-          <a className="back-button back-button-footer" onClick={openMenu}>
+        <Link href={menuOpenUrl}>
+          <a className="back-button back-button-footer">
             <Arrow />
             {siteText.nav.terug_naar_alle_cijfers}
           </a>

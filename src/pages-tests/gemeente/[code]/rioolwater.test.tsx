@@ -2,7 +2,7 @@ import React from 'react';
 import SewerWater from '~/pages/gemeente/[code]/rioolwater';
 import { loadFixture } from '~/test-utils/load-fixture';
 import { render } from '~/test-utils/render';
-import { testKpiValue } from '~/test-utils/test-kip-value';
+import { testKpiValue } from '~/test-utils/test-kpi-value';
 import { Municipal } from '~/types/data';
 import { formatNumber } from '~/utils/formatNumber';
 
@@ -69,7 +69,7 @@ describe('Municipal page: SewerWater', () => {
       dataCopy.sewer_per_installation.values = [firstInstallation];
     }
 
-    const { container } = render(
+    const { container: localContainer } = render(
       <SewerWater
         data={dataCopy}
         lastGenerated="test"
@@ -78,7 +78,7 @@ describe('Municipal page: SewerWater', () => {
     );
 
     testKpiValue(
-      container,
+      localContainer,
       'barscale_value',
       formatNumber(
         dataCopy.sewer_per_installation.values[0].last_value.rna_normalized

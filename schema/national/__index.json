@@ -7,6 +7,7 @@
     "proto_name",
     "name",
     "code",
+    "difference",
     "verdenkingen_huisartsen",
     "intake_hospital_ma",
     "infectious_people_count",
@@ -42,6 +43,9 @@
     "code": {
       "type": "string",
       "const": { "$data": "1/proto_name" }
+    },
+    "difference": {
+      "$ref": "__difference.json"
     },
     "verdenkingen_huisartsen": {
       "$ref": "verdenkingen_huisartsen.json"

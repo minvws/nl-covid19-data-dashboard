@@ -21,7 +21,6 @@ import { ISafetyRegionData } from '~/static-props/safetyregion-data';
 import { getSewerWaterBarScaleData } from '~/utils/sewer-water/safety-region-sewer-water.util';
 import { useMediaQuery } from '~/utils/useMediaQuery';
 import { NursingHomeInfectedPeopleMetric } from '../common/nursing-home-infected-people-metric';
-import { useMenuState } from './useMenuState';
 
 export function getSafetyRegionLayout() {
   return function (
@@ -43,7 +42,7 @@ type TSafetyRegion = {
   searchTerms?: string[];
 };
 
-/*
+/**
  * SafetyRegionLayout is a composition of persistent layouts.
  *
  * ## States
@@ -75,10 +74,11 @@ function SafetyRegionLayout(
 
   const showMetricLinks = router.route !== '/veiligheidsregio';
 
-  const { isMenuOpen, openMenu } = useMenuState(isMainRoute);
-
-  // remove focus after navigation
-  const blur = (evt: any) => evt.currentTarget.blur();
+  const isMenuOpen = router.query.menu === '1';
+  const menuUrl = {
+    pathname: router.pathname,
+    query: { ...router.query, menu: '1' },
+  };
 
   function getClassName(path: string) {
     return router.pathname === path
@@ -119,8 +119,8 @@ function SafetyRegionLayout(
             : 'has-menu-closed'
         }`}
       >
-        <Link href={`/veiligheidsregio/${code}`}>
-          <a className="back-button" onClick={openMenu}>
+        <Link href={menuUrl}>
+          <a className="back-button">
             <Arrow />
             {siteText.nav.terug_naar_alle_cijfers}
           </a>
@@ -133,7 +133,11 @@ function SafetyRegionLayout(
           />
 
           {showMetricLinks && (
-            <nav aria-label="metric navigation">
+            <nav
+              /** re-mount when route changes in order to blur anchors */
+              key={router.asPath}
+              aria-label="metric navigation"
+            >
               <h2>{safetyRegionName}</h2>
               <h2>{siteText.veiligheidsregio_layout.headings.besmettingen}</h2>
               <ul>
@@ -142,7 +146,6 @@ function SafetyRegionLayout(
                     href={`/veiligheidsregio/${code}/positief-geteste-mensen`}
                   >
                     <a
-                      onClick={blur}
                       className={getClassName(
                         `/veiligheidsregio/[code]/positief-geteste-mensen`
                       )}
@@ -155,9 +158,7 @@ function SafetyRegionLayout(
                         }
                       />
                       <span className="metric-wrapper">
-                        <PositivelyTestedPeopleMetric
-                          data={data.results_per_region.last_value}
-                        />
+                        <PositivelyTestedPeopleMetric data={data} />
                         <PositivelyTestedPeopleBarScale
                           data={data.results_per_region}
                           showAxis={false}
@@ -173,7 +174,6 @@ function SafetyRegionLayout(
                 <li>
                   <Link href={`/veiligheidsregio/${code}/ziekenhuis-opnames`}>
                     <a
-                      onClick={blur}
                       className={getClassName(
                         `/veiligheidsregio/[code]/ziekenhuis-opnames`
                       )}
@@ -185,8 +185,8 @@ function SafetyRegionLayout(
                             .titel_sidebar
                         }
                       />
-                      <span>
-                        <IntakeHospitalMetric data={data.results_per_region} />
+                      <span className="metric-wrapper">
+                        <IntakeHospitalMetric data={data} />
                       </span>
                     </a>
                   </Link>
@@ -199,7 +199,6 @@ function SafetyRegionLayout(
                 <li>
                   <Link href={`/veiligheidsregio/${code}/verpleeghuiszorg`}>
                     <a
-                      onClick={blur}
                       className={getClassName(
                         '/veiligheidsregio/[code]/verpleeghuiszorg'
                       )}
@@ -212,7 +211,7 @@ function SafetyRegionLayout(
                             .titel_sidebar
                         }
                       />
-                      <span>
+                      <span className="metric-wrapper">
                         <NursingHomeInfectedPeopleMetric
                           data={data.nursing_home.last_value}
                         />
@@ -230,7 +229,6 @@ function SafetyRegionLayout(
                 <li>
                   <Link href={`/veiligheidsregio/${code}/rioolwater`}>
                     <a
-                      onClick={blur}
                       className={getClassName(
                         `/veiligheidsregio/[code]/rioolwater`
                       )}
@@ -242,7 +240,7 @@ function SafetyRegionLayout(
                             .titel_sidebar
                         }
                       />
-                      <span>
+                      <span className="metric-wrapper">
                         <SewerWaterMetric
                           data={getSewerWaterBarScaleData(data)}
                         />
@@ -256,7 +254,6 @@ function SafetyRegionLayout(
                 <li>
                   <Link href={`/veiligheidsregio/${code}/gedrag`}>
                     <a
-                      onClick={blur}
                       className={getClassName(
                         '/veiligheidsregio/[code]/gedrag'
                       )}
@@ -265,7 +262,7 @@ function SafetyRegionLayout(
                         icon={<Gedrag />}
                         title={siteText.nl_gedrag.sidebar.titel}
                       />
-                      <span>
+                      <span className="metric-wrapper">
                         <BehaviorMetric data={data.behavior} />
                       </span>
                     </a>
@@ -278,8 +275,8 @@ function SafetyRegionLayout(
 
         <section className="safety-region-content">{children}</section>
 
-        <Link href={`/veiligheidsregio/${code}`}>
-          <a className="back-button back-button-footer" onClick={openMenu}>
+        <Link href={menuUrl}>
+          <a className="back-button back-button-footer">
             <Arrow />
             {siteText.nav.terug_naar_alle_cijfers}
           </a>

@@ -4,7 +4,7 @@ import path from 'path';
 import { FCWithLayout, getLayoutWithMetadata } from '~/components/layout';
 import { MaxWidth } from '~/components/maxWidth';
 import siteText, { TALLLanguages } from '~/locale/index';
-import { MDToHTMLString } from '~/utils/MDToHTMLString';
+import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
 import styles from './over.module.scss';
 
 interface StaticProps {
@@ -17,11 +17,7 @@ interface OverRisiconiveausProps {
 }
 
 export async function getStaticProps(): Promise<StaticProps> {
-  const text = (await import('../locale/index')).default;
-
-  text.over_risiconiveaus.toelichting = MDToHTMLString(
-    text.over_risiconiveaus.toelichting
-  );
+  const text = parseMarkdownInLocale((await import('../locale/index')).default);
 
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
   const fileContents = fs.readFileSync(filePath, 'utf8');

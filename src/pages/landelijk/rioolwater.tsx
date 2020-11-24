@@ -5,7 +5,7 @@ import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/use-safety-region-legenda-data';
+import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createSewerRegionalTooltip } from '~/components/choropleth/tooltips/region/create-sewer-regional-tooltip';
@@ -14,16 +14,18 @@ import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
-import getNlData, { INationalData } from '~/static-props/nl-data';
+import {
+  getNationalStaticProps,
+  NationalPageProps,
+} from '~/static-props/nl-data';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 
 const text = siteText.rioolwater_metingen;
 
-const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
+const SewerWater: FCWithLayout<NationalPageProps> = ({ data }) => {
   const sewerAverages = data.sewer;
   const router = useRouter();
-  const legendItems = useSafetyRegionLegendaData('sewer');
 
   return (
     <>
@@ -118,14 +120,10 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
           ],
           source: text.bron,
         }}
-        legend={
-          legendItems // this data value should probably not be optional
-            ? {
-                title: text.legenda_titel,
-                items: legendItems,
-              }
-            : undefined
-        }
+        legend={{
+          title: text.legenda_titel,
+          thresholds: regionThresholds.sewer,
+        }}
       >
         <SafetyRegionChoropleth
           metricName="sewer"
@@ -138,8 +136,8 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
   );
 };
 
-SewerWater.getLayout = getNationalLayout();
+SewerWater.getLayout = getNationalLayout;
 
-export const getStaticProps = getNlData();
+export const getStaticProps = getNationalStaticProps;
 
 export default SewerWater;

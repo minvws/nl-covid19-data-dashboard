@@ -3,11 +3,14 @@ import { color } from 'styled-system';
 import { isDefined } from 'ts-is-present';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
+import { DifferenceDecimal, DifferenceInteger } from '~/types/data';
+import { DifferenceIndicator } from '~/components-styled/difference-indicator';
 
 interface KpiValueProps {
   absolute?: number;
   percentage?: number;
   valueAnnotation?: string;
+  difference?: DifferenceDecimal | DifferenceInteger;
 }
 
 /**
@@ -36,19 +39,21 @@ export function KpiValue({
   absolute,
   percentage,
   valueAnnotation,
-  ...props
+  difference,
+  ...otherProps
 }: KpiValueProps) {
   return (
     <>
       {isDefined(percentage) ? (
-        <StyledValue color="data.primary" {...(props as any)}>
+        <StyledValue color="data.primary" {...otherProps}>
           {`${formatNumber(absolute)} (${formatPercentage(percentage)}%)`}
         </StyledValue>
       ) : (
-        <StyledValue color="data.primary" {...(props as any)}>
+        <StyledValue color="data.primary" {...otherProps}>
           {formatNumber(absolute)}
         </StyledValue>
       )}
+      {difference && <DifferenceIndicator value={difference} />}
       {valueAnnotation && <ValueAnnotation>{valueAnnotation}</ValueAnnotation>}
     </>
   );

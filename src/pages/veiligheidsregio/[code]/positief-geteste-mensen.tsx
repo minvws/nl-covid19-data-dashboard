@@ -11,8 +11,8 @@ import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { MultipleLineChartTile } from '~/components-styled/multiple-line-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
-import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/use-safety-region-legenda-data';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
+import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
 import { ContentHeader } from '~/components/contentHeader';
@@ -47,7 +47,6 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
   const ggdData = data.ggd.last_value;
   const ggdValues = data.ggd.values;
 
-  const legendItems = useSafetyRegionLegendaData('positive_tested_people');
   const municipalCodes = regionCodeToMunicipalCodeLookup[data.code];
   const selectedMunicipalCode = municipalCodes ? municipalCodes[0] : undefined;
 
@@ -104,6 +103,10 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
             absolute={Math.round(
               resultsPerRegion.last_value.total_reported_increase_per_region
             )}
+            difference={
+              data.difference
+                .results_per_region__total_reported_increase_per_region
+            }
           />
           <Text>{text.kpi_toelichting}</Text>
           <Box>
@@ -149,15 +152,10 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           source: text.bron,
         }}
         description={text.map_toelichting}
-        legend={
-          legendItems // this data value should probably not be optional
-            ? {
-                title:
-                  siteText.positief_geteste_personen.chloropleth_legenda.titel,
-                items: legendItems,
-              }
-            : undefined
-        }
+        legend={{
+          title: siteText.positief_geteste_personen.chloropleth_legenda.titel,
+          thresholds: regionThresholds.positive_tested_people,
+        }}
       >
         <MunicipalityChoropleth
           selected={selectedMunicipalCode}

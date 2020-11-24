@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "municipal_difference",
+  "type": "object",
+  "properties": {
+    "positive_tested_people__infected_daily_increase": {
+      "$ref": "#/definitions/diff_decimal"
+    },
+    "positive_tested_people__infected_daily_total": {
+      "$ref": "#/definitions/diff_integer"
+    },
+    "hospital_admissions__moving_average_hospital": {
+      "$ref": "#/definitions/diff_decimal"
+    },
+    "sewer__average": {
+      "$ref": "#/definitions/diff_decimal"
+    }
+  },
+  "required": [
+    "positive_tested_people__infected_daily_total",
+    "hospital_admissions__moving_average_hospital"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "diff_integer": {
+      "title": "difference_integer",
+      "type": "object",
+      "properties": {
+        "old_value": {
+          "type": "integer"
+        },
+        "difference": {
+          "type": "integer"
+        },
+        "old_date_of_report_unix": {
+          "type": "integer"
+        },
+        "new_date_of_report_unix": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "old_value",
+        "difference",
+        "old_date_of_report_unix",
+        "new_date_of_report_unix"
+      ],
+      "additionalProperties": false
+    },
+    "diff_decimal": {
+      "title": "difference_decimal",
+      "type": "object",
+      "properties": {
+        "old_value": {
+          "type": "number"
+        },
+        "difference": {
+          "type": "number"
+        },
+        "old_date_of_report_unix": {
+          "type": "integer"
+        },
+        "new_date_of_report_unix": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "old_value",
+        "difference",
+        "old_date_of_report_unix",
+        "new_date_of_report_unix"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

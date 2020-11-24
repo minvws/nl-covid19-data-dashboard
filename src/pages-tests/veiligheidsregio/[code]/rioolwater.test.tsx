@@ -2,7 +2,7 @@ import React from 'react';
 import SewerWater from '~/pages/veiligheidsregio/[code]/rioolwater';
 import { loadFixture } from '~/test-utils/load-fixture';
 import { render } from '~/test-utils/render';
-import { testKpiValue } from '~/test-utils/test-kip-value';
+import { testKpiValue } from '~/test-utils/test-kpi-value';
 import { Regionaal } from '~/types/data';
 import { formatNumber } from '~/utils/formatNumber';
 

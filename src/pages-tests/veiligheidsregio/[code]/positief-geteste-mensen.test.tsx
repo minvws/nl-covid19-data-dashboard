@@ -1,38 +1,29 @@
-import { ByRoleMatcher, Matcher } from '@testing-library/react';
+import { RenderResult } from '@testing-library/react';
 import React from 'react';
 import PositiefGetesteMensen from '~/pages/veiligheidsregio/[code]/positief-geteste-mensen';
 import { loadFixture } from '~/test-utils/load-fixture';
 import { render } from '~/test-utils/render';
-import { testKpiValue } from '~/test-utils/test-kip-value';
+import { testKpiValue } from '~/test-utils/test-kpi-value';
 import { Regionaal } from '~/types/data';
 import { formatNumber } from '~/utils/formatNumber';
 
 describe('Safety region page: PositiefGetesteMensen', () => {
   const data = loadFixture<Regionaal>('VR13.json');
-  let container: HTMLElement;
-  let getByText: (text: Matcher, options?: any) => HTMLElement;
-  let getAllByRole: (
-    text: ByRoleMatcher,
-    options?: any,
-    waitforoptions?: any
-  ) => HTMLElement[];
+  let renderResult: RenderResult;
 
   beforeEach(() => {
-    const renderResult = render(
+    renderResult = render(
       <PositiefGetesteMensen
         data={data}
         lastGenerated="test"
         safetyRegionName={'Test Region'}
       />
     );
-    container = renderResult.container;
-    getByText = renderResult.getByText;
-    getAllByRole = renderResult.getAllByRole;
   });
 
   it('should use total_reported_increase_per_region for Results per Region', () => {
     testKpiValue(
-      container,
+      renderResult.container,
       'total_reported_increase_per_region',
       formatNumber(
         data.results_per_region.last_value.total_reported_increase_per_region
@@ -41,7 +32,7 @@ describe('Safety region page: PositiefGetesteMensen', () => {
   });
 
   it('should show a signaalwaarde', () => {
-    getByText(/signaalwaarde/i);
+    renderResult.getByText(/signaalwaarde/i);
   });
 
   it("should show not show 'last week' option for GGD charts", () => {
@@ -54,9 +45,9 @@ describe('Safety region page: PositiefGetesteMensen', () => {
      * This test is rather brittle, but for now the only way to do this test as a
      * way of a regression check.
      */
-    const allRadios = getAllByRole('radio').filter(
-      (elm) => (elm as HTMLInputElement).value === 'week'
-    );
+    const allRadios = renderResult
+      .getAllByRole('radio')
+      .filter((elm) => (elm as HTMLInputElement).value === 'week');
 
     expect(allRadios.length).toBe(1);
   });

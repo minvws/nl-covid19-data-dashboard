@@ -2,7 +2,7 @@ import React from 'react';
 import IntakeIntensiveCare from '~/pages/landelijk/intensive-care-opnames';
 import { loadFixture } from '~/test-utils/load-fixture';
 import { render } from '~/test-utils/render';
-import { testKpiValue } from '~/test-utils/test-kip-value';
+import { testKpiValue } from '~/test-utils/test-kpi-value';
 import { National } from '~/types/data';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 

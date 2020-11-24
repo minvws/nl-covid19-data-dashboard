@@ -1,41 +1,32 @@
-import { ByRoleMatcher, Matcher } from '@testing-library/react';
+import { RenderResult } from '@testing-library/react';
 import React from 'react';
 import PositiefGetesteMensen from '~/pages/landelijk/positief-geteste-mensen';
 import { loadFixture } from '~/test-utils/load-fixture';
 import { render } from '~/test-utils/render';
-import { testKpiValue } from '~/test-utils/test-kip-value';
+import { testKpiValue } from '~/test-utils/test-kpi-value';
 import { National } from '~/types/data';
 import { formatNumber } from '~/utils/formatNumber';
 
 describe('National page: PositiefGetesteMensen', () => {
   const data = loadFixture<National>('NL.json');
-  let container: HTMLElement;
-  let getByText: (text: Matcher, options?: any) => HTMLElement;
-  let getAllByRole: (
-    text: ByRoleMatcher,
-    options?: any,
-    waitforoptions?: any
-  ) => HTMLElement[];
+  let renderResult: RenderResult;
 
   beforeEach(() => {
-    const renderResult = render(
+    renderResult = render(
       <PositiefGetesteMensen data={data} lastGenerated="test" />
     );
-    container = renderResult.container;
-    getByText = renderResult.getByText;
-    getAllByRole = renderResult.getAllByRole;
   });
 
   it('should use infected_daily_total for Results per Region', () => {
     testKpiValue(
-      container,
+      renderResult.container,
       'infected_daily_total',
       formatNumber(data.infected_people_total.last_value.infected_daily_total)
     );
   });
 
   it('should show a signaalwaarde', () => {
-    getByText(/signaalwaarde/i);
+    renderResult.getByText(/signaalwaarde/i);
   });
 
   it("should show not show 'last week' option for GGD charts", () => {
@@ -48,9 +39,9 @@ describe('National page: PositiefGetesteMensen', () => {
      * This test is rather brittle, but for now the only way to do this test as a
      * way of a regression check.
      */
-    const allRadios = getAllByRole('radio').filter(
-      (elm) => (elm as HTMLInputElement).value === 'week'
-    );
+    const allRadios = renderResult
+      .getAllByRole('radio')
+      .filter((elm) => (elm as HTMLInputElement).value === 'week');
 
     expect(allRadios.length).toBe(1);
   });
