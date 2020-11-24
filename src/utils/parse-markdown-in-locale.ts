@@ -24,7 +24,10 @@ export function parseMarkdownInLocale(text: TALLLanguages) {
   return textClone;
 }
 
-function replaceWithMarkdown(object: any, path: string) {
+function replaceWithMarkdown<T extends Record<string, unknown>>(
+  object: T | T[],
+  path: string
+) {
   if (Array.isArray(object)) {
     object.forEach((obj) => replaceWithMarkdown(obj, path));
     return;
@@ -32,11 +35,14 @@ function replaceWithMarkdown(object: any, path: string) {
 
   if (path.includes('[].')) {
     const [key, ...paths] = path.split('[].');
-    replaceWithMarkdown(get(object, key), paths.join('[].'));
+    replaceWithMarkdown(
+      get(object, key) as Record<string, unknown>,
+      paths.join('[].')
+    );
     return;
   }
 
-  const value = get(object, path);
+  const value = get(object, path) as string | undefined;
 
   if (value) {
     set(object, path, MDToHTMLString(value));

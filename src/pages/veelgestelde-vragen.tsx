@@ -61,7 +61,7 @@ const Verantwoording: FCWithLayout<VeelgesteldeVragenProps> = (props) => {
                       dangerouslySetInnerHTML={{
                         __html: item.antwoord,
                       }}
-                    ></div>
+                    />
                   </Collapsable>
                 );
               })}
