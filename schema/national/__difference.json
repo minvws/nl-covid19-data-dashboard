@@ -40,7 +40,7 @@
       "$ref": "#/definitions/diff_integer"
     },
     "sewer__average": {
-      "$ref": "#/definitions/diff_integer"
+      "$ref": "#/definitions/diff_decimal"
     },
     "nursing_home__newly_infected_people": {
       "$ref": "#/definitions/diff_integer"

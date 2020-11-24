@@ -173,10 +173,8 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                             .titel_sidebar
                         }
                       />
-                      <span>
-                        <PositivelyTestedPeopleMetric
-                          data={data?.positive_tested_people.last_value}
-                        />
+                      <span className="metric-wrapper">
+                        <PositivelyTestedPeopleMetric data={data} />
                       </span>
                     </a>
                   </Link>
@@ -200,10 +198,8 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                             .titel_sidebar
                         }
                       />
-                      <span>
-                        <IntakeHospitalMetric
-                          data={data?.hospital_admissions.last_value}
-                        />
+                      <span className="metric-wrapper">
+                        <IntakeHospitalMetric data={data} />
                       </span>
                     </a>
                   </Link>
@@ -225,7 +221,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                             siteText.gemeente_rioolwater_metingen.titel_sidebar
                           }
                         />
-                        <span>
+                        <span className="metric-wrapper">
                           <SewerWaterMetric data={sewerWaterBarScaleData} />
                         </span>
                       </a>

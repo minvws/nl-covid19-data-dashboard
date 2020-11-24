@@ -149,7 +149,7 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
   );
 };
 
-Home.getLayout = getNationalLayout();
+Home.getLayout = getNationalLayout;
 
 /**
  * Calculate the counts of regions with a certain escalation level

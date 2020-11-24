@@ -1,6 +1,9 @@
 import { ValueAnnotation } from '~/components-styled/value-annotation';
+import { DifferenceDecimal, DifferenceInteger } from '~/types/data';
 import { Box } from './base';
-import { Heading, Text } from './typography';
+import { DifferenceIndicator } from './difference-indicator';
+import { Heading, InlineText } from './typography';
+import { isDefined } from 'ts-is-present';
 
 type IProps = {
   title: string;
@@ -8,10 +11,18 @@ type IProps = {
   percentage?: string;
   description?: string;
   valueAnnotation?: string;
+  difference?: DifferenceDecimal | DifferenceInteger;
 };
 
 export function MetricKPI(props: IProps) {
-  const { absolute, percentage, title, description, valueAnnotation } = props;
+  const {
+    absolute,
+    percentage,
+    title,
+    description,
+    valueAnnotation,
+    difference,
+  } = props;
 
   return (
     <Box width="100%" minHeight="4rem">
@@ -24,31 +35,38 @@ export function MetricKPI(props: IProps) {
       >
         {title}
       </Heading>
-      <Box display="flex" alignItems="center">
-        <Text display="inline-block" fontSize={3} fontWeight="bold" margin="0">
-          {absolute}
-        </Text>
-        {percentage !== undefined && (
-          <Text
-            display="inline-block"
-            fontSize={3}
-            fontWeight="bold"
-            margin="0"
-            marginLeft={1}
-          >
-            ({percentage}%)
-          </Text>
+      <Box display="flex" alignItems="center" justifyContent="flex-start">
+        {isDefined(absolute) && (
+          <InlineText fontSize={3} fontWeight="bold" margin="0" marginRight={1}>
+            {absolute}
+          </InlineText>
         )}
-        <Text
-          display="inline-block"
-          margin="0"
-          marginLeft={3}
-          color="annotation"
-          fontSize={1}
-        >
-          {description}
-        </Text>
+
+        {isDefined(percentage) && (
+          <InlineText fontSize={3} fontWeight="bold" margin="0" marginRight={1}>
+            ({percentage}%)
+          </InlineText>
+        )}
+
+        {isDefined(difference) && (
+          <Box as="span" fontSize={3} display="flex" alignItems="center">
+            <DifferenceIndicator value={difference} isContextSidebar={true} />
+          </Box>
+        )}
+
+        {isDefined(description) && (
+          <InlineText
+            display="inline-block"
+            margin="0"
+            color="annotation"
+            fontSize={1}
+            marginLeft={2}
+          >
+            {description}
+          </InlineText>
+        )}
       </Box>
+
       {valueAnnotation && <ValueAnnotation>{valueAnnotation}</ValueAnnotation>}
     </Box>
   );

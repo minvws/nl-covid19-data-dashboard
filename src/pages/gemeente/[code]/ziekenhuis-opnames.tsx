@@ -72,6 +72,9 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
         >
           <KpiValue
             absolute={hospitalAdmissions.last_value.moving_average_hospital}
+            difference={
+              data.difference.hospital_admissions__moving_average_hospital
+            }
           />
         </KpiTile>
       </TwoKpiSection>
@@ -84,15 +87,13 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
           metadata={{ source: text.bron }}
         >
           {(timeframe) => (
-            <>
-              <LineChart
-                timeframe={timeframe}
-                values={hospitalAdmissions.values.map((value: any) => ({
-                  value: value.moving_average_hospital,
-                  date: value.date_of_report_unix,
-                }))}
-              />
-            </>
+            <LineChart
+              timeframe={timeframe}
+              values={hospitalAdmissions.values.map((value) => ({
+                value: value.moving_average_hospital,
+                date: value.date_of_report_unix,
+              }))}
+            />
           )}
         </ChartTileWithTimeframe>
       )}
