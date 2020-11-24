@@ -9,7 +9,7 @@
     "title": "Laatst bijgewerkt"
   },
   "notificatie": {
-    "titel": "Langzamere afname COVID-19 meldingen ",
+    "titel": "Aantal COVID-19 meldingen stagneert",
     "bericht": "Afgelopen week (18 november-24 november) waren er bijna net zo veel nieuwe COVID-19 meldingen dan de week daarvoor. Het aantal mensen dat vanwege COVID-19 in het ziekenhuis of op de IC werden opgenomen daalde wel licht. De druk op de zorg vanwege COVID-19 blijft hoog. Het reproductiegetal van 6 november is gestegen ten opzichte van een week eerder en is nu 1,02 (ondergrens: 0,99 en bovengrens: 1,05). Dat betekent dat 100 mensen die COVID-19 hebben 102 andere mensen besmetten. \n\nHet risiconiveau per regio kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2), ‘ernstig’ (niveau 3), ‘zeer ernstig’ (niveau 4) zijn. Op dit moment zijn {{escalationLevel4}} regio’s ingeschaald op ‘zeer ernstig’, {{escalationLevel3}} op ‘ernstig’, {{escalationLevel2}} op ‘zorgelijk’ en {{escalationLevel1}} op ‘waakzaam.‘",
     "link": {
       "text": "Bekijk de toelichting van het RIVM",
