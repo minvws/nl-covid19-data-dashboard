@@ -101,7 +101,6 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
       )}
 
       <ChoroplethTile
-        showDataWarning
         title={text.veiligheidsregio_index.selecteer_titel}
         description={
           <>
