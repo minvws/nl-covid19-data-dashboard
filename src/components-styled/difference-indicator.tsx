@@ -94,15 +94,17 @@ function renderTileIndicator(value: DifferenceDecimal | DifferenceInteger) {
   if (difference < 0) {
     const splitText = text.afname.split(' ');
 
-    <Container>
-      <Span color="green">
-        <IconDown />
-      </Span>
-      <Span fontWeight="bold" mr="0.3em">
-        {splitText[0]}
-      </Span>
-      <Span>{`${splitText[1]} ${timespanText}`}</Span>
-    </Container>;
+    return (
+      <Container>
+        <Span color="green">
+          <IconDown />
+        </Span>
+        <Span fontWeight="bold" mr="0.3em">
+          {splitText[0]}
+        </Span>
+        <Span>{`${splitText[1]} ${timespanText}`}</Span>
+      </Container>
+    );
   }
 
   return (
