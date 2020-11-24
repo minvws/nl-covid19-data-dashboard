@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import CoronaVirus from '~/assets/coronavirus.svg';
 import Locatie from '~/assets/locaties.svg';
-import Getest from '~/assets/test.svg';
+import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
@@ -44,7 +44,7 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
       <ContentHeader
         category={siteText.nationaal_layout.headings.kwetsbare_groepen}
         title={positiveTestedPeopleText.titel}
-        icon={<Getest />}
+        icon={<Verpleeghuiszorg />}
         subtitle={positiveTestedPeopleText.pagina_toelichting}
         metadata={{
           datumsText: positiveTestedPeopleText.datums,
@@ -142,10 +142,7 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
           metricName="nursing_home"
           metricValueName="infected_locations_percentage"
           tooltipContent={createInfectedLocationsRegionalTooltip(router)}
-          onSelect={createSelectRegionHandler(
-            router,
-            'verpleeghuis-besmette-locaties'
-          )}
+          onSelect={createSelectRegionHandler(router, 'verpleeghuiszorg')}
         />
       </ChoroplethTile>
 
