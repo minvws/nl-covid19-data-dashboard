@@ -7,7 +7,7 @@ import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
-import { useMunicipalLegendaData } from '~/components/choropleth/legenda/hooks/use-municipal-legenda-data';
+import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
@@ -27,8 +27,6 @@ const text = siteText.gemeente_positief_geteste_personen;
 const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
   const { data, municipalityName } = props;
   const router = useRouter();
-
-  const legendItems = useMunicipalLegendaData('positive_tested_people');
   const positivelyTestedPeople = data.positive_tested_people;
 
   return (
@@ -108,12 +106,10 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
           municipality: municipalityName,
         })}
         description={text.map_toelichting}
-        legend={
-          legendItems && {
-            items: legendItems,
-            title: siteText.positief_geteste_personen.chloropleth_legenda.titel,
-          }
-        }
+        legend={{
+          thresholds: municipalThresholds.positive_tested_people,
+          title: siteText.positief_geteste_personen.chloropleth_legenda.titel,
+        }}
         metadata={{
           date: positivelyTestedPeople.last_value.date_of_report_unix,
           source: text.bronnen.rivm,

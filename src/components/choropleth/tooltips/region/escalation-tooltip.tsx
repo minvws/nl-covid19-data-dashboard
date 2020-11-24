@@ -8,7 +8,7 @@ import { formatDateFromSeconds } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import styles from '../tooltip.module.scss';
 
-const escalationThresholds = regionThresholds.escalation_levels.thresholds;
+const escalationThresholds = regionThresholds.escalation_levels;
 
 export const escalationTooltip = (router: NextRouter) => {
   return (context: any): ReactNode => {

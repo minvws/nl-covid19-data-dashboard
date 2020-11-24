@@ -1,7 +1,5 @@
-import {
-  ChoroplethLegenda,
-  LegendaItem,
-} from '~/components-styled/choropleth-legenda';
+import { ChoroplethLegenda } from '~/components-styled/choropleth-legenda';
+import { ChoroplethThresholdsValue } from '~/components/choropleth/shared';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { Box } from './base';
 import {
@@ -29,7 +27,7 @@ interface ChoroplethTileProps extends DataProps {
   children: React.ReactNode;
   legend?: {
     title: string;
-    items: LegendaItem[];
+    thresholds: ChoroplethThresholdsValue[];
   };
   metadata?: MetadataProps;
   showDataWarning?: boolean;
@@ -46,7 +44,7 @@ export function ChoroplethTile<T>({
 }: ChoroplethTileProps) {
   const breakpoints = useBreakpoints();
   const legendaComponent = legend && (
-    <ChoroplethLegenda items={legend.items} title={legend.title} />
+    <ChoroplethLegenda thresholds={legend.thresholds} title={legend.title} />
   );
 
   return (
