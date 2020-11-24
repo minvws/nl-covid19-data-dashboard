@@ -109,7 +109,7 @@
       "description": "National (estimated) number of patients who contact the general practitioner for the first time due to COVID-19 like symptoms."
     },
     "normalized_kpi_titel": "Number of patients with symptoms that could indicate COVID-19 per 100.000 inhabitants",
-    "normalized_kpi_toelichting": "Number of patients who contact the general practitioner for the first time due to COVID-19 like symptoms, per week.",
+    "normalized_kpi_toelichting": "Number of patients, per 100.000 inhabitants, who contact the general practitioner for the first time due to COVID-19 like symptoms, per week.",
     "titel_kpi": "Patients who contact the general practitioner for the first time due to COVID-19 symptoms"
   },
   "ziekenhuisopnames_per_dag": {
