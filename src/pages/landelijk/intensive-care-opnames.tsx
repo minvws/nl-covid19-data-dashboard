@@ -42,6 +42,7 @@ const IntakeIntensiveCare: FCWithLayout<NationalPageProps> = (props) => {
           dataSourceA: text.bronnen.nice,
           dataSourceB: text.bronnen.lnaz,
         }}
+        reference={text.reference}
       />
 
       <TwoKpiSection>

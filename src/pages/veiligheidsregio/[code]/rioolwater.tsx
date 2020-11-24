@@ -81,6 +81,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
           dateOfInsertionUnix: sewerAverages.last_value.date_of_insertion_unix,
           dataSource: text.bron,
         }}
+        reference={text.reference}
       />
 
       {barScaleData && barScaleData.value !== undefined && (

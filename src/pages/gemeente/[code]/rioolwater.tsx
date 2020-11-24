@@ -86,7 +86,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
         title={replaceVariablesInText(text.titel, {
           municipality: municipalityName,
         })}
-        icon={RioolwaterMonitoring}
+        icon={<RioolwaterMonitoring />}
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
@@ -95,6 +95,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
           dateOfInsertionUnix: sewerAverages.last_value.date_of_insertion_unix,
           dataSource: text.bron,
         }}
+        reference={text.reference}
       />
 
       <TwoKpiSection>

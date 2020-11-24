@@ -13,7 +13,7 @@ import { MetadataHack } from './metadata_sourcesHack';
  * reasons.
  */
 export function ContentHeader_sourcesHack(props: IContentHeaderProps) {
-  const { category, icon, title, subtitle, metadata, id } = props;
+  const { category, icon, title, subtitle, metadata, id, reference } = props;
 
   const layoutClasses = [styles.contentHeader];
 
@@ -31,7 +31,9 @@ export function ContentHeader_sourcesHack(props: IContentHeaderProps) {
       {!icon && <Heading level={2}>{title}</Heading>}
 
       <div className={styles.text}>
-        <p>{subtitle}</p>
+        <p>
+          {subtitle} <a href={reference.href}>{reference.text}</a>
+        </p>
 
         <div>
           <MetadataHack {...metadata} />
@@ -56,6 +58,10 @@ interface IContentHeaderProps {
       href: string;
       text: string;
     };
+  };
+  reference: {
+    href: string;
+    text: string;
   };
   category?: string;
   icon?: JSX.Element;

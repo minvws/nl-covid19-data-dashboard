@@ -15,7 +15,7 @@ import { Metadata } from './metadata_weekRangeHack';
 export function ContentHeader_weekRangeHack(
   props: ContentHeader_weekRangeHackProps
 ) {
-  const { category, icon, title, subtitle, metadata, id } = props;
+  const { category, icon, title, subtitle, metadata, id, reference } = props;
 
   const layoutClasses = [styles.contentHeader];
 
@@ -33,7 +33,9 @@ export function ContentHeader_weekRangeHack(
       {!icon && <Heading level={2}>{title}</Heading>}
 
       <div className={styles.text}>
-        <p>{subtitle}</p>
+        <p>
+          {subtitle} <a href={reference.href}>{reference.text}</a>
+        </p>
 
         <div>
           <Metadata {...metadata} />
@@ -55,6 +57,10 @@ interface ContentHeader_weekRangeHackProps {
       href: string;
       text: string;
     };
+  };
+  reference: {
+    href: string;
+    text: string;
   };
   category?: string;
   icon?: JSX.Element;

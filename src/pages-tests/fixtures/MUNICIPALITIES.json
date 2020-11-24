@@ -1,0 +1,24 @@
+{
+	"last_generated": "1605606396",
+	"proto_name": "MUNICIPALITIES",
+	"name": "MUNICIPALITIES",
+	"code": "MUNICIPALITIES",
+	"positive_tested_people": [
+		{
+			"date_of_report_unix": 1605052800,
+			"gmcode": "GM0363",
+			"positive_tested_people": 37,
+			"total_positive_tested_people": 329,
+			"date_of_insertion_unix": 1605178262
+		}
+	],
+	"hospital_admissions": [
+		{
+			"date_of_report_unix": 1605052800,
+			"gmcode": "GM0363",
+			"hospital_admissions": 1.7,
+			"date_of_insertion_unix": 1605169739
+		}
+	],
+	"deceased": []
+}

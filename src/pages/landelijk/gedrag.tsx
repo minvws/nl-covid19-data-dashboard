@@ -32,7 +32,7 @@ const BehaviorPage: FCWithLayout<NationalPageProps> = (props) => {
       <ContentHeader_weekRangeHack
         category={siteText.nationaal_layout.headings.gedrag}
         title={text.pagina.titel}
-        icon={Gedrag}
+        icon={<Gedrag />}
         subtitle={text.pagina.toelichting}
         metadata={{
           datumsText: text.datums,
@@ -41,6 +41,7 @@ const BehaviorPage: FCWithLayout<NationalPageProps> = (props) => {
           dateOfInsertionUnix: behaviorData.last_value.date_of_insertion_unix,
           dataSource: text.bron,
         }}
+        reference={text.reference}
       />
 
       <TwoKpiSection>

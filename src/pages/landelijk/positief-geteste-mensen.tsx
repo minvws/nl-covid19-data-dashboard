@@ -15,8 +15,8 @@ import { MultipleLineChartTile } from '~/components-styled/multiple-line-chart-t
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
 import { BarChart } from '~/components/charts/index';
-import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/use-safety-region-legenda-data';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
+import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
@@ -47,8 +47,6 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
   );
   const router = useRouter();
 
-  const legendItems = useSafetyRegionLegendaData('positive_tested_people');
-
   const dataInfectedDelta = data.infected_people_delta_normalized;
   const dataIntakeAge = data.intake_share_age_groups;
   const dataGgdLastValue = data.ggd.last_value;
@@ -78,6 +76,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
           dateInsertedUnix: dataInfectedDelta.last_value.date_of_insertion_unix,
           dataSource: text.bron,
         }}
+        reference={text.reference}
       />
 
       <TwoKpiSection>
@@ -147,14 +146,10 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
         }}
         description={text.map_toelichting}
         onChangeControls={setSelectedMap}
-        legend={
-          legendItems // this data value should probably not be optional
-            ? {
-                title: text.chloropleth_legenda.titel,
-                items: legendItems,
-              }
-            : undefined
-        }
+        legend={{
+          title: text.chloropleth_legenda.titel,
+          thresholds: regionThresholds.positive_tested_people,
+        }}
       >
         {/**
          * It's probably a good idea to abstract this even further, so that
@@ -232,6 +227,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
           dateOfInsertionUnix: dataGgdLastValue.date_of_insertion_unix,
           dataSource: ggdText.bron,
         }}
+        reference={text.reference}
       />
 
       <TwoKpiSection>
@@ -316,6 +312,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
       />
 
       <MultipleLineChartTile
+        timeframeOptions={['all', '5weeks']}
         title={ggdText.linechart_totaltests_titel}
         description={ggdText.linechart_totaltests_toelichting}
         values={[

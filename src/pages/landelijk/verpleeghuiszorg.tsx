@@ -1,14 +1,14 @@
 import { useRouter } from 'next/router';
 import CoronaVirus from '~/assets/coronavirus.svg';
 import Locatie from '~/assets/locaties.svg';
-import Getest from '~/assets/test.svg';
+import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
-import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/use-safety-region-legenda-data';
+import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createInfectedLocationsRegionalTooltip } from '~/components/choropleth/tooltips/region/create-infected-locations-regional-tooltip';
@@ -29,10 +29,6 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
   const nursinghomeData = data.nursing_home;
 
   const router = useRouter();
-  const legendItems = useSafetyRegionLegendaData(
-    'nursing_home',
-    'infected_locations_percentage'
-  );
 
   return (
     <>
@@ -44,7 +40,7 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
       <ContentHeader
         category={siteText.nationaal_layout.headings.kwetsbare_groepen}
         title={positiveTestedPeopleText.titel}
-        icon={<Getest />}
+        icon={<Verpleeghuiszorg />}
         subtitle={positiveTestedPeopleText.pagina_toelichting}
         metadata={{
           datumsText: positiveTestedPeopleText.datums,
@@ -52,6 +48,7 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
           dateInsertedUnix: nursinghomeData.last_value.date_of_insertion_unix,
           dataSource: positiveTestedPeopleText.bron,
         }}
+        reference={positiveTestedPeopleText.reference}
       />
 
       <TwoKpiSection>
@@ -89,6 +86,7 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
           dateInsertedUnix: nursinghomeData.last_value.date_of_insertion_unix,
           dataSource: infectedLocationsText.bron,
         }}
+        reference={infectedLocationsText.reference}
       />
 
       <TwoKpiSection>
@@ -129,21 +127,17 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
           date: nursinghomeData.last_value.date_of_report_unix,
           source: infectedLocationsText.bron,
         }}
-        legend={
-          legendItems && {
-            items: legendItems,
-            title: infectedLocationsText.chloropleth_legenda.titel,
-          }
-        }
+        legend={{
+          thresholds:
+            regionThresholds.nursing_home.infected_locations_percentage,
+          title: infectedLocationsText.chloropleth_legenda.titel,
+        }}
       >
         <SafetyRegionChoropleth
           metricName="nursing_home"
           metricValueName="infected_locations_percentage"
           tooltipContent={createInfectedLocationsRegionalTooltip(router)}
-          onSelect={createSelectRegionHandler(
-            router,
-            'verpleeghuis-besmette-locaties'
-          )}
+          onSelect={createSelectRegionHandler(router, 'verpleeghuiszorg')}
         />
       </ChoroplethTile>
 
@@ -166,6 +160,7 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
           dateInsertedUnix: nursinghomeData.last_value.date_of_insertion_unix,
           dataSource: locationDeaths.bron,
         }}
+        reference={locationDeaths.reference}
       />
 
       <TwoKpiSection>

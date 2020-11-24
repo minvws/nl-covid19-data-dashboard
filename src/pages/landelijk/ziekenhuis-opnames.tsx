@@ -7,8 +7,8 @@ import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/use-safety-region-legenda-data';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
+import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
@@ -28,14 +28,14 @@ import {
 const text = siteText.ziekenhuisopnames_per_dag;
 
 const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
-  const { data: state } = props;
+  const { data } = props;
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
     'municipal'
   );
   const router = useRouter();
-  const legendItems = useSafetyRegionLegendaData('hospital_admissions');
-  const dataIntake = state.intake_hospital_ma;
-  const dataBeds = state.hospital_beds_occupied;
+
+  const dataIntake = data.intake_hospital_ma;
+  const dataBeds = data.hospital_beds_occupied;
 
   return (
     <>
@@ -55,6 +55,7 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
           dataSourceA: text.bronnen.rivm,
           dataSourceB: text.bronnen.lnaz,
         }}
+        reference={text.reference}
       />
       <Spacer mb={4} />
 
@@ -111,12 +112,14 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
         title={text.map_titel}
         description={text.map_toelichting}
         onChangeControls={setSelectedMap}
-        legend={
-          legendItems && {
-            items: legendItems,
-            title: text.chloropleth_legenda.titel,
-          }
-        }
+        legend={{
+          thresholds: regionThresholds.hospital_admissions,
+          title: text.chloropleth_legenda.titel,
+        }}
+        metadata={{
+          date: dataIntake.last_value.date_of_report_unix,
+          source: text.bronnen.rivmSource,
+        }}
         showDataWarning
       >
         {selectedMap === 'municipal' && (
