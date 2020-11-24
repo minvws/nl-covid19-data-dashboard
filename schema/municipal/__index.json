@@ -9,7 +9,8 @@
     "name",
     "code",
     "hospital_admissions",
-    "positive_tested_people"
+    "positive_tested_people",
+    "difference"
   ],
   "properties": {
     "last_generated": {

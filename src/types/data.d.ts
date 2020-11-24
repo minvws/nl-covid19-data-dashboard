@@ -10,7 +10,7 @@ export interface Municipal {
   proto_name: string;
   name: string;
   code: string;
-  difference?: MunicipalDifference;
+  difference: MunicipalDifference;
   hospital_admissions: MunicipalHospitalAdmissions;
   positive_tested_people: MunicipalPositiveTestedPeople;
   sewer?: MunicipalSewer;
@@ -525,7 +525,7 @@ export interface Regionaal {
   proto_name: string;
   name: string;
   code: string;
-  difference?: RegionalDifference;
+  difference: RegionalDifference;
   sewer: RegionalSewer;
   sewer_per_installation: RegionalSewerPerInstallation;
   results_per_region: ResultsPerRegion;
