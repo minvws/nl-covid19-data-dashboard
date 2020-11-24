@@ -25,13 +25,14 @@ import getNlData, { INationalData } from '~/static-props/nl-data';
 const text = siteText.ziekenhuisopnames_per_dag;
 
 const IntakeHospital: FCWithLayout<INationalData> = (props) => {
-  const { data: state } = props;
+  const { data } = props;
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
     'municipal'
   );
   const router = useRouter();
-  const dataIntake = state.intake_hospital_ma;
-  const dataBeds = state.hospital_beds_occupied;
+
+  const dataIntake = data.intake_hospital_ma;
+  const dataBeds = data.hospital_beds_occupied;
 
   return (
     <>
@@ -111,6 +112,10 @@ const IntakeHospital: FCWithLayout<INationalData> = (props) => {
         legend={{
           thresholds: regionThresholds.hospital_admissions,
           title: text.chloropleth_legenda.titel,
+        }}
+        metadata={{
+          date: dataIntake.last_value.date_of_report_unix,
+          source: text.bronnen.rivmSource,
         }}
         showDataWarning
       >
