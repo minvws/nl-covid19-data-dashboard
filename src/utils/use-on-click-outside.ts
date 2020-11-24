@@ -1,23 +1,23 @@
-import { useEffect, useRef } from 'react';
+import { RefObject, useEffect, useRef } from 'react';
 
-export function useOnClickOutside<T extends HTMLElement>(
-  ref: React.RefObject<T>,
+export function useOnClickOutside<T extends RefObject<Element>>(
+  ref: T[],
   handler: (event: MouseEvent | TouchEvent) => void
 ) {
   const handlerRef = useRef(handler);
   handlerRef.current = handler;
 
   useEffect(() => {
-    function listener(event: MouseEvent | TouchEvent) {
-      // Do nothing if clicking ref's element or descendent elements
-      if (
-        !ref.current ||
-        (event.target !== null && ref.current.contains(event.target as Node))
-      ) {
-        return;
-      }
+    const refs = Array.isArray(ref) ? ref : [ref];
 
-      handlerRef.current(event);
+    function listener(event: MouseEvent | TouchEvent) {
+      const clickedInsideRef = refs.find((ref) =>
+        ref.current?.contains(event.target as Node)
+      );
+
+      if (!clickedInsideRef) {
+        handlerRef.current(event);
+      }
     }
 
     document.addEventListener('mousedown', listener);
