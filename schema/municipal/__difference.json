@@ -13,7 +13,7 @@
       "$ref": "#/definitions/diff_decimal"
     },
     "sewer__average": {
-      "$ref": "#/definitions/diff_integer"
+      "$ref": "#/definitions/diff_decimal"
     }
   },
   "required": [

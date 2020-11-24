@@ -27,7 +27,7 @@
           "type": "number"
         },
         "infected_daily_increase": {
-          "type": "number"
+          "type": "integer"
         },
         "date_of_insertion_unix": {
           "type": "integer"
