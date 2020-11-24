@@ -1,4 +1,3 @@
-import Warning from '~/assets/warning.svg';
 import fs from 'fs';
 import { useRouter } from 'next/router';
 import path from 'path';
@@ -64,7 +63,7 @@ const SafetyRegion: FCWithLayout<any> = (props) => {
       />
 
       {text.regionaal_index.belangrijk_bericht && (
-        <MessageTile icon={<Warning fill="black" />}>
+        <MessageTile>
           <div
             dangerouslySetInnerHTML={{
               __html: text.regionaal_index.belangrijk_bericht,

@@ -1,13 +1,13 @@
 import css from '@styled-system/css';
+import Warning from '~/assets/warning.svg';
 import { Box } from './base';
 import { Tile } from './layout';
 
 interface MessageTileProps {
   children: React.ReactNode;
-  icon: React.ReactNode;
 }
 
-export function MessageTile({ icon, children }: MessageTileProps) {
+export function MessageTile({ children }: MessageTileProps) {
   return (
     <Tile
       mb={4}
@@ -19,8 +19,8 @@ export function MessageTile({ icon, children }: MessageTileProps) {
       })}
     >
       <Box display="flex" alignItems="flex-start">
-        <Box mr={3} width={25} flexShrink={0}>
-          {icon}
+        <Box mr={3} width={38} flexShrink={0}>
+          <Warning width={38} height={38} fill="black" />
         </Box>
         <Box maxWidth={450} css={css({ p: { m: 0 } })}>
           {children}

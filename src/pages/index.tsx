@@ -1,4 +1,3 @@
-import Warning from '~/assets/warning.svg';
 import css from '@styled-system/css';
 import fs from 'fs';
 import { useRouter } from 'next/router';
@@ -98,7 +97,7 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
       </article>
 
       {text.regionaal_index.belangrijk_bericht && (
-        <MessageTile icon={<Warning fill="black" />}>
+        <MessageTile>
           <div
             dangerouslySetInnerHTML={{
               __html: text.regionaal_index.belangrijk_bericht,
@@ -108,6 +107,7 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
       )}
 
       <ChoroplethTile
+        showDataWarning
         title={text.veiligheidsregio_index.selecteer_titel}
         description={
           <>
