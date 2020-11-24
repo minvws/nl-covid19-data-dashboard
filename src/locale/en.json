@@ -9,7 +9,7 @@
     "title": "Last updated"
   },
   "notificatie": {
-    "titel": "Slower decrease in new COVID-19 infections",
+    "titel": "Number of confirmed cases stagnates",
     "bericht": "In the past week (18 November – 24 November) the number of newly tested COVID-19 positives was comparable to the week before. The number of hospital and IC admissions due to COVID-19 did decrease slightly in the past week. The pressure on the healthcare system remains high. The reproduction number of 6 November increased compared to the week before, and has a value of 1,02 (lower: 0,99 and upper: 1,05). This means that 100 COVID-19 positives infect 102 other persons.\n\nRisk level per region can be ‘caution’ (level 1), ‘concern’ (level 2), ‘serious’ (level 3) or ‘severe’ (level 4). At this moment the risk level of {{escalationLevel4}} regions is 'severe', for {{escalationLevel3}} it is ‘serious’, for {{escalationLevel2}} it is ‘concern’ and for {{escalationLevel1}} it is ‘caution’.",
     "link": {
       "text": "View the full message from the RIVM",
@@ -113,7 +113,7 @@
       "description": "National (estimated) number of patients who contact the general practitioner for the first time due to COVID-19 like symptoms."
     },
     "normalized_kpi_titel": "Number of patients with symptoms that could indicate COVID-19 per 100.000 inhabitants",
-    "normalized_kpi_toelichting": "Number of patients who contact the general practitioner for the first time due to COVID-19 like symptoms, per week.",
+    "normalized_kpi_toelichting": "Number of patients, per 100.000 inhabitants, who contact the general practitioner for the first time due to COVID-19 like symptoms, per week.",
     "titel_kpi": "Patients who contact the general practitioner for the first time due to COVID-19 symptoms",
     "reference": {
       "href": "",
