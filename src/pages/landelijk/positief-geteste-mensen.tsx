@@ -23,7 +23,6 @@ import { createSelectRegionHandler } from '~/components/choropleth/select-handle
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
 import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/create-positive-tested-people-regional-tooltip';
 import { ContentHeader } from '~/components/contentHeader';
-import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRangeHack';
 import { PositiveTestedPeopleBarScale } from '~/components/landelijk/positive-tested-people-barscale';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
@@ -218,17 +217,19 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         />
       </ChartTile>
 
-      <ContentHeader_weekRangeHack
+      <ContentHeader
         title={ggdText.titel}
         id="ggd"
         icon={<Afname />}
         subtitle={ggdText.toelichting}
         metadata={{
           datumsText: ggdText.datums,
-          weekStartUnix: ggdLastValue.week_start_unix,
-          weekEndUnix: ggdLastValue.week_end_unix,
+          dateInfo: {
+            weekStartUnix: ggdLastValue.week_start_unix,
+            weekEndUnix: ggdLastValue.week_end_unix,
+          },
           dateOfInsertionUnix: ggdLastValue.date_of_insertion_unix,
-          dataSource: ggdText.bronnen.rivm,
+          dataSources: [ggdText.bronnen.rivm],
         }}
         reference={text.reference}
       />
