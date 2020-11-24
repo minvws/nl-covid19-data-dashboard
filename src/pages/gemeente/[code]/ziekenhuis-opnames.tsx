@@ -89,7 +89,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
           {(timeframe) => (
             <LineChart
               timeframe={timeframe}
-              values={hospitalAdmissions.values.map((value: any) => ({
+              values={hospitalAdmissions.values.map((value) => ({
                 value: value.moving_average_hospital,
                 date: value.date_of_report_unix,
               }))}

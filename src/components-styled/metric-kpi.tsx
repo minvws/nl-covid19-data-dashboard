@@ -37,25 +37,13 @@ export function MetricKPI(props: IProps) {
       </Heading>
       <Box display="flex" alignItems="center" justifyContent="flex-start">
         {isDefined(absolute) && (
-          <InlineText
-            as="span"
-            fontSize={3}
-            fontWeight="bold"
-            margin="0"
-            marginRight={1}
-          >
+          <InlineText fontSize={3} fontWeight="bold" margin="0" marginRight={1}>
             {absolute}
           </InlineText>
         )}
 
         {isDefined(percentage) && (
-          <InlineText
-            as="span"
-            fontSize={3}
-            fontWeight="bold"
-            margin="0"
-            marginRight={1}
-          >
+          <InlineText fontSize={3} fontWeight="bold" margin="0" marginRight={1}>
             ({percentage}%)
           </InlineText>
         )}

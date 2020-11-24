@@ -13,8 +13,6 @@ export function PositiveTestedPeopleMetric({ data }: { data: National }) {
   const difference =
     data.difference.infected_people_total__infected_daily_total;
 
-  // if (data === undefined) return null;
-
   const description = replaceVariablesInText(text.dateOfReport, {
     dateOfReport: formatDateFromSeconds(
       lastValue.date_of_report_unix,
