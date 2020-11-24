@@ -15,7 +15,7 @@ export function MessageTile({ icon, children }: MessageTileProps) {
       mr={{ _: -4, sm: 0 }}
       css={css({
         borderLeft: '9px solid #FFd600',
-        backgroundColor: '#FFFCED',
+        backgroundColor: '#FFF4B9',
       })}
     >
       <Box display="flex" alignItems="flex-start">
