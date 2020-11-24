@@ -72,17 +72,21 @@ export function Choropleth<T1, T2, T3>({
 }: TProps<T1, T2, T3>) {
   const [tooltip, setTooltip] = useState<TooltipSettings>();
   const isTouch = useIsTouchDevice();
-  const ref = useRef<HTMLDivElement>(null);
-  useOnClickOutside(ref, () => setTooltip(undefined));
+
+  const hoverRef = useRef<SVGGElement>(null);
+  const tooltipRef = useRef<HTMLDivElement>(null);
+
+  useOnClickOutside([tooltipRef, hoverRef], () => setTooltip(undefined));
 
   return (
     <>
-      <div ref={ref}>
-        <ChoroplethMap {...props} setTooltip={setTooltip} />
-      </div>
+      <ChoroplethMap {...props} setTooltip={setTooltip} hoverRef={hoverRef} />
 
       {tooltip && (
-        <div style={{ pointerEvents: isTouch ? 'all' : 'none' }}>
+        <div
+          ref={tooltipRef}
+          style={{ pointerEvents: isTouch ? 'all' : 'none' }}
+        >
           <Tooltip
             left={tooltip.left}
             top={tooltip.top}
@@ -106,7 +110,9 @@ type ChoroplethMapProps<T1, T2, T3> = Omit<
 };
 
 const ChoroplethMap: <T1, T2, T3>(
-  props: ChoroplethMapProps<T1, T2, T3>
+  props: ChoroplethMapProps<T1, T2, T3> & {
+    hoverRef: React.RefObject<SVGGElement>;
+  }
 ) => JSX.Element | null = memo((props) => {
   const {
     featureCollection,
@@ -117,6 +123,7 @@ const ChoroplethMap: <T1, T2, T3>(
     hoverCallback,
     onPathClick,
     setTooltip,
+    hoverRef,
   } = props;
 
   const clipPathId = useRef(`_${Math.random().toString(36).substring(2, 15)}`);
@@ -172,11 +179,13 @@ const ChoroplethMap: <T1, T2, T3>(
           <Country fitSize={fitSize} />
 
           {hovers && (
-            <MercatorGroup
-              data={hovers.features}
-              render={hoverCallback}
-              fitSize={fitSize}
-            />
+            <g ref={hoverRef}>
+              <MercatorGroup
+                data={hovers.features}
+                render={hoverCallback}
+                fitSize={fitSize}
+              />
+            </g>
           )}
         </g>
       </svg>
