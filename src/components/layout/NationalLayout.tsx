@@ -28,8 +28,8 @@ import { BehaviorMetric } from '~/domain/behavior/behavior-metric';
 import siteText from '~/locale/index';
 import { INationalData } from '~/static-props/nl-data';
 import theme from '~/style/theme';
+import { useBreakpoints } from '~/utils/useBreakpoints';
 import { NursingHomeInfectedPeopleMetric } from '../common/nursing-home-infected-people-metric';
-import { useMenuState } from './useMenuState';
 
 export function getNationalLayout() {
   return function (
@@ -47,7 +47,7 @@ interface NationalLayoutProps extends INationalData {
   children: React.ReactNode;
 }
 
-/*
+/**
  * NationalLayout is a composition of persistent layouts.
  *
  * ## States
@@ -66,19 +66,22 @@ interface NationalLayoutProps extends INationalData {
 function NationalLayout(props: NationalLayoutProps) {
   const { children, data } = props;
   const router = useRouter();
-  const isMainRoute = router.route === '/';
-
-  const { isMenuOpen, openMenu } = useMenuState(isMainRoute);
-
-  // remove focus after navigation
-  const blur = (evt: React.MouseEvent<HTMLAnchorElement>) =>
-    evt.currentTarget.blur();
+  const breakpoints = useBreakpoints();
 
   function getClassName(path: string) {
     return router.pathname === path
       ? 'metric-link active-metric-link'
       : 'metric-link';
   }
+
+  const menuOpenUrl = {
+    pathname: router.pathname,
+    query: { ...router.query, menu: '1' },
+  };
+
+  const isMenuOpen =
+    (router.pathname === '/' && !('menu' in router.query)) ||
+    router.query.menu === '1';
 
   return (
     <>
@@ -101,8 +104,8 @@ function NationalLayout(props: NationalLayoutProps) {
           isMenuOpen ? 'has-menu-opened' : 'has-menu-closed'
         }`}
       >
-        <Link href="/landelijk">
-          <a className="back-button" onClick={openMenu}>
+        <Link href={menuOpenUrl}>
+          <a className="back-button">
             <Arrow />
             {router.pathname === '/'
               ? siteText.nav.terug_naar_alle_cijfers_homepage
@@ -110,15 +113,25 @@ function NationalLayout(props: NationalLayoutProps) {
           </a>
         </Link>
         <aside className="national-aside">
-          <nav aria-label="metric navigation">
+          <nav
+            /** re-mount when route changes in order to blur anchors */
+            key={router.asPath}
+            aria-label="metric navigation"
+          >
             <h2>{siteText.nationaal_layout.headings.algemeen}</h2>
             <ul className="last-developments">
               <li>
-                <Link href="/">
-                  <a
-                    onClick={blur}
-                    className={`last-developments-link ${getClassName('/')}`}
-                  >
+                <Link
+                  href={{
+                    pathname: '/',
+                    query: breakpoints.md
+                      ? {} // only add menu flags on narrow devices
+                      : isMenuOpen
+                      ? { menu: '0' }
+                      : { menu: '1' },
+                  }}
+                >
+                  <a className={`last-developments-link ${getClassName('/')}`}>
                     <HeadingWithIcon
                       icon={<Notification color={theme.colors.notification} />}
                       title={siteText.laatste_ontwikkelingen.title}
@@ -133,7 +146,6 @@ function NationalLayout(props: NationalLayoutProps) {
               <li>
                 <Link href="/landelijk/positief-geteste-mensen">
                   <a
-                    onClick={blur}
                     className={getClassName(
                       '/landelijk/positief-geteste-mensen'
                     )}
@@ -159,7 +171,6 @@ function NationalLayout(props: NationalLayoutProps) {
               <li>
                 <Link href="/landelijk/besmettelijke-mensen">
                   <a
-                    onClick={blur}
                     className={getClassName('/landelijk/besmettelijke-mensen')}
                   >
                     <HeadingWithIcon
@@ -179,10 +190,7 @@ function NationalLayout(props: NationalLayoutProps) {
 
               <li>
                 <Link href="/landelijk/reproductiegetal">
-                  <a
-                    onClick={blur}
-                    className={getClassName('/landelijk/reproductiegetal')}
-                  >
+                  <a className={getClassName('/landelijk/reproductiegetal')}>
                     <HeadingWithIcon
                       icon={<ReproIcon />}
                       title={siteText.reproductiegetal.titel_sidebar}
@@ -209,10 +217,7 @@ function NationalLayout(props: NationalLayoutProps) {
             <ul>
               <li>
                 <Link href="/landelijk/ziekenhuis-opnames">
-                  <a
-                    onClick={blur}
-                    className={getClassName('/landelijk/ziekenhuis-opnames')}
-                  >
+                  <a className={getClassName('/landelijk/ziekenhuis-opnames')}>
                     <HeadingWithIcon
                       icon={<Ziekenhuis />}
                       title={siteText.ziekenhuisopnames_per_dag.titel_sidebar}
@@ -234,7 +239,6 @@ function NationalLayout(props: NationalLayoutProps) {
               <li>
                 <Link href="/landelijk/intensive-care-opnames">
                   <a
-                    onClick={blur}
                     className={getClassName(
                       '/landelijk/intensive-care-opnames'
                     )}
@@ -263,10 +267,7 @@ function NationalLayout(props: NationalLayoutProps) {
             <ul>
               <li>
                 <Link href="/landelijk/verpleeghuiszorg">
-                  <a
-                    onClick={blur}
-                    className={getClassName('/landelijk/verpleeghuiszorg')}
-                  >
+                  <a className={getClassName('/landelijk/verpleeghuiszorg')}>
                     <HeadingWithIcon
                       icon={<Verpleeghuiszorg />}
                       title={
@@ -289,7 +290,6 @@ function NationalLayout(props: NationalLayoutProps) {
               <li>
                 <Link href="/landelijk/verdenkingen-huisartsen">
                   <a
-                    onClick={blur}
                     className={getClassName(
                       '/landelijk/verdenkingen-huisartsen'
                     )}
@@ -309,10 +309,7 @@ function NationalLayout(props: NationalLayoutProps) {
 
               <li>
                 <Link href="/landelijk/rioolwater">
-                  <a
-                    onClick={blur}
-                    className={getClassName('/landelijk/rioolwater')}
-                  >
+                  <a className={getClassName('/landelijk/rioolwater')}>
                     <HeadingWithIcon
                       icon={<RioolwaterMonitoring />}
                       title={siteText.rioolwater_metingen.titel_sidebar}
@@ -328,10 +325,7 @@ function NationalLayout(props: NationalLayoutProps) {
             <ul>
               <li>
                 <Link href="/landelijk/gedrag">
-                  <a
-                    onClick={blur}
-                    className={getClassName('/landelijk/gedrag')}
-                  >
+                  <a className={getClassName('/landelijk/gedrag')}>
                     <HeadingWithIcon
                       icon={<Gedrag />}
                       title={siteText.nl_gedrag.sidebar.titel}
@@ -348,8 +342,8 @@ function NationalLayout(props: NationalLayoutProps) {
 
         <section className="national-content">{children}</section>
 
-        <Link href="/landelijk">
-          <a className="back-button back-button-footer" onClick={openMenu}>
+        <Link href={menuOpenUrl}>
+          <a className="back-button back-button-footer">
             <Arrow />
             {router.pathname === '/'
               ? siteText.nav.terug_naar_alle_cijfers_homepage
