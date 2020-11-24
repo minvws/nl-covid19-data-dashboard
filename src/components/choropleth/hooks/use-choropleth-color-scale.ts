@@ -24,14 +24,14 @@ export function useChoroplethColorScale(
   defaultColor = 'white'
 ) {
   const colorScale = useMemo(() => {
+    if (!thresholds) {
+      return undefined;
+    }
+
     assert(
       Array.isArray(thresholds),
       `thresholds is not of type Array: ${JSON.stringify(thresholds)}`
     );
-
-    if (!thresholds) {
-      return undefined;
-    }
 
     const domain = thresholds.map((t) => t.threshold);
     domain.shift();
