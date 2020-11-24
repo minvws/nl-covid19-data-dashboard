@@ -69,6 +69,8 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
   const router = useRouter();
   const isLargeScreen = useMediaQuery('(min-width: 1000px)');
 
+  if (!data) return null;
+
   const { code } = router.query;
 
   const showMetricLinks = router.route !== '/gemeente';
@@ -100,9 +102,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
     | { name: string; code: string; id: number }
     | undefined = getSafetyRegionForMunicipalityCode(code as string);
 
-  const sewerWaterBarScaleData = data
-    ? getSewerWaterBarScaleData(data)
-    : undefined;
+  const sewerWaterBarScaleData = data && getSewerWaterBarScaleData(data);
 
   return (
     <>
