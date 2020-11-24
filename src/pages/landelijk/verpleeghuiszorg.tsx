@@ -17,14 +17,19 @@ import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
-import getNlData, { INationalData } from '~/static-props/nl-data';
+import {
+  getNationalStaticProps,
+  NationalPageProps,
+} from '~/static-props/nl-data';
 
 const infectedLocationsText = siteText.verpleeghuis_besmette_locaties;
 const positiveTestedPeopleText =
   siteText.verpleeghuis_positief_geteste_personen;
 const locationDeaths = siteText.verpleeghuis_oversterfte;
 
-const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
+const NursingHomeInfectedLocations: FCWithLayout<NationalPageProps> = (
+  props
+) => {
   const { data } = props;
   const nursinghomeData = data.nursing_home;
 
@@ -190,8 +195,8 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
   );
 };
 
-NursingHomeInfectedLocations.getLayout = getNationalLayout();
+NursingHomeInfectedLocations.getLayout = getNationalLayout;
 
-export const getStaticProps = getNlData();
+export const getStaticProps = getNationalStaticProps;
 
 export default NursingHomeInfectedLocations;
