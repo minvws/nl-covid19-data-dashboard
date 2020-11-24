@@ -14,7 +14,7 @@ export function ContentHeader(props: IContentHeaderProps) {
   const cssRules: SystemStyleObject = {
     '&[id]': {
       marginLeft: '-100vw',
-      paddingLeft: '-100vw',
+      paddingLeft: '100vw',
     },
     marginTop: category ? undefined : 4,
     marginLeft: icon ? undefined : 5,
