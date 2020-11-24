@@ -100,9 +100,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
     | { name: string; code: string; id: number }
     | undefined = getSafetyRegionForMunicipalityCode(code as string);
 
-  const sewerWaterBarScaleData = data
-    ? getSewerWaterBarScaleData(data)
-    : undefined;
+  const sewerWaterBarScaleData = data && getSewerWaterBarScaleData(data);
 
   return (
     <>
@@ -160,57 +158,57 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                   </p>
                 )}
               </div>
-              <h2>{siteText.gemeente_layout.headings.besmettingen}</h2>
-              <ul>
-                <li>
-                  <Link href={`/gemeente/${code}/positief-geteste-mensen`}>
-                    <a
-                      className={getClassName(
-                        `/gemeente/[code]/positief-geteste-mensen`
-                      )}
-                    >
-                      <HeadingWithIcon
-                        icon={<GetestIcon />}
-                        title={
-                          siteText.gemeente_positief_geteste_personen
-                            .titel_sidebar
-                        }
-                      />
-                      <span>
-                        <PositivelyTestedPeopleMetric
-                          data={data?.positive_tested_people.last_value}
-                        />
-                      </span>
-                    </a>
-                  </Link>
-                </li>
-              </ul>
+              {data && (
+                <>
+                  <h2>{siteText.gemeente_layout.headings.besmettingen}</h2>
+                  <ul>
+                    <li>
+                      <Link href={`/gemeente/${code}/positief-geteste-mensen`}>
+                        <a
+                          className={getClassName(
+                            `/gemeente/[code]/positief-geteste-mensen`
+                          )}
+                        >
+                          <HeadingWithIcon
+                            icon={<GetestIcon />}
+                            title={
+                              siteText.gemeente_positief_geteste_personen
+                                .titel_sidebar
+                            }
+                          />
+                          <span className="metric-wrapper">
+                            <PositivelyTestedPeopleMetric data={data} />
+                          </span>
+                        </a>
+                      </Link>
+                    </li>
+                  </ul>
 
-              <h2>{siteText.gemeente_layout.headings.ziekenhuizen}</h2>
-              <ul>
-                <li>
-                  <Link href={`/gemeente/${code}/ziekenhuis-opnames`}>
-                    <a
-                      className={getClassName(
-                        `/gemeente/[code]/ziekenhuis-opnames`
-                      )}
-                    >
-                      <HeadingWithIcon
-                        icon={<Ziekenhuis />}
-                        title={
-                          siteText.gemeente_ziekenhuisopnames_per_dag
-                            .titel_sidebar
-                        }
-                      />
-                      <span>
-                        <IntakeHospitalMetric
-                          data={data?.hospital_admissions.last_value}
-                        />
-                      </span>
-                    </a>
-                  </Link>
-                </li>
-              </ul>
+                  <h2>{siteText.gemeente_layout.headings.ziekenhuizen}</h2>
+                  <ul>
+                    <li>
+                      <Link href={`/gemeente/${code}/ziekenhuis-opnames`}>
+                        <a
+                          className={getClassName(
+                            `/gemeente/[code]/ziekenhuis-opnames`
+                          )}
+                        >
+                          <HeadingWithIcon
+                            icon={<Ziekenhuis />}
+                            title={
+                              siteText.gemeente_ziekenhuisopnames_per_dag
+                                .titel_sidebar
+                            }
+                          />
+                          <span className="metric-wrapper">
+                            <IntakeHospitalMetric data={data} />
+                          </span>
+                        </a>
+                      </Link>
+                    </li>
+                  </ul>
+                </>
+              )}
 
               <h2>{siteText.gemeente_layout.headings.vroege_signalen}</h2>
               <ul>
@@ -226,7 +224,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                             siteText.gemeente_rioolwater_metingen.titel_sidebar
                           }
                         />
-                        <span>
+                        <span className="metric-wrapper">
                           <SewerWaterMetric data={sewerWaterBarScaleData} />
                         </span>
                       </a>

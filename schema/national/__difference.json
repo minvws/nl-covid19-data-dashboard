@@ -1,0 +1,113 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "national_difference",
+  "type": "object",
+  "properties": {
+    "infected_people_delta_normalized__infected_daily_increase": {
+      "$ref": "#/definitions/diff_decimal"
+    },
+    "infected_people_total__infected_daily_total": {
+      "$ref": "#/definitions/diff_integer"
+    },
+    "ggd__tested_total": {
+      "$ref": "#/definitions/diff_integer"
+    },
+    "ggd__infected_percentage": {
+      "$ref": "#/definitions/diff_decimal"
+    },
+    "reproduction_index_last_known_average__reproduction_index_avg": {
+      "$ref": "#/definitions/diff_decimal"
+    },
+    "infectious_people_count_normalized__infectious_avg_normalized": {
+      "$ref": "#/definitions/diff_integer"
+    },
+    "intake_hospital_ma__moving_average_hospital": {
+      "$ref": "#/definitions/diff_decimal"
+    },
+    "hospital_beds_occupied__covid_occupied": {
+      "$ref": "#/definitions/diff_integer"
+    },
+    "intake_intensivecare_ma__moving_average_ic": {
+      "$ref": "#/definitions/diff_decimal"
+    },
+    "intensive_care_beds_occupied__covid_occupied": {
+      "$ref": "#/definitions/diff_integer"
+    },
+    "huisarts_verdenkingen__incidentie": {
+      "$ref": "#/definitions/diff_decimal"
+    },
+    "huisarts_verdenkingen__geschat_aantal": {
+      "$ref": "#/definitions/diff_integer"
+    },
+    "sewer__average": {
+      "$ref": "#/definitions/diff_decimal"
+    },
+    "nursing_home__newly_infected_people": {
+      "$ref": "#/definitions/diff_integer"
+    },
+    "nursing_home__infected_locations_total": {
+      "$ref": "#/definitions/diff_integer"
+    },
+    "nursing_home__deceased_daily": {
+      "$ref": "#/definitions/diff_integer"
+    }
+  },
+  "required": [
+    "infected_people_total__infected_daily_total",
+    "intake_hospital_ma__moving_average_hospital",
+    "intake_intensivecare_ma__moving_average_ic"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "diff_integer": {
+      "title": "difference_integer",
+      "type": "object",
+      "properties": {
+        "old_value": {
+          "type": "integer"
+        },
+        "difference": {
+          "type": "integer"
+        },
+        "old_date_of_report_unix": {
+          "type": "integer"
+        },
+        "new_date_of_report_unix": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "old_value",
+        "difference",
+        "old_date_of_report_unix",
+        "new_date_of_report_unix"
+      ],
+      "additionalProperties": false
+    },
+    "diff_decimal": {
+      "title": "difference_decimal",
+      "type": "object",
+      "properties": {
+        "old_value": {
+          "type": "number"
+        },
+        "difference": {
+          "type": "number"
+        },
+        "old_date_of_report_unix": {
+          "type": "integer"
+        },
+        "new_date_of_report_unix": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "old_value",
+        "difference",
+        "old_date_of_report_unix",
+        "new_date_of_report_unix"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

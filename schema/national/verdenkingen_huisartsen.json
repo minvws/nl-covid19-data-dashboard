@@ -11,9 +11,6 @@
     },
     "last_value": {
       "$ref": "#/definitions/value"
-    },
-    "last_value_difference": {
-      "$ref": "#/definitions/value_difference"
     }
   },
   "required": ["values", "last_value"],
@@ -49,35 +46,6 @@
         "incidentie",
         "geschat_aantal",
         "date_of_insertion_unix"
-      ],
-      "additionalProperties": false
-    },
-    "value_difference": {
-      "title": "national_huisarts_verdenkingen_value_difference",
-      "type": "object",
-      "properties": {
-        "incidentie_old": {
-          "type": "integer"
-        },
-        "incidentie_difference": {
-          "type": "integer"
-        },
-        "geschat_aantal_old": {
-          "type": "integer"
-        },
-        "geschat_aantal_difference": {
-          "type": "integer"
-        },
-        "date_of_report_unix_old": {
-          "type": "integer"
-        }
-      },
-      "required": [
-        "incidentie_old",
-        "incidentie_difference",
-        "geschat_aantal_old",
-        "geschat_aantal_difference",
-        "date_of_report_unix_old"
       ],
       "additionalProperties": false
     }

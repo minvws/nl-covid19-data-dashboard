@@ -12,9 +12,6 @@
     },
     "last_value": {
       "$ref": "#/definitions/value"
-    },
-    "last_value_difference": {
-      "$ref": "#/definitions/value_difference"
     }
   },
   "required": ["values", "last_value"],
@@ -38,28 +35,6 @@
         "infected_daily_total",
         "date_of_report_unix",
         "date_of_insertion_unix"
-      ],
-      "additionalProperties": false
-    },
-    "value_difference": {
-      "title": "national_infected_people_total_value_difference",
-      "type": "object",
-      "properties": {
-        "infected_daily_total_old": {
-          "type": "integer"
-        },
-        "infected_daily_total_difference": {
-          "type": "integer"
-        },
-
-        "date_of_report_unix_old": {
-          "type": "integer"
-        }
-      },
-      "required": [
-        "infected_daily_total_old",
-        "infected_daily_total_difference",
-        "date_of_report_unix_old"
       ],
       "additionalProperties": false
     }

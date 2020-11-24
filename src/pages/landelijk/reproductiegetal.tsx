@@ -10,11 +10,14 @@ import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
-import getNlData, { INationalData } from '~/static-props/nl-data';
+import {
+  getNationalStaticProps,
+  NationalPageProps,
+} from '~/static-props/nl-data';
 
 const text = siteText.reproductiegetal;
 
-const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
+const ReproductionIndex: FCWithLayout<NationalPageProps> = (props) => {
   const { data } = props;
 
   const lastKnownValidData = data.reproduction_index_last_known_average;
@@ -89,8 +92,8 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
   );
 };
 
-ReproductionIndex.getLayout = getNationalLayout();
+ReproductionIndex.getLayout = getNationalLayout;
 
-export const getStaticProps = getNlData();
+export const getStaticProps = getNationalStaticProps;
 
 export default ReproductionIndex;

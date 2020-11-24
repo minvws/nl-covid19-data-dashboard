@@ -103,6 +103,10 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
             absolute={Math.round(
               resultsPerRegion.last_value.total_reported_increase_per_region
             )}
+            difference={
+              data.difference
+                .results_per_region__total_reported_increase_per_region
+            }
           />
           <Text>{text.kpi_toelichting}</Text>
           <Box>

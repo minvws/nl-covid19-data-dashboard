@@ -10,11 +10,14 @@ import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
-import getNlData, { INationalData } from '~/static-props/nl-data';
+import {
+  getNationalStaticProps,
+  NationalPageProps,
+} from '~/static-props/nl-data';
 
 const text = siteText.besmettelijke_personen;
 
-const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
+const InfectiousPeople: FCWithLayout<NationalPageProps> = (props) => {
   const { data } = props;
 
   const count = data.infectious_people_count;
@@ -103,8 +106,8 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
   );
 };
 
-InfectiousPeople.getLayout = getNationalLayout();
+InfectiousPeople.getLayout = getNationalLayout;
 
-export const getStaticProps = getNlData();
+export const getStaticProps = getNationalStaticProps;
 
 export default InfectiousPeople;

@@ -51,6 +51,20 @@
     "terug_naar_alle_cijfers": "Terug naar alle cijfers",
     "terug_naar_alle_cijfers_homepage": "Terug naar alle cijfers"
   },
+  "toe_en_afname": {
+    "toename": "meer dan",
+    "afname": "minder dan",
+    "gelijk": "gelijk aan",
+    "tijdverloop": {
+      "gisteren": "gisteren",
+      "geleden": "geleden",
+      "dagen": "dagen",
+      "week": {
+        "enkelvoud": "week",
+        "meervoud": "weken"
+      }
+    }
+  },
   "ic_opnames_per_dag": {
     "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
     "titel": "Intensive care-opnames per dag",
@@ -1010,7 +1024,7 @@
   },
   "laatste_ontwikkelingen": {
     "title": "Laatste ontwikkelingen",
-    "menu_subtitle": "Langzamere afname COVID-19 meldingen ",
+    "menu_subtitle": "Aantal COVID-19 meldingen stagneert",
     "alle_cijfers_header": "Benieuwd naar alle cijfers?",
     "alle_cijfers_link": "Bekijk alle cijfers"
   },

@@ -2,8 +2,8 @@ import css from '@styled-system/css';
 import styled from 'styled-components';
 
 import Gelijk from '~/assets/gelijk.svg';
-import PijlOmhoog from '~/assets/pijl_omhoog.svg';
-import PijlOmlaag from '~/assets/pijl_omlaag.svg';
+import PijlOmhoog from '~/assets/pijl-omhoog.svg';
+import PijlOmlaag from '~/assets/pijl-omlaag.svg';
 import { BehaviorTrendType } from '../behavior-types';
 import siteText from '~/locale/index';
 

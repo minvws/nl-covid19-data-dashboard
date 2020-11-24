@@ -51,6 +51,20 @@
     "terug_naar_alle_cijfers": "Overview",
     "terug_naar_alle_cijfers_homepage": "Overview"
   },
+  "toe_en_afname": {
+    "toename": "more than",
+    "afname": "less than",
+    "gelijk": "equal to",
+    "tijdverloop": {
+      "gisteren": "yesterday",
+      "geleden": "ago",
+      "dagen": "days",
+      "week": {
+        "enkelvoud": "week",
+        "meervoud": "weeks"
+      }
+    }
+  },
   "ic_opnames_per_dag": {
     "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
     "titel": "Intensive care admissions by day",
@@ -1009,7 +1023,7 @@
   },
   "laatste_ontwikkelingen": {
     "title": "Latest developments",
-    "menu_subtitle": "Slower decrease in new COVID-19 infections",
+    "menu_subtitle": "Number of confirmed cases stagnates",
     "alle_cijfers_header": "",
     "alle_cijfers_link": ""
   },

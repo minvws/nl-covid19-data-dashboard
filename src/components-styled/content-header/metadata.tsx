@@ -5,11 +5,11 @@ import siteText from '~/locale/index';
 import theme from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { Box } from './base';
-import { ExternalLink } from './external-link';
-import { Text } from './typography';
+import { Box } from '../base';
+import { ExternalLink } from '../external-link';
+import { Text } from '../typography';
 
-export interface IDatasource {
+export interface Datasource {
   href: string;
   text: string;
   download: string;
@@ -20,8 +20,8 @@ export interface IWeekRange {
   weekEndUnix: number;
 }
 
-export interface IContentHeaderMetadataProps {
-  dataSources: IDatasource[];
+export interface MetadataProps {
+  dataSources: Datasource[];
   datumsText: string;
   dateInfo: number | IWeekRange;
   dateOfInsertionUnix: number;
@@ -29,15 +29,16 @@ export interface IContentHeaderMetadataProps {
 
 const text = siteText.common.metadata;
 
-export function Metadata(props: IContentHeaderMetadataProps) {
+export function Metadata(props: MetadataProps) {
   const { dataSources, datumsText, dateInfo, dateOfInsertionUnix } = props;
 
   let dateText = '';
   if (typeof dateInfo === 'number') {
     const dateOfReport = formatDateFromSeconds(dateInfo, 'weekday-medium');
-    const dateOfInsertion = dateOfInsertionUnix
-      ? formatDateFromSeconds(dateOfInsertionUnix, 'weekday-medium')
-      : undefined;
+    const dateOfInsertion = formatDateFromSeconds(
+      dateOfInsertionUnix,
+      'weekday-medium'
+    );
     dateText = replaceVariablesInText(datumsText, {
       dateOfReport,
       dateOfInsertion,
@@ -63,8 +64,8 @@ export function Metadata(props: IContentHeaderMetadataProps) {
   }
 
   const dataDownloads = dataSources
-    .filter((ds) => Boolean(ds.download.trim()))
-    .map((ds) => ({ href: ds.download, text: ds.text }));
+    .filter((x) => Boolean(x.download.trim()))
+    .map((x) => ({ href: x.download, text: x.text }));
 
   return (
     <Box>
@@ -92,8 +93,8 @@ export function Metadata(props: IContentHeaderMetadataProps) {
           <DownloadIcon
             aria-hidden
             color={theme.colors.annotation}
-            width="14"
-            height="14"
+            width="1em"
+            height="1em"
           />
         }
         items={dataDownloads}
@@ -103,7 +104,7 @@ export function Metadata(props: IContentHeaderMetadataProps) {
   );
 }
 
-interface IMetadataItemProps {
+interface MetadataItemProps {
   icon: JSX.Element;
   label: string;
   items: {
@@ -112,7 +113,7 @@ interface IMetadataItemProps {
   }[];
 }
 
-function MetadataItem(props: IMetadataItemProps) {
+function MetadataItem(props: MetadataItemProps) {
   const { icon, label, items } = props;
 
   if (!items.length) {
