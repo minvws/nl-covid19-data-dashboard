@@ -24,8 +24,7 @@
     "hospital_beds_occupied",
     "intensive_care_beds_occupied",
     "ggd",
-    "nursing_home",
-    "behavior"
+    "nursing_home"
   ],
   "additionalProperties": false,
   "properties": {

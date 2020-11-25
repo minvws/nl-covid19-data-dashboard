@@ -15,7 +15,9 @@ export type TMunicipalityMetricType = ValueOf<
 >[number] &
   Partial<MunicipalityProperties>;
 
-export type TRegionMetricName = TMetricHolder<Omit<Regions, 'deceased'>>;
+export type TRegionMetricName = TMetricHolder<
+  Omit<Regions, 'deceased' | 'behavior'>
+>;
 
 export type TRegionMetricType = ValueOf<
   Pick<Regions, TRegionMetricName>

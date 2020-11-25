@@ -2,7 +2,6 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Arrow from '~/assets/arrow.svg';
-import Gedrag from '~/assets/gedrag.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
@@ -15,7 +14,6 @@ import { PositivelyTestedPeopleBarScale } from '~/components/veiligheidsregio/po
 import { PositivelyTestedPeopleMetric } from '~/components/veiligheidsregio/positive-tested-people-metric';
 import { SewerWaterMetric } from '~/components/veiligheidsregio/sewer-water-metric';
 import safetyRegions from '~/data/index';
-import { BehaviorMetric } from '~/domain/behavior/behavior-metric';
 import siteText from '~/locale/index';
 import { ISafetyRegionData } from '~/static-props/safetyregion-data';
 import { getSewerWaterBarScaleData } from '~/utils/sewer-water/safety-region-sewer-water.util';
@@ -244,26 +242,6 @@ function SafetyRegionLayout(
                         <SewerWaterMetric
                           data={getSewerWaterBarScaleData(data)}
                         />
-                      </span>
-                    </a>
-                  </Link>
-                </li>
-              </ul>
-              <h2>{siteText.nationaal_layout.headings.gedrag}</h2>
-              <ul>
-                <li>
-                  <Link href={`/veiligheidsregio/${code}/gedrag`}>
-                    <a
-                      className={getClassName(
-                        '/veiligheidsregio/[code]/gedrag'
-                      )}
-                    >
-                      <HeadingWithIcon
-                        icon={<Gedrag />}
-                        title={siteText.nl_gedrag.sidebar.titel}
-                      />
-                      <span className="metric-wrapper">
-                        <BehaviorMetric data={data.behavior} />
                       </span>
                     </a>
                   </Link>
