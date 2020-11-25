@@ -144,7 +144,7 @@ export interface National {
   ggd: NationalGgd;
   nursing_home: NationalNursingHome;
   restrictions?: NationalRestrictions;
-  behavior: NationalBehavior;
+  behavior?: NationalBehavior;
 }
 export interface NationalDifference {
   infected_people_delta_normalized__infected_daily_increase?: DifferenceDecimal;
@@ -532,7 +532,7 @@ export interface Regionaal {
   ggd: RegionalGgd;
   nursing_home: RegionalNursingHome;
   restrictions?: RegionalRestrictions;
-  behavior: RegionalBehavior;
+  behavior?: RegionalBehavior;
 }
 export interface RegionalDifference {
   results_per_region__infected_increase_per_region?: DifferenceDecimal;
@@ -725,7 +725,7 @@ export interface Regions {
   escalation_levels: EscalationLevels[];
   nursing_home: RegionsNursingHome[];
   sewer: RegionsSewer[];
-  behavior: RegionsBehavior[];
+  behavior?: RegionsBehavior[];
 }
 export interface RegionHospitalAdmissions {
   date_of_report_unix: number;
