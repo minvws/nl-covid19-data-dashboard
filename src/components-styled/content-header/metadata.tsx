@@ -9,13 +9,13 @@ import { Box } from '../base';
 import { ExternalLink } from '../external-link';
 import { Text } from '../typography';
 
-export interface Datasource {
+interface Datasource {
   href: string;
   text: string;
   download: string;
 }
 
-export interface IWeekRange {
+interface WeekRange {
   weekStartUnix: number;
   weekEndUnix: number;
 }
@@ -23,7 +23,7 @@ export interface IWeekRange {
 export interface MetadataProps {
   dataSources: Datasource[];
   datumsText: string;
-  dateInfo: number | IWeekRange;
+  dateInfo: number | WeekRange;
   dateOfInsertionUnix: number;
 }
 
@@ -32,36 +32,7 @@ const text = siteText.common.metadata;
 export function Metadata(props: MetadataProps) {
   const { dataSources, datumsText, dateInfo, dateOfInsertionUnix } = props;
 
-  let dateText = '';
-  if (typeof dateInfo === 'number') {
-    const dateOfReport = formatDateFromSeconds(dateInfo, 'weekday-medium');
-    const dateOfInsertion = formatDateFromSeconds(
-      dateOfInsertionUnix,
-      'weekday-medium'
-    );
-    dateText = replaceVariablesInText(datumsText, {
-      dateOfReport,
-      dateOfInsertion,
-    });
-  } else {
-    const weekStart = formatDateFromSeconds(
-      dateInfo.weekStartUnix,
-      'weekday-medium'
-    );
-    const weekEnd = formatDateFromSeconds(
-      dateInfo.weekEndUnix,
-      'weekday-medium'
-    );
-    const dateOfInsertion = formatDateFromSeconds(
-      dateOfInsertionUnix,
-      'weekday-medium'
-    );
-    dateText = replaceVariablesInText(datumsText, {
-      weekStart,
-      weekEnd,
-      dateOfInsertion,
-    });
-  }
+  const dateText = formateDateText(dateInfo, dateOfInsertionUnix, datumsText);
 
   const dataDownloads = dataSources
     .filter((x) => Boolean(x.download.trim()))
@@ -137,12 +108,11 @@ function MetadataItem(props: MetadataItemProps) {
           if (index) {
             return (
               <>
-                {' '}
-                &amp;{' '}
+                {' & '}
                 <ExternalLink
                   href={item.href}
                   text={item.text}
-                  key={`label_${index}_${item.href}`}
+                  key={index + item.href}
                 />
               </>
             );
@@ -151,11 +121,47 @@ function MetadataItem(props: MetadataItemProps) {
             <ExternalLink
               href={item.href}
               text={item.text}
-              key={`label_${index}_${item.href}`}
+              key={index + item.href}
             />
           );
         })}
       </Text>
     </Box>
   );
+}
+
+function formateDateText(
+  dateInfo: number | WeekRange,
+  dateOfInsertionUnix: number,
+  datumsText: string
+) {
+  if (typeof dateInfo === 'number') {
+    const dateOfReport = formatDateFromSeconds(dateInfo, 'weekday-medium');
+    const dateOfInsertion = formatDateFromSeconds(
+      dateOfInsertionUnix,
+      'weekday-medium'
+    );
+    return replaceVariablesInText(datumsText, {
+      dateOfReport,
+      dateOfInsertion,
+    });
+  } else {
+    const weekStart = formatDateFromSeconds(
+      dateInfo.weekStartUnix,
+      'weekday-medium'
+    );
+    const weekEnd = formatDateFromSeconds(
+      dateInfo.weekEndUnix,
+      'weekday-medium'
+    );
+    const dateOfInsertion = formatDateFromSeconds(
+      dateOfInsertionUnix,
+      'weekday-medium'
+    );
+    return replaceVariablesInText(datumsText, {
+      weekStart,
+      weekEnd,
+      dateOfInsertion,
+    });
+  }
 }

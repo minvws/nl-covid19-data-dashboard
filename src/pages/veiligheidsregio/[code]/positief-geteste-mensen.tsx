@@ -170,7 +170,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
         title={replaceVariablesInText(ggdText.titel, {
           safetyRegion: safetyRegionName,
         })}
-        id="ggd"
+        skipLinkAnchor={true}
         icon={<Afname />}
         subtitle={ggdText.toelichting}
         metadata={{

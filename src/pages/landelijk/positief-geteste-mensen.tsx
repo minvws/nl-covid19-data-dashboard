@@ -217,7 +217,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
 
       <ContentHeader
         title={ggdText.titel}
-        id="ggd"
+        skipLinkAnchor={true}
         icon={<Afname />}
         subtitle={ggdText.toelichting}
         metadata={{
