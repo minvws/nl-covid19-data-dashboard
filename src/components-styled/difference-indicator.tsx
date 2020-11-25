@@ -14,6 +14,7 @@ import IconUp from '~/assets/pijl-omhoog.svg';
 import IconDown from '~/assets/pijl-omlaag.svg';
 import siteText from '~/locale/index';
 import { DifferenceDecimal, DifferenceInteger } from '~/types/data';
+import { formatPercentage } from '~/utils/formatNumber';
 
 const text = siteText.toe_en_afname;
 const DAY_IN_SECONDS = 24 * 60 * 60;
@@ -21,14 +22,15 @@ const DAY_IN_SECONDS = 24 * 60 * 60;
 interface DifferenceIndicatorProps {
   value: DifferenceDecimal | DifferenceInteger;
   isContextSidebar?: boolean;
+  isDecimal?: boolean;
 }
 
 export function DifferenceIndicator(props: DifferenceIndicatorProps) {
-  const { isContextSidebar, value } = props;
+  const { isContextSidebar, value, isDecimal } = props;
 
   return isContextSidebar
     ? renderSidebarIndicator(value)
-    : renderTileIndicator(value);
+    : renderTileIndicator(value, isDecimal);
 }
 
 function renderSidebarIndicator(value: DifferenceDecimal | DifferenceInteger) {
@@ -63,12 +65,19 @@ function renderSidebarIndicator(value: DifferenceDecimal | DifferenceInteger) {
   );
 }
 
-function renderTileIndicator(value: DifferenceDecimal | DifferenceInteger) {
+function renderTileIndicator(
+  value: DifferenceDecimal | DifferenceInteger,
+  isDecimal?: boolean
+) {
   const {
     difference,
     old_date_of_report_unix,
     new_date_of_report_unix,
   } = value;
+
+  const differenceFormattedString = isDecimal
+    ? formatPercentage(Math.abs(difference))
+    : Math.abs(difference);
 
   const timespanText = getTimespanText(
     old_date_of_report_unix,
@@ -84,7 +93,7 @@ function renderTileIndicator(value: DifferenceDecimal | DifferenceInteger) {
           <IconUp />
         </Span>
         <Span fontWeight="bold" mr="0.3em">
-          {`${difference} ${splitText[0]}`}
+          {`${differenceFormattedString} ${splitText[0]}`}
         </Span>
         <Span color="annotation">{`${splitText[1]} ${timespanText}`}</Span>
       </Container>
@@ -100,7 +109,7 @@ function renderTileIndicator(value: DifferenceDecimal | DifferenceInteger) {
           <IconDown />
         </Span>
         <Span fontWeight="bold" mr="0.3em">
-          {`${Math.abs(difference)} ${splitText[0]}`}
+          {`${differenceFormattedString} ${splitText[0]}`}
         </Span>
         <Span>{`${splitText[1]} ${timespanText}`}</Span>
       </Container>

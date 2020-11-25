@@ -67,7 +67,11 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
             source: text.bronnen.rivm,
           }}
         >
-          <IntakeHospitalBarScale data={dataIntake} showAxis={true} />
+          <IntakeHospitalBarScale
+            data={data}
+            showAxis={true}
+            showValue={true}
+          />
         </KpiTile>
 
         <KpiTile
