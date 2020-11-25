@@ -14,7 +14,7 @@ import IconUp from '~/assets/pijl-omhoog.svg';
 import IconDown from '~/assets/pijl-omlaag.svg';
 import siteText from '~/locale/index';
 import { DifferenceDecimal, DifferenceInteger } from '~/types/data';
-import { formatPercentage } from '~/utils/formatNumber';
+import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 
 const text = siteText.toe_en_afname;
 const DAY_IN_SECONDS = 24 * 60 * 60;
@@ -77,7 +77,7 @@ function renderTileIndicator(
 
   const differenceFormattedString = isDecimal
     ? formatPercentage(Math.abs(difference))
-    : Math.abs(difference);
+    : formatNumber(Math.abs(difference));
 
   const timespanText = getTimespanText(
     old_date_of_report_unix,
