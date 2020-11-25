@@ -51,20 +51,6 @@
     "terug_naar_alle_cijfers": "Overview",
     "terug_naar_alle_cijfers_homepage": "Overview"
   },
-  "toe_en_afname": {
-    "toename": "more than",
-    "afname": "less than",
-    "gelijk": "equal to",
-    "tijdverloop": {
-      "gisteren": "yesterday",
-      "geleden": "ago",
-      "dagen": "days",
-      "week": {
-        "enkelvoud": "week",
-        "meervoud": "weeks"
-      }
-    }
-  },
   "ic_opnames_per_dag": {
     "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
     "bron": {
@@ -606,8 +592,8 @@
         "verantwoording": "This dashboard was developed in a short amount of time. So far, we have therefore not been able to publish the code for inputting the data and constructing the .JSON files. However, this will be done soon. The web application code was published on [Github](https://github.com/minvws/nl-covid19-data-dashboard) on 5 June 2020. The [data calculations](https://github.com/minvws/nl-covid19-data-backend-processing) are available via Github as well."
       },
       {
-        "cijfer": "Behaviour",
-        "verantwoording": "This data is updated every three weeks and is published as an open data file by the National Institute for Public Health and the Environment (RIVM). The information on the Coronavirus Dashboard is also updated on the day the new file is released. The data file contains information on the Dutch public’s behaviour in relation to the COVID-19 rules and is based on findings obtained by means of a survey.\n\nData is collected online via computer-assisted web interviewing (CAWI). This method involves posting a programmed questionnaire online. Invitations to complete the questionnaire are then sent by email, explaining the purpose of the survey and referring to RIVM as the commissioning authority. The questionnaire was drawn up by RIVM’s Corona Behavioural Unit. \n\nParticipants are selected from the Kantar Consumer Panel (TNS NIPObase) and are aged 16 and over. For each safety region, invitations are sent to a representative sample according to gender, age (5 categories) and highest level of education completed (3 categories) (based on marginal totals). Assuming a 50% response rate, a gross sample of n=9,780 is drawn. \n\nPeople in the study sample have one week to fill in the questionnaire online. After this, data collection is closed and responses are checked for reliability. To make the survey findings more representative for the entire Dutch population, the results are weighted in two steps on the basis of Statistics Netherlands’ population figures:\n\n1 Firstly, the sample in each safety region is weighted according to the actual population distribution by age, sex and level of education for the region in question.\n2 Secondly, each safety region is given a weight in the total, according to its share of the Dutch population.\n\nThe data set is then sent to RIVM which uses a standardised method to calculate values for the indicators included in the open data file.\n"
+        "cijfer": "",
+        "verantwoording": ""
       },
       {
         "cijfer": "",
@@ -1310,6 +1296,20 @@
     "reference": {
       "href": "/verantwoording",
       "text": "Read more in 'explanation of the data presented'."
+    }
+  },
+  "toe_en_afname": {
+    "toename": "",
+    "afname": "",
+    "gelijk": "",
+    "tijdverloop": {
+      "gisteren": "",
+      "geleden": "",
+      "dagen": "",
+      "week": {
+        "enkelvoud": "",
+        "meervoud": ""
+      }
     }
   }
 }

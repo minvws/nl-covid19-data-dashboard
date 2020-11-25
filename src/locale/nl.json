@@ -51,20 +51,6 @@
     "terug_naar_alle_cijfers": "Terug naar alle cijfers",
     "terug_naar_alle_cijfers_homepage": "Terug naar alle cijfers"
   },
-  "toe_en_afname": {
-    "toename": "meer dan",
-    "afname": "minder dan",
-    "gelijk": "gelijk aan",
-    "tijdverloop": {
-      "gisteren": "gisteren",
-      "geleden": "geleden",
-      "dagen": "dagen",
-      "week": {
-        "enkelvoud": "week",
-        "meervoud": "weken"
-      }
-    }
-  },
   "ic_opnames_per_dag": {
     "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
     "bron": {
@@ -606,8 +592,8 @@
         "verantwoording": "Dit dashboard is in korte tijd tot stand gekomen. Het is daarom nog niet gelukt om de code voor het inlezen van de data en het construeren van de JSON- bestanden open source beschikbaar te stellen. Dit zal binnen afzienbare tijd beschikbaar worden gesteld. De code van de webapplicatie is op 5 juni 2020 gepubliceerd op [GitHub](https://github.com/minvws/nl-covid19-data-dashboard). De [databerekeningen](https://github.com/minvws/nl-covid19-data-backend-processing) zijn ook beschikbaar via Github."
       },
       {
-        "cijfer": "Gedrag",
-        "verantwoording": "Deze gegevens worden elke drie weken geactualiseerd en als open databestand gepubliceerd door het RIVM. Op de dag dat het nieuwe bestand beschikbaar is, worden ook de gegevens op het Dashboard Coronavirus geactualiseerd. Het databestand bevat gegevens over het gedrag van de Nederlandse bevolking in relatie tot de corona gedragsregels. De basis hiervoor is een enquête.\n\nDe dataverzameling vindt telkens plaats via het internet (CAWI). Bij deze methode wordt de geprogrammeerde vragenlijst op internet geplaatst. De uitnodigingen voor het invullen van de enquête worden via e-mail verzonden. In de uitnodiging wordt het doel van het onderzoek toegelicht en RIVM als opdrachtgever genoemd. De Gedragsunit van het RIVM heeft de vragenlijst opgesteld. \n\nDe deelnemers aan het onderzoek zijn geselecteerd uit het Kantar Consumentenpanel (NIPObase). De steekproef bestaat uit respondenten van 16 jaar en ouder. De steekproeven zijn per veiligheidsregio representatief uitgezet naar geslacht, leeftijd (5 categorieën) en hoogst gevolgde opleiding (3 categorieën) (op randtotalen). Er is uitgegaan van een respons van 50%, waarbij een bruto steekproef van n=9.780 is uitgezet. \n\nDe vragenlijst is gedurende een week online beschikbaar voor de respondenten. Daarna wordt de dataverzameling afgesloten. Er vindt een controle plaats op de betrouwbaarheid van de antwoorden. Om de representativiteit voor de Nederlandse bevolking te verhogen worden de resultaten in twee stappen gewogen op basis van de de CBS populatiecijfers:\n\n1 Eerst is elke veiligheidsregio gewogen naar de ideaalcijfers van desbetreffende regio (op Sekse, Leeftijd en Opleiding).\n2 Vervolgens is elke veiligheidsregio ‘ingewogen’ in het totaal volgens het aandeel dat desbetreffende regio heeft in Nederland.\n\nVervolgens wordt de dataset verstuurd naar het RIVM. Het RIVM berekent op een gestandaardiseerde manier de indicatoren die in het open databestand zijn opgenomen."
+        "cijfer": "",
+        "verantwoording": ""
       },
       {
         "cijfer": "",
@@ -1310,6 +1296,20 @@
     "reference": {
       "href": "/verantwoording",
       "text": "Lees meer in de cijferverantwoording."
+    }
+  },
+  "toe_en_afname": {
+    "toename": "meer dan",
+    "afname": "minder dan",
+    "gelijk": "gelijk aan",
+    "tijdverloop": {
+      "gisteren": "gisteren",
+      "geleden": "geleden",
+      "dagen": "dagen",
+      "week": {
+        "enkelvoud": "week",
+        "meervoud": "weken"
+      }
     }
   }
 }
