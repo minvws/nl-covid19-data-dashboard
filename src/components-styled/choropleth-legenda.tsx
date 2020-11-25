@@ -23,7 +23,7 @@ export function ChoroplethLegenda({
               first={index === 0}
               last={index === thresholds.length - 1}
             />
-            {index > 0 && <Label>{threshold}</Label>}
+            <Label>{threshold}</Label>
           </Item>
         ))}
       </List>

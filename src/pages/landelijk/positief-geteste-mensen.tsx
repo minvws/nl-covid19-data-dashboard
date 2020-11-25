@@ -88,12 +88,8 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
             source: text.bronnen.rivm,
           }}
         >
-          {dataInfectedDelta && (
-            <PositiveTestedPeopleBarScale
-              data={dataInfectedDelta}
-              showAxis={true}
-            />
-          )}
+          <PositiveTestedPeopleBarScale data={data} showAxis />
+
           <Text>{text.barscale_toelichting}</Text>
         </KpiTile>
 
