@@ -9,9 +9,9 @@ import {
   typography,
   TypographyProps,
 } from 'styled-system';
+import IconGelijk from '~/assets/gelijk.svg';
 import IconUp from '~/assets/pijl-omhoog.svg';
 import IconDown from '~/assets/pijl-omlaag.svg';
-import IconGelijk from '~/assets/gelijk.svg';
 import siteText from '~/locale/index';
 import { DifferenceDecimal, DifferenceInteger } from '~/types/data';
 
@@ -100,7 +100,7 @@ function renderTileIndicator(value: DifferenceDecimal | DifferenceInteger) {
           <IconDown />
         </Span>
         <Span fontWeight="bold" mr="0.3em">
-          {splitText[0]}
+          {`${Math.abs(difference)} ${splitText[0]}`}
         </Span>
         <Span>{`${splitText[1]} ${timespanText}`}</Span>
       </Container>
