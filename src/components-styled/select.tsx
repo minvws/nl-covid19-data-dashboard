@@ -46,7 +46,7 @@ export function Select<T extends string>({
   );
 }
 
-const Container = styled.div(css({ position: 'relative' }));
+const Container = styled.div(css({ position: 'relative', maxWidth: '100%' }));
 
 const ClearButton = styled.button(
   css({
@@ -71,6 +71,7 @@ const StyledSelect = styled.select<{ isClearable: boolean }>((x) =>
   css({
     display: 'block',
     minWidth: '15em',
+    maxWidth: '100%',
     borderWidth: 1,
     borderStyle: 'solid',
     borderColor: 'lightGray',
