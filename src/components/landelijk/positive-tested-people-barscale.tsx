@@ -45,7 +45,7 @@ export function PositiveTestedPeopleBarScale(props: {
         showAxis={showAxis}
         showValue={showValue}
       />
-      {difference && <DifferenceIndicator value={difference} />}
+      {showValue && difference && <DifferenceIndicator value={difference} />}
     </>
   );
 }
