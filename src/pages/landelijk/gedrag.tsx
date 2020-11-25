@@ -11,6 +11,7 @@ import { SEOHead } from '~/components/seoHead';
 import { BehaviorChoroplethTile } from '~/domain/behavior/behavior-choropleth-tile';
 import { BehaviorLineChartTile } from '~/domain/behavior/behavior-line-chart-tile';
 import { BehaviorTableTile } from '~/domain/behavior/behavior-table-tile';
+import { MoreInformation } from '~/domain/behavior/components/more-information';
 import siteText from '~/locale/index';
 import {
   getNationalStaticProps,
@@ -81,6 +82,8 @@ const BehaviorPage: FCWithLayout<NationalPageProps> = (props) => {
       />
 
       <BehaviorChoroplethTile />
+
+      <MoreInformation />
     </>
   );
 };
