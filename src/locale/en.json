@@ -730,7 +730,7 @@
     "select_region_municipality_legend": "Select a municipality:",
     "select_region_type_legend": "Show numbers from:",
     "your_municipality": "Municipality",
-    "belangrijk_bericht": "There are [country-wide measures](https://www.rijksoverheid.nl/actueel/nieuws/2020/11/17/gedeeltelijke-lockdown-gaat-verder) to stop the quick spread of the coronavirus."
+    "belangrijk_bericht": "There are [country-wide measures](https://www.rijksoverheid.nl/actueel/nieuws/2020/11/17/gedeeltelijke-lockdown-gaat-verder) to stop the spread of the coronavirus."
   },
   "common": {
     "metadata": {
@@ -1061,12 +1061,12 @@
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Level of risk",
-    "selecteer_toelichting": "The map indicates the level of risk per safety region.\n\nThere are [country-wide measures](https://www.rijksoverheid.nl/actueel/nieuws/2020/11/17/gedeeltelijke-lockdown-gaat-verder) to stop the quick spread of the coronavirus. \n\n[More about risk levels](/over-risiconiveaus)",
+    "selecteer_toelichting": "The map indicates the level of risk per safety region.\n\n[More about risk levels](/over-risiconiveaus)",
     "metadata": {
       "title": "Level of risk per safety region | Dashboard Coronavirus | Government.nl",
       "description": "Overview of the level of risk per safety region in the Netherlands."
     },
-    "belangrijk_bericht": "There are [country-wide measures](https://www.rijksoverheid.nl/actueel/nieuws/2020/11/17/gedeeltelijke-lockdown-gaat-verder) to stop the quick spread of the coronavirus."
+    "belangrijk_bericht": "There are [country-wide measures](https://www.rijksoverheid.nl/actueel/nieuws/2020/11/17/gedeeltelijke-lockdown-gaat-verder) to stop the spread of the coronavirus."
   },
   "gemeente_index": {
     "selecteer_titel": "Select your municipality",
@@ -1084,7 +1084,7 @@
   },
   "escalatie_niveau": {
     "titel": "Level of risk",
-    "toelichting": "The map indicates the level of risk per safety region.\n\nThere are [country-wide measures](https://www.rijksoverheid.nl/actueel/nieuws/2020/11/17/gedeeltelijke-lockdown-gaat-verder) to stop the quick spread of the coronavirus. \n\n[More about risk levels](/over-risiconiveaus)",
+    "toelichting": "The map indicates the level of risk per safety region.\n\n[More about risk levels](/over-risiconiveaus)",
     "types": {
       "1": {
         "titel": "Caution",
