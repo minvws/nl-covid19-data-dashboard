@@ -48,6 +48,7 @@ const StyledAnchorTile = styled(Tile)(
     display: 'flex',
     mx: [-4, null, 0],
     flexDirection: ['column', null, 'row'],
+    boxShadow: 'none',
   })
 );
 
