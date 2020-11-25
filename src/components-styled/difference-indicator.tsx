@@ -100,7 +100,7 @@ function renderTileIndicator(value: DifferenceDecimal | DifferenceInteger) {
           <IconDown />
         </Span>
         <Span fontWeight="bold" mr="0.3em">
-          {splitText[0]}
+          {`${Math.abs(difference)} ${splitText[0]}`}
         </Span>
         <Span>{`${splitText[1]} ${timespanText}`}</Span>
       </Container>

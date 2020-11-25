@@ -231,7 +231,7 @@ function NationalLayout(props: NationalLayoutProps) {
                     <span className="metric-wrapper">
                       <IntakeHospitalMetric data={data} />
                       <IntakeHospitalBarScale
-                        data={data.intake_hospital_ma}
+                        data={data}
                         showAxis={false}
                         showValue={false}
                       />
