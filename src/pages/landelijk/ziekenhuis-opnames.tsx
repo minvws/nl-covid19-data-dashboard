@@ -64,7 +64,7 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
           description={text.extra_uitleg}
           metadata={{
             date: dataIntake.last_value.date_of_report_unix,
-            source: text.bronnen.rivm,
+            source: text.bronnen.nice,
           }}
         >
           <IntakeHospitalBarScale
@@ -98,7 +98,7 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
         }))}
         signaalwaarde={40}
         metadata={{
-          source: text.bronnen.rivm,
+          source: text.bronnen.nice,
         }}
       />
 
@@ -124,7 +124,7 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
         }}
         metadata={{
           date: dataIntake.last_value.date_of_report_unix,
-          source: text.bronnen.rivm,
+          source: text.bronnen.nice,
         }}
         showDataWarning
       >
