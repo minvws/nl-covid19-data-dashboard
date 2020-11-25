@@ -35,7 +35,7 @@ import { formatDateFromSeconds } from '~/utils/formatDate';
 import { MultipleLineChartTile } from '~/components-styled/multiple-line-chart-tile';
 import { RegionControlOption } from '~/components-styled/chart-region-controls';
 import { ChartTile } from '~/components-styled/chart-tile';
-import { AgeGroupChart } from '~/components-styled/age-group-chart';
+import { AgeGroupChartWrapper } from '~/domain/infected-people/age-group/age-group-chart-wrapper';
 
 const text = siteText.positief_geteste_personen;
 const ggdText = siteText.positief_geteste_personen_ggd;
@@ -136,9 +136,9 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         legend={
           legendItems // this data value should probably not be optional
             ? {
-              title: text.chloropleth_legenda.titel,
-              items: legendItems,
-            }
+                title: text.chloropleth_legenda.titel,
+                items: legendItems,
+              }
             : undefined
         }
       >
@@ -214,7 +214,9 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           source: text.bron,
         }}
       >
-        <AgeGroupChart data={data.infected_age_groups} />
+        <Box mx="-2rem">
+          <AgeGroupChartWrapper data={data.infected_age_groups} />
+        </Box>
       </ChartTile>
 
       <ContentHeader_weekRangeHack
