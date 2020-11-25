@@ -10,6 +10,7 @@ import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { SEOHead } from '~/components/seoHead';
 import { BehaviorLineChartTile } from '~/domain/behavior/behavior-line-chart-tile';
 import { BehaviorTableTile } from '~/domain/behavior/behavior-table-tile';
+import { MoreInformation } from '~/domain/behavior/components/more-information';
 import siteText from '~/locale/index';
 import {
   getSafetyRegionData,
@@ -78,6 +79,8 @@ const BehaviorPage: FCWithLayout<ISafetyRegionData> = (props) => {
         introduction={text.basisregels_over_tijd.intro}
         values={behaviorData.values}
       />
+
+      <MoreInformation />
     </>
   );
 };
