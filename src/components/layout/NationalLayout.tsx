@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Arrow from '~/assets/arrow.svg';
 import Arts from '~/assets/arts.svg';
-import Gedrag from '~/assets/gedrag.svg';
 import Notification from '~/assets/notification.svg';
 import ReproIcon from '~/assets/reproductiegetal.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
@@ -25,7 +24,6 @@ import { ReproductionIndexMetric } from '~/components/landelijk/reproduction-ind
 import { SewerWaterMetric } from '~/components/landelijk/sewer-water-metric';
 import { SuspectedPatientsMetric } from '~/components/landelijk/suspected-patients-metric';
 import Layout from '~/components/layout';
-import { BehaviorMetric } from '~/domain/behavior/behavior-metric';
 import siteText from '~/locale/index';
 import { NationalPageProps } from '~/static-props/nl-data';
 import theme from '~/style/theme';
@@ -318,22 +316,6 @@ function NationalLayout(props: NationalLayoutProps) {
                     />
                     <span className="metric-wrapper">
                       <SewerWaterMetric data={data.sewer} />
-                    </span>
-                  </a>
-                </Link>
-              </li>
-            </ul>
-            <h2>{siteText.nationaal_layout.headings.gedrag}</h2>
-            <ul>
-              <li>
-                <Link href="/landelijk/gedrag">
-                  <a className={getClassName('/landelijk/gedrag')}>
-                    <HeadingWithIcon
-                      icon={<Gedrag />}
-                      title={siteText.nl_gedrag.sidebar.titel}
-                    />
-                    <span className="metric-wrapper">
-                      <BehaviorMetric data={data.behavior} />
                     </span>
                   </a>
                 </Link>
