@@ -52,7 +52,7 @@ const IntakeIntensiveCare: FCWithLayout<NationalPageProps> = (props) => {
             source: text.bronnen.nice,
           }}
         >
-          <IntakeIntensiveCareBarscale data={dataIntake} showAxis={true} />
+          <IntakeIntensiveCareBarscale data={data} showAxis showValue />
           <Text>{text.extra_uitleg}</Text>
         </KpiTile>
 
