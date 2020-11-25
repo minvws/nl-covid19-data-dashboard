@@ -67,12 +67,12 @@
       "nice": {
         "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
         "text": "Stichting NICE",
-        "download": ""
+        "download": "https://stichting-nice.nl/covid-19/public/new-intake/confirmed/"
       },
       "lnaz": {
-        "href": "",
-        "text": "",
-        "download": ""
+        "href": "https://lcps.nu/datafeed/",
+        "text": "LCPS",
+        "download": "https://lcps.nu/wp-content/uploads/covid-19.csv"
       }
     },
     "kpi_bedbezetting": {
@@ -124,8 +124,8 @@
     "bronnen": {
       "nivel": {
         "download": "",
-        "href": "",
-        "text": ""
+        "href": "https://www.nivel.nl/nl/nivel-zorgregistraties-eerste-lijn/nivel-zorgregistraties-eerste-lijn",
+        "text": "Nivel Zorgregistraties Eerste Lijn"
       }
     }
   },
@@ -151,21 +151,21 @@
       "rivm": {
         "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
         "text": "NICE foundation",
-        "download": ""
+        "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv"
       },
       "lnaz": {
         "href": "https://lcps.nu/datafeed/",
         "text": "LCPS",
-        "download": ""
+        "download": "https://lcps.nu/wp-content/uploads/covid-19.csv"
       },
       "rivmSource": {
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
         "text": "RIVM"
       },
       "nice": {
-        "href": "",
-        "text": "",
-        "download": ""
+        "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
+        "text": "Stichting NICE",
+        "download": "https://stichting-nice.nl/covid-19/public/zkh/new-intake/confirmed"
       }
     },
     "kpi_bedbezetting": {
@@ -250,9 +250,9 @@
     },
     "bronnen": {
       "rivm": {
-        "download": "",
-        "href": "",
-        "text": ""
+        "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
+        "text": "RIVM"
       }
     }
   },
@@ -288,9 +288,9 @@
     },
     "bronnen": {
       "rivm": {
-        "download": "",
-        "href": "",
-        "text": ""
+        "download": "https://data.rivm.nl/covid-19/COVID-19_prevalentie.json",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/097155aa-75eb-4caa-8ed3-4c6edb80467e",
+        "text": "RIVM"
       }
     }
   },
@@ -324,9 +324,9 @@
     },
     "bronnen": {
       "rivm": {
-        "download": "",
-        "href": "",
-        "text": ""
+        "download": "https://data.rivm.nl/covid-19/COVID-19_reproductiegetal.json",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/ed0699d1-c9d5-4436-8517-27eb993eab6e",
+        "text": "RIVM"
       }
     }
   },
@@ -407,9 +407,9 @@
     },
     "bronnen": {
       "rivm": {
-        "download": "",
-        "href": "",
-        "text": ""
+        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "text": "RIVM"
       }
     }
   },
@@ -443,9 +443,9 @@
     },
     "bronnen": {
       "rivm": {
-        "download": "",
-        "href": "",
-        "text": ""
+        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "text": "RIVM"
       }
     }
   },
@@ -475,9 +475,9 @@
     },
     "bronnen": {
       "rivm": {
-        "download": "",
-        "href": "",
-        "text": ""
+        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "text": "RIVM"
       }
     }
   },
@@ -520,9 +520,9 @@
     },
     "bronnen": {
       "rivm": {
-        "download": "",
-        "text": "",
-        "href": ""
+        "download": "https://data.rivm.nl/covid-19/COVID-19_rioolwaterdata.csv",
+        "text": "RIVM",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
       }
     }
   },
@@ -827,9 +827,9 @@
     },
     "bronnen": {
       "rivm": {
-        "download": "",
-        "href": "",
-        "text": ""
+        "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
+        "text": "RIVM"
       }
     }
   },
@@ -887,9 +887,9 @@
     },
     "bronnen": {
       "rivm": {
-        "download": "",
-        "href": "",
-        "text": ""
+        "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
+        "text": "RIVM"
       }
     }
   },
@@ -930,9 +930,9 @@
     },
     "bronnen": {
       "rivm": {
-        "download": "",
-        "text": "",
-        "href": ""
+        "download": "https://data.rivm.nl/covid-19/COVID-19_rioolwaterdata.csv",
+        "text": "RIVM",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
       }
     }
   },
@@ -964,9 +964,9 @@
     },
     "bronnen": {
       "rivm": {
-        "download": "",
-        "href": "",
-        "text": ""
+        "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
+        "text": "RIVM"
       }
     }
   },
@@ -1010,9 +1010,9 @@
     },
     "bronnen": {
       "rivm": {
-        "download": "",
-        "href": "",
-        "text": ""
+        "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
+        "text": "RIVM"
       }
     }
   },
@@ -1053,9 +1053,9 @@
     },
     "bronnen": {
       "rivm": {
-        "download": "",
-        "text": "",
-        "href": ""
+        "download": "https://data.rivm.nl/covid-19/COVID-19_rioolwaterdata.csv",
+        "text": "RIVM",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
       }
     }
   },
@@ -1150,8 +1150,8 @@
     "bronnen": {
       "rivm": {
         "download": "",
-        "href": "",
-        "text": ""
+        "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+        "text": "RIVM"
       }
     }
   },
@@ -1192,8 +1192,8 @@
     "bronnen": {
       "rivm": {
         "download": "",
-        "href": "",
-        "text": ""
+        "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+        "text": "RIVM"
       }
     }
   },
@@ -1222,9 +1222,9 @@
     },
     "bronnen": {
       "rivm": {
-        "download": "",
-        "href": "",
-        "text": ""
+        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "text": "RIVM"
       }
     }
   },
@@ -1253,9 +1253,9 @@
     },
     "bronnen": {
       "rivm": {
-        "download": "",
-        "href": "",
-        "text": ""
+        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "text": "RIVM"
       }
     }
   },
@@ -1288,9 +1288,9 @@
     },
     "bronnen": {
       "rivm": {
-        "download": "",
-        "href": "",
-        "text": ""
+        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "text": "RIVM"
       }
     }
   },
@@ -1390,8 +1390,8 @@
     "bronnen": {
       "rivm": {
         "download": "",
-        "text": "",
-        "href": ""
+        "text": "Name source",
+        "href": "link to source"
       }
     }
   },
@@ -1451,8 +1451,8 @@
     "bronnen": {
       "rivm": {
         "download": "",
-        "text": "",
-        "href": ""
+        "text": "Name source",
+        "href": "link to source"
       }
     }
   },
