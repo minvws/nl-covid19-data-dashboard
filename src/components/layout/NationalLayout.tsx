@@ -163,7 +163,7 @@ function NationalLayout(props: NationalLayoutProps) {
                     <span className="metric-wrapper">
                       <PositiveTestedPeopleMetric data={data} />
                       <PositiveTestedPeopleBarScale
-                        data={data.infected_people_delta_normalized}
+                        data={data}
                         showAxis={false}
                         showValue={false}
                       />
@@ -229,7 +229,7 @@ function NationalLayout(props: NationalLayoutProps) {
                     <span className="metric-wrapper">
                       <IntakeHospitalMetric data={data} />
                       <IntakeHospitalBarScale
-                        data={data.intake_hospital_ma}
+                        data={data}
                         showAxis={false}
                         showValue={false}
                       />
