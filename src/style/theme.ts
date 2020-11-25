@@ -94,6 +94,7 @@ export const colors = {
   annotation: '#595959',
   notification: '#cd005a',
   red: '#F35363',
+  category: '#6b6b6b',
 
   data: {
     primary: '#007BC7',

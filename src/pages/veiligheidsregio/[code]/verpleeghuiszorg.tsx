@@ -1,12 +1,12 @@
 import CoronaVirus from '~/assets/coronavirus.svg';
 import Locatie from '~/assets/locaties.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
+import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
-import { ContentHeader } from '~/components/contentHeader';
 import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { SEOHead } from '~/components/seoHead';
@@ -56,9 +56,9 @@ const NursingHomeCare: FCWithLayout<ISafetyRegionData> = (props) => {
         )}
         metadata={{
           datumsText: positiveTestPeopleText.datums,
-          dateUnix: nursinghomeLastValue.date_of_report_unix,
-          dateInsertedUnix: nursinghomeLastValue.date_of_insertion_unix,
-          dataSource: positiveTestPeopleText.bron,
+          dateInfo: nursinghomeLastValue.date_of_report_unix,
+          dateOfInsertionUnix: nursinghomeLastValue.date_of_insertion_unix,
+          dataSources: [positiveTestPeopleText.bronnen.rivm],
         }}
         reference={positiveTestPeopleText.reference}
       />
@@ -69,7 +69,7 @@ const NursingHomeCare: FCWithLayout<ISafetyRegionData> = (props) => {
           description={positiveTestPeopleText.extra_uitleg}
           metadata={{
             date: nursinghomeLastValue.date_of_report_unix,
-            source: positiveTestPeopleText.bron,
+            source: positiveTestPeopleText.bronnen.rivm,
           }}
         >
           <KpiValue
@@ -80,7 +80,7 @@ const NursingHomeCare: FCWithLayout<ISafetyRegionData> = (props) => {
       </TwoKpiSection>
 
       <LineChartTile
-        metadata={{ source: positiveTestPeopleText.bron }}
+        metadata={{ source: positiveTestPeopleText.bronnen.rivm }}
         title={positiveTestPeopleText.linechart_titel}
         values={data.nursing_home.values.map((value) => ({
           value: value.newly_infected_people,
@@ -89,6 +89,7 @@ const NursingHomeCare: FCWithLayout<ISafetyRegionData> = (props) => {
       />
 
       <ContentHeader
+        skipLinkAnchor={true}
         title={replaceVariablesInText(locationsText.titel, {
           safetyRegion: safetyRegionName,
         })}
@@ -96,9 +97,9 @@ const NursingHomeCare: FCWithLayout<ISafetyRegionData> = (props) => {
         subtitle={locationsText.pagina_toelichting}
         metadata={{
           datumsText: locationsText.datums,
-          dateUnix: nursinghomeLastValue.date_of_report_unix,
-          dateInsertedUnix: nursinghomeLastValue.date_of_insertion_unix,
-          dataSource: locationsText.bron,
+          dateInfo: nursinghomeLastValue.date_of_report_unix,
+          dateOfInsertionUnix: nursinghomeLastValue.date_of_insertion_unix,
+          dataSources: [locationsText.bronnen.rivm],
         }}
         reference={locationsText.reference}
       />
@@ -108,7 +109,7 @@ const NursingHomeCare: FCWithLayout<ISafetyRegionData> = (props) => {
           title={locationsText.kpi_titel}
           metadata={{
             date: nursinghomeLastValue.date_of_report_unix,
-            source: locationsText.bron,
+            source: locationsText.bronnen.rivm,
           }}
         >
           <KpiValue
@@ -122,7 +123,7 @@ const NursingHomeCare: FCWithLayout<ISafetyRegionData> = (props) => {
           title={locationsText.barscale_titel}
           metadata={{
             date: nursinghomeLastValue.date_of_report_unix,
-            source: locationsText.bron,
+            source: locationsText.bronnen.rivm,
           }}
         >
           <KpiValue
@@ -141,12 +142,13 @@ const NursingHomeCare: FCWithLayout<ISafetyRegionData> = (props) => {
             date: value.date_of_report_unix,
           }))}
           metadata={{
-            source: locationsText.bron,
+            source: locationsText.bronnen.rivm,
           }}
         />
       )}
 
       <ContentHeader
+        skipLinkAnchor={true}
         title={replaceVariablesInText(mortalityText.titel, {
           safetyRegion: safetyRegionName,
         })}
@@ -154,9 +156,9 @@ const NursingHomeCare: FCWithLayout<ISafetyRegionData> = (props) => {
         subtitle={mortalityText.pagina_toelichting}
         metadata={{
           datumsText: mortalityText.datums,
-          dateUnix: nursinghomeLastValue.date_of_report_unix,
-          dateInsertedUnix: nursinghomeLastValue.date_of_insertion_unix,
-          dataSource: mortalityText.bron,
+          dateInfo: nursinghomeLastValue.date_of_report_unix,
+          dateOfInsertionUnix: nursinghomeLastValue.date_of_insertion_unix,
+          dataSources: [mortalityText.bronnen.rivm],
         }}
         reference={mortalityText.reference}
       />
@@ -167,7 +169,7 @@ const NursingHomeCare: FCWithLayout<ISafetyRegionData> = (props) => {
           description={mortalityText.extra_uitleg}
           metadata={{
             date: nursinghomeLastValue.date_of_report_unix,
-            source: mortalityText.bron,
+            source: mortalityText.bronnen.rivm,
           }}
         >
           <KpiValue
@@ -179,7 +181,7 @@ const NursingHomeCare: FCWithLayout<ISafetyRegionData> = (props) => {
 
       {data && (
         <LineChartTile
-          metadata={{ source: mortalityText.bron }}
+          metadata={{ source: mortalityText.bronnen.rivm }}
           title={mortalityText.linechart_titel}
           values={data.nursing_home.values.map((value) => ({
             value: value.deceased_daily,

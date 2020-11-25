@@ -1,11 +1,11 @@
 import Ziektegolf from '~/assets/ziektegolf.svg';
 import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
+import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { Legenda } from '~/components-styled/legenda';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { AreaChart } from '~/components/charts/index';
-import { ContentHeader } from '~/components/contentHeader';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
@@ -37,11 +37,11 @@ const InfectiousPeople: FCWithLayout<NationalPageProps> = (props) => {
         subtitle={text.toelichting_pagina}
         metadata={{
           datumsText: text.datums,
-          dateUnix:
+          dateInfo:
             infectiousPeopleLastKnownAverage.last_value.date_of_report_unix,
-          dateInsertedUnix:
+          dateOfInsertionUnix:
             infectiousPeopleLastKnownAverage.last_value.date_of_insertion_unix,
-          dataSource: text.bron,
+          dataSources: [text.bronnen.rivm],
         }}
         reference={text.reference}
       />
@@ -53,7 +53,7 @@ const InfectiousPeople: FCWithLayout<NationalPageProps> = (props) => {
           metadata={{
             date:
               infectiousPeopleLastKnownAverage.last_value.date_of_report_unix,
-            source: text.bron,
+            source: text.bronnen.rivm,
           }}
         >
           <KpiValue
@@ -67,7 +67,7 @@ const InfectiousPeople: FCWithLayout<NationalPageProps> = (props) => {
 
       {count?.values && (
         <ChartTileWithTimeframe
-          metadata={{ source: text.bron }}
+          metadata={{ source: text.bronnen.rivm }}
           title={text.linechart_titel}
           timeframeOptions={['all', '5weeks']}
           timeframeInitialValue="5weeks"

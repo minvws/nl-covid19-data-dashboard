@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import Getest from '~/assets/test.svg';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
+import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
@@ -10,7 +11,6 @@ import { municipalThresholds } from '~/components/choropleth/municipal-threshold
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
-import { ContentHeader } from '~/components/contentHeader';
 import { FCWithLayout } from '~/components/layout';
 import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
 import { SEOHead } from '~/components/seoHead';
@@ -20,7 +20,6 @@ import {
   getMunicipalityPaths,
   IMunicipalityData,
 } from '~/static-props/municipality-data';
-import { MunicipalPositiveTestedPeople } from '~/types/data.d';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text = siteText.gemeente_positief_geteste_personen;
@@ -28,8 +27,7 @@ const text = siteText.gemeente_positief_geteste_personen;
 const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
   const { data, municipalityName } = props;
   const router = useRouter();
-  const positivelyTestedPeople: MunicipalPositiveTestedPeople =
-    data.positive_tested_people;
+  const positivelyTestedPeople = data.positive_tested_people;
 
   return (
     <>
@@ -50,10 +48,10 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: positivelyTestedPeople.last_value.date_of_report_unix,
-          dateInsertedUnix:
+          dateInfo: positivelyTestedPeople.last_value.date_of_report_unix,
+          dateOfInsertionUnix:
             positivelyTestedPeople.last_value.date_of_insertion_unix,
-          dataSource: text.bron,
+          dataSources: [text.bronnen.rivm],
         }}
         reference={text.reference}
       />
@@ -63,7 +61,7 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
           title={text.barscale_titel}
           metadata={{
             date: positivelyTestedPeople.last_value.date_of_report_unix,
-            source: text.bron,
+            source: text.bronnen.rivm,
           }}
         >
           <KpiValue
@@ -77,7 +75,7 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
           title={text.kpi_titel}
           metadata={{
             date: positivelyTestedPeople.last_value.date_of_report_unix,
-            source: text.bron,
+            source: text.bronnen.rivm,
           }}
         >
           <KpiValue
@@ -100,7 +98,7 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
             date: value.date_of_report_unix,
           }))}
           metadata={{
-            source: text.bron,
+            source: text.bronnen.rivm,
           }}
         />
       )}
@@ -116,7 +114,7 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
         }}
         metadata={{
           date: positivelyTestedPeople.last_value.date_of_report_unix,
-          source: text.bron,
+          source: text.bronnen.rivm,
         }}
       >
         <MunicipalityChoropleth

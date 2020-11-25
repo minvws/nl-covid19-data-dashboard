@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { Spacer } from '~/components-styled/base';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
+import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
@@ -14,7 +15,6 @@ import { createSelectMunicipalHandler } from '~/components/choropleth/select-han
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createMunicipalHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/municipal/create-municipal-hospital-admissions-tooltip';
 import { createRegionHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/region/create-region-hospital-admissions-tooltip';
-import { ContentHeader_sourcesHack } from '~/components/contentHeader_sourcesHack';
 import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-barscale';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
@@ -43,17 +43,16 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
         title={text.metadata.title}
         description={text.metadata.description}
       />
-      <ContentHeader_sourcesHack
+      <ContentHeader
         category={siteText.nationaal_layout.headings.ziekenhuizen}
         title={text.titel}
         icon={<Ziekenhuis />}
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: dataIntake.last_value.date_of_report_unix,
-          dateInsertedUnix: dataIntake.last_value.date_of_insertion_unix,
-          dataSourceA: text.bronnen.rivm,
-          dataSourceB: text.bronnen.lnaz,
+          dateInfo: dataIntake.last_value.date_of_report_unix,
+          dateOfInsertionUnix: dataIntake.last_value.date_of_insertion_unix,
+          dataSources: [text.bronnen.nice, text.bronnen.lnaz],
         }}
         reference={text.reference}
       />
@@ -121,7 +120,7 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
         }}
         metadata={{
           date: dataIntake.last_value.date_of_report_unix,
-          source: text.bronnen.rivmSource,
+          source: text.bronnen.rivm,
         }}
         showDataWarning
       >

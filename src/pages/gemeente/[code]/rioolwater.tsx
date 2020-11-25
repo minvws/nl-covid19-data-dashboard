@@ -5,12 +5,12 @@ import {
   ChartTile,
   ChartTileWithTimeframe,
 } from '~/components-styled/chart-tile';
+import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { Select } from '~/components-styled/select';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { BarChart } from '~/components/charts';
-import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRangeHack';
 import { FCWithLayout } from '~/components/layout';
 import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
 import { SewerWaterChart } from '~/components/lineChart/sewer-water-chart';
@@ -81,7 +81,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
         })}
       />
 
-      <ContentHeader_weekRangeHack
+      <ContentHeader
         category={siteText.gemeente_layout.headings.vroege_signalen}
         title={replaceVariablesInText(text.titel, {
           municipality: municipalityName,
@@ -90,10 +90,12 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          weekStartUnix: sewerAverages.last_value.week_start_unix,
-          weekEndUnix: sewerAverages.last_value.week_end_unix,
+          dateInfo: {
+            weekStartUnix: sewerAverages.last_value.week_start_unix,
+            weekEndUnix: sewerAverages.last_value.week_end_unix,
+          },
           dateOfInsertionUnix: sewerAverages.last_value.date_of_insertion_unix,
-          dataSource: text.bron,
+          dataSources: [text.bronnen.rivm],
         }}
         reference={text.reference}
       />
@@ -108,7 +110,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
                 sewerAverages.last_value.week_start_unix,
                 sewerAverages.last_value.week_end_unix,
               ],
-              source: text.bron,
+              source: text.bronnen.rivm,
             }}
           >
             <KpiValue
@@ -130,7 +132,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
               sewerAverages.last_value.week_start_unix,
               sewerAverages.last_value.week_end_unix,
             ],
-            source: text.bron,
+            source: text.bronnen.rivm,
           }}
         >
           <KpiValue
@@ -143,7 +145,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
       {lineChartData && (
         <ChartTileWithTimeframe
           title={text.linechart_titel}
-          metadata={{ source: text.bron }}
+          metadata={{ source: text.bronnen.rivm }}
           timeframeOptions={['all', '5weeks']}
           timeframeInitialValue="all"
         >
@@ -191,7 +193,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
               sewerAverages.last_value.week_start_unix,
               sewerAverages.last_value.week_end_unix,
             ],
-            source: text.bron,
+            source: text.bronnen.rivm,
           }}
         >
           <BarChart

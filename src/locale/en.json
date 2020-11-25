@@ -53,10 +53,6 @@
   },
   "ic_opnames_per_dag": {
     "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
-    "bron": {
-      "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
-      "text": "Stichting NICE"
-    },
     "titel": "Intensive care admissions by day",
     "pagina_toelichting": "Number of confirmed COVID-19 cases who are admitted to a hospital intensive care unit (ICU) per day.",
     "barscale_titel": "Intensive care admissions per day",
@@ -66,11 +62,13 @@
     "bronnen": {
       "nice": {
         "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
-        "text": "Stichting NICE"
+        "text": "Stichting NICE",
+        "download": "https://stichting-nice.nl/covid-19/public/new-intake/confirmed/"
       },
       "lnaz": {
-        "href": "",
-        "text": ""
+        "href": "https://lcps.nu/datafeed/",
+        "text": "LCPS",
+        "download": "https://lcps.nu/wp-content/uploads/covid-19.csv"
       }
     },
     "kpi_bedbezetting": {
@@ -94,10 +92,6 @@
   },
   "verdenkingen_huisartsen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
-    "bron": {
-      "href": "https://www.nivel.nl/en/nivel-primary-care-database",
-      "text": "Nivel Primary Care Database"
-    },
     "estimated_amount_of_patients": "Estimated number of patients with symptoms that could indicate COVID-19:",
     "titel": "Estimated number of patients who contact the general practitioner for the first time with COVID-19 symptoms",
     "pagina_toelichting": "Based on the registered diagnoses by general practitioners every week, NIVEL calculates the number patients who contact the general practitioner for the first time due to COVID-19 like symptoms.",
@@ -118,14 +112,17 @@
     "reference": {
       "href": "",
       "text": "Read more in 'explanation of the data presented'."
+    },
+    "bronnen": {
+      "nivel": {
+        "download": "",
+        "href": "https://www.nivel.nl/nl/nivel-zorgregistraties-eerste-lijn/nivel-zorgregistraties-eerste-lijn",
+        "text": "Nivel Zorgregistraties Eerste Lijn"
+      }
     }
   },
   "ziekenhuisopnames_per_dag": {
     "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
-    "bron": {
-      "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
-      "text": "NICE foundation"
-    },
     "titel": "Hospital admissions per day",
     "pagina_toelichting": "Number of confirmed COVID-19 cases who are admitted to a hospital per day.\n\nPlease note: as of 13 October 2020, data on hospital admissions is obtained from a new source. For more information see the explanation of the data presented.",
     "barscale_titel": "Hospital admissions per day",
@@ -139,17 +136,20 @@
       "geen_meldingen": "No reported admissions"
     },
     "bronnen": {
-      "rivm": {
+      "nice": {
         "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
-        "text": "NICE foundation"
+        "text": "Stichting NICE",
+        "download": "https://stichting-nice.nl/covid-19/public/zkh/new-intake/confirmed"
       },
       "lnaz": {
         "href": "https://lcps.nu/datafeed/",
-        "text": "LCPS"
+        "text": "LCPS",
+        "download": "https://lcps.nu/wp-content/uploads/covid-19.csv"
       },
-      "rivmSource": {
+      "rivm": {
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
-        "text": "RIVM"
+        "text": "RIVM",
+        "download": ""
       }
     },
     "kpi_bedbezetting": {
@@ -174,10 +174,6 @@
   },
   "positief_geteste_personen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "bron": {
-      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
-      "text": "RIVM"
-    },
     "titel": "Number of confirmed cases",
     "pagina_toelichting": "By keeping track of the number of confirmed cases, we are able to determine the rate at which the virus is spreading before it reaches the intensive care. This keeps us prepared.",
     "barscale_titel": "Average number of confirmed cases per 100,000 inhabitants per day.",
@@ -231,15 +227,18 @@
     "reference": {
       "href": "",
       "text": "Read more in 'explanation of the data presented'."
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
+        "text": "RIVM"
+      }
     }
   },
   "besmettelijke_personen": {
     "title": "Number of infectious people",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
-    "bron": {
-      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/097155aa-75eb-4caa-8ed3-4c6edb80467e",
-      "text": "RIVM"
-    },
     "legenda_line": "The number of infectious people in the Netherlands.",
     "legenda_marge": "The confidence interval shows the range between which the number of infectious people falls.",
     "rangeLegendLabel": "Confidence interval",
@@ -262,16 +261,19 @@
     "reference": {
       "href": "",
       "text": "Read more in 'explanation of the data presented'."
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/097155aa-75eb-4caa-8ed3-4c6edb80467e",
+        "text": "RIVM"
+      }
     }
   },
   "reproductiegetal": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
     "rangeLegendLabel": "Confidence interval",
     "lineLegendLabel": "Effective R",
-    "bron": {
-      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/ed0699d1-c9d5-4436-8517-27eb993eab6e",
-      "text": "RIVM"
-    },
     "legenda_r": "The reproduction number is not an exact value but a reliable estimate. Reproduction numbers (R) using data from less than two weeks ago are not reliable, therefore, the line depicting R stops at a date two weeks in the past. ",
     "legenda_marge": "The confidence interval shows the range between which the number R falls. This is updated on a weekly basis.",
     "reproductie_explainer_alt": "Image to support the explanation above",
@@ -291,6 +293,13 @@
     "reference": {
       "href": "",
       "text": "Read more in 'explanation of the data presented'."
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_reproductiegetal.json",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/ed0699d1-c9d5-4436-8517-27eb993eab6e",
+        "text": "RIVM"
+      }
     }
   },
   "overige_gegevens": {
@@ -340,10 +349,6 @@
   },
   "verpleeghuis_besmette_locaties": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "bron": {
-      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
-      "text": "RIVM"
-    },
     "titel": "Number of infected locations",
     "pagina_toelichting": "This number is an estimation of the number of new nursing home locations where there is at least one confirmed case.\n\nThe calculation method has been changed on the 29th of September. Please also see the data explanation section.",
     "barscale_titel": "Number of new locations per day",
@@ -367,14 +372,17 @@
     "reference": {
       "href": "",
       "text": "Read more in 'explanation of the data presented'."
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "text": "RIVM"
+      }
     }
   },
   "verpleeghuis_positief_geteste_personen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "bron": {
-      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
-      "text": "RIVM"
-    },
     "titel": "Number of confirmed cases",
     "barscale_titel": "Number of confirmed cases in nursing homes per day",
     "extra_uitleg": "Number of new confirmed cases in nursing homes that have been reported per day.",
@@ -396,14 +404,17 @@
     "reference": {
       "href": "",
       "text": "Read more in 'explanation of the data presented'."
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "text": "RIVM"
+      }
     }
   },
   "verpleeghuis_oversterfte": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "bron": {
-      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
-      "text": "RIVM"
-    },
     "titel": "Mortality",
     "pagina_toelichting": "Daily number of deceased residents with confirmed cases of COVID-19 in nursing homes.",
     "barscale_titel": "Number of deceased residents",
@@ -421,6 +432,13 @@
     "reference": {
       "href": "",
       "text": "Read more in 'explanation of the data presented'."
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "text": "RIVM"
+      }
     }
   },
   "blok_verpleeghuis_zorg": {
@@ -432,10 +450,6 @@
   },
   "rioolwater_metingen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "bron": {
-      "text": "RIVM",
-      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
-    },
     "titel": "Sewage water examination",
     "pagina_toelichting": "Average number of coronavirus particles per 100.000 inhabitants found in wastewater. The weekly average is calculated by adding up all the values measured at roughly 300 locations and dividing this by the number of measurements taken.",
     "barscale_titel": "Average number of virus particles per 100.000 inhabitants",
@@ -459,6 +473,13 @@
     "reference": {
       "href": "",
       "text": "Read more in 'explanation of the data presented'."
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_rioolwaterdata.csv",
+        "text": "RIVM",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
+      }
     }
   },
   "notfound_titel": {
@@ -669,6 +690,7 @@
   },
   "common": {
     "metadata": {
+      "download": "Download data",
       "source": "Source",
       "date": "Value of {{date}}",
       "dateFromTo": "Value from {{dateFrom}} to {{dateTo}}"
@@ -745,10 +767,6 @@
     "map_toelichting": "These maps show the daily hospital admissions in the Netherlands.",
     "linechart_titel": "Progression in hospital admissions over time",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
-    "bron": {
-      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
-      "text": "RIVM"
-    },
     "linechart_description": "",
     "metadata": {
       "title": "Hospital admissions residents {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
@@ -758,6 +776,13 @@
     "reference": {
       "href": "",
       "text": "Read more in 'explanation of the data presented'."
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
+        "text": "RIVM"
+      }
     }
   },
   "veiligheidsregio_positief_geteste_personen": {
@@ -785,10 +810,6 @@
       "60 to 80",
       "80+"
     ],
-    "bron": {
-      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
-      "text": "RIVM"
-    },
     "cluster_datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "cluster_bron": {
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
@@ -810,6 +831,13 @@
     "reference": {
       "href": "",
       "text": "Read more in 'explanation of the data presented'."
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
+        "text": "RIVM"
+      }
     }
   },
   "veiligheidsregio_rioolwater_metingen": {
@@ -824,10 +852,6 @@
     "linechart_titel": "Average number of virus particles per 100.000 inhabitants over time",
     "bar_chart_title": "Most recent measurement per location in {{safetyRegion}}",
     "bar_chart_axis_title": "Average number of coronavirus particles per 100,000 inhabitants",
-    "bron": {
-      "text": "RIVM",
-      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
-    },
     "graph_average_label_text": "Weekly average for safety region",
     "graph_secondary_label_text": "Individual measurements",
     "graph_average_label_text_rwzi": "Measurements for {{name}}",
@@ -846,6 +870,13 @@
     "reference": {
       "href": "",
       "text": "Read more in 'explanation of the data presented'."
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_rioolwaterdata.csv",
+        "text": "RIVM",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
+      }
     }
   },
   "gemeente_ziekenhuisopnames_per_dag": {
@@ -860,10 +891,6 @@
     "map_toelichting": "These maps show the daily hospital admissions in the Netherlands.",
     "linechart_titel": "Progression in hospital admissions over time",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
-    "bron": {
-      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
-      "text": "RIVM"
-    },
     "linechart_description": "",
     "metadata": {
       "title": "Hospital admissions {{municipalityName}} | Dashboard Coronavirus | Government.nl",
@@ -873,6 +900,13 @@
     "reference": {
       "href": "",
       "text": "Read more in 'explanation of the data presented'."
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
+        "text": "RIVM"
+      }
     }
   },
   "gemeente_positief_geteste_personen": {
@@ -900,10 +934,6 @@
       "30 to 40",
       "40 to 50"
     ],
-    "bron": {
-      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
-      "text": "RIVM"
-    },
     "metadata": {
       "title": "Confirmed cases in  {{municipalityName}} | Dashboard Coronavirus | Government.nl",
       "description": "Overview of confirmed cases in municipality {{municipalityName}}"
@@ -912,6 +942,13 @@
     "reference": {
       "href": "",
       "text": "Read more in 'explanation of the data presented'."
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
+        "text": "RIVM"
+      }
     }
   },
   "gemeente_rioolwater_metingen": {
@@ -926,10 +963,6 @@
     "linechart_titel": "Average number of virus particles per 100.000 inhabitants over time",
     "bar_chart_title": "Most recent measurement per location in {{municipality}}",
     "bar_chart_axis_title": "Average number of coronavirus particles per 100,000 inhabitants",
-    "bron": {
-      "text": "RIVM",
-      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
-    },
     "graph_average_label_text": "Weekly average of measured locations",
     "graph_secondary_label_text": "Individual measurements",
     "graph_average_label_text_rwzi": "Measurements for {{name}}",
@@ -948,6 +981,13 @@
     "reference": {
       "href": "",
       "text": "Read more in 'explanation of the data presented'."
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_rioolwaterdata.csv",
+        "text": "RIVM",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
+      }
     }
   },
   "veiligheidsregio_index": {
@@ -1018,10 +1058,6 @@
     "summary_title": "{{percentage}} of GGD tests had a positive result",
     "summary_link_cta": "Read more",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
-    "bron": {
-      "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
-      "text": "RIVM"
-    },
     "toelichting": "This number is about the total number of persons tested by the municipal health services (GGD) in one week, for which a result is known and how many of those people had a positive test result. Note that most, but not all tests are conducted by the GGD. That's why the absolute number of positive test cases might differ from the number shown here.",
     "totaal_getest_week_titel": "Number of people tested by GGD",
     "totaal_getest_week_uitleg": "Number of people tested by GGD in one week, and of which the test result is known.",
@@ -1037,6 +1073,13 @@
     "reference": {
       "href": "",
       "text": "Read more in 'explanation of the data presented'."
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "",
+        "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+        "text": "RIVM"
+      }
     }
   },
   "over_risiconiveaus": {
@@ -1053,10 +1096,6 @@
     "summary_title": "{{percentage}} of GGD tests had a positive result",
     "summary_link_cta": "Read more",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
-    "bron": {
-      "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
-      "text": "RIVM"
-    },
     "toelichting": "This number is about the total number of persons tested by the municipal health services (GGD) in one week, for which a result is known and how many of those people had a positive test result. Note that most, but not all tests are conducted by the GGD. That's why the absolute number of positive test cases might differ from the number shown here.",
     "totaal_getest_week_titel": "Number of people tested by GGD",
     "totaal_getest_week_uitleg": "Number of people tested by GGD in one week, and of which the test result is known.",
@@ -1072,14 +1111,17 @@
     "reference": {
       "href": "",
       "text": "Read more in 'explanation of the data presented'."
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "",
+        "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+        "text": "RIVM"
+      }
     }
   },
   "veiligheidsregio_verpleeghuis_oversterfte": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "bron": {
-      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
-      "text": "RIVM"
-    },
     "titel": "Mortality in {{safetyRegion}}",
     "pagina_toelichting": "Daily number of deceased residents with confirmed cases of COVID-19 in nursing homes.",
     "barscale_titel": "Deceased nursing home residents",
@@ -1096,14 +1138,17 @@
     "reference": {
       "href": "",
       "text": "Read more in 'explanation of the data presented'."
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "text": "RIVM"
+      }
     }
   },
   "veiligheidsregio_verpleeghuis_besmette_locaties": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "bron": {
-      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
-      "text": "RIVM"
-    },
     "titel": "Total number of infected locations",
     "pagina_toelichting": "This number is an estimation of the number of new nursing home locations where there is at least one confirmed case.\n\nThe calculation method has been changed on the 29th of September. Please also see the data explanation section.",
     "barscale_titel": "Number of new locations per day",
@@ -1120,14 +1165,17 @@
     "reference": {
       "href": "",
       "text": "Read more in 'explanation of the data presented'."
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "text": "RIVM"
+      }
     }
   },
   "veiligheidsregio_verpleeghuis_positief_geteste_personen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "bron": {
-      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
-      "text": "RIVM"
-    },
     "titel": "Confirmed cases in {{safetyRegion}}",
     "barscale_titel": "Number of confirmed cases in nursing homes per day",
     "extra_uitleg": "Number of new confirmed cases in nursing homes that have been reported per day.",
@@ -1148,6 +1196,13 @@
     "reference": {
       "href": "",
       "text": "Read more in 'explanation of the data presented'."
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "text": "RIVM"
+      }
     }
   },
   "data_warning_text": "Please note: this information is not as recent as the information for the national level. We're working on a resolution. For more information, see the page \"explanation of the data presented\".",
@@ -1197,10 +1252,6 @@
       "titel": "Compliance and support"
     },
     "datums": "This survey was carried out between {{weekStart}} and {{weekEnd}}. Is updated every 3 weeks.",
-    "bron": {
-      "text": "RIVM",
-      "href": "https://data.rivm.nl/covid-19/COVID-19_gedrag.html"
-    },
     "onderzoek_uitleg": {
       "titel": "Survey of the Dutch public",
       "toelichting": "Every three weeks a survey of a representative sample of the Dutch population is carried out. Survey respondents all answer the same questions about the basic rules that the government has laid down to combat coronavirus. The purpose of the survey is to find out to what extent the public supports and follows these rules. The survey is coordinated and published by RIVM, and carried out by Kantar Public. "
@@ -1242,6 +1293,13 @@
     "reference": {
       "href": "/verantwoording",
       "text": "Read more in 'explanation of the data presented'."
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "",
+        "text": "Naam bron",
+        "href": "link naar de bron"
+      }
     }
   },
   "regionaal_gedrag": {
@@ -1296,6 +1354,13 @@
     "reference": {
       "href": "/verantwoording",
       "text": "Read more in 'explanation of the data presented'."
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "",
+        "text": "Naam bron",
+        "href": "link naar de bron"
+      }
     }
   },
   "toe_en_afname": {

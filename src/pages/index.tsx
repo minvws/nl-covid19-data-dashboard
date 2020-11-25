@@ -125,7 +125,7 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
           date:
             data.infected_people_delta_normalized.last_value
               .date_of_report_unix,
-          source: text.positief_geteste_personen.bron,
+          source: text.positief_geteste_personen.bronnen.rivm,
         }}
         description={text.positief_geteste_personen.map_toelichting}
         onChangeControls={setSelectedMap}

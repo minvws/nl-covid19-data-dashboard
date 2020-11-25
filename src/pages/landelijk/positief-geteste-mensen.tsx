@@ -8,6 +8,7 @@ import { Box } from '~/components-styled/base';
 import { RegionControlOption } from '~/components-styled/chart-region-controls';
 import { ChartTile } from '~/components-styled/chart-tile';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
+import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
@@ -22,8 +23,6 @@ import { createSelectMunicipalHandler } from '~/components/choropleth/select-han
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
 import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/create-positive-tested-people-regional-tooltip';
-import { ContentHeader } from '~/components/contentHeader';
-import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRangeHack';
 import { PositiveTestedPeopleBarScale } from '~/components/landelijk/positive-tested-people-barscale';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
@@ -72,9 +71,10 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: dataInfectedDelta.last_value.date_of_report_unix,
-          dateInsertedUnix: dataInfectedDelta.last_value.date_of_insertion_unix,
-          dataSource: text.bron,
+          dateInfo: dataInfectedDelta.last_value.date_of_report_unix,
+          dateOfInsertionUnix:
+            dataInfectedDelta.last_value.date_of_insertion_unix,
+          dataSources: [text.bronnen.rivm],
         }}
         reference={text.reference}
       />
@@ -85,7 +85,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
           data-cy="infected_daily_increase"
           metadata={{
             date: dataInfectedDelta.last_value.date_of_report_unix,
-            source: text.bron,
+            source: text.bronnen.rivm,
           }}
         >
           {dataInfectedDelta && (
@@ -101,7 +101,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
           title={text.kpi_titel}
           metadata={{
             date: dataInfectedDelta.last_value.date_of_report_unix,
-            source: text.bron,
+            source: text.bronnen.rivm,
           }}
         >
           <KpiValue
@@ -142,7 +142,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
         title={text.map_titel}
         metadata={{
           date: dataInfectedDelta.last_value.date_of_report_unix,
-          source: text.bron,
+          source: text.bronnen.rivm,
         }}
         description={text.map_toelichting}
         onChangeControls={setSelectedMap}
@@ -187,7 +187,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
           date: value.date_of_report_unix,
         }))}
         metadata={{
-          source: text.bron,
+          source: text.bronnen.rivm,
         }}
       />
 
@@ -196,7 +196,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
         description={text.barchart_toelichting}
         metadata={{
           date: dataInfectedDelta.last_value.date_of_report_unix,
-          source: text.bron,
+          source: text.bronnen.rivm,
         }}
       >
         <BarChart
@@ -215,17 +215,19 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
         />
       </ChartTile>
 
-      <ContentHeader_weekRangeHack
+      <ContentHeader
         title={ggdText.titel}
-        id="ggd"
+        skipLinkAnchor={true}
         icon={<Afname />}
         subtitle={ggdText.toelichting}
         metadata={{
           datumsText: ggdText.datums,
-          weekStartUnix: dataGgdLastValue.week_start_unix,
-          weekEndUnix: dataGgdLastValue.week_end_unix,
+          dateInfo: {
+            weekStartUnix: dataGgdLastValue.week_start_unix,
+            weekEndUnix: dataGgdLastValue.week_end_unix,
+          },
           dateOfInsertionUnix: dataGgdLastValue.date_of_insertion_unix,
-          dataSource: ggdText.bron,
+          dataSources: [ggdText.bronnen.rivm],
         }}
         reference={text.reference}
       />
@@ -238,7 +240,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
               dataGgdLastValue.week_start_unix,
               dataGgdLastValue.week_end_unix,
             ],
-            source: ggdText.bron,
+            source: ggdText.bronnen.rivm,
           }}
         >
           <KpiValue absolute={dataGgdLastValue.tested_total} />
@@ -251,7 +253,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
               dataGgdLastValue.week_start_unix,
               dataGgdLastValue.week_end_unix,
             ],
-            source: ggdText.bron,
+            source: ggdText.bronnen.rivm,
           }}
         >
           <KpiValue
@@ -307,7 +309,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
           return `${formatPercentage(y)}%`;
         }}
         metadata={{
-          source: ggdText.bron,
+          source: ggdText.bronnen.rivm,
         }}
       />
 
@@ -344,7 +346,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
           },
         ]}
         metadata={{
-          source: ggdText.bron,
+          source: ggdText.bronnen.rivm,
         }}
       />
     </>
