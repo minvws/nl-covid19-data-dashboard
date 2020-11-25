@@ -90,8 +90,8 @@
     "titel_sidebar": "Intensive care-opnames",
     "titel_kpi": "Gemiddeld aantal intensive care-opnames over 3 dagen",
     "reference": {
-      "href": "/verantwoording",
-      "text": "[Lees meer in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#intensive-care)"
+      "href": "/verantwoording#intensive-care",
+      "text": "Lees meer in de cijferverantwoording."
     }
   },
   "verdenkingen_huisartsen": {
@@ -118,8 +118,8 @@
     "normalized_kpi_toelichting": "Aantal patiënten, per 100.000 inwoners, dat voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten, per week.",
     "titel_kpi": "Patiënten met eerste melding van COVID-19 klachten bij de huisarts",
     "reference": {
-      "href": "/verantwoording",
-      "text": "[Lees meer in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#huisartsen)"
+      "href": "/verantwoording#huisartsen",
+      "text": "Lees meer in de cijferverantwoording."
     },
     "bronnen": {
       "nivel": {
@@ -184,8 +184,8 @@
     "titel_sidebar": "Ziekenhuisopnames",
     "titel_kpi": "Gemiddeld aantal ziekenhuisopnames over 3 dagen",
     "reference": {
-      "href": "/verantwoording",
-      "text": "[Lees meer in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#ziekenhuizen)"
+      "href": "/verantwoording#ziekenhuizen",
+      "text": "Lees meer in de cijferverantwoording."
     }
   },
   "positief_geteste_personen": {
@@ -245,8 +245,8 @@
     },
     "titel_kpi": "Positief geteste mensen per dag",
     "reference": {
-      "href": "/verantwoording",
-      "text": "[Lees meer in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#positieve-testen)"
+      "href": "/verantwoording#positieve-testen",
+      "text": "Lees meer in de cijferverantwoording."
     },
     "bronnen": {
       "rivm": {
@@ -283,8 +283,8 @@
     "barscale_toelichting": "Een berekening van hoeveel mensen met COVID-19 per 100.000 inwoners besmettelijk zijn voor anderen. Dit getal wordt door het RIVM berekend.",
     "titel_kpi": "Aantal besmettelijke mensen",
     "reference": {
-      "href": "/verantwoording",
-      "text": "[Lees meer in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#besmettelijke-mensen)"
+      "href": "/verantwoording#besmettelijke-mensen",
+      "text": "Lees meer in de cijferverantwoording."
     },
     "bronnen": {
       "rivm": {
@@ -319,8 +319,8 @@
     "titel_sidebar": "Reproductiegetal",
     "titel_kpi": "Meest recente reproductiegetal",
     "reference": {
-      "href": "/verantwoording",
-      "text": "[Lees meer in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#reproductiegetal)"
+      "href": "/verantwoording#reproductiegetal",
+      "text": "Lees meer in de cijferverantwoording."
     },
     "bronnen": {
       "rivm": {
@@ -402,8 +402,8 @@
     "titel_sidebar": "Verpleeghuiszorg",
     "titel_kpi": "Aantal besmette locaties",
     "reference": {
-      "href": "/verantwoording",
-      "text": "[Lees meer in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#verpleeghuizen)"
+      "href": "/verantwoording#verpleeghuizen",
+      "text": "Lees meer in de cijferverantwoording."
     },
     "bronnen": {
       "rivm": {
@@ -438,8 +438,8 @@
     },
     "titel_kpi": "Aantal positief geteste bewoners per dag",
     "reference": {
-      "href": "/verantwoording",
-      "text": "[Lees meer in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#verpleeghuizen)"
+      "href": "/verantwoording#verpleeghuizen",
+      "text": "Lees meer in de cijferverantwoording."
     },
     "bronnen": {
       "rivm": {
@@ -470,8 +470,8 @@
     },
     "titel_kpi": "Sterfte per dag",
     "reference": {
-      "href": "/verantwoording",
-      "text": "[Lees meer in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#verpleeghuizen)"
+      "href": "/verantwoording#verpleeghuizen",
+      "text": "Lees meer in de cijferverantwoording."
     },
     "bronnen": {
       "rivm": {
@@ -515,8 +515,8 @@
     "map_tooltip": "per 100.000 inwoners",
     "map_tooltip_value": "{{value}} x100 miljard",
     "reference": {
-      "href": "/verantwoording",
-      "text": "[Lees meer in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#rioolwater)"
+      "href": "/verantwoording#rioolwater",
+      "text": "Lees meer in de cijferverantwoording."
     },
     "bronnen": {
       "rivm": {
@@ -730,7 +730,7 @@
     "select_region_municipality_legend": "Selecteer een gemeente:",
     "select_region_type_legend": "Toon cijfers van:",
     "your_municipality": "Gemeente",
-    "belangrijk_bericht": ""
+    "belangrijk_bericht": "Er zijn [landelijke maatregelen](https://www.rijksoverheid.nl/actueel/nieuws/2020/11/17/gedeeltelijke-lockdown-gaat-verder) van kracht om de snelle verspreiding van het coronavirus tegen te gaan."
   },
   "common": {
     "metadata": {
@@ -822,8 +822,8 @@
     },
     "titel_kpi": "Gemiddeld aantal ziekenhuisopnames over 3 dagen",
     "reference": {
-      "href": "/verantwoording",
-      "text": "[Lees meer in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#ziekenhuizen)"
+      "href": "/verantwoording#ziekenhuizen",
+      "text": "Lees meer in de cijferverantwoording."
     },
     "bronnen": {
       "rivm": {
@@ -882,8 +882,8 @@
       "description": "Overzicht van het aantal mensen in de veiligheidsregio {{safetyRegionName}} die positief getest zijn en COVID-19 hebben."
     },
     "reference": {
-      "href": "/verantwoording",
-      "text": "[Lees meer in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#positieve-testen)"
+      "href": "/verantwoording#positieve-testen",
+      "text": "Lees meer in de cijferverantwoording."
     },
     "bronnen": {
       "rivm": {
@@ -925,8 +925,8 @@
     "total_installation_count_description": "Wekelijks aantal rioolwaterzuiveringsinstallaties die minimaal één keer een meting hebben gerapporteerd. Het weekgemiddelde wordt berekend door het gemiddelde te nemen van alle metingen op deze locaties. Per week kan dit aantal variëren omdat niet alle metingen altijd lukken.",
     "rwzi_abbrev": "",
     "reference": {
-      "href": "/verantwoording",
-      "text": "[Lees meer in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#rioolwater)"
+      "href": "/verantwoording#rioolwater",
+      "text": "Lees meer in de cijferverantwoording."
     },
     "bronnen": {
       "rivm": {
@@ -959,8 +959,8 @@
     },
     "titel_kpi": "Gemiddeld aantal ziekenhuisopnames over 3 dagen",
     "reference": {
-      "href": "/verantwoording",
-      "text": "[Lees meer in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#ziekenhuizen)"
+      "href": "/verantwoording#ziekenhuizen",
+      "text": "Lees meer in de cijferverantwoording."
     },
     "bronnen": {
       "rivm": {
@@ -1005,8 +1005,8 @@
     },
     "titel_kpi": "Positief geteste mensen per dag",
     "reference": {
-      "href": "/verantwoording",
-      "text": "[Lees meer in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#positieve-testen)"
+      "href": "/verantwoording#positieve-testen",
+      "text": "Lees meer in de cijferverantwoording."
     },
     "bronnen": {
       "rivm": {
@@ -1048,8 +1048,8 @@
     "graph_selected_rwzi_placeholder": "Selecteer locatie",
     "graph_range_description": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners over tijd",
     "reference": {
-      "href": "/verantwoording",
-      "text": "[Lees meer in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#rioolwater)"
+      "href": "/verantwoording#rioolwater",
+      "text": "Lees meer in de cijferverantwoording."
     },
     "bronnen": {
       "rivm": {
@@ -1066,7 +1066,7 @@
       "title": "Risiconiveaus per veiligheidsregio | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van het huidige risiconiveau per veiligheidsregio in Nederland."
     },
-    "belangrijk_bericht": ""
+    "belangrijk_bericht": "Er zijn [landelijke maatregelen](https://www.rijksoverheid.nl/actueel/nieuws/2020/11/17/gedeeltelijke-lockdown-gaat-verder) van kracht om de snelle verspreiding van het coronavirus tegen te gaan."
   },
   "gemeente_index": {
     "selecteer_titel": "Selecteer een gemeente",
@@ -1144,8 +1144,8 @@
     "linechart_totaltests_legend_label": "Alle GGD tests",
     "linechart_positivetests_legend_label": "Alle positieve testen van de GGD",
     "reference": {
-      "href": "/verantwoording",
-      "text": "[Lees meer in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#positieve-testen)"
+      "href": "/verantwoording#positieve-testen",
+      "text": "Lees meer in de cijferverantwoording."
     },
     "bronnen": {
       "rivm": {
@@ -1186,8 +1186,8 @@
     "linechart_totaltests_legend_label": "Alle GGD tests",
     "linechart_positivetests_legend_label": "Alle positieve testen van de GGD",
     "reference": {
-      "href": "/verantwoording",
-      "text": "[Lees meer in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#positieve-testen)"
+      "href": "/verantwoording#positieve-testen",
+      "text": "Lees meer in de cijferverantwoording."
     },
     "bronnen": {
       "rivm": {
@@ -1217,8 +1217,8 @@
       "description": "Aantal gemelde verpleeghuisbewoners dat in veiligheidsregio {{safetyRegionName}} overlijdt aan de gevolgen van het coronavirus."
     },
     "reference": {
-      "href": "/verantwoording",
-      "text": "[Lees meer in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#verpleeghuizen)"
+      "href": "/verantwoording#verpleeghuizen",
+      "text": "Lees meer in de cijferverantwoording."
     },
     "bronnen": {
       "rivm": {
@@ -1248,8 +1248,8 @@
     },
     "titel_sidebar": "Verpleeghuiszorg",
     "reference": {
-      "href": "/verantwoording",
-      "text": "[Lees meer in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#verpleeghuizen)"
+      "href": "/verantwoording#verpleeghuizen",
+      "text": "Lees meer in de cijferverantwoording."
     },
     "bronnen": {
       "rivm": {
@@ -1283,8 +1283,8 @@
       "description": "Overzicht aantal bewoners van verpleeghuizen in veiligheidsregio {{safetyRegionName}} waarbij COVID-19-besmetting is vastgesteld."
     },
     "reference": {
-      "href": "/verantwoording",
-      "text": "[Lees meer in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#verpleeghuizen)"
+      "href": "/verantwoording#verpleeghuizen",
+      "text": "Lees meer in de cijferverantwoording."
     },
     "bronnen": {
       "rivm": {

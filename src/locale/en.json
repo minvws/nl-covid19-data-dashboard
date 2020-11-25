@@ -90,7 +90,7 @@
     "titel_sidebar": "Intensive care units admissions",
     "titel_kpi": "Average number of intensive care admissions in 3 days",
     "reference": {
-      "href": "",
+      "href": "/verantwoording#intensive-care",
       "text": "Read more in 'explanation of the data presented'."
     }
   },
@@ -118,7 +118,7 @@
     "normalized_kpi_toelichting": "Number of patients, per 100.000 inhabitants, who contact the general practitioner for the first time due to COVID-19 like symptoms, per week.",
     "titel_kpi": "Patients who contact the general practitioner for the first time due to COVID-19 symptoms",
     "reference": {
-      "href": "",
+      "href": "/verantwoording#general-practitioners",
       "text": "Read more in 'explanation of the data presented'."
     },
     "bronnen": {
@@ -184,7 +184,7 @@
     "titel_sidebar": "Hospital admissions",
     "titel_kpi": "Average number of hospital admissions in 3 days",
     "reference": {
-      "href": "",
+      "href": "/verantwoording#hospitals",
       "text": "Read more in 'explanation of the data presented'."
     }
   },
@@ -245,7 +245,7 @@
     },
     "titel_kpi": "Confirmed cases per day",
     "reference": {
-      "href": "",
+      "href": "/verantwoording#confirmed-cases",
       "text": "Read more in 'explanation of the data presented'."
     },
     "bronnen": {
@@ -283,7 +283,7 @@
     "barscale_toelichting": "",
     "titel_kpi": "Number of infectious people",
     "reference": {
-      "href": "",
+      "href": "/verantwoording#infectious-people",
       "text": "Read more in 'explanation of the data presented'."
     },
     "bronnen": {
@@ -319,7 +319,7 @@
     "titel_sidebar": "Reproduction number",
     "titel_kpi": "Most recent reproduction number",
     "reference": {
-      "href": "",
+      "href": "/verantwoording#reproduction-number",
       "text": "Read more in 'explanation of the data presented'."
     },
     "bronnen": {
@@ -402,7 +402,7 @@
     "titel_sidebar": "Nursing homes",
     "titel_kpi": "Number of infected locations",
     "reference": {
-      "href": "",
+      "href": "/verantwoording#nursing-homes",
       "text": "Read more in 'explanation of the data presented'."
     },
     "bronnen": {
@@ -438,7 +438,7 @@
     },
     "titel_kpi": "Number of confirmed cases per day",
     "reference": {
-      "href": "",
+      "href": "/verantwoording#nursing-homes",
       "text": "Read more in 'explanation of the data presented'."
     },
     "bronnen": {
@@ -470,7 +470,7 @@
     },
     "titel_kpi": "Mortality per day",
     "reference": {
-      "href": "",
+      "href": "/verantwoording#nursing-homes",
       "text": "Read more in 'explanation of the data presented'."
     },
     "bronnen": {
@@ -515,7 +515,7 @@
     "map_tooltip": "{{value}} x100 billion virus particles per 100.000 inhabitants",
     "map_tooltip_value": "",
     "reference": {
-      "href": "",
+      "href": "/verantwoording#sewage-water",
       "text": "Read more in 'explanation of the data presented'."
     },
     "bronnen": {
@@ -822,7 +822,7 @@
     },
     "titel_kpi": "Average number of hospital admissions in 3 days",
     "reference": {
-      "href": "",
+      "href": "/verantwoording#hospitals",
       "text": "Read more in 'explanation of the data presented'."
     },
     "bronnen": {
@@ -882,7 +882,7 @@
       "description": "Overview of confirmed cases in safety region {{safetyRegionName}}."
     },
     "reference": {
-      "href": "",
+      "href": "/verantwoording#confirmed-cases",
       "text": "Read more in 'explanation of the data presented'."
     },
     "bronnen": {
@@ -925,7 +925,7 @@
     "total_installation_count_description": "Weekly number of sewage water treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful.",
     "rwzi_abbrev": "",
     "reference": {
-      "href": "",
+      "href": "/verantwoording#sewage-water",
       "text": "Read more in 'explanation of the data presented'."
     },
     "bronnen": {
@@ -959,7 +959,7 @@
     },
     "titel_kpi": "Average number of hospital admissions in 3 days",
     "reference": {
-      "href": "",
+      "href": "/verantwoording#hospitals",
       "text": "Read more in 'explanation of the data presented'."
     },
     "bronnen": {
@@ -1005,7 +1005,7 @@
     },
     "titel_kpi": "Confirmed cases per day",
     "reference": {
-      "href": "",
+      "href": "/verantwoording#confirmed-cases",
       "text": "Read more in 'explanation of the data presented'."
     },
     "bronnen": {
@@ -1048,7 +1048,7 @@
     "graph_selected_rwzi_placeholder": "",
     "graph_range_description": "",
     "reference": {
-      "href": "",
+      "href": "/verantwoording#sewage-water",
       "text": "Read more in 'explanation of the data presented'."
     },
     "bronnen": {
@@ -1144,7 +1144,7 @@
     "linechart_totaltests_legend_label": "All tests with results",
     "linechart_positivetests_legend_label": "Number of positive tests",
     "reference": {
-      "href": "",
+      "href": "/verantwoording#confirmed-cases",
       "text": "Read more in 'explanation of the data presented'."
     },
     "bronnen": {
@@ -1186,7 +1186,7 @@
     "linechart_totaltests_legend_label": "All tests with results",
     "linechart_positivetests_legend_label": "Number of positive tests",
     "reference": {
-      "href": "",
+      "href": "/verantwoording#confirmed-cases",
       "text": "Read more in 'explanation of the data presented'."
     },
     "bronnen": {
@@ -1217,7 +1217,7 @@
       "description": "Number of deceased residents with confirmed cases of COVID-19 in nursing homes within safety region {{safetyRegionName}}."
     },
     "reference": {
-      "href": "",
+      "href": "/verantwoording#nursing-homes",
       "text": "Read more in 'explanation of the data presented'."
     },
     "bronnen": {
@@ -1248,7 +1248,7 @@
     },
     "titel_sidebar": "Nursing homes",
     "reference": {
-      "href": "",
+      "href": "/verantwoording#nursing-homes",
       "text": "Read more in 'explanation of the data presented'."
     },
     "bronnen": {
@@ -1283,7 +1283,7 @@
       "description": "Number of confirmed cases of COVID-19 under nursing home residents in safety region {{safetyRegionName}}."
     },
     "reference": {
-      "href": "",
+      "href": "/verantwoording#nursing-homes",
       "text": "Read more in 'explanation of the data presented'."
     },
     "bronnen": {
