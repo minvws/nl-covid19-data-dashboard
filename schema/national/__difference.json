@@ -19,7 +19,7 @@
       "$ref": "#/definitions/diff_decimal"
     },
     "infectious_people_count_normalized__infectious_avg_normalized": {
-      "$ref": "#/definitions/diff_integer"
+      "$ref": "#/definitions/diff_decimal"
     },
     "intake_hospital_ma__moving_average_hospital": {
       "$ref": "#/definitions/diff_decimal"

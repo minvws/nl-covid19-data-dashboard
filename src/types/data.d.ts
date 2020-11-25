@@ -152,7 +152,7 @@ export interface NationalDifference {
   ggd__tested_total?: DifferenceInteger;
   ggd__infected_percentage?: DifferenceDecimal;
   reproduction_index_last_known_average__reproduction_index_avg?: DifferenceDecimal;
-  infectious_people_count_normalized__infectious_avg_normalized?: DifferenceInteger;
+  infectious_people_count_normalized__infectious_avg_normalized?: DifferenceDecimal;
   intake_hospital_ma__moving_average_hospital: DifferenceDecimal;
   hospital_beds_occupied__covid_occupied?: DifferenceInteger;
   intake_intensivecare_ma__moving_average_ic: DifferenceDecimal;
