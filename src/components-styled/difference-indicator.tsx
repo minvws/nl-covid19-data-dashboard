@@ -69,20 +69,13 @@ function renderTileIndicator(
   value: DifferenceDecimal | DifferenceInteger,
   isDecimal?: boolean
 ) {
-  const {
-    difference,
-    old_date_of_report_unix,
-    new_date_of_report_unix,
-  } = value;
+  const { difference, old_date_of_report_unix } = value;
 
   const differenceFormattedString = isDecimal
     ? formatPercentage(Math.abs(difference))
     : formatNumber(Math.abs(difference));
 
-  const timespanText = getTimespanText(
-    old_date_of_report_unix,
-    new_date_of_report_unix
-  );
+  const timespanText = getTimespanText(old_date_of_report_unix);
 
   if (difference > 0) {
     const splitText = text.toename.split(' ');
@@ -143,21 +136,20 @@ const Container = styled.div(
   })
 );
 
-function getTimespanText(oldDate: number, newDate: number) {
-  const days = Math.round((newDate - oldDate) / DAY_IN_SECONDS);
-
-  /**
-   * @TODO discuss logic for this
-   *
-   * 6 days is more like a week
-   * and 13 days more like two weeks
-   *
-   * Think this way we can prevent rounding errors. In our data timespans should
-   * typically be a few days or a week or multiple weeks anyway.
-   */
+/**
+ * @TODO discuss logic for this
+ *
+ * 6 days is more like a week
+ * and 13 days more like two weeks
+ *
+ * Think this way we can prevent rounding errors. In our data timespans should
+ * typically be a few days or a week or multiple weeks anyway.
+ */
+function getTimespanText(oldDate: number) {
+  const days = Math.round((Date.now() / 1000 - oldDate) / DAY_IN_SECONDS);
 
   if (days < 2) {
-    return `${text.tijdverloop.gisteren}`;
+    return text.tijdverloop.gisteren;
   }
 
   if (days < 6) {
