@@ -14,6 +14,7 @@ import IconUp from '~/assets/pijl-omhoog.svg';
 import IconDown from '~/assets/pijl-omlaag.svg';
 import siteText from '~/locale/index';
 import { DifferenceDecimal, DifferenceInteger } from '~/types/data';
+import { formatDateFromMilliseconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 
 const text = siteText.toe_en_afname;
@@ -75,8 +76,6 @@ function renderTileIndicator(
     ? formatPercentage(Math.abs(difference))
     : formatNumber(Math.abs(difference));
 
-  const timespanText = getTimespanText(old_date_of_report_unix);
-
   if (difference > 0) {
     const splitText = text.toename.split(' ');
 
@@ -86,9 +85,11 @@ function renderTileIndicator(
           <IconUp />
         </Span>
         <Span fontWeight="bold" mr="0.3em">
-          {`${differenceFormattedString} ${splitText[0]}`}
+          {differenceFormattedString} {splitText[0]}
         </Span>
-        <Span color="annotation">{`${splitText[1]} ${timespanText}`}</Span>
+        <Span color="annotation">
+          {splitText[1]} <TimespanText date={old_date_of_report_unix} />
+        </Span>
       </Container>
     );
   }
@@ -102,9 +103,11 @@ function renderTileIndicator(
           <IconDown />
         </Span>
         <Span fontWeight="bold" mr="0.3em">
-          {`${differenceFormattedString} ${splitText[0]}`}
+          {differenceFormattedString} {splitText[0]}
         </Span>
-        <Span>{`${splitText[1]} ${timespanText}`}</Span>
+        <Span>
+          {splitText[1]} <TimespanText date={old_date_of_report_unix} />
+        </Span>
       </Container>
     );
   }
@@ -114,7 +117,9 @@ function renderTileIndicator(
       <Span color="lightGray">
         <IconGelijk />
       </Span>
-      <Span>{`${text.gelijk} ${timespanText}`}</Span>
+      <Span>
+        {text.gelijk} <TimespanText date={old_date_of_report_unix} />
+      </Span>
     </Container>
   );
 }
@@ -135,6 +140,17 @@ const Container = styled.div(
     },
   })
 );
+
+function TimespanText({ date }: { date: number }) {
+  const fullDate = formatDateFromMilliseconds(date * 1000, 'medium');
+  const text = getTimespanText(date);
+
+  return (
+    <Span suppressHydrationWarning title={fullDate}>
+      {text}
+    </Span>
+  );
+}
 
 /**
  * @TODO discuss logic for this
