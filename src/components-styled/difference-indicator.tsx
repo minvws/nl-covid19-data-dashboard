@@ -149,7 +149,7 @@ function getTimespanText(oldDate: number) {
   const days = Math.round((Date.now() / 1000 - oldDate) / DAY_IN_SECONDS);
 
   if (days < 2) {
-    return `${text.tijdverloop.gisteren}`;
+    return text.tijdverloop.gisteren;
   }
 
   if (days < 6) {
