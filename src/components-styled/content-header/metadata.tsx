@@ -39,7 +39,7 @@ export function Metadata(props: MetadataProps) {
     .map((x) => ({ href: x.download, text: x.text }));
 
   return (
-    <Box spaceChildren={2} my={3}>
+    <Box space={2} my={3}>
       <Box display="flex" alignItems="flex-start" color="annotation">
         <Box as="span" minWidth="1.8rem" mt={1}>
           <ClockIcon aria-hidden color={theme.colors.annotation} />

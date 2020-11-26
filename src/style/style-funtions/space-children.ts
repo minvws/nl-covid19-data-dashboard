@@ -5,13 +5,13 @@ import { SpaceValue } from '../theme';
 import { getArrayValue } from '../utils';
 
 export interface SpaceChildrenProps {
-  spaceChildren?: ResponsiveValue<SpaceValue>;
+  space?: ResponsiveValue<SpaceValue>;
   spaceHorizontal?: boolean;
 }
 
-export const spaceChildren: styleFn = (x) => {
-  if (isDefined(x.spaceChildren)) {
-    const value = getArrayValue(x.spaceChildren);
+export const spaceChildren: styleFn = (x: SpaceChildrenProps) => {
+  if (isDefined(x.space)) {
+    const value = getArrayValue(x.space);
 
     return css({
       '& > *:not(:last-child)': {

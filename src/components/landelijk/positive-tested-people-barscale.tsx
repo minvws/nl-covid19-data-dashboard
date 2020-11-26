@@ -20,7 +20,7 @@ export function PositiveTestedPeopleBarScale(props: {
     data.difference.infected_people_delta_normalized__infected_daily_increase;
 
   return (
-    <Box spaceChildren={2}>
+    <Box space={2}>
       <BarScale
         min={0}
         max={10}
