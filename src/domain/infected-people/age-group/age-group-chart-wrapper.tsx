@@ -1,6 +1,6 @@
 import css from '@styled-system/css';
 import { ParentSize } from '@visx/responsive';
-import { useCallback, useRef, useState } from 'react';
+import { MouseEvent, useCallback, useRef, useState } from 'react';
 import styled from 'styled-components';
 import {
   NationalInfectedAgeGroups,
@@ -43,10 +43,10 @@ export function AgeGroupChartWrapper({ data }: AgeGroupChartWrapperProps) {
 
   const openTooltip = useCallback(
     (
-      event: MouseEvent,
+      event: MouseEvent<SVGGElement>,
       value: NationalInfectedAgeGroupsValue,
       getTooltipCoordinates: (
-        event: MouseEvent<SVGGElement, MouseEvent>,
+        event: MouseEvent<SVGGElement>,
         value: NationalInfectedAgeGroupsValue
       ) => { x: number; y: number }
     ) => {

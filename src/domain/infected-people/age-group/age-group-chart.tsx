@@ -12,6 +12,7 @@ import {
 } from '~/types/data.d';
 import { formatPercentage } from '~/utils/formatNumber';
 import siteText from '~/locale/index';
+import { MouseEvent } from 'react';
 
 export const AGE_GROUP_TOOLTIP_WIDTH = 340;
 
@@ -21,10 +22,10 @@ interface AgeGroupChartProps {
   parentWidth: number;
   data: NationalInfectedAgeGroups;
   openTooltip: (
-    event: MouseEvent,
+    event: MouseEvent<SVGGElement>,
     value: NationalInfectedAgeGroupsValue,
     getTooltipCoordinates: (
-      event: MouseEvent<SVGGElement, MouseEvent>,
+      event: MouseEvent<SVGGElement>,
       value: NationalInfectedAgeGroupsValue
     ) => { x: number; y: number }
   ) => void;
