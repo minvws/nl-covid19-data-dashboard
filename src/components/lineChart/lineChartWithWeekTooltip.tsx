@@ -4,6 +4,7 @@ import Highcharts, {
 } from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import React, { useMemo } from 'react';
+import { colors } from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
@@ -41,8 +42,8 @@ function getOptions(
       data: values.map((x) => ({ x: x.date, y: x.value, originalData: x })),
       name: '',
       showInLegend: false,
-      color: '#3391CC',
-      fillColor: 'rgba(51, 145, 204, 0.2)',
+      color: colors.data.primary,
+      fillColor: colors.data.fill,
       allowPointSelect: false,
       marker: {
         symbol: 'circle',

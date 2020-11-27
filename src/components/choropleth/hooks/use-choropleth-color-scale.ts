@@ -1,6 +1,7 @@
 import { scaleThreshold } from 'd3-scale';
 import { useCallback, useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
+import { assert } from '~/utils/assert';
 import { ChoroplethThresholdsValue } from '../shared';
 
 /**
@@ -26,6 +27,11 @@ export function useChoroplethColorScale(
     if (!thresholds) {
       return undefined;
     }
+
+    assert(
+      Array.isArray(thresholds),
+      `thresholds is not of type Array: ${JSON.stringify(thresholds)}`
+    );
 
     const domain = thresholds.map((t) => t.threshold);
     domain.shift();

@@ -1,28 +1,22 @@
-import Link from 'next/link';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
-
-import siteText from '~/locale/index';
+import Arrow from '~/assets/arrow.svg';
+import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
+import GetestIcon from '~/assets/test.svg';
+import Ziekenhuis from '~/assets/ziekenhuis.svg';
+import { HeadingWithIcon } from '~/components-styled/heading-with-icon';
+import { ComboBox } from '~/components/comboBox';
+import { IntakeHospitalMetric } from '~/components/gemeente/intake-hospital-metric';
+import { PositivelyTestedPeopleMetric } from '~/components/gemeente/positively-tested-people-metric';
+import { SewerWaterMetric } from '~/components/gemeente/sewer-water-metric';
+import { getLayout as getSiteLayout } from '~/components/layout';
 import municipalities from '~/data/gemeente_veiligheidsregio.json';
+import siteText from '~/locale/index';
 import { IMunicipalityData } from '~/static-props/municipality-data';
-
 import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMunicipalityCode';
 import { getSewerWaterBarScaleData } from '~/utils/sewer-water/municipality-sewer-water.util';
 import { useMediaQuery } from '~/utils/useMediaQuery';
-
-import { PositivelyTestedPeopleMetric } from '~/components/gemeente/positively-tested-people-metric';
-import { IntakeHospitalMetric } from '~/components/gemeente/intake-hospital-metric';
-import { SewerWaterMetric } from '~/components/gemeente/sewer-water-metric';
-
-import { TitleWithIcon } from '~/components/titleWithIcon';
-import { getLayout as getSiteLayout } from '~/components/layout';
-import { ComboBox } from '~/components/comboBox';
-
-import GetestIcon from '~/assets/test.svg';
-import Ziekenhuis from '~/assets/ziekenhuis.svg';
-import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
-import Arrow from '~/assets/arrow.svg';
-import { useMenuState } from './useMenuState';
 
 interface IMunicipality {
   name: string;
@@ -54,7 +48,7 @@ export function getMunicipalityLayout() {
   };
 }
 
-/*
+/**
  * MunicipalityLayout is a composition of persistent layouts.
  *
  * ## States
@@ -82,10 +76,11 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
   const isMainRoute =
     router.route === '/gemeente' || router.route === `/gemeente/[code]`;
 
-  const { isMenuOpen, openMenu } = useMenuState(isMainRoute);
-
-  // remove focus after navigation
-  const blur = (evt: any) => evt.currentTarget.blur();
+  const isMenuOpen = router.query.menu === '1';
+  const menuOpenUrl = {
+    pathname: router.pathname,
+    query: { ...router.query, menu: '1' },
+  };
 
   function getClassName(path: string) {
     return router.pathname === path
@@ -95,12 +90,9 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
 
   function handleMunicipalitySelect(region: IMunicipality) {
     if (isLargeScreen) {
-      router.push(
-        '/gemeente/[code]/positief-geteste-mensen',
-        `/gemeente/${region.gemcode}/positief-geteste-mensen`
-      );
+      router.push(`/gemeente/${region.gemcode}/positief-geteste-mensen`);
     } else {
-      router.push('/gemeente/[code]', `/gemeente/${region.gemcode}`);
+      router.push(`/gemeente/${region.gemcode}`);
     }
   }
 
@@ -108,9 +100,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
     | { name: string; code: string; id: number }
     | undefined = getSafetyRegionForMunicipalityCode(code as string);
 
-  const sewerWaterBarScaleData = data
-    ? getSewerWaterBarScaleData(data)
-    : undefined;
+  const sewerWaterBarScaleData = data && getSewerWaterBarScaleData(data);
 
   return (
     <>
@@ -136,8 +126,8 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
             : 'has-menu-closed'
         }`}
       >
-        <Link href="/gemeente/[code]" as={`/gemeente/${code}`}>
-          <a className="back-button" onClick={openMenu}>
+        <Link href={menuOpenUrl}>
+          <a className="back-button">
             <Arrow />
             {siteText.nav.terug_naar_alle_cijfers}
           </a>
@@ -150,108 +140,99 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
           />
 
           {showMetricLinks && (
-            <nav aria-label="metric navigation">
+            <nav
+              /** re-mount when route changes in order to blur anchors */
+              key={router.asPath}
+              aria-label="metric navigation"
+            >
               <div className="region-names">
                 <h2>{municipalityName}</h2>
                 {safetyRegion && (
                   <p>
                     {siteText.common.veiligheidsregio_label}{' '}
                     <Link
-                      href="/veiligheidsregio/[code]/positief-geteste-mensen"
-                      as={`/veiligheidsregio/${safetyRegion.code}/positief-geteste-mensen`}
+                      href={`/veiligheidsregio/${safetyRegion.code}/positief-geteste-mensen`}
                     >
-                      <a onClick={blur}>{safetyRegion.name}</a>
+                      <a>{safetyRegion.name}</a>
                     </Link>
                   </p>
                 )}
               </div>
-              <h2>{siteText.gemeente_layout.headings.besmettingen}</h2>
-              <ul>
-                <li>
-                  <Link
-                    href="/gemeente/[code]/positief-geteste-mensen"
-                    as={`/gemeente/${code}/positief-geteste-mensen`}
-                  >
-                    <a
-                      onClick={blur}
-                      className={getClassName(
-                        `/gemeente/[code]/positief-geteste-mensen`
-                      )}
-                    >
-                      <TitleWithIcon
-                        Icon={GetestIcon}
-                        title={
-                          siteText.gemeente_positief_geteste_personen
-                            .titel_sidebar
-                        }
-                      />
-                      <span>
-                        <PositivelyTestedPeopleMetric
-                          data={data?.positive_tested_people.last_value}
-                        />
-                      </span>
-                    </a>
-                  </Link>
-                </li>
-              </ul>
+              {data && (
+                <>
+                  <h2>{siteText.gemeente_layout.headings.besmettingen}</h2>
+                  <ul>
+                    <li>
+                      <Link href={`/gemeente/${code}/positief-geteste-mensen`}>
+                        <a
+                          className={getClassName(
+                            `/gemeente/[code]/positief-geteste-mensen`
+                          )}
+                        >
+                          <HeadingWithIcon
+                            icon={<GetestIcon />}
+                            title={
+                              siteText.gemeente_positief_geteste_personen
+                                .titel_sidebar
+                            }
+                          />
+                          <span className="metric-wrapper">
+                            <PositivelyTestedPeopleMetric data={data} />
+                          </span>
+                        </a>
+                      </Link>
+                    </li>
+                  </ul>
 
-              <h2>{siteText.gemeente_layout.headings.ziekenhuizen}</h2>
-              <ul>
-                <li>
-                  <Link
-                    href="/gemeente/[code]/ziekenhuis-opnames"
-                    as={`/gemeente/${code}/ziekenhuis-opnames`}
-                  >
-                    <a
-                      onClick={blur}
-                      className={getClassName(
-                        `/gemeente/[code]/ziekenhuis-opnames`
-                      )}
-                    >
-                      <TitleWithIcon
-                        Icon={Ziekenhuis}
-                        title={
-                          siteText.gemeente_ziekenhuisopnames_per_dag
-                            .titel_sidebar
-                        }
-                      />
-                      <span>
-                        <IntakeHospitalMetric
-                          data={data?.hospital_admissions.last_value}
-                        />
-                      </span>
-                    </a>
-                  </Link>
-                </li>
-              </ul>
+                  <h2>{siteText.gemeente_layout.headings.ziekenhuizen}</h2>
+                  <ul>
+                    <li>
+                      <Link href={`/gemeente/${code}/ziekenhuis-opnames`}>
+                        <a
+                          className={getClassName(
+                            `/gemeente/[code]/ziekenhuis-opnames`
+                          )}
+                        >
+                          <HeadingWithIcon
+                            icon={<Ziekenhuis />}
+                            title={
+                              siteText.gemeente_ziekenhuisopnames_per_dag
+                                .titel_sidebar
+                            }
+                          />
+                          <span className="metric-wrapper">
+                            <IntakeHospitalMetric data={data} />
+                          </span>
+                        </a>
+                      </Link>
+                    </li>
+                  </ul>
+                </>
+              )}
 
               <h2>{siteText.gemeente_layout.headings.vroege_signalen}</h2>
               <ul>
                 <li>
                   {sewerWaterBarScaleData ? (
-                    <Link
-                      href="/gemeente/[code]/rioolwater"
-                      as={`/gemeente/${code}/rioolwater`}
-                    >
+                    <Link href={`/gemeente/${code}/rioolwater`}>
                       <a
-                        onClick={blur}
                         className={getClassName(`/gemeente/[code]/rioolwater`)}
                       >
-                        <TitleWithIcon
-                          Icon={RioolwaterMonitoring}
+                        <HeadingWithIcon
+                          icon={<RioolwaterMonitoring />}
                           title={
                             siteText.gemeente_rioolwater_metingen.titel_sidebar
                           }
                         />
-                        <span>
+                        <span className="metric-wrapper">
                           <SewerWaterMetric data={sewerWaterBarScaleData} />
                         </span>
                       </a>
                     </Link>
                   ) : (
                     <div className="metric-not-available">
-                      <TitleWithIcon
-                        Icon={RioolwaterMonitoring}
+                      <HeadingWithIcon
+                        icon={<RioolwaterMonitoring />}
                         title={
                           siteText.gemeente_rioolwater_metingen.titel_sidebar
                         }
@@ -269,8 +250,8 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
 
         <section className="municipality-content">{children}</section>
 
-        <Link href="/gemeente/[code]" as={`/gemeente/${code}`}>
-          <a className="back-button back-button-footer" onClick={openMenu}>
+        <Link href={menuOpenUrl}>
+          <a className="back-button back-button-footer">
             <Arrow />
             {siteText.nav.terug_naar_alle_cijfers}
           </a>

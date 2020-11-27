@@ -40,8 +40,6 @@ export type TProps<
  *
  * When a selected region code is specified, the map will zoom in on the safety region.
  *
- * As an overlay the country outlines are shown.
- *
  * @param props
  */
 export function SafetyRegionChoropleth<
@@ -71,42 +69,31 @@ export function SafetyRegionChoropleth<
 
   const selectedThreshold = getSelectedThreshold(metricName, metricValueName);
 
+  const DEFAULT_FILL = 'white';
   const getFillColor = useChoroplethColorScale(
     getData,
-    selectedThreshold?.thresholds
+    selectedThreshold,
+    DEFAULT_FILL
   );
 
   const featureCallback = useCallback(
-    (
-      feature: Feature<MultiPolygon, SafetyRegionProperties>,
-      path: string,
-      _index: number
-    ) => {
+    (feature: Feature<MultiPolygon, SafetyRegionProperties>, path: string) => {
       const { vrcode } = feature.properties;
-      const fill = getFillColor(vrcode);
-
+      const fill =
+        hasData && getFillColor(vrcode) ? getFillColor(vrcode) : DEFAULT_FILL;
       return (
         <Path
           key={vrcode}
           id={vrcode}
           d={path}
-          fill={hasData && fill ? fill : '#fff'}
-          stroke="#fff"
+          fill={fill}
+          stroke={fill === DEFAULT_FILL ? '#c4c4c4' : '#fff'}
           strokeWidth={1}
         />
       );
     },
     [getFillColor, hasData]
   );
-
-  const overlayCallback = (
-    feature: Feature<MultiPolygon, SafetyRegionProperties>,
-    path: string
-  ) => {
-    const { vrcode } = feature.properties;
-
-    return <Path key={vrcode} d={path} stroke="#c4c4c4" strokeWidth={1} />;
-  };
 
   const hoverCallback = useCallback(
     (feature: Feature<MultiPolygon, SafetyRegionProperties>, path: string) => {
@@ -146,12 +133,10 @@ export function SafetyRegionChoropleth<
     <div ref={ref} css={css({ position: 'relative', bg: 'transparent' })}>
       <Choropleth
         featureCollection={regionGeo}
-        overlays={countryGeo}
         hovers={hasData ? regionGeo : undefined}
         boundingBox={boundingBox || countryGeo}
         dimensions={dimensions}
         featureCallback={featureCallback}
-        overlayCallback={overlayCallback}
         hoverCallback={hoverCallback}
         onPathClick={onClick}
         getTooltipContent={getTooltipContent}

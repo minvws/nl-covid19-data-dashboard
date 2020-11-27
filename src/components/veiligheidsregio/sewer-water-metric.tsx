@@ -1,10 +1,9 @@
-import { SewerWaterBarScaleData } from '~/utils/sewer-water/safety-region-sewer-water.util';
-import { MetricKPI } from '~/components/metricKPI';
+import { MetricKPI } from '~/components-styled/metric-kpi';
+import siteText from '~/locale/index';
+import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { formatDateFromSeconds } from '~/utils/formatDate';
-
-import siteText from '~/locale/index';
+import { SewerWaterBarScaleData } from '~/utils/sewer-water/safety-region-sewer-water.util';
 
 const text = siteText.common.metricKPI;
 const title = siteText.veiligheidsregio_rioolwater_metingen.titel_kpi;
@@ -23,8 +22,7 @@ export function SewerWaterMetric(props: { data: SewerWaterBarScaleData }) {
   return (
     <MetricKPI
       title={title}
-      value={data.value}
-      format={formatNumber}
+      absolute={formatNumber(data.value)}
       description={description}
       valueAnnotation={siteText.waarde_annotaties.riool_normalized}
     />

@@ -12,7 +12,7 @@
     "nursing_home",
     "sewer",
     "sewer_per_installation",
-    "behavior"
+    "difference"
   ],
   "additionalProperties": false,
   "properties": {
@@ -30,6 +30,9 @@
     "code": {
       "type": "string",
       "const": { "$data": "1/proto_name" }
+    },
+    "difference": {
+      "$ref": "__difference.json"
     },
     "sewer": {
       "$ref": "sewer.json"
