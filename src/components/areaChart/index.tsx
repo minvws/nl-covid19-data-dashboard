@@ -2,6 +2,7 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { useMemo } from 'react';
 import text from '~/locale/index';
+import { colors } from '~/style/theme';
 import { createDate } from '~/utils/createDate';
 import { formatDateFromMilliseconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
@@ -238,7 +239,9 @@ function getChartOptions(props: IGetOptions): Highcharts.Options {
         name: rangeLegendLabel,
         data: rangeData,
         type: 'arearange',
-        color: '#C4C4C4',
+        color: colors.data.primary,
+        opacity: 0.05,
+        fillOpacity: 1,
         marker: {
           enabled: false,
         },
@@ -247,7 +250,7 @@ function getChartOptions(props: IGetOptions): Highcharts.Options {
         name: lineLegendLabel,
         data: lineData.map((el) => el[1] as number),
         type: 'line',
-        color: '#3391CC',
+        color: colors.data.primary,
         lineWidth: 2,
         marker: {
           enabled: false,

@@ -5,7 +5,6 @@ import { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { FCWithLayout } from '~/components/layout';
 import '~/components/comboBox/comboBox.scss';
-import '~/components/legenda/legenda.scss';
 import * as piwik from '~/lib/piwik';
 import '~/scss/style.scss';
 import { GlobalStyle } from '~/style/global-style';

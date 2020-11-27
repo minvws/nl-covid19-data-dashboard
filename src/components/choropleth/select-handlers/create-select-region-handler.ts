@@ -13,9 +13,6 @@ export function createSelectRegionHandler(
       return;
     }
 
-    router.push(
-      `/veiligheidsregio/[code]/${pageName}`,
-      `/veiligheidsregio/${context.vrcode}/${pageName}`
-    );
+    router.push(`/veiligheidsregio/${context.vrcode}/${pageName}`);
   };
 }

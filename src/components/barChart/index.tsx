@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import HighCharts, { XrangePointOptionsObject } from 'highcharts';
 import HighChartsReact from 'highcharts-react-official';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
+import { colors } from '~/style/theme';
 
 interface IProps {
   data: XrangePointOptionsObject[];
@@ -60,7 +61,7 @@ export default function BarChart(props: IProps) {
         series: {
           minPointLength: 5,
           groupPadding: 0,
-          color: '#3391CC',
+          color: colors.data.primary,
         },
       },
       series: [

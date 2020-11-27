@@ -1,4 +1,4 @@
-import { MetricKPI } from '~/components/metricKPI';
+import { MetricKPI } from '~/components-styled/metric-kpi';
 import siteText from '~/locale/index';
 import { NationalSewer } from '~/types/data.d';
 import { formatDateFromSeconds } from '~/utils/formatDate';
@@ -21,8 +21,7 @@ export function SewerWaterMetric(props: { data: NationalSewer }) {
   return (
     <MetricKPI
       title={title}
-      value={data.last_value.average}
-      format={formatNumber}
+      absolute={formatNumber(data.last_value.average)}
       description={description}
       valueAnnotation={siteText.waarde_annotaties.riool_normalized}
     />
