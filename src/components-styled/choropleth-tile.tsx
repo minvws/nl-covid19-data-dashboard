@@ -52,7 +52,7 @@ export function ChoroplethTile<T>({
       <Box display="flex" flexDirection={{ _: 'column', lg: 'row' }}>
         <Box mb={3} flex={{ lg: 1 }}>
           <Box mb={[0, 2]}>
-            <Heading level={2}>{title}</Heading>
+            <Heading level={3}>{title}</Heading>
             {typeof description === 'string' ? (
               <Text>{description}</Text>
             ) : (

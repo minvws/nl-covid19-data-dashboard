@@ -1,14 +1,14 @@
 import css from '@styled-system/css';
 import React from 'react';
 import { Box } from './base';
-import { Heading } from './typography';
+import { Heading, HeadingProps } from './typography';
 
-interface IProps {
+type HeadingWithIconProps = {
   title: string;
   icon: JSX.Element;
   subtitle?: string;
   headingLevel?: 1 | 2 | 3 | 4 | 5;
-}
+} & Omit<HeadingProps, 'children' | 'level'>;
 
 function Icon({
   children,
@@ -43,8 +43,8 @@ function Icon({
   );
 }
 
-export function HeadingWithIcon(props: IProps) {
-  const { icon, title, subtitle, headingLevel = 3 } = props;
+export function HeadingWithIcon(props: HeadingWithIconProps) {
+  const { icon, title, subtitle, headingLevel = 3, ...headingProps } = props;
 
   return (
     <Box
@@ -57,7 +57,7 @@ export function HeadingWithIcon(props: IProps) {
       <Icon small={headingLevel > 2}>{icon}</Icon>
 
       <Box>
-        <Heading level={headingLevel} mb={0}>
+        <Heading level={headingLevel} mb={0} {...headingProps}>
           {title}
         </Heading>
         {subtitle}

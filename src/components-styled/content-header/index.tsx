@@ -45,7 +45,7 @@ const Header = (props: HeaderProps) => {
   );
 };
 
-const CategoryText = styled(Text)(
+export const CategoryHeading = styled(Heading)<{ hide: boolean }>((x) =>
   css({
     fontSize: 3,
     fontWeight: 'bold',
@@ -53,6 +53,12 @@ const CategoryText = styled(Text)(
     margin: 0,
     marginBottom: 1,
     marginLeft: 5,
+    position: x.hide ? 'absolute' : undefined,
+    left: x.hide ? '-10000px' : undefined,
+    top: x.hide ? 'auto' : undefined,
+    width: x.hide ? '1px' : undefined,
+    height: x.hide ? '1px' : undefined,
+    overflow: x.hide ? 'hidden' : undefined,
   })
 );
 
@@ -79,6 +85,7 @@ const MetadataBox = styled(Box)(
 
 export function ContentHeader(props: ContentHeaderProps) {
   const {
+    hideCategory = false,
     category,
     icon,
     title,
@@ -86,12 +93,17 @@ export function ContentHeader(props: ContentHeaderProps) {
     metadata,
     skipLinkAnchor,
     reference,
-    headingLevel = 1,
+    headingLevel = 2,
+    id,
   } = props;
 
   return (
     <Header id={id} skipLinkAnchor={skipLinkAnchor} hasIcon={Boolean(icon)}>
-      {category && <CategoryText>{category}</CategoryText>}
+      {category && (
+        <CategoryHeading level={1} hide={hideCategory}>
+          {category}
+        </CategoryHeading>
+      )}
       {icon ? (
         <HeadingWithIcon
           icon={icon}
@@ -99,7 +111,9 @@ export function ContentHeader(props: ContentHeaderProps) {
           headingLevel={headingLevel}
         />
       ) : (
-        <Heading level={headingLevel}>{title}</Heading>
+        <Heading level={headingLevel} fontSize={4}>
+          {title}
+        </Heading>
       )}
 
       <BodyBox>
@@ -132,6 +146,7 @@ interface ContentHeaderProps {
     text: string;
   };
   category?: string;
+  hideCategory?: boolean;
   icon?: JSX.Element;
   skipLinkAnchor?: boolean;
   headingLevel?: HeadingLevel;

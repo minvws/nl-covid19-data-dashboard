@@ -6,6 +6,7 @@ import Notification from '~/assets/notification.svg';
 import { AnchorTile } from '~/components-styled/anchor-tile';
 import { Box, Spacer } from '~/components-styled/base';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
+import { CategoryHeading } from '~/components-styled/content-header';
 import { HeadingWithIcon } from '~/components-styled/heading-with-icon';
 import { MessageTile } from '~/components-styled/message-tile';
 import { Text } from '~/components-styled/typography';
@@ -61,10 +62,13 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
   return (
     <>
       <Box mb={3}>
+        <CategoryHeading level={1} hide={true}>
+          {text.nationaal_layout.headings.algemeen}
+        </CategoryHeading>
         <HeadingWithIcon
           icon={<Notification color={theme.colors.notification} />}
           title={text.laatste_ontwikkelingen.title}
-          headingLevel={1}
+          headingLevel={2}
         />
       </Box>
       <AnchorTile

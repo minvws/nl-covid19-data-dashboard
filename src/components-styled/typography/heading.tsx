@@ -12,7 +12,7 @@ import {
   TypographyProps,
 } from 'styled-system';
 
-interface HeadingProps extends StyledHeadingProps {
+export interface HeadingProps extends StyledHeadingProps {
   children: React.ReactNode;
   as?: keyof JSX.IntrinsicElements | React.ComponentType<any>;
   level: HeadingLevel;
@@ -65,7 +65,7 @@ const Heading2 = styled.h2<StyledHeadingProps>(composedStyles);
 
 Heading2.defaultProps = {
   fontFamily: 'body',
-  fontSize: 3,
+  fontSize: 4,
   lineHeight: 2,
   mt: 0,
   mb: 3,
