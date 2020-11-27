@@ -1,4 +1,5 @@
 import css from '@styled-system/css';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {
   color,
@@ -142,14 +143,13 @@ const Container = styled.div(
 );
 
 function TimespanText({ date }: { date: number }) {
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => setIsMounted(true), []);
+
   const fullDate = formatDateFromMilliseconds(date * 1000, 'medium');
   const text = getTimespanText(date);
 
-  return (
-    <Span suppressHydrationWarning title={fullDate}>
-      {text}
-    </Span>
-  );
+  return <Span title={fullDate}>{isMounted ? text : fullDate}</Span>;
 }
 
 /**
@@ -162,17 +162,17 @@ function TimespanText({ date }: { date: number }) {
  * typically be a few days or a week or multiple weeks anyway.
  */
 function getTimespanText(oldDate: number) {
-  const days = Math.round((Date.now() / 1000 - oldDate) / DAY_IN_SECONDS);
+  const days = Math.floor((Date.now() / 1000 - oldDate) / DAY_IN_SECONDS);
 
   if (days < 2) {
     return text.tijdverloop.gisteren;
   }
 
-  if (days < 6) {
+  if (days < 7) {
     return `${days} ${text.tijdverloop.dagen} ${text.tijdverloop.geleden}`;
   }
 
-  const weeks = Math.round(days / 7);
+  const weeks = Math.floor(days / 7);
 
   if (weeks < 2) {
     return `${weeks} ${text.tijdverloop.week.enkelvoud} ${text.tijdverloop.geleden}`;
