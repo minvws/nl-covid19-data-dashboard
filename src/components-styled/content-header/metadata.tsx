@@ -39,14 +39,8 @@ export function Metadata(props: MetadataProps) {
     .map((x) => ({ href: x.download, text: x.text }));
 
   return (
-    <Box>
-      <Box
-        display="flex"
-        alignItems="flex-start"
-        color="annotation"
-        my={3}
-        mx={0}
-      >
+    <Box spacing={2} my={3}>
+      <Box display="flex" alignItems="flex-start" color="annotation">
         <Box as="span" minWidth="1.8rem" mt={1}>
           <ClockIcon aria-hidden color={theme.colors.annotation} />
         </Box>
@@ -92,13 +86,7 @@ function MetadataItem(props: MetadataItemProps) {
   }
 
   return (
-    <Box
-      display="flex"
-      alignItems="flex-start"
-      color="annotation"
-      my={3}
-      mx={0}
-    >
+    <Box display="flex" alignItems="flex-start" color="annotation">
       <Box as="span" minWidth="1.8rem" mt={1}>
         {icon}
       </Box>
