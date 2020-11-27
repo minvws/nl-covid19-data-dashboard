@@ -81,6 +81,7 @@ const NursingHomeCare: FCWithLayout<NationalPageProps> = (props) => {
       />
 
       <ContentHeader
+        id="besmette-locaties"
         skipLinkAnchor={true}
         title={infectedLocationsText.titel}
         icon={<Locatie />}
@@ -159,6 +160,7 @@ const NursingHomeCare: FCWithLayout<NationalPageProps> = (props) => {
       />
 
       <ContentHeader
+        id="sterfte"
         skipLinkAnchor={true}
         title={locationDeaths.titel}
         icon={<CoronaVirus />}

@@ -167,6 +167,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
       </ChoroplethTile>
 
       <ContentHeader
+        id="ggd"
         title={replaceVariablesInText(ggdText.titel, {
           safetyRegion: safetyRegionName,
         })}
