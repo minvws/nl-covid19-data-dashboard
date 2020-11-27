@@ -18,7 +18,7 @@ export function IntakeHospitalBarScale(props: {
     data.difference.intake_hospital_ma__moving_average_hospital;
 
   return (
-    <Box space={2}>
+    <Box spacing={2}>
       <BarScale
         min={0}
         max={100}

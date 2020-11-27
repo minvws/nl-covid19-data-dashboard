@@ -19,13 +19,10 @@ import {
   typography,
   TypographyProps,
 } from 'styled-system';
-import {
-  spaceChildren,
-  SpaceChildrenProps,
-} from '~/style/style-funtions/space-children';
+import { spacing, SpacingProps } from '~/style/functions/spacing';
 
 export type BoxProps = SpaceProps &
-  SpaceChildrenProps &
+  SpacingProps &
   LayoutProps &
   FlexboxProps &
   ColorProps &
@@ -44,7 +41,7 @@ export type BoxProps = SpaceProps &
 export const Box = styled.div<BoxProps>(
   { boxSizing: 'border-box', minWidth: 0 },
   space,
-  spaceChildren,
+  spacing,
   layout,
   flexbox,
   color,
