@@ -116,7 +116,7 @@ function NationalLayout(props: NationalLayoutProps) {
           <nav
             /** re-mount when route changes in order to blur anchors */
             key={router.asPath}
-            aria-label="categorie keuze"
+            aria-label="metrieken per categorie keuze"
             role="navigation"
           >
             <ul>

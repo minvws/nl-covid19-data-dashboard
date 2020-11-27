@@ -79,6 +79,7 @@ function Layout(
       <div className={styles.skiplinks}>
         <a href="#content">{text.skiplinks.inhoud}</a>
         <a href="#main-navigation">{text.skiplinks.nav}</a>
+        <a href="#footer-navigation">{text.skiplinks.footernav}</a>
       </div>
 
       <header className={styles.header}>
@@ -206,7 +207,7 @@ function Layout(
         </nav>
       </header>
 
-      {children}
+      <div id="content">{children}</div>
 
       <footer
         /** re-mount when route changes in order to blur anchors */
@@ -219,7 +220,11 @@ function Layout(
                 <Heading level={4} fontSize={3}>
                   {text.nav.title}
                 </Heading>
-                <nav aria-label="pagina keuze" role="navigation">
+                <nav
+                  aria-label="pagina keuze"
+                  role="navigation"
+                  id="footer-navigation"
+                >
                   <ul className={styles.footerList}>
                     <li>
                       <Link href="/">

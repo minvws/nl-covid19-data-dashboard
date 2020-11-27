@@ -27,7 +27,8 @@
   },
   "skiplinks": {
     "inhoud": "Go directly to the content",
-    "nav": "Go directly to the navigation"
+    "nav": "Go directly to the navigation",
+    "footernav": "Go directly to the footer navigation"
   },
   "header": {
     "title": "Coronavirus dashboard",
