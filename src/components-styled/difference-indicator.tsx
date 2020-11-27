@@ -132,11 +132,11 @@ const Container = styled.div(
   css({
     whiteSpace: 'nowrap',
     display: 'inline-block',
-    fontSize: 1,
+    fontSize: 2,
     svg: {
       mr: 1,
-      width: '1em',
-      verticalAlign: 'middle',
+      width: '1.2em',
+      verticalAlign: 'text-bottom',
     },
   })
 );
