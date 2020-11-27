@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { Heading } from '~/components-styled/typography';
 import { MaxWidth } from '~/components/maxWidth';
 import { SEOHead } from '~/components/seoHead';
 import text from '~/locale/index';
@@ -142,6 +143,8 @@ function Layout(
           key={router.route}
           id="main-navigation"
           className={styles.nav}
+          role="navigation"
+          aria-label="landelijk regio gemeente keuze"
         >
           <MaxWidth>
             <ul className={styles.navList}>
@@ -213,8 +216,10 @@ function Layout(
           <MaxWidth>
             <div className={styles.grid}>
               <div className={styles.footerColumn}>
-                <h3>{text.nav.title}</h3>
-                <nav>
+                <Heading level={4} fontSize={3}>
+                  {text.nav.title}
+                </Heading>
+                <nav aria-label="pagina keuze" role="navigation">
                   <ul className={styles.footerList}>
                     <li>
                       <Link href="/">
@@ -279,7 +284,9 @@ function Layout(
                 </nav>
               </div>
               <div className={styles.footerColumn}>
-                <h3>{text.laatst_bijgewerkt.title}</h3>
+                <Heading level={4} fontSize={3}>
+                  {text.laatst_bijgewerkt.title}
+                </Heading>
                 <p
                   dangerouslySetInnerHTML={{
                     __html: replaceVariablesInText(
