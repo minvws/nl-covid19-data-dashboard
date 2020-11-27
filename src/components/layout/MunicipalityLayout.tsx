@@ -248,7 +248,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
           )}
         </aside>
 
-        <section className="municipality-content">{children}</section>
+        <main className="municipality-content">{children}</main>
 
         <Link href={menuOpenUrl}>
           <a className="back-button back-button-footer">

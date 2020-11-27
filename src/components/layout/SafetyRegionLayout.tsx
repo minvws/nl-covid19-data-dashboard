@@ -251,7 +251,7 @@ function SafetyRegionLayout(
           )}
         </aside>
 
-        <section className="safety-region-content">{children}</section>
+        <main className="safety-region-content">{children}</main>
 
         <Link href={menuUrl}>
           <a className="back-button back-button-footer">

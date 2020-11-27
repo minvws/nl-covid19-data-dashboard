@@ -208,7 +208,8 @@
   > aside {
     flex-basis: 100%;
   }
-  > section {
+  > section,
+  main {
     background: $page-background;
     padding: 2em;
     flex-basis: 100%;
@@ -226,7 +227,8 @@
   .national-layout,
   .safety-region-layout,
   .municipality-layout {
-    > section {
+    > section,
+    main {
       padding-top: 0;
       margin-top: 2em;
     }

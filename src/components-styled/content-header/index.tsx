@@ -7,7 +7,7 @@ import {
   MetadataProps,
 } from '~/components-styled/content-header/metadata';
 import { HeadingWithIcon } from '~/components-styled/heading-with-icon';
-import { Heading, Text } from '~/components-styled/typography';
+import { Heading, HeadingLevel, Text } from '~/components-styled/typography';
 import { Box } from '../base';
 
 /*
@@ -15,12 +15,11 @@ import { Box } from '../base';
   This fixes odd skip-link behavior in IE11
 */
 const HeaderBox = styled.header<{
-  hasCategory: boolean;
   hasIcon: boolean;
   skipLinkAnchor: boolean;
 }>((x) =>
   css({
-    mt: x.hasCategory ? undefined : 4,
+    mt: 0,
     ml: x.skipLinkAnchor ? '-100vw' : x.hasIcon ? undefined : 5,
     pl: x.skipLinkAnchor ? '100vw' : undefined,
   })
@@ -28,19 +27,14 @@ const HeaderBox = styled.header<{
 
 interface HeaderProps {
   skipLinkAnchor?: boolean;
-  hasCategory: boolean;
   hasIcon: boolean;
   children: ReactNode;
 }
 
 const Header = (props: HeaderProps) => {
-  const { hasCategory, hasIcon, children, skipLinkAnchor } = props;
+  const { hasIcon, children, skipLinkAnchor } = props;
   return (
-    <HeaderBox
-      hasCategory={hasCategory}
-      hasIcon={hasIcon}
-      skipLinkAnchor={Boolean(skipLinkAnchor)}
-    >
+    <HeaderBox hasIcon={hasIcon} skipLinkAnchor={Boolean(skipLinkAnchor)}>
       {children}
     </HeaderBox>
   );
@@ -87,19 +81,20 @@ export function ContentHeader(props: ContentHeaderProps) {
     metadata,
     skipLinkAnchor,
     reference,
+    headingLevel = 1,
   } = props;
 
   return (
-    <Header
-      skipLinkAnchor={skipLinkAnchor}
-      hasCategory={Boolean(category)}
-      hasIcon={Boolean(icon)}
-    >
+    <Header skipLinkAnchor={skipLinkAnchor} hasIcon={Boolean(icon)}>
       {category && <CategoryText>{category}</CategoryText>}
       {icon ? (
-        <HeadingWithIcon icon={icon} title={title} headingLevel={2} />
+        <HeadingWithIcon
+          icon={icon}
+          title={title}
+          headingLevel={headingLevel}
+        />
       ) : (
-        <Heading level={2}>{title}</Heading>
+        <Heading level={headingLevel}>{title}</Heading>
       )}
 
       <BodyBox>
@@ -133,4 +128,5 @@ interface ContentHeaderProps {
   category?: string;
   icon?: JSX.Element;
   skipLinkAnchor?: boolean;
+  headingLevel?: HeadingLevel;
 }

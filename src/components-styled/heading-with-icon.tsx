@@ -7,7 +7,7 @@ interface IProps {
   title: string;
   icon: JSX.Element;
   subtitle?: string;
-  headingLevel?: 2 | 3;
+  headingLevel?: 1 | 2 | 3 | 4 | 5;
 }
 
 function Icon({
@@ -54,14 +54,10 @@ export function HeadingWithIcon(props: IProps) {
       alignItems="center"
       mb={-2}
     >
-      <Icon small={headingLevel === 3}>{icon}</Icon>
+      <Icon small={headingLevel > 2}>{icon}</Icon>
 
       <Box>
-        <Heading
-          level={headingLevel}
-          fontSize={headingLevel === 3 ? 2 : undefined}
-          mb={0}
-        >
+        <Heading level={headingLevel} mb={0}>
           {title}
         </Heading>
         {subtitle}

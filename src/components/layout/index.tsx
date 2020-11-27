@@ -1,18 +1,15 @@
-import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-
+import React from 'react';
+import { MaxWidth } from '~/components/maxWidth';
+import { SEOHead } from '~/components/seoHead';
 import text from '~/locale/index';
 import { ILastGeneratedData } from '~/static-props/last-generated-data';
-import styles from './layout.module.scss';
-
-import { useMediaQuery } from '~/utils/useMediaQuery';
 import { formatDateFromSeconds } from '~/utils/formatDate';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { getLocale } from '~/utils/getLocale';
-
-import { SEOHead } from '~/components/seoHead';
-import { MaxWidth } from '~/components/maxWidth';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { useMediaQuery } from '~/utils/useMediaQuery';
+import styles from './layout.module.scss';
 
 export interface LayoutProps {
   url?: string;
@@ -121,7 +118,17 @@ function Layout(
               EN
             </a>
           </div>
-          <h1>{text.header.title}</h1>
+          <div
+            style={{
+              fontSize: '2.02729rem',
+              lineHeight: '1.23318',
+              marginBottom: 0,
+              marginTop: '2.5rem',
+              fontWeight: 'bold',
+            }}
+          >
+            {text.header.title}
+          </div>
           <p>
             {text.header.text}{' '}
             <Link href="/over">
@@ -196,7 +203,7 @@ function Layout(
         </nav>
       </header>
 
-      <main id="content">{children}</main>
+      {children}
 
       <footer
         /** re-mount when route changes in order to blur anchors */

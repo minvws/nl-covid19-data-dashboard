@@ -324,7 +324,7 @@ function NationalLayout(props: NationalLayoutProps) {
           </nav>
         </aside>
 
-        <section className="national-content">{children}</section>
+        <main className="national-content">{children}</main>
 
         <Link href={menuOpenUrl}>
           <a className="back-button back-button-footer">
