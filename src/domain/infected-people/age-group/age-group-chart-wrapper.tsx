@@ -2,6 +2,7 @@ import css from '@styled-system/css';
 import { ParentSize } from '@visx/responsive';
 import { MouseEvent, useCallback, useRef, useState } from 'react';
 import styled from 'styled-components';
+import { Box } from '~/components-styled/base';
 import {
   NationalInfectedAgeGroups,
   NationalInfectedAgeGroupsValue,
@@ -26,20 +27,22 @@ const Wrapper = styled.div(
 );
 
 export function AgeGroupChartWrapper({ data }: AgeGroupChartWrapperProps) {
-  const [tooltip, setTooltip] = useState<null | TooltipOptions>();
+  const [tooltip, setTooltip] = useState<TooltipOptions>();
 
   // @TODO move this tooltip logic elsewhere
   // And combine with keyboard logic
   const timer = useRef(-1);
 
-  const debounceSetTooltip = useCallback((options: TooltipOptions | null) => {
-    if (timer.current > -1) {
-      window.clearTimeout(timer.current);
-      timer.current = -1;
-    }
+  const debounceSetTooltip = useCallback(
+    (options: TooltipOptions | undefined) => {
+      if (timer.current > -1) {
+        window.clearTimeout(timer.current);
+      }
 
-    timer.current = window.setTimeout(() => setTooltip(options), 100);
-  }, []);
+      timer.current = window.setTimeout(() => setTooltip(options), 100);
+    },
+    []
+  );
 
   const openTooltip = useCallback(
     (
@@ -58,28 +61,30 @@ export function AgeGroupChartWrapper({ data }: AgeGroupChartWrapperProps) {
   );
 
   const closeTooltip = useCallback(() => {
-    debounceSetTooltip(null);
+    debounceSetTooltip(undefined);
   }, [debounceSetTooltip]);
 
   return (
-    <Wrapper>
-      <ParentSize>
-        {(parent) => (
-          <AgeGroupChart
-            parentWidth={parent.width}
-            data={data}
-            openTooltip={openTooltip}
-            closeTooltip={closeTooltip}
+    <Box mx="-2rem">
+      <Wrapper>
+        <ParentSize>
+          {(parent) => (
+            <AgeGroupChart
+              parentWidth={parent.width}
+              data={data}
+              openTooltip={openTooltip}
+              closeTooltip={closeTooltip}
+            />
+          )}
+        </ParentSize>
+        {tooltip && (
+          <AgeGroupTooltip
+            left={tooltip.left}
+            top={tooltip.top}
+            value={tooltip.value}
           />
         )}
-      </ParentSize>
-      {tooltip && (
-        <AgeGroupTooltip
-          left={tooltip.left}
-          top={tooltip.top}
-          value={tooltip.value}
-        />
-      )}
-    </Wrapper>
+      </Wrapper>
+    </Box>
   );
 }

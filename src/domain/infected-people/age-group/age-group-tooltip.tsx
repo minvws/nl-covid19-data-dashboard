@@ -18,7 +18,7 @@ interface AgeGroupTooltipProps {
   value: NationalInfectedAgeGroupsValue;
 }
 
-export const Tooltip = styled.div(
+const Tooltip = styled.div(
   css({
     position: 'absolute',
     background: '#FFF',
@@ -68,7 +68,7 @@ const LegendItem = styled.li(
 
 export function AgeGroupTooltip({ value, left, top }: AgeGroupTooltipProps) {
   return (
-    <Tooltip style={{ left: `${left}px`, top: `${top}px` }}>
+    <Tooltip style={{ left, top }}>
       <Text fontSize={3} fontWeight="bold" px={3} py={2} m="0">
         {replaceVariablesInText(text.graph.age_group_range_tooltip, {
           ageGroupRange: formatAgeGroupRange(value.age_group_range),

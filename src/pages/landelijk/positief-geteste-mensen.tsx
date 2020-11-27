@@ -46,7 +46,7 @@ import { colors } from '~/style/theme';
 const text = siteText.positief_geteste_personen;
 const ggdText = siteText.positief_geteste_personen_ggd;
 
-function getAgeGroupExample(data: NationalInfectedAgeGroups) {
+function getAgeGroupExampleData(data: NationalInfectedAgeGroups) {
   const ageGroupRange = '20-29';
 
   const value = data.values.find(
@@ -74,7 +74,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
   const dataGgdLastValue = data.ggd.last_value;
   const dataGgdValues = data.ggd.values;
 
-  const ageGroupExample = getAgeGroupExample(data.infected_age_groups);
+  const ageGroupExampleData = getAgeGroupExampleData(data.infected_age_groups);
 
   return (
     <>
@@ -216,12 +216,10 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
         <Text mt="0">
           {replaceVariablesInText(
             siteText.infected_age_groups.example,
-            ageGroupExample
+            ageGroupExampleData
           )}
         </Text>
-        <Box mx="-2rem">
-          <AgeGroupChartWrapper data={data.infected_age_groups} />
-        </Box>
+        <AgeGroupChartWrapper data={data.infected_age_groups} />
       </ChartTile>
 
       <ContentHeader

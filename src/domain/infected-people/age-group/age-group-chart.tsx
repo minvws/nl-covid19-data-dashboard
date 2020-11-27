@@ -13,6 +13,7 @@ import {
 import { formatPercentage } from '~/utils/formatNumber';
 import siteText from '~/locale/index';
 import { MouseEvent } from 'react';
+import { useBreakpoints } from '~/utils/useBreakpoints';
 
 export const AGE_GROUP_TOOLTIP_WIDTH = 340;
 
@@ -57,7 +58,8 @@ export function AgeGroupChart({
   });
 
   // Define the graph dimensions and margins
-  const isSmallScreen = parentWidth < 500;
+  const breakpoints = useBreakpoints();
+  const isSmallScreen = !breakpoints.md;
   const ageRangeAxisWidth = isSmallScreen ? 60 : 100;
   const width = parentWidth;
   const height = 400;
@@ -75,8 +77,10 @@ export function AgeGroupChart({
     d.age_group_percentage;
   const infectedPercentage = (d: NationalInfectedAgeGroupsValue) =>
     d.infected_percentage;
-  const y = (d: NationalInfectedAgeGroupsValue) => d.age_group_range;
+  const ageGroupRange = (d: NationalInfectedAgeGroupsValue) =>
+    d.age_group_range;
 
+  // And then scale the graph by our data
   const domainPercentages = [
     0,
     Math.max(
@@ -86,7 +90,6 @@ export function AgeGroupChart({
     ),
   ];
 
-  // And then scale the graph by our data
   const ageGroupPercentageScale = scaleLinear({
     range: [xMax, 0],
     round: true,
@@ -97,26 +100,26 @@ export function AgeGroupChart({
     round: true,
     domain: domainPercentages,
   });
-  const yScale = scaleBand({
+  const ageGroupRangeScale = scaleBand({
     range: [margin.top, height - margin.top],
     round: true,
-    domain: values.map(y),
+    domain: values.map(ageGroupRange),
     padding: 0.4,
   });
 
   // Compose together the scale and accessor functions to get point functions
-  const compose = (scale: any, accessor: any) => (
+  const createPoint = (scale: any, accessor: any) => (
     d: NationalInfectedAgeGroupsValue
   ) => scale(accessor(d));
-  const ageGroupPercentagePoint = compose(
+  const ageGroupPercentagePoint = createPoint(
     ageGroupPercentageScale,
     ageGroupPercentage
   );
-  const infectedPercentagePoint = compose(
+  const infectedPercentagePoint = createPoint(
     infectedPercentageScale,
     infectedPercentage
   );
-  const yPoint = compose(yScale, y);
+  const ageGroupRangePoint = createPoint(ageGroupRangeScale, ageGroupRange);
 
   const getTooltipCoordinates = (
     event: MouseEvent,
@@ -146,7 +149,7 @@ export function AgeGroupChart({
       }
     }
 
-    const y = yPoint(value);
+    const y = ageGroupRangePoint(value);
     return { x, y };
   };
 
@@ -164,7 +167,7 @@ export function AgeGroupChart({
         x={width / 2 - ageRangeAxisWidth / 2}
         fill="#000"
         fontWeight="bold"
-        fontSize={'1.2rem'}
+        fontSize={isSmallScreen ? '1rem' : '1.2rem'}
       >
         {text.graph.age_group_percentage_title}
       </Text>
@@ -175,7 +178,7 @@ export function AgeGroupChart({
         x={width / 2 + ageRangeAxisWidth / 2}
         fill="#000"
         fontWeight="bold"
-        fontSize={'1.2rem'}
+        fontSize={isSmallScreen ? '1rem' : '1.2rem'}
       >
         {text.graph.infected_percentage_title}
       </Text>
@@ -217,11 +220,11 @@ export function AgeGroupChart({
             })}
           >
             {/* This bar takes all width to display the background color on hover
-              The tranparent stroke is to capture mouse movements in between bars for the tooltip */}
+              The transparent stroke is to capture mouse movements in between bars for the tooltip */}
             <Bar
               x={margin.left}
-              y={yPoint(d)}
-              height={yScale.bandwidth()}
+              y={ageGroupRangePoint(d)}
+              height={ageGroupRangeScale.bandwidth()}
               width={width - margin.left - margin.right}
               fill="transparent"
               className="hoverbar"
@@ -230,24 +233,24 @@ export function AgeGroupChart({
             />
             <Bar
               x={width / 2 - ageRangeAxisWidth / 2 - ageGroupPercentageWidth}
-              y={yPoint(d)}
-              height={yScale.bandwidth()}
+              y={ageGroupRangePoint(d)}
+              height={ageGroupRangeScale.bandwidth()}
               width={ageGroupPercentageWidth}
               fill="#c6c8ca"
             />
             <Text
               textAnchor="middle"
               verticalAnchor="middle"
-              y={yPoint(d) + yScale.bandwidth() / 2}
+              y={ageGroupRangePoint(d) + ageGroupRangeScale.bandwidth() / 2}
               x={width / 2}
               fill="#595959"
             >
-              {formatAgeGroupRange(y(d))}
+              {formatAgeGroupRange(ageGroupRange(d))}
             </Text>
             <Bar
               x={width / 2 + ageRangeAxisWidth / 2}
-              y={yPoint(d)}
-              height={yScale.bandwidth()}
+              y={ageGroupRangePoint(d)}
+              height={ageGroupRangeScale.bandwidth()}
               width={infectedPercentageWidth}
               fill="#3391cc"
             />

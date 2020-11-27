@@ -5,7 +5,6 @@ const sitemap = require('./src/tools/sitemap/generate-sitemap.js');
 const withTM = require('next-transpile-modules')([
   '@visx/tooltip',
   '@visx/event',
-  'zustand',
 ]);
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
