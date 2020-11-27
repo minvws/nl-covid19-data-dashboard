@@ -42,7 +42,15 @@ export function AgeGroupChartWrapper({ data }: AgeGroupChartWrapperProps) {
   }, []);
 
   const openTooltip = useCallback(
-    (value: NationalInfectedAgeGroupsValue, x: number, y: number) => {
+    (
+      event: MouseEvent,
+      value: NationalInfectedAgeGroupsValue,
+      getTooltipCoordinates: (
+        event: MouseEvent<SVGGElement, MouseEvent>,
+        value: NationalInfectedAgeGroupsValue
+      ) => { x: number; y: number }
+    ) => {
+      const { x, y } = getTooltipCoordinates(event, value);
       const options: TooltipOptions = { left: x, top: y, value };
       debounceSetTooltip(options);
     },

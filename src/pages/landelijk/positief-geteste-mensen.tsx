@@ -27,6 +27,8 @@ import siteText from '~/locale/index';
 import getNlData, { INationalData } from '~/static-props/nl-data';
 import {
   InfectedPeopleDeltaNormalized,
+  NationalInfectedAgeGroups,
+  NationalInfectedAgeGroupsValue,
   NationalInfectedPeopleTotal,
 } from '~/types/data.d';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
@@ -36,9 +38,29 @@ import { MultipleLineChartTile } from '~/components-styled/multiple-line-chart-t
 import { RegionControlOption } from '~/components-styled/chart-region-controls';
 import { ChartTile } from '~/components-styled/chart-tile';
 import { AgeGroupChartWrapper } from '~/domain/infected-people/age-group/age-group-chart-wrapper';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { formatAgeGroupRange } from '~/domain/infected-people/age-group/age-group-chart';
 
 const text = siteText.positief_geteste_personen;
 const ggdText = siteText.positief_geteste_personen_ggd;
+
+function getAgeGroupExample(data: NationalInfectedAgeGroups) {
+  const ageGroupRange = '20-29';
+
+  const value = data.values.find(
+    (x: NationalInfectedAgeGroupsValue) => x.age_group_range === ageGroupRange
+  );
+
+  if (!value) {
+    return {};
+  }
+
+  return {
+    ageGroupRange: formatAgeGroupRange(ageGroupRange),
+    ageGroupPercentage: `${formatPercentage(value.age_group_percentage)}%`,
+    infectedPercentage: `${formatPercentage(value.infected_percentage)}%`,
+  };
+}
 
 const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
   const { data } = props;
@@ -54,6 +76,8 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
 
   const ggdLastValue = data.ggd.last_value;
   const ggdValues = data.ggd.values;
+
+  const ageGroupExample = getAgeGroupExample(data.infected_age_groups);
 
   return (
     <>
@@ -182,38 +206,20 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         }}
       />
 
-      {/* <ChartTile
-        title={text.barchart_titel}
-        description={text.barchart_toelichting}
-        metadata={{
-          date: delta.last_value.date_of_report_unix,
-          source: text.bron,
-        }}
-      >
-        <BarChart
-          keys={text.barscale_keys}
-          data={age.values.map((value) => ({
-            y: value.infected_per_agegroup_increase,
-            label:
-              barChartTotal > 0
-                ? `${(
-                    (value.infected_per_agegroup_increase * 100) /
-                    barChartTotal
-                  ).toFixed(0)}%`
-                : false,
-          }))}
-          axisTitle={text.barchart_axis_titel}
-        />
-      </ChartTile> */}
-
       <ChartTile
-        title={text.barchart_titel}
-        description={text.barchart_toelichting}
+        title={siteText.infected_age_groups.title}
+        description={siteText.infected_age_groups.description}
         metadata={{
           date: delta.last_value.date_of_report_unix,
           source: text.bron,
         }}
       >
+        <Text mt="0">
+          {replaceVariablesInText(
+            siteText.infected_age_groups.example,
+            ageGroupExample
+          )}
+        </Text>
         <Box mx="-2rem">
           <AgeGroupChartWrapper data={data.infected_age_groups} />
         </Box>
