@@ -5,8 +5,15 @@ import Arrow from '~/assets/arrow.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
-import { Category } from '~/components-styled/sidebar/category';
-import { TitleWithIcon } from '~/components-styled/sidebar/title-with-icon';
+import { Category } from '~/components-styled/aside/category';
+import {
+  CategoryMenuItem,
+  Menu,
+  MetricMenuItem,
+} from '~/components-styled/aside/menu';
+import { TitleWithIcon } from '~/components-styled/aside/title-with-icon';
+import { Box } from '~/components-styled/base';
+import { Text } from '~/components-styled/typography';
 import { ComboBox } from '~/components/comboBox';
 import { IntakeHospitalMetric } from '~/components/gemeente/intake-hospital-metric';
 import { PositivelyTestedPeopleMetric } from '~/components/gemeente/positively-tested-people-metric';
@@ -145,30 +152,31 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
               /** re-mount when route changes in order to blur anchors */
               key={router.asPath}
               role="navigation"
+              id="metric-navigation"
               aria-label="metrieken per categorie keuze"
             >
-              <div className="region-names">
-                <Category>{municipalityName}</Category>
+              <Box>
+                <Category marginBottom={0}>{municipalityName}</Category>
                 {safetyRegion && (
-                  <p>
+                  <Text pl={3}>
                     {siteText.common.veiligheidsregio_label}{' '}
                     <Link
                       href={`/veiligheidsregio/${safetyRegion.code}/positief-geteste-mensen`}
                     >
                       <a>{safetyRegion.name}</a>
                     </Link>
-                  </p>
+                  </Text>
                 )}
-              </div>
-              <ul>
+              </Box>
+              <Menu>
                 {data && (
                   <>
-                    <li>
+                    <CategoryMenuItem>
                       <Category>
                         {siteText.gemeente_layout.headings.besmettingen}
                       </Category>
-                      <ul>
-                        <li>
+                      <Menu>
+                        <MetricMenuItem>
                           <Link
                             href={`/gemeente/${code}/positief-geteste-mensen`}
                           >
@@ -189,15 +197,15 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                               </span>
                             </a>
                           </Link>
-                        </li>
-                      </ul>
-                    </li>
-                    <li>
+                        </MetricMenuItem>
+                      </Menu>
+                    </CategoryMenuItem>
+                    <CategoryMenuItem>
                       <Category>
                         {siteText.gemeente_layout.headings.ziekenhuizen}
                       </Category>
-                      <ul>
-                        <li>
+                      <Menu>
+                        <MetricMenuItem>
                           <Link href={`/gemeente/${code}/ziekenhuis-opnames`}>
                             <a
                               className={getClassName(
@@ -216,17 +224,17 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                               </span>
                             </a>
                           </Link>
-                        </li>
-                      </ul>
-                    </li>
+                        </MetricMenuItem>
+                      </Menu>
+                    </CategoryMenuItem>
                   </>
                 )}
-                <li>
+                <CategoryMenuItem>
                   <Category>
                     {siteText.gemeente_layout.headings.vroege_signalen}
                   </Category>
-                  <ul>
-                    <li>
+                  <Menu>
+                    <MetricMenuItem>
                       {sewerWaterBarScaleData ? (
                         <Link href={`/gemeente/${code}/rioolwater`}>
                           <a
@@ -263,10 +271,10 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                           </p>
                         </div>
                       )}
-                    </li>
-                  </ul>
-                </li>
-              </ul>
+                    </MetricMenuItem>
+                  </Menu>
+                </CategoryMenuItem>
+              </Menu>
             </nav>
           )}
         </aside>

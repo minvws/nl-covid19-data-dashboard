@@ -10,8 +10,8 @@ import GetestIcon from '~/assets/test.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import Ziektegolf from '~/assets/ziektegolf.svg';
-import { Category } from '~/components-styled/sidebar/category';
-import { TitleWithIcon } from '~/components-styled/sidebar/title-with-icon';
+import { Category } from '~/components-styled/aside/category';
+import { TitleWithIcon } from '~/components-styled/aside/title-with-icon';
 import { NursingHomeInfectedPeopleMetric } from '~/components/common/nursing-home-infected-people-metric';
 import { InfectiousPeopleMetric } from '~/components/landelijk/infectious-people-metric';
 import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-barscale';
@@ -116,6 +116,7 @@ function NationalLayout(props: NationalLayoutProps) {
           <nav
             /** re-mount when route changes in order to blur anchors */
             key={router.asPath}
+            id="metric-navigation"
             aria-label="metrieken per categorie keuze"
             role="navigation"
           >

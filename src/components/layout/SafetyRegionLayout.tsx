@@ -6,8 +6,8 @@ import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
-import { Category } from '~/components-styled/sidebar/category';
-import { TitleWithIcon } from '~/components-styled/sidebar/title-with-icon';
+import { Category } from '~/components-styled/aside/category';
+import { TitleWithIcon } from '~/components-styled/aside/title-with-icon';
 import { ComboBox } from '~/components/comboBox';
 import { getLayout as getSiteLayout } from '~/components/layout';
 import { IntakeHospitalMetric } from '~/components/veiligheidsregio/intake-hospital-metric';
@@ -135,6 +135,7 @@ function SafetyRegionLayout(
             <nav
               /** re-mount when route changes in order to blur anchors */
               key={router.asPath}
+              id="metric-navigation"
               aria-label="metrieken per categorie keuze"
               role="navigation"
             >

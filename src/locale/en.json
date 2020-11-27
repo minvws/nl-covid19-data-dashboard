@@ -28,6 +28,7 @@
   "skiplinks": {
     "inhoud": "Go directly to the content",
     "nav": "Go directly to the navigation",
+    "metricnav": "Go directly to the metric navigation",
     "footernav": "Go directly to the footer navigation"
   },
   "header": {
