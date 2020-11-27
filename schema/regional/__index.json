@@ -12,7 +12,9 @@
     "nursing_home",
     "sewer",
     "sewer_per_installation",
-    "difference"
+    "difference",
+    "deceased_rivm",
+    "deceased_cbs"
   ],
   "additionalProperties": false,
   "properties": {
@@ -54,6 +56,12 @@
     },
     "behavior": {
       "$ref": "behavior.json"
+    },
+    "deceased_rivm": {
+      "$ref": "deceased_rivm.json"
+    },
+    "deceased_cbs": {
+      "$ref": "deceased_cbs.json"
     }
   }
 }

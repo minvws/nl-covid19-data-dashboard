@@ -41,12 +41,12 @@
     },
     "positive_tested_people": {
       "type": "array",
+      "minItems": 25,
       "maxItems": 25,
       "items": {
         "$ref": "positive_tested_people.json"
       }
     },
-
     "escalation_levels": {
       "type": "array",
       "minItems": 25,
@@ -57,6 +57,7 @@
     },
     "nursing_home": {
       "type": "array",
+      "minItems": 25,
       "maxItems": 25,
       "items": {
         "$ref": "nursing_home.json"
@@ -64,6 +65,7 @@
     },
     "sewer": {
       "type": "array",
+      "minItems": 25,
       "maxItems": 25,
       "items": {
         "$ref": "sewer.json"
@@ -71,6 +73,7 @@
     },
     "behavior": {
       "type": "array",
+      "minItems": 25,
       "maxItems": 25,
       "items": {
         "$ref": "behavior.json"
