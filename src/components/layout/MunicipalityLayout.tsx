@@ -279,7 +279,9 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
           )}
         </aside>
 
-        <main className="municipality-content">{children}</main>
+        <main id="content" className="municipality-content">
+          {children}
+        </main>
 
         <Link href={menuOpenUrl}>
           <a className="back-button back-button-footer">

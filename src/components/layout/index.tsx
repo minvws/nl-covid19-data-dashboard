@@ -208,7 +208,7 @@ function Layout(
         </nav>
       </header>
 
-      <div id="content">{children}</div>
+      <div>{children}</div>
 
       <footer
         /** re-mount when route changes in order to blur anchors */

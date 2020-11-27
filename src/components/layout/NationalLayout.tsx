@@ -11,6 +11,11 @@ import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import Ziektegolf from '~/assets/ziektegolf.svg';
 import { Category } from '~/components-styled/aside/category';
+import {
+  CategoryMenuItem,
+  Menu,
+  MetricMenuItem,
+} from '~/components-styled/aside/menu';
 import { TitleWithIcon } from '~/components-styled/aside/title-with-icon';
 import { NursingHomeInfectedPeopleMetric } from '~/components/common/nursing-home-infected-people-metric';
 import { InfectiousPeopleMetric } from '~/components/landelijk/infectious-people-metric';
@@ -29,6 +34,7 @@ import { NationalPageProps } from '~/static-props/nl-data';
 import theme from '~/style/theme';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { PositiveTestedPeopleMetric } from '../landelijk/positive-tested-people-metric';
+
 export function getNationalLayout(
   page: React.ReactNode,
   pageProps: NationalPageProps
@@ -120,13 +126,13 @@ function NationalLayout(props: NationalLayoutProps) {
             aria-label="metrieken per categorie keuze"
             role="navigation"
           >
-            <ul>
-              <li>
+            <Menu>
+              <CategoryMenuItem>
                 <Category>
                   {siteText.nationaal_layout.headings.algemeen}
                 </Category>
-                <ul className="last-developments">
-                  <li>
+                <Menu>
+                  <MetricMenuItem>
                     <Link
                       href={{
                         pathname: '/',
@@ -153,15 +159,15 @@ function NationalLayout(props: NationalLayoutProps) {
                         />
                       </a>
                     </Link>
-                  </li>
-                </ul>
-              </li>
-              <li>
+                  </MetricMenuItem>
+                </Menu>
+              </CategoryMenuItem>
+              <CategoryMenuItem>
                 <Category>
                   {siteText.nationaal_layout.headings.besmettingen}
                 </Category>
-                <ul>
-                  <li>
+                <Menu>
+                  <MetricMenuItem>
                     <Link href="/landelijk/positief-geteste-mensen">
                       <a
                         className={getClassName(
@@ -184,8 +190,8 @@ function NationalLayout(props: NationalLayoutProps) {
                         </span>
                       </a>
                     </Link>
-                  </li>
-                  <li>
+                  </MetricMenuItem>
+                  <MetricMenuItem>
                     <Link href="/landelijk/besmettelijke-mensen">
                       <a
                         className={getClassName(
@@ -206,8 +212,8 @@ function NationalLayout(props: NationalLayoutProps) {
                         </span>
                       </a>
                     </Link>
-                  </li>
-                  <li>
+                  </MetricMenuItem>
+                  <MetricMenuItem>
                     <Link href="/landelijk/reproductiegetal">
                       <a
                         className={getClassName('/landelijk/reproductiegetal')}
@@ -231,15 +237,15 @@ function NationalLayout(props: NationalLayoutProps) {
                         </span>
                       </a>
                     </Link>
-                  </li>
-                </ul>
-              </li>
-              <li>
+                  </MetricMenuItem>
+                </Menu>
+              </CategoryMenuItem>
+              <CategoryMenuItem>
                 <Category>
                   {siteText.nationaal_layout.headings.ziekenhuizen}
                 </Category>
-                <ul>
-                  <li>
+                <Menu>
+                  <MetricMenuItem>
                     <Link href="/landelijk/ziekenhuis-opnames">
                       <a
                         className={getClassName(
@@ -262,9 +268,9 @@ function NationalLayout(props: NationalLayoutProps) {
                         </span>
                       </a>
                     </Link>
-                  </li>
+                  </MetricMenuItem>
 
-                  <li>
+                  <MetricMenuItem>
                     <Link href="/landelijk/intensive-care-opnames">
                       <a
                         className={getClassName(
@@ -285,15 +291,15 @@ function NationalLayout(props: NationalLayoutProps) {
                         </span>
                       </a>
                     </Link>
-                  </li>
-                </ul>
-              </li>
-              <li>
+                  </MetricMenuItem>
+                </Menu>
+              </CategoryMenuItem>
+              <CategoryMenuItem>
                 <Category>
                   {siteText.nationaal_layout.headings.kwetsbare_groepen}
                 </Category>
-                <ul>
-                  <li>
+                <Menu>
+                  <MetricMenuItem>
                     <Link href="/landelijk/verpleeghuiszorg">
                       <a
                         className={getClassName('/landelijk/verpleeghuiszorg')}
@@ -312,15 +318,15 @@ function NationalLayout(props: NationalLayoutProps) {
                         </span>
                       </a>
                     </Link>
-                  </li>
-                </ul>
-              </li>
-              <li>
+                  </MetricMenuItem>
+                </Menu>
+              </CategoryMenuItem>
+              <CategoryMenuItem>
                 <Category>
                   {siteText.nationaal_layout.headings.vroege_signalen}
                 </Category>
-                <ul>
-                  <li>
+                <Menu>
+                  <MetricMenuItem>
                     <Link href="/landelijk/verdenkingen-huisartsen">
                       <a
                         className={getClassName(
@@ -338,9 +344,9 @@ function NationalLayout(props: NationalLayoutProps) {
                         </span>
                       </a>
                     </Link>
-                  </li>
+                  </MetricMenuItem>
 
-                  <li>
+                  <MetricMenuItem>
                     <Link href="/landelijk/rioolwater">
                       <a className={getClassName('/landelijk/rioolwater')}>
                         <TitleWithIcon
@@ -352,14 +358,18 @@ function NationalLayout(props: NationalLayoutProps) {
                         </span>
                       </a>
                     </Link>
-                  </li>
-                </ul>
-              </li>
-            </ul>
+                  </MetricMenuItem>
+                </Menu>
+              </CategoryMenuItem>
+            </Menu>
           </nav>
         </aside>
 
-        <main className="national-content" aria-label="nationale pagina inhoud">
+        <main
+          id="content"
+          className="national-content"
+          aria-label="nationale pagina inhoud"
+        >
           {children}
         </main>
 

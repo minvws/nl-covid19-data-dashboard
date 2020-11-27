@@ -7,6 +7,11 @@ import GetestIcon from '~/assets/test.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { Category } from '~/components-styled/aside/category';
+import {
+  CategoryMenuItem,
+  Menu,
+  MetricMenuItem,
+} from '~/components-styled/aside/menu';
 import { TitleWithIcon } from '~/components-styled/aside/title-with-icon';
 import { ComboBox } from '~/components/comboBox';
 import { getLayout as getSiteLayout } from '~/components/layout';
@@ -140,13 +145,13 @@ function SafetyRegionLayout(
               role="navigation"
             >
               <Category>{safetyRegionName}</Category>
-              <ul>
-                <li>
+              <Menu>
+                <CategoryMenuItem>
                   <Category>
                     {siteText.veiligheidsregio_layout.headings.besmettingen}
                   </Category>
-                  <ul>
-                    <li>
+                  <Menu>
+                    <MetricMenuItem>
                       <Link
                         href={`/veiligheidsregio/${code}/positief-geteste-mensen`}
                       >
@@ -173,15 +178,15 @@ function SafetyRegionLayout(
                           </span>
                         </a>
                       </Link>
-                    </li>
-                  </ul>
-                </li>
-                <li>
+                    </MetricMenuItem>
+                  </Menu>
+                </CategoryMenuItem>
+                <CategoryMenuItem>
                   <Category>
                     {siteText.veiligheidsregio_layout.headings.ziekenhuizen}
                   </Category>
-                  <ul>
-                    <li>
+                  <Menu>
+                    <MetricMenuItem>
                       <Link
                         href={`/veiligheidsregio/${code}/ziekenhuis-opnames`}
                       >
@@ -203,18 +208,18 @@ function SafetyRegionLayout(
                           </span>
                         </a>
                       </Link>
-                    </li>
-                  </ul>
-                </li>
-                <li>
+                    </MetricMenuItem>
+                  </Menu>
+                </CategoryMenuItem>
+                <CategoryMenuItem>
                   <Category>
                     {
                       siteText.veiligheidsregio_layout.headings
                         .kwetsbare_groepen
                     }
                   </Category>
-                  <ul>
-                    <li>
+                  <Menu>
+                    <MetricMenuItem>
                       <Link href={`/veiligheidsregio/${code}/verpleeghuiszorg`}>
                         <a
                           className={getClassName(
@@ -236,15 +241,15 @@ function SafetyRegionLayout(
                           </span>
                         </a>
                       </Link>
-                    </li>
-                  </ul>
-                </li>
-                <li>
+                    </MetricMenuItem>
+                  </Menu>
+                </CategoryMenuItem>
+                <CategoryMenuItem>
                   <Category>
                     {siteText.veiligheidsregio_layout.headings.vroege_signalen}
                   </Category>
-                  <ul>
-                    <li>
+                  <Menu>
+                    <MetricMenuItem>
                       <Link href={`/veiligheidsregio/${code}/rioolwater`}>
                         <a
                           className={getClassName(
@@ -265,15 +270,17 @@ function SafetyRegionLayout(
                           </span>
                         </a>
                       </Link>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
+                    </MetricMenuItem>
+                  </Menu>
+                </CategoryMenuItem>
+              </Menu>
             </nav>
           )}
         </aside>
 
-        <main className="safety-region-content">{children}</main>
+        <main id="content" className="safety-region-content">
+          {children}
+        </main>
 
         <Link href={menuUrl}>
           <a className="back-button back-button-footer">

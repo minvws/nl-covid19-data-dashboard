@@ -26,7 +26,7 @@ export function AnchorTile({
   return (
     <StyledAnchorTile shadow={Boolean(shadow)}>
       <Content>
-        <Heading level={2}>{title}</Heading>
+        <Heading level={3}>{title}</Heading>
         {children}
       </Content>
 
