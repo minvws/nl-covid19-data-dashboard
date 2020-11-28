@@ -1,3 +1,4 @@
+import { Box } from '~/components-styled/base';
 import { DifferenceIndicator } from '~/components-styled/difference-indicator';
 import { BarScale } from '~/components/barScale';
 import siteText from '~/locale/index';
@@ -16,7 +17,7 @@ export function IntakeIntensiveCareBarscale(props: {
   const difference = data.difference.intake_intensivecare_ma__moving_average_ic;
 
   return (
-    <>
+    <Box spacing={2}>
       <BarScale
         min={0}
         max={30}
@@ -43,6 +44,6 @@ export function IntakeIntensiveCareBarscale(props: {
         showValue={showValue}
       />
       {showValue && <DifferenceIndicator value={difference} isDecimal />}
-    </>
+    </Box>
   );
 }
