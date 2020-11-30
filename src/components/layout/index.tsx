@@ -79,8 +79,8 @@ function Layout(
       <nav role="navigation" className={styles.skiplinks}>
         <a href="#content">{text.skiplinks.inhoud}</a>
         <a href="#main-navigation">{text.skiplinks.nav}</a>
-        <a href="#metric-navigation">{text.skiplinks.metricnav}</a>
-        <a href="#footer-navigation">{text.skiplinks.footernav}</a>
+        <a href="#metric-navigation">{text.skiplinks.metric_nav}</a>
+        <a href="#footer-navigation">{text.skiplinks.footer_nav}</a>
       </nav>
 
       <header className={styles.header}>

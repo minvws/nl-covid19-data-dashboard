@@ -11,8 +11,8 @@ interface AnchorTileProps {
   href: string;
   label: string;
   children: React.ReactNode;
-  external?: boolean;
-  shadow?: boolean;
+  isExternal?: boolean;
+  hasShadow?: boolean;
 }
 
 export function AnchorTile({
@@ -20,11 +20,11 @@ export function AnchorTile({
   href,
   label,
   children,
-  external,
-  shadow,
+  isExternal: external,
+  hasShadow: shadow,
 }: AnchorTileProps) {
   return (
-    <StyledAnchorTile shadow={Boolean(shadow)}>
+    <Container shadow={Boolean(shadow)}>
       <Content>
         <Heading level={3}>{title}</Heading>
         {children}
@@ -47,11 +47,11 @@ export function AnchorTile({
           </>
         )}
       </LinkContainer>
-    </StyledAnchorTile>
+    </Container>
   );
 }
 
-const StyledAnchorTile = styled(Tile)<{ shadow: boolean }>((x) =>
+const Container = styled(Tile)<{ shadow: boolean }>((x) =>
   css({
     display: 'flex',
     mx: [-4, null, 0],

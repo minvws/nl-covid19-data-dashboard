@@ -28,8 +28,8 @@
   "skiplinks": {
     "inhoud": "Ga direct naar de inhoud",
     "nav": "Ga direct naar de navigatie",
-    "metricnav": "Ga direct naar de metrieken navigatie",
-    "footernav": "Ga direct naar de footer navigatie"
+    "metric_nav": "Ga direct naar de metrieken navigatie",
+    "footer_nav": "Ga direct naar de footer navigatie"
   },
   "header": {
     "title": "Dashboard coronavirus",
