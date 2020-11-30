@@ -187,7 +187,7 @@
       "href": "/verantwoording#hospitals",
       "text": "Read more in 'explanation of the data presented'."
     },
-    "tijdelijk_onbeschikbaar_titel": "",
+    "tijdelijk_onbeschikbaar_titel": "Map temporarily not available",
     "tijdelijk_onbeschikbaar": "Hospital admissions per safety region and municipality are temporarily not shown. The dataset these numbers were based on (Osiris) is no longer sufficiently aligned with the actual number of hospital admissions.  From December 10 on we expect to show admissions per safety region and municipality again, based on data from NICE, a better dataset. For hospital admissions on a national level NICE is already the source.  Read more in 'explanation of the data presented'."
   },
   "positief_geteste_personen": {
@@ -834,7 +834,7 @@
         "text": "RIVM"
       }
     },
-    "tijdelijk_onbeschikbaar_titel": "",
+    "tijdelijk_onbeschikbaar_titel": "Temporarily not available",
     "tijdelijk_onbeschikbaar": "Hospital admissions per safety region and municipality are temporarily not shown. The dataset these numbers were based on (Osiris) is no longer sufficiently aligned with the actual number of hospital admissions.  From December 10 on we expect to show admissions per safety region and municipality again, based on data from NICE, a better dataset. For hospital admissions on a national level NICE is already the source.  Read more in 'explanation of the data presented'."
   },
   "veiligheidsregio_positief_geteste_personen": {
@@ -973,7 +973,7 @@
         "text": "RIVM"
       }
     },
-    "tijdelijk_onbeschikbaar_titel": "",
+    "tijdelijk_onbeschikbaar_titel": "Temporarily not available",
     "tijdelijk_onbeschikbaar": "Hospital admissions per safety region and municipality are temporarily not shown. The dataset these numbers were based on (Osiris) is no longer sufficiently aligned with the actual number of hospital admissions.  From December 10 on we expect to show admissions per safety region and municipality again, based on data from NICE, a better dataset. For hospital admissions on a national level NICE is already the source.  Read more in 'explanation of the data presented'."
   },
   "gemeente_positief_geteste_personen": {
