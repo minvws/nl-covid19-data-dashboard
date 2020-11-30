@@ -114,9 +114,7 @@ export function ContentHeader(props: ContentHeaderProps) {
           </Text>
         </ReferenceBox>
 
-        <MetadataBox>
-          <Metadata {...metadata} />
-        </MetadataBox>
+        <MetadataBox>{metadata && <Metadata {...metadata} />}</MetadataBox>
       </BodyBox>
     </Header>
   );
