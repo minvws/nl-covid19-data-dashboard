@@ -118,9 +118,7 @@ export function ContentHeader(props: ContentHeaderProps) {
           </Text>
         </ReferenceBox>
 
-        <MetadataBox>
-          <Metadata {...metadata} />
-        </MetadataBox>
+        <MetadataBox>{metadata && <Metadata {...metadata} />}</MetadataBox>
       </BodyBox>
     </Header>
   );
@@ -130,7 +128,7 @@ interface ContentHeaderProps {
   id?: string;
   title: string;
   subtitle: string;
-  metadata: MetadataProps;
+  metadata?: MetadataProps;
   reference: {
     href: string;
     text: string;

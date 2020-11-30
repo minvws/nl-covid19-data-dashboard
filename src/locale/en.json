@@ -130,6 +130,8 @@
     }
   },
   "ziekenhuisopnames_per_dag": {
+    "tijdelijk_onbeschikbaar_titel": "",
+    "tijdelijk_onbeschikbaar": "",
     "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
     "bron": {
       "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
@@ -800,6 +802,8 @@
     "title": "Municipality"
   },
   "veiligheidsregio_ziekenhuisopnames_per_dag": {
+    "tijdelijk_onbeschikbaar_titel": "",
+    "tijdelijk_onbeschikbaar": "",
     "titel_sidebar": "Hospital admissions",
     "titel": "Hospital admissions per day of residents in {{safetyRegion}}",
     "pagina_toelichting": "Number of confirmed COVID-19 cases who are admitted to a hospital per day.",
@@ -937,6 +941,8 @@
     }
   },
   "gemeente_ziekenhuisopnames_per_dag": {
+    "tijdelijk_onbeschikbaar_titel": "",
+    "tijdelijk_onbeschikbaar": "",
     "titel_sidebar": "Hospital admissions",
     "titel": "Hospital admissions per day of residents in {{municipality}}",
     "pagina_toelichting": "Number of confirmed COVID-19 cases who are admitted to a hospital per day.",
