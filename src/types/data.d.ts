@@ -567,7 +567,7 @@ export interface Regionaal {
   nursing_home: RegionalNursingHome;
   restrictions?: RegionalRestrictions;
   behavior?: RegionalBehavior;
-  eldery_at_home?: RegionalElderlyAtHome;
+  elderly_at_home: RegionalElderlyAtHome;
 }
 export interface RegionalDifference {
   results_per_region__infected_increase_per_region?: DifferenceDecimal;

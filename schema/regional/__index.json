@@ -56,7 +56,7 @@
     "behavior": {
       "$ref": "behavior.json"
     },
-    "eldery_at_home": {
+    "elderly_at_home": {
       "$ref": "elderly_at_home.json"
     }
   }
