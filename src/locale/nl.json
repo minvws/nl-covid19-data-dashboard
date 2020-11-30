@@ -188,7 +188,7 @@
       "text": "Lees meer in de cijferverantwoording."
     },
     "tijdelijk_onbeschikbaar_titel": "Kaart tijdelijk niet beschikbaar",
-    "tijdelijk_onbeschikbaar": "Ziekenhuisopnamen per veiligheidsregio en per gemeente worden tijdelijk niet op het dashboard getoond. Het cijferbestand waaruit het dashboard putte (Osiris) wijkt nu te sterk af van het werkelijke aantal ziekenhuisopnamen. Per 10 december verwachten we weer ziekenhuisopnamen per veiligheidsregio en gemeente te kunnen tonen  maar dan op basis van een beter cijferbestand van Stichting NICE. Voor ziekenhuisopnamen op landelijk niveau wordt al gebruik gemaakt van data uit dit bestand. Lees meer in de cijferverantwoording."
+    "tijdelijk_onbeschikbaar": "Ziekenhuisopnamen per veiligheidsregio en per gemeente worden tijdelijk niet op het dashboard getoond. Het cijferbestand waaruit het dashboard putte (Osiris) wijkt nu te sterk af van het werkelijke aantal ziekenhuisopnamen. Binnenkort verwachten we weer ziekenhuisopnamen per veiligheidsregio en gemeente te kunnen tonen  maar dan op basis van een beter cijferbestand van Stichting NICE. Voor ziekenhuisopnamen op landelijk niveau wordt al gebruik gemaakt van data uit dit bestand. Lees meer in de cijferverantwoording."
   },
   "positief_geteste_personen": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -835,7 +835,7 @@
       }
     },
     "tijdelijk_onbeschikbaar_titel": "Tijdelijk niet beschikbaar",
-    "tijdelijk_onbeschikbaar": "Ziekenhuisopnamen per veiligheidsregio en per gemeente worden tijdelijk niet op het dashboard getoond. Het cijferbestand waaruit het dashboard putte (Osiris) wijkt nu te sterk af van het werkelijke aantal ziekenhuisopnamen. Per 10 december verwachten we weer ziekenhuisopnamen per veiligheidsregio en gemeente te kunnen tonen  maar dan op basis van een beter cijferbestand van Stichting NICE. Voor ziekenhuisopnamen op landelijk niveau wordt al gebruik gemaakt van data uit dit bestand. Lees meer in de cijferverantwoording."
+    "tijdelijk_onbeschikbaar": "Ziekenhuisopnamen per veiligheidsregio en per gemeente worden tijdelijk niet op het dashboard getoond. Het cijferbestand waaruit het dashboard putte (Osiris) wijkt nu te sterk af van het werkelijke aantal ziekenhuisopnamen. Binnenkort verwachten we weer ziekenhuisopnamen per veiligheidsregio en gemeente te kunnen tonen  maar dan op basis van een beter cijferbestand van Stichting NICE. Voor ziekenhuisopnamen op landelijk niveau wordt al gebruik gemaakt van data uit dit bestand. Lees meer in de cijferverantwoording."
   },
   "veiligheidsregio_positief_geteste_personen": {
     "titel_sidebar": "Positief geteste mensen",
@@ -974,7 +974,7 @@
       }
     },
     "tijdelijk_onbeschikbaar_titel": "Tijdelijk niet beschikbaar",
-    "tijdelijk_onbeschikbaar": "Ziekenhuisopnamen per veiligheidsregio en per gemeente worden tijdelijk niet op het dashboard getoond. Het cijferbestand waaruit het dashboard putte (Osiris) wijkt nu te sterk af van het werkelijke aantal ziekenhuisopnamen. Per 10 december verwachten we weer ziekenhuisopnamen per veiligheidsregio en gemeente te kunnen tonen  maar dan op basis van een beter cijferbestand van Stichting NICE. Voor ziekenhuisopnamen op landelijk niveau wordt al gebruik gemaakt van data uit dit bestand. Lees meer in de cijferverantwoording."
+    "tijdelijk_onbeschikbaar": "Ziekenhuisopnamen per veiligheidsregio en per gemeente worden tijdelijk niet op het dashboard getoond. Het cijferbestand waaruit het dashboard putte (Osiris) wijkt nu te sterk af van het werkelijke aantal ziekenhuisopnamen. Binnenkort verwachten we weer ziekenhuisopnamen per veiligheidsregio en gemeente te kunnen tonen  maar dan op basis van een beter cijferbestand van Stichting NICE. Voor ziekenhuisopnamen op landelijk niveau wordt al gebruik gemaakt van data uit dit bestand. Lees meer in de cijferverantwoording."
   },
   "gemeente_positief_geteste_personen": {
     "titel_sidebar": "Positief geteste mensen",
