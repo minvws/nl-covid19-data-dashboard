@@ -25,9 +25,7 @@ describe('Regional page: NursingHomeCare', () => {
     testKpiValue(
       container,
       'hospital_moving_avg_per_region',
-      formatNumber(
-        data.results_per_region.last_value.hospital_moving_avg_per_region
-      )
+      formatNumber(data.hospital.last_value.admissions_moving_average)
     );
   });
 });

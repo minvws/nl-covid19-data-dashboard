@@ -28,7 +28,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
   const { data, safetyRegionName } = props;
   const router = useRouter();
 
-  const resultsPerRegion = data.results_per_region;
+  const lastValue = data.hospital.last_value;
 
   const municipalCodes = regionCodeToMunicipalCodeLookup[data.code];
   const selectedMunicipalCode = municipalCodes ? municipalCodes[0] : undefined;
@@ -52,9 +52,8 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateInfo: resultsPerRegion.last_value.date_of_report_unix,
-          dateOfInsertionUnix:
-            resultsPerRegion.last_value.date_of_insertion_unix,
+          dateInfo: lastValue.date_of_report_unix,
+          dateOfInsertionUnix: lastValue.date_of_insertion_unix,
           dataSources: [text.bronnen.rivm],
         }}
         reference={text.reference}
@@ -66,30 +65,26 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
           title={text.barscale_titel}
           description={text.extra_uitleg}
           metadata={{
-            date: resultsPerRegion.last_value.date_of_report_unix,
+            date: lastValue.date_of_report_unix,
             source: text.bronnen.rivm,
           }}
         >
           <KpiValue
             data-cy="hospital_moving_avg_per_region"
-            absolute={
-              resultsPerRegion.last_value.hospital_moving_avg_per_region
-            }
-            difference={
-              data.difference.results_per_region__hospital_moving_avg_per_region
-            }
+            absolute={lastValue.admissions_moving_average}
+            difference={data.difference.hospital__admissions_moving_average}
           />
         </KpiTile>
       </TwoKpiSection>
 
-      {resultsPerRegion && (
+      {lastValue && (
         <LineChartTile
           showDataWarning
           metadata={{ source: text.bronnen.rivm }}
           title={text.linechart_titel}
           description={text.linechart_description}
-          values={resultsPerRegion.values.map((value: any) => ({
-            value: value.hospital_moving_avg_per_region,
+          values={data.hospital.values.map((value) => ({
+            value: value.admissions_moving_average,
             date: value.date_of_report_unix,
           }))}
         />
@@ -102,18 +97,19 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
         })}
         description={text.map_toelichting}
         legend={{
-          thresholds: municipalThresholds.hospital_admissions,
+          thresholds: municipalThresholds.hospital.admissions_moving_average,
           title: siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel,
         }}
         metadata={{
-          date: resultsPerRegion.last_value.date_of_report_unix,
+          date: lastValue.date_of_report_unix,
           source: text.bronnen.rivm,
         }}
       >
         <MunicipalityChoropleth
           selected={selectedMunicipalCode}
           highlightSelection={false}
-          metricName="hospital_admissions"
+          metricName="hospital"
+          metricProperty="admissions_moving_average"
           tooltipContent={createMunicipalHospitalAdmissionsTooltip(router)}
           onSelect={createSelectMunicipalHandler(router, 'ziekenhuis-opnames')}
         />

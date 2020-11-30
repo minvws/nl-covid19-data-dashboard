@@ -1,3 +1,4 @@
+import { assert } from '~/utils/assert';
 import { useMemo } from 'react';
 import useSWR from 'swr';
 import { Regions } from '~/types/data';
@@ -7,10 +8,17 @@ import {
   TRegionMetricName,
   TRegionMetricType,
 } from '../shared';
+import set from 'lodash/set';
+import get from 'lodash/get';
 
 export type TGetRegionFunc<T> = (id: string) => T | SafetyRegionProperties;
 
 export type TSafetyRegionDataInfo<T> = [TGetRegionFunc<T>, boolean];
+
+type RegionMetricValue = {
+  vrcode: string;
+  [key: string]: unknown;
+};
 
 /**
  * This hook takes a metric name, extracts the associated data from the json/regions.json
@@ -29,46 +37,46 @@ export type TSafetyRegionDataInfo<T> = [TGetRegionFunc<T>, boolean];
  */
 
 export function useSafetyRegionData(
-  metricName: TRegionMetricName | undefined,
   featureCollection: RegionGeoJSON,
+  metricName: TRegionMetricName,
   metricProperty?: string
 ) {
   const { data } = useSWR<Regions>('/json/REGIONS.json');
 
-  const items = metricName && data ? data[metricName] : undefined;
-  metricProperty = metricProperty ?? metricName;
+  assert(data, 'Missing regions data');
+
+  const values = data[metricName];
 
   return useMemo(() => {
-    const propertyData = featureCollection.features.reduce((aggr, feature) => {
-      aggr[feature.properties.vrcode] = feature.properties;
-      return aggr;
-    }, {} as Record<string, SafetyRegionProperties>);
+    const propertyData = featureCollection.features.reduce(
+      (acc, feature) => set(acc, feature.properties.vrcode, feature.properties),
+      {} as Record<string, SafetyRegionProperties>
+    );
 
     /**
-     * cast items[] to any[] because of https://github.com/microsoft/TypeScript/issues/36390
+     * Cast to unknown because of https://github.com/microsoft/TypeScript/issues/36390
      **/
-    const mergedData = (items as any[])?.reduce<{
-      [key: string]: TRegionMetricType & { value: number };
-    }>((aggr, item) => {
-      const feature = featureCollection.features.find(
-        (feat) => feat.properties.vrcode === item.vrcode
-      );
+    const mergedData = ((values as unknown) as RegionMetricValue[]).reduce(
+      (acc, value) => {
+        const feature = featureCollection.features.find(
+          (feat) => feat.properties.vrcode === value.vrcode
+        );
 
-      aggr[item.vrcode] = {
-        ...item,
-        ...feature?.properties,
-        value: (item as any)[metricProperty as string],
-      };
-      return aggr;
-    }, {});
+        return set(acc, value.vrcode, {
+          ...feature?.properties,
+          value: metricProperty
+            ? get(value, [metricName, metricProperty])
+            : value[metricName],
+        });
+      },
+      {} as Record<string, TRegionMetricType & { value: unknown }>
+    );
 
-    const hasData = mergedData
-      ? Boolean(Object.keys(mergedData).length)
-      : false;
+    const hasData = Object.keys(mergedData).length > 0;
 
     const getData = (id: string) =>
-      mergedData ? mergedData[id] : propertyData[id];
+      hasData ? mergedData[id] : propertyData[id];
 
     return [getData, hasData] as const;
-  }, [items, metricProperty, featureCollection.features]);
+  }, [values, metricName, metricProperty, featureCollection.features]);
 }

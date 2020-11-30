@@ -53,5 +53,7 @@ const hospitalAdmissionsThresholds: ChoroplethThresholdsValue[] = [
 
 export const municipalThresholds = {
   positive_tested_people: positiveTestedThresholds,
-  hospital_admissions: hospitalAdmissionsThresholds,
+  hospital: {
+    admissions_moving_average: hospitalAdmissionsThresholds,
+  },
 } as const;
