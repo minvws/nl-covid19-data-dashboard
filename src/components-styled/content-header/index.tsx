@@ -128,7 +128,7 @@ interface ContentHeaderProps {
   id?: string;
   title: string;
   subtitle: string;
-  metadata: MetadataProps;
+  metadata?: MetadataProps;
   reference: {
     href: string;
     text: string;
