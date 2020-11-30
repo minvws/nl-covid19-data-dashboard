@@ -10,7 +10,13 @@ export const Menu = styled.ul(
   })
 );
 
-export const CategoryMenuItem = styled.li({});
+export const CategoryMenuItem = styled.li(
+  css({
+    '& p': {
+      pb: 3,
+    },
+  })
+);
 
 export const MetricMenuItem = styled.li(
   css({

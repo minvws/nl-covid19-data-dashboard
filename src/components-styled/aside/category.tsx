@@ -9,8 +9,6 @@ export const Category = styled(Text)(
     pt: 4,
     px: 3,
     pb: 2,
-    m: 0,
-    mb: 3,
     fontWeight: 'bold',
   })
 );
