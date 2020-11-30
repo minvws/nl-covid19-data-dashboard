@@ -2,11 +2,9 @@ import React from 'react';
 import IntakeHospital from '~/pages/veiligheidsregio/[code]/ziekenhuis-opnames';
 import { loadFixture } from '~/test-utils/load-fixture';
 import { render } from '~/test-utils/render';
-import { testKpiValue } from '~/test-utils/test-kpi-value';
 import { Regionaal } from '~/types/data';
-import { formatNumber } from '~/utils/formatNumber';
 
-describe('Regional page: NursingHomeCare', () => {
+xdescribe('Regional page: NursingHomeCare', () => {
   const data = loadFixture<Regionaal>('VR13.json');
   let container: HTMLElement;
 
