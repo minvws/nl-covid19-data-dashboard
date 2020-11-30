@@ -13,7 +13,8 @@
     "positive_tested_people",
     "deceased",
     "nursing_home",
-    "sewer"
+    "sewer",
+    "elderly_at_home"
   ],
   "properties": {
     "last_generated": {
@@ -80,6 +81,14 @@
       "maxItems": 25,
       "items": {
         "$ref": "behavior.json"
+      }
+    },
+    "elderly_at_home": {
+      "type": "array",
+      "minItems": 25,
+      "maxItems": 25,
+      "items": {
+        "$ref": "elderly_at_home.json"
       }
     }
   }

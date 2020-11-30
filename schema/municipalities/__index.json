@@ -10,7 +10,8 @@
     "code",
     "hospital_admissions",
     "positive_tested_people",
-    "deceased"
+    "deceased",
+    "elderly_at_home"
   ],
   "properties": {
     "last_generated": {
@@ -47,6 +48,13 @@
       "maxItems": 355,
       "items": {
         "$ref": "deceased.json"
+      }
+    },
+    "elderly_at_home":{
+      "type": "array",
+      "maxItems": 355,
+      "items": {
+        "$ref": "elderly_at_home.json"
       }
     }
   }
