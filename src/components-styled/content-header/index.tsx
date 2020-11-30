@@ -123,7 +123,7 @@ export function ContentHeader(props: ContentHeaderProps) {
 interface ContentHeaderProps {
   title: string;
   subtitle: string;
-  metadata: MetadataProps;
+  metadata?: MetadataProps;
   reference: {
     href: string;
     text: string;
