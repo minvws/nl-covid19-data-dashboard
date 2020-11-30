@@ -2,11 +2,9 @@ import React from 'react';
 import IntakeHospital from '~/pages/gemeente/[code]/ziekenhuis-opnames';
 import { loadFixture } from '~/test-utils/load-fixture';
 import { render } from '~/test-utils/render';
-import { testKpiValue } from '~/test-utils/test-kpi-value';
 import { Municipal } from '~/types/data';
-import { formatNumber } from '~/utils/formatNumber';
 
-describe('Municipal page: IntakeHospital', () => {
+xdescribe('Municipal page: IntakeHospital', () => {
   const data = loadFixture<Municipal>('GM0363.json');
   let container: HTMLElement;
 
