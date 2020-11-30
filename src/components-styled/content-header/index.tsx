@@ -7,7 +7,12 @@ import {
   MetadataProps,
 } from '~/components-styled/content-header/metadata';
 import { HeadingWithIcon } from '~/components-styled/heading-with-icon';
-import { Heading, HeadingLevel, Text } from '~/components-styled/typography';
+import {
+  Heading,
+  HeadingLevel,
+  InlineText,
+  Text,
+} from '~/components-styled/typography';
 import { Box } from '../base';
 
 /*
@@ -62,6 +67,17 @@ export const CategoryHeading = styled(Heading)<{ hide: boolean }>((x) =>
   })
 );
 
+export const AriaInlineText = styled(InlineText)(
+  css({
+    position: 'absolute',
+    left: '-10000px',
+    top: 'auto',
+    width: '1px',
+    height: '1px',
+    overflow: 'hidden',
+  })
+);
+
 const BodyBox = styled(Box)(
   css({
     display: [null, null, null, 'flex'],
@@ -87,6 +103,7 @@ export function ContentHeader(props: ContentHeaderProps) {
   const {
     hideCategory = false,
     category,
+    ariaCategory,
     icon,
     title,
     subtitle,
@@ -102,6 +119,9 @@ export function ContentHeader(props: ContentHeaderProps) {
       {category && (
         <CategoryHeading level={1} hide={hideCategory}>
           {category}
+          {Boolean(ariaCategory) && (
+            <AriaInlineText> - {ariaCategory}</AriaInlineText>
+          )}
         </CategoryHeading>
       )}
       {icon ? (
@@ -146,6 +166,7 @@ interface ContentHeaderProps {
     text: string;
   };
   category?: string;
+  ariaCategory?: string;
   hideCategory?: boolean;
   icon?: JSX.Element;
   skipLinkAnchor?: boolean;

@@ -45,6 +45,7 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
       />
       <ContentHeader
         category={siteText.nationaal_layout.headings.ziekenhuizen}
+        ariaCategory={siteText.ziekenhuisopnames_per_dag.titel_sidebar}
         title={text.titel}
         icon={<Ziekenhuis />}
         subtitle={text.pagina_toelichting}
