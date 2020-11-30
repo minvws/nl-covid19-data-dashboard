@@ -152,6 +152,37 @@ const behaviorThresholds: ChoroplethThresholdsValue[] = [
   },
 ];
 
+const elderlyAtHomeThresholds: ChoroplethThresholdsValue[] = [
+  {
+    color: '#fffff',
+    threshold: 0,
+  },
+  {
+    color: colors.data.scale.blue[0],
+    threshold: 1,
+  },
+  {
+    color: colors.data.scale.blue[1],
+    threshold: 5,
+  },
+  {
+    color: colors.data.scale.blue[2],
+    threshold: 8,
+  },
+  {
+    color: colors.data.scale.blue[3],
+    threshold: 11,
+  },
+  {
+    color: colors.data.scale.blue[4],
+    threshold: 21,
+  },
+  {
+    color: colors.data.scale.blue[5],
+    threshold: 31,
+  },
+];
+
 export const regionThresholds = {
   positive_tested_people: positiveTestedThresholds,
   hospital_admissions: hospitalAdmissionsThresholds,
@@ -161,4 +192,5 @@ export const regionThresholds = {
   },
   sewer: sewerThresholds,
   behavior: behaviorThresholds,
+  elderly_at_home: elderlyAtHomeThresholds,
 } as const;
