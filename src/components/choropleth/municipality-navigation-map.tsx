@@ -12,7 +12,6 @@ type MunicipalityNavigationMapProps<T> = {
   tooltipContent?: (
     context: MunicipalityProperties & { value: T }
   ) => ReactNode;
-  isSelectorMap?: boolean;
 };
 
 /**
