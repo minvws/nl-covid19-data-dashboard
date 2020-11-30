@@ -28,7 +28,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
   const { data, municipalityName } = props;
   const router = useRouter();
 
-  const hospitalAdmissions = data.hospital_admissions;
+  const lastValue = data.hospital.last_value;
 
   return (
     <>
@@ -50,9 +50,8 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateInfo: hospitalAdmissions.last_value.date_of_report_unix,
-          dateOfInsertionUnix:
-            hospitalAdmissions.last_value.date_of_insertion_unix,
+          dateInfo: lastValue.date_of_report_unix,
+          dateOfInsertionUnix: lastValue.date_of_insertion_unix,
           dataSources: [text.bronnen.rivm],
         }}
         reference={text.reference}
@@ -64,21 +63,19 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
           title={text.barscale_titel}
           description={text.extra_uitleg}
           metadata={{
-            date: hospitalAdmissions.last_value.date_of_report_unix,
+            date: lastValue.date_of_report_unix,
             source: text.bronnen.rivm,
           }}
         >
           <KpiValue
             data-cy="moving_average_hospital"
-            absolute={hospitalAdmissions.last_value.moving_average_hospital}
-            difference={
-              data.difference.hospital_admissions__moving_average_hospital
-            }
+            absolute={lastValue.admissions_moving_average}
+            difference={data.difference.hospital__admissions_moving_average}
           />
         </KpiTile>
       </TwoKpiSection>
 
-      {hospitalAdmissions && (
+      {lastValue && (
         <ChartTileWithTimeframe
           showDataWarning
           title={text.linechart_titel}
@@ -88,8 +85,8 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
           {(timeframe) => (
             <LineChart
               timeframe={timeframe}
-              values={hospitalAdmissions.values.map((value) => ({
-                value: value.moving_average_hospital,
+              values={data.hospital.values.map((value) => ({
+                value: value.admissions_moving_average,
                 date: value.date_of_report_unix,
               }))}
             />
@@ -103,18 +100,19 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
           municipality: municipalityName,
         })}
         metadata={{
-          date: hospitalAdmissions.last_value.date_of_report_unix,
+          date: lastValue.date_of_report_unix,
           source: text.bronnen.rivm,
         }}
         description={text.map_toelichting}
         legend={{
           title: siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel,
-          thresholds: municipalThresholds.hospital_admissions,
+          thresholds: municipalThresholds.hospital.admissions_moving_average,
         }}
       >
         <MunicipalityChoropleth
           selected={data.code}
-          metricName="hospital_admissions"
+          metricName="hospital"
+          metricNameValue="admissions_moving_average"
           tooltipContent={createMunicipalHospitalAdmissionsTooltip(router)}
           onSelect={createSelectMunicipalHandler(router, 'ziekenhuis-opnames')}
         />

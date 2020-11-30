@@ -9,17 +9,21 @@ import {
   useMunicipalityData,
   useRegionMunicipalities,
 } from './hooks';
+import { getDataThresholds } from './legenda/utils';
 import { municipalThresholds } from './municipal-thresholds';
 import { Path } from './path';
 import { MunicipalityProperties, TMunicipalityMetricName } from './shared';
 import { countryGeo, municipalGeo, regionGeo } from './topology';
 
-export type TProps = {
-  metricName?: TMunicipalityMetricName;
+type MunicipalityChoroplethProps<T> = {
+  metricName: TMunicipalityMetricName;
+  metricNameValue?: string;
   selected?: string;
   highlightSelection?: boolean;
   onSelect?: (context: MunicipalityProperties) => void;
-  tooltipContent?: (context: MunicipalityProperties) => ReactNode;
+  tooltipContent?: (
+    context: MunicipalityProperties & { value: T }
+  ) => ReactNode;
   isSelectorMap?: boolean;
 };
 
@@ -35,10 +39,13 @@ export type TProps = {
  *
  * @param props
  */
-export function MunicipalityChoropleth(props: TProps) {
+export function MunicipalityChoropleth<T>(
+  props: MunicipalityChoroplethProps<T>
+) {
   const {
     selected,
     metricName,
+    metricNameValue,
     onSelect,
     tooltipContent,
     highlightSelection = true,
@@ -53,9 +60,11 @@ export function MunicipalityChoropleth(props: TProps) {
 
   const safetyRegionMunicipalCodes = useRegionMunicipalities(selected);
 
-  const thresholdValues = metricName
-    ? municipalThresholds[metricName]
-    : undefined;
+  const thresholdValues = getDataThresholds(
+    municipalThresholds,
+    metricName,
+    metricNameValue
+  );
 
   const getFillColor = useChoroplethColorScale(getData, thresholdValues);
 

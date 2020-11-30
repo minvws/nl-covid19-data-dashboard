@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import { Feature, MultiPolygon } from 'geojson';
 import { ReactNode, useCallback } from 'react';
-import { Regions } from '~/types/data';
+import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { Choropleth } from './choropleth';
 import {
   useChartDimensions,
@@ -9,23 +9,21 @@ import {
   useSafetyRegionBoundingbox,
   useSafetyRegionData,
 } from './hooks';
-import { getSelectedThreshold } from './legenda/utils';
+import { getDataThresholds } from './legenda/utils';
 import { Path } from './path';
 import { SafetyRegionProperties, TRegionMetricName } from './shared';
 import { countryGeo, regionGeo } from './topology';
 
-export type TProps<
-  T extends TRegionMetricName,
-  ItemType extends Regions[T][number],
-  ReturnType extends ItemType & { value: number },
-  TContext extends ReturnType | SafetyRegionProperties
-> = {
-  metricName?: T;
-  metricValueName?: string;
+type SafetyRegionChoroplethProps<T> = {
+  metricName: TRegionMetricName;
+  metricNameValue?: string;
   selected?: string;
   highlightSelection?: boolean;
-  onSelect?: (context: TContext) => void;
-  tooltipContent?: (context: TContext) => ReactNode;
+  onSelect?: (context: SafetyRegionProperties) => void;
+  tooltipContent?: (
+    context: SafetyRegionProperties & { value: T }
+  ) => ReactNode;
+  isSelectorMap?: boolean;
 };
 
 /**
@@ -34,7 +32,7 @@ export type TProps<
  *
  * The metricName specifies which exact metric is visualized. The color scale is calculated using
  * the specified metric and the given gradient.
- * An optional metricValueName can be provided as well, when the metric key isn't the same name
+ * An optional metricNameValue can be provided as well, when the metric key isn't the same name
  * as the actual value name. Most of the time they are the same:
  * e.g. hospital_admissions.hospital_admissions
  *
@@ -42,17 +40,14 @@ export type TProps<
  *
  * @param props
  */
-export function SafetyRegionChoropleth<
-  T extends TRegionMetricName,
-  ItemType extends Regions[T][number],
-  ReturnType extends ItemType & { value: number },
-  TContext extends ReturnType | SafetyRegionProperties
->(props: TProps<T, ItemType, ReturnType, TContext>) {
+export function SafetyRegionChoropleth<T>(
+  props: SafetyRegionChoroplethProps<T>
+) {
   const {
     selected,
     highlightSelection = true,
     metricName,
-    metricValueName,
+    metricNameValue,
     onSelect,
     tooltipContent,
   } = props;
@@ -64,10 +59,14 @@ export function SafetyRegionChoropleth<
   const [getData, hasData] = useSafetyRegionData(
     metricName,
     regionGeo,
-    metricValueName
+    metricNameValue
   );
 
-  const selectedThreshold = getSelectedThreshold(metricName, metricValueName);
+  const selectedThreshold = getDataThresholds(
+    regionThresholds,
+    metricName,
+    metricNameValue
+  );
 
   const DEFAULT_FILL = 'white';
   const getFillColor = useChoroplethColorScale(

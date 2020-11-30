@@ -25,7 +25,7 @@ describe('Municipal page: IntakeHospital', () => {
     testKpiValue(
       container,
       'moving_average_hospital',
-      formatNumber(data.hospital_admissions.last_value.moving_average_hospital)
+      formatNumber(data.hospital.last_value.admissions_moving_average)
     );
   });
 });
