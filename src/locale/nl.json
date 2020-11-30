@@ -130,8 +130,6 @@
     }
   },
   "ziekenhuisopnames_per_dag": {
-    "tijdelijk_onbeschikbaar_titel": "Kaart tijdelijk niet beschikbaar",
-    "tijdelijk_onbeschikbaar": "Ziekenhuisopnamen per veiligheidsregio en per gemeente worden tijdelijk niet op het dashboard getoond. Het cijferbestand waaruit het dashboard putte (Osiris) wijkt nu te sterk af van het werkelijke aantal ziekenhuisopnamen. Per 10 december verwachten we weer ziekenhuisopnamen per veiligheidsregio en gemeente te kunnen tonen  maar dan op basis van een beter cijferbestand van Stichting NICE. Voor ziekenhuisopnamen op landelijk niveau wordt al gebruik gemaakt van data uit dit bestand. Lees meer in de cijferverantwoording.",
     "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
     "bron": {
       "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
@@ -188,7 +186,9 @@
     "reference": {
       "href": "/verantwoording#ziekenhuizen",
       "text": "Lees meer in de cijferverantwoording."
-    }
+    },
+    "tijdelijk_onbeschikbaar_titel": "Kaart tijdelijk niet beschikbaar",
+    "tijdelijk_onbeschikbaar": "Ziekenhuisopnamen per veiligheidsregio en per gemeente worden tijdelijk niet op het dashboard getoond. Het cijferbestand waaruit het dashboard putte (Osiris) wijkt nu te sterk af van het werkelijke aantal ziekenhuisopnamen. Per 10 december verwachten we weer ziekenhuisopnamen per veiligheidsregio en gemeente te kunnen tonen  maar dan op basis van een beter cijferbestand van Stichting NICE. Voor ziekenhuisopnamen op landelijk niveau wordt al gebruik gemaakt van data uit dit bestand. Lees meer in de cijferverantwoording."
   },
   "positief_geteste_personen": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -624,7 +624,7 @@
       },
       {
         "cijfer": "Ziekenhuizen",
-        "verantwoording": "Nieuwe ziekenhuisopnames, exclusief intensive care opnames, worden beschikbaar gesteld als [open data](https://stichting-nice.nl/covid-19/public/zkh/new-intake/confirmed) door Stichting NICE. Zie [hier](https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie) de beschrijving van deze dataset. Met deze data wordt het gemiddelde berekend van de afgelopen drie dagen (gisteren, eergisteren en de dag daarvoor). Let op dat hierbij dus niet ziekenhuisopnames van de lopende dag (vandaag) worden meegenomen. Dit omdat die dag nog niet verstreken is en daardoor de registratie van vandaag nog zeer onvolledig zal zijn. Hoewel ziekenhuizen proberen om COVID-19 patiënten snel te registreren, is het aannemelijk dat de registratie achter loopt. Om deze reden zijn de aantallen van de afgelopen dagen meestal ook nog onvolledig. Deze gegevens worden op het dashboard daarom elke dag ververst.\n\nVoorheen gebruikte het dashboard [open data](https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv) van het RIVM voor nieuwe ziekenhuisopnames op landelijk niveau. Zie [hier](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427) de beschrijving van deze dataset. Deze dataset is gebaseerd op de Osiris database. Echter is hier sprake van aanzienlijke onderrapportage. Het bestand van NICE is completer, maar hanteert ook een ruimere definitie van ziekenhuisopname. De RIVM-dataset neemt alleen de patiënten mee die vanwege COVID-19 in het ziekenhuis liggen, terwijl NICE dat onderscheid niet maakt en dus ook ziekenhuisopnames van patiënten met COVID-19 die om een andere reden in het ziekenhuis zijn opgenomen, meeneemt. \n\nNICE gegevens kunnen op dit moment nog niet vertaald worden naar gegevens op veiligheidsregio en gemeenteniveau. Voor deze niveaus wordt daarom nog gebruik gemaakt van gegevens uit Osiris. Er wordt aan gewerkt om ook op deze niveaus de data van Stichting NICE te kunnen tonen. \n\nDe bezetting van ziekenhuisbedden (exclusief IC-bedden) wordt als [open data](https://lcps.nu/wp-content/uploads/covid-19.csv) beschikbaar gesteld door het LCPS. Zie [hier](https://lcps.nu/datafeed/) de beschrijving van deze dataset. De bedbezetting cijfers van vóór 1 juni zijn niet beschikbaar omdat bepaalde kwaliteitscontroles niet hebben plaatsgevonden vóór deze datum. Daardoor kunnen deze gegevens onvolkomenheden bevatten en worden die niet door het LCPS gepubliceerd."
+        "verantwoording": "Nieuwe ziekenhuisopnames, exclusief intensive care opnames, worden beschikbaar gesteld als [open data](https://stichting-nice.nl/covid-19/public/zkh/new-intake/confirmed) door Stichting NICE. Zie [hier](https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie) de beschrijving van deze dataset. Met deze data wordt het gemiddelde berekend van de afgelopen drie dagen (gisteren, eergisteren en de dag daarvoor). Let op dat hierbij dus niet ziekenhuisopnames van de lopende dag (vandaag) worden meegenomen. Dit omdat die dag nog niet verstreken is en daardoor de registratie van vandaag nog zeer onvolledig zal zijn. Hoewel ziekenhuizen proberen om COVID-19 patiënten snel te registreren, is het aannemelijk dat de registratie achter loopt. Om deze reden zijn de aantallen van de afgelopen dagen meestal ook nog onvolledig. Deze gegevens worden op het dashboard daarom elke dag ververst.\n\nVoorheen gebruikte het dashboard [open data](https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv) van het RIVM voor nieuwe ziekenhuisopnames op landelijk niveau. Zie [hier](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427) de beschrijving van deze dataset. Deze dataset is gebaseerd op de Osiris database. Echter is hier sprake van aanzienlijke onderrapportage. Het bestand van NICE is completer, maar hanteert ook een ruimere definitie van ziekenhuisopname. De RIVM-dataset neemt alleen de patiënten mee die vanwege COVID-19 in het ziekenhuis liggen, terwijl NICE dat onderscheid niet maakt en dus ook ziekenhuisopnames van patiënten met COVID-19 die om een andere reden in het ziekenhuis zijn opgenomen, meeneemt. \n\nNICE gegevens kunnen op dit moment nog niet vertaald worden naar gegevens op veiligheidsregio en gemeenteniveau. Voor deze niveaus werd daarom tot 30 november 2020 nog gebruik gemaakt van gegevens uit Osiris. Omdat de cijfers uit OSIRIS sterk blijken af te wijken van werkelijke opnamen is toen besloten deze gegevens niet meer te tonen. Er wordt aan gewerkt om ook op het niveau van veiligheidsregio en gemeente de data van Stichting NICE te kunnen tonen op het dashboard.\n\nDe bezetting van ziekenhuisbedden (exclusief IC-bedden) wordt als [open data](https://lcps.nu/wp-content/uploads/covid-19.csv) beschikbaar gesteld door het LCPS. Zie [hier](https://lcps.nu/datafeed/) de beschrijving van deze dataset. De bedbezetting cijfers van vóór 1 juni zijn niet beschikbaar omdat bepaalde kwaliteitscontroles niet hebben plaatsgevonden vóór deze datum. Daardoor kunnen deze gegevens onvolkomenheden bevatten en worden die niet door het LCPS gepubliceerd."
       },
       {
         "cijfer": "Positieve testen",
@@ -802,8 +802,6 @@
     "title": "Gemeente"
   },
   "veiligheidsregio_ziekenhuisopnames_per_dag": {
-    "tijdelijk_onbeschikbaar_titel": "Tijdelijk niet beschikbaar",
-    "tijdelijk_onbeschikbaar": "Ziekenhuisopnamen per veiligheidsregio en per gemeente worden tijdelijk niet op het dashboard getoond. Het cijferbestand waaruit het dashboard putte (Osiris) wijkt nu te sterk af van het werkelijke aantal ziekenhuisopnamen. Per 10 december verwachten we weer ziekenhuisopnamen per veiligheidsregio en gemeente te kunnen tonen  maar dan op basis van een beter cijferbestand van Stichting NICE. Voor ziekenhuisopnamen op landelijk niveau wordt al gebruik gemaakt van data uit dit bestand. Lees meer in de cijferverantwoording.",
     "titel_sidebar": "Ziekenhuisopnames",
     "titel": "Ziekenhuisopnames per dag van inwoners {{safetyRegion}}",
     "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen.",
@@ -835,7 +833,9 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
         "text": "RIVM"
       }
-    }
+    },
+    "tijdelijk_onbeschikbaar_titel": "Tijdelijk niet beschikbaar",
+    "tijdelijk_onbeschikbaar": "Ziekenhuisopnamen per veiligheidsregio en per gemeente worden tijdelijk niet op het dashboard getoond. Het cijferbestand waaruit het dashboard putte (Osiris) wijkt nu te sterk af van het werkelijke aantal ziekenhuisopnamen. Per 10 december verwachten we weer ziekenhuisopnamen per veiligheidsregio en gemeente te kunnen tonen  maar dan op basis van een beter cijferbestand van Stichting NICE. Voor ziekenhuisopnamen op landelijk niveau wordt al gebruik gemaakt van data uit dit bestand. Lees meer in de cijferverantwoording."
   },
   "veiligheidsregio_positief_geteste_personen": {
     "titel_sidebar": "Positief geteste mensen",
@@ -941,8 +941,6 @@
     }
   },
   "gemeente_ziekenhuisopnames_per_dag": {
-    "tijdelijk_onbeschikbaar_titel": "Tijdelijk niet beschikbaar",
-    "tijdelijk_onbeschikbaar": "Ziekenhuisopnamen per veiligheidsregio en per gemeente worden tijdelijk niet op het dashboard getoond. Het cijferbestand waaruit het dashboard putte (Osiris) wijkt nu te sterk af van het werkelijke aantal ziekenhuisopnamen. Per 10 december verwachten we weer ziekenhuisopnamen per veiligheidsregio en gemeente te kunnen tonen  maar dan op basis van een beter cijferbestand van Stichting NICE. Voor ziekenhuisopnamen op landelijk niveau wordt al gebruik gemaakt van data uit dit bestand. Lees meer in de cijferverantwoording.",
     "titel_sidebar": "Ziekenhuisopnames",
     "titel": "Ziekenhuisopnames per dag van inwoners {{municipality}}",
     "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen.",
@@ -974,7 +972,9 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
         "text": "RIVM"
       }
-    }
+    },
+    "tijdelijk_onbeschikbaar_titel": "Tijdelijk niet beschikbaar",
+    "tijdelijk_onbeschikbaar": "Ziekenhuisopnamen per veiligheidsregio en per gemeente worden tijdelijk niet op het dashboard getoond. Het cijferbestand waaruit het dashboard putte (Osiris) wijkt nu te sterk af van het werkelijke aantal ziekenhuisopnamen. Per 10 december verwachten we weer ziekenhuisopnamen per veiligheidsregio en gemeente te kunnen tonen  maar dan op basis van een beter cijferbestand van Stichting NICE. Voor ziekenhuisopnamen op landelijk niveau wordt al gebruik gemaakt van data uit dit bestand. Lees meer in de cijferverantwoording."
   },
   "gemeente_positief_geteste_personen": {
     "titel_sidebar": "Positief geteste mensen",
