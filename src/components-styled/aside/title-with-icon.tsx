@@ -34,6 +34,12 @@ function Icon({ children }: { children: React.ReactNode }) {
   );
 }
 
+/**
+ * This is a title (with an icon) that looks like a heading, but isn't rendered using an H* element.
+ * To be used in places where the optics are required, but semantically it shouldn't be a heading.
+ *
+ * @param props
+ */
 export function TitleWithIcon(props: TitleWithIconProps) {
   const { icon, title, subtitle, ...headingProps } = props;
 
