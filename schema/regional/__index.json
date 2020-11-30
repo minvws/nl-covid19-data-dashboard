@@ -12,7 +12,8 @@
     "nursing_home",
     "sewer",
     "sewer_per_installation",
-    "difference"
+    "difference",
+    "elderly_at_home"
   ],
   "additionalProperties": false,
   "properties": {
@@ -54,6 +55,9 @@
     },
     "behavior": {
       "$ref": "behavior.json"
+    },
+    "elderly_at_home": {
+      "$ref": "elderly_at_home.json"
     }
   }
 }
