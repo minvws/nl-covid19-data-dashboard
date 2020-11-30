@@ -24,7 +24,6 @@ type MunicipalityChoroplethProps<T> = {
   tooltipContent?: (
     context: MunicipalityProperties & { value: T }
   ) => ReactNode;
-  isSelectorMap?: boolean;
 };
 
 /**
@@ -49,7 +48,6 @@ export function MunicipalityChoropleth<T>(
     onSelect,
     tooltipContent,
     highlightSelection = true,
-    isSelectorMap,
   } = props;
 
   const [ref, dimensions] = useChartDimensions<HTMLDivElement>(1.2);
@@ -90,9 +88,7 @@ export function MunicipalityChoropleth<T>(
           d={path}
           fill={hasData && fill ? fill : '#fff'}
           stroke={
-            isSelectorMap
-              ? '#01689b'
-              : selected
+            selected
               ? /**
                  * If `selected` eq true, the map is zoomed in on a VR. Render
                  * white strokes when we're rendering a municipality inside this
@@ -107,7 +103,7 @@ export function MunicipalityChoropleth<T>(
         />
       );
     },
-    [getFillColor, hasData, safetyRegionMunicipalCodes, selected, isSelectorMap]
+    [getFillColor, hasData, safetyRegionMunicipalCodes, selected]
   );
 
   const hoverCallback = useCallback(
@@ -127,19 +123,12 @@ export function MunicipalityChoropleth<T>(
           id={gemcode}
           key={gemcode}
           d={path}
-          stroke={isSelectorMap ? '#01689b' : isSelected ? '#000' : undefined}
+          stroke={isSelected ? '#000' : undefined}
           strokeWidth={isSelected ? 3 : undefined}
-          fill={isSelectorMap ? '#01689b' : undefined}
         />
       );
     },
-    [
-      selected,
-      highlightSelection,
-      safetyRegionMunicipalCodes,
-      hasData,
-      isSelectorMap,
-    ]
+    [selected, highlightSelection, safetyRegionMunicipalCodes, hasData]
   );
 
   const onClick = (id: string) => {
@@ -161,7 +150,7 @@ export function MunicipalityChoropleth<T>(
     <div ref={ref} css={css({ bg: 'transparent', position: 'relative' })}>
       <Choropleth
         featureCollection={municipalGeo}
-        hovers={hasData || isSelectorMap ? municipalGeo : undefined}
+        hovers={hasData ? municipalGeo : undefined}
         boundingBox={boundingbox || countryGeo}
         dimensions={dimensions}
         featureCallback={featureCallback}
