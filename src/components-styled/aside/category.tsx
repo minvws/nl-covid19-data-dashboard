@@ -6,9 +6,7 @@ export const Category = styled(Text)(
   css({
     fontSize: 3,
     lineHeight: 1,
-    pt: 4,
     px: 3,
-    pb: 2,
     fontWeight: 'bold',
   })
 );

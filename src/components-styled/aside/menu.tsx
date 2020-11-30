@@ -13,7 +13,7 @@ export const Menu = styled.ul(
 export const CategoryMenuItem = styled.li(
   css({
     '& p': {
-      pb: 3,
+      mt: 4,
     },
   })
 );
