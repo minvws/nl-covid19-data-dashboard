@@ -17,7 +17,7 @@ import { countryGeo, municipalGeo, regionGeo } from './topology';
 
 type MunicipalityChoroplethProps<T> = {
   metricName: TMunicipalityMetricName;
-  metricNameValue?: string;
+  metricProperty?: string;
   selected?: string;
   highlightSelection?: boolean;
   onSelect?: (context: MunicipalityProperties) => void;
@@ -45,7 +45,7 @@ export function MunicipalityChoropleth<T>(
   const {
     selected,
     metricName,
-    metricNameValue,
+    metricProperty,
     onSelect,
     tooltipContent,
     highlightSelection = true,
@@ -56,14 +56,18 @@ export function MunicipalityChoropleth<T>(
 
   const [boundingbox] = useMunicipalityBoundingbox(regionGeo, selected);
 
-  const [getData, hasData] = useMunicipalityData(metricName, municipalGeo);
+  const [getData, hasData] = useMunicipalityData(
+    municipalGeo,
+    metricName,
+    metricProperty
+  );
 
   const safetyRegionMunicipalCodes = useRegionMunicipalities(selected);
 
   const thresholdValues = getDataThresholds(
     municipalThresholds,
     metricName,
-    metricNameValue
+    metricProperty
   );
 
   const getFillColor = useChoroplethColorScale(getData, thresholdValues);

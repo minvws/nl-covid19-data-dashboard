@@ -16,7 +16,7 @@ import { countryGeo, regionGeo } from './topology';
 
 type SafetyRegionChoroplethProps<T> = {
   metricName: TRegionMetricName;
-  metricNameValue?: string;
+  metricProperty?: string;
   selected?: string;
   highlightSelection?: boolean;
   onSelect?: (context: SafetyRegionProperties) => void;
@@ -32,7 +32,7 @@ type SafetyRegionChoroplethProps<T> = {
  *
  * The metricName specifies which exact metric is visualized. The color scale is calculated using
  * the specified metric and the given gradient.
- * An optional metricNameValue can be provided as well, when the metric key isn't the same name
+ * An optional metricProperty can be provided as well, when the metric key isn't the same name
  * as the actual value name. Most of the time they are the same:
  * e.g. hospital_admissions.hospital_admissions
  *
@@ -47,7 +47,7 @@ export function SafetyRegionChoropleth<T>(
     selected,
     highlightSelection = true,
     metricName,
-    metricNameValue,
+    metricProperty,
     onSelect,
     tooltipContent,
   } = props;
@@ -57,15 +57,15 @@ export function SafetyRegionChoropleth<T>(
   const boundingBox = useSafetyRegionBoundingbox(regionGeo, selected);
 
   const [getData, hasData] = useSafetyRegionData(
-    metricName,
     regionGeo,
-    metricNameValue
+    metricName,
+    metricProperty
   );
 
   const selectedThreshold = getDataThresholds(
     regionThresholds,
     metricName,
-    metricNameValue
+    metricProperty
   );
 
   const DEFAULT_FILL = 'white';

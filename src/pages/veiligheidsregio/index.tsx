@@ -83,7 +83,7 @@ const SafetyRegion: FCWithLayout<any> = (props) => {
         <div className="choropleth-chart">
           <SafetyRegionChoropleth
             metricName="escalation_levels"
-            metricNameValue="escalation_level"
+            metricProperty="escalation_level"
             onSelect={createSelectRegionHandler(router)}
             tooltipContent={escalationTooltip(router)}
           />

@@ -129,7 +129,7 @@ const SewerWater: FCWithLayout<NationalPageProps> = ({ data }) => {
       >
         <SafetyRegionChoropleth
           metricName="sewer"
-          metricNameValue="average"
+          metricProperty="average"
           tooltipContent={createSewerRegionalTooltip(router)}
           onSelect={createSelectRegionHandler(router, 'rioolwater')}
         />

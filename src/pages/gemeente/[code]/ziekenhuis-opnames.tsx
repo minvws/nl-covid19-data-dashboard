@@ -112,7 +112,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
         <MunicipalityChoropleth
           selected={data.code}
           metricName="hospital"
-          metricNameValue="admissions_moving_average"
+          metricProperty="admissions_moving_average"
           tooltipContent={createMunicipalHospitalAdmissionsTooltip(router)}
           onSelect={createSelectMunicipalHandler(router, 'ziekenhuis-opnames')}
         />

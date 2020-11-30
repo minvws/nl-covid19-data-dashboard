@@ -9,6 +9,7 @@ import {
   TMunicipalityMetricType,
 } from '../shared';
 import set from 'lodash/set';
+import get from 'lodash/get';
 
 /**
  * This hook takes a metric name, extracts the associated data from the json/municipalities.json
@@ -48,8 +49,9 @@ export function useMunicipalityNavigationData(
 }
 
 export function useMunicipalityData(
+  featureCollection: MunicipalGeoJSON,
   metricName: TMunicipalityMetricName,
-  featureCollection: MunicipalGeoJSON
+  metricProperty?: string
 ) {
   const { data: municipalities } = useSWR<Municipalities>(
     '/json/MUNICIPALITIES.json'
@@ -57,14 +59,15 @@ export function useMunicipalityData(
 
   assert(municipalities, 'Missing municipalities data');
 
-  const propertyData = featureCollection.features.reduce(
-    (acc, feature) => set(acc, feature.properties.gemcode, feature.properties),
-    {} as Record<string, MunicipalityProperties>
-  );
-
   const values = municipalities[metricName];
 
   return useMemo(() => {
+    const propertyData = featureCollection.features.reduce(
+      (acc, feature) =>
+        set(acc, feature.properties.gemcode, feature.properties),
+      {} as Record<string, MunicipalityProperties>
+    );
+
     /**
      * Cast values to unknown because of https://github.com/microsoft/TypeScript/issues/36390
      **/
@@ -76,9 +79,10 @@ export function useMunicipalityData(
       );
 
       return set(acc, value.gmcode, {
-        ...value,
         ...feature?.properties,
-        value: value[metricName],
+        value: metricProperty
+          ? get(value, [metricName, metricProperty])
+          : value[metricName],
       });
     }, {} as Record<string, TMunicipalityMetricType & { value: unknown }>);
 
@@ -88,5 +92,5 @@ export function useMunicipalityData(
       mergedData ? mergedData[id] : propertyData[id];
 
     return [getData, hasData] as const;
-  }, [values, metricName, featureCollection]);
+  }, [values, metricName, metricProperty, featureCollection]);
 }
