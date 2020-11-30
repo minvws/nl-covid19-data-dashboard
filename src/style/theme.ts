@@ -13,6 +13,11 @@ const space = [
 ];
 
 /**
+ * Valid space index values
+ */
+export type SpaceValue = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+
+/**
  * Font sizes currently are a mess. Mixing em, rem and px. Header font size definitions
  * don't seem to have much logic behind them, with h1 and h2 being almost the
  * same size and h5 being bigger then h4.

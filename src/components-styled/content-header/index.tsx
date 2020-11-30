@@ -27,6 +27,7 @@ const HeaderBox = styled.header<{
 );
 
 interface HeaderProps {
+  id?: string;
   skipLinkAnchor?: boolean;
   hasCategory: boolean;
   hasIcon: boolean;
@@ -34,9 +35,10 @@ interface HeaderProps {
 }
 
 const Header = (props: HeaderProps) => {
-  const { hasCategory, hasIcon, children, skipLinkAnchor } = props;
+  const { hasCategory, hasIcon, children, skipLinkAnchor, id } = props;
   return (
     <HeaderBox
+      id={id}
       hasCategory={hasCategory}
       hasIcon={hasIcon}
       skipLinkAnchor={Boolean(skipLinkAnchor)}
@@ -87,10 +89,12 @@ export function ContentHeader(props: ContentHeaderProps) {
     metadata,
     skipLinkAnchor,
     reference,
+    id,
   } = props;
 
   return (
     <Header
+      id={id}
       skipLinkAnchor={skipLinkAnchor}
       hasCategory={Boolean(category)}
       hasIcon={Boolean(icon)}
@@ -114,18 +118,17 @@ export function ContentHeader(props: ContentHeaderProps) {
           </Text>
         </ReferenceBox>
 
-        <MetadataBox>
-          <Metadata {...metadata} />
-        </MetadataBox>
+        <MetadataBox>{metadata && <Metadata {...metadata} />}</MetadataBox>
       </BodyBox>
     </Header>
   );
 }
 
 interface ContentHeaderProps {
+  id?: string;
   title: string;
   subtitle: string;
-  metadata: MetadataProps;
+  metadata?: MetadataProps;
   reference: {
     href: string;
     text: string;

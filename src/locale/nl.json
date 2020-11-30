@@ -130,6 +130,8 @@
     }
   },
   "ziekenhuisopnames_per_dag": {
+    "tijdelijk_onbeschikbaar_titel": "Kaart tijdelijk niet beschikbaar",
+    "tijdelijk_onbeschikbaar": "Ziekenhuisopnamen per veiligheidsregio en per gemeente worden tijdelijk niet op het dashboard getoond. Het cijferbestand waaruit het dashboard putte (Osiris) wijkt nu te sterk af van het werkelijke aantal ziekenhuisopnamen. Per 10 december verwachten we weer ziekenhuisopnamen per veiligheidsregio en gemeente te kunnen tonen  maar dan op basis van een beter cijferbestand van Stichting NICE. Voor ziekenhuisopnamen op landelijk niveau wordt al gebruik gemaakt van data uit dit bestand. Lees meer in de cijferverantwoording.",
     "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
     "bron": {
       "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
@@ -800,6 +802,8 @@
     "title": "Gemeente"
   },
   "veiligheidsregio_ziekenhuisopnames_per_dag": {
+    "tijdelijk_onbeschikbaar_titel": "Tijdelijk niet beschikbaar",
+    "tijdelijk_onbeschikbaar": "Ziekenhuisopnamen per veiligheidsregio en per gemeente worden tijdelijk niet op het dashboard getoond. Het cijferbestand waaruit het dashboard putte (Osiris) wijkt nu te sterk af van het werkelijke aantal ziekenhuisopnamen. Per 10 december verwachten we weer ziekenhuisopnamen per veiligheidsregio en gemeente te kunnen tonen  maar dan op basis van een beter cijferbestand van Stichting NICE. Voor ziekenhuisopnamen op landelijk niveau wordt al gebruik gemaakt van data uit dit bestand. Lees meer in de cijferverantwoording.",
     "titel_sidebar": "Ziekenhuisopnames",
     "titel": "Ziekenhuisopnames per dag van inwoners {{safetyRegion}}",
     "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen.",
@@ -937,6 +941,8 @@
     }
   },
   "gemeente_ziekenhuisopnames_per_dag": {
+    "tijdelijk_onbeschikbaar_titel": "Tijdelijk niet beschikbaar",
+    "tijdelijk_onbeschikbaar": "Ziekenhuisopnamen per veiligheidsregio en per gemeente worden tijdelijk niet op het dashboard getoond. Het cijferbestand waaruit het dashboard putte (Osiris) wijkt nu te sterk af van het werkelijke aantal ziekenhuisopnamen. Per 10 december verwachten we weer ziekenhuisopnamen per veiligheidsregio en gemeente te kunnen tonen  maar dan op basis van een beter cijferbestand van Stichting NICE. Voor ziekenhuisopnamen op landelijk niveau wordt al gebruik gemaakt van data uit dit bestand. Lees meer in de cijferverantwoording.",
     "titel_sidebar": "Ziekenhuisopnames",
     "titel": "Ziekenhuisopnames per dag van inwoners {{municipality}}",
     "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen.",

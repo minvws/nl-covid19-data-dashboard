@@ -1,4 +1,5 @@
 import css from '@styled-system/css';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {
   color,
@@ -14,6 +15,7 @@ import IconUp from '~/assets/pijl-omhoog.svg';
 import IconDown from '~/assets/pijl-omlaag.svg';
 import siteText from '~/locale/index';
 import { DifferenceDecimal, DifferenceInteger } from '~/types/data';
+import { formatDateFromMilliseconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 
 const text = siteText.toe_en_afname;
@@ -75,8 +77,6 @@ function renderTileIndicator(
     ? formatPercentage(Math.abs(difference))
     : formatNumber(Math.abs(difference));
 
-  const timespanText = getTimespanText(old_date_of_report_unix);
-
   if (difference > 0) {
     const splitText = text.toename.split(' ');
 
@@ -86,9 +86,11 @@ function renderTileIndicator(
           <IconUp />
         </Span>
         <Span fontWeight="bold" mr="0.3em">
-          {`${differenceFormattedString} ${splitText[0]}`}
+          {differenceFormattedString} {splitText[0]}
         </Span>
-        <Span color="annotation">{`${splitText[1]} ${timespanText}`}</Span>
+        <Span color="annotation">
+          {splitText[1]} <TimespanText date={old_date_of_report_unix} />
+        </Span>
       </Container>
     );
   }
@@ -102,9 +104,11 @@ function renderTileIndicator(
           <IconDown />
         </Span>
         <Span fontWeight="bold" mr="0.3em">
-          {`${differenceFormattedString} ${splitText[0]}`}
+          {differenceFormattedString} {splitText[0]}
         </Span>
-        <Span>{`${splitText[1]} ${timespanText}`}</Span>
+        <Span>
+          {splitText[1]} <TimespanText date={old_date_of_report_unix} />
+        </Span>
       </Container>
     );
   }
@@ -114,7 +118,9 @@ function renderTileIndicator(
       <Span color="lightGray">
         <IconGelijk />
       </Span>
-      <Span>{`${text.gelijk} ${timespanText}`}</Span>
+      <Span>
+        {text.gelijk} <TimespanText date={old_date_of_report_unix} />
+      </Span>
     </Container>
   );
 }
@@ -127,14 +133,24 @@ const Container = styled.div(
   css({
     whiteSpace: 'nowrap',
     display: 'inline-block',
-    fontSize: 1,
+    fontSize: 2,
     svg: {
       mr: 1,
-      width: '1em',
-      verticalAlign: 'middle',
+      width: '1.2em',
+      verticalAlign: 'text-bottom',
     },
   })
 );
+
+function TimespanText({ date }: { date: number }) {
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => setIsMounted(true), []);
+
+  const fullDate = formatDateFromMilliseconds(date * 1000, 'medium');
+  const text = getTimespanText(date);
+
+  return <Span title={fullDate}>{isMounted ? text : fullDate}</Span>;
+}
 
 /**
  * @TODO discuss logic for this
@@ -146,17 +162,17 @@ const Container = styled.div(
  * typically be a few days or a week or multiple weeks anyway.
  */
 function getTimespanText(oldDate: number) {
-  const days = Math.round((Date.now() / 1000 - oldDate) / DAY_IN_SECONDS);
+  const days = Math.floor((Date.now() / 1000 - oldDate) / DAY_IN_SECONDS);
 
   if (days < 2) {
     return text.tijdverloop.gisteren;
   }
 
-  if (days < 6) {
+  if (days < 7) {
     return `${days} ${text.tijdverloop.dagen} ${text.tijdverloop.geleden}`;
   }
 
-  const weeks = Math.round(days / 7);
+  const weeks = Math.floor(days / 7);
 
   if (weeks < 2) {
     return `${weeks} ${text.tijdverloop.week.enkelvoud} ${text.tijdverloop.geleden}`;

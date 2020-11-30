@@ -89,6 +89,7 @@ const NursingHomeCare: FCWithLayout<ISafetyRegionData> = (props) => {
       />
 
       <ContentHeader
+        id="besmette-locaties"
         skipLinkAnchor={true}
         title={replaceVariablesInText(locationsText.titel, {
           safetyRegion: safetyRegionName,
@@ -148,6 +149,7 @@ const NursingHomeCare: FCWithLayout<ISafetyRegionData> = (props) => {
       )}
 
       <ContentHeader
+        id="sterfte"
         skipLinkAnchor={true}
         title={replaceVariablesInText(mortalityText.titel, {
           safetyRegion: safetyRegionName,
