@@ -9,7 +9,6 @@
     "code",
     "difference",
     "verdenkingen_huisartsen",
-    "intake_hospital_ma",
     "infectious_people_count",
     "infectious_people_count_normalized",
     "intake_intensivecare_ma",
@@ -21,7 +20,7 @@
     "sewer",
     "sewer_per_installation",
     "infectious_people_last_known_average",
-    "hospital_beds_occupied",
+    "hospital",
     "intensive_care_beds_occupied",
     "ggd",
     "nursing_home"
@@ -48,9 +47,6 @@
     },
     "verdenkingen_huisartsen": {
       "$ref": "verdenkingen_huisartsen.json"
-    },
-    "intake_hospital_ma": {
-      "$ref": "intake_hospital_ma.json"
     },
     "infectious_people_count": {
       "$ref": "infectious_people_count.json"
@@ -88,8 +84,8 @@
     "sewer_per_installation": {
       "$ref": "sewer_per_installation.json"
     },
-    "hospital_beds_occupied": {
-      "$ref": "hospital_beds_occupied.json"
+    "hospital": {
+      "$ref": "hospital.json"
     },
     "intensive_care_beds_occupied": {
       "$ref": "intensive_care_beds_occupied.json"

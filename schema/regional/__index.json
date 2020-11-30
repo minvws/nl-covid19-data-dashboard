@@ -8,6 +8,7 @@
     "name",
     "code",
     "results_per_region",
+    "hospital",
     "ggd",
     "nursing_home",
     "sewer",
@@ -42,6 +43,9 @@
     },
     "results_per_region": {
       "$ref": "results_per_region.json"
+    },
+    "hospital": {
+      "$ref": "hospital.json"
     },
     "ggd": {
       "$ref": "ggd.json"

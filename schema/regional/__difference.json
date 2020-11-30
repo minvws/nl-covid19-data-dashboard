@@ -15,11 +15,8 @@
     "ggd__infected_percentage": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "results_per_region__hospital_moving_avg_per_region": {
+    "hospital__admissions_moving_average": {
       "$ref": "#/definitions/diff_decimal"
-    },
-    "results_per_region__hospital_total_counts_per_region": {
-      "$ref": "#/definitions/diff_integer"
     },
     "sewer__average": {
       "$ref": "#/definitions/diff_decimal"
@@ -36,7 +33,7 @@
   },
   "required": [
     "results_per_region__total_reported_increase_per_region",
-    "results_per_region__hospital_moving_avg_per_region"
+    "hospital__admissions_moving_average"
   ],
   "additionalProperties": false,
   "definitions": {

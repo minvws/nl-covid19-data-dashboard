@@ -9,7 +9,7 @@
     "positive_tested_people__infected_daily_total": {
       "$ref": "#/definitions/diff_integer"
     },
-    "hospital_admissions__moving_average_hospital": {
+    "hospital__admissions_moving_average": {
       "$ref": "#/definitions/diff_decimal"
     },
     "sewer__average": {
@@ -18,7 +18,7 @@
   },
   "required": [
     "positive_tested_people__infected_daily_total",
-    "hospital_admissions__moving_average_hospital"
+    "hospital__admissions_moving_average"
   ],
   "additionalProperties": false,
   "definitions": {
