@@ -14,7 +14,8 @@ import { SEOHead } from '~/components/seoHead';
 import { TALLLanguages } from '~/locale/index';
 import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
 
-const escalationThresholds = regionThresholds.escalation_levels;
+const escalationThresholds =
+  regionThresholds.escalation_levels.escalation_level;
 
 interface EscalationMapLegendaProps {
   text: TALLLanguages;
