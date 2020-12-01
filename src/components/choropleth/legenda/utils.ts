@@ -1,17 +1,20 @@
 import { ChoroplethThresholdsValue } from '../shared';
+import get from 'lodash/get';
+import { assert } from 'console';
 
 export function getDataThresholds<T>(
   thresholdData: T,
   metricName: keyof T,
   metricProperty?: string
 ) {
-  // Even if a metricProperty is passed in, there's not necessarily
-  // a threshold defined for this. In that case we fall back to the threshold
-  // that exists for the metric name.
-  const thresholdInfo =
-    (metricProperty
-      ? (thresholdData[metricName] as any)[metricProperty]
-      : thresholdData[metricName]) ?? thresholdData[metricName];
+  const thresholds = metricProperty
+    ? get(thresholdData, [metricName, metricProperty])
+    : thresholdData[metricName];
 
-  return thresholdInfo as ChoroplethThresholdsValue[];
+  assert(
+    thresholds,
+    `No thresholds are defined for ${metricName} ${metricProperty ?? ''}`
+  );
+
+  return thresholds as ChoroplethThresholdsValue[];
 }
