@@ -77,11 +77,23 @@ function Layout(
         url={url}
       />
 
-      <nav role="navigation" className={styles.skiplinks}>
-        <a href="#content">{text.skiplinks.inhoud}</a>
-        <a href="#main-navigation">{text.skiplinks.nav}</a>
-        <a href="#metric-navigation">{text.skiplinks.metric_nav}</a>
-        <a href="#footer-navigation">{text.skiplinks.footer_nav}</a>
+      <nav
+        role="navigation"
+        className={styles.skiplinks}
+        aria-label={text.aria_labels.skip_links}
+      >
+        <a href="#content" role="menuitem">
+          {text.skiplinks.inhoud}
+        </a>
+        <a href="#main-navigation" role="menuitem">
+          {text.skiplinks.nav}
+        </a>
+        <a href="#metric-navigation" role="menuitem">
+          {text.skiplinks.metric_nav}
+        </a>
+        <a href="#footer-navigation" role="menuitem">
+          {text.skiplinks.footer_nav}
+        </a>
       </nav>
 
       <header className={styles.header}>
@@ -227,62 +239,63 @@ function Layout(
                   role="navigation"
                   id="footer-navigation"
                 >
-                  <ul className={styles.footerList}>
-                    <li>
+                  <ul className={styles.footerList} role="menu">
+                    <li role="none">
                       <Link href="/">
-                        <a className={styles.footerLink}>
+                        <a className={styles.footerLink} role="menuitem">
                           {text.nav.links.index}
                         </a>
                       </Link>
                     </li>
-                    <li>
+                    <li role="none">
                       <Link href="/veiligheidsregio">
-                        <a className={styles.footerLink}>
+                        <a className={styles.footerLink} role="menuitem">
                           {text.nav.links.veiligheidsregio}
                         </a>
                       </Link>
                     </li>
-                    <li>
+                    <li role="none">
                       <Link href="/gemeente">
-                        <a className={styles.footerLink}>
+                        <a className={styles.footerLink} role="menuitem">
                           {text.nav.links.gemeente}
                         </a>
                       </Link>
                     </li>
-                    <li>
+                    <li role="none">
                       <Link href="/over">
-                        <a className={styles.footerLink}>
+                        <a className={styles.footerLink} role="menuitem">
                           {text.nav.links.over}
                         </a>
                       </Link>
                     </li>
-                    <li>
+                    <li role="none">
                       <Link href="/veelgestelde-vragen">
-                        <a className={styles.footerLink}>
+                        <a className={styles.footerLink} role="menuitem">
                           {text.nav.links.veelgestelde_vragen}
                         </a>
                       </Link>
                     </li>
-                    <li>
+                    <li role="none">
                       <Link href="/over-risiconiveaus">
-                        <a className={styles.footerLink}>
+                        <a className={styles.footerLink} role="menuitem">
                           {text.nav.links.over_risiconiveaus}
                         </a>
                       </Link>
                     </li>
-                    <li>
+                    <li role="none">
                       <Link href="/verantwoording">
-                        <a className={styles.footerLink}>
+                        <a className={styles.footerLink} role="menuitem">
                           {text.nav.links.verantwoording}
                         </a>
                       </Link>
                     </li>
-                    <li>
+                    <li role="none">
                       <a
                         href={text.nav.links.meer_href}
                         target="_blank"
                         rel="noopener noreferrer"
                         className={styles.footerLink}
+                        role="menuitem"
                       >
                         {text.nav.links.meer}
                       </a>
