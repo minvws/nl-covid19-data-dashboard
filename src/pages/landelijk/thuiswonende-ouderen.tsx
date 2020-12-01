@@ -92,7 +92,10 @@ const ElderlyAtHomeNationalPage: FCWithLayout<NationalPageProps> = (props) => {
       <ChoroplethTile
         title={text.section_positive_tested.choropleth_daily_title}
         description={text.section_positive_tested.choropleth_daily_description}
-        metadata={{ source: text.section_positive_tested.bronnen.rivm }}
+        metadata={{
+          date: elderlyAtHomeData.last_value.date_of_report_unix,
+          source: text.section_positive_tested.bronnen.rivm,
+        }}
         legend={{
           thresholds: regionThresholds.elderly_at_home,
           title: text.section_positive_tested.choropleth_daily_legenda,
