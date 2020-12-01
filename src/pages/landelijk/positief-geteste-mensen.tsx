@@ -33,7 +33,7 @@ import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { AgeDemographic } from '~/domain/infected-people/age-demographic/age-demographic';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { formatAgeGroupRange } from '~/domain/infected-people/age-demographic/age-demogrraphic-chart';
+import { formatAgeGroupRange } from '~/domain/infected-people/age-demographic/age-demographic-chart';
 import {
   getNationalStaticProps,
   NationalPageProps,

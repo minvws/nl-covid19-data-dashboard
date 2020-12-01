@@ -6,7 +6,7 @@ import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import {
   AGE_GROUP_TOOLTIP_WIDTH,
   formatAgeGroupRange,
-} from './age-demogrraphic-chart';
+} from './age-demographic-chart';
 import siteText from '~/locale/index';
 import { NationalInfectedAgeGroupsValue } from '~/types/data';
 
@@ -55,7 +55,7 @@ const LegendItem = styled.li(
       display: 'block',
       width: '1rem',
       height: '1rem',
-      backgroundColor: 'data.default',
+      backgroundColor: 'data.neutral',
       position: 'absolute',
       left: 3,
       top: '0.5rem',

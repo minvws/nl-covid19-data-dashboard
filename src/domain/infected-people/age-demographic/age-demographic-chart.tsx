@@ -81,9 +81,9 @@ export function AgeDemographicChart({
 
   // We'll make some helpers to get at the data we want
   const ageGroupPercentage = (d: NationalInfectedAgeGroupsValue) =>
-    d.age_group_percentage;
+    d.age_group_percentage * 100;
   const infectedPercentage = (d: NationalInfectedAgeGroupsValue) =>
-    d.infected_percentage;
+    d.infected_percentage * 100;
   const ageGroupRange = (d: NationalInfectedAgeGroupsValue) =>
     d.age_group_range;
 
@@ -243,7 +243,7 @@ export function AgeDemographicChart({
               y={ageGroupRangePoint(d)}
               height={ageGroupRangeScale.bandwidth()}
               width={ageGroupPercentageWidth}
-              fill={colors.data.default}
+              fill={colors.data.neutral}
             />
             <Text
               textAnchor="middle"

@@ -7,7 +7,7 @@ import {
   NationalInfectedAgeGroups,
   NationalInfectedAgeGroupsValue,
 } from '~/types/data';
-import { AgeDemographicChart } from './age-demogrraphic-chart';
+import { AgeDemographicChart } from './age-demographic-chart';
 import { AgeDemographicTooltip } from './age-demographic-tooltip';
 
 interface AgeDemographicProps {
