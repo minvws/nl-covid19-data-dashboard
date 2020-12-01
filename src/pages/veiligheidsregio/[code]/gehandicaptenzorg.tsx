@@ -27,7 +27,7 @@ const mortalityText = siteText.veiligheidsregio_gehandicaptenzorg_oversterfte;
 const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
   const { data, safetyRegionName } = props;
 
-  const nursinghomeLastValue = data.disability_care.last_value;
+  const disabilityCareLastValue = data.disability_care.last_value;
 
   return (
     <>
@@ -57,8 +57,8 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
         )}
         metadata={{
           datumsText: positiveTestPeopleText.datums,
-          dateInfo: nursinghomeLastValue.date_of_report_unix,
-          dateOfInsertionUnix: nursinghomeLastValue.date_of_insertion_unix,
+          dateInfo: disabilityCareLastValue.date_of_report_unix,
+          dateOfInsertionUnix: disabilityCareLastValue.date_of_insertion_unix,
           dataSources: [positiveTestPeopleText.bronnen.rivm],
         }}
         reference={positiveTestPeopleText.reference}
@@ -69,13 +69,13 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
           title={positiveTestPeopleText.barscale_titel}
           description={positiveTestPeopleText.extra_uitleg}
           metadata={{
-            date: nursinghomeLastValue.date_of_report_unix,
+            date: disabilityCareLastValue.date_of_report_unix,
             source: positiveTestPeopleText.bronnen.rivm,
           }}
         >
           <KpiValue
             data-cy="newly_infected_people"
-            absolute={nursinghomeLastValue.newly_infected_people}
+            absolute={disabilityCareLastValue.newly_infected_people}
           />
         </KpiTile>
       </TwoKpiSection>
@@ -99,8 +99,8 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
         subtitle={locationsText.pagina_toelichting}
         metadata={{
           datumsText: locationsText.datums,
-          dateInfo: nursinghomeLastValue.date_of_report_unix,
-          dateOfInsertionUnix: nursinghomeLastValue.date_of_insertion_unix,
+          dateInfo: disabilityCareLastValue.date_of_report_unix,
+          dateOfInsertionUnix: disabilityCareLastValue.date_of_insertion_unix,
           dataSources: [locationsText.bronnen.rivm],
         }}
         reference={locationsText.reference}
@@ -110,33 +110,33 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
         <KpiTile
           title={locationsText.kpi_titel}
           metadata={{
-            date: nursinghomeLastValue.date_of_report_unix,
+            date: disabilityCareLastValue.date_of_report_unix,
             source: locationsText.bronnen.rivm,
           }}
         >
           <KpiValue
             data-cy="infected_locations_total"
-            absolute={nursinghomeLastValue.infected_locations_total}
-            percentage={nursinghomeLastValue.infected_locations_percentage}
+            absolute={disabilityCareLastValue.infected_locations_total}
+            percentage={disabilityCareLastValue.infected_locations_percentage}
           />
           <Text>{locationsText.kpi_toelichting}</Text>
         </KpiTile>
         <KpiTile
           title={locationsText.barscale_titel}
           metadata={{
-            date: nursinghomeLastValue.date_of_report_unix,
+            date: disabilityCareLastValue.date_of_report_unix,
             source: locationsText.bronnen.rivm,
           }}
         >
           <KpiValue
             data-cy="newly_infected_locations"
-            absolute={nursinghomeLastValue.newly_infected_locations}
+            absolute={disabilityCareLastValue.newly_infected_locations}
           />
           <Text>{locationsText.barscale_toelichting}</Text>
         </KpiTile>
       </TwoKpiSection>
 
-      {nursinghomeLastValue.infected_locations_total !== undefined && (
+      {disabilityCareLastValue.infected_locations_total !== undefined && (
         <LineChartTile
           title={locationsText.linechart_titel}
           values={data.nursing_home.values.map((value) => ({
@@ -159,8 +159,8 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
         subtitle={mortalityText.pagina_toelichting}
         metadata={{
           datumsText: mortalityText.datums,
-          dateInfo: nursinghomeLastValue.date_of_report_unix,
-          dateOfInsertionUnix: nursinghomeLastValue.date_of_insertion_unix,
+          dateInfo: disabilityCareLastValue.date_of_report_unix,
+          dateOfInsertionUnix: disabilityCareLastValue.date_of_insertion_unix,
           dataSources: [mortalityText.bronnen.rivm],
         }}
         reference={mortalityText.reference}
@@ -171,13 +171,13 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
           title={mortalityText.barscale_titel}
           description={mortalityText.extra_uitleg}
           metadata={{
-            date: nursinghomeLastValue.date_of_report_unix,
+            date: disabilityCareLastValue.date_of_report_unix,
             source: mortalityText.bronnen.rivm,
           }}
         >
           <KpiValue
             data-cy="deceased_daily"
-            absolute={nursinghomeLastValue.deceased_daily}
+            absolute={disabilityCareLastValue.deceased_daily}
           />
         </KpiTile>
       </TwoKpiSection>
