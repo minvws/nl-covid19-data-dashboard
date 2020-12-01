@@ -1,14 +1,14 @@
 {
   "definitions": {
-    "value": {
-      "title": "municipal_hospital_value",
+    "item": {
+      "title": "hospital_admissions_last_value",
       "type": "object",
       "additionalProperties": false,
       "required": [
+        "date_of_report_unix",
         "gmcode",
         "municipality_name",
-        "admissions_moving_average",
-        "date_of_report_unix",
+        "moving_average_hospital",
         "date_of_insertion_unix"
       ],
       "properties": {
@@ -22,7 +22,7 @@
         "municipality_name": {
           "type": "string"
         },
-        "admissions_moving_average": {
+        "moving_average_hospital": {
           "type": "number"
         },
         "date_of_insertion_unix": {
@@ -32,7 +32,8 @@
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "municipal_hospital",
+  "$id": "hospital_admissions.json",
+  "title": "municipal_hospital_admissions",
   "type": "object",
   "required": ["values", "last_value"],
   "additionalProperties": false,
@@ -40,11 +41,11 @@
     "values": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/value"
+        "$ref": "#/definitions/item"
       }
     },
     "last_value": {
-      "$ref": "#/definitions/value"
+      "$ref": "#/definitions/item"
     }
   }
 }

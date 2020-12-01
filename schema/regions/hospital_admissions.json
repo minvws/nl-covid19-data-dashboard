@@ -1,23 +1,23 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-  "title": "municipalities_hospital",
+  "title": "region_hospital_admissions",
   "additionalProperties": false,
   "required": [
     "date_of_report_unix",
-    "gmcode",
-    "admissions_moving_average",
+    "vrcode",
+    "hospital_admissions",
     "date_of_insertion_unix"
   ],
   "properties": {
     "date_of_report_unix": {
       "type": "integer"
     },
-    "gmcode": {
+    "vrcode": {
       "type": "string",
-      "pattern": "^GM[0-9]+$"
+      "pattern": "^VR[0-9]+$"
     },
-    "admissions_moving_average": {
+    "hospital_admissions": {
       "type": "number"
     },
     "date_of_insertion_unix": {

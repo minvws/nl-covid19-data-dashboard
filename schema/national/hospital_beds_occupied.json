@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "regional_hospital",
+  "title": "hospital_beds_occupied",
   "type": "object",
   "properties": {
     "values": {
@@ -17,28 +17,23 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "regional_hospital_value",
+      "title": "hospital_beds_occupied_value",
       "type": "object",
       "properties": {
-        "admissions_moving_average": {
-          "type": "number"
+        "covid_occupied": {
+          "type": "integer"
         },
         "date_of_report_unix": {
           "type": "integer"
         },
         "date_of_insertion_unix": {
           "type": "integer"
-        },
-        "vrcode": {
-          "type": "string",
-          "equalsRootProperty": "code"
         }
       },
       "required": [
-        "admissions_moving_average",
+        "covid_occupied",
         "date_of_report_unix",
-        "date_of_insertion_unix",
-        "vrcode"
+        "date_of_insertion_unix"
       ],
       "additionalProperties": false
     }

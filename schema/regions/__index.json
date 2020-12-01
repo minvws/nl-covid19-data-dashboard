@@ -9,7 +9,7 @@
     "name",
     "code",
     "escalation_levels",
-    "hospital",
+    "hospital_admissions",
     "positive_tested_people",
     "deceased",
     "nursing_home",
@@ -31,12 +31,12 @@
       "type": "string",
       "const": { "$data": "1/proto_name" }
     },
-    "hospital": {
+    "hospital_admissions": {
       "type": "array",
       "minItems": 25,
       "maxItems": 25,
       "items": {
-        "$ref": "hospital.json"
+        "$ref": "hospital_admissions.json"
       }
     },
     "positive_tested_people": {

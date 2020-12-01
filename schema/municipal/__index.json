@@ -8,7 +8,7 @@
     "proto_name",
     "name",
     "code",
-    "hospital",
+    "hospital_admissions",
     "positive_tested_people",
     "difference"
   ],
@@ -31,8 +31,8 @@
     "difference": {
       "$ref": "__difference.json"
     },
-    "hospital": {
-      "$ref": "hospital.json"
+    "hospital_admissions": {
+      "$ref": "hospital_admissions.json"
     },
     "positive_tested_people": {
       "$ref": "positive_tested_people.json"

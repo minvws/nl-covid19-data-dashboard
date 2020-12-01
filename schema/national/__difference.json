@@ -21,10 +21,10 @@
     "infectious_people_count_normalized__infectious_avg_normalized": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "hospital__admissions_moving_average": {
+    "intake_hospital_ma__moving_average_hospital": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "hospital__beds_occupied_covid": {
+    "hospital_beds_occupied__covid_occupied": {
       "$ref": "#/definitions/diff_integer"
     },
     "intake_intensivecare_ma__moving_average_ic": {
@@ -54,7 +54,7 @@
   },
   "required": [
     "infected_people_total__infected_daily_total",
-    "hospital__admissions_moving_average",
+    "intake_hospital_ma__moving_average_hospital",
     "intake_intensivecare_ma__moving_average_ic"
   ],
   "additionalProperties": false,
