@@ -7,7 +7,12 @@ import {
   MetadataProps,
 } from '~/components-styled/content-header/metadata';
 import { HeadingWithIcon } from '~/components-styled/heading-with-icon';
-import { Heading, Text } from '~/components-styled/typography';
+import {
+  Heading,
+  HeadingLevel,
+  InlineText,
+  Text,
+} from '~/components-styled/typography';
 import { Box } from '../base';
 
 /*
@@ -15,12 +20,11 @@ import { Box } from '../base';
   This fixes odd skip-link behavior in IE11
 */
 const HeaderBox = styled.header<{
-  hasCategory: boolean;
   hasIcon: boolean;
   skipLinkAnchor: boolean;
 }>((x) =>
   css({
-    mt: x.hasCategory ? undefined : 4,
+    mt: 0,
     ml: x.skipLinkAnchor ? '-100vw' : x.hasIcon ? undefined : 5,
     pl: x.skipLinkAnchor ? '100vw' : undefined,
   })
@@ -29,17 +33,15 @@ const HeaderBox = styled.header<{
 interface HeaderProps {
   id?: string;
   skipLinkAnchor?: boolean;
-  hasCategory: boolean;
   hasIcon: boolean;
   children: ReactNode;
 }
 
 const Header = (props: HeaderProps) => {
-  const { hasCategory, hasIcon, children, skipLinkAnchor, id } = props;
+  const { hasIcon, children, skipLinkAnchor, id } = props;
   return (
     <HeaderBox
       id={id}
-      hasCategory={hasCategory}
       hasIcon={hasIcon}
       skipLinkAnchor={Boolean(skipLinkAnchor)}
     >
@@ -48,7 +50,7 @@ const Header = (props: HeaderProps) => {
   );
 };
 
-const CategoryText = styled(Text)(
+export const CategoryHeading = styled(Heading)<{ hide: boolean }>(
   css({
     fontSize: 3,
     fontWeight: 'bold',
@@ -56,6 +58,27 @@ const CategoryText = styled(Text)(
     margin: 0,
     marginBottom: 1,
     marginLeft: 5,
+  }),
+  (x) =>
+    x.hide &&
+    css({
+      position: 'absolute',
+      left: '-10000px',
+      top: 'auto',
+      width: '1px',
+      height: '1px',
+      overflow: 'hidden',
+    })
+);
+
+export const AriaInlineText = styled(InlineText)(
+  css({
+    position: 'absolute',
+    left: '-10000px',
+    top: 'auto',
+    width: '1px',
+    height: '1px',
+    overflow: 'hidden',
   })
 );
 
@@ -82,28 +105,37 @@ const MetadataBox = styled(Box)(
 
 export function ContentHeader(props: ContentHeaderProps) {
   const {
+    hideCategory = false,
     category,
+    screenreaderCategory: ariaCategory,
     icon,
     title,
     subtitle,
     metadata,
     skipLinkAnchor,
     reference,
+    headingLevel = 2,
     id,
   } = props;
 
   return (
-    <Header
-      id={id}
-      skipLinkAnchor={skipLinkAnchor}
-      hasCategory={Boolean(category)}
-      hasIcon={Boolean(icon)}
-    >
-      {category && <CategoryText>{category}</CategoryText>}
+    <Header id={id} skipLinkAnchor={skipLinkAnchor} hasIcon={Boolean(icon)}>
+      {category && (
+        <CategoryHeading level={1} hide={hideCategory}>
+          {category}
+          {ariaCategory && <AriaInlineText> - {ariaCategory}</AriaInlineText>}
+        </CategoryHeading>
+      )}
       {icon ? (
-        <HeadingWithIcon icon={icon} title={title} headingLevel={2} />
+        <HeadingWithIcon
+          icon={icon}
+          title={title}
+          headingLevel={headingLevel}
+        />
       ) : (
-        <Heading level={2}>{title}</Heading>
+        <Heading level={headingLevel} fontSize={4}>
+          {title}
+        </Heading>
       )}
 
       <BodyBox>
@@ -134,6 +166,9 @@ interface ContentHeaderProps {
     text: string;
   };
   category?: string;
+  screenreaderCategory?: string;
+  hideCategory?: boolean;
   icon?: JSX.Element;
   skipLinkAnchor?: boolean;
+  headingLevel?: HeadingLevel;
 }

@@ -1,4 +1,10 @@
 {
+  "aria_labels": {
+    "pagina_keuze": "National, region or municipality menu",
+    "footer_keuze": "Page menu",
+    "metriek_navigatie": "Metrics per category menu",
+    "skip_links": "Quicklink menu"
+  },
   "andere_gegevens": "Other data",
   "blok_andere_gegevens": {
     "title": "Other data",
@@ -27,7 +33,9 @@
   },
   "skiplinks": {
     "inhoud": "Go directly to the content",
-    "nav": "Go directly to the navigation"
+    "nav": "Go directly to the navigation",
+    "metric_nav": "Go directly to the metric navigation",
+    "footer_nav": "Go directly to the footer navigation"
   },
   "header": {
     "title": "Coronavirus dashboard",

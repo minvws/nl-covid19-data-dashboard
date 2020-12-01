@@ -30,6 +30,7 @@ const ReproductionIndex: FCWithLayout<NationalPageProps> = (props) => {
       />
       <ContentHeader
         category={siteText.nationaal_layout.headings.besmettingen}
+        screenreaderCategory={siteText.reproductiegetal.titel_sidebar}
         title={text.titel}
         icon={<Repro />}
         subtitle={text.pagina_toelichting}

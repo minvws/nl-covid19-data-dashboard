@@ -1,4 +1,10 @@
 {
+  "aria_labels": {
+    "pagina_keuze": "Landelijk, regio of gemeente menu",
+    "footer_keuze": "Pagina menu",
+    "metriek_navigatie": "Metrieken per categorie menu",
+    "skip_links": "Snelkoppeling menu"
+  },
   "andere_gegevens": "Andere gegevens",
   "blok_andere_gegevens": {
     "title": "Andere gegevens",
@@ -27,7 +33,9 @@
   },
   "skiplinks": {
     "inhoud": "Ga direct naar de inhoud",
-    "nav": "Ga direct naar de navigatie"
+    "nav": "Ga direct naar de navigatie",
+    "metric_nav": "Ga direct naar de metrieken navigatie",
+    "footer_nav": "Ga direct naar de footer navigatie"
   },
   "header": {
     "title": "Dashboard coronavirus",

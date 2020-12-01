@@ -33,6 +33,7 @@ const SuspectedPatients: FCWithLayout<NationalPageProps> = (props) => {
       />
       <ContentHeader
         category={siteText.nationaal_layout.headings.vroege_signalen}
+        screenreaderCategory={siteText.verdenkingen_huisartsen.titel_sidebar}
         title={text.titel}
         icon={<Arts />}
         subtitle={text.pagina_toelichting}

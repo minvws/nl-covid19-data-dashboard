@@ -49,8 +49,13 @@ export function ChoroplethTile<T>({
 
   return (
     <ChartTileContainer metadata={metadata} showDataWarning={showDataWarning}>
-      <Box display="flex" flexDirection={{ _: 'column', lg: 'row' }}>
-        <Box mb={3} flex={{ lg: 1 }}>
+      <Box
+        display="flex"
+        flexDirection={{ _: 'column', lg: 'row' }}
+        m={0}
+        as="figure"
+      >
+        <Box mb={3} flex={{ lg: 1 }} as="figcaption">
           <Box mb={[0, 2]}>
             <Heading level={3}>{title}</Heading>
             {typeof description === 'string' ? (

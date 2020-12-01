@@ -100,6 +100,7 @@ export const colors = {
   notification: '#cd005a',
   red: '#F35363',
   category: '#6b6b6b',
+  border: '#c4c4c4',
 
   data: {
     primary: '#007BC7',
