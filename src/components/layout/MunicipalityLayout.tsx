@@ -15,7 +15,6 @@ import { TitleWithIcon } from '~/components-styled/aside/title-with-icon';
 import { Box } from '~/components-styled/base';
 import { Text } from '~/components-styled/typography';
 import { ComboBox } from '~/components/comboBox';
-import { IntakeHospitalMetric } from '~/components/gemeente/intake-hospital-metric';
 import { PositivelyTestedPeopleMetric } from '~/components/gemeente/positively-tested-people-metric';
 import { SewerWaterMetric } from '~/components/gemeente/sewer-water-metric';
 import { getLayout as getSiteLayout } from '~/components/layout';
@@ -220,7 +219,10 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                                 }
                               />
                               <span className="metric-wrapper">
-                                <IntakeHospitalMetric data={data} />
+                                {
+                                  siteText.gemeente_ziekenhuisopnames_per_dag
+                                    .tijdelijk_onbeschikbaar_titel
+                                }
                               </span>
                             </a>
                           </Link>

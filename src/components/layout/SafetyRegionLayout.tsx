@@ -15,7 +15,6 @@ import {
 import { TitleWithIcon } from '~/components-styled/aside/title-with-icon';
 import { ComboBox } from '~/components/comboBox';
 import { getLayout as getSiteLayout } from '~/components/layout';
-import { IntakeHospitalMetric } from '~/components/veiligheidsregio/intake-hospital-metric';
 import { PositivelyTestedPeopleBarScale } from '~/components/veiligheidsregio/positive-tested-people-barscale';
 import { PositivelyTestedPeopleMetric } from '~/components/veiligheidsregio/positive-tested-people-metric';
 import { SewerWaterMetric } from '~/components/veiligheidsregio/sewer-water-metric';
@@ -204,7 +203,11 @@ function SafetyRegionLayout(
                             }
                           />
                           <span className="metric-wrapper">
-                            <IntakeHospitalMetric data={data} />
+                            {
+                              siteText
+                                .veiligheidsregio_ziekenhuisopnames_per_dag
+                                .tijdelijk_onbeschikbaar_titel
+                            }
                           </span>
                         </a>
                       </Link>
