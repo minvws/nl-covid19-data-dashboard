@@ -107,7 +107,7 @@ export function ContentHeader(props: ContentHeaderProps) {
   const {
     hideCategory = false,
     category,
-    ariaCategory,
+    screenreaderCategory: ariaCategory,
     icon,
     title,
     subtitle,
@@ -166,7 +166,7 @@ interface ContentHeaderProps {
     text: string;
   };
   category?: string;
-  ariaCategory?: string;
+  screenreaderCategory?: string;
   hideCategory?: boolean;
   icon?: JSX.Element;
   skipLinkAnchor?: boolean;
