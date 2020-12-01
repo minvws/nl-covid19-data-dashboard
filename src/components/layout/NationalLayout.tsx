@@ -10,7 +10,13 @@ import GetestIcon from '~/assets/test.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import Ziektegolf from '~/assets/ziektegolf.svg';
-import { HeadingWithIcon } from '~/components-styled/heading-with-icon';
+import { Category } from '~/components-styled/aside/category';
+import {
+  CategoryMenuItem,
+  Menu,
+  MetricMenuItem,
+} from '~/components-styled/aside/menu';
+import { TitleWithIcon } from '~/components-styled/aside/title-with-icon';
 import { NursingHomeInfectedPeopleMetric } from '~/components/common/nursing-home-infected-people-metric';
 import { InfectiousPeopleMetric } from '~/components/landelijk/infectious-people-metric';
 import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-barscale';
@@ -18,7 +24,6 @@ import { IntakeHospitalMetric } from '~/components/landelijk/intake-hospital-met
 import { IntakeIntensiveCareBarscale } from '~/components/landelijk/intake-intensive-care-barscale';
 import { IntakeIntensiveCareMetric } from '~/components/landelijk/intake-intensive-care-metric';
 import { PositiveTestedPeopleBarScale } from '~/components/landelijk/positive-tested-people-barscale';
-import { PositiveTestedPeopleMetric } from '~/components/landelijk/positive-tested-people-metric';
 import { ReproductionIndexBarScale } from '~/components/landelijk/reproduction-index-barscale';
 import { ReproductionIndexMetric } from '~/components/landelijk/reproduction-index-metric';
 import { SewerWaterMetric } from '~/components/landelijk/sewer-water-metric';
@@ -28,13 +33,8 @@ import siteText from '~/locale/index';
 import { NationalPageProps } from '~/static-props/nl-data';
 import theme from '~/style/theme';
 import { useBreakpoints } from '~/utils/useBreakpoints';
+import { PositiveTestedPeopleMetric } from '../landelijk/positive-tested-people-metric';
 
-/**
- * Using composition this can be a less confusing and more direct replacement
- * for getSiteLayout.
- *
- * @TODO replace other use of getSiteLayout()
- */
 export function getNationalLayout(
   page: React.ReactNode,
   pageProps: NationalPageProps
@@ -122,209 +122,256 @@ function NationalLayout(props: NationalLayoutProps) {
           <nav
             /** re-mount when route changes in order to blur anchors */
             key={router.asPath}
-            aria-label="metric navigation"
+            id="metric-navigation"
+            aria-label={siteText.aria_labels.metriek_navigatie}
+            role="navigation"
           >
-            <h2>{siteText.nationaal_layout.headings.algemeen}</h2>
-            <ul className="last-developments">
-              <li>
-                <Link
-                  href={{
-                    pathname: '/',
-                    query: breakpoints.md
-                      ? {} // only add menu flags on narrow devices
-                      : isMenuOpen
-                      ? { menu: '0' }
-                      : { menu: '1' },
-                  }}
-                >
-                  <a className={`last-developments-link ${getClassName('/')}`}>
-                    <HeadingWithIcon
-                      icon={<Notification color={theme.colors.notification} />}
-                      title={siteText.laatste_ontwikkelingen.title}
-                      subtitle={siteText.laatste_ontwikkelingen.menu_subtitle}
-                    />
-                  </a>
-                </Link>
-              </li>
-            </ul>
-            <h2>{siteText.nationaal_layout.headings.besmettingen}</h2>
-            <ul>
-              <li>
-                <Link href="/landelijk/positief-geteste-mensen">
-                  <a
-                    className={getClassName(
-                      '/landelijk/positief-geteste-mensen'
-                    )}
-                  >
-                    <HeadingWithIcon
-                      icon={<GetestIcon />}
-                      title={siteText.positief_geteste_personen.titel_sidebar}
-                    />
-                    <span className="metric-wrapper">
-                      <PositiveTestedPeopleMetric data={data} />
-                      <PositiveTestedPeopleBarScale
-                        data={data}
-                        showAxis={false}
-                        showValue={false}
-                      />
-                    </span>
-                  </a>
-                </Link>
-              </li>
+            <Menu>
+              <CategoryMenuItem>
+                <Category>
+                  {siteText.nationaal_layout.headings.algemeen}
+                </Category>
+                <Menu>
+                  <MetricMenuItem>
+                    <Link
+                      href={{
+                        pathname: '/',
+                        query: breakpoints.md
+                          ? {} // only add menu flags on narrow devices
+                          : isMenuOpen
+                          ? { menu: '0' }
+                          : { menu: '1' },
+                      }}
+                    >
+                      <a
+                        className={`last-developments-link ${getClassName(
+                          '/'
+                        )}`}
+                      >
+                        <TitleWithIcon
+                          icon={
+                            <Notification color={theme.colors.notification} />
+                          }
+                          title={siteText.laatste_ontwikkelingen.title}
+                          subtitle={
+                            siteText.laatste_ontwikkelingen.menu_subtitle
+                          }
+                        />
+                      </a>
+                    </Link>
+                  </MetricMenuItem>
+                </Menu>
+              </CategoryMenuItem>
+              <CategoryMenuItem>
+                <Category>
+                  {siteText.nationaal_layout.headings.besmettingen}
+                </Category>
+                <Menu>
+                  <MetricMenuItem>
+                    <Link href="/landelijk/positief-geteste-mensen">
+                      <a
+                        className={getClassName(
+                          '/landelijk/positief-geteste-mensen'
+                        )}
+                      >
+                        <TitleWithIcon
+                          icon={<GetestIcon />}
+                          title={
+                            siteText.positief_geteste_personen.titel_sidebar
+                          }
+                        />
+                        <span className="metric-wrapper">
+                          <PositiveTestedPeopleMetric data={data} />
+                          <PositiveTestedPeopleBarScale
+                            data={data}
+                            showAxis={false}
+                            showValue={false}
+                          />
+                        </span>
+                      </a>
+                    </Link>
+                  </MetricMenuItem>
+                  <MetricMenuItem>
+                    <Link href="/landelijk/besmettelijke-mensen">
+                      <a
+                        className={getClassName(
+                          '/landelijk/besmettelijke-mensen'
+                        )}
+                      >
+                        <TitleWithIcon
+                          icon={<Ziektegolf />}
+                          title={siteText.besmettelijke_personen.titel_sidebar}
+                        />
+                        <span className="metric-wrapper">
+                          <InfectiousPeopleMetric
+                            data={
+                              data.infectious_people_last_known_average
+                                ?.last_value
+                            }
+                          />
+                        </span>
+                      </a>
+                    </Link>
+                  </MetricMenuItem>
+                  <MetricMenuItem>
+                    <Link href="/landelijk/reproductiegetal">
+                      <a
+                        className={getClassName('/landelijk/reproductiegetal')}
+                      >
+                        <TitleWithIcon
+                          icon={<ReproIcon />}
+                          title={siteText.reproductiegetal.titel_sidebar}
+                        />
+                        <span className="metric-wrapper">
+                          <ReproductionIndexMetric
+                            data={
+                              data.reproduction_index_last_known_average
+                                .last_value
+                            }
+                          />
+                          <ReproductionIndexBarScale
+                            data={data.reproduction_index_last_known_average}
+                            showAxis={false}
+                            showValue={false}
+                          />
+                        </span>
+                      </a>
+                    </Link>
+                  </MetricMenuItem>
+                </Menu>
+              </CategoryMenuItem>
+              <CategoryMenuItem>
+                <Category>
+                  {siteText.nationaal_layout.headings.ziekenhuizen}
+                </Category>
+                <Menu>
+                  <MetricMenuItem>
+                    <Link href="/landelijk/ziekenhuis-opnames">
+                      <a
+                        className={getClassName(
+                          '/landelijk/ziekenhuis-opnames'
+                        )}
+                      >
+                        <TitleWithIcon
+                          icon={<Ziekenhuis />}
+                          title={
+                            siteText.ziekenhuisopnames_per_dag.titel_sidebar
+                          }
+                        />
+                        <span className="metric-wrapper">
+                          <IntakeHospitalMetric data={data} />
+                          <IntakeHospitalBarScale
+                            data={data}
+                            showAxis={false}
+                            showValue={false}
+                          />
+                        </span>
+                      </a>
+                    </Link>
+                  </MetricMenuItem>
 
-              <li>
-                <Link href="/landelijk/besmettelijke-mensen">
-                  <a
-                    className={getClassName('/landelijk/besmettelijke-mensen')}
-                  >
-                    <HeadingWithIcon
-                      icon={<Ziektegolf />}
-                      title={siteText.besmettelijke_personen.titel_sidebar}
-                    />
-                    <span className="metric-wrapper">
-                      <InfectiousPeopleMetric
-                        data={
-                          data.infectious_people_last_known_average?.last_value
-                        }
-                      />
-                    </span>
-                  </a>
-                </Link>
-              </li>
+                  <MetricMenuItem>
+                    <Link href="/landelijk/intensive-care-opnames">
+                      <a
+                        className={getClassName(
+                          '/landelijk/intensive-care-opnames'
+                        )}
+                      >
+                        <TitleWithIcon
+                          icon={<Arts />}
+                          title={siteText.ic_opnames_per_dag.titel_sidebar}
+                        />
+                        <span className="metric-wrapper">
+                          <IntakeIntensiveCareMetric data={data} />
+                          <IntakeIntensiveCareBarscale
+                            data={data}
+                            showAxis={false}
+                            showValue={false}
+                          />
+                        </span>
+                      </a>
+                    </Link>
+                  </MetricMenuItem>
+                </Menu>
+              </CategoryMenuItem>
+              <CategoryMenuItem>
+                <Category>
+                  {siteText.nationaal_layout.headings.kwetsbare_groepen}
+                </Category>
+                <Menu>
+                  <MetricMenuItem>
+                    <Link href="/landelijk/verpleeghuiszorg">
+                      <a
+                        className={getClassName('/landelijk/verpleeghuiszorg')}
+                      >
+                        <TitleWithIcon
+                          icon={<Verpleeghuiszorg />}
+                          title={
+                            siteText.verpleeghuis_besmette_locaties
+                              .titel_sidebar
+                          }
+                        />
+                        <span className="metric-wrapper">
+                          <NursingHomeInfectedPeopleMetric
+                            data={data.nursing_home.last_value}
+                          />
+                        </span>
+                      </a>
+                    </Link>
+                  </MetricMenuItem>
+                </Menu>
+              </CategoryMenuItem>
+              <CategoryMenuItem>
+                <Category>
+                  {siteText.nationaal_layout.headings.vroege_signalen}
+                </Category>
+                <Menu>
+                  <MetricMenuItem>
+                    <Link href="/landelijk/verdenkingen-huisartsen">
+                      <a
+                        className={getClassName(
+                          '/landelijk/verdenkingen-huisartsen'
+                        )}
+                      >
+                        <TitleWithIcon
+                          icon={<Arts />}
+                          title={siteText.verdenkingen_huisartsen.titel_sidebar}
+                        />
+                        <span className="metric-wrapper">
+                          <SuspectedPatientsMetric
+                            data={data.verdenkingen_huisartsen.last_value}
+                          />
+                        </span>
+                      </a>
+                    </Link>
+                  </MetricMenuItem>
 
-              <li>
-                <Link href="/landelijk/reproductiegetal">
-                  <a className={getClassName('/landelijk/reproductiegetal')}>
-                    <HeadingWithIcon
-                      icon={<ReproIcon />}
-                      title={siteText.reproductiegetal.titel_sidebar}
-                    />
-                    <span className="metric-wrapper">
-                      <ReproductionIndexMetric
-                        data={
-                          data.reproduction_index_last_known_average.last_value
-                        }
-                      />
-                      <ReproductionIndexBarScale
-                        data={data.reproduction_index_last_known_average}
-                        showAxis={false}
-                        showValue={false}
-                      />
-                    </span>
-                  </a>
-                </Link>
-              </li>
-            </ul>
-
-            <h2>{siteText.nationaal_layout.headings.ziekenhuizen}</h2>
-
-            <ul>
-              <li>
-                <Link href="/landelijk/ziekenhuis-opnames">
-                  <a className={getClassName('/landelijk/ziekenhuis-opnames')}>
-                    <HeadingWithIcon
-                      icon={<Ziekenhuis />}
-                      title={siteText.ziekenhuisopnames_per_dag.titel_sidebar}
-                    />
-                    <span className="metric-wrapper">
-                      <IntakeHospitalMetric data={data} />
-                      <IntakeHospitalBarScale
-                        data={data}
-                        showAxis={false}
-                        showValue={false}
-                      />
-                    </span>
-                  </a>
-                </Link>
-              </li>
-
-              <li>
-                <Link href="/landelijk/intensive-care-opnames">
-                  <a
-                    className={getClassName(
-                      '/landelijk/intensive-care-opnames'
-                    )}
-                  >
-                    <HeadingWithIcon
-                      icon={<Arts />}
-                      title={siteText.ic_opnames_per_dag.titel_sidebar}
-                    />
-                    <span className="metric-wrapper">
-                      <IntakeIntensiveCareMetric data={data} />
-                      <IntakeIntensiveCareBarscale
-                        data={data}
-                        showAxis={false}
-                        showValue={false}
-                      />
-                    </span>
-                  </a>
-                </Link>
-              </li>
-            </ul>
-
-            <h2>{siteText.nationaal_layout.headings.kwetsbare_groepen}</h2>
-
-            <ul>
-              <li>
-                <Link href="/landelijk/verpleeghuiszorg">
-                  <a className={getClassName('/landelijk/verpleeghuiszorg')}>
-                    <HeadingWithIcon
-                      icon={<Verpleeghuiszorg />}
-                      title={
-                        siteText.verpleeghuis_besmette_locaties.titel_sidebar
-                      }
-                    />
-                    <span className="metric-wrapper">
-                      <NursingHomeInfectedPeopleMetric
-                        data={data.nursing_home.last_value}
-                      />
-                    </span>
-                  </a>
-                </Link>
-              </li>
-            </ul>
-
-            <h2>{siteText.nationaal_layout.headings.vroege_signalen}</h2>
-
-            <ul>
-              <li>
-                <Link href="/landelijk/verdenkingen-huisartsen">
-                  <a
-                    className={getClassName(
-                      '/landelijk/verdenkingen-huisartsen'
-                    )}
-                  >
-                    <HeadingWithIcon
-                      icon={<Arts />}
-                      title={siteText.verdenkingen_huisartsen.titel_sidebar}
-                    />
-                    <span className="metric-wrapper">
-                      <SuspectedPatientsMetric
-                        data={data.verdenkingen_huisartsen.last_value}
-                      />
-                    </span>
-                  </a>
-                </Link>
-              </li>
-
-              <li>
-                <Link href="/landelijk/rioolwater">
-                  <a className={getClassName('/landelijk/rioolwater')}>
-                    <HeadingWithIcon
-                      icon={<RioolwaterMonitoring />}
-                      title={siteText.rioolwater_metingen.titel_sidebar}
-                    />
-                    <span className="metric-wrapper">
-                      <SewerWaterMetric data={data.sewer} />
-                    </span>
-                  </a>
-                </Link>
-              </li>
-            </ul>
+                  <MetricMenuItem>
+                    <Link href="/landelijk/rioolwater">
+                      <a className={getClassName('/landelijk/rioolwater')}>
+                        <TitleWithIcon
+                          icon={<RioolwaterMonitoring />}
+                          title={siteText.rioolwater_metingen.titel_sidebar}
+                        />
+                        <span className="metric-wrapper">
+                          <SewerWaterMetric data={data.sewer} />
+                        </span>
+                      </a>
+                    </Link>
+                  </MetricMenuItem>
+                </Menu>
+              </CategoryMenuItem>
+            </Menu>
           </nav>
         </aside>
 
-        <section className="national-content">{children}</section>
+        <main
+          id="content"
+          className="national-content"
+          aria-label="nationale pagina inhoud"
+        >
+          {children}
+        </main>
 
         <Link href={menuOpenUrl}>
           <a className="back-button back-button-footer">

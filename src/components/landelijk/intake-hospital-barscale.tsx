@@ -1,3 +1,4 @@
+import { Box } from '~/components-styled/base';
 import { DifferenceIndicator } from '~/components-styled/difference-indicator';
 import { BarScale } from '~/components/barScale';
 import siteText from '~/locale/index';
@@ -17,7 +18,7 @@ export function IntakeHospitalBarScale(props: {
     data.difference.intake_hospital_ma__moving_average_hospital;
 
   return (
-    <>
+    <Box spacing={2}>
       <BarScale
         min={0}
         max={100}
@@ -50,6 +51,6 @@ export function IntakeHospitalBarScale(props: {
          */
         showValue && <DifferenceIndicator value={difference} />
       }
-    </>
+    </Box>
   );
 }

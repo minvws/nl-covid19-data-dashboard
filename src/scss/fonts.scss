@@ -36,42 +36,6 @@ body {
   line-height: 150%;
 }
 
-h1 {
-  font-size: 2.02729rem;
-  line-height: 1.23318;
-  margin-bottom: $default-margin;
-}
-
-h2 {
-  font-size: 2rem;
-  line-height: 1.4;
-  margin: 0 0 $default-margin 0;
-}
-
-h3 {
-  font-size: 1.42383rem;
-  line-height: 1.40466;
-  margin: 0 0 ($default-margin / 2) 0;
-}
-
-h4 {
-  font-size: 1em;
-  line-height: 1.2;
-  margin: ($default-margin) 0 ($default-margin / 2) 0;
-}
-
-h5 {
-  font-size: 1.26562rem;
-  line-height: 1.18519;
-  margin: 0 0 ($default-margin / 2) 0;
-  font-style: italic;
-  margin: 0 0 ($default-margin / 2) 0;
-}
-
-p {
-  margin: $default-margin 0;
-}
-
 a {
   color: #01689b;
 }

@@ -35,6 +35,7 @@ const SewerWater: FCWithLayout<NationalPageProps> = ({ data }) => {
       />
       <ContentHeader
         category={siteText.nationaal_layout.headings.vroege_signalen}
+        screenreaderCategory={siteText.rioolwater_metingen.titel_sidebar}
         title={text.titel}
         icon={<RioolwaterMonitoring />}
         subtitle={text.pagina_toelichting}
