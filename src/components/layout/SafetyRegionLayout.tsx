@@ -149,7 +149,11 @@ function SafetyRegionLayout(
                   <Category>
                     {siteText.veiligheidsregio_layout.headings.besmettingen}
                   </Category>
-                  <Menu>
+                  <Menu
+                    ariaLabel={
+                      siteText.veiligheidsregio_layout.headings.besmettingen
+                    }
+                  >
                     <MetricMenuItem>
                       <Link
                         href={`/veiligheidsregio/${code}/positief-geteste-mensen`}
@@ -185,7 +189,11 @@ function SafetyRegionLayout(
                   <Category>
                     {siteText.veiligheidsregio_layout.headings.ziekenhuizen}
                   </Category>
-                  <Menu>
+                  <Menu
+                    ariaLabel={
+                      siteText.veiligheidsregio_layout.headings.ziekenhuizen
+                    }
+                  >
                     <MetricMenuItem>
                       <Link
                         href={`/veiligheidsregio/${code}/ziekenhuis-opnames`}
@@ -223,7 +231,12 @@ function SafetyRegionLayout(
                         .kwetsbare_groepen
                     }
                   </Category>
-                  <Menu>
+                  <Menu
+                    ariaLabel={
+                      siteText.veiligheidsregio_layout.headings
+                        .kwetsbare_groepen
+                    }
+                  >
                     <MetricMenuItem>
                       <Link href={`/veiligheidsregio/${code}/verpleeghuiszorg`}>
                         <a
@@ -254,7 +267,11 @@ function SafetyRegionLayout(
                   <Category>
                     {siteText.veiligheidsregio_layout.headings.vroege_signalen}
                   </Category>
-                  <Menu>
+                  <Menu
+                    ariaLabel={
+                      siteText.veiligheidsregio_layout.headings.vroege_signalen
+                    }
+                  >
                     <MetricMenuItem>
                       <Link href={`/veiligheidsregio/${code}/rioolwater`}>
                         <a

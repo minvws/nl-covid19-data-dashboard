@@ -3,6 +3,10 @@ import { ReactNode } from 'react';
 import styled from 'styled-components';
 import theme from '~/style/theme';
 
+type WithChildren = {
+  children: ReactNode;
+};
+
 const StyledMenu = styled.ul(
   css({
     listStyle: 'none',
@@ -11,11 +15,18 @@ const StyledMenu = styled.ul(
   })
 );
 
-export const Menu = ({ children }: { children: ReactNode }) => {
-  return <StyledMenu role="menu">{children}</StyledMenu>;
+export const Menu = ({
+  children,
+  ariaLabel,
+}: WithChildren & { ariaLabel?: string }) => {
+  return (
+    <StyledMenu role="menu" aria-label={ariaLabel}>
+      {children}
+    </StyledMenu>
+  );
 };
 
-export const CategoryMenuItem = styled.li(
+const StyledCategoryMenuItem = styled.li(
   css({
     '& p': {
       mt: 4,
@@ -23,7 +34,13 @@ export const CategoryMenuItem = styled.li(
   })
 );
 
-export const MetricMenuItem = styled.li(
+export const CategoryMenuItem = ({ children }: WithChildren) => {
+  return (
+    <StyledCategoryMenuItem role="none">{children}</StyledCategoryMenuItem>
+  );
+};
+
+export const StyledMetricMenuItem = styled.li(
   css({
     borderBottom: `1px solid ${theme.colors.border}`,
     '&:first-child': {
@@ -31,3 +48,7 @@ export const MetricMenuItem = styled.li(
     },
   })
 );
+
+export const MetricMenuItem = ({ children }: WithChildren) => {
+  return <StyledMetricMenuItem role="none">{children}</StyledMetricMenuItem>;
+};
