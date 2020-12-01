@@ -11,8 +11,8 @@ interface AnchorTileProps {
   href: string;
   label: string;
   children: React.ReactNode;
-  isExternal?: boolean;
-  hasShadow?: boolean;
+  external?: boolean;
+  shadow?: boolean;
 }
 
 export function AnchorTile({
@@ -20,11 +20,11 @@ export function AnchorTile({
   href,
   label,
   children,
-  isExternal: external,
-  hasShadow: shadow,
+  external = false,
+  shadow = false,
 }: AnchorTileProps) {
   return (
-    <Container shadow={Boolean(shadow)}>
+    <Container shadow={shadow}>
       <Content>
         <Heading level={3}>{title}</Heading>
         {children}

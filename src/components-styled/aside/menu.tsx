@@ -1,6 +1,5 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import theme from '~/style/theme';
 
 export const Menu = styled.ul(
   css({
@@ -10,19 +9,15 @@ export const Menu = styled.ul(
   })
 );
 
-export const CategoryMenuItem = styled.li(
-  css({
-    '& p': {
-      mt: 4,
-    },
-  })
-);
+export const CategoryMenuItem = styled.li({});
 
 export const MetricMenuItem = styled.li(
   css({
-    borderBottom: `1px solid ${theme.colors.border}`,
+    borderBottom: '1px solid',
+    borderBottomColor: 'border',
     '&:first-child': {
-      borderTop: `1px solid ${theme.colors.border}`,
+      borderTop: '1px solid',
+      borderTopColor: 'border',
     },
   })
 );

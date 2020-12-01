@@ -1,3 +1,4 @@
+import css from '@styled-system/css';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -121,17 +122,17 @@ function Layout(
               EN
             </a>
           </div>
-          <div
-            style={{
-              fontSize: '2.02729rem',
-              lineHeight: '1.23318',
-              marginBottom: 0,
-              marginTop: '2.5rem',
+          <Box
+            css={css({
+              fontSize: 5,
+              lineHeight: 0,
+              mb: 0,
+              mt: 4,
               fontWeight: 'bold',
-            }}
+            })}
           >
             {text.header.title}
-          </div>
+          </Box>
           <p>
             {text.header.text}{' '}
             <Link href="/over">

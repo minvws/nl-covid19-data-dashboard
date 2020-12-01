@@ -50,7 +50,7 @@ const Header = (props: HeaderProps) => {
   );
 };
 
-export const CategoryHeading = styled(Heading)<{ hide: boolean }>((x) =>
+export const CategoryHeading = styled(Heading)<{ hide: boolean }>(
   css({
     fontSize: 3,
     fontWeight: 'bold',
@@ -58,13 +58,17 @@ export const CategoryHeading = styled(Heading)<{ hide: boolean }>((x) =>
     margin: 0,
     marginBottom: 1,
     marginLeft: 5,
-    position: x.hide ? 'absolute' : undefined,
-    left: x.hide ? '-10000px' : undefined,
-    top: x.hide ? 'auto' : undefined,
-    width: x.hide ? '1px' : undefined,
-    height: x.hide ? '1px' : undefined,
-    overflow: x.hide ? 'hidden' : undefined,
-  })
+  }),
+  (x) =>
+    x.hide &&
+    css({
+      position: 'absolute',
+      left: '-10000px',
+      top: 'auto',
+      width: '1px',
+      height: '1px',
+      overflow: 'hidden',
+    })
 );
 
 export const AriaInlineText = styled(InlineText)(
@@ -119,9 +123,7 @@ export function ContentHeader(props: ContentHeaderProps) {
       {category && (
         <CategoryHeading level={1} hide={hideCategory}>
           {category}
-          {Boolean(ariaCategory) && (
-            <AriaInlineText> - {ariaCategory}</AriaInlineText>
-          )}
+          {ariaCategory && <AriaInlineText> - {ariaCategory}</AriaInlineText>}
         </CategoryHeading>
       )}
       {icon ? (

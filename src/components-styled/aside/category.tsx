@@ -7,8 +7,7 @@ export const Category = styled(Text)(
     fontSize: 3,
     lineHeight: 1,
     px: 3,
+    pt: 4,
     fontWeight: 'bold',
   })
 );
-
-//    padding: 2rem 1rem .5rem;

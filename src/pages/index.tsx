@@ -75,8 +75,8 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
         title={text.notificatie.titel}
         href={text.notificatie.link.href}
         label={text.notificatie.link.text}
-        isExternal
-        hasShadow
+        external
+        shadow
       >
         <Text>
           {replaceVariablesInText(
