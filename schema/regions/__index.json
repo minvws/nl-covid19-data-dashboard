@@ -13,7 +13,8 @@
     "positive_tested_people",
     "deceased",
     "nursing_home",
-    "sewer"
+    "sewer",
+    "disability_care"
   ],
   "properties": {
     "last_generated": {

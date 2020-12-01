@@ -12,7 +12,8 @@
     "nursing_home",
     "sewer",
     "sewer_per_installation",
-    "difference"
+    "difference",
+    "disability_care"
   ],
   "additionalProperties": false,
   "properties": {
