@@ -19,7 +19,7 @@ export const AGE_GROUP_TOOLTIP_WIDTH = 340;
 
 const text = siteText.infected_age_groups;
 
-interface AgeGroupChartProps {
+interface AgeDemographicChartProps {
   parentWidth: number;
   data: NationalInfectedAgeGroups;
   openTooltip: (
@@ -45,12 +45,12 @@ export const formatAgeGroupRange = (range: string): string => {
   return range.split('-').join(' – ');
 };
 
-export function AgeGroupChart({
+export function AgeDemographicChart({
   data,
   parentWidth,
   openTooltip,
   closeTooltip,
-}: AgeGroupChartProps) {
+}: AgeDemographicChartProps) {
   const values = data.values.sort((a, b) => {
     const aStart = parseInt(a.age_group_range, 10);
     const bStart = parseInt(b.age_group_range, 10);
@@ -208,7 +208,7 @@ export function AgeGroupChart({
         const infectedPercentageWidth = infectedPercentagePoint(d);
         return (
           <Group
-            key={`bar-${i}`}
+            key={i}
             onMouseMove={(event) =>
               openTooltip(event, d, getTooltipCoordinates)
             }

@@ -27,16 +27,13 @@ import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
-import {
-  NationalInfectedAgeGroups,
-  NationalInfectedAgeGroupsValue,
-} from '~/types/data.d';
+import { NationalInfectedAgeGroups } from '~/types/data.d';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { formatDateFromSeconds } from '~/utils/formatDate';
-import { AgeGroupChartWrapper } from '~/domain/infected-people/age-group/age-group-chart-wrapper';
+import { AgeDemographic } from '~/domain/infected-people/age-demographic/age-demographic';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { formatAgeGroupRange } from '~/domain/infected-people/age-group/age-group-chart';
+import { formatAgeGroupRange } from '~/domain/infected-people/age-demographic/age-demogrraphic-chart';
 import {
   getNationalStaticProps,
   NationalPageProps,
@@ -46,12 +43,11 @@ import { colors } from '~/style/theme';
 const text = siteText.positief_geteste_personen;
 const ggdText = siteText.positief_geteste_personen_ggd;
 
-function getAgeGroupExampleData(data: NationalInfectedAgeGroups) {
+/* Retrieves certain age demographic data to be used in the example text. */
+function getAgeDemographicExampleData(data: NationalInfectedAgeGroups) {
   const ageGroupRange = '20-29';
 
-  const value = data.values.find(
-    (x: NationalInfectedAgeGroupsValue) => x.age_group_range === ageGroupRange
-  );
+  const value = data.values.find((x) => x.age_group_range === ageGroupRange);
 
   if (!value) {
     return {};
@@ -74,7 +70,9 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
   const dataGgdLastValue = data.ggd.last_value;
   const dataGgdValues = data.ggd.values;
 
-  const ageGroupExampleData = getAgeGroupExampleData(data.infected_age_groups);
+  const ageDemographicExampleData = getAgeDemographicExampleData(
+    data.infected_age_groups
+  );
 
   return (
     <>
@@ -213,13 +211,13 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
           source: text.bronnen.rivm,
         }}
       >
-        <Text mt="0">
+        <Text mt={0}>
           {replaceVariablesInText(
             siteText.infected_age_groups.example,
-            ageGroupExampleData
+            ageDemographicExampleData
           )}
         </Text>
-        <AgeGroupChartWrapper data={data.infected_age_groups} />
+        <AgeDemographic data={data.infected_age_groups} />
       </ChartTile>
 
       <ContentHeader

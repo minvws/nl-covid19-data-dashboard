@@ -7,10 +7,10 @@ import {
   NationalInfectedAgeGroups,
   NationalInfectedAgeGroupsValue,
 } from '~/types/data';
-import { AgeGroupChart } from './age-group-chart';
-import { AgeGroupTooltip } from './age-group-tooltip';
+import { AgeDemographicChart } from './age-demogrraphic-chart';
+import { AgeDemographicTooltip } from './age-demographic-tooltip';
 
-interface AgeGroupChartWrapperProps {
+interface AgeDemographicProps {
   data: NationalInfectedAgeGroups;
 }
 
@@ -26,7 +26,7 @@ const Wrapper = styled.div(
   })
 );
 
-export function AgeGroupChartWrapper({ data }: AgeGroupChartWrapperProps) {
+export function AgeDemographic({ data }: AgeDemographicProps) {
   const [tooltip, setTooltip] = useState<TooltipOptions>();
 
   // @TODO move this tooltip logic elsewhere
@@ -65,11 +65,11 @@ export function AgeGroupChartWrapper({ data }: AgeGroupChartWrapperProps) {
   }, [debounceSetTooltip]);
 
   return (
-    <Box mx="-2rem">
+    <Box mx={-4}>
       <Wrapper>
         <ParentSize>
           {(parent) => (
-            <AgeGroupChart
+            <AgeDemographicChart
               parentWidth={parent.width}
               data={data}
               openTooltip={openTooltip}
@@ -78,7 +78,7 @@ export function AgeGroupChartWrapper({ data }: AgeGroupChartWrapperProps) {
           )}
         </ParentSize>
         {tooltip && (
-          <AgeGroupTooltip
+          <AgeDemographicTooltip
             left={tooltip.left}
             top={tooltip.top}
             value={tooltip.value}
