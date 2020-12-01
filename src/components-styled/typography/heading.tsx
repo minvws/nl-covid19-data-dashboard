@@ -1,22 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
 import {
-  compose,
-  typography,
-  margin,
-  padding,
   color,
   ColorProps,
-  TypographyProps,
+  compose,
+  margin,
   MarginProps,
+  padding,
   PaddingProps,
+  typography,
+  TypographyProps,
 } from 'styled-system';
 
-interface HeadingProps extends StyledHeadingProps {
+export interface HeadingProps extends StyledHeadingProps {
   children: React.ReactNode;
   as?: keyof JSX.IntrinsicElements | React.ComponentType<any>;
-  level: 1 | 2 | 3 | 4 | 5;
+  level: HeadingLevel;
 }
+
+export type HeadingLevel = 1 | 2 | 3 | 4 | 5;
 
 /**
  * A generic heading component. The level determines the styling for the
@@ -55,6 +57,7 @@ Heading1.defaultProps = {
   fontSize: 5,
   lineHeight: 2,
   color: 'body',
+  mt: 0,
   mb: 4,
 };
 
@@ -64,7 +67,8 @@ Heading2.defaultProps = {
   fontFamily: 'body',
   fontSize: 4,
   lineHeight: 2,
-  mb: 4,
+  mt: 0,
+  mb: 3,
 };
 
 const Heading3 = styled.h3<StyledHeadingProps>(composedStyles);
@@ -73,6 +77,7 @@ Heading3.defaultProps = {
   fontFamily: 'body',
   fontSize: 3,
   lineHeight: 2,
+  mt: 0,
   mb: 3,
 };
 
@@ -82,6 +87,7 @@ Heading4.defaultProps = {
   fontFamily: 'body',
   fontSize: 2,
   lineHeight: 2,
+  mt: 0,
   mb: 3,
 };
 
@@ -91,5 +97,6 @@ Heading5.defaultProps = {
   fontFamily: 'body',
   fontSize: 1,
   lineHeight: 2,
+  mt: 0,
   mb: 3,
 };

@@ -1,9 +1,9 @@
+import { isDefined } from 'ts-is-present';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import { DifferenceDecimal, DifferenceInteger } from '~/types/data';
 import { Box } from './base';
 import { DifferenceIndicator } from './difference-indicator';
 import { Heading, InlineText } from './typography';
-import { isDefined } from 'ts-is-present';
 
 type IProps = {
   title: string;
@@ -32,6 +32,7 @@ export function MetricKPI(props: IProps) {
         fontWeight="normal"
         marginBottom={3}
         marginTop="0"
+        as="div"
       >
         {title}
       </Heading>

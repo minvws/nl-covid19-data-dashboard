@@ -42,6 +42,9 @@ const NursingHomeCare: FCWithLayout<NationalPageProps> = (props) => {
 
       <ContentHeader
         category={siteText.nationaal_layout.headings.kwetsbare_groepen}
+        screenreaderCategory={
+          siteText.verpleeghuis_besmette_locaties.titel_sidebar
+        }
         title={positiveTestedPeopleText.titel}
         icon={<Verpleeghuiszorg />}
         subtitle={positiveTestedPeopleText.pagina_toelichting}
@@ -81,6 +84,7 @@ const NursingHomeCare: FCWithLayout<NationalPageProps> = (props) => {
       />
 
       <ContentHeader
+        id="besmette-locaties"
         skipLinkAnchor={true}
         title={infectedLocationsText.titel}
         icon={<Locatie />}
@@ -159,6 +163,7 @@ const NursingHomeCare: FCWithLayout<NationalPageProps> = (props) => {
       />
 
       <ContentHeader
+        id="sterfte"
         skipLinkAnchor={true}
         title={locationDeaths.titel}
         icon={<CoronaVirus />}

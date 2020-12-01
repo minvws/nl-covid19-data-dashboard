@@ -82,6 +82,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
       />
       <ContentHeader
         category={siteText.nationaal_layout.headings.besmettingen}
+        screenreaderCategory={siteText.positief_geteste_personen.titel_sidebar}
         title={text.titel}
         icon={<Getest />}
         subtitle={text.pagina_toelichting}
@@ -223,6 +224,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
       <ContentHeader
         title={ggdText.titel}
         skipLinkAnchor={true}
+        id="ggd"
         icon={<Afname />}
         subtitle={ggdText.toelichting}
         metadata={{
