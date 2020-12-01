@@ -152,7 +152,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
               key={router.asPath}
               role="navigation"
               id="metric-navigation"
-              aria-label="metrieken per categorie keuze"
+              aria-label={siteText.aria_labels.metriek_navigatie}
             >
               <Box>
                 <Category marginBottom={0}>{municipalityName}</Category>
@@ -162,7 +162,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                     <Link
                       href={`/veiligheidsregio/${safetyRegion.code}/positief-geteste-mensen`}
                     >
-                      <a>{safetyRegion.name}</a>
+                      <a role="menuitem">{safetyRegion.name}</a>
                     </Link>
                   </Text>
                 )}
@@ -180,6 +180,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                             href={`/gemeente/${code}/positief-geteste-mensen`}
                           >
                             <a
+                              role="menuitem"
                               className={getClassName(
                                 `/gemeente/[code]/positief-geteste-mensen`
                               )}
@@ -207,6 +208,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                         <MetricMenuItem>
                           <Link href={`/gemeente/${code}/ziekenhuis-opnames`}>
                             <a
+                              role="menuitem"
                               className={getClassName(
                                 `/gemeente/[code]/ziekenhuis-opnames`
                               )}
@@ -240,6 +242,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                       {sewerWaterBarScaleData ? (
                         <Link href={`/gemeente/${code}/rioolwater`}>
                           <a
+                            role="menuitem"
                             className={getClassName(
                               `/gemeente/[code]/rioolwater`
                             )}

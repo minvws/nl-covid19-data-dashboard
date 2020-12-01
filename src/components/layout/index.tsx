@@ -147,7 +147,7 @@ function Layout(
           id="main-navigation"
           className={styles.nav}
           role="navigation"
-          aria-label="landelijk regio gemeente keuze"
+          aria-label={text.aria_labels.pagina_keuze}
         >
           <MaxWidth>
             <ul className={styles.navList}>
@@ -223,7 +223,7 @@ function Layout(
                   {text.nav.title}
                 </Box>
                 <nav
-                  aria-label="pagina keuze"
+                  aria-label={text.aria_labels.footer_keuze}
                   role="navigation"
                   id="footer-navigation"
                 >

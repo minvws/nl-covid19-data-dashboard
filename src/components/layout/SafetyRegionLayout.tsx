@@ -140,7 +140,7 @@ function SafetyRegionLayout(
               /** re-mount when route changes in order to blur anchors */
               key={router.asPath}
               id="metric-navigation"
-              aria-label="metrieken per categorie keuze"
+              aria-label={siteText.aria_labels.metriek_navigatie}
               role="navigation"
             >
               <Category>{safetyRegionName}</Category>
@@ -155,6 +155,7 @@ function SafetyRegionLayout(
                         href={`/veiligheidsregio/${code}/positief-geteste-mensen`}
                       >
                         <a
+                          role="menuitem"
                           className={getClassName(
                             `/veiligheidsregio/[code]/positief-geteste-mensen`
                           )}
@@ -190,6 +191,7 @@ function SafetyRegionLayout(
                         href={`/veiligheidsregio/${code}/ziekenhuis-opnames`}
                       >
                         <a
+                          role="menuitem"
                           className={getClassName(
                             `/veiligheidsregio/[code]/ziekenhuis-opnames`
                           )}
@@ -225,6 +227,7 @@ function SafetyRegionLayout(
                     <MetricMenuItem>
                       <Link href={`/veiligheidsregio/${code}/verpleeghuiszorg`}>
                         <a
+                          role="menuitem"
                           className={getClassName(
                             '/veiligheidsregio/[code]/verpleeghuiszorg'
                           )}
@@ -255,6 +258,7 @@ function SafetyRegionLayout(
                     <MetricMenuItem>
                       <Link href={`/veiligheidsregio/${code}/rioolwater`}>
                         <a
+                          role="menuitem"
                           className={getClassName(
                             `/veiligheidsregio/[code]/rioolwater`
                           )}

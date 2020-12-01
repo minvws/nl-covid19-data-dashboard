@@ -1,4 +1,9 @@
 {
+  "aria_labels": {
+    "pagina_keuze": "landelijk regio gemeente menu",
+    "footer_keuze": "Pagina menu",
+    "metriek_navigatie": "Metrieken per categorie menu"
+  },
   "andere_gegevens": "Andere gegevens",
   "blok_andere_gegevens": {
     "title": "Andere gegevens",
