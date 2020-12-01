@@ -144,7 +144,6 @@ function NationalLayout(props: NationalLayoutProps) {
                       }}
                     >
                       <a
-                        role="menuitem"
                         className={`last-developments-link ${getClassName(
                           '/'
                         )}`}
@@ -173,7 +172,6 @@ function NationalLayout(props: NationalLayoutProps) {
                   <MetricMenuItem>
                     <Link href="/landelijk/positief-geteste-mensen">
                       <a
-                        role="menuitem"
                         className={getClassName(
                           '/landelijk/positief-geteste-mensen'
                         )}
@@ -198,7 +196,6 @@ function NationalLayout(props: NationalLayoutProps) {
                   <MetricMenuItem>
                     <Link href="/landelijk/besmettelijke-mensen">
                       <a
-                        role="menuitem"
                         className={getClassName(
                           '/landelijk/besmettelijke-mensen'
                         )}
@@ -221,7 +218,6 @@ function NationalLayout(props: NationalLayoutProps) {
                   <MetricMenuItem>
                     <Link href="/landelijk/reproductiegetal">
                       <a
-                        role="menuitem"
                         className={getClassName('/landelijk/reproductiegetal')}
                       >
                         <TitleWithIcon
@@ -256,7 +252,6 @@ function NationalLayout(props: NationalLayoutProps) {
                   <MetricMenuItem>
                     <Link href="/landelijk/ziekenhuis-opnames">
                       <a
-                        role="menuitem"
                         className={getClassName(
                           '/landelijk/ziekenhuis-opnames'
                         )}
@@ -282,7 +277,6 @@ function NationalLayout(props: NationalLayoutProps) {
                   <MetricMenuItem>
                     <Link href="/landelijk/intensive-care-opnames">
                       <a
-                        role="menuitem"
                         className={getClassName(
                           '/landelijk/intensive-care-opnames'
                         )}
@@ -316,7 +310,6 @@ function NationalLayout(props: NationalLayoutProps) {
                   <MetricMenuItem>
                     <Link href="/landelijk/verpleeghuiszorg">
                       <a
-                        role="menuitem"
                         className={getClassName('/landelijk/verpleeghuiszorg')}
                       >
                         <TitleWithIcon
@@ -346,7 +339,6 @@ function NationalLayout(props: NationalLayoutProps) {
                   <MetricMenuItem>
                     <Link href="/landelijk/verdenkingen-huisartsen">
                       <a
-                        role="menuitem"
                         className={getClassName(
                           '/landelijk/verdenkingen-huisartsen'
                         )}
@@ -366,10 +358,7 @@ function NationalLayout(props: NationalLayoutProps) {
 
                   <MetricMenuItem>
                     <Link href="/landelijk/rioolwater">
-                      <a
-                        role="menuitem"
-                        className={getClassName('/landelijk/rioolwater')}
-                      >
+                      <a className={getClassName('/landelijk/rioolwater')}>
                         <TitleWithIcon
                           icon={<RioolwaterMonitoring />}
                           title={siteText.rioolwater_metingen.titel_sidebar}

@@ -162,7 +162,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                     <Link
                       href={`/veiligheidsregio/${safetyRegion.code}/positief-geteste-mensen`}
                     >
-                      <a role="menuitem">{safetyRegion.name}</a>
+                      <a>{safetyRegion.name}</a>
                     </Link>
                   </Text>
                 )}
@@ -184,7 +184,6 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                             href={`/gemeente/${code}/positief-geteste-mensen`}
                           >
                             <a
-                              role="menuitem"
                               className={getClassName(
                                 `/gemeente/[code]/positief-geteste-mensen`
                               )}
@@ -216,7 +215,6 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                         <MetricMenuItem>
                           <Link href={`/gemeente/${code}/ziekenhuis-opnames`}>
                             <a
-                              role="menuitem"
                               className={getClassName(
                                 `/gemeente/[code]/ziekenhuis-opnames`
                               )}
@@ -254,7 +252,6 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                       {sewerWaterBarScaleData ? (
                         <Link href={`/gemeente/${code}/rioolwater`}>
                           <a
-                            role="menuitem"
                             className={getClassName(
                               `/gemeente/[code]/rioolwater`
                             )}

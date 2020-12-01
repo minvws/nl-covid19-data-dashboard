@@ -159,7 +159,6 @@ function SafetyRegionLayout(
                         href={`/veiligheidsregio/${code}/positief-geteste-mensen`}
                       >
                         <a
-                          role="menuitem"
                           className={getClassName(
                             `/veiligheidsregio/[code]/positief-geteste-mensen`
                           )}
@@ -199,7 +198,6 @@ function SafetyRegionLayout(
                         href={`/veiligheidsregio/${code}/ziekenhuis-opnames`}
                       >
                         <a
-                          role="menuitem"
                           className={getClassName(
                             `/veiligheidsregio/[code]/ziekenhuis-opnames`
                           )}
@@ -240,7 +238,6 @@ function SafetyRegionLayout(
                     <MetricMenuItem>
                       <Link href={`/veiligheidsregio/${code}/verpleeghuiszorg`}>
                         <a
-                          role="menuitem"
                           className={getClassName(
                             '/veiligheidsregio/[code]/verpleeghuiszorg'
                           )}
@@ -275,7 +272,6 @@ function SafetyRegionLayout(
                     <MetricMenuItem>
                       <Link href={`/veiligheidsregio/${code}/rioolwater`}>
                         <a
-                          role="menuitem"
                           className={getClassName(
                             `/veiligheidsregio/[code]/rioolwater`
                           )}

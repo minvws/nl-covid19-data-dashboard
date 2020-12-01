@@ -82,18 +82,10 @@ function Layout(
         className={styles.skiplinks}
         aria-label={text.aria_labels.skip_links}
       >
-        <a href="#content" role="menuitem">
-          {text.skiplinks.inhoud}
-        </a>
-        <a href="#main-navigation" role="menuitem">
-          {text.skiplinks.nav}
-        </a>
-        <a href="#metric-navigation" role="menuitem">
-          {text.skiplinks.metric_nav}
-        </a>
-        <a href="#footer-navigation" role="menuitem">
-          {text.skiplinks.footer_nav}
-        </a>
+        <a href="#content">{text.skiplinks.inhoud}</a>
+        <a href="#main-navigation">{text.skiplinks.nav}</a>
+        <a href="#metric-navigation">{text.skiplinks.metric_nav}</a>
+        <a href="#footer-navigation">{text.skiplinks.footer_nav}</a>
       </nav>
 
       <header className={styles.header}>
@@ -123,7 +115,7 @@ function Layout(
             >
               NL
             </a>
-            |
+            <span aria-hidden="true">|</span>
             <a
               href={`https://coronadashboard.government.nl${router.asPath}`}
               lang="en-GB"
@@ -239,63 +231,62 @@ function Layout(
                   role="navigation"
                   id="footer-navigation"
                 >
-                  <ul className={styles.footerList} role="menu">
-                    <li role="none">
+                  <ul className={styles.footerList}>
+                    <li>
                       <Link href="/">
-                        <a className={styles.footerLink} role="menuitem">
+                        <a className={styles.footerLink}>
                           {text.nav.links.index}
                         </a>
                       </Link>
                     </li>
-                    <li role="none">
+                    <li>
                       <Link href="/veiligheidsregio">
-                        <a className={styles.footerLink} role="menuitem">
+                        <a className={styles.footerLink}>
                           {text.nav.links.veiligheidsregio}
                         </a>
                       </Link>
                     </li>
-                    <li role="none">
+                    <li>
                       <Link href="/gemeente">
-                        <a className={styles.footerLink} role="menuitem">
+                        <a className={styles.footerLink}>
                           {text.nav.links.gemeente}
                         </a>
                       </Link>
                     </li>
-                    <li role="none">
+                    <li>
                       <Link href="/over">
-                        <a className={styles.footerLink} role="menuitem">
+                        <a className={styles.footerLink}>
                           {text.nav.links.over}
                         </a>
                       </Link>
                     </li>
-                    <li role="none">
+                    <li>
                       <Link href="/veelgestelde-vragen">
-                        <a className={styles.footerLink} role="menuitem">
+                        <a className={styles.footerLink}>
                           {text.nav.links.veelgestelde_vragen}
                         </a>
                       </Link>
                     </li>
-                    <li role="none">
+                    <li>
                       <Link href="/over-risiconiveaus">
-                        <a className={styles.footerLink} role="menuitem">
+                        <a className={styles.footerLink}>
                           {text.nav.links.over_risiconiveaus}
                         </a>
                       </Link>
                     </li>
-                    <li role="none">
+                    <li>
                       <Link href="/verantwoording">
-                        <a className={styles.footerLink} role="menuitem">
+                        <a className={styles.footerLink}>
                           {text.nav.links.verantwoording}
                         </a>
                       </Link>
                     </li>
-                    <li role="none">
+                    <li>
                       <a
                         href={text.nav.links.meer_href}
                         target="_blank"
                         rel="noopener noreferrer"
                         className={styles.footerLink}
-                        role="menuitem"
                       >
                         {text.nav.links.meer}
                       </a>
