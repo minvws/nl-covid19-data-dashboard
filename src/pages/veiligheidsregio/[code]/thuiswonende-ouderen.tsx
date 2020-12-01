@@ -1,0 +1,132 @@
+import ElderlyIcon from '~/assets/elderly.svg';
+import { ContentHeader } from '~/components-styled/content-header';
+import { KpiTile } from '~/components-styled/kpi-tile';
+import { KpiValue } from '~/components-styled/kpi-value';
+import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { TwoKpiSection } from '~/components-styled/two-kpi-section';
+import { Text } from '~/components-styled/typography';
+import { FCWithLayout } from '~/components/layout';
+import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
+import { SEOHead } from '~/components/seoHead';
+import siteText from '~/locale/index';
+import {
+  getSafetyRegionData,
+  getSafetyRegionPaths,
+  ISafetyRegionData,
+} from '~/static-props/safetyregion-data';
+
+const text = siteText.thuiswonende_ouderen;
+
+const ElderlyAtHomeRegionalPage: FCWithLayout<ISafetyRegionData> = (props) => {
+  const elderlyAtHomeData = props.data.elderly_at_home;
+
+  return (
+    <>
+      <SEOHead
+        title={text.metadata.title}
+        description={text.metadata.description}
+      />
+
+      <ContentHeader
+        category={siteText.nationaal_layout.headings.kwetsbare_groepen}
+        title={text.section_positive_tested.title}
+        icon={<ElderlyIcon />}
+        subtitle={text.section_positive_tested.description}
+        metadata={{
+          datumsText: text.section_positive_tested.datums,
+          dateInfo: elderlyAtHomeData.last_value.date_of_report_unix,
+          dateOfInsertionUnix:
+            elderlyAtHomeData.last_value.date_of_insertion_unix,
+          dataSources: [text.section_positive_tested.bronnen.rivm],
+        }}
+        reference={text.section_positive_tested.reference}
+      />
+
+      <TwoKpiSection>
+        <KpiTile
+          title={text.section_positive_tested.kpi_daily_title}
+          metadata={{
+            date: elderlyAtHomeData.last_value.date_of_report_unix,
+            source: text.section_positive_tested.bronnen.rivm,
+          }}
+        >
+          <KpiValue
+            absolute={elderlyAtHomeData.last_value.positive_tested_daily}
+          />
+          <Text>{text.section_positive_tested.kpi_daily_description}</Text>
+        </KpiTile>
+        <KpiTile
+          title={text.section_positive_tested.kpi_daily_permillage_title}
+          metadata={{
+            date: elderlyAtHomeData.last_value.date_of_report_unix,
+            source: text.section_positive_tested.bronnen.rivm,
+          }}
+        >
+          <KpiValue
+            absolute={
+              elderlyAtHomeData.last_value.positive_tested_daily_permillage
+            }
+          />
+          <Text>
+            {text.section_positive_tested.kpi_daily_permillage_description}
+          </Text>
+        </KpiTile>
+      </TwoKpiSection>
+
+      <LineChartTile
+        timeframeOptions={['all', '5weeks']}
+        title={text.section_positive_tested.line_chart_daily_title}
+        values={elderlyAtHomeData.values.map((value) => ({
+          value: value.positive_tested_daily,
+          date: value.date_of_report_unix,
+        }))}
+        metadata={{ source: text.section_positive_tested.bronnen.rivm }}
+      />
+
+      <ContentHeader
+        category={siteText.nationaal_layout.headings.kwetsbare_groepen}
+        title={text.section_deceased.title}
+        icon={<ElderlyIcon />}
+        subtitle={text.section_deceased.description}
+        metadata={{
+          datumsText: text.section_deceased.datums,
+          dateInfo: elderlyAtHomeData.last_value.date_of_report_unix,
+          dateOfInsertionUnix:
+            elderlyAtHomeData.last_value.date_of_insertion_unix,
+          dataSources: [text.section_deceased.bronnen.rivm],
+        }}
+        reference={text.section_deceased.reference}
+      />
+
+      <TwoKpiSection>
+        <KpiTile
+          title={text.section_deceased.kpi_daily_title}
+          description={text.section_deceased.kpi_daily_description}
+          metadata={{
+            date: elderlyAtHomeData.last_value.date_of_report_unix,
+            source: text.section_deceased.bronnen.rivm,
+          }}
+        >
+          <KpiValue absolute={elderlyAtHomeData.last_value.deceased_daily} />
+        </KpiTile>
+      </TwoKpiSection>
+
+      <LineChartTile
+        timeframeOptions={['all', '5weeks']}
+        title={text.section_deceased.line_chart_daily_title}
+        values={elderlyAtHomeData.values.map((value) => ({
+          value: value.deceased_daily,
+          date: value.date_of_report_unix,
+        }))}
+        metadata={{ source: text.section_positive_tested.bronnen.rivm }}
+      />
+    </>
+  );
+};
+
+ElderlyAtHomeRegionalPage.getLayout = getSafetyRegionLayout();
+
+export const getStaticProps = getSafetyRegionData();
+export const getStaticPaths = getSafetyRegionPaths();
+
+export default ElderlyAtHomeRegionalPage;
