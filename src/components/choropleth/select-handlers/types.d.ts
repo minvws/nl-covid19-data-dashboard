@@ -3,4 +3,7 @@ export type PageName =
   | 'ziekenhuis-opnames'
   | 'rioolwater';
 
-export type RegioPageName = PageName | 'verpleeghuiszorg';
+export type RegioPageName =
+  | PageName
+  | 'verpleeghuiszorg'
+  | 'thuiswonende-ouderen';

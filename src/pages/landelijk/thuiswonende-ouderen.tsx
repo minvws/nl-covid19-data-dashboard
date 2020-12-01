@@ -1,10 +1,16 @@
+import { useRouter } from 'next/router';
 import ElderlyIcon from '~/assets/elderly.svg';
+import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
+import { regionThresholds } from '~/components/choropleth/region-thresholds';
+import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
+import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
+import { createRegionElderlyAtHomeTooltip } from '~/components/choropleth/tooltips/region/create-region-elderly-at-home-tooltip';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
@@ -17,6 +23,7 @@ import {
 const text = siteText.thuiswonende_ouderen;
 
 const ElderlyAtHomeNationalPage: FCWithLayout<NationalPageProps> = (props) => {
+  const router = useRouter();
   const elderlyAtHomeData = props.data.elderly_at_home;
 
   return (
@@ -81,6 +88,23 @@ const ElderlyAtHomeNationalPage: FCWithLayout<NationalPageProps> = (props) => {
         }))}
         metadata={{ source: text.section_positive_tested.bronnen.rivm }}
       />
+
+      <ChoroplethTile
+        title={text.section_positive_tested.choropleth_daily_title}
+        description={text.section_positive_tested.choropleth_daily_description}
+        metadata={{ source: text.section_positive_tested.bronnen.rivm }}
+        legend={{
+          thresholds: regionThresholds.elderly_at_home,
+          title: text.section_positive_tested.choropleth_daily_legenda,
+        }}
+      >
+        <SafetyRegionChoropleth
+          metricName="elderly_at_home"
+          metricValueName="positive_tested_daily"
+          tooltipContent={createRegionElderlyAtHomeTooltip(router)}
+          onSelect={createSelectRegionHandler(router, 'thuiswonende-ouderen')}
+        />
+      </ChoroplethTile>
 
       <ContentHeader
         category={siteText.nationaal_layout.headings.kwetsbare_groepen}

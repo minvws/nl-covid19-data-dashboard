@@ -154,7 +154,7 @@ const behaviorThresholds: ChoroplethThresholdsValue[] = [
 
 const elderlyAtHomeThresholds: ChoroplethThresholdsValue[] = [
   {
-    color: '#fffff',
+    color: '#ffffff',
     threshold: 0,
   },
   {
