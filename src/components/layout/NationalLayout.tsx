@@ -131,7 +131,7 @@ function NationalLayout(props: NationalLayoutProps) {
                 <Category>
                   {siteText.nationaal_layout.headings.algemeen}
                 </Category>
-                <Menu ariaLabel={siteText.nationaal_layout.headings.algemeen}>
+                <Menu>
                   <MetricMenuItem>
                     <Link
                       href={{
@@ -166,9 +166,7 @@ function NationalLayout(props: NationalLayoutProps) {
                 <Category>
                   {siteText.nationaal_layout.headings.besmettingen}
                 </Category>
-                <Menu
-                  ariaLabel={siteText.nationaal_layout.headings.besmettingen}
-                >
+                <Menu>
                   <MetricMenuItem>
                     <Link href="/landelijk/positief-geteste-mensen">
                       <a
@@ -246,9 +244,7 @@ function NationalLayout(props: NationalLayoutProps) {
                 <Category>
                   {siteText.nationaal_layout.headings.ziekenhuizen}
                 </Category>
-                <Menu
-                  ariaLabel={siteText.nationaal_layout.headings.ziekenhuizen}
-                >
+                <Menu>
                   <MetricMenuItem>
                     <Link href="/landelijk/ziekenhuis-opnames">
                       <a
@@ -302,11 +298,7 @@ function NationalLayout(props: NationalLayoutProps) {
                 <Category>
                   {siteText.nationaal_layout.headings.kwetsbare_groepen}
                 </Category>
-                <Menu
-                  ariaLabel={
-                    siteText.nationaal_layout.headings.kwetsbare_groepen
-                  }
-                >
+                <Menu>
                   <MetricMenuItem>
                     <Link href="/landelijk/verpleeghuiszorg">
                       <a
@@ -333,9 +325,7 @@ function NationalLayout(props: NationalLayoutProps) {
                 <Category>
                   {siteText.nationaal_layout.headings.vroege_signalen}
                 </Category>
-                <Menu
-                  ariaLabel={siteText.nationaal_layout.headings.vroege_signalen}
-                >
+                <Menu>
                   <MetricMenuItem>
                     <Link href="/landelijk/verdenkingen-huisartsen">
                       <a

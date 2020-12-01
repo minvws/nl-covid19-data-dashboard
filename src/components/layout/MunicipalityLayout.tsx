@@ -174,11 +174,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                       <Category>
                         {siteText.gemeente_layout.headings.besmettingen}
                       </Category>
-                      <Menu
-                        ariaLabel={
-                          siteText.gemeente_layout.headings.besmettingen
-                        }
-                      >
+                      <Menu>
                         <MetricMenuItem>
                           <Link
                             href={`/gemeente/${code}/positief-geteste-mensen`}
@@ -207,11 +203,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                       <Category>
                         {siteText.gemeente_layout.headings.ziekenhuizen}
                       </Category>
-                      <Menu
-                        ariaLabel={
-                          siteText.gemeente_layout.headings.ziekenhuizen
-                        }
-                      >
+                      <Menu>
                         <MetricMenuItem>
                           <Link href={`/gemeente/${code}/ziekenhuis-opnames`}>
                             <a
@@ -243,11 +235,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                   <Category>
                     {siteText.gemeente_layout.headings.vroege_signalen}
                   </Category>
-                  <Menu
-                    ariaLabel={
-                      siteText.gemeente_layout.headings.vroege_signalen
-                    }
-                  >
+                  <Menu>
                     <MetricMenuItem>
                       {sewerWaterBarScaleData ? (
                         <Link href={`/gemeente/${code}/rioolwater`}>
