@@ -34,8 +34,8 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
   );
   const router = useRouter();
 
-  const dataHospital = data.hospital;
-  const lastValue = dataHospital.last_value;
+  const dataHospitalIntake = data.intake_hospital_ma;
+  const dataHospitalBeds = data.hospital_beds_occupied;
 
   return (
     <>
@@ -50,8 +50,9 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateInfo: lastValue.date_of_report_unix,
-          dateOfInsertionUnix: lastValue.date_of_insertion_unix,
+          dateInfo: dataHospitalIntake.last_value.date_of_report_unix,
+          dateOfInsertionUnix:
+            dataHospitalIntake.last_value.date_of_insertion_unix,
           dataSources: [text.bronnen.nice, text.bronnen.lnaz],
         }}
         reference={text.reference}
@@ -63,7 +64,7 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
           title={text.barscale_titel}
           description={text.extra_uitleg}
           metadata={{
-            date: lastValue.date_of_report_unix,
+            date: dataHospitalIntake.last_value.date_of_report_unix,
             source: text.bronnen.nice,
           }}
         >
@@ -78,13 +79,13 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
           title={text.kpi_bedbezetting.title}
           description={text.kpi_bedbezetting.description}
           metadata={{
-            date: lastValue.date_of_report_unix,
+            date: dataHospitalBeds.last_value.date_of_report_unix,
             source: text.bronnen.lnaz,
           }}
         >
           <KpiValue
             data-cy="covid_occupied"
-            absolute={lastValue.beds_occupied_covid}
+            absolute={dataHospitalBeds.last_value.covid_occupied}
           />
         </KpiTile>
       </TwoKpiSection>
@@ -92,7 +93,7 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
       <LineChartTile
         title={text.linechart_titel}
         description={text.linechart_description}
-        values={dataHospital.values.map((value: any) => ({
+        values={dataHospitalIntake.values.map((value: any) => ({
           value: value.moving_average_hospital,
           date: value.date_of_report_unix,
         }))}
@@ -105,8 +106,8 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
       <LineChartTile
         title={text.chart_bedbezetting.title}
         description={text.chart_bedbezetting.description}
-        values={dataHospital.values.map((value) => ({
-          value: value.beds_occupied_covid,
+        values={dataHospitalBeds.values.map((value) => ({
+          value: value.covid_occupied,
           date: value.date_of_report_unix,
         }))}
         metadata={{
@@ -119,19 +120,18 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
         description={text.map_toelichting}
         onChangeControls={setSelectedMap}
         legend={{
-          thresholds: regionThresholds.hospital.admissions_moving_average,
+          thresholds: regionThresholds.hospital_admissions,
           title: text.chloropleth_legenda.titel,
         }}
         metadata={{
-          date: lastValue.date_of_report_unix,
+          date: dataHospitalIntake.last_value.date_of_report_unix,
           source: text.bronnen.nice,
         }}
         showDataWarning
       >
         {selectedMap === 'municipal' && (
           <MunicipalityChoropleth
-            metricName="hospital"
-            metricProperty="admissions_moving_average"
+            metricName="hospital_admissions"
             tooltipContent={createMunicipalHospitalAdmissionsTooltip(router)}
             onSelect={createSelectMunicipalHandler(
               router,
@@ -141,8 +141,7 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
         )}
         {selectedMap === 'region' && (
           <SafetyRegionChoropleth
-            metricName="hospital"
-            metricProperty="admissions_moving_average"
+            metricName="hospital_admissions"
             tooltipContent={createRegionHospitalAdmissionsTooltip(router)}
             onSelect={createSelectRegionHandler(router, 'ziekenhuis-opnames')}
           />

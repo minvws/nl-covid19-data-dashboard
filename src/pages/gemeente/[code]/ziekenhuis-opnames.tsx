@@ -28,7 +28,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
   const { data, municipalityName } = props;
   const router = useRouter();
 
-  const lastValue = data.hospital.last_value;
+  const lastValue = data.hospital_admissions.last_value;
 
   return (
     <>
@@ -69,8 +69,10 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
         >
           <KpiValue
             data-cy="moving_average_hospital"
-            absolute={lastValue.admissions_moving_average}
-            difference={data.difference.hospital__admissions_moving_average}
+            absolute={lastValue.moving_average_hospital}
+            difference={
+              data.difference.hospital_admissions__moving_average_hospital
+            }
           />
         </KpiTile>
       </TwoKpiSection>
@@ -85,8 +87,8 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
           {(timeframe) => (
             <LineChart
               timeframe={timeframe}
-              values={data.hospital.values.map((value) => ({
-                value: value.admissions_moving_average,
+              values={data.hospital_admissions.values.map((value) => ({
+                value: value.moving_average_hospital,
                 date: value.date_of_report_unix,
               }))}
             />
@@ -106,13 +108,12 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
         description={text.map_toelichting}
         legend={{
           title: siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel,
-          thresholds: municipalThresholds.hospital.admissions_moving_average,
+          thresholds: municipalThresholds.hospital_admissions,
         }}
       >
         <MunicipalityChoropleth
           selected={data.code}
-          metricName="hospital"
-          metricProperty="admissions_moving_average"
+          metricName="hospital_admissions"
           tooltipContent={createMunicipalHospitalAdmissionsTooltip(router)}
           onSelect={createSelectMunicipalHandler(router, 'ziekenhuis-opnames')}
         />

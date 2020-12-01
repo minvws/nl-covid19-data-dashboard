@@ -154,9 +154,7 @@ const behaviorThresholds: ChoroplethThresholdsValue[] = [
 
 export const regionThresholds = {
   positive_tested_people: positiveTestedThresholds,
-  hospital: {
-    admissions_moving_average: hospitalAdmissionsThresholds,
-  },
+  hospital_admissions: hospitalAdmissionsThresholds,
   escalation_levels: escalationThresholds,
   nursing_home: {
     infected_locations_percentage: nursingHomeInfectedLocationsPercentageThresholds,

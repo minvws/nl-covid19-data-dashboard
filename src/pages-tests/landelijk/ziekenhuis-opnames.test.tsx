@@ -21,7 +21,7 @@ describe('National page: IntakeHospital', () => {
     testKpiValue(
       container,
       'covid_occupied',
-      formatNumber(data.hospital.last_value.beds_occupied_covid)
+      formatNumber(data.hospital_beds_occupied.last_value.covid_occupied)
     );
   });
 });

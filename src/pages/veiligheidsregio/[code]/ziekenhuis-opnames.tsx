@@ -28,7 +28,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
   const { data, safetyRegionName } = props;
   const router = useRouter();
 
-  const lastValue = data.hospital.last_value;
+  const lastValue = data.results_per_region.last_value;
 
   const municipalCodes = regionCodeToMunicipalCodeLookup[data.code];
   const selectedMunicipalCode = municipalCodes ? municipalCodes[0] : undefined;
@@ -71,8 +71,10 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
         >
           <KpiValue
             data-cy="hospital_moving_avg_per_region"
-            absolute={lastValue.admissions_moving_average}
-            difference={data.difference.hospital__admissions_moving_average}
+            absolute={lastValue.hospital_moving_avg_per_region}
+            difference={
+              data.difference.results_per_region__hospital_moving_avg_per_region
+            }
           />
         </KpiTile>
       </TwoKpiSection>
@@ -83,8 +85,8 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
           metadata={{ source: text.bronnen.rivm }}
           title={text.linechart_titel}
           description={text.linechart_description}
-          values={data.hospital.values.map((value) => ({
-            value: value.admissions_moving_average,
+          values={data.results_per_region.values.map((value) => ({
+            value: value.hospital_moving_avg_per_region,
             date: value.date_of_report_unix,
           }))}
         />
@@ -97,7 +99,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
         })}
         description={text.map_toelichting}
         legend={{
-          thresholds: municipalThresholds.hospital.admissions_moving_average,
+          thresholds: municipalThresholds.hospital_admissions,
           title: siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel,
         }}
         metadata={{
@@ -108,8 +110,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
         <MunicipalityChoropleth
           selected={selectedMunicipalCode}
           highlightSelection={false}
-          metricName="hospital"
-          metricProperty="admissions_moving_average"
+          metricName="hospital_admissions"
           tooltipContent={createMunicipalHospitalAdmissionsTooltip(router)}
           onSelect={createSelectMunicipalHandler(router, 'ziekenhuis-opnames')}
         />

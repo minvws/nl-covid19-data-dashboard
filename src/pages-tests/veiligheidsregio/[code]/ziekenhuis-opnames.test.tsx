@@ -21,11 +21,13 @@ describe('Regional page: NursingHomeCare', () => {
     container = renderResult.container;
   });
 
-  it('should use newly_infected_people for newly infected count', () => {
+  it('should use hospital_moving_avg_per_region', () => {
     testKpiValue(
       container,
       'hospital_moving_avg_per_region',
-      formatNumber(data.hospital.last_value.admissions_moving_average)
+      formatNumber(
+        data.results_per_region.last_value.hospital_moving_avg_per_region
+      )
     );
   });
 });

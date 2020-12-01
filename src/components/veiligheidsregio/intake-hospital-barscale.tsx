@@ -7,7 +7,7 @@ export function IntakeHospitalBarScale(props: {
   showAxis: boolean;
 }) {
   const { data, showAxis } = props;
-  const lastValue = data.hospital.last_value;
+  const lastValue = data.results_per_region.last_value;
 
   const text = siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
 
@@ -16,7 +16,7 @@ export function IntakeHospitalBarScale(props: {
       min={0}
       max={100}
       screenReaderText={text.barscale_screenreader_text}
-      value={lastValue.admissions_moving_average}
+      value={lastValue.hospital_moving_avg_per_region}
       id="opnames"
       rangeKey="hospital_moving_avg_per_region"
       gradient={[

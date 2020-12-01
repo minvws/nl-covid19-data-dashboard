@@ -3,11 +3,11 @@ import { ReactNode } from 'react';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { SafetyRegionProperties } from '~/components/choropleth/shared';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
-import { RegionalHospitalValue } from '~/types/data';
+import { RegionHospitalAdmissions } from '~/types/data';
 import { formatNumber } from '~/utils/formatNumber';
 
 export const createRegionHospitalAdmissionsTooltip = (router: NextRouter) => (
-  context: SafetyRegionProperties & { value: RegionalHospitalValue }
+  context: SafetyRegionProperties & { value: RegionHospitalAdmissions }
 ): ReactNode => {
   const handler = createSelectRegionHandler(router);
 
@@ -19,7 +19,7 @@ export const createRegionHospitalAdmissionsTooltip = (router: NextRouter) => (
   return (
     context && (
       <TooltipContent title={context.vrname} onSelect={onSelect}>
-        <strong>{formatNumber(context.value.admissions_moving_average)}</strong>
+        <strong>{formatNumber(context.value.hospital_admissions)}</strong>
       </TooltipContent>
     )
   );

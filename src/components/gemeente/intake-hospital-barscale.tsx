@@ -1,11 +1,11 @@
 import { BarScale } from '~/components/barScale';
-import { MunicipalHospital } from '~/types/data.d';
+import { MunicipalHospitalAdmissions } from '~/types/data.d';
 
 import siteText from '~/locale/index';
 const text = siteText.gemeente_ziekenhuisopnames_per_dag;
 
 export function IntakeHospitalBarScale(props: {
-  data: MunicipalHospital | undefined;
+  data: MunicipalHospitalAdmissions | undefined;
   showAxis: boolean;
 }) {
   const { data, showAxis } = props;
@@ -17,7 +17,7 @@ export function IntakeHospitalBarScale(props: {
       min={0}
       max={100}
       screenReaderText={text.screen_reader_graph_content}
-      value={data.last_value.admissions_moving_average}
+      value={data.last_value.moving_average_hospital}
       id="opnames"
       rangeKey="moving_average_hospital"
       gradient={[
