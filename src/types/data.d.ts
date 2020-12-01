@@ -15,7 +15,6 @@ export interface Municipal {
   positive_tested_people: MunicipalPositiveTestedPeople;
   sewer?: MunicipalSewer;
   sewer_per_installation?: MunicipalSewerPerInstallation;
-  elderly_at_home: MunicipalElderlyAtHome;
 }
 export interface MunicipalDifference {
   positive_tested_people__infected_daily_increase?: DifferenceDecimal;
@@ -90,18 +89,6 @@ export interface MunicipalSewerPerInstallationValue {
   rna_normalized: number;
   date_of_insertion_unix: number;
 }
-export interface MunicipalElderlyAtHome {
-  values: MunicipalElderlyAtHomeValue[];
-  last_value: MunicipalElderlyAtHomeValue;
-}
-export interface MunicipalElderlyAtHomeValue {
-  positive_tested_daily: number;
-  positive_tested_daily_permillage: number;
-  deceased_daily: number;
-  date_of_report_unix: number;
-  date_of_insertion_unix: number;
-  gmcode: string;
-}
 
 export interface Municipalities {
   last_generated: string;
@@ -111,7 +98,6 @@ export interface Municipalities {
   hospital_admissions: MunicipalitiesHospitalAdmissions[];
   positive_tested_people: MunicipalitiesPositiveTestedPeople[];
   deceased: Deceased[];
-  elderly_at_home: MunicipalitiesElderlyAtHome[];
 }
 export interface MunicipalitiesHospitalAdmissions {
   date_of_report_unix: number;
@@ -131,14 +117,6 @@ export interface Deceased {
   gmcode: string;
   deceased: number;
   date_of_insertion_unix: number;
-}
-export interface MunicipalitiesElderlyAtHome {
-  positive_tested_daily: number;
-  positive_tested_daily_permillage: number;
-  deceased_daily: number;
-  date_of_report_unix: number;
-  date_of_insertion_unix: number;
-  gmcode: string;
 }
 
 export interface National {

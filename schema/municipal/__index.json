@@ -10,8 +10,7 @@
     "code",
     "hospital_admissions",
     "positive_tested_people",
-    "difference",
-    "elderly_at_home"
+    "difference"
   ],
   "properties": {
     "last_generated": {
@@ -43,9 +42,6 @@
     },
     "sewer_per_installation": {
       "$ref": "sewer_per_installation.json"
-    },
-    "elderly_at_home": {
-      "$ref": "elderly_at_home.json"
     }
   }
 }
