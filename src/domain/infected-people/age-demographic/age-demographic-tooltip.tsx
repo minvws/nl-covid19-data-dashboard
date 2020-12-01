@@ -21,7 +21,7 @@ interface AgeDemographicTooltipProps {
 const Tooltip = styled.div(
   css({
     position: 'absolute',
-    background: '#FFF',
+    background: 'white',
     transition: 'left 0.15s, top 0.15s',
     transform: 'translate(0, 20px)',
     pointerEvents: 'none',
@@ -55,13 +55,13 @@ const LegendItem = styled.li(
       display: 'block',
       width: '1rem',
       height: '1rem',
-      background: '#c6c8ca',
+      backgroundColor: 'data.default',
       position: 'absolute',
       left: 3,
       top: '0.5rem',
     },
     '&.infected-percentage:before': {
-      background: '#3391cc',
+      backgroundColor: 'data.primary',
     },
   })
 );

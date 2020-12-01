@@ -14,6 +14,7 @@ import { formatPercentage } from '~/utils/formatNumber';
 import siteText from '~/locale/index';
 import { MouseEvent } from 'react';
 import { useBreakpoints } from '~/utils/useBreakpoints';
+import { colors } from '~/style/theme';
 
 export const AGE_GROUP_TOOLTIP_WIDTH = 340;
 
@@ -35,7 +36,13 @@ interface AgeDemographicChartProps {
 
 const TickValue = ({ x, y, formattedValue }: TickRendererProps) => {
   return (
-    <Text x={x} y={y} fill="#595959" fontSize={'1rem'} textAnchor="middle">
+    <Text
+      x={x}
+      y={y}
+      fill={colors.annotation}
+      fontSize="1rem"
+      textAnchor="middle"
+    >
       {formattedValue}
     </Text>
   );
@@ -165,7 +172,7 @@ export function AgeDemographicChart({
         verticalAnchor="start"
         y={0}
         x={width / 2 - ageRangeAxisWidth / 2}
-        fill="#000"
+        fill="black"
         fontWeight="bold"
         fontSize={isSmallScreen ? '1rem' : '1.2rem'}
       >
@@ -176,7 +183,7 @@ export function AgeDemographicChart({
         verticalAnchor="start"
         y={0}
         x={width / 2 + ageRangeAxisWidth / 2}
-        fill="#000"
+        fill="black"
         fontWeight="bold"
         fontSize={isSmallScreen ? '1rem' : '1.2rem'}
       >
@@ -191,7 +198,7 @@ export function AgeDemographicChart({
         left={margin.left}
         top={margin.top}
         numTicks={numTicks}
-        stroke="#c4c4c4"
+        stroke={colors.border}
       />
       <GridColumns
         scale={infectedPercentageScale}
@@ -200,7 +207,7 @@ export function AgeDemographicChart({
         left={width / 2 + ageRangeAxisWidth / 2}
         top={margin.top}
         numTicks={numTicks}
-        stroke="#c4c4c4"
+        stroke={colors.border}
       />
 
       {values.map((d, i) => {
@@ -215,7 +222,7 @@ export function AgeDemographicChart({
             onMouseLeave={closeTooltip}
             css={css({
               '&:hover .hoverbar': {
-                fill: '#E0EEF6',
+                fill: colors.lightBlue,
               },
             })}
           >
@@ -236,14 +243,14 @@ export function AgeDemographicChart({
               y={ageGroupRangePoint(d)}
               height={ageGroupRangeScale.bandwidth()}
               width={ageGroupPercentageWidth}
-              fill="#c6c8ca"
+              fill={colors.data.default}
             />
             <Text
               textAnchor="middle"
               verticalAnchor="middle"
               y={ageGroupRangePoint(d) + ageGroupRangeScale.bandwidth() / 2}
               x={width / 2}
-              fill="#595959"
+              fill={colors.annotation}
             >
               {formatAgeGroupRange(ageGroupRange(d))}
             </Text>
@@ -252,7 +259,7 @@ export function AgeDemographicChart({
               y={ageGroupRangePoint(d)}
               height={ageGroupRangeScale.bandwidth()}
               width={infectedPercentageWidth}
-              fill="#3391cc"
+              fill={colors.data.primary}
             />
           </Group>
         );

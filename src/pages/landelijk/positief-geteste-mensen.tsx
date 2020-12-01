@@ -39,6 +39,7 @@ import {
   NationalPageProps,
 } from '~/static-props/nl-data';
 import { colors } from '~/style/theme';
+import { assert } from '~/utils/assert';
 
 const text = siteText.positief_geteste_personen;
 const ggdText = siteText.positief_geteste_personen_ggd;
@@ -46,12 +47,12 @@ const ggdText = siteText.positief_geteste_personen_ggd;
 /* Retrieves certain age demographic data to be used in the example text. */
 function getAgeDemographicExampleData(data: NationalInfectedAgeGroups) {
   const ageGroupRange = '20-29';
-
   const value = data.values.find((x) => x.age_group_range === ageGroupRange);
 
-  if (!value) {
-    return {};
-  }
+  assert(
+    value,
+    `NationalInfectedAgeGroups should contain a value for age group ${ageGroupRange}`
+  );
 
   return {
     ageGroupRange: formatAgeGroupRange(ageGroupRange),
