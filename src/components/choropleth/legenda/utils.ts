@@ -1,6 +1,6 @@
 import { ChoroplethThresholdsValue } from '../shared';
 import get from 'lodash/get';
-import { assert } from 'console';
+import { assert } from '~/utils/assert';
 
 export function getDataThresholds<T>(
   thresholdData: T,
