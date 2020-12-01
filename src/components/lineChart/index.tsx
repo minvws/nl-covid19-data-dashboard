@@ -1,14 +1,13 @@
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { isFilled } from 'ts-is-present';
-import { ChartTimeControls } from '~/components-styled/chart-time-controls';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import text from '~/locale/index';
+import { colors } from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
-import styles from './lineChart.module.scss';
 
 export type Value = {
   date: number;
@@ -18,11 +17,9 @@ export type Value = {
 const SIGNAALWAARDE_Z_INDEX = 5;
 
 export interface LineChartProps<T> {
-  title: string;
-  description?: string;
   values: T[];
   signaalwaarde?: number;
-  timeframeOptions?: TimeframeOption[];
+  timeframe?: TimeframeOption;
   formatTooltip?: (value: T) => string;
   formatYAxis?: (y: number) => string;
   showFill?: boolean;
@@ -152,7 +149,7 @@ function getChartOptions<T extends Value>(
         data: values.map((value) => value.value as number),
         name: '',
         showInLegend: false,
-        color: '#3391CC',
+        color: colors.data.primary,
         /**
          * HEX to rgb converted, added opacity.
          * Since this chart has type 'area', a fillColor of `undefined` will return
@@ -160,7 +157,14 @@ function getChartOptions<T extends Value>(
          * transparent fill
          */
 
-        fillColor: showFill ? 'rgba(51, 145, 204, 0.2)' : 'transparent',
+        fillColor: 'transparent',
+
+        ...(showFill && {
+          fillColor: colors.data.fill,
+          opacity: 1,
+          fillOpacity: 0.05,
+        }),
+
         marker: {
           enabled: false,
         },
@@ -186,18 +190,14 @@ function getChartOptions<T extends Value>(
 }
 
 export default function LineChart<T extends Value>({
-  title,
-  description,
   values,
   signaalwaarde,
-  timeframeOptions,
+  timeframe = '5weeks',
   formatTooltip,
   formatYAxis,
   valueAnnotation,
   showFill = true,
 }: LineChartProps<T>) {
-  const [timeframe, setTimeframe] = useState<TimeframeOption>('5weeks');
-
   const chartOptions = useMemo(() => {
     const filteredValues = getFilteredValues<T>(
       values,
@@ -214,20 +214,7 @@ export default function LineChart<T extends Value>({
   }, [values, timeframe, signaalwaarde, formatTooltip, formatYAxis, showFill]);
 
   return (
-    <section className={styles.root}>
-      <header className={styles.header}>
-        <div className={styles.titleAndDescription}>
-          {title && <h3>{title}</h3>}
-          {description && <p>{description}</p>}
-        </div>
-        <div className={styles.timeControls}>
-          <ChartTimeControls
-            timeframe={timeframe}
-            timeframeOptions={timeframeOptions}
-            onChange={setTimeframe}
-          />
-        </div>
-      </header>
+    <section>
       {valueAnnotation && (
         <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
       )}

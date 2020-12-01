@@ -24,6 +24,8 @@ const Summary = styled(DisclosureButton)(
     p: 3,
     textAlign: 'left',
     width: '100%',
+    position: 'relative',
+    overflow: 'visible',
 
     '&:focus': {
       outlineWidth: '1px',
@@ -43,6 +45,7 @@ const Summary = styled(DisclosureButton)(
       content: '""',
       flex: '0 0 1.9em',
       height: '0.55em',
+      ml: 'auto',
       mr: -2,
       mt: '0.35em',
       py: 0,
@@ -50,6 +53,25 @@ const Summary = styled(DisclosureButton)(
 
     '&[data-state="open"]:after': {
       transform: 'rotate(180deg)',
+    },
+  })
+);
+
+const AnchorLink = styled.a(
+  css({
+    color: 'lightGray',
+    px: 3,
+    py: 1,
+    transition: 'opacity 0.3s',
+    fontSize: 2,
+    textDecoration: 'none',
+    position: 'absolute',
+    right: '100%',
+    '&:hover, &:focus': {
+      color: 'blue',
+    },
+    '[data-state="collapsed"] &': {
+      opacity: 0,
     },
   })
 );
@@ -149,7 +171,12 @@ export const Collapsable = ({ summary, children, id }: CollapsableProps) => {
   return (
     <Box as="section" borderTop="1px solid" borderTopColor="lightGray" id={id}>
       <Disclosure open={open} onChange={toggle}>
-        <Summary>{summary}</Summary>
+        <Summary>
+          {summary}
+          <AnchorLink onClick={(e) => e.stopPropagation()} href={`#${id}`}>
+            #
+          </AnchorLink>
+        </Summary>
         <Panel
           ref={panelReference}
           onTransitionEnd={() => setIsAnimating(false)}

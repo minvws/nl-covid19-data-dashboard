@@ -1,13 +1,12 @@
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import { useMemo, useState } from 'react';
-import { ChartTimeControls } from '~/components-styled/chart-time-controls';
+import { useMemo } from 'react';
 import text from '~/locale/index';
+import { colors } from '~/style/theme';
 import { createDate } from '~/utils/createDate';
 import { formatDateFromMilliseconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
-import styles from './areaChart.module.scss';
 
 if (typeof Highcharts === 'object') {
   require('highcharts/highcharts-more')(Highcharts);
@@ -19,8 +18,6 @@ type TLine = [Date, number | null];
 const SIGNAALWAARDE_Z_INDEX = 5;
 
 interface AreaChartProps {
-  title: string;
-  description?: string;
   rangeLegendLabel: string;
   lineLegendLabel: string;
   data: Array<{
@@ -30,7 +27,7 @@ interface AreaChartProps {
     max: number | null;
   }>;
   signaalwaarde?: number;
-  timeframeOptions?: TimeframeOption[];
+  timeframe?: TimeframeOption;
 }
 
 type IGetOptions = Omit<AreaChartProps, 'data' | 'title' | 'description'> & {
@@ -44,9 +41,7 @@ export default function AreaChart(props: AreaChartProps) {
     lineLegendLabel,
     data,
     signaalwaarde,
-    timeframeOptions,
-    title,
-    description,
+    timeframe = '5weeks',
   } = props;
 
   const rangeData: TRange[] = useMemo(() => {
@@ -58,8 +53,6 @@ export default function AreaChart(props: AreaChartProps) {
       return [createDate(value.date), value.avg];
     });
   }, [data]);
-
-  const [timeframe, setTimeframe] = useState<TimeframeOption>('5weeks');
 
   const chartOptions = useMemo(() => {
     const getOptionsThunk = (rangeData: TRange[], lineData: TLine[]) =>
@@ -93,24 +86,7 @@ export default function AreaChart(props: AreaChartProps) {
     timeframe,
   ]);
 
-  return (
-    <section className={styles.root}>
-      <header className={styles.header}>
-        <div className={styles.titleAndDescription}>
-          {title && <h3>{title}</h3>}
-          {description && <p>{description}</p>}
-        </div>
-        <div className={styles.timeControls}>
-          <ChartTimeControls
-            timeframe={timeframe}
-            timeframeOptions={timeframeOptions}
-            onChange={(value) => setTimeframe(value)}
-          />
-        </div>
-      </header>
-      <HighchartsReact highcharts={Highcharts} options={chartOptions} />
-    </section>
-  );
+  return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;
 }
 
 function getChartOptions(props: IGetOptions): Highcharts.Options {
@@ -263,7 +239,9 @@ function getChartOptions(props: IGetOptions): Highcharts.Options {
         name: rangeLegendLabel,
         data: rangeData,
         type: 'arearange',
-        color: '#C4C4C4',
+        color: colors.data.primary,
+        opacity: 0.05,
+        fillOpacity: 1,
         marker: {
           enabled: false,
         },
@@ -272,7 +250,7 @@ function getChartOptions(props: IGetOptions): Highcharts.Options {
         name: lineLegendLabel,
         data: lineData.map((el) => el[1] as number),
         type: 'line',
-        color: '#3391CC',
+        color: colors.data.primary,
         lineWidth: 2,
         marker: {
           enabled: false,

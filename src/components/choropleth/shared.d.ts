@@ -1,5 +1,5 @@
 import { FeatureCollection, MultiPolygon } from 'geojson';
-import { Municipalities, Regions, RegionsNursingHome } from '~/types/data';
+import { Municipalities, Regions } from '~/types/data';
 
 type TMetricHolder<T> = keyof Omit<
   T,
@@ -15,17 +15,14 @@ export type TMunicipalityMetricType = ValueOf<
 >[number] &
   Partial<MunicipalityProperties>;
 
-export type TRegionMetricName = TMetricHolder<Omit<Regions, 'deceased'>>;
+export type TRegionMetricName = TMetricHolder<
+  Omit<Regions, 'deceased' | 'behavior'>
+>;
 
 export type TRegionMetricType = ValueOf<
   Pick<Regions, TRegionMetricName>
 >[number] &
   Partial<SafetyRegionProperties>;
-
-export type TRegionsNursingHomeMetricName = keyof Omit<
-  RegionsNursingHome,
-  'date_of_report_unix' | 'date_of_insertion_unix' | 'vrcode'
->;
 
 export interface SafetyRegionProperties {
   vrcode: string;
@@ -46,12 +43,7 @@ export type RegionGeoJSON = FeatureCollection<
   SafetyRegionProperties
 >;
 
-export type ChoroplethThresholds = {
-  svgClass?: string;
-  thresholds: ChoroplethThresholdsValue[];
-};
-
-export type ChoroplethThresholdsValue = {
+export type ChoroplethThresholdsValue<T extends number = number> = {
   color: string;
-  threshold: number;
+  threshold: T;
 };

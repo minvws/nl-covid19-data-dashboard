@@ -1,20 +1,23 @@
 import Repro from '~/assets/reproductiegetal.svg';
-import { LineChart } from '~/components/charts/index';
+import { ContentHeader } from '~/components-styled/content-header';
+import { KpiWithIllustrationTile } from '~/components-styled/kpi-with-illustration-tile';
+import { Legenda } from '~/components-styled/legenda';
+import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { TwoKpiSection } from '~/components-styled/two-kpi-section';
+import { Text } from '~/components-styled/typography';
 import { ReproductionIndexBarScale } from '~/components/landelijk/reproduction-index-barscale';
 import { FCWithLayout } from '~/components/layout';
-import { ContentHeader } from '~/components/contentHeader';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
-import { Legenda } from '~/components/legenda';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
-import getNlData, { INationalData } from '~/static-props/nl-data';
-import { Metadata } from '~/components-styled/metadata';
-import { Text } from '~/components-styled/typography';
-import { KpiWithIllustrationTile } from '~/components-styled/kpi-with-illustration-tile';
+import {
+  getNationalStaticProps,
+  NationalPageProps,
+} from '~/static-props/nl-data';
 
 const text = siteText.reproductiegetal;
 
-const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
+const ReproductionIndex: FCWithLayout<NationalPageProps> = (props) => {
   const { data } = props;
 
   const lastKnownValidData = data.reproduction_index_last_known_average;
@@ -27,58 +30,71 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
       />
       <ContentHeader
         category={siteText.nationaal_layout.headings.besmettingen}
+        screenreaderCategory={siteText.reproductiegetal.titel_sidebar}
         title={text.titel}
-        Icon={Repro}
+        icon={<Repro />}
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: lastKnownValidData.last_value.date_of_report_unix,
-          dateInsertedUnix:
+          dateInfo: lastKnownValidData.last_value.date_of_report_unix,
+          dateOfInsertionUnix:
             lastKnownValidData.last_value.date_of_insertion_unix,
-          dataSource: text.bron,
+          dataSources: [text.bronnen.rivm],
         }}
+        reference={text.reference}
       />
 
-      <KpiWithIllustrationTile
-        title={text.barscale_titel}
-        metadata={{
-          date: lastKnownValidData.last_value.date_of_report_unix,
-          source: text.bron,
-        }}
-        illustration={{
-          image: '/images/reproductie-explainer.svg',
-          alt: text.reproductie_explainer_alt,
-          description: text.extra_uitleg,
-        }}
-      >
-        <ReproductionIndexBarScale data={lastKnownValidData} showAxis={true} />
-        <Text>{text.barscale_toelichting}</Text>
-      </KpiWithIllustrationTile>
+      <TwoKpiSection>
+        <KpiWithIllustrationTile
+          title={text.barscale_titel}
+          metadata={{
+            date: lastKnownValidData.last_value.date_of_report_unix,
+            source: text.bronnen.rivm,
+          }}
+          illustration={{
+            image: '/images/reproductie-explainer.svg',
+            alt: text.reproductie_explainer_alt,
+            description: text.extra_uitleg,
+          }}
+        >
+          <ReproductionIndexBarScale
+            data={lastKnownValidData}
+            showAxis={true}
+          />
+          <Text>{text.barscale_toelichting}</Text>
+        </KpiWithIllustrationTile>
+      </TwoKpiSection>
 
       {data.reproduction_index.values && (
-        <article className="metric-article">
-          <LineChart
-            title={text.linechart_titel}
-            values={data.reproduction_index.values.map((value) => ({
-              value: value.reproduction_index_avg,
-              date: value.date_of_report_unix,
-            }))}
-            signaalwaarde={1}
-            timeframeOptions={['all', '5weeks']}
-            showFill={false}
-          />
-          <Legenda>
-            <li className="blue">{text.legenda_r}</li>
-          </Legenda>
-          <Metadata source={text.bron} />
-        </article>
+        <LineChartTile
+          metadata={{ source: text.bronnen.rivm }}
+          title={text.linechart_titel}
+          values={data.reproduction_index.values.map((value) => ({
+            value: value.reproduction_index_avg,
+            date: value.date_of_report_unix,
+          }))}
+          signaalwaarde={1}
+          timeframeOptions={['all', '5weeks']}
+          showFill={false}
+          footer={
+            <Legenda
+              items={[
+                {
+                  label: text.legenda_r,
+                  color: 'data.primary',
+                  shape: 'line',
+                },
+              ]}
+            />
+          }
+        />
       )}
     </>
   );
 };
 
-ReproductionIndex.getLayout = getNationalLayout();
+ReproductionIndex.getLayout = getNationalLayout;
 
-export const getStaticProps = getNlData();
+export const getStaticProps = getNationalStaticProps;
 
 export default ReproductionIndex;

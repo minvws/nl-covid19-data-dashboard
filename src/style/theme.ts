@@ -13,6 +13,11 @@ const space = [
 ];
 
 /**
+ * Valid space index values
+ */
+export type SpaceValue = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+
+/**
  * Font sizes currently are a mess. Mixing em, rem and px. Header font size definitions
  * don't seem to have much logic behind them, with h1 and h2 being almost the
  * same size and h5 being bigger then h4.
@@ -30,6 +35,12 @@ const fontSizes = [
   '2rem',
   '2.02729rem',
 ];
+
+const fontWeights = {
+  normal: 400,
+  bold: 600,
+  heavy: 700,
+};
 
 const lineHeights = [1.2, 1.4, 1.5];
 
@@ -63,11 +74,11 @@ const breakpoints: Partial<Breakpoints> = [
   '100em',
 ];
 
-breakpoints.xs = breakpoints[0];
-breakpoints.sm = breakpoints[1];
-breakpoints.md = breakpoints[2];
-breakpoints.lg = breakpoints[3];
-breakpoints.xl = breakpoints[4];
+breakpoints.xs = breakpoints[0]; // ~420px
+breakpoints.sm = breakpoints[1]; // ~768px
+breakpoints.md = breakpoints[2]; // ~960px
+breakpoints.lg = breakpoints[3]; // ~1200px
+breakpoints.xl = breakpoints[4]; // ~1600px
 
 const mediaQueries = {
   xs: `screen and (min-width: ${breakpoints[0]})`,
@@ -79,14 +90,30 @@ const mediaQueries = {
 
 type TMediaQueries = typeof mediaQueries;
 
-const colors = {
+export const colors = {
   blue: '#01689b',
   icon: '#01689b',
   button: '#01689b',
   shadow: '#e5e5e5',
   lightGray: '#dfdfdf',
   annotation: '#595959',
+  notification: '#cd005a',
+  red: '#F35363',
+  category: '#6b6b6b',
+  border: '#c4c4c4',
+
+  data: {
+    primary: '#007BC7',
+    secondary: '#154273',
+    fill: 'rgba(0, 123, 199, .05)',
+    scale: {
+      blue: ['#8FCAE7', '#5BADDB', '#248FCF', '#0070BB', '#00529D', '#003580'],
+      magenta: ['#F6B4D1', '#D3719C', '#9E3A66', '#64032D', '#000000'],
+    },
+  },
 };
+
+export type ThemeColors = typeof colors;
 
 const radii = [0, 5, 10];
 
@@ -95,11 +122,14 @@ const shadows = {
 };
 
 type TDashboardTheme = ScaleThemeProperties &
-  ThemeBreakPoints & { mediaQueries: TMediaQueries };
+  ThemeBreakPoints & { mediaQueries: TMediaQueries } & {
+    colors: ThemeColors;
+  };
 
 const theme: TDashboardTheme = {
   fonts,
   fontSizes,
+  fontWeights,
   lineHeights,
   breakpoints: breakpoints as any,
   mediaQueries,

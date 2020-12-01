@@ -1,14 +1,14 @@
 /* eslint no-console: 0 */
-import fs from 'fs';
-import path from 'path';
-
-import { createValidateFunction } from './create-validate-function';
-import { schemaDirectory } from './get-schema-names';
-import { schemaInformation } from './schema-information';
-import { executeValidations } from './execute-validations';
-
 import chalk from 'chalk';
+import fs from 'fs';
 import meow from 'meow';
+import path from 'path';
+import { createValidateFunction } from './create-validate-function';
+import { executeValidations } from './execute-validations';
+import { schemaDirectory } from './get-schema-names';
+import { getSchemaInformation } from './schema-information';
+
+const schemaInformation = getSchemaInformation();
 
 const validSchemaNames = Object.keys(schemaInformation);
 

@@ -15,9 +15,6 @@ export function createSelectMunicipalHandler(
       return;
     }
 
-    router.push(
-      `/gemeente/[code]/${pageName}`,
-      `/gemeente/${context.gemcode}/${pageName}`
-    );
+    router.push(`/gemeente/${context.gemcode}/${pageName}`);
   };
 }

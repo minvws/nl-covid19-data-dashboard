@@ -1,18 +1,17 @@
-import React from 'react';
+import css from '@styled-system/css';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-
+import React from 'react';
+import { Box } from '~/components-styled/base';
+import { MaxWidth } from '~/components/maxWidth';
+import { SEOHead } from '~/components/seoHead';
 import text from '~/locale/index';
 import { ILastGeneratedData } from '~/static-props/last-generated-data';
-import styles from './layout.module.scss';
-
-import { useMediaQuery } from '~/utils/useMediaQuery';
 import { formatDateFromSeconds } from '~/utils/formatDate';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { getLocale } from '~/utils/getLocale';
-
-import { SEOHead } from '~/components/seoHead';
-import { MaxWidth } from '~/components/maxWidth';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { useMediaQuery } from '~/utils/useMediaQuery';
+import styles from './layout.module.scss';
 
 export interface LayoutProps {
   url?: string;
@@ -60,9 +59,6 @@ function Layout(
 
   const router = useRouter();
 
-  // remove focus after navigation
-  const blur = (evt: any) => evt.target.blur();
-
   const locale = getLocale();
   const showSmallLogo = useMediaQuery('(max-width: 480px)', true);
 
@@ -81,10 +77,16 @@ function Layout(
         url={url}
       />
 
-      <div className={styles.skiplinks}>
+      <nav
+        role="navigation"
+        className={styles.skiplinks}
+        aria-label={text.aria_labels.skip_links}
+      >
         <a href="#content">{text.skiplinks.inhoud}</a>
         <a href="#main-navigation">{text.skiplinks.nav}</a>
-      </div>
+        <a href="#metric-navigation">{text.skiplinks.metric_nav}</a>
+        <a href="#footer-navigation">{text.skiplinks.footer_nav}</a>
+      </nav>
 
       <header className={styles.header}>
         <div className={styles.logoWrapper}>
@@ -113,7 +115,7 @@ function Layout(
             >
               NL
             </a>
-            |
+            <span aria-hidden="true">|</span>
             <a
               href={`https://coronadashboard.government.nl${router.asPath}`}
               lang="en-GB"
@@ -124,7 +126,17 @@ function Layout(
               EN
             </a>
           </div>
-          <h1>{text.header.title}</h1>
+          <Box
+            css={css({
+              fontSize: 5,
+              lineHeight: 0,
+              mb: 0,
+              mt: 4,
+              fontWeight: 'bold',
+            })}
+          >
+            {text.header.title}
+          </Box>
           <p>
             {text.header.text}{' '}
             <Link href="/over">
@@ -133,13 +145,19 @@ function Layout(
           </p>
         </MaxWidth>
 
-        <nav id="main-navigation" className={styles.nav}>
+        <nav
+          /** re-mount when route changes in order to blur anchors */
+          key={router.route}
+          id="main-navigation"
+          className={styles.nav}
+          role="navigation"
+          aria-label={text.aria_labels.pagina_keuze}
+        >
           <MaxWidth>
             <ul className={styles.navList}>
               <li>
                 <Link href="/">
                   <a
-                    onClick={blur}
                     className={
                       router.pathname.indexOf('/landelijk') === 0 ||
                       router.pathname === '/'
@@ -154,7 +172,6 @@ function Layout(
               <li>
                 <Link href="/veiligheidsregio">
                   <a
-                    onClick={blur}
                     className={
                       router.pathname.indexOf('/veiligheidsregio') === 0
                         ? styles.link + ' ' + styles.active
@@ -168,7 +185,6 @@ function Layout(
               <li>
                 <Link href="/gemeente">
                   <a
-                    onClick={blur}
                     className={
                       router.pathname.indexOf('/gemeente') === 0
                         ? styles.link + ' ' + styles.active
@@ -182,7 +198,6 @@ function Layout(
               <li>
                 <Link href="/over">
                   <a
-                    onClick={blur}
                     className={
                       router.pathname == '/over'
                         ? styles.link + ' ' + styles.active
@@ -198,61 +213,70 @@ function Layout(
         </nav>
       </header>
 
-      <main id="content">{children}</main>
+      <div>{children}</div>
 
-      <footer>
+      <footer
+        /** re-mount when route changes in order to blur anchors */
+        key={router.route}
+      >
         <div className={styles.footer}>
           <MaxWidth>
             <div className={styles.grid}>
               <div className={styles.footerColumn}>
-                <h3>{text.nav.title}</h3>
-                <nav>
+                <Box fontSize={3} fontWeight="bold">
+                  {text.nav.title}
+                </Box>
+                <nav
+                  aria-label={text.aria_labels.footer_keuze}
+                  role="navigation"
+                  id="footer-navigation"
+                >
                   <ul className={styles.footerList}>
                     <li>
                       <Link href="/">
-                        <a onClick={blur} className={styles.footerLink}>
+                        <a className={styles.footerLink}>
                           {text.nav.links.index}
                         </a>
                       </Link>
                     </li>
                     <li>
                       <Link href="/veiligheidsregio">
-                        <a onClick={blur} className={styles.footerLink}>
+                        <a className={styles.footerLink}>
                           {text.nav.links.veiligheidsregio}
                         </a>
                       </Link>
                     </li>
                     <li>
                       <Link href="/gemeente">
-                        <a onClick={blur} className={styles.footerLink}>
+                        <a className={styles.footerLink}>
                           {text.nav.links.gemeente}
                         </a>
                       </Link>
                     </li>
                     <li>
                       <Link href="/over">
-                        <a onClick={blur} className={styles.footerLink}>
+                        <a className={styles.footerLink}>
                           {text.nav.links.over}
                         </a>
                       </Link>
                     </li>
                     <li>
                       <Link href="/veelgestelde-vragen">
-                        <a onClick={blur} className={styles.footerLink}>
+                        <a className={styles.footerLink}>
                           {text.nav.links.veelgestelde_vragen}
                         </a>
                       </Link>
                     </li>
                     <li>
                       <Link href="/over-risiconiveaus">
-                        <a onClick={blur} className={styles.footerLink}>
+                        <a className={styles.footerLink}>
                           {text.nav.links.over_risiconiveaus}
                         </a>
                       </Link>
                     </li>
                     <li>
                       <Link href="/verantwoording">
-                        <a onClick={blur} className={styles.footerLink}>
+                        <a className={styles.footerLink}>
                           {text.nav.links.verantwoording}
                         </a>
                       </Link>
@@ -271,7 +295,9 @@ function Layout(
                 </nav>
               </div>
               <div className={styles.footerColumn}>
-                <h3>{text.laatst_bijgewerkt.title}</h3>
+                <Box fontSize={3} fontWeight="bold">
+                  {text.laatst_bijgewerkt.title}
+                </Box>
                 <p
                   dangerouslySetInnerHTML={{
                     __html: replaceVariablesInText(

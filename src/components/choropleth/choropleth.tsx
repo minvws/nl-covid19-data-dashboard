@@ -1,12 +1,14 @@
+import css from '@styled-system/css';
 import { localPoint } from '@vx/event';
 import { Mercator } from '@vx/geo';
-import { GeoPermissibleObjects } from 'd3-geo';
 import { Feature, FeatureCollection, Geometry, MultiPolygon } from 'geojson';
 import { memo, MutableRefObject, ReactNode, useRef, useState } from 'react';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
-import styles from './choropleth.module.scss';
+import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { TCombinedChartDimensions } from './hooks/use-chart-dimensions';
+import { Path } from './path';
 import { Tooltip } from './tooltips/tooltipContainer';
+import { countryGeo } from './topology';
 
 export type TooltipSettings = {
   left: number;
@@ -20,16 +22,13 @@ export type TRenderCallback = (
   index: number
 ) => ReactNode;
 
-export type TProps<TFeatureProperties> = {
+export type TProps<T1, T2, T3> = {
   // This is the main feature collection that displays the features that will
   // be colored in as part of the choropleth
-  featureCollection: FeatureCollection<MultiPolygon, TFeatureProperties>;
-  // These are features that are used as an overlay, overlays have no interactions
-  // they are simply there to beautify the map or emphasize certain parts.
-  overlays: FeatureCollection<MultiPolygon>;
+  featureCollection: FeatureCollection<MultiPolygon, T1>;
   // These are features that are used as as the hover features, these are
   // typically activated when the user mouse overs them.
-  hovers?: FeatureCollection<MultiPolygon, TFeatureProperties>;
+  hovers?: FeatureCollection<MultiPolygon, T3>;
   // The bounding box is calculated based on these features, this can be used to
   // zoom in on a specific part of the map upon initialization.
   boundingBox: FeatureCollection<MultiPolygon>;
@@ -38,21 +37,14 @@ export type TProps<TFeatureProperties> = {
   // This callback is invoked for each of the features in the featureCollection property.
   // This will usually return a <path/> element.
   featureCallback: (
-    feature: Feature<MultiPolygon, TFeatureProperties>,
-    path: string,
-    index: number
-  ) => ReactNode;
-  // This callback is invoked for each of the features in the overlays property.
-  // This will usually return a <path/> element.
-  overlayCallback: (
-    feature: Feature<MultiPolygon, TFeatureProperties>,
+    feature: Feature<MultiPolygon, T1>,
     path: string,
     index: number
   ) => ReactNode;
   // This callback is invoked for each of the features in the hovers property.
   // This will usually return a <path/> element.
   hoverCallback: (
-    feature: Feature<MultiPolygon, TFeatureProperties>,
+    feature: Feature<MultiPolygon, T3>,
     path: string,
     index: number
   ) => ReactNode;
@@ -66,7 +58,7 @@ export type TProps<TFeatureProperties> = {
 
 /**
  * Generic choropleth component that takes featurecollection that is considered the data layer
- * and another that is considered the overlay layer.
+ * and another that is considered the interactive hover layer.
  * It implements a click and mouseover/mouseout system where the value that is assigned to the
  * data-id attribute of a path is propagated to the injected onPatchClick and getTooltipContent
  * callbacks.
@@ -74,15 +66,27 @@ export type TProps<TFeatureProperties> = {
  * @param props
  */
 
-export function Choropleth<T>({ getTooltipContent, ...props }: TProps<T>) {
+export function Choropleth<T1, T2, T3>({
+  getTooltipContent,
+  ...props
+}: TProps<T1, T2, T3>) {
   const [tooltip, setTooltip] = useState<TooltipSettings>();
   const isTouch = useIsTouchDevice();
+
+  const hoverRef = useRef<SVGGElement>(null);
+  const tooltipRef = useRef<HTMLDivElement>(null);
+
+  useOnClickOutside([tooltipRef, hoverRef], () => setTooltip(undefined));
+
   return (
     <>
-      <ChoroplethMap {...props} setTooltip={setTooltip} />
+      <ChoroplethMap {...props} setTooltip={setTooltip} hoverRef={hoverRef} />
 
       {tooltip && (
-        <div style={{ pointerEvents: isTouch ? 'all' : 'none' }}>
+        <div
+          ref={tooltipRef}
+          style={{ pointerEvents: isTouch ? 'all' : 'none' }}
+        >
           <Tooltip
             left={tooltip.left}
             top={tooltip.top}
@@ -96,24 +100,30 @@ export function Choropleth<T>({ getTooltipContent, ...props }: TProps<T>) {
   );
 }
 
-type ChoroplethMapProps<T> = Omit<TProps<T>, 'getTooltipContent'> & {
+type FitSize = [[number, number], any];
+
+type ChoroplethMapProps<T1, T2, T3> = Omit<
+  TProps<T1, T2, T3>,
+  'getTooltipContent'
+> & {
   setTooltip: (tooltip: TooltipSettings | undefined) => void;
 };
 
-const ChoroplethMap: <T>(
-  props: ChoroplethMapProps<T>
+const ChoroplethMap: <T1, T2, T3>(
+  props: ChoroplethMapProps<T1, T2, T3> & {
+    hoverRef: React.RefObject<SVGGElement>;
+  }
 ) => JSX.Element | null = memo((props) => {
   const {
     featureCollection,
-    overlays,
     hovers,
     boundingBox,
     dimensions,
     featureCallback,
-    overlayCallback,
     hoverCallback,
     onPathClick,
     setTooltip,
+    hoverRef,
   } = props;
 
   const clipPathId = useRef(`_${Math.random().toString(36).substring(2, 15)}`);
@@ -129,17 +139,14 @@ const ChoroplethMap: <T>(
     boundedHeight,
   } = dimensions;
 
-  const sizeToFit: [[number, number], any] = [
-    [boundedWidth, boundedHeight],
-    boundingBox,
-  ];
+  const fitSize: FitSize = [[boundedWidth, boundedHeight], boundingBox];
 
   return (
     <>
       <svg
         width={width}
         height={height}
-        className={styles.svgMap}
+        css={css({ display: 'block', bg: 'transparent' })}
         onMouseMove={createSvgMouseOverHandler(timeout, setTooltip)}
         onMouseOut={
           isTouch ? undefined : createSvgMouseOutHandler(timeout, setTooltip)
@@ -166,21 +173,19 @@ const ChoroplethMap: <T>(
           <MercatorGroup
             data={featureCollection.features}
             render={featureCallback}
-            fitSize={sizeToFit}
+            fitSize={fitSize}
           />
 
-          <MercatorGroup
-            data={overlays.features}
-            render={overlayCallback}
-            fitSize={sizeToFit}
-          />
+          <Country fitSize={fitSize} />
 
           {hovers && (
-            <MercatorGroup
-              data={hovers.features}
-              render={hoverCallback}
-              fitSize={sizeToFit}
-            />
+            <g ref={hoverRef}>
+              <MercatorGroup
+                data={hovers.features}
+                render={hoverCallback}
+                fitSize={fitSize}
+              />
+            </g>
           )}
         </g>
       </svg>
@@ -188,25 +193,35 @@ const ChoroplethMap: <T>(
   );
 });
 
+function Country({ fitSize }: { fitSize: FitSize }) {
+  return (
+    <g css={css({ pointerEvents: 'none' })}>
+      <MercatorGroup
+        data={countryGeo.features}
+        render={(_, path, index) => (
+          <Path key={index} d={path} stroke="#c4c4c4" strokeWidth={0.5} />
+        )}
+        fitSize={fitSize}
+      />
+    </g>
+  );
+}
+
 interface MercatorGroupProps<G extends Geometry, P> {
-  data: Array<Feature<G, P>>;
-  render: any;
-  fitSize: [[number, number], any];
+  data: Feature<G, P>[];
+  render: (
+    feature: Feature<G, P>,
+    path: string,
+    index: number
+  ) => React.ReactNode;
+  fitSize: FitSize;
 }
 
 function MercatorGroup<G extends Geometry, P>(props: MercatorGroupProps<G, P>) {
   const { data, fitSize, render } = props;
 
   return (
-    <Mercator
-      /**
-       * @TODO It looks like there are some discrepancies between types coming
-       * from geojson and d3-geo.
-       * Our data uses geojson, the Mercator component depends on d3-geo.
-       */
-      data={(data as unknown) as GeoPermissibleObjects[]}
-      fitSize={fitSize}
-    >
+    <Mercator data={data} fitSize={fitSize}>
       {({ features }) => (
         <g data-cy="choropleth-features">
           {features.map(

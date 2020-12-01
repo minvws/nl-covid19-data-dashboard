@@ -1,64 +1,57 @@
+import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Afname from '~/assets/afname.svg';
 import Getest from '~/assets/test.svg';
 import { Anchor } from '~/components-styled/anchor';
 import { Box } from '~/components-styled/base';
+import { RegionControlOption } from '~/components-styled/chart-region-controls';
+import { ChartTile } from '~/components-styled/chart-tile';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
-import { KpiSection } from '~/components-styled/kpi-section';
+import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { MultipleLineChartTile } from '~/components-styled/multiple-line-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
 import { BarChart } from '~/components/charts/index';
-import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/use-safety-region-legenda-data';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
+import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
 import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/create-positive-tested-people-regional-tooltip';
-import { ContentHeader } from '~/components/contentHeader';
-import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRangeHack';
 import { PositiveTestedPeopleBarScale } from '~/components/landelijk/positive-tested-people-barscale';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
-import getNlData, { INationalData } from '~/static-props/nl-data';
 import {
-  InfectedPeopleDeltaNormalized,
-  IntakeShareAgeGroups,
-  NationalInfectedPeopleTotal,
-} from '~/types/data.d';
+  getNationalStaticProps,
+  NationalPageProps,
+} from '~/static-props/nl-data';
+import { colors } from '~/style/theme';
+import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
-import { formatDateFromSeconds } from '~/utils/formatDate';
-import { Metadata } from '~/components-styled/metadata';
-import { MultipleLineChartTile } from '~/components-styled/multiple-line-chart-tile';
-import { RegionControlOption } from '~/components-styled/chart-region-controls';
 
 const text = siteText.positief_geteste_personen;
 const ggdText = siteText.positief_geteste_personen_ggd;
 
-const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
-  const { data } = props;
+const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>(
     'municipal'
   );
   const router = useRouter();
 
-  const legendItems = useSafetyRegionLegendaData('positive_tested_people');
-  const delta: InfectedPeopleDeltaNormalized =
-    data.infected_people_delta_normalized;
-  const age: IntakeShareAgeGroups = data.intake_share_age_groups;
-  const total: NationalInfectedPeopleTotal = data?.infected_people_total;
+  const dataInfectedDelta = data.infected_people_delta_normalized;
+  const dataIntakeAge = data.intake_share_age_groups;
+  const dataGgdLastValue = data.ggd.last_value;
+  const dataGgdValues = data.ggd.values;
 
-  const ggdLastValue = data.ggd.last_value;
-  const ggdValues = data.ggd.values;
-
-  const barChartTotal: number = age.values.reduce(
+  const barChartTotal: number = dataIntakeAge.values.reduce(
     (mem: number, part): number => {
       return mem + part.infected_per_agegroup_increase;
     },
@@ -73,15 +66,18 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
       />
       <ContentHeader
         category={siteText.nationaal_layout.headings.besmettingen}
+        screenreaderCategory={siteText.positief_geteste_personen.titel_sidebar}
         title={text.titel}
-        Icon={Getest}
+        icon={<Getest />}
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: delta.last_value.date_of_report_unix,
-          dateInsertedUnix: delta.last_value.date_of_insertion_unix,
-          dataSource: text.bron,
+          dateInfo: dataInfectedDelta.last_value.date_of_report_unix,
+          dateOfInsertionUnix:
+            dataInfectedDelta.last_value.date_of_insertion_unix,
+          dataSources: [text.bronnen.rivm],
         }}
+        reference={text.reference}
       />
 
       <TwoKpiSection>
@@ -89,43 +85,47 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           title={text.barscale_titel}
           data-cy="infected_daily_increase"
           metadata={{
-            date: delta.last_value.date_of_report_unix,
-            source: text.bron,
+            date: dataInfectedDelta.last_value.date_of_report_unix,
+            source: text.bronnen.rivm,
           }}
         >
-          {delta && (
-            <PositiveTestedPeopleBarScale data={delta} showAxis={true} />
-          )}
+          <PositiveTestedPeopleBarScale data={data} showAxis />
+
           <Text>{text.barscale_toelichting}</Text>
         </KpiTile>
 
         <KpiTile
           title={text.kpi_titel}
           metadata={{
-            date: delta.last_value.date_of_report_unix,
-            source: text.bron,
+            date: dataInfectedDelta.last_value.date_of_report_unix,
+            source: text.bronnen.rivm,
           }}
         >
           <KpiValue
             data-cy="infected_daily_total"
-            absolute={total.last_value.infected_daily_total}
+            absolute={
+              data.infected_people_total.last_value.infected_daily_total
+            }
+            difference={
+              data.difference.infected_people_total__infected_daily_total
+            }
           />
           <Text>{text.kpi_toelichting}</Text>
           <Box>
             <Heading level={4} fontSize={'1.2em'} mt={'1.5em'} mb={0}>
               <span
+                css={css({ '& > span': { color: 'data.primary' } })}
                 dangerouslySetInnerHTML={{
                   __html: replaceKpisInText(ggdText.summary_title, [
                     {
                       name: 'percentage',
                       value: `${formatPercentage(
-                        ggdLastValue.infected_percentage
+                        dataGgdLastValue.infected_percentage
                       )}%`,
-                      className: 'text-blue',
                     },
                   ]),
                 }}
-              ></span>
+              />
             </Heading>
             <Text mt={0} lineHeight={1}>
               <Anchor name="ggd" text={ggdText.summary_link_cta} />
@@ -138,19 +138,15 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         data-cy="chloropleths"
         title={text.map_titel}
         metadata={{
-          date: delta.last_value.date_of_report_unix,
-          source: text.bron,
+          date: dataInfectedDelta.last_value.date_of_report_unix,
+          source: text.bronnen.rivm,
         }}
         description={text.map_toelichting}
         onChangeControls={setSelectedMap}
-        legend={
-          legendItems // this data value should probably not be optional
-            ? {
-                title: text.chloropleth_legenda.titel,
-                items: legendItems,
-              }
-            : undefined
-        }
+        legend={{
+          title: text.chloropleth_legenda.titel,
+          thresholds: regionThresholds.positive_tested_people,
+        }}
       >
         {/**
          * It's probably a good idea to abstract this even further, so that
@@ -183,95 +179,100 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         title={text.linechart_titel}
         description={text.linechart_toelichting}
         signaalwaarde={7}
-        values={delta.values.map((value) => ({
+        values={dataInfectedDelta.values.map((value) => ({
           value: value.infected_daily_increase,
           date: value.date_of_report_unix,
         }))}
         metadata={{
-          source: text.bron,
+          source: text.bronnen.rivm,
         }}
       />
 
-      <KpiSection flexDirection="column">
-        <Box>
-          <Heading level={3}>{text.barchart_titel}</Heading>
-          <Text>{text.barchart_toelichting}</Text>
-        </Box>
-        <Box>
-          <BarChart
-            keys={text.barscale_keys}
-            data={age.values.map((value) => ({
-              y: value.infected_per_agegroup_increase,
-              label:
-                barChartTotal > 0
-                  ? `${(
-                      (value.infected_per_agegroup_increase * 100) /
-                      barChartTotal
-                    ).toFixed(0)}%`
-                  : false,
-            }))}
-            axisTitle={text.barchart_axis_titel}
-          />
-        </Box>
-        <Metadata
-          date={delta.last_value.date_of_report_unix}
-          source={text.bron}
+      <ChartTile
+        title={text.barchart_titel}
+        description={text.barchart_toelichting}
+        metadata={{
+          date: dataInfectedDelta.last_value.date_of_report_unix,
+          source: text.bronnen.rivm,
+        }}
+      >
+        <BarChart
+          keys={text.barscale_keys}
+          data={dataIntakeAge.values.map((value) => ({
+            y: value.infected_per_agegroup_increase,
+            label:
+              barChartTotal > 0
+                ? `${(
+                    (value.infected_per_agegroup_increase * 100) /
+                    barChartTotal
+                  ).toFixed(0)}%`
+                : false,
+          }))}
+          axisTitle={text.barchart_axis_titel}
         />
-      </KpiSection>
+      </ChartTile>
 
-      <ContentHeader_weekRangeHack
+      <ContentHeader
         title={ggdText.titel}
+        skipLinkAnchor={true}
         id="ggd"
-        Icon={Afname}
+        icon={<Afname />}
         subtitle={ggdText.toelichting}
         metadata={{
           datumsText: ggdText.datums,
-          weekStartUnix: ggdLastValue.week_start_unix,
-          weekEndUnix: ggdLastValue.week_end_unix,
-          dateOfInsertionUnix: ggdLastValue.date_of_insertion_unix,
-          dataSource: ggdText.bron,
+          dateInfo: {
+            weekStartUnix: dataGgdLastValue.week_start_unix,
+            weekEndUnix: dataGgdLastValue.week_end_unix,
+          },
+          dateOfInsertionUnix: dataGgdLastValue.date_of_insertion_unix,
+          dataSources: [ggdText.bronnen.rivm],
         }}
+        reference={text.reference}
       />
 
       <TwoKpiSection>
         <KpiTile
           title={ggdText.totaal_getest_week_titel}
           metadata={{
-            date: [ggdLastValue.week_start_unix, ggdLastValue.week_end_unix],
-            source: ggdText.bron,
+            date: [
+              dataGgdLastValue.week_start_unix,
+              dataGgdLastValue.week_end_unix,
+            ],
+            source: ggdText.bronnen.rivm,
           }}
         >
-          <KpiValue absolute={ggdLastValue.tested_total} />
+          <KpiValue absolute={dataGgdLastValue.tested_total} />
           <Text>{ggdText.totaal_getest_week_uitleg}</Text>
         </KpiTile>
         <KpiTile
           title={ggdText.positief_getest_week_titel}
           metadata={{
-            date: [ggdLastValue.week_start_unix, ggdLastValue.week_end_unix],
-            source: ggdText.bron,
+            date: [
+              dataGgdLastValue.week_start_unix,
+              dataGgdLastValue.week_end_unix,
+            ],
+            source: ggdText.bronnen.rivm,
           }}
         >
           <KpiValue
-            absolute={ggdLastValue.infected}
-            percentage={ggdLastValue.infected_percentage}
+            absolute={dataGgdLastValue.infected}
+            percentage={dataGgdLastValue.infected_percentage}
           />
           <Text>{ggdText.positief_getest_week_uitleg}</Text>
           <Text>
             <strong
-              className="additional-kpi"
+              css={css({ '& > span': { color: 'data.primary' } })}
               dangerouslySetInnerHTML={{
                 __html: replaceKpisInText(
                   ggdText.positief_getest_getest_week_uitleg,
                   [
                     {
                       name: 'numerator',
-                      value: formatNumber(ggdLastValue.infected),
-                      className: 'text-blue',
+                      value: formatNumber(dataGgdLastValue.infected),
                     },
                     {
                       name: 'denominator',
-                      value: formatNumber(ggdLastValue.tested_total),
-                      className: 'text-blue',
+                      value: formatNumber(dataGgdLastValue.tested_total),
                     },
                   ]
                 ),
@@ -285,7 +286,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         timeframeOptions={['all', '5weeks']}
         title={ggdText.linechart_percentage_titel}
         description={ggdText.linechart_percentage_toelichting}
-        values={ggdValues.map((value) => ({
+        values={dataGgdValues.map((value) => ({
           value: value.infected_percentage,
           date: value.week_unix,
           week: {
@@ -306,15 +307,16 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
           return `${formatPercentage(y)}%`;
         }}
         metadata={{
-          source: ggdText.bron,
+          source: ggdText.bronnen.rivm,
         }}
       />
 
       <MultipleLineChartTile
+        timeframeOptions={['all', '5weeks']}
         title={ggdText.linechart_totaltests_titel}
         description={ggdText.linechart_totaltests_toelichting}
         values={[
-          ggdValues.map((value) => ({
+          dataGgdValues.map((value) => ({
             value: value.tested_total,
             date: value.week_unix,
             week: {
@@ -322,7 +324,7 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
               end: value.week_end_unix,
             },
           })),
-          ggdValues.map((value) => ({
+          dataGgdValues.map((value) => ({
             value: value.infected,
             date: value.week_unix,
             week: {
@@ -333,24 +335,24 @@ const PositivelyTestedPeople: FCWithLayout<INationalData> = (props) => {
         ]}
         linesConfig={[
           {
-            color: '#154273',
+            color: colors.data.secondary,
             legendLabel: ggdText.linechart_totaltests_legend_label,
           },
           {
-            color: '#3391CC',
+            color: colors.data.primary,
             legendLabel: ggdText.linechart_positivetests_legend_label,
           },
         ]}
         metadata={{
-          source: ggdText.bron,
+          source: ggdText.bronnen.rivm,
         }}
       />
     </>
   );
 };
 
-PositivelyTestedPeople.getLayout = getNationalLayout();
+PositivelyTestedPeople.getLayout = getNationalLayout;
 
-export const getStaticProps = getNlData();
+export const getStaticProps = getNationalStaticProps;
 
 export default PositivelyTestedPeople;

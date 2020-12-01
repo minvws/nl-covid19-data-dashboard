@@ -3,9 +3,9 @@ import { Box } from './base';
 import { css } from '@styled-system/css';
 import styled from 'styled-components';
 
-export interface RadioGroupItem {
+export interface RadioGroupItem<T extends string> {
   label: string;
-  value: string;
+  value: T;
 }
 
 const StyledInput = styled.input(
@@ -34,6 +34,8 @@ const StyledLabel = styled.label(
     borderWidth: '1px 0 1px 1px',
     whiteSpace: 'nowrap',
 
+    cursor: 'pointer',
+
     '&:last-child': {
       borderRightWidth: '1px',
     },
@@ -48,25 +50,25 @@ const StyledLabel = styled.label(
   })
 );
 
-interface RadioGroupProps {
+interface RadioGroupProps<T extends string> {
   onChange: (value: any) => void;
-  value?: string;
-  items: RadioGroupItem[];
+  value?: T;
+  items: RadioGroupItem<T>[];
 }
 
 /**
  * A radiogroup component that takes an array of radiogroup items and
  * reports its changes using the given onSelect callback.
  */
-export function RadioGroup(props: RadioGroupProps) {
+export function RadioGroup<T extends string>(props: RadioGroupProps<T>) {
   const { onChange, items, value } = props;
-  const [selectedValue, setSelectedValue] = useState<string>(
+  const [selectedValue, setSelectedValue] = useState<T>(
     value ?? items[0].value
   );
 
   const id = useComponentId();
 
-  const onLocalChange = (value: string): void => {
+  const onLocalChange = (value: T): void => {
     if (value !== selectedValue) {
       setSelectedValue(value);
       onChange(value);

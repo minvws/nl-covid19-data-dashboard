@@ -1,7 +1,7 @@
 import { Box } from './base';
-import { Text, Heading } from './typography';
 import { Tile } from './layout';
-import { MetadataProps, Metadata } from './metadata';
+import { Metadata, MetadataProps } from './metadata';
+import { Heading, Text } from './typography';
 
 interface Illustration {
   image: string;

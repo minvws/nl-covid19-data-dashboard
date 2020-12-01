@@ -1,29 +1,31 @@
 import { useRouter } from 'next/router';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
+import { ContentHeader } from '~/components-styled/content-header';
+import { KpiTile } from '~/components-styled/kpi-tile';
+import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
-import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/use-safety-region-legenda-data';
+import { TwoKpiSection } from '~/components-styled/two-kpi-section';
+import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createSewerRegionalTooltip } from '~/components/choropleth/tooltips/region/create-sewer-regional-tooltip';
-import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRangeHack';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
-import getNlData, { INationalData } from '~/static-props/nl-data';
+import {
+  getNationalStaticProps,
+  NationalPageProps,
+} from '~/static-props/nl-data';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
-import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { KpiTile } from '~/components-styled/kpi-tile';
-import { KpiValue } from '~/components-styled/kpi-value';
 
 const text = siteText.rioolwater_metingen;
 
-const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
+const SewerWater: FCWithLayout<NationalPageProps> = ({ data }) => {
   const sewerAverages = data.sewer;
   const router = useRouter();
-  const legendItems = useSafetyRegionLegendaData('sewer');
 
   return (
     <>
@@ -31,18 +33,22 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
         title={text.metadata.title}
         description={text.metadata.description}
       />
-      <ContentHeader_weekRangeHack
+      <ContentHeader
         category={siteText.nationaal_layout.headings.vroege_signalen}
+        screenreaderCategory={siteText.rioolwater_metingen.titel_sidebar}
         title={text.titel}
-        Icon={RioolwaterMonitoring}
+        icon={<RioolwaterMonitoring />}
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          weekStartUnix: sewerAverages.last_value.week_start_unix,
-          weekEndUnix: sewerAverages.last_value.week_end_unix,
+          dateInfo: {
+            weekStartUnix: sewerAverages.last_value.week_start_unix,
+            weekEndUnix: sewerAverages.last_value.week_end_unix,
+          },
           dateOfInsertionUnix: sewerAverages.last_value.date_of_insertion_unix,
-          dataSource: text.bron,
+          dataSources: [text.bronnen.rivm],
         }}
+        reference={text.reference}
       />
 
       <TwoKpiSection>
@@ -54,10 +60,11 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
               sewerAverages.last_value.week_start_unix,
               sewerAverages.last_value.week_end_unix,
             ],
-            source: text.bron,
+            source: text.bronnen.rivm,
           }}
         >
           <KpiValue
+            data-cy="sewer_average"
             absolute={sewerAverages.last_value.average}
             valueAnnotation={siteText.waarde_annotaties.riool_normalized}
           />
@@ -73,10 +80,11 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
               sewerAverages.last_value.week_start_unix,
               sewerAverages.last_value.week_end_unix,
             ],
-            source: text.bron,
+            source: text.bronnen.rivm,
           }}
         >
           <KpiValue
+            data-cy="total_installation_count"
             absolute={sewerAverages.last_value.total_installation_count}
           />
         </KpiTile>
@@ -91,7 +99,7 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
           week: { start: value.week_start_unix, end: value.week_end_unix },
         }))}
         metadata={{
-          source: text.bron,
+          source: text.bronnen.rivm,
         }}
         formatTooltip={(x) => {
           return `<strong>${formatDateFromSeconds(
@@ -113,16 +121,12 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
             sewerAverages.last_value.week_start_unix,
             sewerAverages.last_value.week_end_unix,
           ],
-          source: text.bron,
+          source: text.bronnen.rivm,
         }}
-        legend={
-          legendItems // this data value should probably not be optional
-            ? {
-                title: text.legenda_titel,
-                items: legendItems,
-              }
-            : undefined
-        }
+        legend={{
+          title: text.legenda_titel,
+          thresholds: regionThresholds.sewer,
+        }}
       >
         <SafetyRegionChoropleth
           metricName="sewer"
@@ -135,8 +139,8 @@ const SewerWater: FCWithLayout<INationalData> = ({ data }) => {
   );
 };
 
-SewerWater.getLayout = getNationalLayout();
+SewerWater.getLayout = getNationalLayout;
 
-export const getStaticProps = getNlData();
+export const getStaticProps = getNationalStaticProps;
 
 export default SewerWater;

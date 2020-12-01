@@ -1,18 +1,23 @@
 import Ziektegolf from '~/assets/ziektegolf.svg';
+import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
+import { ContentHeader } from '~/components-styled/content-header';
+import { KpiTile } from '~/components-styled/kpi-tile';
+import { KpiValue } from '~/components-styled/kpi-value';
+import { Legenda } from '~/components-styled/legenda';
+import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { AreaChart } from '~/components/charts/index';
-import { ContentHeader } from '~/components/contentHeader';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
-import { Legenda } from '~/components/legenda';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
-import getNlData, { INationalData } from '~/static-props/nl-data';
-import { Metadata } from '~/components-styled/metadata';
-import { formatNumber } from '~/utils/formatNumber';
+import {
+  getNationalStaticProps,
+  NationalPageProps,
+} from '~/static-props/nl-data';
 
 const text = siteText.besmettelijke_personen;
 
-const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
+const InfectiousPeople: FCWithLayout<NationalPageProps> = (props) => {
   const { data } = props;
 
   const count = data.infectious_people_count;
@@ -27,95 +32,84 @@ const InfectiousPeople: FCWithLayout<INationalData> = (props) => {
       />
       <ContentHeader
         category={siteText.nationaal_layout.headings.besmettingen}
+        screenreaderCategory={siteText.besmettelijke_personen.titel_sidebar}
         title={text.title}
-        Icon={Ziektegolf}
+        icon={<Ziektegolf />}
         subtitle={text.toelichting_pagina}
         metadata={{
           datumsText: text.datums,
-          dateUnix:
+          dateInfo:
             infectiousPeopleLastKnownAverage.last_value.date_of_report_unix,
-          dateInsertedUnix:
+          dateOfInsertionUnix:
             infectiousPeopleLastKnownAverage.last_value.date_of_insertion_unix,
-          dataSource: text.bron,
+          dataSources: [text.bronnen.rivm],
         }}
+        reference={text.reference}
       />
 
-      {/*
-        @TODO make this replace the code below. Maybe extend TwoKpiSection so that
-        it renders the KPI full-width if there is only one child.
-
-        Discuss with design. https://trello.com/c/gnDOKkZ2/780-regressie-gemiddeld-aantal-besmettelijke-mensen-per-100k
-
       <TwoKpiSection>
-        {infectiousPeopleLastKnownAverage && (
-          <KpiTile
-            title={text.cijfer_titel}
-            description={text.cijfer_toelichting}
-            metadata={{
-              date:
-                infectiousPeopleLastKnownAverage.last_value.date_of_report_unix,
-              source: text.bron,
-            }}
-          >
-            <KpiValue
-              absolute={
-                infectiousPeopleLastKnownAverage.last_value.infectious_avg
-              }
-            />
-          </KpiTile>
-        )}
+        <KpiTile
+          title={text.cijfer_titel}
+          description={text.cijfer_toelichting}
+          metadata={{
+            date:
+              infectiousPeopleLastKnownAverage.last_value.date_of_report_unix,
+            source: text.bronnen.rivm,
+          }}
+        >
+          <KpiValue
+            data-cy="infectious_avg"
+            absolute={
+              infectiousPeopleLastKnownAverage.last_value.infectious_avg
+            }
+          />
+        </KpiTile>
       </TwoKpiSection>
 
-      */}
-
-      <article className="metric-article layout-two-column">
-        <div className="column-item column-item-extra-margin">
-          <h3>{text.cijfer_titel}</h3>
-          <p className="text-blue kpi" data-cy="infected_daily_total">
-            {formatNumber(
-              infectiousPeopleLastKnownAverage.last_value.infectious_avg
-            )}
-          </p>
-          <Metadata
-            date={
-              infectiousPeopleLastKnownAverage.last_value.date_of_report_unix
-            }
-            source={text.bron}
-          />
-        </div>
-
-        <div className="column-item column-item-extra-margin">
-          <p>{text.cijfer_toelichting}</p>
-        </div>
-      </article>
-
       {count?.values && (
-        <article className="metric-article">
-          <AreaChart
-            title={text.linechart_titel}
-            data={count.values.map((value) => ({
-              avg: value.infectious_avg,
-              min: value.infectious_low,
-              max: value.infectious_high,
-              date: value.date_of_report_unix,
-            }))}
-            rangeLegendLabel={text.rangeLegendLabel}
-            lineLegendLabel={text.lineLegendLabel}
-            timeframeOptions={['all', '5weeks']}
-          />
-          <Legenda>
-            <li className="blue">{text.legenda_line}</li>
-            <li className="gray square">{text.legenda_marge}</li>
-          </Legenda>
-          <Metadata source={text.bron} />
-        </article>
+        <ChartTileWithTimeframe
+          metadata={{ source: text.bronnen.rivm }}
+          title={text.linechart_titel}
+          timeframeOptions={['all', '5weeks']}
+          timeframeInitialValue="5weeks"
+        >
+          {(timeframe) => (
+            <>
+              <AreaChart
+                timeframe={timeframe}
+                data={count.values.map((value) => ({
+                  avg: value.infectious_avg,
+                  min: value.infectious_low,
+                  max: value.infectious_high,
+                  date: value.date_of_report_unix,
+                }))}
+                rangeLegendLabel={text.rangeLegendLabel}
+                lineLegendLabel={text.lineLegendLabel}
+              />
+              <Legenda
+                items={[
+                  {
+                    label: text.legenda_line,
+                    color: 'data.primary',
+                    shape: 'line',
+                  },
+                  {
+                    label: text.legenda_marge,
+                    color: 'data.fill',
+                    shape: 'square',
+                  },
+                ]}
+              />
+            </>
+          )}
+        </ChartTileWithTimeframe>
       )}
     </>
   );
 };
 
-InfectiousPeople.getLayout = getNationalLayout();
+InfectiousPeople.getLayout = getNationalLayout;
 
-export const getStaticProps = getNlData();
+export const getStaticProps = getNationalStaticProps;
 
 export default InfectiousPeople;

@@ -34,10 +34,14 @@ export function Path({
 const StyledPath = styled.path<{ hoverable?: boolean }>(
   (x) =>
     css({
-      fill: x.fill || 'none',
+      fill: x.fill || 'transparent',
       stroke: x.stroke,
       strokeWidth: x.strokeWidth || 0.5,
       pointerEvents: 'none',
+
+      transitionProperty: 'fill, stroke, stroke-width',
+      transitionDuration: '120ms, 90ms',
+      transitionTimingFunction: 'ease-out',
     }),
   (x) =>
     x.hoverable &&
@@ -47,9 +51,6 @@ const StyledPath = styled.path<{ hoverable?: boolean }>(
       stroke: x.stroke ?? 'transparent',
       strokeWidth: x.strokeWidth ?? 0,
       pointerEvents: 'all',
-      transitionProperty: 'fill, stroke, stroke-width',
-      transitionDuration: '90ms',
-      transitionTimingFunction: 'ease-out',
       '&:hover': {
         transitionDuration: '0ms',
         fill: x.fill ?? 'none',

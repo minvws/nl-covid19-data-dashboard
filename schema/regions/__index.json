@@ -33,6 +33,7 @@
     },
     "hospital_admissions": {
       "type": "array",
+      "minItems": 25,
       "maxItems": 25,
       "items": {
         "$ref": "hospital_admissions.json"
@@ -79,6 +80,13 @@
       "maxItems": 25,
       "items": {
         "$ref": "sewer.json"
+      }
+    },
+    "behavior": {
+      "type": "array",
+      "maxItems": 25,
+      "items": {
+        "$ref": "behavior.json"
       }
     }
   }

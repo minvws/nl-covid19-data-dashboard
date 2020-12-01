@@ -1,19 +1,13 @@
 import fs from 'fs';
 import Head from 'next/head';
 import path from 'path';
+import { Collapsable } from '~/components-styled/collapsable';
 import { FCWithLayout, getLayoutWithMetadata } from '~/components/layout';
 import { MaxWidth } from '~/components/maxWidth';
 import siteText, { TALLLanguages } from '~/locale/index';
-import { MDToHTMLString } from '~/utils/MDToHTMLString';
-import { ensureUniqueSkipLinkIds, getSkipLinkId } from '~/utils/skipLinks';
+import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
+import { getSkipLinkId } from '~/utils/skipLinks';
 import styles from './over.module.scss';
-import { Collapsable } from '~/components-styled/collapsable';
-
-interface ICijfer {
-  cijfer: string;
-  verantwoording: string;
-  id?: string;
-}
 
 interface StaticProps {
   props: VerantwoordingProps;
@@ -25,18 +19,7 @@ interface VerantwoordingProps {
 }
 
 export async function getStaticProps(): Promise<StaticProps> {
-  const text = (await import('../locale/index')).default;
-  const serializedContent = text.verantwoording.cijfers.map(
-    (item: ICijfer) => ({
-      ...item,
-      id: getSkipLinkId(item.cijfer),
-      verantwoording: MDToHTMLString(item.verantwoording),
-    })
-  );
-
-  ensureUniqueSkipLinkIds(serializedContent);
-
-  text.verantwoording.cijfers = serializedContent;
+  const text = parseMarkdownInLocale((await import('../locale/index')).default);
 
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
   const fileContents = fs.readFileSync(filePath, 'utf8');
@@ -70,17 +53,19 @@ const Verantwoording: FCWithLayout<VerantwoordingProps> = (props) => {
             <h2>{text.verantwoording.title}</h2>
             <p>{text.verantwoording.paragraaf}</p>
             <article className={styles.faqList}>
-              {text.verantwoording.cijfers.map((item: ICijfer) =>
-                item.verantwoording && item.cijfer ? (
-                  <Collapsable key={item.id} id={item.id} summary={item.cijfer}>
+              {text.verantwoording.cijfers.map((item) => {
+                const id = getSkipLinkId(item.cijfer);
+
+                return item.verantwoording && item.cijfer ? (
+                  <Collapsable key={id} id={id} summary={item.cijfer}>
                     <div
                       dangerouslySetInnerHTML={{
                         __html: item.verantwoording,
                       }}
                     ></div>
                   </Collapsable>
-                ) : null
-              )}
+                ) : null;
+              })}
             </article>
           </div>
         </MaxWidth>

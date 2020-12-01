@@ -49,7 +49,10 @@ Runs the app in the development mode. Open http://localhost:3000 to view it in t
 Builds the app for production to the out folder. It correctly bundles React in production mode and optimizes the build for the best performance. All pages are output as static HTML files through next export, ready to be served on any static file server.
 
 `yarn download`
-This downloads the latest data files from the production server and places the data in the right folder.
+This downloads the latest data files from the production server and places the data in the `public/json` folder.
+
+`yarn copy-fixtures`
+Copies the required json files from the `public/json` folder to the `src/pages-tests/fixtures` directory and prunes the necessary files of unneeded data.
 
 `yarn validate-json`
 This validates the date downloaded by the `yarn download` command against the JSON schemas in the `schema` directory.

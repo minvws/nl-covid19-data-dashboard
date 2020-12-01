@@ -10,10 +10,29 @@ export interface Municipal {
   proto_name: string;
   name: string;
   code: string;
+  difference: MunicipalDifference;
   hospital_admissions: MunicipalHospitalAdmissions;
   positive_tested_people: MunicipalPositiveTestedPeople;
   sewer?: MunicipalSewer;
   sewer_per_installation?: MunicipalSewerPerInstallation;
+}
+export interface MunicipalDifference {
+  positive_tested_people__infected_daily_increase?: DifferenceDecimal;
+  positive_tested_people__infected_daily_total: DifferenceInteger;
+  hospital_admissions__moving_average_hospital: DifferenceDecimal;
+  sewer__average?: DifferenceDecimal;
+}
+export interface DifferenceDecimal {
+  old_value: number;
+  difference: number;
+  old_date_of_report_unix: number;
+  new_date_of_report_unix: number;
+}
+export interface DifferenceInteger {
+  old_value: number;
+  difference: number;
+  old_date_of_report_unix: number;
+  new_date_of_report_unix: number;
 }
 export interface MunicipalHospitalAdmissions {
   values: HospitalAdmissionsLastValue[];
@@ -105,6 +124,7 @@ export interface National {
   proto_name: "NL";
   name: string;
   code: string;
+  difference: NationalDifference;
   verdenkingen_huisartsen: NationalHuisartsVerdenkingen;
   intake_hospital_ma: IntakeHospitalMa;
   infectious_people_count: InfectiousPeopleCount;
@@ -124,11 +144,41 @@ export interface National {
   ggd: NationalGgd;
   nursing_home: NationalNursingHome;
   restrictions?: NationalRestrictions;
+  behavior?: NationalBehavior;
+}
+export interface NationalDifference {
+  infected_people_delta_normalized__infected_daily_increase?: DifferenceDecimal;
+  infected_people_total__infected_daily_total: DifferenceInteger;
+  ggd__tested_total?: DifferenceInteger;
+  ggd__infected_percentage?: DifferenceDecimal;
+  reproduction_index_last_known_average__reproduction_index_avg?: DifferenceDecimal;
+  infectious_people_count_normalized__infectious_avg_normalized?: DifferenceDecimal;
+  intake_hospital_ma__moving_average_hospital: DifferenceDecimal;
+  hospital_beds_occupied__covid_occupied?: DifferenceInteger;
+  intake_intensivecare_ma__moving_average_ic: DifferenceDecimal;
+  intensive_care_beds_occupied__covid_occupied?: DifferenceInteger;
+  huisarts_verdenkingen__incidentie?: DifferenceDecimal;
+  huisarts_verdenkingen__geschat_aantal?: DifferenceInteger;
+  sewer__average?: DifferenceDecimal;
+  nursing_home__newly_infected_people?: DifferenceInteger;
+  nursing_home__infected_locations_total?: DifferenceInteger;
+  nursing_home__deceased_daily?: DifferenceInteger;
+}
+export interface DifferenceDecimal {
+  old_value: number;
+  difference: number;
+  old_date_of_report_unix: number;
+  new_date_of_report_unix: number;
+}
+export interface DifferenceInteger {
+  old_value: number;
+  difference: number;
+  old_date_of_report_unix: number;
+  new_date_of_report_unix: number;
 }
 export interface NationalHuisartsVerdenkingen {
   values: NationalHuisartsVerdenkingenValue[];
   last_value: NationalHuisartsVerdenkingenValue;
-  last_value_difference?: NationalHuisartsVerdenkingenValueDifference;
 }
 export interface NationalHuisartsVerdenkingenValue {
   week_unix: number;
@@ -137,13 +187,6 @@ export interface NationalHuisartsVerdenkingenValue {
   incidentie: number;
   geschat_aantal: number;
   date_of_insertion_unix: number;
-}
-export interface NationalHuisartsVerdenkingenValueDifference {
-  incidentie_old: number;
-  incidentie_difference: number;
-  geschat_aantal_old: number;
-  geschat_aantal_difference: number;
-  date_of_report_unix_old: number;
 }
 export interface IntakeHospitalMa {
   values: IntakeHospitalMaLastValue[];
@@ -198,17 +241,11 @@ export interface InfectedPeopleClustersLastValue {
 export interface NationalInfectedPeopleTotal {
   values: NationalInfectedPeopleTotalValue[];
   last_value: NationalInfectedPeopleTotalValue;
-  last_value_difference?: NationalInfectedPeopleTotalValueDifference;
 }
 export interface NationalInfectedPeopleTotalValue {
   infected_daily_total: number;
   date_of_report_unix: number;
   date_of_insertion_unix: number;
-}
-export interface NationalInfectedPeopleTotalValueDifference {
-  infected_daily_total_old: number;
-  infected_daily_total_difference: number;
-  date_of_report_unix_old: number;
 }
 export interface InfectedPeopleDeltaNormalized {
   values: InfectedPeopleDeltaNormalizedLastValue[];
@@ -361,6 +398,56 @@ export interface NationalRestrictionValue {
   restriction_order: number;
   valid_from_unix: number;
 }
+export interface NationalBehavior {
+  values: NationalBehaviorValue[];
+  last_value: NationalBehaviorValue;
+}
+export interface NationalBehaviorValue {
+  number_of_participants: number;
+  wash_hands_compliance: number | null;
+  wash_hands_compliance_trend: ("up" | "down" | "equal") | null;
+  keep_distance_compliance: number | null;
+  keep_distance_compliance_trend: ("up" | "down" | "equal") | null;
+  work_from_home_compliance: number | null;
+  work_from_home_compliance_trend: ("up" | "down" | "equal") | null;
+  avoid_crowds_compliance: number | null;
+  avoid_crowds_compliance_trend: ("up" | "down" | "equal") | null;
+  symptoms_stay_home_compliance: number | null;
+  symptoms_stay_home_compliance_trend: ("up" | "down" | "equal") | null;
+  symptoms_get_tested_compliance: number | null;
+  symptoms_get_tested_compliance_trend: ("up" | "down" | "equal") | null;
+  wear_mask_public_indoors_compliance: number | null;
+  wear_mask_public_indoors_compliance_trend: ("up" | "down" | "equal") | null;
+  wear_mask_public_transport_compliance: number | null;
+  wear_mask_public_transport_compliance_trend: ("up" | "down" | "equal") | null;
+  sneeze_cough_elbow_compliance: number | null;
+  sneeze_cough_elbow_compliance_trend: ("up" | "down" | "equal") | null;
+  max_visitors_compliance: number | null;
+  max_visitors_compliance_trend: ("up" | "down" | "equal") | null;
+  wash_hands_support: number | null;
+  wash_hands_support_trend: ("up" | "down" | "equal") | null;
+  keep_distance_support: number | null;
+  keep_distance_support_trend: ("up" | "down" | "equal") | null;
+  work_from_home_support: number | null;
+  work_from_home_support_trend: ("up" | "down" | "equal") | null;
+  avoid_crowds_support: number | null;
+  avoid_crowds_support_trend: ("up" | "down" | "equal") | null;
+  symptoms_stay_home_support: number | null;
+  symptoms_stay_home_support_trend: ("up" | "down" | "equal") | null;
+  symptoms_get_tested_support: number | null;
+  symptoms_get_tested_support_trend: ("up" | "down" | "equal") | null;
+  wear_mask_public_indoors_support: number | null;
+  wear_mask_public_indoors_support_trend: ("up" | "down" | "equal") | null;
+  wear_mask_public_transport_support?: number | null;
+  wear_mask_public_transport_support_trend?: ("up" | "down" | "equal") | null;
+  sneeze_cough_elbow_support: number | null;
+  sneeze_cough_elbow_support_trend: ("up" | "down" | "equal") | null;
+  max_visitors_support: number | null;
+  max_visitors_support_trend: ("up" | "down" | "equal") | null;
+  week_start_unix: number;
+  week_end_unix: number;
+  date_of_insertion_unix: number;
+}
 
 export interface Ranges {
   last_generated: string;
@@ -438,12 +525,38 @@ export interface Regionaal {
   proto_name: string;
   name: string;
   code: string;
+  difference: RegionalDifference;
   sewer: RegionalSewer;
   sewer_per_installation: RegionalSewerPerInstallation;
   results_per_region: ResultsPerRegion;
   ggd: RegionalGgd;
   nursing_home: RegionalNursingHome;
   restrictions?: RegionalRestrictions;
+  behavior?: RegionalBehavior;
+}
+export interface RegionalDifference {
+  results_per_region__infected_increase_per_region?: DifferenceDecimal;
+  results_per_region__total_reported_increase_per_region: DifferenceInteger;
+  ggd__tested_total?: DifferenceInteger;
+  ggd__infected_percentage?: DifferenceDecimal;
+  results_per_region__hospital_moving_avg_per_region: DifferenceDecimal;
+  results_per_region__hospital_total_counts_per_region?: DifferenceInteger;
+  sewer__average?: DifferenceDecimal;
+  nursing_home__newly_infected_people?: DifferenceInteger;
+  nursing_home__infected_locations_total?: DifferenceInteger;
+  nursing_home__deceased_daily?: DifferenceInteger;
+}
+export interface DifferenceDecimal {
+  old_value: number;
+  difference: number;
+  old_date_of_report_unix: number;
+  new_date_of_report_unix: number;
+}
+export interface DifferenceInteger {
+  old_value: number;
+  difference: number;
+  old_date_of_report_unix: number;
+  new_date_of_report_unix: number;
 }
 export interface RegionalSewer {
   values: RegionalSewerValue[];
@@ -549,6 +662,57 @@ export interface RegionalRestrictionValue {
   restriction_order: number;
   valid_from_unix: number;
 }
+export interface RegionalBehavior {
+  values: RegionalBehaviorValue[];
+  last_value: RegionalBehaviorValue;
+}
+export interface RegionalBehaviorValue {
+  number_of_participants: number;
+  wash_hands_compliance: number | null;
+  wash_hands_compliance_trend: ("up" | "down" | "equal") | null;
+  keep_distance_compliance: number | null;
+  keep_distance_compliance_trend: ("up" | "down" | "equal") | null;
+  work_from_home_compliance: number | null;
+  work_from_home_compliance_trend: ("up" | "down" | "equal") | null;
+  avoid_crowds_compliance: number | null;
+  avoid_crowds_compliance_trend: ("up" | "down" | "equal") | null;
+  symptoms_stay_home_compliance: number | null;
+  symptoms_stay_home_compliance_trend: ("up" | "down" | "equal") | null;
+  symptoms_get_tested_compliance: number | null;
+  symptoms_get_tested_compliance_trend: ("up" | "down" | "equal") | null;
+  wear_mask_public_indoors_compliance: number | null;
+  wear_mask_public_indoors_compliance_trend: ("up" | "down" | "equal") | null;
+  wear_mask_public_transport_compliance: number | null;
+  wear_mask_public_transport_compliance_trend: ("up" | "down" | "equal") | null;
+  sneeze_cough_elbow_compliance: number | null;
+  sneeze_cough_elbow_compliance_trend: ("up" | "down" | "equal") | null;
+  max_visitors_compliance: number | null;
+  max_visitors_compliance_trend: ("up" | "down" | "equal") | null;
+  wash_hands_support: number | null;
+  wash_hands_support_trend: ("up" | "down" | "equal") | null;
+  keep_distance_support: number | null;
+  keep_distance_support_trend: ("up" | "down" | "equal") | null;
+  work_from_home_support: number | null;
+  work_from_home_support_trend: ("up" | "down" | "equal") | null;
+  avoid_crowds_support: number | null;
+  avoid_crowds_support_trend: ("up" | "down" | "equal") | null;
+  symptoms_stay_home_support: number | null;
+  symptoms_stay_home_support_trend: ("up" | "down" | "equal") | null;
+  symptoms_get_tested_support: number | null;
+  symptoms_get_tested_support_trend: ("up" | "down" | "equal") | null;
+  wear_mask_public_indoors_support: number | null;
+  wear_mask_public_indoors_support_trend: ("up" | "down" | "equal") | null;
+  wear_mask_public_transport_support?: number | null;
+  wear_mask_public_transport_support_trend?: ("up" | "down" | "equal") | null;
+  sneeze_cough_elbow_support: number | null;
+  sneeze_cough_elbow_support_trend: ("up" | "down" | "equal") | null;
+  max_visitors_support: number | null;
+  max_visitors_support_trend: ("up" | "down" | "equal") | null;
+  week_start_unix: number;
+  week_end_unix: number;
+  date_of_insertion_unix: number;
+  vrcode: string;
+}
 
 export interface Regions {
   last_generated: string;
@@ -561,6 +725,7 @@ export interface Regions {
   escalation_levels: EscalationLevels[];
   nursing_home: RegionsNursingHome[];
   sewer: RegionsSewer[];
+  behavior?: RegionsBehavior[];
 }
 export interface RegionHospitalAdmissions {
   date_of_report_unix: number;
@@ -605,5 +770,52 @@ export interface RegionsSewer {
   vrcode: string;
   average: number;
   total_installation_count: number;
+  date_of_insertion_unix: number;
+}
+export interface RegionsBehavior {
+  vrcode: string;
+  number_of_participants: number;
+  wash_hands_compliance: number | null;
+  wash_hands_compliance_trend: ("up" | "down" | "equal") | null;
+  keep_distance_compliance: number | null;
+  keep_distance_compliance_trend: ("up" | "down" | "equal") | null;
+  work_from_home_compliance: number | null;
+  work_from_home_compliance_trend: ("up" | "down" | "equal") | null;
+  avoid_crowds_compliance: number | null;
+  avoid_crowds_compliance_trend: ("up" | "down" | "equal") | null;
+  symptoms_stay_home_compliance: number | null;
+  symptoms_stay_home_compliance_trend: ("up" | "down" | "equal") | null;
+  symptoms_get_tested_compliance: number | null;
+  symptoms_get_tested_compliance_trend: ("up" | "down" | "equal") | null;
+  wear_mask_public_indoors_compliance: number | null;
+  wear_mask_public_indoors_compliance_trend: ("up" | "down" | "equal") | null;
+  wear_mask_public_transport_compliance: number | null;
+  wear_mask_public_transport_compliance_trend: ("up" | "down" | "equal") | null;
+  sneeze_cough_elbow_compliance: number | null;
+  sneeze_cough_elbow_compliance_trend: ("up" | "down" | "equal") | null;
+  max_visitors_compliance: number | null;
+  max_visitors_compliance_trend: ("up" | "down" | "equal") | null;
+  wash_hands_support: number | null;
+  wash_hands_support_trend: ("up" | "down" | "equal") | null;
+  keep_distance_support: number | null;
+  keep_distance_support_trend: ("up" | "down" | "equal") | null;
+  work_from_home_support: number | null;
+  work_from_home_support_trend: ("up" | "down" | "equal") | null;
+  avoid_crowds_support: number | null;
+  avoid_crowds_support_trend: ("up" | "down" | "equal") | null;
+  symptoms_stay_home_support: number | null;
+  symptoms_stay_home_support_trend: ("up" | "down" | "equal") | null;
+  symptoms_get_tested_support: number | null;
+  symptoms_get_tested_support_trend: ("up" | "down" | "equal") | null;
+  wear_mask_public_indoors_support: number | null;
+  wear_mask_public_indoors_support_trend: ("up" | "down" | "equal") | null;
+  wear_mask_public_transport_support?: number | null;
+  wear_mask_public_transport_support_trend?: ("up" | "down" | "equal") | null;
+  sneeze_cough_elbow_support: number | null;
+  sneeze_cough_elbow_support_trend: ("up" | "down" | "equal") | null;
+  max_visitors_support: number | null;
+  max_visitors_support_trend: ("up" | "down" | "equal") | null;
+  week_start_unix: number;
+  week_end_unix: number;
   date_of_insertion_unix: number;
 }
