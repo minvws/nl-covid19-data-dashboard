@@ -1,12 +1,8 @@
 import { checkKpiValues } from 'cypress/support/checkKpiValues';
 import { swallowResizeObserverError } from 'cypress/support/swallowResizeObserverError';
 import { Context } from 'mocha';
-/// <reference types="cypress" />
-import { National } from '../../../src/types/data';
-import {
-  formatNumber,
-  formatPercentage,
-} from '../../../src/utils/formatNumber';
+import { National } from '~/types/data';
+import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 
 context('Landelijk - IC Opnames', () => {
   swallowResizeObserverError();

@@ -4,7 +4,7 @@ export function swallowResizeObserverError() {
     // it doesn't crash anything, so for now we're just going to swallow
     // the error and continue testing...
     const errorMessage = err.toString();
-    if (errorMessage.indexOf('ResizeObserver loop') > -1) {
+    if (errorMessage.includes('ResizeObserver loop')) {
       return false;
     }
     return true;

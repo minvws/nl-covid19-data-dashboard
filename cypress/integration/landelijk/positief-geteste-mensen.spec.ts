@@ -1,12 +1,8 @@
 import { checkKpiValues } from 'cypress/support/checkKpiValues';
 import { swallowResizeObserverError } from 'cypress/support/swallowResizeObserverError';
 import { Context } from 'mocha';
-/// <reference types="cypress" />
-import { National } from '../../../src/types/data';
-import {
-  formatNumber,
-  formatPercentage,
-} from '../../../src/utils/formatNumber';
+import { National } from '~/types/data';
+import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 
 context('Landelijk - Positief geteste mensen', () => {
   swallowResizeObserverError();
@@ -33,7 +29,7 @@ context('Landelijk - Positief geteste mensen', () => {
     checkKpiValues(kpiTestInfo);
   });
 
-  /*it('Should navigate to the appropriate municipality page after clicking on the choropleth', function (this: Context & {
+  xit('Should navigate to the appropriate municipality page after clicking on the choropleth', function (this: Context & {
     national: National;
   }) {
     const testMunicipalCode = 'GM0003';
@@ -49,5 +45,5 @@ context('Landelijk - Positief geteste mensen', () => {
         );
       });
     });
-  });*/
+  });
 });

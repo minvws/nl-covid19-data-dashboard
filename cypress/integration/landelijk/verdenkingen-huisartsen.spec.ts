@@ -1,9 +1,8 @@
 import { checkKpiValues } from 'cypress/support/checkKpiValues';
 import { swallowResizeObserverError } from 'cypress/support/swallowResizeObserverError';
 import { Context } from 'mocha';
-/// <reference types="cypress" />
-import { National } from '../../../src/types/data';
-import { formatNumber } from '../../../src/utils/formatNumber';
+import { National } from '~/types/data';
+import { formatNumber } from '~/utils/formatNumber';
 
 context('Landelijk - Verdenkingen huisartsen', () => {
   swallowResizeObserverError();
