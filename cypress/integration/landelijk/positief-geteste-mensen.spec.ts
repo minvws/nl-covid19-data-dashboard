@@ -1,19 +1,15 @@
+import { checkKpiValues } from 'cypress/support/checkKpiValues';
+import { swallowResizeObserverError } from 'cypress/support/swallowResizeObserverError';
 import { Context } from 'mocha';
 /// <reference types="cypress" />
-import { National } from '../../src/types/data';
-import { formatNumber, formatPercentage } from '../../src/utils/formatNumber';
+import { National } from '../../../src/types/data';
+import {
+  formatNumber,
+  formatPercentage,
+} from '../../../src/utils/formatNumber';
 
 context('Landelijk - Positief geteste mensen', () => {
-  Cypress.on('uncaught:exception', (err, runnable) => {
-    // For some reason this error throws very often during cypress tests,
-    // it doesn't crash anything, so for now we're just going to swallow
-    // the error and continue testing...
-    const errorMessage = err.toString();
-    if (errorMessage.indexOf('ResizeObserver loop') > -1) {
-      return false;
-    }
-    return true;
-  });
+  swallowResizeObserverError();
 
   before(() => {
     cy.fixture<National>('NL.json').as('national');
@@ -23,7 +19,7 @@ context('Landelijk - Positief geteste mensen', () => {
   it('Should show the correct KPI values', function (this: Context & {
     national: National;
   }) {
-    const kpiValues = {
+    const kpiTestInfo = {
       infected_daily_total: formatNumber(
         this.national.infected_people_total.last_value.infected_daily_total
       ),
@@ -34,16 +30,7 @@ context('Landelijk - Positief geteste mensen', () => {
       ggd_tested_total: formatNumber(this.national.ggd.last_value.tested_total),
     };
 
-    Object.entries(kpiValues).forEach(([key, value]) => {
-      const element = cy.get(`[data-cy=${key}]`);
-      if (Array.isArray(value)) {
-        value.forEach((val) => {
-          element.contains(val);
-        });
-      } else {
-        element.contains(value);
-      }
-    });
+    checkKpiValues(kpiTestInfo);
   });
 
   /*it('Should navigate to the appropriate municipality page after clicking on the choropleth', function (this: Context & {

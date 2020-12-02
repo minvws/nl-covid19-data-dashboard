@@ -1,0 +1,27 @@
+import { checkKpiValues } from 'cypress/support/checkKpiValues';
+import { swallowResizeObserverError } from 'cypress/support/swallowResizeObserverError';
+import { Context } from 'mocha';
+/// <reference types="cypress" />
+import { National } from '../../../src/types/data';
+import { formatNumber } from '../../../src/utils/formatNumber';
+
+context('Landelijk - Ziekenhuis opnames', () => {
+  swallowResizeObserverError();
+
+  before(() => {
+    cy.fixture<National>('NL.json').as('national');
+    cy.visit('/landelijk/ziekenhuis-opnames');
+  });
+
+  it('Should show the correct KPI values', function (this: Context & {
+    national: National;
+  }) {
+    const kpiTestInfo = {
+      covid_occupied: formatNumber(
+        this.national.hospital_beds_occupied.last_value.covid_occupied
+      ),
+    };
+
+    checkKpiValues(kpiTestInfo);
+  });
+});
