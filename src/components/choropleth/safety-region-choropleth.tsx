@@ -25,16 +25,16 @@ type SafetyRegionChoroplethProps<T> = {
 };
 
 /**
- * This component renders a map of the Netherlands with the outlines of all the safety regions which
- * receive a fill color based on the specified Region metric data.
+ * This component renders a map of the Netherlands with the outlines of all the
+ * safety regions which receive a fill color based on the specified Region
+ * metric data.
  *
- * The metricName specifies which exact metric is visualized. The color scale is calculated using
- * the specified metric and the given gradient.
- * An optional metricProperty can be provided as well, when the metric key isn't the same name
- * as the actual value name. Most of the time they are the same:
- * e.g. hospital_admissions.hospital_admissions
+ * The metricName plus the metricProperty together specify which value is
+ * visualized. The color scale is calculated using the specified metric and the
+ * given gradient.
  *
- * When a selected region code is specified, the map will zoom in on the safety region.
+ * When a selected region code is specified, the map will zoom in on the safety
+ * region.
  *
  * @param props
  */

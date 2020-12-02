@@ -28,8 +28,9 @@ type MunicipalityChoroplethProps<T> = {
  * This component renders a map of the Netherlands with the outlines of all the municipalities which
  * receive a fill color based on the specified Municipality metric data.
  *
- * The metricName specifies which exact metric is visualized. The color scale is calculated using
- * the specified metric and the given gradient.
+ * The metricName plus the metricProperty together specify which value is
+ * visualized. The color scale is calculated using the specified metric and the
+ * given gradient.
  *
  * When a selected municipal code is specified, the map will zoom in on the safety region to which
  * the associated municipality belongs and all surrounding features will be rendered in a faded manner.
