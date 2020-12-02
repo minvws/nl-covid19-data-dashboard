@@ -121,7 +121,6 @@
     "lint": "eslint .",
     "type-check": "yarn compile",
     "compile": "tsc --pretty --noEmit",
-    "copy-fixtures": "ts-node --project src/tools/tsconfig.json src/tools/test/copy-fixtures.ts",
     "validate-json": "ts-node --project src/tools/tsconfig.json src/tools/validator/validate-json.ts",
     "validate-single": "ts-node --project src/tools/tsconfig.json src/tools/validator/validate-single.ts",
     "generate-typescript": "ts-node --project src/tools/tsconfig.json src/tools/code-generation/generate-typescript.ts",
