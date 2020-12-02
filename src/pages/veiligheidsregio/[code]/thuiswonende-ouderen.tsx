@@ -28,7 +28,7 @@ const ElderlyAtHomeRegionalPage: FCWithLayout<ISafetyRegionData> = (props) => {
       />
 
       <ContentHeader
-        category={siteText.nationaal_layout.headings.kwetsbare_groepen}
+        category={siteText.veiligheidsregio_layout.headings.kwetsbare_groepen}
         title={text.section_positive_tested.title}
         icon={<ElderlyIcon />}
         subtitle={text.section_positive_tested.description}
