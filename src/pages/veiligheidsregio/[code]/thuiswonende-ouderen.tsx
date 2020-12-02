@@ -14,24 +14,37 @@ import {
   getSafetyRegionPaths,
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
-const text = siteText.thuiswonende_ouderen;
+const text = siteText.veiligheidsregio_thuiswonende_ouderen;
 
 const ElderlyAtHomeRegionalPage: FCWithLayout<ISafetyRegionData> = (props) => {
-  const elderlyAtHomeData = props.data.elderly_at_home;
+  const { safetyRegionName, data } = props;
+  const elderlyAtHomeData = data.elderly_at_home;
 
   return (
     <>
       <SEOHead
-        title={text.metadata.title}
-        description={text.metadata.description}
+        title={replaceVariablesInText(text.metadata.title, {
+          safetyRegionName,
+        })}
+        description={replaceVariablesInText(text.metadata.description, {
+          safetyRegionName,
+        })}
       />
 
       <ContentHeader
         category={siteText.veiligheidsregio_layout.headings.kwetsbare_groepen}
-        title={text.section_positive_tested.title}
+        title={replaceVariablesInText(text.section_positive_tested.title, {
+          safetyRegion: safetyRegionName,
+        })}
         icon={<ElderlyIcon />}
-        subtitle={text.section_positive_tested.description}
+        subtitle={replaceVariablesInText(
+          text.section_positive_tested.description,
+          {
+            safetyRegion: safetyRegionName,
+          }
+        )}
         metadata={{
           datumsText: text.section_positive_tested.datums,
           dateInfo: elderlyAtHomeData.last_value.date_of_report_unix,
@@ -85,9 +98,13 @@ const ElderlyAtHomeRegionalPage: FCWithLayout<ISafetyRegionData> = (props) => {
 
       <ContentHeader
         category={siteText.nationaal_layout.headings.kwetsbare_groepen}
-        title={text.section_deceased.title}
+        title={replaceVariablesInText(text.section_deceased.title, {
+          safetyRegion: safetyRegionName,
+        })}
         icon={<ElderlyIcon />}
-        subtitle={text.section_deceased.description}
+        subtitle={replaceVariablesInText(text.section_deceased.description, {
+          safetyRegion: safetyRegionName,
+        })}
         metadata={{
           datumsText: text.section_deceased.datums,
           dateInfo: elderlyAtHomeData.last_value.date_of_report_unix,
