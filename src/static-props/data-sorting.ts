@@ -101,8 +101,6 @@ function sortTimeSeriesValues(values: Timestamped[], propertyName: string) {
   throw new Error(
     `Unknown timestamp in value ${JSON.stringify(values[0], null, 2)}`
   );
-
-  return values;
 }
 
 type Timestamped = ReportTimestamped | WeekTimestamped | MeasurementTimestamped;
