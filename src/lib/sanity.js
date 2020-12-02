@@ -1,18 +1,35 @@
+// lib/sanity.js
 import {
   createClient,
+  createImageUrlBuilder,
   createPortableTextComponent,
   createPreviewSubscriptionHook,
   createCurrentUserHook,
 } from 'next-sanity';
 
 const config = {
+  /**
+   * Find your project ID and dataset in `sanity.json` in your studio project.
+   * These are considered “public”, but you can use environment variables
+   * if you want differ between local dev and production.
+   *
+   * https://nextjs.org/docs/basic-features/environment-variables
+   **/
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '',
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
   useCdn: process.env.NODE_ENV === 'production',
-  // useCdn == true gives fast, cheap responses using a globally distributed cache.
-  // Set this to false if your application require the freshest possible
-  // data always (potentially slightly slower and a bit more expensive).
+  /**
+   * Set useCdn to `false` if your application require the freshest possible
+   * data always (potentially slightly slower and a bit more expensive).
+   * Authenticated request (like preview) will always bypass the CDN
+   **/
 };
+
+/**
+ * Set up a helper function for generating Image URLs with only the asset reference data in your documents.
+ * Read more: https://www.sanity.io/docs/image-url
+ **/
+export const urlFor = (source) => createImageUrlBuilder(config).image(source);
 
 // Set up the live preview subsscription hook
 export const usePreviewSubscription = createPreviewSubscriptionHook(config);
@@ -35,18 +52,18 @@ export const previewClient = createClient({
 });
 
 // Helper function for easily switching between normal client and preview client
-export const getClient = (usePreview: boolean) =>
+export const getClient = (usePreview) =>
   usePreview ? previewClient : sanityClient;
 
 // Helper function for using the current logged in user account
 export const useCurrentUser = createCurrentUserHook(config);
 
-export function localize(value: any, languages: any): any {
+export function localize(value, languages) {
   if (Array.isArray(value)) {
     return value.map((v) => localize(v, languages));
   } else if (typeof value == 'object') {
     if (/^locale[A-Z]/.test(value._type)) {
-      const language = languages.find((lang: string) => value[lang]);
+      const language = languages.find((lang) => value[lang]);
       return value[language];
     }
 
@@ -58,5 +75,3 @@ export function localize(value: any, languages: any): any {
   }
   return value;
 }
-
-export default getClient;

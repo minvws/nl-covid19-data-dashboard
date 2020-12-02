@@ -9,6 +9,16 @@ import { ensureUniqueSkipLinkIds, getSkipLinkId } from '~/utils/skipLinks';
 import styles from './over.module.scss';
 import { Collapsable } from '~/components-styled/collapsable';
 
+import { groq } from 'next-sanity';
+import {
+  getClient,
+  usePreviewSubscription,
+  PortableText,
+  localize,
+} from '~/lib/sanity';
+
+import { targetLanguage } from '../locale/index';
+
 interface IVraagEnAntwoord {
   vraag: string;
   antwoord: string;
@@ -22,7 +32,15 @@ interface StaticProps {
 interface VeelgesteldeVragenProps {
   text: TALLLanguages;
   lastGenerated: string;
+  faq: any;
 }
+
+const faqQuery = groq`
+  *[_type == 'veelgesteldeVragen']
+  {
+    ...
+  }[0]
+`;
 
 export async function getStaticProps(): Promise<StaticProps> {
   const text: TALLLanguages = (await import('../locale/index')).default;
@@ -43,11 +61,24 @@ export async function getStaticProps(): Promise<StaticProps> {
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const lastGenerated = JSON.parse(fileContents).last_generated;
 
-  return { props: { text, lastGenerated } };
+  const sanityData = await getClient(true).fetch(faqQuery);
+
+  const faq = localize(sanityData, [targetLanguage, 'nl']);
+
+  return { props: { text, lastGenerated, faq } };
 }
 
 const Verantwoording: FCWithLayout<VeelgesteldeVragenProps> = (props) => {
-  const { text } = props;
+  const { text, faq } = props;
+
+  const { data: staticOrPreviewData } = usePreviewSubscription(faqQuery, {
+    initialData: faq,
+    enabled: true,
+  });
+
+  const faqList = localize(staticOrPreviewData, [targetLanguage, 'nl']);
+
+  // console.log(faqList);
 
   return (
     <>
@@ -71,26 +102,20 @@ const Verantwoording: FCWithLayout<VeelgesteldeVragenProps> = (props) => {
             <h2>{text.over_veelgestelde_vragen.titel}</h2>
             <p>{text.over_veelgestelde_vragen.paragraaf}</p>
             <article className={styles.faqList}>
-              {text.over_veelgestelde_vragen.vragen.map(
-                (item: IVraagEnAntwoord) => {
-                  //@TODO, Why does this sometimes return empty strings for the
-                  // antwoord key? Does this PR mess up something with promises/async behavior
-                  // in getStaticProps?
-                  return (
-                    <Collapsable
-                      key={item.id}
-                      id={item.id}
-                      summary={item.vraag}
-                    >
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: item.antwoord,
-                        }}
-                      ></div>
-                    </Collapsable>
-                  );
-                }
-              )}
+              {faqList.content.map((item: any) => {
+                //@TODO, Why does this sometimes return empty strings for the
+                // antwoord key? Does this PR mess up something with promises/async behavior
+                // in getStaticProps?
+                return (
+                  <Collapsable
+                    key={item._key}
+                    id={item._key}
+                    summary={item.vraag}
+                  >
+                    <PortableText blocks={item.antwoord} />
+                  </Collapsable>
+                );
+              })}
             </article>
           </div>
         </MaxWidth>
