@@ -49,7 +49,7 @@ export function AgeDemographic({ data }: AgeDemographicProps) {
       event: MouseEvent<SVGGElement>,
       value: NationalInfectedAgeGroupsValue,
       getTooltipCoordinates: (
-        event: MouseEvent<SVGGElement>,
+        event: MouseEvent<SVGGElement> | undefined,
         value: NationalInfectedAgeGroupsValue
       ) => { x: number; y: number }
     ) => {
@@ -64,6 +64,42 @@ export function AgeDemographic({ data }: AgeDemographicProps) {
     debounceSetTooltip(undefined);
   }, [debounceSetTooltip]);
 
+  const [tooltipKeyboardIndex, setTooltipKeyboardIndex] = useState<number>();
+
+  const keyboardTooltip = (
+    event: any,
+    getTooltipCoordinates: (
+      event: MouseEvent<SVGGElement> | undefined,
+      value: NationalInfectedAgeGroupsValue
+    ) => { x: number; y: number }
+  ) => {
+    const KEY_ARROW_LEFT = 37;
+    const KEY_ARROW_RIGHT = 39;
+
+    if (event.which !== KEY_ARROW_LEFT && event.which !== KEY_ARROW_RIGHT) {
+      return;
+    }
+
+    const direction = event.which === KEY_ARROW_LEFT ? -1 : 1;
+    setTooltipKeyboardIndex(
+      ((tooltipKeyboardIndex ?? -1) + direction + data.values.length) %
+        data.values.length
+    );
+
+    const value =
+      tooltipKeyboardIndex !== undefined
+        ? data.values[tooltipKeyboardIndex]
+        : undefined;
+
+    if (!value) {
+      return;
+    }
+
+    const { x, y } = getTooltipCoordinates(undefined, value);
+    const options: TooltipOptions = { left: x, top: y, value };
+    setTooltip(options);
+  };
+
   return (
     <Box mx={-4}>
       <Wrapper>
@@ -72,18 +108,17 @@ export function AgeDemographic({ data }: AgeDemographicProps) {
             <AgeDemographicChart
               parentWidth={parent.width}
               data={data}
+              keyboardTooltip={keyboardTooltip}
               openTooltip={openTooltip}
               closeTooltip={closeTooltip}
             />
           )}
         </ParentSize>
-        {tooltip && (
-          <AgeDemographicTooltip
-            left={tooltip.left}
-            top={tooltip.top}
-            value={tooltip.value}
-          />
-        )}
+        <AgeDemographicTooltip
+          left={tooltip?.left}
+          top={tooltip?.top}
+          value={tooltip?.value}
+        />
       </Wrapper>
     </Box>
   );

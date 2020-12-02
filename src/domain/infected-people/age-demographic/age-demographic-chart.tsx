@@ -27,11 +27,18 @@ interface AgeDemographicChartProps {
     event: MouseEvent<SVGGElement>,
     value: NationalInfectedAgeGroupsValue,
     getTooltipCoordinates: (
-      event: MouseEvent<SVGGElement>,
+      event: MouseEvent<SVGGElement> | undefined,
       value: NationalInfectedAgeGroupsValue
     ) => { x: number; y: number }
   ) => void;
   closeTooltip: () => void;
+  keyboardTooltip: (
+    event: any,
+    getTooltipCoordinates: (
+      event: MouseEvent<SVGGElement> | undefined,
+      value: NationalInfectedAgeGroupsValue
+    ) => { x: number; y: number }
+  ) => void;
 }
 
 const TickValue = ({ x, y, formattedValue }: TickRendererProps) => {
@@ -57,6 +64,7 @@ export function AgeDemographicChart({
   parentWidth,
   openTooltip,
   closeTooltip,
+  keyboardTooltip,
 }: AgeDemographicChartProps) {
   const values = data.values.sort((a, b) => {
     const aStart = parseInt(a.age_group_range, 10);
@@ -129,16 +137,16 @@ export function AgeDemographicChart({
   const ageGroupRangePoint = createPoint(ageGroupRangeScale, ageGroupRange);
 
   const getTooltipCoordinates = (
-    event: MouseEvent,
+    event: MouseEvent | undefined,
     value: NationalInfectedAgeGroupsValue
   ) => {
-    const point = localPoint(event) || { x: width };
+    const point = event ? localPoint(event) || { x: width } : { x: width };
 
     // On small screens: align the tooltip in the middle
     let x = (width - AGE_GROUP_TOOLTIP_WIDTH) / 2;
 
     // On desktop: align the tooltip with the bars
-    if (!isSmallScreen) {
+    if (!isSmallScreen && event) {
       const infectedPercentageSide = point.x > width / 2;
       if (infectedPercentageSide) {
         // Align the top left of the tooltip with the middle of the infected percentage bar
@@ -165,7 +173,10 @@ export function AgeDemographicChart({
       width={width}
       height={height}
       role="img"
+      id="age-demographic-chart"
       aria-label={text.graph.accessibility_description}
+      tabIndex={0}
+      onKeyUp={(event) => keyboardTooltip(event, getTooltipCoordinates)}
     >
       <Text
         textAnchor="end"
