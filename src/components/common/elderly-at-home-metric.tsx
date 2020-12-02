@@ -8,13 +8,11 @@ import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 const text = siteText.common.metricKPI;
 const title = siteText.thuiswonende_ouderen.titel_kpi;
 
-export function ElderlyAtHomeMetric(props: {
-  data: NationalElderlyAtHomeValue | undefined;
-}) {
-  const { data } = props;
+interface ElderlyAtHomeMetricProps {
+  data: NationalElderlyAtHomeValue;
+}
 
-  if (data === undefined) return null;
-
+export function ElderlyAtHomeMetric({ data }: ElderlyAtHomeMetricProps) {
   const description = replaceVariablesInText(text.dateOfReport, {
     dateOfReport: formatDateFromSeconds(data.date_of_report_unix, 'medium'),
   });
