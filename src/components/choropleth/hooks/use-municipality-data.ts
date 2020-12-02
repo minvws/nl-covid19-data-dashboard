@@ -30,10 +30,6 @@ interface MunicipalityMetricValue extends MunicipalityProperties {
 }
 
 export interface MunicipalityChoroplethValue extends MunicipalityMetricValue {
-  /**
-   * This is a special requirement for the choropleth. We could make this more
-   * explicit.
-   */
   __color_value: number;
 }
 

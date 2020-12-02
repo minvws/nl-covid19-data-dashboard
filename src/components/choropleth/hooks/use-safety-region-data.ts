@@ -19,10 +19,6 @@ interface RegionMetricValue extends SafetyRegionProperties {
 }
 
 export interface RegionChoroplethValue extends RegionMetricValue {
-  /**
-   * This is a special requirement for the choropleth. We could make this more
-   * explicit.
-   */
   __color_value: number;
 }
 
