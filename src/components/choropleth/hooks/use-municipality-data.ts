@@ -79,7 +79,10 @@ export function useMunicipalityData(
 
     if (!data) {
       return {
-        getChoroplethValue: (id) => ({ ...propertyData[id], __color_value: 0 }),
+        getChoroplethValue: (id) => ({
+          ...propertyData[id],
+          __color_value: 0,
+        }),
         hasData: false,
       };
     }
@@ -100,7 +103,7 @@ export function useMunicipalityData(
 
       if (!feature) return acc;
 
-      return set(acc, value.gemcode, {
+      return set(acc, value.gmcode, {
         ...feature.properties,
         /**
          * To access things like timestamps in the tooltip we simply merge all

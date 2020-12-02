@@ -142,6 +142,7 @@ export function MunicipalityChoropleth<T>(
   const getTooltipContent = (id: string) => {
     if (tooltipContent) {
       const data = getChoroplethValue(id);
+
       return tooltipContent(data as any);
     }
     return null;

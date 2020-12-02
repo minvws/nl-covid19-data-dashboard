@@ -31,6 +31,7 @@ export interface SafetyRegionProperties {
 export interface MunicipalityProperties {
   gemnaam: string;
   gemcode: string;
+  gmcode: string;
 }
 
 export type MunicipalGeoJSON = FeatureCollection<
