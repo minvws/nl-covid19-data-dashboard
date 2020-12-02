@@ -69,7 +69,7 @@ const ElderlyAtHomeRegionalPage: FCWithLayout<ISafetyRegionData> = (props) => {
           <Text>{text.section_positive_tested.kpi_daily_description}</Text>
         </KpiTile>
         <KpiTile
-          title={text.section_positive_tested.kpi_daily_permillage_title}
+          title={text.section_positive_tested.kpi_daily_per_100k_title}
           metadata={{
             date: elderlyAtHomeData.last_value.date_of_report_unix,
             source: text.section_positive_tested.bronnen.rivm,
@@ -77,11 +77,11 @@ const ElderlyAtHomeRegionalPage: FCWithLayout<ISafetyRegionData> = (props) => {
         >
           <KpiValue
             absolute={
-              elderlyAtHomeData.last_value.positive_tested_daily_permillage
+              elderlyAtHomeData.last_value.positive_tested_daily_per_100k
             }
           />
           <Text>
-            {text.section_positive_tested.kpi_daily_permillage_description}
+            {text.section_positive_tested.kpi_daily_per_100k_description}
           </Text>
         </KpiTile>
       </TwoKpiSection>
