@@ -1,3 +1,4 @@
+import { getHost } from 'cypress/support/getHost';
 import { Context } from 'mocha';
 /// <reference types="cypress" />
 import { National } from '../../src/types/data';
@@ -9,17 +10,17 @@ context('Landelijk - Positief geteste mensen', () => {
     // it doesn't crash anything, so for now we're just going to swallow
     // the error and continue testing...
     const errorMessage = err.toString();
-    if (errorMessage.indexOf('ResizeObserver loop limit exceeded') > -1) {
+    if (errorMessage.indexOf('ResizeObserver loop') > -1) {
       return false;
     }
     return true;
   });
 
-  const host = `${Cypress.env('host')}:${Cypress.env('port')}`;
+  const host = getHost();
 
   before(() => {
     cy.fixture<National>('NL.json').as('national');
-    cy.visit(`${host}/landelijk/positief-geteste-mensen`);
+    cy.visit('/landelijk/positief-geteste-mensen');
   });
 
   it('Should show the correct KPI values', function (this: Context & {
