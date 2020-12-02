@@ -1,5 +1,4 @@
-import get from 'lodash/get';
-import set from 'lodash/set';
+import { get, set } from 'lodash';
 import { useMemo } from 'react';
 import useSWR from 'swr';
 import { Municipalities } from '~/types/data';

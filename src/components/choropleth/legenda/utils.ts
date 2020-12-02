@@ -1,5 +1,5 @@
 import { ChoroplethThresholdsValue } from '../shared';
-import get from 'lodash/get';
+import { get } from 'lodash';
 import { assert } from '~/utils/assert';
 
 export function getDataThresholds<T>(
@@ -7,7 +7,6 @@ export function getDataThresholds<T>(
   metricName: keyof T,
   metricProperty?: string
 ) {
-  console.log('thresholdData', thresholdData);
   const thresholds = metricProperty
     ? get(thresholdData, [metricName, metricProperty])
     : thresholdData[metricName];
@@ -16,7 +15,7 @@ export function getDataThresholds<T>(
     thresholds,
     `No thresholds are defined for ${metricName}${
       metricProperty ? `:${metricProperty}` : ''
-    }, value: ${thresholds}`
+    }`
   );
 
   return thresholds as ChoroplethThresholdsValue[];
