@@ -19,7 +19,7 @@ context('Landelijk - Positief geteste mensen', () => {
 
   before(() => {
     cy.fixture<National>('NL.json').as('national');
-    cy.visit(`http://${host}/landelijk/positief-geteste-mensen`);
+    cy.visit(`${host}/landelijk/positief-geteste-mensen`);
   });
 
   it('Should show the correct KPI values', function (this: Context & {
