@@ -15,9 +15,11 @@ context('Landelijk - Positief geteste mensen', () => {
     return true;
   });
 
+  const host = `${Cypress.env('host')}:${Cypress.env('port')}`;
+
   before(() => {
     cy.fixture<National>('NL.json').as('national');
-    cy.visit('http://localhost:3000/landelijk/positief-geteste-mensen');
+    cy.visit(`http://${host}/landelijk/positief-geteste-mensen`);
   });
 
   it('Should show the correct KPI values', function (this: Context & {
