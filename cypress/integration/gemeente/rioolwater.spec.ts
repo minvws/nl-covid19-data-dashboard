@@ -1,8 +1,8 @@
+import { MunicipalContext } from 'cypress/integration/types';
 import { checkKpiValues } from 'cypress/support/checkKpiValues';
 import { swallowResizeObserverError } from 'cypress/support/swallowResizeObserverError';
 import { Municipal } from '~/types/data';
 import { formatNumber } from '~/utils/formatNumber';
-import { MunicipalContext } from '../types';
 
 context('Gemeente - Rioolwater', () => {
   swallowResizeObserverError();

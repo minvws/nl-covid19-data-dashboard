@@ -1,8 +1,8 @@
+import { RegionalContext } from 'cypress/integration/types';
 import { checkKpiValues } from 'cypress/support/checkKpiValues';
 import { swallowResizeObserverError } from 'cypress/support/swallowResizeObserverError';
 import { Regionaal } from '~/types/data';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
-import { RegionalContext } from '../types';
 
 context('Regionaal - Verpleeghuiszorg', () => {
   swallowResizeObserverError();

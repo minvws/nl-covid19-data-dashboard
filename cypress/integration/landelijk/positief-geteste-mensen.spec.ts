@@ -1,8 +1,8 @@
+import { NationalContext } from 'cypress/integration/types';
 import { checkKpiValues } from 'cypress/support/checkKpiValues';
 import { swallowResizeObserverError } from 'cypress/support/swallowResizeObserverError';
 import { National } from '~/types/data';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
-import { NationalContext } from '../types';
 
 context('Landelijk - Positief geteste mensen', () => {
   swallowResizeObserverError();
