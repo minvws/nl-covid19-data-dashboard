@@ -16,13 +16,11 @@ import { countryGeo, regionGeo } from './topology';
 
 type SafetyRegionChoroplethProps<T> = {
   metricName: TRegionMetricName;
-  metricProperty?: string;
+  metricProperty: string;
   selected?: string;
   highlightSelection?: boolean;
   onSelect?: (context: SafetyRegionProperties) => void;
-  tooltipContent?: (
-    context: SafetyRegionProperties & { value: T }
-  ) => ReactNode;
+  tooltipContent?: (context: SafetyRegionProperties & T) => ReactNode;
   isSelectorMap?: boolean;
 };
 
@@ -56,7 +54,7 @@ export function SafetyRegionChoropleth<T>(
 
   const boundingBox = useSafetyRegionBoundingbox(regionGeo, selected);
 
-  const { getData, hasData } = useSafetyRegionData(
+  const { getChoroplethValue, hasData } = useSafetyRegionData(
     regionGeo,
     metricName,
     metricProperty
@@ -70,7 +68,7 @@ export function SafetyRegionChoropleth<T>(
 
   const DEFAULT_FILL = 'white';
   const getFillColor = useChoroplethColorScale(
-    getData,
+    getChoroplethValue,
     selectedThreshold,
     DEFAULT_FILL
   );
@@ -115,14 +113,14 @@ export function SafetyRegionChoropleth<T>(
 
   const onClick = (id: string) => {
     if (onSelect) {
-      const data = getData(id);
+      const data = getChoroplethValue(id);
       onSelect(data as any);
     }
   };
 
   const getTooltipContent = (id: string) => {
     if (tooltipContent) {
-      const data = getData(id);
+      const data = getChoroplethValue(id);
       return tooltipContent(data as any);
     }
     return null;

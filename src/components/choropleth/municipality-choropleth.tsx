@@ -17,13 +17,11 @@ import { countryGeo, municipalGeo, regionGeo } from './topology';
 
 type MunicipalityChoroplethProps<T> = {
   metricName: TMunicipalityMetricName;
-  metricProperty?: string;
+  metricProperty: string;
   selected?: string;
   highlightSelection?: boolean;
   onSelect?: (context: MunicipalityProperties) => void;
-  tooltipContent?: (
-    context: MunicipalityProperties & { value: T }
-  ) => ReactNode;
+  tooltipContent?: (context: MunicipalityProperties & T) => ReactNode;
 };
 
 /**
@@ -54,7 +52,7 @@ export function MunicipalityChoropleth<T>(
 
   const [boundingbox] = useMunicipalityBoundingbox(regionGeo, selected);
 
-  const { getData, hasData } = useMunicipalityData(
+  const { getChoroplethValue, hasData } = useMunicipalityData(
     municipalGeo,
     metricName,
     metricProperty
@@ -68,7 +66,10 @@ export function MunicipalityChoropleth<T>(
     metricProperty
   );
 
-  const getFillColor = useChoroplethColorScale(getData, thresholdValues);
+  const getFillColor = useChoroplethColorScale(
+    getChoroplethValue,
+    thresholdValues
+  );
 
   const featureCallback = useCallback(
     (
@@ -133,14 +134,14 @@ export function MunicipalityChoropleth<T>(
 
   const onClick = (id: string) => {
     if (onSelect) {
-      const data = getData(id);
+      const data = getChoroplethValue(id);
       onSelect(data as any);
     }
   };
 
   const getTooltipContent = (id: string) => {
     if (tooltipContent) {
-      const data = getData(id);
+      const data = getChoroplethValue(id);
       return tooltipContent(data as any);
     }
     return null;

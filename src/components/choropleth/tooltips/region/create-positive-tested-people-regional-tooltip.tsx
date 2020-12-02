@@ -6,18 +6,17 @@ import { createSelectRegionHandler } from '../../select-handlers/create-select-r
 import { SafetyRegionProperties } from '../../shared';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import siteText from '~/locale/index';
+import { RegionPositiveTestedPeople } from '~/types/data';
 const text = siteText.common.tooltip;
 
 export const createPositiveTestedPeopleRegionalTooltip = (
   router: NextRouter
 ) => (
-  context: SafetyRegionProperties & {
-    value: number;
-  }
+  context: SafetyRegionProperties & RegionPositiveTestedPeople
 ): ReactNode => {
   const handler = createSelectRegionHandler(router);
 
-  const { vrname, value } = context;
+  const { vrname, positive_tested_people } = context;
 
   const onSelect = (event: any) => {
     event.stopPropagation();
@@ -27,10 +26,12 @@ export const createPositiveTestedPeopleRegionalTooltip = (
   return (
     context && (
       <TooltipContent title={vrname} onSelect={onSelect}>
-        <p className="info-value">{formatNumber(value)} per 100.000</p>
+        <p className="info-value">
+          {formatNumber(positive_tested_people)} per 100.000
+        </p>
         <p className="info-total">
           {replaceVariablesInText(text.positive_tested_people, {
-            totalPositiveTestedPeople: `${value}`,
+            totalPositiveTestedPeople: `${positive_tested_people}`,
           })}
         </p>
       </TooltipContent>

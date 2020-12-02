@@ -7,7 +7,7 @@ import { createSelectRegionHandler } from '../../select-handlers/create-select-r
 import { SafetyRegionProperties } from '../../shared';
 
 export const createInfectedLocationsRegionalTooltip = (router: NextRouter) => (
-  context: SafetyRegionProperties & { value: RegionsNursingHome }
+  context: SafetyRegionProperties & RegionsNursingHome
 ): ReactNode => {
   const handler = createSelectRegionHandler(router);
 
@@ -21,8 +21,8 @@ export const createInfectedLocationsRegionalTooltip = (router: NextRouter) => (
       <TooltipContent title={context.vrname} onSelect={onSelect}>
         <strong>
           {`${formatPercentage(
-            context.value.infected_locations_percentage
-          )}% (${formatNumber(context.value.infected_locations_total)})`}
+            context.infected_locations_percentage
+          )}% (${formatNumber(context.infected_locations_total)})`}
         </strong>
       </TooltipContent>
     )

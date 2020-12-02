@@ -6,7 +6,7 @@ import text from '~/locale/index';
 const escalationThresholds =
   regionThresholds.escalation_levels.escalation_level;
 
-type EscalationLevel = 1 | 2 | 3 | 4 | 5;
+export type EscalationLevel = 1 | 2 | 3 | 4 | 5;
 
 export function EscalationLevelIcon({ level }: { level: EscalationLevel }) {
   const color = escalationThresholds[level - 1].color;

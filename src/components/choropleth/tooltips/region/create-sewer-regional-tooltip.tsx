@@ -10,7 +10,7 @@ import { SafetyRegionProperties } from '../../shared';
 const text = siteText.rioolwater_metingen;
 
 export const createSewerRegionalTooltip = (router: NextRouter) => (
-  context: SafetyRegionProperties & { value: RegionalSewerValue }
+  context: SafetyRegionProperties & RegionalSewerValue
 ): ReactNode => {
   const handler = createSelectRegionHandler(router);
 
@@ -24,7 +24,7 @@ export const createSewerRegionalTooltip = (router: NextRouter) => (
       <TooltipContent title={context.vrname} onSelect={onSelect}>
         <p className="info-value">
           {`${replaceVariablesInText(text.map_tooltip_value, {
-            value: formatNumber(context.value.average),
+            value: formatNumber(context.average),
           })}`}
         </p>
         <p className="info-total">{text.map_tooltip}</p>

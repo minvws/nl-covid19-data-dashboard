@@ -132,6 +132,7 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
         {selectedMap === 'municipal' && (
           <MunicipalityChoropleth
             metricName="hospital_admissions"
+            metricProperty="hospital_admissions"
             tooltipContent={createMunicipalHospitalAdmissionsTooltip(router)}
             onSelect={createSelectMunicipalHandler(
               router,
@@ -142,6 +143,7 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
         {selectedMap === 'region' && (
           <SafetyRegionChoropleth
             metricName="hospital_admissions"
+            metricProperty="hospital_admissions"
             tooltipContent={createRegionHospitalAdmissionsTooltip(router)}
             onSelect={createSelectRegionHandler(router, 'ziekenhuis-opnames')}
           />

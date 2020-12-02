@@ -1,12 +1,14 @@
-import { get, set } from 'lodash';
+import { set } from 'lodash';
 import { useMemo } from 'react';
 import useSWR from 'swr';
 import { Municipalities } from '~/types/data';
+import { assert } from '~/utils/assert';
+import { GetDataFunctionType } from '../choropleth';
 import {
+  Dictionary,
   MunicipalGeoJSON,
   MunicipalityProperties,
   TMunicipalityMetricName,
-  TMunicipalityMetricType,
 } from '../shared';
 
 /**
@@ -24,26 +26,31 @@ import {
  * @param featureCollection
  */
 
-type MunicipalitiesMetricValue = {
-  gmcode: string;
+interface MunicipalityMetricValue extends MunicipalityProperties {
   [key: string]: unknown;
-};
+}
+
+export interface MunicipalityChoroplethValue extends MunicipalityMetricValue {
+  /**
+   * This is a special requirement for the choropleth. We could make this more
+   * explicit.
+   */
+  __color_value: number;
+}
 
 type UseDataReturnValue = {
-  getData: (id: string) => unknown;
+  getChoroplethValue: GetDataFunctionType;
   hasData: boolean;
 };
 
 export function useMunicipalityNavigationData(
   featureCollection: MunicipalGeoJSON
 ): UseDataReturnValue {
-  const { data: municipalities } = useSWR<Municipalities>(
-    '/json/MUNICIPALITIES.json'
-  );
+  const { data } = useSWR<Municipalities>('/json/MUNICIPALITIES.json');
 
-  if (!municipalities) {
+  if (!data) {
     return {
-      getData: () => 0,
+      getChoroplethValue: () => undefined,
       hasData: false,
     };
   }
@@ -54,7 +61,10 @@ export function useMunicipalityNavigationData(
   );
 
   return {
-    getData: (id: string) => propertyData[id],
+    getChoroplethValue: (id: string) => ({
+      ...propertyData[id],
+      __color_value: 0,
+    }),
     hasData: true,
   };
 }
@@ -62,50 +72,60 @@ export function useMunicipalityNavigationData(
 export function useMunicipalityData(
   featureCollection: MunicipalGeoJSON,
   metricName: TMunicipalityMetricName,
-  metricProperty?: string
+  metricProperty: string
 ): UseDataReturnValue {
   const { data } = useSWR<Municipalities>('/json/MUNICIPALITIES.json');
-
-  // assert(municipalities, 'Missing municipalities data');
 
   return useMemo(() => {
     if (!data) {
       return {
-        getData: () => 0,
+        getChoroplethValue: () => undefined,
         hasData: false,
       };
     }
 
-    const values = data[metricName];
+    const metricsForAllMunicipalities = (data[metricName] as unknown) as
+      | MunicipalityMetricValue[]
+      | undefined;
+
+    assert(
+      metricsForAllMunicipalities,
+      `Missing municipality metric data for ${metricName}`
+    );
+
     const propertyData = featureCollection.features.reduce(
       (acc, feature) =>
         set(acc, feature.properties.gemcode, feature.properties),
       {} as Record<string, MunicipalityProperties>
     );
 
-    /**
-     * Cast values to unknown because of https://github.com/microsoft/TypeScript/issues/36390
-     **/
-    const mergedData = ((values as unknown) as Array<
-      MunicipalitiesMetricValue
-    >).reduce((acc, value) => {
+    const mergedData = metricsForAllMunicipalities.reduce((acc, value) => {
       const feature = featureCollection.features.find(
         (feat) => feat.properties.gemcode === value.gmcode
       );
 
-      return set(acc, value.gmcode, {
-        ...feature?.properties,
-        value: metricProperty
-          ? get(value, [metricName, metricProperty])
-          : value[metricName],
+      if (!feature) return acc;
+
+      return set(acc, value.gemcode, {
+        ...feature.properties,
+        /**
+         * To access things like timestamps in the tooltip we simply merge all
+         * metric properties in here. The result is what is passed to the
+         * tooltop function.
+         */
+        ...value,
+        /**
+         * The metric value used to define the fill color in the choropleth
+         */
+        __color_value: Number(value[metricProperty]),
       });
-    }, {} as Record<string, TMunicipalityMetricType & { value: unknown }>);
+    }, {} as Dictionary<MunicipalityChoroplethValue>);
 
     const hasData = Object.keys(mergedData).length > 0;
 
-    const getData = (id: string) =>
-      mergedData ? mergedData[id] : propertyData[id];
+    const getChoroplethValue = (id: string) =>
+      hasData ? mergedData[id] : { ...propertyData[id], __color_value: 0 };
 
-    return { getData, hasData };
+    return { getChoroplethValue, hasData };
   }, [data, metricName, metricProperty, featureCollection]);
 }

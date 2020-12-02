@@ -7,7 +7,7 @@ import { RegionHospitalAdmissions } from '~/types/data';
 import { formatNumber } from '~/utils/formatNumber';
 
 export const createRegionHospitalAdmissionsTooltip = (router: NextRouter) => (
-  context: SafetyRegionProperties & { value: RegionHospitalAdmissions }
+  context: SafetyRegionProperties & RegionHospitalAdmissions
 ): ReactNode => {
   const handler = createSelectRegionHandler(router);
 
@@ -19,7 +19,7 @@ export const createRegionHospitalAdmissionsTooltip = (router: NextRouter) => (
   return (
     context && (
       <TooltipContent title={context.vrname} onSelect={onSelect}>
-        <strong>{formatNumber(context.value.hospital_admissions)}</strong>
+        <strong>{formatNumber(context.hospital_admissions)}</strong>
       </TooltipContent>
     )
   );

@@ -1,25 +1,34 @@
-import { get, set } from 'lodash';
+import { set } from 'lodash';
 import { useMemo } from 'react';
 import useSWR from 'swr';
 import { Regions } from '~/types/data';
+import { assert } from '~/utils/assert';
+import { GetDataFunctionType } from '../choropleth';
 import {
+  Dictionary,
   RegionGeoJSON,
   SafetyRegionProperties,
   TRegionMetricName,
-  TRegionMetricType,
 } from '../shared';
 
 export type TGetRegionFunc<T> = (id: string) => T | SafetyRegionProperties;
 
 export type TSafetyRegionDataInfo<T> = [TGetRegionFunc<T>, boolean];
 
-type RegionMetricValue = {
-  vrcode: string;
+interface RegionMetricValue extends SafetyRegionProperties {
   [key: string]: unknown;
-};
+}
+
+export interface RegionChoroplethValue extends RegionMetricValue {
+  /**
+   * This is a special requirement for the choropleth. We could make this more
+   * explicit.
+   */
+  __color_value: number;
+}
 
 type UseDataReturnValue = {
-  getData: (id: string) => unknown;
+  getChoroplethValue: GetDataFunctionType;
   hasData: boolean;
 };
 
@@ -42,49 +51,64 @@ type UseDataReturnValue = {
 export function useSafetyRegionData(
   featureCollection: RegionGeoJSON,
   metricName: TRegionMetricName,
-  metricProperty?: string
+  metricProperty: string
 ): UseDataReturnValue {
   const { data } = useSWR<Regions>('/json/REGIONS.json');
 
   return useMemo(() => {
     if (!data) {
       return {
-        getData: () => 0,
+        getChoroplethValue: () => undefined,
         hasData: false,
       };
     }
 
-    const values = data[metricName];
+    const metricForAllRegions = (data[metricName] as unknown) as
+      | RegionMetricValue[]
+      | undefined;
+
+    assert(
+      metricForAllRegions,
+      `Missing regions metric data for ${metricName}`
+    );
 
     const propertyData = featureCollection.features.reduce(
       (acc, feature) => set(acc, feature.properties.vrcode, feature.properties),
       {} as Record<string, SafetyRegionProperties>
     );
 
-    /**
-     * Cast to unknown because of https://github.com/microsoft/TypeScript/issues/36390
-     **/
-    const mergedData = ((values as unknown) as RegionMetricValue[]).reduce(
-      (acc, value) => {
-        const feature = featureCollection.features.find(
-          (feat) => feat.properties.vrcode === value.vrcode
-        );
+    const mergedData = metricForAllRegions.reduce((acc, value) => {
+      const feature = featureCollection.features.find(
+        (feat) => feat.properties.vrcode === value.vrcode
+      );
 
-        return set(acc, value.vrcode, {
-          ...feature?.properties,
-          value: metricProperty
-            ? get(value, [metricName, metricProperty])
-            : value[metricName],
-        });
-      },
-      {} as Record<string, TRegionMetricType & { value: unknown }>
-    );
+      if (!feature) return acc;
+
+      const choroplethValue: RegionChoroplethValue = {
+        ...feature?.properties,
+        /**
+         * To access things like timestamps in the tooltip we simply merge all
+         * metric properties in here. The result is what is passed to the
+         * tooltop function.
+         */
+        ...value,
+        /**
+         * The metric value used to define the fill color in the choropleth
+         */
+        __color_value: Number(value[metricProperty]),
+      };
+
+      return set(acc, value.vrcode, choroplethValue);
+    }, {} as Dictionary<RegionChoroplethValue>);
 
     const hasData = Object.keys(mergedData).length > 0;
 
-    const getData = (id: string) =>
-      hasData ? mergedData[id] : propertyData[id];
+    const getChoroplethValue = (id: string) => {
+      return hasData
+        ? mergedData[id]
+        : { ...propertyData[id], __color_value: 0 };
+    };
 
-    return { getData, hasData };
+    return { getChoroplethValue, hasData };
   }, [data, metricName, metricProperty, featureCollection.features]);
 }

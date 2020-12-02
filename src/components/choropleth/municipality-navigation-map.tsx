@@ -26,7 +26,7 @@ export function MunicipalityNavigationMap<T>(
 
   const [ref, dimensions] = useChartDimensions<HTMLDivElement>(1.2);
 
-  const { getData } = useMunicipalityNavigationData(municipalGeo);
+  const { getChoroplethValue } = useMunicipalityNavigationData(municipalGeo);
 
   const featureCallback = (
     feature: Feature<MultiPolygon, MunicipalityProperties>,
@@ -67,14 +67,14 @@ export function MunicipalityNavigationMap<T>(
 
   const onClick = (id: string) => {
     if (onSelect) {
-      const data = getData(id);
+      const data = getChoroplethValue(id);
       onSelect(data as any);
     }
   };
 
   const getTooltipContent = (id: string) => {
     if (tooltipContent) {
-      const data = getData(id);
+      const data = getChoroplethValue(id);
       return tooltipContent(data as any);
     }
     return null;
