@@ -161,5 +161,5 @@ function isMeasurementTimestamped(
 }
 
 function isWhitelistedProperty(propertyName: string) {
-  return ['restrictions'].indexOf(propertyName) !== -1;
+  return ['restrictions'].includes(propertyName);
 }
