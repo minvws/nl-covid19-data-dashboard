@@ -16,7 +16,11 @@ export const createPositiveTestedPeopleRegionalTooltip = (
 ): ReactNode => {
   const handler = createSelectRegionHandler(router);
 
-  const { vrname, positive_tested_people } = context;
+  const {
+    vrname,
+    positive_tested_people,
+    total_positive_tested_people,
+  } = context;
 
   const onSelect = (event: any) => {
     event.stopPropagation();
@@ -31,7 +35,7 @@ export const createPositiveTestedPeopleRegionalTooltip = (
         </p>
         <p className="info-total">
           {replaceVariablesInText(text.positive_tested_people, {
-            totalPositiveTestedPeople: `${positive_tested_people}`,
+            totalPositiveTestedPeople: `${total_positive_tested_people}`,
           })}
         </p>
       </TooltipContent>
