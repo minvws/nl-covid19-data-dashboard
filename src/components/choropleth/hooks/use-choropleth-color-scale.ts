@@ -2,9 +2,9 @@ import { scaleThreshold } from 'd3-scale';
 import { useCallback, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { assert } from '~/utils/assert';
-import { GetDataFunctionType } from '../choropleth';
 import { ChoroplethThresholdsValue } from '../shared';
-
+import { GetRegionDataFunctionType } from './use-safety-region-data';
+import { GetMunicipalityDataFunctionType } from './use-municipality-data';
 /**
  * This hook return a color scale for the given domain and gradient.
  * If either domain or gradient is undefined, it will return a method
@@ -20,7 +20,9 @@ import { ChoroplethThresholdsValue } from '../shared';
  * @param defaultColor
  */
 export function useChoroplethColorScale(
-  getChoroplethValue: GetDataFunctionType,
+  getChoroplethValue:
+    | GetRegionDataFunctionType
+    | GetMunicipalityDataFunctionType,
   thresholds: ChoroplethThresholdsValue[],
   defaultColor = 'white'
 ) {

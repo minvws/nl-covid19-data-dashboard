@@ -22,13 +22,6 @@ export type TRenderCallback = (
   index: number
 ) => ReactNode;
 
-type GetDataValue = {
-  __color_value: number;
-  [key: string]: unknown;
-};
-
-export type GetDataFunctionType = (id: string) => GetDataValue | undefined;
-
 export type TProps<T1, T2, T3> = {
   // This is the main feature collection that displays the features that will
   // be colored in as part of the choropleth

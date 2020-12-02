@@ -135,7 +135,7 @@ export function MunicipalityChoropleth<T>(
   const onClick = (id: string) => {
     if (onSelect) {
       const data = getChoroplethValue(id);
-      onSelect(data as any);
+      onSelect(data);
     }
   };
 

@@ -161,6 +161,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
         {selectedMap === 'municipal' && (
           <MunicipalityChoropleth
             metricName="positive_tested_people"
+            metricProperty="positive_tested_people"
             tooltipContent={createPositiveTestedPeopleMunicipalTooltip(router)}
             onSelect={createSelectMunicipalHandler(router)}
           />
@@ -168,6 +169,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
         {selectedMap === 'region' && (
           <SafetyRegionChoropleth
             metricName="positive_tested_people"
+            metricProperty="positive_tested_people"
             tooltipContent={createPositiveTestedPeopleRegionalTooltip(router)}
             onSelect={createSelectRegionHandler(router)}
           />

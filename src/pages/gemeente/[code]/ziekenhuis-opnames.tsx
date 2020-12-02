@@ -108,12 +108,14 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
         description={text.map_toelichting}
         legend={{
           title: siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel,
-          thresholds: municipalThresholds.hospital_admissions,
+          thresholds:
+            municipalThresholds.hospital_admissions.hospital_admissions,
         }}
       >
         <MunicipalityChoropleth
           selected={data.code}
           metricName="hospital_admissions"
+          metricProperty="hospital_admissions"
           tooltipContent={createMunicipalHospitalAdmissionsTooltip(router)}
           onSelect={createSelectMunicipalHandler(router, 'ziekenhuis-opnames')}
         />

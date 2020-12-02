@@ -3,7 +3,6 @@ import { useMemo } from 'react';
 import useSWR from 'swr';
 import { Municipalities } from '~/types/data';
 import { assert } from '~/utils/assert';
-import { GetDataFunctionType } from '../choropleth';
 import {
   Dictionary,
   MunicipalGeoJSON,
@@ -38,23 +37,18 @@ export interface MunicipalityChoroplethValue extends MunicipalityMetricValue {
   __color_value: number;
 }
 
+export type GetMunicipalityDataFunctionType = (
+  id: string
+) => MunicipalityChoroplethValue;
+
 type UseDataReturnValue = {
-  getChoroplethValue: GetDataFunctionType;
+  getChoroplethValue: GetMunicipalityDataFunctionType;
   hasData: boolean;
 };
 
 export function useMunicipalityNavigationData(
   featureCollection: MunicipalGeoJSON
 ): UseDataReturnValue {
-  const { data } = useSWR<Municipalities>('/json/MUNICIPALITIES.json');
-
-  if (!data) {
-    return {
-      getChoroplethValue: () => undefined,
-      hasData: false,
-    };
-  }
-
   const propertyData = featureCollection.features.reduce(
     (acc, feature) => set(acc, feature.properties.gemcode, feature.properties),
     {} as Record<string, MunicipalityProperties>
@@ -77,9 +71,15 @@ export function useMunicipalityData(
   const { data } = useSWR<Municipalities>('/json/MUNICIPALITIES.json');
 
   return useMemo(() => {
+    const propertyData = featureCollection.features.reduce(
+      (acc, feature) =>
+        set(acc, feature.properties.gemcode, feature.properties),
+      {} as Record<string, MunicipalityProperties>
+    );
+
     if (!data) {
       return {
-        getChoroplethValue: () => undefined,
+        getChoroplethValue: (id) => ({ ...propertyData[id], __color_value: 0 }),
         hasData: false,
       };
     }
@@ -91,12 +91,6 @@ export function useMunicipalityData(
     assert(
       metricsForAllMunicipalities,
       `Missing municipality metric data for ${metricName}`
-    );
-
-    const propertyData = featureCollection.features.reduce(
-      (acc, feature) =>
-        set(acc, feature.properties.gemcode, feature.properties),
-      {} as Record<string, MunicipalityProperties>
     );
 
     const mergedData = metricsForAllMunicipalities.reduce((acc, value) => {
@@ -123,8 +117,10 @@ export function useMunicipalityData(
 
     const hasData = Object.keys(mergedData).length > 0;
 
-    const getChoroplethValue = (id: string) =>
-      hasData ? mergedData[id] : { ...propertyData[id], __color_value: 0 };
+    const getChoroplethValue = (id: string) => {
+      const value = mergedData[id];
+      return value || { ...propertyData[id], __color_value: 0 };
+    };
 
     return { getChoroplethValue, hasData };
   }, [data, metricName, metricProperty, featureCollection]);

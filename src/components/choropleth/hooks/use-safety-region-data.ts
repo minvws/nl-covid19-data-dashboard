@@ -3,7 +3,6 @@ import { useMemo } from 'react';
 import useSWR from 'swr';
 import { Regions } from '~/types/data';
 import { assert } from '~/utils/assert';
-import { GetDataFunctionType } from '../choropleth';
 import {
   Dictionary,
   RegionGeoJSON,
@@ -27,8 +26,10 @@ export interface RegionChoroplethValue extends RegionMetricValue {
   __color_value: number;
 }
 
+export type GetRegionDataFunctionType = (id: string) => RegionChoroplethValue;
+
 type UseDataReturnValue = {
-  getChoroplethValue: GetDataFunctionType;
+  getChoroplethValue: GetRegionDataFunctionType;
   hasData: boolean;
 };
 
@@ -58,7 +59,7 @@ export function useSafetyRegionData(
   return useMemo(() => {
     if (!data) {
       return {
-        getChoroplethValue: () => undefined,
+        getChoroplethValue: (id) => ({ ...propertyData[id], __color_value: 0 }),
         hasData: false,
       };
     }
@@ -104,9 +105,8 @@ export function useSafetyRegionData(
     const hasData = Object.keys(mergedData).length > 0;
 
     const getChoroplethValue = (id: string) => {
-      return hasData
-        ? mergedData[id]
-        : { ...propertyData[id], __color_value: 0 };
+      const value = mergedData[id];
+      return value || { ...propertyData[id], __color_value: 0 };
     };
 
     return { getChoroplethValue, hasData };
