@@ -56,8 +56,10 @@ function getAgeDemographicExampleData(data: NationalInfectedAgeGroups) {
 
   return {
     ageGroupRange: formatAgeGroupRange(ageGroupRange),
-    ageGroupPercentage: `${formatPercentage(value.age_group_percentage)}%`,
-    infectedPercentage: `${formatPercentage(value.infected_percentage)}%`,
+    ageGroupPercentage: `${formatPercentage(
+      value.age_group_percentage * 100
+    )}%`,
+    infectedPercentage: `${formatPercentage(value.infected_percentage * 100)}%`,
   };
 }
 
