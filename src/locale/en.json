@@ -1478,6 +1478,19 @@
       }
     }
   },
+  "infected_age_groups": {
+    "title": "Verdeling naar leeftijd",
+    "description": "....",
+    "example": "Bijvoorbeeld: Van alle positief geteste mensen is {{infectedPercentage}} tussen de {{ageGroupRange}} jaar. Van alle Nederlanders is {{ageGroupPercentage}} tussen de {{ageGroupRange}} jaar.",
+    "graph": {
+      "age_group_percentage_title": "Percentage van de bevolking",
+      "age_group_percentage_tooltip": "van de bevolking is {{ageGroupRange}} jaar",
+      "infected_percentage_title": "Percentage van de positieve testen",
+      "infected_percentage_tooltip": "van het aantal positief geteste mensen is {{ageGroupRange}} jaar",
+      "age_group_range_tooltip": "{{ageGroupRange}} jaar",
+      "accessibility_description": "Grafiek met percentages voor de verdeling van de bevolking en de verdeling van positief geteste leeftijdsgroepen."
+    }
+  },
   "aria_labels": {
     "pagina_keuze": "",
     "footer_keuze": "",

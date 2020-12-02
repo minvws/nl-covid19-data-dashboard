@@ -15,7 +15,6 @@ import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { MultipleLineChartTile } from '~/components-styled/multiple-line-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
-import { BarChart } from '~/components/charts/index';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
@@ -28,17 +27,41 @@ import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
+import { NationalInfectedAgeGroups } from '~/types/data.d';
+import { formatNumber, formatPercentage } from '~/utils/formatNumber';
+import { replaceKpisInText } from '~/utils/replaceKpisInText';
+import { formatDateFromSeconds } from '~/utils/formatDate';
+import { AgeDemographic } from '~/domain/infected-people/age-demographic/age-demographic';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { formatAgeGroupRange } from '~/domain/infected-people/age-demographic/age-demographic-chart';
 import {
   getNationalStaticProps,
   NationalPageProps,
 } from '~/static-props/nl-data';
 import { colors } from '~/style/theme';
-import { formatDateFromSeconds } from '~/utils/formatDate';
-import { formatNumber, formatPercentage } from '~/utils/formatNumber';
-import { replaceKpisInText } from '~/utils/replaceKpisInText';
+import { assert } from '~/utils/assert';
 
 const text = siteText.positief_geteste_personen;
 const ggdText = siteText.positief_geteste_personen_ggd;
+
+/* Retrieves certain age demographic data to be used in the example text. */
+function getAgeDemographicExampleData(data: NationalInfectedAgeGroups) {
+  const ageGroupRange = '20-29';
+  const value = data.values.find((x) => x.age_group_range === ageGroupRange);
+
+  assert(
+    value,
+    `NationalInfectedAgeGroups should contain a value for age group ${ageGroupRange}`
+  );
+
+  return {
+    ageGroupRange: formatAgeGroupRange(ageGroupRange),
+    ageGroupPercentage: `${formatPercentage(
+      value.age_group_percentage * 100
+    )}%`,
+    infectedPercentage: `${formatPercentage(value.infected_percentage * 100)}%`,
+  };
+}
 
 const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>(
@@ -47,15 +70,11 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
   const router = useRouter();
 
   const dataInfectedDelta = data.infected_people_delta_normalized;
-  const dataIntakeAge = data.intake_share_age_groups;
   const dataGgdLastValue = data.ggd.last_value;
   const dataGgdValues = data.ggd.values;
 
-  const barChartTotal: number = dataIntakeAge.values.reduce(
-    (mem: number, part): number => {
-      return mem + part.infected_per_agegroup_increase;
-    },
-    0
+  const ageDemographicExampleData = getAgeDemographicExampleData(
+    data.infected_age_groups
   );
 
   return (
@@ -189,27 +208,20 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
       />
 
       <ChartTile
-        title={text.barchart_titel}
-        description={text.barchart_toelichting}
+        title={siteText.infected_age_groups.title}
+        description={siteText.infected_age_groups.description}
         metadata={{
           date: dataInfectedDelta.last_value.date_of_report_unix,
           source: text.bronnen.rivm,
         }}
       >
-        <BarChart
-          keys={text.barscale_keys}
-          data={dataIntakeAge.values.map((value) => ({
-            y: value.infected_per_agegroup_increase,
-            label:
-              barChartTotal > 0
-                ? `${(
-                    (value.infected_per_agegroup_increase * 100) /
-                    barChartTotal
-                  ).toFixed(0)}%`
-                : false,
-          }))}
-          axisTitle={text.barchart_axis_titel}
-        />
+        <Text mt={0}>
+          {replaceVariablesInText(
+            siteText.infected_age_groups.example,
+            ageDemographicExampleData
+          )}
+        </Text>
+        <AgeDemographic data={data.infected_age_groups} />
       </ChartTile>
 
       <ContentHeader
