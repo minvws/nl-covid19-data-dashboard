@@ -1,8 +1,8 @@
 import { checkKpiValues } from 'cypress/support/checkKpiValues';
 import { swallowResizeObserverError } from 'cypress/support/swallowResizeObserverError';
-import { Context } from 'mocha';
 import { Regionaal } from '~/types/data';
 import { formatNumber } from '~/utils/formatNumber';
+import { RegionalContext } from '../types';
 
 context('Regionaal - Rioolwater', () => {
   swallowResizeObserverError();
@@ -10,17 +10,15 @@ context('Regionaal - Rioolwater', () => {
   const vrcode = 'VR13';
 
   before(() => {
-    cy.fixture<Regionaal>(`${vrcode}.json`).as('region');
+    cy.fixture<Regionaal>(`${vrcode}.json`).as('regionData');
     cy.visit(`/veiligheidsregio/${vrcode}/rioolwater`);
   });
 
-  it('Should show the correct KPI values', function (this: Context & {
-    region: Regionaal;
-  }) {
+  it('Should show the correct KPI values', function (this: RegionalContext) {
     const kpiTestInfo = {
-      riool_normalized: formatNumber(this.region.sewer.last_value.average),
+      riool_normalized: formatNumber(this.regionData.sewer.last_value.average),
       total_installation_count: formatNumber(
-        this.region.sewer.last_value.total_installation_count
+        this.regionData.sewer.last_value.total_installation_count
       ),
     };
 
