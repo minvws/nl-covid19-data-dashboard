@@ -4,8 +4,12 @@ export function sortNationalTimeSeriesInDataInPlace(data: National) {
   const timeSeriesPropertyNames = getTimeSeriesPropertyNames(data);
 
   for (const propertyName of timeSeriesPropertyNames) {
+    if (isWhitelistedProperty(propertyName)) {
+      continue;
+    }
+
     const timeSeries = data[propertyName] as TimeSeriesData<Timestamped>;
-    timeSeries.values = sortTimeSeriesValues(timeSeries.values, propertyName);
+    timeSeries.values = sortTimeSeriesValues(timeSeries.values);
   }
 }
 
@@ -13,6 +17,9 @@ export function sortRegionalTimeSeriesInDataInPlace(data: Regionaal) {
   const timeSeriesPropertyNames = getTimeSeriesPropertyNames(data);
 
   for (const propertyName of timeSeriesPropertyNames) {
+    if (isWhitelistedProperty(propertyName)) {
+      continue;
+    }
     /**
      * There is one property in the dataset that contains timeseries nested
      * inside values, so we need to process that separately.
@@ -23,7 +30,7 @@ export function sortRegionalTimeSeriesInDataInPlace(data: Regionaal) {
       >;
 
       nestedSeries.values = nestedSeries.values.map((x) => {
-        x.values = sortTimeSeriesValues(x.values, propertyName);
+        x.values = sortTimeSeriesValues(x.values);
         return x;
       });
 
@@ -32,7 +39,7 @@ export function sortRegionalTimeSeriesInDataInPlace(data: Regionaal) {
     }
 
     const timeSeries = data[propertyName] as TimeSeriesData<Timestamped>;
-    timeSeries.values = sortTimeSeriesValues(timeSeries.values, propertyName);
+    timeSeries.values = sortTimeSeriesValues(timeSeries.values);
   }
 }
 
@@ -40,6 +47,9 @@ export function sortMunicipalTimeSeriesInDataInPlace(data: Municipal) {
   const timeSeriesPropertyNames = getTimeSeriesPropertyNames(data);
 
   for (const propertyName of timeSeriesPropertyNames) {
+    if (isWhitelistedProperty(propertyName)) {
+      continue;
+    }
     /**
      * There is one property in the dataset that contains timeseries nested
      * inside values, so we need to process that separately.
@@ -50,7 +60,7 @@ export function sortMunicipalTimeSeriesInDataInPlace(data: Municipal) {
       >;
 
       nestedSeries.values = nestedSeries.values.map((x) => {
-        x.values = sortTimeSeriesValues(x.values, propertyName);
+        x.values = sortTimeSeriesValues(x.values);
         return x;
       });
 
@@ -59,7 +69,7 @@ export function sortMunicipalTimeSeriesInDataInPlace(data: Municipal) {
     }
 
     const timeSeries = data[propertyName] as TimeSeriesData<Timestamped>;
-    timeSeries.values = sortTimeSeriesValues(timeSeries.values, propertyName);
+    timeSeries.values = sortTimeSeriesValues(timeSeries.values);
   }
 }
 
@@ -75,7 +85,7 @@ function getTimeSeriesPropertyNames<T>(data: T) {
   );
 }
 
-function sortTimeSeriesValues(values: Timestamped[], propertyName: string) {
+function sortTimeSeriesValues(values: Timestamped[]) {
   /**
    * There are 3 ways in which time series data can be timestamped. We need
    * to detect and handle each of them.
@@ -88,10 +98,6 @@ function sortTimeSeriesValues(values: Timestamped[], propertyName: string) {
     return values.sort(
       (a, b) => a.date_measurement_unix - b.date_measurement_unix
     );
-  }
-
-  if (isWhitelistedProperty(propertyName)) {
-    return values;
   }
 
   /**
