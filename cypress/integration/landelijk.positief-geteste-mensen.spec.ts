@@ -1,4 +1,3 @@
-import { getHost } from 'cypress/support/getHost';
 import { Context } from 'mocha';
 /// <reference types="cypress" />
 import { National } from '../../src/types/data';
@@ -15,8 +14,6 @@ context('Landelijk - Positief geteste mensen', () => {
     }
     return true;
   });
-
-  const host = getHost();
 
   before(() => {
     cy.fixture<National>('NL.json').as('national');
