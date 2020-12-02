@@ -1,3 +1,4 @@
+import { Box } from '~/components-styled/base';
 import { DifferenceIndicator } from '~/components-styled/difference-indicator';
 import { BarScale } from '~/components/barScale';
 import siteText from '~/locale/index';
@@ -19,7 +20,7 @@ export function PositiveTestedPeopleBarScale(props: {
     data.difference.infected_people_delta_normalized__infected_daily_increase;
 
   return (
-    <>
+    <Box spacing={2}>
       <BarScale
         min={0}
         max={10}
@@ -46,6 +47,6 @@ export function PositiveTestedPeopleBarScale(props: {
         showValue={showValue}
       />
       {showValue && difference && <DifferenceIndicator value={difference} />}
-    </>
+    </Box>
   );
 }

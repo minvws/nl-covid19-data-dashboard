@@ -1,9 +1,10 @@
 import css from '@styled-system/css';
 import Link from 'next/link';
 import styled from 'styled-components';
-import ExternalLink from '~/assets/external-link.svg';
+import ExternalLinkIcon from '~/assets/external-link.svg';
 import { Tile } from '~/components-styled/layout';
 import { Heading } from '~/components-styled/typography';
+import { ExternalLink } from './external-link';
 
 interface AnchorTileProps {
   title: string;
@@ -11,6 +12,7 @@ interface AnchorTileProps {
   label: string;
   children: React.ReactNode;
   external?: boolean;
+  shadow?: boolean;
 }
 
 export function AnchorTile({
@@ -18,43 +20,50 @@ export function AnchorTile({
   href,
   label,
   children,
-  external,
+  external = false,
+  shadow = false,
 }: AnchorTileProps) {
   return (
-    <StyledAnchorTile>
+    <Container shadow={shadow}>
       <Content>
         <Heading level={3}>{title}</Heading>
         {children}
       </Content>
 
       <LinkContainer>
-        <Link href={href} passHref>
-          <Anchor>
-            {external && (
-              <IconContainer>
-                <ExternalLink />
-              </IconContainer>
-            )}
-            <span>{label}</span>
-          </Anchor>
-        </Link>
+        {!external && (
+          <Link href={href} passHref>
+            <Anchor>
+              <span>{label}</span>
+            </Anchor>
+          </Link>
+        )}
+        {external && (
+          <>
+            <IconContainer>
+              <ExternalLinkIcon />
+            </IconContainer>
+            <ExternalLink href={href} text={label} />
+          </>
+        )}
       </LinkContainer>
-    </StyledAnchorTile>
+    </Container>
   );
 }
 
-const StyledAnchorTile = styled(Tile)(
+const Container = styled(Tile)<{ shadow: boolean }>((x) =>
   css({
     display: 'flex',
     mx: [-4, null, 0],
     flexDirection: ['column', null, 'row'],
-    boxShadow: 'none',
+    boxShadow: x.shadow ? 'tile' : 'none',
   })
 );
 
 const Content = styled.div(
   css({
     flexGrow: 1,
+    flex: '1 1 70%',
   })
 );
 
@@ -69,6 +78,7 @@ const IconContainer = styled.span(css({ mr: 2 }));
 const LinkContainer = styled.div(
   css({
     flexShrink: 1,
+    flex: '1 1 30%',
     display: 'flex',
     alignItems: 'center',
     border: 0,

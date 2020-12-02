@@ -6,7 +6,7 @@ import { testKpiValue } from '~/test-utils/test-kpi-value';
 import { Regionaal } from '~/types/data';
 import { formatNumber } from '~/utils/formatNumber';
 
-describe('Regional page: NursingHomeCare', () => {
+xdescribe('Regional page: NursingHomeCare', () => {
   const data = loadFixture<Regionaal>('VR13.json');
   let container: HTMLElement;
 

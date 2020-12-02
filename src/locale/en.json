@@ -27,7 +27,9 @@
   },
   "skiplinks": {
     "inhoud": "Go directly to the content",
-    "nav": "Go directly to the navigation"
+    "nav": "Go directly to the navigation",
+    "metric_nav": "",
+    "footer_nav": "Go to footer"
   },
   "header": {
     "title": "Coronavirus dashboard",
@@ -186,7 +188,9 @@
     "reference": {
       "href": "/verantwoording#hospitals",
       "text": "Read more in 'explanation of the data presented'."
-    }
+    },
+    "tijdelijk_onbeschikbaar_titel": "Map temporarily not available",
+    "tijdelijk_onbeschikbaar": "Hospital admissions per safety region and municipality are temporarily not shown. The dataset these numbers were based on (Osiris) is no longer sufficiently aligned with the actual number of hospital admissions.  Soon we expect to show admissions per safety region and municipality again, based on data from NICE, a better dataset. For hospital admissions on a national level NICE is already the source.  Read more in 'explanation of the data presented'."
   },
   "positief_geteste_personen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -510,7 +514,7 @@
     "total_installation_count_description": "Weekly number of sewage water treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful.",
     "rwzi_abbrev": "",
     "map_titel": "Average number of virus particles per 100.000 inhabitants",
-    "map_toelichting": "This map shows the average number of virus particles per 100.000 inhabitants, per safety region.",
+    "map_toelichting": "This map shows the average number of virus particles per 100.000 inhabitants, per safety region. Please note: on the 26th of November the legend has been revised.",
     "legenda_titel": "",
     "map_tooltip": "{{value}} x100 billion virus particles per 100.000 inhabitants",
     "map_tooltip_value": "",
@@ -622,7 +626,7 @@
       },
       {
         "cijfer": "Hospitals",
-        "verantwoording": "New hospital admissions are made available as [open data](https://stichting-nice.nl/covid-19/public/zkh/new-intake/confirmed) by the Stichting NICE (the National Intensive Care Evaluation Registry). The description of this dataset can be found [here](https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie). The average number of daily hospital admissions is calculated using the figures for one day ago, two days ago and three days ago. Data for the present day is not included in this calculation, as the present day is not yet over and registration data is therefore incomplete. Although hospitals strive to register COVID-19 patients as fast as possible, there is usually some delay. As a result, the figures for the previous several days tend to be incomplete. That is why data on the dashboard is refreshed daily.\n\nPreviously, new hospital admissions on a national level were based on [open data](https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv) from RIVM. The description of this dataset can be found [here](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427). This dataset uses the Osiris database. However, this database suffers from significant underreporting. The NICE database is more complete and uses a broader definition of hospital admission. RIVM figures include only those patients admitted to hospital because of COVID-19, whereas NICE figures also include patients who were admitted to the hospital for another reason but also have COVID-19.\n\nNICE figures cannot currently be broken down by safety region or municipality. Data at these levels is therefore still taken from the Osiris database. Work is being done to provide NICE figures for hospital admissions at safety region and municipal levels. \n\nHospital occupancy rates (non-ICU) are obtained daily via [open data](https://lcps.nu/wp-content/uploads/covid-19.csv) from LCPS. The description of this dataset can be found [here](https://lcps.nu/datafeed/). The total occupancy numbers are not available prior to the 1st of June because certain quality checks have not been performed before this date. Therefore that data might be flawed and is not published by LCPS."
+        "verantwoording": "New hospital admissions are made available as [open data](https://stichting-nice.nl/covid-19/public/zkh/new-intake/confirmed) by the Stichting NICE (the National Intensive Care Evaluation Registry). The description of this dataset can be found [here](https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie). The average number of daily hospital admissions is calculated using the figures for one day ago, two days ago and three days ago. Data for the present day is not included in this calculation, as the present day is not yet over and registration data is therefore incomplete. Although hospitals strive to register COVID-19 patients as fast as possible, there is usually some delay. As a result, the figures for the previous several days tend to be incomplete. That is why data on the dashboard is refreshed daily.\n\nPreviously, new hospital admissions on a national level were based on [open data](https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv) from RIVM. The description of this dataset can be found [here](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427). This dataset uses the Osiris database. However, this database suffers from significant underreporting. The NICE database is more complete and uses a broader definition of hospital admission. RIVM figures include only those patients admitted to hospital because of COVID-19, whereas NICE figures also include patients who were admitted to the hospital for another reason but also have COVID-19.\n\nCurrently data from NICE is not available on the level of safety regions and municipalities. Unitil November 30 2020 hospital admissions for safety regions and municipalities shown on this dashboard where based on the Osiris database. This data no longer sufficiently aligned with the actual numbers. From December 10 we expect to show admissions per safety region and municipality again, based on data from NICE.\n\nHospital occupancy rates (non-ICU) are obtained daily via [open data](https://lcps.nu/wp-content/uploads/covid-19.csv) from LCPS. The description of this dataset can be found [here](https://lcps.nu/datafeed/). The total occupancy numbers are not available prior to the 1st of June because certain quality checks have not been performed before this date. Therefore that data might be flawed and is not published by LCPS."
       },
       {
         "cijfer": "Confirmed cases",
@@ -646,7 +650,7 @@
       },
       {
         "cijfer": "Sewage water",
-        "verantwoording": "Information on sewage water is made available via [open data](https://data.rivm.nl/covid-19/COVID-19_rioolwaterdata.csv) by the RIVM. The description of this dataset can be found [here](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9). Human excrement flushed down the toilet can contain pathogens (viruses and bacteria that can make people sick), which can be measured in wastewater. These tests measure the concentration of coronavirus particles in wastewater that may (but do not always) come from the excrement of infected individuals. Measurements are collected at more than 300 wastewater treatment plants around the country. At least once a week at each location, researchers from the RIVM test a sample of wastewater collected over a 24-hour period. The weekly number of locations with new data varies however, because not every test is completed successfully. The open data shows at which locations tests were done on a given date. \n\nAs of 3 November 2020, the dashboard no longer shows the number of virus particles in one millilitre of wastewater. Instead it shows the number of virus particles per 100,000 inhabitants. Assisted by the water authorities, Statistics Netherlands (CBS) has calculated the number of inhabitants served by each wastewater treatment plant, so that RIVM can determine the number of virus particles per 100,000 inhabitants. RIVM now also corrects for the volume of water flowing into the plant at the time of sampling, which is called the flow rate. Rainwater, for example, has a diluting effect. However, it can only retrospectively correct the data from 7 September 2020, which means that data from before that date is no longer shown on the dashboard. This coincides with the fact that the number of testing locations was increased from roughly 80 to 318 on 7 September 2020.    \n\nIf the number of virus particles in a sample is too low to be measured, the value is recorded as 0. Sometimes RIVM will indicate that a measurement isn’t representative. These measurements are filtered out when data is entered in the dashboard. The current study makes trends visible, such as an increase or decrease in the number of virus particles. But more research is needed before any conclusions can be drawn about these trends. \n\nThe weekly average is calculated by first determining the average of all measurements taken at a sampling site in a given week, and then using this to determine the average of all sampling sites for that week per municipality, safety region or for the country as a whole. A week runs from Monday to Sunday. The weekly average is calculated on the following Tuesday, so that the week is complete and the RIVM has time to receive and analyse the samples, and report on them. Please note that additional data relating to the preceding week or even the weeks before that may be received after Tuesday. This is why the open data file is read every day and the weekly averages recalculated. Any corrections relating to previous weeks are also entered in the dashboard. The graph shows the value of the sample for each location and the date on which it was collected.\n\nWastewater treatment plants are allocated to a safety region based on their catchment area, that is, the area from which wastewater flows to that plant to be treated. RIVM indicates what percentage of a location falls under a certain safety region. This distribution is not yet entirely accurate and will be finetuned in the coming period. The catchment area of some locations fall under more than one safety region. In that case, the location can be found on the dashboard under the safety region in which the biggest share of its catchment area falls. Locations are linked to municipalities on the basis of their postcode, using Statistics Netherlands’ distribution of postcodes per municipality. Sometimes this did not result in a match. In these exceptional cases, the location’s coordinates were looked up on a map to see which municipality it falls under. Please note that the link to a particular municipality may not be entirely accurate because a wastewater treatment plant’s catchment area may not coincide exactly with municipal boundaries. We are working to make a more accurate link between sewage treatment plant locations and municipalities."
+        "verantwoording": "Information on sewage water is made available via [open data](https://data.rivm.nl/covid-19/COVID-19_rioolwaterdata.csv) by the RIVM. The description of this dataset can be found [here](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9). Human excrement flushed down the toilet can contain pathogens (viruses and bacteria that can make people sick), which can be measured in wastewater. These tests measure the concentration of coronavirus particles in wastewater that may (but do not always) come from the excrement of infected individuals. Measurements are collected at more than 300 wastewater treatment plants around the country. At least once a week at each location, researchers from the RIVM test a sample of wastewater collected over a 24-hour period. The weekly number of locations with new data varies however, because not every test is completed successfully. The open data shows at which locations tests were done on a given date. \n\nAs of 3 November 2020, the dashboard no longer shows the number of virus particles in one millilitre of wastewater. Instead it shows the number of virus particles per 100,000 inhabitants. Assisted by the water authorities, Statistics Netherlands (CBS) has calculated the number of inhabitants served by each wastewater treatment plant, so that RIVM can determine the number of virus particles per 100,000 inhabitants. RIVM now also corrects for the volume of water flowing into the plant at the time of sampling, which is called the flow rate. Rainwater, for example, has a diluting effect. However, it can only retrospectively correct the data from 7 September 2020, which means that data from before that date is no longer shown on the dashboard. This coincides with the fact that the number of testing locations was increased from roughly 80 to 318 on 7 September 2020.    \n\nIf the number of virus particles in a sample is too low to be measured, the value is recorded as 0. Sometimes RIVM will indicate that a measurement isn’t representative. These measurements are filtered out when data is entered in the dashboard. The current study makes trends visible, such as an increase or decrease in the number of virus particles. But more research is needed before any conclusions can be drawn about these trends. \n\nThe weekly average is calculated by first determining the average of all measurements taken at a sampling site in a given week, and then using this to determine the average of all sampling sites for that week per municipality, safety region or for the country as a whole. A week runs from Monday to Sunday. The weekly average is calculated on the following Tuesday, so that the week is complete and the RIVM has time to receive and analyse the samples, and report on them. Please note that additional data relating to the preceding week or even the weeks before that may be received after Tuesday. This is why the open data file is read every day and the weekly averages recalculated. Any corrections relating to previous weeks are also entered in the dashboard. The graph shows the value of the sample for each location and the date on which it was collected.\n\nWastewater treatment plants are allocated to a safety region based on their catchment area, that is, the area from which wastewater flows to that plant to be treated. RIVM indicates what percentage of a location falls under a certain safety region. This distribution is not yet entirely accurate and will be finetuned in the coming period. The catchment area of some locations fall under more than one safety region. In that case, the location can be found on the dashboard under the safety region in which the biggest share of its catchment area falls. Locations are linked to municipalities on the basis of their postcode, using Statistics Netherlands’ distribution of postcodes per municipality. Sometimes this did not result in a match. In these exceptional cases, the location’s coordinates were looked up on a map to see which municipality it falls under. Please note that the link to a particular municipality may not be entirely accurate because a wastewater treatment plant’s catchment area may not coincide exactly with municipal boundaries. We are working to make a more accurate link between sewage treatment plant locations and municipalities.\n\nThe legend of the national map has been revised on the x of November. This shows differences between security region more clearly."
       },
       {
         "cijfer": "“Value of ” and “Obtained”",
@@ -730,7 +734,7 @@
     "select_region_municipality_legend": "Select a municipality:",
     "select_region_type_legend": "Show numbers from:",
     "your_municipality": "Municipality",
-    "belangrijk_bericht": "There are [country-wide measures](https://www.rijksoverheid.nl/actueel/nieuws/2020/11/17/gedeeltelijke-lockdown-gaat-verder) to stop the quick spread of the coronavirus."
+    "belangrijk_bericht": "There are [country-wide measures](https://www.rijksoverheid.nl/actueel/nieuws/2020/11/17/gedeeltelijke-lockdown-gaat-verder) to stop the spread of the coronavirus."
   },
   "common": {
     "metadata": {
@@ -831,7 +835,9 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
         "text": "RIVM"
       }
-    }
+    },
+    "tijdelijk_onbeschikbaar_titel": "Temporarily not available",
+    "tijdelijk_onbeschikbaar": "Hospital admissions per safety region and municipality are temporarily not shown. The dataset these numbers were based on (Osiris) is no longer sufficiently aligned with the actual number of hospital admissions.  Soon we expect to show admissions per safety region and municipality again, based on data from NICE, a better dataset. For hospital admissions on a national level NICE is already the source.  Read more in 'explanation of the data presented'."
   },
   "veiligheidsregio_positief_geteste_personen": {
     "titel_sidebar": "Confirmed cases",
@@ -968,7 +974,9 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
         "text": "RIVM"
       }
-    }
+    },
+    "tijdelijk_onbeschikbaar_titel": "Temporarily not available",
+    "tijdelijk_onbeschikbaar": "Hospital admissions per safety region and municipality are temporarily not shown. The dataset these numbers were based on (Osiris) is no longer sufficiently aligned with the actual number of hospital admissions.  Soon we expect to show admissions per safety region and municipality again, based on data from NICE, a better dataset. For hospital admissions on a national level NICE is already the source.  Read more in 'explanation of the data presented'."
   },
   "gemeente_positief_geteste_personen": {
     "titel_sidebar": "Confirmed cases",
@@ -1061,12 +1069,12 @@
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Level of risk",
-    "selecteer_toelichting": "The map indicates the level of risk per safety region.\n\nThere are [country-wide measures](https://www.rijksoverheid.nl/actueel/nieuws/2020/11/17/gedeeltelijke-lockdown-gaat-verder) to stop the quick spread of the coronavirus. \n\n[More about risk levels](/over-risiconiveaus)",
+    "selecteer_toelichting": "The map indicates the level of risk per safety region.\n\n[More about risk levels](/over-risiconiveaus)",
     "metadata": {
       "title": "Level of risk per safety region | Dashboard Coronavirus | Government.nl",
       "description": "Overview of the level of risk per safety region in the Netherlands."
     },
-    "belangrijk_bericht": "There are [country-wide measures](https://www.rijksoverheid.nl/actueel/nieuws/2020/11/17/gedeeltelijke-lockdown-gaat-verder) to stop the quick spread of the coronavirus."
+    "belangrijk_bericht": "There are [country-wide measures](https://www.rijksoverheid.nl/actueel/nieuws/2020/11/17/gedeeltelijke-lockdown-gaat-verder) to stop the spread of the coronavirus."
   },
   "gemeente_index": {
     "selecteer_titel": "Select your municipality",
@@ -1084,7 +1092,7 @@
   },
   "escalatie_niveau": {
     "titel": "Level of risk",
-    "toelichting": "The map indicates the level of risk per safety region.\n\nThere are [country-wide measures](https://www.rijksoverheid.nl/actueel/nieuws/2020/11/17/gedeeltelijke-lockdown-gaat-verder) to stop the quick spread of the coronavirus. \n\n[More about risk levels](/over-risiconiveaus)",
+    "toelichting": "The map indicates the level of risk per safety region.\n\n[More about risk levels](/over-risiconiveaus)",
     "types": {
       "1": {
         "titel": "Caution",
@@ -1475,5 +1483,11 @@
         "meervoud": "weeks"
       }
     }
+  },
+  "aria_labels": {
+    "pagina_keuze": "",
+    "footer_keuze": "",
+    "metriek_navigatie": "",
+    "skip_links": ""
   }
 }
