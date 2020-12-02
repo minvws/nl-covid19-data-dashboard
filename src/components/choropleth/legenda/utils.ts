@@ -7,13 +7,16 @@ export function getDataThresholds<T>(
   metricName: keyof T,
   metricProperty?: string
 ) {
+  console.log('thresholdData', thresholdData);
   const thresholds = metricProperty
     ? get(thresholdData, [metricName, metricProperty])
     : thresholdData[metricName];
 
   assert(
     thresholds,
-    `No thresholds are defined for ${metricName} ${metricProperty ?? ''}`
+    `No thresholds are defined for ${metricName}${
+      metricProperty ? `:${metricProperty}` : ''
+    }, value: ${thresholds}`
   );
 
   return thresholds as ChoroplethThresholdsValue[];

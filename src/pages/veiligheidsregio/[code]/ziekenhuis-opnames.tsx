@@ -6,8 +6,8 @@ import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
+import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createMunicipalHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/municipal/create-municipal-hospital-admissions-tooltip';
 import { FCWithLayout } from '~/components/layout';
@@ -99,7 +99,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
         })}
         description={text.map_toelichting}
         legend={{
-          thresholds: municipalThresholds.hospital_admissions,
+          thresholds: regionThresholds.hospital_admissions,
           title: siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel,
         }}
         metadata={{

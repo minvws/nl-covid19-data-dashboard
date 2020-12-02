@@ -1,4 +1,5 @@
-import { assert } from '~/utils/assert';
+import get from 'lodash/get';
+import set from 'lodash/set';
 import { useMemo } from 'react';
 import useSWR from 'swr';
 import { Regions } from '~/types/data';
@@ -8,8 +9,6 @@ import {
   TRegionMetricName,
   TRegionMetricType,
 } from '../shared';
-import set from 'lodash/set';
-import get from 'lodash/get';
 
 export type TGetRegionFunc<T> = (id: string) => T | SafetyRegionProperties;
 
@@ -18,6 +17,11 @@ export type TSafetyRegionDataInfo<T> = [TGetRegionFunc<T>, boolean];
 type RegionMetricValue = {
   vrcode: string;
   [key: string]: unknown;
+};
+
+type UseDataReturnValue = {
+  getData: (id: string) => unknown;
+  hasData: boolean;
 };
 
 /**
@@ -40,14 +44,19 @@ export function useSafetyRegionData(
   featureCollection: RegionGeoJSON,
   metricName: TRegionMetricName,
   metricProperty?: string
-) {
+): UseDataReturnValue {
   const { data } = useSWR<Regions>('/json/REGIONS.json');
 
-  assert(data, 'Missing regions data');
-
-  const values = data[metricName];
-
   return useMemo(() => {
+    if (!data) {
+      return {
+        getData: () => 0,
+        hasData: false,
+      };
+    }
+
+    const values = data[metricName];
+
     const propertyData = featureCollection.features.reduce(
       (acc, feature) => set(acc, feature.properties.vrcode, feature.properties),
       {} as Record<string, SafetyRegionProperties>
@@ -77,6 +86,6 @@ export function useSafetyRegionData(
     const getData = (id: string) =>
       hasData ? mergedData[id] : propertyData[id];
 
-    return [getData, hasData] as const;
-  }, [values, metricName, metricProperty, featureCollection.features]);
+    return { getData, hasData };
+  }, [data, metricName, metricProperty, featureCollection.features]);
 }

@@ -1,15 +1,14 @@
+import get from 'lodash/get';
+import set from 'lodash/set';
 import { useMemo } from 'react';
 import useSWR from 'swr';
 import { Municipalities } from '~/types/data';
-import { assert } from '~/utils/assert';
 import {
   MunicipalGeoJSON,
   MunicipalityProperties,
   TMunicipalityMetricName,
   TMunicipalityMetricType,
 } from '../shared';
-import set from 'lodash/set';
-import get from 'lodash/get';
 
 /**
  * This hook takes a metric name, extracts the associated data from the json/municipalities.json
@@ -31,37 +30,54 @@ type MunicipalitiesMetricValue = {
   [key: string]: unknown;
 };
 
+type UseDataReturnValue = {
+  getData: (id: string) => unknown;
+  hasData: boolean;
+};
+
 export function useMunicipalityNavigationData(
   featureCollection: MunicipalGeoJSON
-) {
+): UseDataReturnValue {
   const { data: municipalities } = useSWR<Municipalities>(
     '/json/MUNICIPALITIES.json'
   );
 
-  assert(municipalities, 'Missing municipalities data');
+  if (!municipalities) {
+    return {
+      getData: () => 0,
+      hasData: false,
+    };
+  }
 
   const propertyData = featureCollection.features.reduce(
     (acc, feature) => set(acc, feature.properties.gemcode, feature.properties),
     {} as Record<string, MunicipalityProperties>
   );
 
-  return (id: string) => propertyData[id];
+  return {
+    getData: (id: string) => propertyData[id],
+    hasData: true,
+  };
 }
 
 export function useMunicipalityData(
   featureCollection: MunicipalGeoJSON,
   metricName: TMunicipalityMetricName,
   metricProperty?: string
-) {
-  const { data: municipalities } = useSWR<Municipalities>(
-    '/json/MUNICIPALITIES.json'
-  );
+): UseDataReturnValue {
+  const { data } = useSWR<Municipalities>('/json/MUNICIPALITIES.json');
 
-  assert(municipalities, 'Missing municipalities data');
-
-  const values = municipalities[metricName];
+  // assert(municipalities, 'Missing municipalities data');
 
   return useMemo(() => {
+    if (!data) {
+      return {
+        getData: () => 0,
+        hasData: false,
+      };
+    }
+
+    const values = data[metricName];
     const propertyData = featureCollection.features.reduce(
       (acc, feature) =>
         set(acc, feature.properties.gemcode, feature.properties),
@@ -91,6 +107,6 @@ export function useMunicipalityData(
     const getData = (id: string) =>
       mergedData ? mergedData[id] : propertyData[id];
 
-    return [getData, hasData] as const;
-  }, [values, metricName, metricProperty, featureCollection]);
+    return { getData, hasData };
+  }, [data, metricName, metricProperty, featureCollection]);
 }

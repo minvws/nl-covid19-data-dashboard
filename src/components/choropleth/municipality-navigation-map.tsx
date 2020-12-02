@@ -26,7 +26,7 @@ export function MunicipalityNavigationMap<T>(
 
   const [ref, dimensions] = useChartDimensions<HTMLDivElement>(1.2);
 
-  const getData = useMunicipalityNavigationData(municipalGeo);
+  const { getData } = useMunicipalityNavigationData(municipalGeo);
 
   const featureCallback = (
     feature: Feature<MultiPolygon, MunicipalityProperties>,

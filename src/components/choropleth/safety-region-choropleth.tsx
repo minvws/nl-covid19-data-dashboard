@@ -56,7 +56,7 @@ export function SafetyRegionChoropleth<T>(
 
   const boundingBox = useSafetyRegionBoundingbox(regionGeo, selected);
 
-  const [getData, hasData] = useSafetyRegionData(
+  const { getData, hasData } = useSafetyRegionData(
     regionGeo,
     metricName,
     metricProperty

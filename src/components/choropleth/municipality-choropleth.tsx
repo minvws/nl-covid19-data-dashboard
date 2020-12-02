@@ -54,7 +54,7 @@ export function MunicipalityChoropleth<T>(
 
   const [boundingbox] = useMunicipalityBoundingbox(regionGeo, selected);
 
-  const [getData, hasData] = useMunicipalityData(
+  const { getData, hasData } = useMunicipalityData(
     municipalGeo,
     metricName,
     metricProperty
