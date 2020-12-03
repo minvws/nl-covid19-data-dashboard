@@ -257,8 +257,12 @@ function NationalLayout(props: NationalLayoutProps) {
                             siteText.ziekenhuisopnames_per_dag.titel_sidebar
                           }
                         />
-                        {/*
-                         A next step could be to embed the SidebarMetric component in an even higher-level component which would also include the link and the TitleWithIcon, seeing that both appear to use the same localeTextKey, and it would make sense to enforce the existence of standardized properties like title_sidebar.
+                        {/**
+                         * A next step could be to embed the SidebarMetric component in an even
+                         * higher-level component which would also include the link and the
+                         * TitleWithIcon, seeing that both appear to use the same localeTextKey,
+                         * and it would make sense to enforce the existence of standardized
+                         * properties like title_sidebar.
                          */}
                         <SidebarMetric
                           scope="nl"
