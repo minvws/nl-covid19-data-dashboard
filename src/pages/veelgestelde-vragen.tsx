@@ -61,9 +61,7 @@ export async function getStaticProps(): Promise<StaticProps> {
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const lastGenerated = JSON.parse(fileContents).last_generated;
 
-  const sanityData = await getClient(true).fetch(faqQuery);
-
-  const faq = localize(sanityData, [targetLanguage, 'nl']);
+  const faq = await getClient(true).fetch(faqQuery);
 
   return { props: { text, lastGenerated, faq } };
 }
@@ -77,8 +75,6 @@ const Verantwoording: FCWithLayout<VeelgesteldeVragenProps> = (props) => {
   });
 
   const faqList = localize(staticOrPreviewData, [targetLanguage, 'nl']);
-
-  // console.log(faqList);
 
   return (
     <>
@@ -100,7 +96,8 @@ const Verantwoording: FCWithLayout<VeelgesteldeVragenProps> = (props) => {
         <MaxWidth>
           <div className={styles.maxwidth}>
             <h2>{text.over_veelgestelde_vragen.titel}</h2>
-            <p>{text.over_veelgestelde_vragen.paragraaf}</p>
+            <PortableText blocks={faqList.description} />
+
             <article className={styles.faqList}>
               {faqList.content.map((item: any) => {
                 //@TODO, Why does this sometimes return empty strings for the

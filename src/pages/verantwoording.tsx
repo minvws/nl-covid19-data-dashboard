@@ -9,8 +9,13 @@ import { ensureUniqueSkipLinkIds, getSkipLinkId } from '~/utils/skipLinks';
 import styles from './over.module.scss';
 import { Collapsable } from '~/components-styled/collapsable';
 
-import BlockContent from '@sanity/block-content-to-react';
-import client, { localize } from '~/lib/sanity';
+import { groq } from 'next-sanity';
+import {
+  getClient,
+  usePreviewSubscription,
+  PortableText,
+  localize,
+} from '~/lib/sanity';
 
 import { targetLanguage } from '../locale/index';
 
@@ -27,8 +32,15 @@ interface StaticProps {
 interface VerantwoordingProps {
   text: TALLLanguages;
   lastGenerated: string;
-  verantwoording: any;
+  cijferVerantwoording: any;
 }
+
+const cijferVerantwoordingQuery = groq`
+  *[_type == 'cijferVerantwoording']
+  {
+    ...
+  }[0]
+`;
 
 export async function getStaticProps(): Promise<StaticProps> {
   const text = (await import('../locale/index')).default;
@@ -49,24 +61,28 @@ export async function getStaticProps(): Promise<StaticProps> {
   const lastGenerated = JSON.parse(fileContents).last_generated;
 
   // @ts-ignore
-  const sanityData = await client.fetch(
-    `
-    *[_type == 'cijferVerantwoording']
-    {
-      title,
-      beschrijving,
-      content,
-    }[0]
-  `
+  const cijferVerantwoording = await getClient(true).fetch(
+    cijferVerantwoordingQuery
   );
 
-  const verantwoording = localize(sanityData, [targetLanguage, 'nl']);
-
-  return { props: { text, lastGenerated, verantwoording } };
+  return { props: { text, lastGenerated, cijferVerantwoording } };
 }
 
 const Verantwoording: FCWithLayout<VerantwoordingProps> = (props) => {
-  const { verantwoording } = props;
+  const { cijferVerantwoording } = props;
+
+  const { data: staticOrPreviewData } = usePreviewSubscription(
+    cijferVerantwoordingQuery,
+    {
+      initialData: cijferVerantwoording,
+      enabled: true,
+    }
+  );
+
+  const verantwoordingList = localize(staticOrPreviewData, [
+    targetLanguage,
+    'nl',
+  ]);
 
   return (
     <>
@@ -87,13 +103,13 @@ const Verantwoording: FCWithLayout<VerantwoordingProps> = (props) => {
       <div className={styles.container}>
         <MaxWidth>
           <div className={styles.maxwidth}>
-            <h2>{verantwoording.title}</h2>
-            <BlockContent blocks={verantwoording.beschrijving} />
+            <h2>{verantwoordingList.title}</h2>
+            <PortableText blocks={verantwoordingList.beschrijving} />
             <article className={styles.faqList}>
-              {verantwoording.content.map((item: any) =>
+              {verantwoordingList.content.map((item: any) =>
                 item.titel && item.verantwoording ? (
                   <Collapsable key={item.id} id={item.id} summary={item.titel}>
-                    <BlockContent blocks={item.verantwoording} />
+                    <PortableText blocks={item.verantwoording} />
                   </Collapsable>
                 ) : null
               )}
