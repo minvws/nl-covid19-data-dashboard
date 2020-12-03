@@ -43,7 +43,7 @@ export function AnchorTile({
             <IconContainer>
               <ExternalLinkIcon />
             </IconContainer>
-            <ExternalLink href={href} text={label} />
+            <ExternalLink href={href}>{label}</ExternalLink>
           </>
         )}
       </LinkContainer>

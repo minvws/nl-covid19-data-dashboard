@@ -4,7 +4,8 @@ import React from 'react';
 import { Box } from '~/components-styled/base';
 import { MaxWidth } from '~/components-styled/max-width';
 import { SEOHead } from '~/components/seoHead';
-import { SiteHeader } from '~/domain/site/header';
+import { SiteFooter } from '~/domain/site/site-footer';
+import { SiteHeader } from '~/domain/site/site-header';
 import text from '~/locale/index';
 import { ILastGeneratedData } from '~/static-props/last-generated-data';
 import { formatDateFromSeconds } from '~/utils/formatDate';
@@ -57,13 +58,8 @@ function Layout(
 
   const router = useRouter();
 
-  const dateTime = formatDateFromSeconds(Number(lastGenerated), 'iso');
-  const dateOfInsertion = lastGenerated
-    ? formatDateFromSeconds(Number(lastGenerated), 'long')
-    : undefined;
-
   return (
-    <>
+    <div key={router.asPath}>
       <SEOHead
         title={title}
         description={description}
@@ -87,104 +83,7 @@ function Layout(
 
       <div>{children}</div>
 
-      <footer
-        /** re-mount when route changes in order to blur anchors */
-        key={router.route}
-      >
-        <div className={styles.footer}>
-          <MaxWidth>
-            <div className={styles.grid}>
-              <div className={styles.footerColumn}>
-                <Box fontSize={3} fontWeight="bold">
-                  {text.nav.title}
-                </Box>
-                <nav
-                  aria-label={text.aria_labels.footer_keuze}
-                  role="navigation"
-                  id="footer-navigation"
-                >
-                  <ul className={styles.footerList}>
-                    <li>
-                      <Link href="/">
-                        <a className={styles.footerLink}>
-                          {text.nav.links.index}
-                        </a>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/veiligheidsregio">
-                        <a className={styles.footerLink}>
-                          {text.nav.links.veiligheidsregio}
-                        </a>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/gemeente">
-                        <a className={styles.footerLink}>
-                          {text.nav.links.gemeente}
-                        </a>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/over">
-                        <a className={styles.footerLink}>
-                          {text.nav.links.over}
-                        </a>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/veelgestelde-vragen">
-                        <a className={styles.footerLink}>
-                          {text.nav.links.veelgestelde_vragen}
-                        </a>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/over-risiconiveaus">
-                        <a className={styles.footerLink}>
-                          {text.nav.links.over_risiconiveaus}
-                        </a>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/verantwoording">
-                        <a className={styles.footerLink}>
-                          {text.nav.links.verantwoording}
-                        </a>
-                      </Link>
-                    </li>
-                    <li>
-                      <a
-                        href={text.nav.links.meer_href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={styles.footerLink}
-                      >
-                        {text.nav.links.meer}
-                      </a>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
-              <div className={styles.footerColumn}>
-                <Box fontSize={3} fontWeight="bold">
-                  {text.laatst_bijgewerkt.title}
-                </Box>
-                <p
-                  dangerouslySetInnerHTML={{
-                    __html: replaceVariablesInText(
-                      text.laatst_bijgewerkt.message,
-                      {
-                        dateOfInsertion: `<time datetime=${dateTime}>${dateOfInsertion}</time>`,
-                      }
-                    ),
-                  }}
-                />
-              </div>
-            </div>
-          </MaxWidth>
-        </div>
-      </footer>
-    </>
+      <SiteFooter lastGenerated={lastGenerated} />
+    </div>
   );
 }

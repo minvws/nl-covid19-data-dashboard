@@ -10,8 +10,6 @@ export function TopNavigation() {
   const router = useRouter();
   return (
     <nav
-      // re-mount when route changes in order to blur anchors
-      key={router.route}
       id="main-navigation"
       role="navigation"
       aria-label={text.aria_labels.pagina_keuze}
