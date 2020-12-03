@@ -1427,7 +1427,7 @@
         "titel": "Number of respondents",
         "toelichting": "Number of people surveyed between 20 and 26 October 2020.",
         "bron": {
-          "text": "",
+          "text": "RIVM",
           "href": "https://data.rivm.nl/covid-19/COVID-19_gedrag.html"
         }
       }
