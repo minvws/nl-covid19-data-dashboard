@@ -1,17 +1,14 @@
 import { MunicipalContext } from 'cypress/integration/types';
+import { beforeMunicipalTests } from 'cypress/support/beforeMunicipalTests';
 import { checkKpiValues } from 'cypress/support/checkKpiValues';
 import { swallowResizeObserverError } from 'cypress/support/swallowResizeObserverError';
-import { Municipal } from '~/types/data';
 import { formatNumber } from '~/utils/formatNumber';
 
 context('Gemeente - Rioolwater', () => {
   swallowResizeObserverError();
 
-  const gmcode = 'GM0363';
-
   before(() => {
-    cy.fixture<Municipal>(`${gmcode}.json`).as('municipalData');
-    cy.visit(`/gemeente/${gmcode}/rioolwater`);
+    beforeMunicipalTests('rioolwater');
   });
 
   it('Should show the correct KPI values', function (this: MunicipalContext) {

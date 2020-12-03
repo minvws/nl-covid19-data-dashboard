@@ -4,33 +4,28 @@ import { checkKpiValues } from 'cypress/support/checkKpiValues';
 import { swallowResizeObserverError } from 'cypress/support/swallowResizeObserverError';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 
-context('Landelijk - Verpleeghuiszorg', () => {
+context('Landelijk - Gehandicaptenzorg', () => {
   swallowResizeObserverError();
 
   before(() => {
-    beforeNationalTests('verpleeghuiszorg');
+    beforeNationalTests('gehandicaptenzorg');
   });
 
   it('Should show the correct KPI values', function (this: NationalContext) {
+    const disabilityCareLastValue = this.nationalData.disability_care
+      .last_value;
     const kpiTestInfo = {
       newly_infected_people: formatNumber(
-        this.nationalData.nursing_home.last_value.newly_infected_people
+        disabilityCareLastValue.newly_infected_people
       ),
       infected_locations_total: [
-        formatNumber(
-          this.nationalData.nursing_home.last_value.infected_locations_total
-        ),
-        `(${formatPercentage(
-          this.nationalData.nursing_home.last_value
-            .infected_locations_percentage
-        )}%)`,
+        formatNumber(disabilityCareLastValue.infected_locations_total),
+        formatPercentage(disabilityCareLastValue.infected_locations_percentage),
       ],
       newly_infected_locations: formatNumber(
-        this.nationalData.nursing_home.last_value.newly_infected_locations
+        disabilityCareLastValue.newly_infected_locations
       ),
-      deceased_daily: formatNumber(
-        this.nationalData.nursing_home.last_value.deceased_daily
-      ),
+      deceased_daily: formatNumber(disabilityCareLastValue.deceased_daily),
     };
 
     checkKpiValues(kpiTestInfo);
