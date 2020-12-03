@@ -108,7 +108,11 @@ const Verantwoording: FCWithLayout<VerantwoordingProps> = (props) => {
             <article className={styles.faqList}>
               {verantwoordingList.content.map((item: any) =>
                 item.titel && item.verantwoording ? (
-                  <Collapsable key={item.id} id={item.id} summary={item.titel}>
+                  <Collapsable
+                    key={item._key}
+                    id={item._key}
+                    summary={item.titel}
+                  >
                     <PortableText blocks={item.verantwoording} />
                   </Collapsable>
                 ) : null
