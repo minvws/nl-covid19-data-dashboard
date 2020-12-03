@@ -1,6 +1,6 @@
 import css from '@styled-system/css';
-import { localPoint } from '@vx/event';
-import { Mercator } from '@vx/geo';
+import { localPoint } from '@visx/event';
+import { Mercator } from '@visx/geo';
 import { Feature, FeatureCollection, Geometry, MultiPolygon } from 'geojson';
 import { memo, MutableRefObject, ReactNode, useRef, useState } from 'react';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';

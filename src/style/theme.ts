@@ -101,10 +101,12 @@ export const colors = {
   red: '#F35363',
   category: '#6b6b6b',
   border: '#c4c4c4',
+  lightBlue: '#E0EEF6',
 
   data: {
     primary: '#007BC7',
     secondary: '#154273',
+    neutral: '#C6C8CA',
     fill: 'rgba(0, 123, 199, .05)',
     scale: {
       blue: ['#8FCAE7', '#5BADDB', '#248FCF', '#0070BB', '#00529D', '#003580'],
