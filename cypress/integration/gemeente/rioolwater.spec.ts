@@ -12,12 +12,12 @@ context('Gemeente - Rioolwater', () => {
   });
 
   it('Should show the correct KPI values', function (this: MunicipalContext) {
+    const sewerLastValue = this.municipalData.sewer?.last_value;
+
     const kpiTestInfo = {
-      barscale_value: formatNumber(
-        this.municipalData.sewer?.last_value.average
-      ),
+      barscale_value: formatNumber(sewerLastValue?.average),
       total_installation_count: formatNumber(
-        this.municipalData.sewer?.last_value.total_installation_count
+        sewerLastValue?.total_installation_count
       ),
     };
 

@@ -4,30 +4,30 @@ import { checkKpiValues } from 'cypress/support/checkKpiValues';
 import { swallowResizeObserverError } from 'cypress/support/swallowResizeObserverError';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 
-context('Regionaal - Verpleeghuiszorg', () => {
+context('Regionaal - Gehandicaptenzorg', () => {
   swallowResizeObserverError();
 
   before(() => {
-    beforeRegionTests('verpleeghuiszorg');
+    beforeRegionTests('gehandicaptenzorg');
   });
 
   it('Should show the correct KPI values', function (this: RegionalContext) {
-    const nursingHomeLastValue = this.regionData.nursing_home.last_value;
+    const disablityCareLastValue = this.regionData.disability_care.last_value;
 
     const kpiTestInfo = {
       newly_infected_people: formatNumber(
-        nursingHomeLastValue.newly_infected_people
+        disablityCareLastValue.newly_infected_people
       ),
       infected_locations_total: [
-        formatNumber(nursingHomeLastValue.infected_locations_total),
+        formatNumber(disablityCareLastValue.infected_locations_total),
         `${formatPercentage(
-          nursingHomeLastValue.infected_locations_percentage
+          disablityCareLastValue.infected_locations_percentage
         )}%`,
       ],
       newly_infected_locations: formatNumber(
-        nursingHomeLastValue.newly_infected_locations
+        disablityCareLastValue.newly_infected_locations
       ),
-      deceased_daily: formatNumber(nursingHomeLastValue.deceased_daily),
+      deceased_daily: formatNumber(disablityCareLastValue.deceased_daily),
     };
 
     checkKpiValues(kpiTestInfo);

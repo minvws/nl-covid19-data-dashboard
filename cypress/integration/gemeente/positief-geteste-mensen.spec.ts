@@ -12,14 +12,15 @@ context('Gemeente - Positief geteste mensen', () => {
   });
 
   it('Should show the correct KPI values', function (this: MunicipalContext) {
+    const positiveTestedLastValue = this.municipalData.positive_tested_people
+      .last_value;
+
     const kpiTestInfo = {
       infected_daily_increase: formatNumber(
-        this.municipalData.positive_tested_people.last_value
-          .infected_daily_increase
+        positiveTestedLastValue.infected_daily_increase
       ),
       infected_daily_total: formatNumber(
-        this.municipalData.positive_tested_people.last_value
-          .infected_daily_total
+        positiveTestedLastValue.infected_daily_total
       ),
     };
 

@@ -12,15 +12,14 @@ context('Landelijk - IC Opnames', () => {
   });
 
   it('Should show the correct KPI values', function (this: NationalContext) {
+    const icBedsLastValue = this.nationalData.intensive_care_beds_occupied
+      .last_value;
+
     const kpiTestInfo = {
       covid_occupied: [
-        formatNumber(
-          this.nationalData.intensive_care_beds_occupied.last_value
-            .covid_occupied
-        ),
+        formatNumber(icBedsLastValue.covid_occupied),
         `(${formatPercentage(
-          this.nationalData.intensive_care_beds_occupied.last_value
-            .covid_percentage_of_all_occupied
+          icBedsLastValue.covid_percentage_of_all_occupied
         )}%)`,
       ],
     };

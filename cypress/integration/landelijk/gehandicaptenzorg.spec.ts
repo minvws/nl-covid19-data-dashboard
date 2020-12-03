@@ -14,13 +14,16 @@ context('Landelijk - Gehandicaptenzorg', () => {
   it('Should show the correct KPI values', function (this: NationalContext) {
     const disabilityCareLastValue = this.nationalData.disability_care
       .last_value;
+
     const kpiTestInfo = {
       newly_infected_people: formatNumber(
         disabilityCareLastValue.newly_infected_people
       ),
       infected_locations_total: [
         formatNumber(disabilityCareLastValue.infected_locations_total),
-        formatPercentage(disabilityCareLastValue.infected_locations_percentage),
+        `${formatPercentage(
+          disabilityCareLastValue.infected_locations_percentage
+        )}%`,
       ],
       newly_infected_locations: formatNumber(
         disabilityCareLastValue.newly_infected_locations
