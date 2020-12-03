@@ -31,18 +31,11 @@ export function SidebarMetric<T>({
   showBarScale,
   annotationKey,
 }: SidebarMetricProps<T>) {
-  const value = get(data, [metricName, 'last_value', metricProperty]);
+  const lastValue = get(data, [metricName, 'last_value']);
+  const propertyValue = lastValue && lastValue[metricProperty];
 
-  console.log(
-    '+++data',
-    metricName,
-    'last_value',
-    metricProperty,
-    get(data, [metricName, 'last_value']),
-    value
-  );
   assert(
-    value,
+    propertyValue,
     `Missing value for metric property ${[
       metricName,
       'last_value',
@@ -52,23 +45,22 @@ export function SidebarMetric<T>({
       .join(':')}`
   );
 
-  console.log('+++value', value);
+  // console.log('+++ value', value);
 
   const config = getDataConfig(scope, metricName, metricProperty);
   const commonText = siteText.common.metricKPI;
-  return null;
 
   const title = get(siteText, [localeTextKey, 'titel_kpi']);
   assert(title, `Missing title at %{localeTextKey}.titel_kpi`);
 
   const description = config.isWeeklyData
     ? replaceVariablesInText(commonText.dateRangeOfReport, {
-        startDate: formatDateFromSeconds(value.week_start_unix, 'axis'),
-        endDate: formatDateFromSeconds(value.week_end_unix, 'axis'),
+        startDate: formatDateFromSeconds(lastValue.week_start_unix, 'axis'),
+        endDate: formatDateFromSeconds(lastValue.week_end_unix, 'axis'),
       })
     : replaceVariablesInText(commonText.dateOfReport, {
         dateOfReport: formatDateFromSeconds(
-          value.date_of_report_unix,
+          lastValue.date_of_report_unix,
           'medium'
         ),
       });
@@ -102,10 +94,10 @@ export function SidebarMetric<T>({
   }
 
   return (
-    <Box spacing={2}>
+    <Box spacing={1} mx={'2.5rem'}>
       <SidebarKpiValue
         title={title}
-        value={value}
+        value={propertyValue}
         isPercentage={config.isPercentage}
         description={description}
         difference={differenceValue}
@@ -113,7 +105,7 @@ export function SidebarMetric<T>({
       {showBarScale && (
         <SidebarBarScale
           localeTextKey={localeTextKey}
-          value={value}
+          value={propertyValue}
           config={config.barScale}
           uniqueId={[scope, metricName, metricProperty].join(':')}
         />
