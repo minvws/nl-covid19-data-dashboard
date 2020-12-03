@@ -161,8 +161,8 @@
       "kpi_daily_title": "Dagelijks nieuw gemelde besmettingen onder thuiswonende ouderen",
       "kpi_daily_description": "Dit getal laat zien van hoeveel thuiswonende ouderen gemeld is dat ze positief getest zijn en COVID-19 hebben. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.",
 
-      "kpi_daily_permillage_title": "Aantal dagelijks gemelde besmettingen per 1.000 thuiswonende ouderen",
-      "kpi_daily_permillage_description": "Dit getal laat zien welke percentage van de thuiswonende ouderen positief getest is op covid-19.",
+      "kpi_daily_per_100k_title": "Aantal dagelijks gemelde besmettingen per 100.000 thuiswonende ouderen",
+      "kpi_daily_per_100k_description": "Dit getal laat zien welke deel van de thuiswonende ouderen positief getest is op COVID-19.",
 
       "line_chart_daily_title": "Aantal dagelijks nieuwe besmette thuiswonende ouders",
 
@@ -228,8 +228,8 @@
       "kpi_daily_title": "Dagelijks nieuw gemelde besmettingen onder thuiswonende ouderen",
       "kpi_daily_description": "Dit getal laat zien van hoeveel thuiswonende ouderen gemeld is dat ze positief getest zijn en COVID-19 hebben. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.",
 
-      "kpi_daily_permillage_title": "Aantal dagelijks gemelde besmettingen per 1.000 thuiswonende ouderen",
-      "kpi_daily_permillage_description": "Dit getal laat zien welke percentage van de thuiswonende ouderen positief getest is op covid-19.",
+      "kpi_daily_per_100k_title": "Aantal dagelijks gemelde besmettingen per 1.000 thuiswonende ouderen",
+      "kpi_daily_per_100k_description": "Dit getal laat zien welke percentage van de thuiswonende ouderen positief getest is op covid-19.",
 
       "line_chart_daily_title": "Aantal dagelijks nieuwe besmette thuiswonende ouders",
 

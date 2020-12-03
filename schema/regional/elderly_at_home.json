@@ -23,7 +23,7 @@
         "positive_tested_daily": {
           "type": "integer"
         },
-        "positive_tested_daily_permillage": {
+        "positive_tested_daily_per_100k": {
           "type": "number"
         },
         "deceased_daily": {
@@ -42,7 +42,7 @@
       },
       "required": [
         "positive_tested_daily",
-        "positive_tested_daily_permillage",
+        "positive_tested_daily_per_100k",
         "deceased_daily",
         "date_of_report_unix",
         "date_of_insertion_unix",
