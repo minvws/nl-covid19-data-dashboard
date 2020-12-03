@@ -17,10 +17,9 @@ import {
   MetricMenuItem,
 } from '~/components-styled/aside/menu';
 import { TitleWithIcon } from '~/components-styled/aside/title-with-icon';
+import { SidebarMetric } from '~/components-styled/sidebar-metric';
 import { NursingHomeInfectedPeopleMetric } from '~/components/common/nursing-home-infected-people-metric';
 import { InfectiousPeopleMetric } from '~/components/landelijk/infectious-people-metric';
-import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-barscale';
-import { IntakeHospitalMetric } from '~/components/landelijk/intake-hospital-metric';
 import { IntakeIntensiveCareBarscale } from '~/components/landelijk/intake-intensive-care-barscale';
 import { IntakeIntensiveCareMetric } from '~/components/landelijk/intake-intensive-care-metric';
 import { PositiveTestedPeopleBarScale } from '~/components/landelijk/positive-tested-people-barscale';
@@ -258,14 +257,17 @@ function NationalLayout(props: NationalLayoutProps) {
                             siteText.ziekenhuisopnames_per_dag.titel_sidebar
                           }
                         />
-                        <span className="metric-wrapper">
-                          <IntakeHospitalMetric data={data} />
-                          <IntakeHospitalBarScale
-                            data={data}
-                            showAxis={false}
-                            showValue={false}
-                          />
-                        </span>
+                        {/**
+                         * I think the next step could be to embed the SidebarKpi component in an even higher-level component which would also include the link and the TitleWithIcon, seeing that both appear to use the same localeTextKey, and it would make sense to enforce that (and the existence of properties like title_sidebar anyway.
+                         */}
+                        <SidebarMetric
+                          data={data}
+                          metricName="intake_hospital_ma"
+                          metricProperty="moving_average_hospital"
+                          localeTextKey="ziekenhuisopnames_per_dag"
+                          differenceProperty="intake_hospital_ma__moving_average_hospital"
+                          showBarScale={true}
+                        />
                       </a>
                     </Link>
                   </MetricMenuItem>
