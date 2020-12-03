@@ -69,7 +69,7 @@ export function SidebarMetric<T>({
 
   if (differenceKey) {
     /**
-     * If you pass in a difference property, it should exist
+     * If you pass in a difference key, it should exist
      */
     assert(differenceValue, `Missing value for difference:${differenceKey}`);
   }
