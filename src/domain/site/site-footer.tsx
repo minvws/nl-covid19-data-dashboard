@@ -1,5 +1,5 @@
 import css from '@styled-system/css';
-import Link from 'next/link';
+import { Link } from '~/utils/link';
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components-styled/base';

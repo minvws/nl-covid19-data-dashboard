@@ -1,5 +1,5 @@
 import css from '@styled-system/css';
-import Link from 'next/link';
+import { Link } from '~/utils/link';
 import React from 'react';
 import { Box } from '~/components-styled/base';
 import { MaxWidth } from '~/components-styled/max-width';

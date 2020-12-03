@@ -1,5 +1,5 @@
 import css from '@styled-system/css';
-import Link from 'next/link';
+import { Link } from '~/utils/link';
 import styled from 'styled-components';
 import ExternalLinkIcon from '~/assets/external-link.svg';
 import { Tile } from '~/components-styled/layout';

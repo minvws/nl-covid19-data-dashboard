@@ -1,15 +1,10 @@
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { Box } from '~/components-styled/base';
-import { MaxWidth } from '~/components-styled/max-width';
 import { SEOHead } from '~/components/seoHead';
 import { SiteFooter } from '~/domain/site/site-footer';
 import { SiteHeader } from '~/domain/site/site-header';
 import text from '~/locale/index';
 import { ILastGeneratedData } from '~/static-props/last-generated-data';
-import { formatDateFromSeconds } from '~/utils/formatDate';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import styles from './layout.module.scss';
 
 export interface LayoutProps {

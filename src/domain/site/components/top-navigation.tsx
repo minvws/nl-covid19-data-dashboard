@@ -1,13 +1,16 @@
 import css from '@styled-system/css';
-import Link from 'next/link';
+import { Link } from '~/utils/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
 import { MaxWidth } from '~/components-styled/max-width';
 import text from '~/locale/index';
+import { useBreakpoints } from '~/utils/useBreakpoints';
 
 export function TopNavigation() {
   const router = useRouter();
+  const breakpoints = useBreakpoints(true);
+
   return (
     <nav
       id="main-navigation"
@@ -29,9 +32,12 @@ export function TopNavigation() {
             {text.nav.links.veiligheidsregio}
           </NavItem>
           <NavItem href="/gemeente">{text.nav.links.gemeente}</NavItem>
-          <NavItem alignRight href="/over">
-            {text.nav.links.over}
-          </NavItem>
+
+          {breakpoints.md && (
+            <NavItem alignRight href="/over">
+              {text.nav.links.over}
+            </NavItem>
+          )}
         </NavList>
       </MaxWidth>
     </nav>
