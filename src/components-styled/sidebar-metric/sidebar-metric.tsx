@@ -15,7 +15,7 @@ interface SidebarMetricProps<T> {
   metricName: string;
   metricProperty: string;
   localeTextKey: string;
-  differenceProperty?: string;
+  differenceKey?: string;
   showBarScale?: boolean;
   isWeeklyData?: boolean;
   annotationKey?: string;
@@ -27,7 +27,7 @@ export function SidebarMetric<T>({
   metricName,
   metricProperty,
   localeTextKey,
-  differenceProperty,
+  differenceKey,
   showBarScale,
   annotationKey,
 }: SidebarMetricProps<T>) {
@@ -44,8 +44,6 @@ export function SidebarMetric<T>({
       .filter(isDefined)
       .join(':')}`
   );
-
-  // console.log('+++ value', value);
 
   const config = getDataConfig(scope, metricName, metricProperty);
   const commonText = siteText.common.metricKPI;
@@ -65,18 +63,15 @@ export function SidebarMetric<T>({
         ),
       });
 
-  const differenceValue = differenceProperty
-    ? get(data, ['difference', differenceProperty])
+  const differenceValue = differenceKey
+    ? get(data, ['difference', differenceKey])
     : undefined;
 
-  if (differenceProperty) {
+  if (differenceKey) {
     /**
      * If you pass in a difference property, it should exist
      */
-    assert(
-      differenceValue,
-      `Missing value for difference:${differenceProperty}`
-    );
+    assert(differenceValue, `Missing value for difference:${differenceKey}`);
   }
 
   const valueAnnotation = annotationKey

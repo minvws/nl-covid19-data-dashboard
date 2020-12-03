@@ -1,6 +1,6 @@
 /**
  * This configuration declares properties about data to be used by various
- * display components to know what how the data should be rendered.
+ * display components to know how the data should be rendered.
  *
  * By having a global declaration like this, we can keep an overview and prevent
  * a lot of the specialized components we now use to render everything.

@@ -266,7 +266,7 @@ function NationalLayout(props: NationalLayoutProps) {
                           metricName="intake_hospital_ma"
                           metricProperty="moving_average_hospital"
                           localeTextKey="ziekenhuisopnames_per_dag"
-                          differenceProperty="intake_hospital_ma__moving_average_hospital"
+                          differenceKey="intake_hospital_ma__moving_average_hospital"
                           showBarScale={true}
                         />
                       </a>
