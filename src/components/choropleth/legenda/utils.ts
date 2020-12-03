@@ -1,6 +1,7 @@
 import { ChoroplethThresholdsValue } from '../shared';
 import { get } from 'lodash';
 import { assert } from '~/utils/assert';
+import { isDefined } from 'ts-is-present';
 
 export function getDataThresholds<T>(
   thresholdData: T,
@@ -13,9 +14,9 @@ export function getDataThresholds<T>(
 
   assert(
     thresholds,
-    `No thresholds are defined for ${metricName}${
-      metricProperty ? `:${metricProperty}` : ''
-    }`
+    `No thresholds are defined for ${[metricName, metricProperty]
+      .filter(isDefined)
+      .join(':')}`
   );
 
   return thresholds as ChoroplethThresholdsValue[];
