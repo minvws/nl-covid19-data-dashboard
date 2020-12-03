@@ -1,6 +1,6 @@
 import css from '@styled-system/css';
 import { ParentSize } from '@visx/responsive';
-import { MouseEvent, useCallback, useRef, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components-styled/base';
 import {
@@ -8,7 +8,10 @@ import {
   NationalInfectedAgeGroupsValue,
 } from '~/types/data';
 import { AgeDemographicChart } from './age-demographic-chart';
-import { AgeDemographicTooltip } from './age-demographic-tooltip';
+import { useBreakpoints } from '~/utils/useBreakpoints';
+import { getAgeDemographicCoordinates } from './age-demographic-coordinates';
+// import { AgeDemographicTooltipContent } from './age-demographic-tooltip';
+// import { Tooltip } from './tooltip';
 
 interface AgeDemographicProps {
   data: NationalInfectedAgeGroups;
@@ -27,98 +30,72 @@ const Wrapper = styled.div(
 );
 
 export function AgeDemographic({ data }: AgeDemographicProps) {
-  const [tooltip, setTooltip] = useState<TooltipOptions>();
+  // const [tooltip, setTooltip] = useState<TooltipOptions>();
+  const [parentWidth, setParentWidth] = useState(0);
 
-  // @TODO move this tooltip logic elsewhere
-  // And combine with keyboard logic
-  const timer = useRef(-1);
+  const breakpoints = useBreakpoints();
+  const isSmallScreen = !breakpoints.md;
 
-  const debounceSetTooltip = useCallback(
-    (options: TooltipOptions | undefined) => {
-      if (timer.current > -1) {
-        window.clearTimeout(timer.current);
-      }
-
-      timer.current = window.setTimeout(() => setTooltip(options), 100);
-    },
-    []
+  const coordinates = getAgeDemographicCoordinates(
+    data,
+    isSmallScreen,
+    parentWidth
   );
 
-  const openTooltip = useCallback(
-    (
-      event: MouseEvent<SVGGElement>,
-      value: NationalInfectedAgeGroupsValue,
-      getTooltipCoordinates: (
-        event: MouseEvent<SVGGElement> | undefined,
-        value: NationalInfectedAgeGroupsValue
-      ) => { x: number; y: number }
-    ) => {
-      const { x, y } = getTooltipCoordinates(event, value);
-      const options: TooltipOptions = { left: x, top: y, value };
-      debounceSetTooltip(options);
-    },
-    [debounceSetTooltip]
-  );
+  // const [tooltipKeyboardIndex, setTooltipKeyboardIndex] = useState<number>();
 
-  const closeTooltip = useCallback(() => {
-    debounceSetTooltip(undefined);
-  }, [debounceSetTooltip]);
+  // const keyboardTooltip = (
+  //   event: any,
+  //   getTooltipCoordinates: (
+  //     event: MouseEvent<SVGGElement> | undefined,
+  //     value: NationalInfectedAgeGroupsValue
+  //   ) => { x: number; y: number }
+  // ) => {
+  //   const KEY_ARROW_LEFT = 37;
+  //   const KEY_ARROW_RIGHT = 39;
 
-  const [tooltipKeyboardIndex, setTooltipKeyboardIndex] = useState<number>();
+  //   if (event.which !== KEY_ARROW_LEFT && event.which !== KEY_ARROW_RIGHT) {
+  //     return;
+  //   }
 
-  const keyboardTooltip = (
-    event: any,
-    getTooltipCoordinates: (
-      event: MouseEvent<SVGGElement> | undefined,
-      value: NationalInfectedAgeGroupsValue
-    ) => { x: number; y: number }
-  ) => {
-    const KEY_ARROW_LEFT = 37;
-    const KEY_ARROW_RIGHT = 39;
+  //   const direction = event.which === KEY_ARROW_LEFT ? -1 : 1;
+  //   setTooltipKeyboardIndex(
+  //     ((tooltipKeyboardIndex ?? -1) + direction + data.values.length) %
+  //     data.values.length
+  //   );
 
-    if (event.which !== KEY_ARROW_LEFT && event.which !== KEY_ARROW_RIGHT) {
-      return;
-    }
+  //   const value =
+  //     tooltipKeyboardIndex !== undefined
+  //       ? data.values[tooltipKeyboardIndex]
+  //       : undefined;
 
-    const direction = event.which === KEY_ARROW_LEFT ? -1 : 1;
-    setTooltipKeyboardIndex(
-      ((tooltipKeyboardIndex ?? -1) + direction + data.values.length) %
-        data.values.length
-    );
+  //   if (!value) {
+  //     return;
+  //   }
 
-    const value =
-      tooltipKeyboardIndex !== undefined
-        ? data.values[tooltipKeyboardIndex]
-        : undefined;
-
-    if (!value) {
-      return;
-    }
-
-    const { x, y } = getTooltipCoordinates(undefined, value);
-    const options: TooltipOptions = { left: x, top: y, value };
-    setTooltip(options);
-  };
+  //   const { x, y } = getTooltipCoordinates(undefined, value);
+  //   const options: TooltipOptions = { left: x, top: y, value };
+  //   setTooltip(options);
+  // };
 
   return (
     <Box mx={-4}>
       <Wrapper>
         <ParentSize>
-          {(parent) => (
-            <AgeDemographicChart
-              parentWidth={parent.width}
-              data={data}
-              keyboardTooltip={keyboardTooltip}
-              openTooltip={openTooltip}
-              closeTooltip={closeTooltip}
-            />
-          )}
+          {(parent) => {
+            setParentWidth(parent.width);
+            return <AgeDemographicChart coordinates={coordinates} />;
+          }}
         </ParentSize>
-        <AgeDemographicTooltip
-          left={tooltip?.left}
-          top={tooltip?.top}
-          value={tooltip?.value}
-        />
+        {/* {
+          tooltip && (
+            <Tooltip>
+              <AgeDemographicTooltipContent
+                value={tooltip.value}
+              />
+            </Tooltip>
+          )
+        } */}
       </Wrapper>
     </Box>
   );

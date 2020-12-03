@@ -77,7 +77,6 @@ const SuspectedPatients: FCWithLayout<NationalPageProps> = (props) => {
         >
           {(timeframe) => (
             <LineChartWithWeekTooltip
-              title={text.linechart_titel}
               timeframe={timeframe}
               values={doctorData.values.map((value) => ({
                 value: value.incidentie,
