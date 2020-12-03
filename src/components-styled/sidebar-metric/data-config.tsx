@@ -10,7 +10,7 @@
 
 type DataConfig = {
   isPercentage?: boolean;
-  isRangeData?: boolean;
+  isWeeklyData?: boolean;
   barScale: BarScaleConfig;
 };
 

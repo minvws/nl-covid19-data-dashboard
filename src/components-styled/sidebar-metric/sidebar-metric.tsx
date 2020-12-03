@@ -7,7 +7,7 @@ import { SidebarKpiValue } from './sidebar-kpi-value';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import siteText from '~/locale/index';
-import {getDataConfig} from './data-config'
+import { getDataConfig } from './data-config';
 
 interface SidebarMetricProps<T> {
   data: T;
@@ -16,7 +16,7 @@ interface SidebarMetricProps<T> {
   localeTextKey: string;
   differenceProperty?: string;
   showBarScale?: boolean;
-  isRangeData?: boolean;
+  isWeeklyData?: boolean;
   annotationKey?: string;
 }
 
@@ -36,7 +36,7 @@ export function SidebarMetric<T>({
   const title = get(siteText, [localeTextKey, 'titel_kpi']);
   assert(title, `Missing title at %{localeTextKey}.titel_kpi`);
 
-  const description = config.isRangeData
+  const description = config.isWeeklyData
     ? replaceVariablesInText(commonText.dateRangeOfReport, {
         startDate: formatDateFromSeconds(value.week_start_unix, 'axis'),
         endDate: formatDateFromSeconds(value.week_end_unix, 'axis'),
@@ -92,7 +92,7 @@ export function SidebarMetric<T>({
       <SidebarKpiValue
         title={title}
         value={value}
-        isPercentage={
+        isPercentage={config.isPercentage}
         description={description}
         difference={differenceValue}
       />
