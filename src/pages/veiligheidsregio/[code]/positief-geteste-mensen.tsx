@@ -161,6 +161,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           selected={selectedMunicipalCode}
           highlightSelection={false}
           metricName="positive_tested_people"
+          metricProperty="positive_tested_people"
           tooltipContent={createPositiveTestedPeopleMunicipalTooltip(router)}
           onSelect={createSelectMunicipalHandler(router)}
         />

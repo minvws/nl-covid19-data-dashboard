@@ -108,7 +108,7 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
       >
         <SafetyRegionChoropleth
           metricName="escalation_levels"
-          metricValueName="escalation_level"
+          metricProperty="escalation_level"
           onSelect={createSelectRegionHandler(router)}
           tooltipContent={escalationTooltip(router)}
         />
@@ -132,6 +132,7 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
         {selectedMap === 'municipal' && (
           <MunicipalityChoropleth
             metricName="positive_tested_people"
+            metricProperty="positive_tested_people"
             tooltipContent={createPositiveTestedPeopleMunicipalTooltip(router)}
             onSelect={createSelectMunicipalHandler(router)}
           />
@@ -139,6 +140,7 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
         {selectedMap === 'region' && (
           <SafetyRegionChoropleth
             metricName="positive_tested_people"
+            metricProperty="positive_tested_people"
             tooltipContent={createPositiveTestedPeopleRegionalTooltip(router)}
             onSelect={createSelectRegionHandler(router)}
           />

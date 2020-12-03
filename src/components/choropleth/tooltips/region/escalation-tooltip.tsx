@@ -1,22 +1,20 @@
 import { NextRouter } from 'next/router';
 import { ReactNode } from 'react';
-import { EscalationLevelIcon } from '~/components-styled/escalation-level-icon';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
+import {
+  EscalationLevel,
+  EscalationLevelIcon,
+} from '~/components-styled/escalation-level-icon';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
 import text from '~/locale/index';
+import { EscalationLevels } from '~/types/data';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { SafetyRegionProperties } from '../../shared';
 import styles from '../tooltip.module.scss';
 
-const escalationThresholds = regionThresholds.escalation_levels;
-
 export const escalationTooltip = (router: NextRouter) => {
-  return (context: any): ReactNode => {
-    const type: number = context?.value;
-
-    const thresholdInfo = escalationThresholds.find(
-      (value) => value.threshold === type
-    );
+  return (context: SafetyRegionProperties & EscalationLevels): ReactNode => {
+    const level = context.escalation_level as EscalationLevel;
 
     const onSelect = (event: any) => {
       event.stopPropagation();
@@ -25,29 +23,29 @@ export const escalationTooltip = (router: NextRouter) => {
       );
     };
 
+    const escalationText = ((text.escalatie_niveau.types as unknown) as Record<
+      EscalationLevel,
+      { titel: string; valid_from: string }
+    >)[level];
+
     return (
-      type &&
-      thresholdInfo && (
-        <TooltipContent title={context.vrname} onSelect={onSelect}>
-          <div className={styles.escalationInfo}>
-            <div className={styles.bubble}>
-              <EscalationLevelIcon level={thresholdInfo.threshold} />
-            </div>
-            <div>
-              <strong>
-                {(text.escalatie_niveau.types as any)[type].titel}
-              </strong>
-              <br />
-              {replaceVariablesInText(text.escalatie_niveau.valid_from, {
-                validFrom: formatDateFromSeconds(
-                  context.valid_from_unix,
-                  'short'
-                ),
-              })}
-            </div>
+      <TooltipContent title={context.vrname} onSelect={onSelect}>
+        <div className={styles.escalationInfo}>
+          <div className={styles.bubble}>
+            <EscalationLevelIcon level={level} />
           </div>
-        </TooltipContent>
-      )
+          <div>
+            <strong>{escalationText.titel}</strong>
+            <br />
+            {replaceVariablesInText(escalationText.valid_from, {
+              validFrom: formatDateFromSeconds(
+                context.valid_from_unix,
+                'short'
+              ),
+            })}
+          </div>
+        </div>
+      </TooltipContent>
     );
   };
 };

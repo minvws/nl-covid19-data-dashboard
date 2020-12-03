@@ -109,7 +109,8 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
         })}
         description={text.map_toelichting}
         legend={{
-          thresholds: municipalThresholds.positive_tested_people,
+          thresholds:
+            municipalThresholds.positive_tested_people.positive_tested_people,
           title: siteText.positief_geteste_personen.chloropleth_legenda.titel,
         }}
         metadata={{
@@ -120,6 +121,7 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
         <MunicipalityChoropleth
           selected={data.code}
           metricName="positive_tested_people"
+          metricProperty="positive_tested_people"
           tooltipContent={createPositiveTestedPeopleMunicipalTooltip(router)}
           onSelect={createSelectMunicipalHandler(router)}
         />

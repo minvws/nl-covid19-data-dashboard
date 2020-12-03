@@ -46,10 +46,10 @@ export interface HospitalAdmissionsLastValue {
   date_of_insertion_unix: number;
 }
 export interface MunicipalPositiveTestedPeople {
-  values: PositiveTestedPeopleLastValue[];
-  last_value: PositiveTestedPeopleLastValue;
+  values: MunicipalPositiveTestedPeopleValue[];
+  last_value: MunicipalPositiveTestedPeopleValue;
 }
-export interface PositiveTestedPeopleLastValue {
+export interface MunicipalPositiveTestedPeopleValue {
   date_of_report_unix: number;
   gmcode: string;
   municipality_name: string;
