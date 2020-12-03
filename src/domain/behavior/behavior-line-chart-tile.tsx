@@ -6,7 +6,7 @@ import { Box, Spacer } from '~/components-styled/base';
 import { Tile } from '~/components-styled/layout';
 import { Select } from '~/components-styled/select';
 import siteText from '~/locale/index';
-import { NationalBehaviorValue } from '~/types/data';
+import { NationalBehaviorValue, RegionalBehaviorValue } from '~/types/data';
 import {
   BehaviorIdentifier,
   behaviorIdentifiers,
@@ -16,7 +16,7 @@ import { BehaviorLineChart, Value } from './components/behavior-line-chart';
 import { BehaviorTypeControl } from './components/behavior-type-control';
 
 interface BehaviorLineChartTileProps {
-  values: NationalBehaviorValue[];
+  values: NationalBehaviorValue[] | RegionalBehaviorValue[];
   title: string;
   introduction: Record<BehaviorType, string>;
 }
@@ -39,7 +39,9 @@ export function BehaviorLineChartTile({
        * result in a "line" in our line-chart.
        */
       const hasEnoughData =
-        values.flatMap((x) => x[valueKey]).filter(Boolean).length > 1;
+        (values as NationalBehaviorValue[])
+          .map((x) => x[valueKey])
+          .filter(isDefined).length > 1;
 
       return hasEnoughData
         ? {
@@ -104,7 +106,7 @@ export function BehaviorLineChartTile({
 
       <BehaviorLineChart
         values={behaviorIdentifierWithData.map(({ valueKey, label }) =>
-          values
+          (values as NationalBehaviorValue[])
             .map((value) =>
               valueKey in value
                 ? ({
