@@ -7,6 +7,16 @@ import siteText, { TALLLanguages } from '~/locale/index';
 import { MDToHTMLString } from '~/utils/MDToHTMLString';
 import styles from './over.module.scss';
 
+import { groq } from 'next-sanity';
+import {
+  getClient,
+  usePreviewSubscription,
+  PortableText,
+  localize,
+} from '~/lib/sanity';
+
+import { targetLanguage } from '../locale/index';
+
 interface StaticProps {
   props: OverProps;
 }
@@ -14,7 +24,15 @@ interface StaticProps {
 interface OverProps {
   text: TALLLanguages;
   lastGenerated: string;
+  overData: any;
 }
+
+const overQuery = groq`
+  *[_type == 'overDitDashboard']
+  {
+    ...
+  }[0]
+`;
 
 export async function getStaticProps(): Promise<StaticProps> {
   const text = (await import('../locale/index')).default;
@@ -25,11 +43,20 @@ export async function getStaticProps(): Promise<StaticProps> {
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const lastGenerated = JSON.parse(fileContents).last_generated;
 
-  return { props: { text, lastGenerated } };
+  const overData = await getClient(true).fetch(overQuery);
+
+  return { props: { text, lastGenerated, overData } };
 }
 
 const Over: FCWithLayout<OverProps> = (props) => {
-  const { text } = props;
+  const { overData } = props;
+
+  const { data: staticOrPreviewData } = usePreviewSubscription(overQuery, {
+    initialData: overData,
+    enabled: true,
+  });
+
+  const over = localize(staticOrPreviewData, [targetLanguage, 'nl']);
 
   return (
     <>
@@ -50,10 +77,8 @@ const Over: FCWithLayout<OverProps> = (props) => {
       <div className={styles.container}>
         <MaxWidth>
           <div className={styles.maxwidth}>
-            <h2>{text.over_titel.text}</h2>
-            <div
-              dangerouslySetInnerHTML={{ __html: text.over_beschrijving.text }}
-            />
+            <h2>{over.title}</h2>
+            <PortableText blocks={over.beschrijving} />
           </div>
         </MaxWidth>
       </div>
