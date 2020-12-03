@@ -14,20 +14,24 @@ type DataConfig = {
   barScale: BarScaleConfig;
 };
 
-type BarScaleConfig = {
+export type BarScaleConfig = {
   min: number;
   max: number;
   signaalwaarde: number;
   gradient: { color: string; value: number }[];
+  rangesKey: string;
 };
 
 /**
  * The data is scoped at nl/vr/gm, because we can not assume that the same
  * things like min/max/gradients apply everywhere for the same KPI.
  */
-type Scope = 'nl' | 'vr' | 'gm';
+export type DataScope = 'nl' | 'vr' | 'gm';
 
-const dataConfig: Record<Scope, Record<string, Record<string, DataConfig>>> = {
+const dataConfig: Record<
+  DataScope,
+  Record<string, Record<string, DataConfig>>
+> = {
   nl: {
     intake_hospital_ma: {
       moving_average_hospital: {
@@ -49,6 +53,7 @@ const dataConfig: Record<Scope, Record<string, Record<string, DataConfig>>> = {
               value: 90,
             },
           ],
+          rangesKey: 'moving_average_hospital',
         },
       },
     },
@@ -61,12 +66,20 @@ import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { assert } from '~/utils/assert';
 
-export function getDataConfig(metricName: string, metricProperty: string) {
-  const config = get(dataConfig, [metricName, metricProperty]);
+export function getDataConfig(
+  scope: DataScope,
+  metricName: string,
+  metricProperty: string
+) {
+  const config = get(dataConfig, [scope, metricName, metricProperty]);
 
   assert(
     config,
-    `Missing configuration for bar scale metric ${[metricName, metricProperty]
+    `Missing configuration for bar scale metric ${[
+      scope,
+      metricName,
+      metricProperty,
+    ]
       .filter(isDefined)
       .join(':')}`
   );

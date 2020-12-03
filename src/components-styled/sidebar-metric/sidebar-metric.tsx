@@ -7,9 +7,10 @@ import { SidebarKpiValue } from './sidebar-kpi-value';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import siteText from '~/locale/index';
-import { getDataConfig } from './data-config';
+import { getDataConfig, DataScope } from './data-config';
 
 interface SidebarMetricProps<T> {
+  scope: DataScope;
   data: T;
   metricName: string;
   metricProperty: string;
@@ -21,6 +22,7 @@ interface SidebarMetricProps<T> {
 }
 
 export function SidebarMetric<T>({
+  scope,
   data,
   metricName,
   metricProperty,
@@ -30,8 +32,31 @@ export function SidebarMetric<T>({
   annotationKey,
 }: SidebarMetricProps<T>) {
   const value = get(data, [metricName, 'last_value', metricProperty]);
-  const config = getDataConfig(metricName, metricProperty);
+
+  console.log(
+    '+++data',
+    metricName,
+    'last_value',
+    metricProperty,
+    get(data, [metricName, 'last_value']),
+    value
+  );
+  assert(
+    value,
+    `Missing value for metric property ${[
+      metricName,
+      'last_value',
+      metricProperty,
+    ]
+      .filter(isDefined)
+      .join(':')}`
+  );
+
+  console.log('+++value', value);
+
+  const config = getDataConfig(scope, metricName, metricProperty);
   const commonText = siteText.common.metricKPI;
+  return null;
 
   const title = get(siteText, [localeTextKey, 'titel_kpi']);
   assert(title, `Missing title at %{localeTextKey}.titel_kpi`);
@@ -47,17 +72,6 @@ export function SidebarMetric<T>({
           'medium'
         ),
       });
-
-  assert(
-    value,
-    `Missing value for metric property ${[
-      metricName,
-      'last_value',
-      metricProperty,
-    ]
-      .filter(isDefined)
-      .join(':')}`
-  );
 
   const differenceValue = differenceProperty
     ? get(data, ['difference', differenceProperty])
@@ -100,8 +114,8 @@ export function SidebarMetric<T>({
         <SidebarBarScale
           localeTextKey={localeTextKey}
           value={value}
-          metricName={metricName}
-          metricProperty={metricProperty}
+          config={config.barScale}
+          uniqueId={[scope, metricName, metricProperty].join(':')}
         />
       )}
     </Box>
