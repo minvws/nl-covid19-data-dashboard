@@ -92,27 +92,16 @@ function MetadataItem(props: MetadataItemProps) {
       </Box>
       <Text margin={0}>
         {label}:{' '}
-        {items.map((item, index) => {
-          if (index) {
-            return (
-              <>
-                {' & '}
-                <ExternalLink
-                  href={item.href}
-                  text={item.text}
-                  key={index + item.href}
-                />
-              </>
-            );
-          }
-          return (
-            <ExternalLink
-              href={item.href}
-              text={item.text}
-              key={index + item.href}
-            />
-          );
-        })}
+        {items.map((item, index) =>
+          index > 0 ? (
+            <span key={index + item.href}>
+              {' & '}
+              <ExternalLink href={item.href} text={item.text} />
+            </span>
+          ) : (
+            <ExternalLink href={item.href} text={item.text} />
+          )
+        )}
       </Text>
     </Box>
   );
