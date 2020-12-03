@@ -3,9 +3,8 @@ import React from 'react';
 import { SEOHead } from '~/components/seoHead';
 import { SiteFooter } from '~/domain/site/site-footer';
 import { SiteHeader } from '~/domain/site/site-header';
-import text from '~/locale/index';
+import { SkipLinks } from '~/domain/site/skip-links';
 import { ILastGeneratedData } from '~/static-props/last-generated-data';
-import styles from './layout.module.scss';
 
 export interface LayoutProps {
   url?: string;
@@ -63,16 +62,7 @@ function Layout(
         url={url}
       />
 
-      <nav
-        role="navigation"
-        className={styles.skiplinks}
-        aria-label={text.aria_labels.skip_links}
-      >
-        <a href="#content">{text.skiplinks.inhoud}</a>
-        <a href="#main-navigation">{text.skiplinks.nav}</a>
-        <a href="#metric-navigation">{text.skiplinks.metric_nav}</a>
-        <a href="#footer-navigation">{text.skiplinks.footer_nav}</a>
-      </nav>
+      <SkipLinks />
 
       <SiteHeader />
 
