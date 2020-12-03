@@ -1,10 +1,4 @@
 {
-  "aria_labels": {
-    "pagina_keuze": "National, region or municipality menu",
-    "footer_keuze": "Page menu",
-    "metriek_navigatie": "Metrics per category menu",
-    "skip_links": "Quicklink menu"
-  },
   "andere_gegevens": "Other data",
   "blok_andere_gegevens": {
     "title": "Other data",
@@ -34,8 +28,8 @@
   "skiplinks": {
     "inhoud": "Go directly to the content",
     "nav": "Go directly to the navigation",
-    "metric_nav": "Go directly to the metric navigation",
-    "footer_nav": "Go directly to the footer navigation"
+    "metric_nav": "",
+    "footer_nav": "Go to footer"
   },
   "header": {
     "title": "Coronavirus dashboard",
@@ -1676,5 +1670,24 @@
         "meervoud": "weeks"
       }
     }
+  },
+  "infected_age_groups": {
+    "title": "Verdeling naar leeftijd",
+    "description": "....",
+    "example": "Bijvoorbeeld: Van alle positief geteste mensen is {{infectedPercentage}} tussen de {{ageGroupRange}} jaar. Van alle Nederlanders is {{ageGroupPercentage}} tussen de {{ageGroupRange}} jaar.",
+    "graph": {
+      "age_group_percentage_title": "Percentage van de bevolking",
+      "age_group_percentage_tooltip": "van de bevolking is {{ageGroupRange}} jaar",
+      "infected_percentage_title": "Percentage van de positieve testen",
+      "infected_percentage_tooltip": "van het aantal positief geteste mensen is {{ageGroupRange}} jaar",
+      "age_group_range_tooltip": "{{ageGroupRange}} jaar",
+      "accessibility_description": "Grafiek met percentages voor de verdeling van de bevolking en de verdeling van positief geteste leeftijdsgroepen."
+    }
+  },
+  "aria_labels": {
+    "pagina_keuze": "",
+    "footer_keuze": "",
+    "metriek_navigatie": "",
+    "skip_links": ""
   }
 }
