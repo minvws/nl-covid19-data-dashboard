@@ -24,7 +24,7 @@ export interface RegionChoroplethValue extends RegionMetricValue {
 
 export type GetRegionDataFunctionType = (id: string) => RegionChoroplethValue;
 
-type UseDataReturnValue = {
+type UseRegionDataReturnValue = {
   getChoroplethValue: GetRegionDataFunctionType;
   hasData: boolean;
 };
@@ -49,7 +49,7 @@ export function useSafetyRegionData(
   featureCollection: RegionGeoJSON,
   metricName: TRegionMetricName,
   metricProperty: string
-): UseDataReturnValue {
+): UseRegionDataReturnValue {
   const { data } = useSWR<Regions>('/json/REGIONS.json');
 
   return useMemo(() => {

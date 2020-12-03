@@ -37,14 +37,14 @@ export type GetMunicipalityDataFunctionType = (
   id: string
 ) => MunicipalityChoroplethValue;
 
-type UseDataReturnValue = {
+type UseMunicipalityDataReturnValue = {
   getChoroplethValue: GetMunicipalityDataFunctionType;
   hasData: boolean;
 };
 
 export function useMunicipalityNavigationData(
   featureCollection: MunicipalGeoJSON
-): UseDataReturnValue {
+): UseMunicipalityDataReturnValue {
   const propertyData = featureCollection.features.reduce(
     (acc, feature) => set(acc, feature.properties.gemcode, feature.properties),
     {} as Record<string, MunicipalityProperties>
@@ -63,7 +63,7 @@ export function useMunicipalityData(
   featureCollection: MunicipalGeoJSON,
   metricName: TMunicipalityMetricName,
   metricProperty: string
-): UseDataReturnValue {
+): UseMunicipalityDataReturnValue {
   const { data } = useSWR<Municipalities>('/json/MUNICIPALITIES.json');
 
   return useMemo(() => {
