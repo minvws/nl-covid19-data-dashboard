@@ -23,10 +23,10 @@ export const escalationTooltip = (router: NextRouter) => {
       );
     };
 
-    const escalationText = (text.escalatie_niveau.types as Record<
-      string,
-      unknown
-    >)[level] as { titel: string; valid_from: string };
+    const escalationText = ((text.escalatie_niveau.types as unknown) as Record<
+      EscalationLevel,
+      { titel: string; valid_from: string }
+    >)[level];
 
     return (
       <TooltipContent title={context.vrname} onSelect={onSelect}>

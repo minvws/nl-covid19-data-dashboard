@@ -92,16 +92,12 @@ function MetadataItem(props: MetadataItemProps) {
       </Box>
       <Text margin={0}>
         {label}:{' '}
-        {items.map((item, index) =>
-          index > 0 ? (
-            <Fragment key={index + item.href}>
-              {' & '}
-              <ExternalLink href={item.href} text={item.text} />
-            </Fragment>
-          ) : (
+        {items.map((item, index) => (
+          <Fragment key={index + item.href}>
+            {index > 0 && ' & '}
             <ExternalLink href={item.href} text={item.text} />
-          )
-        )}
+          </Fragment>
+        ))}
       </Text>
     </Box>
   );
