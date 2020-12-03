@@ -1,14 +1,13 @@
 import { BarScale } from '~/components/barScale';
-import { ResultsPerRegion } from '~/types/data.d';
+import { Regionaal } from '~/types/data.d';
 import siteText from '~/locale/index';
 
 export function IntakeHospitalBarScale(props: {
-  data: ResultsPerRegion | undefined;
+  data: Regionaal;
   showAxis: boolean;
 }) {
   const { data, showAxis } = props;
-
-  if (!data) return null;
+  const lastValue = data.results_per_region.last_value;
 
   const text = siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
 
@@ -17,7 +16,7 @@ export function IntakeHospitalBarScale(props: {
       min={0}
       max={100}
       screenReaderText={text.barscale_screenreader_text}
-      value={data.last_value.hospital_moving_avg_per_region}
+      value={lastValue.hospital_moving_avg_per_region}
       id="opnames"
       rangeKey="hospital_moving_avg_per_region"
       gradient={[

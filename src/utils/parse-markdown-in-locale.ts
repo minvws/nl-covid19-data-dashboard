@@ -1,5 +1,4 @@
-import get from 'lodash/get';
-import set from 'lodash/set';
+import { get, set } from 'lodash';
 import { TALLLanguages } from '~/locale';
 import { MDToHTMLString } from './MDToHTMLString';
 

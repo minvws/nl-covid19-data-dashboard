@@ -7,7 +7,7 @@ import { createSelectRegionHandler } from '../../select-handlers/create-select-r
 import { SafetyRegionProperties } from '../../shared';
 
 export const createInfectedLocationsRegionalTooltip = (router: NextRouter) => (
-  context: RegionsNursingHome & SafetyRegionProperties
+  context: SafetyRegionProperties & RegionsNursingHome
 ): ReactNode => {
   const handler = createSelectRegionHandler(router);
 

@@ -31,6 +31,7 @@ export interface SafetyRegionProperties {
 export interface MunicipalityProperties {
   gemnaam: string;
   gemcode: string;
+  gmcode: string;
 }
 
 export type MunicipalGeoJSON = FeatureCollection<
@@ -47,3 +48,5 @@ export type ChoroplethThresholdsValue<T extends number = number> = {
   color: string;
   threshold: T;
 };
+
+export type Dictionary<T> = Partial<Record<string, T>>;
