@@ -15,7 +15,7 @@
     "intake_intensivecare_ma",
     "infected_people_total",
     "infected_people_delta_normalized",
-    "intake_share_age_groups",
+    "infected_age_groups",
     "reproduction_index",
     "reproduction_index_last_known_average",
     "sewer",
@@ -70,8 +70,8 @@
     "infected_people_delta_normalized": {
       "$ref": "infected_people_delta_normalized.json"
     },
-    "intake_share_age_groups": {
-      "$ref": "intake_share_age_groups.json"
+    "infected_age_groups": {
+      "$ref": "infected_age_groups.json"
     },
     "reproduction_index": {
       "$ref": "reproduction_index.json"

@@ -6,7 +6,7 @@ import { testKpiValue } from '~/test-utils/test-kpi-value';
 import { Municipal } from '~/types/data';
 import { formatNumber } from '~/utils/formatNumber';
 
-describe('Municipal page: IntakeHospital', () => {
+xdescribe('Municipal page: IntakeHospital', () => {
   const data = loadFixture<Municipal>('GM0363.json');
   let container: HTMLElement;
 

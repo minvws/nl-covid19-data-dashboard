@@ -1,12 +1,15 @@
-import css from '@styled-system/css';
 import fs from 'fs';
 import { useRouter } from 'next/router';
 import path from 'path';
 import { useState } from 'react';
-import ExternalLink from '~/assets/external-link.svg';
 import Notification from '~/assets/notification.svg';
+import { AnchorTile } from '~/components-styled/anchor-tile';
+import { Box, Spacer } from '~/components-styled/base';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
+import { CategoryHeading } from '~/components-styled/content-header';
 import { HeadingWithIcon } from '~/components-styled/heading-with-icon';
+import { MessageTile } from '~/components-styled/message-tile';
+import { Text } from '~/components-styled/typography';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
@@ -21,11 +24,9 @@ import { TALLLanguages } from '~/locale/index';
 import theme from '~/style/theme';
 import { EscalationLevels, National, Regions } from '~/types/data';
 import { assert } from '~/utils/assert';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import styles from './index.module.scss';
-import { EscalationMapLegenda } from './veiligheidsregio';
-import { MessageTile } from '~/components-styled/message-tile';
 import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { EscalationMapLegenda } from './veiligheidsregio';
 
 interface StaticProps {
   props: INationalHomepageData;
@@ -60,42 +61,36 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
 
   return (
     <>
-      <HeadingWithIcon
-        icon={<Notification color={theme.colors.notification} />}
-        title={text.laatste_ontwikkelingen.title}
-        headingLevel={2}
-      />
-      <article
-        className={styles.notification}
-        css={css({
-          mb: 4,
-          ml: [-4, null, 0],
-          mr: [-4, null, 0],
-          boxShadow: 'tile',
-        })}
+      <Box mb={3}>
+        <CategoryHeading level={1} hide={true}>
+          {text.nationaal_layout.headings.algemeen}
+        </CategoryHeading>
+        <HeadingWithIcon
+          icon={<Notification color={theme.colors.notification} />}
+          title={text.laatste_ontwikkelingen.title}
+          headingLevel={2}
+        />
+      </Box>
+      <AnchorTile
+        title={text.notificatie.titel}
+        href={text.notificatie.link.href}
+        label={text.notificatie.link.text}
+        external
+        shadow
       >
-        <div className={styles.textgroup}>
-          <h3 className={styles.header}>{text.notificatie.titel}</h3>
-          <p>
-            {replaceVariablesInText(
-              text.notificatie.bericht,
-              escalationLevelCounts
-            )}
-          </p>
-        </div>
-        <a
-          className={styles.link}
-          href={text.notificatie.link.href}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <ExternalLink />
-          <span>{text.notificatie.link.text}</span>
-        </a>
-      </article>
+        <Text>
+          {replaceVariablesInText(
+            text.notificatie.bericht,
+            escalationLevelCounts
+          )}
+        </Text>
+      </AnchorTile>
 
       {text.regionaal_index.belangrijk_bericht && (
-        <MessageTile message={text.regionaal_index.belangrijk_bericht} />
+        <>
+          <Spacer mt={4} />
+          <MessageTile message={text.regionaal_index.belangrijk_bericht} />
+        </>
       )}
 
       <ChoroplethTile

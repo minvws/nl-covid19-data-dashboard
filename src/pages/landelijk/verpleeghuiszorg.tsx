@@ -42,6 +42,9 @@ const NursingHomeCare: FCWithLayout<NationalPageProps> = (props) => {
 
       <ContentHeader
         category={siteText.nationaal_layout.headings.kwetsbare_groepen}
+        screenreaderCategory={
+          siteText.verpleeghuis_besmette_locaties.titel_sidebar
+        }
         title={positiveTestedPeopleText.titel}
         icon={<Verpleeghuiszorg />}
         subtitle={positiveTestedPeopleText.pagina_toelichting}
