@@ -66,7 +66,7 @@ const LegendItem = styled.li(
   })
 );
 
-export function AgeDemographicTooltip({
+export function AgeDemographicTooltipContent({
   value,
   left,
   top,

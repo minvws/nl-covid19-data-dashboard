@@ -7,8 +7,11 @@ import {
   NationalInfectedAgeGroups,
   NationalInfectedAgeGroupsValue,
 } from '~/types/data';
+import { useBreakpoints } from '~/utils/useBreakpoints';
 import { AgeDemographicChart } from './age-demographic-chart';
-import { AgeDemographicTooltip } from './age-demographic-tooltip';
+import { getAgeDemographicCoordinates } from './age-demographic-coordinates';
+import { AgeDemographicTooltipContent } from './age-demographic-tooltip';
+import { Tooltip } from './tooltip';
 
 interface AgeDemographicProps {
   data: NationalInfectedAgeGroups;
@@ -28,61 +31,36 @@ const Wrapper = styled.div(
 
 export function AgeDemographic({ data }: AgeDemographicProps) {
   const [tooltip, setTooltip] = useState<TooltipOptions>();
+  const [parentWidth, setParentWidth] = useState(0);
 
-  // @TODO move this tooltip logic elsewhere
-  // And combine with keyboard logic
-  const timer = useRef(-1);
+  const breakpoints = useBreakpoints();
+  const isSmallScreen = !breakpoints.md;
 
-  const debounceSetTooltip = useCallback(
-    (options: TooltipOptions | undefined) => {
-      if (timer.current > -1) {
-        window.clearTimeout(timer.current);
-      }
+  const coordinates = getAgeDemographicCoordinates(data, isSmallScreen, parentWidth);
 
-      timer.current = window.setTimeout(() => setTooltip(options), 100);
-    },
-    []
-  );
 
-  const openTooltip = useCallback(
-    (
-      event: MouseEvent<SVGGElement>,
-      value: NationalInfectedAgeGroupsValue,
-      getTooltipCoordinates: (
-        event: MouseEvent<SVGGElement>,
-        value: NationalInfectedAgeGroupsValue
-      ) => { x: number; y: number }
-    ) => {
-      const { x, y } = getTooltipCoordinates(event, value);
-      const options: TooltipOptions = { left: x, top: y, value };
-      debounceSetTooltip(options);
-    },
-    [debounceSetTooltip]
-  );
-
-  const closeTooltip = useCallback(() => {
-    debounceSetTooltip(undefined);
-  }, [debounceSetTooltip]);
 
   return (
     <Box mx={-4}>
       <Wrapper>
         <ParentSize>
-          {(parent) => (
-            <AgeDemographicChart
-              parentWidth={parent.width}
-              data={data}
-              openTooltip={openTooltip}
-              closeTooltip={closeTooltip}
-            />
-          )}
+          {(parent) => {
+            setParentWidth(parent.width);
+            return (
+              <AgeDemographicChart
+                coordinates={coordinates}
+                openTooltip={openTooltip}
+                closeTooltip={closeTooltip}
+              />
+            )
+          }}
         </ParentSize>
         {tooltip && (
-          <AgeDemographicTooltip
-            left={tooltip.left}
-            top={tooltip.top}
-            value={tooltip.value}
-          />
+          <Tooltip>
+            <AgeDemographicTooltipContent
+              value={tooltip.value}
+            />
+          </Tooltip>
         )}
       </Wrapper>
     </Box>
