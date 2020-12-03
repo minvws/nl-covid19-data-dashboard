@@ -285,7 +285,7 @@ function SafetyRegionLayout(
                   </Category>
                   <Menu>
                     <MetricMenuItem>
-                      <Link href={`veiligheidsregio/${code}/gedrag`}>
+                      <Link href={`/veiligheidsregio/${code}/gedrag`}>
                         <a
                           className={getClassName(
                             '/veiligheidsregio/[code]/gedrag'
