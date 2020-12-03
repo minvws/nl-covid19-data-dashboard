@@ -97,6 +97,7 @@ export const colors = {
   shadow: '#e5e5e5',
   lightGray: '#dfdfdf',
   annotation: '#595959',
+  header: '#cd005a',
   notification: '#cd005a',
   red: '#F35363',
   category: '#6b6b6b',

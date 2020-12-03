@@ -1,16 +1,14 @@
-import css from '@styled-system/css';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { Box } from '~/components-styled/base';
-import { MaxWidth } from '~/components/maxWidth';
+import { MaxWidth } from '~/components-styled/max-width';
 import { SEOHead } from '~/components/seoHead';
+import { SiteHeader } from '~/domain/site/header';
 import text from '~/locale/index';
 import { ILastGeneratedData } from '~/static-props/last-generated-data';
 import { formatDateFromSeconds } from '~/utils/formatDate';
-import { getLocale } from '~/utils/getLocale';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { useMediaQuery } from '~/utils/useMediaQuery';
 import styles from './layout.module.scss';
 
 export interface LayoutProps {
@@ -59,9 +57,6 @@ function Layout(
 
   const router = useRouter();
 
-  const locale = getLocale();
-  const showSmallLogo = useMediaQuery('(max-width: 480px)', true);
-
   const dateTime = formatDateFromSeconds(Number(lastGenerated), 'iso');
   const dateOfInsertion = lastGenerated
     ? formatDateFromSeconds(Number(lastGenerated), 'long')
@@ -88,130 +83,7 @@ function Layout(
         <a href="#footer-navigation">{text.skiplinks.footer_nav}</a>
       </nav>
 
-      <header className={styles.header}>
-        <div className={styles.logoWrapper}>
-          <img
-            className={styles.logo}
-            src={
-              showSmallLogo
-                ? '/images/logo-ro-small.svg'
-                : '/images/logo-ro.svg'
-            }
-            alt={text.header.logo_alt}
-            // loading="lazy"
-            width={showSmallLogo ? 40 : 314}
-            height={showSmallLogo ? 76 : 125}
-          />
-        </div>
-
-        <MaxWidth>
-          <div className={styles.languageSwitcher}>
-            <a
-              href={`https://coronadashboard.rijksoverheid.nl${router.asPath}`}
-              lang="nl"
-              hrefLang="nl"
-              className={locale === 'nl' ? styles.languageActive : undefined}
-              title="Website in het Nederlands"
-            >
-              NL
-            </a>
-            <span aria-hidden="true">|</span>
-            <a
-              href={`https://coronadashboard.government.nl${router.asPath}`}
-              lang="en-GB"
-              hrefLang="en-GB"
-              className={locale === 'en-GB' ? styles.languageActive : undefined}
-              title="Website in English"
-            >
-              EN
-            </a>
-          </div>
-          <Box
-            css={css({
-              fontSize: 5,
-              lineHeight: 0,
-              mb: 0,
-              mt: 4,
-              fontWeight: 'bold',
-            })}
-          >
-            {text.header.title}
-          </Box>
-          <p>
-            {text.header.text}{' '}
-            <Link href="/over">
-              <a className={styles.readMoreLink}>{text.header.link}</a>
-            </Link>
-          </p>
-        </MaxWidth>
-
-        <nav
-          /** re-mount when route changes in order to blur anchors */
-          key={router.route}
-          id="main-navigation"
-          className={styles.nav}
-          role="navigation"
-          aria-label={text.aria_labels.pagina_keuze}
-        >
-          <MaxWidth>
-            <ul className={styles.navList}>
-              <li>
-                <Link href="/">
-                  <a
-                    className={
-                      router.pathname.indexOf('/landelijk') === 0 ||
-                      router.pathname === '/'
-                        ? styles.link + ' ' + styles.active
-                        : styles.link
-                    }
-                  >
-                    {text.nav.links.index}
-                  </a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/veiligheidsregio">
-                  <a
-                    className={
-                      router.pathname.indexOf('/veiligheidsregio') === 0
-                        ? styles.link + ' ' + styles.active
-                        : styles.link
-                    }
-                  >
-                    {text.nav.links.veiligheidsregio}
-                  </a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/gemeente">
-                  <a
-                    className={
-                      router.pathname.indexOf('/gemeente') === 0
-                        ? styles.link + ' ' + styles.active
-                        : styles.link
-                    }
-                  >
-                    {text.nav.links.gemeente}
-                  </a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/over">
-                  <a
-                    className={
-                      router.pathname == '/over'
-                        ? styles.link + ' ' + styles.active
-                        : styles.link
-                    }
-                  >
-                    {text.nav.links.over}
-                  </a>
-                </Link>
-              </li>
-            </ul>
-          </MaxWidth>
-        </nav>
-      </header>
+      <SiteHeader />
 
       <div>{children}</div>
 
