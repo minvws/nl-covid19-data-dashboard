@@ -18,21 +18,11 @@ const text = siteText.infected_age_groups;
 interface AgeDemographicChartProps {
   coordinates: AgeDemographicCoordinates;
   openTooltip: (
-    event: MouseEvent<SVGGElement>,
-    value: NationalInfectedAgeGroupsValue,
-    getTooltipCoordinates: (
-      event: MouseEvent<SVGGElement> | undefined,
-      value: NationalInfectedAgeGroupsValue
-    ) => { x: number; y: number }
+    event: MouseEvent<any>,
+    value: NationalInfectedAgeGroupsValue
   ) => void;
   closeTooltip: () => void;
-  keyboardTooltip: (
-    event: any,
-    getTooltipCoordinates: (
-      event: MouseEvent<SVGGElement> | undefined,
-      value: NationalInfectedAgeGroupsValue
-    ) => { x: number; y: number }
-  ) => void;
+  keyboardTooltip: (event: any) => void;
 }
 
 const TickValue = ({ x, y, formattedValue }: TickRendererProps) => {
@@ -55,6 +45,7 @@ export const formatAgeGroupRange = (range: string): string => {
 
 export function AgeDemographicChart({
   coordinates,
+  keyboardTooltip,
   openTooltip,
   closeTooltip,
 }: AgeDemographicChartProps) {
@@ -71,7 +62,6 @@ export function AgeDemographicChart({
     ageGroupPercentagePoint,
     infectedPercentagePoint,
     ageGroupRangePoint,
-    getTooltipCoordinates,
     isSmallScreen,
     margin,
     values,
@@ -86,7 +76,12 @@ export function AgeDemographicChart({
       id="age-demographic-chart"
       aria-label={text.graph.accessibility_description}
       tabIndex={0}
-      onKeyUp={(event) => keyboardTooltip(event, getTooltipCoordinates)}
+      onKeyUp={(event) => keyboardTooltip(event)}
+      css={css({
+        '&:focus': {
+          outline: 'none',
+        },
+      })}
     >
       <Text
         textAnchor="end"
@@ -137,9 +132,7 @@ export function AgeDemographicChart({
         return (
           <Group
             key={i}
-            onMouseMove={(event) =>
-              openTooltip(event, d, getTooltipCoordinates)
-            }
+            onMouseMove={(event) => openTooltip(event, d)}
             onMouseLeave={closeTooltip}
             css={css({
               '&:hover .hoverbar': {

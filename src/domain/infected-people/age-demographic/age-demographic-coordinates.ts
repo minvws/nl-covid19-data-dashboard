@@ -1,11 +1,13 @@
+import { MouseEvent } from 'react';
 import { localPoint } from '@visx/event';
-import { scaleBand, scaleLinear } from '@visx/scale';
+import { scaleBand, scaleLinear, ScaleTypeToD3Scale } from '@visx/scale';
 import {
   NationalInfectedAgeGroups,
   NationalInfectedAgeGroupsValue,
 } from '~/types/data';
-
-const AGE_GROUP_TOOLTIP_WIDTH = 350;
+import { AGE_GROUP_TOOLTIP_WIDTH } from './age-demographic-chart';
+import { GetTooltipCoordinates, TooltipCoordinates } from './tooltip';
+import { ScaleBand } from 'd3-scale';
 
 export interface AgeDemographicCoordinates {
   width: number;
@@ -13,17 +15,22 @@ export interface AgeDemographicCoordinates {
   numTicks: number;
   xMax: number;
   yMax: number;
-  ageGroupPercentageScale: any;
-  infectedPercentageScale: any;
-  ageGroupRangeScale: any;
-  ageGroupPercentagePoint: any;
-  infectedPercentagePoint: any;
-  ageGroupRangePoint: any;
-  getTooltipCoordinates: any;
+  ageGroupPercentageScale: ValueOf<ScaleTypeToD3Scale<any, any, any>>;
+  infectedPercentageScale: ValueOf<ScaleTypeToD3Scale<any, any, any>>;
+  ageGroupRangeScale: ScaleBand<string>;
+  ageGroupPercentagePoint: (d: NationalInfectedAgeGroupsValue) => any;
+  infectedPercentagePoint: (d: NationalInfectedAgeGroupsValue) => any;
+  ageGroupRangePoint: (d: NationalInfectedAgeGroupsValue) => any;
+  getTooltipCoordinates: GetTooltipCoordinates<NationalInfectedAgeGroupsValue>;
   isSmallScreen: boolean;
-  margin: any;
-  values: any;
-  ageGroupRange: any;
+  margin: {
+    top: number;
+    right: number;
+    bottom: number;
+    left: number;
+  };
+  values: NationalInfectedAgeGroupsValue[];
+  ageGroupRange: (d: NationalInfectedAgeGroupsValue) => string;
   ageRangeAxisWidth: number;
 }
 
@@ -47,11 +54,11 @@ export function getAgeDemographicCoordinates(
 
   const numTicks = isSmallScreen ? 3 : 4;
 
-  // Then we'll create some bounds
+  // Bounds of the graph
   const xMax = (width - margin.left - margin.right - ageRangeAxisWidth) / 2;
   const yMax = height - margin.top - margin.bottom;
 
-  // We'll make some helpers to get at the data we want
+  // Helper functions to retrieve parts of the values
   const ageGroupPercentage = (d: NationalInfectedAgeGroupsValue) =>
     d.age_group_percentage * 100;
   const infectedPercentage = (d: NationalInfectedAgeGroupsValue) =>
@@ -59,7 +66,9 @@ export function getAgeDemographicCoordinates(
   const ageGroupRange = (d: NationalInfectedAgeGroupsValue) =>
     d.age_group_range;
 
-  // And then scale the graph by our data
+  // Scales to map between values and coordinates
+
+  // The ageGroupPercentageScale and infectedPercentageScale will use the same domain
   const domainPercentages = [
     0,
     Math.max(
@@ -100,27 +109,31 @@ export function getAgeDemographicCoordinates(
   );
   const ageGroupRangePoint = createPoint(ageGroupRangeScale, ageGroupRange);
 
-  const getTooltipCoordinates = (
-    event: MouseEvent,
-    value: NationalInfectedAgeGroupsValue
-  ) => {
-    const point = localPoint(event) || { x: width };
+  // Method for the tooltip to retrieve coordinates based on
+  // The event and/or the value
+  const getTooltipCoordinates: GetTooltipCoordinates<NationalInfectedAgeGroupsValue> = (
+    event?: MouseEvent<any>,
+    value?: NationalInfectedAgeGroupsValue
+  ): TooltipCoordinates => {
+    const point = event ? localPoint(event) || { x: width } : { x: 0 };
 
-    // On small screens: align the tooltip in the middle
-    let x = (width - AGE_GROUP_TOOLTIP_WIDTH) / 2;
+    // On small screens and when using keyboard
+    // align the tooltip in the middle
+    let left = (width - AGE_GROUP_TOOLTIP_WIDTH) / 2;
 
     // On desktop: align the tooltip with the bars
-    if (!isSmallScreen) {
+    // Not for keyboard (they don't pass a mouse event)
+    if (!isSmallScreen && event && value) {
       const infectedPercentageSide = point.x > width / 2;
       if (infectedPercentageSide) {
         // Align the top left of the tooltip with the middle of the infected percentage bar
-        x =
+        left =
           width / 2 +
           ageRangeAxisWidth / 2 +
           infectedPercentagePoint(value) / 2;
       } else {
         // Align the top right of the tooltio with the middle of the age group percentage bar
-        x =
+        left =
           width / 2 -
           ageRangeAxisWidth / 2 -
           (xMax - ageGroupPercentagePoint(value)) / 2 -
@@ -128,11 +141,11 @@ export function getAgeDemographicCoordinates(
       }
     }
 
-    const y = ageGroupRangePoint(value);
-    return { x, y };
+    const top = value ? ageGroupRangePoint(value) : 0;
+    return { left, top };
   };
 
-  const coordinates = {
+  return {
     width,
     height,
     numTicks,
@@ -151,6 +164,4 @@ export function getAgeDemographicCoordinates(
     ageGroupRange,
     ageRangeAxisWidth,
   };
-
-  return coordinates;
 }

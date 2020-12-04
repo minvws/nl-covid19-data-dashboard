@@ -3,34 +3,15 @@ import styled from 'styled-components';
 import { Text } from '~/components-styled/typography';
 import { formatPercentage } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import {
-  AGE_GROUP_TOOLTIP_WIDTH,
-  formatAgeGroupRange,
-} from './age-demographic-chart';
+import { formatAgeGroupRange } from './age-demographic-chart';
 import siteText from '~/locale/index';
 import { NationalInfectedAgeGroupsValue } from '~/types/data';
 
 const text = siteText.infected_age_groups;
 
-interface AgeDemographicTooltipProps {
-  left?: number;
-  top?: number;
+interface AgeDemographicTooltipContentProps {
   value?: NationalInfectedAgeGroupsValue;
 }
-
-const Tooltip = styled.div(
-  css({
-    position: 'absolute',
-    background: 'white',
-    transition: 'left 0.15s, top 0.15s',
-    transform: 'translate(0, 20px)',
-    pointerEvents: 'none',
-    width: `${AGE_GROUP_TOOLTIP_WIDTH}px`,
-    boxShadow: 'tile',
-    borderRadius: 1,
-    zIndex: 42,
-  })
-);
 
 const Legend = styled.ul(
   css({
@@ -68,41 +49,31 @@ const LegendItem = styled.li(
 
 export function AgeDemographicTooltipContent({
   value,
-  left,
-  top,
-}: AgeDemographicTooltipProps) {
+}: AgeDemographicTooltipContentProps) {
+  if (!value) {
+    return null;
+  }
   return (
-    <Tooltip
-      lang="nl"
-      aria-hidden={!value}
-      style={{ left, top }}
-      aria-live="assertive"
-      aria-controls="age-demographic-chart"
-      role="tooltip"
-    >
-      {value && (
-        <>
-          <Text fontSize={3} fontWeight="bold" px={3} py={2} m="0">
-            {replaceVariablesInText(text.graph.age_group_range_tooltip, {
-              ageGroupRange: formatAgeGroupRange(value.age_group_range),
-            })}
-          </Text>
-          <Legend>
-            <LegendItem>
-              <b>{formatPercentage(value.age_group_percentage * 100)}%</b>{' '}
-              {replaceVariablesInText(text.graph.age_group_percentage_tooltip, {
-                ageGroupRange: formatAgeGroupRange(value.age_group_range),
-              })}
-            </LegendItem>
-            <LegendItem className="infected-percentage">
-              <b>{formatPercentage(value.infected_percentage * 100)}%</b>{' '}
-              {replaceVariablesInText(text.graph.infected_percentage_tooltip, {
-                ageGroupRange: formatAgeGroupRange(value.age_group_range),
-              })}
-            </LegendItem>
-          </Legend>
-        </>
-      )}
-    </Tooltip>
+    <>
+      <Text fontSize={3} fontWeight="bold" px={3} py={2} m="0">
+        {replaceVariablesInText(text.graph.age_group_range_tooltip, {
+          ageGroupRange: formatAgeGroupRange(value.age_group_range),
+        })}
+      </Text>
+      <Legend>
+        <LegendItem>
+          <b>{formatPercentage(value.age_group_percentage * 100)}%</b>{' '}
+          {replaceVariablesInText(text.graph.age_group_percentage_tooltip, {
+            ageGroupRange: formatAgeGroupRange(value.age_group_range),
+          })}
+        </LegendItem>
+        <LegendItem className="infected-percentage">
+          <b>{formatPercentage(value.infected_percentage * 100)}%</b>{' '}
+          {replaceVariablesInText(text.graph.infected_percentage_tooltip, {
+            ageGroupRange: formatAgeGroupRange(value.age_group_range),
+          })}
+        </LegendItem>
+      </Legend>
+    </>
   );
 }
