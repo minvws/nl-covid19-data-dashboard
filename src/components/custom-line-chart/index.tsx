@@ -5,7 +5,7 @@ import { LinePath, Line, Bar } from '@visx/shape';
 import { scaleUtc, scaleLinear } from '@visx/scale';
 import { AxisLeft, AxisBottom } from '@visx/axis';
 import { localPoint } from '@visx/event';
-import { withTooltip, Tooltip, defaultStyles } from '@visx/tooltip';
+import { useTooltip, Tooltip, defaultStyles } from '@visx/tooltip';
 import { bisect, extent } from 'd3-array';
 
 // Colors
@@ -15,28 +15,38 @@ export const accentColor = '#edffea';
 export const accentColorDark = '#75daad';
 
 // Accessors
-const getDate = (d) => new Date(d.date * 1000);
-const getValue = (d) => new Date(d.value).valueOf();
+const getDate = (d: any) => new Date(d?.date * 1000);
+const getValue = (d: any) => d.value;
 
 const defaultMargin = { top: 40, right: 30, bottom: 30, left: 30 };
 
 export type ThresholdProps = {
+  values: any[];
   width: number;
   height?: number;
   margin?: { top: number; right: number; bottom: number; left: number };
 };
 
 function CustomLineChart({
-  showTooltip,
-  hideTooltip,
-  tooltipData,
-  tooltipTop = 0,
-  tooltipLeft = 0,
-  width,
   values,
+  width,
   height = 200,
   margin = defaultMargin,
-}: ThresholdProps) {
+}: //   signaalwaarde,
+//   timeframe = '5weeks',
+//   formatTooltip,
+//   formatYAxis,
+//   valueAnnotation,
+//   showFill = true,
+ThresholdProps) {
+  const {
+    tooltipData,
+    tooltipLeft,
+    tooltipTop,
+    showTooltip,
+    hideTooltip,
+  } = useTooltip();
+
   // Bounds
   const bounded = {
     width: width - margin.left - margin.right,
@@ -62,9 +72,17 @@ function CustomLineChart({
     ) => {
       const { x } = localPoint(event) || { x: 0 };
 
-      const xDate = timeScale.invert(x);
-      const dateIndex = bisect(values.map(getDate), xDate);
-      const dataPoint = values[dateIndex];
+      const x0 = timeScale.invert(x);
+
+      const index = bisect(values.map(getDate), x0);
+
+      const d0 = values[index - 1];
+      const d1 = values[index];
+      const dataPoint =
+        x0.valueOf() - getDate(d0).valueOf() >
+        getDate(d1).valueOf() - x0.valueOf()
+          ? d1
+          : d0;
 
       showTooltip({
         tooltipData: dataPoint,
@@ -96,14 +114,14 @@ function CustomLineChart({
           <Bar
             x={0}
             y={0}
-            width={width}
-            height={height}
+            width={bounded.width}
+            height={bounded.height}
             fill="transparent"
             rx={14}
             onTouchStart={handleTooltip}
             onTouchMove={handleTooltip}
             onMouseMove={handleTooltip}
-            onMouseLeave={() => hideTooltip()}
+            onMouseLeave={hideTooltip}
           />
 
           {tooltipData && (
@@ -140,9 +158,9 @@ function CustomLineChart({
           )}
         </Group>
       </svg>
-      {tooltipData && (
+      {tooltipData && tooltipTop && tooltipLeft && (
         <Tooltip
-          top={tooltipTop}
+          top={tooltipTop + margin.top}
           left={tooltipLeft + margin.left}
           offsetLeft={0}
           style={{
@@ -159,4 +177,4 @@ function CustomLineChart({
   );
 }
 
-export default withTooltip(CustomLineChart);
+export default CustomLineChart;
