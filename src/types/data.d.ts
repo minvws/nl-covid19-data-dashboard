@@ -97,7 +97,6 @@ export interface Municipalities {
   code: string;
   hospital_admissions: MunicipalitiesHospitalAdmissions[];
   positive_tested_people: MunicipalitiesPositiveTestedPeople[];
-  deceased: Deceased[];
 }
 export interface MunicipalitiesHospitalAdmissions {
   date_of_report_unix: number;
@@ -110,12 +109,6 @@ export interface MunicipalitiesPositiveTestedPeople {
   gmcode: string;
   positive_tested_people: number;
   total_positive_tested_people?: number;
-  date_of_insertion_unix: number;
-}
-export interface Deceased {
-  date_of_report_unix: number;
-  gmcode: string;
-  deceased: number;
   date_of_insertion_unix: number;
 }
 
@@ -145,6 +138,8 @@ export interface National {
   nursing_home: NationalNursingHome;
   restrictions?: NationalRestrictions;
   behavior?: NationalBehavior;
+  deceased_rivm: NationalDeceasedRivm;
+  deceased_cbs: NationalDeceasedCbs;
 }
 export interface NationalDifference {
   infected_people_delta_normalized__infected_daily_increase?: DifferenceDecimal;
@@ -448,6 +443,28 @@ export interface NationalBehaviorValue {
   week_end_unix: number;
   date_of_insertion_unix: number;
 }
+export interface NationalDeceasedRivm {
+  values: NationalDeceasedRivmValue[];
+  last_value: NationalDeceasedRivmValue;
+}
+export interface NationalDeceasedRivmValue {
+  covid_daily: number;
+  covid_total: number;
+  date_of_report_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NationalDeceasedCbs {
+  values: NationalDeceasedCbsValue[];
+  last_value: NationalDeceasedCbsValue;
+}
+export interface NationalDeceasedCbsValue {
+  registered: number;
+  expected: number;
+  expected_min: number;
+  expected_max: number;
+  date_of_report_unix: number;
+  date_of_insertion_unix: number;
+}
 
 export interface Ranges {
   last_generated: string;
@@ -533,6 +550,8 @@ export interface Regionaal {
   nursing_home: RegionalNursingHome;
   restrictions?: RegionalRestrictions;
   behavior?: RegionalBehavior;
+  deceased_rivm: RegionalDeceasedRivm;
+  deceased_cbs: RegionalDeceasedCbs;
 }
 export interface RegionalDifference {
   results_per_region__infected_increase_per_region?: DifferenceDecimal;
@@ -713,6 +732,30 @@ export interface RegionalBehaviorValue {
   date_of_insertion_unix: number;
   vrcode: string;
 }
+export interface RegionalDeceasedRivm {
+  values: RegionalDeceasedRivmValue[];
+  last_value: RegionalDeceasedRivmValue;
+}
+export interface RegionalDeceasedRivmValue {
+  covid_daily: number;
+  covid_total: number;
+  date_of_report_unix: number;
+  date_of_insertion_unix: number;
+  vrcode: string;
+}
+export interface RegionalDeceasedCbs {
+  values: RegionalDeceasedCbsValue[];
+  last_value: RegionalDeceasedCbsValue;
+}
+export interface RegionalDeceasedCbsValue {
+  registered: number;
+  expected: number;
+  expected_min: number;
+  expected_max: number;
+  date_of_report_unix: number;
+  date_of_insertion_unix: number;
+  vrcode: string;
+}
 
 export interface Regions {
   last_generated: string;
@@ -721,7 +764,6 @@ export interface Regions {
   code: string;
   hospital_admissions: RegionHospitalAdmissions[];
   positive_tested_people: RegionPositiveTestedPeople[];
-  deceased: RegionDeceased[];
   escalation_levels: EscalationLevels[];
   nursing_home: RegionsNursingHome[];
   sewer: RegionsSewer[];
@@ -738,12 +780,6 @@ export interface RegionPositiveTestedPeople {
   vrcode: string;
   positive_tested_people: number;
   total_positive_tested_people?: number;
-  date_of_insertion_unix: number;
-}
-export interface RegionDeceased {
-  date_of_report_unix: number;
-  vrcode: string;
-  deceased: number;
   date_of_insertion_unix: number;
 }
 export interface EscalationLevels {
