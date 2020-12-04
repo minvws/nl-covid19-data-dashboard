@@ -149,7 +149,7 @@ const DisabilityCare: FCWithLayout<NationalPageProps> = (props) => {
           metricName="disability_care"
           metricProperty="infected_locations_percentage"
           tooltipContent={createDisablityInfectedLocationsRegionalTooltip(
-            router
+            createSelectRegionHandler(router, 'gehandicaptenzorg')
           )}
           onSelect={createSelectRegionHandler(router, 'gehandicaptenzorg')}
         />

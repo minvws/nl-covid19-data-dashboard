@@ -122,8 +122,9 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
           selected={data.code}
           metricName="positive_tested_people"
           metricProperty="positive_tested_people"
-          tooltipContent={createPositiveTestedPeopleMunicipalTooltip(router)}
-          onSelect={createSelectMunicipalHandler(router)}
+          tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
+            createSelectMunicipalHandler(router)
+          )}
         />
       </ChoroplethTile>
     </>
