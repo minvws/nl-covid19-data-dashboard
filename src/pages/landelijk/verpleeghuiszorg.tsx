@@ -147,7 +147,7 @@ const NursingHomeCare: FCWithLayout<NationalPageProps> = (props) => {
       >
         <SafetyRegionChoropleth
           metricName="nursing_home"
-          metricValueName="infected_locations_percentage"
+          metricProperty="infected_locations_percentage"
           tooltipContent={createInfectedLocationsRegionalTooltip(router)}
           onSelect={createSelectRegionHandler(router, 'verpleeghuiszorg')}
         />
