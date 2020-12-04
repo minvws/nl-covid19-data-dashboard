@@ -746,6 +746,7 @@
     "barScale": {
       "signaalwaarde": "Signaalwaarde"
     },
+    "barchart_accessibility_label": "Gebruik pijltjestoetsen links en rechts om door de inhoud te navigeren.",
     "zoekveld_geen_resultaten": "Geen resultaten",
     "zoekveld_placeholder_regio": "Zoek op veiligheidsregio ",
     "zoekveld_placeholder_gemeente": "Zoek op gemeente ",

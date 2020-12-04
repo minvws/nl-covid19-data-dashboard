@@ -74,7 +74,7 @@ export function AgeDemographicChart({
       height={height}
       role="img"
       id="age-demographic-chart"
-      aria-label={text.graph.accessibility_description}
+      aria-label={`${text.graph.accessibility_description} ${siteText.common.barchart_accessibility_label}`}
       tabIndex={0}
       onKeyUp={(event) => keyboardTooltip(event)}
       css={css({
