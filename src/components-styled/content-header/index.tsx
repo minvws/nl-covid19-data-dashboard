@@ -142,11 +142,13 @@ export function ContentHeader(props: ContentHeaderProps) {
         <ReferenceBox>
           <Text>
             {subtitle}{' '}
-            <Link href={reference.href}>
-              <Text as="a" href={reference.href}>
-                {reference.text}
-              </Text>
-            </Link>
+            {reference && (
+              <Link href={reference.href}>
+                <Text as="a" href={reference.href}>
+                  {reference.text}
+                </Text>
+              </Link>
+            )}
           </Text>
         </ReferenceBox>
 
@@ -161,7 +163,7 @@ interface ContentHeaderProps {
   title: string;
   subtitle: string;
   metadata?: MetadataProps;
-  reference: {
+  reference?: {
     href: string;
     text: string;
   };
