@@ -6,7 +6,7 @@ import Getest from '~/assets/test.svg';
 import { Anchor } from '~/components-styled/anchor';
 import { Box } from '~/components-styled/base';
 import { RegionControlOption } from '~/components-styled/chart-region-controls';
-import { ChartTile } from '~/components-styled/chart-tile';
+// import { ChartTile } from '~/components-styled/chart-tile';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
@@ -27,41 +27,41 @@ import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
-import { NationalInfectedAgeGroups } from '~/types/data.d';
+// import { NationalInfectedAgeGroups } from '~/types/data.d';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { formatDateFromSeconds } from '~/utils/formatDate';
-import { AgeDemographic } from '~/domain/infected-people/age-demographic/age-demographic';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { formatAgeGroupRange } from '~/domain/infected-people/age-demographic/age-demographic-chart';
+// import { AgeDemographic } from '~/domain/infected-people/age-demographic/age-demographic';
+// import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+// import { formatAgeGroupRange } from '~/domain/infected-people/age-demographic/age-demographic-chart';
 import {
   getNationalStaticProps,
   NationalPageProps,
 } from '~/static-props/nl-data';
 import { colors } from '~/style/theme';
-import { assert } from '~/utils/assert';
+// import { assert } from '~/utils/assert';
 
 const text = siteText.positief_geteste_personen;
 const ggdText = siteText.positief_geteste_personen_ggd;
 
-/* Retrieves certain age demographic data to be used in the example text. */
-function getAgeDemographicExampleData(data: NationalInfectedAgeGroups) {
-  const ageGroupRange = '20-29';
-  const value = data.values.find((x) => x.age_group_range === ageGroupRange);
+// /* Retrieves certain age demographic data to be used in the example text. */
+// function getAgeDemographicExampleData(data: NationalInfectedAgeGroups) {
+//   const ageGroupRange = '20-29';
+//   const value = data?.values.find((x) => x.age_group_range === ageGroupRange);
 
-  assert(
-    value,
-    `NationalInfectedAgeGroups should contain a value for age group ${ageGroupRange}`
-  );
+//   assert(
+//     value,
+//     `NationalInfectedAgeGroups should contain a value for age group ${ageGroupRange}`
+//   );
 
-  return {
-    ageGroupRange: formatAgeGroupRange(ageGroupRange),
-    ageGroupPercentage: `${formatPercentage(
-      value.age_group_percentage * 100
-    )}%`,
-    infectedPercentage: `${formatPercentage(value.infected_percentage * 100)}%`,
-  };
-}
+//   return {
+//     ageGroupRange: formatAgeGroupRange(ageGroupRange),
+//     ageGroupPercentage: `${formatPercentage(
+//       value.age_group_percentage * 100
+//     )}%`,
+//     infectedPercentage: `${formatPercentage(value.infected_percentage * 100)}%`,
+//   };
+// }
 
 const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>(
@@ -73,9 +73,9 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
   const dataGgdLastValue = data.ggd.last_value;
   const dataGgdValues = data.ggd.values;
 
-  const ageDemographicExampleData = getAgeDemographicExampleData(
-    data.infected_age_groups
-  );
+  // const ageDemographicExampleData = getAgeDemographicExampleData(
+  //   data.infected_age_groups
+  // );
 
   return (
     <>
@@ -209,7 +209,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
         }}
       />
 
-      <ChartTile
+      {/* <ChartTile
         title={siteText.infected_age_groups.title}
         description={siteText.infected_age_groups.description}
         metadata={{
@@ -224,7 +224,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
           )}
         </Text>
         <AgeDemographic data={data.infected_age_groups} />
-      </ChartTile>
+      </ChartTile> */}
 
       <ContentHeader
         title={ggdText.titel}
