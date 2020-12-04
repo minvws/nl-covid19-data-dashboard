@@ -17,7 +17,7 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "national_hospital",
+      "title": "national_hospital_value",
       "type": "object",
       "properties": {
         "admissions_moving_average": {

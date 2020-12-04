@@ -318,10 +318,10 @@ export interface NationalSewerPerInstallationValue {
   date_of_insertion_unix: number;
 }
 export interface NationalHospital {
-  values: NationalHospital1[];
-  last_value: NationalHospital1;
+  values: NationalHospitalValue[];
+  last_value: NationalHospitalValue;
 }
-export interface NationalHospital1 {
+export interface NationalHospitalValue {
   admissions_moving_average: number;
   beds_occupied_covid: number;
   date_of_report_unix: number;
