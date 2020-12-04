@@ -165,6 +165,10 @@ export const regionThresholds = {
   nursing_home: {
     infected_locations_percentage: nursingHomeInfectedLocationsPercentageThresholds,
   },
-  sewer: sewerThresholds,
-  behavior: behaviorThresholds,
+  sewer: {
+    average: sewerThresholds,
+  },
+  behavior: {
+    todo_copy_to_all_properties__question_mark: behaviorThresholds,
+  },
 } as const;
