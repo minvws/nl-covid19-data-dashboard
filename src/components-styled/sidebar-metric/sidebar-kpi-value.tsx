@@ -38,15 +38,9 @@ export function SidebarKpiValue(props: SidebarKpiValueProps) {
         {title}
       </Heading>
       <Box display="flex" alignItems="center" justifyContent="flex-start">
-        {isPercentage ? (
-          <InlineText fontSize={3} fontWeight="bold" margin="0" marginRight={1}>
-            ({formatPercentage(value)}%)
-          </InlineText>
-        ) : (
-          <InlineText fontSize={3} fontWeight="bold" margin="0" marginRight={1}>
-            {formatNumber(value)}
-          </InlineText>
-        )}
+        <InlineText fontSize={3} fontWeight="bold" margin="0" marginRight={1}>
+          {isPercentage ? `${formatPercentage(value)}%` : formatNumber(value)}
+        </InlineText>
 
         {isDefined(difference) && (
           <Box as="span" fontSize={3} display="flex" alignItems="center">
