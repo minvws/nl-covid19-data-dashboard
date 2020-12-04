@@ -97,7 +97,6 @@ export interface Municipalities {
   code: string;
   hospital: MunicipalitiesHospital[];
   positive_tested_people: MunicipalitiesPositiveTestedPeople[];
-  deceased: Deceased[];
 }
 export interface MunicipalitiesHospital {
   date_of_report_unix: number;
@@ -110,12 +109,6 @@ export interface MunicipalitiesPositiveTestedPeople {
   gmcode: string;
   positive_tested_people: number;
   total_positive_tested_people?: number;
-  date_of_insertion_unix: number;
-}
-export interface Deceased {
-  date_of_report_unix: number;
-  gmcode: string;
-  deceased: number;
   date_of_insertion_unix: number;
 }
 
@@ -719,7 +712,6 @@ export interface Regions {
   code: string;
   hospital: RegionsHospital[];
   positive_tested_people: RegionPositiveTestedPeople[];
-  deceased: RegionDeceased[];
   escalation_levels: EscalationLevels[];
   nursing_home: RegionsNursingHome[];
   sewer: RegionsSewer[];
@@ -736,12 +728,6 @@ export interface RegionPositiveTestedPeople {
   vrcode: string;
   positive_tested_people: number;
   total_positive_tested_people?: number;
-  date_of_insertion_unix: number;
-}
-export interface RegionDeceased {
-  date_of_report_unix: number;
-  vrcode: string;
-  deceased: number;
   date_of_insertion_unix: number;
 }
 export interface EscalationLevels {

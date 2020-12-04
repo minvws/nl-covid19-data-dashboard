@@ -9,9 +9,7 @@
     "name",
     "code",
     "escalation_levels",
-    "hospital",
     "positive_tested_people",
-    "deceased",
     "nursing_home",
     "sewer"
   ],
@@ -44,13 +42,6 @@
       "maxItems": 25,
       "items": {
         "$ref": "positive_tested_people.json"
-      }
-    },
-    "deceased": {
-      "type": "array",
-      "maxItems": 25,
-      "items": {
-        "$ref": "deceased.json"
       }
     },
     "escalation_levels": {

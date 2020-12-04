@@ -7,7 +7,7 @@ import {
   Dictionary,
   MunicipalGeoJSON,
   MunicipalityProperties,
-  TMunicipalityMetricName,
+  MunicipalitiesMetricName,
 } from '../shared';
 
 /**
@@ -61,7 +61,7 @@ export function useMunicipalityNavigationData(
 
 export function useMunicipalityData(
   featureCollection: MunicipalGeoJSON,
-  metricName: TMunicipalityMetricName,
+  metricName: MunicipalitiesMetricName,
   metricProperty: string
 ): UseMunicipalityDataReturnValue {
   const { data } = useSWR<Municipalities>('/json/MUNICIPALITIES.json');
