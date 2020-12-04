@@ -42,6 +42,9 @@ const NursingHomeCare: FCWithLayout<NationalPageProps> = (props) => {
 
       <ContentHeader
         category={siteText.nationaal_layout.headings.kwetsbare_groepen}
+        screenreaderCategory={
+          siteText.verpleeghuis_besmette_locaties.titel_sidebar
+        }
         title={positiveTestedPeopleText.titel}
         icon={<Verpleeghuiszorg />}
         subtitle={positiveTestedPeopleText.pagina_toelichting}
@@ -144,7 +147,7 @@ const NursingHomeCare: FCWithLayout<NationalPageProps> = (props) => {
       >
         <SafetyRegionChoropleth
           metricName="nursing_home"
-          metricValueName="infected_locations_percentage"
+          metricProperty="infected_locations_percentage"
           tooltipContent={createInfectedLocationsRegionalTooltip(router)}
           onSelect={createSelectRegionHandler(router, 'verpleeghuiszorg')}
         />

@@ -10,7 +10,7 @@ import { SafetyRegionProperties } from '../../shared';
 const text = siteText.rioolwater_metingen;
 
 export const createSewerRegionalTooltip = (router: NextRouter) => (
-  context: RegionalSewerValue & SafetyRegionProperties
+  context: SafetyRegionProperties & RegionalSewerValue
 ): ReactNode => {
   const handler = createSelectRegionHandler(router);
 

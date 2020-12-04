@@ -15,19 +15,35 @@ export interface Value {
   week: Week;
 }
 
-export type Week = {
+type Week = {
   start: number;
   end: number;
 };
 
-export type LineChartWithWeekProps = {
+type LineChartWithWeekProps = {
   values: Value[];
-  title: string;
-  description?: string;
   timeframe?: TimeframeOption;
   formatYAxis?: (y: number) => string;
   tooltipFormatter?: TooltipFormatterCallbackFunction;
 };
+
+export function LineChartWithWeekTooltip({
+  values,
+  formatYAxis,
+  tooltipFormatter,
+  timeframe = '5weeks',
+}: LineChartWithWeekProps) {
+  const chartOptions = useMemo(() => {
+    const filteredValues = getFilteredValues<Value>(
+      values,
+      timeframe,
+      (value: Value) => value.date * 1000
+    );
+    return getOptions(filteredValues, tooltipFormatter, formatYAxis);
+  }, [values, timeframe, tooltipFormatter, formatYAxis]);
+
+  return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;
+}
 
 function getOptions(
   values: Value[],
@@ -157,22 +173,4 @@ function getOptions(
   };
 
   return options;
-}
-
-export function LineChartWithWeekTooltip({
-  values,
-  formatYAxis,
-  tooltipFormatter,
-  timeframe = '5weeks',
-}: LineChartWithWeekProps) {
-  const chartOptions = useMemo(() => {
-    const filteredValues = getFilteredValues<Value>(
-      values,
-      timeframe,
-      (value: Value) => value.date * 1000
-    );
-    return getOptions(filteredValues, tooltipFormatter, formatYAxis);
-  }, [values, timeframe, tooltipFormatter, formatYAxis]);
-
-  return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;
 }

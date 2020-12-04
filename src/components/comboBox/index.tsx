@@ -5,11 +5,12 @@ import {
   ComboboxOption,
   ComboboxPopover,
 } from '@reach/combobox';
-import { assert } from '~/utils/assert';
 import matchSorter from 'match-sorter';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { Box } from '~/components-styled/base';
 import text from '~/locale/index';
+import { assert } from '~/utils/assert';
 import { useMediaQuery } from '~/utils/useMediaQuery';
 import { useThrottle } from '~/utils/useThrottle';
 
@@ -82,27 +83,29 @@ export function ComboBox<Option extends TOption>(props: TProps<Option>) {
   }, [isLargeScreen, hasRegionSelected]);
 
   return (
-    <Combobox openOnFocus onSelect={handleSelect}>
-      <ComboboxInput
-        ref={inputRef}
-        onChange={handleInputChange}
-        placeholder={placeholder}
-      />
-      <ComboboxPopover>
-        {results.length > 0 ? (
-          <ComboboxList persistSelection>
-            {results.map((option) => (
-              <ComboboxOption
-                key={option.name}
-                value={option.displayName || option.name}
-              />
-            ))}
-          </ComboboxList>
-        ) : (
-          <span>{text.common.zoekveld_geen_resultaten}</span>
-        )}
-      </ComboboxPopover>
-    </Combobox>
+    <Box role="search">
+      <Combobox openOnFocus onSelect={handleSelect}>
+        <ComboboxInput
+          ref={inputRef}
+          onChange={handleInputChange}
+          placeholder={placeholder}
+        />
+        <ComboboxPopover>
+          {results.length > 0 ? (
+            <ComboboxList persistSelection>
+              {results.map((option) => (
+                <ComboboxOption
+                  key={option.name}
+                  value={option.displayName || option.name}
+                />
+              ))}
+            </ComboboxList>
+          ) : (
+            <span>{text.common.zoekveld_geen_resultaten}</span>
+          )}
+        </ComboboxPopover>
+      </Combobox>
+    </Box>
   );
 }
 

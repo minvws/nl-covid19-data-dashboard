@@ -32,6 +32,7 @@ const InfectiousPeople: FCWithLayout<NationalPageProps> = (props) => {
       />
       <ContentHeader
         category={siteText.nationaal_layout.headings.besmettingen}
+        screenreaderCategory={siteText.besmettelijke_personen.titel_sidebar}
         title={text.title}
         icon={<Ziektegolf />}
         subtitle={text.toelichting_pagina}

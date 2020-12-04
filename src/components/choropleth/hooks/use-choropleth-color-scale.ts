@@ -1,9 +1,10 @@
 import { scaleThreshold } from 'd3-scale';
 import { useCallback, useMemo } from 'react';
-import { isPresent } from 'ts-is-present';
+import { isDefined } from 'ts-is-present';
 import { assert } from '~/utils/assert';
 import { ChoroplethThresholdsValue } from '../shared';
-
+import { GetRegionDataFunctionType } from './use-safety-region-data';
+import { GetMunicipalityDataFunctionType } from './use-municipality-data';
 /**
  * This hook return a color scale for the given domain and gradient.
  * If either domain or gradient is undefined, it will return a method
@@ -13,21 +14,19 @@ import { ChoroplethThresholdsValue } from '../shared';
  * will be created using the given domain. If the array is bigger it is
  * assumed that the indexes map directly to the data value.
  *
- * @param getData
+ * @param getChoroplethValue
  * @param domain
  * @param gradient
  * @param defaultColor
  */
 export function useChoroplethColorScale(
-  getData: (id: string) => any,
-  thresholds?: ChoroplethThresholdsValue[],
+  getChoroplethValue:
+    | GetRegionDataFunctionType
+    | GetMunicipalityDataFunctionType,
+  thresholds: ChoroplethThresholdsValue[],
   defaultColor = 'white'
 ) {
   const colorScale = useMemo(() => {
-    if (!thresholds) {
-      return undefined;
-    }
-
     assert(
       Array.isArray(thresholds),
       `thresholds is not of type Array: ${JSON.stringify(thresholds)}`
@@ -44,12 +43,10 @@ export function useChoroplethColorScale(
 
   return useCallback(
     (id: string) => {
-      const data = getData(id);
-      if (colorScale && isPresent(data?.value)) {
-        return colorScale(data.value);
-      }
-      return defaultColor;
+      const data = getChoroplethValue(id);
+
+      return isDefined(data) ? colorScale(data.__color_value) : defaultColor;
     },
-    [colorScale, getData, defaultColor]
+    [colorScale, getChoroplethValue, defaultColor]
   );
 }

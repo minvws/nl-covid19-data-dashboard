@@ -154,7 +154,6 @@
     }
   },
   "required": [
-
     "number_of_participants",
     "wash_hands_compliance",
     "wash_hands_compliance_trend",
