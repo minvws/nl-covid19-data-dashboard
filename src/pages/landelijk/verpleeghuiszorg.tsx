@@ -196,16 +196,14 @@ const NursingHomeCare: FCWithLayout<NationalPageProps> = (props) => {
         </KpiTile>
       </TwoKpiSection>
 
-      {data && (
-        <LineChartTile
-          metadata={{ source: locationDeaths.bronnen.rivm }}
-          title={locationDeaths.linechart_titel}
-          values={nursinghomeData.values.map((value) => ({
-            value: value.deceased_daily,
-            date: value.date_of_report_unix,
-          }))}
-        />
-      )}
+      <LineChartTile
+        metadata={{ source: locationDeaths.bronnen.rivm }}
+        title={locationDeaths.linechart_titel}
+        values={nursinghomeData.values.map((value) => ({
+          value: value.deceased_daily,
+          date: value.date_of_report_unix,
+        }))}
+      />
     </>
   );
 };

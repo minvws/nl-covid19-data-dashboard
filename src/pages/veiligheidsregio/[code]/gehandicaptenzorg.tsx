@@ -27,7 +27,8 @@ const mortalityText = siteText.veiligheidsregio_gehandicaptenzorg_oversterfte;
 const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
   const { data, safetyRegionName } = props;
 
-  const disabilityCareLastValue = data.disability_care.last_value;
+  const lastValue = data.disability_care.last_value;
+  const values = data.disability_care.values;
 
   return (
     <>
@@ -57,8 +58,8 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
         )}
         metadata={{
           datumsText: positiveTestPeopleText.datums,
-          dateInfo: disabilityCareLastValue.date_of_report_unix,
-          dateOfInsertionUnix: disabilityCareLastValue.date_of_insertion_unix,
+          dateInfo: lastValue.date_of_report_unix,
+          dateOfInsertionUnix: lastValue.date_of_insertion_unix,
           dataSources: [positiveTestPeopleText.bronnen.rivm],
         }}
         reference={positiveTestPeopleText.reference}
@@ -69,13 +70,13 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
           title={positiveTestPeopleText.barscale_titel}
           description={positiveTestPeopleText.extra_uitleg}
           metadata={{
-            date: disabilityCareLastValue.date_of_report_unix,
+            date: lastValue.date_of_report_unix,
             source: positiveTestPeopleText.bronnen.rivm,
           }}
         >
           <KpiValue
             data-cy="newly_infected_people"
-            absolute={disabilityCareLastValue.newly_infected_people}
+            absolute={lastValue.newly_infected_people}
           />
         </KpiTile>
       </TwoKpiSection>
@@ -83,7 +84,7 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
       <LineChartTile
         metadata={{ source: positiveTestPeopleText.bronnen.rivm }}
         title={positiveTestPeopleText.linechart_titel}
-        values={data.nursing_home.values.map((value) => ({
+        values={values.map((value) => ({
           value: value.newly_infected_people,
           date: value.date_of_report_unix,
         }))}
@@ -99,8 +100,8 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
         subtitle={locationsText.pagina_toelichting}
         metadata={{
           datumsText: locationsText.datums,
-          dateInfo: disabilityCareLastValue.date_of_report_unix,
-          dateOfInsertionUnix: disabilityCareLastValue.date_of_insertion_unix,
+          dateInfo: lastValue.date_of_report_unix,
+          dateOfInsertionUnix: lastValue.date_of_insertion_unix,
           dataSources: [locationsText.bronnen.rivm],
         }}
         reference={locationsText.reference}
@@ -110,36 +111,36 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
         <KpiTile
           title={locationsText.kpi_titel}
           metadata={{
-            date: disabilityCareLastValue.date_of_report_unix,
+            date: lastValue.date_of_report_unix,
             source: locationsText.bronnen.rivm,
           }}
         >
           <KpiValue
             data-cy="infected_locations_total"
-            absolute={disabilityCareLastValue.infected_locations_total}
-            percentage={disabilityCareLastValue.infected_locations_percentage}
+            absolute={lastValue.infected_locations_total}
+            percentage={lastValue.infected_locations_percentage}
           />
           <Text>{locationsText.kpi_toelichting}</Text>
         </KpiTile>
         <KpiTile
           title={locationsText.barscale_titel}
           metadata={{
-            date: disabilityCareLastValue.date_of_report_unix,
+            date: lastValue.date_of_report_unix,
             source: locationsText.bronnen.rivm,
           }}
         >
           <KpiValue
             data-cy="newly_infected_locations"
-            absolute={disabilityCareLastValue.newly_infected_locations}
+            absolute={lastValue.newly_infected_locations}
           />
           <Text>{locationsText.barscale_toelichting}</Text>
         </KpiTile>
       </TwoKpiSection>
 
-      {disabilityCareLastValue.infected_locations_total !== undefined && (
+      {lastValue.infected_locations_total !== undefined && (
         <LineChartTile
           title={locationsText.linechart_titel}
-          values={data.nursing_home.values.map((value) => ({
+          values={values.map((value) => ({
             value: value.infected_locations_total,
             date: value.date_of_report_unix,
           }))}
@@ -159,8 +160,8 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
         subtitle={mortalityText.pagina_toelichting}
         metadata={{
           datumsText: mortalityText.datums,
-          dateInfo: disabilityCareLastValue.date_of_report_unix,
-          dateOfInsertionUnix: disabilityCareLastValue.date_of_insertion_unix,
+          dateInfo: lastValue.date_of_report_unix,
+          dateOfInsertionUnix: lastValue.date_of_insertion_unix,
           dataSources: [mortalityText.bronnen.rivm],
         }}
         reference={mortalityText.reference}
@@ -171,13 +172,13 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
           title={mortalityText.barscale_titel}
           description={mortalityText.extra_uitleg}
           metadata={{
-            date: disabilityCareLastValue.date_of_report_unix,
+            date: lastValue.date_of_report_unix,
             source: mortalityText.bronnen.rivm,
           }}
         >
           <KpiValue
             data-cy="deceased_daily"
-            absolute={disabilityCareLastValue.deceased_daily}
+            absolute={lastValue.deceased_daily}
           />
         </KpiTile>
       </TwoKpiSection>
@@ -186,7 +187,7 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
         <LineChartTile
           metadata={{ source: mortalityText.bronnen.rivm }}
           title={mortalityText.linechart_titel}
-          values={data.nursing_home.values.map((value) => ({
+          values={values.map((value) => ({
             value: value.deceased_daily,
             date: value.date_of_report_unix,
           }))}
