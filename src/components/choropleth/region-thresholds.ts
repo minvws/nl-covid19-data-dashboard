@@ -168,7 +168,9 @@ export const regionThresholds = {
   disability_care: {
     infected_locations_percentage: nursingHomeInfectedLocationsPercentageThresholds,
   },
-  sewer: sewerThresholds,
+  sewer: {
+    average: sewerThresholds,
+  },
   behavior: {
     todo_copy_to_all_properties__question_mark: behaviorThresholds,
   },

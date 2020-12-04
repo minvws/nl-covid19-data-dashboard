@@ -66,10 +66,13 @@
             "argsIgnorePattern": "^_"
           }
         ],
-        "no-restricted-imports": ["error", {
-          "name": "next/link",
-          "message": "Please use the custom ~/utils/link instead"
-        }]
+        "no-restricted-imports": [
+          "error",
+          {
+            "name": "next/link",
+            "message": "Please use the custom ~/utils/link instead"
+          }
+        ]
       }
     }
   ]
