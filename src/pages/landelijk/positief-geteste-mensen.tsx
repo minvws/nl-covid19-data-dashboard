@@ -164,7 +164,8 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
         onChangeControls={setSelectedMap}
         legend={{
           title: text.chloropleth_legenda.titel,
-          thresholds: regionThresholds.positive_tested_people,
+          thresholds:
+            regionThresholds.positive_tested_people.positive_tested_people,
         }}
       >
         {/**

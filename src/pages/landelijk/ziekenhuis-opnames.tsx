@@ -109,7 +109,7 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
         description={text.map_toelichting}
         onChangeControls={setSelectedMap}
         legend={{
-          thresholds: regionThresholds.hospital_admissions,
+          thresholds: regionThresholds.hospital_admissions.hospital_admissions,
           title: text.chloropleth_legenda.titel,
         }}
         metadata={{
