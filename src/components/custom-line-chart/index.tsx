@@ -15,7 +15,7 @@ export const accentColor = '#edffea';
 export const accentColorDark = '#75daad';
 
 // Accessors
-const getDate = (d: any) => new Date(d?.date * 1000);
+const getDate = (d: any) => new Date(d.date * 1000);
 const getValue = (d: any) => d.value;
 
 const defaultMargin = { top: 40, right: 30, bottom: 30, left: 30 };
@@ -72,10 +72,8 @@ ThresholdProps) {
     ) => {
       const { x } = localPoint(event) || { x: 0 };
 
-      const x0 = timeScale.invert(x);
-
+      const x0 = timeScale.invert(x - margin.left);
       const index = bisect(values.map(getDate), x0);
-
       const d0 = values[index - 1];
       const d1 = values[index];
       const dataPoint =
