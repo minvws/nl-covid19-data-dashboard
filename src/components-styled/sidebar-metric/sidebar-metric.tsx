@@ -35,7 +35,7 @@ export function SidebarMetric<T>({
   const propertyValue = lastValue && lastValue[metricProperty];
 
   assert(
-    propertyValue,
+    isDefined(propertyValue),
     `Missing value for metric property ${[
       metricName,
       'last_value',
@@ -71,7 +71,10 @@ export function SidebarMetric<T>({
     /**
      * If you pass in a difference key, it should exist
      */
-    assert(differenceValue, `Missing value for difference:${differenceKey}`);
+    assert(
+      isDefined(differenceValue),
+      `Missing value for difference:${differenceKey}`
+    );
   }
 
   const valueAnnotation = annotationKey
