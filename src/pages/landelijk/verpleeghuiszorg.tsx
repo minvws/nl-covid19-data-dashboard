@@ -42,7 +42,7 @@ const NursingHomeCare: FCWithLayout<NationalPageProps> = (props) => {
 
       <ContentHeader
         category={siteText.nationaal_layout.headings.kwetsbare_groepen}
-        screenreaderCategory={
+        screenReaderCategory={
           siteText.verpleeghuis_besmette_locaties.titel_sidebar
         }
         title={positiveTestedPeopleText.titel}
@@ -126,7 +126,7 @@ const NursingHomeCare: FCWithLayout<NationalPageProps> = (props) => {
         >
           <KpiValue
             data-cy="newly_infected_locations"
-            absolute={nursinghomeData?.last_value.newly_infected_locations}
+            absolute={nursinghomeData.last_value.newly_infected_locations}
           />
           <Text>{infectedLocationsText.barscale_toelichting}</Text>
         </KpiTile>
@@ -147,8 +147,10 @@ const NursingHomeCare: FCWithLayout<NationalPageProps> = (props) => {
       >
         <SafetyRegionChoropleth
           metricName="nursing_home"
-          metricValueName="infected_locations_percentage"
-          tooltipContent={createInfectedLocationsRegionalTooltip(router)}
+          metricProperty="infected_locations_percentage"
+          tooltipContent={createInfectedLocationsRegionalTooltip(
+            createSelectRegionHandler(router, 'verpleeghuiszorg')
+          )}
           onSelect={createSelectRegionHandler(router, 'verpleeghuiszorg')}
         />
       </ChoroplethTile>
@@ -194,16 +196,14 @@ const NursingHomeCare: FCWithLayout<NationalPageProps> = (props) => {
         </KpiTile>
       </TwoKpiSection>
 
-      {data && (
-        <LineChartTile
-          metadata={{ source: locationDeaths.bronnen.rivm }}
-          title={locationDeaths.linechart_titel}
-          values={nursinghomeData.values.map((value) => ({
-            value: value.deceased_daily,
-            date: value.date_of_report_unix,
-          }))}
-        />
-      )}
+      <LineChartTile
+        metadata={{ source: locationDeaths.bronnen.rivm }}
+        title={locationDeaths.linechart_titel}
+        values={nursinghomeData.values.map((value) => ({
+          value: value.deceased_daily,
+          date: value.date_of_report_unix,
+        }))}
+      />
     </>
   );
 };

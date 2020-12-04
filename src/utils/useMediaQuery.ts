@@ -2,9 +2,19 @@ import { useState, useEffect } from 'react';
 
 export function useMediaQuery(
   breakpoint: string,
-  initialMatches = false
+  initialMatches?: boolean
 ): boolean {
-  const [matches, setMatches] = useState(initialMatches);
+  const [matches, setMatches] = useState(() => {
+    if (initialMatches === undefined) {
+      try {
+        return window.matchMedia(breakpoint).matches;
+      } catch (err) {
+        return false;
+      }
+    }
+
+    return initialMatches;
+  });
 
   useEffect(() => {
     const mqList = window.matchMedia(breakpoint);

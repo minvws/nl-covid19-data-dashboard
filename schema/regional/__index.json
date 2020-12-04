@@ -12,7 +12,8 @@
     "nursing_home",
     "sewer",
     "sewer_per_installation",
-    "difference"
+    "difference",
+    "disability_care"
   ],
   "additionalProperties": false,
   "properties": {
@@ -48,6 +49,9 @@
     },
     "nursing_home": {
       "$ref": "nursing_home.json"
+    },
+    "disability_care": {
+      "$ref": "disability_care.json"
     },
     "restrictions": {
       "$ref": "restrictions.json"

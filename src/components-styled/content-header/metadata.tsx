@@ -8,7 +8,7 @@ import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { Box } from '../base';
 import { ExternalLink } from '../external-link';
 import { Text } from '../typography';
-
+import { Fragment } from 'react';
 interface Datasource {
   href: string;
   text: string;
@@ -92,27 +92,12 @@ function MetadataItem(props: MetadataItemProps) {
       </Box>
       <Text margin={0}>
         {label}:{' '}
-        {items.map((item, index) => {
-          if (index) {
-            return (
-              <>
-                {' & '}
-                <ExternalLink
-                  href={item.href}
-                  text={item.text}
-                  key={index + item.href}
-                />
-              </>
-            );
-          }
-          return (
-            <ExternalLink
-              href={item.href}
-              text={item.text}
-              key={index + item.href}
-            />
-          );
-        })}
+        {items.map((item, index) => (
+          <Fragment key={index + item.href}>
+            {index > 0 && ' & '}
+            <ExternalLink href={item.href}>{item.text}</ExternalLink>
+          </Fragment>
+        ))}
       </Text>
     </Box>
   );
