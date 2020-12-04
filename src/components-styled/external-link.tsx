@@ -1,14 +1,20 @@
 import React from 'react';
 
 interface ExternalLinkProps {
-  text: string;
   href: string;
+  children: React.ReactNode;
+  className?: string;
 }
 
-export function ExternalLink({ text, href }: ExternalLinkProps) {
+export function ExternalLink({ href, children, className }: ExternalLinkProps) {
   return (
-    <a href={href} rel="noopener noreferrer" target="_blank">
-      {text}
+    <a
+      href={href}
+      rel="noopener noreferrer"
+      target="_blank"
+      className={className}
+    >
+      {children}
     </a>
   );
 }
