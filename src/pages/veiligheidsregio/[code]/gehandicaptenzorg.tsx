@@ -183,16 +183,14 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
         </KpiTile>
       </TwoKpiSection>
 
-      {data && (
-        <LineChartTile
-          metadata={{ source: mortalityText.bronnen.rivm }}
-          title={mortalityText.linechart_titel}
-          values={values.map((value) => ({
-            value: value.deceased_daily,
-            date: value.date_of_report_unix,
-          }))}
-        />
-      )}
+      <LineChartTile
+        metadata={{ source: mortalityText.bronnen.rivm }}
+        title={mortalityText.linechart_titel}
+        values={values.map((value) => ({
+          value: value.deceased_daily,
+          date: value.date_of_report_unix,
+        }))}
+      />
     </>
   );
 };
