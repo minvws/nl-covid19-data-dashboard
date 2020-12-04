@@ -12,10 +12,12 @@ context('Landelijk - Rioolwater', () => {
   });
 
   it('Should show the correct KPI values', function (this: NationalContext) {
+    const lastValue = this.nationalData.sewer.last_value;
+
     const kpiTestInfo = {
-      sewer_average: formatNumber(this.nationalData.sewer.last_value.average),
+      sewer_average: formatNumber(lastValue.average),
       total_installation_count: formatNumber(
-        this.nationalData.sewer.last_value.total_installation_count
+        lastValue.total_installation_count
       ),
     };
 

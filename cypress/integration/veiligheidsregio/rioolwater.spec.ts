@@ -12,12 +12,12 @@ context('Regionaal - Rioolwater', () => {
   });
 
   it('Should show the correct KPI values', function (this: RegionalContext) {
-    const sewerwaterLastValue = this.regionData.sewer.last_value;
+    const lastValue = this.regionData.sewer.last_value;
 
     const kpiTestInfo = {
-      riool_normalized: formatNumber(sewerwaterLastValue.average),
+      riool_normalized: formatNumber(lastValue.average),
       total_installation_count: formatNumber(
-        sewerwaterLastValue.total_installation_count
+        lastValue.total_installation_count
       ),
     };
 

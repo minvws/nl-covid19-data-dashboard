@@ -42,7 +42,7 @@ const NursingHomeCare: FCWithLayout<NationalPageProps> = (props) => {
 
       <ContentHeader
         category={siteText.nationaal_layout.headings.kwetsbare_groepen}
-        screenreaderCategory={
+        screenReaderCategory={
           siteText.verpleeghuis_besmette_locaties.titel_sidebar
         }
         title={positiveTestedPeopleText.titel}
@@ -126,7 +126,7 @@ const NursingHomeCare: FCWithLayout<NationalPageProps> = (props) => {
         >
           <KpiValue
             data-cy="newly_infected_locations"
-            absolute={nursinghomeData?.last_value.newly_infected_locations}
+            absolute={nursinghomeData.last_value.newly_infected_locations}
           />
           <Text>{infectedLocationsText.barscale_toelichting}</Text>
         </KpiTile>

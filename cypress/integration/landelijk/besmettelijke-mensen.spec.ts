@@ -12,11 +12,11 @@ context('Landelijk - Besmettelijke mensen', () => {
   });
 
   it('Should show the correct KPI values', function (this: NationalContext) {
+    const lastValue = this.nationalData.infectious_people_last_known_average
+      .last_value;
+
     const kpiTestInfo = {
-      infectious_avg: formatNumber(
-        this.nationalData.infectious_people_last_known_average.last_value
-          .infectious_avg
-      ),
+      infectious_avg: formatNumber(lastValue.infectious_avg),
     };
 
     checkKpiValues(kpiTestInfo);

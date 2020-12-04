@@ -12,22 +12,18 @@ context('Regionaal - Gehandicaptenzorg', () => {
   });
 
   it('Should show the correct KPI values', function (this: RegionalContext) {
-    const disablityCareLastValue = this.regionData.disability_care.last_value;
+    const lastValue = this.regionData.disability_care.last_value;
 
     const kpiTestInfo = {
-      newly_infected_people: formatNumber(
-        disablityCareLastValue.newly_infected_people
-      ),
+      newly_infected_people: formatNumber(lastValue.newly_infected_people),
       infected_locations_total: [
-        formatNumber(disablityCareLastValue.infected_locations_total),
-        `${formatPercentage(
-          disablityCareLastValue.infected_locations_percentage
-        )}%`,
+        formatNumber(lastValue.infected_locations_total),
+        `${formatPercentage(lastValue.infected_locations_percentage)}%`,
       ],
       newly_infected_locations: formatNumber(
-        disablityCareLastValue.newly_infected_locations
+        lastValue.newly_infected_locations
       ),
-      deceased_daily: formatNumber(disablityCareLastValue.deceased_daily),
+      deceased_daily: formatNumber(lastValue.deceased_daily),
     };
 
     checkKpiValues(kpiTestInfo);

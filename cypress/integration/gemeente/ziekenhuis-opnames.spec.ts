@@ -12,13 +12,10 @@ context('Gemeente - Ziekenhuis opnames', () => {
   });
 
   xit('Should show the correct KPI values', function (this: MunicipalContext) {
-    const hospitalAdmissionsLastValue = this.municipalData.hospital_admissions
-      .last_value;
+    const lastValue = this.municipalData.hospital_admissions.last_value;
 
     const kpiTestInfo = {
-      moving_average_hospital: formatNumber(
-        hospitalAdmissionsLastValue.moving_average_hospital
-      ),
+      moving_average_hospital: formatNumber(lastValue.moving_average_hospital),
     };
 
     checkKpiValues(kpiTestInfo);

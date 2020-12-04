@@ -42,7 +42,7 @@ const DisabilityCare: FCWithLayout<NationalPageProps> = (props) => {
 
       <ContentHeader
         category={siteText.nationaal_layout.headings.kwetsbare_groepen}
-        screenreaderCategory={
+        screenReaderCategory={
           siteText.verpleeghuis_positief_geteste_personen.titel_sidebar
         }
         title={positiveTestedPeopleText.titel}
@@ -126,7 +126,7 @@ const DisabilityCare: FCWithLayout<NationalPageProps> = (props) => {
         >
           <KpiValue
             data-cy="newly_infected_locations"
-            absolute={disabilityCareData?.last_value.newly_infected_locations}
+            absolute={disabilityCareData.last_value.newly_infected_locations}
           />
           <Text>{infectedLocationsText.barscale_toelichting}</Text>
         </KpiTile>
