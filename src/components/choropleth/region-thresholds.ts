@@ -153,14 +153,22 @@ const behaviorThresholds: ChoroplethThresholdsValue[] = [
 ];
 
 export const regionThresholds = {
-  positive_tested_people: positiveTestedThresholds,
-  hospital_admissions: hospitalAdmissionsThresholds,
+  positive_tested_people: {
+    positive_tested_people: positiveTestedThresholds,
+  },
+  hospital_admissions: {
+    hospital_admissions: hospitalAdmissionsThresholds,
+  },
   escalation_levels: {
     escalation_level: escalationThresholds,
   },
   nursing_home: {
     infected_locations_percentage: nursingHomeInfectedLocationsPercentageThresholds,
   },
-  sewer: sewerThresholds,
-  behavior: behaviorThresholds,
+  sewer: {
+    average: sewerThresholds,
+  },
+  behavior: {
+    todo_copy_to_all_properties__question_mark: behaviorThresholds,
+  },
 } as const;
