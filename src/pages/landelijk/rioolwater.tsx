@@ -125,7 +125,7 @@ const SewerWater: FCWithLayout<NationalPageProps> = ({ data }) => {
         }}
         legend={{
           title: text.legenda_titel,
-          thresholds: regionThresholds.sewer,
+          thresholds: regionThresholds.sewer.average,
         }}
       >
         <SafetyRegionChoropleth

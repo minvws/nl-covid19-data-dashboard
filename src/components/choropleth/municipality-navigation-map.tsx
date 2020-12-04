@@ -1,6 +1,7 @@
 import css from '@styled-system/css';
 import { Feature, MultiPolygon } from 'geojson';
 import { ReactNode } from 'react';
+import { AspectRatio } from '~/components-styled/aspect-ratio';
 import { Choropleth } from './choropleth';
 import { useChartDimensions, useMunicipalityNavigationData } from './hooks';
 import { Path } from './path';
@@ -24,7 +25,8 @@ export function MunicipalityNavigationMap<T>(
 ) {
   const { onSelect, tooltipContent } = props;
 
-  const [ref, dimensions] = useChartDimensions<HTMLDivElement>(1.2);
+  const ratio = 1.2;
+  const [ref, dimensions] = useChartDimensions<HTMLDivElement>(ratio);
 
   const { getChoroplethValue } = useMunicipalityNavigationData(municipalGeo);
 
@@ -82,16 +84,18 @@ export function MunicipalityNavigationMap<T>(
 
   return (
     <div ref={ref} css={css({ bg: 'transparent', position: 'relative' })}>
-      <Choropleth
-        featureCollection={municipalGeo}
-        hovers={municipalGeo}
-        boundingBox={countryGeo}
-        dimensions={dimensions}
-        featureCallback={featureCallback}
-        hoverCallback={hoverCallback}
-        onPathClick={onClick}
-        getTooltipContent={getTooltipContent}
-      />
+      <AspectRatio ratio={1 / ratio}>
+        <Choropleth
+          featureCollection={municipalGeo}
+          hovers={municipalGeo}
+          boundingBox={countryGeo}
+          dimensions={dimensions}
+          featureCallback={featureCallback}
+          hoverCallback={hoverCallback}
+          onPathClick={onClick}
+          getTooltipContent={getTooltipContent}
+        />
+      </AspectRatio>
     </div>
   );
 }

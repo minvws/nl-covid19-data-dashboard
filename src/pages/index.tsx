@@ -125,7 +125,8 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
         description={text.positief_geteste_personen.map_toelichting}
         onChangeControls={setSelectedMap}
         legend={{
-          thresholds: regionThresholds.positive_tested_people,
+          thresholds:
+            regionThresholds.positive_tested_people.positive_tested_people,
           title: text.positief_geteste_personen.chloropleth_legenda.titel,
         }}
       >

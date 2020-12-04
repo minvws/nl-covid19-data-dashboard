@@ -92,7 +92,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
         })}
         description={text.map_toelichting}
         legend={{
-          thresholds: regionThresholds.hospital_admissions,
+          thresholds: regionThresholds.hospital_admissions.hospital_admissions,
           title: siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel,
         }}
         metadata={{
