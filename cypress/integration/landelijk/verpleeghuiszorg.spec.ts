@@ -12,25 +12,22 @@ context('Landelijk - Verpleeghuiszorg', () => {
   });
 
   it('Should show the correct KPI values', function (this: NationalContext) {
+    const nursingHomeLastValue = this.nationalData.nursing_home.last_value;
+
     const kpiTestInfo = {
       newly_infected_people: formatNumber(
-        this.nationalData.nursing_home.last_value.newly_infected_people
+        nursingHomeLastValue.newly_infected_people
       ),
       infected_locations_total: [
-        formatNumber(
-          this.nationalData.nursing_home.last_value.infected_locations_total
-        ),
+        formatNumber(nursingHomeLastValue.infected_locations_total),
         `(${formatPercentage(
-          this.nationalData.nursing_home.last_value
-            .infected_locations_percentage
+          nursingHomeLastValue.infected_locations_percentage
         )}%)`,
       ],
       newly_infected_locations: formatNumber(
-        this.nationalData.nursing_home.last_value.newly_infected_locations
+        nursingHomeLastValue.newly_infected_locations
       ),
-      deceased_daily: formatNumber(
-        this.nationalData.nursing_home.last_value.deceased_daily
-      ),
+      deceased_daily: formatNumber(nursingHomeLastValue.deceased_daily),
     };
 
     checkKpiValues(kpiTestInfo);

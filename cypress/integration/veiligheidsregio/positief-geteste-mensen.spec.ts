@@ -12,10 +12,12 @@ context('Regionaal - Positief geteste mensen', () => {
   });
 
   it('Should show the correct KPI values', function (this: RegionalContext) {
+    const resultPerRegionLastValue = this.regionData.results_per_region
+      .last_value;
+
     const kpiTestInfo = {
       total_reported_increase_per_region: formatNumber(
-        this.regionData.results_per_region.last_value
-          .total_reported_increase_per_region
+        resultPerRegionLastValue.total_reported_increase_per_region
       ),
     };
 

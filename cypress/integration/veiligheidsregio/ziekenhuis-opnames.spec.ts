@@ -12,10 +12,12 @@ context('Regionaal - Ziekenhuis opnames', () => {
   });
 
   xit('Should show the correct KPI values', async function (this: RegionalContext) {
+    const resultsPerRegionLastValue = this.regionData.results_per_region
+      .last_value;
+
     const kpiTestInfo = {
       hospital_moving_avg_per_region: formatNumber(
-        this.regionData.results_per_region.last_value
-          .hospital_moving_avg_per_region
+        resultsPerRegionLastValue.hospital_moving_avg_per_region
       ),
     };
 

@@ -12,10 +12,11 @@ context('Landelijk - Ziekenhuis opnames', () => {
   });
 
   it('Should show the correct KPI values', function (this: NationalContext) {
+    const hospitalBedsLastValue = this.nationalData.hospital_beds_occupied
+      .last_value;
+
     const kpiTestInfo = {
-      covid_occupied: formatNumber(
-        this.nationalData.hospital_beds_occupied.last_value.covid_occupied
-      ),
+      covid_occupied: formatNumber(hospitalBedsLastValue.covid_occupied),
     };
 
     checkKpiValues(kpiTestInfo);
