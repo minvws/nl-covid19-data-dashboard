@@ -13,7 +13,8 @@
     "positive_tested_people",
     "deceased",
     "nursing_home",
-    "sewer"
+    "sewer",
+    "disability_care"
   ],
   "properties": {
     "last_generated": {
@@ -41,6 +42,7 @@
     },
     "positive_tested_people": {
       "type": "array",
+      "minItems": 25,
       "maxItems": 25,
       "items": {
         "$ref": "positive_tested_people.json"
@@ -48,6 +50,7 @@
     },
     "deceased": {
       "type": "array",
+      "minItems": 25,
       "maxItems": 25,
       "items": {
         "$ref": "deceased.json"
@@ -63,13 +66,23 @@
     },
     "nursing_home": {
       "type": "array",
+      "minItems": 25,
       "maxItems": 25,
       "items": {
         "$ref": "nursing_home.json"
       }
     },
+    "disability_care": {
+      "type": "array",
+      "minItems": 25,
+      "maxItems": 25,
+      "items": {
+        "$ref": "disability_care.json"
+      }
+    },
     "sewer": {
       "type": "array",
+      "minItems": 25,
       "maxItems": 25,
       "items": {
         "$ref": "sewer.json"
@@ -77,6 +90,7 @@
     },
     "behavior": {
       "type": "array",
+      "minItems": 25,
       "maxItems": 25,
       "items": {
         "$ref": "behavior.json"

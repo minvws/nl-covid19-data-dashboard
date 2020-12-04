@@ -379,6 +379,40 @@
     "title": "Information per region",
     "text": "View the most important information for your safety region."
   },
+  "gehandicaptenzorg_besmette_locaties": {
+    "datums": "",
+    "titel": "",
+    "pagina_toelichting": "",
+    "barscale_titel": "",
+    "barscale_toelichting": "",
+    "kpi_titel": "",
+    "kpi_toelichting": "",
+    "linechart_titel": "",
+    "barscale_screenreader_text": "{{value}}",
+    "chloropleth_legenda": {
+      "titel": "",
+      "geen_meldingen": ""
+    },
+    "map_titel": "",
+    "map_toelichting": "",
+    "metadata": {
+      "title": "",
+      "description": ""
+    },
+    "titel_sidebar": "",
+    "titel_kpi": "",
+    "reference": {
+      "href": "/verantwoording#gehandicaptenzorg",
+      "text": ""
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "text": "RIVM"
+      }
+    }
+  },
   "verpleeghuis_besmette_locaties": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
@@ -417,6 +451,41 @@
       }
     }
   },
+  "gehandicaptenzorg_positief_geteste_personen": {
+    "datums": "",
+    "bron": {
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+      "text": "RIVM"
+    },
+    "titel": "",
+    "barscale_titel": "",
+    "extra_uitleg": "",
+    "pagina_toelichting": "",
+    "linechart_titel": "",
+    "barscale_screenreader_text": "{{value}}",
+    "chloropleth_legenda": {
+      "titel": "",
+      "geen_meldingen": ""
+    },
+    "map_titel": "",
+    "map_toelichting": "",
+    "metadata": {
+      "title": "",
+      "description": ""
+    },
+    "titel_kpi": "",
+    "reference": {
+      "href": "/verantwoording#gehandicaptenzorg",
+      "text": ""
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "text": "RIVM"
+      }
+    }
+  },
   "verpleeghuis_positief_geteste_personen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
@@ -444,6 +513,37 @@
     "reference": {
       "href": "/verantwoording#nursing-homes",
       "text": "Read more in 'explanation of the data presented'."
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "text": "RIVM"
+      }
+    }
+  },
+  "gehandicaptenzorg_oversterfte": {
+    "datums": "{{dateOfInsertion}}",
+    "bron": {
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+      "text": "RIVM"
+    },
+    "titel": "",
+    "pagina_toelichting": "",
+    "barscale_titel": "",
+    "barscale_screenreader_text": "{{value}}",
+    "extra_uitleg": "",
+    "linechart_titel": "",
+    "map_titel": "",
+    "map_toelichting": "",
+    "metadata": {
+      "title": "",
+      "description": ""
+    },
+    "titel_kpi": "",
+    "reference": {
+      "href": "/verantwoording#gehandicaptenzorg",
+      "text": ""
     },
     "bronnen": {
       "rivm": {
@@ -639,6 +739,10 @@
       {
         "cijfer": "Nursing homes",
         "verantwoording": "The National Institute for Public Health and the Environment (RIVM) provides the Ministry of Health, Welfare and Sport with information about the COVID-19 situation in nursing homes on a daily basis via [open data](https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv). The description of this dataset can be found [here](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a). This data cannot always be clearly linked to a specific safety region. As a result, the total sum of numbers at the safety-region level may be less than the numbers at the national level. The number of deaths of nursing home residents is based on the date of death. However, when the date of death is unknown that death is not included in this statistic in the dashboard.\n\nThe method used to estimate the numbers of nursing homes and nursing home residents infected with coronavirus has been improved. Since 1 July 2020, for every person newly infected with coronavirus, the municipal health services (GGDs) have noted whether that person lives in a nursing home. Until the end of September 2020, no use was made of this data and a different method was used to calculate infection numbers, which led to a significant overestimate of the number of infected nursing homes. As of 29 September 2020, the estimates on the dashboard from 1 July 2020 onwards have been recalculated using the this data and therefore now give a much better picture of the actual number of infected nursing homes and nursing home residents.\n\nOld definition of a nursing home resident: A person was counted as a nursing home resident if, according to the central database OSIRIS: on the basis of their postcode, they can be linked to a registered nursing home or residential care home for the elderly, a setting (place where infection may have occurred) labelled as a ‘nursing home’ or something similar, or if there is any other term that links them in the database to a nursing home or residential care home for the elderly. In addition, the person:\n- must be over 70 years old\n- must not be a health worker, and\n- must not be employed.\n\nNew definition of a nursing home resident: As of 1 July 2020, every time a person tests positive for COVID-19, the GGD asks whether that person is a resident of a nursing home or residential care home for the elderly. This information is used in the new definition. A person is considered to be a nursing home resident if, according to the data in OSIRIS:\n- This person is a resident of a nursing home or a residential care home for the elderly.\n- If it is not known whether the person lives in a nursing home or residential care home for the elderly, the old definition is used.\n\nThe total number of nursing homes per safety region is provided by RIVM. Any nursing homes with the same postcode are counted as one nursing home. This is because the number of infected nursing homes is also determined by postcode. It is necessary to know the total number of nursing homes per safety region in order to calculate what percentage of nursing homes in the safety region is infected. The total number of nursing homes nationwide is the sum of the total number of nursing homes in all safety regions."
+      },
+      {
+        "cijfer": "Disability care",
+        "verantwoording": ""
       },
       {
         "cijfer": "Infectious people",
@@ -1205,6 +1309,37 @@
       }
     }
   },
+  "veiligheidsregio_gehandicaptenzorg_oversterfte": {
+    "datums": "",
+    "bron": {
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+      "text": "RIVM"
+    },
+    "titel": "",
+    "pagina_toelichting": "",
+    "barscale_titel": "",
+    "barscale_screenreader_text": "",
+    "extra_uitleg": "",
+    "linechart_titel": "",
+    "map_titel": "",
+    "map_toelichting": "",
+    "titel_sidebar": "",
+    "metadata": {
+      "title": "",
+      "description": ""
+    },
+    "reference": {
+      "href": "/verantwoording#gehandicaptenzorg",
+      "text": ""
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "text": "RIVM"
+      }
+    }
+  },
   "veiligheidsregio_verpleeghuis_oversterfte": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
@@ -1236,6 +1371,33 @@
       }
     }
   },
+  "veiligheidsregio_gehandicaptenzorg_besmette_locaties": {
+    "datums": "",
+    "titel": "",
+    "pagina_toelichting": "",
+    "barscale_titel": "",
+    "barscale_toelichting": "",
+    "kpi_titel": "",
+    "kpi_toelichting": "",
+    "linechart_titel": "",
+    "barscale_screenreader_text": "",
+    "metadata": {
+      "title": "",
+      "description": ""
+    },
+    "titel_sidebar": "",
+    "reference": {
+      "href": "/verantwoording#gehandicaptenzorg",
+      "text": ""
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "text": "RIVM"
+      }
+    }
+  },
   "veiligheidsregio_verpleeghuis_besmette_locaties": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
@@ -1258,6 +1420,37 @@
     "reference": {
       "href": "/verantwoording#nursing-homes",
       "text": "Read more in 'explanation of the data presented'."
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "text": "RIVM"
+      }
+    }
+  },
+  "veiligheidsregio_gehandicaptenzorg_positief_geteste_personen": {
+    "datums": "",
+    "titel": "",
+    "barscale_titel": "",
+    "extra_uitleg": "",
+    "pagina_toelichting": "",
+    "linechart_titel": "",
+    "barscale_screenreader_text": "",
+    "titel_sidebar": "",
+    "chloropleth_legenda": {
+      "titel": "",
+      "geen_meldingen": ""
+    },
+    "map_titel": "",
+    "map_toelichting": "",
+    "metadata": {
+      "title": "",
+      "description": ""
+    },
+    "reference": {
+      "href": "/verantwoording#gehandicaptenzorg",
+      "text": ""
     },
     "bronnen": {
       "rivm": {

@@ -3,6 +3,7 @@ import { Link } from '~/utils/link';
 import { useRouter } from 'next/router';
 import Arrow from '~/assets/arrow.svg';
 import Arts from '~/assets/arts.svg';
+import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
 import Notification from '~/assets/notification.svg';
 import ReproIcon from '~/assets/reproductiegetal.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
@@ -314,6 +315,26 @@ function NationalLayout(props: NationalLayoutProps) {
                         <span className="metric-wrapper">
                           <NursingHomeInfectedPeopleMetric
                             data={data.nursing_home.last_value}
+                          />
+                        </span>
+                      </a>
+                    </Link>
+                  </MetricMenuItem>
+                  <MetricMenuItem>
+                    <Link href="/landelijk/gehandicaptenzorg">
+                      <a
+                        className={getClassName('/landelijk/gehandicaptenzorg')}
+                      >
+                        <TitleWithIcon
+                          icon={<Gehandicaptenzorg />}
+                          title={
+                            siteText.gehandicaptenzorg_besmette_locaties
+                              .titel_sidebar
+                          }
+                        />
+                        <span className="metric-wrapper">
+                          <NursingHomeInfectedPeopleMetric
+                            data={data.disability_care.last_value}
                           />
                         </span>
                       </a>
