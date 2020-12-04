@@ -6,23 +6,14 @@ type TMetricHolder<T> = keyof Omit<
   'last_generated' | 'proto_name' | 'name' | 'code'
 >;
 
-export type TMunicipalityMetricName = TMetricHolder<
-  Omit<Municipalities, 'deceased'>
->;
+export type TMunicipalityMetricName = TMetricHolder<Municipalities>;
 
 export type TMunicipalityMetricType = ValueOf<
   Pick<Municipalities, TMunicipalityMetricName>
 >[number] &
   Partial<MunicipalityProperties>;
 
-export type TRegionMetricName = TMetricHolder<
-  Omit<Regions, 'deceased' | 'behavior'>
->;
-
-export type TRegionMetricType = ValueOf<
-  Pick<Regions, TRegionMetricName>
->[number] &
-  Partial<SafetyRegionProperties>;
+export type TRegionMetricName = TMetricHolder<Regions>;
 
 export interface SafetyRegionProperties {
   vrcode: string;

@@ -13,9 +13,8 @@ export function IntakeHospitalBarScale(props: {
 }) {
   const { data, showAxis, showValue } = props;
 
-  const lastValue = data.intake_hospital_ma.last_value;
-  const difference =
-    data.difference.intake_hospital_ma__moving_average_hospital;
+  const lastValue = data.hospital.last_value;
+  const difference = data.difference.hospital__admissions_moving_average;
 
   return (
     <Box spacing={2}>
@@ -24,7 +23,7 @@ export function IntakeHospitalBarScale(props: {
         max={100}
         signaalwaarde={40}
         screenReaderText={text.barscale_screenreader_text}
-        value={lastValue.moving_average_hospital}
+        value={lastValue.admissions_moving_average}
         id="opnames"
         rangeKey="moving_average_hospital"
         gradient={[

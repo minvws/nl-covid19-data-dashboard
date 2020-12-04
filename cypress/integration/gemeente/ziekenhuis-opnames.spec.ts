@@ -17,8 +17,7 @@ context('Gemeente - Ziekenhuis opnames', () => {
   xit('Should show the correct KPI values', function (this: MunicipalContext) {
     const kpiTestInfo = {
       moving_average_hospital: formatNumber(
-        this.municipalData.hospital_admissions.last_value
-          .moving_average_hospital
+        this.municipalData.hospital.last_value.admissions_moving_average
       ),
     };
 

@@ -22,8 +22,7 @@ const text = siteText.ziekenhuisopnames_per_dag;
 const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
   const { data } = props;
 
-  const dataHospitalIntake = data.intake_hospital_ma;
-  const dataHospitalBeds = data.hospital_beds_occupied;
+  const lastValue = data.hospital.last_value;
 
   return (
     <>
@@ -39,9 +38,8 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateInfo: dataHospitalIntake.last_value.date_of_report_unix,
-          dateOfInsertionUnix:
-            dataHospitalIntake.last_value.date_of_insertion_unix,
+          dateInfo: lastValue.date_of_report_unix,
+          dateOfInsertionUnix: lastValue.date_of_insertion_unix,
           dataSources: [text.bronnen.nice, text.bronnen.lnaz],
         }}
         reference={text.reference}
@@ -53,7 +51,7 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
           title={text.barscale_titel}
           description={text.extra_uitleg}
           metadata={{
-            date: dataHospitalIntake.last_value.date_of_report_unix,
+            date: lastValue.date_of_report_unix,
             source: text.bronnen.nice,
           }}
         >
@@ -68,13 +66,13 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
           title={text.kpi_bedbezetting.title}
           description={text.kpi_bedbezetting.description}
           metadata={{
-            date: dataHospitalBeds.last_value.date_of_report_unix,
+            date: lastValue.date_of_report_unix,
             source: text.bronnen.lnaz,
           }}
         >
           <KpiValue
             data-cy="covid_occupied"
-            absolute={dataHospitalBeds.last_value.covid_occupied}
+            absolute={lastValue.beds_occupied_covid}
           />
         </KpiTile>
       </TwoKpiSection>
@@ -82,8 +80,8 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
       <LineChartTile
         title={text.linechart_titel}
         description={text.linechart_description}
-        values={dataHospitalIntake.values.map((value: any) => ({
-          value: value.moving_average_hospital,
+        values={data.hospital.values.map((value) => ({
+          value: value.admissions_moving_average,
           date: value.date_of_report_unix,
         }))}
         signaalwaarde={40}
@@ -95,8 +93,8 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
       <LineChartTile
         title={text.chart_bedbezetting.title}
         description={text.chart_bedbezetting.description}
-        values={dataHospitalBeds.values.map((value) => ({
-          value: value.covid_occupied,
+        values={data.hospital.values.map((value) => ({
+          value: value.beds_occupied_covid,
           date: value.date_of_report_unix,
         }))}
         metadata={{
@@ -113,7 +111,7 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
           title: text.chloropleth_legenda.titel,
         }}
         metadata={{
-          date: dataHospitalIntake.last_value.date_of_report_unix,
+          date: lastValue.date_of_report_unix,
           source: text.bronnen.nice,
         }}
         showDataWarning

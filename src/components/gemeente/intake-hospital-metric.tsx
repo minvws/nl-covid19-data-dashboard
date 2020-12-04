@@ -9,9 +9,8 @@ const text = siteText.common.metricKPI;
 const title = siteText.gemeente_ziekenhuisopnames_per_dag.titel_kpi;
 
 export function IntakeHospitalMetric({ data }: { data: Municipal }) {
-  const lastValue = data.hospital_admissions.last_value;
-  const difference =
-    data.difference.hospital_admissions__moving_average_hospital;
+  const lastValue = data.hospital.last_value;
+  const difference = data.difference.hospital__admissions_moving_average;
 
   const description = replaceVariablesInText(text.dateOfReport, {
     dateOfReport: formatDateFromSeconds(
@@ -23,7 +22,7 @@ export function IntakeHospitalMetric({ data }: { data: Municipal }) {
   return (
     <MetricKPI
       title={title}
-      absolute={formatNumber(lastValue.moving_average_hospital)}
+      absolute={formatNumber(lastValue.admissions_moving_average)}
       description={description}
       difference={difference}
     />

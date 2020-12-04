@@ -156,8 +156,8 @@ export const regionThresholds = {
   positive_tested_people: {
     positive_tested_people: positiveTestedThresholds,
   },
-  hospital_admissions: {
-    hospital_admissions: hospitalAdmissionsThresholds,
+  hospital: {
+    admissions_moving_average: hospitalAdmissionsThresholds,
   },
   escalation_levels: {
     escalation_level: escalationThresholds,

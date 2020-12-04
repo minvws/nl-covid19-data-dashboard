@@ -55,5 +55,5 @@ export const municipalThresholds = {
   positive_tested_people: {
     positive_tested_people: positiveTestedThresholds,
   },
-  hospital_admissions: { hospital_admissions: hospitalAdmissionsThresholds },
+  hospital: { admissions_moving_average: hospitalAdmissionsThresholds },
 } as const;
