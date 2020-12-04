@@ -12,7 +12,7 @@ import { Text } from '~/components-styled/typography';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
-import { createInfectedLocationsRegionalTooltip } from '~/components/choropleth/tooltips/region/create-infected-locations-regional-tooltip';
+import { createDisablityInfectedLocationsRegionalTooltip } from '~/components/choropleth/tooltips/region/create-disability-infected-locations-regional-tooltip';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
@@ -147,8 +147,10 @@ const DisabilityCare: FCWithLayout<NationalPageProps> = (props) => {
       >
         <SafetyRegionChoropleth
           metricName="disability_care"
-          metricValueName="infected_locations_percentage"
-          tooltipContent={createInfectedLocationsRegionalTooltip(router)}
+          metricProperty="infected_locations_percentage"
+          tooltipContent={createDisablityInfectedLocationsRegionalTooltip(
+            router
+          )}
           onSelect={createSelectRegionHandler(router, 'gehandicaptenzorg')}
         />
       </ChoroplethTile>
