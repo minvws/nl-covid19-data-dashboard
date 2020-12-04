@@ -1,5 +1,5 @@
 import { GridRows } from '@visx/grid';
-import { curveCatmullRom } from '@visx/curve';
+import { curveMonotoneX } from '@visx/curve';
 import { ParentSize } from '@visx/responsive';
 import { Threshold } from '@visx/threshold';
 import { scaleTime, scaleLinear } from '@visx/scale';
@@ -14,6 +14,7 @@ import {
   SharedAxisProps,
 } from '@visx/axis';
 import { Group } from '@visx/group';
+import { LinePath } from '@visx/shape';
 
 export function MortalityMonitor({
   values,
@@ -35,11 +36,17 @@ export function MortalityMonitor({
   );
 }
 
-const date = (d: NationalDeceasedCbsValue) => d.date_of_report_unix * 1000;
-const expectedMin = (d: NationalDeceasedCbsValue) => d.expected_min;
-const expectedMax = (d: NationalDeceasedCbsValue) => d.expected_max;
-const expected = (d: NationalDeceasedCbsValue) => d.expected;
-const registered = (d: NationalDeceasedCbsValue) => d.registered;
+const getDate = (d: NationalDeceasedCbsValue) => d.date_of_report_unix * 1000;
+const getExpectedMin = (d: NationalDeceasedCbsValue) => d.expected_min;
+const getExpectedMax = (d: NationalDeceasedCbsValue) => d.expected_max;
+const getExpected = (d: NationalDeceasedCbsValue) => d.expected;
+const getRegistered = (d: NationalDeceasedCbsValue) => d.registered;
+const getAllYValues = (d: NationalDeceasedCbsValue) => [
+  getExpected(d),
+  getExpectedMin(d),
+  getExpectedMax(d),
+  getRegistered(d),
+];
 
 const margin = { top: 40, right: 30, bottom: 50, left: 40 };
 
@@ -53,32 +60,20 @@ function MortalityMonitorChart({
   height: number;
 }) {
   const timeScale = scaleTime<number>({
-    domain: [Math.min(...values.map(date)), Math.max(...values.map(date))],
+    domain: [
+      Math.min(...values.map(getDate)),
+      Math.max(...values.map(getDate)),
+    ],
   });
 
   const mortalityScale = scaleLinear<number>({
     domain: [
-      Math.min(
-        ...values.flatMap((d) => [
-          expected(d),
-          expectedMin(d),
-          expectedMax(d),
-          registered(d),
-        ])
-      ),
-      Math.max(
-        ...values.flatMap((d) => [
-          expected(d),
-          expectedMin(d),
-          expectedMax(d),
-          registered(d),
-        ])
-      ),
+      Math.min(...values.flatMap(getAllYValues)),
+      Math.max(...values.flatMap(getAllYValues)),
     ],
     nice: true,
   });
 
-  // bounds
   const xMax = width - margin.left - margin.right;
   const yMax = height - margin.top - margin.bottom;
 
@@ -114,22 +109,36 @@ function MortalityMonitorChart({
         />
 
         <Threshold
-          id={`${Math.random()}`}
+          id="margin"
           data={values}
-          x={(d) => timeScale(date(d)) ?? 0}
-          y0={(d) => mortalityScale(expectedMin(d))}
-          y1={(d) => mortalityScale(expectedMax(d))}
+          x={(d) => timeScale(getDate(d)) ?? 0}
+          y0={(d) => mortalityScale(getExpectedMin(d))}
+          y1={(d) => mortalityScale(getExpectedMax(d))}
           clipAboveTo={0}
           clipBelowTo={yMax}
-          curve={curveCatmullRom}
-          belowAreaProps={{
-            fill: 'green',
-            fillOpacity: 0.4,
-          }}
-          aboveAreaProps={{
-            fill: 'green',
-            fillOpacity: 0.4,
-          }}
+          curve={curveMonotoneX}
+          belowAreaProps={{ fill: '#D0EDFF' }}
+          aboveAreaProps={{ fill: '#D0EDFF' }}
+        />
+
+        <LinePath
+          curve={curveMonotoneX}
+          data={values}
+          x={(d) => timeScale(getDate(d))}
+          y={(d) => mortalityScale(getExpected(d)) ?? 0}
+          stroke="#5BADDB"
+          strokeWidth="1.5"
+          shapeRendering="geometricPrecision"
+        />
+
+        <LinePath
+          curve={curveMonotoneX}
+          data={values}
+          x={(d) => timeScale(getDate(d))}
+          y={(d) => mortalityScale(getRegistered(d)) ?? 0}
+          stroke="#007BC7"
+          strokeWidth="1.5"
+          shapeRendering="geometricPrecision"
         />
       </Group>
     </svg>
