@@ -1,7 +1,6 @@
-import { ReactNode, useRef, useState } from 'react';
-import { MouseEvent } from 'react';
-import { Box } from '~/components-styled/base';
 import css from '@styled-system/css';
+import { MouseEvent, ReactNode, useRef, useState } from 'react';
+import { Box } from '~/components-styled/base';
 
 export interface TooltipCoordinates {
   left: number;

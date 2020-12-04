@@ -1,18 +1,18 @@
 import { ParentSize } from '@visx/responsive';
 import { useMemo, useState } from 'react';
 import { Box } from '~/components-styled/base';
+import { Tooltip, useTooltip } from '~/components-styled/tooltip';
 import {
   NationalInfectedAgeGroups,
   NationalInfectedAgeGroupsValue,
 } from '~/types/data';
+import { useBreakpoints } from '~/utils/useBreakpoints';
 import {
   AgeDemographicChart,
   AGE_GROUP_TOOLTIP_WIDTH,
 } from './age-demographic-chart';
-import { useBreakpoints } from '~/utils/useBreakpoints';
 import { getAgeDemographicCoordinates } from './age-demographic-coordinates';
-import { AgeDemographicTooltipContent } from './age-demographic-tooltip';
-import { Tooltip, useTooltip } from '~/components-styled/tooltip';
+import { AgeDemographicTooltipContent } from './age-demographic-tooltip-content';
 
 interface AgeDemographicProps {
   data: NationalInfectedAgeGroups;

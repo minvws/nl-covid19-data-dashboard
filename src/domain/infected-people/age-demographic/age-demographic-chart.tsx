@@ -4,11 +4,11 @@ import { GridColumns } from '@visx/grid';
 import { Group } from '@visx/group';
 import { Bar } from '@visx/shape';
 import { Text } from '@visx/text';
+import { MouseEvent } from 'react';
+import siteText from '~/locale/index';
+import { colors } from '~/style/theme';
 import { NationalInfectedAgeGroupsValue } from '~/types/data.d';
 import { formatPercentage } from '~/utils/formatNumber';
-import siteText from '~/locale/index';
-import { MouseEvent } from 'react';
-import { colors } from '~/style/theme';
 import { AgeDemographicCoordinates } from './age-demographic-coordinates';
 
 export const AGE_GROUP_TOOLTIP_WIDTH = 340;

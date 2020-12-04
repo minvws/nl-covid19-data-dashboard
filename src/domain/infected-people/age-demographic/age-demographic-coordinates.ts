@@ -1,13 +1,16 @@
-import { MouseEvent } from 'react';
 import { localPoint } from '@visx/event';
 import { scaleBand, scaleLinear, ScaleTypeToD3Scale } from '@visx/scale';
+import { ScaleBand } from 'd3-scale';
+import { MouseEvent } from 'react';
+import {
+  GetTooltipCoordinates,
+  TooltipCoordinates,
+} from '~/components-styled/tooltip';
 import {
   NationalInfectedAgeGroups,
   NationalInfectedAgeGroupsValue,
 } from '~/types/data';
 import { AGE_GROUP_TOOLTIP_WIDTH } from './age-demographic-chart';
-import { GetTooltipCoordinates, TooltipCoordinates } from './tooltip';
-import { ScaleBand } from 'd3-scale';
 
 export interface AgeDemographicCoordinates {
   width: number;
