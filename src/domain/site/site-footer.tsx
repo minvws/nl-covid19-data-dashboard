@@ -127,6 +127,9 @@ const linkStyle = css({
   '&:hover': {
     textDecoration: 'underline',
   },
+  '&:focus': {
+    outline: '2px dotted white',
+  },
 });
 
 const FooterLink = styled.a(linkStyle);

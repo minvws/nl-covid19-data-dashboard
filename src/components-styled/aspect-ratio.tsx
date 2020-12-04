@@ -1,5 +1,5 @@
 import css from '@styled-system/css';
-import React from 'react';
+import { ReactNode } from 'react';
 import styled from 'styled-components';
 
 interface AspectRatioProps {
@@ -7,7 +7,7 @@ interface AspectRatioProps {
    * ratio is expressed as width / height
    */
   ratio: number;
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export function AspectRatio({ ratio, children }: AspectRatioProps) {

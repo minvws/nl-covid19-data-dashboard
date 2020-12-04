@@ -27,16 +27,17 @@ const SkipLinkMenu = styled.nav(
 const SkipLink = styled.a(
   css({
     position: 'absolute',
-    fontSize: '1.2em',
+    fontSize: 2,
+    fontWeight: 'bold',
     width: 'auto',
-    minHeight: '44px',
-    padding: '0.75rem 1rem',
+    px: 4,
+    py: 3,
     cursor: 'pointer',
     color: 'white',
-    backgroundColor: 'blue',
+    bg: 'blue',
     textDecoration: 'none',
-    top: '-100vh',
-    left: '-100vw',
+    top: -9999,
+    left: -9999,
 
     '&:focus': {
       position: 'absolute',
