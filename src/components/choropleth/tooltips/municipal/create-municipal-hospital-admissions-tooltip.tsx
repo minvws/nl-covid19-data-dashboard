@@ -3,10 +3,13 @@ import { ReactNode } from 'react';
 import { MunicipalityProperties } from '~/components/choropleth/shared';
 import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
+import { MunicipalitiesHospitalAdmissions } from '~/types/data';
 
 export const createMunicipalHospitalAdmissionsTooltip = (
   router: NextRouter
-) => (context: MunicipalityProperties & { value?: number }): ReactNode => {
+) => (
+  context: MunicipalityProperties & MunicipalitiesHospitalAdmissions
+): ReactNode => {
   const handler = createSelectMunicipalHandler(router);
 
   const onSelect = (event: any) => {
@@ -15,10 +18,8 @@ export const createMunicipalHospitalAdmissionsTooltip = (
   };
 
   return (
-    context && (
-      <TooltipContent title={context.gemnaam} onSelect={onSelect}>
-        <strong>{context.value !== undefined ? context.value : '-'}</strong>
-      </TooltipContent>
-    )
+    <TooltipContent title={context.gemnaam} onSelect={onSelect}>
+      <strong>{context.hospital_admissions}</strong>
+    </TooltipContent>
   );
 };

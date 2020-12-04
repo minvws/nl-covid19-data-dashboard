@@ -154,19 +154,22 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
         description={text.map_toelichting}
         legend={{
           title: siteText.positief_geteste_personen.chloropleth_legenda.titel,
-          thresholds: regionThresholds.positive_tested_people,
+          thresholds:
+            regionThresholds.positive_tested_people.positive_tested_people,
         }}
       >
         <MunicipalityChoropleth
           selected={selectedMunicipalCode}
           highlightSelection={false}
           metricName="positive_tested_people"
+          metricProperty="positive_tested_people"
           tooltipContent={createPositiveTestedPeopleMunicipalTooltip(router)}
           onSelect={createSelectMunicipalHandler(router)}
         />
       </ChoroplethTile>
 
       <ContentHeader
+        id="ggd"
         title={replaceVariablesInText(ggdText.titel, {
           safetyRegion: safetyRegionName,
         })}

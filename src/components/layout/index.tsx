@@ -1,18 +1,10 @@
-import React from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
-
-import text from '~/locale/index';
-import { ILastGeneratedData } from '~/static-props/last-generated-data';
-import styles from './layout.module.scss';
-
-import { useMediaQuery } from '~/utils/useMediaQuery';
-import { formatDateFromSeconds } from '~/utils/formatDate';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { getLocale } from '~/utils/getLocale';
-
+import React from 'react';
 import { SEOHead } from '~/components/seoHead';
-import { MaxWidth } from '~/components/maxWidth';
+import { SiteFooter } from '~/domain/site/site-footer';
+import { SiteHeader } from '~/domain/site/site-header';
+import { SkipLinks } from '~/domain/site/skip-links';
+import { ILastGeneratedData } from '~/static-props/last-generated-data';
 
 export interface LayoutProps {
   url?: string;
@@ -60,16 +52,8 @@ function Layout(
 
   const router = useRouter();
 
-  const locale = getLocale();
-  const showSmallLogo = useMediaQuery('(max-width: 480px)', true);
-
-  const dateTime = formatDateFromSeconds(Number(lastGenerated), 'iso');
-  const dateOfInsertion = lastGenerated
-    ? formatDateFromSeconds(Number(lastGenerated), 'long')
-    : undefined;
-
   return (
-    <>
+    <div key={router.asPath}>
       <SEOHead
         title={title}
         description={description}
@@ -78,216 +62,13 @@ function Layout(
         url={url}
       />
 
-      <div className={styles.skiplinks}>
-        <a href="#content">{text.skiplinks.inhoud}</a>
-        <a href="#main-navigation">{text.skiplinks.nav}</a>
-      </div>
+      <SkipLinks />
 
-      <header className={styles.header}>
-        <div className={styles.logoWrapper}>
-          <img
-            className={styles.logo}
-            src={
-              showSmallLogo
-                ? '/images/logo-ro-small.svg'
-                : '/images/logo-ro.svg'
-            }
-            alt={text.header.logo_alt}
-            // loading="lazy"
-            width={showSmallLogo ? 40 : 314}
-            height={showSmallLogo ? 76 : 125}
-          />
-        </div>
+      <SiteHeader />
 
-        <MaxWidth>
-          <div className={styles.languageSwitcher}>
-            <a
-              href={`https://coronadashboard.rijksoverheid.nl${router.asPath}`}
-              lang="nl"
-              hrefLang="nl"
-              className={locale === 'nl' ? styles.languageActive : undefined}
-              title="Website in het Nederlands"
-            >
-              NL
-            </a>
-            |
-            <a
-              href={`https://coronadashboard.government.nl${router.asPath}`}
-              lang="en-GB"
-              hrefLang="en-GB"
-              className={locale === 'en-GB' ? styles.languageActive : undefined}
-              title="Website in English"
-            >
-              EN
-            </a>
-          </div>
-          <h1>{text.header.title}</h1>
-          <p>
-            {text.header.text}{' '}
-            <Link href="/over">
-              <a className={styles.readMoreLink}>{text.header.link}</a>
-            </Link>
-          </p>
-        </MaxWidth>
+      <div>{children}</div>
 
-        <nav
-          /** re-mount when route changes in order to blur anchors */
-          key={router.route}
-          id="main-navigation"
-          className={styles.nav}
-        >
-          <MaxWidth>
-            <ul className={styles.navList}>
-              <li>
-                <Link href="/">
-                  <a
-                    className={
-                      router.pathname.indexOf('/landelijk') === 0 ||
-                      router.pathname === '/'
-                        ? styles.link + ' ' + styles.active
-                        : styles.link
-                    }
-                  >
-                    {text.nav.links.index}
-                  </a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/veiligheidsregio">
-                  <a
-                    className={
-                      router.pathname.indexOf('/veiligheidsregio') === 0
-                        ? styles.link + ' ' + styles.active
-                        : styles.link
-                    }
-                  >
-                    {text.nav.links.veiligheidsregio}
-                  </a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/gemeente">
-                  <a
-                    className={
-                      router.pathname.indexOf('/gemeente') === 0
-                        ? styles.link + ' ' + styles.active
-                        : styles.link
-                    }
-                  >
-                    {text.nav.links.gemeente}
-                  </a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/over">
-                  <a
-                    className={
-                      router.pathname == '/over'
-                        ? styles.link + ' ' + styles.active
-                        : styles.link
-                    }
-                  >
-                    {text.nav.links.over}
-                  </a>
-                </Link>
-              </li>
-            </ul>
-          </MaxWidth>
-        </nav>
-      </header>
-
-      <main id="content">{children}</main>
-
-      <footer
-        /** re-mount when route changes in order to blur anchors */
-        key={router.route}
-      >
-        <div className={styles.footer}>
-          <MaxWidth>
-            <div className={styles.grid}>
-              <div className={styles.footerColumn}>
-                <h3>{text.nav.title}</h3>
-                <nav>
-                  <ul className={styles.footerList}>
-                    <li>
-                      <Link href="/">
-                        <a className={styles.footerLink}>
-                          {text.nav.links.index}
-                        </a>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/veiligheidsregio">
-                        <a className={styles.footerLink}>
-                          {text.nav.links.veiligheidsregio}
-                        </a>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/gemeente">
-                        <a className={styles.footerLink}>
-                          {text.nav.links.gemeente}
-                        </a>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/over">
-                        <a className={styles.footerLink}>
-                          {text.nav.links.over}
-                        </a>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/veelgestelde-vragen">
-                        <a className={styles.footerLink}>
-                          {text.nav.links.veelgestelde_vragen}
-                        </a>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/over-risiconiveaus">
-                        <a className={styles.footerLink}>
-                          {text.nav.links.over_risiconiveaus}
-                        </a>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/verantwoording">
-                        <a className={styles.footerLink}>
-                          {text.nav.links.verantwoording}
-                        </a>
-                      </Link>
-                    </li>
-                    <li>
-                      <a
-                        href={text.nav.links.meer_href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={styles.footerLink}
-                      >
-                        {text.nav.links.meer}
-                      </a>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
-              <div className={styles.footerColumn}>
-                <h3>{text.laatst_bijgewerkt.title}</h3>
-                <p
-                  dangerouslySetInnerHTML={{
-                    __html: replaceVariablesInText(
-                      text.laatst_bijgewerkt.message,
-                      {
-                        dateOfInsertion: `<time datetime=${dateTime}>${dateOfInsertion}</time>`,
-                      }
-                    ),
-                  }}
-                />
-              </div>
-            </div>
-          </MaxWidth>
-        </div>
-      </footer>
-    </>
+      <SiteFooter lastGenerated={lastGenerated} />
+    </div>
   );
 }
