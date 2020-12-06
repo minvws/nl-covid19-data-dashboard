@@ -22,7 +22,6 @@ import { NursingHomeInfectedPeopleMetric } from '~/components/common/nursing-hom
 import { InfectiousPeopleMetric } from '~/components/landelijk/infectious-people-metric';
 import { IntakeIntensiveCareBarscale } from '~/components/landelijk/intake-intensive-care-barscale';
 import { IntakeIntensiveCareMetric } from '~/components/landelijk/intake-intensive-care-metric';
-import { PositiveTestedPeopleBarScale } from '~/components/landelijk/positive-tested-people-barscale';
 import { ReproductionIndexBarScale } from '~/components/landelijk/reproduction-index-barscale';
 import { ReproductionIndexMetric } from '~/components/landelijk/reproduction-index-metric';
 import { SewerWaterMetric } from '~/components/landelijk/sewer-water-metric';
@@ -32,7 +31,6 @@ import siteText from '~/locale/index';
 import { NationalPageProps } from '~/static-props/nl-data';
 import theme from '~/style/theme';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-import { PositiveTestedPeopleMetric } from '../landelijk/positive-tested-people-metric';
 
 export function getNationalLayout(
   page: React.ReactNode,
@@ -179,14 +177,19 @@ function NationalLayout(props: NationalLayoutProps) {
                             siteText.positief_geteste_personen.titel_sidebar
                           }
                         />
-                        <span className="metric-wrapper">
-                          <PositiveTestedPeopleMetric data={data} />
-                          <PositiveTestedPeopleBarScale
-                            data={data}
-                            showAxis={false}
-                            showValue={false}
-                          />
-                        </span>
+                        <SidebarMetric
+                          scope="nl"
+                          data={data}
+                          metricName="infected_people_total"
+                          metricProperty="infected_daily_total"
+                          altBarScaleMetric={{
+                            metricName: 'infected_people_delta_normalized',
+                            metricProperty: 'infected_daily_increase',
+                          }}
+                          localeTextKey="positief_geteste_personen"
+                          differenceKey="infected_people_total__infected_daily_total"
+                          showBarScale={true}
+                        />
                       </a>
                     </Link>
                   </MetricMenuItem>

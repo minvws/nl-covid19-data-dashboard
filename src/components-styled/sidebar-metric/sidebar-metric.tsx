@@ -6,19 +6,34 @@ import { SidebarBarScale } from './sidebar-barscale';
 import { SidebarKpiValue } from './sidebar-kpi-value';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { formatDateFromSeconds } from '~/utils/formatDate';
-import siteText from '~/locale/index';
-import { getDataConfig, DataScope } from './data-config';
+import siteText, { TALLLanguages } from '~/locale/index';
+import { getDataConfig, DataScope } from '~/metric-config';
+import { National, NationalDifference } from '~/types/data';
+import {
+  TMunicipalityMetricName,
+  TRegionMetricName,
+} from '~/components/choropleth/shared';
 
 interface SidebarMetricProps<T> {
   scope: DataScope;
   data: T;
-  metricName: string;
+  metricName: keyof National | TMunicipalityMetricName | TRegionMetricName;
   metricProperty: string;
-  localeTextKey: string;
-  differenceKey?: string;
+  localeTextKey: keyof TALLLanguages;
+  differenceKey?: keyof NationalDifference;
   showBarScale?: boolean;
   isWeeklyData?: boolean;
   annotationKey?: string;
+
+  /**
+   * Sometimes the barscale is not showing the same metric. Also since data
+   * is not properly unified yet, the bar scale can point to both a different
+   * metric name and metric property.
+   */
+  altBarScaleMetric?: {
+    metricName: keyof National | TMunicipalityMetricName | TRegionMetricName;
+    metricProperty: string;
+  };
 }
 
 export function SidebarMetric<T>({
@@ -30,6 +45,7 @@ export function SidebarMetric<T>({
   differenceKey,
   showBarScale,
   annotationKey,
+  altBarScaleMetric,
 }: SidebarMetricProps<T>) {
   const lastValue = get(data, [metricName, 'last_value']);
   const propertyValue = lastValue && lastValue[metricProperty];
@@ -102,10 +118,17 @@ export function SidebarMetric<T>({
       />
       {showBarScale && (
         <SidebarBarScale
+          data={data}
+          scope={scope}
           localeTextKey={localeTextKey}
-          value={propertyValue}
-          config={config.barScale}
-          uniqueId={[scope, metricName, metricProperty].join(':')}
+          metricName={
+            altBarScaleMetric ? altBarScaleMetric.metricName : metricName
+          }
+          metricProperty={
+            altBarScaleMetric
+              ? altBarScaleMetric.metricProperty
+              : metricProperty
+          }
         />
       )}
     </Box>

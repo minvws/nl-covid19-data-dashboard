@@ -1,30 +1,54 @@
 import { get } from 'lodash';
+import { isDefined } from 'ts-is-present';
 import { BarScale } from '~/components/barScale';
-import siteText from '~/locale/index';
+import {
+  TMunicipalityMetricName,
+  TRegionMetricName,
+} from '~/components/choropleth/shared';
+import siteText, { TALLLanguages } from '~/locale/index';
+import { National } from '~/types/data';
 import { assert } from '~/utils/assert';
+import { DataScope, getDataBarScaleConfig } from '../../metric-config';
 import { Box } from '../base';
-import { BarScaleConfig } from './data-config';
 
-interface SidebarBarScaleProps {
-  config: BarScaleConfig;
-  value: number;
-  localeTextKey: string;
+interface SidebarBarScaleProps<T> {
+  scope: DataScope;
+  data: T;
+  localeTextKey: keyof TALLLanguages;
+  metricName: keyof National | TMunicipalityMetricName | TRegionMetricName;
+  metricProperty: string;
+}
+
+export function SidebarBarScale<T>({
+  data,
+  scope,
+  metricName,
+  metricProperty,
+  localeTextKey,
+}: SidebarBarScaleProps<T>) {
+  const text = siteText[localeTextKey] as Record<string, string>;
+  const lastValue = get(data, [metricName, 'last_value']);
+  const propertyValue = lastValue && lastValue[metricProperty];
+
   /**
    * A unique id is required for path rendering and should be constant between
    * server and client side rendering
    */
-  uniqueId: string;
-}
+  const uniqueId = ['sidebar', scope, metricName, metricProperty].join(':');
 
-export function SidebarBarScale({
-  value,
-  config,
-  localeTextKey,
-  uniqueId,
-}: SidebarBarScaleProps) {
-  const text = get(siteText, localeTextKey);
+  assert(
+    isDefined(propertyValue),
+    `Missing value for metric property ${[
+      metricName,
+      'last_value',
+      metricProperty,
+    ]
+      .filter(isDefined)
+      .join(':')}`
+  );
 
-  assert(text, `No text found for locale key ${localeTextKey}`);
+  const config = getDataBarScaleConfig(scope, metricName, metricProperty);
+
   assert(
     text.barscale_screenreader_text,
     `Missing screen reader text at ${localeTextKey}.barscale_screenreader_text`
@@ -43,7 +67,7 @@ export function SidebarBarScale({
         max={config.max}
         signaalwaarde={config.signaalwaarde}
         screenReaderText={text.barscale_screenreader_text}
-        value={value}
+        value={propertyValue}
         id={uniqueId}
         rangeKey={config.rangesKey}
         gradient={config.gradient}
