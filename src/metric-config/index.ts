@@ -55,6 +55,12 @@ export function getDataBarScaleConfig(
 ) {
   const config = get(metricConfig, [scope, metricName, metricProperty]);
 
+  /**
+   * @TODO The bar scale config should exist, but if it is common that the vr/gm
+   * scales are the same as nl, then we can do a fallback here when the
+   * configuration can't be found. Not sure yet if that is a good idea of asking
+   * for trouble.
+   */
   assert(
     config.barScale,
     `Missing configuration for bar scale metric ${[
