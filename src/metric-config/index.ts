@@ -2,6 +2,8 @@ import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { assert } from '~/utils/assert';
 import { nl } from './nl';
+import { vr } from './vr';
+import { gm } from './gm';
 import { BarScaleConfig, MetricConfig } from './types';
 
 /**
@@ -25,8 +27,8 @@ const metricConfig: Record<
   Record<string, Record<string, MetricConfig>>
 > = {
   nl,
-  vr: {},
-  gm: {},
+  vr,
+  gm,
 };
 
 export function getDataConfig(
