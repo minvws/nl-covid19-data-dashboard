@@ -1,8 +1,9 @@
 import { MetricConfig } from './types';
+import { colors } from '~/style/theme';
 
-const GREEN = '#69c253';
-const YELLOW = '#D3A500';
-const RED = '#f35065';
+const GREEN = colors.data.gradient.green;
+const YELLOW = colors.data.gradient.yellow;
+const RED = colors.data.gradient.green;
 
 /**
  * Maybe we can make this stricter, but if I use keyof National now, it
