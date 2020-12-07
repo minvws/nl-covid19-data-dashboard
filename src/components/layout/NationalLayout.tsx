@@ -178,8 +178,8 @@ function NationalLayout(props: NationalLayoutProps) {
                           }
                         />
                         <SidebarMetric
-                          scope="nl"
                           data={data}
+                          scope="nl"
                           metricName="infected_people_total"
                           metricProperty="infected_daily_total"
                           altBarScaleMetric={{
@@ -268,8 +268,8 @@ function NationalLayout(props: NationalLayoutProps) {
                          * properties like title_sidebar.
                          */}
                         <SidebarMetric
-                          scope="nl"
                           data={data}
+                          scope="nl"
                           metricName="intake_hospital_ma"
                           metricProperty="moving_average_hospital"
                           localeTextKey="ziekenhuisopnames_per_dag"

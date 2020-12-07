@@ -16,8 +16,6 @@ import { TitleWithIcon } from '~/components-styled/aside/title-with-icon';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
 import { ComboBox } from '~/components/comboBox';
 import { getLayout as getSiteLayout } from '~/components/layout';
-import { PositivelyTestedPeopleBarScale } from '~/components/veiligheidsregio/positive-tested-people-barscale';
-import { PositivelyTestedPeopleMetric } from '~/components/veiligheidsregio/positive-tested-people-metric';
 import { SewerWaterMetric } from '~/components/veiligheidsregio/sewer-water-metric';
 import safetyRegions from '~/data/index';
 import siteText from '~/locale/index';
@@ -168,18 +166,10 @@ function SafetyRegionLayout(
                                 .titel_sidebar
                             }
                           />
-                          <span className="metric-wrapper">
-                            <PositivelyTestedPeopleMetric data={data} />
-                            <PositivelyTestedPeopleBarScale
-                              data={data.results_per_region}
-                              showAxis={false}
-                              showValue={false}
-                            />
-                          </span>
 
                           <SidebarMetric
-                            scope="vr"
                             data={data}
+                            scope="vr"
                             metricName="results_per_region"
                             metricProperty="total_reported_increase_per_region"
                             altBarScaleMetric={{
