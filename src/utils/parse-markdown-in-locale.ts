@@ -13,7 +13,6 @@ const MARKDOWN_KEYS = [
   'over_beschrijving.text',
   'over_veelgestelde_vragen.vragen[].antwoord',
   'verantwoording.cijfers[].verantwoording',
-  'sterfte.section_deceased_cbs.cbs_message.message',
 ];
 
 export function parseMarkdownInLocale(text: TALLLanguages) {

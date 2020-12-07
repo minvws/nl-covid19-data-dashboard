@@ -1,12 +1,17 @@
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import { NationalDeceasedCbsValue } from '~/types/data';
+import {
+  NationalDeceasedCbsValue,
+  RegionalDeceasedCbsValue,
+} from '~/types/data';
 import { formatDateFromMilliseconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 
 if (typeof Highcharts === 'object') {
   require('highcharts/highcharts-more')(Highcharts);
 }
+
+type CbsValue = NationalDeceasedCbsValue | RegionalDeceasedCbsValue;
 
 type SeriesConfig = Record<
   'registered' | 'expected' | 'margin',
@@ -17,21 +22,18 @@ type SeriesConfig = Record<
 >;
 
 interface DeceasedMonitorProps {
-  values: NationalDeceasedCbsValue[];
+  values: CbsValue[];
   config: SeriesConfig;
 }
 
-export default function DeceasedMonitor(props: DeceasedMonitorProps) {
+export default function DeceasedMonitorChart(props: DeceasedMonitorProps) {
   const { config, values } = props;
   const chartOptions = useHighchartOptions(values, config);
 
   return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;
 }
 
-function useHighchartOptions(
-  values: NationalDeceasedCbsValue[],
-  config: SeriesConfig
-) {
+function useHighchartOptions(values: CbsValue[], config: SeriesConfig) {
   const allYValues = values.flatMap((x) => [
     x.registered,
     x.expected,
