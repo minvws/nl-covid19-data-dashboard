@@ -197,7 +197,7 @@ const NursingHomeCare: FCWithLayout<ISafetyRegionData> = (props) => {
 
 NursingHomeCare.getLayout = getSafetyRegionLayout();
 
-export const getStaticProps = getSafetyRegionData();
+export const getStaticProps = getSafetyRegionData;
 export const getStaticPaths = getSafetyRegionPaths();
 
 export default NursingHomeCare;

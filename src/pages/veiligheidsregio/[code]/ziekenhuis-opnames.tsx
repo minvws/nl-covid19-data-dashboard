@@ -125,7 +125,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
 
 IntakeHospital.getLayout = getSafetyRegionLayout();
 
-export const getStaticProps = getSafetyRegionData();
+export const getStaticProps = getSafetyRegionData;
 export const getStaticPaths = getSafetyRegionPaths();
 
 export default IntakeHospital;

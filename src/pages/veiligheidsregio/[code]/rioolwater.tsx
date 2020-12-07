@@ -195,7 +195,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
 
 SewerWater.getLayout = getSafetyRegionLayout();
 
-export const getStaticProps = getSafetyRegionData();
+export const getStaticProps = getSafetyRegionData;
 export const getStaticPaths = getSafetyRegionPaths();
 
 export default SewerWater;

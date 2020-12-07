@@ -12,7 +12,7 @@ const SafetyRegion: FCWithLayout<ISafetyRegionData> = () => {
 
 SafetyRegion.getLayout = getSafetyRegionLayout();
 
-export const getStaticProps = getSafetyRegionData();
+export const getStaticProps = getSafetyRegionData;
 export const getStaticPaths = getSafetyRegionPaths();
 
 export default SafetyRegion;
