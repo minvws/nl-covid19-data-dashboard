@@ -1,13 +1,13 @@
 import { useCallback, memo } from 'react';
-import { Group } from '@visx/group';
-import { AreaClosed, LinePath, Bar } from '@visx/shape';
-import { AxisLeft, AxisBottom } from '@visx/axis';
-import { localPoint } from '@visx/event';
-import { bisector } from 'd3-array';
-import { colors } from '~/style/theme';
-import { GridRows } from '@visx/grid';
-
 import { scaleLinear, scaleTime } from 'd3-scale';
+import { bisector } from 'd3-array';
+import { AxisLeft, AxisBottom } from '@visx/axis';
+import { GridRows } from '@visx/grid';
+import { Group } from '@visx/group';
+import { Line } from '@visx/shape';
+
+import { colors } from '~/style/theme';
+import Trends from './trends';
 
 const defaultMargin = { top: 10, right: 10, bottom: 30, left: 30 };
 const defaultColors = {
@@ -15,10 +15,10 @@ const defaultColors = {
   axis: '#C4C4C4',
 };
 
-export type ThresholdProps = {
+export type Props = {
+  benchmark: any;
   isHovered: boolean;
   trend: any[];
-  getValue: any;
   handleHover: any;
   xDomain: any[];
   yDomain: any[];
@@ -29,7 +29,6 @@ export type ThresholdProps = {
 
 function Chart({
   trend,
-  getValue,
   width,
   height = 250,
   margin = defaultMargin,
@@ -37,7 +36,8 @@ function Chart({
   yDomain,
   handleHover,
   isHovered,
-}: ThresholdProps) {
+  benchmark,
+}: Props) {
   const bounded = {
     width: width - margin.left - margin.right,
     height: height - margin.top - margin.bottom,
@@ -59,22 +59,6 @@ function Chart({
     [x, margin]
   );
 
-  const onPointerMove = useCallback(
-    (
-      event: React.TouchEvent<SVGRectElement> | React.MouseEvent<SVGRectElement>
-    ) => {
-      if (event.type === 'mouseleave') {
-        handleHover(event);
-      } else {
-        const { x } = localPoint(event) || { x: 0 };
-        const pointData = bisect(trend, x);
-
-        handleHover(event, pointData, x, y(getValue(pointData)));
-      }
-    },
-    [handleHover, y, trend, getValue, bisect]
-  );
-
   return (
     <svg width={width} height={height}>
       <Group left={margin.left} top={margin.top}>
@@ -87,7 +71,7 @@ function Chart({
         <AxisBottom
           top={bounded.height}
           scale={x}
-          numTicks={width > 520 ? 10 : 5} // improve?
+          numTicks={2} // TODO: fix
           stroke={defaultColors.axis}
         />
         <AxisLeft
@@ -98,33 +82,26 @@ function Chart({
           stroke={defaultColors.axis}
         />
 
-        <AreaClosed
-          data={trend}
-          x={(d) => x(d.date)}
-          y={(d) => y(getValue(d))}
-          fill={defaultColors.main}
-          fillOpacity={0.1}
-          yScale={y}
-        />
-        <LinePath
-          data={trend}
-          x={(d) => x(d.date)}
-          y={(d) => y(getValue(d))}
-          stroke={defaultColors.main}
-          strokeWidth={isHovered ? 3 : 2}
-        />
+        {benchmark && (
+          <>
+            <Line
+              stroke="black"
+              strokeDasharray="4,3"
+              from={{ x: 0, y: y(benchmark.value) }}
+              to={{ x: bounded.width, y: y(benchmark.value) }}
+            />
+          </>
+        )}
 
-        <Bar
-          x={0}
-          y={0}
-          width={bounded.width}
-          height={bounded.height}
-          fill="transparent"
-          rx={14}
-          onTouchStart={onPointerMove}
-          onTouchMove={onPointerMove}
-          onMouseMove={onPointerMove}
-          onMouseLeave={onPointerMove}
+        <Trends
+          size={bounded}
+          x={x}
+          y={y}
+          trend={trend}
+          color={defaultColors.main}
+          handleHover={handleHover}
+          isHovered={isHovered}
+          bisect={bisect}
         />
       </Group>
     </svg>

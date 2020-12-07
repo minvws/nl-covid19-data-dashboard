@@ -5,25 +5,21 @@ import { Box } from '~/components-styled/base';
 import Chart from './chart';
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
 
-// Accessors
-const getValue = (d: any) => d.value; // NOTE: should be part of series data
-const getDate = (d: any) => d.date;
-
 export type ThresholdProps = {
   values: any[];
   width: number;
   height?: number;
   timeframe?: TimeframeOption;
+  signaalwaarde?: number;
 };
 
 function CustomLineChart({
   values,
   width,
   height,
-  timeframe,
-}: //   signaalwaarde,
-//   timeframe = '5weeks',
-//   formatTooltip,
+  timeframe = '5weeks',
+  signaalwaarde,
+}: //   formatTooltip,
 //   formatYAxis,
 //   valueAnnotation,
 //   showFill = true,
@@ -35,6 +31,12 @@ ThresholdProps) {
     showTooltip,
     hideTooltip,
   } = useTooltip();
+
+  const benchmark = useMemo(() => {
+    return signaalwaarde
+      ? { value: signaalwaarde, label: 'Signaalwaarde' }
+      : null;
+  }, [signaalwaarde]);
 
   const graphData = useMemo(() => {
     const filteredData = getFilteredValues<T>(
@@ -51,7 +53,9 @@ ThresholdProps) {
   const xDomain = useMemo(() => extent(graphData.map((d) => d.date)), [
     graphData,
   ]);
-  const yDomain = useMemo(() => extent(graphData.map(getValue)), [graphData]);
+  const yDomain = useMemo(() => extent(graphData.map((d) => d.value)), [
+    graphData,
+  ]);
 
   // Tooltip
   const handleTooltip = useCallback(
@@ -80,13 +84,13 @@ ThresholdProps) {
     <Box position="relative">
       <Chart
         trend={graphData} // TODO: update to accept series with array of configurable trends
-        getValue={getValue} // NOTE: should be part of series data
         height={height}
         width={width}
         handleHover={handleTooltip}
         xDomain={xDomain}
         yDomain={yDomain}
         isHovered={!!tooltipData}
+        benchmark={benchmark}
       />
       {tooltipData && (
         <>
@@ -101,7 +105,7 @@ ThresholdProps) {
               transform: 'translateX(-50%)',
             }}
           >
-            {getDate(tooltipData).toDateString()}
+            {tooltipData.date.toDateString()}
           </Tooltip>
         </>
       )}
