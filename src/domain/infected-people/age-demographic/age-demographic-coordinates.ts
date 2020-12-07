@@ -1,7 +1,7 @@
 import { localPoint } from '@visx/event';
 import { scaleBand, scaleLinear, ScaleTypeToD3Scale } from '@visx/scale';
 import { ScaleBand } from 'd3-scale';
-import { MouseEvent } from 'react';
+import { MouseEvent, useMemo } from 'react';
 import {
   GetTooltipCoordinates,
   TooltipCoordinates,
@@ -21,9 +21,9 @@ export interface AgeDemographicCoordinates {
   ageGroupPercentageScale: ValueOf<ScaleTypeToD3Scale<any, any, any>>;
   infectedPercentageScale: ValueOf<ScaleTypeToD3Scale<any, any, any>>;
   ageGroupRangeScale: ScaleBand<string>;
-  ageGroupPercentagePoint: (d: NationalInfectedAgeGroupsValue) => any;
-  infectedPercentagePoint: (d: NationalInfectedAgeGroupsValue) => any;
-  ageGroupRangePoint: (d: NationalInfectedAgeGroupsValue) => any;
+  ageGroupPercentagePoint: (value: NationalInfectedAgeGroupsValue) => any;
+  infectedPercentagePoint: (value: NationalInfectedAgeGroupsValue) => any;
+  ageGroupRangePoint: (value: NationalInfectedAgeGroupsValue) => any;
   getTooltipCoordinates: GetTooltipCoordinates<NationalInfectedAgeGroupsValue>;
   isSmallScreen: boolean;
   margin: {
@@ -33,19 +33,27 @@ export interface AgeDemographicCoordinates {
     left: number;
   };
   values: NationalInfectedAgeGroupsValue[];
-  ageGroupRange: (d: NationalInfectedAgeGroupsValue) => string;
+  ageGroupRange: (value: NationalInfectedAgeGroupsValue) => string;
   ageRangeAxisWidth: number;
 }
 
-export function getAgeDemographicCoordinates(
+export function useAgeDemographicCoordinates(
+  data: NationalInfectedAgeGroups,
+  isSmallScreen: boolean,
+  parentWidth: number
+) {
+  return useMemo(() => {
+    return calculateAgeDemographicCoordinates(data, isSmallScreen, parentWidth);
+  }, [data, isSmallScreen, parentWidth]);
+}
+
+function calculateAgeDemographicCoordinates(
   data: NationalInfectedAgeGroups,
   isSmallScreen: boolean,
   parentWidth: number
 ): AgeDemographicCoordinates {
   const values = data.values.sort((a, b) => {
-    const aStart = parseInt(a.age_group_range, 10);
-    const bStart = parseInt(b.age_group_range, 10);
-    return bStart - aStart;
+    return b.age_group_range.localeCompare(a.age_group_range);
   });
 
   // Define the graph dimensions and margins
@@ -62,12 +70,12 @@ export function getAgeDemographicCoordinates(
   const yMax = height - margin.top - margin.bottom;
 
   // Helper functions to retrieve parts of the values
-  const ageGroupPercentage = (d: NationalInfectedAgeGroupsValue) =>
-    d.age_group_percentage * 100;
-  const infectedPercentage = (d: NationalInfectedAgeGroupsValue) =>
-    d.infected_percentage * 100;
-  const ageGroupRange = (d: NationalInfectedAgeGroupsValue) =>
-    d.age_group_range;
+  const ageGroupPercentage = (value: NationalInfectedAgeGroupsValue) =>
+    value.age_group_percentage * 100;
+  const infectedPercentage = (value: NationalInfectedAgeGroupsValue) =>
+    value.infected_percentage * 100;
+  const ageGroupRange = (value: NationalInfectedAgeGroupsValue) =>
+    value.age_group_range;
 
   // Scales to map between values and coordinates
 
@@ -75,8 +83,8 @@ export function getAgeDemographicCoordinates(
   const domainPercentages = [
     0,
     Math.max(
-      ...values.map((d) =>
-        Math.max(ageGroupPercentage(d), infectedPercentage(d))
+      ...values.map((value) =>
+        Math.max(ageGroupPercentage(value), infectedPercentage(value))
       )
     ),
   ];
@@ -99,9 +107,10 @@ export function getAgeDemographicCoordinates(
   });
 
   // Compose together the scale and accessor functions to get point functions
+  // The any/any is needed as typing would be a-flexible; and without it Typescript would complain
   const createPoint = (scale: any, accessor: any) => (
-    d: NationalInfectedAgeGroupsValue
-  ) => scale(accessor(d));
+    value: NationalInfectedAgeGroupsValue
+  ) => scale(accessor(value));
   const ageGroupPercentagePoint = createPoint(
     ageGroupPercentageScale,
     ageGroupPercentage

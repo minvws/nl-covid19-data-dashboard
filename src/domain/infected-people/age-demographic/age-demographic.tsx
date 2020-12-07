@@ -1,5 +1,5 @@
 import { ParentSize } from '@visx/responsive';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { Box } from '~/components-styled/base';
 import { Tooltip, useTooltip } from '~/components-styled/tooltip';
 import {
@@ -11,7 +11,7 @@ import {
   AgeDemographicChart,
   AGE_GROUP_TOOLTIP_WIDTH,
 } from './age-demographic-chart';
-import { getAgeDemographicCoordinates } from './age-demographic-coordinates';
+import { useAgeDemographicCoordinates } from './age-demographic-coordinates';
 import { AgeDemographicTooltipContent } from './age-demographic-tooltip-content';
 
 interface AgeDemographicProps {
@@ -24,9 +24,11 @@ export function AgeDemographic({ data }: AgeDemographicProps) {
   const isSmallScreen = !breakpoints.md;
 
   // Calculate graph's coordinates based on the data, the component width and wheher we are on a small screen or not.
-  const coordinates = useMemo(() => {
-    return getAgeDemographicCoordinates(data, isSmallScreen, parentWidth);
-  }, [data, isSmallScreen, parentWidth]);
+  const coordinates = useAgeDemographicCoordinates(
+    data,
+    isSmallScreen,
+    parentWidth
+  );
 
   // Generate tooltip event handlers and state based on values and tooltip coordinates callback
   const {

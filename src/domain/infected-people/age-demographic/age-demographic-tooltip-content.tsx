@@ -50,6 +50,7 @@ const LegendItem = styled.li(
 export function AgeDemographicTooltipContent({
   value,
 }: AgeDemographicTooltipContentProps) {
+  // Check for no value is needed here, to be able to properly trigger the aria-live readouts of changing tooltip values.
   if (!value) {
     return null;
   }

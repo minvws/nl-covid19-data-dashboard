@@ -74,7 +74,7 @@ export function AgeDemographicChart({
       height={height}
       role="img"
       id="age-demographic-chart"
-      aria-label={`${text.graph.accessibility_description} ${siteText.common.barchart_accessibility_label}`}
+      aria-label={text.graph.accessibility_description}
       tabIndex={0}
       onKeyUp={(event) => keyboardTooltip(event)}
       css={css({
@@ -126,13 +126,13 @@ export function AgeDemographicChart({
         stroke={colors.border}
       />
 
-      {values.map((d: NationalInfectedAgeGroupsValue, i: number) => {
-        const ageGroupPercentageWidth = xMax - ageGroupPercentagePoint(d);
-        const infectedPercentageWidth = infectedPercentagePoint(d);
+      {values.map((value, index) => {
+        const ageGroupPercentageWidth = xMax - ageGroupPercentagePoint(value);
+        const infectedPercentageWidth = infectedPercentagePoint(value);
         return (
           <Group
-            key={i}
-            onMouseMove={(event) => openTooltip(event, d)}
+            key={index}
+            onMouseMove={(event) => openTooltip(event, value)}
             onMouseLeave={closeTooltip}
             css={css({
               '&:hover .hoverbar': {
@@ -144,7 +144,7 @@ export function AgeDemographicChart({
               The transparent stroke is to capture mouse movements in between bars for the tooltip */}
             <Bar
               x={margin.left}
-              y={ageGroupRangePoint(d)}
+              y={ageGroupRangePoint(value)}
               height={ageGroupRangeScale.bandwidth()}
               width={width - margin.left - margin.right}
               fill="transparent"
@@ -154,7 +154,7 @@ export function AgeDemographicChart({
             />
             <Bar
               x={width / 2 - ageRangeAxisWidth / 2 - ageGroupPercentageWidth}
-              y={ageGroupRangePoint(d)}
+              y={ageGroupRangePoint(value)}
               height={ageGroupRangeScale.bandwidth()}
               width={ageGroupPercentageWidth}
               fill={colors.data.neutral}
@@ -162,15 +162,15 @@ export function AgeDemographicChart({
             <Text
               textAnchor="middle"
               verticalAnchor="middle"
-              y={ageGroupRangePoint(d) + ageGroupRangeScale.bandwidth() / 2}
+              y={ageGroupRangePoint(value) + ageGroupRangeScale.bandwidth() / 2}
               x={width / 2}
               fill={colors.annotation}
             >
-              {formatAgeGroupRange(ageGroupRange(d))}
+              {formatAgeGroupRange(ageGroupRange(value))}
             </Text>
             <Bar
               x={width / 2 + ageRangeAxisWidth / 2}
-              y={ageGroupRangePoint(d)}
+              y={ageGroupRangePoint(value)}
               height={ageGroupRangeScale.bandwidth()}
               width={infectedPercentageWidth}
               fill={colors.data.primary}

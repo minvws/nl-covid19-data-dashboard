@@ -20,7 +20,7 @@ interface TooltipProps<T> {
 }
 
 interface TooltipState<T> {
-  visible: boolean;
+  isVisible: boolean;
   coordinates?: TooltipCoordinates;
   value?: T;
 }
@@ -36,7 +36,7 @@ export function useTooltip<T>({
   values,
   getTooltipCoordinates,
 }: UseTooltipStateArguments<T>) {
-  const [visible, setVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const [coordinates, setCoordinates] = useState<TooltipCoordinates>();
   const [value, setValue] = useState<T>();
   const [keyboardValueIndex, setKeyboardValueIndex] = useState(0);
@@ -44,43 +44,40 @@ export function useTooltip<T>({
   const timer = useRef(-1);
 
   const tooltipState: TooltipState<T> = {
-    visible,
+    isVisible,
     coordinates,
     value,
   };
 
   // This timeout smoothens the display of the tooltip for mouse users
-  const debounceMouseEvents = (callback: () => void) => {
+  function debounceMouseEvents(callback: () => void) {
     if (timer.current > -1) {
       window.clearTimeout(timer.current);
     }
 
     timer.current = window.setTimeout(callback, 75);
-  };
+  }
 
-  const openTooltip = (event: MouseEvent<any>, value: T) => {
+  function openTooltip(event: MouseEvent<any>, value: T) {
     debounceMouseEvents(() => {
       setCoordinates(getTooltipCoordinates(event, value));
-      setVisible(true);
+      setIsVisible(true);
       setValue(value);
     });
-  };
+  }
 
-  const closeTooltip = () => {
+  function closeTooltip() {
     debounceMouseEvents(() => {
-      setVisible(false);
+      setIsVisible(false);
     });
-  };
+  }
 
-  const keyboardTooltip = (event: any) => {
-    const KEY_ARROW_LEFT = 37;
-    const KEY_ARROW_RIGHT = 39;
-
-    if (event.which !== KEY_ARROW_LEFT && event.which !== KEY_ARROW_RIGHT) {
+  function keyboardTooltip(event: any) {
+    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') {
       return;
     }
 
-    const direction = event.which === KEY_ARROW_LEFT ? -1 : 1;
+    const direction = event.key === 'ArrowLeft' ? -1 : 1;
 
     // The new index overflows from zero to the last and vice versa
     const newIndex =
@@ -91,15 +88,15 @@ export function useTooltip<T>({
     const newValue = values[newIndex];
 
     if (!newValue) {
-      setVisible(false);
+      setIsVisible(false);
       return;
     }
 
     setKeyboardValueIndex(newIndex);
     setCoordinates(getTooltipCoordinates(undefined, newValue));
     setValue(newValue);
-    setVisible(true);
-  };
+    setIsVisible(true);
+  }
 
   return { openTooltip, closeTooltip, keyboardTooltip, tooltipState };
 }
@@ -115,7 +112,7 @@ export function Tooltip<T>({
       aria-live="assertive"
       aria-controls={controls}
       role="tooltip"
-      aria-hidden={!tooltipState.visible}
+      aria-hidden={!tooltipState.isVisible}
       css={css({
         position: 'absolute',
         background: 'white',
