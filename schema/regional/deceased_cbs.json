@@ -32,7 +32,10 @@
         "expected_max": {
           "type": "integer"
         },
-        "date_of_report_unix": {
+        "week_start_unix": {
+          "type": "integer"
+        },
+        "week_end_unix": {
           "type": "integer"
         },
         "date_of_insertion_unix": {
@@ -48,7 +51,8 @@
         "expected",
         "expected_min",
         "expected_max",
-        "date_of_report_unix",
+        "week_start_unix",
+        "week_end_unix",
         "date_of_insertion_unix",
         "vrcode"
       ],
