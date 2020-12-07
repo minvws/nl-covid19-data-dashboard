@@ -3,7 +3,7 @@ import { colors } from '~/style/theme';
 
 const GREEN = colors.data.gradient.green;
 const YELLOW = colors.data.gradient.yellow;
-const RED = colors.data.gradient.green;
+const RED = colors.data.gradient.red;
 
 /**
  * Maybe we can make this stricter, but if I use keyof National now, it
