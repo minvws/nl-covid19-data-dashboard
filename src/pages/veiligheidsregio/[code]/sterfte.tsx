@@ -20,24 +20,31 @@ import {
   getSafetyRegionPaths,
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
-const text = siteText.sterfte;
+const text = siteText.veiligheidsregio_sterfte;
 
 const DeceasedRegionalPage: FCWithLayout<ISafetyRegionData> = (props) => {
   const theme = useTheme();
-  const dataCbs = props.data.deceased_cbs;
-  const dataRivm = props.data.deceased_rivm;
+  const {
+    safetyRegionName: safetyRegion,
+    data: { deceased_cbs: dataCbs, deceased_rivm: dataRivm },
+  } = props;
 
   return (
     <>
       <SEOHead
-        title={text.metadata.title}
-        description={text.metadata.description}
+        title={replaceVariablesInText(text.metadata.title, { safetyRegion })}
+        description={replaceVariablesInText(text.metadata.description, {
+          safetyRegion,
+        })}
       />
 
       <ContentHeader
         category={siteText.veiligheidsregio_layout.headings.besmettingen}
-        title={text.section_deceased_rivm.title}
+        title={replaceVariablesInText(text.section_deceased_rivm.title, {
+          safetyRegion,
+        })}
         icon={<CoronaVirusIcon />}
         subtitle={text.section_deceased_rivm.description}
         metadata={{
