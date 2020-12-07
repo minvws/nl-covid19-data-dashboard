@@ -26,10 +26,7 @@
         "covid_total": {
           "type": "integer"
         },
-        "week_start_unix": {
-          "type": "integer"
-        },
-        "week_end_unix": {
+        "date_of_report_unix": {
           "type": "integer"
         },
         "date_of_insertion_unix": {
@@ -43,8 +40,7 @@
       "required": [
         "covid_daily",
         "covid_total",
-        "week_start_unix",
-        "week_end_unix",
+        "date_of_report_unix",
         "date_of_insertion_unix",
         "vrcode"
       ],

@@ -450,8 +450,7 @@ export interface NationalDeceasedRivm {
 export interface NationalDeceasedRivmValue {
   covid_daily: number;
   covid_total: number;
-  week_start_unix: number;
-  week_end_unix: number;
+  date_of_report_unix: number;
   date_of_insertion_unix: number;
 }
 export interface NationalDeceasedCbs {
@@ -741,8 +740,7 @@ export interface RegionalDeceasedRivm {
 export interface RegionalDeceasedRivmValue {
   covid_daily: number;
   covid_total: number;
-  week_start_unix: number;
-  week_end_unix: number;
+  date_of_report_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;
 }
