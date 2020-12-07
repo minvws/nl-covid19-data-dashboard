@@ -20,8 +20,6 @@ import { TitleWithIcon } from '~/components-styled/aside/title-with-icon';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
 import { NursingHomeInfectedPeopleMetric } from '~/components/common/nursing-home-infected-people-metric';
 import { InfectiousPeopleMetric } from '~/components/landelijk/infectious-people-metric';
-import { IntakeIntensiveCareBarscale } from '~/components/landelijk/intake-intensive-care-barscale';
-import { IntakeIntensiveCareMetric } from '~/components/landelijk/intake-intensive-care-metric';
 import { ReproductionIndexBarScale } from '~/components/landelijk/reproduction-index-barscale';
 import { ReproductionIndexMetric } from '~/components/landelijk/reproduction-index-metric';
 import { SewerWaterMetric } from '~/components/landelijk/sewer-water-metric';
@@ -291,14 +289,15 @@ function NationalLayout(props: NationalLayoutProps) {
                           icon={<Arts />}
                           title={siteText.ic_opnames_per_dag.titel_sidebar}
                         />
-                        <span className="metric-wrapper">
-                          <IntakeIntensiveCareMetric data={data} />
-                          <IntakeIntensiveCareBarscale
-                            data={data}
-                            showAxis={false}
-                            showValue={false}
-                          />
-                        </span>
+                        <SidebarMetric
+                          data={data}
+                          scope="nl"
+                          metricName="intake_intensivecare_ma"
+                          metricProperty="moving_average_ic"
+                          localeTextKey="ic_opnames_per_dag"
+                          differenceKey="intake_intensivecare_ma__moving_average_ic"
+                          showBarScale={true}
+                        />
                       </a>
                     </Link>
                   </MetricMenuItem>

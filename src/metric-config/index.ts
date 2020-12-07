@@ -64,11 +64,12 @@ export function getDataBarScaleConfig(
    * for trouble.
    */
   assert(
-    config.barScale,
-    `Missing configuration for bar scale metric ${[
+    config && config.barScale,
+    `Missing configuration for bar scale metric at ${[
       scope,
       metricName,
       metricProperty,
+      'barScale',
     ]
       .filter(isDefined)
       .join(':')}`

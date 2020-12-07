@@ -36,6 +36,30 @@ export const nl: NlConfig = {
       },
     },
   },
+  intake_intensivecare_ma: {
+    moving_average_ic: {
+      barScale: {
+        min: 0,
+        max: 30,
+        rangesKey: 'moving_average_ic',
+        signaalwaarde: 10,
+        gradient: [
+          {
+            color: GREEN,
+            value: 0,
+          },
+          {
+            color: YELLOW,
+            value: 10,
+          },
+          {
+            color: RED,
+            value: 20,
+          },
+        ],
+      },
+    },
+  },
   infected_people_delta_normalized: {
     infected_daily_increase: {
       barScale: {
