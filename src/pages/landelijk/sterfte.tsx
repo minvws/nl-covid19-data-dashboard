@@ -1,3 +1,4 @@
+import { useTheme } from 'styled-components';
 import CoronaVirusIcon from '~/assets/coronavirus.svg';
 import { AnchorTile } from '~/components-styled/anchor-tile';
 import { Box } from '~/components-styled/base';
@@ -9,11 +10,10 @@ import { Legenda } from '~/components-styled/legenda';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
-import AreaChart from '~/components/areaChart';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
-import { MortalityMonitor } from '~/domain/deceased/mortality-monitor';
+import DeceasedMonitor from '~/domain/deceased/deceased-monitor';
 import siteText from '~/locale/index';
 import {
   getNationalStaticProps,
@@ -23,8 +23,9 @@ import {
 const text = siteText.sterfte;
 
 const ElderlyAtHomeNationalPage: FCWithLayout<NationalPageProps> = (props) => {
-  const dataCbs = props.data.deceased_cbs || ({ last_value: {} } as any);
-  const dataRivm = props.data.deceased_rivm || ({ last_value: {} } as any);
+  const theme = useTheme();
+  const dataCbs = props.data.deceased_cbs;
+  const dataRivm = props.data.deceased_rivm;
 
   return (
     <>
@@ -45,8 +46,6 @@ const ElderlyAtHomeNationalPage: FCWithLayout<NationalPageProps> = (props) => {
           dataSources: [text.section_deceased_rivm.bronnen.rivm],
         }}
       />
-
-      <MortalityMonitor values={dataCbs.values} />
 
       <TwoKpiSection>
         <KpiTile
@@ -112,7 +111,29 @@ const ElderlyAtHomeNationalPage: FCWithLayout<NationalPageProps> = (props) => {
             text.section_deceased_cbs.mortality_monitor_chart_description
           }
         >
-          <MortalityMonitor values={dataCbs.values} />
+          <DeceasedMonitor
+            values={dataCbs.values}
+            config={{
+              registered: {
+                label:
+                  text.section_deceased_cbs
+                    .mortality_monitor_chart_legenda_registered,
+                color: theme.colors.data.primary,
+              },
+              expected: {
+                label:
+                  text.section_deceased_cbs
+                    .mortality_monitor_chart_legenda_expected,
+                color: '#5BADDB',
+              },
+              margin: {
+                label:
+                  text.section_deceased_cbs
+                    .mortality_monitor_chart_legenda_expected_margin,
+                color: '#D0EDFF',
+              },
+            }}
+          />
           <Legenda
             items={[
               {
