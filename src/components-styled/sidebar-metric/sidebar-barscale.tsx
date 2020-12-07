@@ -1,12 +1,8 @@
 import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { BarScale } from '~/components/barScale';
-import {
-  TMunicipalityMetricName,
-  TRegionMetricName,
-} from '~/components/choropleth/shared';
+import { MetricKeys } from '~/components/choropleth/shared';
 import siteText, { TALLLanguages } from '~/locale/index';
-import { National } from '~/types/data';
 import { assert } from '~/utils/assert';
 import { DataScope, getDataBarScaleConfig } from '../../metric-config';
 import { Box } from '../base';
@@ -15,7 +11,7 @@ interface SidebarBarScaleProps<T> {
   scope: DataScope;
   data: T;
   localeTextKey: keyof TALLLanguages;
-  metricName: keyof National | TMunicipalityMetricName | TRegionMetricName;
+  metricName: ValueOf<MetricKeys<T>>;
   metricProperty: string;
 }
 
@@ -27,7 +23,10 @@ export function SidebarBarScale<T>({
   localeTextKey,
 }: SidebarBarScaleProps<T>) {
   const text = siteText[localeTextKey] as Record<string, string>;
-  const lastValue = get(data, [metricName, 'last_value']);
+  const lastValue = get(data, [
+    (metricName as unknown) as string,
+    'last_value',
+  ]);
   const propertyValue = lastValue && lastValue[metricProperty];
 
   /**
@@ -47,7 +46,11 @@ export function SidebarBarScale<T>({
       .join(':')}`
   );
 
-  const config = getDataBarScaleConfig(scope, metricName, metricProperty);
+  const config = getDataBarScaleConfig(
+    scope,
+    (metricName as unknown) as string,
+    metricProperty
+  );
 
   assert(
     text.barscale_screenreader_text,

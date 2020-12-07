@@ -8,19 +8,15 @@ import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import siteText, { TALLLanguages } from '~/locale/index';
 import { getDataConfig, DataScope } from '~/metric-config';
-import { National, NationalDifference } from '~/types/data';
-import {
-  TMunicipalityMetricName,
-  TRegionMetricName,
-} from '~/components/choropleth/shared';
+import { MetricKeys, DifferenceKeys } from '~/components/choropleth/shared';
 
-interface SidebarMetricProps<T> {
+interface SidebarMetricProps<T extends { difference: unknown }> {
   scope: DataScope;
   data: T;
-  metricName: keyof National | TMunicipalityMetricName | TRegionMetricName;
+  metricName: ValueOf<MetricKeys<T>>;
   metricProperty: string;
   localeTextKey: keyof TALLLanguages;
-  differenceKey?: keyof NationalDifference;
+  differenceKey?: ValueOf<DifferenceKeys<T>>;
   showBarScale?: boolean;
   isWeeklyData?: boolean;
   annotationKey?: string;
@@ -31,12 +27,12 @@ interface SidebarMetricProps<T> {
    * metric name and metric property.
    */
   altBarScaleMetric?: {
-    metricName: keyof National | TMunicipalityMetricName | TRegionMetricName;
+    metricName: ValueOf<MetricKeys<T>>;
     metricProperty: string;
   };
 }
 
-export function SidebarMetric<T>({
+export function SidebarMetric<T extends { difference: unknown }>({
   scope,
   data,
   metricName,
@@ -47,7 +43,10 @@ export function SidebarMetric<T>({
   annotationKey,
   altBarScaleMetric,
 }: SidebarMetricProps<T>) {
-  const lastValue = get(data, [metricName, 'last_value']);
+  const lastValue = get(data, [
+    (metricName as unknown) as string,
+    'last_value',
+  ]);
   const propertyValue = lastValue && lastValue[metricProperty];
 
   assert(
@@ -61,7 +60,11 @@ export function SidebarMetric<T>({
       .join(':')}`
   );
 
-  const config = getDataConfig(scope, metricName, metricProperty);
+  const config = getDataConfig(
+    scope,
+    (metricName as unknown) as string,
+    metricProperty
+  );
   const commonText = siteText.common.metricKPI;
 
   const title = get(siteText, [localeTextKey, 'titel_kpi']);
@@ -80,7 +83,7 @@ export function SidebarMetric<T>({
       });
 
   const differenceValue = differenceKey
-    ? get(data, ['difference', differenceKey])
+    ? get(data, ['difference', (differenceKey as unknown) as string])
     : undefined;
 
   if (differenceKey) {

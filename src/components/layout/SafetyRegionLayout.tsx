@@ -13,6 +13,7 @@ import {
   MetricMenuItem,
 } from '~/components-styled/aside/menu';
 import { TitleWithIcon } from '~/components-styled/aside/title-with-icon';
+import { SidebarMetric } from '~/components-styled/sidebar-metric';
 import { ComboBox } from '~/components/comboBox';
 import { getLayout as getSiteLayout } from '~/components/layout';
 import { PositivelyTestedPeopleBarScale } from '~/components/veiligheidsregio/positive-tested-people-barscale';
@@ -175,6 +176,20 @@ function SafetyRegionLayout(
                               showValue={false}
                             />
                           </span>
+
+                          <SidebarMetric
+                            scope="vr"
+                            data={data}
+                            metricName="results_per_region"
+                            metricProperty="total_reported_increase_per_region"
+                            altBarScaleMetric={{
+                              metricName: 'infected_people_delta_normalized',
+                              metricProperty: 'infected_daily_increase',
+                            }}
+                            localeTextKey="veiligheidsregio_positief_geteste_personen"
+                            differenceKey="results_per_region__total_reported_increase_per_region"
+                            showBarScale={true}
+                          />
                         </a>
                       </Link>
                     </MetricMenuItem>
