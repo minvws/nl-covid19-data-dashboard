@@ -379,40 +379,6 @@
     "title": "Information per region",
     "text": "View the most important information for your safety region."
   },
-  "gehandicaptenzorg_besmette_locaties": {
-    "datums": "",
-    "titel": "",
-    "pagina_toelichting": "",
-    "barscale_titel": "",
-    "barscale_toelichting": "",
-    "kpi_titel": "",
-    "kpi_toelichting": "",
-    "linechart_titel": "",
-    "barscale_screenreader_text": "{{value}}",
-    "chloropleth_legenda": {
-      "titel": "",
-      "geen_meldingen": ""
-    },
-    "map_titel": "",
-    "map_toelichting": "",
-    "metadata": {
-      "title": "",
-      "description": ""
-    },
-    "titel_sidebar": "",
-    "titel_kpi": "",
-    "reference": {
-      "href": "/verantwoording#gehandicaptenzorg",
-      "text": ""
-    },
-    "bronnen": {
-      "rivm": {
-        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
-        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
-        "text": "RIVM"
-      }
-    }
-  },
   "verpleeghuis_besmette_locaties": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
@@ -451,41 +417,6 @@
       }
     }
   },
-  "gehandicaptenzorg_positief_geteste_personen": {
-    "datums": "",
-    "bron": {
-      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
-      "text": "RIVM"
-    },
-    "titel": "",
-    "barscale_titel": "",
-    "extra_uitleg": "",
-    "pagina_toelichting": "",
-    "linechart_titel": "",
-    "barscale_screenreader_text": "{{value}}",
-    "chloropleth_legenda": {
-      "titel": "",
-      "geen_meldingen": ""
-    },
-    "map_titel": "",
-    "map_toelichting": "",
-    "metadata": {
-      "title": "",
-      "description": ""
-    },
-    "titel_kpi": "",
-    "reference": {
-      "href": "/verantwoording#gehandicaptenzorg",
-      "text": ""
-    },
-    "bronnen": {
-      "rivm": {
-        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
-        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
-        "text": "RIVM"
-      }
-    }
-  },
   "verpleeghuis_positief_geteste_personen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
@@ -513,37 +444,6 @@
     "reference": {
       "href": "/verantwoording#nursing-homes",
       "text": "Read more in 'explanation of the data presented'."
-    },
-    "bronnen": {
-      "rivm": {
-        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
-        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
-        "text": "RIVM"
-      }
-    }
-  },
-  "gehandicaptenzorg_oversterfte": {
-    "datums": "{{dateOfInsertion}}",
-    "bron": {
-      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
-      "text": "RIVM"
-    },
-    "titel": "",
-    "pagina_toelichting": "",
-    "barscale_titel": "",
-    "barscale_screenreader_text": "{{value}}",
-    "extra_uitleg": "",
-    "linechart_titel": "",
-    "map_titel": "",
-    "map_toelichting": "",
-    "metadata": {
-      "title": "",
-      "description": ""
-    },
-    "titel_kpi": "",
-    "reference": {
-      "href": "/verantwoording#gehandicaptenzorg",
-      "text": ""
     },
     "bronnen": {
       "rivm": {
@@ -741,10 +641,6 @@
         "verantwoording": "The National Institute for Public Health and the Environment (RIVM) provides the Ministry of Health, Welfare and Sport with information about the COVID-19 situation in nursing homes on a daily basis via [open data](https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv). The description of this dataset can be found [here](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a). This data cannot always be clearly linked to a specific safety region. As a result, the total sum of numbers at the safety-region level may be less than the numbers at the national level. The number of deaths of nursing home residents is based on the date of death. However, when the date of death is unknown that death is not included in this statistic in the dashboard.\n\nThe method used to estimate the numbers of nursing homes and nursing home residents infected with coronavirus has been improved. Since 1 July 2020, for every person newly infected with coronavirus, the municipal health services (GGDs) have noted whether that person lives in a nursing home. Until the end of September 2020, no use was made of this data and a different method was used to calculate infection numbers, which led to a significant overestimate of the number of infected nursing homes. As of 29 September 2020, the estimates on the dashboard from 1 July 2020 onwards have been recalculated using the this data and therefore now give a much better picture of the actual number of infected nursing homes and nursing home residents.\n\nOld definition of a nursing home resident: A person was counted as a nursing home resident if, according to the central database OSIRIS: on the basis of their postcode, they can be linked to a registered nursing home or residential care home for the elderly, a setting (place where infection may have occurred) labelled as a ‘nursing home’ or something similar, or if there is any other term that links them in the database to a nursing home or residential care home for the elderly. In addition, the person:\n- must be over 70 years old\n- must not be a health worker, and\n- must not be employed.\n\nNew definition of a nursing home resident: As of 1 July 2020, every time a person tests positive for COVID-19, the GGD asks whether that person is a resident of a nursing home or residential care home for the elderly. This information is used in the new definition. A person is considered to be a nursing home resident if, according to the data in OSIRIS:\n- This person is a resident of a nursing home or a residential care home for the elderly.\n- If it is not known whether the person lives in a nursing home or residential care home for the elderly, the old definition is used.\n\nThe total number of nursing homes per safety region is provided by RIVM. Any nursing homes with the same postcode are counted as one nursing home. This is because the number of infected nursing homes is also determined by postcode. It is necessary to know the total number of nursing homes per safety region in order to calculate what percentage of nursing homes in the safety region is infected. The total number of nursing homes nationwide is the sum of the total number of nursing homes in all safety regions."
       },
       {
-        "cijfer": "Disability care",
-        "verantwoording": ""
-      },
-      {
         "cijfer": "Infectious people",
         "verantwoording": "The number of infectious people is published via [open data](https://data.rivm.nl/covid-19/COVID-19_prevalentie.json) by the RIVM on a weekly basis (on Tuesdays). The description of this dataset can be found [here](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/097155aa-75eb-4caa-8ed3-4c6edb80467e). A person who carries coronavirus can infect other people within a certain time frame. How long someone is infectious for differs from person to person. Using a range of data sources regarding the number of people infected with the virus in a specific time frame, it is possible to estimate the number of infectious people in the Netherlands. See [RIVM](https://www.rivm.nl/coronavirus-covid-19/hoe-berekeningen-bijdragen-aan-bestrijding-van-virus) for more information regarding the method. There is no alert value for the number of infectious people as this number is an estimate based on a calculation.\n\nThe calculation method of the number of infectious people has been changed since 13 October. Between 1 June till 13 October this number was calculated based on the results of the first [Pienter Corona research](https://www.rivm.nl/pienter-corona-studie), the number of hospital admissions and the number of confirmed cases. From 13 October onwards, this number is calculated based on the results of the second Pienter Corona research and the number of hospital admissions. In this second research, a larger group of people have been examined. Besides, more insight in the infectiousness of people has been gained."
       },
@@ -763,6 +659,10 @@
       {
         "cijfer": "Open source data processing",
         "verantwoording": "This dashboard was developed in a short amount of time. So far, we have therefore not been able to publish the code for inputting the data and constructing the .JSON files. However, this will be done soon. The web application code was published on [Github](https://github.com/minvws/nl-covid19-data-dashboard) on 5 June 2020. The [data calculations](https://github.com/minvws/nl-covid19-data-backend-processing) are available via Github as well."
+      },
+      {
+        "cijfer": "",
+        "verantwoording": ""
       },
       {
         "cijfer": "",
@@ -1309,37 +1209,6 @@
       }
     }
   },
-  "veiligheidsregio_gehandicaptenzorg_oversterfte": {
-    "datums": "",
-    "bron": {
-      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
-      "text": "RIVM"
-    },
-    "titel": "",
-    "pagina_toelichting": "",
-    "barscale_titel": "",
-    "barscale_screenreader_text": "",
-    "extra_uitleg": "",
-    "linechart_titel": "",
-    "map_titel": "",
-    "map_toelichting": "",
-    "titel_sidebar": "",
-    "metadata": {
-      "title": "",
-      "description": ""
-    },
-    "reference": {
-      "href": "/verantwoording#gehandicaptenzorg",
-      "text": ""
-    },
-    "bronnen": {
-      "rivm": {
-        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
-        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
-        "text": "RIVM"
-      }
-    }
-  },
   "veiligheidsregio_verpleeghuis_oversterfte": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
@@ -1371,33 +1240,6 @@
       }
     }
   },
-  "veiligheidsregio_gehandicaptenzorg_besmette_locaties": {
-    "datums": "",
-    "titel": "",
-    "pagina_toelichting": "",
-    "barscale_titel": "",
-    "barscale_toelichting": "",
-    "kpi_titel": "",
-    "kpi_toelichting": "",
-    "linechart_titel": "",
-    "barscale_screenreader_text": "",
-    "metadata": {
-      "title": "",
-      "description": ""
-    },
-    "titel_sidebar": "",
-    "reference": {
-      "href": "/verantwoording#gehandicaptenzorg",
-      "text": ""
-    },
-    "bronnen": {
-      "rivm": {
-        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
-        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
-        "text": "RIVM"
-      }
-    }
-  },
   "veiligheidsregio_verpleeghuis_besmette_locaties": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
@@ -1420,37 +1262,6 @@
     "reference": {
       "href": "/verantwoording#nursing-homes",
       "text": "Read more in 'explanation of the data presented'."
-    },
-    "bronnen": {
-      "rivm": {
-        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
-        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
-        "text": "RIVM"
-      }
-    }
-  },
-  "veiligheidsregio_gehandicaptenzorg_positief_geteste_personen": {
-    "datums": "",
-    "titel": "",
-    "barscale_titel": "",
-    "extra_uitleg": "",
-    "pagina_toelichting": "",
-    "linechart_titel": "",
-    "barscale_screenreader_text": "",
-    "titel_sidebar": "",
-    "chloropleth_legenda": {
-      "titel": "",
-      "geen_meldingen": ""
-    },
-    "map_titel": "",
-    "map_toelichting": "",
-    "metadata": {
-      "title": "",
-      "description": ""
-    },
-    "reference": {
-      "href": "/verantwoording#gehandicaptenzorg",
-      "text": ""
     },
     "bronnen": {
       "rivm": {
@@ -1671,23 +1482,204 @@
       }
     }
   },
-  "infected_age_groups": {
-    "title": "Verdeling naar leeftijd",
-    "description": "....",
-    "example": "Bijvoorbeeld: Van alle positief geteste mensen is {{infectedPercentage}} tussen de {{ageGroupRange}} jaar. Van alle Nederlanders is {{ageGroupPercentage}} tussen de {{ageGroupRange}} jaar.",
-    "graph": {
-      "age_group_percentage_title": "Percentage van de bevolking",
-      "age_group_percentage_tooltip": "van de bevolking is {{ageGroupRange}} jaar",
-      "infected_percentage_title": "Percentage van de positieve testen",
-      "infected_percentage_tooltip": "van het aantal positief geteste mensen is {{ageGroupRange}} jaar",
-      "age_group_range_tooltip": "{{ageGroupRange}} jaar",
-      "accessibility_description": "Grafiek met percentages voor de verdeling van de bevolking en de verdeling van positief geteste leeftijdsgroepen."
-    }
-  },
   "aria_labels": {
     "pagina_keuze": "",
     "footer_keuze": "",
     "metriek_navigatie": "",
     "skip_links": ""
+  },
+  "infected_age_groups": {
+    "title": "",
+    "description": "",
+    "example": "",
+    "graph": {
+      "age_group_percentage_title": "",
+      "age_group_percentage_tooltip": "",
+      "infected_percentage_title": "",
+      "infected_percentage_tooltip": "",
+      "age_group_range_tooltip": "",
+      "accessibility_description": ""
+    }
+  },
+  "gehandicaptenzorg_besmette_locaties": {
+    "datums": "",
+    "titel": "",
+    "pagina_toelichting": "",
+    "barscale_titel": "",
+    "barscale_toelichting": "",
+    "kpi_titel": "",
+    "kpi_toelichting": "",
+    "linechart_titel": "",
+    "barscale_screenreader_text": "",
+    "chloropleth_legenda": {
+      "titel": "",
+      "geen_meldingen": ""
+    },
+    "map_titel": "",
+    "map_toelichting": "",
+    "metadata": {
+      "title": "",
+      "description": ""
+    },
+    "titel_sidebar": "",
+    "titel_kpi": "",
+    "reference": {
+      "href": "",
+      "text": ""
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "",
+        "href": "",
+        "text": ""
+      }
+    }
+  },
+  "gehandicaptenzorg_positief_geteste_personen": {
+    "datums": "",
+    "titel": "",
+    "barscale_titel": "",
+    "extra_uitleg": "",
+    "pagina_toelichting": "",
+    "linechart_titel": "",
+    "barscale_screenreader_text": "",
+    "chloropleth_legenda": {
+      "titel": "",
+      "geen_meldingen": ""
+    },
+    "map_titel": "",
+    "map_toelichting": "",
+    "metadata": {
+      "title": "",
+      "description": ""
+    },
+    "titel_kpi": "",
+    "reference": {
+      "href": "",
+      "text": ""
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "",
+        "href": "",
+        "text": ""
+      }
+    }
+  },
+  "gehandicaptenzorg_oversterfte": {
+    "datums": "",
+    "titel": "",
+    "pagina_toelichting": "",
+    "barscale_titel": "",
+    "barscale_screenreader_text": "",
+    "extra_uitleg": "",
+    "linechart_titel": "",
+    "map_titel": "",
+    "map_toelichting": "",
+    "metadata": {
+      "title": "",
+      "description": ""
+    },
+    "titel_kpi": "",
+    "reference": {
+      "href": "",
+      "text": ""
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "",
+        "href": "",
+        "text": ""
+      }
+    }
+  },
+  "veiligheidsregio_gehandicaptenzorg_oversterfte": {
+    "datums": "",
+    "bron": {
+      "href": "",
+      "text": ""
+    },
+    "titel": "",
+    "pagina_toelichting": "",
+    "barscale_titel": "",
+    "barscale_screenreader_text": "",
+    "extra_uitleg": "",
+    "linechart_titel": "",
+    "map_titel": "",
+    "map_toelichting": "",
+    "titel_sidebar": "",
+    "metadata": {
+      "title": "",
+      "description": ""
+    },
+    "reference": {
+      "href": "",
+      "text": ""
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "",
+        "href": "",
+        "text": ""
+      }
+    }
+  },
+  "veiligheidsregio_gehandicaptenzorg_besmette_locaties": {
+    "datums": "",
+    "titel": "",
+    "pagina_toelichting": "",
+    "barscale_titel": "",
+    "barscale_toelichting": "",
+    "kpi_titel": "",
+    "kpi_toelichting": "",
+    "linechart_titel": "",
+    "barscale_screenreader_text": "",
+    "metadata": {
+      "title": "",
+      "description": ""
+    },
+    "titel_sidebar": "",
+    "reference": {
+      "href": "",
+      "text": ""
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "",
+        "href": "",
+        "text": ""
+      }
+    }
+  },
+  "veiligheidsregio_gehandicaptenzorg_positief_geteste_personen": {
+    "datums": "",
+    "titel": "",
+    "barscale_titel": "",
+    "extra_uitleg": "",
+    "pagina_toelichting": "",
+    "linechart_titel": "",
+    "barscale_screenreader_text": "",
+    "titel_sidebar": "",
+    "chloropleth_legenda": {
+      "titel": "",
+      "geen_meldingen": ""
+    },
+    "map_titel": "",
+    "map_toelichting": "",
+    "metadata": {
+      "title": "",
+      "description": ""
+    },
+    "reference": {
+      "href": "",
+      "text": ""
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "",
+        "href": "",
+        "text": ""
+      }
+    }
   }
 }
