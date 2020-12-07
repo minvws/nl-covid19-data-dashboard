@@ -46,7 +46,7 @@ export const EscalationMapLegenda = (props: EscalationMapLegendaProps) => {
 
 // Passing `any` to `FCWithLayout` because we
 // can't do `getStaticProps` on this page because we require
-// a code, but is is the screen we select a code (safety region).
+// a code, but on this screen we select a code (safety region).
 // All other pages which use `getSafetyRegionLayout` can assume
 // the data is always there. Making the data optional would mean
 // lots of unnecessary null checks on those pages.

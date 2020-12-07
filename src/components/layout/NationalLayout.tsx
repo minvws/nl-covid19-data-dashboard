@@ -136,7 +136,7 @@ function NationalLayout(props: NationalLayoutProps) {
                   <MetricMenuItem>
                     <Link
                       href={{
-                        pathname: '/',
+                        pathname: '/landelijk/laatste-ontwikkelingen',
                         query: breakpoints.md
                           ? {} // only add menu flags on narrow devices
                           : isMenuOpen
@@ -146,7 +146,7 @@ function NationalLayout(props: NationalLayoutProps) {
                     >
                       <a
                         className={`last-developments-link ${getClassName(
-                          '/'
+                          '/landelijk/laatste-ontwikkelingen'
                         )}`}
                       >
                         <TitleWithIcon
