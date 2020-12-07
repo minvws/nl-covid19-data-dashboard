@@ -761,7 +761,8 @@
     "tooltip": {
       "positive_tested_people": "{{totalPositiveTestedPeople}} in totaal"
     },
-    "niveau": "niveau"
+    "niveau": "niveau",
+    "clear_select_input": "Leegmaken"
   },
   "seoHead": {
     "default_description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
