@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, memo } from 'react';
 import { Group } from '@visx/group';
 // import { curveBasis } from '@visx/curve';
 import { AreaClosed, Bar } from '@visx/shape';
@@ -110,4 +110,4 @@ function Chart({
   );
 }
 
-export default Chart;
+export default memo(Chart);
