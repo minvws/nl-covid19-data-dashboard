@@ -21,7 +21,7 @@ interface IPaths {
   fallback: boolean;
 }
 
-export interface IParams {
+interface IParams {
   params: {
     code: string;
   };
@@ -73,7 +73,7 @@ export function getSafetyRegionData({ params }: IParams): IProps {
   };
 }
 
-/*
+/**
  * getSafetyRegionPaths creates an array of all the allowed
  * `/veiligheidsregio/[code]` routes. This should be used
  * together with `getSafetyRegionData`.

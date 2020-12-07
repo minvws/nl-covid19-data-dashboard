@@ -11,18 +11,19 @@ import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/components/layout';
-import { getNationalLayout } from '~/components/layout/NationalLayout';
+import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { SEOHead } from '~/components/seoHead';
 import DeceasedMonitor from '~/domain/deceased/deceased-monitor';
 import siteText from '~/locale/index';
 import {
-  getNationalStaticProps,
-  NationalPageProps,
-} from '~/static-props/nl-data';
+  getSafetyRegionData,
+  getSafetyRegionPaths,
+  ISafetyRegionData,
+} from '~/static-props/safetyregion-data';
 
 const text = siteText.sterfte;
 
-const DeceasedNationalPage: FCWithLayout<NationalPageProps> = (props) => {
+const DeceasedRegionalPage: FCWithLayout<ISafetyRegionData> = (props) => {
   const theme = useTheme();
   const dataCbs = props.data.deceased_cbs;
   const dataRivm = props.data.deceased_rivm;
@@ -35,7 +36,7 @@ const DeceasedNationalPage: FCWithLayout<NationalPageProps> = (props) => {
       />
 
       <ContentHeader
-        category={siteText.nationaal_layout.headings.besmettingen}
+        category={siteText.veiligheidsregio_layout.headings.besmettingen}
         title={text.section_deceased_rivm.title}
         icon={<CoronaVirusIcon />}
         subtitle={text.section_deceased_rivm.description}
@@ -82,7 +83,6 @@ const DeceasedNationalPage: FCWithLayout<NationalPageProps> = (props) => {
       />
 
       <ContentHeader
-        category={siteText.nationaal_layout.headings.besmettingen}
         title={text.section_deceased_cbs.title}
         icon={<CoronaVirusIcon />}
         subtitle={text.section_deceased_cbs.description}
@@ -168,8 +168,10 @@ const DeceasedNationalPage: FCWithLayout<NationalPageProps> = (props) => {
   );
 };
 
-DeceasedNationalPage.getLayout = getNationalLayout;
+DeceasedRegionalPage.getLayout = getSafetyRegionLayout();
 
-export const getStaticProps = getNationalStaticProps;
+export const getStaticProps = getSafetyRegionData;
 
-export default DeceasedNationalPage;
+export const getStaticPaths = getSafetyRegionPaths();
+
+export default DeceasedRegionalPage;

@@ -1,7 +1,6 @@
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { NationalDeceasedCbsValue } from '~/types/data';
-import { createDate } from '~/utils/createDate';
 import { formatDateFromMilliseconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 
@@ -33,28 +32,12 @@ function useHighchartOptions(
   values: NationalDeceasedCbsValue[],
   config: SeriesConfig
 ) {
-  const marginValues = values.map(
-    (x) =>
-      [
-        createDate(x.date_of_report_unix),
-        x.expected_min,
-        x.expected_max,
-      ] as const
-  );
-
-  const expectedValues = values.map(
-    (x) => [createDate(x.date_of_report_unix), x.expected] as const
-  );
-
-  const registeredValues = values.map(
-    (x) => [createDate(x.date_of_report_unix), x.registered] as const
-  );
-
-  const allYValues = [
-    ...marginValues.flatMap(([_, a, b]) => [a, b]),
-    ...expectedValues.map(([_, a]) => a),
-    ...registeredValues.map(([_, a]) => a),
-  ];
+  const allYValues = values.flatMap((x) => [
+    x.registered,
+    x.expected,
+    x.expected_min,
+    x.expected_max,
+  ]);
 
   const yMin = Math.min(...allYValues);
   const yMax = Math.max(...allYValues);
@@ -83,7 +66,7 @@ function useHighchartOptions(
       lineColor: '#C4C4C4',
       gridLineColor: '#ca005d',
       type: 'datetime',
-      categories: expectedValues.map((el) => el[0].getTime() as any),
+      categories: values.map((x) => (x.week_start_unix * 1000).toString()),
       title: {
         text: null,
       },
@@ -125,6 +108,7 @@ function useHighchartOptions(
     },
 
     tooltip: {
+      useHTML: true,
       shared: true,
 
       backgroundColor: '#FFF',
@@ -132,34 +116,32 @@ function useHighchartOptions(
       borderRadius: 0,
       xDateFormat: '%d %b %y',
       formatter() {
-        const marginPoint = marginValues.find(
-          (el) => el[0].getTime() === this.x
-        );
+        const value = values.find((x) => x.week_start_unix === this.x / 1000);
 
-        if (!marginPoint) return;
+        if (!value) return;
 
-        const [, minPoint, maxPoint] = marginPoint;
-        const expectedPoint = expectedValues.find(
-          (el) => el[0].getTime() === this.x
-        );
-        const registeredPoint = registeredValues.find(
-          (el) => el[0].getTime() === this.x
-        );
+        const dateText = [
+          value.week_start_unix * 1000,
+          value.week_end_unix * 1000,
+        ]
+          .map((x) => formatDateFromMilliseconds(x, 'medium'))
+          .join(' - ');
 
-        const dateText = formatDateFromMilliseconds(this.x, 'medium');
-        const marginText = [minPoint, maxPoint].map(formatNumber).join(' - ');
-        const expectedText = expectedPoint
-          ? formatNumber(expectedPoint[1])
-          : '–';
-        const registeredText = registeredPoint
-          ? formatNumber(registeredPoint[1])
-          : '–';
+        const expectedText = formatNumber(value.expected);
+        const registeredText = formatNumber(value.registered);
+        const marginText = [value.expected_min, value.expected_max]
+          .map(formatNumber)
+          .join(' - ');
 
         return `
-            ${dateText}<br/>
-            <strong>${config.registered.label}:</strong> ${registeredText}<br/>
-            <strong>${config.expected.label}:</strong> ${expectedText}<br/>
-            <strong>${config.margin.label}:</strong> ${marginText}<br/>
+            <div style="margin-bottom: 8px;">${dateText}</div>
+
+            <div style="margin-bottom: 4px;">${config.registered.label}: <strong>${registeredText}</strong></div>
+
+            <div style="margin-bottom: 4px;">${config.expected.label}: <strong>${expectedText}</strong></div>
+
+            <div style="margin-bottom: 4px;">${config.margin.label}: <strong>${marginText}</strong></div>
+
           `;
       },
     },
@@ -167,7 +149,11 @@ function useHighchartOptions(
     series: [
       {
         type: 'arearange',
-        data: marginValues,
+        data: values.map((x) => [
+          new Date(x.week_start_unix * 1000),
+          x.expected_min,
+          x.expected_max,
+        ]),
         name: config.margin.label,
         color: config.margin.color,
         opacity: 1,
@@ -178,7 +164,10 @@ function useHighchartOptions(
       },
       {
         type: 'line',
-        data: expectedValues.map((el) => el[1]),
+        data: values.map((x) => [
+          new Date(x.week_start_unix * 1000),
+          x.expected,
+        ]),
         name: config.expected.label,
         color: config.expected.color,
         lineWidth: 2,
@@ -195,7 +184,10 @@ function useHighchartOptions(
       },
       {
         type: 'line',
-        data: registeredValues.map((el) => el[1]),
+        data: values.map((x) => [
+          new Date(x.week_start_unix * 1000),
+          x.registered,
+        ]),
         name: config.registered.label,
         color: config.registered.color,
         lineWidth: 2,
