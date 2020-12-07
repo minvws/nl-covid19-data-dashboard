@@ -3,27 +3,24 @@ import { useTooltip, Tooltip, defaultStyles } from '@visx/tooltip';
 import { extent } from 'd3-array';
 import { Box } from '~/components-styled/base';
 import Chart from './chart';
-
-// Colors
-export const background = '#3b6978';
-export const background2 = '#204051';
-export const accentColor = '#edffea';
-export const accentColorDark = '#75daad';
+import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
 
 // Accessors
-const getValue = (d: any) => d.value;
+const getValue = (d: any) => d.value; // NOTE: should be part of series data
 const getDate = (d: any) => d.date;
 
 export type ThresholdProps = {
   values: any[];
   width: number;
   height?: number;
+  timeframe?: TimeframeOption;
 };
 
 function CustomLineChart({
   values,
   width,
-  height = 200,
+  height,
+  timeframe,
 }: //   signaalwaarde,
 //   timeframe = '5weeks',
 //   formatTooltip,
@@ -39,8 +36,22 @@ ThresholdProps) {
     hideTooltip,
   } = useTooltip();
 
-  const xDomain = useMemo(() => extent(values.map((d) => d.date)), [values]);
-  const yDomain = useMemo(() => extent(values.map(getValue)), [values]);
+  const graphData = useMemo(() => {
+    const filteredData = getFilteredValues<T>(
+      values,
+      timeframe,
+      (value: T) => value.date * 1000
+    );
+    return filteredData.map((point) => ({
+      ...point,
+      date: new Date(point.date * 1000),
+    }));
+  }, [values, timeframe]);
+
+  const xDomain = useMemo(() => extent(graphData.map((d) => d.date)), [
+    graphData,
+  ]);
+  const yDomain = useMemo(() => extent(graphData.map(getValue)), [graphData]);
 
   // Tooltip
   const handleTooltip = useCallback(
@@ -68,28 +79,31 @@ ThresholdProps) {
   return (
     <Box position="relative">
       <Chart
-        trend={values}
-        getValue={getValue}
+        trend={graphData} // TODO: update to accept series with array of configurable trends
+        getValue={getValue} // NOTE: should be part of series data
         height={height}
         width={width}
         handleHover={handleTooltip}
         xDomain={xDomain}
         yDomain={yDomain}
+        isHovered={!!tooltipData}
       />
       {tooltipData && (
-        <Tooltip
-          top={tooltipTop}
-          left={tooltipLeft}
-          offsetLeft={0}
-          style={{
-            ...defaultStyles,
-            minWidth: 72,
-            textAlign: 'center',
-            transform: 'translateX(-50%)',
-          }}
-        >
-          {getDate(tooltipData).toDateString()}
-        </Tooltip>
+        <>
+          <Tooltip
+            top={tooltipTop}
+            left={tooltipLeft}
+            offsetLeft={0}
+            style={{
+              ...defaultStyles,
+              minWidth: 72,
+              textAlign: 'center',
+              transform: 'translateX(-50%)',
+            }}
+          >
+            {getDate(tooltipData).toDateString()}
+          </Tooltip>
+        </>
       )}
     </Box>
   );

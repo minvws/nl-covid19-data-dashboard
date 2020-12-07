@@ -2266,17 +2266,17 @@
     d3-geo "^1.11.3"
     prop-types "^15.5.10"
 
-"@visx/grid@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@visx/grid/-/grid-1.1.0.tgz#32c34dcfee12bd7d840ef275b7a91efafd271b55"
-  integrity sha512-rK208C2mRdR2EXsglbkP8SQloBHjSW6X+hmIPDP77hCGApSah3l5gK7HJkZvQoPtfnfOWmPOSl3ZWso3iQOGSw==
+"@visx/grid@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@visx/grid/-/grid-1.2.0.tgz#ed02a5d75278641d5499295c95824fb2b224a322"
+  integrity sha512-JygMeVTb/X4mIRRlbdlH9r55iC6fxKsEWNWwbwjLKOGrLKqAM7Nsgneqo2cwBDlo/1FH7bKUrrgztFLSDkgryQ==
   dependencies:
     "@types/classnames" "^2.2.9"
     "@types/react" "*"
     "@visx/group" "1.0.0"
     "@visx/point" "1.0.0"
     "@visx/scale" "1.1.0"
-    "@visx/shape" "1.1.0"
+    "@visx/shape" "1.2.0"
     classnames "^2.2.5"
     prop-types "^15.6.2"
 
@@ -2325,25 +2325,6 @@
     d3-interpolate "^1.4.0"
     d3-scale "^3.0.1"
     d3-time "^1.1.0"
-
-"@visx/shape@1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@visx/shape/-/shape-1.1.0.tgz#a0fdcf21a84f6cf6799aa21e24abca8afdd3e282"
-  integrity sha512-3tf+m0R2fAecz+eGgG4NMIl+LVEKm51CrM+AxSJEOrRiTe4syERgRXxOGa04BHDo75S66coBN+416L38GHri4g==
-  dependencies:
-    "@types/classnames" "^2.2.9"
-    "@types/d3-path" "^1.0.8"
-    "@types/d3-shape" "^1.3.1"
-    "@types/lodash" "^4.14.146"
-    "@types/react" "*"
-    "@visx/curve" "1.0.0"
-    "@visx/group" "1.0.0"
-    "@visx/scale" "1.1.0"
-    classnames "^2.2.5"
-    d3-path "^1.0.5"
-    d3-shape "^1.2.0"
-    lodash "^4.17.15"
-    prop-types "^15.5.10"
 
 "@visx/shape@1.2.0", "@visx/shape@^1.2.0":
   version "1.2.0"

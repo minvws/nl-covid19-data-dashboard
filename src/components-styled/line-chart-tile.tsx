@@ -41,12 +41,8 @@ export function LineChartTile<T extends Value>({
             {(parent) => (
               <CustomLineChart
                 {...chartProps}
-                values={chartProps.values.map((point) => ({
-                  ...point,
-                  date: new Date(point.date),
-                }))}
                 width={parent.width}
-                // timeframe={timeframe}
+                timeframe={timeframe}
               />
             )}
           </ParentSize>

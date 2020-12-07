@@ -1,16 +1,22 @@
 import { useCallback, memo } from 'react';
 import { Group } from '@visx/group';
-// import { curveBasis } from '@visx/curve';
-import { AreaClosed, Bar } from '@visx/shape';
+import { AreaClosed, LinePath, Bar } from '@visx/shape';
 import { AxisLeft, AxisBottom } from '@visx/axis';
 import { localPoint } from '@visx/event';
 import { bisector } from 'd3-array';
+import { colors } from '~/style/theme';
+import { GridRows } from '@visx/grid';
 
 import { scaleLinear, scaleTime } from 'd3-scale';
 
-const defaultMargin = { top: 40, right: 30, bottom: 30, left: 30 };
+const defaultMargin = { top: 10, right: 10, bottom: 30, left: 30 };
+const defaultColors = {
+  main: colors.data.primary,
+  axis: '#C4C4C4',
+};
 
 export type ThresholdProps = {
+  isHovered: boolean;
   trend: any[];
   getValue: any;
   handleHover: any;
@@ -25,11 +31,12 @@ function Chart({
   trend,
   getValue,
   width,
-  height = 200,
+  height = 250,
   margin = defaultMargin,
   xDomain,
   yDomain,
   handleHover,
+  isHovered,
 }: ThresholdProps) {
   const bounded = {
     width: width - margin.left - margin.right,
@@ -37,10 +44,7 @@ function Chart({
   };
 
   const x = scaleTime().domain(xDomain).range([0, bounded.width]);
-  const y = scaleLinear()
-    .domain(yDomain)
-    .range([bounded.height, 0])
-    .nice(width > 520 ? 8 : 3);
+  const y = scaleLinear().domain(yDomain).range([bounded.height, 0]).nice();
 
   const bisect = useCallback(
     (trend, mx) => {
@@ -74,25 +78,42 @@ function Chart({
   return (
     <svg width={width} height={height}>
       <Group left={margin.left} top={margin.top}>
+        <GridRows
+          scale={y}
+          width={bounded.width}
+          numTicks={4}
+          stroke={defaultColors.axis}
+        />
         <AxisBottom
           top={bounded.height}
           scale={x}
           numTicks={width > 520 ? 10 : 5} // improve?
+          stroke={defaultColors.axis}
         />
-        <AxisLeft scale={y} numTicks={5} />
+        <AxisLeft
+          scale={y}
+          numTicks={4}
+          hideTicks
+          hideAxisLine
+          stroke={defaultColors.axis}
+        />
 
         <AreaClosed
           data={trend}
           x={(d) => x(d.date)}
           y={(d) => y(getValue(d))}
-          stroke="black"
-          fill="pink"
+          fill={defaultColors.main}
+          fillOpacity={0.1}
           yScale={y}
-          strokeWidth={1}
-          // stroke="url(#area-gradient)"
-          // fill="url(#area-gradient)"
-          // curve={curveMonotoneX}
         />
+        <LinePath
+          data={trend}
+          x={(d) => x(d.date)}
+          y={(d) => y(getValue(d))}
+          stroke={defaultColors.main}
+          strokeWidth={isHovered ? 3 : 2}
+        />
+
         <Bar
           x={0}
           y={0}
