@@ -22,7 +22,7 @@ import {
 
 const text = siteText.sterfte;
 
-const ElderlyAtHomeNationalPage: FCWithLayout<NationalPageProps> = (props) => {
+const DeceasedNationalPage: FCWithLayout<NationalPageProps> = (props) => {
   const theme = useTheme();
   const dataCbs = props.data.deceased_cbs;
   const dataRivm = props.data.deceased_rivm;
@@ -158,8 +158,8 @@ const ElderlyAtHomeNationalPage: FCWithLayout<NationalPageProps> = (props) => {
   );
 };
 
-ElderlyAtHomeNationalPage.getLayout = getNationalLayout;
+DeceasedNationalPage.getLayout = getNationalLayout;
 
 export const getStaticProps = getNationalStaticProps;
 
-export default ElderlyAtHomeNationalPage;
+export default DeceasedNationalPage;
