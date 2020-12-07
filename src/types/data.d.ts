@@ -462,7 +462,8 @@ export interface NationalDeceasedCbsValue {
   expected: number;
   expected_min: number;
   expected_max: number;
-  date_of_report_unix: number;
+  week_start_unix: number;
+  week_end_unix: number;
   date_of_insertion_unix: number;
 }
 
@@ -752,7 +753,8 @@ export interface RegionalDeceasedCbsValue {
   expected: number;
   expected_min: number;
   expected_max: number;
-  date_of_report_unix: number;
+  week_start_unix: number;
+  week_end_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;
 }
