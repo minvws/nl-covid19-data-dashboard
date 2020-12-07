@@ -756,7 +756,6 @@ export interface RegionalDeceasedCbsValue {
   week_start_unix: number;
   week_end_unix: number;
   date_of_insertion_unix: number;
-  vrcode: string;
 }
 
 export interface Regions {

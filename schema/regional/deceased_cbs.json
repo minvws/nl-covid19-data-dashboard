@@ -40,10 +40,6 @@
         },
         "date_of_insertion_unix": {
           "type": "integer"
-        },
-        "vrcode": {
-          "type": "string",
-          "equalsRootProperty": "code"
         }
       },
       "required": [
@@ -53,8 +49,7 @@
         "expected_max",
         "week_start_unix",
         "week_end_unix",
-        "date_of_insertion_unix",
-        "vrcode"
+        "date_of_insertion_unix"
       ],
       "additionalProperties": false
     }
