@@ -23,7 +23,7 @@ export function AgeDemographic({ data }: AgeDemographicProps) {
   const breakpoints = useBreakpoints();
   const isSmallScreen = !breakpoints.md;
 
-  // Calculate graph's coordinates based on the data, the component width and eher we are on a small screen or not.
+  // Calculate graph's coordinates based on the data, the component width and wheher we are on a small screen or not.
   const coordinates = useMemo(() => {
     return getAgeDemographicCoordinates(data, isSmallScreen, parentWidth);
   }, [data, isSmallScreen, parentWidth]);

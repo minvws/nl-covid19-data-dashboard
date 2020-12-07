@@ -82,7 +82,7 @@ export function useTooltip<T>({
 
     const direction = event.which === KEY_ARROW_LEFT ? -1 : 1;
 
-    // The new index overfloews from zero to the last and vice versa
+    // The new index overflows from zero to the last and vice versa
     const newIndex =
       keyboardValueIndex === undefined
         ? 0
