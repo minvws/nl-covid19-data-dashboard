@@ -157,9 +157,9 @@ function useHighchartOptions(
 
         return `
             ${dateText}<br/>
-            <strong>${config.registered.label}</strong> ${registeredText}<br/>
-            <strong>${config.expected.label}</strong> ${expectedText}<br/>
-            <strong>${config.margin.label}</strong> ${marginText}<br/>
+            <strong>${config.registered.label}:</strong> ${registeredText}<br/>
+            <strong>${config.expected.label}:</strong> ${expectedText}<br/>
+            <strong>${config.margin.label}:</strong> ${marginText}<br/>
           `;
       },
     },
