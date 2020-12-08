@@ -761,7 +761,8 @@
     "tooltip": {
       "positive_tested_people": ""
     },
-    "niveau": ""
+    "niveau": "",
+    "clear_select_input": "Clear"
   },
   "seoHead": {
     "default_description": "Information on the development of the coronavirus in The Netherlands.",
