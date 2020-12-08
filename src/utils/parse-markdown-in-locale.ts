@@ -9,9 +9,10 @@ const MARKDOWN_KEYS = [
   'regionaal_index.belangrijk_bericht',
   'veiligheidsregio_index.selecteer_toelichting',
   'veiligheidsregio_index.belangrijk_bericht',
-  'over_risiconiveaus.toelichting',
+  'over_risiconiveaus.paragraaf',
   'over_beschrijving.text',
   'over_veelgestelde_vragen.vragen[].antwoord',
+  'over_risiconiveaus.vragen[].antwoord',
   'verantwoording.cijfers[].verantwoording',
 ];
 
