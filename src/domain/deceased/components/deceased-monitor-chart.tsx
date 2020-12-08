@@ -4,6 +4,7 @@ import {
   NationalDeceasedCbsValue,
   RegionalDeceasedCbsValue,
 } from '~/types/data';
+import { createDate } from '~/utils/createDate';
 import { formatDateFromMilliseconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 
@@ -68,7 +69,7 @@ function useHighchartOptions(values: CbsValue[], config: SeriesConfig) {
       lineColor: '#C4C4C4',
       gridLineColor: '#ca005d',
       type: 'datetime',
-      categories: values.map((x) => (x.week_start_unix * 1000).toString()),
+      categories: values.map((x) => toEpochMs(x.week_start_unix).toString()),
       title: {
         text: null,
       },
@@ -118,14 +119,14 @@ function useHighchartOptions(values: CbsValue[], config: SeriesConfig) {
       borderRadius: 0,
       xDateFormat: '%d %b %y',
       formatter() {
-        const value = values.find((x) => x.week_start_unix === this.x / 1000);
+        const value = values.find(
+          (x) => toEpochMs(x.week_start_unix) === Number(this.x)
+        );
 
         if (!value) return;
 
-        const dateText = [
-          value.week_start_unix * 1000,
-          value.week_end_unix * 1000,
-        ]
+        const dateText = [value.week_start_unix, value.week_end_unix]
+          .map(toEpochMs)
           .map((x) => formatDateFromMilliseconds(x, 'medium'))
           .join(' - ');
 
@@ -152,7 +153,7 @@ function useHighchartOptions(values: CbsValue[], config: SeriesConfig) {
       {
         type: 'arearange',
         data: values.map((x) => [
-          new Date(x.week_start_unix * 1000),
+          createDate(x.week_start_unix),
           x.expected_min,
           x.expected_max,
         ]),
@@ -166,10 +167,7 @@ function useHighchartOptions(values: CbsValue[], config: SeriesConfig) {
       },
       {
         type: 'line',
-        data: values.map((x) => [
-          new Date(x.week_start_unix * 1000),
-          x.expected,
-        ]),
+        data: values.map((x) => [createDate(x.week_start_unix), x.expected]),
         name: config.expected.label,
         color: config.expected.color,
         lineWidth: 2,
@@ -186,10 +184,7 @@ function useHighchartOptions(values: CbsValue[], config: SeriesConfig) {
       },
       {
         type: 'line',
-        data: values.map((x) => [
-          new Date(x.week_start_unix * 1000),
-          x.registered,
-        ]),
+        data: values.map((x) => [createDate(x.week_start_unix), x.registered]),
         name: config.registered.label,
         color: config.registered.color,
         lineWidth: 2,
@@ -206,4 +201,8 @@ function useHighchartOptions(values: CbsValue[], config: SeriesConfig) {
       },
     ],
   } as Highcharts.Options;
+}
+
+function toEpochMs(x: number) {
+  return x * 1000;
 }
