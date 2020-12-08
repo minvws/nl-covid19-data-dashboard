@@ -4,18 +4,19 @@ import styled from 'styled-components';
 import { Box } from '~/components-styled/base';
 import { Tile } from '~/components-styled/layout';
 import { PercentageBar } from '~/components-styled/percentage-bar';
+import { Heading } from '~/components-styled/typography';
+import siteText from '~/locale/index';
 import { NationalBehaviorValue, RegionalBehaviorValue } from '~/types/data';
 import { formatPercentage } from '~/utils/formatNumber';
 import {
-  behaviorIdentifiers,
   BehaviorIdentifier,
+  behaviorIdentifiers,
   BehaviorTrendType,
   BehaviorType,
 } from './behavior-types';
 import { BehaviorIcon } from './components/behavior-icon';
 import { BehaviorTrend } from './components/behavior-trend';
 import { BehaviorTypeControl } from './components/behavior-type-control';
-import siteText from '~/locale/index';
 
 const commonText = siteText.gedrag_common;
 
@@ -138,7 +139,7 @@ export function BehaviorTableTile({
       ml={{ _: -4, sm: 0 }}
       mr={{ _: -4, sm: 0 }}
     >
-      <h3>{title}</h3>
+      <Heading level={3}>{title}</Heading>
       <Box display="flex" justifyContent="start">
         <BehaviorTypeControl value={behaviorType} onChange={setBehaviorType} />
       </Box>

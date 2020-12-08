@@ -5,6 +5,7 @@ import { isDefined } from 'ts-is-present';
 import { Box, Spacer } from '~/components-styled/base';
 import { Tile } from '~/components-styled/layout';
 import { Select } from '~/components-styled/select';
+import { Heading } from '~/components-styled/typography';
 import siteText from '~/locale/index';
 import { NationalBehaviorValue, RegionalBehaviorValue } from '~/types/data';
 import {
@@ -74,7 +75,7 @@ export function BehaviorLineChartTile({
     >
       <Header>
         <Box mr={{ lg: '1em' }} mb={{ lg: '1em' }}>
-          <h3>{title}</h3>
+          <Heading level={3}>{title}</Heading>
         </Box>
       </Header>
 
