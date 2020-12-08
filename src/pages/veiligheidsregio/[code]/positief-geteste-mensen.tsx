@@ -10,6 +10,7 @@ import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { MultipleLineChartTile } from '~/components-styled/multiple-line-chart-tile';
+import { PageBarScale } from '~/components-styled/page-barscale';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
@@ -19,7 +20,6 @@ import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropl
 import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { SEOHead } from '~/components/seoHead';
-import { PositivelyTestedPeopleBarScale } from '~/components/veiligheidsregio/positive-tested-people-barscale';
 import regionCodeToMunicipalCodeLookup from '~/data/regionCodeToMunicipalCodeLookup';
 import siteText from '~/locale/index';
 import {
@@ -84,9 +84,13 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
             source: text.bronnen.rivm,
           }}
         >
-          <PositivelyTestedPeopleBarScale
-            data={resultsPerRegion}
-            showAxis={true}
+          <PageBarScale
+            data={data}
+            scope="vr"
+            metricName="results_per_region"
+            metricProperty="infected_increase_per_region"
+            localeTextKey="veiligheidsregio_positief_geteste_personen"
+            differenceKey="results_per_region__infected_increase_per_region"
           />
           <Text>{text.barscale_toelichting}</Text>
         </KpiTile>

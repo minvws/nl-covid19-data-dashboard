@@ -13,9 +13,9 @@ import {
 } from '~/components-styled/aside/menu';
 import { TitleWithIcon } from '~/components-styled/aside/title-with-icon';
 import { Box } from '~/components-styled/base';
+import { SidebarMetric } from '~/components-styled/sidebar-metric';
 import { Text } from '~/components-styled/typography';
 import { ComboBox } from '~/components/comboBox';
-import { PositivelyTestedPeopleMetric } from '~/components/gemeente/positively-tested-people-metric';
 import { SewerWaterMetric } from '~/components/gemeente/sewer-water-metric';
 import { getLayout as getSiteLayout } from '~/components/layout';
 import municipalities from '~/data/gemeente_veiligheidsregio.json';
@@ -191,9 +191,14 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                                     .titel_sidebar
                                 }
                               />
-                              <span className="metric-wrapper">
-                                <PositivelyTestedPeopleMetric data={data} />
-                              </span>
+                              <SidebarMetric
+                                data={data}
+                                scope="gm"
+                                metricName="positive_tested_people"
+                                metricProperty="infected_daily_total"
+                                localeTextKey="gemeente_positief_geteste_personen"
+                                differenceKey="positive_tested_people__infected_daily_total"
+                              />
                             </a>
                           </Link>
                         </MetricMenuItem>
