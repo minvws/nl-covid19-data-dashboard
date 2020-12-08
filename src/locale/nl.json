@@ -9,7 +9,7 @@
     "title": "Laatst bijgewerkt"
   },
   "notificatie": {
-    "titel": "Aantal COVID-19 meldingen stagneert",
+    "titel": "Zorgwekkende stijging aantal meldingen COVID-19",
     "bericht": "Afgelopen week zijn er 27% meer nieuwe meldingen van COVID-19 besmettingen gerapporteerd dan een week eerder. In de week van 2 tot en met 8 december werden 43.103 nieuwe personen met een positieve COVID-19 uitslag gemeld. Ruim 9.000 meldingen meer dan 33.949 meldingen in de week daarvoor. In iedere veiligheidsregio steeg het aantal nieuwe meldingen van COVID-19 besmettingen. Meer mensen hebben zich laten testen. Het percentage mensen met een positieve testuitslag is gestegen van 11,1% naar 11,6% afgelopen week. Het reproductiegetal van 20 november is 1,00 (ondergrens 0,97 – bovengrens 1,03).\n\nHet risiconiveau per regio kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2), ‘ernstig’ (niveau 3), ‘zeer ernstig’ (niveau 4) zijn. Op dit moment zijn {{escalationLevel4}} regio’s ingeschaald op ‘zeer ernstig’, {{escalationLevel3}} op ‘ernstig’, {{escalationLevel2}} op ‘zorgelijk’ en {{escalationLevel1}} op ‘waakzaam.‘",
     "link": {
       "text": "Bekijk de toelichting van het RIVM",
@@ -1084,7 +1084,7 @@
   },
   "laatste_ontwikkelingen": {
     "title": "Laatste ontwikkelingen",
-    "menu_subtitle": "Aantal COVID-19 meldingen stagneert",
+    "menu_subtitle": "Stijging aantal meldingen COVID-19",
     "alle_cijfers_header": "Benieuwd naar alle cijfers?",
     "alle_cijfers_link": "Bekijk alle cijfers"
   },
