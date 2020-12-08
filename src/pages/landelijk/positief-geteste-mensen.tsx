@@ -85,7 +85,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
       />
       <ContentHeader
         category={siteText.nationaal_layout.headings.besmettingen}
-        screenreaderCategory={siteText.positief_geteste_personen.titel_sidebar}
+        screenReaderCategory={siteText.positief_geteste_personen.titel_sidebar}
         title={text.titel}
         icon={<Getest />}
         subtitle={text.pagina_toelichting}
@@ -171,7 +171,8 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
         onChangeControls={setSelectedMap}
         legend={{
           title: text.chloropleth_legenda.titel,
-          thresholds: regionThresholds.positive_tested_people,
+          thresholds:
+            regionThresholds.positive_tested_people.positive_tested_people,
         }}
       >
         {/**
@@ -189,7 +190,9 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
           <MunicipalityChoropleth
             metricName="positive_tested_people"
             metricProperty="positive_tested_people"
-            tooltipContent={createPositiveTestedPeopleMunicipalTooltip(router)}
+            tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
+              createSelectMunicipalHandler(router)
+            )}
             onSelect={createSelectMunicipalHandler(router)}
           />
         )}
@@ -197,7 +200,9 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
           <SafetyRegionChoropleth
             metricName="positive_tested_people"
             metricProperty="positive_tested_people"
-            tooltipContent={createPositiveTestedPeopleRegionalTooltip(router)}
+            tooltipContent={createPositiveTestedPeopleRegionalTooltip(
+              createSelectRegionHandler(router)
+            )}
             onSelect={createSelectRegionHandler(router)}
           />
         )}

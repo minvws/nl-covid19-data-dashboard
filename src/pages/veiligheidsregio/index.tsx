@@ -86,7 +86,9 @@ const SafetyRegion: FCWithLayout<any> = (props) => {
             metricName="escalation_levels"
             metricProperty="escalation_level"
             onSelect={createSelectRegionHandler(router)}
-            tooltipContent={escalationTooltip(router)}
+            tooltipContent={escalationTooltip(
+              createSelectRegionHandler(router)
+            )}
           />
         </div>
 

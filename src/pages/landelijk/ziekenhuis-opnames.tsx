@@ -33,7 +33,7 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
       />
       <ContentHeader
         category={siteText.nationaal_layout.headings.ziekenhuizen}
-        screenreaderCategory={siteText.ziekenhuisopnames_per_dag.titel_sidebar}
+        screenReaderCategory={siteText.ziekenhuisopnames_per_dag.titel_sidebar}
         title={text.titel}
         icon={<Ziekenhuis />}
         subtitle={text.pagina_toelichting}
@@ -112,7 +112,7 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
         description={text.map_toelichting}
         onChangeControls={setSelectedMap}
         legend={{
-          thresholds: regionThresholds.hospital_admissions,
+          thresholds: regionThresholds.hospital_admissions.hospital_admissions,
           title: text.chloropleth_legenda.titel,
         }}
         metadata={{

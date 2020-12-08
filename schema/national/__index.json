@@ -24,7 +24,9 @@
     "hospital_beds_occupied",
     "intensive_care_beds_occupied",
     "ggd",
-    "nursing_home"
+    "nursing_home",
+    "elderly_at_home",
+    "disability_care"
   ],
   "additionalProperties": false,
   "properties": {
@@ -100,11 +102,17 @@
     "nursing_home": {
       "$ref": "nursing_home.json"
     },
+    "disability_care": {
+      "$ref": "disability_care.json"
+    },
     "restrictions": {
       "$ref": "restrictions.json"
     },
     "behavior": {
       "$ref": "behavior.json"
+    },
+    "elderly_at_home": {
+      "$ref": "elderly_at_home.json"
     }
   }
 }

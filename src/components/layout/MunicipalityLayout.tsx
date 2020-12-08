@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import Link from 'next/link';
+import { Link } from '~/utils/link';
 import { useRouter } from 'next/router';
 import Arrow from '~/assets/arrow.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';

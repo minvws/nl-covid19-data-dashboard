@@ -36,7 +36,7 @@ export function Metadata({ date, source }: MetadataProps) {
         {source ? (
           <>
             {locale.common.metadata.source}
-            {': '} <ExternalLink {...source} />
+            {': '} <ExternalLink href={source.href}>{source.text}</ExternalLink>
           </>
         ) : null}
       </Text>

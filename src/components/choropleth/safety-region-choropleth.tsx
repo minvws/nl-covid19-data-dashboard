@@ -1,6 +1,7 @@
 import css from '@styled-system/css';
 import { Feature, MultiPolygon } from 'geojson';
 import { ReactNode, useCallback } from 'react';
+import { AspectRatio } from '~/components-styled/aspect-ratio';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { Choropleth } from './choropleth';
 import {
@@ -50,7 +51,8 @@ export function SafetyRegionChoropleth<T>(
     tooltipContent,
   } = props;
 
-  const [ref, dimensions] = useChartDimensions<HTMLDivElement>(1.2);
+  const ratio = 1.2;
+  const [ref, dimensions] = useChartDimensions<HTMLDivElement>(ratio);
 
   const boundingBox = useSafetyRegionBoundingbox(regionGeo, selected);
 
@@ -128,16 +130,18 @@ export function SafetyRegionChoropleth<T>(
 
   return (
     <div ref={ref} css={css({ position: 'relative', bg: 'transparent' })}>
-      <Choropleth
-        featureCollection={regionGeo}
-        hovers={hasData ? regionGeo : undefined}
-        boundingBox={boundingBox || countryGeo}
-        dimensions={dimensions}
-        featureCallback={featureCallback}
-        hoverCallback={hoverCallback}
-        onPathClick={onClick}
-        getTooltipContent={getTooltipContent}
-      />
+      <AspectRatio ratio={1 / ratio}>
+        <Choropleth
+          featureCollection={regionGeo}
+          hovers={hasData ? regionGeo : undefined}
+          boundingBox={boundingBox || countryGeo}
+          dimensions={dimensions}
+          featureCallback={featureCallback}
+          hoverCallback={hoverCallback}
+          onPathClick={onClick}
+          getTooltipContent={getTooltipContent}
+        />
+      </AspectRatio>
     </div>
   );
 }

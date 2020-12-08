@@ -1,20 +1,17 @@
-import { NextRouter } from 'next/router';
 import { ReactNode } from 'react';
+import { MunicipalitySelectionHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { MunicipalityProperties } from '~/components/choropleth/shared';
-import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
 import { MunicipalitiesHospitalAdmissions } from '~/types/data';
 
 export const createMunicipalHospitalAdmissionsTooltip = (
-  router: NextRouter
+  selectHandler: MunicipalitySelectionHandler
 ) => (
   context: MunicipalityProperties & MunicipalitiesHospitalAdmissions
 ): ReactNode => {
-  const handler = createSelectMunicipalHandler(router);
-
   const onSelect = (event: any) => {
     event.stopPropagation();
-    handler(context);
+    selectHandler(context);
   };
 
   return (
