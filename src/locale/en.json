@@ -680,12 +680,12 @@
         "verantwoording": ""
       },
       {
-        "cijfer": "",
-        "verantwoording": ""
+        "cijfer": "Disability care homes",
+        "verantwoording": "Every day the National Institute for Public Health and the Environment (RIVM) provides open data about the COVID-19 situation in disability care homes. A description of the data set can be found here. \n\nThis data cannot always be clearly linked to a specific safety region. As a result, the total sum of numbers at safety-region level may be less than the numbers at national level. The number of deaths is based on the date of death. However, when the date of death is unknown that death is not included in this statistic in the dashboard.\n\nThe word ‘locations’ refers to the 2,586 care homes in the Netherlands that are registered by Zorgkaart Nederland [LINK] as providing residential care to people with disabilities. The number of locations in each safety region is provided by RIVM. Care homes with the same postcode are counted as one location, which is identical to the method used to determine the number of infected locations. The number of locations in each safety region is needed in order to calculate the percentage of infected locations in that region. The total number of locations in the Netherlands is calculated by adding up the numbers for all of the safety regions.\n\nAs with nursing homes, information about disability care homes is based on records kept by the municipal health services (GGDs). As of 1 July 2020, every time a person tests positive for COVID-19, the GGD asks whether that person is a resident of a disability care home. A person is considered to be a disability care home resident if this is evident from information in OSIRIS (the database used by RIVM for this purpose). If it is unknown whether someone is a disability care home resident, their postcode can be used to link them to a registered disability care home or a setting (place where the infection may have occurred) labelled as a ‘care home’ or something similar.\n"
       },
       {
-        "cijfer": "Every day the National Institute for Public Health and the Environment (RIVM) provides open data about the COVID-19 situation among over-70s living at home. A description of the data set can be found here. This data cannot always be clearly linked to a specific safety region. As a result, the total sum of numbers at safety-region level may be less than the numbers at national level. The number of deaths is based on the date of death. However, when the date of death is unknown that death is not included in this statistic in the dashboard.\n\nFor its calculations RIVM uses test results and mortality data which it receives from the municipal health service (GGD). When people get tested for coronavirus, the GGD also records certain personal details, such as their age and whether they live in a nursing home or disability care home. RIVM calculates the number of new cases among over-70s living at home by, first, determining the total number of new cases in this age group and then subtracting the number of infections:\n-\tAmongst nursing home residents \n-\tAmongst care workers\n-\tAmongst people that can be linked to a care home via their address \n-\tAmongst people that can be linked to a care home because of the setting of their infection.\n\nThe population of over-70s living at home is highly diverse in terms of their health and living situation. Many over-70s are active and in good health. But others live with at least one chronic disease and/or have physical or cognitive limitations, and are less active. It is not possible at this time to distinguish between COVID-19 infections among active and inactive over-70s living at home because information about activity levels is not recorded when people get tested for coronavirus.\n\nThe dashboard also shows the number of daily confirmed cases per 100,000 for over-70s living at home. The total number of over-70s living at home is based on data collected by Statistics Netherlands on the number of over-70s living in a private household (Households: size, composition, position, 1 January; cbs.nl). This group consists of roughly 2.3 million people.",
-        "verantwoording": ""
+        "cijfer": "People over 70 living at home",
+        "verantwoording": "Every day the National Institute for Public Health and the Environment (RIVM) provides open data about the COVID-19 situation among over-70s living at home. A description of the data set can be found here. This data cannot always be clearly linked to a specific safety region. As a result, the total sum of numbers at safety-region level may be less than the numbers at national level. The number of deaths is based on the date of death. However, when the date of death is unknown that death is not included in this statistic in the dashboard.\n\nFor its calculations RIVM uses test results and mortality data which it receives from the municipal health service (GGD). When people get tested for coronavirus, the GGD also records certain personal details, such as their age and whether they live in a nursing home or disability care home. RIVM calculates the number of new cases among over-70s living at home by, first, determining the total number of new cases in this age group and then subtracting the number of infections:\n-\tAmongst nursing home residents \n-\tAmongst care workers\n-\tAmongst people that can be linked to a care home via their address \n-\tAmongst people that can be linked to a care home because of the setting of their infection.\n\nThe population of over-70s living at home is highly diverse in terms of their health and living situation. Many over-70s are active and in good health. But others live with at least one chronic disease and/or have physical or cognitive limitations, and are less active. It is not possible at this time to distinguish between COVID-19 infections among active and inactive over-70s living at home because information about activity levels is not recorded when people get tested for coronavirus.\n\nThe dashboard also shows the number of daily confirmed cases per 100,000 for over-70s living at home. The total number of over-70s living at home is based on data collected by Statistics Netherlands on the number of over-70s living in a private household (Households: size, composition, position, 1 January; cbs.nl). This group consists of roughly 2.3 million people."
       },
       {
         "cijfer": "",
@@ -1631,7 +1631,7 @@
   },
   "gehandicaptenzorg_oversterfte": {
     "datums": "Latest values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "titel": "",
+    "titel": "Disability care homes – Deaths",
     "pagina_toelichting": "Number of disability care home residents who have died from COVID-19.",
     "barscale_titel": "Number of deceased residents",
     "barscale_screenreader_text": "",
@@ -1646,7 +1646,7 @@
     "titel_kpi": "Number of deceased residents",
     "reference": {
       "href": "/verantwoording#disability-care-homes",
-      "text": ""
+      "text": "Read more in explantion of the data presented"
     },
     "bronnen": {
       "rivm": {
@@ -1657,33 +1657,33 @@
     }
   },
   "veiligheidsregio_gehandicaptenzorg_oversterfte": {
-    "datums": "",
+    "datums": "Latest values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
-      "href": "",
-      "text": ""
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+      "text": "RIVM"
     },
-    "titel": "",
-    "pagina_toelichting": "",
-    "barscale_titel": "",
+    "titel": "Disability care homes in {{safetyRegion}} – deaths",
+    "pagina_toelichting": "Number of disability care home residents in this region with confirmed COVID-19 who have died, per day.",
+    "barscale_titel": "Number of deceased residents",
     "barscale_screenreader_text": "",
-    "extra_uitleg": "",
-    "linechart_titel": "",
+    "extra_uitleg": "This is an estimate of the number of COVID-19 related deaths reported yesterday among disability care home residents in this region.",
+    "linechart_titel": "Progression over time",
     "map_titel": "",
     "map_toelichting": "",
-    "titel_sidebar": "",
+    "titel_sidebar": "Death per day",
     "metadata": {
       "title": "Deceased residents of disability care homes in {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
       "description": "Total number of confirmed cases in disability care homes in safety region {{safetyRegionName}} that died from COVID-19"
     },
     "reference": {
-      "href": "",
-      "text": ""
+      "href": "/verantwoording#disability-care-homes",
+      "text": "Read more in 'explanation of the data presented'."
     },
     "bronnen": {
       "rivm": {
-        "download": "",
-        "href": "",
-        "text": ""
+        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "text": "RIVM"
       }
     }
   },
