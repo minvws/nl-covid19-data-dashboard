@@ -11,7 +11,7 @@ import { colors } from '~/style/theme';
 import Trends from './trends';
 
 const NUM_TICKS = 3;
-export const defaultMargin = { top: 10, right: 10, bottom: 30, left: 30 };
+export const defaultMargin = { top: 10, right: 20, bottom: 30, left: 30 };
 const defaultColors = {
   main: colors.data.primary,
   axis: '#C4C4C4',

@@ -33,9 +33,7 @@ function CustomLineChart({
   signaalwaarde,
   formatTooltip,
   formatYAxis,
-}: // formatTooltip,
-//   formatYAxis,
-//   valueAnnotation,
+}: //   valueAnnotation,
 //   showFill = true,
 ThresholdProps) {
   const {
@@ -115,7 +113,10 @@ ThresholdProps) {
           y={tooltipTop + defaultMargin.top}
         >
           {formatTooltip
-            ? formatTooltip(tooltipData.date)
+            ? formatTooltip({
+                ...tooltipData,
+                date: dateToValue(tooltipData.date),
+              })
             : `${formatDateFromSeconds(
                 dateToValue(tooltipData.date)
               )}: ${formatNumber(tooltipData.value)}`}
