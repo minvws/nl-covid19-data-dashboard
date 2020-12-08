@@ -1,10 +1,10 @@
 import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { assert } from '~/utils/assert';
-import { nl } from './nl';
-import { vr } from './vr';
 import { gm } from './gm';
+import { nl } from './nl';
 import { BarScaleConfig, MetricConfig } from './types';
+import { vr } from './vr';
 
 /**
  * This configuration declares properties about data to be used by various
@@ -22,14 +22,11 @@ import { BarScaleConfig, MetricConfig } from './types';
  */
 export type DataScope = 'nl' | 'vr' | 'gm';
 
-const metricConfig: Record<
-  DataScope,
-  Record<string, Record<string, MetricConfig>>
-> = {
+const metricConfig = {
   nl,
   vr,
   gm,
-};
+} as const;
 
 export function getDataConfig(
   scope: DataScope,

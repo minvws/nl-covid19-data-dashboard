@@ -1,16 +1,16 @@
 import { MetricConfig } from './types';
 import { colors } from '~/style/theme';
+import { National } from '~/types/data';
+import { MetricKeys } from '~/components/choropleth/shared';
 
 const GREEN = colors.data.gradient.green;
 const YELLOW = colors.data.gradient.yellow;
 const RED = colors.data.gradient.red;
 
-/**
- * Maybe we can make this stricter, but if I use keyof National now, it
- * complains that I haven't implemented all properties of national. So for now
- * they are all the same and vague.
- */
-type NlConfig = Record<string, Record<string, MetricConfig>>;
+type NlMetricKey = MetricKeys<National>;
+export type NlConfig = Partial<
+  Record<NlMetricKey, Record<string, MetricConfig>>
+>;
 
 export const nl: NlConfig = {
   intake_hospital_ma: {
