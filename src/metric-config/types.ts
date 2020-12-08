@@ -1,9 +1,10 @@
 /**
- * These types are placed here to avoid a circular depencency. The nl/vr/gm
+ * These types are placed here to avoid a circular dependency. The nl/vr/gm
  * files import them and those files are imported from index, so placing them
  * in index would make it circular.
  */
 export type MetricConfig = {
+  isDecimal?: boolean;
   isPercentage?: boolean;
   isWeeklyData?: boolean;
   barScale?: BarScaleConfig;

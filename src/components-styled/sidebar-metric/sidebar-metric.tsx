@@ -7,7 +7,7 @@ import { SidebarKpiValue } from './sidebar-kpi-value';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import siteText, { TALLLanguages } from '~/locale/index';
-import { getDataConfig, DataScope } from '~/metric-config';
+import { getMetricConfig, DataScope } from '~/metric-config';
 import {
   MetricKeys /* DifferenceKeys */,
 } from '~/components/choropleth/shared';
@@ -63,7 +63,7 @@ export function SidebarMetric<T extends { difference: unknown }>({
       .join(':')}`
   );
 
-  const config = getDataConfig(
+  const config = getMetricConfig(
     scope,
     (metricName as unknown) as string,
     metricProperty

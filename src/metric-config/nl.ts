@@ -39,6 +39,7 @@ export const nl: NlConfig = {
   },
   intake_intensivecare_ma: {
     moving_average_ic: {
+      isDecimal: true,
       barScale: {
         min: 0,
         max: 30,

@@ -1,9 +1,7 @@
 import { get } from 'lodash';
-import { isDefined } from 'ts-is-present';
-import { assert } from '~/utils/assert';
 import { gm } from './gm';
 import { nl } from './nl';
-import { BarScaleConfig, MetricConfig } from './types';
+import { MetricConfig } from './types';
 import { vr } from './vr';
 
 /**
@@ -26,49 +24,18 @@ const metricConfig = {
   gm,
 } as const;
 
-export function getDataConfig(
+export function getMetricConfig(
   scope: DataScope,
   metricName: string,
   metricProperty: string
 ) {
   /**
    * Fall back to an empty object so we don't have to specify empty objects in
-   * the config file for properties that do not need a config.
+   * the config file for properties that do not need a config. Since all
+   * root-level properties in the MetricConfig are optional, an empty object is
+   * still a valid configuration.
    */
   const config = get(metricConfig, [scope, metricName, metricProperty], {});
 
   return config as MetricConfig;
-}
-
-/**
- * Because it is very common to want to get to the bar scale config, and also we
- * want to enforce the configuration is available, this specific function
- * grabs that config with an assertion.
- */
-export function getDataConfigForBarScale(
-  scope: DataScope,
-  metricName: string,
-  metricProperty: string
-) {
-  const config = get(metricConfig, [scope, metricName, metricProperty]);
-
-  /**
-   * @TODO The bar scale config should exist, but if it is common that the vr/gm
-   * scales are the same as nl, then we can do a fallback here when the
-   * configuration can't be found. Not sure yet if that is a good idea of asking
-   * for trouble.
-   */
-  assert(
-    config && config.barScale,
-    `Missing configuration for bar scale metric at ${[
-      scope,
-      metricName,
-      metricProperty,
-      'barScale',
-    ]
-      .filter(isDefined)
-      .join(':')}`
-  );
-
-  return config.barScale as BarScaleConfig;
 }

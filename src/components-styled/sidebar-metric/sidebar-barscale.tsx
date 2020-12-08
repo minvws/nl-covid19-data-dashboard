@@ -4,7 +4,7 @@ import { BarScale } from '~/components/barScale';
 import { MetricKeys } from '~/components/choropleth/shared';
 import siteText, { TALLLanguages } from '~/locale/index';
 import { assert } from '~/utils/assert';
-import { DataScope, getDataConfigForBarScale } from '../../metric-config';
+import { DataScope, getMetricConfig } from '../../metric-config';
 import { Box } from '../base';
 
 interface SidebarBarScaleProps<T> {
@@ -46,18 +46,28 @@ export function SidebarBarScale<T>({
       .join(':')}`
   );
 
-  const config = getDataConfigForBarScale(
+  const config = getMetricConfig(
     scope,
     (metricName as unknown) as string,
     metricProperty
   );
 
   assert(
+    config.barScale,
+    `Missing configuration for bar scale metric at ${[
+      scope,
+      metricName,
+      metricProperty,
+      'barScale',
+    ]
+      .filter(isDefined)
+      .join(':')}`
+  );
+
+  assert(
     text.barscale_screenreader_text,
     `Missing screen reader text at ${localeTextKey}.barscale_screenreader_text`
   );
-
-  assert(config.rangesKey, `Missing ranges key for bar scale ${localeTextKey}`);
 
   /**
     @TODO refactor BarScale and remove these ugly css hacks which were part of
@@ -66,14 +76,14 @@ export function SidebarBarScale<T>({
   return (
     <Box height="3.5rem" mt="-1.25em">
       <BarScale
-        min={config.min}
-        max={config.max}
-        signaalwaarde={config.signaalwaarde}
+        min={config.barScale.min}
+        max={config.barScale.max}
+        signaalwaarde={config.barScale.signaalwaarde}
         screenReaderText={text.barscale_screenreader_text}
         value={propertyValue}
         id={uniqueId}
-        rangeKey={config.rangesKey}
-        gradient={config.gradient}
+        rangeKey={config.barScale.rangesKey}
+        gradient={config.barScale.gradient}
         showValue={false}
       />
     </Box>

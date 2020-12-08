@@ -4,7 +4,7 @@ import { BarScale } from '~/components/barScale';
 import { MetricKeys } from '~/components/choropleth/shared';
 import siteText, { TALLLanguages } from '~/locale/index';
 import { assert } from '~/utils/assert';
-import { DataScope, getDataConfigForBarScale } from '../metric-config';
+import { DataScope, getMetricConfig } from '../metric-config';
 import { Box } from './base';
 import { DifferenceIndicator } from './difference-indicator';
 
@@ -55,18 +55,28 @@ export function PageBarScale<T>({
       .join(':')}`
   );
 
-  const config = getDataConfigForBarScale(
+  const config = getMetricConfig(
     scope,
     (metricName as unknown) as string,
     metricProperty
   );
 
   assert(
+    config.barScale,
+    `Missing configuration for bar scale metric at ${[
+      scope,
+      metricName,
+      metricProperty,
+      'barScale',
+    ]
+      .filter(isDefined)
+      .join(':')}`
+  );
+
+  assert(
     text.barscale_screenreader_text,
     `Missing screen reader text at ${localeTextKey}.barscale_screenreader_text`
   );
-
-  assert(config.rangesKey, `Missing ranges key for bar scale ${localeTextKey}`);
 
   const differenceValue = differenceKey
     ? get(data, ['difference', (differenceKey as unknown) as string])
@@ -85,18 +95,23 @@ export function PageBarScale<T>({
   return (
     <Box spacing={2}>
       <BarScale
-        min={config.min}
-        max={config.max}
-        signaalwaarde={config.signaalwaarde}
+        min={config.barScale.min}
+        max={config.barScale.max}
+        signaalwaarde={config.barScale.signaalwaarde}
         screenReaderText={text.barscale_screenreader_text}
         value={propertyValue}
         id={uniqueId}
-        rangeKey={config.rangesKey}
-        gradient={config.gradient}
+        rangeKey={config.barScale.rangesKey}
+        gradient={config.barScale.gradient}
         showValue={true}
         showAxis={true}
       />
-      {differenceKey && <DifferenceIndicator value={differenceValue} />}
+      {differenceKey && (
+        <DifferenceIndicator
+          value={differenceValue}
+          isDecimal={config.isDecimal}
+        />
+      )}
     </Box>
   );
 }
