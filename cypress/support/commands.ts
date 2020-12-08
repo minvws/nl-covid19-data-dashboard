@@ -38,6 +38,12 @@ declare global {
        */
       dataCy(value: string): Chainable<Element>;
       /**
+       * Page navigation for general pages (about pages, etc)
+       *
+       * @param pageName
+       */
+      beforeGeneralTests(pageName: string): void;
+      /**
        * Fixture loading and page navigation for municipal page tests
        *
        * @param pageName
@@ -82,6 +88,12 @@ Cypress.Commands.add('checkHeadings', () => {
     1,
     'More than one <H1> element was found on the page, only one is allowed. This might be because there are multiple <ContentHeader> components on the page that all have a category prop assigned. This prop is rendered as an <H1> element. Remove one of those props to fix this error.'
   );
+});
+
+Cypress.Commands.add('beforeGeneralTests', (pageName: string) => {
+  cy.visit(`/${pageName}`);
+
+  cy.checkHeadings();
 });
 
 Cypress.Commands.add(
