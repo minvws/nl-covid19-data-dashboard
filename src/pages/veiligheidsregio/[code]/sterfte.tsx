@@ -11,7 +11,7 @@ import { SEOHead } from '~/components/seoHead';
 import { DeceasedMonitorSection } from '~/domain/deceased/deceased-monitor-section';
 import siteText from '~/locale/index';
 import {
-  getSafetyRegionData,
+  getSafetyRegionStaticProps,
   getSafetyRegionPaths,
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
@@ -90,7 +90,7 @@ const DeceasedRegionalPage: FCWithLayout<ISafetyRegionData> = (props) => {
 
 DeceasedRegionalPage.getLayout = getSafetyRegionLayout();
 
-export const getStaticProps = getSafetyRegionData;
+export const getStaticProps = getSafetyRegionStaticProps;
 
 export const getStaticPaths = getSafetyRegionPaths();
 
