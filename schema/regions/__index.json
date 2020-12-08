@@ -48,14 +48,6 @@
         "$ref": "positive_tested_people.json"
       }
     },
-    "deceased": {
-      "type": "array",
-      "minItems": 25,
-      "maxItems": 25,
-      "items": {
-        "$ref": "deceased.json"
-      }
-    },
     "escalation_levels": {
       "type": "array",
       "minItems": 25,

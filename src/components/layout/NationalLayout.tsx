@@ -9,6 +9,7 @@ import ReproIcon from '~/assets/reproductiegetal.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
+import VirusIcon from '~/assets/virus.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import Ziektegolf from '~/assets/ziektegolf.svg';
 import { Category } from '~/components-styled/aside/category';
@@ -18,6 +19,7 @@ import {
   MetricMenuItem,
 } from '~/components-styled/aside/menu';
 import { TitleWithIcon } from '~/components-styled/aside/title-with-icon';
+import { DeceasedMetric } from '~/components/common/deceased-metric';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
 import { ElderlyAtHomeMetric } from '~/components/common/elderly-at-home-metric';
 import { NursingHomeInfectedPeopleMetric } from '~/components/common/nursing-home-infected-people-metric';
@@ -236,6 +238,22 @@ function NationalLayout(props: NationalLayoutProps) {
                             data={data.reproduction_index_last_known_average}
                             showAxis={false}
                             showValue={false}
+                          />
+                        </span>
+                      </a>
+                    </Link>
+                  </MetricMenuItem>
+                  <MetricMenuItem>
+                    <Link href="/landelijk/sterfte">
+                      <a className={getClassName('/landelijk/sterfte')}>
+                        <TitleWithIcon
+                          icon={<VirusIcon />}
+                          title={siteText.sterfte.titel_sidebar}
+                        />
+                        <span className="metric-wrapper">
+                          <DeceasedMetric
+                            title={siteText.sterfte.titel_kpi}
+                            data={data.deceased_rivm.last_value}
                           />
                         </span>
                       </a>

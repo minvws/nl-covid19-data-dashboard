@@ -25,6 +25,8 @@
     "intensive_care_beds_occupied",
     "ggd",
     "nursing_home",
+    "deceased_rivm",
+    "deceased_cbs",
     "elderly_at_home",
     "disability_care"
   ],
@@ -110,6 +112,12 @@
     },
     "behavior": {
       "$ref": "behavior.json"
+    },
+    "deceased_rivm": {
+      "$ref": "deceased_rivm.json"
+    },
+    "deceased_cbs": {
+      "$ref": "deceased_cbs.json"
     },
     "elderly_at_home": {
       "$ref": "elderly_at_home.json"

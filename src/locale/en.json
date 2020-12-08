@@ -794,7 +794,15 @@
       },
       {
         "cijfer": "Thuiswonende 70 plussers",
-        "verantwoording": ""
+        "verantwoording": "@TODO"
+      },
+      {
+        "cijfer": "Sterfte",
+        "verantwoording": "@TODO"
+      },
+      {
+        "cijfer": "Sterftemonitor",
+        "verantwoording": "@TODO"
       },
       {
         "cijfer": "",
@@ -944,6 +952,114 @@
   "gemeente_metadata": {
     "title": "Municipality"
   },
+
+  "sterfte": {
+    "titel_sidebar": "Sterfte",
+    "titel_kpi": "Aantal overledenen per dag",
+
+    "metadata": {
+      "title": "Sterfte | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Aantal overledenen per dag"
+    },
+
+    "section_deceased_rivm": {
+      "title": "Gemelde covid-19 sterfte",
+      "description": "Deze cijfers laten zien van hoeveel mensen bekend is dat ze zijn overleden aan COVID-19. Het werkelijke aantal overleden COVID-19 patiënten is hoger dan het aantal meldingen in de surveillance, omdat niet alle overleden patiënten getest worden.",
+
+      "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+      "bronnen": {
+        "rivm": {
+          "href": "#",
+          "text": "RIVM",
+          "download": "#"
+        }
+      },
+
+      "reference": {
+        "href": "/verantwoording#sterfte",
+        "text": "Lees meer in de cijferverantwoording."
+      },
+
+      "kpi_covid_daily_title": "Gemeld aantal overleden covid-patienten per dag",
+      "kpi_covid_daily_description": "Dit getal laat zien van hoeveel mensen overledenen zijn aan het COVID-19 virus. Een deel van de meldingen is van eerdere dagen, die later zijn doorgegeven.",
+      "kpi_covid_total_title": "Totaal aantal gemelde overleden covid-patienten",
+      "kpi_covid_total_description": "Dit getal laat het totaal aantal mensen zien waarvan bekend is dat ze zijn overleden aan COVID-19. Dit wordt bijgehouden sinds 28 februari.",
+
+      "line_chart_covid_daily_title": "Aantal overledenen over tijd"
+    }
+  },
+
+  "veiligheidsregio_sterfte": {
+    "titel_sidebar": "Sterfte",
+    "titel_kpi": "Aantal overledenen per dag",
+
+    "metadata": {
+      "title": "Sterfte in {{safetyRegion}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Aantal overledenen per dag in {{safetyRegion}}"
+    },
+
+    "section_deceased_rivm": {
+      "title": "Gemelde covid-19 sterfte in {{safetyRegion}}",
+      "description": "Deze cijfers laten zien van hoeveel mensen bekend is dat ze zijn overleden aan COVID-19. Het werkelijke aantal overleden COVID-19 patiënten is hoger dan het aantal meldingen in de surveillance, omdat niet alle overleden patiënten getest worden.",
+
+      "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+      "bronnen": {
+        "rivm": {
+          "href": "#",
+          "text": "RIVM",
+          "download": "#"
+        }
+      },
+
+      "reference": {
+        "href": "/verantwoording#sterfte",
+        "text": "Lees meer in de cijferverantwoording."
+      },
+
+      "kpi_covid_daily_title": "Gemeld aantal overleden covid-patienten per dag",
+      "kpi_covid_daily_description": "Dit getal laat zien van hoeveel mensen overledenen zijn aan het COVID-19 virus. Een deel van de meldingen is van eerdere dagen, die later zijn doorgegeven.",
+      "kpi_covid_total_title": "Totaal aantal gemelde overleden covid-patienten",
+      "kpi_covid_total_description": "Dit getal laat het totaal aantal mensen zien waarvan bekend is dat ze zijn overleden aan COVID-19. Dit wordt bijgehouden sinds 28 februari.",
+
+      "line_chart_covid_daily_title": "Aantal overledenen over tijd"
+    }
+  },
+
+  "section_sterftemonitor": {
+    "title": "Landelijke sterftemonitor",
+    "description": "Sinds de griepepidemie van 2009 houdt het RIVM Rijksinstituut voor Volksgezondheid en Milieu wekelijks het aantal overleden mensen in de gaten met gegevens van het CBS Centraal Bureau voor de Statistiek.",
+
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "bronnen": {
+      "cbs": {
+        "href": "#",
+        "text": "CBS",
+        "download": "#"
+      }
+    },
+
+    "reference": {
+      "href": "/verantwoording#sterftemonitor",
+      "text": "Lees meer in de cijferverantwoording."
+    },
+
+    "cbs_message": {
+      "title": "CBS: Sterfte neemt verder toe",
+      "published_text": "Publicatiedatum: maandag 2 november",
+      "message": "Het *CBS* meldt vandaag in de week van 26 oktober tot en met 1 november, net als in de voorgaande weken, een hogere sterfte dan verwacht. De sterfte in deze week is 700 hoger dan verwacht in deze periode. Ook het RIVM Rijksinstituut voor Volksgezondheid en Milieu houdt sterftecijfers wekelijks bij. In de meest recente data van het RIVM van 22 oktober tot en met 28 oktober, is de sterfte sterk verhoogd in de leeftijdsgroepen 65-74 jaar en 75 jaar en ouder.",
+      "link": {
+        "href": "#",
+        "text": "Website CBS"
+      }
+    },
+
+    "deceased_monitor_chart_title": "Landelijke overledenen per week in 2020",
+    "deceased_monitor_chart_description": "Toelichting over sterftecijfers van het CBS. Deze grafiek loopt tot de dag van vandaag en heeft hetzelfde startpunt als de COVID-19 sterfte grafiek.",
+    "deceased_monitor_chart_legenda_registered": "Overleden",
+    "deceased_monitor_chart_legenda_expected": "Verwacht aantal overledenen",
+    "deceased_monitor_chart_legenda_expected_margin": "Verwacht aantal overledenen (marge)"
+  },
+
   "veiligheidsregio_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Hospital admissions",
     "titel": "Hospital admissions per day of residents in {{safetyRegion}}",
