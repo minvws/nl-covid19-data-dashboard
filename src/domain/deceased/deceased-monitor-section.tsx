@@ -24,6 +24,7 @@ export function DeceasedMonitorSection({
         title={text.title}
         icon={<CoronaVirusIcon />}
         subtitle={text.description}
+        reference={text.reference}
         metadata={{
           datumsText: text.datums,
           dateInfo: {

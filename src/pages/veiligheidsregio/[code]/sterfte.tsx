@@ -41,6 +41,7 @@ const DeceasedRegionalPage: FCWithLayout<ISafetyRegionData> = (props) => {
         })}
         icon={<CoronaVirusIcon />}
         subtitle={text.section_deceased_rivm.description}
+        reference={text.section_deceased_rivm.reference}
         metadata={{
           datumsText: text.section_deceased_rivm.datums,
           dateInfo: dataRivm.last_value.date_of_report_unix,
