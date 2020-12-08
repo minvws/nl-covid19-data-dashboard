@@ -1,7 +1,6 @@
 import { useCallback, memo } from 'react';
 import { scaleLinear, scaleTime } from 'd3-scale';
 import { bisector } from 'd3-array';
-import { timeFormat } from 'd3-time-format';
 import { AxisLeft, AxisBottom } from '@visx/axis';
 import { GridRows } from '@visx/grid';
 import { Group } from '@visx/group';
@@ -11,14 +10,14 @@ import { Text } from '@visx/text';
 import { colors } from '~/style/theme';
 import Trends from './trends';
 
+const NUM_TICKS = 3;
 export const defaultMargin = { top: 10, right: 10, bottom: 30, left: 30 };
 const defaultColors = {
   main: colors.data.primary,
   axis: '#C4C4C4',
+  axisLabels: '#666666',
   benchmark: '#4f5458',
 };
-const defaultDateFormatter = timeFormat('%e %b');
-const NUM_TICKS = 3;
 
 export type Props = {
   benchmark: any;
@@ -31,6 +30,7 @@ export type Props = {
   height?: number;
   margin?: { top: number; right: number; bottom: number; left: number };
   formatXAxis: any;
+  formatYAxis: any;
 };
 
 function Chart({
@@ -44,6 +44,7 @@ function Chart({
   isHovered,
   benchmark,
   formatXAxis,
+  formatYAxis,
 }: Props) {
   const bounded = {
     width: width - margin.left - margin.right,
@@ -83,14 +84,14 @@ function Chart({
         <AxisBottom
           scale={x}
           tickValues={x.domain()}
-          tickFormat={formatXAxis ? formatXAxis : defaultDateFormatter}
+          tickFormat={formatXAxis}
           top={bounded.height}
           stroke={defaultColors.axis}
-          labelProps={{
-            x: -10,
-            fill: defaultColors.axis,
-            stroke: defaultColors.axis,
-          }}
+          tickLabelProps={() => ({
+            dx: -25,
+            fill: defaultColors.axisLabels,
+            fontSize: 12,
+          })}
           hideTicks
         />
         <AxisLeft
@@ -99,6 +100,14 @@ function Chart({
           hideTicks
           hideAxisLine
           stroke={defaultColors.axis}
+          tickFormat={formatYAxis}
+          tickLabelProps={() => ({
+            fill: defaultColors.axisLabels,
+            fontSize: 12,
+            dx: -5,
+            textAnchor: 'end',
+            verticalAnchor: 'middle',
+          })}
         />
 
         {benchmark && (

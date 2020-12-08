@@ -13,8 +13,8 @@ export type Props = {
   color: string;
 };
 
-// TODO: update to accept series prop which is an array of trends
-// to enable plotting of multiple lines
+// TODO: update to accept series prop which accepts an array of
+// trends to enable plotting of multiple lines
 function Trends({
   trend,
   color,

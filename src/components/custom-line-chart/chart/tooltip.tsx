@@ -1,5 +1,5 @@
-import css from '@styled-system/css';
 import { memo } from 'react';
+import css from '@styled-system/css';
 
 import { colors } from '~/style/theme';
 import { Box } from '~/components-styled/base';
@@ -69,6 +69,7 @@ function Tooltip({
           transform: 'translate(-50%,calc(-100% - 10px))',
           pointerEvents: 'none',
           transition: 'left 0.1s, top 0.1s',
+          whiteSpace: 'nowrap',
         })}
       >
         {children}

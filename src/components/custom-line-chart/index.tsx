@@ -3,8 +3,8 @@ import { useTooltip } from '@visx/tooltip';
 import { extent } from 'd3-array';
 
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
-// import { formatDateFromSeconds } from '~/utils/formatDate';
-// import { formatNumber } from '~/utils/formatNumber';
+import { formatDateFromSeconds } from '~/utils/formatDate';
+import { formatNumber } from '~/utils/formatNumber';
 
 import { Box } from '~/components-styled/base';
 import Chart, { defaultMargin } from './chart';
@@ -12,7 +12,9 @@ import Tooltip from './chart/tooltip';
 import { calculateYMax } from '~/components/lineChart';
 
 const valueToDate = (d: number) => new Date(d * 1000);
-// const dateToValue = (d: any) => d.valueOf() / 1000;
+const dateToValue = (d: any) => d.valueOf() / 1000;
+const formatXAxis = (date: any) =>
+  formatDateFromSeconds(dateToValue(date), 'axis');
 
 export type ThresholdProps = {
   values: any[];
@@ -29,6 +31,8 @@ function CustomLineChart({
   height,
   timeframe = '5weeks',
   signaalwaarde,
+  formatTooltip,
+  formatYAxis,
 }: // formatTooltip,
 //   formatYAxis,
 //   valueAnnotation,
@@ -68,7 +72,6 @@ ThresholdProps) {
     signaalwaarde,
   ]);
 
-  // Tooltip
   const handleTooltip = useCallback(
     (
       event:
@@ -94,53 +97,32 @@ ThresholdProps) {
   return (
     <Box position="relative">
       <Chart
-        trend={graphData} // TODO: update to accept series with array of configurable trends
+        trend={graphData}
         height={height}
         width={width}
         handleHover={handleTooltip}
         xDomain={xDomain}
         yDomain={yDomain}
+        formatYAxis={formatYAxis}
+        formatXAxis={formatXAxis}
         isHovered={!!tooltipData}
         benchmark={benchmark}
       />
+
       {tooltipData && (
         <Tooltip
           x={tooltipLeft + defaultMargin.left}
           y={tooltipTop + defaultMargin.top}
         >
-          {tooltipData.date.toDateString()}
+          {formatTooltip
+            ? formatTooltip(tooltipData.date)
+            : `${formatDateFromSeconds(
+                dateToValue(tooltipData.date)
+              )}: ${formatNumber(tooltipData.value)}`}
         </Tooltip>
       )}
     </Box>
   );
-}
-{
-  /* <Tooltip
-  top={tooltipTop + margin.top}
-  left={tooltipLeft}
-  offsetLeft={0}
-  style={{
-    ...defaultStyles,
-    borderRadius: 0,
-    minWidth: 72,
-    textAlign: 'center',
-    transform: 'translateX(-50%)',
-  }}
->
-  {formatTooltip
-    ? formatTooltip(tooltipData.date)
-    : `${formatDateFromSeconds(
-        dateToValue(tooltipData.date)
-      )}: ${formatNumber(tooltipData.value)}`}
-  <Box
-    bg="red"
-    width="5px"
-    height="5px"
-    position="absolute"
-    left="50%"
-    transform="translateX(-50%)"
-  />
-</Tooltip> */
 }
 
 export default CustomLineChart;

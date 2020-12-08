@@ -29,7 +29,6 @@
     "core-js": "^3.6.5",
     "d3-array": "^2.9.0",
     "d3-scale": "2.2.2",
-    "d3-time-format": "^3.0.0",
     "date-fns": "^2.15.0",
     "geojson": "^0.5.0",
     "highcharts": "^8.2.0",
