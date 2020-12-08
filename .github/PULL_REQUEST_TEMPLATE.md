@@ -15,7 +15,7 @@ closely to the solution you have in mind.
 ## Detailed design
 
 This is the bulk of the PR. Explain the design in enough detail for somebody
-familiar with Opus to understand, and for somebody familiar with the
+familiar with the project to understand, and for somebody familiar with the
 front-end to implement. This should get into specifics and corner-cases,
 and include examples of how the feature is used. Any new terminology should be
 defined here.
