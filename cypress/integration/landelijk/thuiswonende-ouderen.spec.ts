@@ -1,0 +1,27 @@
+import { NationalContext } from 'cypress/integration/types';
+import { beforeNationalTests } from 'cypress/support/beforeNationalTests';
+import { checkKpiValues } from 'cypress/support/checkKpiValues';
+import { swallowResizeObserverError } from 'cypress/support/swallowResizeObserverError';
+import { formatNumber } from '~/utils/formatNumber';
+
+context('Landelijk - Thuiswonende ouderen', () => {
+  swallowResizeObserverError();
+
+  before(() => {
+    beforeNationalTests('thuiswonende-ouderen');
+  });
+
+  it('Should show the correct KPI values', function (this: NationalContext) {
+    const lastValue = this.nationalData.elderly_at_home.last_value;
+
+    const kpiTestInfo = {
+      positive_tested_daily: formatNumber(lastValue.positive_tested_daily),
+      positive_tested_daily_per_100k: formatNumber(
+        lastValue.positive_tested_daily_per_100k
+      ),
+      deceased_daily: formatNumber(lastValue.deceased_daily),
+    };
+
+    checkKpiValues(kpiTestInfo);
+  });
+});

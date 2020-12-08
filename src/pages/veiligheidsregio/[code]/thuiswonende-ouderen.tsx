@@ -65,6 +65,7 @@ const ElderlyAtHomeRegionalPage: FCWithLayout<ISafetyRegionData> = (props) => {
           }}
         >
           <KpiValue
+            data-cy="positive_tested_daily"
             absolute={elderlyAtHomeData.last_value.positive_tested_daily}
           />
           <Text>{text.section_positive_tested.kpi_daily_description}</Text>
@@ -77,6 +78,7 @@ const ElderlyAtHomeRegionalPage: FCWithLayout<ISafetyRegionData> = (props) => {
           }}
         >
           <KpiValue
+            data-cy="positive_tested_daily_per_100k"
             absolute={
               elderlyAtHomeData.last_value.positive_tested_daily_per_100k
             }
@@ -124,7 +126,10 @@ const ElderlyAtHomeRegionalPage: FCWithLayout<ISafetyRegionData> = (props) => {
             source: text.section_deceased.bronnen.rivm,
           }}
         >
-          <KpiValue absolute={elderlyAtHomeData.last_value.deceased_daily} />
+          <KpiValue
+            data-cy="deceased_daily"
+            absolute={elderlyAtHomeData.last_value.deceased_daily}
+          />
         </KpiTile>
       </TwoKpiSection>
 

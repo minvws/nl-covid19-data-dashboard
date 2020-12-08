@@ -58,6 +58,7 @@ const ElderlyAtHomeNationalPage: FCWithLayout<NationalPageProps> = (props) => {
           }}
         >
           <KpiValue
+            data-cy="positive_tested_daily"
             absolute={elderlyAtHomeData.last_value.positive_tested_daily}
           />
           <Text>{text.section_positive_tested.kpi_daily_description}</Text>
@@ -70,6 +71,7 @@ const ElderlyAtHomeNationalPage: FCWithLayout<NationalPageProps> = (props) => {
           }}
         >
           <KpiValue
+            data-cy="positive_tested_daily_per_100k"
             absolute={
               elderlyAtHomeData.last_value.positive_tested_daily_per_100k
             }
@@ -136,7 +138,10 @@ const ElderlyAtHomeNationalPage: FCWithLayout<NationalPageProps> = (props) => {
             source: text.section_deceased.bronnen.rivm,
           }}
         >
-          <KpiValue absolute={elderlyAtHomeData.last_value.deceased_daily} />
+          <KpiValue
+            data-cy="deceased_daily"
+            absolute={elderlyAtHomeData.last_value.deceased_daily}
+          />
         </KpiTile>
       </TwoKpiSection>
 
