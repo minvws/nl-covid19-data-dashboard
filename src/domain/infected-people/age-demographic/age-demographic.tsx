@@ -19,7 +19,7 @@ interface AgeDemographicProps {
 }
 
 export function AgeDemographic({ data }: AgeDemographicProps) {
-  const [parentWidth, setParentWidth] = useState(0);
+  const [parentWidth, setParentWidth] = useState(400);
   const breakpoints = useBreakpoints();
   const isSmallScreen = !breakpoints.xl;
 
@@ -46,6 +46,7 @@ export function AgeDemographic({ data }: AgeDemographicProps) {
       <Box position="relative">
         <ParentSize>
           {(parent) => {
+            // This method is invoked by the ParentSize once parent size information is available.
             setParentWidth(parent.width);
             return (
               <AgeDemographicChart
