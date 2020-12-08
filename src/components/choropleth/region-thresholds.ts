@@ -202,9 +202,7 @@ export const regionThresholds = {
   sewer: {
     average: sewerThresholds,
   },
-  behavior: {
-    behavior: behaviorThresholds,
-  },
+  behavior: behaviorThresholds,
   elderly_at_home: {
     positive_tested_daily_per_100k: elderlyAtHomeThresholds,
   },
