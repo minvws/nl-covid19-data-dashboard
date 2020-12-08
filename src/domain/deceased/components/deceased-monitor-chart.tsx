@@ -69,7 +69,14 @@ function useHighchartOptions(values: CbsValue[], config: SeriesConfig) {
       lineColor: '#C4C4C4',
       gridLineColor: '#ca005d',
       type: 'datetime',
-      categories: values.map((x) => toEpochMs(x.week_start_unix).toString()),
+      categories: values.map((x, i) =>
+        toEpochMs(
+          /**
+           * The last category will render the week_end date
+           */
+          values[i + 1] ? x.week_start_unix : x.week_end_unix
+        ).toString()
+      ),
       title: {
         text: null,
       },
