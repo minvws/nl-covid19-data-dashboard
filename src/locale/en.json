@@ -753,7 +753,7 @@
     "select_region_municipality_legend": "Select a municipality:",
     "select_region_type_legend": "Show numbers from:",
     "your_municipality": "Municipality",
-    "belangrijk_bericht": "There are [country-wide measures](https://www.rijksoverheid.nl/actueel/nieuws/2020/11/17/gedeeltelijke-lockdown-gaat-verder) to stop the spread of the coronavirus."
+    "belangrijk_bericht": "There are [country-wide measures](https://www.rijksoverheid.nl/actueel/nieuws/2020/12/08/gedeeltelijke-lockdown-ook-tijdens-feestdagen) to stop the spread of the coronavirus."
   },
   "common": {
     "metadata": {
@@ -1097,7 +1097,7 @@
       "title": "Level of risk per safety region | Dashboard Coronavirus | Government.nl",
       "description": "Overview of the level of risk per safety region in the Netherlands."
     },
-    "belangrijk_bericht": "There are [country-wide measures](https://www.rijksoverheid.nl/actueel/nieuws/2020/11/17/gedeeltelijke-lockdown-gaat-verder) to stop the spread of the coronavirus."
+    "belangrijk_bericht": "There are [country-wide measures](https://www.rijksoverheid.nl/actueel/nieuws/2020/12/08/gedeeltelijke-lockdown-ook-tijdens-feestdagen) to stop the spread of the coronavirus."
   },
   "gemeente_index": {
     "selecteer_titel": "Select your municipality",
@@ -1400,12 +1400,13 @@
       "trend_lager": "lower",
       "trend_gelijk": "same"
     },
-    "kpi_titel": "Percentage of people who agree with the basic rules and the percentage of people who also follow those rules in practice.",
+    "titel_kpi": "Percentage of people who agree with the basic rules and the percentage of people who also follow those rules in practice.",
+    "kpi_titel": "",
     "meer_onderzoeksresultaten": {
-      "title": "Meer onderzoeksresultaten",
-      "description": "Bekijk voor meer gedetailleerde resultaten het volledige onderzoek op de website van de RIVM.",
-      "linkLabel": "Bekijk het gehele onderzoek op de website van de RIVM",
-      "linkHref": "#"
+      "title": "",
+      "description": "",
+      "linkLabel": "",
+      "linkHref": ""
     }
   },
   "nl_gedrag": {
@@ -1621,7 +1622,7 @@
       "title": "Confirmed cases of disability care home residents | Dashboard Coronavirus | Government.nl",
       "description": "National overview of the number of confirmed cases of disability care home residents for COVID-19."
     },
-    "kpi_titel": "Disability care homes - daily confirmed cases (residents)",
+    "titel_kpi": "Disability care homes - daily confirmed cases (residents)",
     "reference": {
       "href": "/verantwoording#disability-care-homes",
       "text": "Read more in the explanation of the presented data."
@@ -1632,7 +1633,8 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
         "text": "RIVM"
       }
-    }
+    },
+    "kpi_titel": ""
   },
   "gehandicaptenzorg_oversterfte": {
     "datums": "Latest values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -1648,7 +1650,7 @@
       "title": "Deceased residents of disability care homes | Dashboard Coronavirus | Government.nl",
       "description": "Total number of confirmed cases in disability care homes in the Netherlands that died from COVID-19"
     },
-    "kpi_titel": "Number of deceased residents",
+    "titel_kpi": "Number of deceased residents",
     "reference": {
       "href": "/verantwoording#disability-care-homes",
       "text": "Read more in explantion of the data presented"
@@ -1659,7 +1661,8 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
         "text": "RIVM"
       }
-    }
+    },
+    "kpi_titel": ""
   },
   "veiligheidsregio_gehandicaptenzorg_oversterfte": {
     "datums": "Latest values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -1752,7 +1755,7 @@
   },
   "thuiswonende_ouderen": {
     "titel_sidebar": "People over 70 living at home",
-    "kpi_titel": "",
+    "titel_kpi": "",
     "metadata": {
       "title": "",
       "description": ""
@@ -1799,11 +1802,12 @@
       "kpi_daily_description": "The number of people over 70 living at home who were reported as deceased due to COVID-19 yesterday.",
       "line_chart_daily_title": "Number of COVID-19 deaths among over-70s living at home: progression over time",
       "datums": "Last update  {{dateOfInsertion}}. Updated daily."
-    }
+    },
+    "kpi_titel": ""
   },
   "veiligheidsregio_thuiswonende_ouderen": {
     "titel_sidebar": "People over 70 living at home",
-    "kpi_titel": "",
+    "titel_kpi": "",
     "metadata": {
       "title": "Over-70s living at home in {{safetyRegion}} I Dashboard Coronvirus I Rijksoverheid.nl",
       "description": "Over-70s living at home in {{safetyRegion}}"
@@ -1847,11 +1851,12 @@
       "kpi_daily_description": "The number of people over 70 living at home in this safety region who were reported as deceased due to COVID-19 yesterday",
       "line_chart_daily_title": "Number of COVID-19 deaths among over-70s living at home: progression over time",
       "datums": "Last values obtained on {{dateOfInsertion}}. 1 December. Is updated on a daily basis."
-    }
+    },
+    "kpi_titel": ""
   },
   "sterfte": {
     "titel_sidebar": "",
-    "kpi_titel": "",
+    "titel_kpi": "",
     "metadata": {
       "title": "",
       "description": ""
@@ -1876,11 +1881,12 @@
       "kpi_covid_total_title": "",
       "kpi_covid_total_description": "",
       "line_chart_covid_daily_title": ""
-    }
+    },
+    "kpi_titel": ""
   },
   "veiligheidsregio_sterfte": {
     "titel_sidebar": "",
-    "kpi_titel": "",
+    "titel_kpi": "",
     "metadata": {
       "title": "",
       "description": ""
@@ -1905,7 +1911,8 @@
       "kpi_covid_total_title": "",
       "kpi_covid_total_description": "",
       "line_chart_covid_daily_title": ""
-    }
+    },
+    "kpi_titel": ""
   },
   "section_sterftemonitor": {
     "title": "",
