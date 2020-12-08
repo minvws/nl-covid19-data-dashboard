@@ -29,12 +29,14 @@ function Trends({
     (
       event: React.TouchEvent<SVGRectElement> | React.MouseEvent<SVGRectElement>
     ) => {
-      const { x } = localPoint(event) || { x: 0 };
-      const pointData = bisect(trend, x);
+      if (trend.length < 1) return null;
 
-      handleHover(event, pointData, x, y(pointData.value));
+      const { x: xPosition } = localPoint(event) || { x: 0 };
+      const pointData = bisect(trend, xPosition);
+
+      handleHover(event, pointData, x(pointData.date), y(pointData.value));
     },
-    [handleHover, y, trend, bisect.value]
+    [handleHover, y, x, trend, bisect]
   );
 
   return (
@@ -44,7 +46,7 @@ function Trends({
         x={(d: any) => x(d.date)}
         y={(d: any) => y(d.value)}
         fill={color}
-        fillOpacity={0.1}
+        fillOpacity={0.05}
         yScale={y}
       />
       <LinePath

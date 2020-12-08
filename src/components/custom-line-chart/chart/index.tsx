@@ -1,6 +1,7 @@
 import { useCallback, memo } from 'react';
 import { scaleLinear, scaleTime } from 'd3-scale';
 import { bisector } from 'd3-array';
+import { timeFormat } from 'd3-time-format';
 import { AxisLeft, AxisBottom } from '@visx/axis';
 import { GridRows } from '@visx/grid';
 import { Group } from '@visx/group';
@@ -10,11 +11,13 @@ import { Text } from '@visx/text';
 import { colors } from '~/style/theme';
 import Trends from './trends';
 
-const defaultMargin = { top: 10, right: 10, bottom: 30, left: 30 };
+export const defaultMargin = { top: 10, right: 10, bottom: 30, left: 30 };
 const defaultColors = {
   main: colors.data.primary,
   axis: '#C4C4C4',
 };
+const defaultDateFormatter = timeFormat('%e %b');
+const NUM_TICKS = 3;
 
 export type Props = {
   benchmark: any;
@@ -26,6 +29,7 @@ export type Props = {
   width: number;
   height?: number;
   margin?: { top: number; right: number; bottom: number; left: number };
+  formatXAxis: any;
 };
 
 function Chart({
@@ -38,6 +42,7 @@ function Chart({
   handleHover,
   isHovered,
   benchmark,
+  formatXAxis,
 }: Props) {
   const bounded = {
     width: width - margin.left - margin.right,
@@ -45,10 +50,15 @@ function Chart({
   };
 
   const x = scaleTime().domain(xDomain).range([0, bounded.width]);
-  const y = scaleLinear().domain(yDomain).range([bounded.height, 0]).nice();
+  const y = scaleLinear()
+    .domain(yDomain)
+    .range([bounded.height, 0])
+    .nice(NUM_TICKS);
 
   const bisect = useCallback(
     (trend, mx) => {
+      if (trend.length === 1) return trend[0];
+
       const bisect = bisector((d) => d.date).left;
       const date = x.invert(mx - margin.left);
       const index = bisect(trend, date, 1);
@@ -66,14 +76,21 @@ function Chart({
         <GridRows
           scale={y}
           width={bounded.width}
-          numTicks={4}
+          numTicks={NUM_TICKS}
           stroke={defaultColors.axis}
         />
         <AxisBottom
-          top={bounded.height}
           scale={x}
-          numTicks={2} // TODO: fix
+          tickValues={x.domain()}
+          tickFormat={formatXAxis ? formatXAxis : defaultDateFormatter}
+          top={bounded.height}
           stroke={defaultColors.axis}
+          labelProps={{
+            x: -10,
+            fill: defaultColors.axis,
+            stroke: defaultColors.axis,
+          }}
+          hideTicks
         />
         <AxisLeft
           scale={y}

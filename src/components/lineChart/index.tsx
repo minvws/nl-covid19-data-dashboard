@@ -227,7 +227,7 @@ export default function LineChart<T extends Value>({
  * From all the defined values, extract the highest number so we know how to
  * scale the y-axis
  */
-function calculateYMax(values: Value[], signaalwaarde = -Infinity) {
+export function calculateYMax(values: Value[], signaalwaarde = -Infinity) {
   const maxValue = values
     .map((x) => x.value)
     .filter(isFilled)
