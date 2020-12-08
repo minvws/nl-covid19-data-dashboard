@@ -15,6 +15,7 @@ export const defaultMargin = { top: 10, right: 10, bottom: 30, left: 30 };
 const defaultColors = {
   main: colors.data.primary,
   axis: '#C4C4C4',
+  benchmark: '#4f5458',
 };
 const defaultDateFormatter = timeFormat('%e %b');
 const NUM_TICKS = 3;
@@ -102,14 +103,20 @@ function Chart({
 
         {benchmark && (
           <Group top={y(benchmark.value)}>
-            <Text fontSize="14px" dy={-8}>
+            <Text fontSize="14px" dy={-8} fill={defaultColors.benchmark}>
               {benchmark.value}
             </Text>
-            <Text fontSize="14px" dy={-8} dx={bounded.width} textAnchor="end">
+            <Text
+              fontSize="14px"
+              dy={-8}
+              dx={bounded.width}
+              textAnchor="end"
+              fill={defaultColors.benchmark}
+            >
               {benchmark.label}
             </Text>
             <Line
-              stroke="black"
+              stroke={defaultColors.benchmark}
               strokeDasharray="4,3"
               from={{ x: 0, y: 0 }}
               to={{ x: bounded.width, y: 0 }}
