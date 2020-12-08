@@ -111,7 +111,6 @@ const ElderlyAtHomeNationalPage: FCWithLayout<NationalPageProps> = (props) => {
       </ChoroplethTile>
 
       <ContentHeader
-        category={siteText.nationaal_layout.headings.kwetsbare_groepen}
         title={text.section_deceased.title}
         icon={<ElderlyIcon />}
         subtitle={text.section_deceased.description}

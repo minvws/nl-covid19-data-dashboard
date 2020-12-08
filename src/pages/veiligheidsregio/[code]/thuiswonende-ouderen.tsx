@@ -98,7 +98,6 @@ const ElderlyAtHomeRegionalPage: FCWithLayout<ISafetyRegionData> = (props) => {
       />
 
       <ContentHeader
-        category={siteText.nationaal_layout.headings.kwetsbare_groepen}
         title={replaceVariablesInText(text.section_deceased.title, {
           safetyRegion: safetyRegionName,
         })}
