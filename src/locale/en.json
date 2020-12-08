@@ -1400,8 +1400,13 @@
       "trend_lager": "lower",
       "trend_gelijk": "same"
     },
-    "titel_kpi": "Percentage of people who agree with the basic rules and the percentage of people who also follow those rules in practice.",
-    "kpi_titel": ""
+    "kpi_titel": "Percentage of people who agree with the basic rules and the percentage of people who also follow those rules in practice.",
+    "meer_onderzoeksresultaten": {
+      "title": "Meer onderzoeksresultaten",
+      "description": "Bekijk voor meer gedetailleerde resultaten het volledige onderzoek op de website van de RIVM.",
+      "linkLabel": "Bekijk het gehele onderzoek op de website van de RIVM",
+      "linkHref": "#"
+    }
   },
   "nl_gedrag": {
     "metadata": {

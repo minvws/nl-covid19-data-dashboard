@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Arrow from '~/assets/arrow.svg';
 import Arts from '~/assets/arts.svg';
+import Gedrag from '~/assets/gedrag.svg';
 import ElderlyIcon from '~/assets/elderly.svg';
 import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
 import Notification from '~/assets/notification.svg';
@@ -29,6 +30,7 @@ import { ReproductionIndexMetric } from '~/components/landelijk/reproduction-ind
 import { SewerWaterMetric } from '~/components/landelijk/sewer-water-metric';
 import { SuspectedPatientsMetric } from '~/components/landelijk/suspected-patients-metric';
 import Layout from '~/components/layout';
+import { BehaviorMetric } from '~/domain/behavior/behavior-metric';
 import siteText from '~/locale/index';
 import { NationalPageProps } from '~/static-props/nl-data';
 import theme from '~/style/theme';
@@ -424,6 +426,25 @@ function NationalLayout(props: NationalLayoutProps) {
                           <SuspectedPatientsMetric
                             data={data.verdenkingen_huisartsen.last_value}
                           />
+                        </span>
+                      </a>
+                    </Link>
+                  </MetricMenuItem>
+                </Menu>
+              </CategoryMenuItem>
+
+              <CategoryMenuItem>
+                <Category>{siteText.nationaal_layout.headings.gedrag}</Category>
+                <Menu>
+                  <MetricMenuItem>
+                    <Link href="/landelijk/gedrag">
+                      <a className={getClassName('/landelijk/gedrag')}>
+                        <TitleWithIcon
+                          icon={<Gedrag />}
+                          title={siteText.nl_gedrag.sidebar.titel}
+                        />
+                        <span className="metric-wrapper">
+                          <BehaviorMetric data={data.behavior} />
                         </span>
                       </a>
                     </Link>

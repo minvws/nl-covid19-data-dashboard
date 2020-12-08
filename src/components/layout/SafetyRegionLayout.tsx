@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Arrow from '~/assets/arrow.svg';
+import Gedrag from '~/assets/gedrag.svg';
 import ElderlyIcon from '~/assets/elderly.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
@@ -21,6 +22,7 @@ import { ElderlyAtHomeMetric } from '~/components/common/elderly-at-home-metric'
 import { getLayout as getSiteLayout } from '~/components/layout';
 import { SewerWaterMetric } from '~/components/veiligheidsregio/sewer-water-metric';
 import safetyRegions from '~/data/index';
+import { BehaviorMetric } from '~/domain/behavior/behavior-metric';
 import siteText from '~/locale/index';
 import { ISafetyRegionData } from '~/static-props/safetyregion-data';
 import { Link } from '~/utils/link';
@@ -325,6 +327,31 @@ function SafetyRegionLayout(
                             <SewerWaterMetric
                               data={getSewerWaterBarScaleData(data)}
                             />
+                          </span>
+                        </a>
+                      </Link>
+                    </MetricMenuItem>
+                  </Menu>
+                </CategoryMenuItem>
+
+                <CategoryMenuItem>
+                  <Category>
+                    {siteText.veiligheidsregio_layout.headings.gedrag}
+                  </Category>
+                  <Menu>
+                    <MetricMenuItem>
+                      <Link href={`/veiligheidsregio/${code}/gedrag`}>
+                        <a
+                          className={getClassName(
+                            '/veiligheidsregio/[code]/gedrag'
+                          )}
+                        >
+                          <TitleWithIcon
+                            icon={<Gedrag />}
+                            title={siteText.regionaal_gedrag.sidebar.titel}
+                          />
+                          <span className="metric-wrapper">
+                            <BehaviorMetric data={data.behavior} />
                           </span>
                         </a>
                       </Link>

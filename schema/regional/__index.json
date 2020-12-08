@@ -12,6 +12,7 @@
     "nursing_home",
     "sewer",
     "sewer_per_installation",
+    "behavior",
     "difference",
     "deceased_rivm",
     "deceased_cbs",

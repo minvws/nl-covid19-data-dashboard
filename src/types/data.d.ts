@@ -138,7 +138,7 @@ export interface National {
   nursing_home: NationalNursingHome;
   disability_care: NationalDisabilityCare;
   restrictions?: NationalRestrictions;
-  behavior?: NationalBehavior;
+  behavior: NationalBehavior;
   deceased_rivm: NationalDeceasedRivm;
   deceased_cbs: NationalDeceasedCbs;
   elderly_at_home: NationalElderlyAtHome;
@@ -577,7 +577,7 @@ export interface Regionaal {
   nursing_home: RegionalNursingHome;
   disability_care: RegionalDisabilityCare;
   restrictions?: RegionalRestrictions;
-  behavior?: RegionalBehavior;
+  behavior: RegionalBehavior;
   deceased_rivm: RegionalDeceasedRivm;
   deceased_cbs: RegionalDeceasedCbs;
   elderly_at_home: RegionalElderlyAtHome;
@@ -738,14 +738,8 @@ export interface RegionalBehaviorValue {
   work_from_home_compliance_trend: ("up" | "down" | "equal") | null;
   avoid_crowds_compliance: number | null;
   avoid_crowds_compliance_trend: ("up" | "down" | "equal") | null;
-  symptoms_stay_home_compliance?: number | null;
-  symptoms_stay_home_compliance_trend?: ("up" | "down" | "equal") | null;
-  symptoms_get_tested_compliance?: number | null;
-  symptoms_get_tested_compliance_trend?: ("up" | "down" | "equal") | null;
   wear_mask_public_indoors_compliance: number | null;
   wear_mask_public_indoors_compliance_trend: ("up" | "down" | "equal") | null;
-  wear_mask_public_transport_compliance?: number | null;
-  wear_mask_public_transport_compliance_trend?: ("up" | "down" | "equal") | null;
   sneeze_cough_elbow_compliance: number | null;
   sneeze_cough_elbow_compliance_trend: ("up" | "down" | "equal") | null;
   max_visitors_compliance: number | null;
@@ -758,14 +752,8 @@ export interface RegionalBehaviorValue {
   work_from_home_support_trend: ("up" | "down" | "equal") | null;
   avoid_crowds_support: number | null;
   avoid_crowds_support_trend: ("up" | "down" | "equal") | null;
-  symptoms_stay_home_support?: number | null;
-  symptoms_stay_home_support_trend?: ("up" | "down" | "equal") | null;
-  symptoms_get_tested_support?: number | null;
-  symptoms_get_tested_support_trend?: ("up" | "down" | "equal") | null;
   wear_mask_public_indoors_support: number | null;
   wear_mask_public_indoors_support_trend: ("up" | "down" | "equal") | null;
-  wear_mask_public_transport_support?: number | null;
-  wear_mask_public_transport_support_trend?: ("up" | "down" | "equal") | null;
   sneeze_cough_elbow_support: number | null;
   sneeze_cough_elbow_support_trend: ("up" | "down" | "equal") | null;
   max_visitors_support: number | null;
@@ -823,7 +811,7 @@ export interface Regions {
   nursing_home: RegionsNursingHome[];
   disability_care: RegionsDisabilityCare[];
   sewer: RegionsSewer[];
-  behavior?: RegionsBehavior[];
+  behavior: RegionsBehavior[];
   elderly_at_home: RegionsElderlyAtHome[];
 }
 export interface RegionHospitalAdmissions {
@@ -886,14 +874,8 @@ export interface RegionsBehavior {
   work_from_home_compliance_trend: ("up" | "down" | "equal") | null;
   avoid_crowds_compliance: number | null;
   avoid_crowds_compliance_trend: ("up" | "down" | "equal") | null;
-  symptoms_stay_home_compliance?: number | null;
-  symptoms_stay_home_compliance_trend?: ("up" | "down" | "equal") | null;
-  symptoms_get_tested_compliance?: number | null;
-  symptoms_get_tested_compliance_trend?: ("up" | "down" | "equal") | null;
   wear_mask_public_indoors_compliance: number | null;
   wear_mask_public_indoors_compliance_trend: ("up" | "down" | "equal") | null;
-  wear_mask_public_transport_compliance?: number | null;
-  wear_mask_public_transport_compliance_trend?: ("up" | "down" | "equal") | null;
   sneeze_cough_elbow_compliance: number | null;
   sneeze_cough_elbow_compliance_trend: ("up" | "down" | "equal") | null;
   max_visitors_compliance: number | null;
@@ -906,14 +888,8 @@ export interface RegionsBehavior {
   work_from_home_support_trend: ("up" | "down" | "equal") | null;
   avoid_crowds_support: number | null;
   avoid_crowds_support_trend: ("up" | "down" | "equal") | null;
-  symptoms_stay_home_support?: number | null;
-  symptoms_stay_home_support_trend?: ("up" | "down" | "equal") | null;
-  symptoms_get_tested_support?: number | null;
-  symptoms_get_tested_support_trend?: ("up" | "down" | "equal") | null;
   wear_mask_public_indoors_support: number | null;
   wear_mask_public_indoors_support_trend: ("up" | "down" | "equal") | null;
-  wear_mask_public_transport_support?: number | null;
-  wear_mask_public_transport_support_trend?: ("up" | "down" | "equal") | null;
   sneeze_cough_elbow_support: number | null;
   sneeze_cough_elbow_support_trend: ("up" | "down" | "equal") | null;
   max_visitors_support: number | null;
