@@ -1,14 +1,9 @@
 import { NationalContext } from 'cypress/integration/types';
-import { beforeNationalTests } from 'cypress/support/beforeNationalTests';
-import { checkKpiValues } from 'cypress/support/checkKpiValues';
-import { swallowResizeObserverError } from 'cypress/support/swallowResizeObserverError';
 import { formatNumber } from '~/utils/formatNumber';
 
 context('Landelijk - Thuiswonende ouderen', () => {
-  swallowResizeObserverError();
-
   before(() => {
-    beforeNationalTests('thuiswonende-ouderen');
+    cy.beforeNationalTests('thuiswonende-ouderen');
   });
 
   it('Should show the correct KPI values', function (this: NationalContext) {
@@ -22,6 +17,6 @@ context('Landelijk - Thuiswonende ouderen', () => {
       deceased_daily: formatNumber(lastValue.deceased_daily),
     };
 
-    checkKpiValues(kpiTestInfo);
+    cy.checkKpiValues(kpiTestInfo);
   });
 });

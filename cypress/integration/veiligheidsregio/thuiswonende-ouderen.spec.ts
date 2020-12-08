@@ -1,14 +1,9 @@
 import { RegionalContext } from 'cypress/integration/types';
-import { beforeRegionTests } from 'cypress/support/beforeRegionTests';
-import { checkKpiValues } from 'cypress/support/checkKpiValues';
-import { swallowResizeObserverError } from 'cypress/support/swallowResizeObserverError';
 import { formatNumber } from '~/utils/formatNumber';
 
 context('Regionaal - Thuiswonende ouderen', () => {
-  swallowResizeObserverError();
-
   before(() => {
-    beforeRegionTests('thuiswonende-ouderen');
+    cy.beforeRegionTests('thuiswonende-ouderen');
   });
 
   it('Should show the correct KPI values', function (this: RegionalContext) {
@@ -22,6 +17,6 @@ context('Regionaal - Thuiswonende ouderen', () => {
       deceased_daily: formatNumber(lastValue.deceased_daily),
     };
 
-    checkKpiValues(kpiTestInfo);
+    cy.checkKpiValues(kpiTestInfo);
   });
 });
