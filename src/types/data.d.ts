@@ -20,7 +20,7 @@ export interface MunicipalDifference {
   positive_tested_people__infected_daily_increase: DifferenceDecimal;
   positive_tested_people__infected_daily_total: DifferenceInteger;
   hospital_admissions__moving_average_hospital: DifferenceDecimal;
-  sewer__average: DifferenceDecimal;
+  sewer__average?: DifferenceDecimal;
 }
 export interface DifferenceDecimal {
   old_value: number;
