@@ -80,7 +80,6 @@ export function SafetyRegionChoropleth<T>(
       const { vrcode } = feature.properties;
       const fill =
         hasData && getFillColor(vrcode) ? getFillColor(vrcode) : DEFAULT_FILL;
-
       return (
         <Path
           key={vrcode}
