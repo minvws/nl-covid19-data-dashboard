@@ -4,7 +4,7 @@ import { BarScale } from '~/components/barScale';
 import { MetricKeys } from '~/components/choropleth/shared';
 import siteText, { TALLLanguages } from '~/locale/index';
 import { assert } from '~/utils/assert';
-import { DataScope, getDataBarScaleConfig } from '../../metric-config';
+import { DataScope, getDataConfigForBarScale } from '../../metric-config';
 import { Box } from '../base';
 
 interface SidebarBarScaleProps<T> {
@@ -46,7 +46,7 @@ export function SidebarBarScale<T>({
       .join(':')}`
   );
 
-  const config = getDataBarScaleConfig(
+  const config = getDataConfigForBarScale(
     scope,
     (metricName as unknown) as string,
     metricProperty

@@ -12,8 +12,6 @@ import { vr } from './vr';
  *
  * By having a global declaration like this, we can keep an overview and prevent
  * a lot of the specialized components we now use to render everything.
- *
- * @TODO move this to a top-level location
  */
 
 /**
@@ -47,7 +45,7 @@ export function getDataConfig(
  * want to enforce the configuration is available, this specific function
  * grabs that config with an assertion.
  */
-export function getDataBarScaleConfig(
+export function getDataConfigForBarScale(
   scope: DataScope,
   metricName: string,
   metricProperty: string
