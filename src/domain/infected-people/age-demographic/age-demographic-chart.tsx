@@ -4,7 +4,8 @@ import { GridColumns } from '@visx/grid';
 import { Group } from '@visx/group';
 import { Bar } from '@visx/shape';
 import { Text } from '@visx/text';
-import { MouseEvent } from 'react';
+import { memo, MouseEvent } from 'react';
+import styled from 'styled-components';
 import siteText from '~/locale/index';
 import { colors } from '~/style/theme';
 import { NationalInfectedAgeGroupsValue } from '~/types/data.d';
@@ -43,164 +44,167 @@ export const formatAgeGroupRange = (range: string): string => {
   return range.split('-').join(' – ');
 };
 
-export function AgeDemographicChart({
-  coordinates,
-  keyboardTooltip,
-  openTooltip,
-  closeTooltip,
-}: AgeDemographicChartProps) {
-  const {
-    width,
-    height,
-    numTicks,
-    xMax,
-    yMax,
-    ageRangeAxisWidth,
-    ageGroupPercentageScale,
-    infectedPercentageScale,
-    ageGroupRangeScale,
-    ageGroupPercentagePoint,
-    infectedPercentagePoint,
-    ageGroupRangePoint,
-    isSmallScreen,
-    margin,
-    values,
-    ageGroupRange,
-  } = coordinates;
+export const AgeDemographicChart = memo<AgeDemographicChartProps>(
+  ({ coordinates, keyboardTooltip, openTooltip, closeTooltip }) => {
+    const {
+      width,
+      height,
+      numTicks,
+      xMax,
+      yMax,
+      ageRangeAxisWidth,
+      ageGroupPercentageScale,
+      infectedPercentageScale,
+      ageGroupRangeScale,
+      ageGroupPercentagePoint,
+      infectedPercentagePoint,
+      ageGroupRangePoint,
+      isSmallScreen,
+      margin,
+      values,
+      ageGroupRange,
+    } = coordinates;
 
-  return (
-    <svg
-      width={width}
-      height={height}
-      role="img"
-      id="age-demographic-chart"
-      aria-label={text.graph.accessibility_description}
-      tabIndex={0}
-      onKeyUp={(event) => keyboardTooltip(event)}
-      css={css({
-        '&:focus': {
-          outline: 'none',
-        },
-      })}
-    >
-      <Text
-        textAnchor="end"
-        verticalAnchor="start"
-        y={0}
-        x={width / 2 - ageRangeAxisWidth / 2}
-        fill="black"
-        fontWeight="bold"
-        fontSize={isSmallScreen ? '1rem' : '1.2rem'}
+    return (
+      <svg
+        width={width}
+        height={height}
+        role="img"
+        id="age-demographic-chart"
+        aria-label={text.graph.accessibility_description}
+        tabIndex={0}
+        onKeyUp={(event) => keyboardTooltip(event)}
+        css={css({
+          '&:focus': {
+            outline: 'none',
+          },
+        })}
       >
-        {text.graph.age_group_percentage_title}
-      </Text>
-      <Text
-        textAnchor="start"
-        verticalAnchor="start"
-        y={0}
-        x={width / 2 + ageRangeAxisWidth / 2}
-        fill="black"
-        fontWeight="bold"
-        fontSize={isSmallScreen ? '1rem' : '1.2rem'}
-      >
-        {text.graph.infected_percentage_title}
-      </Text>
+        <Text
+          textAnchor="end"
+          verticalAnchor="start"
+          y={0}
+          x={width / 2 - ageRangeAxisWidth / 2}
+          fill="black"
+          fontWeight="bold"
+          fontSize={isSmallScreen ? '1rem' : '1.2rem'}
+        >
+          {text.graph.age_group_percentage_title}
+        </Text>
+        <Text
+          textAnchor="start"
+          verticalAnchor="start"
+          y={0}
+          x={width / 2 + ageRangeAxisWidth / 2}
+          fill="black"
+          fontWeight="bold"
+          fontSize={isSmallScreen ? '1rem' : '1.2rem'}
+        >
+          {text.graph.infected_percentage_title}
+        </Text>
 
-      {/* Vertical lines */}
-      <GridColumns
-        scale={ageGroupPercentageScale}
-        width={xMax}
-        height={yMax}
-        left={margin.left}
-        top={margin.top}
-        numTicks={numTicks}
-        stroke={colors.border}
-      />
-      <GridColumns
-        scale={infectedPercentageScale}
-        width={xMax}
-        height={yMax}
-        left={width / 2 + ageRangeAxisWidth / 2}
-        top={margin.top}
-        numTicks={numTicks}
-        stroke={colors.border}
-      />
+        {/* Vertical lines */}
+        <GridColumns
+          scale={ageGroupPercentageScale}
+          width={xMax}
+          height={yMax}
+          left={margin.left}
+          top={margin.top}
+          numTicks={numTicks}
+          stroke={colors.border}
+        />
+        <GridColumns
+          scale={infectedPercentageScale}
+          width={xMax}
+          height={yMax}
+          left={width / 2 + ageRangeAxisWidth / 2}
+          top={margin.top}
+          numTicks={numTicks}
+          stroke={colors.border}
+        />
 
-      {values.map((value, index) => {
-        const ageGroupPercentageWidth = xMax - ageGroupPercentagePoint(value);
-        const infectedPercentageWidth = infectedPercentagePoint(value);
-        return (
-          <Group
-            key={index}
-            onMouseMove={(event) => openTooltip(event, value)}
-            onMouseLeave={closeTooltip}
-            css={css({
-              '&:hover .hoverbar': {
-                fill: colors.lightBlue,
-              },
-            })}
-          >
-            {/* This bar takes all width to display the background color on hover
-              The transparent stroke is to capture mouse movements in between bars for the tooltip */}
-            <Bar
-              x={margin.left}
-              y={ageGroupRangePoint(value)}
-              height={ageGroupRangeScale.bandwidth()}
-              width={width - margin.left - margin.right}
-              fill="transparent"
-              className="hoverbar"
-              stroke="transparent"
-              strokeWidth={15}
-            />
-            <Bar
-              x={width / 2 - ageRangeAxisWidth / 2 - ageGroupPercentageWidth}
-              y={ageGroupRangePoint(value)}
-              height={ageGroupRangeScale.bandwidth()}
-              width={ageGroupPercentageWidth}
-              fill={colors.data.neutral}
-            />
-            <Text
-              textAnchor="middle"
-              verticalAnchor="middle"
-              y={ageGroupRangePoint(value) + ageGroupRangeScale.bandwidth() / 2}
-              x={width / 2}
-              fill={colors.annotation}
+        {values.map((value, index) => {
+          const ageGroupPercentageWidth = xMax - ageGroupPercentagePoint(value);
+          const infectedPercentageWidth = infectedPercentagePoint(value);
+          return (
+            <StyledGroup
+              key={index}
+              onMouseMove={(event) => openTooltip(event, value)}
+              onMouseLeave={closeTooltip}
             >
-              {formatAgeGroupRange(ageGroupRange(value))}
-            </Text>
-            <Bar
-              x={width / 2 + ageRangeAxisWidth / 2}
-              y={ageGroupRangePoint(value)}
-              height={ageGroupRangeScale.bandwidth()}
-              width={infectedPercentageWidth}
-              fill={colors.data.primary}
-            />
-          </Group>
-        );
-      })}
+              {/* This bar takes all width to display the background color on hover */}
+              <StyledHoverBar
+                x={margin.left}
+                y={ageGroupRangePoint(value)}
+                height={ageGroupRangeScale.bandwidth()}
+                width={width - margin.left - margin.right}
+              />
+              <Bar
+                x={width / 2 - ageRangeAxisWidth / 2 - ageGroupPercentageWidth}
+                y={ageGroupRangePoint(value)}
+                height={ageGroupRangeScale.bandwidth()}
+                width={ageGroupPercentageWidth}
+                fill={colors.data.neutral}
+              />
+              <Text
+                textAnchor="middle"
+                verticalAnchor="middle"
+                y={
+                  ageGroupRangePoint(value) + ageGroupRangeScale.bandwidth() / 2
+                }
+                x={width / 2}
+                fill={colors.annotation}
+              >
+                {formatAgeGroupRange(ageGroupRange(value))}
+              </Text>
+              <Bar
+                x={width / 2 + ageRangeAxisWidth / 2}
+                y={ageGroupRangePoint(value)}
+                height={ageGroupRangeScale.bandwidth()}
+                width={infectedPercentageWidth}
+                fill={colors.data.primary}
+              />
+            </StyledGroup>
+          );
+        })}
 
-      {/* Axis lines, match up with the vertical lines */}
-      <AxisBottom
-        scale={ageGroupPercentageScale}
-        left={margin.left}
-        top={height - margin.bottom}
-        numTicks={numTicks}
-        hideTicks={true}
-        hideAxisLine={true}
-        tickFormat={(a) => `${formatPercentage(a as number)}%`}
-        tickComponent={TickValue}
-      />
+        {/* Axis lines, match up with the vertical lines */}
+        <AxisBottom
+          scale={ageGroupPercentageScale}
+          left={margin.left}
+          top={height - margin.bottom}
+          numTicks={numTicks}
+          hideTicks={true}
+          hideAxisLine={true}
+          tickFormat={(a) => `${formatPercentage(a as number)}%`}
+          tickComponent={TickValue}
+        />
 
-      <AxisBottom
-        scale={infectedPercentageScale}
-        left={width / 2 + ageRangeAxisWidth / 2}
-        top={height - margin.bottom}
-        numTicks={numTicks}
-        hideTicks={true}
-        hideAxisLine={true}
-        tickFormat={(a) => `${formatPercentage(a as number)}%`}
-        tickComponent={TickValue}
-      />
-    </svg>
-  );
-}
+        <AxisBottom
+          scale={infectedPercentageScale}
+          left={width / 2 + ageRangeAxisWidth / 2}
+          top={height - margin.bottom}
+          numTicks={numTicks}
+          hideTicks={true}
+          hideAxisLine={true}
+          tickFormat={(a) => `${formatPercentage(a as number)}%`}
+          tickComponent={TickValue}
+        />
+      </svg>
+    );
+  }
+);
+
+const StyledGroup = styled(Group)({});
+const StyledHoverBar = styled(Bar)(
+  css({
+    fill: 'transparent',
+    // transparent stroke is to capture mouse movements in between bars for the tooltip
+    stroke: 'transparent',
+    strokeWidth: 15,
+
+    [`${StyledGroup}:hover &`]: {
+      fill: 'lightBlue',
+    },
+  })
+);

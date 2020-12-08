@@ -10,7 +10,7 @@ import { formatAgeGroupRange } from './age-demographic-chart';
 const text = siteText.infected_age_groups;
 
 interface AgeDemographicTooltipContentProps {
-  value?: NationalInfectedAgeGroupsValue;
+  value: NationalInfectedAgeGroupsValue;
 }
 
 const Legend = styled.ul(
@@ -50,10 +50,6 @@ const LegendItem = styled.li(
 export function AgeDemographicTooltipContent({
   value,
 }: AgeDemographicTooltipContentProps) {
-  // Check for no value is needed here, to be able to properly trigger the aria-live readouts of changing tooltip values.
-  if (!value) {
-    return null;
-  }
   return (
     <>
       <Text fontSize={3} fontWeight="bold" px={3} py={2} m="0">

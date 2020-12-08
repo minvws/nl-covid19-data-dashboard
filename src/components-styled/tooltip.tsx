@@ -1,5 +1,5 @@
 import css from '@styled-system/css';
-import { MouseEvent, ReactNode, useRef, useState } from 'react';
+import { MouseEvent, ReactNode, useCallback, useRef, useState } from 'react';
 import { Box } from '~/components-styled/base';
 
 export interface TooltipCoordinates {
@@ -58,45 +58,51 @@ export function useTooltip<T>({
     timer.current = window.setTimeout(callback, 75);
   }
 
-  function openTooltip(event: MouseEvent<any>, value: T) {
+  const openTooltip = useCallback(
+    (event: MouseEvent<any>, value: T) => {
+      debounceMouseEvents(() => {
+        setCoordinates(getTooltipCoordinates(event, value));
+        setIsVisible(true);
+        setValue(value);
+      });
+    },
+    [getTooltipCoordinates]
+  );
+
+  const closeTooltip = useCallback(() => {
     debounceMouseEvents(() => {
-      setCoordinates(getTooltipCoordinates(event, value));
+      setIsVisible(false);
+    });
+  }, []);
+
+  const keyboardTooltip = useCallback(
+    (event: any) => {
+      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') {
+        return;
+      }
+
+      const direction = event.key === 'ArrowLeft' ? -1 : 1;
+
+      // The new index overflows from zero to the last and vice versa
+      const newIndex =
+        keyboardValueIndex === undefined
+          ? 0
+          : (keyboardValueIndex + direction + values.length) % values.length;
+
+      const newValue = values[newIndex];
+
+      if (!newValue) {
+        setIsVisible(false);
+        return;
+      }
+
+      setKeyboardValueIndex(newIndex);
+      setCoordinates(getTooltipCoordinates(undefined, newValue));
+      setValue(newValue);
       setIsVisible(true);
-      setValue(value);
-    });
-  }
-
-  function closeTooltip() {
-    debounceMouseEvents(() => {
-      setIsVisible(false);
-    });
-  }
-
-  function keyboardTooltip(event: any) {
-    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') {
-      return;
-    }
-
-    const direction = event.key === 'ArrowLeft' ? -1 : 1;
-
-    // The new index overflows from zero to the last and vice versa
-    const newIndex =
-      keyboardValueIndex === undefined
-        ? 0
-        : (keyboardValueIndex + direction + values.length) % values.length;
-
-    const newValue = values[newIndex];
-
-    if (!newValue) {
-      setIsVisible(false);
-      return;
-    }
-
-    setKeyboardValueIndex(newIndex);
-    setCoordinates(getTooltipCoordinates(undefined, newValue));
-    setValue(newValue);
-    setIsVisible(true);
-  }
+    },
+    [getTooltipCoordinates, keyboardValueIndex, values]
+  );
 
   return { openTooltip, closeTooltip, keyboardTooltip, tooltipState };
 }

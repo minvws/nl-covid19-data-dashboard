@@ -1,11 +1,10 @@
-import { ParentSize } from '@visx/responsive';
-import { useState } from 'react';
 import { Box } from '~/components-styled/base';
 import { Tooltip, useTooltip } from '~/components-styled/tooltip';
 import {
   NationalInfectedAgeGroups,
   NationalInfectedAgeGroupsValue,
 } from '~/types/data';
+import { useElementSize } from '~/utils/use-element-size';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import {
   AgeDemographicChart,
@@ -19,7 +18,7 @@ interface AgeDemographicProps {
 }
 
 export function AgeDemographic({ data }: AgeDemographicProps) {
-  const [parentWidth, setParentWidth] = useState(400);
+  const [sizeRef, size] = useElementSize<HTMLDivElement>(400);
   const breakpoints = useBreakpoints();
   const isSmallScreen = !breakpoints.xl;
 
@@ -27,7 +26,7 @@ export function AgeDemographic({ data }: AgeDemographicProps) {
   const coordinates = useAgeDemographicCoordinates(
     data,
     isSmallScreen,
-    parentWidth
+    size.width
   );
 
   // Generate tooltip event handlers and state based on values and tooltip coordinates callback
@@ -43,27 +42,25 @@ export function AgeDemographic({ data }: AgeDemographicProps) {
 
   return (
     <Box mx={-4}>
+      width: {size.width}
       <Box position="relative">
-        <ParentSize>
-          {(parent) => {
-            // This method is invoked by the ParentSize once parent size information is available.
-            setParentWidth(parent.width);
-            return (
-              <AgeDemographicChart
-                coordinates={coordinates}
-                openTooltip={openTooltip}
-                closeTooltip={closeTooltip}
-                keyboardTooltip={keyboardTooltip}
-              />
-            );
-          }}
-        </ParentSize>
+        <div ref={sizeRef}>
+          <AgeDemographicChart
+            coordinates={coordinates}
+            openTooltip={openTooltip}
+            closeTooltip={closeTooltip}
+            keyboardTooltip={keyboardTooltip}
+          />
+        </div>
+
         <Tooltip
           controls="age-demographic-chart"
           tooltipState={tooltipState}
           width={AGE_GROUP_TOOLTIP_WIDTH}
         >
-          <AgeDemographicTooltipContent value={tooltipState.value} />
+          {tooltipState.value && (
+            <AgeDemographicTooltipContent value={tooltipState.value} />
+          )}
         </Tooltip>
       </Box>
     </Box>
