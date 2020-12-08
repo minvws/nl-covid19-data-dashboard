@@ -49,7 +49,7 @@ export function BehaviorChoroplethTile() {
         </>
       }
       legend={{
-        thresholds: regionThresholds.behavior.behavior,
+        thresholds: regionThresholds.behavior,
         title: text.verdeling_in_nederland.legenda_titel,
       }}
     >
