@@ -42,7 +42,6 @@ export function AgeDemographic({ data }: AgeDemographicProps) {
 
   return (
     <Box mx={-4}>
-      width: {size.width}
       <Box position="relative">
         <div ref={sizeRef}>
           <AgeDemographicChart
