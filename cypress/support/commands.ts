@@ -26,28 +26,60 @@
 
 import { Municipal, National, Regionaal } from '~/types/data';
 
+// Must be declared global to be detected by typescript (allows import/export)
+// eslint-disable @typescript/interface-name
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Cypress {
-    interface Chainable {
+    interface Chainable<Subject> {
       /**
        * Custom command to select DOM element by data-cy attribute.
        * @example cy.dataCy('greeting')
        */
       dataCy(value: string): Chainable<Element>;
+      /**
+       * Fixture loading and page navigation for municipal page tests
+       *
+       * @param pageName
+       * @param gmcode
+       */
       beforeMunicipalTests(
         pageName: string,
         gmcode?: string
       ): Chainable<Element>;
+      /**
+       * Fixture loading and page navigation for national page tests
+       *
+       * @param pageName
+       */
       beforeNationalTests(pageName: string): Chainable<Element>;
+      /**
+       * Fixture loading and page navigation for regional page tests
+       *
+       * @param pageName
+       * @param vrcode
+       */
       beforeRegionTests(pageName: string, vrcode?: string): Chainable<Element>;
+      /**
+       * Ignores any errors coming out of the ResizeObserver
+       */
       swallowResizeObserverError(): void;
+      /**
+       * Checks a list of values against their associated of data-cy IDs
+       *
+       * @param kpiTestInfo
+       */
       checkKpiValues(kpiTestInfo: Record<string, string | string[]>): void;
     }
   }
 }
 
+console.log(
+  '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
+);
+
 Cypress.Commands.add(
-  'beforeMunicipal',
+  'beforeMunicipalTests',
   (pageName: string, gmcode = 'GM0363') => {
     cy.swallowResizeObserverError();
     return cy
