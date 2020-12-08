@@ -1,6 +1,15 @@
 import { FeatureCollection, MultiPolygon } from 'geojson';
 import { Municipalities, Regions } from '~/types/data';
 
+export type MetricKeys<T> = keyof Omit<
+  T,
+  'last_generated' | 'proto_name' | 'name' | 'code'
+>;
+
+export type DifferenceKeys<
+  T extends { difference: unknown }
+> = keyof T['difference'];
+
 type TMetricHolder<T> = keyof Omit<
   T,
   'last_generated' | 'proto_name' | 'name' | 'code'

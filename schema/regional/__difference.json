@@ -35,8 +35,16 @@
     }
   },
   "required": [
+    "results_per_region__infected_increase_per_region",
     "results_per_region__total_reported_increase_per_region",
-    "results_per_region__hospital_moving_avg_per_region"
+    "ggd__tested_total",
+    "ggd__infected_percentage",
+    "results_per_region__hospital_moving_avg_per_region",
+    "results_per_region__hospital_total_counts_per_region",
+    "sewer__average",
+    "nursing_home__newly_infected_people",
+    "nursing_home__infected_locations_total",
+    "nursing_home__deceased_daily"
   ],
   "additionalProperties": false,
   "definitions": {

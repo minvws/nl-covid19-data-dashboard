@@ -4,24 +4,33 @@ import { BarScale } from '~/components/barScale';
 import { MetricKeys } from '~/components/choropleth/shared';
 import siteText, { TALLLanguages } from '~/locale/index';
 import { assert } from '~/utils/assert';
-import { DataScope, getMetricConfig } from '../../metric-config';
-import { Box } from '../base';
+import { DataScope, getMetricConfig } from '../metric-config';
+import { Box } from './base';
+import { DifferenceIndicator } from './difference-indicator';
 
-interface SidebarBarScaleProps<T> {
+/**
+ * This component originated from SidebarBarScale, but is used on pages and
+ * adds the ability to show the difference as well as things like signaalwaarde.
+ *
+ * I think we can come up with a better name, maybe later.
+ */
+interface PageBarScaleProps<T> {
   scope: DataScope;
   data: T;
   localeTextKey: keyof TALLLanguages;
   metricName: ValueOf<MetricKeys<T>>;
   metricProperty: string;
+  differenceKey?: string;
 }
 
-export function SidebarBarScale<T>({
+export function PageBarScale<T>({
   data,
   scope,
   metricName,
   metricProperty,
   localeTextKey,
-}: SidebarBarScaleProps<T>) {
+  differenceKey,
+}: PageBarScaleProps<T>) {
   const text = siteText[localeTextKey] as Record<string, string>;
   const lastValue = get(data, [
     (metricName as unknown) as string,
@@ -69,12 +78,22 @@ export function SidebarBarScale<T>({
     `Missing screen reader text at ${localeTextKey}.barscale_screenreader_text`
   );
 
-  /**
-    @TODO refactor BarScale and remove these ugly css hacks which were part of
-    the metric-wrapper class.
-    */
+  const differenceValue = differenceKey
+    ? get(data, ['difference', (differenceKey as unknown) as string])
+    : undefined;
+
+  if (differenceKey) {
+    /**
+     * If you pass in a difference key, it should exist
+     */
+    assert(
+      isDefined(differenceValue),
+      `Missing value for difference:${differenceKey}`
+    );
+  }
+
   return (
-    <Box height="3.5rem" mt="-1.25em">
+    <Box spacing={2}>
       <BarScale
         min={config.barScale.min}
         max={config.barScale.max}
@@ -84,8 +103,15 @@ export function SidebarBarScale<T>({
         id={uniqueId}
         rangeKey={config.barScale.rangesKey}
         gradient={config.barScale.gradient}
-        showValue={false}
+        showValue={true}
+        showAxis={true}
       />
+      {differenceKey && (
+        <DifferenceIndicator
+          value={differenceValue}
+          isDecimal={config.isDecimal}
+        />
+      )}
     </Box>
   );
 }

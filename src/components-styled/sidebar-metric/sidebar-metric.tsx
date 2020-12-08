@@ -6,22 +6,36 @@ import { SidebarBarScale } from './sidebar-barscale';
 import { SidebarKpiValue } from './sidebar-kpi-value';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { formatDateFromSeconds } from '~/utils/formatDate';
-import siteText from '~/locale/index';
-import { getDataConfig, DataScope } from './data-config';
+import siteText, { TALLLanguages } from '~/locale/index';
+import { getMetricConfig, DataScope } from '~/metric-config';
+import {
+  MetricKeys /* DifferenceKeys */,
+} from '~/components/choropleth/shared';
 
-interface SidebarMetricProps<T> {
+interface SidebarMetricProps<T extends { difference: unknown }> {
   scope: DataScope;
   data: T;
-  metricName: string;
+  metricName: ValueOf<MetricKeys<T>>;
   metricProperty: string;
-  localeTextKey: string;
+  localeTextKey: keyof TALLLanguages;
+  // differenceKey?: ValueOf<DifferenceKeys<T>>;
   differenceKey?: string;
   showBarScale?: boolean;
   isWeeklyData?: boolean;
   annotationKey?: string;
+
+  /**
+   * Sometimes the barscale is not showing the same metric. Also since data
+   * is not properly unified yet, the bar scale can point to both a different
+   * metric name and metric property.
+   */
+  altBarScaleMetric?: {
+    metricName: ValueOf<MetricKeys<T>>;
+    metricProperty: string;
+  };
 }
 
-export function SidebarMetric<T>({
+export function SidebarMetric<T extends { difference: unknown }>({
   scope,
   data,
   metricName,
@@ -30,8 +44,12 @@ export function SidebarMetric<T>({
   differenceKey,
   showBarScale,
   annotationKey,
+  altBarScaleMetric,
 }: SidebarMetricProps<T>) {
-  const lastValue = get(data, [metricName, 'last_value']);
+  const lastValue = get(data, [
+    (metricName as unknown) as string,
+    'last_value',
+  ]);
   const propertyValue = lastValue && lastValue[metricProperty];
 
   assert(
@@ -45,11 +63,15 @@ export function SidebarMetric<T>({
       .join(':')}`
   );
 
-  const config = getDataConfig(scope, metricName, metricProperty);
+  const config = getMetricConfig(
+    scope,
+    (metricName as unknown) as string,
+    metricProperty
+  );
   const commonText = siteText.common.metricKPI;
 
-  const title = get(siteText, [localeTextKey, 'titel_kpi']);
-  assert(title, `Missing title at %{localeTextKey}.titel_kpi`);
+  const title = get(siteText, [localeTextKey, 'kpi_titel']);
+  assert(title, `Missing title at ${localeTextKey}.kpi_titel`);
 
   const description = config.isWeeklyData
     ? replaceVariablesInText(commonText.dateRangeOfReport, {
@@ -64,7 +86,7 @@ export function SidebarMetric<T>({
       });
 
   const differenceValue = differenceKey
-    ? get(data, ['difference', differenceKey])
+    ? get(data, ['difference', (differenceKey as unknown) as string])
     : undefined;
 
   if (differenceKey) {
@@ -102,10 +124,17 @@ export function SidebarMetric<T>({
       />
       {showBarScale && (
         <SidebarBarScale
+          data={data}
+          scope={scope}
           localeTextKey={localeTextKey}
-          value={propertyValue}
-          config={config.barScale}
-          uniqueId={[scope, metricName, metricProperty].join(':')}
+          metricName={
+            altBarScaleMetric ? altBarScaleMetric.metricName : metricName
+          }
+          metricProperty={
+            altBarScaleMetric
+              ? altBarScaleMetric.metricProperty
+              : metricProperty
+          }
         />
       )}
     </Box>

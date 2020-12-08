@@ -20,9 +20,6 @@ import { TitleWithIcon } from '~/components-styled/aside/title-with-icon';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
 import { NursingHomeInfectedPeopleMetric } from '~/components/common/nursing-home-infected-people-metric';
 import { InfectiousPeopleMetric } from '~/components/landelijk/infectious-people-metric';
-import { IntakeIntensiveCareBarscale } from '~/components/landelijk/intake-intensive-care-barscale';
-import { IntakeIntensiveCareMetric } from '~/components/landelijk/intake-intensive-care-metric';
-import { PositiveTestedPeopleBarScale } from '~/components/landelijk/positive-tested-people-barscale';
 import { ReproductionIndexBarScale } from '~/components/landelijk/reproduction-index-barscale';
 import { ReproductionIndexMetric } from '~/components/landelijk/reproduction-index-metric';
 import { SewerWaterMetric } from '~/components/landelijk/sewer-water-metric';
@@ -32,7 +29,6 @@ import siteText from '~/locale/index';
 import { NationalPageProps } from '~/static-props/nl-data';
 import theme from '~/style/theme';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-import { PositiveTestedPeopleMetric } from '../landelijk/positive-tested-people-metric';
 
 export function getNationalLayout(
   page: React.ReactNode,
@@ -179,14 +175,19 @@ function NationalLayout(props: NationalLayoutProps) {
                             siteText.positief_geteste_personen.titel_sidebar
                           }
                         />
-                        <span className="metric-wrapper">
-                          <PositiveTestedPeopleMetric data={data} />
-                          <PositiveTestedPeopleBarScale
-                            data={data}
-                            showAxis={false}
-                            showValue={false}
-                          />
-                        </span>
+                        <SidebarMetric
+                          data={data}
+                          scope="nl"
+                          metricName="infected_people_total"
+                          metricProperty="infected_daily_total"
+                          altBarScaleMetric={{
+                            metricName: 'infected_people_delta_normalized',
+                            metricProperty: 'infected_daily_increase',
+                          }}
+                          localeTextKey="positief_geteste_personen"
+                          differenceKey="infected_people_total__infected_daily_total"
+                          showBarScale={true}
+                        />
                       </a>
                     </Link>
                   </MetricMenuItem>
@@ -265,8 +266,8 @@ function NationalLayout(props: NationalLayoutProps) {
                          * properties like title_sidebar.
                          */}
                         <SidebarMetric
-                          scope="nl"
                           data={data}
+                          scope="nl"
                           metricName="intake_hospital_ma"
                           metricProperty="moving_average_hospital"
                           localeTextKey="ziekenhuisopnames_per_dag"
@@ -288,14 +289,15 @@ function NationalLayout(props: NationalLayoutProps) {
                           icon={<Arts />}
                           title={siteText.ic_opnames_per_dag.titel_sidebar}
                         />
-                        <span className="metric-wrapper">
-                          <IntakeIntensiveCareMetric data={data} />
-                          <IntakeIntensiveCareBarscale
-                            data={data}
-                            showAxis={false}
-                            showValue={false}
-                          />
-                        </span>
+                        <SidebarMetric
+                          data={data}
+                          scope="nl"
+                          metricName="intake_intensivecare_ma"
+                          metricProperty="moving_average_ic"
+                          localeTextKey="ic_opnames_per_dag"
+                          differenceKey="intake_intensivecare_ma__moving_average_ic"
+                          showBarScale={true}
+                        />
                       </a>
                     </Link>
                   </MetricMenuItem>

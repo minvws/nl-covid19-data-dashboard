@@ -6,7 +6,7 @@ import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text = siteText.common.metricKPI;
-const title = siteText.veiligheidsregio_ziekenhuisopnames_per_dag.titel_kpi;
+const title = siteText.veiligheidsregio_ziekenhuisopnames_per_dag.kpi_titel;
 
 export function IntakeHospitalMetric({ data }: { data: Regionaal }) {
   const lastValue = data.results_per_region.last_value;
