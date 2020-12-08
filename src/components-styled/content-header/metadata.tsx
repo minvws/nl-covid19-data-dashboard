@@ -95,7 +95,7 @@ function MetadataItem(props: MetadataItemProps) {
         {items.map((item, index) => (
           <Fragment key={index + item.href}>
             {index > 0 && ' & '}
-            <ExternalLink href={item.href} text={item.text} />
+            <ExternalLink href={item.href}>{item.text}</ExternalLink>
           </Fragment>
         ))}
       </Text>

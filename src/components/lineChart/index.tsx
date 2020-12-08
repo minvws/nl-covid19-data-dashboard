@@ -218,7 +218,9 @@ export default function LineChart<T extends Value>({
       {valueAnnotation && (
         <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
       )}
-      <HighchartsReact highcharts={Highcharts} options={chartOptions} />
+      <div>
+        <HighchartsReact highcharts={Highcharts} options={chartOptions} />
+      </div>
     </section>
   );
 }

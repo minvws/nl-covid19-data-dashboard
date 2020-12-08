@@ -6,13 +6,14 @@ import Getest from '~/assets/test.svg';
 import { Anchor } from '~/components-styled/anchor';
 import { Box } from '~/components-styled/base';
 import { RegionControlOption } from '~/components-styled/chart-region-controls';
-// import { ChartTile } from '~/components-styled/chart-tile';
+import { ChartTile } from '~/components-styled/chart-tile';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { MultipleLineChartTile } from '~/components-styled/multiple-line-chart-tile';
+import { PageBarScale } from '~/components-styled/page-barscale';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
@@ -22,46 +23,45 @@ import { createSelectMunicipalHandler } from '~/components/choropleth/select-han
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
 import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/create-positive-tested-people-regional-tooltip';
-import { PositiveTestedPeopleBarScale } from '~/components/landelijk/positive-tested-people-barscale';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
+import { AgeDemographic } from '~/domain/infected-people/age-demographic/age-demographic';
+import { formatAgeGroupRange } from '~/domain/infected-people/age-demographic/age-demographic-chart';
 import siteText from '~/locale/index';
-// import { NationalInfectedAgeGroups } from '~/types/data.d';
-import { formatNumber, formatPercentage } from '~/utils/formatNumber';
-import { replaceKpisInText } from '~/utils/replaceKpisInText';
-import { formatDateFromSeconds } from '~/utils/formatDate';
-// import { AgeDemographic } from '~/domain/infected-people/age-demographic/age-demographic';
-// import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-// import { formatAgeGroupRange } from '~/domain/infected-people/age-demographic/age-demographic-chart';
 import {
   getNationalStaticProps,
   NationalPageProps,
 } from '~/static-props/nl-data';
 import { colors } from '~/style/theme';
-// import { assert } from '~/utils/assert';
+import { NationalInfectedAgeGroups } from '~/types/data.d';
+import { assert } from '~/utils/assert';
+import { formatDateFromSeconds } from '~/utils/formatDate';
+import { formatNumber, formatPercentage } from '~/utils/formatNumber';
+import { replaceKpisInText } from '~/utils/replaceKpisInText';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text = siteText.positief_geteste_personen;
 const ggdText = siteText.positief_geteste_personen_ggd;
 
-// /* Retrieves certain age demographic data to be used in the example text. */
-// function getAgeDemographicExampleData(data: NationalInfectedAgeGroups) {
-//   const ageGroupRange = '20-29';
-//   const value = data?.values.find((x) => x.age_group_range === ageGroupRange);
+/* Retrieves certain age demographic data to be used in the example text. */
+function getAgeDemographicExampleData(data: NationalInfectedAgeGroups) {
+  const ageGroupRange = '20-29';
+  const value = data.values.find((x) => x.age_group_range === ageGroupRange);
 
-//   assert(
-//     value,
-//     `NationalInfectedAgeGroups should contain a value for age group ${ageGroupRange}`
-//   );
+  assert(
+    value,
+    `NationalInfectedAgeGroups should contain a value for age group ${ageGroupRange}`
+  );
 
-//   return {
-//     ageGroupRange: formatAgeGroupRange(ageGroupRange),
-//     ageGroupPercentage: `${formatPercentage(
-//       value.age_group_percentage * 100
-//     )}%`,
-//     infectedPercentage: `${formatPercentage(value.infected_percentage * 100)}%`,
-//   };
-// }
+  return {
+    ageGroupRange: formatAgeGroupRange(ageGroupRange),
+    ageGroupPercentage: `${formatPercentage(
+      value.age_group_percentage * 100
+    )}%`,
+    infectedPercentage: `${formatPercentage(value.infected_percentage * 100)}%`,
+  };
+}
 
 const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>(
@@ -73,9 +73,9 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
   const dataGgdLastValue = data.ggd.last_value;
   const dataGgdValues = data.ggd.values;
 
-  // const ageDemographicExampleData = getAgeDemographicExampleData(
-  //   data.infected_age_groups
-  // );
+  const ageDemographicExampleData = getAgeDemographicExampleData(
+    data.infected_age_groups
+  );
 
   return (
     <>
@@ -85,7 +85,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
       />
       <ContentHeader
         category={siteText.nationaal_layout.headings.besmettingen}
-        screenreaderCategory={siteText.positief_geteste_personen.titel_sidebar}
+        screenReaderCategory={siteText.positief_geteste_personen.titel_sidebar}
         title={text.titel}
         icon={<Getest />}
         subtitle={text.pagina_toelichting}
@@ -108,7 +108,14 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
             source: text.bronnen.rivm,
           }}
         >
-          <PositiveTestedPeopleBarScale data={data} showAxis />
+          <PageBarScale
+            data={data}
+            scope="nl"
+            metricName="infected_people_delta_normalized"
+            metricProperty="infected_daily_increase"
+            localeTextKey="positief_geteste_personen"
+            differenceKey="infected_people_delta_normalized__infected_daily_increase"
+          />
 
           <Text>{text.barscale_toelichting}</Text>
         </KpiTile>
@@ -164,7 +171,8 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
         onChangeControls={setSelectedMap}
         legend={{
           title: text.chloropleth_legenda.titel,
-          thresholds: regionThresholds.positive_tested_people,
+          thresholds:
+            regionThresholds.positive_tested_people.positive_tested_people,
         }}
       >
         {/**
@@ -182,7 +190,9 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
           <MunicipalityChoropleth
             metricName="positive_tested_people"
             metricProperty="positive_tested_people"
-            tooltipContent={createPositiveTestedPeopleMunicipalTooltip(router)}
+            tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
+              createSelectMunicipalHandler(router)
+            )}
             onSelect={createSelectMunicipalHandler(router)}
           />
         )}
@@ -190,7 +200,9 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
           <SafetyRegionChoropleth
             metricName="positive_tested_people"
             metricProperty="positive_tested_people"
-            tooltipContent={createPositiveTestedPeopleRegionalTooltip(router)}
+            tooltipContent={createPositiveTestedPeopleRegionalTooltip(
+              createSelectRegionHandler(router)
+            )}
             onSelect={createSelectRegionHandler(router)}
           />
         )}
@@ -209,7 +221,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
         }}
       />
 
-      {/* <ChartTile
+      <ChartTile
         title={siteText.infected_age_groups.title}
         description={siteText.infected_age_groups.description}
         metadata={{
@@ -224,7 +236,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
           )}
         </Text>
         <AgeDemographic data={data.infected_age_groups} />
-      </ChartTile> */}
+      </ChartTile>
 
       <ContentHeader
         title={ggdText.titel}

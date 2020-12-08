@@ -6,7 +6,7 @@ import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text = siteText.common.metricKPI;
-const title = siteText.verpleeghuis_oversterfte.titel_kpi;
+const title = siteText.verpleeghuis_oversterfte.kpi_titel;
 
 export function NursingHomeDeathsMetric(props: {
   data: NationalNursingHomeValue | undefined;

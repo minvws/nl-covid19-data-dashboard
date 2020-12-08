@@ -12,7 +12,12 @@
     "nursing_home",
     "sewer",
     "sewer_per_installation",
-    "difference"
+    "behavior",
+    "difference",
+    "deceased_rivm",
+    "deceased_cbs",
+    "elderly_at_home",
+    "disability_care"
   ],
   "additionalProperties": false,
   "properties": {
@@ -49,11 +54,23 @@
     "nursing_home": {
       "$ref": "nursing_home.json"
     },
+    "disability_care": {
+      "$ref": "disability_care.json"
+    },
     "restrictions": {
       "$ref": "restrictions.json"
     },
     "behavior": {
       "$ref": "behavior.json"
+    },
+    "deceased_rivm": {
+      "$ref": "deceased_rivm.json"
+    },
+    "deceased_cbs": {
+      "$ref": "deceased_cbs.json"
+    },
+    "elderly_at_home": {
+      "$ref": "elderly_at_home.json"
     }
   }
 }

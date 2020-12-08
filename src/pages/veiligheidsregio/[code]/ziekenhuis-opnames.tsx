@@ -8,7 +8,7 @@ import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import {
-  getSafetyRegionData,
+  getSafetyRegionStaticProps,
   getSafetyRegionPaths,
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
@@ -92,7 +92,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
         })}
         description={text.map_toelichting}
         legend={{
-          thresholds: regionThresholds.hospital_admissions,
+          thresholds: regionThresholds.hospital_admissions.hospital_admissions,
           title: siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel,
         }}
         metadata={{
@@ -125,7 +125,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
 
 IntakeHospital.getLayout = getSafetyRegionLayout();
 
-export const getStaticProps = getSafetyRegionData();
+export const getStaticProps = getSafetyRegionStaticProps;
 export const getStaticPaths = getSafetyRegionPaths();
 
 export default IntakeHospital;

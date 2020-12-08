@@ -5,9 +5,9 @@ import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { Tile } from '~/components-styled/layout';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { PageBarScale } from '~/components-styled/page-barscale';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
-import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-barscale';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
@@ -33,7 +33,7 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
       />
       <ContentHeader
         category={siteText.nationaal_layout.headings.ziekenhuizen}
-        screenreaderCategory={siteText.ziekenhuisopnames_per_dag.titel_sidebar}
+        screenReaderCategory={siteText.ziekenhuisopnames_per_dag.titel_sidebar}
         title={text.titel}
         icon={<Ziekenhuis />}
         subtitle={text.pagina_toelichting}
@@ -57,10 +57,13 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
             source: text.bronnen.nice,
           }}
         >
-          <IntakeHospitalBarScale
+          <PageBarScale
             data={data}
-            showAxis={true}
-            showValue={true}
+            scope="nl"
+            metricName="intake_hospital_ma"
+            metricProperty="moving_average_hospital"
+            localeTextKey="ziekenhuisopnames_per_dag"
+            differenceKey="intake_hospital_ma__moving_average_hospital"
           />
         </KpiTile>
 
@@ -109,7 +112,7 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
         description={text.map_toelichting}
         onChangeControls={setSelectedMap}
         legend={{
-          thresholds: regionThresholds.hospital_admissions,
+          thresholds: regionThresholds.hospital_admissions.hospital_admissions,
           title: text.chloropleth_legenda.titel,
         }}
         metadata={{

@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import Getest from '~/assets/test.svg';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { ContentHeader } from '~/components-styled/content-header';
@@ -9,7 +8,6 @@ import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
-import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
 import { FCWithLayout } from '~/components/layout';
 import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
@@ -26,8 +24,7 @@ const text = siteText.gemeente_positief_geteste_personen;
 
 const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
   const { data, municipalityName } = props;
-  const router = useRouter();
-  const positivelyTestedPeople = data.positive_tested_people;
+  const lastValue = data.positive_tested_people.last_value;
 
   return (
     <>
@@ -48,9 +45,8 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateInfo: positivelyTestedPeople.last_value.date_of_report_unix,
-          dateOfInsertionUnix:
-            positivelyTestedPeople.last_value.date_of_insertion_unix,
+          dateInfo: lastValue.date_of_report_unix,
+          dateOfInsertionUnix: lastValue.date_of_insertion_unix,
           dataSources: [text.bronnen.rivm],
         }}
         reference={text.reference}
@@ -60,13 +56,16 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
         <KpiTile
           title={text.barscale_titel}
           metadata={{
-            date: positivelyTestedPeople.last_value.date_of_report_unix,
+            date: lastValue.date_of_report_unix,
             source: text.bronnen.rivm,
           }}
         >
           <KpiValue
             data-cy="infected_daily_increase"
-            absolute={positivelyTestedPeople.last_value.infected_daily_increase}
+            absolute={lastValue.infected_daily_increase}
+            difference={
+              data.difference.positive_tested_people__infected_daily_increase
+            }
           />
           <Text>{text.barscale_toelichting}</Text>
         </KpiTile>
@@ -74,13 +73,13 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
         <KpiTile
           title={text.kpi_titel}
           metadata={{
-            date: positivelyTestedPeople.last_value.date_of_report_unix,
+            date: lastValue.date_of_report_unix,
             source: text.bronnen.rivm,
           }}
         >
           <KpiValue
             data-cy="infected_daily_total"
-            absolute={positivelyTestedPeople.last_value.infected_daily_total}
+            absolute={lastValue.infected_daily_total}
             difference={
               data.difference.positive_tested_people__infected_daily_total
             }
@@ -89,11 +88,11 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
         </KpiTile>
       </TwoKpiSection>
 
-      {positivelyTestedPeople && (
+      {data.positive_tested_people && (
         <LineChartTile
           title={text.linechart_titel}
           description={text.linechart_toelichting}
-          values={positivelyTestedPeople.values.map((value) => ({
+          values={data.positive_tested_people.values.map((value) => ({
             value: value.infected_daily_increase,
             date: value.date_of_report_unix,
           }))}
@@ -114,7 +113,7 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
           title: siteText.positief_geteste_personen.chloropleth_legenda.titel,
         }}
         metadata={{
-          date: positivelyTestedPeople.last_value.date_of_report_unix,
+          date: lastValue.date_of_report_unix,
           source: text.bronnen.rivm,
         }}
       >
@@ -122,8 +121,7 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
           selected={data.code}
           metricName="positive_tested_people"
           metricProperty="positive_tested_people"
-          tooltipContent={createPositiveTestedPeopleMunicipalTooltip(router)}
-          onSelect={createSelectMunicipalHandler(router)}
+          tooltipContent={createPositiveTestedPeopleMunicipalTooltip()}
         />
       </ChoroplethTile>
     </>

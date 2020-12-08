@@ -1,5 +1,5 @@
 import css from '@styled-system/css';
-import Link from 'next/link';
+import { Link } from '~/utils/link';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import {
@@ -107,7 +107,7 @@ export function ContentHeader(props: ContentHeaderProps) {
   const {
     hideCategory = false,
     category,
-    screenreaderCategory: ariaCategory,
+    screenReaderCategory,
     icon,
     title,
     subtitle,
@@ -123,7 +123,9 @@ export function ContentHeader(props: ContentHeaderProps) {
       {category && (
         <CategoryHeading level={1} hide={hideCategory}>
           {category}
-          {ariaCategory && <AriaInlineText> - {ariaCategory}</AriaInlineText>}
+          {screenReaderCategory && (
+            <AriaInlineText> - {screenReaderCategory}</AriaInlineText>
+          )}
         </CategoryHeading>
       )}
       {icon ? (
@@ -166,7 +168,7 @@ interface ContentHeaderProps {
     text: string;
   };
   category?: string;
-  screenreaderCategory?: string;
+  screenReaderCategory?: string;
   hideCategory?: boolean;
   icon?: JSX.Element;
   skipLinkAnchor?: boolean;

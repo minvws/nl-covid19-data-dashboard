@@ -6,7 +6,7 @@ import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { SewerWaterBarScaleData } from '~/utils/sewer-water/safety-region-sewer-water.util';
 
 const text = siteText.common.metricKPI;
-const title = siteText.veiligheidsregio_rioolwater_metingen.titel_kpi;
+const title = siteText.veiligheidsregio_rioolwater_metingen.kpi_titel;
 
 export function SewerWaterMetric(props: { data: SewerWaterBarScaleData }) {
   const { data } = props;

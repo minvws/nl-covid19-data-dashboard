@@ -9,8 +9,8 @@
     "title": "Last updated"
   },
   "notificatie": {
-    "titel": "Number of confirmed cases stagnates",
-    "bericht": "In the past week (18 November – 24 November) the number of newly tested COVID-19 positives was comparable to the week before. The number of hospital and IC admissions due to COVID-19 did decrease slightly in the past week. The pressure on the healthcare system remains high. The reproduction number of 6 November increased compared to the week before, and has a value of 1,02 (lower: 0,99 and upper: 1,05). This means that 100 COVID-19 positives infect 102 other persons.\n\nRisk level per region can be ‘caution’ (level 1), ‘concern’ (level 2), ‘serious’ (level 3) or ‘severe’ (level 4). At this moment the risk level of {{escalationLevel4}} regions is 'severe', for {{escalationLevel3}} it is ‘serious’, for {{escalationLevel2}} it is ‘concern’ and for {{escalationLevel1}} it is ‘caution’.",
+    "titel": "Increase in newly reported COVID-19 infections is cause for concern",
+    "bericht": "Last week there was a 27% increase in COVID-19 positives compared with the week before. In the week from 2 to 8 December 43,103 newly tested COVID-19 positives were reported. This is an increase of 9,000 COVID-19 positives compared to the 33,949 COVID-19 positives reported the week before. In each safety region the number of newly tested positives also increased. More people have been tested. The percentage of people with a positive test result raised from 11.1% to 11.6% last week. The reproduction number of 20 November has a value of 1.00 (lower: 0.97; upper: 1.03).\n\nRisk level per region can be ‘caution’ (level 1), ‘concern’ (level 2), ‘serious’ (level 3) or ‘severe’ (level 4). At this moment the risk level of {{escalationLevel4}} regions is 'severe', for {{escalationLevel3}} it is ‘serious’, for {{escalationLevel2}} it is ‘concern’ and for {{escalationLevel1}} it is ‘caution’.",
     "link": {
       "text": "View the full message from the RIVM",
       "href": "https://www.rivm.nl/en/novel-coronavirus-covid-19/current-information"
@@ -34,7 +34,7 @@
   "header": {
     "title": "Coronavirus dashboard",
     "text": "The coronavirus dashboard provides information on the development of the coronavirus in the Netherlands.",
-    "link": "Read more",
+    "link": "Read more about this dashboard",
     "logo_alt": "Government of The Netherlands"
   },
   "nav": {
@@ -94,7 +94,8 @@
     "reference": {
       "href": "/verantwoording#intensive-care",
       "text": "Read more in 'explanation of the data presented'."
-    }
+    },
+    "kpi_titel": ""
   },
   "verdenkingen_huisartsen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
@@ -190,7 +191,8 @@
       "text": "Read more in 'explanation of the data presented'."
     },
     "tijdelijk_onbeschikbaar_titel": "Map temporarily not available",
-    "tijdelijk_onbeschikbaar": "Hospital admissions per safety region and municipality are temporarily not shown. The dataset these numbers were based on (Osiris) is no longer sufficiently aligned with the actual number of hospital admissions.  Soon we expect to show admissions per safety region and municipality again, based on data from NICE, a better dataset. For hospital admissions on a national level NICE is already the source.  Read more in 'explanation of the data presented'."
+    "tijdelijk_onbeschikbaar": "Hospital admissions per safety region and municipality are temporarily not shown. The dataset these numbers were based on (Osiris) is no longer sufficiently aligned with the actual number of hospital admissions.  Soon we expect to show admissions per safety region and municipality again, based on data from NICE, a better dataset. For hospital admissions on a national level NICE is already the source.  Read more in 'explanation of the data presented'.",
+    "kpi_titel": ""
   },
   "positief_geteste_personen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -296,7 +298,8 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/097155aa-75eb-4caa-8ed3-4c6edb80467e",
         "text": "RIVM"
       }
-    }
+    },
+    "kpi_titel": ""
   },
   "reproductiegetal": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
@@ -332,7 +335,8 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/ed0699d1-c9d5-4436-8517-27eb993eab6e",
         "text": "RIVM"
       }
-    }
+    },
+    "kpi_titel": ""
   },
   "overige_gegevens": {
     "title": "To be developed",
@@ -451,7 +455,8 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
         "text": "RIVM"
       }
-    }
+    },
+    "kpi_titel": ""
   },
   "verpleeghuis_oversterfte": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -483,7 +488,8 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
         "text": "RIVM"
       }
-    }
+    },
+    "kpi_titel": ""
   },
   "blok_verpleeghuis_zorg": {
     "title": "Nursing homes",
@@ -528,7 +534,8 @@
         "text": "RIVM",
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
       }
-    }
+    },
+    "kpi_titel": ""
   },
   "notfound_titel": {
     "text": "Something went wrong"
@@ -544,7 +551,7 @@
     "text": ""
   },
   "over_beschrijving": {
-    "text": "The coronavirus dashboard was developed by the Ministry of Health, Welfare and Sport. It gives up-to-date information about developments surrounding coronavirus in the Netherlands. This information can help us pick up early signs that the rate of infection is increasing, allowing us to act in time to stop the virus from spreading further.\n\n### Development\n\nThe dashboard is still under development, so some features aren’t yet available. As we continue to develop the website, we look carefully to see that the information is clear and understandable for everyone, and that it can be properly viewed on any device. The dashboard is available in Dutch and English. \n\n### Contact\n\nIf you have suggestions for improving the website, you can email them to coronadashboard@minvws.nl. We read every email that comes in and do our best to reply to each one promptly. When it’s busy, this may take us a bit longer. In many cases, the answers to many questions are already provided on the [Explanation of the data presented](https://coronadashboard.government.nl/veelgestelde-vragen) and [Frequently asked questions](https://coronadashboard.rijksoverheid.nl/veelgestelde-vragen) pages.\n\nIT developers can share their feedback on Github. Front-end-related questions and suggestions can be submitted [here](https://github.com/minvws/nl-covid19-data-dashboard). Questions about the underlying calculations can be submitted [here](https://github.com/minvws/nl-covid19-data-backend-processing). \n\nIf you find that the dashboard has any technical vulnerabilities, we’d like to know. We work together with the National Cyber Security Centre (NCSC) in this area. Please notify them of what you’ve found as soon as possible using their [form](https://www.ncsc.nl/contact/kwetsbaarheid-melden/cvd-meldingen-formulier) before making the issue publicly known. Together with the NCSC we will address the issue and resolve it as quickly as possible. Thank you for your assistance!\n\nAnswers to many questions about coronavirus and COVID-19 are available on [government.nl](https://www.government.nl/topics/coronavirus-covid-19). If you cannot find the answer you are looking for there, you can call the public information number: 0800 1351 (between 8.00 and 20.00). From outside the Netherlands, call +31 20 205 1351."
+    "text": "The coronavirus dashboard was developed by the Ministry of Health, Welfare and Sport. It gives up-to-date information about developments surrounding coronavirus in the Netherlands. This information can help us pick up early signs that the rate of infection is increasing, allowing us to act in time to stop the virus from spreading further.\n\n### Development\n\nThe dashboard is still under development, so some features aren’t yet available. As we continue to develop the website, we look carefully to see that the information is clear and understandable for everyone, and that it can be properly viewed on any device. The dashboard is available in Dutch and English. \n\n### Contact\n\nIf you have suggestions for improving the website, you can email them to coronadashboard@minvws.nl . We read every email that comes in and do our best to reply to each one promptly. When it’s busy, this may take us a bit longer. In many cases, the answers to many questions are already provided on the [Explanation of the data presented](https://coronadashboard.government.nl/veelgestelde-vragen) and [Frequently asked questions](https://coronadashboard.rijksoverheid.nl/veelgestelde-vragen) pages.\n\nIT developers can share their feedback on Github. Front-end-related questions and suggestions can be submitted [here](https://github.com/minvws/nl-covid19-data-dashboard). Questions about the underlying calculations can be submitted [here](https://github.com/minvws/nl-covid19-data-backend-processing). \n\nIf you find that the dashboard has any technical vulnerabilities, we’d like to know. We work together with the National Cyber Security Centre (NCSC) in this area. Please notify them of what you’ve found as soon as possible using their [form](https://www.ncsc.nl/contact/kwetsbaarheid-melden/cvd-meldingen-formulier) before making the issue publicly known. Together with the NCSC we will address the issue and resolve it as quickly as possible. Thank you for your assistance!\n\nAnswers to many questions about coronavirus and COVID-19 are available on [government.nl](https://www.government.nl/topics/coronavirus-covid-19). If you cannot find the answer you are looking for there, you can call the public information number: 0800 1351 (between 8.00 and 20.00). From outside the Netherlands, call +31 20 205 1351."
   },
   "over_veelgestelde_vragen": {
     "text": "Frequently asked questions",
@@ -673,6 +680,18 @@
         "verantwoording": ""
       },
       {
+        "cijfer": "Disability care homes",
+        "verantwoording": "Every day the National Institute for Public Health and the Environment (RIVM) provides open data about the COVID-19 situation in disability care homes. A description of the data set can be found here. \n\nThis data cannot always be clearly linked to a specific safety region. As a result, the total sum of numbers at safety-region level may be less than the numbers at national level. The number of deaths is based on the date of death. However, when the date of death is unknown that death is not included in this statistic in the dashboard.\n\nThe word ‘locations’ refers to the 2,586 care homes in the Netherlands that are registered by Zorgkaart Nederland [LINK] as providing residential care to people with disabilities. The number of locations in each safety region is provided by RIVM. Care homes with the same postcode are counted as one location, which is identical to the method used to determine the number of infected locations. The number of locations in each safety region is needed in order to calculate the percentage of infected locations in that region. The total number of locations in the Netherlands is calculated by adding up the numbers for all of the safety regions.\n\nAs with nursing homes, information about disability care homes is based on records kept by the municipal health services (GGDs). As of 1 July 2020, every time a person tests positive for COVID-19, the GGD asks whether that person is a resident of a disability care home. A person is considered to be a disability care home resident if this is evident from information in OSIRIS (the database used by RIVM for this purpose). If it is unknown whether someone is a disability care home resident, their postcode can be used to link them to a registered disability care home or a setting (place where the infection may have occurred) labelled as a ‘care home’ or something similar.\n"
+      },
+      {
+        "cijfer": "People over 70 living at home",
+        "verantwoording": "Every day the National Institute for Public Health and the Environment (RIVM) provides open data about the COVID-19 situation among over-70s living at home. A description of the data set can be found here. This data cannot always be clearly linked to a specific safety region. As a result, the total sum of numbers at safety-region level may be less than the numbers at national level. The number of deaths is based on the date of death. However, when the date of death is unknown that death is not included in this statistic in the dashboard.\n\nFor its calculations RIVM uses test results and mortality data which it receives from the municipal health service (GGD). When people get tested for coronavirus, the GGD also records certain personal details, such as their age and whether they live in a nursing home or disability care home. RIVM calculates the number of new cases among over-70s living at home by, first, determining the total number of new cases in this age group and then subtracting the number of infections:\n-\tAmongst nursing home residents \n-\tAmongst care workers\n-\tAmongst people that can be linked to a care home via their address \n-\tAmongst people that can be linked to a care home because of the setting of their infection.\n\nThe population of over-70s living at home is highly diverse in terms of their health and living situation. Many over-70s are active and in good health. But others live with at least one chronic disease and/or have physical or cognitive limitations, and are less active. It is not possible at this time to distinguish between COVID-19 infections among active and inactive over-70s living at home because information about activity levels is not recorded when people get tested for coronavirus.\n\nThe dashboard also shows the number of daily confirmed cases per 100,000 for over-70s living at home. The total number of over-70s living at home is based on data collected by Statistics Netherlands on the number of over-70s living in a private household (Households: size, composition, position, 1 January; cbs.nl). This group consists of roughly 2.3 million people."
+      },
+      {
+        "cijfer": "",
+        "verantwoording": ""
+      },
+      {
         "cijfer": "",
         "verantwoording": ""
       }
@@ -757,7 +776,8 @@
     "tooltip": {
       "positive_tested_people": ""
     },
-    "niveau": ""
+    "niveau": "",
+    "clear_select_input": ""
   },
   "seoHead": {
     "default_description": "Information on the development of the coronavirus in The Netherlands.",
@@ -779,7 +799,7 @@
       "verpleeghuizen": "Nursing homes",
       "vroege_signalen": "Early indicators",
       "gedrag": "Behaviour",
-      "kwetsbare_groepen": ""
+      "kwetsbare_groepen": "Vulnerable groups"
     }
   },
   "veiligheidsregio_layout": {
@@ -792,7 +812,7 @@
       "verpleeghuizen": "Nursing homes",
       "vroege_signalen": "Early indicators",
       "gedrag": "Behaviour",
-      "kwetsbare_groepen": ""
+      "kwetsbare_groepen": "Vulnerable groups"
     }
   },
   "veiligheidsregio_metadata": {
@@ -837,7 +857,8 @@
       }
     },
     "tijdelijk_onbeschikbaar_titel": "Temporarily not available",
-    "tijdelijk_onbeschikbaar": "Hospital admissions per safety region and municipality are temporarily not shown. The dataset these numbers were based on (Osiris) is no longer sufficiently aligned with the actual number of hospital admissions.  Soon we expect to show admissions per safety region and municipality again, based on data from NICE, a better dataset. For hospital admissions on a national level NICE is already the source.  Read more in 'explanation of the data presented'."
+    "tijdelijk_onbeschikbaar": "Hospital admissions per safety region and municipality are temporarily not shown. The dataset these numbers were based on (Osiris) is no longer sufficiently aligned with the actual number of hospital admissions.  Soon we expect to show admissions per safety region and municipality again, based on data from NICE, a better dataset. For hospital admissions on a national level NICE is already the source.  Read more in 'explanation of the data presented'.",
+    "kpi_titel": ""
   },
   "veiligheidsregio_positief_geteste_personen": {
     "titel_sidebar": "Confirmed cases",
@@ -940,7 +961,8 @@
         "text": "RIVM",
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
       }
-    }
+    },
+    "kpi_titel": ""
   },
   "gemeente_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Hospital admissions",
@@ -976,7 +998,8 @@
       }
     },
     "tijdelijk_onbeschikbaar_titel": "Temporarily not available",
-    "tijdelijk_onbeschikbaar": "Hospital admissions per safety region and municipality are temporarily not shown. The dataset these numbers were based on (Osiris) is no longer sufficiently aligned with the actual number of hospital admissions.  Soon we expect to show admissions per safety region and municipality again, based on data from NICE, a better dataset. For hospital admissions on a national level NICE is already the source.  Read more in 'explanation of the data presented'."
+    "tijdelijk_onbeschikbaar": "Hospital admissions per safety region and municipality are temporarily not shown. The dataset these numbers were based on (Osiris) is no longer sufficiently aligned with the actual number of hospital admissions.  Soon we expect to show admissions per safety region and municipality again, based on data from NICE, a better dataset. For hospital admissions on a national level NICE is already the source.  Read more in 'explanation of the data presented'.",
+    "kpi_titel": ""
   },
   "gemeente_positief_geteste_personen": {
     "titel_sidebar": "Confirmed cases",
@@ -1086,7 +1109,7 @@
   },
   "laatste_ontwikkelingen": {
     "title": "Latest developments",
-    "menu_subtitle": "Number of confirmed cases stagnates",
+    "menu_subtitle": "Increse of number of confirmed cases",
     "alle_cijfers_header": "",
     "alle_cijfers_link": ""
   },
@@ -1165,7 +1188,50 @@
   },
   "over_risiconiveaus": {
     "title": "Level of risk",
-    "toelichting": "Each week the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. This assessment is carried out jointly by central government, the municipal health services (GGDs), the National Institute for Public Health and the Environment (RIVM) and the safety regions. The Minister of Health, Welfare and Sport then determines which risk level applies to each region. Do we need to exercise ‘caution’ (level 1), is the situation one of ‘concern’ (level 2) or is the situation ‘serious’ (level 3) or even ‘severe’ (level 4)?\n\nCentral government and/or the safety region in question will take appropriate measures based on the risk level. Measures depend on the local situation and may therefore vary from region to region.\n\n**What determines a region’s risk level?**\n\nA region’s risk level is determined by looking at the situation in that region, in the surrounding regions and in the rest of the country. This is done on the basis of the coronavirus dashboard, RIVM’s weekly report, and assessments by the GGDs and the safety regions.\nSeveral aspects are taken into consideration when determining the risk level:\n- How quickly is the number of new infections rising?\n- Are additional measures needed for vulnerable groups?\n- How effective is contact tracing?\n- How well are the measures being complied with?\n- Is there still sufficient healthcare capacity?\n\n**When is a region’s risk level raised to ‘concern’, ‘serious’ or ‘severe’?**\n\n- A region’s risk level is in principle raised from ‘caution’ to ‘concern’ if there are more than 50 positive tests per 100,000 inhabitants in one week. This means that the alert value of 7 positive tests per 100,000 inhabitants is exceeded each day.\n- A region’s risk level is in principle raised from ‘concern’ to ‘serious’ if there are more than 150 positive test results per 100,000 inhabitants in one week.\n- A region’s risk level is in principle raised from ‘serious’ to ‘severe’ if there are more than 250 positive test results per 100,000 inhabitants in one week. If the situation is ‘severe’ in multiple regions, the severest measures then apply to the whole country.\n\nEvery Monday RIVM calculates which risk level applies to which region. A more in-depth assessment of the situation in these regions is carried out in the following days. If the situation in a region is one of ‘concern’ or ‘serious’, the Minister of Health, Welfare and Sport (Hugo de Jonge) may decide to assign a higher risk level to that region. The above criteria are intended as a guideline. Even if a region has not yet reached the alert values given above, the risk level may nevertheless be scaled up in light of circumstances and assessments.\n\n**When can the risk level in a region be scaled down?**\n\nAny decision to scale down the risk level in a region requires careful consideration of not only the number of new infections, but also healthcare capacity. After all, even if the number of new infections falls, the healthcare sector may still be dealing with large numbers of patients recovering from COVID-19. Healthcare professionals must also be given an opportunity to rest. The focus must be on preventing the virus from spreading quickly once more and the healthcare system becoming overburdened.\n\n**What do the four risk levels mean?**\n\n1. Caution. The situation is manageable. The number of new infections is low. Vulnerable groups must remain alert. Contact tracing is largely effective. Measures are being sufficiently complied with and are enforceable. There is sufficient healthcare capacity. Any additional measures are designed to make the existing approach more effective.\n2. Concern. The situation is moving in a negative direction. The number of new infections is increasing. A tailored approach is needed to protect vulnerable groups. If the situation continues, contact tracing will become ineffective. Measures are not being sufficiently complied with. Pressure on healthcare capacity is increasing. The existing approach needs to be strengthened through additional measures to get the virus under control again and return to a manageable situation.\n3. Serious. Severe measures are needed to prevent further escalation and return to a manageable situation. The number of new infections is increasing rapidly. An intensive tailored approach is needed to protect vulnerable groups. Contact tracing is no longer effective, making it more difficult to keep track of how the virus is spreading. Measures are not being sufficiently complied with. There is insufficient healthcare capacity. Measures to be taken are designed to prevent regional healthcare from becoming overburdened and to be able to track the spread of the virus again.\n4. Severe. More severe national measures are needed to prevent further escalation and return to a manageable situation. A very large number of people are infectious and the number of new infections is high. Contact tracing is no longer effective, meaning there is limited insight into how the virus is spreading. Measures are not being sufficiently complied with. Regional healthcare capacity is insufficient and some kinds of regular healthcare have already been scaled down. Measures to be taken are designed to prevent national and regional healthcare from becoming overburdened and to regain maximum control of the virus."
+    "toelichting": "",
+    "paragraaf": "Each week the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. This assessment is carried out jointly by central government, the municipal health services (GGDs), the National Institute for Public Health and the Environment (RIVM) and the safety regions. The Minister of Health, Welfare and Sport then determines which risk level applies to each region. Do we need to exercise ‘caution’ (level 1), is the situation one of ‘concern’ (level 2) or is the situation ‘serious’ (level 3) or even ‘severe’ (level 4)?\n\nCentral government and/or the safety region in question will take appropriate measures based on the risk level. Measures depend on the local situation and may therefore vary from region to region.",
+    "vragen": [
+      {
+        "vraag": "What determines a region’s risk level?",
+        "antwoord": "A region’s risk level is determined by looking at the situation in that region, in the surrounding regions and in the rest of the country. This is done on the basis of the coronavirus dashboard, RIVM’s weekly report, and assessments by the GGDs and the safety regions.\n\nSeveral aspects are taken into consideration when determining the risk level:\n\n- How quickly is the number of new infections rising?\n- Are additional measures needed for vulnerable groups?\n- How effective is contact tracing?\n- How well are the measures being complied with?\n- Is there still sufficient healthcare capacity?"
+      },
+      {
+        "vraag": "When is a region’s risk level raised to ‘concern’, ‘serious’ or ‘severe’?",
+        "antwoord": "- A region’s risk level is in principle raised from ‘caution’ to ‘concern’ if there are more than 50 positive tests per 100,000 inhabitants in one week. This means that the alert value of 7 positive tests per 100,000 inhabitants is exceeded each day.\n- A region’s risk level is in principle raised from ‘concern’ to ‘serious’ if there are more than 150 positive test results per 100,000 inhabitants in one week.\n- A region’s risk level is in principle raised from ‘serious’ to ‘severe’ if there are more than 250 positive test results per 100,000 inhabitants in one week. If the situation is ‘severe’ in multiple regions, the severest measures then apply to the whole country.\n\nEvery Monday RIVM calculates which risk level applies to which region. A more in-depth assessment of the situation in these regions is carried out in the following days. If the situation in a region is one of ‘concern’ or ‘serious’, the Minister of Health, Welfare and Sport (Hugo de Jonge) may decide to assign a higher risk level to that region. The above criteria are intended as a guideline. Even if a region has not yet reached the alert values given above, the risk level may nevertheless be scaled up in light of circumstances and assessments."
+      },
+      {
+        "vraag": "When can the risk level in a region be scaled down?",
+        "antwoord": "Any decision to scale down the risk level in a region requires careful consideration of not only the number of new infections, but also healthcare capacity. After all, even if the number of new infections falls, the healthcare sector may still be dealing with large numbers of patients recovering from COVID-19. Healthcare professionals must also be given an opportunity to rest. The focus must be on preventing the virus from spreading quickly once more and the healthcare system becoming overburdened."
+      },
+      {
+        "vraag": "What do the four risk levels mean?",
+        "antwoord": "1. Caution. The situation is manageable. The number of new infections is low. Vulnerable groups must remain alert. Contact tracing is largely effective. Measures are being sufficiently complied with and are enforceable. There is sufficient healthcare capacity. Any additional measures are designed to make the existing approach more effective.\n2. Concern. The situation is moving in a negative direction. The number of new infections is increasing. A tailored approach is needed to protect vulnerable groups. If the situation continues, contact tracing will become ineffective. Measures are not being sufficiently complied with. Pressure on healthcare capacity is increasing. The existing approach needs to be strengthened through additional measures to get the virus under control again and return to a manageable situation.\n3. Serious. Severe measures are needed to prevent further escalation and return to a manageable situation. The number of new infections is increasing rapidly. An intensive tailored approach is needed to protect vulnerable groups. Contact tracing is no longer effective, making it more difficult to keep track of how the virus is spreading. Measures are not being sufficiently complied with. There is insufficient healthcare capacity. Measures to be taken are designed to prevent regional healthcare from becoming overburdened and to be able to track the spread of the virus again.\n4. Severe. More severe national measures are needed to prevent further escalation and return to a manageable situation. A very large number of people are infectious and the number of new infections is high. Contact tracing is no longer effective, meaning there is limited insight into how the virus is spreading. Measures are not being sufficiently complied with. Regional healthcare capacity is insufficient and some kinds of regular healthcare have already been scaled down. Measures to be taken are designed to prevent national and regional healthcare from becoming overburdened and to regain maximum control of the virus."
+      },
+      {
+        "vraag": "",
+        "antwoord": ""
+      },
+      {
+        "vraag": "",
+        "antwoord": ""
+      },
+      {
+        "vraag": "",
+        "antwoord": ""
+      },
+      {
+        "vraag": "",
+        "antwoord": ""
+      },
+      {
+        "vraag": "",
+        "antwoord": ""
+      },
+      {
+        "vraag": "",
+        "antwoord": ""
+      }
+    ]
   },
   "over_risiconiveaus_metadata": {
     "title": "Risk levels Coronavirus COVID-19 Dashboard | Government.nl",
@@ -1334,7 +1400,13 @@
       "trend_lager": "lower",
       "trend_gelijk": "same"
     },
-    "titel_kpi": "Percentage of people who agree with the basic rules and the percentage of people who also follow those rules in practice."
+    "kpi_titel": "Percentage of people who agree with the basic rules and the percentage of people who also follow those rules in practice.",
+    "meer_onderzoeksresultaten": {
+      "title": "Meer onderzoeksresultaten",
+      "description": "Bekijk voor meer gedetailleerde resultaten het volledige onderzoek op de website van de RIVM.",
+      "linkLabel": "Bekijk het gehele onderzoek op de website van de RIVM",
+      "linkHref": "#"
+    }
   },
   "nl_gedrag": {
     "metadata": {
@@ -1478,23 +1550,391 @@
       }
     }
   },
-  "infected_age_groups": {
-    "title": "Verdeling naar leeftijd",
-    "description": "....",
-    "example": "Bijvoorbeeld: Van alle positief geteste mensen is {{infectedPercentage}} tussen de {{ageGroupRange}} jaar. Van alle Nederlanders is {{ageGroupPercentage}} tussen de {{ageGroupRange}} jaar.",
-    "graph": {
-      "age_group_percentage_title": "Percentage van de bevolking",
-      "age_group_percentage_tooltip": "van de bevolking is {{ageGroupRange}} jaar",
-      "infected_percentage_title": "Percentage van de positieve testen",
-      "infected_percentage_tooltip": "van het aantal positief geteste mensen is {{ageGroupRange}} jaar",
-      "age_group_range_tooltip": "{{ageGroupRange}} jaar",
-      "accessibility_description": "Grafiek met percentages voor de verdeling van de bevolking en de verdeling van positief geteste leeftijdsgroepen."
-    }
-  },
   "aria_labels": {
     "pagina_keuze": "",
     "footer_keuze": "",
     "metriek_navigatie": "",
     "skip_links": ""
+  },
+  "infected_age_groups": {
+    "title": "",
+    "description": "",
+    "example": "",
+    "graph": {
+      "age_group_percentage_title": "",
+      "age_group_percentage_tooltip": "",
+      "infected_percentage_title": "",
+      "infected_percentage_tooltip": "",
+      "age_group_range_tooltip": "",
+      "accessibility_description": ""
+    }
+  },
+  "gehandicaptenzorg_besmette_locaties": {
+    "datums": "Latest values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
+    "titel": "Disability care homes - no. of infected locations",
+    "pagina_toelichting": "This is an estimate of the number of disability care homes that currently have at least one confirmed COVID-19 case. Read more in the explanation of the presented data.",
+    "barscale_titel": "Number of new locations per day",
+    "barscale_toelichting": "This figure shows the number of disability care homes where at least one resident was reported as testing positive for COVID-19 yesterday. A disability care home is considered to have a new outbreak if there had been no new cases of COVID-19 in the home in the previous 28 days (i.e. twice the length of the incubation period).",
+    "kpi_titel": "Total no. of new infected locations",
+    "kpi_toelichting": "This figure shows the total number of disability care homes that have reported at least one confirmed COVID-19 case among residents, based on a positive test, in the last 28 days. The percentage expresses the share of all disability care homes in the Netherlands with confirmed COVID-19 cases.",
+    "linechart_titel": "Total no. of infected locations – progression over time",
+    "barscale_screenreader_text": "",
+    "chloropleth_legenda": {
+      "titel": "Percentage of infected locations",
+      "geen_meldingen": "No newly confirmed cases"
+    },
+    "map_titel": "Distribution of infected locations in the Netherlands",
+    "map_toelichting": "This map shows the number of disability care homes that have reported at least one confirmed COVID-19 case, based on a positive test, in the last 28 days.",
+    "metadata": {
+      "title": "Infected disability care homes | Dashboard Coronavirus | Governement.nl",
+      "description": "National overview of the disability care homes that have reported at least one confirmed COVID-19 case."
+    },
+    "titel_sidebar": "Disability care",
+    "titel_kpi": "Total no. of infected locations",
+    "reference": {
+      "href": "/verantwoording#disability-care-homes",
+      "text": "Read more in the explanation of the data presented"
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "text": "RIVM"
+      }
+    }
+  },
+  "gehandicaptenzorg_positief_geteste_personen": {
+    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
+    "titel": "Disability care homes - confirmed cases (residents)",
+    "barscale_titel": "Disability care homes – daily confirmed cases (residents)",
+    "extra_uitleg": "The number of disability care home residents in this region who were reported as testing positive for COVID-19 daily.",
+    "pagina_toelichting": "People who live in disability care homes are often extra vulnerable to coronavirus infection. Because of this, Municipal health services (GGDs) monitor whether a persons who tests positive for COVID-19 lives in a disability care home. By doing so, measures can be taken if the number of cases in residential care increases. Read more in the explanation of the presented data.",
+    "linechart_titel": "Progression over time",
+    "barscale_screenreader_text": "{{value}} confirmed cases (residents)",
+    "chloropleth_legenda": {
+      "titel": "",
+      "geen_meldingen": ""
+    },
+    "map_titel": "Distribution of infected locations in the Netherlands",
+    "map_toelichting": "",
+    "metadata": {
+      "title": "Confirmed cases of disability care home residents | Dashboard Coronavirus | Government.nl",
+      "description": "National overview of the number of confirmed cases of disability care home residents for COVID-19."
+    },
+    "titel_kpi": "Disability care homes - daily confirmed cases (residents)",
+    "reference": {
+      "href": "/verantwoording#disability-care-homes",
+      "text": "Read more in the explanation of the presented data."
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "text": "RIVM"
+      }
+    }
+  },
+  "gehandicaptenzorg_oversterfte": {
+    "datums": "Latest values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
+    "titel": "Disability care homes – Deaths",
+    "pagina_toelichting": "Number of disability care home residents who have died from COVID-19.",
+    "barscale_titel": "Number of deceased residents",
+    "barscale_screenreader_text": "",
+    "extra_uitleg": "This is an estimate of the number of disability care home residents in the Netherlands who have died from COVID-19 since 27 February 2020. ",
+    "linechart_titel": "Progression over time",
+    "map_titel": "Disability care homes – deaths",
+    "map_toelichting": "",
+    "metadata": {
+      "title": "Deceased residents of disability care homes | Dashboard Coronavirus | Government.nl",
+      "description": "Total number of confirmed cases in disability care homes in the Netherlands that died from COVID-19"
+    },
+    "titel_kpi": "Number of deceased residents",
+    "reference": {
+      "href": "/verantwoording#disability-care-homes",
+      "text": "Read more in explantion of the data presented"
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "text": "RIVM"
+      }
+    }
+  },
+  "veiligheidsregio_gehandicaptenzorg_oversterfte": {
+    "datums": "Latest values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
+    "bron": {
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+      "text": "RIVM"
+    },
+    "titel": "Disability care homes in {{safetyRegion}} – deaths",
+    "pagina_toelichting": "Number of disability care home residents in this region with confirmed COVID-19 who have died, per day.",
+    "barscale_titel": "Number of deceased residents",
+    "barscale_screenreader_text": "",
+    "extra_uitleg": "This is an estimate of the number of COVID-19 related deaths reported yesterday among disability care home residents in this region.",
+    "linechart_titel": "Progression over time",
+    "map_titel": "",
+    "map_toelichting": "",
+    "titel_sidebar": "Death per day",
+    "metadata": {
+      "title": "Deceased residents of disability care homes in {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
+      "description": "Total number of confirmed cases in disability care homes in safety region {{safetyRegionName}} that died from COVID-19"
+    },
+    "reference": {
+      "href": "/verantwoording#disability-care-homes",
+      "text": "Read more in 'explanation of the data presented'."
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "text": "RIVM"
+      }
+    }
+  },
+  "veiligheidsregio_gehandicaptenzorg_besmette_locaties": {
+    "datums": "Latest values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
+    "titel": "Disability care homes in {{safetyRegion}} - no. of infected locations",
+    "pagina_toelichting": "This is an estimate of the number of disability care homes in this region that currently have at least one confirmed COVID-19 case. Read more in the explanation of the presented data.",
+    "barscale_titel": "Number of new locations per day",
+    "barscale_toelichting": "This figure shows the number of disability care homes where at least one resident was reported as testing positive for COVID-19. A disability care home is considered to have a new outbreak if there had been no new cases of COVID-19 in the home in the previous 28 days (i.e. twice the length of the incubation period).",
+    "kpi_titel": "Total no. of infected locations ",
+    "kpi_toelichting": "This figure shows the total number of disability care homes that have reported at least one confirmed COVID-19 case, based on a positive test, in the last 28 days. The percentage expresses the share of all disability care homes in the Netherlands with confirmed COVID-19 cases.",
+    "linechart_titel": "Total no. of infected locations – progression over time",
+    "barscale_screenreader_text": "",
+    "metadata": {
+      "title": "Infected disability care homes in {{safetyRegionName}} | Dashboard Coronavirus | Governement.nl",
+      "description": "Regional overview of the disability care homes in {{safetyRegionName}} that have reported at least one confirmed COVID-19 case."
+    },
+    "titel_sidebar": "Confirmed cases (homes)",
+    "reference": {
+      "href": "/verantwoording#disability-care-homes",
+      "text": "Read more in explanation of the data presented"
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "text": "RIVM"
+      }
+    }
+  },
+  "veiligheidsregio_gehandicaptenzorg_positief_geteste_personen": {
+    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
+    "titel": "Disability care homes in {{safetyRegion}} – confirmed cases among residents",
+    "barscale_titel": "Disability care homes - daily confirmed cases (residents)",
+    "extra_uitleg": "The number of disability care home residents in this region who were reported as testing positive for COVID-19 yesterday.",
+    "pagina_toelichting": "People who live in disability care homes are often extra vulnerable to coronavirus infection. Because of this, Municipal health services (GGDs) monitor whether a persons who tests positive for COVID-19 lives in a disability care home. By doing so, measures can be taken if the number of cases in residential care increases. Read more in the explanation of the presented data.   ",
+    "linechart_titel": "Progression over time",
+    "barscale_screenreader_text": "",
+    "titel_sidebar": "Number of confirmed cases (residents)",
+    "chloropleth_legenda": {
+      "titel": "",
+      "geen_meldingen": ""
+    },
+    "map_titel": "",
+    "map_toelichting": "",
+    "metadata": {
+      "title": "Confirmed cases of disability care home residents in {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
+      "description": "Regional overview of the number of confirmed cases of disability care home residents in {{safetyRegionName}} for COVID-19."
+    },
+    "reference": {
+      "href": "/verantwoording#disability-care-homes",
+      "text": "Read more in the explanation of the presented data."
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "text": "RIVM"
+      }
+    }
+  },
+  "thuiswonende_ouderen": {
+    "titel_sidebar": "People over 70 living at home",
+    "titel_kpi": "",
+    "metadata": {
+      "title": "",
+      "description": ""
+    },
+    "section_positive_tested": {
+      "title": "People over 70 living at home",
+      "description": "People aged over 70 are extra vulnerable to coronavirus infection. Keeping track of the number of infections among over-70s who are still living independently in their own homes makes targeted measures possible. Over-70s living in residential settings – nursing homes or disability care homes – are counted under those groups on this dashboard. Read more in the explanation of the presented data.",
+      "reference": {
+        "href": "",
+        "text": "See the [explanation of the data presented](https://coronadashboard.government.nl/verantwoording)"
+      },
+      "bronnen": {
+        "rivm": {
+          "href": "",
+          "text": "",
+          "download": ""
+        }
+      },
+      "kpi_daily_title": "Confirmed cases among over-70s living at home",
+      "kpi_daily_description": "The number of people over 70 living at home who were reported as testing positive for COVID-19 yesterday.",
+      "kpi_daily_per_100k_title": "Daily number of COVID-19 cases per 100.000 over-70s",
+      "kpi_daily_per_100k_description": "This number shows how many over-70s living at home have COVID-19 per 100.000 over-70s living at home.",
+      "line_chart_daily_title": "Daily number of over-70s with confirmed COVID-19 case",
+      "choropleth_daily_title": "Distribution of daily confirmed cases among over-70s living at home (per safety region)",
+      "choropleth_daily_description": "This map shows the differences between safety regions in the number of confirmed cases per 100,000 among over-70s living at home, as reported yesterday.",
+      "choropleth_daily_legenda": "Number per 100.000 over-70s living at home",
+      "datums": "Updated {{dateOfInsertion}}. Updated daily."
+    },
+    "section_deceased": {
+      "title": "Over-70s living at home - COVID-19 mortality",
+      "description": "The number of people over 70 living at home who were reported as deceased due to COVID-19 yesterday. Read more in the explanation of the presented data.",
+      "reference": {
+        "href": "",
+        "text": "See the [explanation on the data presented](https://coronadashboard.government.nl/verantwoording)"
+      },
+      "bronnen": {
+        "rivm": {
+          "href": "",
+          "text": "",
+          "download": ""
+        }
+      },
+      "kpi_daily_title": "Number of over-70s living at home that died because of COVID-19, daily",
+      "kpi_daily_description": "The number of people over 70 living at home who were reported as deceased due to COVID-19 yesterday.",
+      "line_chart_daily_title": "Number of COVID-19 deaths among over-70s living at home: progression over time",
+      "datums": "Last update  {{dateOfInsertion}}. Updated daily."
+    }
+  },
+  "veiligheidsregio_thuiswonende_ouderen": {
+    "titel_sidebar": "People over 70 living at home",
+    "titel_kpi": "",
+    "metadata": {
+      "title": "Over-70s living at home in {{safetyRegion}} I Dashboard Coronvirus I Rijksoverheid.nl",
+      "description": "Over-70s living at home in {{safetyRegion}}"
+    },
+    "section_positive_tested": {
+      "title": "Over-70s in {{safetyRegion}} living at home - newly confirmed cases",
+      "description": "People aged over 70 are extra vulnerable to coronavirus infection. Keeping track of the number of infections among over-70s who are still living independently in their own homes makes targeted measures possible. Over-70s living in residential settings – nursing homes or disability care homes – are counted on this dashboard under those groups. Read more in the explanation of the [presented data](https://coronadashboard.government.nl/verantwoording).",
+      "reference": {
+        "href": "",
+        "text": ""
+      },
+      "bronnen": {
+        "rivm": {
+          "href": "",
+          "text": "",
+          "download": ""
+        }
+      },
+      "kpi_daily_title": "Daily confirmed cases among over-70s living at home",
+      "kpi_daily_description": "The number of people over 70 living at home in this safety region who were reported as testing positive for COVID-19 yesterday.",
+      "kpi_daily_per_100k_title": "Daily confirmed cases per 100,000 among over-70s living at home",
+      "kpi_daily_per_100k_description": "Calculating the daily number of COVID-19 cases per 100.000 over-70s makes it possible to compare regions.",
+      "line_chart_daily_title": "Daily number of over-70s with confirmed case of COVID-19: progression over time",
+      "datums": "Last values obtained on {{dateOfInsertion}}. 1 December. Is updated on a daily basis."
+    },
+    "section_deceased": {
+      "title": "People over 70 in {{safetyRegion}} living at home – deaths",
+      "description": "People aged over 70 are extra vulnerable to coronavirus infection. Keeping track of the number of infections among over-70s who are still living independently in their own homes makes targeted measures possible. Over-70s living in residential settings – nursing homes or disability care homes – are counted on this dashboard under those groups. Read more in the explanation of the presented data.",
+      "reference": {
+        "href": "",
+        "text": ""
+      },
+      "bronnen": {
+        "rivm": {
+          "href": "",
+          "text": "",
+          "download": ""
+        }
+      },
+      "kpi_daily_title": "COVID-19 deaths among over-70s living at home, per day",
+      "kpi_daily_description": "The number of people over 70 living at home in this safety region who were reported as deceased due to COVID-19 yesterday",
+      "line_chart_daily_title": "Number of COVID-19 deaths among over-70s living at home: progression over time",
+      "datums": "Last values obtained on {{dateOfInsertion}}. 1 December. Is updated on a daily basis."
+    }
+  },
+  "sterfte": {
+    "titel_sidebar": "",
+    "titel_kpi": "",
+    "metadata": {
+      "title": "",
+      "description": ""
+    },
+    "section_deceased_rivm": {
+      "title": "",
+      "description": "",
+      "datums": "",
+      "bronnen": {
+        "rivm": {
+          "href": "",
+          "text": "",
+          "download": ""
+        }
+      },
+      "reference": {
+        "href": "",
+        "text": ""
+      },
+      "kpi_covid_daily_title": "",
+      "kpi_covid_daily_description": "",
+      "kpi_covid_total_title": "",
+      "kpi_covid_total_description": "",
+      "line_chart_covid_daily_title": ""
+    }
+  },
+  "veiligheidsregio_sterfte": {
+    "titel_sidebar": "",
+    "titel_kpi": "",
+    "metadata": {
+      "title": "",
+      "description": ""
+    },
+    "section_deceased_rivm": {
+      "title": "",
+      "description": "",
+      "datums": "",
+      "bronnen": {
+        "rivm": {
+          "href": "",
+          "text": "",
+          "download": ""
+        }
+      },
+      "reference": {
+        "href": "",
+        "text": ""
+      },
+      "kpi_covid_daily_title": "",
+      "kpi_covid_daily_description": "",
+      "kpi_covid_total_title": "",
+      "kpi_covid_total_description": "",
+      "line_chart_covid_daily_title": ""
+    }
+  },
+  "section_sterftemonitor": {
+    "title": "",
+    "description": "",
+    "datums": "",
+    "bronnen": {
+      "cbs": {
+        "href": "",
+        "text": "",
+        "download": ""
+      }
+    },
+    "reference": {
+      "href": "",
+      "text": ""
+    },
+    "cbs_message": {
+      "title": "",
+      "published_text": "",
+      "message": "",
+      "link": {
+        "href": "",
+        "text": ""
+      }
+    },
+    "deceased_monitor_chart_title": "",
+    "deceased_monitor_chart_description": "",
+    "deceased_monitor_chart_legenda_registered": "",
+    "deceased_monitor_chart_legenda_expected": "",
+    "deceased_monitor_chart_legenda_expected_margin": ""
   }
 }

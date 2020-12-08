@@ -1,4 +1,3 @@
-import { NextRouter } from 'next/router';
 import { ReactNode } from 'react';
 import {
   EscalationLevel,
@@ -9,18 +8,17 @@ import text from '~/locale/index';
 import { EscalationLevels } from '~/types/data';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { RegionSelectionHandler } from '../../select-handlers/create-select-region-handler';
 import { SafetyRegionProperties } from '../../shared';
 import styles from '../tooltip.module.scss';
 
-export const escalationTooltip = (router: NextRouter) => {
+export const escalationTooltip = (selectHandler: RegionSelectionHandler) => {
   return (context: SafetyRegionProperties & EscalationLevels): ReactNode => {
     const level = context.escalation_level as EscalationLevel;
 
     const onSelect = (event: any) => {
       event.stopPropagation();
-      router.push(
-        `/veiligheidsregio/${context.vrcode}/positief-geteste-mensen`
-      );
+      selectHandler(context);
     };
 
     const escalationText = ((text.escalatie_niveau.types as unknown) as Record<
