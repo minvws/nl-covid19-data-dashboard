@@ -104,6 +104,11 @@ export const colors = {
       blue: ['#8FCAE7', '#5BADDB', '#248FCF', '#0070BB', '#00529D', '#003580'],
       magenta: ['#F6B4D1', '#D3719C', '#9E3A66', '#64032D', '#000000'],
     },
+    gradient: {
+      green: '#69c253',
+      yellow: '#D3A500',
+      red: '#f35065',
+    },
   },
 } as const;
 

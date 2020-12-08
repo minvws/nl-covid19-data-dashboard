@@ -17,10 +17,10 @@ export interface Municipal {
   sewer_per_installation?: MunicipalSewerPerInstallation;
 }
 export interface MunicipalDifference {
-  positive_tested_people__infected_daily_increase?: DifferenceDecimal;
+  positive_tested_people__infected_daily_increase: DifferenceDecimal;
   positive_tested_people__infected_daily_total: DifferenceInteger;
   hospital_admissions__moving_average_hospital: DifferenceDecimal;
-  sewer__average?: DifferenceDecimal;
+  sewer__average: DifferenceDecimal;
 }
 export interface DifferenceDecimal {
   old_value: number;
@@ -149,22 +149,22 @@ export interface National {
   elderly_at_home: NationalElderlyAtHome;
 }
 export interface NationalDifference {
-  infected_people_delta_normalized__infected_daily_increase?: DifferenceDecimal;
+  infected_people_delta_normalized__infected_daily_increase: DifferenceDecimal;
   infected_people_total__infected_daily_total: DifferenceInteger;
-  ggd__tested_total?: DifferenceInteger;
-  ggd__infected_percentage?: DifferenceDecimal;
-  reproduction_index_last_known_average__reproduction_index_avg?: DifferenceDecimal;
-  infectious_people_count_normalized__infectious_avg_normalized?: DifferenceDecimal;
+  ggd__tested_total: DifferenceInteger;
+  ggd__infected_percentage: DifferenceDecimal;
+  reproduction_index_last_known_average__reproduction_index_avg: DifferenceDecimal;
+  infectious_people_count_normalized__infectious_avg_normalized: DifferenceDecimal;
   intake_hospital_ma__moving_average_hospital: DifferenceDecimal;
-  hospital_beds_occupied__covid_occupied?: DifferenceInteger;
+  hospital_beds_occupied__covid_occupied: DifferenceInteger;
   intake_intensivecare_ma__moving_average_ic: DifferenceDecimal;
-  intensive_care_beds_occupied__covid_occupied?: DifferenceInteger;
-  huisarts_verdenkingen__incidentie?: DifferenceDecimal;
-  huisarts_verdenkingen__geschat_aantal?: DifferenceInteger;
-  sewer__average?: DifferenceDecimal;
-  nursing_home__newly_infected_people?: DifferenceInteger;
-  nursing_home__infected_locations_total?: DifferenceInteger;
-  nursing_home__deceased_daily?: DifferenceInteger;
+  intensive_care_beds_occupied__covid_occupied: DifferenceInteger;
+  huisarts_verdenkingen__incidentie: DifferenceDecimal;
+  huisarts_verdenkingen__geschat_aantal: DifferenceInteger;
+  sewer__average: DifferenceDecimal;
+  nursing_home__newly_infected_people: DifferenceInteger;
+  nursing_home__infected_locations_total: DifferenceInteger;
+  nursing_home__deceased_daily: DifferenceInteger;
 }
 export interface DifferenceDecimal {
   old_value: number;
@@ -563,16 +563,16 @@ export interface Regionaal {
   elderly_at_home: RegionalElderlyAtHome;
 }
 export interface RegionalDifference {
-  results_per_region__infected_increase_per_region?: DifferenceDecimal;
+  results_per_region__infected_increase_per_region: DifferenceDecimal;
   results_per_region__total_reported_increase_per_region: DifferenceInteger;
-  ggd__tested_total?: DifferenceInteger;
-  ggd__infected_percentage?: DifferenceDecimal;
+  ggd__tested_total: DifferenceInteger;
+  ggd__infected_percentage: DifferenceDecimal;
   results_per_region__hospital_moving_avg_per_region: DifferenceDecimal;
-  results_per_region__hospital_total_counts_per_region?: DifferenceInteger;
-  sewer__average?: DifferenceDecimal;
-  nursing_home__newly_infected_people?: DifferenceInteger;
-  nursing_home__infected_locations_total?: DifferenceInteger;
-  nursing_home__deceased_daily?: DifferenceInteger;
+  results_per_region__hospital_total_counts_per_region: DifferenceInteger;
+  sewer__average: DifferenceDecimal;
+  nursing_home__newly_infected_people: DifferenceInteger;
+  nursing_home__infected_locations_total: DifferenceInteger;
+  nursing_home__deceased_daily: DifferenceInteger;
 }
 export interface DifferenceDecimal {
   old_value: number;

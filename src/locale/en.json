@@ -90,7 +90,7 @@
       "description": "National overview of confirmed COVID-19 cases who are admitted to a hospital intensive care unit (ICU)."
     },
     "titel_sidebar": "Intensive care units admissions",
-    "titel_kpi": "Average number of intensive care admissions in 3 days",
+    "kpi_titel": "Average number of intensive care admissions in 3 days",
     "reference": {
       "href": "/verantwoording#intensive-care",
       "text": "Read more in 'explanation of the data presented'."
@@ -118,7 +118,7 @@
     },
     "normalized_kpi_titel": "Number of patients with symptoms that could indicate COVID-19 per 100.000 inhabitants",
     "normalized_kpi_toelichting": "Number of patients, per 100.000 inhabitants, who contact the general practitioner for the first time due to COVID-19 like symptoms, per week.",
-    "titel_kpi": "Patients who contact the general practitioner for the first time due to COVID-19 symptoms",
+    "kpi_titel": "Patients who contact the general practitioner for the first time due to COVID-19 symptoms",
     "reference": {
       "href": "/verantwoording#general-practitioners",
       "text": "Read more in 'explanation of the data presented'."
@@ -316,7 +316,7 @@
       "description": "Number of confirmed COVID-19 cases who are admitted to a hospital in the Netherlands."
     },
     "titel_sidebar": "Hospital admissions",
-    "titel_kpi": "Average number of hospital admissions in 3 days",
+    "kpi_titel": "Average number of hospital admissions in 3 days",
     "reference": {
       "href": "/verantwoording#hospitals",
       "text": "Read more in 'explanation of the data presented'."
@@ -379,7 +379,7 @@
       "title": "Confirmed cases | Dashboard Coronavirus | Government.nl",
       "description": "National overview of confirmed cases in inhabitants with COVID-19."
     },
-    "titel_kpi": "Confirmed cases per day",
+    "kpi_titel": "Confirmed cases per day",
     "reference": {
       "href": "/verantwoording#confirmed-cases",
       "text": "Read more in 'explanation of the data presented'."
@@ -417,7 +417,7 @@
       "description": "National overview of how many people with COVID-19 can transmit the virus. This number is calculated by the RIVM."
     },
     "barscale_toelichting": "",
-    "titel_kpi": "Number of infectious people",
+    "kpi_titel": "Number of infectious people",
     "reference": {
       "href": "/verantwoording#infectious-people",
       "text": "Read more in 'explanation of the data presented'."
@@ -453,7 +453,7 @@
       "description": "The reproduction number shows how fast the virus is spreading. This number shows how many people are on average infected by one patient with COVID-19."
     },
     "titel_sidebar": "Reproduction number",
-    "titel_kpi": "Most recent reproduction number",
+    "kpi_titel": "Most recent reproduction number",
     "reference": {
       "href": "/verantwoording#reproduction-number",
       "text": "Read more in 'explanation of the data presented'."
@@ -536,7 +536,7 @@
       "description": "National number of nursing homes with at least one confirmed case of COVID-19."
     },
     "titel_sidebar": "Nursing homes",
-    "titel_kpi": "Number of infected locations",
+    "kpi_titel": "Number of infected locations",
     "reference": {
       "href": "/verantwoording#nursing-homes",
       "text": "Read more in 'explanation of the data presented'."
@@ -572,7 +572,7 @@
       "title": "Confirmed cases in nursing homes | Dashboard Coronavirus | Government.nl",
       "description": "Number of confirmed cases of COVID-19 in nursing homes in the Netherlands."
     },
-    "titel_kpi": "Number of confirmed cases per day",
+    "kpi_titel": "Number of confirmed cases per day",
     "reference": {
       "href": "/verantwoording#nursing-homes",
       "text": "Read more in 'explanation of the data presented'."
@@ -604,7 +604,7 @@
       "title": "Number of confirmed cases in nursing homes | Dashboard Coronavirus | Government.nl",
       "description": "National number of deceased residents with confirmed cases of COVID-19 in nursing homes."
     },
-    "titel_kpi": "Mortality per day",
+    "kpi_titel": "Mortality per day",
     "reference": {
       "href": "/verantwoording#nursing-homes",
       "text": "Read more in 'explanation of the data presented'."
@@ -641,7 +641,7 @@
       "description": "Average number of virus particles per 100.000 inhabitants"
     },
     "titel_sidebar": "Sewage water examination",
-    "titel_kpi": "Average number of coronavirus particles per 100,000 inhabitants",
+    "kpi_titel": "Average number of coronavirus particles per 100,000 inhabitants",
     "total_installation_count_titel": "Number of measurement locations",
     "total_installation_count_description": "Weekly number of sewage water treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful.",
     "rwzi_abbrev": "",
@@ -965,7 +965,7 @@
       "title": "Hospital admissions residents {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
       "description": "Confirmed cases of COVID-19 in safety region {{safetyRegionName}} who are admitted to a hospital."
     },
-    "titel_kpi": "Average number of hospital admissions in 3 days",
+    "kpi_titel": "Average number of hospital admissions in 3 days",
     "reference": {
       "href": "/verantwoording#hospitals",
       "text": "Read more in 'explanation of the data presented'."
@@ -1067,7 +1067,7 @@
     "graph_daily_label_text_rwzi": "Measurements for ({{name}})",
     "graph_selected_rwzi_placeholder": "Select location",
     "graph_range_description": "Average number of virus particles per 100.000 inhabitants over time",
-    "titel_kpi": "Average number of virus particles per 100.000 inhabitants",
+    "kpi_titel": "Average number of virus particles per 100.000 inhabitants",
     "total_installation_count_titel": "Number of measurement locations",
     "total_installation_count_description": "Weekly number of sewage water treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful.",
     "rwzi_abbrev": "",
@@ -1104,7 +1104,7 @@
       "title": "Hospital admissions {{municipalityName}} | Dashboard Coronavirus | Government.nl",
       "description": "Overview of the number of confirmed COVID-19 cases in {{municipalityName}} who are admitted to a hospital per day."
     },
-    "titel_kpi": "Average number of hospital admissions in 3 days",
+    "kpi_titel": "Average number of hospital admissions in 3 days",
     "reference": {
       "href": "/verantwoording#hospitals",
       "text": "Read more in 'explanation of the data presented'."
@@ -1152,7 +1152,7 @@
       "title": "Confirmed cases in  {{municipalityName}} | Dashboard Coronavirus | Government.nl",
       "description": "Overview of confirmed cases in municipality {{municipalityName}}"
     },
-    "titel_kpi": "Confirmed cases per day",
+    "kpi_titel": "Confirmed cases per day",
     "reference": {
       "href": "/verantwoording#confirmed-cases",
       "text": "Read more in 'explanation of the data presented'."
@@ -1518,7 +1518,7 @@
       "trend_lager": "lower",
       "trend_gelijk": "same"
     },
-    "titel_kpi": "Percentage of people who agree with the basic rules and the percentage of people who also follow those rules in practice."
+    "kpi_titel": "Percentage of people who agree with the basic rules and the percentage of people who also follow those rules in practice."
   },
   "nl_gedrag": {
     "metadata": {

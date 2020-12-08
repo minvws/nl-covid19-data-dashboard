@@ -6,7 +6,7 @@ import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text = siteText.common.metricKPI;
-const title = siteText.gemeente_ziekenhuisopnames_per_dag.titel_kpi;
+const title = siteText.gemeente_ziekenhuisopnames_per_dag.kpi_titel;
 
 export function IntakeHospitalMetric({ data }: { data: Municipal }) {
   const lastValue = data.hospital_admissions?.last_value;
