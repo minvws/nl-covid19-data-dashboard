@@ -254,7 +254,7 @@ function NationalLayout(props: NationalLayoutProps) {
                         />
                         <span className="metric-wrapper">
                           <DeceasedMetric
-                            title={siteText.sterfte.titel_kpi}
+                            title={siteText.sterfte.kpi_titel}
                             data={data.deceased_rivm.last_value}
                           />
                         </span>
@@ -385,6 +385,7 @@ function NationalLayout(props: NationalLayoutProps) {
                         <span className="metric-wrapper">
                           <ElderlyAtHomeMetric
                             data={data.elderly_at_home.last_value}
+                            title={siteText.thuiswonende_ouderen.kpi_titel}
                           />
                         </span>
                       </a>

@@ -205,7 +205,7 @@ function SafetyRegionLayout(
                           <span className="metric-wrapper">
                             <DeceasedMetric
                               title={
-                                siteText.veiligheidsregio_sterfte.titel_kpi
+                                siteText.veiligheidsregio_sterfte.kpi_titel
                               }
                               data={data.deceased_rivm.last_value}
                             />
@@ -292,11 +292,18 @@ function SafetyRegionLayout(
                         >
                           <TitleWithIcon
                             icon={<ElderlyIcon />}
-                            title={siteText.thuiswonende_ouderen.titel_sidebar}
+                            title={
+                              siteText.veiligheidsregio_thuiswonende_ouderen
+                                .titel_sidebar
+                            }
                           />
                           <span className="metric-wrapper">
                             <ElderlyAtHomeMetric
                               data={data.elderly_at_home.last_value}
+                              title={
+                                siteText.veiligheidsregio_thuiswonende_ouderen
+                                  .kpi_titel
+                              }
                             />
                           </span>
                         </a>
