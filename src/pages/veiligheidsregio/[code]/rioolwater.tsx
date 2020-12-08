@@ -17,7 +17,7 @@ import { SewerWaterChart } from '~/components/lineChart/sewer-water-chart';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import {
-  getSafetyRegionData,
+  getSafetyRegionStaticProps,
   getSafetyRegionPaths,
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
@@ -195,7 +195,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
 
 SewerWater.getLayout = getSafetyRegionLayout();
 
-export const getStaticProps = getSafetyRegionData();
+export const getStaticProps = getSafetyRegionStaticProps;
 export const getStaticPaths = getSafetyRegionPaths();
 
 export default SewerWater;
