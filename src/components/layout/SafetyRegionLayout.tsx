@@ -1,10 +1,10 @@
 import Head from 'next/head';
-import { Link } from '~/utils/link';
 import { useRouter } from 'next/router';
 import Arrow from '~/assets/arrow.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
+import VirusIcon from '~/assets/virus.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { Category } from '~/components-styled/aside/category';
 import {
@@ -14,6 +14,7 @@ import {
 } from '~/components-styled/aside/menu';
 import { TitleWithIcon } from '~/components-styled/aside/title-with-icon';
 import { ComboBox } from '~/components/comboBox';
+import { DeceasedMetric } from '~/components/common/deceased-metric';
 import { getLayout as getSiteLayout } from '~/components/layout';
 import { PositivelyTestedPeopleBarScale } from '~/components/veiligheidsregio/positive-tested-people-barscale';
 import { PositivelyTestedPeopleMetric } from '~/components/veiligheidsregio/positive-tested-people-metric';
@@ -21,6 +22,7 @@ import { SewerWaterMetric } from '~/components/veiligheidsregio/sewer-water-metr
 import safetyRegions from '~/data/index';
 import siteText from '~/locale/index';
 import { ISafetyRegionData } from '~/static-props/safetyregion-data';
+import { Link } from '~/utils/link';
 import { getSewerWaterBarScaleData } from '~/utils/sewer-water/safety-region-sewer-water.util';
 import { useMediaQuery } from '~/utils/useMediaQuery';
 import { NursingHomeInfectedPeopleMetric } from '../common/nursing-home-infected-people-metric';
@@ -173,6 +175,30 @@ function SafetyRegionLayout(
                               data={data.results_per_region}
                               showAxis={false}
                               showValue={false}
+                            />
+                          </span>
+                        </a>
+                      </Link>
+                    </MetricMenuItem>
+                    <MetricMenuItem>
+                      <Link href={`/veiligheidsregio/${code}/sterfte`}>
+                        <a
+                          className={getClassName(
+                            '/veiligheidsregio/[code]/sterfte'
+                          )}
+                        >
+                          <TitleWithIcon
+                            icon={<VirusIcon />}
+                            title={
+                              siteText.veiligheidsregio_sterfte.titel_sidebar
+                            }
+                          />
+                          <span className="metric-wrapper">
+                            <DeceasedMetric
+                              title={
+                                siteText.veiligheidsregio_sterfte.titel_kpi
+                              }
+                              data={data.deceased_rivm.last_value}
                             />
                           </span>
                         </a>
