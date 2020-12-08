@@ -131,7 +131,6 @@
       }
     }
   },
-
   "thuiswonende_ouderen": {
     "titel_sidebar": "Thuiswonende ouderen",
     "titel_kpi": "Aantal positief geteste mensen",
@@ -143,7 +142,7 @@
 
     "section_positive_tested": {
       "title": "Thuiswonende ouderen - nieuwe besmettingen",
-      "description": "Korte toelichting die de definitie van thuiswonende ouderen uitlegt. Eventueel met een link naar de [cijferverantwoording](#).",
+      "description": "Korte toelichting die de definitie van thuiswonende ouderen uitlegt. Eventueel met een link naar de cijferverantwoording.",
 
       "reference": {
         "href": "/verantwoording#thuiswonende-70-plussers",

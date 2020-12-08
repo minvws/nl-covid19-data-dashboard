@@ -35,6 +35,7 @@ const ElderlyAtHomeNationalPage: FCWithLayout<NationalPageProps> = (props) => {
 
       <ContentHeader
         category={siteText.nationaal_layout.headings.kwetsbare_groepen}
+        screenreaderCategory={siteText.thuiswonende_ouderen.titel_sidebar}
         title={text.section_positive_tested.title}
         icon={<ElderlyIcon />}
         subtitle={text.section_positive_tested.description}
