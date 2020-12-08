@@ -44,7 +44,7 @@ const DeceasedRegionalPage: FCWithLayout<ISafetyRegionData> = (props) => {
         metadata={{
           datumsText: text.section_deceased_rivm.datums,
           dateInfo: dataRivm.last_value.date_of_report_unix,
-          dateOfInsertionUnix: dataCbs.last_value.date_of_insertion_unix,
+          dateOfInsertionUnix: dataRivm.last_value.date_of_insertion_unix,
           dataSources: [text.section_deceased_rivm.bronnen.rivm],
         }}
       />
