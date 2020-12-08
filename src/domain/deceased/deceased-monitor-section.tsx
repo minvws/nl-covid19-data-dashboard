@@ -9,7 +9,7 @@ import DeceasedMonitor from '~/domain/deceased/components/deceased-monitor-chart
 import siteText from '~/locale/index';
 import { NationalDeceasedCbs, RegionalDeceasedCbs } from '~/types/data';
 
-const sterftemonitorText = siteText.section_sterftemonitor;
+const text = siteText.section_sterftemonitor;
 
 export function DeceasedMonitorSection({
   data,
@@ -21,51 +21,48 @@ export function DeceasedMonitorSection({
   return (
     <Box>
       <ContentHeader
-        title={sterftemonitorText.title}
+        title={text.title}
         icon={<CoronaVirusIcon />}
-        subtitle={sterftemonitorText.description}
+        subtitle={text.description}
         metadata={{
-          datumsText: sterftemonitorText.datums,
+          datumsText: text.datums,
           dateInfo: {
             weekStartUnix: data.last_value.week_start_unix,
             weekEndUnix: data.last_value.week_end_unix,
           },
           dateOfInsertionUnix: data.last_value.date_of_insertion_unix,
-          dataSources: [sterftemonitorText.bronnen.cbs],
+          dataSources: [text.bronnen.cbs],
         }}
       />
 
       <Box spacing={4}>
         <AnchorTile
-          title={sterftemonitorText.cbs_message.title}
-          label={sterftemonitorText.cbs_message.link.text}
-          href={sterftemonitorText.cbs_message.link.href}
+          title={text.cbs_message.title}
+          label={text.cbs_message.link.text}
+          href={text.cbs_message.link.href}
           external
         >
-          {sterftemonitorText.cbs_message.message}
+          {text.cbs_message.message}
         </AnchorTile>
 
         <ChartTile
-          metadata={{ source: sterftemonitorText.bronnen.cbs }}
-          title={sterftemonitorText.deceased_monitor_chart_title}
-          description={sterftemonitorText.deceased_monitor_chart_description}
+          metadata={{ source: text.bronnen.cbs }}
+          title={text.deceased_monitor_chart_title}
+          description={text.deceased_monitor_chart_description}
         >
           <DeceasedMonitor
             values={data.values}
             config={{
               registered: {
-                label:
-                  sterftemonitorText.deceased_monitor_chart_legenda_registered,
+                label: text.deceased_monitor_chart_legenda_registered,
                 color: theme.colors.data.primary,
               },
               expected: {
-                label:
-                  sterftemonitorText.deceased_monitor_chart_legenda_expected,
+                label: text.deceased_monitor_chart_legenda_expected,
                 color: '#5BADDB',
               },
               margin: {
-                label:
-                  sterftemonitorText.deceased_monitor_chart_legenda_expected_margin,
+                label: text.deceased_monitor_chart_legenda_expected_margin,
                 color: '#D0EDFF',
               },
             }}
@@ -73,20 +70,17 @@ export function DeceasedMonitorSection({
           <Legenda
             items={[
               {
-                label:
-                  sterftemonitorText.deceased_monitor_chart_legenda_registered,
+                label: text.deceased_monitor_chart_legenda_registered,
                 color: theme.colors.data.primary,
                 shape: 'line',
               },
               {
-                label:
-                  sterftemonitorText.deceased_monitor_chart_legenda_expected,
+                label: text.deceased_monitor_chart_legenda_expected,
                 color: '#5BADDB',
                 shape: 'line',
               },
               {
-                label:
-                  sterftemonitorText.deceased_monitor_chart_legenda_expected_margin,
+                label: text.deceased_monitor_chart_legenda_expected_margin,
                 color: '#D0EDFF',
                 shape: 'square',
               },
