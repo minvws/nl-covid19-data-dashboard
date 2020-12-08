@@ -95,7 +95,7 @@ export interface Municipalities {
   proto_name: "MUNICIPALITIES";
   name: string;
   code: string;
-  hospital_admissions: MunicipalitiesHospitalAdmissions[];
+  hospital_admissions?: MunicipalitiesHospitalAdmissions[];
   positive_tested_people: MunicipalitiesPositiveTestedPeople[];
 }
 export interface MunicipalitiesHospitalAdmissions {
