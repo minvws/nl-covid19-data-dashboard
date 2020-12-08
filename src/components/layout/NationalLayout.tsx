@@ -10,6 +10,7 @@ import ReproIcon from '~/assets/reproductiegetal.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
+import VirusIcon from '~/assets/virus.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import Ziektegolf from '~/assets/ziektegolf.svg';
 import { Category } from '~/components-styled/aside/category';
@@ -19,14 +20,11 @@ import {
   MetricMenuItem,
 } from '~/components-styled/aside/menu';
 import { TitleWithIcon } from '~/components-styled/aside/title-with-icon';
+import { DeceasedMetric } from '~/components/common/deceased-metric';
+import { SidebarMetric } from '~/components-styled/sidebar-metric';
 import { ElderlyAtHomeMetric } from '~/components/common/elderly-at-home-metric';
 import { NursingHomeInfectedPeopleMetric } from '~/components/common/nursing-home-infected-people-metric';
 import { InfectiousPeopleMetric } from '~/components/landelijk/infectious-people-metric';
-import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-barscale';
-import { IntakeHospitalMetric } from '~/components/landelijk/intake-hospital-metric';
-import { IntakeIntensiveCareBarscale } from '~/components/landelijk/intake-intensive-care-barscale';
-import { IntakeIntensiveCareMetric } from '~/components/landelijk/intake-intensive-care-metric';
-import { PositiveTestedPeopleBarScale } from '~/components/landelijk/positive-tested-people-barscale';
 import { ReproductionIndexBarScale } from '~/components/landelijk/reproduction-index-barscale';
 import { ReproductionIndexMetric } from '~/components/landelijk/reproduction-index-metric';
 import { SewerWaterMetric } from '~/components/landelijk/sewer-water-metric';
@@ -38,7 +36,6 @@ import { NationalPageProps } from '~/static-props/nl-data';
 import theme from '~/style/theme';
 import { Link } from '~/utils/link';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-import { PositiveTestedPeopleMetric } from '../landelijk/positive-tested-people-metric';
 
 export function getNationalLayout(
   page: React.ReactNode,
@@ -185,14 +182,19 @@ function NationalLayout(props: NationalLayoutProps) {
                             siteText.positief_geteste_personen.titel_sidebar
                           }
                         />
-                        <span className="metric-wrapper">
-                          <PositiveTestedPeopleMetric data={data} />
-                          <PositiveTestedPeopleBarScale
-                            data={data}
-                            showAxis={false}
-                            showValue={false}
-                          />
-                        </span>
+                        <SidebarMetric
+                          data={data}
+                          scope="nl"
+                          metricName="infected_people_total"
+                          metricProperty="infected_daily_total"
+                          altBarScaleMetric={{
+                            metricName: 'infected_people_delta_normalized',
+                            metricProperty: 'infected_daily_increase',
+                          }}
+                          localeTextKey="positief_geteste_personen"
+                          differenceKey="infected_people_total__infected_daily_total"
+                          showBarScale={true}
+                        />
                       </a>
                     </Link>
                   </MetricMenuItem>
@@ -243,6 +245,22 @@ function NationalLayout(props: NationalLayoutProps) {
                       </a>
                     </Link>
                   </MetricMenuItem>
+                  <MetricMenuItem>
+                    <Link href="/landelijk/sterfte">
+                      <a className={getClassName('/landelijk/sterfte')}>
+                        <TitleWithIcon
+                          icon={<VirusIcon />}
+                          title={siteText.sterfte.titel_sidebar}
+                        />
+                        <span className="metric-wrapper">
+                          <DeceasedMetric
+                            title={siteText.sterfte.titel_kpi}
+                            data={data.deceased_rivm.last_value}
+                          />
+                        </span>
+                      </a>
+                    </Link>
+                  </MetricMenuItem>
                 </Menu>
               </CategoryMenuItem>
               <CategoryMenuItem>
@@ -263,14 +281,22 @@ function NationalLayout(props: NationalLayoutProps) {
                             siteText.ziekenhuisopnames_per_dag.titel_sidebar
                           }
                         />
-                        <span className="metric-wrapper">
-                          <IntakeHospitalMetric data={data} />
-                          <IntakeHospitalBarScale
-                            data={data}
-                            showAxis={false}
-                            showValue={false}
-                          />
-                        </span>
+                        {/**
+                         * A next step could be to embed the SidebarMetric component in an even
+                         * higher-level component which would also include the link and the
+                         * TitleWithIcon, seeing that both appear to use the same localeTextKey,
+                         * and it would make sense to enforce the existence of standardized
+                         * properties like title_sidebar.
+                         */}
+                        <SidebarMetric
+                          data={data}
+                          scope="nl"
+                          metricName="intake_hospital_ma"
+                          metricProperty="moving_average_hospital"
+                          localeTextKey="ziekenhuisopnames_per_dag"
+                          differenceKey="intake_hospital_ma__moving_average_hospital"
+                          showBarScale={true}
+                        />
                       </a>
                     </Link>
                   </MetricMenuItem>
@@ -286,14 +312,15 @@ function NationalLayout(props: NationalLayoutProps) {
                           icon={<Arts />}
                           title={siteText.ic_opnames_per_dag.titel_sidebar}
                         />
-                        <span className="metric-wrapper">
-                          <IntakeIntensiveCareMetric data={data} />
-                          <IntakeIntensiveCareBarscale
-                            data={data}
-                            showAxis={false}
-                            showValue={false}
-                          />
-                        </span>
+                        <SidebarMetric
+                          data={data}
+                          scope="nl"
+                          metricName="intake_intensivecare_ma"
+                          metricProperty="moving_average_ic"
+                          localeTextKey="ic_opnames_per_dag"
+                          differenceKey="intake_intensivecare_ma__moving_average_ic"
+                          showBarScale={true}
+                        />
                       </a>
                     </Link>
                   </MetricMenuItem>

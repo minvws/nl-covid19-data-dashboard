@@ -6,7 +6,7 @@ import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text = siteText.common.metricKPI;
-const title = siteText.verpleeghuis_besmette_locaties.titel_kpi;
+const title = siteText.verpleeghuis_besmette_locaties.kpi_titel;
 
 export function NursingHomeInfectedLocationsMetric(props: {
   data: NationalNursingHomeValue;
