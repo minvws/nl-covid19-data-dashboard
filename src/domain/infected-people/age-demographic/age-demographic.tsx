@@ -21,7 +21,7 @@ interface AgeDemographicProps {
 export function AgeDemographic({ data }: AgeDemographicProps) {
   const [parentWidth, setParentWidth] = useState(0);
   const breakpoints = useBreakpoints();
-  const isSmallScreen = !breakpoints.md;
+  const isSmallScreen = !breakpoints.xl;
 
   // Calculate graph's coordinates based on the data, the component width and wheher we are on a small screen or not.
   const coordinates = useAgeDemographicCoordinates(
