@@ -9,7 +9,7 @@
     "title": "Last updated"
   },
   "notificatie": {
-    "titel": "Number of confirmed cases stagnates",
+    "titel": "Increase in newly reported COVID-19 infections is cause for concern",
     "bericht": "Last week there was a 27% increase in COVID-19 positives compared with the week before. In the week from 2 to 8 December 43,103 newly tested COVID-19 positives were reported. This is an increase of 9,000 COVID-19 positives compared to the 33,949 COVID-19 positives reported the week before. In each safety region the number of newly tested positives also increased. More people have been tested. The percentage of people with a positive test result raised from 11.1% to 11.6% last week. The reproduction number of 20 November has a value of 1.00 (lower: 0.97; upper: 1.03).\n\nRisk level per region can be ‘caution’ (level 1), ‘concern’ (level 2), ‘serious’ (level 3) or ‘severe’ (level 4). At this moment the risk level of {{escalationLevel4}} regions is 'severe', for {{escalationLevel3}} it is ‘serious’, for {{escalationLevel2}} it is ‘concern’ and for {{escalationLevel1}} it is ‘caution’.",
     "link": {
       "text": "View the full message from the RIVM",
@@ -684,7 +684,7 @@
         "verantwoording": ""
       },
       {
-        "cijfer": "",
+        "cijfer": "Every day the National Institute for Public Health and the Environment (RIVM) provides open data about the COVID-19 situation among over-70s living at home. A description of the data set can be found here. This data cannot always be clearly linked to a specific safety region. As a result, the total sum of numbers at safety-region level may be less than the numbers at national level. The number of deaths is based on the date of death. However, when the date of death is unknown that death is not included in this statistic in the dashboard.\n\nFor its calculations RIVM uses test results and mortality data which it receives from the municipal health service (GGD). When people get tested for coronavirus, the GGD also records certain personal details, such as their age and whether they live in a nursing home or disability care home. RIVM calculates the number of new cases among over-70s living at home by, first, determining the total number of new cases in this age group and then subtracting the number of infections:\n-\tAmongst nursing home residents \n-\tAmongst care workers\n-\tAmongst people that can be linked to a care home via their address \n-\tAmongst people that can be linked to a care home because of the setting of their infection.\n\nThe population of over-70s living at home is highly diverse in terms of their health and living situation. Many over-70s are active and in good health. But others live with at least one chronic disease and/or have physical or cognitive limitations, and are less active. It is not possible at this time to distinguish between COVID-19 infections among active and inactive over-70s living at home because information about activity levels is not recorded when people get tested for coronavirus.\n\nThe dashboard also shows the number of daily confirmed cases per 100,000 for over-70s living at home. The total number of over-70s living at home is based on data collected by Statistics Netherlands on the number of over-70s living in a private household (Households: size, composition, position, 1 January; cbs.nl). This group consists of roughly 2.3 million people.",
         "verantwoording": ""
       },
       {
@@ -1109,7 +1109,7 @@
   },
   "laatste_ontwikkelingen": {
     "title": "Latest developments",
-    "menu_subtitle": "Number of confirmed cases stagnates",
+    "menu_subtitle": "Increse of number of confirmed cases",
     "alle_cijfers_header": "",
     "alle_cijfers_link": ""
   },
@@ -1565,30 +1565,30 @@
     }
   },
   "gehandicaptenzorg_besmette_locaties": {
-    "datums": "",
-    "titel": "",
-    "pagina_toelichting": "",
-    "barscale_titel": "",
-    "barscale_toelichting": "",
-    "kpi_titel": "",
-    "kpi_toelichting": "",
-    "linechart_titel": "",
+    "datums": "Latest values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
+    "titel": "Disability care homes - no. of infected locations",
+    "pagina_toelichting": "This is an estimate of the number of disability care homes that currently have at least one confirmed COVID-19 case. Read more in the explanation of the presented data.",
+    "barscale_titel": "Number of new locations per day",
+    "barscale_toelichting": "This figure shows the number of disability care homes where at least one resident was reported as testing positive for COVID-19 yesterday. A disability care home is considered to have a new outbreak if there had been no new cases of COVID-19 in the home in the previous 28 days (i.e. twice the length of the incubation period).",
+    "kpi_titel": "Total no. of new infected locations",
+    "kpi_toelichting": "This figure shows the total number of disability care homes that have reported at least one confirmed COVID-19 case among residents, based on a positive test, in the last 28 days. The percentage expresses the share of all disability care homes in the Netherlands with confirmed COVID-19 cases.",
+    "linechart_titel": "Total no. of infected locations – progression over time",
     "barscale_screenreader_text": "",
     "chloropleth_legenda": {
-      "titel": "",
-      "geen_meldingen": ""
+      "titel": "Percentage of infected locations",
+      "geen_meldingen": "No newly confirmed cases"
     },
-    "map_titel": "",
-    "map_toelichting": "",
+    "map_titel": "Distribution of infected locations in the Netherlands",
+    "map_toelichting": "This map shows the number of disability care homes that have reported at least one confirmed COVID-19 case, based on a positive test, in the last 28 days.",
     "metadata": {
-      "title": "",
-      "description": ""
+      "title": "Infected disability care homes | Dashboard Coronavirus | Governement.nl",
+      "description": "National overview of the disability care homes that have reported at least one confirmed COVID-19 case."
     },
-    "titel_sidebar": "",
-    "titel_kpi": "",
+    "titel_sidebar": "Disability care",
+    "titel_kpi": "Total no. of infected locations",
     "reference": {
-      "href": "",
-      "text": ""
+      "href": "/verantwoording#disability-care-homes",
+      "text": "Read more in the explanation of the data presented"
     },
     "bronnen": {
       "rivm": {
@@ -1630,29 +1630,29 @@
     }
   },
   "gehandicaptenzorg_oversterfte": {
-    "datums": "",
+    "datums": "Latest values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "titel": "",
-    "pagina_toelichting": "",
-    "barscale_titel": "",
+    "pagina_toelichting": "Number of disability care home residents who have died from COVID-19.",
+    "barscale_titel": "Number of deceased residents",
     "barscale_screenreader_text": "",
-    "extra_uitleg": "",
-    "linechart_titel": "",
-    "map_titel": "",
+    "extra_uitleg": "This is an estimate of the number of disability care home residents in the Netherlands who have died from COVID-19 since 27 February 2020. ",
+    "linechart_titel": "Progression over time",
+    "map_titel": "Disability care homes – deaths",
     "map_toelichting": "",
     "metadata": {
-      "title": "",
-      "description": ""
+      "title": "Deceased residents of disability care homes | Dashboard Coronavirus | Government.nl",
+      "description": "Total number of confirmed cases in disability care homes in the Netherlands that died from COVID-19"
     },
-    "titel_kpi": "",
+    "titel_kpi": "Number of deceased residents",
     "reference": {
-      "href": "",
+      "href": "/verantwoording#disability-care-homes",
       "text": ""
     },
     "bronnen": {
       "rivm": {
-        "download": "",
-        "href": "",
-        "text": ""
+        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "text": "RIVM"
       }
     }
   },
@@ -1672,8 +1672,8 @@
     "map_toelichting": "",
     "titel_sidebar": "",
     "metadata": {
-      "title": "",
-      "description": ""
+      "title": "Deceased residents of disability care homes in {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
+      "description": "Total number of confirmed cases in disability care homes in safety region {{safetyRegionName}} that died from COVID-19"
     },
     "reference": {
       "href": "",
@@ -1688,41 +1688,41 @@
     }
   },
   "veiligheidsregio_gehandicaptenzorg_besmette_locaties": {
-    "datums": "",
-    "titel": "",
-    "pagina_toelichting": "",
-    "barscale_titel": "",
-    "barscale_toelichting": "",
-    "kpi_titel": "",
-    "kpi_toelichting": "",
-    "linechart_titel": "",
+    "datums": "Latest values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
+    "titel": "Disability care homes in {{safetyRegion}} - no. of infected locations",
+    "pagina_toelichting": "This is an estimate of the number of disability care homes in this region that currently have at least one confirmed COVID-19 case. Read more in the explanation of the presented data.",
+    "barscale_titel": "Number of new locations per day",
+    "barscale_toelichting": "This figure shows the number of disability care homes where at least one resident was reported as testing positive for COVID-19. A disability care home is considered to have a new outbreak if there had been no new cases of COVID-19 in the home in the previous 28 days (i.e. twice the length of the incubation period).",
+    "kpi_titel": "Total no. of infected locations ",
+    "kpi_toelichting": "This figure shows the total number of disability care homes that have reported at least one confirmed COVID-19 case, based on a positive test, in the last 28 days. The percentage expresses the share of all disability care homes in the Netherlands with confirmed COVID-19 cases.",
+    "linechart_titel": "Total no. of infected locations – progression over time",
     "barscale_screenreader_text": "",
     "metadata": {
-      "title": "",
-      "description": ""
+      "title": "Infected disability care homes in {{safetyRegionName}} | Dashboard Coronavirus | Governement.nl",
+      "description": "Regional overview of the disability care homes in {{safetyRegionName}} that have reported at least one confirmed COVID-19 case."
     },
-    "titel_sidebar": "",
+    "titel_sidebar": "Confirmed cases (homes)",
     "reference": {
-      "href": "",
-      "text": ""
+      "href": "/verantwoording#disability-care-homes",
+      "text": "Read more in explanation of the data presented"
     },
     "bronnen": {
       "rivm": {
-        "download": "",
-        "href": "",
-        "text": ""
+        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "text": "RIVM"
       }
     }
   },
   "veiligheidsregio_gehandicaptenzorg_positief_geteste_personen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "titel": "",
+    "titel": "Disability care homes in {{safetyRegion}} – confirmed cases among residents",
     "barscale_titel": "Disability care homes - daily confirmed cases (residents)",
     "extra_uitleg": "The number of disability care home residents in this region who were reported as testing positive for COVID-19 yesterday.",
-    "pagina_toelichting": "",
+    "pagina_toelichting": "People who live in disability care homes are often extra vulnerable to coronavirus infection. Because of this, Municipal health services (GGDs) monitor whether a persons who tests positive for COVID-19 lives in a disability care home. By doing so, measures can be taken if the number of cases in residential care increases. Read more in the explanation of the presented data.   ",
     "linechart_titel": "Progression over time",
     "barscale_screenreader_text": "",
-    "titel_sidebar": "confirmed cases (residents)",
+    "titel_sidebar": "Number of confirmed cases (residents)",
     "chloropleth_legenda": {
       "titel": "",
       "geen_meldingen": ""
@@ -1746,18 +1746,18 @@
     }
   },
   "thuiswonende_ouderen": {
-    "titel_sidebar": "",
+    "titel_sidebar": "People over 70 living at home",
     "titel_kpi": "",
     "metadata": {
       "title": "",
       "description": ""
     },
     "section_positive_tested": {
-      "title": "",
-      "description": "",
+      "title": "People over 70 living at home",
+      "description": "People aged over 70 are extra vulnerable to coronavirus infection. Keeping track of the number of infections among over-70s who are still living independently in their own homes makes targeted measures possible. Over-70s living in residential settings – nursing homes or disability care homes – are counted under those groups on this dashboard. Read more in the explanation of the presented data.",
       "reference": {
         "href": "",
-        "text": ""
+        "text": "See the [explanation of the data presented](https://coronadashboard.government.nl/verantwoording)"
       },
       "bronnen": {
         "rivm": {
@@ -1766,22 +1766,22 @@
           "download": ""
         }
       },
-      "kpi_daily_title": "",
-      "kpi_daily_description": "",
-      "kpi_daily_per_100k_title": "",
-      "kpi_daily_per_100k_description": "",
-      "line_chart_daily_title": "",
-      "choropleth_daily_title": "",
-      "choropleth_daily_description": "",
-      "choropleth_daily_legenda": "",
-      "datums": ""
+      "kpi_daily_title": "Confirmed cases among over-70s living at home",
+      "kpi_daily_description": "The number of people over 70 living at home who were reported as testing positive for COVID-19 yesterday.",
+      "kpi_daily_per_100k_title": "Daily number of COVID-19 cases per 100.000 over-70s",
+      "kpi_daily_per_100k_description": "This number shows how many over-70s living at home have COVID-19 per 100.000 over-70s living at home.",
+      "line_chart_daily_title": "Daily number of over-70s with confirmed COVID-19 case",
+      "choropleth_daily_title": "Distribution of daily confirmed cases among over-70s living at home (per safety region)",
+      "choropleth_daily_description": "This map shows the differences between safety regions in the number of confirmed cases per 100,000 among over-70s living at home, as reported yesterday.",
+      "choropleth_daily_legenda": "Number per 100.000 over-70s living at home",
+      "datums": "Updated {{dateOfInsertion}}. Updated daily."
     },
     "section_deceased": {
-      "title": "",
-      "description": "",
+      "title": "Over-70s living at home - COVID-19 mortality",
+      "description": "The number of people over 70 living at home who were reported as deceased due to COVID-19 yesterday. Read more in the explanation of the presented data.",
       "reference": {
         "href": "",
-        "text": ""
+        "text": "See the [explanation on the data presented](https://coronadashboard.government.nl/verantwoording)"
       },
       "bronnen": {
         "rivm": {
@@ -1790,22 +1790,22 @@
           "download": ""
         }
       },
-      "kpi_daily_title": "",
-      "kpi_daily_description": "",
-      "line_chart_daily_title": "",
-      "datums": ""
+      "kpi_daily_title": "Number of over-70s living at home that died because of COVID-19, daily",
+      "kpi_daily_description": "The number of people over 70 living at home who were reported as deceased due to COVID-19 yesterday.",
+      "line_chart_daily_title": "Number of COVID-19 deaths among over-70s living at home: progression over time",
+      "datums": "Last update  {{dateOfInsertion}}. Updated daily."
     }
   },
   "veiligheidsregio_thuiswonende_ouderen": {
-    "titel_sidebar": "",
+    "titel_sidebar": "People over 70 living at home",
     "titel_kpi": "",
     "metadata": {
-      "title": "",
-      "description": ""
+      "title": "Over-70s living at home in {{safetyRegion}} I Dashboard Coronvirus I Rijksoverheid.nl",
+      "description": "Over-70s living at home in {{safetyRegion}}"
     },
     "section_positive_tested": {
-      "title": "",
-      "description": "",
+      "title": "Over-70s in {{safetyRegion}} living at home - newly confirmed cases",
+      "description": "People aged over 70 are extra vulnerable to coronavirus infection. Keeping track of the number of infections among over-70s who are still living independently in their own homes makes targeted measures possible. Over-70s living in residential settings – nursing homes or disability care homes – are counted on this dashboard under those groups. Read more in the explanation of the [presented data](https://coronadashboard.government.nl/verantwoording).",
       "reference": {
         "href": "",
         "text": ""

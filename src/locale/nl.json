@@ -9,7 +9,7 @@
     "title": "Laatst bijgewerkt"
   },
   "notificatie": {
-    "titel": "Aantal COVID-19 meldingen stagneert",
+    "titel": "Zorgwekkende stijging aantal meldingen COVID-19",
     "bericht": "Afgelopen week zijn er 27% meer nieuwe meldingen van COVID-19 besmettingen gerapporteerd dan een week eerder. In de week van 2 tot en met 8 december werden 43.103 nieuwe personen met een positieve COVID-19 uitslag gemeld. Ruim 9.000 meldingen meer dan 33.949 meldingen in de week daarvoor. In iedere veiligheidsregio steeg het aantal nieuwe meldingen van COVID-19 besmettingen. Meer mensen hebben zich laten testen. Het percentage mensen met een positieve testuitslag is gestegen van 11,1% naar 11,6% afgelopen week. Het reproductiegetal van 20 november is 1,00 (ondergrens 0,97 – bovengrens 1,03). \n\nHet risiconiveau per regio kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2), ‘ernstig’ (niveau 3), ‘zeer ernstig’ (niveau 4) zijn. Op dit moment zijn {{escalationLevel4}} regio’s ingeschaald op ‘zeer ernstig’, {{escalationLevel3}} op ‘ernstig’, {{escalationLevel2}} op ‘zorgelijk’ en {{escalationLevel1}} op ‘waakzaam.‘",
     "link": {
       "text": "Bekijk de toelichting van het RIVM",
@@ -684,8 +684,8 @@
         "verantwoording": "@TODO"
       },
       {
-        "cijfer": "",
-        "verantwoording": ""
+        "cijfer": "De informatie over thuiswonende 70 plussers wordt dagelijks beschikbaar gesteld via open data  door het RIVM. Zie hier  de beschrijving van deze dataset. In de aangeleverde gegevens is soms de veiligheidsregio onbekend. Dit heeft als gevolg dat het totaal van de weergegeven cijfers op veiligheidsregio niveau minder kan zijn dan wat er op landelijk niveau wordt getoond. Het aantal overleden personen wordt getoond op basis van de datum van overlijden. De overlijdensdatum is echter niet altijd bekend. Als de datum niet bekend is, dan zijn die gevallen niet op het dashboard zichtbaar.\n\nHet RIVM baseert zich op testresultaten en sterfgevallen zoals door de GGD’en bij het RIVM gemeld. Bij het melden van een positieve testuitslag door de GGD wordt (onder meer) geregistreerd hoe oud iemand is en of de persoon in een verpleeghuis of instelling voor gehandicaptenzorg woont. Het RIVM stelt het aantal (nieuwe) besmettingen van thuiswonenden van 70 jaar of ouder vast door het totaal aantal (nieuwe) besmettingen in de leeftijdsklasse 70 jaar of ouder vast te stellen en daarop in mindering te brengen het aantal besmettingen:\n-\tonder bewoners van een instelling\n-\tonder mensen die werkzaam zijn in de zorg \n-\tOnder mensen die via hun adres gelinkt kunnen worden aan een verpleeghuis of een locatie voor gehandicaptenzorg \n-\tOnder mensen die op basis van setting van besmetting of voorkomen in een vrij tekstveld gelinkt kunnen worden aan een verpleeghuis of gehandicaptenzorginstelling.\n\nDe groep thuiswonenden van 70 jaar is een diverse groep ten aanzien van de woonsituatie en gezondheidssituatie. Een groot deel van de 70-jarigen is vitaal en heeft een goede gezondheid. Een ander deel heeft één of meerdere chronische aandoeningen of fysieke of cognitieve beperkingen en is minder vitaal. Op dit moment is het nog niet mogelijk op het dashboard een onderscheid aan te brengen tussen de besmettingen onder vitale en minder vitale thuiswonende ouderen omdat deze informatie niet standaard wordt vastgelegd wanneer een coronatest wordt afgenomen.\n\nHet dashboard toont welk deel van de thuiswonende ouderen van 70 jaar of ouder die dag besmet is geraakt. Voor totaal aantal thuiswonende ouderen van 70 jaar is gebruik gemaakt van gegevens van het CBS over het aantal personen van 70 jaar dat in een particulier huishouden woont (StatLine - Huishoudens; personen naar geslacht, leeftijd en regio, 1 januari (cbs.nl). Het gaat in totaal om 2,3 mln. personen. ",
+        "verantwoording": "@TODO"
       },
       {
         "cijfer": "",
@@ -1109,7 +1109,7 @@
   },
   "laatste_ontwikkelingen": {
     "title": "Laatste ontwikkelingen",
-    "menu_subtitle": "Aantal COVID-19 meldingen stagneert",
+    "menu_subtitle": "Stijging aantal meldingen COVID-19",
     "alle_cijfers_header": "Benieuwd naar alle cijfers?",
     "alle_cijfers_link": "Bekijk alle cijfers"
   },
@@ -1567,11 +1567,11 @@
   "gehandicaptenzorg_besmette_locaties": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "titel": "Gehandicaptenzorg – Besmette locaties",
-    "pagina_toelichting": "Dit getal is een inschatting van het aantal nieuwe gehandicaptenzorglocaties waar sprake is van tenminste een COVID-19 besmetting op basis van een positieve test.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de cijferverantwoording.",
+    "pagina_toelichting": "Dit getal is een berekening van het aantal locaties voor gehandicaptenzorg waar op dit moment sprake is van tenminste één COVID-19 besmetting. Lees meer in de cijferverantwoording.",
     "barscale_titel": "Aantal nieuwe locaties per dag",
-    "barscale_toelichting": "Aantal nieuwe locaties waarbij tenminste één bewoner positief getest is. Een gehandicaptenzorglocatie wordt meegeteld als ‘nieuwe locatie’ wanneer er tenminste 28 dagen, dit is twee keer de incubatietijd, geen nieuwe patiënten zijn geweest.",
+    "barscale_toelichting": "Het aantal nieuwe besmette locaties voor gehandicaptenzorg waarbij gisteren tenminste één bewoner positief is getest. Een locatie telt mee als “nieuwe locatie” wanneer er tenminste 28 dagen (dit is twee keer de incubatietijd) geen nieuwe patienten besmet zijn geweest.",
     "kpi_titel": "Totaal aantal besmette locaties",
-    "kpi_toelichting": "Dit getal is een inschatting van het totaal aantal gehandicaptenzorglocaties waar in de afgelopen 28 dagen minstens één (nieuwe) COVID-19 besmetting op basis van een positieve test, is gemeld. Het percentage geeft aan hoeveel dit is ten opzichte van het totaal aantal gehandicaptenzorglocaties in Nederland.",
+    "kpi_toelichting": "Het aantal besmette locaties is het aantal locaties voor gehandicaptenzorg waar de afgelopen 28 dagen sprake is geweest van tenminste één vastgestelde COVID-19 besmetting bij een bewoner op basis van een positieve test. Het percentage geeft aan op hoeveel locaties een besmetting is ten opzichte van het totaal aantal locaties voor gehandicaptenzorg in Nederland.",
     "linechart_titel": "Totaal aantal besmette locaties over tijd",
     "barscale_screenreader_text": "{{value}} nieuwe locaties waarbij tenminste één bewoner positief getest is, per dag.",
     "chloropleth_legenda": {
@@ -1579,7 +1579,7 @@
       "geen_meldingen": "Geen meldingen"
     },
     "map_titel": "Verdeling besmette locaties in Nederland",
-    "map_toelichting": "Deze kaart toont een schatting van het aantal gehandicaptenzorglocaties waar in de afgelopen 28 dagen minstens één (nieuwe) COVID-19 besmetting op basis van een positieve test is gemeld.",
+    "map_toelichting": "Deze kaart toont het aantal locaties voor gehandicaptenzorg waar in de afgelopen 28 dagen minstens één (nieuwe) vastgestelde COVID-19 besmetting op basis van een positieve test is gemeld.",
     "metadata": {
       "title": "Besmette gehandicaptenzorglocaties | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Landelijk overzicht van gehandicaptenzorglocaties waar tenminste één COVID-19 besmetting is vastgesteld."
@@ -1632,18 +1632,18 @@
   "gehandicaptenzorg_oversterfte": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "titel": "Gehandicaptenzorg – Sterfte",
-    "pagina_toelichting": "Aantal overleden bewoners in gehandicaptenzorglocaties met een vastgestelde COVID-19-besmetting per dag.",
+    "pagina_toelichting": "Aantal bewoners van instellingen voor gehandicaptenzorg overleden aan COVID-19.",
     "barscale_titel": "Aantal overleden bewoners",
     "barscale_screenreader_text": "{{value}} overleden bewoners.",
-    "extra_uitleg": "Dit getal is een inschatting van het aantal gemelde gehandicaptenzorglocatiebewoners dat in Nederland overlijdt aan de gevolgen van het nieuwe coronavirus.",
+    "extra_uitleg": "Dit getal is een berekening van het aantal bewoners van instellingen voor gehandicaptenzorg dat in Nederland is overleden aan de gevolgen van het coronavirus, sinds 27 februari 2020. ",
     "linechart_titel": "Verloop over tijd",
-    "map_titel": "Gehandicaptenzorg oversterfte in Nederland",
+    "map_titel": "Gehandicaptenzorg – sterfte",
     "map_toelichting": "Deze kaarten laten zien hoe de oversterfte in gehandicaptenzorglocatie is in Nederland per dag.",
     "metadata": {
       "title": "Overleden bewoners gehandicaptenzorglocaties | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Landelijk aantal gemelde gehandicaptenzorglocatiebewoners dat in Nederland overlijdt aan de gevolgen van het coronavirus."
     },
-    "titel_kpi": "Sterfte per dag",
+    "titel_kpi": "Aantal overleden personen",
     "reference": {
       "href": "/verantwoording#gehandicaptenzorg",
       "text": "Lees meer in de cijferverantwoording."
@@ -1689,19 +1689,19 @@
   },
   "veiligheidsregio_gehandicaptenzorg_besmette_locaties": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "titel": "Gehandicaptenzorg - Aantal besmette locaties in {{safetyRegion}}",
-    "pagina_toelichting": "Dit getal is een inschatting van het aantal nieuwe gehandicaptenzorglocaties waar sprake is van tenminste een COVID-19 besmetting op basis van een positieve test.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de cijferverantwoording.",
+    "titel": "Gehandicaptenzorg – besmette locaties in {{safetyRegion}}",
+    "pagina_toelichting": "Dit getal is een berekening van het aantal nieuwe locaties voor gehandicaptenzorg in deze regio waar sprake is van tenminste één COVID-19 besmetting op basis van een positieve test. Lees meer in de cijferverantwoording.",
     "barscale_titel": "Aantal nieuwe locaties per dag",
-    "barscale_toelichting": "Aantal nieuwe locaties waarbij tenminste één bewoner positief getest is. Een gehandicaptenzorglocatie wordt meegeteld als ‘nieuwe locatie’ wanneer er tenminste 28 dagen, dit is twee keer de incubatietijd, geen nieuwe patiënten zijn geweest.",
+    "barscale_toelichting": "Het aantal nieuw besmette locaties waarbij tenminste één bewoners positief is getest. Een locatie telt mee als “nieuwe locatie” wanneer er tenminste 28 dagen (dit is twee keer de incubatietijd) geen nieuwe patienten besmet zijn geweest.",
     "kpi_titel": "Totaal aantal besmette locaties",
-    "kpi_toelichting": "Dit getal is een inschatting van het totaal aantal gehandicaptenzorglocaties waar in de afgelopen 28 dagen minstens één (nieuwe) COVID-19 besmetting op basis van een positieve test, is gemeld. Het percentage geeft aan hoeveel dit is ten opzichte van het totaal aantal gehandicaptenzorglocaties in deze veiligheidsregio.",
+    "kpi_toelichting": "Het aantal besmette locaties is het aantal locaties voor gehandicaptenzorg waar de afgelopen 28 dagen sprake is geweest van tenminste één vastgestelde COVID-19 besmetting op basis van een positieve test. Het percentage geeft aan op hoeveel locaties een besmetting is ten opzichte van het totaal aantal locaties voor gehandicaptenzorg in Nederland.",
     "linechart_titel": "Totaal aantal besmette locaties over tijd",
     "barscale_screenreader_text": "{{value}} nieuwe locaties waarbij tenminste één bewoner positief getest is, per dag.",
     "metadata": {
       "title": "Besmette gehandicaptenzorglocaties in {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van gehandicaptenzorglocaties in veiligheidsregio {{safetyRegionName}} waar tenminste één COVID-19 besmetting is vastgesteld."
     },
-    "titel_sidebar": "Verpleeghuiszorg",
+    "titel_sidebar": "Besmettelijke locaties",
     "reference": {
       "href": "/verantwoording#gehandicaptenzorg",
       "text": "Lees meer in de cijferverantwoording."
@@ -1716,10 +1716,10 @@
   },
   "veiligheidsregio_gehandicaptenzorg_positief_geteste_personen": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "titel": "Gehandicaptenzorg – Aantal positief geteste bewoners in {{safetyRegion}}",
+    "titel": "Gehandicaptenzorg - positief geteste bewoners in {{safetyRegion}}",
     "barscale_titel": "Aantal positief geteste bewoners in verpleeghuizen per dag",
     "extra_uitleg": "Het aantal bewoners van een instelling voor gehandicaptenzorg in deze regio waarvan gisteren is gemeld dat ze positief getest zijn op COVID-19.",
-    "pagina_toelichting": "Aantal positief geteste bewoners in gehandicaptenzorglocaties per dag in {{safetyRegion}}. Dit getal is een inschatting van het aantal gemelde bewoners in verpleeghuizen dat in Nederland positief getest is en COVID-19 heeft.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de cijferverantwoording.",
+    "pagina_toelichting": "Bewoners van een instelling voor gehandicaptenzorg zijn vaak extra kwetsbaar bij een besmetting met het coronavirus. GGD’en houden daarom bij waneer een bewoner van een instelling positief test op COVID-19. Zo kunnen maatregelen worden genomen wanneer het aantal besmettingen in instellingen toeneemt. Lees meer in de cijferverantwoording. ",
     "linechart_titel": "Verloop over tijd",
     "barscale_screenreader_text": "{{value}} positief geteste bewoners.",
     "titel_sidebar": "Positief geteste bewoners",
@@ -1746,18 +1746,18 @@
     }
   },
   "thuiswonende_ouderen": {
-    "titel_sidebar": "Thuiswonende ouderen",
+    "titel_sidebar": "Thuiswonende 70-plussers",
     "titel_kpi": "Aantal positief geteste mensen",
     "metadata": {
       "title": "Thuiswonende ouderen | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Thuiswonende ouderen."
     },
     "section_positive_tested": {
-      "title": "Thuiswonende ouderen - nieuwe besmettingen",
-      "description": "Korte toelichting die de definitie van thuiswonende ouderen uitlegt. Eventueel met een link naar de cijferverantwoording.",
+      "title": "Thuiswonende 70-plusser",
+      "description": "Personen van 70 jaar ens ouder zijn extra kwetsbaar bij een besmetting met het coronavirus. Door zicht te houden op het aantal besmettingen onder deze groep kunnen de juiste maatregelen genomen worden om het virus in te dammen.Het gaat hierbij om zelfstandig wonenden. Personen van 70+ die zijn opgenomen in een verpleeghuis of instelling voor gehandicaptenzorg worden op dit dashboard in die groepen meegeteld. Lees meer in de cijferverantwoording.   ",
       "reference": {
         "href": "/verantwoording#thuiswonende-70-plussers",
-        "text": "Lees meer in de cijferverantwoording."
+        "text": "Lees meer in de [cijferverantwoording](https://coronadashboard.rijksoverheid.nl/verantwoording)."
       },
       "bronnen": {
         "rivm": {
@@ -1766,22 +1766,22 @@
           "download": "#"
         }
       },
-      "kpi_daily_title": "Dagelijks nieuw gemelde besmettingen onder thuiswonende ouderen",
-      "kpi_daily_description": "Dit getal laat zien van hoeveel thuiswonende ouderen gemeld is dat ze positief getest zijn en COVID-19 hebben. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.",
-      "kpi_daily_per_100k_title": "Aantal dagelijks gemelde besmettingen per 100.000 thuiswonende ouderen",
-      "kpi_daily_per_100k_description": "Dit getal laat zien welke deel van de thuiswonende ouderen positief getest is op COVID-19.",
-      "line_chart_daily_title": "Aantal dagelijks nieuwe besmette thuiswonende ouders",
-      "choropleth_daily_title": "Verdeling nieuwe besmette thuiswonende ouderen",
-      "choropleth_daily_description": "Deze grafieken laten zien hoe de verdeling van hoeveel thuiswonende ouderen per 1.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
-      "choropleth_daily_legenda": "Aantal per 100.000 inwoners",
+      "kpi_daily_title": "Aantal positief geteste thuiswonende 70-plussers",
+      "kpi_daily_description": "Het aantal thuiswonenden van 70 jaar of ouder waarvan gisteren is gemeld dat ze positief zijn getest op COVID-19.",
+      "kpi_daily_per_100k_title": "Aantal dagelijks gemelde besmettingen per 100.000 thuiswonende 70-plussers",
+      "kpi_daily_per_100k_description": "Dit getal laat zien welke deel van de thuiswonende 70-plussers positief getest is op COVID-19.",
+      "line_chart_daily_title": "Dagelijks aantal besmette thuiswonende 70-plussers",
+      "choropleth_daily_title": "Verdeling nieuwe besmettingen thuiswonende 70-plussers (per veiligheidsregio)",
+      "choropleth_daily_description": "Deze kaart laat de verdeling zien van het aantal nieuwe besmettingen per dag onder thuiswonende personen van 70 of ouder per 100.000 thuiswonende personen van 70 of ouder waarvan gisteren is gemeld dat ze positief getest zijn op COVID-19.",
+      "choropleth_daily_legenda": "Aantal per 100.000 thuiswonende 70-plussers",
       "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt."
     },
     "section_deceased": {
-      "title": "Thuiswonende ouderen - sterfte",
-      "description": "Aantal overleden bewoners in gehandicatenzorg locaties met een vastgestelde COVID-19-besmetting per dag.",
+      "title": "Thuiswonende 70-plussers - COVID-19 sterfte",
+      "description": "Aantal thuiswonende personen van 70 jaar of ouder waarvan gisteren is gemeld dat ze zijn overleden aan COVID-19. Lees meer in de cijferverantwoording.",
       "reference": {
         "href": "/verantwoording#thuiswonende-70-plussers",
-        "text": "Lees meer in de cijferverantwoording."
+        "text": "Lees meer in de [cijferverantwoording](https://coronadashboard.rijksoverheid.nl/verantwoording)."
       },
       "bronnen": {
         "rivm": {
@@ -1790,22 +1790,22 @@
           "download": "#"
         }
       },
-      "kpi_daily_title": "Dagelijks aantal overleden bewoners",
-      "kpi_daily_description": "Dit getal is een inschatting van het aantal gemelde bewoners in de gehandicatenzorg dat in Nederland overlijdt aan de gevolgen van het nieuwe coronavirus.",
-      "line_chart_daily_title": "Dagelijks aantal overleden bewoners over tijd",
+      "kpi_daily_title": "Aantal door COVID-19 overleden thuiswonende 70-plussers, dagelijks",
+      "kpi_daily_description": "Aantal thuiswonende personen van 70 jaar of ouder waarvan gisteren is gemeld dat ze zijn overleden aan COVID-19.",
+      "line_chart_daily_title": "Dagelijks aantal aan COVID-19 overleden thuiswonende 70-plussers: verloop over tijd",
       "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt."
     }
   },
   "veiligheidsregio_thuiswonende_ouderen": {
-    "titel_sidebar": "Thuiswonende ouderen",
+    "titel_sidebar": "Thuiswonende 70-plussers",
     "titel_kpi": "Patiënten met eerste melding van COVID-19 klachten bij de huisarts",
     "metadata": {
-      "title": "Thuiswonende ouderen in {{safetyRegion}} | Dashboard Coronavirus | Rijksoverheid.nl",
-      "description": "Thuiswonende ouderen in {{safetyRegion}}."
+      "title": "Thuiswonende 70-plussers in {{safetyRegion}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Thuiswonende 70-plussers in {{safetyRegion}}."
     },
     "section_positive_tested": {
-      "title": "Thuiswonende ouderen in {{safetyRegion}} - nieuwe besmettingen",
-      "description": "Korte toelichting die de definitie van thuiswonende ouderen uitlegt.",
+      "title": "Thuiswonende 70-plussers in {{safetyRegion}} - nieuwe besmettingen",
+      "description": "Personen boven de 70 zijn extra kwetsbaar bij een besmetting met het coronavirus. Door zicht te houden op het aantal besmettingen onder deze groep kunnen de juiste maatregelen genomen worden om het virus in te dammen. Het gaat bij onderstaande cijfers om personen van 70 jaar of ouder die zelfstandig wonen. Personen van 70 of ouder die zijn opgenomen in een verpleeghuis of instelling voor gehandicaptenzorg worden  op dit dashboard alleen in die groepen meegeteld. Lees meer in de [cijferverantwoording](https://coronadashboard.rijksoverheid.nl/verantwoording). ",
       "reference": {
         "href": "/verantwoording#thuiswonende-70-plussers",
         "text": "Lees meer in de cijferverantwoording."
