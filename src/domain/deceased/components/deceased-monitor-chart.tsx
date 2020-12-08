@@ -53,7 +53,6 @@ function useHighchartOptions(values: CbsValue[], config: SeriesConfig) {
       borderColor: '#000',
       borderRadius: 0,
       borderWidth: 0,
-      className: 'undefined',
       colorCount: 10,
       displayErrors: true,
       height: 300,
