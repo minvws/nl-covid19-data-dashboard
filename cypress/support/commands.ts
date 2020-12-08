@@ -43,23 +43,20 @@ declare global {
        * @param pageName
        * @param gmcode
        */
-      beforeMunicipalTests(
-        pageName: string,
-        gmcode?: string
-      ): Chainable<Element>;
+      beforeMunicipalTests(pageName: string, gmcode?: string): void;
       /**
        * Fixture loading and page navigation for national page tests
        *
        * @param pageName
        */
-      beforeNationalTests(pageName: string): Chainable<Element>;
+      beforeNationalTests(pageName: string): void;
       /**
        * Fixture loading and page navigation for regional page tests
        *
        * @param pageName
        * @param vrcode
        */
-      beforeRegionTests(pageName: string, vrcode?: string): Chainable<Element>;
+      beforeRegionTests(pageName: string, vrcode?: string): void;
       /**
        * Ignores any errors coming out of the ResizeObserver
        */
@@ -70,41 +67,56 @@ declare global {
        * @param kpiTestInfo
        */
       checkKpiValues(kpiTestInfo: Record<string, string | string[]>): void;
+      /**
+       * Checks if there is only ONE <h1> element on the page
+       *
+       */
+      checkHeadings(): void;
     }
   }
 }
 
-console.log(
-  '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
-);
+Cypress.Commands.add('checkHeadings', () => {
+  const headings = Cypress.$('h1');
+  expect(headings.length).to.equal(
+    1,
+    'More than one <H1> element was found on the page, only one is allowed. This might be because there are multiple <ContentHeader> components on the page that all have a category prop assigned. This prop is rendered as an <H1> element. Remove one of those props to fix this error.'
+  );
+});
 
 Cypress.Commands.add(
   'beforeMunicipalTests',
   (pageName: string, gmcode = 'GM0363') => {
     cy.swallowResizeObserverError();
-    return cy
-      .fixture<Municipal>(`${gmcode}.json`)
+
+    cy.fixture<Municipal>(`${gmcode}.json`)
       .as('municipalData')
       .visit(`/gemeente/${gmcode}/${pageName}`);
+
+    cy.checkHeadings();
   }
 );
 
 Cypress.Commands.add('beforeNationalTests', (pageName: string) => {
   cy.swallowResizeObserverError();
-  return cy
-    .fixture<National>('NL.json')
+
+  cy.fixture<National>('NL.json')
     .as('nationalData')
     .visit(`/landelijk/${pageName}`);
+
+  cy.checkHeadings();
 });
 
 Cypress.Commands.add(
   'beforeRegionTests',
   (pageName: string, vrcode = 'VR13') => {
     cy.swallowResizeObserverError();
-    return cy
-      .fixture<Regionaal>(`${vrcode}.json`)
+
+    cy.fixture<Regionaal>(`${vrcode}.json`)
       .as('regionData')
       .visit(`/veiligheidsregio/${vrcode}/${pageName}`);
+
+    cy.checkHeadings();
   }
 );
 
