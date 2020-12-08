@@ -131,6 +131,138 @@
       }
     }
   },
+
+  "thuiswonende_ouderen": {
+    "titel_sidebar": "Thuiswonende ouderen",
+    "titel_kpi": "Aantal positief geteste mensen",
+
+    "metadata": {
+      "title": "Thuiswonende ouderen | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Thuiswonende ouderen."
+    },
+
+    "section_positive_tested": {
+      "title": "Thuiswonende ouderen - nieuwe besmettingen",
+      "description": "Korte toelichting die de definitie van thuiswonende ouderen uitlegt. Eventueel met een link naar de [cijferverantwoording](#).",
+
+      "reference": {
+        "href": "/verantwoording#thuiswonende-ouderen",
+        "text": "Lees meer in de cijferverantwoording."
+      },
+
+      "bronnen": {
+        "rivm": {
+          "href": "#",
+          "text": "RIVM",
+          "download": "#"
+        }
+      },
+
+      "kpi_daily_title": "Dagelijks nieuw gemelde besmettingen onder thuiswonende ouderen",
+      "kpi_daily_description": "Dit getal laat zien van hoeveel thuiswonende ouderen gemeld is dat ze positief getest zijn en COVID-19 hebben. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.",
+
+      "kpi_daily_per_100k_title": "Aantal dagelijks gemelde besmettingen per 100.000 thuiswonende ouderen",
+      "kpi_daily_per_100k_description": "Dit getal laat zien welke deel van de thuiswonende ouderen positief getest is op COVID-19.",
+
+      "line_chart_daily_title": "Aantal dagelijks nieuwe besmette thuiswonende ouders",
+
+      "choropleth_daily_title": "Verdeling nieuwe besmette thuiswonende ouderen",
+      "choropleth_daily_description": "Deze grafieken laten zien hoe de verdeling van hoeveel thuiswonende ouderen per 1.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
+      "choropleth_daily_legenda": "Aantal per 100.000 inwoners",
+
+      "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt."
+    },
+
+    "section_deceased": {
+      "title": "Thuiswonende ouderen - sterfte",
+      "description": "Aantal overleden bewoners in gehandicatenzorg locaties met een vastgestelde COVID-19-besmetting per dag.",
+
+      "reference": {
+        "href": "/verantwoording#thuiswonende-ouderen",
+        "text": "Lees meer in de cijferverantwoording."
+      },
+
+      "bronnen": {
+        "rivm": {
+          "href": "#",
+          "text": "RIVM",
+          "download": "#"
+        }
+      },
+
+      "kpi_daily_title": "Dagelijks aantal overleden bewoners",
+      "kpi_daily_description": "Dit getal is een inschatting van het aantal gemelde bewoners in de gehandicatenzorg dat in Nederland overlijdt aan de gevolgen van het nieuwe coronavirus.",
+
+      "line_chart_daily_title": "Dagelijks aantal overleden bewoners over tijd",
+
+      "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt."
+    }
+  },
+
+  "veiligheidsregio_thuiswonende_ouderen": {
+    "titel_sidebar": "Thuiswonende ouderen",
+    "titel_kpi": "Patiënten met eerste melding van COVID-19 klachten bij de huisarts",
+
+    "metadata": {
+      "title": "Thuiswonende ouderen in {{safetyRegion}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Thuiswonende ouderen in {{safetyRegion}}."
+    },
+
+    "section_positive_tested": {
+      "title": "Thuiswonende ouderen in {{safetyRegion}} - nieuwe besmettingen",
+      "description": "Korte toelichting die de definitie van thuiswonende ouderen uitlegt.",
+
+      "reference": {
+        "href": "/verantwoording#thuiswonende-ouderen",
+        "text": "Lees meer in de cijferverantwoording."
+      },
+
+      "bronnen": {
+        "rivm": {
+          "href": "#",
+          "text": "RIVM",
+          "download": "#"
+        }
+      },
+
+      "kpi_daily_title": "Dagelijks nieuw gemelde besmettingen onder thuiswonende ouderen",
+      "kpi_daily_description": "Dit getal laat zien van hoeveel thuiswonende ouderen gemeld is dat ze positief getest zijn en COVID-19 hebben. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.",
+
+      "kpi_daily_per_100k_title": "Aantal dagelijks gemelde besmettingen per 1.000 thuiswonende ouderen",
+      "kpi_daily_per_100k_description": "Dit getal laat zien welke percentage van de thuiswonende ouderen positief getest is op covid-19.",
+
+      "line_chart_daily_title": "Aantal dagelijks nieuwe besmette thuiswonende ouders",
+
+      "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt."
+    },
+
+    "section_deceased": {
+      "title": "Thuiswonende ouderen in {{safetyRegion}} - sterfte",
+      "description": "Korte toelichting die de definitie van thuiswonende ouderen uitlegt.",
+
+
+      "reference": {
+        "href": "/verantwoording#thuiswonende-ouderen",
+        "text": "Lees meer in de cijferverantwoording."
+      },
+
+      "bronnen": {
+        "rivm": {
+          "href": "#",
+          "text": "RIVM",
+          "download": "#"
+        }
+      },
+
+      "kpi_daily_title": "Dagelijks aantal overleden bewoners",
+      "kpi_daily_description": "Dit getal is een inschatting van het aantal gemelde bewoners in de gehandicatenzorg dat in Nederland overlijdt aan de gevolgen van het nieuwe coronavirus.",
+
+      "line_chart_daily_title": "Dagelijks aantal overleden bewoners over tijd",
+
+      "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt."
+    }
+  },
+
   "ziekenhuisopnames_per_dag": {
     "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
     "bron": {
@@ -659,6 +791,10 @@
       {
         "cijfer": "Open source data processing",
         "verantwoording": "This dashboard was developed in a short amount of time. So far, we have therefore not been able to publish the code for inputting the data and constructing the .JSON files. However, this will be done soon. The web application code was published on [Github](https://github.com/minvws/nl-covid19-data-dashboard) on 5 June 2020. The [data calculations](https://github.com/minvws/nl-covid19-data-backend-processing) are available via Github as well."
+      },
+      {
+        "cijfer": "Thuiswonende 70 plussers",
+        "verantwoording": ""
       },
       {
         "cijfer": "",

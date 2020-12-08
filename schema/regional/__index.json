@@ -13,6 +13,7 @@
     "sewer",
     "sewer_per_installation",
     "difference",
+    "elderly_at_home",
     "disability_care"
   ],
   "additionalProperties": false,
@@ -58,6 +59,9 @@
     },
     "behavior": {
       "$ref": "behavior.json"
+    },
+    "elderly_at_home": {
+      "$ref": "elderly_at_home.json"
     }
   }
 }
