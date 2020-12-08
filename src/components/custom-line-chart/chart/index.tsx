@@ -5,6 +5,7 @@ import { AxisLeft, AxisBottom } from '@visx/axis';
 import { GridRows } from '@visx/grid';
 import { Group } from '@visx/group';
 import { Line } from '@visx/shape';
+import { Text } from '@visx/text';
 
 import { colors } from '~/style/theme';
 import Trends from './trends';
@@ -83,14 +84,20 @@ function Chart({
         />
 
         {benchmark && (
-          <>
+          <Group top={y(benchmark.value)}>
+            <Text fontSize="14px" dy={-8}>
+              {benchmark.value}
+            </Text>
+            <Text fontSize="14px" dy={-8} dx={bounded.width} textAnchor="end">
+              {benchmark.label}
+            </Text>
             <Line
               stroke="black"
               strokeDasharray="4,3"
-              from={{ x: 0, y: y(benchmark.value) }}
-              to={{ x: bounded.width, y: y(benchmark.value) }}
+              from={{ x: 0, y: 0 }}
+              to={{ x: bounded.width, y: 0 }}
             />
-          </>
+          </Group>
         )}
 
         <Trends

@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react';
 import { useTooltip, Tooltip, defaultStyles } from '@visx/tooltip';
-import { extent } from 'd3-array';
+import { extent, max } from 'd3-array';
 import { Box } from '~/components-styled/base';
 import Chart from './chart';
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
@@ -53,7 +53,7 @@ ThresholdProps) {
   const xDomain = useMemo(() => extent(graphData.map((d) => d.date)), [
     graphData,
   ]);
-  const yDomain = useMemo(() => extent(graphData.map((d) => d.value)), [
+  const yDomain = useMemo(() => [0, max(graphData.map((d) => d.value))], [
     graphData,
   ]);
 
