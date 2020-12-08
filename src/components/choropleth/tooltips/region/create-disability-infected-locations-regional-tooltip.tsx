@@ -1,13 +1,13 @@
 import { ReactNode } from 'react';
-import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
-import { RegionsNursingHome } from '~/types/data';
+import { RegionsDisabilityCare } from '~/types/data';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { RegionSelectionHandler } from '../../select-handlers/create-select-region-handler';
 import { SafetyRegionProperties } from '../../shared';
+import { TooltipContent } from '../tooltipContent';
 
-export const createInfectedLocationsRegionalTooltip = (
+export const createDisablityInfectedLocationsRegionalTooltip = (
   selectHandler: RegionSelectionHandler
-) => (context: SafetyRegionProperties & RegionsNursingHome): ReactNode => {
+) => (context: SafetyRegionProperties & RegionsDisabilityCare): ReactNode => {
   const onSelect = (event: any) => {
     event.stopPropagation();
     selectHandler(context);

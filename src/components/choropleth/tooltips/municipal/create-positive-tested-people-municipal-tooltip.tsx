@@ -1,20 +1,17 @@
-import { NextRouter } from 'next/router';
 import { ReactNode } from 'react';
-import { MunicipalityProperties } from '../../shared';
-import { createSelectMunicipalHandler } from '../../select-handlers/create-select-municipal-handler';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import siteText from '~/locale/index';
 import { MunicipalitiesPositiveTestedPeople } from '~/types/data';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { MunicipalitySelectionHandler } from '../../select-handlers/create-select-municipal-handler';
+import { MunicipalityProperties } from '../../shared';
 const text = siteText.common.tooltip;
 
 export const createPositiveTestedPeopleMunicipalTooltip = (
-  router: NextRouter
+  selectHandler?: MunicipalitySelectionHandler
 ) => (
   context: MunicipalityProperties & MunicipalitiesPositiveTestedPeople
 ): ReactNode => {
-  const onSelectHandler = createSelectMunicipalHandler(router);
-
   const {
     gemnaam,
     positive_tested_people,
@@ -23,7 +20,9 @@ export const createPositiveTestedPeopleMunicipalTooltip = (
 
   const onSelect = (event: any) => {
     event.stopPropagation();
-    onSelectHandler(context);
+    if (selectHandler) {
+      selectHandler(context);
+    }
   };
 
   return (

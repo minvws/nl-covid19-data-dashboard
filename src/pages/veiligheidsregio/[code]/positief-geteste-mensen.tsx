@@ -163,7 +163,9 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           highlightSelection={false}
           metricName="positive_tested_people"
           metricProperty="positive_tested_people"
-          tooltipContent={createPositiveTestedPeopleMunicipalTooltip(router)}
+          tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
+            createSelectMunicipalHandler(router)
+          )}
           onSelect={createSelectMunicipalHandler(router)}
         />
       </ChoroplethTile>

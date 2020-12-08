@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import Getest from '~/assets/test.svg';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { ContentHeader } from '~/components-styled/content-header';
@@ -9,7 +8,6 @@ import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
-import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
 import { FCWithLayout } from '~/components/layout';
 import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
@@ -26,7 +24,6 @@ const text = siteText.gemeente_positief_geteste_personen;
 
 const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
   const { data, municipalityName } = props;
-  const router = useRouter();
   const positivelyTestedPeople = data.positive_tested_people;
 
   return (
@@ -89,19 +86,17 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
         </KpiTile>
       </TwoKpiSection>
 
-      {positivelyTestedPeople && (
-        <LineChartTile
-          title={text.linechart_titel}
-          description={text.linechart_toelichting}
-          values={positivelyTestedPeople.values.map((value) => ({
-            value: value.infected_daily_increase,
-            date: value.date_of_report_unix,
-          }))}
-          metadata={{
-            source: text.bronnen.rivm,
-          }}
-        />
-      )}
+      <LineChartTile
+        title={text.linechart_titel}
+        description={text.linechart_toelichting}
+        values={positivelyTestedPeople.values.map((value) => ({
+          value: value.infected_daily_increase,
+          date: value.date_of_report_unix,
+        }))}
+        metadata={{
+          source: text.bronnen.rivm,
+        }}
+      />
 
       <ChoroplethTile
         title={replaceVariablesInText(text.map_titel, {
@@ -122,8 +117,7 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
           selected={data.code}
           metricName="positive_tested_people"
           metricProperty="positive_tested_people"
-          tooltipContent={createPositiveTestedPeopleMunicipalTooltip(router)}
-          onSelect={createSelectMunicipalHandler(router)}
+          tooltipContent={createPositiveTestedPeopleMunicipalTooltip()}
         />
       </ChoroplethTile>
     </>

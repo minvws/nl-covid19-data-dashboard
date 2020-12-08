@@ -9,11 +9,11 @@
     "name",
     "code",
     "escalation_levels",
-    "hospital_admissions",
     "positive_tested_people",
     "deceased",
     "nursing_home",
-    "sewer"
+    "sewer",
+    "disability_care"
   ],
   "properties": {
     "last_generated": {
@@ -61,6 +61,14 @@
       "maxItems": 25,
       "items": {
         "$ref": "nursing_home.json"
+      }
+    },
+    "disability_care": {
+      "type": "array",
+      "minItems": 25,
+      "maxItems": 25,
+      "items": {
+        "$ref": "disability_care.json"
       }
     },
     "sewer": {
