@@ -1,6 +1,6 @@
 import CoronaVirus from '~/assets/coronavirus.svg';
+import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
 import Locatie from '~/assets/locaties.svg';
-import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
@@ -49,7 +49,7 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
         title={replaceVariablesInText(positiveTestPeopleText.titel, {
           safetyRegion: safetyRegionName,
         })}
-        icon={<Verpleeghuiszorg />}
+        icon={<Gehandicaptenzorg />}
         subtitle={replaceVariablesInText(
           positiveTestPeopleText.pagina_toelichting,
           {

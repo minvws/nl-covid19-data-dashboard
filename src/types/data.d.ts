@@ -11,7 +11,7 @@ export interface Municipal {
   name: string;
   code: string;
   difference: MunicipalDifference;
-  hospital_admissions: MunicipalHospitalAdmissions;
+  hospital_admissions?: MunicipalHospitalAdmissions;
   positive_tested_people: MunicipalPositiveTestedPeople;
   sewer?: MunicipalSewer;
   sewer_per_installation?: MunicipalSewerPerInstallation;
@@ -141,6 +141,7 @@ export interface National {
   behavior?: NationalBehavior;
   deceased_rivm: NationalDeceasedRivm;
   deceased_cbs: NationalDeceasedCbs;
+  elderly_at_home: NationalElderlyAtHome;
 }
 export interface NationalDifference {
   infected_people_delta_normalized__infected_daily_increase?: DifferenceDecimal;
@@ -421,14 +422,14 @@ export interface NationalBehaviorValue {
   work_from_home_compliance_trend: ("up" | "down" | "equal") | null;
   avoid_crowds_compliance: number | null;
   avoid_crowds_compliance_trend: ("up" | "down" | "equal") | null;
-  symptoms_stay_home_compliance: number | null;
-  symptoms_stay_home_compliance_trend: ("up" | "down" | "equal") | null;
-  symptoms_get_tested_compliance: number | null;
-  symptoms_get_tested_compliance_trend: ("up" | "down" | "equal") | null;
+  symptoms_stay_home_compliance?: number | null;
+  symptoms_stay_home_compliance_trend?: ("up" | "down" | "equal") | null;
+  symptoms_get_tested_compliance?: number | null;
+  symptoms_get_tested_compliance_trend?: ("up" | "down" | "equal") | null;
   wear_mask_public_indoors_compliance: number | null;
   wear_mask_public_indoors_compliance_trend: ("up" | "down" | "equal") | null;
-  wear_mask_public_transport_compliance: number | null;
-  wear_mask_public_transport_compliance_trend: ("up" | "down" | "equal") | null;
+  wear_mask_public_transport_compliance?: number | null;
+  wear_mask_public_transport_compliance_trend?: ("up" | "down" | "equal") | null;
   sneeze_cough_elbow_compliance: number | null;
   sneeze_cough_elbow_compliance_trend: ("up" | "down" | "equal") | null;
   max_visitors_compliance: number | null;
@@ -441,10 +442,10 @@ export interface NationalBehaviorValue {
   work_from_home_support_trend: ("up" | "down" | "equal") | null;
   avoid_crowds_support: number | null;
   avoid_crowds_support_trend: ("up" | "down" | "equal") | null;
-  symptoms_stay_home_support: number | null;
-  symptoms_stay_home_support_trend: ("up" | "down" | "equal") | null;
-  symptoms_get_tested_support: number | null;
-  symptoms_get_tested_support_trend: ("up" | "down" | "equal") | null;
+  symptoms_stay_home_support?: number | null;
+  symptoms_stay_home_support_trend?: ("up" | "down" | "equal") | null;
+  symptoms_get_tested_support?: number | null;
+  symptoms_get_tested_support_trend?: ("up" | "down" | "equal") | null;
   wear_mask_public_indoors_support: number | null;
   wear_mask_public_indoors_support_trend: ("up" | "down" | "equal") | null;
   wear_mask_public_transport_support?: number | null;
@@ -478,6 +479,17 @@ export interface NationalDeceasedCbsValue {
   expected_max: number;
   week_start_unix: number;
   week_end_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NationalElderlyAtHome {
+  values: NationalElderlyAtHomeValue[];
+  last_value: NationalElderlyAtHomeValue;
+}
+export interface NationalElderlyAtHomeValue {
+  positive_tested_daily: number;
+  positive_tested_daily_per_100k: number;
+  deceased_daily: number;
+  date_of_report_unix: number;
   date_of_insertion_unix: number;
 }
 
@@ -568,6 +580,7 @@ export interface Regionaal {
   behavior?: RegionalBehavior;
   deceased_rivm: RegionalDeceasedRivm;
   deceased_cbs: RegionalDeceasedCbs;
+  elderly_at_home: RegionalElderlyAtHome;
 }
 export interface RegionalDifference {
   results_per_region__infected_increase_per_region?: DifferenceDecimal;
@@ -725,14 +738,14 @@ export interface RegionalBehaviorValue {
   work_from_home_compliance_trend: ("up" | "down" | "equal") | null;
   avoid_crowds_compliance: number | null;
   avoid_crowds_compliance_trend: ("up" | "down" | "equal") | null;
-  symptoms_stay_home_compliance: number | null;
-  symptoms_stay_home_compliance_trend: ("up" | "down" | "equal") | null;
-  symptoms_get_tested_compliance: number | null;
-  symptoms_get_tested_compliance_trend: ("up" | "down" | "equal") | null;
+  symptoms_stay_home_compliance?: number | null;
+  symptoms_stay_home_compliance_trend?: ("up" | "down" | "equal") | null;
+  symptoms_get_tested_compliance?: number | null;
+  symptoms_get_tested_compliance_trend?: ("up" | "down" | "equal") | null;
   wear_mask_public_indoors_compliance: number | null;
   wear_mask_public_indoors_compliance_trend: ("up" | "down" | "equal") | null;
-  wear_mask_public_transport_compliance: number | null;
-  wear_mask_public_transport_compliance_trend: ("up" | "down" | "equal") | null;
+  wear_mask_public_transport_compliance?: number | null;
+  wear_mask_public_transport_compliance_trend?: ("up" | "down" | "equal") | null;
   sneeze_cough_elbow_compliance: number | null;
   sneeze_cough_elbow_compliance_trend: ("up" | "down" | "equal") | null;
   max_visitors_compliance: number | null;
@@ -745,10 +758,10 @@ export interface RegionalBehaviorValue {
   work_from_home_support_trend: ("up" | "down" | "equal") | null;
   avoid_crowds_support: number | null;
   avoid_crowds_support_trend: ("up" | "down" | "equal") | null;
-  symptoms_stay_home_support: number | null;
-  symptoms_stay_home_support_trend: ("up" | "down" | "equal") | null;
-  symptoms_get_tested_support: number | null;
-  symptoms_get_tested_support_trend: ("up" | "down" | "equal") | null;
+  symptoms_stay_home_support?: number | null;
+  symptoms_stay_home_support_trend?: ("up" | "down" | "equal") | null;
+  symptoms_get_tested_support?: number | null;
+  symptoms_get_tested_support_trend?: ("up" | "down" | "equal") | null;
   wear_mask_public_indoors_support: number | null;
   wear_mask_public_indoors_support_trend: ("up" | "down" | "equal") | null;
   wear_mask_public_transport_support?: number | null;
@@ -786,19 +799,32 @@ export interface RegionalDeceasedCbsValue {
   week_end_unix: number;
   date_of_insertion_unix: number;
 }
+export interface RegionalElderlyAtHome {
+  values: RegionalElderlyAtHomeValue[];
+  last_value: RegionalElderlyAtHomeValue;
+}
+export interface RegionalElderlyAtHomeValue {
+  positive_tested_daily: number;
+  positive_tested_daily_per_100k: number;
+  deceased_daily: number;
+  date_of_report_unix: number;
+  date_of_insertion_unix: number;
+  vrcode: string;
+}
 
 export interface Regions {
   last_generated: string;
   proto_name: "REGIONS";
   name: string;
   code: string;
-  hospital_admissions: RegionHospitalAdmissions[];
+  hospital_admissions?: RegionHospitalAdmissions[];
   positive_tested_people: RegionPositiveTestedPeople[];
   escalation_levels: EscalationLevels[];
   nursing_home: RegionsNursingHome[];
   disability_care: RegionsDisabilityCare[];
   sewer: RegionsSewer[];
   behavior?: RegionsBehavior[];
+  elderly_at_home: RegionsElderlyAtHome[];
 }
 export interface RegionHospitalAdmissions {
   date_of_report_unix: number;
@@ -860,14 +886,14 @@ export interface RegionsBehavior {
   work_from_home_compliance_trend: ("up" | "down" | "equal") | null;
   avoid_crowds_compliance: number | null;
   avoid_crowds_compliance_trend: ("up" | "down" | "equal") | null;
-  symptoms_stay_home_compliance: number | null;
-  symptoms_stay_home_compliance_trend: ("up" | "down" | "equal") | null;
-  symptoms_get_tested_compliance: number | null;
-  symptoms_get_tested_compliance_trend: ("up" | "down" | "equal") | null;
+  symptoms_stay_home_compliance?: number | null;
+  symptoms_stay_home_compliance_trend?: ("up" | "down" | "equal") | null;
+  symptoms_get_tested_compliance?: number | null;
+  symptoms_get_tested_compliance_trend?: ("up" | "down" | "equal") | null;
   wear_mask_public_indoors_compliance: number | null;
   wear_mask_public_indoors_compliance_trend: ("up" | "down" | "equal") | null;
-  wear_mask_public_transport_compliance: number | null;
-  wear_mask_public_transport_compliance_trend: ("up" | "down" | "equal") | null;
+  wear_mask_public_transport_compliance?: number | null;
+  wear_mask_public_transport_compliance_trend?: ("up" | "down" | "equal") | null;
   sneeze_cough_elbow_compliance: number | null;
   sneeze_cough_elbow_compliance_trend: ("up" | "down" | "equal") | null;
   max_visitors_compliance: number | null;
@@ -880,10 +906,10 @@ export interface RegionsBehavior {
   work_from_home_support_trend: ("up" | "down" | "equal") | null;
   avoid_crowds_support: number | null;
   avoid_crowds_support_trend: ("up" | "down" | "equal") | null;
-  symptoms_stay_home_support: number | null;
-  symptoms_stay_home_support_trend: ("up" | "down" | "equal") | null;
-  symptoms_get_tested_support: number | null;
-  symptoms_get_tested_support_trend: ("up" | "down" | "equal") | null;
+  symptoms_stay_home_support?: number | null;
+  symptoms_stay_home_support_trend?: ("up" | "down" | "equal") | null;
+  symptoms_get_tested_support?: number | null;
+  symptoms_get_tested_support_trend?: ("up" | "down" | "equal") | null;
   wear_mask_public_indoors_support: number | null;
   wear_mask_public_indoors_support_trend: ("up" | "down" | "equal") | null;
   wear_mask_public_transport_support?: number | null;
@@ -895,4 +921,12 @@ export interface RegionsBehavior {
   week_start_unix: number;
   week_end_unix: number;
   date_of_insertion_unix: number;
+}
+export interface RegionsElderlyAtHome {
+  positive_tested_daily: number;
+  positive_tested_daily_per_100k: number;
+  deceased_daily: number;
+  date_of_report_unix: number;
+  date_of_insertion_unix: number;
+  vrcode: string;
 }

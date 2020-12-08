@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Arrow from '~/assets/arrow.svg';
+import ElderlyIcon from '~/assets/elderly.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
@@ -15,6 +16,7 @@ import {
 import { TitleWithIcon } from '~/components-styled/aside/title-with-icon';
 import { ComboBox } from '~/components/comboBox';
 import { DeceasedMetric } from '~/components/common/deceased-metric';
+import { ElderlyAtHomeMetric } from '~/components/common/elderly-at-home-metric';
 import { getLayout as getSiteLayout } from '~/components/layout';
 import { PositivelyTestedPeopleBarScale } from '~/components/veiligheidsregio/positive-tested-people-barscale';
 import { PositivelyTestedPeopleMetric } from '~/components/veiligheidsregio/positive-tested-people-metric';
@@ -266,6 +268,28 @@ function SafetyRegionLayout(
                           <span className="metric-wrapper">
                             <NursingHomeInfectedPeopleMetric
                               data={data.nursing_home.last_value}
+                            />
+                          </span>
+                        </a>
+                      </Link>
+                    </MetricMenuItem>
+
+                    <MetricMenuItem>
+                      <Link
+                        href={`/veiligheidsregio/${code}/thuiswonende-ouderen`}
+                      >
+                        <a
+                          className={getClassName(
+                            '/veiligheidsregio/[code]/thuiswonende-ouderen'
+                          )}
+                        >
+                          <TitleWithIcon
+                            icon={<ElderlyIcon />}
+                            title={siteText.thuiswonende_ouderen.titel_sidebar}
+                          />
+                          <span className="metric-wrapper">
+                            <ElderlyAtHomeMetric
+                              data={data.elderly_at_home.last_value}
                             />
                           </span>
                         </a>

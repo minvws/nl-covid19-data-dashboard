@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Arrow from '~/assets/arrow.svg';
 import Arts from '~/assets/arts.svg';
+import ElderlyIcon from '~/assets/elderly.svg';
 import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
 import Notification from '~/assets/notification.svg';
 import ReproIcon from '~/assets/reproductiegetal.svg';
@@ -19,6 +20,7 @@ import {
 } from '~/components-styled/aside/menu';
 import { TitleWithIcon } from '~/components-styled/aside/title-with-icon';
 import { DeceasedMetric } from '~/components/common/deceased-metric';
+import { ElderlyAtHomeMetric } from '~/components/common/elderly-at-home-metric';
 import { NursingHomeInfectedPeopleMetric } from '~/components/common/nursing-home-infected-people-metric';
 import { InfectiousPeopleMetric } from '~/components/landelijk/infectious-people-metric';
 import { IntakeHospitalBarScale } from '~/components/landelijk/intake-hospital-barscale';
@@ -353,6 +355,25 @@ function NationalLayout(props: NationalLayoutProps) {
                         <span className="metric-wrapper">
                           <NursingHomeInfectedPeopleMetric
                             data={data.disability_care.last_value}
+                          />
+                        </span>
+                      </a>
+                    </Link>
+                  </MetricMenuItem>
+                  <MetricMenuItem>
+                    <Link href="/landelijk/thuiswonende-ouderen">
+                      <a
+                        className={getClassName(
+                          '/landelijk/thuiswonende-ouderen'
+                        )}
+                      >
+                        <TitleWithIcon
+                          icon={<ElderlyIcon />}
+                          title={siteText.thuiswonende_ouderen.titel_sidebar}
+                        />
+                        <span className="metric-wrapper">
+                          <ElderlyAtHomeMetric
+                            data={data.elderly_at_home.last_value}
                           />
                         </span>
                       </a>
