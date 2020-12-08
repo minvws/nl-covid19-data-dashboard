@@ -4,4 +4,7 @@ export type PageName =
   | 'rioolwater'
   | 'gehandicaptenzorg';
 
-export type RegioPageName = PageName | 'verpleeghuiszorg';
+export type RegioPageName =
+  | PageName
+  | 'verpleeghuiszorg'
+  | 'thuiswonende-ouderen';
