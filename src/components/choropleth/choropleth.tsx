@@ -144,8 +144,8 @@ const ChoroplethMap: <T1, T2, T3>(
   return (
     <>
       <svg
-        width={width}
-        height={height}
+        width="100%"
+        height="100%"
         css={css({ display: 'block', bg: 'transparent' })}
         onMouseMove={createSvgMouseOverHandler(timeout, setTooltip)}
         onMouseOut={

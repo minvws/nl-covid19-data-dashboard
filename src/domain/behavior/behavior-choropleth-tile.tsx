@@ -49,13 +49,13 @@ export function BehaviorChoroplethTile() {
         </>
       }
       legend={{
-        thresholds: regionThresholds.behavior,
+        thresholds: regionThresholds.behavior.behavior,
         title: text.verdeling_in_nederland.legenda_titel,
       }}
     >
       <SafetyRegionChoropleth
         metricName="behavior"
-        metricValueName={metricValueName}
+        metricProperty={metricValueName}
         tooltipContent={(context: RegionsBehavior & SafetyRegionProperties) => {
           const onSelect = (event: React.MouseEvent) => {
             event.stopPropagation();

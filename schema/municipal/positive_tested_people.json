@@ -1,7 +1,7 @@
 {
   "definitions": {
-    "item": {
-      "title": "positive_tested_people_last_value",
+    "value": {
+      "title": "municipal_positive_tested_people_value",
       "type": "object",
       "additionalProperties": false,
       "required": [
@@ -45,11 +45,11 @@
     "values": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/item"
+        "$ref": "#/definitions/value"
       }
     },
     "last_value": {
-      "$ref": "#/definitions/item"
+      "$ref": "#/definitions/value"
     }
   }
 }

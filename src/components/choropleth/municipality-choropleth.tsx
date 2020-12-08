@@ -1,6 +1,7 @@
 import css from '@styled-system/css';
 import { Feature, MultiPolygon } from 'geojson';
 import { ReactNode, useCallback } from 'react';
+import { AspectRatio } from '~/components-styled/aspect-ratio';
 import { Choropleth } from './choropleth';
 import {
   useChartDimensions,
@@ -9,55 +10,69 @@ import {
   useMunicipalityData,
   useRegionMunicipalities,
 } from './hooks';
+import { getDataThresholds } from './legenda/utils';
 import { municipalThresholds } from './municipal-thresholds';
 import { Path } from './path';
 import { MunicipalityProperties, TMunicipalityMetricName } from './shared';
 import { countryGeo, municipalGeo, regionGeo } from './topology';
 
-export type TProps = {
-  metricName?: TMunicipalityMetricName;
+type MunicipalityChoroplethProps<T> = {
+  metricName: TMunicipalityMetricName;
+  metricProperty: string;
   selected?: string;
   highlightSelection?: boolean;
   onSelect?: (context: MunicipalityProperties) => void;
-  tooltipContent?: (context: MunicipalityProperties) => ReactNode;
-  isSelectorMap?: boolean;
+  tooltipContent?: (context: MunicipalityProperties & T) => ReactNode;
 };
 
 /**
  * This component renders a map of the Netherlands with the outlines of all the municipalities which
  * receive a fill color based on the specified Municipality metric data.
  *
- * The metricName specifies which exact metric is visualized. The color scale is calculated using
- * the specified metric and the given gradient.
+ * The metricName plus the metricProperty together specify which value is
+ * visualized. The color scale is calculated using the specified metric and the
+ * given gradient.
  *
  * When a selected municipal code is specified, the map will zoom in on the safety region to which
  * the associated municipality belongs and all surrounding features will be rendered in a faded manner.
  *
  * @param props
  */
-export function MunicipalityChoropleth(props: TProps) {
+export function MunicipalityChoropleth<T>(
+  props: MunicipalityChoroplethProps<T>
+) {
   const {
     selected,
     metricName,
+    metricProperty,
     onSelect,
     tooltipContent,
     highlightSelection = true,
-    isSelectorMap,
   } = props;
 
-  const [ref, dimensions] = useChartDimensions<HTMLDivElement>(1.2);
+  const ratio = 1.2;
+  const [ref, dimensions] = useChartDimensions<HTMLDivElement>(ratio);
 
   const [boundingbox] = useMunicipalityBoundingbox(regionGeo, selected);
 
-  const [getData, hasData] = useMunicipalityData(metricName, municipalGeo);
+  const { getChoroplethValue, hasData } = useMunicipalityData(
+    municipalGeo,
+    metricName,
+    metricProperty
+  );
 
   const safetyRegionMunicipalCodes = useRegionMunicipalities(selected);
 
-  const thresholdValues = metricName
-    ? municipalThresholds[metricName]
-    : undefined;
+  const thresholdValues = getDataThresholds(
+    municipalThresholds,
+    metricName,
+    metricProperty
+  );
 
-  const getFillColor = useChoroplethColorScale(getData, thresholdValues);
+  const getFillColor = useChoroplethColorScale(
+    getChoroplethValue,
+    thresholdValues
+  );
 
   const featureCallback = useCallback(
     (
@@ -77,9 +92,7 @@ export function MunicipalityChoropleth(props: TProps) {
           d={path}
           fill={hasData && fill ? fill : '#fff'}
           stroke={
-            isSelectorMap
-              ? '#01689b'
-              : selected
+            selected
               ? /**
                  * If `selected` eq true, the map is zoomed in on a VR. Render
                  * white strokes when we're rendering a municipality inside this
@@ -94,7 +107,7 @@ export function MunicipalityChoropleth(props: TProps) {
         />
       );
     },
-    [getFillColor, hasData, safetyRegionMunicipalCodes, selected, isSelectorMap]
+    [getFillColor, hasData, safetyRegionMunicipalCodes, selected]
   );
 
   const hoverCallback = useCallback(
@@ -114,31 +127,25 @@ export function MunicipalityChoropleth(props: TProps) {
           id={gemcode}
           key={gemcode}
           d={path}
-          stroke={isSelectorMap ? '#01689b' : isSelected ? '#000' : undefined}
+          stroke={isSelected ? '#000' : undefined}
           strokeWidth={isSelected ? 3 : undefined}
-          fill={isSelectorMap ? '#01689b' : undefined}
         />
       );
     },
-    [
-      selected,
-      highlightSelection,
-      safetyRegionMunicipalCodes,
-      hasData,
-      isSelectorMap,
-    ]
+    [selected, highlightSelection, safetyRegionMunicipalCodes, hasData]
   );
 
   const onClick = (id: string) => {
     if (onSelect) {
-      const data = getData(id);
-      onSelect(data as any);
+      const data = getChoroplethValue(id);
+      onSelect(data);
     }
   };
 
   const getTooltipContent = (id: string) => {
     if (tooltipContent) {
-      const data = getData(id);
+      const data = getChoroplethValue(id);
+
       return tooltipContent(data as any);
     }
     return null;
@@ -146,16 +153,18 @@ export function MunicipalityChoropleth(props: TProps) {
 
   return (
     <div ref={ref} css={css({ bg: 'transparent', position: 'relative' })}>
-      <Choropleth
-        featureCollection={municipalGeo}
-        hovers={hasData || isSelectorMap ? municipalGeo : undefined}
-        boundingBox={boundingbox || countryGeo}
-        dimensions={dimensions}
-        featureCallback={featureCallback}
-        hoverCallback={hoverCallback}
-        onPathClick={onClick}
-        getTooltipContent={getTooltipContent}
-      />
+      <AspectRatio ratio={1 / ratio}>
+        <Choropleth
+          featureCollection={municipalGeo}
+          hovers={hasData ? municipalGeo : undefined}
+          boundingBox={boundingbox || countryGeo}
+          dimensions={dimensions}
+          featureCallback={featureCallback}
+          hoverCallback={hoverCallback}
+          onPathClick={onClick}
+          getTooltipContent={getTooltipContent}
+        />
+      </AspectRatio>
     </div>
   );
 }

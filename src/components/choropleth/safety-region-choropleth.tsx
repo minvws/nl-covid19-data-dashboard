@@ -1,7 +1,8 @@
 import css from '@styled-system/css';
 import { Feature, MultiPolygon } from 'geojson';
 import { ReactNode, useCallback } from 'react';
-import { Regions } from '~/types/data';
+import { AspectRatio } from '~/components-styled/aspect-ratio';
+import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { Choropleth } from './choropleth';
 import {
   useChartDimensions,
@@ -9,69 +10,67 @@ import {
   useSafetyRegionBoundingbox,
   useSafetyRegionData,
 } from './hooks';
-import { getSelectedThreshold } from './legenda/utils';
+import { getDataThresholds } from './legenda/utils';
 import { Path } from './path';
 import { SafetyRegionProperties, TRegionMetricName } from './shared';
 import { countryGeo, regionGeo } from './topology';
 
-export type TProps<
-  T extends TRegionMetricName,
-  ItemType extends Regions[T][number],
-  ReturnType extends ItemType & { value: number },
-  TContext extends ReturnType | SafetyRegionProperties
-> = {
-  metricName?: T;
-  metricValueName?: string;
+type SafetyRegionChoroplethProps<T> = {
+  metricName: TRegionMetricName;
+  metricProperty: string;
   selected?: string;
   highlightSelection?: boolean;
-  onSelect?: (context: TContext) => void;
-  tooltipContent?: (context: TContext) => ReactNode;
+  onSelect?: (context: SafetyRegionProperties) => void;
+  tooltipContent?: (context: SafetyRegionProperties & T) => ReactNode;
+  isSelectorMap?: boolean;
 };
 
 /**
- * This component renders a map of the Netherlands with the outlines of all the safety regions which
- * receive a fill color based on the specified Region metric data.
+ * This component renders a map of the Netherlands with the outlines of all the
+ * safety regions which receive a fill color based on the specified Region
+ * metric data.
  *
- * The metricName specifies which exact metric is visualized. The color scale is calculated using
- * the specified metric and the given gradient.
- * An optional metricValueName can be provided as well, when the metric key isn't the same name
- * as the actual value name. Most of the time they are the same:
- * e.g. hospital_admissions.hospital_admissions
+ * The metricName plus the metricProperty together specify which value is
+ * visualized. The color scale is calculated using the specified metric and the
+ * given gradient.
  *
- * When a selected region code is specified, the map will zoom in on the safety region.
+ * When a selected region code is specified, the map will zoom in on the safety
+ * region.
  *
  * @param props
  */
-export function SafetyRegionChoropleth<
-  T extends TRegionMetricName,
-  ItemType extends Regions[T][number],
-  ReturnType extends ItemType & { value: number },
-  TContext extends ReturnType | SafetyRegionProperties
->(props: TProps<T, ItemType, ReturnType, TContext>) {
+export function SafetyRegionChoropleth<T>(
+  props: SafetyRegionChoroplethProps<T>
+) {
   const {
     selected,
     highlightSelection = true,
     metricName,
-    metricValueName,
+    metricProperty,
     onSelect,
     tooltipContent,
   } = props;
 
-  const [ref, dimensions] = useChartDimensions<HTMLDivElement>(1.2);
+  const ratio = 1.2;
+  const [ref, dimensions] = useChartDimensions<HTMLDivElement>(ratio);
 
   const boundingBox = useSafetyRegionBoundingbox(regionGeo, selected);
 
-  const [getData, hasData] = useSafetyRegionData(
-    metricName,
+  const { getChoroplethValue, hasData } = useSafetyRegionData(
     regionGeo,
-    metricValueName
+    metricName,
+    metricProperty
   );
 
-  const selectedThreshold = getSelectedThreshold(metricName, metricValueName);
+  const selectedThreshold = getDataThresholds(
+    regionThresholds,
+    metricName,
+    metricProperty
+  );
 
   const DEFAULT_FILL = 'white';
   const getFillColor = useChoroplethColorScale(
-    getData,
+    getChoroplethValue,
     selectedThreshold,
     DEFAULT_FILL
   );
@@ -116,14 +115,14 @@ export function SafetyRegionChoropleth<
 
   const onClick = (id: string) => {
     if (onSelect) {
-      const data = getData(id);
-      onSelect(data as any);
+      const data = getChoroplethValue(id);
+      onSelect(data);
     }
   };
 
   const getTooltipContent = (id: string) => {
     if (tooltipContent) {
-      const data = getData(id);
+      const data = getChoroplethValue(id);
       return tooltipContent(data as any);
     }
     return null;
@@ -131,16 +130,18 @@ export function SafetyRegionChoropleth<
 
   return (
     <div ref={ref} css={css({ position: 'relative', bg: 'transparent' })}>
-      <Choropleth
-        featureCollection={regionGeo}
-        hovers={hasData ? regionGeo : undefined}
-        boundingBox={boundingBox || countryGeo}
-        dimensions={dimensions}
-        featureCallback={featureCallback}
-        hoverCallback={hoverCallback}
-        onPathClick={onClick}
-        getTooltipContent={getTooltipContent}
-      />
+      <AspectRatio ratio={1 / ratio}>
+        <Choropleth
+          featureCollection={regionGeo}
+          hovers={hasData ? regionGeo : undefined}
+          boundingBox={boundingBox || countryGeo}
+          dimensions={dimensions}
+          featureCallback={featureCallback}
+          hoverCallback={hoverCallback}
+          onPathClick={onClick}
+          getTooltipContent={getTooltipContent}
+        />
+      </AspectRatio>
     </div>
   );
 }

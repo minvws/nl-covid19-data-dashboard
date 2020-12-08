@@ -26,20 +26,20 @@ import { PositiveTestedPeopleBarScale } from '~/components/landelijk/positive-te
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
-import siteText from '~/locale/index';
-import { NationalInfectedAgeGroups } from '~/types/data.d';
-import { formatNumber, formatPercentage } from '~/utils/formatNumber';
-import { replaceKpisInText } from '~/utils/replaceKpisInText';
-import { formatDateFromSeconds } from '~/utils/formatDate';
 import { AgeDemographic } from '~/domain/infected-people/age-demographic/age-demographic';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { formatAgeGroupRange } from '~/domain/infected-people/age-demographic/age-demographic-chart';
+import siteText from '~/locale/index';
 import {
   getNationalStaticProps,
   NationalPageProps,
 } from '~/static-props/nl-data';
 import { colors } from '~/style/theme';
+import { NationalInfectedAgeGroups } from '~/types/data.d';
 import { assert } from '~/utils/assert';
+import { formatDateFromSeconds } from '~/utils/formatDate';
+import { formatNumber, formatPercentage } from '~/utils/formatNumber';
+import { replaceKpisInText } from '~/utils/replaceKpisInText';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text = siteText.positief_geteste_personen;
 const ggdText = siteText.positief_geteste_personen_ggd;
@@ -85,7 +85,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
       />
       <ContentHeader
         category={siteText.nationaal_layout.headings.besmettingen}
-        screenreaderCategory={siteText.positief_geteste_personen.titel_sidebar}
+        screenReaderCategory={siteText.positief_geteste_personen.titel_sidebar}
         title={text.titel}
         icon={<Getest />}
         subtitle={text.pagina_toelichting}
@@ -164,7 +164,8 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
         onChangeControls={setSelectedMap}
         legend={{
           title: text.chloropleth_legenda.titel,
-          thresholds: regionThresholds.positive_tested_people,
+          thresholds:
+            regionThresholds.positive_tested_people.positive_tested_people,
         }}
       >
         {/**
@@ -181,14 +182,20 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
         {selectedMap === 'municipal' && (
           <MunicipalityChoropleth
             metricName="positive_tested_people"
-            tooltipContent={createPositiveTestedPeopleMunicipalTooltip(router)}
+            metricProperty="positive_tested_people"
+            tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
+              createSelectMunicipalHandler(router)
+            )}
             onSelect={createSelectMunicipalHandler(router)}
           />
         )}
         {selectedMap === 'region' && (
           <SafetyRegionChoropleth
             metricName="positive_tested_people"
-            tooltipContent={createPositiveTestedPeopleRegionalTooltip(router)}
+            metricProperty="positive_tested_people"
+            tooltipContent={createPositiveTestedPeopleRegionalTooltip(
+              createSelectRegionHandler(router)
+            )}
             onSelect={createSelectRegionHandler(router)}
           />
         )}

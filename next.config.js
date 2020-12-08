@@ -48,7 +48,12 @@ const nextConfig = {
       },
     });
 
-    config.plugins.push(new LodashModuleReplacementPlugin());
+    config.plugins.push(
+      new LodashModuleReplacementPlugin({
+        // See https://github.com/lodash/lodash-webpack-plugin#feature-sets
+        paths: true,
+      })
+    );
 
     // if (!dev) {
     //   // Move Preact into the framework chunk instead of duplicating in routes:

@@ -32,7 +32,7 @@ const IntakeIntensiveCare: FCWithLayout<NationalPageProps> = (props) => {
       />
       <ContentHeader
         category={siteText.nationaal_layout.headings.ziekenhuizen}
-        screenreaderCategory={siteText.ic_opnames_per_dag.titel_sidebar}
+        screenReaderCategory={siteText.ic_opnames_per_dag.titel_sidebar}
         title={text.titel}
         icon={<Arts />}
         subtitle={text.pagina_toelichting}
