@@ -8,8 +8,7 @@
     "proto_name",
     "name",
     "code",
-    "positive_tested_people",
-    "deceased"
+    "positive_tested_people"
   ],
   "properties": {
     "last_generated": {
@@ -39,13 +38,6 @@
       "maxItems": 355,
       "items": {
         "$ref": "positive_tested_people.json"
-      }
-    },
-    "deceased": {
-      "type": "array",
-      "maxItems": 355,
-      "items": {
-        "$ref": "deceased.json"
       }
     }
   }

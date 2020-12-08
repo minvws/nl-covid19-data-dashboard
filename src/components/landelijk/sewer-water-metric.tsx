@@ -6,7 +6,7 @@ import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text = siteText.common.metricKPI;
-const title = siteText.rioolwater_metingen.titel_kpi;
+const title = siteText.rioolwater_metingen.kpi_titel;
 
 export function SewerWaterMetric(props: { data: NationalSewer }) {
   const { data } = props;
