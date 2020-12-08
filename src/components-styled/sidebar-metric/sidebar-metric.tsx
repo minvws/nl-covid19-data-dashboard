@@ -70,8 +70,8 @@ export function SidebarMetric<T extends { difference: unknown }>({
   );
   const commonText = siteText.common.metricKPI;
 
-  const title = get(siteText, [localeTextKey, 'titel_kpi']);
-  assert(title, `Missing title at ${localeTextKey}.titel_kpi`);
+  const title = get(siteText, [localeTextKey, 'kpi_titel']);
+  assert(title, `Missing title at ${localeTextKey}.kpi_titel`);
 
   const description = config.isWeeklyData
     ? replaceVariablesInText(commonText.dateRangeOfReport, {

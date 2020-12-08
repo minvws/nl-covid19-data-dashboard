@@ -173,8 +173,8 @@ function SafetyRegionLayout(
                             metricName="results_per_region"
                             metricProperty="total_reported_increase_per_region"
                             altBarScaleMetric={{
-                              metricName: 'infected_people_delta_normalized',
-                              metricProperty: 'infected_daily_increase',
+                              metricName: 'results_per_region',
+                              metricProperty: 'infected_increase_per_region',
                             }}
                             localeTextKey="veiligheidsregio_positief_geteste_personen"
                             differenceKey="results_per_region__total_reported_increase_per_region"

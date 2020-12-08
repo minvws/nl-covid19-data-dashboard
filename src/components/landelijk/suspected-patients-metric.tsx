@@ -6,7 +6,7 @@ import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text = siteText.common.metricKPI;
-const title = siteText.verdenkingen_huisartsen.titel_kpi;
+const title = siteText.verdenkingen_huisartsen.kpi_titel;
 
 export function SuspectedPatientsMetric(props: {
   data: NationalHuisartsVerdenkingenValue | undefined;
