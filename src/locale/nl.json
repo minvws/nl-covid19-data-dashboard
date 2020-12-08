@@ -1621,7 +1621,7 @@
       "title": "Positief geteste bewoners gehandicaptenzorglocaties | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Landelijk overzicht van het aantal bewoners van gehandicaptenzorglocaties die positief getest zijn en COVID-19 hebben."
     },
-    "titel_kpi": "Aantal positief geteste bewoners van gehandicapteninstellingen per dag",
+    "kpi_titel": "Aantal positief geteste bewoners van gehandicapteninstellingen per dag",
     "reference": {
       "href": "/verantwoording#gehandicaptenzorg",
       "text": "Lees meer in de cijferverantwoording."
@@ -1648,7 +1648,7 @@
       "title": "Overleden bewoners gehandicaptenzorglocaties | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Landelijk aantal gemelde gehandicaptenzorglocatiebewoners dat in Nederland overlijdt aan de gevolgen van het coronavirus."
     },
-    "titel_kpi": "Aantal overleden personen",
+    "kpi_titel": "Aantal overleden personen",
     "reference": {
       "href": "/verantwoording#gehandicaptenzorg",
       "text": "Lees meer in de cijferverantwoording."
@@ -1752,7 +1752,7 @@
   },
   "thuiswonende_ouderen": {
     "titel_sidebar": "Thuiswonende 70-plussers",
-    "titel_kpi": "Aantal positief geteste mensen",
+    "kpi_titel": "Aantal positief geteste mensen",
     "metadata": {
       "title": "Thuiswonende ouderen | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Thuiswonende ouderen."
@@ -1803,7 +1803,7 @@
   },
   "veiligheidsregio_thuiswonende_ouderen": {
     "titel_sidebar": "Thuiswonende 70-plussers",
-    "titel_kpi": "Patiënten met eerste melding van COVID-19 klachten bij de huisarts",
+    "kpi_titel": "Patiënten met eerste melding van COVID-19 klachten bij de huisarts",
     "metadata": {
       "title": "Thuiswonende 70-plussers in {{safetyRegion}} | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Thuiswonende 70-plussers in {{safetyRegion}}."
@@ -1851,7 +1851,7 @@
   },
   "sterfte": {
     "titel_sidebar": "Sterfte",
-    "titel_kpi": "Aantal overledenen per dag",
+    "kpi_titel": "Aantal overledenen per dag",
     "metadata": {
       "title": "Sterfte | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Aantal overledenen per dag"
@@ -1880,7 +1880,7 @@
   },
   "veiligheidsregio_sterfte": {
     "titel_sidebar": "Sterfte",
-    "titel_kpi": "Aantal overledenen per dag",
+    "kpi_titel": "Aantal overledenen per dag",
     "metadata": {
       "title": "Sterfte in {{safetyRegion}} | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Aantal overledenen per dag in {{safetyRegion}}"

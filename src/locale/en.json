@@ -1621,7 +1621,7 @@
       "title": "Confirmed cases of disability care home residents | Dashboard Coronavirus | Government.nl",
       "description": "National overview of the number of confirmed cases of disability care home residents for COVID-19."
     },
-    "titel_kpi": "Disability care homes - daily confirmed cases (residents)",
+    "kpi_titel": "Disability care homes - daily confirmed cases (residents)",
     "reference": {
       "href": "/verantwoording#disability-care-homes",
       "text": "Read more in the explanation of the presented data."
@@ -1648,7 +1648,7 @@
       "title": "Deceased residents of disability care homes | Dashboard Coronavirus | Government.nl",
       "description": "Total number of confirmed cases in disability care homes in the Netherlands that died from COVID-19"
     },
-    "titel_kpi": "Number of deceased residents",
+    "kpi_titel": "Number of deceased residents",
     "reference": {
       "href": "/verantwoording#disability-care-homes",
       "text": "Read more in explantion of the data presented"
@@ -1752,7 +1752,7 @@
   },
   "thuiswonende_ouderen": {
     "titel_sidebar": "People over 70 living at home",
-    "titel_kpi": "",
+    "kpi_titel": "",
     "metadata": {
       "title": "",
       "description": ""
@@ -1803,7 +1803,7 @@
   },
   "veiligheidsregio_thuiswonende_ouderen": {
     "titel_sidebar": "People over 70 living at home",
-    "titel_kpi": "",
+    "kpi_titel": "",
     "metadata": {
       "title": "Over-70s living at home in {{safetyRegion}} I Dashboard Coronvirus I Rijksoverheid.nl",
       "description": "Over-70s living at home in {{safetyRegion}}"
@@ -1851,7 +1851,7 @@
   },
   "sterfte": {
     "titel_sidebar": "",
-    "titel_kpi": "",
+    "kpi_titel": "",
     "metadata": {
       "title": "",
       "description": ""
@@ -1880,7 +1880,7 @@
   },
   "veiligheidsregio_sterfte": {
     "titel_sidebar": "",
-    "titel_kpi": "",
+    "kpi_titel": "",
     "metadata": {
       "title": "",
       "description": ""
