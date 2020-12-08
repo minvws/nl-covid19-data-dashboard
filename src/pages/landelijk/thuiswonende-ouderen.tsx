@@ -35,7 +35,7 @@ const ElderlyAtHomeNationalPage: FCWithLayout<NationalPageProps> = (props) => {
 
       <ContentHeader
         category={siteText.nationaal_layout.headings.kwetsbare_groepen}
-        screenreaderCategory={siteText.thuiswonende_ouderen.titel_sidebar}
+        screenReaderCategory={siteText.thuiswonende_ouderen.titel_sidebar}
         title={text.section_positive_tested.title}
         icon={<ElderlyIcon />}
         subtitle={text.section_positive_tested.description}
@@ -98,14 +98,17 @@ const ElderlyAtHomeNationalPage: FCWithLayout<NationalPageProps> = (props) => {
           source: text.section_positive_tested.bronnen.rivm,
         }}
         legend={{
-          thresholds: regionThresholds.elderly_at_home,
+          thresholds:
+            regionThresholds.elderly_at_home.positive_tested_daily_per_100k,
           title: text.section_positive_tested.choropleth_daily_legenda,
         }}
       >
         <SafetyRegionChoropleth
           metricName="elderly_at_home"
-          metricValueName="positive_tested_daily"
-          tooltipContent={createRegionElderlyAtHomeTooltip(router)}
+          metricProperty="positive_tested_daily_per_100k"
+          tooltipContent={createRegionElderlyAtHomeTooltip(
+            createSelectRegionHandler(router, 'thuiswonende-ouderen')
+          )}
           onSelect={createSelectRegionHandler(router, 'thuiswonende-ouderen')}
         />
       </ChoroplethTile>

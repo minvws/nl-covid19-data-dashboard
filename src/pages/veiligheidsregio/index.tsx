@@ -14,7 +14,8 @@ import { SEOHead } from '~/components/seoHead';
 import { TALLLanguages } from '~/locale/index';
 import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
 
-const escalationThresholds = regionThresholds.escalation_levels;
+const escalationThresholds =
+  regionThresholds.escalation_levels.escalation_level;
 
 interface EscalationMapLegendaProps {
   text: TALLLanguages;
@@ -83,9 +84,11 @@ const SafetyRegion: FCWithLayout<any> = (props) => {
         <div className="choropleth-chart">
           <SafetyRegionChoropleth
             metricName="escalation_levels"
-            metricValueName="escalation_level"
+            metricProperty="escalation_level"
             onSelect={createSelectRegionHandler(router)}
-            tooltipContent={escalationTooltip(router)}
+            tooltipContent={escalationTooltip(
+              createSelectRegionHandler(router)
+            )}
           />
         </div>
 

@@ -1,5 +1,7 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
+import siteText from '~/locale/index';
+import { VisuallyHidden } from './visually-hidden';
 
 interface Option<T extends string> {
   value: T;
@@ -41,7 +43,14 @@ export function Select<T extends string>({
         ))}
       </StyledSelect>
 
-      {onClear && value && <ClearButton onClick={() => onClear && onClear()} />}
+      {onClear && value && (
+        <ClearButton
+          onClick={() => onClear && onClear()}
+          title={siteText.common.clear_select_input}
+        >
+          <VisuallyHidden>{siteText.common.clear_select_input}</VisuallyHidden>
+        </ClearButton>
+      )}
     </Container>
   );
 }

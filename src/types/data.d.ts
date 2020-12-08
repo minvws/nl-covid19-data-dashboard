@@ -46,10 +46,10 @@ export interface HospitalAdmissionsLastValue {
   date_of_insertion_unix: number;
 }
 export interface MunicipalPositiveTestedPeople {
-  values: PositiveTestedPeopleLastValue[];
-  last_value: PositiveTestedPeopleLastValue;
+  values: MunicipalPositiveTestedPeopleValue[];
+  last_value: MunicipalPositiveTestedPeopleValue;
 }
-export interface PositiveTestedPeopleLastValue {
+export interface MunicipalPositiveTestedPeopleValue {
   date_of_report_unix: number;
   gmcode: string;
   municipality_name: string;
@@ -133,7 +133,7 @@ export interface National {
   infected_people_clusters?: InfectedPeopleClusters;
   infected_people_total: NationalInfectedPeopleTotal;
   infected_people_delta_normalized: InfectedPeopleDeltaNormalized;
-  intake_share_age_groups: IntakeShareAgeGroups;
+  infected_age_groups: NationalInfectedAgeGroups;
   reproduction_index: ReproductionIndex;
   reproduction_index_last_known_average: ReproductionIndexLastKnownAverage;
   infectious_people_last_known_average: InfectiousPeopleLastKnownAverage;
@@ -143,6 +143,7 @@ export interface National {
   intensive_care_beds_occupied: IntensiveCareBedsOccupied;
   ggd: NationalGgd;
   nursing_home: NationalNursingHome;
+  disability_care: NationalDisabilityCare;
   restrictions?: NationalRestrictions;
   behavior?: NationalBehavior;
   elderly_at_home: NationalElderlyAtHome;
@@ -257,13 +258,13 @@ export interface InfectedPeopleDeltaNormalizedLastValue {
   date_of_report_unix: number;
   date_of_insertion_unix: number;
 }
-export interface IntakeShareAgeGroups {
-  values: IntakeShareAgeGroupsLastValue[];
-  last_value: IntakeShareAgeGroupsLastValue;
+export interface NationalInfectedAgeGroups {
+  values: NationalInfectedAgeGroupsValue[];
 }
-export interface IntakeShareAgeGroupsLastValue {
-  agegroup: string;
-  infected_per_agegroup_increase: number;
+export interface NationalInfectedAgeGroupsValue {
+  age_group_range: string;
+  infected_percentage: number;
+  age_group_percentage: number;
   date_of_report_unix: number;
   date_of_insertion_unix: number;
 }
@@ -366,6 +367,19 @@ export interface NationalNursingHome {
   last_value: NationalNursingHomeValue;
 }
 export interface NationalNursingHomeValue {
+  newly_infected_people: number;
+  deceased_daily: number;
+  newly_infected_locations: number;
+  infected_locations_total: number;
+  infected_locations_percentage: number;
+  date_of_report_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NationalDisabilityCare {
+  values: NationalDisabilityCareValue[];
+  last_value: NationalDisabilityCareValue;
+}
+export interface NationalDisabilityCareValue {
   newly_infected_people: number;
   deceased_daily: number;
   newly_infected_locations: number;
@@ -543,6 +557,7 @@ export interface Regionaal {
   results_per_region: ResultsPerRegion;
   ggd: RegionalGgd;
   nursing_home: RegionalNursingHome;
+  disability_care: RegionalDisabilityCare;
   restrictions?: RegionalRestrictions;
   behavior?: RegionalBehavior;
   elderly_at_home: RegionalElderlyAtHome;
@@ -641,6 +656,20 @@ export interface RegionalNursingHome {
   last_value: RegionalNursingHomeValue;
 }
 export interface RegionalNursingHomeValue {
+  newly_infected_people: number;
+  newly_infected_locations: number;
+  infected_locations_total: number;
+  infected_locations_percentage: number;
+  deceased_daily: number;
+  date_of_report_unix: number;
+  date_of_insertion_unix: number;
+  vrcode: string;
+}
+export interface RegionalDisabilityCare {
+  values: RegionalDisabilityCareValue[];
+  last_value: RegionalDisabilityCareValue;
+}
+export interface RegionalDisabilityCareValue {
   newly_infected_people: number;
   newly_infected_locations: number;
   infected_locations_total: number;
@@ -749,6 +778,7 @@ export interface Regions {
   deceased: RegionDeceased[];
   escalation_levels: EscalationLevels[];
   nursing_home: RegionsNursingHome[];
+  disability_care: RegionsDisabilityCare[];
   sewer: RegionsSewer[];
   behavior?: RegionsBehavior[];
   elderly_at_home: RegionsElderlyAtHome[];
@@ -780,6 +810,16 @@ export interface EscalationLevels {
   date_of_insertion_unix: number;
 }
 export interface RegionsNursingHome {
+  newly_infected_people: number;
+  newly_infected_locations: number;
+  infected_locations_total: number;
+  infected_locations_percentage: number;
+  deceased_daily: number;
+  date_of_report_unix: number;
+  date_of_insertion_unix: number;
+  vrcode: string;
+}
+export interface RegionsDisabilityCare {
   newly_infected_people: number;
   newly_infected_locations: number;
   infected_locations_total: number;

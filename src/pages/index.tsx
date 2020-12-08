@@ -108,9 +108,9 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
       >
         <SafetyRegionChoropleth
           metricName="escalation_levels"
-          metricValueName="escalation_level"
+          metricProperty="escalation_level"
           onSelect={createSelectRegionHandler(router)}
-          tooltipContent={escalationTooltip(router)}
+          tooltipContent={escalationTooltip(createSelectRegionHandler(router))}
         />
       </ChoroplethTile>
 
@@ -125,21 +125,28 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
         description={text.positief_geteste_personen.map_toelichting}
         onChangeControls={setSelectedMap}
         legend={{
-          thresholds: regionThresholds.positive_tested_people,
+          thresholds:
+            regionThresholds.positive_tested_people.positive_tested_people,
           title: text.positief_geteste_personen.chloropleth_legenda.titel,
         }}
       >
         {selectedMap === 'municipal' && (
           <MunicipalityChoropleth
             metricName="positive_tested_people"
-            tooltipContent={createPositiveTestedPeopleMunicipalTooltip(router)}
+            metricProperty="positive_tested_people"
+            tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
+              createSelectMunicipalHandler(router)
+            )}
             onSelect={createSelectMunicipalHandler(router)}
           />
         )}
         {selectedMap === 'region' && (
           <SafetyRegionChoropleth
             metricName="positive_tested_people"
-            tooltipContent={createPositiveTestedPeopleRegionalTooltip(router)}
+            metricProperty="positive_tested_people"
+            tooltipContent={createPositiveTestedPeopleRegionalTooltip(
+              createSelectRegionHandler(router)
+            )}
             onSelect={createSelectRegionHandler(router)}
           />
         )}

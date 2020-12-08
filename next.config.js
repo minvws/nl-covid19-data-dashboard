@@ -3,9 +3,8 @@ const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const sitemap = require('./src/tools/sitemap/generate-sitemap.js');
 
 const withTM = require('next-transpile-modules')([
-  '@vx/tooltip',
-  '@vx/event',
-  'zustand',
+  '@visx/tooltip',
+  '@visx/event',
 ]);
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
@@ -49,7 +48,12 @@ const nextConfig = {
       },
     });
 
-    config.plugins.push(new LodashModuleReplacementPlugin());
+    config.plugins.push(
+      new LodashModuleReplacementPlugin({
+        // See https://github.com/lodash/lodash-webpack-plugin#feature-sets
+        paths: true,
+      })
+    );
 
     // if (!dev) {
     //   // Move Preact into the framework chunk instead of duplicating in routes:

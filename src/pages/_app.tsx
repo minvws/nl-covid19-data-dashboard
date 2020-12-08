@@ -23,18 +23,10 @@ export default function App(props: AppPropsWithLayout) {
   const getLayout = Component.getLayout || page;
 
   useEffect(() => {
-    window.document.documentElement.className += ' js';
-    const handleRouteChange = (url: string) => {
-      if (url.indexOf('?menu') !== -1) {
-        /* Opening a menu on mobile scrolls to the top of the menus */
-        window.document
-          .querySelector('#main-navigation,aside')
-          ?.scrollIntoView(true);
-      } else {
-        /* Any other page scrolls to the top */
-        window.scrollTo(0, 0);
-      }
+    window.document.documentElement.classList.add('js');
+    const handleRouteChange = () => {
       piwik.pageview();
+      scrollToTop();
     };
 
     Router.events.on('routeChangeComplete', handleRouteChange);
@@ -51,4 +43,13 @@ export default function App(props: AppPropsWithLayout) {
       {pageWithLayout}
     </ThemeProvider>
   );
+}
+
+function scrollToTop() {
+  const navigationBar = document.querySelector(
+    '#main-navigation'
+  ) as HTMLElement | null;
+  const offset = navigationBar?.offsetTop ?? 0;
+
+  window.scrollTo(0, window.scrollY >= offset ? offset : 0);
 }

@@ -35,7 +35,7 @@ const ElderlyAtHomeRegionalPage: FCWithLayout<ISafetyRegionData> = (props) => {
 
       <ContentHeader
         category={siteText.veiligheidsregio_layout.headings.kwetsbare_groepen}
-        screenreaderCategory={siteText.thuiswonende_ouderen.titel_sidebar}
+        screenReaderCategory={siteText.thuiswonende_ouderen.titel_sidebar}
         title={replaceVariablesInText(text.section_positive_tested.title, {
           safetyRegion: safetyRegionName,
         })}

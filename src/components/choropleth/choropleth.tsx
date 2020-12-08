@@ -1,6 +1,6 @@
 import css from '@styled-system/css';
-import { localPoint } from '@vx/event';
-import { Mercator } from '@vx/geo';
+import { localPoint } from '@visx/event';
+import { Mercator } from '@visx/geo';
 import { Feature, FeatureCollection, Geometry, MultiPolygon } from 'geojson';
 import { memo, MutableRefObject, ReactNode, useRef, useState } from 'react';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
@@ -144,8 +144,8 @@ const ChoroplethMap: <T1, T2, T3>(
   return (
     <>
       <svg
-        width={width}
-        height={height}
+        width="100%"
+        height="100%"
         css={css({ display: 'block', bg: 'transparent' })}
         onMouseMove={createSvgMouseOverHandler(timeout, setTooltip)}
         onMouseOut={

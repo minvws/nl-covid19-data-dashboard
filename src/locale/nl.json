@@ -34,7 +34,7 @@
   "header": {
     "title": "Dashboard coronavirus",
     "text": "Het dashboard coronavirus geeft informatie over de ontwikkeling van het coronavirus in Nederland.",
-    "link": "Lees meer",
+    "link": "Lees meer over dit dashboard",
     "logo_alt": "Rijksoverheid"
   },
   "nav": {
@@ -675,7 +675,7 @@
     "text": ""
   },
   "over_beschrijving": {
-    "text": "Het dashboard coronavirus is ontwikkeld door het ministerie van VWS. Het geeft informatie over de ontwikkeling van het coronavirus in Nederland. Met deze informatie kunnen signalen van oplevingen worden opgepikt. Zo kunnen maatregelen genomen worden om het virus te stoppen.\n\n### In ontwikkeling\n\nHet dashboard wordt de komende tijd stap voor stap verder uitgebreid. Sommige functies zijn nu dus nog niet beschikbaar. Bij elke stap wordt goed gekeken of de informatie eenduidig en begrijpelijk is voor iedereen. Ook willen we dat de informatie op deze site goed te lezen is op iedere computer, tablet of telefoon. De informatie op deze site is in zowel Nederlands als Engels beschikbaar. \n\n### Contact\n\nAls u vragen heeft of suggesties om dit dashboard verder te verbeteren, dan kunt u mailen naar coronadashboard@minvws.nl. We lezen alle mails die daar binnen komen en doen onze uiterste best om iedereen op korte termijn te antwoorden. Vanwege drukte kan een reactie soms even op zich laten wachten. Veel antwoorden zijn al te vinden op onze pagina met [cijferverantwoording](https://coronadashboard.rijksoverheid.nl/verantwoording) en die met antwoorden op [veel gestelde vragen](https://coronadashboard.rijksoverheid.nl/veelgestelde-vragen).\n\nIT-ontwikkelaars kunnen suggesties delen via het platform Github. Voor vragen en suggesties die betrekking hebben op front-end kunt u [hier](https://github.com/minvws/nl-covid19-data-dashboard) terecht. Voor vragen over onderliggende berekeningen kunt u [hier](https://github.com/minvws/nl-covid19-data-backend-processing) terecht. \n\nAls u IT-kwetsbaarheden ziet op het dashboard geef die dan graag door. Wij werken daarvoor samen met het Nationaal Cyber Security Centrum (NCSC). Stel het NCSC zo snel mogelijk op de hoogte via het [formulier](https://www.ncsc.nl/contact/kwetsbaarheid-melden/cvd-meldingen-formulier) voordat u dit aan de buitenwereld kenbaar maakt. In samenwerking met het NCSC nemen we de melding in behandeling en lossen deze zo snel mogelijk op. Dank voor uw medewerking!\n\nAntwoord op veel vragen over het coronavirus zijn te vinden op [rijksoverheid.nl](https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19). Als u het antwoord daar niet kunt vinden, kunt u terecht bij het publieksinformatienummer 0800 - 1351 (tussen 08:00 en 20:00 uur). Vanuit het buitenland is het nummer te bereiken door te bellen naar +31 20 205 1351."
+    "text": "Het dashboard coronavirus is ontwikkeld door het ministerie van VWS. Het geeft informatie over de ontwikkeling van het coronavirus in Nederland. Met deze informatie kunnen signalen van oplevingen worden opgepikt. Zo kunnen maatregelen genomen worden om het virus te stoppen.\n\n### In ontwikkeling\n\nHet dashboard wordt de komende tijd stap voor stap verder uitgebreid. Sommige functies zijn nu dus nog niet beschikbaar. Bij elke stap wordt goed gekeken of de informatie eenduidig en begrijpelijk is voor iedereen. Ook willen we dat de informatie op deze site goed te lezen is op iedere computer, tablet of telefoon. De informatie op deze site is in zowel Nederlands als Engels beschikbaar. \n\n### Contact\n\nAls u vragen heeft of suggesties om dit dashboard verder te verbeteren, dan kunt u mailen naar coronadashboard@minvws.nl . We lezen alle mails die daar binnen komen en doen onze uiterste best om iedereen op korte termijn te antwoorden. Vanwege drukte kan een reactie soms even op zich laten wachten. Veel antwoorden zijn al te vinden op onze pagina met [cijferverantwoording](https://coronadashboard.rijksoverheid.nl/verantwoording) en die met antwoorden op [veel gestelde vragen](https://coronadashboard.rijksoverheid.nl/veelgestelde-vragen).\n\nIT-ontwikkelaars kunnen suggesties delen via het platform Github. Voor vragen en suggesties die betrekking hebben op front-end kunt u [hier](https://github.com/minvws/nl-covid19-data-dashboard) terecht. Voor vragen over onderliggende berekeningen kunt u [hier](https://github.com/minvws/nl-covid19-data-backend-processing) terecht. \n\nAls u IT-kwetsbaarheden ziet op het dashboard geef die dan graag door. Wij werken daarvoor samen met het Nationaal Cyber Security Centrum (NCSC). Stel het NCSC zo snel mogelijk op de hoogte via het [formulier](https://www.ncsc.nl/contact/kwetsbaarheid-melden/cvd-meldingen-formulier) voordat u dit aan de buitenwereld kenbaar maakt. In samenwerking met het NCSC nemen we de melding in behandeling en lossen deze zo snel mogelijk op. Dank voor uw medewerking!\n\nAntwoord op veel vragen over het coronavirus zijn te vinden op [rijksoverheid.nl](https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19). Als u het antwoord daar niet kunt vinden, kunt u terecht bij het publieksinformatienummer 0800 - 1351 (tussen 08:00 en 20:00 uur). Vanuit het buitenland is het nummer te bereiken door te bellen naar +31 20 205 1351."
   },
   "over_veelgestelde_vragen": {
     "text": "Veelgestelde vragen",
@@ -892,7 +892,8 @@
     "tooltip": {
       "positive_tested_people": "{{totalPositiveTestedPeople}} in totaal"
     },
-    "niveau": "niveau"
+    "niveau": "niveau",
+    "clear_select_input": "Leegmaken"
   },
   "seoHead": {
     "default_description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
@@ -1300,7 +1301,50 @@
   },
   "over_risiconiveaus": {
     "title": "Over risiconiveaus",
-    "toelichting": "Iedere week wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. Dan beoordelen het Rijk, de GGD’en, het RIVM en de veiligheidsregio’s samen de situatie. De minister van VWS stelt vervolgens vast op welk risiconiveau een regio zit. Moeten we waakzaam zijn (niveau 1), is de situatie zorgelijk (niveau 2),is de situatie  ernstig (niveau 3), of is de situatie zelfs zeer ernstig te noemen (niveau 4)?\n\nOp basis van het risiconiveau nemen het Rijk en/of de veiligheidsregio passende maatregelen. Maatregelen zijn afhankelijk van de lokale situatie en kunnen daarom tussen regio’s verschillen.\n\n**Wat bepaalt het risiconiveau van een regio?**\n\nIn welk risiconiveau een regio zit, wordt bepaald door te kijken naar de situatie van een regio, die van de omliggende regio’s en de situatie in de rest van het land. Dit gebeurt op basis van informatie van het coronadashboard, het weekrapport van het RIVM, de duiding van de GGD’en en de duiding van de veiligheidsregio’s.\n\nVoor het risiconiveau van een regio wordt gelet op een aantal aspecten, bijvoorbeeld:\n\n- Hoe snel neemt het aantal nieuwe besmettingen toe?\n- Zijn er extra maatregelen nodig voor kwetsbare groepen?\n- Hoe effectief is het bron- en contactonderzoek nog?\n- Hoe goed worden de maatregelen nageleefd?\n- Is er nog voldoende zorg beschikbaar?\n\n**Wanneer gaat een regio naar ‘zorgelijk’, ‘ernstig’ of ‘zeer ernstig’?**\n- Een regio gaat in principe van ‘waakzaam’ naar ‘zorgelijk’ als er in een week meer dan 50 positieve testuitslagen per 100.000 inwoners zijn. Dit komt overeen met het elke dag overschrijden van de signaalwaarde van 7 positieve testuitslagen per 100.000 inwoners. Ook telt mee als meer dan 5 procent van de afgenomen testen positief is.\n- Een regio gaat in principe van ‘zorgelijk’ naar ‘ernstig’ als er in een week meer dan 150 positieve testuitslagen per 100.000 inwoners zijn. Of als meer dan 10 procent van de afgenomen testen positief is.\n- Een regio gaat in principe over van ‘ernstig’ naar ‘zeer ernstig’ als er meer dan 250 positieve testuitslagen per 100.000 inwoners zijn gedurende een week. Als in meerdere regio’s de situatie zeer ernstig is, gelden de zwaarste maatregelen voor het hele land. \n\nElke maandag berekent het RIVM welke regio’s hieraan voldoen. In de dagen erna wordt dieper in de situatie in deze regio’s gedoken. Als de situatie inderdaad zorgelijk of ernstig is, kan de minister van VWS (Hugo de Jonge) besluiten een regio op een hoger risiconiveau te zetten. Bovenstaande criteria zijn dus bedoeld als ‘leidraad’. Ook wanneer een regio nog niet de grenswaarden bereikt heeft om op te schalen, kan op basis van de context en duiding besloten worden om een regio op te schalen.\n \n**Wanneer kan een regio terug naar een lager risiconiveau?**\n\nBij het bepalen of een regio terug kan naar een lager risiconiveau wordt grote voorzichtigheid betracht. Naast het aantal nieuwe besmettingen wordt gekeken of de capaciteit in de zorg dit toelaat. Ook als het aantal nieuwe besmettingen afneemt kan de zorg immers nog te maken hebben met een groot aantal patiënten die nog herstellende zijn van corona. Daarbij moet ook het zorgpersoneel de kans krijgen om op adem te komen. Voorkomen moet worden dat het virus zich weer snel verspreidt en de zorg overvraagd wordt.\n\n**Wat betekenen de vier risiconiveaus?**\n1. Waakzaam. De situatie is beheersbaar. Het aantal nieuwe besmettingen is laag. Kwetsbare groepen dienen alert te zijn. Het bron-en contactonderzoek is overwegend effectief. Maatregelen worden voldoende nageleefd en zijn te handhaven. Er is voldoende zorgcapaciteit. Aanvullende maatregelen zijn erop gericht om de bestaande aanpak beter te laten functioneren.\n2. Zorgelijk. De situatie ontwikkelt zich negatief. Het aantal nieuwe besmettingen neemt toe. Maatwerk is nodig om kwetsbare groepen te beschermen. Als de situatie voortduurt, wordt het bron- en contactonderzoek ineffectief. Maatregelen worden onvoldoende nageleefd. De druk op de zorgcapaciteit neemt toe. De bestaande aanpak moet met aanvullende maatregelen worden versterkt om de verspreiding van het virus weer onder controle te krijgen en terug te keren naar een beheersbare situatie.\n3. Ernstig. Hard ingrijpen is noodzakelijk om verdere escalatie te voorkomen en terug te keren naar een beheersbare situatie. Het aantal nieuwe besmettingen neemt snel toe. Intensief maatwerk is nodig om kwetsbare groepen te beschermen. Het bron- en contactonderzoek is niet meer effectief, waardoor het zicht op de verspreiding afneemt. Maatregelen worden onvoldoende nageleefd. De zorgcapaciteit is onvoldoende. Maatregelen zijn erop gericht om (regionale) overbelasting van de zorg te voorkomen, kwetsbaren te beschermen en weer zicht op de verspreiding van het virus te krijgen.\n4. Zeer ernstig. Strenge, landelijke maatregelen zijn noodzakelijk om verdere escalatie te voorkomen en terug te keren naar een beheersbare situatie (waakzaam). Er zijn zeer veel mensen besmettelijk en het dagelijks aantal nieuwe besmettingen is hoog. Het bron- en contactonderzoek is niet meer effectief, waardoor het zicht op de verspreiding van het virus beperkt is. Maatregelen worden onvoldoende nageleefd. De regionale zorgcapaciteit is onvoldoende en een deel van de reguliere zorg is al afgeschaald. Maatregelen zijn erop gericht om landelijk en regionaal overbelasting van de zorg te voorkomen, kwetsbaren te beschermen en het virus weer maximaal te controleren."
+    "toelichting": "Iedere week wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. Dan beoordelen het Rijk, de GGD’en, het RIVM en de veiligheidsregio’s samen de situatie. De minister van VWS stelt vervolgens vast op welk risiconiveau een regio zit. Moeten we waakzaam zijn (niveau 1), is de situatie zorgelijk (niveau 2),is de situatie  ernstig (niveau 3), of is de situatie zelfs zeer ernstig te noemen (niveau 4)?\n\nOp basis van het risiconiveau nemen het Rijk en/of de veiligheidsregio passende maatregelen. Maatregelen zijn afhankelijk van de lokale situatie en kunnen daarom tussen regio’s verschillen.\n\n**Wat bepaalt het risiconiveau van een regio?**\n\nIn welk risiconiveau een regio zit, wordt bepaald door te kijken naar de situatie van een regio, die van de omliggende regio’s en de situatie in de rest van het land. Dit gebeurt op basis van informatie van het coronadashboard, het weekrapport van het RIVM, de duiding van de GGD’en en de duiding van de veiligheidsregio’s.\n\nVoor het risiconiveau van een regio wordt gelet op een aantal aspecten, bijvoorbeeld:\n\n- Hoe snel neemt het aantal nieuwe besmettingen toe?\n- Zijn er extra maatregelen nodig voor kwetsbare groepen?\n- Hoe effectief is het bron- en contactonderzoek nog?\n- Hoe goed worden de maatregelen nageleefd?\n- Is er nog voldoende zorg beschikbaar?\n\n**Wanneer gaat een regio naar ‘zorgelijk’, ‘ernstig’ of ‘zeer ernstig’?**\n- Een regio gaat in principe van ‘waakzaam’ naar ‘zorgelijk’ als er in een week meer dan 50 positieve testuitslagen per 100.000 inwoners zijn. Dit komt overeen met het elke dag overschrijden van de signaalwaarde van 7 positieve testuitslagen per 100.000 inwoners. Ook telt mee als meer dan 5 procent van de afgenomen testen positief is.\n- Een regio gaat in principe van ‘zorgelijk’ naar ‘ernstig’ als er in een week meer dan 150 positieve testuitslagen per 100.000 inwoners zijn. Of als meer dan 10 procent van de afgenomen testen positief is.\n- Een regio gaat in principe over van ‘ernstig’ naar ‘zeer ernstig’ als er meer dan 250 positieve testuitslagen per 100.000 inwoners zijn gedurende een week. Als in meerdere regio’s de situatie zeer ernstig is, gelden de zwaarste maatregelen voor het hele land. \n\nElke maandag berekent het RIVM welke regio’s hieraan voldoen. In de dagen erna wordt dieper in de situatie in deze regio’s gedoken. Als de situatie inderdaad zorgelijk of ernstig is, kan de minister van VWS (Hugo de Jonge) besluiten een regio op een hoger risiconiveau te zetten. Bovenstaande criteria zijn dus bedoeld als ‘leidraad’. Ook wanneer een regio nog niet de grenswaarden bereikt heeft om op te schalen, kan op basis van de context en duiding besloten worden om een regio op te schalen.\n \n**Wanneer kan een regio terug naar een lager risiconiveau?**\n\nBij het bepalen of een regio terug kan naar een lager risiconiveau wordt grote voorzichtigheid betracht. Naast het aantal nieuwe besmettingen wordt gekeken of de capaciteit in de zorg dit toelaat. Ook als het aantal nieuwe besmettingen afneemt kan de zorg immers nog te maken hebben met een groot aantal patiënten die nog herstellende zijn van corona. Daarbij moet ook het zorgpersoneel de kans krijgen om op adem te komen. Voorkomen moet worden dat het virus zich weer snel verspreidt en de zorg overvraagd wordt.\n\n**Wat betekenen de vier risiconiveaus?**\n1. Waakzaam. De situatie is beheersbaar. Het aantal nieuwe besmettingen is laag. Kwetsbare groepen dienen alert te zijn. Het bron-en contactonderzoek is overwegend effectief. Maatregelen worden voldoende nageleefd en zijn te handhaven. Er is voldoende zorgcapaciteit. Aanvullende maatregelen zijn erop gericht om de bestaande aanpak beter te laten functioneren.\n2. Zorgelijk. De situatie ontwikkelt zich negatief. Het aantal nieuwe besmettingen neemt toe. Maatwerk is nodig om kwetsbare groepen te beschermen. Als de situatie voortduurt, wordt het bron- en contactonderzoek ineffectief. Maatregelen worden onvoldoende nageleefd. De druk op de zorgcapaciteit neemt toe. De bestaande aanpak moet met aanvullende maatregelen worden versterkt om de verspreiding van het virus weer onder controle te krijgen en terug te keren naar een beheersbare situatie.\n3. Ernstig. Hard ingrijpen is noodzakelijk om verdere escalatie te voorkomen en terug te keren naar een beheersbare situatie. Het aantal nieuwe besmettingen neemt snel toe. Intensief maatwerk is nodig om kwetsbare groepen te beschermen. Het bron- en contactonderzoek is niet meer effectief, waardoor het zicht op de verspreiding afneemt. Maatregelen worden onvoldoende nageleefd. De zorgcapaciteit is onvoldoende. Maatregelen zijn erop gericht om (regionale) overbelasting van de zorg te voorkomen, kwetsbaren te beschermen en weer zicht op de verspreiding van het virus te krijgen.\n4. Zeer ernstig. Strenge, landelijke maatregelen zijn noodzakelijk om verdere escalatie te voorkomen en terug te keren naar een beheersbare situatie (waakzaam). Er zijn zeer veel mensen besmettelijk en het dagelijks aantal nieuwe besmettingen is hoog. Het bron- en contactonderzoek is niet meer effectief, waardoor het zicht op de verspreiding van het virus beperkt is. Maatregelen worden onvoldoende nageleefd. De regionale zorgcapaciteit is onvoldoende en een deel van de reguliere zorg is al afgeschaald. Maatregelen zijn erop gericht om landelijk en regionaal overbelasting van de zorg te voorkomen, kwetsbaren te beschermen en het virus weer maximaal te controleren.",
+    "paragraaf": "Iedere week wordt ....",
+    "vragen": [
+      {
+        "vraag": "Wat bepaalt het risiconiveau van een regio?",
+        "antwoord": "In welk risiconiveau een regio zit, wordt bepaald door te kijken naar de si..."
+      },
+      {
+        "vraag": "Wanneer gaat een regio naar ‘zorgelijk’, ‘ernstig’ of ‘zeer ernstig’?",
+        "antwoord": "Een regio gaat in principe van ‘waakzaam’ naar ‘zorgel...."
+      },
+      {
+        "vraag": "Wanneer kan een regio terug naar een lager risiconiveau?",
+        "antwoord": "Bij het bepalen of een regio terug kan naar een lager risiconiveau..."
+      },
+      {
+        "vraag": "Wat betekenen de vier risiconiveaus?",
+        "antwoord": "Waakzaam. De situatie is beheers...."
+      },
+      {
+        "vraag": "",
+        "antwoord": ""
+      },
+      {
+        "vraag": "",
+        "antwoord": ""
+      },
+      {
+        "vraag": "",
+        "antwoord": ""
+      },
+      {
+        "vraag": "",
+        "antwoord": ""
+      },
+      {
+        "vraag": "",
+        "antwoord": ""
+      },
+      {
+        "vraag": "",
+        "antwoord": ""
+      }
+    ]
   },
   "over_risiconiveaus_metadata": {
     "title": "Risiconiveaus Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
@@ -1618,5 +1662,199 @@
     "footer_keuze": "Pagina menu",
     "metriek_navigatie": "Metrieken per categorie menu",
     "skip_links": "Snelkoppeling menu"
+  },
+  "infected_age_groups": {
+    "title": "Verdeling naar leeftijd",
+    "description": "....",
+    "example": "Bijvoorbeeld: Van alle positief geteste mensen is {{infectedPercentage}} tussen de {{ageGroupRange}} jaar. Van alle Nederlanders is {{ageGroupPercentage}} tussen de {{ageGroupRange}} jaar.",
+    "graph": {
+      "age_group_percentage_title": "Percentage van de bevolking",
+      "age_group_percentage_tooltip": "van de bevolking is {{ageGroupRange}} jaar",
+      "infected_percentage_title": "Percentage van de positieve testen",
+      "infected_percentage_tooltip": "van het aantal positief geteste mensen is {{ageGroupRange}} jaar",
+      "age_group_range_tooltip": "{{ageGroupRange}} jaar",
+      "accessibility_description": "Grafiek met percentages voor de verdeling van de bevolking en de verdeling van positief geteste leeftijdsgroepen."
+    }
+  },
+  "gehandicaptenzorg_besmette_locaties": {
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "titel": "Gehandicaptenzorg – Besmette locaties",
+    "pagina_toelichting": "Dit getal is een inschatting van het aantal nieuwe gehandicaptenzorglocaties waar sprake is van tenminste een COVID-19 besmetting op basis van een positieve test.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de cijferverantwoording.",
+    "barscale_titel": "Aantal nieuwe locaties per dag",
+    "barscale_toelichting": "Aantal nieuwe locaties waarbij tenminste één bewoner positief getest is. Een gehandicaptenzorglocatie wordt meegeteld als ‘nieuwe locatie’ wanneer er tenminste 28 dagen, dit is twee keer de incubatietijd, geen nieuwe patiënten zijn geweest.",
+    "kpi_titel": "Totaal aantal besmette locaties",
+    "kpi_toelichting": "Dit getal is een inschatting van het totaal aantal gehandicaptenzorglocaties waar in de afgelopen 28 dagen minstens één (nieuwe) COVID-19 besmetting op basis van een positieve test, is gemeld. Het percentage geeft aan hoeveel dit is ten opzichte van het totaal aantal gehandicaptenzorglocaties in Nederland.",
+    "linechart_titel": "Totaal aantal besmette locaties over tijd",
+    "barscale_screenreader_text": "{{value}} nieuwe locaties waarbij tenminste één bewoner positief getest is, per dag.",
+    "chloropleth_legenda": {
+      "titel": "Percentage besmette locaties",
+      "geen_meldingen": "Geen meldingen"
+    },
+    "map_titel": "Verdeling besmette locaties in Nederland",
+    "map_toelichting": "Deze kaart toont een schatting van het aantal gehandicaptenzorglocaties waar in de afgelopen 28 dagen minstens één (nieuwe) COVID-19 besmetting op basis van een positieve test is gemeld.",
+    "metadata": {
+      "title": "Besmette gehandicaptenzorglocaties | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Landelijk overzicht van gehandicaptenzorglocaties waar tenminste één COVID-19 besmetting is vastgesteld."
+    },
+    "titel_sidebar": "Gehandicaptenzorg",
+    "titel_kpi": "Aantal besmette locaties",
+    "reference": {
+      "href": "/verantwoording#gehandicaptenzorg",
+      "text": "Lees meer in de cijferverantwoording."
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "text": "RIVM"
+      }
+    }
+  },
+  "gehandicaptenzorg_positief_geteste_personen": {
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "titel": "Gehandicaptenzorg – Aantal positief geteste bewoners",
+    "barscale_titel": "Aantal positief geteste bewoners in gehandicaptenzorglocaties per dag",
+    "extra_uitleg": "Aantal nieuwe positief geteste bewoners in gehandicaptenzorglocaties dat per dag gemeld is.",
+    "pagina_toelichting": "Aantal nieuwe positief geteste bewoners in gehandicaptenzorglocaties dat per dag is gemeld. Dit getal is een inschatting van het aantal gemelde bewoners in gehandicaptenzorglocaties dat in Nederland positief getest is en COVID-19 heeft.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de cijferverantwoording.",
+    "linechart_titel": "Verloop over tijd",
+    "barscale_screenreader_text": "{{value}} positief geteste bewoners.",
+    "chloropleth_legenda": {
+      "titel": "Aantal per 100.000 inwoners",
+      "geen_meldingen": "Geen meldingen"
+    },
+    "map_titel": "Verdeling positief geteste bewoners in Nederland",
+    "map_toelichting": "Deze kaarten laten zien van hoeveel bewoners gisteren is gemeld dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
+    "metadata": {
+      "title": "Positief geteste bewoners gehandicaptenzorglocaties | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Landelijk overzicht van het aantal bewoners van gehandicaptenzorglocaties die positief getest zijn en COVID-19 hebben."
+    },
+    "titel_kpi": "Aantal positief geteste bewoners per dag",
+    "reference": {
+      "href": "/verantwoording#gehandicaptenzorg",
+      "text": "Lees meer in de cijferverantwoording."
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "text": "RIVM"
+      }
+    }
+  },
+  "gehandicaptenzorg_oversterfte": {
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "titel": "Gehandicaptenzorg – Sterfte",
+    "pagina_toelichting": "Aantal overleden bewoners in gehandicaptenzorglocaties met een vastgestelde COVID-19-besmetting per dag.",
+    "barscale_titel": "Aantal overleden bewoners",
+    "barscale_screenreader_text": "{{value}} overleden bewoners.",
+    "extra_uitleg": "Dit getal is een inschatting van het aantal gemelde gehandicaptenzorglocatiebewoners dat in Nederland overlijdt aan de gevolgen van het nieuwe coronavirus.",
+    "linechart_titel": "Verloop over tijd",
+    "map_titel": "Gehandicaptenzorg oversterfte in Nederland",
+    "map_toelichting": "Deze kaarten laten zien hoe de oversterfte in gehandicaptenzorglocatie is in Nederland per dag.",
+    "metadata": {
+      "title": "Overleden bewoners gehandicaptenzorglocaties | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Landelijk aantal gemelde gehandicaptenzorglocatiebewoners dat in Nederland overlijdt aan de gevolgen van het coronavirus."
+    },
+    "titel_kpi": "Sterfte per dag",
+    "reference": {
+      "href": "/verantwoording#gehandicaptenzorg",
+      "text": "Lees meer in de cijferverantwoording."
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "text": "RIVM"
+      }
+    }
+  },
+  "veiligheidsregio_gehandicaptenzorg_oversterfte": {
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "bron": {
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+      "text": "RIVM"
+    },
+    "titel": "Gehandicaptenzorg – Sterfte in {{safetyRegion}}",
+    "pagina_toelichting": "Aantal overleden bewoners in gehandicaptenzorglocaties met een vastgestelde COVID-19-besmetting per dag.",
+    "barscale_titel": "Overleden bewoners verpleeghuizen",
+    "barscale_screenreader_text": "{{value}} overleden bewoners.",
+    "extra_uitleg": "Dit getal is een inschatting van het aantal gemelde gehandicaptenzorglocatiebewoners uit deze veiligheidsregio dat overlijdt aan de gevolgen van het nieuwe coronavirus.",
+    "linechart_titel": "Verloop over tijd",
+    "map_titel": "Gehandicaptenzorg oversterfte in Nederland",
+    "map_toelichting": "Deze kaarten laten zien hoe de oversterfte in gehandicaptenzorglocaties is in Nederland per dag.",
+    "titel_sidebar": "Sterfte per dag",
+    "metadata": {
+      "title": "Overleden bewoners gehandicaptenzorglocaties in {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Aantal gemelde gehandicaptenzorglocatiebewoners dat in veiligheidsregio {{safetyRegionName}} overlijdt aan de gevolgen van het coronavirus."
+    },
+    "reference": {
+      "href": "/verantwoording#gehandicaptenzorg",
+      "text": "Lees meer in de cijferverantwoording."
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "text": "RIVM"
+      }
+    }
+  },
+  "veiligheidsregio_gehandicaptenzorg_besmette_locaties": {
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "titel": "Gehandicaptenzorg - Aantal besmette locaties in {{safetyRegion}}",
+    "pagina_toelichting": "Dit getal is een inschatting van het aantal nieuwe gehandicaptenzorglocaties waar sprake is van tenminste een COVID-19 besmetting op basis van een positieve test.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de cijferverantwoording.",
+    "barscale_titel": "Aantal nieuwe locaties per dag",
+    "barscale_toelichting": "Aantal nieuwe locaties waarbij tenminste één bewoner positief getest is. Een gehandicaptenzorglocatie wordt meegeteld als ‘nieuwe locatie’ wanneer er tenminste 28 dagen, dit is twee keer de incubatietijd, geen nieuwe patiënten zijn geweest.",
+    "kpi_titel": "Totaal aantal besmette locaties",
+    "kpi_toelichting": "Dit getal is een inschatting van het totaal aantal gehandicaptenzorglocaties waar in de afgelopen 28 dagen minstens één (nieuwe) COVID-19 besmetting op basis van een positieve test, is gemeld. Het percentage geeft aan hoeveel dit is ten opzichte van het totaal aantal gehandicaptenzorglocaties in deze veiligheidsregio.",
+    "linechart_titel": "Totaal aantal besmette locaties over tijd",
+    "barscale_screenreader_text": "{{value}} nieuwe locaties waarbij tenminste één bewoner positief getest is, per dag.",
+    "metadata": {
+      "title": "Besmette gehandicaptenzorglocaties in {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Overzicht van gehandicaptenzorglocaties in veiligheidsregio {{safetyRegionName}} waar tenminste één COVID-19 besmetting is vastgesteld."
+    },
+    "titel_sidebar": "Verpleeghuiszorg",
+    "reference": {
+      "href": "/verantwoording#gehandicaptenzorg",
+      "text": "Lees meer in de cijferverantwoording."
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "text": "RIVM"
+      }
+    }
+  },
+  "veiligheidsregio_gehandicaptenzorg_positief_geteste_personen": {
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "titel": "Gehandicaptenzorg – Aantal positief geteste bewoners in {{safetyRegion}}",
+    "barscale_titel": "Aantal positief geteste bewoners in verpleeghuizen per dag",
+    "extra_uitleg": "Aantal nieuwe positief geteste bewoners in gehandicaptenzorglocaties dat per dag gemeld is.",
+    "pagina_toelichting": "Aantal positief geteste bewoners in gehandicaptenzorglocaties per dag in {{safetyRegion}}. Dit getal is een inschatting van het aantal gemelde bewoners in verpleeghuizen dat in Nederland positief getest is en COVID-19 heeft.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de cijferverantwoording.",
+    "linechart_titel": "Verloop over tijd",
+    "barscale_screenreader_text": "{{value}} positief geteste bewoners.",
+    "titel_sidebar": "Positief geteste bewoners",
+    "chloropleth_legenda": {
+      "titel": "Aantal per 100.000 inwoners",
+      "geen_meldingen": "Geen meldingen"
+    },
+    "map_titel": "Verdeling positief geteste mensen in Nederland",
+    "map_toelichting": "Deze kaarten laten zien van hoeveel mensen gisteren is gemeld dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
+    "metadata": {
+      "title": "Positief geteste bewoners gehandicaptenzorglocaties in {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Overzicht aantal bewoners van gehandicaptenzorglocaties in veiligheidsregio {{safetyRegionName}} waarbij COVID-19-besmetting is vastgesteld."
+    },
+    "reference": {
+      "href": "/verantwoording#gehandicaptenzorg",
+      "text": "Lees meer in de cijferverantwoording."
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "text": "RIVM"
+      }
+    }
   }
 }

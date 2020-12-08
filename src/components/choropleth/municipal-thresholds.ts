@@ -83,7 +83,9 @@ const elderlyAtHomeThresholds: ChoroplethThresholdsValue[] = [
 ];
 
 export const municipalThresholds = {
-  positive_tested_people: positiveTestedThresholds,
-  hospital_admissions: hospitalAdmissionsThresholds,
+  positive_tested_people: {
+    positive_tested_people: positiveTestedThresholds,
+  },
+  hospital_admissions: { hospital_admissions: hospitalAdmissionsThresholds },
   elderly_at_home: elderlyAtHomeThresholds,
 } as const;

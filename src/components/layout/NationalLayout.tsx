@@ -1,9 +1,9 @@
 import Head from 'next/head';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Arrow from '~/assets/arrow.svg';
 import Arts from '~/assets/arts.svg';
 import ElderlyIcon from '~/assets/elderly.svg';
+import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
 import Notification from '~/assets/notification.svg';
 import ReproIcon from '~/assets/reproductiegetal.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
@@ -34,6 +34,7 @@ import Layout from '~/components/layout';
 import siteText from '~/locale/index';
 import { NationalPageProps } from '~/static-props/nl-data';
 import theme from '~/style/theme';
+import { Link } from '~/utils/link';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { PositiveTestedPeopleMetric } from '../landelijk/positive-tested-people-metric';
 
@@ -322,6 +323,26 @@ function NationalLayout(props: NationalLayoutProps) {
                     </Link>
                   </MetricMenuItem>
                   <MetricMenuItem>
+                    <Link href="/landelijk/gehandicaptenzorg">
+                      <a
+                        className={getClassName('/landelijk/gehandicaptenzorg')}
+                      >
+                        <TitleWithIcon
+                          icon={<Gehandicaptenzorg />}
+                          title={
+                            siteText.gehandicaptenzorg_besmette_locaties
+                              .titel_sidebar
+                          }
+                        />
+                        <span className="metric-wrapper">
+                          <NursingHomeInfectedPeopleMetric
+                            data={data.disability_care.last_value}
+                          />
+                        </span>
+                      </a>
+                    </Link>
+                  </MetricMenuItem>
+                  <MetricMenuItem>
                     <Link href="/landelijk/thuiswonende-ouderen">
                       <a
                         className={getClassName(
@@ -348,6 +369,20 @@ function NationalLayout(props: NationalLayoutProps) {
                 </Category>
                 <Menu>
                   <MetricMenuItem>
+                    <Link href="/landelijk/rioolwater">
+                      <a className={getClassName('/landelijk/rioolwater')}>
+                        <TitleWithIcon
+                          icon={<RioolwaterMonitoring />}
+                          title={siteText.rioolwater_metingen.titel_sidebar}
+                        />
+                        <span className="metric-wrapper">
+                          <SewerWaterMetric data={data.sewer} />
+                        </span>
+                      </a>
+                    </Link>
+                  </MetricMenuItem>
+
+                  <MetricMenuItem>
                     <Link href="/landelijk/verdenkingen-huisartsen">
                       <a
                         className={getClassName(
@@ -362,20 +397,6 @@ function NationalLayout(props: NationalLayoutProps) {
                           <SuspectedPatientsMetric
                             data={data.verdenkingen_huisartsen.last_value}
                           />
-                        </span>
-                      </a>
-                    </Link>
-                  </MetricMenuItem>
-
-                  <MetricMenuItem>
-                    <Link href="/landelijk/rioolwater">
-                      <a className={getClassName('/landelijk/rioolwater')}>
-                        <TitleWithIcon
-                          icon={<RioolwaterMonitoring />}
-                          title={siteText.rioolwater_metingen.titel_sidebar}
-                        />
-                        <span className="metric-wrapper">
-                          <SewerWaterMetric data={data.sewer} />
                         </span>
                       </a>
                     </Link>
