@@ -676,12 +676,12 @@
         "verantwoording": ""
       },
       {
-        "cijfer": "",
-        "verantwoording": ""
+        "cijfer": "Mortality monitor CBS",
+        "verantwoording": "General data on mortality (mortality monitor) is provided by the national office Statistics Netherlands (CBS) and updated weekly. The predicted number of deaths per week have been taken from the mortality projections made once every year by the CBS. "
       },
       {
         "cijfer": "Disability care homes",
-        "verantwoording": "Every day the National Institute for Public Health and the Environment (RIVM) provides open data about the COVID-19 situation in disability care homes. A description of the data set can be found here. \n\nThis data cannot always be clearly linked to a specific safety region. As a result, the total sum of numbers at safety-region level may be less than the numbers at national level. The number of deaths is based on the date of death. However, when the date of death is unknown that death is not included in this statistic in the dashboard.\n\nThe word ‘locations’ refers to the 2,586 care homes in the Netherlands that are registered by Zorgkaart Nederland [LINK] as providing residential care to people with disabilities. The number of locations in each safety region is provided by RIVM. Care homes with the same postcode are counted as one location, which is identical to the method used to determine the number of infected locations. The number of locations in each safety region is needed in order to calculate the percentage of infected locations in that region. The total number of locations in the Netherlands is calculated by adding up the numbers for all of the safety regions.\n\nAs with nursing homes, information about disability care homes is based on records kept by the municipal health services (GGDs). As of 1 July 2020, every time a person tests positive for COVID-19, the GGD asks whether that person is a resident of a disability care home. A person is considered to be a disability care home resident if this is evident from information in OSIRIS (the database used by RIVM for this purpose). If it is unknown whether someone is a disability care home resident, their postcode can be used to link them to a registered disability care home or a setting (place where the infection may have occurred) labelled as a ‘care home’ or something similar.\n"
+        "verantwoording": "Every day the National Institute for Public Health and the Environment (RIVM) provides open data about the COVID-19 situation in disability care homes. A description of the data set can be found here. \n\nThis data cannot always be clearly linked to a specific safety region. As a result, the total sum of numbers at safety-region level may be less than the numbers at national level. The number of deaths is based on the date of death. However, when the date of death is unknown that death is not included in this statistic in the dashboard.\n\nThe word ‘locations’ refers to the 2,586 care homes in the Netherlands that are registered by [Zorgkaart Nederland](https://www.zorgkaartnederland.nl/) as providing residential care to people with disabilities. The number of locations in each safety region is provided by RIVM. Care homes with the same postcode are counted as one location, which is identical to the method used to determine the number of infected locations. The number of locations in each safety region is needed in order to calculate the percentage of infected locations in that region. The total number of locations in the Netherlands is calculated by adding up the numbers for all of the safety regions.\n\nAs with nursing homes, information about disability care homes is based on records kept by the municipal health services (GGDs). As of 1 July 2020, every time a person tests positive for COVID-19, the GGD asks whether that person is a resident of a disability care home. A person is considered to be a disability care home resident if this is evident from information in OSIRIS (the database used by RIVM for this purpose). If it is unknown whether someone is a disability care home resident, their postcode can be used to link them to a registered disability care home or a setting (place where the infection may have occurred) labelled as a ‘care home’ or something similar.\n"
       },
       {
         "cijfer": "People over 70 living at home",
@@ -1751,7 +1751,8 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
         "text": "RIVM"
       }
-    }
+    },
+    "kpi_titel": ""
   },
   "thuiswonende_ouderen": {
     "titel_sidebar": "People over 70 living at home",
@@ -1855,93 +1856,93 @@
     "kpi_titel": ""
   },
   "sterfte": {
-    "titel_sidebar": "",
-    "titel_kpi": "",
+    "titel_sidebar": "Deaths",
+    "titel_kpi": "Daily reported deaths from COVID-19",
     "metadata": {
-      "title": "",
-      "description": ""
+      "title": "Deaths | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Number of deceased per day"
     },
     "section_deceased_rivm": {
-      "title": "",
-      "description": "",
-      "datums": "",
+      "title": "Deaths",
+      "description": "These figures show the number of deaths related directly or indirectly to COVID-19, as reported to the GGD. The actual number of deaths related to COVID-19 may be higher because not all people with COVID-19 get tested and there is no requirement for reporting COVID-19 related deaths. ",
+      "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
       "bronnen": {
         "rivm": {
           "href": "",
-          "text": "",
+          "text": "RIVM",
           "download": ""
         }
       },
       "reference": {
-        "href": "",
-        "text": ""
+        "href": "/verantwoording#deaths",
+        "text": "Read more in 'explanation of the data presented'."
       },
-      "kpi_covid_daily_title": "",
-      "kpi_covid_daily_description": "",
-      "kpi_covid_total_title": "",
-      "kpi_covid_total_description": "",
-      "line_chart_covid_daily_title": ""
+      "kpi_covid_daily_title": "Daily reported deaths from COVID-19",
+      "kpi_covid_daily_description": "This figure shows the number of COVID-19 deaths reported to the GGD, per day. It includes late reports of deaths that occurred in the preceding days.",
+      "kpi_covid_total_title": "Total reported deaths from/related to COVID-19 per 100,000 inhabitants.",
+      "kpi_covid_total_description": "This figure shows the number of deaths from/related to COVID-19 reported yesterday, per 100,000 inhabitants.",
+      "line_chart_covid_daily_title": "Number of reported deaths related to COVID-19 over time"
     },
-    "kpi_titel": ""
+    "kpi_titel": "Daily reported deaths from COVID-19"
   },
   "veiligheidsregio_sterfte": {
-    "titel_sidebar": "",
-    "titel_kpi": "",
+    "titel_sidebar": "Deaths",
+    "titel_kpi": "Gemeld aantal patiënten overleden aan COVID-19 per dag",
     "metadata": {
-      "title": "",
-      "description": ""
+      "title": "Deaths in {{safetyRegion}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Number of deceased per day in {{safetyRegion}}"
     },
     "section_deceased_rivm": {
-      "title": "",
-      "description": "",
-      "datums": "",
+      "title": "Deaths",
+      "description": "These figures show the number of deaths related directly or indirectly to COVID-19, as reported to the GGD. The actual number of deaths related to COVID-19 may be higher because not all people with COVID-19 get tested and there is no requirement for reporting COVID-19 related deaths. ",
+      "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
       "bronnen": {
         "rivm": {
           "href": "",
-          "text": "",
+          "text": "RIVM",
           "download": ""
         }
       },
       "reference": {
-        "href": "",
-        "text": ""
+        "href": "/verantwoording#deaths",
+        "text": "Read more in 'explanation of the data presented'."
       },
-      "kpi_covid_daily_title": "",
-      "kpi_covid_daily_description": "",
-      "kpi_covid_total_title": "",
-      "kpi_covid_total_description": "",
-      "line_chart_covid_daily_title": ""
+      "kpi_covid_daily_title": "Daily reported deaths from COVID-19",
+      "kpi_covid_daily_description": "This figure shows the number of COVID-19 deaths reported to the GGD, per day. It includes late reports of deaths that occurred in the preceding days.",
+      "kpi_covid_total_title": "Total reported deaths from/related to COVID-19 per 100,000 inhabitants.",
+      "kpi_covid_total_description": "This figure shows the number of deaths from/related to COVID-19 reported yesterday, per 100,000 inhabitants. ",
+      "line_chart_covid_daily_title": "Number of reported deaths related to COVID-19 over time"
     },
-    "kpi_titel": ""
+    "kpi_titel": "Daily reported deaths from COVID-19"
   },
   "section_sterftemonitor": {
-    "title": "",
-    "description": "",
-    "datums": "",
+    "title": "Mortality monitor",
+    "description": "Every week the national office Statistics Netherlands (CBS) publishes data on the total number of deaths in the Netherlands and compares this to the predicted number of deaths, corrected for extreme temperatures, epidemics, etc. If more deaths occur than predicted, these are considered excess deaths. This graph may show a more complete picture of COVID-19 related deaths than the numbers reported by the GGD because not everyone who dies from COVID-19 has been tested for it. ",
+    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "bronnen": {
       "cbs": {
         "href": "",
-        "text": "",
+        "text": "CBS",
         "download": ""
       }
     },
     "reference": {
-      "href": "",
-      "text": ""
+      "href": "/verantwoording#mortality-monitor-CBS",
+      "text": "Read more in 'explanation of the data presented'"
     },
     "cbs_message": {
-      "title": "",
-      "published_text": "",
-      "message": "",
+      "title": "CBS: Higher mortality in week 48",
+      "published_text": "Date of publication: Friday 4 December",
+      "message": "In week 48 (23 to 29 November inclusive), the estimated number of deaths stood at 3,450. This is approximately 150 more than in the previous week, when there were 3,293 deaths. Mortality is always higher in winter. However, there were still over 400 more deaths recorded in week 48 than normally expected for this period. Statistics Netherlands (CBS) reports this based on the latest provisional weekly mortality figures.",
       "link": {
-        "href": "",
-        "text": ""
+        "href": "https://www.cbs.nl/en-gb/news/2020/49/higher-mortality-in-week-48",
+        "text": "Website CBS"
       }
     },
-    "deceased_monitor_chart_title": "",
-    "deceased_monitor_chart_description": "",
-    "deceased_monitor_chart_legenda_registered": "",
-    "deceased_monitor_chart_legenda_expected": "",
-    "deceased_monitor_chart_legenda_expected_margin": ""
+    "deceased_monitor_chart_title": "Total number of deaths per week",
+    "deceased_monitor_chart_description": "This graph shows the total number of deaths per week in the Netherlands in 2020. The actual number of deaths is compared to the number of deaths predicted based on the figures from preceding years. The light blue line, drawn within its range of uncertainty, shows the number of deaths predicted over the year. The dark blue line shows the number of actual deaths.",
+    "deceased_monitor_chart_legenda_registered": "Actual mortality",
+    "deceased_monitor_chart_legenda_expected": "Predicted mortality",
+    "deceased_monitor_chart_legenda_expected_margin": "Range of predicted mortality"
   }
 }

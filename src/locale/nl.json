@@ -676,12 +676,12 @@
         "verantwoording": "@TODO"
       },
       {
-        "cijfer": "Sterftemonitor",
-        "verantwoording": "@TODO"
+        "cijfer": "Sterftemonitor CBS",
+        "verantwoording": "De algemene sterftecijfers (sterfte monitor) zijn afkomstig van het Centraal Bureau voor de Statistiek (CBS). Deze gegevens worden wekelijks bijgewerkt. De verwachte sterftegevallen per week zijn onderdeel van een eenmalige prognose van het CBS die per jaar opnieuw wordt gemaakt. "
       },
       {
         "cijfer": "Gehandicaptenzorg",
-        "verantwoording": "De informatie over gehandicaptenzorg wordt dagelijks beschikbaar gesteld via open data door het RIVM. Zie hier de beschrijving van deze dataset. \n\nIn de aangeleverde gegevens is soms de veiligheidsregio onbekend. Dit heeft als gevolg dat het totaal van de weergegeven cijfers op veiligheidsregio niveau minder kan zijn dan wat er op landelijk niveau wordt getoond. Het aantal overleden personen wordt getoond op basis van de datum van overlijden. De overlijdensdatum is echter niet altijd bekend. Als dit zo is, dan zijn die gevallen niet op het dashboard zichtbaar.\n\nMet locaties worden de 2586 locaties bedoeld die volgens zorgkaart Nederland [LINK] bekend zijn als woning voor personen met een beperking in Nederland. Het totaal aantal locaties per veiligheidsregio is door het RIVM aangeleverd. Locaties met dezelfde postcode worden hierbij gerekend tot één locatie. Dit is gedaan omdat het aantal besmette locaties ook met dezelfde logica wordt bepaald. Het totaal aantal locaties per veiligheidsregio is nodig om het percentage besmette locaties te berekenen. Voor het landelijke totaal aantal locaties, worden de totalen van alle veiligheidsregio's bij elkaar opgeteld.\n\nVoor de gehandicaptenzorg wordt net als bij de verpleeghuizen gebruik gemaakt van de registratie van de GGD’en. Sinds 1 juli vraagt de GGD voor iedere nieuw positief geteste persoon of dit een bewoner is van een gehandicapteninstelling. Iemand wordt als een bewoner van een gehandicapteninstelling aangemerkt wanneer deze volgens de gegevens van OSIRIS (de database die het RIVM hiervoor hanteert) blijkt dat het een bewoner is van een gehandicapteninstelling. Indien het onbekend is of een persoon in een instelling voor gehandicaptenzorg woont, wordt iemand meegeteld wanneer deze  ‘gehandicaptenzorginstelling’ als locatie van de besmetting heeft en geen zorgmedewerker is, of op basis van de inhoud van vrije tekstvelden gelinkt kan worden aan een gehandicaptenzorginstelling en geen zorgmedewerker is. \n"
+        "verantwoording": "De informatie over gehandicaptenzorg wordt dagelijks beschikbaar gesteld via open data door het RIVM. Zie hier de beschrijving van deze dataset. \n\nIn de aangeleverde gegevens is soms de veiligheidsregio onbekend. Dit heeft als gevolg dat het totaal van de weergegeven cijfers op veiligheidsregio niveau minder kan zijn dan wat er op landelijk niveau wordt getoond. Het aantal overleden personen wordt getoond op basis van de datum van overlijden. De overlijdensdatum is echter niet altijd bekend. Als dit zo is, dan zijn die gevallen niet op het dashboard zichtbaar.\n\nMet locaties worden de 2586 locaties bedoeld die volgens [Zorgkaart Nederland](https://www.zorgkaartnederland.nl/) bekend zijn als woning voor personen met een beperking in Nederland. Het totaal aantal locaties per veiligheidsregio is door het RIVM aangeleverd. Locaties met dezelfde postcode worden hierbij gerekend tot één locatie. Dit is gedaan omdat het aantal besmette locaties ook met dezelfde logica wordt bepaald. Het totaal aantal locaties per veiligheidsregio is nodig om het percentage besmette locaties te berekenen. Voor het landelijke totaal aantal locaties, worden de totalen van alle veiligheidsregio's bij elkaar opgeteld.\n\nVoor de gehandicaptenzorg wordt net als bij de verpleeghuizen gebruik gemaakt van de registratie van de GGD’en. Sinds 1 juli vraagt de GGD voor iedere nieuw positief geteste persoon of dit een bewoner is van een gehandicapteninstelling. Iemand wordt als een bewoner van een gehandicapteninstelling aangemerkt wanneer deze volgens de gegevens van OSIRIS (de database die het RIVM hiervoor hanteert) blijkt dat het een bewoner is van een gehandicapteninstelling. Indien het onbekend is of een persoon in een instelling voor gehandicaptenzorg woont, wordt iemand meegeteld wanneer deze  ‘gehandicaptenzorginstelling’ als locatie van de besmetting heeft en geen zorgmedewerker is, of op basis van de inhoud van vrije tekstvelden gelinkt kan worden aan een gehandicaptenzorginstelling en geen zorgmedewerker is. \n"
       },
       {
         "cijfer": "Thuiswonende 70-plussers",
@@ -1857,14 +1857,14 @@
   },
   "sterfte": {
     "titel_sidebar": "Sterfte",
-    "titel_kpi": "Aantal overledenen per dag",
+    "titel_kpi": "Gemeld aantal patiënten overleden aan COVID-19 per dag",
     "metadata": {
       "title": "Sterfte | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Aantal overledenen per dag"
     },
     "section_deceased_rivm": {
-      "title": "Gemelde covid-19 sterfte",
-      "description": "Deze cijfers laten zien van hoeveel mensen bekend is dat ze zijn overleden aan COVID-19. Het werkelijke aantal overleden COVID-19 patiënten is hoger dan het aantal meldingen in de surveillance, omdat niet alle overleden patiënten getest worden.",
+      "title": "Sterfte",
+      "description": "Deze cijfers laten zien van hoeveel patiënten er aan de GGD gemeld is dat ze zijn overleden aan/met COVID-19. Het werkelijke aantal patiënten dat is overleden aan/met COVID-19 is waarschijnlijk hoger, omdat niet alle COVID-19 patiënten getest worden en er geen meldingsplicht geldt voor overlijden aan/met COVID-19. ",
       "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "bronnen": {
         "rivm": {
@@ -1877,24 +1877,24 @@
         "href": "/verantwoording#sterfte",
         "text": "Lees meer in de cijferverantwoording."
       },
-      "kpi_covid_daily_title": "Gemeld aantal overleden covid-patienten per dag",
-      "kpi_covid_daily_description": "Dit getal laat zien van hoeveel mensen overledenen zijn aan het COVID-19 virus. Een deel van de meldingen is van eerdere dagen, die later zijn doorgegeven.",
-      "kpi_covid_total_title": "Totaal aantal gemelde overleden covid-patienten",
-      "kpi_covid_total_description": "Dit getal laat het totaal aantal mensen zien waarvan bekend is dat ze zijn overleden aan COVID-19. Dit wordt bijgehouden sinds 28 februari.",
-      "line_chart_covid_daily_title": "Aantal overledenen over tijd"
+      "kpi_covid_daily_title": "Gemeld aantal patiënten overleden aan COVID-19 per dag",
+      "kpi_covid_daily_description": "Dit getal toont het aantal patiënten waarvan aan de GGD gemeld is dat ze zijn overleden aan COVID-19, per dag. Een deel van de overlijdens is van eerdere dagen, die later zijn doorgegeven.",
+      "kpi_covid_total_title": "Totaal aantal personen overleden aan/met COVID-19",
+      "kpi_covid_total_description": "Dit getal laat van zien hoeveel personen in totaal is gemeld dat ze zijn overleden aan/met COVID-19, sinds het begin van de meldingen.",
+      "line_chart_covid_daily_title": "Gemelde aantal patiënten overleden aan/met COVID-19 over tijd"
     },
-    "kpi_titel": "Aantal overledenen per dag"
+    "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
   },
   "veiligheidsregio_sterfte": {
     "titel_sidebar": "Sterfte",
-    "titel_kpi": "Aantal overledenen per dag",
+    "titel_kpi": "Gemeld aantal patiënten overleden aan COVID-19 per dag",
     "metadata": {
       "title": "Sterfte in {{safetyRegion}} | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Aantal overledenen per dag in {{safetyRegion}}"
     },
     "section_deceased_rivm": {
-      "title": "Gemelde covid-19 sterfte in {{safetyRegion}}",
-      "description": "Deze cijfers laten zien van hoeveel mensen bekend is dat ze zijn overleden aan COVID-19. Het werkelijke aantal overleden COVID-19 patiënten is hoger dan het aantal meldingen in de surveillance, omdat niet alle overleden patiënten getest worden.",
+      "title": "Sterfte",
+      "description": "Deze cijfers laten zien van hoeveel patiënten er aan de GGD gemeld is dat ze zijn overleden aan/met COVID-19. Het werkelijke aantal patiënten dat is overleden aan/met COVID-19 is waarschijnlijk hoger, omdat niet alle COVID-19 patiënten getest worden en er geen meldingsplicht geldt voor overlijden aan/met COVID-19. ",
       "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "bronnen": {
         "rivm": {
@@ -1907,17 +1907,17 @@
         "href": "/verantwoording#sterfte",
         "text": "Lees meer in de cijferverantwoording."
       },
-      "kpi_covid_daily_title": "Gemeld aantal overleden covid-patienten per dag",
-      "kpi_covid_daily_description": "Dit getal laat zien van hoeveel mensen overledenen zijn aan het COVID-19 virus. Een deel van de meldingen is van eerdere dagen, die later zijn doorgegeven.",
-      "kpi_covid_total_title": "Totaal aantal gemelde overleden covid-patienten",
-      "kpi_covid_total_description": "Dit getal laat het totaal aantal mensen zien waarvan bekend is dat ze zijn overleden aan COVID-19. Dit wordt bijgehouden sinds 28 februari.",
-      "line_chart_covid_daily_title": "Aantal overledenen over tijd"
+      "kpi_covid_daily_title": "Gemeld aantal patiënten overleden aan COVID-19 per dag",
+      "kpi_covid_daily_description": "Dit getal toont het aantal patiënten waarvan aan de GGD gemeld is dat ze zijn overleden aan COVID-19, per dag. Een deel van de overlijdens is van eerdere dagen, die later zijn doorgegeven.",
+      "kpi_covid_total_title": "Totaal aantal personen overleden aan/met COVID-19",
+      "kpi_covid_total_description": "Dit getal laat van zien hoeveel personen in totaal is gemeld dat ze zijn overleden aan/met COVID-19, sinds het begin van de meldingen.",
+      "line_chart_covid_daily_title": "Gemelde aantal patiënten overleden aan/met COVID-19 over tijd"
     },
-    "kpi_titel": "Aantal overledenen per dag"
+    "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
   },
   "section_sterftemonitor": {
-    "title": "Landelijke sterftemonitor",
-    "description": "Sinds de griepepidemie van 2009 houdt het RIVM Rijksinstituut voor Volksgezondheid en Milieu wekelijks het aantal overleden mensen in de gaten met gegevens van het CBS Centraal Bureau voor de Statistiek.",
+    "title": "Sterftemonitor",
+    "description": "Het Centraal Bureau voor de Statistiek (CBS) publiceert wekelijks het totaal aantal overleden mensen in Nederland en vergelijkt dit aantal met het verwacht aantal overlijdens gecorrigeerd voor koude- of hittegolven, uitbraken en epidemieën. Er is sprake van oversterfte indien meer mensen overlijden dan verwacht. Deze grafiek geeft mogelijk een completer beeld van sterfte door COVID-19 dan de door de GGD’en gemelde COVID-19 sterfte, omdat niet alle mensen die overlijden aan COVID-19 getest zijn op COVID-19. ",
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "bronnen": {
       "cbs": {
@@ -1927,22 +1927,22 @@
       }
     },
     "reference": {
-      "href": "/verantwoording#sterftemonitor",
+      "href": "/verantwoording#sterftemonitor-CBS",
       "text": "Lees meer in de cijferverantwoording."
     },
     "cbs_message": {
-      "title": "CBS: Sterfte neemt verder toe",
-      "published_text": "Publicatiedatum: maandag 2 november",
-      "message": "Het CBS meldt vandaag in de week van 26 oktober tot en met 1 november, net als in de voorgaande weken, een hogere sterfte dan verwacht. De sterfte in deze week is 700 hoger dan verwacht in deze periode. Ook het RIVM Rijksinstituut voor Volksgezondheid en Milieu houdt sterftecijfers wekelijks bij. In de meest recente data van het RIVM van 22 oktober tot en met 28 oktober, is de sterfte sterk verhoogd in de leeftijdsgroepen 65-74 jaar en 75 jaar en ouder.",
+      "title": "CBS: Sterfte in week 48 toegenomen",
+      "published_text": "Publicatiedatum: vrijdag 4 december",
+      "message": "In week 48 (23 tot en met 29 november 2020) overleden naar schatting 3 450 mensen. Dat zijn er ongeveer 150 meer dan een week eerder, toen 3 293 mensen overleden. In de winter neemt het aantal overledenen altijd toe. De sterfte in week 48 is echter nog ruim 400 hoger dan verwacht voor deze periode. Dat meldt het CBS op basis van de voorlopige sterftecijfers per week.",
       "link": {
-        "href": "#",
+        "href": "https://www.cbs.nl/nl-nl/nieuws/2020/49/sterfte-in-week-48-toegenomen",
         "text": "Website CBS"
       }
     },
-    "deceased_monitor_chart_title": "Landelijke overledenen per week in 2020",
-    "deceased_monitor_chart_description": "Toelichting over sterftecijfers van het CBS. Deze grafiek loopt tot de dag van vandaag en heeft hetzelfde startpunt als de COVID-19 sterfte grafiek.",
-    "deceased_monitor_chart_legenda_registered": "Overleden",
+    "deceased_monitor_chart_title": "Totaal aantal overledenen per week",
+    "deceased_monitor_chart_description": "Deze grafiek laat zien hoeveel mensen er in totaal wekelijks overleden zijn in Nederland. Het aantal daadwerkelijk overleden mensen wordt vergeleken met het aantal overlijdens dat wordt verwacht op basis van voorgaande jaren. De lichtblauwe lijn en omliggende marge tonen de sterfte die op dat moment in het jaar wordt verwacht, de donkerblauwe lijn toont de sterfte zoals deze heeft plaatsgevonden.",
+    "deceased_monitor_chart_legenda_registered": "Daadwerkelijk aantal overledenen",
     "deceased_monitor_chart_legenda_expected": "Verwacht aantal overledenen",
-    "deceased_monitor_chart_legenda_expected_margin": "Verwacht aantal overledenen (marge)"
+    "deceased_monitor_chart_legenda_expected_margin": "Boven en ondergrens van verwacht aantal overledenen"
   }
 }
