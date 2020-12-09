@@ -33,7 +33,9 @@ export function replaceVariablesInText(
       return (variables[variableName.trim()] ?? '').toString();
     }
     throw new Error(
-      `Placeholder name ${trimmedName} was not defined in the given variables`
+      `Placeholder name ${trimmedName} was not defined in the given variables: ${JSON.stringify(
+        variables
+      )}, text: ${translation}`
     );
   });
 }
