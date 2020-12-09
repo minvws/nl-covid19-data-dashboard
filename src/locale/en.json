@@ -1270,7 +1270,8 @@
         "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
         "text": "RIVM"
       }
-    }
+    },
+    "kpi_titel": ""
   },
   "veiligheidsregio_verpleeghuis_oversterfte": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
