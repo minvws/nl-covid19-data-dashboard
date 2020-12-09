@@ -14,7 +14,7 @@ export function useElementSize<T extends HTMLElement>(
   useEffect(() => {
     const debounceHandleResize = debounce(handleResize, 60);
 
-    handleResize();
+    requestAnimationFrame(handleResize);
     window.addEventListener('resize', debounceHandleResize);
 
     return () => window.removeEventListener('resize', debounceHandleResize);
