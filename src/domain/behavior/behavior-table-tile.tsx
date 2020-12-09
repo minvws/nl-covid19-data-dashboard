@@ -178,13 +178,7 @@ export function BehaviorTableTile({
             ).map((behavior) => (
               <tr key={behavior.id}>
                 <Cell>{formatPercentage(behavior.percentage ?? 0)}%</Cell>
-                <Cell
-                  color={
-                    behaviorType === 'compliance'
-                      ? 'data.primary'
-                      : 'data.secondary'
-                  }
-                >
+                <Cell color="data.primary">
                   <PercentageBar percentage={behavior.percentage ?? 0} />
                 </Cell>
                 <Cell>
