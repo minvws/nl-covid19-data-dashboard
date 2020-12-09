@@ -8,9 +8,7 @@ import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import siteText, { TALLLanguages } from '~/locale/index';
 import { getMetricConfig, DataScope } from '~/metric-config';
-import {
-  MetricKeys /* DifferenceKeys */,
-} from '~/components/choropleth/shared';
+import { MetricKeys } from '~/components/choropleth/shared';
 
 interface SidebarMetricProps<T extends { difference: unknown }> {
   scope: DataScope;
@@ -18,10 +16,8 @@ interface SidebarMetricProps<T extends { difference: unknown }> {
   metricName: ValueOf<MetricKeys<T>>;
   metricProperty: string;
   localeTextKey: keyof TALLLanguages;
-  // differenceKey?: ValueOf<DifferenceKeys<T>>;
   differenceKey?: string;
   showBarScale?: boolean;
-  isWeeklyData?: boolean;
   annotationKey?: string;
 
   /**
@@ -128,6 +124,7 @@ export function SidebarMetric<T extends { difference: unknown }>({
         isPercentage={config.isPercentage}
         description={description}
         difference={differenceValue}
+        valueAnnotation={valueAnnotation}
       />
       {showBarScale && (
         <SidebarBarScale

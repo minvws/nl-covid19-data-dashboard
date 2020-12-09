@@ -13,6 +13,16 @@ export type NlConfig = Partial<
 >;
 
 export const nl: NlConfig = {
+  verdenkingen_huisartsen: {
+    geschat_aantal: {
+      isWeeklyData: true,
+    },
+  },
+  sewer: {
+    average: {
+      isWeeklyData: true,
+    },
+  },
   reproduction_index_last_known_average: {
     reproduction_index_avg: {
       isDecimal: true,

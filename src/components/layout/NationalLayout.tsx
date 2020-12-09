@@ -23,10 +23,7 @@ import { TitleWithIcon } from '~/components-styled/aside/title-with-icon';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
 import { DeceasedMetric } from '~/components/common/deceased-metric';
 import { ElderlyAtHomeMetric } from '~/components/common/elderly-at-home-metric';
-import { NursingHomeInfectedPeopleMetric } from '~/components/common/nursing-home-infected-people-metric';
 import { InfectiousPeopleMetric } from '~/components/landelijk/infectious-people-metric';
-import { SewerWaterMetric } from '~/components/landelijk/sewer-water-metric';
-import { SuspectedPatientsMetric } from '~/components/landelijk/suspected-patients-metric';
 import Layout from '~/components/layout';
 import { BehaviorMetric } from '~/domain/behavior/behavior-metric';
 import siteText from '~/locale/index';
@@ -337,11 +334,14 @@ function NationalLayout(props: NationalLayoutProps) {
                               .titel_sidebar
                           }
                         />
-                        <span className="metric-wrapper">
-                          <NursingHomeInfectedPeopleMetric
-                            data={data.nursing_home.last_value}
-                          />
-                        </span>
+                        <SidebarMetric
+                          data={data}
+                          scope="nl"
+                          metricName="nursing_home"
+                          metricProperty="newly_infected_people"
+                          localeTextKey="verpleeghuis_positief_geteste_personen"
+                          differenceKey="nursing_home__newly_infected_people"
+                        />
                       </a>
                     </Link>
                   </MetricMenuItem>
@@ -401,9 +401,16 @@ function NationalLayout(props: NationalLayoutProps) {
                           icon={<RioolwaterMonitoring />}
                           title={siteText.rioolwater_metingen.titel_sidebar}
                         />
-                        <span className="metric-wrapper">
-                          <SewerWaterMetric data={data.sewer} />
-                        </span>
+
+                        <SidebarMetric
+                          data={data}
+                          scope="nl"
+                          metricName="sewer"
+                          metricProperty="average"
+                          localeTextKey="rioolwater_metingen"
+                          differenceKey="sewer__average"
+                          annotationKey="riool_normalized"
+                        />
                       </a>
                     </Link>
                   </MetricMenuItem>
@@ -419,11 +426,14 @@ function NationalLayout(props: NationalLayoutProps) {
                           icon={<Arts />}
                           title={siteText.verdenkingen_huisartsen.titel_sidebar}
                         />
-                        <span className="metric-wrapper">
-                          <SuspectedPatientsMetric
-                            data={data.verdenkingen_huisartsen.last_value}
-                          />
-                        </span>
+                        <SidebarMetric
+                          data={data}
+                          scope="nl"
+                          metricName="verdenkingen_huisartsen"
+                          metricProperty="geschat_aantal"
+                          localeTextKey="verdenkingen_huisartsen"
+                          differenceKey="verdenkingen_huisartsen__geschat_aantal"
+                        />
                       </a>
                     </Link>
                   </MetricMenuItem>

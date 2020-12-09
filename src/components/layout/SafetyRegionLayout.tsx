@@ -21,15 +21,12 @@ import { ComboBox } from '~/components/comboBox';
 import { DeceasedMetric } from '~/components/common/deceased-metric';
 import { ElderlyAtHomeMetric } from '~/components/common/elderly-at-home-metric';
 import { getLayout as getSiteLayout } from '~/components/layout';
-import { SewerWaterMetric } from '~/components/veiligheidsregio/sewer-water-metric';
 import safetyRegions from '~/data/index';
 import { BehaviorMetric } from '~/domain/behavior/behavior-metric';
 import siteText from '~/locale/index';
 import { ISafetyRegionData } from '~/static-props/safetyregion-data';
 import { Link } from '~/utils/link';
-import { getSewerWaterBarScaleData } from '~/utils/sewer-water/safety-region-sewer-water.util';
 import { useMediaQuery } from '~/utils/useMediaQuery';
-import { NursingHomeInfectedPeopleMetric } from '../common/nursing-home-infected-people-metric';
 
 export function getSafetyRegionLayout() {
   return function (
@@ -273,11 +270,14 @@ function SafetyRegionLayout(
                                 .titel_sidebar
                             }
                           />
-                          <span className="metric-wrapper">
-                            <NursingHomeInfectedPeopleMetric
-                              data={data.nursing_home.last_value}
-                            />
-                          </span>
+                          <SidebarMetric
+                            data={data}
+                            scope="vr"
+                            metricName="nursing_home"
+                            metricProperty="newly_infected_people"
+                            localeTextKey="verpleeghuis_positief_geteste_personen"
+                            differenceKey="nursing_home__newly_infected_people"
+                          />
                         </a>
                       </Link>
                     </MetricMenuItem>
@@ -356,11 +356,15 @@ function SafetyRegionLayout(
                                 .titel_sidebar
                             }
                           />
-                          <span className="metric-wrapper">
-                            <SewerWaterMetric
-                              data={getSewerWaterBarScaleData(data)}
-                            />
-                          </span>
+                          <SidebarMetric
+                            data={data}
+                            scope="vr"
+                            metricName="sewer"
+                            metricProperty="average"
+                            localeTextKey="veiligheidsregio_rioolwater_metingen"
+                            differenceKey="sewer__average"
+                            annotationKey="riool_normalized"
+                          />
                         </a>
                       </Link>
                     </MetricMenuItem>
