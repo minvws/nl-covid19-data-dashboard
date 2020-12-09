@@ -39,7 +39,7 @@ export function useTooltip<T>({
   const [isVisible, setIsVisible] = useState(false);
   const [coordinates, setCoordinates] = useState<TooltipCoordinates>();
   const [value, setValue] = useState<T>();
-  const [keyboardValueIndex, setKeyboardValueIndex] = useState<undefined>();
+  const [keyboardValueIndex, setKeyboardValueIndex] = useState<number>();
 
   const timer = useRef(-1);
 
