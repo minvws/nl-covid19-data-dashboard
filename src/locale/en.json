@@ -489,7 +489,7 @@
         "text": "RIVM"
       }
     },
-    "kpi_titel": ""
+    "kpi_titel": "Mortality per day"
   },
   "blok_verpleeghuis_zorg": {
     "title": "Nursing homes",
@@ -672,8 +672,8 @@
         "verantwoording": ""
       },
       {
-        "cijfer": "",
-        "verantwoording": ""
+        "cijfer": "Deaths",
+        "verantwoording": "These figures are supplied daily as open data by the National Institute for Public Health and the Environment (RIVM). They show the number of COVID-19 related deaths reported to RIVM in the past 24 hours, up to 10.00 on the day of publication. The date used is the date on which the death was reported by the GGD to RIVM. This may not be the same as the day on which the death occurred. The actual number of deaths related to COVID-19 is higher than what is reported by RIVM because there is no requirement for reporting COVID-19 related deaths. "
       },
       {
         "cijfer": "Mortality monitor CBS",
@@ -1054,7 +1054,6 @@
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "screen_reader_graph_content": "{{value}} virus particles per 100.000 inhabitants",
     "barscale_titel": "Average number of virus particles per 100,000 inhabitants",
-    "kpi_titel": "Average number of virus particles per 100,000 inhabitants",
     "extra_uitleg": "The weekly average for the municipality is calculated by adding up all the values measured in one week and dividing this by the number of measurements taken.",
     "barscale_screenreader_text": "{{value}} virus particles per 100.000 inhabitants",
     "linechart_titel": "Average number of virus particles per 100.000 inhabitants over time",
@@ -1089,7 +1088,8 @@
         "text": "RIVM",
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
       }
-    }
+    },
+    "kpi_titel": ""
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Level of risk",
@@ -1270,8 +1270,7 @@
         "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
         "text": "RIVM"
       }
-    },
-    "kpi_titel": ""
+    }
   },
   "veiligheidsregio_verpleeghuis_oversterfte": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -1643,8 +1642,8 @@
     "titel": "Disability care homes – Deaths",
     "pagina_toelichting": "Number of disability care home residents who have died from COVID-19.",
     "barscale_titel": "Number of deceased residents",
-    "barscale_screenreader_text": "",
-    "extra_uitleg": "This is an estimate of the number of disability care home residents in the Netherlands who have died from COVID-19 since 27 February 2020. ",
+    "barscale_screenreader_text": "{{value}} deceased residents",
+    "extra_uitleg": "This is an estimate of the number of disability care home residents in the Netherlands who have died from COVID-19 since 27 February 2020.",
     "linechart_titel": "Progression over time",
     "map_titel": "Disability care homes – deaths",
     "map_toelichting": "",
@@ -1664,7 +1663,7 @@
         "text": "RIVM"
       }
     },
-    "kpi_titel": ""
+    "kpi_titel": "Number of deceased residents"
   },
   "veiligheidsregio_gehandicaptenzorg_oversterfte": {
     "datums": "Latest values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -1675,7 +1674,7 @@
     "titel": "Disability care homes in {{safetyRegion}} – deaths",
     "pagina_toelichting": "Number of disability care home residents in this region with confirmed COVID-19 who have died, per day.",
     "barscale_titel": "Number of deceased residents",
-    "barscale_screenreader_text": "",
+    "barscale_screenreader_text": "{{value}}deceased residents.",
     "extra_uitleg": "This is an estimate of the number of COVID-19 related deaths reported yesterday among disability care home residents in this region.",
     "linechart_titel": "Progression over time",
     "map_titel": "",
@@ -1728,7 +1727,6 @@
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "titel": "Disability care homes in {{safetyRegion}} – confirmed cases among residents",
     "barscale_titel": "Disability care homes - daily confirmed cases (residents)",
-    "kpi_titel": "Disability care homes - daily confirmed cases (residents)",
     "extra_uitleg": "The number of disability care home residents in this region who were reported as testing positive for COVID-19 yesterday.",
     "pagina_toelichting": "People who live in disability care homes are often extra vulnerable to coronavirus infection. Because of this, Municipal health services (GGDs) monitor whether a persons who tests positive for COVID-19 lives in a disability care home. By doing so, measures can be taken if the number of cases in residential care increases. Read more in the explanation of the presented data.   ",
     "linechart_titel": "Progression over time",
@@ -1754,7 +1752,8 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
         "text": "RIVM"
       }
-    }
+    },
+    "kpi_titel": ""
   },
   "thuiswonende_ouderen": {
     "titel_sidebar": "People over 70 living at home",
@@ -1866,7 +1865,7 @@
     },
     "section_deceased_rivm": {
       "title": "Deaths",
-      "description": "These figures show the number of deaths related directly or indirectly to COVID-19, as reported to the GGD. The actual number of deaths related to COVID-19 may be higher because not all people with COVID-19 get tested and there is no requirement for reporting COVID-19 related deaths. ",
+      "description": "These figures show the number of deaths from COVID-19, as reported to the GGD. The actual number of deaths from COVID-19 may be higher because not all people with COVID-19 get tested and there is no requirement for reporting deaths due to COVID-19. ",
       "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
       "bronnen": {
         "rivm": {
@@ -1881,9 +1880,9 @@
       },
       "kpi_covid_daily_title": "Daily reported deaths from COVID-19",
       "kpi_covid_daily_description": "This figure shows the number of COVID-19 deaths reported to the GGD, per day. It includes late reports of deaths that occurred in the preceding days.",
-      "kpi_covid_total_title": "Total reported deaths from/related to COVID-19 per 100,000 inhabitants.",
-      "kpi_covid_total_description": "This figure shows the number of deaths from/related to COVID-19 reported yesterday, per 100,000 inhabitants.",
-      "line_chart_covid_daily_title": "Number of reported deaths related to COVID-19 over time"
+      "kpi_covid_total_title": "Total reported deaths from COVID-19.",
+      "kpi_covid_total_description": "This figure shows the number of reported deaths from COVID-19, since the reporting of COVID-19 deaths started.",
+      "line_chart_covid_daily_title": "Number of reported deaths from COVID-19 over time"
     },
     "kpi_titel": "Daily reported deaths from COVID-19"
   },

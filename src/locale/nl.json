@@ -673,7 +673,7 @@
       },
       {
         "cijfer": "Sterfte",
-        "verantwoording": "@TODO"
+        "verantwoording": "Deze gegevens worden dagelijks aangeleverd als open data door het RIVM. Het gaat om het aantal overleden personen aan/met COVID-19 dat gemeld is aan het RIVM in de afgelopen 24 uur, tot 10uur op de dag van publicatie van het cijfer. De datum die gebruikt wordt, is de datum van melding door de GGD bij het RIVM. Dat is dus niet hetzelfde als de datum waarop mensen zijn overleden. Het werkelijke aantal overleden personen aan/met COVID-19 is hoger dan het dan het aantal overleden personen gemeld door het RIVM , omdat  er geen meldingsplicht geldt voor overlijden aan COVID-19. "
       },
       {
         "cijfer": "Sterftemonitor CBS",
@@ -1054,7 +1054,6 @@
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "screen_reader_graph_content": "{{value}} virusdeeltjes per 100.000 inwoners",
     "barscale_titel": "Gemiddelde aantal virusdeeltjes per 100.000 inwoners",
-    "kpi_titel": "Gemiddelde aantal virusdeeltjes per 100.000 inwoners",
     "extra_uitleg": "Alle rioolmeetwaarden van één week worden bij elkaar opgeteld en gedeeld door het aantal metingen, om tot dit wekelijkse gemiddelde te komen voor deze gemeente.",
     "barscale_screenreader_text": "{{value}} virusdeeltjes per 100.000 inwoners",
     "linechart_titel": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners over tijd",
@@ -1089,7 +1088,8 @@
         "text": "RIVM",
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
       }
-    }
+    },
+    "kpi_titel": "Gemiddelde aantal virusdeeltjes per 100.000 inwoners"
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Risiconiveaus",
@@ -1727,7 +1727,6 @@
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "titel": "Gehandicaptenzorg - positief geteste bewoners in {{safetyRegion}}",
     "barscale_titel": "Aantal positief geteste bewoners in verpleeghuizen per dag",
-    "kpi_titel": "Aantal positief geteste bewoners van gehandicapteninstellingen per dag",
     "extra_uitleg": "Het aantal bewoners van een instelling voor gehandicaptenzorg in deze regio waarvan gisteren is gemeld dat ze positief getest zijn op COVID-19.",
     "pagina_toelichting": "Bewoners van een instelling voor gehandicaptenzorg zijn vaak extra kwetsbaar bij een besmetting met het coronavirus. GGD’en houden daarom bij waneer een bewoner van een instelling positief test op COVID-19. Zo kunnen maatregelen worden genomen wanneer het aantal besmettingen in instellingen toeneemt. Lees meer in de cijferverantwoording. ",
     "linechart_titel": "Verloop over tijd",
@@ -1753,7 +1752,8 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
         "text": "RIVM"
       }
-    }
+    },
+    "kpi_titel": "Aantal positief geteste bewoners van gehandicapteninstellingen per dag"
   },
   "thuiswonende_ouderen": {
     "titel_sidebar": "Thuiswonende 70-plussers",
@@ -1865,7 +1865,7 @@
     },
     "section_deceased_rivm": {
       "title": "Sterfte",
-      "description": "Deze cijfers laten zien van hoeveel patiënten er aan de GGD gemeld is dat ze zijn overleden aan/met COVID-19. Het werkelijke aantal patiënten dat is overleden aan/met COVID-19 is waarschijnlijk hoger, omdat niet alle COVID-19 patiënten getest worden en er geen meldingsplicht geldt voor overlijden aan/met COVID-19. ",
+      "description": "Deze cijfers laten zien van hoeveel patiënten er aan de GGD gemeld is dat ze zijn overleden aan COVID-19. Het werkelijke aantal patiënten dat is overleden aan COVID-19 is waarschijnlijk hoger, omdat niet alle COVID-19 patiënten getest worden en er geen meldingsplicht geldt voor overlijden aan COVID-19. ",
       "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "bronnen": {
         "rivm": {
@@ -1880,9 +1880,9 @@
       },
       "kpi_covid_daily_title": "Gemeld aantal patiënten overleden aan COVID-19 per dag",
       "kpi_covid_daily_description": "Dit getal toont het aantal patiënten waarvan aan de GGD gemeld is dat ze zijn overleden aan COVID-19, per dag. Een deel van de overlijdens is van eerdere dagen, die later zijn doorgegeven.",
-      "kpi_covid_total_title": "Totaal aantal personen overleden aan/met COVID-19",
-      "kpi_covid_total_description": "Dit getal laat van zien hoeveel personen in totaal is gemeld dat ze zijn overleden aan/met COVID-19, sinds het begin van de meldingen.",
-      "line_chart_covid_daily_title": "Gemelde aantal patiënten overleden aan/met COVID-19 over tijd"
+      "kpi_covid_total_title": "Totaal aantal personen overleden aan COVID-19",
+      "kpi_covid_total_description": "Dit getal laat van zien hoeveel personen in totaal is gemeld dat ze zijn overleden aan COVID-19, sinds het begin van de meldingen.",
+      "line_chart_covid_daily_title": "Gemelde aantal patiënten overleden aan COVID-19 over tijd"
     },
     "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
   },
