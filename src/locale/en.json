@@ -1110,9 +1110,9 @@
   },
   "laatste_ontwikkelingen": {
     "title": "Latest developments",
-    "menu_subtitle": "Increse of number of confirmed cases",
-    "alle_cijfers_header": "",
-    "alle_cijfers_link": ""
+    "menu_subtitle": "Increase of number of confirmed cases",
+    "alle_cijfers_header": "Want to see all data?",
+    "alle_cijfers_link": "View all"
   },
   "escalatie_niveau": {
     "titel": "Level of risk",
@@ -1588,7 +1588,7 @@
     "map_titel": "Distribution of infected locations in the Netherlands",
     "map_toelichting": "This map shows the number of disability care homes that have reported at least one confirmed COVID-19 case, based on a positive test, in the last 28 days.",
     "metadata": {
-      "title": "Infected disability care homes | Dashboard Coronavirus | Governement.nl",
+      "title": "Infected disability care homes | Dashboard Coronavirus | Government.nl",
       "description": "National overview of the disability care homes that have reported at least one confirmed COVID-19 case."
     },
     "titel_sidebar": "Disability care",
@@ -1654,7 +1654,7 @@
     "titel_kpi": "Number of deceased residents",
     "reference": {
       "href": "/verantwoording#disability-care-homes",
-      "text": "Read more in explantion of the data presented"
+      "text": "Read more in explanation of the data presented"
     },
     "bronnen": {
       "rivm": {
@@ -1707,7 +1707,7 @@
     "linechart_titel": "Total no. of infected locations – progression over time",
     "barscale_screenreader_text": "",
     "metadata": {
-      "title": "Infected disability care homes in {{safetyRegionName}} | Dashboard Coronavirus | Governement.nl",
+      "title": "Infected disability care homes in {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
       "description": "Regional overview of the disability care homes in {{safetyRegionName}} that have reported at least one confirmed COVID-19 case."
     },
     "titel_sidebar": "Confirmed cases (homes)",
@@ -1811,7 +1811,7 @@
     "titel_sidebar": "People over 70 living at home",
     "titel_kpi": "",
     "metadata": {
-      "title": "Over-70s living at home in {{safetyRegion}} I Dashboard Coronvirus I Rijksoverheid.nl",
+      "title": "Over-70s living at home in {{safetyRegion}} I Dashboard Coronavirus I Rijksoverheid.nl",
       "description": "Over-70s living at home in {{safetyRegion}}"
     },
     "section_positive_tested": {
