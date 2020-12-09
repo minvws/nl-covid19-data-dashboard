@@ -29,7 +29,6 @@ import { ISafetyRegionData } from '~/static-props/safetyregion-data';
 import { Link } from '~/utils/link';
 import { getSewerWaterBarScaleData } from '~/utils/sewer-water/safety-region-sewer-water.util';
 import { useMediaQuery } from '~/utils/useMediaQuery';
-import { DisabilityCareInfectedPeopleMetric } from '../common/disability-care-infected-people-metric';
 import { NursingHomeInfectedPeopleMetric } from '../common/nursing-home-infected-people-metric';
 
 export function getSafetyRegionLayout() {
@@ -297,11 +296,14 @@ function SafetyRegionLayout(
                                 .titel_sidebar
                             }
                           />
-                          <span className="metric-wrapper">
-                            <DisabilityCareInfectedPeopleMetric
-                              data={data.disability_care.last_value}
-                            />
-                          </span>
+                          <SidebarMetric
+                            data={data}
+                            scope="vr"
+                            metricName="disability_care"
+                            metricProperty="newly_infected_people"
+                            localeTextKey="gehandicaptenzorg_positief_geteste_personen"
+                            showBarScale={false}
+                          />
                         </a>
                       </Link>
                     </MetricMenuItem>

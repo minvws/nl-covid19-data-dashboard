@@ -36,7 +36,6 @@ import { NationalPageProps } from '~/static-props/nl-data';
 import theme from '~/style/theme';
 import { Link } from '~/utils/link';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-import { DisabilityCareInfectedPeopleMetric } from '../common/disability-care-infected-people-metric';
 
 export function getNationalLayout(
   page: React.ReactNode,
@@ -364,11 +363,14 @@ function NationalLayout(props: NationalLayoutProps) {
                               .titel_sidebar
                           }
                         />
-                        <span className="metric-wrapper">
-                          <DisabilityCareInfectedPeopleMetric
-                            data={data.disability_care.last_value}
-                          />
-                        </span>
+                        <SidebarMetric
+                          data={data}
+                          scope="nl"
+                          metricName="disability_care"
+                          metricProperty="newly_infected_people"
+                          localeTextKey="gehandicaptenzorg_positief_geteste_personen"
+                          showBarScale={false}
+                        />
                       </a>
                     </Link>
                   </MetricMenuItem>
