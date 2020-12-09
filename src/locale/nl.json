@@ -668,10 +668,6 @@
         "verantwoording": "Dit dashboard is in korte tijd tot stand gekomen. Het is daarom nog niet gelukt om de code voor het inlezen van de data en het construeren van de JSON- bestanden open source beschikbaar te stellen. Dit zal binnen afzienbare tijd beschikbaar worden gesteld. De code van de webapplicatie is op 5 juni 2020 gepubliceerd op [GitHub](https://github.com/minvws/nl-covid19-data-dashboard). De [databerekeningen](https://github.com/minvws/nl-covid19-data-backend-processing) zijn ook beschikbaar via Github."
       },
       {
-        "cijfer": "Open source data verwerking",
-        "verantwoording": "Dit dashboard is in korte tijd tot stand gekomen. Het is daarom nog niet gelukt om de code voor het inlezen van de data en het construeren van de JSON- bestanden open source beschikbaar te stellen. Dit zal binnen afzienbare tijd beschikbaar worden gesteld. De code van de webapplicatie is op 5 juni 2020 gepubliceerd op [GitHub](https://github.com/minvws/nl-covid19-data-dashboard). De [databerekeningen](https://github.com/minvws/nl-covid19-data-backend-processing) zijn ook beschikbaar via Github."
-      },
-      {
         "cijfer": "Sterfte",
         "verantwoording": "Deze gegevens worden dagelijks aangeleverd als [open data](https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv) door het RIVM. Zie [hier](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427) een beschrijving van deze dataset. Het gaat om het aantal overleden personen aan/met COVID-19 dat gemeld is aan het RIVM in de afgelopen 24 uur, tot 10uur op de dag van publicatie van het cijfer. De datum die gebruikt wordt, is de datum van melding door de GGD bij het RIVM. Dat is dus niet hetzelfde als de datum waarop mensen zijn overleden. Het werkelijke aantal overleden personen aan/met COVID-19 is hoger dan het dan het aantal overleden personen gemeld door het RIVM , omdat  er geen meldingsplicht geldt voor overlijden aan COVID-19."
       },
@@ -1763,11 +1759,11 @@
       "description": "Thuiswonende ouderen."
     },
     "section_positive_tested": {
-      "title": "Thuiswonende 70-plusser",
+      "title": "Thuiswonende 70-plussers",
       "description": "Personen van 70 jaar ens ouder zijn extra kwetsbaar bij een besmetting met het coronavirus. Door zicht te houden op het aantal besmettingen onder deze groep kunnen de juiste maatregelen genomen worden om het virus in te dammen.Het gaat hierbij om zelfstandig wonenden. Personen van 70+ die zijn opgenomen in een verpleeghuis of instelling voor gehandicaptenzorg worden op dit dashboard in die groepen meegeteld. Lees meer in de cijferverantwoording.   ",
       "reference": {
         "href": "/verantwoording#thuiswonende-70-plussers",
-        "text": "Lees meer in de [cijferverantwoording](https://coronadashboard.rijksoverheid.nl/verantwoording)."
+        "text": "Lees meer in de cijferverantwoording."
       },
       "bronnen": {
         "rivm": {
@@ -1791,7 +1787,7 @@
       "description": "Aantal thuiswonende personen van 70 jaar of ouder waarvan gisteren is gemeld dat ze zijn overleden aan COVID-19. Lees meer in de cijferverantwoording.",
       "reference": {
         "href": "/verantwoording#thuiswonende-70-plussers",
-        "text": "Lees meer in de [cijferverantwoording](https://coronadashboard.rijksoverheid.nl/verantwoording)."
+        "text": "Lees meer in de cijferverantwoording."
       },
       "bronnen": {
         "rivm": {
