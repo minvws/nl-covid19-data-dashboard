@@ -151,9 +151,7 @@ Cypress.Commands.add(
     Object.entries(kpiTestInfo).forEach(([key, value]) => {
       const element = cy.dataCy(key);
       if (Array.isArray(value)) {
-        value.forEach((val) => {
-          element.contains(val);
-        });
+        value.forEach((val) => element.contains(val));
       } else {
         element.contains(value);
       }
