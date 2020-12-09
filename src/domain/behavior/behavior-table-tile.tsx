@@ -69,7 +69,7 @@ function formatBehaviorType(
         `${identifier}_${type}_trend` as keyof BehaviorValue
       ] ?? undefined) as BehaviorTrendType | null;
 
-      return isPresent(percentage) /* && isPresent(trend) */
+      return isPresent(percentage)
         ? {
             id: identifier,
             description: siteText.gedrag_onderwerpen[identifier],
