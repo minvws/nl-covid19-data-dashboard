@@ -677,7 +677,7 @@
       },
       {
         "cijfer": "Sterftemonitor CBS",
-        "verantwoording": "De algemene sterftecijfers (sterfte monitor) zijn afkomstig van het Centraal Bureau voor de Statistiek (CBS). Deze gegevens worden wekelijks bijgewerkt. De verwachte sterftegevallen per week zijn onderdeel van een eenmalige prognose van het CBS die per jaar opnieuw wordt gemaakt. "
+        "verantwoording": "De algemene sterftecijfers (sterfte monitor) zijn afkomstig van een [openbare tabel](https://www.cbs.nl/nl-nl/cijfers/detail/70895ned) van het Centraal Bureau voor de Statistiek (CBS). Deze gegevens worden wekelijks bijgewerkt. De verwachte sterftegevallen per week zijn onderdeel van een eenmalige prognose van het CBS die per jaar opnieuw wordt gemaakt."
       },
       {
         "cijfer": "Gehandicaptenzorg",
@@ -1407,7 +1407,7 @@
       "title": "Meer onderzoeksresultaten",
       "description": "Bekijk voor meer gedetailleerde resultaten het volledige onderzoek op de website van de RIVM.",
       "linkLabel": "Bekijk het gehele onderzoek op de website van de RIVM",
-      "linkHref": "#"
+      "linkHref": "https://www.rivm.nl/gedragsonderzoek/maatregelen-welbevinden"
     }
   },
   "nl_gedrag": {
@@ -1472,8 +1472,8 @@
     "bronnen": {
       "rivm": {
         "download": "",
-        "text": "Naam bron",
-        "href": "link naar de bron"
+        "text": "RIVM",
+        "href": "https://www.rivm.nl/gedragsonderzoek/maatregelen-welbevinden"
       }
     }
   },
@@ -1533,8 +1533,8 @@
     "bronnen": {
       "rivm": {
         "download": "",
-        "text": "Naam bron",
-        "href": "link naar de bron"
+        "text": "RIVM",
+        "href": "https://www.rivm.nl/gedragsonderzoek/maatregelen-welbevinden"
       }
     }
   },
@@ -1922,9 +1922,9 @@
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "bronnen": {
       "cbs": {
-        "href": "#",
+        "href": "https://www.cbs.nl/nl-nl/cijfers/detail/70895ned",
         "text": "CBS",
-        "download": "#"
+        "download": "https://opendata.cbs.nl/ODataApi/odata/70895ned/TypedDataSet?$filter=((Geslacht eq '1100')) and ((LeeftijdOp31December eq '10000')) and (substringof('W', Perioden) eq true)&$select=Perioden, Overledenen_1"
       }
     },
     "reference": {
