@@ -357,11 +357,6 @@ function NationalLayout(props: NationalLayoutProps) {
                               .titel_sidebar
                           }
                         />
-                        <span className="metric-wrapper">
-                          {/* <NursingHomeInfectedPeopleMetric
-                            data={data.disability_care.last_value}
-                          /> */}
-                        </span>
                       </a>
                     </Link>
                   </MetricMenuItem>
