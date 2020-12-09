@@ -23,8 +23,8 @@ import { SEOHead } from '~/components/seoHead';
 import regionCodeToMunicipalCodeLookup from '~/data/regionCodeToMunicipalCodeLookup';
 import siteText from '~/locale/index';
 import {
-  getSafetyRegionStaticProps,
   getSafetyRegionPaths,
+  getSafetyRegionStaticProps,
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
 import { colors } from '~/style/theme';
@@ -202,7 +202,10 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
             source: ggdText.bronnen.rivm,
           }}
         >
-          <KpiValue absolute={ggdData.tested_total} />
+          <KpiValue
+            absolute={ggdData.tested_total}
+            difference={data.difference.ggd__tested_total}
+          />
           <Text>{ggdText.totaal_getest_week_uitleg}</Text>
         </KpiTile>
         <KpiTile
@@ -215,6 +218,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           <KpiValue
             absolute={ggdData.infected}
             percentage={ggdData.infected_percentage}
+            difference={data.difference.ggd__infected_percentage}
           />
           <Text>{ggdText.positief_getest_week_uitleg}</Text>
           <Text>

@@ -20,13 +20,11 @@ import {
   MetricMenuItem,
 } from '~/components-styled/aside/menu';
 import { TitleWithIcon } from '~/components-styled/aside/title-with-icon';
-import { DeceasedMetric } from '~/components/common/deceased-metric';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
+import { DeceasedMetric } from '~/components/common/deceased-metric';
 import { ElderlyAtHomeMetric } from '~/components/common/elderly-at-home-metric';
 import { NursingHomeInfectedPeopleMetric } from '~/components/common/nursing-home-infected-people-metric';
 import { InfectiousPeopleMetric } from '~/components/landelijk/infectious-people-metric';
-import { ReproductionIndexBarScale } from '~/components/landelijk/reproduction-index-barscale';
-import { ReproductionIndexMetric } from '~/components/landelijk/reproduction-index-metric';
 import { SewerWaterMetric } from '~/components/landelijk/sewer-water-metric';
 import { SuspectedPatientsMetric } from '~/components/landelijk/suspected-patients-metric';
 import Layout from '~/components/layout';
@@ -229,19 +227,15 @@ function NationalLayout(props: NationalLayoutProps) {
                           icon={<ReproIcon />}
                           title={siteText.reproductiegetal.titel_sidebar}
                         />
-                        <span className="metric-wrapper">
-                          <ReproductionIndexMetric
-                            data={
-                              data.reproduction_index_last_known_average
-                                .last_value
-                            }
-                          />
-                          <ReproductionIndexBarScale
-                            data={data.reproduction_index_last_known_average}
-                            showAxis={false}
-                            showValue={false}
-                          />
-                        </span>
+                        <SidebarMetric
+                          data={data}
+                          scope="nl"
+                          metricName="reproduction_index_last_known_average"
+                          metricProperty="reproduction_index_avg"
+                          localeTextKey="reproductiegetal"
+                          differenceKey="reproduction_index_last_known_average__reproduction_index_avg"
+                          showBarScale={true}
+                        />
                       </a>
                     </Link>
                   </MetricMenuItem>
