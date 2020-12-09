@@ -759,7 +759,7 @@
     "metadata": {
       "source": "Source",
       "date": "Value of {{date}}",
-      "dateFromTo": "Value from {{dateFrom}} to {{dateTo}}",
+      "dateFromTo": "Value from {{startDate}} - {{endDate}}",
       "download": ""
     },
     "barScale": {
@@ -771,7 +771,7 @@
     "veiligheidsregio_label": "Safety region:",
     "metricKPI": {
       "dateOfReport": "Value of {{dateOfReport}}",
-      "dateRangeOfReport": "Value from {{dateFrom}} - {{dateTo}}"
+      "dateRangeOfReport": "Value from {{startDate}} - {{endDate}}"
     },
     "tooltip": {
       "positive_tested_people": ""
