@@ -202,9 +202,7 @@ export const regionThresholds = {
   sewer: {
     average: sewerThresholds,
   },
-  behavior: {
-    todo_copy_to_all_properties__question_mark: behaviorThresholds,
-  },
+  behavior: behaviorThresholds,
   elderly_at_home: {
     positive_tested_daily_per_100k: elderlyAtHomeThresholds,
   },

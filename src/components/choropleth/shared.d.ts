@@ -25,7 +25,7 @@ export type TMunicipalityMetricType = ValueOf<
   Partial<MunicipalityProperties>;
 
 export type TRegionMetricName = TMetricHolder<
-  Omit<Regions, 'deceased' | 'behavior' | 'hospital_admissions'>
+  Omit<Regions, 'deceased' | 'hospital_admissions'>
 >;
 
 export type TRegionMetricType = ValueOf<

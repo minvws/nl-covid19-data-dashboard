@@ -6,13 +6,13 @@ import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text = siteText.common.metricKPI;
-const title = siteText.thuiswonende_ouderen.titel_kpi;
 
 interface ElderlyAtHomeMetricProps {
   data: NationalElderlyAtHomeValue;
+  title: string;
 }
 
-export function ElderlyAtHomeMetric({ data }: ElderlyAtHomeMetricProps) {
+export function ElderlyAtHomeMetric({ data, title }: ElderlyAtHomeMetricProps) {
   const description = replaceVariablesInText(text.dateOfReport, {
     dateOfReport: formatDateFromSeconds(data.date_of_report_unix, 'medium'),
   });
