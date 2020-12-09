@@ -29,7 +29,7 @@ describe('Util: replaceVariablesInText', () => {
 
   it('Should throw error if no translation string is supplied', () => {
     const testFunc = () => {
-      replaceVariablesInText('', {});
+      replaceVariablesInText(undefined as any, {});
     };
     expect(testFunc).toThrow(Error);
   });
