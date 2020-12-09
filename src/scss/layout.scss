@@ -297,7 +297,8 @@
       width: 25em;
     }
 
-    & > section {
+    & > section,
+    & > main {
       max-width: calc(100vw - 25em);
     }
 
@@ -321,7 +322,8 @@
   .national-layout,
   .safety-region-layout,
   .municipality-layout {
-    & > section {
+    & > section,
+    & > main {
       max-width: 80em;
     }
   }
