@@ -28,6 +28,7 @@ interface BehaviorTileProps {
   title: string;
   introduction: Record<BehaviorType, string>;
   footer: Record<BehaviorType, string>;
+  footerAsterisk: Record<BehaviorType, string>;
 }
 
 interface BehaviorFormatted {
@@ -122,6 +123,7 @@ export function BehaviorTableTile({
   title,
   introduction,
   footer,
+  footerAsterisk,
 }: BehaviorTileProps) {
   const { sortedCompliance, sortedSupport } = formatAndSortBehavior(behavior);
   const [behaviorType, setBehaviorType] = useState<BehaviorType>('compliance');
@@ -200,7 +202,10 @@ export function BehaviorTableTile({
           </tbody>
         </table>
       </div>
-      <p css={css({ color: 'gray' })}>{footer[behaviorType]}</p>
+      <p css={css({ color: 'annotation' })}>{footer[behaviorType]}</p>
+      <p css={css({ color: 'annotation', m: 0 })}>
+        {footerAsterisk[behaviorType]}
+      </p>
     </Tile>
   );
 }

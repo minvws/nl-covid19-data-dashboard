@@ -1456,6 +1456,10 @@
       "voetnoot": {
         "compliance": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft de gedragsregels te volgen in zijn/haar dagelijks leven \n* Als er een verschil is met de vorige meting kan dat met 95% zekerheid gezegd worden.",
         "support": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft achter de gedragsregel te staan.\n* Als er een verschil is met de vorige meting kan dat met 95% zekerheid gezegd worden."
+      },
+      "voetnoot_asterisk": {
+        "compliance": "",
+        "support": ""
       }
     },
     "basisregels_over_tijd": {
@@ -1517,6 +1521,10 @@
       "voetnoot": {
         "compliance": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft de gedragsregels te volgen in zijn/haar dagelijks leven \n* Als er een verschil is met de vorige meting kan dat met 95% zekerheid gezegd worden.",
         "support": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft achter de gedragsregel te staan.\n* Als er een verschil is met de vorige meting kan dat met 95% zekerheid gezegd worden."
+      },
+      "voetnoot_asterisk": {
+        "compliance": "",
+        "support": ""
       }
     },
     "basisregels_over_tijd": {

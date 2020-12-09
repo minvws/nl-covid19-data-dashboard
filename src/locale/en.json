@@ -1456,6 +1456,10 @@
       "voetnoot": {
         "compliance": "This table shows the percentage of survey respondents who reported following each of the basic rules in their daily life.\n* Any difference compared to the previous measurement can be shown with 95% certainty. ",
         "support": "This table shows the percentage of survey respondents who reported supporting each of the basic rules.\n* Any difference compared to the previous measurement can be shown with 95% certainty. "
+      },
+      "voetnoot_asterisk": {
+        "compliance": "",
+        "support": ""
       }
     },
     "basisregels_over_tijd": {
@@ -1517,6 +1521,10 @@
       "voetnoot": {
         "compliance": "This table shows the percentage of survey respondents who reported following each of the basic rules in their daily life. \n* Any difference compared to the previous measurement can be shown with 95% certainty. ",
         "support": "This table shows the percentage of survey respondents who reported supporting each of the basic rules.\n* Any difference compared to the previous measurement can be shown with 95% certainty. "
+      },
+      "voetnoot_asterisk": {
+        "compliance": "",
+        "support": ""
       }
     },
     "basisregels_over_tijd": {

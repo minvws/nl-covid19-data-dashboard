@@ -73,6 +73,7 @@ const BehaviorPage: FCWithLayout<NationalPageProps> = (props) => {
         title={text.basisregels.title}
         introduction={text.basisregels.intro}
         footer={text.basisregels.voetnoot}
+        footerAsterisk={text.basisregels.voetnoot_asterisk}
       />
 
       <BehaviorLineChartTile
