@@ -26,10 +26,10 @@ const ElderlyAtHomeRegionalPage: FCWithLayout<ISafetyRegionData> = (props) => {
     <>
       <SEOHead
         title={replaceVariablesInText(text.metadata.title, {
-          safetyRegionName,
+          safetyRegion: safetyRegionName,
         })}
         description={replaceVariablesInText(text.metadata.description, {
-          safetyRegionName,
+          safetyRegion: safetyRegionName,
         })}
       />
 
