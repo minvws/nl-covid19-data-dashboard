@@ -2,8 +2,8 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Arrow from '~/assets/arrow.svg';
 import Arts from '~/assets/arts.svg';
-import Gedrag from '~/assets/gedrag.svg';
 import ElderlyIcon from '~/assets/elderly.svg';
+import Gedrag from '~/assets/gedrag.svg';
 import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
 import Notification from '~/assets/notification.svg';
 import ReproIcon from '~/assets/reproductiegetal.svg';
@@ -357,11 +357,13 @@ function NationalLayout(props: NationalLayoutProps) {
                               .titel_sidebar
                           }
                         />
-                        <span className="metric-wrapper">
-                          <NursingHomeInfectedPeopleMetric
-                            data={data.disability_care.last_value}
-                          />
-                        </span>
+                        <SidebarMetric
+                          data={data}
+                          scope="nl"
+                          metricName="disability_care"
+                          metricProperty="newly_infected_people"
+                          localeTextKey="gehandicaptenzorg_positief_geteste_personen"
+                        />
                       </a>
                     </Link>
                   </MetricMenuItem>
