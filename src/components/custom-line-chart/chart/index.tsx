@@ -1,5 +1,5 @@
 import { useCallback, memo } from 'react';
-import { scaleLinear, scaleTime } from 'd3-scale';
+import { scaleTime, scaleLinear } from '@visx/scale';
 import { bisector } from 'd3-array';
 import { AxisLeft, AxisBottom } from '@visx/axis';
 import { GridRows } from '@visx/grid';
@@ -53,23 +53,38 @@ function Chart({
     height: height - margin.top - margin.bottom,
   };
 
-  const x = scaleTime().domain(xDomain).range([0, bounded.width]);
-  const y = scaleLinear()
-    .domain(yDomain)
-    .range([bounded.height, 0])
-    .nice(NUM_TICKS);
+  const x = scaleTime({
+    domain: xDomain,
+    range: [0, bounded.width],
+  });
+
+  const y = scaleLinear({
+    domain: yDomain,
+    range: [bounded.height, 0],
+    nice: NUM_TICKS,
+  });
+
+  type Trend = {
+    date: Date;
+    value: number;
+    week: {
+      start: number;
+      end: number;
+    };
+  };
 
   const bisect = useCallback(
-    (trend, mx) => {
+    (trend: Array<Trend>, mx: number) => {
       if (trend.length === 1) return trend[0];
 
-      const bisect = bisector((d) => d.date).left;
-      const date = x.invert(mx - margin.left);
-      const index = bisect(trend, date, 1);
-      const d0 = trend[index - 1];
-      const d1 = trend[index];
+      const bisect = bisector((d: Trend) => d.date).left;
+      const date: Date = x.invert(mx - margin.left);
+      const index: number = bisect(trend, date, 1);
 
-      return date - d0.date > d1.date - date ? d1 : d0;
+      const d0: Trend = trend[index - 1];
+      const d1: Trend = trend[index];
+
+      return +date - +d0.date > +d1.date - +date ? d1 : d0;
     },
     [x, margin]
   );

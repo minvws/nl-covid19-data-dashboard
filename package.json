@@ -60,7 +60,6 @@
     "@types/classnames": "^2.2.10",
     "@types/d3-scale": "^2.2.0",
     "@types/d3-array": "^2.8.0",
-
     "@types/geojson": "^7946.0.7",
     "@types/jest": "^26.0.15",
     "@types/linkifyjs": "^2.1.3",
