@@ -1566,7 +1566,7 @@
       "age_group_percentage_title": "Percentage of the population",
       "age_group_percentage_tooltip": "of the population is {{ageGroupRange}} years old.",
       "infected_percentage_title": "Percentage of the positive tests",
-      "infected_percentage_tooltip": "of the total amount of positive tested persons is {{ageGroupRange}}  years old. ",
+      "infected_percentage_tooltip": "of the total amount of positive tested persons is {{ageGroupRange}} years old. ",
       "age_group_range_tooltip": "{{ageGroupRange}} years old. ",
       "accessibility_description": "Graph with percentages for the distribution of the population and the distribution of positive tested age groups."
     }
