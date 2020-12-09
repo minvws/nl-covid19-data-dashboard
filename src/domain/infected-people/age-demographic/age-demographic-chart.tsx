@@ -59,7 +59,6 @@ export const AgeDemographicChart = memo<AgeDemographicChartProps>(
       ageGroupPercentagePoint,
       infectedPercentagePoint,
       ageGroupRangePoint,
-      isSmallScreen,
       margin,
       values,
       ageGroupRange,
@@ -87,7 +86,7 @@ export const AgeDemographicChart = memo<AgeDemographicChartProps>(
           x={width / 2 - ageRangeAxisWidth / 2}
           fill="black"
           fontWeight="bold"
-          fontSize={isSmallScreen ? '1rem' : '1.2rem'}
+          fontSize={xMax < 300 ? '1rem' : '1.2rem'}
           width={xMax + margin.left}
         >
           {text.graph.age_group_percentage_title}
@@ -99,7 +98,7 @@ export const AgeDemographicChart = memo<AgeDemographicChartProps>(
           x={width / 2 + ageRangeAxisWidth / 2}
           fill="black"
           fontWeight="bold"
-          fontSize={isSmallScreen ? '1rem' : '1.2rem'}
+          fontSize={xMax < 300 ? '1rem' : '1.2rem'}
           width={xMax + margin.right}
         >
           {text.graph.infected_percentage_title}
