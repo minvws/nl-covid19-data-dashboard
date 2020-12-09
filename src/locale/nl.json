@@ -1751,7 +1751,8 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
         "text": "RIVM"
       }
-    }
+    },
+    "kpi_titel": "Aantal positief geteste bewoners van gehandicapteninstellingen per dag"
   },
   "thuiswonende_ouderen": {
     "titel_sidebar": "Thuiswonende 70-plussers",
