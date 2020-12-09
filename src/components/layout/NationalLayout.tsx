@@ -357,6 +357,13 @@ function NationalLayout(props: NationalLayoutProps) {
                               .titel_sidebar
                           }
                         />
+                        <SidebarMetric
+                          data={data}
+                          scope="nl"
+                          metricName="disability_care"
+                          metricProperty="newly_infected_people"
+                          localeTextKey="gehandicaptenzorg_positief_geteste_personen"
+                        />
                       </a>
                     </Link>
                   </MetricMenuItem>

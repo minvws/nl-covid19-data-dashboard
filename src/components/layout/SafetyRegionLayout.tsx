@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import Arrow from '~/assets/arrow.svg';
 import ElderlyIcon from '~/assets/elderly.svg';
 import Gedrag from '~/assets/gedrag.svg';
+import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
@@ -276,6 +277,31 @@ function SafetyRegionLayout(
                             metricProperty="newly_infected_people"
                             localeTextKey="verpleeghuis_positief_geteste_personen"
                             differenceKey="nursing_home__newly_infected_people"
+                          />
+                        </a>
+                      </Link>
+                    </MetricMenuItem>
+
+                    <MetricMenuItem>
+                      <Link href="/landelijk/gehandicaptenzorg">
+                        <a
+                          className={getClassName(
+                            '/landelijk/gehandicaptenzorg'
+                          )}
+                        >
+                          <TitleWithIcon
+                            icon={<Gehandicaptenzorg />}
+                            title={
+                              siteText.gehandicaptenzorg_besmette_locaties
+                                .titel_sidebar
+                            }
+                          />
+                          <SidebarMetric
+                            data={data}
+                            scope="vr"
+                            metricName="disability_care"
+                            metricProperty="newly_infected_people"
+                            localeTextKey="veiligheidsregio_gehandicaptenzorg_positief_geteste_personen"
                           />
                         </a>
                       </Link>
