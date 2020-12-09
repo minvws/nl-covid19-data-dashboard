@@ -23,6 +23,7 @@ export type Props = {
   benchmark: any;
   isHovered: boolean;
   trend: any[];
+  type: string;
   handleHover: any;
   xDomain: any[];
   yDomain: any[];
@@ -35,6 +36,7 @@ export type Props = {
 
 function Chart({
   trend,
+  type,
   width,
   height = 250,
   margin = defaultMargin,
@@ -134,10 +136,11 @@ function Chart({
         )}
 
         <Trends
+          trend={trend}
+          type={type}
           size={bounded}
           x={x}
           y={y}
-          trend={trend}
           color={defaultColors.main}
           handleHover={handleHover}
           isHovered={isHovered}

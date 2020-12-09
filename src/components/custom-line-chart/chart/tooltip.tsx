@@ -10,14 +10,17 @@ export type Props = {
   y: number;
   primaryColor: string;
   borderColor: string;
+  bounds: any;
 };
 
+// TODO: improve how bounds are used to keep tooltips within the chart
 function Tooltip({
   children,
   x,
   y,
   primaryColor = colors.data.primary,
   borderColor = '#01689B',
+  bounds,
 }: Props) {
   return (
     <>
@@ -66,7 +69,11 @@ function Tooltip({
         py={1}
         fontSize={1}
         css={css({
-          transform: 'translate(-50%,calc(-100% - 10px))',
+          transform: `translate(${
+            x < bounds.width - 75
+              ? '-50%'
+              : `calc(-100% + ${bounds.width - x}px)`
+          },calc(-100% - 10px))`,
           pointerEvents: 'none',
           transition: 'left 0.1s, top 0.1s',
           whiteSpace: 'nowrap',

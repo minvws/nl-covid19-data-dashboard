@@ -6,8 +6,10 @@ import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 
+import { ValueAnnotation } from '~/components-styled/value-annotation';
 import { Box } from '~/components-styled/base';
 import Chart, { defaultMargin } from './chart';
+import { trendTypes } from './chart/trends';
 import Tooltip from './chart/tooltip';
 import { calculateYMax } from '~/components/lineChart';
 
@@ -23,6 +25,9 @@ export type ThresholdProps = {
   timeframe?: TimeframeOption;
   signaalwaarde?: number;
   formatTooltip: any;
+  formatYAxis: any;
+  showFill: boolean;
+  valueAnnotation?: string;
 };
 
 function CustomLineChart({
@@ -33,9 +38,9 @@ function CustomLineChart({
   signaalwaarde,
   formatTooltip,
   formatYAxis,
-}: //   valueAnnotation,
-//   showFill = true,
-ThresholdProps) {
+  showFill = true,
+  valueAnnotation,
+}: ThresholdProps) {
   const {
     tooltipData,
     tooltipLeft,
@@ -94,21 +99,27 @@ ThresholdProps) {
 
   return (
     <Box position="relative">
+      {valueAnnotation && (
+        <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
+      )}
+
       <Chart
         trend={graphData}
+        type={showFill ? trendTypes.area : trendTypes.line}
         height={height}
         width={width}
-        handleHover={handleTooltip}
         xDomain={xDomain}
         yDomain={yDomain}
         formatYAxis={formatYAxis}
         formatXAxis={formatXAxis}
+        handleHover={handleTooltip}
         isHovered={!!tooltipData}
         benchmark={benchmark}
       />
 
       {tooltipData && (
         <Tooltip
+          bounds={{ width, height }}
           x={tooltipLeft + defaultMargin.left}
           y={tooltipTop + defaultMargin.top}
         >
