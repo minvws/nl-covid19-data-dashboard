@@ -68,25 +68,28 @@ export function SafetyRegionChoropleth<T>(
     metricProperty
   );
 
-  const DEFAULT_FILL = 'white';
   const getFillColor = useChoroplethColorScale(
     getChoroplethValue,
-    selectedThreshold,
-    DEFAULT_FILL
+    selectedThreshold
   );
 
   const featureCallback = useCallback(
     (feature: Feature<MultiPolygon, SafetyRegionProperties>, path: string) => {
       const { vrcode } = feature.properties;
-      const fill =
-        hasData && getFillColor(vrcode) ? getFillColor(vrcode) : DEFAULT_FILL;
+      const fill = (hasData && getFillColor(vrcode)) || 'white';
+      /**
+       * @TODO this should actually be some kind of function returning
+       * the "brightness" of a given color.
+       */
+      const isWhiteFill = ['#fff', '#ffffff', 'white'].includes(fill);
+
       return (
         <Path
           key={vrcode}
           id={vrcode}
           d={path}
           fill={fill}
-          stroke={fill === DEFAULT_FILL ? '#c4c4c4' : '#fff'}
+          stroke={isWhiteFill ? '#c4c4c4' : '#fff'}
           strokeWidth={1}
         />
       );
