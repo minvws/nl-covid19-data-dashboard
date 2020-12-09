@@ -302,7 +302,6 @@ function SafetyRegionLayout(
                             metricName="disability_care"
                             metricProperty="newly_infected_people"
                             localeTextKey="veiligheidsregio_gehandicaptenzorg_positief_geteste_personen"
-                            showBarScale={false}
                           />
                         </a>
                       </Link>

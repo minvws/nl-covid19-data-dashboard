@@ -369,7 +369,6 @@ function NationalLayout(props: NationalLayoutProps) {
                           metricName="disability_care"
                           metricProperty="newly_infected_people"
                           localeTextKey="gehandicaptenzorg_positief_geteste_personen"
-                          showBarScale={false}
                         />
                       </a>
                     </Link>
