@@ -19,8 +19,8 @@ const curlyBracketRegex = /\{\{(.+?)\}\}/g;
  */
 
 export function replaceVariablesInText(
-  translation?: string,
-  variables?: { [key: string]: string | number | undefined }
+  translation: string,
+  variables: { [key: string]: string | number | undefined }
 ): string {
   assert(
     translation,
@@ -28,12 +28,12 @@ export function replaceVariablesInText(
   );
 
   return translation.replace(curlyBracketRegex, (_string, variableName) => {
-    /**
-     * @TODO Why are we replacing variables with empty strings? It feels like
-     * these cases should be reported somewhere.
-     */
-    if (!variables) return '';
-
-    return (variables[variableName.trim()] ?? '').toString();
+    const trimmedName = variableName.trim();
+    if (trimmedName in variables) {
+      return (variables[variableName.trim()] ?? '').toString();
+    }
+    throw new Error(
+      `Placeholder name ${trimmedName} was not defined in the given variables`
+    );
   });
 }
