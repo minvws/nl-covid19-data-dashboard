@@ -2,8 +2,8 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Arrow from '~/assets/arrow.svg';
 import Arts from '~/assets/arts.svg';
-import Gedrag from '~/assets/gedrag.svg';
 import ElderlyIcon from '~/assets/elderly.svg';
+import Gedrag from '~/assets/gedrag.svg';
 import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
 import Notification from '~/assets/notification.svg';
 import ReproIcon from '~/assets/reproductiegetal.svg';
@@ -20,8 +20,8 @@ import {
   MetricMenuItem,
 } from '~/components-styled/aside/menu';
 import { TitleWithIcon } from '~/components-styled/aside/title-with-icon';
-import { DeceasedMetric } from '~/components/common/deceased-metric';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
+import { DeceasedMetric } from '~/components/common/deceased-metric';
 import { ElderlyAtHomeMetric } from '~/components/common/elderly-at-home-metric';
 import { NursingHomeInfectedPeopleMetric } from '~/components/common/nursing-home-infected-people-metric';
 import { InfectiousPeopleMetric } from '~/components/landelijk/infectious-people-metric';
@@ -36,6 +36,7 @@ import { NationalPageProps } from '~/static-props/nl-data';
 import theme from '~/style/theme';
 import { Link } from '~/utils/link';
 import { useBreakpoints } from '~/utils/useBreakpoints';
+import { DisabilityCareInfectedPeopleMetric } from '../common/disability-care-infected-people-metric';
 
 export function getNationalLayout(
   page: React.ReactNode,
@@ -364,7 +365,7 @@ function NationalLayout(props: NationalLayoutProps) {
                           }
                         />
                         <span className="metric-wrapper">
-                          <NursingHomeInfectedPeopleMetric
+                          <DisabilityCareInfectedPeopleMetric
                             data={data.disability_care.last_value}
                           />
                         </span>

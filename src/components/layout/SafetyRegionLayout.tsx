@@ -1,8 +1,9 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Arrow from '~/assets/arrow.svg';
-import Gedrag from '~/assets/gedrag.svg';
 import ElderlyIcon from '~/assets/elderly.svg';
+import Gedrag from '~/assets/gedrag.svg';
+import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
@@ -28,6 +29,7 @@ import { ISafetyRegionData } from '~/static-props/safetyregion-data';
 import { Link } from '~/utils/link';
 import { getSewerWaterBarScaleData } from '~/utils/sewer-water/safety-region-sewer-water.util';
 import { useMediaQuery } from '~/utils/useMediaQuery';
+import { DisabilityCareInfectedPeopleMetric } from '../common/disability-care-infected-people-metric';
 import { NursingHomeInfectedPeopleMetric } from '../common/nursing-home-infected-people-metric';
 
 export function getSafetyRegionLayout() {
@@ -275,6 +277,29 @@ function SafetyRegionLayout(
                           <span className="metric-wrapper">
                             <NursingHomeInfectedPeopleMetric
                               data={data.nursing_home.last_value}
+                            />
+                          </span>
+                        </a>
+                      </Link>
+                    </MetricMenuItem>
+
+                    <MetricMenuItem>
+                      <Link href="/landelijk/gehandicaptenzorg">
+                        <a
+                          className={getClassName(
+                            '/landelijk/gehandicaptenzorg'
+                          )}
+                        >
+                          <TitleWithIcon
+                            icon={<Gehandicaptenzorg />}
+                            title={
+                              siteText.gehandicaptenzorg_besmette_locaties
+                                .titel_sidebar
+                            }
+                          />
+                          <span className="metric-wrapper">
+                            <DisabilityCareInfectedPeopleMetric
+                              data={data.disability_care.last_value}
                             />
                           </span>
                         </a>
