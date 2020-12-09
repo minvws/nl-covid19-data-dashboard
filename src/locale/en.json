@@ -1727,6 +1727,7 @@
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "titel": "Disability care homes in {{safetyRegion}} – confirmed cases among residents",
     "barscale_titel": "Disability care homes - daily confirmed cases (residents)",
+    "kpi_titel": "Disability care homes - daily confirmed cases (residents)",
     "extra_uitleg": "The number of disability care home residents in this region who were reported as testing positive for COVID-19 yesterday.",
     "pagina_toelichting": "People who live in disability care homes are often extra vulnerable to coronavirus infection. Because of this, Municipal health services (GGDs) monitor whether a persons who tests positive for COVID-19 lives in a disability care home. By doing so, measures can be taken if the number of cases in residential care increases. Read more in the explanation of the presented data.   ",
     "linechart_titel": "Progression over time",
