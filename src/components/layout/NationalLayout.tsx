@@ -230,7 +230,6 @@ function NationalLayout(props: NationalLayoutProps) {
                           metricName="reproduction_index_last_known_average"
                           metricProperty="reproduction_index_avg"
                           localeTextKey="reproductiegetal"
-                          differenceKey="reproduction_index_last_known_average__reproduction_index_avg"
                           showBarScale={true}
                         />
                       </a>

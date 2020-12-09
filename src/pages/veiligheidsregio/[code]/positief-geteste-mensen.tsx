@@ -216,7 +216,6 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           }}
         >
           <KpiValue
-            absolute={ggdData.infected}
             percentage={ggdData.infected_percentage}
             difference={data.difference.ggd__infected_percentage}
           />
