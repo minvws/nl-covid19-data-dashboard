@@ -432,7 +432,7 @@ function NationalLayout(props: NationalLayoutProps) {
                           metricName="verdenkingen_huisartsen"
                           metricProperty="geschat_aantal"
                           localeTextKey="verdenkingen_huisartsen"
-                          differenceKey="verdenkingen_huisartsen__geschat_aantal"
+                          differenceKey="huisarts_verdenkingen__geschat_aantal"
                         />
                       </a>
                     </Link>
