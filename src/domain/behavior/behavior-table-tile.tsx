@@ -34,7 +34,7 @@ interface BehaviorFormatted {
   id: BehaviorIdentifier;
   description: string;
   percentage: number;
-  trend: BehaviorTrendType;
+  trend?: BehaviorTrendType;
 }
 
 const HeaderCell = styled.th(
@@ -69,12 +69,12 @@ function formatBehaviorType(
         `${identifier}_${type}_trend` as keyof BehaviorValue
       ] ?? undefined) as BehaviorTrendType | null;
 
-      return isPresent(percentage) && isPresent(trend)
+      return isPresent(percentage) /* && isPresent(trend) */
         ? {
             id: identifier,
             description: siteText.gedrag_onderwerpen[identifier],
             percentage,
-            trend,
+            trend: trend || undefined,
           }
         : undefined;
     })
@@ -180,31 +180,29 @@ export function BehaviorTableTile({
             {(behaviorType === 'compliance'
               ? sortedCompliance
               : sortedSupport
-            ).map((behavior) =>
-              isDefined(behavior.percentage) ? (
-                <tr key={behavior.id}>
-                  <Cell>{formatPercentage(behavior.percentage)}%</Cell>
-                  <Cell
-                    color={
-                      behaviorType === 'compliance'
-                        ? 'data.primary'
-                        : 'data.secondary'
-                    }
-                  >
-                    <PercentageBar percentage={behavior.percentage} />
-                  </Cell>
-                  <Cell>
-                    <Box minWidth={32}>
-                      <BehaviorIcon name={behavior.id} />
-                    </Box>
-                  </Cell>
-                  <Cell>{behavior.description}</Cell>
-                  <Cell>
-                    <BehaviorTrend trend={behavior.trend} />
-                  </Cell>
-                </tr>
-              ) : null
-            )}
+            ).map((behavior) => (
+              <tr key={behavior.id}>
+                <Cell>{formatPercentage(behavior.percentage)}%</Cell>
+                <Cell
+                  color={
+                    behaviorType === 'compliance'
+                      ? 'data.primary'
+                      : 'data.secondary'
+                  }
+                >
+                  <PercentageBar percentage={behavior.percentage} />
+                </Cell>
+                <Cell>
+                  <Box minWidth={32}>
+                    <BehaviorIcon name={behavior.id} />
+                  </Box>
+                </Cell>
+                <Cell>{behavior.description}</Cell>
+                <Cell>
+                  <BehaviorTrend trend={behavior.trend} />
+                </Cell>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
