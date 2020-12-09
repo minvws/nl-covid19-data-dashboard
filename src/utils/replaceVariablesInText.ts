@@ -1,3 +1,4 @@
+import { isDefined } from 'ts-is-present';
 import { assert } from './assert';
 
 const curlyBracketRegex = /\{\{(.+?)\}\}/g;
@@ -23,14 +24,14 @@ export function replaceVariablesInText(
   variables: { [key: string]: string | number | undefined }
 ): string {
   assert(
-    translation,
+    isDefined(translation),
     'translation placeholder text is not defined, perhaps a missing locale key?'
   );
 
   return translation.replace(curlyBracketRegex, (_string, variableName) => {
     const trimmedName = variableName.trim();
     if (trimmedName in variables) {
-      return (variables[variableName.trim()] ?? '').toString();
+      return (variables[trimmedName] ?? '').toString();
     }
     throw new Error(
       `Placeholder name ${trimmedName} was not defined in the given variables: ${JSON.stringify(
