@@ -286,7 +286,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
         >
           <KpiValue
             data-cy="ggd_infected"
-            absolute={dataGgdLastValue.infected}
+            // absolute={dataGgdLastValue.infected}
             percentage={dataGgdLastValue.infected_percentage}
             difference={data.difference.ggd__infected_percentage}
           />
