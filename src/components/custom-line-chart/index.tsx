@@ -6,12 +6,12 @@ import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 
-import { ValueAnnotation } from '~/components-styled/value-annotation';
 import { Box } from '~/components-styled/base';
+import { ValueAnnotation } from '~/components-styled/value-annotation';
+import { calculateYMax } from '~/components/lineChart';
 import Chart, { defaultMargin } from './chart';
 import { trendTypes } from './chart/trends';
 import Tooltip from './chart/tooltip';
-import { calculateYMax } from '~/components/lineChart';
 
 const valueToDate = (d: number) => new Date(d * 1000);
 const dateToValue = (d: any) => d.valueOf() / 1000;
