@@ -15,10 +15,7 @@ context('Landelijk - Positief geteste mensen', () => {
       infected_daily_total: formatNumber(
         infectedTotalLastValue.infected_daily_total
       ),
-      ggd_infected: [
-        formatNumber(ggdLastValue.infected),
-        formatPercentage(ggdLastValue.infected_percentage),
-      ],
+      ggd_infected: formatPercentage(ggdLastValue.infected_percentage),
       ggd_tested_total: formatNumber(ggdLastValue.tested_total),
     };
 
