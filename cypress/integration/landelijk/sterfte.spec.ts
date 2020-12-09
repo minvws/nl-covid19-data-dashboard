@@ -1,17 +1,17 @@
 import { NationalContext } from 'cypress/integration/types';
 import { formatNumber } from '~/utils/formatNumber';
 
-context('Landelijk - Besmettelijke mensen', () => {
+context('Landelijk - Sterfte', () => {
   before(() => {
-    cy.beforeNationalTests('besmettelijke-mensen');
+    cy.beforeNationalTests('sterfte');
   });
 
   it('Should show the correct KPI values', function (this: NationalContext) {
-    const lastValue = this.nationalData.infectious_people_last_known_average
-      .last_value;
+    const rivmLastValue = this.nationalData.deceased_rivm.last_value;
 
     const kpiTestInfo = {
-      infectious_avg: formatNumber(lastValue.infectious_avg),
+      covid_daily: formatNumber(rivmLastValue.covid_daily),
+      covid_total: formatNumber(rivmLastValue.covid_total),
     };
 
     cy.checkKpiValues(kpiTestInfo);

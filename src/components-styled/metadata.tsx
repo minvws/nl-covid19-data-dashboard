@@ -1,9 +1,9 @@
 import locale from '~/locale/index';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { Box } from './base';
 import { ExternalLink } from './external-link';
 import { Text } from './typography';
-import { Box } from './base';
 
 export interface MetadataProps {
   date?: number | [number, number];
@@ -21,8 +21,8 @@ function formatMetadataDate(date: number | [number, number]): string {
   }
 
   return replaceVariablesInText(locale.common.metadata.dateFromTo, {
-    dateFrom: formatDateFromSeconds(date[0], 'weekday-medium'),
-    dateTo: formatDateFromSeconds(date[1], 'weekday-medium'),
+    startDate: formatDateFromSeconds(date[0], 'weekday-medium'),
+    endDate: formatDateFromSeconds(date[1], 'weekday-medium'),
   });
 }
 

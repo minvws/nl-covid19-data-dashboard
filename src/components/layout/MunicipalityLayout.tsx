@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { Link } from '~/utils/link';
 import { useRouter } from 'next/router';
 import Arrow from '~/assets/arrow.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
@@ -16,13 +15,12 @@ import { Box } from '~/components-styled/base';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
 import { Text } from '~/components-styled/typography';
 import { ComboBox } from '~/components/comboBox';
-import { SewerWaterMetric } from '~/components/gemeente/sewer-water-metric';
 import { getLayout as getSiteLayout } from '~/components/layout';
 import municipalities from '~/data/gemeente_veiligheidsregio.json';
 import siteText from '~/locale/index';
 import { IMunicipalityData } from '~/static-props/municipality-data';
 import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMunicipalityCode';
-import { getSewerWaterBarScaleData } from '~/utils/sewer-water/municipality-sewer-water.util';
+import { Link } from '~/utils/link';
 import { useMediaQuery } from '~/utils/useMediaQuery';
 
 interface IMunicipality {
@@ -106,8 +104,6 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
   const safetyRegion:
     | { name: string; code: string; id: number }
     | undefined = getSafetyRegionForMunicipalityCode(code as string);
-
-  const sewerWaterBarScaleData = data && getSewerWaterBarScaleData(data);
 
   return (
     <>
@@ -242,7 +238,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                   </Category>
                   <Menu>
                     <MetricMenuItem>
-                      {sewerWaterBarScaleData ? (
+                      {data?.sewer ? (
                         <Link href={`/gemeente/${code}/rioolwater`}>
                           <a
                             className={getClassName(
@@ -256,9 +252,15 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                                   .titel_sidebar
                               }
                             />
-                            <span className="metric-wrapper">
-                              <SewerWaterMetric data={sewerWaterBarScaleData} />
-                            </span>
+                            <SidebarMetric
+                              data={data}
+                              scope="gm"
+                              metricName="sewer"
+                              metricProperty="average"
+                              localeTextKey="gemeente_rioolwater_metingen"
+                              differenceKey="sewer__average"
+                              annotationKey="riool_normalized"
+                            />
                           </a>
                         </Link>
                       ) : (

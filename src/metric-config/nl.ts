@@ -13,8 +13,49 @@ export type NlConfig = Partial<
 >;
 
 export const nl: NlConfig = {
+  verdenkingen_huisartsen: {
+    geschat_aantal: {
+      isWeeklyData: true,
+    },
+  },
+  sewer: {
+    average: {
+      isWeeklyData: true,
+    },
+  },
+  reproduction_index_last_known_average: {
+    reproduction_index_avg: {
+      isDecimal: true,
+      barScale: {
+        min: 0,
+        max: 2,
+        signaalwaarde: 1,
+        rangesKey: 'reproduction_index_avg',
+        gradient: [
+          {
+            color: GREEN,
+            value: 0,
+          },
+          {
+            color: GREEN,
+            value: 1,
+          },
+          {
+            color: YELLOW,
+            value: 1.0104,
+          },
+          {
+            color: RED,
+            value: 1.125,
+          },
+        ],
+      },
+    },
+  },
+
   intake_hospital_ma: {
     moving_average_hospital: {
+      isDecimal: true,
       barScale: {
         min: 0,
         max: 100,

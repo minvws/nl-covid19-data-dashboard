@@ -1,6 +1,7 @@
 import css from '@styled-system/css';
 import { useState } from 'react';
 import styled from 'styled-components';
+import { isDefined, isPresent } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import { Tile } from '~/components-styled/layout';
 import { PercentageBar } from '~/components-styled/percentage-bar';
@@ -27,13 +28,14 @@ interface BehaviorTileProps {
   title: string;
   introduction: Record<BehaviorType, string>;
   footer: Record<BehaviorType, string>;
+  footerAsterisk: Record<BehaviorType, string>;
 }
 
 interface BehaviorFormatted {
   id: BehaviorIdentifier;
   description: string;
-  percentage: number | undefined;
-  trend: BehaviorTrendType | undefined;
+  percentage: number;
+  trend?: BehaviorTrendType;
 }
 
 const HeaderCell = styled.th(
@@ -59,24 +61,28 @@ function formatBehaviorType(
   behavior: BehaviorValue,
   type: BehaviorType
 ): BehaviorFormatted[] {
-  return behaviorIdentifiers.map((identifier) => {
-    const percentage = behavior[
-      `${identifier}_${type}` as keyof BehaviorValue
-    ] as number | null;
-    const trend = (behavior[
-      `${identifier}_${type}_trend` as keyof BehaviorValue
-    ] ?? undefined) as BehaviorTrendType | null;
+  return behaviorIdentifiers
+    .map((identifier) => {
+      const percentage = behavior[
+        `${identifier}_${type}` as keyof BehaviorValue
+      ] as number | null;
+      const trend = (behavior[
+        `${identifier}_${type}_trend` as keyof BehaviorValue
+      ] ?? undefined) as BehaviorTrendType | null;
 
-    return {
-      id: identifier,
-      description: siteText.gedrag_onderwerpen[identifier],
-      percentage: percentage ?? undefined,
-      trend: trend ?? undefined,
-    };
-  });
+      return isPresent(percentage)
+        ? {
+            id: identifier,
+            description: siteText.gedrag_onderwerpen[identifier],
+            percentage,
+            trend: trend || undefined,
+          }
+        : undefined;
+    })
+    .filter(isDefined);
 }
 
-/* Sort lists of formatted compliance and support behaviours */
+/* Sort lists of formatted compliance and support behaviors */
 function sortBehavior(
   compliance: BehaviorFormatted[],
   support: BehaviorFormatted[]
@@ -117,6 +123,7 @@ export function BehaviorTableTile({
   title,
   introduction,
   footer,
+  footerAsterisk,
 }: BehaviorTileProps) {
   const { sortedCompliance, sortedSupport } = formatAndSortBehavior(behavior);
   const [behaviorType, setBehaviorType] = useState<BehaviorType>('compliance');
@@ -177,15 +184,9 @@ export function BehaviorTableTile({
               : sortedSupport
             ).map((behavior) => (
               <tr key={behavior.id}>
-                <Cell>{formatPercentage(behavior.percentage ?? 0)}%</Cell>
-                <Cell
-                  color={
-                    behaviorType === 'compliance'
-                      ? 'data.primary'
-                      : 'data.secondary'
-                  }
-                >
-                  <PercentageBar percentage={behavior.percentage ?? 0} />
+                <Cell>{formatPercentage(behavior.percentage)}%</Cell>
+                <Cell color="data.primary">
+                  <PercentageBar percentage={behavior.percentage} />
                 </Cell>
                 <Cell>
                   <Box minWidth={32}>
@@ -201,7 +202,10 @@ export function BehaviorTableTile({
           </tbody>
         </table>
       </div>
-      <p css={css({ color: 'gray' })}>{footer[behaviorType]}</p>
+      <p css={css({ color: 'annotation' })}>{footer[behaviorType]}</p>
+      <p css={css({ color: 'annotation', m: 0 })}>
+        {footerAsterisk[behaviorType]}
+      </p>
     </Tile>
   );
 }

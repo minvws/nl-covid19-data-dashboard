@@ -70,6 +70,7 @@ const NursingHomeCare: FCWithLayout<NationalPageProps> = (props) => {
           <KpiValue
             data-cy="newly_infected_people"
             absolute={nursinghomeData.last_value.newly_infected_people}
+            difference={data.difference.nursing_home__newly_infected_people}
           />
         </KpiTile>
       </TwoKpiSection>
@@ -113,6 +114,7 @@ const NursingHomeCare: FCWithLayout<NationalPageProps> = (props) => {
             percentage={
               nursinghomeData.last_value.infected_locations_percentage
             }
+            difference={data.difference.nursing_home__infected_locations_total}
           />
           <Text>{infectedLocationsText.kpi_toelichting}</Text>
         </KpiTile>

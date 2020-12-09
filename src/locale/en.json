@@ -489,7 +489,7 @@
         "text": "RIVM"
       }
     },
-    "kpi_titel": ""
+    "kpi_titel": "Mortality per day"
   },
   "blok_verpleeghuis_zorg": {
     "title": "Nursing homes",
@@ -610,7 +610,7 @@
       },
       {
         "vraag": "Why do I find a different value for the total number of confirmed cases (people who tested positive) as shown on the site, if I add all the reported confirmed cases per safety region? ",
-        "antwoord": "We calculate the increase in the number of confirmed cases (people who tested positive) by deducting the current day’s cumulative number of confirmed cases reported from the cumulative number reported the day before. Any corrections to historical data, such as double counting, are processed by the RIVM on the day the error was discovered. This means the number of new cases reported for that day is lower than the actual number, but this is offset by the numbers being too high on previous days. Because of such corrections, it is possible for the current day’s cumulative number to be lower than the number for the day before. This is then depicted as 0 (zero) on the dashboard, as a negative number is confusing. This is why discrepancies arise when regional data is aggregated into national data. If you would use the negative values of the safety regions to calculate the daily number of confirmed cases, you would find the correct values. "
+        "antwoord": "We calculate the increase in the number of confirmed cases (people who tested positive) by deducting the current day’s cumulative number of confirmed cases reported from the cumulative number reported the day before. Any corrections to historical data, such as double counting, are processed by the RIVM on the day the error was discovered. This means the number of new cases reported for that day is lower than the actual number, but this is offset by the numbers being too high on previous days. Because of such corrections, it is possible for the current day’s cumulative number to be lower than the number for the day before. This is then depicted as 0 (zero) on the dashboard, as a negative number is confusing. This is why discrepancies arise when regional data is aggregated into national data. If you would use the negative values of the safety regions to calculate the daily number of confirmed cases, you would find the correct values."
       }
     ],
     "titel": "Frequently asked questions",
@@ -637,7 +637,7 @@
       },
       {
         "cijfer": "Confirmed cases",
-        "verantwoording": "The number of positive tests (confirmed cases) is supplied daily via [open data](https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv) by the National Institute for Public Health and the Environment (RIVM). The description of this dataset can be found [here](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427?tab=relations). The figures show the daily positive tests reported to RIVM in the preceding 24 hours, up to 10:00 on the day of publication. The date attributed to positive tests is the date on which RIVM was notified. This is not the same as the day on which people were tested. \n\nDoctors and laboratories in the Netherlands are required by law to report cases of certain infectious diseases to the municipal health service (GGD). However, coronavirus tests are increasingly being carried out by commercial organisations and individuals, and the results are not always reported to the GGD. Moreover, tests that do not meet the standards of the National Diagnostic Chain Coordination Team (LCDK) or RIVM are not counted (https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/testen/soorten-testen/ontwikkeling-van-sneltesten-op-corona). In other words, the figure for daily positive tests published on the dashboard may not be 100% accurate. This must be kept in mind when interpreting the figures. \n\nTest results are transferred from laboratories to the GDD and RIVM using different IT systems and is partly done manually, which delays the process somewhat. The GGD needs to question infected persons or their relatives to collect important data, so there is a time lag between a test result becoming known and RIVM being notified. A rise in the number of infected persons or a technical malfunction can lead to notification backlogs. So the data provided for the previous 24-hour period does not include all newly confirmed cases at the moment that RIVM accesses the data file. However, the data is always corrected with any late notifications that come in. Delays in reporting can skew the daily figures for positive tests. The moving average filters out daily fluctuations and thus provides a better picture of the trend in the number of infections. \n\nSometimes RIVM has to correct data that has already been published. These are not content-related corrections, but concern minor procedural errors, such as a typo in a GGD questionnaire, or the wrong selection of an answer category. These corrections are also processed in the open data file and incorporated in the dashboard. \n\nThe database provides figures per safety region and municipality. National figures are obtained by adding up all the notifications. In some cases, notifications cannot be linked to a particular municipality/safety region. These cannot therefore be shown at that level, but they are included in the national figures. We calculate the relative rate of infection in the following way. First, we divide the Netherlands’ total population by 100,000. We then divide the number of daily positive tests by the outcome of that division. This gives us the number of daily positive tests per 100,000 inhabitants. This makes it possible to compare individual municipalities and safety regions. The number of inhabitants is based on data supplied by Statistics Netherlands [CBS-indeling](https://opendata.cbs.nl/#/CBS/nl/dataset/84721NED/table?dl=3A154). \nThe division of new cases by age group is based on the national figures because ages are not recorded in the file containing municipal data. The table on the RIVM website may therefore not always match the table on the dashboard. \n\nA system of alert values has been set up. They signal when a situation has become alarming and needs urgent attention. The alert value for the number of confirmed cases a day is 7 per 100,000 inhabitants. This is the stage at which the number of infections is increasing too fast to keep the virus under control. The same alert value is also used in Germany. \n\nThe percentage of positive tests is based solely on tests carried out by the GGD for which the result is known. This is because the GGD is the only organisation that reports negative test results as well as positive ones. Negative results of any tests not carried out by the GGD are not reported to the GGD or to RIVM. RIVM provides the Ministry of Health, Welfare and Sport with weekly data relating to the GGD test centres (for example number of people tested and average processing time)."
+        "verantwoording": "The number of positive tests (confirmed cases) is supplied daily via [open data](https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv) by the National Institute for Public Health and the Environment (RIVM). The description of this dataset can be found [here](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427?tab=relations). The figures show the daily positive tests reported to RIVM in the preceding 24 hours, up to 10:00 on the day of publication. The date attributed to positive tests is the date on which RIVM was notified. This is not the same as the day on which people were tested. \n\nDoctors and laboratories in the Netherlands are required by law to report cases of certain infectious diseases to the municipal health service (GGD). However, coronavirus tests are increasingly being carried out by commercial organisations and individuals, and the results are not always reported to the GGD. Moreover, tests that do not meet the standards of the National Diagnostic Chain Coordination Team (LCDK) or RIVM are not counted (https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/testen/soorten-testen/ontwikkeling-van-sneltesten-op-corona). In other words, the figure for daily positive tests published on the dashboard may not be 100% accurate. This must be kept in mind when interpreting the figures. \n\nTest results are transferred from laboratories to the GDD and RIVM using different IT systems and is partly done manually, which delays the process somewhat. The GGD needs to question infected persons or their relatives to collect important data, so there is a time lag between a test result becoming known and RIVM being notified. A rise in the number of infected persons or a technical malfunction can lead to notification backlogs. So the data provided for the previous 24-hour period does not include all newly confirmed cases at the moment that RIVM accesses the data file. However, the data is always corrected with any late notifications that come in. Delays in reporting can skew the daily figures for positive tests. The moving average filters out daily fluctuations and thus provides a better picture of the trend in the number of infections. \n\nSometimes RIVM has to correct data that has already been published. These are not content-related corrections, but concern minor procedural errors, such as a typo in a GGD questionnaire, or the wrong selection of an answer category. These corrections are also processed in the open data file and incorporated in the dashboard. \n\nBased on the absolute numbers, we calculate the relative number of positive people in proportion to the number of inhabitants. We do this by dividing the number of positive people by the number of inhabitants of the Netherlands. We present this as the number of positively tested persons per 100,000 inhabitants. The number of inhabitants nationally, per safety region and per municipality is based on this [CBS classification](https://opendata.cbs.nl/#/CBS/nl/dataset/84721NED/table?dl=3A154).\n\nThe age distribution is determined on the basis of [another open data file from the RIVM](https://data.rivm.nl/covid-19/COVID-19_casus_landelijk.csv). This is because no ages are registered in the municipal file. Small differences may therefore arise between the table as shown in the 'weekly update of the epidemiological situation of COVID-19 in the Netherlands' on the RIVM website and as shown on the dashboard. The age distribution shown in the number of positively tested persons only concerns the cases reported since the penultimate update of the dashboard. The population size per age group is determined on the basis of this [CBS classification](https://opendata.cbs.nl/#/CBS/nl/dataset/03759ned/table).\n\nA system of alert values has been set up. They signal when a situation has become alarming and needs urgent attention. The alert value for the number of confirmed cases a day is 7 per 100,000 inhabitants. This is the stage at which the number of infections is increasing too fast to keep the virus under control. The same alert value is also used in Germany. \n\nThe percentage of positive tests is based solely on tests carried out by the GGD for which the result is known. This is because the GGD is the only organisation that reports negative test results as well as positive ones. Negative results of any tests not carried out by the GGD are not reported to the GGD or to RIVM. RIVM provides the Ministry of Health, Welfare and Sport with weekly data relating to the GGD test centres (for example number of people tested and average processing time)."
       },
       {
         "cijfer": "Reproduction number",
@@ -668,24 +668,24 @@
         "verantwoording": "This dashboard was developed in a short amount of time. So far, we have therefore not been able to publish the code for inputting the data and constructing the .JSON files. However, this will be done soon. The web application code was published on [Github](https://github.com/minvws/nl-covid19-data-dashboard) on 5 June 2020. The [data calculations](https://github.com/minvws/nl-covid19-data-backend-processing) are available via Github as well."
       },
       {
-        "cijfer": "",
+        "cijfer": "Behaviour",
         "verantwoording": ""
       },
       {
-        "cijfer": "",
-        "verantwoording": ""
+        "cijfer": "Deaths",
+        "verantwoording": "These figures are supplied daily as [open data](https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv) by the National Institute for Public Health and the Environment (RIVM). A description of this dataset can be found [here](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427). They show the number of COVID-19 related deaths reported to RIVM in the past 24 hours, up to 10.00 on the day of publication. The date used is the date on which the death was reported by the GGD to RIVM. This may not be the same as the day on which the death occurred. The actual number of deaths related to COVID-19 is higher than what is reported by RIVM because there is no requirement for reporting COVID-19 related deaths. "
       },
       {
-        "cijfer": "",
-        "verantwoording": ""
+        "cijfer": "Mortality monitor CBS",
+        "verantwoording": "General data on mortality (mortality monitor) is provided via a [public table](https://www.cbs.nl/nl-nl/cijfers/detail/70895ned) by the national office Statistics Netherlands (CBS) and updated weekly. The predicted number of deaths per week have been taken from the mortality projections made once every year by the CBS."
       },
       {
         "cijfer": "Disability care homes",
-        "verantwoording": "Every day the National Institute for Public Health and the Environment (RIVM) provides open data about the COVID-19 situation in disability care homes. A description of the data set can be found here. \n\nThis data cannot always be clearly linked to a specific safety region. As a result, the total sum of numbers at safety-region level may be less than the numbers at national level. The number of deaths is based on the date of death. However, when the date of death is unknown that death is not included in this statistic in the dashboard.\n\nThe word ‘locations’ refers to the 2,586 care homes in the Netherlands that are registered by Zorgkaart Nederland [LINK] as providing residential care to people with disabilities. The number of locations in each safety region is provided by RIVM. Care homes with the same postcode are counted as one location, which is identical to the method used to determine the number of infected locations. The number of locations in each safety region is needed in order to calculate the percentage of infected locations in that region. The total number of locations in the Netherlands is calculated by adding up the numbers for all of the safety regions.\n\nAs with nursing homes, information about disability care homes is based on records kept by the municipal health services (GGDs). As of 1 July 2020, every time a person tests positive for COVID-19, the GGD asks whether that person is a resident of a disability care home. A person is considered to be a disability care home resident if this is evident from information in OSIRIS (the database used by RIVM for this purpose). If it is unknown whether someone is a disability care home resident, their postcode can be used to link them to a registered disability care home or a setting (place where the infection may have occurred) labelled as a ‘care home’ or something similar.\n"
+        "verantwoording": "Every day the National Institute for Public Health and the Environment (RIVM) provides [open data](https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.csv) about the COVID-19 situation in disability care homes. A description of the data set can be found [here](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/aa28b74d-7150-47bc-a7cb-98876e93381b). \n\nThis data cannot always be clearly linked to a specific safety region. As a result, the total sum of numbers at safety-region level may be less than the numbers at national level. The number of deaths is based on the date of death. However, when the date of death is unknown that death is not included in this statistic in the dashboard.\n\nThe word ‘locations’ refers to the 2,586 care homes in the Netherlands that are registered by [Zorgkaart Nederland](https://www.zorgkaartnederland.nl/) as providing residential care to people with disabilities. The number of locations in each safety region is provided by RIVM. Care homes with the same postcode are counted as one location, which is identical to the method used to determine the number of infected locations. The number of locations in each safety region is needed in order to calculate the percentage of infected locations in that region. The total number of locations in the Netherlands is calculated by adding up the numbers for all of the safety regions.\n\nAs with nursing homes, information about disability care homes is based on records kept by the municipal health services (GGDs). As of 1 July 2020, every time a person tests positive for COVID-19, the GGD asks whether that person is a resident of a disability care home. A person is considered to be a disability care home resident if this is evident from information in OSIRIS (the database used by RIVM for this purpose). If it is unknown whether someone is a disability care home resident, their postcode can be used to link them to a registered disability care home or a setting (place where the infection may have occurred) labelled as a ‘care home’ or something similar."
       },
       {
         "cijfer": "People over 70 living at home",
-        "verantwoording": "Every day the National Institute for Public Health and the Environment (RIVM) provides open data about the COVID-19 situation among over-70s living at home. A description of the data set can be found here. This data cannot always be clearly linked to a specific safety region. As a result, the total sum of numbers at safety-region level may be less than the numbers at national level. The number of deaths is based on the date of death. However, when the date of death is unknown that death is not included in this statistic in the dashboard.\n\nFor its calculations RIVM uses test results and mortality data which it receives from the municipal health service (GGD). When people get tested for coronavirus, the GGD also records certain personal details, such as their age and whether they live in a nursing home or disability care home. RIVM calculates the number of new cases among over-70s living at home by, first, determining the total number of new cases in this age group and then subtracting the number of infections:\n-\tAmongst nursing home residents \n-\tAmongst care workers\n-\tAmongst people that can be linked to a care home via their address \n-\tAmongst people that can be linked to a care home because of the setting of their infection.\n\nThe population of over-70s living at home is highly diverse in terms of their health and living situation. Many over-70s are active and in good health. But others live with at least one chronic disease and/or have physical or cognitive limitations, and are less active. It is not possible at this time to distinguish between COVID-19 infections among active and inactive over-70s living at home because information about activity levels is not recorded when people get tested for coronavirus.\n\nThe dashboard also shows the number of daily confirmed cases per 100,000 for over-70s living at home. The total number of over-70s living at home is based on data collected by Statistics Netherlands on the number of over-70s living in a private household (Households: size, composition, position, 1 January; cbs.nl). This group consists of roughly 2.3 million people."
+        "verantwoording": "Every day the National Institute for Public Health and the Environment (RIVM) provides [open data](https://data.rivm.nl/covid-19/COVID-19_thuiswonend_70plus.csv) about the COVID-19 situation among over-70s living at home. A description of the data set can be found [here](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/40508e17-7296-4f39-ad25-8ddd0c904087). This data cannot always be clearly linked to a specific safety region. As a result, the total sum of numbers at safety-region level may be less than the numbers at national level. The number of deaths is based on the date of death. However, when the date of death is unknown that death is not included in this statistic in the dashboard.\n\nFor its calculations RIVM uses test results and mortality data which it receives from the municipal health service (GGD). When people get tested for coronavirus, the GGD also records certain personal details, such as their age and whether they live in a nursing home or disability care home. RIVM calculates the number of new cases among over-70s living at home by, first, determining the total number of new cases in this age group and then subtracting the number of infections:\n- Amongst nursing home residents \n- Amongst care workers\n- Amongst people that can be linked to a care home via their address \n- Amongst people that can be linked to a care home because of the setting of their infection.\n\nThe population of over-70s living at home is highly diverse in terms of their health and living situation. Many over-70s are active and in good health. But others live with at least one chronic disease and/or have physical or cognitive limitations, and are less active. It is not possible at this time to distinguish between COVID-19 infections among active and inactive over-70s living at home because information about activity levels is not recorded when people get tested for coronavirus.\n\nThe dashboard also shows the number of daily confirmed cases per 100,000 for over-70s living at home. The total number of over-70s living at home is based on data collected by Statistics Netherlands on the number of over-70s living in a private household (Households: size, composition, position, 1 January; cbs.nl). This group consists of roughly 2.3 million people."
       },
       {
         "cijfer": "",
@@ -753,13 +753,13 @@
     "select_region_municipality_legend": "Select a municipality:",
     "select_region_type_legend": "Show numbers from:",
     "your_municipality": "Municipality",
-    "belangrijk_bericht": "There are [country-wide measures](https://www.rijksoverheid.nl/actueel/nieuws/2020/11/17/gedeeltelijke-lockdown-gaat-verder) to stop the spread of the coronavirus."
+    "belangrijk_bericht": "There are [country-wide measures](https://www.rijksoverheid.nl/actueel/nieuws/2020/12/08/gedeeltelijke-lockdown-ook-tijdens-feestdagen) to stop the spread of the coronavirus."
   },
   "common": {
     "metadata": {
       "source": "Source",
       "date": "Value of {{date}}",
-      "dateFromTo": "Value from {{dateFrom}} to {{dateTo}}",
+      "dateFromTo": "Value from {{startDate}} - {{endDate}}",
       "download": ""
     },
     "barScale": {
@@ -771,7 +771,7 @@
     "veiligheidsregio_label": "Safety region:",
     "metricKPI": {
       "dateOfReport": "Value of {{dateOfReport}}",
-      "dateRangeOfReport": "Value from {{dateFrom}} - {{dateTo}}"
+      "dateRangeOfReport": "Value from {{startDate}} - {{endDate}}"
     },
     "tooltip": {
       "positive_tested_people": ""
@@ -1088,7 +1088,8 @@
         "text": "RIVM",
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
       }
-    }
+    },
+    "kpi_titel": ""
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Level of risk",
@@ -1097,7 +1098,7 @@
       "title": "Level of risk per safety region | Dashboard Coronavirus | Government.nl",
       "description": "Overview of the level of risk per safety region in the Netherlands."
     },
-    "belangrijk_bericht": "There are [country-wide measures](https://www.rijksoverheid.nl/actueel/nieuws/2020/11/17/gedeeltelijke-lockdown-gaat-verder) to stop the spread of the coronavirus."
+    "belangrijk_bericht": "There are [country-wide measures](https://www.rijksoverheid.nl/actueel/nieuws/2020/12/08/gedeeltelijke-lockdown-ook-tijdens-feestdagen) to stop the spread of the coronavirus."
   },
   "gemeente_index": {
     "selecteer_titel": "Select your municipality",
@@ -1109,9 +1110,9 @@
   },
   "laatste_ontwikkelingen": {
     "title": "Latest developments",
-    "menu_subtitle": "Increse of number of confirmed cases",
-    "alle_cijfers_header": "",
-    "alle_cijfers_link": ""
+    "menu_subtitle": "Increase of number of confirmed cases",
+    "alle_cijfers_header": "Want to see all data?",
+    "alle_cijfers_link": "View all"
   },
   "escalatie_niveau": {
     "titel": "Level of risk",
@@ -1400,12 +1401,13 @@
       "trend_lager": "lower",
       "trend_gelijk": "same"
     },
-    "kpi_titel": "Percentage of people who agree with the basic rules and the percentage of people who also follow those rules in practice.",
+    "titel_kpi": "Percentage of people who agree with the basic rules and the percentage of people who also follow those rules in practice.",
+    "kpi_titel": "Percentage of people that agree with the measures and the percentage that also adheres to them.",
     "meer_onderzoeksresultaten": {
-      "title": "Meer onderzoeksresultaten",
-      "description": "Bekijk voor meer gedetailleerde resultaten het volledige onderzoek op de website van de RIVM.",
-      "linkLabel": "Bekijk het gehele onderzoek op de website van de RIVM",
-      "linkHref": "#"
+      "title": "More research results",
+      "description": "For more details please see the entire research on the website of RIVM.",
+      "linkLabel": "View the entire research on the website of RIVM",
+      "linkHref": "https://www.rivm.nl/gedragsonderzoek/maatregelen-welbevinden"
     }
   },
   "nl_gedrag": {
@@ -1454,6 +1456,10 @@
       "voetnoot": {
         "compliance": "This table shows the percentage of survey respondents who reported following each of the basic rules in their daily life.\n* Any difference compared to the previous measurement can be shown with 95% certainty. ",
         "support": "This table shows the percentage of survey respondents who reported supporting each of the basic rules.\n* Any difference compared to the previous measurement can be shown with 95% certainty. "
+      },
+      "voetnoot_asterisk": {
+        "compliance": "",
+        "support": ""
       }
     },
     "basisregels_over_tijd": {
@@ -1470,8 +1476,8 @@
     "bronnen": {
       "rivm": {
         "download": "",
-        "text": "Name source",
-        "href": "link to source"
+        "text": "RIVM",
+        "href": "https://www.rivm.nl/gedragsonderzoek/maatregelen-welbevinden"
       }
     }
   },
@@ -1501,7 +1507,7 @@
         "titel": "Number of respondents",
         "toelichting": "Number of people surveyed between 20 and 26 October 2020.",
         "bron": {
-          "text": "",
+          "text": "RIVM",
           "href": "https://data.rivm.nl/covid-19/COVID-19_gedrag.html"
         }
       }
@@ -1515,6 +1521,10 @@
       "voetnoot": {
         "compliance": "This table shows the percentage of survey respondents who reported following each of the basic rules in their daily life. \n* Any difference compared to the previous measurement can be shown with 95% certainty. ",
         "support": "This table shows the percentage of survey respondents who reported supporting each of the basic rules.\n* Any difference compared to the previous measurement can be shown with 95% certainty. "
+      },
+      "voetnoot_asterisk": {
+        "compliance": "",
+        "support": ""
       }
     },
     "basisregels_over_tijd": {
@@ -1531,8 +1541,8 @@
     "bronnen": {
       "rivm": {
         "download": "",
-        "text": "Name source",
-        "href": "link to source"
+        "text": "RIVM",
+        "href": "https://www.rivm.nl/gedragsonderzoek/maatregelen-welbevinden"
       }
     }
   },
@@ -1551,22 +1561,22 @@
     }
   },
   "aria_labels": {
-    "pagina_keuze": "",
-    "footer_keuze": "",
-    "metriek_navigatie": "",
-    "skip_links": ""
+    "pagina_keuze": "National, regional or municipality menu",
+    "footer_keuze": "Page menu",
+    "metriek_navigatie": "Metrics per category menu",
+    "skip_links": "Quick links"
   },
   "infected_age_groups": {
-    "title": "",
-    "description": "",
-    "example": "",
+    "title": "Distribution by age",
+    "description": "The blue (right) bars in this graph show which age group positive tested persons belong to. The gray (left) bars show how large each age group is in relation to the entire Dutch population. The blue and gray bars together show whether age groups have relatively more or less positive tested persons. For example: 10% of all positive tested persons are in their thirties (blue bar) and 14% of all Dutch people are in their thirties (gray bar). In this example, the age group thirties has relatively fewer positive tested people. The chart is updated daily and covers only the most recently reported cases.",
+    "example": "For example: of all positive tested people is {{infectedPercentage}} between {{ageGroupRange}} years old. Of all Dutch people is {{ageGroupPercentage}} between {{ageGroupRange}} years old. ",
     "graph": {
-      "age_group_percentage_title": "",
-      "age_group_percentage_tooltip": "",
-      "infected_percentage_title": "",
-      "infected_percentage_tooltip": "",
-      "age_group_range_tooltip": "",
-      "accessibility_description": ""
+      "age_group_percentage_title": "Percentage of the population",
+      "age_group_percentage_tooltip": "of the population is {{ageGroupRange}} years old.",
+      "infected_percentage_title": "Percentage of the positive tests",
+      "infected_percentage_tooltip": "of the total amount of positive tested persons is {{ageGroupRange}} years old. ",
+      "age_group_range_tooltip": "{{ageGroupRange}} years old. ",
+      "accessibility_description": "Graph with percentages for the distribution of the population and the distribution of positive tested age groups."
     }
   },
   "gehandicaptenzorg_besmette_locaties": {
@@ -1586,7 +1596,7 @@
     "map_titel": "Distribution of infected locations in the Netherlands",
     "map_toelichting": "This map shows the number of disability care homes that have reported at least one confirmed COVID-19 case, based on a positive test, in the last 28 days.",
     "metadata": {
-      "title": "Infected disability care homes | Dashboard Coronavirus | Governement.nl",
+      "title": "Infected disability care homes | Dashboard Coronavirus | Government.nl",
       "description": "National overview of the disability care homes that have reported at least one confirmed COVID-19 case."
     },
     "titel_sidebar": "Disability care",
@@ -1632,15 +1642,16 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
         "text": "RIVM"
       }
-    }
+    },
+    "kpi_titel": ""
   },
   "gehandicaptenzorg_oversterfte": {
     "datums": "Latest values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "titel": "Disability care homes – Deaths",
     "pagina_toelichting": "Number of disability care home residents who have died from COVID-19.",
     "barscale_titel": "Number of deceased residents",
-    "barscale_screenreader_text": "",
-    "extra_uitleg": "This is an estimate of the number of disability care home residents in the Netherlands who have died from COVID-19 since 27 February 2020. ",
+    "barscale_screenreader_text": "{{value}} deceased residents",
+    "extra_uitleg": "This is an estimate of the number of disability care home residents in the Netherlands who have died from COVID-19 since 27 February 2020.",
     "linechart_titel": "Progression over time",
     "map_titel": "Disability care homes – deaths",
     "map_toelichting": "",
@@ -1651,7 +1662,7 @@
     "titel_kpi": "Number of deceased residents",
     "reference": {
       "href": "/verantwoording#disability-care-homes",
-      "text": "Read more in explantion of the data presented"
+      "text": "Read more in explanation of the data presented"
     },
     "bronnen": {
       "rivm": {
@@ -1659,7 +1670,8 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
         "text": "RIVM"
       }
-    }
+    },
+    "kpi_titel": "Number of deceased residents"
   },
   "veiligheidsregio_gehandicaptenzorg_oversterfte": {
     "datums": "Latest values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -1670,7 +1682,7 @@
     "titel": "Disability care homes in {{safetyRegion}} – deaths",
     "pagina_toelichting": "Number of disability care home residents in this region with confirmed COVID-19 who have died, per day.",
     "barscale_titel": "Number of deceased residents",
-    "barscale_screenreader_text": "",
+    "barscale_screenreader_text": "{{value}}deceased residents.",
     "extra_uitleg": "This is an estimate of the number of COVID-19 related deaths reported yesterday among disability care home residents in this region.",
     "linechart_titel": "Progression over time",
     "map_titel": "",
@@ -1703,7 +1715,7 @@
     "linechart_titel": "Total no. of infected locations – progression over time",
     "barscale_screenreader_text": "",
     "metadata": {
-      "title": "Infected disability care homes in {{safetyRegionName}} | Dashboard Coronavirus | Governement.nl",
+      "title": "Infected disability care homes in {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
       "description": "Regional overview of the disability care homes in {{safetyRegionName}} that have reported at least one confirmed COVID-19 case."
     },
     "titel_sidebar": "Confirmed cases (homes)",
@@ -1748,11 +1760,12 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
         "text": "RIVM"
       }
-    }
+    },
+    "kpi_titel": ""
   },
   "thuiswonende_ouderen": {
     "titel_sidebar": "People over 70 living at home",
-    "titel_kpi": "",
+    "titel_kpi": "Confirmed cases",
     "metadata": {
       "title": "",
       "description": ""
@@ -1761,14 +1774,14 @@
       "title": "People over 70 living at home",
       "description": "People aged over 70 are extra vulnerable to coronavirus infection. Keeping track of the number of infections among over-70s who are still living independently in their own homes makes targeted measures possible. Over-70s living in residential settings – nursing homes or disability care homes – are counted under those groups on this dashboard. Read more in the explanation of the presented data.",
       "reference": {
-        "href": "",
-        "text": "See the [explanation of the data presented](https://coronadashboard.government.nl/verantwoording)"
+        "href": "/verantwoording#thuiswonende-70-plussers",
+        "text": "See the explanation of the data presented."
       },
       "bronnen": {
         "rivm": {
-          "href": "",
-          "text": "",
-          "download": ""
+          "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/40508e17-7296-4f39-ad25-8ddd0c904087",
+          "text": "RIVM",
+          "download": "https://data.rivm.nl/covid-19/COVID-19_thuiswonend_70plus.csv"
         }
       },
       "kpi_daily_title": "Confirmed cases among over-70s living at home",
@@ -1785,41 +1798,42 @@
       "title": "Over-70s living at home - COVID-19 mortality",
       "description": "The number of people over 70 living at home who were reported as deceased due to COVID-19 yesterday. Read more in the explanation of the presented data.",
       "reference": {
-        "href": "",
-        "text": "See the [explanation on the data presented](https://coronadashboard.government.nl/verantwoording)"
+        "href": "/verantwoording#thuiswonende-70-plussers",
+        "text": "See the explanation on the data presented."
       },
       "bronnen": {
         "rivm": {
-          "href": "",
-          "text": "",
-          "download": ""
+          "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/40508e17-7296-4f39-ad25-8ddd0c904087",
+          "text": "RIVM",
+          "download": "https://data.rivm.nl/covid-19/COVID-19_thuiswonend_70plus.csv"
         }
       },
       "kpi_daily_title": "Number of over-70s living at home that died because of COVID-19, daily",
       "kpi_daily_description": "The number of people over 70 living at home who were reported as deceased due to COVID-19 yesterday.",
       "line_chart_daily_title": "Number of COVID-19 deaths among over-70s living at home: progression over time",
-      "datums": "Last update  {{dateOfInsertion}}. Updated daily."
-    }
+      "datums": "Last update {{dateOfInsertion}}. Updated daily."
+    },
+    "kpi_titel": "Confirmed cases"
   },
   "veiligheidsregio_thuiswonende_ouderen": {
     "titel_sidebar": "People over 70 living at home",
     "titel_kpi": "",
     "metadata": {
-      "title": "Over-70s living at home in {{safetyRegion}} I Dashboard Coronvirus I Rijksoverheid.nl",
+      "title": "Over-70s living at home in {{safetyRegion}} I Dashboard Coronavirus I Rijksoverheid.nl",
       "description": "Over-70s living at home in {{safetyRegion}}"
     },
     "section_positive_tested": {
       "title": "Over-70s in {{safetyRegion}} living at home - newly confirmed cases",
       "description": "People aged over 70 are extra vulnerable to coronavirus infection. Keeping track of the number of infections among over-70s who are still living independently in their own homes makes targeted measures possible. Over-70s living in residential settings – nursing homes or disability care homes – are counted on this dashboard under those groups. Read more in the explanation of the [presented data](https://coronadashboard.government.nl/verantwoording).",
       "reference": {
-        "href": "",
+        "href": "/verantwoording#thuiswonende-70-plussers",
         "text": ""
       },
       "bronnen": {
         "rivm": {
-          "href": "",
-          "text": "",
-          "download": ""
+          "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/40508e17-7296-4f39-ad25-8ddd0c904087",
+          "text": "RIVM",
+          "download": "https://data.rivm.nl/covid-19/COVID-19_thuiswonend_70plus.csv"
         }
       },
       "kpi_daily_title": "Daily confirmed cases among over-70s living at home",
@@ -1833,108 +1847,111 @@
       "title": "People over 70 in {{safetyRegion}} living at home – deaths",
       "description": "People aged over 70 are extra vulnerable to coronavirus infection. Keeping track of the number of infections among over-70s who are still living independently in their own homes makes targeted measures possible. Over-70s living in residential settings – nursing homes or disability care homes – are counted on this dashboard under those groups. Read more in the explanation of the presented data.",
       "reference": {
-        "href": "",
+        "href": "/verantwoording#thuiswonende-70-plussers",
         "text": ""
       },
       "bronnen": {
         "rivm": {
-          "href": "",
-          "text": "",
-          "download": ""
+          "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/40508e17-7296-4f39-ad25-8ddd0c904087",
+          "text": "RIVM",
+          "download": "https://data.rivm.nl/covid-19/COVID-19_thuiswonend_70plus.csv"
         }
       },
       "kpi_daily_title": "COVID-19 deaths among over-70s living at home, per day",
       "kpi_daily_description": "The number of people over 70 living at home in this safety region who were reported as deceased due to COVID-19 yesterday",
       "line_chart_daily_title": "Number of COVID-19 deaths among over-70s living at home: progression over time",
       "datums": "Last values obtained on {{dateOfInsertion}}. 1 December. Is updated on a daily basis."
-    }
+    },
+    "kpi_titel": ""
   },
   "sterfte": {
-    "titel_sidebar": "",
-    "titel_kpi": "",
+    "titel_sidebar": "Deaths",
+    "titel_kpi": "Daily reported deaths from COVID-19",
     "metadata": {
-      "title": "",
-      "description": ""
+      "title": "Deaths | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Number of deceased per day"
     },
     "section_deceased_rivm": {
-      "title": "",
-      "description": "",
-      "datums": "",
+      "title": "Deaths",
+      "description": "These figures show the number of deaths from COVID-19, as reported to the GGD. The actual number of deaths from COVID-19 may be higher because not all people with COVID-19 get tested and there is no requirement for reporting deaths due to COVID-19. ",
+      "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
       "bronnen": {
         "rivm": {
-          "href": "",
-          "text": "",
-          "download": ""
+          "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
+          "text": "RIVM",
+          "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv"
         }
       },
       "reference": {
-        "href": "",
-        "text": ""
+        "href": "/verantwoording#deaths",
+        "text": "Read more in 'explanation of the data presented'."
       },
-      "kpi_covid_daily_title": "",
-      "kpi_covid_daily_description": "",
-      "kpi_covid_total_title": "",
-      "kpi_covid_total_description": "",
-      "line_chart_covid_daily_title": ""
-    }
+      "kpi_covid_daily_title": "Daily reported deaths from COVID-19",
+      "kpi_covid_daily_description": "This figure shows the number of COVID-19 deaths reported to the GGD, per day. It includes late reports of deaths that occurred in the preceding days.",
+      "kpi_covid_total_title": "Total reported deaths from COVID-19.",
+      "kpi_covid_total_description": "This figure shows the number of reported deaths from COVID-19, since the reporting of COVID-19 deaths started.",
+      "line_chart_covid_daily_title": "Number of reported deaths from COVID-19 over time"
+    },
+    "kpi_titel": "Daily reported deaths from COVID-19"
   },
   "veiligheidsregio_sterfte": {
-    "titel_sidebar": "",
-    "titel_kpi": "",
+    "titel_sidebar": "Deaths",
+    "titel_kpi": "Gemeld aantal patiënten overleden aan COVID-19 per dag",
     "metadata": {
-      "title": "",
-      "description": ""
+      "title": "Deaths in {{safetyRegion}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Number of deceased per day in {{safetyRegion}}"
     },
     "section_deceased_rivm": {
-      "title": "",
-      "description": "",
-      "datums": "",
+      "title": "Deaths",
+      "description": "These figures show the number of deaths related directly or indirectly to COVID-19, as reported to the GGD. The actual number of deaths related to COVID-19 may be higher because not all people with COVID-19 get tested and there is no requirement for reporting COVID-19 related deaths. ",
+      "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
       "bronnen": {
         "rivm": {
-          "href": "",
-          "text": "",
-          "download": ""
+          "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
+          "text": "RIVM",
+          "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv"
         }
       },
       "reference": {
-        "href": "",
-        "text": ""
+        "href": "/verantwoording#deaths",
+        "text": "Read more in 'explanation of the data presented'."
       },
-      "kpi_covid_daily_title": "",
-      "kpi_covid_daily_description": "",
-      "kpi_covid_total_title": "",
-      "kpi_covid_total_description": "",
-      "line_chart_covid_daily_title": ""
-    }
+      "kpi_covid_daily_title": "Daily reported deaths from COVID-19",
+      "kpi_covid_daily_description": "This figure shows the number of COVID-19 deaths reported to the GGD, per day. It includes late reports of deaths that occurred in the preceding days.",
+      "kpi_covid_total_title": "Total reported deaths from/related to COVID-19 per 100,000 inhabitants.",
+      "kpi_covid_total_description": "This figure shows the number of deaths from/related to COVID-19 reported yesterday, per 100,000 inhabitants. ",
+      "line_chart_covid_daily_title": "Number of reported deaths related to COVID-19 over time"
+    },
+    "kpi_titel": "Daily reported deaths from COVID-19"
   },
   "section_sterftemonitor": {
-    "title": "",
-    "description": "",
-    "datums": "",
+    "title": "Mortality monitor",
+    "description": "Every week the national office Statistics Netherlands (CBS) publishes data on the total number of deaths in the Netherlands and compares this to the predicted number of deaths, corrected for extreme temperatures, epidemics, etc. If more deaths occur than predicted, these are considered excess deaths. This graph may show a more complete picture of COVID-19 related deaths than the numbers reported by the GGD because not everyone who dies from COVID-19 has been tested for it. ",
+    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "bronnen": {
       "cbs": {
-        "href": "",
-        "text": "",
-        "download": ""
+        "href": "https://www.cbs.nl/nl-nl/cijfers/detail/70895ned",
+        "text": "CBS",
+        "download": "https://opendata.cbs.nl/ODataApi/odata/70895ned/TypedDataSet?$filter=((Geslacht eq '1100')) and ((LeeftijdOp31December eq '10000')) and (substringof('W', Perioden) eq true)&$select=Perioden, Overledenen_1"
       }
     },
     "reference": {
-      "href": "",
-      "text": ""
+      "href": "/verantwoording#mortality-monitor-CBS",
+      "text": "Read more in 'explanation of the data presented'"
     },
     "cbs_message": {
-      "title": "",
-      "published_text": "",
-      "message": "",
+      "title": "CBS: Higher mortality in week 48",
+      "published_text": "Date of publication: Friday 4 December",
+      "message": "In week 48 (23 to 29 November inclusive), the estimated number of deaths stood at 3,450. This is approximately 150 more than in the previous week, when there were 3,293 deaths. Mortality is always higher in winter. However, there were still over 400 more deaths recorded in week 48 than normally expected for this period. Statistics Netherlands (CBS) reports this based on the latest provisional weekly mortality figures.",
       "link": {
-        "href": "",
-        "text": ""
+        "href": "https://www.cbs.nl/en-gb/news/2020/49/higher-mortality-in-week-48",
+        "text": "Website CBS"
       }
     },
-    "deceased_monitor_chart_title": "",
-    "deceased_monitor_chart_description": "",
-    "deceased_monitor_chart_legenda_registered": "",
-    "deceased_monitor_chart_legenda_expected": "",
-    "deceased_monitor_chart_legenda_expected_margin": ""
+    "deceased_monitor_chart_title": "Total number of deaths per week",
+    "deceased_monitor_chart_description": "This graph shows the total number of deaths per week in the Netherlands in 2020. The actual number of deaths is compared to the number of deaths predicted based on the figures from preceding years. The light blue line, drawn within its range of uncertainty, shows the number of deaths predicted over the year. The dark blue line shows the number of actual deaths.",
+    "deceased_monitor_chart_legenda_registered": "Actual mortality",
+    "deceased_monitor_chart_legenda_expected": "Predicted mortality",
+    "deceased_monitor_chart_legenda_expected_margin": "Range of predicted mortality"
   }
 }

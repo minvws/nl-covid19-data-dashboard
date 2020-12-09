@@ -2,8 +2,8 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Arrow from '~/assets/arrow.svg';
 import Arts from '~/assets/arts.svg';
-import Gedrag from '~/assets/gedrag.svg';
 import ElderlyIcon from '~/assets/elderly.svg';
+import Gedrag from '~/assets/gedrag.svg';
 import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
 import Notification from '~/assets/notification.svg';
 import ReproIcon from '~/assets/reproductiegetal.svg';
@@ -20,15 +20,10 @@ import {
   MetricMenuItem,
 } from '~/components-styled/aside/menu';
 import { TitleWithIcon } from '~/components-styled/aside/title-with-icon';
-import { DeceasedMetric } from '~/components/common/deceased-metric';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
+import { DeceasedMetric } from '~/components/common/deceased-metric';
 import { ElderlyAtHomeMetric } from '~/components/common/elderly-at-home-metric';
-import { NursingHomeInfectedPeopleMetric } from '~/components/common/nursing-home-infected-people-metric';
 import { InfectiousPeopleMetric } from '~/components/landelijk/infectious-people-metric';
-import { ReproductionIndexBarScale } from '~/components/landelijk/reproduction-index-barscale';
-import { ReproductionIndexMetric } from '~/components/landelijk/reproduction-index-metric';
-import { SewerWaterMetric } from '~/components/landelijk/sewer-water-metric';
-import { SuspectedPatientsMetric } from '~/components/landelijk/suspected-patients-metric';
 import Layout from '~/components/layout';
 import { BehaviorMetric } from '~/domain/behavior/behavior-metric';
 import siteText from '~/locale/index';
@@ -229,19 +224,14 @@ function NationalLayout(props: NationalLayoutProps) {
                           icon={<ReproIcon />}
                           title={siteText.reproductiegetal.titel_sidebar}
                         />
-                        <span className="metric-wrapper">
-                          <ReproductionIndexMetric
-                            data={
-                              data.reproduction_index_last_known_average
-                                .last_value
-                            }
-                          />
-                          <ReproductionIndexBarScale
-                            data={data.reproduction_index_last_known_average}
-                            showAxis={false}
-                            showValue={false}
-                          />
-                        </span>
+                        <SidebarMetric
+                          data={data}
+                          scope="nl"
+                          metricName="reproduction_index_last_known_average"
+                          metricProperty="reproduction_index_avg"
+                          localeTextKey="reproductiegetal"
+                          showBarScale={true}
+                        />
                       </a>
                     </Link>
                   </MetricMenuItem>
@@ -254,7 +244,7 @@ function NationalLayout(props: NationalLayoutProps) {
                         />
                         <span className="metric-wrapper">
                           <DeceasedMetric
-                            title={siteText.sterfte.titel_kpi}
+                            title={siteText.sterfte.kpi_titel}
                             data={data.deceased_rivm.last_value}
                           />
                         </span>
@@ -343,11 +333,14 @@ function NationalLayout(props: NationalLayoutProps) {
                               .titel_sidebar
                           }
                         />
-                        <span className="metric-wrapper">
-                          <NursingHomeInfectedPeopleMetric
-                            data={data.nursing_home.last_value}
-                          />
-                        </span>
+                        <SidebarMetric
+                          data={data}
+                          scope="nl"
+                          metricName="nursing_home"
+                          metricProperty="newly_infected_people"
+                          localeTextKey="verpleeghuis_positief_geteste_personen"
+                          differenceKey="nursing_home__newly_infected_people"
+                        />
                       </a>
                     </Link>
                   </MetricMenuItem>
@@ -363,11 +356,13 @@ function NationalLayout(props: NationalLayoutProps) {
                               .titel_sidebar
                           }
                         />
-                        <span className="metric-wrapper">
-                          <NursingHomeInfectedPeopleMetric
-                            data={data.disability_care.last_value}
-                          />
-                        </span>
+                        <SidebarMetric
+                          data={data}
+                          scope="nl"
+                          metricName="disability_care"
+                          metricProperty="newly_infected_people"
+                          localeTextKey="gehandicaptenzorg_positief_geteste_personen"
+                        />
                       </a>
                     </Link>
                   </MetricMenuItem>
@@ -385,6 +380,7 @@ function NationalLayout(props: NationalLayoutProps) {
                         <span className="metric-wrapper">
                           <ElderlyAtHomeMetric
                             data={data.elderly_at_home.last_value}
+                            title={siteText.thuiswonende_ouderen.kpi_titel}
                           />
                         </span>
                       </a>
@@ -404,9 +400,16 @@ function NationalLayout(props: NationalLayoutProps) {
                           icon={<RioolwaterMonitoring />}
                           title={siteText.rioolwater_metingen.titel_sidebar}
                         />
-                        <span className="metric-wrapper">
-                          <SewerWaterMetric data={data.sewer} />
-                        </span>
+
+                        <SidebarMetric
+                          data={data}
+                          scope="nl"
+                          metricName="sewer"
+                          metricProperty="average"
+                          localeTextKey="rioolwater_metingen"
+                          differenceKey="sewer__average"
+                          annotationKey="riool_normalized"
+                        />
                       </a>
                     </Link>
                   </MetricMenuItem>
@@ -422,11 +425,14 @@ function NationalLayout(props: NationalLayoutProps) {
                           icon={<Arts />}
                           title={siteText.verdenkingen_huisartsen.titel_sidebar}
                         />
-                        <span className="metric-wrapper">
-                          <SuspectedPatientsMetric
-                            data={data.verdenkingen_huisartsen.last_value}
-                          />
-                        </span>
+                        <SidebarMetric
+                          data={data}
+                          scope="nl"
+                          metricName="verdenkingen_huisartsen"
+                          metricProperty="geschat_aantal"
+                          localeTextKey="verdenkingen_huisartsen"
+                          differenceKey="huisarts_verdenkingen__geschat_aantal"
+                        />
                       </a>
                     </Link>
                   </MetricMenuItem>

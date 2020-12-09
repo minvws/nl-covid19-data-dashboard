@@ -41,9 +41,9 @@ function renderSidebarIndicator(value: DifferenceDecimal | DifferenceInteger) {
   if (difference > 0) {
     return (
       <Container>
-        <Span color="red">
+        <IconContainer color="red">
           <IconUp />
-        </Span>
+        </IconContainer>
       </Container>
     );
   }
@@ -51,18 +51,18 @@ function renderSidebarIndicator(value: DifferenceDecimal | DifferenceInteger) {
   if (difference < 0) {
     return (
       <Container>
-        <Span color="data.primary">
+        <IconContainer color="data.primary">
           <IconDown />
-        </Span>
+        </IconContainer>
       </Container>
     );
   }
 
   return (
     <Container>
-      <Span color="lightGray">
+      <IconContainer color="lightGray">
         <IconGelijk />
-      </Span>
+      </IconContainer>
     </Container>
   );
 }
@@ -82,9 +82,9 @@ function renderTileIndicator(
 
     return (
       <Container>
-        <Span color="red">
+        <IconContainer color="red">
           <IconUp />
-        </Span>
+        </IconContainer>
         <Span fontWeight="bold" mr="0.3em">
           {differenceFormattedString} {splitText[0]}
         </Span>
@@ -100,9 +100,9 @@ function renderTileIndicator(
 
     return (
       <Container>
-        <Span color="data.primary">
+        <IconContainer color="data.primary">
           <IconDown />
-        </Span>
+        </IconContainer>
         <Span fontWeight="bold" mr="0.3em">
           {differenceFormattedString} {splitText[0]}
         </Span>
@@ -115,9 +115,9 @@ function renderTileIndicator(
 
   return (
     <Container>
-      <Span color="lightGray">
+      <IconContainer color="lightGray">
         <IconGelijk />
-      </Span>
+      </IconContainer>
       <Span>
         {text.gelijk} <TimespanText date={old_date_of_report_unix} />
       </Span>
@@ -128,6 +128,15 @@ function renderTileIndicator(
 type SpanProps = SpaceProps & ColorProps & TypographyProps;
 
 const Span = styled.span<SpanProps>(compose(color, space, typography));
+const IconContainer = styled(Span)(
+  css({
+    svg: {
+      mr: 1,
+      width: '19px',
+      height: '19px',
+    },
+  })
+);
 
 const Container = styled.div(
   css({

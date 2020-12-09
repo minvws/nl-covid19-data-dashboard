@@ -1,16 +1,14 @@
-import { assert } from '~/utils/assert';
 import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
+import { MetricKeys } from '~/components/choropleth/shared';
+import siteText, { TALLLanguages } from '~/locale/index';
+import { DataScope, getMetricConfig } from '~/metric-config';
+import { assert } from '~/utils/assert';
+import { formatDateFromSeconds } from '~/utils/formatDate';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { SidebarBarScale } from './sidebar-barscale';
 import { SidebarKpiValue } from './sidebar-kpi-value';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { formatDateFromSeconds } from '~/utils/formatDate';
-import siteText, { TALLLanguages } from '~/locale/index';
-import { getMetricConfig, DataScope } from '~/metric-config';
-import {
-  MetricKeys /* DifferenceKeys */,
-} from '~/components/choropleth/shared';
 
 interface SidebarMetricProps<T extends { difference: unknown }> {
   scope: DataScope;
@@ -18,10 +16,8 @@ interface SidebarMetricProps<T extends { difference: unknown }> {
   metricName: ValueOf<MetricKeys<T>>;
   metricProperty: string;
   localeTextKey: keyof TALLLanguages;
-  // differenceKey?: ValueOf<DifferenceKeys<T>>;
   differenceKey?: string;
   showBarScale?: boolean;
-  isWeeklyData?: boolean;
   annotationKey?: string;
 
   /**
@@ -70,8 +66,15 @@ export function SidebarMetric<T extends { difference: unknown }>({
   );
   const commonText = siteText.common.metricKPI;
 
-  const title = get(siteText, [localeTextKey, 'kpi_titel']);
-  assert(title, `Missing title at ${localeTextKey}.kpi_titel`);
+  /**
+   * Because the locale files are not consistent in using kpi_titel and titel_kpi
+   * we support both but kpi_titel has precedence.
+   */
+  const title =
+    get(siteText, [localeTextKey, 'kpi_titel']) ??
+    get(siteText, [localeTextKey, 'titel_kpi']);
+
+  assert(title !== undefined, `Missing title at ${localeTextKey}.kpi_titel`);
 
   const description = config.isWeeklyData
     ? replaceVariablesInText(commonText.dateRangeOfReport, {
@@ -121,6 +124,7 @@ export function SidebarMetric<T extends { difference: unknown }>({
         isPercentage={config.isPercentage}
         description={description}
         difference={differenceValue}
+        valueAnnotation={valueAnnotation}
       />
       {showBarScale && (
         <SidebarBarScale

@@ -50,7 +50,10 @@ const DeceasedNationalPage: FCWithLayout<NationalPageProps> = (props) => {
             source: text.section_deceased_rivm.bronnen.rivm,
           }}
         >
-          <KpiValue absolute={dataRivm.last_value.covid_daily} />
+          <KpiValue
+            data-cy="covid_daily"
+            absolute={dataRivm.last_value.covid_daily}
+          />
           <Text>{text.section_deceased_rivm.kpi_covid_daily_description}</Text>
         </KpiTile>
         <KpiTile
@@ -60,7 +63,10 @@ const DeceasedNationalPage: FCWithLayout<NationalPageProps> = (props) => {
             source: text.section_deceased_rivm.bronnen.rivm,
           }}
         >
-          <KpiValue absolute={dataRivm.last_value.covid_total} />
+          <KpiValue
+            data-cy="covid_total"
+            absolute={dataRivm.last_value.covid_total}
+          />
           <Text>{text.section_deceased_rivm.kpi_covid_total_description}</Text>
         </KpiTile>
       </TwoKpiSection>

@@ -1,19 +1,17 @@
 import { RegionalContext } from 'cypress/integration/types';
 import { formatNumber } from '~/utils/formatNumber';
 
-context('Regionaal - Rioolwater', () => {
+context('Regionaal - Sterfte', () => {
   before(() => {
-    cy.beforeRegionTests('rioolwater');
+    cy.beforeRegionTests('sterfte');
   });
 
   it('Should show the correct KPI values', function (this: RegionalContext) {
-    const lastValue = this.regionData.sewer.last_value;
+    const rivmLastValue = this.regionData.deceased_rivm.last_value;
 
     const kpiTestInfo = {
-      riool_normalized: formatNumber(lastValue.average),
-      total_installation_count: formatNumber(
-        lastValue.total_installation_count
-      ),
+      covid_daily: formatNumber(rivmLastValue.covid_daily),
+      covid_total: formatNumber(rivmLastValue.covid_total),
     };
 
     cy.checkKpiValues(kpiTestInfo);

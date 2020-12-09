@@ -13,6 +13,11 @@ export type VrConfig = Partial<
 >;
 
 export const vr: VrConfig = {
+  sewer: {
+    average: {
+      isWeeklyData: true,
+    },
+  },
   results_per_region: {
     infected_increase_per_region: {
       barScale: {

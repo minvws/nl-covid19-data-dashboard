@@ -12,4 +12,10 @@ export type GmConfig = Partial<
   Record<GmMetricKey, Record<string, MetricConfig>>
 >;
 
-export const gm: GmConfig = {};
+export const gm: GmConfig = {
+  sewer: {
+    average: {
+      isWeeklyData: true,
+    },
+  },
+};
