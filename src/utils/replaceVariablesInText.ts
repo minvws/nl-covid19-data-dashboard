@@ -1,3 +1,5 @@
+import { assert } from './assert';
+
 const curlyBracketRegex = /\{\{(.+?)\}\}/g;
 
 /**
@@ -17,10 +19,13 @@ const curlyBracketRegex = /\{\{(.+?)\}\}/g;
  */
 
 export function replaceVariablesInText(
-  translation?: string | undefined | null,
+  translation?: string,
   variables?: { [key: string]: string | number | undefined }
 ): string {
-  if (!translation) return '';
+  assert(
+    translation,
+    'translation placeholder text is not defined, perhaps a missing locale key?'
+  );
 
   return translation.replace(curlyBracketRegex, (_string, variableName) => {
     /**

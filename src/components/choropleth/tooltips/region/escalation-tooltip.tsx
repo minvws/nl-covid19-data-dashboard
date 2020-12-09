@@ -26,6 +26,13 @@ export const escalationTooltip = (selectHandler: RegionSelectionHandler) => {
       { titel: string; valid_from: string }
     >)[level];
 
+    const validFromText = replaceVariablesInText(
+      text.escalatie_niveau.valid_from,
+      {
+        validFrom: formatDateFromSeconds(context.valid_from_unix, 'short'),
+      }
+    );
+
     return (
       <TooltipContent title={context.vrname} onSelect={onSelect}>
         <div className={styles.escalationInfo}>
@@ -35,12 +42,7 @@ export const escalationTooltip = (selectHandler: RegionSelectionHandler) => {
           <div>
             <strong>{escalationText.titel}</strong>
             <br />
-            {replaceVariablesInText(escalationText.valid_from, {
-              validFrom: formatDateFromSeconds(
-                context.valid_from_unix,
-                'short'
-              ),
-            })}
+            {validFromText}
           </div>
         </div>
       </TooltipContent>
