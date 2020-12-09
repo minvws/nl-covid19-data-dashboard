@@ -1,5 +1,6 @@
 import { useCallback, useMemo } from 'react';
 import { useTooltip } from '@visx/tooltip';
+import { UseTooltipParams } from '@visx/tooltip/lib/hooks/useTooltip';
 import { extent } from 'd3-array';
 
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
@@ -52,7 +53,7 @@ function CustomLineChart({
     tooltipTop = 0,
     showTooltip,
     hideTooltip,
-  } = useTooltip();
+  }: UseTooltipParams<TooltipData> = useTooltip();
 
   const benchmark = useMemo(() => {
     return signaalwaarde
