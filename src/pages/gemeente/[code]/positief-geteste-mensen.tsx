@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import Getest from '~/assets/test.svg';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { ContentHeader } from '~/components-styled/content-header';
@@ -8,6 +9,7 @@ import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
+import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
 import { FCWithLayout } from '~/components/layout';
 import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
@@ -25,6 +27,8 @@ const text = siteText.gemeente_positief_geteste_personen;
 const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
   const { data, municipalityName } = props;
   const lastValue = data.positive_tested_people.last_value;
+
+  const router = useRouter();
 
   return (
     <>
@@ -121,7 +125,10 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
           selected={data.code}
           metricName="positive_tested_people"
           metricProperty="positive_tested_people"
-          tooltipContent={createPositiveTestedPeopleMunicipalTooltip()}
+          tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
+            createSelectMunicipalHandler(router)
+          )}
+          onSelect={createSelectMunicipalHandler(router)}
         />
       </ChoroplethTile>
     </>

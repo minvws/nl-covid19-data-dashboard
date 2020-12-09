@@ -1,14 +1,9 @@
 import { RegionalContext } from 'cypress/integration/types';
-import { beforeRegionTests } from 'cypress/support/beforeRegionTests';
-import { checkKpiValues } from 'cypress/support/checkKpiValues';
-import { swallowResizeObserverError } from 'cypress/support/swallowResizeObserverError';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 
 context('Regionaal - Gehandicaptenzorg', () => {
-  swallowResizeObserverError();
-
   before(() => {
-    beforeRegionTests('gehandicaptenzorg');
+    cy.beforeRegionTests('gehandicaptenzorg');
   });
 
   it('Should show the correct KPI values', function (this: RegionalContext) {
@@ -26,6 +21,6 @@ context('Regionaal - Gehandicaptenzorg', () => {
       deceased_daily: formatNumber(lastValue.deceased_daily),
     };
 
-    checkKpiValues(kpiTestInfo);
+    cy.checkKpiValues(kpiTestInfo);
   });
 });

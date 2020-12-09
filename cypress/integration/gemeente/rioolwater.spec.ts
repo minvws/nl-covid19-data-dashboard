@@ -1,14 +1,9 @@
 import { MunicipalContext } from 'cypress/integration/types';
-import { beforeMunicipalTests } from 'cypress/support/beforeMunicipalTests';
-import { checkKpiValues } from 'cypress/support/checkKpiValues';
-import { swallowResizeObserverError } from 'cypress/support/swallowResizeObserverError';
 import { formatNumber } from '~/utils/formatNumber';
 
 context('Gemeente - Rioolwater', () => {
-  swallowResizeObserverError();
-
   before(() => {
-    beforeMunicipalTests('rioolwater');
+    cy.beforeMunicipalTests('rioolwater');
   });
 
   it('Should show the correct KPI values', function (this: MunicipalContext) {
@@ -21,6 +16,6 @@ context('Gemeente - Rioolwater', () => {
       ),
     };
 
-    checkKpiValues(kpiTestInfo);
+    cy.checkKpiValues(kpiTestInfo);
   });
 });
