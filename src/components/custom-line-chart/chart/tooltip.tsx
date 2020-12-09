@@ -8,8 +8,8 @@ export type Props = {
   children: any;
   x: number;
   y: number;
-  primaryColor: string;
-  borderColor: string;
+  primaryColor?: string;
+  borderColor?: string;
   bounds: any;
 };
 

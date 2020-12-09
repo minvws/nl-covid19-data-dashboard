@@ -30,6 +30,11 @@ export type ThresholdProps = {
   valueAnnotation?: string;
 };
 
+type TooltipData = {
+  date: Date;
+  value: number;
+};
+
 function CustomLineChart({
   values,
   width,
@@ -43,8 +48,8 @@ function CustomLineChart({
 }: ThresholdProps) {
   const {
     tooltipData,
-    tooltipLeft,
-    tooltipTop,
+    tooltipLeft = 0,
+    tooltipTop = 0,
     showTooltip,
     hideTooltip,
   } = useTooltip();
@@ -56,10 +61,10 @@ function CustomLineChart({
   }, [signaalwaarde]);
 
   const graphData = useMemo(() => {
-    const filteredData = getFilteredValues<T>(
+    const filteredData = getFilteredValues(
       values,
       timeframe,
-      (value: T) => value.date * 1000
+      (value) => value.date * 1000
     );
     return filteredData.map((point) => ({
       ...point,
