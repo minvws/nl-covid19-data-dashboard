@@ -129,7 +129,6 @@ type SpanProps = SpaceProps & ColorProps & TypographyProps;
 
 const Span = styled.span<SpanProps>(compose(color, space, typography));
 const IconContainer = styled(Span)(
-  compose(color, space, typography),
   css({
     svg: {
       mr: 1,
