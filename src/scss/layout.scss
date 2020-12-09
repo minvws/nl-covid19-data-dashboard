@@ -1,5 +1,12 @@
 @import './variables.scss';
 
+main {
+  /**
+   * IE11 does not support the main tag, the following line makes it styleable
+   */
+  display: block;
+}
+
 .container {
   display: flex;
   flex-direction: column-reverse;

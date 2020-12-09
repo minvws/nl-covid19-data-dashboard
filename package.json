@@ -4,7 +4,9 @@
   "private": true,
   "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
   "resolutions": {
-    "@types/lodash": "4.14.159"
+    "@types/lodash": "4.14.159",
+    "//": "d3-scale v3 is not compatible with IE11",
+    "d3-scale": "2.2.2"
   },
   "dependencies": {
     "@formatjs/intl-datetimeformat": "^2.6.7",
