@@ -277,7 +277,7 @@
     "geen_signaalwaarde_beschikbaar_lees_waarom": "Lees hier waarom",
     "toelichting_pagina": "Als iemand het coronavirus oploopt, dan is deze persoon een tijd lang besmettelijk voor anderen. Hoe lang dit duurt verschilt van persoon tot persoon. Het aantal besmettelijke mensen is een schatting op basis van een aantal gegevensbronnen. Het exacte aantal is onbekend, maar we kunnen wel aangeven of het gaat om tientallen, honderden, duizenden of meer.",
     "barscale_titel": "Gemiddeld aantal besmettelijke mensen per 100.000 inwoners ",
-    "barscale_screenreader_text": "{{value}} besmettelijke mensen ",
+    "barscale_screenreader_text": "{{value}} besmettelijke mensen",
     "cijfer_titel": "Geschat aantal besmettelijke mensen in Nederland:",
     "cijfer_toelichting": "Een schatting van hoeveel mensen met COVID-19 besmettelijk zijn voor anderen. Dit getal wordt door het RIVM berekend.",
     "linechart_titel": "Verloop over tijd",
@@ -668,7 +668,7 @@
         "verantwoording": "Dit dashboard is in korte tijd tot stand gekomen. Het is daarom nog niet gelukt om de code voor het inlezen van de data en het construeren van de JSON- bestanden open source beschikbaar te stellen. Dit zal binnen afzienbare tijd beschikbaar worden gesteld. De code van de webapplicatie is op 5 juni 2020 gepubliceerd op [GitHub](https://github.com/minvws/nl-covid19-data-dashboard). De [databerekeningen](https://github.com/minvws/nl-covid19-data-backend-processing) zijn ook beschikbaar via Github."
       },
       {
-        "cijfer": "",
+        "cijfer": "Gedrag",
         "verantwoording": ""
       },
       {
@@ -1775,7 +1775,7 @@
       "description": "Personen van 70 jaar ens ouder zijn extra kwetsbaar bij een besmetting met het coronavirus. Door zicht te houden op het aantal besmettingen onder deze groep kunnen de juiste maatregelen genomen worden om het virus in te dammen.Het gaat hierbij om zelfstandig wonenden. Personen van 70+ die zijn opgenomen in een verpleeghuis of instelling voor gehandicaptenzorg worden op dit dashboard in die groepen meegeteld. Lees meer in de cijferverantwoording.   ",
       "reference": {
         "href": "/verantwoording#thuiswonende-70-plussers",
-        "text": "Lees meer in de [cijferverantwoording](https://coronadashboard.rijksoverheid.nl/verantwoording)."
+        "text": "Lees meer in de cijferverantwoording."
       },
       "bronnen": {
         "rivm": {
@@ -1799,7 +1799,7 @@
       "description": "Aantal thuiswonende personen van 70 jaar of ouder waarvan gisteren is gemeld dat ze zijn overleden aan COVID-19. Lees meer in de cijferverantwoording.",
       "reference": {
         "href": "/verantwoording#thuiswonende-70-plussers",
-        "text": "Lees meer in de [cijferverantwoording](https://coronadashboard.rijksoverheid.nl/verantwoording)."
+        "text": "Lees meer in de cijferverantwoording."
       },
       "bronnen": {
         "rivm": {

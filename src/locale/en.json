@@ -668,7 +668,7 @@
         "verantwoording": "This dashboard was developed in a short amount of time. So far, we have therefore not been able to publish the code for inputting the data and constructing the .JSON files. However, this will be done soon. The web application code was published on [Github](https://github.com/minvws/nl-covid19-data-dashboard) on 5 June 2020. The [data calculations](https://github.com/minvws/nl-covid19-data-backend-processing) are available via Github as well."
       },
       {
-        "cijfer": "",
+        "cijfer": "Behaviour",
         "verantwoording": ""
       },
       {
@@ -1561,10 +1561,10 @@
     }
   },
   "aria_labels": {
-    "pagina_keuze": "",
-    "footer_keuze": "",
-    "metriek_navigatie": "",
-    "skip_links": ""
+    "pagina_keuze": "National, regional or municipality menu",
+    "footer_keuze": "Page menu",
+    "metriek_navigatie": "Metrics per category menu",
+    "skip_links": "Quick links"
   },
   "infected_age_groups": {
     "title": "Distribution by age",
@@ -1765,7 +1765,7 @@
   },
   "thuiswonende_ouderen": {
     "titel_sidebar": "People over 70 living at home",
-    "titel_kpi": "",
+    "titel_kpi": "Confirmed cases",
     "metadata": {
       "title": "",
       "description": ""
@@ -1774,8 +1774,8 @@
       "title": "People over 70 living at home",
       "description": "People aged over 70 are extra vulnerable to coronavirus infection. Keeping track of the number of infections among over-70s who are still living independently in their own homes makes targeted measures possible. Over-70s living in residential settings – nursing homes or disability care homes – are counted under those groups on this dashboard. Read more in the explanation of the presented data.",
       "reference": {
-        "href": "",
-        "text": "See the [explanation of the data presented](https://coronadashboard.government.nl/verantwoording)"
+        "href": "/verantwoording#thuiswonende-70-plussers",
+        "text": "See the explanation of the data presented."
       },
       "bronnen": {
         "rivm": {
@@ -1798,8 +1798,8 @@
       "title": "Over-70s living at home - COVID-19 mortality",
       "description": "The number of people over 70 living at home who were reported as deceased due to COVID-19 yesterday. Read more in the explanation of the presented data.",
       "reference": {
-        "href": "",
-        "text": "See the [explanation on the data presented](https://coronadashboard.government.nl/verantwoording)"
+        "href": "/verantwoording#thuiswonende-70-plussers",
+        "text": "See the explanation on the data presented."
       },
       "bronnen": {
         "rivm": {
@@ -1811,9 +1811,9 @@
       "kpi_daily_title": "Number of over-70s living at home that died because of COVID-19, daily",
       "kpi_daily_description": "The number of people over 70 living at home who were reported as deceased due to COVID-19 yesterday.",
       "line_chart_daily_title": "Number of COVID-19 deaths among over-70s living at home: progression over time",
-      "datums": "Last update  {{dateOfInsertion}}. Updated daily."
+      "datums": "Last update {{dateOfInsertion}}. Updated daily."
     },
-    "kpi_titel": ""
+    "kpi_titel": "Confirmed cases"
   },
   "veiligheidsregio_thuiswonende_ouderen": {
     "titel_sidebar": "People over 70 living at home",
@@ -1826,7 +1826,7 @@
       "title": "Over-70s in {{safetyRegion}} living at home - newly confirmed cases",
       "description": "People aged over 70 are extra vulnerable to coronavirus infection. Keeping track of the number of infections among over-70s who are still living independently in their own homes makes targeted measures possible. Over-70s living in residential settings – nursing homes or disability care homes – are counted on this dashboard under those groups. Read more in the explanation of the [presented data](https://coronadashboard.government.nl/verantwoording).",
       "reference": {
-        "href": "",
+        "href": "/verantwoording#thuiswonende-70-plussers",
         "text": ""
       },
       "bronnen": {
@@ -1847,7 +1847,7 @@
       "title": "People over 70 in {{safetyRegion}} living at home – deaths",
       "description": "People aged over 70 are extra vulnerable to coronavirus infection. Keeping track of the number of infections among over-70s who are still living independently in their own homes makes targeted measures possible. Over-70s living in residential settings – nursing homes or disability care homes – are counted on this dashboard under those groups. Read more in the explanation of the presented data.",
       "reference": {
-        "href": "",
+        "href": "/verantwoording#thuiswonende-70-plussers",
         "text": ""
       },
       "bronnen": {
