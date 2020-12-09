@@ -74,11 +74,11 @@ export function SidebarMetric<T extends { difference: unknown }>({
    * Because the locale files are not consistent in using kpi_titel and titel_kpi
    * we support both but kpi_titel has precedence.
    */
-  const titel =
+  const title =
     get(siteText, [localeTextKey, 'kpi_titel']) ||
     get(siteText, [localeTextKey, 'titel_kpi']);
 
-  assert(titel, `Missing title at ${localeTextKey}.kpi_titel`);
+  assert(title, `Missing title at ${localeTextKey}.kpi_titel`);
 
   const description = config.isWeeklyData
     ? replaceVariablesInText(commonText.dateRangeOfReport, {
