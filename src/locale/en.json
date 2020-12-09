@@ -1054,6 +1054,7 @@
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "screen_reader_graph_content": "{{value}} virus particles per 100.000 inhabitants",
     "barscale_titel": "Average number of virus particles per 100,000 inhabitants",
+    "kpi_titel": "Average number of virus particles per 100,000 inhabitants",
     "extra_uitleg": "The weekly average for the municipality is calculated by adding up all the values measured in one week and dividing this by the number of measurements taken.",
     "barscale_screenreader_text": "{{value}} virus particles per 100.000 inhabitants",
     "linechart_titel": "Average number of virus particles per 100.000 inhabitants over time",

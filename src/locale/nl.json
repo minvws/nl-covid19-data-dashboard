@@ -1054,6 +1054,7 @@
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "screen_reader_graph_content": "{{value}} virusdeeltjes per 100.000 inwoners",
     "barscale_titel": "Gemiddelde aantal virusdeeltjes per 100.000 inwoners",
+    "kpi_titel": "Gemiddelde aantal virusdeeltjes per 100.000 inwoners",
     "extra_uitleg": "Alle rioolmeetwaarden van één week worden bij elkaar opgeteld en gedeeld door het aantal metingen, om tot dit wekelijkse gemiddelde te komen voor deze gemeente.",
     "barscale_screenreader_text": "{{value}} virusdeeltjes per 100.000 inwoners",
     "linechart_titel": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners over tijd",
