@@ -75,6 +75,7 @@ const NursingHomeCare: FCWithLayout<ISafetyRegionData> = (props) => {
           <KpiValue
             data-cy="newly_infected_people"
             absolute={nursinghomeLastValue.newly_infected_people}
+            difference={data.difference.nursing_home__newly_infected_people}
           />
         </KpiTile>
       </TwoKpiSection>
@@ -117,6 +118,7 @@ const NursingHomeCare: FCWithLayout<ISafetyRegionData> = (props) => {
             data-cy="infected_locations_total"
             absolute={nursinghomeLastValue.infected_locations_total}
             percentage={nursinghomeLastValue.infected_locations_percentage}
+            difference={data.difference.nursing_home__infected_locations_total}
           />
           <Text>{locationsText.kpi_toelichting}</Text>
         </KpiTile>
@@ -177,6 +179,7 @@ const NursingHomeCare: FCWithLayout<ISafetyRegionData> = (props) => {
           <KpiValue
             data-cy="deceased_daily"
             absolute={nursinghomeLastValue.deceased_daily}
+            difference={data.difference.nursing_home__deceased_daily}
           />
         </KpiTile>
       </TwoKpiSection>

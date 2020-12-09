@@ -17,11 +17,11 @@ interface SidebarMetricProps<T extends { difference: unknown }> {
   data: T;
   metricName: ValueOf<MetricKeys<T>>;
   metricProperty: string;
+
   localeTextKey: keyof TALLLanguages;
   // differenceKey?: ValueOf<DifferenceKeys<T>>;
   differenceKey?: string;
   showBarScale?: boolean;
-  isWeeklyData?: boolean;
   annotationKey?: string;
 
   /**
@@ -128,6 +128,7 @@ export function SidebarMetric<T extends { difference: unknown }>({
         isPercentage={config.isPercentage}
         description={description}
         difference={differenceValue}
+        valueAnnotation={valueAnnotation}
       />
       {showBarScale && (
         <SidebarBarScale

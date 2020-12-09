@@ -103,6 +103,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
               data-cy="riool_normalized"
               absolute={barScaleData.value}
               valueAnnotation={siteText.waarde_annotaties.riool_normalized}
+              difference={data.difference.sewer__average}
             />
           </KpiTile>
           <KpiTile
