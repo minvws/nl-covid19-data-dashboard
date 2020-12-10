@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Box } from '~/components-styled/base';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { Select } from '~/components-styled/select';
-import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/use-safety-region-legenda-data';
+import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { SafetyRegionProperties } from '~/components/choropleth/shared';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
@@ -18,19 +18,21 @@ import { BehaviorTypeControl } from './components/behavior-type-control';
 
 const text = siteText.nl_gedrag;
 
+const unusedRules = [
+  'symptoms_stay_home',
+  'symptoms_get_tested',
+  'wear_mask_public_transport',
+];
+
 export function BehaviorChoroplethTile() {
   const [type, setType] = useState<BehaviorType>('compliance');
   const [currentId, setCurrentId] = useState<BehaviorIdentifier>('wash_hands');
-  const legendItems = useSafetyRegionLegendaData('behavior');
   const router = useRouter();
 
   const metricValueName = `${currentId}_${type}` as keyof RegionsBehavior;
 
   function goToRegion(vrcode: string) {
-    router.push(
-      '/veiligheidsregio/[code]/gedrag',
-      `/veiligheidsregio/${vrcode}/gedrag`
-    );
+    router.push(`/veiligheidsregio/${vrcode}/gedrag`);
   }
 
   return (
@@ -45,23 +47,23 @@ export function BehaviorChoroplethTile() {
           <Select
             value={currentId}
             onChange={setCurrentId}
-            options={behaviorIdentifiers.map((id) => ({
-              value: id,
-              label: siteText.gedrag_onderwerpen[id],
-            }))}
+            options={behaviorIdentifiers
+              .filter((identifier) => unusedRules.indexOf(identifier) < 0)
+              .map((id) => ({
+                value: id,
+                label: siteText.gedrag_onderwerpen[id],
+              }))}
           />
         </>
       }
-      legend={
-        legendItems && {
-          items: legendItems,
-          title: text.verdeling_in_nederland.legenda_titel,
-        }
-      }
+      legend={{
+        thresholds: regionThresholds.behavior,
+        title: text.verdeling_in_nederland.legenda_titel,
+      }}
     >
       <SafetyRegionChoropleth
         metricName="behavior"
-        metricValueName={metricValueName}
+        metricProperty={metricValueName}
         tooltipContent={(context: RegionsBehavior & SafetyRegionProperties) => {
           const onSelect = (event: React.MouseEvent) => {
             event.stopPropagation();

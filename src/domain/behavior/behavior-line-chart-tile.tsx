@@ -5,8 +5,9 @@ import { isDefined } from 'ts-is-present';
 import { Box, Spacer } from '~/components-styled/base';
 import { Tile } from '~/components-styled/layout';
 import { Select } from '~/components-styled/select';
+import { Heading } from '~/components-styled/typography';
 import siteText from '~/locale/index';
-import { NationalBehaviorValue } from '~/types/data';
+import { NationalBehaviorValue, RegionalBehaviorValue } from '~/types/data';
 import {
   BehaviorIdentifier,
   behaviorIdentifiers,
@@ -16,7 +17,7 @@ import { BehaviorLineChart, Value } from './components/behavior-line-chart';
 import { BehaviorTypeControl } from './components/behavior-type-control';
 
 interface BehaviorLineChartTileProps {
-  values: NationalBehaviorValue[];
+  values: NationalBehaviorValue[] | RegionalBehaviorValue[];
   title: string;
   introduction: Record<BehaviorType, string>;
 }
@@ -39,7 +40,9 @@ export function BehaviorLineChartTile({
        * result in a "line" in our line-chart.
        */
       const hasEnoughData =
-        values.flatMap((x) => x[valueKey]).filter(Boolean).length > 1;
+        (values as NationalBehaviorValue[])
+          .map((x) => x[valueKey])
+          .filter(isDefined).length > 1;
 
       return hasEnoughData
         ? {
@@ -72,7 +75,7 @@ export function BehaviorLineChartTile({
     >
       <Header>
         <Box mr={{ lg: '1em' }} mb={{ lg: '1em' }}>
-          <h3>{title}</h3>
+          <Heading level={3}>{title}</Heading>
         </Box>
       </Header>
 
@@ -81,14 +84,14 @@ export function BehaviorLineChartTile({
       </Box>
 
       <Box
-        display="flex"
+        display={{ lg: 'flex' }}
         alignItems="baseline"
-        flexDirection={{ _: 'column', lg: 'row' }}
+        flexDirection={{ lg: 'row' }}
       >
         <Box flex="1" mr={{ lg: 2 }}>
           <p>{introduction[type]}</p>
         </Box>
-        <Box flex="1" ml={{ lg: 2 }}>
+        <Box flex="1" display="flex" justifyContent="flex-end" ml={{ lg: 2 }}>
           <Select
             value={currentId}
             onChange={setCurrentId}
@@ -104,7 +107,7 @@ export function BehaviorLineChartTile({
 
       <BehaviorLineChart
         values={behaviorIdentifierWithData.map(({ valueKey, label }) =>
-          values
+          (values as NationalBehaviorValue[])
             .map((value) =>
               valueKey in value
                 ? ({

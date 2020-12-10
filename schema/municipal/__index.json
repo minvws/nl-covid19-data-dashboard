@@ -8,8 +8,8 @@
     "proto_name",
     "name",
     "code",
-    "hospital_admissions",
-    "positive_tested_people"
+    "positive_tested_people",
+    "difference"
   ],
   "properties": {
     "last_generated": {
@@ -26,6 +26,9 @@
     "code": {
       "type": "string",
       "const": { "$data": "1/proto_name" }
+    },
+    "difference": {
+      "$ref": "__difference.json"
     },
     "hospital_admissions": {
       "$ref": "hospital_admissions.json"

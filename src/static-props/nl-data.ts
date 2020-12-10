@@ -1,17 +1,12 @@
-import fs from 'fs';
 import path from 'path';
-import { TALLLanguages } from '~/locale';
 import { National } from '~/types/data.d';
 import { sortNationalTimeSeriesInDataInPlace } from './data-sorting';
+import { loadJsonFromFile } from './utils/load-json-from-file';
 
-export interface INationalData {
+export interface NationalPageProps {
   data: National;
   lastGenerated: string;
-  text?: TALLLanguages;
-}
-
-interface IProps {
-  props: INationalData;
+  text?: Record<string, unknown>;
 }
 
 /*
@@ -20,9 +15,9 @@ interface IProps {
  *
  * Example:
  * ```ts
- * PositivelyTestedPeople.getLayout = getNationalLayout();
+ * PositivelyTestedPeople.getLayout = getNationalLayout;
  *
- * export const getStaticProps = getNlData();
+ * export const getStaticProps = getNlData
  *
  * export default PositivelyTestedPeople;
  * ```
@@ -36,21 +31,20 @@ interface IProps {
  * }
  * ```
  */
-export default function getNlData(): () => IProps {
-  return function () {
-    const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
-    const fileContents = fs.readFileSync(filePath, 'utf8');
-    const data = JSON.parse(fileContents) as National;
 
-    const lastGenerated = data.last_generated;
+export function getNationalStaticProps() {
+  const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
 
-    sortNationalTimeSeriesInDataInPlace(data);
+  const data = loadJsonFromFile<National>(filePath);
 
-    return {
-      props: {
-        data,
-        lastGenerated,
-      },
-    };
+  const lastGenerated = data.last_generated;
+
+  sortNationalTimeSeriesInDataInPlace(data);
+
+  return {
+    props: {
+      data,
+      lastGenerated,
+    },
   };
 }

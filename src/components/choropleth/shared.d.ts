@@ -1,5 +1,14 @@
 import { FeatureCollection, MultiPolygon } from 'geojson';
-import { Municipalities, Regions, RegionsNursingHome } from '~/types/data';
+import { Municipalities, Regions } from '~/types/data';
+
+export type MetricKeys<T> = keyof Omit<
+  T,
+  'last_generated' | 'proto_name' | 'name' | 'code'
+>;
+
+export type DifferenceKeys<
+  T extends { difference: unknown }
+> = keyof T['difference'];
 
 type TMetricHolder<T> = keyof Omit<
   T,
@@ -7,7 +16,7 @@ type TMetricHolder<T> = keyof Omit<
 >;
 
 export type TMunicipalityMetricName = TMetricHolder<
-  Omit<Municipalities, 'deceased'>
+  Omit<Municipalities, 'deceased' | 'hospital_admissions'>
 >;
 
 export type TMunicipalityMetricType = ValueOf<
@@ -15,17 +24,14 @@ export type TMunicipalityMetricType = ValueOf<
 >[number] &
   Partial<MunicipalityProperties>;
 
-export type TRegionMetricName = TMetricHolder<Omit<Regions, 'deceased'>>;
+export type TRegionMetricName = TMetricHolder<
+  Omit<Regions, 'deceased' | 'hospital_admissions'>
+>;
 
 export type TRegionMetricType = ValueOf<
   Pick<Regions, TRegionMetricName>
 >[number] &
   Partial<SafetyRegionProperties>;
-
-export type TRegionsNursingHomeMetricName = keyof Omit<
-  RegionsNursingHome,
-  'date_of_report_unix' | 'date_of_insertion_unix' | 'vrcode'
->;
 
 export interface SafetyRegionProperties {
   vrcode: string;
@@ -34,6 +40,7 @@ export interface SafetyRegionProperties {
 export interface MunicipalityProperties {
   gemnaam: string;
   gemcode: string;
+  gmcode: string;
 }
 
 export type MunicipalGeoJSON = FeatureCollection<
@@ -46,11 +53,9 @@ export type RegionGeoJSON = FeatureCollection<
   SafetyRegionProperties
 >;
 
-export type ChoroplethThresholds = {
-  thresholds: ChoroplethThresholdsValue[];
+export type ChoroplethThresholdsValue<T extends number = number> = {
+  color: string;
+  threshold: T;
 };
 
-export type ChoroplethThresholdsValue = {
-  color: string;
-  threshold: number;
-};
+export type Dictionary<T> = Partial<Record<string, T>>;

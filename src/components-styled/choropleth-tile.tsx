@@ -1,7 +1,5 @@
-import {
-  ChoroplethLegenda,
-  LegendaItem,
-} from '~/components-styled/choropleth-legenda';
+import { ChoroplethLegenda } from '~/components-styled/choropleth-legenda';
+import { ChoroplethThresholdsValue } from '~/components/choropleth/shared';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { Box } from './base';
 import {
@@ -29,7 +27,7 @@ interface ChoroplethTileProps extends DataProps {
   children: React.ReactNode;
   legend?: {
     title: string;
-    items: LegendaItem[];
+    thresholds: ChoroplethThresholdsValue[];
   };
   metadata?: MetadataProps;
   showDataWarning?: boolean;
@@ -46,13 +44,18 @@ export function ChoroplethTile<T>({
 }: ChoroplethTileProps) {
   const breakpoints = useBreakpoints();
   const legendaComponent = legend && (
-    <ChoroplethLegenda items={legend.items} title={legend.title} />
+    <ChoroplethLegenda thresholds={legend.thresholds} title={legend.title} />
   );
 
   return (
     <ChartTileContainer metadata={metadata} showDataWarning={showDataWarning}>
-      <Box display="flex" flexDirection={{ _: 'column', lg: 'row' }}>
-        <Box mb={3} flex={{ lg: 1 }}>
+      <Box
+        display="flex"
+        flexDirection={{ _: 'column', lg: 'row' }}
+        m={0}
+        as="figure"
+      >
+        <Box mb={3} flex={{ lg: 1 }} as="figcaption">
           <Box mb={[0, 2]}>
             <Heading level={3}>{title}</Heading>
             {typeof description === 'string' ? (

@@ -1,18 +1,19 @@
 import Gedrag from '~/assets/gedrag.svg';
+import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { Tile } from '~/components-styled/layout';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
-import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRangeHack';
 import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { SEOHead } from '~/components/seoHead';
 import { BehaviorLineChartTile } from '~/domain/behavior/behavior-line-chart-tile';
 import { BehaviorTableTile } from '~/domain/behavior/behavior-table-tile';
+import { MoreInformation } from '~/domain/behavior/components/more-information';
 import siteText from '~/locale/index';
 import {
-  getSafetyRegionData,
+  getSafetyRegionStaticProps,
   getSafetyRegionPaths,
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
@@ -28,18 +29,21 @@ const BehaviorPage: FCWithLayout<ISafetyRegionData> = (props) => {
         title={text.metadata.title}
         description={text.metadata.description}
       />
-      <ContentHeader_weekRangeHack
+      <ContentHeader
         category={siteText.nationaal_layout.headings.gedrag}
         title={text.pagina.titel}
-        Icon={Gedrag}
+        icon={<Gedrag />}
         subtitle={text.pagina.toelichting}
         metadata={{
           datumsText: text.datums,
-          weekStartUnix: behaviorData.last_value.week_start_unix,
-          weekEndUnix: behaviorData.last_value.week_end_unix,
+          dateInfo: {
+            weekStartUnix: behaviorData.last_value.week_start_unix,
+            weekEndUnix: behaviorData.last_value.week_end_unix,
+          },
           dateOfInsertionUnix: behaviorData.last_value.date_of_insertion_unix,
-          dataSource: text.bron,
+          dataSources: [text.bronnen.rivm],
         }}
+        reference={text.reference}
       />
 
       <TwoKpiSection>
@@ -68,6 +72,7 @@ const BehaviorPage: FCWithLayout<ISafetyRegionData> = (props) => {
         title={text.basisregels.title}
         introduction={text.basisregels.intro}
         footer={text.basisregels.voetnoot}
+        footerAsterisk={text.basisregels.voetnoot_asterisk}
       />
 
       <BehaviorLineChartTile
@@ -75,13 +80,15 @@ const BehaviorPage: FCWithLayout<ISafetyRegionData> = (props) => {
         introduction={text.basisregels_over_tijd.intro}
         values={behaviorData.values}
       />
+
+      <MoreInformation />
     </>
   );
 };
 
 BehaviorPage.getLayout = getSafetyRegionLayout();
 
-export const getStaticProps = getSafetyRegionData();
+export const getStaticProps = getSafetyRegionStaticProps;
 export const getStaticPaths = getSafetyRegionPaths();
 
 export default BehaviorPage;

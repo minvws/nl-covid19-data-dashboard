@@ -1,20 +1,23 @@
 import Repro from '~/assets/reproductiegetal.svg';
+import { ContentHeader } from '~/components-styled/content-header';
 import { KpiWithIllustrationTile } from '~/components-styled/kpi-with-illustration-tile';
+import { Legenda } from '~/components-styled/legenda';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { PageBarScale } from '~/components-styled/page-barscale';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
-import { ContentHeader } from '~/components/contentHeader';
-import { ReproductionIndexBarScale } from '~/components/landelijk/reproduction-index-barscale';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
-import { Legenda } from '~/components/legenda';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
-import getNlData, { INationalData } from '~/static-props/nl-data';
+import {
+  getNationalStaticProps,
+  NationalPageProps,
+} from '~/static-props/nl-data';
 
 const text = siteText.reproductiegetal;
 
-const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
+const ReproductionIndex: FCWithLayout<NationalPageProps> = (props) => {
   const { data } = props;
 
   const lastKnownValidData = data.reproduction_index_last_known_average;
@@ -27,16 +30,18 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
       />
       <ContentHeader
         category={siteText.nationaal_layout.headings.besmettingen}
+        screenReaderCategory={siteText.reproductiegetal.titel_sidebar}
         title={text.titel}
-        Icon={Repro}
+        icon={<Repro />}
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: lastKnownValidData.last_value.date_of_report_unix,
-          dateInsertedUnix:
+          dateInfo: lastKnownValidData.last_value.date_of_report_unix,
+          dateOfInsertionUnix:
             lastKnownValidData.last_value.date_of_insertion_unix,
-          dataSource: text.bron,
+          dataSources: [text.bronnen.rivm],
         }}
+        reference={text.reference}
       />
 
       <TwoKpiSection>
@@ -44,7 +49,7 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
           title={text.barscale_titel}
           metadata={{
             date: lastKnownValidData.last_value.date_of_report_unix,
-            source: text.bron,
+            source: text.bronnen.rivm,
           }}
           illustration={{
             image: '/images/reproductie-explainer.svg',
@@ -52,9 +57,12 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
             description: text.extra_uitleg,
           }}
         >
-          <ReproductionIndexBarScale
-            data={lastKnownValidData}
-            showAxis={true}
+          <PageBarScale
+            data={data}
+            scope="nl"
+            metricName="reproduction_index_last_known_average"
+            metricProperty="reproduction_index_avg"
+            localeTextKey="reproductiegetal"
           />
           <Text>{text.barscale_toelichting}</Text>
         </KpiWithIllustrationTile>
@@ -62,7 +70,7 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
 
       {data.reproduction_index.values && (
         <LineChartTile
-          metadata={{ source: text.bron }}
+          metadata={{ source: text.bronnen.rivm }}
           title={text.linechart_titel}
           values={data.reproduction_index.values.map((value) => ({
             value: value.reproduction_index_avg,
@@ -72,9 +80,15 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
           timeframeOptions={['all', '5weeks']}
           showFill={false}
           footer={
-            <Legenda>
-              <li className="blue">{text.legenda_r}</li>
-            </Legenda>
+            <Legenda
+              items={[
+                {
+                  label: text.legenda_r,
+                  color: 'data.primary',
+                  shape: 'line',
+                },
+              ]}
+            />
           }
         />
       )}
@@ -82,8 +96,8 @@ const ReproductionIndex: FCWithLayout<INationalData> = (props) => {
   );
 };
 
-ReproductionIndex.getLayout = getNationalLayout();
+ReproductionIndex.getLayout = getNationalLayout;
 
-export const getStaticProps = getNlData();
+export const getStaticProps = getNationalStaticProps;
 
 export default ReproductionIndex;

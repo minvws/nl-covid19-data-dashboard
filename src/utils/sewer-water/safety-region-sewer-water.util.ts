@@ -1,5 +1,5 @@
-import { XrangePointOptionsObject } from 'highcharts';
 import siteText from '~/locale/index';
+import { colors } from '~/style/theme';
 import { Regionaal, RegionalSewerPerInstallationValue } from '~/types/data.d';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
@@ -39,7 +39,7 @@ export interface SewerWaterLineChartData {
 
 export interface SewerWaterBarChartData {
   keys: string[];
-  data: XrangePointOptionsObject[];
+  data: Highcharts.XrangePointOptionsObject[];
 }
 
 export function getSewerWaterBarScaleData(
@@ -57,21 +57,26 @@ export function getSewerWaterBarScaleData(
 }
 
 export function getInstallationNames(data: Regionaal): string[] {
-  return (
-    data.sewer_per_installation?.values
-      .flatMap((value) => value.values)
-      .map((value) => value.rwzi_awzi_name)
-      .filter((value, index, arr) => arr.indexOf(value) === index)
-      .sort((a, b) => a.localeCompare(b)) ?? []
-  );
+  return data.sewer_per_installation.values
+    .flatMap((value) => value.values)
+    .map((value) => value.rwzi_awzi_name)
+    .filter((value, index, arr) => arr.indexOf(value) === index)
+    .sort((a, b) => a.localeCompare(b));
 }
 
 export function getSewerWaterScatterPlotData(
   data: Regionaal
 ): RegionalSewerPerInstallationValue[] | undefined {
-  return (
-    data.sewer_per_installation?.values.flatMap((value) => value.values) ?? []
+  const values = data.sewer_per_installation.values.flatMap(
+    (value) => value.values
   );
+  /**
+   * All individual `value.values`-arrays are already sorted correctly, but
+   * due to merging them into one array the sort might be off.
+   */
+  values.sort((a, b) => a.date_measurement_unix - b.date_measurement_unix);
+
+  return values;
 }
 
 export function getSewerWaterLineChartData(
@@ -97,10 +102,11 @@ export function getSewerWaterLineChartData(
 export function getSewerWaterBarChartData(
   data: Regionaal
 ): SewerWaterBarChartData | undefined {
-  const sortedInstallations =
-    data.sewer_per_installation?.values.sort((a, b) => {
+  const sortedInstallations = data.sewer_per_installation.values.sort(
+    (a, b) => {
       return b.last_value.rna_normalized - a.last_value.rna_normalized;
-    }) ?? [];
+    }
+  );
 
   // Concat keys and data to glue the "average" as first bar and then
   // the RWZI-locations from highest to lowest
@@ -112,14 +118,14 @@ export function getSewerWaterBarChartData(
     data: [
       {
         y: data.sewer.last_value.average,
-        color: '#3391CC',
+        color: colors.data.primary,
         label: data.sewer.last_value
           ? `${formatDateFromSeconds(
               data.sewer.last_value.week_unix,
               'short'
             )}: ${formatNumber(data.sewer.last_value.average)}`
           : false,
-      } as XrangePointOptionsObject,
+      } as Highcharts.XrangePointOptionsObject,
       ...sortedInstallations.map(
         (installation) =>
           ({
@@ -131,7 +137,7 @@ export function getSewerWaterBarChartData(
                   'short'
                 )}: ${formatNumber(installation.last_value.rna_normalized)}`
               : false,
-          } as XrangePointOptionsObject)
+          } as Highcharts.XrangePointOptionsObject)
       ),
     ],
   };

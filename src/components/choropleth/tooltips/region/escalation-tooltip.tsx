@@ -1,70 +1,51 @@
-import { NextRouter } from 'next/router';
 import { ReactNode } from 'react';
-import EscalationLevel1 from '~/assets/niveau-1.svg';
-import EscalationLevel2 from '~/assets/niveau-2.svg';
-import EscalationLevel3 from '~/assets/niveau-3.svg';
-import EscalationLevel4 from '~/assets/niveau-4.svg';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
+import {
+  EscalationLevel,
+  EscalationLevelIcon,
+} from '~/components-styled/escalation-level-icon';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
 import text from '~/locale/index';
+import { EscalationLevels } from '~/types/data';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { ChoroplethThresholds } from '../../shared';
+import { RegionSelectionHandler } from '../../select-handlers/create-select-region-handler';
+import { SafetyRegionProperties } from '../../shared';
 import styles from '../tooltip.module.scss';
 
-const escalationThresholds = (regionThresholds.escalation_levels as ChoroplethThresholds)
-  .thresholds;
-
-export const escalationTooltip = (router: NextRouter) => {
-  return (context: any): ReactNode => {
-    const type: number = context?.value;
-
-    const thresholdInfo = escalationThresholds.find(
-      (value) => value.threshold === type
-    );
+export const escalationTooltip = (selectHandler: RegionSelectionHandler) => {
+  return (context: SafetyRegionProperties & EscalationLevels): ReactNode => {
+    const level = context.escalation_level as EscalationLevel;
 
     const onSelect = (event: any) => {
       event.stopPropagation();
-      router.push(
-        '/veiligheidsregio/[code]/maatregelen',
-        `/veiligheidsregio/${context.vrcode}/maatregelen`
-      );
+      selectHandler(context);
     };
 
+    const escalationText = ((text.escalatie_niveau.types as unknown) as Record<
+      EscalationLevel,
+      { titel: string; valid_from: string }
+    >)[level];
+
+    const validFromText = replaceVariablesInText(
+      text.escalatie_niveau.valid_from,
+      {
+        validFrom: formatDateFromSeconds(context.valid_from_unix, 'short'),
+      }
+    );
+
     return (
-      type &&
-      thresholdInfo && (
-        <TooltipContent title={context.vrname} onSelect={onSelect}>
-          <div className={styles.escalationInfo}>
-            <div className={styles.bubble}>
-              {thresholdInfo.threshold === 1 && (
-                <EscalationLevel1 color={thresholdInfo.color} />
-              )}
-              {thresholdInfo.threshold === 2 && (
-                <EscalationLevel2 color={thresholdInfo.color} />
-              )}
-              {thresholdInfo.threshold === 3 && (
-                <EscalationLevel3 color={thresholdInfo.color} />
-              )}
-              {thresholdInfo.threshold === 4 && (
-                <EscalationLevel4 color={thresholdInfo.color} />
-              )}
-            </div>
-            <div>
-              <strong>
-                {(text.escalatie_niveau.types as any)[type].titel}
-              </strong>
-              <br />
-              {replaceVariablesInText(text.escalatie_niveau.valid_from, {
-                validFrom: formatDateFromSeconds(
-                  context.valid_from_unix,
-                  'short'
-                ),
-              })}
-            </div>
+      <TooltipContent title={context.vrname} onSelect={onSelect}>
+        <div className={styles.escalationInfo}>
+          <div className={styles.bubble}>
+            <EscalationLevelIcon level={level} />
           </div>
-        </TooltipContent>
-      )
+          <div>
+            <strong>{escalationText.titel}</strong>
+            <br />
+            {validFromText}
+          </div>
+        </div>
+      </TooltipContent>
     );
   };
 };

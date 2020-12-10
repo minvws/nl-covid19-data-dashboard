@@ -26,6 +26,10 @@ export const Text = styled.p<TextProps>(
   compose(margin, padding, typography, color)
 );
 
+export const InlineText = styled.span<TextProps>(
+  compose(margin, padding, typography, color)
+);
+
 /**
  * By setting defaultProps we can set themed defaults for the text component to
  * match what normally would be the default body text styling.

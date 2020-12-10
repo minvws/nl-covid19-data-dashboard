@@ -1,32 +1,27 @@
 import { useRouter } from 'next/router';
-import MaatregelenIcon from '~/assets/maatregelen.svg';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { KpiSection } from '~/components-styled/kpi-section';
 import { Heading } from '~/components-styled/typography';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
-import { GenericContentHeader } from '~/components/contentHeader';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { useRestrictionsTable } from '~/components/restrictions/hooks/useRestrictionsTable';
 import { RestrictionsTable } from '~/components/restrictions/restrictionsTable';
 import { SEOHead } from '~/components/seoHead';
+import text from '~/locale';
 import { EscalationMapLegenda } from '~/pages/veiligheidsregio';
-import { INationalData } from '~/static-props/nl-data';
+import { NationalPageProps } from '~/static-props/nl-data';
 import { useRestrictionLevel } from '~/utils/useRestrictionLevel';
 export { getStaticProps } from '~/pages';
 
-const NationalRestrictions: FCWithLayout<INationalData> = (props) => {
-  const { data, text } = props;
+const NationalRestrictions: FCWithLayout<NationalPageProps> = (props) => {
+  const { data } = props;
   const router = useRouter();
 
   const restrictionsTable = useRestrictionsTable(data.restrictions.values);
   const restrictionLevel = useRestrictionLevel(data.restrictions.values);
-
-  if (!text) {
-    return null;
-  }
 
   const escalationLevel = restrictionLevel > 4 ? 4 : restrictionLevel;
 
@@ -38,10 +33,6 @@ const NationalRestrictions: FCWithLayout<INationalData> = (props) => {
       <SEOHead
         title={text.nationaal_metadata.title}
         description={text.nationaal_metadata.description}
-      />
-      <GenericContentHeader
-        title={text.nationaal_maatregelen.titel}
-        Icon={MaatregelenIcon}
       />
 
       <ChoroplethTile
@@ -59,9 +50,9 @@ const NationalRestrictions: FCWithLayout<INationalData> = (props) => {
       >
         <SafetyRegionChoropleth
           metricName="escalation_levels"
-          metricValueName="escalation_level"
+          metricProperty="escalation_level"
           onSelect={createSelectRegionHandler(router, 'maatregelen')}
-          tooltipContent={escalationTooltip(router)}
+          tooltipContent={escalationTooltip(createSelectRegionHandler(router))}
         />
       </ChoroplethTile>
 
@@ -76,6 +67,6 @@ const NationalRestrictions: FCWithLayout<INationalData> = (props) => {
   );
 };
 
-NationalRestrictions.getLayout = getNationalLayout();
+NationalRestrictions.getLayout = getNationalLayout;
 
 export default NationalRestrictions;

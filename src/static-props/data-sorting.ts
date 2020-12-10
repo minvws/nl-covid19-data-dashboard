@@ -6,6 +6,10 @@ export function sortNationalTimeSeriesInDataInPlace(data: National) {
   );
 
   for (const propertyName of timeSeriesPropertyNames) {
+    if (isWhitelistedProperty(propertyName)) {
+      continue;
+    }
+
     const timeSeries = data[propertyName] as TimeSeriesData<Timestamped>;
     timeSeries.values = sortTimeSeriesValues(timeSeries.values);
   }
@@ -17,6 +21,9 @@ export function sortRegionalTimeSeriesInDataInPlace(data: Regionaal) {
   );
 
   for (const propertyName of timeSeriesPropertyNames) {
+    if (isWhitelistedProperty(propertyName)) {
+      continue;
+    }
     /**
      * There is one property in the dataset that contains timeseries nested
      * inside values, so we need to process that separately.
@@ -44,6 +51,9 @@ export function sortMunicipalTimeSeriesInDataInPlace(data: Municipal) {
   const timeSeriesPropertyNames = getTimeSeriesPropertyNames(data);
 
   for (const propertyName of timeSeriesPropertyNames) {
+    if (isWhitelistedProperty(propertyName)) {
+      continue;
+    }
     /**
      * There is one property in the dataset that contains timeseries nested
      * inside values, so we need to process that separately.
@@ -156,4 +166,8 @@ function isMeasurementTimestamped(
     (timeSeries as MeasurementTimestamped[])[0].date_measurement_unix !==
     undefined
   );
+}
+
+function isWhitelistedProperty(propertyName: string) {
+  return ['restrictions'].includes(propertyName);
 }

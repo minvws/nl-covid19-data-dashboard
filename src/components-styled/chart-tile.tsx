@@ -5,6 +5,7 @@ import { Box } from './base';
 import { ChartTileContainer } from './chart-tile-container';
 import { ChartTimeControls } from './chart-time-controls';
 import { MetadataProps } from './metadata';
+import { Heading } from './typography';
 
 interface ChartTileProps {
   children: React.ReactNode;
@@ -79,11 +80,11 @@ function ChartTileHeader({
     <Box
       mb={3}
       display="flex"
-      flexDirection={{ _: 'column', xl: 'row' }}
+      flexDirection={{ _: 'column', lg: 'row' }}
       justifyContent="space-between"
     >
       <div css={css({ mb: [3, null, null, null, 0], mr: [0, 0, 2] })}>
-        <h3>{title}</h3>
+        <Heading level={3}>{title}</Heading>
         {description &&
           (typeof description === 'string' ? (
             <p css={css({ m: 0 })}>{description}</p>

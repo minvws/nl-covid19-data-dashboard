@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { ChoroplethThresholds } from '~/components/choropleth/shared';
 
 export function useEscalationColor(level?: number) {
   return useMemo(() => {
@@ -8,8 +7,8 @@ export function useEscalationColor(level?: number) {
       return '#000000';
     }
 
-    const escalationThresholds = (regionThresholds.escalation_levels as ChoroplethThresholds)
-      .thresholds;
+    const escalationThresholds =
+      regionThresholds.escalation_levels.escalation_level;
 
     const escalationColor =
       escalationThresholds.find((threshold) => threshold.threshold === level)

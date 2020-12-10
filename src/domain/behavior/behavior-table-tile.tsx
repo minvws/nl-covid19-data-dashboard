@@ -1,21 +1,23 @@
 import css from '@styled-system/css';
 import { useState } from 'react';
 import styled from 'styled-components';
+import { isDefined, isPresent } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import { Tile } from '~/components-styled/layout';
 import { PercentageBar } from '~/components-styled/percentage-bar';
+import { Heading } from '~/components-styled/typography';
+import siteText from '~/locale/index';
 import { NationalBehaviorValue, RegionalBehaviorValue } from '~/types/data';
 import { formatPercentage } from '~/utils/formatNumber';
 import {
-  behaviorIdentifiers,
   BehaviorIdentifier,
+  behaviorIdentifiers,
   BehaviorTrendType,
   BehaviorType,
 } from './behavior-types';
 import { BehaviorIcon } from './components/behavior-icon';
 import { BehaviorTrend } from './components/behavior-trend';
 import { BehaviorTypeControl } from './components/behavior-type-control';
-import siteText from '~/locale/index';
 
 const commonText = siteText.gedrag_common;
 
@@ -26,13 +28,14 @@ interface BehaviorTileProps {
   title: string;
   introduction: Record<BehaviorType, string>;
   footer: Record<BehaviorType, string>;
+  footerAsterisk: Record<BehaviorType, string>;
 }
 
 interface BehaviorFormatted {
   id: BehaviorIdentifier;
   description: string;
-  percentage: number | undefined;
-  trend: BehaviorTrendType | undefined;
+  percentage: number;
+  trend?: BehaviorTrendType;
 }
 
 const HeaderCell = styled.th(
@@ -50,7 +53,6 @@ const Cell = styled.td((x) =>
     borderBottomColor: 'lightGrey',
     px: 3,
     py: 2,
-    whiteSpace: ['nowrap', null, 'normal'],
   })
 );
 
@@ -59,24 +61,28 @@ function formatBehaviorType(
   behavior: BehaviorValue,
   type: BehaviorType
 ): BehaviorFormatted[] {
-  return behaviorIdentifiers.map((identifier) => {
-    const percentage = behavior[
-      `${identifier}_${type}` as keyof BehaviorValue
-    ] as number | null;
-    const trend = (behavior[
-      `${identifier}_${type}_trend` as keyof BehaviorValue
-    ] ?? undefined) as BehaviorTrendType | null;
+  return behaviorIdentifiers
+    .map((identifier) => {
+      const percentage = behavior[
+        `${identifier}_${type}` as keyof BehaviorValue
+      ] as number | null;
+      const trend = (behavior[
+        `${identifier}_${type}_trend` as keyof BehaviorValue
+      ] ?? undefined) as BehaviorTrendType | null;
 
-    return {
-      id: identifier,
-      description: siteText.gedrag_onderwerpen[identifier],
-      percentage: percentage ?? undefined,
-      trend: trend ?? undefined,
-    };
-  });
+      return isPresent(percentage)
+        ? {
+            id: identifier,
+            description: siteText.gedrag_onderwerpen[identifier],
+            percentage,
+            trend: trend || undefined,
+          }
+        : undefined;
+    })
+    .filter(isDefined);
 }
 
-/* Sort lists of formatted compliance and support behaviours */
+/* Sort lists of formatted compliance and support behaviors */
 function sortBehavior(
   compliance: BehaviorFormatted[],
   support: BehaviorFormatted[]
@@ -117,6 +123,7 @@ export function BehaviorTableTile({
   title,
   introduction,
   footer,
+  footerAsterisk,
 }: BehaviorTileProps) {
   const { sortedCompliance, sortedSupport } = formatAndSortBehavior(behavior);
   const [behaviorType, setBehaviorType] = useState<BehaviorType>('compliance');
@@ -139,7 +146,7 @@ export function BehaviorTableTile({
       ml={{ _: -4, sm: 0 }}
       mr={{ _: -4, sm: 0 }}
     >
-      <h3>{title}</h3>
+      <Heading level={3}>{title}</Heading>
       <Box display="flex" justifyContent="start">
         <BehaviorTypeControl value={behaviorType} onChange={setBehaviorType} />
       </Box>
@@ -147,7 +154,7 @@ export function BehaviorTableTile({
       <p>{introduction[behaviorType]}</p>
 
       <div css={css({ overflow: 'auto' })}>
-        <table css={css({ width: '100%' })}>
+        <table css={css({ width: '100%', borderCollapse: 'collapse' })}>
           <thead>
             <tr>
               <HeaderCell colSpan={2}>
@@ -155,9 +162,20 @@ export function BehaviorTableTile({
               </HeaderCell>
               <th />
               <HeaderCell>
-                {commonText.basisregels.header_basisregel}
+                <span
+                  css={css({
+                    display: 'inline-block',
+                    minWidth: [180, 200, 250, 180],
+                  })}
+                >
+                  {commonText.basisregels.header_basisregel}
+                </span>
               </HeaderCell>
-              <HeaderCell>{commonText.basisregels.header_trend}</HeaderCell>
+              <HeaderCell>
+                <span css={css({ display: 'inline-block', minWidth: 100 })}>
+                  {commonText.basisregels.header_trend}
+                </span>
+              </HeaderCell>
             </tr>
           </thead>
           <tbody>
@@ -166,20 +184,16 @@ export function BehaviorTableTile({
               : sortedSupport
             ).map((behavior) => (
               <tr key={behavior.id}>
-                <Cell>{formatPercentage(behavior.percentage ?? 0)}%</Cell>
-                <Cell
-                  color={behaviorType === 'compliance' ? 'blue' : 'blueDark'}
-                >
-                  <PercentageBar percentage={behavior.percentage ?? 0} />
+                <Cell>{formatPercentage(behavior.percentage)}%</Cell>
+                <Cell color="data.primary">
+                  <PercentageBar percentage={behavior.percentage} />
                 </Cell>
                 <Cell>
                   <Box minWidth={32}>
                     <BehaviorIcon name={behavior.id} />
                   </Box>
                 </Cell>
-                <Cell>
-                  <Box minWidth={220}>{behavior.description}</Box>
-                </Cell>
+                <Cell>{behavior.description}</Cell>
                 <Cell>
                   <BehaviorTrend trend={behavior.trend} />
                 </Cell>
@@ -188,7 +202,10 @@ export function BehaviorTableTile({
           </tbody>
         </table>
       </div>
-      <p css={css({ color: 'gray' })}>{footer[behaviorType]}</p>
+      <p css={css({ color: 'annotation' })}>{footer[behaviorType]}</p>
+      <p css={css({ color: 'annotation', m: 0 })}>
+        {footerAsterisk[behaviorType]}
+      </p>
     </Tile>
   );
 }

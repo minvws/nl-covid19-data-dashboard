@@ -1,6 +1,6 @@
-import Highcharts from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
 import React from 'react';
+import { HighchartsWrapper } from '~/components/common/highcharts';
+import { colors } from '~/style/theme';
 import { assert } from '~/utils/assert';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { getFilteredValues } from '~/utils/timeframe';
@@ -28,7 +28,7 @@ interface MultipleLineChartProps<T> {
   linesConfig: LineConfig<T>[];
 }
 
-const COLOR_FOCUS = '#05A0ED';
+const COLOR_FOCUS = colors.data.primary;
 const COLOR_BLUR = '#E7E7E7';
 
 export function BehaviorLineChart<T>({
@@ -46,7 +46,7 @@ export function BehaviorLineChart<T>({
 
   const options = getChartOptions<T>(filteredValueLists, linesConfig);
 
-  return <HighchartsReact highcharts={Highcharts} options={options} />;
+  return <HighchartsWrapper options={options} />;
 }
 
 function getChartOptions<T>(values: Value[][], linesConfig: LineConfig<T>[]) {

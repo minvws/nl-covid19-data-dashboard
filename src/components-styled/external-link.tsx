@@ -1,21 +1,20 @@
 import React from 'react';
-import { Text, TextProps } from './typography';
 
-interface ExternalLinkProps extends TextProps {
-  text: string;
+interface ExternalLinkProps {
   href: string;
+  children: React.ReactNode;
+  className?: string;
 }
 
-export function ExternalLink({ text, href, ...textProps }: ExternalLinkProps) {
+export function ExternalLink({ href, children, className }: ExternalLinkProps) {
   return (
-    <Text
-      as="a"
+    <a
       href={href}
       rel="noopener noreferrer"
       target="_blank"
-      {...(textProps as any)}
+      className={className}
     >
-      {text}
-    </Text>
+      {children}
+    </a>
   );
 }

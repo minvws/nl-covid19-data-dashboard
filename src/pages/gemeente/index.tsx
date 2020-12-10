@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
-import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
+import { MunicipalityNavigationMap } from '~/components/choropleth/municipality-navigation-map';
 import {
   createSelectMunicipalHandler,
   MunicipalitySelectionHandler,
@@ -44,10 +44,7 @@ const Municipality: FCWithLayout<any> = () => {
 
   const onSelectMunicipal = (context: MunicipalityProperties) => {
     const pageName = isLargeScreen ? '/positief-geteste-mensen' : '';
-    router.push(
-      `/gemeente/[code]${pageName}`,
-      `/gemeente/${context.gemcode}${pageName}`
-    );
+    router.push(`/gemeente/${context.gemcode}${pageName}`);
   };
 
   return (
@@ -62,8 +59,7 @@ const Municipality: FCWithLayout<any> = () => {
           <p>{text.gemeente_index.selecteer_toelichting}</p>
         </div>
         <div className="map-container">
-          <MunicipalityChoropleth
-            isSelectorMap
+          <MunicipalityNavigationMap
             tooltipContent={tooltipContent(onSelectMunicipal)}
             onSelect={createSelectMunicipalHandler(
               router,

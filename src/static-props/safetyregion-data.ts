@@ -1,15 +1,15 @@
+import fs from 'fs';
 import path from 'path';
+
+import { Regionaal } from '~/types/data.d';
+
 import safetyRegions from '~/data/index';
-import { Regionaal, Regions } from '~/types/data.d';
 import { sortRegionalTimeSeriesInDataInPlace } from './data-sorting';
-import { loadJsonFromFile } from './utils/load-json-from-file';
 
 export interface ISafetyRegionData {
   data: Regionaal;
-  code: string;
   safetyRegionName: string;
   lastGenerated: string;
-  escalationLevel: Regions['escalation_levels'][number];
 }
 
 interface IProps {
@@ -27,15 +27,15 @@ interface IParams {
   };
 }
 
-/*
- * getSafetyRegionData loads the data for /veiligheidsregio pages.
+/**
+ * getSafetyRegionStaticProps loads the data for /veiligheidsregio pages.
  * It needs to be used as the Next.js `getStaticProps` function.
  *
  * Example:
  * ```ts
  * PostivelyTestedPeople.getLayout = getSafetyRegionLayout();
  *
- * export const getStaticProps = getSafetyRegionData();
+ * export const getStaticProps = getSafetyRegionStaticProps;
  *
  * export default PostivelyTestedPeople;
  * ```
@@ -49,49 +49,34 @@ interface IParams {
  * }
  * ```
  */
-export function getSafetyRegionData() {
-  return function ({ params }: IParams): IProps {
-    const { code } = params;
+export function getSafetyRegionStaticProps({ params }: IParams): IProps {
+  const { code } = params;
 
-    const publicJsonPath = path.join(process.cwd(), 'public', 'json');
+  // get data for the page
+  const filePath = path.join(process.cwd(), 'public', 'json', `${code}.json`);
+  const fileContents = fs.readFileSync(filePath, 'utf8');
+  const data = JSON.parse(fileContents) as Regionaal;
 
-    // get data for the page
-    const data = loadJsonFromFile<Regionaal>(
-      path.join(publicJsonPath, `${code}.json`)
-    );
+  sortRegionalTimeSeriesInDataInPlace(data);
 
-    // get the regions file and extract the escalation level for this region from it
-    const regionsData = loadJsonFromFile<Regions>(
-      path.join(publicJsonPath, `REGIONS.json`)
-    );
+  const lastGenerated = data.last_generated;
 
-    const escalationLevelInfo =
-      regionsData.escalation_levels.find((item) => item.vrcode === code) ??
-      regionsData.escalation_levels[0];
+  const safetyRegionName =
+    safetyRegions.find((r) => r.code === code)?.name || '';
 
-    sortRegionalTimeSeriesInDataInPlace(data);
-
-    const lastGenerated = data.last_generated;
-
-    const safetyRegionName =
-      safetyRegions.find((r) => r.code === code)?.name || '';
-
-    return {
-      props: {
-        data,
-        code,
-        safetyRegionName,
-        lastGenerated,
-        escalationLevel: escalationLevelInfo,
-      },
-    };
+  return {
+    props: {
+      data,
+      safetyRegionName,
+      lastGenerated,
+    },
   };
 }
 
-/*
+/**
  * getSafetyRegionPaths creates an array of all the allowed
  * `/veiligheidsregio/[code]` routes. This should be used
- * together with `getSafetyRegionData`.
+ * together with `getSafetyRegionStaticProps`.
  */
 export function getSafetyRegionPaths(): () => IPaths {
   return function () {

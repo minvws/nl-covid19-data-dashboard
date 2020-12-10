@@ -6,7 +6,7 @@ import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text = siteText.common.metricKPI;
 
-const title = siteText.gedrag_common.titel_kpi;
+const title = siteText.gedrag_common.kpi_titel;
 
 interface BehaviorMetricProps {
   data: NationalBehavior | RegionalBehavior;
