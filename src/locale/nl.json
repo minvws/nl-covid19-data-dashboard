@@ -10,7 +10,7 @@
   },
   "notificatie": {
     "titel": "Zorgwekkende stijging aantal meldingen COVID-19",
-    "bericht": "Afgelopen week zijn er 27% meer nieuwe meldingen van COVID-19 besmettingen gerapporteerd dan een week eerder. In de week van 2 tot en met 8 december werden 43.103 nieuwe personen met een positieve COVID-19 uitslag gemeld. Ruim 9.000 meldingen meer dan 33.949 meldingen in de week daarvoor. In iedere veiligheidsregio steeg het aantal nieuwe meldingen van COVID-19 besmettingen. Meer mensen hebben zich laten testen. Het percentage mensen met een positieve testuitslag is gestegen van 11,1% naar 11,6% afgelopen week. Het reproductiegetal van 20 november is 1,00 (ondergrens 0,97 – bovengrens 1,03).\n\nHet risiconiveau per regio kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2), ‘ernstig’ (niveau 3), ‘zeer ernstig’ (niveau 4) zijn. Op dit moment zijn {{escalationLevel4}} regio’s ingeschaald op ‘zeer ernstig’, {{escalationLevel3}} op ‘ernstig’, {{escalationLevel2}} op ‘zorgelijk’ en {{escalationLevel1}} op ‘waakzaam.‘",
+    "bericht": "Afgelopen week zijn er 27% meer nieuwe meldingen van COVID-19 besmettingen gerapporteerd dan een week eerder. In de week van 2 tot en met 8 december werden 43.103 nieuwe personen met een positieve COVID-19 uitslag gemeld. Ruim 9.000 meldingen meer dan 33.949 meldingen in de week daarvoor. In iedere veiligheidsregio steeg het aantal nieuwe meldingen van COVID-19 besmettingen. Meer mensen hebben zich laten testen. Het percentage mensen met een positieve testuitslag is gestegen van 11,1% naar 11,6% afgelopen week. Het reproductiegetal van 20 november is 1,00 (ondergrens 0,97 – bovengrens 1,03). \n\nHet risiconiveau per regio kan ‘waakzaam’ (niveau 1), ‘zorgelijk’ (niveau 2), ‘ernstig’ (niveau 3), ‘zeer ernstig’ (niveau 4) zijn. Op dit moment zijn {{escalationLevel4}} regio’s ingeschaald op ‘zeer ernstig’, {{escalationLevel3}} op ‘ernstig’, {{escalationLevel2}} op ‘zorgelijk’ en {{escalationLevel1}} op ‘waakzaam.‘",
     "link": {
       "text": "Bekijk de toelichting van het RIVM",
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel"
@@ -27,12 +27,14 @@
   },
   "skiplinks": {
     "inhoud": "Ga direct naar de inhoud",
-    "nav": "Ga direct naar de navigatie"
+    "nav": "Ga direct naar de navigatie",
+    "metric_nav": "Ga direct naar de metrieken navigatie",
+    "footer_nav": "Ga direct naar de footer navigatie"
   },
   "header": {
     "title": "Dashboard coronavirus",
     "text": "Het dashboard coronavirus geeft informatie over de ontwikkeling van het coronavirus in Nederland.",
-    "link": "Lees meer",
+    "link": "Lees meer over dit dashboard",
     "logo_alt": "Rijksoverheid"
   },
   "nav": {
@@ -92,7 +94,8 @@
     "reference": {
       "href": "/verantwoording#intensive-care",
       "text": "Lees meer in de cijferverantwoording."
-    }
+    },
+    "kpi_titel": "Gemiddeld aantal intensive care-opnames over 3 dagen"
   },
   "verdenkingen_huisartsen": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -188,7 +191,8 @@
       "text": "Lees meer in de cijferverantwoording."
     },
     "tijdelijk_onbeschikbaar_titel": "Kaart tijdelijk niet beschikbaar",
-    "tijdelijk_onbeschikbaar": "Ziekenhuisopnamen per veiligheidsregio en per gemeente worden tijdelijk niet op het dashboard getoond. Het cijferbestand waaruit het dashboard putte (Osiris) wijkt nu te sterk af van het werkelijke aantal ziekenhuisopnamen. Binnenkort verwachten we weer ziekenhuisopnamen per veiligheidsregio en gemeente te kunnen tonen  maar dan op basis van een beter cijferbestand van Stichting NICE. Voor ziekenhuisopnamen op landelijk niveau wordt al gebruik gemaakt van data uit dit bestand. Lees meer in de cijferverantwoording."
+    "tijdelijk_onbeschikbaar": "Ziekenhuisopnamen per veiligheidsregio en per gemeente worden tijdelijk niet op het dashboard getoond. Het cijferbestand waaruit het dashboard putte (Osiris) wijkt nu te sterk af van het werkelijke aantal ziekenhuisopnamen. Binnenkort verwachten we weer ziekenhuisopnamen per veiligheidsregio en gemeente te kunnen tonen  maar dan op basis van een beter cijferbestand van Stichting NICE. Voor ziekenhuisopnamen op landelijk niveau wordt al gebruik gemaakt van data uit dit bestand. Lees meer in de cijferverantwoording.",
+    "kpi_titel": "Gemiddeld aantal ziekenhuisopnames over 3 dagen"
   },
   "positief_geteste_personen": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -273,7 +277,7 @@
     "geen_signaalwaarde_beschikbaar_lees_waarom": "Lees hier waarom",
     "toelichting_pagina": "Als iemand het coronavirus oploopt, dan is deze persoon een tijd lang besmettelijk voor anderen. Hoe lang dit duurt verschilt van persoon tot persoon. Het aantal besmettelijke mensen is een schatting op basis van een aantal gegevensbronnen. Het exacte aantal is onbekend, maar we kunnen wel aangeven of het gaat om tientallen, honderden, duizenden of meer.",
     "barscale_titel": "Gemiddeld aantal besmettelijke mensen per 100.000 inwoners ",
-    "barscale_screenreader_text": "{{value}} besmettelijke mensen ",
+    "barscale_screenreader_text": "{{value}} besmettelijke mensen",
     "cijfer_titel": "Geschat aantal besmettelijke mensen in Nederland:",
     "cijfer_toelichting": "Een schatting van hoeveel mensen met COVID-19 besmettelijk zijn voor anderen. Dit getal wordt door het RIVM berekend.",
     "linechart_titel": "Verloop over tijd",
@@ -294,7 +298,8 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/097155aa-75eb-4caa-8ed3-4c6edb80467e",
         "text": "RIVM"
       }
-    }
+    },
+    "kpi_titel": "Aantal besmettelijke mensen"
   },
   "reproductiegetal": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
@@ -330,7 +335,8 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/ed0699d1-c9d5-4436-8517-27eb993eab6e",
         "text": "RIVM"
       }
-    }
+    },
+    "kpi_titel": "Meest recente reproductiegetal"
   },
   "overige_gegevens": {
     "title": "Nog te ontwikkelen",
@@ -449,7 +455,8 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
         "text": "RIVM"
       }
-    }
+    },
+    "kpi_titel": "Aantal positief geteste bewoners per dag"
   },
   "verpleeghuis_oversterfte": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -481,7 +488,8 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
         "text": "RIVM"
       }
-    }
+    },
+    "kpi_titel": "Sterfte per dag"
   },
   "blok_verpleeghuis_zorg": {
     "title": "Verpleeghuiszorg",
@@ -526,7 +534,8 @@
         "text": "RIVM",
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
       }
-    }
+    },
+    "kpi_titel": "Gemiddelde aantal virusdeeltjes per 100.000 inwoners"
   },
   "notfound_titel": {
     "text": "Er is iets misgegaan"
@@ -628,7 +637,7 @@
       },
       {
         "cijfer": "Positieve testen",
-        "verantwoording": "Het aantal positief geteste mensen wordt dagelijks gepubliceerd als [open data](https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv) door het RIVM. Zie [hier](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427) de beschrijving van deze dataset. Het gaat om het aantal positief geteste mensen die aan het RIVM gemeld zijn in de afgelopen 24 uur, tot 10.00 op de dag van publicatie van het cijfer. De datum die gebruikt wordt, is de datum van melding door de GGD bij het RIVM. Dat is dus niet hetzelfde als de datum waarop mensen zijn getest. \n\nArtsen en laboratoria moeten besmettingen met infectieziekten melden bij de GGD. Er worden echter ook - steeds vaker - tests afgenomen door particuliere organisaties en door individuen. De uitslagen hiervan worden niet altijd bij de GGD gemeld of de melding telt niet mee omdat de test die gebruikt is niet voldoet aan de normen van het RIVM. Het (dagelijks) aantal besmettingen dat we op het dashboard weergeven geeft dus geen compleet beeld. Daar moet rekening mee gehouden worden bij het interpreteren van dit cijfer. \n\nHet doorgeven van cijfers is deels mensenwerk. Het komt voor dat op het moment dat het RIVM de balans opmaakt over het laatste etmaal nog niet alle besmettingen goed zijn doorgegeven door de GGD’en. Ontbrekende meldingen worden dan later alsnog doorgegeven. Het ontbreken van meldingen of het vertraagd doorgeven van meldingen kan het dagelijkse beeld vertekenen. Het voortschrijdende gemiddelde filtert dit soort fluctuaties eruit en geeft daarom vaak een beter beeld. \n\nHet RIVM kan ook met terugwerkende kracht correcties uitvoeren op eerder gepubliceerde cijfers. Deze correcties komen dan in het open databestand te staan en worden overgenomen door het dashboard. Het databestand registreert op niveau van veiligheidsregio en gemeente. Om tot landelijke gegevens te komen tellen we alle meldingen bij elkaar op. In het aanleverbestand wordt voor sommige meldingen de gemeente en/of veiligheidsregio niet vermeld, omdat die gegevens ontbreken. Die kunnen dan niet op dat niveau worden getoond, maar wel op landelijk niveau. \n\nWe berekenen op basis van de absolute aantallen het relatieve aantal positief geteste mensen naar rato van het aantal inwoners. Dit doen we door het aantal positief geteste mensen te delen door het aantal inwoners van Nederland. We geven dit weer als het aantal positief geteste personen per 100.000 inwoners. Het aantal inwoners wordt gebaseerd op [deze CBS-indeling](https://opendata.cbs.nl/#/CBS/nl/dataset/84721NED/table?dl=3A154). De leeftijdsverdeling wordt bepaald op basis van de landelijke cijfers, omdat in het gemeentelijke bestand geen leeftijden worden geregistreerd. Er kunnen daarom kleine verschillen ontstaan tussen de tabel zoals weergegeven in de 'wekelijks update epidemiologische situatie COVID-19 in Nederland' op de website van het RIVM en zoals weergeven op het dashboard.\n\nDe signaalwaarde voor het aantal positief geteste mensen bedraagt 7 op de 100.000 inwoners. Dit betekent dat vanaf deze waarde mogelijk het aantal besmettingen te hard oploopt om het virus in de hand te houden. Deze waarde wordt bijvoorbeeld ook in Duitsland gehanteerd. Een signaalwaarde functioneert als een ‘alarmbel’ om met urgentie naar de situatie te kijken. \n\nVoor het berekenen van het percentage positief geteste mensen wordt alleen gekeken naar de tests die via de GGD plaatsvinden en waarvan de testuitslag bekend is. De gegevens over de GGD teststraten worden wekelijks door het RIVM aangeleverd bij het ministerie van VWS."
+        "verantwoording": "Het aantal positief geteste mensen wordt dagelijks gepubliceerd als [open data](https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv) door het RIVM. Zie [hier](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427) de beschrijving van deze dataset. Het gaat om het aantal positief geteste mensen die aan het RIVM gemeld zijn in de afgelopen 24 uur, tot 10.00 op de dag van publicatie van het cijfer. De datum die gebruikt wordt, is de datum van melding door de GGD bij het RIVM. Dat is dus niet hetzelfde als de datum waarop mensen zijn getest. \n\nArtsen en laboratoria moeten besmettingen met infectieziekten melden bij de GGD. Er worden echter ook - steeds vaker - tests afgenomen door particuliere organisaties en door individuen. De uitslagen hiervan worden niet altijd bij de GGD gemeld of de melding telt niet mee omdat de test die gebruikt is niet voldoet aan de normen van het RIVM. Het (dagelijks) aantal besmettingen dat we op het dashboard weergeven geeft dus geen compleet beeld. Daar moet rekening mee gehouden worden bij het interpreteren van dit cijfer. \n\nHet doorgeven van cijfers is deels mensenwerk. Het komt voor dat op het moment dat het RIVM de balans opmaakt over het laatste etmaal nog niet alle besmettingen goed zijn doorgegeven door de GGD’en. Ontbrekende meldingen worden dan later alsnog doorgegeven. Het ontbreken van meldingen of het vertraagd doorgeven van meldingen kan het dagelijkse beeld vertekenen. Het voortschrijdende gemiddelde filtert dit soort fluctuaties eruit en geeft daarom vaak een beter beeld. \n\nHet RIVM kan ook met terugwerkende kracht correcties uitvoeren op eerder gepubliceerde cijfers. Deze correcties komen dan in het open databestand te staan en worden overgenomen door het dashboard. Het databestand registreert op niveau van veiligheidsregio en gemeente. Om tot landelijke gegevens te komen tellen we alle meldingen bij elkaar op. In het aanleverbestand wordt voor sommige meldingen de gemeente en/of veiligheidsregio niet vermeld, omdat die gegevens ontbreken. Die kunnen dan niet op dat niveau worden getoond, maar wel op landelijk niveau. \n\nWe berekenen op basis van de absolute aantallen het relatieve aantal positief geteste mensen naar rato van het aantal inwoners. Dit doen we door het aantal positief geteste mensen te delen door het aantal inwoners van Nederland. We geven dit weer als het aantal positief geteste personen per 100.000 inwoners. Het aantal inwoners landelijk, per veiligheidsregio en per gemeente wordt gebaseerd op deze [CBS-indeling](https://opendata.cbs.nl/#/CBS/nl/dataset/84721NED/table?dl=3A154). \n\nDe leeftijdsverdeling wordt bepaald op basis van een [ander open data bestand van het RIVM](https://data.rivm.nl/covid-19/COVID-19_casus_landelijk.csv). Dit omdat in het gemeentelijke bestand geen leeftijden worden geregistreerd. Er kunnen daarom kleine verschillen ontstaan tussen de tabel zoals weergegeven in de 'wekelijks update epidemiologische situatie COVID-19 in Nederland' op de website van het RIVM en zoals weergeven op het dashboard. De getoonde leeftijdsverdeling in het aantal positief geteste personen betreffen alleen de gevallen die gemeld zijn sinds de één na laatste update van het dashboard. De bevolkingsgrootte per leeftijdsgroep wordt bepaald aan de hand van deze [CBS-indeling](https://opendata.cbs.nl/#/CBS/nl/dataset/03759ned/table).\n\nDe signaalwaarde voor het aantal positief geteste mensen bedraagt 7 op de 100.000 inwoners. Dit betekent dat vanaf deze waarde mogelijk het aantal besmettingen te hard oploopt om het virus in de hand te houden. Deze waarde wordt bijvoorbeeld ook in Duitsland gehanteerd. Een signaalwaarde functioneert als een ‘alarmbel’ om met urgentie naar de situatie te kijken. \n\nVoor het berekenen van het percentage positief geteste mensen wordt alleen gekeken naar de tests die via de GGD plaatsvinden en waarvan de testuitslag bekend is. De gegevens over de GGD teststraten worden wekelijks door het RIVM aangeleverd bij het ministerie van VWS."
       },
       {
         "cijfer": "Reproductiegetal",
@@ -659,12 +668,24 @@
         "verantwoording": "Dit dashboard is in korte tijd tot stand gekomen. Het is daarom nog niet gelukt om de code voor het inlezen van de data en het construeren van de JSON- bestanden open source beschikbaar te stellen. Dit zal binnen afzienbare tijd beschikbaar worden gesteld. De code van de webapplicatie is op 5 juni 2020 gepubliceerd op [GitHub](https://github.com/minvws/nl-covid19-data-dashboard). De [databerekeningen](https://github.com/minvws/nl-covid19-data-backend-processing) zijn ook beschikbaar via Github."
       },
       {
-        "cijfer": "",
-        "verantwoording": ""
+        "cijfer": "Gedrag",
+        "verantwoording": "Deze gegevens worden elke drie weken geactualiseerd en als open databestand gepubliceerd door het [RIVM](https://data.rivm.nl/covid-19/COVID-19_gedrag.html). Op de dag dat het nieuwe bestand beschikbaar is, worden ook de gegevens op het Dashboard Coronavirus geactualiseerd. Het databestand bevat gegevens over het gedrag van de Nederlandse bevolking in relatie tot de corona gedragsregels. De basis hiervoor is een enquête.\n\nDe dataverzameling vindt telkens plaats via het internet (CAWI). Bij deze methode wordt de geprogrammeerde vragenlijst op internet geplaatst. De uitnodigingen voor het invullen van de enquête worden via e-mail verzonden. In de uitnodiging wordt het doel van het onderzoek toegelicht en RIVM als opdrachtgever genoemd. De Gedragsunit van het RIVM heeft de vragenlijst opgesteld. \n\nDe deelnemers aan het onderzoek zijn geselecteerd uit het Kantar Consumentenpanel (NIPObase). De steekproef bestaat uit respondenten van 16 jaar en ouder. De steekproeven zijn per veiligheidsregio representatief uitgezet naar geslacht, leeftijd (5 categorieën) en hoogst gevolgde opleiding (3 categorieën) (op randtotalen). Er is uitgegaan van een respons van 50%, waarbij een bruto steekproef van n=9.780 is uitgezet. \n\nDe steekproef is gedurende een week online beschikbaar voor de respondenten. Daarna wordt de dataverzameling afgesloten. Er vindt een controle plaats op de betrouwbaarheid van de antwoorden. Om de representativiteit voor de Nederlandse bevolking te verhogen worden de resultaten in twee stappen gewogen op basis van de de CBS populatiecijfers:\n\n1 Eerst is elke veiligheidsregio gewogen naar de ideaalcijfers van desbetreffende regio (op Sekse, Leeftijd en Opleiding).\n2 Vervolgens is elke veiligheidsregio ‘ingewogen’ in het totaal volgens het aandeel dat desbetreffende regio heeft in Nederland\n\nVervolgens wordt de dataset verstuurd naar het RIVM. Het RIVM berekent op een gestandaardiseerde manier de indicatoren die in het open databestand zijn opgenomen."
       },
       {
-        "cijfer": "",
-        "verantwoording": ""
+        "cijfer": "Sterfte",
+        "verantwoording": "Deze gegevens worden dagelijks aangeleverd als [open data](https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv) door het RIVM. Zie [hier](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427) een beschrijving van deze dataset. Het gaat om het aantal overleden personen aan/met COVID-19 dat gemeld is aan het RIVM in de afgelopen 24 uur, tot 10uur op de dag van publicatie van het cijfer. De datum die gebruikt wordt, is de datum van melding door de GGD bij het RIVM. Dat is dus niet hetzelfde als de datum waarop mensen zijn overleden. Het werkelijke aantal overleden personen aan/met COVID-19 is hoger dan het dan het aantal overleden personen gemeld door het RIVM , omdat  er geen meldingsplicht geldt voor overlijden aan COVID-19."
+      },
+      {
+        "cijfer": "Sterftemonitor CBS",
+        "verantwoording": "De algemene sterftecijfers (sterfte monitor) zijn afkomstig van een [openbare tabel](https://www.cbs.nl/nl-nl/cijfers/detail/70895ned) van het Centraal Bureau voor de Statistiek (CBS). Deze gegevens worden wekelijks bijgewerkt. De verwachte sterftegevallen per week zijn onderdeel van een eenmalige prognose van het CBS die per jaar opnieuw wordt gemaakt."
+      },
+      {
+        "cijfer": "Gehandicaptenzorg",
+        "verantwoording": "De informatie over gehandicaptenzorg wordt dagelijks beschikbaar gesteld via [open data](https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.csv) door het RIVM. Zie [hier](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/aa28b74d-7150-47bc-a7cb-98876e93381b) de beschrijving van deze dataset. \n\nIn de aangeleverde gegevens is soms de veiligheidsregio onbekend. Dit heeft als gevolg dat het totaal van de weergegeven cijfers op veiligheidsregio niveau minder kan zijn dan wat er op landelijk niveau wordt getoond. Het aantal overleden personen wordt getoond op basis van de datum van overlijden. De overlijdensdatum is echter niet altijd bekend. Als dit zo is, dan zijn die gevallen niet op het dashboard zichtbaar.\n\nMet locaties worden de 2586 locaties bedoeld die volgens [Zorgkaart Nederland](https://www.zorgkaartnederland.nl/) bekend zijn als woning voor personen met een beperking in Nederland. Het totaal aantal locaties per veiligheidsregio is door het RIVM aangeleverd. Locaties met dezelfde postcode worden hierbij gerekend tot één locatie. Dit is gedaan omdat het aantal besmette locaties ook met dezelfde logica wordt bepaald. Het totaal aantal locaties per veiligheidsregio is nodig om het percentage besmette locaties te berekenen. Voor het landelijke totaal aantal locaties, worden de totalen van alle veiligheidsregio's bij elkaar opgeteld.\n\nVoor de gehandicaptenzorg wordt net als bij de verpleeghuizen gebruik gemaakt van de registratie van de GGD’en. Sinds 1 juli vraagt de GGD voor iedere nieuw positief geteste persoon of dit een bewoner is van een gehandicapteninstelling. Iemand wordt als een bewoner van een gehandicapteninstelling aangemerkt wanneer deze volgens de gegevens van OSIRIS (de database die het RIVM hiervoor hanteert) blijkt dat het een bewoner is van een gehandicapteninstelling. Indien het onbekend is of een persoon in een instelling voor gehandicaptenzorg woont, wordt iemand meegeteld wanneer deze  ‘gehandicaptenzorginstelling’ als locatie van de besmetting heeft en geen zorgmedewerker is, of op basis van de inhoud van vrije tekstvelden gelinkt kan worden aan een gehandicaptenzorginstelling en geen zorgmedewerker is."
+      },
+      {
+        "cijfer": "Thuiswonende 70-plussers",
+        "verantwoording": "De informatie over thuiswonende 70-plussers wordt dagelijks beschikbaar gesteld via [open data](https://data.rivm.nl/covid-19/COVID-19_thuiswonend_70plus.csv) door het RIVM. Zie [hier](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/40508e17-7296-4f39-ad25-8ddd0c904087) de beschrijving van deze dataset. In de aangeleverde gegevens is soms de veiligheidsregio onbekend. Dit heeft als gevolg dat het totaal van de weergegeven cijfers op veiligheidsregio niveau minder kan zijn dan wat er op landelijk niveau wordt getoond. Het aantal overleden personen wordt getoond op basis van de datum van overlijden. De overlijdensdatum is echter niet altijd bekend. Als de datum niet bekend is, dan zijn die gevallen niet op het dashboard zichtbaar.\n\nHet RIVM baseert zich op testresultaten en sterfgevallen zoals door de GGD’ en bij het RIVM gemeld. Bij het melden van een positieve testuitslag door de GGD wordt (onder meer) geregistreerd hoe oud iemand is en of de persoon in een verpleeghuis of instelling voor gehandicaptenzorg woont. Het RIVM stelt het aantal (nieuwe) besmettingen van thuiswonenden van 70 jaar of ouder vast door het totaal aantal (nieuwe) besmettingen in de leeftijdsklasse 70 jaar of ouder vast te stellen en daarop in mindering te brengen het aantal besmettingen:\n- Onder bewoners van een instelling\n- Onder mensen die werkzaam zijn in de zorg \n- Onder mensen die via hun adres gelinkt kunnen worden aan een verpleeghuis of een locatie voor gehandicaptenzorg \n- Onder mensen die op basis van setting van besmetting of voorkomen in een vrij tekstveld gelinkt kunnen worden aan een verpleeghuis of gehandicaptenzorginstelling.\n\nDe groep thuiswonenden van 70 jaar is een diverse groep ten aanzien van de woonsituatie en gezondheidssituatie. Een groot deel van de 70-plussers is vitaal en heeft een goede gezondheid. Een ander deel heeft één of meerdere chronische aandoeningen of fysieke of cognitieve beperkingen en is minder vitaal. Op dit moment is het nog niet mogelijk op het dashboard een onderscheid aan te brengen tussen de besmettingen onder vitale en minder vitale thuiswonende ouderen omdat deze informatie niet standaard wordt vastgelegd wanneer een coronatest wordt afgenomen.\n\nHet dashboard toont welk deel van de thuiswonende ouderen van 70 jaar of ouder die dag besmet is geraakt. Voor totaal aantal thuiswonende ouderen van 70 jaar is gebruik gemaakt van gegevens van het CBS over het aantal personen van 70 jaar dat in een particulier huishouden woont (StatLine - Huishoudens; personen naar geslacht, leeftijd en regio, 1 januari (cbs.nl). Het gaat in totaal om 2,3 mln. personen. "
       },
       {
         "cijfer": "",
@@ -738,7 +759,7 @@
     "metadata": {
       "source": "Bron",
       "date": "Waarde van {{date}}",
-      "dateFromTo": "Waarde van {{dateFrom}} t/m {{dateTo}}",
+      "dateFromTo": "Waarde van {{startDate}} - {{endDate}}",
       "download": "Download data"
     },
     "barScale": {
@@ -755,7 +776,8 @@
     "tooltip": {
       "positive_tested_people": "{{totalPositiveTestedPeople}} in totaal"
     },
-    "niveau": "niveau"
+    "niveau": "niveau",
+    "clear_select_input": "Leegmaken"
   },
   "seoHead": {
     "default_description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
@@ -835,7 +857,8 @@
       }
     },
     "tijdelijk_onbeschikbaar_titel": "Tijdelijk niet beschikbaar",
-    "tijdelijk_onbeschikbaar": "Ziekenhuisopnamen per veiligheidsregio en per gemeente worden tijdelijk niet op het dashboard getoond. Het cijferbestand waaruit het dashboard putte (Osiris) wijkt nu te sterk af van het werkelijke aantal ziekenhuisopnamen. Binnenkort verwachten we weer ziekenhuisopnamen per veiligheidsregio en gemeente te kunnen tonen  maar dan op basis van een beter cijferbestand van Stichting NICE. Voor ziekenhuisopnamen op landelijk niveau wordt al gebruik gemaakt van data uit dit bestand. Lees meer in de cijferverantwoording."
+    "tijdelijk_onbeschikbaar": "Ziekenhuisopnamen per veiligheidsregio en per gemeente worden tijdelijk niet op het dashboard getoond. Het cijferbestand waaruit het dashboard putte (Osiris) wijkt nu te sterk af van het werkelijke aantal ziekenhuisopnamen. Binnenkort verwachten we weer ziekenhuisopnamen per veiligheidsregio en gemeente te kunnen tonen  maar dan op basis van een beter cijferbestand van Stichting NICE. Voor ziekenhuisopnamen op landelijk niveau wordt al gebruik gemaakt van data uit dit bestand. Lees meer in de cijferverantwoording.",
+    "kpi_titel": "Gemiddeld aantal ziekenhuisopnames over 3 dagen"
   },
   "veiligheidsregio_positief_geteste_personen": {
     "titel_sidebar": "Positief geteste mensen",
@@ -938,7 +961,8 @@
         "text": "RIVM",
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
       }
-    }
+    },
+    "kpi_titel": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners"
   },
   "gemeente_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Ziekenhuisopnames",
@@ -974,7 +998,8 @@
       }
     },
     "tijdelijk_onbeschikbaar_titel": "Tijdelijk niet beschikbaar",
-    "tijdelijk_onbeschikbaar": "Ziekenhuisopnamen per veiligheidsregio en per gemeente worden tijdelijk niet op het dashboard getoond. Het cijferbestand waaruit het dashboard putte (Osiris) wijkt nu te sterk af van het werkelijke aantal ziekenhuisopnamen. Binnenkort verwachten we weer ziekenhuisopnamen per veiligheidsregio en gemeente te kunnen tonen  maar dan op basis van een beter cijferbestand van Stichting NICE. Voor ziekenhuisopnamen op landelijk niveau wordt al gebruik gemaakt van data uit dit bestand. Lees meer in de cijferverantwoording."
+    "tijdelijk_onbeschikbaar": "Ziekenhuisopnamen per veiligheidsregio en per gemeente worden tijdelijk niet op het dashboard getoond. Het cijferbestand waaruit het dashboard putte (Osiris) wijkt nu te sterk af van het werkelijke aantal ziekenhuisopnamen. Binnenkort verwachten we weer ziekenhuisopnamen per veiligheidsregio en gemeente te kunnen tonen  maar dan op basis van een beter cijferbestand van Stichting NICE. Voor ziekenhuisopnamen op landelijk niveau wordt al gebruik gemaakt van data uit dit bestand. Lees meer in de cijferverantwoording.",
+    "kpi_titel": "Gemiddeld aantal ziekenhuisopnames over 3 dagen"
   },
   "gemeente_positief_geteste_personen": {
     "titel_sidebar": "Positief geteste mensen",
@@ -987,7 +1012,7 @@
     "barscale_screenreader_text": "{{value}} positief geteste mensen per dag.",
     "kpi_titel": "Aantal positief geteste mensen",
     "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn en COVID-19 hebben. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.",
-    "map_titel": "Verdeling positief geteste mensen in {{municipality}}s veiligheidsregio",
+    "map_titel": "Verdeling positief geteste mensen in {{municipality}}",
     "map_toelichting": "Deze kaart laat zien van hoeveel mensen in deze gemeenten gisteren gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "linechart_titel": "Verloop over tijd",
     "linechart_toelichting": "Deze grafiek laat zien van hoeveel mensen in de geselecteerde periode in deze gemeente gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
@@ -1063,7 +1088,8 @@
         "text": "RIVM",
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
       }
-    }
+    },
+    "kpi_titel": "Gemiddelde aantal virusdeeltjes per 100.000 inwoners"
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Risiconiveaus",
@@ -1163,7 +1189,50 @@
   },
   "over_risiconiveaus": {
     "title": "Over risiconiveaus",
-    "toelichting": "Iedere week wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. Dan beoordelen het Rijk, de GGD’en, het RIVM en de veiligheidsregio’s samen de situatie. De minister van VWS stelt vervolgens vast op welk risiconiveau een regio zit. Moeten we waakzaam zijn (niveau 1), is de situatie zorgelijk (niveau 2),is de situatie  ernstig (niveau 3), of is de situatie zelfs zeer ernstig te noemen (niveau 4)?\n\nOp basis van het risiconiveau nemen het Rijk en/of de veiligheidsregio passende maatregelen. Maatregelen zijn afhankelijk van de lokale situatie en kunnen daarom tussen regio’s verschillen.\n\n**Wat bepaalt het risiconiveau van een regio?**\n\nIn welk risiconiveau een regio zit, wordt bepaald door te kijken naar de situatie van een regio, die van de omliggende regio’s en de situatie in de rest van het land. Dit gebeurt op basis van informatie van het coronadashboard, het weekrapport van het RIVM, de duiding van de GGD’en en de duiding van de veiligheidsregio’s.\n\nVoor het risiconiveau van een regio wordt gelet op een aantal aspecten, bijvoorbeeld:\n\n- Hoe snel neemt het aantal nieuwe besmettingen toe?\n- Zijn er extra maatregelen nodig voor kwetsbare groepen?\n- Hoe effectief is het bron- en contactonderzoek nog?\n- Hoe goed worden de maatregelen nageleefd?\n- Is er nog voldoende zorg beschikbaar?\n\n**Wanneer gaat een regio naar ‘zorgelijk’, ‘ernstig’ of ‘zeer ernstig’?**\n- Een regio gaat in principe van ‘waakzaam’ naar ‘zorgelijk’ als er in een week meer dan 50 positieve testuitslagen per 100.000 inwoners zijn. Dit komt overeen met het elke dag overschrijden van de signaalwaarde van 7 positieve testuitslagen per 100.000 inwoners. Ook telt mee als meer dan 5 procent van de afgenomen testen positief is.\n- Een regio gaat in principe van ‘zorgelijk’ naar ‘ernstig’ als er in een week meer dan 150 positieve testuitslagen per 100.000 inwoners zijn. Of als meer dan 10 procent van de afgenomen testen positief is.\n- Een regio gaat in principe over van ‘ernstig’ naar ‘zeer ernstig’ als er meer dan 250 positieve testuitslagen per 100.000 inwoners zijn gedurende een week. Als in meerdere regio’s de situatie zeer ernstig is, gelden de zwaarste maatregelen voor het hele land. \n\nElke maandag berekent het RIVM welke regio’s hieraan voldoen. In de dagen erna wordt dieper in de situatie in deze regio’s gedoken. Als de situatie inderdaad zorgelijk of ernstig is, kan de minister van VWS (Hugo de Jonge) besluiten een regio op een hoger risiconiveau te zetten. Bovenstaande criteria zijn dus bedoeld als ‘leidraad’. Ook wanneer een regio nog niet de grenswaarden bereikt heeft om op te schalen, kan op basis van de context en duiding besloten worden om een regio op te schalen.\n \n**Wanneer kan een regio terug naar een lager risiconiveau?**\n\nBij het bepalen of een regio terug kan naar een lager risiconiveau wordt grote voorzichtigheid betracht. Naast het aantal nieuwe besmettingen wordt gekeken of de capaciteit in de zorg dit toelaat. Ook als het aantal nieuwe besmettingen afneemt kan de zorg immers nog te maken hebben met een groot aantal patiënten die nog herstellende zijn van corona. Daarbij moet ook het zorgpersoneel de kans krijgen om op adem te komen. Voorkomen moet worden dat het virus zich weer snel verspreidt en de zorg overvraagd wordt.\n\n**Wat betekenen de vier risiconiveaus?**\n1. Waakzaam. De situatie is beheersbaar. Het aantal nieuwe besmettingen is laag. Kwetsbare groepen dienen alert te zijn. Het bron-en contactonderzoek is overwegend effectief. Maatregelen worden voldoende nageleefd en zijn te handhaven. Er is voldoende zorgcapaciteit. Aanvullende maatregelen zijn erop gericht om de bestaande aanpak beter te laten functioneren.\n2. Zorgelijk. De situatie ontwikkelt zich negatief. Het aantal nieuwe besmettingen neemt toe. Maatwerk is nodig om kwetsbare groepen te beschermen. Als de situatie voortduurt, wordt het bron- en contactonderzoek ineffectief. Maatregelen worden onvoldoende nageleefd. De druk op de zorgcapaciteit neemt toe. De bestaande aanpak moet met aanvullende maatregelen worden versterkt om de verspreiding van het virus weer onder controle te krijgen en terug te keren naar een beheersbare situatie.\n3. Ernstig. Hard ingrijpen is noodzakelijk om verdere escalatie te voorkomen en terug te keren naar een beheersbare situatie. Het aantal nieuwe besmettingen neemt snel toe. Intensief maatwerk is nodig om kwetsbare groepen te beschermen. Het bron- en contactonderzoek is niet meer effectief, waardoor het zicht op de verspreiding afneemt. Maatregelen worden onvoldoende nageleefd. De zorgcapaciteit is onvoldoende. Maatregelen zijn erop gericht om (regionale) overbelasting van de zorg te voorkomen, kwetsbaren te beschermen en weer zicht op de verspreiding van het virus te krijgen.\n4. Zeer ernstig. Strenge, landelijke maatregelen zijn noodzakelijk om verdere escalatie te voorkomen en terug te keren naar een beheersbare situatie (waakzaam). Er zijn zeer veel mensen besmettelijk en het dagelijks aantal nieuwe besmettingen is hoog. Het bron- en contactonderzoek is niet meer effectief, waardoor het zicht op de verspreiding van het virus beperkt is. Maatregelen worden onvoldoende nageleefd. De regionale zorgcapaciteit is onvoldoende en een deel van de reguliere zorg is al afgeschaald. Maatregelen zijn erop gericht om landelijk en regionaal overbelasting van de zorg te voorkomen, kwetsbaren te beschermen en het virus weer maximaal te controleren."
+    "toelichting": "",
+    "paragraaf": "Iedere week wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. Dan beoordelen het Rijk, de GGD’en, het RIVM en de veiligheidsregio’s samen de situatie. De minister van VWS stelt vervolgens vast op welk risiconiveau een regio zit. Moeten we waakzaam zijn (niveau 1), is de situatie zorgelijk (niveau 2),is de situatie  ernstig (niveau 3), of is de situatie zelfs zeer ernstig te noemen (niveau 4)?\n\nOp basis van het risiconiveau nemen het Rijk en/of de veiligheidsregio passende maatregelen. Maatregelen zijn afhankelijk van de lokale situatie en kunnen daarom tussen regio’s verschillen.",
+    "vragen": [
+      {
+        "vraag": "Wat bepaalt het risiconiveau van een regio?",
+        "antwoord": "In welk risiconiveau een regio zit, wordt bepaald door te kijken naar de situatie van een regio, die van de omliggende regio’s en de situatie in de rest van het land. Dit gebeurt op basis van informatie van het coronadashboard, het weekrapport van het RIVM, de duiding van de GGD’en en de duiding van de veiligheidsregio’s.\n\nVoor het risiconiveau van een regio wordt gelet op een aantal aspecten, bijvoorbeeld:\n\n- Hoe snel neemt het aantal nieuwe besmettingen toe?\n- Zijn er extra maatregelen nodig voor kwetsbare groepen?\n- Hoe effectief is het bron- en contactonderzoek nog?\n- Hoe goed worden de maatregelen nageleefd?\n- Is er nog voldoende zorg beschikbaar?"
+      },
+      {
+        "vraag": "Wanneer gaat een regio naar ‘zorgelijk’, ‘ernstig’ of ‘zeer ernstig’?",
+        "antwoord": "- Een regio gaat in principe van ‘waakzaam’ naar ‘zorgelijk’ als er in een week meer dan 50 positieve testuitslagen per 100.000 inwoners zijn. Dit komt overeen met het elke dag overschrijden van de signaalwaarde van 7 positieve testuitslagen per 100.000 inwoners. Ook telt mee als meer dan 5 procent van de afgenomen testen positief is.\n- Een regio gaat in principe van ‘zorgelijk’ naar ‘ernstig’ als er in een week meer dan 150 positieve testuitslagen per 100.000 inwoners zijn. Of als meer dan 10 procent van de afgenomen testen positief is.\n- Een regio gaat in principe over van ‘ernstig’ naar ‘zeer ernstig’ als er meer dan 250 positieve testuitslagen per 100.000 inwoners zijn gedurende een week. Als in meerdere regio’s de situatie zeer ernstig is, gelden de zwaarste maatregelen voor het hele land. \n\nElke maandag berekent het RIVM welke regio’s hieraan voldoen. In de dagen erna wordt dieper in de situatie in deze regio’s gedoken. Als de situatie inderdaad zorgelijk of ernstig is, kan de minister van VWS (Hugo de Jonge) besluiten een regio op een hoger risiconiveau te zetten. Bovenstaande criteria zijn dus bedoeld als ‘leidraad’. Ook wanneer een regio nog niet de grenswaarden bereikt heeft om op te schalen, kan op basis van de context en duiding besloten worden om een regio op te schalen."
+      },
+      {
+        "vraag": "Wanneer kan een regio terug naar een lager risiconiveau?",
+        "antwoord": "Bij het bepalen of een regio terug kan naar een lager risiconiveau wordt grote voorzichtigheid betracht. Naast het aantal nieuwe besmettingen wordt gekeken of de capaciteit in de zorg dit toelaat. Ook als het aantal nieuwe besmettingen afneemt kan de zorg immers nog te maken hebben met een groot aantal patiënten die nog herstellende zijn van corona. Daarbij moet ook het zorgpersoneel de kans krijgen om op adem te komen. Voorkomen moet worden dat het virus zich weer snel verspreidt en de zorg overvraagd wordt."
+      },
+      {
+        "vraag": "Wat betekenen de vier risiconiveaus?",
+        "antwoord": "1. Waakzaam. De situatie is beheersbaar. Het aantal nieuwe besmettingen is laag. Kwetsbare groepen dienen alert te zijn. Het bron-en contactonderzoek is overwegend effectief. Maatregelen worden voldoende nageleefd en zijn te handhaven. Er is voldoende zorgcapaciteit. Aanvullende maatregelen zijn erop gericht om de bestaande aanpak beter te laten functioneren.\n2. Zorgelijk. De situatie ontwikkelt zich negatief. Het aantal nieuwe besmettingen neemt toe. Maatwerk is nodig om kwetsbare groepen te beschermen. Als de situatie voortduurt, wordt het bron- en contactonderzoek ineffectief. Maatregelen worden onvoldoende nageleefd. De druk op de zorgcapaciteit neemt toe. De bestaande aanpak moet met aanvullende maatregelen worden versterkt om de verspreiding van het virus weer onder controle te krijgen en terug te keren naar een beheersbare situatie.\n3. Ernstig. Hard ingrijpen is noodzakelijk om verdere escalatie te voorkomen en terug te keren naar een beheersbare situatie. Het aantal nieuwe besmettingen neemt snel toe. Intensief maatwerk is nodig om kwetsbare groepen te beschermen. Het bron- en contactonderzoek is niet meer effectief, waardoor het zicht op de verspreiding afneemt. Maatregelen worden onvoldoende nageleefd. De zorgcapaciteit is onvoldoende. Maatregelen zijn erop gericht om (regionale) overbelasting van de zorg te voorkomen, kwetsbaren te beschermen en weer zicht op de verspreiding van het virus te krijgen.\n4. Zeer ernstig. Strenge, landelijke maatregelen zijn noodzakelijk om verdere escalatie te voorkomen en terug te keren naar een beheersbare situatie (waakzaam). Er zijn zeer veel mensen besmettelijk en het dagelijks aantal nieuwe besmettingen is hoog. Het bron- en contactonderzoek is niet meer effectief, waardoor het zicht op de verspreiding van het virus beperkt is. Maatregelen worden onvoldoende nageleefd. De regionale zorgcapaciteit is onvoldoende en een deel van de reguliere zorg is al afgeschaald. Maatregelen zijn erop gericht om landelijk en regionaal overbelasting van de zorg te voorkomen, kwetsbaren te beschermen en het virus weer maximaal te controleren."
+      },
+      {
+        "vraag": "",
+        "antwoord": ""
+      },
+      {
+        "vraag": "",
+        "antwoord": ""
+      },
+      {
+        "vraag": "",
+        "antwoord": ""
+      },
+      {
+        "vraag": "",
+        "antwoord": ""
+      },
+      {
+        "vraag": "",
+        "antwoord": ""
+      },
+      {
+        "vraag": "",
+        "antwoord": ""
+      }
+    ]
   },
   "over_risiconiveaus_metadata": {
     "title": "Risiconiveaus Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
@@ -1304,7 +1373,7 @@
   "veelgestelde_vragen_metadata": {
     "title": "Veelgestelde vragen | Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
     "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
-    "url": "https://coronadashboard.rijksoverheid.nl/veelgestelde-vragen"
+    "url": "https://coronadashboard.government.nl/veelgestelde-vragen"
   },
   "waarde_annotaties": {
     "riool_normalized": "x100 miljard"
@@ -1332,7 +1401,14 @@
       "trend_lager": "lager",
       "trend_gelijk": "gelijk"
     },
-    "titel_kpi": "Percentage mensen dat het eens is met de gedragsregels en het percentage dat zich vervolgens ook zelf aan de gedragsregels houdt."
+    "titel_kpi": "Percentage mensen dat het eens is met de gedragsregels en het percentage dat zich vervolgens ook zelf aan de gedragsregels houdt.",
+    "kpi_titel": "Percentage mensen dat het eens is met de gedragsregels en het percentage dat zich vervolgens ook zelf aan de gedragsregels houdt.",
+    "meer_onderzoeksresultaten": {
+      "title": "Meer onderzoeksresultaten",
+      "description": "Bekijk voor meer gedetailleerde resultaten het volledige onderzoek op de website van de RIVM.",
+      "linkLabel": "Bekijk het gehele onderzoek op de website van de RIVM",
+      "linkHref": "https://www.rivm.nl/gedragsonderzoek/trendonderzoek"
+    }
   },
   "nl_gedrag": {
     "metadata": {
@@ -1349,19 +1425,19 @@
     "datums": "Enquête is afgenomen tussen {{weekStart}} en {{weekEnd}}. Wordt 3-wekelijks bijgewerkt.",
     "bron": {
       "text": "RIVM",
-      "href": "https://data.rivm.nl/covid-19/COVID-19_gedrag.html"
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/8a72d78a-fcf8-4882-b0ab-cd594961a267?tab=relations"
     },
     "onderzoek_uitleg": {
       "titel": "Onderzoek onder de Nederlandse bevolking",
-      "toelichting": "Elke drie weken wordt een enquête gehouden onder een representatieve steekproef van de Nederlandse bevolking. Deelnemers aan deze enquête beantwoorden allemaal dezelfde vragen over de gedragsregels die de overheid opstelt vanwege corona. In hoeverre steunen ze de regels en in hoeverre leven ze de regels ook na?. Dit onderzoek wordt gecoördineerd en gepubliceerd door RIVM. De praktische uitvoering wordt verzorgd door Kantar Public. "
+      "toelichting": "Elke drie weken wordt een enquête gehouden onder een representatieve steekproef van de Nederlandse bevolking. Deelnemers aan deze enquête beantwoorden allemaal dezelfde vragen over de gedragsregels die de overheid opstelt vanwege corona. In hoeverre steunen ze de regels en in hoeverre leven ze de regels ook na? Dit onderzoek wordt gecoördineerd en gepubliceerd door RIVM. De praktische uitvoering wordt verzorgd door Kantar Public. "
     },
     "kpi": {
       "aantal_respondenten": {
         "titel": "Aantal respondenten",
-        "toelichting": "Aantal mensen dat heeft deelgenomen aan het onderzoek van 20 t/m 26 oktober.",
+        "toelichting": "Aantal mensen dat heeft deelgenomen aan het onderzoek.",
         "bron": {
           "text": "RIVM",
-          "href": "https://data.rivm.nl/covid-19/COVID-19_gedrag.html"
+          "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/8a72d78a-fcf8-4882-b0ab-cd594961a267?tab=relations"
         }
       }
     },
@@ -1380,24 +1456,28 @@
       "voetnoot": {
         "compliance": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft de gedragsregels te volgen in zijn/haar dagelijks leven \n* Als er een verschil is met de vorige meting kan dat met 95% zekerheid gezegd worden.",
         "support": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft achter de gedragsregel te staan.\n* Als er een verschil is met de vorige meting kan dat met 95% zekerheid gezegd worden."
+      },
+      "voetnoot_asterisk": {
+        "compliance": "",
+        "support": ""
       }
     },
     "basisregels_over_tijd": {
       "title": "Basisregels over tijd",
       "intro": {
-        "compliance": "Deze grafiek toont veranderingen in de loop van de tijd van het percentage van de respondenten dat aangeeft de gedragsregel te volgen in zijn/haar dagelijks leven. ",
+        "compliance": "Deze grafiek toont veranderingen in de loop van de tijd van het percentage van de respondenten dat aangeeft de gedragsregel te volgen in zijn/haar dagelijks leven.",
         "support": "Deze grafiek toont veranderingen in de loop van de tijd van het percentage van de respondenten dat aangeeft achter de gedragsregel te staan."
       }
     },
     "reference": {
-      "href": "/verantwoording",
+      "href": "https://coronadashboard.rijksoverheid.nl/verantwoording#gedrag",
       "text": "Lees meer in de cijferverantwoording."
     },
     "bronnen": {
       "rivm": {
-        "download": "",
-        "text": "Naam bron",
-        "href": "link naar de bron"
+        "download": "https://data.rivm.nl/covid-19/COVID-19_gedrag.csv",
+        "text": "RIVM",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/8a72d78a-fcf8-4882-b0ab-cd594961a267?tab=relations"
       }
     }
   },
@@ -1416,19 +1496,19 @@
     "datums": "Enquête is afgenomen tussen {{weekStart}} en {{weekEnd}}. Wordt 3-wekelijks bijgewerkt.",
     "bron": {
       "text": "RIVM",
-      "href": "https://data.rivm.nl/covid-19/COVID-19_gedrag.html"
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/8a72d78a-fcf8-4882-b0ab-cd594961a267?tab=relations"
     },
     "onderzoek_uitleg": {
       "titel": "Onderzoek onder de Nederlandse bevolking",
-      "toelichting": "Elke drie weken wordt een enquête gehouden onder een representatieve steekproef van de Nederlandse bevolking. Deelnemers aan deze enquête beantwoorden allemaal dezelfde vragen over de gedragsregels die de overheid opstelt vanwege corona. In hoeverre steunen ze de regels en in hoeverre leven ze de regels ook na?. Dit onderzoek wordt gecoördineerd en gepubliceerd door RIVM. De praktische uitvoering wordt verzorgd door Kantar Public. "
+      "toelichting": "Elke drie weken wordt een enquête gehouden onder een representatieve steekproef van de Nederlandse bevolking. Deelnemers aan deze enquête beantwoorden allemaal dezelfde vragen over de gedragsregels die de overheid opstelt vanwege corona. In hoeverre steunen ze de regels en in hoeverre leven ze de regels ook na? Dit onderzoek wordt gecoördineerd en gepubliceerd door RIVM. De praktische uitvoering wordt verzorgd door Kantar Public. "
     },
     "kpi": {
       "aantal_respondenten": {
         "titel": "Aantal respondenten",
-        "toelichting": "Aantal mensen dat heeft deelgenomen aan het onderzoek van 20 t/m 26 oktober.",
+        "toelichting": "Aantal mensen dat heeft deelgenomen aan het onderzoek.",
         "bron": {
           "text": "RIVM",
-          "href": "https://data.rivm.nl/covid-19/COVID-19_gedrag.html"
+          "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/8a72d78a-fcf8-4882-b0ab-cd594961a267?tab=relations"
         }
       }
     },
@@ -1441,6 +1521,10 @@
       "voetnoot": {
         "compliance": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft de gedragsregels te volgen in zijn/haar dagelijks leven \n* Als er een verschil is met de vorige meting kan dat met 95% zekerheid gezegd worden.",
         "support": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft achter de gedragsregel te staan.\n* Als er een verschil is met de vorige meting kan dat met 95% zekerheid gezegd worden."
+      },
+      "voetnoot_asterisk": {
+        "compliance": "",
+        "support": ""
       }
     },
     "basisregels_over_tijd": {
@@ -1451,14 +1535,14 @@
       }
     },
     "reference": {
-      "href": "/verantwoording",
+      "href": "https://coronadashboard.rijksoverheid.nl/verantwoording#gedrag",
       "text": "Lees meer in de cijferverantwoording."
     },
     "bronnen": {
       "rivm": {
-        "download": "",
-        "text": "Naam bron",
-        "href": "link naar de bron"
+        "download": "https://data.rivm.nl/covid-19/COVID-19_gedrag.csv",
+        "text": "RIVM",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/8a72d78a-fcf8-4882-b0ab-cd594961a267?tab=relations"
       }
     }
   },
@@ -1475,5 +1559,398 @@
         "meervoud": "weken"
       }
     }
+  },
+  "aria_labels": {
+    "pagina_keuze": "Landelijk, regio of gemeente menu",
+    "footer_keuze": "Pagina menu",
+    "metriek_navigatie": "Metrieken per categorie menu",
+    "skip_links": "Snelkoppeling menu"
+  },
+  "infected_age_groups": {
+    "title": "Verdeling naar leeftijd",
+    "description": "De blauwe rechterbalken in deze grafiek laten zien tot welke leeftijdsgroep positief geteste personen behoren. De grijze linkerbalken tonen hoe groot elke leeftijdsgroep is ten opzichte van de hele Nederlandse bevolking. De blauwe en grijze balken laten samen zien of leeftijdsgroepen naar verhouding meer of minder positief geteste personen hebben. Bijvoorbeeld: Van alle positief geteste mensen is {{infectedPercentage}} tussen de {{ageGroupRange}} jaar (blauwe balk). Van alle Nederlanders is {{ageGroupPercentage}} tussen de {{ageGroupRange}} jaar (grijze balk). De grafiek wordt dagelijks bijgewerkt en gaat alleen over de meest recent gemelde gevallen.",
+    "graph": {
+      "age_group_percentage_title": "Verdeling leeftijdsgroepen in Nederland",
+      "age_group_percentage_tooltip": "van de bevolking is {{ageGroupRange}} jaar",
+      "infected_percentage_title": "Positieve testen per leeftijdsgroep",
+      "infected_percentage_tooltip": "van het aantal positief geteste mensen is {{ageGroupRange}} jaar",
+      "age_group_range_tooltip": "{{ageGroupRange}} jaar",
+      "accessibility_description": "Grafiek met percentages voor de verdeling van de bevolking en de verdeling van positief geteste leeftijdsgroepen."
+    }
+  },
+  "gehandicaptenzorg_besmette_locaties": {
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "titel": "Gehandicaptenzorg – Besmette locaties",
+    "pagina_toelichting": "Dit getal is een berekening van het aantal locaties voor gehandicaptenzorg waar op dit moment sprake is van tenminste één COVID-19 besmetting. Lees meer in de cijferverantwoording.",
+    "barscale_titel": "Aantal nieuwe locaties per dag",
+    "barscale_toelichting": "Het aantal nieuwe besmette locaties voor gehandicaptenzorg waarbij gisteren tenminste één bewoner positief is getest. Een locatie telt mee als “nieuwe locatie” wanneer er tenminste 28 dagen (dit is twee keer de incubatietijd) geen nieuwe patienten besmet zijn geweest.",
+    "kpi_titel": "Totaal aantal besmette locaties",
+    "kpi_toelichting": "Het aantal besmette locaties is het aantal locaties voor gehandicaptenzorg waar de afgelopen 28 dagen sprake is geweest van tenminste één vastgestelde COVID-19 besmetting bij een bewoner op basis van een positieve test. Het percentage geeft aan op hoeveel locaties een besmetting is ten opzichte van het totaal aantal locaties voor gehandicaptenzorg in Nederland.",
+    "linechart_titel": "Totaal aantal besmette locaties over tijd",
+    "barscale_screenreader_text": "{{value}} nieuwe locaties waarbij tenminste één bewoner positief getest is, per dag.",
+    "chloropleth_legenda": {
+      "titel": "Percentage besmette locaties",
+      "geen_meldingen": "Geen meldingen"
+    },
+    "map_titel": "Verdeling besmette locaties in Nederland",
+    "map_toelichting": "Deze kaart toont het aantal locaties voor gehandicaptenzorg waar in de afgelopen 28 dagen minstens één (nieuwe) vastgestelde COVID-19 besmetting op basis van een positieve test is gemeld.",
+    "metadata": {
+      "title": "Besmette gehandicaptenzorglocaties | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Landelijk overzicht van gehandicaptenzorglocaties waar tenminste één COVID-19 besmetting is vastgesteld."
+    },
+    "titel_sidebar": "Gehandicaptenzorg",
+    "titel_kpi": "Aantal besmette locaties",
+    "reference": {
+      "href": "/verantwoording#gehandicaptenzorg",
+      "text": "Lees meer in de cijferverantwoording."
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "text": "RIVM"
+      }
+    }
+  },
+  "gehandicaptenzorg_positief_geteste_personen": {
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "titel": "Gehandicaptenzorg – positief geteste bewoners",
+    "barscale_titel": "Aantal positief geteste bewoners van gehandicapteninstellingen per dag",
+    "extra_uitleg": "Het aantal bewoners van een instelling voor gehandicaptenzorg waarvan dagelijks is gemeld dat ze positief getest zijn op COVID-19.",
+    "pagina_toelichting": "Bewoners van een instelling voor gehandicaptenzorg zijn vaak extra kwetsbaar bij een besmetting met het coronavirus. GGD’en houden daarom sinds 1 juli  bij of een positief geteste persoon in een instelling voor gehandicaptenzorg woont. Zo kunnen maatregelen worden genomen wanneer het aantal besmettingen in instellingen toeneemt. Lees meer in de cijferverantwoording.",
+    "linechart_titel": "Verloop over tijd",
+    "barscale_screenreader_text": "{{value}} positief geteste bewoners.",
+    "chloropleth_legenda": {
+      "titel": "Aantal per 100.000 inwoners",
+      "geen_meldingen": "Geen meldingen"
+    },
+    "map_titel": "Verdeling positief geteste bewoners in Nederland",
+    "map_toelichting": "Deze kaarten laten zien van hoeveel bewoners gisteren is gemeld dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
+    "metadata": {
+      "title": "Positief geteste bewoners gehandicaptenzorglocaties | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Landelijk overzicht van het aantal bewoners van gehandicaptenzorglocaties die positief getest zijn en COVID-19 hebben."
+    },
+    "titel_kpi": "Aantal positief geteste bewoners van gehandicapteninstellingen per dag",
+    "reference": {
+      "href": "/verantwoording#gehandicaptenzorg",
+      "text": "Lees meer in de cijferverantwoording."
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "text": "RIVM"
+      }
+    },
+    "kpi_titel": "Aantal positief geteste bewoners van gehandicapteninstellingen per dag"
+  },
+  "gehandicaptenzorg_oversterfte": {
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "titel": "Gehandicaptenzorg – Sterfte",
+    "pagina_toelichting": "Aantal bewoners van instellingen voor gehandicaptenzorg overleden aan COVID-19.",
+    "barscale_titel": "Aantal overleden bewoners",
+    "barscale_screenreader_text": "{{value}} overleden bewoners.",
+    "extra_uitleg": "Dit getal is een berekening van het aantal bewoners van instellingen voor gehandicaptenzorg dat in Nederland is overleden aan de gevolgen van het coronavirus, sinds 27 februari 2020. ",
+    "linechart_titel": "Verloop over tijd",
+    "map_titel": "Gehandicaptenzorg – sterfte",
+    "map_toelichting": "Deze kaarten laten zien hoe de oversterfte in gehandicaptenzorglocatie is in Nederland per dag.",
+    "metadata": {
+      "title": "Overleden bewoners gehandicaptenzorglocaties | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Landelijk aantal gemelde gehandicaptenzorglocatiebewoners dat in Nederland overlijdt aan de gevolgen van het coronavirus."
+    },
+    "titel_kpi": "Aantal overleden personen",
+    "reference": {
+      "href": "/verantwoording#gehandicaptenzorg",
+      "text": "Lees meer in de cijferverantwoording."
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "text": "RIVM"
+      }
+    },
+    "kpi_titel": "Aantal overleden personen"
+  },
+  "veiligheidsregio_gehandicaptenzorg_oversterfte": {
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "bron": {
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+      "text": "RIVM"
+    },
+    "titel": "Gehandicaptenzorg – Sterfte in {{safetyRegion}}",
+    "pagina_toelichting": "Aantal bewoners van instellingen voor gehandicaptenzorg in deze regio die zijn overleden met een vastgestelde COVID-19 besmetting, per dag.",
+    "barscale_titel": "Aantal overleden bewoners",
+    "barscale_screenreader_text": "{{value}} overleden bewoners.",
+    "extra_uitleg": "Berekening van het aantal bewoners van instellingen voor gehandicaptenzorg dat gisteren in deze regio is overleden aan de gevolgen van het coronavirus.",
+    "linechart_titel": "Verloop over tijd",
+    "map_titel": "Gehandicaptenzorg oversterfte in Nederland",
+    "map_toelichting": "Deze kaarten laten zien hoe de oversterfte in gehandicaptenzorglocaties is in Nederland per dag.",
+    "titel_sidebar": "Sterfte per dag",
+    "metadata": {
+      "title": "Overleden bewoners gehandicaptenzorglocaties in {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Aantal gemelde gehandicaptenzorglocatiebewoners dat in veiligheidsregio {{safetyRegionName}} overlijdt aan de gevolgen van het coronavirus."
+    },
+    "reference": {
+      "href": "/verantwoording#gehandicaptenzorg",
+      "text": "Lees meer in de cijferverantwoording."
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "text": "RIVM"
+      }
+    }
+  },
+  "veiligheidsregio_gehandicaptenzorg_besmette_locaties": {
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "titel": "Gehandicaptenzorg – besmette locaties in {{safetyRegion}}",
+    "pagina_toelichting": "Dit getal is een berekening van het aantal nieuwe locaties voor gehandicaptenzorg in deze regio waar sprake is van tenminste één COVID-19 besmetting op basis van een positieve test. Lees meer in de cijferverantwoording.",
+    "barscale_titel": "Aantal nieuwe locaties per dag",
+    "barscale_toelichting": "Het aantal nieuw besmette locaties waarbij tenminste één bewoners positief is getest. Een locatie telt mee als “nieuwe locatie” wanneer er tenminste 28 dagen (dit is twee keer de incubatietijd) geen nieuwe patienten besmet zijn geweest.",
+    "kpi_titel": "Totaal aantal besmette locaties",
+    "kpi_toelichting": "Het aantal besmette locaties is het aantal locaties voor gehandicaptenzorg waar de afgelopen 28 dagen sprake is geweest van tenminste één vastgestelde COVID-19 besmetting op basis van een positieve test. Het percentage geeft aan op hoeveel locaties een besmetting is ten opzichte van het totaal aantal locaties voor gehandicaptenzorg in Nederland.",
+    "linechart_titel": "Totaal aantal besmette locaties over tijd",
+    "barscale_screenreader_text": "{{value}} nieuwe locaties waarbij tenminste één bewoner positief getest is, per dag.",
+    "metadata": {
+      "title": "Besmette gehandicaptenzorglocaties in {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Overzicht van gehandicaptenzorglocaties in veiligheidsregio {{safetyRegionName}} waar tenminste één COVID-19 besmetting is vastgesteld."
+    },
+    "titel_sidebar": "Besmettelijke locaties",
+    "reference": {
+      "href": "/verantwoording#gehandicaptenzorg",
+      "text": "Lees meer in de cijferverantwoording."
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "text": "RIVM"
+      }
+    }
+  },
+  "veiligheidsregio_gehandicaptenzorg_positief_geteste_personen": {
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "titel": "Gehandicaptenzorg - positief geteste bewoners in {{safetyRegion}}",
+    "barscale_titel": "Aantal positief geteste bewoners in verpleeghuizen per dag",
+    "extra_uitleg": "Het aantal bewoners van een instelling voor gehandicaptenzorg in deze regio waarvan gisteren is gemeld dat ze positief getest zijn op COVID-19.",
+    "pagina_toelichting": "Bewoners van een instelling voor gehandicaptenzorg zijn vaak extra kwetsbaar bij een besmetting met het coronavirus. GGD’en houden daarom bij waneer een bewoner van een instelling positief test op COVID-19. Zo kunnen maatregelen worden genomen wanneer het aantal besmettingen in instellingen toeneemt. Lees meer in de cijferverantwoording. ",
+    "linechart_titel": "Verloop over tijd",
+    "barscale_screenreader_text": "{{value}} positief geteste bewoners.",
+    "titel_sidebar": "Positief geteste bewoners",
+    "chloropleth_legenda": {
+      "titel": "Aantal per 100.000 inwoners",
+      "geen_meldingen": "Geen meldingen"
+    },
+    "map_titel": "Verdeling positief geteste mensen in Nederland",
+    "map_toelichting": "Deze kaarten laten zien van hoeveel mensen gisteren is gemeld dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
+    "metadata": {
+      "title": "Positief geteste bewoners gehandicaptenzorglocaties in {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Overzicht aantal bewoners van gehandicaptenzorglocaties in veiligheidsregio {{safetyRegionName}} waarbij COVID-19-besmetting is vastgesteld."
+    },
+    "reference": {
+      "href": "/verantwoording#gehandicaptenzorg",
+      "text": "Lees meer in de cijferverantwoording."
+    },
+    "bronnen": {
+      "rivm": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "text": "RIVM"
+      }
+    },
+    "kpi_titel": "Aantal positief geteste bewoners van gehandicapteninstellingen per dag"
+  },
+  "thuiswonende_ouderen": {
+    "titel_sidebar": "Thuiswonende 70-plussers",
+    "titel_kpi": "Aantal positief geteste mensen",
+    "metadata": {
+      "title": "Thuiswonende 70-plussers | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Thuiswonende 70-plussers"
+    },
+    "section_positive_tested": {
+      "title": "Thuiswonende 70-plussers",
+      "description": "Personen van 70 jaar of ouder zijn extra kwetsbaar bij een besmetting met het coronavirus. Door zicht te houden op het aantal besmettingen onder deze groep kunnen de juiste maatregelen genomen worden om het virus in te dammen. Het gaat hierbij om zelfstandig wonenden. Personen van 70 jaar of ouder die zijn opgenomen in een verpleeghuis of instelling voor gehandicaptenzorg worden op dit dashboard in die groepen meegeteld. Lees meer in de cijferverantwoording.",
+      "reference": {
+        "href": "/verantwoording#thuiswonende-70-plussers",
+        "text": "Lees meer in de cijferverantwoording."
+      },
+      "bronnen": {
+        "rivm": {
+          "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/40508e17-7296-4f39-ad25-8ddd0c904087",
+          "text": "RIVM",
+          "download": "https://data.rivm.nl/covid-19/COVID-19_thuiswonend_70plus.csv"
+        }
+      },
+      "kpi_daily_title": "Aantal positief geteste thuiswonende 70-plussers",
+      "kpi_daily_description": "Het aantal thuiswonenden van 70 jaar of ouder waarvan gisteren is gemeld dat ze positief zijn getest op COVID-19.",
+      "kpi_daily_per_100k_title": "Aantal positief geteste thuiswonende 70-plussers per dag, per 100.000",
+      "kpi_daily_per_100k_description": "Dit getal laat zien van hoeveel thuiswonende personen van 70 jaar of ouder gisteren is gemeld dat ze positief zijn getest op COVID-19,  per 100.000 thuiswonende ouderen . Deze berekening maakt het mogelijk om regio’s beter met elkaar te vergelijken.",
+      "line_chart_daily_title": "Nieuwe besmettingen onder thuiswonenden van 70 jaar of ouder: verloop over tijd",
+      "choropleth_daily_title": "Verdeling nieuwe besmettingen thuiswonende 70-plussers (per veiligheidsregio)",
+      "choropleth_daily_description": "Deze kaart laat de verdeling zien van het aantal nieuwe besmettingen per dag onder thuiswonende personen van 70 jaar of ouder per 100.000 thuiswonende personen van 70 jaar of ouder, waarvan gisteren is gemeld dat ze positief getest zijn op COVID-19.",
+      "choropleth_daily_legenda": "Aantal per 100.000 thuiswonende 70-plussers",
+      "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt."
+    },
+    "section_deceased": {
+      "title": "Thuiswonende 70-plussers - COVID-19 sterfte",
+      "description": "Aantal thuiswonende personen van 70 jaar of ouder waarvan gisteren is gemeld dat ze zijn overleden aan COVID-19. Lees meer in de cijferverantwoording.",
+      "reference": {
+        "href": "/verantwoording#thuiswonende-70-plussers",
+        "text": "Lees meer in de cijferverantwoording."
+      },
+      "bronnen": {
+        "rivm": {
+          "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/40508e17-7296-4f39-ad25-8ddd0c904087",
+          "text": "RIVM",
+          "download": "https://data.rivm.nl/covid-19/COVID-19_thuiswonend_70plus.csv"
+        }
+      },
+      "kpi_daily_title": "Aantal 70-plussers dat aan COVID-19 is overleden, per dag",
+      "kpi_daily_description": "Aantal thuiswonende ouderen van 70 jaar of ouder waarvan gisteren is gemeld dat ze zijn overleden aan COVID-19.",
+      "line_chart_daily_title": "Dagelijks aantal aan COVID-19 overleden thuiswonende 70-plussers: verloop over tijd",
+      "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt."
+    },
+    "kpi_titel": "Aantal positief geteste mensen"
+  },
+  "veiligheidsregio_thuiswonende_ouderen": {
+    "titel_sidebar": "Thuiswonende 70-plussers",
+    "titel_kpi": "Positief geteste mensen",
+    "metadata": {
+      "title": "Thuiswonende 70-plussers in {{safetyRegion}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Thuiswonende 70-plussers in {{safetyRegion}}."
+    },
+    "section_positive_tested": {
+      "title": "Thuiswonende 70-plussers in {{safetyRegion}} - nieuwe besmettingen",
+      "description": "Personen boven de 70 zijn extra kwetsbaar bij een besmetting met het coronavirus. Door zicht te houden op het aantal besmettingen onder deze groep kunnen de juiste maatregelen genomen worden om het virus in te dammen. Het gaat bij onderstaande cijfers om personen van 70 jaar of ouder die zelfstandig wonen. Personen van 70 of ouder die zijn opgenomen in een verpleeghuis of instelling voor gehandicaptenzorg worden  op dit dashboard alleen in die groepen meegeteld. Lees meer in de cijferverantwoording. ",
+      "reference": {
+        "href": "/verantwoording#thuiswonende-70-plussers",
+        "text": "Lees meer in de cijferverantwoording."
+      },
+      "bronnen": {
+        "rivm": {
+          "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/40508e17-7296-4f39-ad25-8ddd0c904087",
+          "text": "RIVM",
+          "download": "https://data.rivm.nl/covid-19/COVID-19_thuiswonend_70plus.csv"
+        }
+      },
+      "kpi_daily_title": "Aantal positief geteste thuiswonende 70-plussers",
+      "kpi_daily_description": "Het aantal thuiswonenden van 70 jaar of ouder in deze veiligheidsregio waarvan gisteren is gemeld dat ze besmet zijn met COVID-19.",
+      "kpi_daily_per_100k_title": "Aantal positief geteste thuiswonende 70-plussers per dag, per 100.000",
+      "kpi_daily_per_100k_description": "Door te berekenen hoeveel thuiswonende 70-plussers in deze regio dagelijks besmet worden per 100.000 70-plussers is vergelijking met andere regio's mogelijk.",
+      "line_chart_daily_title": "Nieuwe besmettingen onder thuiswonenden van 70 jaar of ouder: verloop over tijd",
+      "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt."
+    },
+    "section_deceased": {
+      "title": "Thuiswonende 70-plussers in {{safetyRegion}} - sterfte",
+      "description": "Aantal thuiswonende personen van 70 jaar of ouder in deze veiligheidsregio die zijn overleden aan COVID-19, per dag.",
+      "reference": {
+        "href": "/verantwoording#thuiswonende-70-plussers",
+        "text": "Lees meer in de cijferverantwoording."
+      },
+      "bronnen": {
+        "rivm": {
+          "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/40508e17-7296-4f39-ad25-8ddd0c904087",
+          "text": "RIVM",
+          "download": "https://data.rivm.nl/covid-19/COVID-19_thuiswonend_70plus.csv"
+        }
+      },
+      "kpi_daily_title": "Aantal 70-plussers overleden aan COVID-19, per dag",
+      "kpi_daily_description": "Aantal thuiswonende personen van 70 jaar of ouder in deze regio waarvan gisteren is gemeld dat ze zijn overleden aan COVID-19",
+      "line_chart_daily_title": "Dagelijks aantal aan COVID-19 overleden thuiswonende 70-plussers: verloop over tijd",
+      "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt."
+    },
+    "kpi_titel": "Aantal positief geteste mensen"
+  },
+  "sterfte": {
+    "titel_sidebar": "Sterfte",
+    "titel_kpi": "Gemeld aantal patiënten overleden aan COVID-19 per dag",
+    "metadata": {
+      "title": "Sterfte | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Aantal overledenen per dag"
+    },
+    "section_deceased_rivm": {
+      "title": "Sterfte",
+      "description": "Deze cijfers laten zien van hoeveel patiënten er aan de GGD gemeld is dat ze zijn overleden aan COVID-19. Het werkelijke aantal patiënten dat is overleden aan COVID-19 is waarschijnlijk hoger, omdat niet alle COVID-19 patiënten getest worden en er geen meldingsplicht geldt voor overlijden aan COVID-19. ",
+      "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+      "bronnen": {
+        "rivm": {
+          "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
+          "text": "RIVM",
+          "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv"
+        }
+      },
+      "reference": {
+        "href": "/verantwoording#sterfte",
+        "text": "Lees meer in de cijferverantwoording."
+      },
+      "kpi_covid_daily_title": "Gemeld aantal patiënten overleden aan COVID-19 per dag",
+      "kpi_covid_daily_description": "Dit getal toont het aantal patiënten waarvan aan de GGD gemeld is dat ze zijn overleden aan COVID-19, per dag. Een deel van de overlijdens is van eerdere dagen, die later zijn doorgegeven.",
+      "kpi_covid_total_title": "Totaal aantal personen overleden aan COVID-19",
+      "kpi_covid_total_description": "Dit getal laat van zien hoeveel personen in totaal is gemeld dat ze zijn overleden aan COVID-19, sinds het begin van de meldingen.",
+      "line_chart_covid_daily_title": "Gemelde aantal patiënten overleden aan COVID-19 over tijd"
+    },
+    "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
+  },
+  "veiligheidsregio_sterfte": {
+    "titel_sidebar": "Sterfte",
+    "titel_kpi": "Gemeld aantal patiënten overleden aan COVID-19 per dag",
+    "metadata": {
+      "title": "Sterfte in {{safetyRegion}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Aantal overledenen per dag in {{safetyRegion}}"
+    },
+    "section_deceased_rivm": {
+      "title": "Sterfte",
+      "description": "Deze cijfers laten zien van hoeveel patiënten er aan de GGD gemeld is dat ze zijn overleden aan/met COVID-19. Het werkelijke aantal patiënten dat is overleden aan/met COVID-19 is waarschijnlijk hoger, omdat niet alle COVID-19 patiënten getest worden en er geen meldingsplicht geldt voor overlijden aan/met COVID-19. ",
+      "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+      "bronnen": {
+        "rivm": {
+          "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
+          "text": "RIVM",
+          "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv"
+        }
+      },
+      "reference": {
+        "href": "/verantwoording#sterfte",
+        "text": "Lees meer in de cijferverantwoording."
+      },
+      "kpi_covid_daily_title": "Gemeld aantal patiënten overleden aan COVID-19 per dag",
+      "kpi_covid_daily_description": "Dit getal toont het aantal patiënten waarvan aan de GGD gemeld is dat ze zijn overleden aan COVID-19, per dag. Een deel van de overlijdens is van eerdere dagen, die later zijn doorgegeven.",
+      "kpi_covid_total_title": "Totaal aantal personen overleden aan/met COVID-19",
+      "kpi_covid_total_description": "Dit getal laat van zien hoeveel personen in totaal is gemeld dat ze zijn overleden aan/met COVID-19, sinds het begin van de meldingen.",
+      "line_chart_covid_daily_title": "Gemelde aantal patiënten overleden aan/met COVID-19 over tijd"
+    },
+    "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
+  },
+  "section_sterftemonitor": {
+    "title": "Sterftemonitor",
+    "description": "Het Centraal Bureau voor de Statistiek (CBS) publiceert wekelijks het totaal aantal overleden mensen in Nederland en vergelijkt dit aantal met het verwacht aantal overlijdens gecorrigeerd voor koude- of hittegolven, uitbraken en epidemieën. Er is sprake van oversterfte indien meer mensen overlijden dan verwacht. Deze grafiek geeft mogelijk een completer beeld van sterfte door COVID-19 dan de door de GGD’en gemelde COVID-19 sterfte, omdat niet alle mensen die overlijden aan COVID-19 getest zijn op COVID-19. ",
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "bronnen": {
+      "cbs": {
+        "href": "https://www.cbs.nl/nl-nl/cijfers/detail/70895ned",
+        "text": "CBS",
+        "download": "https://opendata.cbs.nl/ODataApi/odata/70895ned/TypedDataSet?$filter=((Geslacht eq '1100')) and ((LeeftijdOp31December eq '10000')) and (substringof('W', Perioden) eq true)&$select=Perioden, Overledenen_1"
+      }
+    },
+    "reference": {
+      "href": "/verantwoording#sterftemonitor-CBS",
+      "text": "Lees meer in de cijferverantwoording."
+    },
+    "cbs_message": {
+      "title": "CBS: Sterfte in week 48 toegenomen",
+      "published_text": "Publicatiedatum: vrijdag 4 december",
+      "message": "In week 48 (23 tot en met 29 november 2020) overleden naar schatting 3 450 mensen. Dat zijn er ongeveer 150 meer dan een week eerder, toen 3 293 mensen overleden. In de winter neemt het aantal overledenen altijd toe. De sterfte in week 48 is echter nog ruim 400 hoger dan verwacht voor deze periode. Dat meldt het CBS op basis van de voorlopige sterftecijfers per week.",
+      "link": {
+        "href": "https://www.cbs.nl/nl-nl/nieuws/2020/49/sterfte-in-week-48-toegenomen",
+        "text": "Website CBS"
+      }
+    },
+    "deceased_monitor_chart_title": "Totaal aantal overledenen per week",
+    "deceased_monitor_chart_description": "Deze grafiek laat zien hoeveel mensen er in totaal wekelijks overleden zijn in Nederland. Het aantal daadwerkelijk overleden mensen wordt vergeleken met het aantal overlijdens dat wordt verwacht op basis van voorgaande jaren. De lichtblauwe lijn en omliggende marge tonen de sterfte die op dat moment in het jaar wordt verwacht, de donkerblauwe lijn toont de sterfte zoals deze heeft plaatsgevonden.",
+    "deceased_monitor_chart_legenda_registered": "Daadwerkelijk aantal overledenen",
+    "deceased_monitor_chart_legenda_expected": "Verwacht aantal overledenen",
+    "deceased_monitor_chart_legenda_expected_margin": "Boven en ondergrens van verwacht aantal overledenen"
   }
 }
