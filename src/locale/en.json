@@ -1642,7 +1642,7 @@
         "text": "RIVM"
       }
     },
-    "kpi_titel": ""
+    "kpi_titel": "Daily number of disabililty care home residents who were reported as testing positive for COVID-19"
   },
   "gehandicaptenzorg_oversterfte": {
     "datums": "Latest values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -1760,7 +1760,7 @@
         "text": "RIVM"
       }
     },
-    "kpi_titel": ""
+    "kpi_titel": "Daily number of disabililty care home residents who were reported as testing positive for COVID-19"
   },
   "thuiswonende_ouderen": {
     "titel_sidebar": "People over 70 living at home",
