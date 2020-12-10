@@ -1012,7 +1012,7 @@
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
     "kpi_titel": "Number of confirmed cases",
     "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.",
-    "map_titel": "Distribution of confirmed cases in {{municipality}}’s safety region",
+    "map_titel": "Distribution of confirmed cases in {{municipality}}",
     "map_toelichting": "This map shows how many confirmed cases of COVID-19 were reported yesterday in these municipalities per 100,000 inhabitants.",
     "linechart_titel": "Progression over time",
     "linechart_toelichting": "This graph shows how many confirmed cases of COVID-19 were reported in the selected period in this municipality per 100,000 inhabitants.",
@@ -1149,7 +1149,7 @@
       "medisch": "Medical indicators",
       "overig": "Early warning",
       "verpleeghuis": "Nursing homes",
-      "besmettingen": "",
+      "besmettingen": "Infections",
       "ziekenhuizen": "Hospitals",
       "vroege_signalen": "Early indicators"
     }
