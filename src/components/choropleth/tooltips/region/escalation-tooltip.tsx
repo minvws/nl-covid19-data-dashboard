@@ -16,7 +16,7 @@ export const escalationTooltip = (selectHandler: RegionSelectionHandler) => {
   return (context: SafetyRegionProperties & EscalationLevels): ReactNode => {
     const level = context.escalation_level as EscalationLevel;
 
-    const onSelect = (event: any) => {
+    const onSelect = (event: React.MouseEvent<HTMLElement>) => {
       event.stopPropagation();
       selectHandler(context);
     };

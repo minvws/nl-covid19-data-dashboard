@@ -20,7 +20,8 @@ export function useOnClickOutside<T extends RefObject<Element>>(
         while (el && !el.contains && el !== document.body) {
           el = el.parentNode;
         }
-        el?.contains(event.target as Node);
+
+        return el?.contains(event.target as Node);
       });
 
       if (!clickedInsideRef) {
