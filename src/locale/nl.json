@@ -685,7 +685,7 @@
       },
       {
         "cijfer": "Thuiswonende 70-plussers",
-        "verantwoording": "De informatie over thuiswonende 70-plussers wordt dagelijks beschikbaar gesteld via [open data](https://data.rivm.nl/covid-19/COVID-19_thuiswonend_70plus.csv) door het RIVM. Zie [hier](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/40508e17-7296-4f39-ad25-8ddd0c904087) de beschrijving van deze dataset. In de aangeleverde gegevens is soms de veiligheidsregio onbekend. Dit heeft als gevolg dat het totaal van de weergegeven cijfers op veiligheidsregio niveau minder kan zijn dan wat er op landelijk niveau wordt getoond. Het aantal overleden personen wordt getoond op basis van de datum van overlijden. De overlijdensdatum is echter niet altijd bekend. Als de datum niet bekend is, dan zijn die gevallen niet op het dashboard zichtbaar.\n\nHet RIVM baseert zich op testresultaten en sterfgevallen zoals door de GGD’en bij het RIVM gemeld. Bij het melden van een positieve testuitslag door de GGD wordt (onder meer) geregistreerd hoe oud iemand is en of de persoon in een verpleeghuis of instelling voor gehandicaptenzorg woont. Het RIVM stelt het aantal (nieuwe) besmettingen van thuiswonenden van 70 jaar of ouder vast door het totaal aantal (nieuwe) besmettingen in de leeftijdsklasse 70 jaar of ouder vast te stellen en daarop in mindering te brengen het aantal besmettingen:\n- Onder bewoners van een instelling\n- Onder mensen die werkzaam zijn in de zorg \n- Onder mensen die via hun adres gelinkt kunnen worden aan een verpleeghuis of een locatie voor gehandicaptenzorg \n- Onder mensen die op basis van setting van besmetting of voorkomen in een vrij tekstveld gelinkt kunnen worden aan een verpleeghuis of gehandicaptenzorginstelling.\n\nDe groep thuiswonenden van 70 jaar is een diverse groep ten aanzien van de woonsituatie en gezondheidssituatie. Een groot deel van de 70-jarigen is vitaal en heeft een goede gezondheid. Een ander deel heeft één of meerdere chronische aandoeningen of fysieke of cognitieve beperkingen en is minder vitaal. Op dit moment is het nog niet mogelijk op het dashboard een onderscheid aan te brengen tussen de besmettingen onder vitale en minder vitale thuiswonende ouderen omdat deze informatie niet standaard wordt vastgelegd wanneer een coronatest wordt afgenomen.\n\nHet dashboard toont welk deel van de thuiswonende ouderen van 70 jaar of ouder die dag besmet is geraakt. Voor totaal aantal thuiswonende ouderen van 70 jaar is gebruik gemaakt van gegevens van het CBS over het aantal personen van 70 jaar dat in een particulier huishouden woont (StatLine - Huishoudens; personen naar geslacht, leeftijd en regio, 1 januari (cbs.nl). Het gaat in totaal om 2,3 mln. personen. "
+        "verantwoording": "De informatie over thuiswonende 70-plussers wordt dagelijks beschikbaar gesteld via [open data](https://data.rivm.nl/covid-19/COVID-19_thuiswonend_70plus.csv) door het RIVM. Zie [hier](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/40508e17-7296-4f39-ad25-8ddd0c904087) de beschrijving van deze dataset. In de aangeleverde gegevens is soms de veiligheidsregio onbekend. Dit heeft als gevolg dat het totaal van de weergegeven cijfers op veiligheidsregio niveau minder kan zijn dan wat er op landelijk niveau wordt getoond. Het aantal overleden personen wordt getoond op basis van de datum van overlijden. De overlijdensdatum is echter niet altijd bekend. Als de datum niet bekend is, dan zijn die gevallen niet op het dashboard zichtbaar.\n\nHet RIVM baseert zich op testresultaten en sterfgevallen zoals door de GGD’ en bij het RIVM gemeld. Bij het melden van een positieve testuitslag door de GGD wordt (onder meer) geregistreerd hoe oud iemand is en of de persoon in een verpleeghuis of instelling voor gehandicaptenzorg woont. Het RIVM stelt het aantal (nieuwe) besmettingen van thuiswonenden van 70 jaar of ouder vast door het totaal aantal (nieuwe) besmettingen in de leeftijdsklasse 70 jaar of ouder vast te stellen en daarop in mindering te brengen het aantal besmettingen:\n- Onder bewoners van een instelling\n- Onder mensen die werkzaam zijn in de zorg \n- Onder mensen die via hun adres gelinkt kunnen worden aan een verpleeghuis of een locatie voor gehandicaptenzorg \n- Onder mensen die op basis van setting van besmetting of voorkomen in een vrij tekstveld gelinkt kunnen worden aan een verpleeghuis of gehandicaptenzorginstelling.\n\nDe groep thuiswonenden van 70 jaar is een diverse groep ten aanzien van de woonsituatie en gezondheidssituatie. Een groot deel van de 70-plussers is vitaal en heeft een goede gezondheid. Een ander deel heeft één of meerdere chronische aandoeningen of fysieke of cognitieve beperkingen en is minder vitaal. Op dit moment is het nog niet mogelijk op het dashboard een onderscheid aan te brengen tussen de besmettingen onder vitale en minder vitale thuiswonende ouderen omdat deze informatie niet standaard wordt vastgelegd wanneer een coronatest wordt afgenomen.\n\nHet dashboard toont welk deel van de thuiswonende ouderen van 70 jaar of ouder die dag besmet is geraakt. Voor totaal aantal thuiswonende ouderen van 70 jaar is gebruik gemaakt van gegevens van het CBS over het aantal personen van 70 jaar dat in een particulier huishouden woont (StatLine - Huishoudens; personen naar geslacht, leeftijd en regio, 1 januari (cbs.nl). Het gaat in totaal om 2,3 mln. personen. "
       },
       {
         "cijfer": "",
@@ -1772,7 +1772,7 @@
     },
     "section_positive_tested": {
       "title": "Thuiswonende 70-plussers",
-      "description": "Personen van 70 jaar ens ouder zijn extra kwetsbaar bij een besmetting met het coronavirus. Door zicht te houden op het aantal besmettingen onder deze groep kunnen de juiste maatregelen genomen worden om het virus in te dammen.Het gaat hierbij om zelfstandig wonenden. Personen van 70+ die zijn opgenomen in een verpleeghuis of instelling voor gehandicaptenzorg worden op dit dashboard in die groepen meegeteld. Lees meer in de cijferverantwoording.   ",
+      "description": "Personen van 70 jaar of ouder zijn extra kwetsbaar bij een besmetting met het coronavirus. Door zicht te houden op het aantal besmettingen onder deze groep kunnen de juiste maatregelen genomen worden om het virus in te dammen. Het gaat hierbij om zelfstandig wonenden. Personen van 70 jaar of ouder die zijn opgenomen in een verpleeghuis of instelling voor gehandicaptenzorg worden op dit dashboard in die groepen meegeteld. Lees meer in de cijferverantwoording.",
       "reference": {
         "href": "/verantwoording#thuiswonende-70-plussers",
         "text": "Lees meer in de cijferverantwoording."
@@ -1790,7 +1790,7 @@
       "kpi_daily_per_100k_description": "Dit getal laat zien van hoeveel thuiswonende personen van 70 jaar of ouder gisteren is gemeld dat ze positief zijn getest op COVID-19,  per 100.000 thuiswonende ouderen . Deze berekening maakt het mogelijk om regio’s beter met elkaar te vergelijken.",
       "line_chart_daily_title": "Nieuwe besmettingen onder thuiswonenden van 70 jaar of ouder: verloop over tijd",
       "choropleth_daily_title": "Verdeling nieuwe besmettingen thuiswonende 70-plussers (per veiligheidsregio)",
-      "choropleth_daily_description": "Deze kaart laat de verdeling zien van het aantal nieuwe besmettingen per dag onder thuiswonende personen van 70 of ouder per 100.000 thuiswonende personen van 70 of ouder, waarvan gisteren is gemeld dat ze positief getest zijn op COVID-19.",
+      "choropleth_daily_description": "Deze kaart laat de verdeling zien van het aantal nieuwe besmettingen per dag onder thuiswonende personen van 70 jaar of ouder per 100.000 thuiswonende personen van 70 jaar of ouder, waarvan gisteren is gemeld dat ze positief getest zijn op COVID-19.",
       "choropleth_daily_legenda": "Aantal per 100.000 thuiswonende 70-plussers",
       "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt."
     },
@@ -1817,14 +1817,14 @@
   },
   "veiligheidsregio_thuiswonende_ouderen": {
     "titel_sidebar": "Thuiswonende 70-plussers",
-    "titel_kpi": "Patiënten met eerste melding van COVID-19 klachten bij de huisarts",
+    "titel_kpi": "Positief geteste mensen",
     "metadata": {
       "title": "Thuiswonende 70-plussers in {{safetyRegion}} | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Thuiswonende 70-plussers in {{safetyRegion}}."
     },
     "section_positive_tested": {
       "title": "Thuiswonende 70-plussers in {{safetyRegion}} - nieuwe besmettingen",
-      "description": "Personen boven de 70 zijn extra kwetsbaar bij een besmetting met het coronavirus. Door zicht te houden op het aantal besmettingen onder deze groep kunnen de juiste maatregelen genomen worden om het virus in te dammen. Het gaat bij onderstaande cijfers om personen van 70 jaar of ouder die zelfstandig wonen. Personen van 70 of ouder die zijn opgenomen in een verpleeghuis of instelling voor gehandicaptenzorg worden  op dit dashboard alleen in die groepen meegeteld. Lees meer in de [cijferverantwoording](https://coronadashboard.rijksoverheid.nl/verantwoording). ",
+      "description": "Personen boven de 70 zijn extra kwetsbaar bij een besmetting met het coronavirus. Door zicht te houden op het aantal besmettingen onder deze groep kunnen de juiste maatregelen genomen worden om het virus in te dammen. Het gaat bij onderstaande cijfers om personen van 70 jaar of ouder die zelfstandig wonen. Personen van 70 of ouder die zijn opgenomen in een verpleeghuis of instelling voor gehandicaptenzorg worden  op dit dashboard alleen in die groepen meegeteld. Lees meer in de cijferverantwoording. ",
       "reference": {
         "href": "/verantwoording#thuiswonende-70-plussers",
         "text": "Lees meer in de cijferverantwoording."
@@ -1836,16 +1836,16 @@
           "download": "https://data.rivm.nl/covid-19/COVID-19_thuiswonend_70plus.csv"
         }
       },
-      "kpi_daily_title": "Aantal positief geteste thuiswonenden van 70 jaar of ouder, per dag",
-      "kpi_daily_description": "Het aantal thuiswonenden van 70 jaar of ouder in deze veiligheisdregio waarvan gisteren is gemeld dat ze besmet zijn met COVID-19.",
-      "kpi_daily_per_100k_title": "Aantal dagelijks gemelde nieuwe besmettingen per 100.000 thuiswonende personen van 70 jaar of ouder",
-      "kpi_daily_per_100k_description": "Door te bereken hoeveel thuiswonende 70-plussers in deze regio dagelijks besmet worden per 100.000 70-plussers is vergelijking met andere regio's mogelijk.",
-      "line_chart_daily_title": "Aantal 70-plussers dat dagelijks is besmet met COVID-19: verloop over tijd",
-      "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt."
+      "kpi_daily_title": "Aantal positief geteste thuiswonende 70-plussers",
+      "kpi_daily_description": "Het aantal thuiswonenden van 70 jaar of ouder in deze veiligheidsregio waarvan gisteren is gemeld dat ze besmet zijn met COVID-19.",
+      "kpi_daily_per_100k_title": "Aantal positief geteste thuiswonende 70-plussers per dag, per 100.000",
+      "kpi_daily_per_100k_description": "Door te berekenen hoeveel thuiswonende 70-plussers in deze regio dagelijks besmet worden per 100.000 70-plussers is vergelijking met andere regio's mogelijk.",
+      "line_chart_daily_title": "Nieuwe besmettingen onder thuiswonenden van 70 jaar of ouder: verloop over tijd",
+      "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt."
     },
     "section_deceased": {
       "title": "Thuiswonende 70-plussers in {{safetyRegion}} - sterfte",
-      "description": "Personen boven de 70 zijn extra kwetsbaar bij een besmetting met het coronavirus. Door zicht te houden op het aantal besmettingen onder deze groep kunnen de juiste maatregelen genomen worden om het virus in te dammen. Het gaat bij onderstaande cijfers om personen van 70 jaar of ouder die zelfstandig wonen. Personen van 70 of ouder die zijn opgenomen in een verpleeghuis of instelling voor gehandicaptenzorg worden  op dit dashboard alleen in die groepen meegeteld. Lees meer in de cijferverantwoording.",
+      "description": "Aantal thuiswonende personen van 70 jaar of ouder in deze veiligheidsregio die zijn overleden aan COVID-19, per dag.",
       "reference": {
         "href": "/verantwoording#thuiswonende-70-plussers",
         "text": "Lees meer in de cijferverantwoording."
@@ -1860,9 +1860,9 @@
       "kpi_daily_title": "Aantal 70-plussers overleden aan COVID-19, per dag",
       "kpi_daily_description": "Aantal thuiswonende personen van 70 jaar of ouder in deze regio waarvan gisteren is gemeld dat ze zijn overleden aan COVID-19",
       "line_chart_daily_title": "Dagelijks aantal aan COVID-19 overleden thuiswonende 70-plussers: verloop over tijd",
-      "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt."
+      "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt."
     },
-    "kpi_titel": "Patiënten met eerste melding van COVID-19 klachten bij de huisarts"
+    "kpi_titel": "Aantal positief geteste mensen"
   },
   "sterfte": {
     "titel_sidebar": "Sterfte",
