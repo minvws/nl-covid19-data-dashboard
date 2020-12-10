@@ -1,7 +1,6 @@
 import { Municipal } from '~/types/data.d';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
-import { XrangePointOptionsObject } from 'highcharts';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 import siteText from '~/locale/index';
@@ -43,7 +42,7 @@ export interface SewerWaterLineChartData {
 
 export interface SewerWaterBarChartData {
   keys: string[];
-  data: XrangePointOptionsObject[];
+  data: Highcharts.XrangePointOptionsObject[];
 }
 
 /**
@@ -201,7 +200,7 @@ export function getSewerWaterBarChartData(
               'short'
             )}: ${formatNumber(data.sewer.last_value.average)}`
           : false,
-      } as XrangePointOptionsObject,
+      } as Highcharts.XrangePointOptionsObject,
       ...installations.map(
         (installation) =>
           ({
@@ -213,7 +212,7 @@ export function getSewerWaterBarChartData(
                   'short'
                 )}: ${formatNumber(installation.last_value.rna_normalized)}`
               : false,
-          } as XrangePointOptionsObject)
+          } as Highcharts.XrangePointOptionsObject)
       ),
     ],
   };

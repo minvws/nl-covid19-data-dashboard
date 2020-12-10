@@ -1,4 +1,3 @@
-import { SeriesLineOptions, SeriesScatterOptions } from 'highcharts';
 import { useMemo } from 'react';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
@@ -110,7 +109,7 @@ export function useSewerWaterChartOptions<
       [text.secondary_label_text]: 'scatter',
     };
 
-    const scatterSerie: SeriesScatterOptions = {
+    const scatterSerie: Highcharts.SeriesScatterOptions = {
       type: 'scatter',
       name: text.secondary_label_text,
       description: text.secondary_label_text,
@@ -127,7 +126,10 @@ export function useSewerWaterChartOptions<
       },
     };
 
-    const series: (SeriesLineOptions | SeriesScatterOptions)[] = [scatterSerie];
+    const series: (
+      | Highcharts.SeriesLineOptions
+      | Highcharts.SeriesScatterOptions
+    )[] = [scatterSerie];
 
     series.push({
       type: 'line',

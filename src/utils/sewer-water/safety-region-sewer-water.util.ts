@@ -1,4 +1,3 @@
-import { XrangePointOptionsObject } from 'highcharts';
 import siteText from '~/locale/index';
 import { colors } from '~/style/theme';
 import { Regionaal, RegionalSewerPerInstallationValue } from '~/types/data.d';
@@ -40,7 +39,7 @@ export interface SewerWaterLineChartData {
 
 export interface SewerWaterBarChartData {
   keys: string[];
-  data: XrangePointOptionsObject[];
+  data: Highcharts.XrangePointOptionsObject[];
 }
 
 export function getSewerWaterBarScaleData(
@@ -126,7 +125,7 @@ export function getSewerWaterBarChartData(
               'short'
             )}: ${formatNumber(data.sewer.last_value.average)}`
           : false,
-      } as XrangePointOptionsObject,
+      } as Highcharts.XrangePointOptionsObject,
       ...sortedInstallations.map(
         (installation) =>
           ({
@@ -138,7 +137,7 @@ export function getSewerWaterBarChartData(
                   'short'
                 )}: ${formatNumber(installation.last_value.rna_normalized)}`
               : false,
-          } as XrangePointOptionsObject)
+          } as Highcharts.XrangePointOptionsObject)
       ),
     ],
   };
