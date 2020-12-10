@@ -95,7 +95,7 @@
       "href": "/verantwoording#intensive-care",
       "text": "Read more in 'explanation of the data presented'."
     },
-    "kpi_titel": ""
+    "kpi_titel": "Average number of intensive care admissions in 3 days"
   },
   "verdenkingen_huisartsen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
@@ -192,7 +192,7 @@
     },
     "tijdelijk_onbeschikbaar_titel": "Map temporarily not available",
     "tijdelijk_onbeschikbaar": "Hospital admissions per safety region and municipality are temporarily not shown. The dataset these numbers were based on (Osiris) is no longer sufficiently aligned with the actual number of hospital admissions.  Soon we expect to show admissions per safety region and municipality again, based on data from NICE, a better dataset. For hospital admissions on a national level NICE is already the source.  Read more in 'explanation of the data presented'.",
-    "kpi_titel": ""
+    "kpi_titel": "Average number of hospital admissions in 3 days"
   },
   "positief_geteste_personen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -286,7 +286,7 @@
       "title": "Number of infectious people | Dashboard Coronavirus | Government.nl",
       "description": "National overview of how many people with COVID-19 can transmit the virus. This number is calculated by the RIVM."
     },
-    "barscale_toelichting": "",
+    "barscale_toelichting": "A calculation of how many people with COVID-19 per 100.000 people can transmit the virus. This number is calculated by the RIVM.",
     "titel_kpi": "Number of infectious people",
     "reference": {
       "href": "/verantwoording#infectious-people",
@@ -336,7 +336,7 @@
         "text": "RIVM"
       }
     },
-    "kpi_titel": ""
+    "kpi_titel": "Most recent reproduction number"
   },
   "overige_gegevens": {
     "title": "To be developed",
@@ -456,7 +456,7 @@
         "text": "RIVM"
       }
     },
-    "kpi_titel": ""
+    "kpi_titel": "Number of confirmed cases per day"
   },
   "verpleeghuis_oversterfte": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -535,7 +535,7 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
       }
     },
-    "kpi_titel": ""
+    "kpi_titel": "Average number of coronavirus particles per 100.000 people"
   },
   "notfound_titel": {
     "text": "Something went wrong"
@@ -782,7 +782,7 @@
   "seoHead": {
     "default_description": "Information on the development of the coronavirus in The Netherlands.",
     "default_title": "Dashboard Coronavirus COVID-19 | Government.nl",
-    "default_url": "https://coronadashboard.government.nl"
+    "default_url": "https://coronadashboard.rijksoverheid.nl/veelgestelde-vragen"
   },
   "no_data_for_this_municipality": {
     "text": "This information is not available for this municipality."
@@ -858,7 +858,7 @@
     },
     "tijdelijk_onbeschikbaar_titel": "Temporarily not available",
     "tijdelijk_onbeschikbaar": "Hospital admissions per safety region and municipality are temporarily not shown. The dataset these numbers were based on (Osiris) is no longer sufficiently aligned with the actual number of hospital admissions.  Soon we expect to show admissions per safety region and municipality again, based on data from NICE, a better dataset. For hospital admissions on a national level NICE is already the source.  Read more in 'explanation of the data presented'.",
-    "kpi_titel": ""
+    "kpi_titel": "Average number of hospital admissions in 3 days"
   },
   "veiligheidsregio_positief_geteste_personen": {
     "titel_sidebar": "Confirmed cases",
@@ -962,7 +962,7 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
       }
     },
-    "kpi_titel": ""
+    "kpi_titel": "Average number of coronavirus particles per 100.000 people"
   },
   "gemeente_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Hospital admissions",
@@ -999,7 +999,7 @@
     },
     "tijdelijk_onbeschikbaar_titel": "Temporarily not available",
     "tijdelijk_onbeschikbaar": "Hospital admissions per safety region and municipality are temporarily not shown. The dataset these numbers were based on (Osiris) is no longer sufficiently aligned with the actual number of hospital admissions.  Soon we expect to show admissions per safety region and municipality again, based on data from NICE, a better dataset. For hospital admissions on a national level NICE is already the source.  Read more in 'explanation of the data presented'.",
-    "kpi_titel": ""
+    "kpi_titel": "Average number of hospital admissions in 3 days"
   },
   "gemeente_positief_geteste_personen": {
     "titel_sidebar": "Confirmed cases",
@@ -1089,7 +1089,7 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
       }
     },
-    "kpi_titel": ""
+    "kpi_titel": "Average number of coronavirus particles per 100.000 people"
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Level of risk",
@@ -1373,7 +1373,7 @@
   "veelgestelde_vragen_metadata": {
     "title": "Frequently asked questions | Dashboard Coronavirus COVID-19 | Government.nl",
     "description": "",
-    "url": ""
+    "url": "https://coronadashboard.government.nl/veelgestelde-vragen"
   },
   "waarde_annotaties": {
     "riool_normalized": "x100 billion"
@@ -1434,7 +1434,7 @@
     "kpi": {
       "aantal_respondenten": {
         "titel": "Number of respondents",
-        "toelichting": "Number of people surveyed between 20 and 26 October 2020.",
+        "toelichting": "Number of people surveyed.",
         "bron": {
           "text": "RIVM",
           "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/8a72d78a-fcf8-4882-b0ab-cd594961a267?tab=relations"
@@ -1470,7 +1470,7 @@
       }
     },
     "reference": {
-      "href": "https://coronadashboard.rijksoverheid.nl/verantwoording#gedrag",
+      "href": "https://coronadashboard.government.nl/verantwoording#gedrag",
       "text": "Read more in 'explanation of the data presented'."
     },
     "bronnen": {
@@ -1505,7 +1505,7 @@
     "kpi": {
       "aantal_respondenten": {
         "titel": "Number of respondents",
-        "toelichting": "Number of people surveyed between 20 and 26 October 2020.",
+        "toelichting": "Number of people surveyed.",
         "bron": {
           "text": "RIVM",
           "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/8a72d78a-fcf8-4882-b0ab-cd594961a267?tab=relations"
@@ -1535,7 +1535,7 @@
       }
     },
     "reference": {
-      "href": "https://coronadashboard.rijksoverheid.nl/verantwoording#gedrag",
+      "href": "https://coronadashboard.government.nl/verantwoording#gedrag",
       "text": "Read more in 'explanation of the data presented'."
     },
     "bronnen": {
@@ -1626,7 +1626,7 @@
       "geen_meldingen": ""
     },
     "map_titel": "Distribution of infected locations in the Netherlands",
-    "map_toelichting": "",
+    "map_toelichting": "These maps show how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
     "metadata": {
       "title": "Confirmed cases of disability care home residents | Dashboard Coronavirus | Government.nl",
       "description": "National overview of the number of confirmed cases of disability care home residents for COVID-19."
@@ -1745,7 +1745,7 @@
       "geen_meldingen": ""
     },
     "map_titel": "",
-    "map_toelichting": "",
+    "map_toelichting": "These maps show how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
     "metadata": {
       "title": "Confirmed cases of disability care home residents in {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
       "description": "Regional overview of the number of confirmed cases of disability care home residents in {{safetyRegionName}} for COVID-19."

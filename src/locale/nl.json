@@ -1373,7 +1373,7 @@
   "veelgestelde_vragen_metadata": {
     "title": "Veelgestelde vragen | Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
     "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
-    "url": "https://coronadashboard.rijksoverheid.nl/veelgestelde-vragen"
+    "url": "https://coronadashboard.government.nl/veelgestelde-vragen"
   },
   "waarde_annotaties": {
     "riool_normalized": "x100 miljard"
@@ -1434,7 +1434,7 @@
     "kpi": {
       "aantal_respondenten": {
         "titel": "Aantal respondenten",
-        "toelichting": "Aantal mensen dat heeft deelgenomen aan het onderzoek van 20 t/m 26 oktober.",
+        "toelichting": "Aantal mensen dat heeft deelgenomen aan het onderzoek.",
         "bron": {
           "text": "RIVM",
           "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/8a72d78a-fcf8-4882-b0ab-cd594961a267?tab=relations"
@@ -1505,7 +1505,7 @@
     "kpi": {
       "aantal_respondenten": {
         "titel": "Aantal respondenten",
-        "toelichting": "Aantal mensen dat heeft deelgenomen aan het onderzoek van 20 t/m 26 oktober.",
+        "toelichting": "Aantal mensen dat heeft deelgenomen aan het onderzoek.",
         "bron": {
           "text": "RIVM",
           "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/8a72d78a-fcf8-4882-b0ab-cd594961a267?tab=relations"
