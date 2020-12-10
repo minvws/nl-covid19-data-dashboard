@@ -75,7 +75,7 @@ function Tooltip({
               : `calc(-100% + ${bounds.width - x}px)`
           },calc(-100% - 10px))`,
           pointerEvents: 'none',
-          transition: 'left 0.1s, top 0.1s',
+          transition: 'left 0.075s, top 0.075s',
           whiteSpace: 'nowrap',
         })}
       >

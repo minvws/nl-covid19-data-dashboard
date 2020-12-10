@@ -104,41 +104,43 @@ function CustomLineChart({
   );
 
   return (
-    <Box position="relative">
+    <Box>
       {valueAnnotation && (
         <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
       )}
 
-      <Chart
-        trend={graphData}
-        type={showFill ? trendTypes.area : trendTypes.line}
-        height={height}
-        width={width}
-        xDomain={xDomain}
-        yDomain={yDomain}
-        formatYAxis={formatYAxis}
-        formatXAxis={formatXAxis}
-        handleHover={handleTooltip}
-        isHovered={!!tooltipData}
-        benchmark={benchmark}
-      />
+      <Box position="relative">
+        <Chart
+          trend={graphData}
+          type={showFill ? trendTypes.area : trendTypes.line}
+          height={height}
+          width={width}
+          xDomain={xDomain}
+          yDomain={yDomain}
+          formatYAxis={formatYAxis}
+          formatXAxis={formatXAxis}
+          handleHover={handleTooltip}
+          isHovered={!!tooltipData}
+          benchmark={benchmark}
+        />
 
-      {tooltipData && (
-        <Tooltip
-          bounds={{ width, height }}
-          x={tooltipLeft + defaultMargin.left}
-          y={tooltipTop + defaultMargin.top}
-        >
-          {formatTooltip
-            ? formatTooltip({
-                ...tooltipData,
-                date: dateToValue(tooltipData.date),
-              })
-            : `${formatDateFromSeconds(
-                dateToValue(tooltipData.date)
-              )}: ${formatNumber(tooltipData.value)}`}
-        </Tooltip>
-      )}
+        {tooltipData && (
+          <Tooltip
+            bounds={{ width, height }}
+            x={tooltipLeft + defaultMargin.left}
+            y={tooltipTop + defaultMargin.top}
+          >
+            {formatTooltip
+              ? formatTooltip({
+                  ...tooltipData,
+                  date: dateToValue(tooltipData.date),
+                })
+              : `${formatDateFromSeconds(
+                  dateToValue(tooltipData.date)
+                )}: ${formatNumber(tooltipData.value)}`}
+          </Tooltip>
+        )}
+      </Box>
     </Box>
   );
 }
