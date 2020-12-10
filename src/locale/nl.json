@@ -1772,7 +1772,7 @@
     },
     "section_positive_tested": {
       "title": "Thuiswonende 70-plussers",
-      "description": "Personen van 70 jaar of ouder zijn extra kwetsbaar bij een besmetting met het coronavirus. Door zicht te houden op het aantal besmettingen onder deze groep kunnen de juiste maatregelen genomen worden om het virus in te dammen. Het gaat hierbij om zelfstandig wonenden. Personen van 70 jaar of ouder die zijn opgenomen in een verpleeghuis of instelling voor gehandicaptenzorg worden op dit dashboard in die groepen meegeteld.",
+      "description": "Personen van 70 jaar of ouder zijn extra kwetsbaar bij een besmetting met het coronavirus. Door zicht te houden op het aantal besmettingen onder deze groep kunnen de juiste maatregelen genomen worden om het virus in te dammen. Het gaat hierbij alleen om zelfstandig wonende 70-plussers.",
       "reference": {
         "href": "/verantwoording#thuiswonende-70-plussers",
         "text": "Lees meer in de cijferverantwoording."
@@ -1824,7 +1824,7 @@
     },
     "section_positive_tested": {
       "title": "Thuiswonende 70-plussers in {{safetyRegion}} - nieuwe besmettingen",
-      "description": "Personen boven de 70 zijn extra kwetsbaar bij een besmetting met het coronavirus. Door zicht te houden op het aantal besmettingen onder deze groep kunnen de juiste maatregelen genomen worden om het virus in te dammen. Het gaat bij onderstaande cijfers om personen van 70 jaar of ouder die zelfstandig wonen. Personen van 70 of ouder die zijn opgenomen in een verpleeghuis of instelling voor gehandicaptenzorg worden op dit dashboard alleen in die groepen meegeteld.",
+      "description": "Personen van 70 jaar of ouder zijn extra kwetsbaar bij een besmetting met het coronavirus. Door zicht te houden op het aantal besmettingen onder deze groep kunnen de juiste maatregelen genomen worden om het virus in te dammen. Het gaat hierbij alleen om zelfstandig wonende 70-plussers.",
       "reference": {
         "href": "/verantwoording#thuiswonende-70-plussers",
         "text": "Lees meer in de cijferverantwoording."

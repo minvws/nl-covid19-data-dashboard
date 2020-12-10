@@ -1772,7 +1772,7 @@
     },
     "section_positive_tested": {
       "title": "People over 70 living at home",
-      "description": "People aged over 70 are extra vulnerable to coronavirus infection. Keeping track of the number of infections among over-70s who are still living independently in their own homes makes targeted measures possible. Over-70s living in residential settings – nursing homes or disability care homes – are counted under those groups on this dashboard.",
+      "description": "People aged over 70 are extra vulnerable to coronavirus infection. Keeping track of the number of infections among over-70s who are still living independently in their own homes makes targeted measures possible.",
       "reference": {
         "href": "/verantwoording#thuiswonende-70-plussers",
         "text": "See the explanation of the data presented."
@@ -1824,7 +1824,7 @@
     },
     "section_positive_tested": {
       "title": "People over-70 in {{safetyRegion}} living at home - newly confirmed cases",
-      "description": "People aged over 70 are extra vulnerable to coronavirus infection. Keeping track of the number of infections among over-70s who are still living independently in their own homes makes targeted measures possible. Over-70s living in residential settings – nursing homes or disability care homes – are counted on this dashboard under those groups.",
+      "description": "People aged over 70 are extra vulnerable to coronavirus infection. Keeping track of the number of infections among over-70s who are still living independently in their own homes makes targeted measures possible.",
       "reference": {
         "href": "/verantwoording#people-over-70-living-at-home",
         "text": "Read more in explanation of the data presented"
