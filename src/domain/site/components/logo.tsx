@@ -4,23 +4,23 @@ import text from '~/locale/index';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 
 export function Logo() {
-  const isSmall = !useBreakpoints().xs;
+  const breakpoints = useBreakpoints(false);
 
   return (
     <LogoWrapper>
-      {isSmall ? (
-        <LogoImage
-          src="/images/logo-ro-small.svg"
-          alt={text.header.logo_alt}
-          width={40}
-          height={76}
-        />
-      ) : (
+      {breakpoints.xs ? (
         <LogoImage
           src="/images/logo-ro.svg"
           alt={text.header.logo_alt}
           width={314}
           height={125}
+        />
+      ) : (
+        <LogoImage
+          src="/images/logo-ro-small.svg"
+          alt={text.header.logo_alt}
+          width={40}
+          height={76}
         />
       )}
     </LogoWrapper>
