@@ -23,7 +23,6 @@ import { TitleWithIcon } from '~/components-styled/aside/title-with-icon';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
 import { DeceasedMetric } from '~/components/common/deceased-metric';
 import { ElderlyAtHomeMetric } from '~/components/common/elderly-at-home-metric';
-import { InfectiousPeopleMetric } from '~/components/landelijk/infectious-people-metric';
 import Layout from '~/components/layout';
 import { BehaviorMetric } from '~/domain/behavior/behavior-metric';
 import siteText from '~/locale/index';
@@ -204,14 +203,14 @@ function NationalLayout(props: NationalLayoutProps) {
                           icon={<Ziektegolf />}
                           title={siteText.besmettelijke_personen.titel_sidebar}
                         />
-                        <span className="metric-wrapper">
-                          <InfectiousPeopleMetric
-                            data={
-                              data.infectious_people_last_known_average
-                                ?.last_value
-                            }
-                          />
-                        </span>
+                        <SidebarMetric
+                          data={data}
+                          scope="nl"
+                          metricName="infectious_people_last_known_average"
+                          metricProperty="infectious_avg"
+                          localeTextKey="besmettelijke_personen"
+                          differenceKey="infectious_people_last_known_average__infectious_avg"
+                        />
                       </a>
                     </Link>
                   </MetricMenuItem>
