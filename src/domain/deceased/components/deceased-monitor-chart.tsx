@@ -1,5 +1,4 @@
-import Highcharts from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
+import { HighchartsWrapper } from '~/components/common/highcharts';
 import {
   NationalDeceasedCbsValue,
   RegionalDeceasedCbsValue,
@@ -7,10 +6,6 @@ import {
 import { createDate } from '~/utils/createDate';
 import { formatDateFromMilliseconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
-
-if (typeof Highcharts === 'object') {
-  require('highcharts/highcharts-more')(Highcharts);
-}
 
 type CbsValue = NationalDeceasedCbsValue | RegionalDeceasedCbsValue;
 
@@ -31,7 +26,7 @@ export default function DeceasedMonitorChart(props: DeceasedMonitorProps) {
   const { config, values } = props;
   const chartOptions = useHighchartOptions(values, config);
 
-  return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;
+  return <HighchartsWrapper options={chartOptions} />;
 }
 
 function useHighchartOptions(values: CbsValue[], config: SeriesConfig) {
