@@ -106,6 +106,11 @@ export function BehaviorLineChartTile({
       <Spacer mb={3} />
 
       <BehaviorLineChart
+        /**
+         * setting this key is a very aggresive fix for an unknown critital
+         * issue which only happens with a production build.
+         */
+        key={type + currentId}
         values={behaviorIdentifierWithData.map(({ valueKey, label }) =>
           (values as NationalBehaviorValue[])
             .map((value) =>

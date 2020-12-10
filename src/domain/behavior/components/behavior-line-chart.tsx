@@ -138,6 +138,7 @@ function getChartOptions<T>(values: Value[][], linesConfig: LineConfig<T>[]) {
       const { id, isSelected, onClick } = linesConfig[index];
 
       return {
+        animation: false,
         type: 'line',
         showInLegend: false,
 
