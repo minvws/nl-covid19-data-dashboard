@@ -1012,7 +1012,7 @@
     "barscale_screenreader_text": "{{value}} positief geteste mensen per dag.",
     "kpi_titel": "Aantal positief geteste mensen",
     "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn en COVID-19 hebben. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.",
-    "map_titel": "Verdeling positief geteste mensen in {{municipality}}",
+    "map_titel": "Verdeling positief geteste mensen in {{municipality}}s veiligheidsregio",
     "map_toelichting": "Deze kaart laat zien van hoeveel mensen in deze gemeenten gisteren gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "linechart_titel": "Verloop over tijd",
     "linechart_toelichting": "Deze grafiek laat zien van hoeveel mensen in de geselecteerde periode in deze gemeente gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
