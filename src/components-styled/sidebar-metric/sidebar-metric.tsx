@@ -71,7 +71,7 @@ export function SidebarMetric<T extends { difference: unknown }>({
    * we support both but kpi_titel has precedence.
    */
   const title =
-    get(siteText, [localeTextKey, 'kpi_titel']) ??
+    get(siteText, [localeTextKey, 'kpi_titel']) ||
     get(siteText, [localeTextKey, 'titel_kpi']);
 
   assert(title !== undefined, `Missing title at ${localeTextKey}.kpi_titel`);
