@@ -1,5 +1,4 @@
-import Highcharts from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
+import { Highcharts } from '~/components/common/highcharts';
 import React, { useMemo } from 'react';
 import { isFilled } from 'ts-is-present';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
@@ -219,7 +218,7 @@ export default function LineChart<T extends Value>({
         <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
       )}
       <div>
-        <HighchartsReact highcharts={Highcharts} options={chartOptions} />
+        <Highcharts options={chartOptions} />
       </div>
     </section>
   );

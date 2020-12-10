@@ -1,5 +1,5 @@
-import Highcharts, { TooltipFormatterContextObject } from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
+import { Highcharts } from '~/components/common/highcharts';
+
 import React, { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import text from '~/locale/index';
@@ -80,7 +80,8 @@ function getChartOptions(
       shared: true,
       useHTML: true,
       formatter: function (): string {
-        const contextObjects = this.points as TooltipFormatterContextObject[];
+        const contextObjects = this
+          .points as Highcharts.TooltipFormatterContextObject[];
 
         const percentage = (contextObjects[1].y * 100) / contextObjects[0].y;
 
@@ -227,7 +228,7 @@ export function MultipleLineChart({
     return getChartOptions(filteredValueLists, linesConfig, signaalwaarde);
   }, [values, linesConfig, timeframe, signaalwaarde]);
 
-  return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;
+  return <Highcharts options={chartOptions} />;
 }
 
 /**

@@ -1,5 +1,4 @@
-import Highcharts from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
+import { Highcharts } from '~/components/common/highcharts';
 import React from 'react';
 import { colors } from '~/style/theme';
 import { assert } from '~/utils/assert';
@@ -47,7 +46,7 @@ export function BehaviorLineChart<T>({
 
   const options = getChartOptions<T>(filteredValueLists, linesConfig);
 
-  return <HighchartsReact highcharts={Highcharts} options={options} />;
+  return <Highcharts options={options} />;
 }
 
 function getChartOptions<T>(values: Value[][], linesConfig: LineConfig<T>[]) {

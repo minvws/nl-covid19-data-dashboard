@@ -1,6 +1,5 @@
+import { Highcharts } from '~/components/common/highcharts';
 import css from '@styled-system/css';
-import Highcharts from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
 import styled from 'styled-components';
 import Dot from '~/assets/dot.svg';
 import Line from '~/assets/line.svg';
@@ -47,7 +46,7 @@ export function SewerWaterChart<T extends SewerPerInstallationBaseValue>(
       {valueAnnotation && (
         <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
       )}
-      <HighchartsReact highcharts={Highcharts} options={chartOptions} />
+      <Highcharts options={chartOptions} />
       {scatterPlotValues.length > 1 && (
         <div>
           <ul>
