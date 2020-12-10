@@ -669,7 +669,7 @@
       },
       {
         "cijfer": "Behaviour",
-        "verantwoording": ""
+        "verantwoording": "This data is updated every three weeks and is published as an open data file by the National Institute for Public Health and the Environment [(RIVM)](https://data.rivm.nl/covid-19/COVID-19_gedrag.html). The information on the Coronavirus Dashboard is also updated on the day the new file is released. The data file contains information on the Dutch public’s behaviour in relation to the COVID-19 rules and is based on findings obtained by means of a survey.\n\nData is collected online via computer-assisted web interviewing (CAWI). This method involves posting a programmed questionnaire online. Invitations to complete the questionnaire are then sent by email, explaining the purpose of the survey and referring to RIVM as the commissioning authority. The questionnaire was drawn up by RIVM’s Corona Behavioural Unit. \n\nParticipants are selected from the Kantar Consumer Panel (TNS NIPObase) and are aged 16 and over. For each safety region, invitations are sent to a representative sample according to gender, age (5 categories) and highest level of education completed (3 categories) (based on marginal totals). Assuming a 50% response rate, a gross sample of n=9,780 is drawn. \n\nPeople in the study sample have one week to fill in the questionnaire online. After this, data collection is closed and responses are checked for reliability. To make the survey findings more representative for the entire Dutch population, the results are weighted in two steps on the basis of Statistics Netherlands’ population figures:\n\n1\tFirstly, the sample in each safety region is weighted according to the actual population distribution by age, sex and level of education for the region in question.\n2\tSecondly, each safety region is given a weight in the total, according to its share of the Dutch population.\n\nThe data set is then sent to RIVM which uses a standardised method to calculate values for the indicators included in the open data file."
       },
       {
         "cijfer": "Deaths",
@@ -1407,7 +1407,7 @@
       "title": "More research results",
       "description": "For more details please see the entire research on the website of RIVM.",
       "linkLabel": "View the entire research on the website of RIVM",
-      "linkHref": "https://www.rivm.nl/gedragsonderzoek/maatregelen-welbevinden"
+      "linkHref": "https://www.rivm.nl/gedragsonderzoek/trendonderzoek"
     }
   },
   "nl_gedrag": {
@@ -1425,7 +1425,7 @@
     "datums": "This survey was carried out between {{weekStart}} and {{weekEnd}}. Is updated every 3 weeks.",
     "bron": {
       "text": "RIVM",
-      "href": "https://data.rivm.nl/covid-19/COVID-19_gedrag.html"
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/8a72d78a-fcf8-4882-b0ab-cd594961a267?tab=relations"
     },
     "onderzoek_uitleg": {
       "titel": "Survey of the Dutch public",
@@ -1437,7 +1437,7 @@
         "toelichting": "Number of people surveyed between 20 and 26 October 2020.",
         "bron": {
           "text": "RIVM",
-          "href": "https://data.rivm.nl/covid-19/COVID-19_gedrag.html"
+          "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/8a72d78a-fcf8-4882-b0ab-cd594961a267?tab=relations"
         }
       }
     },
@@ -1465,19 +1465,19 @@
     "basisregels_over_tijd": {
       "title": "Basic rules over time",
       "intro": {
-        "compliance": "This graph shows the changes in the percentage of respondents who reported following the basic rule in their daily life. ",
+        "compliance": "This graph shows the changes in the percentage of respondents who reported following the basic rule in their daily life.",
         "support": "This graph shows the changes in the percentage of respondents who reported supporting the basic rule."
       }
     },
     "reference": {
-      "href": "/verantwoording",
+      "href": "https://coronadashboard.rijksoverheid.nl/verantwoording#gedrag",
       "text": "Read more in 'explanation of the data presented'."
     },
     "bronnen": {
       "rivm": {
-        "download": "",
+        "download": "https://data.rivm.nl/covid-19/COVID-19_gedrag.csv",
         "text": "RIVM",
-        "href": "https://www.rivm.nl/gedragsonderzoek/maatregelen-welbevinden"
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/8a72d78a-fcf8-4882-b0ab-cd594961a267?tab=relations"
       }
     }
   },
@@ -1496,7 +1496,7 @@
     "datums": "This survey was carried out between {{weekStart}} and {{weekEnd}}. Is updated every 3 weeks.",
     "bron": {
       "text": "RIVM",
-      "href": "https://data.rivm.nl/covid-19/COVID-19_gedrag.html"
+      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/8a72d78a-fcf8-4882-b0ab-cd594961a267?tab=relations"
     },
     "onderzoek_uitleg": {
       "titel": "Survey of the Dutch public",
@@ -1508,7 +1508,7 @@
         "toelichting": "Number of people surveyed between 20 and 26 October 2020.",
         "bron": {
           "text": "RIVM",
-          "href": "https://data.rivm.nl/covid-19/COVID-19_gedrag.html"
+          "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/8a72d78a-fcf8-4882-b0ab-cd594961a267?tab=relations"
         }
       }
     },
@@ -1535,14 +1535,14 @@
       }
     },
     "reference": {
-      "href": "/verantwoording",
+      "href": "https://coronadashboard.rijksoverheid.nl/verantwoording#gedrag",
       "text": "Read more in 'explanation of the data presented'."
     },
     "bronnen": {
       "rivm": {
-        "download": "",
+        "download": "https://data.rivm.nl/covid-19/COVID-19_gedrag.csv",
         "text": "RIVM",
-        "href": "https://www.rivm.nl/gedragsonderzoek/maatregelen-welbevinden"
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/8a72d78a-fcf8-4882-b0ab-cd594961a267?tab=relations"
       }
     }
   },
@@ -1767,8 +1767,8 @@
     "titel_sidebar": "People over 70 living at home",
     "titel_kpi": "Confirmed cases",
     "metadata": {
-      "title": "",
-      "description": ""
+      "title": "People over 70 living home | Dashboard Coronavirus | Governement.nl",
+      "description": "People over 70 living home"
     },
     "section_positive_tested": {
       "title": "People over 70 living at home",
@@ -1786,19 +1786,19 @@
       },
       "kpi_daily_title": "Confirmed cases among over-70s living at home",
       "kpi_daily_description": "The number of people over 70 living at home who were reported as testing positive for COVID-19 yesterday.",
-      "kpi_daily_per_100k_title": "Daily number of COVID-19 cases per 100.000 over-70s",
-      "kpi_daily_per_100k_description": "This number shows how many over-70s living at home have COVID-19 per 100.000 over-70s living at home.",
-      "line_chart_daily_title": "Daily number of over-70s with confirmed COVID-19 case",
+      "kpi_daily_per_100k_title": "Daily confirmed cases per 100,000 among over-70s living at home ",
+      "kpi_daily_per_100k_description": "This figure shows how many people over 70 living at home were reported as testing positive for COVID-19 yesterday, per 100,000 over-70s living at home . This figure makes it easier to compare the situation in different regions.",
+      "line_chart_daily_title": "Daily confirmed cases among over-70s living at home: progression over time",
       "choropleth_daily_title": "Distribution of daily confirmed cases among over-70s living at home (per safety region)",
       "choropleth_daily_description": "This map shows the differences between safety regions in the number of confirmed cases per 100,000 among over-70s living at home, as reported yesterday.",
       "choropleth_daily_legenda": "Number per 100.000 over-70s living at home",
-      "datums": "Updated {{dateOfInsertion}}. Updated daily."
+      "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis."
     },
     "section_deceased": {
-      "title": "Over-70s living at home - COVID-19 mortality",
+      "title": "People over 70 living at home - COVID-19 deaths",
       "description": "The number of people over 70 living at home who were reported as deceased due to COVID-19 yesterday. Read more in the explanation of the presented data.",
       "reference": {
-        "href": "/verantwoording#thuiswonende-70-plussers",
+        "href": "/verantwoording#people-over-70-living-at-home",
         "text": "See the explanation on the data presented."
       },
       "bronnen": {
@@ -1808,10 +1808,10 @@
           "download": "https://data.rivm.nl/covid-19/COVID-19_thuiswonend_70plus.csv"
         }
       },
-      "kpi_daily_title": "Number of over-70s living at home that died because of COVID-19, daily",
+      "kpi_daily_title": "COVID-19 deaths among over-70s living at home, per day",
       "kpi_daily_description": "The number of people over 70 living at home who were reported as deceased due to COVID-19 yesterday.",
       "line_chart_daily_title": "Number of COVID-19 deaths among over-70s living at home: progression over time",
-      "datums": "Last update {{dateOfInsertion}}. Updated daily."
+      "datums": "Last values obtained on {{dateOfInsertion}}. Updated daily."
     },
     "kpi_titel": "Confirmed cases"
   },
