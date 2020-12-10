@@ -139,7 +139,7 @@
       "text": "Stichting NICE"
     },
     "titel": "Ziekenhuisopnames per dag",
-    "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen.\n\nLet op: Sinds 13 oktober wordt een nieuwe bron gebruikt voor de ziekenhuisopnames. Lees meer in de cijferverantwoording.",
+    "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen.\n\nLet op: Sinds 13 oktober wordt een nieuwe bron gebruikt voor de ziekenhuisopnames.",
     "barscale_titel": "Ziekenhuisopnames per dag",
     "extra_uitleg": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis (exclusief IC) is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen.\n\nLet op: Hoewel ziekenhuizen proberen om COVID-19 patiënten snel te registreren, is het aannemelijk dat de registratie achter loopt. Om deze reden zijn de aantallen van de afgelopen dagen meestal nog onvolledig.",
     "map_titel": "Verdeling ziekenhuisopnames in Nederland",
@@ -191,7 +191,7 @@
       "text": "Lees meer in de cijferverantwoording."
     },
     "tijdelijk_onbeschikbaar_titel": "Kaart tijdelijk niet beschikbaar",
-    "tijdelijk_onbeschikbaar": "Ziekenhuisopnamen per veiligheidsregio en per gemeente worden tijdelijk niet op het dashboard getoond. Het cijferbestand waaruit het dashboard putte (Osiris) wijkt nu te sterk af van het werkelijke aantal ziekenhuisopnamen. Binnenkort verwachten we weer ziekenhuisopnamen per veiligheidsregio en gemeente te kunnen tonen  maar dan op basis van een beter cijferbestand van Stichting NICE. Voor ziekenhuisopnamen op landelijk niveau wordt al gebruik gemaakt van data uit dit bestand. Lees meer in de cijferverantwoording.",
+    "tijdelijk_onbeschikbaar": "Ziekenhuisopnamen per veiligheidsregio en per gemeente worden tijdelijk niet op het dashboard getoond. Het cijferbestand waaruit het dashboard putte (Osiris) wijkt nu te sterk af van het werkelijke aantal ziekenhuisopnamen. Binnenkort verwachten we weer ziekenhuisopnamen per veiligheidsregio en gemeente te kunnen tonen  maar dan op basis van een beter cijferbestand van Stichting NICE. Voor ziekenhuisopnamen op landelijk niveau wordt al gebruik gemaakt van data uit dit bestand.",
     "kpi_titel": "Gemiddeld aantal ziekenhuisopnames over 3 dagen"
   },
   "positief_geteste_personen": {
@@ -857,7 +857,7 @@
       }
     },
     "tijdelijk_onbeschikbaar_titel": "Tijdelijk niet beschikbaar",
-    "tijdelijk_onbeschikbaar": "Ziekenhuisopnamen per veiligheidsregio en per gemeente worden tijdelijk niet op het dashboard getoond. Het cijferbestand waaruit het dashboard putte (Osiris) wijkt nu te sterk af van het werkelijke aantal ziekenhuisopnamen. Binnenkort verwachten we weer ziekenhuisopnamen per veiligheidsregio en gemeente te kunnen tonen  maar dan op basis van een beter cijferbestand van Stichting NICE. Voor ziekenhuisopnamen op landelijk niveau wordt al gebruik gemaakt van data uit dit bestand. Lees meer in de cijferverantwoording.",
+    "tijdelijk_onbeschikbaar": "Ziekenhuisopnamen per veiligheidsregio en per gemeente worden tijdelijk niet op het dashboard getoond. Het cijferbestand waaruit het dashboard putte (Osiris) wijkt nu te sterk af van het werkelijke aantal ziekenhuisopnamen. Binnenkort verwachten we weer ziekenhuisopnamen per veiligheidsregio en gemeente te kunnen tonen  maar dan op basis van een beter cijferbestand van Stichting NICE. Voor ziekenhuisopnamen op landelijk niveau wordt al gebruik gemaakt van data uit dit bestand.",
     "kpi_titel": "Gemiddeld aantal ziekenhuisopnames over 3 dagen"
   },
   "veiligheidsregio_positief_geteste_personen": {
@@ -998,7 +998,7 @@
       }
     },
     "tijdelijk_onbeschikbaar_titel": "Tijdelijk niet beschikbaar",
-    "tijdelijk_onbeschikbaar": "Ziekenhuisopnamen per veiligheidsregio en per gemeente worden tijdelijk niet op het dashboard getoond. Het cijferbestand waaruit het dashboard putte (Osiris) wijkt nu te sterk af van het werkelijke aantal ziekenhuisopnamen. Binnenkort verwachten we weer ziekenhuisopnamen per veiligheidsregio en gemeente te kunnen tonen  maar dan op basis van een beter cijferbestand van Stichting NICE. Voor ziekenhuisopnamen op landelijk niveau wordt al gebruik gemaakt van data uit dit bestand. Lees meer in de cijferverantwoording.",
+    "tijdelijk_onbeschikbaar": "Ziekenhuisopnamen per veiligheidsregio en per gemeente worden tijdelijk niet op het dashboard getoond. Het cijferbestand waaruit het dashboard putte (Osiris) wijkt nu te sterk af van het werkelijke aantal ziekenhuisopnamen. Binnenkort verwachten we weer ziekenhuisopnamen per veiligheidsregio en gemeente te kunnen tonen  maar dan op basis van een beter cijferbestand van Stichting NICE. Voor ziekenhuisopnamen op landelijk niveau wordt al gebruik gemaakt van data uit dit bestand.",
     "kpi_titel": "Gemiddeld aantal ziekenhuisopnames over 3 dagen"
   },
   "gemeente_positief_geteste_personen": {
@@ -1581,7 +1581,7 @@
   "gehandicaptenzorg_besmette_locaties": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "titel": "Gehandicaptenzorg – Besmette locaties",
-    "pagina_toelichting": "Dit getal is een berekening van het aantal locaties voor gehandicaptenzorg waar op dit moment sprake is van tenminste één COVID-19 besmetting. Lees meer in de cijferverantwoording.",
+    "pagina_toelichting": "Dit getal is een berekening van het aantal locaties voor gehandicaptenzorg waar op dit moment sprake is van tenminste één COVID-19 besmetting.",
     "barscale_titel": "Aantal nieuwe locaties per dag",
     "barscale_toelichting": "Het aantal nieuwe besmette locaties voor gehandicaptenzorg waarbij gisteren tenminste één bewoner positief is getest. Een locatie telt mee als “nieuwe locatie” wanneer er tenminste 28 dagen (dit is twee keer de incubatietijd) geen nieuwe patienten besmet zijn geweest.",
     "kpi_titel": "Totaal aantal besmette locaties",
@@ -1706,7 +1706,7 @@
   "veiligheidsregio_gehandicaptenzorg_besmette_locaties": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "titel": "Gehandicaptenzorg – besmette locaties in {{safetyRegion}}",
-    "pagina_toelichting": "Dit getal is een berekening van het aantal nieuwe locaties voor gehandicaptenzorg in deze regio waar sprake is van tenminste één COVID-19 besmetting op basis van een positieve test. Lees meer in de cijferverantwoording.",
+    "pagina_toelichting": "Dit getal is een berekening van het aantal nieuwe locaties voor gehandicaptenzorg in deze regio waar sprake is van tenminste één COVID-19 besmetting op basis van een positieve test.",
     "barscale_titel": "Aantal nieuwe locaties per dag",
     "barscale_toelichting": "Het aantal nieuw besmette locaties waarbij tenminste één bewoners positief is getest. Een locatie telt mee als “nieuwe locatie” wanneer er tenminste 28 dagen (dit is twee keer de incubatietijd) geen nieuwe patienten besmet zijn geweest.",
     "kpi_titel": "Totaal aantal besmette locaties",
@@ -1771,7 +1771,7 @@
     },
     "section_positive_tested": {
       "title": "Thuiswonende 70-plussers",
-      "description": "Personen van 70 jaar of ouder zijn extra kwetsbaar bij een besmetting met het coronavirus. Door zicht te houden op het aantal besmettingen onder deze groep kunnen de juiste maatregelen genomen worden om het virus in te dammen. Het gaat hierbij om zelfstandig wonenden. Personen van 70 jaar of ouder die zijn opgenomen in een verpleeghuis of instelling voor gehandicaptenzorg worden op dit dashboard in die groepen meegeteld.",
+      "description": "Personen van 70 jaar of ouder zijn extra kwetsbaar bij een besmetting met het coronavirus. Door zicht te houden op het aantal besmettingen onder deze groep kunnen de juiste maatregelen genomen worden om het virus in te dammen. Het gaat hierbij alleen om zelfstandig wonende 70-plussers.",
       "reference": {
         "href": "/verantwoording#thuiswonende-70-plussers",
         "text": "Lees meer in de cijferverantwoording."
@@ -1823,7 +1823,7 @@
     },
     "section_positive_tested": {
       "title": "Thuiswonende 70-plussers in {{safetyRegion}} - nieuwe besmettingen",
-      "description": "Personen boven de 70 zijn extra kwetsbaar bij een besmetting met het coronavirus. Door zicht te houden op het aantal besmettingen onder deze groep kunnen de juiste maatregelen genomen worden om het virus in te dammen. Het gaat bij onderstaande cijfers om personen van 70 jaar of ouder die zelfstandig wonen. Personen van 70 of ouder die zijn opgenomen in een verpleeghuis of instelling voor gehandicaptenzorg worden op dit dashboard alleen in die groepen meegeteld.",
+      "description": "Personen van 70 jaar of ouder zijn extra kwetsbaar bij een besmetting met het coronavirus. Door zicht te houden op het aantal besmettingen onder deze groep kunnen de juiste maatregelen genomen worden om het virus in te dammen. Het gaat hierbij alleen om zelfstandig wonende 70-plussers.",
       "reference": {
         "href": "/verantwoording#thuiswonende-70-plussers",
         "text": "Lees meer in de cijferverantwoording."
