@@ -96,10 +96,12 @@ export function useTooltip<T>({
         return;
       }
 
-      setKeyboardValueIndex(newIndex);
-      setCoordinates(getTooltipCoordinates(undefined, newValue));
-      setValue(newValue);
-      setIsVisible(true);
+      requestAnimationFrame(() => {
+        setKeyboardValueIndex(newIndex);
+        setCoordinates(getTooltipCoordinates(undefined, newValue));
+        setValue(newValue);
+        setIsVisible(true);
+      });
     },
     [getTooltipCoordinates, keyboardValueIndex, values]
   );

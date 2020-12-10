@@ -223,18 +223,15 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
 
       <ChartTile
         title={siteText.infected_age_groups.title}
-        description={siteText.infected_age_groups.description}
+        description={replaceVariablesInText(
+          siteText.infected_age_groups.description,
+          ageDemographicExampleData
+        )}
         metadata={{
           date: dataInfectedDelta.last_value.date_of_report_unix,
           source: text.bronnen.rivm,
         }}
       >
-        <Text mt={0}>
-          {replaceVariablesInText(
-            siteText.infected_age_groups.example,
-            ageDemographicExampleData
-          )}
-        </Text>
         <AgeDemographic data={data.infected_age_groups} />
       </ChartTile>
 
