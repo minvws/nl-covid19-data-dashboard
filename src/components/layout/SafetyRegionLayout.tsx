@@ -283,10 +283,12 @@ function SafetyRegionLayout(
                     </MetricMenuItem>
 
                     <MetricMenuItem>
-                      <Link href="/landelijk/gehandicaptenzorg">
+                      <Link
+                        href={`/veiligheidsregio/${code}/gehandicaptenzorg`}
+                      >
                         <a
                           className={getClassName(
-                            '/landelijk/gehandicaptenzorg'
+                            '/veiligheidsregio/[code]/gehandicaptenzorg'
                           )}
                         >
                           <TitleWithIcon
