@@ -1,16 +1,11 @@
-import Highcharts from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
 import { useMemo } from 'react';
+import { HighchartsWrapper } from '~/components/common/highcharts';
 import text from '~/locale/index';
 import { colors } from '~/style/theme';
 import { createDate } from '~/utils/createDate';
 import { formatDateFromMilliseconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
-
-if (typeof Highcharts === 'object') {
-  require('highcharts/highcharts-more')(Highcharts);
-}
 
 type TRange = [Date, number | null, number | null];
 type TLine = [Date, number | null];
@@ -86,7 +81,7 @@ export default function AreaChart(props: AreaChartProps) {
     timeframe,
   ]);
 
-  return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;
+  return <HighchartsWrapper options={chartOptions} />;
 }
 
 function getChartOptions(props: IGetOptions): Highcharts.Options {

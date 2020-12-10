@@ -1,6 +1,5 @@
-import Highcharts from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
 import React from 'react';
+import { HighchartsWrapper } from '~/components/common/highcharts';
 import { colors } from '~/style/theme';
 import { assert } from '~/utils/assert';
 import { formatDateFromSeconds } from '~/utils/formatDate';
@@ -47,7 +46,7 @@ export function BehaviorLineChart<T>({
 
   const options = getChartOptions<T>(filteredValueLists, linesConfig);
 
-  return <HighchartsReact highcharts={Highcharts} options={options} />;
+  return <HighchartsWrapper options={options} />;
 }
 
 function getChartOptions<T>(values: Value[][], linesConfig: LineConfig<T>[]) {
