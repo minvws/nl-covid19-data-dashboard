@@ -18,6 +18,12 @@ import { BehaviorTypeControl } from './components/behavior-type-control';
 
 const text = siteText.nl_gedrag;
 
+const unusedRules = [
+  'symptoms_stay_home',
+  'symptoms_get_tested',
+  'wear_mask_public_transport',
+];
+
 export function BehaviorChoroplethTile() {
   const [type, setType] = useState<BehaviorType>('compliance');
   const [currentId, setCurrentId] = useState<BehaviorIdentifier>('wash_hands');
@@ -41,10 +47,12 @@ export function BehaviorChoroplethTile() {
           <Select
             value={currentId}
             onChange={setCurrentId}
-            options={behaviorIdentifiers.map((id) => ({
-              value: id,
-              label: siteText.gedrag_onderwerpen[id],
-            }))}
+            options={behaviorIdentifiers
+              .filter((identifier) => unusedRules.indexOf(identifier) < 0)
+              .map((id) => ({
+                value: id,
+                label: siteText.gedrag_onderwerpen[id],
+              }))}
           />
         </>
       }
