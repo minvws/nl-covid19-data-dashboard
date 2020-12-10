@@ -3,9 +3,9 @@ import { ContentHeader } from '~/components-styled/content-header';
 import { KpiWithIllustrationTile } from '~/components-styled/kpi-with-illustration-tile';
 import { Legenda } from '~/components-styled/legenda';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { PageBarScale } from '~/components-styled/page-barscale';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
-import { ReproductionIndexBarScale } from '~/components/landelijk/reproduction-index-barscale';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
@@ -30,6 +30,7 @@ const ReproductionIndex: FCWithLayout<NationalPageProps> = (props) => {
       />
       <ContentHeader
         category={siteText.nationaal_layout.headings.besmettingen}
+        screenReaderCategory={siteText.reproductiegetal.titel_sidebar}
         title={text.titel}
         icon={<Repro />}
         subtitle={text.pagina_toelichting}
@@ -56,9 +57,12 @@ const ReproductionIndex: FCWithLayout<NationalPageProps> = (props) => {
             description: text.extra_uitleg,
           }}
         >
-          <ReproductionIndexBarScale
-            data={lastKnownValidData}
-            showAxis={true}
+          <PageBarScale
+            data={data}
+            scope="nl"
+            metricName="reproduction_index_last_known_average"
+            metricProperty="reproduction_index_avg"
+            localeTextKey="reproductiegetal"
           />
           <Text>{text.barscale_toelichting}</Text>
         </KpiWithIllustrationTile>

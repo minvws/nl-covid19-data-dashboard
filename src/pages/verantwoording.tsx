@@ -3,7 +3,7 @@ import Head from 'next/head';
 import path from 'path';
 import { Collapsable } from '~/components-styled/collapsable';
 import { FCWithLayout, getLayoutWithMetadata } from '~/components/layout';
-import { MaxWidth } from '~/components/maxWidth';
+import { MaxWidth } from '~/components-styled/max-width';
 import siteText, { TALLLanguages } from '~/locale/index';
 import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
 import { getSkipLinkId } from '~/utils/skipLinks';

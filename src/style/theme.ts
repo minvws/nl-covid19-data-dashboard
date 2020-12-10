@@ -1,5 +1,3 @@
-import { ScaleThemeProperties, ThemeBreakPoints } from '@styled-system/css';
-
 const space = [
   0,
   '0.25rem', // 4px at default zoom
@@ -10,7 +8,7 @@ const space = [
   '8rem',
   '16rem',
   '32rem',
-];
+] as const;
 
 /**
  * Valid space index values
@@ -25,7 +23,7 @@ export type SpaceValue = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 const fonts = {
   body: "'RO Sans', Calibri, sans-serif",
   code: "source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace",
-};
+} as const;
 
 const fontSizes = [
   '0.6875rem', // 11px, used in chart dates labels
@@ -34,15 +32,15 @@ const fontSizes = [
   '1.42383rem',
   '2rem',
   '2.02729rem',
-];
+] as const;
 
 const fontWeights = {
   normal: 400,
   bold: 600,
   heavy: 700,
-};
+} as const;
 
-const lineHeights = [1.2, 1.4, 1.5];
+const lineHeights = [1.2, 1.4, 1.5] as const;
 
 /**
  * Breakpoints used in original code and their em equivalent
@@ -59,20 +57,15 @@ const lineHeights = [1.2, 1.4, 1.5];
  */
 
 interface Breakpoints extends Array<string> {
-  xs?: string;
-  sm?: string;
-  md?: string;
-  lg?: string;
-  xl?: string;
+  xs: string;
+  sm: string;
+  md: string;
+  lg: string;
+  xl: string;
 }
 
-const breakpoints: Partial<Breakpoints> = [
-  '26em',
-  '48em',
-  '60em',
-  '75em',
-  '100em',
-];
+// @ts-expect-error ignore error, missing props are assigned after this line
+const breakpoints: Breakpoints = ['26em', '48em', '60em', '75em', '100em'];
 
 breakpoints.xs = breakpoints[0]; // ~420px
 breakpoints.sm = breakpoints[1]; // ~768px
@@ -86,9 +79,7 @@ const mediaQueries = {
   md: `screen and (min-width: ${breakpoints[2]})`,
   lg: `screen and (min-width: ${breakpoints[3]})`,
   xl: `screen and (min-width: ${breakpoints[4]})`,
-};
-
-type TMediaQueries = typeof mediaQueries;
+} as const;
 
 export const colors = {
   blue: '#01689b',
@@ -97,20 +88,29 @@ export const colors = {
   shadow: '#e5e5e5',
   lightGray: '#dfdfdf',
   annotation: '#595959',
+  header: '#cd005a',
   notification: '#cd005a',
   red: '#F35363',
   category: '#6b6b6b',
+  border: '#c4c4c4',
+  lightBlue: '#E0EEF6',
 
   data: {
     primary: '#007BC7',
     secondary: '#154273',
+    neutral: '#C6C8CA',
     fill: 'rgba(0, 123, 199, .05)',
     scale: {
       blue: ['#8FCAE7', '#5BADDB', '#248FCF', '#0070BB', '#00529D', '#003580'],
       magenta: ['#F6B4D1', '#D3719C', '#9E3A66', '#64032D', '#000000'],
     },
+    gradient: {
+      green: '#69c253',
+      yellow: '#D3A500',
+      red: '#f35065',
+    },
   },
-};
+} as const;
 
 export type ThemeColors = typeof colors;
 
@@ -118,25 +118,22 @@ const radii = [0, 5, 10];
 
 const shadows = {
   tile: `0 -1px 1px 0 ${colors.shadow}, 0 1px 1px 0 ${colors.shadow}, 0 2px 2px 0 ${colors.shadow}, 0 4px 4px 0 ${colors.shadow}, 0 6px 6px 0 ${colors.shadow}`,
-};
+} as const;
 
-type TDashboardTheme = ScaleThemeProperties &
-  ThemeBreakPoints & { mediaQueries: TMediaQueries } & {
-    colors: ThemeColors;
-  };
-
-const theme: TDashboardTheme = {
+const theme = {
   fonts,
   fontSizes,
   fontWeights,
   lineHeights,
-  breakpoints: breakpoints as any,
+  breakpoints,
   mediaQueries,
   space,
   colors,
   radii,
   shadows,
-};
+} as const;
+
+type Theme = typeof theme;
 
 export default theme;
 
@@ -145,5 +142,5 @@ export default theme;
  */
 declare module 'styled-components' {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  export interface DefaultTheme extends TDashboardTheme {}
+  export interface DefaultTheme extends Theme {}
 }

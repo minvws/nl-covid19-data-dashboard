@@ -152,13 +152,58 @@ const behaviorThresholds: ChoroplethThresholdsValue[] = [
   },
 ];
 
+const elderlyAtHomeThresholds: ChoroplethThresholdsValue[] = [
+  {
+    color: '#ffffff',
+    threshold: 0,
+  },
+  {
+    color: colors.data.scale.blue[0],
+    threshold: 1,
+  },
+  {
+    color: colors.data.scale.blue[1],
+    threshold: 5,
+  },
+  {
+    color: colors.data.scale.blue[2],
+    threshold: 8,
+  },
+  {
+    color: colors.data.scale.blue[3],
+    threshold: 11,
+  },
+  {
+    color: colors.data.scale.blue[4],
+    threshold: 21,
+  },
+  {
+    color: colors.data.scale.blue[5],
+    threshold: 31,
+  },
+];
+
 export const regionThresholds = {
-  positive_tested_people: positiveTestedThresholds,
-  hospital_admissions: hospitalAdmissionsThresholds,
-  escalation_levels: escalationThresholds,
+  positive_tested_people: {
+    positive_tested_people: positiveTestedThresholds,
+  },
+  hospital_admissions: {
+    hospital_admissions: hospitalAdmissionsThresholds,
+  },
+  escalation_levels: {
+    escalation_level: escalationThresholds,
+  },
   nursing_home: {
     infected_locations_percentage: nursingHomeInfectedLocationsPercentageThresholds,
   },
-  sewer: sewerThresholds,
+  disability_care: {
+    infected_locations_percentage: nursingHomeInfectedLocationsPercentageThresholds,
+  },
+  sewer: {
+    average: sewerThresholds,
+  },
   behavior: behaviorThresholds,
+  elderly_at_home: {
+    positive_tested_daily_per_100k: elderlyAtHomeThresholds,
+  },
 } as const;

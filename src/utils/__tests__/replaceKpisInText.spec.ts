@@ -1,12 +1,6 @@
 import { replaceKpisInText } from '../replaceKpisInText';
 
 describe('Util: replaceKpisInText', () => {
-  it('Should embed nothing if there are no KPIs', () => {
-    expect(replaceKpisInText('Example text string', [])).toMatchInlineSnapshot(
-      `"Example text string"`
-    );
-  });
-
   it('Should embed KPI if there is one', () => {
     expect(
       replaceKpisInText('Example text {{foo}}', [
@@ -31,10 +25,11 @@ describe('Util: replaceKpisInText', () => {
     ).toMatchInlineSnapshot(`"Example text"`);
   });
 
-  it('Should use empty string if KPI is not provided', () => {
-    expect(replaceKpisInText('Example text {{zap}}', [])).toMatchInlineSnapshot(
-      `"Example text "`
-    );
+  it('Should throw error if KPI is not provided', () => {
+    const testFunc = () => {
+      replaceKpisInText('Example text {{zap}}', []);
+    };
+    expect(testFunc).toThrow(Error);
   });
 
   it('Should replace multiple KPIs', () => {

@@ -19,11 +19,7 @@ const text = siteText.verdenkingen_huisartsen;
 
 const SuspectedPatients: FCWithLayout<NationalPageProps> = (props) => {
   const { data } = props;
-
-  const doctorData = data.verdenkingen_huisartsen;
-
-  const total = doctorData.last_value.geschat_aantal;
-  const normalized = doctorData.last_value.incidentie;
+  const lastValue = data.verdenkingen_huisartsen.last_value;
 
   return (
     <>
@@ -33,13 +29,14 @@ const SuspectedPatients: FCWithLayout<NationalPageProps> = (props) => {
       />
       <ContentHeader
         category={siteText.nationaal_layout.headings.vroege_signalen}
+        screenReaderCategory={siteText.verdenkingen_huisartsen.titel_sidebar}
         title={text.titel}
         icon={<Arts />}
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateInfo: doctorData.last_value.week_unix,
-          dateOfInsertionUnix: doctorData.last_value.date_of_insertion_unix,
+          dateInfo: lastValue.week_unix,
+          dateOfInsertionUnix: lastValue.date_of_insertion_unix,
           dataSources: [text.bronnen.nivel],
         }}
         reference={text.reference}
@@ -49,47 +46,52 @@ const SuspectedPatients: FCWithLayout<NationalPageProps> = (props) => {
         <KpiTile
           title={text.kpi_titel}
           metadata={{
-            date: doctorData.last_value.week_unix,
+            date: lastValue.week_unix,
             source: text.bronnen.nivel,
           }}
         >
-          <KpiValue absolute={total} data-cy="geschat_aantal" />
+          <KpiValue
+            absolute={lastValue.geschat_aantal}
+            data-cy="geschat_aantal"
+            difference={data.difference.huisarts_verdenkingen__geschat_aantal}
+          />
           <Text>{text.barscale_toelichting}</Text>
         </KpiTile>
         <KpiTile
           title={text.normalized_kpi_titel}
           metadata={{
-            date: doctorData.last_value.week_unix,
+            date: lastValue.week_unix,
             source: text.bronnen.nivel,
           }}
         >
-          <KpiValue absolute={normalized} data-cy="incidentie" />
+          <KpiValue
+            absolute={lastValue.incidentie}
+            data-cy="incidentie"
+            difference={data.difference.huisarts_verdenkingen__incidentie}
+          />
           <Text>{text.normalized_kpi_toelichting}</Text>
         </KpiTile>
       </TwoKpiSection>
 
-      {doctorData && (
-        <ChartTileWithTimeframe
-          title={text.linechart_titel}
-          metadata={{ source: text.bronnen.nivel }}
-          timeframeOptions={['all', '5weeks']}
-        >
-          {(timeframe) => (
-            <LineChartWithWeekTooltip
-              title={text.linechart_titel}
-              timeframe={timeframe}
-              values={doctorData.values.map((value) => ({
-                value: value.incidentie,
-                date: value.week_unix,
-                week: {
-                  start: value.week_start_unix,
-                  end: value.week_end_unix,
-                },
-              }))}
-            />
-          )}
-        </ChartTileWithTimeframe>
-      )}
+      <ChartTileWithTimeframe
+        title={text.linechart_titel}
+        metadata={{ source: text.bronnen.nivel }}
+        timeframeOptions={['all', '5weeks']}
+      >
+        {(timeframe) => (
+          <LineChartWithWeekTooltip
+            timeframe={timeframe}
+            values={data.verdenkingen_huisartsen.values.map((value) => ({
+              value: value.incidentie,
+              date: value.week_unix,
+              week: {
+                start: value.week_start_unix,
+                end: value.week_end_unix,
+              },
+            }))}
+          />
+        )}
+      </ChartTileWithTimeframe>
     </>
   );
 };

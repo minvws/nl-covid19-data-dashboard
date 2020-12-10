@@ -1,3 +1,4 @@
 {
-  "fixturesFolder": "public/json"
+  "fixturesFolder": "public/json",
+  "baseUrl": "http://localhost:3000"
 }

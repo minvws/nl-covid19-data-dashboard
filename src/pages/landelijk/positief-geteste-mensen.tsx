@@ -13,9 +13,9 @@ import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { MultipleLineChartTile } from '~/components-styled/multiple-line-chart-tile';
+import { PageBarScale } from '~/components-styled/page-barscale';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
-import { BarChart } from '~/components/charts/index';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
@@ -23,22 +23,45 @@ import { createSelectMunicipalHandler } from '~/components/choropleth/select-han
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
 import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/create-positive-tested-people-regional-tooltip';
-import { PositiveTestedPeopleBarScale } from '~/components/landelijk/positive-tested-people-barscale';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
+import { AgeDemographic } from '~/domain/infected-people/age-demographic/age-demographic';
+import { formatAgeGroupRange } from '~/domain/infected-people/age-demographic/age-demographic-chart';
 import siteText from '~/locale/index';
 import {
   getNationalStaticProps,
   NationalPageProps,
 } from '~/static-props/nl-data';
 import { colors } from '~/style/theme';
+import { NationalInfectedAgeGroups } from '~/types/data.d';
+import { assert } from '~/utils/assert';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text = siteText.positief_geteste_personen;
 const ggdText = siteText.positief_geteste_personen_ggd;
+
+/* Retrieves certain age demographic data to be used in the example text. */
+function getAgeDemographicExampleData(data: NationalInfectedAgeGroups) {
+  const ageGroupRange = '20-29';
+  const value = data.values.find((x) => x.age_group_range === ageGroupRange);
+
+  assert(
+    value,
+    `NationalInfectedAgeGroups should contain a value for age group ${ageGroupRange}`
+  );
+
+  return {
+    ageGroupRange: formatAgeGroupRange(ageGroupRange),
+    ageGroupPercentage: `${formatPercentage(
+      value.age_group_percentage * 100
+    )}%`,
+    infectedPercentage: `${formatPercentage(value.infected_percentage * 100)}%`,
+  };
+}
 
 const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>(
@@ -47,15 +70,11 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
   const router = useRouter();
 
   const dataInfectedDelta = data.infected_people_delta_normalized;
-  const dataIntakeAge = data.intake_share_age_groups;
   const dataGgdLastValue = data.ggd.last_value;
   const dataGgdValues = data.ggd.values;
 
-  const barChartTotal: number = dataIntakeAge.values.reduce(
-    (mem: number, part): number => {
-      return mem + part.infected_per_agegroup_increase;
-    },
-    0
+  const ageDemographicExampleData = getAgeDemographicExampleData(
+    data.infected_age_groups
   );
 
   return (
@@ -66,6 +85,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
       />
       <ContentHeader
         category={siteText.nationaal_layout.headings.besmettingen}
+        screenReaderCategory={siteText.positief_geteste_personen.titel_sidebar}
         title={text.titel}
         icon={<Getest />}
         subtitle={text.pagina_toelichting}
@@ -88,7 +108,14 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
             source: text.bronnen.rivm,
           }}
         >
-          <PositiveTestedPeopleBarScale data={data} showAxis />
+          <PageBarScale
+            data={data}
+            scope="nl"
+            metricName="infected_people_delta_normalized"
+            metricProperty="infected_daily_increase"
+            localeTextKey="positief_geteste_personen"
+            differenceKey="infected_people_delta_normalized__infected_daily_increase"
+          />
 
           <Text>{text.barscale_toelichting}</Text>
         </KpiTile>
@@ -144,7 +171,8 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
         onChangeControls={setSelectedMap}
         legend={{
           title: text.chloropleth_legenda.titel,
-          thresholds: regionThresholds.positive_tested_people,
+          thresholds:
+            regionThresholds.positive_tested_people.positive_tested_people,
         }}
       >
         {/**
@@ -161,14 +189,20 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
         {selectedMap === 'municipal' && (
           <MunicipalityChoropleth
             metricName="positive_tested_people"
-            tooltipContent={createPositiveTestedPeopleMunicipalTooltip(router)}
+            metricProperty="positive_tested_people"
+            tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
+              createSelectMunicipalHandler(router)
+            )}
             onSelect={createSelectMunicipalHandler(router)}
           />
         )}
         {selectedMap === 'region' && (
           <SafetyRegionChoropleth
             metricName="positive_tested_people"
-            tooltipContent={createPositiveTestedPeopleRegionalTooltip(router)}
+            metricProperty="positive_tested_people"
+            tooltipContent={createPositiveTestedPeopleRegionalTooltip(
+              createSelectRegionHandler(router)
+            )}
             onSelect={createSelectRegionHandler(router)}
           />
         )}
@@ -188,27 +222,17 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
       />
 
       <ChartTile
-        title={text.barchart_titel}
-        description={text.barchart_toelichting}
+        title={siteText.infected_age_groups.title}
+        description={replaceVariablesInText(
+          siteText.infected_age_groups.description,
+          ageDemographicExampleData
+        )}
         metadata={{
           date: dataInfectedDelta.last_value.date_of_report_unix,
           source: text.bronnen.rivm,
         }}
       >
-        <BarChart
-          keys={text.barscale_keys}
-          data={dataIntakeAge.values.map((value) => ({
-            y: value.infected_per_agegroup_increase,
-            label:
-              barChartTotal > 0
-                ? `${(
-                    (value.infected_per_agegroup_increase * 100) /
-                    barChartTotal
-                  ).toFixed(0)}%`
-                : false,
-          }))}
-          axisTitle={text.barchart_axis_titel}
-        />
+        <AgeDemographic data={data.infected_age_groups} />
       </ChartTile>
 
       <ContentHeader
@@ -240,7 +264,11 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
             source: ggdText.bronnen.rivm,
           }}
         >
-          <KpiValue absolute={dataGgdLastValue.tested_total} />
+          <KpiValue
+            data-cy="ggd_tested_total"
+            absolute={dataGgdLastValue.tested_total}
+            difference={data.difference.ggd__tested_total}
+          />
           <Text>{ggdText.totaal_getest_week_uitleg}</Text>
         </KpiTile>
         <KpiTile
@@ -254,8 +282,9 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
           }}
         >
           <KpiValue
-            absolute={dataGgdLastValue.infected}
+            data-cy="ggd_infected"
             percentage={dataGgdLastValue.infected_percentage}
+            difference={data.difference.ggd__infected_percentage}
           />
           <Text>{ggdText.positief_getest_week_uitleg}</Text>
           <Text>

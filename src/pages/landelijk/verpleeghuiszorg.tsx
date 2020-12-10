@@ -42,6 +42,9 @@ const NursingHomeCare: FCWithLayout<NationalPageProps> = (props) => {
 
       <ContentHeader
         category={siteText.nationaal_layout.headings.kwetsbare_groepen}
+        screenReaderCategory={
+          siteText.verpleeghuis_besmette_locaties.titel_sidebar
+        }
         title={positiveTestedPeopleText.titel}
         icon={<Verpleeghuiszorg />}
         subtitle={positiveTestedPeopleText.pagina_toelichting}
@@ -67,6 +70,7 @@ const NursingHomeCare: FCWithLayout<NationalPageProps> = (props) => {
           <KpiValue
             data-cy="newly_infected_people"
             absolute={nursinghomeData.last_value.newly_infected_people}
+            difference={data.difference.nursing_home__newly_infected_people}
           />
         </KpiTile>
       </TwoKpiSection>
@@ -110,6 +114,7 @@ const NursingHomeCare: FCWithLayout<NationalPageProps> = (props) => {
             percentage={
               nursinghomeData.last_value.infected_locations_percentage
             }
+            difference={data.difference.nursing_home__infected_locations_total}
           />
           <Text>{infectedLocationsText.kpi_toelichting}</Text>
         </KpiTile>
@@ -123,7 +128,7 @@ const NursingHomeCare: FCWithLayout<NationalPageProps> = (props) => {
         >
           <KpiValue
             data-cy="newly_infected_locations"
-            absolute={nursinghomeData?.last_value.newly_infected_locations}
+            absolute={nursinghomeData.last_value.newly_infected_locations}
           />
           <Text>{infectedLocationsText.barscale_toelichting}</Text>
         </KpiTile>
@@ -144,8 +149,10 @@ const NursingHomeCare: FCWithLayout<NationalPageProps> = (props) => {
       >
         <SafetyRegionChoropleth
           metricName="nursing_home"
-          metricValueName="infected_locations_percentage"
-          tooltipContent={createInfectedLocationsRegionalTooltip(router)}
+          metricProperty="infected_locations_percentage"
+          tooltipContent={createInfectedLocationsRegionalTooltip(
+            createSelectRegionHandler(router, 'verpleeghuiszorg')
+          )}
           onSelect={createSelectRegionHandler(router, 'verpleeghuiszorg')}
         />
       </ChoroplethTile>
@@ -191,16 +198,14 @@ const NursingHomeCare: FCWithLayout<NationalPageProps> = (props) => {
         </KpiTile>
       </TwoKpiSection>
 
-      {data && (
-        <LineChartTile
-          metadata={{ source: locationDeaths.bronnen.rivm }}
-          title={locationDeaths.linechart_titel}
-          values={nursinghomeData.values.map((value) => ({
-            value: value.deceased_daily,
-            date: value.date_of_report_unix,
-          }))}
-        />
-      )}
+      <LineChartTile
+        metadata={{ source: locationDeaths.bronnen.rivm }}
+        title={locationDeaths.linechart_titel}
+        values={nursinghomeData.values.map((value) => ({
+          value: value.deceased_daily,
+          date: value.date_of_report_unix,
+        }))}
+      />
     </>
   );
 };

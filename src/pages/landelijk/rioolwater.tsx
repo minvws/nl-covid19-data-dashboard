@@ -35,6 +35,7 @@ const SewerWater: FCWithLayout<NationalPageProps> = ({ data }) => {
       />
       <ContentHeader
         category={siteText.nationaal_layout.headings.vroege_signalen}
+        screenReaderCategory={siteText.rioolwater_metingen.titel_sidebar}
         title={text.titel}
         icon={<RioolwaterMonitoring />}
         subtitle={text.pagina_toelichting}
@@ -66,6 +67,7 @@ const SewerWater: FCWithLayout<NationalPageProps> = ({ data }) => {
             data-cy="sewer_average"
             absolute={sewerAverages.last_value.average}
             valueAnnotation={siteText.waarde_annotaties.riool_normalized}
+            difference={data.difference.sewer__average}
           />
         </KpiTile>
         <KpiTile
@@ -124,13 +126,15 @@ const SewerWater: FCWithLayout<NationalPageProps> = ({ data }) => {
         }}
         legend={{
           title: text.legenda_titel,
-          thresholds: regionThresholds.sewer,
+          thresholds: regionThresholds.sewer.average,
         }}
       >
         <SafetyRegionChoropleth
           metricName="sewer"
-          metricValueName="average"
-          tooltipContent={createSewerRegionalTooltip(router)}
+          metricProperty="average"
+          tooltipContent={createSewerRegionalTooltip(
+            createSelectRegionHandler(router, 'rioolwater')
+          )}
           onSelect={createSelectRegionHandler(router, 'rioolwater')}
         />
       </ChoroplethTile>

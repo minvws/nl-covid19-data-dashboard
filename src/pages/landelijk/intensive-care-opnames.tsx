@@ -3,9 +3,9 @@ import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { PageBarScale } from '~/components-styled/page-barscale';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
-import { IntakeIntensiveCareBarscale } from '~/components/landelijk/intake-intensive-care-barscale';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
@@ -32,6 +32,7 @@ const IntakeIntensiveCare: FCWithLayout<NationalPageProps> = (props) => {
       />
       <ContentHeader
         category={siteText.nationaal_layout.headings.ziekenhuizen}
+        screenReaderCategory={siteText.ic_opnames_per_dag.titel_sidebar}
         title={text.titel}
         icon={<Arts />}
         subtitle={text.pagina_toelichting}
@@ -52,7 +53,14 @@ const IntakeIntensiveCare: FCWithLayout<NationalPageProps> = (props) => {
             source: text.bronnen.nice,
           }}
         >
-          <IntakeIntensiveCareBarscale data={data} showAxis showValue />
+          <PageBarScale
+            data={data}
+            scope="nl"
+            metricName="intake_intensivecare_ma"
+            metricProperty="moving_average_ic"
+            localeTextKey="ic_opnames_per_dag"
+            differenceKey="intake_intensivecare_ma__moving_average_ic"
+          />
           <Text>{text.extra_uitleg}</Text>
         </KpiTile>
 
@@ -67,6 +75,9 @@ const IntakeIntensiveCare: FCWithLayout<NationalPageProps> = (props) => {
             data-cy="covid_occupied"
             absolute={dataBeds.last_value.covid_occupied}
             percentage={dataBeds.last_value.covid_percentage_of_all_occupied}
+            difference={
+              data.difference.intensive_care_beds_occupied__covid_occupied
+            }
           />
           <Text>{text.kpi_bedbezetting.description}</Text>
         </KpiTile>

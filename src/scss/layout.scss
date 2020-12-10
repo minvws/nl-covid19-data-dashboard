@@ -1,5 +1,12 @@
 @import './variables.scss';
 
+main {
+  /**
+   * IE11 does not support the main tag, the following line makes it styleable
+   */
+  display: block;
+}
+
 .container {
   display: flex;
   flex-direction: column-reverse;
@@ -208,7 +215,8 @@
   > aside {
     flex-basis: 100%;
   }
-  > section {
+  > section,
+  main {
     background: $page-background;
     padding: 2em;
     flex-basis: 100%;
@@ -226,7 +234,8 @@
   .national-layout,
   .safety-region-layout,
   .municipality-layout {
-    > section {
+    > section,
+    main {
       padding-top: 0;
       margin-top: 2em;
     }
@@ -295,7 +304,8 @@
       width: 25em;
     }
 
-    & > section {
+    & > section,
+    & > main {
       max-width: calc(100vw - 25em);
     }
 
@@ -319,7 +329,8 @@
   .national-layout,
   .safety-region-layout,
   .municipality-layout {
-    & > section {
+    & > section,
+    & > main {
       max-width: 80em;
     }
   }
@@ -331,28 +342,6 @@
   background: white;
   box-shadow: 1px -1px 5px #e5e5e5, -1px -1px 5px #e5e5e5;
   z-index: 2;
-
-  h2 {
-    font-size: 1.42383rem;
-    line-height: 1.40466;
-    padding: 1rem;
-    padding-bottom: 0.5rem;
-    padding-top: 2rem;
-  }
-
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-
-    li {
-      border-bottom: 1px solid #c4c4c4;
-
-      &:first-child {
-        border-top: 1px solid #c4c4c4;
-      }
-    }
-  }
 }
 
 .metric-wrapper {
@@ -362,18 +351,6 @@
   & > div:not(:first-child) {
     height: 3.5rem;
     margin-top: -1.25em;
-  }
-}
-
-.region-names {
-  h2 {
-    padding-bottom: 0;
-    margin-bottom: 0;
-  }
-
-  p {
-    margin-top: 0;
-    padding: 0 1rem 1rem;
   }
 }
 
@@ -408,12 +385,6 @@ a.metric-link {
     position: absolute;
     right: 1em;
     top: 1.35em;
-  }
-
-  &.last-developments-link {
-    &::after {
-      top: 1.15em;
-    }
   }
 }
 

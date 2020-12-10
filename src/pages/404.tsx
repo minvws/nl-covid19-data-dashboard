@@ -1,5 +1,5 @@
 import { FCWithLayout, getLayoutWithMetadata } from '~/components/layout';
-import { MaxWidth } from '~/components/maxWidth';
+import { MaxWidth } from '~/components-styled/max-width';
 import text from '~/locale/index';
 import getLastGeneratedData from '~/static-props/last-generated-data';
 import styles from './over.module.scss';

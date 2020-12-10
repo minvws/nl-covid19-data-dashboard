@@ -15,7 +15,7 @@
     "intake_intensivecare_ma",
     "infected_people_total",
     "infected_people_delta_normalized",
-    "intake_share_age_groups",
+    "infected_age_groups",
     "reproduction_index",
     "reproduction_index_last_known_average",
     "sewer",
@@ -24,7 +24,12 @@
     "hospital_beds_occupied",
     "intensive_care_beds_occupied",
     "ggd",
-    "nursing_home"
+    "nursing_home",
+    "behavior",
+    "deceased_rivm",
+    "deceased_cbs",
+    "elderly_at_home",
+    "disability_care"
   ],
   "additionalProperties": false,
   "properties": {
@@ -70,8 +75,8 @@
     "infected_people_delta_normalized": {
       "$ref": "infected_people_delta_normalized.json"
     },
-    "intake_share_age_groups": {
-      "$ref": "intake_share_age_groups.json"
+    "infected_age_groups": {
+      "$ref": "infected_age_groups.json"
     },
     "reproduction_index": {
       "$ref": "reproduction_index.json"
@@ -100,11 +105,23 @@
     "nursing_home": {
       "$ref": "nursing_home.json"
     },
+    "disability_care": {
+      "$ref": "disability_care.json"
+    },
     "restrictions": {
       "$ref": "restrictions.json"
     },
     "behavior": {
       "$ref": "behavior.json"
+    },
+    "deceased_rivm": {
+      "$ref": "deceased_rivm.json"
+    },
+    "deceased_cbs": {
+      "$ref": "deceased_cbs.json"
+    },
+    "elderly_at_home": {
+      "$ref": "elderly_at_home.json"
     }
   }
 }
