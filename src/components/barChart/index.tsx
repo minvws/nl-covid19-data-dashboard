@@ -1,6 +1,6 @@
-import { Highcharts } from '~/components/common/highcharts';
 import { useMemo } from 'react';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
+import { HighchartsWrapper } from '~/components/common/highcharts';
 import { colors } from '~/style/theme';
 
 interface IProps {
@@ -77,7 +77,7 @@ export default function BarChart(props: IProps) {
       {valueAnnotation && (
         <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
       )}
-      <Highcharts options={options} />
+      <HighchartsWrapper options={options} />
     </>
   );
 }

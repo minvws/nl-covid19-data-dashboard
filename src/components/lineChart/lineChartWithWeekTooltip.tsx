@@ -1,5 +1,5 @@
-import { Highcharts } from '~/components/common/highcharts';
 import React, { useMemo } from 'react';
+import { HighchartsWrapper } from '~/components/common/highcharts';
 import { colors } from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
@@ -38,7 +38,7 @@ export function LineChartWithWeekTooltip({
     return getOptions(filteredValues, tooltipFormatter, formatYAxis);
   }, [values, timeframe, tooltipFormatter, formatYAxis]);
 
-  return <Highcharts options={chartOptions} />;
+  return <HighchartsWrapper options={chartOptions} />;
 }
 
 function getOptions(

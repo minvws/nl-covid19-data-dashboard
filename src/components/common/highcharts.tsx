@@ -5,6 +5,10 @@ if (typeof HighchartsLibrary === 'object') {
   require('highcharts/highcharts-more')(HighchartsLibrary);
 }
 
-export function Highcharts({ options }: { options: Highcharts.Options }) {
+interface HighchartsWrapperProps {
+  options: Highcharts.Options;
+}
+
+export function HighchartsWrapper({ options }: HighchartsWrapperProps) {
   return <HighchartsReact highcharts={HighchartsLibrary} options={options} />;
 }

@@ -1,7 +1,6 @@
-import { Highcharts } from '~/components/common/highcharts';
-
 import React, { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
+import { HighchartsWrapper } from '~/components/common/highcharts';
 import text from '~/locale/index';
 import { assert } from '~/utils/assert';
 import { formatDateFromSeconds } from '~/utils/formatDate';
@@ -228,7 +227,7 @@ export function MultipleLineChart({
     return getChartOptions(filteredValueLists, linesConfig, signaalwaarde);
   }, [values, linesConfig, timeframe, signaalwaarde]);
 
-  return <Highcharts options={chartOptions} />;
+  return <HighchartsWrapper options={chartOptions} />;
 }
 
 /**

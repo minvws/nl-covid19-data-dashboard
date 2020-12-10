@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Highcharts } from '~/components/common/highcharts';
+import { HighchartsWrapper } from '~/components/common/highcharts';
 import text from '~/locale/index';
 import { colors } from '~/style/theme';
 import { createDate } from '~/utils/createDate';
@@ -81,7 +81,7 @@ export default function AreaChart(props: AreaChartProps) {
     timeframe,
   ]);
 
-  return <Highcharts options={chartOptions} />;
+  return <HighchartsWrapper options={chartOptions} />;
 }
 
 function getChartOptions(props: IGetOptions): Highcharts.Options {

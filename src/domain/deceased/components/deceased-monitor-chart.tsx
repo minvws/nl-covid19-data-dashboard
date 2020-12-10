@@ -1,4 +1,4 @@
-import { Highcharts } from '~/components/common/highcharts';
+import { HighchartsWrapper } from '~/components/common/highcharts';
 import {
   NationalDeceasedCbsValue,
   RegionalDeceasedCbsValue,
@@ -26,7 +26,7 @@ export default function DeceasedMonitorChart(props: DeceasedMonitorProps) {
   const { config, values } = props;
   const chartOptions = useHighchartOptions(values, config);
 
-  return <Highcharts options={chartOptions} />;
+  return <HighchartsWrapper options={chartOptions} />;
 }
 
 function useHighchartOptions(values: CbsValue[], config: SeriesConfig) {

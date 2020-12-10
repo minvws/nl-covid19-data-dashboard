@@ -1,7 +1,7 @@
-import { Highcharts } from '~/components/common/highcharts';
 import React, { useMemo } from 'react';
 import { isFilled } from 'ts-is-present';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
+import { HighchartsWrapper } from '~/components/common/highcharts';
 import text from '~/locale/index';
 import { colors } from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
@@ -218,7 +218,7 @@ export default function LineChart<T extends Value>({
         <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
       )}
       <div>
-        <Highcharts options={chartOptions} />
+        <HighchartsWrapper options={chartOptions} />
       </div>
     </section>
   );

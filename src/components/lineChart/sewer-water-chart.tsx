@@ -1,9 +1,9 @@
-import { Highcharts } from '~/components/common/highcharts';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import Dot from '~/assets/dot.svg';
 import Line from '~/assets/line.svg';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
+import { HighchartsWrapper } from '~/components/common/highcharts';
 import { TimeframeOption } from '~/utils/timeframe';
 import {
   SewerPerInstallationBaseValue,
@@ -46,7 +46,7 @@ export function SewerWaterChart<T extends SewerPerInstallationBaseValue>(
       {valueAnnotation && (
         <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
       )}
-      <Highcharts options={chartOptions} />
+      <HighchartsWrapper options={chartOptions} />
       {scatterPlotValues.length > 1 && (
         <div>
           <ul>
