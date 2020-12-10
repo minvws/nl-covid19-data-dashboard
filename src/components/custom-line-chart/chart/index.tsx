@@ -64,7 +64,7 @@ function Chart({
     nice: NUM_TICKS,
   });
 
-  type Trend = {
+  type DataPoint = {
     date: Date;
     value: number;
     week: {
@@ -74,15 +74,15 @@ function Chart({
   };
 
   const bisect = useCallback(
-    (trend: Array<Trend>, mx: number) => {
+    (trend: Array<DataPoint>, mx: number) => {
       if (trend.length === 1) return trend[0];
 
-      const bisect = bisector((d: Trend) => d.date).left;
+      const bisect = bisector((d: DataPoint) => d.date).left;
       const date: Date = x.invert(mx - margin.left);
       const index: number = bisect(trend, date, 1);
 
-      const d0: Trend = trend[index - 1];
-      const d1: Trend = trend[index];
+      const d0: DataPoint = trend[index - 1];
+      const d1: DataPoint = trend[index];
 
       return +date - +d0.date > +d1.date - +date ? d1 : d0;
     },
