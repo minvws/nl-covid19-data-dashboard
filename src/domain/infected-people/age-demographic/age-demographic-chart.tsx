@@ -87,7 +87,7 @@ export const AgeDemographicChart = memo<AgeDemographicChartProps>(
           fill="black"
           fontWeight="bold"
           fontSize="1rem"
-          width={xMax + margin.left}
+          width={xMax - 10}
         >
           {text.graph.age_group_percentage_title}
         </Text>
@@ -99,7 +99,7 @@ export const AgeDemographicChart = memo<AgeDemographicChartProps>(
           fill="black"
           fontWeight="bold"
           fontSize="1rem"
-          width={xMax + margin.right}
+          width={xMax - 10}
         >
           {text.graph.infected_percentage_title}
         </Text>
