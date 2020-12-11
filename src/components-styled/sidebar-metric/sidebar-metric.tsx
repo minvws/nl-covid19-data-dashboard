@@ -57,9 +57,7 @@ export function SidebarMetric<T extends { difference: unknown }>({
   const propertyValue =
     metricProperty && lastValue && lastValue[metricProperty];
 
-  const hasMetricProperty = metricProperty !== NO_METRIC_PROPERTY;
-
-  if (hasMetricProperty) {
+  if (metricProperty !== NO_METRIC_PROPERTY) {
     assert(
       isDefined(propertyValue),
       `Missing value for metric property ${[
@@ -90,7 +88,7 @@ export function SidebarMetric<T extends { difference: unknown }>({
   const config = getMetricConfig(
     scope,
     (metricName as unknown) as string,
-    hasMetricProperty ? metricProperty : NO_METRIC_PROPERTY
+    metricProperty
   );
 
   let description = '';
