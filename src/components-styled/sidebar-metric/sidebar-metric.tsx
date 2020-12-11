@@ -110,10 +110,10 @@ export function SidebarMetric<T extends { difference: unknown }>({
   } catch (err) {
     throw new Error(
       `Failed to format description for ${metricName}:${
-        metricProperty || '__no_property'
-      } from common.metricKPI.${
-        config.isWeeklyData ? 'dateRangeOfReport' : 'dateOfReport'
-      }: ${err.message}`
+        metricProperty || NO_METRIC_PROPERTY
+      }, likely due to a timestamp week/day configuration mismatch. Error: ${
+        err.message
+      }`
     );
   }
 
