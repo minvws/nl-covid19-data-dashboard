@@ -17,3 +17,9 @@ export type BarScaleConfig = {
   gradient: { color: string; value: number }[];
   rangesKey: string;
 };
+
+/**
+ * This is currently only used to facilitate behavior, where we do show metric
+ * data in the sidebar, but nothing specific to a metric property.
+ */
+export const NO_METRIC_PROPERTY = '__no_metric_property';
