@@ -87,10 +87,13 @@ function useHighchartOptions(values: CbsValue[], config: SeriesConfig) {
 
           if (!value) return '';
 
+          const startDate = toEpochMs(value.week_start_unix);
+          const endDate = toEpochMs(value.week_end_unix);
+
           return this.isFirst
-            ? formatDateFromMilliseconds(value?.week_start_unix * 1000, 'axis')
+            ? formatDateFromMilliseconds(startDate, 'axis')
             : this.isLast
-            ? formatDateFromMilliseconds(value?.week_end_unix * 1000, 'axis')
+            ? formatDateFromMilliseconds(endDate, 'axis')
             : '';
         },
       },
