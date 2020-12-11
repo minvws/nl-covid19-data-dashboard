@@ -3,11 +3,7 @@ import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import { MetricKeys } from '~/components/choropleth/shared';
 import siteText, { TALLLanguages } from '~/locale/index';
-import {
-  DataScope,
-  getMetricConfig,
-  NO_METRIC_PROPERTY,
-} from '~/metric-config';
+import { DataScope, getMetricConfig } from '~/metric-config';
 import { assert } from '~/utils/assert';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
@@ -43,7 +39,7 @@ export function SidebarMetric<T extends { difference: unknown }>({
   scope,
   data,
   metricName,
-  metricProperty = NO_METRIC_PROPERTY,
+  metricProperty,
   localeTextKey,
   differenceKey,
   showBarScale,
@@ -57,7 +53,7 @@ export function SidebarMetric<T extends { difference: unknown }>({
   const propertyValue =
     metricProperty && lastValue && lastValue[metricProperty];
 
-  if (metricProperty !== NO_METRIC_PROPERTY) {
+  if (metricProperty) {
     assert(
       isDefined(propertyValue),
       `Missing value for metric property ${[
