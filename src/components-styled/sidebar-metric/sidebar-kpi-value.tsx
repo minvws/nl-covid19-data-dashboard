@@ -8,7 +8,11 @@ import { Heading, InlineText } from '../typography';
 
 type SidebarKpiValueProps = {
   title: string;
-  value: number;
+  /**
+   * Make value optional for odd case where we do not show a metric.
+   * Currently only behavior is doing that.
+   */
+  value?: number;
   description: string;
   valueAnnotation?: string;
   difference?: DifferenceDecimal | DifferenceInteger;
@@ -38,12 +42,25 @@ export function SidebarKpiValue(props: SidebarKpiValueProps) {
         {title}
       </Heading>
       <Box display="flex" alignItems="center" justifyContent="flex-start">
-        <InlineText fontSize={3} fontWeight="bold" margin="0" marginRight={1}>
-          {isPercentage ? `${formatPercentage(value)}%` : formatNumber(value)}
-        </InlineText>
+        {isDefined(value) && (
+          <InlineText
+            fontSize={3}
+            fontWeight="bold"
+            margin="0"
+            marginRight={isDefined(difference) ? 1 : 3}
+          >
+            {isPercentage ? `${formatPercentage(value)}%` : formatNumber(value)}
+          </InlineText>
+        )}
 
         {isDefined(difference) && (
-          <Box as="span" fontSize={3} display="flex" alignItems="center">
+          <Box
+            as="span"
+            fontSize={3}
+            display="flex"
+            alignItems="center"
+            marginRight={1}
+          >
             <DifferenceIndicator value={difference} isContextSidebar={true} />
           </Box>
         )}
@@ -53,7 +70,6 @@ export function SidebarKpiValue(props: SidebarKpiValueProps) {
           margin="0"
           color="annotation"
           fontSize={1}
-          marginLeft={2}
         >
           {description}
         </InlineText>

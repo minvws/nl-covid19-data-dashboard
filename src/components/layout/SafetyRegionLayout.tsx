@@ -18,11 +18,8 @@ import {
 import { TitleWithIcon } from '~/components-styled/aside/title-with-icon';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
 import { ComboBox } from '~/components/comboBox';
-import { DeceasedMetric } from '~/components/common/deceased-metric';
-import { ElderlyAtHomeMetric } from '~/components/common/elderly-at-home-metric';
 import { getLayout as getSiteLayout } from '~/components/layout';
 import safetyRegions from '~/data/index';
-import { BehaviorMetric } from '~/domain/behavior/behavior-metric';
 import siteText from '~/locale/index';
 import { ISafetyRegionData } from '~/static-props/safetyregion-data';
 import { Link } from '~/utils/link';
@@ -200,14 +197,13 @@ function SafetyRegionLayout(
                               siteText.veiligheidsregio_sterfte.titel_sidebar
                             }
                           />
-                          <span className="metric-wrapper">
-                            <DeceasedMetric
-                              title={
-                                siteText.veiligheidsregio_sterfte.kpi_titel
-                              }
-                              data={data.deceased_rivm.last_value}
-                            />
-                          </span>
+                          <SidebarMetric
+                            data={data}
+                            scope="vr"
+                            metricName="deceased_rivm"
+                            metricProperty="covid_daily"
+                            localeTextKey="veiligheidsregio_sterfte"
+                          />
                         </a>
                       </Link>
                     </MetricMenuItem>
@@ -325,15 +321,13 @@ function SafetyRegionLayout(
                                 .titel_sidebar
                             }
                           />
-                          <span className="metric-wrapper">
-                            <ElderlyAtHomeMetric
-                              data={data.elderly_at_home.last_value}
-                              title={
-                                siteText.veiligheidsregio_thuiswonende_ouderen
-                                  .kpi_titel
-                              }
-                            />
-                          </span>
+                          <SidebarMetric
+                            data={data}
+                            scope="vr"
+                            metricName="elderly_at_home"
+                            metricProperty="positive_tested_daily"
+                            localeTextKey="veiligheidsregio_thuiswonende_ouderen"
+                          />
                         </a>
                       </Link>
                     </MetricMenuItem>
@@ -389,9 +383,12 @@ function SafetyRegionLayout(
                             icon={<Gedrag />}
                             title={siteText.regionaal_gedrag.sidebar.titel}
                           />
-                          <span className="metric-wrapper">
-                            <BehaviorMetric data={data.behavior} />
-                          </span>
+                          <SidebarMetric
+                            data={data}
+                            scope="vr"
+                            metricName="behavior"
+                            localeTextKey="gedrag_common"
+                          />
                         </a>
                       </Link>
                     </MetricMenuItem>
