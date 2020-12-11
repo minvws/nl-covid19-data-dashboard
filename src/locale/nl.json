@@ -1890,7 +1890,8 @@
       "kpi_covid_daily_description": "Dit getal toont het aantal patiënten waarvan aan de GGD gemeld is dat ze zijn overleden aan COVID-19, per dag. Een deel van de overlijdens is van eerdere dagen, die later zijn doorgegeven.",
       "kpi_covid_total_title": "Totaal aantal personen overleden aan COVID-19",
       "kpi_covid_total_description": "Dit getal laat van zien hoeveel personen in totaal is gemeld dat ze zijn overleden aan COVID-19, sinds het begin van de meldingen.",
-      "line_chart_covid_daily_title": "Gemelde aantal patiënten overleden aan COVID-19 over tijd"
+      "line_chart_covid_daily_title": "Gemelde aantal patiënten overleden aan COVID-19 over tijd",
+      "line_chart_covid_daily_description": ""
     },
     "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
   },
@@ -1920,7 +1921,8 @@
       "kpi_covid_daily_description": "Dit getal toont het aantal patiënten waarvan aan de GGD gemeld is dat ze zijn overleden aan COVID-19, per dag. Een deel van de overlijdens is van eerdere dagen, die later zijn doorgegeven.",
       "kpi_covid_total_title": "Totaal aantal personen overleden aan/met COVID-19",
       "kpi_covid_total_description": "Dit getal laat van zien hoeveel personen in totaal is gemeld dat ze zijn overleden aan/met COVID-19, sinds het begin van de meldingen.",
-      "line_chart_covid_daily_title": "Gemelde aantal patiënten overleden aan/met COVID-19 over tijd"
+      "line_chart_covid_daily_title": "Gemelde aantal patiënten overleden aan/met COVID-19 over tijd",
+      "line_chart_covid_daily_description": ""
     },
     "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
   },
