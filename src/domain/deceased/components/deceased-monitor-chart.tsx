@@ -63,14 +63,7 @@ function useHighchartOptions(values: CbsValue[], config: SeriesConfig) {
       lineColor: '#C4C4C4',
       gridLineColor: '#ca005d',
       type: 'datetime',
-      categories: values.map((x, i) =>
-        toEpochMs(
-          /**
-           * The last category will render the week_end date
-           */
-          values[i + 1] ? x.week_start_unix : x.week_end_unix
-        ).toString()
-      ),
+      categories: values.map((x) => toEpochMs(x.week_start_unix).toString()),
       title: {
         text: null,
       },
@@ -88,8 +81,16 @@ function useHighchartOptions(values: CbsValue[], config: SeriesConfig) {
          */
         rotation: ('0' as unknown) as number,
         formatter: function () {
-          return this.isFirst || this.isLast
-            ? formatDateFromMilliseconds(this.value, 'axis')
+          const value = values.find(
+            (x) => toEpochMs(x.week_start_unix) === Number(this.value)
+          );
+
+          if (!value) return '';
+
+          return this.isFirst
+            ? formatDateFromMilliseconds(value?.week_start_unix * 1000, 'axis')
+            : this.isLast
+            ? formatDateFromMilliseconds(value?.week_end_unix * 1000, 'axis')
             : '';
         },
       },
