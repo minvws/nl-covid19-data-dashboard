@@ -61,10 +61,11 @@ function calculateAgeDemographicCoordinates(
   const width = parentWidth;
 
   // Height and top margin are higher for small screens to fit the heading texts
-  const height = parentWidth < 400 ? 420 : 400;
+  const isNarrowScreen = parentWidth < 400;
+  const height = isNarrowScreen ? 420 : 400;
   const marginX = isSmallScreen ? 10 : 40;
   const margin = {
-    top: parentWidth < 400 ? 55 : 35,
+    top: isNarrowScreen ? 55 : 35,
     bottom: 20,
     left: marginX,
     right: marginX,
