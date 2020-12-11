@@ -10,7 +10,7 @@ type SidebarKpiValueProps = {
   title: string;
   /**
    * Make value optional for odd case where we do not show a metric.
-   * Currently only behavior is doing that.
+   * Currently only `Behavior` is doing that.
    */
   value?: number;
   description: string;
@@ -54,13 +54,7 @@ export function SidebarKpiValue(props: SidebarKpiValueProps) {
         )}
 
         {isDefined(difference) && (
-          <Box
-            as="span"
-            fontSize={3}
-            display="flex"
-            alignItems="center"
-            marginRight={1}
-          >
+          <Box fontSize={3} display="flex" alignItems="center" marginRight={1}>
             <DifferenceIndicator value={difference} isContextSidebar={true} />
           </Box>
         )}
