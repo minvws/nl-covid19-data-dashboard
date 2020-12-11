@@ -59,9 +59,17 @@ function calculateAgeDemographicCoordinates(
   // Define the graph dimensions and margins
   const ageRangeAxisWidth = isSmallScreen ? 60 : 100;
   const width = parentWidth;
-  const height = 400;
-  const marginX = isSmallScreen ? 6 : 40;
-  const margin = { top: 35, bottom: 20, left: marginX, right: marginX };
+
+  // Height and top margin are higher for small screens to fit the heading texts
+  const isNarrowScreen = parentWidth < 400;
+  const height = isNarrowScreen ? 420 : 400;
+  const marginX = isSmallScreen ? 10 : 40;
+  const margin = {
+    top: isNarrowScreen ? 55 : 35,
+    bottom: 20,
+    left: marginX,
+    right: marginX,
+  };
 
   const numTicks = isSmallScreen ? 3 : 4;
 
