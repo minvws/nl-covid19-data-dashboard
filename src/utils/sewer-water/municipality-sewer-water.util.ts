@@ -6,6 +6,7 @@ import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import siteText from '~/locale/index';
 import { assert } from '../assert';
 import { colors } from '~/style/theme';
+import { BarChartValue } from '~/components-styled/bar-chart/bar-chart-coordinates';
 
 /**
  * @TODO these helpers for VR and GM should be merged into one using generics.
@@ -43,6 +44,7 @@ export interface SewerWaterLineChartData {
 export interface SewerWaterBarChartData {
   keys: string[];
   data: Highcharts.XrangePointOptionsObject[];
+  values: BarChartValue[];
 }
 
 /**
@@ -214,6 +216,26 @@ export function getSewerWaterBarChartData(
               : false,
           } as Highcharts.XrangePointOptionsObject)
       ),
+    ],
+    values: [
+      {
+        y: text.average,
+        x: data.sewer.last_value.average,
+        color: colors.data.primary,
+        tooltip: `${formatDateFromSeconds(
+          data.sewer.last_value.week_unix,
+          'short'
+        )}: ${formatNumber(data.sewer.last_value.average)}`,
+      },
+      ...installations.map((installation) => ({
+        y: installation.last_value.rwzi_awzi_name,
+        x: installation.last_value.rna_normalized,
+        color: '#C1C1C1',
+        tooltip: `${formatDateFromSeconds(
+          installation.last_value.date_measurement_unix,
+          'short'
+        )}: ${formatNumber(installation.last_value.rna_normalized)}`,
+      })),
     ],
   };
 }

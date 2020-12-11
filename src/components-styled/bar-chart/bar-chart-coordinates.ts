@@ -3,6 +3,13 @@ import { ScaleBand } from 'd3-scale';
 import { MouseEvent, useMemo } from 'react';
 import { GetTooltipCoordinates } from '../tooltip';
 
+export interface BarChartValue {
+  x: number;
+  y: string;
+  tooltip: string;
+  color: string;
+}
+
 export interface BarChartCoordinates {
   width: number;
   height: number;
@@ -26,21 +33,18 @@ export interface BarChartCoordinates {
 }
 
 export function useBarChartCoordinates(
-  data: any[],
-  keys: string[],
+  values: BarChartValue[],
   parentWidth: number
 ) {
   return useMemo(() => {
-    return generateBarChartCoordinates(data, keys, parentWidth);
-  }, [data, keys, parentWidth]);
+    return generateBarChartCoordinates(values, parentWidth);
+  }, [values, parentWidth]);
 }
 
 function generateBarChartCoordinates(
-  data: any[],
-  keys: string[],
+  values: BarChartValue[],
   parentWidth: number
 ): BarChartCoordinates {
-  const values = data;
   const width = parentWidth;
 
   const margin = {
@@ -58,11 +62,8 @@ function generateBarChartCoordinates(
 
   const numTicks = 10;
 
-  const x = (value: any): number => value.y;
-  const y = (value: any) => {
-    const index = values.indexOf(value);
-    return keys[index];
-  };
+  const x = (value: BarChartValue): number => value.x;
+  const y = (value: BarChartValue): string => value.y;
 
   const xScale = scaleLinear({
     range: [0, xMax],
@@ -77,13 +78,16 @@ function generateBarChartCoordinates(
     padding: 0.2,
   });
 
-  const createPoint = (scale: any, accessor: any) => (value: any) =>
+  const createPoint = (scale: any, accessor: any) => (value: BarChartValue) =>
     scale(accessor(value));
 
   const xPoint = createPoint(xScale, x);
   const yPoint = createPoint(yScale, y);
 
-  function getTooltipCoordinates(event?: MouseEvent<any>, value?: any) {
+  function getTooltipCoordinates(
+    event?: MouseEvent<any>,
+    value?: BarChartValue
+  ) {
     const left = (value ? xPoint(value) : 0) + margin.left;
     const top = (value ? yPoint(value) : 0) + margin.top;
 

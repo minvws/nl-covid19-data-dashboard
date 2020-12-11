@@ -15,6 +15,7 @@ interface BarChartChartProps {
   closeTooltip: () => void;
   keyboardTooltip: (event: any) => void;
   xAxisLabel: string;
+  chartLabel: string;
 }
 
 const TickValue = ({ x, y, formattedValue }: TickRendererProps) => {
@@ -37,6 +38,7 @@ export function BarChartChart({
   openTooltip,
   closeTooltip,
   xAxisLabel,
+  chartLabel,
 }: BarChartChartProps) {
   const {
     width,
@@ -60,7 +62,7 @@ export function BarChartChart({
       height={height}
       role="img"
       id="age-demographic-chart"
-      aria-label="aria-labeltje"
+      aria-label={chartLabel}
       tabIndex={0}
       onKeyUp={(event: any) => keyboardTooltip(event)}
     >

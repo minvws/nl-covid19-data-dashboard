@@ -4,32 +4,32 @@ import { Box } from '../base';
 import { Tooltip, useTooltip } from '../tooltip';
 import { ValueAnnotation } from '../value-annotation';
 import { BarChartChart } from './bar-chart-chart';
-import { useBarChartCoordinates } from './bar-chart-coordinates';
+import { BarChartValue, useBarChartCoordinates } from './bar-chart-coordinates';
 import { BarChartTooltipContent } from './bar-chart-tooltip-contents';
 
 interface BarChartProps {
-  keys: string[];
-  data: any[];
-  axisTitle: string;
+  values: BarChartValue[];
+  xAxisTitle: string;
+  chartLabel: string;
   valueAnnotation?: string;
 }
 
 export function NewBarChart({
-  keys,
-  data,
-  axisTitle,
+  values,
+  xAxisTitle,
+  chartLabel,
   valueAnnotation,
 }: BarChartProps) {
   const [sizeRef, size] = useElementSize<HTMLDivElement>(400);
 
-  const coordinates = useBarChartCoordinates(data, keys, size.width);
+  const coordinates = useBarChartCoordinates(values, size.width);
 
   const {
     openTooltip,
     closeTooltip,
     keyboardTooltip,
     tooltipState,
-  } = useTooltip<any>({
+  } = useTooltip<BarChartValue>({
     values: coordinates.values,
     getTooltipCoordinates: coordinates.getTooltipCoordinates,
   });
@@ -46,7 +46,8 @@ export function NewBarChart({
           openTooltip={openTooltip}
           closeTooltip={closeTooltip}
           keyboardTooltip={keyboardTooltip}
-          xAxisLabel={axisTitle}
+          xAxisLabel={xAxisTitle}
+          chartLabel={chartLabel}
         />
       </div>
 

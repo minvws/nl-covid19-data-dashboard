@@ -8,7 +8,7 @@ interface BarChartTooltipContentProps {
 export function BarChartTooltipContent({ value }: BarChartTooltipContentProps) {
   return (
     <Box p={1} css={css({ whiteSpace: 'nowrap' })}>
-      {value.label}
+      {value.tooltip}
     </Box>
   );
 }
