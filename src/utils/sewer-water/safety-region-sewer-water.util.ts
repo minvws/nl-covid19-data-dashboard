@@ -39,8 +39,6 @@ export interface SewerWaterLineChartData {
 }
 
 export interface SewerWaterBarChartData {
-  keys: string[];
-  data: Highcharts.XrangePointOptionsObject[];
   values: BarChartValue[];
 }
 
@@ -113,35 +111,6 @@ export function getSewerWaterBarChartData(
   // Concat keys and data to glue the "average" as first bar and then
   // the RWZI-locations from highest to lowest
   return {
-    keys: [
-      text.average,
-      ...sortedInstallations.map((i) => i.last_value.rwzi_awzi_name),
-    ],
-    data: [
-      {
-        y: data.sewer.last_value.average,
-        color: colors.data.primary,
-        label: data.sewer.last_value
-          ? `${formatDateFromSeconds(
-              data.sewer.last_value.week_unix,
-              'short'
-            )}: ${formatNumber(data.sewer.last_value.average)}`
-          : false,
-      } as Highcharts.XrangePointOptionsObject,
-      ...sortedInstallations.map(
-        (installation) =>
-          ({
-            y: installation.last_value.rna_normalized,
-            color: '#C1C1C1',
-            label: installation.last_value
-              ? `${formatDateFromSeconds(
-                  installation.last_value.date_measurement_unix,
-                  'short'
-                )}: ${formatNumber(installation.last_value.rna_normalized)}`
-              : false,
-          } as Highcharts.XrangePointOptionsObject)
-      ),
-    ],
     values: [
       {
         y: text.average,

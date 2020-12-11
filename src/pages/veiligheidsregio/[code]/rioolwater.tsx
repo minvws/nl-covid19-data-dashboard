@@ -11,7 +11,6 @@ import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { Select } from '~/components-styled/select';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { BarChart } from '~/components/charts';
 import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { SewerWaterChart } from '~/components/lineChart/sewer-water-chart';
@@ -183,13 +182,6 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
             source: text.bronnen.rivm,
           }}
         >
-          <BarChart
-            keys={barChartData.keys}
-            data={barChartData.data}
-            axisTitle={text.bar_chart_axis_title}
-            valueAnnotation={siteText.waarde_annotaties.riool_normalized}
-          />
-
           <NewBarChart
             values={barChartData.values}
             xAxisTitle={text.bar_chart_axis_title}
