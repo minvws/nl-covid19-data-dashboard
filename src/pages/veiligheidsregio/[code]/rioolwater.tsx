@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
+import { NewBarChart } from '~/components-styled/bar-chart/bar-chart';
 import { Box } from '~/components-styled/base';
 import {
   ChartTile,
@@ -183,6 +184,13 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
           }}
         >
           <BarChart
+            keys={barChartData.keys}
+            data={barChartData.data}
+            axisTitle={text.bar_chart_axis_title}
+            valueAnnotation={siteText.waarde_annotaties.riool_normalized}
+          />
+
+          <NewBarChart
             keys={barChartData.keys}
             data={barChartData.data}
             axisTitle={text.bar_chart_axis_title}

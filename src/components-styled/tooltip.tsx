@@ -16,7 +16,7 @@ interface TooltipProps<T> {
   controls: string;
   children: ReactNode;
   tooltipState: TooltipState<T>;
-  width: number;
+  width?: number;
 }
 
 interface TooltipState<T> {
@@ -127,7 +127,7 @@ export function Tooltip<T>({
         transition: 'left 0.15s, top 0.15s',
         transform: 'translate(0, 20px)',
         pointerEvents: 'none',
-        width: `${width}px`,
+        width: width ? `${width}px` : 'auto',
         boxShadow: 'tile',
         borderRadius: 1,
         zIndex: 42,
