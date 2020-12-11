@@ -63,7 +63,7 @@ function useHighchartOptions(values: CbsValue[], config: SeriesConfig) {
       lineColor: '#C4C4C4',
       gridLineColor: '#ca005d',
       type: 'datetime',
-      categories: values.map((x) => toEpochMs(x.week_start_unix).toString()),
+      categories: values.map((x) => x.week_start_unix.toString()),
       title: {
         text: null,
       },
@@ -82,7 +82,7 @@ function useHighchartOptions(values: CbsValue[], config: SeriesConfig) {
         rotation: ('0' as unknown) as number,
         formatter: function () {
           const value = values.find(
-            (x) => toEpochMs(x.week_start_unix) === Number(this.value)
+            (x) => x.week_start_unix === Number(this.value)
           );
 
           if (!value) return '';
@@ -121,9 +121,7 @@ function useHighchartOptions(values: CbsValue[], config: SeriesConfig) {
       borderRadius: 0,
       xDateFormat: '%d %b %y',
       formatter() {
-        const value = values.find(
-          (x) => toEpochMs(x.week_start_unix) === Number(this.x)
-        );
+        const value = values.find((x) => x.week_start_unix === Number(this.x));
 
         if (!value) return;
 
@@ -202,8 +200,4 @@ function useHighchartOptions(values: CbsValue[], config: SeriesConfig) {
       },
     ],
   } as Highcharts.Options;
-}
-
-function toEpochMs(x: number) {
-  return x * 1000;
 }
