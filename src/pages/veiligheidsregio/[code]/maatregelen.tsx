@@ -17,7 +17,7 @@ import {
 } from '~/static-props/safetyregion-data';
 import theme from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { useRestrictionLevel } from '~/utils/useRestrictionLevel';
+import { useEscalationLevel } from '~/utils/useRestrictionLevel';
 
 const text = siteText.veiligheidsregio_maatregelen;
 type VRCode = keyof typeof siteText.veiligheidsregio_maatregelen_urls;
@@ -33,9 +33,9 @@ const RegionalRestrictions: FCWithLayout<ISafetyRegionData> = (props) => {
 
   const restrictionsTable = useRestrictionsTable(data.restrictions.values);
 
-  const restrictionLevel = useRestrictionLevel(data.restrictions.values);
+  const escalationLevel = useEscalationLevel(data.restrictions.values);
 
-  const key = restrictionLevel.toString() as keyof typeof siteText.maatregelen.headings;
+  const key = escalationLevel.toString() as keyof typeof siteText.maatregelen.headings;
   const restrictionInfo = siteText.maatregelen.headings[key];
 
   return (
@@ -59,7 +59,10 @@ const RegionalRestrictions: FCWithLayout<ISafetyRegionData> = (props) => {
             )}
           </Text>
         </Box>
-        <RestrictionsTable data={restrictionsTable} escalationLevel={41} />
+        <RestrictionsTable
+          data={restrictionsTable}
+          escalationLevel={escalationLevel > 4 ? 4 : escalationLevel}
+        />
       </KpiSection>
 
       <KpiSection display="flex" flexDirection={['column', 'row']}>

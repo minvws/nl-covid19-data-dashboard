@@ -6,7 +6,7 @@ import {
 
 const codes = [1, 2, 3, 4, 401, 402, 41];
 
-export function useRestrictionLevel(
+export function useEscalationLevel(
   values: (RegionalRestrictionValue | NationalRestrictionValue)[]
 ) {
   return useMemo(() => {

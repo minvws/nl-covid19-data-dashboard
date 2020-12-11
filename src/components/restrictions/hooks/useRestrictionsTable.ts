@@ -13,7 +13,6 @@ const restrictionTexts: Record<string, string> = siteText.maatregelen.teksten;
  * is rendered in the table.
  */
 const rowOrder: EscalationCategory[] = [
-  'algemeen',
   'er_op_uit',
   'bezoek',
   'samenkomst',
@@ -29,6 +28,7 @@ const rowOrder: EscalationCategory[] = [
   'werk',
   'winkels',
   'alcohol',
+  'algemeen',
 ];
 
 export type EscalationCategory = RegionalRestrictionValue['category_id'];
@@ -113,6 +113,6 @@ function createColumn(data: RestrictionValue[], category: EscalationCategory) {
     .sort(sortByRestrictionOrder)
     .map<RestrictionColumnData>((value) => ({
       Icon: restrictionIcons[value.restriction_id],
-      text: restrictionTexts[value.restriction_id] ?? value.restriction_id,
+      text: restrictionTexts[value.restriction_id] || value.restriction_id,
     }));
 }

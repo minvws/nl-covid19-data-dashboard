@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { Box } from '~/components-styled/base';
 import { Cell, Row, Table, TableBody } from '~/components-styled/layout/table';
-import { Text } from '~/components-styled/typography';
+import { InlineText } from '~/components-styled/typography';
 import { RestrictionsTableData } from '~/components/restrictions/hooks/useRestrictionsTable';
 import siteText from '~/locale/index';
 import { useBreakpoints } from '~/utils/useBreakpoints';
@@ -46,9 +46,9 @@ function MobileRestrictionsTable(props: TableProps) {
                 pt={3}
                 verticalAlign="top"
               >
-                <Text as="span" fontWeight="bold">
+                <InlineText fontWeight="bold">
                   {categoryLabels[row.categoryColumn]}
-                </Text>
+                </InlineText>
               </Cell>
             </Row>
             <Row>
@@ -59,7 +59,7 @@ function MobileRestrictionsTable(props: TableProps) {
                       <Box as="span" flexShrink={0}>
                         {getIcon(value.Icon, color)}
                       </Box>
-                      <Box as="span">{value.text}</Box>
+                      <Box>{value.text}</Box>
                     </Box>
                   ))}
                 </Box>
@@ -81,16 +81,15 @@ function DesktopRestrictionsTable(props: TableProps) {
           <Row key={row.categoryColumn}>
             <Cell
               borderTop={'1px solid black'}
-              backgroundColor="#eeeeee"
-              width="250em"
-              pt={3}
-              pb={3}
-              pl={1}
+              backgroundColor="#F9F9F9"
+              width="20em"
+              py={3}
+              px={1}
               verticalAlign="top"
             >
-              <Text as="span" fontWeight="bold">
+              <InlineText fontWeight="bold">
                 {categoryLabels[row.categoryColumn]}
-              </Text>
+              </InlineText>
             </Cell>
             <Cell
               borderTop={'1px solid black'}

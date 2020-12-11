@@ -13,7 +13,7 @@ import { SEOHead } from '~/components/seoHead';
 import text from '~/locale';
 import { EscalationMapLegenda } from '~/pages/veiligheidsregio';
 import { NationalPageProps } from '~/static-props/nl-data';
-import { useRestrictionLevel } from '~/utils/useRestrictionLevel';
+import { useEscalationLevel } from '~/utils/useRestrictionLevel';
 export { getStaticProps } from '~/pages';
 
 const NationalRestrictions: FCWithLayout<NationalPageProps> = (props) => {
@@ -21,9 +21,7 @@ const NationalRestrictions: FCWithLayout<NationalPageProps> = (props) => {
   const router = useRouter();
 
   const restrictionsTable = useRestrictionsTable(data.restrictions.values);
-  const restrictionLevel = useRestrictionLevel(data.restrictions.values);
-
-  const escalationLevel = restrictionLevel > 4 ? 4 : restrictionLevel;
+  const escalationLevel = useEscalationLevel(data.restrictions.values);
 
   const key = restrictionLevel.toString() as keyof typeof text.maatregelen.headings;
   const restrictionInfo = text.maatregelen.headings[key];
@@ -60,7 +58,7 @@ const NationalRestrictions: FCWithLayout<NationalPageProps> = (props) => {
         <Heading level={3}>{restrictionInfo.extratoelichting.titel}</Heading>
         <RestrictionsTable
           data={restrictionsTable}
-          escalationLevel={escalationLevel}
+          escalationLevel={escalationLevel > 4 ? 4 : escalationLevel}
         />
       </KpiSection>
     </>
