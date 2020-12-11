@@ -1,7 +1,7 @@
 import { MetricKeys } from '~/components/choropleth/shared';
 import { colors } from '~/style/theme';
 import { Regionaal } from '~/types/data';
-import { MetricConfig } from './types';
+import { MetricConfig } from './common';
 
 const GREEN = colors.data.gradient.green;
 const YELLOW = colors.data.gradient.yellow;

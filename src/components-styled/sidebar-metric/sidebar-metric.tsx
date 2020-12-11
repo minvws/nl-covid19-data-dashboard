@@ -3,7 +3,11 @@ import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import { MetricKeys } from '~/components/choropleth/shared';
 import siteText, { TALLLanguages } from '~/locale/index';
-import { DataScope, getMetricConfig } from '~/metric-config';
+import {
+  DataScope,
+  getMetricConfig,
+  NO_METRIC_PROPERTY,
+} from '~/metric-config';
 import { assert } from '~/utils/assert';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
@@ -14,7 +18,11 @@ interface SidebarMetricProps<T extends { difference: unknown }> {
   scope: DataScope;
   data: T;
   metricName: ValueOf<MetricKeys<T>>;
-  metricProperty: string;
+  /**
+   * Make metric property optional for odd case where we do not show a metric.
+   * Currently only behavior is doing that.
+   */
+  metricProperty?: string;
   localeTextKey: keyof TALLLanguages;
   differenceKey?: string;
   showBarScale?: boolean;
@@ -35,7 +43,7 @@ export function SidebarMetric<T extends { difference: unknown }>({
   scope,
   data,
   metricName,
-  metricProperty,
+  metricProperty = NO_METRIC_PROPERTY,
   localeTextKey,
   differenceKey,
   showBarScale,
@@ -46,29 +54,32 @@ export function SidebarMetric<T extends { difference: unknown }>({
     (metricName as unknown) as string,
     'last_value',
   ]);
-  const propertyValue = lastValue && lastValue[metricProperty];
+  const propertyValue =
+    metricProperty && lastValue && lastValue[metricProperty];
 
-  assert(
-    isDefined(propertyValue),
-    `Missing value for metric property ${[
-      metricName,
-      'last_value',
-      metricProperty,
-    ]
-      .filter(isDefined)
-      .join(':')}`
-  );
+  const hasMetricProperty = metricProperty !== NO_METRIC_PROPERTY;
 
-  const config = getMetricConfig(
-    scope,
-    (metricName as unknown) as string,
-    metricProperty
-  );
+  if (hasMetricProperty) {
+    assert(
+      isDefined(propertyValue),
+      `Missing value for metric property ${[
+        metricName,
+        'last_value',
+        metricProperty,
+      ]
+        .filter(isDefined)
+        .join(':')}`
+    );
+  }
+
   const commonText = siteText.common.metricKPI;
 
   /**
    * Because the locale files are not consistent in using kpi_titel and titel_kpi
    * we support both but kpi_titel has precedence.
+   *
+   * @TODO this should really be called sidebar_metric_description or something
+   * as it's not a title at all.
    */
   const title =
     get(siteText, [localeTextKey, 'kpi_titel']) ||
@@ -76,17 +87,35 @@ export function SidebarMetric<T extends { difference: unknown }>({
 
   assert(title, `Missing title at ${localeTextKey}.kpi_titel`);
 
-  const description = config.isWeeklyData
-    ? replaceVariablesInText(commonText.dateRangeOfReport, {
-        startDate: formatDateFromSeconds(lastValue.week_start_unix, 'axis'),
-        endDate: formatDateFromSeconds(lastValue.week_end_unix, 'axis'),
-      })
-    : replaceVariablesInText(commonText.dateOfReport, {
-        dateOfReport: formatDateFromSeconds(
-          lastValue.date_of_report_unix,
-          'medium'
-        ),
-      });
+  const config = getMetricConfig(
+    scope,
+    (metricName as unknown) as string,
+    hasMetricProperty ? metricProperty : NO_METRIC_PROPERTY
+  );
+
+  let description = '';
+
+  try {
+    description = config.isWeeklyData
+      ? replaceVariablesInText(commonText.dateRangeOfReport, {
+          startDate: formatDateFromSeconds(lastValue.week_start_unix, 'axis'),
+          endDate: formatDateFromSeconds(lastValue.week_end_unix, 'axis'),
+        })
+      : replaceVariablesInText(commonText.dateOfReport, {
+          dateOfReport: formatDateFromSeconds(
+            lastValue.date_of_report_unix,
+            'medium'
+          ),
+        });
+  } catch (err) {
+    throw new Error(
+      `Failed to format description for ${metricName}:${
+        metricProperty || '__no_property'
+      } from common.metricKPI.${
+        config.isWeeklyData ? 'dateRangeOfReport' : 'dateOfReport'
+      }: ${err.message}`
+    );
+  }
 
   const differenceValue = differenceKey
     ? get(data, ['difference', (differenceKey as unknown) as string])
@@ -114,6 +143,10 @@ export function SidebarMetric<T extends { difference: unknown }>({
       valueAnnotation,
       `Missing value annotation at waarde_annotaties:${annotationKey}`
     );
+  }
+
+  if (!metricProperty) {
+    return <SidebarKpiValue title={title} description={description} />;
   }
 
   return (
