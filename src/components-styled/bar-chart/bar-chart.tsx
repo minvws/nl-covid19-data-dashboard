@@ -14,7 +14,7 @@ interface BarChartProps {
   valueAnnotation?: string;
 }
 
-export function NewBarChart({
+export function BarChart({
   values,
   xAxisTitle,
   chartLabel,

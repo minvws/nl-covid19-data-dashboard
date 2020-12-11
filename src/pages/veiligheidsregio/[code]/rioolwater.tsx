@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
-import { NewBarChart } from '~/components-styled/bar-chart/bar-chart';
+import { BarChart } from '~/components-styled/bar-chart/bar-chart';
 import { Box } from '~/components-styled/base';
 import {
   ChartTile,
@@ -182,7 +182,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
             source: text.bronnen.rivm,
           }}
         >
-          <NewBarChart
+          <BarChart
             values={barChartData.values}
             xAxisTitle={text.bar_chart_axis_title}
             chartLabel={text.bar_chart_accessibility_description}
