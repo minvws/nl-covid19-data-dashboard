@@ -136,7 +136,11 @@ export function SidebarMetric<T extends { difference: unknown }>({
   }
 
   if (!metricProperty) {
-    return <SidebarKpiValue title={title} description={description} />;
+    return (
+      <Box mx={'2.5rem'}>
+        <SidebarKpiValue title={title} description={description} />
+      </Box>
+    );
   }
 
   return (

@@ -4,8 +4,6 @@ import { nl } from './nl';
 import { MetricConfig, NO_METRIC_PROPERTY } from './common';
 import { vr } from './vr';
 
-export { NO_METRIC_PROPERTY } from './common';
-
 /**
  * This configuration declares properties about data to be used by various
  * display components to know how the data should be rendered.
