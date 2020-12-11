@@ -23,7 +23,7 @@ const NationalRestrictions: FCWithLayout<NationalPageProps> = (props) => {
   const restrictionsTable = useRestrictionsTable(data.restrictions.values);
   const escalationLevel = useEscalationLevel(data.restrictions.values);
 
-  const key = restrictionLevel.toString() as keyof typeof text.maatregelen.headings;
+  const key = escalationLevel.toString() as keyof typeof text.maatregelen.headings;
   const restrictionInfo = text.maatregelen.headings[key];
 
   return (
