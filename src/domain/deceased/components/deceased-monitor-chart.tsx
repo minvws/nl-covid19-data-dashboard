@@ -4,7 +4,7 @@ import {
   RegionalDeceasedCbsValue,
 } from '~/types/data';
 import { createDate } from '~/utils/createDate';
-import { formatDateFromMilliseconds } from '~/utils/formatDate';
+import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 
 type CbsValue = NationalDeceasedCbsValue | RegionalDeceasedCbsValue;
@@ -87,13 +87,10 @@ function useHighchartOptions(values: CbsValue[], config: SeriesConfig) {
 
           if (!value) return '';
 
-          const startDate = toEpochMs(value.week_start_unix);
-          const endDate = toEpochMs(value.week_end_unix);
-
           return this.isFirst
-            ? formatDateFromMilliseconds(startDate, 'axis')
+            ? formatDateFromSeconds(value.week_start_unix, 'axis')
             : this.isLast
-            ? formatDateFromMilliseconds(endDate, 'axis')
+            ? formatDateFromSeconds(value.week_end_unix, 'axis')
             : '';
         },
       },
@@ -131,8 +128,7 @@ function useHighchartOptions(values: CbsValue[], config: SeriesConfig) {
         if (!value) return;
 
         const dateText = [value.week_start_unix, value.week_end_unix]
-          .map(toEpochMs)
-          .map((x) => formatDateFromMilliseconds(x, 'medium'))
+          .map((x) => formatDateFromSeconds(x, 'medium'))
           .join(' - ');
 
         const expectedText = formatNumber(value.expected);
