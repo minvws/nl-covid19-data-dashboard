@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, ReactNode } from 'react';
 import { useTooltip } from '@visx/tooltip';
 import { extent } from 'd3-array';
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
@@ -39,8 +39,8 @@ export type CustomLineChartProps<T> = {
 
 export function CustomLineChart<T extends Value>({
   values,
-  width,
-  height,
+  width = 500,
+  height = 250,
   timeframe = '5weeks',
   signaalwaarde,
   formatTooltip,
@@ -125,7 +125,7 @@ export function CustomLineChart<T extends Value>({
 
         {isDefined(tooltipData) && (
           <Tooltip
-            bounds={{ width, height }}
+            bounds={{ right: width, left: 0, top: 0, bottom: height }}
             x={tooltipLeft + defaultMargin.left}
             y={tooltipTop + defaultMargin.top}
           >

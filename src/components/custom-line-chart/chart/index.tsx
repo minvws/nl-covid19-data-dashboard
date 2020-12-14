@@ -19,7 +19,7 @@ const defaultColors = {
   benchmark: '#4f5458',
 };
 
-export type Props = {
+export type ChartProps = {
   benchmark: any;
   isHovered: boolean;
   trend: any[];
@@ -28,7 +28,7 @@ export type Props = {
   xDomain: any[];
   yDomain: any[];
   width: number;
-  height?: number;
+  height: number;
   margin?: { top: number; right: number; bottom: number; left: number };
   formatXAxis: any;
   formatYAxis: any;
@@ -38,7 +38,7 @@ function Chart({
   trend,
   type,
   width,
-  height = 250,
+  height,
   margin = defaultMargin,
   xDomain,
   yDomain,
@@ -47,7 +47,7 @@ function Chart({
   benchmark,
   formatXAxis,
   formatYAxis,
-}: Props) {
+}: ChartProps) {
   const bounded = {
     width: width - margin.left - margin.right,
     height: height - margin.top - margin.bottom,
