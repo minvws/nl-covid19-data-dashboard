@@ -1890,7 +1890,7 @@
       "kpi_covid_total_title": "Total reported deaths from COVID-19.",
       "kpi_covid_total_description": "This figure shows the number of reported deaths from COVID-19, since the reporting of COVID-19 deaths started.",
       "line_chart_covid_daily_title": "Number of reported deaths from COVID-19 over time",
-      "line_chart_covid_daily_description": ""
+      "line_chart_covid_daily_description": "This graph shows the number of reported deaths from COVID-19, in the selected period of time."
     },
     "kpi_titel": "Daily reported deaths from COVID-19"
   },
@@ -1921,7 +1921,7 @@
       "kpi_covid_total_title": "Total reported deaths from/related to COVID-19 per 100,000 inhabitants.",
       "kpi_covid_total_description": "This figure shows the number of deaths from/related to COVID-19 reported yesterday, per 100,000 inhabitants. ",
       "line_chart_covid_daily_title": "Number of reported deaths related to COVID-19 over time",
-      "line_chart_covid_daily_description": ""
+      "line_chart_covid_daily_description": "This graph shows the number of reported deaths from COVID-19, in the selected period of time."
     },
     "kpi_titel": "Daily reported deaths from COVID-19"
   },
