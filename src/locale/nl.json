@@ -1013,7 +1013,7 @@
     "kpi_titel": "Aantal positief geteste mensen",
     "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn en COVID-19 hebben. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.",
     "map_titel": "Verdeling positief geteste mensen in {{municipality}}",
-    "map_toelichting": "Deze kaart laat zien van hoeveel mensen in deze gemeenten gisteren gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
+    "map_toelichting": "Deze kaart laat zien van hoeveel mensen in deze gemeente en in andere gemeenten in dezelfde veiligheidsregio gisteren gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "linechart_titel": "Verloop over tijd",
     "linechart_toelichting": "Deze grafiek laat zien van hoeveel mensen in de geselecteerde periode in deze gemeente gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
@@ -1891,7 +1891,7 @@
       "kpi_covid_total_title": "Totaal aantal personen overleden aan COVID-19",
       "kpi_covid_total_description": "Dit getal laat van zien hoeveel personen in totaal is gemeld dat ze zijn overleden aan COVID-19, sinds het begin van de meldingen.",
       "line_chart_covid_daily_title": "Gemelde aantal patiënten overleden aan COVID-19 over tijd",
-      "line_chart_covid_daily_description": ""
+      "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel personen in de geselecteerde periode gemeld is dat ze zijn overleden aan COVID-19."
     },
     "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
   },
@@ -1922,7 +1922,7 @@
       "kpi_covid_total_title": "Totaal aantal personen overleden aan/met COVID-19",
       "kpi_covid_total_description": "Dit getal laat van zien hoeveel personen in totaal is gemeld dat ze zijn overleden aan/met COVID-19, sinds het begin van de meldingen.",
       "line_chart_covid_daily_title": "Gemelde aantal patiënten overleden aan/met COVID-19 over tijd",
-      "line_chart_covid_daily_description": ""
+      "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel personen in de geselecteerde periode gemeld is dat ze zijn overleden aan COVID-19."
     },
     "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
   },
