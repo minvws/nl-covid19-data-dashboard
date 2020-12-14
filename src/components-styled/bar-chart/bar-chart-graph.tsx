@@ -6,10 +6,10 @@ import { Bar } from '@visx/shape';
 import { Text } from '@visx/text';
 import { KeyboardEvent, MouseEvent } from 'react';
 import styled from 'styled-components';
-import { colors } from '~/style/theme';
+import theme, { colors } from '~/style/theme';
 import { BarChartCoordinates, BarChartValue } from './bar-chart-coordinates';
 
-interface BarChartChartProps {
+interface BarChartGraphProps {
   coordinates: BarChartCoordinates;
   onMouseMoveBar: (value: BarChartValue, event: MouseEvent<SVGElement>) => void;
   onMouseLeaveBar: () => void;
@@ -24,7 +24,7 @@ const TickValue = ({ x, y, formattedValue }: TickRendererProps) => {
       x={x}
       y={y}
       fill={colors.annotation}
-      fontSize="0.75rem"
+      fontSize={theme.fontSizes[0]}
       textAnchor="middle"
     >
       {formattedValue}
@@ -32,27 +32,27 @@ const TickValue = ({ x, y, formattedValue }: TickRendererProps) => {
   );
 };
 
-export function BarChartChart({
+export function BarChartGraph({
   coordinates,
   onKeyInput,
   onMouseMoveBar,
   onMouseLeaveBar,
   xAxisLabel,
   accessibilityDescription,
-}: BarChartChartProps) {
+}: BarChartGraphProps) {
   const {
     width,
     height,
     spacing,
     spacingLabel,
-    xScale,
-    yScale,
+    valueScale,
+    labelScale,
     barsWidth,
     barsHeight,
     numTicks,
     values,
-    xPoint,
-    yPoint,
+    getBarSize,
+    getBarOffset,
     getLabel,
   } = coordinates;
 
@@ -67,7 +67,7 @@ export function BarChartChart({
     >
       {/* Vertical lines */}
       <GridColumns
-        scale={xScale}
+        scale={valueScale}
         width={barsWidth}
         height={barsHeight}
         left={spacing.left}
@@ -78,7 +78,7 @@ export function BarChartChart({
 
       {/* Axis line, match up with the vertical lines */}
       <AxisBottom
-        scale={xScale}
+        scale={valueScale}
         left={spacing.left}
         top={barsHeight}
         numTicks={numTicks}
@@ -96,18 +96,19 @@ export function BarChartChart({
             <Text
               textAnchor="end"
               verticalAnchor="middle"
-              y={yPoint(value) ?? 0 + yScale.bandwidth() / 2}
+              y={getBarOffset(value) ?? 0 + labelScale.bandwidth() / 2}
               x={spacing.left - spacingLabel}
               fill={colors.annotation}
-              fontSize="0.75rem"
+              fontSize={theme.fontSizes[0]}
             >
               {getLabel(value)}
             </Text>
+            {/* Bar has a minimum width of 5 pixels to stay visible / clickable */}
             <Bar
               x={spacing.left}
-              y={yPoint(value)}
-              height={yScale.bandwidth()}
-              width={Math.max(xPoint(value), 5)}
+              y={getBarOffset(value) ?? 0}
+              height={labelScale.bandwidth()}
+              width={Math.max(getBarSize(value) ?? 0, 5)}
               fill={value.color}
               onMouseMove={(event) => onMouseMoveBar(value, event)}
               onMouseLeave={onMouseLeaveBar}
@@ -123,7 +124,7 @@ export function BarChartChart({
 const StyledSvg = styled.svg(
   css({
     '& .bar-chart-x-axis-label': {
-      fontSize: '0.75rem',
+      fontSize: 1,
       fill: 'annotation',
       fontFamily: '"RO Sans", Calibri, sans-serif',
     },

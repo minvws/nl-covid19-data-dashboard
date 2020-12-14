@@ -20,14 +20,14 @@ export interface BarChartCoordinates {
     left: number;
   };
   spacingLabel: number;
-  xScale: ValueOf<ScaleTypeToD3Scale<any, any, any>>;
-  yScale: ScaleBand<string>;
+  valueScale: ValueOf<ScaleTypeToD3Scale<any, any, any>>;
+  labelScale: ScaleBand<string>;
   barsWidth: number;
   barsHeight: number;
   numTicks: number;
   values: BarChartValue[];
-  xPoint: (x: BarChartValue) => number;
-  yPoint: (x: BarChartValue) => number | undefined;
+  getBarSize: (x: BarChartValue) => number;
+  getBarOffset: (x: BarChartValue) => number | undefined;
   getLabel: (x: BarChartValue) => string;
   getTooltipCoordinates: GetTooltipCoordinates<BarChartValue>;
 }
@@ -65,25 +65,31 @@ function generateBarChartCoordinates(
   const getValue = (value: BarChartValue): number => value.value;
   const getLabel = (value: BarChartValue): string => value.label;
 
-  const xScale = scaleLinear({
+  const valueScale = scaleLinear({
     range: [0, barsWidth],
     round: true,
     domain: [0, Math.max(...values.map(getValue))],
   });
 
-  const yScale = scaleBand({
+  const labelScale = scaleBand({
     range: [spacing.top, height - spacing.bottom],
     round: true,
     domain: values.map(getLabel),
     padding: 0.2,
   });
 
-  const xPoint = (value: BarChartValue) => xScale(getValue(value));
-  const yPoint = (value: BarChartValue) => yScale(getLabel(value));
+  const createPoint = (scale: any, accessor: any) => (value: BarChartValue) =>
+    scale(accessor(value));
+
+  const getBarSize = createPoint(valueScale, getValue);
+  const getBarOffset = createPoint(labelScale, getLabel);
+
+  // const xPoint = (value: BarChartValue) => xScale(getValue(value));
+  // const yPoint = (value: BarChartValue) => yScale(getLabel(value));
 
   function getTooltipCoordinates(value: BarChartValue) {
-    const left = xPoint(value) ?? 0 + spacing.left;
-    const top = yPoint(value) ?? 0 + spacing.top;
+    const left = getBarSize(value) ?? 0 + spacing.left;
+    const top = getBarOffset(value) ?? 0 + spacing.top;
 
     return { left, top };
   }
@@ -93,14 +99,14 @@ function generateBarChartCoordinates(
     height,
     spacing,
     spacingLabel,
-    xScale,
-    yScale,
+    valueScale,
+    labelScale,
     barsWidth,
     barsHeight,
     numTicks,
     values,
-    xPoint,
-    yPoint,
+    getBarSize,
+    getBarOffset,
     getLabel,
     getTooltipCoordinates,
   };

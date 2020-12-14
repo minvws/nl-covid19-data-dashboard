@@ -188,8 +188,8 @@ export function getSewerWaterBarChartData(
   return {
     values: [
       {
-        y: text.average,
-        x: data.sewer.last_value.average,
+        label: text.average,
+        value: data.sewer.last_value.average,
         color: colors.data.primary,
         tooltip: `${formatDateFromSeconds(
           data.sewer.last_value.week_unix,
@@ -197,8 +197,8 @@ export function getSewerWaterBarChartData(
         )}: ${formatNumber(data.sewer.last_value.average)}`,
       },
       ...installations.map((installation) => ({
-        y: installation.last_value.rwzi_awzi_name,
-        x: installation.last_value.rna_normalized,
+        label: installation.last_value.rwzi_awzi_name,
+        value: installation.last_value.rna_normalized,
         color: '#C1C1C1',
         tooltip: `${formatDateFromSeconds(
           installation.last_value.date_measurement_unix,

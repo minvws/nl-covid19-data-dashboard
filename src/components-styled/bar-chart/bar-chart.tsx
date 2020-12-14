@@ -3,7 +3,7 @@ import { useElementSize } from '~/utils/use-element-size';
 import { Box } from '../base';
 import { Tooltip, useTooltip } from '../tooltip';
 import { ValueAnnotation } from '../value-annotation';
-import { BarChartChart } from './bar-chart-chart';
+import { BarChartGraph } from './bar-chart-graph';
 import { BarChartValue, useBarChartCoordinates } from './bar-chart-coordinates';
 import { BarChartTooltipContent } from './bar-chart-tooltip-contents';
 
@@ -41,7 +41,7 @@ export function BarChart({
       )}
 
       <div ref={sizeRef}>
-        <BarChartChart
+        <BarChartGraph
           coordinates={coordinates}
           onMouseMoveBar={openTooltip}
           onMouseLeaveBar={closeTooltip}
