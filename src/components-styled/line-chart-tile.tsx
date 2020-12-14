@@ -23,7 +23,6 @@ export function LineChartTile<T extends Value>({
   timeframeInitialValue = '5weeks',
   footer,
   showDataWarning,
-  showFill = false,
   ...chartProps
 }: LineChartTileProps<T>) {
   return (
@@ -40,7 +39,6 @@ export function LineChartTile<T extends Value>({
           <ParentSize>
             {(parent) => (
               <CustomLineChart
-                showFill={showFill}
                 width={parent.width}
                 timeframe={timeframe}
                 {...chartProps}

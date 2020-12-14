@@ -33,7 +33,7 @@ export type CustomLineChartProps<T> = {
   signaalwaarde?: number;
   formatTooltip?: (value: T) => React.ReactNode;
   formatYAxis?: (y: number) => string;
-  showFill: boolean;
+  showFill?: boolean;
   valueAnnotation?: string;
 };
 
