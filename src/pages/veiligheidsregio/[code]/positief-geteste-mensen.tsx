@@ -255,15 +255,15 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
             end: value.week_end_unix,
           },
         }))}
-        formatTooltip={(x) => {
-          return `<strong>${formatDateFromSeconds(
-            x.week.start,
-            'short'
-          )} - ${formatDateFromSeconds(
-            x.week.end,
-            'short'
-          )}:</strong> ${formatPercentage(x.value)}%`;
-        }}
+        formatTooltip={(x) => (
+          <>
+            <strong>{`${formatDateFromSeconds(
+              x.week.start,
+              'short'
+            )} - ${formatDateFromSeconds(x.week.end, 'short')}:`}</strong>
+            {` ${formatPercentage(x.value)}%`}
+          </>
+        )}
         formatYAxis={(y: number) => {
           return `${formatPercentage(y)}%`;
         }}
