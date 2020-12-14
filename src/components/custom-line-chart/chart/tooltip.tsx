@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import css from '@styled-system/css';
 
 import { colors } from '~/style/theme';
@@ -13,8 +12,10 @@ export type Props = {
   bounds: any;
 };
 
-// TODO: improve how bounds are used to keep tooltips within the chart
-function Tooltip({
+/**
+ * @TODO improve how bounds are used to keep tooltips within the chart
+ */
+export function Tooltip({
   children,
   x,
   y,
@@ -84,5 +85,3 @@ function Tooltip({
     </>
   );
 }
-
-export default memo(Tooltip);

@@ -7,7 +7,7 @@ import { Box } from '~/components-styled/base';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import Chart, { defaultMargin } from './chart';
 import { trendTypes } from './chart/trends';
-import Tooltip from './chart/tooltip';
+import { Tooltip } from './chart/tooltip';
 import { calculateYMax, Value } from '../lineChart';
 import { isDefined } from 'ts-is-present';
 
@@ -37,7 +37,7 @@ export type CustomLineChartProps<T> = {
   valueAnnotation?: string;
 };
 
-function CustomLineChart<T extends Value>({
+export function CustomLineChart<T extends Value>({
   values,
   width,
   height,
@@ -140,5 +140,3 @@ function CustomLineChart<T extends Value>({
     </Box>
   );
 }
-
-export default CustomLineChart;
