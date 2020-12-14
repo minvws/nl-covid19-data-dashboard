@@ -4,18 +4,18 @@ import { GridColumns } from '@visx/grid';
 import { Group } from '@visx/group';
 import { Bar } from '@visx/shape';
 import { Text } from '@visx/text';
-import { MouseEvent } from 'react';
+import { KeyboardEvent, MouseEvent } from 'react';
 import styled from 'styled-components';
 import { colors } from '~/style/theme';
-import { BarChartCoordinates } from './bar-chart-coordinates';
+import { BarChartCoordinates, BarChartValue } from './bar-chart-coordinates';
 
 interface BarChartChartProps {
   coordinates: BarChartCoordinates;
-  openTooltip: (event: MouseEvent<any>, value: any) => void;
-  closeTooltip: () => void;
-  keyboardTooltip: (event: any) => void;
+  onMouseMoveBar: (value: BarChartValue, event: MouseEvent<SVGElement>) => void;
+  onMouseLeaveBar: () => void;
+  onKeyInput: (event: KeyboardEvent<HTMLElement | SVGElement>) => void;
   xAxisLabel: string;
-  chartLabel: string;
+  accessibilityDescription: string;
 }
 
 const TickValue = ({ x, y, formattedValue }: TickRendererProps) => {
@@ -34,26 +34,26 @@ const TickValue = ({ x, y, formattedValue }: TickRendererProps) => {
 
 export function BarChartChart({
   coordinates,
-  keyboardTooltip,
-  openTooltip,
-  closeTooltip,
+  onKeyInput,
+  onMouseMoveBar,
+  onMouseLeaveBar,
   xAxisLabel,
-  chartLabel,
+  accessibilityDescription,
 }: BarChartChartProps) {
   const {
     width,
     height,
-    margin,
+    spacing,
     spacingLabel,
     xScale,
     yScale,
-    xMax,
-    yMax,
+    barsWidth,
+    barsHeight,
     numTicks,
     values,
     xPoint,
     yPoint,
-    y,
+    getLabel,
   } = coordinates;
 
   return (
@@ -61,18 +61,17 @@ export function BarChartChart({
       width={width}
       height={height}
       role="img"
-      id="age-demographic-chart"
-      aria-label={chartLabel}
+      aria-label={accessibilityDescription}
       tabIndex={0}
-      onKeyUp={(event: any) => keyboardTooltip(event)}
+      onKeyUp={(event: KeyboardEvent<SVGElement>) => onKeyInput(event)}
     >
       {/* Vertical lines */}
       <GridColumns
         scale={xScale}
-        width={xMax}
-        height={yMax}
-        left={margin.left}
-        top={margin.top}
+        width={barsWidth}
+        height={barsHeight}
+        left={spacing.left}
+        top={spacing.top}
         numTicks={numTicks}
         stroke={colors.border}
       />
@@ -80,8 +79,8 @@ export function BarChartChart({
       {/* Axis line, match up with the vertical lines */}
       <AxisBottom
         scale={xScale}
-        left={margin.left}
-        top={yMax}
+        left={spacing.left}
+        top={barsHeight}
         numTicks={numTicks}
         hideTicks={true}
         hideAxisLine={true}
@@ -97,21 +96,21 @@ export function BarChartChart({
             <Text
               textAnchor="end"
               verticalAnchor="middle"
-              y={yPoint(value) + yScale.bandwidth() / 2}
-              x={margin.left - spacingLabel}
+              y={yPoint(value) ?? 0 + yScale.bandwidth() / 2}
+              x={spacing.left - spacingLabel}
               fill={colors.annotation}
               fontSize="0.75rem"
             >
-              {y(value)}
+              {getLabel(value)}
             </Text>
             <Bar
-              x={margin.left}
+              x={spacing.left}
               y={yPoint(value)}
               height={yScale.bandwidth()}
               width={Math.max(xPoint(value), 5)}
               fill={value.color}
-              onMouseMove={(event) => openTooltip(event, value)}
-              onMouseLeave={closeTooltip}
+              onMouseMove={(event) => onMouseMoveBar(value, event)}
+              onMouseLeave={onMouseLeaveBar}
             />
           </Group>
         );

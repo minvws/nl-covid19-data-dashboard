@@ -195,7 +195,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
           <BarChart
             values={barChartData.values}
             xAxisTitle={text.bar_chart_axis_title}
-            chartLabel={text.bar_chart_accessibility_description}
+            accessibilityDescription={text.bar_chart_accessibility_description}
             valueAnnotation={siteText.waarde_annotaties.riool_normalized}
           />
         </ChartTile>

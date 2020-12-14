@@ -1,8 +1,9 @@
 import css from '@styled-system/css';
 import { Box } from '../base';
+import { BarChartValue } from './bar-chart-coordinates';
 
 interface BarChartTooltipContentProps {
-  value: any;
+  value: BarChartValue;
 }
 
 export function BarChartTooltipContent({ value }: BarChartTooltipContentProps) {

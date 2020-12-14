@@ -1,11 +1,11 @@
 import { scaleBand, scaleLinear, ScaleTypeToD3Scale } from '@visx/scale';
 import { ScaleBand } from 'd3-scale';
-import { MouseEvent, useMemo } from 'react';
+import { useMemo } from 'react';
 import { GetTooltipCoordinates } from '../tooltip';
 
 export interface BarChartValue {
-  x: number;
-  y: string;
+  value: number;
+  label: string;
   tooltip: string;
   color: string;
 }
@@ -13,7 +13,7 @@ export interface BarChartValue {
 export interface BarChartCoordinates {
   width: number;
   height: number;
-  margin: {
+  spacing: {
     top: number;
     right: number;
     bottom: number;
@@ -22,14 +22,14 @@ export interface BarChartCoordinates {
   spacingLabel: number;
   xScale: ValueOf<ScaleTypeToD3Scale<any, any, any>>;
   yScale: ScaleBand<string>;
-  xMax: number;
-  yMax: number;
+  barsWidth: number;
+  barsHeight: number;
   numTicks: number;
-  values: any[];
-  xPoint: (x: any) => number;
-  yPoint: (x: any) => number;
-  y: (x: any) => string;
-  getTooltipCoordinates: GetTooltipCoordinates<any>;
+  values: BarChartValue[];
+  xPoint: (x: BarChartValue) => number;
+  yPoint: (x: BarChartValue) => number | undefined;
+  getLabel: (x: BarChartValue) => string;
+  getTooltipCoordinates: GetTooltipCoordinates<BarChartValue>;
 }
 
 export function useBarChartCoordinates(
@@ -47,7 +47,7 @@ function generateBarChartCoordinates(
 ): BarChartCoordinates {
   const width = parentWidth;
 
-  const margin = {
+  const spacing = {
     top: 0,
     right: 0,
     bottom: 50, // used for x axis values and label
@@ -56,40 +56,34 @@ function generateBarChartCoordinates(
 
   const spacingLabel = 10;
 
-  const xMax = width - margin.left - margin.right;
-  const yMax = values.length * 40;
-  const height = yMax + margin.top + margin.bottom;
+  const barsWidth = width - spacing.left - spacing.right;
+  const barsHeight = values.length * 40;
+  const height = barsHeight + spacing.top + spacing.bottom;
 
   const numTicks = 10;
 
-  const x = (value: BarChartValue): number => value.x;
-  const y = (value: BarChartValue): string => value.y;
+  const getValue = (value: BarChartValue): number => value.value;
+  const getLabel = (value: BarChartValue): string => value.label;
 
   const xScale = scaleLinear({
-    range: [0, xMax],
+    range: [0, barsWidth],
     round: true,
-    domain: [0, Math.max(...values.map(x))],
+    domain: [0, Math.max(...values.map(getValue))],
   });
 
   const yScale = scaleBand({
-    range: [margin.top, height - margin.bottom],
+    range: [spacing.top, height - spacing.bottom],
     round: true,
-    domain: values.map(y),
+    domain: values.map(getLabel),
     padding: 0.2,
   });
 
-  const createPoint = (scale: any, accessor: any) => (value: BarChartValue) =>
-    scale(accessor(value));
+  const xPoint = (value: BarChartValue) => xScale(getValue(value));
+  const yPoint = (value: BarChartValue) => yScale(getLabel(value));
 
-  const xPoint = createPoint(xScale, x);
-  const yPoint = createPoint(yScale, y);
-
-  function getTooltipCoordinates(
-    event?: MouseEvent<any>,
-    value?: BarChartValue
-  ) {
-    const left = (value ? xPoint(value) : 0) + margin.left;
-    const top = (value ? yPoint(value) : 0) + margin.top;
+  function getTooltipCoordinates(value: BarChartValue) {
+    const left = xPoint(value) ?? 0 + spacing.left;
+    const top = yPoint(value) ?? 0 + spacing.top;
 
     return { left, top };
   }
@@ -97,17 +91,17 @@ function generateBarChartCoordinates(
   return {
     width,
     height,
-    margin,
+    spacing,
     spacingLabel,
     xScale,
     yScale,
-    xMax,
-    yMax,
+    barsWidth,
+    barsHeight,
     numTicks,
     values,
     xPoint,
     yPoint,
-    y,
+    getLabel,
     getTooltipCoordinates,
   };
 }

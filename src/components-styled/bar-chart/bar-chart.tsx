@@ -10,14 +10,14 @@ import { BarChartTooltipContent } from './bar-chart-tooltip-contents';
 interface BarChartProps {
   values: BarChartValue[];
   xAxisTitle: string;
-  chartLabel: string;
+  accessibilityDescription: string;
   valueAnnotation?: string;
 }
 
 export function BarChart({
   values,
   xAxisTitle,
-  chartLabel,
+  accessibilityDescription,
   valueAnnotation,
 }: BarChartProps) {
   const [sizeRef, size] = useElementSize<HTMLDivElement>(400);
@@ -27,7 +27,7 @@ export function BarChart({
   const {
     openTooltip,
     closeTooltip,
-    keyboardTooltip,
+    keyboardNavigateTooltip,
     tooltipState,
   } = useTooltip<BarChartValue>({
     values: coordinates.values,
@@ -43,15 +43,15 @@ export function BarChart({
       <div ref={sizeRef}>
         <BarChartChart
           coordinates={coordinates}
-          openTooltip={openTooltip}
-          closeTooltip={closeTooltip}
-          keyboardTooltip={keyboardTooltip}
+          onMouseMoveBar={openTooltip}
+          onMouseLeaveBar={closeTooltip}
+          onKeyInput={keyboardNavigateTooltip}
           xAxisLabel={xAxisTitle}
-          chartLabel={chartLabel}
+          accessibilityDescription={accessibilityDescription}
         />
       </div>
 
-      <Tooltip controls="age-demographic-chart" tooltipState={tooltipState}>
+      <Tooltip tooltipState={tooltipState}>
         {tooltipState.value && (
           <BarChartTooltipContent value={tooltipState.value} />
         )}
