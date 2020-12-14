@@ -1,14 +1,14 @@
-import EscalationLevel1 from '~/assets/niveau-1.svg';
-import EscalationLevel2 from '~/assets/niveau-2.svg';
-import EscalationLevel3 from '~/assets/niveau-3.svg';
-import EscalationLevel4 from '~/assets/niveau-4.svg';
 import { Box } from '~/components-styled/base';
+import {
+  EscalationLevel,
+  EscalationLevelIcon,
+} from '~/components-styled/escalation-level-icon';
 import { Text } from '~/components-styled/typography';
 import siteText from '~/locale/index';
 import { useEscalationColor } from '~/utils/use-escalation-color';
 
 export type EscalationLevelLabelProps = {
-  escalationLevel: number;
+  escalationLevel: EscalationLevel;
 };
 
 export function EscalationLevelInfoLabel(props: EscalationLevelLabelProps) {
@@ -18,10 +18,7 @@ export function EscalationLevelInfoLabel(props: EscalationLevelLabelProps) {
 
   return (
     <>
-      {escalationLevel === 1 && <EscalationLevel1 color={color} />}
-      {escalationLevel === 2 && <EscalationLevel2 color={color} />}
-      {escalationLevel === 3 && <EscalationLevel3 color={color} />}
-      {escalationLevel === 4 && <EscalationLevel4 color={color} />}
+      <EscalationLevelIcon level={escalationLevel} />
       <Text
         as="span"
         marginLeft=".5em !important"
@@ -29,7 +26,7 @@ export function EscalationLevelInfoLabel(props: EscalationLevelLabelProps) {
         fontWeight="bold"
       >
         {
-          siteText.escalatie_niveau.types[escalationLevel as 1 | 2 | 3 | 4]
+          siteText.escalatie_niveau.types[escalationLevel as EscalationLevel]
             .titel
         }
       </Text>

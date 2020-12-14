@@ -121,6 +121,13 @@
           "titel": "Maatregelen bij risiconiveau 4/ Lockdown (regionaal)",
           "toelichting": "In {{safetyRegionName}} is een regionale lockdown van kracht."
         }
+      },
+      "landelijk":{
+        "toelichting_risiconiveau": "",
+        "extratoelichting": {
+          "titel": "Landelijke maatregelen",
+          "toelichting": "Het kabinet heeft besloten dat er strengere landelijke maatregelen nodig zijn die er voor moeten zorgen dat het aantal besmettingen daalt. In de weken tot 27 oktober beoordeelt het kabinet wat er voor die periode daarna nodig is. Er moet voldoende bewijs zijn in vermindering van het aantal besmettingen en de druk op de reguliere zorg alvorens met zekerheid te kunnen zeggen dat de maatregelen effect hebben en dus heroverwogen kunnen worden."
+        }
       }
     },
     "teksten": {
@@ -885,6 +892,7 @@
   },
   "nationaal_layout": {
     "headings": {
+      "maatregelen": "Maatregelen",
       "medisch": "Medische indicatoren",
       "overig": "Vroegsignalering",
       "verpleeghuis": "Verpleeghuiszorg",

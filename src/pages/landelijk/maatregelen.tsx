@@ -1,7 +1,6 @@
 import Maatregelen from '~/assets/maatregelen.svg';
 import { Spacer } from '~/components-styled/base';
-import { Header } from '~/components-styled/content-header';
-import { HeadingWithIcon } from '~/components-styled/heading-with-icon';
+import { ContentHeader } from '~/components-styled/content-header';
 import { KpiSection } from '~/components-styled/kpi-section';
 import { Heading } from '~/components-styled/typography';
 import { FCWithLayout } from '~/components/layout';
@@ -35,13 +34,11 @@ const NationalRestrictions: FCWithLayout<NationalPageProps> = (props) => {
         description={text.nationaal_metadata.description}
       />
 
-      <Header hasIcon={true}>
-        <HeadingWithIcon
-          icon={<Maatregelen fill={theme.colors.restrictions} />}
-          title={text.nationaal_maatregelen.titel}
-          headingLevel={1}
-        />
-      </Header>
+      <ContentHeader
+        category={text.nationaal_layout.headings.maatregelen}
+        icon={<Maatregelen fill={theme.colors.restrictions} />}
+        title={text.nationaal_maatregelen.titel}
+      />
 
       <Spacer mb={3} />
 

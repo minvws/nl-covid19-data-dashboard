@@ -2,8 +2,8 @@ import { useRouter } from 'next/router';
 import Maatregelen from '~/assets/maatregelen.svg';
 import { AnchorTile } from '~/components-styled/anchor-tile';
 import { Box, Spacer } from '~/components-styled/base';
-import { Header } from '~/components-styled/content-header';
-import { HeadingWithIcon } from '~/components-styled/heading-with-icon';
+import { ContentHeader } from '~/components-styled/content-header';
+import { EscalationLevelInfoLabel } from '~/components-styled/escalation-level';
 import { KpiSection } from '~/components-styled/kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/components/layout';
@@ -18,11 +18,13 @@ import {
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
 import theme from '~/style/theme';
+import { formatDateFromSeconds } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useEscalationLevel } from '~/utils/use-escalation-level';
 
 const text = siteText.veiligheidsregio_maatregelen;
 type VRCode = keyof typeof siteText.veiligheidsregio_maatregelen_urls;
+type HeadingKey = keyof typeof siteText.maatregelen.headings;
 
 const RegionalRestrictions: FCWithLayout<ISafetyRegionData> = (props) => {
   const { data, safetyRegionName } = props;
@@ -40,12 +42,23 @@ const RegionalRestrictions: FCWithLayout<ISafetyRegionData> = (props) => {
   const effectiveEscalationLevel: 1 | 2 | 3 | 4 =
     escalationLevel > 4 ? 4 : (escalationLevel as 1 | 2 | 3 | 4);
 
-  const key = escalationLevel.toString() as keyof typeof siteText.maatregelen.headings;
+  const isNationalLevel = data.restrictions.values.every(
+    (res) => res.target_region === 'nl'
+  );
+
+  const key = isNationalLevel
+    ? 'landelijk'
+    : (escalationLevel.toString() as HeadingKey);
   const restrictionInfo = siteText.maatregelen.headings[key];
 
-  /*const isNationalLevel = data.restrictions.values.every(
-    (res) => res.target_region === 'nl'
-  );*/
+  const escalationLevelInfo =
+    siteText.maatregelen.headings[
+      effectiveEscalationLevel.toString() as HeadingKey
+    ];
+
+  const validFrom = formatDateFromSeconds(
+    data.restrictions.values[0].valid_from_unix
+  );
 
   return (
     <>
@@ -58,31 +71,54 @@ const RegionalRestrictions: FCWithLayout<ISafetyRegionData> = (props) => {
         })}
       />
 
-      <Header hasIcon={true}>
-        <HeadingWithIcon
-          icon={<Maatregelen fill={theme.colors.restrictions} />}
-          title={replaceVariablesInText(
-            siteText.veiligheidsregio_maatregelen.titel,
-            {
-              safetyRegionName,
-            }
-          )}
-          headingLevel={1}
-        />
-      </Header>
+      <ContentHeader
+        category={siteText.veiligheidsregio_layout.headings.maatregelen}
+        icon={<Maatregelen fill={theme.colors.restrictions} />}
+        title={replaceVariablesInText(
+          siteText.veiligheidsregio_maatregelen.titel,
+          {
+            safetyRegionName,
+          }
+        )}
+      />
 
       <Spacer mb={3} />
 
-      <KpiSection display="flex" flexDirection="column">
-        <Heading level={3}>{restrictionInfo.extratoelichting.titel}</Heading>
-        <Box>
+      <KpiSection>
+        <Box flex="1 1 25%">
+          <Heading level={3}>
+            {siteText.veiligheidsregio_maatregelen.titel_risiconiveau}
+          </Heading>
+          <EscalationLevelInfoLabel
+            escalationLevel={effectiveEscalationLevel}
+          />
+        </Box>
+        <Box flex="1 1 75%">
+          <Text m={0}>{escalationLevelInfo.toelichting_risiconiveau}</Text>
+        </Box>
+      </KpiSection>
+
+      <KpiSection>
+        <Box flex="1 1 25%">
+          <Heading level={3}>{restrictionInfo.extratoelichting.titel}</Heading>
           <Text>
+            {replaceVariablesInText(siteText.escalatie_niveau.valid_from, {
+              validFrom,
+            })}
+          </Text>
+        </Box>
+        <Box flex="1 1 75%">
+          <Text m={0}>
             {replaceVariablesInText(
               restrictionInfo.extratoelichting.toelichting,
               { safetyRegionName }
             )}
           </Text>
         </Box>
+      </KpiSection>
+
+      <KpiSection display="flex" flexDirection="column">
+        <Heading level={3}>{restrictionInfo.extratoelichting.titel}</Heading>
         <RestrictionsTable
           data={restrictionsTable}
           escalationLevel={effectiveEscalationLevel}

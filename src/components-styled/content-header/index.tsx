@@ -37,7 +37,7 @@ interface HeaderProps {
   children: ReactNode;
 }
 
-export const Header = (props: HeaderProps) => {
+const Header = (props: HeaderProps) => {
   const { hasIcon, children, skipLinkAnchor, id } = props;
   return (
     <HeaderBox
@@ -141,18 +141,24 @@ export function ContentHeader(props: ContentHeaderProps) {
       )}
 
       <BodyBox>
-        <ReferenceBox>
-          <Text>
-            {subtitle}{' '}
-            <Link href={reference.href}>
-              <Text as="a" href={reference.href}>
-                {reference.text}
-              </Text>
-            </Link>
-          </Text>
-        </ReferenceBox>
+        {reference && (
+          <ReferenceBox>
+            <Text>
+              {subtitle}{' '}
+              <Link href={reference.href}>
+                <Text as="a" href={reference.href}>
+                  {reference.text}
+                </Text>
+              </Link>
+            </Text>
+          </ReferenceBox>
+        )}
 
-        <MetadataBox>{metadata && <Metadata {...metadata} />}</MetadataBox>
+        {metadata && (
+          <MetadataBox>
+            <Metadata {...metadata} />
+          </MetadataBox>
+        )}
       </BodyBox>
     </Header>
   );
@@ -161,9 +167,9 @@ export function ContentHeader(props: ContentHeaderProps) {
 interface ContentHeaderProps {
   id?: string;
   title: string;
-  subtitle: string;
+  subtitle?: string;
   metadata?: MetadataProps;
-  reference: {
+  reference?: {
     href: string;
     text: string;
   };

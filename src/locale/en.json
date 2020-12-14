@@ -121,6 +121,13 @@
           "titel": "Maatregelen bij risiconiveau 4/ Lockdown (regionaal)",
           "toelichting": "In {{safetyRegionName}} is een regionale lockdown van kracht."
         }
+      },
+      "landelijk": {
+        "toelichting_risiconiveau": "",
+        "extratoelichting": {
+          "titel": "",
+          "toelichting": ""
+        }
       }
     },
     "teksten": {
@@ -885,6 +892,7 @@
   },
   "nationaal_layout": {
     "headings": {
+      "maatregelen": "Restrictions",
       "medisch": "Medical indicators",
       "overig": "Early indicators",
       "verpleeghuis": "Nursing homes",
