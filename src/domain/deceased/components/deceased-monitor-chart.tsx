@@ -4,7 +4,7 @@ import {
   RegionalDeceasedCbsValue,
 } from '~/types/data';
 import { createDate } from '~/utils/createDate';
-import { formatDateFromMilliseconds } from '~/utils/formatDate';
+import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 
 type CbsValue = NationalDeceasedCbsValue | RegionalDeceasedCbsValue;
@@ -63,14 +63,7 @@ function useHighchartOptions(values: CbsValue[], config: SeriesConfig) {
       lineColor: '#C4C4C4',
       gridLineColor: '#ca005d',
       type: 'datetime',
-      categories: values.map((x, i) =>
-        toEpochMs(
-          /**
-           * The last category will render the week_end date
-           */
-          values[i + 1] ? x.week_start_unix : x.week_end_unix
-        ).toString()
-      ),
+      categories: values.map((x) => x.week_start_unix.toString()),
       title: {
         text: null,
       },
@@ -88,8 +81,16 @@ function useHighchartOptions(values: CbsValue[], config: SeriesConfig) {
          */
         rotation: ('0' as unknown) as number,
         formatter: function () {
-          return this.isFirst || this.isLast
-            ? formatDateFromMilliseconds(this.value, 'axis')
+          const value = values.find(
+            (x) => x.week_start_unix === Number(this.value)
+          );
+
+          if (!value) return '';
+
+          return this.isFirst
+            ? formatDateFromSeconds(value.week_start_unix, 'axis')
+            : this.isLast
+            ? formatDateFromSeconds(value.week_end_unix, 'axis')
             : '';
         },
       },
@@ -120,15 +121,12 @@ function useHighchartOptions(values: CbsValue[], config: SeriesConfig) {
       borderRadius: 0,
       xDateFormat: '%d %b %y',
       formatter() {
-        const value = values.find(
-          (x) => toEpochMs(x.week_start_unix) === Number(this.x)
-        );
+        const value = values.find((x) => x.week_start_unix === Number(this.x));
 
         if (!value) return;
 
         const dateText = [value.week_start_unix, value.week_end_unix]
-          .map(toEpochMs)
-          .map((x) => formatDateFromMilliseconds(x, 'medium'))
+          .map((x) => formatDateFromSeconds(x, 'medium'))
           .join(' - ');
 
         const expectedText = formatNumber(value.expected);
@@ -202,8 +200,4 @@ function useHighchartOptions(values: CbsValue[], config: SeriesConfig) {
       },
     ],
   } as Highcharts.Options;
-}
-
-function toEpochMs(x: number) {
-  return x * 1000;
 }
