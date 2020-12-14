@@ -10,7 +10,7 @@
   },
   "notificatie": {
     "titel": "Increase in newly reported COVID-19 infections is cause for concern",
-    "bericht": "Last week there was a 27% increase in COVID-19 positives compared with the week before. In the week from 2 to 8 December 43,103 newly tested COVID-19 positives were reported. This is an increase of 9,000 COVID-19 positives compared to the 33,949 COVID-19 positives reported the week before. In each safety region the number of newly tested positives also increased. More people have been tested. The percentage of people with a positive test result raised from 11.1% to 11.6% last week. The reproduction number of 20 November has a value of 1.00 (lower: 0.97; upper: 1.03).\n\nRisk level per region can be ‘caution’ (level 1), ‘concern’ (level 2), ‘serious’ (level 3) or ‘severe’ (level 4). At this moment the risk level of {{escalationLevel4}} regions is 'severe', for {{escalationLevel3}} it is ‘serious’, for {{escalationLevel2}} it is ‘concern’ and for {{escalationLevel1}} it is ‘caution’.",
+    "bericht": "Last week there was a 27% increase in COVID-19 positives compared with the week before. In the week from 2 to 8 December 43,103 newly tested COVID-19 positives were reported. This is an increase of 9,000 COVID-19 positives compared to the 33,949 COVID-19 positives reported the week before. In each safety region the number of newly tested positives also increased. More people have been tested. The percentage of people with a positive test result raised from 11.1% to 11.6% last week. The reproduction number of 20 November has a value of 1.00 (lower: 0.97; upper: 1.03).",
     "link": {
       "text": "View the full message from the RIVM",
       "href": "https://www.rivm.nl/en/novel-coronavirus-covid-19/current-information"
@@ -753,7 +753,7 @@
     "select_region_municipality_legend": "Select a municipality:",
     "select_region_type_legend": "Show numbers from:",
     "your_municipality": "Municipality",
-    "belangrijk_bericht": "There are [country-wide measures](https://www.government.nl/latest/news/2020/12/08/partial-lockdown-continues-to-apply-during-festive-season) to stop the spread of the coronavirus."
+    "belangrijk_bericht": "There is a [national lockdown](https://www.rijksoverheid.nl/actueel/nieuws/2020/12/14/lockdown-nodig-om-snel-oplopend-aantal-besmettingen-tegen-te-gaan)"
   },
   "common": {
     "metadata": {
@@ -1098,7 +1098,7 @@
       "title": "Level of risk per safety region | Dashboard Coronavirus | Government.nl",
       "description": "Overview of the level of risk per safety region in the Netherlands."
     },
-    "belangrijk_bericht": "There are [country-wide measures](https://www.government.nl/latest/news/2020/12/08/partial-lockdown-continues-to-apply-during-festive-season) to stop the spread of the coronavirus."
+    "belangrijk_bericht": "There is a [national lockdown](https://www.rijksoverheid.nl/actueel/nieuws/2020/12/14/lockdown-nodig-om-snel-oplopend-aantal-besmettingen-tegen-te-gaan)"
   },
   "gemeente_index": {
     "selecteer_titel": "Select your municipality",
