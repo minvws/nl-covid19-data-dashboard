@@ -1,8 +1,8 @@
-import { memo, ReactNode } from 'react';
+import { ReactNode, memo } from 'react';
 import css from '@styled-system/css';
+import styled from 'styled-components';
 
 import { colors } from '~/style/theme';
-import { Box } from '~/components-styled/base';
 
 const BOUND_OFFSET = 70;
 
@@ -21,6 +21,46 @@ export type Props = {
   borderColor?: string;
   bounds: Bounds;
 };
+
+const Point = styled.div`
+  pointer-events: none;
+  position: absolute;
+  height: 18px;
+  width: 18px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    height: 8px;
+    width: 8px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 1px solid white;
+    background: ${(props) => props.color || 'black'};
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    height: 18px;
+    width: 18px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: ${(props) => props.color || 'black'};
+    opacity: 0.2;
+  }
+`;
+
+const TooltipContainer = styled.div`
+  pointer-events: none;
+  position: absolute;
+  border: ${(props) => `1px solid ${props.borderColor || 'black'}`}
+  background-color: white;
+  min-width: 72;
+  white-space: nowrap;
+
+  ${css({ px: 2, py: 1, fontSize: 1 })}
+`;
 
 // TODO: improve how bounds are used to keep tooltips within the chart
 function Tooltip({
@@ -43,59 +83,19 @@ function Tooltip({
 
   return (
     <>
-      <Box
-        position="absolute"
-        top={y}
-        left={x}
-        css={css({ pointerEvents: 'none' })}
-      >
-        <Box
-          position="absolute"
-          top={0}
-          left={0}
-          bg={primaryColor}
-          borderRadius="50%"
-          height="18px"
-          width="18px"
-          opacity={0.2}
-          css={css({
-            transform: 'translate(-50%,-50%)',
-          })}
-        />
-        <Box
-          position="absolute"
-          top={0}
-          left={0}
-          bg={primaryColor}
-          borderRadius="50%"
-          width="8px"
-          height="8px"
-          border="1px solid white"
-          css={css({
-            transform: 'translate(-50%,-50%)',
-          })}
-        />
-      </Box>
+      <Point style={{ top: y, left: x }} color={primaryColor} />
 
-      <Box
-        bg="white"
-        border={`1px solid ${borderColor}`}
-        top={y}
-        left={x}
-        position="absolute"
-        minWidth={72}
-        px={2}
-        py={1}
-        fontSize={1}
-        css={css({
+      <TooltipContainer
+        style={{
+          top: y,
+          left: x,
           transform: `translate(${xTransform},${yTransform})`,
-          pointerEvents: 'none',
           transition: 'left 0.075s, top 0.075s',
-          whiteSpace: 'nowrap',
-        })}
+        }}
+        borderColor={borderColor}
       >
         {children}
-      </Box>
+      </TooltipContainer>
     </>
   );
 }

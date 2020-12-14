@@ -18,9 +18,10 @@ const valueToDate = (d: number) => new Date(d * 1000);
 const dateToValue = (d: Date) => d.valueOf() / 1000;
 const formatXAxis = (date: Date) =>
   formatDateFromSeconds(dateToValue(date), 'axis');
+const formatYAxisFunc = (y: number) => y.toString();
 
 export type Value = {
-  date: any; // NOTE: starts as number and gets turned into a date
+  date: any;
   value: number | null;
 };
 
@@ -48,7 +49,7 @@ export default function CustomLineChart<T extends Value>({
   timeframe = '5weeks',
   signaalwaarde,
   formatTooltip,
-  formatYAxis,
+  formatYAxis = formatYAxisFunc,
   showFill = true,
   valueAnnotation,
 }: LineChartProps<T>) {
@@ -63,7 +64,7 @@ export default function CustomLineChart<T extends Value>({
   const benchmark = useMemo(() => {
     return signaalwaarde
       ? { value: signaalwaarde, label: 'Signaalwaarde' }
-      : null;
+      : undefined;
   }, [signaalwaarde]);
 
   const graphData = useMemo(() => {

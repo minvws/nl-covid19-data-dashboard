@@ -19,19 +19,34 @@ const defaultColors = {
   benchmark: '#4f5458',
 };
 
+type DataPoint = {
+  date: Date;
+  value: number;
+};
+
+type Benchmark = {
+  value: number;
+  label: string;
+};
+
 export type ChartProps = {
-  benchmark: any;
+  benchmark?: Benchmark;
   isHovered: boolean;
-  trend: any[];
+  trend: DataPoint[];
   type: string;
-  handleHover: any;
-  xDomain: any[];
-  yDomain: any[];
+  handleHover: (
+    event: React.TouchEvent<SVGRectElement> | React.MouseEvent<SVGRectElement>,
+    data: any,
+    xPosition: number,
+    yPosition: number
+  ) => void;
+  xDomain: [any, any]; // TODO: improve type
+  yDomain: number[];
   width: number;
   height: number;
   margin?: { top: number; right: number; bottom: number; left: number };
-  formatXAxis: any;
-  formatYAxis: any;
+  formatXAxis: (x: any) => string;
+  formatYAxis: (y: any) => string;
 };
 
 function Chart({
@@ -63,15 +78,6 @@ function Chart({
     range: [bounded.height, 0],
     nice: NUM_TICKS,
   });
-
-  type DataPoint = {
-    date: Date;
-    value: number;
-    week: {
-      start: number;
-      end: number;
-    };
-  };
 
   const bisect = useCallback(
     (trend: Array<DataPoint>, mx: number) => {

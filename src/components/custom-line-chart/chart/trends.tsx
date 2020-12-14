@@ -21,7 +21,7 @@ export type Props = {
 
 // TODO: update to accept series prop which accepts an array of
 // trends to enable plotting of multiple lines
-function Trends({
+export default function Trends({
   trend,
   type = trendTypes.line,
   color,
@@ -93,5 +93,3 @@ function Trends({
     </>
   );
 }
-
-export default Trends;
