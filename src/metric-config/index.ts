@@ -1,7 +1,7 @@
 import { get } from 'lodash';
 import { gm } from './gm';
 import { nl } from './nl';
-import { MetricConfig } from './types';
+import { MetricConfig, NO_METRIC_PROPERTY } from './common';
 import { vr } from './vr';
 
 /**
@@ -27,7 +27,7 @@ const metricConfig = {
 export function getMetricConfig(
   scope: DataScope,
   metricName: string,
-  metricProperty: string
+  metricProperty = NO_METRIC_PROPERTY
 ) {
   /**
    * Fall back to an empty object so we don't have to specify empty objects in

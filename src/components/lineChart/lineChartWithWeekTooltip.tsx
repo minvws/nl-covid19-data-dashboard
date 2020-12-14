@@ -1,9 +1,5 @@
-import Highcharts, {
-  SeriesAreaOptions,
-  TooltipFormatterCallbackFunction,
-} from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
 import React, { useMemo } from 'react';
+import { HighchartsWrapper } from '~/components/common/highcharts';
 import { colors } from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
@@ -24,7 +20,7 @@ type LineChartWithWeekProps = {
   values: Value[];
   timeframe?: TimeframeOption;
   formatYAxis?: (y: number) => string;
-  tooltipFormatter?: TooltipFormatterCallbackFunction;
+  tooltipFormatter?: Highcharts.TooltipFormatterCallbackFunction;
 };
 
 export function LineChartWithWeekTooltip({
@@ -42,17 +38,17 @@ export function LineChartWithWeekTooltip({
     return getOptions(filteredValues, tooltipFormatter, formatYAxis);
   }, [values, timeframe, tooltipFormatter, formatYAxis]);
 
-  return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;
+  return <HighchartsWrapper options={chartOptions} />;
 }
 
 function getOptions(
   values: Value[],
-  tooltipFormatter?: TooltipFormatterCallbackFunction,
+  tooltipFormatter?: Highcharts.TooltipFormatterCallbackFunction,
   formatYAxis?: (y: number) => string
 ): Highcharts.Options {
   const hasMultipleValues = values.length > 1;
 
-  const series: SeriesAreaOptions[] = [
+  const series: Highcharts.SeriesAreaOptions[] = [
     {
       type: 'area',
       data: values.map((x) => ({ x: x.date, y: x.value, originalData: x })),

@@ -1,4 +1,4 @@
-import { MetricConfig } from './types';
+import { MetricConfig, NO_METRIC_PROPERTY } from './common';
 import { colors } from '~/style/theme';
 import { National } from '~/types/data';
 import { MetricKeys } from '~/components/choropleth/shared';
@@ -13,6 +13,11 @@ export type NlConfig = Partial<
 >;
 
 export const nl: NlConfig = {
+  behavior: {
+    [NO_METRIC_PROPERTY]: {
+      isWeeklyData: true,
+    },
+  },
   verdenkingen_huisartsen: {
     geschat_aantal: {
       isWeeklyData: true,

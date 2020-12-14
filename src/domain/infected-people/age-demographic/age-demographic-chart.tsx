@@ -86,8 +86,8 @@ export const AgeDemographicChart = memo<AgeDemographicChartProps>(
           x={width / 2 - ageRangeAxisWidth / 2}
           fill="black"
           fontWeight="bold"
-          fontSize={xMax < 300 ? '1rem' : '1.2rem'}
-          width={xMax + margin.left}
+          fontSize="1rem"
+          width={xMax - 10}
         >
           {text.graph.age_group_percentage_title}
         </Text>
@@ -98,8 +98,8 @@ export const AgeDemographicChart = memo<AgeDemographicChartProps>(
           x={width / 2 + ageRangeAxisWidth / 2}
           fill="black"
           fontWeight="bold"
-          fontSize={xMax < 300 ? '1rem' : '1.2rem'}
-          width={xMax + margin.right}
+          fontSize="1rem"
+          width={xMax - 10}
         >
           {text.graph.infected_percentage_title}
         </Text>
@@ -202,7 +202,7 @@ const StyledHoverBar = styled(Bar)(
     fill: 'transparent',
     // transparent stroke is to capture mouse movements in between bars for the tooltip
     stroke: 'transparent',
-    strokeWidth: 15,
+    strokeWidth: 12,
 
     [`${StyledGroup}:hover &`]: {
       fill: 'lightBlue',
