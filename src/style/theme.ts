@@ -94,6 +94,7 @@ export const colors = {
   category: '#6b6b6b',
   border: '#c4c4c4',
   lightBlue: '#E0EEF6',
+  restrictions: '#CD0059',
 
   data: {
     primary: '#007BC7',

@@ -1,5 +1,4 @@
 import css from '@styled-system/css';
-import { Link } from '~/utils/link';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import {
@@ -13,6 +12,7 @@ import {
   InlineText,
   Text,
 } from '~/components-styled/typography';
+import { Link } from '~/utils/link';
 import { Box } from '../base';
 
 /*
@@ -37,7 +37,7 @@ interface HeaderProps {
   children: ReactNode;
 }
 
-const Header = (props: HeaderProps) => {
+export const Header = (props: HeaderProps) => {
   const { hasIcon, children, skipLinkAnchor, id } = props;
   return (
     <HeaderBox

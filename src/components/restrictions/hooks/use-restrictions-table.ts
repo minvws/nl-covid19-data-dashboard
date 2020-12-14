@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { restrictionIcons } from '~/components/restrictions/restrictionIcons';
+import { restrictionIcons } from '~/components/restrictions/restriction-icons';
 import siteText from '~/locale/index';
 import {
   NationalRestrictionValue,

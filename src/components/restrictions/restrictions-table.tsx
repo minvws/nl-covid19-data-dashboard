@@ -2,14 +2,14 @@ import { Fragment } from 'react';
 import { Box } from '~/components-styled/base';
 import { Cell, Row, Table, TableBody } from '~/components-styled/layout/table';
 import { InlineText } from '~/components-styled/typography';
-import { RestrictionsTableData } from '~/components/restrictions/hooks/useRestrictionsTable';
+import { RestrictionsTableData } from '~/components/restrictions/hooks/use-restrictions-table';
 import siteText from '~/locale/index';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { useEscalationColor } from '~/utils/useEscalationColor';
 
 export type RestrictionsTableProps = {
   data: RestrictionsTableData;
-  escalationLevel: number;
+  escalationLevel: 1 | 2 | 3 | 4;
 };
 
 export type TableProps = {
@@ -41,6 +41,7 @@ function MobileRestrictionsTable(props: TableProps) {
           <Fragment key={row.categoryColumn}>
             <Row>
               <Cell
+                role="rowheader"
                 borderTop={'1px solid black'}
                 width="20em"
                 pt={3}
@@ -80,6 +81,7 @@ function DesktopRestrictionsTable(props: TableProps) {
         {data.rows.map((row) => (
           <Row key={row.categoryColumn}>
             <Cell
+              role="rowheader"
               borderTop={'1px solid black'}
               backgroundColor="#F9F9F9"
               width="20em"

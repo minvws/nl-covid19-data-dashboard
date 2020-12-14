@@ -1,13 +1,15 @@
 import { useRouter } from 'next/router';
-import ExternalLinkIcon from '~/assets/external-link.svg';
-import { Box } from '~/components-styled/base';
-import { ExternalLink } from '~/components-styled/external-link';
+import Maatregelen from '~/assets/maatregelen.svg';
+import { AnchorTile } from '~/components-styled/anchor-tile';
+import { Box, Spacer } from '~/components-styled/base';
+import { Header } from '~/components-styled/content-header';
+import { HeadingWithIcon } from '~/components-styled/heading-with-icon';
 import { KpiSection } from '~/components-styled/kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
-import { useRestrictionsTable } from '~/components/restrictions/hooks/useRestrictionsTable';
-import { RestrictionsTable } from '~/components/restrictions/restrictionsTable';
+import { useRestrictionsTable } from '~/components/restrictions/hooks/use-restrictions-table';
+import { RestrictionsTable } from '~/components/restrictions/restrictions-table';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import {
@@ -17,7 +19,7 @@ import {
 } from '~/static-props/safetyregion-data';
 import theme from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { useEscalationLevel } from '~/utils/useRestrictionLevel';
+import { useEscalationLevel } from '~/utils/use-restriction-level';
 
 const text = siteText.veiligheidsregio_maatregelen;
 type VRCode = keyof typeof siteText.veiligheidsregio_maatregelen_urls;
@@ -26,14 +28,17 @@ const RegionalRestrictions: FCWithLayout<ISafetyRegionData> = (props) => {
   const { data, safetyRegionName } = props;
 
   const router = useRouter();
-  const { code } = router.query;
+  const code = (router.query.code as unknown) as VRCode;
 
-  const regioUrl =
-    siteText.veiligheidsregio_maatregelen_urls[(code as unknown) as VRCode];
+  const regioUrl = siteText.veiligheidsregio_maatregelen_urls[code];
 
   const restrictionsTable = useRestrictionsTable(data.restrictions.values);
 
   const escalationLevel = useEscalationLevel(data.restrictions.values);
+
+  // Colors etc are determined by the effective escalation level which is 1, 2, 3 or 4.
+  const effectiveEscalationLevel: 1 | 2 | 3 | 4 =
+    escalationLevel > 4 ? 4 : (escalationLevel as 1 | 2 | 3 | 4);
 
   const key = escalationLevel.toString() as keyof typeof siteText.maatregelen.headings;
   const restrictionInfo = siteText.maatregelen.headings[key];
@@ -49,6 +54,21 @@ const RegionalRestrictions: FCWithLayout<ISafetyRegionData> = (props) => {
         })}
       />
 
+      <Header hasIcon={true}>
+        <HeadingWithIcon
+          icon={<Maatregelen fill={theme.colors.restrictions} />}
+          title={replaceVariablesInText(
+            siteText.veiligheidsregio_maatregelen.titel,
+            {
+              safetyRegionName,
+            }
+          )}
+          headingLevel={1}
+        />
+      </Header>
+
+      <Spacer mb={3} />
+
       <KpiSection display="flex" flexDirection="column">
         <Heading level={3}>{restrictionInfo.extratoelichting.titel}</Heading>
         <Box>
@@ -61,31 +81,20 @@ const RegionalRestrictions: FCWithLayout<ISafetyRegionData> = (props) => {
         </Box>
         <RestrictionsTable
           data={restrictionsTable}
-          escalationLevel={escalationLevel > 4 ? 4 : escalationLevel}
+          escalationLevel={effectiveEscalationLevel}
         />
       </KpiSection>
 
-      <KpiSection display="flex" flexDirection={['column', 'row']}>
-        <Box
-          borderRight={{ lg: `1px solid ${theme.colors?.lightGray}` }}
-          pr={[0, 2]}
-        >
-          <Heading level={3}>{text.titel_aanvullendemaatregelen}</Heading>
-          <Box>{text.toelichting_aanvullendemaatregelen}</Box>
-        </Box>
-        <Box ml={[0, 3]} pt={[2, 0]} flexShrink={0} display="flex">
-          {regioUrl.length > 0 && (
-            <>
-              <ExternalLinkIcon />
-              <ExternalLink href={regioUrl}>
-                {replaceVariablesInText(text.linktext_regionpage, {
-                  safetyRegionName,
-                })}
-              </ExternalLink>
-            </>
-          )}
-        </Box>
-      </KpiSection>
+      <AnchorTile
+        external
+        title={text.titel_aanvullendemaatregelen}
+        href={regioUrl}
+        label={replaceVariablesInText(text.linktext_regionpage, {
+          safetyRegionName,
+        })}
+      >
+        {text.toelichting_aanvullendemaatregelen}
+      </AnchorTile>
     </>
   );
 };
