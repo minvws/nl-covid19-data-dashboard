@@ -11,7 +11,7 @@ import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
 
 export type Value = {
   date: number;
-  value?: number; // note to self used to be number | null
+  value?: number;
 };
 
 const SIGNAALWAARDE_Z_INDEX = 5;
