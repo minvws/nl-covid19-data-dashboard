@@ -1,6 +1,6 @@
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import React, { ReactNode, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { isFilled } from 'ts-is-present';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import text from '~/locale/index';
@@ -20,7 +20,7 @@ export interface LineChartProps<T> {
   values: T[];
   signaalwaarde?: number;
   timeframe?: TimeframeOption;
-  formatTooltip?: (value: T) => ReactNode;
+  formatTooltip?: (value: T) => string;
   formatYAxis?: (y: number) => string;
   showFill?: boolean;
   valueAnnotation?: string;

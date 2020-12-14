@@ -1,7 +1,8 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, ReactNode } from 'react';
 import { useTooltip } from '@visx/tooltip';
 import { UseTooltipParams } from '@visx/tooltip/lib/hooks/useTooltip';
 import { extent } from 'd3-array';
+import { isFilled } from 'ts-is-present';
 
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
 import { formatDateFromSeconds } from '~/utils/formatDate';
@@ -9,26 +10,18 @@ import { formatNumber } from '~/utils/formatNumber';
 
 import { Box } from '~/components-styled/base';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
-import { calculateYMax } from '~/components/lineChart';
 import Chart, { defaultMargin } from './chart';
 import { trendTypes } from './chart/trends';
 import Tooltip from './chart/tooltip';
 
 const valueToDate = (d: number) => new Date(d * 1000);
-const dateToValue = (d: any) => d.valueOf() / 1000;
-const formatXAxis = (date: any) =>
+const dateToValue = (d: Date) => d.valueOf() / 1000;
+const formatXAxis = (date: Date) =>
   formatDateFromSeconds(dateToValue(date), 'axis');
 
-export type ThresholdProps = {
-  values: any[];
-  width: number;
-  height?: number;
-  timeframe?: TimeframeOption;
-  signaalwaarde?: number;
-  formatTooltip: any;
-  formatYAxis: any;
-  showFill: boolean;
-  valueAnnotation?: string;
+export type Value = {
+  date: any; // NOTE: starts as number and gets turned into a date
+  value: number | null;
 };
 
 type TooltipData = {
@@ -36,17 +29,29 @@ type TooltipData = {
   value: number;
 };
 
-function CustomLineChart({
+export interface LineChartProps<T> {
+  values: T[];
+  width?: number;
+  height?: number;
+  timeframe?: TimeframeOption;
+  signaalwaarde?: number;
+  formatTooltip?: (data: any) => ReactNode;
+  formatYAxis?: (y: number) => string;
+  showFill?: boolean;
+  valueAnnotation?: string;
+}
+
+export default function CustomLineChart<T extends Value>({
   values,
-  width,
-  height,
+  width = 500,
+  height = 250,
   timeframe = '5weeks',
   signaalwaarde,
   formatTooltip,
   formatYAxis,
   showFill = true,
   valueAnnotation,
-}: ThresholdProps) {
+}: LineChartProps<T>) {
   const {
     tooltipData,
     tooltipLeft = 0,
@@ -126,7 +131,7 @@ function CustomLineChart({
 
         {tooltipData && (
           <Tooltip
-            bounds={{ right: width, left: 0 }}
+            bounds={{ right: width, left: 0, top: 0, bottom: height }}
             x={tooltipLeft + defaultMargin.left}
             y={tooltipTop + defaultMargin.top}
           >
@@ -145,4 +150,19 @@ function CustomLineChart({
   );
 }
 
-export default CustomLineChart;
+/**
+ * From all the defined values, extract the highest number so we know how to
+ * scale the y-axis
+ */
+function calculateYMax(values: Value[], signaalwaarde = -Infinity) {
+  const maxValue = values
+    .map((x) => x.value)
+    .filter(isFilled)
+    .reduce((acc, value) => (value > acc ? value : acc), -Infinity);
+
+  /**
+   * Value cannot be 0, hence the 1
+   * If the value is below signaalwaarde, make sure the signaalwaarde floats in the middle
+   */
+  return Math.max(maxValue, signaalwaarde * 2, 1);
+}

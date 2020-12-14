@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, ReactNode } from 'react';
 import css from '@styled-system/css';
 
 import { colors } from '~/style/theme';
@@ -6,13 +6,20 @@ import { Box } from '~/components-styled/base';
 
 const BOUND_OFFSET = 70;
 
+type Bounds = {
+  left: number;
+  right: number;
+  top: number;
+  bottom: number;
+};
+
 export type Props = {
-  children: any;
+  children: ReactNode;
   x: number;
   y: number;
   primaryColor?: string;
   borderColor?: string;
-  bounds: any;
+  bounds: Bounds;
 };
 
 // TODO: improve how bounds are used to keep tooltips within the chart
@@ -27,10 +34,10 @@ function Tooltip({
   const yTransform = 'calc(-100% - 10px)';
 
   let xTransform = '-50%';
-  if (!isNaN(bounds?.right) && x > bounds.right - BOUND_OFFSET) {
+  if (x > bounds.right - BOUND_OFFSET) {
     xTransform = `calc(-100% + ${bounds.right - x}px)`;
   }
-  if (!isNaN(bounds?.left) && x < bounds.left + BOUND_OFFSET) {
+  if (x < bounds.left + BOUND_OFFSET) {
     xTransform = `calc(-50% + ${BOUND_OFFSET - x}px)`;
   }
 
