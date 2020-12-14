@@ -5,7 +5,7 @@ import EscalationLevel4 from '~/assets/niveau-4.svg';
 import { Box } from '~/components-styled/base';
 import { Text } from '~/components-styled/typography';
 import siteText from '~/locale/index';
-import { useEscalationColor } from '~/utils/useEscalationColor';
+import { useEscalationColor } from '~/utils/use-escalation-color';
 
 export type EscalationLevelLabelProps = {
   escalationLevel: number;

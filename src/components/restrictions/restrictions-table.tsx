@@ -4,8 +4,8 @@ import { Cell, Row, Table, TableBody } from '~/components-styled/layout/table';
 import { InlineText } from '~/components-styled/typography';
 import { RestrictionsTableData } from '~/components/restrictions/hooks/use-restrictions-table';
 import siteText from '~/locale/index';
+import { useEscalationColor } from '~/utils/use-escalation-color';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-import { useEscalationColor } from '~/utils/useEscalationColor';
 
 export type RestrictionsTableProps = {
   data: RestrictionsTableData;

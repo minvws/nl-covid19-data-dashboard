@@ -12,7 +12,7 @@ import { SEOHead } from '~/components/seoHead';
 import text from '~/locale';
 import { NationalPageProps } from '~/static-props/nl-data';
 import theme from '~/style/theme';
-import { useEscalationLevel } from '~/utils/use-restriction-level';
+import { useEscalationLevel } from '~/utils/use-escalation-level';
 export { getStaticProps } from '~/pages';
 
 const NationalRestrictions: FCWithLayout<NationalPageProps> = (props) => {
@@ -20,6 +20,7 @@ const NationalRestrictions: FCWithLayout<NationalPageProps> = (props) => {
 
   const restrictionsTable = useRestrictionsTable(data.restrictions.values);
   const escalationLevel = useEscalationLevel(data.restrictions.values);
+
   // Colors etc are determined by the effective escalation level which is 1, 2, 3 or 4.
   const effectiveEscalationLevel: 1 | 2 | 3 | 4 =
     escalationLevel > 4 ? 4 : (escalationLevel as 1 | 2 | 3 | 4);

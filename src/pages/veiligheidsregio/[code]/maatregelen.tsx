@@ -19,7 +19,7 @@ import {
 } from '~/static-props/safetyregion-data';
 import theme from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { useEscalationLevel } from '~/utils/use-restriction-level';
+import { useEscalationLevel } from '~/utils/use-escalation-level';
 
 const text = siteText.veiligheidsregio_maatregelen;
 type VRCode = keyof typeof siteText.veiligheidsregio_maatregelen_urls;
@@ -42,6 +42,10 @@ const RegionalRestrictions: FCWithLayout<ISafetyRegionData> = (props) => {
 
   const key = escalationLevel.toString() as keyof typeof siteText.maatregelen.headings;
   const restrictionInfo = siteText.maatregelen.headings[key];
+
+  /*const isNationalLevel = data.restrictions.values.every(
+    (res) => res.target_region === 'nl'
+  );*/
 
   return (
     <>
