@@ -1890,7 +1890,7 @@
       "kpi_covid_total_title": "Totaal aantal personen overleden aan COVID-19",
       "kpi_covid_total_description": "Dit getal laat van zien hoeveel personen in totaal is gemeld dat ze zijn overleden aan COVID-19, sinds het begin van de meldingen.",
       "line_chart_covid_daily_title": "Gemelde aantal patiënten overleden aan COVID-19 over tijd",
-      "line_chart_covid_daily_description": ""
+      "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel personen in de geselecteerde periode gemeld is dat ze zijn overleden aan COVID-19."
     },
     "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
   },
@@ -1921,7 +1921,7 @@
       "kpi_covid_total_title": "Totaal aantal personen overleden aan/met COVID-19",
       "kpi_covid_total_description": "Dit getal laat van zien hoeveel personen in totaal is gemeld dat ze zijn overleden aan/met COVID-19, sinds het begin van de meldingen.",
       "line_chart_covid_daily_title": "Gemelde aantal patiënten overleden aan/met COVID-19 over tijd",
-      "line_chart_covid_daily_description": ""
+      "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel personen in de geselecteerde periode gemeld is dat ze zijn overleden aan COVID-19."
     },
     "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
   },
