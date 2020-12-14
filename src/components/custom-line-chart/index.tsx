@@ -126,7 +126,7 @@ function CustomLineChart({
 
         {tooltipData && (
           <Tooltip
-            bounds={{ width, height }}
+            bounds={{ right: width, left: 0 }}
             x={tooltipLeft + defaultMargin.left}
             y={tooltipTop + defaultMargin.top}
           >

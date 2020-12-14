@@ -4,6 +4,8 @@ import css from '@styled-system/css';
 import { colors } from '~/style/theme';
 import { Box } from '~/components-styled/base';
 
+const BOUND_OFFSET = 70;
+
 export type Props = {
   children: any;
   x: number;
@@ -22,6 +24,16 @@ function Tooltip({
   borderColor = '#01689B',
   bounds,
 }: Props) {
+  const yTransform = 'calc(-100% - 10px)';
+
+  let xTransform = '-50%';
+  if (!isNaN(bounds?.right) && x > bounds.right - BOUND_OFFSET) {
+    xTransform = `calc(-100% + ${bounds.right - x}px)`;
+  }
+  if (!isNaN(bounds?.left) && x < bounds.left + BOUND_OFFSET) {
+    xTransform = `calc(-50% + ${BOUND_OFFSET - x}px)`;
+  }
+
   return (
     <>
       <Box
@@ -69,11 +81,7 @@ function Tooltip({
         py={1}
         fontSize={1}
         css={css({
-          transform: `translate(${
-            x < bounds.width - 75
-              ? '-50%'
-              : `calc(-100% + ${bounds.width - x}px)`
-          },calc(-100% - 10px))`,
+          transform: `translate(${xTransform},${yTransform})`,
           pointerEvents: 'none',
           transition: 'left 0.075s, top 0.075s',
           whiteSpace: 'nowrap',
