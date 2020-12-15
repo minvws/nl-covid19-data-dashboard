@@ -26,6 +26,7 @@ const rowOrder: EscalationCategory[] = [
   'uitvaart',
   'onderwijs',
   'werk',
+  'contactberoep',
   'winkels',
   'alcohol',
   'algemeen',

@@ -129,8 +129,8 @@ function DesktopRestrictionsTable(props: TableProps) {
 
 function getIcon(IconComponent: any | undefined, color: string) {
   if (!IconComponent) {
-    return <Box width="32px" height="32px" />;
+    return <Box size={32} />;
   }
 
-  return <IconComponent fill={color} />;
+  return <IconComponent color={color} />;
 }
