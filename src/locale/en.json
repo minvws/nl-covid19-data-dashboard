@@ -753,7 +753,7 @@
     "select_region_municipality_legend": "Select a municipality:",
     "select_region_type_legend": "Show numbers from:",
     "your_municipality": "Municipality",
-    "belangrijk_bericht": "There are [country-wide measures](https://www.government.nl/latest/news/2020/12/08/partial-lockdown-continues-to-apply-during-festive-season) to stop the spread of the coronavirus."
+    "belangrijk_bericht": "There is a [national lockdown](https://www.rijksoverheid.nl/actueel/nieuws/2020/12/14/lockdown-nodig-om-snel-oplopend-aantal-besmettingen-tegen-te-gaan)."
   },
   "common": {
     "metadata": {
@@ -1098,7 +1098,7 @@
       "title": "Level of risk per safety region | Dashboard Coronavirus | Government.nl",
       "description": "Overview of the level of risk per safety region in the Netherlands."
     },
-    "belangrijk_bericht": "There are [country-wide measures](https://www.government.nl/latest/news/2020/12/08/partial-lockdown-continues-to-apply-during-festive-season) to stop the spread of the coronavirus."
+    "belangrijk_bericht": "There is a [national lockdown](https://www.rijksoverheid.nl/actueel/nieuws/2020/12/14/lockdown-nodig-om-snel-oplopend-aantal-besmettingen-tegen-te-gaan)."
   },
   "gemeente_index": {
     "selecteer_titel": "Select your municipality",
