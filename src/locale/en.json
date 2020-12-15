@@ -9,8 +9,8 @@
     "title": "Last updated"
   },
   "notificatie": {
-    "titel": "Increase in newly reported COVID-19 infections is cause for concern",
-    "bericht": "Last week there was a 27% increase in COVID-19 positives compared with the week before. In the week from 2 to 8 December 43,103 newly tested COVID-19 positives were reported. This is an increase of 9,000 COVID-19 positives compared to the 33,949 COVID-19 positives reported the week before. In each safety region the number of newly tested positives also increased. More people have been tested. The percentage of people with a positive test result raised from 11.1% to 11.6% last week. The reproduction number of 20 November has a value of 1.00 (lower: 0.97; upper: 1.03).",
+    "titel": "Hospital and IC admissions rose sharply.",
+    "bericht": "The increasing number of COVID-19 positives during the past two weeks was followed by an increase in the number of hospital and IC admissions last week. In the past week the number of newly admitted patients to the hospital with COVID-19 increased by 20% compared to the previous week. Also, in intensive care units an increase in the number of new COVID-19 patients has been reported (+ 24%), compared to a week earlier. In nursing homes and residential care centers was a significant increase (+ 61%) in the number of Corona infected locations.",
     "link": {
       "text": "View the full message from the RIVM",
       "href": "https://www.rivm.nl/en/novel-coronavirus-covid-19/current-information"
@@ -1110,7 +1110,7 @@
   },
   "laatste_ontwikkelingen": {
     "title": "Latest developments",
-    "menu_subtitle": "Increase of number of confirmed cases",
+    "menu_subtitle": "Hospital and IC admissions rose sharply.",
     "alle_cijfers_header": "Want to see all data?",
     "alle_cijfers_link": "View all"
   },
