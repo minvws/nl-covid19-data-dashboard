@@ -5,6 +5,7 @@ import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/components/layout';
@@ -12,8 +13,8 @@ import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import {
-  getSafetyRegionStaticProps,
   getSafetyRegionPaths,
+  getSafetyRegionStaticProps,
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
@@ -31,7 +32,7 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
   const values = data.disability_care.values;
 
   return (
-    <>
+    <TileList>
       <SEOHead
         title={replaceVariablesInText(locationsText.metadata.title, {
           safetyRegionName,
@@ -191,7 +192,7 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
           date: value.date_of_report_unix,
         }))}
       />
-    </>
+    </TileList>
   );
 };
 

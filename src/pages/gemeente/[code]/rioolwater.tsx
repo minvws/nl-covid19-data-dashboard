@@ -9,6 +9,7 @@ import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { Select } from '~/components-styled/select';
+import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { BarChart } from '~/components/charts';
 import { FCWithLayout } from '~/components/layout';
@@ -68,7 +69,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
   const enableScatterPlot = sewerStationNames.length > 1;
 
   return (
-    <>
+    <TileList>
       <SEOHead
         title={replaceVariablesInText(text.metadata.title, {
           municipalityName,
@@ -200,7 +201,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
           />
         </ChartTile>
       )}
-    </>
+    </TileList>
   );
 };
 

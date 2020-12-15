@@ -1,18 +1,24 @@
+import css from '@styled-system/css';
 import fs from 'fs';
 import { useRouter } from 'next/router';
 import path from 'path';
+import { Box } from '~/components-styled/base';
+import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { EscalationLevelIcon } from '~/components-styled/escalation-level-icon';
 import { MessageTile } from '~/components-styled/message-tile';
+import { TileList } from '~/components-styled/tile-list';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
 import styles from '~/components/choropleth/tooltips/tooltip.module.scss';
 import { FCWithLayout } from '~/components/layout';
+import { SafetyRegionComboBox } from '~/components/layout/safety-region-combo-box';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { SEOHead } from '~/components/seoHead';
 import { TALLLanguages } from '~/locale/index';
 import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
+import { useBreakpoints } from '~/utils/useBreakpoints';
 
 const escalationThresholds =
   regionThresholds.escalation_levels.escalation_level;
@@ -26,7 +32,9 @@ export const EscalationMapLegenda = (props: EscalationMapLegendaProps) => {
 
   return (
     <div className={styles.legenda} aria-label="legend">
-      <h3 className="text-max-width">{text.escalatie_niveau.legenda.titel}</h3>
+      <h3 css={css({ maxWidth: '20em' })}>
+        {text.escalatie_niveau.legenda.titel}
+      </h3>
       {escalationThresholds.map((info) => (
         <div
           className={styles.escalationInfoLegenda}
@@ -53,6 +61,7 @@ export const EscalationMapLegenda = (props: EscalationMapLegendaProps) => {
 
 const SafetyRegion: FCWithLayout<any> = (props) => {
   const router = useRouter();
+  const breakpoints = useBreakpoints();
 
   const { text } = props;
 
@@ -63,25 +72,30 @@ const SafetyRegion: FCWithLayout<any> = (props) => {
         description={text.veiligheidsregio_index.metadata.description}
       />
 
-      {text.regionaal_index.belangrijk_bericht && (
-        <MessageTile message={text.regionaal_index.belangrijk_bericht} />
+      {!breakpoints.md && (
+        <Box bg="white">
+          <SafetyRegionComboBox />
+        </Box>
       )}
 
-      <article className="index-article layout-choropleth">
-        <div className="choropleth-header">
-          <h2>{text.veiligheidsregio_index.selecteer_titel}</h2>
-          {/**
-           * This is rendering html content which has been generated from
-           * markdown text.
-           */}
-          <div
-            dangerouslySetInnerHTML={{
-              __html: text.veiligheidsregio_index.selecteer_toelichting,
-            }}
-          />
-        </div>
+      <TileList>
+        {text.regionaal_index.belangrijk_bericht && (
+          <MessageTile message={text.regionaal_index.belangrijk_bericht} />
+        )}
 
-        <div className="choropleth-chart">
+        <ChoroplethTile
+          title={text.veiligheidsregio_index.selecteer_titel}
+          description={
+            <>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: text.veiligheidsregio_index.selecteer_toelichting,
+                }}
+              />
+              <EscalationMapLegenda text={text} />
+            </>
+          }
+        >
           <SafetyRegionChoropleth
             metricName="escalation_levels"
             metricProperty="escalation_level"
@@ -90,12 +104,8 @@ const SafetyRegion: FCWithLayout<any> = (props) => {
               createSelectRegionHandler(router)
             )}
           />
-        </div>
-
-        <div className="choropleth-legend">
-          <EscalationMapLegenda text={text} />
-        </div>
-      </article>
+        </ChoroplethTile>
+      </TileList>
     </>
   );
 };

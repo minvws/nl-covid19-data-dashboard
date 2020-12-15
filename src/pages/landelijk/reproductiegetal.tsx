@@ -4,6 +4,7 @@ import { KpiWithIllustrationTile } from '~/components-styled/kpi-with-illustrati
 import { Legenda } from '~/components-styled/legenda';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { PageBarScale } from '~/components-styled/page-barscale';
+import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/components/layout';
@@ -23,7 +24,7 @@ const ReproductionIndex: FCWithLayout<NationalPageProps> = (props) => {
   const lastKnownValidData = data.reproduction_index_last_known_average;
 
   return (
-    <>
+    <TileList>
       <SEOHead
         title={text.metadata.title}
         description={text.metadata.description}
@@ -92,7 +93,7 @@ const ReproductionIndex: FCWithLayout<NationalPageProps> = (props) => {
           }
         />
       )}
-    </>
+    </TileList>
   );
 };
 

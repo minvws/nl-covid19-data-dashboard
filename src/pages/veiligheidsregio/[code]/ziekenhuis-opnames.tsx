@@ -2,14 +2,15 @@ import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { Box } from '~/components-styled/base';
 import { ContentHeader } from '~/components-styled/content-header';
 import { Tile } from '~/components-styled/layout';
+import { TileList } from '~/components-styled/tile-list';
 import { Heading, Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import {
-  getSafetyRegionStaticProps,
   getSafetyRegionPaths,
+  getSafetyRegionStaticProps,
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
@@ -27,7 +28,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
   const { safetyRegionName } = props;
 
   return (
-    <>
+    <TileList>
       <SEOHead
         title={replaceVariablesInText(text.metadata.title, {
           safetyRegionName,
@@ -119,7 +120,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
           <Text>{text.tijdelijk_onbeschikbaar}</Text>
         </Box>
       </Tile>
-    </>
+    </TileList>
   );
 };
 

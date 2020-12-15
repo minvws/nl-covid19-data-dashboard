@@ -3,6 +3,7 @@ import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { Tile } from '~/components-styled/layout';
+import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/components/layout';
@@ -13,8 +14,8 @@ import { BehaviorTableTile } from '~/domain/behavior/behavior-table-tile';
 import { MoreInformation } from '~/domain/behavior/components/more-information';
 import siteText from '~/locale/index';
 import {
-  getSafetyRegionStaticProps,
   getSafetyRegionPaths,
+  getSafetyRegionStaticProps,
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
 
@@ -24,7 +25,7 @@ const BehaviorPage: FCWithLayout<ISafetyRegionData> = (props) => {
   const behaviorData = props.data.behavior;
 
   return (
-    <>
+    <TileList>
       <SEOHead
         title={text.metadata.title}
         description={text.metadata.description}
@@ -82,7 +83,7 @@ const BehaviorPage: FCWithLayout<ISafetyRegionData> = (props) => {
       />
 
       <MoreInformation />
-    </>
+    </TileList>
   );
 };
 

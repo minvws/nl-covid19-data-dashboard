@@ -3,6 +3,7 @@ import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
+import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/components/layout';
@@ -22,7 +23,7 @@ const SuspectedPatients: FCWithLayout<NationalPageProps> = (props) => {
   const lastValue = data.verdenkingen_huisartsen.last_value;
 
   return (
-    <>
+    <TileList>
       <SEOHead
         title={text.metadata.title}
         description={text.metadata.description}
@@ -92,7 +93,7 @@ const SuspectedPatients: FCWithLayout<NationalPageProps> = (props) => {
           />
         )}
       </ChartTileWithTimeframe>
-    </>
+    </TileList>
   );
 };
 

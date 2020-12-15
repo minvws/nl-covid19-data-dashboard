@@ -13,7 +13,7 @@ export function ChartTileContainer({
   metadata?: MetadataProps;
 }) {
   return (
-    <Tile mb={4} ml={{ _: -4, sm: 0 }} mr={{ _: -4, sm: 0 }}>
+    <Tile>
       {showDataWarning && <DataWarning />}
 
       {children}

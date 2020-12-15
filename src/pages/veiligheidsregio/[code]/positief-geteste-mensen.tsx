@@ -11,6 +11,7 @@ import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { MultipleLineChartTile } from '~/components-styled/multiple-line-chart-tile';
 import { PageBarScale } from '~/components-styled/page-barscale';
+import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
@@ -50,7 +51,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
   const selectedMunicipalCode = municipalCodes ? municipalCodes[0] : undefined;
 
   return (
-    <>
+    <TileList>
       <SEOHead
         title={replaceVariablesInText(text.metadata.title, {
           safetyRegionName,
@@ -308,7 +309,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           source: ggdText.bronnen.rivm,
         }}
       />
-    </>
+    </TileList>
   );
 };
 

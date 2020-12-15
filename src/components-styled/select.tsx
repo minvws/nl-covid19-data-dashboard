@@ -26,23 +26,21 @@ export function Select<T extends string>({
   return (
     <Container>
       <StyledSelect
-        value={value}
+        value={value || ''}
         onChange={(event) => onChange((event.target.value || undefined) as T)}
         isClearable={!!onClear}
       >
         {placeholder && (
-          <option value="" disabled={!value} selected={value === undefined}>
+          <option value="" disabled={!value}>
             {placeholder}
           </option>
         )}
-
         {options.map(({ value, label }) => (
           <option key={value} value={value}>
             {label}
           </option>
         ))}
       </StyledSelect>
-
       {onClear && value && (
         <ClearButton
           onClick={() => onClear && onClear()}

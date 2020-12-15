@@ -3,6 +3,7 @@ import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/components/layout';
@@ -22,7 +23,7 @@ const DeceasedNationalPage: FCWithLayout<NationalPageProps> = (props) => {
   const dataRivm = props.data.deceased_rivm;
 
   return (
-    <>
+    <TileList>
       <SEOHead
         title={text.metadata.title}
         description={text.metadata.description}
@@ -86,7 +87,7 @@ const DeceasedNationalPage: FCWithLayout<NationalPageProps> = (props) => {
       />
 
       <DeceasedMonitorSection data={dataCbs} />
-    </>
+    </TileList>
   );
 };
 

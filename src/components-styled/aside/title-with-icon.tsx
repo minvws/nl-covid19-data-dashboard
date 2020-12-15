@@ -1,11 +1,11 @@
 import css from '@styled-system/css';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Box } from '../base';
 import { Heading, HeadingProps } from '../typography';
 
 type TitleWithIconProps = {
   title: string;
-  icon: JSX.Element;
+  icon: ReactNode;
   subtitle?: string;
 } & Omit<HeadingProps, 'children' | 'level'>;
 

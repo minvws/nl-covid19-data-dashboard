@@ -1,5 +1,7 @@
 import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
+import { Box } from '~/components-styled/base';
+import { Heading, Text } from '~/components-styled/typography';
 import { MunicipalityNavigationMap } from '~/components/choropleth/municipality-navigation-map';
 import {
   createSelectMunicipalHandler,
@@ -9,10 +11,11 @@ import { MunicipalityProperties } from '~/components/choropleth/shared';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
 import { FCWithLayout } from '~/components/layout';
 import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
+import { SafetyRegionComboBox } from '~/components/layout/safety-region-combo-box';
 import { SEOHead } from '~/components/seoHead';
 import text from '~/locale/index';
 import getLastGeneratedData from '~/static-props/last-generated-data';
-import { useMediaQuery } from '~/utils/useMediaQuery';
+import { useBreakpoints } from '~/utils/useBreakpoints';
 
 const tooltipContent = (selectedHandler: MunicipalitySelectionHandler) => {
   return (context: MunicipalityProperties): ReactNode => {
@@ -40,12 +43,7 @@ const tooltipContent = (selectedHandler: MunicipalitySelectionHandler) => {
 // lots of unnecessary null checks on those pages.
 const Municipality: FCWithLayout<any> = () => {
   const router = useRouter();
-  const isLargeScreen = useMediaQuery('(min-width: 1000px)');
-
-  const onSelectMunicipal = (context: MunicipalityProperties) => {
-    const pageName = isLargeScreen ? '/positief-geteste-mensen' : '';
-    router.push(`/gemeente/${context.gemcode}${pageName}`);
-  };
+  const breakpoints = useBreakpoints();
 
   return (
     <>
@@ -53,21 +51,36 @@ const Municipality: FCWithLayout<any> = () => {
         title={text.gemeente_index.metadata.title}
         description={text.gemeente_index.metadata.description}
       />
-      <article className="map-article">
-        <div>
-          <h2>{text.gemeente_index.selecteer_titel}</h2>
-          <p>{text.gemeente_index.selecteer_toelichting}</p>
-        </div>
-        <div className="map-container">
+
+      {!breakpoints.md && (
+        <Box bg="white">
+          <SafetyRegionComboBox />
+        </Box>
+      )}
+
+      <Box as="article" p={4}>
+        <Heading level={3} as="h1">
+          {text.gemeente_index.selecteer_titel}
+        </Heading>
+        <Text>{text.gemeente_index.selecteer_toelichting}</Text>
+
+        <Box
+          display="flex"
+          justifyContent="center"
+          width="100%"
+          height="120vw"
+          maxWidth={750}
+          maxHeight={960}
+          margin="0 auto"
+        >
           <MunicipalityNavigationMap
-            tooltipContent={tooltipContent(onSelectMunicipal)}
-            onSelect={createSelectMunicipalHandler(
-              router,
-              'positief-geteste-mensen'
+            onSelect={createSelectMunicipalHandler(router)}
+            tooltipContent={tooltipContent(
+              createSelectMunicipalHandler(router)
             )}
           />
-        </div>
-      </article>
+        </Box>
+      </Box>
     </>
   );
 };

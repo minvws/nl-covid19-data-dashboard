@@ -1,10 +1,9 @@
 import css from '@styled-system/css';
-import { Link } from '~/utils/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
-import { MaxWidth } from '~/components-styled/max-width';
 import text from '~/locale/index';
+import { Link } from '~/utils/link';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 
 export function TopNavigation() {
@@ -17,29 +16,27 @@ export function TopNavigation() {
       role="navigation"
       aria-label={text.aria_labels.pagina_keuze}
     >
-      <MaxWidth>
-        <NavList>
-          <NavItem
-            href="/"
-            isActive={
-              router.pathname.indexOf('/landelijk') === 0 ||
-              router.pathname === '/'
-            }
-          >
-            {text.nav.links.index}
-          </NavItem>
-          <NavItem href="/veiligheidsregio">
-            {text.nav.links.veiligheidsregio}
-          </NavItem>
-          <NavItem href="/gemeente">{text.nav.links.gemeente}</NavItem>
+      <NavList>
+        <NavItem
+          href="/"
+          isActive={
+            router.pathname.indexOf('/landelijk') === 0 ||
+            router.pathname === '/'
+          }
+        >
+          {text.nav.links.index}
+        </NavItem>
+        <NavItem href="/veiligheidsregio">
+          {text.nav.links.veiligheidsregio}
+        </NavItem>
+        <NavItem href="/gemeente">{text.nav.links.gemeente}</NavItem>
 
-          {breakpoints.md && (
-            <NavItem alignRight href="/over">
-              {text.nav.links.over}
-            </NavItem>
-          )}
-        </NavList>
-      </MaxWidth>
+        {breakpoints.md && (
+          <NavItem alignRight href="/over">
+            {text.nav.links.over}
+          </NavItem>
+        )}
+      </NavList>
     </nav>
   );
 }

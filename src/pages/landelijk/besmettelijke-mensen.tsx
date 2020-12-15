@@ -4,6 +4,7 @@ import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { Legenda } from '~/components-styled/legenda';
+import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { AreaChart } from '~/components/charts/index';
 import { FCWithLayout } from '~/components/layout';
@@ -25,7 +26,7 @@ const InfectiousPeople: FCWithLayout<NationalPageProps> = (props) => {
     data.infectious_people_last_known_average;
 
   return (
-    <>
+    <TileList>
       <SEOHead
         title={text.metadata.title}
         description={text.metadata.description}
@@ -104,7 +105,7 @@ const InfectiousPeople: FCWithLayout<NationalPageProps> = (props) => {
           )}
         </ChartTileWithTimeframe>
       )}
-    </>
+    </TileList>
   );
 };
 

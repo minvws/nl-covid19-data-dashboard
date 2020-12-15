@@ -1,17 +1,16 @@
 import '@reach/combobox/styles.css';
-import Router from 'next/router';
+/* Polyfill for flatMap */
+import 'core-js/features/array/flat-map';
 import { AppProps } from 'next/app';
+import Router from 'next/router';
 import { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
-import { FCWithLayout } from '~/components/layout';
 import '~/components/comboBox/comboBox.scss';
+import { FCWithLayout } from '~/components/layout';
 import * as piwik from '~/lib/piwik';
 import '~/scss/style.scss';
 import { GlobalStyle } from '~/style/global-style';
 import theme from '~/style/theme';
-
-/* Polyfill for flatMap */
-import 'core-js/features/array/flat-map';
 
 type AppPropsWithLayout = AppProps & {
   Component: FCWithLayout;
@@ -23,7 +22,6 @@ export default function App(props: AppPropsWithLayout) {
   const getLayout = Component.getLayout || page;
 
   useEffect(() => {
-    window.document.documentElement.classList.add('js');
     const handleRouteChange = (pathname: string) => {
       piwik.pageview();
 
@@ -43,6 +41,11 @@ export default function App(props: AppPropsWithLayout) {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `try { window.document.documentElement.classList.remove('has-no-js'); } catch(err) {};`,
+        }}
+      />
       {pageWithLayout}
     </ThemeProvider>
   );

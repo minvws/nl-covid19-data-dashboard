@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import Arrow from '~/assets/arrow.svg';
 import ElderlyIcon from '~/assets/elderly.svg';
 import Gedrag from '~/assets/gedrag.svg';
 import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
@@ -11,19 +10,16 @@ import VirusIcon from '~/assets/virus.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { Category } from '~/components-styled/aside/category';
 import {
-  CategoryMenuItem,
+  CategoryMenu,
   Menu,
-  MetricMenuItem,
+  MetricMenuItemLink,
 } from '~/components-styled/aside/menu';
-import { TitleWithIcon } from '~/components-styled/aside/title-with-icon';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
-import { ComboBox } from '~/components/comboBox';
 import { getLayout as getSiteLayout } from '~/components/layout';
-import safetyRegions from '~/data/index';
+import { SiteContent } from '~/domain/site/site-content';
 import siteText from '~/locale/index';
 import { ISafetyRegionData } from '~/static-props/safetyregion-data';
-import { Link } from '~/utils/link';
-import { useMediaQuery } from '~/utils/useMediaQuery';
+import { SafetyRegionComboBox } from './safety-region-combo-box';
 
 export function getSafetyRegionLayout() {
   return function (
@@ -36,14 +32,6 @@ export function getSafetyRegionLayout() {
     )(<SafetyRegionLayout {...pageProps}>{page}</SafetyRegionLayout>);
   };
 }
-
-type TSafetyRegion = {
-  name: string;
-  displayName?: string;
-  code: string;
-  id: number;
-  searchTerms?: string[];
-};
 
 /**
  * SafetyRegionLayout is a composition of persistent layouts.
@@ -67,8 +55,6 @@ function SafetyRegionLayout(
   const { children, data, safetyRegionName } = props;
 
   const router = useRouter();
-  const isLargeScreen = useMediaQuery('(min-width: 1000px)', true);
-
   const { code } = router.query;
 
   const isMainRoute =
@@ -76,26 +62,6 @@ function SafetyRegionLayout(
     router.route === `/veiligheidsregio/[code]`;
 
   const showMetricLinks = router.route !== '/veiligheidsregio';
-
-  const isMenuOpen = router.query.menu === '1';
-  const menuUrl = {
-    pathname: router.pathname,
-    query: { ...router.query, menu: '1' },
-  };
-
-  function getClassName(path: string) {
-    return router.pathname === path
-      ? 'metric-link active-metric-link'
-      : 'metric-link';
-  }
-
-  function handleSafeRegionSelect(region: TSafetyRegion) {
-    if (isLargeScreen) {
-      router.push(`/veiligheidsregio/${region.code}/positief-geteste-mensen`);
-    } else {
-      router.push(`/veiligheidsregio/${region.code}`);
-    }
-  }
 
   return (
     <>
@@ -113,303 +79,189 @@ function SafetyRegionLayout(
         />
       </Head>
 
-      <div
-        className={`safety-region-layout ${
-          isMainRoute
-            ? 'has-menu-and-content-opened'
-            : isMenuOpen
-            ? 'has-menu-opened'
-            : 'has-menu-closed'
-        }`}
-      >
-        <Link href={menuUrl}>
-          <a className="back-button">
-            <Arrow />
-            {siteText.nav.terug_naar_alle_cijfers}
-          </a>
-        </Link>
-        <aside className="safety-region-aside">
-          <ComboBox<TSafetyRegion>
-            placeholder={siteText.common.zoekveld_placeholder_regio}
-            onSelect={handleSafeRegionSelect}
-            options={safetyRegions}
-          />
+      <SiteContent
+        hideMenuButton={isMainRoute}
+        renderSearch={<SafetyRegionComboBox />}
+        renderSidebar={
+          <>
+            {showMetricLinks && (
+              <nav
+                /** re-mount when route changes in order to blur anchors */
+                key={router.asPath}
+                id="metric-navigation"
+                aria-label={siteText.aria_labels.metriek_navigatie}
+                role="navigation"
+              >
+                <Category>{safetyRegionName}</Category>
+                <Menu>
+                  <CategoryMenu
+                    title={
+                      siteText.veiligheidsregio_layout.headings.besmettingen
+                    }
+                  >
+                    <MetricMenuItemLink
+                      href={`/veiligheidsregio/${code}/positief-geteste-mensen`}
+                      icon={<GetestIcon />}
+                      title={
+                        siteText.veiligheidsregio_positief_geteste_personen
+                          .titel_sidebar
+                      }
+                    >
+                      <SidebarMetric
+                        data={data}
+                        scope="vr"
+                        metricName="results_per_region"
+                        metricProperty="total_reported_increase_per_region"
+                        altBarScaleMetric={{
+                          metricName: 'results_per_region',
+                          metricProperty: 'infected_increase_per_region',
+                        }}
+                        localeTextKey="veiligheidsregio_positief_geteste_personen"
+                        differenceKey="results_per_region__total_reported_increase_per_region"
+                        showBarScale={true}
+                      />
+                    </MetricMenuItemLink>
 
-          {showMetricLinks && (
-            <nav
-              /** re-mount when route changes in order to blur anchors */
-              key={router.asPath}
-              id="metric-navigation"
-              aria-label={siteText.aria_labels.metriek_navigatie}
-              role="navigation"
-            >
-              <Category>{safetyRegionName}</Category>
-              <Menu>
-                <CategoryMenuItem>
-                  <Category>
-                    {siteText.veiligheidsregio_layout.headings.besmettingen}
-                  </Category>
-                  <Menu>
-                    <MetricMenuItem>
-                      <Link
-                        href={`/veiligheidsregio/${code}/positief-geteste-mensen`}
-                      >
-                        <a
-                          className={getClassName(
-                            `/veiligheidsregio/[code]/positief-geteste-mensen`
-                          )}
-                        >
-                          <TitleWithIcon
-                            icon={<GetestIcon />}
-                            title={
-                              siteText
-                                .veiligheidsregio_positief_geteste_personen
-                                .titel_sidebar
-                            }
-                          />
-
-                          <SidebarMetric
-                            data={data}
-                            scope="vr"
-                            metricName="results_per_region"
-                            metricProperty="total_reported_increase_per_region"
-                            altBarScaleMetric={{
-                              metricName: 'results_per_region',
-                              metricProperty: 'infected_increase_per_region',
-                            }}
-                            localeTextKey="veiligheidsregio_positief_geteste_personen"
-                            differenceKey="results_per_region__total_reported_increase_per_region"
-                            showBarScale={true}
-                          />
-                        </a>
-                      </Link>
-                    </MetricMenuItem>
-                    <MetricMenuItem>
-                      <Link href={`/veiligheidsregio/${code}/sterfte`}>
-                        <a
-                          className={getClassName(
-                            '/veiligheidsregio/[code]/sterfte'
-                          )}
-                        >
-                          <TitleWithIcon
-                            icon={<VirusIcon />}
-                            title={
-                              siteText.veiligheidsregio_sterfte.titel_sidebar
-                            }
-                          />
-                          <SidebarMetric
-                            data={data}
-                            scope="vr"
-                            metricName="deceased_rivm"
-                            metricProperty="covid_daily"
-                            localeTextKey="veiligheidsregio_sterfte"
-                          />
-                        </a>
-                      </Link>
-                    </MetricMenuItem>
-                  </Menu>
-                </CategoryMenuItem>
-                <CategoryMenuItem>
-                  <Category>
-                    {siteText.veiligheidsregio_layout.headings.ziekenhuizen}
-                  </Category>
-                  <Menu>
-                    <MetricMenuItem>
-                      <Link
-                        href={`/veiligheidsregio/${code}/ziekenhuis-opnames`}
-                      >
-                        <a
-                          className={getClassName(
-                            `/veiligheidsregio/[code]/ziekenhuis-opnames`
-                          )}
-                        >
-                          <TitleWithIcon
-                            icon={<Ziekenhuis />}
-                            title={
-                              siteText
-                                .veiligheidsregio_ziekenhuisopnames_per_dag
-                                .titel_sidebar
-                            }
-                          />
-                          <span className="metric-wrapper">
-                            {
-                              siteText
-                                .veiligheidsregio_ziekenhuisopnames_per_dag
-                                .tijdelijk_onbeschikbaar_titel
-                            }
-                          </span>
-                        </a>
-                      </Link>
-                    </MetricMenuItem>
-                  </Menu>
-                </CategoryMenuItem>
-                <CategoryMenuItem>
-                  <Category>
-                    {
+                    <MetricMenuItemLink
+                      href={`/veiligheidsregio/${code}/sterfte`}
+                      icon={<VirusIcon />}
+                      title={siteText.veiligheidsregio_sterfte.titel_sidebar}
+                    >
+                      <SidebarMetric
+                        data={data}
+                        scope="vr"
+                        metricName="deceased_rivm"
+                        metricProperty="covid_daily"
+                        localeTextKey="veiligheidsregio_sterfte"
+                      />
+                    </MetricMenuItemLink>
+                  </CategoryMenu>
+                  <CategoryMenu
+                    title={
+                      siteText.veiligheidsregio_layout.headings.ziekenhuizen
+                    }
+                  >
+                    <MetricMenuItemLink
+                      href={`/veiligheidsregio/${code}/ziekenhuis-opnames`}
+                      icon={<Ziekenhuis />}
+                      title={
+                        siteText.veiligheidsregio_ziekenhuisopnames_per_dag
+                          .titel_sidebar
+                      }
+                    >
+                      {
+                        siteText.veiligheidsregio_ziekenhuisopnames_per_dag
+                          .tijdelijk_onbeschikbaar_titel
+                      }
+                    </MetricMenuItemLink>
+                  </CategoryMenu>
+                  <CategoryMenu
+                    title={
                       siteText.veiligheidsregio_layout.headings
                         .kwetsbare_groepen
                     }
-                  </Category>
-                  <Menu>
-                    <MetricMenuItem>
-                      <Link href={`/veiligheidsregio/${code}/verpleeghuiszorg`}>
-                        <a
-                          className={getClassName(
-                            '/veiligheidsregio/[code]/verpleeghuiszorg'
-                          )}
-                        >
-                          <TitleWithIcon
-                            icon={<Verpleeghuiszorg />}
-                            title={
-                              siteText
-                                .veiligheidsregio_verpleeghuis_besmette_locaties
-                                .titel_sidebar
-                            }
-                          />
-                          <SidebarMetric
-                            data={data}
-                            scope="vr"
-                            metricName="nursing_home"
-                            metricProperty="newly_infected_people"
-                            localeTextKey="verpleeghuis_positief_geteste_personen"
-                            differenceKey="nursing_home__newly_infected_people"
-                          />
-                        </a>
-                      </Link>
-                    </MetricMenuItem>
+                  >
+                    <MetricMenuItemLink
+                      href={`/veiligheidsregio/${code}/verpleeghuiszorg`}
+                      icon={<Verpleeghuiszorg />}
+                      title={
+                        siteText.veiligheidsregio_verpleeghuis_besmette_locaties
+                          .titel_sidebar
+                      }
+                    >
+                      <SidebarMetric
+                        data={data}
+                        scope="vr"
+                        metricName="nursing_home"
+                        metricProperty="newly_infected_people"
+                        localeTextKey="verpleeghuis_positief_geteste_personen"
+                        differenceKey="nursing_home__newly_infected_people"
+                      />
+                    </MetricMenuItemLink>
 
-                    <MetricMenuItem>
-                      <Link
-                        href={`/veiligheidsregio/${code}/gehandicaptenzorg`}
-                      >
-                        <a
-                          className={getClassName(
-                            '/veiligheidsregio/[code]/gehandicaptenzorg'
-                          )}
-                        >
-                          <TitleWithIcon
-                            icon={<Gehandicaptenzorg />}
-                            title={
-                              siteText.gehandicaptenzorg_besmette_locaties
-                                .titel_sidebar
-                            }
-                          />
-                          <SidebarMetric
-                            data={data}
-                            scope="vr"
-                            metricName="disability_care"
-                            metricProperty="newly_infected_people"
-                            localeTextKey="veiligheidsregio_gehandicaptenzorg_positief_geteste_personen"
-                          />
-                        </a>
-                      </Link>
-                    </MetricMenuItem>
+                    <MetricMenuItemLink
+                      href={`/veiligheidsregio/${code}/gehandicaptenzorg`}
+                      icon={<Gehandicaptenzorg />}
+                      title={
+                        siteText.gehandicaptenzorg_besmette_locaties
+                          .titel_sidebar
+                      }
+                    >
+                      <SidebarMetric
+                        data={data}
+                        scope="vr"
+                        metricName="disability_care"
+                        metricProperty="newly_infected_people"
+                        localeTextKey="veiligheidsregio_gehandicaptenzorg_positief_geteste_personen"
+                      />
+                    </MetricMenuItemLink>
 
-                    <MetricMenuItem>
-                      <Link
-                        href={`/veiligheidsregio/${code}/thuiswonende-ouderen`}
-                      >
-                        <a
-                          className={getClassName(
-                            '/veiligheidsregio/[code]/thuiswonende-ouderen'
-                          )}
-                        >
-                          <TitleWithIcon
-                            icon={<ElderlyIcon />}
-                            title={
-                              siteText.veiligheidsregio_thuiswonende_ouderen
-                                .titel_sidebar
-                            }
-                          />
-                          <SidebarMetric
-                            data={data}
-                            scope="vr"
-                            metricName="elderly_at_home"
-                            metricProperty="positive_tested_daily"
-                            localeTextKey="veiligheidsregio_thuiswonende_ouderen"
-                          />
-                        </a>
-                      </Link>
-                    </MetricMenuItem>
-                  </Menu>
-                </CategoryMenuItem>
-                <CategoryMenuItem>
-                  <Category>
-                    {siteText.veiligheidsregio_layout.headings.vroege_signalen}
-                  </Category>
-                  <Menu>
-                    <MetricMenuItem>
-                      <Link href={`/veiligheidsregio/${code}/rioolwater`}>
-                        <a
-                          className={getClassName(
-                            `/veiligheidsregio/[code]/rioolwater`
-                          )}
-                        >
-                          <TitleWithIcon
-                            icon={<RioolwaterMonitoring />}
-                            title={
-                              siteText.veiligheidsregio_rioolwater_metingen
-                                .titel_sidebar
-                            }
-                          />
-                          <SidebarMetric
-                            data={data}
-                            scope="vr"
-                            metricName="sewer"
-                            metricProperty="average"
-                            localeTextKey="veiligheidsregio_rioolwater_metingen"
-                            differenceKey="sewer__average"
-                            annotationKey="riool_normalized"
-                          />
-                        </a>
-                      </Link>
-                    </MetricMenuItem>
-                  </Menu>
-                </CategoryMenuItem>
+                    <MetricMenuItemLink
+                      href={`/veiligheidsregio/${code}/thuiswonende-ouderen`}
+                      icon={<ElderlyIcon />}
+                      title={
+                        siteText.veiligheidsregio_thuiswonende_ouderen
+                          .titel_sidebar
+                      }
+                    >
+                      <SidebarMetric
+                        data={data}
+                        scope="vr"
+                        metricName="elderly_at_home"
+                        metricProperty="positive_tested_daily"
+                        localeTextKey="veiligheidsregio_thuiswonende_ouderen"
+                      />
+                    </MetricMenuItemLink>
+                  </CategoryMenu>
+                  <CategoryMenu
+                    title={
+                      siteText.veiligheidsregio_layout.headings.vroege_signalen
+                    }
+                  >
+                    <MetricMenuItemLink
+                      href={`/veiligheidsregio/${code}/rioolwater`}
+                      icon={<RioolwaterMonitoring />}
+                      title={
+                        siteText.veiligheidsregio_rioolwater_metingen
+                          .titel_sidebar
+                      }
+                    >
+                      <SidebarMetric
+                        data={data}
+                        scope="vr"
+                        metricName="sewer"
+                        metricProperty="average"
+                        localeTextKey="veiligheidsregio_rioolwater_metingen"
+                        differenceKey="sewer__average"
+                        annotationKey="riool_normalized"
+                      />
+                    </MetricMenuItemLink>
+                  </CategoryMenu>
 
-                <CategoryMenuItem>
-                  <Category>
-                    {siteText.veiligheidsregio_layout.headings.gedrag}
-                  </Category>
-                  <Menu>
-                    <MetricMenuItem>
-                      <Link href={`/veiligheidsregio/${code}/gedrag`}>
-                        <a
-                          className={getClassName(
-                            '/veiligheidsregio/[code]/gedrag'
-                          )}
-                        >
-                          <TitleWithIcon
-                            icon={<Gedrag />}
-                            title={siteText.regionaal_gedrag.sidebar.titel}
-                          />
-                          <SidebarMetric
-                            data={data}
-                            scope="vr"
-                            metricName="behavior"
-                            localeTextKey="gedrag_common"
-                          />
-                        </a>
-                      </Link>
-                    </MetricMenuItem>
-                  </Menu>
-                </CategoryMenuItem>
-              </Menu>
-            </nav>
-          )}
-        </aside>
-
-        <main id="content" className="safety-region-content">
-          {children}
-        </main>
-
-        <Link href={menuUrl}>
-          <a className="back-button back-button-footer">
-            <Arrow />
-            {siteText.nav.terug_naar_alle_cijfers}
-          </a>
-        </Link>
-      </div>
+                  <CategoryMenu
+                    title={siteText.veiligheidsregio_layout.headings.gedrag}
+                  >
+                    <MetricMenuItemLink
+                      href={`/veiligheidsregio/${code}/gedrag`}
+                      icon={<Gedrag />}
+                      title={siteText.regionaal_gedrag.sidebar.titel}
+                    >
+                      <SidebarMetric
+                        data={data}
+                        scope="vr"
+                        metricName="behavior"
+                        localeTextKey="gedrag_common"
+                      />
+                    </MetricMenuItemLink>
+                  </CategoryMenu>
+                </Menu>
+              </nav>
+            )}
+          </>
+        }
+      >
+        {children}
+      </SiteContent>
     </>
   );
 }

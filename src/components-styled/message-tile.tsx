@@ -11,9 +11,6 @@ interface MessageTileProps {
 export function MessageTile({ message }: MessageTileProps) {
   return (
     <Tile
-      mb={4}
-      ml={{ _: -4, sm: 0 }}
-      mr={{ _: -4, sm: 0 }}
       css={css({
         borderLeft: '9px solid #FFd600',
         backgroundColor: '#FFF4B9',

@@ -1,13 +1,13 @@
 const space = [
   0,
-  '0.25rem', // 4px at default zoom
-  '0.5rem',
-  '1rem',
-  '2rem',
-  '4rem',
-  '8rem',
-  '16rem',
-  '32rem',
+  '0.25rem', // 1 -   4px at default zoom
+  '0.5rem', // 2 -   8px
+  '1rem', // 4 -  16px
+  '2rem', // 5 -  32px
+  '4rem', // 6 -  64px
+  '8rem', // 7 - 128px
+  '16rem', // 8 - 256px
+  '32rem', // 9 - 512px
 ] as const;
 
 /**
@@ -82,15 +82,18 @@ const mediaQueries = {
 } as const;
 
 export const colors = {
+  page: '#f3f3f3',
   blue: '#01689b',
   icon: '#01689b',
   button: '#01689b',
   shadow: '#e5e5e5',
+  gray: '#808080',
   lightGray: '#dfdfdf',
   annotation: '#595959',
   header: '#cd005a',
   notification: '#cd005a',
   red: '#F35363',
+  sidebarLinkBorder: '#cd005a',
   category: '#6b6b6b',
   border: '#c4c4c4',
   lightBlue: '#E0EEF6',

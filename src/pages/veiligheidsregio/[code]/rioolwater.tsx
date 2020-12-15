@@ -9,6 +9,7 @@ import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { Select } from '~/components-styled/select';
+import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { BarChart } from '~/components/charts';
 import { FCWithLayout } from '~/components/layout';
@@ -17,8 +18,8 @@ import { SewerWaterChart } from '~/components/lineChart/sewer-water-chart';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import {
-  getSafetyRegionStaticProps,
   getSafetyRegionPaths,
+  getSafetyRegionStaticProps,
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
@@ -58,7 +59,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
   >();
 
   return (
-    <>
+    <TileList>
       <SEOHead
         title={replaceVariablesInText(text.metadata.title, {
           safetyRegionName,
@@ -190,7 +191,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
           />
         </ChartTile>
       )}
-    </>
+    </TileList>
   );
 };
 

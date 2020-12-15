@@ -7,6 +7,7 @@ import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
@@ -35,7 +36,7 @@ const DisabilityCare: FCWithLayout<NationalPageProps> = (props) => {
   const router = useRouter();
 
   return (
-    <>
+    <TileList>
       <SEOHead
         title={infectedLocationsText.metadata.title}
         description={infectedLocationsText.metadata.description}
@@ -200,7 +201,7 @@ const DisabilityCare: FCWithLayout<NationalPageProps> = (props) => {
           date: value.date_of_report_unix,
         }))}
       />
-    </>
+    </TileList>
   );
 };
 

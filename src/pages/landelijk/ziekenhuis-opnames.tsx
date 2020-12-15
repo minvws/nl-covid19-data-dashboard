@@ -6,6 +6,7 @@ import { KpiValue } from '~/components-styled/kpi-value';
 import { Tile } from '~/components-styled/layout';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { PageBarScale } from '~/components-styled/page-barscale';
+import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/components/layout';
@@ -26,7 +27,7 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
   const dataHospitalBeds = data.hospital_beds_occupied;
 
   return (
-    <>
+    <TileList>
       <SEOHead
         title={text.metadata.title}
         description={text.metadata.description}
@@ -149,7 +150,7 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
           <Text>{text.tijdelijk_onbeschikbaar}</Text>
         </Box>
       </Tile>
-    </>
+    </TileList>
   );
 };
 

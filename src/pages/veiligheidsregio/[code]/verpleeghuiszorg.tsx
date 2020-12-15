@@ -5,6 +5,7 @@ import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/components/layout';
@@ -12,8 +13,8 @@ import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import {
-  getSafetyRegionStaticProps,
   getSafetyRegionPaths,
+  getSafetyRegionStaticProps,
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
@@ -29,7 +30,7 @@ const NursingHomeCare: FCWithLayout<ISafetyRegionData> = (props) => {
   const nursinghomeLastValue = data.nursing_home.last_value;
 
   return (
-    <>
+    <TileList>
       <SEOHead
         title={replaceVariablesInText(locationsText.metadata.title, {
           safetyRegionName,
@@ -194,7 +195,7 @@ const NursingHomeCare: FCWithLayout<ISafetyRegionData> = (props) => {
           }))}
         />
       )}
-    </>
+    </TileList>
   );
 };
 

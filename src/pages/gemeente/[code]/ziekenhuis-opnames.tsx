@@ -2,6 +2,7 @@ import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { Box } from '~/components-styled/base';
 import { ContentHeader } from '~/components-styled/content-header';
 import { Tile } from '~/components-styled/layout';
+import { TileList } from '~/components-styled/tile-list';
 import { Heading, Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/components/layout';
 import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
@@ -24,7 +25,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
   const { municipalityName } = props;
 
   return (
-    <>
+    <TileList>
       <SEOHead
         title={replaceVariablesInText(text.metadata.title, {
           municipalityName,
@@ -123,7 +124,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
           <Text>{text.tijdelijk_onbeschikbaar}</Text>
         </Box>
       </Tile>
-    </>
+    </TileList>
   );
 };
 

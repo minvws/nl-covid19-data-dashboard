@@ -5,6 +5,7 @@ import {
   ComboboxOption,
   ComboboxPopover,
 } from '@reach/combobox';
+import css from '@styled-system/css';
 import matchSorter from 'match-sorter';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -25,7 +26,7 @@ type TProps<Option extends TOption> = {
   onSelect: (option: Option) => void;
 };
 
-/*
+/**
  * Combobox is an accessible dropdown with search.
  *
  * @param options - Options to render. Needs to at least contain a key `name` with a string as value.
@@ -83,7 +84,7 @@ export function ComboBox<Option extends TOption>(props: TProps<Option>) {
   }, [isLargeScreen, hasRegionSelected]);
 
   return (
-    <Box role="search">
+    <Box role="search" css={css({ '[data-reach-combobox]': { px: 3, py: 4 } })}>
       <Combobox openOnFocus onSelect={handleSelect}>
         <ComboboxInput
           ref={inputRef}

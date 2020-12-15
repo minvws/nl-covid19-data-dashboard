@@ -1,9 +1,9 @@
 import css from '@styled-system/css';
-import { Link } from '~/utils/link';
 import styled from 'styled-components';
 import ExternalLinkIcon from '~/assets/external-link.svg';
 import { Tile } from '~/components-styled/layout';
 import { Heading } from '~/components-styled/typography';
+import { Link } from '~/utils/link';
 import { ExternalLink } from './external-link';
 
 interface AnchorTileProps {
@@ -54,7 +54,6 @@ export function AnchorTile({
 const Container = styled(Tile)<{ shadow: boolean }>((x) =>
   css({
     display: 'flex',
-    mx: [-4, null, 0],
     flexDirection: ['column', null, null, null, 'row'],
     boxShadow: x.shadow ? 'tile' : 'none',
   })

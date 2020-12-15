@@ -1,5 +1,4 @@
 import css from '@styled-system/css';
-import { Link } from '~/utils/link';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import {
@@ -13,6 +12,7 @@ import {
   InlineText,
   Text,
 } from '~/components-styled/typography';
+import { Link } from '~/utils/link';
 import { Box } from '../base';
 
 /*
@@ -21,7 +21,7 @@ import { Box } from '../base';
 */
 const HeaderBox = styled.header<{
   hasIcon: boolean;
-  skipLinkAnchor: boolean;
+  skipLinkAnchor?: boolean;
 }>((x) =>
   css({
     mt: 0,
@@ -31,20 +31,16 @@ const HeaderBox = styled.header<{
 );
 
 interface HeaderProps {
+  children: ReactNode;
+  hasIcon: boolean;
   id?: string;
   skipLinkAnchor?: boolean;
-  hasIcon: boolean;
-  children: ReactNode;
 }
 
 const Header = (props: HeaderProps) => {
   const { hasIcon, children, skipLinkAnchor, id } = props;
   return (
-    <HeaderBox
-      id={id}
-      hasIcon={hasIcon}
-      skipLinkAnchor={Boolean(skipLinkAnchor)}
-    >
+    <HeaderBox id={id} hasIcon={hasIcon} skipLinkAnchor={skipLinkAnchor}>
       {children}
     </HeaderBox>
   );
@@ -82,13 +78,6 @@ export const AriaInlineText = styled(InlineText)(
   })
 );
 
-const BodyBox = styled(Box)(
-  css({
-    display: [null, null, null, 'flex'],
-    marginLeft: [null, null, null, 5],
-  })
-);
-
 const ReferenceBox = styled(Box)(
   css({
     maxWidth: '30em',
@@ -119,41 +108,48 @@ export function ContentHeader(props: ContentHeaderProps) {
   } = props;
 
   return (
-    <Header id={id} skipLinkAnchor={skipLinkAnchor} hasIcon={Boolean(icon)}>
-      {category && (
-        <CategoryHeading level={1} hide={hideCategory}>
-          {category}
-          {screenReaderCategory && (
-            <AriaInlineText> - {screenReaderCategory}</AriaInlineText>
-          )}
-        </CategoryHeading>
-      )}
-      {icon ? (
-        <HeadingWithIcon
-          icon={icon}
-          title={title}
-          headingLevel={headingLevel}
-        />
-      ) : (
-        <Heading level={headingLevel} fontSize={4}>
-          {title}
-        </Heading>
-      )}
+    <Header id={id} skipLinkAnchor={skipLinkAnchor} hasIcon={!!icon}>
+      <Box px={[4, null, 0]} spacing={1}>
+        {category && (
+          <CategoryHeading level={1} hide={hideCategory}>
+            {category}
+            {screenReaderCategory && (
+              <AriaInlineText> - {screenReaderCategory}</AriaInlineText>
+            )}
+          </CategoryHeading>
+        )}
+        {icon ? (
+          <HeadingWithIcon
+            icon={icon}
+            title={title}
+            headingLevel={headingLevel}
+          />
+        ) : (
+          <Heading level={headingLevel} fontSize={4}>
+            {title}
+          </Heading>
+        )}
 
-      <BodyBox>
-        <ReferenceBox>
-          <Text>
-            {subtitle}{' '}
-            <Link href={reference.href}>
-              <Text as="a" href={reference.href}>
-                {reference.text}
-              </Text>
-            </Link>
-          </Text>
-        </ReferenceBox>
+        <Box
+          spacing={3}
+          display="flex"
+          flexDirection={['column', null, null, null, 'row']}
+          ml={[null, null, null, 5]}
+        >
+          <ReferenceBox>
+            <Text m={0}>
+              {subtitle}{' '}
+              <Link href={reference.href}>
+                <Text as="a" href={reference.href}>
+                  {reference.text}
+                </Text>
+              </Link>
+            </Text>
+          </ReferenceBox>
 
-        <MetadataBox>{metadata && <Metadata {...metadata} />}</MetadataBox>
-      </BodyBox>
+          <MetadataBox>{metadata && <Metadata {...metadata} />}</MetadataBox>
+        </Box>
+      </Box>
     </Header>
   );
 }

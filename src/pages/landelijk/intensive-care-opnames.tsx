@@ -4,6 +4,7 @@ import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { PageBarScale } from '~/components-styled/page-barscale';
+import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/components/layout';
@@ -25,7 +26,7 @@ const IntakeIntensiveCare: FCWithLayout<NationalPageProps> = (props) => {
   const dataBeds = data.intensive_care_beds_occupied;
 
   return (
-    <>
+    <TileList>
       <SEOHead
         title={text.metadata.title}
         description={text.metadata.description}
@@ -102,7 +103,7 @@ const IntakeIntensiveCare: FCWithLayout<NationalPageProps> = (props) => {
         }))}
         metadata={{ source: text.bronnen.lnaz }}
       />
-    </>
+    </TileList>
   );
 };
 

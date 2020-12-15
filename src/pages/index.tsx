@@ -9,6 +9,7 @@ import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { CategoryHeading } from '~/components-styled/content-header';
 import { HeadingWithIcon } from '~/components-styled/heading-with-icon';
 import { MessageTile } from '~/components-styled/message-tile';
+import { TileList } from '~/components-styled/tile-list';
 import { Text } from '~/components-styled/typography';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
@@ -39,7 +40,7 @@ interface INationalHomepageData {
   escalationLevelCounts: EscalationLevelCounts;
 }
 
-/*
+/**
  * The keys in this object are used to find and replace values in the translation files.
  * Adjustments here need to be applied in Lokalize too.
  * This is also why the keys are a bit more verbose.
@@ -60,8 +61,8 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
   );
 
   return (
-    <>
-      <Box mb={3}>
+    <TileList>
+      <Box>
         <CategoryHeading level={1} hide={true}>
           {text.nationaal_layout.headings.algemeen}
         </CategoryHeading>
@@ -71,6 +72,7 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
           headingLevel={2}
         />
       </Box>
+
       <AnchorTile
         title={text.notificatie.titel}
         href={text.notificatie.link.href}
@@ -151,7 +153,7 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
           />
         )}
       </ChoroplethTile>
-    </>
+    </TileList>
   );
 };
 
