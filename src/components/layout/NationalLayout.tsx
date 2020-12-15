@@ -5,6 +5,7 @@ import Arts from '~/assets/arts.svg';
 import ElderlyIcon from '~/assets/elderly.svg';
 import Gedrag from '~/assets/gedrag.svg';
 import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
+import Maatregelen from '~/assets/maatregelen.svg';
 import Notification from '~/assets/notification.svg';
 import ReproIcon from '~/assets/reproductiegetal.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
@@ -125,6 +126,18 @@ function NationalLayout(props: NationalLayoutProps) {
                   {siteText.nationaal_layout.headings.algemeen}
                 </Category>
                 <Menu>
+                  <MetricMenuItem>
+                    <Link href={`/landelijk/maatregelen`}>
+                      <a className={getClassName(`/landelijk/maatregelen`)}>
+                        <TitleWithIcon
+                          icon={
+                            <Maatregelen fill={theme.colors.restrictions} />
+                          }
+                          title={siteText.nationaal_maatregelen.titel_sidebar}
+                        />
+                      </a>
+                    </Link>
+                  </MetricMenuItem>
                   <MetricMenuItem>
                     <Link
                       href={{

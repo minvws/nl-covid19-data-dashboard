@@ -7,4 +7,5 @@ export type PageName =
 export type RegioPageName =
   | PageName
   | 'verpleeghuiszorg'
-  | 'thuiswonende-ouderen';
+  | 'thuiswonende-ouderen'
+  | 'maatregelen';

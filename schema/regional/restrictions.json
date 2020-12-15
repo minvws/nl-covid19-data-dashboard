@@ -22,7 +22,8 @@
         "escalation_level",
         "category_id",
         "restriction_order",
-        "valid_from_unix"
+        "valid_from_unix",
+        "vrcode"
       ],
       "properties": {
         "restriction_id": {
@@ -35,7 +36,7 @@
         },
         "escalation_level": {
           "type": "integer",
-          "enum": [0, 1, 2, 3, 4, 41, 401]
+          "enum": [0, 1, 2, 3, 4, 41, 401, 402]
         },
         "category_id": {
           "type": "string",
@@ -48,12 +49,15 @@
             "horeca",
             "sport",
             "reizen_binnenland",
+            "reizen_buitenland",
             "ov",
             "uitvaart",
             "onderwijs",
             "werk",
             "winkels",
-            "alcohol"
+            "alcohol",
+            "algemeen",
+            "contactberoep"
           ]
         },
         "restriction_order": {
@@ -61,6 +65,10 @@
         },
         "valid_from_unix": {
           "type": "integer"
+        },
+        "vrcode": {
+          "type": "string",
+          "equalsRootProperty": "code"
         }
       }
     }

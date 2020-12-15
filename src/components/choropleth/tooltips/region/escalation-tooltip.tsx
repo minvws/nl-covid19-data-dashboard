@@ -1,9 +1,7 @@
 import { ReactNode } from 'react';
-import {
-  EscalationLevel,
-  EscalationLevelIcon,
-} from '~/components-styled/escalation-level-icon';
+import { EscalationLevelIcon } from '~/components-styled/escalation-level-icon';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
+import { EscalationLevel } from '~/components/restrictions/type';
 import text from '~/locale/index';
 import { EscalationLevels } from '~/types/data';
 import { formatDateFromSeconds } from '~/utils/formatDate';
@@ -16,7 +14,7 @@ export const escalationTooltip = (selectHandler: RegionSelectionHandler) => {
   return (context: SafetyRegionProperties & EscalationLevels): ReactNode => {
     const level = context.escalation_level as EscalationLevel;
 
-    const onSelect = (event: any) => {
+    const onSelect = (event: React.MouseEvent<HTMLElement>) => {
       event.stopPropagation();
       selectHandler(context);
     };

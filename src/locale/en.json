@@ -53,6 +53,111 @@
     "terug_naar_alle_cijfers": "Overview",
     "terug_naar_alle_cijfers_homepage": "Overview"
   },
+  "maatregelen": {
+    "categories":{
+      "er_op_uit":"",
+      "bezoek":"",
+      "samenkomst":"",
+      "huwelijk":"",
+      "verpleeghuis":"",
+      "horeca":"",
+      "sport":"",
+      "reizen_binnenland":"",
+      "reizen_buitenland":"",
+      "ov":"",
+      "uitvaart":"",
+      "onderwijs":"",
+      "werk":"",
+      "winkels":"",
+      "alcohol":"",
+      "algemeen": "",
+      "contactberoep": ""
+    },
+    "headings": {
+      "1": {
+        "toelichting_risiconiveau": "Het aantal nieuwe besmettingen is laag. Maatregelen worden voldoende nageleefd. Er is voldoende zorgcapaciteit.",
+        "extratoelichting": {
+          "titel": "Maatregelen bij risiconiveau 1",
+          "toelichting": "Er gelden in {{safetyRegionName}} maatregelen die standaard horen bij risiconiveau 1. Het is mogelijk dat deze veiligheidsregio aanvullende maatregelen neemt. "
+        }
+      },
+      "2": {
+        "toelichting_risiconiveau": "Het aantal nieuwe besmettingen neemt toe. De druk op de zorg neemt toe. Er zijn aanvullende maatregelen nodig.",
+        "extratoelichting": {
+          "titel": "Maatregelen bij risiconiveau 2",
+          "toelichting": "Er gelden in {{safetyRegionName}} maatregelen die standaard horen bij risiconiveau 2. Het is mogelijk dat deze veiligheidsregio aanvullende maatregelen neemt."
+        }
+      },
+      "3": {
+        "toelichting_risiconiveau": "Het aantal nieuwe besmettingen neemt snel toe. De zorgcapaciteit is onvoldoende. Er zijn maatregelen nodig om weer zicht op de verspreiding van het virus te krijgen.",
+        "extratoelichting": {
+          "titel": "Maatregelen bij risiconiveau 3",
+          "toelichting": "Er gelden in {{safetyRegionName}} maatregelen die standaard horen bij risiconiveau 3. Het is mogelijk dat deze veiligheidsregio aanvullende maatregelen neemt."
+        }
+      },
+      "4": {
+        "toelichting_risiconiveau": "Er zijn zeer veel mensen besmettelijk en het dagelijks aantal nieuwe besmettingen is hoog. De regionale zorgcapaciteit is onvoldoende. Strenge, landelijke maatregelen zijn noodzakelijk.",
+        "extratoelichting": {
+          "titel": "Maatregelen bij risiconiveau 4",
+          "toelichting": "Er gelden in {{safetyRegionName}} maatregelen die standaard horen bij risiconiveau 4. Het is mogelijk dat deze veiligheidsregio aanvullende maatregelen neemt."
+        }
+      },
+      "401": {
+        "toelichting_risiconiveau": "Er zijn zeer veel mensen besmettelijk en het dagelijks aantal nieuwe besmettingen is hoog. De regionale zorgcapaciteit is onvoldoende. Strenge, landelijke maatregelen zijn noodzakelijk.",
+        "extratoelichting": {
+          "titel": "Maatregelen bij risiconiveau 4/ Gedeeltelijke lockdown",
+          "toelichting": "Er gelden momenteel landelijke maatregelen, ongeacht het risiconiveau in een bepaalde veiligheidsregio."
+        }
+      },
+      "402": {
+        "toelichting_risiconiveau": "Er zijn zeer veel mensen besmettelijk en het dagelijks aantal nieuwe besmettingen is hoog. De regionale zorgcapaciteit is onvoldoende. Strenge, landelijke maatregelen zijn noodzakelijk.",
+        "extratoelichting": {
+          "titel": "Maatregelen bij risiconiveau 4/ Tijdelijke verzwaring van de gedeeltelijke lockdown",
+          "toelichting": "Er gelden momenteel landelijke maatregelen, ongeacht het risiconiveau in een bepaalde veiligheidsregio."
+        }
+      },
+      "41": {
+        "toelichting_risiconiveau": "Er zijn zeer veel mensen besmettelijk en het dagelijks aantal nieuwe besmettingen is hoog. De regionale zorgcapaciteit is onvoldoende. Strenge, landelijke maatregelen zijn noodzakelijk.",
+        "extratoelichting": {
+          "titel": "Maatregelen bij risiconiveau 4/ Lockdown (regionaal)",
+          "toelichting": "In {{safetyRegionName}} is een regionale lockdown van kracht."
+        }
+      },
+      "landelijk": {
+        "toelichting_risiconiveau": "",
+        "extratoelichting": {
+          "titel": "",
+          "toelichting": ""
+        }
+      }
+    },
+    "teksten": {
+      "0_algemeen_18": "Werk thuis, tenzij het niet anders kan.",
+      "0_algemeen_19": "Houd 1,5 meter afstand.",
+      "0_algemeen_20": "Is het druk? Ga dan weg.",
+      "0_algemeen_21": "Was vaak je handen.",
+      "0_algemeen_22": "Hoest en nies in je elleboog.",
+      "0_algemeen_23": "Draag een mondkapje waar dat verplicht is.",
+      "41_bezoek_24": "Ontvang max. 2 personen per dag (excl. kinderen t/m 12 jaar). Voor de periode 24 t/m 26 december geldt: ontvang max. 3 personen per dag.",
+      "41_er_op_uit_25": "Binnen en buiten: groep van max. 2 personen of 1 huishouden.",
+      "41_samenkomst_26": "Onder andere musea, bioscopen, theaters, dierenparken, bibliotheken, zwembaden en pretparken dicht.",
+      "41_horeca_27": "Eet- en drinkgelegenheden dicht. Ook in hotels, incl. roomservice.",
+      "41_horeca_28": "Bestellen bij restaurants mogelijk.",
+      "41_horeca_29": "Evenementen verboden.",
+      "41_winkels_30": "Niet-essentiële winkels dicht.",
+      "41_winkels_31": "Onder andere supermarkten, drogisterijen, groentewinkels en tankstations open.",
+      "41_winkels_32": "Alcoholverbod na 20.00 uur.",
+      "41_contactberoep_33": "Het uitoefenen van niet-medische contactberoepen zoals kappers, tatoeëerders en schoonheids- specialisten verboden.",
+      "41_sport_34": "Buiten met max. 2 personen op 1,5 meter afstand. Kinderen t/m 17 jaar en topsporters uitgezonderd.",
+      "41_sport_35": "Binnensportlocaties dicht.",
+      "41_sport_36": "Geen wedstrijden en groepslessen. Topsporters uitgezonderd.",
+      "41_ov_37": "Blijf zoveel mogelijk thuis en reis alleen met het ov voor noodzakelijke reizen.",
+      "41_ov_38": "Reis niet naar het buitenland en boek geen reis tot half maart.",
+      "41_onderwijs_39": "Onderwijs op afstand voor po, vo, mbo, hbo, wo en alle overige onderwijs-, trainings- en educatieve activiteiten. Onder andere examens, praktijklessen en onderwijs voor kwetsbare leerlingen uitgezonderd. Dit geldt van 16 december t/m in ieder geval 17 januari.",
+      "41_onderwijs_40": "Kinderopvang dicht. Dit geldt van 16 december t/m in ieder geval 17 januari.",
+      "41_onderwijs_41": "Er is noodopvang voor kinderen van ouders met cruciale beroepen en kinderen in een kwetsbare positie. Dit geldt van 16 december t/m in ieder geval 17 januari."
+    }
+  },
   "ic_opnames_per_dag": {
     "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
     "bron": {
@@ -789,6 +894,7 @@
   },
   "nationaal_layout": {
     "headings": {
+      "maatregelen": "Restrictions",
       "medisch": "Medical indicators",
       "overig": "Early indicators",
       "verpleeghuis": "Nursing homes",
@@ -804,6 +910,7 @@
   },
   "veiligheidsregio_layout": {
     "headings": {
+      "maatregelen": "Restrictions",
       "medisch": "Medical indicators",
       "overig": "Other indicators",
       "verpleeghuis": "Nursing homes",
@@ -822,6 +929,51 @@
   },
   "gemeente_metadata": {
     "title": "Municipality"
+  },
+  "nationaal_maatregelen": {
+    "titel": "Risiconiveau en Maatregelen",
+    "titel_sidebar": "",
+    "subtitel_sidebar": ""
+  },
+  "veiligheidsregio_maatregelen": {
+    "titel_sidebar": "",
+    "titel": "",
+    "titel_risiconiveau": "",
+    "linktext_riskpage": "",
+    "linktext_regionpage": "",
+    "titel_aanvullendemaatregelen": "",
+    "toelichting_aanvullendemaatregelen": "",
+    "metadata": {
+      "title": "",
+      "description": "{{safetyRegionName}}."
+    }
+  },
+  "veiligheidsregio_maatregelen_urls": {
+    "VR01": "http://www.veiligheidsregiogroningen.nl/",
+    "VR02": "https://www.veiligheidsregiofryslan.nl/",
+    "VR03": "http://www.vrd.nl/",
+    "VR04": "https://www.vrijsselland.nl/",
+    "VR05": "http://www.vrtwente.nl/",
+    "VR06": "https://www.vnog.nl/",
+    "VR07": "http://www.vggm.nl/vggm",
+    "VR08": "http://www.vrgz.nl/",
+    "VR09": "http://www.vru.nl/",
+    "VR10": "http://www.vrnhn.nl/",
+    "VR11": "https://www.veiligheidsregiozaanstreekwaterland.nl/",
+    "VR12": "http://www.vrk.nl/",
+    "VR13": "https://www.amsterdam.nl/veiligheidsregio/",
+    "VR14": "https://www.vrgooienvechtstreek.nl/",
+    "VR15": "https://haaglandenveilig.nl/",
+    "VR16": "https://www.hollandsmiddenveilig.nl/",
+    "VR17": "https://www.rijnmondveilig.nl/",
+    "VR18": "https://www.zhzveilig.nl/",
+    "VR19": "https://www.zeelandveilig.nl/",
+    "VR20": "https://www.vrmwb.nl/",
+    "VR21": "https://www.vrbn.nl/",
+    "VR22": "http://www.veiligheidsregiozob.nl/",
+    "VR23": "http://vrln.nl/",
+    "VR24": "http://www.vrzuidlimburg.nl/",
+    "VR25": "http://www.veiligheidsregioflevoland.nl/"
   },
   "veiligheidsregio_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Hospital admissions",
@@ -1142,7 +1294,8 @@
     "legenda": {
       "titel": "Legend"
     },
-    "valid_from": "Valid from {{validFrom}}"
+    "valid_from": "Valid from {{validFrom}}",
+    "sidebar_label": "Risiconiveau"
   },
   "gemeente_layout": {
     "headings": {

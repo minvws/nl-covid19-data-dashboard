@@ -4,6 +4,7 @@ import Arrow from '~/assets/arrow.svg';
 import ElderlyIcon from '~/assets/elderly.svg';
 import Gedrag from '~/assets/gedrag.svg';
 import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
+import Maatregelen from '~/assets/maatregelen.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
@@ -22,6 +23,7 @@ import { getLayout as getSiteLayout } from '~/components/layout';
 import safetyRegions from '~/data/index';
 import siteText from '~/locale/index';
 import { ISafetyRegionData } from '~/static-props/safetyregion-data';
+import theme from '~/style/theme';
 import { Link } from '~/utils/link';
 import { useMediaQuery } from '~/utils/useMediaQuery';
 
@@ -145,6 +147,31 @@ function SafetyRegionLayout(
             >
               <Category>{safetyRegionName}</Category>
               <Menu>
+                <CategoryMenuItem
+                  borderTop="1px solid"
+                  borderTopColor="border"
+                  borderBottom="1px solid"
+                  borderBottomColor="border"
+                >
+                  <Menu>
+                    <Link href={`/veiligheidsregio/${code}/maatregelen`}>
+                      <a
+                        className={getClassName(
+                          `/veiligheidsregio/[code]/maatregelen`
+                        )}
+                      >
+                        <TitleWithIcon
+                          icon={
+                            <Maatregelen fill={theme.colors.restrictions} />
+                          }
+                          title={
+                            siteText.veiligheidsregio_maatregelen.titel_sidebar
+                          }
+                        />
+                      </a>
+                    </Link>
+                  </Menu>
+                </CategoryMenuItem>
                 <CategoryMenuItem>
                   <Category>
                     {siteText.veiligheidsregio_layout.headings.besmettingen}
