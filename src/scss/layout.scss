@@ -228,13 +228,6 @@ main {
       min-height: 0;
     }
   }
-
-  .restrictions {
-    margin-top: 1.5em;
-    li {
-      min-height: 0;
-    }
-  }
 }
 
 @media (max-width: 999px) {
@@ -392,12 +385,6 @@ a.metric-link {
     position: absolute;
     right: 1em;
     top: 1.35em;
-  }
-
-  &.restrictions-link {
-    &::after {
-      top: 1.15em;
-    }
   }
 }
 

@@ -2,6 +2,7 @@ import { Municipal, National, Regionaal } from '~/types/data.d';
 
 export function sortNationalTimeSeriesInDataInPlace(data: National) {
   const timeSeriesPropertyNames = getTimeSeriesPropertyNames(data).filter(
+    // restrictions doesn't have any timeseries so needs to be removed from this list
     (propertyName) => propertyName !== 'restrictions'
   );
 
@@ -17,6 +18,7 @@ export function sortNationalTimeSeriesInDataInPlace(data: National) {
 
 export function sortRegionalTimeSeriesInDataInPlace(data: Regionaal) {
   const timeSeriesPropertyNames = getTimeSeriesPropertyNames(data).filter(
+    // restrictions doesn't have any timeseries so needs to be removed from this list
     (propertyName) => propertyName !== 'restrictions'
   );
 
