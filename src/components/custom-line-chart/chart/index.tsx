@@ -40,8 +40,8 @@ type ChartProps = {
   width: number;
   height: number;
   margin?: { top: number; right: number; bottom: number; left: number };
-  formatXAxis: (x: unknown) => string;
-  formatYAxis: (y: unknown) => string;
+  formatXAxis: (x: any) => string;
+  formatYAxis: (y: any) => string;
 };
 
 export const Chart = memo(function Chart({

@@ -3,6 +3,7 @@ import { useTooltip } from '@visx/tooltip';
 import { UseTooltipParams } from '@visx/tooltip/lib/hooks/useTooltip';
 import { extent } from 'd3-array';
 import { isDefined } from 'ts-is-present';
+import text from '~/locale/index';
 
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
 import { formatDateFromSeconds } from '~/utils/formatDate';
@@ -57,7 +58,7 @@ export function LineChart<T extends Value>({
 
   const benchmark = useMemo(() => {
     return signaalwaarde
-      ? { value: signaalwaarde, label: 'Signaalwaarde' }
+      ? { value: signaalwaarde, label: text.common.barScale.signaalwaarde }
       : undefined;
   }, [signaalwaarde]);
 
