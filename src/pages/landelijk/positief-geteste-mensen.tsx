@@ -28,7 +28,7 @@ import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
 import { AgeDemographic } from '~/domain/infected-people/age-demographic/age-demographic';
 import { formatAgeGroupRange } from '~/domain/infected-people/age-demographic/age-demographic-chart';
-import siteText from '~/locale/index';
+
 import {
   getNationalStaticProps,
   NationalPageProps,
@@ -40,9 +40,6 @@ import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-
-const text = siteText.positief_geteste_personen;
-const ggdText = siteText.positief_geteste_personen_ggd;
 
 /* Retrieves certain age demographic data to be used in the example text. */
 function getAgeDemographicExampleData(data: NationalInfectedAgeGroups) {
@@ -63,7 +60,12 @@ function getAgeDemographicExampleData(data: NationalInfectedAgeGroups) {
   };
 }
 
-const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
+const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
+  data,
+  text: siteText,
+}) => {
+  const text = siteText.positief_geteste_personen;
+  const ggdText = siteText.positief_geteste_personen_ggd;
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>(
     'municipal'
   );
@@ -136,7 +138,12 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
               data.difference.infected_people_total__infected_daily_total
             }
           />
-          <Text>{text.kpi_toelichting}</Text>
+
+          <Text
+            as="div"
+            dangerouslySetInnerHTML={{ __html: text.kpi_toelichting }}
+          />
+
           <Box>
             <Heading level={4} fontSize={'1.2em'} mt={'1.5em'} mb={0}>
               <span
