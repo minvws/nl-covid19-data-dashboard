@@ -11,7 +11,6 @@ import { formatNumber } from '~/utils/formatNumber';
 import { Box } from '~/components-styled/base';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import { Chart, defaultMargin } from './chart';
-import { trendTypes } from './chart/trends';
 import { Tooltip } from './chart/tooltip';
 
 const valueToDate = (d: number) => new Date(d * 1000);
@@ -82,7 +81,7 @@ export default function CustomLineChart<T extends Value>({
     signaalwaarde,
   ]);
 
-  const handleTooltip = useCallback(
+  const handleHover = useCallback(
     (
       event:
         | React.TouchEvent<SVGRectElement>
@@ -113,14 +112,14 @@ export default function CustomLineChart<T extends Value>({
       <Box position="relative">
         <Chart
           trend={graphData}
-          type={showFill ? trendTypes.area : trendTypes.line}
+          type={showFill ? 'area' : 'line'}
           height={height}
           width={width}
           xDomain={xDomain}
           yDomain={yDomain}
           formatYAxis={formatYAxis}
           formatXAxis={formatXAxis}
-          handleHover={handleTooltip}
+          onHover={handleHover}
           isHovered={!!tooltipData}
           benchmark={benchmark}
         />

@@ -8,7 +8,7 @@ import { Line } from '@visx/shape';
 import { Text } from '@visx/text';
 
 import { colors } from '~/style/theme';
-import { Trends } from './trends';
+import { Trends, DataPoint, TrendType } from './trends';
 
 const NUM_TICKS = 3;
 export const defaultMargin = { top: 10, right: 20, bottom: 30, left: 30 };
@@ -17,11 +17,6 @@ const defaultColors = {
   axis: '#C4C4C4',
   axisLabels: '#666666',
   benchmark: '#4f5458',
-};
-
-type DataPoint = {
-  date: Date;
-  value?: number;
 };
 
 type Benchmark = {
@@ -33,20 +28,20 @@ type ChartProps = {
   benchmark?: Benchmark;
   isHovered: boolean;
   trend: DataPoint[];
-  type: string;
-  handleHover: (
+  type: TrendType;
+  onHover: (
     event: React.TouchEvent<SVGRectElement> | React.MouseEvent<SVGRectElement>,
-    data: any,
-    xPosition: number,
-    yPosition: number
+    data?: any,
+    xPosition?: number,
+    yPosition?: number
   ) => void;
   xDomain: [any, any];
   yDomain: number[];
   width: number;
   height: number;
   margin?: { top: number; right: number; bottom: number; left: number };
-  formatXAxis: (x: any) => string;
-  formatYAxis: (y: any) => string;
+  formatXAxis: (x: unknown) => string;
+  formatYAxis: (y: unknown) => string;
 };
 
 export const Chart = memo(function Chart({
@@ -57,7 +52,7 @@ export const Chart = memo(function Chart({
   margin = defaultMargin,
   xDomain,
   yDomain,
-  handleHover,
+  onHover,
   isHovered,
   benchmark,
   formatXAxis,
@@ -163,7 +158,7 @@ export const Chart = memo(function Chart({
           x={x}
           y={y}
           color={defaultColors.main}
-          handleHover={handleHover}
+          onHover={onHover}
           isHovered={isHovered}
           bisect={bisect}
         />
