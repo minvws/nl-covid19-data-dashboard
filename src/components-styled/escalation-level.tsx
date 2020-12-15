@@ -1,9 +1,7 @@
 import { Box } from '~/components-styled/base';
-import {
-  EscalationLevel,
-  EscalationLevelIcon,
-} from '~/components-styled/escalation-level-icon';
+import { EscalationLevelIcon } from '~/components-styled/escalation-level-icon';
 import { Text } from '~/components-styled/typography';
+import { EscalationLevel } from '~/components/restrictions/type';
 import siteText from '~/locale/index';
 import { useEscalationColor } from '~/utils/use-escalation-color';
 
@@ -20,10 +18,7 @@ export function EscalationLevelInfoLabel(props: EscalationLevelProps) {
     <>
       <EscalationLevelIcon level={escalationLevel} />
       <Text as="span" marginLeft=".5em" color={color} fontWeight="bold">
-        {
-          siteText.escalatie_niveau.types[escalationLevel as EscalationLevel]
-            .titel
-        }
+        {siteText.escalatie_niveau.types[escalationLevel].titel}
       </Text>
     </>
   );
