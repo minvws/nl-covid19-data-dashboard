@@ -62,15 +62,13 @@ const TooltipContainer = styled.div<TooltipContainerProps>`
   position: absolute;
   min-width: 72;
   white-space: nowrap;
-
-  ${(props) =>
-    css({
-      px: 2,
-      py: 1,
-      fontSize: 1,
-      bg: 'white',
-      border: `1px solid ${props.borderColor || 'black'}`,
-    })}
+  background: white;
+  border: ${(props) => `1px solid ${props.borderColor || 'black'}`};
+  ${css({
+    px: 2,
+    py: 1,
+    fontSize: 1,
+  })};
 `;
 
 /**
