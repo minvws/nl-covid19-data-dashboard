@@ -7,11 +7,11 @@ import { Text } from '~/components-styled/typography';
 import siteText from '~/locale/index';
 import { useEscalationColor } from '~/utils/use-escalation-color';
 
-export type EscalationLevelLabelProps = {
+export type EscalationLevelProps = {
   escalationLevel: EscalationLevel;
 };
 
-export function EscalationLevelInfoLabel(props: EscalationLevelLabelProps) {
+export function EscalationLevelInfoLabel(props: EscalationLevelProps) {
   const { escalationLevel } = props;
 
   const color = useEscalationColor(escalationLevel);
@@ -19,12 +19,7 @@ export function EscalationLevelInfoLabel(props: EscalationLevelLabelProps) {
   return (
     <>
       <EscalationLevelIcon level={escalationLevel} />
-      <Text
-        as="span"
-        marginLeft=".5em !important"
-        color={color}
-        fontWeight="bold"
-      >
+      <Text as="span" marginLeft=".5em" color={color} fontWeight="bold">
         {
           siteText.escalatie_niveau.types[escalationLevel as EscalationLevel]
             .titel
@@ -34,7 +29,7 @@ export function EscalationLevelInfoLabel(props: EscalationLevelLabelProps) {
   );
 }
 
-export function EscalationLevelInfo(props: EscalationLevelLabelProps) {
+export function EscalationLevelInfo(props: EscalationLevelProps) {
   const { escalationLevel } = props;
 
   return (
