@@ -22,7 +22,10 @@ export type Props = {
   bounds: Bounds;
 };
 
-const Point = styled.div`
+type PointProps = {
+  indicatorColor: string;
+};
+const Point = styled.div<PointProps>`
   pointer-events: none;
   position: absolute;
   height: 18px;
@@ -36,7 +39,7 @@ const Point = styled.div`
     transform: translate(-50%, -50%);
     border-radius: 50%;
     border: 1px solid white;
-    background: ${(props) => props.color || 'black'};
+    background: ${(props) => props.indicatorColor || 'black'};
   }
 
   &::before {
@@ -46,12 +49,15 @@ const Point = styled.div`
     width: 18px;
     transform: translate(-50%, -50%);
     border-radius: 50%;
-    background: ${(props) => props.color || 'black'};
+    background: ${(props) => props.indicatorColor || 'black'};
     opacity: 0.2;
   }
 `;
 
-const TooltipContainer = styled.div`
+type TooltipContainerProps = {
+  borderColor: string;
+};
+const TooltipContainer = styled.div<TooltipContainerProps>`
   pointer-events: none;
   position: absolute;
   border: ${(props) => `1px solid ${props.borderColor || 'black'}`}
@@ -85,7 +91,7 @@ export function Tooltip({
 
   return (
     <>
-      <Point style={{ top: y, left: x }} color={primaryColor} />
+      <Point style={{ top: y, left: x }} indicatorColor={primaryColor} />
 
       <TooltipContainer
         style={{
