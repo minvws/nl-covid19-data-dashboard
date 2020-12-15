@@ -70,9 +70,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
   const isMainRoute =
     router.route === '/gemeente' || router.route === `/gemeente/[code]`;
 
-  const safetyRegion:
-    | { name: string; code: string; id: number }
-    | undefined = getSafetyRegionForMunicipalityCode(code as string);
+  const safetyRegion = getSafetyRegionForMunicipalityCode(code as string);
 
   return (
     <>

@@ -27,6 +27,10 @@ export function SiteContent({
     query: { ...router.query, menu: '1' },
   };
 
+  /**
+   * @TODO Possibly not the right place to check the "homepage" (/) menu-state,
+   * but it's good enough for now I guess
+   */
   const isMenuOpen =
     (router.pathname === '/' && !('menu' in router.query)) ||
     router.query.menu === '1';
