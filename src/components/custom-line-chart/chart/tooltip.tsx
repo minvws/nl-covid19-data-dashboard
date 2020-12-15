@@ -62,7 +62,9 @@ const TooltipContainer = styled.div`
   ${css({ px: 2, py: 1, fontSize: 1 })}
 `;
 
-// TODO: improve how bounds are used to keep tooltips within the chart
+/**
+ * @TODO improve how bounds are used to keep tooltips within the chart
+ */
 export function Tooltip({
   children,
   x,

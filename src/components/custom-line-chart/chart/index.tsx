@@ -40,7 +40,7 @@ export type ChartProps = {
     xPosition: number,
     yPosition: number
   ) => void;
-  xDomain: [any, any]; // TODO: improve type
+  xDomain: [any, any];
   yDomain: number[];
   width: number;
   height: number;

@@ -19,8 +19,9 @@ export type Props = {
   color: string;
 };
 
-// TODO: update to accept series prop which accepts an array of
-// trends to enable plotting of multiple lines
+/**
+ * @TODO update to accept series prop which accepts an array of trends to enable plotting of multiple lines
+ */
 export function Trends({
   trend,
   type = trendTypes.line,
