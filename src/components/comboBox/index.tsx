@@ -15,7 +15,7 @@ import { assert } from '~/utils/assert';
 import { useMediaQuery } from '~/utils/useMediaQuery';
 import { useThrottle } from '~/utils/useThrottle';
 
-export type TOption = {
+type TOption = {
   displayName?: string;
   name: string;
 };

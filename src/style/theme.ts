@@ -116,8 +116,6 @@ export const colors = {
   },
 } as const;
 
-export type ThemeColors = typeof colors;
-
 const radii = [0, 5, 10];
 
 const shadows = {

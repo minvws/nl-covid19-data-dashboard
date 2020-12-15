@@ -6,7 +6,7 @@ import { SiteHeader } from '~/domain/site/site-header';
 import { SkipLinks } from '~/domain/site/skip-links';
 import { ILastGeneratedData } from '~/static-props/last-generated-data';
 
-export interface LayoutProps {
+interface LayoutProps {
   url?: string;
   title: string;
   description?: string;

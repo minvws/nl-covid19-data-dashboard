@@ -39,7 +39,7 @@ export function CategoryMenu({
   );
 }
 
-export const MetricMenuItem = styled.li(
+const MetricMenuItem = styled.li(
   css({
     borderBottom: '1px solid',
     borderBottomColor: 'border',

@@ -29,7 +29,7 @@ interface MunicipalityMetricValue extends MunicipalityProperties {
   [key: string]: unknown;
 }
 
-export interface MunicipalityChoroplethValue extends MunicipalityMetricValue {
+interface MunicipalityChoroplethValue extends MunicipalityMetricValue {
   __color_value: number;
 }
 
