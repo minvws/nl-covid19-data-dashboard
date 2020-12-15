@@ -2,7 +2,7 @@ import { useCallback, useMemo, ReactNode } from 'react';
 import { useTooltip } from '@visx/tooltip';
 import { UseTooltipParams } from '@visx/tooltip/lib/hooks/useTooltip';
 import { extent } from 'd3-array';
-import { isFilled } from 'ts-is-present';
+import { isDefined } from 'ts-is-present';
 
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
 import { formatDateFromSeconds } from '~/utils/formatDate';
@@ -10,9 +10,9 @@ import { formatNumber } from '~/utils/formatNumber';
 
 import { Box } from '~/components-styled/base';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
-import Chart, { defaultMargin } from './chart';
+import { Chart, defaultMargin } from './chart';
 import { trendTypes } from './chart/trends';
-import Tooltip from './chart/tooltip';
+import { Tooltip } from './chart/tooltip';
 
 const valueToDate = (d: number) => new Date(d * 1000);
 const dateToValue = (d: Date) => d.valueOf() / 1000;
@@ -22,7 +22,7 @@ const formatYAxisFunc = (y: number) => y.toString();
 
 export type Value = {
   date: any;
-  value: number | null;
+  value?: number;
 };
 
 type TooltipData = {
@@ -158,7 +158,7 @@ export default function CustomLineChart<T extends Value>({
 function calculateYMax(values: Value[], signaalwaarde = -Infinity) {
   const maxValue = values
     .map((x) => x.value)
-    .filter(isFilled)
+    .filter(isDefined)
     .reduce((acc, value) => (value > acc ? value : acc), -Infinity);
 
   /**

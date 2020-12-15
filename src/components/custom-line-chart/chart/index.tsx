@@ -8,7 +8,7 @@ import { Line } from '@visx/shape';
 import { Text } from '@visx/text';
 
 import { colors } from '~/style/theme';
-import Trends from './trends';
+import { Trends } from './trends';
 
 const NUM_TICKS = 3;
 export const defaultMargin = { top: 10, right: 20, bottom: 30, left: 30 };
@@ -21,7 +21,7 @@ const defaultColors = {
 
 type DataPoint = {
   date: Date;
-  value: number;
+  value?: number;
 };
 
 type Benchmark = {
@@ -49,7 +49,7 @@ export type ChartProps = {
   formatYAxis: (y: any) => string;
 };
 
-function Chart({
+export const Chart = memo(function Chart({
   trend,
   type,
   width,
@@ -170,6 +170,4 @@ function Chart({
       </Group>
     </svg>
   );
-}
-
-export default memo(Chart);
+});

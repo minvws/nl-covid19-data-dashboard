@@ -1,4 +1,4 @@
-import { ReactNode, memo } from 'react';
+import { ReactNode } from 'react';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 
@@ -63,7 +63,7 @@ const TooltipContainer = styled.div`
 `;
 
 // TODO: improve how bounds are used to keep tooltips within the chart
-function Tooltip({
+export function Tooltip({
   children,
   x,
   y,
@@ -99,5 +99,3 @@ function Tooltip({
     </>
   );
 }
-
-export default memo(Tooltip);
