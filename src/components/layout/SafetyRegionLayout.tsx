@@ -3,12 +3,12 @@ import { useRouter } from 'next/router';
 import ElderlyIcon from '~/assets/elderly.svg';
 import Gedrag from '~/assets/gedrag.svg';
 import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
+import Maatregelen from '~/assets/maatregelen.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
 import VirusIcon from '~/assets/virus.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
-import { Category } from '~/components-styled/aside/category';
 import {
   CategoryMenu,
   Menu,
@@ -19,6 +19,7 @@ import { getLayout as getSiteLayout } from '~/components/layout';
 import { SiteContent } from '~/domain/site/site-content';
 import siteText from '~/locale/index';
 import { ISafetyRegionData } from '~/static-props/safetyregion-data';
+import { colors } from '~/style/theme';
 import { SafetyRegionComboBox } from './safety-region-combo-box';
 
 export function getSafetyRegionLayout() {
@@ -92,8 +93,17 @@ function SafetyRegionLayout(
                 aria-label={siteText.aria_labels.metriek_navigatie}
                 role="navigation"
               >
-                <Category>{safetyRegionName}</Category>
                 <Menu>
+                  <CategoryMenu title={safetyRegionName}>
+                    <MetricMenuItemLink
+                      href={`/veiligheidsregio/${code}/maatregelen`}
+                      icon={<Maatregelen fill={colors.restrictions} />}
+                      title={
+                        siteText.veiligheidsregio_maatregelen.titel_sidebar
+                      }
+                    />
+                  </CategoryMenu>
+
                   <CategoryMenu
                     title={
                       siteText.veiligheidsregio_layout.headings.besmettingen

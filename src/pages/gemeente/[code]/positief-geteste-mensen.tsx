@@ -15,7 +15,6 @@ import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropl
 import { FCWithLayout } from '~/components/layout';
 import { getMunicipalityLayout } from '~/components/layout/MunicipalityLayout';
 import { SEOHead } from '~/components/seoHead';
-import siteText from '~/locale/index';
 import {
   getMunicipalityData,
   getMunicipalityPaths,
@@ -23,10 +22,10 @@ import {
 } from '~/static-props/municipality-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
-const text = siteText.gemeente_positief_geteste_personen;
-
 const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
-  const { data, municipalityName } = props;
+  const { data, municipalityName, text: siteText } = props;
+
+  const text = siteText.gemeente_positief_geteste_personen;
   const lastValue = data.positive_tested_people.last_value;
 
   const router = useRouter();
@@ -89,7 +88,10 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
               data.difference.positive_tested_people__infected_daily_total
             }
           />
-          <Text>{text.kpi_toelichting}</Text>
+          <Text
+            as="div"
+            dangerouslySetInnerHTML={{ __html: text.kpi_toelichting }}
+          />
         </KpiTile>
       </TwoKpiSection>
 

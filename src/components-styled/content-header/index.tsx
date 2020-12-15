@@ -136,18 +136,24 @@ export function ContentHeader(props: ContentHeaderProps) {
           flexDirection={['column', null, null, null, 'row']}
           ml={[null, null, null, 5]}
         >
-          <ReferenceBox>
-            <Text m={0}>
-              {subtitle}{' '}
-              <Link href={reference.href}>
-                <Text as="a" href={reference.href}>
-                  {reference.text}
-                </Text>
-              </Link>
-            </Text>
-          </ReferenceBox>
+          {reference && (
+            <ReferenceBox>
+              <Text m={0}>
+                {subtitle}{' '}
+                <Link href={reference.href}>
+                  <Text as="a" href={reference.href}>
+                    {reference.text}
+                  </Text>
+                </Link>
+              </Text>
+            </ReferenceBox>
+          )}
 
-          <MetadataBox>{metadata && <Metadata {...metadata} />}</MetadataBox>
+          {metadata && (
+            <MetadataBox>
+              <Metadata {...metadata} />
+            </MetadataBox>
+          )}
         </Box>
       </Box>
     </Header>
@@ -157,9 +163,9 @@ export function ContentHeader(props: ContentHeaderProps) {
 interface ContentHeaderProps {
   id?: string;
   title: string;
-  subtitle: string;
+  subtitle?: string;
   metadata?: MetadataProps;
-  reference: {
+  reference?: {
     href: string;
     text: string;
   };

@@ -14,6 +14,9 @@ const MARKDOWN_KEYS = [
   'over_veelgestelde_vragen.vragen[].antwoord',
   'over_risiconiveaus.vragen[].antwoord',
   'verantwoording.cijfers[].verantwoording',
+  'positief_geteste_personen.kpi_toelichting',
+  'veiligheidsregio_positief_geteste_personen.kpi_toelichting',
+  'gemeente_positief_geteste_personen.kpi_toelichting',
 ];
 
 export function parseMarkdownInLocale(text: TALLLanguages) {

@@ -9,8 +9,8 @@
     "title": "Last updated"
   },
   "notificatie": {
-    "titel": "Increase in newly reported COVID-19 infections is cause for concern",
-    "bericht": "Last week there was a 27% increase in COVID-19 positives compared with the week before. In the week from 2 to 8 December 43,103 newly tested COVID-19 positives were reported. This is an increase of 9,000 COVID-19 positives compared to the 33,949 COVID-19 positives reported the week before. In each safety region the number of newly tested positives also increased. More people have been tested. The percentage of people with a positive test result raised from 11.1% to 11.6% last week. The reproduction number of 20 November has a value of 1.00 (lower: 0.97; upper: 1.03).\n\nRisk level per region can be ‘caution’ (level 1), ‘concern’ (level 2), ‘serious’ (level 3) or ‘severe’ (level 4). At this moment the risk level of {{escalationLevel4}} regions is 'severe', for {{escalationLevel3}} it is ‘serious’, for {{escalationLevel2}} it is ‘concern’ and for {{escalationLevel1}} it is ‘caution’.",
+    "titel": "Hospital and IC admissions rose sharply.",
+    "bericht": "The increasing number of COVID-19 positives during the past two weeks was followed by an increase in the number of hospital and IC admissions last week. In the past week the number of newly admitted patients to the hospital with COVID-19 increased by 20% compared to the previous week. Also, in intensive care units an increase in the number of new COVID-19 patients has been reported (+ 24%), compared to a week earlier. In nursing homes and residential care centers was a significant increase (+ 61%) in the number of Corona infected locations.",
     "link": {
       "text": "View the full message from the RIVM",
       "href": "https://www.rivm.nl/en/novel-coronavirus-covid-19/current-information"
@@ -753,7 +753,7 @@
     "select_region_municipality_legend": "Select a municipality:",
     "select_region_type_legend": "Show numbers from:",
     "your_municipality": "Municipality",
-    "belangrijk_bericht": "There are [country-wide measures](https://www.government.nl/latest/news/2020/12/08/partial-lockdown-continues-to-apply-during-festive-season) to stop the spread of the coronavirus."
+    "belangrijk_bericht": "There is a [national lockdown](https://www.rijksoverheid.nl/actueel/nieuws/2020/12/14/lockdown-nodig-om-snel-oplopend-aantal-besmettingen-tegen-te-gaan)."
   },
   "common": {
     "metadata": {
@@ -799,7 +799,8 @@
       "verpleeghuizen": "Nursing homes",
       "vroege_signalen": "Early indicators",
       "gedrag": "Behaviour",
-      "kwetsbare_groepen": "Vulnerable groups"
+      "kwetsbare_groepen": "Vulnerable groups",
+      "maatregelen": ""
     }
   },
   "veiligheidsregio_layout": {
@@ -812,7 +813,8 @@
       "verpleeghuizen": "Nursing homes",
       "vroege_signalen": "Early indicators",
       "gedrag": "Behaviour",
-      "kwetsbare_groepen": "Vulnerable groups"
+      "kwetsbare_groepen": "Vulnerable groups",
+      "maatregelen": ""
     }
   },
   "veiligheidsregio_metadata": {
@@ -1013,7 +1015,7 @@
     "kpi_titel": "Number of confirmed cases",
     "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.",
     "map_titel": "Distribution of confirmed cases in {{municipality}}",
-    "map_toelichting": "This map shows how many confirmed cases of COVID-19 were reported yesterday in these municipalities per 100,000 inhabitants.",
+    "map_toelichting": "This map shows how many confirmed cases of COVID-19 were reported yesterday in this municipality and other municipalities in the same safety region, per 100,000 inhabitants.",
     "linechart_titel": "Progression over time",
     "linechart_toelichting": "This graph shows how many confirmed cases of COVID-19 were reported in the selected period in this municipality per 100,000 inhabitants.",
     "barchart_titel": "New cases by age group",
@@ -1098,7 +1100,7 @@
       "title": "Level of risk per safety region | Dashboard Coronavirus | Government.nl",
       "description": "Overview of the level of risk per safety region in the Netherlands."
     },
-    "belangrijk_bericht": "There are [country-wide measures](https://www.government.nl/latest/news/2020/12/08/partial-lockdown-continues-to-apply-during-festive-season) to stop the spread of the coronavirus."
+    "belangrijk_bericht": "There is a [national lockdown](https://www.rijksoverheid.nl/actueel/nieuws/2020/12/14/lockdown-nodig-om-snel-oplopend-aantal-besmettingen-tegen-te-gaan)."
   },
   "gemeente_index": {
     "selecteer_titel": "Select your municipality",
@@ -1110,7 +1112,7 @@
   },
   "laatste_ontwikkelingen": {
     "title": "Latest developments",
-    "menu_subtitle": "Increase of number of confirmed cases",
+    "menu_subtitle": "Hospital and IC admissions rose sharply.",
     "alle_cijfers_header": "Want to see all data?",
     "alle_cijfers_link": "View all"
   },
@@ -1142,7 +1144,8 @@
     "legenda": {
       "titel": "Legend"
     },
-    "valid_from": "Valid from {{validFrom}}"
+    "valid_from": "Valid from {{validFrom}}",
+    "sidebar_label": ""
   },
   "gemeente_layout": {
     "headings": {
@@ -1891,7 +1894,7 @@
       "kpi_covid_total_title": "Total reported deaths from COVID-19.",
       "kpi_covid_total_description": "This figure shows the number of reported deaths from COVID-19, since the reporting of COVID-19 deaths started.",
       "line_chart_covid_daily_title": "Number of reported deaths from COVID-19 over time",
-      "line_chart_covid_daily_description": ""
+      "line_chart_covid_daily_description": "This graph shows the number of reported deaths from COVID-19, in the selected period of time."
     },
     "kpi_titel": "Daily reported deaths from COVID-19"
   },
@@ -1922,7 +1925,7 @@
       "kpi_covid_total_title": "Total reported deaths from/related to COVID-19 per 100,000 inhabitants.",
       "kpi_covid_total_description": "This figure shows the number of deaths from/related to COVID-19 reported yesterday, per 100,000 inhabitants. ",
       "line_chart_covid_daily_title": "Number of reported deaths related to COVID-19 over time",
-      "line_chart_covid_daily_description": ""
+      "line_chart_covid_daily_description": "This graph shows the number of reported deaths from COVID-19, in the selected period of time."
     },
     "kpi_titel": "Daily reported deaths from COVID-19"
   },
@@ -1942,11 +1945,11 @@
       "text": "Read more in 'explanation of the data presented'"
     },
     "cbs_message": {
-      "title": "CBS: Higher mortality in week 48",
+      "title": "Mortality still elevated in week 49",
       "published_text": "Date of publication: Friday 4 December",
-      "message": "In week 48 (23 to 29 November inclusive), the estimated number of deaths stood at 3,450. This is approximately 150 more than in the previous week, when there were 3,293 deaths. Mortality is always higher in winter. However, there were still over 400 more deaths recorded in week 48 than normally expected for this period. Statistics Netherlands (CBS) reports this based on the latest provisional weekly mortality figures.",
+      "message": "In week 49 (30 November to 6 December inclusive), the estimated number of deaths stood at 3,450. This is approximately 75 more than in the previous week, when there were 3,373 deaths. Mortality is always higher in winter. However, there were still 400 more deaths recorded in week 49 than normally expected for this period. Statistics Netherlands (CBS) reports this based on the latest provisional weekly mortality figures.",
       "link": {
-        "href": "https://www.cbs.nl/en-gb/news/2020/49/higher-mortality-in-week-48",
+        "href": "https://www.cbs.nl/en-gb/news/2020/50/mortality-still-elevated-in-week-49",
         "text": "Website CBS"
       }
     },
@@ -1955,5 +1958,156 @@
     "deceased_monitor_chart_legenda_registered": "Actual mortality",
     "deceased_monitor_chart_legenda_expected": "Predicted mortality",
     "deceased_monitor_chart_legenda_expected_margin": "Range of predicted mortality"
+  },
+  "maatregelen": {
+    "categories": {
+      "er_op_uit": "",
+      "bezoek": "",
+      "samenkomst": "",
+      "huwelijk": "",
+      "verpleeghuis": "",
+      "horeca": "",
+      "sport": "",
+      "reizen_binnenland": "",
+      "reizen_buitenland": "",
+      "ov": "",
+      "uitvaart": "",
+      "onderwijs": "",
+      "werk": "",
+      "winkels": "",
+      "alcohol": "",
+      "algemeen": "",
+      "contactberoep": ""
+    },
+    "headings": {
+      "1": {
+        "toelichting_risiconiveau": "",
+        "extratoelichting": {
+          "titel": "",
+          "toelichting": ""
+        }
+      },
+      "2": {
+        "toelichting_risiconiveau": "",
+        "extratoelichting": {
+          "titel": "",
+          "toelichting": ""
+        }
+      },
+      "3": {
+        "toelichting_risiconiveau": "",
+        "extratoelichting": {
+          "titel": "",
+          "toelichting": ""
+        }
+      },
+      "4": {
+        "toelichting_risiconiveau": "",
+        "extratoelichting": {
+          "titel": "",
+          "toelichting": ""
+        }
+      },
+      "401": {
+        "toelichting_risiconiveau": "",
+        "extratoelichting": {
+          "titel": "",
+          "toelichting": ""
+        }
+      },
+      "402": {
+        "toelichting_risiconiveau": "",
+        "extratoelichting": {
+          "titel": "",
+          "toelichting": ""
+        }
+      },
+      "41": {
+        "toelichting_risiconiveau": "",
+        "extratoelichting": {
+          "titel": "",
+          "toelichting": ""
+        }
+      },
+      "landelijk": {
+        "toelichting_risiconiveau": "",
+        "extratoelichting": {
+          "titel": "",
+          "toelichting": ""
+        }
+      }
+    },
+    "teksten": {
+      "0_algemeen_18": "",
+      "0_algemeen_19": "",
+      "0_algemeen_20": "",
+      "0_algemeen_21": "",
+      "0_algemeen_22": "",
+      "0_algemeen_23": "",
+      "41_bezoek_24": "",
+      "41_er_op_uit_25": "",
+      "41_samenkomst_26": "",
+      "41_horeca_27": "",
+      "41_horeca_28": "",
+      "41_horeca_29": "",
+      "41_winkels_30": "",
+      "41_winkels_31": "",
+      "41_winkels_32": "",
+      "41_contactberoep_33": "",
+      "41_sport_34": "",
+      "41_sport_35": "",
+      "41_sport_36": "",
+      "41_ov_37": "",
+      "41_ov_38": "",
+      "41_onderwijs_39": "",
+      "41_onderwijs_40": "",
+      "41_onderwijs_41": ""
+    }
+  },
+  "nationaal_maatregelen": {
+    "titel": "",
+    "titel_sidebar": "",
+    "subtitel_sidebar": ""
+  },
+  "veiligheidsregio_maatregelen": {
+    "titel_sidebar": "",
+    "titel": "",
+    "titel_risiconiveau": "",
+    "toelichting_risiconiveau": "",
+    "linktext_riskpage": "",
+    "linktext_regionpage": "",
+    "titel_aanvullendemaatregelen": "",
+    "toelichting_aanvullendemaatregelen": "",
+    "metadata": {
+      "title": "",
+      "description": ""
+    }
+  },
+  "veiligheidsregio_maatregelen_urls": {
+    "VR01": "",
+    "VR02": "",
+    "VR03": "",
+    "VR04": "",
+    "VR05": "",
+    "VR06": "",
+    "VR07": "",
+    "VR08": "",
+    "VR09": "",
+    "VR10": "",
+    "VR11": "",
+    "VR12": "",
+    "VR13": "",
+    "VR14": "",
+    "VR15": "",
+    "VR16": "",
+    "VR17": "",
+    "VR18": "",
+    "VR19": "",
+    "VR20": "",
+    "VR21": "",
+    "VR22": "",
+    "VR23": "",
+    "VR24": "",
+    "VR25": ""
   }
 }

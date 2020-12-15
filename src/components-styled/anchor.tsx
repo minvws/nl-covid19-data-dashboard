@@ -1,4 +1,5 @@
 import React from 'react';
+import { Text } from './typography';
 
 interface AnchorProps {
   text: string;
@@ -6,5 +7,9 @@ interface AnchorProps {
 }
 
 export function Anchor({ text, name }: AnchorProps) {
-  return <a href={`#${name}`}>{text}</a>;
+  return (
+    <Text as="a" href={`#${name}`}>
+      {text}
+    </Text>
+  );
 }

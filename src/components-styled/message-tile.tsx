@@ -16,9 +16,9 @@ export function MessageTile({ message }: MessageTileProps) {
         backgroundColor: '#FFF4B9',
       })}
     >
-      <Box display="flex" alignItems="flex-start">
+      <Box display="flex" alignItems={['flex-start', 'center']}>
         <Box mr={3} width={38} flexShrink={0}>
-          <Warning width={38} height={38} fill="black" />
+          <StyledWarning />
         </Box>
         {typeof message === 'string' ? (
           <Children dangerouslySetInnerHTML={{ __html: message }} />
@@ -30,9 +30,20 @@ export function MessageTile({ message }: MessageTileProps) {
   );
 }
 
+const StyledWarning = styled(Warning)(
+  css({
+    width: 38,
+    height: 38,
+    fill: 'black',
+    display: 'block',
+  })
+);
+
 const Children = styled.div(
   css({
     maxWidth: 450,
+    fontSize: 3,
+    fontWeight: 'bold',
     '> *': {
       mt: 0,
       mb: 3,

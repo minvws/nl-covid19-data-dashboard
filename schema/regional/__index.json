@@ -12,12 +12,13 @@
     "nursing_home",
     "sewer",
     "sewer_per_installation",
-    "behavior",
+    "restrictions",
     "difference",
     "deceased_rivm",
     "deceased_cbs",
     "elderly_at_home",
-    "disability_care"
+    "disability_care",
+    "behavior"
   ],
   "additionalProperties": false,
   "properties": {
