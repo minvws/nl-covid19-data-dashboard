@@ -2,13 +2,17 @@ import { Fragment } from 'react';
 import { Box } from '~/components-styled/base';
 import { Cell, Row, Table, TableBody } from '~/components-styled/layout/table';
 import { InlineText } from '~/components-styled/typography';
-import { RestrictionsTableData } from '~/components/restrictions/hooks/use-restrictions-table';
+import {
+  RestrictionsTableData,
+  RestrictionValue,
+  useRestrictionsTable,
+} from '~/components/restrictions/hooks/use-restrictions-table';
 import siteText from '~/locale/index';
 import { useEscalationColor } from '~/utils/use-escalation-color';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 
 export type RestrictionsTableProps = {
-  data: RestrictionsTableData;
+  data: RestrictionValue[];
   escalationLevel: 1 | 2 | 3 | 4;
 };
 
@@ -21,15 +25,18 @@ const categoryLabels = siteText.maatregelen.categories;
 
 export function RestrictionsTable(props: RestrictionsTableProps) {
   const { data, escalationLevel } = props;
+
+  const restrictionsTable = useRestrictionsTable(data);
+
   const breakpoints = useBreakpoints();
 
   const color = useEscalationColor(escalationLevel);
 
   if (breakpoints.lg) {
-    return <DesktopRestrictionsTable data={data} color={color} />;
+    return <DesktopRestrictionsTable data={restrictionsTable} color={color} />;
   }
 
-  return <MobileRestrictionsTable data={data} color={color} />;
+  return <MobileRestrictionsTable data={restrictionsTable} color={color} />;
 }
 
 function MobileRestrictionsTable(props: TableProps) {

@@ -1,13 +1,5 @@
 import styled from 'styled-components';
 import {
-  backgroundImage,
-  BackgroundImageProps,
-  backgroundPosition,
-  BackgroundPositionProps,
-  backgroundRepeat,
-  BackgroundRepeatProps,
-  backgroundSize,
-  BackgroundSizeProps,
   borders,
   BordersProps,
   color,
@@ -38,11 +30,7 @@ export type BoxProps = SpaceProps &
   TypographyProps &
   BordersProps &
   ShadowProps &
-  GridProps &
-  BackgroundImageProps &
-  BackgroundSizeProps &
-  BackgroundPositionProps &
-  BackgroundRepeatProps;
+  GridProps;
 
 /**
  * A fully generic styling component used for layouts throughout the app. For
@@ -61,9 +49,5 @@ export const Box = styled.div<BoxProps>(
   typography,
   borders,
   shadow,
-  grid,
-  backgroundImage,
-  backgroundPosition,
-  backgroundRepeat,
-  backgroundSize
+  grid
 );
