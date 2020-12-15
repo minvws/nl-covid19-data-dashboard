@@ -25,18 +25,13 @@ export type Value = {
   value?: number;
 };
 
-type TooltipData = {
-  date: Date;
-  value: number;
-};
-
-export interface LineChartProps<T> {
+export interface CustomLineChartProps<T> {
   values: T[];
   width?: number;
   height?: number;
   timeframe?: TimeframeOption;
   signaalwaarde?: number;
-  formatTooltip?: (data: any) => ReactNode;
+  formatTooltip?: (data: T) => ReactNode;
   formatYAxis?: (y: number) => string;
   showFill?: boolean;
   valueAnnotation?: string;
@@ -52,14 +47,14 @@ export default function CustomLineChart<T extends Value>({
   formatYAxis = formatYAxisFunc,
   showFill = true,
   valueAnnotation,
-}: LineChartProps<T>) {
+}: CustomLineChartProps<T>) {
   const {
     tooltipData,
     tooltipLeft = 0,
     tooltipTop = 0,
     showTooltip,
     hideTooltip,
-  }: UseTooltipParams<TooltipData> = useTooltip();
+  }: UseTooltipParams<T> = useTooltip();
 
   const benchmark = useMemo(() => {
     return signaalwaarde
@@ -130,7 +125,7 @@ export default function CustomLineChart<T extends Value>({
           benchmark={benchmark}
         />
 
-        {tooltipData && (
+        {isDefined(tooltipData) && (
           <Tooltip
             bounds={{ right: width, left: 0, top: 0, bottom: height }}
             x={tooltipLeft + defaultMargin.left}

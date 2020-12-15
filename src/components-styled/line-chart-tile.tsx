@@ -4,11 +4,11 @@ import { TimeframeOption } from '~/utils/timeframe';
 import { ChartTileWithTimeframe } from './chart-tile';
 import { MetadataProps } from './metadata';
 import CustomLineChart, {
-  LineChartProps,
+  CustomLineChartProps,
   Value,
 } from '~/components/custom-line-chart/index';
 
-interface LineChartTileProps<T> extends LineChartProps<T> {
+interface LineChartTileProps<T> extends CustomLineChartProps<T> {
   title: string;
   metadata: MetadataProps;
   description?: string;
