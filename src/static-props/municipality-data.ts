@@ -5,11 +5,14 @@ import { Municipal } from '~/types/data.d';
 
 import municipalities from '~/data/gemeente_veiligheidsregio.json';
 import { sortMunicipalTimeSeriesInDataInPlace } from './data-sorting';
+import { TALLLanguages } from '~/locale';
+import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
 
 export interface IMunicipalityData {
   data: Municipal;
   lastGenerated: string;
   municipalityName: string;
+  text: TALLLanguages;
 }
 
 interface IPaths {
@@ -27,7 +30,7 @@ interface IParams {
   };
 }
 
-/*
+/**
  * getMunicipalityData loads the data for /gemeente pages.
  * It needs to be used as the Next.js `getStaticProps` function.
  *
@@ -50,7 +53,7 @@ interface IParams {
  * ```
  */
 export function getMunicipalityData() {
-  return function ({ params }: IParams): IProps {
+  return async function ({ params }: IParams): Promise<IProps> {
     const { code } = params;
 
     const filePath = path.join(process.cwd(), 'public', 'json', `${code}.json`);
@@ -63,17 +66,22 @@ export function getMunicipalityData() {
       municipalities.find((r) => r.gemcode === code)?.name || '';
     const lastGenerated = data.last_generated;
 
+    const text = parseMarkdownInLocale(
+      (await import('../locale/index')).default
+    );
+
     return {
       props: {
         data,
         municipalityName,
         lastGenerated,
+        text,
       },
     };
   };
 }
 
-/*
+/**
  * getMunicipalityPaths creates an array of all the allowed
  * `/gemeente/[code]` routes. This should be used
  * together with `getMunicipalityData`.
