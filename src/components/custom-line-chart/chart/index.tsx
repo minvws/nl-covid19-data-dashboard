@@ -1,14 +1,13 @@
-import { useCallback, memo } from 'react';
-import { scaleTime, scaleLinear } from '@visx/scale';
-import { bisector } from 'd3-array';
-import { AxisLeft, AxisBottom } from '@visx/axis';
+import { AxisBottom, AxisLeft } from '@visx/axis';
 import { GridRows } from '@visx/grid';
 import { Group } from '@visx/group';
+import { scaleLinear, scaleTime } from '@visx/scale';
 import { Line } from '@visx/shape';
 import { Text } from '@visx/text';
-
+import { bisector } from 'd3-array';
+import { memo, useCallback } from 'react';
 import { colors } from '~/style/theme';
-import { Trends, DataPoint, TrendType } from './trends';
+import { DataPoint, Trends, TrendType } from './trends';
 
 const NUM_TICKS = 3;
 export const defaultMargin = { top: 10, right: 20, bottom: 30, left: 30 };

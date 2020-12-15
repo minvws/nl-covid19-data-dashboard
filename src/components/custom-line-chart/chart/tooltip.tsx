@@ -1,7 +1,6 @@
-import { ReactNode } from 'react';
 import css from '@styled-system/css';
+import { ReactNode } from 'react';
 import styled from 'styled-components';
-
 import { colors } from '~/style/theme';
 
 const BOUND_OFFSET = 70;

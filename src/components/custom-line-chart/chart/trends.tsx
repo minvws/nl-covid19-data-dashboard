@@ -1,6 +1,6 @@
-import { useCallback } from 'react';
-import { AreaClosed, LinePath, Bar } from '@visx/shape';
 import { localPoint } from '@visx/event';
+import { AreaClosed, Bar, LinePath } from '@visx/shape';
+import { useCallback } from 'react';
 
 export type DataPoint = {
   date: Date;

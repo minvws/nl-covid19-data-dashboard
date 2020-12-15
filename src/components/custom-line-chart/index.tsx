@@ -1,16 +1,14 @@
-import { useCallback, useMemo, ReactNode } from 'react';
 import { useTooltip } from '@visx/tooltip';
 import { UseTooltipParams } from '@visx/tooltip/lib/hooks/useTooltip';
 import { extent } from 'd3-array';
+import { ReactNode, useCallback, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
-import text from '~/locale/index';
-
-import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
-import { formatDateFromSeconds } from '~/utils/formatDate';
-import { formatNumber } from '~/utils/formatNumber';
-
 import { Box } from '~/components-styled/base';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
+import text from '~/locale/index';
+import { formatDateFromSeconds } from '~/utils/formatDate';
+import { formatNumber } from '~/utils/formatNumber';
+import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
 import { Chart, defaultMargin } from './chart';
 import { Tooltip } from './chart/tooltip';
 
