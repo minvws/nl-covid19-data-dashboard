@@ -86,6 +86,7 @@ export const colors = {
   blue: '#01689b',
   icon: '#01689b',
   button: '#01689b',
+  link: '#01689b',
   shadow: '#e5e5e5',
   gray: '#808080',
   lightGray: '#dfdfdf',

@@ -69,8 +69,8 @@ html {
   color: $text-color;
   font-style: normal;
   font-weight: normal;
-  font-size: 1rem;
-  line-height: 1.5;
+  font-size: ${(x) => x.theme.fontSizes[2]} ;
+  line-height: ${(x) => x.theme.lineHeights[2]};
 
   margin: 0;
   background: #f3f3f3;
@@ -96,16 +96,15 @@ main {
 
 
 a {
-  color: #01689b;
+  color: ${(x) => x.theme.colors.link};
 }
 
 a:focus {
-  outline: 2px dotted #01689b;
+  outline: 2px dotted ${(x) => x.theme.colors.link};
   outline-offset: 0;
 }
 
 button::-moz-focus-inner {
   border: 0;
 }
-
 `;

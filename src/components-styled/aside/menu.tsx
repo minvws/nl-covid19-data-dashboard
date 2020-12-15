@@ -104,9 +104,8 @@ function isActivePath(router: NextRouter, href: Url) {
  * The following css is copied from the layout.scss file, it can be cleaned up
  */
 
-const ChildrenWrapper = styled.span(
+const ChildrenWrapper = styled.div(
   css({
-    display: 'block',
     margin: '0 2.5rem',
 
     '& > div:not(:first-child)': {
