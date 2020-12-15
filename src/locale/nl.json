@@ -9,8 +9,8 @@
     "title": "Laatst bijgewerkt"
   },
   "notificatie": {
-    "titel": "Zorgwekkende stijging aantal meldingen COVID-19",
-    "bericht": "Afgelopen week zijn 27% meer nieuwe meldingen van COVID-19 besmettingen gerapporteerd dan een week eerder. In de week van 2 tot en met 8 december werden 43.103 nieuwe personen met een positieve COVID-19 uitslag gemeld. Ruim 9.000 meldingen meer dan 33.949 meldingen in de week daarvoor. In iedere veiligheidsregio steeg het aantal nieuwe meldingen van COVID-19 besmettingen. Meer mensen hebben zich laten testen. Het percentage mensen met een positieve testuitslag is gestegen van 11,1% naar 11,6% afgelopen week. Het reproductiegetal van 20 november is 1,00 (ondergrens 0,97 – bovengrens 1,03).",
+    "titel": "Ziekenhuis- en IC opnames fors gestegen. ",
+    "bericht": "Het toenemende aantal meldingen van mensen met een positieve corona testuitslag gedurende de afgelopen twee weken werd in de afgelopen week gevolgd door een stijging in het aantal ziekenhuis- en IC opnames. Het aantal nieuwe patiënten dat met COVID-19 in de afgelopen week in het ziekenhuis is opgenomen is in vergelijking met de week daarvoor met 20% gestegen. Ook op de intensive care afdelingen is er een flinke toename (+ 24%),  van het aantal nieuwe COVID-19 patiënten gemeld, in vergelijking met een week eerder. Ook bij verpleeghuizen en woonzorgcentra is een aanzienlijke toename van 61%  in het aantal locaties met besmettingen te zien.",
     "link": {
       "text": "Bekijk de toelichting van het RIVM",
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel"
@@ -1110,7 +1110,7 @@
   },
   "laatste_ontwikkelingen": {
     "title": "Laatste ontwikkelingen",
-    "menu_subtitle": "Stijging aantal meldingen COVID-19",
+    "menu_subtitle": "Ziekenhuis- en IC opnames fors gestegen. ",
     "alle_cijfers_header": "Benieuwd naar alle cijfers?",
     "alle_cijfers_link": "Bekijk alle cijfers"
   },
