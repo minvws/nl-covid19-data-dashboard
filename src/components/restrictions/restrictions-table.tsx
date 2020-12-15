@@ -10,10 +10,11 @@ import {
 import siteText from '~/locale/index';
 import { useEscalationColor } from '~/utils/use-escalation-color';
 import { useBreakpoints } from '~/utils/useBreakpoints';
+import { EscalationLevel } from './type';
 
 export type RestrictionsTableProps = {
   data: RestrictionValue[];
-  escalationLevel: 1 | 2 | 3 | 4;
+  escalationLevel: EscalationLevel;
 };
 
 export type TableProps = {

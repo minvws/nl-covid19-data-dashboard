@@ -406,7 +406,8 @@ export interface NationalRestrictionValue {
     | "werk"
     | "winkels"
     | "alcohol"
-    | "algemeen";
+    | "algemeen"
+    | "contactberoep";
   restriction_order: number;
   valid_from_unix: number;
 }
@@ -724,7 +725,8 @@ export interface RegionalRestrictionValue {
     | "werk"
     | "winkels"
     | "alcohol"
-    | "algemeen";
+    | "algemeen"
+    | "contactberoep";
   restriction_order: number;
   valid_from_unix: number;
   vrcode: string;

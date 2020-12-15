@@ -6,6 +6,7 @@ import { Heading } from '~/components-styled/typography';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { RestrictionsTable } from '~/components/restrictions/restrictions-table';
+import { EscalationLevel } from '~/components/restrictions/type';
 import { SEOHead } from '~/components/seoHead';
 import text from '~/locale';
 import { NationalPageProps } from '~/static-props/nl-data';
@@ -19,8 +20,8 @@ const NationalRestrictions: FCWithLayout<NationalPageProps> = (props) => {
   const escalationLevel = useEscalationLevel(data.restrictions.values);
 
   // Colors etc are determined by the effective escalation level which is 1, 2, 3 or 4.
-  const effectiveEscalationLevel: 1 | 2 | 3 | 4 =
-    escalationLevel > 4 ? 4 : (escalationLevel as 1 | 2 | 3 | 4);
+  const effectiveEscalationLevel: EscalationLevel =
+    escalationLevel > 4 ? 4 : (escalationLevel as EscalationLevel);
 
   const key = escalationLevel.toString() as keyof typeof text.maatregelen.headings;
   const restrictionInfo = text.maatregelen.headings[key];

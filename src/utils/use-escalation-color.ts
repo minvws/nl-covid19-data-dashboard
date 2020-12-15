@@ -1,8 +1,9 @@
 import { useMemo } from 'react';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
+import { EscalationLevel } from '~/components/restrictions/type';
 import { assert } from './assert';
 
-export function useEscalationColor(level?: 1 | 2 | 3 | 4) {
+export function useEscalationColor(level?: EscalationLevel) {
   return useMemo(() => {
     assert(
       level !== undefined,

@@ -56,7 +56,8 @@
             "werk",
             "winkels",
             "alcohol",
-            "algemeen"
+            "algemeen",
+            "contactberoep"
           ]
         },
         "restriction_order": {

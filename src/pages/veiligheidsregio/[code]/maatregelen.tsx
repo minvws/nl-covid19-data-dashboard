@@ -9,6 +9,7 @@ import { Heading, Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { RestrictionsTable } from '~/components/restrictions/restrictions-table';
+import { EscalationLevel } from '~/components/restrictions/type';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import {
@@ -37,8 +38,8 @@ const RegionalRestrictions: FCWithLayout<ISafetyRegionData> = (props) => {
 
   // Colors etc are determined by the effective escalation level which is 1, 2, 3 or 4.
   // Data is determined by the actual escalation level which can be 1, 2, 3, 4, 401, 402, 41
-  const effectiveEscalationLevel: 1 | 2 | 3 | 4 =
-    escalationLevel > 4 ? 4 : (escalationLevel as 1 | 2 | 3 | 4);
+  const effectiveEscalationLevel: EscalationLevel =
+    escalationLevel > 4 ? 4 : (escalationLevel as EscalationLevel);
 
   const isNationalLevel = data.restrictions.values.every(
     (res) => res.target_region === 'nl'
