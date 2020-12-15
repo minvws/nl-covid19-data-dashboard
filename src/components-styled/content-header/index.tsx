@@ -67,7 +67,7 @@ export const CategoryHeading = styled(Heading)<{ hide: boolean }>(
     })
 );
 
-export const AriaInlineText = styled(InlineText)(
+const AriaInlineText = styled(InlineText)(
   css({
     position: 'absolute',
     left: '-10000px',

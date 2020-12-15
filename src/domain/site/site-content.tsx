@@ -73,7 +73,7 @@ const SiteContentContainer = styled.div(
   })
 );
 
-export const StyledSiteContent = styled.main(
+const StyledSiteContent = styled.main(
   css({
     bg: 'page',
     zIndex: 2,
@@ -84,7 +84,7 @@ export const StyledSiteContent = styled.main(
   })
 );
 
-export const StyledSidebar = styled.aside(
+const StyledSidebar = styled.aside(
   css({
     bg: 'white',
     zIndex: 3,

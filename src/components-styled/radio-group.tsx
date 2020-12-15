@@ -3,7 +3,7 @@ import { Box } from './base';
 import { css } from '@styled-system/css';
 import styled from 'styled-components';
 
-export interface RadioGroupItem<T extends string> {
+interface RadioGroupItem<T extends string> {
   label: string;
   value: T;
 }
@@ -109,7 +109,7 @@ const getUniqueId = () => String(uniqueId++);
 // This was the previous uid generator
 // const getUniqueId = () => Math.random().toString(36).substr(2);
 
-export function useComponentId() {
+function useComponentId() {
   const idRef = useRef<string>();
   if (idRef.current === undefined) {
     idRef.current = getUniqueId();

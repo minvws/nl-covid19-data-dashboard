@@ -32,7 +32,7 @@ const combineChartDimensions = (
   };
 };
 
-export type TChartDimensions = {
+type TChartDimensions = {
   width?: number;
   height?: number;
   marginTop?: number;

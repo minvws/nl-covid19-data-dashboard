@@ -6,10 +6,6 @@ export type MetricKeys<T> = keyof Omit<
   'last_generated' | 'proto_name' | 'name' | 'code'
 >;
 
-export type DifferenceKeys<
-  T extends { difference: unknown }
-> = keyof T['difference'];
-
 type TMetricHolder<T> = keyof Omit<
   T,
   'last_generated' | 'proto_name' | 'name' | 'code'
@@ -19,19 +15,9 @@ export type TMunicipalityMetricName = TMetricHolder<
   Omit<Municipalities, 'deceased' | 'hospital_admissions'>
 >;
 
-export type TMunicipalityMetricType = ValueOf<
-  Pick<Municipalities, TMunicipalityMetricName>
->[number] &
-  Partial<MunicipalityProperties>;
-
 export type TRegionMetricName = TMetricHolder<
   Omit<Regions, 'deceased' | 'hospital_admissions'>
 >;
-
-export type TRegionMetricType = ValueOf<
-  Pick<Regions, TRegionMetricName>
->[number] &
-  Partial<SafetyRegionProperties>;
 
 export interface SafetyRegionProperties {
   vrcode: string;
