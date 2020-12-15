@@ -3,12 +3,13 @@ import { ParentSize } from '@visx/responsive';
 import { TimeframeOption } from '~/utils/timeframe';
 import { ChartTileWithTimeframe } from './chart-tile';
 import { MetadataProps } from './metadata';
-import CustomLineChart, {
-  CustomLineChartProps,
+import {
+  LineChart,
+  LineChartProps,
   Value,
 } from '~/components/custom-line-chart/index';
 
-interface LineChartTileProps<T> extends CustomLineChartProps<T> {
+interface LineChartTileProps<T> extends LineChartProps<T> {
   title: string;
   metadata: MetadataProps;
   description?: string;
@@ -41,7 +42,7 @@ export function LineChartTile<T extends Value>({
         <>
           <ParentSize>
             {(parent) => (
-              <CustomLineChart
+              <LineChart
                 {...chartProps}
                 width={parent.width}
                 timeframe={timeframe}

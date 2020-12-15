@@ -11,18 +11,19 @@ export type TrendType = 'line' | 'area';
 
 export type TrendsProps = {
   isHovered: boolean;
-  trend: any;
+  trend: DataPoint[];
   type: TrendType;
-  x: (x: Date) => number;
-  y: (y: number) => number;
+  x: any;
+  y: any;
   onHover: (
     event: React.TouchEvent<SVGRectElement> | React.MouseEvent<SVGRectElement>,
     data?: DataPoint,
     xPosition?: number,
     yPosition?: number
   ) => void;
-  size: any;
-  bisect: any;
+  height: number;
+  width: number;
+  bisect: (trend: DataPoint[], mx: number) => DataPoint;
   color: string;
 };
 
@@ -36,7 +37,8 @@ export function Trends({
   x,
   y,
   onHover,
-  size,
+  height,
+  width,
   isHovered,
   bisect,
 }: TrendsProps) {
@@ -89,8 +91,8 @@ export function Trends({
       <Bar
         x={0}
         y={0}
-        width={size.width}
-        height={size.height}
+        width={width}
+        height={height}
         fill="transparent"
         rx={14}
         onTouchStart={handlePointerMove}

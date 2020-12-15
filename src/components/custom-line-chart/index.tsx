@@ -24,7 +24,7 @@ export type Value = {
   value?: number;
 };
 
-export interface CustomLineChartProps<T> {
+export interface LineChartProps<T> {
   values: T[];
   width?: number;
   height?: number;
@@ -36,7 +36,7 @@ export interface CustomLineChartProps<T> {
   valueAnnotation?: string;
 }
 
-export default function CustomLineChart<T extends Value>({
+export function LineChart<T extends Value>({
   values,
   width = 500,
   height = 250,
@@ -46,7 +46,7 @@ export default function CustomLineChart<T extends Value>({
   formatYAxis = formatYAxisFunc,
   showFill = true,
   valueAnnotation,
-}: CustomLineChartProps<T>) {
+}: LineChartProps<T>) {
   const {
     tooltipData,
     tooltipLeft = 0,

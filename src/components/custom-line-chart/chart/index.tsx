@@ -75,7 +75,7 @@ export const Chart = memo(function Chart({
   });
 
   const bisect = useCallback(
-    (trend: Array<DataPoint>, mx: number) => {
+    (trend: DataPoint[], mx: number) => {
       if (trend.length === 1) return trend[0];
 
       const bisect = bisector((d: DataPoint) => d.date).left;
@@ -154,7 +154,8 @@ export const Chart = memo(function Chart({
         <Trends
           trend={trend}
           type={type}
-          size={bounded}
+          height={bounded.height}
+          width={bounded.width}
           x={x}
           y={y}
           color={defaultColors.main}
