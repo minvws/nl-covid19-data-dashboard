@@ -29,7 +29,7 @@ type Benchmark = {
   label: string;
 };
 
-export type ChartProps = {
+type ChartProps = {
   benchmark?: Benchmark;
   isHovered: boolean;
   trend: DataPoint[];

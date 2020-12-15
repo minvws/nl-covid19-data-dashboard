@@ -13,7 +13,7 @@ type Bounds = {
   bottom: number;
 };
 
-export type Props = {
+export type TooltipProps = {
   children: ReactNode;
   x: number;
   y: number;
@@ -60,12 +60,17 @@ type TooltipContainerProps = {
 const TooltipContainer = styled.div<TooltipContainerProps>`
   pointer-events: none;
   position: absolute;
-  border: ${(props) => `1px solid ${props.borderColor || 'black'}`}
-  background-color: white;
   min-width: 72;
   white-space: nowrap;
 
-  ${css({ px: 2, py: 1, fontSize: 1 })}
+  ${(props) =>
+    css({
+      px: 2,
+      py: 1,
+      fontSize: 1,
+      bg: 'white',
+      border: `1px solid ${props.borderColor || 'black'}`,
+    })}
 `;
 
 /**
@@ -78,7 +83,7 @@ export function Tooltip({
   primaryColor = colors.data.primary,
   borderColor = '#01689B',
   bounds,
-}: Props) {
+}: TooltipProps) {
   const yTransform = 'calc(-100% - 10px)';
 
   let xTransform = '-50%';

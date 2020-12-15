@@ -7,7 +7,7 @@ export const trendTypes = {
   area: 'area',
 };
 
-export type Props = {
+export type TrendsProps = {
   isHovered: boolean;
   trend: any;
   type: string;
@@ -32,7 +32,7 @@ export function Trends({
   size,
   isHovered,
   bisect,
-}: Props) {
+}: TrendsProps) {
   const onPointerMove = useCallback(
     (
       event: React.TouchEvent<SVGRectElement> | React.MouseEvent<SVGRectElement>
