@@ -6,10 +6,14 @@ import { Regionaal } from '~/types/data.d';
 import safetyRegions from '~/data/index';
 import { sortRegionalTimeSeriesInDataInPlace } from './data-sorting';
 
+import { TALLLanguages } from '~/locale/index';
+import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
+
 export interface ISafetyRegionData {
   data: Regionaal;
   safetyRegionName: string;
   lastGenerated: string;
+  text: TALLLanguages;
 }
 
 interface IProps {
@@ -49,7 +53,9 @@ interface IParams {
  * }
  * ```
  */
-export function getSafetyRegionStaticProps({ params }: IParams): IProps {
+export async function getSafetyRegionStaticProps({
+  params,
+}: IParams): Promise<IProps> {
   const { code } = params;
 
   // get data for the page
@@ -64,11 +70,14 @@ export function getSafetyRegionStaticProps({ params }: IParams): IProps {
   const safetyRegionName =
     safetyRegions.find((r) => r.code === code)?.name || '';
 
+  const text = parseMarkdownInLocale((await import('../locale/index')).default);
+
   return {
     props: {
       data,
       safetyRegionName,
       lastGenerated,
+      text,
     },
   };
 }

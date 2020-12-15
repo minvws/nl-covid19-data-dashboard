@@ -21,7 +21,6 @@ import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { SEOHead } from '~/components/seoHead';
 import regionCodeToMunicipalCodeLookup from '~/data/regionCodeToMunicipalCodeLookup';
-import siteText from '~/locale/index';
 import {
   getSafetyRegionPaths,
   getSafetyRegionStaticProps,
@@ -34,11 +33,12 @@ import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
-const text = siteText.veiligheidsregio_positief_geteste_personen;
-const ggdText = siteText.veiligheidsregio_positief_geteste_personen_ggd;
-
 const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
-  const { data, safetyRegionName } = props;
+  const { data, safetyRegionName, text: siteText } = props;
+
+  const text = siteText.veiligheidsregio_positief_geteste_personen;
+  const ggdText = siteText.veiligheidsregio_positief_geteste_personen_ggd;
+
   const router = useRouter();
 
   const resultsPerRegion: ResultsPerRegion = data.results_per_region;
@@ -112,7 +112,12 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
                 .results_per_region__total_reported_increase_per_region
             }
           />
-          <Text>{text.kpi_toelichting}</Text>
+
+          <Text
+            as="div"
+            dangerouslySetInnerHTML={{ __html: text.kpi_toelichting }}
+          />
+
           <Box>
             <Heading level={4} fontSize={'1.2em'} mt={'1.5em'} mb={0}>
               <span

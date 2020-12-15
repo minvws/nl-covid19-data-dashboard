@@ -1,15 +1,17 @@
 import fs from 'fs';
 import path from 'path';
 import { National } from '~/types/data.d';
+import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
 import { sortNationalTimeSeriesInDataInPlace } from './data-sorting';
+import { TALLLanguages } from '~/locale/index';
 
 export interface NationalPageProps {
   data: National;
   lastGenerated: string;
-  text?: Record<string, unknown>;
+  text: TALLLanguages;
 }
 
-/*
+/**
  * getNlData loads the data for /landelijk pages.
  * It needs to be used as the Next.js `getStaticProps` function.
  *
@@ -32,7 +34,7 @@ export interface NationalPageProps {
  * ```
  */
 
-export function getNationalStaticProps() {
+export async function getNationalStaticProps() {
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const data = JSON.parse(fileContents) as National;
@@ -41,9 +43,12 @@ export function getNationalStaticProps() {
 
   sortNationalTimeSeriesInDataInPlace(data);
 
+  const text = parseMarkdownInLocale((await import('../locale/index')).default);
+
   return {
     props: {
       data,
+      text,
       lastGenerated,
     },
   };
