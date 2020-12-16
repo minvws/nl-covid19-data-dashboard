@@ -56,7 +56,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
           datumsText: text.datums,
           dateInfo: lastValue.date_of_report_unix,
           dateOfInsertionUnix: lastValue.date_of_insertion_unix,
-          dataSources: [text.bronnen.rivm],
+          dataSources: [text.bronnen.rivm, text.bronnen.nice],
         }}
         reference={text.reference}
       />
@@ -108,7 +108,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
         }}
         metadata={{
           date: lastValue.date_of_report_unix,
-          source: text.bronnen.rivm,
+          source: text.bronnen.nice,
         }}
       >
         <MunicipalityChoropleth
