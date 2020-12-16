@@ -2061,16 +2061,19 @@
       "41_onderwijs_39": "Onderwijs op afstand voor po, vo, mbo, hbo, wo en alle overige onderwijs-, trainings- en educatieve activiteiten. Onder andere examens, praktijklessen en onderwijs voor kwetsbare leerlingen uitgezonderd. Dit geldt van 16 december t/m in ieder geval 17 januari.",
       "41_onderwijs_40": "Kinderopvang dicht. Dit geldt van 16 december t/m in ieder geval 17 januari.",
       "41_onderwijs_41": "Er is noodopvang voor kinderen van ouders met cruciale beroepen en kinderen in een kwetsbare positie. Dit geldt van 16 december t/m in ieder geval 17 januari.",
-      "41_algemeen_42": "Heb je klachten? Blijf thuis en laat je testen."
+      "0_algemeen_42": "Heb je klachten? Blijf thuis.",
+      "0_algemeen_43": "Heb je klachten? Laat je testen."
     }
   },
   "nationaal_maatregelen": {
     "titel": "Maatregelen",
     "titel_sidebar": "Maatregelen",
-    "subtitel_sidebar": "Er gelden landelijke maatregelen"
+    "subtitel_sidebar": "Er gelden landelijke maatregelen",
+    "tabel_titel": "Maatregelen van Lockdown"
   },
   "veiligheidsregio_maatregelen": {
     "titel_sidebar": "Maatregelen",
+    "subtitel_sidebar": "Er gelden landelijke maatregelen",
     "titel": "Maatregelen in {{safetyRegionName}}",
     "titel_risiconiveau": "Risiconiveau",
     "toelichting_risiconiveau": "Voor meer informatie over uw regio, kunt u terecht op de website van uw veiligheidsregio.",

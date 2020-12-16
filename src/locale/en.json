@@ -2068,10 +2068,12 @@
   "nationaal_maatregelen": {
     "titel": "Measures",
     "titel_sidebar": "Measures",
-    "subtitel_sidebar": ""
+    "subtitel_sidebar": "",
+    "tabel_titel": ""
   },
   "veiligheidsregio_maatregelen": {
     "titel_sidebar": "Measures",
+    "subtitel_sidebar": "Lockdown Measures",
     "titel": "Measures in {{safetyRegionName}}",
     "titel_risiconiveau": "",
     "toelichting_risiconiveau": "For more information about your region, please check the website of your safety region.",

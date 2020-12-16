@@ -17,7 +17,6 @@ import {
   MetricMenuItem,
 } from '~/components-styled/aside/menu';
 import { TitleWithIcon } from '~/components-styled/aside/title-with-icon';
-import { Spacer } from '~/components-styled/base';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
 import { ComboBox } from '~/components/comboBox';
 import { getLayout as getSiteLayout } from '~/components/layout';
@@ -168,8 +167,11 @@ function SafetyRegionLayout(
                           title={
                             siteText.veiligheidsregio_maatregelen.titel_sidebar
                           }
+                          subtitle={
+                            siteText.veiligheidsregio_maatregelen
+                              .subtitel_sidebar
+                          }
                         />
-                        <Spacer mb={2} />
                       </a>
                     </Link>
                   </Menu>
