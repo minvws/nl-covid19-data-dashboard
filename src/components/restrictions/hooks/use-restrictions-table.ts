@@ -14,16 +14,16 @@ const restrictionTexts: Record<string, string> = siteText.maatregelen.teksten;
  */
 const rowOrder: EscalationCategory[] = [
   'bezoek',
-  'samenkomst',
   'er_op_uit',
+  'samenkomst',
   'horeca',
   'winkels',
   'contactberoep',
   'sport',
   'reizen_binnenland',
   'reizen_buitenland',
-  'onderwijs',
   'ov',
+  'onderwijs',
   'huwelijk',
   'verpleeghuis',
   'uitvaart',

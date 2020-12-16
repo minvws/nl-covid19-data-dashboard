@@ -39,7 +39,7 @@ const NationalRestrictions: FCWithLayout<NationalPageProps> = (props) => {
       />
 
       <ContentHeader
-        category={text.nationaal_layout.headings.maatregelen}
+        category={text.nationaal_layout.headings.algemeen}
         icon={<Maatregelen fill={theme.colors.restrictions} />}
         title={text.nationaal_maatregelen.titel}
       />

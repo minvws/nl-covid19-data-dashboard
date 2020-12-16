@@ -53,7 +53,10 @@ function MobileRestrictionsTable(props: TableProps) {
                 borderTop={'1px solid black'}
                 width="20em"
                 pt={3}
-                verticalAlign="top"
+                px={2}
+                pb={3}
+                verticalAlign="center"
+                backgroundColor="#F9F9F9"
               >
                 <InlineText fontWeight="bold">
                   {categoryLabels[row.categoryColumn]}
@@ -61,14 +64,14 @@ function MobileRestrictionsTable(props: TableProps) {
               </Cell>
             </Row>
             <Row>
-              <Cell pb={3} verticalAlign="top">
+              <Cell pb={3} verticalAlign="top" pt={2}>
                 <Box display="flex" flexDirection="column">
                   {row.restrictionsColumn.map((value) => (
                     <Box key={value.text} display="flex" flexDirection="row">
                       <Box as="span" flexShrink={0}>
                         {getIcon(value.Icon, color)}
                       </Box>
-                      <Box>{value.text}</Box>
+                      <Box pt="5px">{value.text}</Box>
                     </Box>
                   ))}
                 </Box>
@@ -110,16 +113,11 @@ function DesktopRestrictionsTable(props: TableProps) {
             >
               <Box display="flex" flexDirection="column">
                 {row.restrictionsColumn.map((value) => (
-                  <Box
-                    key={value.text}
-                    display="flex"
-                    flexDirection="row"
-                    alignItems="center"
-                  >
+                  <Box key={value.text} display="flex" flexDirection="row">
                     <Box as="span" flexShrink={0}>
                       {getIcon(value.Icon, color)}
                     </Box>
-                    <Box as="span" ml={1}>
+                    <Box as="span" ml={1} pt="5px">
                       {value.text}
                     </Box>
                   </Box>
