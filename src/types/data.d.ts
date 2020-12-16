@@ -11,7 +11,7 @@ export interface Municipal {
   name: string;
   code: string;
   difference: MunicipalDifference;
-  hospital_admissions?: MunicipalHospitalAdmissions;
+  hospital_admissions: MunicipalHospitalAdmissions;
   positive_tested_people: MunicipalPositiveTestedPeople;
   sewer?: MunicipalSewer;
   sewer_per_installation?: MunicipalSewerPerInstallation;
@@ -95,7 +95,7 @@ export interface Municipalities {
   proto_name: "MUNICIPALITIES";
   name: string;
   code: string;
-  hospital_admissions?: MunicipalitiesHospitalAdmissions[];
+  hospital_admissions: MunicipalitiesHospitalAdmissions[];
   positive_tested_people: MunicipalitiesPositiveTestedPeople[];
 }
 export interface MunicipalitiesHospitalAdmissions {
@@ -812,7 +812,7 @@ export interface Regions {
   proto_name: "REGIONS";
   name: string;
   code: string;
-  hospital_admissions?: RegionHospitalAdmissions[];
+  hospital_admissions: RegionHospitalAdmissions[];
   positive_tested_people: RegionPositiveTestedPeople[];
   escalation_levels: EscalationLevels[];
   nursing_home: RegionsNursingHome[];

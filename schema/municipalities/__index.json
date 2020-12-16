@@ -8,6 +8,7 @@
     "proto_name",
     "name",
     "code",
+    "hospital_admissions",
     "positive_tested_people"
   ],
   "properties": {
