@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { HighchartsWrapper } from '~/components/common/highcharts';
+import { HighchartsWrapper } from '~/components/highcharts-wrapper';
 import text from '~/locale/index';
 import { colors } from '~/style/theme';
 import { createDate } from '~/utils/createDate';

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
-import { HighchartsWrapper } from '~/components/common/highcharts';
+import { HighchartsWrapper } from '~/components/highcharts-wrapper';
 import text from '~/locale/index';
 import { assert } from '~/utils/assert';
 import { formatDateFromSeconds } from '~/utils/formatDate';
