@@ -1976,7 +1976,7 @@
       "werk": "",
       "winkels": "Groceries and shopping",
       "alcohol": "",
-      "algemeen": "",
+      "algemeen": "General",
       "contactberoep": "Contact-based industries"
     },
     "headings": {
@@ -2032,7 +2032,7 @@
       "landelijk": {
         "toelichting_risiconiveau": "",
         "extratoelichting": {
-          "titel": "",
+          "titel": "The Netherlands in lockdown",
           "toelichting": "Coronavirus is spreading rapidly. To ensure healthcare services remain available to all, we must limit our contact with others. The following measures apply from 15 December 2020 until at least 19 January 2021:"
         }
       }
