@@ -40,6 +40,12 @@ const Municipality: FCWithLayout<any> = () => {
   const router = useRouter();
   const breakpoints = useBreakpoints();
 
+  const goToMunicipal = createSelectMunicipalHandler(
+    router,
+    'positief-geteste-mensen',
+    !breakpoints.md
+  );
+
   return (
     <>
       <SEOHead
@@ -69,10 +75,8 @@ const Municipality: FCWithLayout<any> = () => {
           margin="0 auto"
         >
           <MunicipalityNavigationMap
-            tooltipContent={tooltipContent(
-              createSelectMunicipalHandler(router)
-            )}
-            onSelect={createSelectMunicipalHandler(router)}
+            tooltipContent={tooltipContent(goToMunicipal)}
+            onSelect={goToMunicipal}
           />
         </Box>
       </Box>
