@@ -21,6 +21,7 @@ import {
   MetricMenuItem,
 } from '~/components-styled/aside/menu';
 import { TitleWithIcon } from '~/components-styled/aside/title-with-icon';
+import { Spacer } from '~/components-styled/base';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
 import Layout from '~/components/layout';
 import siteText from '~/locale/index';
@@ -127,18 +128,6 @@ function NationalLayout(props: NationalLayoutProps) {
                 </Category>
                 <Menu>
                   <MetricMenuItem>
-                    <Link href={`/landelijk/maatregelen`}>
-                      <a className={getClassName(`/landelijk/maatregelen`)}>
-                        <TitleWithIcon
-                          icon={
-                            <Maatregelen fill={theme.colors.restrictions} />
-                          }
-                          title={siteText.nationaal_maatregelen.titel_sidebar}
-                        />
-                      </a>
-                    </Link>
-                  </MetricMenuItem>
-                  <MetricMenuItem>
                     <Link
                       href={{
                         pathname: '/',
@@ -163,6 +152,19 @@ function NationalLayout(props: NationalLayoutProps) {
                             siteText.laatste_ontwikkelingen.menu_subtitle
                           }
                         />
+                      </a>
+                    </Link>
+                  </MetricMenuItem>
+                  <MetricMenuItem>
+                    <Link href={`/landelijk/maatregelen`}>
+                      <a className={getClassName(`/landelijk/maatregelen`)}>
+                        <TitleWithIcon
+                          icon={
+                            <Maatregelen fill={theme.colors.restrictions} />
+                          }
+                          title={siteText.nationaal_maatregelen.titel_sidebar}
+                        />
+                        <Spacer mb={2} />
                       </a>
                     </Link>
                   </MetricMenuItem>

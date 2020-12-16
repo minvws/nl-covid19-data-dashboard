@@ -1,19 +1,19 @@
 import styled from 'styled-components';
 import {
+  border,
+  BorderProps,
+  color,
+  ColorProps,
   compose,
+  LayoutProps,
   margin,
   padding,
-  color,
-  space,
   position,
-  border,
+  PositionProps,
+  space,
+  SpaceProps,
   verticalAlign,
   VerticalAlignProps,
-  SpaceProps,
-  BorderProps,
-  LayoutProps,
-  ColorProps,
-  PositionProps,
 } from 'styled-system';
 
 type TableProps = TableCellProps & PositionProps;
@@ -26,7 +26,7 @@ type TableCellProps = TableBodyProps &
 type TableBodyProps = SpaceProps & LayoutProps;
 
 export const Table = styled.table<TableProps>(
-  { borderCollapse: 'collapse', borderSpacing: 0 },
+  { borderCollapse: 'collapse', borderSpacing: 0, tableLayout: 'fixed' },
   compose(margin, padding, color, space, position)
 );
 
