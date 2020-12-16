@@ -652,12 +652,12 @@ export interface RegionaalValue {
   vrcode: string;
   total_reported_increase_per_region: number;
   infected_total_counts_per_region: number;
-  hospital_total_counts_per_region: number;
+  hospital_total_counts_per_region: number | null;
   active_clusters?: number | null;
   cluster_average?: number | null;
   infected_increase_per_region: number;
-  hospital_increase_per_region: number;
-  hospital_moving_avg_per_region: number;
+  hospital_increase_per_region: number | null;
+  hospital_moving_avg_per_region: number | null;
   date_of_insertion_unix: number;
 }
 export interface RegionalGgd {
