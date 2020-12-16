@@ -641,7 +641,7 @@
       },
       {
         "cijfer": "Reproduction number",
-        "verantwoording": "The reproduction number is supplied every Tuesday as [open data](https://data.rivm.nl/covid-19/COVID-19_reproductiegetal.json) by the National Institute for Public Health and the Environment (RIVM). The description of this dataset can be found [here](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/ed0699d1-c9d5-4436-8517-27eb993eab6e). The reproduction number (R) is not an exact value, but a reliable estimate. The value of R is based on (1) the number of ICU and hospital admissions, and (2) the day on which these ICU and hospital patients developed symptoms. The most up to date value of R provided on the coronavirus dashboard at any given time is always from at least two weeks ago. \n\nEstimates of R using data from less than 14 days ago could provide an indication of what the definitive value may be, but are not reliable predictors. Estimates using more recent data are less reliable because the data is not yet complete. It is, for instance, impossible to know how many newly confirmed cases will result in hospital admissions in the days ahead. \n\nUntil 3 November 2020, the graph showing the progression of R over time did not give a value of R for the most recent two weeks but did give a projection of this value in the form of a bandwidth. As of 3 November, the dashboard graph will no longer display this bandwidth."
+        "verantwoording": "The explanation of the data presented about the reproduction number is being translated and will follow shortly. In the meantime we refer to the explantion of the data presented in Dutch. "
       },
       {
         "cijfer": "Nursing homes",
