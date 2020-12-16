@@ -94,7 +94,7 @@ function DesktopRestrictionsTable(props: TableProps) {
               backgroundColor="#F9F9F9"
               width="180em"
               py={3}
-              px={1}
+              px={2}
               verticalAlign="top"
             >
               <InlineText fontWeight="bold">
