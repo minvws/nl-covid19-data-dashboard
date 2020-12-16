@@ -92,7 +92,7 @@ function DesktopRestrictionsTable(props: TableProps) {
               role="rowheader"
               borderTop={'1px solid black'}
               backgroundColor="#F9F9F9"
-              width="20em"
+              width="180em"
               py={3}
               px={1}
               verticalAlign="top"
@@ -110,7 +110,12 @@ function DesktopRestrictionsTable(props: TableProps) {
             >
               <Box display="flex" flexDirection="column">
                 {row.restrictionsColumn.map((value) => (
-                  <Box key={value.text} display="flex" flexDirection="row">
+                  <Box
+                    key={value.text}
+                    display="flex"
+                    flexDirection="row"
+                    alignItems="center"
+                  >
                     <Box as="span" flexShrink={0}>
                       {getIcon(value.Icon, color)}
                     </Box>
