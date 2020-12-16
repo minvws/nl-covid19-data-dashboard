@@ -13,21 +13,21 @@ const restrictionTexts: Record<string, string> = siteText.maatregelen.teksten;
  * is rendered in the table.
  */
 const rowOrder: EscalationCategory[] = [
-  'er_op_uit',
   'bezoek',
   'samenkomst',
-  'huwelijk',
-  'verpleeghuis',
+  'er_op_uit',
   'horeca',
+  'winkels',
+  'contactberoep',
   'sport',
   'reizen_binnenland',
   'reizen_buitenland',
-  'ov',
-  'uitvaart',
   'onderwijs',
+  'ov',
+  'huwelijk',
+  'verpleeghuis',
+  'uitvaart',
   'werk',
-  'contactberoep',
-  'winkels',
   'alcohol',
   'algemeen',
 ];

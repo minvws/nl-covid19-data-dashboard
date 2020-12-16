@@ -3,6 +3,7 @@ import BasisregelsDrukte from '~/assets/restrictions/basisregels_drukte.svg';
 import BasisregelsElleboog from '~/assets/restrictions/basisregels_elleboog.svg';
 import BasisregelsHandenWassen from '~/assets/restrictions/basisregels_handenwassen.svg';
 import BasisregelsMondkapje from '~/assets/restrictions/basisregels_mondkapje.svg';
+import BasisregelsTesten from '~/assets/restrictions/basisregels_testen.svg';
 import ContactBeroepen from '~/assets/restrictions/contactberoepen.svg';
 import Groepen from '~/assets/restrictions/groepen.svg';
 import HorecaBestellen from '~/assets/restrictions/horeca-en-evenementen_bestellen.svg';
@@ -45,6 +46,7 @@ export const restrictionIcons: Record<string, any> = {
   '0_algemeen_21': BasisregelsHandenWassen,
   '0_algemeen_22': BasisregelsElleboog,
   '0_algemeen_23': BasisregelsMondkapje,
+  '41_algemeen_42': BasisregelsTesten,
   '41_bezoek_24': Thuis,
   '41_er_op_uit_25': Groepen,
   '41_samenkomst_26': PubliekeLocaties,
