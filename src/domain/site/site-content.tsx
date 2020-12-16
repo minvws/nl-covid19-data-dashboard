@@ -70,6 +70,7 @@ const SiteContentContainer = styled.div(
     flexDirection: ['column', null, null, 'row'],
     marginBottom: '2rem',
     margin: '0 auto',
+    pb: 4,
   })
 );
 
@@ -81,6 +82,8 @@ const StyledSiteContent = styled.main(
     minWidth: 0,
     flexGrow: 1,
     flexShrink: 1,
+    pt: 4,
+    px: [0, 0, 4],
   })
 );
 
