@@ -17,7 +17,6 @@ import {
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
 import theme from '~/style/theme';
-import { formatDateFromSeconds } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useEscalationLevel } from '~/utils/use-escalation-level';
 
@@ -49,10 +48,6 @@ const RegionalRestrictions: FCWithLayout<ISafetyRegionData> = (props) => {
     : (escalationLevel.toString() as HeadingKey);
   const restrictionInfo = siteText.maatregelen.headings[key];
 
-  const validFrom = formatDateFromSeconds(
-    data.restrictions.values[0].valid_from_unix
-  );
-
   return (
     <>
       <SEOHead
@@ -80,11 +75,6 @@ const RegionalRestrictions: FCWithLayout<ISafetyRegionData> = (props) => {
       <KpiSection flexDirection={['column', 'row']}>
         <Box flex={{ lg: '1 1 25%' }}>
           <Heading level={3}>{restrictionInfo.extratoelichting.titel}</Heading>
-          <Text>
-            {replaceVariablesInText(siteText.escalatie_niveau.valid_from, {
-              validFrom,
-            })}
-          </Text>
         </Box>
         <Box flex={{ lg: '1 1 75%' }}>
           <Text m={0}>

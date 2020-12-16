@@ -2062,16 +2062,19 @@
       "41_onderwijs_39": "Remote and online teaching in primary, secondary, secondary vocational and higher education and for all other forms of training and educational activities. Exemptions include exams, practical lessons and education for vulnerable pupils. These measures apply from 16 December 2020 until at least 17 January 2021.",
       "41_onderwijs_40": "Childcare centres are closed. These measures apply from 16 December 2020 until at least 17 January 2021.",
       "41_onderwijs_41": "Emergency childcare is available for children of key workers and for vulnerable children. These measures apply from 16 December 2020 until at least 17 January 2021.",
-      "41_algemeen_42": "Heb je klachten? Blijf thuis en laat je testen."
+      "0_algemeen_42": "Heb je klachten? Blijf thuis.",
+      "0_algemeen_43": "Heb je klachten? Laat je testen."
     }
   },
   "nationaal_maatregelen": {
     "titel": "Measures",
     "titel_sidebar": "Measures",
-    "subtitel_sidebar": ""
+    "subtitel_sidebar": "",
+    "tabel_titel": ""
   },
   "veiligheidsregio_maatregelen": {
     "titel_sidebar": "Measures",
+    "subtitel_sidebar": "Lockdown Measures",
     "titel": "Measures in {{safetyRegionName}}",
     "titel_risiconiveau": "",
     "toelichting_risiconiveau": "For more information about your region, please check the website of your safety region.",

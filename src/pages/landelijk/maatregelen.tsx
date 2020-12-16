@@ -11,8 +11,6 @@ import { SEOHead } from '~/components/seoHead';
 import text from '~/locale';
 import { NationalPageProps } from '~/static-props/nl-data';
 import theme from '~/style/theme';
-import { formatDateFromSeconds } from '~/utils/formatDate';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useEscalationLevel } from '~/utils/use-escalation-level';
 export { getStaticProps } from '~/pages';
 
@@ -26,10 +24,6 @@ const NationalRestrictions: FCWithLayout<NationalPageProps> = (props) => {
     escalationLevel > 4 ? 4 : (escalationLevel as EscalationLevel);
 
   const restrictionInfo = text.maatregelen.headings['landelijk'];
-
-  const validFrom = formatDateFromSeconds(
-    data.restrictions.values[0].valid_from_unix
-  );
 
   return (
     <>
@@ -49,11 +43,6 @@ const NationalRestrictions: FCWithLayout<NationalPageProps> = (props) => {
       <KpiSection flexDirection={['column', 'row']}>
         <Box flex={{ lg: '1 1 25%' }}>
           <Heading level={3}>{restrictionInfo.extratoelichting.titel}</Heading>
-          <Text>
-            {replaceVariablesInText(text.escalatie_niveau.valid_from, {
-              validFrom,
-            })}
-          </Text>
         </Box>
         <Box flex={{ lg: '1 1 75%' }}>
           <Text m={0}>{restrictionInfo.extratoelichting.toelichting}</Text>
@@ -61,7 +50,7 @@ const NationalRestrictions: FCWithLayout<NationalPageProps> = (props) => {
       </KpiSection>
 
       <KpiSection display="flex" flexDirection="column">
-        <Heading level={3}>{restrictionInfo.extratoelichting.titel}</Heading>
+        <Heading level={3}>{text.nationaal_maatregelen.tabel_titel}</Heading>
         <RestrictionsTable
           data={data.restrictions.values}
           escalationLevel={effectiveEscalationLevel}

@@ -163,6 +163,9 @@ function NationalLayout(props: NationalLayoutProps) {
                             <Maatregelen fill={theme.colors.restrictions} />
                           }
                           title={siteText.nationaal_maatregelen.titel_sidebar}
+                          subtitle={
+                            siteText.nationaal_maatregelen.subtitel_sidebar
+                          }
                         />
                         <Spacer mb={2} />
                       </a>
