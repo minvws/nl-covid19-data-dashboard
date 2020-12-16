@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import { isFilled } from 'ts-is-present';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { ContentHeader } from '~/components-styled/content-header';
@@ -20,6 +21,7 @@ import {
   getSafetyRegionStaticProps,
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
+import { getLastFilledValue } from '~/utils/get-last-filled-value';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text = siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
@@ -28,7 +30,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
   const { data, safetyRegionName } = props;
   const router = useRouter();
 
-  const lastValue = data.results_per_region.last_value;
+  const lastValue = getLastFilledValue(data, 'results_per_region');
 
   const municipalCodes = regionCodeToMunicipalCodeLookup[data.code];
   const selectedMunicipalCode = municipalCodes ? municipalCodes[0] : undefined;
@@ -85,10 +87,12 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
           metadata={{ source: text.bronnen.rivm }}
           title={text.linechart_titel}
           description={text.linechart_description}
-          values={data.results_per_region.values.map((value) => ({
-            value: value.hospital_moving_avg_per_region,
-            date: value.date_of_report_unix,
-          }))}
+          values={data.results_per_region.values
+            .filter((x) => isFilled(x.hospital_moving_avg_per_region))
+            .map((value) => ({
+              value: value.hospital_moving_avg_per_region,
+              date: value.date_of_report_unix,
+            }))}
         />
       )}
 
