@@ -2073,10 +2073,10 @@
     "titel_sidebar": "Maatregelen",
     "titel": "Maatregelen in {{safetyRegionName}}",
     "titel_risiconiveau": "Risiconiveau",
-    "toelichting_risiconiveau": "De situatie in deze regio is zorgelijk en ontwikkelt zich negatief. Daarom zijn er naast de landelijke maatregelen aanvullende maatregelen getroffen.",
+    "toelichting_risiconiveau": "Voor meer informatie over uw regio, kunt u terecht op de website van uw veiligheidsregio.",
     "linktext_riskpage": "Meer over de risiconiveaus",
     "linktext_regionpage": "Website veiligheidsregio {{safetyRegionName}}",
-    "titel_aanvullendemaatregelen": "Aanvullende maatregelen",
+    "titel_aanvullendemaatregelen": "Aanvullende informatie",
     "toelichting_aanvullendemaatregelen": "Lokaal of regionaal kunnen aanvullend nog strengere maatregelen gelden. Kijk hiervoor op de website van de veiligheidsregio.",
     "metadata": {
       "title": "Maatregelen in {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
