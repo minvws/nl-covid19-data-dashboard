@@ -800,7 +800,7 @@
       "vroege_signalen": "Early indicators",
       "gedrag": "Behaviour",
       "kwetsbare_groepen": "Vulnerable groups",
-      "maatregelen": ""
+      "maatregelen": "Measures"
     }
   },
   "veiligheidsregio_layout": {
@@ -814,7 +814,7 @@
       "vroege_signalen": "Early indicators",
       "gedrag": "Behaviour",
       "kwetsbare_groepen": "Vulnerable groups",
-      "maatregelen": ""
+      "maatregelen": "Measures"
     }
   },
   "veiligheidsregio_metadata": {
@@ -2025,7 +2025,7 @@
       "41": {
         "toelichting_risiconiveau": "",
         "extratoelichting": {
-          "titel": "",
+          "titel": "Current Measures",
           "toelichting": ""
         }
       },
@@ -2033,7 +2033,7 @@
         "toelichting_risiconiveau": "",
         "extratoelichting": {
           "titel": "",
-          "toelichting": ""
+          "toelichting": "Coronavirus is spreading rapidly. To ensure healthcare services remain available to all, we must limit our contact with others. The following measures apply from 15 December 2020 until at least 19 January 2021:"
         }
       }
     },
@@ -2065,49 +2065,49 @@
     }
   },
   "nationaal_maatregelen": {
-    "titel": "",
-    "titel_sidebar": "",
+    "titel": "Measures",
+    "titel_sidebar": "Measures",
     "subtitel_sidebar": ""
   },
   "veiligheidsregio_maatregelen": {
-    "titel_sidebar": "",
-    "titel": "",
+    "titel_sidebar": "Measures",
+    "titel": "Measures in {{safetyRegionName}}",
     "titel_risiconiveau": "",
     "toelichting_risiconiveau": "",
     "linktext_riskpage": "",
-    "linktext_regionpage": "",
+    "linktext_regionpage": "Website safety region {{safetyRegionName}}",
     "titel_aanvullendemaatregelen": "",
     "toelichting_aanvullendemaatregelen": "",
     "metadata": {
-      "title": "",
-      "description": ""
+      "title": "Measures in {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
+      "description": "Overview of the corona measures in the safety region {{safetyRegionName}}."
     }
   },
   "veiligheidsregio_maatregelen_urls": {
-    "VR01": "",
-    "VR02": "",
-    "VR03": "",
-    "VR04": "",
-    "VR05": "",
-    "VR06": "",
-    "VR07": "",
-    "VR08": "",
-    "VR09": "",
-    "VR10": "",
-    "VR11": "",
-    "VR12": "",
-    "VR13": "",
-    "VR14": "",
-    "VR15": "",
-    "VR16": "",
-    "VR17": "",
-    "VR18": "",
-    "VR19": "",
-    "VR20": "",
-    "VR21": "",
-    "VR22": "",
-    "VR23": "",
-    "VR24": "",
-    "VR25": ""
+    "VR01": "http://www.veiligheidsregiogroningen.nl/",
+    "VR02": "https://www.veiligheidsregiofryslan.nl/",
+    "VR03": "http://www.vrd.nl/",
+    "VR04": "https://www.vrijsselland.nl/",
+    "VR05": "http://www.vrtwente.nl/",
+    "VR06": "https://www.vnog.nl/",
+    "VR07": "http://www.vggm.nl/vggm",
+    "VR08": "http://www.vrgz.nl/",
+    "VR09": "http://www.vru.nl/",
+    "VR10": "http://www.vrnhn.nl/",
+    "VR11": "https://www.veiligheidsregiozaanstreekwaterland.nl/",
+    "VR12": "http://www.vrk.nl/",
+    "VR13": "https://www.amsterdam.nl/veiligheidsregio/",
+    "VR14": "https://www.vrgooienvechtstreek.nl/",
+    "VR15": "https://haaglandenveilig.nl/",
+    "VR16": "https://www.hollandsmiddenveilig.nl/",
+    "VR17": "https://www.rijnmondveilig.nl/",
+    "VR18": "https://www.zhzveilig.nl/",
+    "VR19": "https://www.zeelandveilig.nl/",
+    "VR20": "https://www.vrmwb.nl/",
+    "VR21": "https://www.vrbn.nl/",
+    "VR22": "http://www.veiligheidsregiozob.nl/",
+    "VR23": "http://vrln.nl/",
+    "VR24": "http://www.vrzuidlimburg.nl/",
+    "VR25": "http://www.veiligheidsregioflevoland.nl/"
   }
 }

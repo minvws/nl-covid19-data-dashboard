@@ -2025,15 +2025,15 @@
       "41": {
         "toelichting_risiconiveau": "Er zijn zeer veel mensen besmettelijk en het dagelijks aantal nieuwe besmettingen is hoog. De regionale zorgcapaciteit is onvoldoende. Strenge, landelijke maatregelen zijn noodzakelijk.",
         "extratoelichting": {
-          "titel": "Maatregelen bij risiconiveau 4/ Lockdown (regionaal)",
+          "titel": "Maatregelen voor Lockdown",
           "toelichting": "In {{safetyRegionName}} is een regionale lockdown van kracht."
         }
       },
       "landelijk": {
         "toelichting_risiconiveau": "",
         "extratoelichting": {
-          "titel": "Landelijke maatregelen",
-          "toelichting": "Het kabinet heeft besloten dat er strengere landelijke maatregelen nodig zijn die er voor moeten zorgen dat het aantal besmettingen daalt. In de weken tot 27 oktober beoordeelt het kabinet wat er voor die periode daarna nodig is. Er moet voldoende bewijs zijn in vermindering van het aantal besmettingen en de druk op de reguliere zorg alvorens met zekerheid te kunnen zeggen dat de maatregelen effect hebben en dus heroverwogen kunnen worden."
+          "titel": "Nederland in Lockdown",
+          "toelichting": "Het coronavirus verspreidt zich razendsnel. Om de zorg toegankelijk te houden, moeten we onze contacten tot een minimum beperken. Van 15 december t/m in ieder geval 19 januari gelden de volgende maatregelen:"
         }
       }
     },
@@ -2065,13 +2065,13 @@
     }
   },
   "nationaal_maatregelen": {
-    "titel": "Risiconiveau en Maatregelen",
-    "titel_sidebar": "Risiconiveau en Maatregelen",
+    "titel": "Maatregelen",
+    "titel_sidebar": "Maatregelen",
     "subtitel_sidebar": "Er gelden landelijke maatregelen"
   },
   "veiligheidsregio_maatregelen": {
-    "titel_sidebar": "Risiconiveau en Maatregelen",
-    "titel": "Risiconiveau en Maatregelen in {{safetyRegionName}}",
+    "titel_sidebar": "Maatregelen",
+    "titel": "Maatregelen in {{safetyRegionName}}",
     "titel_risiconiveau": "Risiconiveau",
     "toelichting_risiconiveau": "De situatie in deze regio is zorgelijk en ontwikkelt zich negatief. Daarom zijn er naast de landelijke maatregelen aanvullende maatregelen getroffen.",
     "linktext_riskpage": "Meer over de risiconiveaus",
@@ -2079,7 +2079,7 @@
     "titel_aanvullendemaatregelen": "Aanvullende maatregelen",
     "toelichting_aanvullendemaatregelen": "Lokaal of regionaal kunnen aanvullend nog strengere maatregelen gelden. Kijk hiervoor op de website van de veiligheidsregio.",
     "metadata": {
-      "title": "Risiconiveau en Maatregelen in {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Maatregelen in {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van de corona maatregelen in de veiligheidsregio {{safetyRegionName}}."
     }
   },
