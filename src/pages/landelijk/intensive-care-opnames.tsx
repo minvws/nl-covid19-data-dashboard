@@ -26,84 +26,86 @@ const IntakeIntensiveCare: FCWithLayout<NationalPageProps> = (props) => {
   const dataBeds = data.intensive_care_beds_occupied;
 
   return (
-    <TileList>
+    <>
       <SEOHead
         title={text.metadata.title}
         description={text.metadata.description}
       />
-      <ContentHeader
-        category={siteText.nationaal_layout.headings.ziekenhuizen}
-        screenReaderCategory={siteText.ic_opnames_per_dag.titel_sidebar}
-        title={text.titel}
-        icon={<Arts />}
-        subtitle={text.pagina_toelichting}
-        metadata={{
-          datumsText: text.datums,
-          dateInfo: dataIntake.last_value.date_of_report_unix,
-          dateOfInsertionUnix: dataIntake.last_value.date_of_insertion_unix,
-          dataSources: [text.bronnen.nice, text.bronnen.lnaz],
-        }}
-        reference={text.reference}
-      />
-
-      <TwoKpiSection>
-        <KpiTile
-          title={text.barscale_titel}
+      <TileList>
+        <ContentHeader
+          category={siteText.nationaal_layout.headings.ziekenhuizen}
+          screenReaderCategory={siteText.ic_opnames_per_dag.titel_sidebar}
+          title={text.titel}
+          icon={<Arts />}
+          subtitle={text.pagina_toelichting}
           metadata={{
-            date: dataIntake.last_value.date_of_report_unix,
-            source: text.bronnen.nice,
+            datumsText: text.datums,
+            dateInfo: dataIntake.last_value.date_of_report_unix,
+            dateOfInsertionUnix: dataIntake.last_value.date_of_insertion_unix,
+            dataSources: [text.bronnen.nice, text.bronnen.lnaz],
           }}
-        >
-          <PageBarScale
-            data={data}
-            scope="nl"
-            metricName="intake_intensivecare_ma"
-            metricProperty="moving_average_ic"
-            localeTextKey="ic_opnames_per_dag"
-            differenceKey="intake_intensivecare_ma__moving_average_ic"
-          />
-          <Text>{text.extra_uitleg}</Text>
-        </KpiTile>
+          reference={text.reference}
+        />
 
-        <KpiTile
-          title={text.kpi_bedbezetting.title}
-          metadata={{
-            date: dataBeds.last_value.date_of_report_unix,
-            source: text.bronnen.lnaz,
-          }}
-        >
-          <KpiValue
-            data-cy="covid_occupied"
-            absolute={dataBeds.last_value.covid_occupied}
-            percentage={dataBeds.last_value.covid_percentage_of_all_occupied}
-            difference={
-              data.difference.intensive_care_beds_occupied__covid_occupied
-            }
-          />
-          <Text>{text.kpi_bedbezetting.description}</Text>
-        </KpiTile>
-      </TwoKpiSection>
+        <TwoKpiSection>
+          <KpiTile
+            title={text.barscale_titel}
+            metadata={{
+              date: dataIntake.last_value.date_of_report_unix,
+              source: text.bronnen.nice,
+            }}
+          >
+            <PageBarScale
+              data={data}
+              scope="nl"
+              metricName="intake_intensivecare_ma"
+              metricProperty="moving_average_ic"
+              localeTextKey="ic_opnames_per_dag"
+              differenceKey="intake_intensivecare_ma__moving_average_ic"
+            />
+            <Text>{text.extra_uitleg}</Text>
+          </KpiTile>
 
-      <LineChartTile
-        title={text.linechart_titel}
-        values={dataIntake.values.map((value) => ({
-          value: value.moving_average_ic,
-          date: value.date_of_report_unix,
-        }))}
-        signaalwaarde={10}
-        metadata={{ source: text.bronnen.nice }}
-      />
+          <KpiTile
+            title={text.kpi_bedbezetting.title}
+            metadata={{
+              date: dataBeds.last_value.date_of_report_unix,
+              source: text.bronnen.lnaz,
+            }}
+          >
+            <KpiValue
+              data-cy="covid_occupied"
+              absolute={dataBeds.last_value.covid_occupied}
+              percentage={dataBeds.last_value.covid_percentage_of_all_occupied}
+              difference={
+                data.difference.intensive_care_beds_occupied__covid_occupied
+              }
+            />
+            <Text>{text.kpi_bedbezetting.description}</Text>
+          </KpiTile>
+        </TwoKpiSection>
 
-      <LineChartTile
-        title={text.chart_bedbezetting.title}
-        description={text.chart_bedbezetting.description}
-        values={dataBeds.values.map((value) => ({
-          value: value.covid_occupied,
-          date: value.date_of_report_unix,
-        }))}
-        metadata={{ source: text.bronnen.lnaz }}
-      />
-    </TileList>
+        <LineChartTile
+          title={text.linechart_titel}
+          values={dataIntake.values.map((value) => ({
+            value: value.moving_average_ic,
+            date: value.date_of_report_unix,
+          }))}
+          signaalwaarde={10}
+          metadata={{ source: text.bronnen.nice }}
+        />
+
+        <LineChartTile
+          title={text.chart_bedbezetting.title}
+          description={text.chart_bedbezetting.description}
+          values={dataBeds.values.map((value) => ({
+            value: value.covid_occupied,
+            date: value.date_of_report_unix,
+          }))}
+          metadata={{ source: text.bronnen.lnaz }}
+        />
+      </TileList>
+    </>
   );
 };
 

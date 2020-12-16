@@ -25,65 +25,69 @@ const BehaviorPage: FCWithLayout<ISafetyRegionData> = (props) => {
   const behaviorData = props.data.behavior;
 
   return (
-    <TileList>
+    <>
       <SEOHead
         title={text.metadata.title}
         description={text.metadata.description}
       />
-      <ContentHeader
-        category={siteText.nationaal_layout.headings.gedrag}
-        title={text.pagina.titel}
-        icon={<Gedrag />}
-        subtitle={text.pagina.toelichting}
-        metadata={{
-          datumsText: text.datums,
-          dateInfo: {
-            weekStartUnix: behaviorData.last_value.week_start_unix,
-            weekEndUnix: behaviorData.last_value.week_end_unix,
-          },
-          dateOfInsertionUnix: behaviorData.last_value.date_of_insertion_unix,
-          dataSources: [text.bronnen.rivm],
-        }}
-        reference={text.reference}
-      />
-
-      <TwoKpiSection>
-        <Tile height="100%">
-          <Heading level={3}>{text.onderzoek_uitleg.titel}</Heading>
-          <Text>{text.onderzoek_uitleg.toelichting}</Text>
-        </Tile>
-
-        <KpiTile
-          title={text.kpi.aantal_respondenten.titel}
+      <TileList>
+        <ContentHeader
+          category={siteText.nationaal_layout.headings.gedrag}
+          title={text.pagina.titel}
+          icon={<Gedrag />}
+          subtitle={text.pagina.toelichting}
           metadata={{
-            source: text.kpi.aantal_respondenten.bron,
-            date: [
-              behaviorData.last_value.week_start_unix,
-              behaviorData.last_value.week_end_unix,
-            ],
+            datumsText: text.datums,
+            dateInfo: {
+              weekStartUnix: behaviorData.last_value.week_start_unix,
+              weekEndUnix: behaviorData.last_value.week_end_unix,
+            },
+            dateOfInsertionUnix: behaviorData.last_value.date_of_insertion_unix,
+            dataSources: [text.bronnen.rivm],
           }}
-        >
-          <KpiValue absolute={behaviorData.last_value.number_of_participants} />
-          <Text>{text.kpi.aantal_respondenten.toelichting}</Text>
-        </KpiTile>
-      </TwoKpiSection>
+          reference={text.reference}
+        />
 
-      <BehaviorTableTile
-        behavior={behaviorData.last_value}
-        title={text.basisregels.title}
-        introduction={text.basisregels.intro}
-        footer={text.basisregels.voetnoot}
-        footerAsterisk={text.basisregels.voetnoot_asterisk}
-      />
+        <TwoKpiSection>
+          <Tile height="100%">
+            <Heading level={3}>{text.onderzoek_uitleg.titel}</Heading>
+            <Text>{text.onderzoek_uitleg.toelichting}</Text>
+          </Tile>
 
-      <BehaviorLineChartTile
-        title={text.basisregels_over_tijd.title}
-        introduction={text.basisregels_over_tijd.intro}
-        values={behaviorData.values}
-      />
+          <KpiTile
+            title={text.kpi.aantal_respondenten.titel}
+            metadata={{
+              source: text.kpi.aantal_respondenten.bron,
+              date: [
+                behaviorData.last_value.week_start_unix,
+                behaviorData.last_value.week_end_unix,
+              ],
+            }}
+          >
+            <KpiValue
+              absolute={behaviorData.last_value.number_of_participants}
+            />
+            <Text>{text.kpi.aantal_respondenten.toelichting}</Text>
+          </KpiTile>
+        </TwoKpiSection>
 
-      <MoreInformation />
-    </TileList>
+        <BehaviorTableTile
+          behavior={behaviorData.last_value}
+          title={text.basisregels.title}
+          introduction={text.basisregels.intro}
+          footer={text.basisregels.voetnoot}
+          footerAsterisk={text.basisregels.voetnoot_asterisk}
+        />
+
+        <BehaviorLineChartTile
+          title={text.basisregels_over_tijd.title}
+          introduction={text.basisregels_over_tijd.intro}
+          values={behaviorData.values}
+        />
+
+        <MoreInformation />
+      </TileList>
+    </>
   );
 };
 

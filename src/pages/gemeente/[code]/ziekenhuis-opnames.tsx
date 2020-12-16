@@ -25,7 +25,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
   const { municipalityName } = props;
 
   return (
-    <TileList>
+    <>
       <SEOHead
         title={replaceVariablesInText(text.metadata.title, {
           municipalityName,
@@ -34,23 +34,23 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
           municipalityName,
         })}
       />
-
-      <ContentHeader
-        category={siteText.gemeente_layout.headings.ziekenhuizen}
-        title={replaceVariablesInText(text.titel, {
-          municipality: municipalityName,
-        })}
-        icon={<Ziekenhuis />}
-        subtitle={text.pagina_toelichting}
-        // metadata={{
-        //   datumsText: text.datums,
-        //   dateInfo: lastValue.date_of_report_unix,
-        //   dateOfInsertionUnix: lastValue.date_of_insertion_unix,
-        //   dataSources: [text.bronnen.rivm],
-        // }}
-        reference={text.reference}
-      />
-      {/*
+      <TileList>
+        <ContentHeader
+          category={siteText.gemeente_layout.headings.ziekenhuizen}
+          title={replaceVariablesInText(text.titel, {
+            municipality: municipalityName,
+          })}
+          icon={<Ziekenhuis />}
+          subtitle={text.pagina_toelichting}
+          // metadata={{
+          //   datumsText: text.datums,
+          //   dateInfo: lastValue.date_of_report_unix,
+          //   dateOfInsertionUnix: lastValue.date_of_insertion_unix,
+          //   dataSources: [text.bronnen.rivm],
+          // }}
+          reference={text.reference}
+        />
+        {/*
       <TwoKpiSection>
         <KpiTile
           showDataWarning
@@ -118,13 +118,14 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
       />
       */}
 
-      <Tile>
-        <Heading level={3}>{text.tijdelijk_onbeschikbaar_titel}</Heading>
-        <Box width="70%">
-          <Text>{text.tijdelijk_onbeschikbaar}</Text>
-        </Box>
-      </Tile>
-    </TileList>
+        <Tile>
+          <Heading level={3}>{text.tijdelijk_onbeschikbaar_titel}</Heading>
+          <Box width="70%">
+            <Text>{text.tijdelijk_onbeschikbaar}</Text>
+          </Box>
+        </Tile>
+      </TileList>
+    </>
   );
 };
 

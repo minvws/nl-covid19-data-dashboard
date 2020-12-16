@@ -32,7 +32,7 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
   const values = data.disability_care.values;
 
   return (
-    <TileList>
+    <>
       <SEOHead
         title={replaceVariablesInText(locationsText.metadata.title, {
           safetyRegionName,
@@ -44,155 +44,156 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
           }
         )}
       />
-
-      <ContentHeader
-        category={siteText.veiligheidsregio_layout.headings.kwetsbare_groepen}
-        title={replaceVariablesInText(positiveTestPeopleText.titel, {
-          safetyRegion: safetyRegionName,
-        })}
-        icon={<Gehandicaptenzorg />}
-        subtitle={replaceVariablesInText(
-          positiveTestPeopleText.pagina_toelichting,
-          {
+      <TileList>
+        <ContentHeader
+          category={siteText.veiligheidsregio_layout.headings.kwetsbare_groepen}
+          title={replaceVariablesInText(positiveTestPeopleText.titel, {
             safetyRegion: safetyRegionName,
-          }
-        )}
-        metadata={{
-          datumsText: positiveTestPeopleText.datums,
-          dateInfo: lastValue.date_of_report_unix,
-          dateOfInsertionUnix: lastValue.date_of_insertion_unix,
-          dataSources: [positiveTestPeopleText.bronnen.rivm],
-        }}
-        reference={positiveTestPeopleText.reference}
-      />
-
-      <TwoKpiSection>
-        <KpiTile
-          title={positiveTestPeopleText.barscale_titel}
-          description={positiveTestPeopleText.extra_uitleg}
+          })}
+          icon={<Gehandicaptenzorg />}
+          subtitle={replaceVariablesInText(
+            positiveTestPeopleText.pagina_toelichting,
+            {
+              safetyRegion: safetyRegionName,
+            }
+          )}
           metadata={{
-            date: lastValue.date_of_report_unix,
-            source: positiveTestPeopleText.bronnen.rivm,
+            datumsText: positiveTestPeopleText.datums,
+            dateInfo: lastValue.date_of_report_unix,
+            dateOfInsertionUnix: lastValue.date_of_insertion_unix,
+            dataSources: [positiveTestPeopleText.bronnen.rivm],
           }}
-        >
-          <KpiValue
-            data-cy="newly_infected_people"
-            absolute={lastValue.newly_infected_people}
-          />
-        </KpiTile>
-      </TwoKpiSection>
+          reference={positiveTestPeopleText.reference}
+        />
 
-      <LineChartTile
-        metadata={{ source: positiveTestPeopleText.bronnen.rivm }}
-        title={positiveTestPeopleText.linechart_titel}
-        values={values.map((value) => ({
-          value: value.newly_infected_people,
-          date: value.date_of_report_unix,
-        }))}
-      />
+        <TwoKpiSection>
+          <KpiTile
+            title={positiveTestPeopleText.barscale_titel}
+            description={positiveTestPeopleText.extra_uitleg}
+            metadata={{
+              date: lastValue.date_of_report_unix,
+              source: positiveTestPeopleText.bronnen.rivm,
+            }}
+          >
+            <KpiValue
+              data-cy="newly_infected_people"
+              absolute={lastValue.newly_infected_people}
+            />
+          </KpiTile>
+        </TwoKpiSection>
 
-      <ContentHeader
-        id="besmette-locaties"
-        skipLinkAnchor={true}
-        title={replaceVariablesInText(locationsText.titel, {
-          safetyRegion: safetyRegionName,
-        })}
-        icon={<Locatie />}
-        subtitle={locationsText.pagina_toelichting}
-        metadata={{
-          datumsText: locationsText.datums,
-          dateInfo: lastValue.date_of_report_unix,
-          dateOfInsertionUnix: lastValue.date_of_insertion_unix,
-          dataSources: [locationsText.bronnen.rivm],
-        }}
-        reference={locationsText.reference}
-      />
-
-      <TwoKpiSection>
-        <KpiTile
-          title={locationsText.kpi_titel}
-          metadata={{
-            date: lastValue.date_of_report_unix,
-            source: locationsText.bronnen.rivm,
-          }}
-        >
-          <KpiValue
-            data-cy="infected_locations_total"
-            absolute={lastValue.infected_locations_total}
-            percentage={lastValue.infected_locations_percentage}
-          />
-          <Text>{locationsText.kpi_toelichting}</Text>
-        </KpiTile>
-        <KpiTile
-          title={locationsText.barscale_titel}
-          metadata={{
-            date: lastValue.date_of_report_unix,
-            source: locationsText.bronnen.rivm,
-          }}
-        >
-          <KpiValue
-            data-cy="newly_infected_locations"
-            absolute={lastValue.newly_infected_locations}
-          />
-          <Text>{locationsText.barscale_toelichting}</Text>
-        </KpiTile>
-      </TwoKpiSection>
-
-      {lastValue.infected_locations_total !== undefined && (
         <LineChartTile
-          title={locationsText.linechart_titel}
+          metadata={{ source: positiveTestPeopleText.bronnen.rivm }}
+          title={positiveTestPeopleText.linechart_titel}
           values={values.map((value) => ({
-            value: value.infected_locations_total,
+            value: value.newly_infected_people,
             date: value.date_of_report_unix,
           }))}
-          metadata={{
-            source: locationsText.bronnen.rivm,
-          }}
         />
-      )}
 
-      <ContentHeader
-        id="sterfte"
-        skipLinkAnchor={true}
-        title={replaceVariablesInText(mortalityText.titel, {
-          safetyRegion: safetyRegionName,
-        })}
-        icon={<CoronaVirus />}
-        subtitle={mortalityText.pagina_toelichting}
-        metadata={{
-          datumsText: mortalityText.datums,
-          dateInfo: lastValue.date_of_report_unix,
-          dateOfInsertionUnix: lastValue.date_of_insertion_unix,
-          dataSources: [mortalityText.bronnen.rivm],
-        }}
-        reference={mortalityText.reference}
-      />
-
-      <TwoKpiSection>
-        <KpiTile
-          title={mortalityText.barscale_titel}
-          description={mortalityText.extra_uitleg}
+        <ContentHeader
+          id="besmette-locaties"
+          skipLinkAnchor={true}
+          title={replaceVariablesInText(locationsText.titel, {
+            safetyRegion: safetyRegionName,
+          })}
+          icon={<Locatie />}
+          subtitle={locationsText.pagina_toelichting}
           metadata={{
-            date: lastValue.date_of_report_unix,
-            source: mortalityText.bronnen.rivm,
+            datumsText: locationsText.datums,
+            dateInfo: lastValue.date_of_report_unix,
+            dateOfInsertionUnix: lastValue.date_of_insertion_unix,
+            dataSources: [locationsText.bronnen.rivm],
           }}
-        >
-          <KpiValue
-            data-cy="deceased_daily"
-            absolute={lastValue.deceased_daily}
-          />
-        </KpiTile>
-      </TwoKpiSection>
+          reference={locationsText.reference}
+        />
 
-      <LineChartTile
-        metadata={{ source: mortalityText.bronnen.rivm }}
-        title={mortalityText.linechart_titel}
-        values={values.map((value) => ({
-          value: value.deceased_daily,
-          date: value.date_of_report_unix,
-        }))}
-      />
-    </TileList>
+        <TwoKpiSection>
+          <KpiTile
+            title={locationsText.kpi_titel}
+            metadata={{
+              date: lastValue.date_of_report_unix,
+              source: locationsText.bronnen.rivm,
+            }}
+          >
+            <KpiValue
+              data-cy="infected_locations_total"
+              absolute={lastValue.infected_locations_total}
+              percentage={lastValue.infected_locations_percentage}
+            />
+            <Text>{locationsText.kpi_toelichting}</Text>
+          </KpiTile>
+          <KpiTile
+            title={locationsText.barscale_titel}
+            metadata={{
+              date: lastValue.date_of_report_unix,
+              source: locationsText.bronnen.rivm,
+            }}
+          >
+            <KpiValue
+              data-cy="newly_infected_locations"
+              absolute={lastValue.newly_infected_locations}
+            />
+            <Text>{locationsText.barscale_toelichting}</Text>
+          </KpiTile>
+        </TwoKpiSection>
+
+        {lastValue.infected_locations_total !== undefined && (
+          <LineChartTile
+            title={locationsText.linechart_titel}
+            values={values.map((value) => ({
+              value: value.infected_locations_total,
+              date: value.date_of_report_unix,
+            }))}
+            metadata={{
+              source: locationsText.bronnen.rivm,
+            }}
+          />
+        )}
+
+        <ContentHeader
+          id="sterfte"
+          skipLinkAnchor={true}
+          title={replaceVariablesInText(mortalityText.titel, {
+            safetyRegion: safetyRegionName,
+          })}
+          icon={<CoronaVirus />}
+          subtitle={mortalityText.pagina_toelichting}
+          metadata={{
+            datumsText: mortalityText.datums,
+            dateInfo: lastValue.date_of_report_unix,
+            dateOfInsertionUnix: lastValue.date_of_insertion_unix,
+            dataSources: [mortalityText.bronnen.rivm],
+          }}
+          reference={mortalityText.reference}
+        />
+
+        <TwoKpiSection>
+          <KpiTile
+            title={mortalityText.barscale_titel}
+            description={mortalityText.extra_uitleg}
+            metadata={{
+              date: lastValue.date_of_report_unix,
+              source: mortalityText.bronnen.rivm,
+            }}
+          >
+            <KpiValue
+              data-cy="deceased_daily"
+              absolute={lastValue.deceased_daily}
+            />
+          </KpiTile>
+        </TwoKpiSection>
+
+        <LineChartTile
+          metadata={{ source: mortalityText.bronnen.rivm }}
+          title={mortalityText.linechart_titel}
+          values={values.map((value) => ({
+            value: value.deceased_daily,
+            date: value.date_of_report_unix,
+          }))}
+        />
+      </TileList>
+    </>
   );
 };
 

@@ -69,7 +69,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
   const enableScatterPlot = sewerStationNames.length > 1;
 
   return (
-    <TileList>
+    <>
       <SEOHead
         title={replaceVariablesInText(text.metadata.title, {
           municipalityName,
@@ -78,130 +78,132 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
           municipalityName,
         })}
       />
-
-      <ContentHeader
-        category={siteText.gemeente_layout.headings.vroege_signalen}
-        title={replaceVariablesInText(text.titel, {
-          municipality: municipalityName,
-        })}
-        icon={<RioolwaterMonitoring />}
-        subtitle={text.pagina_toelichting}
-        metadata={{
-          datumsText: text.datums,
-          dateInfo: {
-            weekStartUnix: sewerAverages.last_value.week_start_unix,
-            weekEndUnix: sewerAverages.last_value.week_end_unix,
-          },
-          dateOfInsertionUnix: sewerAverages.last_value.date_of_insertion_unix,
-          dataSources: [text.bronnen.rivm],
-        }}
-        reference={text.reference}
-      />
-
-      <TwoKpiSection>
-        <KpiTile
-          title={text.barscale_titel}
-          description={text.extra_uitleg}
-          metadata={{
-            date: [
-              sewerAverages.last_value.week_start_unix,
-              sewerAverages.last_value.week_end_unix,
-            ],
-            source: text.bronnen.rivm,
-          }}
-        >
-          <KpiValue
-            data-cy="barscale_value"
-            absolute={sewerAverages.last_value.average}
-            valueAnnotation={siteText.waarde_annotaties.riool_normalized}
-            difference={data.difference.sewer__average}
-          />
-        </KpiTile>
-
-        <KpiTile
-          title={text.total_installation_count_titel}
-          description={
-            text.total_installation_count_description +
-            `<p style="color:#595959">${text.rwzi_abbrev}</p>`
-          }
-          metadata={{
-            date: [
-              sewerAverages.last_value.week_start_unix,
-              sewerAverages.last_value.week_end_unix,
-            ],
-            source: text.bronnen.rivm,
-          }}
-        >
-          <KpiValue
-            data-cy="total_installation_count"
-            absolute={sewerAverages.last_value.total_installation_count}
-          />
-        </KpiTile>
-      </TwoKpiSection>
-
-      {lineChartData && (
-        <ChartTileWithTimeframe
-          title={text.linechart_titel}
-          metadata={{ source: text.bronnen.rivm }}
-          timeframeOptions={['all', '5weeks']}
-          timeframeInitialValue="all"
-        >
-          {(timeframe) => (
-            <>
-              {enableScatterPlot && (
-                <Box display="flex" justifyContent="flex-end">
-                  <Select
-                    options={sewerStationNames.map((x) => ({
-                      label: x,
-                      value: x,
-                    }))}
-                    value={selectedInstallation}
-                    placeholder={text.graph_selected_rwzi_placeholder}
-                    onChange={setSelectedInstallation}
-                    onClear={() => setSelectedInstallation(undefined)}
-                  />
-                </Box>
-              )}
-              <SewerWaterChart
-                timeframe={timeframe}
-                scatterPlotValues={scatterPlotData}
-                averageValues={lineChartData.averageValues}
-                selectedInstallation={selectedInstallation}
-                text={{
-                  average_label_text: lineChartData.averageLabelText,
-                  secondary_label_text: text.graph_secondary_label_text,
-                  daily_label_text: text.graph_daily_label_text_rwzi,
-                  range_description: text.graph_range_description,
-                }}
-                valueAnnotation={siteText.waarde_annotaties.riool_normalized}
-              />
-            </>
-          )}
-        </ChartTileWithTimeframe>
-      )}
-
-      {barChartData && (
-        <ChartTile
-          title={replaceVariablesInText(text.bar_chart_title, {
+      <TileList>
+        <ContentHeader
+          category={siteText.gemeente_layout.headings.vroege_signalen}
+          title={replaceVariablesInText(text.titel, {
             municipality: municipalityName,
           })}
+          icon={<RioolwaterMonitoring />}
+          subtitle={text.pagina_toelichting}
           metadata={{
-            date: [
-              sewerAverages.last_value.week_start_unix,
-              sewerAverages.last_value.week_end_unix,
-            ],
-            source: text.bronnen.rivm,
+            datumsText: text.datums,
+            dateInfo: {
+              weekStartUnix: sewerAverages.last_value.week_start_unix,
+              weekEndUnix: sewerAverages.last_value.week_end_unix,
+            },
+            dateOfInsertionUnix:
+              sewerAverages.last_value.date_of_insertion_unix,
+            dataSources: [text.bronnen.rivm],
           }}
-        >
-          <BarChart
-            keys={barChartData.keys}
-            data={barChartData.data}
-            axisTitle={text.bar_chart_axis_title}
-            valueAnnotation={siteText.waarde_annotaties.riool_normalized}
-          />
-        </ChartTile>
-      )}
-    </TileList>
+          reference={text.reference}
+        />
+
+        <TwoKpiSection>
+          <KpiTile
+            title={text.barscale_titel}
+            description={text.extra_uitleg}
+            metadata={{
+              date: [
+                sewerAverages.last_value.week_start_unix,
+                sewerAverages.last_value.week_end_unix,
+              ],
+              source: text.bronnen.rivm,
+            }}
+          >
+            <KpiValue
+              data-cy="barscale_value"
+              absolute={sewerAverages.last_value.average}
+              valueAnnotation={siteText.waarde_annotaties.riool_normalized}
+              difference={data.difference.sewer__average}
+            />
+          </KpiTile>
+
+          <KpiTile
+            title={text.total_installation_count_titel}
+            description={
+              text.total_installation_count_description +
+              `<p style="color:#595959">${text.rwzi_abbrev}</p>`
+            }
+            metadata={{
+              date: [
+                sewerAverages.last_value.week_start_unix,
+                sewerAverages.last_value.week_end_unix,
+              ],
+              source: text.bronnen.rivm,
+            }}
+          >
+            <KpiValue
+              data-cy="total_installation_count"
+              absolute={sewerAverages.last_value.total_installation_count}
+            />
+          </KpiTile>
+        </TwoKpiSection>
+
+        {lineChartData && (
+          <ChartTileWithTimeframe
+            title={text.linechart_titel}
+            metadata={{ source: text.bronnen.rivm }}
+            timeframeOptions={['all', '5weeks']}
+            timeframeInitialValue="all"
+          >
+            {(timeframe) => (
+              <>
+                {enableScatterPlot && (
+                  <Box display="flex" justifyContent="flex-end">
+                    <Select
+                      options={sewerStationNames.map((x) => ({
+                        label: x,
+                        value: x,
+                      }))}
+                      value={selectedInstallation}
+                      placeholder={text.graph_selected_rwzi_placeholder}
+                      onChange={setSelectedInstallation}
+                      onClear={() => setSelectedInstallation(undefined)}
+                    />
+                  </Box>
+                )}
+                <SewerWaterChart
+                  timeframe={timeframe}
+                  scatterPlotValues={scatterPlotData}
+                  averageValues={lineChartData.averageValues}
+                  selectedInstallation={selectedInstallation}
+                  text={{
+                    average_label_text: lineChartData.averageLabelText,
+                    secondary_label_text: text.graph_secondary_label_text,
+                    daily_label_text: text.graph_daily_label_text_rwzi,
+                    range_description: text.graph_range_description,
+                  }}
+                  valueAnnotation={siteText.waarde_annotaties.riool_normalized}
+                />
+              </>
+            )}
+          </ChartTileWithTimeframe>
+        )}
+
+        {barChartData && (
+          <ChartTile
+            title={replaceVariablesInText(text.bar_chart_title, {
+              municipality: municipalityName,
+            })}
+            metadata={{
+              date: [
+                sewerAverages.last_value.week_start_unix,
+                sewerAverages.last_value.week_end_unix,
+              ],
+              source: text.bronnen.rivm,
+            }}
+          >
+            <BarChart
+              keys={barChartData.keys}
+              data={barChartData.data}
+              axisTitle={text.bar_chart_axis_title}
+              valueAnnotation={siteText.waarde_annotaties.riool_normalized}
+            />
+          </ChartTile>
+        )}
+      </TileList>
+    </>
   );
 };
 
