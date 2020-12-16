@@ -641,7 +641,7 @@
       },
       {
         "cijfer": "Reproduction number",
-        "verantwoording": "The explanation of the data presented about the reproduction number is being translated and will follow shortly. In the meantime we refer to the explantion of the data presented in Dutch."
+        "verantwoording": "The explanation of the data presented about the reproduction number is being translated and will follow shortly. In the meantime we refer to the explanation of the data presented in Dutch."
       },
       {
         "cijfer": "Nursing homes",
@@ -753,7 +753,7 @@
     "select_region_municipality_legend": "Select a municipality:",
     "select_region_type_legend": "Show numbers from:",
     "your_municipality": "Municipality",
-    "belangrijk_bericht": "There is a [national lockdown](https://www.rijksoverheid.nl/actueel/nieuws/2020/12/14/lockdown-nodig-om-snel-oplopend-aantal-besmettingen-tegen-te-gaan)."
+    "belangrijk_bericht": "There is a [national lockdown](https://www.rijksoverheid.nl/actueel/nieuws/2020/12/14/lockdown-nodig-om-snel-oplopend-aantal-besmettingen-tegen-te-gaan) until at least Tuesday 19 January."
   },
   "common": {
     "metadata": {
@@ -1100,7 +1100,7 @@
       "title": "Level of risk per safety region | Dashboard Coronavirus | Government.nl",
       "description": "Overview of the level of risk per safety region in the Netherlands."
     },
-    "belangrijk_bericht": "There is a [national lockdown](https://www.rijksoverheid.nl/actueel/nieuws/2020/12/14/lockdown-nodig-om-snel-oplopend-aantal-besmettingen-tegen-te-gaan)."
+    "belangrijk_bericht": "There is a [national lockdown](https://www.rijksoverheid.nl/actueel/nieuws/2020/12/14/lockdown-nodig-om-snel-oplopend-aantal-besmettingen-tegen-te-gaan) until at least Tuesday 19 January."
   },
   "gemeente_index": {
     "selecteer_titel": "Select your municipality",
